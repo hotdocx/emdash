@@ -521,6 +521,36 @@ Proof certificates are optional metadata. The acceptance boundary is that the
 proof assistant can request, name, consume, and compute with the same weak-
 kernel data and factorization operations as the CAS layer.
 
+### Implemented computation-to-formal bridge result
+
+`src/v3_2/algebra_formal_weak_kernel.ts` now reifies the actual native whole
+weak-kernel result into the selected object rank, source matrix `F`, and
+weak-kernel matrix `K`, with exact explicit-Core claim `F o K = 0`. A second
+realization reifies any selected factorization matrix `U`, test matrix `H`,
+and the exact reconstruction claim `K o U = H`. Both use the existing finite-
+family matrix, composition, zero, and equality owners; no new Core or
+Lambdapi symbol is introduced by the TypeScript bridge.
+
+Goal-bound formal-computation adapters replay the real backend-neutral whole
+weak-kernel and lift algebra operations. Only byte-identical selected output
+is interpreted as the exact formal claim; changed output remains an
+observation. The ordinary proof–CAS workflow then requires explicit adoption
+before either equation becomes an assumption. Realization, operation input,
+and output serializers are canonical and deterministic.
+
+Focused tests check both Core targets in the current finite-module LF mirror,
+delegate/recompute each operation, explicitly adopt both exact equations,
+check deterministic replay, and retain nonuniqueness. The optional live gate
+passes both generated equation targets in Lambdapi within 60 seconds.
+
+This row intentionally does not fabricate a closed ring-wide
+`ComputationalWeakKernel` value. The generic Lambdapi constructor additionally
+requires a factor operation and law for **every** test cone, plus supplied
+formal preadditive evidence for the finite-free category. The bridge now
+provides the computational object/morphism and every requested named
+annihilation/lift equation; packaging a universal selector is a concrete
+successor prerequisite rather than a consequence of finitely many examples.
+
 ## Why The Abelian Theorem Is A Later Goal
 
 The next theorem layer must use computational weak kernels of the base
@@ -617,9 +647,9 @@ genuine capability consumer and must not be deferred behind documentation.
 | `WKH-LIFT-3` | complete; combined checkpoint `aac1826` | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
 | `WKH-CATEGORY-4` | complete; checkpoint `aac1826` | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
 | `WKH-SINGULAR-5` | complete; checkpoint `06e0b20` | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
-| `WKH-FORMAL-6` | complete; checkpoint pending | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
-| `WKH-BRIDGE-7` | ready | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
-| `WKH-CLOSE-8` | blocked by accepted/deferred rows | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
+| `WKH-FORMAL-6` | complete; checkpoint `6648589` | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
+| `WKH-BRIDGE-7` | complete; checkpoint pending | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
+| `WKH-CLOSE-8` | ready | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
 or deferred only with durable evidence and a concrete replacement/prerequisite;
@@ -646,6 +676,7 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-015` | accepted after category probes | TypeScript needed a genuine finite-free polynomial category facade before weak-kernel qualification. It is constructed as an additive category first, then extended by one whole weak-kernel operation and derived observations. Weak kernels and weak cokernels are dual doctrine descriptors, but only the field-polynomial weak-kernel side has an implementation in this goal. |
 | `D-WKH-016` | accepted after Singular probes | Differential comparison is bidirectional submodule membership between `syz(F)` and the native generator module, not literal basis equality. Rank-zero cases use direct mathematically forced scripts; disagreements remain non-authoritative observations. |
 | `D-WKH-017` | accepted after formal owner probes | Test-object action is retained by a transparent `path_map_func` for each reindexing arrow. No primitive whole annihilator-family functor or naturality of selected lifts is asserted, because both would add coherence not required by the weak-kernel definition. |
+| `D-WKH-018` | accepted after bridge probes | Concrete formal adoption is equation-by-equation and provider-driven: selected `F`, `K`, `U`, and `H` yield exact annihilation/reconstruction targets. A universal formal factor family is not inferred from named cases and remains an explicit capability prerequisite for constructing a closed ring-wide package. |
 
 ## Validation Matrix
 

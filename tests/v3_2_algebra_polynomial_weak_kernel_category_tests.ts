@@ -1,6 +1,7 @@
 /** Focused finite-free weak-kernel category, doctrine, and graph tests. */
 
 import './v3_2_algebra_polynomial_weak_kernel_singular_tests';
+import './v3_2_algebra_formal_weak_kernel_tests';
 
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
