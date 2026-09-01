@@ -861,6 +861,7 @@ RawHom(P,Q)                : groupoidified agreement category
 Hom_Freyd(P,Q)             : 0-truncated RawHom(P,Q)
 El(P) = Hom_Freyd(R,P)     : representable element carrier.
 PreAdd(Freyd_R)            : set-valued abelian Homs with bilinear composition
+PreAdd(Free_R)             : the same structure on finite-free matrix Homs
 0_(P,Q), f+g, -f           : the selected Hom operations.
 0_R                        : rank-zero presentation
 P ⊕ Q                      : block-diagonal presentation direct sum
@@ -890,6 +891,7 @@ The literal owners are `CommRingFiniteFree_cat`,
 `comm_ring_freyd_class_preadditive_evidence`,
 `groupoidify_set_map_ext`,
 `PreadditiveCategory`,
+`comm_ring_finite_free_preadditive`,
 `AdditiveCategory`,
 `comm_ring_zero_presentation`,
 `comm_ring_presentation_direct_sum`,

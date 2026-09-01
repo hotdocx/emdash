@@ -3284,6 +3284,14 @@ ordinary existence view is propositionally truncated. The formal layer does
 not assert naturality of the selected factors or fabricate a primitive whole
 annihilator-family functor whose stored fibre proofs lack checked coherence.
 
+The formal finite-free base now packages its existing matrix computation as a
+genuine `PreadditiveCategory`. Nested finite-family setness makes every matrix
+Hom a set; zero, componentwise addition, and componentwise negation reuse the
+matrix owners and their abelian-group laws. Both distributivity orientations
+are transported from transparent matrix multiplication through the checked
+comparison with generic categorical composition. No new matrix syntax or
+runtime composition rule is introduced.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation

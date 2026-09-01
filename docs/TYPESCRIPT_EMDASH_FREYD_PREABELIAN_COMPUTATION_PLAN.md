@@ -572,8 +572,9 @@ Refine or reject a candidate when it:
 |---|---|---|---|
 | `FPA-PLAN-0` | complete; checkpoint `4059161` | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
 | `FPA-AUDIT-1` | complete; checkpoint `0bdd3b5` | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
-| `FPA-BASE-ADD-2` | active | finite-free matrix laws | formal `PreadditiveCategory`/`AdditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
-| `FPA-UNIVERSAL-3` | complete; checkpoint pending | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
+| `FPA-BASE-PREADD-2A` | complete; checkpoint pending | finite-free matrix laws | formal `PreadditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
+| `FPA-BASE-ADD-2B` | active | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
+| `FPA-UNIVERSAL-3` | complete; checkpoint `66d2687` | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
 | `FPA-WEAK-PB-4` | blocked on base + weak kernels | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-5` | blocked on audit | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
 | `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
@@ -604,6 +605,7 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-012` | accepted after upstream audit | In the repository's column convention, the cokernel relation is `[rho_B,alpha]`; the kernel relation is the second biased weak-fibre-product projection and its embedding datum is the first projection. The zero-composite agreement remains typed input even when upstream CAP retrieves it indirectly. |
 | `D-FPA-013` | accepted after formal audit | Genuine kernel/cokernel uniqueness is contractibility of direct Hom factor fibres. The selected centre, fibre path, and contraction path derive lift/colift, reconstruction, and uniqueness without a manual universal-square record. |
 | `D-FPA-014` | accepted after universal probe | Cokernel coannihilators and factor spaces are transparent direct dual definitions over precomposition. This is a rule-free mirrored semantic surface, not a duplicated runtime theory or propositional equality bridge; it retains covariant test-object Path action. |
+| `D-FPA-015` | accepted after finite-free preadditive probe | Matrix zero/add/negate and abelian-group laws are reused definitionally. Generic `comp_fapp0` remains the runtime owner; both bilinearity paths pass through the existing generic-to-transparent matrix-composition comparison. No rewrite/unifier or parallel matrix operation is added. |
 
 ## Implemented Generic Universal Layer
 
@@ -626,8 +628,26 @@ the additive projection of pre-Abelian data. Source and reviewer checks pass
 within the bounded gate. The strict LHS audit reports zero clauses. Warning-
 enabled comparison is exactly neutral at `1,386 = 1,217 + 169` against the
 sole import owner `emdash3_2_weak_kernels.lp`. The module and reviewer are
-registered; the catalog and 393-file source-metrics health snapshot are
-refreshed.
+registered; at that checkpoint the catalog and 393-file source-metrics health
+snapshot were refreshed.
+
+## Implemented Finite-Free Preadditive Base
+
+`emdash3_2_commutative_algebra_finite_free_preadditive.lp` now constructs the
+first selected `PreadditiveCategory` on `CommRingFiniteFree_cat(R)`. Nested
+`finite_family_is_set` witnesses establish matrix-Hom setness. The Hom
+abelian-group structure reuses `comm_ring_matrix_zero`,
+`comm_ring_matrix_add`, `comm_ring_matrix_neg`, and their checked laws.
+
+Right and left bilinearity start from generic category composition, pass
+through `comm_ring_finite_free_comp_fapp0_transparent_path`, apply the existing
+transparent matrix distributivity path, and reframe both summands back to
+generic composition. The module is rule-free, strict-LHS clean, and exactly
+warning-neutral at `1,274 = 1,117 + 157` against its import union.
+`examples/commutative_ring_finite_free_preadditive.lp` checks definitional
+zero/add/negate observations and both generic distributivity paths. The module
+and reviewer are registered, and the current health snapshot covers 395
+files.
 
 ## Validation Matrix
 

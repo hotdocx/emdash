@@ -369,6 +369,11 @@ belongs to the owning implementation plan rather than to standing guidance.
   functor and Hom action, and select the generic triangular
   `BinaryProducts` surface. Proof-time rigid comparisons expose concrete
   quotient projections/pairing while generic Došen beta/eta remains primary.
+- `emdash3_2_commutative_algebra_finite_free_preadditive.lp`: packages each
+  column-matrix Hom as a set-valued abelian group and transports both matrix
+  distributivity paths through the existing generic/transparent composition
+  comparison. Generic `comp_fapp0` remains the runtime owner; the module adds
+  no rule or second matrix operation.
 - `emdash3_2_commutative_algebra_freyd_terminal_zero.lp` and
   `emdash3_2_commutative_algebra_freyd_cartesian.lp`: derive terminality from
   zero-row matrix uniqueness and quotient descent, then transparently pair the

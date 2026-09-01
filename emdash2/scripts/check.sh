@@ -44,6 +44,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_matrix_blocks.lp)
   files+=(emdash3_2_commutative_algebra_matrix_block_laws.lp)
   files+=(emdash3_2_commutative_algebra_finite_free_direct_sums.lp)
+  files+=(emdash3_2_commutative_algebra_finite_free_preadditive.lp)
   files+=(emdash3_2_commutative_algebra_presentation_direct_sums.lp)
   files+=(emdash3_2_commutative_algebra_presentation_direct_sum_agreements.lp)
   files+=(emdash3_2_commutative_algebra_freyd_direct_sums.lp)
