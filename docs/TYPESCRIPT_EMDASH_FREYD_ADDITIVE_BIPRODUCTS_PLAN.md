@@ -567,6 +567,37 @@ operational doctrine become `additive-category`. The direct category remains
 a computation engine over presentations; it is not replaced by formal proof
 certificates.
 
+### Implemented operational additive result
+
+`src/v3_2/algebra_polynomial_freyd_category.ts` now constructs the rank-zero
+presentation and flattened direct sum of polynomial presentations. The latter
+embeds both relation families into one free module. Its operational
+`AlgebraPolynomialFreydBiproduct` retains the sum object and all four canonical
+injection/projection presentation morphisms, while direct sum on morphisms is
+the corresponding block-diagonal column map. Relation-preservation evidence
+continues to be computed by the existing presentation-morphism engine.
+
+The category registry now exposes executable operations for zero morphism,
+addition, negation, zero object, biproduct, and direct-sum morphism. Every
+operation also has an algebra lowering and TypeScript-reference implementation,
+so categorical programs can delegate to the same direct engine. Binding the
+first five operations qualifies the model against the inherited
+`additive-category` doctrine roles before construction returns; its profile
+and categorical tower now advertise that doctrine rather than merely
+preadditivity.
+
+The focused reviewer checks all five role methods, block-diagonal whole arrow
+action and composition, all four projection/injection beta cases, the diagonal
+biproduct identity, rank/relation concatenation, zero-object computation,
+doctrine qualification, and a compiled biproduct program executed by the
+reference algebra engine. Workspace validation, root typecheck, affected lint,
+and the focused suite are green. The one required `check:ts` integration run
+also passed workspace, typecheck, and full lint; its consolidated tests reached
+completion but retained unrelated pre-existing failures in byte/line-position
+pins for the active kernel and overview article. No failure named the changed
+Freyd source, operation registry, compiler lowering, or focused reviewer, so
+those orthogonal transfer/audit pins are not rewritten in this goal.
+
 ## Feasibility And Rejection Signals
 
 The architecture is considered highly feasible because:
@@ -659,9 +690,9 @@ consequences rather than replacing it.
 | `FAB-AGREEMENT-5B` | complete; checkpoint `5d7ce09` | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
 | `FAB-DESCENT-6A` | complete; checkpoint `5643fbf` | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint `219660a` | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
-| `FAB-ADDITIVE-8A` | complete; checkpoint pending | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
-| `FAB-TYPESCRIPT-9A` | ready | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
-| `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+| `FAB-ADDITIVE-8A` | complete; checkpoint `118d6c2` | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
+| `FAB-TYPESCRIPT-9A` | complete; checkpoint pending | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
+| `FAB-CLOSE-10A` | ready | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, reordered when dependencies permit, rejected, or deferred
 only with durable evidence and a synchronized ledger. Difficulty alone is not
@@ -696,6 +727,7 @@ evidence for an opaque axiom.
 | `D-FAB-023` | accepted after selected-product probes | The concrete `BinaryProducts` witness reuses the whole quotient direct-sum functor and generic triangular theory. Selected point projections/pairing meet rigid Freyd observations through typed proof-time comparisons, then those rigid heads fold to constructed quotient semantics. Direct rules on the generic point heads exceeded the bounded check; the selected bridge preserves those heads for beta/eta and adds no warning beyond the exact import union. |
 | `D-FAB-024` | accepted after terminal-zero probes | Terminality of the zero presentation is constructed from zero-row matrix uniqueness and the existing agreement/groupoidification/truncation descent, not postulated from preadditivity or encoded by a manual square. The generic terminal transfor/cut remain primary; selected point and contractibility observations expose the quotient zero semantics. Cartesian evidence is their transparent product. |
 | `D-FAB-025` | accepted after generic-additive proofs | `AdditiveCategory` is exactly preadditive plus selected Cartesian evidence. Initiality, injections, copairing, both beta laws, the diagonal identity, and eta are theorem-level consequences of abelian cancellation, bilinearity, and generic product/terminal computation; no primitive coproduct or runtime additive rule is introduced. The formal Freyd instance is transparent. |
+| `D-FAB-026` | accepted after operational qualification | The direct polynomial Freyd model constructs zero/direct sums and canonical biproduct maps, registers the five inherited additive doctrine roles plus whole direct-sum arrow action, supplies compiler lowerings/reference implementations, and advertises `additive-category` only after runtime qualification succeeds. |
 
 ## Validation Matrix
 
