@@ -4,7 +4,7 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FREYD-PREABELIAN-COMPUTATION`
 
-Status: complete on a dedicated branch/worktree; closeout checkpoint pending
+Status: complete on a dedicated branch/worktree; closeout checkpoint `3552d939`
 
 Baseline: `c781a42972a3e91f60a79bfd95989ca4dca4aaac`
 
@@ -583,7 +583,7 @@ Refine or reject a candidate when it:
 | `FPA-CATEGORY-7` | complete; checkpoint `e9bc341a` | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | complete at witnessed boundary; checkpoint `ddbcf9e8`; closed quotient package gated by effectiveness | explicit weak-kernel capability + witnessed constructions | capability-parameterized witnessed formal Freyd pre-Abelian surface and selected proof-CAS consumers without fabricated quotient decoder |
 | `FPA-DIFFERENTIAL-9` | complete by audited carried evidence; no new cross-representation adapter | native constructions + existing field-module/Singular evidence | field-module whole kernel/cokernel and installed Singular weak-kernel differential pass `18/18` without replacing native data |
-| `FPA-CLOSE-10` | complete; checkpoint pending | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
+| `FPA-CLOSE-10` | complete; checkpoint `3552d939` | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
 or deferred only with durable evidence and a concrete replacement or
