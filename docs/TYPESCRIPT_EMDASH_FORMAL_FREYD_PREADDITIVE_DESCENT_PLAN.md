@@ -323,9 +323,9 @@ to emit proof certificates for all internal algorithms.
 | --- | --- | --- | --- |
 | `FPD-PLAN-0` | complete; checkpoint `bcf807c` | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
 | `FPD-OWNER-1A` | complete; checkpoint `8a053ae` | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
-| `FPD-MATRIX-2A` | active; comparison, identity, and associativity complete; zero/bilinearity remain | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
-| `FPD-RAW-3A` | active; identity/composition complete, zero/addition await bilinearity | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
-| `FPD-AGREE-4A` | blocked on raw operations | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
+| `FPD-MATRIX-2A` | complete; checkpoint pending | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
+| `FPD-RAW-3A` | complete; checkpoint pending | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
+| `FPD-AGREE-4A` | active | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
 | `FPD-DESCENT-5A` | blocked on agreement algebra | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
 | `FPD-FREYD-6A` | blocked on descent | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
 | `FPD-PREADDITIVE-7A` | blocked on Freyd operations | class operations | smallest checked homwise preadditive package; no biproduct/additive claim |
@@ -356,6 +356,8 @@ opaque axiom should replace it.
 | `D-FPD-014` | accepted after owner proof | Generic finite-free composition reaches transparent evaluation propositionally by transitivity of the existing generic-to-rigid `eq_refl` usability path and the constructed rigid-to-transparent path. |
 | `D-FPD-015` | accepted after law probe | Transparent matrix left/right identity and associativity are transported from generic category normalization through explicit named comparison paths; unification transitivity is not assumed. |
 | `D-FPD-016` | accepted after raw-operation probe | A reusable matrix-square pasting path derives composite presentation laws by five explicit categorical steps; presentation identity/composition retain both generator and relation matrices. |
+| `D-FPD-017` | accepted after additive-law probes | A rule-free derived ring-law layer and Nat-recursive vector/matrix layer construct additive-group laws, action linearity, zero composition, and both distributivity orientations. |
+| `D-FPD-018` | accepted after raw-additive probe | Raw presentation zero and addition combine both stored matrices; their square laws are derived from matrix zero/bilinearity and the input square laws. |
 
 ## Current Matrix-Layer Result
 
@@ -368,7 +370,7 @@ rigid identity path and generic unit/associativity paths now prove transparent
 matrix left/right identity and associativity. The owner passes quiet and
 warning-enabled bounded checks, the focused reviewer consumes all paths, and
 strict LHS audit remains empty. Zero and bilinearity remain the active part of
-`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 342
+`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 347
 owner/reviewer files; no repository-wide timing claim is introduced.
 
 `emdash3_2_commutative_algebra_presentation_operations.lp` now constructs raw
@@ -377,8 +379,18 @@ two transparent matrix unit paths. Composition computes both matrix
 components, while `comm_ring_matrix_square_comp_path` pastes the two stored
 relation squares through transparent associativity. A focused reviewer checks
 both projections, consumes the whole composite law, and retains a noncollapse
-boundary. Formal zero and addition remain gated by the still-active matrix
-zero/bilinearity laws.
+boundary. The additive continuation below supplies the remaining raw
+operations.
+
+The matrix prerequisite is now complete. A low-level derived ring-law module
+supplies the missing opposite orientations and zero consequences of the
+retained commutative-ring basis. The matrix additive-law module recursively
+constructs finite-family extensionality, vector additive/scalar laws, matrix-
+action linearity, matrix additive-group laws, zero composition, and left/right
+distributivity. `emdash3_2_commutative_algebra_presentation_additive_operations.lp`
+uses those paths to construct raw zero and addition together with their whole
+relation squares. All three owners are rule-free, pass focused checks and
+strict LHS audits, and have reviewer-facing positive/noncollapse consumers.
 
 ## Validation Policy
 

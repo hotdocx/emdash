@@ -3184,6 +3184,14 @@ manually: a reusable five-step pasting path associates the left composite,
 applies the second stored square, reassociates, applies the first square, and
 associates to the resulting composite map.
 
+The additive continuation derives the omitted orientations of the ring-law
+basis once, then lifts them through vectors and matrices by Nat recursion.
+Matrix action preserves zero and addition in both its coefficient vector and
+matrix argument. Consequently composition annihilates zero matrices and
+distributes over matrix addition on both sides. Raw presentation zero and
+addition combine generator and relation matrices componentwise; their stored
+squares are derived from those bilinear paths and the input squares.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
