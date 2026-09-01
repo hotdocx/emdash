@@ -336,6 +336,7 @@ import './v3_2_algebra_formal_presentation_morphism_category_tests';
 import './v3_2_algebra_formal_presentation_morphism_conformance_tests';
 import './v3_2_algebra_formal_bounded_complex_tests';
 import './v3_2_algebra_formal_bounded_complex_delegation_tests';
+import './v3_2_algebra_formal_bounded_complex_conformance_tests';
 import './v3_2_lf_module_theorem_development_tests';
 import './v3_2_lf_module_theorem_authoring_tests';
 import './v3_2_lf_declaration_fragment_authoring_tests';

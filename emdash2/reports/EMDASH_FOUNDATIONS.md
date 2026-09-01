@@ -3090,6 +3090,73 @@ operation, formal equation, and categorical compiler therefore share one
 representation without making matrix internals the interface of every generic
 categorical algorithm.
 
+### Bounded Free Complexes And Chain Maps
+
+A sequence of matrices cannot be represented faithfully by one homogeneous
+finite family: adjacent matrices have different ranks. The bounded-complex
+owner instead fixes a selected boundary `d : R^current -> R^below` and defines
+the continuation
+
+```text
+ChainTail_R(0;below,current,d) = Unit
+
+ChainTail_R(n+1;below,current,d)
+  = Sigma next,
+      Sigma e : R^next -> R^current,
+        (d o e = 0)
+        x ChainTail_R(n;current,next,e).
+```
+
+Every next rank is therefore bound before the next differential, and every
+genuine adjacent-zero law is stored beside that differential. No `Fin`,
+lookup, heterogeneous list, or external endpoint equation is needed.
+
+The first differential has no preceding chain condition. Accordingly,
+
+```text
+BoundedFreeComplex_R(0) = Nat
+
+BoundedFreeComplex_R(n+1)
+  = Sigma rank0,
+      Sigma rank1,
+        Sigma d1 : R^rank1 -> R^rank0,
+          ChainTail_R(n;rank0,rank1,d1).
+```
+
+An earlier candidate placed the canonical zero map below degree zero and
+stored `0 o d1 = 0`. Although mathematically valid, that equation is not
+judgmental for an arbitrary formal ring because matrix action still exposes
+ring multiplication/addition laws. The selected representation omits this
+redundant proof rather than adding a rewrite or opaque theorem.
+
+A chain-map tail recurses over two independently packaged complex tails. Given
+the current component `F_i`, a successor stores
+
+```text
+F_(i+1)
+e_(i+1) o F_(i+1) = F_i o d_(i+1)
+remaining chain-map tail.
+```
+
+Thus zero length is one matrix. A positive-length whole map retains `F0`,
+`F1`, the first square over `d1/e1`, and the remaining tail starting at `F1`.
+Source and target complexes are not duplicated into a separate aligned spine.
+
+The polynomial CAS mirrors these whole owners. A candidate complex retains all
+terms, differentials, adjacent composites, and zero statuses; a nonzero
+composite remains an inspectable negative result. Schreyer resolutions convert
+without changing order or completion metadata and are revalidated by the
+generic complex constructor. Chain maps retain every component and square;
+identity and composition return through that same validator.
+
+At the bridge, each genuine `d^2=0` law and each component square is a separate
+exact Core target and independently classified assumption. A recursive recipe
+aligns the selected ranks, matrices, and adopted laws with the formal
+constructors. The bridge does not postulate an opaque whole complex. The
+TypeScript direct category and compiler operate at the plain `Category`
+doctrine; kernels, cokernels, exactness, homology, presented-module complexes,
+and Čech cohomology remain later layers.
+
 ### Presented Affine Basic Opens And Elementwise Base Change
 
 The downstream Zariski module supplies geometric presentation data without
@@ -6955,6 +7022,10 @@ kernel and one-way library vocabulary.
 | retained generator map, relation witness, and law | `comm_ring_presentation_morphism_map` / `comm_ring_presentation_morphism_witness` / `comm_ring_presentation_morphism_law` |
 | representative agreement modulo target relations | `CommRingPresentationMorphismAgreement P Q F G` |
 | exact chain-map component square | `CommRingChainMapSquare` |
+| recursive free-complex tail | `CommRingFreeChainTail` / `comm_ring_free_chain_tail_cons` |
+| whole bounded free complex | `CommRingBoundedFreeComplex` / `comm_ring_bounded_free_complex_succ` |
+| recursive chain-map tail | `CommRingFreeChainMapTail` / `comm_ring_free_chain_map_tail_cons` |
+| whole bounded free chain map | `CommRingBoundedFreeChainMap` / `comm_ring_bounded_free_chain_map_succ` |
 | selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
 | retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
 | finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |

@@ -1,6 +1,16 @@
 # EMDASH Reports Index
 
-Date: 2026-08-31
+Date: 2026-09-01
+
+`../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
+active cross-layer continuation from individual matrix squares to whole
+bounded polynomial free complexes and chain maps. Boundary-indexed recursive
+formal tails internalize varying ranks, genuine `d^2=0` laws, components, and
+chain squares without arrays or manual coherence inputs. Native whole
+complexes revalidate Schreyer resolutions, retain negative composites, expose
+typed operations/graphs and a direct category, and delegate every exact law in
+recursive order. Quotient modules, presented-module complexes, exactness,
+homology, and Čech cohomology remain explicit later layers.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_PRESENTATION_MORPHISMS_PLAN.md` is the
 completed cross-layer continuation from finite presentations to fixed-ring

@@ -831,6 +831,25 @@ path in a quotient module. `ChainSq` is computed from its four matrices; do
 not describe it as a separately hand-written coherence field. This layer does
 not introduce a formal category of presentations or a general complex.
 
+For bounded free complexes and chain maps, comments and examples may write
+
+```text
+C = (C0 <-d1- C1 <-d2- ... <-dn- Cn)
+d²_i                       : d_(i-1) o d_i = 0
+F : C -> D                 : components F_i with e_i o F_i = F_(i-1) o d_i
+Tail(d_i)                  : recursively typed higher terms and laws.
+```
+
+The literal owners are `CommRingFreeChainTail`,
+`CommRingBoundedFreeComplex`, `CommRingFreeChainMapTail`, and
+`CommRingBoundedFreeChainMap`, together with their nil/cons and selected
+projection names. A zero-length complex retains one rank; a positive-length
+complex stores `C0`, `C1`, `d1`, then the recursive tail, so there is no
+spurious printed law `0 o d1 = 0`. Chain-map square fields are computed from
+selected components and adopted as exact laws; they are not independent
+hand-written coherence inputs. Do not describe these packages as complexes of
+quotient modules, an Abelian category, exact resolutions, or homology.
+
 For the separately promoted direct big-affine topology, comments and examples
 may write
 

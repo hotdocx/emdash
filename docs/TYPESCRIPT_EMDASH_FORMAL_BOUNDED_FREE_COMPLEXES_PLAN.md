@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-BOUNDED-FREE-COMPLEXES`
 
-Status: active living plan on a dedicated branch/worktree; reviewed recursive
-design, owner-position feasibility probe pending.
+Status: implementation complete on a dedicated branch/worktree; final
+conformance/documentation checkpoint pending.
 
 Baseline: `c9d8e5ff1c91c1292fa0548b895e3183a0a8657c`
 
@@ -329,9 +329,9 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | `FBC-SCHREYER-5A` | complete; checkpoint `3a934c7` | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
 | `FBC-CHAIN-MAP-6A` | complete; checkpoint `3a934c7` | complex | whole chain maps, identity, composition, and retained noncommuting squares |
 | `FBC-OPERATIONS-7A` | complete; checkpoint `1c7acad` | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
-| `FBC-BRIDGE-8A` | complete; bridge checkpoint pending | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
+| `FBC-BRIDGE-8A` | complete; checkpoint `791d774` | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
 | `FBC-CATEGORY-9A` | complete; checkpoint `1c7acad` | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
-| `FBC-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
+| `FBC-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Every completed row requires focused positive/negative
@@ -370,6 +370,9 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-027` | accepted during Core reification | A complex realization retains ordered ranks, explicit differential matrices, and only genuine adjacent-zero law targets; a chain-map realization retains every component and square target. |
 | `D-FBC-028` | accepted during adoption | Law assumptions are appended in ascending complex degree followed by chain-map and square order; invalid composites/squares remain unadoptable observations. |
 | `D-FBC-029` | accepted during package usability | TypeScript returns a constructor-aligned recursive recipe with selected matrices and adopted law references, while Lambdapi remains the owner of the actual recursive package constructors; no opaque whole-complex assumption is introduced. |
+| `D-FBC-030` | accepted during conformance | Both rule-free formal owners and reviewers are registered; quiet/warning checks and strict LHS audits add zero local diagnostics or clauses. |
+| `D-FBC-031` | accepted during conformance | Live emission reuses the completed matrix/equality signature surface and checks one adjacent-zero plus two chain-square Core targets against the active bounded-chain-map module. |
+| `D-FBC-032` | accepted during conformance | Health is synchronized as an honest no-check 336-target snapshot under the established scoped-validation policy. |
 
 ## Initial Formal Owner Audit Result
 
@@ -488,6 +491,27 @@ Core-check one adjacent-zero law and two square laws, adopt all three in the
 promised order, and retain nonzero/unequal negative observations. The five
 directly affected bridge/complex/category suites, root typecheck, and affected
 lint pass.
+
+## Conformance Result
+
+The bounded-free-complex and bounded-free-chain-map owners plus their two
+reviewers are registered. Quiet target checks pass; warning-enabled checking
+adds no diagnostic located in either module; both strict LHS audits are empty
+because no rewrite or unification rule was introduced.
+
+Live emitted-Core conformance checks one genuine adjacent-zero law and two
+successive chain-map squares against
+`emdash3_2_commutative_algebra_bounded_free_chain_maps`. The same terms first
+pass the TypeScript Core checker. Formal reviewers separately construct whole
+complex and chain-map packages through the recursive constructors, while the
+bridge artifact retains the exact selected matrices and adopted law references
+in matching order.
+
+Standing current-status, Foundations, canonical-syntax, and report-index
+documentation records the recursive representation, rejected dummy-zero
+boundary, direct category, and nonclaims. The strict catalog is synchronized.
+Health records 336 owner/reviewer files in an honest no-check source snapshot;
+no repository-wide timing or aggregate claim is introduced.
 
 ## Validation Policy
 

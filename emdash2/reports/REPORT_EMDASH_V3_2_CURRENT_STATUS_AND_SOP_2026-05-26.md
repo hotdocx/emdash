@@ -260,6 +260,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   `R_Q o H = F-G`; one exact classifier exposes a chain-map component square.
   These are explicit matrix equations, not quotient-module equality, a formal
   presentation category, exactness, or homology.
+- `emdash3_2_commutative_algebra_bounded_free_complexes.lp`: downstream
+  one-way, rule-free bounded free-complex layer. A boundary-indexed Nat/Sigma
+  tail stores every next rank, differential, genuine adjacent-zero law, and
+  rest. Length zero is one rank; positive length stores `rank0`, `rank1`,
+  `d1`, then the tail, avoiding a redundant nonjudgmental `0 o d1` law.
+- `emdash3_2_commutative_algebra_bounded_free_chain_maps.lp`: downstream
+  one-way, rule-free chain-map layer over two independently packaged complex
+  tails. Zero length is one matrix; positive length stores `F0`, `F1`, the
+  first exact square, and a tail that recursively stores later components and
+  squares. Neither module claims presented-module quotients, a formal complex
+  category, exactness, or homology.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5217,8 +5228,9 @@ confluence.
 After integration of the completed TypeScript-elaborator, PSSS,
 internal-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification,
 monad/Cartesian, cubical/property-profile, pullback, and
-slice-dependent-product histories, plus the rule-free finite-presentation and
-presentation-morphism extensions, the active kernel warning boundary remains
+slice-dependent-product histories, plus the rule-free finite-presentation,
+presentation-morphism, and bounded-free-complex/chain-map extensions, the
+active kernel warning boundary remains
 1,274 diagnostics: 1,117 unjoinable critical pairs and 157
 replaceable-pattern advisories. Downstream module-specific additions and
 projection-order classifications remain in their dated implementation plans;
@@ -5229,15 +5241,15 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 332 maintained owner/reviewer files. It records no exit
+source snapshot over 336 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
 90-second-per-target gates in their owning tranches. The source-metrics
 snapshot is
-`sha256:3aee00b8af3dbd1363cddfef9995c5f79ca5a57c05370f4fd8751ec7dfce9fe2`
+`sha256:ededc8f317d761290978f14cfeb2471c82bcac17d33a53f66efc47b88abda4c8`
 and the check-content snapshot is
-`sha256:cc86b4f3e7d8a50cb076e980c940690fba441f435878e2c6da8dcbf22a36ef85`.
+`sha256:dc5536942c7c22fb930215cb1c5bdf2695d53666e8dc5f6186adb74e8ad98d95`.
 The newly registered finite-module owner and reviewer pass their focused
 bounded checks, its strict LHS audit is empty, and emitted membership,
 syzygy, and adjacent-zero Core targets pass a live Lambdapi probe. The
@@ -5248,6 +5260,11 @@ focused checks with zero local warning diagnostics and an empty strict LHS
 audit. Live emitted-Core checking accepts its relation-preservation,
 representative-agreement, and chain-square equations. These are proportional
 target results, not a repository-wide timing claim.
+The recursive bounded-free-complex and chain-map owners plus both reviewers
+pass their focused checks with zero local warning diagnostics and empty strict
+LHS audits. Live emitted-Core checking accepts the selected adjacent-zero and
+component-square laws; whole negative composites remain TypeScript
+observations. These results add no quotient, exactness, or homology claim.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 
