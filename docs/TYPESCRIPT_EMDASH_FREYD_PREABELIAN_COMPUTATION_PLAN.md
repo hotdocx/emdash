@@ -579,9 +579,9 @@ Refine or reject a candidate when it:
 | `FPA-COKERNEL-NATIVE-5A` | complete; checkpoint `3625a254` | Freyd presentation/additive owners | native unconditional Freyd whole cokernel, object, projection, witness-retaining colift, annihilation, reconstruction, quotient uniqueness |
 | `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint `4cd1348c`; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
 | `FPA-KERNEL-NATIVE-6A` | complete; checkpoint `6d0ef4c0` | polynomial Freyd presentation + weak pullbacks | native Freyd whole kernel, object, embedding, two-stage lift, annihilation, reconstruction, quotient uniqueness |
-| `FPA-KERNEL-FORMAL-6B` | complete at witness-enriched boundary; checkpoint pending; closed quotient package subject to effective path/witness decoding | formal witnessed weak pullbacks + explicit zero agreement | formal kernel presentation/embedding/two-stage lift, annihilation, reconstruction and monic uniqueness |
-| `FPA-CATEGORY-7` | active | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
-| `FPA-FORMAL-8` | blocked on universal + concrete constructions | explicit weak-kernel capability | capability-parameterized formal Freyd pre-Abelian package and selected proof-CAS consumers |
+| `FPA-KERNEL-FORMAL-6B` | complete at witness-enriched boundary; checkpoint `18d96719`; closed quotient package subject to effective path/witness decoding | formal witnessed weak pullbacks + explicit zero agreement | formal kernel presentation/embedding/two-stage lift, annihilation, reconstruction and monic uniqueness |
+| `FPA-CATEGORY-7` | complete; checkpoint pending | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
+| `FPA-FORMAL-8` | active; closed quotient package gated by effectiveness boundary | explicit weak-kernel capability + witnessed constructions | capability-parameterized witnessed formal Freyd pre-Abelian surface and selected proof-CAS consumers without fabricated quotient decoder |
 | `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
 | `FPA-CLOSE-10` | blocked on all required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
 
@@ -618,6 +618,8 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-023` | accepted after compatibility/cone probes | Difference-zero and conventional equalizing equations are two theorem-level views of one weak-pullback carrier. Generic abelian cancellation derives `alpha o p = gamma o q`; pairing plus bilinearity turns an explicit equality back into the annihilator cone. |
 | `D-FPA-024` | accepted after native kernel tests | Polynomial Freyd kernels use exactly two existing weak-pullback solves. The zero-composite agreement witness feeds the first induced map; the test morphism's retained relation witness feeds the second. The second first projection is the kernel relation map and the first first projection is the embedding datum. |
 | `D-FPA-025` | accepted after formal witnessed-kernel probes | Formal Construction 3.10 is parameterized by the finite-free weak-kernel capability. The zero agreement and source relation square construct the two lift cones. For uniqueness, the difference between a competing and selected lift plus the competing reconstruction witness forms a second-stage cone whose factor is exactly the Freyd agreement witness. |
+| `D-FPA-026` | accepted after category-provider tests | `PREABELIAN_DOCTRINE` requires whole kernel/cokernel plus object, embedding/projection, and lift/colift roles. The field-polynomial Freyd provider qualifies only after every role has a plannable method; uniqueness remains checked inside the whole results and explicit native functions. |
+| `D-FPA-027` | accepted after provider boundary tests | Operational pre-Abelian qualification is available only for polynomial rings with a field coefficient provider. The ordinary additive Freyd model remains valid over its broader ring boundary and is not silently promoted. |
 
 ## Implemented Generic Universal Layer
 
@@ -785,6 +787,34 @@ agreement witness. The rule-free source and focused reviewer pass; its warning
 inventory is exactly its import union at `1,392 = 1,223 + 169`, and the strict
 LHS audit is empty. The owner and reviewer are registered; the refreshed
 health snapshot covers 409 files.
+
+## Implemented Operational Pre-Abelian Category
+
+`algebra_polynomial_freyd_preabelian_category.ts` extends the existing
+additive polynomial Freyd model without changing its presentation or quotient
+representation. It registers one whole kernel and one whole cokernel
+primitive, then derives kernel object/embedding/lift and cokernel
+object/projection/colift through the category-method planner. The model rejects
+non-field coefficient providers before claiming the capability.
+
+`PREABELIAN_DOCTRINE` now requires all eight usable roles rather than two
+opaque whole boxes, and its dual map exchanges every kernel role with the
+corresponding cokernel role. The new model qualifies that complete inherited
+role set, appends one capability constructor to the categorical tower, lowers
+all eight operations to backend-neutral algebra operations, and executes them
+through the TypeScript reference engine. Focused tests cover qualification,
+all derived plans, inherited additive operations, non-field rejection, whole
+kernel/cokernel compilation, factor compilation, and graph execution.
+
+The required shared `check:ts` gate reached completion on this fixed tree.
+Workspace validation, root typecheck, and full lint pass. Every new doctrine,
+weak-pullback, Freyd kernel/cokernel, pre-Abelian category, compiler, reference-
+engine, and graph test passes in the consolidated corpus. Its failures are
+exclusively inherited source-pin audits: the active-kernel digest split
+between `e87ddf...` and `0a1177...`, displaced owner/rule positions in the
+same historical transfer/pathout tests, and the existing overview-article
+digest mismatch. No failure names a new operation, provider, model, or test;
+the aggregate is not rerun.
 
 ## Validation Matrix
 

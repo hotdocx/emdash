@@ -889,6 +889,7 @@ q_f                        : identity-data quotient projection
 colift_f(h,H₀)             : colift consuming explicit zero agreement H₀
 Ker_Freyd(f)               : presentation from two biased weak pullbacks
 lift_f(τ,H₀)               : kernel lift using H₀ and τ's relation witness.
+PreAb(Freyd_R)             : field-polynomial provider with all eight roles.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,

@@ -287,10 +287,28 @@ export const COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE = defineDoctrine({
 export const PREABELIAN_DOCTRINE = defineDoctrine({
     id: 'preabelian-category',
     parents: ['additive-category'],
-    requiredRoles: ['kernel', 'cokernel'],
+    requiredRoles: [
+        'kernel',
+        'kernel-object',
+        'kernel-embedding',
+        'kernel-lift',
+        'cokernel',
+        'cokernel-object',
+        'cokernel-projection',
+        'cokernel-colift'
+    ],
     dual: {
         doctrineId: 'preabelian-category',
-        roles: { kernel: 'cokernel', cokernel: 'kernel' }
+        roles: {
+            kernel: 'cokernel',
+            'kernel-object': 'cokernel-object',
+            'kernel-embedding': 'cokernel-projection',
+            'kernel-lift': 'cokernel-colift',
+            cokernel: 'kernel',
+            'cokernel-object': 'kernel-object',
+            'cokernel-projection': 'kernel-embedding',
+            'cokernel-colift': 'kernel-lift'
+        }
     }
 });
 export const ABELIAN_DOCTRINE = defineDoctrine({

@@ -5515,6 +5515,15 @@ agreements feed both lift stages and the uniqueness factor through the second
 weak pullback. Quotient paths expose the resulting equations without claiming
 a capability for arbitrary rings.
 
+The field-polynomial category/CAS provider now registers complete kernel and
+cokernel role families on the unchanged Freyd carrier. Whole constructions
+are primitive computation owners; object, embedding/projection, and
+lift/colift are derived category methods with compiler lowerings and reference-
+engine execution. `PREABELIAN_DOCTRINE` requires all eight usable roles, and
+the provider qualifies only after every inherited additive and universal role
+is plannable. Non-field coefficient providers are rejected; no Abelian claim
+is made.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its

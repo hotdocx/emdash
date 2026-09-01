@@ -37,6 +37,14 @@ describe('v3.2 operational categorical doctrines', () => {
         assert.deepEqual(PREABELIAN_DOCTRINE.parents, ['additive-category']);
         assert.equal(PREABELIAN_DOCTRINE.dual.roles.kernel, 'cokernel');
         assert.equal(PREABELIAN_DOCTRINE.dual.roles.cokernel, 'kernel');
+        assert.equal(
+            PREABELIAN_DOCTRINE.dual.roles['kernel-embedding'],
+            'cokernel-projection'
+        );
+        assert.equal(
+            PREABELIAN_DOCTRINE.dual.roles['kernel-lift'],
+            'cokernel-colift'
+        );
         assert.equal(ABELIAN_DOCTRINE.dual.roles.image, 'coimage');
         assert.equal(
             ALGEBRA_BASE_DOCTRINES.byId.get('category')?.dual.doctrineId,
@@ -73,6 +81,12 @@ describe('v3.2 operational categorical doctrines', () => {
         assert.deepEqual(qualification.missingRoles, [
             'add-morphisms',
             'biproduct',
+            'cokernel-colift',
+            'cokernel-object',
+            'cokernel-projection',
+            'kernel-embedding',
+            'kernel-lift',
+            'kernel-object',
             'negate-morphism',
             'zero-morphism',
             'zero-object'
@@ -82,7 +96,10 @@ describe('v3.2 operational categorical doctrines', () => {
     it('qualifies a category only when every inherited role is plannable', () => {
         const roles = [
             'zero-morphism', 'add-morphisms', 'negate-morphism',
-            'zero-object', 'biproduct', 'kernel', 'cokernel',
+            'zero-object', 'biproduct',
+            'kernel', 'kernel-object', 'kernel-embedding', 'kernel-lift',
+            'cokernel', 'cokernel-object', 'cokernel-projection',
+            'cokernel-colift',
             'image', 'coimage', 'coimage-image-isomorphism'
         ];
         const operations = roles.map(role => defineCategoryOperation({

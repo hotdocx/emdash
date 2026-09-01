@@ -3368,6 +3368,15 @@ a competing and selected lift, together with the competing reconstruction
 witness, forms another second-stage cone. Its factor is exactly the agreement
 witness proving the two lifts equal in the Freyd quotient.
 
+At the operational category layer these constructions are not hidden inside
+metadata. The polynomial Freyd model registers whole kernel and cokernel
+operations, then derives their objects, structural arrows, and factors through
+the generic method planner. Every role lowers to the same backend-neutral
+algebra graph and TypeScript reference engine. Only a field-backed polynomial
+provider qualifies the resulting `preabelian-category`; the broader additive
+model is left unchanged. This mirrors CAP's usable operation families while
+also retaining emdash's formal semantic targets and explicit trust boundary.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation
