@@ -273,6 +273,20 @@ This layer provides the matrix evidence consumed by presentation sums. It need
 not independently package the final Freyd `BinaryProducts` instance if doing
 so would duplicate the presentation-level consumer.
 
+### Implemented finite-free result
+
+`emdash3_2_commutative_algebra_finite_free_direct_sums.lp` now provides one
+whole functor from the product of two finite-free matrix categories to the
+same category. Its object action is `nat_add`; its first-arrow action computes
+to the flattened block diagonal; and its first Hom action remains available as
+a whole functor. The direct transparent action passed owner-position probing,
+so no rigid intermediary or proof-time unifier was required. Constructed
+diagonal identity/composition paths give the semantic functor-law joins.
+
+The focused implementation/reviewer checks and strict LHS audit pass. After
+replacing the unused ring argument in the object-rule LHS by `_`, the warning
+count remains 1,274, equal to the predecessor boundary.
+
 ## Presentation Direct Sums And Zero
 
 For presentations
@@ -502,8 +516,8 @@ consequences rather than replacing it.
 | `FAB-AUDIT-1A` | complete; first semantic checkpoint pending | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
 | `FAB-FAMILY-2A` | complete; first semantic checkpoint pending | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
 | `FAB-BLOCK-3A` | complete; block checkpoint pending | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
-| `FAB-FREE-4A` | ready | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
-| `FAB-PRESENTATION-5A` | blocked by block/free layers | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
+| `FAB-FREE-4A` | complete; finite-free checkpoint pending | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
+| `FAB-PRESENTATION-5A` | ready | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
 | `FAB-DESCENT-6A` | blocked by presentation layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
@@ -536,6 +550,7 @@ evidence for an opaque axiom.
 | `D-FAB-016` | accepted after family probe | Transparent left-recursive append/split operations suffice; no new runtime/unification clause or alternative finite-family carrier is needed. |
 | `D-FAB-017` | accepted after block probes | A vertical pair of horizontal rows is the selected general block orientation because it exposes product projections directly. |
 | `D-FAB-018` | accepted after block laws | All required block beta/eta and diagonal-composition equations are constructed theorem paths; no block runtime/unification family is needed. |
+| `D-FAB-019` | accepted after whole-functor probe | Finite-free direct-sum object/arrow computation can reduce directly to `nat_add`/block diagonal without a rigid intermediary or new warning family. |
 
 ## Validation Matrix
 

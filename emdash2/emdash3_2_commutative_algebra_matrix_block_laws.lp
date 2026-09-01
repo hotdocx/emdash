@@ -1465,3 +1465,53 @@ symbol comm_ring_matrix_block_diag_comp_path
         middle_left middle_right columns_left columns_right A B E)
       (@comm_ring_matrix_block_diag_bottom_comp_path R rows_right
         middle_left middle_right columns_left columns_right D B E));
+
+// The diagonal of two identity matrices is the identity at the rank sum.
+symbol comm_ring_matrix_block_diag_id_path
+  (R : τ CommRing)
+  (m n : τ Nat_grpd)
+  : τ (@= (@CommRingMatrix R (@nat_add m n) (@nat_add m n))
+      (@comm_ring_matrix_block_diag R m n m n
+        (@comm_ring_finite_free_id_matrix R m)
+        (@comm_ring_finite_free_id_matrix R n))
+      (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+≔ @eq_trans
+    (@CommRingMatrix R (@nat_add m n) (@nat_add m n))
+    (@comm_ring_matrix_block_diag R m n m n
+      (@comm_ring_finite_free_id_matrix R m)
+      (@comm_ring_finite_free_id_matrix R n))
+    (@comm_ring_matrix_vertical R m n (@nat_add m n)
+      (@comm_ring_matrix_comp R m (@nat_add m n) (@nat_add m n)
+        (@comm_ring_matrix_proj1 R m n)
+        (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+      (@comm_ring_matrix_comp R n (@nat_add m n) (@nat_add m n)
+        (@comm_ring_matrix_proj2 R m n)
+        (@comm_ring_finite_free_id_matrix R (@nat_add m n))))
+    (@comm_ring_finite_free_id_matrix R (@nat_add m n))
+    (@comm_ring_matrix_vertical_congr_path R m n (@nat_add m n)
+      (@comm_ring_matrix_proj1 R m n)
+      (@comm_ring_matrix_comp R m (@nat_add m n) (@nat_add m n)
+        (@comm_ring_matrix_proj1 R m n)
+        (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+      (@comm_ring_matrix_proj2 R m n)
+      (@comm_ring_matrix_comp R n (@nat_add m n) (@nat_add m n)
+        (@comm_ring_matrix_proj2 R m n)
+        (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+      (@eq_sym
+        (@CommRingMatrix R m (@nat_add m n))
+        (@comm_ring_matrix_comp R m (@nat_add m n) (@nat_add m n)
+          (@comm_ring_matrix_proj1 R m n)
+          (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+        (@comm_ring_matrix_proj1 R m n)
+        (@comm_ring_matrix_comp_right_identity_path R
+          (@nat_add m n) m (@comm_ring_matrix_proj1 R m n)))
+      (@eq_sym
+        (@CommRingMatrix R n (@nat_add m n))
+        (@comm_ring_matrix_comp R n (@nat_add m n) (@nat_add m n)
+          (@comm_ring_matrix_proj2 R m n)
+          (@comm_ring_finite_free_id_matrix R (@nat_add m n)))
+        (@comm_ring_matrix_proj2 R m n)
+        (@comm_ring_matrix_comp_right_identity_path R
+          (@nat_add m n) n (@comm_ring_matrix_proj2 R m n))))
+    (@comm_ring_matrix_vertical_proj_eta_path R m n (@nat_add m n)
+      (@comm_ring_finite_free_id_matrix R (@nat_add m n)));
