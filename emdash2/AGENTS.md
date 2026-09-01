@@ -65,8 +65,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   structures and bilinear generic composition.
   `emdash3_2_commutative_algebra_freyd_preadditive_laws.lp` and
   `emdash3_2_commutative_algebra_freyd_preadditive.lp` own full arbitrary-
-  quotient Freyd laws and the checked preadditive instance. Biproducts,
-  additive-category structure, weak kernels, and Abelian structure remain
+  quotient Freyd laws and the checked preadditive instance.
+  `emdash3_2_additive_categories.lp` and the finite-direct-sum/Freyd additive
+  extensions derive biproducts, terminal/initial zero, and the checked
+  `AdditiveCategory` instance. Weak kernels and Abelian structure remain
   separate layers.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
