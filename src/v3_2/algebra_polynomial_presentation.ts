@@ -24,6 +24,7 @@ import {
     algebraPolynomialModuleGroebnerBasis,
     algebraPolynomialModuleMembership,
     algebraPolynomialModuleSchreyerSyzygies,
+    algebraPolynomialModuleSubtract,
     algebraPolynomialModuleVector,
     algebraPolynomialModuleZero,
     algebraPolynomialSchreyerModule,
@@ -149,6 +150,62 @@ export const algebraPolynomialModuleMapIdentity = <
             )
         )
     );
+
+export const algebraPolynomialModuleMapZero = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    source: AlgebraPolynomialFreeModule<P, C, I>,
+    target: AlgebraPolynomialFreeModule<P, C, I>
+): AlgebraPolynomialModuleMap<P, C, I> => algebraPolynomialModuleMap(
+    source,
+    target,
+    Array.from({ length: source.rank }, () =>
+        algebraPolynomialModuleZero(target)
+    )
+);
+
+export function algebraPolynomialModuleMapAdd<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    left: AlgebraPolynomialModuleMap<P, C, I>,
+    right: AlgebraPolynomialModuleMap<P, C, I>
+): AlgebraPolynomialModuleMap<P, C, I> {
+    if (
+        !sameAlgebraParent(left.source, right.source) ||
+        !sameAlgebraParent(left.target, right.target)
+    ) {
+        return fail(
+            'INVALID_MODULE_MAP',
+            'polynomialModuleMapAdd',
+            'Map addition requires identical free-module endpoints'
+        );
+    }
+    return algebraPolynomialModuleMap(
+        left.source,
+        left.target,
+        left.columns.map((column, index) =>
+            algebraPolynomialModuleAdd(column, right.columns[index])
+        )
+    );
+}
+
+export const algebraPolynomialModuleMapNegate = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(map: AlgebraPolynomialModuleMap<P, C, I>):
+    AlgebraPolynomialModuleMap<P, C, I> => algebraPolynomialModuleMap(
+    map.source,
+    map.target,
+    map.columns.map(column => algebraPolynomialModuleSubtract(
+        algebraPolynomialModuleZero(map.target),
+        column
+    ))
+);
 
 export function algebraPolynomialModuleMapCompose<
     P extends AlgebraParent,

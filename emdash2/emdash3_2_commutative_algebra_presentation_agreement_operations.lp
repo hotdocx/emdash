@@ -9,7 +9,7 @@
 */
 
 require open emdash.emdash3_2_commutative_algebra_matrix_subtractive_laws;
-require open emdash.emdash3_2_commutative_algebra_presentation_additive_operations;
+require open emdash.emdash3_2_commutative_algebra_presentation_subtractive_operations;
 
 symbol comm_ring_presentation_agreement_witness
   [R : τ CommRing]
@@ -79,6 +79,32 @@ symbol comm_ring_presentation_agreement_refl
         (@comm_ring_matrix_sub_refl_path R
           (@comm_ring_presentation_generators R Q)
           (@comm_ring_presentation_generators R P) F)));
+
+// Any literal matrix path induces agreement by path induction from reflexivity.
+symbol comm_ring_presentation_agreement_of_map_path
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  [F G : τ (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P))]
+  (p : τ (@= (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P)) F G))
+  : τ (@CommRingPresentationMorphismAgreement R P Q F G)
+≔ @ind_eqr
+    (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P))
+    G
+    (λ F0 : τ (@CommRingMatrix R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P)),
+      λ _ : τ (@= (@CommRingMatrix R
+          (@comm_ring_presentation_generators R Q)
+          (@comm_ring_presentation_generators R P)) F0 G),
+        @CommRingPresentationMorphismAgreement R P Q F0 G)
+    (@comm_ring_presentation_agreement_refl R P Q G)
+    F p;
 
 symbol comm_ring_presentation_agreement_sym
   [R : τ CommRing]
@@ -237,6 +263,98 @@ symbol comm_ring_presentation_agreement_add
             (@comm_ring_presentation_generators R Q)
             (@comm_ring_presentation_generators R P)
             F G F' G'))));
+
+symbol comm_ring_presentation_agreement_neg
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  [F G : τ (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P))]
+  (a : τ (@CommRingPresentationMorphismAgreement R P Q F G))
+  : τ (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_matrix_neg R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P) F)
+      (@comm_ring_matrix_neg R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P) G))
+≔ @comm_ring_presentation_morphism_agreement_intro R P Q
+    (@comm_ring_matrix_neg R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P) F)
+    (@comm_ring_matrix_neg R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P) G)
+    (@comm_ring_matrix_neg R
+      (@comm_ring_presentation_relations R Q)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_agreement_witness R P Q F G a))
+    (@eq_trans
+      (@CommRingMatrix R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P))
+      _ _ _
+      (@comm_ring_matrix_comp_neg_right_path R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_relations R Q)
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_presentation_matrix R Q)
+        (@comm_ring_presentation_agreement_witness R P Q F G a))
+      (@eq_trans
+        (@CommRingMatrix R
+          (@comm_ring_presentation_generators R Q)
+          (@comm_ring_presentation_generators R P))
+        _ _ _
+        (@eq_ap
+          (@CommRingMatrix R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_generators R P))
+          (@CommRingMatrix R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_generators R P))
+          (λ X : τ (@CommRingMatrix R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P)),
+            @comm_ring_matrix_neg R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P) X)
+          (@comm_ring_matrix_comp R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_relations R Q)
+            (@comm_ring_presentation_generators R P)
+            (@comm_ring_presentation_matrix R Q)
+            (@comm_ring_presentation_agreement_witness R P Q F G a))
+          (@comm_ring_matrix_sub R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_generators R P) F G)
+          (@comm_ring_presentation_agreement_law R P Q F G a))
+        (@eq_trans
+          (@CommRingMatrix R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_generators R P))
+          _ _ _
+          (@comm_ring_matrix_neg_sub_swap_path R
+            (@comm_ring_presentation_generators R Q)
+            (@comm_ring_presentation_generators R P) F G)
+          (@eq_sym
+            (@CommRingMatrix R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P))
+            (@comm_ring_matrix_sub R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P)
+              (@comm_ring_matrix_neg R
+                (@comm_ring_presentation_generators R Q)
+                (@comm_ring_presentation_generators R P) F)
+              (@comm_ring_matrix_neg R
+                (@comm_ring_presentation_generators R Q)
+                (@comm_ring_presentation_generators R P) G))
+            (@comm_ring_matrix_sub R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P) G F)
+            (@comm_ring_matrix_sub_neg_path R
+              (@comm_ring_presentation_generators R Q)
+              (@comm_ring_presentation_generators R P) F G)))));
 
 // Agreement is preserved by precomposition with an arbitrary generator map.
 symbol comm_ring_presentation_agreement_precomp

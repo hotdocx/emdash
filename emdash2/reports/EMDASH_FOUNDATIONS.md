@@ -3209,6 +3209,21 @@ class computations. Generic Freyd identity and composition retain the global
 category normal forms and meet these semantic operations through a sequential
 rigid-head usability bridge.
 
+Negation follows the same route, giving zero, addition, and inverse on every
+ordinary quotient Hom. The additive-group and bilinear laws are presently
+checked on every generating raw presentation class. This class-preadditive
+evidence is not promoted to a full preadditive-category claim: extending all
+proposition-valued laws to arbitrary points requires a generic dependent or
+proposition-valued induction principle for `Groupoidify`, beyond its current
+nondependent recursor.
+
+The direct polynomial implementation computes the same zero, addition, and
+negation on presentation maps by rebuilding and validating the complete
+relation witness. Target-factorization congruence verifies additive unit,
+cancellation, and both distributivity orientations. This computational
+capability does not by itself upgrade the formal doctrine beyond the recorded
+raw-class law boundary.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

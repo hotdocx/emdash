@@ -34,6 +34,15 @@ assert
   ≡ @comm_ring_freyd_hom_class R P Q
       (@comm_ring_presentation_morphism_add R P Q f g);
 
+assert
+  (R : τ CommRing)
+  (P Q : τ (@CommRingPresentation R))
+  (f : τ (@CommRingPresentationMorphism R P Q))
+  ⊢ @comm_ring_freyd_neg R P Q
+      (@comm_ring_freyd_hom_class R P Q f)
+  ≡ @comm_ring_freyd_hom_class R P Q
+      (@comm_ring_presentation_morphism_neg R P Q f);
+
 symbol freyd_whole_postcomp_functor_reviewer
   [R : τ CommRing]
   [P Q S : τ (@CommRingPresentation R)]

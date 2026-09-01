@@ -305,6 +305,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   completes the raw presentation surface with zero and addition on both stored
   matrices. Their relation squares are constructed from the matrix zero and
   bilinearity paths; no opaque square or runtime algebra rule is introduced.
+- `emdash3_2_commutative_algebra_presentation_subtractive_operations.lp`:
+  negates generator and relation matrices together and derives the resulting
+  relation square from matrix composition/negation paths.
 - `emdash3_2_commutative_algebra_presentation_agreement_operations.lp`:
   constructs reflexive, symmetric, transitive, additive, precomposition, and
   postcomposition operations on explicit target-factorization agreement. The
@@ -331,6 +334,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   typed proof-time unifiers; only afterward do rigid-head runtime folds expose
   the raw identity class and descended composition. No rule is headed by
   generic `id` or `comp_fapp0`.
+- `emdash3_2_commutative_algebra_freyd_preadditive_class_laws.lp`: packages
+  quotient-Hom zero/addition/negation and proves additive-group plus bilateral
+  distributivity laws on every generating raw class. It deliberately records
+  class-preadditive evidence rather than a full `PreadditiveCategory` instance;
+  arbitrary-quotient law promotion awaits a generic proposition-valued or
+  dependent groupoidification induction interface.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5301,7 +5310,7 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 354 maintained owner/reviewer files. It records no exit
+source snapshot over 358 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
@@ -5349,6 +5358,17 @@ truncated composition/addition compute on classes, and named paths connect
 generic category identity/composition to their semantic operations. The two
 outer fapp1 action rules contribute six classified identity overlaps; the two
 inner action comparisons are proof-time and add no runtime family.
+The raw-negation and class-preadditive owners plus their focused reviewers pass
+as well. Negation computes on raw/truncated classes, and packaged class laws
+cover additive unit/associativity/commutativity/inverse and both
+distributivity orientations. The full arbitrary-quotient law promotion remains
+explicitly gated by generic proposition-valued groupoidification induction.
+The direct polynomial Freyd model also computes zero/addition/negation and
+checks representative additive unit, cancellation, and bilateral
+distributivity by target-factorization congruence. Its doctrine remains plain
+`category`, and its formal-law boundary is explicitly the generating raw
+classes. Live Core/Lambdapi conformance accepts both the earlier representative
+agreement and computed additive cancellation against the active formal module.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

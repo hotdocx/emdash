@@ -326,11 +326,11 @@ to emit proof certificates for all internal algorithms.
 | `FPD-MATRIX-2A` | complete; checkpoint `75783e5` | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
 | `FPD-RAW-3A` | complete; checkpoint `75783e5` | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
 | `FPD-AGREE-4A` | complete; checkpoint `f41e8db` | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
-| `FPD-DESCENT-5A` | complete; checkpoint pending | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
-| `FPD-FREYD-6A` | complete; checkpoint pending | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
-| `FPD-PREADDITIVE-7A` | active | class operations | smallest checked homwise preadditive package; no biproduct/additive claim |
-| `FPD-CONFORMANCE-8A` | blocked on formal consumer | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
-| `FPD-CLOSE-9A` | blocked on active rows | all accepted/deferred rows | registration, reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+| `FPD-DESCENT-5A` | complete; checkpoint `ad62202` | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
+| `FPD-FREYD-6A` | complete; checkpoint `ad62202` | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
+| `FPD-PREADDITIVE-7A` | complete for hom operations and all raw-class laws; arbitrary-quotient law promotion deferred behind proposition-valued groupoidification induction | class operations | honest class-preadditive capability; no full PreadditiveCategory, biproduct, or additive claim |
+| `FPD-CONFORMANCE-8A` | complete; checkpoint pending | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
+| `FPD-CLOSE-9A` | active | all accepted/deferred rows | registration, reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized ledger. A difficult proof is not by itself evidence that an
@@ -365,6 +365,10 @@ opaque axiom should replace it.
 | `D-FPD-023` | accepted after quotient probes | Whole agreement functors, representation transfors, and nested groupoidification/0-truncation recursion give composition and addition on arbitrary quotient Homs with raw-class computation. |
 | `D-FPD-024` | accepted after usability probes | Generic Freyd identity/composition first meet rigid heads by proof-time unification; only after typed `eq_refl` validation do local rigid-head folds expose the raw identity class and descended composition. |
 | `D-FPD-025` | accepted after alias probes | Direct unifiers to defined identity/composition or outer-action aliases do not fire here; sequential rigid intermediaries succeed. This confirms that immediate `eq_refl` is a test, not a consequence of declaration order. |
+| `D-FPD-026` | accepted after inverse descent | Raw presentation negation, agreement under negation, and groupoidified/truncated negation complete the computational additive operations. |
+| `D-FPD-027` | accepted at the law boundary | All additive-group and bilinear laws are checked on every generating raw class and packaged as class-preadditive evidence. Promoting them to arbitrary groupoidified/truncated points requires a generic dependent or proposition-valued groupoidification induction principle absent from the current API. |
+| `D-FPD-028` | accepted during direct alignment | The direct polynomial Freyd model computes zero/add/negation and representative bilinearity while retaining the plain category doctrine and explicitly recording `formalLawBoundary = generating-raw-classes`. |
+| `D-FPD-029` | accepted during live conformance | One live Core/Lambdapi probe checks both the original representative agreement and computed additive cancellation against the active class-preadditive formal module. |
 
 ## Current Matrix-Layer Result
 
@@ -377,7 +381,7 @@ rigid identity path and generic unit/associativity paths now prove transparent
 matrix left/right identity and associativity. The owner passes quiet and
 warning-enabled bounded checks, the focused reviewer consumes all paths, and
 strict LHS audit remains empty. Zero and bilinearity remain the active part of
-`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 354
+`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 358
 owner/reviewer files; no repository-wide timing claim is introduced.
 
 `emdash3_2_commutative_algebra_presentation_operations.lp` now constructs raw
@@ -417,6 +421,25 @@ the validated sequential rigid-head pattern. The focused operations and
 usability reviewers pass. Six outer identity-action overlaps are recorded;
 the timed-out inner runtime action is kept proof-time instead.
 
+Additive inverse now follows the same descent route. The formal class-law
+module constructs additive unit, associativity, commutativity, inverse, and
+both distributivity laws for every raw presentation class and packages zero,
+addition, negation, and those theorems as explicit class-preadditive evidence.
+This is intentionally not named a full `PreadditiveCategory` instance: the
+current `Groupoidify` API exposes nondependent recursion and whole uniqueness,
+but no generic proposition-valued dependent induction principle for extending
+all class laws to arbitrary raw-groupoid and truncated points. That missing
+generic principle is a concrete later prerequisite, not an opaque axiom filled
+inside this goal.
+
+The direct TypeScript model now mirrors the new computational operations.
+Polynomial-module maps and presentation morphisms expose zero, addition, and
+negation; the Freyd model publishes them as an additive Hom-operation
+capability without promoting its doctrine. Focused tests check additive unit,
+cancellation, and both distributivity orientations by target-factorization
+congruence. Root typecheck, affected lint, nine direct/presentation tests, and
+the live two-agreement Core/Lambdapi consumer pass. No root aggregate was run.
+
 ## Validation Policy
 
 - Documentation-only tranches receive exact diff, report-index/header/link,
@@ -448,6 +471,8 @@ the timed-out inner runtime action is kept proof-time instead.
   `eq_refl` proof;
 - broad matrix ring normalization in the kernel;
 - arbitrary quotient carriers as the primary module architecture;
+- a full arbitrary-quotient `PreadditiveCategory` instance before generic
+  proposition-valued groupoidification induction;
 - finite biproducts or an additive-category claim;
 - weak kernels or a weak-kernel-to-Abelian theorem;
 - formal kernels, cokernels, images, coimages, exactness, or homology;
@@ -467,14 +492,16 @@ supports raw presentation identity/composition/zero/addition; agreement makes
 those operations representative-independent; groupoidification and
 `0`-truncation expose quotient-Hom operations; generic Freyd identity and
 composition have a selected usability comparison with their raw classes;
-homwise zero/addition and distributivity are packaged without an additive or
-Abelian overclaim; focused cross-layer conformance passes; and every bounded
-tranche is recorded and checkpointed.
+homwise zero/addition/negation and raw-class distributivity are packaged as
+honest class-preadditive evidence; full arbitrary-quotient laws are deferred
+behind the named generic induction prerequisite; focused cross-layer
+conformance passes; and every bounded tranche is recorded and checkpointed.
 
 ## Later Continuation
 
 ```text
-formal preadditive Freyd presentation category
+proposition-valued/dependent Groupoidify induction
+  -> full preadditive Freyd presentation category
   -> computable weak kernels of finite-free matrices
   -> constructive weak-kernel-to-Abelian promotion
   -> kernels, cokernels, images, coimages, and exactness

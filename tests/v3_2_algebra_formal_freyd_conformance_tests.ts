@@ -15,7 +15,12 @@ import {
     algebraPolynomialIdeal,
     algebraPolynomialModuleMap,
     algebraPolynomialModuleVector,
+    algebraPolynomialPresentationMorphismAdd,
     algebraPolynomialPresentationMorphismAgreement,
+    algebraPolynomialPresentationMorphismCongruence,
+    algebraPolynomialPresentationMorphismIdentity,
+    algebraPolynomialPresentationMorphismNegate,
+    algebraPolynomialPresentationMorphismZero,
     algebraPolynomialQuotientRing,
     algebraPolynomialRing,
     algebraPolynomialSubmodule,
@@ -91,6 +96,27 @@ describe('FRP live emitted-Core conformance', () => {
                     reifier,
                     selected: agreement
                 });
+            const identity = algebraPolynomialPresentationMorphismIdentity(
+                presentation
+            );
+            const zeroMorphism = algebraPolynomialPresentationMorphismZero(
+                presentation,
+                presentation
+            );
+            const cancellation = algebraPolynomialPresentationMorphismAdd(
+                identity,
+                algebraPolynomialPresentationMorphismNegate(identity)
+            );
+            const cancellationAgreement =
+                algebraPolynomialPresentationMorphismCongruence(
+                    cancellation,
+                    zeroMorphism
+                );
+            const cancellationRealization =
+                defineAlgebraFormalPresentationAgreementRealization({
+                    reifier,
+                    selected: cancellationAgreement
+                });
             const elementType = affineFormalRingElementType(formalRing);
             const environment = createFormalPresentationMorphismProofEnvironment([
                 { name: formalRing.name, type: affineFormalCommRingType() },
@@ -104,6 +130,11 @@ describe('FRP live emitted-Core conformance', () => {
             checker.validateEnvironment();
             const universe = kernelUniverse(because('law universe'));
             checker.check(checker.rootContext, realization.claimType, universe);
+            checker.check(
+                checker.rootContext,
+                cancellationRealization.claimType,
+                universe
+            );
             const serialized = serializeCoreLfKernelProbe({
                 environment,
                 externalFreeReferences: {
@@ -123,15 +154,26 @@ describe('FRP live emitted-Core conformance', () => {
                         1,
                         2
                     )
+                }, {
+                    label: 'Freyd additive cancellation agreement',
+                    term: cancellationRealization.claimType,
+                    type: universe,
+                    span: sourceSpan(
+                        'generated/proof-cas-freyd.ts',
+                        2,
+                        1,
+                        2,
+                        2
+                    )
                 }]
             });
             const probe = {
                 ...serialized,
                 source: serialized.source.replace(
                     'require open emdash.emdash3_2;',
-                    'require open ' +
+                        'require open ' +
                         'emdash.emdash3_2_commutative_algebra_' +
-                        'freyd_presentations;'
+                        'freyd_preadditive_class_laws;'
                 )
             };
             const checked = checkLambdapiProbe(probe, {
@@ -141,6 +183,7 @@ describe('FRP live emitted-Core conformance', () => {
             assert.equal(checked.timedOut, false, checked.diagnostics);
             assert.equal(checked.accepted, true, checked.diagnostics);
             assert.equal(agreement.agrees, true);
+            assert.equal(cancellationAgreement.agrees, true);
         }
     );
 });

@@ -11,8 +11,10 @@ existing syntactic functoriality. It then constructs the missing non-opaque
 rigid/transparent matrix comparison and algebra paths, formal raw presentation
 identity/composition/zero/addition, agreement compatibility, quotient-Hom
 descent through groupoidification and `0`-truncation, and the smallest checked
-preadditive Hom package. Biproducts, additive/Abelian structure, weak kernels,
-exactness, and homology remain later gates.
+additive Hom-operation/class-law package. Full laws on arbitrary quotient
+points await generic proposition-valued groupoidification induction, so no
+`PreadditiveCategory` instance is claimed. Biproducts, additive/Abelian
+structure, weak kernels, exactness, and homology remain later gates.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:
@@ -20,9 +22,10 @@ finite-free matrix Homs feed raw presentation maps; fixed-endpoint agreement
 categories are groupoidified and `0`-truncated to quotient Hom sets; elements
 are derived representably from the rank-one free presentation. The direct
 TypeScript category uses computed target-factorization congruence and lowers
-through the existing compiler. Explicit raw-class identity/composition descent,
-preadditivity, and capability-indexed Abelian structure remain named gates;
-there is no unconditional Abelian claim for arbitrary `CommRing`.
+through the existing compiler. Its active continuation now supplies raw-class
+identity/composition/additive descent; full arbitrary-quotient preadditivity
+and capability-indexed Abelian structure remain named gates. There is no
+unconditional Abelian claim for arbitrary `CommRing`.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
 completed cross-layer continuation from individual matrix squares to whole

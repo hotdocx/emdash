@@ -376,6 +376,31 @@ symbol comm_ring_matrix_neg_sub_swap_path
       (@comm_ring_matrix_add_comm_path R rows columns
         (@comm_ring_matrix_neg R rows columns A) B));
 
+// Negating both endpoints reverses a subtraction.
+symbol comm_ring_matrix_sub_neg_path
+  (R : τ CommRing)
+  (rows columns : τ Nat_grpd)
+  (A B : τ (@CommRingMatrix R rows columns))
+  : τ (@= (@CommRingMatrix R rows columns)
+      (@comm_ring_matrix_sub R rows columns
+        (@comm_ring_matrix_neg R rows columns A)
+        (@comm_ring_matrix_neg R rows columns B))
+      (@comm_ring_matrix_sub R rows columns B A))
+≔ @eq_trans
+    (@CommRingMatrix R rows columns)
+    _ _ _
+    (@comm_ring_matrix_add_congr_path R rows columns
+      (@comm_ring_matrix_neg R rows columns A)
+      (@comm_ring_matrix_neg R rows columns A)
+      (@comm_ring_matrix_neg R rows columns
+        (@comm_ring_matrix_neg R rows columns B))
+      B
+      (@eq_refl (@CommRingMatrix R rows columns)
+        (@comm_ring_matrix_neg R rows columns A))
+      (@comm_ring_matrix_neg_involutive_path R rows columns B))
+    (@comm_ring_matrix_add_comm_path R rows columns
+      (@comm_ring_matrix_neg R rows columns A) B);
+
 symbol comm_ring_matrix_sub_chain_path
   (R : τ CommRing)
   (rows columns : τ Nat_grpd)

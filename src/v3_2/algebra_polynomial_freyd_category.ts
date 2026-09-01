@@ -44,8 +44,11 @@ import {
     AlgebraPolynomialModuleMap,
     AlgebraPresentedPolynomialModule,
     algebraPolynomialModuleMap,
+    algebraPolynomialModuleMapAdd,
     algebraPolynomialModuleMapCompose,
     algebraPolynomialModuleMapIdentity,
+    algebraPolynomialModuleMapNegate,
+    algebraPolynomialModuleMapZero,
     algebraPresentedPolynomialModule
 } from './algebra_polynomial_presentation';
 import {
@@ -69,12 +72,14 @@ import {
 } from './algebra_reference_engine';
 
 export const ALGEBRA_POLYNOMIAL_FREYD_CATEGORY_PROFILE = Object.freeze({
-    revision: 'emdash-algebra-polynomial-freyd-category-v1' as const,
+    revision: 'emdash-algebra-polynomial-freyd-category-v2' as const,
     objectRepresentation: 'ordered-relation-presentation' as const,
     morphismRepresentation:
         'generator-map-with-computed-relation-witness' as const,
     equality: 'target-relation-congruence' as const,
     doctrine: 'category' as const,
+    additiveHomOperations: true as const,
+    formalLawBoundary: 'generating-raw-classes' as const,
     abelianClaim: false as const,
     performsIo: false as const
 });
@@ -127,6 +132,68 @@ export function algebraPolynomialPresentationMorphismCompose<
     });
     if (!result.preservesRelations) {
         throw new Error('Composite presentation map failed relation preservation');
+    }
+    return result;
+}
+
+export function algebraPolynomialPresentationMorphismZero<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    source: AlgebraPresentedPolynomialModule<P, C, I>,
+    target: AlgebraPresentedPolynomialModule<P, C, I>
+): AlgebraPolynomialPresentationMorphism<P, C, I> {
+    if (!sameAlgebraParent(source.ambient.ring, target.ambient.ring)) {
+        throw new Error('Presentation zero requires one polynomial ring');
+    }
+    const result = algebraPolynomialPresentationMorphism({
+        source,
+        target,
+        map: algebraPolynomialModuleMapZero(source.ambient, target.ambient)
+    });
+    if (!result.preservesRelations) {
+        throw new Error('Presentation zero failed relation preservation');
+    }
+    return result;
+}
+
+export function algebraPolynomialPresentationMorphismAdd<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    left: AlgebraPolynomialPresentationMorphism<P, C, I>,
+    right: AlgebraPolynomialPresentationMorphism<P, C, I>
+): AlgebraPolynomialPresentationMorphism<P, C, I> {
+    if (
+        !algebraPresentedPolynomialModuleEquals(left.source, right.source) ||
+        !algebraPresentedPolynomialModuleEquals(left.target, right.target)
+    ) throw new Error('Presentation addition requires identical endpoints');
+    const result = algebraPolynomialPresentationMorphism({
+        source: left.source,
+        target: left.target,
+        map: algebraPolynomialModuleMapAdd(left.map, right.map)
+    });
+    if (!result.preservesRelations) {
+        throw new Error('Presentation sum failed relation preservation');
+    }
+    return result;
+}
+
+export function algebraPolynomialPresentationMorphismNegate<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(morphism: AlgebraPolynomialPresentationMorphism<P, C, I>):
+    AlgebraPolynomialPresentationMorphism<P, C, I> {
+    const result = algebraPolynomialPresentationMorphism({
+        source: morphism.source,
+        target: morphism.target,
+        map: algebraPolynomialModuleMapNegate(morphism.map)
+    });
+    if (!result.preservesRelations) {
+        throw new Error('Presentation negation failed relation preservation');
     }
     return result;
 }
@@ -238,6 +305,20 @@ export interface AlgebraPolynomialFreydCategoryModel<
     >;
     readonly native:
         AlgebraPolynomialPresentationMorphismReferenceOperations<P, C, I>;
+    readonly additiveHomOperations: {
+        readonly zero: (
+            source: AlgebraPresentedPolynomialModule<P, C, I>,
+            target: AlgebraPresentedPolynomialModule<P, C, I>
+        ) => AlgebraPolynomialPresentationMorphism<P, C, I>;
+        readonly add: (
+            left: AlgebraPolynomialPresentationMorphism<P, C, I>,
+            right: AlgebraPolynomialPresentationMorphism<P, C, I>
+        ) => AlgebraPolynomialPresentationMorphism<P, C, I>;
+        readonly negate: (
+            morphism: AlgebraPolynomialPresentationMorphism<P, C, I>
+        ) => AlgebraPolynomialPresentationMorphism<P, C, I>;
+        readonly formalLawBoundary: 'generating-raw-classes';
+    };
     readonly tower: CategoricalTower;
     readonly reinterpretation: ComputationalReinterpretation<
         AlgebraPresentedPolynomialModule<P, C, I>,
@@ -358,6 +439,12 @@ export function algebraPolynomialFreydCategoryModel<
         category,
         morphismOperation,
         native,
+        additiveHomOperations: Object.freeze({
+            zero: algebraPolynomialPresentationMorphismZero,
+            add: algebraPolynomialPresentationMorphismAdd,
+            negate: algebraPolynomialPresentationMorphismNegate,
+            formalLawBoundary: 'generating-raw-classes' as const
+        }),
         tower,
         reinterpretation,
         lowerings: Object.freeze([{

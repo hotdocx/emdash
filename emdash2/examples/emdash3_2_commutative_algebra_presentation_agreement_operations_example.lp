@@ -70,6 +70,22 @@ symbol presentation_agreement_postcomp_reviewer
         (@comm_ring_presentation_morphism_map R Q S g) F'))
 ≔ @comm_ring_presentation_agreement_postcomp R P Q S F F' a g;
 
+symbol presentation_agreement_neg_reviewer
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  [F G : τ (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P))]
+  (a : τ (@CommRingPresentationMorphismAgreement R P Q F G))
+  : τ (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_matrix_neg R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P) F)
+      (@comm_ring_matrix_neg R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P) G))
+≔ @comm_ring_presentation_agreement_neg R P Q F G a;
+
 assertnot
   (R : τ CommRing)
   (P Q : τ (@CommRingPresentation R))

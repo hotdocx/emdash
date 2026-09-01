@@ -439,3 +439,104 @@ symbol comm_ring_freyd_add
           @comm_ring_freyd_raw_add R P Q raw_f raw_g)
         g)
     f;
+
+injective symbol comm_ring_presentation_neg_agreement_func
+  (R : τ CommRing)
+  (P Q : τ (@CommRingPresentation R))
+  : τ (@Functor
+      (@CommRingPresentationAgreement_cat R P Q)
+      (@CommRingPresentationAgreement_cat R P Q));
+
+rule @fapp0 _ _
+      (@comm_ring_presentation_neg_agreement_func
+        $R $P $Q) $f
+  ↪ @comm_ring_presentation_morphism_neg $R $P $Q $f;
+
+injective symbol comm_ring_presentation_neg_agreement_fapp1
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  [f g : τ (@CommRingPresentationMorphism R P Q)]
+  (a : τ (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_presentation_morphism_map R P Q g)))
+  : τ (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_presentation_morphism_neg_map R P Q f)
+      (@comm_ring_presentation_morphism_neg_map R P Q g));
+
+unif_rule
+  @fapp1_fapp0 _ _
+      (@comm_ring_presentation_neg_agreement_func
+        $R $P $Q) $f $g $a
+  ≡ @comm_ring_presentation_neg_agreement_fapp1
+      $R $P $Q $f $g $a
+  ↪ [ tt ≡ tt ];
+
+symbol comm_ring_presentation_neg_agreement_fapp1_path
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  [f g : τ (@CommRingPresentationMorphism R P Q)]
+  (a : τ (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_presentation_morphism_map R P Q g)))
+  : τ (@= (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_presentation_morphism_neg_map R P Q f)
+      (@comm_ring_presentation_morphism_neg_map R P Q g))
+      (@fapp1_fapp0
+        (@CommRingPresentationAgreement_cat R P Q)
+        (@CommRingPresentationAgreement_cat R P Q)
+        (@comm_ring_presentation_neg_agreement_func R P Q)
+        f g a)
+      (@comm_ring_presentation_neg_agreement_fapp1 R P Q f g a))
+≔ @eq_refl
+    (@CommRingPresentationMorphismAgreement R P Q
+      (@comm_ring_presentation_morphism_neg_map R P Q f)
+      (@comm_ring_presentation_morphism_neg_map R P Q g))
+    (@fapp1_fapp0
+      (@CommRingPresentationAgreement_cat R P Q)
+      (@CommRingPresentationAgreement_cat R P Q)
+      (@comm_ring_presentation_neg_agreement_func R P Q)
+      f g a);
+
+symbol comm_ring_freyd_neg_representation_func
+  (R : τ CommRing)
+  (P Q : τ (@CommRingPresentation R))
+  : τ (@Functor
+      (@CommRingPresentationAgreement_cat R P Q)
+      (Path_cat (@CommRingFreydRawHomGroupoid R P Q)))
+≔ @comp_cat_fapp0
+    (@CommRingPresentationAgreement_cat R P Q)
+    (@CommRingPresentationAgreement_cat R P Q)
+    (Path_cat (@CommRingFreydRawHomGroupoid R P Q))
+    (@groupoidify_unit_func
+      (@CommRingPresentationAgreement_cat R P Q))
+    (@comm_ring_presentation_neg_agreement_func R P Q);
+
+symbol comm_ring_freyd_raw_neg_function
+  (R : τ CommRing)
+  (P Q : τ (@CommRingPresentation R))
+  : τ (@Function_grpd
+      (@CommRingFreydRawHomGroupoid R P Q)
+      (@CommRingFreydRawHomGroupoid R P Q))
+≔ @groupoidify_extend_at
+    (@CommRingPresentationAgreement_cat R P Q)
+    (@CommRingFreydRawHomGroupoid R P Q)
+    (@comm_ring_freyd_neg_representation_func R P Q);
+
+symbol comm_ring_freyd_raw_neg
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  (f : τ (@CommRingFreydRawHomGroupoid R P Q))
+  : τ (@CommRingFreydRawHomGroupoid R P Q)
+≔ (@comm_ring_freyd_raw_neg_function R P Q) f;
+
+symbol comm_ring_freyd_neg
+  [R : τ CommRing]
+  [P Q : τ (@CommRingPresentation R)]
+  (f : τ (@CommRingFreydHomSet R P Q))
+  : τ (@CommRingFreydHomSet R P Q)
+≔ @trunc_map
+    trunc_zero
+    (@CommRingFreydRawHomGroupoid R P Q)
+    (@CommRingFreydRawHomGroupoid R P Q)
+    (@comm_ring_freyd_raw_neg_function R P Q)
+    f;
