@@ -1,0 +1,523 @@
+# TypeScript/emdash Computational Freyd Direct Sums and Additive Categories Plan
+
+Date: 2026-09-01
+
+Plan-ID: `TS-EMDASH-FREYD-ADDITIVE-BIPRODUCTS`
+
+Status: active on a dedicated branch/worktree
+
+Baseline: `c3bb8691e76d47bebca1aa58d28cd1126335fc26`
+
+Branch: `goal/freyd-additive-biproducts-v3.2`
+
+Worktree: `/home/user1/emdash1-freyd-additive-biproducts-v1`
+
+Decision-Response-Evidence:
+
+- `infinity-codex:01a02f68-6142-7e53-993a-4505aa8e2cbe:01a05d21-c6d3-7853-9400-668717238bc1`
+
+## Purpose
+
+This plan is the immediate structural continuation from full Freyd
+preadditivity. It builds computational finite direct sums and the zero
+presentation, reuses the existing Došen-style product and terminal-object
+calculus, and culminates in the first formal additive-category instance:
+
+```text
+comm_ring_freyd_additive
+  : AdditiveCategory(
+      CommRingFreydPresentation_cat(R),
+      comm_ring_freyd_direct_sum_func(R),
+      comm_ring_freyd_zero_presentation(R)).
+```
+
+The intended vertical slice is:
+
+```text
+finite-family concatenation/splitting
+  -> vector and matrix blocks
+  -> finite-free direct sums
+  -> presentation direct sums and zero
+  -> quotient-Hom projections and pairing
+  -> selected Cartesian Freyd structure
+  -> generic preadditive-plus-cartesian additive bridge
+  -> formal Freyd AdditiveCategory
+  -> concrete TypeScript additive-doctrine qualification.
+```
+
+This is the first direct-sum consumer needed by the longer proof-assistant/CAS
+architecture. Matrix algorithms remain the computational backend; generic
+category structure remains the internal semantic surface.
+
+## Operational Baseline And Git Boundary
+
+The branch starts directly from completed set-extensionality/preadditivity
+checkpoint `c3bb869`. Historical `main` remains at `85f459a`; this goal does
+not mutate or first fast-forward it. The orthogonal path-cubical and global-
+strictness worktrees remain excluded.
+
+The user explicitly authorized this dedicated branch/worktree, persistent
+goal, and continuation under the established local validated-checkpoint
+workflow. Local commits are permitted only after a bounded tranche is green,
+this ledger is synchronized, and the exact staged diff excludes unrelated
+work. This does not authorize push, merge, publication, release, PR creation,
+amend, rebase, reset, history rewriting, branch deletion, or worktree removal.
+
+Initial state is clean and the baseline is an ancestor of `HEAD`. The fresh
+worktree was bootstrapped with the pinned workspace dependency graph.
+
+Focused baseline checks are green for:
+
+- `emdash3_2_commutative_algebra_finite_modules.lp`;
+- `emdash3_2_commutative_algebra_freyd_preadditive.lp`;
+- `emdash3_2_cartesian_categories.lp`; and
+- the clean branch/ancestry boundary.
+
+No repository-wide aggregate is part of the initial baseline.
+
+## Central Architecture: Products Become Biproducts
+
+Do not implement a parallel primitive coproduct calculus. The active kernel
+already has:
+
+- `PreadditiveCategory(C)`, with set-valued abelian Homs and bilinear generic
+  composition;
+- `BinaryProducts(C,P)`, with one whole product functor, whole projection
+  transfors, whole pairing, and Došen-style triangular computation;
+- `TerminalObject(C,t)`, with one whole canonical-arrow transfor and Hom
+  contractibility; and
+- `CartesianCategory(C,P,t)`, the thin package of the previous two structures.
+
+The selected generic theorem is therefore:
+
+```text
+PreadditiveCategory(C)
+  + CartesianCategory(C,P,t)
+  --------------------------------
+  AdditiveCategory(C,P,t).
+```
+
+In a preadditive category, terminality implies initiality. If `t` is terminal,
+its identity and zero endomorphism agree by uniqueness. For every
+`f : t -> X`,
+
+```text
+f = f o id_t = f o 0 = 0,
+```
+
+where composition with zero is derived from bilinearity and additive
+cancellation. Thus `t` is a zero object.
+
+Similarly, a selected product `P(A,B)` is automatically a biproduct. Define:
+
+```text
+iota_1 := <id_A,0_(A,B)> : A -> P(A,B)
+iota_2 := <0_(B,A),id_B> : B -> P(A,B)
+
+[f,g] := f o pi_1 + g o pi_2 : P(A,B) -> X.
+```
+
+Product beta/eta, preadditive bilinearity, and the derived zero-composition
+paths prove the coproduct beta/eta and the matrix identity
+
+```text
+iota_1 o pi_1 + iota_2 o pi_2 = id_(P(A,B)).
+```
+
+The new generic additive module must expose those constructions and paths.
+Merely pairing two evidence records without deriving the missing initial and
+coproduct observations is not sufficient for an `AdditiveCategory` claim.
+
+## Finite-Family Concatenation And Splitting
+
+The existing representation is
+
+```text
+FiniteFamily(A,0)     = Unit
+FiniteFamily(A,n+1)   = A × FiniteFamily(A,n),
+```
+
+while `nat_add(m,n)` recurses on `m`. These choices align directly with
+left-family recursion:
+
+```text
+append(nil,ys)        = ys
+append(cons(x,xs),ys) = cons(x,append(xs,ys)).
+```
+
+Add the smallest reusable operations required by block matrices:
+
+- `finite_family_append`;
+- `finite_family_take_left`;
+- `finite_family_drop_left`; and
+- reconstruction/extensionality paths showing that splitting and appending
+  agree.
+
+Prefer transparent Nat-recursive functions and theorem-level paths. Add a
+runtime rule only when it is a constructor-visible beta owned by the recursive
+operation. Do not install broad arithmetic or Sigma-projection rewrites.
+
+Required boundaries include zero-left, zero-right, successor, rank-one, and
+nontrivial mixed lengths. Distinct families must not collapse.
+
+## Vector And Matrix Block Calculus
+
+Use concatenation to construct actual flattened vectors and matrices, not a
+parallel record of four unrelated blocks.
+
+Required vector operations:
+
+```text
+u ++ v                 : R^(m+n)
+inl(u) = u ++ 0        : R^m -> R^(m+n)
+inr(v) = 0 ++ v        : R^n -> R^(m+n)
+pr1, pr2                : split projections.
+```
+
+Required matrix operations should include the smallest general block owner
+from which the special cases derive:
+
+```text
+[ A B ]
+[ C D ]
+
+block_diag(A,D)
+horizontal(A,B)
+vertical(A,C)
+matrix_inl, matrix_inr
+matrix_proj1, matrix_proj2.
+```
+
+The column-oriented convention remains authoritative: an `m × n` matrix is an
+arrow `n -> m`.
+
+Construct theorem-level paths for:
+
+- block application to concatenated vectors;
+- projection/inclusion beta equations;
+- diagonal identity and composition;
+- horizontal/vertical composition;
+- zero off-diagonal blocks; and
+- the biproduct matrix identity.
+
+Reuse existing matrix additive, subtractive, identity, composition, and
+extensional paths. Do not add global block normalization rules merely to make
+these equations reflexive.
+
+## Finite-Free Direct Sums
+
+For `CommRingFiniteFree_cat(R)`, choose:
+
+```text
+m ⊕ n := nat_add(m,n).
+```
+
+The whole direct-sum action on a pair of matrices is block diagonal. Generic
+category identity/composition remain their existing runtime owners. Any rigid
+direct-sum action head must compare with transparent block computation through
+constructed paths or narrowly typed proof-time usability rules; do not repeat
+the rejected generic-composition-to-transparent-matrix rewrite.
+
+This layer provides the matrix evidence consumed by presentation sums. It need
+not independently package the final Freyd `BinaryProducts` instance if doing
+so would duplicate the presentation-level consumer.
+
+## Presentation Direct Sums And Zero
+
+For presentations
+
+```text
+P = [R_P : R^rP -> R^gP]
+Q = [R_Q : R^rQ -> R^gQ],
+```
+
+define:
+
+```text
+P ⊕ Q
+  := [block_diag(R_P,R_Q)
+        : R^(rP+rQ) -> R^(gP+gQ)].
+```
+
+The selected zero presentation is:
+
+```text
+0_R := [0 : R^0 -> R^0].
+```
+
+Raw presentation direct sums retain both matrices:
+
+```text
+(F,W) ⊕ (G,V) := (block_diag(F,G), block_diag(W,V)).
+```
+
+Its stored relation square must be constructed from block-composition and the
+two input squares. Projection and pairing raw morphisms likewise retain their
+generator and relation matrices; no manual square field is accepted.
+
+Prove at the raw level:
+
+- projection/pairing beta;
+- product eta;
+- identity/zero at `0_R`;
+- direct-sum identity and composition; and
+- compatibility with target-factorization agreement.
+
+## Quotient Descent And Whole Direct-Sum Structure
+
+Descend projection, pairing, block-diagonal action, and zero through the
+existing agreement-groupoidification and `0`-truncation architecture.
+
+Use the completed set-target groupoidification and truncation path-induction
+helpers to promote class equations to arbitrary quotient points. Do not add a
+general dependent eliminator or representative-selection operation.
+
+The selected whole functor is approximately:
+
+```text
+comm_ring_freyd_direct_sum_func(R)
+  : Freyd_R × Freyd_R -> Freyd_R.
+```
+
+It must retain ordinary Hom and higher action. Its object observation computes
+to presentation direct sum. The Došen-derived map action supplied by
+`BinaryProducts` should remain primary at the generic product surface; a
+concrete block-diagonal comparison belongs at a stable semantic owner.
+
+The selected witness is approximately:
+
+```text
+comm_ring_freyd_binary_products(R)
+  : BinaryProducts(
+      Freyd_R,
+      comm_ring_freyd_direct_sum_func(R)).
+```
+
+Because `BinaryProducts` and `Transf` are primitive classifiers, the first
+owner audit must determine the minimal stable instance/whole-operation
+assembly. Concrete point projections and pairing must connect to the checked
+matrix classes. Do not introduce unrelated opaque equality bridges.
+
+## Zero Presentation And Terminality
+
+The preferred generic route is:
+
+1. prove `id_(0_R) = 0_(0_R,0_R)` from the zero-rank matrix computation;
+2. derive composition with zero from the generic preadditive laws;
+3. derive contractibility of every `Hom(P,0_R)`; and
+4. assemble the selected terminal whole arrow from zero morphisms.
+
+Since `TerminalObject` and `Transf` are primitive classifiers, a narrow stable
+whole zero-arrow assembly may be required. If so, its components must compute
+to the existing preadditive zero maps and its contractions must be the derived
+ones. It is not permission to postulate terminality without exposing the
+computational zero-map semantics.
+
+The resulting evidence is approximately:
+
+```text
+comm_ring_freyd_terminal_zero(R)
+  : TerminalObject(Freyd_R,0_R)
+
+comm_ring_freyd_cartesian(R)
+  : CartesianCategory(Freyd_R,oplus_R,0_R).
+```
+
+Preadditivity will then derive the initial half; a separate primitive initial-
+object or coproduct theory is not selected.
+
+## Generic Additive Category Package
+
+Introduce an internal `AdditiveCategory` package indexed by the already-
+selected product functor and terminal object. It should retain:
+
+- the existing `PreadditiveCategory`;
+- the existing `CartesianCategory`;
+- derived initial/zero-object contractibility;
+- derived injections and copairing;
+- coproduct beta and eta;
+- the biproduct matrix identity; and
+- readable projections for later weak-kernel consumers.
+
+The package adds no parallel category grammar and no duplicate generic
+identity/composition rule. The Freyd instance should be a transparent package
+of checked components once its stable product/terminal owners are selected.
+
+## TypeScript Operational Doctrine Promotion
+
+The direct polynomial Freyd model already computes representative identity,
+composition, zero, addition, and negation, but its category-operation registry
+currently exposes only primitive morphism construction. This goal supplies the
+first concrete consumer for the deferred operational bridge.
+
+Add direct zero-presentation and direct-sum operations, then register category
+operations for:
+
+- `zero-morphism`;
+- `add-morphisms`;
+- `negate-morphism`;
+- `zero-object`; and
+- `biproduct`.
+
+Only after the registry and qualification tests are green should the model's
+operational doctrine become `additive-category`. The direct category remains
+a computation engine over presentations; it is not replaced by formal proof
+certificates.
+
+## Feasibility And Rejection Signals
+
+The architecture is considered highly feasible because:
+
+- `FiniteFamily` and `nat_add` share the correct recursion orientation;
+- matrix identity/addition/composition and their theorem paths already exist;
+- whole computational binary products and terminal objects already exist;
+- full Freyd preadditivity is active;
+- arbitrary quotient-point descent is active; and
+- TypeScript doctrine roles already name the desired operations.
+
+The main engineering risk is interaction between concrete direct-sum heads and
+generic product/functor-action computation. The experiment loop must reject or
+refine a candidate when it causes subject-reduction failure, loses whole/higher
+action, requires compound reducible inferred LHS slots without justification,
+or forces a global generic composition rewrite.
+
+Warnings alone are not a rejection signal. Classify overlaps, test both
+reduction orders, and add only narrowly justified joins.
+
+If the full product instance cannot be promoted in the first bounded tranche,
+retain the checked block/presentation operations as a coherent checkpoint and
+record the exact missing stable-owner interface. Do not replace the missing
+interface by opaque universal-property equality constants.
+
+## Deliberate Non-Goals
+
+This goal does not include:
+
+- a parallel primitive coproduct theory;
+- arbitrary finite/n-ary direct sums beyond binary plus the empty case;
+- general finite colimits;
+- computable weak kernels;
+- the weak-kernel-to-Abelian theorem;
+- an unconditional Abelian claim for arbitrary `CommRing`;
+- kernels, cokernels, exactness, homology, or derived categories;
+- source-functorial `Groupoidify_func` or its adjunction;
+- integration of path-cubical/global-strictness work; or
+- unrelated print, book, release, or repository-wide maintenance.
+
+Additivity is expected for arbitrary `CommRing`. The successor weak-kernel and
+Abelian goals remain capability-indexed, for example by polynomial rings over
+computational fields with Gröbner/syzygy support.
+
+## Corrected Longer-Term Order
+
+```text
+full Freyd preadditivity                         complete
+  -> computational zero/direct sums             this goal
+  -> formal and operational additive category   this goal
+  -> computable weak kernels                     next capability goal
+  -> generic weak-kernel-to-Abelian theorem
+  -> kernels, cokernels, homology, derived constructions.
+```
+
+The action-category/groupoidification/truncation model remains the quotient-Hom
+foundation throughout. Additive and later Abelian packages organize its
+consequences rather than replacing it.
+
+## Proposed Implementation Sequence
+
+1. Audit the exact generic additive bridge and the primitive product/terminal
+   instance assembly boundary.
+2. Implement and prove finite-family append/split operations.
+3. Implement vector/matrix blocks and the exact block law set required by
+   direct sums.
+4. Construct finite-free rank sums and block-diagonal matrix action.
+5. Construct presentation direct sum, zero, raw projections/pairing, and
+   agreement compatibility.
+6. Descend the operations through groupoidification/truncation and construct
+   the whole direct-sum functor.
+7. Select and connect the Freyd `BinaryProducts`, terminal-zero, and
+   `CartesianCategory` instances.
+8. Derive the generic additive bridge and construct the Freyd
+   `AdditiveCategory` instance.
+9. Register TypeScript additive operations and qualify the direct model.
+10. Add focused reviewers/conformance and synchronize standing authorities,
+    catalog, health snapshot, and the final ledger.
+
+## Implementation Ledger
+
+| Row | Status | Dependency | Deliverable and acceptance boundary |
+| --- | --- | --- | --- |
+| `FAB-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed preadditive checkpoint `c3bb869` | living plan, isolated branch/worktree, clean focused baseline, Git and scope limits, persistent goal |
+| `FAB-AUDIT-1A` | ready | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
+| `FAB-FAMILY-2A` | blocked by audit | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
+| `FAB-BLOCK-3A` | blocked by family layer | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
+| `FAB-FREE-4A` | blocked by block layer | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
+| `FAB-PRESENTATION-5A` | blocked by block/free layers | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
+| `FAB-DESCENT-6A` | blocked by presentation layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
+| `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
+| `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
+| `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
+| `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+
+Rows may be split, reordered when dependencies permit, rejected, or deferred
+only with durable evidence and a synchronized ledger. Difficulty alone is not
+evidence for an opaque axiom.
+
+## Initial Decisions
+
+| Decision | Status | Rationale |
+| --- | --- | --- |
+| `D-FAB-001` | accepted | The goal combines direct sums, zero object, biproduct derivation, and additive packaging as one coherent vertical slice. |
+| `D-FAB-002` | accepted | Preadditive plus Cartesian is the primary additive architecture; no parallel primitive coproduct theory is selected. |
+| `D-FAB-003` | accepted | Terminality becomes zero-object structure through generic preadditive proofs; coproduct operations derive from products and addition. |
+| `D-FAB-004` | accepted | Finite-family append recurses on the left index, matching the active `nat_add` owner. |
+| `D-FAB-005` | accepted | Block matrices are flattened into the existing column-matrix representation rather than retained as a second matrix carrier. |
+| `D-FAB-006` | accepted | Matrix and presentation square laws are constructed internally; no manually entered commuting square is part of the usability surface. |
+| `D-FAB-007` | accepted | The whole direct-sum functor and product/terminal transfors must retain Hom and higher action. |
+| `D-FAB-008` | accepted | Generic category identity/composition remain runtime owners; transparent block computation is connected by paths or narrow proof-time usability. |
+| `D-FAB-009` | accepted | Existing groupoidification/truncation helpers promote class equations; no new general quotient eliminator is selected. |
+| `D-FAB-010` | accepted | TypeScript becomes operationally additive only after concrete role registration and qualification. |
+| `D-FAB-011` | accepted | Additivity is uniform in `CommRing`; weak kernels and Abelian structure remain capability-indexed successor goals. |
+| `D-FAB-012` | accepted | Warning counts are diagnostic evidence, not a semantic veto; every new overlap still requires classification. |
+| `D-FAB-013` | accepted | Orthogonal path-cubical/global-strictness histories and historical `main` are excluded from the baseline. |
+| `D-FAB-014` | accepted | No unrelated repository-wide aggregate is part of the focused implementation loop. |
+
+## Validation Matrix
+
+For each semantic tranche:
+
+- smallest owner-position probe;
+- positive typed consumer and zero/rank-one/nontrivial boundary cases;
+- relevant noncollapse or wrong-endpoint reviewer;
+- retained whole/higher action where a functor/transfor is introduced;
+- bounded quiet checks;
+- warning-enabled predecessor/candidate comparison;
+- strict inferred-slot audit on every changed Lambdapi source;
+- affected reviewer examples; and
+- exact staged diff plus synchronized ledger before a checkpoint.
+
+Catalog and no-check health/source snapshots are refreshed after registration.
+Run larger aggregates only when separately justified by an actually affected
+integration/release boundary; preserve the user's instruction to avoid
+unrelated long aggregate checks.
+
+## Persistent Goal Launch Prompt
+
+Continue `TS-EMDASH-FREYD-ADDITIVE-BIPRODUCTS` from the living plan in
+`docs/TYPESCRIPT_EMDASH_FREYD_ADDITIVE_BIPRODUCTS_PLAN.md`. Treat active source
+and the Lambdapi SOP as authority. Work only in
+`/home/user1/emdash1-freyd-additive-biproducts-v1` on branch
+`goal/freyd-additive-biproducts-v3.2`, preserving baseline
+`c3bb8691e76d47bebca1aa58d28cd1126335fc26` as comparison evidence. Resume the
+first dependency-ready ledger row and revise the plan when probes refine the
+architecture. Preserve the preadditive-plus-Cartesian derivation, column-matrix
+orientation, whole/higher action, quotient descent, owner-position probing,
+warning classification, strict LHS audits, focused reviewers, and proportional
+validation. Local validated checkpoint commits are authorized after each
+bounded coherent tranche is green and the exact staged diff is reviewed. Do
+not push, merge, publish, release, create a PR, amend, rebase, reset, rewrite
+history, delete a branch, or remove a worktree. Do not integrate orthogonal
+path-cubical/global-strictness work. The goal is complete only when every
+scoped row is implemented, rejected with durable evidence, or explicitly
+deferred behind a concrete prerequisite, and all affected authorities are
+synchronized.

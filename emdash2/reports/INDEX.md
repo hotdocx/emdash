@@ -2,6 +2,17 @@
 
 Date: 2026-09-01
 
+`../../docs/TYPESCRIPT_EMDASH_FREYD_ADDITIVE_BIPRODUCTS_PLAN.md` is the active
+continuation from full formal Freyd preadditivity. It constructs flattened
+finite-family/vector/matrix blocks, finite-free and presentation direct sums,
+the zero presentation, and quotient-level whole product computation. The
+generic architecture derives zero-object and coproduct observations from
+`PreadditiveCategory + CartesianCategory`, rather than duplicating a primitive
+coproduct theory, and targets the first formal and operational Freyd
+`AdditiveCategory`. Weak kernels, the weak-kernel-to-Abelian theorem,
+exactness, homology, and orthogonal path-cubical/strictness work remain later
+gates.
+
 `../../docs/TYPESCRIPT_EMDASH_GROUPOIDIFY_SET_EXT_FREYD_PREADDITIVE_PLAN.md`
 is the completed continuation from the Freyd
 class-law boundary. Maps from `Groupoidify(C)` into a set are now equal when
