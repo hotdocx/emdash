@@ -4,7 +4,7 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FREYD-ADDITIVE-BIPRODUCTS`
 
-Status: active on a dedicated branch/worktree
+Status: complete on a dedicated branch/worktree; integration not performed
 
 Baseline: `c3bb8691e76d47bebca1aa58d28cd1126335fc26`
 
@@ -28,7 +28,7 @@ comm_ring_freyd_additive
   : AdditiveCategory(
       CommRingFreydPresentation_cat(R),
       comm_ring_freyd_direct_sum_func(R),
-      comm_ring_freyd_zero_presentation(R)).
+      comm_ring_zero_presentation(R)).
 ```
 
 The intended vertical slice is:
@@ -682,7 +682,7 @@ consequences rather than replacing it.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FAB-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed preadditive checkpoint `c3bb869` | living plan, isolated branch/worktree, clean focused baseline, Git and scope limits, persistent goal |
-| `FAB-AUDIT-1A` | complete; first semantic checkpoint pending | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
+| `FAB-AUDIT-1A` | complete; recorded in plan checkpoint `5359dbf` | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
 | `FAB-FAMILY-2A` | complete; checkpoint `76eef67` | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
 | `FAB-BLOCK-3A` | complete; checkpoint `8fdf7ca` | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
 | `FAB-FREE-4A` | complete; checkpoint `38e54d1` | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
@@ -691,8 +691,8 @@ consequences rather than replacing it.
 | `FAB-DESCENT-6A` | complete; checkpoint `5643fbf` | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint `219660a` | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | complete; checkpoint `118d6c2` | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
-| `FAB-TYPESCRIPT-9A` | complete; checkpoint pending | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
-| `FAB-CLOSE-10A` | ready | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+| `FAB-TYPESCRIPT-9A` | complete; checkpoint `eadfc8e` | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
+| `FAB-CLOSE-10A` | complete; closeout checkpoint pending | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, reordered when dependencies permit, rejected, or deferred
 only with durable evidence and a synchronized ledger. Difficulty alone is not
@@ -728,6 +728,7 @@ evidence for an opaque axiom.
 | `D-FAB-024` | accepted after terminal-zero probes | Terminality of the zero presentation is constructed from zero-row matrix uniqueness and the existing agreement/groupoidification/truncation descent, not postulated from preadditivity or encoded by a manual square. The generic terminal transfor/cut remain primary; selected point and contractibility observations expose the quotient zero semantics. Cartesian evidence is their transparent product. |
 | `D-FAB-025` | accepted after generic-additive proofs | `AdditiveCategory` is exactly preadditive plus selected Cartesian evidence. Initiality, injections, copairing, both beta laws, the diagonal identity, and eta are theorem-level consequences of abelian cancellation, bilinearity, and generic product/terminal computation; no primitive coproduct or runtime additive rule is introduced. The formal Freyd instance is transparent. |
 | `D-FAB-026` | accepted after operational qualification | The direct polynomial Freyd model constructs zero/direct sums and canonical biproduct maps, registers the five inherited additive doctrine roles plus whole direct-sum arrow action, supplies compiler lowerings/reference implementations, and advertises `additive-category` only after runtime qualification succeeds. |
+| `D-FAB-027` | accepted at closeout | The objective is complete at formal and operational layers. Weak kernels, the weak-kernel-to-Abelian theorem, exactness, homology, broader finite colimits, and orthogonal cubical/strictness integration remain successor goals rather than hidden gaps in this additive package. |
 
 ## Validation Matrix
 
@@ -747,6 +748,42 @@ Catalog and no-check health/source snapshots are refreshed after registration.
 Run larger aggregates only when separately justified by an actually affected
 integration/release boundary; preserve the user's instruction to avoid
 unrelated long aggregate checks.
+
+## Completion Result
+
+The requirement-by-requirement audit is closed:
+
+- finite-family append/take/drop and reconstruction are checked at checkpoint
+  `76eef67`;
+- flattened vector/matrix blocks and required laws are checked at `8fdf7ca`;
+- the whole finite-free sum functor is checked at `38e54d1`;
+- zero/direct-sum presentations and computed raw maps/squares are checked at
+  `794f163`, with agreement compatibility at `5d7ce09`;
+- quotient pairing, projection classes, whole direct sums, and retained Hom
+  action are checked at `5643fbf`;
+- selected binary products, terminal zero, and Cartesian evidence are checked
+  at `d3880d0` and `219660a`;
+- the rule-free generic additive derivation and transparent formal Freyd
+  instance are checked at `118d6c2`; and
+- direct zero/biproduct computation, all five doctrine roles, whole arrow
+  action, compiler lowering, reference-engine execution, and successful
+  `additive-category` qualification are checked at `eadfc8e`.
+
+Every changed Lambdapi module and reviewer passed its bounded focused check.
+Strict LHS audits are empty. Warning comparisons are classified against exact
+predecessor/import-union baselines; selected-product and terminal-zero
+instance layers add no local warning. The strict check catalog, no-check health
+source snapshot for 389 Lambdapi/reviewer files, source TOC, active references,
+report lifecycle headers, shell syntax, Python compilation, and exact diff
+hygiene pass.
+
+For TypeScript, workspace validation, root typecheck, affected lint, and the
+five-test direct polynomial Freyd suite are green. The one justified
+`check:ts` boundary run passed workspace/typecheck/full lint and completed its
+consolidated suite; its failures are inherited kernel/article byte and
+line-position pins outside this branch's additive changes. They are recorded,
+not rewritten. No print, release, kernel-wide CI, push, merge, publication, PR,
+history rewrite, branch cleanup, or worktree removal was performed.
 
 ## Persistent Goal Launch Prompt
 

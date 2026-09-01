@@ -3231,16 +3231,40 @@ structure on every existing `Hom_C(X,Y)` and bilinearity of the existing
 generic composition. The formal Freyd category carries such a package. Its
 semantic composition laws are reframed at generic `comp_fapp0` through the
 already checked usability paths; no global composition rule or extra
-unifier is installed. This is a preadditive claim, not an additive or Abelian
-claim: zero objects and biproducts remain separate structure.
+unifier is installed.
+
+The additive continuation keeps those owners and derives rather than
+duplicates the missing structure. Finite-family concatenation gives flattened
+vector and matrix blocks; presentation direct sum uses block-diagonal relation
+matrices; pairing descends through the existing agreement-groupoidification
+and set-truncation ladder. The resulting whole direct-sum functor retains Hom
+action. A selected `BinaryProducts` witness keeps the generic Došen
+projection/pairing transfors and beta/eta rules as runtime owners, while narrow
+proof-time comparisons expose the constructed Freyd projection and pairing
+classes.
+
+The zero presentation is terminal because every zero-row generator matrix is
+constructively the zero matrix. This gives raw agreement with the zero map and
+then contractibility of every quotient `Hom(P,0)` after the same descent.
+Generic abelian cancellation and bilinearity prove both zero-composition laws;
+therefore terminality also yields initiality. Injections `<id,0>` and `<0,id>`
+and copairing `f o pi_1 + g o pi_2` satisfy both beta laws, eta, and
+`iota_1 o pi_1 + iota_2 o pi_2 = id`. Accordingly
+`AdditiveCategory(C,P,t)` is exactly the existing `PreadditiveCategory(C)` and
+`CartesianCategory(C,P,t)` evidence, and the formal Freyd category has a
+checked instance. This remains distinct from an Abelian claim: weak kernels,
+kernels/cokernels, exactness, and homology require later capability-indexed
+structure.
 
 The direct polynomial implementation computes the same zero, addition, and
 negation on presentation maps by rebuilding and validating the complete
 relation witness. Target-factorization congruence verifies additive unit,
-cancellation, and both distributivity orientations. Its operational doctrine
-registry remains `category` until the three additive operations are registered
-as doctrine roles, while its formal metadata now records the checked
-`preadditive-category` structure and arbitrary-quotient-point law boundary.
+cancellation, and both distributivity orientations. It now also computes the
+rank-zero presentation, flattened presentation sums, all four biproduct maps,
+and block-diagonal action on morphisms. The category registry binds executable
+zero/add/negate/zero-object/biproduct roles, qualifies as
+`additive-category`, and lowers those operations to the same TypeScript
+reference engine. Its formal law boundary remains arbitrary quotient points.
 
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
@@ -3275,10 +3299,11 @@ CommRingFreydPresentation_cat(R)
 ```
 
 has presentations as objects and `Path_cat(FreydHomSet(P,Q))` as Homs. This is
-the selected long-term module architecture. The current category head supplies
-generic identity and composition, but their explicit comparison with classes
-of raw identity/composite matrices has not yet been constructed. Hom addition,
-biproducts, and preadditivity remain gated by that class-level descent.
+the selected long-term module architecture. Generic identity/composition meet
+classes of raw identity/composite matrices through the checked sequential
+usability bridge. Hom addition, full preadditivity, whole direct sums, selected
+binary products, terminal zero, and the derived formal additive package are
+all active; weak kernels and Abelian structure remain separately gated.
 
 Ordinary elements are representable. Let `FreeOne_R` be the rank-one
 presentation with no relations. Then
@@ -3295,11 +3320,13 @@ not a second module type.
 The TypeScript direct Freyd category computes raw identities/composites and
 uses target-relation membership as categorical equality. Its representable
 elements agree with canonical module membership, and its compiler lowers raw
-morphism construction to the whole relation-witness operation. A separate
-weak-kernel capability records supported Gröbner/syzygy computation but does
-not itself claim Abelian structure. The later theorem must derive Abelian
-structure from explicit weak-kernel/coherence evidence; no such property is
-global for arbitrary `CommRing`.
+morphism construction and all additive operations to whole reference-engine
+operations. The direct model is operationally additive, including zero and
+biproduct construction, but a separate weak-kernel capability merely records
+supported Gröbner/syzygy computation and does not itself claim Abelian
+structure. The later theorem must derive Abelian structure from explicit
+weak-kernel/coherence evidence; no such property is global for arbitrary
+`CommRing`.
 
 ### Presented Affine Basic Opens And Elementwise Base Change
 

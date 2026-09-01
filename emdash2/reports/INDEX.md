@@ -2,8 +2,8 @@
 
 Date: 2026-09-01
 
-`../../docs/TYPESCRIPT_EMDASH_FREYD_ADDITIVE_BIPRODUCTS_PLAN.md` is the active
-continuation from full formal Freyd preadditivity. It constructs flattened
+`../../docs/TYPESCRIPT_EMDASH_FREYD_ADDITIVE_BIPRODUCTS_PLAN.md` is the
+completed continuation from full formal Freyd preadditivity. It constructs flattened
 finite-family/vector/matrix blocks, finite-free and presentation direct sums,
 the zero presentation, and quotient-level whole product computation. The
 generic architecture derives zero-object and coproduct observations from
@@ -21,9 +21,9 @@ transformation, existing extension action maps it, and existing eta closes the
 path. Derived unary/binary/ternary groupoidification and truncation helpers
 promote additive-group and bilinearity laws to arbitrary quotient-Hom points.
 The first generic `PreadditiveCategory` package and the formal Freyd instance
-are checked. General dependent groupoidification, source functoriality and its
-adjunction, biproducts/additivity, weak kernels, Abelian structure, and homology
-remain explicit later gates.
+are checked. The completed successor above supplies biproducts and additivity;
+general dependent groupoidification, source functoriality and its adjunction,
+weak kernels, Abelian structure, and homology remain explicit later gates.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PREADDITIVE_DESCENT_PLAN.md` is the
 completed continuation from the formal Freyd presentation-category skeleton. It
@@ -35,10 +35,11 @@ rigid/transparent matrix comparison and algebra paths, formal raw presentation
 identity/composition/zero/addition, agreement compatibility, quotient-Hom
 descent through groupoidification and `0`-truncation, and the smallest checked
 additive Hom-operation/class-law package. That historical stopping boundary is
-now discharged by the active successor plan above through the narrower
-set-target extensionality theorem; no general dependent groupoidification
-eliminator was required. Biproducts, additive/Abelian structure, weak kernels,
-exactness, and homology remain later gates.
+now discharged by the completed set-extensionality successor immediately
+above through the narrower set-target theorem; no general dependent
+groupoidification eliminator was required. The completed top-level successor
+supplies biproducts/additivity; weak kernels, Abelian structure, exactness, and
+homology remain later gates.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:
@@ -47,9 +48,10 @@ categories are groupoidified and `0`-truncated to quotient Hom sets; elements
 are derived representably from the rank-one free presentation. The direct
 TypeScript category uses computed target-factorization congruence and lowers
 through the existing compiler. Its completed successors now supply raw-class
-identity/composition/additive descent and full arbitrary-quotient
-preadditivity. Capability-indexed additive and Abelian structure remain named
-gates; there is no unconditional Abelian claim for arbitrary `CommRing`.
+identity/composition/additive descent, full arbitrary-quotient preadditivity,
+and the derived additive package. Capability-indexed weak kernels and Abelian
+structure remain named gates; there is no unconditional Abelian claim for
+arbitrary `CommRing`.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
 completed cross-layer continuation from individual matrix squares to whole

@@ -357,8 +357,28 @@ belongs to the owning implementation plan rather than to standing guidance.
   `emdash3_2_commutative_algebra_freyd_preadditive.lp`: promote every class law
   through groupoidification and `0`-truncation, then construct the checked
   `PreadditiveCategory(CommRingFreydPresentation_cat(R))` instance. Generic
-  composition is connected by explicit existing usability paths. No
-  biproduct, additive-category, weak-kernel, or Abelian claim is made.
+  composition is connected by explicit existing usability paths.
+- `emdash3_2_finite_family_sums.lp`, the matrix-block modules, and the
+  finite-free/presentation direct-sum modules: construct flattened append and
+  split operations, general and diagonal block matrices, whole finite-free
+  sums, the zero presentation, presentation sums, and computed raw/agreement
+  operations without a second block carrier or manually supplied square.
+- `emdash3_2_commutative_algebra_freyd_direct_sums.lp` and
+  `emdash3_2_commutative_algebra_freyd_binary_products.lp`: descend pairing
+  and direct sum through groupoidification/truncation, retain the whole sum
+  functor and Hom action, and select the generic triangular
+  `BinaryProducts` surface. Proof-time rigid comparisons expose concrete
+  quotient projections/pairing while generic Došen beta/eta remains primary.
+- `emdash3_2_commutative_algebra_freyd_terminal_zero.lp` and
+  `emdash3_2_commutative_algebra_freyd_cartesian.lp`: derive terminality from
+  zero-row matrix uniqueness and quotient descent, then transparently pair the
+  selected product and terminal capabilities.
+- `emdash3_2_additive_categories.lp` and
+  `emdash3_2_commutative_algebra_freyd_additive.lp`: derive zero composition,
+  initiality, injections, copairing, both beta laws, eta, and the diagonal
+  biproduct identity from `PreadditiveCategory + CartesianCategory`, then
+  instantiate the formal Freyd `AdditiveCategory`. No primitive coproduct,
+  weak-kernel, or Abelian claim is added.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5388,16 +5408,16 @@ promote those equations to arbitrary quotient points and construct the formal
 target each report 1,300 warning instances, so the rule-free descent/package
 adds no diagnostic family; the one set-pointwise component beta likewise left
 its focused groupoidification count unchanged at 1,274.
-The direct polynomial Freyd model also computes zero/addition/negation and
-checks representative additive unit, cancellation, and bilateral
-distributivity by target-factorization congruence. Its doctrine remains plain
-`category` until its operations are registered as doctrine roles; its formal
-metadata now names `preadditive-category` and the arbitrary-quotient-point law
-boundary. Live Core/Lambdapi conformance accepts both the earlier
-representative agreement and computed additive cancellation against the
-completed formal module. Focused TypeScript tests, typechecking, and targeted
-lint pass. No repository-wide TypeScript, print, or root aggregate is claimed
-at this intermediate boundary.
+The direct polynomial Freyd model computes zero/addition/negation, zero and
+direct-sum presentations, canonical biproduct maps, and block-diagonal arrow
+action. Its registry binds and qualifies every inherited
+`additive-category` role, and its categorical compiler lowers those operations
+to the TypeScript reference engine. Focused TypeScript tests, typechecking,
+targeted lint, and the formal reviewers pass. The one full TypeScript boundary
+run passed workspace/typecheck/lint and retained only unrelated existing
+kernel/article source-pin failures in the consolidated suite; those orthogonal
+audits are not rewritten by this additive tranche. Weak kernels and Abelian
+structure remain later capability-indexed work.
 
 ## Book And Renderer Workflow
 

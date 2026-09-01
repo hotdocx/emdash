@@ -862,6 +862,11 @@ Hom_Freyd(P,Q)             : 0-truncated RawHom(P,Q)
 El(P) = Hom_Freyd(R,P)     : representable element carrier.
 PreAdd(Freyd_R)            : set-valued abelian Homs with bilinear composition
 0_(P,Q), f+g, -f           : the selected Hom operations.
+0_R                        : rank-zero presentation
+P ⊕ Q                      : block-diagonal presentation direct sum
+Add(Freyd_R)               : derived additive-category structure
+ι_1 = <id,0>, ι_2 = <0,id> : biproduct injections
+[f,g] = f o π_1 + g o π_2 : derived copairing.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -877,6 +882,18 @@ The literal owners are `CommRingFiniteFree_cat`,
 `comm_ring_freyd_class_preadditive_evidence`,
 `groupoidify_set_map_ext`,
 `PreadditiveCategory`,
+`AdditiveCategory`,
+`comm_ring_zero_presentation`,
+`comm_ring_presentation_direct_sum`,
+`comm_ring_freyd_direct_sum_func`,
+`comm_ring_freyd_binary_products`,
+`comm_ring_freyd_terminal_zero`,
+`comm_ring_freyd_cartesian`,
+`additive_inj1_fapp0`,
+`additive_inj2_fapp0`,
+`additive_copair_fapp0`,
+`additive_biproduct_identity_path`,
+`comm_ring_freyd_additive`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,
@@ -889,11 +906,13 @@ The literal owners are `CommRingFiniteFree_cat`,
 owners and compare with rigid finite-free matrix observations only at proof
 time. `RawHom` retains agreement/syzygy paths; `Hom_Freyd` is its ordinary set
 truncation. `El(P)` is a representable specialization rather than an
-independent quotient-element type. `PreAdd(Freyd_R)` is now a checked
-preadditive package on arbitrary quotient points; do not strengthen it to an
-additive or Abelian category before zero objects/biproducts and the later
-kernel hypotheses are supplied. Do not print kernels/cokernels or homology at
-this boundary.
+independent quotient-element type. `PreAdd(Freyd_R)` is a checked preadditive
+package on arbitrary quotient points. `Add(Freyd_R)` additionally selects the
+whole sum functor and terminal zero, then derives coproduct and zero-object
+observations from products and preadditivity; it is not a parallel coproduct
+grammar. Do not strengthen this to an Abelian category or print
+kernels/cokernels or homology before the later weak-kernel hypotheses are
+supplied.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write
