@@ -108,6 +108,8 @@ export * from './algebra_formal_presentation_morphism_delegation';
 export * from './algebra_formal_presentation_morphism_batch';
 export * from './algebra_formal_presentation_morphism_category';
 export * from './algebra_formal_presentation_morphism_signatures';
+export * from './algebra_formal_bounded_complex';
+export * from './algebra_formal_bounded_complex_delegation';
 export * from './lf';
 export * from './lf_declarations';
 export * from './lf_conversion';

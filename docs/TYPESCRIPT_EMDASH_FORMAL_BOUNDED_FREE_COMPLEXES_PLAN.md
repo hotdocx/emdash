@@ -328,9 +328,9 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | `FBC-COMPUTE-4A` | complete; checkpoint `3a934c7` | formal orientation | whole polynomial complex and negative chain-condition results |
 | `FBC-SCHREYER-5A` | complete; checkpoint `3a934c7` | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
 | `FBC-CHAIN-MAP-6A` | complete; checkpoint `3a934c7` | complex | whole chain maps, identity, composition, and retained noncommuting squares |
-| `FBC-OPERATIONS-7A` | complete; operations/category checkpoint pending | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
-| `FBC-BRIDGE-8A` | pending | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
-| `FBC-CATEGORY-9A` | complete; operations/category checkpoint pending | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
+| `FBC-OPERATIONS-7A` | complete; checkpoint `1c7acad` | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
+| `FBC-BRIDGE-8A` | complete; bridge checkpoint pending | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
+| `FBC-CATEGORY-9A` | complete; checkpoint `1c7acad` | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
 | `FBC-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
@@ -367,6 +367,9 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-024` | accepted during operation exposure | Complex construction, Schreyer conversion, and chain-map validation are separate typed whole operations; serializers retain terms, maps, composites/squares, negative status, and Schreyer metadata. |
 | `D-FBC-025` | accepted during graph validation | Direct and graph execution agree on the complete bytes of a deliberately invalid complex, proving that graph lowering does not project away the offending composite. |
 | `D-FBC-026` | accepted during category compatibility | Polynomial complexes and validated chain maps form a direct computable category at the plain `Category` doctrine; one constructor/reinterpretation/compiler lowering targets the native chain-map operation without a formal category or homology claim. |
+| `D-FBC-027` | accepted during Core reification | A complex realization retains ordered ranks, explicit differential matrices, and only genuine adjacent-zero law targets; a chain-map realization retains every component and square target. |
+| `D-FBC-028` | accepted during adoption | Law assumptions are appended in ascending complex degree followed by chain-map and square order; invalid composites/squares remain unadoptable observations. |
+| `D-FBC-029` | accepted during package usability | TypeScript returns a constructor-aligned recursive recipe with selected matrices and adopted law references, while Lambdapi remains the owner of the actual recursive package constructors; no opaque whole-complex assumption is introduced. |
 
 ## Initial Formal Owner Audit Result
 
@@ -462,6 +465,29 @@ complex constructor and direct reinterpretation, and lowers chain-map
 validation to the native graph operation. Focused tests confirm categorical
 identity/composition, direct/compiled byte agreement, the selected primitive
 method, and retained reinterpretation rule.
+
+## Core Reification And Delegation Result
+
+`src/v3_2/algebra_formal_bounded_complex.ts` reifies every differential and
+component matrix through the completed finite-module owner. Complex recipes
+retain ordered ranks, matrices, and only the genuine `d_(i-1) o d_i = 0`
+targets beginning in degree two. Chain-map realizations retain both endpoint
+recipes, every component, and one exact square target per differential.
+
+The delegation layer recomputes complete complex or chain-map outputs through
+the native operations, compares canonical selected bytes, reconstructs every
+Core target, and admits a claim only when the corresponding composite or
+square is valid. Batch adoption proceeds in ascending complex degree, then map
+and square order, producing one `computed-equation` entry per law. The
+returned recursive recipe aligns those references with the Lambdapi
+nil/cons/successor constructors rather than postulating an opaque whole
+complex. Its serialization is deterministic.
+
+Focused tests build a length-two complex and three-component scalar chain map,
+Core-check one adjacent-zero law and two square laws, adopt all three in the
+promised order, and retain nonzero/unequal negative observations. The five
+directly affected bridge/complex/category suites, root typecheck, and affected
+lint pass.
 
 ## Validation Policy
 
