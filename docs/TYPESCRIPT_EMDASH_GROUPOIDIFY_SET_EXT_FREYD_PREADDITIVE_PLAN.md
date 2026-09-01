@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-GROUPOIDIFY-SET-EXT-FREYD-PREADDITIVE`
 
-Status: implementation and proportional closeout complete on a dedicated
-branch/worktree; final ledger checkpoint pending
+Status: completed on a dedicated branch/worktree; implementation and
+proportional closeout checkpoint `c581920`
 
 Baseline: `0e8b390060c926757dd8fae8cbf95dd49b90da09`
 
@@ -449,8 +449,8 @@ Freyd/Abelian structure packages its consequences rather than replacing it.
 | `GSE-TRUNC-LIFT-4A` | complete; checkpoint `f127838` | generic extensionality | unary/binary/ternary derived helpers actually required to pass from generators to arbitrary quotient points |
 | `GSE-FREYD-LAWS-5A` | complete; checkpoint `f127838` | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
 | `GSE-PREADDITIVE-6A` | complete; checkpoint `f127838` | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
-| `GSE-CONFORMANCE-7A` | complete; final closeout checkpoint pending | formal package | focused reviewers, direct TypeScript metadata, focused TS/Core/Lambdapi conformance |
-| `GSE-CLOSE-8A` | complete; final closeout checkpoint pending | all rows | standing docs, strict catalog, no-check 366-file health snapshot, proportional gates and final ledger |
+| `GSE-CONFORMANCE-7A` | complete; checkpoint `c581920` | formal package | focused reviewers, direct TypeScript metadata, focused TS/Core/Lambdapi conformance |
+| `GSE-CLOSE-8A` | complete; implementation/conformance checkpoint `c581920`; ledger finalized here | all rows | standing docs, strict catalog, no-check 366-file health snapshot, proportional gates and final ledger |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized ledger. Difficulty alone is not evidence for an opaque axiom.

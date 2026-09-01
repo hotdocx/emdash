@@ -3,7 +3,7 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_GROUPOIDIFY_SET_EXT_FREYD_PREADDITIVE_PLAN.md`
-is the active closeout ledger for the implemented continuation from the Freyd
+is the completed continuation from the Freyd
 class-law boundary. Maps from `Groupoidify(C)` into a set are now equal when
 they agree on the whole unit: set-valued pointwise paths assemble one whole
 transformation, existing extension action maps it, and existing eta closes the
