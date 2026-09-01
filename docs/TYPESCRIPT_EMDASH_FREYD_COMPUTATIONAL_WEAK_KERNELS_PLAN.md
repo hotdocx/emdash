@@ -134,6 +134,29 @@ The missing transformation layer must account for:
 Merely returning the current `syzygies.generators` would use the wrong source
 free module and fail the universal factorization boundary.
 
+### Implemented original-column syzygy result
+
+`algebraPolynomialModuleOriginalSyzygies` now constructs the complete
+original-column syzygy module without changing the existing Schreyer owner.
+It computes the image Gröbner basis and its retained original-generator
+transformation rows, pulls every Schreyer relation back through those rows,
+and adds one `e_j`-minus-reconstruction relation for every original column.
+The latter recovers literal zero columns, duplicate/redundant columns, and all
+relations hidden when the original list is replaced by its basis.
+
+All candidates live in one deterministic `term-over-position` free module
+whose positions are exactly the original column indices. Each raw relation is
+checked by recombination with the original columns. A final Gröbner basis of
+that syzygy submodule is computed and checked again, while the result retains
+the image basis, Schreyer data, pulled-back relations, original rewrites,
+raw generators, final basis, operation counts, progress, and cancellation.
+
+The focused suite now checks a three-column polynomial example with both a
+Koszul and redundant-column relation, duplicate and zero columns, independent
+identity columns, an empty source, reconstruction of every selected basis
+element, immutable output, cancellation, and non-field rejection. Root
+typechecking and the focused `8/8` module suite pass.
+
 ### No formal weak-kernel owner exists
 
 The active Lambdapi library has `HFiber`, generic Hom pre/postcomposition,
@@ -463,10 +486,10 @@ genuine capability consumer and must not be deferred behind documentation.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `WKH-PLAN-0` | complete; plan checkpoint pending | additive baseline `c4baf61` | living plan, isolated branch/worktree, explicit scope/Git boundary, baseline evidence, persistent goal |
-| `WKH-AUDIT-1` | complete; initial plan checkpoint pending | plan | metadata-stub, original-column syzygy, lift, formal `HFiber`, operation/doctrine, and Singular owner audit with rejection signals |
-| `WKH-SYZYGY-2` | ready | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
-| `WKH-LIFT-3` | blocked by syzygy basis | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
+| `WKH-PLAN-0` | complete; checkpoint `3d18fa9` | additive baseline `c4baf61` | living plan, isolated branch/worktree, explicit scope/Git boundary, baseline evidence, persistent goal |
+| `WKH-AUDIT-1` | complete; checkpoint `3d18fa9` | plan | metadata-stub, original-column syzygy, lift, formal `HFiber`, operation/doctrine, and Singular owner audit with rejection signals |
+| `WKH-SYZYGY-2` | complete; checkpoint pending | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
+| `WKH-LIFT-3` | ready | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
 | `WKH-CATEGORY-4` | blocked by whole result | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
 | `WKH-SINGULAR-5` | blocked by native result | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
 | `WKH-FORMAL-6` | ready after owner probe | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
@@ -493,6 +516,7 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-010` | accepted | No kernel/cokernel/Abelian doctrine promotion occurs in this goal. |
 | `D-WKH-011` | accepted | Generic identity/composition and existing Hom action remain runtime owners; new rules/unifiers require owner-position probes and narrow discriminators. |
 | `D-WKH-012` | accepted | Orthogonal strictness/cubical histories, historical main, print/release work, and broad aggregates remain out of scope. |
+| `D-WKH-013` | accepted after original-column probes | The selected syzygy carrier is the base `term-over-position` free module indexed by every original column, including zero columns. Pulled-back Schreyer relations plus one rewrite per original generator form the raw generating family; the final Gröbner basis is selected only after every raw and final relation reconstructs zero. |
 
 ## Validation Matrix
 

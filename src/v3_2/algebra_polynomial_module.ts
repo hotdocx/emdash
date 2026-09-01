@@ -782,6 +782,41 @@ const rowScale = <
     algebraPolynomialMultiply(scalar, value)
 );
 
+const rowCombination = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    ring: AlgebraPolynomialRing<P, C, I>,
+    rows: readonly (readonly AlgebraPolynomial<P, C, I>[])[],
+    coefficients: readonly AlgebraPolynomial<P, C, I>[],
+    length: number
+): AlgebraPolynomial<P, C, I>[] => {
+    if (rows.length !== coefficients.length) {
+        return fail(
+            'INVALID_TRANSFORMATION',
+            'moduleGroebner.rowCombination',
+            'Row-combination coefficient count disagrees with rows'
+        );
+    }
+    return rows.reduce<AlgebraPolynomial<P, C, I>[]>(
+        (sum, row, index) => {
+            if (row.length !== length) {
+                return fail(
+                    'INVALID_TRANSFORMATION',
+                    `moduleGroebner.rowCombination[${index}]`,
+                    'Transformation row has the wrong original-generator length'
+                );
+            }
+            const contribution = rowScale(coefficients[index], row);
+            return sum.map((value, position) =>
+                algebraPolynomialAdd(value, contribution[position])
+            );
+        },
+        zeroRow(ring, length)
+    );
+};
+
 const lcmExponents = (
     left: AlgebraMonomial,
     right: AlgebraMonomial
@@ -1246,6 +1281,205 @@ export function algebraPolynomialModuleSchreyerSyzygies<
         sourcePairs: Object.freeze(sourcePairs),
         pairsProcessed,
         reductionSteps
+    });
+}
+
+export interface AlgebraPolynomialModuleOriginalSyzygies<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-polynomial-module-original-syzygies';
+    readonly originalSubmodule: AlgebraPolynomialSubmodule<P, C, I>;
+    readonly imageBasis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
+    readonly schreyerSyzygies:
+        AlgebraPolynomialModuleSchreyerSyzygies<P, C, I>;
+    /** Free module indexed by the original ordered generators. */
+    readonly module: AlgebraPolynomialFreeModule<P, C, I>;
+    /** Pulled-back S-pair relations before final interreduction. */
+    readonly pulledBackSchreyer: readonly {
+        readonly basisSyzygy: AlgebraPolynomialModuleVector<P, C, I>;
+        readonly relation: AlgebraPolynomialModuleVector<P, C, I>;
+    }[];
+    /** e_j minus the retained reconstruction of original generator j. */
+    readonly originalRewrites: readonly {
+        readonly index: number;
+        readonly membership: AlgebraPolynomialModuleMembership<P, C, I>;
+        readonly relation: AlgebraPolynomialModuleVector<P, C, I>;
+    }[];
+    readonly rawGenerators:
+        readonly AlgebraPolynomialModuleVector<P, C, I>[];
+    /** Selected deterministic basis of the complete original-column kernel. */
+    readonly basis: AlgebraPolynomialModuleGroebnerBasis<P, C, I>;
+    readonly pairsProcessed: number;
+    readonly reductionSteps: number;
+}
+
+/**
+ * Compute the complete syzygy module of an original ordered generator list.
+ *
+ * Schreyer relations among the derived Groebner basis are pulled through the
+ * retained transformation rows.  One additional rewrite relation for every
+ * original generator recovers zero/redundant columns and the kernel lost when
+ * replacing the original list by a basis.
+ */
+export function algebraPolynomialModuleOriginalSyzygies<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    originalSubmodule: AlgebraPolynomialSubmodule<P, C, I>,
+    options: AlgebraPolynomialModuleGroebnerOptions = {}
+): AlgebraPolynomialModuleOriginalSyzygies<P, C, I> {
+    if (!record(options)) {
+        return fail(
+            'INVALID_OPTIONS',
+            'originalSyzygies.options',
+            'Original-syzygy options must be a record'
+        );
+    }
+    const context = normalizeAlgebraComputationContext(options.context);
+    const maximumReductionStepsPerPair = positiveLimit(
+        options.maximumReductionStepsPerPair,
+        ALGEBRA_POLYNOMIAL_MODULE_PROFILE.maximumReductionStepsPerPair,
+        'originalSyzygies.maximumReductionStepsPerPair'
+    );
+    const imageBasis = algebraPolynomialModuleGroebnerBasis(
+        originalSubmodule,
+        options
+    );
+    const schreyerSyzygies = algebraPolynomialModuleSchreyerSyzygies(
+        imageBasis,
+        maximumReductionStepsPerPair
+    );
+    const originalCount = originalSubmodule.generators.length;
+    const module = algebraPolynomialFreeModule(
+        originalSubmodule.module.ring,
+        originalCount,
+        'term-over-position'
+    );
+    const pulledBackSchreyer = schreyerSyzygies.generators.flatMap(
+        basisSyzygy => {
+            const row = rowCombination(
+                originalSubmodule.module.ring,
+                imageBasis.transformations,
+                basisSyzygy.components,
+                originalCount
+            );
+            const relation = algebraPolynomialModuleVector(module, row);
+            if (algebraPolynomialModuleLeadingTerm(relation) === undefined) {
+                return [];
+            }
+            return [Object.freeze({ basisSyzygy, relation })];
+        }
+    );
+    const originalRewrites = originalSubmodule.generators.flatMap(
+        (generator, index) => {
+            if (context.cancellation?.requested()) {
+                return fail(
+                    'CANCELLED',
+                    `originalSyzygies.original[${index}]`,
+                    context.cancellation.reason?.() ??
+                        'Original syzygy computation cancelled'
+                );
+            }
+            context.onProgress?.({
+                phase: 'algebra.polynomial-module.original-syzygies',
+                completed: index + 1,
+                total: originalCount
+            });
+            const membership = algebraPolynomialModuleMembership(
+                generator,
+                imageBasis,
+                maximumReductionStepsPerPair
+            );
+            if (!membership.member) {
+                return fail(
+                    'INVALID_GROEBNER_BASIS',
+                    `originalSyzygies.original[${index}]`,
+                    'An original generator is absent from its computed image basis'
+                );
+            }
+            const row = rowSubtract(
+                unitRow(
+                    originalSubmodule.module.ring,
+                    originalCount,
+                    index
+                ),
+                membership.coefficients
+            );
+            const relation = algebraPolynomialModuleVector(module, row);
+            if (algebraPolynomialModuleLeadingTerm(relation) === undefined) {
+                return [];
+            }
+            return [Object.freeze({ index, membership, relation })];
+        }
+    );
+    const rawGenerators = [
+        ...pulledBackSchreyer.map(entry => entry.relation),
+        ...originalRewrites.map(entry => entry.relation)
+    ].filter((relation, index, all) => !all.slice(0, index).some(previous =>
+        algebraPolynomialModuleEquals(previous, relation)
+    ));
+    rawGenerators.forEach((relation, index) => {
+        const reconstructed = algebraPolynomialModuleCombination(
+            originalSubmodule.generators,
+            relation.components
+        );
+        if (!algebraPolynomialModuleEquals(
+            reconstructed,
+            algebraPolynomialModuleZero(originalSubmodule.module)
+        )) {
+            return fail(
+                'INVALID_TRANSFORMATION',
+                `originalSyzygies.rawGenerators[${index}]`,
+                'Generated original-column relation does not reconstruct zero'
+            );
+        }
+    });
+    const basis = algebraPolynomialModuleGroebnerBasis(
+        algebraPolynomialSubmodule(module, rawGenerators),
+        options
+    );
+    basis.basis.forEach((relation, index) => {
+        if (originalCount === 0) return;
+        const reconstructed = algebraPolynomialModuleCombination(
+            originalSubmodule.generators,
+            relation.components
+        );
+        if (!algebraPolynomialModuleEquals(
+            reconstructed,
+            algebraPolynomialModuleZero(originalSubmodule.module)
+        )) {
+            return fail(
+                'INVALID_TRANSFORMATION',
+                `originalSyzygies.basis[${index}]`,
+                'Selected original-column syzygy does not reconstruct zero'
+            );
+        }
+    });
+    return Object.freeze({
+        kind: 'algebra-polynomial-module-original-syzygies',
+        originalSubmodule,
+        imageBasis,
+        schreyerSyzygies,
+        module,
+        pulledBackSchreyer: Object.freeze(pulledBackSchreyer),
+        originalRewrites: Object.freeze(originalRewrites),
+        rawGenerators: Object.freeze(rawGenerators),
+        basis,
+        pairsProcessed:
+            imageBasis.pairsProcessed +
+            schreyerSyzygies.pairsProcessed +
+            basis.pairsProcessed,
+        reductionSteps:
+            imageBasis.reductionSteps +
+            schreyerSyzygies.reductionSteps +
+            originalRewrites.reduce(
+                (total, entry) => total + entry.membership.reductionSteps,
+                0
+            ) +
+            basis.reductionSteps
     });
 }
 

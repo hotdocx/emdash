@@ -5,9 +5,11 @@ import { describe, it } from 'node:test';
 import { INTEGER_DOMAIN, RATIONAL_DOMAIN } from '../src/v3_2/algebra_exact';
 import {
     algebraPolynomialAdd,
+    algebraPolynomialOne,
     algebraPolynomialPower,
     algebraPolynomialRing,
     algebraPolynomialText,
+    algebraPolynomialSubtract,
     algebraPolynomialVariable,
     algebraPolynomialZero
 } from '../src/v3_2/algebra_polynomial';
@@ -22,6 +24,7 @@ import {
     algebraPolynomialModuleGroebnerBasis,
     algebraPolynomialModuleLeadingTerm,
     algebraPolynomialModuleMembership,
+    algebraPolynomialModuleOriginalSyzygies,
     algebraPolynomialModuleScale,
     algebraPolynomialModuleSchreyerSyzygies,
     algebraPolynomialModuleVector,
@@ -201,6 +204,113 @@ describe('v3.2 polynomial free modules and module Buchberger', () => {
         assert.ok(Object.isFrozen(syzygies.module.schreyerData));
     });
 
+    it('recovers complete syzygies in the original ordered columns', () => {
+        const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x', 'y'], 'lex');
+        const x = algebraPolynomialVariable(ring, 0);
+        const y = algebraPolynomialVariable(ring, 1);
+        const zero = algebraPolynomialZero(ring);
+        const one = algebraPolynomialOne(ring);
+        const negativeOne = algebraPolynomialSubtract(zero, one);
+        const target = algebraPolynomialFreeModule(ring, 1);
+        const columns = [
+            algebraPolynomialModuleVector(target, [x]),
+            algebraPolynomialModuleVector(target, [y]),
+            algebraPolynomialModuleVector(target, [algebraPolynomialAdd(x, y)])
+        ];
+        const syzygies = algebraPolynomialModuleOriginalSyzygies(
+            algebraPolynomialSubmodule(target, columns)
+        );
+        assert.equal(syzygies.module.rank, 3);
+        assert.equal(syzygies.module.termOrder, 'term-over-position');
+        assert.ok(syzygies.pulledBackSchreyer.length > 0);
+        assert.ok(syzygies.originalRewrites.length > 0);
+        const expectedKoszul = algebraPolynomialModuleVector(
+            syzygies.module,
+            [algebraPolynomialSubtract(zero, y), x, zero]
+        );
+        const expectedRedundant = algebraPolynomialModuleVector(
+            syzygies.module,
+            [negativeOne, negativeOne, one]
+        );
+        assert.equal(
+            algebraPolynomialModuleMembership(
+                expectedKoszul,
+                syzygies.basis
+            ).member,
+            true
+        );
+        assert.equal(
+            algebraPolynomialModuleMembership(
+                expectedRedundant,
+                syzygies.basis
+            ).member,
+            true
+        );
+        syzygies.basis.basis.forEach(relation => assert.ok(
+            algebraPolynomialModuleEquals(
+                algebraPolynomialModuleCombination(
+                    columns,
+                    relation.components
+                ),
+                algebraPolynomialModuleZero(target)
+            )
+        ));
+        assert.ok(Object.isFrozen(syzygies));
+        assert.ok(Object.isFrozen(syzygies.rawGenerators));
+    });
+
+    it('retains zero and redundant original-column relations', () => {
+        const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x'], 'lex');
+        const x = algebraPolynomialVariable(ring, 0);
+        const zero = algebraPolynomialZero(ring);
+        const one = algebraPolynomialOne(ring);
+        const negativeOne = algebraPolynomialSubtract(zero, one);
+        const target = algebraPolynomialFreeModule(ring, 1);
+        const syzygies = algebraPolynomialModuleOriginalSyzygies(
+            algebraPolynomialSubmodule(target, [
+                algebraPolynomialModuleVector(target, [x]),
+                algebraPolynomialModuleVector(target, [x]),
+                algebraPolynomialModuleVector(target, [zero])
+            ])
+        );
+        const duplicate = algebraPolynomialModuleVector(
+            syzygies.module,
+            [one, negativeOne, zero]
+        );
+        const zeroColumn = algebraPolynomialModuleVector(
+            syzygies.module,
+            [zero, zero, one]
+        );
+        assert.equal(
+            algebraPolynomialModuleMembership(duplicate, syzygies.basis).member,
+            true
+        );
+        assert.equal(
+            algebraPolynomialModuleMembership(zeroColumn, syzygies.basis).member,
+            true
+        );
+    });
+
+    it('returns rank-zero syzygies for independent and empty columns', () => {
+        const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x'], 'lex');
+        const zero = algebraPolynomialZero(ring);
+        const one = algebraPolynomialOne(ring);
+        const target = algebraPolynomialFreeModule(ring, 2);
+        const independent = algebraPolynomialModuleOriginalSyzygies(
+            algebraPolynomialSubmodule(target, [
+                algebraPolynomialModuleVector(target, [one, zero]),
+                algebraPolynomialModuleVector(target, [zero, one])
+            ])
+        );
+        assert.equal(independent.module.rank, 2);
+        assert.equal(independent.basis.basis.length, 0);
+        const empty = algebraPolynomialModuleOriginalSyzygies(
+            algebraPolynomialSubmodule(target, [])
+        );
+        assert.equal(empty.module.rank, 0);
+        assert.equal(empty.basis.basis.length, 0);
+    });
+
     it('enforces field, module, divisor, basis, and cancellation gates', () => {
         const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x', 'y'], 'lex');
         const x = algebraPolynomialVariable(ring, 0);
@@ -218,6 +328,12 @@ describe('v3.2 polynomial free modules and module Buchberger', () => {
         );
         assert.throws(
             () => algebraPolynomialModuleGroebnerBasis(submodule, {
+                context: { cancellation: { requested: () => true } }
+            }),
+            moduleError('CANCELLED')
+        );
+        assert.throws(
+            () => algebraPolynomialModuleOriginalSyzygies(submodule, {
                 context: { cancellation: { requested: () => true } }
             }),
             moduleError('CANCELLED')
@@ -251,6 +367,14 @@ describe('v3.2 polynomial free modules and module Buchberger', () => {
         const integerX = algebraPolynomialVariable(integerRing, 0);
         assert.throws(
             () => algebraPolynomialModuleGroebnerBasis(
+                algebraPolynomialSubmodule(integerModule, [
+                    algebraPolynomialModuleVector(integerModule, [integerX])
+                ])
+            ),
+            moduleError('NON_FIELD_COEFFICIENTS')
+        );
+        assert.throws(
+            () => algebraPolynomialModuleOriginalSyzygies(
                 algebraPolynomialSubmodule(integerModule, [
                     algebraPolynomialModuleVector(integerModule, [integerX])
                 ])
