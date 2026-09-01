@@ -649,7 +649,7 @@ genuine capability consumer and must not be deferred behind documentation.
 | `WKH-SINGULAR-5` | complete; checkpoint `06e0b20` | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
 | `WKH-FORMAL-6` | complete; checkpoint `6648589` | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
 | `WKH-BRIDGE-7` | complete; checkpoint `913d395` | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
-| `WKH-CLOSE-8` | complete; closeout checkpoint pending | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
+| `WKH-CLOSE-8` | complete; checkpoint `8d7d98f` | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
 or deferred only with durable evidence and a concrete replacement/prerequisite;
@@ -729,6 +729,9 @@ The requirement-by-requirement audit is closed:
   `6648589`; and
 - explicit-Core annihilation/reconstruction targets, actual operation replay,
   explicit adoption, and live Lambdapi checking are checked at `913d395`.
+- the public qualified-provider facade, exports, test registration, standing
+  authorities, validation record, and completed-plan boundary are checked at
+  `8d7d98f`.
 
 The native algorithm covers nontrivial polynomial relations, duplicate/zero
 columns, identity and zero maps, empty/rank-zero cases, arbitrary multi-column
