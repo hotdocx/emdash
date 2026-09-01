@@ -446,6 +446,35 @@ selected binary-products and terminal-zero witnesses as one
 `CartesianCategory`. Its evidence projections compute to those two witnesses;
 it adds no rule, unifier, or parallel product/terminal operation.
 
+### Implemented generic and formal additive result
+
+`emdash3_2_additive_categories.lp` defines `AdditiveCategory(C,P,t)` as
+exactly the product of the existing `PreadditiveCategory(C)` and selected
+`CartesianCategory(C,P,t)` evidence. Its rule-free theorem layer derives:
+
+- left zero and inverse laws from the selected abelian-group basis;
+- both composition-with-zero laws from bilinearity and additive-idempotent
+  cancellation;
+- equality of identity and zero at a terminal object, hence contractibility of
+  every outgoing Hom and the initial half of the zero object;
+- the two injections `<id,0>` and `<0,id>`;
+- copairing `f o pi_1 + g o pi_2`;
+- both copair beta laws;
+- the diagonal identity `iota_1 o pi_1 + iota_2 o pi_2 = id`; and
+- copair eta.
+
+All constructions use the existing product, terminal, Hom-addition, and
+ordinary composition owners. No initial-object/coproduct classifier, runtime
+rule, unifier, or parallel category syntax is added.
+
+`emdash3_2_commutative_algebra_freyd_additive.lp` transparently combines the
+checked Freyd preadditive and Cartesian witnesses. The generic initiality,
+copair beta/eta, and biproduct identity specialize directly to the formal
+Freyd quotient Homs. Focused generic and Freyd reviewers pass; both modules
+are rule-free and have empty strict LHS audits. Their inherited warning
+inventories are respectively `1,358 = 1,189 + 169` and
+`1,392 = 1,223 + 169`, with no module-owned warning.
+
 The selected whole functor is approximately:
 
 ```text
@@ -629,9 +658,9 @@ consequences rather than replacing it.
 | `FAB-PRESENTATION-5A` | complete; checkpoint `794f163` | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
 | `FAB-AGREEMENT-5B` | complete; checkpoint `5d7ce09` | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
 | `FAB-DESCENT-6A` | complete; checkpoint `5643fbf` | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
-| `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint pending | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
-| `FAB-ADDITIVE-8A` | ready | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
-| `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
+| `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint `219660a` | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
+| `FAB-ADDITIVE-8A` | complete; checkpoint pending | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
+| `FAB-TYPESCRIPT-9A` | ready | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
 | `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, reordered when dependencies permit, rejected, or deferred
@@ -666,6 +695,7 @@ evidence for an opaque axiom.
 | `D-FAB-022` | accepted after quotient-descent probes | Nested agreement-groupoidification and set-truncation descent construct quotient pairing without representative choice. The outer generic action uses a rigid proof-time bridge because its direct transparent runtime fold exceeded the bounded check; the rigid head then reduces to the constructed semantic path, while the public direct-sum functor keeps direct object/arrow computation and retained Hom action. |
 | `D-FAB-023` | accepted after selected-product probes | The concrete `BinaryProducts` witness reuses the whole quotient direct-sum functor and generic triangular theory. Selected point projections/pairing meet rigid Freyd observations through typed proof-time comparisons, then those rigid heads fold to constructed quotient semantics. Direct rules on the generic point heads exceeded the bounded check; the selected bridge preserves those heads for beta/eta and adds no warning beyond the exact import union. |
 | `D-FAB-024` | accepted after terminal-zero probes | Terminality of the zero presentation is constructed from zero-row matrix uniqueness and the existing agreement/groupoidification/truncation descent, not postulated from preadditivity or encoded by a manual square. The generic terminal transfor/cut remain primary; selected point and contractibility observations expose the quotient zero semantics. Cartesian evidence is their transparent product. |
+| `D-FAB-025` | accepted after generic-additive proofs | `AdditiveCategory` is exactly preadditive plus selected Cartesian evidence. Initiality, injections, copairing, both beta laws, the diagonal identity, and eta are theorem-level consequences of abelian cancellation, bilinearity, and generic product/terminal computation; no primitive coproduct or runtime additive rule is introduced. The formal Freyd instance is transparent. |
 
 ## Validation Matrix
 

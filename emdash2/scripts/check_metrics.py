@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
     Path("emdash3_2_preadditive_categories.lp"),
+    Path("emdash3_2_additive_categories.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
@@ -58,6 +59,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_binary_products.lp"),
     Path("emdash3_2_commutative_algebra_freyd_terminal_zero.lp"),
     Path("emdash3_2_commutative_algebra_freyd_cartesian.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_additive.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_laurent.lp"),

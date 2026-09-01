@@ -50,6 +50,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_binary_products.lp)
   files+=(emdash3_2_commutative_algebra_freyd_terminal_zero.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cartesian.lp)
+  files+=(emdash3_2_additive_categories.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_gray_interchanger_orientation.lp)
   files+=(emdash3_2_gray_transformation_graph.lp)
   files+=(emdash3_2_gray_cubes.lp)
