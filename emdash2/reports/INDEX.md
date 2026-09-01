@@ -3,7 +3,7 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PREADDITIVE_DESCENT_PLAN.md` is the
-active continuation from the formal Freyd presentation-category skeleton. It
+completed continuation from the formal Freyd presentation-category skeleton. It
 first corrects the earlier runtime-owner diagnosis: identity and a rigid
 composition target check quickly, while reducing generic composition directly
 to the transparent recursive matrix body triggers an explosive overlap with
@@ -14,7 +14,10 @@ descent through groupoidification and `0`-truncation, and the smallest checked
 additive Hom-operation/class-law package. Full laws on arbitrary quotient
 points await generic proposition-valued groupoidification induction, so no
 `PreadditiveCategory` instance is claimed. Biproducts, additive/Abelian
-structure, weak kernels, exactness, and homology remain later gates.
+structure, weak kernels, exactness, and homology remain later gates. Its exact
+next prerequisite is generic proposition-valued/dependent groupoidification
+induction, needed to promote checked generating-class laws to arbitrary
+quotient points.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:

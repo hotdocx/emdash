@@ -4,7 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-FREYD-PREADDITIVE-DESCENT`
 
-Status: active on a dedicated branch/worktree
+Status: completed on a dedicated branch/worktree; implementation and
+conformance checkpoint `c1b5a8e`
 
 Baseline: `c7d1eb7d2a121b7bd27e36d14f344cc8070627fc`
 
@@ -328,9 +329,9 @@ to emit proof certificates for all internal algorithms.
 | `FPD-AGREE-4A` | complete; checkpoint `f41e8db` | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
 | `FPD-DESCENT-5A` | complete; checkpoint `ad62202` | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
 | `FPD-FREYD-6A` | complete; checkpoint `ad62202` | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
-| `FPD-PREADDITIVE-7A` | complete for hom operations and all raw-class laws; arbitrary-quotient law promotion deferred behind proposition-valued groupoidification induction | class operations | honest class-preadditive capability; no full PreadditiveCategory, biproduct, or additive claim |
-| `FPD-CONFORMANCE-8A` | complete; checkpoint pending | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
-| `FPD-CLOSE-9A` | active | all accepted/deferred rows | registration, reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+| `FPD-PREADDITIVE-7A` | complete for hom operations and all raw-class laws; checkpoint `c1b5a8e`; arbitrary-quotient law promotion deferred behind proposition-valued groupoidification induction | class operations | honest class-preadditive capability; no full PreadditiveCategory, biproduct, or additive claim |
+| `FPD-CONFORMANCE-8A` | complete; checkpoint `c1b5a8e` | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
+| `FPD-CLOSE-9A` | complete; implementation checkpoint `c1b5a8e`, ledger finalized here | all accepted/deferred rows | registration, reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized ledger. A difficult proof is not by itself evidence that an
@@ -439,6 +440,43 @@ capability without promoting its doctrine. Focused tests check additive unit,
 cancellation, and both distributivity orientations by target-factorization
 congruence. Root typecheck, affected lint, nine direct/presentation tests, and
 the live two-agreement Core/Lambdapi consumer pass. No root aggregate was run.
+
+## Final Result
+
+The completed branch supplies:
+
+- the corrected finite-free composition-owner audit;
+- a constructed rigid/transparent matrix-composition path;
+- transparent matrix identity, associativity, zero, additive-group, and
+  bilinearity paths;
+- raw presentation identity/composition/zero/addition/negation with derived
+  relation squares;
+- reflexive, symmetric, transitive, additive, negative, precomposition, and
+  postcomposition agreement operations;
+- whole agreement functors and representation transfors;
+- groupoidified and `0`-truncated composition, addition, and negation;
+- sequential rigid-head usability paths for generic Freyd identity and
+  composition;
+- computational Hom-operation and class-preadditive evidence packages;
+- direct TypeScript zero/add/negation and representative bilinearity; and
+- live emitted-Core acceptance of representative and additive-cancellation
+  agreement.
+
+Every new formal owner and focused reviewer passes its bounded check. Strict
+LHS audits are empty. Warning-enabled checking reports exactly six local
+identity-action overlaps, all at the two deliberately retained outer
+groupoidification fapp1 actions; the timed-out inner action remains proof-time.
+Workspace validation, root typecheck, affected lint, nine focused direct/raw-
+presentation tests, and the focused live conformance test pass. Catalog,
+report, active-reference, source-TOC, and health checks are synchronized; the
+health report is an honest no-check snapshot over 358 files. No repository-
+wide TypeScript, Lambdapi, book, print, package, or release aggregate was run.
+
+The one substantive deferred theorem is exact: the current nondependent
+`Groupoidify` recursor does not provide the proposition-valued dependent
+induction needed to promote every generating-class additive law to arbitrary
+groupoidified and truncated points. No opaque witness or misleading full
+`PreadditiveCategory` instance replaces it.
 
 ## Validation Policy
 
