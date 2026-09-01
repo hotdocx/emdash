@@ -328,6 +328,21 @@ Prove at the raw level:
 - direct-sum identity and composition; and
 - compatibility with target-factorization agreement.
 
+### Implemented raw-presentation result
+
+`emdash3_2_commutative_algebra_presentation_direct_sums.lp` now defines the
+zero presentation and block-diagonal binary presentation sum. Raw direct-sum
+morphisms, both projections, and pairing retain generator and relation
+matrices. Their relation laws are constructed respectively from block-diagonal
+composition/congruence, block projection squares, and componentwise diagonal
+action on vertical pairing. No manual square, rewrite, unifier, or opaque
+equality witness is introduced.
+
+Focused implementation/reviewer checks and strict LHS audits pass. The target
+remains at 1,274 warning diagnostics. Agreement-category action and quotient
+descent are separated into the next ledger row rather than hidden inside this
+constructor checkpoint.
+
 ## Quotient Descent And Whole Direct-Sum Structure
 
 Descend projection, pairing, block-diagonal action, and zero through the
@@ -517,8 +532,9 @@ consequences rather than replacing it.
 | `FAB-FAMILY-2A` | complete; first semantic checkpoint pending | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
 | `FAB-BLOCK-3A` | complete; block checkpoint pending | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
 | `FAB-FREE-4A` | complete; finite-free checkpoint pending | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
-| `FAB-PRESENTATION-5A` | ready | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
-| `FAB-DESCENT-6A` | blocked by presentation layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
+| `FAB-PRESENTATION-5A` | complete; raw-presentation checkpoint pending | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
+| `FAB-AGREEMENT-5B` | ready | raw presentation sums | direct-sum, projection, and pairing compatibility on fixed-endpoint agreement categories |
+| `FAB-DESCENT-6A` | blocked by agreement layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
@@ -551,6 +567,7 @@ evidence for an opaque axiom.
 | `D-FAB-017` | accepted after block probes | A vertical pair of horizontal rows is the selected general block orientation because it exposes product projections directly. |
 | `D-FAB-018` | accepted after block laws | All required block beta/eta and diagonal-composition equations are constructed theorem paths; no block runtime/unification family is needed. |
 | `D-FAB-019` | accepted after whole-functor probe | Finite-free direct-sum object/arrow computation can reduce directly to `nat_add`/block diagonal without a rigid intermediary or new warning family. |
+| `D-FAB-020` | accepted after presentation probes | Zero/sum objects and raw sum/projection/pairing morphisms are flattened matrix data whose retained relation squares are all constructed from block laws. |
 
 ## Validation Matrix
 

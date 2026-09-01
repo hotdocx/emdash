@@ -39,6 +39,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_finite_free_category.lp"),
     Path("emdash3_2_commutative_algebra_finite_free_direct_sums.lp"),
     Path("emdash3_2_commutative_algebra_presentation_operations.lp"),
+    Path("emdash3_2_commutative_algebra_presentation_direct_sums.lp"),
     Path("emdash3_2_commutative_algebra_matrix_additive_laws.lp"),
     Path("emdash3_2_commutative_algebra_matrix_blocks.lp"),
     Path("emdash3_2_commutative_algebra_matrix_block_laws.lp"),
