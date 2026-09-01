@@ -15,6 +15,8 @@ import {
     ABELIAN_DOCTRINE,
     ALGEBRA_BASE_DOCTRINES,
     AlgebraDoctrineError,
+    COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE,
+    COMPUTATIONAL_WEAK_KERNEL_DOCTRINE,
     PREABELIAN_DOCTRINE,
     createDoctrineRegistry,
     defineDoctrine,
@@ -40,6 +42,19 @@ describe('v3.2 operational categorical doctrines', () => {
             ALGEBRA_BASE_DOCTRINES.byId.get('category')?.dual.doctrineId,
             'category'
         );
+        assert.equal(
+            COMPUTATIONAL_WEAK_KERNEL_DOCTRINE.dual.doctrineId,
+            COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE.id
+        );
+        assert.equal(
+            COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE.dual.roles[
+                'weak-cokernel-colift'
+            ],
+            'weak-kernel-lift'
+        );
+        assert.deepEqual(COMPUTATIONAL_WEAK_KERNEL_DOCTRINE.parents, [
+            'additive-category'
+        ]);
     });
 
     it('reports inherited missing roles for the current module category', () => {

@@ -246,6 +246,44 @@ export const ADDITIVE_DOCTRINE = defineDoctrine({
         roles: { 'zero-object': 'zero-object', biproduct: 'biproduct' }
     }
 });
+export const COMPUTATIONAL_WEAK_KERNEL_DOCTRINE = defineDoctrine({
+    id: 'additive-category-with-computational-weak-kernels',
+    parents: ['additive-category'],
+    requiredRoles: [
+        'weak-kernel',
+        'weak-kernel-object',
+        'weak-kernel-morphism',
+        'weak-kernel-lift'
+    ],
+    dual: {
+        doctrineId: 'additive-category-with-computational-weak-cokernels',
+        roles: {
+            'weak-kernel': 'weak-cokernel',
+            'weak-kernel-object': 'weak-cokernel-object',
+            'weak-kernel-morphism': 'weak-cokernel-morphism',
+            'weak-kernel-lift': 'weak-cokernel-colift'
+        }
+    }
+});
+export const COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE = defineDoctrine({
+    id: 'additive-category-with-computational-weak-cokernels',
+    parents: ['additive-category'],
+    requiredRoles: [
+        'weak-cokernel',
+        'weak-cokernel-object',
+        'weak-cokernel-morphism',
+        'weak-cokernel-colift'
+    ],
+    dual: {
+        doctrineId: 'additive-category-with-computational-weak-kernels',
+        roles: {
+            'weak-cokernel': 'weak-kernel',
+            'weak-cokernel-object': 'weak-kernel-object',
+            'weak-cokernel-morphism': 'weak-kernel-morphism',
+            'weak-cokernel-colift': 'weak-kernel-lift'
+        }
+    }
+});
 export const PREABELIAN_DOCTRINE = defineDoctrine({
     id: 'preabelian-category',
     parents: ['additive-category'],
@@ -273,6 +311,8 @@ export const ALGEBRA_BASE_DOCTRINES = createDoctrineRegistry([
     CATEGORY_DOCTRINE,
     PREADDITIVE_DOCTRINE,
     ADDITIVE_DOCTRINE,
+    COMPUTATIONAL_WEAK_KERNEL_DOCTRINE,
+    COMPUTATIONAL_WEAK_COKERNEL_DOCTRINE,
     PREABELIAN_DOCTRINE,
     ABELIAN_DOCTRINE
 ]);

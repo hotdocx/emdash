@@ -284,6 +284,31 @@ K o U = H.
 The returned data retains each membership result, coefficients, remainder,
 progress, and reduction counts. It does not merely return a Boolean.
 
+### Implemented whole weak-kernel and lift result
+
+`src/v3_2/algebra_polynomial_weak_kernel.ts` now constructs a genuine
+finite-free weak kernel from the complete original-column syzygy result. Its
+selected object has one basis vector per final syzygy generator; its morphism
+uses those generators as columns into the original source; and the composed
+annihilation matrix is computed and required to be zero before the immutable
+record is returned. The record explicitly states that lifts are not claimed
+unique.
+
+`algebraPolynomialWeakKernelFactor` accepts a test map only when its target is
+the source of the selected map and the computed composite is zero. It divides
+each test column by the exact selected syzygy Gröbner basis, retains every
+quotient/remainder and progress event, assembles the quotient columns into the
+lift matrix, and requires the reconstructed composite to equal the original
+test map. Invalid limits, cancellation, foreign endpoints, non-annihilated
+tests, nonzero remainders, or failed reconstruction are distinct fail-closed
+boundaries.
+
+The new focused suite checks a nontrivial two-column factorization, zero-map
+and identity-map weak kernels, a rank-zero source, non-annihilated and foreign
+tests, invalid bounds, cancellation, field-only availability, exact zero
+remainders, immutability, and nonuniqueness metadata. Root typechecking,
+affected lint, and the combined module/weak-kernel `13/13` suite pass.
+
 ### Determinism and resource bounds
 
 Preserve the current module-engine conventions:
@@ -343,6 +368,47 @@ Every category operation receives:
 - categorical-program lowering;
 - deterministic runtime schema; and
 - focused direct and compiled-graph consumers.
+
+### Implemented finite-free category and capability result
+
+`src/v3_2/algebra_polynomial_weak_kernel_category.ts` now supplies the missing
+operational finite-free polynomial category. Objects are polynomial free
+modules and arrows are column maps with their existing identity, composition,
+and equality. Zero/addition/negation, rank-zero object, binary direct sum with
+all four biproduct maps, and block-diagonal arrow action make the facade
+operationally additive rather than merely labelling it so.
+
+The doctrine registry now contains the dual pair
+`additive-category-with-computational-weak-kernels` and
+`additive-category-with-computational-weak-cokernels`. The latter is metadata
+only in this goal; no weak-cokernel provider is claimed. The polynomial
+finite-free model qualifies the weak-kernel doctrine through all five
+inherited additive roles and four new roles.
+
+One primitive whole `weak-kernel` method owns the syzygy computation. Derived
+`weak-kernel-object` and `weak-kernel-morphism` methods call that owner, while
+`weak-kernel-lift` requests the whole result and invokes the retained
+factorization basis. Every category operation has a backend-neutral algebra
+operation, reference implementation, compiler lowering, schema, and direct
+consumer. Whole weak-kernel and lift categorical programs both compile and
+execute through the TypeScript reference engine. The tower ends at the
+computational-weak-kernel doctrine and explicitly does not reach pre-Abelian
+or Abelian structure.
+
+Focused reviewers cover qualification, every additive operation, biproduct
+beta and diagonal identity, derived owner/prerequisite planning, selected
+lifts, whole and lift graph execution, direct-sum identity/composition, and
+the non-self-dual doctrine metadata. Workspace validation, root typechecking,
+affected lint, diff hygiene, and the combined doctrine/module/weak-kernel/
+category suite pass `22/22`.
+
+The one required shared `check:ts` boundary run passed workspace validation,
+root typechecking, and full lint. Its consolidated suite reached completion
+and retained only the inherited active-kernel/article digest and source-line
+position failures already recorded at the additive baseline. No failure names
+the new module, weak-kernel, doctrine, category, compiler graph, or focused
+reviewer files. Those orthogonal pins are evidence, not part of this goal's
+mutation scope, and the long aggregate is not repeated for unchanged rows.
 
 This architecture subsumes the CAP/homalg division:
 
@@ -488,10 +554,10 @@ genuine capability consumer and must not be deferred behind documentation.
 | --- | --- | --- | --- |
 | `WKH-PLAN-0` | complete; checkpoint `3d18fa9` | additive baseline `c4baf61` | living plan, isolated branch/worktree, explicit scope/Git boundary, baseline evidence, persistent goal |
 | `WKH-AUDIT-1` | complete; checkpoint `3d18fa9` | plan | metadata-stub, original-column syzygy, lift, formal `HFiber`, operation/doctrine, and Singular owner audit with rejection signals |
-| `WKH-SYZYGY-2` | complete; checkpoint pending | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
-| `WKH-LIFT-3` | ready | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
-| `WKH-CATEGORY-4` | blocked by whole result | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
-| `WKH-SINGULAR-5` | blocked by native result | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
+| `WKH-SYZYGY-2` | complete; checkpoint `b4b8de6` | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
+| `WKH-LIFT-3` | complete; combined lift/category checkpoint pending | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
+| `WKH-CATEGORY-4` | complete; checkpoint pending | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
+| `WKH-SINGULAR-5` | ready | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
 | `WKH-FORMAL-6` | ready after owner probe | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
 | `WKH-BRIDGE-7` | blocked by native and formal rows | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
 | `WKH-CLOSE-8` | blocked by accepted/deferred rows | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
@@ -517,6 +583,8 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-011` | accepted | Generic identity/composition and existing Hom action remain runtime owners; new rules/unifiers require owner-position probes and narrow discriminators. |
 | `D-WKH-012` | accepted | Orthogonal strictness/cubical histories, historical main, print/release work, and broad aggregates remain out of scope. |
 | `D-WKH-013` | accepted after original-column probes | The selected syzygy carrier is the base `term-over-position` free module indexed by every original column, including zero columns. Pulled-back Schreyer relations plus one rewrite per original generator form the raw generating family; the final Gröbner basis is selected only after every raw and final relation reconstructs zero. |
+| `D-WKH-014` | accepted after lift probes | The weak-kernel morphism uses the final syzygy Gröbner-basis vectors as columns. Test lifts use direct division quotients against that same basis rather than transformed membership coefficients for the raw generating family; this keeps the lift source rank aligned with the selected weak-kernel object. |
+| `D-WKH-015` | accepted after category probes | TypeScript needed a genuine finite-free polynomial category facade before weak-kernel qualification. It is constructed as an additive category first, then extended by one whole weak-kernel operation and derived observations. Weak kernels and weak cokernels are dual doctrine descriptors, but only the field-polynomial weak-kernel side has an implementation in this goal. |
 
 ## Validation Matrix
 
