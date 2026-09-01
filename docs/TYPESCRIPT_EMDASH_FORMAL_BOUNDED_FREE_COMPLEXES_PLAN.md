@@ -324,13 +324,13 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | `FBC-PLAN-0` | in progress | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
 | `FBC-AUDIT-1A` | complete; checkpoint `1789918` | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
 | `FBC-FORMAL-COMPLEX-2A` | complete; checkpoint `ccc0499` | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
-| `FBC-FORMAL-MAP-3A` | complete; formal/computational checkpoint pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
-| `FBC-COMPUTE-4A` | complete; formal/computational checkpoint pending | formal orientation | whole polynomial complex and negative chain-condition results |
-| `FBC-SCHREYER-5A` | complete; formal/computational checkpoint pending | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
-| `FBC-CHAIN-MAP-6A` | complete; formal/computational checkpoint pending | complex | whole chain maps, identity, composition, and retained noncommuting squares |
-| `FBC-OPERATIONS-7A` | pending | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
+| `FBC-FORMAL-MAP-3A` | complete; checkpoint `3a934c7` | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
+| `FBC-COMPUTE-4A` | complete; checkpoint `3a934c7` | formal orientation | whole polynomial complex and negative chain-condition results |
+| `FBC-SCHREYER-5A` | complete; checkpoint `3a934c7` | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
+| `FBC-CHAIN-MAP-6A` | complete; checkpoint `3a934c7` | complex | whole chain maps, identity, composition, and retained noncommuting squares |
+| `FBC-OPERATIONS-7A` | complete; operations/category checkpoint pending | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
 | `FBC-BRIDGE-8A` | pending | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
-| `FBC-CATEGORY-9A` | pending | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
+| `FBC-CATEGORY-9A` | complete; operations/category checkpoint pending | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
 | `FBC-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
@@ -364,6 +364,9 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-021` | accepted during Schreyer conversion | Resolution free-module/differential order, maximum length, completeness, and the original whole resolution are retained, while every adjacent composite is recomputed through the generic complex owner. |
 | `D-FBC-022` | accepted during chain maps | A whole chain map retains one component per degree and every computed square; its status also requires both endpoints to be valid complexes. |
 | `D-FBC-023` | accepted during chain maps | Identity and composition are constructed componentwise and re-enter the common whole validator; no privileged Boolean-only path or manually supplied square exists. |
+| `D-FBC-024` | accepted during operation exposure | Complex construction, Schreyer conversion, and chain-map validation are separate typed whole operations; serializers retain terms, maps, composites/squares, negative status, and Schreyer metadata. |
+| `D-FBC-025` | accepted during graph validation | Direct and graph execution agree on the complete bytes of a deliberately invalid complex, proving that graph lowering does not project away the offending composite. |
+| `D-FBC-026` | accepted during category compatibility | Polynomial complexes and validated chain maps form a direct computable category at the plain `Category` doctrine; one constructor/reinterpretation/compiler lowering targets the native chain-map operation without a formal category or homology claim. |
 
 ## Initial Formal Owner Audit Result
 
@@ -441,6 +444,24 @@ tests cover valid/invalid complexes, nonzero composite visibility, Schreyer
 metadata, identity/scalar/composition, and a negative square. Eleven directly
 affected polynomial presentation tests, root typecheck, and affected lint
 pass.
+
+## Operations, Graph, And Category Result
+
+`src/v3_2/algebra_polynomial_bounded_complex_reference_operations.ts` exposes
+whole complex construction, Schreyer conversion, and chain-map validation with
+separate schemas and reference algorithms. Canonical serializers retain every
+term rank/order, differential, adjacent composite, square side, status, and
+Schreyer completion field. A deliberately invalid complex serializes
+byte-for-byte identically through direct and graph execution.
+
+`src/v3_2/algebra_polynomial_bounded_complex_category.ts` supplies the direct
+computable category over one polynomial ring. Objects are bounded free
+complexes; morphisms are whole chain maps; identity/composition reuse the
+common validated owners. The model remains at doctrine `category`, records one
+complex constructor and direct reinterpretation, and lowers chain-map
+validation to the native graph operation. Focused tests confirm categorical
+identity/composition, direct/compiled byte agreement, the selected primitive
+method, and retained reinterpretation rule.
 
 ## Validation Policy
 
