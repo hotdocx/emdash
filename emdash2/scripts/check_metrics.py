@@ -24,6 +24,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
     Path("emdash3_2_finite_families.lp"),
+    Path("emdash3_2_finite_family_sums.lp"),
     Path("emdash3_2_finite_limits.lp"),
     Path("emdash3_2_commutative_algebra.lp"),
     Path("emdash3_2_commutative_algebra_derived_laws.lp"),

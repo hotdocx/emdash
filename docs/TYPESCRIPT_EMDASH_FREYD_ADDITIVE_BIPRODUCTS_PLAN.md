@@ -75,6 +75,21 @@ Focused baseline checks are green for:
 
 No repository-wide aggregate is part of the initial baseline.
 
+### Initial owner-audit result
+
+The active product and terminal classifiers have no exposed constructors and
+there are no existing concrete `BinaryProducts` or `TerminalObject` instances
+to reuse. A Freyd instance will therefore require narrow stable whole
+assembly, with its point projections, pairing, zero arrows, and contractions
+connected to constructed semantic operations. This does not alter the central
+architecture: the coproduct half remains derived from product computation and
+preadditivity.
+
+The generic additive derivation is feasible with the current interfaces. Its
+first missing reusable lemmas are abelian cancellation/idempotent-zero and
+preadditive zero-composition paths. Those belong in the later generic additive
+module and require no new runtime rule.
+
 ## Central Architecture: Products Become Biproducts
 
 Do not implement a parallel primitive coproduct calculus. The active kernel
@@ -159,6 +174,18 @@ operation. Do not install broad arithmetic or Sigma-projection rewrites.
 
 Required boundaries include zero-left, zero-right, successor, rank-one, and
 nontrivial mixed lengths. Distinct families must not collapse.
+
+### Implemented finite-family result
+
+`emdash3_2_finite_family_sums.lp` now provides transparent
+`finite_family_append`, `finite_family_take_left`, and
+`finite_family_drop_left`. Nat-inductive theorem paths prove both
+split-after-append equations, append-after-split reconstruction, and
+right-empty append. Constructor computations are inherited from the existing
+`nat_elim`/`FiniteFamily` owners; the module adds no rewrite or unification
+rule. Its focused implementation/reviewer checks pass, the strict LHS audit is
+empty, and the reviewer retains a noncollapse boundary. The warning-enabled
+predecessor and candidate each report 1,274 diagnostics.
 
 ## Vector And Matrix Block Calculus
 
@@ -448,9 +475,9 @@ consequences rather than replacing it.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FAB-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed preadditive checkpoint `c3bb869` | living plan, isolated branch/worktree, clean focused baseline, Git and scope limits, persistent goal |
-| `FAB-AUDIT-1A` | ready | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
-| `FAB-FAMILY-2A` | blocked by audit | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
-| `FAB-BLOCK-3A` | blocked by family layer | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
+| `FAB-AUDIT-1A` | complete; first semantic checkpoint pending | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
+| `FAB-FAMILY-2A` | complete; first semantic checkpoint pending | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
+| `FAB-BLOCK-3A` | ready | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
 | `FAB-FREE-4A` | blocked by block layer | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
 | `FAB-PRESENTATION-5A` | blocked by block/free layers | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
 | `FAB-DESCENT-6A` | blocked by presentation layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
@@ -481,6 +508,8 @@ evidence for an opaque axiom.
 | `D-FAB-012` | accepted | Warning counts are diagnostic evidence, not a semantic veto; every new overlap still requires classification. |
 | `D-FAB-013` | accepted | Orthogonal path-cubical/global-strictness histories and historical `main` are excluded from the baseline. |
 | `D-FAB-014` | accepted | No unrelated repository-wide aggregate is part of the focused implementation loop. |
+| `D-FAB-015` | accepted after owner audit | Primitive product/terminal classifiers require narrow stable concrete assembly; every exposed observation must still route to constructed Freyd semantics. |
+| `D-FAB-016` | accepted after family probe | Transparent left-recursive append/split operations suffice; no new runtime/unification clause or alternative finite-family carrier is needed. |
 
 ## Validation Matrix
 
