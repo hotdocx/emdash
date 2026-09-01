@@ -45,6 +45,7 @@ export * from './algebra_polynomial_bounded_complex';
 export * from './algebra_polynomial_bounded_complex_reference_operations';
 export * from './algebra_polynomial_bounded_complex_category';
 export * from './algebra_polynomial_freyd_category';
+export * from './algebra_polynomial_freyd_cokernel';
 export * from './algebra_polynomial_weak_kernel';
 export * from './algebra_polynomial_weak_kernel_category';
 export * from './algebra_polynomial_weak_kernel_singular';

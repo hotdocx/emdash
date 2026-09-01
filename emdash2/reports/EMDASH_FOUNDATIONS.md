@@ -3318,6 +3318,22 @@ associativity and congruence. The native polynomial implementation performs
 the same construction on the concatenated difference matrix and verifies the
 ordinary cospan compatibility and both reconstructed test maps.
 
+At the operational Freyd level, cokernels require no weak-kernel solve. For a
+presentation morphism `f : P -> Q`, the target relations are extended by the
+columns of `f`; the projection datum is the ambient identity. A test colift
+retains the explicit agreement witnessing that its composite with `f` is zero,
+uses the same ambient map on the enlarged presentation, and verifies
+reconstruction. Any competing colift that reconstructs the test is compared
+to the selected one by target-factorization congruence, establishing
+uniqueness in the quotient rather than literal matrix equality.
+
+The current formal quotient has a deliberate remaining boundary: explicit
+agreements map to paths in the set-truncated Freyd Hom, but no converse
+decoder from an arbitrary quotient path to a relation-factorization witness
+is active. Since that witness is computational input to the induced colift,
+the formal implementation keeps witness-enriched operations and does not
+postulate choice or a closed quotient-level cokernel package.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation

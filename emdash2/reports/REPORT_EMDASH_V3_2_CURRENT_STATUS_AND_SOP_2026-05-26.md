@@ -5464,6 +5464,15 @@ bridge replays whole/lift computation and permits explicit adoption of named
 ring-wide formal factor provider and the Freyd-to-Abelian theorem remain later
 capability-indexed work.
 
+The next native construction now computes unconditional polynomial Freyd
+cokernels by adjoining morphism columns to target relations. It retains the
+zero-composite agreement consumed by each colift and checks annihilation,
+reconstruction, and quotient uniqueness of competing colifts. Formal raw
+presentation/projection data are the next consumer; a closed quotient-level
+universal package remains gated because the current truncation API maps raw
+agreement to equality but does not decode arbitrary quotient equality back to
+the witness required by the colift algorithm.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its
