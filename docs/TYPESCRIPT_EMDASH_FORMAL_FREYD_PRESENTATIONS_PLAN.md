@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-FREYD-PRESENTATIONS`
 
-Status: active living plan on a dedicated branch/worktree; categorical owner
-and matrix-law audits pending.
+Status: implementation complete on a dedicated branch/worktree; final
+conformance/documentation checkpoint pending.
 
 Baseline: `85f459a5e6f7f20c4451c34ad14c5b0616090c12`
 
@@ -362,17 +362,17 @@ one opaque assumption.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `FRP-PLAN-0` | in progress | completed bounded complexes at `85f459a` and reviewed categorical continuation | living plan, isolated branch/worktree, exact baseline, layered architecture, validation, Git limits |
-| `FRP-AUDIT-1A` | complete; categorical checkpoint pending | plan | matrix-law and category-head owner probes, quotient-Hom orientation, capability boundary |
-| `FRP-FREE-2A` | complete with stable-pointwise boundary; categorical checkpoint pending | audit | matrix identity/laws and formal/direct finite-free category |
+| `FRP-PLAN-0` | complete; checkpoint `86c84d5` | completed bounded complexes at `85f459a` and reviewed categorical continuation | living plan, isolated branch/worktree, exact baseline, layered architecture, validation, Git limits |
+| `FRP-AUDIT-1A` | complete; checkpoint `b4973c6` | plan | matrix-law and category-head owner probes, quotient-Hom orientation, capability boundary |
+| `FRP-FREE-2A` | complete with stable-pointwise boundary; checkpoint `b4973c6` | audit | matrix identity/laws and formal/direct finite-free category |
 | `FRP-RAW-3A` | complete computationally; explicit formal class descent deferred | finite-free category | raw presentation identity/composition/addition and congruence compatibility |
-| `FRP-AGREE-4A` | complete with generic category operations; categorical checkpoint pending | raw morphisms | fixed-endpoint morphism-agreement categories with derived identity/composition |
-| `FRP-QUOTIENT-HOM-5A` | complete; categorical checkpoint pending | agreement category | groupoidified and `0`-truncated quotient Hom objects and class maps |
+| `FRP-AGREE-4A` | complete with generic category operations; checkpoint `b4973c6` | raw morphisms | fixed-endpoint morphism-agreement categories with derived identity/composition |
+| `FRP-QUOTIENT-HOM-5A` | complete; checkpoint `b4973c6` | agreement category | groupoidified and `0`-truncated quotient Hom objects and class maps |
 | `FRP-FREYD-6A` | complete as category/Hom skeleton; explicit raw-class identity/composition descent deferred | quotient Homs | formal Freyd presentation category with descended identity/composition and selected preadditivity |
-| `FRP-ELEMENTS-7A` | complete for raw-class agreement and direct representable comparison; categorical checkpoint pending | Freyd category | representable element carrier, membership-to-equality bridge, direct comparison |
-| `FRP-COMPUTE-8A` | complete; categorical checkpoint pending | raw/congruence owners | whole operations, direct category, compiler/graph agreement, deterministic artifact |
-| `FRP-ABELIAN-GATE-9A` | complete as explicit non-Abelian capability boundary; categorical checkpoint pending | Freyd category | explicit weak-kernel/coherence interface and supported-polynomial feasibility probe; no unconditional Abelian claim |
-| `FRP-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
+| `FRP-ELEMENTS-7A` | complete for raw-class agreement and direct representable comparison; checkpoint `b4973c6` | Freyd category | representable element carrier, membership-to-equality bridge, direct comparison |
+| `FRP-COMPUTE-8A` | complete; checkpoint `b4973c6` | raw/congruence owners | whole operations, direct category, compiler/graph agreement, deterministic artifact |
+| `FRP-ABELIAN-GATE-9A` | complete as explicit non-Abelian capability boundary; checkpoint `b4973c6` | Freyd category | explicit weak-kernel/coherence interface and supported-polynomial feasibility probe; no unconditional Abelian claim |
+| `FRP-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Every completed row requires focused positive/negative
@@ -404,6 +404,9 @@ tests, proportional validation, and a local checkpoint.
 | `D-FRP-020` | accepted during computation | The direct TypeScript Freyd category uses computed target-factorization congruence as morphism equality; raw identity/composition revalidate through whole relation-witness computation. |
 | `D-FRP-021` | accepted during representable comparison | A Freyd element is a raw morphism from the relation-free rank-one presentation; element equality is exactly presentation-morphism congruence and matches module membership in focused examples. |
 | `D-FRP-022` | accepted at the Abelian gate | Polynomial rings with operational field coefficients expose a Gröbner/syzygy weak-kernel capability record whose `claimsAbelianStructure` field is false; the later theorem/instance remains separate. |
+| `D-FRP-023` | accepted during conformance | Both formal owners and reviewers are registered; focused warning checks report zero local diagnostics after inferred-pattern cleanup. |
+| `D-FRP-024` | accepted during live conformance | A CAS-computed representative-agreement Core law checks against the active Freyd module and is exactly the premise consumed by the formal groupoidification/truncation path. |
+| `D-FRP-025` | accepted during conformance | Health is synchronized as an honest no-check 340-target snapshot under the established scoped-validation policy. |
 
 ## Owner Audit And Selected Formal Boundary
 
@@ -453,6 +456,31 @@ coefficients and identifies the Gröbner/syzygy basis, but explicitly records no
 Abelian claim. It is readiness data for the next capability-indexed theorem,
 not an instance of it.
 
+## Conformance Result
+
+The finite-free and Freyd-presentation owners and both reviewers are
+registered. Quiet focused checks pass. Warning-enabled checking reports no
+diagnostic located in either new module after reconstructible variables were
+replaced by `_`; strict LHS audits are clean.
+
+Formal reviewers check the finite-free object/Hom surface, rigid identity and
+composition column observations, agreement category, groupoidified and
+`0`-truncated Hom objects, explicit agreement paths, Freyd category Hom
+surface, and representable elements. Live emitted-Core checking accepts a
+CAS-computed target-factorization law against the active Freyd module; that
+law is the exact input to the checked quotient-path constructor.
+
+Standing current-status, Foundations, canonical-syntax, report-index, and
+health documentation records the primary categorical architecture and all
+nonclaims. The strict catalog is synchronized. Health records 340 maintained
+owner/reviewer files as an honest no-check source snapshot; no repository-wide
+timing or aggregate claim is introduced.
+
+The next formal dependency remains explicit: construct class-level identity,
+composition, zero, and addition on quotient Homs, then promote preadditivity;
+only afterward should the weak-kernel capability feed a constructive
+weak-kernel-to-Abelian theorem.
+
 ## Validation Policy
 
 - Documentation-only changes receive exact diff, link, registry, and Markdown
@@ -497,6 +525,7 @@ and registries are synchronized; and every bounded tranche is checkpointed.
 
 ```text
 finite-free and Freyd presentation categories
+  -> explicit quotient-class identity/composition and preadditivity
   -> computable weak-kernel/coherence capability
   -> capability-indexed Abelian structure
   -> complexes of presented modules

@@ -2,6 +2,16 @@
 
 Date: 2026-09-01
 
+`../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the active
+categorical continuation. It makes the Freyd/presentation category primary:
+finite-free matrix Homs feed raw presentation maps; fixed-endpoint agreement
+categories are groupoidified and `0`-truncated to quotient Hom sets; elements
+are derived representably from the rank-one free presentation. The direct
+TypeScript category uses computed target-factorization congruence and lowers
+through the existing compiler. Explicit raw-class identity/composition descent,
+preadditivity, and capability-indexed Abelian structure remain named gates;
+there is no unconditional Abelian claim for arbitrary `CommRing`.
+
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
 completed cross-layer continuation from individual matrix squares to whole
 bounded polynomial free complexes and chain maps. Boundary-indexed recursive

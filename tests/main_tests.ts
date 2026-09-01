@@ -285,6 +285,7 @@ import './v3_2_algebra_polynomial_bounded_complex_tests';
 import './v3_2_algebra_polynomial_bounded_complex_reference_tests';
 import './v3_2_algebra_polynomial_bounded_complex_category_tests';
 import './v3_2_algebra_polynomial_freyd_category_tests';
+import './v3_2_algebra_formal_freyd_conformance_tests';
 import './v3_2_algebra_presented_module_tests';
 import './v3_2_algebra_presented_module_map_tests';
 import './v3_2_algebra_presented_module_base_change_tests';

@@ -271,6 +271,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   first exact square, and a tail that recursively stores later components and
   squares. Neither module claims presented-module quotients, a formal complex
   category, exactness, or homology.
+- `emdash3_2_commutative_algebra_finite_free_category.lp`: downstream
+  finite-free matrix-category facade. Objects are ranks and Homs are path
+  categories of column matrices. Generic category identity/composition remain
+  runtime owners; rigid pointwise matrix heads meet them through proof-time
+  usability rules and expose constructor-level columns. Broad runtime category
+  rules and a body-unfolded whole transparent-composition comparison are
+  rejected boundaries.
+- `emdash3_2_commutative_algebra_freyd_presentations.lp`: homwise quotient and
+  Freyd-category skeleton. Raw presentation morphisms and target-factorization
+  agreements form fixed-endpoint categories; existing `Groupoidify` and
+  `0`-truncation produce higher and ordinary quotient Homs. The Freyd category
+  has presentation objects and those Hom sets; elements are represented by Hom
+  from the relation-free rank-one presentation. Explicit raw-class descent of
+  generic Freyd identity/composition, preadditivity, weak kernels, and Abelian
+  structure remain separate gates.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5229,8 +5244,8 @@ After integration of the completed TypeScript-elaborator, PSSS,
 internal-laxity, profiled-Gray, WalkingEnd--Circle, groupoidification,
 monad/Cartesian, cubical/property-profile, pullback, and
 slice-dependent-product histories, plus the rule-free finite-presentation,
-presentation-morphism, and bounded-free-complex/chain-map extensions, the
-active kernel warning boundary remains
+presentation-morphism, bounded-free-complex/chain-map, and finite-free/Freyd
+presentation extensions, the active kernel warning boundary remains
 1,274 diagnostics: 1,117 unjoinable critical pairs and 157
 replaceable-pattern advisories. Downstream module-specific additions and
 projection-order classifications remain in their dated implementation plans;
@@ -5241,15 +5256,15 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 336 maintained owner/reviewer files. It records no exit
+source snapshot over 340 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
 90-second-per-target gates in their owning tranches. The source-metrics
 snapshot is
-`sha256:ededc8f317d761290978f14cfeb2471c82bcac17d33a53f66efc47b88abda4c8`
+`sha256:75fa60a58c5433ca3312d323cef0ac9154cb8d94d9a3b9cbf3234029f39a48ba`
 and the check-content snapshot is
-`sha256:dc5536942c7c22fb930215cb1c5bdf2695d53666e8dc5f6186adb74e8ad98d95`.
+`sha256:e2889d195dbfd6fe3f75557beac504fffc674f65a8f15beaadfd10208e6c9cd7`.
 The newly registered finite-module owner and reviewer pass their focused
 bounded checks, its strict LHS audit is empty, and emitted membership,
 syzygy, and adjacent-zero Core targets pass a live Lambdapi probe. The
@@ -5265,6 +5280,12 @@ pass their focused checks with zero local warning diagnostics and empty strict
 LHS audits. Live emitted-Core checking accepts the selected adjacent-zero and
 component-square laws; whole negative composites remain TypeScript
 observations. These results add no quotient, exactness, or homology claim.
+The finite-free and Freyd-presentation owners plus their reviewers pass their
+focused checks with zero local warning diagnostics and strict LHS findings.
+The formal Hom quotient uses existing groupoidification and `0`-truncation;
+explicit agreement paths and representable elements check. Generic Freyd
+identity/composition remain intentionally unconnected to raw classes, so no
+preadditive or Abelian claim is inferred.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

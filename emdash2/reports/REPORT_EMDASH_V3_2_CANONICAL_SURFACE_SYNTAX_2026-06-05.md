@@ -850,6 +850,29 @@ selected components and adopted as exact laws; they are not independent
 hand-written coherence inputs. Do not describe these packages as complexes of
 quotient modules, an Abelian category, exact resolutions, or homology.
 
+For finite-free and Freyd presentation categories, comments and examples may
+write
+
+```text
+Free_R                     : finite-free matrix category
+[A : R^r -> R^g]           : presentation object
+Agree(P,Q)                 : raw maps and target-factorization arrows
+RawHom(P,Q)                : groupoidified agreement category
+Hom_Freyd(P,Q)             : 0-truncated RawHom(P,Q)
+El(P) = Hom_Freyd(R,P)     : representable element carrier.
+```
+
+The literal owners are `CommRingFiniteFree_cat`,
+`CommRingPresentationAgreement_cat`, `CommRingFreydRawHomGroupoid`,
+`CommRingFreydHomSet`, `CommRingFreydPresentation_cat`, and
+`CommRingFreydElement`. Generic category identity/composition remain runtime
+owners and compare with rigid finite-free matrix observations only at proof
+time. `RawHom` retains agreement/syzygy paths; `Hom_Freyd` is its ordinary set
+truncation. `El(P)` is a representable specialization rather than an
+independent quotient-element type. Do not print an unconditional Abelian
+category, explicit raw-class composition descent, kernels/cokernels, or
+homology at this boundary.
+
 For the separately promoted direct big-affine topology, comments and examples
 may write
 

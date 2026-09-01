@@ -3157,6 +3157,83 @@ TypeScript direct category and compiler operate at the plain `Category`
 doctrine; kernels, cokernels, exactness, homology, presented-module complexes,
 and Čech cohomology remain later layers.
 
+### Finite-Free And Freyd Presentation Categories
+
+The categorical foundation treats presentation matrices as primary and
+quotient carriers as derived. For a commutative ring `R`, the finite-free
+category has
+
+```text
+Obj(Free_R) = Nat
+Hom_Free_R(n,m) = Path_cat(Matrix_R(m,n)).
+```
+
+Generic category identity and composition remain the whole runtime owners.
+Rigid matrix heads expose the familiar identity columns and columnwise
+composition and meet those generic operations at proof time. A direct runtime
+rewrite of category composition to the transparent Nat-recursive matrix body
+was rejected after bounded probes timed out. Likewise, no unsupported whole
+path between the rigid and transparent matrix representations is asserted.
+
+For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
+an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
+with
+
+```text
+R_Q o H = F_f-F_g.
+```
+
+Different `H` witnesses and their syzygies remain visible. Applying the
+existing category-indexed groupoidification gives
+
+```text
+RawHomGroupoid(P,Q) = Groupoidify(Agree(P,Q)),
+```
+
+and the ordinary quotient carrier is
+
+```text
+FreydHomSet(P,Q) = Trunc_0(RawHomGroupoid(P,Q)).
+```
+
+Every explicit agreement arrow becomes a path under the groupoidification
+unit and hence equality after truncation. The truncation evidence proves the
+ordinary Hom carrier is a set without erasing the separately retained higher
+groupoid.
+
+The formal category
+
+```text
+CommRingFreydPresentation_cat(R)
+```
+
+has presentations as objects and `Path_cat(FreydHomSet(P,Q))` as Homs. This is
+the selected long-term module architecture. The current category head supplies
+generic identity and composition, but their explicit comparison with classes
+of raw identity/composite matrices has not yet been constructed. Hom addition,
+biproducts, and preadditivity remain gated by that class-level descent.
+
+Ordinary elements are representable. Let `FreeOne_R` be the rank-one
+presentation with no relations. Then
+
+```text
+El(P) = FreydHomSet(FreeOne_R,P).
+```
+
+A raw map from `FreeOne_R` is exactly a vector in the generator space, and its
+congruence with another such map is exactly presentation agreement. Thus the
+element action-groupoid quotient is a specialization of the generic Freyd Hom,
+not a second module type.
+
+The TypeScript direct Freyd category computes raw identities/composites and
+uses target-relation membership as categorical equality. Its representable
+elements agree with canonical module membership, and its compiler lowers raw
+morphism construction to the whole relation-witness operation. A separate
+weak-kernel capability records supported Gröbner/syzygy computation but does
+not itself claim Abelian structure. The later theorem must derive Abelian
+structure from explicit weak-kernel/coherence evidence; no such property is
+global for arbitrary `CommRing`.
+
 ### Presented Affine Basic Opens And Elementwise Base Change
 
 The downstream Zariski module supplies geometric presentation data without
@@ -7026,6 +7103,12 @@ kernel and one-way library vocabulary.
 | whole bounded free complex | `CommRingBoundedFreeComplex` / `comm_ring_bounded_free_complex_succ` |
 | recursive chain-map tail | `CommRingFreeChainMapTail` / `comm_ring_free_chain_map_tail_cons` |
 | whole bounded free chain map | `CommRingBoundedFreeChainMap` / `comm_ring_bounded_free_chain_map_succ` |
+| finite-free matrix category | `CommRingFiniteFree_cat R` |
+| rigid finite-free identity/composition matrices | `comm_ring_finite_free_id_matrix` / `comm_ring_finite_free_comp_matrix` |
+| fixed-endpoint raw-morphism agreement category | `CommRingPresentationAgreement_cat R P Q` |
+| higher and set-truncated Freyd Homs | `CommRingFreydRawHomGroupoid R P Q` / `CommRingFreydHomSet R P Q` |
+| formal Freyd presentation category | `CommRingFreydPresentation_cat R` |
+| representable Freyd element carrier | `CommRingFreydElement R P` |
 | selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
 | retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
 | finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |
