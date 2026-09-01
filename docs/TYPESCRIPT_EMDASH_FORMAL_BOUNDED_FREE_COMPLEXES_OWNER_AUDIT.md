@@ -4,8 +4,7 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-BOUNDED-FREE-COMPLEXES`
 
-Status: completed complex-tail prerequisite audit; chain-map-tail audit remains
-in the active implementation plan
+Status: completed complex-tail and independent-tail chain-map owner audit
 
 ## Audited Authorities
 
@@ -67,19 +66,19 @@ The first stored law is now the genuine adjacent condition `d1 o d2 = 0`.
 The revised classifier and positive-length constructor/projections pass in the
 same probe.
 
-## Chain-Map Audit Boundary
+## Chain-Map Audit Result
 
-The next formal probe must recurse simultaneously over two already-selected
-tails. At each successor it extracts both next ranks and differentials, binds
-the next component, stores the existing `CommRingChainMapSquare`, and recurses
-over both rest projections.
+The second owner-position probe successfully recurses simultaneously over two
+already-selected tails. At each successor it extracts both next ranks and
+differentials, binds the next component, stores the existing
+`CommRingChainMapSquare`, and recurses over both rest projections. Transparent
+nil/cons and next-map/law/rest projections elaborate without a stable schema.
 
-Transparent tail projections are the selected starting point. If their
-dependent use inside the Nat-eliminator motive is conversion-heavy, a narrow
-stable schema/projection owner may be introduced. A jointly aligned chain-map
-spine is a second fallback only if it retains recoverable whole source and
-target complex data. Flat arrays and manually authored square fields are not
-acceptable fallbacks.
+The whole map is a matrix at length zero. At positive length it stores `F0`,
+`F1`, the first differential square, and the recursive tail starting at `F1`.
+This whole package and its component projections also pass. The jointly
+aligned-spine fallback is therefore rejected as unnecessary; source and target
+complexes remain independently reusable whole terms.
 
 ## Computational Alignment
 

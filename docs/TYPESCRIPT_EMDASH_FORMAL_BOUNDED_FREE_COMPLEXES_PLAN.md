@@ -323,8 +323,8 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | --- | --- | --- | --- |
 | `FBC-PLAN-0` | in progress | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
 | `FBC-AUDIT-1A` | complete; checkpoint `1789918` | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
-| `FBC-FORMAL-COMPLEX-2A` | complete; formal-complex checkpoint pending | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
-| `FBC-FORMAL-MAP-3A` | pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
+| `FBC-FORMAL-COMPLEX-2A` | complete; checkpoint `ccc0499` | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
+| `FBC-FORMAL-MAP-3A` | complete; formal-map checkpoint pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
 | `FBC-COMPUTE-4A` | pending | formal orientation | whole polynomial complex and negative chain-condition results |
 | `FBC-SCHREYER-5A` | pending | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
 | `FBC-CHAIN-MAP-6A` | pending | complex | whole chain maps, identity, composition, and retained noncommuting squares |
@@ -358,6 +358,8 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-015` | accepted after owner probe | A zero-length complex is just its degree-zero rank; a positive-length complex stores `rank0`, `rank1`, `d1`, then a `ChainTail` whose first stored law is the genuine `d1 o d2 = 0`. |
 | `D-FBC-016` | accepted after owner probe | The transparent `ChainTail` Nat eliminator, nil/cons constructors, successor rank/differential/law/rest projections, and positive-length complex package all pass quietly without a stable head, rewrite, or unifier. |
 | `D-FBC-017` | accepted during formal promotion | Complex and chain-tail owners remain transparent in a downstream rule-free module; visible two-differential construction and all selected projections compute without a stable facade. |
+| `D-FBC-018` | accepted after chain-map probe | `CommRingFreeChainMapTail` recurses over two independently packaged complex tails; the aligned-spine fallback is unnecessary. |
+| `D-FBC-019` | accepted after chain-map probe | A positive-length whole chain map stores `F0`, `F1`, the first square, then a recursive tail starting at `F1`; zero length is exactly one matrix between the two degree-zero ranks. |
 
 ## Initial Formal Owner Audit Result
 
@@ -397,6 +399,22 @@ Lambdapi checking. The separate chain-map owner-position probe now also
 confirms that recursion over two independently packaged tails and the whole
 positive-length `F0/F1/first-square/rest` package elaborate without the
 aligned-spine fallback.
+
+## Initial Formal Chain-Map Result
+
+`emdash2/emdash3_2_commutative_algebra_bounded_free_chain_maps.lp` promotes
+the successful two-tail motive. At every tail successor it extracts the next
+source/target ranks and differentials from the already-packaged complexes,
+binds the next component, stores `CommRingChainMapSquare`, and recurses on both
+rest projections. Nil/cons plus next-map, law, and rest projections are
+transparent.
+
+`CommRingBoundedFreeChainMap` is a single matrix at length zero. At positive
+length it retains `F0`, `F1`, the first square over `d1/e1`, and the remaining
+map tail beginning at `F1`. The reviewer constructs a one-differential map,
+exposes both components, and confirms that distinct selected `F0` matrices
+remain runtime-distinct. Owner and reviewer pass quiet bounded checking with
+no stable head, rule, unifier, or duplicated source/target spine.
 
 ## Validation Policy
 
