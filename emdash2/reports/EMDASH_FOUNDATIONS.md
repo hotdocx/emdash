@@ -3200,6 +3200,15 @@ it by the relation matrix retained by the outer raw presentation map, so its
 new factorization square is derived from the stored outer square rather than
 provided separately.
 
+Composition and addition descend first to the higher raw Hom groupoids. Fixed
+raw operands act through whole agreement-category functors; whole transfors
+record variation of the fixed operand, and the existing groupoidification
+extension turns those into paths between functions. Nested `0`-truncation
+recursion then gives ordinary quotient-Hom operations with the expected raw-
+class computations. Generic Freyd identity and composition retain the global
+category normal forms and meet these semantic operations through a sequential
+rigid-head usability bridge.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

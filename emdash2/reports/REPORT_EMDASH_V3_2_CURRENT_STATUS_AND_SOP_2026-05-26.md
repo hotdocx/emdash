@@ -315,9 +315,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreements form fixed-endpoint categories; existing `Groupoidify` and
   `0`-truncation produce higher and ordinary quotient Homs. The Freyd category
   has presentation objects and those Hom sets; elements are represented by Hom
-  from the relation-free rank-one presentation. Explicit raw-class descent of
-  generic Freyd identity/composition, preadditivity, weak kernels, and Abelian
-  structure remain separate gates.
+  from the relation-free rank-one presentation. This skeleton itself stops
+  before operations; the downstream operations/usability modules now supply
+  raw-class descent and generic identity/composition comparison. Full
+  preadditive laws, weak kernels, and Abelian structure remain separate gates.
+- `emdash3_2_commutative_algebra_freyd_operations.lp`: whole quotient-operation
+  layer. Fixed raw operands act by whole functors on agreement categories;
+  whole representation transfors feed groupoidification extension; nested
+  `0`-truncation recursion gives composition and addition on ordinary quotient
+  Homs. Raw-class betas compute. Direct inner fapp1 runtime action times out and
+  is proof-time; two outer runtime actions add six classified identity
+  overlaps.
+- `emdash3_2_commutative_algebra_freyd_usability.lp`: sequential usability
+  bridge. Generic Freyd identity/composition first meet rigid heads through
+  typed proof-time unifiers; only afterward do rigid-head runtime folds expose
+  the raw identity class and descended composition. No rule is headed by
+  generic `id` or `comp_fapp0`.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5288,7 +5301,7 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 350 maintained owner/reviewer files. It records no exit
+source snapshot over 354 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
@@ -5331,6 +5344,11 @@ The matrix-subtractive and presentation-agreement owners plus the focused
 agreement reviewer pass as well. Agreement now has explicit equivalence,
 additive, and pre/postcomposition operations; both new strict LHS audits are
 empty and no local warning family is introduced.
+The Freyd operations/usability owners and both focused reviewers pass. Raw and
+truncated composition/addition compute on classes, and named paths connect
+generic category identity/composition to their semantic operations. The two
+outer fapp1 action rules contribute six classified identity overlaps; the two
+inner action comparisons are proof-time and add no runtime family.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

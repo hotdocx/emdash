@@ -41,6 +41,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_presentation_additive_operations.lp"),
     Path("emdash3_2_commutative_algebra_presentation_agreement_operations.lp"),
     Path("emdash3_2_commutative_algebra_freyd_presentations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_operations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_usability.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_laurent.lp"),

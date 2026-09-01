@@ -325,10 +325,10 @@ to emit proof certificates for all internal algorithms.
 | `FPD-OWNER-1A` | complete; checkpoint `8a053ae` | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
 | `FPD-MATRIX-2A` | complete; checkpoint `75783e5` | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
 | `FPD-RAW-3A` | complete; checkpoint `75783e5` | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
-| `FPD-AGREE-4A` | complete; checkpoint pending | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
-| `FPD-DESCENT-5A` | active | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
-| `FPD-FREYD-6A` | blocked on descent | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
-| `FPD-PREADDITIVE-7A` | blocked on Freyd operations | class operations | smallest checked homwise preadditive package; no biproduct/additive claim |
+| `FPD-AGREE-4A` | complete; checkpoint `f41e8db` | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
+| `FPD-DESCENT-5A` | complete; checkpoint pending | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
+| `FPD-FREYD-6A` | complete; checkpoint pending | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
+| `FPD-PREADDITIVE-7A` | active | class operations | smallest checked homwise preadditive package; no biproduct/additive claim |
 | `FPD-CONFORMANCE-8A` | blocked on formal consumer | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
 | `FPD-CLOSE-9A` | blocked on active rows | all accepted/deferred rows | registration, reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
@@ -360,6 +360,11 @@ opaque axiom should replace it.
 | `D-FPD-018` | accepted after raw-additive probe | Raw presentation zero and addition combine both stored matrices; their square laws are derived from matrix zero/bilinearity and the input square laws. |
 | `D-FPD-019` | accepted after subtractive probe | Matrix inverse uniqueness derives involutive negation, negation/subtraction algebra, subtraction chaining, and preservation of subtraction by both composition arguments. |
 | `D-FPD-020` | accepted after agreement probe | Target-factorization agreement is explicitly reflexive, symmetric, transitive, additive, and stable under arbitrary precomposition and relation-preserving postcomposition. |
+| `D-FPD-021` | accepted after descent split | Direct runtime `fapp1_fapp0` for fixed raw agreement action times out even with a rigid RHS; the whole functor remains, while generic fapp1 meets a stable agreement-action head through a typed proof-time unifier. |
+| `D-FPD-022` | accepted after warning audit | Outer groupoidification representations retain their constructed runtime fapp1 actions. Their six identity-action critical pairs are classified semantic overlaps, not a veto. |
+| `D-FPD-023` | accepted after quotient probes | Whole agreement functors, representation transfors, and nested groupoidification/0-truncation recursion give composition and addition on arbitrary quotient Homs with raw-class computation. |
+| `D-FPD-024` | accepted after usability probes | Generic Freyd identity/composition first meet rigid heads by proof-time unification; only after typed `eq_refl` validation do local rigid-head folds expose the raw identity class and descended composition. |
+| `D-FPD-025` | accepted after alias probes | Direct unifiers to defined identity/composition or outer-action aliases do not fire here; sequential rigid intermediaries succeed. This confirms that immediate `eq_refl` is a test, not a consequence of declaration order. |
 
 ## Current Matrix-Layer Result
 
@@ -372,7 +377,7 @@ rigid identity path and generic unit/associativity paths now prove transparent
 matrix left/right identity and associativity. The owner passes quiet and
 warning-enabled bounded checks, the focused reviewer consumes all paths, and
 strict LHS audit remains empty. Zero and bilinearity remain the active part of
-`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 350
+`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 354
 owner/reviewer files; no repository-wide timing claim is introduced.
 
 `emdash3_2_commutative_algebra_presentation_operations.lp` now constructs raw
@@ -401,6 +406,16 @@ the retained witness/law and constructs reflexivity, symmetry, transitivity,
 addition, arbitrary generator-map precomposition, and postcomposition using
 the outer raw map's relation witness. The owner and focused reviewer pass; no
 runtime rule, quotient collapse, or opaque equality was added.
+
+The quotient descent and category-usability rows are complete.
+`emdash3_2_commutative_algebra_freyd_operations.lp` constructs fixed-operand
+agreement functors, whole representation transfors, groupoidified binary
+composition/addition, and their nested `0`-truncated operations. Both raw and
+ordinary class betas compute. `emdash3_2_commutative_algebra_freyd_usability.lp`
+then connects generic category identity/composition to those operations through
+the validated sequential rigid-head pattern. The focused operations and
+usability reviewers pass. Six outer identity-action overlaps are recorded;
+the timed-out inner runtime action is kept proof-time instead.
 
 ## Validation Policy
 
