@@ -20,10 +20,20 @@ Abelian structure remain separately gated
 ## Finite-Free Category Probe
 
 The transparent recursive identity matrix checks and exposes the expected
-rank-one column. A candidate adding direct runtime `id` and `comp_fapp0` rules
-for a new matrix category repeatedly reached the 90-second bound. A split
-probe showed that the category rules, not identity recursion, caused the hot
-interaction.
+rank-one column. A warning-enabled follow-up audit refines the original
+timeout diagnosis: runtime identity checks, and runtime composition to a rigid
+matrix head also checks quickly. The 90-second failure is specifically the
+rule reducing generic `comp_fapp0` directly to the transparent
+`comm_ring_matrix_comp` body. Its overlap with strict functoriality unfolds
+Nat recursion, finite families, vectors, and the commutative-ring record while
+local confluence compares the two branches.
+
+The rigid runtime composition candidate reports twenty higher-action critical
+pairs. This count is not a veto; it identifies genuine competing normal forms
+that need consumer-driven joins. Replacing the plain source/middle/target
+variables by `_` fails type preservation, so those dimensions are justified
+interface data rather than compound reducible guards. The promoted rules and
+unifiers have no unreviewed compound inferred slots.
 
 The selected owner mirrors `CommRing_cat`:
 
@@ -36,9 +46,12 @@ The selected owner mirrors `CommRing_cat`:
 
 A direct unifier between the rigid composition head and the transparent
 Nat-recursive `comm_ring_matrix_comp` body did not establish the whole
-comparison after unfolding. That equality is not postulated. The rigid head
-is the finite-free category's selected representation; the older transparent
-operation remains the direct presentation/CAS surface.
+comparison after unfolding. A defined readable alias does not remain a rigid
+unification discriminator, and an immediately following `eq_refl` theorem
+cannot make that missing comparison true. That equality is not postulated.
+The rigid head is the finite-free category's selected representation; the
+older transparent operation remains the direct presentation/CAS surface. A
+constructed finite-family path between them is the next formal prerequisite.
 
 ## Homwise Quotient Construction
 

@@ -4,8 +4,11 @@
   Objects are ranks and Homs are path categories of column-oriented matrices.
   Generic category identity/composition remain runtime owners. Rigid
   pointwise matrix heads meet them at proof time and expose visible column
-  projections. This follows CommRing_cat usability and avoids hot global
-  category-operation rules. Additive and Abelian structures remain separate.
+  projections. This follows CommRing_cat usability and avoids reducing generic
+  composition directly into the transparent Nat-recursive matrix body, whose
+  strict-functoriality overlap expands pathologically. A runtime fold to the
+  rigid head checks but leaves higher-action joins consumer-gated. Additive and
+  Abelian structures remain separate.
 */
 
 require open emdash.emdash3_2_commutative_algebra_bounded_free_chain_maps;

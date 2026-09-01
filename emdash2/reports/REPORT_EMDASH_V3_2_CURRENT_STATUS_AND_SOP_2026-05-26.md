@@ -275,9 +275,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   finite-free matrix-category facade. Objects are ranks and Homs are path
   categories of column matrices. Generic category identity/composition remain
   runtime owners; rigid pointwise matrix heads meet them through proof-time
-  usability rules and expose constructor-level columns. Broad runtime category
-  rules and a body-unfolded whole transparent-composition comparison are
-  rejected boundaries.
+  usability rules and expose constructor-level columns. Runtime identity and a
+  runtime composition fold to the rigid head check, but the latter leaves
+  twenty genuine higher-action joins. Reducing generic composition directly
+  to transparent `comm_ring_matrix_comp` exceeds the bounded check while
+  expanding its strict-functoriality overlap. A body-unfolded whole
+  rigid/transparent comparison also does not solve; its constructed path is a
+  later prerequisite.
 - `emdash3_2_commutative_algebra_freyd_presentations.lp`: homwise quotient and
   Freyd-category skeleton. Raw presentation morphisms and target-factorization
   agreements form fixed-endpoint categories; existing `Groupoidify` and

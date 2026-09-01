@@ -397,7 +397,7 @@ tests, proportional validation, and a local checkpoint.
 | `D-FRP-013` | accepted | Direct matrices remain the backend beneath category/doctrine/tower/compiler abstraction. |
 | `D-FRP-014` | accepted | Local validated checkpoints are authorized; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-FRP-015` | accepted | Orthogonal path-cubical/strictness histories remain excluded. |
-| `D-FRP-016` | accepted after category probe | Broad runtime identity/composition rules on the finite-free category time out; generic category operations remain runtime owners and meet rigid pointwise matrix heads through proof-time unifiers. |
+| `D-FRP-016` | refined by the preadditive-descent audit | Runtime identity and runtime composition to a rigid head check; the timeout is specific to reducing generic composition directly into transparent `comm_ring_matrix_comp`. Generic category operations remain runtime owners while rigid pointwise heads meet them through proof-time unifiers because the runtime candidate leaves genuine higher-action joins. |
 | `D-FRP-017` | accepted after category probe | Rigid identity/composition heads expose constructor-level Sigma projections; no unsupported whole equality with the older transparent matrix implementation is fabricated. |
 | `D-FRP-018` | accepted after quotient-Hom probe | Agreement categories may keep generic identity/composition opaque while their objects/Homs feed `Groupoidify`; every explicit agreement witness still becomes a path and then a `0`-truncated equality. |
 | `D-FRP-019` | accepted after Freyd probe | `CommRingFreydPresentation_cat` has presentation objects and quotient Hom sets, but explicit comparison of its generic identity/composition with classes of selected raw morphisms remains a separately gated construction. |
@@ -410,16 +410,20 @@ tests, proportional validation, and a local checkpoint.
 
 ## Owner Audit And Selected Formal Boundary
 
-The matrix identity construction itself checks quickly. A first candidate that
-rewrote generic finite-free category identity and composition directly to
-transparent matrices timed out. Splitting the probe showed the recursive
-identity was not responsible; the hot category rules were. The promoted design
-therefore follows `CommRing_cat`: `Obj` and `Hom` compute, generic category
-operations remain runtime owners, and rigid pointwise matrix heads meet them
-at proof time. Narrow `sigma_Fst`/`sigma_Snd` rules expose identity and
-composition columns. A body-unfolded unifier from the rigid composition head
-to the older transparent matrix implementation did not solve the whole
-comparison, so no such equality is claimed.
+The matrix identity construction itself checks quickly. A later warning-
+enabled split audit sharpened the first probe: runtime identity and runtime
+composition to a rigid matrix head both check; reducing generic composition
+directly to transparent `comm_ring_matrix_comp` is the operation that exceeds
+the bound. Its strict-functoriality overlap expands the transparent recursive
+body. The rigid runtime target avoids that expansion but leaves twenty genuine
+higher-action overlaps, and replacing its plain dimension variables by `_`
+fails type preservation. The promoted design therefore follows
+`CommRing_cat`: `Obj` and `Hom` compute, generic category operations remain
+runtime owners, and rigid pointwise matrix heads meet them at proof time.
+Narrow `sigma_Fst`/`sigma_Snd` rules expose identity and composition columns.
+A body-unfolded unifier from the rigid composition head to the older
+transparent matrix implementation did not solve the whole comparison, so no
+such equality is claimed.
 
 `CommRingPresentationAgreement_cat(R,P,Q)` computes objects to raw
 relation-preserving morphisms and Homs to paths of target-factorization

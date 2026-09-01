@@ -321,9 +321,9 @@ to emit proof certificates for all internal algorithms.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `FPD-PLAN-0` | active | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
-| `FPD-OWNER-1A` | ready | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
-| `FPD-MATRIX-2A` | blocked on inventory | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
+| `FPD-PLAN-0` | complete; checkpoint `bcf807c` | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
+| `FPD-OWNER-1A` | complete; checkpoint pending | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
+| `FPD-MATRIX-2A` | active | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
 | `FPD-RAW-3A` | blocked on matrix laws | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
 | `FPD-AGREE-4A` | blocked on raw operations | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
 | `FPD-DESCENT-5A` | blocked on agreement algebra | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
