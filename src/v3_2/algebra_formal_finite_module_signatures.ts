@@ -23,7 +23,7 @@ import {
 } from './kernel';
 
 export const FORMAL_FINITE_MODULE_SIGNATURE_PROFILE = Object.freeze({
-    revision: 'emdash-formal-finite-module-signatures-v1' as const,
+    revision: 'emdash-formal-finite-module-signatures-v2' as const,
     names: Object.freeze([
         'bridge_CommRingVector',
         'bridge_CommRingMatrix',
@@ -99,7 +99,8 @@ export function createFormalFiniteModuleProofEnvironment(
         pi('rows', nat(), pi('middle', nat(), pi('columns', nat(),
             pi('A', tau(matrix(b(3), b(2), b(1))),
                 pi('B', tau(matrix(b(4), b(2), b(1))),
-                    tau(matrix(b(5), b(4), b(3))))))))));
+                    // After B is bound, columns is index 2; index 3 is middle.
+                    tau(matrix(b(5), b(4), b(2))))))))));
     add('bridge_CommRingPresentationAgreement', pi('R', ring(),
         pi('generators', nat(), pi('relations', nat(),
             pi('A', tau(matrix(b(2), b(1), b(0))),

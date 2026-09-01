@@ -53,6 +53,7 @@ export * from './algebra_polynomial_weak_kernel_category';
 export * from './algebra_polynomial_weak_kernel_singular';
 export * from './algebra_polynomial_weak_pullback';
 export * from './algebra_formal_weak_kernel';
+export * from './algebra_formal_freyd_preabelian';
 export * from './algebra_presented_module';
 export * from './algebra_presented_module_map';
 export * from './algebra_presented_module_base_change';

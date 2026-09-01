@@ -3368,6 +3368,23 @@ a competing and selected lift, together with the competing reconstruction
 witness, forms another second-stage cone. Its factor is exactly the agreement
 witness proving the two lifts equal in the Freyd quotient.
 
+These two canonical constructions are now assembled into one witnessed
+pre-Abelian surface. Given the finite-free weak-kernel capability `W`, it
+packages the exact existing Freyd `AdditiveCategory` together with a kernel
+and cokernel law family for every raw presentation morphism. A kernel test
+supplies its raw arrow and explicit zero-composite agreement; a competing
+lift supplies an explicit reconstruction agreement. The cokernel family is
+dual. The package therefore computes annihilation, selected factors,
+reconstruction, and quotient uniqueness uniformly while preserving the
+constructive information actually available from the quotient.
+
+This surface is intentionally named *witnessed*. It is not an inhabitant of
+the stronger generic `PreAbelianCategory`, whose factor operation starts from
+an arbitrary path in the set-truncated Freyd Hom. Constructing that closed
+package would require an effective decoder from such a path to the raw
+agreement witness consumed by the algorithms. No such decoder, choice
+principle, or opaque substitute is introduced.
+
 At the operational category layer these constructions are not hidden inside
 metadata. The polynomial Freyd model registers whole kernel and cokernel
 operations, then derives their objects, structural arrows, and factors through
@@ -3393,8 +3410,15 @@ it is a non-authoritative differential oracle and basis text need not agree.
 The formal bridge reifies selected `F`, `K`, `U`, and `H`, replays the actual
 whole/lift operations, and exposes exact `F o K = 0` and `K o U = H` goals for
 explicit proof-CAS adoption. Named equations do not create a ring-wide factor
-operation. Constructing kernels in the Freyd category and deriving Abelian
-structure remain the next separate theorem layer.
+operation. The corresponding Freyd pre-Abelian bridge now replays the actual
+kernel, kernel-lift, cokernel, and cokernel-colift operations. It serializes
+their selected presentations and matrices, then reuses the existing formal
+presentation-morphism and agreement equations for structural-arrow,
+annihilation, and reconstruction claims. Eight selected equations check in
+the TypeScript Core and one emitted Lambdapi consumer. This does not promote
+the finite observations into a ring-wide formal capability. Normal
+monomorphisms/epimorphisms and Abelian structure remain the next theorem
+layer.
 
 The generic genuine-kernel layer strengthens factorization by uniqueness
 without changing weak kernels. For an annihilated `tau : T -> A` and candidate
@@ -3411,8 +3435,10 @@ selected one. Cokernels use the dual coannihilator fibre of `- o alpha` and
 contractible colift spaces. Coannihilated test objects retain covariant whole
 Path action. The resulting rule-free package exposes selected whole kernel and
 cokernel capabilities plus a thin `PreAbelianCategory` over existing additive
-data; it does not claim that the current Freyd category already inhabits that
-package.
+data. The formal Freyd category inhabits the separately named witnessed
+surface described above, while the operational field-polynomial provider has
+all eight usable pre-Abelian roles. Neither fact supplies the missing
+quotient-path decoder required by the stronger formal package.
 
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`

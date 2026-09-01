@@ -7,7 +7,10 @@ active constructive continuation from computational weak kernels. It derives
 weak pullbacks in the additive finite-free base, constructs unconditional
 Freyd cokernels and weak-kernel-dependent Freyd kernels with complete
 object/structural-arrow/factor operations, and targets a genuinely qualified
-computational pre-Abelian category. It explicitly defers normal-mono and
+computational pre-Abelian category. The formal boundary is an explicit
+weak-kernel-capability-indexed witnessed package, with selected proof–CAS
+structural, annihilation, and reconstruction equations; it does not fabricate
+a decoder from truncated quotient paths. It explicitly defers normal-mono and
 normal-epi operations, image/coimage comparison, the full Abelian theorem,
 exactness, and homology.
 

@@ -79,8 +79,8 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   reindexing. `emdash3_2_kernels_cokernels.lp` adds genuine kernel/cokernel
   universal properties as contractible internal factor fibres, with selected
   lift/colift, reconstruction, uniqueness, whole capability, and thin
-  pre-Abelian packaging. Concrete ring-wide formal capability, constructed
-  Freyd kernels/cokernels, and Abelian structure remain separate layers.
+  pre-Abelian packaging. Closed quotient-level concrete capability and
+  Abelian structure remain separate layers.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its
@@ -95,6 +95,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   finite-free weak-kernel capability, performs the two weak-pullback
   construction, and retains zero/reconstruction agreements through lift and
   quotient uniqueness.
+  `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
+  existing Freyd additive structure with both canonical constructions as one
+  capability-parameterized witnessed surface. Its universal tests retain raw
+  zero/reconstruction agreements; it is not a closed quotient-level
+  `PreAbelianCategory` and does not decode arbitrary truncated paths.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

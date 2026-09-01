@@ -890,6 +890,7 @@ colift_f(h,H₀)             : colift consuming explicit zero agreement H₀
 Ker_Freyd(f)               : presentation from two biased weak pullbacks
 lift_f(τ,H₀)               : kernel lift using H₀ and τ's relation witness.
 PreAb(Freyd_R)             : field-polynomial provider with all eight roles.
+PreAbʷ(Freyd_R;W)          : formal witnessed surface from base capability W.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -962,6 +963,12 @@ The literal owners are `CommRingFiniteFree_cat`,
 `comm_ring_freyd_kernel_lift`,
 `comm_ring_freyd_kernel_reconstruction_path`,
 `comm_ring_freyd_kernel_uniqueness_path`,
+`CommRingFreydWitnessedKernelUniversal`,
+`CommRingFreydWitnessedCokernelUniversal`,
+`HasCommRingFreydWitnessedKernels`,
+`HasCommRingFreydWitnessedCokernels`,
+`CommRingFreydWitnessedPreAbelian`,
+`comm_ring_freyd_witnessed_preabelian`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,
@@ -982,9 +989,13 @@ grammar. `WK(α)` selects lifts without uniqueness; test-object action is
 retained by the named reindexing functor, while naturality of the selected
 factor choice is not asserted. Do not identify a weak kernel with a kernel or
 strengthen the Freyd category merely because the generic `Ker`, `Coker`, and
-`PreAb` classifiers now exist: a concrete pre-Abelian instance still requires
-actual whole constructions and universal factors. Do not print Abelian
-structure, exactness, or homology at this boundary.
+`PreAb` classifiers now exist. `PreAbʷ(Freyd_R;W)` is the separately named
+witness-enriched formal package: tests and competitors carry raw
+zero/reconstruction agreements, from which the checked quotient paths follow.
+It must not be printed as the stronger closed `PreAb(Freyd_R)` unless an
+effective quotient-path decoder is actually supplied. The field-polynomial
+runtime provider does have all eight usable pre-Abelian roles, but neither
+surface implies Abelian structure, exactness, or homology.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write

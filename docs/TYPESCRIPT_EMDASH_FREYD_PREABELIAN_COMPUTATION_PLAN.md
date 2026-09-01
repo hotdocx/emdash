@@ -580,8 +580,8 @@ Refine or reject a candidate when it:
 | `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint `4cd1348c`; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
 | `FPA-KERNEL-NATIVE-6A` | complete; checkpoint `6d0ef4c0` | polynomial Freyd presentation + weak pullbacks | native Freyd whole kernel, object, embedding, two-stage lift, annihilation, reconstruction, quotient uniqueness |
 | `FPA-KERNEL-FORMAL-6B` | complete at witness-enriched boundary; checkpoint `18d96719`; closed quotient package subject to effective path/witness decoding | formal witnessed weak pullbacks + explicit zero agreement | formal kernel presentation/embedding/two-stage lift, annihilation, reconstruction and monic uniqueness |
-| `FPA-CATEGORY-7` | complete; checkpoint pending | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
-| `FPA-FORMAL-8` | active; closed quotient package gated by effectiveness boundary | explicit weak-kernel capability + witnessed constructions | capability-parameterized witnessed formal Freyd pre-Abelian surface and selected proof-CAS consumers without fabricated quotient decoder |
+| `FPA-CATEGORY-7` | complete; checkpoint `e9bc341a` | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
+| `FPA-FORMAL-8` | complete at witnessed boundary; checkpoint pending; closed quotient package gated by effectiveness | explicit weak-kernel capability + witnessed constructions | capability-parameterized witnessed formal Freyd pre-Abelian surface and selected proof-CAS consumers without fabricated quotient decoder |
 | `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
 | `FPA-CLOSE-10` | blocked on all required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
 
@@ -620,6 +620,9 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-025` | accepted after formal witnessed-kernel probes | Formal Construction 3.10 is parameterized by the finite-free weak-kernel capability. The zero agreement and source relation square construct the two lift cones. For uniqueness, the difference between a competing and selected lift plus the competing reconstruction witness forms a second-stage cone whose factor is exactly the Freyd agreement witness. |
 | `D-FPA-026` | accepted after category-provider tests | `PREABELIAN_DOCTRINE` requires whole kernel/cokernel plus object, embedding/projection, and lift/colift roles. The field-polynomial Freyd provider qualifies only after every role has a plannable method; uniqueness remains checked inside the whole results and explicit native functions. |
 | `D-FPA-027` | accepted after provider boundary tests | Operational pre-Abelian qualification is available only for polynomial rings with a field coefficient provider. The ordinary additive Freyd model remains valid over its broader ring boundary and is not silently promoted. |
+| `D-FPA-028` | accepted after formal capability probe | `CommRingFreydWitnessedPreAbelian(R,W)` packages the exact existing Freyd additive structure and canonical kernel/cokernel law families for all raw presentation morphisms. Tests retain explicit zero/reconstruction agreements, so the package is constructive but intentionally distinct from closed quotient-level `PreAbelianCategory`. |
+| `D-FPA-029` | accepted after selected-equation consumer | The proof-CAS bridge reuses the existing formal presentation-morphism and presentation-agreement realizations. It replays the actual kernel, kernel-lift, cokernel, and cokernel-colift operations and adopts eight exact structural, annihilation, and reconstruction equations; no parallel matrix-claim grammar or finite-observation-to-ring-capability promotion is added. |
+| `D-FPA-030` | accepted after zero-relation regression | The finite-module Core signature for matrix composition previously returned a `rows x middle` classifier instead of `rows x columns`. Selected Freyd agreements with zero relation rank exposed the latent de Bruijn-index error. The shared signature owner now uses the actual columns binder and carries revision `v2`; the focused lower bridge matrix and emitted Lambdapi consumer pass. |
 
 ## Implemented Generic Universal Layer
 
@@ -815,6 +818,60 @@ between `e87ddf...` and `0a1177...`, displaced owner/rule positions in the
 same historical transfer/pathout tests, and the existing overview-article
 digest mismatch. No failure names a new operation, provider, model, or test;
 the aggregate is not rerun.
+
+## Implemented Witnessed Formal Capability And Proof–CAS Consumer
+
+`emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` now packages
+the existing Freyd `AdditiveCategory`, all canonical witnessed kernels, and
+all canonical witnessed cokernels. Its kernel family is parameterized by the
+explicit finite-free weak-kernel capability `W`; the cokernel family remains
+unconditional. For every raw presentation morphism, each family contains
+quotient annihilation and, for every raw test with a zero-composite agreement,
+selected reconstruction plus uniqueness against every raw competitor carrying
+a reconstruction agreement. The whole package has readable additive,
+kernel-family, and cokernel-family projections.
+
+This closes the formal row at the honest constructive boundary. It does not
+manufacture a function from arbitrary set-truncated paths to agreement
+witnesses, so it is not silently coerced to the stronger generic
+`PreAbelianCategory`. The source and reviewer are rule-free, pass bounded
+checking, and have a strict-LHS count of zero. Their warning-enabled inventory
+is identical to the current kernel import at
+`1,392 = 1,223 critical pairs + 169 replaceable variables`.
+
+`algebra_formal_freyd_preabelian.ts` supplies the concrete consumer. It
+serializes the exact selected whole operation output and replays the native
+pre-Abelian provider for kernel, kernel lift, cokernel, and cokernel colift.
+For each result it reuses the established formal presentation-morphism law for
+the structural arrow/factor and the established presentation-agreement law
+for annihilation or reconstruction. All eight equations typecheck in the
+TypeScript Core, all four actual operations replay and their eight claims are
+explicitly adoptable, deterministic replay passes, and one focused emitted
+Lambdapi probe checks all eight equations.
+
+That consumer exposed and corrected one lower signature bug:
+`bridge_comm_ring_matrix_comp` had used the bound `middle` dimension as the
+result's column count. The v2 signature now returns `rows x columns`, as the
+active Lambdapi operation does. The affected finite-module,
+presentation-morphism, weak-kernel, and new Freyd bridge tests pass. This is a
+shared signature correction, not a new runtime or Core owner.
+
+The formal source and reviewer are registered. The generated catalog remains
+strict and the source-metrics health snapshot is current for 411 files. A
+resumable health invocation was stopped after process inspection showed it had
+invalidated its predecessor identity and crossed into unrelated Gray-cube
+checks; the report was refreshed in source-metrics-only mode instead. Fresh
+bounded checks for the new owner, reviewer, warning inventory, emitted
+consumer, and all affected lower TypeScript bridges provide the scoped
+behavioral evidence.
+
+The root workspace contract, TypeScript typecheck, and affected lint pass.
+The focused finite-module, presentation-morphism, weak-kernel, Freyd bridge,
+and pre-Abelian category matrix passes `15/15` ordinary tests with two
+environment-gated live tests skipped; the separately enabled new live test
+passes all `4/4` bridge tests and checks all eight equations in one bounded
+Lambdapi process. The earlier completed `check:ts` result is carried forward
+and is not rerun.
 
 ## Validation Matrix
 

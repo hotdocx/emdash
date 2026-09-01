@@ -434,6 +434,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreement and the test relation witness construct its two-stage lift;
   agreement paths prove annihilation, reconstruction, and monic uniqueness.
   No arbitrary-`CommRing` capability or quotient-path decoder is asserted.
+- `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp`: rule-free
+  capability package combining the exact existing Freyd `AdditiveCategory`
+  with both canonical witnessed universal constructions. It quantifies over
+  every raw presentation morphism and every test carrying the explicit
+  zero/reconstruction agreements required by the quotient implementation.
+  The package exposes annihilation, reconstruction, and raw-competitor
+  uniqueness without pretending to inhabit the stronger closed
+  `PreAbelianCategory` or to decode arbitrary set-truncated paths.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
