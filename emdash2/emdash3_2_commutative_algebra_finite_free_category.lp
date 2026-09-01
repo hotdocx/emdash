@@ -249,3 +249,246 @@ symbol comm_ring_finite_free_comp_fapp0_transparent_path
       R source middle target g f)
     (@comm_ring_finite_free_comp_transparent_path
       R source middle target g f);
+
+/*
+  Transparent matrix identity laws transported from generic category units.
+
+  The identity comparison is applied explicitly inside composition because
+  unification rules are not assumed transitive. The final generic unit step is
+  judgmental; the whole transparent statement remains propositional.
+*/
+symbol comm_ring_matrix_comp_right_identity_path
+  (R : τ CommRing)
+  (source target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comm_ring_matrix_comp R target source source g
+        (@comm_ring_finite_free_id_matrix R source))
+      g)
+≔ @eq_trans
+    (@CommRingMatrix R target source)
+    (@comm_ring_matrix_comp R target source source g
+      (@comm_ring_finite_free_id_matrix R source))
+    (@comp_fapp0
+      (@CommRingFiniteFree_cat R)
+      source source target g
+      (@comm_ring_finite_free_id_matrix R source))
+    g
+    (@eq_sym
+      (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source source target g
+        (@comm_ring_finite_free_id_matrix R source))
+      (@comm_ring_matrix_comp R target source source g
+        (@comm_ring_finite_free_id_matrix R source))
+      (@comm_ring_finite_free_comp_fapp0_transparent_path
+        R source source target g
+        (@comm_ring_finite_free_id_matrix R source)))
+    (@eq_trans
+      (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source source target g
+        (@comm_ring_finite_free_id_matrix R source))
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source source target g
+        (@id (@CommRingFiniteFree_cat R) source))
+      g
+      (@eq_ap
+        (@CommRingMatrix R source source)
+        (@CommRingMatrix R target source)
+        (λ u : τ (@CommRingMatrix R source source),
+          @comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            source source target g u)
+        (@comm_ring_finite_free_id_matrix R source)
+        (@id (@CommRingFiniteFree_cat R) source)
+        (@eq_sym
+          (@CommRingMatrix R source source)
+          (@id (@CommRingFiniteFree_cat R) source)
+          (@comm_ring_finite_free_id_matrix R source)
+          (@comm_ring_finite_free_id_matrix_path R source)))
+      (@eq_refl (@CommRingMatrix R target source) g));
+
+symbol comm_ring_matrix_comp_left_identity_path
+  (R : τ CommRing)
+  (source target : τ Nat_grpd)
+  (g : τ (@CommRingMatrix R target source))
+  : τ (@= (@CommRingMatrix R target source)
+      (@comm_ring_matrix_comp R target target source
+        (@comm_ring_finite_free_id_matrix R target) g)
+      g)
+≔ @eq_trans
+    (@CommRingMatrix R target source)
+    (@comm_ring_matrix_comp R target target source
+      (@comm_ring_finite_free_id_matrix R target) g)
+    (@comp_fapp0
+      (@CommRingFiniteFree_cat R)
+      source target target
+      (@comm_ring_finite_free_id_matrix R target) g)
+    g
+    (@eq_sym
+      (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source target target
+        (@comm_ring_finite_free_id_matrix R target) g)
+      (@comm_ring_matrix_comp R target target source
+        (@comm_ring_finite_free_id_matrix R target) g)
+      (@comm_ring_finite_free_comp_fapp0_transparent_path
+        R source target target
+        (@comm_ring_finite_free_id_matrix R target) g))
+    (@eq_trans
+      (@CommRingMatrix R target source)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source target target
+        (@comm_ring_finite_free_id_matrix R target) g)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        source target target
+        (@id (@CommRingFiniteFree_cat R) target) g)
+      g
+      (@eq_ap
+        (@CommRingMatrix R target target)
+        (@CommRingMatrix R target source)
+        (λ u : τ (@CommRingMatrix R target target),
+          @comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            source target target u g)
+        (@comm_ring_finite_free_id_matrix R target)
+        (@id (@CommRingFiniteFree_cat R) target)
+        (@eq_sym
+          (@CommRingMatrix R target target)
+          (@id (@CommRingFiniteFree_cat R) target)
+          (@comm_ring_finite_free_id_matrix R target)
+          (@comm_ring_finite_free_id_matrix_path R target)))
+      (@eq_refl (@CommRingMatrix R target source) g));
+
+/*
+  Transparent matrix associativity transported from generic cut association.
+
+  Each inner and outer generic/transparent comparison is applied explicitly;
+  no transitivity of unification rules or algebraic runtime normalization is
+  assumed.
+*/
+symbol comm_ring_matrix_comp_assoc_path
+  (R : τ CommRing)
+  (A B C D : τ Nat_grpd)
+  (h : τ (@CommRingMatrix R D C))
+  (g : τ (@CommRingMatrix R C B))
+  (f : τ (@CommRingMatrix R B A))
+  : τ (@= (@CommRingMatrix R D A)
+      (@comm_ring_matrix_comp R D C A h
+        (@comm_ring_matrix_comp R C B A g f))
+      (@comm_ring_matrix_comp R D B A
+        (@comm_ring_matrix_comp R D C B h g) f))
+≔ @eq_trans
+    (@CommRingMatrix R D A)
+    (@comm_ring_matrix_comp R D C A h
+      (@comm_ring_matrix_comp R C B A g f))
+    (@comp_fapp0
+      (@CommRingFiniteFree_cat R)
+      A C D h
+      (@comm_ring_matrix_comp R C B A g f))
+    (@comm_ring_matrix_comp R D B A
+      (@comm_ring_matrix_comp R D C B h g) f)
+    (@eq_sym
+      (@CommRingMatrix R D A)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        A C D h
+        (@comm_ring_matrix_comp R C B A g f))
+      (@comm_ring_matrix_comp R D C A h
+        (@comm_ring_matrix_comp R C B A g f))
+      (@comm_ring_finite_free_comp_fapp0_transparent_path
+        R A C D h
+        (@comm_ring_matrix_comp R C B A g f)))
+    (@eq_trans
+      (@CommRingMatrix R D A)
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        A C D h
+        (@comm_ring_matrix_comp R C B A g f))
+      (@comp_fapp0
+        (@CommRingFiniteFree_cat R)
+        A C D h
+        (@comp_fapp0
+          (@CommRingFiniteFree_cat R)
+          A B C g f))
+      (@comm_ring_matrix_comp R D B A
+        (@comm_ring_matrix_comp R D C B h g) f)
+      (@eq_ap
+        (@CommRingMatrix R C A)
+        (@CommRingMatrix R D A)
+        (λ u : τ (@CommRingMatrix R C A),
+          @comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            A C D h u)
+        (@comm_ring_matrix_comp R C B A g f)
+        (@comp_fapp0
+          (@CommRingFiniteFree_cat R)
+          A B C g f)
+        (@eq_sym
+          (@CommRingMatrix R C A)
+          (@comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            A B C g f)
+          (@comm_ring_matrix_comp R C B A g f)
+          (@comm_ring_finite_free_comp_fapp0_transparent_path
+            R A B C g f)))
+      (@eq_trans
+        (@CommRingMatrix R D A)
+        (@comp_fapp0
+          (@CommRingFiniteFree_cat R)
+          A C D h
+          (@comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            A B C g f))
+        (@comp_fapp0
+          (@CommRingFiniteFree_cat R)
+          A B D
+          (@comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            B C D h g)
+          f)
+        (@comm_ring_matrix_comp R D B A
+          (@comm_ring_matrix_comp R D C B h g) f)
+        (@comp_assoc
+          (@CommRingFiniteFree_cat R)
+          A B C D h g f)
+        (@eq_trans
+          (@CommRingMatrix R D A)
+          (@comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            A B D
+            (@comp_fapp0
+              (@CommRingFiniteFree_cat R)
+              B C D h g)
+            f)
+          (@comp_fapp0
+            (@CommRingFiniteFree_cat R)
+            A B D
+            (@comm_ring_matrix_comp R D C B h g)
+            f)
+          (@comm_ring_matrix_comp R D B A
+            (@comm_ring_matrix_comp R D C B h g) f)
+          (@eq_ap
+            (@CommRingMatrix R D B)
+            (@CommRingMatrix R D A)
+            (λ u : τ (@CommRingMatrix R D B),
+              @comp_fapp0
+                (@CommRingFiniteFree_cat R)
+                A B D u f)
+            (@comp_fapp0
+              (@CommRingFiniteFree_cat R)
+              B C D h g)
+            (@comm_ring_matrix_comp R D C B h g)
+            (@comm_ring_finite_free_comp_fapp0_transparent_path
+              R B C D h g))
+          (@comm_ring_finite_free_comp_fapp0_transparent_path
+            R A B D
+            (@comm_ring_matrix_comp R D C B h g)
+            f))));
