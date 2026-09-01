@@ -3,7 +3,7 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_COMPUTATIONAL_WEAK_KERNELS_PLAN.md` is the
-active capability-indexed continuation from the completed additive Freyd
+completed capability-indexed continuation from the additive Freyd
 category. It targets complete original-column polynomial syzygies, selected
 weak-kernel lifts, whole category/CAS operations, a Singular differential
 oracle, and an internal Hom-fibre weak-kernel interface. It does not yet claim

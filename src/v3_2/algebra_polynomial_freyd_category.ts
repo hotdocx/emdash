@@ -79,6 +79,10 @@ import {
     defineAlgebraReferenceImplementation,
     createAlgebraTypeScriptReferenceEngine
 } from './algebra_reference_engine';
+import {
+    AlgebraPolynomialWeakKernelCategoryModel,
+    algebraPolynomialWeakKernelCategoryModel
+} from './algebra_polynomial_weak_kernel_category';
 
 export const ALGEBRA_POLYNOMIAL_FREYD_CATEGORY_PROFILE = Object.freeze({
     revision: 'emdash-algebra-polynomial-freyd-category-v4' as const,
@@ -1195,9 +1199,13 @@ export interface AlgebraPolynomialWeakKernelCapability<
     readonly ring: AlgebraPolynomialRing<P, C, I>;
     readonly basis: 'groebner-syzygy';
     readonly operationalFieldCoefficients: true;
+    readonly provider:
+        AlgebraPolynomialWeakKernelCategoryModel<P, C, I>;
+    readonly qualification: 'qualified';
     readonly claimsAbelianStructure: false;
 }
 
+/** Compatibility facade backed by the executable finite-free provider. */
 export function algebraPolynomialWeakKernelCapability<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -1207,11 +1215,17 @@ export function algebraPolynomialWeakKernelCapability<
     if ((ring.coefficientDomain as { field?: unknown }).field !== true) {
         throw new Error('Weak-kernel capability requires operational field coefficients');
     }
+    const provider = algebraPolynomialWeakKernelCategoryModel(ring);
+    if (provider.qualification.status !== 'qualified') {
+        throw new Error('Weak-kernel provider did not qualify its doctrine');
+    }
     return Object.freeze({
         kind: 'algebra-polynomial-weak-kernel-capability',
         ring,
         basis: 'groebner-syzygy',
         operationalFieldCoefficients: true,
+        provider,
+        qualification: 'qualified',
         claimsAbelianStructure: false
     });
 }

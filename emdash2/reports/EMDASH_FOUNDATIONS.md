@@ -3266,6 +3266,43 @@ zero/add/negate/zero-object/biproduct roles, qualifies as
 `additive-category`, and lowers those operations to the same TypeScript
 reference engine. Its formal law boundary remains arbitrary quotient points.
 
+The weak-kernel continuation targets the additive finite-free base rather than
+adding an unexplained kernel operation directly to the quotient Freyd
+category. For `alpha : A -> B`, annihilated test arrows are internal:
+
+```text
+Ann_alpha(T)
+  = HFiber(Hom(T,A) --(alpha o -)--> Hom(T,B), 0_(T,B)).
+```
+
+Precomposition constructs reindexing along each `T' -> T`; `path_map_func`
+makes it a whole functor between the corresponding Path categories, retaining
+higher equality action. A `ComputationalWeakKernel` stores `K`,
+`kappa : K -> A`, `alpha o kappa = 0`, a selected (not necessarily unique)
+factor for every annihilated test arrow, and `kappa o factor = tau`. Its
+ordinary existence view is propositionally truncated. The formal layer does
+not assert naturality of the selected factors or fabricate a primitive whole
+annihilator-family functor whose stored fibre proofs lack checked coherence.
+
+Operationally, a polynomial matrix over a computational field first receives
+the complete syzygy module of its original ordered columns. Schreyer relations
+for the derived Gröbner basis are pulled back through retained transformation
+rows, and one reconstruction relation per original column recovers zero and
+redundant columns. The final syzygy basis forms `kappa`; division of each
+annihilated test column by that same basis supplies the lift coefficients and
+checks reconstruction. The finite-free category registers one whole weak-
+kernel operation with derived object/morphism/lift roles and qualifies only as
+an additive category **with computational weak kernels**. Its dual weak-
+cokernel doctrine is recorded, not implemented.
+
+Singular compares the native and `syz` submodules by bidirectional reduction;
+it is a non-authoritative differential oracle and basis text need not agree.
+The formal bridge reifies selected `F`, `K`, `U`, and `H`, replays the actual
+whole/lift operations, and exposes exact `F o K = 0` and `K o U = H` goals for
+explicit proof-CAS adoption. Named equations do not create a ring-wide factor
+operation. Constructing kernels in the Freyd category and deriving Abelian
+structure remain the next separate theorem layer.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
@@ -3322,11 +3359,12 @@ uses target-relation membership as categorical equality. Its representable
 elements agree with canonical module membership, and its compiler lowers raw
 morphism construction and all additive operations to whole reference-engine
 operations. The direct model is operationally additive, including zero and
-biproduct construction, but a separate weak-kernel capability merely records
-supported Gröbner/syzygy computation and does not itself claim Abelian
-structure. The later theorem must derive Abelian structure from explicit
-weak-kernel/coherence evidence; no such property is global for arbitrary
-`CommRing`.
+biproduct construction. Its former weak-kernel metadata facade now points to
+the executable, doctrine-qualified finite-free polynomial provider. That
+provider computes selected nonunique lifts but still does not claim kernels in
+the Freyd category or Abelian structure. The later constructive theorem must
+derive those operations from the explicit weak-kernel capability; no such
+property is global for arbitrary `CommRing`.
 
 ### Presented Affine Basic Opens And Elementwise Base Change
 

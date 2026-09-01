@@ -68,8 +68,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   quotient Freyd laws and the checked preadditive instance.
   `emdash3_2_additive_categories.lp` and the finite-direct-sum/Freyd additive
   extensions derive biproducts, terminal/initial zero, and the checked
-  `AdditiveCategory` instance. Weak kernels and Abelian structure remain
-  separate layers.
+  `AdditiveCategory` instance. `emdash3_2_weak_kernels.lp` owns the generic
+  Hom-fibre computational weak-kernel package and retained per-arrow test
+  reindexing. Concrete ring-wide formal capability, Freyd kernels, and Abelian
+  structure remain separate layers.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

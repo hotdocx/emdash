@@ -379,6 +379,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   biproduct identity from `PreadditiveCategory + CartesianCategory`, then
   instantiate the formal Freyd `AdditiveCategory`. No primitive coproduct,
   weak-kernel, or Abelian claim is added.
+- `emdash3_2_weak_kernels.lp`: rule-free internal computational weak kernels.
+  Annihilated maps are `HFiber` of ordinary postcomposition at zero; each test
+  arrow has a transparent whole Path reindexing functor. The selected package
+  stores object/morphism/annihilation, nonunique factor operations, and
+  reconstruction laws. Its proposition and whole-category capability views
+  are derived. It does not assert factor naturality, kernels, or Abelian
+  structure.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5416,8 +5423,18 @@ to the TypeScript reference engine. Focused TypeScript tests, typechecking,
 targeted lint, and the formal reviewers pass. The one full TypeScript boundary
 run passed workspace/typecheck/lint and retained only unrelated existing
 kernel/article source-pin failures in the consolidated suite; those orthogonal
-audits are not rewritten by this additive tranche. Weak kernels and Abelian
-structure remain later capability-indexed work.
+audits are not rewritten by this additive tranche.
+
+The successor polynomial provider now computes complete original-column
+syzygies, weak-kernel matrices, and selected lifts with checked annihilation
+and reconstruction. A genuine additive finite-free category facade registers
+whole/object/morphism/lift operations, compiler lowerings, and reference
+execution, and qualifies the computational-weak-kernel doctrine. Singular
+compares generated submodules bidirectionally as an oracle. The explicit-Core
+bridge replays whole/lift computation and permits explicit adoption of named
+`F o K = 0` and `K o U = H` equations; its live Lambdapi probe passes. A
+ring-wide formal factor provider and the Freyd-to-Abelian theorem remain later
+capability-indexed work.
 
 ## Book And Renderer Workflow
 

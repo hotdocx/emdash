@@ -47,6 +47,8 @@ export * from './algebra_polynomial_bounded_complex_category';
 export * from './algebra_polynomial_freyd_category';
 export * from './algebra_polynomial_weak_kernel';
 export * from './algebra_polynomial_weak_kernel_category';
+export * from './algebra_polynomial_weak_kernel_singular';
+export * from './algebra_formal_weak_kernel';
 export * from './algebra_presented_module';
 export * from './algebra_presented_module_map';
 export * from './algebra_presented_module_base_change';

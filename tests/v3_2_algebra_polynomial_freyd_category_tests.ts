@@ -97,10 +97,16 @@ describe('FRP direct polynomial Freyd category', () => {
         );
     });
 
-    it('records weak-kernel evidence without claiming Abelian structure', () => {
+    it('exposes the qualified provider without claiming Abelian structure', () => {
         const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x'], 'lex');
         const capability = algebraPolynomialWeakKernelCapability(ring);
         assert.equal(capability.basis, 'groebner-syzygy');
+        assert.equal(capability.qualification, 'qualified');
+        assert.equal(capability.provider.qualification.status, 'qualified');
+        assert.equal(
+            capability.provider.tower.outputDoctrineId,
+            'additive-category-with-computational-weak-kernels'
+        );
         assert.equal(capability.claimsAbelianStructure, false);
     });
 

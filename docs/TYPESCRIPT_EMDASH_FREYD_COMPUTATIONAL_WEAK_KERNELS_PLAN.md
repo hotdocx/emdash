@@ -4,7 +4,7 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FREYD-COMPUTATIONAL-WEAK-KERNELS`
 
-Status: active on a dedicated branch/worktree
+Status: complete on a dedicated branch/worktree; integration not performed
 
 Baseline: `c4baf61102d4dc27b68406fdc3536c82bf01896c`
 
@@ -648,8 +648,8 @@ genuine capability consumer and must not be deferred behind documentation.
 | `WKH-CATEGORY-4` | complete; checkpoint `aac1826` | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
 | `WKH-SINGULAR-5` | complete; checkpoint `06e0b20` | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
 | `WKH-FORMAL-6` | complete; checkpoint `6648589` | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
-| `WKH-BRIDGE-7` | complete; checkpoint pending | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
-| `WKH-CLOSE-8` | ready | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
+| `WKH-BRIDGE-7` | complete; checkpoint `913d395` | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
+| `WKH-CLOSE-8` | complete; closeout checkpoint pending | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
 or deferred only with durable evidence and a concrete replacement/prerequisite;
@@ -677,6 +677,8 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-016` | accepted after Singular probes | Differential comparison is bidirectional submodule membership between `syz(F)` and the native generator module, not literal basis equality. Rank-zero cases use direct mathematically forced scripts; disagreements remain non-authoritative observations. |
 | `D-WKH-017` | accepted after formal owner probes | Test-object action is retained by a transparent `path_map_func` for each reindexing arrow. No primitive whole annihilator-family functor or naturality of selected lifts is asserted, because both would add coherence not required by the weak-kernel definition. |
 | `D-WKH-018` | accepted after bridge probes | Concrete formal adoption is equation-by-equation and provider-driven: selected `F`, `K`, `U`, and `H` yield exact annihilation/reconstruction targets. A universal formal factor family is not inferred from named cases and remains an explicit capability prerequisite for constructing a closed ring-wide package. |
+| `D-WKH-019` | accepted at public-surface audit | The historical `AlgebraPolynomialWeakKernelCapability` name is preserved as a compatibility facade but now contains the actual qualified finite-free provider. Generic weak-kernel/category operations and the formal/Singular adapters are exported; no metadata-only capability remains primary. |
+| `D-WKH-020` | accepted at closeout | The computational weak-kernel prerequisite is complete at native, categorical, oracle, generic formal, and named equation-bridge layers. The ring-wide formal factor provider and constructive Freyd-to-Abelian theorem remain explicit successor goals rather than being inferred from finite selected equations. |
 
 ## Validation Matrix
 
@@ -708,6 +710,51 @@ For each Lambdapi semantic tranche:
 Real Singular tests are optional/environment-gated. Pure script building and
 injected transport tests are mandatory. Do not run print, book, release, or
 unrelated repository aggregates.
+
+## Completion Result
+
+The requirement-by-requirement audit is closed:
+
+- plan, owner audit, isolated worktree, and baseline evidence are recorded at
+  `3d18fa9`;
+- complete original-column syzygies, including pulled-back Schreyer and
+  original-generator rewrite relations, are checked at `b4b8de6`;
+- whole weak-kernel data, arbitrary selected lifts, the additive finite-free
+  category, doctrine qualification, compiler lowerings, and reference-engine
+  execution are checked at `aac1826`;
+- bidirectional Singular submodule comparison and a real installed-Singular
+  consumer are checked at `06e0b20`;
+- the generic internal Hom-fibre weak-kernel package, retained test-object
+  reindexing action, proposition view, and whole capability are checked at
+  `6648589`; and
+- explicit-Core annihilation/reconstruction targets, actual operation replay,
+  explicit adoption, and live Lambdapi checking are checked at `913d395`.
+
+The native algorithm covers nontrivial polynomial relations, duplicate/zero
+columns, identity and zero maps, empty/rank-zero cases, arbitrary multi-column
+lifts, non-annihilated and foreign tests, non-field rejection, limits,
+cancellation, progress, deterministic replay, and reconstruction. The whole
+category capability qualifies every inherited additive and weak-kernel role;
+the weak-cokernel dual remains metadata only as stated.
+
+All changed Lambdapi sources/reviewers pass bounded checking. The generic
+formal module is rule-free, strict-LHS clean, and exactly warning-neutral at
+`1,386 = 1,217 + 169` against its import union. The strict catalog, 391-file
+no-check health/source snapshot, source TOC, active references, report headers,
+shell syntax, Python compilation, and diff hygiene pass.
+
+For TypeScript, workspace validation, root typecheck, affected and full lint,
+and the final focused matrix pass (`35` active passes and `2` intentional
+skips). Optional real Singular passes `6/6`; optional live Lambdapi passes
+`4/4`. The final shared `check:ts` gate reached completion after passing
+workspace/typecheck/full lint. Its consolidated failures are exclusively the
+inherited active-kernel/article digest and source-position pins; no new
+weak-kernel, doctrine, category, oracle, formal bridge, or reviewer failed.
+
+No kernel/cokernel/Abelian doctrine, exactness, homology, arbitrary-`CommRing`
+provider, formal Gröbner correctness theorem, print/book change, push, merge,
+publication, release, PR, history rewrite, branch cleanup, or worktree removal
+was performed.
 
 ## Sources And Design References
 

@@ -867,6 +867,10 @@ P ⊕ Q                      : block-diagonal presentation direct sum
 Add(Freyd_R)               : derived additive-category structure
 ι_1 = <id,0>, ι_2 = <0,id> : biproduct injections
 [f,g] = f o π_1 + g o π_2 : derived copairing.
+Ann_α(T)                    : fibre of α o - over 0
+WK(α) = (K,κ,factor)       : selected computational weak kernel
+α o κ = 0                  : annihilation
+κ o factor(τ,p) = τ        : selected nonunique factorization.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -894,6 +898,13 @@ The literal owners are `CommRingFiniteFree_cat`,
 `additive_copair_fapp0`,
 `additive_biproduct_identity_path`,
 `comm_ring_freyd_additive`,
+`WeakKernelAnnihilator`,
+`weak_kernel_annihilator_reindex_func`,
+`ComputationalWeakKernel`,
+`WeakKernel`,
+`HasComputationalWeakKernels`,
+`computational_weak_kernel_factor_fapp0`,
+`computational_weak_kernel_factor_path`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,
@@ -910,9 +921,12 @@ independent quotient-element type. `PreAdd(Freyd_R)` is a checked preadditive
 package on arbitrary quotient points. `Add(Freyd_R)` additionally selects the
 whole sum functor and terminal zero, then derives coproduct and zero-object
 observations from products and preadditivity; it is not a parallel coproduct
-grammar. Do not strengthen this to an Abelian category or print
-kernels/cokernels or homology before the later weak-kernel hypotheses are
-supplied.
+grammar. `WK(α)` selects lifts without uniqueness; test-object action is
+retained by the named reindexing functor, while naturality of the selected
+factor choice is not asserted. Do not identify a weak kernel with a kernel or
+strengthen the Freyd category to Abelian before the later constructive theorem
+supplies and verifies those operations. Do not print exactness or homology at
+this boundary.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write
