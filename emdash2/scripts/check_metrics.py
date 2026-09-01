@@ -34,6 +34,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_bounded_free_complexes.lp"),
     Path("emdash3_2_commutative_algebra_bounded_free_chain_maps.lp"),
     Path("emdash3_2_commutative_algebra_finite_free_category.lp"),
+    Path("emdash3_2_commutative_algebra_presentation_operations.lp"),
     Path("emdash3_2_commutative_algebra_freyd_presentations.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),

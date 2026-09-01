@@ -863,6 +863,8 @@ El(P) = Hom_Freyd(R,P)     : representable element carrier.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
+`comm_ring_presentation_morphism_identity`,
+`comm_ring_presentation_morphism_comp`,
 `CommRingPresentationAgreement_cat`, `CommRingFreydRawHomGroupoid`,
 `CommRingFreydHomSet`, `CommRingFreydPresentation_cat`, and
 `CommRingFreydElement`. Generic category identity/composition remain runtime

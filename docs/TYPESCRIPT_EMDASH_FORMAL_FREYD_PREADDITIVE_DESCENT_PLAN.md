@@ -324,7 +324,7 @@ to emit proof certificates for all internal algorithms.
 | `FPD-PLAN-0` | complete; checkpoint `bcf807c` | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
 | `FPD-OWNER-1A` | complete; checkpoint `8a053ae` | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
 | `FPD-MATRIX-2A` | active; comparison, identity, and associativity complete; zero/bilinearity remain | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
-| `FPD-RAW-3A` | blocked on matrix laws | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
+| `FPD-RAW-3A` | active; identity/composition complete, zero/addition await bilinearity | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
 | `FPD-AGREE-4A` | blocked on raw operations | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
 | `FPD-DESCENT-5A` | blocked on agreement algebra | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
 | `FPD-FREYD-6A` | blocked on descent | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
@@ -355,6 +355,7 @@ opaque axiom should replace it.
 | `D-FPD-013` | accepted after owner proof | The rigid/transparent composition comparison is constructed by Nat recursion: zero columns are reflexive; successor heads agree definitionally and tails use the induction hypothesis through constant-family pathover. |
 | `D-FPD-014` | accepted after owner proof | Generic finite-free composition reaches transparent evaluation propositionally by transitivity of the existing generic-to-rigid `eq_refl` usability path and the constructed rigid-to-transparent path. |
 | `D-FPD-015` | accepted after law probe | Transparent matrix left/right identity and associativity are transported from generic category normalization through explicit named comparison paths; unification transitivity is not assumed. |
+| `D-FPD-016` | accepted after raw-operation probe | A reusable matrix-square pasting path derives composite presentation laws by five explicit categorical steps; presentation identity/composition retain both generator and relation matrices. |
 
 ## Current Matrix-Layer Result
 
@@ -367,8 +368,17 @@ rigid identity path and generic unit/associativity paths now prove transparent
 matrix left/right identity and associativity. The owner passes quiet and
 warning-enabled bounded checks, the focused reviewer consumes all paths, and
 strict LHS audit remains empty. Zero and bilinearity remain the active part of
-`FPD-MATRIX-2A`; catalog/health synchronization is reserved for the stabilized
-formal tranche.
+`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 342
+owner/reviewer files; no repository-wide timing claim is introduced.
+
+`emdash3_2_commutative_algebra_presentation_operations.lp` now constructs raw
+presentation identity and composition. Identity derives its square from the
+two transparent matrix unit paths. Composition computes both matrix
+components, while `comm_ring_matrix_square_comp_path` pastes the two stored
+relation squares through transparent associativity. A focused reviewer checks
+both projections, consumes the whole composite law, and retains a noncollapse
+boundary. Formal zero and addition remain gated by the still-active matrix
+zero/bilinearity laws.
 
 ## Validation Policy
 

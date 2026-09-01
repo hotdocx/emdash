@@ -280,8 +280,16 @@ belongs to the owning implementation plan rather than to standing guidance.
   twenty genuine higher-action joins. Reducing generic composition directly
   to transparent `comm_ring_matrix_comp` exceeds the bounded check while
   expanding its strict-functoriality overlap. A body-unfolded whole
-  rigid/transparent comparison also does not solve; its constructed path is a
-  later prerequisite.
+  rigid/transparent unifier also does not solve; Nat recursion now supplies
+  the whole propositional comparison instead.
+- `emdash3_2_commutative_algebra_presentation_operations.lp`: downstream raw
+  presentation-operation layer. The constructed rigid/transparent comparison
+  transports generic category units and associativity to transparent matrix
+  laws. A reusable five-step matrix-square pasting path then constructs raw
+  presentation identity and composition, retaining both generator/relation
+  matrices and deriving the composite relation square. Zero, addition,
+  preadditivity, and quotient-class descent remain later parts of the active
+  plan.
 - `emdash3_2_commutative_algebra_freyd_presentations.lp`: homwise quotient and
   Freyd-category skeleton. Raw presentation morphisms and target-factorization
   agreements form fixed-endpoint categories; existing `Groupoidify` and
@@ -5260,7 +5268,7 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 340 maintained owner/reviewer files. It records no exit
+source snapshot over 342 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
@@ -5290,6 +5298,11 @@ The formal Hom quotient uses existing groupoidification and `0`-truncation;
 explicit agreement paths and representable elements check. Generic Freyd
 identity/composition remain intentionally unconnected to raw classes, so no
 preadditive or Abelian claim is inferred.
+The downstream raw presentation-operation owner and reviewer also pass focused
+checks. Identity and composition retain both matrices and construct their
+relation squares from transparent unit/associativity and the reusable square-
+pasting path. The extension adds no rewrite or unification rule and therefore
+no local warning family.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

@@ -492,3 +492,72 @@ symbol comm_ring_matrix_comp_assoc_path
             R A B D
             (@comm_ring_matrix_comp R D C B h g)
             f))));
+
+/*
+  Pasting two relation-preserving matrix squares.
+
+  The proof is the standard five-step categorical calculation: associate,
+  apply the second square, reassociate, apply the first square, and associate.
+  It is reusable by presentation maps and later chain-map constructions.
+*/
+symbol comm_ring_matrix_square_comp_path
+  (R : τ CommRing)
+  (p_rel p_gen q_rel q_gen s_rel s_gen : τ Nat_grpd)
+  (R_P : τ (@CommRingMatrix R p_gen p_rel))
+  (R_Q : τ (@CommRingMatrix R q_gen q_rel))
+  (R_S : τ (@CommRingMatrix R s_gen s_rel))
+  (F : τ (@CommRingMatrix R q_gen p_gen))
+  (W : τ (@CommRingMatrix R q_rel p_rel))
+  (G : τ (@CommRingMatrix R s_gen q_gen))
+  (V : τ (@CommRingMatrix R s_rel q_rel))
+  (law_f : τ (@= (@CommRingMatrix R q_gen p_rel)
+      (@comm_ring_matrix_comp R q_gen q_rel p_rel R_Q W)
+      (@comm_ring_matrix_comp R q_gen p_gen p_rel F R_P)))
+  (law_g : τ (@= (@CommRingMatrix R s_gen q_rel)
+      (@comm_ring_matrix_comp R s_gen s_rel q_rel R_S V)
+      (@comm_ring_matrix_comp R s_gen q_gen q_rel G R_Q)))
+  : τ (@= (@CommRingMatrix R s_gen p_rel)
+      (@comm_ring_matrix_comp R s_gen s_rel p_rel R_S
+        (@comm_ring_matrix_comp R s_rel q_rel p_rel V W))
+      (@comm_ring_matrix_comp R s_gen p_gen p_rel
+        (@comm_ring_matrix_comp R s_gen q_gen p_gen G F) R_P))
+≔ @eq_trans
+    (@CommRingMatrix R s_gen p_rel)
+    _ _ _
+    (@comm_ring_matrix_comp_assoc_path R
+      p_rel q_rel s_rel s_gen R_S V W)
+    (@eq_trans
+      (@CommRingMatrix R s_gen p_rel)
+      _ _ _
+      (@eq_ap
+        (@CommRingMatrix R s_gen q_rel)
+        (@CommRingMatrix R s_gen p_rel)
+        (λ u : τ (@CommRingMatrix R s_gen q_rel),
+          @comm_ring_matrix_comp R s_gen q_rel p_rel u W)
+        (@comm_ring_matrix_comp R s_gen s_rel q_rel R_S V)
+        (@comm_ring_matrix_comp R s_gen q_gen q_rel G R_Q)
+        law_g)
+      (@eq_trans
+        (@CommRingMatrix R s_gen p_rel)
+        _ _ _
+        (@eq_sym
+          (@CommRingMatrix R s_gen p_rel)
+          (@comm_ring_matrix_comp R s_gen q_gen p_rel G
+            (@comm_ring_matrix_comp R q_gen q_rel p_rel R_Q W))
+          (@comm_ring_matrix_comp R s_gen q_rel p_rel
+            (@comm_ring_matrix_comp R s_gen q_gen q_rel G R_Q) W)
+          (@comm_ring_matrix_comp_assoc_path R
+            p_rel q_rel q_gen s_gen G R_Q W))
+        (@eq_trans
+          (@CommRingMatrix R s_gen p_rel)
+          _ _ _
+          (@eq_ap
+            (@CommRingMatrix R q_gen p_rel)
+            (@CommRingMatrix R s_gen p_rel)
+            (λ u : τ (@CommRingMatrix R q_gen p_rel),
+              @comm_ring_matrix_comp R s_gen q_gen p_rel G u)
+            (@comm_ring_matrix_comp R q_gen q_rel p_rel R_Q W)
+            (@comm_ring_matrix_comp R q_gen p_gen p_rel F R_P)
+            law_f)
+          (@comm_ring_matrix_comp_assoc_path R
+            p_rel p_gen q_gen s_gen G F R_P))));

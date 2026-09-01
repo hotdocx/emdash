@@ -3174,6 +3174,15 @@ composition and meet those generic operations at proof time. A direct runtime
 rewrite of category composition to the transparent Nat-recursive matrix body
 was rejected after bounded probes timed out. Likewise, no unsupported whole
 path between the rigid and transparent matrix representations is asserted.
+Instead, Nat recursion now constructs that path columnwise. It transports the
+generic category unit and associativity laws to the transparent evaluator.
+
+Raw presentation identity uses the selected identity matrices on generators
+and relations. Raw composition multiplies the two generator matrices and the
+two retained relation-witness matrices. Its stored square is not entered
+manually: a reusable five-step pasting path associates the left composite,
+applies the second stored square, reassociates, applies the first square, and
+associates to the resulting composite map.
 
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
