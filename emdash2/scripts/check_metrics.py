@@ -56,6 +56,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_preadditive.lp"),
     Path("emdash3_2_commutative_algebra_freyd_direct_sums.lp"),
     Path("emdash3_2_commutative_algebra_freyd_binary_products.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_terminal_zero.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_cartesian.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_laurent.lp"),

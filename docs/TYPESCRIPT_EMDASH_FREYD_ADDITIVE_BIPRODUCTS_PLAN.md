@@ -422,6 +422,30 @@ The strict LHS audit is empty. The warning-enabled import-union baseline and
 candidate both report `1,382 = 1,215 + 167`; the selected instance adds no
 warning family.
 
+### Implemented terminal-zero and Cartesian result
+
+`emdash3_2_commutative_algebra_freyd_terminal_zero.lp` proves that the zero
+presentation is terminal. The proof begins with an internal theorem that every
+zero-row matrix is the selected zero matrix. It turns a raw map into the zero
+presentation into a constructed presentation agreement with the zero map,
+then uses the existing groupoidification set-extensionality and set-truncation
+path induction to prove every quotient-Hom point equal to zero. This gives
+`IsContr(Hom(P,0))` with centre the selected zero arrow; no representative
+choice or manually stored square occurs.
+
+The primitive `TerminalObject` witness retains its whole canonical-arrow
+transfor and generic terminal cut. Its stable point arrow uses the same
+proof-time rigid-head pattern as selected products and then folds to the
+quotient zero class. The semantic contractibility observation reduces directly
+to the constructed evidence. The terminal source/reviewer and strict LHS audit
+pass. Its import-union baseline and candidate are exactly equal at
+`1,394 = 1,225 + 169` warnings.
+
+`emdash3_2_commutative_algebra_freyd_cartesian.lp` then transparently pairs the
+selected binary-products and terminal-zero witnesses as one
+`CartesianCategory`. Its evidence projections compute to those two witnesses;
+it adds no rule, unifier, or parallel product/terminal operation.
+
 The selected whole functor is approximately:
 
 ```text
@@ -605,8 +629,8 @@ consequences rather than replacing it.
 | `FAB-PRESENTATION-5A` | complete; checkpoint `794f163` | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
 | `FAB-AGREEMENT-5B` | complete; checkpoint `5d7ce09` | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
 | `FAB-DESCENT-6A` | complete; checkpoint `5643fbf` | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
-| `FAB-CARTESIAN-7A` | in progress; selected binary products complete, checkpoint pending; terminal-zero and Cartesian assembly ready | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
-| `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
+| `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint pending | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
+| `FAB-ADDITIVE-8A` | ready | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
 | `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
@@ -641,6 +665,7 @@ evidence for an opaque axiom.
 | `D-FAB-021` | accepted after agreement probes | Direct-sum and pairing agreement witnesses are block-diagonal/vertical combinations; subtraction compatibility closes their laws without quotient axioms. |
 | `D-FAB-022` | accepted after quotient-descent probes | Nested agreement-groupoidification and set-truncation descent construct quotient pairing without representative choice. The outer generic action uses a rigid proof-time bridge because its direct transparent runtime fold exceeded the bounded check; the rigid head then reduces to the constructed semantic path, while the public direct-sum functor keeps direct object/arrow computation and retained Hom action. |
 | `D-FAB-023` | accepted after selected-product probes | The concrete `BinaryProducts` witness reuses the whole quotient direct-sum functor and generic triangular theory. Selected point projections/pairing meet rigid Freyd observations through typed proof-time comparisons, then those rigid heads fold to constructed quotient semantics. Direct rules on the generic point heads exceeded the bounded check; the selected bridge preserves those heads for beta/eta and adds no warning beyond the exact import union. |
+| `D-FAB-024` | accepted after terminal-zero probes | Terminality of the zero presentation is constructed from zero-row matrix uniqueness and the existing agreement/groupoidification/truncation descent, not postulated from preadditivity or encoded by a manual square. The generic terminal transfor/cut remain primary; selected point and contractibility observations expose the quotient zero semantics. Cartesian evidence is their transparent product. |
 
 ## Validation Matrix
 
