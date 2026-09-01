@@ -2,6 +2,20 @@
 
 Date: 2026-09-01
 
+`../../docs/TYPESCRIPT_EMDASH_GROUPOIDIFY_SET_EXT_FREYD_PREADDITIVE_PLAN.md`
+is the active continuation from the completed Freyd class-law boundary. It
+targets the smallest missing generic theorem: maps from `Groupoidify(C)` into
+a set are equal when they agree on the whole unit. The selected construction
+assembles set-valued pointwise paths into one whole transformation, applies
+the existing groupoidification extension functor and its retained Hom action,
+and closes with the established extension/restriction eta. That theorem then
+combines with restricted truncation induction to promote additive-group and
+bilinearity laws from raw Freyd classes to arbitrary quotient-Hom points and
+construct the first honest generic `PreadditiveCategory` package and Freyd
+instance. General dependent groupoidification, source functoriality and its
+adjunction, biproducts/additivity, weak kernels, Abelian structure, and homology
+remain explicit later gates.
+
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PREADDITIVE_DESCENT_PLAN.md` is the
 completed continuation from the formal Freyd presentation-category skeleton. It
 first corrects the earlier runtime-owner diagnosis: identity and a rigid
