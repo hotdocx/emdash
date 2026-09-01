@@ -438,6 +438,30 @@ may choose different bases of the same syzygy module. Retain disagreements as
 diagnostics; never overwrite native output. Real process execution remains
 opt-in and separately tested from pure script construction.
 
+### Implemented Singular differential result
+
+`src/v3_2/algebra_polynomial_weak_kernel_singular.ts` now builds a pure
+deterministic Singular program for the selected native weak kernel. Singular
+computes `syz(F)` while the script installs the native generator matrix `N`;
+it reduces every native generator against `std(syz(F))` and every oracle
+generator against `std(N)`. The comparison therefore tests equality of the
+generated submodules in both directions rather than literal basis text.
+
+The adapter parses only stable integer markers for both inclusions and the
+oracle generator count. It returns immutable agreement/disagreement data and
+never replaces the native result. Process requests are shell-free, bounded to
+30 seconds and one megabyte of output, and use the injected transport. Source-
+rank-zero and target-rank-zero cases have deterministic direct scripts instead
+of invalid empty Singular vectors.
+
+Focused tests cover agreement, one-sided disagreement, deterministic script
+shape, bounded process requests, malformed/failed output, and both rank-zero
+boundaries. The optional real-process test passes against installed Singular
+4.3.2 for a nontrivial three-column polynomial matrix. The ordinary suite
+passes `5` active tests with one intentional skip; the real gate passes `6/6`.
+The adapter remains internal to the weak-kernel model until the final public-
+surface audit, avoiding another shared aggregate at this isolated oracle row.
+
 ## Computational-To-Formal Bridge
 
 The active formal polynomial layer is universal-property based rather than a
@@ -557,7 +581,7 @@ genuine capability consumer and must not be deferred behind documentation.
 | `WKH-SYZYGY-2` | complete; checkpoint `b4b8de6` | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
 | `WKH-LIFT-3` | complete; combined lift/category checkpoint pending | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
 | `WKH-CATEGORY-4` | complete; checkpoint pending | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
-| `WKH-SINGULAR-5` | ready | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
+| `WKH-SINGULAR-5` | complete; checkpoint pending | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
 | `WKH-FORMAL-6` | ready after owner probe | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
 | `WKH-BRIDGE-7` | blocked by native and formal rows | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
 | `WKH-CLOSE-8` | blocked by accepted/deferred rows | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
@@ -585,6 +609,7 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-013` | accepted after original-column probes | The selected syzygy carrier is the base `term-over-position` free module indexed by every original column, including zero columns. Pulled-back Schreyer relations plus one rewrite per original generator form the raw generating family; the final Gröbner basis is selected only after every raw and final relation reconstructs zero. |
 | `D-WKH-014` | accepted after lift probes | The weak-kernel morphism uses the final syzygy Gröbner-basis vectors as columns. Test lifts use direct division quotients against that same basis rather than transformed membership coefficients for the raw generating family; this keeps the lift source rank aligned with the selected weak-kernel object. |
 | `D-WKH-015` | accepted after category probes | TypeScript needed a genuine finite-free polynomial category facade before weak-kernel qualification. It is constructed as an additive category first, then extended by one whole weak-kernel operation and derived observations. Weak kernels and weak cokernels are dual doctrine descriptors, but only the field-polynomial weak-kernel side has an implementation in this goal. |
+| `D-WKH-016` | accepted after Singular probes | Differential comparison is bidirectional submodule membership between `syz(F)` and the native generator module, not literal basis equality. Rank-zero cases use direct mathematically forced scripts; disagreements remain non-authoritative observations. |
 
 ## Validation Matrix
 
