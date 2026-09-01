@@ -414,6 +414,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   weak-kernel annihilator fibre on an arrow into `X+Z`. The selected weak-
   kernel factor becomes the lift, and one combined reconstruction derives
   both projection equations. No uniqueness or manual square field is added.
+- `emdash3_2_computational_weak_pullback_compatibility.lp` and
+  `emdash3_2_computational_weak_pullback_cones.lp`: derive the conventional
+  equalizing equation from difference-zero by generic abelian cancellation,
+  and conversely turn an explicitly equalizing pair into the internal
+  annihilator cone. Precomposition preservation of negation is proved from
+  bilinearity; no new cone carrier or runtime rule is introduced.
 - `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
   witness-enriched Construction 3.6. It appends the morphism datum to target
   relations, constructs the identity-data projection, and uses an explicit
@@ -5485,6 +5491,15 @@ presentation and projection from matrix block laws, accepts the explicit
 zero-composite agreement, builds the horizontal relation witness for the
 colift, and produces quotient paths for annihilation, reconstruction, and
 uniqueness. It deliberately preserves the effectiveness boundary above.
+
+The native polynomial Freyd kernel now follows Construction 3.10 literally.
+It weak-pullbacks the morphism datum against target relations, then weak-
+pullbacks the first projection against source relations. The second first
+projection is the kernel relation map and the first first projection is the
+embedding datum. A retained zero-composite agreement supplies the first lift;
+the test's relation witness supplies the second. The implementation checks the
+embedding square, annihilation, lift square, reconstruction, and quotient
+uniqueness of competing lifts.
 
 ## Book And Renderer Workflow
 

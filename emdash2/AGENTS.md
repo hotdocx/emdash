@@ -83,7 +83,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   Freyd kernels/cokernels, and Abelian structure remain separate layers.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
-  of an arrow into the selected biproduct, not a manual square record.
+  of an arrow into the selected biproduct, not a manual square record. Its
+  compatibility/cone theorem modules derive `alpha o p = gamma o q` by
+  additive cancellation and turn an explicit equalizing pair back into that
+  internal cone.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

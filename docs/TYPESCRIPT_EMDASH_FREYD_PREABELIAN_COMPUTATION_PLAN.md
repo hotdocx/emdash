@@ -577,8 +577,9 @@ Refine or reject a candidate when it:
 | `FPA-UNIVERSAL-3` | complete; checkpoint `66d2687` | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
 | `FPA-WEAK-PB-4` | complete; checkpoint `ba573800` | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-NATIVE-5A` | complete; checkpoint `3625a254` | Freyd presentation/additive owners | native unconditional Freyd whole cokernel, object, projection, witness-retaining colift, annihilation, reconstruction, quotient uniqueness |
-| `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint pending; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
-| `FPA-KERNEL-6` | active | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
+| `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint `4cd1348c`; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
+| `FPA-KERNEL-NATIVE-6A` | complete; checkpoint pending | polynomial Freyd presentation + weak pullbacks | native Freyd whole kernel, object, embedding, two-stage lift, annihilation, reconstruction, quotient uniqueness |
+| `FPA-KERNEL-FORMAL-6B` | active | formal witnessed weak pullbacks + explicit zero agreement | witness-enriched formal kernel presentation/embedding/lift and quotient paths; closed quotient package subject to the same effectiveness boundary |
 | `FPA-CATEGORY-7` | blocked on kernel/cokernel | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | blocked on universal + concrete constructions | explicit weak-kernel capability | capability-parameterized formal Freyd pre-Abelian package and selected proof-CAS consumers |
 | `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
@@ -614,6 +615,8 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-020` | accepted after native cokernel tests | Polynomial Freyd cokernels adjoin the morphism columns to the target relation module. Projection datum is ambient identity; a retained zero-composite agreement makes the colift well-defined, and quotient congruence verifies reconstruction and uniqueness. No weak-kernel call occurs. |
 | `D-FPA-021` | accepted after formal cokernel audit | The current set-truncated Freyd Hom exposes agreement witnesses only in the forward direction. A quotient equality does not yet decode constructively to the raw target-factorization witness needed to build a colift. Do not fabricate that decoder, use choice, or postulate a closed `ComputationalCokernel`; first implement witness-enriched formal operations and gate quotient packaging on an effective-quotient theorem. |
 | `D-FPA-022` | accepted after formal witnessed-cokernel probe | The witness-enriched construction is fully internal: relation matrix `[R_Q,F]`, projection witnesses `inl`, annihilation witness `inr`, and colift witness `[W_h,H_0]`. Existing agreement-to-path machinery proves quotient annihilation, reconstruction, and uniqueness without any runtime rule. |
+| `D-FPA-023` | accepted after compatibility/cone probes | Difference-zero and conventional equalizing equations are two theorem-level views of one weak-pullback carrier. Generic abelian cancellation derives `alpha o p = gamma o q`; pairing plus bilinearity turns an explicit equality back into the annihilator cone. |
+| `D-FPA-024` | accepted after native kernel tests | Polynomial Freyd kernels use exactly two existing weak-pullback solves. The zero-composite agreement witness feeds the first induced map; the test morphism's retained relation witness feeds the second. The second first projection is the kernel relation map and the first first projection is the embedding datum. |
 
 ## Implemented Generic Universal Layer
 
@@ -736,6 +739,35 @@ reviewer checks pass. This closes the useful witnessed computation while the
 stronger closed quotient-level `ComputationalCokernel` package remains
 explicitly deferred behind effective quotient-path decoding. The owner and
 reviewer are registered, and the refreshed health snapshot covers 405 files.
+
+## Implemented Native Freyd Kernels
+
+The weak-pullback theorem layer now derives ordinary compatibility by generic
+abelian cancellation and supplies `weak_pullback_cone_intro`, which maps an
+explicit equalizing pair back into the existing difference-annihilator fibre.
+These rule-free modules preserve one cone carrier and make formal Freyd kernel
+inputs available without a manual square record.
+
+`algebra_polynomial_freyd_kernel.ts` implements Posur Construction 3.10 with
+two calls to the existing polynomial weak-pullback algorithm. The first
+combines the morphism datum with target relations. The second combines its
+first projection with source relations. Its first projection becomes the
+kernel presentation relation map; the first construction's first projection
+becomes the embedding datum, and the second projection is checked as the
+embedding relation witness.
+
+For a test morphism, the retained zero-composite agreement supplies the first
+weak-pullback leg. The first selected lift composed with source relations and
+the test's relation witness supply the second pair. The resulting presentation
+morphism is checked for relation preservation, Freyd reconstruction, and
+quotient uniqueness of competing lifts. Four focused tests cover a nontrivial
+`(-y,x)` syzygy, both weak-pullback stages, progress, identity/zero boundaries,
+non-annihilated and endpoint rejection, uniqueness, frozen data, and
+deterministic replay. The two formal weak-pullback theorem modules are
+rule-free, strict-LHS clean, and warning-neutral at
+`1,386 = 1,217 + 169`; source/reviewer checks pass. The native kernel,
+cokernel, and weak-pullback matrix passes `12/12`, along with typecheck and
+affected lint. The refreshed health snapshot covers 407 files.
 
 ## Validation Matrix
 

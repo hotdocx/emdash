@@ -881,10 +881,14 @@ Coker(α)                   : dual coannihilator/contractible-colift data
 lift_α(τ,p), colift_α(τ,p) : selected universal factors
 PreAb(C)                   : additive C with selected kernels and cokernels
 WPB(α,γ)                   : WK([α,−γ]) with projected legs
-lift_WPB(c)                : selected nonunique factor of an encoded cone.
+lift_WPB(c)                : selected nonunique factor of an encoded cone
+α o p = γ o q              : derived conventional WPB compatibility
+cone(a,b,e)                : equalizing pair re-encoded as difference-zero
 Coker_Freyd(f)             : target presentation with relation matrix [R_Q,F]
 q_f                        : identity-data quotient projection
-colift_f(h,H₀)             : colift consuming explicit zero agreement H₀.
+colift_f(h,H₀)             : colift consuming explicit zero agreement H₀
+Ker_Freyd(f)               : presentation from two biased weak pullbacks
+lift_f(τ,H₀)               : kernel lift using H₀ and τ's relation witness.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -943,6 +947,8 @@ The literal owners are `CommRingFiniteFree_cat`,
 `computational_weak_pullback_proj2`,
 `computational_weak_pullback_lift`,
 `HasComputationalWeakPullbacks`,
+`computational_weak_pullback_compatibility_path`,
+`weak_pullback_cone_intro`,
 `comm_ring_freyd_cokernel_presentation`,
 `comm_ring_freyd_cokernel_projection`,
 `comm_ring_freyd_cokernel_annihilation_path`,

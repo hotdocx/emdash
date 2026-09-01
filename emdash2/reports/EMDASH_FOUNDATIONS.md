@@ -3318,6 +3318,13 @@ associativity and congruence. The native polynomial implementation performs
 the same construction on the concatenated difference matrix and verifies the
 ordinary cospan compatibility and both reconstructed test maps.
 
+The difference encoding also derives the usual equation
+`alpha o p = gamma o q`: bilinearity expands the zero equation, composition
+preserves additive inverse, and abelian cancellation removes the negative
+summand. Conversely, a pair with that equality forms a product arrow whose
+difference composite is zero, hence an internal cone. These are theorem-level
+views of one carrier, not parallel weak-pullback notions.
+
 At the operational Freyd level, cokernels require no weak-kernel solve. For a
 presentation morphism `f : P -> Q`, the target relations are extended by the
 columns of `f`; the projection datum is the ambient identity. A test colift
@@ -3342,6 +3349,15 @@ colift relation witness is the horizontal block `[W_h,H_0]`. Matrix block laws
 prove it is relation-preserving, and the existing agreement-to-path ladder
 proves reconstruction and quotient uniqueness. Thus the useful algorithm is
 internal and checked even though arbitrary truncated paths are not decoded.
+
+For polynomial Freyd kernels, the first weak pullback combines the morphism
+datum with the target relation map. The second combines its first projection
+with the source relation map. The latter first projection is the relation map
+of the kernel presentation; the former first projection is the embedding
+datum. For a test morphism, its explicit zero-composite agreement supplies the
+target-relation leg of the first induced map, and its existing relation witness
+supplies the second. Both weak-pullback reconstructions are retained, followed
+by Freyd reconstruction and quotient uniqueness.
 
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
