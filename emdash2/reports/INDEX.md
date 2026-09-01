@@ -2,7 +2,7 @@
 
 Date: 2026-09-01
 
-`../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the active
+`../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:
 finite-free matrix Homs feed raw presentation maps; fixed-endpoint agreement
 categories are groupoidified and `0`-truncated to quotient Hom sets; elements

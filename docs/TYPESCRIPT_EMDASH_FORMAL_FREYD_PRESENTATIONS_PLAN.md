@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-FREYD-PRESENTATIONS`
 
-Status: implementation complete on a dedicated branch/worktree; final
-conformance/documentation checkpoint pending.
+Status: completed on a dedicated branch/worktree; implementation and
+conformance checkpoint `320c8b8`.
 
 Baseline: `85f459a5e6f7f20c4451c34ad14c5b0616090c12`
 
@@ -372,7 +372,7 @@ one opaque assumption.
 | `FRP-ELEMENTS-7A` | complete for raw-class agreement and direct representable comparison; checkpoint `b4973c6` | Freyd category | representable element carrier, membership-to-equality bridge, direct comparison |
 | `FRP-COMPUTE-8A` | complete; checkpoint `b4973c6` | raw/congruence owners | whole operations, direct category, compiler/graph agreement, deterministic artifact |
 | `FRP-ABELIAN-GATE-9A` | complete as explicit non-Abelian capability boundary; checkpoint `b4973c6` | Freyd category | explicit weak-kernel/coherence interface and supported-polynomial feasibility probe; no unconditional Abelian claim |
-| `FRP-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
+| `FRP-CONFORMANCE-10A` | complete; checkpoint `320c8b8` | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Every completed row requires focused positive/negative
