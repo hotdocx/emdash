@@ -363,15 +363,15 @@ one opaque assumption.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FRP-PLAN-0` | in progress | completed bounded complexes at `85f459a` and reviewed categorical continuation | living plan, isolated branch/worktree, exact baseline, layered architecture, validation, Git limits |
-| `FRP-AUDIT-1A` | pending | plan | matrix-law and category-head owner probes, quotient-Hom orientation, capability boundary |
-| `FRP-FREE-2A` | pending | audit | matrix identity/laws and formal/direct finite-free category |
-| `FRP-RAW-3A` | pending | finite-free category | raw presentation identity/composition/addition and congruence compatibility |
-| `FRP-AGREE-4A` | pending | raw morphisms | fixed-endpoint morphism-agreement categories with derived identity/composition |
-| `FRP-QUOTIENT-HOM-5A` | pending | agreement category | groupoidified and `0`-truncated quotient Hom objects and class maps |
-| `FRP-FREYD-6A` | pending | quotient Homs | formal Freyd presentation category with descended identity/composition and selected preadditivity |
-| `FRP-ELEMENTS-7A` | pending | Freyd category | representable element carrier, membership-to-equality bridge, direct comparison |
-| `FRP-COMPUTE-8A` | pending | raw/congruence owners | whole operations, direct category, compiler/graph agreement, deterministic artifact |
-| `FRP-ABELIAN-GATE-9A` | pending | Freyd category | explicit weak-kernel/coherence interface and supported-polynomial feasibility probe; no unconditional Abelian claim |
+| `FRP-AUDIT-1A` | complete; categorical checkpoint pending | plan | matrix-law and category-head owner probes, quotient-Hom orientation, capability boundary |
+| `FRP-FREE-2A` | complete with stable-pointwise boundary; categorical checkpoint pending | audit | matrix identity/laws and formal/direct finite-free category |
+| `FRP-RAW-3A` | complete computationally; explicit formal class descent deferred | finite-free category | raw presentation identity/composition/addition and congruence compatibility |
+| `FRP-AGREE-4A` | complete with generic category operations; categorical checkpoint pending | raw morphisms | fixed-endpoint morphism-agreement categories with derived identity/composition |
+| `FRP-QUOTIENT-HOM-5A` | complete; categorical checkpoint pending | agreement category | groupoidified and `0`-truncated quotient Hom objects and class maps |
+| `FRP-FREYD-6A` | complete as category/Hom skeleton; explicit raw-class identity/composition descent deferred | quotient Homs | formal Freyd presentation category with descended identity/composition and selected preadditivity |
+| `FRP-ELEMENTS-7A` | complete for raw-class agreement and direct representable comparison; categorical checkpoint pending | Freyd category | representable element carrier, membership-to-equality bridge, direct comparison |
+| `FRP-COMPUTE-8A` | complete; categorical checkpoint pending | raw/congruence owners | whole operations, direct category, compiler/graph agreement, deterministic artifact |
+| `FRP-ABELIAN-GATE-9A` | complete as explicit non-Abelian capability boundary; categorical checkpoint pending | Freyd category | explicit weak-kernel/coherence interface and supported-polynomial feasibility probe; no unconditional Abelian claim |
 | `FRP-CONFORMANCE-10A` | pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
@@ -397,6 +397,61 @@ tests, proportional validation, and a local checkpoint.
 | `D-FRP-013` | accepted | Direct matrices remain the backend beneath category/doctrine/tower/compiler abstraction. |
 | `D-FRP-014` | accepted | Local validated checkpoints are authorized; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-FRP-015` | accepted | Orthogonal path-cubical/strictness histories remain excluded. |
+| `D-FRP-016` | accepted after category probe | Broad runtime identity/composition rules on the finite-free category time out; generic category operations remain runtime owners and meet rigid pointwise matrix heads through proof-time unifiers. |
+| `D-FRP-017` | accepted after category probe | Rigid identity/composition heads expose constructor-level Sigma projections; no unsupported whole equality with the older transparent matrix implementation is fabricated. |
+| `D-FRP-018` | accepted after quotient-Hom probe | Agreement categories may keep generic identity/composition opaque while their objects/Homs feed `Groupoidify`; every explicit agreement witness still becomes a path and then a `0`-truncated equality. |
+| `D-FRP-019` | accepted after Freyd probe | `CommRingFreydPresentation_cat` has presentation objects and quotient Hom sets, but explicit comparison of its generic identity/composition with classes of selected raw morphisms remains a separately gated construction. |
+| `D-FRP-020` | accepted during computation | The direct TypeScript Freyd category uses computed target-factorization congruence as morphism equality; raw identity/composition revalidate through whole relation-witness computation. |
+| `D-FRP-021` | accepted during representable comparison | A Freyd element is a raw morphism from the relation-free rank-one presentation; element equality is exactly presentation-morphism congruence and matches module membership in focused examples. |
+| `D-FRP-022` | accepted at the Abelian gate | Polynomial rings with operational field coefficients expose a Gröbner/syzygy weak-kernel capability record whose `claimsAbelianStructure` field is false; the later theorem/instance remains separate. |
+
+## Owner Audit And Selected Formal Boundary
+
+The matrix identity construction itself checks quickly. A first candidate that
+rewrote generic finite-free category identity and composition directly to
+transparent matrices timed out. Splitting the probe showed the recursive
+identity was not responsible; the hot category rules were. The promoted design
+therefore follows `CommRing_cat`: `Obj` and `Hom` compute, generic category
+operations remain runtime owners, and rigid pointwise matrix heads meet them
+at proof time. Narrow `sigma_Fst`/`sigma_Snd` rules expose identity and
+composition columns. A body-unfolded unifier from the rigid composition head
+to the older transparent matrix implementation did not solve the whole
+comparison, so no such equality is claimed.
+
+`CommRingPresentationAgreement_cat(R,P,Q)` computes objects to raw
+relation-preserving morphisms and Homs to paths of target-factorization
+agreement. Applying existing category-indexed `Groupoidify` and then
+`Trunc_grpd trunc_zero` constructs a higher raw Hom groupoid and an ordinary
+set-valued quotient Hom. The unit maps raw morphisms to classes; any explicit
+agreement `H` maps to a path before and after truncation.
+
+`CommRingFreydPresentation_cat(R)` computes objects to presentations and Homs
+to path categories of those quotient sets. `FreeOne_R` yields the representable
+element carrier. Generic Freyd identity/composition exist by the category head,
+but their equality with classes of selected raw identity/composition matrices
+is not yet implemented; selected preadditivity is consequently deferred with
+that class-level descent rather than postulated.
+
+## Direct Computational Freyd Result
+
+`src/v3_2/algebra_polynomial_freyd_category.ts` supplies the concrete model.
+Raw identity and composition compute generator maps and re-enter the whole
+relation-witness constructor. Morphism equality recomputes target-relation
+agreement rather than comparing raw matrices or `W` witnesses. The category,
+one constructor/tower, direct reinterpretation, operation lowering, and graph
+engine use these owners.
+
+The rank-one relation-free presentation represents elements. A vector becomes
+a raw map from that presentation; congruence between such maps is exactly
+membership of the vector difference in the target relations. Focused tests
+show `x=0` in the presentation by `(x)` while `y!=0`, validate categorical
+identity/composition, and obtain byte-identical direct/compiled raw-morphism
+results.
+
+The supported-polynomial weak-kernel record requires operational field
+coefficients and identifies the Gröbner/syzygy basis, but explicitly records no
+Abelian claim. It is readiness data for the next capability-indexed theorem,
+not an instance of it.
 
 ## Validation Policy
 
