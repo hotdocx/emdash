@@ -111,6 +111,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_direct_cover_completion_eliminator.lp)
   files+=(emdash3_2_groupoidification_hit.lp)
   files+=(emdash3_2_groupoidification_universality.lp)
+  files+=(emdash3_2_set_path_pointwise_transformation.lp)
+  files+=(emdash3_2_groupoidification_set_extensionality.lp)
   files+=(emdash3_2_groupoidification_composition.lp)
   files+=(emdash3_2_groupoidification_interval_recovery.lp)
   files+=(emdash3_2_commutative_algebra_scheme_chart_overlaps.lp)

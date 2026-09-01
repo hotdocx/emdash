@@ -4,7 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-GROUPOIDIFY-SET-EXT-FREYD-PREADDITIVE`
 
-Status: active on a dedicated branch/worktree
+Status: active on a dedicated branch/worktree; initial plan checkpoint
+`c412793`
 
 Baseline: `0e8b390060c926757dd8fae8cbf95dd49b90da09`
 
@@ -146,6 +147,41 @@ The owner requires:
 
 It must not introduce runtime equations for generic `tapp*`, functoriality, or
 naturality beyond the one constructor beta.
+
+### Implemented owner-audit result
+
+The audit confirmed that `Transf` is a primitive classifier and exposes no
+record constructor from which arbitrary pointwise paths can be assembled.
+The stable `set_path_pointwise_transf` owner is therefore required and has
+been promoted in `emdash3_2_set_path_pointwise_transformation.lp`. Its sole
+runtime rule is the component beta above, with every reconstructible implicit
+LHS slot written as `_`.
+
+The direct attempt to use pointwise unit paths as components of the restricted
+functors also exposed a distinct, expected normal-form boundary:
+
+```text
+groupoidify_restrict_at(h)[x]
+```
+
+retains the stable Cat-level precomposition presentation and does not reduce
+directly to `h(unit(x))`. No new precomposition rule was added. Instead,
+`groupoidify_restrict_point_path` applies object evaluation by `eq_ap` to the
+already existing whole `groupoidify_restrict_at_path`; this derives exactly
+the needed point path and preserves the established runtime owner.
+
+The whole `groupoidify_set_map_ext` construction then checks exactly as
+planned. The focused warning comparison reports 1,274 baseline diagnostics
+and 1,274 diagnostics with the new modules. Neither the new stable owner nor
+the derived extensionality surface adds a critical-pair or replaceable-slot
+warning. Strict LHS audits report zero unreviewed slots.
+
+An attempted resumable health refresh in the fresh worktree found no complete
+local resume state and began checking the broad registered corpus. It was
+intentionally interrupted rather than violating the proportional-validation
+boundary. No health result is claimed for that command; the generated health
+snapshot remains assigned to `GSE-CLOSE-8A` after the substantive source set
+is complete.
 
 ## Set-Target Groupoidification Extensionality
 
@@ -341,10 +377,10 @@ Freyd/Abelian structure packages its consequences rather than replacing it.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `GSE-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed Freyd checkpoint `0e8b390` | living plan, isolated branch/worktree, clean baseline, focused checks, Git limits, persistent goal |
-| `GSE-AUDIT-1A` | ready | plan | exact restriction component and pointwise-whole owner audit with an explicit accept/reject observation |
-| `GSE-SET-TRANSF-2A` | blocked by audit | owner audit | whole set-valued pointwise transformation, component beta, retained action, noncollapse, warnings and LHS audit |
-| `GSE-MAP-EXT-3A` | blocked by set-transf owner | set transformation | generic set-target map extensionality constructed from extension/restriction and eta |
-| `GSE-TRUNC-LIFT-4A` | blocked by map extensionality | generic extensionality | only the curried/truncation helpers required to pass from generators to arbitrary quotient points |
+| `GSE-AUDIT-1A` | complete; first semantic checkpoint pending | plan | exact restriction component and pointwise-whole owner audit with an explicit accept/reject observation |
+| `GSE-SET-TRANSF-2A` | complete; first semantic checkpoint pending | owner audit | whole set-valued pointwise transformation, component beta, retained action, noncollapse, warnings and LHS audit |
+| `GSE-MAP-EXT-3A` | complete; first semantic checkpoint pending | set transformation | generic set-target map extensionality constructed from extension/restriction and eta |
+| `GSE-TRUNC-LIFT-4A` | ready | generic extensionality | only the curried/truncation helpers required to pass from generators to arbitrary quotient points |
 | `GSE-FREYD-LAWS-5A` | blocked by lift | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
 | `GSE-PREADDITIVE-6A` | blocked by full laws | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
 | `GSE-CONFORMANCE-7A` | blocked by active formal rows | formal package | focused reviewers and only necessary TS/Core/Lambdapi conformance |
@@ -359,7 +395,7 @@ synchronized ledger. Difficulty alone is not evidence for an opaque axiom.
 | --- | --- | --- |
 | `D-GSE-001` | accepted | Set-target map extensionality is the smallest concrete generic prerequisite; a full dependent Groupoidify eliminator is not selected. |
 | `D-GSE-002` | accepted | The proof remains whole: pointwise unit paths assemble one transformation, whose extension action is composed with existing eta paths. |
-| `D-GSE-003` | accepted | A stable set-pointwise transformation owner is permitted only if the primitive Transf classifier prevents transparent assembly. |
+| `D-GSE-003` | accepted after owner audit | `Transf` is primitive and has no exposed constructor; a narrow stable set-pointwise whole transformation owner is required. |
 | `D-GSE-004` | accepted | Consumers never supply naturality squares; sethood makes the relevant coherence proposition-valued. |
 | `D-GSE-005` | accepted | Any new runtime rule is limited to the stable owner's constructor-visible component; generic tapp/fapp computation remains globally owned. |
 | `D-GSE-006` | accepted | Freyd promotion uses set-target map extensionality followed by existing truncation induction, with currying rather than speculative n-ary eliminators. |
@@ -367,6 +403,8 @@ synchronized ledger. Difficulty alone is not evidence for an opaque axiom.
 | `D-GSE-008` | accepted | Preadditive is not additive; zero objects and biproducts are the next structural gate. |
 | `D-GSE-009` | accepted | Groupoidify source action/adjunction and arbitrary dependent induction are orthogonal non-goals. |
 | `D-GSE-010` | accepted | No repository-wide TypeScript or repository aggregate is required during the focused implementation loop. |
+| `D-GSE-011` | accepted after projection probe | Restriction points are derived by applying `eq_ap` to the existing whole restriction path; no generic precomposition runtime rule is added. |
+| `D-GSE-012` | accepted after warning comparison | The component beta adds no diagnostics: the focused baseline and candidate each report 1,274 warning instances, and strict LHS audits are clean. |
 
 ## Validation Matrix
 

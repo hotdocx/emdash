@@ -68,6 +68,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_walking_interval_universality.lp"),
     Path("emdash3_2_groupoidification_hit.lp"),
     Path("emdash3_2_groupoidification_universality.lp"),
+    Path("emdash3_2_set_path_pointwise_transformation.lp"),
+    Path("emdash3_2_groupoidification_set_extensionality.lp"),
     Path("emdash3_2_groupoidification_composition.lp"),
     Path("emdash3_2_groupoidification_interval_recovery.lp"),
     Path("emdash3_2_walking_circle_completion.lp"),
