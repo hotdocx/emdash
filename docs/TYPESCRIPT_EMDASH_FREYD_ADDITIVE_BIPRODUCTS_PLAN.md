@@ -395,6 +395,33 @@ unreviewed slots; and predecessor and candidate warning-enabled checks both
 report `1,300 = 1,143 + 157` diagnostics, with no warning owned by the new
 module.
 
+### Implemented selected-binary-products result
+
+`emdash3_2_commutative_algebra_freyd_binary_products.lp` selects the existing
+whole Freyd direct-sum functor as a `BinaryProducts` structure. It does not
+restate the triangular theory. The generic whole projection transfors,
+pairing transfor, pairing functors, `K_i^a` operations, beta/eta rules,
+naturality, distribution, and comparison with whole product-functor action
+remain the runtime and higher-action owners.
+
+The concrete instance connects the two selected point projections and point
+pairing to the constructed quotient operations. Direct runtime rules on the
+generic `binary_products_*_fapp0` heads repeatedly exceeded the 90-second
+bound because they enlarged already-hot generic triangular decision trees.
+The promoted design instead uses one rigid Freyd head per observation, a
+narrow proof-time unifier from the selected generic observation to that head,
+and a typed `eq_refl` path declared before the rigid head folds at runtime to
+the quotient projection or pairing. Thus the generic heads survive for
+Došen-style normalization, while their concrete Freyd meaning is explicit,
+non-opaque, and propositionally available.
+
+The source and reviewer pass bounded quiet checking. The reviewer instantiates
+generic product beta and eta, retains the whole pairing functor, checks the
+three concrete comparison routes, and keeps projection distinct from zero.
+The strict LHS audit is empty. The warning-enabled import-union baseline and
+candidate both report `1,382 = 1,215 + 167`; the selected instance adds no
+warning family.
+
 The selected whole functor is approximately:
 
 ```text
@@ -577,8 +604,8 @@ consequences rather than replacing it.
 | `FAB-FREE-4A` | complete; checkpoint `38e54d1` | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
 | `FAB-PRESENTATION-5A` | complete; checkpoint `794f163` | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
 | `FAB-AGREEMENT-5B` | complete; checkpoint `5d7ce09` | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
-| `FAB-DESCENT-6A` | complete; checkpoint pending | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
-| `FAB-CARTESIAN-7A` | ready | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
+| `FAB-DESCENT-6A` | complete; checkpoint `5643fbf` | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
+| `FAB-CARTESIAN-7A` | in progress; selected binary products complete, checkpoint pending; terminal-zero and Cartesian assembly ready | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
 | `FAB-CLOSE-10A` | blocked by accepted/deferred rows | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
@@ -613,6 +640,7 @@ evidence for an opaque axiom.
 | `D-FAB-020` | accepted after presentation probes | Zero/sum objects and raw sum/projection/pairing morphisms are flattened matrix data whose retained relation squares are all constructed from block laws. |
 | `D-FAB-021` | accepted after agreement probes | Direct-sum and pairing agreement witnesses are block-diagonal/vertical combinations; subtraction compatibility closes their laws without quotient axioms. |
 | `D-FAB-022` | accepted after quotient-descent probes | Nested agreement-groupoidification and set-truncation descent construct quotient pairing without representative choice. The outer generic action uses a rigid proof-time bridge because its direct transparent runtime fold exceeded the bounded check; the rigid head then reduces to the constructed semantic path, while the public direct-sum functor keeps direct object/arrow computation and retained Hom action. |
+| `D-FAB-023` | accepted after selected-product probes | The concrete `BinaryProducts` witness reuses the whole quotient direct-sum functor and generic triangular theory. Selected point projections/pairing meet rigid Freyd observations through typed proof-time comparisons, then those rigid heads fold to constructed quotient semantics. Direct rules on the generic point heads exceeded the bounded check; the selected bridge preserves those heads for beta/eta and adds no warning beyond the exact import union. |
 
 ## Validation Matrix
 
