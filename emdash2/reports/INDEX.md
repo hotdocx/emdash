@@ -2,6 +2,18 @@
 
 Date: 2026-09-01
 
+`../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PREADDITIVE_DESCENT_PLAN.md` is the
+active continuation from the formal Freyd presentation-category skeleton. It
+first corrects the earlier runtime-owner diagnosis: identity and a rigid
+composition target check quickly, while reducing generic composition directly
+to the transparent recursive matrix body triggers an explosive overlap with
+existing syntactic functoriality. It then constructs the missing non-opaque
+rigid/transparent matrix comparison and algebra paths, formal raw presentation
+identity/composition/zero/addition, agreement compatibility, quotient-Hom
+descent through groupoidification and `0`-truncation, and the smallest checked
+preadditive Hom package. Biproducts, additive/Abelian structure, weak kernels,
+exactness, and homology remain later gates.
+
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:
 finite-free matrix Homs feed raw presentation maps; fixed-endpoint agreement
