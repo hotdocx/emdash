@@ -692,7 +692,7 @@ consequences rather than replacing it.
 | `FAB-CARTESIAN-7A` | complete; selected-product checkpoint `d3880d0`; terminal-zero/Cartesian checkpoint `219660a` | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | complete; checkpoint `118d6c2` | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | complete; checkpoint `eadfc8e` | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
-| `FAB-CLOSE-10A` | complete; closeout checkpoint pending | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
+| `FAB-CLOSE-10A` | complete; closeout checkpoint `638d45d` | all rows | reviewers, standing docs, catalog/health, proportional final gates and checkpoints |
 
 Rows may be split, reordered when dependencies permit, rejected, or deferred
 only with durable evidence and a synchronized ledger. Difficulty alone is not
