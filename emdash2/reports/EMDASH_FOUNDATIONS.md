@@ -3359,6 +3359,15 @@ target-relation leg of the first induced map, and its existing relation witness
 supplies the second. Both weak-pullback reconstructions are retained, followed
 by Freyd reconstruction and quotient uniqueness.
 
+The formal version is capability-parameterized rather than ring-axiomatized.
+Given computational weak kernels in the finite-free base, the same two
+internal weak pullbacks produce a presentation, embedding, and annihilation
+agreement. An explicit zero agreement forms the first cone; functoriality of
+the test relation square forms the second. For uniqueness, the difference of
+a competing and selected lift, together with the competing reconstruction
+witness, forms another second-stage cone. Its factor is exactly the agreement
+witness proving the two lifts equal in the Freyd quotient.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation

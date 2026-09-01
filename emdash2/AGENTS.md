@@ -91,6 +91,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality
   back into a raw agreement witness.
+  `emdash3_2_commutative_algebra_freyd_kernels.lp` consumes an explicit
+  finite-free weak-kernel capability, performs the two weak-pullback
+  construction, and retains zero/reconstruction agreements through lift and
+  quotient uniqueness.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

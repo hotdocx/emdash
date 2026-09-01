@@ -427,6 +427,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   witness. Agreement paths establish quotient annihilation, reconstruction,
   and uniqueness. A closed generic `ComputationalCokernel` instance remains
   gated on effective decoding of truncated quotient paths.
+- `emdash3_2_commutative_algebra_freyd_kernels.lp`: rule-free
+  witness-enriched Construction 3.10, parameterized by an explicit
+  finite-free `HasComputationalWeakKernels` capability. Two internal weak
+  pullbacks construct the kernel presentation and embedding. A zero-composite
+  agreement and the test relation witness construct its two-stage lift;
+  agreement paths prove annihilation, reconstruction, and monic uniqueness.
+  No arbitrary-`CommRing` capability or quotient-path decoder is asserted.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5500,6 +5507,13 @@ embedding datum. A retained zero-composite agreement supplies the first lift;
 the test's relation witness supplies the second. The implementation checks the
 embedding square, annihilation, lift square, reconstruction, and quotient
 uniqueness of competing lifts.
+
+The formal witnessed construction now matches it: an explicit base
+weak-kernel capability constructs both weak pullbacks, conventional
+compatibility supplies the embedding square, and explicit zero/reconstruction
+agreements feed both lift stages and the uniqueness factor through the second
+weak pullback. Quotient paths expose the resulting equations without claiming
+a capability for arbitrary rings.
 
 ## Book And Renderer Workflow
 

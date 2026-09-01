@@ -72,6 +72,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_cartesian.lp"),
     Path("emdash3_2_commutative_algebra_freyd_additive.lp"),
     Path("emdash3_2_commutative_algebra_freyd_cokernels.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_kernels.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_laurent.lp"),

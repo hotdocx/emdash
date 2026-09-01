@@ -578,9 +578,9 @@ Refine or reject a candidate when it:
 | `FPA-WEAK-PB-4` | complete; checkpoint `ba573800` | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-NATIVE-5A` | complete; checkpoint `3625a254` | Freyd presentation/additive owners | native unconditional Freyd whole cokernel, object, projection, witness-retaining colift, annihilation, reconstruction, quotient uniqueness |
 | `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint `4cd1348c`; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
-| `FPA-KERNEL-NATIVE-6A` | complete; checkpoint pending | polynomial Freyd presentation + weak pullbacks | native Freyd whole kernel, object, embedding, two-stage lift, annihilation, reconstruction, quotient uniqueness |
-| `FPA-KERNEL-FORMAL-6B` | active | formal witnessed weak pullbacks + explicit zero agreement | witness-enriched formal kernel presentation/embedding/lift and quotient paths; closed quotient package subject to the same effectiveness boundary |
-| `FPA-CATEGORY-7` | blocked on kernel/cokernel | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
+| `FPA-KERNEL-NATIVE-6A` | complete; checkpoint `6d0ef4c0` | polynomial Freyd presentation + weak pullbacks | native Freyd whole kernel, object, embedding, two-stage lift, annihilation, reconstruction, quotient uniqueness |
+| `FPA-KERNEL-FORMAL-6B` | complete at witness-enriched boundary; checkpoint pending; closed quotient package subject to effective path/witness decoding | formal witnessed weak pullbacks + explicit zero agreement | formal kernel presentation/embedding/two-stage lift, annihilation, reconstruction and monic uniqueness |
+| `FPA-CATEGORY-7` | active | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | blocked on universal + concrete constructions | explicit weak-kernel capability | capability-parameterized formal Freyd pre-Abelian package and selected proof-CAS consumers |
 | `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
 | `FPA-CLOSE-10` | blocked on all required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused/static/integration gates, exact checkpoints and successor boundary |
@@ -617,6 +617,7 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-022` | accepted after formal witnessed-cokernel probe | The witness-enriched construction is fully internal: relation matrix `[R_Q,F]`, projection witnesses `inl`, annihilation witness `inr`, and colift witness `[W_h,H_0]`. Existing agreement-to-path machinery proves quotient annihilation, reconstruction, and uniqueness without any runtime rule. |
 | `D-FPA-023` | accepted after compatibility/cone probes | Difference-zero and conventional equalizing equations are two theorem-level views of one weak-pullback carrier. Generic abelian cancellation derives `alpha o p = gamma o q`; pairing plus bilinearity turns an explicit equality back into the annihilator cone. |
 | `D-FPA-024` | accepted after native kernel tests | Polynomial Freyd kernels use exactly two existing weak-pullback solves. The zero-composite agreement witness feeds the first induced map; the test morphism's retained relation witness feeds the second. The second first projection is the kernel relation map and the first first projection is the embedding datum. |
+| `D-FPA-025` | accepted after formal witnessed-kernel probes | Formal Construction 3.10 is parameterized by the finite-free weak-kernel capability. The zero agreement and source relation square construct the two lift cones. For uniqueness, the difference between a competing and selected lift plus the competing reconstruction witness forms a second-stage cone whose factor is exactly the Freyd agreement witness. |
 
 ## Implemented Generic Universal Layer
 
@@ -768,6 +769,22 @@ rule-free, strict-LHS clean, and warning-neutral at
 `1,386 = 1,217 + 169`; source/reviewer checks pass. The native kernel,
 cokernel, and weak-pullback matrix passes `12/12`, along with typecheck and
 affected lint. The refreshed health snapshot covers 407 files.
+
+`emdash3_2_commutative_algebra_freyd_kernels.lp` now implements the
+witness-enriched formal counterpart. It constructs both weak pullbacks from an
+explicit `HasComputationalWeakKernels` value, exposes the kernel presentation
+and embedding, proves annihilation from first-stage compatibility, and turns
+an explicit zero-composite agreement plus the test relation witness into the
+two lift cones. Existing agreement-to-path owners prove reconstruction.
+
+Monic uniqueness is also computational: subtract the selected lift from a
+competing lift, combine the competing reconstruction agreement with the
+selected reconstruction path to obtain a second-stage equalizing pair, factor
+it through the second weak pullback, and use that factor as the presentation
+agreement witness. The rule-free source and focused reviewer pass; its warning
+inventory is exactly its import union at `1,392 = 1,223 + 169`, and the strict
+LHS audit is empty. The owner and reviewer are registered; the refreshed
+health snapshot covers 409 files.
 
 ## Validation Matrix
 

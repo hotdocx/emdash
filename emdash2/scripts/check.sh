@@ -64,6 +64,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_kernels_cokernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_kernels.lp)
   files+=(emdash3_2_gray_interchanger_orientation.lp)
   files+=(emdash3_2_gray_transformation_graph.lp)
   files+=(emdash3_2_gray_cubes.lp)
