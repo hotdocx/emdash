@@ -862,6 +862,10 @@ Hom_Freyd(P,Q)             : 0-truncated RawHom(P,Q)
 El(P) = Hom_Freyd(R,P)     : representable element carrier.
 PreAdd(Freyd_R)            : set-valued abelian Homs with bilinear composition
 PreAdd(Free_R)             : the same structure on finite-free matrix Homs
+Free_R^m ⊕ Free_R^n        : rank m+n with block-diagonal arrow action
+π₁, π₂, ⟨f,g⟩             : canonical matrix projections/vertical pairing
+0_Free                     : rank zero, both terminal and initial
+Add(Free_R)                : selected finite-free additive-category structure
 0_(P,Q), f+g, -f           : the selected Hom operations.
 0_R                        : rank-zero presentation
 P ⊕ Q                      : block-diagonal presentation direct sum
@@ -892,6 +896,10 @@ The literal owners are `CommRingFiniteFree_cat`,
 `groupoidify_set_map_ext`,
 `PreadditiveCategory`,
 `comm_ring_finite_free_preadditive`,
+`comm_ring_finite_free_binary_products`,
+`comm_ring_finite_free_terminal_zero`,
+`comm_ring_finite_free_cartesian`,
+`comm_ring_finite_free_additive`,
 `AdditiveCategory`,
 `comm_ring_zero_presentation`,
 `comm_ring_presentation_direct_sum`,

@@ -374,6 +374,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   distributivity paths through the existing generic/transparent composition
   comparison. Generic `comp_fapp0` remains the runtime owner; the module adds
   no rule or second matrix operation.
+- `emdash3_2_commutative_algebra_finite_free_binary_products.lp`,
+  `emdash3_2_commutative_algebra_finite_free_terminal_zero.lp`,
+  `emdash3_2_commutative_algebra_finite_free_cartesian.lp`, and
+  `emdash3_2_commutative_algebra_finite_free_additive.lp`: select the whole
+  block-direct-sum functor and rank zero. Stable observations expose the
+  canonical matrix projections, vertical pairing, and zero-row arrow, while
+  generic triangular and terminal owners retain whole action. The final
+  additive package transparently reuses finite-free preadditivity. The shared
+  zero-row uniqueness lemma now lives at its lower matrix owner.
 - `emdash3_2_commutative_algebra_freyd_terminal_zero.lp` and
   `emdash3_2_commutative_algebra_freyd_cartesian.lp`: derive terminality from
   zero-row matrix uniqueness and quotient descent, then transparently pair the

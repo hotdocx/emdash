@@ -572,10 +572,10 @@ Refine or reject a candidate when it:
 |---|---|---|---|
 | `FPA-PLAN-0` | complete; checkpoint `4059161` | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
 | `FPA-AUDIT-1` | complete; checkpoint `0bdd3b5` | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
-| `FPA-BASE-PREADD-2A` | complete; checkpoint pending | finite-free matrix laws | formal `PreadditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
-| `FPA-BASE-ADD-2B` | active | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
+| `FPA-BASE-PREADD-2A` | complete; checkpoint `c0ce415` | finite-free matrix laws | formal `PreadditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
+| `FPA-BASE-ADD-2B` | complete; checkpoint pending | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
 | `FPA-UNIVERSAL-3` | complete; checkpoint `66d2687` | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
-| `FPA-WEAK-PB-4` | blocked on base + weak kernels | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
+| `FPA-WEAK-PB-4` | active | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-5` | blocked on audit | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
 | `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
 | `FPA-CATEGORY-7` | blocked on kernel/cokernel | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
@@ -606,6 +606,8 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-013` | accepted after formal audit | Genuine kernel/cokernel uniqueness is contractibility of direct Hom factor fibres. The selected centre, fibre path, and contraction path derive lift/colift, reconstruction, and uniqueness without a manual universal-square record. |
 | `D-FPA-014` | accepted after universal probe | Cokernel coannihilators and factor spaces are transparent direct dual definitions over precomposition. This is a rule-free mirrored semantic surface, not a duplicated runtime theory or propositional equality bridge; it retains covariant test-object Path action. |
 | `D-FPA-015` | accepted after finite-free preadditive probe | Matrix zero/add/negate and abelian-group laws are reused definitionally. Generic `comp_fapp0` remains the runtime owner; both bilinearity paths pass through the existing generic-to-transparent matrix-composition comparison. No rewrite/unifier or parallel matrix operation is added. |
+| `D-FPA-016` | accepted after finite-free product probes | The whole direct-sum functor owns the product object/action. Narrow stable heads expose matrix projections, vertical pairing, and the terminal zero arrow; generic triangular/terminal theories retain whole transfors and runtime beta/eta. All new warning inventories equal their import unions. |
+| `D-FPA-017` | accepted during terminal audit | Zero-row matrix uniqueness is shared base algebra, so its unchanged proof moves from the Freyd terminal module to `emdash3_2_commutative_algebra_matrix_zero_rows.lp`; both finite-free and Freyd terminal constructions reuse that one owner. |
 
 ## Implemented Generic Universal Layer
 
@@ -648,6 +650,28 @@ warning-neutral at `1,274 = 1,117 + 157` against its import union.
 zero/add/negate observations and both generic distributivity paths. The module
 and reviewer are registered, and the current health snapshot covers 395
 files.
+
+## Implemented Finite-Free Additive Base
+
+The finite-free direct-sum functor is now selected as a genuine whole binary
+product. Stable point observations reduce to `comm_ring_matrix_proj1`,
+`comm_ring_matrix_proj2`, and `comm_ring_matrix_vertical`; the generic
+triangular theory retains whole projection transfors, whole pairing, higher
+action, and Došen beta/eta computation.
+
+Rank zero is selected as terminal. Its Hom contractibility is centred at the
+existing zero matrix and follows from the shared zero-row uniqueness lemma;
+the terminal-arrow observation reduces to that zero matrix. The Cartesian
+package transparently pairs these witnesses, and
+`comm_ring_finite_free_additive` pairs the result with the exact finite-free
+preadditive structure.
+
+The binary-product warning inventory is exactly its import union at
+`1,347 = 1,180 + 167`; terminal and final additive inventories are exactly
+their import unions at `1,358 = 1,189 + 169`. Strict LHS audits are clean, and
+the existing Freyd terminal source/reviewer remain green after moving the
+zero-row lemma to its lower owner. All five new owners and the focused reviewer
+are registered; the refreshed health snapshot covers 401 files.
 
 ## Validation Matrix
 

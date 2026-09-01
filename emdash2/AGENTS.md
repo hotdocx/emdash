@@ -68,7 +68,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   quotient Freyd laws and the checked preadditive instance.
   `emdash3_2_commutative_algebra_finite_free_preadditive.lp` packages the
   existing set-valued column-matrix addition and transparent distributivity
-  comparisons as the finite-free `PreadditiveCategory` instance.
+  comparisons as the finite-free `PreadditiveCategory` instance. The
+  finite-free binary-product, terminal-zero, Cartesian, and additive modules
+  select the existing direct-sum functor and rank zero, with stable matrix
+  projection/pairing/zero observations and generic triangular computation.
   `emdash3_2_additive_categories.lp` and the finite-direct-sum/Freyd additive
   extensions derive biproducts, terminal/initial zero, and the checked
   `AdditiveCategory` instance. `emdash3_2_weak_kernels.lp` owns the generic

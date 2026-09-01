@@ -3292,6 +3292,15 @@ are transported from transparent matrix multiplication through the checked
 comparison with generic categorical composition. No new matrix syntax or
 runtime composition rule is introduced.
 
+The same finite-free base selects its existing block-direct-sum functor as a
+whole binary product and rank zero as terminal. Stable point observations
+expose the canonical projection matrices, vertical pairing, and zero-row
+matrix; the generic triangular and terminal theories continue to own whole
+transfors, higher action, beta/eta, and canonical arrows. Pairing this
+Cartesian evidence with the exact preadditive package yields the formal
+finite-free `AdditiveCategory`. Zero-row uniqueness has one lower matrix owner
+shared with the Freyd terminal construction.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation
