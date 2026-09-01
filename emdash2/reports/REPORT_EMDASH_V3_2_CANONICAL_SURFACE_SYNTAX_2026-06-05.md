@@ -879,7 +879,9 @@ WK(α) = (K,κ,factor)       : selected computational weak kernel
 Ker(α)                     : weak-kernel data plus contractible factor spaces
 Coker(α)                   : dual coannihilator/contractible-colift data
 lift_α(τ,p), colift_α(τ,p) : selected universal factors
-PreAb(C)                   : additive C with selected kernels and cokernels.
+PreAb(C)                   : additive C with selected kernels and cokernels
+WPB(α,γ)                   : WK([α,−γ]) with projected legs
+lift_WPB(c)                : selected nonunique factor of an encoded cone.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -931,6 +933,13 @@ The literal owners are `CommRingFiniteFree_cat`,
 `HasComputationalKernels`,
 `HasComputationalCokernels`,
 `PreAbelianCategory`,
+`weak_pullback_difference_fapp0`,
+`ComputationalWeakPullback`,
+`WeakPullbackCone`,
+`computational_weak_pullback_proj1`,
+`computational_weak_pullback_proj2`,
+`computational_weak_pullback_lift`,
+`HasComputationalWeakPullbacks`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,

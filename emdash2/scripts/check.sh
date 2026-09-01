@@ -58,6 +58,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_cartesian.lp)
   files+=(emdash3_2_additive_categories.lp)
   files+=(emdash3_2_weak_kernels.lp)
+  files+=(emdash3_2_computational_weak_pullbacks.lp)
   files+=(emdash3_2_kernels_cokernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_gray_interchanger_orientation.lp)

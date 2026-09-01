@@ -3301,6 +3301,23 @@ Cartesian evidence with the exact preadditive package yields the formal
 finite-free `AdditiveCategory`. Zero-row uniqueness has one lower matrix owner
 shared with the Freyd terminal construction.
 
+Computational weak pullbacks are then derived rather than postulated. For a
+cospan `X --alpha--> Y <--gamma-- Z`, form
+
+```text
+[alpha,-gamma] : X+Z -> Y
+```
+
+and take its selected weak kernel. A test cone is internally an element of
+the annihilator fibre of this difference map, so it stores one arrow into the
+biproduct together with its zero path—not a separately handwritten square.
+Composing the weak-kernel arrow with the two product projections gives the
+weak-pullback projections. The selected weak-kernel factor is the induced
+map, and its single reconstruction path yields both projection laws by
+associativity and congruence. The native polynomial implementation performs
+the same construction on the concatenated difference matrix and verifies the
+ordinary cospan compatibility and both reconstructed test maps.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation

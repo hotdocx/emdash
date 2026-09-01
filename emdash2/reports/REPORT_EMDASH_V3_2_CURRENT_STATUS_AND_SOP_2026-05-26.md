@@ -408,6 +408,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   selected capabilities and a thin `PreAbelianCategory` over existing
   additive data. It does not yet construct these capabilities for the formal
   Freyd category or assert Abelian structure.
+- `emdash3_2_computational_weak_pullbacks.lp`: rule-free derived weak
+  pullbacks in any additive category with computational weak kernels. The
+  cospan difference is `[alpha,-gamma]`; a test cone is its existing
+  weak-kernel annihilator fibre on an arrow into `X+Z`. The selected weak-
+  kernel factor becomes the lift, and one combined reconstruction derives
+  both projection equations. No uniqueness or manual square field is added.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

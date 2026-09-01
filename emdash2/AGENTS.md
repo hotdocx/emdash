@@ -81,6 +81,9 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   lift/colift, reconstruction, uniqueness, whole capability, and thin
   pre-Abelian packaging. Concrete ring-wide formal capability, constructed
   Freyd kernels/cokernels, and Abelian structure remain separate layers.
+  `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
+  weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
+  of an arrow into the selected biproduct, not a manual square record.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

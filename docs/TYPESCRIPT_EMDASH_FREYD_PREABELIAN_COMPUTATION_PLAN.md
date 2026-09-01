@@ -573,10 +573,10 @@ Refine or reject a candidate when it:
 | `FPA-PLAN-0` | complete; checkpoint `4059161` | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
 | `FPA-AUDIT-1` | complete; checkpoint `0bdd3b5` | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
 | `FPA-BASE-PREADD-2A` | complete; checkpoint `c0ce415` | finite-free matrix laws | formal `PreadditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
-| `FPA-BASE-ADD-2B` | complete; checkpoint pending | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
+| `FPA-BASE-ADD-2B` | complete; checkpoint `6839fe9a` | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
 | `FPA-UNIVERSAL-3` | complete; checkpoint `66d2687` | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
-| `FPA-WEAK-PB-4` | active | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
-| `FPA-COKERNEL-5` | blocked on audit | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
+| `FPA-WEAK-PB-4` | complete; checkpoint pending | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
+| `FPA-COKERNEL-5` | active | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
 | `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
 | `FPA-CATEGORY-7` | blocked on kernel/cokernel | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | blocked on universal + concrete constructions | explicit weak-kernel capability | capability-parameterized formal Freyd pre-Abelian package and selected proof-CAS consumers |
@@ -608,6 +608,8 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-015` | accepted after finite-free preadditive probe | Matrix zero/add/negate and abelian-group laws are reused definitionally. Generic `comp_fapp0` remains the runtime owner; both bilinearity paths pass through the existing generic-to-transparent matrix-composition comparison. No rewrite/unifier or parallel matrix operation is added. |
 | `D-FPA-016` | accepted after finite-free product probes | The whole direct-sum functor owns the product object/action. Narrow stable heads expose matrix projections, vertical pairing, and the terminal zero arrow; generic triangular/terminal theories retain whole transfors and runtime beta/eta. All new warning inventories equal their import unions. |
 | `D-FPA-017` | accepted during terminal audit | Zero-row matrix uniqueness is shared base algebra, so its unchanged proof moves from the Freyd terminal module to `emdash3_2_commutative_algebra_matrix_zero_rows.lp`; both finite-free and Freyd terminal constructions reuse that one owner. |
+| `D-FPA-018` | accepted after weak-pullback probes | `WeakPullbackCone(alpha,gamma,T)` is the existing annihilator fibre of `[alpha,-gamma]` on one arrow `T -> X+Z`. The usual two legs are projections, and their reconstruction laws derive from one combined weak-kernel factor path. This is more internal than a record containing a separately written square. |
+| `D-FPA-019` | accepted after native weak-pullback tests | The polynomial implementation concatenates the columns of `alpha` and `-gamma`, invokes the existing whole weak-kernel solver once, and projects its result. Compatible test pairs are vertically paired and sent to the existing factor operation. No second syzygy algorithm is registered. |
 
 ## Implemented Generic Universal Layer
 
@@ -672,6 +674,31 @@ their import unions at `1,358 = 1,189 + 169`. Strict LHS audits are clean, and
 the existing Freyd terminal source/reviewer remain green after moving the
 zero-row lemma to its lower owner. All five new owners and the focused reviewer
 are registered; the refreshed health snapshot covers 401 files.
+
+## Implemented Computational Weak Pullbacks
+
+`emdash3_2_computational_weak_pullbacks.lp` transparently defines the product
+object, difference arrow, weak-pullback structure, projected legs, encoded
+cone, selected lift, combined reconstruction, both projected reconstruction
+paths, and whole `HasComputationalWeakPullbacks` capability. A whole
+`HasComputationalWeakKernels` value constructs the latter pointwise. The
+module adds no rule or unifier and inherits the nonuniqueness of weak-kernel
+factors.
+
+`algebra_polynomial_weak_pullback.ts` implements the same derivation for
+finite-free polynomial maps. It verifies the selected projections equalize
+the cospan, rejects malformed or incompatible tests, pairs compatible test
+maps, delegates the sole solve to `algebraPolynomialWeakKernelFactor`, and
+checks combined plus both projected reconstructions. Four focused tests cover
+a nontrivial polynomial cospan, identity/zero boundaries, rejection paths,
+progress, deterministic replay, and retained nonuniqueness. Category-operation
+registration remains intentionally grouped with `FPA-CATEGORY-7`.
+
+The formal module is rule-free, strict-LHS clean, and exactly warning-neutral
+at `1,386 = 1,217 + 169` against its weak-kernel import owner. Source and
+reviewer checks pass. The public TypeScript export, focused registration,
+affected lint, typecheck, and `14/14` weak-kernel/weak-pullback matrix pass.
+The refreshed health snapshot covers 403 files.
 
 ## Validation Matrix
 
