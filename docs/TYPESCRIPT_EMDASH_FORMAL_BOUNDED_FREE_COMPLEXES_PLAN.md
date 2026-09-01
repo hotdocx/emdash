@@ -96,18 +96,26 @@ ChainTail_R(n+1; below,current,d)
 ```
 
 Here `Chain0(d,e)` is the existing exact classifier `d o e = 0`. A whole
-length-`n` complex is
+complex separates the first differential, which has no preceding chain
+condition:
 
 ```text
-BoundedFreeComplex_R(n)
+BoundedFreeComplex_R(0)
+  = Nat
+
+BoundedFreeComplex_R(n+1)
   = Sigma rank0,
-      ChainTail_R(n; 0,rank0,0_(0,rank0)).
+      Sigma rank1,
+        Sigma d1 : Matrix_R(rank0,rank1),
+          ChainTail_R(n; rank0,rank1,d1).
 ```
 
-The uniform zero boundary makes the first differential obey the same recursive
-shape: `0 o d_1 = 0`. For visible finite-family matrices this law should be
-reflexive after transparent computation; if a stable theorem is needed, it is
-a narrow constructor consumer rather than a new broad rewrite.
+The owner-position probe rejected the initially proposed dummy zero boundary:
+`0 o d_1 = 0` is mathematically valid but not judgmental for an arbitrary
+formal ring, because matrix action still exposes ring multiplication/addition
+laws. Storing that redundant first law would require theorem-level matrix
+algebra unrelated to the genuine chain conditions. The selected two-level
+representation begins stored laws only with `d_1 o d_2 = 0`.
 
 This representation:
 
@@ -314,7 +322,7 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
 | `FBC-PLAN-0` | in progress | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
-| `FBC-AUDIT-1A` | pending | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
+| `FBC-AUDIT-1A` | complete; audit checkpoint pending | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
 | `FBC-FORMAL-COMPLEX-2A` | pending | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
 | `FBC-FORMAL-MAP-3A` | pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
 | `FBC-COMPUTE-4A` | pending | formal orientation | whole polynomial complex and negative chain-condition results |
@@ -335,7 +343,7 @@ tests, proportional validation, and a local checkpoint.
 | --- | --- | --- |
 | `D-FBC-001` | accepted | A recursive dependent tail is the canonical whole formal representation; a homogeneous matrix array is not. |
 | `D-FBC-002` | accepted | The tail is parameterized by its current boundary, so each successor internalizes the next rank, differential, zero-composite law, and rest. |
-| `D-FBC-003` | accepted | A canonical zero boundary below degree zero gives one uniform recursive chain-law shape. |
+| `D-FBC-003` | rejected after owner probe | A dummy zero boundary would store the redundant law `0 o d_1 = 0`, which is not judgmental over an arbitrary formal ring and would force unrelated matrix-algebra proofs. |
 | `D-FBC-004` | accepted | Chain-map squares are computed from components and stored after adoption; they are not independent usability inputs. |
 | `D-FBC-005` | accepted | Transparent projections are tried first; a narrow stable schema head is allowed only after a measured conversion failure. |
 | `D-FBC-006` | accepted | A jointly aligned chain-map spine is a documented fallback, not permission to abandon whole source/target structure. |
@@ -347,6 +355,29 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-012` | accepted | Direct matrices remain the backend beneath category/doctrine/tower/compiler abstraction. |
 | `D-FBC-013` | accepted | Local validated checkpoints are authorized; push, merge, publication, release, history rewriting, and cleanup are not. |
 | `D-FBC-014` | accepted | Orthogonal path-cubical/strictness histories remain excluded. |
+| `D-FBC-015` | accepted after owner probe | A zero-length complex is just its degree-zero rank; a positive-length complex stores `rank0`, `rank1`, `d1`, then a `ChainTail` whose first stored law is the genuine `d1 o d2 = 0`. |
+| `D-FBC-016` | accepted after owner probe | The transparent `ChainTail` Nat eliminator, nil/cons constructors, successor rank/differential/law/rest projections, and positive-length complex package all pass quietly without a stable head, rewrite, or unifier. |
+
+## Initial Formal Owner Audit Result
+
+The owner-position probe implements `ChainTail` as a Nat eliminator returning
+a dependent function of `below`, `current`, and the selected boundary matrix.
+Its successor is the intended nested Sigma/Product of next rank,
+differential, exact composite-zero law, and recursive rest. Transparent
+nil/cons and all four successor projections elaborate and compute on a visible
+two-differential consumer.
+
+The first probe also tested the proposed uniform zero boundary. Although the
+tail recursion itself and all projections checked, the conversion assertion
+`0_(0,r0) o d1 = 0_(0,r1)` failed: the formal matrix evaluator does not erase
+arbitrary ring multiplication/addition laws judgmentally. The design was
+therefore corrected rather than patched with a rewrite or opaque theorem.
+
+The revised whole complex is `Nat` at length zero and the nested package
+`rank0, rank1, d1, ChainTail(n;rank0,rank1,d1)` at successor length. That
+classifier, constructor, and rank/differential projections pass in the same
+quiet probe. No stable schema fallback is currently needed for complexes;
+chain-map recursion remains the next separate projection audit.
 
 ## Validation Policy
 
