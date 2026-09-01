@@ -173,7 +173,7 @@ describe('FRP live emitted-Core conformance', () => {
                     'require open emdash.emdash3_2;',
                         'require open ' +
                         'emdash.emdash3_2_commutative_algebra_' +
-                        'freyd_preadditive_class_laws;'
+                        'freyd_preadditive;'
                 )
             };
             const checked = checkLambdapiProbe(probe, {

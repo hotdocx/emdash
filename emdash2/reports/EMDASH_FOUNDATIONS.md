@@ -3210,19 +3210,37 @@ category normal forms and meet these semantic operations through a sequential
 rigid-head usability bridge.
 
 Negation follows the same route, giving zero, addition, and inverse on every
-ordinary quotient Hom. The additive-group and bilinear laws are presently
-checked on every generating raw presentation class. This class-preadditive
-evidence is not promoted to a full preadditive-category claim: extending all
-proposition-valued laws to arbitrary points requires a generic dependent or
-proposition-valued induction principle for `Groupoidify`, beyond its current
-nondependent recursor.
+ordinary quotient Hom. The class laws are now promoted without adding a full
+dependent groupoidification eliminator. For a set `S`, pointwise paths between
+two functors `C -> Path(S)` assemble into one whole transformation: all of its
+naturality and higher coherence lives in proposition-valued path spaces. If
+two maps `h,k : Groupoidify(C) -> S` agree on the whole unit, the first Hom
+action of groupoidification extension maps that transformation to a path
+between their extensions; the existing extension/restriction eta closes a
+path `h = k`.
+
+Unary, binary, and ternary instances extend the additive class equations to
+arbitrary points of each raw Hom groupoid. The existing restricted
+`trunc_ind_ambient` then extends those set-valued paths to arbitrary points of
+the `0`-truncated Hom. Consequently additive zero, associativity,
+commutativity, inverse, and both distributivity orientations hold on every
+ordinary quotient-Hom point.
+
+The generic `PreadditiveCategory(C)` package retains a set-valued abelian-group
+structure on every existing `Hom_C(X,Y)` and bilinearity of the existing
+generic composition. The formal Freyd category carries such a package. Its
+semantic composition laws are reframed at generic `comp_fapp0` through the
+already checked usability paths; no global composition rule or extra
+unifier is installed. This is a preadditive claim, not an additive or Abelian
+claim: zero objects and biproducts remain separate structure.
 
 The direct polynomial implementation computes the same zero, addition, and
 negation on presentation maps by rebuilding and validating the complete
 relation witness. Target-factorization congruence verifies additive unit,
-cancellation, and both distributivity orientations. This computational
-capability does not by itself upgrade the formal doctrine beyond the recorded
-raw-class law boundary.
+cancellation, and both distributivity orientations. Its operational doctrine
+registry remains `category` until the three additive operations are registered
+as doctrine roles, while its formal metadata now records the checked
+`preadditive-category` structure and arbitrary-quotient-point law boundary.
 
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`

@@ -3,16 +3,14 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_GROUPOIDIFY_SET_EXT_FREYD_PREADDITIVE_PLAN.md`
-is the active continuation from the completed Freyd class-law boundary. It
-targets the smallest missing generic theorem: maps from `Groupoidify(C)` into
-a set are equal when they agree on the whole unit. The selected construction
-assembles set-valued pointwise paths into one whole transformation, applies
-the existing groupoidification extension functor and its retained Hom action,
-and closes with the established extension/restriction eta. That theorem then
-combines with restricted truncation induction to promote additive-group and
-bilinearity laws from raw Freyd classes to arbitrary quotient-Hom points and
-construct the first honest generic `PreadditiveCategory` package and Freyd
-instance. General dependent groupoidification, source functoriality and its
+is the active closeout ledger for the implemented continuation from the Freyd
+class-law boundary. Maps from `Groupoidify(C)` into a set are now equal when
+they agree on the whole unit: set-valued pointwise paths assemble one whole
+transformation, existing extension action maps it, and existing eta closes the
+path. Derived unary/binary/ternary groupoidification and truncation helpers
+promote additive-group and bilinearity laws to arbitrary quotient-Hom points.
+The first generic `PreadditiveCategory` package and the formal Freyd instance
+are checked. General dependent groupoidification, source functoriality and its
 adjunction, biproducts/additivity, weak kernels, Abelian structure, and homology
 remain explicit later gates.
 
@@ -25,13 +23,11 @@ existing syntactic functoriality. It then constructs the missing non-opaque
 rigid/transparent matrix comparison and algebra paths, formal raw presentation
 identity/composition/zero/addition, agreement compatibility, quotient-Hom
 descent through groupoidification and `0`-truncation, and the smallest checked
-additive Hom-operation/class-law package. Full laws on arbitrary quotient
-points await generic proposition-valued groupoidification induction, so no
-`PreadditiveCategory` instance is claimed. Biproducts, additive/Abelian
-structure, weak kernels, exactness, and homology remain later gates. Its exact
-next prerequisite is generic proposition-valued/dependent groupoidification
-induction, needed to promote checked generating-class laws to arbitrary
-quotient points.
+additive Hom-operation/class-law package. That historical stopping boundary is
+now discharged by the active successor plan above through the narrower
+set-target extensionality theorem; no general dependent groupoidification
+eliminator was required. Biproducts, additive/Abelian structure, weak kernels,
+exactness, and homology remain later gates.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_FREYD_PRESENTATIONS_PLAN.md` is the completed
 categorical continuation. It makes the Freyd/presentation category primary:
@@ -39,10 +35,10 @@ finite-free matrix Homs feed raw presentation maps; fixed-endpoint agreement
 categories are groupoidified and `0`-truncated to quotient Hom sets; elements
 are derived representably from the rank-one free presentation. The direct
 TypeScript category uses computed target-factorization congruence and lowers
-through the existing compiler. Its active continuation now supplies raw-class
-identity/composition/additive descent; full arbitrary-quotient preadditivity
-and capability-indexed Abelian structure remain named gates. There is no
-unconditional Abelian claim for arbitrary `CommRing`.
+through the existing compiler. Its completed successors now supply raw-class
+identity/composition/additive descent and full arbitrary-quotient
+preadditivity. Capability-indexed additive and Abelian structure remain named
+gates; there is no unconditional Abelian claim for arbitrary `CommRing`.
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
 completed cross-layer continuation from individual matrix squares to whole

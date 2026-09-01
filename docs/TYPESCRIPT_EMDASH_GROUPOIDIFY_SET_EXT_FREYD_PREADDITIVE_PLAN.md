@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-GROUPOIDIFY-SET-EXT-FREYD-PREADDITIVE`
 
-Status: active on a dedicated branch/worktree; initial plan checkpoint
-`c412793`
+Status: implementation and proportional closeout complete on a dedicated
+branch/worktree; final ledger checkpoint pending
 
 Baseline: `0e8b390060c926757dd8fae8cbf95dd49b90da09`
 
@@ -358,6 +358,29 @@ composition agree with the now fully lawful formal package on selected
 nontrivial and zero-rank cases. Existing recent green evidence may be carried
 forward for untouched boundaries.
 
+### Implemented conformance boundary
+
+The direct TypeScript Freyd model continues to compute zero, addition,
+negation, and composition on representatives modulo target-factorization
+congruence. Its profile revision is now `v3`; the additive-Hom capability
+records:
+
+```text
+formalStructure   = preadditive-category
+formalLawBoundary = arbitrary-quotient-points.
+```
+
+Its operational doctrine remains `category`. This is deliberate: the three
+functions have not yet been registered as category-operation roles consumed
+by the TypeScript doctrine qualification engine. The formal theorem does not
+pretend that this separate operational registration has happened.
+
+The focused TypeScript category tests, the live emitted-Core/Lambdapi Freyd
+consumer against `emdash3_2_commutative_algebra_freyd_preadditive`, root
+TypeScript typechecking, and targeted lint all pass. No broad `check:ts` or
+repository aggregate was run under the user-directed proportional-validation
+boundary.
+
 ## Deliberate Non-Goals
 
 This goal does not include:
@@ -423,11 +446,11 @@ Freyd/Abelian structure packages its consequences rather than replacing it.
 | `GSE-AUDIT-1A` | complete; checkpoint `de9fcb9` | plan | exact restriction component and pointwise-whole owner audit with an explicit accept/reject observation |
 | `GSE-SET-TRANSF-2A` | complete; checkpoint `de9fcb9` | owner audit | whole set-valued pointwise transformation, component beta, retained action, noncollapse, warnings and LHS audit |
 | `GSE-MAP-EXT-3A` | complete; checkpoint `de9fcb9` | set transformation | generic set-target map extensionality constructed from extension/restriction and eta |
-| `GSE-TRUNC-LIFT-4A` | complete; formal-preadditive checkpoint pending | generic extensionality | unary/binary/ternary derived helpers actually required to pass from generators to arbitrary quotient points |
-| `GSE-FREYD-LAWS-5A` | complete; formal-preadditive checkpoint pending | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
-| `GSE-PREADDITIVE-6A` | complete; formal-preadditive checkpoint pending | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
-| `GSE-CONFORMANCE-7A` | ready | formal package | focused reviewers and only necessary TS/Core/Lambdapi conformance |
-| `GSE-CLOSE-8A` | blocked by accepted/deferred rows | all rows | standing docs, catalog, health, proportional CI, final ledger and checkpoints |
+| `GSE-TRUNC-LIFT-4A` | complete; checkpoint `f127838` | generic extensionality | unary/binary/ternary derived helpers actually required to pass from generators to arbitrary quotient points |
+| `GSE-FREYD-LAWS-5A` | complete; checkpoint `f127838` | class laws | arbitrary-point additive-group and both bilinearity laws for every Freyd Hom |
+| `GSE-PREADDITIVE-6A` | complete; checkpoint `f127838` | Freyd laws | generic formal preadditive package and checked Freyd instance; no additive claim |
+| `GSE-CONFORMANCE-7A` | complete; final closeout checkpoint pending | formal package | focused reviewers, direct TypeScript metadata, focused TS/Core/Lambdapi conformance |
+| `GSE-CLOSE-8A` | complete; final closeout checkpoint pending | all rows | standing docs, strict catalog, no-check 366-file health snapshot, proportional gates and final ledger |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized ledger. Difficulty alone is not evidence for an opaque axiom.
@@ -453,6 +476,49 @@ synchronized ledger. Difficulty alone is not evidence for an opaque axiom.
 | `D-GSE-015` | accepted after packaging probe | `PreadditiveCategory(C)` retains set-valued abelian-group structures on existing Homs and both laws for existing generic composition. |
 | `D-GSE-016` | accepted after failed direct generic-composition probe | Semantic Freyd bilinearity does not definitionally inhabit generic `comp_fapp0` bilinearity; explicit existing usability paths reframe all three composite occurrences. |
 | `D-GSE-017` | accepted after warning comparison | The class-law and completed preadditive targets both report 1,300 diagnostics; rule-free descent and packaging add no warning family. |
+| `D-GSE-018` | accepted during cross-layer closeout | TypeScript records the checked formal preadditive structure and arbitrary-quotient boundary, while its operational doctrine remains `category` until additive operations are registered as doctrine roles. |
+| `D-GSE-019` | accepted during proportional closeout | The health report is refreshed in explicit no-check mode to 366 registered files; focused semantic checks are recorded separately and no repo-wide aggregate is claimed. |
+
+## Closeout Evidence
+
+Focused formal checks, each bounded by 90 seconds:
+
+- `emdash3_2_groupoidification_set_extensionality.lp`: green;
+- `emdash3_2_truncation_set_path_induction.lp`: green;
+- `emdash3_2_commutative_algebra_freyd_preadditive_laws.lp`: green;
+- `emdash3_2_preadditive_categories.lp`: green;
+- `emdash3_2_commutative_algebra_freyd_preadditive.lp`: green;
+- `examples/groupoidification_set_extensionality.lp`: green; and
+- `examples/emdash3_2_commutative_algebra_freyd_preadditive_example.lp`:
+  green.
+
+Interaction evidence:
+
+- groupoidification warning baseline/candidate: `1274 / 1274`;
+- Freyd class-law/completed-preadditive warning comparison: `1300 / 1300`;
+- strict LHS audits on every affected semantic source: zero findings; and
+- the failed direct semantic-to-generic composition probe is retained as the
+  reason for explicit usability-path reframing.
+
+Focused cross-layer evidence:
+
+- direct Freyd category and ordinary conformance tests: 4 pass, 1 expected
+  skip when the live flag is absent;
+- live `EMDASH_RUN_PROOF_CAS_FREYD=1` conformance: 1 pass;
+- `pnpm typecheck`: green; and
+- targeted ESLint on the three affected TypeScript/test files: green.
+
+Standing-document/tooling evidence:
+
+- strict generated catalog check: green;
+- no-check health source snapshot: 366 registered files, green snapshot check;
+- source TOC, active-reference, and report-header checks: green;
+- report-registry and check-metrics unit tests: 16 pass; and
+- exact diff whitespace check: green.
+
+The direct instruction to avoid unrelated long aggregates is preserved: no
+full `make check`, `make examples`, `make ci`, `check:ts`, print, book, or root
+aggregate is claimed.
 
 ## Validation Matrix
 
@@ -466,7 +532,9 @@ For semantic owner changes:
 - strict inferred-slot audit for each changed Lambdapi source;
 - affected reviewer example check;
 - catalog and health synchronization after registration; and
-- bounded `make ci` only at the final substantive semantic boundary.
+- a repository aggregate only when separately justified by an affected
+  integration/release boundary; this goal instead records its explicit
+  proportional closeout matrix above.
 
 For plan/documentation-only checkpoints, inspect the exact diff and use
 Markdown/link hygiene only. Do not run unrelated TypeScript, print, book, or

@@ -320,8 +320,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   has presentation objects and those Hom sets; elements are represented by Hom
   from the relation-free rank-one presentation. This skeleton itself stops
   before operations; the downstream operations/usability modules now supply
-  raw-class descent and generic identity/composition comparison. Full
-  preadditive laws, weak kernels, and Abelian structure remain separate gates.
+  raw-class descent and generic identity/composition comparison. The further
+  preadditive modules now supply full arbitrary-quotient laws; weak kernels and
+  Abelian structure remain separate gates.
 - `emdash3_2_commutative_algebra_freyd_operations.lp`: whole quotient-operation
   layer. Fixed raw operands act by whole functors on agreement categories;
   whole representation transfors feed groupoidification extension; nested
@@ -336,10 +337,28 @@ belongs to the owning implementation plan rather than to standing guidance.
   generic `id` or `comp_fapp0`.
 - `emdash3_2_commutative_algebra_freyd_preadditive_class_laws.lp`: packages
   quotient-Hom zero/addition/negation and proves additive-group plus bilateral
-  distributivity laws on every generating raw class. It deliberately records
-  class-preadditive evidence rather than a full `PreadditiveCategory` instance;
-  arbitrary-quotient law promotion awaits a generic proposition-valued or
-  dependent groupoidification induction interface.
+  distributivity laws on every generating raw class. It remains the explicit
+  generating-data layer used by the full descent.
+- `emdash3_2_set_path_pointwise_transformation.lp` and
+  `emdash3_2_groupoidification_set_extensionality.lp`: a pointwise path family
+  between functors into `Path(S)` assembles into one whole transformation when
+  `S` is a set. Whole groupoidification extension and its existing eta then
+  prove that maps out of `Groupoidify(C)` into `S` are determined by the unit.
+  The restriction point comparison is derived from its whole path; no generic
+  precomposition rule, dependent eliminator, source action, or adjunction is
+  added.
+- `emdash3_2_truncation_set_path_induction.lp`: rule-free unary, binary, and
+  ternary set-valued path induction derived from `trunc_ind_ambient`, exactly
+  for the arities used by the Freyd laws.
+- `emdash3_2_preadditive_categories.lp`: generic set-valued abelian-group Hom
+  structures and bilateral composition distributivity over the existing
+  `comp_fapp0` grammar.
+- `emdash3_2_commutative_algebra_freyd_preadditive_laws.lp` and
+  `emdash3_2_commutative_algebra_freyd_preadditive.lp`: promote every class law
+  through groupoidification and `0`-truncation, then construct the checked
+  `PreadditiveCategory(CommRingFreydPresentation_cat(R))` instance. Generic
+  composition is connected by explicit existing usability paths. No
+  biproduct, additive-category, weak-kernel, or Abelian claim is made.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5337,9 +5356,9 @@ observations. These results add no quotient, exactness, or homology claim.
 The finite-free and Freyd-presentation owners plus their reviewers pass their
 focused checks with zero local warning diagnostics and strict LHS findings.
 The formal Hom quotient uses existing groupoidification and `0`-truncation;
-explicit agreement paths and representable elements check. Generic Freyd
-identity/composition remain intentionally unconnected to raw classes, so no
-preadditive or Abelian claim is inferred.
+explicit agreement paths and representable elements check. Downstream named
+usability paths now connect generic Freyd identity/composition to the semantic
+class operations without changing their generic runtime owners.
 The downstream raw presentation-operation owner and reviewer also pass focused
 checks. Identity and composition retain both matrices and construct their
 relation squares from transparent unit/associativity and the reusable square-
@@ -5361,16 +5380,24 @@ inner action comparisons are proof-time and add no runtime family.
 The raw-negation and class-preadditive owners plus their focused reviewers pass
 as well. Negation computes on raw/truncated classes, and packaged class laws
 cover additive unit/associativity/commutativity/inverse and both
-distributivity orientations. The full arbitrary-quotient law promotion remains
-explicitly gated by generic proposition-valued groupoidification induction.
+distributivity orientations.
+The set-target groupoidification, truncation-path, full-law, and generic/Freyd
+preadditive owners now pass their focused checks and strict LHS audits. They
+promote those equations to arbitrary quotient points and construct the formal
+`PreadditiveCategory` instance. The prior class-law target and the completed
+target each report 1,300 warning instances, so the rule-free descent/package
+adds no diagnostic family; the one set-pointwise component beta likewise left
+its focused groupoidification count unchanged at 1,274.
 The direct polynomial Freyd model also computes zero/addition/negation and
 checks representative additive unit, cancellation, and bilateral
 distributivity by target-factorization congruence. Its doctrine remains plain
-`category`, and its formal-law boundary is explicitly the generating raw
-classes. Live Core/Lambdapi conformance accepts both the earlier representative
-agreement and computed additive cancellation against the active formal module.
-No repository-wide post-integration `make check`, `make examples`,
-`make health`, `make ci`, or root aggregate is claimed.
+`category` until its operations are registered as doctrine roles; its formal
+metadata now names `preadditive-category` and the arbitrary-quotient-point law
+boundary. Live Core/Lambdapi conformance accepts both the earlier
+representative agreement and computed additive cancellation against the
+completed formal module. Focused TypeScript tests, typechecking, and targeted
+lint pass. No repository-wide TypeScript, print, or root aggregate is claimed
+at this intermediate boundary.
 
 ## Book And Renderer Workflow
 

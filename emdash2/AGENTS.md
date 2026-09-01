@@ -56,6 +56,18 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the current-status report.
 - `emdash3_2_monads.lp` owns monad-primary triangular extension and its narrow
   opposite-derived computational mirror.
+- `emdash3_2_set_path_pointwise_transformation.lp` and
+  `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
+  set-target whole-transformation and map-extensionality boundary. They do not
+  provide arbitrary pointwise naturality, dependent groupoidification, source
+  action, or a `Groupoidify` adjunction.
+- `emdash3_2_preadditive_categories.lp` owns generic set-valued abelian Hom
+  structures and bilinear generic composition.
+  `emdash3_2_commutative_algebra_freyd_preadditive_laws.lp` and
+  `emdash3_2_commutative_algebra_freyd_preadditive.lp` own full arbitrary-
+  quotient Freyd laws and the checked preadditive instance. Biproducts,
+  additive-category structure, weak kernels, and Abelian structure remain
+  separate layers.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

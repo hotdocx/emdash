@@ -17,6 +17,13 @@ Decision-Response-Evidence:
 
 - `infinity-codex:01a02f68-6142-7e53-993a-4505aa8e2cbe:01a05c2d-08d4-7143-a5ff-690de2076edf`
 
+Successor note: the historical arbitrary-quotient stopping boundary recorded
+below was discharged by
+`TYPESCRIPT_EMDASH_GROUPOIDIFY_SET_EXT_FREYD_PREADDITIVE_PLAN.md`. The
+successor derives set-target groupoidification extensionality, promotes the
+class laws, and constructs the generic/Freyd `PreadditiveCategory` package
+without adding a general dependent groupoidification eliminator.
+
 ## Purpose
 
 This plan completes the formal algebraic layer deliberately left open by the

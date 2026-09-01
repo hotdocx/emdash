@@ -144,7 +144,11 @@ describe('FRP direct polynomial Freyd category', () => {
         ), true);
         assert.equal(
             model.additiveHomOperations.formalLawBoundary,
-            'generating-raw-classes'
+            'arbitrary-quotient-points'
+        );
+        assert.equal(
+            model.additiveHomOperations.formalStructure,
+            'preadditive-category'
         );
         assert.equal(
             model.additiveHomOperations.zero(presentation, presentation)

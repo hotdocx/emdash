@@ -72,14 +72,15 @@ import {
 } from './algebra_reference_engine';
 
 export const ALGEBRA_POLYNOMIAL_FREYD_CATEGORY_PROFILE = Object.freeze({
-    revision: 'emdash-algebra-polynomial-freyd-category-v2' as const,
+    revision: 'emdash-algebra-polynomial-freyd-category-v3' as const,
     objectRepresentation: 'ordered-relation-presentation' as const,
     morphismRepresentation:
         'generator-map-with-computed-relation-witness' as const,
     equality: 'target-relation-congruence' as const,
     doctrine: 'category' as const,
     additiveHomOperations: true as const,
-    formalLawBoundary: 'generating-raw-classes' as const,
+    formalStructure: 'preadditive-category' as const,
+    formalLawBoundary: 'arbitrary-quotient-points' as const,
     abelianClaim: false as const,
     performsIo: false as const
 });
@@ -317,7 +318,8 @@ export interface AlgebraPolynomialFreydCategoryModel<
         readonly negate: (
             morphism: AlgebraPolynomialPresentationMorphism<P, C, I>
         ) => AlgebraPolynomialPresentationMorphism<P, C, I>;
-        readonly formalLawBoundary: 'generating-raw-classes';
+        readonly formalStructure: 'preadditive-category';
+        readonly formalLawBoundary: 'arbitrary-quotient-points';
     };
     readonly tower: CategoricalTower;
     readonly reinterpretation: ComputationalReinterpretation<
@@ -443,7 +445,8 @@ export function algebraPolynomialFreydCategoryModel<
             zero: algebraPolynomialPresentationMorphismZero,
             add: algebraPolynomialPresentationMorphismAdd,
             negate: algebraPolynomialPresentationMorphismNegate,
-            formalLawBoundary: 'generating-raw-classes' as const
+            formalStructure: 'preadditive-category' as const,
+            formalLawBoundary: 'arbitrary-quotient-points' as const
         }),
         tower,
         reinterpretation,

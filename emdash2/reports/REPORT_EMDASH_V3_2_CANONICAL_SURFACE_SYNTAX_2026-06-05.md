@@ -860,6 +860,8 @@ Agree(P,Q)                 : raw maps and target-factorization arrows
 RawHom(P,Q)                : groupoidified agreement category
 Hom_Freyd(P,Q)             : 0-truncated RawHom(P,Q)
 El(P) = Hom_Freyd(R,P)     : representable element carrier.
+PreAdd(Freyd_R)            : set-valued abelian Homs with bilinear composition
+0_(P,Q), f+g, -f           : the selected Hom operations.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -873,6 +875,12 @@ The literal owners are `CommRingFiniteFree_cat`,
 `comm_ring_freyd_add`,
 `comm_ring_freyd_neg`,
 `comm_ring_freyd_class_preadditive_evidence`,
+`groupoidify_set_map_ext`,
+`PreadditiveCategory`,
+`comm_ring_freyd_add_assoc_path`,
+`comm_ring_freyd_comp_add_right_path`,
+`comm_ring_freyd_comp_add_left_path`,
+`comm_ring_freyd_preadditive`,
 `comm_ring_freyd_identity_usability_path`,
 `comm_ring_freyd_comp_usability_path`,
 `CommRingPresentationAgreement_cat`, `CommRingFreydRawHomGroupoid`,
@@ -881,9 +889,11 @@ The literal owners are `CommRingFiniteFree_cat`,
 owners and compare with rigid finite-free matrix observations only at proof
 time. `RawHom` retains agreement/syzygy paths; `Hom_Freyd` is its ordinary set
 truncation. `El(P)` is a representable specialization rather than an
-independent quotient-element type. Do not print an unconditional Abelian
-category, explicit raw-class composition descent, kernels/cokernels, or
-homology at this boundary.
+independent quotient-element type. `PreAdd(Freyd_R)` is now a checked
+preadditive package on arbitrary quotient points; do not strengthen it to an
+additive or Abelian category before zero objects/biproducts and the later
+kernel hypotheses are supplied. Do not print kernels/cokernels or homology at
+this boundary.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write
