@@ -83,6 +83,35 @@ symbol finite_family_drop_left
         rec (@finite_family_tail A (@nat_add m0 n) zs0))
     m) zs;
 
+// Congruence of concatenation in both family inputs.
+symbol finite_family_append_congr_path
+  [A : Grpd]
+  (m n : τ Nat_grpd)
+  (xs xs' : τ (@FiniteFamily A m))
+  (ys ys' : τ (@FiniteFamily A n))
+  (p : τ (@= (@FiniteFamily A m) xs xs'))
+  (q : τ (@= (@FiniteFamily A n) ys ys'))
+  : τ (@= (@FiniteFamily A (@nat_add m n))
+      (@finite_family_append A m n xs ys)
+      (@finite_family_append A m n xs' ys'))
+≔ @eq_trans
+    (@FiniteFamily A (@nat_add m n))
+    (@finite_family_append A m n xs ys)
+    (@finite_family_append A m n xs' ys)
+    (@finite_family_append A m n xs' ys')
+    (@eq_ap
+      (@FiniteFamily A m)
+      (@FiniteFamily A (@nat_add m n))
+      (λ zs : τ (@FiniteFamily A m),
+        @finite_family_append A m n zs ys)
+      xs xs' p)
+    (@eq_ap
+      (@FiniteFamily A n)
+      (@FiniteFamily A (@nat_add m n))
+      (λ zs : τ (@FiniteFamily A n),
+        @finite_family_append A m n xs' zs)
+      ys ys' q);
+
 // Taking the left block after append recovers the first family.
 symbol finite_family_take_append_path
   [A : Grpd]

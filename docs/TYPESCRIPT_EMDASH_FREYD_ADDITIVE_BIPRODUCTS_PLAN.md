@@ -231,6 +231,30 @@ Reuse existing matrix additive, subtractive, identity, composition, and
 extensional paths. Do not add global block normalization rules merely to make
 these equations reflexive.
 
+### Implemented block-matrix result
+
+`emdash3_2_commutative_algebra_matrix_blocks.lp` now constructs actual
+flattened vector concatenation/splitting, horizontal and vertical matrices,
+the general four-block matrix, block diagonals, and canonical inclusions and
+projections. The four-block owner is oriented as a vertical pair of horizontal
+rows, matching the product/projection consumer.
+
+`emdash3_2_commutative_algebra_matrix_block_laws.lp` constructs, without rules
+or unifiers:
+
+- append congruence and preservation of zero, addition, and scalar action;
+- horizontal and vertical matrix-application formulas;
+- identity-matrix action on arbitrary vectors;
+- both projection/vector beta laws;
+- projection after vertical pairing for arbitrary column counts;
+- vertical projection eta for arbitrary matrices;
+- horizontal/vertical composition laws; and
+- block-diagonal composition.
+
+The focused implementation and reviewer checks pass, strict LHS audits are
+empty, and the predecessor/candidate warning counts are both 1,274. Distinct
+canonical inclusions remain nonconvertible.
+
 ## Finite-Free Direct Sums
 
 For `CommRingFiniteFree_cat(R)`, choose:
@@ -477,8 +501,8 @@ consequences rather than replacing it.
 | `FAB-PLAN-0` | complete; initial plan checkpoint recorded in branch history | completed preadditive checkpoint `c3bb869` | living plan, isolated branch/worktree, clean focused baseline, Git and scope limits, persistent goal |
 | `FAB-AUDIT-1A` | complete; first semantic checkpoint pending | plan | generic additive theorem and concrete primitive-instance owner audit with explicit rejection signals |
 | `FAB-FAMILY-2A` | complete; first semantic checkpoint pending | finite-family owner | append/take/drop, constructor betas, reconstruction/extensionality and boundary reviewers |
-| `FAB-BLOCK-3A` | ready | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
-| `FAB-FREE-4A` | blocked by block layer | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
+| `FAB-BLOCK-3A` | complete; block checkpoint pending | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
+| `FAB-FREE-4A` | ready | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
 | `FAB-PRESENTATION-5A` | blocked by block/free layers | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, computed relation squares and agreement compatibility |
 | `FAB-DESCENT-6A` | blocked by presentation layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
@@ -510,6 +534,8 @@ evidence for an opaque axiom.
 | `D-FAB-014` | accepted | No unrelated repository-wide aggregate is part of the focused implementation loop. |
 | `D-FAB-015` | accepted after owner audit | Primitive product/terminal classifiers require narrow stable concrete assembly; every exposed observation must still route to constructed Freyd semantics. |
 | `D-FAB-016` | accepted after family probe | Transparent left-recursive append/split operations suffice; no new runtime/unification clause or alternative finite-family carrier is needed. |
+| `D-FAB-017` | accepted after block probes | A vertical pair of horizontal rows is the selected general block orientation because it exposes product projections directly. |
+| `D-FAB-018` | accepted after block laws | All required block beta/eta and diagonal-composition equations are constructed theorem paths; no block runtime/unification family is needed. |
 
 ## Validation Matrix
 
