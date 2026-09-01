@@ -220,6 +220,41 @@ stable point operation is acceptable only when its whole source action is
 retained elsewhere and explicitly documented. No uniqueness path is required
 or desired.
 
+### Implemented internal weak-kernel result
+
+`emdash3_2_weak_kernels.lp` now defines annihilated test maps exactly as the
+`HFiber` of ordinary composition by `alpha` over the selected preadditive zero.
+The existing `hom_postcomp_func` remains available as the whole Hom action and
+a typed `eq_refl` path records its proof-time ordinary-composition reading.
+
+For every `h : T' -> T`, a constructed reindexing operation sends
+`(tau,p)` to `tau o h`; its annihilation path is the composite of ordinary
+associativity, `p` under congruence, and generic zero precomposition. Applying
+`path_map_func` makes that operation a whole functor between the two Path
+categories, retaining every higher equality action.
+
+The audit deliberately does not package these reindexings as a primitive
+`Op(C) -> Cat` functor: identity/composition would also have to identify the
+stored `HFiber` proof witnesses, and that coherence is not judgmentally free.
+The per-arrow whole reindexing functors provide the required action without
+asserting unchecked functor laws. Likewise, the selected Gröbner lift family
+is not claimed natural; weak kernels require existence of selected lifts, not
+a natural choice of them.
+
+`ComputationalWeakKernel` is the transparent nested Sigma of object, morphism,
+annihilation path, factor family over every test object, and reconstruction
+law. Readable projections expose every component and factor equation. Its
+ordinary proposition view is the `(-1)`-truncation, and whole-category
+capabilities are dependent products over all arrows. No rule or unifier is
+added.
+
+The source and reviewer pass bounded checking. Reviewers cover the internal
+fibre, whole reindex functor, object action, retained next-Hom action,
+constructor/projection beta, reconstruction, computational-to-proposition
+conversion, whole capability conversion, and a reversed-endpoint negative.
+The strict LHS audit is empty; exact import-union and candidate warning counts
+are both `1,386 = 1,217 + 169`.
+
 The proposition-valued ordinary notion should be derived by `(-1)`-truncating
 selected computational data or factor fibres. It is not the primary runtime
 interface.
@@ -579,11 +614,11 @@ genuine capability consumer and must not be deferred behind documentation.
 | `WKH-PLAN-0` | complete; checkpoint `3d18fa9` | additive baseline `c4baf61` | living plan, isolated branch/worktree, explicit scope/Git boundary, baseline evidence, persistent goal |
 | `WKH-AUDIT-1` | complete; checkpoint `3d18fa9` | plan | metadata-stub, original-column syzygy, lift, formal `HFiber`, operation/doctrine, and Singular owner audit with rejection signals |
 | `WKH-SYZYGY-2` | complete; checkpoint `b4b8de6` | module Gröbner transformations | deterministic complete syzygy generators in the original source free module, reconstruction equations, boundaries and focused tests |
-| `WKH-LIFT-3` | complete; combined lift/category checkpoint pending | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
-| `WKH-CATEGORY-4` | complete; checkpoint pending | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
-| `WKH-SINGULAR-5` | complete; checkpoint pending | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
-| `WKH-FORMAL-6` | ready after owner probe | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
-| `WKH-BRIDGE-7` | blocked by native and formal rows | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
+| `WKH-LIFT-3` | complete; combined checkpoint `aac1826` | original-column syzygies + membership | whole weak-kernel result and arbitrary annihilated-map factorization with retained coefficients/remainders/progress |
+| `WKH-CATEGORY-4` | complete; checkpoint `aac1826` | category/engine/doctrine registries | whole primitive plus derived object/morphism/lift operations, compiler lowerings, reference execution, capability qualification |
+| `WKH-SINGULAR-5` | complete; checkpoint `06e0b20` | injected/real Singular transports | pure `syz` script, span comparison, retained disagreements, optional real differential checks |
+| `WKH-FORMAL-6` | complete; checkpoint pending | `HFiber`, Hom action, preadditive/additive owners | internal annihilator family, selected computational weak-kernel package, factorization law, proposition view, retained action and reviewers |
+| `WKH-BRIDGE-7` | ready | proof–CAS/declaration reification | concrete selected matrices, annihilation and lift equations usable through the formal interface without a global arbitrary-ring claim |
 | `WKH-CLOSE-8` | blocked by accepted/deferred rows | all rows | standing docs, warnings/LHS, catalog/health, focused/static/integration gates, exact checkpoints and next theorem boundary |
 
 Rows may be split or reordered when dependencies permit. A row may be rejected
@@ -610,6 +645,7 @@ difficulty or warning count alone is insufficient.
 | `D-WKH-014` | accepted after lift probes | The weak-kernel morphism uses the final syzygy Gröbner-basis vectors as columns. Test lifts use direct division quotients against that same basis rather than transformed membership coefficients for the raw generating family; this keeps the lift source rank aligned with the selected weak-kernel object. |
 | `D-WKH-015` | accepted after category probes | TypeScript needed a genuine finite-free polynomial category facade before weak-kernel qualification. It is constructed as an additive category first, then extended by one whole weak-kernel operation and derived observations. Weak kernels and weak cokernels are dual doctrine descriptors, but only the field-polynomial weak-kernel side has an implementation in this goal. |
 | `D-WKH-016` | accepted after Singular probes | Differential comparison is bidirectional submodule membership between `syz(F)` and the native generator module, not literal basis equality. Rank-zero cases use direct mathematically forced scripts; disagreements remain non-authoritative observations. |
+| `D-WKH-017` | accepted after formal owner probes | Test-object action is retained by a transparent `path_map_func` for each reindexing arrow. No primitive whole annihilator-family functor or naturality of selected lifts is asserted, because both would add coherence not required by the weak-kernel definition. |
 
 ## Validation Matrix
 

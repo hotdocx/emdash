@@ -21,6 +21,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
     Path("emdash3_2_preadditive_categories.lp"),
     Path("emdash3_2_additive_categories.lp"),
+    Path("emdash3_2_weak_kernels.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
