@@ -414,6 +414,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   weak-kernel annihilator fibre on an arrow into `X+Z`. The selected weak-
   kernel factor becomes the lift, and one combined reconstruction derives
   both projection equations. No uniqueness or manual square field is added.
+- `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
+  witness-enriched Construction 3.6. It appends the morphism datum to target
+  relations, constructs the identity-data projection, and uses an explicit
+  agreement witnessing a zero composite as the second block of each colift
+  witness. Agreement paths establish quotient annihilation, reconstruction,
+  and uniqueness. A closed generic `ComputationalCokernel` instance remains
+  gated on effective decoding of truncated quotient paths.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and
@@ -5472,6 +5479,12 @@ presentation/projection data are the next consumer; a closed quotient-level
 universal package remains gated because the current truncation API maps raw
 agreement to equality but does not decode arbitrary quotient equality back to
 the witness required by the colift algorithm.
+
+The formal witnessed counterpart is now active: it constructs the enlarged
+presentation and projection from matrix block laws, accepts the explicit
+zero-composite agreement, builds the horizontal relation witness for the
+colift, and produces quotient paths for annihilation, reconstruction, and
+uniqueness. It deliberately preserves the effectiveness boundary above.
 
 ## Book And Renderer Workflow
 

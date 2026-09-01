@@ -576,9 +576,9 @@ Refine or reject a candidate when it:
 | `FPA-BASE-ADD-2B` | complete; checkpoint `6839fe9a` | finite-free preadditivity + direct sums | selected binary products, terminal zero, Cartesian and `AdditiveCategory` packages for `CommRingFiniteFree_cat(R)` |
 | `FPA-UNIVERSAL-3` | complete; checkpoint `66d2687` | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
 | `FPA-WEAK-PB-4` | complete; checkpoint `ba573800` | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
-| `FPA-COKERNEL-NATIVE-5A` | complete; checkpoint pending | Freyd presentation/additive owners | native unconditional Freyd whole cokernel, object, projection, witness-retaining colift, annihilation, reconstruction, quotient uniqueness |
-| `FPA-COKERNEL-FORMAL-5B` | active; quotient packaging gated by effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection and witness-enriched colift; closed quotient-level `ComputationalCokernel` only with constructive effectiveness evidence |
-| `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
+| `FPA-COKERNEL-NATIVE-5A` | complete; checkpoint `3625a254` | Freyd presentation/additive owners | native unconditional Freyd whole cokernel, object, projection, witness-retaining colift, annihilation, reconstruction, quotient uniqueness |
+| `FPA-COKERNEL-FORMAL-5B` | complete at witness-enriched boundary; checkpoint pending; closed quotient package deferred behind effective path/witness decoding | raw formal presentation/agreement owners | formal cokernel presentation/projection, witnessed colift, annihilation, reconstruction and uniqueness; no fabricated decoder |
+| `FPA-KERNEL-6` | active | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
 | `FPA-CATEGORY-7` | blocked on kernel/cokernel | operation/doctrine engine | complete operation families, strengthened pre-Abelian doctrine, provider qualification, compiler lowering, reference/graph execution |
 | `FPA-FORMAL-8` | blocked on universal + concrete constructions | explicit weak-kernel capability | capability-parameterized formal Freyd pre-Abelian package and selected proof-CAS consumers |
 | `FPA-DIFFERENTIAL-9` | optional after native construction | stable external adapter | non-authoritative field-module and/or Singular comparison without replacing native data |
@@ -613,6 +613,7 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-019` | accepted after native weak-pullback tests | The polynomial implementation concatenates the columns of `alpha` and `-gamma`, invokes the existing whole weak-kernel solver once, and projects its result. Compatible test pairs are vertically paired and sent to the existing factor operation. No second syzygy algorithm is registered. |
 | `D-FPA-020` | accepted after native cokernel tests | Polynomial Freyd cokernels adjoin the morphism columns to the target relation module. Projection datum is ambient identity; a retained zero-composite agreement makes the colift well-defined, and quotient congruence verifies reconstruction and uniqueness. No weak-kernel call occurs. |
 | `D-FPA-021` | accepted after formal cokernel audit | The current set-truncated Freyd Hom exposes agreement witnesses only in the forward direction. A quotient equality does not yet decode constructively to the raw target-factorization witness needed to build a colift. Do not fabricate that decoder, use choice, or postulate a closed `ComputationalCokernel`; first implement witness-enriched formal operations and gate quotient packaging on an effective-quotient theorem. |
+| `D-FPA-022` | accepted after formal witnessed-cokernel probe | The witness-enriched construction is fully internal: relation matrix `[R_Q,F]`, projection witnesses `inl`, annihilation witness `inr`, and colift witness `[W_h,H_0]`. Existing agreement-to-path machinery proves quotient annihilation, reconstruction, and uniqueness without any runtime rule. |
 
 ## Implemented Generic Universal Layer
 
@@ -720,6 +721,21 @@ with the selected colift, giving computational uniqueness/epicity without
 raw-matrix equality. Four focused tests cover a nontrivial `R/(x)` cokernel,
 nonidentical but quotient-equal competing colifts, the zero boundary,
 non-annihilated tests, invalid endpoints, frozen results, and rejection paths.
+
+`emdash3_2_commutative_algebra_freyd_cokernels.lp` implements the formal
+witness-enriched counterpart. Matrix horizontal/vertical block laws construct
+the enlarged presentation, projection relation square, and the two canonical
+relation injections. An explicit agreement for `h o f = 0` becomes the second
+block of `[W_h,H_0]`, yielding a raw colift. Existing groupoidification and
+truncation paths prove annihilation, reconstruction, and quotient uniqueness
+of every explicitly reconstructing competing raw colift.
+
+The module is rule-free, strict-LHS clean, and exactly warning-neutral at
+`1,392 = 1,223 + 169` against `comm_ring_freyd_additive`. Source and focused
+reviewer checks pass. This closes the useful witnessed computation while the
+stronger closed quotient-level `ComputationalCokernel` package remains
+explicitly deferred behind effective quotient-path decoding. The owner and
+reviewer are registered, and the refreshed health snapshot covers 405 files.
 
 ## Validation Matrix
 

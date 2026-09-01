@@ -882,6 +882,9 @@ lift_α(τ,p), colift_α(τ,p) : selected universal factors
 PreAb(C)                   : additive C with selected kernels and cokernels
 WPB(α,γ)                   : WK([α,−γ]) with projected legs
 lift_WPB(c)                : selected nonunique factor of an encoded cone.
+Coker_Freyd(f)             : target presentation with relation matrix [R_Q,F]
+q_f                        : identity-data quotient projection
+colift_f(h,H₀)             : colift consuming explicit zero agreement H₀.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -940,6 +943,12 @@ The literal owners are `CommRingFiniteFree_cat`,
 `computational_weak_pullback_proj2`,
 `computational_weak_pullback_lift`,
 `HasComputationalWeakPullbacks`,
+`comm_ring_freyd_cokernel_presentation`,
+`comm_ring_freyd_cokernel_projection`,
+`comm_ring_freyd_cokernel_annihilation_path`,
+`comm_ring_freyd_cokernel_colift`,
+`comm_ring_freyd_cokernel_reconstruction_path`,
+`comm_ring_freyd_cokernel_uniqueness_path`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,

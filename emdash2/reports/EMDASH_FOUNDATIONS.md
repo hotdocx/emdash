@@ -3334,6 +3334,15 @@ is active. Since that witness is computational input to the induced colift,
 the formal implementation keeps witness-enriched operations and does not
 postulate choice or a closed quotient-level cokernel package.
 
+That witnessed formal computation is nevertheless complete: the cokernel
+presentation has relation matrix `[R_Q,F]`; its projection stores the left
+relation injection, while annihilation stores the right injection as an
+agreement witness. For a test map with explicit zero-composite agreement, the
+colift relation witness is the horizontal block `[W_h,H_0]`. Matrix block laws
+prove it is relation-preserving, and the existing agreement-to-path ladder
+proves reconstruction and quotient uniqueness. Thus the useful algorithm is
+internal and checked even though arbitrary truncated paths are not decoded.
+
 Operationally, a polynomial matrix over a computational field first receives
 the complete syzygy module of its original ordered columns. Schreyer relations
 for the derived Gröbner basis are pulled back through retained transformation
