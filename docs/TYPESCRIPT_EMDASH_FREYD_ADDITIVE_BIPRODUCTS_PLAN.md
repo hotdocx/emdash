@@ -352,6 +352,16 @@ Use the completed set-target groupoidification and truncation path-induction
 helpers to promote class equations to arbitrary quotient points. Do not add a
 general dependent eliminator or representative-selection operation.
 
+### Implemented agreement result
+
+`emdash3_2_commutative_algebra_presentation_direct_sum_agreements.lp` now
+combines target-factorization witnesses by block diagonal for direct-sum maps
+and by vertical pairing for maps into a presentation sum. The laws use
+block-diagonal/vertical composition followed by the input agreement paths and
+the new subtraction compatibility. The module is rule-free, passes its
+focused reviewer and strict LHS audit, and leaves the warning inventory at
+1,274.
+
 The selected whole functor is approximately:
 
 ```text
@@ -533,8 +543,8 @@ consequences rather than replacing it.
 | `FAB-BLOCK-3A` | complete; block checkpoint pending | matrix owners | vector concatenation and general/special block matrices with the required composition, zero, identity, and split paths |
 | `FAB-FREE-4A` | complete; finite-free checkpoint pending | finite-free category | rank addition and block-diagonal direct-sum action with categorical comparison paths |
 | `FAB-PRESENTATION-5A` | complete; raw-presentation checkpoint pending | presentations | zero/direct-sum presentations, raw direct sums, projections, pairing, and computed relation squares |
-| `FAB-AGREEMENT-5B` | ready | raw presentation sums | direct-sum, projection, and pairing compatibility on fixed-endpoint agreement categories |
-| `FAB-DESCENT-6A` | blocked by agreement layer | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
+| `FAB-AGREEMENT-5B` | complete; agreement checkpoint pending | raw presentation sums | direct-sum and pairing compatibility on fixed-endpoint agreement categories; fixed projections require no varying input action |
+| `FAB-DESCENT-6A` | ready | quotient machinery | quotient projection/pairing/action, arbitrary-point laws, and whole direct-sum functor with retained action |
 | `FAB-CARTESIAN-7A` | blocked by descent | generic product/terminal owners | connected `BinaryProducts`, terminal-zero, and `CartesianCategory` Freyd instances |
 | `FAB-ADDITIVE-8A` | blocked by Cartesian structure | preadditive + Cartesian | generic zero/biproduct derivation, `AdditiveCategory`, and formal Freyd instance |
 | `FAB-TYPESCRIPT-9A` | blocked by formal/direct operations | direct model | registered additive roles, direct zero/biproduct computations, doctrine qualification and focused conformance |
@@ -568,6 +578,7 @@ evidence for an opaque axiom.
 | `D-FAB-018` | accepted after block laws | All required block beta/eta and diagonal-composition equations are constructed theorem paths; no block runtime/unification family is needed. |
 | `D-FAB-019` | accepted after whole-functor probe | Finite-free direct-sum object/arrow computation can reduce directly to `nat_add`/block diagonal without a rigid intermediary or new warning family. |
 | `D-FAB-020` | accepted after presentation probes | Zero/sum objects and raw sum/projection/pairing morphisms are flattened matrix data whose retained relation squares are all constructed from block laws. |
+| `D-FAB-021` | accepted after agreement probes | Direct-sum and pairing agreement witnesses are block-diagonal/vertical combinations; subtraction compatibility closes their laws without quotient axioms. |
 
 ## Validation Matrix
 

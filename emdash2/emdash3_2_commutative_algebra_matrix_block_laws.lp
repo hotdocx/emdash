@@ -9,6 +9,7 @@
 
 require open emdash.emdash3_2_commutative_algebra_matrix_blocks;
 require open emdash.emdash3_2_commutative_algebra_matrix_additive_laws;
+require open emdash.emdash3_2_commutative_algebra_matrix_subtractive_laws;
 
 // Congruence of vector concatenation in both inputs.
 symbol comm_ring_vector_append_congr_path
@@ -166,6 +167,94 @@ symbol comm_ring_vector_scale_append_path
             (@finite_family_tail (@comm_ring_carrier R) m0 u0)
             v0))
     m) u v;
+
+// Concatenation commutes with componentwise additive inverse.
+symbol comm_ring_vector_neg_append_path
+  (R : τ CommRing)
+  (m n : τ Nat_grpd)
+  (u : τ (@CommRingVector R m))
+  (v : τ (@CommRingVector R n))
+  : τ (@= (@CommRingVector R (@nat_add m n))
+      (@comm_ring_vector_neg R (@nat_add m n)
+        (@comm_ring_vector_append R m n u v))
+      (@comm_ring_vector_append R m n
+        (@comm_ring_vector_neg R m u)
+        (@comm_ring_vector_neg R n v)))
+≔ (@nat_elim
+    (λ m0 : τ Nat_grpd,
+      @Pi_grpd (@CommRingVector R m0) (λ u0 : τ _,
+        @Pi_grpd (@CommRingVector R n) (λ v0 : τ _,
+          @= (@CommRingVector R (@nat_add m0 n))
+            (@comm_ring_vector_neg R (@nat_add m0 n)
+              (@comm_ring_vector_append R m0 n u0 v0))
+            (@comm_ring_vector_append R m0 n
+              (@comm_ring_vector_neg R m0 u0)
+              (@comm_ring_vector_neg R n v0)))))
+    (λ _ : τ _, λ v0 : τ _,
+      @eq_refl (@CommRingVector R n) (@comm_ring_vector_neg R n v0))
+    (λ m0 : τ Nat_grpd, λ ih : τ _, λ u0 : τ _, λ v0 : τ _,
+      @finite_family_succ_path
+        (@comm_ring_carrier R) (@nat_add m0 n)
+        (@comm_ring_vector_neg R (@nat_add (succ m0) n)
+          (@comm_ring_vector_append R (succ m0) n u0 v0))
+        (@comm_ring_vector_append R (succ m0) n
+          (@comm_ring_vector_neg R (succ m0) u0)
+          (@comm_ring_vector_neg R n v0))
+        (@eq_refl
+          (@comm_ring_carrier R)
+          (@comm_ring_neg R
+            (@finite_family_head (@comm_ring_carrier R) m0 u0)))
+        (ih (@finite_family_tail (@comm_ring_carrier R) m0 u0) v0))
+    m) u v;
+
+// Concatenation preserves componentwise subtraction.
+symbol comm_ring_vector_sub_append_path
+  (R : τ CommRing)
+  (m n : τ Nat_grpd)
+  (u u' : τ (@CommRingVector R m))
+  (v v' : τ (@CommRingVector R n))
+  : τ (@= (@CommRingVector R (@nat_add m n))
+      (@comm_ring_vector_append R m n
+        (@comm_ring_vector_sub R m u u')
+        (@comm_ring_vector_sub R n v v'))
+      (@comm_ring_vector_sub R (@nat_add m n)
+        (@comm_ring_vector_append R m n u v)
+        (@comm_ring_vector_append R m n u' v')))
+≔ @eq_trans
+    (@CommRingVector R (@nat_add m n))
+    (@comm_ring_vector_append R m n
+      (@comm_ring_vector_sub R m u u')
+      (@comm_ring_vector_sub R n v v'))
+    (@comm_ring_vector_add R (@nat_add m n)
+      (@comm_ring_vector_append R m n u v)
+      (@comm_ring_vector_append R m n
+        (@comm_ring_vector_neg R m u')
+        (@comm_ring_vector_neg R n v')))
+    (@comm_ring_vector_sub R (@nat_add m n)
+      (@comm_ring_vector_append R m n u v)
+      (@comm_ring_vector_append R m n u' v'))
+    (@comm_ring_vector_append_add_path R m n
+      u (@comm_ring_vector_neg R m u')
+      v (@comm_ring_vector_neg R n v'))
+    (@eq_ap
+      (@CommRingVector R (@nat_add m n))
+      (@CommRingVector R (@nat_add m n))
+      (λ z : τ (@CommRingVector R (@nat_add m n)),
+        @comm_ring_vector_add R (@nat_add m n)
+          (@comm_ring_vector_append R m n u v) z)
+      (@comm_ring_vector_append R m n
+        (@comm_ring_vector_neg R m u')
+        (@comm_ring_vector_neg R n v'))
+      (@comm_ring_vector_neg R (@nat_add m n)
+        (@comm_ring_vector_append R m n u' v'))
+      (@eq_sym
+        (@CommRingVector R (@nat_add m n))
+        (@comm_ring_vector_neg R (@nat_add m n)
+          (@comm_ring_vector_append R m n u' v'))
+        (@comm_ring_vector_append R m n
+          (@comm_ring_vector_neg R m u')
+          (@comm_ring_vector_neg R n v'))
+        (@comm_ring_vector_neg_append_path R m n u' v')));
 
 // Horizontal block application splits as the sum of the two block actions.
 symbol comm_ring_matrix_horizontal_apply_path
@@ -913,6 +1002,122 @@ symbol comm_ring_matrix_vertical_congr_path
         @comm_ring_matrix_vertical R rows_top rows_bottom columns A' M)
       B B' q);
 
+// Horizontal blocks preserve componentwise matrix subtraction.
+symbol comm_ring_matrix_horizontal_sub_path
+  (R : τ CommRing)
+  (rows columns_left columns_right : τ Nat_grpd)
+  (A A' : τ (@CommRingMatrix R rows columns_left))
+  (B B' : τ (@CommRingMatrix R rows columns_right))
+  : τ (@= (@CommRingMatrix R rows
+      (@nat_add columns_left columns_right))
+      (@comm_ring_matrix_horizontal R rows columns_left columns_right
+        (@comm_ring_matrix_sub R rows columns_left A A')
+        (@comm_ring_matrix_sub R rows columns_right B B'))
+      (@comm_ring_matrix_sub R rows (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_horizontal R rows columns_left columns_right A B)
+        (@comm_ring_matrix_horizontal R rows columns_left columns_right A' B')))
+≔ (@nat_elim
+    (λ columns_left0 : τ Nat_grpd,
+      @Pi_grpd (@CommRingMatrix R rows columns_left0) (λ A0 : τ _,
+        @Pi_grpd (@CommRingMatrix R rows columns_left0) (λ A0' : τ _,
+          @= (@CommRingMatrix R rows
+              (@nat_add columns_left0 columns_right))
+            (@comm_ring_matrix_horizontal R rows
+              columns_left0 columns_right
+              (@comm_ring_matrix_sub R rows columns_left0 A0 A0')
+              (@comm_ring_matrix_sub R rows columns_right B B'))
+            (@comm_ring_matrix_sub R rows
+              (@nat_add columns_left0 columns_right)
+              (@comm_ring_matrix_horizontal R rows
+                columns_left0 columns_right A0 B)
+              (@comm_ring_matrix_horizontal R rows
+                columns_left0 columns_right A0' B')))))
+    (λ _ : τ _, λ _ : τ _,
+      @eq_refl
+        (@CommRingMatrix R rows columns_right)
+        (@comm_ring_matrix_sub R rows columns_right B B'))
+    (λ columns_left0 : τ Nat_grpd, λ ih : τ _,
+      λ A0 : τ _, λ A0' : τ _,
+        @finite_family_succ_path
+          (@CommRingVector R rows) (@nat_add columns_left0 columns_right)
+          (@comm_ring_matrix_horizontal R rows
+            (succ columns_left0) columns_right
+            (@comm_ring_matrix_sub R rows (succ columns_left0) A0 A0')
+            (@comm_ring_matrix_sub R rows columns_right B B'))
+          (@comm_ring_matrix_sub R rows
+            (@nat_add (succ columns_left0) columns_right)
+            (@comm_ring_matrix_horizontal R rows
+              (succ columns_left0) columns_right A0 B)
+            (@comm_ring_matrix_horizontal R rows
+              (succ columns_left0) columns_right A0' B'))
+          (@eq_refl
+            (@CommRingVector R rows)
+            (@comm_ring_vector_sub R rows
+              (@finite_family_head (@CommRingVector R rows) columns_left0 A0)
+              (@finite_family_head (@CommRingVector R rows) columns_left0 A0')))
+          (ih
+            (@finite_family_tail (@CommRingVector R rows) columns_left0 A0)
+            (@finite_family_tail
+              (@CommRingVector R rows) columns_left0 A0')))
+    columns_left) A A';
+
+// Vertical blocks preserve componentwise matrix subtraction.
+symbol comm_ring_matrix_vertical_sub_path
+  (R : τ CommRing)
+  (rows_top rows_bottom columns : τ Nat_grpd)
+  (A A' : τ (@CommRingMatrix R rows_top columns))
+  (B B' : τ (@CommRingMatrix R rows_bottom columns))
+  : τ (@= (@CommRingMatrix R (@nat_add rows_top rows_bottom) columns)
+      (@comm_ring_matrix_vertical R rows_top rows_bottom columns
+        (@comm_ring_matrix_sub R rows_top columns A A')
+        (@comm_ring_matrix_sub R rows_bottom columns B B'))
+      (@comm_ring_matrix_sub R (@nat_add rows_top rows_bottom) columns
+        (@comm_ring_matrix_vertical R rows_top rows_bottom columns A B)
+        (@comm_ring_matrix_vertical R rows_top rows_bottom columns A' B')))
+≔ (@nat_elim
+    (λ columns0 : τ Nat_grpd,
+      @Pi_grpd (@CommRingMatrix R rows_top columns0) (λ A0 : τ _,
+        @Pi_grpd (@CommRingMatrix R rows_top columns0) (λ A0' : τ _,
+          @Pi_grpd (@CommRingMatrix R rows_bottom columns0) (λ B0 : τ _,
+            @Pi_grpd (@CommRingMatrix R rows_bottom columns0) (λ B0' : τ _,
+              @= (@CommRingMatrix R (@nat_add rows_top rows_bottom) columns0)
+                (@comm_ring_matrix_vertical R rows_top rows_bottom columns0
+                  (@comm_ring_matrix_sub R rows_top columns0 A0 A0')
+                  (@comm_ring_matrix_sub R rows_bottom columns0 B0 B0'))
+                (@comm_ring_matrix_sub R (@nat_add rows_top rows_bottom)
+                  columns0
+                  (@comm_ring_matrix_vertical R rows_top rows_bottom
+                    columns0 A0 B0)
+                  (@comm_ring_matrix_vertical R rows_top rows_bottom
+                    columns0 A0' B0')))))))
+    (λ _ : τ _, λ _ : τ _, λ _ : τ _, λ _ : τ _,
+      @eq_refl Unit_grpd tt)
+    (λ columns0 : τ Nat_grpd, λ ih : τ _,
+      λ A0 : τ _, λ A0' : τ _, λ B0 : τ _, λ B0' : τ _,
+        @finite_family_succ_path
+          (@CommRingVector R (@nat_add rows_top rows_bottom)) columns0
+          (@comm_ring_matrix_vertical R rows_top rows_bottom (succ columns0)
+            (@comm_ring_matrix_sub R rows_top (succ columns0) A0 A0')
+            (@comm_ring_matrix_sub R rows_bottom (succ columns0) B0 B0'))
+          (@comm_ring_matrix_sub R (@nat_add rows_top rows_bottom)
+            (succ columns0)
+            (@comm_ring_matrix_vertical R rows_top rows_bottom
+              (succ columns0) A0 B0)
+            (@comm_ring_matrix_vertical R rows_top rows_bottom
+              (succ columns0) A0' B0'))
+          (@comm_ring_vector_sub_append_path R rows_top rows_bottom
+            (@finite_family_head (@CommRingVector R rows_top) columns0 A0)
+            (@finite_family_head (@CommRingVector R rows_top) columns0 A0')
+            (@finite_family_head (@CommRingVector R rows_bottom) columns0 B0)
+            (@finite_family_head (@CommRingVector R rows_bottom) columns0 B0'))
+          (ih
+            (@finite_family_tail (@CommRingVector R rows_top) columns0 A0)
+            (@finite_family_tail (@CommRingVector R rows_top) columns0 A0')
+            (@finite_family_tail (@CommRingVector R rows_bottom) columns0 B0)
+            (@finite_family_tail
+              (@CommRingVector R rows_bottom) columns0 B0')))
+    columns) A A' B B';
+
 // Postcomposition preserves horizontal column concatenation.
 symbol comm_ring_matrix_comp_horizontal_path
   (R : τ CommRing)
@@ -1559,6 +1764,139 @@ symbol comm_ring_matrix_block_diag_congr_path
         @comm_ring_matrix_block_diag R
           rows_left rows_right columns_left columns_right A' M)
       D D' q);
+
+// Block diagonals preserve componentwise subtraction.
+symbol comm_ring_matrix_block_diag_sub_path
+  (R : τ CommRing)
+  (rows_left rows_right columns_left columns_right : τ Nat_grpd)
+  (A A' : τ (@CommRingMatrix R rows_left columns_left))
+  (D D' : τ (@CommRingMatrix R rows_right columns_right))
+  : τ (@= (@CommRingMatrix R
+      (@nat_add rows_left rows_right)
+      (@nat_add columns_left columns_right))
+      (@comm_ring_matrix_block_diag R
+        rows_left rows_right columns_left columns_right
+        (@comm_ring_matrix_sub R rows_left columns_left A A')
+        (@comm_ring_matrix_sub R rows_right columns_right D D'))
+      (@comm_ring_matrix_sub R
+        (@nat_add rows_left rows_right)
+        (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_block_diag R
+          rows_left rows_right columns_left columns_right A D)
+        (@comm_ring_matrix_block_diag R
+          rows_left rows_right columns_left columns_right A' D')))
+≔ @eq_trans
+    _ _
+    (@comm_ring_matrix_vertical R rows_left rows_right
+      (@nat_add columns_left columns_right)
+      (@comm_ring_matrix_sub R rows_left
+        (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          A (@comm_ring_matrix_zero R rows_left columns_right))
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          A' (@comm_ring_matrix_zero R rows_left columns_right)))
+      (@comm_ring_matrix_sub R rows_right
+        (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left) D)
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left) D')))
+    _
+    (@comm_ring_matrix_vertical_congr_path R rows_left rows_right
+      (@nat_add columns_left columns_right)
+      (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+        (@comm_ring_matrix_sub R rows_left columns_left A A')
+        (@comm_ring_matrix_zero R rows_left columns_right))
+      (@comm_ring_matrix_sub R rows_left
+        (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          A (@comm_ring_matrix_zero R rows_left columns_right))
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          A' (@comm_ring_matrix_zero R rows_left columns_right)))
+      (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+        (@comm_ring_matrix_zero R rows_right columns_left)
+        (@comm_ring_matrix_sub R rows_right columns_right D D'))
+      (@comm_ring_matrix_sub R rows_right
+        (@nat_add columns_left columns_right)
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left) D)
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left) D'))
+      (@eq_trans
+        _
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          (@comm_ring_matrix_sub R rows_left columns_left A A')
+          (@comm_ring_matrix_zero R rows_left columns_right))
+        (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+          (@comm_ring_matrix_sub R rows_left columns_left A A')
+          (@comm_ring_matrix_sub R rows_left columns_right
+            (@comm_ring_matrix_zero R rows_left columns_right)
+            (@comm_ring_matrix_zero R rows_left columns_right)))
+        (@comm_ring_matrix_sub R rows_left
+          (@nat_add columns_left columns_right)
+          (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+            A (@comm_ring_matrix_zero R rows_left columns_right))
+          (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+            A' (@comm_ring_matrix_zero R rows_left columns_right)))
+        (@comm_ring_matrix_horizontal_congr_path R rows_left
+          columns_left columns_right
+          (@comm_ring_matrix_sub R rows_left columns_left A A')
+          (@comm_ring_matrix_sub R rows_left columns_left A A')
+          (@comm_ring_matrix_zero R rows_left columns_right)
+          (@comm_ring_matrix_sub R rows_left columns_right
+            (@comm_ring_matrix_zero R rows_left columns_right)
+            (@comm_ring_matrix_zero R rows_left columns_right))
+          (@eq_refl _ _)
+          (@eq_sym _ _ _
+            (@comm_ring_matrix_sub_refl_path R rows_left columns_right
+              (@comm_ring_matrix_zero R rows_left columns_right))))
+        (@comm_ring_matrix_horizontal_sub_path R rows_left
+          columns_left columns_right A A'
+          (@comm_ring_matrix_zero R rows_left columns_right)
+          (@comm_ring_matrix_zero R rows_left columns_right)))
+      (@eq_trans
+        _
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left)
+          (@comm_ring_matrix_sub R rows_right columns_right D D'))
+        (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+          (@comm_ring_matrix_sub R rows_right columns_left
+            (@comm_ring_matrix_zero R rows_right columns_left)
+            (@comm_ring_matrix_zero R rows_right columns_left))
+          (@comm_ring_matrix_sub R rows_right columns_right D D'))
+        (@comm_ring_matrix_sub R rows_right
+          (@nat_add columns_left columns_right)
+          (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+            (@comm_ring_matrix_zero R rows_right columns_left) D)
+          (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+            (@comm_ring_matrix_zero R rows_right columns_left) D'))
+        (@comm_ring_matrix_horizontal_congr_path R rows_right
+          columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left)
+          (@comm_ring_matrix_sub R rows_right columns_left
+            (@comm_ring_matrix_zero R rows_right columns_left)
+            (@comm_ring_matrix_zero R rows_right columns_left))
+          (@comm_ring_matrix_sub R rows_right columns_right D D')
+          (@comm_ring_matrix_sub R rows_right columns_right D D')
+          (@eq_sym _ _ _
+            (@comm_ring_matrix_sub_refl_path R rows_right columns_left
+              (@comm_ring_matrix_zero R rows_right columns_left)))
+          (@eq_refl _ _))
+        (@comm_ring_matrix_horizontal_sub_path R rows_right
+          columns_left columns_right
+          (@comm_ring_matrix_zero R rows_right columns_left)
+          (@comm_ring_matrix_zero R rows_right columns_left)
+          D D')))
+    (@comm_ring_matrix_vertical_sub_path R rows_left rows_right
+      (@nat_add columns_left columns_right)
+      (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+        A (@comm_ring_matrix_zero R rows_left columns_right))
+      (@comm_ring_matrix_horizontal R rows_left columns_left columns_right
+        A' (@comm_ring_matrix_zero R rows_left columns_right))
+      (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+        (@comm_ring_matrix_zero R rows_right columns_left) D)
+      (@comm_ring_matrix_horizontal R rows_right columns_left columns_right
+        (@comm_ring_matrix_zero R rows_right columns_left) D'));
 
 // A block diagonal matrix acts componentwise on a vertical pair.
 symbol comm_ring_matrix_block_diag_vertical_path
