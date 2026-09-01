@@ -41,6 +41,7 @@ export * from './algebra_polynomial_module';
 export * from './algebra_polynomial_presentation';
 export * from './algebra_polynomial_presentation_morphism';
 export * from './algebra_polynomial_presentation_morphism_reference_operations';
+export * from './algebra_polynomial_bounded_complex';
 export * from './algebra_presented_module';
 export * from './algebra_presented_module_map';
 export * from './algebra_presented_module_base_change';

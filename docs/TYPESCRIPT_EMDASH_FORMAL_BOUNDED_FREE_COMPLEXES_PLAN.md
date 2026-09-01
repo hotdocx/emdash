@@ -324,10 +324,10 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | `FBC-PLAN-0` | in progress | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
 | `FBC-AUDIT-1A` | complete; checkpoint `1789918` | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
 | `FBC-FORMAL-COMPLEX-2A` | complete; checkpoint `ccc0499` | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
-| `FBC-FORMAL-MAP-3A` | complete; formal-map checkpoint pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
-| `FBC-COMPUTE-4A` | pending | formal orientation | whole polynomial complex and negative chain-condition results |
-| `FBC-SCHREYER-5A` | pending | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
-| `FBC-CHAIN-MAP-6A` | pending | complex | whole chain maps, identity, composition, and retained noncommuting squares |
+| `FBC-FORMAL-MAP-3A` | complete; formal/computational checkpoint pending | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
+| `FBC-COMPUTE-4A` | complete; formal/computational checkpoint pending | formal orientation | whole polynomial complex and negative chain-condition results |
+| `FBC-SCHREYER-5A` | complete; formal/computational checkpoint pending | computational complex | lossless/revalidated conversion from bounded Schreyer resolutions |
+| `FBC-CHAIN-MAP-6A` | complete; formal/computational checkpoint pending | complex | whole chain maps, identity, composition, and retained noncommuting squares |
 | `FBC-OPERATIONS-7A` | pending | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
 | `FBC-BRIDGE-8A` | pending | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
 | `FBC-CATEGORY-9A` | pending | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
@@ -360,6 +360,10 @@ tests, proportional validation, and a local checkpoint.
 | `D-FBC-017` | accepted during formal promotion | Complex and chain-tail owners remain transparent in a downstream rule-free module; visible two-differential construction and all selected projections compute without a stable facade. |
 | `D-FBC-018` | accepted after chain-map probe | `CommRingFreeChainMapTail` recurses over two independently packaged complex tails; the aligned-spine fallback is unnecessary. |
 | `D-FBC-019` | accepted after chain-map probe | A positive-length whole chain map stores `F0`, `F1`, the first square, then a recursive tail starting at `F1`; zero length is exactly one matrix between the two degree-zero ranks. |
+| `D-FBC-020` | accepted during computation | Polynomial complexes use zero-based consecutive terms and `d_i : C_i -> C_(i-1)`; endpoint/ring/count failures are structural, while nonzero adjacent composites remain whole negative results. |
+| `D-FBC-021` | accepted during Schreyer conversion | Resolution free-module/differential order, maximum length, completeness, and the original whole resolution are retained, while every adjacent composite is recomputed through the generic complex owner. |
+| `D-FBC-022` | accepted during chain maps | A whole chain map retains one component per degree and every computed square; its status also requires both endpoints to be valid complexes. |
+| `D-FBC-023` | accepted during chain maps | Identity and composition are constructed componentwise and re-enter the common whole validator; no privileged Boolean-only path or manually supplied square exists. |
 
 ## Initial Formal Owner Audit Result
 
@@ -415,6 +419,28 @@ map tail beginning at `F1`. The reviewer constructs a one-differential map,
 exposes both components, and confirms that distinct selected `F0` matrices
 remain runtime-distinct. Owner and reviewer pass quiet bounded checking with
 no stable head, rule, unifier, or duplicated source/target spine.
+
+## Initial Computational Complex Result
+
+`src/v3_2/algebra_polynomial_bounded_complex.ts` now owns zero-based bounded
+free complexes and chain maps. A complex retains ordered free modules,
+differentials, every adjacent composite, each zero status, its length, and an
+overall status. Ring, count, and endpoint mismatches are rejected, but a
+nonzero composite remains inspectable rather than causing construction to
+discard the candidate.
+
+Schreyer conversion preserves the source resolution, free modules,
+differentials, maximum length, and completion status, while reconstructing all
+conditions through the generic complex owner. The representative complete
+length-two resolution remains a valid complex.
+
+A chain map retains every component and square. Identity, scalar maps, and
+composition return through the same constructor; a changed component produces
+an `isChainMap = false` result with the unequal square sides retained. Focused
+tests cover valid/invalid complexes, nonzero composite visibility, Schreyer
+metadata, identity/scalar/composition, and a negative square. Eleven directly
+affected polynomial presentation tests, root typecheck, and affected lint
+pass.
 
 ## Validation Policy
 
