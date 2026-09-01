@@ -4,8 +4,8 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-BOUNDED-FREE-COMPLEXES`
 
-Status: implementation complete on a dedicated branch/worktree; final
-conformance/documentation checkpoint pending.
+Status: completed on a dedicated branch/worktree; implementation and
+conformance checkpoint `2311e93`.
 
 Baseline: `c9d8e5ff1c91c1292fa0548b895e3183a0a8657c`
 
@@ -321,7 +321,7 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 
 | Row | Status | Dependency | Deliverable and acceptance boundary |
 | --- | --- | --- | --- |
-| `FBC-PLAN-0` | in progress | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
+| `FBC-PLAN-0` | complete; checkpoint `b9aada0` | completed presentation morphisms at `c9d8e5f` and reviewed continuation | living plan, isolated branch/worktree, exact baseline, recursive design, validation, Git limits |
 | `FBC-AUDIT-1A` | complete; checkpoint `1789918` | plan | owner-position `ChainTail` probe, projection/zero-boundary feasibility, exact fallback classification |
 | `FBC-FORMAL-COMPLEX-2A` | complete; checkpoint `ccc0499` | audit | rule-minimal recursive formal complex, constructors/projections, positive/noncollapse reviewer |
 | `FBC-FORMAL-MAP-3A` | complete; checkpoint `3a934c7` | formal complex | recursive formal chain map or documented aligned-spine fallback, exact component squares |
@@ -331,7 +331,7 @@ claim comparable package breadth, API compatibility, or proof of the CAS.
 | `FBC-OPERATIONS-7A` | complete; checkpoint `1c7acad` | computational owners | exact schemas, operations, serializers, reference engine, direct/graph byte agreement |
 | `FBC-BRIDGE-8A` | complete; checkpoint `791d774` | formal/computational owners | recursive Core reification, exact adapters, ordered classified adoption, package construction, deterministic artifact |
 | `FBC-CATEGORY-9A` | complete; checkpoint `1c7acad` | chain maps/operations | direct computable category plus representative tower/compiler lowering and agreement |
-| `FBC-CONFORMANCE-10A` | complete; final checkpoint pending | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
+| `FBC-CONFORMANCE-10A` | complete; checkpoint `2311e93` | all active rows | registration, standing docs, affected checks/lint, live Lambdapi acceptance, proportional final audit |
 
 Rows may be split, rejected, or deferred only with durable evidence and a
 synchronized plan. Every completed row requires focused positive/negative

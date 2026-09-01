@@ -3,7 +3,7 @@
 Date: 2026-09-01
 
 `../../docs/TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md` is the
-active cross-layer continuation from individual matrix squares to whole
+completed cross-layer continuation from individual matrix squares to whole
 bounded polynomial free complexes and chain maps. Boundary-indexed recursive
 formal tails internalize varying ranks, genuine `d^2=0` laws, components, and
 chain squares without arrays or manual coherence inputs. Native whole
