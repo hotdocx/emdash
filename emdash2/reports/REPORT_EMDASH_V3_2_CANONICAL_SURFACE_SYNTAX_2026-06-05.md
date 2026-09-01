@@ -867,6 +867,8 @@ The literal owners are `CommRingFiniteFree_cat`,
 `comm_ring_presentation_morphism_comp`,
 `comm_ring_presentation_morphism_zero`,
 `comm_ring_presentation_morphism_add`,
+`comm_ring_presentation_agreement_refl`,
+`comm_ring_presentation_agreement_trans`,
 `CommRingPresentationAgreement_cat`, `CommRingFreydRawHomGroupoid`,
 `CommRingFreydHomSet`, `CommRingFreydPresentation_cat`, and
 `CommRingFreydElement`. Generic category identity/composition remain runtime

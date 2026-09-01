@@ -3192,6 +3192,14 @@ distributes over matrix addition on both sides. Raw presentation zero and
 addition combine generator and relation matrices componentwise; their stored
 squares are derived from those bilinear paths and the input squares.
 
+Target-factorization agreement inherits the resulting subtraction calculus.
+Zero witnesses reflexivity, negation witnesses symmetry, and witness addition
+gives transitivity and additive compatibility. Precomposition multiplies the
+agreement witness by the incoming generator map. Postcomposition multiplies
+it by the relation matrix retained by the outer raw presentation map, so its
+new factorization square is derived from the stored outer square rather than
+provided separately.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

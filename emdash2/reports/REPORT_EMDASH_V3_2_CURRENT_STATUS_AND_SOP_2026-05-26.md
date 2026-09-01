@@ -297,10 +297,19 @@ belongs to the owning implementation plan rather than to standing guidance.
   extensional assembly, vector additive/scalar laws, matrix-action linearity,
   matrix additive-group laws, zero composition, and both matrix-composition
   distributivity paths.
+- `emdash3_2_commutative_algebra_matrix_subtractive_laws.lp`: derives inverse
+  uniqueness, involutive negation, negation of sums/subtractions, subtraction
+  chaining/additivity, and preservation of subtraction by both sides of
+  composition. It is theorem-level and rule-free.
 - `emdash3_2_commutative_algebra_presentation_additive_operations.lp`:
   completes the raw presentation surface with zero and addition on both stored
   matrices. Their relation squares are constructed from the matrix zero and
   bilinearity paths; no opaque square or runtime algebra rule is introduced.
+- `emdash3_2_commutative_algebra_presentation_agreement_operations.lp`:
+  constructs reflexive, symmetric, transitive, additive, precomposition, and
+  postcomposition operations on explicit target-factorization agreement. The
+  postcomposition witness uses the relation matrix retained by the outer raw
+  map; no manually entered square is added.
 - `emdash3_2_commutative_algebra_freyd_presentations.lp`: homwise quotient and
   Freyd-category skeleton. Raw presentation morphisms and target-factorization
   agreements form fixed-endpoint categories; existing `Groupoidify` and
@@ -5279,7 +5288,7 @@ has zero strict findings. The generated catalog contains 2,359 classified
 checks across 116 areas with zero legacy or unclassified entries.
 
 The current registered health report is deliberately an honest no-check
-source snapshot over 347 maintained owner/reviewer files. It records no exit
+source snapshot over 350 maintained owner/reviewer files. It records no exit
 or timing claim, because the integration follows the user's scoped-validation
 boundary rather than launching a repository-wide health sweep. The relevant
 changed kernel/module/diagnostic/reviewer targets passed their proportional
@@ -5318,6 +5327,10 @@ The derived-ring, matrix-additive, and raw-presentation-additive owners plus
 their two focused reviewers also pass. They construct zero, addition,
 bilinearity, and both raw additive square laws without runtime rules or opaque
 equality constants; all three strict LHS audits are empty.
+The matrix-subtractive and presentation-agreement owners plus the focused
+agreement reviewer pass as well. Agreement now has explicit equivalence,
+additive, and pre/postcomposition operations; both new strict LHS audits are
+empty and no local warning family is introduced.
 No repository-wide post-integration `make check`, `make examples`,
 `make health`, `make ci`, or root aggregate is claimed.
 

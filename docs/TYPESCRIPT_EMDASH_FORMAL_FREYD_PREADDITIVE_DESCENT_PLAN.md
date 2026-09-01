@@ -323,10 +323,10 @@ to emit proof certificates for all internal algorithms.
 | --- | --- | --- | --- |
 | `FPD-PLAN-0` | complete; checkpoint `bcf807c` | completed Freyd checkpoint `c7d1eb7` | living plan, isolated branch/worktree, corrected owner model, baseline and Git limits |
 | `FPD-OWNER-1A` | complete; checkpoint `8a053ae` | plan | durable correction of the transparent-composition timeout diagnosis and focused warning classification |
-| `FPD-MATRIX-2A` | complete; checkpoint pending | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
-| `FPD-RAW-3A` | complete; checkpoint pending | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
-| `FPD-AGREE-4A` | active | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
-| `FPD-DESCENT-5A` | blocked on agreement algebra | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
+| `FPD-MATRIX-2A` | complete; checkpoint `75783e5` | owner audit | constructed rigid/transparent comparison plus required identity/associativity/zero/bilinearity paths |
+| `FPD-RAW-3A` | complete; checkpoint `75783e5` | matrix theorem layer | formal raw presentation identity/composition/zero/addition with checked stored laws |
+| `FPD-AGREE-4A` | complete; checkpoint pending | raw calculus | reflexive/symmetric/transitive/additive and pre/postcomposition agreement operations |
+| `FPD-DESCENT-5A` | active | agreement operations | groupoidified and truncated identity/composition/zero/addition on quotient Homs |
 | `FPD-FREYD-6A` | blocked on descent | quotient operations | selected class owners and usability comparisons for generic Freyd identity/composition |
 | `FPD-PREADDITIVE-7A` | blocked on Freyd operations | class operations | smallest checked homwise preadditive package; no biproduct/additive claim |
 | `FPD-CONFORMANCE-8A` | blocked on formal consumer | active formal rows | focused direct/category/compiler/Core/Lambdapi agreement and artifacts |
@@ -358,6 +358,8 @@ opaque axiom should replace it.
 | `D-FPD-016` | accepted after raw-operation probe | A reusable matrix-square pasting path derives composite presentation laws by five explicit categorical steps; presentation identity/composition retain both generator and relation matrices. |
 | `D-FPD-017` | accepted after additive-law probes | A rule-free derived ring-law layer and Nat-recursive vector/matrix layer construct additive-group laws, action linearity, zero composition, and both distributivity orientations. |
 | `D-FPD-018` | accepted after raw-additive probe | Raw presentation zero and addition combine both stored matrices; their square laws are derived from matrix zero/bilinearity and the input square laws. |
+| `D-FPD-019` | accepted after subtractive probe | Matrix inverse uniqueness derives involutive negation, negation/subtraction algebra, subtraction chaining, and preservation of subtraction by both composition arguments. |
+| `D-FPD-020` | accepted after agreement probe | Target-factorization agreement is explicitly reflexive, symmetric, transitive, additive, and stable under arbitrary precomposition and relation-preserving postcomposition. |
 
 ## Current Matrix-Layer Result
 
@@ -370,7 +372,7 @@ rigid identity path and generic unit/associativity paths now prove transparent
 matrix left/right identity and associativity. The owner passes quiet and
 warning-enabled bounded checks, the focused reviewer consumes all paths, and
 strict LHS audit remains empty. Zero and bilinearity remain the active part of
-`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 347
+`FPD-MATRIX-2A`. The registered no-check health snapshot now contains 350
 owner/reviewer files; no repository-wide timing claim is introduced.
 
 `emdash3_2_commutative_algebra_presentation_operations.lp` now constructs raw
@@ -391,6 +393,14 @@ distributivity. `emdash3_2_commutative_algebra_presentation_additive_operations.
 uses those paths to construct raw zero and addition together with their whole
 relation squares. All three owners are rule-free, pass focused checks and
 strict LHS audits, and have reviewer-facing positive/noncollapse consumers.
+
+The agreement prerequisite is also complete. The subtractive matrix module
+derives the inverse and subtraction algebra needed by target factorization.
+`emdash3_2_commutative_algebra_presentation_agreement_operations.lp` exposes
+the retained witness/law and constructs reflexivity, symmetry, transitivity,
+addition, arbitrary generator-map precomposition, and postcomposition using
+the outer raw map's relation witness. The owner and focused reviewer pass; no
+runtime rule, quotient collapse, or opaque equality was added.
 
 ## Validation Policy
 

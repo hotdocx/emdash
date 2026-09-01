@@ -10,7 +10,7 @@
   category owners; their explicit class-level descent is separately gated.
 */
 
-require open emdash.emdash3_2_commutative_algebra_presentation_additive_operations;
+require open emdash.emdash3_2_commutative_algebra_presentation_agreement_operations;
 require open emdash.emdash3_2_groupoidification_universality;
 require open emdash.emdash3_2_truncation_reflector;
 
