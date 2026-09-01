@@ -570,10 +570,10 @@ Refine or reject a candidate when it:
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
-| `FPA-PLAN-0` | complete; checkpoint pending | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
-| `FPA-AUDIT-1` | active | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
-| `FPA-BASE-ADD-2` | blocked on audit | finite-free matrix laws | formal `PreadditiveCategory`/`AdditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
-| `FPA-UNIVERSAL-3` | blocked on audit | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
+| `FPA-PLAN-0` | complete; checkpoint `4059161` | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
+| `FPA-AUDIT-1` | complete; checkpoint pending | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
+| `FPA-BASE-ADD-2` | ready | finite-free matrix laws | formal `PreadditiveCategory`/`AdditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
+| `FPA-UNIVERSAL-3` | active | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
 | `FPA-WEAK-PB-4` | blocked on base + weak kernels | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-5` | blocked on audit | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
 | `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
@@ -600,6 +600,9 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-008` | accepted | `PREABELIAN_DOCTRINE` must require the usable kernel/cokernel role families, not only whole boxes. |
 | `D-FPA-009` | accepted | The field-module implementation is differential evidence only; polynomial Freyd computation must not use field-only splittings. |
 | `D-FPA-010` | accepted | Lifts along arbitrary monomorphisms, colifts along arbitrary epimorphisms, image/coimage comparison, and `AbelianCategory` belong to the successor goal. |
+| `D-FPA-011` | accepted after owner audit | The first formal theorem targets the existing `CommRingFreydPresentation_cat(R)` and takes an explicit finite-free weak-kernel capability. A second generic formal Freyd quotient is not introduced without a consumer that cannot reuse the active presentation/agreement/groupoidification carrier. |
+| `D-FPA-012` | accepted after upstream audit | In the repository's column convention, the cokernel relation is `[rho_B,alpha]`; the kernel relation is the second biased weak-fibre-product projection and its embedding datum is the first projection. The zero-composite agreement remains typed input even when upstream CAP retrieves it indirectly. |
+| `D-FPA-013` | accepted after formal audit | Genuine kernel/cokernel uniqueness is contractibility of direct Hom factor fibres. The selected centre, fibre path, and contraction path derive lift/colift, reconstruction, and uniqueness without a manual universal-square record. |
 
 ## Validation Matrix
 
@@ -659,6 +662,8 @@ repository aggregates.
   `docs/TYPESCRIPT_EMDASH_FREYD_COMPUTATIONAL_WEAK_KERNELS_PLAN.md`.
 - Completed additive Freyd plan:
   `docs/TYPESCRIPT_EMDASH_FREYD_ADDITIVE_BIPRODUCTS_PLAN.md`.
+- Completed prerequisite owner audit:
+  `docs/TYPESCRIPT_EMDASH_FREYD_PREABELIAN_OWNER_AUDIT.md`.
 
 These references guide formulas and operation decomposition. Active source,
 focused diagnostics, and repository SOP remain implementation authority.
