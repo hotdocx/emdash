@@ -571,9 +571,9 @@ Refine or reject a candidate when it:
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `FPA-PLAN-0` | complete; checkpoint `4059161` | baseline `c781a42` | living plan, isolated branch/worktree, fast-forward evidence, explicit Git/scope boundary, persistent goal |
-| `FPA-AUDIT-1` | complete; checkpoint pending | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
-| `FPA-BASE-ADD-2` | ready | finite-free matrix laws | formal `PreadditiveCategory`/`AdditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
-| `FPA-UNIVERSAL-3` | active | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
+| `FPA-AUDIT-1` | complete; checkpoint `0bdd3b5` | plan | exact formal/TypeScript owners, Posur/CAP formula orientation, current role/provider gaps, rejection signals, bounded baseline |
+| `FPA-BASE-ADD-2` | active | finite-free matrix laws | formal `PreadditiveCategory`/`AdditiveCategory` package for `CommRingFiniteFree_cat(R)` without duplicate operations |
+| `FPA-UNIVERSAL-3` | complete; checkpoint pending | preadditive owners | generic internal computational kernel/cokernel factor spaces, contractibility, projections, proposition and whole capability views |
 | `FPA-WEAK-PB-4` | blocked on base + weak kernels | additive biproduct + weak kernels | derived whole computational weak pullback with projections and selected factor |
 | `FPA-COKERNEL-5` | blocked on audit | Freyd presentation/additive owners | unconditional Freyd whole cokernel, object, projection, colift, annihilation, reconstruction, uniqueness/epic evidence |
 | `FPA-KERNEL-6` | blocked on weak pullbacks | Freyd presentation + base capability | Freyd whole kernel, object, embedding, lift, annihilation, reconstruction, uniqueness/monic evidence |
@@ -603,6 +603,31 @@ prerequisite; difficulty or warning count alone is insufficient.
 | `D-FPA-011` | accepted after owner audit | The first formal theorem targets the existing `CommRingFreydPresentation_cat(R)` and takes an explicit finite-free weak-kernel capability. A second generic formal Freyd quotient is not introduced without a consumer that cannot reuse the active presentation/agreement/groupoidification carrier. |
 | `D-FPA-012` | accepted after upstream audit | In the repository's column convention, the cokernel relation is `[rho_B,alpha]`; the kernel relation is the second biased weak-fibre-product projection and its embedding datum is the first projection. The zero-composite agreement remains typed input even when upstream CAP retrieves it indirectly. |
 | `D-FPA-013` | accepted after formal audit | Genuine kernel/cokernel uniqueness is contractibility of direct Hom factor fibres. The selected centre, fibre path, and contraction path derive lift/colift, reconstruction, and uniqueness without a manual universal-square record. |
+| `D-FPA-014` | accepted after universal probe | Cokernel coannihilators and factor spaces are transparent direct dual definitions over precomposition. This is a rule-free mirrored semantic surface, not a duplicated runtime theory or propositional equality bridge; it retains covariant test-object Path action. |
+
+## Implemented Generic Universal Layer
+
+`emdash3_2_kernels_cokernels.lp` now implements the generic internal layer
+selected by the audit. It adds the coannihilator `HFiber` and its covariant
+whole Path reindexing, direct kernel/cokernel factor spaces, selected
+computational structures whose every factor space is contractible, and
+readable projections for object, structural arrow, annihilation,
+lift/colift, reconstruction, and uniqueness.
+
+Ordinary `Kernel` and `Cokernel` existence are propositionally truncated from
+the selected structures. Whole `HasComputationalKernels`,
+`HasComputationalCokernels`, `HasKernels`, and `HasCokernels` packages are
+active, as is the thin selected `PreAbelianCategory` package over one existing
+`AdditiveCategory`. The module adds no rewrite or unification rule.
+
+`examples/kernels_cokernels.lp` checks retained coannihilator Path action,
+selected lifts/colifts, both reconstruction paths, both uniqueness paths, and
+the additive projection of pre-Abelian data. Source and reviewer checks pass
+within the bounded gate. The strict LHS audit reports zero clauses. Warning-
+enabled comparison is exactly neutral at `1,386 = 1,217 + 169` against the
+sole import owner `emdash3_2_weak_kernels.lp`. The module and reviewer are
+registered; the catalog and 393-file source-metrics health snapshot are
+refreshed.
 
 ## Validation Matrix
 

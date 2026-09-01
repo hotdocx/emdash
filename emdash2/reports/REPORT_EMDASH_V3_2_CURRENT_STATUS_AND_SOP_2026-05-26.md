@@ -386,6 +386,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   reconstruction laws. Its proposition and whole-category capability views
   are derived. It does not assert factor naturality, kernels, or Abelian
   structure.
+- `emdash3_2_kernels_cokernels.lp`: rule-free genuine computational kernels
+  and cokernels. Kernel and cokernel factor spaces are internal `HFiber`s of
+  post/precomposition over one annihilated/coannihilated arrow. Contractibility
+  supplies the selected lift/colift, reconstruction, and uniqueness; ordinary
+  existence is propositionally truncated. The module also packages whole
+  selected capabilities and a thin `PreAbelianCategory` over existing
+  additive data. It does not yet construct these capabilities for the formal
+  Freyd category or assert Abelian structure.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

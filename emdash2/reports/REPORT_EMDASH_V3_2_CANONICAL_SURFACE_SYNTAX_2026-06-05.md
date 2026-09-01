@@ -870,7 +870,11 @@ Add(Freyd_R)               : derived additive-category structure
 Ann_α(T)                    : fibre of α o - over 0
 WK(α) = (K,κ,factor)       : selected computational weak kernel
 α o κ = 0                  : annihilation
-κ o factor(τ,p) = τ        : selected nonunique factorization.
+κ o factor(τ,p) = τ        : selected nonunique factorization
+Ker(α)                     : weak-kernel data plus contractible factor spaces
+Coker(α)                   : dual coannihilator/contractible-colift data
+lift_α(τ,p), colift_α(τ,p) : selected universal factors
+PreAb(C)                   : additive C with selected kernels and cokernels.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -905,6 +909,18 @@ The literal owners are `CommRingFiniteFree_cat`,
 `HasComputationalWeakKernels`,
 `computational_weak_kernel_factor_fapp0`,
 `computational_weak_kernel_factor_path`,
+`KernelFactorSpace`,
+`CokernelCoannihilator`,
+`CokernelFactorSpace`,
+`ComputationalKernel`,
+`ComputationalCokernel`,
+`computational_kernel_lift`,
+`computational_kernel_lift_unique_path`,
+`computational_cokernel_colift`,
+`computational_cokernel_colift_unique_path`,
+`HasComputationalKernels`,
+`HasComputationalCokernels`,
+`PreAbelianCategory`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,
@@ -924,9 +940,10 @@ observations from products and preadditivity; it is not a parallel coproduct
 grammar. `WK(α)` selects lifts without uniqueness; test-object action is
 retained by the named reindexing functor, while naturality of the selected
 factor choice is not asserted. Do not identify a weak kernel with a kernel or
-strengthen the Freyd category to Abelian before the later constructive theorem
-supplies and verifies those operations. Do not print exactness or homology at
-this boundary.
+strengthen the Freyd category merely because the generic `Ker`, `Coker`, and
+`PreAb` classifiers now exist: a concrete pre-Abelian instance still requires
+actual whole constructions and universal factors. Do not print Abelian
+structure, exactness, or homology at this boundary.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write

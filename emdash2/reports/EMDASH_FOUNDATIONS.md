@@ -3303,6 +3303,24 @@ explicit proof-CAS adoption. Named equations do not create a ring-wide factor
 operation. Constructing kernels in the Freyd category and deriving Abelian
 structure remain the next separate theorem layer.
 
+The generic genuine-kernel layer strengthens factorization by uniqueness
+without changing weak kernels. For an annihilated `tau : T -> A` and candidate
+`kappa : K -> A`, its factor classifier is
+
+```text
+HFiber(Hom(T,K) --(kappa o -)--> Hom(T,A), tau).
+```
+
+A computational kernel requires this classifier to be contractible. Its
+centre is the selected lift, its fibre path is the reconstruction equation,
+and its contraction proves that every competing factor agrees with the
+selected one. Cokernels use the dual coannihilator fibre of `- o alpha` and
+contractible colift spaces. Coannihilated test objects retain covariant whole
+Path action. The resulting rule-free package exposes selected whole kernel and
+cokernel capabilities plus a thin `PreAbelianCategory` over existing additive
+data; it does not claim that the current Freyd category already inhabits that
+package.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

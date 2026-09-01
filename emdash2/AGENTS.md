@@ -70,8 +70,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   extensions derive biproducts, terminal/initial zero, and the checked
   `AdditiveCategory` instance. `emdash3_2_weak_kernels.lp` owns the generic
   Hom-fibre computational weak-kernel package and retained per-arrow test
-  reindexing. Concrete ring-wide formal capability, Freyd kernels, and Abelian
-  structure remain separate layers.
+  reindexing. `emdash3_2_kernels_cokernels.lp` adds genuine kernel/cokernel
+  universal properties as contractible internal factor fibres, with selected
+  lift/colift, reconstruction, uniqueness, whole capability, and thin
+  pre-Abelian packaging. Concrete ring-wide formal capability, constructed
+  Freyd kernels/cokernels, and Abelian structure remain separate layers.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product
