@@ -83,6 +83,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_functorial_homology.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_bounded_complexes.lp"),
     Path("emdash3_2_commutative_algebra_freyd_images.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),

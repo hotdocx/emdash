@@ -506,6 +506,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   colift. The resulting map has an explicit reconstruction agreement and
   quotient path. The module does not decode paths or postulate the induced
   map.
+- `emdash3_2_commutative_algebra_freyd_bounded_complexes.lp`: rule-free
+  recursive formal Freyd complexes. Each successor stores the next
+  presentation, raw differential, and existing adjacent-zero agreement. The
+  first interior-degree projection delegates to
+  `CommRingFreydWitnessedHomologyAt`; no second homology or quotient grammar is
+  introduced.
 - `emdash3_2_commutative_algebra_freyd_images.lp`: rule-free witnessed formal
   image/coimage layer. It derives cokernel-of-kernel coimage,
   kernel-of-cokernel image, their comparison, and `f = i chi p`. Explicit
@@ -545,6 +551,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   Degreewise homology inserts selected zero-presentation endpoint maps and
   delegates to the one-degree owner. The direct bounded-free adapter embeds
   free modules as relation-free presentations and retains its source complex.
+  The whole bounded chain-map extension retains every component square and
+  iterates the one-degree induced-map owner at a selected degree; identity and
+  failed-square consumers are explicit.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

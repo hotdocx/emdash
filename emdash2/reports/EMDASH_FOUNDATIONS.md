@@ -3606,6 +3606,14 @@ selected zero presentation at either endpoint. Direct bounded-free complexes
 embed by viewing free modules as relation-free presentations; the adapter
 does not define a second homology operation.
 
+The bounded native map layer similarly retains one component in every degree
+and the complete agreement for every square. Selecting a degree extracts the
+three neighboring components and delegates to the one-degree induced-map
+owner. Formally, `CommRingFreydChainTail` gives the matching recursive
+presentation/differential/agreement spine, and its first interior-degree
+projection delegates to witnessed homology. Indexing therefore iterates the
+universal construction instead of redefining it.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

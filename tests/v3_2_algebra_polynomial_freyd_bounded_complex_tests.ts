@@ -10,13 +10,18 @@ import {
     algebraPolynomialFreydBoundedComplex,
     algebraPolynomialFreydBoundedComplexFromFree,
     algebraPolynomialFreydBoundedComplexHomology,
+    algebraPolynomialFreydBoundedChainMap,
+    algebraPolynomialFreydBoundedChainMapHomology,
+    algebraPolynomialFreydBoundedChainMapIdentity,
     algebraPolynomialFreydCokernel,
     algebraPolynomialFreydExactnessAt,
     algebraPolynomialModuleMap,
     algebraPolynomialModuleMapZero,
     algebraPolynomialModuleVector,
     algebraPolynomialPresentationMorphism,
+    algebraPolynomialPresentationMorphismCongruence,
     algebraPolynomialPresentationMorphismIdentity,
+    algebraPolynomialPresentationMorphismZero,
     algebraPolynomialRing,
     algebraPolynomialSubmodule,
     algebraPolynomialVariable,
@@ -160,5 +165,60 @@ describe('v3.2 bounded polynomial Freyd complexes', () => {
             second.homology.homologyObject);
         assert.deepEqual(first.homology.boundaryMorphism.map,
             second.homology.boundaryMorphism.map);
+    });
+
+    it('iterates a bounded identity chain map to degreewise homology', () => {
+        const value = fixture();
+        const complex = algebraPolynomialFreydBoundedComplex({
+            terms: [value.quotient.object, value.one, value.one],
+            differentials: [
+                value.quotient.projection,
+                value.multiplicationX
+            ]
+        });
+        const identity = algebraPolynomialFreydBoundedChainMapIdentity(complex);
+        const induced = algebraPolynomialFreydBoundedChainMapHomology(
+            identity,
+            1
+        );
+        const expected = algebraPolynomialPresentationMorphismIdentity(
+            induced.sourceHomology.homology.homologyObject
+        );
+        assert.equal(identity.isChainMap, true);
+        assert.equal(induced.localChainMap.isChainMap, true);
+        assert.equal(induced.induced.homologyReconstruction.agrees, true);
+        assert.equal(algebraPolynomialPresentationMorphismCongruence(
+            induced.induced.homologyMap,
+            expected
+        ).agrees, true);
+    });
+
+    it('retains a failed bounded square and gates its homology map', () => {
+        const value = fixture();
+        const complex = algebraPolynomialFreydBoundedComplex({
+            terms: [value.quotient.object, value.one, value.one],
+            differentials: [
+                value.quotient.projection,
+                value.multiplicationX
+            ]
+        });
+        const chainMap = algebraPolynomialFreydBoundedChainMap({
+            source: complex,
+            target: complex,
+            components: [
+                algebraPolynomialPresentationMorphismZero(
+                    value.quotient.object,
+                    value.quotient.object
+                ),
+                algebraPolynomialPresentationMorphismIdentity(value.one),
+                algebraPolynomialPresentationMorphismIdentity(value.one)
+            ]
+        });
+        assert.equal(chainMap.squares[0].agreement.agrees, false);
+        assert.equal(chainMap.isChainMap, false);
+        assert.throws(
+            () => algebraPolynomialFreydBoundedChainMapHomology(chainMap, 1),
+            boundedError('CHAIN_CONDITION_FAILED')
+        );
     });
 });

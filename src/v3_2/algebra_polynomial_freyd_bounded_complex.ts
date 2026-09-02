@@ -26,6 +26,9 @@ import {
 import {
     algebraPresentedPolynomialModuleEquals,
     algebraPolynomialFreydZeroPresentation,
+    algebraPolynomialPresentationMorphismCompose,
+    algebraPolynomialPresentationMorphismCongruence,
+    algebraPolynomialPresentationMorphismIdentity,
     algebraPolynomialPresentationMorphismZero
 } from './algebra_polynomial_freyd_category';
 import {
@@ -34,6 +37,12 @@ import {
     algebraPolynomialFreydChainPair,
     algebraPolynomialFreydHomologyAt
 } from './algebra_polynomial_freyd_homology';
+import {
+    AlgebraPolynomialFreydHomologyChainMap,
+    AlgebraPolynomialFreydInducedHomologyMap,
+    algebraPolynomialFreydHomologyChainMap,
+    algebraPolynomialFreydInducedHomologyMap
+} from './algebra_polynomial_freyd_functorial_homology';
 
 export const ALGEBRA_POLYNOMIAL_FREYD_BOUNDED_COMPLEX_PROFILE = Object.freeze({
     revision: 'emdash-algebra-polynomial-freyd-bounded-complex-v1' as const,
@@ -304,5 +313,199 @@ export function algebraPolynomialFreydBoundedComplexHomology<
         homology: algebraPolynomialFreydHomologyAt(pair),
         lowerEndpoint: degree === 0,
         upperEndpoint: degree === complex.length
+    });
+}
+
+export interface AlgebraPolynomialFreydBoundedChainMapComponent<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly degree: number;
+    readonly morphism: AlgebraPolynomialPresentationMorphism<P, C, I>;
+}
+
+export interface AlgebraPolynomialFreydBoundedChainMapSquare<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly degree: number;
+    readonly targetAfterComponent:
+        AlgebraPolynomialPresentationMorphism<P, C, I>;
+    readonly componentAfterSource:
+        AlgebraPolynomialPresentationMorphism<P, C, I>;
+    readonly agreement:
+        AlgebraPolynomialPresentationMorphismAgreement<P, C, I>;
+    readonly commutes: boolean;
+}
+
+export interface AlgebraPolynomialFreydBoundedChainMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-polynomial-freyd-bounded-chain-map';
+    readonly source: AlgebraPolynomialFreydBoundedComplex<P, C, I>;
+    readonly target: AlgebraPolynomialFreydBoundedComplex<P, C, I>;
+    readonly components:
+        readonly AlgebraPolynomialFreydBoundedChainMapComponent<P, C, I>[];
+    readonly squares:
+        readonly AlgebraPolynomialFreydBoundedChainMapSquare<P, C, I>[];
+    readonly isChainMap: boolean;
+}
+
+export function algebraPolynomialFreydBoundedChainMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(input: {
+    readonly source: AlgebraPolynomialFreydBoundedComplex<P, C, I>;
+    readonly target: AlgebraPolynomialFreydBoundedComplex<P, C, I>;
+    readonly components:
+        readonly AlgebraPolynomialPresentationMorphism<P, C, I>[];
+}): AlgebraPolynomialFreydBoundedChainMap<P, C, I> {
+    if (
+        input.source.length !== input.target.length ||
+        input.components.length !== input.source.terms.length
+    ) {
+        return fail(
+            'INVALID_DIFFERENTIALS',
+            'freydBoundedChainMap',
+            'A bounded chain map requires equal ranges and one component per term'
+        );
+    }
+    input.components.forEach((component, degree) => {
+        if (
+            !algebraPresentedPolynomialModuleEquals(
+                component.source,
+                input.source.terms[degree].object
+            ) ||
+            !algebraPresentedPolynomialModuleEquals(
+                component.target,
+                input.target.terms[degree].object
+            )
+        ) {
+            return fail(
+                'INVALID_DIFFERENTIALS',
+                `freydBoundedChainMap.components[${degree}]`,
+                'Chain-map component has incompatible endpoints'
+            );
+        }
+    });
+    const components = Object.freeze(input.components.map(
+        (morphism, degree) => Object.freeze({ degree, morphism })
+    ));
+    const squares = Object.freeze(input.source.differentials.map(
+        (sourceDifferential, index) => {
+            const degree = index + 1;
+            const targetAfterComponent =
+                algebraPolynomialPresentationMorphismCompose(
+                    input.target.differentials[index].morphism,
+                    input.components[degree]
+                );
+            const componentAfterSource =
+                algebraPolynomialPresentationMorphismCompose(
+                    input.components[degree - 1],
+                    sourceDifferential.morphism
+                );
+            const agreement = algebraPolynomialPresentationMorphismCongruence(
+                targetAfterComponent,
+                componentAfterSource
+            );
+            return Object.freeze({
+                degree,
+                targetAfterComponent,
+                componentAfterSource,
+                agreement,
+                commutes: agreement.agrees
+            });
+        }
+    ));
+    return Object.freeze({
+        kind: 'algebra-polynomial-freyd-bounded-chain-map',
+        source: input.source,
+        target: input.target,
+        components,
+        squares,
+        isChainMap: squares.every(square => square.commutes)
+    });
+}
+
+export function algebraPolynomialFreydBoundedChainMapIdentity<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(complex: AlgebraPolynomialFreydBoundedComplex<P, C, I>):
+    AlgebraPolynomialFreydBoundedChainMap<P, C, I> {
+    return algebraPolynomialFreydBoundedChainMap({
+        source: complex,
+        target: complex,
+        components: complex.terms.map(term =>
+            algebraPolynomialPresentationMorphismIdentity(term.object)
+        )
+    });
+}
+
+export interface AlgebraPolynomialFreydBoundedInducedHomologyMap<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly kind: 'algebra-polynomial-freyd-bounded-induced-homology-map';
+    readonly chainMap: AlgebraPolynomialFreydBoundedChainMap<P, C, I>;
+    readonly degree: number;
+    readonly sourceHomology: AlgebraPolynomialFreydBoundedHomologyAt<P, C, I>;
+    readonly targetHomology: AlgebraPolynomialFreydBoundedHomologyAt<P, C, I>;
+    readonly localChainMap: AlgebraPolynomialFreydHomologyChainMap<P, C, I>;
+    readonly induced: AlgebraPolynomialFreydInducedHomologyMap<P, C, I>;
+}
+
+export function algebraPolynomialFreydBoundedChainMapHomology<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(
+    chainMap: AlgebraPolynomialFreydBoundedChainMap<P, C, I>,
+    degree: number
+): AlgebraPolynomialFreydBoundedInducedHomologyMap<P, C, I> {
+    if (!chainMap.isChainMap) {
+        return fail(
+            'CHAIN_CONDITION_FAILED',
+            'freydBoundedChainMap.homology',
+            'Induced bounded homology requires every component square'
+        );
+    }
+    const sourceHomology = algebraPolynomialFreydBoundedComplexHomology(
+        chainMap.source,
+        degree
+    );
+    const targetHomology = algebraPolynomialFreydBoundedComplexHomology(
+        chainMap.target,
+        degree
+    );
+    const zero = algebraPolynomialFreydZeroPresentation(chainMap.source.ring);
+    const fNext = degree < chainMap.source.length
+        ? chainMap.components[degree + 1].morphism
+        : algebraPolynomialPresentationMorphismIdentity(zero);
+    const f = chainMap.components[degree].morphism;
+    const fPrev = degree > 0
+        ? chainMap.components[degree - 1].morphism
+        : algebraPolynomialPresentationMorphismIdentity(zero);
+    const localChainMap = algebraPolynomialFreydHomologyChainMap({
+        source: sourceHomology.homology,
+        target: targetHomology.homology,
+        fNext,
+        f,
+        fPrev
+    });
+    return Object.freeze({
+        kind: 'algebra-polynomial-freyd-bounded-induced-homology-map',
+        chainMap,
+        degree,
+        sourceHomology,
+        targetHomology,
+        localChainMap,
+        induced: algebraPolynomialFreydInducedHomologyMap(localChainMap)
     });
 }
