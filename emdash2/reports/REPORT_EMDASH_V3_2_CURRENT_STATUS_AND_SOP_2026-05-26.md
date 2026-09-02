@@ -473,6 +473,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   monic when its first leg is monic; normal-mono lifting proves the second
   selected pushout injection monic. The proofs return actual `IsEpic` and
   `IsMonic` cancellation functions, not flags.
+- `emdash3_2_preabelian_bimorphism_lemmas.lp`: rule-free cancellation
+  converses and closure. A zero selected kernel embedding proves monicity by
+  factoring an arbitrary annihilated difference through the kernel; the dual
+  cokernel proof gives epicity. Monic and epic arrows are also closed under
+  composition. The canonical coimage–image bimorphism consumer remains the
+  next active plan slice.
 - `emdash3_2_abelian_snake_lemma.lp`: active rule-free generic snake spine.
   One internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
   path. That path constructs the selected cokernel colift `gamma` and kernel

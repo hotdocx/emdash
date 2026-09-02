@@ -589,7 +589,8 @@ monomorphism.
 | `ASC-FIBER-2` | complete; checkpoint `9a73e59b` | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
 | `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | complete; checkpoint `9d637cdd` | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
-| `ASC-IMAGE-BIMORPHISM-4A` | dependency-ready prerequisite | generic image/coimage comparison | prove the canonical pre-Abelian coimage-to-image comparison monic and epic; derive epic coastriction into `Ker(Coker f)` and the dual monic astriction |
+| `ASC-IMAGE-BIMORPHISM-4A` | foundation green; comparison proof pending | generic image/coimage comparison | prove the canonical pre-Abelian coimage-to-image comparison monic and epic; derive epic coastriction into `Ker(Coker f)` and the dual monic astriction |
+| `ASC-BIMORPHISM-LEMMAS-4A1` | implementation/reviewer green; checkpoint pending | generic kernels/cokernels and additive cancellation | zero selected kernel implies monic, zero selected cokernel implies epic, and both properties compose |
 | `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | in progress via 6A | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-SPINE-6A` | complete; checkpoint `aa0d1be4` | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
@@ -633,6 +634,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-022` | accepted after generic spine probe | The generic snake input is one internal Sigma triple retaining `delta`, `beta`, `lambda`, and `lambda o beta o delta = 0`. That single path constructs both the `lambda beta` cokernel cone and the `beta delta` kernel cone, so `gamma` and `alpha` are selected operations rather than diagram fields. |
 | `D-ASC-023` | accepted after generic square-stage probe | CAP's fiber product and pushout are the canonical constructions selected by the same `ComputationalAbelianCategory`; therefore the already-proved stability theorems apply without transport or a second choice and return the exact epic `p1` and monic `q2` needed by normality. |
 | `D-ASC-024` | prerequisite exposed by final-test audit | To prove that `q1 o beta o p2` annihilates `Ker(p1)`, one must factor an `epsilon`-annihilated arrow through the image coastriction of `delta`. The active library constructs the coimage–image comparison but does not yet prove its standard pre-Abelian monic/epic properties. Prove that reusable theorem and derive the epic coastriction (plus its dual) rather than taking CAP's normal tests as new fields. |
+| `D-ASC-025` | accepted after cancellation-converse probe | Monicity from a zero selected kernel and epicity from a zero selected cokernel are constructive: factor the arbitrary difference through the contractible kernel/cokernel space, replace the structural arrow by zero, and cancel the additive difference. Named cone/factor observations are required to keep endpoint inference rigid. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -733,6 +735,17 @@ monic and epic, followed by the already-selected cokernel projection. The
 active image module constructs the comparison and its factorization but has
 not yet packaged those two cancellation proofs. Row 4A now owns that genuine
 prerequisite; the snake test remains derived rather than accepted as data.
+
+The first prerequisite tranche is now implemented in
+`emdash3_2_preabelian_bimorphism_lemmas.lp`. It proves both directions missing
+from the earlier one-way cancellation observations: a zero selected kernel
+embedding constructs `IsMonic`, and a zero selected cokernel projection
+constructs `IsEpic`. Each proof forms the additive difference cone, selects
+its unique universal factor, replaces the structural arrow by zero, and
+cancels the difference. Generic composition preserves both properties. Named
+transparent cones and factors avoid repeating reducible `HFiber` expressions
+inside higher-order equality arguments. The comparison-specific pullback and
+pushout proof remains the rest of row 4A.
 
 ## Baseline And Validation Policy
 

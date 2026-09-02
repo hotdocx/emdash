@@ -156,6 +156,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   pushout injection opposite a monic arrow is monic. The proof derives the
   defining difference arrow's cancellation, then uses the existing normal
   epi/mono factor spaces; it adds no property postulate, rule, or unifier.
+  `emdash3_2_preabelian_bimorphism_lemmas.lp` proves the converse
+  kernel/cokernel cancellation criteria by factoring differences through the
+  contractible universal spaces, and proves monic/epic composition. These
+  rule-free lemmas are the active prerequisite for the canonical
+  coimage–image bimorphism theorem.
   `emdash3_2_abelian_snake_lemma.lp` currently owns the rule-free generic
   snake spine: one triple-zero path constructs the selected `gamma` cokernel
   colift and `alpha` kernel lift together with their kernels/cokernels. The
