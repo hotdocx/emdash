@@ -558,13 +558,13 @@ Refine or reject a candidate when it:
 | `FAB-GENERIC-NORMALITY-3` | complete; checkpoint `7d3e7989` | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
 | `FAB-GENERIC-IMAGE-4A` | complete through canonical comparison; checkpoint `f277b3d1` | selected kernels/cokernels | derived image/coimage, projection/embedding, comparison, and factorization `f = i o chi o p` |
 | `FAB-GENERIC-IMAGE-4B` | blocked on concrete normality/bimorphism route | generic comparison + normality | comparison monic/epic consequences and constructed `IsoEvidence` inverse |
-| `FAB-MONO-NATIVE-5A` | complete; checkpoint pending | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
+| `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | active | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
-| `FAB-EPI-NATIVE-6A` | complete; checkpoint pending | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
+| `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | blocked on formal mono helper orientation | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
-| `FAB-IMAGE-NATIVE-7A` | blocked on native normality + generic image | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
+| `FAB-IMAGE-NATIVE-7A` | complete; checkpoint pending | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
-| `FAB-CATEGORY-8` | blocked on native image | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
+| `FAB-CATEGORY-8` | active | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | blocked on formal image | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package only if effectiveness succeeds |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
@@ -599,6 +599,7 @@ prerequisite.
 | `D-FAB-019` | accepted after generic image probe | In every selected pre-Abelian category, `Coim(f)` is the selected cokernel of `Ker(f)` and `Im(f)` the selected kernel of `Coker(f)`. Cokernel universality constructs the coastriction, epic cancellation proves it annihilated by `Coker(f)`, kernel universality constructs `chi`, and associativity gives `f = i o chi o p`. Comparison invertibility remains a separate normality theorem. |
 | `D-FAB-020` | accepted after native Construction 3.14 tests | Native monicity is classified by the selected kernel embedding's explicit agreement with zero. The lower block of a cokernel-zero test agreement is the lift datum; its expected relation witness is the kernel-zero witness after the selected first-weak-pullback factor. Multiplication by `x` with test `xy` computes lift `y`. |
 | `D-FAB-021` | accepted after native Construction 3.15 tests | Native epicity is classified by the selected cokernel projection's explicit agreement with zero. Splitting its identity witness and factoring the pair `sigma_A o R_Q`, `id - sigma_RQ o R_Q` through the first weak pullback constructs the colift relation witness. The quotient projection by `x` computes an identity colift. |
+| `D-FAB-022` | accepted after native image tests | One whole native result derives kernel, coimage, cokernel, image, coastriction, comparison, and `f = i o chi o p`. The comparison is independently classified monic and epic; Constructions 3.14 and 3.15 produce two inverse candidates, their agreement, and both quotient inverse laws. No isomorphism is postulated. |
 
 ## Implemented Generic Normality Layer
 
@@ -675,6 +676,26 @@ non-monic/non-epic inputs, non-annihilated tests, endpoint rejection,
 uniqueness, freezing, and deterministic replay. Together with the affected
 kernel/cokernel/provider suites, `21/21` tests pass; root typecheck and affected
 lint pass. No field-only inverse or external process is used.
+
+## Implemented Native Image/Coimage Isomorphism
+
+`algebra_polynomial_freyd_images.ts` computes the complete canonical
+factorization on the existing presentation carrier. It constructs
+`Coker(Ker(f))`, `Ker(Coker(f))`, the coimage-to-target morphism, the
+coimage–image comparison, the coastriction to the image, and the factorization
+agreement.
+
+The comparison is then passed through the actual normality algorithms. Its
+kernel-zero and cokernel-zero agreements classify it monic and epic.
+Construction 3.14 lifts the image identity and Construction 3.15 colifts the
+coimage identity, producing two inverse candidates. The implementation checks
+their quotient agreement and both inverse laws before returning the whole
+isomorphism result.
+
+Four focused tests cover multiplication by `x`, a nontrivial `[x,y]` row map,
+zero, identity, both inverse constructions, factorization, freezing, and
+deterministic replay. All pass without a primitive image algorithm, an opaque
+isomorphism witness, or field-only linear algebra.
 
 ## Validation Matrix
 

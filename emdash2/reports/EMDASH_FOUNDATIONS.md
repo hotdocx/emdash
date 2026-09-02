@@ -3475,6 +3475,14 @@ the colift, and another first weak-pullback factor constructs the relation
 witness. Both operations retain quotient reconstruction and uniqueness
 agreements; no field inverse or Boolean-only monic/epic test is used.
 
+The native image/coimage operation then applies those normality algorithms to
+the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
+classify the comparison as monic and epic. Lifting the image identity through
+the comparison and colifting the coimage identity through it produce two
+inverse candidates; the implementation checks that they agree in the Freyd
+quotient and verifies both inverse laws. Thus the isomorphism is computed from
+the preceding universal operations rather than inserted as a semantic flag.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
