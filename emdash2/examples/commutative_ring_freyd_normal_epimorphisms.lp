@@ -89,3 +89,21 @@ assert
   (a : τ (@CommRingFreydNormalEpiTestAgreement R W P Q T f tau))
   ⊢ @comm_ring_freyd_normal_epi_colift_raw R W P Q T f e tau a
   : τ (@CommRingPresentationMorphism R Q T);
+
+assert
+  (R : τ CommRing)
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  (P Q T : τ (@CommRingPresentation R))
+  (f : τ (@CommRingPresentationMorphism R P Q))
+  (e : τ (@CommRingFreydEpimorphismWitness R P Q f))
+  (tau : τ (@CommRingPresentationMorphism R P T))
+  (a : τ (@CommRingFreydNormalEpiTestAgreement R W P Q T f tau))
+  ⊢ @comm_ring_freyd_normal_epi_reconstruction_path
+      R W P Q T f e tau a
+  : τ (@= (@CommRingFreydHomSet R P T)
+      (@comm_ring_freyd_comp R P Q T
+        (@comm_ring_freyd_normal_epi_colift R W P Q T f e tau a)
+        (@comm_ring_freyd_hom_class R P Q f))
+      (@comm_ring_freyd_hom_class R P T tau));

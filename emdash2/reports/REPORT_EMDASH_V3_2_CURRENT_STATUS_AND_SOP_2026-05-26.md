@@ -473,8 +473,10 @@ belongs to the owning implementation plan rather than to standing guidance.
   It splits the cokernel-projection-zero witness into the published identity
   decomposition, constructs a first weak-pullback cone after target
   relations, and composes the test kernel-zero witness with the selected
-  factor to obtain a checked raw/quotient colift. Quotient reconstruction and
-  raw-competitor uniqueness remain explicit downstream obligations.
+  factor to obtain a checked raw/quotient colift. A second cone on the source
+  generators supplies an explicit negative agreement and quotient
+  reconstruction. Raw-competitor uniqueness remains an explicit downstream
+  obligation.
 - The operational field-polynomial Freyd provider now implements Posur's
   normal mono/epi constructions with retained agreement witnesses, derives
   image/coimage and the comparison inverse, and qualifies against the complete

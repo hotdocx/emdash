@@ -561,7 +561,7 @@ Refine or reject a candidate when it:
 | `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | active; reconstruction checkpoint `a0dfbe09`; raw-competitor uniqueness remains | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
-| `FAB-EPI-FORMAL-6B` | active; relation-preserving colift checkpoint `b469a6a9`; reconstruction/uniqueness remain | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
+| `FAB-EPI-FORMAL-6B` | active; reconstruction implemented after colift checkpoint `b469a6a9`; raw-competitor uniqueness remains | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
@@ -778,9 +778,15 @@ The test kernel-zero agreement composed with its selected factor is the
 expected relation witness of `tau o sigma_A`, so the module returns a checked
 raw presentation colift and its quotient class.
 
-The source is rule-free and source/reviewer/warning checks pass. Quotient
-reconstruction and raw-competitor uniqueness remain active work in
-`FAB-EPI-FORMAL-6B`; they are not inferred merely from the well-formed colift.
+The same identity decomposition on source generators constructs a second
+weak-pullback cone with components `id - sigma_A o F` and `sigma_RQ o F`.
+Its selected factor turns the test kernel-zero witness into the explicit
+negative agreement witnessing `(tau o sigma_A) o F = tau`. Thus quotient
+reconstruction is derived rather than assumed or decoded from truncation.
+
+The source is rule-free and source/reviewer/warning checks pass.
+Raw-competitor uniqueness remains active work in `FAB-EPI-FORMAL-6B`; it is
+not inferred merely from the well-formed colift or its reconstruction.
 Its warning inventory is neutral at
 `1,392 = 1,223 critical pairs + 169 replaceable variables`, strict LHS remains
 clean, and the refreshed source-metrics health snapshot covers 421 files.

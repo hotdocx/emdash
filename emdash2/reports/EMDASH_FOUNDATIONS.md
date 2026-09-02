@@ -3499,9 +3499,12 @@ the identity decomposition `R_Q sigma_RQ + F sigma_A = id`. Precomposition
 with the target relations and abelian subtraction form a first weak-pullback
 cone. Composing the test's kernel-zero agreement with the selected factor
 supplies the relation witness for the raw colift `tau sigma_A`; its quotient
-class is therefore well-defined without decoding a truncated equality.
-Quotient reconstruction and raw-competitor uniqueness remain named proof
-obligations rather than consequences of well-formedness alone.
+class is therefore well-defined without decoding a truncated equality. A
+second cone, with components `id - sigma_A F` and `sigma_RQ F`, turns the test
+kernel-zero witness into the negative agreement for
+`(tau sigma_A) F = tau`, proving quotient reconstruction. Raw-competitor
+uniqueness remains a named proof obligation rather than a consequence of
+well-formedness alone.
 
 The native image/coimage operation then applies those normality algorithms to
 the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
