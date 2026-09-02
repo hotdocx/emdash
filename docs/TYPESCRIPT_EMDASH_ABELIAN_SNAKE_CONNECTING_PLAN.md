@@ -591,7 +591,8 @@ monomorphism.
 | `ASC-STABILITY-4` | complete; checkpoint `9d637cdd` | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
 | `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | in progress via 6A | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
-| `ASC-SNAKE-SPINE-6A` | implementation/reviewer green; checkpoint pending | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
+| `ASC-SNAKE-SPINE-6A` | complete; checkpoint `aa0d1be4` | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
+| `ASC-SNAKE-SQUARES-6B` | implementation/reviewer green; checkpoint pending | 6A and generic stability | selected `FiberProduct(iota,epsilon)`, `Pushout(mu,pi)`, epic `p1`, and monic `q2` |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
@@ -629,6 +630,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-020` | accepted after exactness owner probe | `ComputationalExactAt` is `IsEpic` for the boundary-to-selected-kernel map already constructed by `ComputationalHomologyAt`. `ComputationalShortExactTriple` adds incoming monicity and outgoing epicity over the same internal zero pair; it stores no image/kernel equality or new diagram. |
 | `D-ASC-021` | accepted after constructive stability proof | Stability is proved for the canonical selected binary constructions, so their combined arrows are definitionally the kernel/cokernel selected by the same `ComputationalAbelianCategory`. The difference arrow first inherits epicity/monicity from the distinguished leg; normal epi/mono factors then turn equality after the projection/injection into a zero difference. |
 | `D-ASC-022` | accepted after generic spine probe | The generic snake input is one internal Sigma triple retaining `delta`, `beta`, `lambda`, and `lambda o beta o delta = 0`. That single path constructs both the `lambda beta` cokernel cone and the `beta delta` kernel cone, so `gamma` and `alpha` are selected operations rather than diagram fields. |
+| `D-ASC-023` | accepted after generic square-stage probe | CAP's fiber product and pushout are the canonical constructions selected by the same `ComputationalAbelianCategory`; therefore the already-proved stability theorems apply without transport or a second choice and return the exact epic `p1` and monic `q2` needed by normality. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -712,6 +714,13 @@ This spine passes quiet and warning-enabled checking, adds no rule or unifier,
 and has zero strict-LHS findings. The fiber product, pushout, their stability
 witnesses, the two derived normal-factor tests, and the final connecting arrow
 remain in the parent 6 row.
+
+The second tranche now selects `FiberProduct(iota,epsilon)` and
+`Pushout(mu,pi)` and exposes all four structural arrows. The generic stability
+owners construct epicity of `p1` from the selected cokernel projection
+`epsilon` and monicity of `q2` from the selected kernel embedding `mu`.
+Reviewer assertions check both exact cancellation types. The two normal-factor
+test paths and their selected colift/lift remain the final 6C tranche.
 
 ## Baseline And Validation Policy
 

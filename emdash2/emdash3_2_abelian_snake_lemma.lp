@@ -461,3 +461,290 @@ symbol abelian_snake_pi
       (@abelian_snake_lambda_kernel C P t Ab A B X D triple))
     (@abelian_snake_alpha C P t Ab A B X D triple)
     (@abelian_snake_alpha_cokernel C P t Ab A B X D triple);
+
+// Readable endpoint aliases for the second CAP stage.
+symbol abelian_snake_coker_delta_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_cokernel_object C
+    (@abelian_stability_preadditive C P t Ab) A B
+    (@abelian_snake_delta C
+      (@abelian_stability_preadditive C P t Ab) A B X D triple)
+    (@abelian_snake_delta_cokernel C P t Ab A B X D triple);
+
+symbol abelian_snake_ker_gamma_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_kernel_object C
+    (@abelian_stability_preadditive C P t Ab)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple) D
+    (@abelian_snake_gamma C P t Ab A B X D triple)
+    (@abelian_snake_gamma_kernel C P t Ab A B X D triple);
+
+symbol abelian_snake_ker_lambda_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_kernel_object C
+    (@abelian_stability_preadditive C P t Ab) X D
+    (@abelian_snake_lambda C
+      (@abelian_stability_preadditive C P t Ab) A B X D triple)
+    (@abelian_snake_lambda_kernel C P t Ab A B X D triple);
+
+symbol abelian_snake_coker_alpha_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_cokernel_object C
+    (@abelian_stability_preadditive C P t Ab) A
+    (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+    (@abelian_snake_alpha C P t Ab A B X D triple)
+    (@abelian_snake_alpha_cokernel C P t Ab A B X D triple);
+
+// FiberProduct(iota,epsilon).
+symbol abelian_snake_fiber_product
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@ComputationalFiberProduct C P t
+      (@abelian_stability_additive C P t Ab)
+      (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+      (@abelian_snake_coker_delta_object C P t Ab A B X D triple)
+      B
+      (@abelian_snake_iota C P t Ab A B X D triple)
+      (@abelian_snake_epsilon C P t Ab A B X D triple))
+≔ @abelian_selected_fiber_product C P t Ab
+    (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple)
+    B
+    (@abelian_snake_iota C P t Ab A B X D triple)
+    (@abelian_snake_epsilon C P t Ab A B X D triple);
+
+symbol abelian_snake_p1
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Hom C
+      (@computational_fiber_product_object C P t
+        (@abelian_stability_additive C P t Ab)
+        (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+        (@abelian_snake_iota C P t Ab A B X D triple)
+        (@abelian_snake_epsilon C P t Ab A B X D triple)
+        (@abelian_snake_fiber_product C P t Ab A B X D triple))
+      (@abelian_snake_ker_gamma_object C P t Ab A B X D triple))
+≔ @computational_fiber_product_proj1 C P t
+    (@abelian_stability_additive C P t Ab)
+    (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+    (@abelian_snake_iota C P t Ab A B X D triple)
+    (@abelian_snake_epsilon C P t Ab A B X D triple)
+    (@abelian_snake_fiber_product C P t Ab A B X D triple);
+
+symbol abelian_snake_p2
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Hom C
+      (@computational_fiber_product_object C P t
+        (@abelian_stability_additive C P t Ab)
+        (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+        (@abelian_snake_iota C P t Ab A B X D triple)
+        (@abelian_snake_epsilon C P t Ab A B X D triple)
+        (@abelian_snake_fiber_product C P t Ab A B X D triple)) B)
+≔ @computational_fiber_product_proj2 C P t
+    (@abelian_stability_additive C P t Ab)
+    (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+    (@abelian_snake_iota C P t Ab A B X D triple)
+    (@abelian_snake_epsilon C P t Ab A B X D triple)
+    (@abelian_snake_fiber_product C P t Ab A B X D triple);
+
+symbol abelian_snake_epsilon_epic
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@IsEpic C B
+      (@abelian_snake_coker_delta_object C P t Ab A B X D triple)
+      (@abelian_snake_epsilon C P t Ab A B X D triple))
+≔ @computational_cokernel_morphism_is_epic C
+    (@abelian_stability_preadditive C P t Ab) A B
+    (@abelian_snake_delta C
+      (@abelian_stability_preadditive C P t Ab) A B X D triple)
+    (@abelian_snake_delta_cokernel C P t Ab A B X D triple);
+
+symbol abelian_snake_p1_epic
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@IsEpic C
+      (@computational_fiber_product_object C P t
+        (@abelian_stability_additive C P t Ab)
+        (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+        (@abelian_snake_iota C P t Ab A B X D triple)
+        (@abelian_snake_epsilon C P t Ab A B X D triple)
+        (@abelian_snake_fiber_product C P t Ab A B X D triple))
+      (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+      (@abelian_snake_p1 C P t Ab A B X D triple))
+≔ @abelian_fiber_product_epic_projection C P t Ab
+    (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+    (@abelian_snake_iota C P t Ab A B X D triple)
+    (@abelian_snake_epsilon C P t Ab A B X D triple)
+    (@abelian_snake_epsilon_epic C P t Ab A B X D triple);
+
+// Pushout(mu,pi).
+symbol abelian_snake_pushout
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@ComputationalPushout C P t
+      (@abelian_stability_additive C P t Ab)
+      X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+      (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+      (@abelian_snake_mu C P t Ab A B X D triple)
+      (@abelian_snake_pi C P t Ab A B X D triple))
+≔ @abelian_selected_pushout C P t Ab
+    (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+    X (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+    (@abelian_snake_mu C P t Ab A B X D triple)
+    (@abelian_snake_pi C P t Ab A B X D triple);
+
+symbol abelian_snake_q1
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Hom C X
+      (@computational_pushout_object C P t
+        (@abelian_stability_additive C P t Ab)
+        X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+        (@abelian_snake_mu C P t Ab A B X D triple)
+        (@abelian_snake_pi C P t Ab A B X D triple)
+        (@abelian_snake_pushout C P t Ab A B X D triple)))
+≔ @computational_pushout_inj1 C P t
+    (@abelian_stability_additive C P t Ab)
+    X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+    (@abelian_snake_mu C P t Ab A B X D triple)
+    (@abelian_snake_pi C P t Ab A B X D triple)
+    (@abelian_snake_pushout C P t Ab A B X D triple);
+
+symbol abelian_snake_q2
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Hom C
+      (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+      (@computational_pushout_object C P t
+        (@abelian_stability_additive C P t Ab)
+        X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+        (@abelian_snake_mu C P t Ab A B X D triple)
+        (@abelian_snake_pi C P t Ab A B X D triple)
+        (@abelian_snake_pushout C P t Ab A B X D triple)))
+≔ @computational_pushout_inj2 C P t
+    (@abelian_stability_additive C P t Ab)
+    X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+    (@abelian_snake_mu C P t Ab A B X D triple)
+    (@abelian_snake_pi C P t Ab A B X D triple)
+    (@abelian_snake_pushout C P t Ab A B X D triple);
+
+symbol abelian_snake_mu_monic
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@IsMonic C
+      (@abelian_snake_ker_lambda_object C P t Ab A B X D triple) X
+      (@abelian_snake_mu C P t Ab A B X D triple))
+≔ @computational_kernel_morphism_is_monic C
+    (@abelian_stability_preadditive C P t Ab) X D
+    (@abelian_snake_lambda C
+      (@abelian_stability_preadditive C P t Ab) A B X D triple)
+    (@abelian_snake_lambda_kernel C P t Ab A B X D triple);
+
+symbol abelian_snake_q2_monic
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@IsMonic C
+      (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+      (@computational_pushout_object C P t
+        (@abelian_stability_additive C P t Ab)
+        X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+        (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+        (@abelian_snake_mu C P t Ab A B X D triple)
+        (@abelian_snake_pi C P t Ab A B X D triple)
+        (@abelian_snake_pushout C P t Ab A B X D triple))
+      (@abelian_snake_q2 C P t Ab A B X D triple))
+≔ @abelian_pushout_monic_injection C P t Ab
+    (@abelian_snake_ker_lambda_object C P t Ab A B X D triple) X
+    (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+    (@abelian_snake_mu C P t Ab A B X D triple)
+    (@abelian_snake_pi C P t Ab A B X D triple)
+    (@abelian_snake_mu_monic C P t Ab A B X D triple);
