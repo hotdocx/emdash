@@ -607,3 +607,53 @@ symbol computational_abelian_epi_colifts
       (@preabelian_kernels C P t
         (@computational_abelian_preabelian C P t A)))
 ≔ sigma_Snd (sigma_Snd A);
+
+symbol abelian_group_add_eq_sub_left_path
+  [A : Grpd]
+  (S : τ (@AbelianGroupStructure A))
+  (a b c : τ A)
+  (p : τ (@= A
+    (@abelian_group_ops_add A (@abelian_group_structure_ops A S) a b) c))
+  : τ (@= A b
+      (@abelian_group_ops_add A (@abelian_group_structure_ops A S) c
+        (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a)))
+≔ @eq_trans A b
+    (@abelian_group_ops_add A (@abelian_group_structure_ops A S)
+      (@abelian_group_ops_zero A (@abelian_group_structure_ops A S)) b)
+    (@abelian_group_ops_add A (@abelian_group_structure_ops A S) c
+      (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a))
+    (@eq_sym A _ b (@abelian_group_add_zero_left_path A S b))
+    (@eq_trans A _
+      (@abelian_group_ops_add A (@abelian_group_structure_ops A S)
+        (@abelian_group_ops_add A (@abelian_group_structure_ops A S)
+          (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a) a)
+        b)
+      (@abelian_group_ops_add A (@abelian_group_structure_ops A S) c
+        (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a))
+      (@eq_ap A A
+        (λ z : τ A,
+          @abelian_group_ops_add A (@abelian_group_structure_ops A S) z b)
+        _ _
+        (@eq_sym A _ _ (@abelian_group_add_inv_left_path A S a)))
+      (@eq_trans A _
+        (@abelian_group_ops_add A (@abelian_group_structure_ops A S)
+          (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a)
+          (@abelian_group_ops_add A (@abelian_group_structure_ops A S) a b))
+        (@abelian_group_ops_add A (@abelian_group_structure_ops A S) c
+          (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a))
+        (@abelian_group_add_assoc_law A S
+          (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a) a b)
+        (@eq_trans A _
+          (@abelian_group_ops_add A (@abelian_group_structure_ops A S)
+            (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a) c)
+          (@abelian_group_ops_add A (@abelian_group_structure_ops A S) c
+            (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a))
+          (@eq_ap A A
+            (λ z : τ A,
+              @abelian_group_ops_add A (@abelian_group_structure_ops A S)
+                (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a)
+                z)
+            _ _ p)
+          (@abelian_group_add_comm_law A S
+            (@abelian_group_ops_neg A (@abelian_group_structure_ops A S) a)
+            c))));

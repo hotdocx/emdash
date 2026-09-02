@@ -899,6 +899,7 @@ lift_f(τ,H₀)               : kernel lift using H₀ and τ's relation witness
 PreAb(Freyd_R)             : field-polynomial provider with all eight roles.
 PreAbʷ(Freyd_R;W)          : formal witnessed surface from base capability W.
 Ab(Freyd_R)                : operational provider with all normality/image roles.
+Monoʷ(f), Liftʷ_f(τ,H₀) : formal kernel-zero witness and normal lift.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -996,6 +997,10 @@ The literal owners are `CommRingFiniteFree_cat`,
 `HasCommRingFreydWitnessedCokernels`,
 `CommRingFreydWitnessedPreAbelian`,
 `comm_ring_freyd_witnessed_preabelian`,
+`CommRingFreydMonomorphismWitness`,
+`CommRingFreydNormalMonoTestAgreement`,
+`comm_ring_freyd_normal_mono_lift_raw`,
+`comm_ring_freyd_normal_mono_reconstruction_path`,
 `comm_ring_freyd_add_assoc_path`,
 `comm_ring_freyd_comp_add_right_path`,
 `comm_ring_freyd_comp_add_left_path`,

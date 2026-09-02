@@ -462,6 +462,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   The package exposes annihilation, reconstruction, and raw-competitor
   uniqueness without pretending to inhabit the stronger closed
   `PreAbelianCategory` or to decode arbitrary set-truncated paths.
+- `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp`: rule-free
+  witness-enriched Construction 3.14 through reconstruction. It splits the
+  cokernel-zero agreement, constructs the relation cone and selected first
+  weak-pullback factor, composes with the kernel-zero witness, and returns a
+  raw/quotient lift with explicit reconstruction agreement. Raw-competitor
+  uniqueness is not yet claimed by this module.
 - The operational field-polynomial Freyd provider now implements Posur's
   normal mono/epi constructions with retained agreement witnesses, derives
   image/coimage and the comparison inverse, and qualifies against the complete

@@ -3483,6 +3483,16 @@ the colift, and another first weak-pullback factor constructs the relation
 witness. Both operations retain quotient reconstruction and uniqueness
 agreements; no field inverse or Boolean-only monic/epic test is used.
 
+The formal normal-monomorphism construction now follows the same data flow.
+An explicit kernel-zero agreement is the monomorphism witness. The test's
+cokernel-zero agreement splits internally into two matrix components; its
+block equation constructs a first weak-pullback cone. The selected factor,
+followed by the kernel-zero witness, makes the lower component a
+relation-preserving lift. A negative upper component is the reconstruction
+agreement witness, yielding equality in the Freyd Hom. This is a genuine
+formal Construction 3.14 through reconstruction, while raw-competitor
+uniqueness remains a separately named unfinished layer.
+
 The native image/coimage operation then applies those normality algorithms to
 the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
 classify the comparison as monic and epic. Lifting the image identity through

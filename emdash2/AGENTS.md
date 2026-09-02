@@ -113,6 +113,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   capability-parameterized witnessed surface. Its universal tests retain raw
   zero/reconstruction agreements; it is not a closed quotient-level
   `PreAbelianCategory` and does not decode arbitrary truncated paths.
+  `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` implements the
+  witness-enriched Construction 3.14 through raw lift and quotient
+  reconstruction using block splitting and the first weak pullback. Its
+  raw-competitor uniqueness layer remains downstream.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product
