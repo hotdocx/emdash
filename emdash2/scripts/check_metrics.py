@@ -29,6 +29,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_computational_fiber_products.lp"),
     Path("emdash3_2_computational_pushouts.lp"),
     Path("emdash3_2_computational_homology.lp"),
+    Path("emdash3_2_short_exact_sequences.lp"),
     Path("emdash3_2_abelian_categories.lp"),
     Path("emdash3_2_abelian_images.lp"),
     Path("emdash3_2_abelian_bimorphisms.lp"),

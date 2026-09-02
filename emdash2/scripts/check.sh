@@ -65,6 +65,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_computational_fiber_products.lp)
   files+=(emdash3_2_computational_pushouts.lp)
   files+=(emdash3_2_computational_homology.lp)
+  files+=(emdash3_2_short_exact_sequences.lp)
   files+=(emdash3_2_abelian_categories.lp)
   files+=(emdash3_2_abelian_images.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)

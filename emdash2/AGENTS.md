@@ -86,6 +86,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   homology as that boundary lift's cokernel. Its whole snapshot and readable
   projections reuse one `PreAbelianCategory`; it adds no image equality,
   exactness claim, manual diagram, rewrite, or unification rule.
+  `emdash3_2_short_exact_sequences.lp` defines generic exactness as epicity of
+  that actual selected boundary lift. A short exact triple additionally
+  retains monicity of the incoming arrow and epicity of the outgoing arrow;
+  it adds no selected image/kernel equality, manual diagram, rule, or unifier.
   `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
   proves selected kernel embeddings monic and cokernel projections epic, and
   packages normal lift/colift `HFiber`s plus the thin generic computational

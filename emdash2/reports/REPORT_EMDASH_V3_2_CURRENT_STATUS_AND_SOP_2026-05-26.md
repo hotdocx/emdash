@@ -414,7 +414,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   cycles, kernel universality supplies the boundary map, and its selected
   cokernel supplies homology. The whole snapshot exposes cycle embedding,
   boundary reconstruction, homology projection, and projection annihilation.
-  Exactness, bounded indexing, and functorial homology remain downstream.
+  Bounded indexing and functorial homology remain downstream.
+- `emdash3_2_short_exact_sequences.lp`: rule-free generic exactness and short
+  exact triples over the selected homology owner. Exactness at the middle
+  object is `IsEpic` for the selected boundary-to-kernel lift. Short exactness
+  additionally retains `IsMonic` for the incoming arrow and `IsEpic` for the
+  outgoing arrow. No image/kernel object equality or separate diagram carrier
+  is introduced.
 - `emdash3_2_abelian_categories.lp`: rule-free generic computational
   normality. `IsMonic` and `IsEpic` are cancellation on existing Hom
   composition; kernel/cokernel contractibility proves the selected structural

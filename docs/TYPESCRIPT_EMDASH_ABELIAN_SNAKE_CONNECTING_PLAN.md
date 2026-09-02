@@ -586,10 +586,10 @@ monomorphism.
 | `ASC-PLAN-0` | complete; checkpoint `8cb81eaf` | baseline `4036ef47` | living plan, isolated branch/worktree, preparatory integration evidence, scope/Git boundary, persistent goal |
 | `ASC-AUDIT-1` | complete; checkpoint `771f082b` | active formal/native/category/proof–CAS owners and CAP source | exact owner and endpoint matrix, focused baselines, operation dependencies, rejection signals |
 | `ASC-NATIVE-SQUARES-1A` | complete; checkpoint `771f082b` | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
-| `ASC-FIBER-2` | complete; checkpoint pending | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
-| `ASC-PUSHOUT-3` | complete; checkpoint pending | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
+| `ASC-FIBER-2` | complete; checkpoint `9a73e59b` | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
+| `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
-| `ASC-EXACT-5` | pending | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
+| `ASC-EXACT-5` | complete; checkpoint pending | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
@@ -625,6 +625,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-017` | accepted after native CAP consumer | The complete CAP operation chain executes over polynomial Freyd using selected epic/monic witnesses for the actual fiber-product projection and pushout injection. The published rational example induces the expected `-1` quotient map. |
 | `D-ASC-018` | accepted after nonsplit consumer | With `delta=x`, `beta=id`, and `lambda=0`, the algorithm computes through the nonsplit quotient `R -> R/(x)` and uses no projection section. This is the decisive rejection of the older field-only construction as general authority. |
 | `D-ASC-019` | classified after source-health refresh | Registering the two new formal sources invalidated the resumable health-set identity and triggered one full rebuild. Every new owner/reviewer passed, but the unrelated existing `examples/dependent_simplex_faces.lp` failed; the same focused failure reproduces on clean baseline `main`. The generated health report correctly remained unchanged. This goal records and excludes that orthogonal baseline defect rather than editing simplex work. |
+| `D-ASC-020` | accepted after exactness owner probe | `ComputationalExactAt` is `IsEpic` for the boundary-to-selected-kernel map already constructed by `ComputationalHomologyAt`. `ComputationalShortExactTriple` adds incoming monicity and outgoing epicity over the same internal zero pair; it stores no image/kernel equality or new diagram. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -667,6 +668,16 @@ colift `u`, the normal-mono lift defining the connecting map, and all
 reconstruction agreements. It passes the CAP rational example and the
 nonsplit `R -> R/(x)` example; the latter contains no section field. Category
 roles, canonical whole serialization, and formal replay remain in later rows.
+
+## Implemented Short Exact Interface
+
+`emdash3_2_short_exact_sequences.lp` packages the selected computational
+notion required by later long-exact-sequence assembly. Exactness is epicity of
+the actual boundary-to-kernel lift. Short exactness additionally retains
+monicity of the incoming arrow and epicity of the outgoing arrow, while the
+zero composite remains the existing `ComputationalChainPair` HFiber point.
+The owner and reviewer pass quiet and warning-enabled checks, add no rule, and
+have zero strict-LHS findings.
 
 ## Baseline And Validation Policy
 

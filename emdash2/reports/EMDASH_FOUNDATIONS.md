@@ -3508,6 +3508,14 @@ whole construction retains both universal results and exposes the equations
 kernel objects or assert exactness; exactness is the later epicity property of
 the boundary map.
 
+That exactness property now has a generic selected interface. For a zero pair
+`A --i--> B --p--> D`, the existing homology construction selects
+`b : A -> Ker(p)`. Exactness at `B` is `IsEpic(b)`, which retains the actual
+cancellation operation rather than an equality between selected image and
+kernel objects. A short exact triple packages this witness together with
+`IsMonic(i)` and `IsEpic(p)`. The zero composite remains the original internal
+chain-pair fibre, so no second diagram or handwritten square is stored.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into
