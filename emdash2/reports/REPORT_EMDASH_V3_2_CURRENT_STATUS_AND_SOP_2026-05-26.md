@@ -479,6 +479,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   reconstruction. The split identity reconstructs the difference of a
   competing colift from its relation and source components, proving
   raw-competitor uniqueness.
+- `emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp`: rule-free
+  capability-indexed formal Abelian boundary. It combines the witnessed
+  pre-Abelian package with complete normal-mono and normal-epi universal
+  families, including reconstruction and raw-competitor uniqueness for every
+  explicitly witnessed test. It does not claim the stronger closed
+  quotient-level `ComputationalAbelianCategory` or decode truncated paths.
 - The operational field-polynomial Freyd provider now implements Posur's
   normal mono/epi constructions with retained agreement witnesses, derives
   image/coimage and the comparison inverse, and qualifies against the complete

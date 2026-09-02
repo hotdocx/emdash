@@ -71,6 +71,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp)
   files+=(emdash3_2_gray_interchanger_orientation.lp)
   files+=(emdash3_2_gray_transformation_graph.lp)
   files+=(emdash3_2_gray_cubes.lp)

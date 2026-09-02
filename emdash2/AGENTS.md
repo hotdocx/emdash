@@ -101,6 +101,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   latter supplies the relation-preserving raw/quotient colift and quotient
   reconstruction. Both construct raw-competitor uniqueness from explicit
   agreements rather than decoding truncated quotient equality.
+  `emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp` combines those
+  completed normality families with the witnessed pre-Abelian package. Its
+  `CommRingFreydWitnessedAbelian` value is capability-indexed by finite-free
+  weak kernels and explicit raw agreements; it is not the stronger closed
+  `ComputationalAbelianCategory` value.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its

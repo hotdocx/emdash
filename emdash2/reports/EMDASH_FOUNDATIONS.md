@@ -3511,6 +3511,16 @@ The split identity then reconstructs their whole difference as a target
 relation, giving an explicit quotient agreement rather than relying on
 well-formedness alone.
 
+These formal constructions assemble into the capability-indexed
+`CommRingFreydWitnessedAbelian(R,W)`. It reuses one
+`CommRingFreydWitnessedPreAbelian` package and adds whole families of the two
+normal universal properties. Each family is indexed by the explicit
+monicity/epicity witness and the explicit test agreement consumed by the
+actual algorithm. Consequently the package exists for every supplied
+finite-free weak-kernel capability `W`, while honestly stopping short of a
+closed `ComputationalAbelianCategory` whose quantifiers would accept arbitrary
+truncated quotient paths.
+
 The native image/coimage operation then applies those normality algorithms to
 the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
 classify the comparison as monic and epic. Lifting the image identity through

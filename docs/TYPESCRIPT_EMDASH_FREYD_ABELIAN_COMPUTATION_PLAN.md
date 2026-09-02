@@ -563,9 +563,9 @@ Refine or reject a candidate when it:
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | complete; checkpoints `b469a6a9`, `2720998e`, `b4b4de93` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
-| `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
+| `FAB-IMAGE-FORMAL-7B` | ready after witnessed Abelian package | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
-| `FAB-FORMAL-9` | blocked on formal image | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package only if effectiveness succeeds |
+| `FAB-FORMAL-9` | complete; checkpoint pending | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
 | `FAB-CLOSE-12` | blocked on required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
@@ -605,6 +605,7 @@ prerequisite.
 | `D-FAB-025` | accepted after formal Construction 3.14 probe | The formal test agreement splits by the existing matrix projections. Its block equation, generic abelian subtraction lemmas, and transparent/generic matrix comparisons construct the first weak-pullback cone. The selected factor after the kernel-zero witness is the lift relation witness; an explicit negative upper block proves quotient reconstruction. No path decoder or runtime rule is used. |
 | `D-FAB-026` | accepted after formal Construction 3.15 relation probe | The cokernel-projection-zero agreement splits into the published identity decomposition. Precomposition with target relations and abelian subtraction construct the first weak-pullback cone. The test kernel-zero agreement after its selected factor is the relation witness for the colift datum `tau o sigma_A`. Reconstruction and uniqueness remain explicit downstream proof obligations. |
 | `D-FAB-027` | accepted after formal normality completion | Monomorphism uniqueness factors the difference of a competitor and the selected lift through the first weak pullback, then uses the kernel-zero witness as its quotient agreement. Epimorphism uniqueness reconstructs the competitor difference from its relation component and the source-composite agreement by the split identity `R_Q sigma_RQ + F sigma_A = id`. Both proofs retain raw agreement witnesses and require no quotient-path decoder. |
+| `D-FAB-028` | accepted after formal package construction | The formal result is `CommRingFreydWitnessedAbelian(R,W)`: one witnessed pre-Abelian package plus capability families indexed by explicit monomorphism, epimorphism, and test agreements. It is constructible for every supplied weak-kernel capability. It deliberately does not masquerade as the stronger closed `ComputationalAbelianCategory`, whose arbitrary quotient-path inputs remain ineffective. |
 
 ## Implemented Generic Normality Layer
 
@@ -800,9 +801,27 @@ explicit agreement between the competitor and selected colift.
 The source is rule-free and source/reviewer/warning checks pass. This completes
 `FAB-EPI-FORMAL-6B`; uniqueness is proved from retained raw witnesses rather
 than inferred from the well-formed colift or a truncated path.
+
+## Implemented Witnessed Formal Abelian Package
+
+`emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp` packages the two
+completed normality constructions over the existing witnessed pre-Abelian
+owner. `CommRingFreydWitnessedNormalMonoUniversal` and
+`CommRingFreydWitnessedNormalEpiUniversal` retain reconstruction and
+raw-competitor uniqueness for every raw test supplied with its explicit
+agreement. Their whole capability families are combined with
+`CommRingFreydWitnessedPreAbelian` into
+`CommRingFreydWitnessedAbelian(R,W)`.
+
+The canonical value exists for every explicit finite-free weak-kernel
+capability `W`, and readable projections recover its pre-Abelian, mono-lift,
+and epi-colift layers. This is the intended capability-indexed theorem: it
+does not claim a closed `ComputationalAbelianCategory` or introduce a decoder
+from arbitrary truncated paths. The module is rule-free and its focused
+source/reviewer checks pass.
 Its warning inventory is neutral at
 `1,392 = 1,223 critical pairs + 169 replaceable variables`, strict LHS remains
-clean, and the refreshed source-metrics health snapshot covers 421 files.
+clean, and the refreshed source-metrics health snapshot covers 423 files.
 
 ## Validation Matrix
 
