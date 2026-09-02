@@ -563,10 +563,10 @@ Refine or reject a candidate when it:
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | complete; checkpoints `b469a6a9`, `2720998e`, `b4b4de93` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
-| `FAB-IMAGE-FORMAL-7B` | complete; checkpoint pending | formal witnessed normality | witnessed image/coimage comparison, factorization, and derived inverse paths |
+| `FAB-IMAGE-FORMAL-7B` | complete; checkpoint `76ecdc40` | formal witnessed normality | witnessed image/coimage comparison, factorization, and derived inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
-| `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
+| `FAB-BRIDGE-10` | ready | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
 | `FAB-CLOSE-12` | blocked on required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
 
