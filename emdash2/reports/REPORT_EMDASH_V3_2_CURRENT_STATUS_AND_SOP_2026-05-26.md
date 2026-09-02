@@ -525,6 +525,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   homology, and compiles the supported whole `homology → exactness` program to
   two ordinary graph nodes. Direct and graph outputs agree canonically; no
   special-purpose dependent IR node is added.
+- `src/v3_2/algebra_polynomial_freyd_bounded_complex.ts`: zero-based bounded
+  complexes of polynomial presentations and raw Freyd morphisms. Adjacent
+  laws retain complete presentation agreements, including negative results.
+  Degreewise homology inserts selected zero-presentation endpoint maps and
+  delegates to the one-degree owner. The direct bounded-free adapter embeds
+  free modules as relation-free presentations and retains its source complex.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

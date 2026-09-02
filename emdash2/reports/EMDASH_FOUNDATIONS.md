@@ -3589,6 +3589,14 @@ derived callback or invent a dependent record syntax; the native whole result
 is the explicit lowering boundary, and direct and graph executions agree
 canonically.
 
+A bounded polynomial Freyd complex iterates this one-degree boundary without
+changing its mathematics. Its terms are presentations, its differentials are
+raw Freyd morphisms, and every adjacent law is a retained presentation
+agreement. Degreewise homology selects the neighboring pair and uses the
+selected zero presentation at either endpoint. Direct bounded-free complexes
+embed by viewing free modules as relation-free presentations; the adapter
+does not define a second homology operation.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

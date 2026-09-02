@@ -338,9 +338,9 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-GENERIC-2` | complete; checkpoint `dfdc3538` | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
 | `FH-NATIVE-3` | complete; checkpoint `5e9aaa4c` | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
 | `FH-EXACT-4` | complete; checkpoint `5e9aaa4c` | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
-| `FH-CATEGORICAL-5` | complete; checkpoint pending | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
-| `FH-BOUNDED-6` | ready | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
-| `FH-FORMAL-7` | blocked on generic/native orientation | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
+| `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
+| `FH-BOUNDED-6` | complete; checkpoint pending | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
+| `FH-FORMAL-7` | ready | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
 | `FH-FUNCTORIAL-8` | blocked on homology owners | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
 | `FH-BRIDGE-9` | blocked on native/formal results | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | blocked on native homology | field reference/Singular adapters | non-authoritative comparison without replacing native Freyd data |
@@ -372,6 +372,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-016` | accepted after native homology tests | Native chain-pair construction always retains the computed presentation agreement, including `agrees=false`; `algebraPolynomialFreydHomologyAt` consumes only a positive pair and composes the existing Freyd kernel, kernel-lift, and cokernel owners into one frozen whole result. |
 | `D-FH-017` | accepted after exactness tests | `algebraPolynomialFreydExactnessAt` compares the selected homology projection with zero. A positive comparison is retained together with the actual `AlgebraPolynomialFreydEpimorphismWitness` for the boundary map; a negative result retains the failed agreement and has no fabricated witness. |
 | `D-FH-018` | accepted after categorical compilation tests | The first retained program is genuinely compositional at the available whole-operation boundary: a chain-pair input feeds derived `homology-at`, whose output feeds derived `exactness-at`. Planner prerequisites record kernel/kernel-lift/cokernel and epimorphism capabilities; direct and two-node graph execution have identical canonical outputs. No dependent-record IR extension is needed. |
+| `D-FH-019` | accepted after bounded Freyd tests | A bounded Freyd complex retains presentation terms, raw differentials, and one full composite-zero agreement per adjacent pair. Degreewise homology supplies zero-presentation endpoint maps and delegates to the one-degree owner. The bounded-free adapter embeds free modules as relation-free presentations without becoming a second homology implementation. |
 
 ## Implemented Owner Audit
 
@@ -434,6 +435,22 @@ direct/graph agreement, inherited Abelian methods, and the whole chain-pair
 operation. Together with the five native tests, root typecheck and focused
 lint pass. No derived-callback inlining or homology-specific IR syntax was
 added.
+
+## Implemented Bounded Freyd Complex Consumer
+
+`algebra_polynomial_freyd_bounded_complex.ts` packages zero-based bounded
+complexes of polynomial presentations and raw Freyd morphisms. Every adjacent
+condition is the full `AlgebraPolynomialFreydChainPair` agreement; invalid
+complexes therefore remain inspectable. Degreewise homology selects the
+neighboring differentials, inserts the existing zero presentation at either
+endpoint, and delegates to `algebraPolynomialFreydHomologyAt`.
+
+The direct bounded-free adapter maps every free module to its relation-free
+presentation and every matrix differential to the corresponding presentation
+morphism while retaining the source complex. Five focused tests cover a
+nontrivial exact three-term complex, interior and endpoint homology, an invalid
+retained adjacent composite, the free adapter, endpoint/degree errors, and
+determinism. Root typecheck and focused lint pass.
 
 ## Baseline And Validation Policy
 

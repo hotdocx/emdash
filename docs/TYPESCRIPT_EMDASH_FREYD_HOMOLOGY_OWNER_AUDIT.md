@@ -231,6 +231,11 @@ The one-degree chain pair and homology result should be implemented before the
 recursive whole complex. This keeps the mathematical owner independent of
 indexing and lets the bounded adapter consume rather than duplicate homology.
 
+The implemented bounded owner follows that split. It retains presentation
+agreements at every adjacent pair, uses selected zero-presentation endpoint
+maps, and delegates every degree query to the one-degree homology function.
+The existing free complex embeds through relation-free presentations.
+
 ## Functorial Homology Boundary
 
 The field reference confirms the correct two-factor algorithm. At a chain-map
