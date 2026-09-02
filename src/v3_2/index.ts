@@ -52,6 +52,8 @@ export * from './algebra_polynomial_freyd_pushout';
 export * from './algebra_polynomial_freyd_stability';
 export * from './algebra_polynomial_freyd_snake';
 export * from './algebra_polynomial_freyd_snake_reference_operations';
+export * from './algebra_polynomial_freyd_short_exact';
+export * from './algebra_polynomial_freyd_snake_category';
 export * from './algebra_polynomial_freyd_preabelian_category';
 export * from './algebra_polynomial_freyd_normality';
 export * from './algebra_polynomial_freyd_images';

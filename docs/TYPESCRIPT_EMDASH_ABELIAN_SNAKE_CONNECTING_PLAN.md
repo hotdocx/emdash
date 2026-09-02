@@ -599,7 +599,7 @@ monomorphism.
 | `ASC-SNAKE-NORMAL-MONO-6D` | complete; checkpoint `22e2da6f` | 6C, lambda kernel, pushout compatibility, and `Coker(q2)` | derived `NormalMonoTest` for `u`, selected connecting arrow, and reconstruction through monic `q2` |
 | `ASC-SNAKE-RESULT-6E` | complete; checkpoint `22e2da6f` | 6C–6D | whole paired selected-factor result retaining both final `HFiber` reconstruction paths and named access to every earlier whole construction |
 | `ASC-SNAKE-NATIVE-7` | complete; checkpoint `fb7548b9` | operational polynomial Freyd Abelian provider | non-split polynomial whole result, typed failures, canonical deterministic serialization, and retained native triple/connecting operations |
-| `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
+| `ASC-CATEGORY-8` | complete; checkpoint pending | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
 | `ASC-BRIDGE-10` | pending | native/category/formal selected results | proof–CAS delegation bundle and exact equation replay |
 | `ASC-DIFFERENTIAL-11` | pending | field implementation and CAP/homalg references | constant-field/CAP differential evidence without split assumptions or runtime dependency |
@@ -643,6 +643,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-028` | accepted after first normal-test construction | `Ker(p1)` and fiber compatibility make `p2` land in the selected image of `delta`; the derived cocone consequence then proves `q1 o beta o p2` annihilates that kernel. This constructs the actual `NormalEpiTest` and selected colift `u`; no epic coastriction, extra exactness field, or manual square is required. |
 | `D-ASC-029` | accepted after second normal-test construction | Fiber compatibility and the selected kernel of `gamma` make `beta o p2` factor through `Ker(lambda)`. Pushout compatibility and `Coker(q2)` annihilation prove the middle arrow zero after `Coker(q2)`. Precomposition with the selected colift equation and cancellation along epic `p1` construct the actual `NormalMonoTest`; its selected lift is the connecting arrow. |
 | `D-ASC-030` | accepted after bounded owner split | A single expanded final target exceeded 90 seconds even though every localized theorem was valid. Splitting first image evidence, first normal colift, lambda-kernel evidence, second cokernel evidence, final lift, and whole snapshot into one-way semantic owners keeps every quiet and warning-enabled target below 90 seconds. This is compilation granularity, not a capped computation, duplicate theory, opacity, unifier, or axiom. |
+| `D-ASC-031` | accepted after categorical consumer | The category layer exposes whole fiber-product, projections, factor, pushout, injections, cofactor, short-exact, snake-triple, and connecting roles on the unchanged Abelian Freyd carrier. The connecting method is one retained derived operation whose immediate plan records the CAP chain `cokernel-colift -> kernel -> cokernel -> kernel-lift -> fiber-product -> pushout -> colift-along-epimorphism -> lift-along-monomorphism`; lowering invokes the existing native whole operation rather than inlining a second matrix algorithm. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -696,6 +697,24 @@ source/target data. A retained two-node native graph serializes byte-for-byte
 with direct execution, and repeated nonsplit execution is deterministic.
 Focused workspace, typecheck, lint, and four-test snake evidence is green; no
 full TypeScript aggregate was run.
+
+`algebra_polynomial_freyd_snake_category.ts` now exposes the reviewed
+CAP-like categorical surface. Whole fiber products and pushouts, both
+projections/injections, their selected factor/cofactor operations, a
+witness-rich short-exact triple, the snake triple, and the snake connecting
+operation are registered as ordinary `CategoryOperation`s. The fiber/pushout
+methods reuse the existing biproduct and kernel/cokernel owners; the
+short-exact method retains the zero, middle-exactness, monic, and epic
+witnesses. The connecting method records the exact reviewed CAP prerequisite
+order and executes the one native whole algorithm.
+
+Every role has a matching algebra-operation lowering. A retained
+triple-then-connecting categorical program compiles to two graph nodes and
+serializes byte-for-byte with direct category execution. Focused consumers
+also execute the projection, injection, factor, cofactor, and short-exact
+roles on the nonsplit ring fixture. The categorical carrier remains the
+existing polynomial Freyd Abelian model, and the compiled graph contains no
+matrix syntax above its lowering boundary.
 
 ## Implemented Short Exact Interface
 

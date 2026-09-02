@@ -5738,8 +5738,17 @@ stability witness, normal factor, and reconstruction agreement. Its
 ring-indexed reference surface exposes whole triple and connecting operations
 plus canonical serialization of the complete result. Direct and two-node
 graph execution agree byte-for-byte on the nonsplit `R -> R/(x)` consumer; no
-projection section or external CAS process is used. Categorical method roles
-and lowering remain the next active layer.
+projection section or external CAS process is used.
+
+The polynomial Freyd snake category model registers whole fiber-product and
+pushout roles, their projections/injections and factor/cofactor operations, a
+witness-rich short-exact triple, the snake triple, and the connecting
+morphism. Its connecting method records the CAP dependency order through the
+existing universal and normal-factor operations. Every role lowers to a
+matching native operation, and a retained two-node triple/connecting program
+agrees canonically with direct category execution. The category carrier and
+Abelian doctrine are unchanged; no matrix algorithm is duplicated above the
+lowering boundary.
 
 ## Book And Renderer Workflow
 

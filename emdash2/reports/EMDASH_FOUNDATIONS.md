@@ -3584,6 +3584,15 @@ The native triple and connecting operations can therefore be retained as two
 ordinary computation-graph nodes, and their serialized output agrees exactly
 with direct execution on the nonsplit `R -> R/(x)` example.
 
+At the categorical-program layer, the same carrier now has named operations
+for fiber products and their factors, pushouts and their cofactors,
+witness-rich short exact triples, snake triples, and the connecting map. The
+connecting method advertises the kernel/cokernel, fiber/pushout, and normal
+factor prerequisites in CAP order. Compilation retains one whole derived
+snake node and lowers it to the native operation; it does not inline matrix
+code into the categorical program. Thus direct category execution and graph
+execution have one canonical whole-result comparison.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into
