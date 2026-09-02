@@ -56,6 +56,7 @@ export * from './algebra_polynomial_freyd_homology_reference_operations';
 export * from './algebra_polynomial_freyd_homology_category';
 export * from './algebra_polynomial_freyd_bounded_complex';
 export * from './algebra_polynomial_freyd_functorial_homology';
+export * from './algebra_formal_freyd_homology';
 export * from './algebra_polynomial_weak_kernel';
 export * from './algebra_polynomial_weak_kernel_category';
 export * from './algebra_polynomial_weak_kernel_singular';

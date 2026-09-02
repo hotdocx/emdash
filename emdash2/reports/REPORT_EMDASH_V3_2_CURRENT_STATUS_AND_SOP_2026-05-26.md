@@ -551,6 +551,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   compatibility makes the target homology projection a source-cokernel test;
   its colift is the homology map. Identity and nontrivial scalar consumers
   compute, while failed squares remain negative data.
+- `src/v3_2/algebra_formal_freyd_homology.ts`: selected proof-CAS homology
+  consumer. It replays five actual native operations and reifies fourteen
+  exact equations spanning chain zero, homology, exactness, both chain
+  squares, cycles/boundary factorization, and induced-map reconstruction.
+  Complete canonical whole outputs are compared before explicit adoption; no
+  Core owner or ring-wide formal theorem is added.
+- The constant rational field/Freyd homology differential agrees on both zero
+  and nonzero homology. It remains test-only, non-authoritative evidence and
+  does not replace polynomial Freyd execution.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

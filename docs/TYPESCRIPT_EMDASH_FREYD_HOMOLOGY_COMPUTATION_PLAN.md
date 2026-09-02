@@ -341,10 +341,10 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
 | `FH-BOUNDED-6` | complete; checkpoint `3fc20066` | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
 | `FH-FORMAL-7` | complete; checkpoint `d68eb79d` | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
-| `FH-FUNCTORIAL-8` | complete; checkpoint pending | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
-| `FH-BRIDGE-9` | ready | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
-| `FH-DIFFERENTIAL-10` | blocked on native homology | field reference/Singular adapters | non-authoritative comparison without replacing native Freyd data |
-| `FH-CLOSE-11` | blocked on required rows | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
+| `FH-FUNCTORIAL-8` | complete; checkpoints `f0ecc0f8`, `4464be91` | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
+| `FH-BRIDGE-9` | complete; checkpoint pending | proof–CAS delegation | fourteen exact selected chain, factor, homology, exactness, and induced-map equations |
+| `FH-DIFFERENTIAL-10` | complete; checkpoint pending | field reference/Singular adapters | non-authoritative constant-field comparison without replacing native Freyd data |
+| `FH-CLOSE-11` | ready | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
 Rows may be split or reordered when a focused probe refines dependencies. A
 row may be rejected or deferred only with durable evidence and a concrete
@@ -376,6 +376,8 @@ replacement, prerequisite, or human decision.
 | `D-FH-020` | accepted after formal homology implementation | `CommRingFreydWitnessedHomologyAt` stores the selected raw kernel lift, its explicit reconstruction agreement, and the existing witnessed cokernel universal property. `CommRingFreydExactnessAt` is the existing epimorphism-witness type for the stored boundary. Readable quotient paths are derived from agreements; no new formal equality carrier or rule is needed. |
 | `D-FH-021` | accepted after native functorial tests | A one-degree chain map retains both presentation-square agreements. The lower square lets the middle component lift through the target cycle kernel; compatibility with the two boundaries is retained explicitly; the target homology projection then coannihilates the source boundary and descends through the source homology cokernel. Identity and nontrivial scalar consumers compute, while a failed square remains negative data. |
 | `D-FH-022` | accepted after formal functorial implementation | The formal induced-map boundary packages the two chain squares plus three explicit agreements computed by the effective consumer: cycles-zero, boundary compatibility, and quotient-zero. These select the target kernel lift and source cokernel colift; the actual induced map and reconstruction are derived. This is witness enrichment, not a manual or opaque map field. |
+| `D-FH-023` | accepted after proof-CAS tests | `algebra_formal_freyd_homology.ts` replays chain-pair, homology, exactness, chain-map, and induced-map operations. Fourteen exact equations cover chain zero, boundary/projection structure and laws, exactness, both squares, cycles reconstruction, boundary compatibility, quotient zero, and induced-map reconstruction. Complete selected whole outputs are compared canonically before adoption. |
+| `D-FH-024` | accepted after differential tests | Constant rational complexes are computed by both the older field-module homology engine and polynomial Freyd homology after scalar extension. Field homology dimension zero agrees with Freyd boundary epicity in both identity→zero and zero→zero cases. This remains non-authoritative differential evidence. |
 
 ## Implemented Owner Audit
 
@@ -506,6 +508,32 @@ Source and reviewer pass quiet and warning-enabled checks at the unchanged
 `1,392 = 1,223 + 169` warning boundary; no rule or unifier was added, strict
 LHS remains clean, and the refreshed source-metrics health snapshot covers
 431 files.
+
+## Implemented Proof-CAS Homology Consumer
+
+`algebra_formal_freyd_homology.ts` defines selected adapters for five actual
+native operations: chain-pair construction, homology, exactness, chain-map
+construction, and induced homology. Canonical serializers compare each
+complete selected whole output before an equation can be interpreted as a
+claim.
+
+Fourteen reified equations cover the adjacent-zero agreement, boundary
+relation preservation and reconstruction, homology-projection relation
+preservation and annihilation, exactness, both chain squares, cycles-map
+relation preservation and reconstruction, boundary compatibility, the
+source-boundary-zero witness, induced-map relation preservation, and final
+reconstruction. Focused tests Core-check all fourteen, replay and explicitly
+adopt them, verify determinism and the negative exactness gate, reject drift,
+and pass one live Lambdapi probe containing the whole equation family.
+
+## Implemented Differential
+
+The focused field/Freyd differential embeds two constant rational chain pairs
+into the polynomial Freyd category. For identity followed by zero, the
+field-module homology has dimension zero and Freyd exactness succeeds. For
+zero followed by zero, the field homology has dimension one and Freyd
+exactness fails. This compares the mathematical result across independent
+representations without making either execution depend on the other.
 
 ## Baseline And Validation Policy
 

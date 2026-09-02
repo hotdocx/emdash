@@ -266,6 +266,10 @@ exactness, cycles-map, and induced-map equations.
 
 No new Core expression, proof-plan tag, or trust mode is needed.
 
+The implemented consumer confirms this boundary with fourteen exact equations
+and one live Lambdapi probe. A separate constant-matrix differential agrees
+with the older field-linear homology engine on zero and nonzero homology.
+
 ## Revised Sequencing
 
 1. Implement the generic rule-free one-degree owner.

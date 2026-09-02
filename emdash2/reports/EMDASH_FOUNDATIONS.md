@@ -3623,6 +3623,15 @@ colift; the middle witness is retained with the construction. Thus the
 induced map and its reconstruction are built from universal operations rather
 than introduced as opaque data.
 
+The corresponding proof-CAS consumer replays the five whole operations and
+reifies fourteen exact presentation equations. These include the chain law,
+both universal-construction structural equations, exactness, both chain-map
+squares, the cycles and boundary witnesses, and induced-map reconstruction.
+Constant rational examples are also computed independently by the older
+field-linear engine: its homology dimension vanishes exactly when the
+polynomial Freyd boundary is classified epic in the two selected comparison
+cases.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
