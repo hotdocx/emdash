@@ -408,6 +408,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   selected capabilities and a thin `PreAbelianCategory` over existing
   additive data. It does not yet construct these capabilities for the formal
   Freyd category or assert Abelian structure.
+- `emdash3_2_computational_homology.lp`: rule-free one-degree homology in one
+  selected pre-Abelian category. A composable zero pair is the existing
+  annihilator fibre; the selected kernel of the lower differential supplies
+  cycles, kernel universality supplies the boundary map, and its selected
+  cokernel supplies homology. The whole snapshot exposes cycle embedding,
+  boundary reconstruction, homology projection, and projection annihilation.
+  Exactness, bounded indexing, and functorial homology remain downstream.
 - `emdash3_2_abelian_categories.lp`: rule-free generic computational
   normality. `IsMonic` and `IsEpic` are cancellation on existing Hom
   composition; kernel/cokernel contractibility proves the selected structural

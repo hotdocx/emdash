@@ -3472,6 +3472,17 @@ a right inverse, and cancellation by `h` proves it a left inverse. This gives
 the existing `IsoEvidence` record and applies to the canonical comparison once
 its bimorphism evidence is available.
 
+One-degree homology already exists at the selected pre-Abelian boundary. A
+chain pair `A -> B -> D` is the ordinary annihilator fibre witnessing that its
+composite is zero. The selected kernel of the lower differential is the cycle
+object. Kernel universality lifts the upper differential to the boundary map
+into cycles, and the selected cokernel of that boundary map is homology. The
+whole construction retains both universal results and exposes the equations
+`cycle_embedding o boundary = upper_differential` and
+`homology_projection o boundary = 0`. It does not identify selected image and
+kernel objects or assert exactness; exactness is the later epicity property of
+the boundary map.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

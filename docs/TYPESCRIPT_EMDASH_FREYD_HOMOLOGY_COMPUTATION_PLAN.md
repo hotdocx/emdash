@@ -334,8 +334,8 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `FH-PLAN-0` | complete; checkpoint `26b7c2fd` | baseline `4acef747` | living plan, isolated branch/worktree, integration evidence, scope/Git boundary, persistent goal |
-| `FH-AUDIT-1` | complete; checkpoint pending | current formal/native owners | exact owner matrix, generic formulation, categorical-IR feasibility, baseline diagnostics, rejection signals |
-| `FH-GENERIC-2` | blocked on audit | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
+| `FH-AUDIT-1` | complete; checkpoint `2602afd6` | current formal/native owners | exact owner matrix, generic formulation, categorical-IR feasibility, baseline diagnostics, rejection signals |
+| `FH-GENERIC-2` | complete; checkpoint pending | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
 | `FH-NATIVE-3` | blocked on generic owner | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
 | `FH-EXACT-4` | blocked on native homology | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
 | `FH-CATEGORICAL-5` | blocked on native whole result | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
@@ -368,6 +368,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-012` | accepted after categorical-IR audit | Current retained programs cannot assemble dependent kernel/lift/cokernel inputs across unary nodes and do not inline derived callbacks. The first categorical consumer retains one whole `homology-at` operation with declared universal-operation prerequisites and a native lowering; generic dependent record assembly remains consumer-gated. |
 | `D-FH-013` | accepted after owner audit | Generic homology construction requires only selected pre-Abelian kernels/cokernels. Abelian normality enters exactness and comparison theorems, not the existence of `Hₙ`. |
 | `D-FH-014` | accepted after native agreement audit | The chain-pair constructor retains negative agreements; the homology constructor consumes only a positive chain agreement and returns a typed failure otherwise. |
+| `D-FH-015` | accepted after generic owner implementation | `ComputationalHomologyAt` is a whole snapshot over one selected `PreAbelianCategory`: it retains the selected cycle kernel and the selected cokernel of the kernel-lifted boundary. Its readable equations are exactly the existing kernel reconstruction and cokernel annihilation paths. |
 
 ## Implemented Owner Audit
 
@@ -376,6 +377,22 @@ IR limitation, baseline diagnostics, and revised sequencing are recorded in
 `docs/TYPESCRIPT_EMDASH_FREYD_HOMOLOGY_OWNER_AUDIT.md`. The audit selects a
 rule-free generic one-degree owner as the first semantic tranche. It rejects
 both a second quotient grammar and a homology-specific categorical AST.
+
+## Implemented Generic One-Degree Homology
+
+`emdash3_2_computational_homology.lp` implements the selected rule-free
+generic owner. `ComputationalChainPair` packages two arrows and the ordinary
+zero-composite path, and exposes the same data as a `WeakKernelAnnihilator`.
+`ComputationalHomologyAt` retains the selected kernel of the lower
+differential and the selected cokernel of the lifted upper differential.
+
+Readable projections expose cycles, cycle object/embedding, boundary,
+boundary reconstruction, homology cokernel/object/projection, and projection
+annihilation. The owner and focused reviewer pass quiet checking. No runtime
+head, rewrite, unifier, image equality, exactness assertion, or manual diagram
+was added. Warning-enabled checking is neutral at
+`1,386 = 1,217 critical pairs + 169 replaceable variables`; strict LHS remains
+clean, and the refreshed source-metrics health snapshot covers 427 files.
 
 ## Baseline And Validation Policy
 

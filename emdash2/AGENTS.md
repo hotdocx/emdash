@@ -81,6 +81,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   lift/colift, reconstruction, uniqueness, whole capability, and thin
   pre-Abelian packaging. Closed quotient-level concrete capability and
   Abelian structure remain separate layers.
+  `emdash3_2_computational_homology.lp` derives one-degree cycles as the
+  selected kernel, lifts the incoming differential into cycles, and selects
+  homology as that boundary lift's cokernel. Its whole snapshot and readable
+  projections reuse one `PreAbelianCategory`; it adds no image equality,
+  exactness claim, manual diagram, rewrite, or unification rule.
   `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
   proves selected kernel embeddings monic and cokernel projections epic, and
   packages normal lift/colift `HFiber`s plus the thin generic computational
