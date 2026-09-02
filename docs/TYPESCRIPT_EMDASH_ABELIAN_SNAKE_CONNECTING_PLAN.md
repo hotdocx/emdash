@@ -601,7 +601,7 @@ monomorphism.
 | `ASC-SNAKE-NATIVE-7` | complete; checkpoint `fb7548b9` | operational polynomial Freyd Abelian provider | non-split polynomial whole result, typed failures, canonical deterministic serialization, and retained native triple/connecting operations |
 | `ASC-CATEGORY-8` | complete; checkpoint `76bcd9cd` | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | complete; checkpoint `8453edb6` | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
-| `ASC-BRIDGE-10` | complete; checkpoint `4c4b29c9` | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 21 exact selected morphism/agreement claims, with a live Lambdapi consumer |
+| `ASC-BRIDGE-10` | complete; checkpoint `4c4b29c9`, reconstruction completion pending | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 25 exact selected morphism/agreement claims, including both projection and both injection reconstructions, with a live Lambdapi consumer |
 | `ASC-DIFFERENTIAL-11` | complete; checkpoint `c6eee629` | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
 | `ASC-CLOSE-12` | pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
@@ -645,7 +645,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-030` | accepted after bounded owner split | A single expanded final target exceeded 90 seconds even though every localized theorem was valid. Splitting first image evidence, first normal colift, lambda-kernel evidence, second cokernel evidence, final lift, and whole snapshot into one-way semantic owners keeps every quiet and warning-enabled target below 90 seconds. This is compilation granularity, not a capped computation, duplicate theory, opacity, unifier, or axiom. |
 | `D-ASC-031` | accepted after categorical consumer | The category layer exposes whole fiber-product, projections, factor, pushout, injections, cofactor, short-exact, snake-triple, and connecting roles on the unchanged Abelian Freyd carrier. The connecting method is one retained derived operation whose immediate plan records the CAP chain `cokernel-colift -> kernel -> cokernel -> kernel-lift -> fiber-product -> pushout -> colift-along-epimorphism -> lift-along-monomorphism`; lowering invokes the existing native whole operation rather than inlining a second matrix algorithm. |
 | `D-ASC-032` | accepted after witnessed formal consumer | The formal Freyd boundary takes the effective `p1`/`q2` arrows, their explicit epic/monic witnesses, and the two normal-test agreements as proof-CAS inputs. Existing witnessed Posur normality constructs raw/quotient `u` and connecting arrows plus both reconstruction agreements/paths. This is the maximal current formal construction without inventing formal fiber/pushout matrix owners or decoding arbitrary truncated paths. |
-| `D-ASC-033` | accepted after proof-CAS replay | One adapter family replays the complete native snake operation and adopts 21 selected morphism/agreement claims only when canonical whole-result serialization is unchanged. It covers the triple zero, all four kernel/cokernel stages, fiber/pushout compatibility, epic/monic witnesses, both normal tests, `u`, the connecting morphism, and both final reconstructions. Wrong-goal drift is rejected and one generated live Lambdapi probe checks all claims. |
+| `D-ASC-033` | accepted after proof-CAS replay | One adapter family replays the complete native snake operation and adopts 25 selected morphism/agreement claims only when canonical whole-result serialization is unchanged. It covers the triple zero, all four kernel/cokernel stages, fiber/pushout compatibility, both projection reconstructions, both injection reconstructions, epic/monic witnesses, both normal tests, `u`, the connecting morphism, and both final reconstructions. Wrong-goal drift is rejected and one generated live Lambdapi probe checks all claims. |
 | `D-ASC-034` | accepted after constant-field differential | The independent field CAP implementation performs the same cokernel-colift, kernel-lift, fiber-product kernel, pushout cokernel, right-inverse colift, and left-inverse lift over rational quotient coordinates. CAP's displayed polynomial representative is the 2-by-2 matrix `[[0,0],[0,-1]]`, while canonical quotient coordinates give the 1-by-1 matrix `[[-1]]`; the differential checks both facts separately and compares the induced polynomial map with the field map. |
 
 ## Implemented Genuine Binary Universal Constructions
@@ -740,16 +740,17 @@ absent.
 `algebra_formal_freyd_snake.ts` now connects that selected construction to the
 proof–CAS workflow. Every adapter replays the same native whole connecting
 operation and compares its canonical serialized output before offering a
-claim. The bundle reifies 21 selected morphism/agreement claims: the triple
+claim. The bundle reifies 25 selected morphism/agreement claims: the triple
 zero; cokernel, kernel, and lift/colift equations for `gamma` and `alpha`;
-fiber and pushout compatibility; the `epsilon`, `p1`, `mu`, and `q2`
-property witnesses; both normal tests; `u` and its reconstruction; and the
-connecting morphism and its reconstruction.
+fiber and pushout compatibility; both selected fiber-factor projection
+reconstructions; both selected pushout-cofactor injection reconstructions; the
+`epsilon`, `p1`, `mu`, and `q2` property witnesses; both normal tests; `u`
+and its reconstruction; and the connecting morphism and its reconstruction.
 
 Focused tests validate every reified Core type, replay and explicitly adopt
-all 21 claims, reject a mismatched goal, check deterministic whole output,
+all 25 claims, reject a mismatched goal, check deterministic whole output,
 and preserve the no-closed-capability/no-path-decoder boundary. The one scoped
-live generated Lambdapi probe passes all 21 assertions in under five seconds.
+live generated Lambdapi probe passes all 25 assertions.
 This bridge provides usable selected equations; it does not certify the CAS
 implementation or enlarge trusted Core syntax.
 

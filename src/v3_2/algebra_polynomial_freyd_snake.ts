@@ -31,11 +31,15 @@ import {
 } from './algebra_polynomial_freyd_kernel';
 import {
     AlgebraPolynomialFreydFiberProduct,
-    algebraPolynomialFreydFiberProduct
+    AlgebraPolynomialFreydFiberProductFactor,
+    algebraPolynomialFreydFiberProduct,
+    algebraPolynomialFreydFiberProductFactor
 } from './algebra_polynomial_freyd_fiber_product';
 import {
     AlgebraPolynomialFreydPushout,
-    algebraPolynomialFreydPushout
+    AlgebraPolynomialFreydPushoutCofactor,
+    algebraPolynomialFreydPushout,
+    algebraPolynomialFreydPushoutCofactor
 } from './algebra_polynomial_freyd_pushout';
 import {
     AlgebraPolynomialFreydColiftAlongEpimorphism,
@@ -178,6 +182,8 @@ export interface AlgebraPolynomialFreydSnakeConnecting<
     readonly epsilonEpimorphism:
         AlgebraPolynomialFreydEpimorphismWitness<P, C, I>;
     readonly fiberProduct: AlgebraPolynomialFreydFiberProduct<P, C, I>;
+    readonly fiberProductIdentityFactor:
+        AlgebraPolynomialFreydFiberProductFactor<P, C, I>;
     readonly fiberProductStability:
         AlgebraPolynomialFreydFiberProductEpicProjection<P, C, I>;
     readonly p1Epimorphism:
@@ -185,6 +191,8 @@ export interface AlgebraPolynomialFreydSnakeConnecting<
     readonly muMonomorphism:
         AlgebraPolynomialFreydMonomorphismWitness<P, C, I>;
     readonly pushout: AlgebraPolynomialFreydPushout<P, C, I>;
+    readonly pushoutIdentityCofactor:
+        AlgebraPolynomialFreydPushoutCofactor<P, C, I>;
     readonly pushoutStability:
         AlgebraPolynomialFreydPushoutMonicInjection<P, C, I>;
     readonly q2Monomorphism:
@@ -245,6 +253,12 @@ export function algebraPolynomialFreydSnakeConnecting<
 
     const epsilonEpimorphism = algebraPolynomialFreydEpimorphismWitness(epsilon);
     const fiberProduct = algebraPolynomialFreydFiberProduct(iota, epsilon);
+    const fiberProductIdentityFactor = algebraPolynomialFreydFiberProductFactor(
+        fiberProduct,
+        fiberProduct.projectionLeft,
+        fiberProduct.projectionRight,
+        options
+    );
     const fiberProductStability =
         algebraPolynomialFreydFiberProductEpicProjection(
             fiberProduct,
@@ -254,6 +268,11 @@ export function algebraPolynomialFreydSnakeConnecting<
 
     const muMonomorphism = algebraPolynomialFreydMonomorphismWitness(mu);
     const pushout = algebraPolynomialFreydPushout(mu, pi);
+    const pushoutIdentityCofactor = algebraPolynomialFreydPushoutCofactor(
+        pushout,
+        pushout.injectionLeft,
+        pushout.injectionRight
+    );
     const pushoutStability = algebraPolynomialFreydPushoutMonicInjection(
         pushout,
         muMonomorphism
@@ -298,10 +317,12 @@ export function algebraPolynomialFreydSnakeConnecting<
         pi,
         epsilonEpimorphism,
         fiberProduct,
+        fiberProductIdentityFactor,
         fiberProductStability,
         p1Epimorphism,
         muMonomorphism,
         pushout,
+        pushoutIdentityCofactor,
         pushoutStability,
         q2Monomorphism,
         betaAfterP2,

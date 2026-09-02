@@ -45,7 +45,7 @@ export const ALGEBRA_FORMAL_FREYD_SNAKE_PROFILE = Object.freeze({
     revision: 'emdash-algebra-formal-freyd-snake-v1' as const,
     equationPolicy: 'selected-whole-output-plus-exact-equations' as const,
     operationReplay: 'native-freyd-snake-provider' as const,
-    exactEquationCount: 21 as const,
+    exactEquationCount: 25 as const,
     claimsRingWideFormalCapability: false as const,
     claimsQuotientPathDecoding: false as const,
     addsCoreOwner: false as const,
@@ -258,6 +258,16 @@ export function algebraFormalFreydSnakeDelegationBundle<
             selected.fiberProduct.compatibilityAgreement,
             'selected fiber-product projections equalize iota and epsilon'
         ),
+        fiberProjectionLeftReconstruction: agreement(
+            'fiber-projection-left-reconstruction',
+            selected.fiberProductIdentityFactor.reconstructionLeftAgreement,
+            'selected fiber factor reconstructs the first projection'
+        ),
+        fiberProjectionRightReconstruction: agreement(
+            'fiber-projection-right-reconstruction',
+            selected.fiberProductIdentityFactor.reconstructionRightAgreement,
+            'selected fiber factor reconstructs the second projection'
+        ),
         epsilonEpicity: agreement(
             'epsilon-epicity',
             selected.epsilonEpimorphism.cokernelZeroAgreement,
@@ -277,6 +287,16 @@ export function algebraFormalFreydSnakeDelegationBundle<
             'pushout-compatibility',
             selected.pushout.compatibilityAgreement,
             'selected pushout injections coequalize mu and pi'
+        ),
+        pushoutInjectionLeftReconstruction: agreement(
+            'pushout-injection-left-reconstruction',
+            selected.pushoutIdentityCofactor.reconstructionLeftAgreement,
+            'selected pushout cofactor reconstructs the first injection'
+        ),
+        pushoutInjectionRightReconstruction: agreement(
+            'pushout-injection-right-reconstruction',
+            selected.pushoutIdentityCofactor.reconstructionRightAgreement,
+            'selected pushout cofactor reconstructs the second injection'
         ),
         q2Monicity: agreement(
             'q2-monicity',

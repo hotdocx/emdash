@@ -574,6 +574,8 @@ export const serializeAlgebraPolynomialFreydSnakeConnecting = <
                 value.epsilonEpimorphism
             ),
         fiberProduct: fiberProductData(value.fiberProduct),
+        fiberProductIdentityFactor:
+            fiberProductFactorData(value.fiberProductIdentityFactor),
         fiberProductStability:
             fiberProductStabilityData(value.fiberProductStability),
         p1Epimorphism:
@@ -585,6 +587,8 @@ export const serializeAlgebraPolynomialFreydSnakeConnecting = <
                 value.muMonomorphism
             ),
         pushout: pushoutData(value.pushout),
+        pushoutIdentityCofactor:
+            pushoutCofactorData(value.pushoutIdentityCofactor),
         pushoutStability: pushoutStabilityData(value.pushoutStability),
         q2Monomorphism:
             serializeAlgebraPolynomialFreydMonomorphismWitness(
