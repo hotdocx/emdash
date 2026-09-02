@@ -588,7 +588,7 @@ monomorphism.
 | `ASC-NATIVE-SQUARES-1A` | complete; checkpoint `771f082b` | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
 | `ASC-FIBER-2` | complete; checkpoint `9a73e59b` | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
 | `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
-| `ASC-STABILITY-4` | pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
+| `ASC-STABILITY-4` | complete; checkpoint pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
 | `ASC-EXACT-5` | complete; checkpoint pending | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
@@ -626,6 +626,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-018` | accepted after nonsplit consumer | With `delta=x`, `beta=id`, and `lambda=0`, the algorithm computes through the nonsplit quotient `R -> R/(x)` and uses no projection section. This is the decisive rejection of the older field-only construction as general authority. |
 | `D-ASC-019` | classified after source-health refresh | Registering the two new formal sources invalidated the resumable health-set identity and triggered one full rebuild. Every new owner/reviewer passed, but the unrelated existing `examples/dependent_simplex_faces.lp` failed; the same focused failure reproduces on clean baseline `main`. The generated health report correctly remained unchanged. This goal records and excludes that orthogonal baseline defect rather than editing simplex work. |
 | `D-ASC-020` | accepted after exactness owner probe | `ComputationalExactAt` is `IsEpic` for the boundary-to-selected-kernel map already constructed by `ComputationalHomologyAt`. `ComputationalShortExactTriple` adds incoming monicity and outgoing epicity over the same internal zero pair; it stores no image/kernel equality or new diagram. |
+| `D-ASC-021` | accepted after constructive stability proof | Stability is proved for the canonical selected binary constructions, so their combined arrows are definitionally the kernel/cokernel selected by the same `ComputationalAbelianCategory`. The difference arrow first inherits epicity/monicity from the distinguished leg; normal epi/mono factors then turn equality after the projection/injection into a zero difference. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -678,6 +679,22 @@ monicity of the incoming arrow and epicity of the outgoing arrow, while the
 zero composite remains the existing `ComputationalChainPair` HFiber point.
 The owner and reviewer pass quiet and warning-enabled checks, add no rule, and
 have zero strict-LHS findings.
+
+## Implemented Generic Abelian Stability
+
+`emdash3_2_abelian_fiber_pushout_stability.lp` proves both witness-producing
+stability results. For fiber products, equality after the first projection is
+converted to an annihilated extension on the biproduct. The epic difference
+map's normal colift is forced to zero by the original epic second leg, which
+proves the first projection epic. The pushout proof is the exact direct dual:
+the monic difference's normal lift is forced to zero by the original monic
+first leg, proving the second injection monic.
+
+The final values inhabit `IsEpic` and `IsMonic`, so downstream snake
+computation receives the actual cancellation evidence. The owner and reviewer
+pass quiet and warning-enabled checks at the inherited `1,217` critical-pair
+and `169` replaceable-variable import boundary. The module adds no rule or
+unifier and has zero strict-LHS findings.
 
 ## Baseline And Validation Policy
 

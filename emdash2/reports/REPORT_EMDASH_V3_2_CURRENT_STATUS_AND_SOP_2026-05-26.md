@@ -466,6 +466,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   contractible cofactors. Ordinary compatibility, conventional copair
   introduction, and both injection reconstructions are derived. Neither
   module is `Pullback_catd` or exact-slice `PullbackStructure`.
+- `emdash3_2_abelian_fiber_pushout_stability.lp`: rule-free constructive
+  Abelian stability for the selected binary constructions. If `epsilon` is
+  epic, `[iota,-epsilon]` is epic; normal-epi colifting then proves the first
+  selected fiber-product projection epic. Dually, the pushout difference is
+  monic when its first leg is monic; normal-mono lifting proves the second
+  selected pushout injection monic. The proofs return actual `IsEpic` and
+  `IsMonic` cancellation functions, not flags.
 - `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
   witness-enriched Construction 3.6. It appends the morphism datum to target
   relations, constructs the identity-data projection, and uses an explicit

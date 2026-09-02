@@ -151,6 +151,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   cocones, contractible cofactors, both injection reconstructions, ordinary
   compatibility, and conventional copair introduction are derived from the
   existing additive/cokernel owners.
+  `emdash3_2_abelian_fiber_pushout_stability.lp` proves that the selected
+  fiber-product projection opposite an epic arrow is epic and the selected
+  pushout injection opposite a monic arrow is monic. The proof derives the
+  defining difference arrow's cancellation, then uses the existing normal
+  epi/mono factor spaces; it adds no property postulate, rule, or unifier.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

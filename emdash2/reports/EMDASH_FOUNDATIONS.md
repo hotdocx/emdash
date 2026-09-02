@@ -3350,6 +3350,18 @@ compatible copairs translate into that fibre, and the one combined
 reconstruction yields both injection laws. These binary constructions are
 separate from Cat-valued family substitution and from exact-slice base change.
 
+Their Abelian stability is constructive. For the pullback of an epic
+`epsilon`, the difference `[iota,-epsilon]` is epic because equality after it
+can be tested on the second biproduct injection and cancelled by `epsilon`.
+If two maps agree after the first pullback projection, extend their difference
+by the first biproduct projection. It annihilates the selected kernel, so
+normal epimorphism computation colifts it through `[iota,-epsilon]`; the
+second component and epicity of `epsilon` force that colift to zero, hence the
+original difference is zero. The dual argument uses the monic pushout
+difference, normal-monomorphism lifting, and the first component to prove the
+second pushout injection monic. Thus both results expose genuine cancellation
+operations rather than Boolean stability claims.
+
 At the operational Freyd level, cokernels require no weak-kernel solve. For a
 presentation morphism `f : P -> Q`, the target relations are extended by the
 columns of `f`; the projection datum is the ambient identity. A test colift
