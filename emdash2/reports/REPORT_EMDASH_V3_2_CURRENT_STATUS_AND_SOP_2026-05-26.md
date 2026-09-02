@@ -415,6 +415,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   spaces are direct `HFiber`s with contractible selected factors. The thin
   `ComputationalAbelianCategory` reuses one existing `PreAbelianCategory`; it
   does not yet construct concrete Freyd normality or image/coimage data.
+- `emdash3_2_abelian_images.lp`: rule-free image/coimage comparison in every
+  selected pre-Abelian category. It derives coimage as cokernel-of-kernel and
+  image as kernel-of-cokernel, constructs the coastriction and comparison by
+  the existing universal properties, and proves
+  `f = image_embedding o comparison o coimage_projection`. The comparison
+  inverse remains a downstream normality theorem rather than an assumed
+  isomorphism.
 - `emdash3_2_computational_weak_pullbacks.lp`: rule-free derived weak
   pullbacks in any additive category with computational weak kernels. The
   cospan difference is `[alpha,-gamma]`; a test cone is its existing

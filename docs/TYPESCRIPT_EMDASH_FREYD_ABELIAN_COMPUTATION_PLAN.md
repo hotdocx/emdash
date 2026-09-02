@@ -555,9 +555,10 @@ Refine or reject a candidate when it:
 | `FAB-PLAN-0` | complete; checkpoint `002f7540` | baseline `7c537a6b` | living plan, isolated branch/worktree, fast-forward evidence, Git/scope boundary, persistent goal |
 | `FAB-AUDIT-1` | complete; checkpoint `8fa545c6` | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
 | `FAB-EFFECTIVENESS-2` | complete as audited deferral at checkpoint `8fa545c6` | quotient owners | no current path-to-agreement/direct dependent eliminator; witnessed work proceeds without choice/opaque decoder |
-| `FAB-GENERIC-NORMALITY-3` | complete; checkpoint pending | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
-| `FAB-GENERIC-IMAGE-4` | active | selected kernels/cokernels | derived image/coimage, structural maps, comparison, factorization, comparison inverse under normality |
-| `FAB-MONO-NATIVE-5A` | blocked on audit | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
+| `FAB-GENERIC-NORMALITY-3` | complete; checkpoint `7d3e7989` | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
+| `FAB-GENERIC-IMAGE-4A` | complete through canonical comparison; checkpoint pending | selected kernels/cokernels | derived image/coimage, projection/embedding, comparison, and factorization `f = i o chi o p` |
+| `FAB-GENERIC-IMAGE-4B` | blocked on concrete normality/bimorphism route | generic comparison + normality | comparison monic/epic consequences and constructed `IsoEvidence` inverse |
+| `FAB-MONO-NATIVE-5A` | active | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | blocked on audit | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | blocked on mono orientation audit | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | blocked on mono orientation audit | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
@@ -595,6 +596,7 @@ prerequisite.
 | `D-FAB-016` | accepted after Construction 3.14 audit | The monic lift datum is the lower block of the test's cokernel-zero agreement. Its relation witness is the monic kernel-zero witness composed with the selected first-weak-pullback factor of the derived relation pair. |
 | `D-FAB-017` | accepted after Construction 3.15 audit | The epic colift datum is the test map composed with the lower block of the cokernel-projection-zero witness. Its relation witness uses the test kernel-zero agreement and a selected first-weak-pullback factor; the exact subtraction orientation remains a focused native test question. |
 | `D-FAB-018` | accepted after generic normality probe | `IsMonic` and `IsEpic` are direct cancellation types over existing Hom composition. Selected kernel embeddings and cokernel projections satisfy them by constructing one annihilator/coannihilator cone and applying contractibility twice. Normal lift/colift spaces are direct `HFiber`s and the computational Abelian package reuses one existing `PreAbelianCategory`. |
+| `D-FAB-019` | accepted after generic image probe | In every selected pre-Abelian category, `Coim(f)` is the selected cokernel of `Ker(f)` and `Im(f)` the selected kernel of `Coker(f)`. Cokernel universality constructs the coastriction, epic cancellation proves it annihilated by `Coker(f)`, kernel universality constructs `chi`, and associativity gives `f = i o chi o p`. Comparison invertibility remains a separate normality theorem. |
 
 ## Implemented Generic Normality Layer
 
@@ -617,6 +619,30 @@ warning inventory is exactly neutral at
 the strict LHS audit has no clauses attributable to this module. Both files
 are registered; the strict catalog remains current and the source-metrics
 health snapshot covers 413 files without launching an unrelated aggregate.
+
+## Implemented Generic Image And Coimage Comparison
+
+`emdash3_2_abelian_images.lp` now derives `Coim(f)` as the selected cokernel
+of `Ker(f)` and `Im(f)` as the selected kernel of `Coker(f)`. It exposes the
+coimage projection, image embedding, coimage-to-target coastriction, canonical
+comparison `chi`, the comparison reconstruction, and the complete
+factorization `f = i o chi o p`.
+
+The construction uses only existing universal data. Contractibility first
+proves every selected cokernel projection epic. That cancellation turns the
+annihilation path after the coimage projection into a direct annihilation path
+for the coastriction, which is then fed to the selected image kernel. The
+module also records the easy normality directions: monic arrows have zero
+selected kernel embeddings and epic arrows have zero selected cokernel
+projections.
+
+The module is rule-free and passes its source and reviewer checks. Its warning
+inventory equals the import owner at
+`1,386 = 1,217 critical pairs + 169 replaceable variables`, and the strict LHS
+audit has no new clauses. The comparison inverse is intentionally not
+postulated; it remains `FAB-GENERIC-IMAGE-4B` and will consume the concrete
+normality route. Both files are registered, and the source-metrics health
+snapshot now covers 415 files without an unrelated behavioral aggregate.
 
 ## Validation Matrix
 

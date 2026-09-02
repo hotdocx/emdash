@@ -3453,6 +3453,17 @@ Pairing both whole capabilities with the existing pre-Abelian package yields
 the generic `ComputationalAbelianCategory`; concrete Freyd witnesses and the
 derived image/coimage comparison remain downstream layers.
 
+The selected image/coimage comparison is now derived as well. For
+`f : A -> B`, the coimage is the selected cokernel of `Ker(f)` and the image
+is the selected kernel of `Coker(f)`. The kernel annihilation lets `f` descend
+through the coimage projection to a coastriction `bar_f`. Since that projection
+is epic, the equality after precomposition proves `Coker(f) o bar_f = 0`.
+Image-kernel universality then constructs `chi_f : Coim(f) -> Im(f)`, and the
+two reconstruction paths give
+`f = image_embedding o chi_f o coimage_projection`. This comparison exists
+already at the pre-Abelian boundary; constructing its inverse is the separate
+normality step and is not assumed here.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

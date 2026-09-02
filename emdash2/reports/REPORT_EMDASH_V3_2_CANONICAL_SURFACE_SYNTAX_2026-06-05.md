@@ -883,6 +883,9 @@ PreAb(C)                   : additive C with selected kernels and cokernels
 Mono(m), Epi(e)            : cancellation on incoming/outgoing Hom actions
 Lift_m(τ), Colift_e(τ)    : selected normal factors of annihilated tests
 Ab(C)                      : pre-Abelian C with normal mono/epi computation
+Coim(f), Im(f)             : Coker(Ker(f)), Ker(Coker(f))
+χ_f : Coim(f) -> Im(f)   : canonical comparison
+f = i_f o χ_f o p_f       : selected image/coimage factorization
 WPB(α,γ)                   : WK([α,−γ]) with projected legs
 lift_WPB(c)                : selected nonunique factor of an encoded cone
 α o p = γ o q              : derived conventional WPB compatibility
@@ -954,6 +957,13 @@ The literal owners are `CommRingFiniteFree_cat`,
 `lift_along_monomorphism`,
 `colift_along_epimorphism`,
 `ComputationalAbelianCategory`,
+`computational_coimage`,
+`computational_image`,
+`computational_coimage_projection`,
+`computational_image_embedding`,
+`coimage_to_target`,
+`coimage_image_comparison`,
+`coimage_image_factorization_path`,
 `weak_pullback_difference_fapp0`,
 `ComputationalWeakPullback`,
 `WeakPullbackCone`,
@@ -1009,8 +1019,10 @@ effective quotient-path decoder is actually supplied. The field-polynomial
 runtime provider does have all eight usable pre-Abelian roles. `Ab(C)` now
 names only the generic package of a selected pre-Abelian structure with
 contractible normal lift/colift spaces; no concrete Freyd value inhabits it at
-this boundary. Neither surface implies concrete Abelian structure, exactness,
-or homology.
+this boundary. `χ_f` is already a constructed comparison with the displayed
+factorization, but must not be printed as an isomorphism until the normality
+layer constructs its inverse. Neither surface implies concrete Abelian
+structure, exactness, or homology.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write

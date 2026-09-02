@@ -86,6 +86,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   packages normal lift/colift `HFiber`s plus the thin generic computational
   Abelian structure. Concrete Freyd normality remains a witnessed downstream
   construction.
+  `emdash3_2_abelian_images.lp` derives coimage as cokernel-of-kernel, image
+  as kernel-of-cokernel, their canonical comparison, and the factorization
+  through projection/comparison/embedding. Comparison invertibility remains
+  downstream normality data and is not postulated.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its
