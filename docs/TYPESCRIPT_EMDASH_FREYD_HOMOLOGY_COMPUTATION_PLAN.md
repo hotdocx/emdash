@@ -4,7 +4,8 @@ Date: 2026-09-02
 
 Plan-ID: `TS-EMDASH-FREYD-HOMOLOGY-COMPUTATION`
 
-Status: active on a dedicated branch/worktree
+Status: completed on a dedicated branch/worktree; substantive implementation
+head `6aec69c5`, closure checkpoint pending
 
 Baseline: `4acef747d4b80e92c5c653e0b6635e6817a9c909`
 
@@ -339,12 +340,12 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-NATIVE-3` | complete; checkpoint `5e9aaa4c` | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
 | `FH-EXACT-4` | complete; checkpoint `5e9aaa4c` | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
 | `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
-| `FH-BOUNDED-6` | complete; native checkpoint `3fc20066`, bounded-map/formal-spine checkpoint pending | bounded free/Freyd spines | whole bounded Freyd complexes/maps, free-complex adapter, degree observations, homology consumer |
+| `FH-BOUNDED-6` | complete; checkpoints `3fc20066`, `6aec69c5` | bounded free/Freyd spines | whole bounded Freyd complexes/maps, free-complex adapter, degree observations, homology consumer |
 | `FH-FORMAL-7` | complete; checkpoint `d68eb79d` | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
 | `FH-FUNCTORIAL-8` | complete; checkpoints `f0ecc0f8`, `4464be91` | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
 | `FH-BRIDGE-9` | complete; checkpoint `aa7c0ba8` | proof–CAS delegation | fourteen exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | complete; checkpoint `aa7c0ba8` | field reference/Singular adapters | non-authoritative constant-field comparison without replacing native Freyd data |
-| `FH-CLOSE-11` | ready | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
+| `FH-CLOSE-11` | complete; closure checkpoint pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
 Rows may be split or reordered when a focused probe refines dependencies. A
 row may be rejected or deferred only with durable evidence and a concrete
@@ -379,6 +380,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-023` | accepted after proof-CAS tests | `algebra_formal_freyd_homology.ts` replays chain-pair, homology, exactness, chain-map, and induced-map operations. Fourteen exact equations cover chain zero, boundary/projection structure and laws, exactness, both squares, cycles reconstruction, boundary compatibility, quotient zero, and induced-map reconstruction. Complete selected whole outputs are compared canonically before adoption. |
 | `D-FH-024` | accepted after differential tests | Constant rational complexes are computed by both the older field-module homology engine and polynomial Freyd homology after scalar extension. Field homology dimension zero agrees with Freyd boundary epicity in both identity→zero and zero→zero cases. This remains non-authoritative differential evidence. |
 | `D-FH-025` | accepted after bounded follow-up | The native bounded chain-map package retains every component square and obtains degreewise induced maps by extracting one local homology chain map. The formal recursive `CommRingFreydChainTail` stores presentations, raw differentials, and adjacent-zero agreements, and its first interior-degree consumer delegates to witnessed one-degree homology. |
+| `D-FH-026` | accepted at closure | The goal completes at one-degree and bounded homology, witness-rich exactness, and functorial induced maps across generic, native, categorical, formal, and proof-CAS layers. Connecting morphisms and long exact sequences are now dependency-ready successors but remain outside this goal. |
 
 ## Implemented Owner Audit
 
@@ -551,6 +553,42 @@ consumer returns `CommRingFreydWitnessedHomologyAt` directly. Owner and
 reviewer are rule-free and pass focused quiet/warning checks at the unchanged
 `1,392 = 1,223 + 169` boundary. Strict LHS is clean, and the refreshed
 source-metrics health snapshot covers 433 files.
+
+## Closure Evidence And Successor Boundary
+
+The substantive implementation head is `6aec69c5`, exactly eleven linear
+commits after baseline `4acef747d4b80e92c5c653e0b6635e6817a9c909`. The
+dedicated goal worktree is clean at that head. Historical `main` remains clean
+at the named baseline, with zero commits unique to `main` and eleven commits
+on this branch. No path-cubical, global-strictness, or other orthogonal branch
+was integrated.
+
+Final proportional evidence is:
+
+- workspace validation, root TypeScript typecheck, and affected-file lint
+  pass;
+- the immediate homology/Abelian/free-complex/field-reference matrix runs 46
+  tests: 44 pass and the two ordinary opt-in live probes are skipped;
+- the opt-in 14-equation proof-CAS run passes all five tests, including its
+  generated Lambdapi probe;
+- generic, formal homology, formal functorial homology, and formal bounded
+  owners/reviewers pass bounded quiet and warning-enabled checks;
+- formal sources are rule-free and inherit
+  `1,392 = 1,223 critical pairs + 169 replaceable variables` at the top Freyd
+  boundary;
+- strict LHS reports zero unreviewed reconstructible clauses; and
+- catalog/report checks and the 433-file source-health snapshot are current.
+
+The repository-wide `check:ts` aggregate was intentionally not rerun under the
+active proportional-validation scope; no unrelated TypeScript subsystem was
+changed.
+
+The natural successor is a separately planned connecting-morphism and long
+exact homology sequence goal, using the completed short-exact and functorial
+owners. Chain homotopy, quasi-isomorphism localization, derived categories,
+spectral sequences, and Čech cohomology remain later boundaries. This closure
+does not authorize any successor, integration into `main`, push, publication,
+release, or worktree cleanup.
 
 ## Baseline And Validation Policy
 

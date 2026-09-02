@@ -4,7 +4,7 @@ Date: 2026-09-02
 
 Plan-ID: `TS-EMDASH-FREYD-HOMOLOGY-COMPUTATION`
 
-Status: active implementation audit
+Status: completed implementation audit; substantive head `6aec69c5`
 
 Baseline: `4acef747d4b80e92c5c653e0b6635e6817a9c909`
 
