@@ -333,8 +333,8 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
-| `FH-PLAN-0` | active | baseline `4acef747` | living plan, isolated branch/worktree, integration evidence, scope/Git boundary, persistent goal |
-| `FH-AUDIT-1` | blocked on plan checkpoint | current formal/native owners | exact owner matrix, generic formulation, categorical-IR feasibility, baseline diagnostics, rejection signals |
+| `FH-PLAN-0` | complete; checkpoint `26b7c2fd` | baseline `4acef747` | living plan, isolated branch/worktree, integration evidence, scope/Git boundary, persistent goal |
+| `FH-AUDIT-1` | complete; checkpoint pending | current formal/native owners | exact owner matrix, generic formulation, categorical-IR feasibility, baseline diagnostics, rejection signals |
 | `FH-GENERIC-2` | blocked on audit | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
 | `FH-NATIVE-3` | blocked on generic owner | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
 | `FH-EXACT-4` | blocked on native homology | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
@@ -365,6 +365,17 @@ replacement, prerequisite, or human decision.
 | `D-FH-009` | accepted | Proof–CAS replays actual whole operations and reifies exact equations without requiring proof certificates. |
 | `D-FH-010` | accepted | No runtime rule, unifier, stable head, or categorical-IR extension is assumed before an owning-position consumer demonstrates the need. |
 | `D-FH-011` | accepted | Derived categories, quasi-isomorphism localization, chain homotopy, spectral sequences, and Čech cohomology are out of scope. |
+| `D-FH-012` | accepted after categorical-IR audit | Current retained programs cannot assemble dependent kernel/lift/cokernel inputs across unary nodes and do not inline derived callbacks. The first categorical consumer retains one whole `homology-at` operation with declared universal-operation prerequisites and a native lowering; generic dependent record assembly remains consumer-gated. |
+| `D-FH-013` | accepted after owner audit | Generic homology construction requires only selected pre-Abelian kernels/cokernels. Abelian normality enters exactness and comparison theorems, not the existence of `Hₙ`. |
+| `D-FH-014` | accepted after native agreement audit | The chain-pair constructor retains negative agreements; the homology constructor consumes only a positive chain agreement and returns a typed failure otherwise. |
+
+## Implemented Owner Audit
+
+The exact owner matrix, mathematical typing, formal/raw boundary, categorical-
+IR limitation, baseline diagnostics, and revised sequencing are recorded in
+`docs/TYPESCRIPT_EMDASH_FREYD_HOMOLOGY_OWNER_AUDIT.md`. The audit selects a
+rule-free generic one-degree owner as the first semantic tranche. It rejects
+both a second quotient grammar and a homology-specific categorical AST.
 
 ## Baseline And Validation Policy
 
