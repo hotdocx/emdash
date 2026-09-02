@@ -138,6 +138,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   compatibility/cone theorem modules derive `alpha o p = gamma o q` by
   additive cancellation and turn an explicit equalizing pair back into that
   internal cone.
+  `emdash3_2_computational_fiber_products.lp` replaces that weak kernel by the
+  selected genuine kernel. The same internal cone now has a contractible
+  factor space; ordinary compatibility, both projection reconstructions, and
+  the forgetful weak-pullback view are derived without a new rule.
+  `emdash3_2_computational_pushouts.lp` is the direct rule-free dual. It uses
+  the selected cokernel of `iota_1 o alpha + iota_2 o (-gamma)`; internal
+  cocones, contractible cofactors, both injection reconstructions, ordinary
+  compatibility, and conventional copair introduction are derived from the
+  existing additive/cokernel owners.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

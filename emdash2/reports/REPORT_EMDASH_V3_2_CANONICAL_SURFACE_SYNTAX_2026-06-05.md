@@ -2674,6 +2674,21 @@ along `F`. It is not notation for categorical pullback objects or `f^*`.
 Products-in-slices, weighted pullback notation, pushouts, Beck–Chevalley, and
 Frobenius have no selected surface syntax yet.
 
+For the separate additive binary universal constructions, mathematical prose
+may write
+
+```text
+X ×_Y Z                    genuine fiber product of alpha:X->Y and gamma:Z->Y
+X ⊔_Y Z                    genuine pushout of alpha:Y->X and gamma:Y->Z
+```
+
+The kernel owners are `ComputationalFiberProduct` and
+`ComputationalPushout`. Their primary cones/cocones are the annihilator and
+coannihilator fibres of the relevant biproduct difference map. They are not
+records with manually entered squares, `Pullback_catd`, or the exact-slice
+`PullbackStructure`. The ASCII formulas are explanatory notation only; no new
+string-parser tokens are selected.
+
 ## Slice Dependent-Product Notation
 
 Given `PB : PullbackStructure(C)` and

@@ -26,6 +26,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_computational_weak_pullback_compatibility.lp"),
     Path("emdash3_2_computational_weak_pullback_cones.lp"),
     Path("emdash3_2_kernels_cokernels.lp"),
+    Path("emdash3_2_computational_fiber_products.lp"),
+    Path("emdash3_2_computational_pushouts.lp"),
     Path("emdash3_2_computational_homology.lp"),
     Path("emdash3_2_abelian_categories.lp"),
     Path("emdash3_2_abelian_images.lp"),

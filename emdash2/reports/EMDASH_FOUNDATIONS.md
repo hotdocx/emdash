@@ -3325,6 +3325,31 @@ summand. Conversely, a pair with that equality forms a product arrow whose
 difference composite is zero, hence an internal cone. These are theorem-level
 views of one carrier, not parallel weak-pullback notions.
 
+Once genuine kernels are selected, the identical difference construction
+becomes a genuine fiber product. Its cone carrier does not change: it remains
+the annihilator fibre of `[alpha,-gamma]`. What changes is the factor
+classifier. The kernel's `KernelFactorSpace` is contractible, so its centre is
+the selected fiber-product lift, its fibre path is reconstruction, and its
+contraction proves uniqueness. Composing the combined reconstruction with the
+two biproduct projections gives both ordinary projection laws. Forgetting the
+contraction recovers the earlier weak pullback definitionally.
+
+Pushouts are constructed directly and dually. For a span
+`X <--alpha-- Y --gamma--> Z`, form
+
+```text
+iota_1 o alpha + iota_2 o (-gamma) : Y -> X+Z
+```
+
+and select its cokernel. Composing the cokernel projection with the two
+biproduct injections gives the pushout injections. Cokernel annihilation and
+abelian cancellation derive their ordinary compatibility. A cocone is the
+existing coannihilator fibre of the difference map, not a stored square;
+`CokernelFactorSpace` makes every cofactor space contractible. Conventional
+compatible copairs translate into that fibre, and the one combined
+reconstruction yields both injection laws. These binary constructions are
+separate from Cat-valued family substitution and from exact-slice base change.
+
 At the operational Freyd level, cokernels require no weak-kernel solve. For a
 presentation morphism `f : P -> Q`, the target relations are extended by the
 columns of `f`; the projection datum is the ambient identity. A test colift

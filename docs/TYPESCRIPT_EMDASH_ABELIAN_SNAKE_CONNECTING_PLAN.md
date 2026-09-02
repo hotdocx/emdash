@@ -584,14 +584,14 @@ monomorphism.
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `ASC-PLAN-0` | complete; checkpoint `8cb81eaf` | baseline `4036ef47` | living plan, isolated branch/worktree, preparatory integration evidence, scope/Git boundary, persistent goal |
-| `ASC-AUDIT-1` | complete; checkpoint pending | active formal/native/category/proof–CAS owners and CAP source | exact owner and endpoint matrix, focused baselines, operation dependencies, rejection signals |
-| `ASC-NATIVE-SQUARES-1A` | implementation green; checkpoint pending | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
-| `ASC-FIBER-2` | pending | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
-| `ASC-PUSHOUT-3` | pending | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
+| `ASC-AUDIT-1` | complete; checkpoint `771f082b` | active formal/native/category/proof–CAS owners and CAP source | exact owner and endpoint matrix, focused baselines, operation dependencies, rejection signals |
+| `ASC-NATIVE-SQUARES-1A` | complete; checkpoint `771f082b` | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
+| `ASC-FIBER-2` | complete; checkpoint pending | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
+| `ASC-PUSHOUT-3` | complete; checkpoint pending | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
 | `ASC-EXACT-5` | pending | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
-| `ASC-SNAKE-NATIVE-7` | pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
+| `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
 | `ASC-BRIDGE-10` | pending | native/category/formal selected results | proof–CAS delegation bundle and exact equation replay |
@@ -620,6 +620,53 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-012` | accepted | Generalized morphisms are audited but deferred as the primary calculus until a Serre-quotient, derived, or spectral-sequence consumer requires them. |
 | `D-ASC-013` | accepted | No runtime rule, unifier, stable head, or categorical-IR extension is assumed before an owner-position consumer demonstrates the need. |
 | `D-ASC-014` | accepted | Long exact homology, chain homotopy, derived localization, spectral sequences, and Čech cohomology are successor goals. |
+| `D-ASC-015` | accepted after formal owner probes | Genuine fiber products reuse the existing weak-pullback cone and compatibility adapters through a transparent genuine-kernel-to-weak-kernel view; contractible kernel factors supply the extra universal content. |
+| `D-ASC-016` | accepted after formal pushout probe | The direct pushout mirror uses `iota_1 o alpha + iota_2 o (-gamma)`. Its cokernel annihilation derives ordinary compatibility; conventional copairs and both injection laws are theorem-level consequences. No `Op_*` runtime surface or rule is needed. |
+| `D-ASC-017` | accepted after native CAP consumer | The complete CAP operation chain executes over polynomial Freyd using selected epic/monic witnesses for the actual fiber-product projection and pushout injection. The published rational example induces the expected `-1` quotient map. |
+| `D-ASC-018` | accepted after nonsplit consumer | With `delta=x`, `beta=id`, and `lambda=0`, the algorithm computes through the nonsplit quotient `R -> R/(x)` and uses no projection section. This is the decisive rejection of the older field-only construction as general authority. |
+| `D-ASC-019` | classified after source-health refresh | Registering the two new formal sources invalidated the resumable health-set identity and triggered one full rebuild. Every new owner/reviewer passed, but the unrelated existing `examples/dependent_simplex_faces.lp` failed; the same focused failure reproduces on clean baseline `main`. The generated health report correctly remained unchanged. This goal records and excludes that orthogonal baseline defect rather than editing simplex work. |
+
+## Implemented Genuine Binary Universal Constructions
+
+`emdash3_2_computational_fiber_products.lp` defines the genuine fiber product
+as the selected kernel of the same additive difference used by weak
+pullbacks. A transparent genuine-kernel-to-weak-kernel view preserves the
+existing cone and ordinary compatibility interface, while the underlying
+`KernelFactorSpace` supplies contractibility and uniqueness. Stable readable
+observations expose the object, combined kernel arrow, both projections,
+selected lift, combined and projected reconstruction, and uniqueness.
+
+`emdash3_2_computational_pushouts.lp` is the direct rule-free mirror. Its
+difference is the sum of the two injection composites, with the second leg
+negated. The selected cokernel supplies the object, combined projection,
+injections, contractible cofactor space, selected cofactor, reconstruction,
+and uniqueness. Additive lemmas derive ordinary compatibility and translate a
+conventional compatible copair into the internal coannihilator fibre.
+
+Both files pass quiet and warning-enabled owner checks. They add no rewrite or
+unification rule and have zero strict-LHS findings.
+
+The source registry and generated check catalog include both owners and the
+reviewer. A required health refresh checked the complete invalidated source
+set once: the new files were green, but the report was not rewritten because
+the unrelated baseline `dependent_simplex_faces` reviewer fails identically on
+`main`. Later work reuses focused evidence and does not repeat that aggregate.
+
+## Implemented Native CAP Core
+
+The TypeScript layer now has derived whole polynomial Freyd fiber products and
+pushouts with explicit quotient agreements and uniqueness operations. The
+native stability adapter retains the supplied epic/monic witness, checks that
+it classifies the selected cospan/span leg, and independently constructs the
+actual projection/injection witness.
+
+`algebraPolynomialFreydSnakeConnecting` follows the reviewed CAP operation
+order exactly. Its frozen whole result retains both first universal factors,
+the genuine fiber product and pushout, stability witnesses, the normal-epi
+colift `u`, the normal-mono lift defining the connecting map, and all
+reconstruction agreements. It passes the CAP rational example and the
+nonsplit `R -> R/(x)` example; the latter contains no section field. Category
+roles, canonical whole serialization, and formal replay remain in later rows.
 
 ## Baseline And Validation Policy
 

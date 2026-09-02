@@ -447,6 +447,19 @@ belongs to the owning implementation plan rather than to standing guidance.
   and conversely turn an explicitly equalizing pair into the internal
   annihilator cone. Precomposition preservation of negation is proved from
   bilinearity; no new cone carrier or runtime rule is introduced.
+- `emdash3_2_computational_fiber_products.lp`: rule-free genuine binary fiber
+  products in every additive category with selected computational kernels.
+  The object is the kernel of `[alpha,-gamma]`; the existing annihilator
+  fibre remains the cone, while `KernelFactorSpace` supplies contractible
+  factors, selected lift, reconstruction, and uniqueness. Its forgetful view
+  reuses the weak-pullback compatibility and conventional-pair adapters.
+- `emdash3_2_computational_pushouts.lp`: rule-free genuine binary pushouts in
+  every additive category with selected computational cokernels. The object
+  is the cokernel of `iota_1 o alpha + iota_2 o (-gamma)`; the existing
+  coannihilator fibre supplies cocones and `CokernelFactorSpace` supplies
+  contractible cofactors. Ordinary compatibility, conventional copair
+  introduction, and both injection reconstructions are derived. Neither
+  module is `Pullback_catd` or exact-slice `PullbackStructure`.
 - `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
   witness-enriched Construction 3.6. It appends the morphism datum to target
   relations, constructs the identity-data projection, and uses an explicit
