@@ -414,7 +414,7 @@ belongs to the owning implementation plan rather than to standing guidance.
   arrows monic/epic. Normal-monomorphism lift and normal-epimorphism colift
   spaces are direct `HFiber`s with contractible selected factors. The thin
   `ComputationalAbelianCategory` reuses one existing `PreAbelianCategory`; it
-  does not yet construct concrete Freyd normality or image/coimage data.
+  does not by itself construct a closed concrete formal Freyd value.
 - `emdash3_2_abelian_images.lp`: rule-free image/coimage comparison in every
   selected pre-Abelian category. It derives coimage as cokernel-of-kernel and
   image as kernel-of-cokernel, constructs the coastriction and comparison by
@@ -456,6 +456,11 @@ belongs to the owning implementation plan rather than to standing guidance.
   The package exposes annihilation, reconstruction, and raw-competitor
   uniqueness without pretending to inhabit the stronger closed
   `PreAbelianCategory` or to decode arbitrary set-truncated paths.
+- The operational field-polynomial Freyd provider now implements Posur's
+  normal mono/epi constructions with retained agreement witnesses, derives
+  image/coimage and the comparison inverse, and qualifies against the complete
+  14-role `abelian-category` interface. This operational qualification does
+  not supply the still-gated closed formal quotient eliminator.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

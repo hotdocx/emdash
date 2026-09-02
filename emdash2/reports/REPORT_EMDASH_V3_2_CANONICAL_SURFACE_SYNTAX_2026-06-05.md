@@ -897,6 +897,7 @@ Ker_Freyd(f)               : presentation from two biased weak pullbacks
 lift_f(τ,H₀)               : kernel lift using H₀ and τ's relation witness.
 PreAb(Freyd_R)             : field-polynomial provider with all eight roles.
 PreAbʷ(Freyd_R;W)          : formal witnessed surface from base capability W.
+Ab(Freyd_R)                : operational provider with all normality/image roles.
 ```
 
 The literal owners are `CommRingFiniteFree_cat`,
@@ -1016,13 +1017,12 @@ witness-enriched formal package: tests and competitors carry raw
 zero/reconstruction agreements, from which the checked quotient paths follow.
 It must not be printed as the stronger closed `PreAb(Freyd_R)` unless an
 effective quotient-path decoder is actually supplied. The field-polynomial
-runtime provider does have all eight usable pre-Abelian roles. `Ab(C)` now
-names only the generic package of a selected pre-Abelian structure with
-contractible normal lift/colift spaces; no concrete Freyd value inhabits it at
-this boundary. `χ_f` is already a constructed comparison with the displayed
-factorization, but must not be printed as an isomorphism until the normality
-layer constructs its inverse. Neither surface implies concrete Abelian
-structure, exactness, or homology.
+runtime provider has all eight pre-Abelian roles, and `Ab(Freyd_R)` adds the
+complete normality/image family plus a computed inverse to `χ_f`. `Ab(C)` is
+the generic package of a selected pre-Abelian structure with contractible
+normal lift/colift spaces. The concrete formal Freyd value remains witnessed
+rather than closed until quotient effectiveness is supplied. None of these
+Abelian surfaces should be printed as exactness or homology data.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write

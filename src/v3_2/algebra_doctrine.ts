@@ -314,12 +314,38 @@ export const PREABELIAN_DOCTRINE = defineDoctrine({
 export const ABELIAN_DOCTRINE = defineDoctrine({
     id: 'abelian-category',
     parents: ['preabelian-category'],
-    requiredRoles: ['image', 'coimage', 'coimage-image-isomorphism'],
+    requiredRoles: [
+        'monomorphism-witness',
+        'epimorphism-witness',
+        'lift-along-monomorphism',
+        'colift-along-epimorphism',
+        'image',
+        'image-object',
+        'image-embedding',
+        'coastriction-to-image',
+        'coimage',
+        'coimage-object',
+        'coimage-projection',
+        'astriction-from-coimage',
+        'coimage-image-comparison',
+        'coimage-image-isomorphism'
+    ],
     dual: {
         doctrineId: 'abelian-category',
         roles: {
+            'monomorphism-witness': 'epimorphism-witness',
+            'epimorphism-witness': 'monomorphism-witness',
+            'lift-along-monomorphism': 'colift-along-epimorphism',
+            'colift-along-epimorphism': 'lift-along-monomorphism',
             image: 'coimage',
+            'image-object': 'coimage-object',
+            'image-embedding': 'coimage-projection',
+            'coastriction-to-image': 'astriction-from-coimage',
             coimage: 'image',
+            'coimage-object': 'image-object',
+            'coimage-projection': 'image-embedding',
+            'astriction-from-coimage': 'coastriction-to-image',
+            'coimage-image-comparison': 'coimage-image-comparison',
             'coimage-image-isomorphism': 'coimage-image-isomorphism'
         }
     }

@@ -562,9 +562,9 @@ Refine or reject a candidate when it:
 | `FAB-MONO-FORMAL-5B` | active | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | blocked on formal mono helper orientation | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
-| `FAB-IMAGE-NATIVE-7A` | complete; checkpoint pending | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
+| `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
-| `FAB-CATEGORY-8` | active | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
+| `FAB-CATEGORY-8` | complete; checkpoint pending | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | blocked on formal image | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package only if effectiveness succeeds |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
@@ -600,6 +600,7 @@ prerequisite.
 | `D-FAB-020` | accepted after native Construction 3.14 tests | Native monicity is classified by the selected kernel embedding's explicit agreement with zero. The lower block of a cokernel-zero test agreement is the lift datum; its expected relation witness is the kernel-zero witness after the selected first-weak-pullback factor. Multiplication by `x` with test `xy` computes lift `y`. |
 | `D-FAB-021` | accepted after native Construction 3.15 tests | Native epicity is classified by the selected cokernel projection's explicit agreement with zero. Splitting its identity witness and factoring the pair `sigma_A o R_Q`, `id - sigma_RQ o R_Q` through the first weak pullback constructs the colift relation witness. The quotient projection by `x` computes an identity colift. |
 | `D-FAB-022` | accepted after native image tests | One whole native result derives kernel, coimage, cokernel, image, coastriction, comparison, and `f = i o chi o p`. The comparison is independently classified monic and epic; Constructions 3.14 and 3.15 produce two inverse candidates, their agreement, and both quotient inverse laws. No isomorphism is postulated. |
+| `D-FAB-023` | accepted after category-provider tests | `ABELIAN_DOCTRINE` requires 14 normality/image roles in addition to inherited pre-Abelian roles. The field-polynomial Freyd provider qualifies only when witness, lift/colift, whole image/coimage, all structural observations, comparison, and isomorphism are plannable and executable. |
 
 ## Implemented Generic Normality Layer
 
@@ -696,6 +697,28 @@ Four focused tests cover multiplication by `x`, a nontrivial `[x,y]` row map,
 zero, identity, both inverse constructions, factorization, freezing, and
 deterministic replay. All pass without a primitive image algorithm, an opaque
 isomorphism witness, or field-only linear algebra.
+
+## Implemented Operational Abelian Category
+
+`algebra_polynomial_freyd_abelian_category.ts` extends the unchanged
+pre-Abelian polynomial Freyd carrier. It registers primitive monomorphism and
+epimorphism witness operations, derived normal lift/colift operations, and one
+primitive whole coimage–image isomorphism. Image, coimage, their objects and
+structural arrows, coastriction, astriction, and comparison are derived
+category methods.
+
+`ABELIAN_DOCTRINE` now requires all 14 usable roles rather than three opaque
+labels. Its dual map exchanges mono/epi, lift/colift, image/coimage,
+embedding/projection, and coastriction/astriction while retaining the
+comparison/isomorphism roles. The provider adds backend-neutral algebra
+operations and lowerings for every role, reference implementations, graph
+execution, and an Abelian constructor in the categorical tower.
+
+Four provider tests cover full qualification, every derived observation,
+normality execution, whole isomorphism execution, compiler and graph paths,
+inherited pre-Abelian methods, and non-field rejection. The affected doctrine,
+pre-Abelian, normality, image, and Abelian provider matrix passes `25/25`, with
+root typecheck and affected lint green.
 
 ## Validation Matrix
 

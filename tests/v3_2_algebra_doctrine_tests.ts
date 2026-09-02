@@ -100,7 +100,13 @@ describe('v3.2 operational categorical doctrines', () => {
             'kernel', 'kernel-object', 'kernel-embedding', 'kernel-lift',
             'cokernel', 'cokernel-object', 'cokernel-projection',
             'cokernel-colift',
-            'image', 'coimage', 'coimage-image-isomorphism'
+            'monomorphism-witness', 'epimorphism-witness',
+            'lift-along-monomorphism', 'colift-along-epimorphism',
+            'image', 'image-object', 'image-embedding',
+            'coastriction-to-image',
+            'coimage', 'coimage-object', 'coimage-projection',
+            'astriction-from-coimage',
+            'coimage-image-comparison', 'coimage-image-isomorphism'
         ];
         const operations = roles.map(role => defineCategoryOperation({
             id: `fixture.doctrine.${role}`,

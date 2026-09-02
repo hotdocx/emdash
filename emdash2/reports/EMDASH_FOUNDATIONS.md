@@ -3483,6 +3483,16 @@ inverse candidates; the implementation checks that they agree in the Freyd
 quotient and verifies both inverse laws. Thus the isomorphism is computed from
 the preceding universal operations rather than inserted as a semantic flag.
 
+These operations are also exposed through one operational Abelian category
+provider. Its doctrine requires explicit monomorphism/epimorphism witnesses,
+normal lift/colift, whole image/coimage, their object and structural-arrow
+observations, coastriction/astriction, comparison, and comparison
+isomorphism. One whole isomorphism computation owns the image/coimage result;
+the method planner derives the observations, and every role lowers to the
+backend-neutral algebra engine and graph executor. Qualification remains
+restricted to the field-polynomial provider that supplies the required weak
+kernels and effective congruence.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
