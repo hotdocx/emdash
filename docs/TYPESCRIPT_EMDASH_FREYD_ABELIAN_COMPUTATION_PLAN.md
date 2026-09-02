@@ -559,9 +559,9 @@ Refine or reject a candidate when it:
 | `FAB-GENERIC-IMAGE-4A` | complete through canonical comparison; checkpoint `f277b3d1` | selected kernels/cokernels | derived image/coimage, projection/embedding, comparison, and factorization `f = i o chi o p` |
 | `FAB-GENERIC-IMAGE-4B` | complete at explicit bimorphism boundary; checkpoint `a9511535` | generic comparison + normality | any explicit monic/epic comparison receives a constructed `IsoEvidence` inverse; concrete evidence is native/formal downstream data |
 | `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
-| `FAB-MONO-FORMAL-5B` | active; reconstruction checkpoint `a0dfbe09`; raw-competitor uniqueness remains | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
+| `FAB-MONO-FORMAL-5B` | complete; uniqueness checkpoint pending after reconstruction checkpoint `a0dfbe09` | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
-| `FAB-EPI-FORMAL-6B` | active; reconstruction implemented after colift checkpoint `b469a6a9`; raw-competitor uniqueness remains | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
+| `FAB-EPI-FORMAL-6B` | complete; reconstruction/uniqueness checkpoint pending after colift checkpoint `b469a6a9` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
@@ -604,6 +604,7 @@ prerequisite.
 | `D-FAB-024` | accepted after balancedness probe | In a `ComputationalAbelianCategory`, an explicitly monic and epic arrow is constructively invertible: epicity makes its cokernel projection zero, so the codomain identity is a normal-mono test; its lift is a right inverse and monic cancellation gives the left law. The result is the existing `IsoEvidence`, including for the canonical comparison when its bimorphism evidence is supplied. |
 | `D-FAB-025` | accepted after formal Construction 3.14 probe | The formal test agreement splits by the existing matrix projections. Its block equation, generic abelian subtraction lemmas, and transparent/generic matrix comparisons construct the first weak-pullback cone. The selected factor after the kernel-zero witness is the lift relation witness; an explicit negative upper block proves quotient reconstruction. No path decoder or runtime rule is used. |
 | `D-FAB-026` | accepted after formal Construction 3.15 relation probe | The cokernel-projection-zero agreement splits into the published identity decomposition. Precomposition with target relations and abelian subtraction construct the first weak-pullback cone. The test kernel-zero agreement after its selected factor is the relation witness for the colift datum `tau o sigma_A`. Reconstruction and uniqueness remain explicit downstream proof obligations. |
+| `D-FAB-027` | accepted after formal normality completion | Monomorphism uniqueness factors the difference of a competitor and the selected lift through the first weak pullback, then uses the kernel-zero witness as its quotient agreement. Epimorphism uniqueness reconstructs the competitor difference from its relation component and the source-composite agreement by the split identity `R_Q sigma_RQ + F sigma_A = id`. Both proofs retain raw agreement witnesses and require no quotient-path decoder. |
 
 ## Implemented Generic Normality Layer
 
@@ -756,12 +757,17 @@ The module constructs the raw presentation lift, its quotient class, an
 explicit reconstruction agreement with negative upper-block witness, and the
 quotient reconstruction path.
 
+For raw-competitor uniqueness, the competing and selected composites are
+first joined by their explicit reconstruction agreements. Their map
+difference and the resulting agreement witness form another cone over the
+first weak pullback. Its selected factor, followed by the kernel-zero witness,
+is an explicit agreement between the competitor and selected lift.
+
 The source is rule-free and warning-neutral at
 `1,392 = 1,223 critical pairs + 169 replaceable variables`. Source and focused
-reviewer checks pass. Raw-competitor uniqueness is the remaining part of
-`FAB-MONO-FORMAL-5B`; this checkpoint does not prematurely call the row
-complete. The source and reviewer are registered, strict LHS remains clean,
-and the source-metrics health snapshot covers 419 files.
+reviewer checks pass. This completes `FAB-MONO-FORMAL-5B`; the source and
+reviewer are registered, strict LHS remains clean, and the source-metrics
+health snapshot covers 419 files at the original source checkpoint.
 
 ## Implemented Formal Normal-Epimorphism Relation Data
 
@@ -784,9 +790,16 @@ Its selected factor turns the test kernel-zero witness into the explicit
 negative agreement witnessing `(tau o sigma_A) o F = tau`. Thus quotient
 reconstruction is derived rather than assumed or decoded from truncation.
 
-The source is rule-free and source/reviewer/warning checks pass.
-Raw-competitor uniqueness remains active work in `FAB-EPI-FORMAL-6B`; it is
-not inferred merely from the well-formed colift or its reconstruction.
+For raw-competitor uniqueness, reconstruction agreements compare the
+competitor and selected composites. The presentation-morphism relation
+witnesses control the difference on `R_Q`, while that comparison agreement
+controls the difference on `F`. Composing both with the two blocks of the
+epimorphism witness and applying `R_Q sigma_RQ + F sigma_A = id` constructs an
+explicit agreement between the competitor and selected colift.
+
+The source is rule-free and source/reviewer/warning checks pass. This completes
+`FAB-EPI-FORMAL-6B`; uniqueness is proved from retained raw witnesses rather
+than inferred from the well-formed colift or a truncated path.
 Its warning inventory is neutral at
 `1,392 = 1,223 critical pairs + 169 replaceable variables`, strict LHS remains
 clean, and the refreshed source-metrics health snapshot covers 421 files.

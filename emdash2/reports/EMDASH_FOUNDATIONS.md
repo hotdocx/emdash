@@ -3490,8 +3490,10 @@ block equation constructs a first weak-pullback cone. The selected factor,
 followed by the kernel-zero witness, makes the lower component a
 relation-preserving lift. A negative upper component is the reconstruction
 agreement witness, yielding equality in the Freyd Hom. This is a genuine
-formal Construction 3.14 through reconstruction, while raw-competitor
-uniqueness remains a separately named unfinished layer.
+formal Construction 3.14. A competitor's difference from the selected lift,
+together with the agreement between their composites, forms a further
+first-weak-pullback cone. Its selected factor followed by the kernel-zero
+witness is the explicit agreement proving raw-competitor uniqueness.
 
 The formal normal-epimorphism construction is its witness-rich Construction
 3.15 counterpart. An explicit cokernel-projection-zero agreement splits into
@@ -3503,7 +3505,10 @@ class is therefore well-defined without decoding a truncated equality. A
 second cone, with components `id - sigma_A F` and `sigma_RQ F`, turns the test
 kernel-zero witness into the negative agreement for
 `(tau sigma_A) F = tau`, proving quotient reconstruction. Raw-competitor
-uniqueness remains a named proof obligation rather than a consequence of
+uniqueness uses the relation witnesses of the competitor and selected colift
+for the `R_Q` component and their composite agreement for the `F` component.
+The split identity then reconstructs their whole difference as a target
+relation, giving an explicit quotient agreement rather than relying on
 well-formedness alone.
 
 The native image/coimage operation then applies those normality algorithms to

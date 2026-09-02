@@ -6,8 +6,9 @@
   target-relation and source-generator components. Matrix and abelian-group
   laws construct the first-weak-pullback cone; its selected factor and the
   monomorphism witness construct the lift's relation witness. The resulting
-  raw/quotient lift and reconstruction agreement implement Posur Construction
-  3.14 without decoding arbitrary truncated paths or adding runtime rules.
+  raw/quotient lift, reconstruction agreement, and raw-competitor uniqueness
+  implement Posur Construction 3.14 without decoding arbitrary truncated
+  paths or adding runtime rules.
 */
 
 require open emdash.emdash3_2_commutative_algebra_freyd_witnessed_preabelian;
@@ -973,3 +974,445 @@ symbol comm_ring_freyd_normal_mono_reconstruction_path
     tau
     (@comm_ring_freyd_normal_mono_reconstruction_agreement
       R W P Q T f m tau a);
+
+// A competing raw lift reconstructing tau determines a cone for the
+// difference from the selected lift.
+symbol comm_ring_freyd_normal_mono_competing_composite_agreement
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@CommRingPresentationMorphismAgreement R T Q
+      (@comm_ring_presentation_morphism_map R T Q
+        (@comm_ring_presentation_morphism_comp R T P Q f k))
+      (@comm_ring_presentation_morphism_map R T Q
+        (@comm_ring_presentation_morphism_comp R T P Q f
+          (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a))))
+≔ @comm_ring_presentation_agreement_trans R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f
+        (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a)))
+    reconstructs
+    (@comm_ring_presentation_agreement_sym R T Q
+      (@comm_ring_presentation_morphism_map R T Q
+        (@comm_ring_presentation_morphism_comp R T P Q f
+          (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a)))
+      (@comm_ring_presentation_morphism_map R T Q tau)
+      (@comm_ring_freyd_normal_mono_reconstruction_agreement
+        R W P Q T f m tau a));
+
+symbol comm_ring_freyd_normal_mono_competing_difference
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  : τ (@CommRingMatrix R
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R T))
+≔ @comm_ring_matrix_sub R
+    (@comm_ring_presentation_generators R P)
+    (@comm_ring_presentation_generators R T)
+    (@comm_ring_presentation_morphism_map R T P k)
+    (@comm_ring_freyd_normal_mono_lift_map R P Q T f tau a);
+
+symbol comm_ring_freyd_normal_mono_competing_witness
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@CommRingMatrix R
+      (@comm_ring_presentation_relations R Q)
+      (@comm_ring_presentation_generators R T))
+≔ @comm_ring_presentation_agreement_witness R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f
+        (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a)))
+    (@comm_ring_freyd_normal_mono_competing_composite_agreement
+      R W P Q T f m tau a k reconstructs);
+
+symbol comm_ring_freyd_normal_mono_competing_compatibility_path
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@= (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R T))
+      (@comm_ring_matrix_comp R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_presentation_morphism_map R P Q f)
+        (@comm_ring_freyd_normal_mono_competing_difference
+          R W P Q T f m tau a k))
+      (@comm_ring_matrix_comp R
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_relations R Q)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_presentation_matrix R Q)
+        (@comm_ring_freyd_normal_mono_competing_witness
+          R W P Q T f m tau a k reconstructs)))
+≔ @eq_trans _ _ _ _
+    (@comm_ring_matrix_comp_sub_right_path R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R T)
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_presentation_morphism_map R T P k)
+      (@comm_ring_freyd_normal_mono_lift_map R P Q T f tau a))
+    (@eq_sym _ _ _
+      (@comm_ring_presentation_agreement_law R T Q
+        (@comm_ring_presentation_morphism_map R T Q
+          (@comm_ring_presentation_morphism_comp R T P Q f k))
+        (@comm_ring_presentation_morphism_map R T Q
+          (@comm_ring_presentation_morphism_comp R T P Q f
+            (@comm_ring_freyd_normal_mono_lift_raw
+              R W P Q T f m tau a)))
+        (@comm_ring_freyd_normal_mono_competing_composite_agreement
+          R W P Q T f m tau a k reconstructs)));
+
+symbol comm_ring_freyd_normal_mono_competing_generic_compatibility_path
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@= (@CommRingMatrix R
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_generators R T))
+      (@comp_fapp0 (@CommRingFiniteFree_cat R)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_morphism_map R P Q f)
+        (@comm_ring_freyd_normal_mono_competing_difference
+          R W P Q T f m tau a k))
+      (@comp_fapp0 (@CommRingFiniteFree_cat R)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_presentation_relations R Q)
+        (@comm_ring_presentation_generators R Q)
+        (@comm_ring_presentation_matrix R Q)
+        (@comm_ring_freyd_normal_mono_competing_witness
+          R W P Q T f m tau a k reconstructs)))
+≔ @eq_trans _ _ _ _
+    (@comm_ring_finite_free_comp_fapp0_transparent_path R
+      (@comm_ring_presentation_generators R T)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_freyd_normal_mono_competing_difference
+        R W P Q T f m tau a k))
+    (@eq_trans _ _ _ _
+      (@comm_ring_freyd_normal_mono_competing_compatibility_path
+        R W P Q T f m tau a k reconstructs)
+      (@eq_sym _ _ _
+        (@comm_ring_finite_free_comp_fapp0_transparent_path R
+          (@comm_ring_presentation_generators R T)
+          (@comm_ring_presentation_relations R Q)
+          (@comm_ring_presentation_generators R Q)
+          (@comm_ring_presentation_matrix R Q)
+          (@comm_ring_freyd_normal_mono_competing_witness
+            R W P Q T f m tau a k reconstructs))));
+
+symbol comm_ring_freyd_normal_mono_competing_cone
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@WeakPullbackCone
+      (@CommRingFiniteFree_cat R)
+      (@comm_ring_finite_free_direct_sum_func R)
+      zero (@comm_ring_finite_free_additive R)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_relations R Q)
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_presentation_matrix R Q)
+      (@comm_ring_presentation_generators R T))
+≔ @weak_pullback_cone_intro
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_direct_sum_func R)
+    zero (@comm_ring_finite_free_additive R)
+    (@comm_ring_presentation_generators R P)
+    (@comm_ring_presentation_generators R Q)
+    (@comm_ring_presentation_relations R Q)
+    (@comm_ring_presentation_generators R T)
+    (@comm_ring_presentation_morphism_map R P Q f)
+    (@comm_ring_presentation_matrix R Q)
+    (@comm_ring_freyd_normal_mono_competing_difference
+      R W P Q T f m tau a k)
+    (@comm_ring_freyd_normal_mono_competing_witness
+      R W P Q T f m tau a k reconstructs)
+    (@comm_ring_freyd_normal_mono_competing_generic_compatibility_path
+      R W P Q T f m tau a k reconstructs);
+
+symbol comm_ring_freyd_normal_mono_competing_factor
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@CommRingMatrix R
+      (@comm_ring_freyd_kernel_first_object R W P Q f)
+      (@comm_ring_presentation_generators R T))
+≔ @computational_weak_pullback_lift
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_direct_sum_func R)
+    zero (@comm_ring_finite_free_additive R)
+    (@comm_ring_presentation_generators R P)
+    (@comm_ring_presentation_generators R Q)
+    (@comm_ring_presentation_relations R Q)
+    (@comm_ring_presentation_morphism_map R P Q f)
+    (@comm_ring_presentation_matrix R Q)
+    (@comm_ring_freyd_kernel_first_weak_pullback R W P Q f)
+    (@comm_ring_presentation_generators R T)
+    (@comm_ring_freyd_normal_mono_competing_cone
+      R W P Q T f m tau a k reconstructs);
+
+symbol comm_ring_freyd_normal_mono_competing_factor_proj1_path
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@= (@CommRingMatrix R
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R T))
+      (@comm_ring_matrix_comp R
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_freyd_kernel_first_object R W P Q f)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_freyd_kernel_first_proj1 R W P Q f)
+        (@comm_ring_freyd_normal_mono_competing_factor
+          R W P Q T f m tau a k reconstructs))
+      (@comm_ring_freyd_normal_mono_competing_difference
+        R W P Q T f m tau a k))
+≔ @eq_trans _ _ _ _
+    (@eq_sym _ _ _
+      (@comm_ring_finite_free_comp_fapp0_transparent_path R
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_freyd_kernel_first_object R W P Q f)
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_freyd_kernel_first_proj1 R W P Q f)
+        (@comm_ring_freyd_normal_mono_competing_factor
+          R W P Q T f m tau a k reconstructs)))
+    (@computational_weak_pullback_lift_proj1_path
+      (@CommRingFiniteFree_cat R)
+      (@comm_ring_finite_free_direct_sum_func R)
+      zero (@comm_ring_finite_free_additive R)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R Q)
+      (@comm_ring_presentation_relations R Q)
+      (@comm_ring_presentation_morphism_map R P Q f)
+      (@comm_ring_presentation_matrix R Q)
+      (@comm_ring_freyd_kernel_first_weak_pullback R W P Q f)
+      (@comm_ring_presentation_generators R T)
+      (@comm_ring_freyd_normal_mono_competing_cone
+        R W P Q T f m tau a k reconstructs));
+
+symbol comm_ring_freyd_normal_mono_uniqueness_witness
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@CommRingMatrix R
+      (@comm_ring_presentation_relations R P)
+      (@comm_ring_presentation_generators R T))
+≔ @comm_ring_matrix_comp R
+    (@comm_ring_presentation_relations R P)
+    (@comm_ring_freyd_kernel_first_object R W P Q f)
+    (@comm_ring_presentation_generators R T)
+    (@comm_ring_freyd_monomorphism_sigma R W P Q f m)
+    (@comm_ring_freyd_normal_mono_competing_factor
+      R W P Q T f m tau a k reconstructs);
+
+symbol comm_ring_freyd_normal_mono_uniqueness_witness_path
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@= (@CommRingMatrix R
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_generators R T))
+      (@comm_ring_matrix_comp R
+        (@comm_ring_presentation_generators R P)
+        (@comm_ring_presentation_relations R P)
+        (@comm_ring_presentation_generators R T)
+        (@comm_ring_presentation_matrix R P)
+        (@comm_ring_freyd_normal_mono_uniqueness_witness
+          R W P Q T f m tau a k reconstructs))
+      (@comm_ring_freyd_normal_mono_competing_difference
+        R W P Q T f m tau a k))
+≔ @eq_trans _ _ _ _
+    (@comm_ring_matrix_comp_assoc_path R
+      (@comm_ring_presentation_generators R T)
+      (@comm_ring_freyd_kernel_first_object R W P Q f)
+      (@comm_ring_presentation_relations R P)
+      (@comm_ring_presentation_generators R P)
+      (@comm_ring_presentation_matrix R P)
+      (@comm_ring_freyd_monomorphism_sigma R W P Q f m)
+      (@comm_ring_freyd_normal_mono_competing_factor
+        R W P Q T f m tau a k reconstructs))
+    (@eq_trans _ _ _ _
+      (@eq_ap _ _
+        (λ z : τ (@CommRingMatrix R
+            (@comm_ring_presentation_generators R P)
+            (@comm_ring_freyd_kernel_first_object R W P Q f)),
+          @comm_ring_matrix_comp R
+            (@comm_ring_presentation_generators R P)
+            (@comm_ring_freyd_kernel_first_object R W P Q f)
+            (@comm_ring_presentation_generators R T) z
+            (@comm_ring_freyd_normal_mono_competing_factor
+              R W P Q T f m tau a k reconstructs))
+        _ _ (@comm_ring_freyd_monomorphism_sigma_path R W P Q f m))
+      (@comm_ring_freyd_normal_mono_competing_factor_proj1_path
+        R W P Q T f m tau a k reconstructs));
+
+symbol comm_ring_freyd_normal_mono_uniqueness_agreement
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@CommRingPresentationMorphismAgreement R T P
+      (@comm_ring_presentation_morphism_map R T P k)
+      (@comm_ring_presentation_morphism_map R T P
+        (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a)))
+≔ @comm_ring_presentation_morphism_agreement_intro R T P
+    (@comm_ring_presentation_morphism_map R T P k)
+    (@comm_ring_presentation_morphism_map R T P
+      (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a))
+    (@comm_ring_freyd_normal_mono_uniqueness_witness
+      R W P Q T f m tau a k reconstructs)
+    (@comm_ring_freyd_normal_mono_uniqueness_witness_path
+      R W P Q T f m tau a k reconstructs);
+
+symbol comm_ring_freyd_normal_mono_uniqueness_path
+  [R : τ CommRing]
+  (W : τ (@HasComputationalWeakKernels
+    (@CommRingFiniteFree_cat R)
+    (@comm_ring_finite_free_preadditive R)))
+  [P Q T : τ (@CommRingPresentation R)]
+  [f : τ (@CommRingPresentationMorphism R P Q)]
+  (m : τ (@CommRingFreydMonomorphismWitness R W P Q f))
+  [tau : τ (@CommRingPresentationMorphism R T Q)]
+  (a : τ (@CommRingFreydNormalMonoTestAgreement R P Q T f tau))
+  (k : τ (@CommRingPresentationMorphism R T P))
+  (reconstructs : τ (@CommRingPresentationMorphismAgreement R T Q
+    (@comm_ring_presentation_morphism_map R T Q
+      (@comm_ring_presentation_morphism_comp R T P Q f k))
+    (@comm_ring_presentation_morphism_map R T Q tau)))
+  : τ (@= (@CommRingFreydHomSet R T P)
+      (@comm_ring_freyd_hom_class R T P k)
+      (@comm_ring_freyd_normal_mono_lift R W P Q T f m tau a))
+≔ @comm_ring_freyd_agreement_path R T P k
+    (@comm_ring_freyd_normal_mono_lift_raw R W P Q T f m tau a)
+    (@comm_ring_freyd_normal_mono_uniqueness_agreement
+      R W P Q T f m tau a k reconstructs);
