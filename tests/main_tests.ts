@@ -287,6 +287,7 @@ import './v3_2_algebra_polynomial_bounded_complex_category_tests';
 import './v3_2_algebra_polynomial_freyd_category_tests';
 import './v3_2_algebra_polynomial_freyd_cokernel_tests';
 import './v3_2_algebra_polynomial_freyd_kernel_tests';
+import './v3_2_algebra_polynomial_freyd_fiber_product_pushout_tests';
 import './v3_2_algebra_polynomial_freyd_preabelian_category_tests';
 import './v3_2_algebra_polynomial_freyd_normality_tests';
 import './v3_2_algebra_polynomial_freyd_images_tests';

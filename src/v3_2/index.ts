@@ -47,6 +47,8 @@ export * from './algebra_polynomial_bounded_complex_category';
 export * from './algebra_polynomial_freyd_category';
 export * from './algebra_polynomial_freyd_cokernel';
 export * from './algebra_polynomial_freyd_kernel';
+export * from './algebra_polynomial_freyd_fiber_product';
+export * from './algebra_polynomial_freyd_pushout';
 export * from './algebra_polynomial_freyd_preabelian_category';
 export * from './algebra_polynomial_freyd_normality';
 export * from './algebra_polynomial_freyd_images';

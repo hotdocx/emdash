@@ -583,8 +583,9 @@ monomorphism.
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
-| `ASC-PLAN-0` | in progress | baseline `4036ef47` | living plan, isolated branch/worktree, preparatory integration evidence, scope/Git boundary, persistent goal |
-| `ASC-AUDIT-1` | pending | active formal/native/category/proof–CAS owners and CAP source | exact owner and endpoint matrix, focused baselines, operation dependencies, rejection signals |
+| `ASC-PLAN-0` | complete; checkpoint `8cb81eaf` | baseline `4036ef47` | living plan, isolated branch/worktree, preparatory integration evidence, scope/Git boundary, persistent goal |
+| `ASC-AUDIT-1` | complete; checkpoint pending | active formal/native/category/proof–CAS owners and CAP source | exact owner and endpoint matrix, focused baselines, operation dependencies, rejection signals |
+| `ASC-NATIVE-SQUARES-1A` | implementation green; checkpoint pending | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
 | `ASC-FIBER-2` | pending | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
 | `ASC-PUSHOUT-3` | pending | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
