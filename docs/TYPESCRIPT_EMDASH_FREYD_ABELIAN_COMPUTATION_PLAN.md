@@ -552,8 +552,8 @@ Refine or reject a candidate when it:
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
-| `FAB-PLAN-0` | active | baseline `7c537a6b` | living plan, isolated branch/worktree, fast-forward evidence, Git/scope boundary, persistent goal |
-| `FAB-AUDIT-1` | blocked on plan checkpoint | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
+| `FAB-PLAN-0` | complete; checkpoint `002f7540` | baseline `7c537a6b` | living plan, isolated branch/worktree, fast-forward evidence, Git/scope boundary, persistent goal |
+| `FAB-AUDIT-1` | active | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
 | `FAB-EFFECTIVENESS-2` | blocked on audit; non-blocking for witnessed work | quotient owners | bounded audit of direct quotient elimination; accept only without choice/opaque decoder |
 | `FAB-GENERIC-NORMALITY-3` | blocked on audit | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
 | `FAB-GENERIC-IMAGE-4` | blocked on generic normality | selected kernels/cokernels | derived image/coimage, structural maps, comparison, factorization, comparison inverse under normality |
