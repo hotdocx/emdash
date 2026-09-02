@@ -602,7 +602,7 @@ monomorphism.
 | `ASC-CATEGORY-8` | complete; checkpoint `76bcd9cd` | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | complete; checkpoint `8453edb6` | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
 | `ASC-BRIDGE-10` | complete; checkpoint `4c4b29c9` | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 21 exact selected morphism/agreement claims, with a live Lambdapi consumer |
-| `ASC-DIFFERENTIAL-11` | complete; checkpoint pending | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
+| `ASC-DIFFERENTIAL-11` | complete; checkpoint `c6eee629` | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
 | `ASC-CLOSE-12` | pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
 Rows may be split or reordered when a focused audit refines their dependency
