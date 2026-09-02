@@ -295,6 +295,49 @@ symbol abelian_snake_iota
     (@abelian_snake_gamma C P t Ab A B X D triple)
     (@abelian_snake_gamma_kernel C P t Ab A B X D triple);
 
+// The readable iota observation retains its selected-kernel annihilation.
+symbol abelian_snake_gamma_iota_zero_path
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (@= (Hom C
+      (@computational_kernel_object C
+        (@abelian_stability_preadditive C P t Ab)
+        (@computational_cokernel_object C
+          (@abelian_stability_preadditive C P t Ab) A B
+          (@abelian_snake_delta C
+            (@abelian_stability_preadditive C P t Ab) A B X D triple)
+          (@abelian_snake_delta_cokernel C P t Ab A B X D triple)) D
+        (@abelian_snake_gamma C P t Ab A B X D triple)
+        (@abelian_snake_gamma_kernel C P t Ab A B X D triple)) D)
+      (@comp_fapp0 C _ _ _
+        (@abelian_snake_gamma C P t Ab A B X D triple)
+        (@abelian_snake_iota C P t Ab A B X D triple))
+      (@preadditive_hom_zero C
+        (@abelian_stability_preadditive C P t Ab)
+        (@computational_kernel_object C
+          (@abelian_stability_preadditive C P t Ab)
+          (@computational_cokernel_object C
+            (@abelian_stability_preadditive C P t Ab) A B
+            (@abelian_snake_delta C
+              (@abelian_stability_preadditive C P t Ab) A B X D triple)
+            (@abelian_snake_delta_cokernel C P t Ab A B X D triple)) D
+          (@abelian_snake_gamma C P t Ab A B X D triple)
+          (@abelian_snake_gamma_kernel C P t Ab A B X D triple)) D))
+≔ @computational_kernel_annihilation C
+    (@abelian_stability_preadditive C P t Ab)
+    (@computational_cokernel_object C
+      (@abelian_stability_preadditive C P t Ab) A B
+      (@abelian_snake_delta C
+        (@abelian_stability_preadditive C P t Ab) A B X D triple)
+      (@abelian_snake_delta_cokernel C P t Ab A B X D triple)) D
+    (@abelian_snake_gamma C P t Ab A B X D triple)
+    (@abelian_snake_gamma_kernel C P t Ab A B X D triple);
+
 symbol abelian_snake_lambda_kernel
   [C : Cat]
   [P : τ (Functor (Product_cat C C) C)]

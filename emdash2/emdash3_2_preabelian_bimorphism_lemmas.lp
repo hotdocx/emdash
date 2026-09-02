@@ -472,3 +472,30 @@ symbol preadditive_factorization_left_annihilation_path
           (@comp_fapp0 C Q B T s
             (@comp_fapp0 C Q I B i chi))
           p annihilation)));
+
+// Postcomposition by an arrow that kills a kernel embedding also kills every
+// arrow reconstructed through that embedding.
+symbol kernel_lift_postannihilation_path
+  [C : Cat]
+  (S : τ (@PreadditiveCategory C))
+  [T I B Z : τ (Obj C)]
+  (i : τ (Hom C I B))
+  (lift : τ (Hom C T I))
+  (h : τ (Hom C T B))
+  (q : τ (Hom C B Z))
+  (reconstruction : τ (@= (Hom C T B)
+    (@comp_fapp0 C T I B i lift) h))
+  (annihilation : τ (@= (Hom C I Z)
+    (@comp_fapp0 C I B Z q i)
+    (@preadditive_hom_zero C S I Z)))
+  : τ (@= (Hom C T Z)
+      (@comp_fapp0 C T B Z q h)
+      (@preadditive_hom_zero C S T Z))
+≔ @eq_trans (Hom C T Z) _ _ _
+    (@eq_ap (Hom C T B) (Hom C T Z)
+      (λ x : τ (Hom C T B), @comp_fapp0 C T B Z q x)
+      _ _ (@eq_sym _ _ _ reconstruction))
+    (@eq_trans (Hom C T Z) _ _ _
+      (@comp_assoc C T I B Z q i lift)
+      (@preadditive_precompose_zero_path C S T I Z
+        (@comp_fapp0 C I B Z q i) lift annihilation));

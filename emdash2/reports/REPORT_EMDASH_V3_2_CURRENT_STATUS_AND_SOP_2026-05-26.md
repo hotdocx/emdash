@@ -493,12 +493,33 @@ belongs to the owning implementation plan rather than to standing guidance.
   combinators keep later image calculations at one canonical owner shape.
   The canonical coimage–image consumer is implemented by the dedicated
   Abelian image-bimorphism module.
-- `emdash3_2_abelian_snake_lemma.lp`: active rule-free generic snake spine.
-  One internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
+- `emdash3_2_abelian_snake_lemma.lp`: rule-free generic snake spine. One
+  internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
   path. That path constructs the selected cokernel colift `gamma` and kernel
-  lift `alpha`, their reconstruction paths, and the surrounding selected
-  kernel/cokernel arrows. Fiber/pushout normal tests and the final connecting
-  lift remain the next plan slice; no partial connecting arrow is postulated.
+  lift `alpha`, their reconstruction paths, surrounding kernels/cokernels,
+  the selected fiber product and pushout, epic `p1`, and monic `q2`.
+- `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
+  `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
+  kernel of `p1` forces the second projection into the selected image of
+  `delta`; the cocone consequence makes `q1 o beta` vanish there. This
+  constructs the actual `NormalEpiTest` and selected colift `u`, together with
+  `u o p1 = q1 o beta o p2`.
+- `emdash3_2_abelian_snake_normal_mono_foundation.lp`,
+  `emdash3_2_abelian_snake_normal_mono_test_foundation.lp`, and
+  `emdash3_2_abelian_snake_connecting.lp`: rule-free second normal test and
+  connecting arrow. Fiber compatibility makes `beta o p2` factor through
+  `Ker(lambda)`. Pushout compatibility and `Coker(q2)` annihilation then make
+  the middle arrow vanish after `Coker(q2)`; epic cancellation along `p1`
+  proves the same for `u`. The selected normal-mono lift is the connecting
+  arrow `Ker(gamma) -> Coker(alpha)` and retains its reconstruction through
+  `q2`.
+- `emdash3_2_abelian_snake_connecting_result.lp`: whole snapshot pairing the
+  selected normal-epi and normal-mono factor-space points. Their internal
+  `HFiber` paths retain both final reconstructions, while every earlier whole
+  kernel, cokernel, fiber product, pushout, and cancellation witness remains a
+  named observation of the same input triple. The modules were split at these
+  semantic boundaries to keep each Lambdapi target below 90 seconds, not to
+  cap or postulate computation.
 - `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
   witness-enriched Construction 3.6. It appends the morphism datum to target
   relations, constructs the identity-data projection, and uses an explicit

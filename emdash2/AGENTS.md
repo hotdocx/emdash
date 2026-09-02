@@ -168,11 +168,21 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   contractible universal spaces, and proves monic/epic composition. These
   rule-free lemmas are the active prerequisite for the canonical
   coimage–image bimorphism theorem.
-  `emdash3_2_abelian_snake_lemma.lp` currently owns the rule-free generic
-  snake spine: one triple-zero path constructs the selected `gamma` cokernel
-  colift and `alpha` kernel lift together with their kernels/cokernels. The
-  final fiber/pushout normal-factor tests and connecting arrow remain the
-  active plan row, not postulated fields.
+  `emdash3_2_abelian_snake_lemma.lp` owns the rule-free generic snake spine:
+  one triple-zero path constructs the selected `gamma` cokernel colift and
+  `alpha` kernel lift together with their kernels/cokernels, fiber product,
+  pushout, epic `p1`, and monic `q2`.
+  `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
+  `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
+  the image cocone consequence and select `u` by normal-epi colifting.
+  `emdash3_2_abelian_snake_normal_mono_foundation.lp` and
+  `emdash3_2_abelian_snake_normal_mono_test_foundation.lp` derive the dual
+  lambda-kernel and `Coker(q2)` test. `emdash3_2_abelian_snake_connecting.lp`
+  cancels along epic `p1` and selects the connecting arrow by normal-mono
+  lifting; `emdash3_2_abelian_snake_connecting_result.lp` packages both final
+  universal-factor points and their reconstruction paths. The split follows
+  mathematical owner boundaries and keeps each target below 90 seconds; no
+  test, square, or connecting arrow is postulated.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

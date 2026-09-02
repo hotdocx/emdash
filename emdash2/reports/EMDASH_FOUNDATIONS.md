@@ -3546,6 +3546,35 @@ kernel objects. A short exact triple packages this witness together with
 `IsMonic(i)` and `IsEpic(p)`. The zero composite remains the original internal
 chain-pair fibre, so no second diagram or handwritten square is stored.
 
+The generic Abelian snake construction is now selected by the same universal
+operations. From one composable triple
+`A --delta--> B --beta--> X --lambda--> D` and its triple-zero point,
+cokernel colifting constructs `gamma`, kernel lifting constructs `alpha`, and
+the selected kernels and cokernels provide `iota`, `mu`, `epsilon`, and `pi`.
+The construction then forms the genuine fiber product of `iota` and
+`epsilon`, and the genuine pushout of `mu` and `pi`. Abelian stability proves
+the first projection `p1` epic and the second injection `q2` monic.
+
+Neither normality test is supplied by the caller. For the first, the kernel of
+`p1` makes the second projection an arrow into `Ker(epsilon)`, which is the
+selected image of `delta`. The derived cocone law says that `q1 o beta` kills
+this image, so `q1 o beta o p2` is a valid normal-epi test. Its selected colift
+is `u` with `u o p1 = q1 o beta o p2`. For the second, fiber compatibility
+makes `beta o p2` factor through `Ker(lambda)`. Pushout compatibility and the
+cokernel annihilation of `q2` show that `Coker(q2) o u` becomes zero after
+precomposition by epic `p1`; epic cancellation makes it zero outright. Thus
+`u` is a valid normal-mono test, and its selected lift is the connecting arrow
+`partial : Ker(gamma) -> Coker(alpha)`, with `q2 o partial = u`.
+
+The implementation retains the two final factor-space points as one whole
+result; their `HFiber` components contain both reconstruction paths. All
+earlier kernels, cokernels, fiber products, pushouts, and cancellation
+witnesses remain named observations of the same triple. Several one-way files
+separate these mathematical stages because a single expanded target exceeds
+the bounded checker budget. This is compilation granularity only: it neither
+caps higher structure nor replaces a universal construction by a manual
+diagram or postulate.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

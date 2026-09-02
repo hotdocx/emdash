@@ -592,9 +592,12 @@ monomorphism.
 | `ASC-IMAGE-BIMORPHISM-4A` | complete; checkpoint `ec022ddb` | generic image/coimage comparison | canonical comparison is constructively monic and epic from visible Abelian capabilities, with a public one-capability wrapper and paired bimorphism value |
 | `ASC-BIMORPHISM-LEMMAS-4A1` | complete; checkpoint `e98a5663`; path-combinator extension included in 4A | generic kernels/cokernels and additive cancellation | zero selected kernel implies monic, zero selected cokernel implies epic, both properties compose, and reusable factorization/fiber/pushout annihilation paths retain canonical endpoints |
 | `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
-| `ASC-SNAKE-GENERIC-6` | in progress via 6A | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
+| `ASC-SNAKE-GENERIC-6` | complete; checkpoint pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-SPINE-6A` | complete; checkpoint `aa0d1be4` | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
 | `ASC-SNAKE-SQUARES-6B` | complete; checkpoint `dcaabb1d` | 6A and generic stability | selected `FiberProduct(iota,epsilon)`, `Pushout(mu,pi)`, epic `p1`, and monic `q2` |
+| `ASC-SNAKE-NORMAL-EPI-6C` | complete; checkpoint pending | 6B and pre-Abelian image cocone consequence | derived `NormalEpiTest` for `q1 o beta o p2`, selected `u`, and reconstruction through epic `p1` |
+| `ASC-SNAKE-NORMAL-MONO-6D` | complete; checkpoint pending | 6C, lambda kernel, pushout compatibility, and `Coker(q2)` | derived `NormalMonoTest` for `u`, selected connecting arrow, and reconstruction through monic `q2` |
+| `ASC-SNAKE-RESULT-6E` | complete; checkpoint pending | 6C–6D | whole paired selected-factor result retaining both final `HFiber` reconstruction paths and named access to every earlier whole construction |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
@@ -637,6 +640,9 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-025` | accepted after cancellation-converse probe | Monicity from a zero selected kernel and epicity from a zero selected cokernel are constructive: factor the arbitrary difference through the contractible kernel/cokernel space, replace the structural arrow by zero, and cancel the additive difference. Named cone/factor observations are required to keep endpoint inference rigid. |
 | `D-ASC-026` | accepted after comparison-bimorphism owner audit | The comparison proof must use one literal pre-Abelian owner presentation. Whole-file and downstream probes that compared a canonical coimage with a second transparent reconstruction exceeded 90 seconds without a type error. Passing the pre-Abelian package and its two normality capabilities explicitly keeps the `ComputationalAbelianCategory` constructor visible at stability calls; public one-capability wrappers then check in under 20 seconds. No opacity, unifier, axiom, or weaker theorem is needed. |
 | `D-ASC-027` | refined after the completed dual proof | The full comparison bimorphism is a reusable Abelian foundation, but the snake normal tests need not route through an epic coastriction. The stronger pre-Abelian cone/cocone consequences now derive directly that the coimage projection kills every kernel cone and every cokernel cocone kills the image embedding. The final snake tranche should use these shorter canonical paths while retaining the independently completed comparison theorem. |
+| `D-ASC-028` | accepted after first normal-test construction | `Ker(p1)` and fiber compatibility make `p2` land in the selected image of `delta`; the derived cocone consequence then proves `q1 o beta o p2` annihilates that kernel. This constructs the actual `NormalEpiTest` and selected colift `u`; no epic coastriction, extra exactness field, or manual square is required. |
+| `D-ASC-029` | accepted after second normal-test construction | Fiber compatibility and the selected kernel of `gamma` make `beta o p2` factor through `Ker(lambda)`. Pushout compatibility and `Coker(q2)` annihilation prove the middle arrow zero after `Coker(q2)`. Precomposition with the selected colift equation and cancellation along epic `p1` construct the actual `NormalMonoTest`; its selected lift is the connecting arrow. |
+| `D-ASC-030` | accepted after bounded owner split | A single expanded final target exceeded 90 seconds even though every localized theorem was valid. Splitting first image evidence, first normal colift, lambda-kernel evidence, second cokernel evidence, final lift, and whole snapshot into one-way semantic owners keeps every quiet and warning-enabled target below 90 seconds. This is compilation granularity, not a capped computation, duplicate theory, opacity, unifier, or axiom. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -725,8 +731,7 @@ The second tranche now selects `FiberProduct(iota,epsilon)` and
 `Pushout(mu,pi)` and exposes all four structural arrows. The generic stability
 owners construct epicity of `p1` from the selected cokernel projection
 `epsilon` and monicity of `q2` from the selected kernel embedding `mu`.
-Reviewer assertions check both exact cancellation types. The two normal-factor
-test paths and their selected colift/lift remain the final 6C tranche.
+Reviewer assertions check both exact cancellation types.
 
 The 6C audit first exposed the canonical image/coimage cancellation layer. The
 first prerequisite tranche is implemented in
@@ -769,6 +774,42 @@ selected image embedding, and the coimage projection kills every kernel cone.
 Thus the comparison bimorphism remains a completed reusable Abelian theorem,
 while the snake construction does not introduce a needless coastriction
 detour or accept either normal test as data.
+
+The complete generic connecting construction is now active as a sequence of
+bounded one-way owners. The first foundation selects `Ker(p1)`, proves that
+`p2` restricted to it is annihilated by `epsilon`, and uses the selected image
+factor of `delta`. The arrow `q1 o beta` is constructed as a genuine cokernel
+cocone of `delta`; the generic image-cocone theorem therefore kills that
+factor. The resulting zero path is exactly a `NormalEpiTest` for the middle
+arrow. Normality selects
+
+```text
+u : Ker(gamma) -> Pushout(mu,pi)
+u o p1 = q1 o beta o p2.
+```
+
+For the second test, the kernel law for `iota` and fiber compatibility prove
+`lambda o beta o p2 = 0`. Kernel universality selects the factor through
+`mu : Ker(lambda) -> X`. After applying `Coker(q2)`, pushout compatibility and
+the cokernel annihilation of `q2` make the middle arrow zero. The equation for
+`u` transports this zero path across `p1`; epic cancellation gives
+`Coker(q2) o u = 0`. This is the actual `NormalMonoTest`, so normality selects
+
+```text
+partial : Ker(gamma) -> Coker(alpha)
+q2 o partial = u.
+```
+
+`AbelianSnakeConnectingResult` pairs the selected normal-epi and normal-mono
+factor-space points. Their `HFiber` components retain both displayed paths;
+the earlier kernel, cokernel, fiber-product, pushout, monic, and epic whole
+values remain named observations of the same triple. The implementation adds
+no rule, unifier, opaque equality, diagram record, split assumption, or
+postulated test. A monolithic probe exceeded the uniform 90-second limit, so
+the active files follow the mathematical stages above. Every quiet and
+warning-enabled owner and reviewer target is green and inherits exactly the
+`1,217` critical-pair and `169` replaceable-variable import boundary; strict
+LHS audits report zero rules in the new modules.
 
 ## Baseline And Validation Policy
 

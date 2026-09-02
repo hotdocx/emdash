@@ -404,11 +404,91 @@ symbol computational_image_coannihilates_cocone
             (@preabelian_preadditive C Prod t P) A B f
             (@preabelian_cokernel C Prod t P A B f))
           T
-          (@computational_cokernel_colift C
-            (@preabelian_preadditive C Prod t P)
-            A B f
-            (@preabelian_cokernel C Prod t P A B f)
-            T cone))));
+            (@computational_cokernel_colift C
+              (@preabelian_preadditive C Prod t P)
+              A B f
+              (@preabelian_cokernel C Prod t P A B f)
+              T cone))));
+
+// Every selected factor through Im(f) is killed by every cocone of f.
+symbol computational_image_factor_annihilated_by_cocone
+  [C : Cat]
+  [Prod : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (P : τ (@PreAbelianCategory C Prod t))
+  [A B : τ (Obj C)]
+  (f : τ (Hom C A B))
+  (T : τ (Obj C))
+  (cone : τ (@WeakKernelAnnihilator C
+    (@preabelian_preadditive C Prod t P)
+    B
+    (@computational_cokernel_object C
+      (@preabelian_preadditive C Prod t P) A B f
+      (@preabelian_cokernel C Prod t P A B f))
+    (@computational_cokernel_morphism C
+      (@preabelian_preadditive C Prod t P) A B f
+      (@preabelian_cokernel C Prod t P A B f))
+    T))
+  (U : τ (Obj C))
+  (cocone : τ (@CokernelCoannihilator C
+    (@preabelian_preadditive C Prod t P) A B f U))
+  : τ (@= (Hom C T U)
+      (@comp_fapp0 C _ _ _
+        (@cokernel_coannihilator_arrow C
+          (@preabelian_preadditive C Prod t P) A B f U cocone)
+        (@weak_kernel_annihilator_arrow C
+          (@preabelian_preadditive C Prod t P)
+          B
+          (@computational_cokernel_object C
+            (@preabelian_preadditive C Prod t P) A B f
+            (@preabelian_cokernel C Prod t P A B f))
+          (@computational_cokernel_morphism C
+            (@preabelian_preadditive C Prod t P) A B f
+            (@preabelian_cokernel C Prod t P A B f))
+          T cone))
+      (@preadditive_hom_zero C
+        (@preabelian_preadditive C Prod t P) T U))
+≔ @kernel_lift_postannihilation_path C
+    (@preabelian_preadditive C Prod t P)
+    T
+    (@computational_image_object C Prod t P A B f)
+    B U
+    (@computational_image_embedding C Prod t P A B f)
+    (@computational_kernel_lift C
+      (@preabelian_preadditive C Prod t P)
+      B
+      (@computational_cokernel_object C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      (@computational_cokernel_morphism C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      (@computational_image C Prod t P A B f)
+      T cone)
+    (@weak_kernel_annihilator_arrow C
+      (@preabelian_preadditive C Prod t P)
+      B
+      (@computational_cokernel_object C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      (@computational_cokernel_morphism C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      T cone)
+    (@cokernel_coannihilator_arrow C
+      (@preabelian_preadditive C Prod t P) A B f U cocone)
+    (@computational_kernel_lift_path C
+      (@preabelian_preadditive C Prod t P)
+      B
+      (@computational_cokernel_object C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      (@computational_cokernel_morphism C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_cokernel C Prod t P A B f))
+      (@computational_image C Prod t P A B f)
+      T cone)
+    (@computational_image_coannihilates_cocone C Prod t P A B f U cocone);
 
 // f is coannihilated by its selected kernel.
 symbol coimage_to_target_cone
