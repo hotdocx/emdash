@@ -3614,6 +3614,15 @@ projection coannihilate the source boundary, so the source cokernel constructs
 the induced homology map. The implementation retains every intermediate
 agreement and reconstruction, not merely the final map.
 
+The formal functorial boundary exposes those same intermediate witnesses. A
+chain map stores its two ordinary presentation-square agreements. The
+effective proof-CAS consumer supplies the computed cycles-zero,
+boundary-compatibility, and quotient-zero agreements. Lambdapi uses the first
+to select the target kernel lift and the last to select the source cokernel
+colift; the middle witness is retained with the construction. Thus the
+induced map and its reconstruction are built from universal operations rather
+than introduced as opaque data.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

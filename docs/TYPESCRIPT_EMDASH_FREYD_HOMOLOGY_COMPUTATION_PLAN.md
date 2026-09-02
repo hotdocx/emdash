@@ -341,8 +341,8 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
 | `FH-BOUNDED-6` | complete; checkpoint `3fc20066` | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
 | `FH-FORMAL-7` | complete; checkpoint `d68eb79d` | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
-| `FH-FUNCTORIAL-8` | active; native result and tests pass, formal/operation surfaces pending | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
-| `FH-BRIDGE-9` | blocked on native/formal results | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
+| `FH-FUNCTORIAL-8` | complete; checkpoint pending | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
+| `FH-BRIDGE-9` | ready | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | blocked on native homology | field reference/Singular adapters | non-authoritative comparison without replacing native Freyd data |
 | `FH-CLOSE-11` | blocked on required rows | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
@@ -375,6 +375,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-019` | accepted after bounded Freyd tests | A bounded Freyd complex retains presentation terms, raw differentials, and one full composite-zero agreement per adjacent pair. Degreewise homology supplies zero-presentation endpoint maps and delegates to the one-degree owner. The bounded-free adapter embeds free modules as relation-free presentations without becoming a second homology implementation. |
 | `D-FH-020` | accepted after formal homology implementation | `CommRingFreydWitnessedHomologyAt` stores the selected raw kernel lift, its explicit reconstruction agreement, and the existing witnessed cokernel universal property. `CommRingFreydExactnessAt` is the existing epimorphism-witness type for the stored boundary. Readable quotient paths are derived from agreements; no new formal equality carrier or rule is needed. |
 | `D-FH-021` | accepted after native functorial tests | A one-degree chain map retains both presentation-square agreements. The lower square lets the middle component lift through the target cycle kernel; compatibility with the two boundaries is retained explicitly; the target homology projection then coannihilates the source boundary and descends through the source homology cokernel. Identity and nontrivial scalar consumers compute, while a failed square remains negative data. |
+| `D-FH-022` | accepted after formal functorial implementation | The formal induced-map boundary packages the two chain squares plus three explicit agreements computed by the effective consumer: cycles-zero, boundary compatibility, and quotient-zero. These select the target kernel lift and source cokernel colift; the actual induced map and reconstruction are derived. This is witness enrichment, not a manual or opaque map field. |
 
 ## Implemented Owner Audit
 
@@ -489,6 +490,22 @@ the identity-induced map, a nontrivial scalar action on nonzero homology, a
 retained failed square, and invalid component endpoints. Root typecheck and
 focused lint pass. A formal witness surface and categorical/proof–CAS
 operations remain the active part of `FH-FUNCTORIAL-8`.
+
+The same operation family is registered in the homology category/reference
+model. A whole chain-map node feeds a derived induced-map node, and direct and
+graph results agree under canonical serialization. The induced method records
+kernel-lift and cokernel-colift prerequisites.
+
+`emdash3_2_commutative_algebra_freyd_functorial_homology.lp` provides the
+formal witnessed surface. `CommRingFreydInducedHomologyData` retains the
+computed cycles-zero, boundary-compatibility, and quotient-zero agreements for
+one formally witnessed chain map. Its projections feed the existing target
+kernel lift and source cokernel colift, yielding
+`comm_ring_freyd_induced_homology_map` and its quotient reconstruction path.
+Source and reviewer pass quiet and warning-enabled checks at the unchanged
+`1,392 = 1,223 + 169` warning boundary; no rule or unifier was added, strict
+LHS remains clean, and the refreshed source-metrics health snapshot covers
+431 files.
 
 ## Baseline And Validation Policy
 

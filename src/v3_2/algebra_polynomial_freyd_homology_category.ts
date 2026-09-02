@@ -51,7 +51,14 @@ import {
     algebraPolynomialFreydHomologyAt
 } from './algebra_polynomial_freyd_homology';
 import {
+    AlgebraPolynomialFreydHomologyChainMap,
+    AlgebraPolynomialFreydInducedHomologyMap,
+    algebraPolynomialFreydHomologyChainMap,
+    algebraPolynomialFreydInducedHomologyMap
+} from './algebra_polynomial_freyd_functorial_homology';
+import {
     AlgebraPolynomialFreydChainPairInput,
+    AlgebraPolynomialFreydHomologyChainMapInput,
     AlgebraPolynomialFreydHomologyReferenceOperations,
     algebraPolynomialFreydHomologyReferenceOperations
 } from './algebra_polynomial_freyd_homology_reference_operations';
@@ -85,6 +92,14 @@ export interface AlgebraPolynomialFreydHomologyOperations<
     readonly exactnessAt: CategoryOperation<
         AlgebraPolynomialFreydHomologyAt<P, C, I>,
         AlgebraPolynomialFreydExactnessAt<P, C, I>
+    >;
+    readonly chainMap: CategoryOperation<
+        AlgebraPolynomialFreydHomologyChainMapInput<P, C, I>,
+        AlgebraPolynomialFreydHomologyChainMap<P, C, I>
+    >;
+    readonly inducedHomologyMap: CategoryOperation<
+        AlgebraPolynomialFreydHomologyChainMap<P, C, I>,
+        AlgebraPolynomialFreydInducedHomologyMap<P, C, I>
     >;
 }
 
@@ -138,7 +153,25 @@ export function algebraPolynomialFreydHomologyCategoryModel<
         input: native.exactnessAt.input,
         output: native.exactnessAt.output
     });
-    const operations = Object.freeze({ chainPair, homologyAt, exactnessAt });
+    const chainMap = defineCategoryOperation({
+        id: `${prefix}/chain-map`,
+        revision,
+        input: native.chainMap.input,
+        output: native.chainMap.output
+    });
+    const inducedHomologyMap = defineCategoryOperation({
+        id: `${prefix}/induced-map`,
+        revision,
+        input: native.inducedHomologyMap.input,
+        output: native.inducedHomologyMap.output
+    });
+    const operations = Object.freeze({
+        chainPair,
+        homologyAt,
+        exactnessAt,
+        chainMap,
+        inducedHomologyMap
+    });
     const methods = [
         defineCategoryMethod({
             id: 'algebra.polynomial-freyd-homology.chain-pair.primitive',
@@ -166,6 +199,23 @@ export function algebraPolynomialFreydHomologyCategoryModel<
             kind: 'derived',
             prerequisites: [base.operations.epimorphismWitness],
             execute: algebraPolynomialFreydExactnessAt
+        }),
+        defineCategoryMethod({
+            id: 'algebra.polynomial-freyd-homology.chain-map.primitive',
+            operation: chainMap,
+            kind: 'primitive',
+            execute: algebraPolynomialFreydHomologyChainMap
+        }),
+        defineCategoryMethod({
+            id: 'algebra.polynomial-freyd-homology.induced-map.derived',
+            operation: inducedHomologyMap,
+            kind: 'derived',
+            prerequisites: [
+                base.base.operations.kernelLift,
+                base.base.operations.cokernelColift
+            ],
+            execute: chainMapValue =>
+                algebraPolynomialFreydInducedHomologyMap(chainMapValue)
         })
     ];
     const category = defineComputableCategory({
@@ -188,7 +238,13 @@ export function algebraPolynomialFreydHomologyCategoryModel<
         id: 'category-constructor.polynomial-freyd-homology',
         inputDoctrineId: 'abelian-category',
         outputDoctrineId: 'abelian-category',
-        introducedRoles: ['chain-pair', 'homology-at', 'exactness-at'],
+        introducedRoles: [
+            'chain-pair',
+            'homology-at',
+            'exactness-at',
+            'homology-chain-map',
+            'induced-homology-map'
+        ],
         objectLayer: 'unchanged-polynomial-presentation',
         morphismLayer: 'unchanged-target-factorization-quotient',
         dualConstructorId: 'category-constructor.polynomial-freyd-homology',
@@ -218,6 +274,14 @@ export function algebraPolynomialFreydHomologyCategoryModel<
         {
             categoryOperation: exactnessAt,
             algebraOperation: native.exactnessAt
+        },
+        {
+            categoryOperation: chainMap,
+            algebraOperation: native.chainMap
+        },
+        {
+            categoryOperation: inducedHomologyMap,
+            algebraOperation: native.inducedHomologyMap
         }
     ] as CategoryOperationLowering[]);
     return Object.freeze({ base, category, operations, native, tower, lowerings });

@@ -499,6 +499,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   Readable quotient paths expose boundary reconstruction and homology
   annihilation. Exactness is an explicit boundary epimorphism witness, not an
   image/kernel object equality or a closed ring-wide decision.
+- `emdash3_2_commutative_algebra_freyd_functorial_homology.lp`: rule-free
+  witnessed induced homology maps. A chain map retains both presentation
+  squares; explicit computed cycles-zero, boundary-compatibility, and
+  quotient-zero agreements feed the target kernel lift and source cokernel
+  colift. The resulting map has an explicit reconstruction agreement and
+  quotient path. The module does not decode paths or postulate the induced
+  map.
 - `emdash3_2_commutative_algebra_freyd_images.lp`: rule-free witnessed formal
   image/coimage layer. It derives cokernel-of-kernel coimage,
   kernel-of-cokernel image, their comparison, and `f = i chi p`. Explicit

@@ -11,6 +11,7 @@ import {
     algebraPolynomialModuleMap,
     algebraPolynomialModuleVector,
     algebraPolynomialPresentationMorphism,
+    algebraPolynomialPresentationMorphismIdentity,
     algebraPolynomialRing,
     algebraPolynomialSubmodule,
     algebraPolynomialVariable,
@@ -22,7 +23,9 @@ import {
     executeCategoryOperation,
     planCategoryOperation,
     serializeAlgebraPolynomialFreydExactnessAt,
-    serializeAlgebraPolynomialFreydHomologyAt
+    serializeAlgebraPolynomialFreydHomologyAt,
+    serializeAlgebraPolynomialFreydHomologyChainMap,
+    serializeAlgebraPolynomialFreydInducedHomologyMap
 } from '../src/v3_2';
 
 const fixture = () => {
@@ -163,4 +166,92 @@ describe('v3.2 polynomial Freyd homology category', () => {
             assert.equal(pair.value.isChainPair, true);
             assert.equal(pair.plan.method.kind, 'primitive');
         });
+
+    it('lowers a whole chain-map and induced-homology program', async () => {
+        const value = fixture();
+        const model = algebraPolynomialFreydHomologyCategoryModel(value.ring);
+        const homology = (await executeCategoryOperation(
+            model.category,
+            model.operations.homologyAt,
+            value.pair
+        )).value;
+        const chainMapInput = {
+            source: homology,
+            target: homology,
+            fNext: algebraPolynomialPresentationMorphismIdentity(
+                homology.pair.dNext.source
+            ),
+            f: algebraPolynomialPresentationMorphismIdentity(
+                homology.pair.dNext.target
+            ),
+            fPrev: algebraPolynomialPresentationMorphismIdentity(
+                homology.pair.d.target
+            )
+        };
+        const directChainMap = (await executeCategoryOperation(
+            model.category,
+            model.operations.chainMap,
+            chainMapInput
+        )).value;
+        const directInduced = (await executeCategoryOperation(
+            model.category,
+            model.operations.inducedHomologyMap,
+            directChainMap
+        )).value;
+        const builder = createCategoricalProgramBuilder(
+            'polynomial-freyd-homology.functorial',
+            'v1'
+        );
+        const input = builder.input('chain-map-input',
+            model.operations.chainMap.input);
+        const chainMap = builder.operation(
+            'chain-map',
+            model.operations.chainMap,
+            input
+        );
+        const induced = builder.operation(
+            'induced',
+            model.operations.inducedHomologyMap,
+            chainMap
+        );
+        const compilation = compileAlgebraPolynomialFreydHomologyProgram(
+            model,
+            builder.build([
+                { id: 'chain-map', value: chainMap },
+                { id: 'induced', value: induced }
+            ])
+        );
+        const execution = await executeAlgebraComputationGraph({
+            graph: compilation.graph,
+            engine: createAlgebraPolynomialFreydHomologyEngine(model),
+            inputs: [{ id: 'chain-map-input', value: chainMapInput }]
+        });
+        assert.equal(
+            serializeAlgebraPolynomialFreydHomologyChainMap(
+                execution.outputs[0].value as typeof directChainMap
+            ),
+            serializeAlgebraPolynomialFreydHomologyChainMap(directChainMap)
+        );
+        assert.equal(
+            serializeAlgebraPolynomialFreydInducedHomologyMap(
+                execution.outputs[1].value as typeof directInduced
+            ),
+            serializeAlgebraPolynomialFreydInducedHomologyMap(directInduced)
+        );
+        assert.deepEqual(
+            compilation.nodes.map(node => node.selectedMethodKind),
+            ['primitive', 'derived']
+        );
+        const inducedPlan = planCategoryOperation(
+            model.category.operations,
+            model.operations.inducedHomologyMap
+        );
+        assert.deepEqual(
+            inducedPlan.prerequisites.map(entry => entry.operation.id),
+            [
+                model.base.base.operations.kernelLift.id,
+                model.base.base.operations.cokernelColift.id
+            ]
+        );
+    });
 });

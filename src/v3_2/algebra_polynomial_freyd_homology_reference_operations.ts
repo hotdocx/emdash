@@ -38,6 +38,12 @@ import {
     algebraPolynomialFreydHomologyAt
 } from './algebra_polynomial_freyd_homology';
 import {
+    AlgebraPolynomialFreydHomologyChainMap,
+    AlgebraPolynomialFreydInducedHomologyMap,
+    algebraPolynomialFreydHomologyChainMap,
+    algebraPolynomialFreydInducedHomologyMap
+} from './algebra_polynomial_freyd_functorial_homology';
+import {
     AlgebraReferenceImplementation,
     defineAlgebraReferenceImplementation
 } from './algebra_reference_engine';
@@ -63,6 +69,18 @@ export interface AlgebraPolynomialFreydChainPairInput<
     readonly d: AlgebraPolynomialPresentationMorphism<P, C, I>;
 }
 
+export interface AlgebraPolynomialFreydHomologyChainMapInput<
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+> {
+    readonly source: AlgebraPolynomialFreydHomologyAt<P, C, I>;
+    readonly target: AlgebraPolynomialFreydHomologyAt<P, C, I>;
+    readonly fNext: AlgebraPolynomialPresentationMorphism<P, C, I>;
+    readonly f: AlgebraPolynomialPresentationMorphism<P, C, I>;
+    readonly fPrev: AlgebraPolynomialPresentationMorphism<P, C, I>;
+}
+
 export interface AlgebraPolynomialFreydHomologyReferenceOperations<
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
@@ -81,6 +99,16 @@ export interface AlgebraPolynomialFreydHomologyReferenceOperations<
     readonly exactnessAt: AlgebraOperation<
         AlgebraPolynomialFreydHomologyAt<P, C, I>,
         AlgebraPolynomialFreydExactnessAt<P, C, I>
+    >;
+    readonly chainMapInputSchema:
+        AlgebraRuntimeSchema<AlgebraPolynomialFreydHomologyChainMapInput<P, C, I>>;
+    readonly chainMap: AlgebraOperation<
+        AlgebraPolynomialFreydHomologyChainMapInput<P, C, I>,
+        AlgebraPolynomialFreydHomologyChainMap<P, C, I>
+    >;
+    readonly inducedHomologyMap: AlgebraOperation<
+        AlgebraPolynomialFreydHomologyChainMap<P, C, I>,
+        AlgebraPolynomialFreydInducedHomologyMap<P, C, I>
     >;
     readonly implementations: readonly AlgebraReferenceImplementation[];
 }
@@ -180,6 +208,89 @@ export const serializeAlgebraPolynomialFreydExactnessAt = <
             }
     }, 'polynomialFreydExactnessAt');
 
+export const serializeAlgebraPolynomialFreydHomologyChainMap = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(value: AlgebraPolynomialFreydHomologyChainMap<P, C, I>): string =>
+    serializeCoreLfWorkspaceCanonicalJson({
+        kind: value.kind,
+        source: serializeAlgebraPolynomialFreydHomologyAt(value.source),
+        target: serializeAlgebraPolynomialFreydHomologyAt(value.target),
+        fNext: serializeAlgebraPolynomialPresentationMorphism(value.fNext),
+        f: serializeAlgebraPolynomialPresentationMorphism(value.f),
+        fPrev: serializeAlgebraPolynomialPresentationMorphism(value.fPrev),
+        upperTargetAfterComponent:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.upperTargetAfterComponent
+            ),
+        upperComponentAfterSource:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.upperComponentAfterSource
+            ),
+        upperAgreement:
+            serializeAlgebraPolynomialPresentationAgreement(value.upperAgreement),
+        lowerTargetAfterComponent:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.lowerTargetAfterComponent
+            ),
+        lowerComponentAfterSource:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.lowerComponentAfterSource
+            ),
+        lowerAgreement:
+            serializeAlgebraPolynomialPresentationAgreement(value.lowerAgreement),
+        isChainMap: value.isChainMap
+    }, 'polynomialFreydHomologyChainMap');
+
+export const serializeAlgebraPolynomialFreydInducedHomologyMap = <
+    P extends AlgebraParent,
+    C extends AlgebraElement<P>,
+    I
+>(value: AlgebraPolynomialFreydInducedHomologyMap<P, C, I>): string =>
+    serializeCoreLfWorkspaceCanonicalJson({
+        kind: value.kind,
+        chainMap: serializeAlgebraPolynomialFreydHomologyChainMap(value.chainMap),
+        cyclesTest:
+            serializeAlgebraPolynomialPresentationMorphism(value.cyclesTest),
+        cyclesMorphism:
+            serializeAlgebraPolynomialPresentationMorphism(value.cyclesMorphism),
+        cyclesReconstruction:
+            serializeAlgebraPolynomialPresentationAgreement(
+                value.cyclesReconstruction
+            ),
+        cyclesAfterBoundary:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.cyclesAfterBoundary
+            ),
+        boundaryAfterNext:
+            serializeAlgebraPolynomialPresentationMorphism(value.boundaryAfterNext),
+        boundaryCompatibility:
+            serializeAlgebraPolynomialPresentationAgreement(
+                value.boundaryCompatibility
+            ),
+        quotientTest:
+            serializeAlgebraPolynomialPresentationMorphism(value.quotientTest),
+        sourceBoundaryComposite:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.sourceBoundaryComposite
+            ),
+        sourceBoundaryZero:
+            serializeAlgebraPolynomialPresentationMorphism(
+                value.sourceBoundaryZero
+            ),
+        sourceBoundaryZeroAgreement:
+            serializeAlgebraPolynomialPresentationAgreement(
+                value.sourceBoundaryZeroAgreement
+            ),
+        homologyMap:
+            serializeAlgebraPolynomialPresentationMorphism(value.homologyMap),
+        homologyReconstruction:
+            serializeAlgebraPolynomialPresentationAgreement(
+                value.homologyReconstruction
+            )
+    }, 'polynomialFreydInducedHomologyMap');
+
 const wholeSchema = <T extends { readonly kind: string }>(input: {
     readonly id: string;
     readonly kind: T['kind'];
@@ -250,6 +361,43 @@ export function algebraPolynomialFreydHomologyReferenceOperations<
         ring: selectedRing,
         ringOf: value => value.homology.pair.dNext.source.ambient.ring
     });
+    const chainMapInputSchema = defineAlgebraRuntimeSchema<
+        AlgebraPolynomialFreydHomologyChainMapInput<P, C, I>
+    >({
+        id: `algebra.polynomial-freyd-homology-chain-map-input/` +
+            selectedRing.identity.id,
+        revision,
+        normalize(value: unknown, path: string) {
+            if (!record(value)) {
+                throw new Error(`Freyd homology chain-map input expected at ${path}`);
+            }
+            return Object.freeze({
+                source: homologySchema.normalize(value.source, `${path}.source`),
+                target: homologySchema.normalize(value.target, `${path}.target`),
+                fNext: morphismSchema.normalize(value.fNext, `${path}.fNext`),
+                f: morphismSchema.normalize(value.f, `${path}.f`),
+                fPrev: morphismSchema.normalize(value.fPrev, `${path}.fPrev`)
+            });
+        }
+    });
+    const chainMapSchema = wholeSchema<
+        AlgebraPolynomialFreydHomologyChainMap<P, C, I>
+    >({
+        id: `algebra.polynomial-freyd-homology-chain-map-result/` +
+            selectedRing.identity.id,
+        kind: 'algebra-polynomial-freyd-homology-chain-map',
+        ring: selectedRing,
+        ringOf: value => value.source.pair.dNext.source.ambient.ring
+    });
+    const inducedMapSchema = wholeSchema<
+        AlgebraPolynomialFreydInducedHomologyMap<P, C, I>
+    >({
+        id: `algebra.polynomial-freyd-induced-homology-map-result/` +
+            selectedRing.identity.id,
+        kind: 'algebra-polynomial-freyd-induced-homology-map',
+        ring: selectedRing,
+        ringOf: value => value.chainMap.source.pair.dNext.source.ambient.ring
+    });
     const prefix = `algebra.polynomial-freyd-homology/` +
         selectedRing.identity.id;
     const chainPair = defineAlgebraOperation({
@@ -270,6 +418,18 @@ export function algebraPolynomialFreydHomologyReferenceOperations<
         input: homologySchema,
         output: exactnessSchema
     });
+    const chainMap = defineAlgebraOperation({
+        id: `${prefix}/chain-map`,
+        revision,
+        input: chainMapInputSchema,
+        output: chainMapSchema
+    });
+    const inducedHomologyMap = defineAlgebraOperation({
+        id: `${prefix}/induced-map`,
+        revision,
+        input: chainMapSchema,
+        output: inducedMapSchema
+    });
     const algorithm = (operation: AlgebraOperation<unknown, unknown>) =>
         algebraAlgorithmIdentity(
             `algebra.typescript-reference/${operation.identity.id}`,
@@ -289,11 +449,17 @@ export function algebraPolynomialFreydHomologyReferenceOperations<
         chainPair,
         homologyAt,
         exactnessAt,
+        chainMapInputSchema,
+        chainMap,
+        inducedHomologyMap,
         implementations: Object.freeze([
             implementation(chainPair, input =>
                 algebraPolynomialFreydChainPair(input.dNext, input.d)),
             implementation(homologyAt, algebraPolynomialFreydHomologyAt),
-            implementation(exactnessAt, algebraPolynomialFreydExactnessAt)
+            implementation(exactnessAt, algebraPolynomialFreydExactnessAt),
+            implementation(chainMap, algebraPolynomialFreydHomologyChainMap),
+            implementation(inducedHomologyMap,
+                algebraPolynomialFreydInducedHomologyMap)
         ])
     });
 }

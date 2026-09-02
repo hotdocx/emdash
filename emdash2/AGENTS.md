@@ -116,6 +116,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   reconstruction, and packages the boundary's witnessed cokernel as homology.
   Exactness is the explicit Freyd epimorphism witness for that boundary; no
   quotient-path decoder or image/kernel object equality is assumed.
+  `emdash3_2_commutative_algebra_freyd_functorial_homology.lp` packages the two
+  chain-square agreements and the computed cycles-zero,
+  boundary-compatibility, and quotient-zero agreements. Target kernel lifting
+  and source cokernel colifting then construct the induced homology map and
+  reconstruction; the auxiliary agreements are explicit proof-CAS data, not
+  opaque map postulates.
   `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
   cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
   factorization. Given explicit comparison monic/epic agreements, it computes
