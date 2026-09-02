@@ -468,6 +468,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   weak-pullback factor, composes with the kernel-zero witness, and returns a
   raw/quotient lift with explicit reconstruction agreement. Raw-competitor
   uniqueness is not yet claimed by this module.
+- `emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp`: rule-free
+  witness-enriched Construction 3.15 through the relation-preserving colift.
+  It splits the cokernel-projection-zero witness into the published identity
+  decomposition, constructs a first weak-pullback cone after target
+  relations, and composes the test kernel-zero witness with the selected
+  factor to obtain a checked raw/quotient colift. Quotient reconstruction and
+  raw-competitor uniqueness remain explicit downstream obligations.
 - The operational field-polynomial Freyd provider now implements Posur's
   normal mono/epi constructions with retained agreement witnesses, derives
   image/coimage and the comparison inverse, and qualifies against the complete

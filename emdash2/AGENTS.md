@@ -94,6 +94,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   explicitly monic and epic arrow using the normal-monomorphism lift of the
   codomain identity; it specializes to the canonical comparison when that
   bimorphism evidence is supplied.
+  `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` and
+  `emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp` are the
+  rule-free witnessed formal Construction 3.14/3.15 owners. The former
+  supplies the relation-preserving lift and quotient reconstruction; the
+  latter presently supplies the relation-preserving raw/quotient colift.
+  Raw-competitor uniqueness, and epimorphism reconstruction, remain explicit
+  downstream obligations rather than consequences of truncated quotient
+  equality.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its

@@ -561,7 +561,7 @@ Refine or reject a candidate when it:
 | `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | active; reconstruction-complete checkpoint pending; raw-competitor uniqueness remains | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
-| `FAB-EPI-FORMAL-6B` | active after formal mono orientation | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
+| `FAB-EPI-FORMAL-6B` | active; relation-preserving raw colift checkpoint pending; reconstruction/uniqueness remain | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
@@ -603,6 +603,7 @@ prerequisite.
 | `D-FAB-023` | accepted after category-provider tests | `ABELIAN_DOCTRINE` requires 14 normality/image roles in addition to inherited pre-Abelian roles. The field-polynomial Freyd provider qualifies only when witness, lift/colift, whole image/coimage, all structural observations, comparison, and isomorphism are plannable and executable. |
 | `D-FAB-024` | accepted after balancedness probe | In a `ComputationalAbelianCategory`, an explicitly monic and epic arrow is constructively invertible: epicity makes its cokernel projection zero, so the codomain identity is a normal-mono test; its lift is a right inverse and monic cancellation gives the left law. The result is the existing `IsoEvidence`, including for the canonical comparison when its bimorphism evidence is supplied. |
 | `D-FAB-025` | accepted after formal Construction 3.14 probe | The formal test agreement splits by the existing matrix projections. Its block equation, generic abelian subtraction lemmas, and transparent/generic matrix comparisons construct the first weak-pullback cone. The selected factor after the kernel-zero witness is the lift relation witness; an explicit negative upper block proves quotient reconstruction. No path decoder or runtime rule is used. |
+| `D-FAB-026` | accepted after formal Construction 3.15 relation probe | The cokernel-projection-zero agreement splits into the published identity decomposition. Precomposition with target relations and abelian subtraction construct the first weak-pullback cone. The test kernel-zero agreement after its selected factor is the relation witness for the colift datum `tau o sigma_A`. Reconstruction and uniqueness remain explicit downstream proof obligations. |
 
 ## Implemented Generic Normality Layer
 
@@ -761,6 +762,28 @@ reviewer checks pass. Raw-competitor uniqueness is the remaining part of
 `FAB-MONO-FORMAL-5B`; this checkpoint does not prematurely call the row
 complete. The source and reviewer are registered, strict LHS remains clean,
 and the source-metrics health snapshot covers 419 files.
+
+## Implemented Formal Normal-Epimorphism Relation Data
+
+`emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp` implements the
+relation-preserving core of published Construction 3.15. A
+`CommRingFreydEpimorphismWitness` is the explicit agreement making the
+selected cokernel projection zero. Its projected upper and lower blocks obey
+the formal identity decomposition.
+
+After precomposition with target relations, generic abelian subtraction
+constructs the pair `sigma_A o R_Q` and
+`id - sigma_RQ o R_Q`. This pair forms an internal first-weak-pullback cone.
+The test kernel-zero agreement composed with its selected factor is the
+expected relation witness of `tau o sigma_A`, so the module returns a checked
+raw presentation colift and its quotient class.
+
+The source is rule-free and source/reviewer/warning checks pass. Quotient
+reconstruction and raw-competitor uniqueness remain active work in
+`FAB-EPI-FORMAL-6B`; they are not inferred merely from the well-formed colift.
+Its warning inventory is neutral at
+`1,392 = 1,223 critical pairs + 169 replaceable variables`, strict LHS remains
+clean, and the refreshed source-metrics health snapshot covers 421 files.
 
 ## Validation Matrix
 

@@ -3493,6 +3493,16 @@ agreement witness, yielding equality in the Freyd Hom. This is a genuine
 formal Construction 3.14 through reconstruction, while raw-competitor
 uniqueness remains a separately named unfinished layer.
 
+The formal normal-epimorphism construction is its witness-rich Construction
+3.15 counterpart. An explicit cokernel-projection-zero agreement splits into
+the identity decomposition `R_Q sigma_RQ + F sigma_A = id`. Precomposition
+with the target relations and abelian subtraction form a first weak-pullback
+cone. Composing the test's kernel-zero agreement with the selected factor
+supplies the relation witness for the raw colift `tau sigma_A`; its quotient
+class is therefore well-defined without decoding a truncated equality.
+Quotient reconstruction and raw-competitor uniqueness remain named proof
+obligations rather than consequences of well-formedness alone.
+
 The native image/coimage operation then applies those normality algorithms to
 the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
 classify the comparison as monic and epic. Lifting the image identity through
