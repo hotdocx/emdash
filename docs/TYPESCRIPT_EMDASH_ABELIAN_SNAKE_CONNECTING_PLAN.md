@@ -4,7 +4,7 @@ Date: 2026-09-02
 
 Plan-ID: `TS-EMDASH-ABELIAN-SNAKE-CONNECTING`
 
-Status: active on a dedicated branch/worktree
+Status: complete on the dedicated branch/worktree; closure checkpoint pending
 
 Baseline: `4036ef47be6c3f82dcac05c257c98b2201c101d7`
 
@@ -603,7 +603,7 @@ monomorphism.
 | `ASC-FORMAL-9` | complete; checkpoint `8453edb6` | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
 | `ASC-BRIDGE-10` | complete; checkpoints `4c4b29c9`, `85ef620b` | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 25 exact selected morphism/agreement claims, including both projection and both injection reconstructions, with a live Lambdapi consumer |
 | `ASC-DIFFERENTIAL-11` | complete; checkpoint `c6eee629` | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
-| `ASC-CLOSE-12` | pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
+| `ASC-CLOSE-12` | complete; closure checkpoint pending | all required rows | authorities, focused warning/LHS/catalog/TOC and TypeScript/Lambdapi evidence synchronized; repository-wide health regeneration explicitly deferred by `D-ASC-019`/`D-ASC-035`; successor boundary recorded |
 
 Rows may be split or reordered when a focused audit refines their dependency
 graph. A row may be rejected or deferred only with durable evidence and a
@@ -647,6 +647,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-032` | accepted after witnessed formal consumer | The formal Freyd boundary takes the effective `p1`/`q2` arrows, their explicit epic/monic witnesses, and the two normal-test agreements as proof-CAS inputs. Existing witnessed Posur normality constructs raw/quotient `u` and connecting arrows plus both reconstruction agreements/paths. This is the maximal current formal construction without inventing formal fiber/pushout matrix owners or decoding arbitrary truncated paths. |
 | `D-ASC-033` | accepted after proof-CAS replay | One adapter family replays the complete native snake operation and adopts 25 selected morphism/agreement claims only when canonical whole-result serialization is unchanged. It covers the triple zero, all four kernel/cokernel stages, fiber/pushout compatibility, both projection reconstructions, both injection reconstructions, epic/monic witnesses, both normal tests, `u`, the connecting morphism, and both final reconstructions. Wrong-goal drift is rejected and one generated live Lambdapi probe checks all claims. |
 | `D-ASC-034` | accepted after constant-field differential | The independent field CAP implementation performs the same cokernel-colift, kernel-lift, fiber-product kernel, pushout cokernel, right-inverse colift, and left-inverse lift over rational quotient coordinates. CAP's displayed polynomial representative is the 2-by-2 matrix `[[0,0],[0,-1]]`, while canonical quotient coordinates give the 1-by-1 matrix `[[-1]]`; the differential checks both facts separately and compares the induced polynomial map with the field map. |
+| `D-ASC-035` | accepted at closure | The generated health report is intentionally not rewritten. Its recorded source snapshot `d5f2c644...` differs from the current `409590ec...`; `--no-check --check-report` records that fact. The only permitted full refresh would recheck 455 files and is excluded by the user's proportional-validation instruction, while `D-ASC-019` already records that the prior invalidated rebuild reached the same unrelated `examples/dependent_simplex_faces.lp` failure on both this branch and clean `main`. Source registries, catalog, TOC, every new owner/reviewer, warning boundaries, and strict LHS audits are current. This is an explicit orthogonal prerequisite, not hidden green health evidence. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -961,6 +962,55 @@ Refine or reject a candidate when it:
 - introduces a snake-specific categorical AST instead of the retained IR;
 - adds broad hot-head runtime rewrites; or
 - depends on an unrelated or orthogonal worktree.
+
+## Completion Audit — 2026-09-02
+
+The scoped implementation boundary is complete.
+
+- Generic Lambdapi owners derive genuine fiber products and pushouts,
+  stability, witness-rich short exactness, the canonical image comparison
+  bimorphism, both snake normal tests, `u`, the connecting arrow, and the
+  paired final factor-space result. No snake-specific rule or unifier was
+  added.
+- The formal Freyd owner consumes explicit effective epic/monic and normal-test
+  agreements and constructs raw/quotient `u` and connecting arrows with both
+  reconstruction agreements/paths. It does not claim a closed formal Abelian
+  instance or quotient-path decoder.
+- Quiet and warning-enabled checks pass for every new generic owner and
+  reviewer. Their warning streams remain the inherited `1,217` critical-pair
+  and `169` replaceable-variable boundary. The witnessed formal owner and
+  reviewer remain at their inherited `1,223`/`169` boundary. Strict LHS audits
+  report zero clauses because these modules add no rules.
+- `make catalog`, strict catalog checking, and `make toc` pass after source
+  registration. The source TOC remains 87 headings across sections 0–20.
+- The final proportional TypeScript gate passes workspace validation, full
+  typecheck, targeted lint, and 28 focused tests across native universal
+  constructions, the inherited Abelian/formal boundary, snake execution,
+  categorical lowering, proof–CAS replay, and the constant-field differential
+  (`26` passed, with the two opt-in live probes skipped). The subsequent
+  reconstruction-completion slice passes its 12 ordinary affected tests, and
+  the separately enabled five-test proof–CAS run passes the live probe as
+  well. No complete TypeScript or repository aggregate was run.
+- The proof–CAS bundle validates, replays, and adopts 25 selected claims,
+  rejects goal drift, and passes one generated live Lambdapi probe with all 25
+  claims.
+- The independent rational CAP differential checks the displayed 2-by-2 raw
+  representative and equality of the induced 1-by-1 quotient map.
+- The worktree contains only local checkpoint history on
+  `goal/abelian-snake-connecting-v3.2`; no push, merge, publication, rebase,
+  reset, branch deletion, or orthogonal cubical/strictness integration was
+  performed.
+
+The generated repository-wide health report remains intentionally stale under
+`D-ASC-019` and `D-ASC-035`. Its regeneration is deferred until the unrelated
+dependent-simplex baseline failure is repaired and a future integration scope
+authorizes a 455-file aggregate. No completion claim relies on that stale
+report.
+
+The natural successor is the long exact homology sequence: assemble adjacent
+generic connecting arrows from this whole result and prove exactness term by
+term using the already selected bounded-homology and exactness owners. That is
+outside this goal.
 
 ## Completion Boundary
 
