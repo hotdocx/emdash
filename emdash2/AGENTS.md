@@ -106,6 +106,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `CommRingFreydWitnessedAbelian` value is capability-indexed by finite-free
   weak kernels and explicit raw agreements; it is not the stronger closed
   `ComputationalAbelianCategory` value.
+  `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
+  cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
+  factorization. Given explicit comparison monic/epic agreements, it computes
+  both normality inverse candidates and packages their derived inverse laws as
+  `IsoEvidence`; it does not take an isomorphism as data.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its

@@ -3521,6 +3521,17 @@ finite-free weak-kernel capability `W`, while honestly stopping short of a
 closed `ComputationalAbelianCategory` whose quantifiers would accept arbitrary
 truncated quotient paths.
 
+The witnessed formal image/coimage layer then repeats the generic construction
+using the concrete selected owners: `Coim(f)` is the cokernel of the formal
+kernel embedding, `Im(f)` the kernel of the formal cokernel projection, and
+the comparison is the kernel lift of the cokernel colift. Their retained raw
+agreements prove `f = i chi p`. Effective consumers can additionally supply
+the comparison's explicit kernel-zero and cokernel-projection-zero agreements.
+Those are bimorphism evidence, not an isomorphism assertion: the formal
+Construction 3.14/3.15 algorithms compute two inverse candidates, ordinary
+categorical composition proves they agree, and the resulting inverse laws
+construct `IsoEvidence`.
+
 The native image/coimage operation then applies those normality algorithms to
 the canonical comparison itself. Its kernel-zero and cokernel-zero agreements
 classify the comparison as monic and epic. Lifting the image identity through

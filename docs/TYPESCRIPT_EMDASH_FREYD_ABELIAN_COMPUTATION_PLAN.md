@@ -563,7 +563,7 @@ Refine or reject a candidate when it:
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | complete; checkpoints `b469a6a9`, `2720998e`, `b4b4de93` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
-| `FAB-IMAGE-FORMAL-7B` | ready after witnessed Abelian package | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
+| `FAB-IMAGE-FORMAL-7B` | complete; checkpoint pending | formal witnessed normality | witnessed image/coimage comparison, factorization, and derived inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
@@ -606,6 +606,7 @@ prerequisite.
 | `D-FAB-026` | accepted after formal Construction 3.15 relation probe | The cokernel-projection-zero agreement splits into the published identity decomposition. Precomposition with target relations and abelian subtraction construct the first weak-pullback cone. The test kernel-zero agreement after its selected factor is the relation witness for the colift datum `tau o sigma_A`. Reconstruction and uniqueness remain explicit downstream proof obligations. |
 | `D-FAB-027` | accepted after formal normality completion | Monomorphism uniqueness factors the difference of a competitor and the selected lift through the first weak pullback, then uses the kernel-zero witness as its quotient agreement. Epimorphism uniqueness reconstructs the competitor difference from its relation component and the source-composite agreement by the split identity `R_Q sigma_RQ + F sigma_A = id`. Both proofs retain raw agreement witnesses and require no quotient-path decoder. |
 | `D-FAB-028` | accepted after formal package construction | The formal result is `CommRingFreydWitnessedAbelian(R,W)`: one witnessed pre-Abelian package plus capability families indexed by explicit monomorphism, epimorphism, and test agreements. It is constructible for every supplied weak-kernel capability. It deliberately does not masquerade as the stronger closed `ComputationalAbelianCategory`, whose arbitrary quotient-path inputs remain ineffective. |
+| `D-FAB-029` | accepted after witnessed formal image construction | Formal coimage and image are the selected cokernel-of-kernel and kernel-of-cokernel. Existing colift/lift agreements construct the comparison and `f = i chi p`. `CommRingFreydComparisonBimorphismWitness` retains the explicit comparison monic/epic agreements produced by the native/proof-CAS consumer; from these, Constructions 3.14/3.15 compute two inverse candidates, categorical composition proves they coincide, and the selected inverse yields `IsoEvidence`. The isomorphism itself is not an input. |
 
 ## Implemented Generic Normality Layer
 
@@ -822,6 +823,28 @@ source/reviewer checks pass.
 Its warning inventory is neutral at
 `1,392 = 1,223 critical pairs + 169 replaceable variables`, strict LHS remains
 clean, and the refreshed source-metrics health snapshot covers 423 files.
+
+## Implemented Witnessed Formal Image And Coimage
+
+`emdash3_2_commutative_algebra_freyd_images.lp` derives the formal coimage as
+the selected cokernel of the selected kernel embedding and the formal image as
+the selected kernel of the selected cokernel projection. The cokernel colift
+constructs the coastriction; its retained annihilation agreement feeds the
+kernel lift that constructs the comparison. Precomposition of the kernel
+reconstruction agreement followed by cokernel reconstruction gives the raw
+and quotient factorization `f = i chi p`.
+
+At the witness boundary,
+`CommRingFreydComparisonBimorphismWitness` stores the comparison's explicit
+kernel-zero and cokernel-projection-zero agreements. It is intended to be
+constructed by the effective native/proof-CAS consumer, not assumed as an
+opaque isomorphism. The two formal normality algorithms then compute inverse
+candidates. Their right/left inverse paths and ordinary categorical
+composition prove that the candidates agree; the mono-selected candidate and
+both laws form the existing `IsoEvidence`. This completes the formal image row
+without a quotient-path decoder or an image/isomorphism primitive. The source
+is rule-free; source, reviewer, warning-enabled, and strict-LHS checks pass,
+and the refreshed source-metrics health snapshot covers 425 files.
 
 ## Validation Matrix
 
