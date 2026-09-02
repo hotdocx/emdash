@@ -86,6 +86,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_snake_connecting.lp)
   files+=(emdash3_2_commutative_algebra_freyd_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_functorial_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_bounded_complexes.lp)

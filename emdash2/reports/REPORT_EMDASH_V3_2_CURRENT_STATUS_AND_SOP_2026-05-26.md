@@ -565,6 +565,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   families, including reconstruction and raw-competitor uniqueness for every
   explicitly witnessed test. It does not claim the stronger closed
   quotient-level `ComputationalAbelianCategory` or decode truncated paths.
+- `emdash3_2_commutative_algebra_freyd_snake_connecting.lp`: rule-free
+  witnessed formal snake normal-factor boundary. Explicit effective data
+  supplies `p1`, its epimorphism witness and normal-epi test, plus `q2`, its
+  monomorphism witness and normal-mono test. The existing Posur normality
+  operations select raw/quotient `u` and connecting arrows and derive both
+  reconstruction agreements and quotient paths. The whole result retains the
+  two raw factors and agreements; no fiber/pushout matrix algorithm, quotient
+  decoder, closed formal Abelian instance, or opaque arrow is introduced.
 - `emdash3_2_commutative_algebra_freyd_homology.lp`: rule-free witnessed
   one-degree formal Freyd homology. An explicit adjacent-zero agreement feeds
   the selected kernel lift; the whole package stores its boundary,

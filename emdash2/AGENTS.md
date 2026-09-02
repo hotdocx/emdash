@@ -122,6 +122,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `CommRingFreydWitnessedAbelian` value is capability-indexed by finite-free
   weak kernels and explicit raw agreements; it is not the stronger closed
   `ComputationalAbelianCategory` value.
+  `emdash3_2_commutative_algebra_freyd_snake_connecting.lp` consumes the
+  effective fiber/pushout boundary as explicit `p1`/`q2` epic/monic and
+  normal-test agreements. Existing witnessed normality then selects the raw
+  and quotient `u` and connecting arrows, proves both reconstruction
+  agreements/paths, and packages the two raw factors. It adds no formal
+  matrix algorithm, quotient decoder, rule, or opaque connecting map.
   `emdash3_2_commutative_algebra_freyd_homology.lp` consumes one explicit raw
   adjacent-zero agreement, stores the existing kernel-lifted boundary and its
   reconstruction, and packages the boundary's witnessed cokernel as homology.

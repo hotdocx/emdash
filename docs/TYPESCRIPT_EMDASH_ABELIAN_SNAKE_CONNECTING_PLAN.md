@@ -600,7 +600,7 @@ monomorphism.
 | `ASC-SNAKE-RESULT-6E` | complete; checkpoint `22e2da6f` | 6C–6D | whole paired selected-factor result retaining both final `HFiber` reconstruction paths and named access to every earlier whole construction |
 | `ASC-SNAKE-NATIVE-7` | complete; checkpoint `fb7548b9` | operational polynomial Freyd Abelian provider | non-split polynomial whole result, typed failures, canonical deterministic serialization, and retained native triple/connecting operations |
 | `ASC-CATEGORY-8` | complete; checkpoint `76bcd9cd` | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
-| `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
+| `ASC-FORMAL-9` | complete; checkpoint pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
 | `ASC-BRIDGE-10` | pending | native/category/formal selected results | proof–CAS delegation bundle and exact equation replay |
 | `ASC-DIFFERENTIAL-11` | pending | field implementation and CAP/homalg references | constant-field/CAP differential evidence without split assumptions or runtime dependency |
 | `ASC-CLOSE-12` | pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
@@ -644,6 +644,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-029` | accepted after second normal-test construction | Fiber compatibility and the selected kernel of `gamma` make `beta o p2` factor through `Ker(lambda)`. Pushout compatibility and `Coker(q2)` annihilation prove the middle arrow zero after `Coker(q2)`. Precomposition with the selected colift equation and cancellation along epic `p1` construct the actual `NormalMonoTest`; its selected lift is the connecting arrow. |
 | `D-ASC-030` | accepted after bounded owner split | A single expanded final target exceeded 90 seconds even though every localized theorem was valid. Splitting first image evidence, first normal colift, lambda-kernel evidence, second cokernel evidence, final lift, and whole snapshot into one-way semantic owners keeps every quiet and warning-enabled target below 90 seconds. This is compilation granularity, not a capped computation, duplicate theory, opacity, unifier, or axiom. |
 | `D-ASC-031` | accepted after categorical consumer | The category layer exposes whole fiber-product, projections, factor, pushout, injections, cofactor, short-exact, snake-triple, and connecting roles on the unchanged Abelian Freyd carrier. The connecting method is one retained derived operation whose immediate plan records the CAP chain `cokernel-colift -> kernel -> cokernel -> kernel-lift -> fiber-product -> pushout -> colift-along-epimorphism -> lift-along-monomorphism`; lowering invokes the existing native whole operation rather than inlining a second matrix algorithm. |
+| `D-ASC-032` | accepted after witnessed formal consumer | The formal Freyd boundary takes the effective `p1`/`q2` arrows, their explicit epic/monic witnesses, and the two normal-test agreements as proof-CAS inputs. Existing witnessed Posur normality constructs raw/quotient `u` and connecting arrows plus both reconstruction agreements/paths. This is the maximal current formal construction without inventing formal fiber/pushout matrix owners or decoding arbitrary truncated paths. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -685,7 +686,7 @@ the genuine fiber product and pushout, stability witnesses, the normal-epi
 colift `u`, the normal-mono lift defining the connecting map, and all
 reconstruction agreements. It passes the CAP rational example and the
 nonsplit `R -> R/(x)` example; the latter contains no section field. Category
-roles and formal replay remain in later rows.
+roles, formal replay, and proof-CAS adoption are separated into later rows.
 
 `algebra_polynomial_freyd_snake_reference_operations.ts` now supplies the
 native whole-operation boundary. The triple and connecting operations have
@@ -715,6 +716,24 @@ also execute the projection, injection, factor, cofactor, and short-exact
 roles on the nonsplit ring fixture. The categorical carrier remains the
 existing polynomial Freyd Abelian model, and the compiled graph contains no
 matrix syntax above its lowering boundary.
+
+`emdash3_2_commutative_algebra_freyd_snake_connecting.lp` implements the
+witnessed formal boundary without claiming a closed quotient-level Abelian
+category. The effective input consists of raw `p1`, its explicit epimorphism
+witness and normal-epi test agreement, followed by raw `q2`, its explicit
+monomorphism witness and normal-mono test agreement for the selected `u`.
+Existing formal Posur normality constructs the raw/quotient `u` and connecting
+arrows, both raw reconstruction agreements, and both quotient paths. A whole
+Sigma result retains the two raw factors and agreements with readable
+projections.
+
+The owner and reviewer pass quiet and warning-enabled checking at the
+inherited formal-Freyd boundary of `1,223` critical-pair reports and `169`
+replaceable-variable reports. They add no rule or unifier and have zero strict
+LHS findings. The formal owner deliberately consumes, rather than manually
+recreates, the effective fiber/pushout and normal-test agreements; arbitrary
+truncated-path decoding and a parallel formal matrix snake algorithm remain
+absent.
 
 ## Implemented Short Exact Interface
 

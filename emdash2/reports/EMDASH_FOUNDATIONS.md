@@ -3593,6 +3593,16 @@ snake node and lowers it to the native operation; it does not inline matrix
 code into the categorical program. Thus direct category execution and graph
 execution have one canonical whole-result comparison.
 
+The formal polynomial Freyd layer respects its stricter effectiveness
+boundary. It accepts the selected `p1` and `q2` raw arrows together with their
+explicit epimorphism, monomorphism, and two normal-test agreements—the data
+that the effective CAS has actually computed. Posur's already formalized
+normal-epi colift then constructs raw and quotient `u`; the normal-mono lift
+constructs the raw and quotient connecting arrow. Both raw reconstruction
+agreements and their quotient paths are derived, and one whole value retains
+the two selected factors. The formal layer neither reruns a second matrix
+algorithm nor decodes arbitrary truncated equality.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

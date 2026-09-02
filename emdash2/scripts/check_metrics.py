@@ -94,6 +94,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp"),
     Path("emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp"),
     Path("emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_snake_connecting.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_functorial_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_bounded_complexes.lp"),
