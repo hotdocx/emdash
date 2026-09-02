@@ -566,7 +566,7 @@ Refine or reject a candidate when it:
 | `FAB-IMAGE-FORMAL-7B` | complete; checkpoint `76ecdc40` | formal witnessed normality | witnessed image/coimage comparison, factorization, and derived inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
-| `FAB-BRIDGE-10` | ready | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
+| `FAB-BRIDGE-10` | complete; checkpoint pending | proof–CAS bridge | thirteen selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
 | `FAB-CLOSE-12` | blocked on required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
 
@@ -607,6 +607,7 @@ prerequisite.
 | `D-FAB-027` | accepted after formal normality completion | Monomorphism uniqueness factors the difference of a competitor and the selected lift through the first weak pullback, then uses the kernel-zero witness as its quotient agreement. Epimorphism uniqueness reconstructs the competitor difference from its relation component and the source-composite agreement by the split identity `R_Q sigma_RQ + F sigma_A = id`. Both proofs retain raw agreement witnesses and require no quotient-path decoder. |
 | `D-FAB-028` | accepted after formal package construction | The formal result is `CommRingFreydWitnessedAbelian(R,W)`: one witnessed pre-Abelian package plus capability families indexed by explicit monomorphism, epimorphism, and test agreements. It is constructible for every supplied weak-kernel capability. It deliberately does not masquerade as the stronger closed `ComputationalAbelianCategory`, whose arbitrary quotient-path inputs remain ineffective. |
 | `D-FAB-029` | accepted after witnessed formal image construction | Formal coimage and image are the selected cokernel-of-kernel and kernel-of-cokernel. Existing colift/lift agreements construct the comparison and `f = i chi p`. `CommRingFreydComparisonBimorphismWitness` retains the explicit comparison monic/epic agreements produced by the native/proof-CAS consumer; from these, Constructions 3.14/3.15 compute two inverse candidates, categorical composition proves they coincide, and the selected inverse yields `IsoEvidence`. The isomorphism itself is not an input. |
+| `D-FAB-030` | accepted after proof-CAS implementation | `algebra_formal_freyd_abelian.ts` replays the actual operational Abelian provider and compares canonical serialization of each complete selected output. Thirteen exact presentation equations cover monic/epic witnesses, lift/colift structure and reconstruction, comparison structure/factorization/bimorphism evidence, inverse-candidate agreement, and both inverse laws. The adapter creates no Core owner, closed formal capability, quotient decoder, or primitive isomorphism. |
 
 ## Implemented Generic Normality Layer
 
@@ -845,6 +846,31 @@ both laws form the existing `IsoEvidence`. This completes the formal image row
 without a quotient-path decoder or an image/isomorphism primitive. The source
 is rule-free; source, reviewer, warning-enabled, and strict-LHS checks pass,
 and the refreshed source-metrics health snapshot covers 425 files.
+
+## Implemented Proof-CAS Abelian Consumer
+
+`algebra_formal_freyd_abelian.ts` is the first concrete consumer of the full
+native/formal boundary. It defines canonical serializers for complete
+monomorphism, epimorphism, normal-lift, normal-colift, and image-isomorphism
+results. Every adapter invokes the corresponding operation from the actual
+operational polynomial Freyd Abelian provider and accepts a claim only when
+the computed whole result exactly matches the selected canonical output.
+
+The bridge reifies thirteen existing presentation equations: kernel-zero and
+cokernel-projection-zero witnesses; lift/colift relation preservation and
+reconstruction; comparison relation preservation and `f = i chi p`; explicit
+comparison monic/epic witnesses; equality of the two computed inverse
+candidates; and both inverse laws. Focused tests check all claim types, replay
+and adopt all thirteen operations, verify deterministic serialization and the
+capability boundary, reject equation drift, and pass one generated Lambdapi
+probe containing all thirteen equations. The live probe remains a consumer of
+the formal owners; it does not manufacture a ring-wide theorem.
+
+Validation is proportional to the affected boundary: the workspace contract,
+root typecheck, focused lint, the 25-test native/formal Freyd matrix, and the
+opt-in live 13-equation Lambdapi probe all pass. The repository-wide
+`check:ts` aggregate was intentionally not rerun under the user's explicit
+scope restriction; no unrelated TypeScript subsystem changed.
 
 ## Validation Matrix
 

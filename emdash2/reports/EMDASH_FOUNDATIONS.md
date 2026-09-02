@@ -3550,6 +3550,16 @@ backend-neutral algebra engine and graph executor. Qualification remains
 restricted to the field-polynomial provider that supplies the required weak
 kernels and effective congruence.
 
+The selected proof-CAS consumer closes the operational/formal loop. It
+replays those actual provider operations rather than a parallel oracle and
+compares the canonical serialization of each complete selected result. Its
+thirteen equations reify monic/epic witnesses, normal factor structure and
+reconstruction, image comparison and factorization, explicit comparison
+bimorphism evidence, inverse-candidate agreement, and both inverse laws. Each
+equation can be explicitly adopted at the proof boundary, while the adapter
+adds neither a kernel primitive nor a claim that every formal ring supplies
+the required effective weak-kernel computation.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

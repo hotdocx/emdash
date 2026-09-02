@@ -496,6 +496,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   image/coimage and the comparison inverse, and qualifies against the complete
   14-role `abelian-category` interface. This operational qualification does
   not supply the still-gated closed formal quotient eliminator.
+- `src/v3_2/algebra_formal_freyd_abelian.ts`: selected proof-CAS consumer for
+  the operational/formal Abelian boundary. It replays the actual native
+  monic/epic, normal lift/colift, and whole image-isomorphism operations and
+  reifies thirteen exact presentation equations, including comparison
+  factorization and both inverse laws. Canonical whole-output comparison is
+  deterministic; no Core owner, quotient decoder, or ring-wide theorem is
+  added.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

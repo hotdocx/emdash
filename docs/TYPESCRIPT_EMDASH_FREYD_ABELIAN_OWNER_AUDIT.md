@@ -32,6 +32,18 @@ proof–CAS equations.
 
 No new runtime rewrite or unification rule is indicated by this audit.
 
+## Implemented Consumer Result
+
+The audited proof-CAS boundary is now realized by
+`src/v3_2/algebra_formal_freyd_abelian.ts`. It replays the operational Abelian
+provider and reifies thirteen exact presentation equations spanning normality,
+comparison factorization, explicit comparison bimorphism witnesses, inverse
+candidate agreement, and both inverse laws. Canonical serialization compares
+the complete selected operation output, while the adapter profile explicitly
+denies a ring-wide formal capability, quotient-path decoding, or a primitive
+isomorphism. A focused generated Lambdapi probe accepts the complete equation
+set.
+
 ## Baseline Evidence
 
 The new worktree bootstrapped successfully with the shared pnpm store.

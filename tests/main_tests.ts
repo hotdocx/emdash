@@ -297,6 +297,7 @@ import './v3_2_algebra_polynomial_weak_kernel_singular_tests';
 import './v3_2_algebra_polynomial_weak_pullback_tests';
 import './v3_2_algebra_formal_weak_kernel_tests';
 import './v3_2_algebra_formal_freyd_preabelian_tests';
+import './v3_2_algebra_formal_freyd_abelian_tests';
 import './v3_2_algebra_formal_freyd_conformance_tests';
 import './v3_2_algebra_presented_module_tests';
 import './v3_2_algebra_presented_module_map_tests';
