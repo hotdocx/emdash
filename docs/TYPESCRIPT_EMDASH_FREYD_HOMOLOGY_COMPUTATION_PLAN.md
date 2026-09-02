@@ -5,7 +5,7 @@ Date: 2026-09-02
 Plan-ID: `TS-EMDASH-FREYD-HOMOLOGY-COMPUTATION`
 
 Status: completed on a dedicated branch/worktree; substantive implementation
-head `6aec69c5`, closure checkpoint pending
+head `6aec69c5`, closure checkpoint `70908586`
 
 Baseline: `4acef747d4b80e92c5c653e0b6635e6817a9c909`
 
@@ -345,7 +345,7 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-FUNCTORIAL-8` | complete; checkpoints `f0ecc0f8`, `4464be91` | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
 | `FH-BRIDGE-9` | complete; checkpoint `aa7c0ba8` | proof–CAS delegation | fourteen exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | complete; checkpoint `aa7c0ba8` | field reference/Singular adapters | non-authoritative constant-field comparison without replacing native Freyd data |
-| `FH-CLOSE-11` | complete; closure checkpoint pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
+| `FH-CLOSE-11` | complete; closure checkpoint `70908586` | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
 Rows may be split or reordered when a focused probe refines dependencies. A
 row may be rejected or deferred only with durable evidence and a concrete
