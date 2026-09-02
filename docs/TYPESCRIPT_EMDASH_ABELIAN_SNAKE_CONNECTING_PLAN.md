@@ -599,7 +599,7 @@ monomorphism.
 | `ASC-SNAKE-NORMAL-MONO-6D` | complete; checkpoint `22e2da6f` | 6C, lambda kernel, pushout compatibility, and `Coker(q2)` | derived `NormalMonoTest` for `u`, selected connecting arrow, and reconstruction through monic `q2` |
 | `ASC-SNAKE-RESULT-6E` | complete; checkpoint `22e2da6f` | 6C–6D | whole paired selected-factor result retaining both final `HFiber` reconstruction paths and named access to every earlier whole construction |
 | `ASC-SNAKE-NATIVE-7` | complete; checkpoint `fb7548b9` | operational polynomial Freyd Abelian provider | non-split polynomial whole result, typed failures, canonical deterministic serialization, and retained native triple/connecting operations |
-| `ASC-CATEGORY-8` | complete; checkpoint pending | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
+| `ASC-CATEGORY-8` | complete; checkpoint `76bcd9cd` | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
 | `ASC-BRIDGE-10` | pending | native/category/formal selected results | proof–CAS delegation bundle and exact equation replay |
 | `ASC-DIFFERENTIAL-11` | pending | field implementation and CAP/homalg references | constant-field/CAP differential evidence without split assumptions or runtime dependency |
