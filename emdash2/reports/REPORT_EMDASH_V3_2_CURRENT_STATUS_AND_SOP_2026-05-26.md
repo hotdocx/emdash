@@ -432,9 +432,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   selected pre-Abelian category. It derives coimage as cokernel-of-kernel and
   image as kernel-of-cokernel, constructs the coastriction and comparison by
   the existing universal properties, and proves
-  `f = image_embedding o comparison o coimage_projection`. The comparison
-  inverse remains a downstream normality theorem rather than an assumed
-  isomorphism.
+  `f = image_embedding o comparison o coimage_projection`. It also derives
+  the two reusable exactness consequences: the coimage projection kills every
+  kernel cone of `f`, and every cokernel cocone of `f` kills the image
+  embedding. The comparison inverse remains a downstream normality theorem
+  rather than an assumed isomorphism.
+- `emdash3_2_abelian_image_bimorphisms.lp`: rule-free constructive monicity
+  and epicity of the canonical coimage-to-image comparison in a computational
+  Abelian category. The monic proof pulls back the epic coimage projection
+  along the comparison kernel; the epic proof pushes out the monic image
+  embedding along the comparison cokernel. Stability, cone/cocone
+  annihilation, and the zero-kernel/zero-cokernel converses force both
+  structural arrows to zero. A constructor-visible internal implementation
+  avoids competing transparent endpoint presentations, while public wrappers
+  consume one `ComputationalAbelianCategory`. No inverse or property is
+  postulated.
 - `emdash3_2_abelian_bimorphisms.lp`: rule-free constructive balancedness.
   Epicity makes the selected cokernel projection zero; the normal-mono lift of
   the codomain identity supplies an inverse on one side, and monic
@@ -477,8 +489,10 @@ belongs to the owning implementation plan rather than to standing guidance.
   converses and closure. A zero selected kernel embedding proves monicity by
   factoring an arbitrary annihilated difference through the kernel; the dual
   cokernel proof gives epicity. Monic and epic arrows are also closed under
-  composition. The canonical coimage–image bimorphism consumer remains the
-  next active plan slice.
+  composition. Generic factorization-annihilation and fiber/pushout path
+  combinators keep later image calculations at one canonical owner shape.
+  The canonical coimage–image consumer is implemented by the dedicated
+  Abelian image-bimorphism module.
 - `emdash3_2_abelian_snake_lemma.lp`: active rule-free generic snake spine.
   One internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
   path. That path constructs the selected cokernel colift `gamma` and kernel

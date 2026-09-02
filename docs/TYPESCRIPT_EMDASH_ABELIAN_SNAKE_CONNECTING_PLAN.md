@@ -589,8 +589,8 @@ monomorphism.
 | `ASC-FIBER-2` | complete; checkpoint `9a73e59b` | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
 | `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | complete; checkpoint `9d637cdd` | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
-| `ASC-IMAGE-BIMORPHISM-4A` | foundation green; comparison proof pending | generic image/coimage comparison | prove the canonical pre-Abelian coimage-to-image comparison monic and epic; derive epic coastriction into `Ker(Coker f)` and the dual monic astriction |
-| `ASC-BIMORPHISM-LEMMAS-4A1` | implementation/reviewer green; checkpoint pending | generic kernels/cokernels and additive cancellation | zero selected kernel implies monic, zero selected cokernel implies epic, and both properties compose |
+| `ASC-IMAGE-BIMORPHISM-4A` | complete; checkpoint pending | generic image/coimage comparison | canonical comparison is constructively monic and epic from visible Abelian capabilities, with a public one-capability wrapper and paired bimorphism value |
+| `ASC-BIMORPHISM-LEMMAS-4A1` | complete; checkpoint `e98a5663`; path-combinator extension included in 4A | generic kernels/cokernels and additive cancellation | zero selected kernel implies monic, zero selected cokernel implies epic, both properties compose, and reusable factorization/fiber/pushout annihilation paths retain canonical endpoints |
 | `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | in progress via 6A | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-SPINE-6A` | complete; checkpoint `aa0d1be4` | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
@@ -633,8 +633,10 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-021` | accepted after constructive stability proof | Stability is proved for the canonical selected binary constructions, so their combined arrows are definitionally the kernel/cokernel selected by the same `ComputationalAbelianCategory`. The difference arrow first inherits epicity/monicity from the distinguished leg; normal epi/mono factors then turn equality after the projection/injection into a zero difference. |
 | `D-ASC-022` | accepted after generic spine probe | The generic snake input is one internal Sigma triple retaining `delta`, `beta`, `lambda`, and `lambda o beta o delta = 0`. That single path constructs both the `lambda beta` cokernel cone and the `beta delta` kernel cone, so `gamma` and `alpha` are selected operations rather than diagram fields. |
 | `D-ASC-023` | accepted after generic square-stage probe | CAP's fiber product and pushout are the canonical constructions selected by the same `ComputationalAbelianCategory`; therefore the already-proved stability theorems apply without transport or a second choice and return the exact epic `p1` and monic `q2` needed by normality. |
-| `D-ASC-024` | prerequisite exposed by final-test audit | To prove that `q1 o beta o p2` annihilates `Ker(p1)`, one must factor an `epsilon`-annihilated arrow through the image coastriction of `delta`. The active library constructs the coimage–image comparison but does not yet prove its standard pre-Abelian monic/epic properties. Prove that reusable theorem and derive the epic coastriction (plus its dual) rather than taking CAP's normal tests as new fields. |
+| `D-ASC-024` | initial prerequisite hypothesis; refined by `D-ASC-027` | The first audit proposed factoring an `epsilon`-annihilated arrow through an epic image coastriction and therefore scheduled the canonical comparison bimorphism. The theorem remains a useful Abelian foundation and was completed, but the later dual review found a shorter proof from the pre-Abelian cone/cocone consequences alone. |
 | `D-ASC-025` | accepted after cancellation-converse probe | Monicity from a zero selected kernel and epicity from a zero selected cokernel are constructive: factor the arbitrary difference through the contractible kernel/cokernel space, replace the structural arrow by zero, and cancel the additive difference. Named cone/factor observations are required to keep endpoint inference rigid. |
+| `D-ASC-026` | accepted after comparison-bimorphism owner audit | The comparison proof must use one literal pre-Abelian owner presentation. Whole-file and downstream probes that compared a canonical coimage with a second transparent reconstruction exceeded 90 seconds without a type error. Passing the pre-Abelian package and its two normality capabilities explicitly keeps the `ComputationalAbelianCategory` constructor visible at stability calls; public one-capability wrappers then check in under 20 seconds. No opacity, unifier, axiom, or weaker theorem is needed. |
+| `D-ASC-027` | refined after the completed dual proof | The full comparison bimorphism is a reusable Abelian foundation, but the snake normal tests need not route through an epic coastriction. The stronger pre-Abelian cone/cocone consequences now derive directly that the coimage projection kills every kernel cone and every cokernel cocone kills the image embedding. The final snake tranche should use these shorter canonical paths while retaining the independently completed comparison theorem. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -726,17 +728,8 @@ owners construct epicity of `p1` from the selected cokernel projection
 Reviewer assertions check both exact cancellation types. The two normal-factor
 test paths and their selected colift/lift remain the final 6C tranche.
 
-The 6C audit identifies one missing reusable theorem. The first normal test
-requires exactness of the canonical pair
-`delta : A -> B`, `epsilon : B -> Coker(delta)`: equivalently, the selected
-map `A -> Ker(epsilon)` must be epic. This follows from the standard
-pre-Abelian fact that the canonical `Coim(f) -> Im(f)` comparison is both
-monic and epic, followed by the already-selected cokernel projection. The
-active image module constructs the comparison and its factorization but has
-not yet packaged those two cancellation proofs. Row 4A now owns that genuine
-prerequisite; the snake test remains derived rather than accepted as data.
-
-The first prerequisite tranche is now implemented in
+The 6C audit first exposed the canonical image/coimage cancellation layer. The
+first prerequisite tranche is implemented in
 `emdash3_2_preabelian_bimorphism_lemmas.lp`. It proves both directions missing
 from the earlier one-way cancellation observations: a zero selected kernel
 embedding constructs `IsMonic`, and a zero selected cokernel projection
@@ -744,8 +737,38 @@ constructs `IsEpic`. Each proof forms the additive difference cone, selects
 its unique universal factor, replaces the structural arrow by zero, and
 cancels the difference. Generic composition preserves both properties. Named
 transparent cones and factors avoid repeating reducible `HFiber` expressions
-inside higher-order equality arguments. The comparison-specific pullback and
-pushout proof remains the rest of row 4A.
+inside higher-order equality arguments. Generic factorization-annihilation and
+fiber/pushout path combinators now keep the comparison proof at one canonical
+endpoint presentation.
+
+The complete comparison tranche is implemented in
+`emdash3_2_abelian_image_bimorphisms.lp`. For monicity it pulls the epic
+coimage projection back along the selected kernel of the comparison. The
+factorization of `f`, the selected image/coimage annihilation consequences,
+and epic cancellation force that kernel embedding to zero. The epic proof is
+the direct pushout dual: push out the monic image embedding along the selected
+comparison cokernel and use monic cancellation to force its projection zero.
+The zero-kernel and zero-cokernel converses then construct the actual
+`IsMonic` and `IsEpic` functions.
+
+The initially attempted downstream and whole-owner variants mixed the
+canonical `computational_coimage_object` with a second transparent expansion
+of the same cokernel-of-kernel. Their proofs were mathematically valid but
+exceeded the 90-second checker bound during conversion. The accepted
+implementation instead retains one literal `PreAbelianCategory` parameter and
+passes its normal-mono and normal-epi capabilities separately, so the
+constructed Abelian package reduces immediately only at the two stability
+calls. Public wrappers consume one arbitrary `ComputationalAbelianCategory`.
+Quiet and warning-enabled owner and reviewer checks are green; the files add
+no rule or unifier and inherit exactly the `1,217` critical-pair and `169`
+replaceable-variable import boundary.
+
+A final dependency review found that the snake normal tests can use the
+shorter pre-Abelian consequences directly: every cocone of `delta` kills its
+selected image embedding, and the coimage projection kills every kernel cone.
+Thus the comparison bimorphism remains a completed reusable Abelian theorem,
+while the snake construction does not introduce a needless coastriction
+detour or accept either normal test as data.
 
 ## Baseline And Validation Policy
 

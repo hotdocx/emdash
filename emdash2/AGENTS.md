@@ -97,8 +97,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   construction.
   `emdash3_2_abelian_images.lp` derives coimage as cokernel-of-kernel, image
   as kernel-of-cokernel, their canonical comparison, and the factorization
-  through projection/comparison/embedding. Comparison invertibility remains
-  downstream normality data and is not postulated.
+  through projection/comparison/embedding. Its cone/cocone consequences state
+  that the coimage projection kills every kernel cone of the original arrow
+  and every cokernel cocone kills the image embedding.
+  `emdash3_2_abelian_image_bimorphisms.lp` constructively proves the canonical
+  comparison monic and epic from the existing Abelian stability and
+  cancellation owners. The implementation keeps the pre-Abelian package and
+  its two normality capabilities visible internally, then exposes ordinary
+  one-`ComputationalAbelianCategory` observations; it postulates no comparison
+  property or inverse.
   `emdash3_2_abelian_bimorphisms.lp` constructs `IsoEvidence` for every
   explicitly monic and epic arrow using the normal-monomorphism lift of the
   codomain identity; it specializes to the canonical comparison when that

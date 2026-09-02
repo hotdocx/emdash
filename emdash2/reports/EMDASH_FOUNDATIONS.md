@@ -3501,6 +3501,24 @@ two reconstruction paths give
 already at the pre-Abelian boundary; constructing its inverse is the separate
 normality step and is not assumed here.
 
+Two useful exactness consequences are available already at this pre-Abelian
+boundary. If `h : T -> A` satisfies `f o h = 0`, then the coimage projection
+kills `h`. Dually, if `q : B -> T` satisfies `q o f = 0`, then `q` kills the
+image embedding. Both statements are obtained by the selected kernel or
+cokernel factorization and the corresponding annihilation law; neither is an
+extra exactness field.
+
+With the full computational Abelian capability, the canonical comparison is
+constructively a bimorphism. Pulling the epic coimage projection back along
+the selected kernel of the comparison gives an epic cover of that kernel.
+The factorization of `f` and the coimage cone consequence make the kernel
+embedding zero after this cover, hence zero by epic cancellation, so the
+comparison is monic. The direct pushout dual makes its selected cokernel
+projection zero and proves epicity. The implementation retains the
+pre-Abelian package and its two normality capabilities separately while this
+argument is checked, then provides a one-capability Abelian interface. This
+is a term-shape discipline, not an additional assumption or opaque bridge.
+
 Generically, normality also proves constructive balancedness. If
 `h : X -> Y` is supplied with both monic and epic cancellation evidence,
 epicity makes its selected cokernel projection zero. The identity of `Y` is

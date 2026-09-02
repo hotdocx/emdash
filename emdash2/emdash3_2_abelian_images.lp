@@ -10,6 +10,7 @@
 */
 
 require open emdash.emdash3_2_abelian_categories;
+require open emdash.emdash3_2_preabelian_bimorphism_lemmas;
 
 // A monomorphism has zero selected kernel embedding.
 symbol monic_kernel_morphism_zero_path
@@ -195,6 +196,94 @@ symbol computational_coimage_projection
       (@preabelian_kernel C Prod t P A B f))
     (@computational_coimage C Prod t P A B f);
 
+// Selected coimage projection annihilates the selected kernel embedding.
+symbol computational_coimage_annihilation
+  [C : Cat]
+  [Prod : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (P : τ (@PreAbelianCategory C Prod t))
+  [A B : τ (Obj C)]
+  (f : τ (Hom C A B))
+  : τ (@= (Hom C
+      (@computational_kernel_object C
+        (@preabelian_preadditive C Prod t P) A B f
+        (@preabelian_kernel C Prod t P A B f))
+      (@computational_coimage_object C Prod t P A B f))
+      (@comp_fapp0 C _ _ _
+        (@computational_coimage_projection C Prod t P A B f)
+        (@computational_kernel_morphism C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f)))
+      (@preadditive_hom_zero C (@preabelian_preadditive C Prod t P)
+        (@computational_kernel_object C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f))
+        (@computational_coimage_object C Prod t P A B f)))
+≔ @computational_cokernel_annihilation C
+    (@preabelian_preadditive C Prod t P)
+    (@computational_kernel_object C
+      (@preabelian_preadditive C Prod t P) A B f
+      (@preabelian_kernel C Prod t P A B f))
+    A
+    (@computational_kernel_morphism C
+      (@preabelian_preadditive C Prod t P) A B f
+      (@preabelian_kernel C Prod t P A B f))
+    (@computational_coimage C Prod t P A B f);
+
+// The coimage projection annihilates every arrow annihilated by f.
+symbol computational_coimage_annihilates_cone
+  [C : Cat]
+  [Prod : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (P : τ (@PreAbelianCategory C Prod t))
+  [A B : τ (Obj C)]
+  (f : τ (Hom C A B))
+  (T : τ (Obj C))
+  (cone : τ (@WeakKernelAnnihilator C
+    (@preabelian_preadditive C Prod t P) A B f T))
+  : τ (@= (Hom C T (@computational_coimage_object C Prod t P A B f))
+      (@comp_fapp0 C _ _ _
+        (@computational_coimage_projection C Prod t P A B f)
+        (@weak_kernel_annihilator_arrow C
+          (@preabelian_preadditive C Prod t P) A B f T cone))
+      (@preadditive_hom_zero C (@preabelian_preadditive C Prod t P) T
+        (@computational_coimage_object C Prod t P A B f)))
+≔ @eq_trans _ _ _ _
+    (@eq_ap (Hom C T A)
+      (Hom C T (@computational_coimage_object C Prod t P A B f))
+      (λ h : τ (Hom C T A),
+        @comp_fapp0 C _ _ _
+          (@computational_coimage_projection C Prod t P A B f) h)
+      _ _
+      (@eq_sym _ _ _
+        (@computational_kernel_lift_path C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f) T cone)))
+    (@eq_trans _ _ _ _
+      (@comp_assoc C _ _ _ _
+        (@computational_coimage_projection C Prod t P A B f)
+        (@computational_kernel_morphism C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f))
+        (@computational_kernel_lift C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f) T cone))
+      (@preadditive_precompose_zero_path C
+        (@preabelian_preadditive C Prod t P) T
+        (@computational_kernel_object C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f))
+        (@computational_coimage_object C Prod t P A B f)
+        (@comp_fapp0 C _ _ _
+          (@computational_coimage_projection C Prod t P A B f)
+          (@computational_kernel_morphism C
+            (@preabelian_preadditive C Prod t P) A B f
+            (@preabelian_kernel C Prod t P A B f)))
+        (@computational_kernel_lift C
+          (@preabelian_preadditive C Prod t P) A B f
+          (@preabelian_kernel C Prod t P A B f) T cone)
+        (@computational_coimage_annihilation C Prod t P A B f)));
+
 symbol computational_image_object
   [C : Cat]
   [Prod : τ (Functor (Product_cat C C) C)]
@@ -232,6 +321,94 @@ symbol computational_image_embedding
       (@preabelian_preadditive C Prod t P) A B f
       (@preabelian_cokernel C Prod t P A B f))
     (@computational_image C Prod t P A B f);
+
+// Every arrow coannihilating f also coannihilates the selected image
+// embedding. This is the direct dual of coimage annihilation of kernel cones.
+symbol computational_image_coannihilates_cocone
+  [C : Cat]
+  [Prod : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (P : τ (@PreAbelianCategory C Prod t))
+  [A B : τ (Obj C)]
+  (f : τ (Hom C A B))
+  (T : τ (Obj C))
+  (cone : τ (@CokernelCoannihilator C
+    (@preabelian_preadditive C Prod t P) A B f T))
+  : τ (@= (Hom C (@computational_image_object C Prod t P A B f) T)
+      (@comp_fapp0 C _ _ _
+        (@cokernel_coannihilator_arrow C
+          (@preabelian_preadditive C Prod t P) A B f T cone)
+        (@computational_image_embedding C Prod t P A B f))
+      (@preadditive_hom_zero C (@preabelian_preadditive C Prod t P)
+        (@computational_image_object C Prod t P A B f) T))
+≔ @eq_trans _ _ _ _
+    (@eq_sym _ _ _
+      (@eq_ap
+        (Hom C B T)
+        (Hom C (@computational_image_object C Prod t P A B f) T)
+        (λ h : τ (Hom C B T),
+          @comp_fapp0 C _ _ _ h
+            (@computational_image_embedding C Prod t P A B f))
+        _ _
+        (@computational_cokernel_colift_path C
+          (@preabelian_preadditive C Prod t P)
+          A B f
+          (@preabelian_cokernel C Prod t P A B f)
+          T cone)))
+    (@eq_trans _ _ _ _
+      (@eq_sym _ _ _
+        (@comp_assoc C _ _ _ _
+          (@computational_cokernel_colift C
+            (@preabelian_preadditive C Prod t P)
+            A B f
+            (@preabelian_cokernel C Prod t P A B f)
+            T cone)
+          (@computational_cokernel_morphism C
+            (@preabelian_preadditive C Prod t P) A B f
+            (@preabelian_cokernel C Prod t P A B f))
+          (@computational_image_embedding C Prod t P A B f)))
+      (@eq_trans _ _ _ _
+        (@eq_ap
+          (Hom C (@computational_image_object C Prod t P A B f)
+            (@computational_cokernel_object C
+              (@preabelian_preadditive C Prod t P) A B f
+              (@preabelian_cokernel C Prod t P A B f)))
+          (Hom C (@computational_image_object C Prod t P A B f) T)
+          (λ h : τ (Hom C
+              (@computational_image_object C Prod t P A B f)
+              (@computational_cokernel_object C
+                (@preabelian_preadditive C Prod t P) A B f
+                (@preabelian_cokernel C Prod t P A B f))),
+            @comp_fapp0 C _ _ _
+              (@computational_cokernel_colift C
+                (@preabelian_preadditive C Prod t P)
+                A B f
+                (@preabelian_cokernel C Prod t P A B f)
+                T cone)
+              h)
+          _ _
+          (@computational_kernel_annihilation C
+            (@preabelian_preadditive C Prod t P)
+            B
+            (@computational_cokernel_object C
+              (@preabelian_preadditive C Prod t P) A B f
+              (@preabelian_cokernel C Prod t P A B f))
+            (@computational_cokernel_morphism C
+              (@preabelian_preadditive C Prod t P) A B f
+              (@preabelian_cokernel C Prod t P A B f))
+            (@computational_image C Prod t P A B f)))
+        (@preadditive_comp_zero_right_path C
+          (@preabelian_preadditive C Prod t P)
+          (@computational_image_object C Prod t P A B f)
+          (@computational_cokernel_object C
+            (@preabelian_preadditive C Prod t P) A B f
+            (@preabelian_cokernel C Prod t P A B f))
+          T
+          (@computational_cokernel_colift C
+            (@preabelian_preadditive C Prod t P)
+            A B f
+            (@preabelian_cokernel C Prod t P A B f)
+            T cone))));
 
 // f is coannihilated by its selected kernel.
 symbol coimage_to_target_cone

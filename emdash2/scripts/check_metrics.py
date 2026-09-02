@@ -35,6 +35,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_preabelian_bimorphism_lemmas.lp"),
     Path("emdash3_2_abelian_snake_lemma.lp"),
     Path("emdash3_2_abelian_images.lp"),
+    Path("emdash3_2_abelian_image_bimorphisms.lp"),
     Path("emdash3_2_abelian_bimorphisms.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
