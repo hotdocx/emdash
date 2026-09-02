@@ -4,7 +4,8 @@ Date: 2026-09-02
 
 Plan-ID: `TS-EMDASH-FREYD-ABELIAN-COMPUTATION`
 
-Status: active on a dedicated branch/worktree
+Status: completed on a dedicated branch/worktree; closure checkpoint
+`807e3637`, final ledger checkpoint `5691ee93`
 
 Baseline: `7c537a6be46f25fc847664786710357c33fc623e`
 
