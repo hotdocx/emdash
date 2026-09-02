@@ -111,6 +111,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `CommRingFreydWitnessedAbelian` value is capability-indexed by finite-free
   weak kernels and explicit raw agreements; it is not the stronger closed
   `ComputationalAbelianCategory` value.
+  `emdash3_2_commutative_algebra_freyd_homology.lp` consumes one explicit raw
+  adjacent-zero agreement, stores the existing kernel-lifted boundary and its
+  reconstruction, and packages the boundary's witnessed cokernel as homology.
+  Exactness is the explicit Freyd epimorphism witness for that boundary; no
+  quotient-path decoder or image/kernel object equality is assumed.
   `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
   cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
   factorization. Given explicit comparison monic/epic agreements, it computes

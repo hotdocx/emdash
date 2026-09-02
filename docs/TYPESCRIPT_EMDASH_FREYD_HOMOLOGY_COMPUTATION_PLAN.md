@@ -339,9 +339,9 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-NATIVE-3` | complete; checkpoint `5e9aaa4c` | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
 | `FH-EXACT-4` | complete; checkpoint `5e9aaa4c` | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
 | `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
-| `FH-BOUNDED-6` | complete; checkpoint pending | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
-| `FH-FORMAL-7` | ready | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
-| `FH-FUNCTORIAL-8` | blocked on homology owners | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
+| `FH-BOUNDED-6` | complete; checkpoint `3fc20066` | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
+| `FH-FORMAL-7` | complete; checkpoint pending | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
+| `FH-FUNCTORIAL-8` | ready | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
 | `FH-BRIDGE-9` | blocked on native/formal results | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | blocked on native homology | field reference/Singular adapters | non-authoritative comparison without replacing native Freyd data |
 | `FH-CLOSE-11` | blocked on required rows | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
@@ -373,6 +373,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-017` | accepted after exactness tests | `algebraPolynomialFreydExactnessAt` compares the selected homology projection with zero. A positive comparison is retained together with the actual `AlgebraPolynomialFreydEpimorphismWitness` for the boundary map; a negative result retains the failed agreement and has no fabricated witness. |
 | `D-FH-018` | accepted after categorical compilation tests | The first retained program is genuinely compositional at the available whole-operation boundary: a chain-pair input feeds derived `homology-at`, whose output feeds derived `exactness-at`. Planner prerequisites record kernel/kernel-lift/cokernel and epimorphism capabilities; direct and two-node graph execution have identical canonical outputs. No dependent-record IR extension is needed. |
 | `D-FH-019` | accepted after bounded Freyd tests | A bounded Freyd complex retains presentation terms, raw differentials, and one full composite-zero agreement per adjacent pair. Degreewise homology supplies zero-presentation endpoint maps and delegates to the one-degree owner. The bounded-free adapter embeds free modules as relation-free presentations without becoming a second homology implementation. |
+| `D-FH-020` | accepted after formal homology implementation | `CommRingFreydWitnessedHomologyAt` stores the selected raw kernel lift, its explicit reconstruction agreement, and the existing witnessed cokernel universal property. `CommRingFreydExactnessAt` is the existing epimorphism-witness type for the stored boundary. Readable quotient paths are derived from agreements; no new formal equality carrier or rule is needed. |
 
 ## Implemented Owner Audit
 
@@ -451,6 +452,25 @@ morphism while retaining the source complex. Five focused tests cover a
 nontrivial exact three-term complex, interior and endpoint homology, an invalid
 retained adjacent composite, the free adapter, endpoint/degree errors, and
 determinism. Root typecheck and focused lint pass.
+
+## Implemented Witnessed Formal Freyd Homology
+
+`emdash3_2_commutative_algebra_freyd_homology.lp` defines
+`CommRingFreydChainPair` as the explicit presentation agreement between the
+adjacent composite and zero. The selected formal kernel supplies cycles, and
+that agreement feeds the existing raw kernel lift. The whole
+`CommRingFreydWitnessedHomologyAt` package retains the boundary, its
+reconstruction agreement, and the boundary's existing witnessed cokernel
+universal property.
+
+Readable projections expose the cycle presentation/embedding, raw and
+quotient boundary, homology presentation/projection, boundary reconstruction,
+and projection annihilation. `CommRingFreydExactnessAt` is the explicit
+epimorphism witness for the stored boundary, and its projection-zero path is
+derived through the agreement-to-path owner. Source and focused reviewer pass
+quiet and warning-enabled checking. The rule-free module inherits
+`1,392 = 1,223 critical pairs + 169 replaceable variables`; strict LHS is
+clean, and the refreshed source-metrics health snapshot covers 429 files.
 
 ## Baseline And Validation Policy
 

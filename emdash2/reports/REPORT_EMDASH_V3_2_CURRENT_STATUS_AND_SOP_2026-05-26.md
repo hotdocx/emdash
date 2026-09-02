@@ -492,6 +492,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   families, including reconstruction and raw-competitor uniqueness for every
   explicitly witnessed test. It does not claim the stronger closed
   quotient-level `ComputationalAbelianCategory` or decode truncated paths.
+- `emdash3_2_commutative_algebra_freyd_homology.lp`: rule-free witnessed
+  one-degree formal Freyd homology. An explicit adjacent-zero agreement feeds
+  the selected kernel lift; the whole package stores its boundary,
+  reconstruction agreement, and witnessed cokernel universal property.
+  Readable quotient paths expose boundary reconstruction and homology
+  annihilation. Exactness is an explicit boundary epimorphism witness, not an
+  image/kernel object equality or a closed ring-wide decision.
 - `emdash3_2_commutative_algebra_freyd_images.lp`: rule-free witnessed formal
   image/coimage layer. It derives cokernel-of-kernel coimage,
   kernel-of-cokernel image, their comparison, and `f = i chi p`. Explicit

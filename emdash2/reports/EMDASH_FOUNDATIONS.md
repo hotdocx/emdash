@@ -3532,6 +3532,15 @@ finite-free weak-kernel capability `W`, while honestly stopping short of a
 closed `ComputationalAbelianCategory` whose quantifiers would accept arbitrary
 truncated quotient paths.
 
+Witnessed formal Freyd homology uses exactly the same universal-operation
+chain as the generic and native owners. An explicit agreement
+`d o dNext ~ 0` feeds the formal kernel lift. The resulting whole package
+stores the raw boundary, its reconstruction agreement, and the existing
+witnessed cokernel universal property; that cokernel presentation is homology.
+The retained agreements induce the readable quotient equations. Exactness is
+an explicit epimorphism witness for the stored boundary, which is precisely
+the homology-projection-zero agreement and requires no truncated-path decoder.
+
 The witnessed formal image/coimage layer then repeats the generic construction
 using the concrete selected owners: `Coim(f)` is the cokernel of the formal
 kernel embedding, `Im(f)` the kernel of the formal cokernel projection, and
