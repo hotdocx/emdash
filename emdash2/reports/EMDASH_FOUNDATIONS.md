@@ -3612,6 +3612,16 @@ the computed result, not a claim that the CAS implementation has been proved
 correct. A mismatched goal or changed whole output remains observable and is
 not silently trusted.
 
+As a differential rather than an authority, a separate finite-dimensional
+implementation performs the CAP construction with ordinary rational linear
+algebra. It constructs the fiber product as a matrix kernel, the pushout as a
+matrix cokernel, and uses the field's one-sided inverses only for the two final
+normal factors. On CAP's published example it recovers the induced map
+`[-1]`. The polynomial Freyd representative is the displayed 2-by-2 matrix,
+and passage to canonical quotient coordinates produces the same `[-1]` map.
+Keeping both comparisons prevents a basis-dependent raw representative from
+being mistaken for a disagreement.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

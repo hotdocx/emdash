@@ -602,7 +602,7 @@ monomorphism.
 | `ASC-CATEGORY-8` | complete; checkpoint `76bcd9cd` | categorical operation registry/compiler | fiber/pushout/projection/factor, short-exact, triple, and connecting roles; CAP prerequisite trace; lowering; direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | complete; checkpoint `8453edb6` | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
 | `ASC-BRIDGE-10` | complete; checkpoint `4c4b29c9` | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 21 exact selected morphism/agreement claims, with a live Lambdapi consumer |
-| `ASC-DIFFERENTIAL-11` | pending | field implementation and CAP/homalg references | constant-field/CAP differential evidence without split assumptions or runtime dependency |
+| `ASC-DIFFERENTIAL-11` | complete; checkpoint pending | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
 | `ASC-CLOSE-12` | pending | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
 
 Rows may be split or reordered when a focused audit refines their dependency
@@ -646,6 +646,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-031` | accepted after categorical consumer | The category layer exposes whole fiber-product, projections, factor, pushout, injections, cofactor, short-exact, snake-triple, and connecting roles on the unchanged Abelian Freyd carrier. The connecting method is one retained derived operation whose immediate plan records the CAP chain `cokernel-colift -> kernel -> cokernel -> kernel-lift -> fiber-product -> pushout -> colift-along-epimorphism -> lift-along-monomorphism`; lowering invokes the existing native whole operation rather than inlining a second matrix algorithm. |
 | `D-ASC-032` | accepted after witnessed formal consumer | The formal Freyd boundary takes the effective `p1`/`q2` arrows, their explicit epic/monic witnesses, and the two normal-test agreements as proof-CAS inputs. Existing witnessed Posur normality constructs raw/quotient `u` and connecting arrows plus both reconstruction agreements/paths. This is the maximal current formal construction without inventing formal fiber/pushout matrix owners or decoding arbitrary truncated paths. |
 | `D-ASC-033` | accepted after proof-CAS replay | One adapter family replays the complete native snake operation and adopts 21 selected morphism/agreement claims only when canonical whole-result serialization is unchanged. It covers the triple zero, all four kernel/cokernel stages, fiber/pushout compatibility, epic/monic witnesses, both normal tests, `u`, the connecting morphism, and both final reconstructions. Wrong-goal drift is rejected and one generated live Lambdapi probe checks all claims. |
+| `D-ASC-034` | accepted after constant-field differential | The independent field CAP implementation performs the same cokernel-colift, kernel-lift, fiber-product kernel, pushout cokernel, right-inverse colift, and left-inverse lift over rational quotient coordinates. CAP's displayed polynomial representative is the 2-by-2 matrix `[[0,0],[0,-1]]`, while canonical quotient coordinates give the 1-by-1 matrix `[[-1]]`; the differential checks both facts separately and compares the induced polynomial map with the field map. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -751,6 +752,21 @@ and preserve the no-closed-capability/no-path-decoder boundary. The one scoped
 live generated Lambdapi probe passes all 21 assertions in under five seconds.
 This bridge provides usable selected equations; it does not certify the CAS
 implementation or enlarge trusted Core syntax.
+
+`algebra_module_cap_snake_reference.ts` supplies the non-authoritative
+constant-field differential. It independently executes the same CAP sequence
+using finite-dimensional quotient realizations: cokernel colift, kernel lift,
+the kernel of `[iota,-epsilon]`, the cokernel of the pushout difference, a
+right-inverse colift along `p1`, and a left-inverse lift along `q2`. Every
+intermediate compatibility and reconstruction is checked.
+
+On the reviewed CAP rational fixture, the published polynomial presentation
+representative is `[[0,0],[0,-1]]`. Its canonical quotient-coordinate map is
+the 1-by-1 matrix `[[-1]]`; the independent field implementation produces
+that same induced map. The differential explicitly distinguishes these two
+bases rather than comparing noncanonical representatives. It is deterministic,
+performs no I/O, declares its use of field splittings, and is not available as
+the general module owner.
 
 ## Implemented Short Exact Interface
 

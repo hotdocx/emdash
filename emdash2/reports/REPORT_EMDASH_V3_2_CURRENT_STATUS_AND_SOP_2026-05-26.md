@@ -5766,6 +5766,13 @@ goal is rejected before adoption. Focused workflow tests and one generated
 live Lambdapi probe pass; the bridge adds no Core owner and makes no CAS
 correctness or closed formal capability claim.
 
+The non-authoritative field differential independently executes the CAP
+kernel/cokernel, fiber/pushout, and one-sided-inverse chain over rational
+quotient coordinates. It matches the constant-ring polynomial Freyd induced
+map `[-1]` and separately checks CAP's displayed 2-by-2 representative
+`[[0,0],[0,-1]]`. Its profile explicitly records field splitting and excludes
+it from the general module authority; it performs no external I/O.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its
