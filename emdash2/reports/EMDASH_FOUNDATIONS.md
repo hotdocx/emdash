@@ -3603,6 +3603,15 @@ agreements and their quotient paths are derived, and one whole value retains
 the two selected factors. The formal layer neither reruns a second matrix
 algorithm nor decodes arbitrary truncated equality.
 
+The proof–CAS consumer replays the same whole native snake operation and
+checks its canonical serialization before exposing any selected equation. It
+reifies the input zero, universal-construction equations, fiber/pushout
+compatibility, property witnesses, both normal tests, `u`, the connecting
+arrow, and both final reconstructions. These are usable equations attached to
+the computed result, not a claim that the CAS implementation has been proved
+correct. A mismatched goal or changed whole output remains observable and is
+not silently trusted.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

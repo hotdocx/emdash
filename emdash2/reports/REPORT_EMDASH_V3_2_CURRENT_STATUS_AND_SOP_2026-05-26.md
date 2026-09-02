@@ -5758,6 +5758,14 @@ agrees canonically with direct category execution. The category carrier and
 Abelian doctrine are unchanged; no matrix algorithm is duplicated above the
 lowering boundary.
 
+The selected snake proof–CAS bundle replays that same whole native operation
+and reifies 21 exact morphism/agreement claims spanning the input zero,
+kernel/cokernel stages, fiber/pushout compatibility, property witnesses,
+normal tests, and final reconstructions. Canonical output drift or a different
+goal is rejected before adoption. Focused workflow tests and one generated
+live Lambdapi probe pass; the bridge adds no Core owner and makes no CAS
+correctness or closed formal capability claim.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its
