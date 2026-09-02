@@ -3464,6 +3464,14 @@ two reconstruction paths give
 already at the pre-Abelian boundary; constructing its inverse is the separate
 normality step and is not assumed here.
 
+Generically, normality also proves constructive balancedness. If
+`h : X -> Y` is supplied with both monic and epic cancellation evidence,
+epicity makes its selected cokernel projection zero. The identity of `Y` is
+then a valid test for lifting along the monomorphism `h`; the selected lift is
+a right inverse, and cancellation by `h` proves it a left inverse. This gives
+the existing `IsoEvidence` record and applies to the canonical comparison once
+its bimorphism evidence is available.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

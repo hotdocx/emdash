@@ -557,14 +557,14 @@ Refine or reject a candidate when it:
 | `FAB-EFFECTIVENESS-2` | complete as audited deferral at checkpoint `8fa545c6` | quotient owners | no current path-to-agreement/direct dependent eliminator; witnessed work proceeds without choice/opaque decoder |
 | `FAB-GENERIC-NORMALITY-3` | complete; checkpoint `7d3e7989` | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
 | `FAB-GENERIC-IMAGE-4A` | complete through canonical comparison; checkpoint `f277b3d1` | selected kernels/cokernels | derived image/coimage, projection/embedding, comparison, and factorization `f = i o chi o p` |
-| `FAB-GENERIC-IMAGE-4B` | blocked on concrete normality/bimorphism route | generic comparison + normality | comparison monic/epic consequences and constructed `IsoEvidence` inverse |
+| `FAB-GENERIC-IMAGE-4B` | complete at explicit bimorphism boundary; checkpoint pending | generic comparison + normality | any explicit monic/epic comparison receives a constructed `IsoEvidence` inverse; concrete evidence is native/formal downstream data |
 | `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | active | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
 | `FAB-EPI-FORMAL-6B` | blocked on formal mono helper orientation | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
-| `FAB-CATEGORY-8` | complete; checkpoint pending | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
+| `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | blocked on formal image | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package only if effectiveness succeeds |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
@@ -601,6 +601,7 @@ prerequisite.
 | `D-FAB-021` | accepted after native Construction 3.15 tests | Native epicity is classified by the selected cokernel projection's explicit agreement with zero. Splitting its identity witness and factoring the pair `sigma_A o R_Q`, `id - sigma_RQ o R_Q` through the first weak pullback constructs the colift relation witness. The quotient projection by `x` computes an identity colift. |
 | `D-FAB-022` | accepted after native image tests | One whole native result derives kernel, coimage, cokernel, image, coastriction, comparison, and `f = i o chi o p`. The comparison is independently classified monic and epic; Constructions 3.14 and 3.15 produce two inverse candidates, their agreement, and both quotient inverse laws. No isomorphism is postulated. |
 | `D-FAB-023` | accepted after category-provider tests | `ABELIAN_DOCTRINE` requires 14 normality/image roles in addition to inherited pre-Abelian roles. The field-polynomial Freyd provider qualifies only when witness, lift/colift, whole image/coimage, all structural observations, comparison, and isomorphism are plannable and executable. |
+| `D-FAB-024` | accepted after balancedness probe | In a `ComputationalAbelianCategory`, an explicitly monic and epic arrow is constructively invertible: epicity makes its cokernel projection zero, so the codomain identity is a normal-mono test; its lift is a right inverse and monic cancellation gives the left law. The result is the existing `IsoEvidence`, including for the canonical comparison when its bimorphism evidence is supplied. |
 
 ## Implemented Generic Normality Layer
 
@@ -719,6 +720,22 @@ normality execution, whole isomorphism execution, compiler and graph paths,
 inherited pre-Abelian methods, and non-field rejection. The affected doctrine,
 pre-Abelian, normality, image, and Abelian provider matrix passes `25/25`, with
 root typecheck and affected lint green.
+
+## Implemented Generic Constructive Balancedness
+
+`emdash3_2_abelian_bimorphisms.lp` proves that every arrow carrying explicit
+`IsMonic` and `IsEpic` evidence in a `ComputationalAbelianCategory` has
+`IsoEvidence`. Epicity turns the selected cokernel projection into zero, so
+the codomain identity forms a normal-monomorphism test. The selected lift is a
+right inverse; monic cancellation derives the left inverse law.
+
+The module also specializes this theorem to the canonical coimage–image
+comparison once its monic and epic evidence is supplied. This matches the
+native provider, which computes those witnesses, without pretending that the
+closed formal Freyd quotient already supplies them. The source is rule-free
+and its focused source/reviewer checks pass. Its warning inventory is neutral
+at `1,386 = 1,217 + 169`, the strict LHS audit adds no clause, and the current
+source-metrics health snapshot covers 417 files.
 
 ## Validation Matrix
 

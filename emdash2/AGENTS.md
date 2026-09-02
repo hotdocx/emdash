@@ -90,6 +90,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   as kernel-of-cokernel, their canonical comparison, and the factorization
   through projection/comparison/embedding. Comparison invertibility remains
   downstream normality data and is not postulated.
+  `emdash3_2_abelian_bimorphisms.lp` constructs `IsoEvidence` for every
+  explicitly monic and epic arrow using the normal-monomorphism lift of the
+  codomain identity; it specializes to the canonical comparison when that
+  bimorphism evidence is supplied.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its

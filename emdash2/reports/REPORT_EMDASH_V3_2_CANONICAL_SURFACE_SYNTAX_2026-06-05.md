@@ -886,6 +886,7 @@ Ab(C)                      : pre-Abelian C with normal mono/epi computation
 Coim(f), Im(f)             : Coker(Ker(f)), Ker(Coker(f))
 χ_f : Coim(f) -> Im(f)   : canonical comparison
 f = i_f o χ_f o p_f       : selected image/coimage factorization
+Bimor(h) -> Iso(h)          : normal-mono lift plus monic cancellation
 WPB(α,γ)                   : WK([α,−γ]) with projected legs
 lift_WPB(c)                : selected nonunique factor of an encoded cone
 α o p = γ o q              : derived conventional WPB compatibility
@@ -965,6 +966,9 @@ The literal owners are `CommRingFiniteFree_cat`,
 `coimage_to_target`,
 `coimage_image_comparison`,
 `coimage_image_factorization_path`,
+`computational_abelian_bimorphism_inverse`,
+`computational_abelian_bimorphism_iso`,
+`computational_abelian_coimage_image_iso`,
 `weak_pullback_difference_fapp0`,
 `ComputationalWeakPullback`,
 `WeakPullbackCone`,

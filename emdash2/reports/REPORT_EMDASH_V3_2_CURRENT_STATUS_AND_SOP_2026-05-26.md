@@ -422,6 +422,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   `f = image_embedding o comparison o coimage_projection`. The comparison
   inverse remains a downstream normality theorem rather than an assumed
   isomorphism.
+- `emdash3_2_abelian_bimorphisms.lp`: rule-free constructive balancedness.
+  Epicity makes the selected cokernel projection zero; the normal-mono lift of
+  the codomain identity supplies an inverse on one side, and monic
+  cancellation supplies the other. The result uses existing `IsoEvidence`
+  and specializes to the coimage–image comparison when explicit bimorphism
+  evidence is available.
 - `emdash3_2_computational_weak_pullbacks.lp`: rule-free derived weak
   pullbacks in any additive category with computational weak kernels. The
   cospan difference is `[alpha,-gamma]`; a test cone is its existing
