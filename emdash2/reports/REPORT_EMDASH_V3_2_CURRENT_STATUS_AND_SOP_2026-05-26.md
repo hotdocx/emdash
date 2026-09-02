@@ -510,6 +510,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   factorization and both inverse laws. Canonical whole-output comparison is
   deterministic; no Core owner, quotient decoder, or ring-wide theorem is
   added.
+- `src/v3_2/algebra_polynomial_freyd_homology.ts`: whole one-degree
+  polynomial Freyd homology and exactness. A chain pair retains its computed
+  adjacent-zero presentation agreement, including negative results. Positive
+  pairs derive cycles, boundary lift, and homology by the existing
+  kernel/lift/cokernel operations. Exactness compares the homology projection
+  with zero and retains an actual boundary epimorphism witness only on
+  success. No image/kernel object equality or formal quotient decoder is
+  assumed.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

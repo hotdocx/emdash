@@ -3571,6 +3571,15 @@ equation can be explicitly adopted at the proof boundary, while the adapter
 adds neither a kernel primitive nor a claim that every formal ring supplies
 the required effective weak-kernel computation.
 
+At the native polynomial Freyd layer, a chain pair first computes and retains
+the complete agreement between its adjacent composite and zero. Homology is
+available only when that agreement succeeds: the existing Freyd kernel gives
+cycles, its existing lift gives the boundary map, and the existing Freyd
+cokernel gives homology. Exactness is then tested by comparing the selected
+homology projection with zero. A successful result retains the corresponding
+epimorphism witness for the boundary map; a failed comparison remains visible
+as negative computational data.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

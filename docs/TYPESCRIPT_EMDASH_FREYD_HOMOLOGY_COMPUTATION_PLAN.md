@@ -335,10 +335,10 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 |---|---|---|---|
 | `FH-PLAN-0` | complete; checkpoint `26b7c2fd` | baseline `4acef747` | living plan, isolated branch/worktree, integration evidence, scope/Git boundary, persistent goal |
 | `FH-AUDIT-1` | complete; checkpoint `2602afd6` | current formal/native owners | exact owner matrix, generic formulation, categorical-IR feasibility, baseline diagnostics, rejection signals |
-| `FH-GENERIC-2` | complete; checkpoint pending | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
-| `FH-NATIVE-3` | blocked on generic owner | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
-| `FH-EXACT-4` | blocked on native homology | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
-| `FH-CATEGORICAL-5` | blocked on native whole result | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
+| `FH-GENERIC-2` | complete; checkpoint `dfdc3538` | generic kernels/cokernels | rule-free one-degree chain-pair, cycles, boundary lift, homology cokernel, readable projections |
+| `FH-NATIVE-3` | complete; checkpoint pending | polynomial Freyd Abelian provider | whole chain-pair and homology result with retained agreements and positive/negative cases |
+| `FH-EXACT-4` | complete; checkpoint pending | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
+| `FH-CATEGORICAL-5` | ready | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
 | `FH-BOUNDED-6` | blocked on native one-degree owner | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
 | `FH-FORMAL-7` | blocked on generic/native orientation | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
 | `FH-FUNCTORIAL-8` | blocked on homology owners | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
@@ -369,6 +369,8 @@ replacement, prerequisite, or human decision.
 | `D-FH-013` | accepted after owner audit | Generic homology construction requires only selected pre-Abelian kernels/cokernels. Abelian normality enters exactness and comparison theorems, not the existence of `Hₙ`. |
 | `D-FH-014` | accepted after native agreement audit | The chain-pair constructor retains negative agreements; the homology constructor consumes only a positive chain agreement and returns a typed failure otherwise. |
 | `D-FH-015` | accepted after generic owner implementation | `ComputationalHomologyAt` is a whole snapshot over one selected `PreAbelianCategory`: it retains the selected cycle kernel and the selected cokernel of the kernel-lifted boundary. Its readable equations are exactly the existing kernel reconstruction and cokernel annihilation paths. |
+| `D-FH-016` | accepted after native homology tests | Native chain-pair construction always retains the computed presentation agreement, including `agrees=false`; `algebraPolynomialFreydHomologyAt` consumes only a positive pair and composes the existing Freyd kernel, kernel-lift, and cokernel owners into one frozen whole result. |
+| `D-FH-017` | accepted after exactness tests | `algebraPolynomialFreydExactnessAt` compares the selected homology projection with zero. A positive comparison is retained together with the actual `AlgebraPolynomialFreydEpimorphismWitness` for the boundary map; a negative result retains the failed agreement and has no fabricated witness. |
 
 ## Implemented Owner Audit
 
@@ -393,6 +395,24 @@ head, rewrite, unifier, image equality, exactness assertion, or manual diagram
 was added. Warning-enabled checking is neutral at
 `1,386 = 1,217 critical pairs + 169 replaceable variables`; strict LHS remains
 clean, and the refreshed source-metrics health snapshot covers 427 files.
+
+## Implemented Native Homology And Exactness
+
+`src/v3_2/algebra_polynomial_freyd_homology.ts` adds two deliberately separate
+whole boundaries. `algebraPolynomialFreydChainPair(dNext,d)` validates the
+middle presentation, computes the composite and zero morphism, and retains
+their full presentation agreement whether it succeeds or fails.
+`algebraPolynomialFreydHomologyAt(pair)` requires the positive agreement and
+then composes the exact existing Freyd kernel, kernel-lift, and cokernel
+operations. Its frozen result retains cycles, cycle embedding, boundary,
+boundary reconstruction, homology, projection, and annihilation.
+
+`algebraPolynomialFreydExactnessAt` compares that selected projection with
+zero. Success additionally retains the computed epimorphism witness for the
+boundary; failure retains the negative agreement without pretending to have
+an epic map. Five focused tests cover invalid endpoints, a retained non-chain
+pair, the nontrivial exact multiplication-by-`x`/quotient sequence, a valid
+nonexact zero pair, and determinism. Root typecheck and focused lint pass.
 
 ## Baseline And Validation Policy
 

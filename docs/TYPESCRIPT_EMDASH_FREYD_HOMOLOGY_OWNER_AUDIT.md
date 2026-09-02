@@ -182,6 +182,11 @@ operations.
 The older field-linear `AlgebraModuleHomology` result is a differential
 oracle. It does not replace this presentation-witnessed whole result.
 
+The selected native implementation now follows this boundary exactly in
+`algebra_polynomial_freyd_homology.ts`. The multiplication-by-`x` map followed
+by its selected quotient projection is the first nontrivial exact consumer;
+the zero-to-zero pair is retained as a valid but nonexact comparison.
+
 ## Categorical Program Feasibility
 
 The operational polynomial Freyd Abelian category exposes inherited whole
