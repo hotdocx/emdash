@@ -565,7 +565,7 @@ Refine or reject a candidate when it:
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | ready after witnessed Abelian package | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
-| `FAB-FORMAL-9` | complete; checkpoint pending | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
+| `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
 | `FAB-BRIDGE-10` | blocked on native/formal operations | proof–CAS bridge | selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
 | `FAB-CLOSE-12` | blocked on required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
