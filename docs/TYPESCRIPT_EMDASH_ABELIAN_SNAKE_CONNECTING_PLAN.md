@@ -588,8 +588,8 @@ monomorphism.
 | `ASC-NATIVE-SQUARES-1A` | complete; checkpoint `771f082b` | native Freyd biproduct/kernel/cokernel owners | derived whole fiber product and pushout, selected factor/cofactor, quotient uniqueness, focused positive/negative/determinism tests |
 | `ASC-FIBER-2` | complete; checkpoint `9a73e59b` | biproducts and computational kernels | genuine rule-free fiber product, internal cone, contractible factor space, projections and compatibility |
 | `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
-| `ASC-STABILITY-4` | complete; checkpoint pending | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
-| `ASC-EXACT-5` | complete; checkpoint pending | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
+| `ASC-STABILITY-4` | complete; checkpoint `9d637cdd` | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
+| `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
 | `ASC-SNAKE-GENERIC-6` | pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
