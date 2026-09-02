@@ -559,9 +559,9 @@ Refine or reject a candidate when it:
 | `FAB-GENERIC-IMAGE-4A` | complete through canonical comparison; checkpoint `f277b3d1` | selected kernels/cokernels | derived image/coimage, projection/embedding, comparison, and factorization `f = i o chi o p` |
 | `FAB-GENERIC-IMAGE-4B` | complete at explicit bimorphism boundary; checkpoint `a9511535` | generic comparison + normality | any explicit monic/epic comparison receives a constructed `IsoEvidence` inverse; concrete evidence is native/formal downstream data |
 | `FAB-MONO-NATIVE-5A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
-| `FAB-MONO-FORMAL-5B` | complete; uniqueness checkpoint pending after reconstruction checkpoint `a0dfbe09` | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
+| `FAB-MONO-FORMAL-5B` | complete; checkpoints `a0dfbe09`, `b4b4de93` | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | complete; checkpoint `852af783` | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
-| `FAB-EPI-FORMAL-6B` | complete; reconstruction/uniqueness checkpoint pending after colift checkpoint `b469a6a9` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
+| `FAB-EPI-FORMAL-6B` | complete; checkpoints `b469a6a9`, `2720998e`, `b4b4de93` | formal witnessed pre-Abelian | witnessed epimorphism and formal Construction 3.15 |
 | `FAB-IMAGE-NATIVE-7A` | complete; checkpoint `8543cfe9` | native pre-Abelian provider | whole image/coimage/comparison/isomorphism operations and boundaries |
 | `FAB-IMAGE-FORMAL-7B` | blocked on formal normality + generic image | formal witnessed normality | witnessed image/coimage comparison and inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
