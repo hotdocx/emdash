@@ -568,7 +568,7 @@ Refine or reject a candidate when it:
 | `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
 | `FAB-BRIDGE-10` | complete; checkpoint `4813ba4f` | proof–CAS bridge | thirteen selected exact normality/comparison equations replay actual operations |
 | `FAB-DIFFERENTIAL-11` | complete by reused real-Singular weak-kernel differential | stable reference adapters | non-authoritative installed-Singular comparison validates the selected computational prerequisite without replacing native data |
-| `FAB-CLOSE-12` | complete; closure checkpoint pending | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
+| `FAB-CLOSE-12` | complete; closure checkpoint `807e3637` | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
 
 Rows may be split or reordered as probes refine dependencies. A row may be
 rejected or deferred only with durable evidence and a concrete replacement or
