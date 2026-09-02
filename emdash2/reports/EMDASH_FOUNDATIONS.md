@@ -3606,6 +3606,14 @@ selected zero presentation at either endpoint. Direct bounded-free complexes
 embed by viewing free modules as relation-free presentations; the adapter
 does not define a second homology operation.
 
+Functorial homology repeats the two universal steps. A chain map retains both
+adjacent square agreements. The lower square makes the middle component send
+source cycles into target cycles, so the target kernel constructs a cycles
+map. Boundary compatibility and the upper square make the target homology
+projection coannihilate the source boundary, so the source cokernel constructs
+the induced homology map. The implementation retains every intermediate
+agreement and reconstruction, not merely the final map.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

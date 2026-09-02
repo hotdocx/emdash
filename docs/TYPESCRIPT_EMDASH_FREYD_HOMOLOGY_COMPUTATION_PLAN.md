@@ -340,8 +340,8 @@ square, a second quotient Hom, or a Boolean-only exactness interface.
 | `FH-EXACT-4` | complete; checkpoint `5e9aaa4c` | normal epimorphism computation | witness-rich exactness at a degree and zero-homology comparison |
 | `FH-CATEGORICAL-5` | complete; checkpoint `9deeeb92` | categorical IR/compiler | retained homology program, method trace, lowering, direct/graph byte agreement |
 | `FH-BOUNDED-6` | complete; checkpoint `3fc20066` | bounded free/Freyd spines | whole bounded Freyd complexes, free-complex adapter, degree observations, homology consumer |
-| `FH-FORMAL-7` | complete; checkpoint pending | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
-| `FH-FUNCTORIAL-8` | ready | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
+| `FH-FORMAL-7` | complete; checkpoint `d68eb79d` | witnessed Freyd Abelian package | formal one-degree homology, exactness witness boundary, focused reviewers |
+| `FH-FUNCTORIAL-8` | active; native result and tests pass, formal/operation surfaces pending | chain-map squares and universal operations | induced cycles/homology map with reconstruction; identity and one nontrivial consumer |
 | `FH-BRIDGE-9` | blocked on native/formal results | proof–CAS delegation | exact selected chain, factor, homology, exactness, and induced-map equations |
 | `FH-DIFFERENTIAL-10` | blocked on native homology | field reference/Singular adapters | non-authoritative comparison without replacing native Freyd data |
 | `FH-CLOSE-11` | blocked on required rows | all required rows | authorities, warning/LHS/catalog/health evidence, focused gates, checkpoints, successor boundary |
@@ -374,6 +374,7 @@ replacement, prerequisite, or human decision.
 | `D-FH-018` | accepted after categorical compilation tests | The first retained program is genuinely compositional at the available whole-operation boundary: a chain-pair input feeds derived `homology-at`, whose output feeds derived `exactness-at`. Planner prerequisites record kernel/kernel-lift/cokernel and epimorphism capabilities; direct and two-node graph execution have identical canonical outputs. No dependent-record IR extension is needed. |
 | `D-FH-019` | accepted after bounded Freyd tests | A bounded Freyd complex retains presentation terms, raw differentials, and one full composite-zero agreement per adjacent pair. Degreewise homology supplies zero-presentation endpoint maps and delegates to the one-degree owner. The bounded-free adapter embeds free modules as relation-free presentations without becoming a second homology implementation. |
 | `D-FH-020` | accepted after formal homology implementation | `CommRingFreydWitnessedHomologyAt` stores the selected raw kernel lift, its explicit reconstruction agreement, and the existing witnessed cokernel universal property. `CommRingFreydExactnessAt` is the existing epimorphism-witness type for the stored boundary. Readable quotient paths are derived from agreements; no new formal equality carrier or rule is needed. |
+| `D-FH-021` | accepted after native functorial tests | A one-degree chain map retains both presentation-square agreements. The lower square lets the middle component lift through the target cycle kernel; compatibility with the two boundaries is retained explicitly; the target homology projection then coannihilates the source boundary and descends through the source homology cokernel. Identity and nontrivial scalar consumers compute, while a failed square remains negative data. |
 
 ## Implemented Owner Audit
 
@@ -471,6 +472,23 @@ derived through the agreement-to-path owner. Source and focused reviewer pass
 quiet and warning-enabled checking. The rule-free module inherits
 `1,392 = 1,223 critical pairs + 169 replaceable variables`; strict LHS is
 clean, and the refreshed source-metrics health snapshot covers 429 files.
+
+## Implemented Native Functorial Homology
+
+`algebra_polynomial_freyd_functorial_homology.ts` implements the two universal
+steps for an induced map. `AlgebraPolynomialFreydHomologyChainMap` retains the
+upper and lower presentation-square agreements, including failures. For a
+valid chain map, the middle component after the source cycle embedding lifts
+through the target cycle kernel. The result retains that lift,
+reconstruction, and its compatibility with the source/target boundaries.
+
+Postcomposition with the target homology projection produces a test that
+coannihilates the source boundary, so the existing source cokernel colift
+constructs the homology map and its reconstruction. Four focused tests cover
+the identity-induced map, a nontrivial scalar action on nonzero homology, a
+retained failed square, and invalid component endpoints. Root typecheck and
+focused lint pass. A formal witness surface and categorical/proof–CAS
+operations remain the active part of `FH-FUNCTORIAL-8`.
 
 ## Baseline And Validation Policy
 

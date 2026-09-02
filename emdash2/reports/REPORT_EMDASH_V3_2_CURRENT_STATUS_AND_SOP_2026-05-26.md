@@ -538,6 +538,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   Degreewise homology inserts selected zero-presentation endpoint maps and
   delegates to the one-degree owner. The direct bounded-free adapter embeds
   free modules as relation-free presentations and retains its source complex.
+- `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
+  one-degree polynomial Freyd homology. Both chain-square agreements are
+  retained. A target-kernel lift constructs the cycles map; explicit boundary
+  compatibility makes the target homology projection a source-cokernel test;
+  its colift is the homology map. Identity and nontrivial scalar consumers
+  compute, while failed squares remain negative data.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

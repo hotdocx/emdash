@@ -250,6 +250,12 @@ first goal requires identity and one nontrivial induced map. Composition
 compatibility is implementation-ready mathematically but should be promoted
 only after the concrete owner and equation orientation are measured.
 
+The native owner now confirms the orientation: lower-square data constructs
+the target-cycle lift; upper-square data is reflected in the computed
+boundary-compatibility agreement; the target homology projection produces the
+source-cokernel test. Identity and scalar maps descend, and a failed square is
+retained rather than coerced.
+
 ## Proof–CAS Boundary
 
 The completed presentation realization can reify every required structural or
