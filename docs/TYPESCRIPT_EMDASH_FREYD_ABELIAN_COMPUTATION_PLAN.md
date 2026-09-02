@@ -553,9 +553,9 @@ Refine or reject a candidate when it:
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `FAB-PLAN-0` | complete; checkpoint `002f7540` | baseline `7c537a6b` | living plan, isolated branch/worktree, fast-forward evidence, Git/scope boundary, persistent goal |
-| `FAB-AUDIT-1` | active | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
-| `FAB-EFFECTIVENESS-2` | blocked on audit; non-blocking for witnessed work | quotient owners | bounded audit of direct quotient elimination; accept only without choice/opaque decoder |
-| `FAB-GENERIC-NORMALITY-3` | blocked on audit | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
+| `FAB-AUDIT-1` | complete; checkpoint pending | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
+| `FAB-EFFECTIVENESS-2` | complete as audited deferral behind effective quotient theorem | quotient owners | no current path-to-agreement/direct dependent eliminator; witnessed work proceeds without choice/opaque decoder |
+| `FAB-GENERIC-NORMALITY-3` | active | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
 | `FAB-GENERIC-IMAGE-4` | blocked on generic normality | selected kernels/cokernels | derived image/coimage, structural maps, comparison, factorization, comparison inverse under normality |
 | `FAB-MONO-NATIVE-5A` | blocked on audit | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | blocked on audit | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
@@ -589,6 +589,11 @@ prerequisite.
 | `D-FAB-010` | accepted | Field-module split inverses are differential evidence only; polynomial Freyd algorithms use retained presentation agreements and weak-pullback data. |
 | `D-FAB-011` | accepted | Whole operations own computation; observations and role-specific usability methods are derived. |
 | `D-FAB-012` | accepted | Exactness and homology begin only after this Abelian boundary is complete. |
+| `D-FAB-013` | accepted after owner audit | Kernel contractibility derives monicity of selected kernel embeddings; cokernel contractibility derives epicity of selected cokernel projections. These cancellation theorems are prerequisites for generic image/coimage comparison. |
+| `D-FAB-014` | accepted after effectiveness audit | Current truncation/groupoidification eliminators promote point laws into sets but do not decode arbitrary truncated-Hom paths to raw agreements. Closed concrete formal qualification remains gated; no choice or opaque decoder is introduced. |
+| `D-FAB-015` | accepted after block-owner audit | Formal row-block splitting and projection/eta laws already exist. Native agreement matrices can be split representation-preservingly by their explicit component arrays; add only a checked helper, not a new matrix representation. |
+| `D-FAB-016` | accepted after Construction 3.14 audit | The monic lift datum is the lower block of the test's cokernel-zero agreement. Its relation witness is the monic kernel-zero witness composed with the selected first-weak-pullback factor of the derived relation pair. |
+| `D-FAB-017` | accepted after Construction 3.15 audit | The epic colift datum is the test map composed with the lower block of the cokernel-projection-zero witness. Its relation witness uses the test kernel-zero agreement and a selected first-weak-pullback factor; the exact subtraction orientation remains a focused native test question. |
 
 ## Validation Matrix
 
