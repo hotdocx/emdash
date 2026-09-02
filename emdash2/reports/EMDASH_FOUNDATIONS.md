@@ -3575,6 +3575,15 @@ the bounded checker budget. This is compilation granularity only: it neither
 caps higher structure nor replaces a universal construction by a manual
 diagram or postulate.
 
+The native polynomial Freyd specialization follows the same operation order
+without selecting a splitting. Its frozen result retains the triple,
+`gamma`/`alpha` factors, genuine fiber product and pushout, stability
+witnesses, both normal factors, the connecting arrow, and all quotient
+agreements. A canonical serializer traverses that complete selected result.
+The native triple and connecting operations can therefore be retained as two
+ordinary computation-graph nodes, and their serialized output agrees exactly
+with direct execution on the nonsplit `R -> R/(x)` example.
+
 At the native polynomial Freyd layer, normality now follows Posur's explicit
 witness formulas. Monicity is represented by the agreement making the
 selected kernel embedding zero. A test's cokernel-zero witness splits into

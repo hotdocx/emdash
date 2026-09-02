@@ -5732,6 +5732,15 @@ the provider qualifies only after every inherited additive and universal role
 is plannable. Non-field coefficient providers are rejected; no Abelian claim
 is made.
 
+The native polynomial Freyd snake operation follows the nonsplit CAP
+fiber-product/pushout algorithm and retains every selected universal result,
+stability witness, normal factor, and reconstruction agreement. Its
+ring-indexed reference surface exposes whole triple and connecting operations
+plus canonical serialization of the complete result. Direct and two-node
+graph execution agree byte-for-byte on the nonsplit `R -> R/(x)` consumer; no
+projection section or external CAS process is used. Categorical method roles
+and lowering remain the next active layer.
+
 ## Book And Renderer Workflow
 
 The book is a first-class exposition artifact under `book/`. Its

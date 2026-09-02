@@ -598,7 +598,7 @@ monomorphism.
 | `ASC-SNAKE-NORMAL-EPI-6C` | complete; checkpoint `22e2da6f` | 6B and pre-Abelian image cocone consequence | derived `NormalEpiTest` for `q1 o beta o p2`, selected `u`, and reconstruction through epic `p1` |
 | `ASC-SNAKE-NORMAL-MONO-6D` | complete; checkpoint `22e2da6f` | 6C, lambda kernel, pushout compatibility, and `Coker(q2)` | derived `NormalMonoTest` for `u`, selected connecting arrow, and reconstruction through monic `q2` |
 | `ASC-SNAKE-RESULT-6E` | complete; checkpoint `22e2da6f` | 6C–6D | whole paired selected-factor result retaining both final `HFiber` reconstruction paths and named access to every earlier whole construction |
-| `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
+| `ASC-SNAKE-NATIVE-7` | complete; checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, typed failures, canonical deterministic serialization, and retained native triple/connecting operations |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
 | `ASC-BRIDGE-10` | pending | native/category/formal selected results | proof–CAS delegation bundle and exact equation replay |
@@ -684,7 +684,18 @@ the genuine fiber product and pushout, stability witnesses, the normal-epi
 colift `u`, the normal-mono lift defining the connecting map, and all
 reconstruction agreements. It passes the CAP rational example and the
 nonsplit `R -> R/(x)` example; the latter contains no section field. Category
-roles, canonical whole serialization, and formal replay remain in later rows.
+roles and formal replay remain in later rows.
+
+`algebra_polynomial_freyd_snake_reference_operations.ts` now supplies the
+native whole-operation boundary. The triple and connecting operations have
+ring-indexed runtime schemas and TypeScript reference implementations. Their
+canonical serializers include the input agreement, four selected
+kernel/cokernel stages, genuine fiber product and pushout, both stability
+witnesses, both normal factors, every reconstruction agreement, and readable
+source/target data. A retained two-node native graph serializes byte-for-byte
+with direct execution, and repeated nonsplit execution is deterministic.
+Focused workspace, typecheck, lint, and four-test snake evidence is green; no
+full TypeScript aggregate was run.
 
 ## Implemented Short Exact Interface
 

@@ -17,7 +17,14 @@ import {
     algebraPolynomialText,
     algebraPolynomialVariable,
     algebraPolynomialFreydSnakeConnecting,
+    algebraPolynomialFreydAbelianCategoryModel,
+    algebraPolynomialFreydSnakeReferenceOperations,
     algebraPolynomialFreydSnakeTriple,
+    createAlgebraComputationGraphBuilder,
+    createAlgebraTypeScriptReferenceEngine,
+    executeAlgebraComputationGraph,
+    serializeAlgebraPolynomialFreydSnakeConnecting,
+    serializeAlgebraPolynomialFreydSnakeTriple,
     algebraPresentedPolynomialModule
 } from '../src/v3_2';
 
@@ -147,4 +154,81 @@ describe('v3.2 CAP-style polynomial Freyd snake morphism', () => {
             snakeError('TRIPLE_ZERO_FAILED')
         );
     });
+
+    it('executes retained native operations with canonical whole serialization',
+        async () => {
+            const ring = algebraPolynomialRing(RATIONAL_DOMAIN, ['x'], 'lex');
+            const x = algebraPolynomialVariable(ring, 0);
+            const ambient = algebraPolynomialFreeModule(ring, 1);
+            const object = algebraPresentedPolynomialModule(
+                algebraPolynomialSubmodule(ambient, [])
+            );
+            const delta = algebraPolynomialPresentationMorphism({
+                source: object,
+                target: object,
+                map: algebraPolynomialModuleMap(ambient, ambient, [
+                    algebraPolynomialModuleVector(ambient, [x])
+                ])
+            });
+            const beta = algebraPolynomialPresentationMorphismIdentity(object);
+            const lambda = algebraPolynomialPresentationMorphism({
+                source: object,
+                target: object,
+                map: algebraPolynomialModuleMapZero(ambient, ambient)
+            });
+            const directTriple = algebraPolynomialFreydSnakeTriple(
+                delta,
+                beta,
+                lambda
+            );
+            const direct = algebraPolynomialFreydSnakeConnecting(directTriple);
+            const operations = algebraPolynomialFreydSnakeReferenceOperations(
+                algebraPolynomialFreydAbelianCategoryModel(ring),
+                ring
+            );
+            const builder = createAlgebraComputationGraphBuilder(
+                'polynomial-freyd-snake.native',
+                'v1'
+            );
+            const input = builder.input('triple-input',
+                operations.tripleInputSchema);
+            const triple = builder.operation('triple', operations.triple, input);
+            const connecting = builder.operation(
+                'connecting',
+                operations.connecting,
+                triple
+            );
+            const execution = await executeAlgebraComputationGraph({
+                graph: builder.build([
+                    { id: 'triple', value: triple },
+                    { id: 'connecting', value: connecting }
+                ]),
+                engine: createAlgebraTypeScriptReferenceEngine({
+                    implementations: operations.implementations
+                }),
+                inputs: [{
+                    id: 'triple-input',
+                    value: { delta, beta, lambda }
+                }]
+            });
+            assert.equal(
+                serializeAlgebraPolynomialFreydSnakeTriple(
+                    execution.outputs[0].value as typeof directTriple
+                ),
+                serializeAlgebraPolynomialFreydSnakeTriple(directTriple)
+            );
+            const compiled = execution.outputs[1].value as typeof direct;
+            assert.equal(
+                serializeAlgebraPolynomialFreydSnakeConnecting(compiled),
+                serializeAlgebraPolynomialFreydSnakeConnecting(direct)
+            );
+            assert.equal(
+                serializeAlgebraPolynomialFreydSnakeConnecting(
+                    algebraPolynomialFreydSnakeConnecting(
+                        algebraPolynomialFreydSnakeTriple(delta, beta, lambda)
+                    )
+                ),
+                serializeAlgebraPolynomialFreydSnakeConnecting(direct)
+            );
+        });
 });
