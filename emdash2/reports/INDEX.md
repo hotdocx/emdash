@@ -1,6 +1,15 @@
 # EMDASH Reports Index
 
-Date: 2026-09-01
+Date: 2026-09-02
+
+`../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` is the active
+constructive continuation from the completed Freyd pre-Abelian boundary. It
+targets witness-retaining lifts along monomorphisms and colifts along
+epimorphisms, derived image/coimage computation, the coimage–image comparison
+isomorphism, a complete operational Abelian role family, and a
+capability-indexed witnessed formal Abelian package. Closed concrete formal
+qualification remains separately gated on effective elimination of arbitrary
+truncated quotient paths; exactness and homology remain successor work.
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_PREABELIAN_COMPUTATION_PLAN.md` is the
 completed constructive continuation from computational weak kernels. It derives
