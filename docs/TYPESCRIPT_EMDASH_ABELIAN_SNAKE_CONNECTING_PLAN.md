@@ -4,7 +4,7 @@ Date: 2026-09-02
 
 Plan-ID: `TS-EMDASH-ABELIAN-SNAKE-CONNECTING`
 
-Status: complete on the dedicated branch/worktree; closure checkpoint pending
+Status: complete on the dedicated branch/worktree
 
 Baseline: `4036ef47be6c3f82dcac05c257c98b2201c101d7`
 
@@ -603,7 +603,7 @@ monomorphism.
 | `ASC-FORMAL-9` | complete; checkpoint `8453edb6` | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit `p1`/`q2` property and normal-test agreements, raw/quotient factors, and reviewers |
 | `ASC-BRIDGE-10` | complete; checkpoints `4c4b29c9`, `85ef620b` | native/category/formal selected results | one whole-operation proof–CAS bundle reifying, replaying, and adopting 25 exact selected morphism/agreement claims, including both projection and both injection reconstructions, with a live Lambdapi consumer |
 | `ASC-DIFFERENTIAL-11` | complete; checkpoint `c6eee629` | field implementation and CAP/homalg references | independent finite-dimensional CAP operation chain agrees with the constant-ring polynomial Freyd result in quotient coordinates and with the published raw fixture, without runtime dependency |
-| `ASC-CLOSE-12` | complete; closure checkpoint pending | all required rows | authorities, focused warning/LHS/catalog/TOC and TypeScript/Lambdapi evidence synchronized; repository-wide health regeneration explicitly deferred by `D-ASC-019`/`D-ASC-035`; successor boundary recorded |
+| `ASC-CLOSE-12` | complete; checkpoint `4c04b52d` | all required rows | authorities, focused warning/LHS/catalog/TOC and TypeScript/Lambdapi evidence synchronized; repository-wide health regeneration explicitly deferred by `D-ASC-019`/`D-ASC-035`; successor boundary recorded |
 
 Rows may be split or reordered when a focused audit refines their dependency
 graph. A row may be rejected or deferred only with durable evidence and a
