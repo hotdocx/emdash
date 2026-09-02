@@ -3464,6 +3464,17 @@ two reconstruction paths give
 already at the pre-Abelian boundary; constructing its inverse is the separate
 normality step and is not assumed here.
 
+At the native polynomial Freyd layer, normality now follows Posur's explicit
+witness formulas. Monicity is represented by the agreement making the
+selected kernel embedding zero. A test's cokernel-zero witness splits into
+two row blocks; the lower block is the lift datum, while its relation witness
+is obtained by the first weak-pullback factor followed by the kernel-zero
+witness. Epicity is represented dually by the split identity witness making
+the cokernel projection zero. Its lower block composes with the test to give
+the colift, and another first weak-pullback factor constructs the relation
+witness. Both operations retain quotient reconstruction and uniqueness
+agreements; no field inverse or Boolean-only monic/epic test is used.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with
