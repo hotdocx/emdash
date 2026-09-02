@@ -590,7 +590,8 @@ monomorphism.
 | `ASC-PUSHOUT-3` | complete; checkpoint `9a73e59b` | biproducts and computational cokernels | genuine rule-free pushout, internal cocone, contractible cofactor space, injections and compatibility |
 | `ASC-STABILITY-4` | complete; checkpoint `9d637cdd` | genuine fiber products/pushouts and Abelian normality | pullback-of-epi epic and pushout-of-mono monic with explicit witnesses |
 | `ASC-EXACT-5` | complete; checkpoint `84ebee12` | generic homology exactness and monic/epic owners | witness-rich short exact triple and canonical readable observations |
-| `ASC-SNAKE-GENERIC-6` | pending | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
+| `ASC-SNAKE-GENERIC-6` | in progress via 6A | rows 2–5 | generic CAP-style connecting morphism with every intermediate whole result and path retained |
+| `ASC-SNAKE-SPINE-6A` | implementation/reviewer green; checkpoint pending | generic kernels/cokernels and triple-zero path | internal triple plus selected `epsilon`, `gamma`, `iota`, `mu`, `alpha`, `pi`, and both first-factor reconstructions |
 | `ASC-SNAKE-NATIVE-7` | core algorithm green; category/serializer checkpoint pending | operational polynomial Freyd Abelian provider | non-split polynomial whole result, failures, deterministic serialization, boundary consumers |
 | `ASC-CATEGORY-8` | pending | categorical operation registry/compiler | operation roles, methods, prerequisite trace, lowering, direct/graph whole-result agreement |
 | `ASC-FORMAL-9` | pending | witnessed formal Freyd Abelian operations | rule-free capability-indexed connecting result with explicit raw agreements and reviewers |
@@ -627,6 +628,7 @@ concrete replacement, prerequisite, or human decision.
 | `D-ASC-019` | classified after source-health refresh | Registering the two new formal sources invalidated the resumable health-set identity and triggered one full rebuild. Every new owner/reviewer passed, but the unrelated existing `examples/dependent_simplex_faces.lp` failed; the same focused failure reproduces on clean baseline `main`. The generated health report correctly remained unchanged. This goal records and excludes that orthogonal baseline defect rather than editing simplex work. |
 | `D-ASC-020` | accepted after exactness owner probe | `ComputationalExactAt` is `IsEpic` for the boundary-to-selected-kernel map already constructed by `ComputationalHomologyAt`. `ComputationalShortExactTriple` adds incoming monicity and outgoing epicity over the same internal zero pair; it stores no image/kernel equality or new diagram. |
 | `D-ASC-021` | accepted after constructive stability proof | Stability is proved for the canonical selected binary constructions, so their combined arrows are definitionally the kernel/cokernel selected by the same `ComputationalAbelianCategory`. The difference arrow first inherits epicity/monicity from the distinguished leg; normal epi/mono factors then turn equality after the projection/injection into a zero difference. |
+| `D-ASC-022` | accepted after generic spine probe | The generic snake input is one internal Sigma triple retaining `delta`, `beta`, `lambda`, and `lambda o beta o delta = 0`. That single path constructs both the `lambda beta` cokernel cone and the `beta delta` kernel cone, so `gamma` and `alpha` are selected operations rather than diagram fields. |
 
 ## Implemented Genuine Binary Universal Constructions
 
@@ -695,6 +697,21 @@ computation receives the actual cancellation evidence. The owner and reviewer
 pass quiet and warning-enabled checks at the inherited `1,217` critical-pair
 and `169` replaceable-variable import boundary. The module adds no rule or
 unifier and has zero strict-LHS findings.
+
+## Implemented Generic Snake Spine
+
+The first generic snake tranche is active in
+`emdash3_2_abelian_snake_lemma.lp`. `AbelianSnakeTriple` retains exactly three
+composable arrows and their triple-zero path. The same path constructs the
+cokernel cone selecting `gamma : Coker(delta) -> D` and the kernel cone
+selecting `alpha : A -> Ker(lambda)`. Their reconstruction paths, the kernel
+embedding `iota`, the kernel embedding `mu`, and the cokernel projection `pi`
+are all named observations of existing universal owners.
+
+This spine passes quiet and warning-enabled checking, adds no rule or unifier,
+and has zero strict-LHS findings. The fiber product, pushout, their stability
+witnesses, the two derived normal-factor tests, and the final connecting arrow
+remain in the parent 6 row.
 
 ## Baseline And Validation Policy
 

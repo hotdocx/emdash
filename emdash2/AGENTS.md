@@ -156,6 +156,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   pushout injection opposite a monic arrow is monic. The proof derives the
   defining difference arrow's cancellation, then uses the existing normal
   epi/mono factor spaces; it adds no property postulate, rule, or unifier.
+  `emdash3_2_abelian_snake_lemma.lp` currently owns the rule-free generic
+  snake spine: one triple-zero path constructs the selected `gamma` cokernel
+  colift and `alpha` kernel lift together with their kernels/cokernels. The
+  final fiber/pushout normal-factor tests and connecting arrow remain the
+  active plan row, not postulated fields.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

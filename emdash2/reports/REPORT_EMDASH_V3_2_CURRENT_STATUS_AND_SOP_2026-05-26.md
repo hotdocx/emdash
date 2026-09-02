@@ -473,6 +473,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   monic when its first leg is monic; normal-mono lifting proves the second
   selected pushout injection monic. The proofs return actual `IsEpic` and
   `IsMonic` cancellation functions, not flags.
+- `emdash3_2_abelian_snake_lemma.lp`: active rule-free generic snake spine.
+  One internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
+  path. That path constructs the selected cokernel colift `gamma` and kernel
+  lift `alpha`, their reconstruction paths, and the surrounding selected
+  kernel/cokernel arrows. Fiber/pushout normal tests and the final connecting
+  lift remain the next plan slice; no partial connecting arrow is postulated.
 - `emdash3_2_commutative_algebra_freyd_cokernels.lp`: rule-free
   witness-enriched Construction 3.6. It appends the morphism datum to target
   relations, constructs the identity-data projection, and uses an explicit

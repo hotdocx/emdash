@@ -68,6 +68,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_short_exact_sequences.lp)
   files+=(emdash3_2_abelian_categories.lp)
   files+=(emdash3_2_abelian_fiber_pushout_stability.lp)
+  files+=(emdash3_2_abelian_snake_lemma.lp)
   files+=(emdash3_2_abelian_images.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)

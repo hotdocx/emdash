@@ -32,6 +32,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_short_exact_sequences.lp"),
     Path("emdash3_2_abelian_categories.lp"),
     Path("emdash3_2_abelian_fiber_pushout_stability.lp"),
+    Path("emdash3_2_abelian_snake_lemma.lp"),
     Path("emdash3_2_abelian_images.lp"),
     Path("emdash3_2_abelian_bimorphisms.lp"),
     Path("emdash3_2_presheaves.lp"),
