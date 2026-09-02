@@ -3440,6 +3440,19 @@ surface described above, while the operational field-polynomial provider has
 all eight usable pre-Abelian roles. Neither fact supplies the missing
 quotient-path decoder required by the stronger formal package.
 
+The generic normality layer now continues this same fibre formulation.
+`IsMonic(m)` and `IsEpic(e)` are cancellation properties of ordinary Hom
+composition. Contractibility of kernel factor spaces proves every selected
+kernel embedding monic; contractibility of cokernel factor spaces proves every
+selected cokernel projection epic. For a monomorphism, a test is an arrow
+annihilated by its selected cokernel projection, and its candidate lifts form
+the fibre of `m o -` at that arrow. The dual colift space is the fibre of
+`- o e`. Requiring those fibres contractible gives selected normal lifts and
+colifts, reconstruction, and uniqueness without a separate diagram record.
+Pairing both whole capabilities with the existing pre-Abelian package yields
+the generic `ComputationalAbelianCategory`; concrete Freyd witnesses and the
+derived image/coimage comparison remain downstream layers.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

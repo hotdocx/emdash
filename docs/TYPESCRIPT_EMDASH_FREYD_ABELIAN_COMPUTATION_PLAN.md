@@ -553,10 +553,10 @@ Refine or reject a candidate when it:
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `FAB-PLAN-0` | complete; checkpoint `002f7540` | baseline `7c537a6b` | living plan, isolated branch/worktree, fast-forward evidence, Git/scope boundary, persistent goal |
-| `FAB-AUDIT-1` | complete; checkpoint pending | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
-| `FAB-EFFECTIVENESS-2` | complete as audited deferral behind effective quotient theorem | quotient owners | no current path-to-agreement/direct dependent eliminator; witnessed work proceeds without choice/opaque decoder |
-| `FAB-GENERIC-NORMALITY-3` | active | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
-| `FAB-GENERIC-IMAGE-4` | blocked on generic normality | selected kernels/cokernels | derived image/coimage, structural maps, comparison, factorization, comparison inverse under normality |
+| `FAB-AUDIT-1` | complete; checkpoint `8fa545c6` | plan | exact formal/native owners, published/CAP formula orientation, role gaps, baseline evidence, rejection signals |
+| `FAB-EFFECTIVENESS-2` | complete as audited deferral at checkpoint `8fa545c6` | quotient owners | no current path-to-agreement/direct dependent eliminator; witnessed work proceeds without choice/opaque decoder |
+| `FAB-GENERIC-NORMALITY-3` | complete; checkpoint pending | generic pre-Abelian owner | `IsMonic`, `IsEpic`, normal lift/colift spaces, selected capability packages, reconstruction/uniqueness |
+| `FAB-GENERIC-IMAGE-4` | active | selected kernels/cokernels | derived image/coimage, structural maps, comparison, factorization, comparison inverse under normality |
 | `FAB-MONO-NATIVE-5A` | blocked on audit | polynomial Freyd kernels/cokernels | monomorphism witness and Construction 3.14 lift with agreements/reconstruction/uniqueness |
 | `FAB-MONO-FORMAL-5B` | blocked on audit | formal witnessed pre-Abelian | witnessed monomorphism and formal Construction 3.14 |
 | `FAB-EPI-NATIVE-6A` | blocked on mono orientation audit | polynomial Freyd kernels/cokernels | epimorphism witness and Construction 3.15 colift with agreements/reconstruction/uniqueness |
@@ -594,6 +594,29 @@ prerequisite.
 | `D-FAB-015` | accepted after block-owner audit | Formal row-block splitting and projection/eta laws already exist. Native agreement matrices can be split representation-preservingly by their explicit component arrays; add only a checked helper, not a new matrix representation. |
 | `D-FAB-016` | accepted after Construction 3.14 audit | The monic lift datum is the lower block of the test's cokernel-zero agreement. Its relation witness is the monic kernel-zero witness composed with the selected first-weak-pullback factor of the derived relation pair. |
 | `D-FAB-017` | accepted after Construction 3.15 audit | The epic colift datum is the test map composed with the lower block of the cokernel-projection-zero witness. Its relation witness uses the test kernel-zero agreement and a selected first-weak-pullback factor; the exact subtraction orientation remains a focused native test question. |
+| `D-FAB-018` | accepted after generic normality probe | `IsMonic` and `IsEpic` are direct cancellation types over existing Hom composition. Selected kernel embeddings and cokernel projections satisfy them by constructing one annihilator/coannihilator cone and applying contractibility twice. Normal lift/colift spaces are direct `HFiber`s and the computational Abelian package reuses one existing `PreAbelianCategory`. |
+
+## Implemented Generic Normality Layer
+
+`emdash3_2_abelian_categories.lp` now defines direct cancellation properties
+`IsMonic` and `IsEpic`, proves every selected computational kernel embedding
+monic and every selected computational cokernel projection epic, and packages
+the normal lift/colift test and factor spaces as internal `HFiber`s.
+
+`HasLiftsAlongMonomorphisms` and `HasColiftsAlongEpimorphisms` require each
+normal factor space to be contractible. Their readable projections expose the
+selected lift/colift, reconstruction path, and uniqueness path. The thin
+`ComputationalAbelianCategory` pairs those capabilities with one existing
+`PreAbelianCategory`; it does not duplicate additive, kernel, or cokernel
+data.
+
+The source introduces no rewrite or unification rule. Its owner-position
+warning inventory is exactly neutral at
+`1,386 = 1,217 critical pairs + 169 replaceable variables` against
+`emdash3_2_kernels_cokernels.lp`. The source and focused reviewer pass, and
+the strict LHS audit has no clauses attributable to this module. Both files
+are registered; the strict catalog remains current and the source-metrics
+health snapshot covers 413 files without launching an unrelated aggregate.
 
 ## Validation Matrix
 

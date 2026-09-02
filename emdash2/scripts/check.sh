@@ -62,6 +62,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_computational_weak_pullback_compatibility.lp)
   files+=(emdash3_2_computational_weak_pullback_cones.lp)
   files+=(emdash3_2_kernels_cokernels.lp)
+  files+=(emdash3_2_abelian_categories.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_kernels.lp)

@@ -880,6 +880,9 @@ Ker(α)                     : weak-kernel data plus contractible factor spaces
 Coker(α)                   : dual coannihilator/contractible-colift data
 lift_α(τ,p), colift_α(τ,p) : selected universal factors
 PreAb(C)                   : additive C with selected kernels and cokernels
+Mono(m), Epi(e)            : cancellation on incoming/outgoing Hom actions
+Lift_m(τ), Colift_e(τ)    : selected normal factors of annihilated tests
+Ab(C)                      : pre-Abelian C with normal mono/epi computation
 WPB(α,γ)                   : WK([α,−γ]) with projected legs
 lift_WPB(c)                : selected nonunique factor of an encoded cone
 α o p = γ o q              : derived conventional WPB compatibility
@@ -942,6 +945,15 @@ The literal owners are `CommRingFiniteFree_cat`,
 `HasComputationalKernels`,
 `HasComputationalCokernels`,
 `PreAbelianCategory`,
+`IsMonic`,
+`IsEpic`,
+`NormalMonoLiftSpace`,
+`NormalEpiColiftSpace`,
+`HasLiftsAlongMonomorphisms`,
+`HasColiftsAlongEpimorphisms`,
+`lift_along_monomorphism`,
+`colift_along_epimorphism`,
+`ComputationalAbelianCategory`,
 `weak_pullback_difference_fapp0`,
 `ComputationalWeakPullback`,
 `WeakPullbackCone`,
@@ -994,8 +1006,11 @@ witness-enriched formal package: tests and competitors carry raw
 zero/reconstruction agreements, from which the checked quotient paths follow.
 It must not be printed as the stronger closed `PreAb(Freyd_R)` unless an
 effective quotient-path decoder is actually supplied. The field-polynomial
-runtime provider does have all eight usable pre-Abelian roles, but neither
-surface implies Abelian structure, exactness, or homology.
+runtime provider does have all eight usable pre-Abelian roles. `Ab(C)` now
+names only the generic package of a selected pre-Abelian structure with
+contractible normal lift/colift spaces; no concrete Freyd value inhabits it at
+this boundary. Neither surface implies concrete Abelian structure, exactness,
+or homology.
 
 For the separately promoted direct big-affine topology, comments and examples
 may write

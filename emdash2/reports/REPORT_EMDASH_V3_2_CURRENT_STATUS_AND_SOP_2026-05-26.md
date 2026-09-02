@@ -408,6 +408,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   selected capabilities and a thin `PreAbelianCategory` over existing
   additive data. It does not yet construct these capabilities for the formal
   Freyd category or assert Abelian structure.
+- `emdash3_2_abelian_categories.lp`: rule-free generic computational
+  normality. `IsMonic` and `IsEpic` are cancellation on existing Hom
+  composition; kernel/cokernel contractibility proves the selected structural
+  arrows monic/epic. Normal-monomorphism lift and normal-epimorphism colift
+  spaces are direct `HFiber`s with contractible selected factors. The thin
+  `ComputationalAbelianCategory` reuses one existing `PreAbelianCategory`; it
+  does not yet construct concrete Freyd normality or image/coimage data.
 - `emdash3_2_computational_weak_pullbacks.lp`: rule-free derived weak
   pullbacks in any additive category with computational weak kernels. The
   cospan difference is `[alpha,-gamma]`; a test cone is its existing

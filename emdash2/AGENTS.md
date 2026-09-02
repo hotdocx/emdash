@@ -81,6 +81,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   lift/colift, reconstruction, uniqueness, whole capability, and thin
   pre-Abelian packaging. Closed quotient-level concrete capability and
   Abelian structure remain separate layers.
+  `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
+  proves selected kernel embeddings monic and cokernel projections epic, and
+  packages normal lift/colift `HFiber`s plus the thin generic computational
+  Abelian structure. Concrete Freyd normality remains a witnessed downstream
+  construction.
   `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
   weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
   of an arrow into the selected biproduct, not a manual square record. Its

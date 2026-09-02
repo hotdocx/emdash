@@ -26,6 +26,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_computational_weak_pullback_compatibility.lp"),
     Path("emdash3_2_computational_weak_pullback_cones.lp"),
     Path("emdash3_2_kernels_cokernels.lp"),
+    Path("emdash3_2_abelian_categories.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
