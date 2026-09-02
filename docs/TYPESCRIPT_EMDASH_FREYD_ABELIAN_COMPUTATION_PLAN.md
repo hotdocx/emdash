@@ -566,9 +566,9 @@ Refine or reject a candidate when it:
 | `FAB-IMAGE-FORMAL-7B` | complete; checkpoint `76ecdc40` | formal witnessed normality | witnessed image/coimage comparison, factorization, and derived inverse paths |
 | `FAB-CATEGORY-8` | complete; checkpoint `97e5ebe9` | operation/doctrine engine | strengthened Abelian role family, provider qualification, compiler/reference/graph execution |
 | `FAB-FORMAL-9` | complete; checkpoint `6b73318e` | explicit weak-kernel capability | `CommRingFreydWitnessedAbelian` and readable projections; closed package remains gated on effectiveness |
-| `FAB-BRIDGE-10` | complete; checkpoint pending | proof–CAS bridge | thirteen selected exact normality/comparison equations replay actual operations |
-| `FAB-DIFFERENTIAL-11` | optional after native operations | stable reference adapters | non-authoritative field-module/CAP/Singular comparison without replacing native data |
-| `FAB-CLOSE-12` | blocked on required rows | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
+| `FAB-BRIDGE-10` | complete; checkpoint `4813ba4f` | proof–CAS bridge | thirteen selected exact normality/comparison equations replay actual operations |
+| `FAB-DIFFERENTIAL-11` | complete by reused real-Singular weak-kernel differential | stable reference adapters | non-authoritative installed-Singular comparison validates the selected computational prerequisite without replacing native data |
+| `FAB-CLOSE-12` | complete; closure checkpoint pending | all required rows | standing docs, warning/LHS/catalog/health evidence, focused gates, exact checkpoints and successor boundary |
 
 Rows may be split or reordered as probes refine dependencies. A row may be
 rejected or deferred only with durable evidence and a concrete replacement or
@@ -608,6 +608,8 @@ prerequisite.
 | `D-FAB-028` | accepted after formal package construction | The formal result is `CommRingFreydWitnessedAbelian(R,W)`: one witnessed pre-Abelian package plus capability families indexed by explicit monomorphism, epimorphism, and test agreements. It is constructible for every supplied weak-kernel capability. It deliberately does not masquerade as the stronger closed `ComputationalAbelianCategory`, whose arbitrary quotient-path inputs remain ineffective. |
 | `D-FAB-029` | accepted after witnessed formal image construction | Formal coimage and image are the selected cokernel-of-kernel and kernel-of-cokernel. Existing colift/lift agreements construct the comparison and `f = i chi p`. `CommRingFreydComparisonBimorphismWitness` retains the explicit comparison monic/epic agreements produced by the native/proof-CAS consumer; from these, Constructions 3.14/3.15 compute two inverse candidates, categorical composition proves they coincide, and the selected inverse yields `IsoEvidence`. The isomorphism itself is not an input. |
 | `D-FAB-030` | accepted after proof-CAS implementation | `algebra_formal_freyd_abelian.ts` replays the actual operational Abelian provider and compares canonical serialization of each complete selected output. Thirteen exact presentation equations cover monic/epic witnesses, lift/colift structure and reconstruction, comparison structure/factorization/bimorphism evidence, inverse-candidate agreement, and both inverse laws. The adapter creates no Core owner, closed formal capability, quotient decoder, or primitive isomorphism. |
+| `D-FAB-031` | accepted after installed-Singular differential | The already selected weak-kernel differential is the correct external comparison boundary for this goal: it compares generated spans bidirectionally rather than literal bases, and the real installed Singular executable agrees on the nontrivial fixture. Duplicating normality/image category structure in a Singular adapter would add no independent algebraic check and would compete with the native whole-operation owner. |
+| `D-FAB-032` | accepted at closure | The constructive Abelian boundary is complete at the witnessed formal and effective operational levels. Closed arbitrary-path formal qualification remains an honestly documented effectiveness gate, not unfinished work in this goal. Exactness and homology remain separate successor goals. |
 
 ## Implemented Generic Normality Layer
 
@@ -871,6 +873,33 @@ root typecheck, focused lint, the 25-test native/formal Freyd matrix, and the
 opt-in live 13-equation Lambdapi probe all pass. The repository-wide
 `check:ts` aggregate was intentionally not rerun under the user's explicit
 scope restriction; no unrelated TypeScript subsystem changed.
+
+## Closure Evidence And Successor Boundary
+
+The substantive implementation head is `4813ba4f`, exactly 20 linear commits
+after baseline `7c537a6be46f25fc847664786710357c33fc623e`. The dedicated goal
+worktree is clean at that head. Historical `main` remains clean at the named
+baseline, and no path-cubical, strictness-migration, or other orthogonal branch
+was merged, rebased, reset, or otherwise incorporated.
+
+The focused final evidence is:
+
+- all new formal normality, witnessed-Abelian, and image sources and reviewers
+  pass bounded Lambdapi checking;
+- their warning-enabled checks remain neutral at the inherited
+  `1,392 = 1,223 critical pairs + 169 replaceable variables` boundary;
+- the strict LHS audit reports zero unreviewed reconstructible clauses;
+- the catalog and health snapshot cover 425 files;
+- workspace validation, root typecheck, and focused bridge lint pass;
+- the relevant native/formal Freyd matrix passes 23 tests with two opt-in
+  probes skipped in the ordinary run;
+- the opt-in 13-equation proof-CAS Lambdapi run passes all five tests; and
+- the installed-Singular weak-kernel differential passes all six tests,
+  including real-process agreement.
+
+This closes the intended theorem and usability boundary. It does not authorize
+integration into `main`, publication, cleanup, exactness, homology, or a claim
+that arbitrary quotient paths decode to raw presentation agreements.
 
 ## Validation Matrix
 

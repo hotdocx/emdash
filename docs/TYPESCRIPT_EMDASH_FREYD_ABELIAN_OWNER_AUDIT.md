@@ -44,6 +44,12 @@ denies a ring-wide formal capability, quotient-path decoding, or a primitive
 isomorphism. A focused generated Lambdapi probe accepts the complete equation
 set.
 
+The optional differential gate reuses the established non-authoritative
+Singular weak-kernel span comparison, which is the computational prerequisite
+actually consumed by Posur Construction 3.14/3.15. A real run against the
+installed `Singular` executable passes all six focused tests. No parallel
+Singular-level Abelian category representation was added.
+
 ## Baseline Evidence
 
 The new worktree bootstrapped successfully with the shared pnpm store.
