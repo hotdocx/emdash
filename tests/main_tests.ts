@@ -292,6 +292,7 @@ import './v3_2_algebra_polynomial_freyd_normality_tests';
 import './v3_2_algebra_polynomial_freyd_images_tests';
 import './v3_2_algebra_polynomial_freyd_abelian_category_tests';
 import './v3_2_algebra_polynomial_freyd_homology_tests';
+import './v3_2_algebra_polynomial_freyd_homology_category_tests';
 import './v3_2_algebra_polynomial_weak_kernel_tests';
 import './v3_2_algebra_polynomial_weak_kernel_category_tests';
 import './v3_2_algebra_polynomial_weak_kernel_singular_tests';

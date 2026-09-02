@@ -518,6 +518,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   with zero and retains an actual boundary epimorphism witness only on
   success. No image/kernel object equality or formal quotient decoder is
   assumed.
+- `src/v3_2/algebra_polynomial_freyd_homology_reference_operations.ts` and
+  `algebra_polynomial_freyd_homology_category.ts`: ring-scoped native and
+  categorical homology operations. The extended category preserves every
+  Abelian method, records kernel/lift/cokernel prerequisites for derived
+  homology, and compiles the supported whole `homology → exactness` program to
+  two ordinary graph nodes. Direct and graph outputs agree canonically; no
+  special-purpose dependent IR node is added.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

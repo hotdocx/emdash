@@ -3580,6 +3580,15 @@ homology projection with zero. A successful result retains the corresponding
 epimorphism witness for the boundary map; a failed comparison remains visible
 as negative computational data.
 
+These computations are also available as whole categorical operations. The
+homology method declares the inherited kernel, kernel-lift, and cokernel
+operations as its prerequisites, while exactness declares the epimorphism
+capability. The retained program can therefore run `homology` followed by
+`exactness` as two typed graph nodes. Compilation does not decompile the
+derived callback or invent a dependent record syntax; the native whole result
+is the explicit lowering boundary, and direct and graph executions agree
+canonically.
+
 For fixed presentations `P,Q`, raw relation-preserving maps are the objects of
 an agreement category. Its arrows from `f` to `g` are explicit matrices `H`
 with

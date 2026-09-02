@@ -52,6 +52,8 @@ export * from './algebra_polynomial_freyd_normality';
 export * from './algebra_polynomial_freyd_images';
 export * from './algebra_polynomial_freyd_abelian_category';
 export * from './algebra_polynomial_freyd_homology';
+export * from './algebra_polynomial_freyd_homology_reference_operations';
+export * from './algebra_polynomial_freyd_homology_category';
 export * from './algebra_polynomial_weak_kernel';
 export * from './algebra_polynomial_weak_kernel_category';
 export * from './algebra_polynomial_weak_kernel_singular';

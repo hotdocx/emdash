@@ -214,6 +214,11 @@ prerequisite list records capability/planning dependence. Multi-node
 dependent inlining is a separately gated generic-IR improvement, not a reason
 to special-case homology syntax.
 
+The implemented category model confirms this selection. Its retained program
+chains whole homology into whole exactness, while its planner records the
+universal-operation prerequisites and its compiler selects two ordinary
+lowerings. Direct and graph results agree under canonical serialization.
+
 ## Whole Freyd Complex Boundary
 
 The existing free-complex recursive shape is reusable, but its object and law
