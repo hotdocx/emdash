@@ -186,7 +186,7 @@ Each map must be selected by an existing kernel or cokernel factor space from
 the reconstruction paths already owned by the triple. Retain the selected
 whole construction and readable arrow/path projections.
 
-Derive all five adjacent-zero points and prove exactness at the four interior
+Derive all four adjacent-zero points and prove exactness at the four interior
 objects:
 
 ```text
@@ -375,7 +375,7 @@ Replay the complete native/categorical whole result and reify the selected
 equations. At minimum cover:
 
 - every degreewise chain square and short-exact zero;
-- all four maps and all five adjacent-zero equations of each snake sequence;
+- all five maps and all four adjacent-zero equations of each snake sequence;
 - each connecting-map descent and target-cycle factorization;
 - every adjacent-zero equation in the long-exact spine;
 - the induced-map and connecting-map reconstruction equations; and
@@ -487,7 +487,7 @@ migration.
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
-| `LEH-AUDIT-1` | pending | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
+| `LEH-AUDIT-1` | complete; checkpoint pending | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
 | `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
 | `LEH-SNAKE-MAPS-3` | pending | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
 | `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
@@ -522,6 +522,8 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-008` | accepted | Native/categorical/formal/proof–CAS layers reuse the completed snake and homology owners rather than duplicating matrix algorithms. |
 | `D-LEH-009` | accepted | Chapter 31 is an evidence-bearing deliverable of this goal; checked code remains authority and generated book/PDF artifacts remain tool-owned. |
 | `D-LEH-010` | accepted | The divergent path-cubical/global-strictness branch remains outside this goal. |
+| `D-LEH-011` | accepted after owner audit | The homogeneous `FiniteFamily` carrier is not by itself a dependent categorical sequence. Construct the concrete six-term window first; if bounded iteration needs a generic spine, follow the recursive dependent-Sigma precedent of formal bounded complexes. |
+| `D-LEH-012` | corrected after endpoint audit | A six-object snake sequence has five arrows and four adjacent arrow composites. Proof–CAS and validation requirements use those exact counts. |
 
 ## Baseline And Validation Policy
 
