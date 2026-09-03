@@ -183,6 +183,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   sequence by the existing kernel universal property. Both reconstruction
   paths retain their literal kernel-lift endpoints; the cokernel-side maps and
   four exactness positions remain downstream.
+  `emdash3_2_abelian_snake_six_term_cokernels.lp` is the direct rule-free
+  mirror: it selects `Coker(beta)` and `Coker(gamma)` and constructs
+  `Coker(alpha) -> Coker(beta) -> Coker(gamma)` by existing cokernel
+  universality. Its reconstruction paths remain literal colift endpoints.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

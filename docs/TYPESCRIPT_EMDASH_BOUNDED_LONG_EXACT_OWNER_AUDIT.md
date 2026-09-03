@@ -296,5 +296,10 @@ owner and reviewer pass quiet and warning-enabled checks, inherit exactly the
 `1,217` critical-pair and `169` replaceable-variable warning boundary, and add
 no rule or unifier. Strict LHS audits report zero clauses.
 
-The next dependency-ready action is the direct cokernel-side mirror described
-above.
+The direct cokernel-side mirror is now implemented in
+`emdash3_2_abelian_snake_six_term_cokernels.lp`. Both maps are selected
+cokernel colifts with explicit reconstruction paths. Its owner/reviewer pass
+quiet and warning-enabled checking at the same inherited `1,217`/`169`
+boundary and add no rule or unifier.
+
+The next dependency-ready action is the four adjacent-zero points.

@@ -73,6 +73,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_image_bimorphisms.lp)
   files+=(emdash3_2_abelian_snake_lemma.lp)
   files+=(emdash3_2_abelian_snake_six_term_kernels.lp)
+  files+=(emdash3_2_abelian_snake_six_term_cokernels.lp)
   files+=(emdash3_2_abelian_snake_normal_epi_foundation.lp)
   files+=(emdash3_2_abelian_snake_normal_epi.lp)
   files+=(emdash3_2_abelian_snake_normal_mono_foundation.lp)

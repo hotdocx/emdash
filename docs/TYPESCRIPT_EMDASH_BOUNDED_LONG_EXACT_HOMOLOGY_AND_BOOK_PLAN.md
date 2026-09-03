@@ -491,7 +491,9 @@ migration.
 | `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
 | `LEH-SNAKE-MAPS-3` | in progress via 3A | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
 | `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint `dd330e5e` | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
-| `LEH-SNAKE-COKERNEL-MAPS-3B` | pending | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
+| `LEH-SNAKE-COKERNEL-MAPS-3B` | complete; checkpoint pending | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
+| `LEH-SNAKE-ZERO-3C` | pending | 3A–3B and completed connecting factor spaces | all four adjacent-zero points |
+| `LEH-SNAKE-RESULT-3D` | pending | 3A–3C | whole six-object/five-arrow snake result with readable projections |
 | `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
@@ -527,6 +529,7 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-011` | accepted after owner audit | The homogeneous `FiniteFamily` carrier is not by itself a dependent categorical sequence. Construct the concrete six-term window first; if bounded iteration needs a generic spine, follow the recursive dependent-Sigma precedent of formal bounded complexes. |
 | `D-LEH-012` | corrected after endpoint audit | A six-object snake sequence has five arrows and four adjacent arrow composites. Proof–CAS and validation requirements use those exact counts. |
 | `D-LEH-013` | accepted after kernel-side owner probe | The first two snake arrows are direct selected kernel lifts of `delta o k_alpha` and `epsilon o k_beta`. Their zero tests derive from the existing alpha/gamma reconstruction and kernel annihilation paths; no comparison rule or endpoint transport is required. |
+| `D-LEH-014` | accepted after cokernel-side owner probe | The final two snake arrows are the direct cokernel-colift mirror, selected from `c_beta o mu` and `c_gamma o lambda`. Their tests derive from the alpha/gamma reconstruction and cokernel annihilation paths, with no duality bridge or new computation rule. |
 
 ## Baseline And Validation Policy
 

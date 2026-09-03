@@ -504,6 +504,11 @@ belongs to the owning implementation plan rather than to standing guidance.
   reconstructions, and selects `Ker(alpha) -> Ker(beta) -> Ker(gamma)` by
   kernel universality. Both reconstruction paths are retained; no rule,
   unifier, or diagram field is added.
+- `emdash3_2_abelian_snake_six_term_cokernels.lp`: direct rule-free
+  cokernel-side mirror. It selects `Coker(beta)` and `Coker(gamma)`, derives
+  the alpha- and beta-coannihilated tests from the existing reconstruction
+  paths, and selects `Coker(alpha) -> Coker(beta) -> Coker(gamma)` by
+  cokernel universality. Both colift paths remain explicit.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of
