@@ -486,7 +486,7 @@ migration.
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
-| `LEH-PLAN-0` | complete; checkpoint pending | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
+| `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
 | `LEH-AUDIT-1` | pending | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
 | `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
 | `LEH-SNAKE-MAPS-3` | pending | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
