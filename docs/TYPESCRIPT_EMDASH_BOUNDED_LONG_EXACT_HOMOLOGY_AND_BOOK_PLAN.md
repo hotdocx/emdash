@@ -530,7 +530,7 @@ current evidence.
 | `LEH-SNAKE-INNER-ZERO-3C2` | complete; checkpoint `3ecad40d` | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
 | `LEH-SNAKE-EXACT-4` | in progress via 4A | row 3 and generic exactness | exactness at all four interior six-term positions |
-| `LEH-SNAKE-EXACT-FIRST-4A` | complete; validated checkpoint pending | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
+| `LEH-SNAKE-EXACT-FIRST-4A` | complete; checkpoint `8dfde0a6` | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
 | `LEH-SNAKE-EXACT-SECOND-4B` | pending | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
 | `LEH-SNAKE-EXACT-THIRD-4C` | pending | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | pending | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` and whole exact result |
