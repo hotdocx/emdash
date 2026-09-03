@@ -502,7 +502,9 @@ term checked separately. The maintained focused gate
 Lambdapi sources into a disposable directory, source-checks each branch with
 fresh object generation in separate bounded invocations, then checks all five
 cross-branch source modules, the whole result/projection modules, and both
-reviewers against those exact objects. Its complete run is green and leaves
+six-term reviewers against those exact objects. The same gate now continues
+through the exactness-cover infrastructure, both canonical-row instances, the
+first-position snake chase, and its reviewer. Its complete run is green and leaves
 no `.lpo` in the worktree. `check.sh`,
 `check_examples.sh`, and the resumable health runner route these measured
 targets through that gate. This is the same source-checked compilation model
@@ -527,7 +529,11 @@ current evidence.
 | `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
 | `LEH-SNAKE-INNER-ZERO-3C2` | complete; checkpoint `3ecad40d` | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
-| `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
+| `LEH-SNAKE-EXACT-4` | in progress via 4A | row 3 and generic exactness | exactness at all four interior six-term positions |
+| `LEH-SNAKE-EXACT-FIRST-4A` | complete; validated checkpoint pending | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
+| `LEH-SNAKE-EXACT-SECOND-4B` | pending | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
+| `LEH-SNAKE-EXACT-THIRD-4C` | pending | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
+| `LEH-SNAKE-EXACT-FOURTH-4D` | pending | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` and whole exact result |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
@@ -567,6 +573,9 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-016` | accepted after inner-zero owner probes | Retain the canonical fiber factor and pushout cofactor with both reconstructions, then derive the inner zero points by the existing `u`/`partial` paths and monic/epic cancellation. Split the two-map sides into unchanged one-map foundations and move readable fiber/pushout object aliases to the snake spine that owns them. Because the two independently source-green branches exceed 90 seconds only when loaded together, validate their join through fresh exact objects in an isolated disposable tree; do not weaken, hide, or duplicate the mathematics. |
 | `D-LEH-017` | rejected after measured probe | Do not replace the selected factor/cofactor calculation by one oversized generic annihilation combinator. The generic statement was mathematically valid, but its concrete pushout instantiation alone required about 36 seconds and did not improve the source dependency boundary. The smaller named reconstruction steps are faster, more inspectable, and have direct whole-result consumers. |
 | `D-LEH-018` | accepted after whole-result probes | The whole six-term snapshot retains the existing whole connecting-factor result, the other four selected arrows, and the four adjacent-zero points. Do not re-expand all four kernel/cokernel factor-space types inside a second carrier: the maximal side-package probe exceeded 90 seconds even with exact dependencies primed. Universal reconstruction points remain named at their original owners, while nine readable projections of the lighter snapshot reduce definitionally to the five canonical arrows and four canonical zero proofs. |
+| `D-LEH-019` | accepted after exactness-owner review | Add an epimorphic local-cover interface equivalent to `ComputationalExactAt`: every annihilated cone factors through the incoming arrow after an epic cover. Exactness gives covers by pulling the cone factor back along the epic boundary; covers imply exactness by applying one to the selected kernel. This is internal universal-property data, not element syntax or a second exactness notion. |
+| `D-LEH-020` | accepted after canonical-row probes | Canonical cokernel exactness is proved with one explicit `PreAbelianCategory` and its two normality capabilities, following the image-bimorphism owner discipline. The epic map `Coim(f) -> Im(f)` after the coimage projection is retained as a point of the selected image factor fibre; `computational_exact_at_from_epic_factor_point` transports epicity to the actual boundary. Bundled concrete wrappers that repeatedly projected `ComputationalAbelianCategory` were rejected after measured conversion timeouts. |
+| `D-LEH-021` | accepted after the first snake exactness probe | At `Ker(beta)`, apply canonical cokernel-row covers to `k_beta o psi`; monicity of `mu` forces the covered preimage through `Ker(alpha)`, and monicity of `k_beta` proves the covered reconstruction through the first snake arrow. The resulting cover family proves epicity of the actual boundary with no image/kernel object equality. |
 
 ## Baseline And Validation Policy
 
@@ -603,9 +612,9 @@ kernel, book, print, package, or release aggregates merely for reassurance.
 - positive reviewer and relevant negative/noncollapse boundary;
 - source registration, catalog, and proportional health evidence; and
 - `scripts/check_abelian_snake_six_term.sh` for the measured whole six-term
-  cross-branch join: each dependency source, final target, projection module,
-  and reviewer is checked in a separate 90-second invocation inside one
-  disposable exact-source copy;
+  and exactness join: each dependency source, final target, projection module,
+  exactness-cover/canonical-row stage, and reviewer is checked in a separate
+  90-second invocation inside one disposable exact-source copy;
 - no unrelated full health rebuild while the recorded dependent-simplex
   baseline defect remains outside scope.
 

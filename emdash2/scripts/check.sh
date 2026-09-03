@@ -37,7 +37,22 @@ is_abelian_snake_six_term_join() {
     emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp|\
     emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp|\
     emdash3_2_abelian_snake_six_term_result.lp|\
-    emdash3_2_abelian_snake_six_term_result_projections.lp)
+    emdash3_2_abelian_snake_six_term_result_projections.lp|\
+    emdash3_2_exactness_covers_foundation.lp|\
+    emdash3_2_exactness_covers.lp|\
+    emdash3_2_exactness_covers_from_exact.lp|\
+    emdash3_2_abelian_canonical_kernel_exactness.lp|\
+    emdash3_2_abelian_canonical_cokernel_foundation.lp|\
+    emdash3_2_abelian_canonical_cokernel_factor.lp|\
+    emdash3_2_abelian_canonical_cokernel_epic.lp|\
+    emdash3_2_abelian_canonical_cokernel_exactness.lp|\
+    emdash3_2_abelian_canonical_cokernel_covers.lp|\
+    emdash3_2_abelian_snake_exact_first_foundation.lp|\
+    emdash3_2_abelian_snake_exact_first_row_cover_projections.lp|\
+    emdash3_2_abelian_snake_exact_first_alpha_zero.lp|\
+    emdash3_2_abelian_snake_exact_first_factor.lp|\
+    emdash3_2_abelian_snake_exact_first_comparison.lp|\
+    emdash3_2_abelian_snake_exact_first_result.lp)
       return 0
       ;;
     *)
@@ -122,6 +137,21 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp)
   files+=(emdash3_2_abelian_snake_six_term_result.lp)
   files+=(emdash3_2_abelian_snake_six_term_result_projections.lp)
+  files+=(emdash3_2_exactness_covers_foundation.lp)
+  files+=(emdash3_2_exactness_covers.lp)
+  files+=(emdash3_2_exactness_covers_from_exact.lp)
+  files+=(emdash3_2_abelian_canonical_kernel_exactness.lp)
+  files+=(emdash3_2_abelian_canonical_cokernel_foundation.lp)
+  files+=(emdash3_2_abelian_canonical_cokernel_factor.lp)
+  files+=(emdash3_2_abelian_canonical_cokernel_epic.lp)
+  files+=(emdash3_2_abelian_canonical_cokernel_exactness.lp)
+  files+=(emdash3_2_abelian_canonical_cokernel_covers.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_foundation.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_row_cover_projections.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_alpha_zero.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_comparison.lp)
+  files+=(emdash3_2_abelian_snake_exact_first_result.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)

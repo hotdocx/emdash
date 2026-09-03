@@ -90,6 +90,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   that actual selected boundary lift. A short exact triple additionally
   retains monicity of the incoming arrow and epicity of the outgoing arrow;
   it adds no selected image/kernel equality, manual diagram, rule, or unifier.
+  The `emdash3_2_exactness_covers*` modules give the equivalent constructive
+  local-cover interface: every annihilated test factors after an epimorphic
+  cover. One direction pulls the test back along the epic boundary; the other
+  applies the cover to the selected kernel and proves that the actual boundary
+  is epic. Canonical kernel/cokernel rows instantiate this interface, with the
+  cokernel proof transporting epicity inside the existing contractible image
+  factor fibre using explicit pre-Abelian/normality capabilities.
   `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
   proves selected kernel embeddings monic and cokernel projections epic, and
   packages normal lift/colift `HFiber`s plus the thin generic computational
@@ -205,6 +212,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   adjacent-zero points in one dependent snapshot. Its projection module
   exposes the five arrows and four paths; the canonical reviewer confirms
   that every projection reduces back to its existing named owner.
+  The first six-term exactness tranche proves exactness at `Ker(beta)` by the
+  local-cover criterion. Canonical exactness of
+  `A -> B -> Coker(A -> B)` supplies an epic cover; monicity of `mu` forces its
+  preimage through `Ker(alpha)`, and monicity of `k_beta` proves the required
+  covered factorization. No image/kernel object equality or manual diagram is
+  introduced.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

@@ -357,3 +357,41 @@ paths already remain named at their owning map modules, while the result
 retains exactly the data needed by indexed exactness consumers.
 
 The next dependency-ready action is exactness at the four interior positions.
+
+## Exactness-Cover Criterion And First Position
+
+The active `ComputationalExactAt` owner remains epicity of the actual selected
+boundary into the selected kernel. A rule-free equivalent interface is now
+implemented: for every annihilated cone `h:S -> B`, a
+`ComputationalExactCoverWitness` retains an object `S'`, an epic map
+`S' -> S`, a factor `S' -> A`, and the reconstruction after the cover.
+Applying this family to the selected kernel makes the boundary epic.
+Conversely, pulling the selected factor of `h` back along an epic boundary
+constructs such a cover. No image/kernel object path or element language is
+used.
+
+Both canonical rows required by the snake proof are available. The selected
+boundary for `Ker(f) -> A -> B` agrees with the identity. For
+`A -> B -> Coker(f)`, `chi_f o p_f` is an epic point of the contractible
+factor fibre defining `Im(f)`; the generic epic-factor-point theorem transports
+that property to the actual selected boundary. The core cokernel proof keeps
+one explicit pre-Abelian package and normal-mono/normal-epi capabilities,
+following the measured image-bimorphism pattern. Direct bundled wrappers were
+discarded after repeated endpoint-conversion timeouts.
+
+Exactness at `Ker(beta)` is complete. Given a cone `psi` killed by
+`Ker(beta) -> Ker(gamma)`, composing with `k_beta` gives a cone for the
+canonical row `delta -> B -> Coker(delta)`. Its exactness cover supplies an
+epic `S' -> S` and `a:S' -> A` with `delta a = k_beta psi e`. The alpha
+reconstruction and `beta k_beta = 0` make `mu alpha a = 0`; monicity of `mu`
+gives `alpha a = 0`, so `a` factors through `Ker(alpha)`. Monicity of
+`k_beta` then proves that the first snake arrow after this factor is
+`psi e`. These witnesses form the exact-cover family, and the generic theorem
+returns `ComputationalExactAt` for the actual selected boundary.
+
+The exact-source isolated gate is green through this first position. The new
+modules add no rule or unifier, strict LHS audits are empty, and the
+warning-enabled exactness foundation inherits the unchanged `1,217/169`
+boundary. The next action is the analogous but longer cover construction at
+`Ker(gamma)` using epic `p1`, the normal-epi factor `u`, and the connecting
+reconstruction.

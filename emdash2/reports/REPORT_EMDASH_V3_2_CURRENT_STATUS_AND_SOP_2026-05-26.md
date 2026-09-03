@@ -421,6 +421,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   additionally retains `IsMonic` for the incoming arrow and `IsEpic` for the
   outgoing arrow. No image/kernel object equality or separate diagram carrier
   is introduced.
+- `emdash3_2_exactness_covers_foundation.lp`,
+  `emdash3_2_exactness_covers.lp`, and
+  `emdash3_2_exactness_covers_from_exact.lp`: rule-free constructive
+  equivalence between the active boundary-epicity notion and an epimorphic
+  local-cover criterion. A cover is a selected object, epimorphism, incoming
+  factor, and reconstruction path for one internal annihilator cone. Applying
+  covers to the selected kernel makes the actual boundary epic; conversely,
+  pulling an arbitrary cone factor back along an epic boundary constructs the
+  cover. This is internal universal-property data, not an element language.
+- The canonical-kernel and split canonical-cokernel exactness modules prove
+  `Ker(f) -> A -> B` and `A -> B -> Coker(f)` exact. The kernel boundary is
+  the identity up to selected-factor uniqueness. The cokernel proof keeps one
+  explicit pre-Abelian value and its two normality capabilities, regards
+  `chi_f o p_f` as an epic point of the image kernel-factor fibre, and uses
+  the generic epic-factor-point theorem. Bundled public projections are used
+  only at consumers, avoiding the measured conversion explosion.
 - `emdash3_2_abelian_categories.lp`: rule-free generic computational
   normality. `IsMonic` and `IsEpic` are cancellation on existing Hom
   composition; kernel/cokernel contractibility proves the selected structural
@@ -540,6 +556,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   maps and proofs. The surrounding universal reconstruction points remain at
   their original owners instead of being re-expanded into a duplicate giant
   result carrier.
+- The first snake exactness modules prove exactness at `Ker(beta)`. For an
+  arbitrary cone killed by `Ker(beta) -> Ker(gamma)`, canonical cokernel-row
+  covers lift `k_beta` times that cone through `delta` after an epimorphism.
+  Monicity of `mu` forces the lifted arrow into `Ker(alpha)`; monicity of
+  `k_beta` then identifies its first six-term image with the original cone
+  after the cover. The generic cover theorem yields `ComputationalExactAt`
+  for the actual selected boundary.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

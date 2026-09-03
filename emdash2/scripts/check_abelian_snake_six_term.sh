@@ -40,6 +40,7 @@ mkdir -p "$scratch/examples"
 cp lambdapi.pkg ./*.lp "$scratch/"
 cp examples/abelian_snake_six_term_inner_zero.lp "$scratch/examples/"
 cp examples/abelian_snake_six_term_result.lp "$scratch/examples/"
+cp examples/abelian_snake_exact_first.lp "$scratch/examples/"
 
 check_object() {
   local file="$1"
@@ -71,5 +72,21 @@ check_object emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.
 check_object emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp
 check_object emdash3_2_abelian_snake_six_term_result.lp
 check_object emdash3_2_abelian_snake_six_term_result_projections.lp
+check_object emdash3_2_exactness_covers_foundation.lp
+check_object emdash3_2_exactness_covers.lp
+check_object emdash3_2_exactness_covers_from_exact.lp
+check_object emdash3_2_abelian_canonical_kernel_exactness.lp
+check_object emdash3_2_abelian_canonical_cokernel_foundation.lp
+check_object emdash3_2_abelian_canonical_cokernel_factor.lp
+check_object emdash3_2_abelian_canonical_cokernel_epic.lp
+check_object emdash3_2_abelian_canonical_cokernel_exactness.lp
+check_object emdash3_2_abelian_canonical_cokernel_covers.lp
+check_object emdash3_2_abelian_snake_exact_first_foundation.lp
+check_object emdash3_2_abelian_snake_exact_first_row_cover_projections.lp
+check_object emdash3_2_abelian_snake_exact_first_alpha_zero.lp
+check_object emdash3_2_abelian_snake_exact_first_factor.lp
+check_object emdash3_2_abelian_snake_exact_first_comparison.lp
+check_object emdash3_2_abelian_snake_exact_first_result.lp
 check_object examples/abelian_snake_six_term_inner_zero.lp
 check_object examples/abelian_snake_six_term_result.lp
+check_object examples/abelian_snake_exact_first.lp

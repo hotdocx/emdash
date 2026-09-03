@@ -3605,6 +3605,36 @@ points remain available at their original universal-property owners; the
 snapshot does not re-expand those large fibres or define a second sequence
 grammar.
 
+For exactness proofs, an equivalent local-cover form is now available. Given
+`A -> B -> D`, every arrow `h:S -> B` killed by the outgoing map may be
+covered by an epimorphism `S' -> S` so that the covered arrow factors through
+`A`. Applying this condition to the selected kernel of `B -> D` shows that
+the actual boundary `A -> Ker(B -> D)` has an epic factor and is therefore
+epic. Conversely, if that boundary is epic, its fiber product with the
+selected factor of `h` supplies the required cover. Thus the criterion is
+equivalent to the existing `ComputationalExactAt`; it is not an alternative
+notion or a hand-written diagram.
+
+The two canonical rows needed in diagram chases are instances. For
+`Ker(f) -> A -> B`, the selected boundary agrees with the identity. For
+`A -> B -> Coker(f)`, the composite
+`A -> Coim(f) -> Im(f)` is epic and is a point of the contractible factor
+space defining the selected boundary. Contractibility transports epicity to
+that selected centre. The proof is formulated first with one explicit
+pre-Abelian package and its normal-mono/normal-epi capabilities, then consumed
+from a whole Abelian package; this is the same term-shape discipline used by
+the image-bimorphism theorem.
+
+Exactness at the first interior snake object, `Ker(beta)`, now follows in this
+form. Start with a test arrow into `Ker(beta)` killed by the next kernel map.
+After composing with `k_beta`, canonical exactness of
+`A -> B -> Coker(delta)` supplies an epimorphic cover and a preimage through
+`delta`. The relation `mu o alpha = beta o delta`, together with
+`beta o k_beta = 0` and monicity of `mu`, forces that preimage into
+`Ker(alpha)`. Finally monicity of `k_beta` identifies its induced first snake
+map with the covered test arrow. The resulting cover family proves epicity of
+the actual boundary selected by homology.
+
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,
 `gamma`/`alpha` factors, genuine fiber product and pushout, stability
