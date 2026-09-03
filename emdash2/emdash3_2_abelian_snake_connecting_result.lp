@@ -81,3 +81,35 @@ symbol abelian_snake_connecting_result
             (@abelian_snake_q2_normal_mono_test C P t Ab A B X D triple)))
       (@abelian_snake_connecting C P t Ab A B X D triple)
       (@abelian_snake_connecting_path C P t Ab A B X D triple));
+
+// Selected normal-epi factor retained by a whole connecting result.
+symbol abelian_snake_connecting_result_u
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  [Ab : τ (@ComputationalAbelianCategory C P t)]
+  [A B X D : τ (Obj C)]
+  [triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D)]
+  (result : τ (@AbelianSnakeConnectingResult C P t
+    Ab A B X D triple))
+  : τ (Hom C
+      (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+      (@abelian_snake_pushout_object C P t Ab A B X D triple))
+≔ sigma_Fst (sigma_Fst result);
+
+// Selected connecting arrow retained by a whole connecting result.
+symbol abelian_snake_connecting_result_arrow
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  [Ab : τ (@ComputationalAbelianCategory C P t)]
+  [A B X D : τ (Obj C)]
+  [triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D)]
+  (result : τ (@AbelianSnakeConnectingResult C P t
+    Ab A B X D triple))
+  : τ (Hom C
+      (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+      (@abelian_snake_coker_alpha_object C P t Ab A B X D triple))
+≔ sigma_Fst (sigma_Snd result);

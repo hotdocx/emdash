@@ -529,9 +529,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   `(Coker(alpha) -> Coker(beta)) o partial = 0` by epic `p1` cancellation.
   No rule, unifier, manual diagram, splitting, or opaque equality is added.
   Because each theorem joins two independently green dependency branches,
-  `scripts/check_abelian_snake_inner_zero.sh` freshly checks both branches and
+  `scripts/check_abelian_snake_six_term.sh` freshly checks both branches and
   then the cross terms in an isolated temporary object chain, with every
   Lambdapi invocation still bounded to 90 seconds and no retained `.lpo`.
+- `emdash3_2_abelian_snake_six_term_result.lp` is the whole rule-free
+  six-object/five-arrow snapshot. It retains the already-whole connecting
+  factor result, the other four canonical arrows, and the four adjacent-zero
+  points. The separate projection module exposes all five arrows and all four
+  paths; the canonical instance reduces definitionally to the existing named
+  maps and proofs. The surrounding universal reconstruction points remain at
+  their original owners instead of being re-expanded into a duplicate giant
+  result carrier.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

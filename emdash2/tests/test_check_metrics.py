@@ -24,7 +24,7 @@ from scripts.check_metrics import (
 
 class CheckMetricsTests(unittest.TestCase):
     @patch("scripts.check_metrics.run_command")
-    def test_inner_zero_join_uses_one_isolated_chain(self, run_command) -> None:
+    def test_six_term_join_uses_one_isolated_chain(self, run_command) -> None:
         run_command.side_effect = [(0, "", 1.0), (0, "", 6.0)]
         files = [
             Path("plain.lp"),
@@ -42,7 +42,7 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertEqual(run_command.call_count, 2)
         self.assertEqual(
             run_command.call_args_list[1],
-            call(["./scripts/check_abelian_snake_inner_zero.sh"]),
+            call(["./scripts/check_abelian_snake_six_term.sh"]),
         )
         self.assertEqual(
             [result.evidence for result in results],

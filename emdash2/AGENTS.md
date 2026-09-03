@@ -200,6 +200,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   and epic `p1`. The cross-branch checks use a fresh isolated object chain so
   every source dependency and final equation remains checked by a separate
   bounded invocation; no object cache is retained and no proof is opaque.
+  `emdash3_2_abelian_snake_six_term_result.lp` retains the existing whole
+  connecting-factor result, the other four canonical arrows, and all four
+  adjacent-zero points in one dependent snapshot. Its projection module
+  exposes the five arrows and four paths; the canonical reviewer confirms
+  that every projection reduces back to its existing named owner.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.
@@ -294,7 +299,7 @@ the iterated-hom architecture to the omega setting.
 - Refresh health report: `make health`
 - Watch and recheck: `make watch` (log: `logs/typecheck.log`)
 - Focused temporary probe: `scripts/probe.sh tmp/probes/name.lp`
-- Measured six-term inner-zero join: `scripts/check_abelian_snake_inner_zero.sh`
+- Measured whole six-term snake join: `scripts/check_abelian_snake_six_term.sh`
 - Decision tree: `scripts/decision_tree.sh SYMBOL`
 - Type-aware search: `scripts/lambdapi_search.sh QUERY`
 - Print preview/check from the Git root: `./scripts/pnpmw run print:dev` /

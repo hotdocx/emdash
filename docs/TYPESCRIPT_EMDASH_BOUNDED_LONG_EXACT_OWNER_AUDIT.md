@@ -336,11 +336,24 @@ checks of the two dependency branches are green and warning-enabled checks
 retain exactly `1,217` critical-pair plus `169` replaceable-variable reports.
 Loading both already-green branches in one fresh Lambdapi process crosses the
 uniform 90-second ceiling before the new root declaration is reached. The
-focused `scripts/check_abelian_snake_inner_zero.sh` therefore copies the exact
+focused `scripts/check_abelian_snake_six_term.sh` therefore copies the exact
 current sources to a disposable directory, freshly compiles each dependency
 branch under its own 90-second bound, and checks both final equations and the
-reviewer against those exact objects. The temporary objects are then removed.
+reviewers against those exact objects. The temporary objects are then removed.
 This is bounded compilation evidence, not opacity or a weakened theorem.
 
-The next dependency-ready action is the whole six-object/five-arrow result,
-followed by exactness at its four interior positions.
+The whole six-object/five-arrow result is now implemented. It stores the
+existing whole connecting-factor result, the other four selected arrows, and
+the four adjacent-zero paths in one dependent Sigma snapshot. Nine readable
+projections expose the five arrows and four paths; the reviewer checks that
+the canonical instance reduces definitionally to every pre-existing named
+owner.
+
+A maximally expanded alternative attempted to store the four surrounding
+`KernelFactorSpace`/`CokernelFactorSpace` types again inside the snapshot. Its
+kernel-side package exceeded 90 seconds even after exact dependency priming.
+That duplication was rejected: all four universal points and reconstruction
+paths already remain named at their owning map modules, while the result
+retains exactly the data needed by indexed exactness consumers.
+
+The next dependency-ready action is exactness at the four interior positions.

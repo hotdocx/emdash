@@ -3590,6 +3590,21 @@ epic `p1` to `c_beta o beta o p2 = 0`, so epic cancellation gives
 contractible factor spaces and the existing normal-factor reconstructions;
 they are not fields of a hand-written snake diagram.
 
+These data are assembled into one dependent six-term snapshot. It retains the
+whole connecting-factor result, then the four remaining canonical arrows and
+the four adjacent-zero paths. Its readable projections recover
+
+```text
+Ker(alpha) -> Ker(beta) -> Ker(gamma)
+           -> Coker(alpha) -> Coker(beta) -> Coker(gamma)
+```
+
+and the canonical snapshot reduces at every arrow and zero projection to the
+previously selected named term. Kernel/cokernel lift and colift reconstruction
+points remain available at their original universal-property owners; the
+snapshot does not re-expand those large fibres or define a second sequence
+grammar.
+
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,
 `gamma`/`alpha` factors, genuine fiber product and pushout, stability

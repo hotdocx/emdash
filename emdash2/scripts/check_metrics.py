@@ -58,6 +58,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp"),
+    Path("emdash3_2_abelian_snake_six_term_result.lp"),
+    Path("emdash3_2_abelian_snake_six_term_result_projections.lp"),
     Path("emdash3_2_abelian_bimorphisms.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
@@ -269,13 +271,16 @@ CHECK_PRIORITY_FILES = [
     Path("emdash3_2_checks.lp"),
     Path("emdash3_2_commutative_algebra_affine_glue.lp"),
 ]
-SPECIAL_INNER_ZERO_CHECK_FILES = {
+SPECIAL_SIX_TERM_CHECK_FILES = {
     Path("emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp"),
+    Path("emdash3_2_abelian_snake_six_term_result.lp"),
+    Path("emdash3_2_abelian_snake_six_term_result_projections.lp"),
     Path("examples/abelian_snake_six_term_inner_zero.lp"),
+    Path("examples/abelian_snake_six_term_result.lp"),
 }
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
@@ -583,7 +588,7 @@ def run_checks(
 ) -> tuple[list[CheckResult], int]:
     results_by_file: dict[str, CheckResult] = dict(resumed or {})
     overall = 0
-    inner_zero_join_checked = False
+    six_term_join_checked = False
     for rel in check_execution_order(files):
         if str(rel) in results_by_file and results_by_file[str(rel)].returncode == 0:
             result = results_by_file[str(rel)]
@@ -592,17 +597,17 @@ def run_checks(
             label = "resumed" if result.evidence == "resumed" else "already checked"
             print(f"{rel}: {label} exit 0, {duration_text}")
             continue
-        if rel in SPECIAL_INNER_ZERO_CHECK_FILES:
-            if inner_zero_join_checked:
+        if rel in SPECIAL_SIX_TERM_CHECK_FILES:
+            if six_term_join_checked:
                 continue
             pending = [
                 path
                 for path in files
-                if path in SPECIAL_INNER_ZERO_CHECK_FILES
+                if path in SPECIAL_SIX_TERM_CHECK_FILES
                 and str(path) not in results_by_file
             ]
             rc, output, duration = run_command(
-                ["./scripts/check_abelian_snake_inner_zero.sh"]
+                ["./scripts/check_abelian_snake_six_term.sh"]
             )
             share = duration / max(1, len(pending))
             for path in pending:
@@ -610,7 +615,7 @@ def run_checks(
                     str(path), rc, share, "current-isolated-object-chain"
                 )
                 print(f"{path}: isolated-chain exit {rc}, {share:.3f}s share")
-            inner_zero_join_checked = True
+            six_term_join_checked = True
             if rc == 0 and save_success is not None:
                 save_success(results_by_file)
             elif rc != 0:
