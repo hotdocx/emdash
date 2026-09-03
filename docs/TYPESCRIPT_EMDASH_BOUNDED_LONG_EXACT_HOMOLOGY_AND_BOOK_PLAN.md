@@ -493,7 +493,7 @@ migration.
 | `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint `dd330e5e` | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
 | `LEH-SNAKE-COKERNEL-MAPS-3B` | complete; checkpoint `737b36fe` | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
 | `LEH-SNAKE-ZERO-3C` | in progress via 3C1 | 3A–3B and completed connecting factor spaces | all four adjacent-zero points |
-| `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint pending | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
+| `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
 | `LEH-SNAKE-INNER-ZERO-3C2` | pending | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | pending | 3A–3C | whole six-object/five-arrow snake result with readable projections |
 | `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
