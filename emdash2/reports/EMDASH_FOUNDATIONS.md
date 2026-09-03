@@ -3635,6 +3635,23 @@ After composing with `k_beta`, canonical exactness of
 map with the covered test arrow. The resulting cover family proves epicity of
 the actual boundary selected by homology.
 
+At `Ker(gamma)`, begin with `psi:S -> Ker(gamma)` satisfying
+`partial o psi = 0`. Pulling `psi` back along epic `p1` gives an epic cover
+`S1 -> S` and an arrow `S1 -> FiberProduct(iota,epsilon)`. The already-selected
+lift of `beta o p2` gives `xi:S1 -> Ker(lambda)`. Pushout compatibility,
+`q2 o partial = u`, `u o p1 = q1 o beta o p2`, and the equation on `psi`
+show `q2 o pi o xi = 0`; monicity of `q2` gives `pi o xi = 0`.
+
+Canonical exactness of `alpha -> Ker(lambda) -> Coker(alpha)` now supplies a
+second epic cover `S0 -> S1` and an `alpha`-preimage. On `S0`, the difference
+between the covered `p2` leg and its `delta`-preimage is killed by `beta`, so
+it has a selected factor through `Ker(beta)`. Applying `epsilon` to this
+difference removes the `delta` term and, by fiber compatibility, recovers the
+original `psi` after both covers. The monic embedding `iota` therefore cancels
+to the required factorization through `Ker(beta) -> Ker(gamma)`. Composition
+of the two epic covers completes the local-cover witness and proves exactness
+of the actual selected boundary at `Ker(gamma)`.
+
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,
 `gamma`/`alpha` factors, genuine fiber product and pushout, stability

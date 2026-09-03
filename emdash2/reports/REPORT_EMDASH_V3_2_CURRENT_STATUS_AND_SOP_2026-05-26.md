@@ -563,6 +563,16 @@ belongs to the owning implementation plan rather than to standing guidance.
   `k_beta` then identifies its first six-term image with the original cone
   after the cover. The generic cover theorem yields `ComputationalExactAt`
   for the actual selected boundary.
+- The second snake exactness modules prove exactness at `Ker(gamma)`. An
+  arbitrary test killed by the connecting arrow is first pulled back along
+  epic `p1`. The existing `beta o p2` kernel lift produces `xi`; the connecting
+  and pushout reconstructions plus monic `q2` show `pi o xi = 0`. Canonical
+  cokernel-row exactness covers `xi` through `alpha`. The difference between
+  the covered `p2` leg and the resulting `delta` preimage factors through
+  `Ker(beta)`; bilinearity, cokernel annihilation, fiber compatibility, and
+  monic `iota` identify its second snake image with the doubly covered test.
+  The composite epic cover then supplies the generic exactness witness. The
+  fine module split follows measured owner/projection boundaries only.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

@@ -36,6 +36,119 @@ symbol ComputationalExactCoverWitness
             T cone)
           e);
 
+symbol computational_exact_cover_intro
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  [Abl : τ (@PreAbelianCategory C P t)]
+  [A B D : τ (Obj C)]
+  [pair : τ (@ComputationalChainPair C
+    (@computational_homology_preadditive C P t Abl) A B D)]
+  [T : τ (Obj C)]
+  [cone : τ (@WeakKernelAnnihilator C
+    (@computational_homology_preadditive C P t Abl)
+    B D
+    (@computational_chain_pair_d C
+      (@computational_homology_preadditive C P t Abl) A B D pair)
+    T)]
+  (U : τ (Obj C))
+  (e : τ (Hom C U T))
+  (epic : τ (@IsEpic C U T e))
+  (a : τ (Hom C U A))
+  (path : τ (@= (Hom C U B)
+    (@comp_fapp0 C _ _ _
+      (@computational_chain_pair_dnext C
+        (@computational_homology_preadditive C P t Abl) A B D pair)
+      a)
+    (@comp_fapp0 C _ _ _
+      (@weak_kernel_annihilator_arrow C
+        (@computational_homology_preadditive C P t Abl)
+        B D
+        (@computational_chain_pair_d C
+          (@computational_homology_preadditive C P t Abl) A B D pair)
+        T cone)
+      e)))
+  : τ (@ComputationalExactCoverWitness C P t Abl
+      A B D pair T cone)
+≔ @Struct_sigma
+    (Obj C)
+    (λ U0 : τ (Obj C),
+      `Σ_ e0 : τ (Hom C U0 T),
+      `Σ_ epic0 : τ (@IsEpic C U0 T e0),
+      `Σ_ a0 : τ (Hom C U0 A),
+        @= (Hom C U0 B)
+          (@comp_fapp0 C _ _ _
+            (@computational_chain_pair_dnext C
+              (@computational_homology_preadditive C P t Abl) A B D pair)
+            a0)
+          (@comp_fapp0 C _ _ _
+            (@weak_kernel_annihilator_arrow C
+              (@computational_homology_preadditive C P t Abl)
+              B D
+              (@computational_chain_pair_d C
+                (@computational_homology_preadditive C P t Abl) A B D pair)
+              T cone)
+            e0))
+    U
+    (@Struct_sigma
+      (Hom C U T)
+      (λ e0 : τ (Hom C U T),
+        `Σ_ epic0 : τ (@IsEpic C U T e0),
+        `Σ_ a0 : τ (Hom C U A),
+          @= (Hom C U B)
+            (@comp_fapp0 C _ _ _
+              (@computational_chain_pair_dnext C
+                (@computational_homology_preadditive C P t Abl) A B D pair)
+              a0)
+            (@comp_fapp0 C _ _ _
+              (@weak_kernel_annihilator_arrow C
+                (@computational_homology_preadditive C P t Abl)
+                B D
+                (@computational_chain_pair_d C
+                  (@computational_homology_preadditive C P t Abl) A B D pair)
+                T cone)
+              e0))
+      e
+      (@Struct_sigma
+        (@IsEpic C U T e)
+        (λ _ : τ _,
+          `Σ_ a0 : τ (Hom C U A),
+            @= (Hom C U B)
+              (@comp_fapp0 C _ _ _
+                (@computational_chain_pair_dnext C
+                  (@computational_homology_preadditive C P t Abl)
+                  A B D pair)
+                a0)
+              (@comp_fapp0 C _ _ _
+                (@weak_kernel_annihilator_arrow C
+                  (@computational_homology_preadditive C P t Abl)
+                  B D
+                  (@computational_chain_pair_d C
+                    (@computational_homology_preadditive C P t Abl)
+                    A B D pair)
+                  T cone)
+                e))
+        epic
+        (@Struct_sigma
+          (Hom C U A)
+          (λ a0 : τ (Hom C U A),
+            @= (Hom C U B)
+              (@comp_fapp0 C _ _ _
+                (@computational_chain_pair_dnext C
+                  (@computational_homology_preadditive C P t Abl)
+                  A B D pair)
+                a0)
+              (@comp_fapp0 C _ _ _
+                (@weak_kernel_annihilator_arrow C
+                  (@computational_homology_preadditive C P t Abl)
+                  B D
+                  (@computational_chain_pair_d C
+                    (@computational_homology_preadditive C P t Abl)
+                    A B D pair)
+                  T cone)
+                e))
+          a path)));
+
 symbol computational_exact_cover_object
   [C : Cat]
   [P : τ (Functor (Product_cat C C) C)]

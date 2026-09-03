@@ -52,7 +52,9 @@ is_abelian_snake_six_term_join() {
     emdash3_2_abelian_snake_exact_first_alpha_zero.lp|\
     emdash3_2_abelian_snake_exact_first_factor.lp|\
     emdash3_2_abelian_snake_exact_first_comparison.lp|\
-    emdash3_2_abelian_snake_exact_first_result.lp)
+    emdash3_2_abelian_snake_exact_first_result.lp|\
+    emdash3_2_preadditive_difference_paths.lp|\
+    emdash3_2_abelian_snake_exact_second_*.lp)
       return 0
       ;;
     *)
@@ -152,6 +154,25 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_snake_exact_first_factor.lp)
   files+=(emdash3_2_abelian_snake_exact_first_comparison.lp)
   files+=(emdash3_2_abelian_snake_exact_first_result.lp)
+  files+=(emdash3_2_preadditive_difference_paths.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_pullback.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_xi.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_q2_pi.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_pi_zero.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_foundation.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_object.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_epi.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_epic.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_beta_difference.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_kernel_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_epsilon_paths.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_epsilon_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_iota_comparison.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_cover_comparison.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_total_cover.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_cover_witness.lp)
+  files+=(emdash3_2_abelian_snake_exact_second_result.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)

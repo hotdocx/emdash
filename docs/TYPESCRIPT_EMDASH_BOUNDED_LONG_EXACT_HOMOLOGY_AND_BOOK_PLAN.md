@@ -504,7 +504,7 @@ fresh object generation in separate bounded invocations, then checks all five
 cross-branch source modules, the whole result/projection modules, and both
 six-term reviewers against those exact objects. The same gate now continues
 through the exactness-cover infrastructure, both canonical-row instances, the
-first-position snake chase, and its reviewer. Its complete run is green and leaves
+first two snake exactness chases, and their reviewers. Its complete run is green and leaves
 no `.lpo` in the worktree. `check.sh`,
 `check_examples.sh`, and the resumable health runner route these measured
 targets through that gate. This is the same source-checked compilation model
@@ -531,7 +531,7 @@ current evidence.
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
 | `LEH-SNAKE-EXACT-4` | in progress via 4A | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SNAKE-EXACT-FIRST-4A` | complete; checkpoint `8dfde0a6` | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
-| `LEH-SNAKE-EXACT-SECOND-4B` | pending | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
+| `LEH-SNAKE-EXACT-SECOND-4B` | complete; validated checkpoint pending | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
 | `LEH-SNAKE-EXACT-THIRD-4C` | pending | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | pending | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` and whole exact result |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
@@ -576,6 +576,7 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-019` | accepted after exactness-owner review | Add an epimorphic local-cover interface equivalent to `ComputationalExactAt`: every annihilated cone factors through the incoming arrow after an epic cover. Exactness gives covers by pulling the cone factor back along the epic boundary; covers imply exactness by applying one to the selected kernel. This is internal universal-property data, not element syntax or a second exactness notion. |
 | `D-LEH-020` | accepted after canonical-row probes | Canonical cokernel exactness is proved with one explicit `PreAbelianCategory` and its two normality capabilities, following the image-bimorphism owner discipline. The epic map `Coim(f) -> Im(f)` after the coimage projection is retained as a point of the selected image factor fibre; `computational_exact_at_from_epic_factor_point` transports epicity to the actual boundary. Bundled concrete wrappers that repeatedly projected `ComputationalAbelianCategory` were rejected after measured conversion timeouts. |
 | `D-LEH-021` | accepted after the first snake exactness probe | At `Ker(beta)`, apply canonical cokernel-row covers to `k_beta o psi`; monicity of `mu` forces the covered preimage through `Ker(alpha)`, and monicity of `k_beta` proves the covered reconstruction through the first snake arrow. The resulting cover family proves epicity of the actual boundary with no image/kernel object equality. |
+| `D-LEH-022` | accepted after the second snake exactness probe | At `Ker(gamma)`, pull a connecting-kernel test back along epic `p1`; use the existing `beta o p2` lift, connecting/pushout reconstructions, and monic `q2` to obtain a cone for the canonical `alpha` cokernel row. After its second epic cover, factor the corrected `p2 - delta` difference through `Ker(beta)` and cancel monic `iota`. Compose the two covers and apply the generic cover criterion. Fine-grained one-symbol cover projections are retained because larger projection files exceeded the 90-second bound. |
 
 ## Baseline And Validation Policy
 

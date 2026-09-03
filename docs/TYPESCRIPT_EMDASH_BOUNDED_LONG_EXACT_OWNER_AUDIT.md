@@ -395,3 +395,30 @@ warning-enabled exactness foundation inherits the unchanged `1,217/169`
 boundary. The next action is the analogous but longer cover construction at
 `Ker(gamma)` using epic `p1`, the normal-epi factor `u`, and the connecting
 reconstruction.
+
+Exactness at `Ker(gamma)` is now complete. For a test `psi` killed by the
+connecting arrow, a selected pullback along epic `p1` gives the first cover
+and a map into the snake fiber product. The existing `beta o p2` lift defines
+`xi` into `Ker(lambda)`. Pushout compatibility and the two final connecting
+reconstructions show `q2 pi xi = 0`; monic `q2` gives `pi xi = 0`. Canonical
+cokernel-row covers then provide a second epic cover and an `alpha`-preimage.
+
+On the double cover, `beta` gives the same value on the covered `p2` leg and
+the corresponding `delta` preimage. Their additive difference therefore has
+a selected factor through `Ker(beta)`. Applying `epsilon` removes the delta
+summand and uses fiber compatibility to recover `iota psi` after the composite
+cover. Monic `iota` yields the required factorization through
+`Ker(beta) -> Ker(gamma)`. Composition preserves epicity, so these data form a
+`ComputationalExactCoverWitness`; the generic criterion returns exactness of
+the actual selected boundary.
+
+The cover carrier exposed a concrete usability omission, now corrected by
+`computational_exact_cover_intro`; consumers no longer re-elaborate its nested
+Sigma body. The canonical alpha-cover observations are split into foundation,
+object, epimorphism, epicity, and factor/reconstruction targets because the
+combined projection surface crossed 90 seconds. The exact-source isolated
+gate is green through the second exactness reviewer. All new files remain
+rule-free, and the warning-enabled generic difference helper inherits the
+unchanged `1,217/169` warning boundary.
+
+The next action is the dual exactness construction at `Coker(alpha)`.

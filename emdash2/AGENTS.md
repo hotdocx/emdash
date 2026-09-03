@@ -218,6 +218,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   preimage through `Ker(alpha)`, and monicity of `k_beta` proves the required
   covered factorization. No image/kernel object equality or manual diagram is
   introduced.
+  The second tranche proves exactness at `Ker(gamma)`. It pulls an arbitrary
+  connecting-kernel test back along epic `p1`, uses the existing
+  `beta o p2` lift into `Ker(lambda)`, covers that lift through `alpha`, and
+  factors the corrected difference through `Ker(beta)`. The `epsilon` and
+  `iota` reconstructions identify the resulting first snake map with the
+  doubly covered test. Each retained cover is an existing fiber-product or
+  exactness-cover point; the implementation adds no element or diagram syntax.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

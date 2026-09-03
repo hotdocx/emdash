@@ -39,7 +39,8 @@ for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
         "$file" == "examples/abelian_snake_six_term_result.lp" ||
-        "$file" == "examples/abelian_snake_exact_first.lp" ]]; then
+        "$file" == "examples/abelian_snake_exact_first.lp" ||
+        "$file" == "examples/abelian_snake_exact_second.lp" ]]; then
     if [[ "$six_term_examples_checked" -eq 0 ]]; then
       ./scripts/check_abelian_snake_six_term.sh
       six_term_examples_checked=1
