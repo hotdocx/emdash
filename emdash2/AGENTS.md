@@ -181,12 +181,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `emdash3_2_abelian_snake_six_term_kernels.lp` selects `Ker(alpha)` and
   `Ker(beta)` and constructs the first two arrows of the six-term snake
   sequence by the existing kernel universal property. Both reconstruction
-  paths retain their literal kernel-lift endpoints; the cokernel-side maps and
-  four exactness positions remain downstream.
+  paths retain their literal kernel-lift endpoints; adjacent-zero and exactness
+  positions remain downstream.
   `emdash3_2_abelian_snake_six_term_cokernels.lp` is the direct rule-free
   mirror: it selects `Coker(beta)` and `Coker(gamma)` and constructs
   `Coker(alpha) -> Coker(beta) -> Coker(gamma)` by existing cokernel
   universality. Its reconstruction paths remain literal colift endpoints.
+  The paired kernel/cokernel zero-foundation modules calculate the two outer
+  composites after the selected structural embedding/projection. Their small
+  cancellation modules then use generic selected-kernel/cokernel zero
+  cancellation to obtain the first and fourth adjacent-zero points. The split
+  preserves exact owner shapes under the 90-second target bound.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

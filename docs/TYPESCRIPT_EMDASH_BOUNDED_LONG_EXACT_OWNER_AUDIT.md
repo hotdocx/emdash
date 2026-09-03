@@ -303,3 +303,14 @@ quiet and warning-enabled checking at the same inherited `1,217`/`169`
 boundary and add no rule or unifier.
 
 The next dependency-ready action is the four adjacent-zero points.
+
+The two outer points are now implemented. Long calculated paths are retained
+in kernel/cokernel zero-foundation owners using the literal selected structural
+heads. Small downstream modules apply reusable direct zero-cancellation lemmas
+for selected kernel embeddings and cokernel projections. Quiet and
+warning-enabled checks pass at the inherited `1,217`/`169` boundary; the
+modules add no rule or unifier.
+
+The remaining dependency-ready work is the two inner points, which must use
+the already-selected fiber-product factor and pushout cofactor rather than a
+new diagram interface.

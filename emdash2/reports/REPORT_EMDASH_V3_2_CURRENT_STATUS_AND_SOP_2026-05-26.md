@@ -509,6 +509,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   the alpha- and beta-coannihilated tests from the existing reconstruction
   paths, and selects `Coker(alpha) -> Coker(beta) -> Coker(gamma)` by
   cokernel universality. Both colift paths remain explicit.
+- The six-term kernel/cokernel zero-foundation and cancellation modules derive
+  the two outer adjacent-zero points. The foundations calculate after the
+  literal selected kernel embedding or cokernel projection; generic direct
+  zero-cancellation lemmas then remove that monic/epic structural arrow. This
+  owner split is compilation granularity for the bounded checker, not a
+  weaker or opaque equation. All files are rule-free.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

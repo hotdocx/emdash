@@ -499,3 +499,85 @@ symbol kernel_lift_postannihilation_path
       (@comp_assoc C T I B Z q i lift)
       (@preadditive_precompose_zero_path C S T I Z
         (@comp_fapp0 C I B Z q i) lift annihilation));
+
+// Cancellation of a zero composite through a monomorphism.
+symbol monic_postcomposition_zero_to_zero_path
+  [C : Cat]
+  (S : τ (@PreadditiveCategory C))
+  [X Y Z : τ (Obj C)]
+  (m : τ (Hom C Y Z))
+  (monic : τ (@IsMonic C Y Z m))
+  (f : τ (Hom C X Y))
+  (zero : τ (@= (Hom C X Z)
+    (@comp_fapp0 C X Y Z m f)
+    (@preadditive_hom_zero C S X Z)))
+  : τ (@= (Hom C X Y) f (@preadditive_hom_zero C S X Y))
+≔ monic X f (@preadditive_hom_zero C S X Y)
+    (@eq_trans (Hom C X Z) _ _ _ zero
+      (@eq_sym _ _ _
+        (@preadditive_comp_zero_right_path C S X Y Z m)));
+
+// Dual cancellation of a zero composite through an epimorphism.
+symbol epic_precomposition_zero_to_zero_path
+  [C : Cat]
+  (S : τ (@PreadditiveCategory C))
+  [X Y Z : τ (Obj C)]
+  (e : τ (Hom C X Y))
+  (epic : τ (@IsEpic C X Y e))
+  (g : τ (Hom C Y Z))
+  (zero : τ (@= (Hom C X Z)
+    (@comp_fapp0 C X Y Z g e)
+    (@preadditive_hom_zero C S X Z)))
+  : τ (@= (Hom C Y Z) g (@preadditive_hom_zero C S Y Z))
+≔ epic Z g (@preadditive_hom_zero C S Y Z)
+    (@eq_trans (Hom C X Z) _ _ _ zero
+      (@eq_sym _ _ _
+        (@preadditive_comp_zero_left_path C S X Y Z e)));
+
+// Selected kernel embeddings cancel a zero postcomposition directly.
+symbol computational_kernel_postzero_to_zero_path
+  [C : Cat]
+  (S : τ (@PreadditiveCategory C))
+  [A B : τ (Obj C)]
+  (m : τ (Hom C A B))
+  (K : τ (@ComputationalKernel C S A B m))
+  [X : τ (Obj C)]
+  (f : τ (Hom C X (@computational_kernel_object C S A B m K)))
+  (zero : τ (@= (Hom C X A)
+    (@comp_fapp0 C X
+      (@computational_kernel_object C S A B m K) A
+      (@computational_kernel_morphism C S A B m K) f)
+    (@preadditive_hom_zero C S X A)))
+  : τ (@= (Hom C X (@computational_kernel_object C S A B m K))
+      f
+      (@preadditive_hom_zero C S X
+        (@computational_kernel_object C S A B m K)))
+≔ @monic_postcomposition_zero_to_zero_path C S
+    X (@computational_kernel_object C S A B m K) A
+    (@computational_kernel_morphism C S A B m K)
+    (@computational_kernel_morphism_is_monic C S A B m K)
+    f zero;
+
+// Selected cokernel projections cancel a zero precomposition directly.
+symbol computational_cokernel_prezero_to_zero_path
+  [C : Cat]
+  (S : τ (@PreadditiveCategory C))
+  [A B : τ (Obj C)]
+  (m : τ (Hom C A B))
+  (Q : τ (@ComputationalCokernel C S A B m))
+  [Z : τ (Obj C)]
+  (g : τ (Hom C (@computational_cokernel_object C S A B m Q) Z))
+  (zero : τ (@= (Hom C B Z)
+    (@comp_fapp0 C B
+      (@computational_cokernel_object C S A B m Q) Z g
+      (@computational_cokernel_morphism C S A B m Q))
+    (@preadditive_hom_zero C S B Z)))
+  : τ (@= (Hom C (@computational_cokernel_object C S A B m Q) Z)
+      g
+      (@preadditive_hom_zero C S
+        (@computational_cokernel_object C S A B m Q) Z))
+≔ @epic_precomposition_zero_to_zero_path C S
+    B (@computational_cokernel_object C S A B m Q) Z
+    (@computational_cokernel_morphism C S A B m Q)
+    (@computational_cokernel_morphism_is_epic C S A B m Q)
+    g zero;
