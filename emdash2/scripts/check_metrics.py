@@ -36,18 +36,28 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_abelian_images.lp"),
     Path("emdash3_2_abelian_image_bimorphisms.lp"),
     Path("emdash3_2_abelian_snake_lemma.lp"),
+    Path("emdash3_2_abelian_snake_six_term_kernel_beta_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_kernels.lp"),
+    Path("emdash3_2_abelian_snake_six_term_cokernel_beta_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_cokernels.lp"),
     Path("emdash3_2_abelian_snake_six_term_kernel_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_kernel_zero.lp"),
     Path("emdash3_2_abelian_snake_six_term_cokernel_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_six_term_cokernel_zero.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_factor.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_cofactor.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_middle_zero_foundation.lp"),
     Path("emdash3_2_abelian_snake_normal_epi_foundation.lp"),
     Path("emdash3_2_abelian_snake_normal_epi.lp"),
     Path("emdash3_2_abelian_snake_normal_mono_foundation.lp"),
     Path("emdash3_2_abelian_snake_normal_mono_test_foundation.lp"),
     Path("emdash3_2_abelian_snake_connecting.lp"),
     Path("emdash3_2_abelian_snake_connecting_result.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp"),
     Path("emdash3_2_abelian_bimorphisms.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
@@ -259,6 +269,14 @@ CHECK_PRIORITY_FILES = [
     Path("emdash3_2_checks.lp"),
     Path("emdash3_2_commutative_algebra_affine_glue.lp"),
 ]
+SPECIAL_INNER_ZERO_CHECK_FILES = {
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp"),
+    Path("emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp"),
+    Path("examples/abelian_snake_six_term_inner_zero.lp"),
+}
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
 HEALTH_STATE = ROOT / "logs" / "check-health-state.json"
@@ -565,11 +583,42 @@ def run_checks(
 ) -> tuple[list[CheckResult], int]:
     results_by_file: dict[str, CheckResult] = dict(resumed or {})
     overall = 0
+    inner_zero_join_checked = False
     for rel in check_execution_order(files):
         if str(rel) in results_by_file and results_by_file[str(rel)].returncode == 0:
-            duration = results_by_file[str(rel)].duration_s
+            result = results_by_file[str(rel)]
+            duration = result.duration_s
             duration_text = "unknown" if duration is None else f"{duration:.3f}s"
-            print(f"{rel}: resumed exit 0, {duration_text}")
+            label = "resumed" if result.evidence == "resumed" else "already checked"
+            print(f"{rel}: {label} exit 0, {duration_text}")
+            continue
+        if rel in SPECIAL_INNER_ZERO_CHECK_FILES:
+            if inner_zero_join_checked:
+                continue
+            pending = [
+                path
+                for path in files
+                if path in SPECIAL_INNER_ZERO_CHECK_FILES
+                and str(path) not in results_by_file
+            ]
+            rc, output, duration = run_command(
+                ["./scripts/check_abelian_snake_inner_zero.sh"]
+            )
+            share = duration / max(1, len(pending))
+            for path in pending:
+                results_by_file[str(path)] = CheckResult(
+                    str(path), rc, share, "current-isolated-object-chain"
+                )
+                print(f"{path}: isolated-chain exit {rc}, {share:.3f}s share")
+            inner_zero_join_checked = True
+            if rc == 0 and save_success is not None:
+                save_success(results_by_file)
+            elif rc != 0:
+                overall = overall or rc
+                tail = "\n".join(output.splitlines()[-40:])
+                print(tail, file=sys.stderr)
+                if not continue_after_failure:
+                    break
             continue
         cmd = lambdapi_check_command(rel)
         rc, output, duration = run_command(cmd, timeout_value)

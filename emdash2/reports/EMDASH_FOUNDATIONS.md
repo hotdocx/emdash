@@ -3575,6 +3575,21 @@ the bounded checker budget. This is compilation granularity only: it neither
 caps higher structure nor replaces a universal construction by a manual
 diagram or postulate.
 
+The surrounding six-term sequence now also has all four adjacent-zero
+equations. Its two outer equations cancel through the selected kernel
+embedding and cokernel projection. For the first inner equation, the
+compatible pair `(Ker(beta) -> Ker(gamma), k_beta)` has a selected lift into
+the fiber product. The equations for its two projections reduce `u` on that
+lift to `beta o k_beta = 0`; the reconstruction `q2 o partial = u` and
+monicity of `q2` then give
+`partial o (Ker(beta) -> Ker(gamma)) = 0`. Dually, the compatible copair
+`(c_beta, Coker(alpha) -> Coker(beta))` has a selected cofactor from the
+pushout. Its two injection equations reduce the other inner composite after
+epic `p1` to `c_beta o beta o p2 = 0`, so epic cancellation gives
+`(Coker(alpha) -> Coker(beta)) o partial = 0`. These are consequences of
+contractible factor spaces and the existing normal-factor reconstructions;
+they are not fields of a hand-written snake diagram.
+
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,
 `gamma`/`alpha` factors, genuine fiber product and pushout, stability

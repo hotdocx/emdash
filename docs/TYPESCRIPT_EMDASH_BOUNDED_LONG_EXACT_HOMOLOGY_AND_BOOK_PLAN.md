@@ -484,6 +484,36 @@ migration.
 
 ## Implementation Ledger
 
+### Inner-zero validation result
+
+The second and third adjacent-zero points are implemented and the focused
+reviewer is green. Current-source quiet and warning-enabled probes of the two
+independent universal-property branches pass below 90 seconds; the warning
+inventory remains exactly `1,217` critical-pair plus `169`
+replaceable-variable reports. Strict audits find zero rule clauses because the
+entire tranche is theorem-level and rule-free. The pre-existing kernel,
+cokernel, and outer-zero reviewers remain green after the source-preserving
+one-map split.
+
+A direct fresh-source process that loads both branches reaches the uniform
+limit before the new root declaration, even though each branch and the root
+term checked separately. The maintained focused gate
+`emdash2/scripts/check_abelian_snake_inner_zero.sh` copies the exact current
+Lambdapi sources into a disposable directory, source-checks each branch with
+fresh object generation in separate bounded invocations, then checks all five
+cross-branch source modules and the reviewer against those exact objects. Its
+complete run is green and leaves no `.lpo` in the worktree. `check.sh`,
+`check_examples.sh`, and the resumable health runner route these measured
+targets through that gate. This is the same source-checked compilation model
+used by the documented large-module fallback; an object-backed failure must
+still be retried from source before semantic diagnosis.
+
+The tracked health report is not regenerated at this intermediate checkpoint:
+that would be an unrelated repository-wide aggregate. Its content snapshot is
+therefore expected to remain stale until the next authorized proportional
+health boundary; the focused gate and its unit-tested health dispatch are the
+current evidence.
+
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
@@ -492,9 +522,9 @@ migration.
 | `LEH-SNAKE-MAPS-3` | in progress via 3A | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
 | `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint `dd330e5e` | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
 | `LEH-SNAKE-COKERNEL-MAPS-3B` | complete; checkpoint `737b36fe` | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
-| `LEH-SNAKE-ZERO-3C` | in progress via 3C1 | 3A–3B and completed connecting factor spaces | all four adjacent-zero points |
+| `LEH-SNAKE-ZERO-3C` | complete; validated checkpoint pending | 3A–3B and completed connecting factor spaces | all four adjacent-zero points |
 | `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
-| `LEH-SNAKE-INNER-ZERO-3C2` | pending | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
+| `LEH-SNAKE-INNER-ZERO-3C2` | complete; validated checkpoint pending | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | pending | 3A–3C | whole six-object/five-arrow snake result with readable projections |
 | `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
@@ -533,6 +563,8 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-013` | accepted after kernel-side owner probe | The first two snake arrows are direct selected kernel lifts of `delta o k_alpha` and `epsilon o k_beta`. Their zero tests derive from the existing alpha/gamma reconstruction and kernel annihilation paths; no comparison rule or endpoint transport is required. |
 | `D-LEH-014` | accepted after cokernel-side owner probe | The final two snake arrows are the direct cokernel-colift mirror, selected from `c_beta o mu` and `c_gamma o lambda`. Their tests derive from the alpha/gamma reconstruction and cokernel annihilation paths, with no duality bridge or new computation rule. |
 | `D-LEH-015` | accepted after outer-zero owner probes | Calculate each outer composite after the literal selected kernel embedding or cokernel projection, then use generic selected-structural-arrow zero cancellation. Keeping the exact owner head avoids expensive alias conversion; splitting calculation from cancellation keeps every target bounded without opacity or new rules. |
+| `D-LEH-016` | accepted after inner-zero owner probes | Retain the canonical fiber factor and pushout cofactor with both reconstructions, then derive the inner zero points by the existing `u`/`partial` paths and monic/epic cancellation. Split the two-map sides into unchanged one-map foundations and move readable fiber/pushout object aliases to the snake spine that owns them. Because the two independently source-green branches exceed 90 seconds only when loaded together, validate their join through fresh exact objects in an isolated disposable tree; do not weaken, hide, or duplicate the mathematics. |
+| `D-LEH-017` | rejected after measured probe | Do not replace the selected factor/cofactor calculation by one oversized generic annihilation combinator. The generic statement was mathematically valid, but its concrete pushout instantiation alone required about 36 seconds and did not improve the source dependency boundary. The smaller named reconstruction steps are faster, more inspectable, and have direct whole-result consumers. |
 
 ## Baseline And Validation Policy
 
@@ -568,6 +600,9 @@ kernel, book, print, package, or release aggregates merely for reassurance.
 - strict inferred-slot/LHS audit;
 - positive reviewer and relevant negative/noncollapse boundary;
 - source registration, catalog, and proportional health evidence; and
+- `scripts/check_abelian_snake_inner_zero.sh` for the measured inner-zero
+  cross-branch join: each dependency source and each final target is checked
+  in a separate 90-second invocation inside one disposable exact-source copy;
 - no unrelated full health rebuild while the recorded dependent-simplex
   baseline defect remains outside scope.
 

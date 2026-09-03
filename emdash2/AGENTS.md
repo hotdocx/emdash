@@ -192,6 +192,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   cancellation modules then use generic selected-kernel/cokernel zero
   cancellation to obtain the first and fourth adjacent-zero points. The split
   preserves exact owner shapes under the 90-second target bound.
+  The one-map kernel/cokernel foundation modules expose the two maps adjacent
+  to the connecting arrow without loading the unrelated half of either
+  six-term side. The inner-zero modules select the corresponding fiber factor
+  and pushout cofactor, retain both projection/injection reconstructions, and
+  derive the second and third adjacent-zero points by cancelling monic `q2`
+  and epic `p1`. The cross-branch checks use a fresh isolated object chain so
+  every source dependency and final equation remains checked by a separate
+  bounded invocation; no object cache is retained and no proof is opaque.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.
@@ -286,6 +294,7 @@ the iterated-hom architecture to the omega setting.
 - Refresh health report: `make health`
 - Watch and recheck: `make watch` (log: `logs/typecheck.log`)
 - Focused temporary probe: `scripts/probe.sh tmp/probes/name.lp`
+- Measured six-term inner-zero join: `scripts/check_abelian_snake_inner_zero.sh`
 - Decision tree: `scripts/decision_tree.sh SYMBOL`
 - Type-aware search: `scripts/lambdapi_search.sh QUERY`
 - Print preview/check from the Git root: `./scripts/pnpmw run print:dev` /

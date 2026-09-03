@@ -36,5 +36,9 @@ check_file() {
 
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
-  check_file "$file"
+  if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ]]; then
+    ./scripts/check_abelian_snake_inner_zero.sh
+  else
+    check_file "$file"
+  fi
 done

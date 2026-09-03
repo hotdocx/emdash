@@ -27,8 +27,32 @@ if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
   read -r -a extra_flags <<< "$EMDASH_LAMBDAPI_FLAGS"
 fi
 
+inner_zero_join_checked=0
+
+is_abelian_snake_inner_zero_join() {
+  case "$1" in
+    emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp|\
+    emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp|\
+    emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp|\
+    emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp|\
+    emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 check_file() {
   local file="$1"
+  if is_abelian_snake_inner_zero_join "$file"; then
+    if [[ "$inner_zero_join_checked" -eq 0 ]]; then
+      ./scripts/check_abelian_snake_inner_zero.sh
+      inner_zero_join_checked=1
+    fi
+    return
+  fi
   if command -v timeout >/dev/null 2>&1; then
     timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
       lambdapi check "${warning_flags[@]}" "${extra_flags[@]}" "$file"
@@ -72,18 +96,28 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_images.lp)
   files+=(emdash3_2_abelian_image_bimorphisms.lp)
   files+=(emdash3_2_abelian_snake_lemma.lp)
+  files+=(emdash3_2_abelian_snake_six_term_kernel_beta_foundation.lp)
   files+=(emdash3_2_abelian_snake_six_term_kernels.lp)
+  files+=(emdash3_2_abelian_snake_six_term_cokernel_beta_foundation.lp)
   files+=(emdash3_2_abelian_snake_six_term_cokernels.lp)
   files+=(emdash3_2_abelian_snake_six_term_kernel_zero_foundation.lp)
   files+=(emdash3_2_abelian_snake_six_term_kernel_zero.lp)
   files+=(emdash3_2_abelian_snake_six_term_cokernel_zero_foundation.lp)
   files+=(emdash3_2_abelian_snake_six_term_cokernel_zero.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_factor.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_cofactor.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_middle_zero_foundation.lp)
   files+=(emdash3_2_abelian_snake_normal_epi_foundation.lp)
   files+=(emdash3_2_abelian_snake_normal_epi.lp)
   files+=(emdash3_2_abelian_snake_normal_mono_foundation.lp)
   files+=(emdash3_2_abelian_snake_normal_mono_test_foundation.lp)
   files+=(emdash3_2_abelian_snake_connecting.lp)
   files+=(emdash3_2_abelian_snake_connecting_result.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp)
+  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)

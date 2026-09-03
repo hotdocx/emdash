@@ -701,6 +701,42 @@ symbol abelian_snake_pushout
     (@abelian_snake_mu C P t Ab A B X D triple)
     (@abelian_snake_pi C P t Ab A B X D triple);
 
+// Readable object projection of the selected fiber product.
+symbol abelian_snake_fiber_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_fiber_product_object C P t
+    (@abelian_stability_additive C P t Ab)
+    (@abelian_snake_ker_gamma_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_delta_object C P t Ab A B X D triple) B
+    (@abelian_snake_iota C P t Ab A B X D triple)
+    (@abelian_snake_epsilon C P t Ab A B X D triple)
+    (@abelian_snake_fiber_product C P t Ab A B X D triple);
+
+// Readable object projection of the selected pushout.
+symbol abelian_snake_pushout_object
+  [C : Cat]
+  [P : τ (Functor (Product_cat C C) C)]
+  [t : τ (Obj C)]
+  (Ab : τ (@ComputationalAbelianCategory C P t))
+  [A B X D : τ (Obj C)]
+  (triple : τ (@AbelianSnakeTriple C
+    (@abelian_stability_preadditive C P t Ab) A B X D))
+  : τ (Obj C)
+≔ @computational_pushout_object C P t
+    (@abelian_stability_additive C P t Ab)
+    X (@abelian_snake_ker_lambda_object C P t Ab A B X D triple)
+    (@abelian_snake_coker_alpha_object C P t Ab A B X D triple)
+    (@abelian_snake_mu C P t Ab A B X D triple)
+    (@abelian_snake_pi C P t Ab A B X D triple)
+    (@abelian_snake_pushout C P t Ab A B X D triple);
+
 symbol abelian_snake_q1
   [C : Cat]
   [P : τ (Functor (Product_cat C C) C)]

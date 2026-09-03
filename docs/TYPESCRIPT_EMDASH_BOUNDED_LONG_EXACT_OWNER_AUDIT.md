@@ -311,6 +311,36 @@ for selected kernel embeddings and cokernel projections. Quiet and
 warning-enabled checks pass at the inherited `1,217`/`169` boundary; the
 modules add no rule or unifier.
 
-The remaining dependency-ready work is the two inner points, which must use
-the already-selected fiber-product factor and pushout cofactor rather than a
-new diagram interface.
+The two inner points are now implemented from exactly those selected universal
+owners. On the kernel side, the compatible pair
+`(Ker(beta) -> Ker(gamma), k_beta)` selects a fiber-product lift and retains
+both projection paths. The `u` reconstruction and `beta o k_beta = 0` make
+`u` vanish on this lift; the connecting reconstruction and monic `q2`
+cancellation prove
+`partial o (Ker(beta) -> Ker(gamma)) = 0`. On the cokernel side, the compatible
+copair `(c_beta, Coker(alpha) -> Coker(beta))` selects a pushout cofactor and
+retains both injection paths. Its first reconstruction and
+`c_beta o beta = 0` kill the middle arrow; its second reconstruction, the two
+connecting paths, and epic `p1` cancellation prove
+`(Coker(alpha) -> Coker(beta)) o partial = 0`.
+
+The former two-map kernel and cokernel sources were split, without changing
+any symbol body, into narrow one-map foundations plus their existing public
+surfaces. Readable selected fiber/pushout object projections moved unchanged
+to the snake spine that owns those constructions. These owner corrections
+remove unrelated endpoint proofs from inner consumers and avoid duplicate
+semantic aliases.
+
+All new mathematics is rule-free and has zero LHS-audit findings. Source-only
+checks of the two dependency branches are green and warning-enabled checks
+retain exactly `1,217` critical-pair plus `169` replaceable-variable reports.
+Loading both already-green branches in one fresh Lambdapi process crosses the
+uniform 90-second ceiling before the new root declaration is reached. The
+focused `scripts/check_abelian_snake_inner_zero.sh` therefore copies the exact
+current sources to a disposable directory, freshly compiles each dependency
+branch under its own 90-second bound, and checks both final equations and the
+reviewer against those exact objects. The temporary objects are then removed.
+This is bounded compilation evidence, not opacity or a weakened theorem.
+
+The next dependency-ready action is the whole six-object/five-arrow result,
+followed by exactness at its four interior positions.

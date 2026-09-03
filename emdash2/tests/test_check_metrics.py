@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+from contextlib import redirect_stdout
+from io import StringIO
 import unittest
+from unittest.mock import call, patch
 from tempfile import TemporaryDirectory
 from pathlib import Path
 
@@ -13,12 +16,43 @@ from scripts.check_metrics import (
     report_check_content_snapshot,
     report_snapshot_issue,
     report_source_metrics_snapshot,
+    run_checks,
     source_metrics_snapshot,
     write_resume_checks,
 )
 
 
 class CheckMetricsTests(unittest.TestCase):
+    @patch("scripts.check_metrics.run_command")
+    def test_inner_zero_join_uses_one_isolated_chain(self, run_command) -> None:
+        run_command.side_effect = [(0, "", 1.0), (0, "", 6.0)]
+        files = [
+            Path("plain.lp"),
+            Path(
+                "emdash3_2_abelian_snake_six_term_"
+                "inner_kernel_u_zero_foundation.lp"
+            ),
+            Path("examples/abelian_snake_six_term_inner_zero.lp"),
+        ]
+
+        with redirect_stdout(StringIO()):
+            results, status = run_checks(files, "90s")
+
+        self.assertEqual(status, 0)
+        self.assertEqual(run_command.call_count, 2)
+        self.assertEqual(
+            run_command.call_args_list[1],
+            call(["./scripts/check_abelian_snake_inner_zero.sh"]),
+        )
+        self.assertEqual(
+            [result.evidence for result in results],
+            [
+                "current",
+                "current-isolated-object-chain",
+                "current-isolated-object-chain",
+            ],
+        )
+
     def test_near_timeout_checks_run_first_without_reordering_report_inputs(self) -> None:
         files = [
             Path("emdash3_2.lp"),

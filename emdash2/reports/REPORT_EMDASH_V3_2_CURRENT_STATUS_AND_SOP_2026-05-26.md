@@ -497,7 +497,8 @@ belongs to the owning implementation plan rather than to standing guidance.
   internal triple retains `delta`, `beta`, `lambda`, and their triple-zero
   path. That path constructs the selected cokernel colift `gamma` and kernel
   lift `alpha`, their reconstruction paths, surrounding kernels/cokernels,
-  the selected fiber product and pushout, epic `p1`, and monic `q2`.
+  the selected fiber product and pushout, their readable object projections,
+  epic `p1`, and monic `q2`.
 - `emdash3_2_abelian_snake_six_term_kernels.lp`: rule-free kernel side of the
   six-term snake sequence. It selects `Ker(alpha)` and `Ker(beta)`, derives
   the `beta`- and `gamma`-annihilated tests from the existing alpha/gamma
@@ -515,6 +516,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   zero-cancellation lemmas then remove that monic/epic structural arrow. This
   owner split is compilation granularity for the bounded checker, not a
   weaker or opaque equation. All files are rule-free.
+- The one-map kernel/cokernel foundation modules retain, respectively,
+  `Ker(beta) -> Ker(gamma)` and `Coker(alpha) -> Coker(beta)` with their
+  structural objects and reconstruction paths. They are source-preserving
+  splits of the public two-map modules, introduced so an inner-zero consumer
+  does not load an unrelated endpoint calculation.
+- The six-term inner-zero modules construct the canonical factor of
+  `(Ker(beta) -> Ker(gamma), k_beta)` through the selected fiber product and
+  the canonical cofactor of `(c_beta, Coker(alpha) -> Coker(beta))` through
+  the selected pushout. Their projection/injection reconstructions derive
+  `partial o (Ker(beta) -> Ker(gamma)) = 0` by monic `q2` cancellation and
+  `(Coker(alpha) -> Coker(beta)) o partial = 0` by epic `p1` cancellation.
+  No rule, unifier, manual diagram, splitting, or opaque equality is added.
+  Because each theorem joins two independently green dependency branches,
+  `scripts/check_abelian_snake_inner_zero.sh` freshly checks both branches and
+  then the cross terms in an isolated temporary object chain, with every
+  Lambdapi invocation still bounded to 90 seconds and no retained `.lpo`.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of
