@@ -178,6 +178,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   one triple-zero path constructs the selected `gamma` cokernel colift and
   `alpha` kernel lift together with their kernels/cokernels, fiber product,
   pushout, epic `p1`, and monic `q2`.
+  `emdash3_2_abelian_snake_six_term_kernels.lp` selects `Ker(alpha)` and
+  `Ker(beta)` and constructs the first two arrows of the six-term snake
+  sequence by the existing kernel universal property. Both reconstruction
+  paths retain their literal kernel-lift endpoints; the cokernel-side maps and
+  four exactness positions remain downstream.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

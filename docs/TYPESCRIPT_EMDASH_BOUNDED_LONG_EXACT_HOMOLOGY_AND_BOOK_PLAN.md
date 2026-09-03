@@ -489,7 +489,9 @@ migration.
 | `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
 | `LEH-AUDIT-1` | complete; checkpoint `01fd062c` | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
 | `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
-| `LEH-SNAKE-MAPS-3` | pending | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
+| `LEH-SNAKE-MAPS-3` | in progress via 3A | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
+| `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint pending | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
+| `LEH-SNAKE-COKERNEL-MAPS-3B` | pending | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
 | `LEH-SNAKE-EXACT-4` | pending | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
@@ -524,6 +526,7 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-010` | accepted | The divergent path-cubical/global-strictness branch remains outside this goal. |
 | `D-LEH-011` | accepted after owner audit | The homogeneous `FiniteFamily` carrier is not by itself a dependent categorical sequence. Construct the concrete six-term window first; if bounded iteration needs a generic spine, follow the recursive dependent-Sigma precedent of formal bounded complexes. |
 | `D-LEH-012` | corrected after endpoint audit | A six-object snake sequence has five arrows and four adjacent arrow composites. Proof–CAS and validation requirements use those exact counts. |
+| `D-LEH-013` | accepted after kernel-side owner probe | The first two snake arrows are direct selected kernel lifts of `delta o k_alpha` and `epsilon o k_beta`. Their zero tests derive from the existing alpha/gamma reconstruction and kernel annihilation paths; no comparison rule or endpoint transport is required. |
 
 ## Baseline And Validation Policy
 

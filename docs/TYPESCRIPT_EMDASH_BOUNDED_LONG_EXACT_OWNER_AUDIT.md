@@ -6,7 +6,7 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 
-Status: active owner and endpoint audit
+Status: completed audit; kernel-side implementation active
 
 ## Scope
 
@@ -286,3 +286,15 @@ No rule or unifier is anticipated. If transparent endpoint conversion exceeds
 the 90-second target, retain the literal selected-kernel owner shape and split
 readable aliases from universal-property paths, following the completed snake
 precedent.
+
+## Kernel-Side Probe Result
+
+The proposed owner was implemented in
+`emdash3_2_abelian_snake_six_term_kernels.lp`. Both maps are direct selected
+kernel lifts and both universal reconstruction paths remain explicit. The
+owner and reviewer pass quiet and warning-enabled checks, inherit exactly the
+`1,217` critical-pair and `169` replaceable-variable warning boundary, and add
+no rule or unifier. Strict LHS audits report zero clauses.
+
+The next dependency-ready action is the direct cokernel-side mirror described
+above.

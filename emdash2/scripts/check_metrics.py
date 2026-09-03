@@ -36,6 +36,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_abelian_images.lp"),
     Path("emdash3_2_abelian_image_bimorphisms.lp"),
     Path("emdash3_2_abelian_snake_lemma.lp"),
+    Path("emdash3_2_abelian_snake_six_term_kernels.lp"),
     Path("emdash3_2_abelian_snake_normal_epi_foundation.lp"),
     Path("emdash3_2_abelian_snake_normal_epi.lp"),
     Path("emdash3_2_abelian_snake_normal_mono_foundation.lp"),

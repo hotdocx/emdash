@@ -498,6 +498,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   path. That path constructs the selected cokernel colift `gamma` and kernel
   lift `alpha`, their reconstruction paths, surrounding kernels/cokernels,
   the selected fiber product and pushout, epic `p1`, and monic `q2`.
+- `emdash3_2_abelian_snake_six_term_kernels.lp`: rule-free kernel side of the
+  six-term snake sequence. It selects `Ker(alpha)` and `Ker(beta)`, derives
+  the `beta`- and `gamma`-annihilated tests from the existing alpha/gamma
+  reconstructions, and selects `Ker(alpha) -> Ker(beta) -> Ker(gamma)` by
+  kernel universality. Both reconstruction paths are retained; no rule,
+  unifier, or diagram field is added.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of
