@@ -3982,9 +3982,28 @@ cokernel. This avoids choosing a global raw target-cycle lift or splitting
 an epimorphism. The result retains all four comparison isomorphisms, both
 universal factors and their tests/reconstructions, and three native exactness
 results. A nonsplit three-degree example has a nonzero source boundary and a
-nonzero connecting map. The corresponding generic induced-map and window
-exactness proofs remain required; native decisions do not supply those
-theorems automatically.
+nonzero connecting map. The generic window exactness proof remains required;
+native decisions do not supply that theorem automatically.
+
+Generic induced homology maps now use two internal factor points. For a
+middle component `f`, one is a postcomposition factor of `f dNext_0`
+through `dNext_1`; the other is a precomposition factor of `d_1 f` through
+`d_0`. Their arrows and paths recover the familiar end components and
+compatibilities. Thus the diagram is displayed from the existing Hom fibres,
+not stored in a new square datatype. The lower factor constructs the cycle
+map by kernel universality. Target-kernel monicity then derives its boundary
+compatibility from the upper factor and the original boundary
+reconstructions, and source-cokernel universality constructs the homology
+map.
+
+Identity, composition, equality under a changed middle component, and inverse
+comparisons are proved from kernel/cokernel uniqueness. In particular,
+different choices of a kernel, cokernel, or whole homology result receive
+actual comparison isomorphisms; no object equality is asserted. These are
+generic map operations with theorem-level laws, not a claim that a whole
+homology functor from a separately constructed category of complexes has
+already been packaged. The concrete snake-row adapters and full generic
+window exactness proof remain the next consumers.
 
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send

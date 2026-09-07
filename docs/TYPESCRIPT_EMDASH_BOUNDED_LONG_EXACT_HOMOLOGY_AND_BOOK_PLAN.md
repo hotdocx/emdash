@@ -632,7 +632,9 @@ was introduced to get a passing target.
 | `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
-| `LEH-WINDOW-GENERIC-MAPS-7C` | pending owner-position construction | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
+| `LEH-WINDOW-GENERIC-MAPS-7C` | in progress through 7C1; canonical snake adapters next | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
+| `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; validated local checkpoint pending | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
+| `LEH-SNAKE-ROW-COMPARISONS-7C2` | pending | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
@@ -714,6 +716,8 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-035` | accepted after endpoint-window tests | Extend complex terms by the retained zero presentation, but compute outside-support homology with its true neighboring differentials. In particular, `0 → C_top` is not the unrelated `0 → 0` pair. Retain an identity-equals-zero agreement for the resulting outside homology object. |
 | `D-LEH-036` | accepted after generic cokernel/homology consumers | Derive the monic cokernel-composite comparison through a selected pushout factor and generic monic-factor cancellation. Specialize to the actual homology cycles/boundary; no pushout isomorphism, object transport, or monicity axiom is needed. |
 | `D-LEH-037` | accepted after bounded owner-position probes | Use one literal preadditive presentation in the Abelian cokernel wrapper, and prove homology monicity with PA/normality explicit before exposing a thin bundled observation. The shorter-alias and direct bundled alternatives each timed out in quiet and warning-enabled checks; the aligned/PA-explicit versions and actual cancellation consumers pass with no new rule or unifier. |
+| `D-LEH-038` | accepted after generic map consumers | Use transparent internal Hom pre/postcomposition fibres as the compatibility owner. A chain-pair map retains its middle arrow and two factor points; ordinary components and equations are projections or a transparent usability constructor, not a new square datatype. |
+| `D-LEH-039` | accepted after map-law and choice consumers | Construct maps on actual kernels/cokernels, derive identity/composition/extensionality by their existing uniqueness, and package inverse maps as ordinary IsoEvidence. Homology reuses these two stages and derives boundary compatibility. Different universal choices receive actual isomorphisms, not object equality or transport. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -1032,6 +1036,76 @@ Generic homology-inclusion checkpoint: `8161a141`. The worktree was clean
 after the commit. Row 7C is next; the full window proof, bounded sequence,
 cross-layer consumers, and book deliverables remain active requirements of
 the unchanged persistent objective.
+
+The row-7C continuation starts from clean `9ed7025f` and a successful
+fresh-source homology-inclusion reviewer. Factor the construction through
+generic maps on existing whole kernels and cokernels, with reconstruction,
+identity, composition, and inverse-comparison consumers. A map's compatibility
+is an existing `HFiber` point of ordinary pre/postcomposition on internal
+Homs; no new square primitive or six-object manual-diagram grammar is added.
+The chain-pair interface can retain a middle map and its two such factor
+points, with conventional components/paths as a transparent usability view.
+Lift the middle map to actual cycles, derive boundary compatibility by target
+kernel monicity, then use the generic cokernel map on the actual boundary
+cokernels. Do not postulate any of the induced maps or reconstruction laws.
+This slice constructs typed map operations and their laws; it does not by
+itself claim a packaged whole homology functor from a newly declared category
+of complexes. The existing homology objects and underlying generic category
+operations remain unchanged.
+
+Fifteen rule-free modules now implement row 7C1. The two `hom_factor_*`
+modules are transparent instances/operations of `HFiber`. The three
+`kernel_map*` and three `cokernel_map*` modules construct maps, their
+reconstructions, identity/composition/extensionality laws, and inverse
+comparisons. The two `chain_pair_map*` modules retain a middle component and
+its upper/lower factor points, with derived component/path observations and
+identity/composition. The five `homology_*map*` modules lift to the actual
+cycle kernels, derive boundary compatibility by target kernel monicity, and
+map the actual boundary cokernels. All intermediate tests are derived from
+the original chain-map data; no induced map or agreement is postulated.
+
+The map laws are theorem paths, not additional runtime functoriality rewrites.
+Homology-map equality depends only on equality of the middle component, so
+inverse middle components induce inverse homology maps. Kernel, cokernel,
+and homology choice comparisons construct `IsoEvidence` between actual
+different choices. They do not identify those objects judgmentally. The
+existing formal Freyd effectiveness boundary is unchanged: generic whole
+universal structures must not be inferred from native decisions.
+
+All five promoted reviewers pass in quiet and warning-enabled source checks:
+`examples/hom_factor_spaces.lp`, `kernel_maps.lp`, `cokernel_maps.lp`,
+`chain_pair_maps.lp`, and `homology_maps.lp`. Their 49 assertions comprise
+43 positive checks and six negative guards. They exercise factor/component
+beta, kernel/cokernel/homology reconstruction and laws, actual isomorphism
+projections, and comparisons of distinct universal choices. A positive
+false-negative guard accepts different proofs of the same chain-zero
+equation; wrong fibre targets, wrong selected objects, and a mismatched
+intermediate chain pair are rejected.
+
+The quiet logs end in `142128`, `142130`, `142131`, `142132`, `142134` on
+2026-09-07; warning logs end in `142616`, `142618`, `142619`, `142620`,
+`142621` respectively under `emdash2/logs/probes/`. The Hom-factor-only
+closure inherits `1,117/157`; the other four inherit `1,217/169`, unchanged
+from their corresponding existing kernel/additive closures. All twenty
+strict audits pass. No new rule, unifier, opaque operation, or equality axiom
+is added. The ordinary check/health lists include the new modules and the
+reviewers are automatically discovered. No new special aggregate is needed.
+
+Row 7C2 remains a real consumer gate. Use an actual `ComputationalChainPairMap`
+between two existing short-exact row pairs to derive the snake triple, then
+compare alpha/gamma with its end components using the row-5 isomorphisms.
+Instantiate the new kernel/cokernel map-isomorphism operations at those
+actual selected snake endpoints. This is not a fresh six-object manual
+diagram input. The generic full-window factor/descent/exactness proof stays
+in row 7D; row 7 and the full persistent goal remain active.
+The ordinary checker also passes on the kernel, cokernel, and homology
+isomorphism roots and their full source closures. A declaration audit confirms
+that all 63 new symbols have definition bodies and no rule/unifier/opaque
+clauses were added. All ten focused health-dispatch tests, strict catalog,
+source TOC, shell syntax, active-reference/report-header checks, and exact
+whitespace review pass. No compilation objects remain. The global health
+snapshot and unchanged TypeScript tests remain at their recorded proportional
+boundaries; no unrelated aggregate was run.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

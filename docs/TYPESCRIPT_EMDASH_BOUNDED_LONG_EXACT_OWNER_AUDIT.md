@@ -779,3 +779,47 @@ and an inclusion at another whole homology object. Promoted quiet and
 warning-enabled source checks pass; the inherited inventory is unchanged at
 `1,217/169` and nine strict audits find no rule clauses. Generic induced
 homology maps and complete window exactness remain required in rows 7C/7D.
+
+## Generic Kernel, Cokernel, And Homology Maps
+
+The generic map operations and laws are now implemented. Their compatibility
+owner is the existing internal Hom-fibre of ordinary pre/postcomposition.
+`HomPostcompFactor` and `HomPrecompFactor` are transparent aliases of that
+owner. When the target is itself a composite, its reconstruction displays
+the familiar square, but no additional square primitive or independent
+commutativity field is introduced.
+
+Kernel maps derive their target annihilator from a lower factor point and
+source-kernel annihilation, then use the actual target kernel lift. Cokernel
+maps are the corresponding upper-factor construction using the actual source
+cokernel colift. Existing uniqueness gives reconstruction, identity,
+composition, and equality under a changed visible component. Inverse visible
+components with both compatibility factors give actual `IsoEvidence`.
+
+A `ComputationalChainPairMap` retains the middle arrow and its two internal
+factor points. Its ordinary three components and two compatibility equations
+are projections; a conventional components/paths constructor is only a
+transparent usability view. Identity and composition reuse the factor
+operations. Different proofs of the same chain-zero equation do not change
+this map-data type, while different intermediate arrows remain constrained.
+
+The homology operation first applies the kernel map to the actual cycles.
+Target-kernel monicity and the two original boundary reconstructions derive
+boundary compatibility; it is not an additional input. The cokernel-map
+operation then acts on the actual boundary cokernels. Its identity,
+composition, extensionality, and inverse laws follow from those generic map
+laws. Different kernel, cokernel, or whole homology choices are compared by
+constructed isomorphisms, without object equality or transport.
+
+Five reviewers contain 49 assertions, all green from source with and without
+warnings. Besides the operation/law and choice comparisons, six negative
+guards reject wrong targets, universal objects, and intermediate chain
+pairs; the same-arrows/different-zero-proof consumer prevents an unnecessary
+false negative. The factor-only warning closure is `1,117/157`, and the
+additive/kernel closures remain `1,217/169`. All twenty strict audits pass.
+
+This completes the generic machinery subrow 7C1, not its canonical snake
+instantiations. Row 7C2 must derive a snake triple from an actual map between
+short-exact rows and instantiate the endpoint isomorphisms there. The full
+window proof remains row 7D. A packaged category-of-complexes homology functor
+and closed formal Freyd quotient effectiveness are not silently claimed.

@@ -414,7 +414,20 @@ belongs to the owning implementation plan rather than to standing guidance.
   cycles, kernel universality supplies the boundary map, and its selected
   cokernel supplies homology. The whole snapshot exposes cycle embedding,
   boundary reconstruction, homology projection, and projection annihilation.
-  Bounded indexing and functorial homology remain downstream.
+  Its bounded/functorial extensions are separate downstream modules.
+- `emdash3_2_hom_factor_spaces.lp` and `emdash3_2_hom_factor_composition.lp`
+  give transparent pre/postcomposition `HFiber` operations. The kernel and
+  cokernel map/law/isomorphism modules use those points to construct actual
+  universal maps and prove identity, composition, extensionality, and inverse
+  comparisons by existing uniqueness. There is no new square primitive.
+  `emdash3_2_chain_pair_maps.lp` and its composition module retain a middle
+  arrow and two factor points, exposing the usual components/paths as a
+  usability view. The generic homology cycle/map/law/isomorphism modules
+  derive cycle action and boundary compatibility and use the original
+  boundary cokernels. They preserve actual chosen homologies and compare
+  other choices by `IsoEvidence`, not object equality. These map operations
+  and theorem paths are not a packaged category-of-complexes functor or a
+  closed concrete formal Freyd capability.
 - `emdash3_2_short_exact_sequences.lp`: rule-free generic exactness and short
   exact triples over the selected homology owner. Exactness at the middle
   object is `IsEpic` for the selected boundary-to-kernel lift. Short exactness
@@ -818,9 +831,10 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreements and three native exactness witnesses; both endpoint-zero
   windows and a nonsplit nonzero-boundary example pass. Its companion
   serializer retains the complete selected result. The generic inclusion
-  monicity theorem is now provided by the separate generic modules; generic
-  induced maps, the full generic window proof, and long-exact iteration
-  remain explicit requirements of the active goal.
+  monicity theorem and induced-map operations/laws are now provided by the
+  separate generic modules. Canonical snake-row endpoint adapters, the full
+  generic window proof, and long-exact iteration remain explicit requirements
+  of the active goal.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

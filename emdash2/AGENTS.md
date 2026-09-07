@@ -93,6 +93,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   actual cycles/boundary and prove `H → Coker(dNext)` monic, preserving the
   original homology. The internal proof keeps PA/normality explicit and has
   a transparent one-Abelian-capability wrapper; no new rule or axiom is used.
+  The Hom-factor and kernel/cokernel-map modules use existing internal
+  pre/postcomposition fibres to construct maps on actual universal objects,
+  with identity/composition/extensionality paths and choice isomorphisms.
+  Chain-pair maps retain a middle component and two such factor points.
+  Generic homology maps derive cycle and boundary compatibility, then reuse
+  the cokernel map on the original homologies. These are rule-free map
+  operations/laws, not a new square grammar or a packaged complex-category
+  functor, and do not close the formal Freyd effectiveness boundary.
   `emdash3_2_short_exact_sequences.lp` defines generic exactness as epicity of
   that actual selected boundary lift. A short exact triple additionally
   retains monicity of the incoming arrow and epicity of the outgoing arrow;
