@@ -3693,6 +3693,18 @@ cokernel epicity. Separating that endpoint comparison from the large test
 application keeps both checks bounded; it changes neither the universal
 construction nor its computation.
 
+At the last interior object, `Coker(beta)`, a test `psi:Coker(beta) -> T`
+killed by the incoming snake map makes `psi c_beta` vanish on `mu`.
+Canonical kernel-row extension through `lambda` therefore yields a
+monomorphism `m:T -> U` and `y:D -> U` with `m psi c_beta = y lambda`.
+The gamma reconstruction and `c_beta beta = 0` show that `y gamma` vanishes
+after epic `epsilon`; cancellation makes it zero. Thus `y` descends to a
+selected colift from `Coker(gamma)`. The last snake-map reconstruction and
+epic cancellation of `c_beta` give the required monomorphic extension of
+`psi`, proving exactness at `Coker(beta)`. This completes the four individual
+interior exactness proofs. Packaging them over the actual arrows of one
+whole six-term snapshot is the next step.
+
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,
 `gamma`/`alpha` factors, genuine fiber product and pushout, stability

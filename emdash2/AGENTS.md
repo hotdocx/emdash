@@ -236,6 +236,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   coextension difference descends through `Coker(beta)`. Cancelling epic
   `pi` identifies that colift with the doubly extended test. The resulting
   extension family proves epicity of the actual boundary, with no new rule.
+  The fourth tranche proves exactness at `Coker(beta)`. A test killed by
+  `Coker(alpha) -> Coker(beta)` gives a kernel-annihilated test after
+  `c_beta`. Canonical extension through `lambda` descends through
+  `Coker(gamma)` by epic `epsilon` cancellation; epic `c_beta` supplies the
+  final reconstruction. The same extension criterion proves exactness.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

@@ -592,6 +592,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   cokernel epicity at readable `pi` endpoints; no property or equality is
   postulated. All twenty-one chase modules and the generic criterion remain
   rule-free.
+- The fourth snake exactness modules prove exactness at `Coker(beta)`.
+  A test killed by the preceding snake map gives a kernel-row test after
+  `c_beta`. Its canonical extension through `lambda` kills `gamma` by epic
+  `epsilon` cancellation and descends through the selected gamma cokernel.
+  Cancelling epic `c_beta` supplies the final extension reconstruction, so the
+  generic criterion gives exactness. All seven stages and their reviewer
+  check directly from source under the ordinary per-target limit; they do not
+  require the isolated multi-branch gate. The four individual exactness
+  proofs are now present; their dependent whole-result package remains next.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

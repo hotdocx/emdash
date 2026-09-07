@@ -469,3 +469,30 @@ promotion and whole exact-result packaging are the next actions. In that
 whole result, each exactness witness must refer to the actual projected
 arrows and zero points of the stored snapshot, rather than to unrelated
 fixed canonical maps.
+
+## Fourth Position And Exact-Result Packaging Boundary
+
+The seven fourth-position stages are promoted. If `psi:Coker(beta) -> T`
+kills `c34`, the c34 reconstruction makes `psi c_beta` a test annihilating
+`mu`. Canonical kernel-row extension through `lambda` provides monic `m`
+and `y:D -> U` with `m psi c_beta = y lambda`. Precomposing `y gamma` with
+epic `epsilon` and using the gamma reconstruction reduces it to
+`m psi c_beta beta = 0`. Cokernel universality descends `y` through
+`Coker(gamma)`. The c45 reconstruction and epic cancellation of `c_beta`
+then produce the exact extension of `psi`; the generic criterion proves
+`ComputationalExactAt` at `Coker(beta)`.
+
+Unlike the third-position chain, this complete reviewer checks in one
+fresh-source invocation within the ordinary 90-second limit. Its seven source
+modules therefore use ordinary checker/health registration, and its reviewer
+uses the ordinary example route. The direct proof does not need a new
+validation group or a repeated run of the earlier multi-branch gate.
+
+The next owner is `AbelianSnakeSixTermExactData(result)`, dependent on the
+actual stored result. Each of its four chain pairs must be constructed from
+that result's adjacent arrows and zero projection; its homology must use the
+existing `computational_homology_at` on that pair. The canonical snapshot's
+projection reductions should then let the four individual proofs inhabit
+that data. The eventual whole exact result is the dependent Sigma of the
+existing snapshot and these witnesses, not an independent product with
+unrelated canonical exactness. This package remains to be implemented.
