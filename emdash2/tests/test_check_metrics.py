@@ -33,6 +33,7 @@ class CheckMetricsTests(unittest.TestCase):
                 "inner_kernel_u_zero_foundation.lp"
             ),
             Path("examples/abelian_snake_six_term_inner_zero.lp"),
+            Path("emdash3_2_abelian_snake_exact_third_result.lp"),
         ]
 
         with redirect_stdout(StringIO()):
@@ -48,6 +49,7 @@ class CheckMetricsTests(unittest.TestCase):
             [result.evidence for result in results],
             [
                 "current",
+                "current-isolated-object-chain",
                 "current-isolated-object-chain",
                 "current-isolated-object-chain",
             ],

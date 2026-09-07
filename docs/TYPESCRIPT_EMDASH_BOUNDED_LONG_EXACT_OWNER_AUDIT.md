@@ -422,3 +422,50 @@ rule-free, and the warning-enabled generic difference helper inherits the
 unchanged `1,217/169` warning boundary.
 
 The next action is the dual exactness construction at `Coker(alpha)`.
+
+## Monomorphic Extensions And Third Position
+
+The dual local-extension criterion is now implemented. For a coannihilated
+test `psi:B -> T` in a zero pair `A -> B -> D`, the witness retains an object
+`U`, a monomorphism `m:T -> U`, a factor `y:D -> U`, and `m psi = y d`.
+The constructor and projections reuse dependent Sigma. A family of extensions
+implies the active exactness notion: push the actual boundary cokernel out
+along the selected cycle embedding, apply the family to the first injection,
+and cancel the resulting two monomorphisms. The boundary cokernel is zero,
+so the boundary is epic. This supplies the needed direction without changing
+`ComputationalExactAt`; a general converse has not been added.
+
+For `Ker(f) -> A -> B`, a test descends to `Coim(f)`. The canonical map from
+that coimage into `B` is monic by the existing comparison theorem; its pushout
+along the descended test supplies the monomorphic extension. One explicit
+pre-Abelian package and the two normality capabilities remain visible in this
+generic construction.
+
+The third snake chase now constructs exactness at `Coker(alpha)`. Given
+`psi partial = 0`, pushing out `q2` gives `s q2 = m psi` with `m` monic.
+The colift of `q1 beta` along `epsilon`, postcomposed with `s`, is `zeta`.
+The connecting reconstruction and epic `p1` give `zeta iota = 0`.
+Canonical kernel-row extension through `gamma` supplies `n zeta = y gamma`
+with `n` monic. Thus `n s q1 - y lambda` kills `beta` and has a selected
+cokernel colift `wbar`. Its reconstruction after `mu` and epic cancellation
+of `pi` give `wbar c34 = n m psi`. The composite `n m` is monic, so the
+generic extension criterion produces the actual exactness witness.
+
+All stage probes and the reviewer pass. A combined comparison/cancellation
+file crossed the 90-second bound; separating those two mathematical steps
+made the comparison check in about 59 seconds. The direct generic-cokernel
+epicity application also crossed the bound. A named transparent theorem
+`abelian_snake_third_pi_epic`, with readable source/target and `pi` endpoints,
+checks separately in about 65 seconds and lets the final cancellation check
+in about two seconds. This is proof declaration granularity and endpoint
+discipline; it introduces no opacity, axiom, rule, or unifier.
+
+Integrated exact-source validation passed through the registered third
+position and its reviewer, with the unchanged `1,217/169` warning inventory.
+The strict audits, focused health-dispatch tests, catalog, TOC, report/link
+hygiene, and staged whitespace checks also pass. The fourth position, at
+`Coker(beta)`, has seven successful stage probes and a successful reviewer;
+promotion and whole exact-result packaging are the next actions. In that
+whole result, each exactness witness must refer to the actual projected
+arrows and zero points of the stored snapshot, rather than to unrelated
+fixed canonical maps.

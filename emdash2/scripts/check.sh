@@ -54,7 +54,10 @@ is_abelian_snake_six_term_join() {
     emdash3_2_abelian_snake_exact_first_comparison.lp|\
     emdash3_2_abelian_snake_exact_first_result.lp|\
     emdash3_2_preadditive_difference_paths.lp|\
-    emdash3_2_abelian_snake_exact_second_*.lp)
+    emdash3_2_abelian_snake_exact_second_*.lp|\
+    emdash3_2_exactness_extensions*.lp|\
+    emdash3_2_abelian_canonical_kernel_extensions*.lp|\
+    emdash3_2_abelian_snake_exact_third_*.lp)
       return 0
       ;;
     *)
@@ -173,6 +176,34 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_snake_exact_second_total_cover.lp)
   files+=(emdash3_2_abelian_snake_exact_second_cover_witness.lp)
   files+=(emdash3_2_abelian_snake_exact_second_result.lp)
+  files+=(emdash3_2_exactness_extensions_foundation.lp)
+  files+=(emdash3_2_exactness_extensions_to_exact_foundation.lp)
+  files+=(emdash3_2_exactness_extensions_to_exact_extension.lp)
+  files+=(emdash3_2_exactness_extensions_to_exact_zero.lp)
+  files+=(emdash3_2_exactness_extensions_to_exact.lp)
+  files+=(emdash3_2_abelian_canonical_kernel_extensions_foundation.lp)
+  files+=(emdash3_2_abelian_canonical_kernel_extensions.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_pushout.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_zeta.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_zeta_epsilon.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_zeta_iota_to_su.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_su_path.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_zeta_zero.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_foundation.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_object.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_monomorphism.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_is_monic.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_path.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_beta_difference.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_cokernel_factor.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_mu_reconstruction.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_difference_mu.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_pi_comparison.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_pi_epic.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_extension_comparison.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_extension_witness.lp)
+  files+=(emdash3_2_abelian_snake_exact_third_result.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)

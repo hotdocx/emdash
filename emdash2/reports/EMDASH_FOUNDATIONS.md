@@ -3625,6 +3625,24 @@ pre-Abelian package and its normal-mono/normal-epi capabilities, then consumed
 from a whole Abelian package; this is the same term-shape discipline used by
 the image-bimorphism theorem.
 
+A dual local-extension criterion is available for the cokernel side of a
+chase. Given `A -> B -> D` and a coannihilated test `psi:B -> T`, an extension
+retains a monomorphism `m:T -> U`, a factor `y:D -> U`, and the reconstruction
+`m psi = y d`. A family of these extensions implies the same
+`ComputationalExactAt`. To see this, take the cokernel `q` of the actual
+boundary into cycles, and push it out along the cycle embedding. The second
+pushout injection is monic. Applying the extension family to the first
+injection, then cancelling the two monomorphisms, shows `q = 0`, so the
+actual boundary is epic. Every test and factor is supplied by the existing
+internal universal constructions.
+
+The canonical kernel row has these extensions constructively. A test killed
+by `Ker(f)` descends to `Coim(f)`. The canonical map `Coim(f) -> B` is monic
+by the image-comparison theorem, so its pushout along the descended test gives
+the required monomorphic extension and reconstruction through `f`. The
+implementation again keeps the pre-Abelian value and its two normality
+capabilities explicit inside this construction.
+
 Exactness at the first interior snake object, `Ker(beta)`, now follows in this
 form. Start with a test arrow into `Ker(beta)` killed by the next kernel map.
 After composing with `k_beta`, canonical exactness of
@@ -3651,6 +3669,29 @@ original `psi` after both covers. The monic embedding `iota` therefore cancels
 to the required factorization through `Ker(beta) -> Ker(gamma)`. Composition
 of the two epic covers completes the local-cover witness and proves exactness
 of the actual selected boundary at `Ker(gamma)`.
+
+At `Coker(alpha)`, take a test `psi:Coker(alpha) -> T` with
+`psi partial = 0`. Push out monic `q2` along `psi` to obtain
+`s:Q -> T1`, `m:T -> T1`, with `m` monic and `s q2 = m psi`.
+The map `q1 beta` descends through `epsilon`; composing that colift with `s`
+gives `zeta:Coker(delta) -> T1`. The connecting reconstructions show that
+`zeta iota` vanishes after epic `p1`, hence vanishes outright.
+
+Canonical kernel-row extension through `gamma` supplies a second monomorphism
+`n:T1 -> T2` and `y:D -> T2` with `n zeta = y gamma`. The difference
+`w = n s q1 - y lambda` therefore kills `beta`, so it has a selected colift
+`wbar:Coker(beta) -> T2`. Applying `mu` removes the `y lambda` summand and
+uses the pushout equations to give `w mu = n m psi pi`. The reconstruction
+for `Coker(alpha) -> Coker(beta)`, followed by epic cancellation of `pi`,
+now gives `wbar (Coker(alpha) -> Coker(beta)) = n m psi`.
+The composite `n m` is monic. These data form the local-extension family,
+which proves exactness of the actual selected boundary at `Coker(alpha)`.
+
+The final cancellation uses a named theorem stating epicity of `pi` at its
+readable source and target. This theorem is a transparent instance of generic
+cokernel epicity. Separating that endpoint comparison from the large test
+application keeps both checks bounded; it changes neither the universal
+construction nor its computation.
 
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,

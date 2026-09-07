@@ -97,6 +97,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   is epic. Canonical kernel/cokernel rows instantiate this interface, with the
   cokernel proof transporting epicity inside the existing contractible image
   factor fibre using explicit pre-Abelian/normality capabilities.
+  The `emdash3_2_exactness_extensions*` modules provide the dual sufficient
+  local-extension criterion and its canonical kernel-row instance. A test
+  killed by the incoming arrow extends through the outgoing arrow after a
+  monomorphism; pushing out the actual boundary cokernel along the cycle
+  embedding proves that this family implies the existing exactness owner.
   `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
   proves selected kernel embeddings monic and cokernel projections epic, and
   packages normal lift/colift `HFiber`s plus the thin generic computational
@@ -222,9 +227,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   connecting-kernel test back along epic `p1`, uses the existing
   `beta o p2` lift into `Ker(lambda)`, covers that lift through `alpha`, and
   factors the corrected difference through `Ker(beta)`. The `epsilon` and
-  `iota` reconstructions identify the resulting first snake map with the
+  `iota` reconstructions identify the resulting second snake map with the
   doubly covered test. Each retained cover is an existing fiber-product or
   exactness-cover point; the implementation adds no element or diagram syntax.
+  The third tranche proves exactness at `Coker(alpha)`. A pushout of monic
+  `q2` extends an arbitrary test killed by the connecting arrow. Canonical
+  kernel-row extension then gives a second monomorphism; the corrected
+  coextension difference descends through `Coker(beta)`. Cancelling epic
+  `pi` identifies that colift with the doubly extended test. The resulting
+  extension family proves epicity of the actual boundary, with no new rule.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

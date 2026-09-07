@@ -437,6 +437,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   `chi_f o p_f` as an epic point of the image kernel-factor fibre, and uses
   the generic epic-factor-point theorem. Bundled public projections are used
   only at consumers, avoiding the measured conversion explosion.
+- The `emdash3_2_exactness_extensions*` modules provide the dual local
+  criterion: a coannihilated test extends through the outgoing arrow after a
+  selected monomorphism. Such a family makes the existing selected boundary
+  epic by pushing out its cokernel along the cycle embedding and cancelling
+  the resulting monomorphisms. The canonical-kernel-extension modules
+  construct the required family for `Ker(f) -> A -> B` using the monic map
+  `Coim(f) -> B` and a selected pushout. These are rule-free definitions and
+  proofs; the general converse from exactness is not claimed here.
 - `emdash3_2_abelian_categories.lp`: rule-free generic computational
   normality. `IsMonic` and `IsEpic` are cancellation on existing Hom
   composition; kernel/cokernel contractibility proves the selected structural
@@ -573,6 +581,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   monic `iota` identify its second snake image with the doubly covered test.
   The composite epic cover then supplies the generic exactness witness. The
   fine module split follows measured owner/projection boundaries only.
+- The third snake exactness modules prove exactness at `Coker(alpha)`.
+  Pushing out monic `q2` extends a connecting-annihilated cocone; epic `p1`
+  shows that the resulting `zeta` kills `iota`. Canonical kernel-row
+  extension supplies a second monomorphism and a gamma-coextension. The
+  corrected difference `n s q1 - y lambda` kills `beta`, descends through
+  `Coker(beta)`, and reconstructs the doubly extended test after epic `pi`.
+  Its monomorphic extension family gives the existing `ComputationalExactAt`.
+  The final application uses a named, transparent instance of generic
+  cokernel epicity at readable `pi` endpoints; no property or equality is
+  postulated. All twenty-one chase modules and the generic criterion remain
+  rule-free.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

@@ -504,8 +504,9 @@ fresh object generation in separate bounded invocations, then checks all five
 cross-branch source modules, the whole result/projection modules, and both
 six-term reviewers against those exact objects. The same gate now continues
 through the exactness-cover infrastructure, both canonical-row instances, the
-first two snake exactness chases, and their reviewers. Its complete run is green and leaves
-no `.lpo` in the worktree. `check.sh`,
+first three snake exactness chases, and their reviewers. The third-position
+extension stages and reviewer now pass that same focused gate. Its complete
+run is green and leaves no `.lpo` in the worktree. `check.sh`,
 `check_examples.sh`, and the resumable health runner route these measured
 targets through that gate. This is the same source-checked compilation model
 used by the documented large-module fallback; an object-backed failure must
@@ -517,23 +518,43 @@ therefore expected to remain stale until the next authorized proportional
 health boundary; the focused gate and its unit-tested health dispatch are the
 current evidence.
 
+### Third-position validation result
+
+The 2026-09-07 warning-enabled isolated gate passed through every registered
+third-position source and reviewer, while retaining the earlier maps, zero
+equations, whole-result projections, and first/second exactness reviewers.
+Every individual Lambdapi process remained bounded to 90 seconds. The exact
+warning inventory is unchanged at `1,217` critical-pair and `169`
+replaceable-variable reports; all thirty affected source/reviewer strict
+audits pass with zero new rule clauses. The nine focused health-dispatch unit
+tests pass, as do shell syntax, the strict fresh catalog, source TOC, report
+headers, active links, and staged whitespace checks. The integration log is
+`emdash2/logs/snake-third-integration.ZoG8vA.log`.
+
+Six inherited extension files had a final blank line removed after the
+isolated copy was taken. Their resulting current source was checked again in
+the successful fourth-foundation probe; the change was whitespace-only.
+Disposable `.lpo` files from the exploratory checks have been removed.
+The full health rebuild and unrelated TypeScript/book aggregates remain at
+the previously documented boundary.
+
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
 | `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
 | `LEH-AUDIT-1` | complete; checkpoint `01fd062c` | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
 | `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
-| `LEH-SNAKE-MAPS-3` | in progress via 3A | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
+| `LEH-SNAKE-MAPS-3` | complete through checkpoint `17a7dd6a` | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
 | `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint `dd330e5e` | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
 | `LEH-SNAKE-COKERNEL-MAPS-3B` | complete; checkpoint `737b36fe` | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
 | `LEH-SNAKE-ZERO-3C` | complete; checkpoint `3ecad40d` | 3A–3B and completed connecting factor spaces | all four adjacent-zero points |
 | `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
 | `LEH-SNAKE-INNER-ZERO-3C2` | complete; checkpoint `3ecad40d` | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
-| `LEH-SNAKE-EXACT-4` | in progress via 4A | row 3 and generic exactness | exactness at all four interior six-term positions |
+| `LEH-SNAKE-EXACT-4` | in progress via 4D; 4A–4C complete | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SNAKE-EXACT-FIRST-4A` | complete; checkpoint `8dfde0a6` | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
 | `LEH-SNAKE-EXACT-SECOND-4B` | complete; checkpoint `08d97080` | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
-| `LEH-SNAKE-EXACT-THIRD-4C` | pending | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
-| `LEH-SNAKE-EXACT-FOURTH-4D` | pending | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` and whole exact result |
+| `LEH-SNAKE-EXACT-THIRD-4C` | complete; validated checkpoint pending | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
+| `LEH-SNAKE-EXACT-FOURTH-4D` | all seven stage probes green; promotion and whole exact result pending | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` and whole exact result |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
@@ -552,6 +573,31 @@ dependency graph. A row may be rejected or deferred only with durable evidence
 and a concrete replacement, prerequisite, or human decision.
 
 ## Initial Decision Ledger
+
+The interruption before the third exactness checkpoint preserved seven new
+rule-free extension-criterion/canonical-kernel modules and the successful
+`zeta o iota = 0` and gamma-extension probes. The 2026-09-07 continuation
+revalidated current files, ancestry, and the exact unfinished target; the
+preceding turn therefore made mathematical implementation progress. The
+resumed chase uses two monomorphic extensions. For a cocone `psi` killed by
+`partial`, push out monic `q2` along `psi` to obtain `s q2 = m psi`. Extend the
+resulting `zeta` through `gamma`, obtaining `n zeta = y gamma` with `n` monic.
+Then `w = n s q1 - y lambda` kills `beta` and descends to `Coker(beta)`.
+Cancelling epic `pi` gives the required extension of `psi` across
+`Coker(alpha) -> Coker(beta)`; the generic extension criterion proves
+epicity of the existing selected boundary. This proof and its reviewer now
+pass in the promoted source and integrated validation.
+
+The fourth-position probes also pass through the final theorem. A test
+`psi:Coker(beta) -> T` killed by `c34` makes `psi c_beta` vanish on `mu`.
+Canonical kernel-row extension through `lambda` supplies `m psi c_beta = y
+lambda` with `m` monic. The gamma reconstruction and epic `epsilon` show
+`y gamma = 0`; descending `y` through `Coker(gamma)` and cancelling epic
+`c_beta` supplies the exact extension. These seven probes remain under
+`emdash2/tmp/probes/abelian_snake_exact_fourth_*`; they are not yet promoted
+implementation or part of the third-position checkpoint.
+After removing all compilation objects, the fourth reviewer also passed as
+one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewer-20260907-063322.log`.
 
 | ID | State | Decision |
 |---|---|---|
@@ -577,6 +623,10 @@ and a concrete replacement, prerequisite, or human decision.
 | `D-LEH-020` | accepted after canonical-row probes | Canonical cokernel exactness is proved with one explicit `PreAbelianCategory` and its two normality capabilities, following the image-bimorphism owner discipline. The epic map `Coim(f) -> Im(f)` after the coimage projection is retained as a point of the selected image factor fibre; `computational_exact_at_from_epic_factor_point` transports epicity to the actual boundary. Bundled concrete wrappers that repeatedly projected `ComputationalAbelianCategory` were rejected after measured conversion timeouts. |
 | `D-LEH-021` | accepted after the first snake exactness probe | At `Ker(beta)`, apply canonical cokernel-row covers to `k_beta o psi`; monicity of `mu` forces the covered preimage through `Ker(alpha)`, and monicity of `k_beta` proves the covered reconstruction through the first snake arrow. The resulting cover family proves epicity of the actual boundary with no image/kernel object equality. |
 | `D-LEH-022` | accepted after the second snake exactness probe | At `Ker(gamma)`, pull a connecting-kernel test back along epic `p1`; use the existing `beta o p2` lift, connecting/pushout reconstructions, and monic `q2` to obtain a cone for the canonical `alpha` cokernel row. After its second epic cover, factor the corrected `p2 - delta` difference through `Ker(beta)` and cancel monic `iota`. Compose the two covers and apply the generic cover criterion. Fine-grained one-symbol cover projections are retained because larger projection files exceeded the 90-second bound. |
+| `D-LEH-023` | accepted after extension-criterion probes | A monomorphic local-extension family implies the existing boundary-epicity exactness. Push the actual boundary cokernel out along the cycle embedding, extend the first injection, and cancel the two monomorphisms to make that cokernel zero. A general converse has not been added. |
+| `D-LEH-024` | accepted after canonical kernel-row probes | Descend a kernel-annihilated test to the coimage and push out the monic canonical map `Coim(f) -> B`. This constructs the kernel row's extension family with explicit pre-Abelian/normality capabilities, no new property postulate, and no new computation rule. |
+| `D-LEH-025` | accepted after third-position probes | Two monomorphic extensions give the corrected coextension `n s q1 - y lambda`; its selected beta-cokernel colift reconstructs after `pi`. Separate that calculation from a readable transparent instance of generic `pi` epicity. This reduces the final application from a timeout to about two seconds without opacity or an extra rule. |
+| `D-LEH-026` | accepted after whole-result type audit | The exactness data of a whole six-term result must depend on its actual projected arrows and zero points. Define each chain pair from those projections and use the existing homology constructor on that pair. Do not attach exactness of the fixed canonical maps to an unconstrained arbitrary `AbelianSnakeSixTermResult`. Canonical projection reduction should connect the selected instance to the four completed proofs. |
 
 ## Baseline And Validation Policy
 
