@@ -688,7 +688,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
-| `LEH-NATIVE-SNAKE-RESULT-10A` | next prerequisite | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
+| `LEH-NATIVE-SNAKE-RESULT-10A` | complete; focused gates green | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1374,6 +1374,37 @@ it. The next dependency-ready operational row is 10A, then the categorical
 operation/lowering and proof–CAS consumers. Generic window/bounded exactness,
 external differential, book, consolidation, and final scoped validation
 remain active requirements; the persistent goal is not complete.
+
+Row 10A resumes from clean `b98c6621`. The preceding status answer did not
+implement another tranche; the next safe action is the native six-term
+operation. Workspace validation and the four existing native snake tests
+pass. Select Ker(alpha), Ker(beta), Coker(beta), and Coker(gamma); retain the
+existing Ker(gamma), Coker(alpha), and connecting arrow. Kernel lifting of
+`delta ∘ k_alpha` and `epsilon ∘ k_beta`, and cokernel colifting of
+`c_beta ∘ mu` and `c_gamma ∘ lambda`, construct the other four arrows.
+Compute/retain all four zero pairs and interior exactness witnesses.
+Neither end is asserted zero, and no extra diagram or arrow is an input.
+
+The native six-term result is implemented in
+`src/v3_2/algebra_polynomial_freyd_snake_exact.ts`. Its standalone constructor
+consumes a triple; its from-connecting constructor retains an already
+computed whole connecting result, including the actual Ker(gamma),
+Coker(alpha), and connecting arrow. It constructs the other four arrows by
+the existing universal operations and retains all four factor results,
+adjacent-zero pairs, and epimorphism-bearing exactness witnesses. Its
+serializer records the full universal/factor data and checks the object/map
+references represented by its fixed six-term owner labels. No endpoint-zero
+assumption or new matrix algorithm is introduced.
+
+Seven new tests plus the four existing snake and eleven bounded-result tests
+pass (22 focused tests). They cover nonzero nonsplit connecting, all four
+exactness positions, standalone/reuse agreement, actual reuse from bounded
+windows, an all-zero triple whose two end objects remain nonzero, failed
+input/owner guards, complete serialization, and retained-witness sensitivity.
+Workspace validation, root typecheck, affected-file lint, and whitespace
+review pass. No formal owner, trusted Core, public barrel, or unrelated
+aggregate changed. Categorical operation registration/lowering is now the
+next operational consumer; full proof–CAS integration remains pending.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

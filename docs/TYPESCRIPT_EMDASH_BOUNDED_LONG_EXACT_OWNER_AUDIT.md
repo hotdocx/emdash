@@ -932,3 +932,20 @@ the five arrows/four zero equations must be available for the planned
 snake-exact-sequence role. Reuse an existing connecting result when deriving
 this auxiliary reference result from a homology window. This requirement is
 not a reason to couple the public homology-connecting API to snake syntax.
+
+## Native six-term categorical prerequisite (row 10A)
+
+`algebra_polynomial_freyd_snake_exact.ts` supplies the missing native whole
+six-term result. Its two kernel lifts and two cokernel colifts mirror the
+existing generic six-term owners. The from-connecting entry point preserves
+the existing gamma kernel, alpha cokernel, and connecting arrow, allowing
+bounded-window replay without a second connecting computation. Four actual
+zero pairs and four native exactness/epimorphism witnesses are retained.
+The two outer objects are not assumed zero; the all-zero triple test has
+nonzero outer objects and still satisfies all interior exactness.
+
+The complete serializer checks selected object/map/pair references and
+retains universal factors and their reconstruction data. Seven new and
+fifteen adjacent tests pass, as do typecheck, affected-file lint, and
+workspace validation. This completes the native prerequisite, not the
+categorical registration, graph lowering, or proof–CAS replay integration.

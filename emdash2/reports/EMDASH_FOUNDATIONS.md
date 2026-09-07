@@ -4041,6 +4041,14 @@ operational construction is tested on nonsplit examples with nonzero
 connecting and boundary maps; generic formal bounded exactness and its
 end-to-end proof–CAS consumers remain distinct unfinished layers.
 
+The native six-term snake result is also available as a separate operation.
+It constructs the two kernel-side and two cokernel-side maps around the
+existing connecting arrow, retaining all four adjacent-zero pairs and
+interior exactness witnesses. It can reuse an existing whole connecting
+construction from a homology window. Its two outer objects need not be zero;
+this six-term reference result is distinct from the zero-ended bounded
+homology sequence and does not dictate the homology operation's public API.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

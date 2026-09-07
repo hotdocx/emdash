@@ -875,7 +875,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   positions, endpoints, actual sharing, failures, and serialization. This is
   the native operational layer, not the still-pending generic formal window
   theorem or a completed categorical/proof–CAS integration. The native
-  six-term snake-result operation is a named prerequisite of that integration.
+  six-term snake-result operation is supplied by the following module.
+- `src/v3_2/algebra_polynomial_freyd_snake_exact.ts` constructs the native
+  six-object/five-arrow snake result with four zero pairs and four interior
+  exactness witnesses. Two kernel lifts and two cokernel colifts reuse the
+  existing universal operations. Its from-connecting entry point preserves
+  an existing connecting construction and its selected endpoints; the
+  standalone entry point starts from a triple. No zero-endpoint or splitting
+  assumption is added. Its full serializer and 22 focused tests qualify the
+  native prerequisite for categorical/replay integration, which remains open.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary
