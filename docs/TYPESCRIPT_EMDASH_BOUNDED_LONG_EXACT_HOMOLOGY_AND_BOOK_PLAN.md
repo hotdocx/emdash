@@ -629,11 +629,11 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | in progress; native window, generic inclusion/maps complete; adapters/exactness remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | in progress through 7C1; canonical snake adapters next | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
-| `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; validated local checkpoint pending | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
+| `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | pending | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -1106,6 +1106,16 @@ source TOC, shell syntax, active-reference/report-header checks, and exact
 whitespace review pass. No compilation objects remain. The global health
 snapshot and unchanged TypeScript tests remain at their recorded proportional
 boundaries; no unrelated aggregate was run.
+
+Generic map checkpoint: `3df110ee`; the worktree was clean after it. The
+next row-map-to-snake construction can already start from two arbitrary
+chain pairs and `F:ComputationalChainPairMap(p0,p1)`: select
+`delta = dNext(p0)`, `beta = middle(F)`, and `lambda = d(p1)`. The upper
+factor gives `beta delta = dNext(p1) next(F)`; the target pair's existing
+zero law proves `lambda beta delta = 0`. Thus the snake triple is derived
+without another coherence input. Short exactness is used subsequently for
+the endpoint comparison isomorphisms, not for forming this triple. This
+remains the first row-7C2 implementation, not a completed claim.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
