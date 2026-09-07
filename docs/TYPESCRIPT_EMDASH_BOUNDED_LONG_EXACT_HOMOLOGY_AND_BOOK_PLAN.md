@@ -683,7 +683,7 @@ was introduced to get a passing target.
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
-| `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; native operation, reuse, serialization and focused tests green | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
+| `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | pending; operational assembly prioritized | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
@@ -1299,6 +1299,13 @@ recomputed. The conventional displayed sequence has selected endpoint zeros
 and the three A/B/C roles at every supported degree. Its exactness witnesses
 must refer to the same stored arrow pairs. Generic row 7D remains required
 but outside this immediate operational critical path.
+
+Named homology-connecting checkpoint: `db73ea79`; the worktree was clean
+after it. This checkpoint also records the user-supplied future-redesign
+references and the external shallow Spectral checkout without introducing a
+new runtime dependency. Native bounded long-exact assembly is next; the full
+persistent goal remains active and no generic window theorem, categorical
+integration, proof–CAS consumer, or book completion is implied by row 7E.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
