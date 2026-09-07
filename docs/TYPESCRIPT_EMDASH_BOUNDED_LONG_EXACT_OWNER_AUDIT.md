@@ -495,4 +495,65 @@ existing `computational_homology_at` on that pair. The canonical snapshot's
 projection reductions should then let the four individual proofs inhabit
 that data. The eventual whole exact result is the dependent Sigma of the
 existing snapshot and these witnesses, not an independent product with
-unrelated canonical exactness. This package remains to be implemented.
+unrelated canonical exactness. This is the implemented package described next.
+
+## Dependent Whole Exact Result
+
+`AbelianSnakeSixTermExactResult` now retains the existing snapshot and its
+four exactness witnesses in one dependent Sigma. Each pair function uses the
+snapshot's actual adjacent arrow projections and its zero-path projection.
+`AbelianSnakeSixTermExactData` applies the existing selected-homology
+exactness classifier to those four pairs. The generic constructor and
+projections are transparent; a negative typed consumer rejects exactness data
+belonging to a different arbitrary snapshot.
+
+The canonical instance uses the same five arrows and four zero points as
+before. Four direct conversion checks confirm that its reconstructed pairs
+are the existing pairs. A direct assignment of the old proofs to the expanded
+new predicate timed out, including an isolated first-position assignment.
+This is a checking-context limitation, not evidence that the pair identity or
+the theorem is unavailable.
+
+The accepted adapter compares at the pair owner. Each canonical identity has
+an `eq_refl` witness, and `computational_exactness_reindex` uses ordinary
+equality elimination on `computational_exact_at_selected`. Its reflexivity
+beta test passes. The four canonical exactness instances then check promptly,
+as does the dependent whole constructor. There is no new axiom, runtime rule,
+unifier, kernel/cokernel object equality, or second homology construction.
+
+The maintained canonical reviewer compares each proof projection with its
+declared canonical instance. A direct comparison against the old, differently
+presented bare proof type exceeded the bound; that diagnostic is not used as
+the ordinary reviewer. The separate pair-conversion/reflexivity checks and
+generic reindexing beta test preserve the explanation of how the old proofs
+are reused. Twenty-seven focused assertions cover the pair projections, both
+whole beta projections, two negative dependency/noncollapse guards, the
+canonical pair/snapshot/proof observations, and reindexing beta.
+
+The dependency sources were compiled in a fresh disposable copy in separate
+bounded invocations. All promoted source and reviewer names checked against
+those exact dependencies, and the generic reindexing reviewer also passed
+from source with warnings enabled. The next required owner is selected
+short-exact-row normalization and its canonical comparison with an arbitrary
+`ComputationalShortExactTriple`.
+
+## Short-Exact Comparison Continuation
+
+For `A --i--> B --p--> D`, let `e:A -> Ker(p)` be the existing selected
+boundary. Its epicity is the supplied exactness witness; `k e = i` and
+monicity of `i` make `e` monic. Existing constructive balancedness should
+therefore provide the required kernel comparison isomorphism.
+
+For the other endpoint, cokernel universality gives `q:Coker(i) -> D` with
+`q c_i = p`. The equation `(c_i k)e = c_i i = 0` and epicity of `e` give
+`c_i k = 0`. Thus `c_i` is a normal-epi test for `p`, whose selected colift
+`r:D -> Coker(i)` satisfies `r p = c_i`. Cancelling epic `p` and epic `c_i`
+in these two reconstructions gives the inverse laws for `q` and `r`. No
+section `D -> B` or object equality is involved.
+
+A suitable fully selected normal row is `Im(i) -> B -> Coker(i)`, with
+`Im(i) = Ker(Coker(i))`. Its short exactness follows from the canonical
+kernel row and epicity of the selected cokernel projection. The source
+comparison with `A` can use the kernel factor of `i` and the normal-mono
+lift of the image embedding along `i`, with monic cancellation giving the
+inverse laws. These are the next owner-position probes, not completed claims.

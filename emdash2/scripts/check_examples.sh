@@ -41,7 +41,10 @@ for file in examples/*.lp; do
         "$file" == "examples/abelian_snake_six_term_result.lp" ||
         "$file" == "examples/abelian_snake_exact_first.lp" ||
         "$file" == "examples/abelian_snake_exact_second.lp" ||
-        "$file" == "examples/abelian_snake_exact_third.lp" ]]; then
+        "$file" == "examples/abelian_snake_exact_third.lp" ||
+        "$file" == "examples/abelian_snake_six_term_exact_pairs.lp" ||
+        "$file" == "examples/abelian_snake_six_term_exact_structure.lp" ||
+        "$file" == "examples/abelian_snake_six_term_exact_result.lp" ]]; then
     if [[ "$six_term_examples_checked" -eq 0 ]]; then
       ./scripts/check_abelian_snake_six_term.sh
       six_term_examples_checked=1

@@ -599,8 +599,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   Cancelling epic `c_beta` supplies the final extension reconstruction, so the
   generic criterion gives exactness. All seven stages and their reviewer
   check directly from source under the ordinary per-target limit; they do not
-  require the isolated multi-branch gate. The four individual exactness
-  proofs are now present; their dependent whole-result package remains next.
+  require the isolated multi-branch gate.
+- The `emdash3_2_abelian_snake_six_term_exact_*` and canonical-exactness
+  modules own the dependent whole exact result. Its four pairs project the
+  actual arrows and zero points of the stored snapshot, and
+  `AbelianSnakeSixTermExactData` uses selected homology exactness for those
+  pairs. `AbelianSnakeSixTermExactResult` is the dependent Sigma of snapshot
+  and exact data. The canonical constructor reuses the four proved witnesses.
+  `emdash3_2_exactness_reindex.lp` provides a generic equality-elimination
+  adapter on fixed-endpoint chain pairs; the four canonical uses have checked
+  `eq_refl` paths. Comparing at that pair owner avoids the measured timeout
+  from opening the large exactness predicate first. This is neither an
+  assumed object equality nor a propositional-only arrow bridge. The retained
+  reviewer tests cover arbitrary pair/whole projections, rejection of evidence
+  for another snapshot, canonical projections at their declared interfaces,
+  and reindexing beta. All modules remain rule-free.
 - `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp`: rule-free first normal test. The
   kernel of `p1` forces the second projection into the selected image of

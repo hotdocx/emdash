@@ -43,6 +43,10 @@ cp examples/abelian_snake_six_term_result.lp "$scratch/examples/"
 cp examples/abelian_snake_exact_first.lp "$scratch/examples/"
 cp examples/abelian_snake_exact_second.lp "$scratch/examples/"
 cp examples/abelian_snake_exact_third.lp "$scratch/examples/"
+cp examples/computational_exactness_reindex.lp "$scratch/examples/"
+cp examples/abelian_snake_six_term_exact_pairs.lp "$scratch/examples/"
+cp examples/abelian_snake_six_term_exact_structure.lp "$scratch/examples/"
+cp examples/abelian_snake_six_term_exact_result.lp "$scratch/examples/"
 
 check_object() {
   local file="$1"
@@ -136,8 +140,21 @@ check_object emdash3_2_abelian_snake_exact_third_pi_epic.lp
 check_object emdash3_2_abelian_snake_exact_third_extension_comparison.lp
 check_object emdash3_2_abelian_snake_exact_third_extension_witness.lp
 check_object emdash3_2_abelian_snake_exact_third_result.lp
+check_object emdash3_2_abelian_snake_exact_fourth_result.lp
+check_object emdash3_2_exactness_reindex.lp
+check_object emdash3_2_abelian_snake_six_term_exact_pairs.lp
+check_object emdash3_2_abelian_snake_six_term_exact_data_intro.lp
+check_object emdash3_2_abelian_snake_six_term_exact_result_foundation.lp
+check_object emdash3_2_abelian_snake_six_term_exact_result_projections.lp
+check_object emdash3_2_abelian_snake_six_term_exact_pair_paths.lp
+check_object emdash3_2_abelian_snake_six_term_canonical_exactness.lp
+check_object emdash3_2_abelian_snake_six_term_exact_result.lp
 check_object examples/abelian_snake_six_term_inner_zero.lp
 check_object examples/abelian_snake_six_term_result.lp
 check_object examples/abelian_snake_exact_first.lp
 check_object examples/abelian_snake_exact_second.lp
 check_object examples/abelian_snake_exact_third.lp
+check_object examples/computational_exactness_reindex.lp
+check_object examples/abelian_snake_six_term_exact_pairs.lp
+check_object examples/abelian_snake_six_term_exact_structure.lp
+check_object examples/abelian_snake_six_term_exact_result.lp

@@ -241,6 +241,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `c_beta`. Canonical extension through `lambda` descends through
   `Coker(gamma)` by epic `epsilon` cancellation; epic `c_beta` supplies the
   final reconstruction. The same extension criterion proves exactness.
+  The six-term exact-result modules now combine the snapshot with all four
+  witnesses in a dependent Sigma. Their pair functions use the actual stored
+  arrows and zero points; exactness is selected homology exactness on those
+  pairs. Canonical pair identities are checked reflexivity paths, and the
+  generic `computational_exactness_reindex` lemma applies the existing proofs
+  before expanding their large predicates. No object identity, new rule, or
+  unifier is assumed. The generic constructor rejects evidence for a different
+  snapshot; canonical projections return their declared exactness instances.
   `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
   `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
   the image cocone consequence and select `u` by normal-epi colifting.

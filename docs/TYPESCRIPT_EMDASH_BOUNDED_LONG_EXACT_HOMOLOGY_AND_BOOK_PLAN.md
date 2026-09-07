@@ -551,9 +551,56 @@ staged whitespace checks pass. No full TypeScript, book, health, or unrelated
 repository aggregate was run. The seven source stages are registered on the
 ordinary checker/health route, and the reviewer is discovered ordinarily.
 
-All four individual exactness witnesses are now implemented. Row 4E retains
-the remaining whole exact-result requirement explicitly; the long-exact and
-book objective is still active.
+All four individual exactness witnesses and their dependent whole result are
+now implemented. The long-exact and book objective is still active.
+
+For row 4E, the 2026-09-07 continuation starts from clean `e6165124` and a
+successful fresh-source fourth reviewer. The previous turn made progress by
+committing both remaining individual proofs. The package experiment uses a
+fresh disposable source copy, checks each existing dependency under its own
+90-second bound, and retains those exact objects only during this tranche's
+incremental probes. Every promoted new source must match its checked copy;
+the temporary build is removed before the checkpoint. This continues the
+existing compilation discipline without retaining a worktree object cache.
+
+### Whole exact-result validation and conversion boundary
+
+Eight rule-free source modules and four reviewers implement row 4E. There
+are 27 focused assertions: twelve arbitrary pair projections, two whole beta
+projections, two negative snapshot/noncollapse guards, four canonical pair
+identities, six canonical snapshot/data/exactness observations, and generic
+reindexing beta. The promoted module names pass with warnings enabled against
+freshly compiled exact dependencies. The generic reindexing reviewer also
+passes directly from source and inherits the unchanged `1,217/169` warning
+boundary. All twelve strict source/reviewer audits have zero rule clauses.
+
+The complete dependency/check sequence ran incrementally in one disposable
+copy. A target-list comparison confirms coverage of all 93 targets in the
+updated focused gate, plus the ordinary fourth-position reviewer. Each
+invocation was bounded to 90 seconds. Logs are
+`emdash2/logs/exact-result-base.KObZEa.log`,
+`emdash2/logs/exact-result-proofs.x73QjV.log`,
+`emdash2/logs/exact-result-promoted.RCtjQ0.log`, and
+`emdash2/logs/exact-result-regressions.kTwn1P.log`.
+The nine focused health-dispatch tests, shell syntax, catalog/TOC, and
+report/link hygiene pass. This is scoped incremental gate evidence, not a
+claim that a repository aggregate was run.
+Byte-for-byte comparison also confirms that all 94 checked target sources
+match the worktree. The disposable build was moved to recoverable trash, and
+no `.lpo` remains in the worktree; source probes and validation logs remain
+available for recovery.
+
+The straightforward canonical proof assignment exceeded 90 seconds, both in
+the combined constructor and at the isolated first position. Its pair
+identity nevertheless passes direct conversion checking. The accepted code
+records that identity by `eq_refl` and invokes
+`computational_exactness_reindex` before expanding the exactness predicate.
+The ordinary canonical reviewer compares the resulting declared instances;
+a direct comparison to the old differently presented bare proof type was
+also too expensive. Generic reindexing beta and the independent pair
+conversion/reflexivity checks account for the reuse of the original proofs.
+No object equality assumption, unifier, runtime rule, or alternative homology
+was introduced to get a passing target.
 
 | ID | State | Dependencies | Required result |
 |---|---|---|---|
@@ -567,12 +614,12 @@ book objective is still active.
 | `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
 | `LEH-SNAKE-INNER-ZERO-3C2` | complete; checkpoint `3ecad40d` | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
-| `LEH-SNAKE-EXACT-4` | in progress via 4E; all four individual proofs complete | row 3 and generic exactness | exactness at all four interior six-term positions |
+| `LEH-SNAKE-EXACT-4` | complete; whole-result checkpoint pending | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SNAKE-EXACT-FIRST-4A` | complete; checkpoint `8dfde0a6` | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
 | `LEH-SNAKE-EXACT-SECOND-4B` | complete; checkpoint `08d97080` | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
 | `LEH-SNAKE-EXACT-THIRD-4C` | complete; checkpoint `e19ac569` | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | complete; checkpoint `aa7a3a06` | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` |
-| `LEH-SNAKE-EXACT-RESULT-4E` | pending | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
+| `LEH-SNAKE-EXACT-RESULT-4E` | complete; validated checkpoint pending | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
@@ -646,6 +693,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-025` | accepted after third-position probes | Two monomorphic extensions give the corrected coextension `n s q1 - y lambda`; its selected beta-cokernel colift reconstructs after `pi`. Separate that calculation from a readable transparent instance of generic `pi` epicity. This reduces the final application from a timeout to about two seconds without opacity or an extra rule. |
 | `D-LEH-026` | accepted after whole-result type audit | The exactness data of a whole six-term result must depend on its actual projected arrows and zero points. Define each chain pair from those projections and use the existing homology constructor on that pair. Do not attach exactness of the fixed canonical maps to an unconstrained arbitrary `AbelianSnakeSixTermResult`. Canonical projection reduction should connect the selected instance to the four completed proofs. |
 | `D-LEH-027` | accepted after fourth-position probes | Extend the `mu`-annihilated test `psi c_beta` through `lambda`; epic `epsilon` makes the coextension kill `gamma`, and epic `c_beta` proves the reconstruction after its selected gamma-cokernel colift. The full reviewer fits one fresh-source invocation, so this tranche uses ordinary source/example/health registration rather than the special multi-branch gate. |
+| `D-LEH-028` | accepted after canonical exact-result probes | Keep the actual snapshot-indexed exactness family. Its canonical pairs compute to the old pairs; record those identities by reflexivity and reindex exactness at that small data owner before opening the large predicate. This retains the selected homology and ordinary reflexivity beta while avoiding the measured direct-assignment/type-comparison timeout. No semantic arrow or object bridge is postulated. |
 
 ## Baseline And Validation Policy
 

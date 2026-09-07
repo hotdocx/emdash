@@ -3701,9 +3701,24 @@ The gamma reconstruction and `c_beta beta = 0` show that `y gamma` vanishes
 after epic `epsilon`; cancellation makes it zero. Thus `y` descends to a
 selected colift from `Coker(gamma)`. The last snake-map reconstruction and
 epic cancellation of `c_beta` give the required monomorphic extension of
-`psi`, proving exactness at `Coker(beta)`. This completes the four individual
-interior exactness proofs. Packaging them over the actual arrows of one
-whole six-term snapshot is the next step.
+`psi`, proving exactness at `Coker(beta)`.
+
+The complete exact sequence is now one dependent whole result. From the
+stored six-term snapshot, four pair projections recover adjacent arrows and
+their existing zero witnesses. Each exactness field concerns the selected
+homology of its corresponding actual pair. The outer dependent Sigma retains
+that snapshot together with these four fields; evidence for an unrelated
+snapshot cannot be substituted. The canonical constructor takes only the
+original Abelian capability and snake triple and supplies all four witnesses.
+
+The canonical pair projections are definitionally the pairs used by the four
+proofs above. The implementation records each identity by `eq_refl` and uses
+ordinary equality elimination on the existing exactness family. This performs
+the comparison at the small pair-data level before opening the larger
+exactness predicate. Reindexing has its usual reflexivity beta computation.
+It adds no object equality assumption, global comparison rule, or alternative
+homology object. The checked whole projections recover the existing snapshot
+and the declared canonical exactness instances.
 
 The native polynomial Freyd specialization follows the same operation order
 without selecting a splitting. Its frozen result retains the triple,

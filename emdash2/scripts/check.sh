@@ -57,7 +57,9 @@ is_abelian_snake_six_term_join() {
     emdash3_2_abelian_snake_exact_second_*.lp|\
     emdash3_2_exactness_extensions*.lp|\
     emdash3_2_abelian_canonical_kernel_extensions*.lp|\
-    emdash3_2_abelian_snake_exact_third_*.lp)
+    emdash3_2_abelian_snake_exact_third_*.lp|\
+    emdash3_2_abelian_snake_six_term_exact_*.lp|\
+    emdash3_2_abelian_snake_six_term_canonical_exactness.lp)
       return 0
       ;;
     *)
@@ -112,6 +114,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_computational_pushouts.lp)
   files+=(emdash3_2_computational_homology.lp)
   files+=(emdash3_2_short_exact_sequences.lp)
+  files+=(emdash3_2_exactness_reindex.lp)
   files+=(emdash3_2_abelian_categories.lp)
   files+=(emdash3_2_abelian_fiber_pushout_stability.lp)
   files+=(emdash3_2_preabelian_bimorphism_lemmas.lp)
@@ -211,6 +214,13 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_snake_exact_fourth_cokernel_factor.lp)
   files+=(emdash3_2_abelian_snake_exact_fourth_comparison.lp)
   files+=(emdash3_2_abelian_snake_exact_fourth_result.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_pairs.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_data_intro.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_result_foundation.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_result_projections.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_pair_paths.lp)
+  files+=(emdash3_2_abelian_snake_six_term_canonical_exactness.lp)
+  files+=(emdash3_2_abelian_snake_six_term_exact_result.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)
