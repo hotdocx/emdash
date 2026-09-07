@@ -681,3 +681,29 @@ normalization closure's `1,217/169`. No rule clauses, new axioms, opaque
 bridges, or quotient decoders were added. The next formal operation must
 retain short-exact evidence on the actual inclusion/projection components;
 the native ability to compute it is not itself a formal closed capability.
+
+## Formal Degreewise Exact-Row Interface
+
+The formal row and bounded-row iterator are now implemented. A
+`CommRingFreydShortExactRow` stores the existing adjacent-zero agreement and
+whole witnessed homology, then the incoming mono, outgoing epi, and
+exactness witnesses. Crucially its exactness is indexed by that actual
+stored homology boundary. Its five projections compute to the supplied data;
+a negative consumer rejects reusing its exactness for another homology.
+
+`CommRingFreydShortExactTail` follows the three actual complex tails and two
+actual chain-map tails. Each row is typed at their next projected components,
+and recursion uses their existing rest projections. The bounded predicate
+retains the first two rows and that tail (only the first row at length zero).
+The whole `CommRingFreydBoundedShortExactSequence` is a dependent package of
+both chain maps and evidence on their actual components. A negative consumer
+rejects rows for another map; no commuting squares are duplicated.
+
+All seventeen row/iterator assertions pass from source with and without
+warnings. The inherited Freyd inventory remains `1,223/169`; all four strict
+audits find zero rule clauses. This completes the finite-support formal
+interface, not a closed formal short-exact decision or the proof-CAS replay.
+Native zero extension retains its one computed zero row; formal endpoint
+consumers must carry the corresponding effective witnesses explicitly.
+The next architecture gate is the actual homology window and its comparison,
+cycle-factor, and source-boundary-descent constructions.

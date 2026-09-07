@@ -740,6 +740,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   `CommRingFreydHomologyChainMap`. Nil/cons, component/tail projections,
   one-degree law projections, and a wrong-endpoint guard are checked. This
   is not a new square primitive or a closed formal Abelian capability.
+- `emdash3_2_commutative_algebra_freyd_short_exact_rows.lp` packages the
+  existing zero-composite agreement, actual whole witnessed homology, incoming
+  mono/outgoing epi witnesses, and exactness of that homology's actual
+  boundary. Its dependent projections reject evidence for another homology.
+  `emdash3_2_commutative_algebra_freyd_bounded_short_exact.lp` iterates this
+  row type on the actual components of the two bounded chain maps, then
+  packages those maps and their dependent rows. Nil/cons, whole projections,
+  and a wrong-map guard compute without any new rule, unifier, square, or
+  homology owner. Effective row data remains explicit at the formal boundary.
 - `emdash3_2_commutative_algebra_freyd_images.lp`: rule-free witnessed formal
   image/coimage layer. It derives cokernel-of-kernel coimage,
   kernel-of-cokernel image, their comparison, and `f = i chi p`. Explicit

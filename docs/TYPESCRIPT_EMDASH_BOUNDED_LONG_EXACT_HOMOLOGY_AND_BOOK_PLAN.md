@@ -624,11 +624,11 @@ was introduced to get a passing target.
 | `LEH-SHORT-EXACT-KERNEL-5A` | complete; checkpoint `18f2ba33` | selected boundary and short-exact evidence | canonical `A -> Ker(p)` comparison isomorphism and reconstruction |
 | `LEH-SHORT-EXACT-COKERNEL-5B` | complete; checkpoint `18f2ba33` | exactness, normal epi colifting, selected cokernel | canonical `Coker(i) -> D` comparison isomorphism, inverse, and reconstruction |
 | `LEH-SHORT-EXACT-SELECTED-5C` | complete; checkpoint `521af261` | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
-| `LEH-BOUNDED-SHORT-EXACT-6` | in progress via 6A–6B | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
+| `LEH-BOUNDED-SHORT-EXACT-6` | complete through 6A–6B; finite-support interface | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-BOUNDED-SHORT-EXACT-NATIVE-6A` | complete; checkpoint `8a32323b` | existing bounded Freyd complexes, chain maps, and short-exact triple operation | checked whole finite sequence, retained input chain maps and row witnesses, zero extension, deterministic serialization |
-| `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | in progress through 6B1 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
-| `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; validated local checkpoint pending | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
-| `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | pending | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
+| `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
+| `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
+| `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; validated local checkpoint pending | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
@@ -705,6 +705,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-030` | accepted after normalization probes | Construct a kernel row from its existing whole kernel and identity exactness covers. Use a single literal kernel-object presentation throughout the selected image row and its isomorphism. Build the source comparison fibre generically at PA/f before specializing to a bundled short exact row; this preserves the actual-row dependency and avoids the measured composite-compatibility conversion timeout. |
 | `D-LEH-031` | accepted after native degreewise consumers | Retain the two existing bounded chain maps and compute each short-exact row through the existing operation. Compare their endpoints by selected presentations and raw differentials, not object identity alone or quotient congruence. Store one zero row for explicit extended lookup. Full serialization retains raw agreements and bounded-free provenance; it excludes only derived Gröbner caches, following the existing presentation convention. |
 | `D-LEH-032` | accepted after formal chain-map consumers | Iterate raw presentation morphisms and their existing agreements over the actual two formal complex tails. The single-square name is transparent; two stored laws package directly as the existing one-degree homology chain map. Keep formal short-exact row evidence capability-indexed and downstream of this iterator. |
+| `D-LEH-033` | accepted after formal exact-row consumers | Store the existing whole witnessed homology in each raw row and index its exactness by that actual value. Iterate rows on the actual projected components of the two retained chain maps; a dependent whole sequence owns both maps and the resulting evidence. Wrong-homology and wrong-map consumers must fail. Native row computation and formal effective evidence remain distinct interfaces. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -834,6 +835,44 @@ long-exact homology window is claimed by the chain-map checkpoint.
 The ten focused health-dispatch tests, shell syntax, fresh strict catalog,
 source TOC, active-reference/report-header checks, and exact whitespace review
 also pass. No compilation objects remain in the worktree.
+
+The next formal experiment packages one raw short-exact row as its existing
+adjacent-zero agreement, whole witnessed homology, incoming monomorphism,
+outgoing epimorphism, and exactness of that actual stored homology boundary.
+These are effective witness inputs, not a closed formal decision procedure.
+The bounded predicate then follows three actual complex tails and the two
+actual chain-map tails, retaining this evidence on their projected components.
+Its whole form stores rows zero and one plus the remaining tail (only row
+zero at length zero). Constructor/projection beta and wrong-map/wrong-homology
+guards must pass before promotion. No independent chain squares or second
+homology definition are admitted.
+
+Both row and iterator probes are now promoted in
+`emdash2/emdash3_2_commutative_algebra_freyd_short_exact_rows.lp` and
+`emdash2/emdash3_2_commutative_algebra_freyd_bounded_short_exact.lp`.
+Their two matching reviewers have seventeen assertions: fifteen positive
+constructor/projection consumers and the wrong-homology and wrong-map
+negatives. Quiet fresh-source checks pass in
+`emdash2/logs/probes/commutative_ring_freyd_short_exact_rows-20260907-122408.log`
+and `emdash2/logs/probes/commutative_ring_freyd_bounded_short_exact-20260907-122410.log`.
+Warning-enabled checks pass in the corresponding `122443` and `122445`
+logs, with the unchanged `1,223/169` Freyd dependency inventory and only the
+expected negative-test diagnostics. All four strict audits find zero rule
+clauses. The formal interface covers the given finite support; native lookup
+already retains the outside zero row. Formal endpoint-window witnesses must
+still come through the same explicit effective boundary when row 7/11 uses
+that extension; no unconditional formal zero-row algorithm is being claimed.
+
+The next architecture gate is still the full row-7 window on the existing
+selected homology objects. Row 6 does not construct its descended connecting
+map or establish long-exactness. No TypeScript/formal adapter, category graph,
+or book claim is silently inferred from this data-interface completion.
+Source/health registration, all ten focused health-dispatch tests, shell
+syntax, strict fresh catalog, source TOC, active-reference/report-header
+checks, and exact whitespace review pass for this tranche. An ignored-file
+inclusive scan confirms that no Lambdapi compilation objects remain. The
+unchanged native layer carries forward its 23-test/typecheck/lint evidence;
+no unrelated aggregate or publication is performed.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

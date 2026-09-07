@@ -176,6 +176,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   presentation-morphism agreements. Its first two laws form the existing
   one-degree homology chain-map data directly; no new square primitive or
   quotient decoder is introduced.
+  The formal Freyd short-exact-row and bounded-short-exact modules retain
+  the existing chain agreement, actual whole homology, and mono/epi/exactness
+  witnesses, then iterate those rows over the actual two bounded chain maps.
+  All constructors/projections are transparent; effective witnesses remain
+  explicit rather than implying a closed quotient-level decision procedure.
   `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
   cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
   factorization. Given explicit comparison monic/epic agreements, it computes

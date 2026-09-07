@@ -3952,6 +3952,17 @@ The nonsplit polynomial test already produces a nonzero snake arrow; descent
 to the selected homology objects and full long-exact assembly are subsequent
 layers, not claims made by this sequence package.
 
+The formal sequence has the corresponding witness-indexed shape. One row
+retains its adjacent-zero agreement, the existing whole witnessed homology,
+incoming monomorphism and outgoing epimorphism witnesses, and exactness of
+that actual homology boundary. A recursive predicate places these rows on
+the actual projected components of the two bounded chain maps. Finally one
+dependent package retains both maps and that predicate's evidence. The
+formal constructors consume the effective row data; they do not silently
+turn native decidability into a closed formal Abelian-category capability.
+The degree-zero/one rows and remaining tail are readable projections, and
+the exactness projection cannot be assigned to an unrelated homology value.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

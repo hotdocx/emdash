@@ -6,8 +6,8 @@ Date: 2026-09-02
 is the active continuation beyond the completed Abelian, homology, and snake
 connecting plans. The complete generic six-term snake exact result and
 short-exact-row normalization are implemented. The current bounded-complex
-tranche supplies native degreewise short-exact sequences and formal bounded
-Freyd chain maps; formal row iteration, homology-window descent/comparisons,
+tranche supplies native degreewise short-exact sequences, formal bounded
+Freyd chain maps, and formal effective row iteration. Homology-window descent/comparisons,
 full bounded long-exact assembly, cross-layer consumers, and Chapter 31 remain
 active requirements. The companion owner audit records these precise
 boundaries; no closed formal quotient effectiveness is claimed.
