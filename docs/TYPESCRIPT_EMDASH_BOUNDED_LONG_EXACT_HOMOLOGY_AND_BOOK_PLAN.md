@@ -691,7 +691,7 @@ was introduced to get a passing target.
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
-| `LEH-BRIDGE-SELECTED-12A` | complete; selected nonsplit replay/adoption and live claim-type conformance green | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
+| `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
@@ -1603,6 +1603,25 @@ matrix equations have the right types or are explicitly trusted. The generic
 window proof (7D), generic bounded assembly, external differential, Chapter
 31/appendices and final consolidation remain required; the persistent goal
 is active, not complete.
+
+Selected bridge checkpoint: `9a1381ab`; the worktree was clean after this
+11-file implementation/test/report commit. The continuation audit found an
+existing formal target for the raw sequence:
+`CommRingFreydBoundedComplex R length` and `CommRingFreydChainTail` already
+retain presentations, raw morphisms and adjacent-zero agreements without a
+weak-kernel capability. Reuse those constructors first, with explicit index
+reversal between the displayed left-to-right long-exact sequence and the
+P0/P1/tail convention. The existing TypeScript
+`algebra_formal_bounded_complex.ts` handles bounded **free** complexes, not
+this Freyd target; it must not be relabelled as that missing consumer.
+
+The stronger exactness layer additionally uses
+`CommRingFreydWitnessedHomologyAt W ...` and `CommRingFreydExactnessAt H`.
+It must retain the actual H and establish how W's selected universal objects
+relate to the native selections, rather than pretending that a matrix
+equation inventory alone supplies W or that arbitrary quotient paths decode
+to raw agreements. That is the next owner-position audit/consumer within
+row 11, not an established formal long-exact theorem in this checkpoint.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
