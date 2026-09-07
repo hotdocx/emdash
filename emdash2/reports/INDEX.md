@@ -7,10 +7,13 @@ is the active continuation beyond the completed Abelian, homology, and snake
 connecting plans. The complete generic six-term snake exact result and
 short-exact-row normalization are implemented. The current bounded-complex
 tranche supplies native degreewise short-exact sequences, formal bounded
-Freyd chain maps, and formal effective row iteration. Homology-window descent/comparisons,
-full bounded long-exact assembly, cross-layer consumers, and Chapter 31 remain
-active requirements. The companion owner audit records these precise
-boundaries; no closed formal quotient effectiveness is claimed.
+Freyd chain maps, formal effective row iteration, and a native exact five-term
+homology window. Generic homology maps and row-to-snake endpoint comparisons
+are constructed. The immediate continuation prioritizes independently named
+homology operations and an end-to-end proof–CAS baseline. Generic window
+exactness, full bounded long-exact assembly, cross-layer consumers, and
+Chapter 31 remain active requirements. The companion owner audit records
+these boundaries; no closed formal quotient effectiveness is claimed.
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` records the completed
 constructive continuation from the completed Freyd pre-Abelian boundary. It

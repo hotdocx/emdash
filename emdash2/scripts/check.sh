@@ -29,6 +29,7 @@ fi
 
 six_term_join_checked=0
 normalization_join_checked=0
+snake_rows_join_checked=0
 
 is_abelian_snake_six_term_join() {
   case "$1" in
@@ -72,6 +73,20 @@ is_abelian_snake_six_term_join() {
 check_file() {
   local file="$1"
   case "$file" in
+    emdash3_2_chain_pair_map_snake.lp|\
+    emdash3_2_snake_row_comparisons.lp|\
+    emdash3_2_kernel_domain_comparison.lp|\
+    emdash3_2_cokernel_codomain_comparison.lp|\
+    emdash3_2_snake_row_source_cycle_iso.lp|\
+    emdash3_2_snake_row_target_cokernel_iso.lp|\
+    emdash3_2_abelian_structure_elimination.lp|\
+    emdash3_2_abelian_snake_row_comparisons.lp|\
+    emdash3_2_short_exact_row_snake.lp)
+      if [[ "$snake_rows_join_checked" -eq 0 ]]; then
+        ./scripts/check_snake_row_comparisons.sh
+        snake_rows_join_checked=1
+      fi
+      return ;;
     emdash3_2_short_exact_rows.lp|\
     emdash3_2_kernel_short_exact_rows.lp|\
     emdash3_2_selected_short_exact_rows.lp|\
@@ -264,6 +279,15 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_homology_cycle_map_laws.lp)
   files+=(emdash3_2_homology_map_laws.lp)
   files+=(emdash3_2_homology_map_isos.lp)
+  files+=(emdash3_2_chain_pair_map_snake.lp)
+  files+=(emdash3_2_snake_row_comparisons.lp)
+  files+=(emdash3_2_kernel_domain_comparison.lp)
+  files+=(emdash3_2_cokernel_codomain_comparison.lp)
+  files+=(emdash3_2_snake_row_source_cycle_iso.lp)
+  files+=(emdash3_2_snake_row_target_cokernel_iso.lp)
+  files+=(emdash3_2_abelian_structure_elimination.lp)
+  files+=(emdash3_2_abelian_snake_row_comparisons.lp)
+  files+=(emdash3_2_short_exact_row_snake.lp)
   files+=(emdash3_2_short_exact_kernel_comparison.lp)
   files+=(emdash3_2_short_exact_cokernel_foundation.lp)
   files+=(emdash3_2_short_exact_cokernel_inverse_test.lp)

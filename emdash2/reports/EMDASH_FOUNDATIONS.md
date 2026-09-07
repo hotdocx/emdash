@@ -4002,8 +4002,28 @@ different choices of a kernel, cokernel, or whole homology result receive
 actual comparison isomorphisms; no object equality is asserted. These are
 generic map operations with theorem-level laws, not a claim that a whole
 homology functor from a separately constructed category of complexes has
-already been packaged. The concrete snake-row adapters and full generic
-window exactness proof remain the next consumers.
+already been packaged.
+
+The concrete snake-row adapters now consume one existing map between two
+row pairs. Its middle component and top incoming/bottom outgoing arrows
+determine the snake triple; the upper factor and bottom zero law derive the
+triple-zero equation. The row comparisons identify the snake's side maps
+with the first and last components of that map. For short-exact rows this
+constructs isomorphisms from the supplied source cycles to Ker(gamma) and
+from Coker(alpha) to the supplied target differential cokernel. Neither
+the cycles nor the eventual homology are replaced by new selected objects.
+
+These comparisons belong to the current implementation strategy. The public
+homology connecting arrow has endpoints H_n(C) and H_(n-1)(A), whereas the
+snake connecting arrow has endpoints Ker(gamma) and Coker(alpha). Reusing
+the latter requires comparisons, target factorization, and source descent;
+it does not make those intermediates intrinsic inputs of the former. A
+separately named homology operation should allow a later direct algorithm
+while preserving the requested homology objects and its observable laws.
+The immediate continuation is an end-to-end operational proof–CAS baseline;
+the full generic window theorem remains unfinished and explicitly required.
+The present transparent operations and theorem paths are a constructive
+reference, not a claim to a final internal homology-functor calculus.
 
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send

@@ -290,6 +290,47 @@ This window is the decisive architecture consumer. Reject a design that:
 
 ## Complete Bounded Long Exact Sequence
 
+### Operational reference priority (2026-09-07 clarification)
+
+Decision response: `0119_2026-09-07T19-46-57Z_01a07d52-6b95-7fd1-a9a7-ded8d98ebc85.md`
+in the session archive under `/home/user1/emdash1/emdash2/tmp/ai-responses/`;
+the user explicitly accepted it and requested continuation. This section,
+not that ignored archive, is the living execution authority for the update.
+
+The user clarified that the immediate useful result is a working end-to-end
+proof–CAS reference baseline. The current rule-free mathematical development
+is valuable reference evidence, not a commitment to its final logical
+packaging. A later literature-informed redesign may replace that packaging
+with a whole category-of-complexes/homology-functor calculus. It must preserve
+the intended operations and observable mathematics, not today's dependent
+Sigma layout or proof-term expansion.
+
+Give the homology connecting operation its own public identity. Its input is
+the short-exact sequence and degree; its output is the arrow
+`delta_n : H_n(C) → H_(n-1)(A)` and the selected reconstruction data. The
+current snake-based method remains one transparent implementation strategy.
+It first produces `Ker(gamma) → Coker(alpha)`, then compares endpoints,
+factors into target homology, and descends through source boundaries. Those
+intermediates are not user-supplied inputs of homology connecting, and must
+not determine the essential categorical operation contract. Retain the
+algorithm trace for replay and inspection without duplicating the algorithm
+above backend-neutral lowering. An independent operation does not by itself
+require a new kernel primitive or runtime rewrite.
+
+After the row-7C2 checkpoint, prioritize the named homology-connecting
+operation, native bounded assembly, categorical lowering, and an actual
+proof-assistant delegation/replay/adoption consumer on nonsplit nonzero
+examples. The existing native five-term window is the operational gate for
+that path. The full generic window theorem in row 7D and generic bounded
+exactness remain required, unfinished work; they are not prerequisites for
+demonstrating the first end-to-end operational baseline. This reorders the
+work without shrinking the full persistent goal or calling its mathematical
+boundary complete. Book claims must distinguish the checked generic snake
+theorem, native computations, witnessed formal consumers, and any still-open
+generic homology theorem.
+
+### Bounded assembly
+
 After the one-degree window is green, iterate it over the finite degree range.
 The whole result should present the conventional order
 
@@ -629,14 +670,15 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | in progress; native window, generic inclusion/maps complete; adapters/exactness remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | in progress; native window and generic inclusion/maps/row comparisons complete; full generic factor/descent/exactness remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
-| `LEH-WINDOW-GENERIC-MAPS-7C` | in progress through 7C1; canonical snake adapters next | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
+| `LEH-WINDOW-GENERIC-MAPS-7C` | complete through 7C1–7C2 | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
-| `LEH-SNAKE-ROW-COMPARISONS-7C2` | pending | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
+| `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; final promoted gates green | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
-| `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
+| `LEH-HOMOLOGY-CONNECTING-API-7E` | next operational tranche | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
+| `LEH-LONG-EXACT-8` | pending; operational assembly prioritized | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
@@ -684,7 +726,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-003` | accepted | The long-exact degree substitution is `delta = i_n`, `beta = d^B_n`, and `lambda = p_(n-1)`. |
 | `D-LEH-004` | accepted | Canonical snake endpoints must be compared with the existing selected homology objects; no second homology theory is introduced. |
 | `D-LEH-005` | accepted | Selected short-exact rows are the primary computational form; arbitrary witnessed rows receive explicit comparison isomorphisms as a usability layer. |
-| `D-LEH-006` | accepted | One exact five-term homology window is the mandatory architecture gate before bounded iteration. |
+| `D-LEH-006` | accepted; operational sequencing clarified by D-LEH-042 | One exact five-term homology window is the architecture gate before bounded iteration. The checked native window qualifies operational iteration; the full generic window theorem remains required before generic long-exactness claims. |
 | `D-LEH-007` | accepted | The full result is bounded and finite; unbounded complexes, derived categories, triangulated categories, spectral sequences, and Čech hypercohomology remain later goals. |
 | `D-LEH-008` | accepted | Native/categorical/formal/proof–CAS layers reuse the completed snake and homology owners rather than duplicating matrix algorithms. |
 | `D-LEH-009` | accepted | Chapter 31 is an evidence-bearing deliverable of this goal; checked code remains authority and generated book/PDF artifacts remain tool-owned. |
@@ -718,6 +760,9 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-037` | accepted after bounded owner-position probes | Use one literal preadditive presentation in the Abelian cokernel wrapper, and prove homology monicity with PA/normality explicit before exposing a thin bundled observation. The shorter-alias and direct bundled alternatives each timed out in quiet and warning-enabled checks; the aligned/PA-explicit versions and actual cancellation consumers pass with no new rule or unifier. |
 | `D-LEH-038` | accepted after generic map consumers | Use transparent internal Hom pre/postcomposition fibres as the compatibility owner. A chain-pair map retains its middle arrow and two factor points; ordinary components and equations are projections or a transparent usability constructor, not a new square datatype. |
 | `D-LEH-039` | accepted after map-law and choice consumers | Construct maps on actual kernels/cokernels, derive identity/composition/extensionality by their existing uniqueness, and package inverse maps as ordinary IsoEvidence. Homology reuses these two stages and derives boundary compatibility. Different universal choices receive actual isomorphisms, not object equality or transport. |
+| `D-LEH-040` | accepted after row-comparison probes | Derive the snake triple from the existing chain-pair map; use actual short-exact comparison arrows and kernel/cokernel uniqueness to identify alpha/gamma, then generic map isomorphisms at the supplied endpoint choices. Retain PA/normality explicitly internally and use existing Sigma elimination for a one-Abelian-package interface; add no eta rule or object equality. |
+| `D-LEH-041` | accepted after timed consumer isolation | Keep every original assertion and validate the exact source dependencies in separate bounded invocations. Separate the source and target whole-row beta consumers, each still below 90 seconds. Do not claim that staged qualification solves the remaining interactive checking-cost concern. |
+| `D-LEH-042` | accepted user priority clarification, 2026-09-07 | Give homology connecting and bounded long exact sequence their own public operation identities. Keep the snake-based route as an implementation/reference strategy. Prioritize the end-to-end operational proof–CAS baseline without silently dropping the generic window theorem or shrinking the full persistent goal. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -958,10 +1003,10 @@ map operation: the baseline's existing induced-map owners are native and
 witnessed formal Freyd. Row 7C must construct the generic kernel/cokernel
 counterpart within this goal, using existing internal factor fibres rather
 than a second manual-diagram grammar. Likewise native monicity and exactness
-decisions do not discharge rows 7B/7D. The one-window gate remains open until
-those generic constructions/proofs and their focused reviewers are complete;
-bounded long-exact iteration and book theorem claims do not start merely
-because the native example is green.
+decisions do not discharge rows 7B/7D. This earlier sequencing required the
+generic window before any bounded iteration. D-LEH-042 now explicitly permits
+the operational proof–CAS baseline to proceed from the checked native window;
+generic window/long-exactness claims still require their actual formal proofs.
 
 The first row-7B generic probe can be stated more generally than homology.
 For monic `k:Z → B`, `b:A → Z`, and `f = k b`, choose the existing whole
@@ -1116,6 +1161,81 @@ zero law proves `lambda beta delta = 0`. Thus the snake triple is derived
 without another coherence input. Short exactness is used subsequently for
 the endpoint comparison isomorphisms, not for forming this triple. This
 remains the first row-7C2 implementation, not a completed claim.
+
+The row-7C2 continuation starts from clean `3ef10eb2` and rechecks the
+short-exact comparison reviewer. Form the triple generically over the
+existing preadditive chain-pair map. For alpha/gamma and the endpoint
+isomorphisms, keep PA/normality explicit internally when instantiating the
+existing Abelian/short-exact owners, following the measured row-7B discipline.
+All comparison paths must be derived from factor reconstructions and monic/
+epic cancellation; no manual diagram fields or object equality are inputs.
+
+The continued owner probes now derive the triple, alpha/gamma comparisons,
+and both endpoint isomorphisms. The source is the actual supplied kernel of
+the row map's last component; the target is the actual supplied cokernel of
+its first component. Forward/inverse maps and their inverse laws are checked
+against the existing generic kernel/cokernel maps, not fresh object choices.
+At that stage the probes were not yet promoted. Direct bundled-Abelian wrappers exceeded
+90 seconds. A transparent eliminator through the two existing Sigma
+eliminators checks and supplies wrappers at the original Ab-owned endpoints.
+Its beta is constructor computation; a neutral Ab does not acquire a new
+judgmental eta rule.
+
+The status-review turn established a second terminal reviewer timeout; this
+is diagnostic progress, not completion of row 7C2. Warning-enabled verbose
+rechecks then confirmed multiple successful assertions before each timeout.
+The isolated target-isomorphism reviewer and arbitrary-Ab consumer pass.
+Other cumulative source runs still exceed the bound: dependency imports alone
+have measured 45–84 seconds in these runs. The next experiment therefore
+checks fresh exact dependency objects in separate bounded invocations, as at
+the existing snake/normalization joins, and retains every original assertion.
+No failing consumer is being replaced by a weaker type or opaque proof.
+
+The first fresh-dependency run passed all nine owner modules and the triple,
+elimination, comparison-path, source-isomorphism, target-isomorphism, and
+bundled-comparison reviewers. It retains exactly the inherited
+`1,217/169` warning inventory. Only the six-assertion whole-row reviewer
+still exceeded its single 90-second invocation. Its source and target
+constructor computations were then tested in separate reviewer targets,
+with all six original assertions retained. This is a bounded consumer split,
+not removal of a required computation or a claim that the entire tranche is
+already green.
+
+The split whole-row probes now pass as well. The last target constructor
+comparison took 71.36 seconds with freshly checked exact dependencies in
+`emdash2/logs/probes/snake-row-whole-isolated-20260907.log`; this is green
+reference evidence, not satisfactory final interactive performance. All 28
+original assertions are retained across eight promoted reviewers. The nine
+owner modules contain 25 transparent definitions and no primitive, rewrite,
+unifier, or opaque proof. `scripts/check_snake_row_comparisons.sh` registers
+the same bounded staging for ordinary, reviewer, and health dispatch. The
+full promoted quiet/warning runs and metadata audits are now green. This
+continuation is progress: it resolves the failed consumers without weakening
+their statements and implements the named row-comparison layer.
+
+Final promoted evidence is
+`emdash2/logs/probes/snake-row-promoted-warnings-20260907.log` and
+`emdash2/logs/probes/snake-row-promoted-quiet-20260907.log`. The latter ran
+through ordinary `scripts/check.sh emdash3_2_short_exact_row_snake.lp`
+dispatch, not a separate unregistered substitute. Both gates check all nine
+owners and eight reviewers; all 28 assertions (24 positive, four negative)
+pass. Each Lambdapi process remains bounded to 90 seconds. The warning
+inventory is unchanged at `1,217/169`. Seventeen strict rule audits,
+thirteen focused health-dispatch tests, central catalog freshness/strict
+classification, source TOC, shell syntax, active-reference/report-header
+hygiene, and exact diff checks pass. The central catalog is unchanged because
+the new assertions are independent examples, not central-kernel assertions.
+No compilation objects remain in the worktree. The full health snapshot
+remains intentionally stale at its recorded unrelated-baseline exception;
+no complete CI, TypeScript, or repository aggregate is claimed.
+
+The next operational tranche is row 7E. Extract the native connecting
+construction from the window into one independently named operation while
+preserving its selected source/target homologies, factor/descent data,
+nonzero/nonsplit behavior, and full serialization. The window must call that
+operation, not retain a second implementation. Subsequent bounded assembly
+must retain and project its actual degreewise homology/window results rather
+than recomputing independent copies. Generic row 7D remains unfinished.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

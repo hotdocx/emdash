@@ -823,3 +823,54 @@ instantiations. Row 7C2 must derive a snake triple from an actual map between
 short-exact rows and instantiate the endpoint isomorphisms there. The full
 window proof remains row 7D. A packaged category-of-complexes homology functor
 and closed formal Freyd quotient effectiveness are not silently claimed.
+
+## Row-to-snake endpoint comparisons (row 7C2)
+
+The new `emdash3_2_chain_pair_map_snake.lp` derives the existing snake triple
+from one existing row-pair map. Its upper internal factor and the lower
+pair's zero equation derive triple-zero; short-exactness is not needed until
+the comparison arrows are made invertible. The comparison module proves
+`gamma = last(F) ∘ q_top` and `alpha = a_bottom ∘ first(F)` by actual
+cokernel/kernel uniqueness.
+
+`emdash3_2_kernel_domain_comparison.lp` and its cokernel-codomain dual
+construct isomorphisms of supplied whole universal objects. Their row
+instances give `cycles(last(F)) ≅ Ker(gamma)` and
+`Coker(alpha) ≅ coker(first(F))`. The source cycles and target cokernel are
+parameters representing the actual consumer's choices, not freshly selected
+replacements. Forward/inverse maps are the existing generic maps and both
+inverse laws are derived. The bottom comparison uses the existing
+balancedness-constructed inverse; literal agreement with a differently
+chosen native inverse representative is not claimed merely from uniqueness.
+
+The internal definitions keep PA and normality explicit. Direct one-Abelian
+wrappers were too expensive; ordinary dependent elimination of the existing
+Sigma package supplies the one-Abelian view at its original endpoints. This
+is a transparent definition with constructor beta, not opacity, an equality
+bridge, or a new eta rule on arbitrary neutral packages. Whole short-exact
+rows project their original pair/evidence into this interface.
+
+Fresh-source cumulative reviewers exceeded 90 seconds. Verbose checks locate
+successful assertions and substantial dependency import cost; fresh exact
+dependency staging plus source/target reviewer separation checks all 28
+assertions without changing their statements. The last isolated target beta
+took 71.36 seconds, so final interaction cost is still a redesign concern.
+The inherited warning inventory remains `1,217/169`; no new rule is added.
+The promoted final-name quiet/warning gates now pass through the registered
+staging script, including ordinary-check dispatch. Seventeen strict rule
+audits, thirteen focused dispatch tests, catalog/TOC and document hygiene
+pass. Temporary compilation objects are removed; the unrelated global health
+exception is unchanged. Row 7C2 is complete, not full window exactness.
+
+## Public homology ownership and the reference baseline
+
+These endpoint comparisons explain one algorithm, not the public identity of
+homology connecting. The public arrow is `H_n(C) → H_(n-1)(A)`; the snake
+arrow has different endpoints and is an implementation/proof helper. The
+2026-09-07 user clarification prioritizes a separately named homology
+operation, native bounded assembly, categorical lowering, and a working
+proof–CAS delegation/replay/adoption route. The completed native window is
+its operational gate. Generic window exactness remains required but does not
+block that first operational baseline. A later internal/functorial redesign
+may replace today's logical packaging while retaining these reference
+algorithms, typed interfaces, laws, and nonsplit regression examples.

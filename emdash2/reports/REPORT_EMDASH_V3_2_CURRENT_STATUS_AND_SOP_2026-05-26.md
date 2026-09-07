@@ -428,6 +428,25 @@ belongs to the owning implementation plan rather than to standing guidance.
   other choices by `IsoEvidence`, not object equality. These map operations
   and theorem paths are not a packaged category-of-complexes functor or a
   closed concrete formal Freyd capability.
+- The chain-pair-map snake and row-comparison extensions derive the snake
+  triple from the existing middle component and factor points. The upper
+  factor and lower row's zero law supply its triple-zero proof. Actual
+  cokernel/kernel uniqueness gives gamma = last-component composed with the
+  top comparison, and alpha = bottom comparison composed with the first
+  component. Existing map-isomorphism operations then compare the supplied
+  source cycles with Ker(gamma), and Coker(alpha) with the supplied target
+  differential cokernel. Both arrows and inverse laws are constructed.
+  Internal PA/normality-explicit definitions have a one-Abelian-package
+  wrapper through `computational_abelian_ind`, itself defined using existing
+  Sigma elimination. It computes on constructor packages, not by a new eta
+  rule for neutral packages. Whole-row aliases reuse the actual pair and
+  evidence. No primitive, rewrite, unifier, or opaque proof is added.
+  The focused `scripts/check_snake_row_comparisons.sh` uses fresh exact
+  dependency objects; eight reviewers retain 28 assertions, including four
+  wrong-owner negatives. A full homology-window theorem is still separate.
+  Public homology connecting/long-exact operations must remain independent
+  of this particular snake-based construction strategy; the immediate
+  continuation prioritizes the operational proof–CAS reference baseline.
 - `emdash3_2_short_exact_sequences.lp`: rule-free generic exactness and short
   exact triples over the selected homology owner. Exactness at the middle
   object is `IsEpic` for the selected boundary-to-kernel lift. Short exactness

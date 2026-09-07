@@ -162,6 +162,15 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_homology_cycle_map_laws.lp"),
     Path("emdash3_2_homology_map_laws.lp"),
     Path("emdash3_2_homology_map_isos.lp"),
+    Path("emdash3_2_chain_pair_map_snake.lp"),
+    Path("emdash3_2_snake_row_comparisons.lp"),
+    Path("emdash3_2_kernel_domain_comparison.lp"),
+    Path("emdash3_2_cokernel_codomain_comparison.lp"),
+    Path("emdash3_2_snake_row_source_cycle_iso.lp"),
+    Path("emdash3_2_snake_row_target_cokernel_iso.lp"),
+    Path("emdash3_2_abelian_structure_elimination.lp"),
+    Path("emdash3_2_abelian_snake_row_comparisons.lp"),
+    Path("emdash3_2_short_exact_row_snake.lp"),
     Path("emdash3_2_short_exact_kernel_comparison.lp"),
     Path("emdash3_2_short_exact_cokernel_foundation.lp"),
     Path("emdash3_2_short_exact_cokernel_inverse_test.lp"),
@@ -492,9 +501,29 @@ SPECIAL_NORMALIZATION_CHECK_FILES = {
     Path("examples/short_exact_normalization_structure.lp"),
     Path("examples/short_exact_normalization.lp"),
 }
+SPECIAL_SNAKE_ROW_CHECK_FILES = {
+    Path("emdash3_2_chain_pair_map_snake.lp"),
+    Path("emdash3_2_snake_row_comparisons.lp"),
+    Path("emdash3_2_kernel_domain_comparison.lp"),
+    Path("emdash3_2_cokernel_codomain_comparison.lp"),
+    Path("emdash3_2_snake_row_source_cycle_iso.lp"),
+    Path("emdash3_2_snake_row_target_cokernel_iso.lp"),
+    Path("emdash3_2_abelian_structure_elimination.lp"),
+    Path("emdash3_2_abelian_snake_row_comparisons.lp"),
+    Path("emdash3_2_short_exact_row_snake.lp"),
+    Path("examples/chain_pair_map_snake.lp"),
+    Path("examples/abelian_structure_elimination.lp"),
+    Path("examples/snake_row_comparisons.lp"),
+    Path("examples/snake_row_source_cycle_iso.lp"),
+    Path("examples/snake_row_target_cokernel_iso.lp"),
+    Path("examples/abelian_snake_row_comparisons.lp"),
+    Path("examples/short_exact_row_snake.lp"),
+    Path("examples/short_exact_row_snake_target.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
     (SPECIAL_SIX_TERM_CHECK_FILES, "./scripts/check_abelian_snake_six_term.sh"),
     (SPECIAL_NORMALIZATION_CHECK_FILES, "./scripts/check_short_exact_normalization.sh"),
+    (SPECIAL_SNAKE_ROW_CHECK_FILES, "./scripts/check_snake_row_comparisons.sh"),
 )
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"

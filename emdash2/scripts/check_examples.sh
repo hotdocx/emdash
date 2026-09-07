@@ -36,6 +36,7 @@ check_file() {
 
 six_term_examples_checked=0
 normalization_examples_checked=0
+snake_rows_examples_checked=0
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
@@ -58,6 +59,18 @@ for file in examples/*.lp; do
     if [[ "$normalization_examples_checked" -eq 0 ]]; then
       ./scripts/check_short_exact_normalization.sh
       normalization_examples_checked=1
+    fi
+  elif [[ "$file" == "examples/chain_pair_map_snake.lp" ||
+         "$file" == "examples/abelian_structure_elimination.lp" ||
+         "$file" == "examples/snake_row_comparisons.lp" ||
+         "$file" == "examples/snake_row_source_cycle_iso.lp" ||
+         "$file" == "examples/snake_row_target_cokernel_iso.lp" ||
+         "$file" == "examples/abelian_snake_row_comparisons.lp" ||
+         "$file" == "examples/short_exact_row_snake.lp" ||
+         "$file" == "examples/short_exact_row_snake_target.lp" ]]; then
+    if [[ "$snake_rows_examples_checked" -eq 0 ]]; then
+      ./scripts/check_snake_row_comparisons.sh
+      snake_rows_examples_checked=1
     fi
   else
     check_file "$file"

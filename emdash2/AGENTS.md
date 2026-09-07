@@ -101,6 +101,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the cokernel map on the original homologies. These are rule-free map
   operations/laws, not a new square grammar or a packaged complex-category
   functor, and do not close the formal Freyd effectiveness boundary.
+  The chain-pair-map snake and row-comparison modules derive the existing
+  snake triple from a row map, identify alpha/gamma through the short-exact
+  comparisons, and construct the source-cycle and target-cokernel
+  isomorphisms at supplied whole universal objects. Their one-Abelian-package
+  usability layer uses ordinary dependent Sigma elimination, with beta on
+  constructor packages and no new neutral-package eta law. Whole rows project
+  their original pair/evidence rather than storing another diagram.
+  `scripts/check_snake_row_comparisons.sh` checks this measured join using
+  fresh temporary dependency objects and individually bounded reviewers.
+  These comparisons are a reference implementation strategy, not the public
+  identity of a homology-connecting or long-exact-sequence operation.
   `emdash3_2_short_exact_sequences.lp` defines generic exactness as epicity of
   that actual selected boundary lift. A short exact triple additionally
   retains monicity of the incoming arrow and epicity of the outgoing arrow;
