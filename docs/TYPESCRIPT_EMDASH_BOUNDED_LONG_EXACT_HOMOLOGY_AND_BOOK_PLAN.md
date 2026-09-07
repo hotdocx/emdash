@@ -624,7 +624,9 @@ was introduced to get a passing target.
 | `LEH-SHORT-EXACT-KERNEL-5A` | complete; checkpoint `18f2ba33` | selected boundary and short-exact evidence | canonical `A -> Ker(p)` comparison isomorphism and reconstruction |
 | `LEH-SHORT-EXACT-COKERNEL-5B` | complete; checkpoint `18f2ba33` | exactness, normal epi colifting, selected cokernel | canonical `Coker(i) -> D` comparison isomorphism, inverse, and reconstruction |
 | `LEH-SHORT-EXACT-SELECTED-5C` | complete; checkpoint `521af261` | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
-| `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
+| `LEH-BOUNDED-SHORT-EXACT-6` | in progress via 6A–6B | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
+| `LEH-BOUNDED-SHORT-EXACT-NATIVE-6A` | complete; local checkpoint follows validation below | existing bounded Freyd complexes, chain maps, and short-exact triple operation | checked whole finite sequence, retained input chain maps and row witnesses, zero extension, deterministic serialization |
+| `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | pending owner audit | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
@@ -699,6 +701,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-028` | accepted after canonical exact-result probes | Keep the actual snapshot-indexed exactness family. Its canonical pairs compute to the old pairs; record those identities by reflexivity and reindex exactness at that small data owner before opening the large predicate. This retains the selected homology and ordinary reflexivity beta while avoiding the measured direct-assignment/type-comparison timeout. No semantic arrow or object bridge is postulated. |
 | `D-LEH-029` | accepted after endpoint-comparison probes | The actual boundary gives the kernel comparison; monic-factor cancellation and constructive balancedness construct its inverse. The cokernel comparison uses its ordinary colift, while exactness makes the cokernel projection a normal-epi test for the outgoing arrow. Its selected colift and common-epic cancellation give the inverse comparison without a section into the middle object. |
 | `D-LEH-030` | accepted after normalization probes | Construct a kernel row from its existing whole kernel and identity exactness covers. Use a single literal kernel-object presentation throughout the selected image row and its isomorphism. Build the source comparison fibre generically at PA/f before specializing to a bundled short exact row; this preserves the actual-row dependency and avoids the measured composite-compatibility conversion timeout. |
+| `D-LEH-031` | accepted after native degreewise consumers | Retain the two existing bounded chain maps and compute each short-exact row through the existing operation. Compare their endpoints by selected presentations and raw differentials, not object identity alone or quotient congruence. Store one zero row for explicit extended lookup. Full serialization retains raw agreements and bounded-free provenance; it excludes only derived Gröbner caches, following the existing presentation convention. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -752,6 +755,46 @@ The public gate removes only its generated file kinds and empty directories,
 retaining unexpected content instead of performing a forced recursive cleanup.
 
 ## Baseline And Validation Policy
+
+### Degreewise sequence implementation boundary
+
+The continuation starts from clean `999f24d7`; the previous turn completed
+and committed short-exact normalization. Workspace validation and eleven
+focused bounded-complex/native-snake tests pass. The first implementation
+keeps the existing input chain-map objects, including their square agreements,
+and checks their endpoints against the declared complexes using selected
+presentation and raw-differential equality. Equal reconstructed inputs are
+accepted; differentials that merely share object endpoints are not.
+
+The native constructor computes every short-exact row with the existing
+short-exact operation, retains those whole witnesses, and stores one selected
+zero row for explicit extension outside the finite support. Bounded lookup
+remains range checked; the separately named extended lookup returns that
+stored zero row. The principal nonsplit test has `R --x--> R` as both sub-
+and middle complexes, quotient `R/(x) --0--> R/(x)`, inclusion `x` and the
+quotient projection in both degrees. This prepares a nonzero connecting-map
+consumer for the following homology-window row.
+
+The new module is directly importable during this tranche; public-barrel and
+categorical-operation integration are batched with the later whole long-exact
+consumer rather than triggering an unrelated TypeScript aggregate now.
+The formal Freyd bounded tail already exists, but its bounded chain-map and
+short-exact iterator must be audited explicitly in row 6B. Native data is not
+silently promoted to the stronger formal Abelian capability.
+
+Row 6A is implemented in
+`src/v3_2/algebra_polynomial_freyd_bounded_short_exact.ts` and its companion
+serialization module. Twelve new focused tests cover nonsplit rows, retained
+map/square owners, a nonzero adjacent-degree snake connecting map, both zero
+extensions, one-degree support, identical reconstructed inputs, different raw
+differentials even when their quotient maps agree, failed squares/rows,
+invalid complexes/ranges/rings, deterministic whole serialization, and
+bounded-free provenance. Together with the seven existing bounded-complex
+and four snake tests, all 23 pass. Root `typecheck` and affected-file ESLint
+also pass on the final source. The lost pre-recovery process handle was first
+checked and found no longer running; only these focused suites were rerun.
+No Lambdapi, book, public-barrel, shared LF, or repository aggregate change is
+part of this native checkpoint.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

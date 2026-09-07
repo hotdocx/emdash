@@ -624,3 +624,35 @@ disposable source copy, with every target bounded to 90 seconds. The root
 checker, reviewer runner, and health dispatcher route this group separately
 from the snake gate. The next implementation row is the degreewise bounded
 short-exact sequence and the homology-window endpoint bridge.
+
+## Native Degreewise Short-Exact Sequence
+
+`algebra_polynomial_freyd_bounded_short_exact.ts` now packages three existing
+bounded complexes, their existing inclusion/projection chain maps, computed
+whole short-exact triples in every degree, and one retained zero row. The
+constructor keeps input map and square-agreement references. It accepts equal
+reconstructed presentations/differentials, but rejects a different raw
+differential even when it induces the same quotient map: reusing the supplied
+square at that different raw endpoint would require a separate comparison.
+
+Strict lookup checks the declared support; explicitly extended lookup reuses
+the stored zero row without rerunning short-exact computation. The companion
+serializer retains all selected algebraic data, raw relation/agreement
+witnesses, both chain-map endpoints, and bounded-free provenance. Derived
+Gröbner caches remain implementation data, as in the existing serializers.
+
+The main fixture is the nonsplit row `R → R → R/(x)` in degrees zero and one,
+with inclusion multiplication by `x`, sub/middle differentials `x`, and zero
+quotient differential. Substitution into the existing snake construction
+already gives a nonzero connecting arrow. This is not yet the descended
+homology-window arrow: comparisons, cycle factorization, and boundary descent
+remain row 7. Twelve new tests and eleven immediate regressions pass, along
+with root typecheck and affected-file lint. No new formal capability, runtime
+rule, unifier, or public-barrel integration is claimed by this checkpoint.
+
+The formal audit finds an existing recursive `CommRingFreydChainTail` and a
+bounded-free chain-map precedent, but no bounded Freyd chain-map iterator.
+The one-degree `CommRingFreydHomologyChainMap` already owns the two raw square
+agreements. Row 6B must iterate that same agreement notion at actual bounded
+spine projections and retain explicit witnessed exactness, without promoting
+native decisions to a closed formal Abelian category.
