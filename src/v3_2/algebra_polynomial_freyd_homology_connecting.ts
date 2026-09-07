@@ -1,9 +1,8 @@
 /** Homology connecting is an operation in its own right; snake is its current method. */
 
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
-import { AlgebraPolynomialPresentationMorphism, algebraPolynomialModuleMapEquals } from './algebra_polynomial_presentation_morphism';
+import { AlgebraPolynomialPresentationMorphism } from './algebra_polynomial_presentation_morphism';
 import {
-    algebraPresentedPolynomialModuleEquals,
     algebraPolynomialPresentationMorphismCompose as compose,
     algebraPolynomialPresentationMorphismCongruence as congruence,
     algebraPolynomialPresentationMorphismIdentity as identity
@@ -109,19 +108,11 @@ export function algebraPolynomialFreydHomologyConnecting<
     const context = algebraPolynomialFreydHomologyContext(sequence, degree, 'homologyConnecting', fail);
     const source = selected.source ?? context.homologyAt(sequence.quotientComplex, degree).homology;
     const target = selected.target ?? context.homologyAt(sequence.subcomplex, degree - 1).homology;
-    const sameSelectedArrow = (
-        actual: AlgebraPolynomialPresentationMorphism<P, C, I>,
-        expected: AlgebraPolynomialPresentationMorphism<P, C, I>
-    ) => algebraPresentedPolynomialModuleEquals(actual.source, expected.source) &&
-        algebraPresentedPolynomialModuleEquals(actual.target, expected.target) &&
-        algebraPolynomialModuleMapEquals(actual.map, expected.map);
     const checkSelection = (
         homology: AlgebraPolynomialFreydHomologyAt<P, C, I>,
         complex: typeof sequence.subcomplex, n: number, path: string
     ) => {
-        if (!homology.pair.isChainPair || !homology.pair.chainAgreement.agrees ||
-            !sameSelectedArrow(homology.pair.dNext, context.differential(complex, n + 1)) ||
-            !sameSelectedArrow(homology.pair.d, context.differential(complex, n))) {
+        if (!context.matchesHomologyAt(homology, complex, n)) {
             fail('INVALID_HOMOLOGY_SELECTION', path,
                 'Selected homology must use the actual adjacent differential representatives');
         }

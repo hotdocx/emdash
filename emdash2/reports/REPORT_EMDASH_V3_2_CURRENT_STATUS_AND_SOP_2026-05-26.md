@@ -864,6 +864,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   tests, root typecheck, and affected-file lint pass. No formal capability or
   trusted Core owner is added; categorical lowering and proof–CAS consumption
   of this operation are subsequent steps.
+- `src/v3_2/algebra_polynomial_freyd_long_exact.ts` constructs the whole
+  native bounded long exact homology result with selected zero endpoints.
+  Its degree/map table is shared by all windows through a validated
+  retained-input interface. Each displayed interior exactness point retains
+  the window's actual arrow pair and epimorphism witness; indexed observers
+  perform no new CAS construction. The companion serializer retains full
+  computation data and verifies the shared links encoded by indices.
+  Forty-five focused tests cover nonsplit/nonzero-boundary data, all interior
+  positions, endpoints, actual sharing, failures, and serialization. This is
+  the native operational layer, not the still-pending generic formal window
+  theorem or a completed categorical/proof–CAS integration. The native
+  six-term snake-result operation is a named prerequisite of that integration.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

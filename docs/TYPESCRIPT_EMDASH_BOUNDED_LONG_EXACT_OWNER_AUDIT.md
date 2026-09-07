@@ -899,3 +899,36 @@ hypothesis are retained in
 [the separate reference inventory](TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md).
 They are research inputs, not implementation authority or additional
 requirements to implement spectral sequences within this bounded goal.
+
+## Native bounded long exact assembly (rows 8A/9)
+
+`algebra_polynomial_freyd_long_exact.ts` retains extended A/B/C homology
+values and both ordinary induced maps once per degree. The window's
+retained-input interface consumes those exact whole owners; adjacent
+windows share the same inclusion result. The connecting operation is still
+constructed inside each window, not supplied by the caller. This interface
+checks native data ownership, not mathematical equality between arbitrary
+isomorphic presentations; ordinary window construction remains available.
+
+The displayed terms run from the actual zero H_(L+1)(C), through A/B/C at
+descending supported degrees, to the actual zero H_(-1)(A). A_n receives
+slot 2 from window n+1, B_n slot 0 from window n, and C_n slot 1 from window
+n. Runtime checks ensure each exactness witness is attached to the actual
+displayed arrows and its original pair. The result stores the complete
+window/table data; observers return those stored objects. Its serializer
+checks shared-reference links before encoding them as indices, and retains
+the underlying universal results, arrows, zero agreements, and exactness
+witnesses in full.
+
+Eleven new tests plus 34 neighboring tests pass, including the three-degree
+nonsplit/nonzero-boundary case and a one-degree five-term sequence. Typecheck,
+affected-file lint, and workspace validation pass. No generic formal window
+or bounded exactness theorem is claimed by this native implementation.
+
+Before categorical role/replay completion, the native full six-term snake
+result remains to be added: current native owners stop at connecting.
+Its other four arrows must use the existing kernel/cokernel operations, and
+the five arrows/four zero equations must be available for the planned
+snake-exact-sequence role. Reuse an existing connecting result when deriving
+this auxiliary reference result from a homology window. This requirement is
+not a reason to couple the public homology-connecting API to snake syntax.

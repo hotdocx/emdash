@@ -684,9 +684,11 @@ was introduced to get a passing target.
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
-| `LEH-LONG-EXACT-8` | pending; operational assembly prioritized | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
-| `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
+| `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
+| `LEH-LONG-EXACT-NATIVE-8A` | complete; focused gates green | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
+| `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
+| `LEH-NATIVE-SNAKE-RESULT-10A` | next prerequisite | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1306,6 +1308,66 @@ references and the external shallow Spectral checkout without introducing a
 new runtime dependency. Native bounded long-exact assembly is next; the full
 persistent goal remains active and no generic window theorem, categorical
 integration, proof–CAS consumer, or book completion is implied by row 7E.
+
+The native bounded-assembly continuation starts from clean `1f59e47d`.
+Workspace validation and the 34 nearest native tests pass. Retain the A/B/C
+homologies and inclusion/projection induced maps once at each extended
+degree, then pass those exact results to the existing window constructor.
+The retained-input interface validates degree/complex ownership, original
+raw adjacent differentials, and the actual homology owners/components of
+the three induced maps; it does not accept a connecting arrow or new zero
+test from the caller. The public two-argument window remains available.
+
+Display one leading zero, all three roles in descending supported degrees,
+and one trailing zero. The leading zero is the actual quotient-complex
+homology in degree L+1; the trailing zero is the actual subcomplex homology
+in degree -1. For A_n use the third exact pair of window n+1; for B_n and
+C_n use the first and second pairs of window n. Every displayed arrow and
+pair must be the retained window/map object, not a recomputed equivalent.
+Window/term/index observers project the whole result without new CAS work.
+The generic window theorem and generic bounded exactness remain unfinished.
+
+Native bounded assembly is now implemented in
+`src/v3_2/algebra_polynomial_freyd_long_exact.ts`. It computes one extended
+degree table and one inclusion/projection map table, then supplies those
+actual values to each window. The retained-window interface is an internal
+owner-sharing contract: whole complex/homology/map references must align;
+it is not a general mathematical equality test or a replacement for the
+ordinary two-argument usability constructor. Shallow view wrappers over the
+same owners remain accepted. It validates raw differential/component maps
+and degree/provenance metadata and never accepts a connecting arrow or
+exactness witness from its caller.
+
+For support 0 through L, the displayed result has `3(L+1)+2` terms,
+`3(L+1)+1` arrows, and `3(L+1)` interior exactness points. It retains `L+2`
+windows and the degree/map table from -1 through L+1. All interior arrow
+pairs and epimorphism-bearing exactness results are literal projections of
+those windows. Position, term, exactness, and window observers return the
+retained values without CAS reconstruction. Serialization keeps the full
+degree/map/window data, arrow values, zero endpoints, and interior witnesses;
+shared term/window/pair links are encoded as indices only after their actual
+owner references have been checked.
+
+Eleven new native tests and 34 neighboring tests pass (45 tests total), as
+do root typecheck, workspace validation, affected-file lint, and whitespace
+review. The three-degree nonsplit example has 11 displayed terms, 10 arrows,
+nine interior exactness witnesses, and a nonzero connecting map descending
+a nonzero source boundary. Tests cover actual sharing, reversible indices,
+both true endpoint differentials, one-degree support, invalid selections
+and indices, deterministic full serialization, changed late-window witness
+data, and rejected broken serialized references. No Lambdapi or trusted-Core
+semantic change, public barrel change, or unrelated aggregate belongs to
+this tranche. The prior formal/health boundary remains unchanged.
+
+The category/replay owner audit locates one remaining native prerequisite:
+`algebra_polynomial_freyd_snake.ts` exposes the triple and connecting result,
+not the full six-term native result. The required snake-exact-sequence role
+and five-arrow/four-zero replay coverage therefore need row 10A. Construct
+the other four arrows through existing kernel lifts/cokernel colifts and
+retain their adjacent-zero/exactness results. Offer reuse of the existing
+connecting result so homology traces need not recompute it. This is a
+separate categorical/replay consumer; the homology operation's essential
+contract remains independent of that reference algorithm.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

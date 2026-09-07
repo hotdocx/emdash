@@ -1,6 +1,7 @@
 /** Canonical whole-window data, including every retained factor and agreement. */
 
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
+import { AlgebraPolynomialFreydHomologyDegree } from './algebra_polynomial_freyd_homology_context';
 import { AlgebraPolynomialFreydHomologyWindow } from './algebra_polynomial_freyd_homology_window';
 import {
     serializeAlgebraPolynomialFreydBoundedComplex,
@@ -19,10 +20,11 @@ import {
 import { algebraPolynomialFreydHomologyConnectingData } from './algebra_polynomial_freyd_homology_connecting_serialization';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
 
-export function serializeAlgebraPolynomialFreydHomologyWindow<
+/** Shared complete degree snapshot, also used by whole bounded sequences. */
+export function algebraPolynomialFreydHomologyDegreeData<
     P extends AlgebraParent, C extends AlgebraElement<P>, I
->(value: AlgebraPolynomialFreydHomologyWindow<P, C, I>): string {
-    const degreeData = (view: typeof value.upperA) => ({
+>(view: AlgebraPolynomialFreydHomologyDegree<P, C, I>) {
+    return {
         complex: serializeAlgebraPolynomialFreydBoundedComplex(view.complex),
         degree: view.degree,
         homology: homology(view.homology),
@@ -37,16 +39,21 @@ export function serializeAlgebraPolynomialFreydHomologyWindow<
         },
         zeroIdentity: view.zeroIdentity === undefined ? null : agreement(view.zeroIdentity),
         location: view.location
-    });
+    };
+}
+
+export function serializeAlgebraPolynomialFreydHomologyWindow<
+    P extends AlgebraParent, C extends AlgebraElement<P>, I
+>(value: AlgebraPolynomialFreydHomologyWindow<P, C, I>): string {
     return serializeCoreLfWorkspaceCanonicalJson({
         kind: value.kind,
         sequence: serializeAlgebraPolynomialFreydBoundedShortExactSequence(value.sequence),
         degree: value.degree,
-        upperA: degreeData(value.upperA),
-        upperB: degreeData(value.upperB),
-        upperC: degreeData(value.upperC),
-        lowerA: degreeData(value.lowerA),
-        lowerB: degreeData(value.lowerB),
+        upperA: algebraPolynomialFreydHomologyDegreeData(value.upperA),
+        upperB: algebraPolynomialFreydHomologyDegreeData(value.upperB),
+        upperC: algebraPolynomialFreydHomologyDegreeData(value.upperC),
+        lowerA: algebraPolynomialFreydHomologyDegreeData(value.lowerA),
+        lowerB: algebraPolynomialFreydHomologyDegreeData(value.lowerB),
         inclusionUpper: induced(value.inclusionUpper),
         projectionUpper: induced(value.projectionUpper),
         inclusionLower: induced(value.inclusionLower),

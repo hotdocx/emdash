@@ -4030,6 +4030,17 @@ the full generic window theorem remains unfinished and explicitly required.
 The present transparent operations and theorem paths are a constructive
 reference, not a claim to a final internal homology-functor calculus.
 
+Native bounded iteration now retains the degreewise homologies and ordinary
+induced maps once and shares them between all windows. The displayed sequence
+has one selected zero endpoint on each side and the A/B/C homologies at each
+supported degree. Exactness at A_n comes from the next window's third pair;
+exactness at B_n and C_n comes from the current window's first two pairs.
+Each retained witness refers to the actual displayed arrows. Observers
+project the stored result rather than running another computation. This
+operational construction is tested on nonsplit examples with nonzero
+connecting and boundary maps; generic formal bounded exactness and its
+end-to-end proof–CAS consumers remain distinct unfinished layers.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles
