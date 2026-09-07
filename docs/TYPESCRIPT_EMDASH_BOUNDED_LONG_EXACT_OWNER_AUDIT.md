@@ -113,7 +113,7 @@ space. None is a new primitive or manually entered square.
 
 ## Adjacent-Zero Proof Matrix
 
-The five zero composites should use these owners.
+The four zero composites should use these owners.
 
 1. `Ker(alpha) -> Ker(beta) -> Ker(gamma)`:
    compare after monic `k_gamma`; reduce to `epsilon o delta o k_alpha = 0`
@@ -979,3 +979,58 @@ records from multiple computed values. Whole-result execution and the
 all-window reference family do not need such machinery. Rows 11/12 must now
 connect these computed results to selected formal equations and explicit
 adoption, with attention to reusing a single whole replay across many claims.
+
+## Selected proof–CAS long-exact bridge (row 12A)
+
+The new bridge reuses those three whole categorical operations for one
+replay. Its default proof goal is the independently named homology
+connecting reconstruction, not a snake-specific endpoint formula. An
+explicit alternate inventory label can select another anchor. The complete
+output, including every reference snake and selected agreement, must match
+before the adapter reports a claim. This makes the current snake route an
+inspectable implementation strategy without changing the homology API.
+
+Preparation reifies all equations before fixing the coefficient environment.
+The existing formal homology, induced-map, exactness, and snake realizations
+are reused without their per-equation whole-replay adapters. The added
+inventory covers the bounded rows, long-exact positions, factor/descent and
+comparison equations, and all five maps/four zeros of every six-term result.
+Identical explicit Core claim types share one adopted assumption, but every
+label and its selected native data remain. Adoption rebuilds the inventory
+from the actual replay, checks it against preparation, and uses the existing
+presentation-equation batch for the remaining distinct claims. The generic
+exact-goal reuse guard is unchanged.
+
+The first full consumer exposed transport, not mathematical, failure:
+repeatedly escaped JSON text inflated the three-degree inventory to about
+67 MB. The local `algebra_formal_freyd_long_exact_encoding.ts` table interns
+equal nodes and tags embedded JSON text, retaining its exact byte identity
+and newline. Round-trip tests recover the complete original serialization;
+no witness is omitted and no hash substitutes for equality. Valid native
+serialization formats and the generic 16 MiB bridge guard are unchanged.
+The resulting three-degree inventory is about 2.2 MB. Portable adoption uses the same
+encoding rather than adding another level of escaping to the receipts.
+
+The two- and three-degree nonsplit examples execute/adopt 422/559 labels as
+55/145 checked assumptions, respectively. Every reference typechecks in the
+final environment. Wrong-goal, inventory, selected output, bundle, reifier,
+and environment consumers reject, and cancellation propagates into the
+whole graph. These are explicitly trusted computed equations, not a
+kernel-certified CAS or the still-required generic exactness theorem. The
+whole witnessed formal construction remains row 11; the bridge supplies
+effective equations for that consumer but does not claim it already exists.
+
+The witness-sensitivity test additionally exposed an unchecked omitted
+short-exact alias. Its serializer now verifies that direct incoming/outgoing,
+pair, homology and exactness refer to the actual retained objects before
+serializing the pair through homology. Malformed sharing rejects; changing
+the actual nonzero coefficient witness with the links preserved changes the
+whole output and rejects adoption. Valid native serialization bytes remain
+unchanged.
+
+Final row-12A qualification: 31 affected tests pass; the separate bounded
+Lambdapi check accepts all 145 distinct three-degree claim types. Typecheck,
+affected-file lint and document hygiene pass. The encoded whole adoption
+artifacts are 1,351,858 / 3,743,154 bytes for the two-/three-degree examples.
+This qualifies the selected operational reference, not the remaining
+generic or witnessed formal whole-result theorem.

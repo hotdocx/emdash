@@ -4025,7 +4025,7 @@ snake-method trace; the window delegates to that single implementation and
 serializer. This permits a later direct algorithm while preserving the
 requested homology objects and observable laws. It does not yet package the
 corresponding whole internal homology functor at the formal layer.
-The immediate continuation is an end-to-end operational proof–CAS baseline;
+The selected operational proof–CAS baseline below follows this design;
 the full generic window theorem remains unfinished and explicitly required.
 The present transparent operations and theorem paths are a constructive
 reference, not a claim to a final internal homology-functor calculus.
@@ -4038,8 +4038,8 @@ exactness at B_n and C_n comes from the current window's first two pairs.
 Each retained witness refers to the actual displayed arrows. Observers
 project the stored result rather than running another computation. This
 operational construction is tested on nonsplit examples with nonzero
-connecting and boundary maps; generic formal bounded exactness and its
-end-to-end proof–CAS consumers remain distinct unfinished layers.
+connecting and boundary maps. Generic formal bounded exactness remains
+unfinished; the selected proof–CAS consumer is described below.
 
 The native six-term snake result is also available as a separate operation.
 It constructs the two kernel-side and two cokernel-side maps around the
@@ -4056,7 +4056,21 @@ complete long-exact homology result, and the reference snake sequences of
 all retained windows. Direct and compiled execution agree on the full
 serialized results. Observations return the already selected windows and
 connecting objects. This is the computational categorical interface; its
-selected proof-assistant replay/adoption consumer remains the next layer.
+selected proof-assistant replay/adoption consumer is a separate layer.
+
+That consumer now replays the whole categorical computation once and
+compares its complete selected output. It inventories the equations of
+every degree, connecting factorization, long-exact position and reference
+snake. Preparation fixes their coefficient bindings; an explicit trust
+action adopts the distinct matrix equations and returns checked references
+with every original label retained. Equal claim types may share an
+assumption, but their selected data and mathematical roles are not dropped.
+The computation alone never changes the proof environment. A lossless
+table representation preserves the exact deeply nested output and receipts
+without repeatedly escaping JSON text. This provides an operational
+proof–CAS reference baseline on nonsplit nonzero examples, not a proof of
+CAS correctness or a substitute for the remaining generic exactness and
+witnessed formal whole-result constructions.
 
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send

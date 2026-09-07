@@ -862,8 +862,8 @@ belongs to the owning implementation plan rather than to standing guidance.
   it does not retain a second implementation. All old method data remains
   under `connecting.trace`. Thirty-four focused operation/window/neighbor
   tests, root typecheck, and affected-file lint pass. No formal capability or
-  trusted Core owner is added; categorical lowering and proof–CAS consumption
-  of this operation are subsequent steps.
+  trusted Core owner is added; its categorical and selected proof–CAS
+  consumers are described below.
 - `src/v3_2/algebra_polynomial_freyd_long_exact.ts` constructs the whole
   native bounded long exact homology result with selected zero endpoints.
   Its degree/map table is shared by all windows through a validated
@@ -874,7 +874,8 @@ belongs to the owning implementation plan rather than to standing guidance.
   Forty-five focused tests cover nonsplit/nonzero-boundary data, all interior
   positions, endpoints, actual sharing, failures, and serialization. This is
   the native operational layer, not the still-pending generic formal window
-  theorem or a completed categorical/proof–CAS integration. The native
+  theorem; categorical and selected proof–CAS integration are separate
+  consumers described below. The native
   six-term snake-result operation is supplied by the following module.
 - `src/v3_2/algebra_polynomial_freyd_snake_exact.ts` constructs the native
   six-object/five-arrow snake result with four zero pairs and four interior
@@ -883,7 +884,7 @@ belongs to the owning implementation plan rather than to standing guidance.
   an existing connecting construction and its selected endpoints; the
   standalone entry point starts from a triple. No zero-endpoint or splitting
   assumption is added. Its full serializer and 22 focused tests qualify the
-  native prerequisite for categorical/replay integration, which remains open.
+  native prerequisite for the categorical/replay integration below.
 - The long-exact reference-operation/category modules now bind nine
   ring-scoped whole operations into the existing categorical planner and
   algebra-graph compiler. They preserve common inherited methods without
@@ -893,8 +894,29 @@ belongs to the owning implementation plan rather than to standing guidance.
   category tests compare every direct/compiled binding and reject foreign
   rings, schemas, missing capabilities, and unsupported method traces.
   The compiler/engine/Core trust boundary is unchanged. A prospective dual
-  descriptor is metadata only; formal selected-equation replay/adoption is
-  the next layer, not already supplied by categorical execution.
+  descriptor is metadata only. Selected-equation replay/adoption belongs to
+  the following bridge, not to categorical execution itself.
+- `src/v3_2/algebra_formal_freyd_long_exact.ts` and its equation-inventory
+  module supply the selected proof–CAS long-exact consumer. One categorical
+  graph replays the complete computation; an independently selected
+  homology equation anchors its full-output comparison. Explicit adoption
+  rebuilds the inventory, then reuses existing matrix-equation batches for
+  the other distinct claims without rerunning the whole homology operation.
+  Every degree/role label remains even when identical Core types share an
+  assumption. Two-/three-degree nonsplit consumers adopt 422/559 labelled
+  equations through 55/145 checked assumptions, respectively, including
+  every reference snake's five maps/four zeros and all long-exact positions.
+  The local lossless data-table encoding avoids exponential JSON escaping
+  while recovering the exact prior selected serialization; it does not
+  raise the generic bridge size limit or drop witnesses. Wrong or stale
+  goals, inventories, outputs, prepared bundles, reifiers and environments
+  reject. Running and trusting remain separate actions. This is trusted
+  computation usability, not CAS certification, generic formal exactness,
+  or the pending witnessed formal whole-result construction.
+  The older short-exact serializer now also verifies the retained
+  incoming/outgoing/pair/homology/exactness links before omitting redundant
+  aliases. Valid native serialization is unchanged; broken sharing rejects,
+  and actual coefficient-witness changes remain visible to whole replay.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -454,8 +454,14 @@ export const serializeAlgebraPolynomialFreydShortExactTriple = <
     P extends AlgebraParent,
     C extends AlgebraElement<P>,
     I
->(value: AlgebraPolynomialFreydShortExactTriple<P, C, I>): string =>
-    serializeCoreLfWorkspaceCanonicalJson({
+>(value: AlgebraPolynomialFreydShortExactTriple<P, C, I>): string => {
+    // The pair is serialized through homology, so its omitted aliases must
+    // retain the very same arrows and whole exactness/homology owners.
+    if (value.pair.dNext !== value.incoming || value.pair.d !== value.outgoing ||
+        value.homology.pair !== value.pair || value.exactness.homology !== value.homology) {
+        throw new Error('Short-exact serialization requires the actual retained pair and homology');
+    }
+    return serializeCoreLfWorkspaceCanonicalJson({
         kind: value.kind,
         incoming:
             serializeAlgebraPolynomialPresentationMorphism(value.incoming),
@@ -473,6 +479,7 @@ export const serializeAlgebraPolynomialFreydShortExactTriple = <
             ),
         shortExact: value.shortExact
     }, 'polynomialFreydShortExactTriple');
+};
 
 const fiberProductStabilityData = <
     P extends AlgebraParent,

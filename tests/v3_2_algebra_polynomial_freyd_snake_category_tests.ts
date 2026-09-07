@@ -54,6 +54,21 @@ const fixture = () => {
 };
 
 describe('v3.2 polynomial Freyd snake categorical program', () => {
+    it('checks omitted short-exact aliases against their retained owners when serializing', () => {
+        const value = fixture();
+        const zero = algebraPolynomialFreydZeroPresentation(value.ring);
+        const incoming = algebraPolynomialPresentationMorphismIdentity(value.object);
+        const outgoing = algebraPolynomialPresentationMorphismZero(value.object, zero);
+        const row = algebraPolynomialFreydShortExactTriple(incoming, outgoing);
+        assert.equal(serializeAlgebraPolynomialFreydShortExactTriple(row), serializeAlgebraPolynomialFreydShortExactTriple(row));
+        for (const changed of [
+            { ...row, incoming: algebraPolynomialPresentationMorphismIdentity(value.object) },
+            { ...row, outgoing: algebraPolynomialPresentationMorphismZero(value.object, zero) },
+            { ...row, pair: { ...row.pair } },
+            { ...row, exactness: { ...row.exactness, homology: { ...row.homology } } }
+        ]) assert.throws(() => serializeAlgebraPolynomialFreydShortExactTriple(changed), /actual retained pair and homology/u);
+    });
+
     it('plans the complete CAP dependency chain', () => {
         const value = fixture();
         const model = algebraPolynomialFreydSnakeCategoryModel(value.ring);

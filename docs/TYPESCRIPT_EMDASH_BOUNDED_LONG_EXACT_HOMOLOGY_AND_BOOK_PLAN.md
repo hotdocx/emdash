@@ -691,6 +691,7 @@ was introduced to get a passing target.
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
+| `LEH-BRIDGE-SELECTED-12A` | complete; selected nonsplit replay/adoption and live claim-type conformance green | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
@@ -771,6 +772,8 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-040` | accepted after row-comparison probes | Derive the snake triple from the existing chain-pair map; use actual short-exact comparison arrows and kernel/cokernel uniqueness to identify alpha/gamma, then generic map isomorphisms at the supplied endpoint choices. Retain PA/normality explicitly internally and use existing Sigma elimination for a one-Abelian-package interface; add no eta rule or object equality. |
 | `D-LEH-041` | accepted after timed consumer isolation | Keep every original assertion and validate the exact source dependencies in separate bounded invocations. Separate the source and target whole-row beta consumers, each still below 90 seconds. Do not claim that staged qualification solves the remaining interactive checking-cost concern. |
 | `D-LEH-042` | accepted user priority clarification, 2026-09-07 | Give homology connecting and bounded long exact sequence their own public operation identities. Keep the snake-based route as an implementation/reference strategy. Prioritize the end-to-end operational proof–CAS baseline without silently dropping the generic window theorem or shrinking the full persistent goal. |
+| `D-LEH-043` | accepted after selected replay/adoption consumers | Preserve exact-goal result reuse. Replay one complete categorical graph and anchor one selected equation to its full output; adopt the other distinct equation types through the existing inexpensive matrix-equation batch. Preserve every label and selected witness even when identical claim types share an assumption. Running and trusting are separate actions; this is explicit trusted computation, not a generic exactness theorem or CAS certification. |
+| `D-LEH-044` | accepted after size failure and lossless round-trip consumers | Do not raise the generic 16 MiB guard or drop evidence when nested JSON text expands excessively. This bridge's tagged, deterministic data table shares equal nodes and retains JSON-text identity/newlines, recovering the original serialized bytes. Keep valid native serialization formats and generic Core/workflow semantics unchanged; measure the selected inventory and portable adoption artifact. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -1481,6 +1484,125 @@ review the batch and retained-computation mechanisms before choosing the
 whole-result replay design. Generic window/bounded exactness, external
 differential, book, and final consolidation remain required and the full
 persistent goal remains active.
+
+The selected bridge resumes from clean `da19fa24`. The existing workflow's
+reuse function is deliberately tied to the exact original goal/request; it
+does not reuse a formal result across different claims. Keep that guard
+unchanged. The proposed consumer replays the complete categorical graph
+once, then uses the existing inexpensive presentation-equation batch for
+the individual claims. Running and trusting remain separate API actions.
+Identical claim types may share one explicitly adopted assumption, while
+all degree/role labels and selected equation data remain in the inventory.
+
+Reify the inventory before fixing the proof environment so coefficient
+bindings are complete. Reuse the existing homology, induced-map, exactness,
+and snake equation realizations, adding the full six-term and long-exact
+positions and connecting factor/descent equations. The whole replay binds
+that inventory to the exact selected output. Native matrix-equation replay
+does not recompute the whole long-exact result per claim. This is row 12A's
+operational baseline; the stronger witnessed formal whole-result boundary
+and generic window/bounded theorem are not silently marked complete.
+
+The first selected bridge consumer typechecked all 559 labels / 145 distinct
+claims of the three-degree nonsplit boundary example, but the two-degree
+whole replay rejected its realization at the existing 16 MiB encoding guard.
+Nested serialized JSON strings expand by repeated escaping; the three-degree
+inventory measured 66,952,063 bytes. Do not raise the generic guard or omit
+witnesses. Probe a local, deterministic, lossless table encoding of the exact
+existing serialization: intern equal nodes and retain JSON-as-text with an
+explicit tag, so decoding recovers the original bytes and distinguishes text
+from objects. Qualify round-trip, determinism, witness sensitivity, size, and
+the original full nonsplit replay/adoption consumer. This changes only this
+new bridge's transport, not native results or existing canonical byte formats,
+the checker, or the generic exact-goal reuse policy.
+
+The bridge is implemented by `algebra_formal_freyd_long_exact.ts`, its
+labelled-equation inventory module, and its local lossless encoding module.
+Preparation reifies every selected equation before the caller fixes the
+coefficient environment. The default anchor is the public connecting-map
+reconstruction at degree one (degree zero for a one-degree complex); callers
+can explicitly select another existing label. The replay constructs the
+original sequence, its whole long-exact result and reference snakes through
+the already qualified categorical graph. Running only observes; trusting
+revalidates the complete result and freshly rebuilds its equation inventory
+before adopting any assumptions. The original source is immutable.
+
+Each distinct Core claim type is adopted once. The returned bindings retain
+all labels, the exact source-entry index, and the checked reference, so a
+consumer can retrieve an equation by its mathematical degree/role rather
+than a guessed declaration order. Coverage includes every chain square and
+short-exact row, all extended homology/induced-map data, connecting comparison
+and factor/descent equations, every long-exact map/zero/exactness witness,
+and all five maps/four zero composites of every reference snake. Existing
+matrix-equation batches do not replay the whole homology computation.
+
+Focused consumers have executed and explicitly adopted 422 labels through
+55 assumptions in the two-degree nonsplit example and 559 labels through
+145 assumptions in the three-degree nonzero-boundary example. The original
+whole-source coefficient environment contains every needed binding. Tests
+reject unknown anchors, altered inventories, different goals, changed whole
+output, foreign prepared bundles/environments, and reifier drift, and check
+that cancellation reaches the nested graph. A changed result is an
+observation, not a claim. Both examples independently check the final Core
+environment and every returned assumption reference. The three-degree
+inventory is now 2,225,572 bytes and its selected data round-trips to the
+exact previous serializer. The final portable artifact uses the same
+lossless encoding, retaining the source, full receipt, equations and labels.
+
+The larger adoption/checking/serialization test measured about 85 seconds
+before final artifact encoding; this is a working baseline, not an
+interactive-performance qualification. Generic equality decoding, generic
+window/long-exact exactness, and the witnessed formal whole construction
+remain separate required rows. Existing homology/snake proof–CAS and
+categorical neighbors pass 16 focused tests (two optional live probes
+skipped). Final local conformance/artifact evidence is recorded below when
+terminal; no shared checker/compiler/engine or public barrel was changed.
+
+Final focused bridge run: seven tests passed, with the optional live check
+skipped in that run. A separate enabled/name-filtered live check passed all
+145 distinct three-degree claim types. The existing TypeScript probe helper
+retains a 60-second ceiling; its attempted 90-second option was rejected by
+the helper before any Lambdapi invocation, so this consumer uses its
+existing 60-second option and finished in about seven seconds including
+fixture/reification. No shared helper migration was needed or performed.
+
+Final encoded adoption artifacts measured 1,351,858 bytes (two-degree) and
+3,743,154 bytes (three-degree), retaining every selected equation, adoption
+receipt and label. The complete positive tests, including replay, adoption,
+independent checking, source validation and repeated serialization, measured
+about 19/76 seconds. The 16 neighboring focused tests also passed; full
+repository TypeScript/kernel/book aggregates were not run. Root typecheck,
+affected-file lint, document hygiene and the exact diff are the checkpoint
+gates. No Lambdapi source/rule/catalog or health metric changed in this row.
+
+An additional raw-witness mutation consumer found a missing retained-owner
+guard in the older short-exact serializer. It encoded `homology.pair` but
+omitted the direct `pair` alias without checking that they were identical.
+The owner now checks incoming/outgoing against the pair, homology against
+that pair, and exactness against that whole homology. Valid output bytes do
+not change. Dedicated native negatives exercise each link. The bridge
+rejects broken sharing and, with those links preserved, detects changing a
+nonzero coefficient witness to zero outside the chosen equation anchor.
+This is a local data-integrity correction, not a new equality test, CAS
+algorithm or formal capability.
+
+After that guard correction, the final affected matrix passed 31 tests
+across the bridge, bounded-short-exact, snake-category and long-exact-category
+suites (one optional live test skipped there and qualified separately).
+The three-degree artifact/claim counts and bytes remained unchanged. Root
+typecheck, all six affected implementation/test lint targets, active-reference
+and report-header hygiene, and staged whitespace checks are green. This
+checkpoint contains only row-12A implementation/tests/docs and the measured
+short-exact serialization guard; `main`, the parallel worktrees, and the
+generic Core/compiler/runtime remain untouched.
+
+Next dependency-ready integration work is row 11: turn the already adopted
+effective equations and retained universal data into the maximal witnessed
+formal long-exact result. This is different from declaring that the selected
+matrix equations have the right types or are explicitly trusted. The generic
+window proof (7D), generic bounded assembly, external differential, Chapter
+31/appendices and final consolidation remain required; the persistent goal
+is active, not complete.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
