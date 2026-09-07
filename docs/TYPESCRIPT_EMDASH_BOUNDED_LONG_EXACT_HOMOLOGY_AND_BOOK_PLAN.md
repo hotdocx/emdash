@@ -687,7 +687,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
-| `LEH-CATEGORY-10` | complete; nine operations and direct/graph gates green | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
+| `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
@@ -1473,6 +1473,14 @@ operation independently for every equation if the existing batch/retained
 computation infrastructure can reuse it. The generic window theorem stays
 explicitly pending; a working selected proof–CAS consumer is the immediate
 priority, not a claim of a closed formal quotient capability.
+
+Categorical execution/lowering checkpoint: `57330594`; the worktree was
+clean after it. Rows 11/12 are the next operational integration frontier.
+The existing formal homology/snake bundles expose per-equation adapters;
+review the batch and retained-computation mechanisms before choosing the
+whole-result replay design. Generic window/bounded exactness, external
+differential, book, and final consolidation remain required and the full
+persistent goal remains active.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
