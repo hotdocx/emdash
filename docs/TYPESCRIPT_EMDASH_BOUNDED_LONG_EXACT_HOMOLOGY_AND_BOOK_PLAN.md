@@ -614,12 +614,12 @@ was introduced to get a passing target.
 | `LEH-SNAKE-OUTER-ZERO-3C1` | complete; checkpoint `72e6fa6b` | 3A–3B and selected structural cancellation | first and fourth adjacent-zero points |
 | `LEH-SNAKE-INNER-ZERO-3C2` | complete; checkpoint `3ecad40d` | 3A–3B, fiber factor, pushout cofactor, `u`, and `partial` | second and third adjacent-zero points |
 | `LEH-SNAKE-RESULT-3D` | complete; checkpoint `17a7dd6a` | 3A–3C | whole six-object/five-arrow snake result with readable projections |
-| `LEH-SNAKE-EXACT-4` | complete; whole-result checkpoint pending | row 3 and generic exactness | exactness at all four interior six-term positions |
+| `LEH-SNAKE-EXACT-4` | complete; whole-result checkpoint `2ca9ac9c` | row 3 and generic exactness | exactness at all four interior six-term positions |
 | `LEH-SNAKE-EXACT-FIRST-4A` | complete; checkpoint `8dfde0a6` | canonical cokernel exactness and first two snake maps | `ComputationalExactAt` at `Ker(beta)` via epimorphic local covers |
 | `LEH-SNAKE-EXACT-SECOND-4B` | complete; checkpoint `08d97080` | fiber product, first normal-epi factor, connecting map | `ComputationalExactAt` at `Ker(gamma)` |
 | `LEH-SNAKE-EXACT-THIRD-4C` | complete; checkpoint `e19ac569` | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | complete; checkpoint `aa7a3a06` | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` |
-| `LEH-SNAKE-EXACT-RESULT-4E` | complete; validated checkpoint pending | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
+| `LEH-SNAKE-EXACT-RESULT-4E` | complete; checkpoint `2ca9ac9c` | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
 | `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
