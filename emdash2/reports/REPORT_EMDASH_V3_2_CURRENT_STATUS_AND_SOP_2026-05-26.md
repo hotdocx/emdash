@@ -433,6 +433,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   epic cancellation proves both inverse laws. The reviewer checks the actual
   factors/reconstructions and rejects interpreting the inverse comparison as
   a section into the middle object. No object equality or global rule is added.
+- The whole short-exact-row, kernel-row, selected-row, and normalization
+  modules package actual pair-indexed evidence. A supplied whole kernel of
+  an epic arrow gives a short exact row by identity covers; the homology in
+  its exactness statement remains the existing selected homology. Applying
+  this to the existing image kernel gives `Im(f) -> B -> Coker(f)` already
+  over a pre-Abelian capability. In the Abelian case, normal-mono lifting
+  constructs the source image isomorphism. Normalization retains the selected
+  row and two `HFiber` points over its actual inclusion/projection, populated
+  by that source isomorphism and the existing cokernel comparison. No manual
+  diagram carrier, object path, axiom, rule, or unifier is added. The ten
+  new modules and five reviewers use the separate bounded normalization
+  gate; they do not trigger the unrelated full snake proof chain.
 - `emdash3_2_exactness_covers_foundation.lp`,
   `emdash3_2_exactness_covers.lp`, and
   `emdash3_2_exactness_covers_from_exact.lp`: rule-free constructive

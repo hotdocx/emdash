@@ -57,6 +57,25 @@ class CheckMetricsTests(unittest.TestCase):
             ],
         )
 
+    @patch("scripts.check_metrics.run_command")
+    def test_normalization_and_snake_groups_run_independently_once(self, run_command) -> None:
+        run_command.side_effect = [(0, "", 2.0), (0, "", 4.0)]
+        files = [
+            Path("emdash3_2_short_exact_normalization.lp"),
+            Path("emdash3_2_abelian_snake_six_term_exact_result.lp"),
+            Path("examples/short_exact_normalization.lp"),
+            Path("examples/abelian_snake_six_term_exact_result.lp"),
+        ]
+        with redirect_stdout(StringIO()):
+            results, status = run_checks(files, "90s")
+        self.assertEqual(status, 0)
+        self.assertEqual(run_command.call_args_list, [
+            call(["./scripts/check_short_exact_normalization.sh"]),
+            call(["./scripts/check_abelian_snake_six_term.sh"]),
+        ])
+        self.assertEqual([result.file for result in results], [str(path) for path in files])
+        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
+
     def test_near_timeout_checks_run_first_without_reordering_report_inputs(self) -> None:
         files = [
             Path("emdash3_2.lp"),

@@ -28,6 +28,7 @@ if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
 fi
 
 six_term_join_checked=0
+normalization_join_checked=0
 
 is_abelian_snake_six_term_join() {
   case "$1" in
@@ -70,6 +71,23 @@ is_abelian_snake_six_term_join() {
 
 check_file() {
   local file="$1"
+  case "$file" in
+    emdash3_2_short_exact_rows.lp|\
+    emdash3_2_kernel_short_exact_rows.lp|\
+    emdash3_2_selected_short_exact_rows.lp|\
+    emdash3_2_monic_image_comparison.lp|\
+    emdash3_2_short_exact_row_comparison_fibres.lp|\
+    emdash3_2_monic_selected_row_comparison.lp|\
+    emdash3_2_short_exact_normalization_foundation.lp|\
+    emdash3_2_short_exact_normalization_isos.lp|\
+    emdash3_2_short_exact_normalization_projections.lp|\
+    emdash3_2_short_exact_normalization.lp)
+      if [[ "$normalization_join_checked" -eq 0 ]]; then
+        ./scripts/check_short_exact_normalization.sh
+        normalization_join_checked=1
+      fi
+      return ;;
+  esac
   if is_abelian_snake_six_term_join "$file"; then
     if [[ "$six_term_join_checked" -eq 0 ]]; then
       ./scripts/check_abelian_snake_six_term.sh
@@ -228,6 +246,16 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_short_exact_cokernel_foundation.lp)
   files+=(emdash3_2_short_exact_cokernel_inverse_test.lp)
   files+=(emdash3_2_short_exact_cokernel_comparison.lp)
+  files+=(emdash3_2_short_exact_rows.lp)
+  files+=(emdash3_2_kernel_short_exact_rows.lp)
+  files+=(emdash3_2_selected_short_exact_rows.lp)
+  files+=(emdash3_2_monic_image_comparison.lp)
+  files+=(emdash3_2_short_exact_row_comparison_fibres.lp)
+  files+=(emdash3_2_monic_selected_row_comparison.lp)
+  files+=(emdash3_2_short_exact_normalization_foundation.lp)
+  files+=(emdash3_2_short_exact_normalization_isos.lp)
+  files+=(emdash3_2_short_exact_normalization_projections.lp)
+  files+=(emdash3_2_short_exact_normalization.lp)
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_kernels.lp)

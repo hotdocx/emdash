@@ -3560,6 +3560,28 @@ Cancelling epic `p` and epic `c_i` proves `q r = id` and `r q = id`.
 The result retains these two selected arrows as `IsoEvidence`; it does not
 select a section `D -> B` or transport through an assumed object equality.
 
+Whole short exact rows retain the original pair and its dependent evidence
+in one Sigma. A generic constructor starts from a whole kernel `W` of an
+epic arrow `p`. Kernel lifting supplies every exactness test with an identity
+cover, so the actual selected boundary is epic. This uses `W` without
+reconstructing it through a second presentation; the homology owner itself
+is unchanged.
+
+For any arrow `f:A -> B` in a pre-Abelian category, the selected image kernel
+therefore produces the short exact row `Im(f) -> B -> Coker(f)`. For a
+monomorphism, its kernel factor into `Im(f)` and the normal-mono lift of the
+image embedding are inverses by monic cancellation. Combining this with the
+cokernel comparison above normalizes an arbitrary Abelian short exact row.
+
+The normalization result stores the selected row and two isomorphism
+comparison points. Each point is an existing Hom-fibre construction over
+composition with the actual map of that stored row. Its fibre path supplies
+compatibility with the original inclusion or projection. The constructor
+derives both points from the existing universal reconstruction laws; the
+caller supplies no extra commuting square. Generic and canonical projection
+checks, including rejection of a comparison belonging to another row, verify
+that the stored evidence refers to the actual stored data.
+
 The generic Abelian snake construction is now selected by the same universal
 operations. From one composable triple
 `A --delta--> B --beta--> X --lambda--> D` and its triple-zero point,

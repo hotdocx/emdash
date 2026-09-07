@@ -620,10 +620,10 @@ was introduced to get a passing target.
 | `LEH-SNAKE-EXACT-THIRD-4C` | complete; checkpoint `e19ac569` | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | complete; checkpoint `aa7a3a06` | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` |
 | `LEH-SNAKE-EXACT-RESULT-4E` | complete; checkpoint `2ca9ac9c` | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
-| `LEH-SHORT-EXACT-NORMAL-5` | in progress via 5A–5C | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
+| `LEH-SHORT-EXACT-NORMAL-5` | complete; normalization checkpoint pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
 | `LEH-SHORT-EXACT-KERNEL-5A` | complete; checkpoint `18f2ba33` | selected boundary and short-exact evidence | canonical `A -> Ker(p)` comparison isomorphism and reconstruction |
 | `LEH-SHORT-EXACT-COKERNEL-5B` | complete; checkpoint `18f2ba33` | exactness, normal epi colifting, selected cokernel | canonical `Coker(i) -> D` comparison isomorphism, inverse, and reconstruction |
-| `LEH-SHORT-EXACT-SELECTED-5C` | in progress; selected-row/image-iso probes pass, compatibility assembly being refined | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
+| `LEH-SHORT-EXACT-SELECTED-5C` | complete; validated checkpoint pending | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -698,6 +698,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-027` | accepted after fourth-position probes | Extend the `mu`-annihilated test `psi c_beta` through `lambda`; epic `epsilon` makes the coextension kill `gamma`, and epic `c_beta` proves the reconstruction after its selected gamma-cokernel colift. The full reviewer fits one fresh-source invocation, so this tranche uses ordinary source/example/health registration rather than the special multi-branch gate. |
 | `D-LEH-028` | accepted after canonical exact-result probes | Keep the actual snapshot-indexed exactness family. Its canonical pairs compute to the old pairs; record those identities by reflexivity and reindex exactness at that small data owner before opening the large predicate. This retains the selected homology and ordinary reflexivity beta while avoiding the measured direct-assignment/type-comparison timeout. No semantic arrow or object bridge is postulated. |
 | `D-LEH-029` | accepted after endpoint-comparison probes | The actual boundary gives the kernel comparison; monic-factor cancellation and constructive balancedness construct its inverse. The cokernel comparison uses its ordinary colift, while exactness makes the cokernel projection a normal-epi test for the outgoing arrow. Its selected colift and common-epic cancellation give the inverse comparison without a section into the middle object. |
+| `D-LEH-030` | accepted after normalization probes | Construct a kernel row from its existing whole kernel and identity exactness covers. Use a single literal kernel-object presentation throughout the selected image row and its isomorphism. Build the source comparison fibre generically at PA/f before specializing to a bundled short exact row; this preserves the actual-row dependency and avoids the measured composite-compatibility conversion timeout. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -715,20 +716,40 @@ Seven strict source/reviewer audits, the nine focused health tests, shell
 syntax, catalog/TOC, and report/link checks pass. These files use ordinary
 checker and health registration; no unrelated aggregate was run.
 
-Row 5C remains active in the ignored `short_exact_*` probes. The selected
-row, PA-explicit monic-image comparison, normalization carrier, projections,
-and canonical isomorphisms check. The compatibility-point assembly still
-requires an owner-position refinement. The next probe constructs a kernel
-row from its existing whole kernel value, using identity exactness covers,
-so the row and the image isomorphism can share that same owner. No object
-equality assumption or weaker normalization result is being substituted.
-The generic whole-kernel row probe passes. Its selected-image instantiation
-still needs consistent literal kernel endpoints: returning the separate
-`computational_image_object` alias at that application again exceeded the
-bound. Continue this owner-position experiment from the retained disposable
-build `/tmp/emdash-short-exact.xSl9rC` after checking its sources against the
-worktree. The public endpoint modules are committed and independent of these
-unfinished ignored probes; no `.lpo` is needed in the worktree itself.
+### Whole normalization checkpoint evidence
+
+Row 5C now has ten promoted source modules and five reviewers. Their 21 new
+assertions pass, as does the existing seven-assertion endpoint reviewer.
+The selected row is `Im(f) -> B -> Coker(f)` over a pre-Abelian capability;
+the arbitrary-row comparison uses Abelian normality and the original
+short-exact evidence. The output retains an actual whole row and two
+isomorphism-comparison `HFiber` points over its actual arrows. The negative
+reviewers reject mismatched pair evidence and a comparison from another row.
+
+The direct full-source canonical reviewer exceeded 90 seconds while loading
+the combined dependency closure. The new scoped gate
+`emdash2/scripts/check_short_exact_normalization.sh` freshly checks each
+dependency and consumer in its own bounded invocation. Its warning-enabled
+public run passed in
+`emdash2/logs/normalization-public-gate.Hw2l8i.log`, with the unchanged
+`1,217/169` warning inventory plus expected `assertnot` diagnostics.
+The gate excludes the unrelated snake-proof chain. Kernel checks, reviewer
+discovery, and the health runner each execute this group once; a focused test
+checks its independence from the snake group. Ten dispatcher tests pass.
+
+The accepted computational presentation uses literal kernel-object endpoints
+and the existing whole image kernel. Its exactness proof uses identity covers
+without replacing the selected homology. Generic source-comparison formation
+at PA/f succeeds before specialization to the full short-exact input. The
+maintained canonical path tests observe the stored fibre points, and the
+generic comparison beta tests observe their original reconstruction paths;
+the direct specialized bare-path comparison was too expensive. No object
+equality assumption, new rule, unifier, or weaker normalization was used.
+
+The experimental build `/tmp/emdash-short-exact.xSl9rC` is disposable and is
+removed at this checkpoint; source probes and logs remain in the worktree.
+The public gate removes only its generated file kinds and empty directories,
+retaining unexpected content instead of performing a forced recursive cleanup.
 
 ## Baseline And Validation Policy
 

@@ -128,6 +128,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   arbitrary existing short exact pair. Their forward and inverse arrows are
   the selected kernel/normal-epi factors; the latter inverse lands in
   `Coker(i)`, never a chosen section into `B`. No object equality is assumed.
+  The whole-row and normalization modules retain one chain pair and its
+  dependent short-exact evidence. Kernel rows consume an existing whole
+  kernel and prove exactness by identity covers using the unchanged selected
+  homology. The selected image row is constructed already over a pre-Abelian
+  capability. An Abelian short exact row normalizes to that image row with
+  two isomorphism-comparison `HFiber` points over its actual maps; all
+  compatibility is constructed from universal reconstructions. Its focused
+  check is `scripts/check_short_exact_normalization.sh`, separate from the
+  larger snake gate.
   `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` and
   `emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp` are the
   rule-free witnessed formal Construction 3.14/3.15 owners. The former

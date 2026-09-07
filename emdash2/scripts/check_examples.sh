@@ -35,6 +35,7 @@ check_file() {
 }
 
 six_term_examples_checked=0
+normalization_examples_checked=0
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
@@ -48,6 +49,15 @@ for file in examples/*.lp; do
     if [[ "$six_term_examples_checked" -eq 0 ]]; then
       ./scripts/check_abelian_snake_six_term.sh
       six_term_examples_checked=1
+    fi
+  elif [[ "$file" == "examples/short_exact_rows.lp" ||
+         "$file" == "examples/monic_image_iso.lp" ||
+         "$file" == "examples/monic_selected_row_comparison.lp" ||
+         "$file" == "examples/short_exact_normalization_structure.lp" ||
+         "$file" == "examples/short_exact_normalization.lp" ]]; then
+    if [[ "$normalization_examples_checked" -eq 0 ]]; then
+      ./scripts/check_short_exact_normalization.sh
+      normalization_examples_checked=1
     fi
   else
     check_file "$file"

@@ -144,6 +144,16 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_short_exact_cokernel_foundation.lp"),
     Path("emdash3_2_short_exact_cokernel_inverse_test.lp"),
     Path("emdash3_2_short_exact_cokernel_comparison.lp"),
+    Path("emdash3_2_short_exact_rows.lp"),
+    Path("emdash3_2_kernel_short_exact_rows.lp"),
+    Path("emdash3_2_selected_short_exact_rows.lp"),
+    Path("emdash3_2_monic_image_comparison.lp"),
+    Path("emdash3_2_short_exact_row_comparison_fibres.lp"),
+    Path("emdash3_2_monic_selected_row_comparison.lp"),
+    Path("emdash3_2_short_exact_normalization_foundation.lp"),
+    Path("emdash3_2_short_exact_normalization_isos.lp"),
+    Path("emdash3_2_short_exact_normalization_projections.lp"),
+    Path("emdash3_2_short_exact_normalization.lp"),
     Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_fibrewise_sigma.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
@@ -440,6 +450,27 @@ SPECIAL_SIX_TERM_CHECK_FILES = {
     Path("examples/abelian_snake_six_term_exact_structure.lp"),
     Path("examples/abelian_snake_six_term_exact_result.lp"),
 }
+SPECIAL_NORMALIZATION_CHECK_FILES = {
+    Path("emdash3_2_short_exact_rows.lp"),
+    Path("emdash3_2_kernel_short_exact_rows.lp"),
+    Path("emdash3_2_selected_short_exact_rows.lp"),
+    Path("emdash3_2_monic_image_comparison.lp"),
+    Path("emdash3_2_short_exact_row_comparison_fibres.lp"),
+    Path("emdash3_2_monic_selected_row_comparison.lp"),
+    Path("emdash3_2_short_exact_normalization_foundation.lp"),
+    Path("emdash3_2_short_exact_normalization_isos.lp"),
+    Path("emdash3_2_short_exact_normalization_projections.lp"),
+    Path("emdash3_2_short_exact_normalization.lp"),
+    Path("examples/short_exact_rows.lp"),
+    Path("examples/monic_image_iso.lp"),
+    Path("examples/monic_selected_row_comparison.lp"),
+    Path("examples/short_exact_normalization_structure.lp"),
+    Path("examples/short_exact_normalization.lp"),
+}
+ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_SIX_TERM_CHECK_FILES, "./scripts/check_abelian_snake_six_term.sh"),
+    (SPECIAL_NORMALIZATION_CHECK_FILES, "./scripts/check_short_exact_normalization.sh"),
+)
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
 HEALTH_STATE = ROOT / "logs" / "check-health-state.json"
@@ -746,7 +777,7 @@ def run_checks(
 ) -> tuple[list[CheckResult], int]:
     results_by_file: dict[str, CheckResult] = dict(resumed or {})
     overall = 0
-    six_term_join_checked = False
+    checked_groups: set[str] = set()
     for rel in check_execution_order(files):
         if str(rel) in results_by_file and results_by_file[str(rel)].returncode == 0:
             result = results_by_file[str(rel)]
@@ -755,25 +786,28 @@ def run_checks(
             label = "resumed" if result.evidence == "resumed" else "already checked"
             print(f"{rel}: {label} exit 0, {duration_text}")
             continue
-        if rel in SPECIAL_SIX_TERM_CHECK_FILES:
-            if six_term_join_checked:
+        group = next(
+            ((members, script) for members, script in ISOLATED_CHECK_GROUPS if rel in members),
+            None,
+        )
+        if group is not None:
+            members, script = group
+            if script in checked_groups:
                 continue
             pending = [
                 path
                 for path in files
-                if path in SPECIAL_SIX_TERM_CHECK_FILES
+                if path in members
                 and str(path) not in results_by_file
             ]
-            rc, output, duration = run_command(
-                ["./scripts/check_abelian_snake_six_term.sh"]
-            )
+            rc, output, duration = run_command([script])
             share = duration / max(1, len(pending))
             for path in pending:
                 results_by_file[str(path)] = CheckResult(
                     str(path), rc, share, "current-isolated-object-chain"
                 )
                 print(f"{path}: isolated-chain exit {rc}, {share:.3f}s share")
-            six_term_join_checked = True
+            checked_groups.add(script)
             if rc == 0 and save_success is not None:
                 save_success(results_by_file)
             elif rc != 0:

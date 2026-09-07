@@ -584,3 +584,43 @@ observations check. Combining the canonical compatibility into those fibres
 still exceeds the bound in the current direct application; this is the
 remaining row-5C experiment, not an endpoint-comparison limitation or a reason
 to introduce object equality assumptions.
+
+## Whole Short-Exact Normalization Result
+
+Row 5C is now implemented. `ComputationalShortExactRow` retains one actual
+chain pair and its short-exact evidence. The generic kernel-row constructor
+takes the existing whole kernel as a parameter, obtains exactness through
+identity covers, and continues to use the PA-selected homology. The selected
+image-row constructor passes the existing image kernel to that constructor;
+it needs only the pre-Abelian capability.
+
+The successful endpoint presentation is the literal `computational_kernel_object`
+of that whole image kernel, with one common preadditive projection expression.
+The PA-explicit monic-image comparison uses that same presentation. Returning
+the alternative readable image-object alias at the application boundary had
+exceeded 90 seconds. These changes concern owner/endpoint presentation, not
+the selected objects or the mathematics.
+
+The comparison classifiers are generic `HFiber`s of composition with actual
+row maps. A generic monomorphism-to-selected-row comparison constructs the
+source point before specialization to the original short exact row. This
+avoids the measured timeout from rebuilding the composite compatibility in
+the fully specialized context. The target point reuses the selected cokernel
+comparison. The resulting normalization is a dependent whole row plus those
+two points, and its projections retain both actual isomorphisms and fibre
+paths. No object equality, new axiom, runtime rule, or unifier is introduced.
+
+The 21 new assertions cover generic row construction, its wrong-pair guard,
+selected-row maps/evidence, both image-isomorphism factors/reconstructions,
+generic comparison-point beta, whole normalization projections, and the
+wrong-row compatibility guard. Canonical fibre paths are checked at their
+stored-point interface; their original reconstruction is checked separately
+at the generic comparison constructor because the specialized bare-path
+comparison exceeded the bound.
+
+The public normalization-only gate passes, including the existing endpoint
+reviewer. It freshly compiles only the normalization dependency chain in a
+disposable source copy, with every target bounded to 90 seconds. The root
+checker, reviewer runner, and health dispatcher route this group separately
+from the snake gate. The next implementation row is the degreewise bounded
+short-exact sequence and the homology-window endpoint bridge.
