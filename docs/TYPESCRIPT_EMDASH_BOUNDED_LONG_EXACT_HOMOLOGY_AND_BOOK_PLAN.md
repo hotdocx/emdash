@@ -631,7 +631,7 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
-| `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; validated local checkpoint pending | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
+| `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | pending owner-position construction | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -1027,6 +1027,11 @@ dispatcher tests, strict fresh catalog, source TOC, shell syntax, active
 references, report headers, and exact whitespace checks pass. The unchanged
 native window retains its 24-test/typecheck/lint evidence. The global health
 snapshot remains at the earlier documented unrelated aggregate boundary.
+
+Generic homology-inclusion checkpoint: `8161a141`. The worktree was clean
+after the commit. Row 7C is next; the full window proof, bounded sequence,
+cross-layer consumers, and book deliverables remain active requirements of
+the unchanged persistent objective.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
