@@ -4018,8 +4018,13 @@ homology connecting arrow has endpoints H_n(C) and H_(n-1)(A), whereas the
 snake connecting arrow has endpoints Ker(gamma) and Coker(alpha). Reusing
 the latter requires comparisons, target factorization, and source descent;
 it does not make those intermediates intrinsic inputs of the former. A
-separately named homology operation should allow a later direct algorithm
-while preserving the requested homology objects and its observable laws.
+separately named native homology operation now accepts the sequence and
+degree, optionally reusing the caller's actual whole homologies. It returns
+the homology arrow and its selected reconstruction separately from the full
+snake-method trace; the window delegates to that single implementation and
+serializer. This permits a later direct algorithm while preserving the
+requested homology objects and observable laws. It does not yet package the
+corresponding whole internal homology functor at the formal layer.
 The immediate continuation is an end-to-end operational proof–CAS baseline;
 the full generic window theorem remains unfinished and explicitly required.
 The present transparent operations and theorem paths are a constructive

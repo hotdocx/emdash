@@ -850,10 +850,20 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreements and three native exactness witnesses; both endpoint-zero
   windows and a nonsplit nonzero-boundary example pass. Its companion
   serializer retains the complete selected result. The generic inclusion
-  monicity theorem and induced-map operations/laws are now provided by the
-  separate generic modules. Canonical snake-row endpoint adapters, the full
-  generic window proof, and long-exact iteration remain explicit requirements
-  of the active goal.
+  monicity theorem, induced-map operations/laws, and canonical snake-row
+  comparisons are provided by the separate generic modules. The full generic
+  window proof and long-exact iteration remain explicit requirements.
+- `src/v3_2/algebra_polynomial_freyd_homology_connecting.ts` now owns a
+  separately named native homology-connecting operation. It accepts the
+  sequence and degree, optionally reuses supplied whole homologies at the
+  original raw differential/presentation endpoints, and returns the homology
+  arrow and selected reconstruction separately from a tagged snake-method
+  trace. The v2 window delegates to this operation and its shared serializer;
+  it does not retain a second implementation. All old method data remains
+  under `connecting.trace`. Thirty-four focused operation/window/neighbor
+  tests, root typecheck, and affected-file lint pass. No formal capability or
+  trusted Core owner is added; categorical lowering and proof–CAS consumption
+  of this operation are subsequent steps.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

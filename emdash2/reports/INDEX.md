@@ -14,6 +14,13 @@ homology operations and an end-to-end proof–CAS baseline. Generic window
 exactness, full bounded long-exact assembly, cross-layer consumers, and
 Chapter 31 remain active requirements. The companion owner audit records
 these boundaries; no closed formal quotient effectiveness is claimed.
+The independently named native homology-connecting operation is implemented;
+bounded assembly and its categorical/proof–CAS consumers are next. Future
+coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum
+references, together with the user's non-loop directed-spectrum hypothesis,
+are retained in
+`../../docs/TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md` without
+expanding this goal into the deferred spectral work.
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` records the completed
 constructive continuation from the completed Freyd pre-Abelian boundary. It

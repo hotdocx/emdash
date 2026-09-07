@@ -292,6 +292,12 @@ This window is the decisive architecture consumer. Reject a design that:
 
 ### Operational reference priority (2026-09-07 clarification)
 
+Future literature and the user's distinct non-loop, directed-spectrum
+hypothesis are retained in
+[the redesign reference inventory](TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md).
+Its bibliographic review and shallow Lean 2 source acquisition do not begin
+the deferred spectral/derived implementation or delay this baseline.
+
 Decision response: `0119_2026-09-07T19-46-57Z_01a07d52-6b95-7fd1-a9a7-ded8d98ebc85.md`
 in the session archive under `/home/user1/emdash1/emdash2/tmp/ai-responses/`;
 the user explicitly accepted it and requested continuation. This section,
@@ -677,7 +683,7 @@ was introduced to get a passing target.
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
-| `LEH-HOMOLOGY-CONNECTING-API-7E` | next operational tranche | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
+| `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; native operation, reuse, serialization and focused tests green | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | pending; operational assembly prioritized | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
@@ -1242,6 +1248,57 @@ after the 29-file local checkpoint; no external Git action occurred. The
 following continuation starts with native row 7E under the explicitly
 accepted operational-reference priority. The complete persistent objective,
 including generic window exactness and the book, remains active.
+
+Row 7E starts from clean `b102bbf9`; workspace validation and the eight existing
+window tests pass. The native extraction keeps one shared bounded-degree
+lookup, one connecting implementation, and one trace serializer. The public
+operation accepts a sequence and degree, optionally reusing supplied whole
+source/target homology values at the original raw adjacent differentials.
+Its essential result contains the homology arrow and selected reconstruction;
+the snake-specific objects/factors are retained separately as its method
+trace. The window must invoke that operation. Wrong-degree/foreign selections,
+nonzero boundary descent, nonsplit/nonzero connecting, complete trace
+serialization, and actual object reuse are the focused acceptance tests.
+
+The native operation is now implemented in
+`src/v3_2/algebra_polynomial_freyd_homology_connecting.ts`. Its input is the
+sequence and degree; optional supplied source/target homology values must
+use the actual adjacent differential representatives and presentations.
+Equivalent freshly reconstructed whole homologies at that pair are accepted
+and retained by reference. Same ambient matrices with wrong quotient
+presentations, foreign rings, wrong degrees, failed chain flags, and merely
+quotient-congruent changed raw differentials are rejected.
+
+The result owns the homology arrow and a reconstruction agreement for
+`j_A ∘ delta_n ∘ q_C`. Its complete snake-method data is separately retained
+under `trace`, tagged `snake-homology-connecting-v1`. The window now calls
+this operation with its actual selected source/target values and advances
+its profile to v2; old trace fields move from `window.connecting.*` to
+`window.connecting.trace.*`, while the public arrow remains
+`window.connecting.homologyMap`. One shared serializer retains all former
+trace data and the added public source/target/reconstruction fields. This is
+a deliberate reference-result layout revision, not a claim of byte-level
+compatibility with the old whole-window payload.
+
+Workspace validation, root typecheck, affected-file lint, all eight existing
+window tests, ten new connecting tests, and sixteen adjacent sequence/map
+regressions pass (34 focused tests total). The new tests exercise standalone
+construction, nonzero/nonsplit boundary descent, both endpoint-zero cases,
+actual selection reuse, direct/window full-serialization agreement, and
+sensitivity to changed reconstruction/trace witnesses. A temporary CommonJS
+entry point joins only these four suites under ts-node; an initial TypeScript
+entry point under the ESM emdash2 package failed module resolution before
+running tests and was replaced by that correctly scoped harness. No trusted
+Core, public barrel, Lambdapi declaration, or test-runner behavior changed;
+the runner only registers the added suite. No unrelated aggregate was run.
+
+Next: native bounded assembly should retain the degreewise homologies and
+ordinary induced maps once, then construct windows from those actual values.
+An inclusion map shared by adjacent windows must not be independently
+recomputed. The conventional displayed sequence has selected endpoint zeros
+and the three A/B/C roles at every supported degree. Its exactness witnesses
+must refer to the same stored arrow pairs. Generic row 7D remains required
+but outside this immediate operational critical path.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

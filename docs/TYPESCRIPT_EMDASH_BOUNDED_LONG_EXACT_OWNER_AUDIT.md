@@ -874,3 +874,28 @@ its operational gate. Generic window exactness remains required but does not
 block that first operational baseline. A later internal/functorial redesign
 may replace today's logical packaging while retaining these reference
 algorithms, typed interfaces, laws, and nonsplit regression examples.
+
+## Named native homology connecting (row 7E)
+
+`algebra_polynomial_freyd_homology_connecting.ts` now owns the homology
+operation independently of the five-term window. A shared bounded-degree
+context preserves true neighboring differentials outside support. Optional
+supplied whole homologies are checked at their original raw maps and
+presentation endpoints, then retained unchanged. The window delegates to
+that operation with its actual source and target homologies; it contains no
+second snake-to-homology algorithm.
+
+The returned arrow, source/target, and `j_A ∘ delta_n ∘ q_C` reconstruction
+are separate from the tagged method `trace`. All earlier factors and
+agreements remain serialized there, and the window serializer delegates to
+the same serializer. This changes the native window profile/layout to v2.
+Ten new tests plus eight window and sixteen neighboring regressions pass;
+root typecheck and affected-file lint pass. No formal owner or trusted Core
+capability is added by this native tranche. Whole bounded assembly and
+categorical/formal/proof–CAS consumers remain subsequent work.
+
+The user's later-redesign references and non-loop directed-spectrum
+hypothesis are retained in
+[the separate reference inventory](TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md).
+They are research inputs, not implementation authority or additional
+requirements to implement spectral sequences within this bounded goal.
