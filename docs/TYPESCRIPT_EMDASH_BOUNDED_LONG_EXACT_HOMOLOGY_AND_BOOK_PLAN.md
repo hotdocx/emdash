@@ -629,7 +629,11 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-NATIVE-7A` | complete; validated local checkpoint pending | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
+| `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | pending | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
+| `LEH-WINDOW-GENERIC-MAPS-7C` | pending owner-position construction | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
+| `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
@@ -706,6 +710,8 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-031` | accepted after native degreewise consumers | Retain the two existing bounded chain maps and compute each short-exact row through the existing operation. Compare their endpoints by selected presentations and raw differentials, not object identity alone or quotient congruence. Store one zero row for explicit extended lookup. Full serialization retains raw agreements and bounded-free provenance; it excludes only derived Gröbner caches, following the existing presentation convention. |
 | `D-LEH-032` | accepted after formal chain-map consumers | Iterate raw presentation morphisms and their existing agreements over the actual two formal complex tails. The single-square name is transparent; two stored laws package directly as the existing one-degree homology chain map. Keep formal short-exact row evidence capability-indexed and downstream of this iterator. |
 | `D-LEH-033` | accepted after formal exact-row consumers | Store the existing whole witnessed homology in each raw row and index its exactness by that actual value. Iterate rows on the actual projected components of the two retained chain maps; a dependent whole sequence owns both maps and the resulting evidence. Wrong-homology and wrong-map consumers must fail. Native row computation and formal effective evidence remain distinct interfaces. |
+| `D-LEH-034` | accepted after native window tests; generic proof required | Compare the actual snake endpoints with source cycles and the target differential cokernel, factor along the canonical homology inclusion, then descend by the actual source homology cokernel. Do not require a global raw target-cycle lift or choose an epimorphism section. All four isomorphisms retain both inverse agreements; all factors retain their effective tests and reconstructions. |
+| `D-LEH-035` | accepted after endpoint-window tests | Extend complex terms by the retained zero presentation, but compute outside-support homology with its true neighboring differentials. In particular, `0 → C_top` is not the unrelated `0 → 0` pair. Retain an identity-equals-zero agreement for the resulting outside homology object. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -885,6 +891,83 @@ must not be silently treated as the source/target homology objects. Compare
 the row endpoints, factor into the target homology, and descend through the
 source boundary at the existing kernel/cokernel/normality owners. Only then
 package the three interior exactness witnesses and proceed to iteration.
+
+### Homology-window owner experiment
+
+The continuation starts from clean `cfd2b04f`; the preceding turn completed
+and checkpointed the finite-support native/formal degreewise interface.
+Workspace validation and sixteen nearest native sequence/functorial-homology
+tests pass. The first native window will retain the five existing homology
+results, the original sequence, and one actual snake result. Its three
+ordinary arrows must consume those homology results through the existing
+one-degree induced-map operation.
+
+The connecting-map experiment first constructs and checks both inverses of
+the short-exact endpoint comparisons `Coker(i_n) ⇄ C_n` and
+`A_(n-1) ⇄ Ker(p_(n-1))`, reusing the snake's actual selected kernel/cokernel.
+These induce `Z_n(C) ⇄ Ker(gamma)` and
+`Coker(alpha) ⇄ Coker(d^A_n)`. The latter intermediate object is not a second
+homology definition. Existing cokernel universality constructs the canonical
+map from the actual `H_(n-1)(A)` into `Coker(d^A_n)`; its monicity permits
+the existing normal-mono lift of the compared snake arrow. Finally the
+source homology cokernel descends that map. Every comparison, zero test,
+factor, reconstruction, and inverse agreement must remain in the result.
+
+This refines “factorization into target cycles before quotienting”: it must
+not require a global lift from source cycles into raw target cycles, which
+need not exist in the nonsplit situation. The generic snake already works
+after an epic cover. The proposed homology inclusion gives a quotient-level
+target-cycle factor without choosing a section. Native computation must
+validate this on the nonsplit polynomial example; the corresponding generic
+monicity/factorization theorem and exactness transfer remain required before
+row 7 is complete. Endpoint-zero windows are included, not silently omitted.
+
+That native route is now implemented in
+`src/v3_2/algebra_polynomial_freyd_homology_window.ts` with its companion
+whole-result serializer. The window consumes an existing checked sequence
+and a degree from zero through one above support. The ordinary arrows reuse
+the existing induced-homology owner on the actual five stored homology
+values. The connecting construction retains its one snake result, both
+short-exact row factors, four checked isomorphisms, the alpha/gamma comparison
+agreements, target differential cokernel, canonical homology inclusion and
+monicity witness, normal-mono factor, and actual source-cokernel descent.
+All three adjacent pairs retain zero agreements and native exactness results
+indexed by those actual pairs. No global cycle representative or section is
+chosen.
+
+Eight focused tests pass, alongside sixteen sequence/functorial-homology
+regressions (24 total). The richer nonsplit fixture has ranks `1,2,1`,
+differentials `[x,0]` and `[0,1]`, degreewise inclusion `x`, and quotient
+complex over `R/(x)`. Its source boundary is genuinely nonzero, its connecting
+map is nonzero, and target factor/source descent succeed. Both endpoint-zero
+windows and length-zero support pass. Tests also check all inverse laws,
+actual homology-object reuse, invalid indices/chain-map flags, complete
+deterministic serialization, and sensitivity to an altered descent witness.
+Root typecheck, affected-file lint, and exact whitespace review pass. No
+Lambdapi semantic changes, public-barrel changes, or unrelated aggregates
+belong to this native checkpoint.
+
+The generic owner audit finds no existing category-generic induced-homology
+map operation: the baseline's existing induced-map owners are native and
+witnessed formal Freyd. Row 7C must construct the generic kernel/cokernel
+counterpart within this goal, using existing internal factor fibres rather
+than a second manual-diagram grammar. Likewise native monicity and exactness
+decisions do not discharge rows 7B/7D. The one-window gate remains open until
+those generic constructions/proofs and their focused reviewers are complete;
+bounded long-exact iteration and book theorem claims do not start merely
+because the native example is green.
+
+The first row-7B generic probe can be stated more generally than homology.
+For monic `k:Z → B`, `b:A → Z`, and `f = k b`, choose the existing whole
+cokernels `q:Z → H` of `b` and `pi:B → D` of `f`. Their universal property
+gives `j:H → D` with `j q = pi k`. Push out monic `k` along `q`; the
+injection `v:H → PO` is monic by existing Abelian stability. The other
+injection kills `f`, so the `f`-cokernel gives `s:D → PO`. Cancelling epic
+`q` proves `s j = v`; existing monic-factor cancellation then makes `j`
+monic. Specialize to the actual homology cycles/boundary. This avoids both
+a second homology object and the need to package an unnecessary pushout
+isomorphism. It is the next owner-position construction, not yet a theorem
+claimed by the native checkpoint.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

@@ -3963,6 +3963,18 @@ turn native decidability into a closed formal Abelian-category capability.
 The degree-zero/one rows and remaining tail are readable projections, and
 the exactness projection cannot be assigned to an unrelated homology value.
 
+The native five-term homology window is now a separate whole operation. It
+compares the selected snake endpoints with source cycles and the target
+differential cokernel, factors along the canonical inclusion of target
+homology into that cokernel, and descends by the actual source homology
+cokernel. This avoids choosing a global raw target-cycle lift or splitting
+an epimorphism. The result retains all four comparison isomorphisms, both
+universal factors and their tests/reconstructions, and three native exactness
+results. A nonsplit three-degree example has a nonzero source boundary and a
+nonzero connecting map. The corresponding generic inclusion/induced-map and
+exactness proofs remain required; native decisions do not supply those
+theorems automatically.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

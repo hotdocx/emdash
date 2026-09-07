@@ -799,6 +799,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreements and bounded-free provenance. The nonsplit polynomial consumer
   already feeds the existing nonzero snake map; its homology descent and
   complete long-exact window remain downstream.
+- `src/v3_2/algebra_polynomial_freyd_homology_window.ts` now constructs one
+  whole native five-term window on the existing selected homologies. Four
+  explicit endpoint isomorphisms compare the actual snake objects with
+  cycles and the target differential cokernel. The canonical homology
+  inclusion, existing normal-mono factor, and source-cokernel descent give
+  the connecting homology map without a section. The result retains all
+  agreements and three native exactness witnesses; both endpoint-zero
+  windows and a nonsplit nonzero-boundary example pass. Its companion
+  serializer retains the complete selected result. The generic inclusion
+  monicity theorem, generic induced maps, full generic window proof, and
+  long-exact iteration remain explicit requirements of the active goal.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

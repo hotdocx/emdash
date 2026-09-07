@@ -707,3 +707,44 @@ Native zero extension retains its one computed zero row; formal endpoint
 consumers must carry the corresponding effective witnesses explicitly.
 The next architecture gate is the actual homology window and its comparison,
 cycle-factor, and source-boundary-descent constructions.
+
+## Native Homology Window And Remaining Generic Owners
+
+`algebra_polynomial_freyd_homology_window.ts` now constructs the actual
+five-term window and all three native exactness results. Its source and
+target remain the existing selected homology objects. Four comparison
+isomorphisms retain actual forward/inverse maps and both inverse agreements:
+`Coker(i_n) ⇄ C_n`, `A_(n-1) ⇄ Ker(p_(n-1))`,
+`Z_n(C) ⇄ Ker(gamma)`, and `Coker(alpha) ⇄ Coker(d^A_n)`.
+The alpha/gamma agreements identify the compared differentials with the
+actual complex differentials.
+
+The canonical target-cycle embedding induces
+`H_(n-1)(A) → Coker(d^A_n)` by the existing homology cokernel's universal
+property. The native normality operations compute its monicity witness and
+factor the compared snake arrow through it. The actual source homology
+cokernel then descends the resulting map. Both selected factors retain their
+tests and reconstructions. This requires no global raw lift into target
+cycles, which would be too strong in a nonsplit setting.
+
+Outside-support complex terms reuse the sequence's zero presentation, but
+the homology pair retains the true neighboring differential (for example
+`0 → C_top`). Replacing that pair by the cached all-zero row would give the
+wrong component endpoints for an induced map. The selected outside homology
+retains its checked identity-equals-zero agreement instead.
+
+The eight tests include the nonsplit two-degree example, a rank-`1,2,1`
+three-degree example with a genuinely nonzero source boundary, all inverse
+and reconstruction checks, both endpoint-zero windows, length-zero support,
+negative input guards, and deterministic complete serialization sensitive to
+the descent witness. Together with sixteen immediate regressions, 24 tests
+pass; root typecheck and affected-file lint pass too.
+
+The remaining generic prerequisites are real owner gaps, not failed native
+computations. The source contains category-generic homology but only native
+and witnessed Freyd induced homology maps. Generic kernel/cokernel map
+construction must therefore be added in row 7C. Row 7B must construct the
+canonical homology inclusion and prove monicity from the generic Abelian
+owners; row 7D must derive target factor/source descent and all three
+exactness witnesses from the completed generic snake theorem. Native
+decisions are not substitutes for those proofs, and row 7 is not complete.

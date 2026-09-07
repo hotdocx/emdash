@@ -299,6 +299,7 @@ import './v3_2_algebra_polynomial_freyd_homology_tests';
 import './v3_2_algebra_polynomial_freyd_homology_category_tests';
 import './v3_2_algebra_polynomial_freyd_bounded_complex_tests';
 import './v3_2_algebra_polynomial_freyd_bounded_short_exact_tests';
+import './v3_2_algebra_polynomial_freyd_homology_window_tests';
 import './v3_2_algebra_polynomial_freyd_functorial_homology_tests';
 import './v3_2_algebra_formal_freyd_homology_tests';
 import './v3_2_algebra_formal_freyd_snake_tests';
