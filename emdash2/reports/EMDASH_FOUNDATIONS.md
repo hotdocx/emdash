@@ -3963,6 +3963,17 @@ turn native decidability into a closed formal Abelian-category capability.
 The degree-zero/one rows and remaining tail are readable projections, and
 the exactness projection cannot be assigned to an unrelated homology value.
 
+The canonical homology inclusion also has a generic proof. More generally,
+if `f = k b` and `k` is monic, cokernel universality constructs
+`j:Coker(b) → Coker(f)` with `j q_b = pi_f k`. Push out `k` along `q_b`.
+The opposite injection is monic by Abelian stability, while the other
+injection kills `f` and therefore factors through its cokernel. Cancelling
+epic `q_b` identifies that monic injection as a composite through `j`, so
+`j` is monic. Specializing to the actual cycle embedding and boundary proves
+`H → Coker(dNext)` monic without changing the selected homology or choosing
+a splitting. The checked one-capability observation delegates to a
+PA-explicit proof; all of its operations and paths are transparent.
+
 The native five-term homology window is now a separate whole operation. It
 compares the selected snake endpoints with source cycles and the target
 differential cokernel, factors along the canonical inclusion of target
@@ -3971,7 +3982,7 @@ cokernel. This avoids choosing a global raw target-cycle lift or splitting
 an epimorphism. The result retains all four comparison isomorphisms, both
 universal factors and their tests/reconstructions, and three native exactness
 results. A nonsplit three-degree example has a nonzero source boundary and a
-nonzero connecting map. The corresponding generic inclusion/induced-map and
+nonzero connecting map. The corresponding generic induced-map and window
 exactness proofs remain required; native decisions do not supply those
 theorems automatically.
 

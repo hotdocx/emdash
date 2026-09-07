@@ -86,6 +86,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   homology as that boundary lift's cokernel. Its whole snapshot and readable
   projections reuse one `PreAbelianCategory`; it adds no image equality,
   exactness claim, manual diagram, rewrite, or unification rule.
+  The cokernel-composite comparison modules construct the induced map
+  `Coker(b) → Coker(k b)` from the original whole cokernels and prove it
+  monic when `k` is monic in an Abelian category. A selected pushout supplies
+  its monic factor. The homology-inclusion modules specialize this to the
+  actual cycles/boundary and prove `H → Coker(dNext)` monic, preserving the
+  original homology. The internal proof keeps PA/normality explicit and has
+  a transparent one-Abelian-capability wrapper; no new rule or axiom is used.
   `emdash3_2_short_exact_sequences.lp` defines generic exactness as epicity of
   that actual selected boundary lift. A short exact triple additionally
   retains monicity of the incoming arrow and epicity of the outgoing arrow;

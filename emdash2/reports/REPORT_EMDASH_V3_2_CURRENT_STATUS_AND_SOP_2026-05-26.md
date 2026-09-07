@@ -433,6 +433,16 @@ belongs to the owning implementation plan rather than to standing guidance.
   epic cancellation proves both inverse laws. The reviewer checks the actual
   factors/reconstructions and rejects interpreting the inverse comparison as
   a section into the middle object. No object equality or global rule is added.
+- The `emdash3_2_cokernel_composite_*` modules derive the comparison
+  `Coker(b) → Coker(f)` from `f = k b`, with its actual cokernel
+  reconstruction. Pushing out `k` along the original `b`-cokernel projection
+  constructs `s` with `s j = inj2`; generic monic-factor cancellation and
+  existing Abelian pushout stability prove `j` monic when `k` is monic.
+  `emdash3_2_homology_cokernel_inclusion*` and the thin Abelian wrapper
+  specialize to the actual homology cycles/boundary, proving its canonical
+  `H → Coker(dNext)` inclusion monic. The PA-explicit proof and common
+  literal preadditive presentation avoid measured direct-bundle conversion
+  timeouts. No comparison axiom, object equality, rewrite, or unifier is added.
 - The whole short-exact-row, kernel-row, selected-row, and normalization
   modules package actual pair-indexed evidence. A supplied whole kernel of
   an epic arrow gives a short exact row by identity covers; the homology in
@@ -808,8 +818,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   agreements and three native exactness witnesses; both endpoint-zero
   windows and a nonsplit nonzero-boundary example pass. Its companion
   serializer retains the complete selected result. The generic inclusion
-  monicity theorem, generic induced maps, full generic window proof, and
-  long-exact iteration remain explicit requirements of the active goal.
+  monicity theorem is now provided by the separate generic modules; generic
+  induced maps, the full generic window proof, and long-exact iteration
+  remain explicit requirements of the active goal.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

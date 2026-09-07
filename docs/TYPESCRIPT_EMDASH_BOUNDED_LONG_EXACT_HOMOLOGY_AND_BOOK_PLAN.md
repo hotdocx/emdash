@@ -631,7 +631,7 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
-| `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | pending | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
+| `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; validated local checkpoint pending | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | pending owner-position construction | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -712,6 +712,8 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-033` | accepted after formal exact-row consumers | Store the existing whole witnessed homology in each raw row and index its exactness by that actual value. Iterate rows on the actual projected components of the two retained chain maps; a dependent whole sequence owns both maps and the resulting evidence. Wrong-homology and wrong-map consumers must fail. Native row computation and formal effective evidence remain distinct interfaces. |
 | `D-LEH-034` | accepted after native window tests; generic proof required | Compare the actual snake endpoints with source cycles and the target differential cokernel, factor along the canonical homology inclusion, then descend by the actual source homology cokernel. Do not require a global raw target-cycle lift or choose an epimorphism section. All four isomorphisms retain both inverse agreements; all factors retain their effective tests and reconstructions. |
 | `D-LEH-035` | accepted after endpoint-window tests | Extend complex terms by the retained zero presentation, but compute outside-support homology with its true neighboring differentials. In particular, `0 → C_top` is not the unrelated `0 → 0` pair. Retain an identity-equals-zero agreement for the resulting outside homology object. |
+| `D-LEH-036` | accepted after generic cokernel/homology consumers | Derive the monic cokernel-composite comparison through a selected pushout factor and generic monic-factor cancellation. Specialize to the actual homology cycles/boundary; no pushout isomorphism, object transport, or monicity axiom is needed. |
+| `D-LEH-037` | accepted after bounded owner-position probes | Use one literal preadditive presentation in the Abelian cokernel wrapper, and prove homology monicity with PA/normality explicit before exposing a thin bundled observation. The shorter-alias and direct bundled alternatives each timed out in quiet and warning-enabled checks; the aligned/PA-explicit versions and actual cancellation consumers pass with no new rule or unifier. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -974,6 +976,57 @@ that commit. No generic theorem is claimed complete by it; row 7B is the
 next dependency-ready proof tranche. The full persistent goal, including
 long-exact iteration, formal/categorical/proof-CAS consumers, and Chapter 31,
 remains active and unchanged in scope.
+
+The row-7B continuation starts from clean `ec3a7805` and a successful
+fresh-source `examples/abelian_fiber_pushout_stability.lp` baseline. First
+construct the cokernel-composite comparison for arbitrary actual whole
+cokernels and an explicit factorization path. Prove its monicity via a
+supplied actual pushout with monic opposite injection; the Abelian wrapper
+must instantiate that evidence using the existing selected pushout and
+stability theorem. Finally specialize to the actual homology cycles and
+boundary. This separates the generic universal-property calculation from
+bundled capability projections, without new axioms or computation rules.
+
+The generic construction is now promoted in seven rule-free modules:
+`emdash2/emdash3_2_cokernel_composite_comparison.lp`,
+`emdash2/emdash3_2_cokernel_composite_pushout.lp`,
+`emdash2/emdash3_2_cokernel_composite_monic.lp`,
+`emdash2/emdash3_2_abelian_cokernel_composite_monic.lp`, and the three
+`homology_cokernel_inclusion`/`abelian_homology_cokernel_inclusion` modules.
+The comparison and its reconstruction are selected from the existing whole
+cokernels. The pushout factor reconstructs the second injection after
+cancelling the original cokernel projection, and monic-factor cancellation
+supplies the desired monicity. The homology instance uses its original whole
+cycles and boundary cokernel. The public theorem again accepts one Abelian
+capability, not extra monicity evidence for the homology map.
+
+The direct short-alias Abelian comparison probe exceeded 90 seconds both
+quietly (`125913`) and with warnings (`130301`). Spelling the common literal
+preadditive presentation consistently passes. Direct bundled homology
+instantiation also exceeded 90 seconds (`130457`/`130752`); the PA-explicit
+proof and its thin bundled wrapper pass. These are constructor/endpoint
+presentation fixes, not weakened statements, opaque sealing, new equality
+rules, or evidence that the mathematics is unavailable. All failed and
+successful variants remain in `emdash2/tmp/probes/` with their logs.
+
+The two promoted reviewers have thirteen assertions, including both
+reconstruction equations, the generic and Abelian monicity statements,
+the literal actual-homology comparison, a usable monic cancellation, and
+negative wrong-cokernel/wrong-homology endpoints. Quiet source checks pass in
+`emdash2/logs/probes/cokernel_composite_comparison-20260907-131545.log` and
+`emdash2/logs/probes/homology_cokernel_inclusion-20260907-131546.log`;
+warning-enabled source checks pass in the corresponding `131709` and
+`131708` logs. The inherited inventory remains `1,217/169`, plus the expected
+negative-test diagnostics. All nine strict audits find zero rule clauses.
+Source and health registration use the ordinary route; no new isolated gate
+or unrelated aggregate is needed. The next semantic row is 7C, generic
+induced homology maps. The full window exactness proof remains row 7D.
+The ordinary `scripts/check.sh` route passes on the final homology-inclusion
+module and its complete source dependency closure. All ten focused health
+dispatcher tests, strict fresh catalog, source TOC, shell syntax, active
+references, report headers, and exact whitespace checks pass. The unchanged
+native window retains its 24-test/typecheck/lint evidence. The global health
+snapshot remains at the earlier documented unrelated aggregate boundary.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

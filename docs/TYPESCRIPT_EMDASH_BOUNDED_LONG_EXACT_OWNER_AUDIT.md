@@ -748,3 +748,34 @@ canonical homology inclusion and prove monicity from the generic Abelian
 owners; row 7D must derive target factor/source descent and all three
 exactness witnesses from the completed generic snake theorem. Native
 decisions are not substitutes for those proofs, and row 7 is not complete.
+
+## Generic Monicity Of The Actual Homology Inclusion
+
+Row 7B is now implemented independently of native decisions. For arbitrary
+whole cokernels and `f = k b`, the comparison `j:Coker(b) → Coker(f)` is
+the selected colift of `pi_f k`. Its annihilation and reconstruction paths
+are derived. An actual pushout of `k` and `q_b` gives a cokernel factor
+`s:Coker(f) → PO`; cancelling epic `q_b` proves `s j = inj2`. The generic
+monic-factor lemma makes `j` monic when that injection is monic, and the
+Abelian wrapper supplies its monicity by the existing pushout-stability
+theorem. No pushout isomorphism is required.
+
+The homology specialization passes its actual cycle embedding, boundary,
+boundary reconstruction, and original whole boundary cokernel to this
+theorem. It constructs the same canonical inclusion as the native window
+and proves it monic. The public one-Abelian-capability observation delegates
+to a PA/normality-explicit proof, following the earlier image-bimorphism
+discipline. No different homology object or equality transport is introduced.
+
+Two rejected presentation variants reached 90 seconds in both quiet and
+warning-enabled checks: a shorter preadditive alias in the Abelian cokernel
+wrapper, and direct bundled homology instantiation. The accepted common
+literal preadditive form and PA-explicit stage pass, as do the ordinary
+bundled observation and its cancellation consumer. These findings concern
+conversion cost, not the theorem or runtime-rule orientation.
+
+The thirteen assertions also reject a comparison at another cokernel object
+and an inclusion at another whole homology object. Promoted quiet and
+warning-enabled source checks pass; the inherited inventory is unchanged at
+`1,217/169` and nine strict audits find no rule clauses. Generic induced
+homology maps and complete window exactness remain required in rows 7C/7D.
