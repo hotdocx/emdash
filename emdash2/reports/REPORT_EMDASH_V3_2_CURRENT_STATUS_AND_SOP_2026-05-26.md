@@ -733,6 +733,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   first interior-degree projection delegates to
   `CommRingFreydWitnessedHomologyAt`; no second homology or quotient grammar is
   introduced.
+- `emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp`: rule-free
+  whole maps between the actual two bounded Freyd complexes. A recursive
+  tail retains each raw component and its presentation-morphism agreement;
+  the first two stored laws directly form the existing one-degree
+  `CommRingFreydHomologyChainMap`. Nil/cons, component/tail projections,
+  one-degree law projections, and a wrong-endpoint guard are checked. This
+  is not a new square primitive or a closed formal Abelian capability.
 - `emdash3_2_commutative_algebra_freyd_images.lp`: rule-free witnessed formal
   image/coimage layer. It derives cokernel-of-kernel coimage,
   kernel-of-cokernel image, their comparison, and `f = i chi p`. Explicit
@@ -775,6 +782,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   The whole bounded chain-map extension retains every component square and
   iterates the one-degree induced-map owner at a selected degree; identity and
   failed-square consumers are explicit.
+- `src/v3_2/algebra_polynomial_freyd_bounded_short_exact.ts`: a whole native
+  degreewise short-exact sequence over three existing bounded complexes and
+  their retained inclusion/projection chain maps. It computes each row using
+  the existing short-exact operation and stores one zero row for explicit
+  extension. The companion serialization module retains actual raw
+  agreements and bounded-free provenance. The nonsplit polynomial consumer
+  already feeds the existing nonzero snake map; its homology descent and
+  complete long-exact window remain downstream.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

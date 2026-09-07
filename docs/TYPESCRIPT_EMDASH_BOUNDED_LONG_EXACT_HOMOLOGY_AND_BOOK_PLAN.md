@@ -625,8 +625,10 @@ was introduced to get a passing target.
 | `LEH-SHORT-EXACT-COKERNEL-5B` | complete; checkpoint `18f2ba33` | exactness, normal epi colifting, selected cokernel | canonical `Coker(i) -> D` comparison isomorphism, inverse, and reconstruction |
 | `LEH-SHORT-EXACT-SELECTED-5C` | complete; checkpoint `521af261` | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
 | `LEH-BOUNDED-SHORT-EXACT-6` | in progress via 6A–6B | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
-| `LEH-BOUNDED-SHORT-EXACT-NATIVE-6A` | complete; local checkpoint follows validation below | existing bounded Freyd complexes, chain maps, and short-exact triple operation | checked whole finite sequence, retained input chain maps and row witnesses, zero extension, deterministic serialization |
-| `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | pending owner audit | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
+| `LEH-BOUNDED-SHORT-EXACT-NATIVE-6A` | complete; checkpoint `8a32323b` | existing bounded Freyd complexes, chain maps, and short-exact triple operation | checked whole finite sequence, retained input chain maps and row witnesses, zero extension, deterministic serialization |
+| `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | in progress through 6B1 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
+| `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; validated local checkpoint pending | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
+| `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | pending | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
@@ -702,6 +704,7 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-029` | accepted after endpoint-comparison probes | The actual boundary gives the kernel comparison; monic-factor cancellation and constructive balancedness construct its inverse. The cokernel comparison uses its ordinary colift, while exactness makes the cokernel projection a normal-epi test for the outgoing arrow. Its selected colift and common-epic cancellation give the inverse comparison without a section into the middle object. |
 | `D-LEH-030` | accepted after normalization probes | Construct a kernel row from its existing whole kernel and identity exactness covers. Use a single literal kernel-object presentation throughout the selected image row and its isomorphism. Build the source comparison fibre generically at PA/f before specializing to a bundled short exact row; this preserves the actual-row dependency and avoids the measured composite-compatibility conversion timeout. |
 | `D-LEH-031` | accepted after native degreewise consumers | Retain the two existing bounded chain maps and compute each short-exact row through the existing operation. Compare their endpoints by selected presentations and raw differentials, not object identity alone or quotient congruence. Store one zero row for explicit extended lookup. Full serialization retains raw agreements and bounded-free provenance; it excludes only derived Gröbner caches, following the existing presentation convention. |
+| `D-LEH-032` | accepted after formal chain-map consumers | Iterate raw presentation morphisms and their existing agreements over the actual two formal complex tails. The single-square name is transparent; two stored laws package directly as the existing one-degree homology chain map. Keep formal short-exact row evidence capability-indexed and downstream of this iterator. |
 
 ### Short-exact endpoint checkpoint evidence
 
@@ -795,6 +798,42 @@ also pass on the final source. The lost pre-recovery process handle was first
 checked and found no longer running; only these focused suites were rerun.
 No Lambdapi, book, public-barrel, shared LF, or repository aggregate change is
 part of this native checkpoint.
+
+The formal iterator experiment follows
+`emdash3_2_commutative_algebra_bounded_free_chain_maps.lp`, replacing ranks
+and matrices by actual selected presentations and raw presentation morphisms.
+Each step stores the same presentation-morphism agreement used by the
+one-degree functorial-homology owner; the single-square name is a transparent
+alias, not a new square primitive. Its first two laws must package directly
+as `CommRingFreydHomologyChainMap`. Nil/cons, whole component/tail beta tests,
+and a wrong-endpoint negative consumer are the acceptance tests before
+proceeding to row exactness. No new computation rules are planned.
+
+That iterator is now promoted as
+`emdash2/emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp`, with
+`examples/commutative_ring_freyd_bounded_chain_maps.lp`. All twelve assertions
+pass directly from source in quiet and warning-enabled modes. Eleven are
+positive beta/consumer checks and one rejects a wrong target. The final logs
+are `emdash2/logs/probes/commutative_ring_freyd_bounded_chain_maps-20260907-121257.log`
+and `emdash2/logs/probes/commutative_ring_freyd_bounded_chain_maps-20260907-121349.log`.
+The exact imported warning inventory is `1,223/169`, identical to the
+pre-existing bounded Freyd reviewer checked in
+`emdash2/logs/probes/commutative_ring_freyd_bounded_complexes-20260907-121348.log`.
+This dependency closure differs from the generic normalization closure's
+`1,217/169`; there is no warning increase from the new module. ANSI color
+codes are stripped in the read-only warning-summary pipeline so its strict
+critical-pair parser can classify all inherited pairs. The negative type
+test emits its expected unsolved-equation diagnostic separately.
+
+Both strict source/reviewer audits find zero rule clauses. Ordinary source
+and health registration now include the module; reviewer discovery is
+automatic. The global health snapshot remains deliberately stale at the
+previously recorded, unrelated aggregate boundary. Formal exact-row iteration
+is the next subrow; no complete formal degreewise short-exact structure or
+long-exact homology window is claimed by the chain-map checkpoint.
+The ten focused health-dispatch tests, shell syntax, fresh strict catalog,
+source TOC, active-reference/report-header checks, and exact whitespace review
+also pass. No compilation objects remain in the worktree.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

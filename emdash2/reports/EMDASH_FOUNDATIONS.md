@@ -3934,6 +3934,24 @@ presentation/differential/agreement spine, and its first interior-degree
 projection delegates to witnessed homology. Indexing therefore iterates the
 universal construction instead of redefining it.
 
+Formal bounded Freyd maps now follow both actual complex tails and retain one
+raw presentation morphism and its agreement at every step. The single-square
+name unfolds to the same presentation-morphism agreement already used by
+one-degree functorial homology. Projecting the first two laws gives the
+existing one-degree chain-map data directly, rather than reconstructing a
+manual diagram or changing the homology operation.
+
+A native degreewise short-exact sequence retains three such complexes, the
+existing inclusion/projection chain maps with their agreements, and the
+computed whole short-exact triple in every degree. Its separately named
+extended lookup reuses one stored zero row outside the finite support. Input
+endpoints are compared as selected presentations with the same raw
+differentials: replacing a differential by a congruent representative would
+require a separate comparison before its old raw agreement could be reused.
+The nonsplit polynomial test already produces a nonzero snake arrow; descent
+to the selected homology objects and full long-exact assembly are subsequent
+layers, not claims made by this sequence package.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

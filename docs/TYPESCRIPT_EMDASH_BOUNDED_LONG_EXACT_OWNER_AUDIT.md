@@ -656,3 +656,28 @@ The one-degree `CommRingFreydHomologyChainMap` already owns the two raw square
 agreements. Row 6B must iterate that same agreement notion at actual bounded
 spine projections and retain explicit witnessed exactness, without promoting
 native decisions to a closed formal Abelian category.
+
+## Formal Bounded Chain-Map Iterator
+
+`emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp` fills that audited
+gap. `CommRingFreydChainMapTail` follows both actual bounded complex tails,
+selects the next raw component, retains the ordinary presentation-morphism
+agreement, and recurses at the projected endpoints. The whole map stores its
+first components, first law, and tail; in length zero it is simply an ordinary
+raw presentation morphism. Constructors and projections are transparent.
+
+`CommRingFreydChainMapSquare` is an alias for the same agreement used by the
+existing one-degree functorial-homology owner. It introduces no new square
+datatype. `comm_ring_freyd_chain_map_first_homology` directly pairs two stored
+agreements as `CommRingFreydHomologyChainMap`; both existing law projections
+compute to the original inputs. Thus the first consumer exercises real owner
+computation, not only acceptance of declarations.
+
+Twelve reviewer assertions pass in quiet and warning-enabled fresh-source
+checks, including nil/cons, whole components/tail, both homology laws, and a
+wrong-target negative. The inherited `1,223/169` warning inventory matches
+the old bounded Freyd reviewer exactly. It is not the different generic
+normalization closure's `1,217/169`. No rule clauses, new axioms, opaque
+bridges, or quotient decoders were added. The next formal operation must
+retain short-exact evidence on the actual inclusion/projection components;
+the native ability to compute it is not itself a formal closed capability.

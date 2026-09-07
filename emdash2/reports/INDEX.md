@@ -2,7 +2,17 @@
 
 Date: 2026-09-02
 
-`../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` is the active
+`../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
+is the active continuation beyond the completed Abelian, homology, and snake
+connecting plans. The complete generic six-term snake exact result and
+short-exact-row normalization are implemented. The current bounded-complex
+tranche supplies native degreewise short-exact sequences and formal bounded
+Freyd chain maps; formal row iteration, homology-window descent/comparisons,
+full bounded long-exact assembly, cross-layer consumers, and Chapter 31 remain
+active requirements. The companion owner audit records these precise
+boundaries; no closed formal quotient effectiveness is claimed.
+
+`../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` records the completed
 constructive continuation from the completed Freyd pre-Abelian boundary. It
 targets witness-retaining lifts along monomorphisms and colifts along
 epimorphisms, derived image/coimage computation, the coimage–image comparison

@@ -267,6 +267,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_functorial_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_bounded_complexes.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp)
   files+=(emdash3_2_commutative_algebra_freyd_images.lp)
   files+=(emdash3_2_gray_interchanger_orientation.lp)
   files+=(emdash3_2_gray_transformation_graph.lp)

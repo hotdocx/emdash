@@ -171,6 +171,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   recursive bounded spine. Its first interior-degree projection delegates to
   witnessed one-degree homology; it is not a second homology theory and adds
   no rule or unifier.
+  `emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp` follows both
+  actual bounded complex tails, retaining raw components and the existing
+  presentation-morphism agreements. Its first two laws form the existing
+  one-degree homology chain-map data directly; no new square primitive or
+  quotient decoder is introduced.
   `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
   cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
   factorization. Given explicit comparison monic/epic agreements, it computes
