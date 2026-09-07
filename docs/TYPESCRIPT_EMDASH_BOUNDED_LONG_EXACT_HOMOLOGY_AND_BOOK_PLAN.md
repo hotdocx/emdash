@@ -628,7 +628,7 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-NATIVE-6A` | complete; checkpoint `8a32323b` | existing bounded Freyd complexes, chain maps, and short-exact triple operation | checked whole finite sequence, retained input chain maps and row witnesses, zero extension, deterministic serialization |
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
-| `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; validated local checkpoint pending | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
+| `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-NATIVE-9` | pending | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
@@ -873,6 +873,18 @@ checks, and exact whitespace review pass for this tranche. An ignored-file
 inclusive scan confirms that no Lambdapi compilation objects remain. The
 unchanged native layer carries forward its 23-test/typecheck/lint evidence;
 no unrelated aggregate or publication is performed.
+
+The continuation checkpoint chain is `8a32323b` (native sequence),
+`3b87d386` (formal bounded maps), and `10f57b4b` (formal degreewise exact
+rows). The next dependency-ready semantic row is `LEH-WINDOW-7`; the
+persistent objective remains active. Its first owner review should retain
+the actual five homology results, reuse the existing induced-map operation
+for the three ordinary arrows, and reuse the actual snake result for the
+connecting arrow. In particular, the snake's `Ker(gamma)` and `Coker(alpha)`
+must not be silently treated as the source/target homology objects. Compare
+the row endpoints, factor into the target homology, and descend through the
+source boundary at the existing kernel/cokernel/normality owners. Only then
+package the three interior exactness witnesses and proceed to iteration.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
