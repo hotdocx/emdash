@@ -630,7 +630,7 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
 | `LEH-WINDOW-7` | in progress through native row 7A; generic proofs remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
-| `LEH-WINDOW-NATIVE-7A` | complete; validated local checkpoint pending | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
+| `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | pending | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | pending owner-position construction | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
@@ -968,6 +968,12 @@ monic. Specialize to the actual homology cycles/boundary. This avoids both
 a second homology object and the need to package an unnecessary pushout
 isomorphism. It is the next owner-position construction, not yet a theorem
 claimed by the native checkpoint.
+
+Native implementation checkpoint: `cae22d6b`. The worktree was clean after
+that commit. No generic theorem is claimed complete by it; row 7B is the
+next dependency-ready proof tranche. The full persistent goal, including
+long-exact iteration, formal/categorical/proof-CAS consumers, and Chapter 31,
+remains active and unchanged in scope.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

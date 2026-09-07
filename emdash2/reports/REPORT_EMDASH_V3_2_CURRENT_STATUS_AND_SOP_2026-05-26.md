@@ -797,8 +797,8 @@ belongs to the owning implementation plan rather than to standing guidance.
   the existing short-exact operation and stores one zero row for explicit
   extension. The companion serialization module retains actual raw
   agreements and bounded-free provenance. The nonsplit polynomial consumer
-  already feeds the existing nonzero snake map; its homology descent and
-  complete long-exact window remain downstream.
+  already feeds the existing nonzero snake map. The separate homology-window
+  module below owns homology descent and the native five-term window.
 - `src/v3_2/algebra_polynomial_freyd_homology_window.ts` now constructs one
   whole native five-term window on the existing selected homologies. Four
   explicit endpoint isomorphisms compare the actual snake objects with
