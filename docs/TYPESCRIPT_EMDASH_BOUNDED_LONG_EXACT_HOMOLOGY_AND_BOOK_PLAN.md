@@ -688,7 +688,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
-| `LEH-NATIVE-SNAKE-RESULT-10A` | complete; focused gates green | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
+| `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1405,6 +1405,17 @@ Workspace validation, root typecheck, affected-file lint, and whitespace
 review pass. No formal owner, trusted Core, public barrel, or unrelated
 aggregate changed. Categorical operation registration/lowering is now the
 next operational consumer; full proof–CAS integration remains pending.
+
+Native six-term checkpoint: `1b870fe4`; the worktree was clean after it.
+Continue row 10 by following the existing homology/snake category models,
+reference-operation schemas, and whole-operation lowering pattern. Register
+the bounded-short-exact constructor, homology connecting/window, native
+six-term result, and bounded long-exact result, plus retained-result
+observations where the compiled consumer needs them. Preserve existing
+primitive methods and avoid duplicate inherited method/lowering identities
+when combining the homology and snake capabilities. The new six-term role
+may consume the existing whole connecting result as a graph dependency;
+this does not mean taking an arbitrary connecting arrow as an axiom.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
