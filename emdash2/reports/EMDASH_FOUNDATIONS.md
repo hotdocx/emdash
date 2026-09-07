@@ -3546,6 +3546,20 @@ kernel objects. A short exact triple packages this witness together with
 `IsMonic(i)` and `IsEpic(p)`. The zero composite remains the original internal
 chain-pair fibre, so no second diagram or handwritten square is stored.
 
+An arbitrary short exact triple now has canonical endpoint comparison
+isomorphisms. The boundary `b:A -> Ker(p)` is epic by exactness. Since
+`k b = i` and `i` is monic, `b` is monic as well; constructive balancedness
+supplies its inverse. This is the same selected boundary already used by
+homology, with its original reconstruction.
+
+For the other endpoint, cokernel universality gives `q:Coker(i) -> D`
+with `q c_i = p`. Precomposing `c_i k` with epic `b` gives
+`c_i k b = c_i i = 0`, so `c_i k = 0`. Thus `c_i` is an actual normal-epi
+test for `p`. Its selected colift `r:D -> Coker(i)` satisfies `r p = c_i`.
+Cancelling epic `p` and epic `c_i` proves `q r = id` and `r q = id`.
+The result retains these two selected arrows as `IsoEvidence`; it does not
+select a section `D -> B` or transport through an assumed object equality.
+
 The generic Abelian snake construction is now selected by the same universal
 operations. From one composable triple
 `A --delta--> B --beta--> X --lambda--> D` and its triple-zero point,

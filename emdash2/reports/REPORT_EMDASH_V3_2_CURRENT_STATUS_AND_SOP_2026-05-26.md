@@ -421,6 +421,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   additionally retains `IsMonic` for the incoming arrow and `IsEpic` for the
   outgoing arrow. No image/kernel object equality or separate diagram carrier
   is introduced.
+- `emdash3_2_iso_evidence_constructors.lp` and
+  `emdash3_2_mono_epi_comparisons.lp` provide transparent isomorphism
+  packaging, monic-factor cancellation, and inverse comparisons through a
+  common monic or epic arrow. The short-exact kernel/cokernel comparison
+  modules use these and existing normality to construct endpoint
+  `IsoEvidence` for any `ComputationalShortExactTriple`. The kernel
+  comparison is the actual epic boundary, made monic by its reconstruction
+  through the monic incoming arrow. The cokernel comparison and its inverse
+  are selected colifts; exactness proves the inverse's normal-epi test, and
+  epic cancellation proves both inverse laws. The reviewer checks the actual
+  factors/reconstructions and rejects interpreting the inverse comparison as
+  a section into the middle object. No object equality or global rule is added.
 - `emdash3_2_exactness_covers_foundation.lp`,
   `emdash3_2_exactness_covers.lp`, and
   `emdash3_2_exactness_covers_from_exact.lp`: rule-free constructive

@@ -620,7 +620,10 @@ was introduced to get a passing target.
 | `LEH-SNAKE-EXACT-THIRD-4C` | complete; checkpoint `e19ac569` | pushout, final normal-mono factor, connecting map | `ComputationalExactAt` at `Coker(alpha)` |
 | `LEH-SNAKE-EXACT-FOURTH-4D` | complete; checkpoint `aa7a3a06` | canonical kernel exactness and final two snake maps | `ComputationalExactAt` at `Coker(beta)` |
 | `LEH-SNAKE-EXACT-RESULT-4E` | complete; checkpoint `2ca9ac9c` | 4A–4D and whole six-term snapshot | one whole exact result whose exactness witnesses depend on its actual stored arrows and zero points |
-| `LEH-SHORT-EXACT-NORMAL-5` | pending | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
+| `LEH-SHORT-EXACT-NORMAL-5` | in progress via 5A–5C | short exactness, image/coimage, normality | selected short-exact-row normal form and canonical arbitrary-row comparison isomorphisms |
+| `LEH-SHORT-EXACT-KERNEL-5A` | complete; validated endpoint checkpoint pending | selected boundary and short-exact evidence | canonical `A -> Ker(p)` comparison isomorphism and reconstruction |
+| `LEH-SHORT-EXACT-COKERNEL-5B` | complete; validated endpoint checkpoint pending | exactness, normal epi colifting, selected cokernel | canonical `Coker(i) -> D` comparison isomorphism, inverse, and reconstruction |
+| `LEH-SHORT-EXACT-SELECTED-5C` | in progress; selected-row/image-iso probes pass, compatibility assembly being refined | 5A–5B and canonical image/kernel row | selected `Im(i) -> B -> Coker(i)` row and whole arbitrary-row usability comparison |
 | `LEH-BOUNDED-SHORT-EXACT-6` | pending | row 5 and bounded chain maps | degreewise short-exact bounded-complex sequence with retained chain squares |
 | `LEH-WINDOW-7` | pending | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-LONG-EXACT-8` | pending | row 7 and finite exact spine | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -694,6 +697,31 @@ one fresh-source target: `emdash2/logs/probes/abelian_snake_exact_fourth_reviewe
 | `D-LEH-026` | accepted after whole-result type audit | The exactness data of a whole six-term result must depend on its actual projected arrows and zero points. Define each chain pair from those projections and use the existing homology constructor on that pair. Do not attach exactness of the fixed canonical maps to an unconstrained arbitrary `AbelianSnakeSixTermResult`. Canonical projection reduction should connect the selected instance to the four completed proofs. |
 | `D-LEH-027` | accepted after fourth-position probes | Extend the `mu`-annihilated test `psi c_beta` through `lambda`; epic `epsilon` makes the coextension kill `gamma`, and epic `c_beta` proves the reconstruction after its selected gamma-cokernel colift. The full reviewer fits one fresh-source invocation, so this tranche uses ordinary source/example/health registration rather than the special multi-branch gate. |
 | `D-LEH-028` | accepted after canonical exact-result probes | Keep the actual snapshot-indexed exactness family. Its canonical pairs compute to the old pairs; record those identities by reflexivity and reindex exactness at that small data owner before opening the large predicate. This retains the selected homology and ordinary reflexivity beta while avoiding the measured direct-assignment/type-comparison timeout. No semantic arrow or object bridge is postulated. |
+| `D-LEH-029` | accepted after endpoint-comparison probes | The actual boundary gives the kernel comparison; monic-factor cancellation and constructive balancedness construct its inverse. The cokernel comparison uses its ordinary colift, while exactness makes the cokernel projection a normal-epi test for the outgoing arrow. Its selected colift and common-epic cancellation give the inverse comparison without a section into the middle object. |
+
+### Short-exact endpoint checkpoint evidence
+
+Rows 5A and 5B now have six promoted rule-free modules and the independent
+`examples/short_exact_comparisons.lp` reviewer. All seven assertions pass from
+source in quiet and warning-enabled modes. They check the selected kernel
+comparison, both cokernel comparison arrows, and the actual reconstruction
+equations; the negative type guard prevents calling the inverse comparison
+a section into the middle object. The inherited warning inventory is exactly
+`1,217/169`; the extra unsolved-equation message belongs to that successful
+`assertnot`. Logs are
+`emdash2/logs/probes/short_exact_comparisons-20260907-102411.log` and
+`emdash2/logs/probes/short_exact_comparisons-20260907-102904.log`.
+Seven strict source/reviewer audits, the nine focused health tests, shell
+syntax, catalog/TOC, and report/link checks pass. These files use ordinary
+checker and health registration; no unrelated aggregate was run.
+
+Row 5C remains active in the ignored `short_exact_*` probes. The selected
+row, PA-explicit monic-image comparison, normalization carrier, projections,
+and canonical isomorphisms check. The compatibility-point assembly still
+requires an owner-position refinement. The next probe constructs a kernel
+row from its existing whole kernel value, using identity exactness covers,
+so the row and the image isomorphism can share that same owner. No object
+equality assumption or weaker normalization result is being substituted.
 
 ## Baseline And Validation Policy
 

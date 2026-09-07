@@ -557,3 +557,30 @@ kernel row and epicity of the selected cokernel projection. The source
 comparison with `A` can use the kernel factor of `i` and the normal-mono
 lift of the image embedding along `i`, with monic cancellation giving the
 inverse laws. These are the next owner-position probes, not completed claims.
+
+## Short-Exact Endpoint Comparison Result
+
+The kernel and cokernel endpoint comparisons are implemented. For the kernel,
+the existing boundary `e:A -> Ker(p)` is epic by the supplied exactness and
+monic because `k e = i` with `i` monic. Constructive balancedness returns its
+isomorphism evidence. For the cokernel, the selected colift
+`q:Coker(i) -> D` has `q c_i = p`; the normal-epi test `c_i k = 0` is
+derived by cancelling epic `e`. The selected inverse colift has `r p = c_i`,
+and cancellation through `c_i` and `p` proves the two inverse equations.
+
+The supporting constructor and cancellation modules remain generic and
+rule-free. The seven reviewer assertions check the selected forward/inverse
+arrows and their actual reconstruction equations, including a negative type
+guard against treating `r` as a section into `B`. Quiet and warning-enabled
+source checks pass, retaining `1,217` critical-pair and `169`
+replaceable-variable reports. The additional unsolved-equation diagnostic
+comes from that successful `assertnot` and is expected.
+
+The selected image row and the PA-explicit monomorphism-to-image isomorphism
+have successful probes. The generic whole normalization carrier uses two
+existing `HFiber` classifiers over the isomorphism forward-arrow maps, indexed
+by the actual normalized row. Its projections and canonical isomorphism
+observations check. Combining the canonical compatibility into those fibres
+still exceeds the bound in the current direct application; this is the
+remaining row-5C experiment, not an endpoint-comparison limitation or a reason
+to introduce object equality assumptions.

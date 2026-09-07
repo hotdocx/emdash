@@ -122,6 +122,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   explicitly monic and epic arrow using the normal-monomorphism lift of the
   codomain identity; it specializes to the canonical comparison when that
   bimorphism evidence is supplied.
+  The isomorphism-constructor and mono/epi-comparison modules provide
+  transparent packaging and cancellation lemmas. The short-exact comparison
+  modules construct `A -> Ker(p)` and `Coker(i) -> D` isomorphisms from an
+  arbitrary existing short exact pair. Their forward and inverse arrows are
+  the selected kernel/normal-epi factors; the latter inverse lands in
+  `Coker(i)`, never a chosen section into `B`. No object equality is assumed.
   `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` and
   `emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp` are the
   rule-free witnessed formal Construction 3.14/3.15 owners. The former
