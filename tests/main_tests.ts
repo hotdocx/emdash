@@ -303,6 +303,7 @@ import './v3_2_algebra_polynomial_freyd_homology_window_tests';
 import './v3_2_algebra_polynomial_freyd_homology_connecting_tests';
 import './v3_2_algebra_polynomial_freyd_long_exact_tests';
 import './v3_2_algebra_polynomial_freyd_snake_exact_tests';
+import './v3_2_algebra_polynomial_freyd_long_exact_category_tests';
 import './v3_2_algebra_polynomial_freyd_functorial_homology_tests';
 import './v3_2_algebra_formal_freyd_homology_tests';
 import './v3_2_algebra_formal_freyd_snake_tests';

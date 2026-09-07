@@ -884,6 +884,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   standalone entry point starts from a triple. No zero-endpoint or splitting
   assumption is added. Its full serializer and 22 focused tests qualify the
   native prerequisite for categorical/replay integration, which remains open.
+- The long-exact reference-operation/category modules now bind nine
+  ring-scoped whole operations into the existing categorical planner and
+  algebra-graph compiler. They preserve common inherited methods without
+  duplicates, expose universal-operation prerequisites, and compute complete
+  long-exact results and all-window reference snake families. Indexed and
+  connecting observations retain the original objects. Fifteen focused
+  category tests compare every direct/compiled binding and reject foreign
+  rings, schemas, missing capabilities, and unsupported method traces.
+  The compiler/engine/Core trust boundary is unchanged. A prospective dual
+  descriptor is metadata only; formal selected-equation replay/adoption is
+  the next layer, not already supplied by categorical execution.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

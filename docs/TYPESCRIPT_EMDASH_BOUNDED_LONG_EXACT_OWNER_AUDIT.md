@@ -949,3 +949,33 @@ retains universal factors and their reconstruction data. Seven new and
 fifteen adjacent tests pass, as do typecheck, affected-file lint, and
 workspace validation. This completes the native prerequisite, not the
 categorical registration, graph lowering, or proof–CAS replay integration.
+
+## Categorical bindings and compiled whole-result consumers (row 10)
+
+The long-exact reference-operation and category modules add nine ring-scoped
+operations with immutable whole-result schemas. They cover the constructors,
+retained observations, native six-term result, and an explicitly
+snake-method-specific all-window reference family. The latter preserves
+the original result and connecting constructions, rather than rebuilding
+the homological calculation. Unsupported trace kinds are rejected.
+
+The existing homology category supplies the common Abelian ancestors. Only
+the snake-owned methods/lowerings and final constructor are added before the
+new layer, so no duplicate inherited identities are silently discarded.
+Derived prerequisite plans expose existing kernel/cokernel, normality, and
+homology capabilities. Lowering binds whole algebra operations and leaves
+the generic compiler unchanged. The dual descriptor is prospective metadata,
+not an implemented cohomology operation or formal-category assertion.
+
+Eight new and seven neighboring category tests pass. All nine bindings have
+direct/compiled consumers, including the complete three-node
+sequence → long-exact → reference-family program and a retained-observation
+program. Full serialized data agrees, and the observed objects are the
+original stored values. Ring/schema/method-tag and capability failures are
+checked. Typecheck, affected-file lint, and workspace validation pass.
+
+The graph's pre-existing unary input boundary remains: it does not assemble
+records from multiple computed values. Whole-result execution and the
+all-window reference family do not need such machinery. Rows 11/12 must now
+connect these computed results to selected formal equations and explicit
+adoption, with attention to reusing a single whole replay across many claims.

@@ -15,7 +15,8 @@ exactness, full bounded long-exact assembly, cross-layer consumers, and
 Chapter 31 remain active requirements. The companion owner audit records
 these boundaries; no closed formal quotient effectiveness is claimed.
 The independently named native homology-connecting operation and native
-bounded assembly are implemented; categorical/proof–CAS consumers are next.
+bounded assembly and categorical/compiled consumers are implemented;
+selected proof–CAS replay/adoption is next.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

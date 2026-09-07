@@ -687,7 +687,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
-| `LEH-CATEGORY-10` | pending | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
+| `LEH-CATEGORY-10` | complete; nine operations and direct/graph gates green | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
@@ -1416,6 +1416,63 @@ primitive methods and avoid duplicate inherited method/lowering identities
 when combining the homology and snake capabilities. The new six-term role
 may consume the existing whole connecting result as a graph dependency;
 this does not mean taking an arbitrary connecting arrow as an axiom.
+
+Row 10 resumes from clean `9ad9e1c8`, with the native prerequisites complete.
+The existing categorical graph has unary whole-value inputs; it does not
+assemble a record from multiple computed values. The primary compiled
+consumer will therefore run sequence input → bounded short-exact result →
+whole bounded long-exact result → a reference family of native six-term
+snake results, one for each retained window. That family reuses every
+existing connecting result. Indexed window lookup remains a separate
+record-input operation; no general record-shaping compiler capability is
+claimed or required for this complete whole-result consumer.
+
+Combine the existing homology and snake categories by retaining the homology
+base and only the snake-owned methods/lowerings/constructor. Do not silently
+drop duplicate inherited implementations. New schemas are ring-scoped and
+normalize by retaining whole results; observers preserve references. A
+prospective dual constructor ID is metadata only, not an implemented
+cohomological/opposite operation. No compiler, engine, or trusted Core
+semantics should change to add these operation bindings.
+
+The categorical bindings are now implemented in
+`src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations.ts` and
+`src/v3_2/algebra_polynomial_freyd_long_exact_category.ts`. Nine operations
+cover bounded-short-exact construction, independent homology connecting and
+window construction, whole bounded long exact homology, retained window and
+connecting observations, the method-specific snake view, the full six-term
+snake result, and the all-window snake-reference family. The family retains
+the original long-exact result and every existing connecting construction;
+its serializer rejects changed reference ordering. Unsupported connecting
+method tags are rejected by the explicitly method-specific view.
+
+The category retains the homology base and adds only snake-owned methods,
+lowerings, and its final constructor, avoiding duplicate common ancestors.
+Derived plans expose the existing universal-operation capabilities. Every
+operation has an explicit whole-operation algebra binding; no callback is
+inlined and no matrix algorithm is copied into the compiler. The prospective
+long-coexact dual descriptor is metadata only, with the profile explicitly
+recording no dual implementation or formal-category claim.
+
+Eight new tests plus seven existing homology/snake category tests pass (15
+focused tests). They execute every new binding both directly and through
+compiled graphs. The primary three-node graph constructs the short-exact
+sequence, whole long-exact homology, and all reference snakes, with identical
+complete serialization. A separate observation graph preserves exact window
+and connecting references. Tests also cover independent constructors,
+prerequisite availability, inherited-method/lowering identity uniqueness,
+foreign rings, bad degrees/kinds/schemas, and unsupported method traces.
+Workspace validation, root typecheck, affected-file lint, and whitespace
+review pass. Compiler, engine, trusted Core, and public barrel semantics are
+unchanged; no unrelated aggregate was run.
+
+Next inspect the existing formal homology/snake delegation and batch
+interfaces for rows 11/12. Reify the actual selected long-exact equations and
+retain whole-result replay/adoption. Do not replay the expensive whole
+operation independently for every equation if the existing batch/retained
+computation infrastructure can reuse it. The generic window theorem stays
+explicitly pending; a working selected proof–CAS consumer is the immediate
+priority, not a claim of a closed formal quotient capability.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

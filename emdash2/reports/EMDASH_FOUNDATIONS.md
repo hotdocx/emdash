@@ -4049,6 +4049,15 @@ construction from a homology window. Its two outer objects need not be zero;
 this six-term reference result is distinct from the zero-ended bounded
 homology sequence and does not dictate the homology operation's public API.
 
+The computational category layer now exposes the new homological operations
+with prerequisite plans and explicit backend-neutral whole-operation
+bindings. A compiled program constructs a bounded short-exact sequence, its
+complete long-exact homology result, and the reference snake sequences of
+all retained windows. Direct and compiled execution agree on the full
+serialized results. Observations return the already selected windows and
+connecting objects. This is the computational categorical interface; its
+selected proof-assistant replay/adoption consumer remains the next layer.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles
