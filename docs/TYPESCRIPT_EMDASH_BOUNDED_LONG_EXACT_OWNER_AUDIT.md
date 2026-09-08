@@ -1098,3 +1098,31 @@ Four focused tests pass, including a single-degree boundary case. These
 field sections are only coordinate choices in a non-authoritative test;
 they add no splitting assumption to the polynomial Freyd computation and
 no production dependency on the field or external CAS implementation.
+
+## Formal boundary epicity and covered reconstruction
+
+`comm_ring_freyd_epimorphism_from_matrices` returns the original
+`CommRingFreydEpimorphismWitness` for the explicit-spine morphism, not a
+new predicate. Its input Q U + F V = id is the semantic matrix identity;
+the retained vertical block [U;V] supplies the cokernel-projection zero
+agreement through existing block multiplication and subtraction-of-zero
+paths. The TypeScript realization checks all original block/owner links,
+replays the existing epicity operation and constructs that whole witness
+from explicitly adopted laws. Actual native homology-boundary consumers
+include nonzero U and V for x+1 over R/(x). The formal cycle-universality
+capability is not inferred from those finite equations.
+
+The generic covered-reconstruction theorem is independent of this concrete
+representation. It proves partial ∘ p1 = pi ∘ L by q2 cancellation from
+q2 partial = u, u p1 = q1 beta p2, mu L = beta p2 and q1 mu = q2 pi.
+Its factor consumer retains L itself as a HomPostcompFactor of pi. This
+is the exact next input of a target-cycle construction using the lower
+neighboring inclusion's monicity and chain compatibility. It is not a
+proof that partial p1 is zero, and supplies no missing neighbor data.
+
+Both additions are rule-free transparent proofs/definitions. The exact
+import warning boundaries remain 1,223/169 for the Freyd constructor and
+1,217/169 for the generic snake theorem. The focused reviewers have 8
+positive/3 negative and 1 positive/1 negative assertions respectively.
+They extend registered source/example checking without changing central
+diagnostic assertions or resolving the standing full-health exception.

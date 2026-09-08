@@ -935,6 +935,26 @@ belongs to the owning implementation plan rather than to standing guidance.
   mirror is signature-only, not a full transfer of their source computation.
   This raw formal sequence does not yet include formal exactness witnesses
   or a concrete weak-kernel capability.
+- `emdash3_2_commutative_algebra_freyd_explicit_epimorphisms.lp` and the
+  formal epimorphism signature/adapter modules now construct the existing
+  `CommRingFreydEpimorphismWitness` for an actual native homology boundary.
+  The semantic block equation Q U + F V = id supplies the vertical witness
+  [U;V] for its canonical cokernel projection. Existing block multiplication
+  and subtraction-of-zero paths justify the transparent constructor.
+  Preparation checks the retained blocks and identity; explicit adoption
+  replays the existing native epicity operation. Core and live Lambdapi
+  consumers include x+1 over R/(x), with both blocks nonzero, and reject
+  wrong blocks, laws, endpoints and stale/foreign realization. The source
+  adds no rule, unifier, equality axiom or weak-kernel provider. This is
+  formal boundary epicity; formal chain exactness still requires the actual
+  cycle universality.
+- `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
+  partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
+  beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout
+  reconstructions. The reviewer packages L as an actual Hom postcomposition
+  factor and rejects a zero-composite claim. This is the covered
+  reconstruction prerequisite of the generic homology window, not the
+  still-required target-cycle factorization or source descent.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

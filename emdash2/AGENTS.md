@@ -201,6 +201,9 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   explicit-matrix introductions returning the original presentation-morphism
   and chain-pair owners. These are proof-CAS usability definitions, not new
   primitive structures, equality axioms, or computation rules.
+  The explicit-epimorphism extension constructs the existing Freyd witness
+  from Q U + F V = id, retaining the vertical coefficient block. It proves
+  boundary epicity, not cycle universality or a closed weak-kernel provider.
   `emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp` follows both
   actual bounded complex tails, retaining raw components and the existing
   presentation-morphism agreements. Its first two laws form the existing
@@ -315,6 +318,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   universal-factor points and their reconstruction paths. The split follows
   mathematical owner boundaries and keeps each target below 90 seconds; no
   test, square, or connecting arrow is postulated.
+  `emdash3_2_abelian_snake_covered_reconstruction.lp` derives the connecting
+  arrow after the original epic cover by cancelling the existing monic
+  pushout injection. Its original lambda-kernel lift becomes a genuine
+  factor point; no factor or equation is postulated.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality
