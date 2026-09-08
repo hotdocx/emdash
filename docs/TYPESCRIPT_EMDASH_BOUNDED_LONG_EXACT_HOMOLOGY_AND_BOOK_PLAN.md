@@ -699,7 +699,7 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-KERNEL-11D` | complete; checkpoint `f05c5d0e` | existing two weak pullbacks and their universal factor operations | per-choice embedding, lifting, reconstruction and uniqueness; W selector compatibility preserving original ranks/matrices and public signatures |
 | `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; checkpoint `9dc9b316` | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
-| `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; live all-position consumer green | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
+| `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -2077,6 +2077,10 @@ catalog, source TOC, 16 metrics unit tests and documentation hygiene pass.
 The source and focused TS reviewers are registered. The unregistered book
 draft and ongoing generic-normality probes remain outside this checkpoint;
 the standing full-health exception is retained without an unrelated aggregate.
+
+Formal actual-interior checkpoint: `a8356452`. Its staging check reported
+one surplus EOF blank line in the new reviewer; an immediate correcting
+checkpoint removes that whitespace without changing any declaration or test.
 
 The shared selected kernel proof core is now promoted for qualification.
 The compatibility module supplies the three W-independent paths; embedding,

@@ -167,4 +167,3 @@ assertnot
   ⊢ @comm_ring_freyd_selected_homology_boundary_raw R (@comm_ring_presentation_intro R n2 r2 P2) (@comm_ring_presentation_intro R n1 r1 P1) (@comm_ring_presentation_intro R n0 r0 P0)
     (@comm_ring_presentation_morphism_from_matrices R n2 r2 n1 r1 P2 P1 F WF lawF) (@comm_ring_presentation_morphism_from_matrices R n1 r1 n0 r0 P1 P0 G WG lawG) (@comm_ring_freyd_kernel_choices_from_matrix_providers R n1 r1 n0 r0 P1 P0 G WG lawG k1 p1 q1 compatible1 provider1 k2 p2 q2 compatible2 provider2) chain (@comm_ring_freyd_homology_from_matrix_providers R n2 r2 n1 r1 n0 r0 P2 P1 P0 F WF lawF G WG lawG chain k1 p1 q1 compatible1 provider1 k2 p2 q2 compatible2 provider2 B WB lawB H lawH)
     ≡ @comm_ring_presentation_morphism_from_matrices R n2 r2 k1 k2 P2 p2 otherB otherWB otherLaw;
-
