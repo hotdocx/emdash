@@ -16,6 +16,10 @@ the next required architectural decision is the variance-repair scope.
 The [bounded variance-repair plan](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md)
 now owns its isolated Co₂/action prototypes and family-propagation controls;
 no corrected kernel signature has been promoted yet.
+The correctly based whole-family prototype now also computes displayed-map
+components, displayed-transformation components and nonidentity base-2-cell
+action, without a new opposite-family primitive or equality bridge. Active
+same-base consumer migration remains the next prerequisite.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:

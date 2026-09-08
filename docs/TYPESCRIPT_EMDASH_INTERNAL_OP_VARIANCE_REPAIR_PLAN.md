@@ -129,8 +129,8 @@ Op_catd_func(K) : Co₂(Catd(K)) → Catd(Co₂(K)).
 It sends a displayed map `FF : E → D` to a displayed map between the new
 opposite families, with component `Op_func(FF[k])`. A transformation between
 such displayed maps reverses, because its components are ordinary
-transformations of fibre functors. This signature is not yet implemented by
-the local prototype; it is the next whole-family qualification obligation.
+transformations of fibre functors. This signature is now implemented by the
+separate whole-family prototype below, not yet by the active kernel.
 The generic Co₂ action on functor categories should own that construction,
 rather than another untyped same-base identification.
 
@@ -147,6 +147,7 @@ if another unrestricted constructor reinstates the same action.
 | OP-REPAIR-1 | baseline reproduced | original native-empty fixture accepted under the unchanged core; exact source and log retained |
 | OP-REPAIR-2 | isolated prototype checked; not promoted | Co₂ category/functor projections, corrected whole op action, correctly directed transformation computation and a rejected wrong-direction application |
 | OP-REPAIR-3 | family-only counterexample confirmed; propagation inventory still open | same-base family reconstruction control and source-level dependent-owner inventory |
+| OP-REPAIR-3A | whole-family prototype checked; not promoted | derive the correctly based operator, displayed map and reversed displayed-transformation action, with genuine base-2-cell computation and retained next Hom action |
 | OP-REPAIR-4 | pending | smallest coherent owner-position migration that removes the bad covariant surfaces and qualifies their legitimate consumers |
 | OP-REPAIR-5 | pending | positive opposite regressions, exact variance-negative fixture, warnings/SOP/health qualification and downstream homology consumer |
 
@@ -217,6 +218,97 @@ fixture was also rerun in `internal_op_empty_reproducer-20260908-141839.log`.
 Therefore the family base change is necessary, not a speculative extension
 of the repair. Keeping the old unrestricted same-base interface would undo
 the correction even if no source expression mentioned the literal `op`.
+
+## Whole-Family Prototype And Its Higher Action
+
+The preceding goal turn was progress: checkpoint `e4486791` recorded the
+dimension-shifted prototype and independent family-only counterexample.
+The next scoped baseline passes in
+`internal_op_co2_prototype_checks-20260908-143810.log`.
+
+The new durable non-library source and reviewer are
+[`internal_op_co2_families_prototype.lp`](../emdash2/audits/internal_op_co2_families_prototype.lp)
+and [`internal_op_co2_families_checks.lp`](../emdash2/audits/internal_op_co2_families_checks.lp).
+One new fundamental whole owner supplies
+
+```text
+Co₂_functor_cat_func(A,B) : Co₂(Functor(A,B)) → Functor(Co₂(A),Co₂(B)).
+```
+
+Its object action is `Co2_func`; its transformation view is a transparent
+alias of ordinary functor action, with point and whole off-diagonal
+projections. The opposite-family operator is a transparent composite of this
+functor and ordinary postcomposition by `op_co2`. The family, displayed-map,
+Hom-functor, displayed-transformation functor and transformation point views
+are derived. There is no new primitive `Op_catd_func`, `Op_funcd` or
+`Op_transfd` mirror in this prototype.
+
+The checked computations recover the original opposite fibres, map
+components `Op_func(FF[k])`, and off-diagonal components
+`Op_func(tapp1(FF,p))`. Displayed-transformation components reduce to
+`Op_transf(eta[k])`. A genuine `a : p ⇒ q` in an arbitrary base Hom also
+computes: action of the retained whole off-diagonal functor, with endpoints
+q,p in the opposite Hom, returns the opposite of the original action on a.
+After transformation projection, the next whole Hom action remains typable.
+Both the wrong transformation direction and an unrestricted same-base family
+type are rejected. No manually stored square or inverse witness is added.
+
+### Endpoint, normal-form and projection decisions
+
+1. The first composite used ordinary functor-category endpoint annotations
+   while its public type used the stable Catd facade. The generic composition
+   projection repeats its endpoints, so this prevented the displayed-map
+   definition from checking. Aligning those annotations resolved the failure
+   without adding a rule.
+2. The whole operator's object normal form is `hom_postcomp_fapp0`, not raw
+   `comp_cat_fapp0`. The prototype `op_co2_catd` now uses that existing owner.
+   The raw-composition view has a checked typed-reflexivity path through the
+   existing generic usability unifier. No new unifier, primitive equality,
+   opacity or global postcomposition-to-composition fold is introduced.
+3. Displayed-transformation components required two further projection rules:
+   Co₂ acting on modifications, and generic Cat-valued postcomposition of a
+   modification. The latter is not op-specific; on eventual migration it
+   belongs with component evaluation/whiskering. Its RHS uses the original
+   modification component and the postcomposing functor's whole Hom action.
+4. An `id _ _` discriminator in that postcomposition probe fails subject
+   reduction because its fapp0/fapp1 actions remain unresolved
+   (`hint_internal_op_co2_transfd_checks-20260908-144943.log`). The literal
+   universe identity is a measured computation/SR guard. With it, the
+   component computes in
+   `hint_internal_op_co2_transfd_checks-20260908-145018.log`. The actual base
+   2-cell test passes in `hint_internal_op_co2_base_two_cell-20260908-145322.log`.
+
+The extension adds one primitive whole functor, six runtime projection rules
+and transparent observations. It adds no generic identity/composition laws,
+changes no existing accumulation orientation, and has no alias-headed rule.
+Its strict LHS audit reports no unreviewed compound inferred slots.
+
+The tracked family reviewer passes eight positive and two negative checks in
+`internal_op_co2_families_checks-20260908-145613.log`. All eleven earlier
+positive and two negative prototype checks still pass in
+`internal_op_co2_prototype_checks-20260908-145615.log`. The scoped ignored
+warning run gives 1,194 critical pairs / 157 pattern reports, with complete
+strict parser accounting
+(`hint_internal_op_co2_transfd_checks-20260908-145323.log`). These are local
+append-only tests, not a completed kernel migration or consistency proof.
+The final tracked warning run confirms the same counts in
+`internal_op_co2_families_checks-20260908-145838.log`. Relative to the first
+Co₂ prototype, the family extension adds twenty pairs and no pattern
+reports: four component/action groups of three each, four composition/
+component pairs, and four component/self pairs. All pair structures parse;
+owning-position joining remains a separate migration gate. Active-reference,
+report-lifecycle and strict LHS checks pass, and registry inspection confirms
+the new audit files are not positive library targets. No unrelated aggregate,
+kernel/CAS source change, catalog/health regeneration or book rendering is
+performed for this non-library checkpoint.
+
+Next: inventory and migrate the active same-base consumers as a coherent
+slice, retaining the corrected base in object and whole-action types. Do not
+erase `Co2_cat(K)` through an unrestricted cast to recover old signatures.
+Qualify generic identity/composition projection orders at the eventual owner
+positions, rerun the empty-type negative against that migrated kernel, and
+return to the homology consumer. The active signature still admits the
+diagnostic; the full long-exact goal is not complete.
 
 ## Validation And Handoff
 

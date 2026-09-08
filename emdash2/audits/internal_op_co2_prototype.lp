@@ -50,7 +50,9 @@ symbol op_co2_transf_func [A B : Cat] (F G : τ (Functor A B))
     (Functor_cat (Op_cat A) (Op_cat B))
     (op_co2_hom_func A B) G F;
 
-// Correctly based pointwise opposite, derived from Co2(E) and op_co2.
+// Correctly based pointwise opposite. Keep the generic postcomposition owner
+// selected by the whole opposite-family operator, with no new runtime fold.
 symbol op_co2_catd [K : Cat] (E : τ (Catd K)) : τ (Catd (Co2_cat K))
-≔ @comp_cat_fapp0 (Co2_cat K) (Co2_cat Cat_cat) Cat_cat
+≔ @hom_postcomp_fapp0 Cat_cat Cat_cat (@id_func Cat_cat)
+    (Co2_cat K) (Co2_cat Cat_cat) Cat_cat
     op_co2 (@Co2_func K Cat_cat E);
