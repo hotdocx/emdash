@@ -1078,3 +1078,23 @@ This completes the raw carrier consumer only. The stronger
 Neither a ring-wide W nor the equality of its selected presentations with
 the native ones follows from the matrix equations. That is the explicit
 next formal boundary; the generic window theorem also remains required.
+
+## Independent constant-field long-exact comparison (row 13)
+
+The new long-exact differential uses Q[] directly, not specialization of
+a polynomial variable. Both implementations receive the same finite input
+matrices and independently build homology and connecting maps. Test rows
+are scaled split field rows: inclusion is (2·id,0), projection (0,3·id),
+and the middle differential's off-diagonal block produces connecting
+scalars 3/2, −2/3 or zero. Source and target homologies are genuine quotients
+by nonzero boundaries, not already one-dimensional raw terms.
+
+The comparison uses the common original complex term to identify cycle
+coordinates, verifies annihilation of native boundary relations, and proves
+both inverse identities for the resulting homology coordinate maps. It
+then compares every spine/window arrow and retained CAP snake map in those
+coordinates, plus every zero composite, exactness point and endpoint.
+Four focused tests pass, including a single-degree boundary case. These
+field sections are only coordinate choices in a non-authoritative test;
+they add no splitting assumption to the polynomial Freyd computation and
+no production dependency on the field or external CAS implementation.

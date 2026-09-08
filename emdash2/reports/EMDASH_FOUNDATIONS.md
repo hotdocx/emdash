@@ -4091,6 +4091,17 @@ still a stronger requirement: it must supply the appropriate universal
 capabilities and relate their selections to the retained homology objects,
 not infer these merely from native exactness booleans.
 
+The complete native long-exact calculation also has an independent
+constant-field comparison. Over Q itself, a field-linear implementation
+constructs the homologies and connecting maps in its own quotient bases.
+Explicit coordinate isomorphisms, derived from the common original complex
+terms, compare every displayed map and window with the polynomial Freyd
+result. The examples include nonzero source and target boundaries and
+connecting scalars of either sign, as well as zero connecting and endpoint
+cases. Field sections serve only this comparison; no field splitting or
+potentially non-flat specialization is used in the native polynomial
+construction.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

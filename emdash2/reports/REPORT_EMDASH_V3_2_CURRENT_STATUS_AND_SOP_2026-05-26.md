@@ -950,6 +950,13 @@ belongs to the owning implementation plan rather than to standing guidance.
 - The constant rational field/Freyd homology differential agrees on both zero
   and nonzero homology. It remains test-only, non-authoritative evidence and
   does not replace polynomial Freyd execution.
+  The long-exact differential now extends this to every spine/window arrow,
+  adjacent zero and interior exactness point, plus retained CAP snake maps.
+  Four constant-Q cases include connecting scalars 3/2, −2/3, zero, and a
+  single-degree endpoint case. Actual cycle/quotient coordinate isomorphisms
+  relate the independently selected bases; raw representatives are not
+  assumed equal. No polynomial-variable specialization, production field
+  splitting or external-process dependency is introduced.
 - `emdash3_2_commutative_algebra_polynomial.lp`: one-way rule-free
   universal-property layer for free commutative `R`-algebras on a variable
   classifier. It packages contractible structured extensions of base maps and

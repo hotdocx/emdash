@@ -690,10 +690,10 @@ was introduced to get a passing target.
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | in progress; raw spine 11A constructed, stronger homology/exactness alignment pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
-| `LEH-FORMAL-RAW-SPINE-11A` | complete; actual whole-term Core/Lambdapi consumers green | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
+| `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
-| `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
+| `LEH-DIFFERENTIAL-13` | complete; four constant-field/CAP cases reviewed and green | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
 | `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
@@ -1682,6 +1682,59 @@ field/quotient-coordinate differential (13) is being implemented in a
 separate test-only file. No parallel worker may change the Core/kernel
 architecture, stage/commit, or merge another worktree. Their results require
 root review before promotion. The full objective remains active.
+
+Raw formal-spine checkpoint: `c2358476`. Only the separate test-only field
+comparison remained untracked after that checkpoint; no parallel work was
+included implicitly. The next formal consumer will construct the existing
+`CommRingFreydEpimorphismWitness` for each actual native boundary from the
+block equation Q U + F V = id. The accepted ignored probe demonstrates this
+without W or a rank cast. It is boundary epicity, not yet formal exactness.
+For selected cycle universality, the audit recommends factoring the existing
+Freyd kernel construction through its two actual selected weak pullbacks;
+their universal factor operations/laws remain explicit capabilities, not
+consequences of a finite set of matrix replay equations. The global W API
+can remain a selector wrapper over that per-choice construction.
+
+The generic window audit independently identifies the covered snake
+reconstruction partial ∘ p1 = pi ∘ L (L is the existing lambda-kernel lift)
+as the next small theorem. It follows by cancelling q2 using the existing
+connecting/u/lift/pushout paths. Subsequent target-cycle factorization also
+needs the lower neighboring chain law and inclusion monicity; source
+descent needs the upper neighboring chain law and projection epicity. The
+two-row comparison alone does not supply those neighbors. These are scoped
+next proofs, not completed generic-window claims.
+
+### Constant-field differential (row 13)
+
+`tests/v3_2_algebra_polynomial_freyd_long_exact_differential_tests.ts`
+compares complete native results over Q[] with the existing field-linear
+homology/connecting implementation and independent CAP snake operation
+order. Q[] is already Q; the tests do not specialize x, which could destroy
+exactness. Degreewise rows are B_n=A_n⊕C_n with inclusion (2·id,0) and
+projection (0,3·id). The three-degree examples have nonzero source and
+target boundaries, and an off-diagonal differential chosen to yield
+connecting scalars 3/2, −2/3, or zero. A fourth case covers single-degree
+endpoints.
+
+Comparisons identify the two selected homologies through their cycle
+embeddings into the same original complex term, prove that the coordinate
+maps kill boundaries, and check both inverse identities on the quotient
+coordinates. Every displayed arrow and every window arrow is compared in
+those coordinates, not as unrelated raw matrices. Every adjacent composite,
+interior exactness point, endpoint zero, and retained snake connecting map
+is checked. The field sections are test-only coordinate choices and do not
+add a splitting assumption or runtime oracle to the native implementation.
+
+Root review and a fresh run passed all four tests. In each three-degree
+case, the comparison covers ten spine arrows, nine adjacent-zero/interior
+positions, all four windows and their sixteen arrows/twelve exact pairs,
+and all four retained snake connecting maps. Both nonzero scalar signs,
+zero connecting with nonzero neighbors, and the single-degree endpoints
+are explicit assertions. Typecheck, changed-file lint, workspace checks and
+the predecessor homology/snake differentials are green. Only a test file,
+its runner import and documentation change; no production algorithm,
+external process or logical capability was added. This closes row 13, not
+the outstanding formal/generic exactness proofs or book work.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.
