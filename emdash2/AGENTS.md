@@ -322,6 +322,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   arrow after the original epic cover by cancelling the existing monic
   pushout injection. Its original lambda-kernel lift becomes a genuine
   factor point; no factor or equation is postulated.
+  The chain-pair cycle-lift and snake-row target-cycle modules factor this
+  covered arrow into the cycles of a supplied whole homology. Three
+  existing short-exact rows and their row maps derive the column chain
+  pair; monicity of the lower inclusion proves the required annihilation.
+  The result remains an existing Hom-factor point, not an assumed normal
+  test or a completed homology connecting map.
+  `scripts/check_snake_row_target_cycles.sh` checks these five owners and
+  four reviewers against fresh exact dependency objects, with 90 seconds
+  per target. This removes repeated import checking without hiding proof
+  bodies; direct source/reviewer joins were measured near the ceiling.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality
@@ -335,6 +345,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   their all-test factor operations and the actual ranks and projections.
   Their constructors reuse generic weak-kernel and Sigma owners; finite
   matrix equations alone do not provide these universal operations.
+  The selected-kernel embedding/lifting/uniqueness modules own the shared
+  proof bodies at those two choices. The legacy W-indexed API selects its
+  original packages and delegates, retaining its signatures and qualified
+  helper names. Its first-stage observations remain independent of stage
+  two; raw zero and reconstruction agreements are still explicit inputs.
   `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
   existing Freyd additive structure with both canonical constructions as one
   capability-parameterized witnessed surface. Its universal tests retain raw

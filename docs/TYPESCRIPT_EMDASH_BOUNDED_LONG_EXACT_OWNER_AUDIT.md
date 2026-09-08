@@ -1161,3 +1161,31 @@ embedding/lift/uniqueness proof promotion and concrete all-test provider
 remain downstream. A W adapter must select both original packages without
 making first-stage ranks depend on a whole choice that itself needs stage
 two. No new primitive, rewrite, unifier or equality axiom is introduced.
+
+The shared selected embedding/lifting/uniqueness proof modules now own the
+proof bodies, using only these choices and explicit raw agreements. The
+legacy kernel module retains all 36 signatures and delegates through a
+whole selector formed after stage two. The first eight selection/observation
+definitions remain unchanged. Its original helper names wrap shared
+compatibility paths, preserving qualified consumers; no duplicate active
+proof theory is introduced. Full raw constructor comparisons retain both
+factor matrices and the original law-name projections. The concrete native
+all-test provider and arbitrary quotient effectiveness remain separate.
+
+## Generic target-cycle factor (row 7D1)
+
+`chain_pair_map_factor_cycle_lift` consumes an existing chain-pair map,
+monicity of its lower component, a middle-component factor and the actual
+source kernel. It derives the cycle equation, lifts and reconstructs.
+`hom_postcomp_factor_source_iso` is the generic source-isomorphism transfer
+for existing factor points. Its snake application retains a⁻¹ L from the
+original lambda-kernel lift and short-exact comparison.
+
+The three-row source/middle columns and their inclusion are derived from
+the original row maps and middle-column zero. The target-cycle API supplies
+an existing Hom-factor point into the cycles of H, which is passed in over
+that derived column pair. Separately retained bounded pairs require an
+explicit reindexing adapter; this API does not silently substitute its
+derived pair for an existing stored one. No new rule, universal axiom or
+manual square structure is introduced. Normal lifting and source descent
+remain downstream of this covered factor.

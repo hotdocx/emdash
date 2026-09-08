@@ -30,6 +30,7 @@ fi
 six_term_join_checked=0
 normalization_join_checked=0
 snake_rows_join_checked=0
+snake_target_cycles_join_checked=0
 
 is_abelian_snake_six_term_join() {
   case "$1" in
@@ -73,6 +74,16 @@ is_abelian_snake_six_term_join() {
 check_file() {
   local file="$1"
   case "$file" in
+    emdash3_2_chain_pair_map_cycle_lifts.lp|\
+    emdash3_2_hom_factor_source_isos.lp|\
+    emdash3_2_short_exact_row_chain_columns.lp|\
+    emdash3_2_snake_row_target_factors.lp|\
+    emdash3_2_snake_row_target_cycles.lp)
+      if [[ "$snake_target_cycles_join_checked" -eq 0 ]]; then
+        ./scripts/check_snake_row_target_cycles.sh
+        snake_target_cycles_join_checked=1
+      fi
+      return ;;
     emdash3_2_chain_pair_map_snake.lp|\
     emdash3_2_snake_row_comparisons.lp|\
     emdash3_2_kernel_domain_comparison.lp|\
@@ -268,6 +279,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_homology_cokernel_inclusion_monic.lp)
   files+=(emdash3_2_abelian_homology_cokernel_inclusion.lp)
   files+=(emdash3_2_hom_factor_spaces.lp)
+  files+=(emdash3_2_hom_factor_source_isos.lp)
   files+=(emdash3_2_hom_factor_composition.lp)
   files+=(emdash3_2_kernel_maps.lp)
   files+=(emdash3_2_kernel_map_laws.lp)
@@ -276,6 +288,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_cokernel_map_laws.lp)
   files+=(emdash3_2_cokernel_map_isos.lp)
   files+=(emdash3_2_chain_pair_maps.lp)
+  files+=(emdash3_2_chain_pair_map_cycle_lifts.lp)
   files+=(emdash3_2_chain_pair_map_composition.lp)
   files+=(emdash3_2_homology_cycle_maps.lp)
   files+=(emdash3_2_homology_maps.lp)
@@ -296,6 +309,9 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_short_exact_cokernel_inverse_test.lp)
   files+=(emdash3_2_short_exact_cokernel_comparison.lp)
   files+=(emdash3_2_short_exact_rows.lp)
+  files+=(emdash3_2_short_exact_row_chain_columns.lp)
+  files+=(emdash3_2_snake_row_target_factors.lp)
+  files+=(emdash3_2_snake_row_target_cycles.lp)
   files+=(emdash3_2_kernel_short_exact_rows.lp)
   files+=(emdash3_2_selected_short_exact_rows.lp)
   files+=(emdash3_2_monic_image_comparison.lp)
@@ -308,6 +324,11 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_additive.lp)
   files+=(emdash3_2_commutative_algebra_freyd_cokernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_kernels.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_kernel_compatibility.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_selected_kernel_embedding.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_selected_kernel_lifting.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_selected_kernel_uniqueness.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_kernel_choices_from_weak_kernels.lp)
   files+=(emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp)

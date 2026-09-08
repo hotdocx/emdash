@@ -684,6 +684,8 @@ was introduced to get a passing target.
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
+| `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; isolated quiet/warning checks green | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
+| `LEH-TARGET-NORMAL-LIFT-7D2` | probe in progress | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
@@ -694,7 +696,8 @@ was introduced to get a passing target.
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
 | `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; checkpoint `5d2f8869` | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
-| `LEH-FORMAL-SELECTED-KERNEL-11D` | choice base implemented; shared lifting/uniqueness and W wrappers in progress | existing two weak pullbacks and their universal factor operations | per-choice kernel interface and W selector wrapper, preserving native rank/matrix presentations without equality casts |
+| `LEH-FORMAL-SELECTED-KERNEL-11D` | complete; root constructor compatibility and warning checks green | existing two weak pullbacks and their universal factor operations | per-choice embedding, lifting, reconstruction and uniqueness; W selector compatibility preserving original ranks/matrices and public signatures |
+| `LEH-FORMAL-SELECTED-PROVIDER-11E` | design audited; implementation next | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1840,6 +1843,122 @@ Both strict rule audits report zero clauses. Catalog, source TOC, the 13
 metrics unit tests, active-reference/header lint and exact-diff hygiene
 passed. The two sources are registered; the existing full-health exception
 is retained explicitly, without claiming a new aggregate result.
+
+### Generic covered factor into the selected target cycles
+
+Selected-choice data checkpoint: `82bb6617`. In parallel, the generic
+window proof now exposes the target-cycle step independently of native CAS
+decisions. `chain_pair_map_factor_cycle_lift` first proves a generic fact:
+if the lower component of a chain-pair map is monic, a factor of the target
+incoming differential through its middle component is killed by the source
+outgoing differential. It lifts that factor through the supplied whole
+source kernel and retains the reconstruction.
+
+`hom_postcomp_factor_source_iso` transfers a factor through a supplied
+source isomorphism, retaining its actual inverse composite. The three-row
+column module derives the source chain law by cancelling the bottom row's
+monic inclusion from the middle-column zero law. Its inclusion map uses
+the two original row-map compatibilities. The snake target-factor module
+then constructs r = a⁻¹ L with i r = beta p2; the target-cycle module lifts
+r into the cycle kernel of the explicitly supplied H and returns the
+existing Hom-factor point k_H ell = r.
+
+No manual square, comparison equation, new kernel choice or cycle-zero
+axiom is an input. H is indexed by the derived source-column pair. A later
+bounded consumer with a separately retained pair must explicitly compare
+or reindex that pair and H; agreeing arrow names alone do not authorize
+silently replacing the stored homology. The target normal test and source
+boundary descent are still separate required steps of 7D.
+
+The complete 7D1 reviewer set has 12 positive and three negative assertions.
+Direct cycle source/reviewer checks passed at 72.8/78.1 seconds, but
+subsequent fresh joins reached 90 seconds without a type error. The focused
+`scripts/check_snake_row_target_cycles.sh` now checks the core, exactly five
+owners and four reviewers with fresh copied sources and temporary compiled
+dependency objects. All ten targets passed quietly and with warnings:
+`snake-row-target-cycles-quiet-20260907-223608.log` and
+`snake-row-target-cycles-warnings-20260907-223809.log`. The slowest source
+was target factors at 63/54 seconds; cycles took 9/10 seconds and its
+reviewer 5/6 seconds. Warning counts remain the inherited 1,217/169.
+Temporary trees were cleaned; no proof is made opaque and no source check
+is skipped. The registered source/example/metrics routes use the same
+nine-owner/reviewer group once. Three focused dispatch tests extend the
+metrics suite to 16 passing tests, including failure propagation and exact
+script/registry parity. This solves repeated dependency checking, not the
+underlying interactive expansion cost.
+
+For the staged warning comparison, complete strict-parser totals by head,
+rule family and location agree. All 169 pattern warnings and 1,117 critical
+pair blocks also agree as rendered; 100 inherited critical pairs differ
+only in explicit/abbreviated argument printing because a later process
+loading the compiled core does not replay its print settings. Do not call
+those complete rendered logs byte-identical. No new warning family was
+introduced by this rule-free tranche.
+
+### Selected provider boundary for the proof-CAS consumer
+
+The native kernel already retains U = WP(F,R_Q) and V = WP(p1,R_P).
+Their two ranks and V's first projection are exactly its presentation;
+no generator elimination or rank cast is required. A concrete formal
+consumer should assemble these choices using the existing finite-free
+weak-pullback factor-operation/law types. The direct native
+`algebraPolynomialWeakKernelFactor` and `algebraPolynomialWeakPullbackFactor`
+consume retained choices. The categorical `weakKernelLift` method currently
+reselects from an input map, so it is not the correct callback here.
+
+An all-test factor operation/law must be explicitly bound as trusted
+provider semantics for the represented native ring. This can reuse the
+existing `trusted-presentation-semantics` discipline used for localization;
+it is neither a new Core trust primitive nor a theorem inferred from finite
+sample equations. Preserve native ring identity, provider revision, selected
+U/V identity and serialized ranks/matrices. Tests of fresh factors validate
+the binding and non-reselection, not universal mathematical correctness.
+
+The native raw embedding's relation witness is recomputed and need not
+equal V's second projection. Likewise, a raw lift's relation witness need
+not be literally the selected second factor matrix. Preserve those raw
+values and use the existing Freyd class-map path when their generator
+matrices agree; do not assume equality of the witness matrices. Provider
+interpretation is restricted to the represented ring, not arbitrary
+specializations of the free formal ring/coefficient symbols. Resource
+failure or unsupported inputs must not be reported as negative mathematics.
+
+The shared selected kernel proof core is now promoted for qualification.
+The compatibility module supplies the three W-independent paths; embedding,
+lifting and uniqueness modules consume the actual two choices. The legacy
+kernel API retains all 36 original signatures and its first eight selector
+definitions. Its whole choice selector is installed only after the second
+stage, and 28 subsequent bodies delegate to the shared core (1,404 legacy
+lines become 868). The downstream W adapter remains downstream, avoiding
+an import cycle. Full raw constructor comparisons cover the embedding and
+lift, including factor matrices and the original qualified law names.
+
+This completes the generalization of the witnessed proof operations once
+qualified, not a closed kernel capability or native-provider adoption.
+Explicit zero-composite and competitor-reconstruction agreements remain
+inputs; no arbitrary truncated quotient-path decoder is added. The next
+11E consumer binds executable factor operations to the retained U/V choices.
+
+The 11D reviewer tranche checks 15 positive assertions across selected
+embedding/lift/uniqueness and full W-selector constructor compatibility;
+the earlier choice-base reviewer supplies six positive/two negative guards.
+The old kernel, witnessed pre-Abelian, normal-monomorphism and homology
+reviewers pass. Root independently compared all original signatures and
+first-stage bodies against `82bb6617`, and compared full warning multisets:
+the old owner before/after refactoring and selected uniqueness are identical
+at 1,223 critical pairs/169 replaceable variables. This is a rule-free
+reparameterization; the standing full-health exception remains recorded.
+
+Root final consumers passed in
+`commutative_ring_freyd_kernel_selector_compatibility-20260907-224113.log`
+and warning-enabled
+`commutative_ring_freyd_selected_kernel_uniqueness-20260907-224141.log`.
+Strict audits, catalog/TOC, 16 metrics unit tests, Bash syntax,
+active-reference/header lint and staged-diff hygiene passed. The local
+checkpoint includes completed 7D1 and 11D plus their exact registration;
+the unfinished 7D2/11E probes/provider files and unregistered Chapter 31
+draft are excluded. No unrelated aggregate or new full-health result is
+claimed.
 
 Raw formal-spine checkpoint: `c2358476`. Only the separate test-only field
 comparison remained untracked after that checkpoint; no parallel work was

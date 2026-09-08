@@ -960,15 +960,27 @@ belongs to the owning implementation plan rather than to standing guidance.
   matrix projections. Its transparent constructors require the existing
   all-test factor operation and law; finite sampled equations are not a
   substitute. This permits selected presentations independently of a global
-  W, while shared kernel universality and its concrete provider remain
-  separately checked downstream obligations.
+  W; concrete provider semantics remain a downstream obligation.
+  The shared selected-kernel proof modules now construct embedding,
+  annihilation, lifting, reconstruction and raw-competitor uniqueness at
+  those choices. The old W-indexed API retains its 36 original signatures
+  and selects the same two packages before delegating. Universal native
+  provider semantics and closed quotient-path effectiveness are not inferred
+  by this reparameterization.
 - `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
   partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
   beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout
   reconstructions. The reviewer packages L as an actual Hom postcomposition
   factor and rejects a zero-composite claim. This is the covered
   reconstruction prerequisite of the generic homology window, not the
-  still-required target-cycle factorization or source descent.
+  completed homology connecting map or its source descent.
+  The chain-pair cycle-lift and snake-row target-cycle modules now derive
+  the factor of this covered arrow into the supplied homology cycles.
+  They use existing row-map compatibilities and bottom-row monicity to
+  construct the column zero law and cycle annihilation. The result retains
+  the actual inverse short-exact comparison, lambda lift and supplied
+  cycle kernel in an ordinary Hom factor. A separately stored bounded
+  column pair still needs explicit reindexing; no homology is replaced.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary
