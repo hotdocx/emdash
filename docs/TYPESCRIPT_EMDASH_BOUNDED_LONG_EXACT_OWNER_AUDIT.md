@@ -1145,3 +1145,19 @@ Tests forbid downstream homology/window/whole-result recomputation and
 check all six constructed terms together in Lambdapi. These data complete
 the family of formal boundary epicities, but do not certify the selected
 cycle kernel or supply a global W.
+
+## Per-arrow selected kernel data (row 11D foundation)
+
+The finite-free weak-pullback specialization retains the original whole
+`ComputationalWeakPullback`, its difference-cone and its all-test factor
+operation/law. `CommRingFreydKernelChoices` is a dependent pair: the second
+weak pullback is indexed by the first package's actual projection. Its
+presentation observes the two retained ranks and second first-projection;
+its prospective embedding observes the first first-projection. Constructor
+beta therefore keeps literal native selections without a rank/object cast.
+
+This is data packaging, not yet selected-kernel universality. The shared
+embedding/lift/uniqueness proof promotion and concrete all-test provider
+remain downstream. A W adapter must select both original packages without
+making first-stage ranks depend on a whole choice that itself needs stage
+two. No new primitive, rewrite, unifier or equality axiom is introduced.

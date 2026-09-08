@@ -209,6 +209,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_finite_free_terminal_zero.lp"),
     Path("emdash3_2_commutative_algebra_finite_free_cartesian.lp"),
     Path("emdash3_2_commutative_algebra_finite_free_additive.lp"),
+    Path("emdash3_2_commutative_algebra_finite_free_weak_pullbacks.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_kernel_choices.lp"),
     Path("emdash3_2_commutative_algebra_presentation_operations.lp"),
     Path("emdash3_2_commutative_algebra_presentation_direct_sums.lp"),
     Path("emdash3_2_commutative_algebra_presentation_direct_sum_agreements.lp"),

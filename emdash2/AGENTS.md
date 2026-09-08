@@ -330,6 +330,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   finite-free weak-kernel capability, performs the two weak-pullback
   construction, and retains zero/reconstruction agreements through lift and
   quotient uniqueness.
+  The finite-free weak-pullback and Freyd kernel-choice modules also expose
+  its per-arrow selected data: two dependent whole weak pullbacks, retaining
+  their all-test factor operations and the actual ranks and projections.
+  Their constructors reuse generic weak-kernel and Sigma owners; finite
+  matrix equations alone do not provide these universal operations.
   `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
   existing Freyd additive structure with both canonical constructions as one
   capability-parameterized witnessed surface. Its universal tests retain raw

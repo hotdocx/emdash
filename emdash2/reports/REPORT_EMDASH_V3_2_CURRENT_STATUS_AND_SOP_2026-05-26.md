@@ -955,6 +955,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   in Core and Lambdapi. Throwing spies verify that downstream construction
   does not recompute homology or the whole sequence. The all-position
   iteration does not remove the selected-cycle universality boundary.
+  The per-arrow kernel-choice interface retains the two actual whole
+  finite-free weak pullbacks in a dependent Sigma, with literal rank and
+  matrix projections. Its transparent constructors require the existing
+  all-test factor operation and law; finite sampled equations are not a
+  substitute. This permits selected presentations independently of a global
+  W, while shared kernel universality and its concrete provider remain
+  separately checked downstream obligations.
 - `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
   partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
   beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout

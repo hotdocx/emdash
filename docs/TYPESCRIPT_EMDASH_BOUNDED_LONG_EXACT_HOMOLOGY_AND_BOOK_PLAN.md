@@ -693,8 +693,8 @@ was introduced to get a passing target.
 | `LEH-FORMAL-11` | in progress; raw spine 11A constructed, stronger homology/exactness alignment pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
-| `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; root live-enabled four-test suite green | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
-| `LEH-FORMAL-SELECTED-KERNEL-11D` | probe in progress | existing two weak pullbacks and their universal factor operations | per-choice kernel interface and W selector wrapper, preserving native rank/matrix presentations without equality casts |
+| `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; checkpoint `5d2f8869` | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
+| `LEH-FORMAL-SELECTED-KERNEL-11D` | choice base implemented; shared lifting/uniqueness and W wrappers in progress | existing two weak pullbacks and their universal factor operations | per-choice kernel interface and W selector wrapper, preserving native rank/matrix presentations without equality casts |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1807,6 +1807,39 @@ test). Changed-file lint and root typecheck also passed. This tranche adds
 only the downstream consumer, its registered focused tests and the owner
 ledger; it changes neither shared checking semantics nor Lambdapi rules.
 Recent green upstream evidence is retained without an unrelated aggregate.
+
+### Selected kernel choices: preserving the computed presentation
+
+The boundary-family checkpoint is `5d2f8869`. The next formal slice exposes
+the two actual whole weak pullbacks independently of a global W selector.
+`emdash3_2_commutative_algebra_finite_free_weak_pullbacks.lp` specializes
+the existing universal owner and its introduction at a supplied rank,
+difference-cone, all-test factor operation and factor law. The dependent
+`CommRingFreydKernelChoices` in
+`emdash3_2_commutative_algebra_freyd_kernel_choices.lp` retains the second
+choice over the first choice's actual projection. Presentation ranks and
+matrices are observations, not equality transports.
+
+The focused reviewer checks both choice projections, arbitrary-test lifting,
+literal-rank and matrix beta, and the dependent relation matrix. Negative
+checks reject rank collapse and a second choice for the wrong first owner.
+These packages do not manufacture a universal solver from finitely many
+matrix equations. The existing W selector and proof bodies will be routed
+through this shared per-choice core, keeping first-stage observations
+independent of the second stage so that no dependency cycle is introduced.
+Lifting, reconstruction and raw-competitor uniqueness have passed probes;
+their shared promotion and the concrete native all-test provider remain
+separate obligations of 11D/11, not completed by this data interface.
+
+Root checked both new sources and the reviewer under the 90-second bound.
+The reviewer has six positive and two negative assertions. Its fresh
+warning-enabled log `commutative_ring_freyd_kernel_choices-20260907-222543.log`
+has an identical warning multiset to the preceding choice-base run:
+1,217 critical pairs and 169 replaceable variables, all inherited.
+Both strict rule audits report zero clauses. Catalog, source TOC, the 13
+metrics unit tests, active-reference/header lint and exact-diff hygiene
+passed. The two sources are registered; the existing full-health exception
+is retained explicitly, without claiming a new aggregate result.
 
 Raw formal-spine checkpoint: `c2358476`. Only the separate test-only field
 comparison remained untracked after that checkpoint; no parallel work was
