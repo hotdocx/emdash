@@ -686,11 +686,11 @@ was introduced to get a passing target.
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
 | `LEH-TARGET-NORMAL-LIFT-7D2` | complete; checkpoint `3d62f060` | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
-| `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
+| `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | in progress; source annihilation complete, homology descent pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
 | `LEH-SOURCE-COLUMN-7D3A` | complete; checkpoint `c000932c` | three upper rows, their maps and middle-column zero | derive the right/quotient column chain law and its whole projection map; retain the actual supplied source homology |
-| `LEH-SOURCE-ANNIHILATION-7D3B` | in progress; whole ingredients probed, concrete covered comparison under qualification | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
-| `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; quiet/warning source/reviewer gates green | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
-| `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | pending | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
+| `LEH-SOURCE-ANNIHILATION-7D3B` | complete; active-source quiet/warning gates and independent reviewers green | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
+| `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
+| `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | in progress; generic helpers checked, actual four-row consumer drafted | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -2231,6 +2231,97 @@ book snapshot and unfinished 7D3B/7D3C/7D4/generic-assembly obligations remain
 unchanged. The next concrete experiment should isolate the dependent
 application of the second-snake comparison, not repeat the rejected blanket
 endpoint substitution or treat the checked s b factor as a zero proof.
+
+### Source-boundary annihilation result (row 7D3B)
+
+The next continuation distinguishes two costs. The diagnostic prints all
+three partial declarations, but its combined bounded run still returns 124;
+those printed declarations are not a successful module-validation result.
+Thus the earlier observation that the first supplied proof appeared to stall
+is not evidence of a permanently unsatisfiable typing problem. The direct arrow
+conversion and inferred-object-argument variants still exceed 90 seconds;
+no unifier, larger timeout or opaque proof is introduced to hide this.
+
+The successful owner is a generic postcomposition lemma for the original
+second snake-map reconstruction. Its kernel embedding uses exactly the
+existing reconstruction producer's expression, including its named cokernel
+object, rather than the older `iota` alias's differently spelled indices.
+`emdash3_2_abelian_snake_second_postcomposition.lp` proves
+(e iota) g = (e epsilon) k_beta by generic Hom-factor pasting. Specializing
+it and the original short-exact cokernel reconstruction gives the actual
+row comparison. The original consumer-compatible result classifier takes
+83/84 seconds in the first two fresh warning runs; a producer-only result
+classifier takes one second but its whole covered-factor consumer times out.
+The latter is therefore not selected merely because its isolated declaration
+is faster. The accepted formulation keeps the already checked source-cycle
+and compared-boundary owners unchanged.
+
+With this comparison, the original upper differential's kernel factor gives
+g l = (s b) p_top by cancellation through the compared monic embedding.
+The existing inner snake zero partial g = 0, followed by epic cancellation
+of p_top, proves partial(s b) = 0. The output depends on the actual three
+rows, their maps, middle-column chain law and supplied H_C. Neither the
+covered factor nor its zero is an additional input; no section or fresh
+homology/kernel/boundary is chosen.
+
+Eight one-way extensions implement the generic epic-factor descent,
+isomorphism monicity, generic second-map postcomposition, row embedding
+monicity/comparison, upper kernel factor, covered boundary factor and its
+annihilation. Unused probe-only repackagings of the second snake map and
+quotient comparison are not promoted. The generic factor views are reused
+from the active owner, not duplicated under new helper names.
+
+The active warning gate
+`snake-row-source-boundary-warnings-20260908-054204.log` checks all source
+prerequisites, three measured cross-branch owners and their three reviewers.
+Every process returns success under the 90-second bound, including the
+consumer-compatible comparison (reported as 90 seconds after rounding),
+covered factor (two seconds), zero proof (two seconds), and reviewers
+(one/five/three seconds). The first promotion attempt exposed one missing
+explicit `chain_pair_map_snake` import in the upper-factor module; adding
+that owning dependency resolves it without a semantic change.
+
+The generic five reviewers also pass directly from source, quietly and with
+warnings. The covered-factor reviewer checks the retained upper kernel lift
+and reconstruction, and the zero reviewer rejects reflexivity as a substitute
+for the epic-cancellation proof. Three focused dispatch tests bring the
+metrics suite to 22 passing tests. The source/example/health registry routes
+only the three measured owner/reviewer pairs through
+`scripts/check_snake_row_source_boundary.sh`; its prerequisites are checked
+fresh but are not reported as new mathematical results.
+
+This completes the mathematical source-annihilation prerequisite, not yet
+7D3C or the homology window. Two ignored generic descent helpers now check:
+a monic factor inherits the original arrow's preannihilation, and an already
+supplied cokernel descends that factor after a source-cycle map. The actual
+four-row, two-supplied-homology consumer is drafted in
+`tmp/probes/short_exact_homology_connecting_factor.lp` but not yet checked or
+promoted. It must reuse the shared middle snake and both original homologies;
+its success must not be inferred from the generic helper tests.
+
+The final quiet gate
+`snake-row-source-boundary-quiet-20260908-055000.log` also succeeds at every
+target. The comparison takes 87 seconds, the covered factor and annihilation
+two seconds each, and the three reviewers one/five/three seconds. The eight
+independent reviewer files contain 13 positive and five negative assertions.
+Every warning inventory (the full source gate and each ordinary reviewer)
+matches the inherited 1,217 critical pairs and 169 pattern reports exactly
+by category, location, term head and rule family. All sixteen strict audits
+have zero rule clauses; the 22 metrics tests, shell syntax, catalog/TOC,
+active-reference and report-header checks pass. No unrelated full-health,
+TypeScript, book or repository aggregate was run. The near-bound comparison
+remains a measured performance liability, not an unverified proof or reason
+to weaken the mathematical statement.
+
+Status assessment: the native/proof-CAS bounded long-exact baseline and the
+generic six-term snake theorem remain completed earlier work. The target
+homology factor and source-boundary annihilation now both exist generically.
+The actual homology descent, three window exactness proofs and generic
+bounded assembly remain required, followed by the final formal-boundary,
+consolidation and book audits. This is a constructive reference proof layer
+using existing whole universal factors and explicit paths, not a claim of
+a whole internal complex category/homology functor or a Došen-style global
+normalization/decidability theorem for homology.
 
 ### Selected provider boundary for the proof-CAS consumer
 

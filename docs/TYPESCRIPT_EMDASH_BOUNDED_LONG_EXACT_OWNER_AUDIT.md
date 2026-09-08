@@ -1379,6 +1379,33 @@ This is a real consumer of the whole comparison, but it deliberately stops
 before the still-unqualified comparison with the second snake map. The
 canonical-snake endpoint trial was slower, not a correction; the chosen
 source-cycle factor retains its original producer's endpoint expressions.
-The generic covered-factor/cancellation proofs and additional second-snake
-factors remain probes pending that concrete join. No new runtime rule,
-proof-time unifier, primitive or opaque witness is involved.
+At that preceding checkpoint, the generic covered-factor/cancellation proofs
+and additional second-snake factors remained probes pending that concrete
+join, now resolved in the next section. No new runtime rule, proof-time
+unifier, primitive or opaque witness is involved.
+
+## Source-boundary annihilation
+
+The concrete join is now constructed. Generic postcomposition of the original
+second-snake reconstruction supplies the missing comparison; its row adapter
+retains the result classifier required by the existing source factors. The
+generic statement follows the literal producer expression for its kernel
+embedding, not a blanket substitution of readable aliases. A faster isolated
+row-classifier variant fails its covered-factor consumer and is not selected.
+
+Write g:Ker(beta)→Ker(gamma) for the original second snake map and l for
+the upper differential's selected kernel lift. The original row and source
+cycle reconstructions give g l = (s b) p_top by monic cancellation. Therefore
+partial(s b) p_top = partial g l = 0, and the top row's epic projection
+gives partial(s b) = 0. Both the covered factor and the zero path are
+constructed from the three actual rows/maps, the neighboring chain law and
+the supplied source homology. There is no section, arbitrary selected
+preimage, new boundary, or zero hypothesis standing in for this proof.
+
+The active factor's arrow reduces to the original upper kernel lift. Its
+reconstruction and zero proof have independent typed consumers, including
+refusal to replace the zero proof by reflexivity. Eight source modules add
+only definitions/proofs. The unused probe-only second-map/quotient-factor
+repackagings are not promoted. The measured source/reviewer dependency join
+has its own fresh-object, individually bounded checker; full source-homology
+descent and window exactness remain separate required tasks.

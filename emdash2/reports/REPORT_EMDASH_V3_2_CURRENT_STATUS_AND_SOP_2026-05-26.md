@@ -1033,14 +1033,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   from the original middle column. The chain law descends through the top
   row epimorphism; all components and compatibility paths retain their
   original row-map owners. This rule-free prerequisite does not yet prove
-  source-boundary annihilation or complete homology descent.
+  complete homology descent by itself.
   The source-cycle factor and compared-boundary modules now reuse the
   inverse kernel-domain comparison as a whole Hom factor and compose it
   with the original boundary of the supplied H_C. They compute that arrow
-  as s b and retain (e iota)(s b) = dNext_C. The concrete comparison with
-  the second snake map, needed to prove partial(s b) = 0, is still under
-  qualification. The broader canonical-endpoint probe was slower and was
-  not selected; these owners retain the original successful endpoint views.
+  as s b and retain (e iota)(s b) = dNext_C. Generic second-map
+  postcomposition now gives the concrete row comparison, and monic
+  cancellation constructs g l = (s b) p_top using the original upper
+  kernel lift. The existing partial g = 0 and epic cancellation prove
+  partial(s b) = 0. No source boundary, kernel or homology is reselected.
+  The consumer-compatible comparison classifier is retained after the
+  faster isolated producer-only variant failed its covered-factor consumer.
+  `check_snake_row_source_boundary.sh` stages the exact dependencies with a
+  separate 90-second bound per source/reviewer. The generic descent helpers
+  are only probed; the four-row connecting operation and window exactness
+  are not yet promoted results.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

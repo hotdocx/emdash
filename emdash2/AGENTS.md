@@ -351,7 +351,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   The kernel-domain comparison factor and source-row cycle/boundary modules
   retain the original inverse cycle comparison and its composite with the
   supplied source homology boundary as whole Hom factors. Their reconstruction
-  is established; annihilation by the connecting arrow remains separate.
+  is established. Generic second-map postcomposition and the row comparison
+  now identify the compared boundary after the top epic cover with a factor
+  through the second snake map. The original inner zero law then proves its
+  annihilation by the connecting arrow. The measured join is checked by
+  `scripts/check_snake_row_source_boundary.sh`; descent through the original
+  source homology cokernel and full window exactness remain downstream.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

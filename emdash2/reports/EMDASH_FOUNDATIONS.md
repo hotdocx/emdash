@@ -4132,16 +4132,19 @@ its derived chain law and whole projection from the middle column. Pasting
 the original Hom-precomposition factors shows that two successive right
 differentials compose to zero after the upper row projection; epic
 cancellation proves the column law. This keeps the original row projections
-and compatibility paths, without selecting sections. The further step of
-showing that the connecting factor annihilates this column's boundaries is
-still required before descending to its supplied homology.
+and compatibility paths, without selecting sections.
 
 The original source-cycle isomorphism is also available as a whole Hom
 factor: s:Z_C→Ker(gamma) with (e iota)s = k_C, where e is the row's
 cokernel comparison. Composing it with the supplied boundary b preserves
 the original arrow s b and reconstructs dNext_C after e iota. This is a
 checked comparison of existing universal constructions, not a newly chosen
-homology or the as-yet-unfinished assertion partial(s b) = 0.
+homology. The next comparison now proves g l = (s b) p_top, where g is
+the existing second snake map and l is the upper differential's original
+kernel lift. The known partial g = 0 then kills this composite after
+p_top, and epic cancellation proves partial(s b) = 0. Descending the
+target-homology factor through the original source homology cokernel remains
+a further construction; no source section is used in the annihilation proof.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

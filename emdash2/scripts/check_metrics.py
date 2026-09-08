@@ -152,6 +152,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_hom_factor_source_isos.lp"),
     Path("emdash3_2_hom_factor_composition.lp"),
     Path("emdash3_2_hom_factor_views.lp"),
+    Path("emdash3_2_hom_factor_epic_descent.lp"),
+    Path("emdash3_2_iso_evidence_monic.lp"),
     Path("emdash3_2_kernel_maps.lp"),
     Path("emdash3_2_kernel_map_laws.lp"),
     Path("emdash3_2_kernel_map_isos.lp"),
@@ -186,6 +188,12 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_hom_factor_chain_zero.lp"),
     Path("emdash3_2_short_exact_row_chain_projection.lp"),
     Path("emdash3_2_snake_row_source_compared_boundary.lp"),
+    Path("emdash3_2_abelian_snake_second_postcomposition.lp"),
+    Path("emdash3_2_snake_row_source_embedding_monic.lp"),
+    Path("emdash3_2_snake_row_source_second_comparison.lp"),
+    Path("emdash3_2_snake_row_source_upper_factor.lp"),
+    Path("emdash3_2_snake_row_source_boundary_covered.lp"),
+    Path("emdash3_2_snake_row_source_boundary_zero.lp"),
     Path("emdash3_2_snake_row_target_factors.lp"),
     Path("emdash3_2_snake_row_target_cycles.lp"),
     Path("emdash3_2_normal_mono_epic_factors.lp"),
@@ -570,7 +578,16 @@ SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES = {
     Path("examples/snake_row_target_homology_normal.lp"),
     Path("examples/snake_row_target_homology_factor.lp"),
 }
+SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES = {
+    Path("emdash3_2_snake_row_source_second_comparison.lp"),
+    Path("emdash3_2_snake_row_source_boundary_covered.lp"),
+    Path("emdash3_2_snake_row_source_boundary_zero.lp"),
+    Path("examples/snake_row_source_second_comparison.lp"),
+    Path("examples/snake_row_source_boundary_covered.lp"),
+    Path("examples/snake_row_source_boundary_zero.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES, "./scripts/check_snake_row_source_boundary.sh"),
     (SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES, "./scripts/check_snake_row_target_homology.sh"),
     (SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES, "./scripts/check_snake_row_target_cycles.sh"),
     (SPECIAL_SIX_TERM_CHECK_FILES, "./scripts/check_abelian_snake_six_term.sh"),

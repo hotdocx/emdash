@@ -39,6 +39,7 @@ normalization_examples_checked=0
 snake_rows_examples_checked=0
 snake_target_cycles_examples_checked=0
 snake_target_homology_examples_checked=0
+snake_source_boundary_examples_checked=0
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
@@ -88,6 +89,13 @@ for file in examples/*.lp; do
     if [[ "$snake_target_homology_examples_checked" -eq 0 ]]; then
       ./scripts/check_snake_row_target_homology.sh
       snake_target_homology_examples_checked=1
+    fi
+  elif [[ "$file" == "examples/snake_row_source_second_comparison.lp" ||
+          "$file" == "examples/snake_row_source_boundary_covered.lp" ||
+          "$file" == "examples/snake_row_source_boundary_zero.lp" ]]; then
+    if [[ "$snake_source_boundary_examples_checked" -eq 0 ]]; then
+      ./scripts/check_snake_row_source_boundary.sh
+      snake_source_boundary_examples_checked=1
     fi
   else
     check_file "$file"
