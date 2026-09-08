@@ -685,7 +685,7 @@ was introduced to get a passing target.
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
-| `LEH-TARGET-NORMAL-LIFT-7D2` | probe in progress | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
+| `LEH-TARGET-NORMAL-LIFT-7D2` | probe in progress; comparison-law application now accepted, final cover-law alignment open | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
@@ -705,7 +705,7 @@ was introduced to get a passing target.
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | in progress; current checked draft integrated; final generic-theorem updates remain | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
-| `LEH-BOOK-DRAFT-14A` | complete; local 0.8.0-dev export and visual checks green | checked owners and reviewed claim boundaries | Chapter 31, all planned appendices, 13 new evidence entries and reference provenance; generic-window/bounded-proof boundaries stated explicitly |
+| `LEH-BOOK-DRAFT-14A` | complete; checkpoint `365b60fd`; local 0.8.0-dev export and visual checks green | checked owners and reviewed claim boundaries | Chapter 31, all planned appendices, 13 new evidence entries and reference provenance; generic-window/bounded-proof boundaries stated explicitly |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
 | `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
 
@@ -1897,6 +1897,61 @@ only in explicit/abbreviated argument printing because a later process
 loading the compiled core does not replay its print settings. Do not call
 those complete rendered logs byte-identical. No new warning family was
 introduced by this rule-free tranche.
+
+### Generic target-normality conversion boundary (row 7D2)
+
+The reviewed mathematical route is still sound: combine the actual target
+cycle factor with j q = c k, the original covered snake reconstruction,
+and the target-cokernel comparison; then cancel the epic cover after the
+cokernel of monic j. Generic factor-pasting and normal-test-from-epic-factor
+helpers have checked in ignored probes. So have the original forward and
+reverse cokernel-comparison reconstruction laws. These partial results are
+not a completed specialized normal test.
+
+The measured failure is the concrete proof application. In
+`homology-target-final-debug-quiet-20260908-010013.log`, all six partial
+application stages and a local final-law binder check, but supplying the
+already proved forward law reaches the 90-second ceiling. The two types
+both state w c_A = pi a. One retains the helper's endpoint/iso aliases;
+the other exposes the original row-cokernel projections. The local
+Lambdapi `Infer.coerce` calls `Eval.pure_eq_modulo` before unification, and
+this comparison unfolds large isomorphism/universal-property expressions.
+Thus the timeout is not evidence of a missing mathematical premise or an
+unjoinable rewrite. An inference-first standalone law checks in five seconds.
+Canonicalizing only the target endpoints moves the expensive comparison to
+the cover law; moving the same equation into a snake-specific wrapper also
+times out. No such failing wrapper is promoted.
+
+The current small hypothesis reorders the generic helper's telescope:
+consume the actual comparison and its law before instantiating the covered
+factor data, infer reconstructible carrier endpoints, and retain the
+preadditive capability explicitly. The helper delegates the same checked
+generic proof. The initial trial exposed a genuinely unrecoverable arrow
+index in the cokernel projection; it was restored explicitly, in accordance
+with the body-argument SOP. The warning-enabled second trial then accepted
+the previously expensive concrete forward-law application. A subsequent
+partial-application alias required its five remaining object arguments
+explicitly. With that corrected, stages 0–3 all check: the actual forward
+law, comparison/cycle factors and quotient factor are accepted. The last
+application of the original cover law still reaches 90 seconds, as recorded
+in `homology-target-forward-first-warnings-20260908-014706.log`.
+The preceding quiet and warning-enabled inference/arity diagnostics are
+`homology-target-forward-first-quiet-20260908-013932.log` and
+`homology-target-forward-first-warnings-20260908-014339.log`.
+These are separate inference/arity issues, not rejected semantic laws.
+The ignored probe is
+`abelian_homology_target_normal_forward_first.lp`, with the correspondingly
+named exact-source runner. It adds no opacity, axiom, primitive or rule.
+Reordering therefore solves one proof application but not the complete
+normal test. No helper or specialization from this probe is promoted.
+The next principled experiment is reindexing at a
+whole universal-data owner along constructed reflexivity, as in the
+existing exactness reindexing interface, rather than moving another large
+equation between spelling-only aliases. The two cover types retain the
+same partial, p1, pi and original lift, but expose different presentations
+of their selected cokernel endpoint/projection. A later isolated runner may
+check multiple variants against one fresh, unchanged dependency set; that
+avoids repeated dependency work without importing unchecked or stale objects.
 
 ### Selected provider boundary for the proof-CAS consumer
 

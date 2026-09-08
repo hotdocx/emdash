@@ -1289,3 +1289,21 @@ public PDF copy is not promoted and nothing is published. A matrix escaping
 defect found by visual inspection is fixed in the authoring source; its
 underlying renderer-normalization issue is recorded as a later scoped
 maintenance consumer in the plan.
+
+## Generic normal-test probe continuation (row 7D2)
+
+The actual target-cycle factor, monic homology inclusion, original covered
+snake reconstruction and target-cokernel comparison are available. The
+remaining application is sensitive to the representation of dependent
+proof types, not only the mathematical equation they state. The local
+checker compares types modulo rewriting before invoking unification.
+
+The forward-first helper experiment keeps the original comparison-law
+projection indices, supplies the unrecoverable cokernel arrow explicitly,
+and consumes the law before the factor data. Its warning-enabled corrected
+consumer accepts that law, the factor data and the quotient factor.
+The final original cover law still exceeds 90 seconds. This narrows the
+open coercion boundary to that cover type; it does not construct the normal
+test or justify promoting the helper. The exact diagnostics and next
+whole-owner reindexing hypothesis are recorded in the plan. No active source,
+rule, proof opacity, universal choice or book theorem claim changes.
