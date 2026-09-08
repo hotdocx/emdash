@@ -692,14 +692,14 @@ was introduced to get a passing target.
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
-| `LEH-FORMAL-11` | in progress; raw spine 11A constructed, stronger homology/exactness alignment pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
+| `LEH-FORMAL-11` | in progress; actual interior homology/exactness constructed, full boundary audit pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
 | `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; checkpoint `5d2f8869` | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
 | `LEH-FORMAL-SELECTED-KERNEL-11D` | complete; checkpoint `f05c5d0e` | existing two weak pullbacks and their universal factor operations | per-choice embedding, lifting, reconstruction and uniqueness; W selector compatibility preserving original ranks/matrices and public signatures |
-| `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; root native/live formal consumers green | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
-| `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; old and downstream compatibility checks green | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
-| `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | next | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
+| `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; checkpoint `9dc9b316` | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
+| `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
+| `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; live all-position consumer green | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -2014,6 +2014,69 @@ Check every constructed homology/exactness term and the all-position result,
 with guards against changed labels, pairs, choices and parent replay, and
 with no re-selection or homology recomputation. Generic 7D and generic
 bounded exactness remain separate required mathematical results.
+
+### Actual formal homology and exactness at all interior positions (11G)
+
+The literal-data helper in
+`emdash3_2_commutative_algebra_freyd_actual_homology.lp` constructs the
+selected homology from the two original providers and a given raw boundary.
+Its reconstruction input is the semantic equation R₁ H = p₁ B − F,
+not an equality between already-evaluated matrix literals. The helper
+retains the raw boundary and relation witness, and the existing epicity
+witness is definitionally exactness at that same stored boundary. The
+focused reviewer checks construction, literal boundary preservation,
+exactness and rejection of another boundary (three positive/one negative).
+The live bridge initially exposed a missing import of the existing explicit
+epimorphism constructor; adding its owning dependency fixed the consumer,
+without changing any mathematical rule or assuming an equality.
+
+`algebra_formal_freyd_actual_homology.ts` reifies that semantic reconstruction
+and replays only the existing raw agreement operation. Its term constructor
+uses the same adopted providers, displayed arrows and original boundary.
+The new exact signature environment combines the existing spine,
+epimorphism and provider declarations with these transparent backend
+constructors. It does not add native evaluation to the logical framework.
+
+`algebra_formal_freyd_long_exact_homology.ts` prepares all coefficient data
+before environment creation. After the original whole replay/adoption, it
+validates the source, reserved signatures, equation inventory and labelled
+selected-homology snapshots; creates the formal spine and boundary epicities
+through their existing consumers; binds each actual replay kernel's retained
+providers; and constructs every homology/exactness term. Additional equations
+and universal provider semantics remain explicitly adopted and separately
+classified. The helper reconstructs only the transparent formal pair of the
+same two providers; it never makes another native kernel choice.
+
+The all-position result retains the original replay, formal spine, all
+boundary epicities, actual interior points and both checked terms per point.
+For the two-degree nonsplit example this is six homologies and six exactness
+terms, at the six original adjoining-arrow pairs. Throwing spies
+confirm no repeated whole homology, window, kernel or weak-pullback selection.
+Guards reject changed interior labels/pairs/choices, foreign preparations,
+missing parent adoption, altered equation inventories and foreign replay
+identity. Reserved source signatures must keep their expected types and
+opaque signature-only status; a user-supplied alternative body is not silently
+treated as the backend's named operation.
+
+Root validation: the one-position consumer passes 3/3 with both constructed
+terms checked in Lambdapi; the whole consumer passes 5/5 with no skipped
+test. Its single live target accepts the formal spine plus all twelve terms
+(13 assertions) in 6.8 seconds; the complete focused TS suite takes about
+99 seconds, mostly preparing/replaying the retained whole data. No Lambdapi
+target exceeds 90 seconds. The source warning reviewer passes in
+`commutative_ring_freyd_actual_homology-20260908-001305.log`. Generic window
+exactness, generic bounded assembly and the full formal-boundary audit
+(including the earlier degreewise and snake-output requirements) remain
+required; this result is not a closed ring-wide Abelian structure or a
+generic long-exact theorem.
+
+The inherited critical-pair/pattern warning multiset is unchanged at
+1,223/169 against the selected-homology baseline. The strict rule audit
+reports zero clauses. Root typecheck, changed-file lint, workspace contract,
+catalog, source TOC, 16 metrics unit tests and documentation hygiene pass.
+The source and focused TS reviewers are registered. The unregistered book
+draft and ongoing generic-normality probes remain outside this checkpoint;
+the standing full-health exception is retained without an unrelated aggregate.
 
 The shared selected kernel proof core is now promoted for qualification.
 The compatibility module supplies the three W-independent paths; embedding,

@@ -247,6 +247,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_kernel_choices_from_weak_kernels.lp"),
     Path("emdash3_2_commutative_algebra_freyd_kernel_choice_providers.lp"),
     Path("emdash3_2_commutative_algebra_freyd_selected_homology.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_actual_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp"),
     Path("emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp"),
     Path("emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp"),

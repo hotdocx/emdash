@@ -978,10 +978,16 @@ belongs to the owning implementation plan rather than to standing guidance.
   those per-arrow choices and an actual boundary with reconstruction, deriving
   the original witnessed cokernel and reading exactness at the stored boundary.
   The W-indexed homology API retains all 20 signatures as the original chain
-  declaration and 19 selector wrappers. Complete formal exactness of the
-  retained bounded sequence still requires applying this interface to all
-  actual interior homologies; neither isolated provider tests nor epicity
-  witnesses alone establish that whole result.
+  declaration and 19 selector wrappers. The actual-homology matrix helper
+  now retains the native raw boundary, constructs its reconstruction from
+  R₁ H = p₁ B − F and reuses its epicity witness as exactness. The all-position
+  consumer applies these operations at every retained interior, preserving
+  the original replay, formal spine, providers and displayed arrows. The
+  two-degree live target checks the spine and all six homology/six exactness
+  terms together; no kernel, weak-pullback, window or whole-homology
+  reselection occurs. This is formal exactness for the selected native
+  result relative to its explicit equation/provider assumptions, not the
+  still-required generic homology-window or bounded long-exact theorem.
 - `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
   partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
   beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout

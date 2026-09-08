@@ -1214,3 +1214,23 @@ old W interface has unchanged signatures and delegates through its original
 two choices. The raw chain owner, quotient agreement semantics and higher
 universal-operation inputs are unchanged; no closed quotient decoder,
 independent homology theory or new runtime rule is introduced.
+
+## Actual interior homology/exactness consumer (row 11G)
+
+The explicit-matrix homology helper retains B and its original relation
+witness, constructs its reconstruction from R₁ H = p₁ B − F, and uses the
+existing selected-homology introduction. The exactness helper returns the
+already constructed epimorphism witness for B; no opaque exactness constant
+or rank/object equality is introduced. The original two providers supply
+the kernel universality at the literal cycle presentation.
+
+The all-position TS consumer reuses one whole replay/adoption, the existing
+formal-spine construction, and all boundary epicities. It prepares every
+coefficient before fixing the source, reconstructs actual replay provider
+handles without rerunning kernel selection, adopts only explicitly labelled
+equations/provider semantics, and checks both terms at every actual pair.
+Its result retains the spine and each original interior point. The two-degree
+consumer checks all 13 resulting spine/homology/exactness terms together.
+This closes the prior interior-universality/epicity alignment gap for the
+selected native result. It does not prove generic window exactness or close
+the broader formal-boundary audit automatically.

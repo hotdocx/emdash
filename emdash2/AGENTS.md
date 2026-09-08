@@ -359,6 +359,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the canonical lift or a supplied raw boundary with reconstruction. Its
   cokernel and exactness refer to that same stored boundary. The original
   W-indexed homology names remain selector wrappers with unchanged signatures.
+  The actual-homology matrix helper retains a supplied native boundary and
+  its semantic reconstruction equation, then reuses the original epicity
+  witness as exactness at that boundary. Its all-position proof-CAS consumer
+  constructs homology/exactness terms for each actual interior of a retained
+  replay and checks them with the formal spine. This selected-result evidence
+  remains distinct from the generic homology-window theorem.
   `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
   existing Freyd additive structure with both canonical constructions as one
   capability-parameterized witnessed surface. Its universal tests retain raw
