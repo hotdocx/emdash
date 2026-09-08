@@ -20,6 +20,11 @@ The correctly based whole-family prototype now also computes displayed-map
 components, displayed-transformation components and nonidentity base-2-cell
 action, without a new opposite-family primitive or equality bridge. Active
 same-base consumer migration remains the next prerequisite.
+The first full-copy migration identifies separate negative-section and
+dependent-Hom-target variance obligations. A total-duality candidate restores
+the negative constant-family interface; the coupled presheaf target still
+needs reconstruction with the original family and jointly correct bases.
+The repair plan records the exact failures and scoped positive controls.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:

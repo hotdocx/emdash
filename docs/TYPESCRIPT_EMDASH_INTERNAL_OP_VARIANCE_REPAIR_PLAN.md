@@ -148,7 +148,7 @@ if another unrestricted constructor reinstates the same action.
 | OP-REPAIR-2 | isolated prototype checked; not promoted | Co₂ category/functor projections, corrected whole op action, correctly directed transformation computation and a rejected wrong-direction application |
 | OP-REPAIR-3 | family-only counterexample confirmed; propagation inventory still open | same-base family reconstruction control and source-level dependent-owner inventory |
 | OP-REPAIR-3A | whole-family prototype checked; not promoted | derive the correctly based operator, displayed map and reversed displayed-transformation action, with genuine base-2-cell computation and retained next Hom action |
-| OP-REPAIR-4 | pending | smallest coherent owner-position migration that removes the bad covariant surfaces and qualifies their legitimate consumers |
+| OP-REPAIR-4 | isolated full-copy migration exposes negative-section and Homd-target boundaries | smallest coherent owner-position migration that removes the bad covariant surfaces and qualifies their legitimate consumers |
 | OP-REPAIR-5 | pending | positive opposite regressions, exact variance-negative fixture, warnings/SOP/health qualification and downstream homology consumer |
 
 The append/import probes for row 2 establish local types and observations only:
@@ -309,6 +309,121 @@ Qualify generic identity/composition projection orders at the eventual owner
 positions, rerun the empty-type negative against that migrated kernel, and
 return to the homology consumer. The active signature still admits the
 diagnostic; the full long-exact goal is not complete.
+
+## Migration Experiment: Distinguish Pointwise Opposite From Negative Sections
+
+Checkpoint `7e190956` completes the preceding isolated family prototype, not
+the kernel migration. A full copied-core migration is now in
+`tmp/probes/hint_internal_op_migrating_core.lp`; the active kernel is unchanged.
+
+The first source failure is the `Hom_catd` fibre projection's old `piapp0 K`
+annotation. Its negative section now belongs to a family over Co₂(K).
+The adjacent constant-Cat reduction needs a stronger review: it expects that
+section to supply an ordinary family over Op(K), not Op(Co₂(K)). Blindly
+changing endpoint annotations does not justify that semantic interface.
+
+Before choosing a replacement, test the constant-family requirement directly:
+negative sections of const_K(C) should have the ordinary contravariant
+functor interpretation Op(K) → C. A total dual reverses all positive
+dimensions; its universe shift reverses dimensions 2,3,... . The candidate
+uses those two dualities specifically for the negative-section interface,
+without changing the meaning of the existing dimension-1 `Op_cat` or the
+dimension-2 Co₂ prototype. Reject any candidate that only checks by equating
+K with Co₂(K), truncating the base, or adding an arbitrary inverse witness.
+This is a next local mathematical/typing experiment, not a selected repair
+of `Hom_catd`, `homd_int`, Sigma, or the homology representation.
+
+### Full-copy result and the distinct dualities
+
+The copied kernel accepts the corrected Co₂/universe/family owner declarations
+and reaches the mixed-Hom section. Its first failure is the old negative
+`piapp0` base (`hint_internal_op_migrating_core-20260908-150939.log`). After
+updating that annotation and its adjacent transfor counterpart, it reaches
+the constant-Cat mixed-Hom reduction and fails subject reduction with
+`K ≡ Co2_cat(K)` unsolved
+(`hint_internal_op_migrating_core-20260908-151604.log`). These are concrete
+source-position failures, not a timeout or warning-count rejection. This
+partial full copy is not a complete migrated kernel and is not promoted.
+
+The durable [total-duality/negative-section prototype](../emdash2/audits/total_duality_negative_sections_prototype.lp)
+tests a different role of duality, without renaming the existing Op:
+
+```text
+All(C)       reverses dimensions 1,2,3,...
+CoAll(C)     reverses dimensions 2,3,4,...
+Hom_All(C)(x,y)   = All(Hom_C(y,x))
+Hom_CoAll(C)(x,y) = All(Hom_C(x,y))
+All(CoAll(C)) = Op(C).
+```
+
+The corresponding `all_op : CoAll(Cat) → Cat` and whole `CoAll_func` give a
+derived `All_catd(E)` over CoAll(K). For a constant family, an actual section
+of that family has the existing Pi-usability view
+`X : CoAll(K) → All(C)`. Applying the whole All functor yields precisely
+`Op(K) → C`, including its higher-dimensional directions. This restores the
+required constant-Cat reduction of a candidate mixed-Hom interface. The
+analogous pointwise-1-opposite route instead gives `Op(Co2(K)) → C`; the
+comparison with `Op(K) → C` is rejected for arbitrary K.
+
+The prototype checks eight positive observations and one negative, including
+actual family fibre/arrow computation, the existing Pi constant-family
+interface, the mixed-Hom constant reduction and retained dimension-3
+orientation. Log:
+`total_duality_negative_sections_prototype-20260908-152845.log`.
+Its general mixed-Hom formation is still a primitive candidate, not a derived
+proof that this is the correct arbitrary-family replacement. Full coherence,
+all higher projection ladders, and the coupled dependent-Hom target remain
+unqualified. Do not confuse this local successful constant case with a repair
+of the complete foundation.
+
+### The presheaf target is a separate coupled boundary
+
+The [presheaf variance-boundary probe](../emdash2/audits/internal_op_presheaf_variance_boundary.lp)
+follows the existing Rep/Edge/Presheaf composition with corrected whole
+operators and the commuting dimension-1/dimension-2 dualities. It derives
+
+```text
+Edge_corrected : Op(Co2(Z)) → Catd(Co2(Z))
+HomPresheaf_corrected : Co2(Z) → Catd(Op(Co2(Z))).
+```
+
+Both original point formulas compute: Hom_Z(x,y)ᵒᵖ and its Cat-valued
+presheaf category. But the existing `Homd_target_section_catd` body then
+expects its other input over Co2(Z), while the supplied E is over Z. The
+probe rejects that old input and accepts an explicitly supplied correctly
+based E2. The latter is only a positive constructor control; it does not
+postulate a canonical E ↦ E2 or authorize new assumptions in the homology
+development. Three positive and one negative checks pass in
+`internal_op_presheaf_variance_boundary-20260908-152847.log`.
+
+Thus a mechanical base-annotation migration is not enough. The next owner
+decision must reconstruct the dependent-Hom target with jointly correct
+variances, preserving the original supplied family, rather than invent an
+unrestricted same-fibre regrading or erase Co2(Z) with an equality/unifier.
+This does not prove that no suitable internal target exists; it identifies
+the exact current target expression that cannot simply be reused. Preserve
+the total-duality candidate and earlier pointwise Co₂ prototypes as distinct
+design evidence. The original long-exact/CAS/book objective remains intact.
+
+### Scoped validation for these migration controls
+
+The tracked total-duality warning run passes at 1,212 critical pairs / 157
+pattern reports (`total_duality_negative_sections_prototype-20260908-153210.log`).
+Relative to its imported Co₂ prototype, its 38 additional pairs comprise
+three All/CoAll interactions, ten action/self interactions, twenty-four
+composition/action interactions and one All-functor involution interaction.
+The presheaf boundary passes at 1,196/157
+(`internal_op_presheaf_variance_boundary-20260908-153211.log`); its two new
+pairs concern commuting Co₂ with the ordinary Op. Both inventories parse
+completely. These are measured interaction families, not global joining or
+consistency claims and not a warning veto.
+
+Both strict LHS audits report zero unreviewed compound inferred slots. Active
+reference and report-lifecycle checks pass; registry inspection confirms the
+two new files are not positive library targets. No active kernel/CAS source,
+book source, catalogue or health snapshot is changed, and no unrelated
+aggregate is run. The failed full-copy migration remains ignored, with its
+exact source and logs retained as recovery evidence.
 
 ## Validation And Handoff
 
