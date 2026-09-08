@@ -12,6 +12,29 @@ Additional finding: [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_H
 
 ## Objective And Scope
 
+Scope clarification from the user: this is a practical repair prerequisite,
+not a new comprehensive-duality goal. Select the smallest coherent formulation
+that removes the identified inconsistencies and preserves the computations
+needed by the long-exact/proof-CAS development. Reinterpret or reform existing
+owners where semantically valid; do not promote every alternative prototype
+as a coexisting public API. Preserve alternatives as non-library recovery
+evidence for a later comprehensive design.
+
+In particular, a complete dimension-mask framework, a general comparative
+lax/oplax duality library, and a fully derived relative-presheaf construction
+are not prerequisites merely because they are attractive architectures.
+A small primitive computational interface with a defensible intended
+semantics can be preferable to deriving a much broader construction now.
+This permission does not justify a false equality, an unrestricted regrading
+cast, or hiding a still-accepted Empty derivation. Any necessary loss of
+requested computations must be surfaced rather than silently imposed.
+
+The immediate worklist is: finish the concrete Sigma correction and its
+direct consumers, choose the minimal valid repair of the unsafe internal-op
+interfaces, run both actual Empty controls and the nearest required positive
+consumers, then return to the long-exact goal. Do not initiate a repo-wide
+semantic migration or unrelated aggregate from this side task.
+
 Correct the higher variance of internal opposite while retaining the existing
 directed categories, whole functor/transfor action, and legitimate local
 `Op_cat`, `Op_func`, and `Op_transf` observations. This is a prerequisite of
@@ -471,6 +494,23 @@ aggregate is run. The failed full-copy migration remains ignored, with its
 exact source and logs retained as recovery evidence.
 
 ## Sigma Prerequisite Before A Total-Category Homd Target
+
+Current scope evidence: the Sigma repair is confined to a full copy of the
+single nucleus (109 added / 35 removed lines at this point). That entire
+source passes checking. The Sigma Empty reproducer fails at its original
+invalid cast; the distinct op reproducer still succeeds, confirming that
+the latter defect is not accidentally hidden. The existing Sigma reviewer
+passes, as does a nonconstant-family 2-cell constructor retaining the forward
+fibre cell and recovering both projections.
+
+The isolated seven-reviewer stage `/tmp/emdash-sigma-repair.UTRhbr` uses one
+freshly generated candidate kernel object and copied source dependencies.
+Sigma total and fibrewise Sigma pass. Five failures reduce to two immediate
+owners: `emdash3_2_dependent_simplex_represented_source.lp` at its old
+triangle-carrier presentation (four affected reviewers), and the first observation
+in `examples/dependent_hom_laxity.lp`. These are the next local checks; they
+are not evidence that every file needs redesign. The kernel remains
+unpromoted while those consumers and the warning audit are resolved.
 
 The next investigation considers a coupled relative/test-category target
 retaining the supplied family through the existing whole Hom and total
