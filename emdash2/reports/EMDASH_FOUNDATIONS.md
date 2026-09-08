@@ -4136,6 +4136,13 @@ and compatibility paths, without selecting sections. The further step of
 showing that the connecting factor annihilates this column's boundaries is
 still required before descending to its supplied homology.
 
+The original source-cycle isomorphism is also available as a whole Hom
+factor: s:Z_C→Ker(gamma) with (e iota)s = k_C, where e is the row's
+cokernel comparison. Composing it with the supplied boundary b preserves
+the original arrow s b and reconstructs dNext_C after e iota. This is a
+checked comparison of existing universal constructions, not a newly chosen
+homology or the as-yet-unfinished assertion partial(s b) = 0.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

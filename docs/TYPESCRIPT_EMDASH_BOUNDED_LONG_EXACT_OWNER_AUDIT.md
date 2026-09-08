@@ -1363,3 +1363,22 @@ components, paths and non-collapse boundary. This completes only 7D3A:
 source-boundary annihilation and descent through the supplied homology
 cokernel remain the next constructions. The sources add definitions/proofs,
 not primitive symbols, rewrite rules or proof-time unifiers.
+
+## Source-cycle factor and the actual source boundary
+
+The inverse kernel-domain comparison now returns a whole internal
+postcomposition factor. Its row-specific specialization uses the original
+source-cycle isomorphism: for e:Coker(i)→C and the selected embedding iota,
+its retained arrow is s:Z_C→Ker(gamma), with (e iota)s = k_C. The supplied
+source homology already provides b:C_next→Z_C. Factor transitivity therefore
+retains s b and proves (e iota)(s b) = dNext_C. Both observations are
+checked at the actual original choices, without an object equality or a
+fresh kernel/homology selection.
+
+This is a real consumer of the whole comparison, but it deliberately stops
+before the still-unqualified comparison with the second snake map. The
+canonical-snake endpoint trial was slower, not a correction; the chosen
+source-cycle factor retains its original producer's endpoint expressions.
+The generic covered-factor/cancellation proofs and additional second-snake
+factors remain probes pending that concrete join. No new runtime rule,
+proof-time unifier, primitive or opaque witness is involved.

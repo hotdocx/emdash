@@ -348,6 +348,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the right-column chain law and whole projection through the top row's
   epic arrow, retaining the original components and compatibility paths.
   They add no rule or unifier and do not yet supply source-boundary descent.
+  The kernel-domain comparison factor and source-row cycle/boundary modules
+  retain the original inverse cycle comparison and its composite with the
+  supplied source homology boundary as whole Hom factors. Their reconstruction
+  is established; annihilation by the connecting arrow remains separate.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

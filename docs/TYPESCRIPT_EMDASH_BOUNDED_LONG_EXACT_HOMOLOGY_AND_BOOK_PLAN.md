@@ -687,8 +687,9 @@ was introduced to get a passing target.
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
 | `LEH-TARGET-NORMAL-LIFT-7D2` | complete; checkpoint `3d62f060` | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
 | `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
-| `LEH-SOURCE-COLUMN-7D3A` | complete; focused quiet/warning reviewers green | three upper rows, their maps and middle-column zero | derive the right/quotient column chain law and its whole projection map; retain the actual supplied source homology |
-| `LEH-SOURCE-ANNIHILATION-7D3B` | pending | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
+| `LEH-SOURCE-COLUMN-7D3A` | complete; checkpoint `c000932c` | three upper rows, their maps and middle-column zero | derive the right/quotient column chain law and its whole projection map; retain the actual supplied source homology |
+| `LEH-SOURCE-ANNIHILATION-7D3B` | in progress; whole ingredients probed, concrete covered comparison under qualification | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
+| `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; quiet/warning source/reviewer gates green | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | pending | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
@@ -2160,6 +2161,76 @@ a changed rewrite interaction. A fresh continuation reviewer also passes in
 `short_exact_row_chain_projection-20260908-043750.log`. Strict source/reviewer
 audits, all 19 metrics-dispatch tests, shell syntax, catalog freshness, source
 TOC, active-reference and report-header checks pass.
+
+The initial ignored probes construct the inverse kernel-domain comparison as
+an actual Hom factor, the original second snake map as its whole selected
+kernel factor, the upper differential's kernel factor, and the supplied
+homology boundary followed by the source-cycle comparison. The latter two
+take one second each in the fresh staged warning run
+`homology-source-boundary-warnings-20260908-045028.log`. Generic transitivity,
+whiskering, covered comparison and annihilation-through-an-epic-factor
+helpers also check. At this intermediate probe stage they were not promoted
+operations or a completed source-boundary theorem; the accepted subset and
+remaining boundary are recorded below.
+
+Repackaging the second snake map from its separately observed arrow and
+path exceeded 90 seconds in both flat quiet/warning probes. Reusing the
+original whole selected kernel factor instead checks (two seconds with
+fresh exact dependencies). The subsequent concrete covered-factor
+application still times out. Factoring its comparison into a named two-row
+lemma localizes the same cost to that lemma in
+`homology-source-boundary-warnings-20260908-045406.log`; it is not a failure
+of generic epic cancellation. The next qualification tested the canonical
+snake cokernel/kernel/embedding endpoint observations consistently instead
+of mixing them with the short-exact and raw selected-kernel views.
+`tmp/probes/source_boundary_check.sh` stages only this source-side dependency
+join, with fresh objects, independent 90-second bounds and automatic cleanup.
+
+The blanket canonical-snake endpoint variant is not selected: it increases
+the source-cycle factor check from one second to 67 seconds and the second
+factor then exceeds 90 seconds in
+`homology-source-boundary-warnings-20260908-045658.log`. The previously
+checked short-exact/raw-kernel owner views are restored. A direct instance
+of generic `hom_factor_paste_path`, instead of the nested factor comparison,
+also times out at the same two-row comparison in
+`homology-source-boundary-warnings-20260908-050036.log`. Thus changing a
+name to a purportedly canonical spelling is not sufficient evidence of an
+improvement; the actual producer and consumer must be measured together.
+
+The unambiguous source-cycle/boundary portion is now implemented separately
+as row 7D3B1. `emdash3_2_hom_factor_views.lp` provides transparent factor
+transitivity, postcomposition and the alternate pre/postcomposition view.
+`emdash3_2_kernel_domain_comparison_factors.lp` obtains the inverse kernel
+comparison as its original whole factor; the row-specific source-cycle
+factor specializes it. `emdash3_2_snake_row_source_compared_boundary.lp`
+composes this with the supplied H_C's original kernel-selected boundary.
+Its arrow is s b, and its reconstruction is (e iota)(s b) = dNext_C.
+This is not an assertion that partial(s b) = 0: that comparison and epic
+cancellation remain required in parent row 7D3B, before 7D3C/7D4 and generic
+bounded assembly. No existing homology, kernel or boundary is reselected.
+
+The four active-source reviewers pass directly from source, quietly and with
+warnings, with ten positive and four negative assertions. In particular, the
+row-cycle arrow computes to the original isomorphism's forward map and the
+compared-boundary arrow computes to that map composed with the original b.
+Both whole factors retain their reconstruction paths. The final warning
+logs are `hom_factor_views-20260908-050321.log`,
+`kernel_domain_comparison_factors-20260908-050327.log`,
+`snake_row_source_cycle_factor-20260908-050352.log`, and
+`snake_row_source_compared_boundary-20260908-050437.log` under
+`emdash2/logs/probes/`. The lightweight Hom-view import has the inherited
+1,117/157 warning subset; each other reviewer has the identical 1,217/169
+strict inventory by category, location, head and rule family. No unclassified
+warning, new rule clause, primitive, unifier or opaque proof is introduced.
+
+All eight source/reviewer strict audits, the 19 metrics-dispatch tests,
+shell syntax, catalog freshness, source TOC, active-reference and report-header
+checks pass. The source registry uses ordinary dispatch: these owners do
+not need a dedicated staged runner. The original full-health exception,
+book snapshot and unfinished 7D3B/7D3C/7D4/generic-assembly obligations remain
+unchanged. The next concrete experiment should isolate the dependent
+application of the second-snake comparison, not repeat the rejected blanket
+endpoint substitution or treat the checked s b factor as a zero proof.
 
 ### Selected provider boundary for the proof-CAS consumer
 

@@ -1034,6 +1034,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   row epimorphism; all components and compatibility paths retain their
   original row-map owners. This rule-free prerequisite does not yet prove
   source-boundary annihilation or complete homology descent.
+  The source-cycle factor and compared-boundary modules now reuse the
+  inverse kernel-domain comparison as a whole Hom factor and compose it
+  with the original boundary of the supplied H_C. They compute that arrow
+  as s b and retain (e iota)(s b) = dNext_C. The concrete comparison with
+  the second snake map, needed to prove partial(s b) = 0, is still under
+  qualification. The broader canonical-endpoint probe was slower and was
+  not selected; these owners retain the original successful endpoint views.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary
