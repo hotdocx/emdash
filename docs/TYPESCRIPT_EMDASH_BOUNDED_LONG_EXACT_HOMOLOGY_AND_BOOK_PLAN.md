@@ -6,6 +6,10 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
+before further component-level window exactness. Connecting-map checkpoint:
+`b83a4d32`; the full goal remains active.
+
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 
 Branch: `goal/bounded-long-exact-homology-book-v3.2`
@@ -2381,13 +2385,16 @@ This completes 7D3C, not the generic window or bounded exactness theorem.
 The user's subsequent question asks whether whole-complex/homology
 internalization should precede the remaining component-level exactness
 proofs. The [research and sequencing review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
-recommends a bounded internalization pilot before 7D4, subject to user
-adoption. Following the user's clarification, prefer the existing primitive
-head/projection computation and proof-time usability style; a general
-`make_*` constructor layer is not a prerequisite. It does not claim that
-the pilot is implemented, require spectra,
-or shrink the full goal. Preserve this completed checkpoint while that
-architectural direction is reviewed.
+recommended a bounded internalization pilot before 7D4. The user's subsequent
+strictness clarifications and continuation select the
+[strict pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md).
+Prefer the existing primitive-head/projection computation and proof-time
+usability style; a general `make_*` constructor layer is not a prerequisite.
+This does not require spectra or shrink the full goal. Preserve the completed
+connecting-map checkpoint while the pilot qualifies whole owners. Its first
+rule-free diagram-evaluation layer now computes object, component and mixed
+transfor action with a retained next Hom functor; the kernel/cokernel/complex/H
+owners remain to be constructed.
 
 ### Selected provider boundary for the proof-CAS consumer
 

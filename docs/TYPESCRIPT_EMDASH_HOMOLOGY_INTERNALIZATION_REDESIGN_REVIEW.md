@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: researched recommendation; proposed architecture, not an implemented replacement
+Status: researched architecture; bounded strict pilot active, not a completed replacement
 
 ## Conclusion And Decision Boundary
 
@@ -13,8 +13,9 @@ Use the established primitive-head plus computation/usability-projection
 style, with one three-term complex category as its first consumer before
 expanding the remaining window exactness chases. A general `make_*` record
 constructor is an optional alternative, not a prerequisite. This is a
-recommendation for user adoption, not a claim that the whole functors
-already exist.
+recommendation now being pursued in the
+[strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
+not a claim that the kernel/cokernel/homology functors already exist.
 
 The current connecting-map tranche is independently complete and validated.
 Preserve its native algorithms, selected choices, nonsplit examples and

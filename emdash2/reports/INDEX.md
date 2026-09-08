@@ -9,14 +9,20 @@ short-exact-row normalization are implemented. The current bounded-complex
 tranche supplies native degreewise short-exact sequences, formal bounded
 Freyd chain maps, formal effective row iteration, and a native exact five-term
 homology window. Generic homology maps and row-to-snake endpoint comparisons
-are constructed. The immediate continuation prioritizes independently named
-homology operations and an end-to-end proof–CAS baseline. Generic window
-exactness, full bounded long-exact assembly, cross-layer consumers, and
-Chapter 31 remain active requirements. The companion owner audit records
-these boundaries; no closed formal quotient effectiveness is claimed.
+are constructed. The generic homology connecting map now descends through
+the original source quotient into the supplied target homology. Generic
+window exactness, generic bounded assembly, final formal-boundary audits,
+and the final Chapter 31 update remain active requirements. The companion
+owner audit records these boundaries; no closed formal quotient effectiveness
+is claimed.
 The independently named native homology-connecting operation and native
 bounded assembly and categorical/compiled consumers are implemented;
-selected proof–CAS replay/adoption is next.
+selected proof–CAS replay/adoption and actual interior homology/exactness
+consumers are implemented. The current architectural slice is
+[the strict internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
+following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
+Its first rule-free whole diagram-evaluation layer is implemented; whole
+kernel/cokernel/complex/homology owners remain under construction.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

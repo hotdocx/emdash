@@ -8,6 +8,12 @@ Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 
 Status: completed audit; kernel-side implementation active
 
+Current follow-up: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md).
+The initial whole evaluation owner is the existing `sym_func` applied to the
+identity on `Functor_cat(I,C)`, exposed by `emdash3_2_diagram_evaluation.lp`.
+Its walking-arrow consumer derives the differential transformation without
+new primitives or rules. Whole kernel/cokernel/H construction remains open.
+
 ## Scope
 
 This audit records the exact owners and endpoint calculations required before

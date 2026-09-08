@@ -322,6 +322,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_path_pseudo_laxity.lp"),
     Path("emdash3_2_gray_profiles.lp"),
     Path("emdash3_2_walking_arrow.lp"),
+    Path("emdash3_2_diagram_evaluation.lp"),
     Path("emdash3_2_gray_right_closure.lp"),
     Path("emdash3_2_gray_walking_square.lp"),
     Path("emdash3_2_gray_interchanger.lp"),

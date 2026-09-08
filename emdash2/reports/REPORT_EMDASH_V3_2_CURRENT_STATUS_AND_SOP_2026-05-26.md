@@ -1055,6 +1055,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   dependency join. Generic window exactness and bounded assembly remain
   unfinished; a whole internal category of complexes/homology functor has
   not been added by this arrow-level result.
+- `emdash3_2_diagram_evaluation.lp` derives whole varying-shape evaluation
+  by applying the existing argument exchange to the identity on
+  `Functor_cat(I,C)`. Its component and mixed action compute to ordinary
+  `fapp1`/`tapp1` evaluation, retaining the next Hom functor. The walking-arrow
+  reviewer obtains source/target functors and the differential transformation,
+  with a nonidentity generator check. This rule-free prerequisite begins the
+  strict internal homology pilot; it does not yet supply a complex category,
+  kernel/cokernel adjunction or homology functor.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

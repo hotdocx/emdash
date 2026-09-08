@@ -1,0 +1,147 @@
+# Strict Internal Homology Pilot
+
+Date: 2026-09-08
+
+Status: active bounded architectural slice within the long-exact goal
+
+Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
+
+Worktree: `/home/user1/emdash1-long-exact-v1`
+
+Branch: `goal/bounded-long-exact-homology-book-v3.2`
+
+## Decision And Scope
+
+Following the [research review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
+and the user's continuation/strictness clarifications, develop the bounded
+whole-functor pilot before extending the remaining component-level window
+exactness chases. The completed connecting-map checkpoint `b83a4d32` remains
+a reference implementation, not an architecture that every new owner must
+copy. The original window exactness, bounded assembly, formal-boundary audit
+and book obligations remain in the parent goal.
+
+Use the repository's ordinary primitive-head/projection/usability style when
+new owners are needed. First reuse transparent semantic constructions that
+already compute. General `make_cat`/`make_func`/`make_transf` record constructors
+are not prerequisites. Do not introduce a second grammar of manually stored
+commuting squares or reselect native kernels and homologies merely to make
+endpoints convenient.
+
+## Strict Working Profile
+
+Use the current integrated globally strict functoriality/naturality cuts;
+do not import the unrelated strictness-migration branch. The user's
+`*_laxity*` clarification refers specifically to witnesses extracted from
+internal hom-action:
+
+- `functord_laxity_transf` projects `fdapp1_int_transfd` through the
+  dependent-hom/self-comma identity-section ladder;
+- `tapp1_post_laxity_transf` and `tapp1_pre_laxity_transf` specialize it to
+  the fixed-source and fixed-target ordinary actions;
+- their component projections and `fapp1_compositor` retain that same
+  provenance. They are not independently supplied naturality squares.
+
+If a pilot consumer requires these structural witnesses to compute as
+identities, probe the canonical surviving projection owner and its exact
+endpoints, then install the smallest justified strict computation. This
+does not authorize a blanket rule erasing arbitrary directed higher cells.
+Strictness also does not itself imply that every higher Hom is discrete.
+An ordinary one-category specialization must state that additional boundary
+if it needs it. Preserve whole action at every retained variable.
+
+## Architecture To Qualify
+
+For a shape I and category C, whole evaluation should supply
+
+```text
+I → Functor_cat(Functor_cat(I,C),C),     i ↦ ev_i,
+u : i → j                            ↦ ev_u : ev_i ⇒ ev_j.
+```
+
+For the existing walking arrow this supplies source/target functors and
+the universal differential as an actual transformation. Next qualify the
+classification of concrete arrows and transformations using existing join,
+Hom and displayed-family owners. A pointwise list of component formulas is
+not a replacement for a whole diagram or its action.
+
+In the strict arrow category, the intended universal pattern is
+
+```text
+J(X) = (X → 0),    J ⊣ Ker,
+I(X) = (0 → X),    Coker ⊣ I.
+```
+
+Audit this against the actual universal capabilities. Current objectwise
+contractible factor spaces do not by themselves constitute a whole
+adjunction of arbitrary omega-categories. Either construct the appropriate
+internal fibration/whole comparison, or state and justify the additional
+coherent provider interface. A new functor name alone does not qualify.
+
+On three-term complexes, use whole evaluation and differential
+transformations, form cycles through the selected kernel interface, factor
+the incoming differential into cycles, and apply the selected cokernel
+interface. The resulting H must preserve the current native-selected
+homologies or expose an explicit comparison where choices genuinely differ.
+Keep public homology/long-exact operations independent of a snake-lemma
+implementation detail; Posur's homology-map formulation is also a candidate.
+
+## Ledger And Acceptance Tests
+
+| Row | Status | Required result |
+|---|---|---|
+| `HINT-EVAL-1` | implemented; focused checks green | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
+| `HINT-ARROW-2` | next | concrete arrow classification and relevant whole action using the existing walking-arrow/join owners; strict structural consumer audit |
+| `HINT-UNIVERSAL-3` | pending | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-COMPLEX-4` | pending | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
+
+This pilot does not claim a general Došen-style homology decidability theorem,
+complete universal quotient effectiveness, or stable/derived/spectral theory.
+If a proposed representation fails, retain the bounded probe and revise the
+owner choice instead of hiding it behind opacity or a new equality axiom.
+
+## Evaluation Result And Evidence
+
+`emdash2/emdash3_2_diagram_evaluation.lp` defines evaluation by the existing
+argument exchange applied to the identity of `Functor_cat(I,C)`. Its three
+transparent definitions add no primitive, runtime rule or proof-time unifier.
+The independent reviewers `examples/diagram_evaluation.lp` and
+`examples/walking_arrow_diagram_evaluation.lp` check
+
+```text
+ev_i(F) → F[i],       ev_i[eta] → eta[i],
+ev_u[F] → F[u],       ev_u[eta] → eta[u].
+```
+
+The mixed operation retains a whole functor and a typed next Hom action.
+The walking-arrow identity diagram returns the original nonidentity
+generator, and its endpoints do not collapse. These are 11 positive and
+2 negative checks; they do not yet identify a strict arrow category with
+the existing lax-arrow total category or supply a kernel adjunction.
+
+The first alternative `curry(Eval ∘ swap)` formed typed definitions but
+failed the desired direct object-evaluation beta in the ignored
+`diagram_evaluation_family_curry.lp` probe. This is a projection/normal-form
+finding, not a mathematical objection to currying. The existing direct
+exchange owner already provides the needed computation, so no new curry
+rule was added.
+
+Validation logs are under `emdash2/logs/probes/`: quiet/warning evaluation
+`diagram_evaluation-20260908-072107.log` / `-072111.log`, walking consumer
+`walking_arrow_diagram_evaluation-20260908-072116.log` / `-072120.log`, and
+the fresh recovery baseline `diagram_evaluation-20260908-073900.log`.
+
+All three promoted source/reviewer targets also pass the ordinary scoped
+`scripts/check.sh` dispatch. The exact warning inventories agree with the
+core-only baseline at 1,117 critical pairs / 157 pattern reports, including
+locations, term heads and rule families. All three strict rule audits have
+zero clauses. The 42 focused metrics/TOC/registry/warning-parser tests pass,
+as do shell syntax, catalog freshness/strict classification, source TOC,
+active-reference and report-header hygiene. The source is registered in the
+ordinary check/metrics lists; reviewer discovery remains automatic.
+
+Use only scoped sources/reviewers, strict warning-inventory comparisons,
+rule audits, catalog/TOC and relevant script tests. Retain the parent's
+unrelated full-health exception; do not rerun repository-wide TypeScript,
+Lambdapi or book aggregates for this independent helper. Local checkpoints
+follow the parent authorization; no push, merge or publication is included.

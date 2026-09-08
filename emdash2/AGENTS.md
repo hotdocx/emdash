@@ -56,6 +56,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the current-status report.
 - `emdash3_2_monads.lp` owns monad-primary triangular extension and its narrow
   opposite-derived computational mirror.
+- `emdash3_2_diagram_evaluation.lp` derives whole varying-shape evaluation
+  from existing argument exchange. Its walking-arrow reviewer supplies a
+  universal differential transformation, not yet a kernel/cokernel
+  adjunction or whole complex/homology functor.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

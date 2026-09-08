@@ -4154,6 +4154,15 @@ the shared snake remains a derived implementation intermediate. This
 constructs the connecting arrow, not yet all exactness statements in the
 homology window or a whole internal homology functor.
 
+The first whole-diagram prerequisite now uses the existing argument-exchange
+construction to form i ↦ ev_i as a functor. A shape arrow u:i→j yields an
+actual transformation ev_u:ev_i⇒ev_j; its component at F is F[u], and its
+mixed action at a transformation eta is eta[u]. Higher Hom action remains
+available. For the walking arrow this produces the universal differential
+between source/target evaluation functors, without a manually stored square
+or a new primitive. The whole kernel/cokernel/homology interfaces remain the
+next architectural layer.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.
