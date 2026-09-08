@@ -608,3 +608,33 @@ this branch's actual strict working profile, and audit the focused
 computations, subject reduction, warnings and noncollapse cases before
 importing a bounded reviewed change. Record selected commit(s) and any
 adaptation; keep unrelated parallel work untouched.
+
+Read-only review at that snapshot inspected the full sources of
+`emdash3_2_path_cubical_square_comparison.lp`,
+`emdash3_2_path_cubical_structured_native_low_dimensions.lp` and
+`emdash3_2_path_cubical_face_naturality.lp`. The first converts native path
+squares to equality of path-edge objects and retains whole equality action
+on the native Hom's path core. The second supplies low-dimensional
+structured/native decoders, with a further readback capability explicit at
+dimension three. The third proves inherited-face comparisons for a selected
+native path cube. These are useful groupoidal references, not an already
+available category of general directed three-term complexes. No files or
+commits from the parallel branch have been imported.
+
+The local compatibility tranche is checkpoint `febf287d`. Its next audit
+must distinguish a genuinely varying native family from a raw function on
+objects or a Path lift of such a function. The current
+`PathOut_cat_func(C):Cᵒᵖ→Cat` is already a whole source-indexed family.
+An arrow in `PathOut_C(A)` is the required local triangle, and maps between
+such arrows suggest the existing derived lax-arrow construction. However,
+the current `CubicalArrow_func(F,P)` takes a supplied functor and its
+pseudofunctor evidence; it is not a declared whole endofunctor `Cat→Cat`
+that can simply be composed with `PathOut_cat_func`. This is an interface
+observation, not a failed probe or impossibility result.
+
+Before adopting that candidate, qualify coherent reindexing of the arrow
+family, its source/opposite variance, the zero-long-edge restriction and the
+resulting prismatic Hom. Compare with the whole shape-diagram route on the
+same original chain data. Do not replace a missing whole varying family by
+a Path lift that retains only equality variation of the flags, or silently
+treat strict structural naturality as discreteness of every ambient Hom.
