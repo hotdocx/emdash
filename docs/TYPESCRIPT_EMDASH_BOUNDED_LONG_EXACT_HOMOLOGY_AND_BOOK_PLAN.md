@@ -29,6 +29,12 @@ The follow-up [Sigma-Hom audit](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.
 confirms an independent inherited empty-type derivation. Correcting Sigma's
 fibre direction and whole projection is also required before using totals in
 the replacement Homd target; the op-source change alone is not sufficient.
+The Sigma half now has a reproducible owner-position patch with thirteen
+green immediate reviewers and directed/negative controls. Its whole
+projection and map actions remain available, and the original Sigma Empty
+cast is rejected. The repair plan owns the exact staged gate and warning
+inventory. This candidate is not yet promoted: the separate internal-op and
+same-base family defect remains accepted and is the next minimal repair.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:

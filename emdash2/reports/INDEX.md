@@ -15,6 +15,15 @@ window exactness, generic bounded assembly, final formal-boundary audits,
 and the final Chapter 31 update remain active requirements. The companion
 owner audit records these boundaries; no closed formal quotient effectiveness
 is claimed.
+Formal qualification is currently gated by the two inherited variance
+diagnostics recorded in the
+[bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
+Its Sigma candidate now has a reproducible non-library owner-position patch,
+thirteen green direct reviewers and explicit rejection of the original
+Sigma cast, with retained whole action. The separate internal-op derivation
+remains accepted; no repaired active kernel or global consistency result is
+claimed. Broader duality design stays deferred behind the user's minimal
+repair scope.
 The independently named native homology-connecting operation and native
 bounded assembly and categorical/compiled consumers are implemented;
 selected proof–CAS replay/adoption and actual interior homology/exactness

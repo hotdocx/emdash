@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active isolated design/probe tranche; no kernel migration promoted
+Status: active; reproducible Sigma candidate passes its scoped gate; internal-op repair open; no kernel migration promoted
 
 Parent: [bounded long-exact homology and book](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -163,12 +163,11 @@ migration. Any eventual general internal name must state which category-level
 duality and which transformation/enrichment profile it denotes. Typed
 projection probes are not a substitute for this semantic compatibility.
 
-The current Sigma full-copy experiment has advanced through the changed Hom
-and higher first projection. Its added CoAll-family operation and map-action
-rules still need declaration-order placement: the last run stopped because
-tapp1_func was referenced before its declaration
-(`hint_sigma_migrating_core-20260908-162751.log`). That scoping error is not
-a semantic counterexample or a reason to reject the total-dual construction.
+The Sigma full-copy experiment now checks the changed Hom, whole first
+projection, and map action. The earlier declaration-order failure
+(`hint_sigma_migrating_core-20260908-162751.log`) was resolved by placing the
+CoAll transformation projections after `tapp1_func`/`tapp1_fapp0`. The scoped
+downstream qualification and reproducible candidate are recorded below.
 
 ## Propagation Is Part Of The Repair
 
@@ -216,7 +215,7 @@ if another unrestricted constructor reinstates the same action.
 | OP-REPAIR-3 | family-only counterexample confirmed; propagation inventory still open | same-base family reconstruction control and source-level dependent-owner inventory |
 | OP-REPAIR-3A | whole-family prototype checked; not promoted | derive the correctly based operator, displayed map and reversed displayed-transformation action, with genuine base-2-cell computation and retained next Hom action |
 | OP-REPAIR-4 | isolated full-copy migration exposes negative-section and Homd-target boundaries | smallest coherent owner-position migration that removes the bad covariant surfaces and qualifies their legitimate consumers |
-| OP-REPAIR-SIGMA-4A | independent empty derivation confirmed; total-dual companion checked locally | correct Sigma Hom's fibre direction together with whole projections/maps and constant-family product compatibility |
+| OP-REPAIR-SIGMA-4A | complete owner-position candidate and 13 nearest reviewers pass; not promoted | corrected Sigma Hom, whole projections/maps, constant products, directed higher-cell controls and rejection of the original Sigma derivation; separate op fault still reproduced |
 | OP-REPAIR-5 | pending | positive opposite regressions, exact variance-negative fixture, warnings/SOP/health qualification and downstream homology consumer |
 
 The append/import probes for row 2 establish local types and observations only:
@@ -495,22 +494,24 @@ exact source and logs retained as recovery evidence.
 
 ## Sigma Prerequisite Before A Total-Category Homd Target
 
-Current scope evidence: the Sigma repair is confined to a full copy of the
-single nucleus (109 added / 35 removed lines at this point). That entire
-source passes checking. The Sigma Empty reproducer fails at its original
+Current scope evidence: the Sigma candidate changes the nucleus, its
+transparent dependent-simplex bridge, and four directly affected reviewers.
+The patch is 184 insertions / 135 deletions across six files; the nucleus
+portion is 129 insertions / 40 deletions. The entire copied source and the
+13 selected reviewers pass. The Sigma Empty reproducer fails at its original
 invalid cast; the distinct op reproducer still succeeds, confirming that
-the latter defect is not accidentally hidden. The existing Sigma reviewer
-passes, as does a nonconstant-family 2-cell constructor retaining the forward
-fibre cell and recovering both projections.
+the latter defect is not accidentally hidden. A nonconstant-family 2-cell
+retains the forward fibre cell, recovers both components, and projects its
+base through the actual whole first-projection functor.
 
 The isolated seven-reviewer stage `/tmp/emdash-sigma-repair.UTRhbr` uses one
 freshly generated candidate kernel object and copied source dependencies.
-Sigma total and fibrewise Sigma pass. Five failures reduce to two immediate
+Sigma total and fibrewise Sigma pass. Its five failures reduced to two immediate
 owners: `emdash3_2_dependent_simplex_represented_source.lp` at its old
 triangle-carrier presentation (four affected reviewers), and the first observation
-in `examples/dependent_hom_laxity.lp`. These are the next local checks; they
-are not evidence that every file needs redesign. The kernel remains
-unpromoted while those consumers and the warning audit are resolved.
+in `examples/dependent_hom_laxity.lp`. These are now resolved by the local
+changes below, not by a repo-wide rewrite. The active kernel remains
+unpromoted pending the separate internal-op repair and joint qualification.
 
 The next investigation considers a coupled relative/test-category target
 retaining the supplied family through the existing whole Hom and total
@@ -530,6 +531,111 @@ object projection, retained next Hom action and corrected constant Sigma-Hom
 reading. It is not a complete recursive Sigma repair. Migrate and qualify the
 Sigma-Hom/projection owners before relying on them for the proposed target.
 The original source, CAS algorithms, checkpoints and full goal remain intact.
+
+## Reproducible Sigma Candidate And Direct Consumers
+
+The non-library owner-position patch is
+[`sigma_hom_variance_repair.patch`](../emdash2/audits/sigma_hom_variance_repair.patch).
+The exact-source staging gate is
+[`check_sigma_variance_repair.sh`](../emdash2/scripts/check_sigma_variance_repair.sh),
+with its focused
+[`directed/negative reviewer`](../emdash2/audits/sigma_hom_variance_repair_checks.lp).
+Run the script from the existing worktree; it rejects drift in the six source
+anchors before applying the patch to a fresh temporary package. It never
+patches the active sources or registers the diagnostic as a positive library
+example. Each source/reviewer invocation has the ordinary subject-reduction
+check and its own 90-second bound. Fresh dependency objects are reused only
+inside that temporary package. The package and logs are deliberately retained
+for inspection. No unrelated TypeScript, book, reviewer or health aggregate
+is part of this gate.
+
+The kernel change is the derived contravariant totalization
+
+```text
+H = homd_(id_E,x,u,y,v) : Op(Hom_K(x,y)) → Cat
+Hom_ΣE((x,u),(y,v)) = All(Σ(All_catd(H))).
+```
+
+Here `All_catd(H)` is over `CoAll(Op(Hom_K(x,y)))`. Both total duals are
+essential: they preserve the original fibre direction. The same existing
+Sigma constructor still gives an ordinary triangle `(p,α)` with
+`α : E[p](u) → v`. At the next dimension the correct input is
+
+```text
+κ : p ⇒ q
+γ : α → H[κ](β),
+```
+
+not the old reverse fibre cell `H[κ](β) → α`. The constant-family control
+reduces to the ordinary product Hom with its forward fibre Hom. This repairs
+an actual directed-cell variance error, not a choice to weaken a previously
+valid computation.
+
+The dependent-simplex bridge now names actual generic owners instead of
+reconstructing their former normal form:
+
+- `DependentTriangle_cat` is `Hom(ΣE)` itself;
+- `dependent_triangle_base_face_func` is the whole hom action of the
+  existing `Sigma_proj1_func`;
+- `DependentTriangleImage_cat` is the Hom between the actual mapped total
+  endpoints;
+- `dependent_triangle_map` is the whole hom action of `sigma_map_func`;
+- `dependent_tetrahedron_fibre_catd` is a transparent represented-Hom family
+  built from `hom_` and the existing fibre transport; it introduces no new
+  higher-cell primitive or manual square field;
+- the tetrahedron constructor remains an ordinary dependent pair.
+
+The new whole Sigma-projection rule uses the stable `Sigma_proj1_func` and
+visible constructor endpoints as discriminators; inferred outer categories
+are `_`. It follows the recursive total-dual Sigma projection. The old
+named capped projection becomes simply `sigma_Fst(theta)`, with no manually
+reconstructed inferred telescope. No composition orientation is reversed,
+no global identity/composition rule is added, and no rewrite or unifier is
+added in the simplex bridge.
+
+Higher map action still computes through the same `fdapp1_int_hom_fapp0`
+owner, now applied to the total-dualized displayed map at the correctly
+shifted base. The mapped base cell is unchanged; the next whole Hom action
+remains available. The represented-source implementation itself needs no
+change. Its reviewer, and the basic/profile reviewers, update the formerly
+reversed input/expected dependent projection. The ordinary compositor test
+continues to pass. No equality cast, opaque body, or replacement coherence
+axiom is used.
+
+The final reproducible run is `/tmp/emdash-sigma-variance-audit.RIJ7dS`
+(the earlier identical-source run is `/tmp/emdash-sigma-variance-audit.PrXKqV`).
+All thirteen scoped reviewers pass: Sigma total, fibrewise Sigma, basic
+dependent-simplex bridge, simplex profiles, represented source, native
+dimensions, chain-pair native triangles, PathOut transformation lifting,
+dependent-Hom laxity, cubical arrows, cubical-arrow functor action,
+chain-pair cubical maps and pullbacks. The added reviewer passes its five
+positive and two negative observations. In particular, a supplied genuine
+2-cell projects through the whole Sigma projection, not just through its
+capped alias. The original Sigma Empty fixture is rejected at its typed
+generic-Hom cast. The independent internal-op fixture is still accepted;
+the script states this explicitly as unresolved fault-isolation evidence.
+
+The warning-enabled candidate has 1,222 critical-pair / 157 pattern reports,
+against the current 1,125/157 core. All 1,222 pair structures parse. There
+are 98 added pairs and one removed `Hom_cat × Sigma_cat` pair. The added
+families are: three All/CoAll, one All-functor involution, twenty-four
+composition/action, ten action/self, twenty-four action/postcomposition,
+eight product-component evaluations, four composition/component,
+three action/component, six action/off-diagonal, four product/off-diagonal,
+two off-diagonal/self, eight composition/off-diagonal and one component/self.
+These are classified interactions, not a confluence proof and not a veto.
+The whole Sigma first-projection addition introduces no further pair.
+The strict LHS audit finds zero unreviewed compound inferred slots, retaining
+the existing 62 annotated slots / 39 clauses.
+The runner's shell syntax check, active-reference lint, report-lifecycle lint
+and twelve focused warning-parser/report-registry tests pass. The active
+kernel, positive registry, catalog and health snapshot are unchanged.
+
+Decision: retain this checked patch as the concrete Sigma half of the minimal
+repair. Do not broaden it into a public duality catalogue. Next resolve the
+unsafe whole `op` and unrestricted same-base opposite-family interfaces,
+then rerun both diagnostic negatives and the required positive consumers
+against the combined candidate before active-source promotion.
 
 ## Validation And Handoff
 
