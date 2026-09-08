@@ -2,7 +2,7 @@
 
 Date: 2026-09-07
 
-Status: retained future-research inventory; not an implementation plan or a completed literature review
+Status: reference inventory; HRI-11 to HRI-17 substantively reviewed, earlier items retain their stated review limits
 
 ## Purpose And Scope
 
@@ -12,8 +12,16 @@ literature-informed redesign of the logical, computational, and internal
 formulation. Bibliographic metadata and the three supplied local PDF/text
 pairs were checked on the date above; detailed mathematical assessment,
 section-by-section reading, and reproduction of external formalizations are
-deferred. Proposed relevance below is a research question, not an assertion
-that an emdash construction follows from a cited theorem.
+deferred for HRI-01 to HRI-10. Proposed relevance there is a research
+question, not an assertion that an emdash construction follows from a cited
+theorem.
+
+The user subsequently requested immediate review of seven constructive
+category/homalg papers. HRI-11 to HRI-17 now have a
+[dedicated substantive review](TYPESCRIPT_EMDASH_POSUR_HOMALG_REDESIGN_REVIEW.md)
+with exact reading coverage, source locators, hypotheses, architecture
+implications and limitations. This does not retroactively claim a full
+review of the earlier spectral/coherence inventory.
 
 The active implementation remains governed by
 [the bounded long-exact plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md).
@@ -167,6 +175,111 @@ claims about closure of strong Steiner complexes under partial duality
 (Proposition 2.4.17 and Remark A.2.5). Pin the version and inspect that
 correction before borrowing a duality argument. No local PDF is recorded
 here yet.
+
+## Constructive Categories And Proof-CAS: Reviewed Sources
+
+The seven entries below were reviewed on 2026-09-07. See the dedicated
+review for section/page locators and the distinction between source results
+and proposed emdash applications. Companion `.txt` files exist beside every
+listed PDF. The user-supplied PDFs were preserved; the final three entries
+were downloaded from primary arXiv records without overwriting prior files.
+
+### HRI-11 - Sebastian Posur
+
+*On free abelian categories for theorem proving*,
+[arXiv:2103.08379v1](https://arxiv.org/abs/2103.08379v1), 15 March 2021.
+
+Local PDF:
+`/home/user1/algebraic-geometry/posur-On-free-abelian-categories-for-theorem-proving-2103.08379v1.pdf`
+
+Reviewed lead: Adelman categories, two-sided homotopy solving, finite
+Z-linear universal diagrams, exact-functor interpretation, the universal
+snake and Dowker's homology-map formula. Concrete rational examples do not
+replace the universal interpretation or its integral coefficient boundary.
+
+### HRI-12 - Sebastian Posur
+
+*Closing the category of finitely presented functors under images made
+constructive*, [arXiv:1911.11469v3](https://arxiv.org/abs/1911.11469v3),
+31 August 2020; [Compositionality DOI](https://doi.org/10.32408/compositionality-2-4).
+
+Local PDF:
+`/home/user1/algebraic-geometry/posur-Closing-the-category-of-finitely-presented-functors-under-images-made-constructive-1911.11469v3.pdf`
+
+Reviewed lead: Q(P)'s cospan/subquotient representation, syzygy inclusion
+with witness transport, image/cokernel closure, and biased weak pullbacks.
+The noncoherent example does not acquire general kernels or Abelianity.
+
+### HRI-13 - Sebastian Posur
+
+*Methods of constructive category theory*,
+[arXiv:1908.04132v1](https://arxiv.org/abs/1908.04132v1), 12 August 2019.
+
+Local PDF:
+`/home/user1/algebraic-geometry/posur-Methods-of-constructive-category-theory-1908.04132v1.pdf`
+
+Reviewed lead: category constructors, homomorphism structures, natural
+transformations, generalized morphisms and diagrammatic computation. Its
+generalized inverses are not ordinary sections. Remark 2.19 distinguishes
+constructing the snake arrow from proving the snake lemma.
+
+### HRI-14 - Sebastian Posur
+
+*A constructive approach to Freyd categories*,
+[arXiv:1712.03492v1](https://arxiv.org/abs/1712.03492v1), 10 December 2017;
+[published DOI](https://doi.org/10.1007/s10485-020-09612-y).
+
+Local PDF:
+`/home/user1/algebraic-geometry/posur-A-constructive-approach-to-Freyd-categories-1712.03492v1.pdf`
+
+Reviewed lead: selected weak kernels and their all-test factor operations,
+decidable lifts, two-pullback kernels, normality, choice comparisons, and
+lowering linear systems from iterated Freyd categories to the base. Keep
+preprint-v1 versus published construction numbering explicit, as already
+recorded in the Freyd Abelian implementation plan.
+
+### HRI-15 - Mohamed Barakat And Daniel Robertz
+
+*homalg: A meta-package for homological algebra*,
+[arXiv:math/0701146v2](https://arxiv.org/abs/math/0701146v2), 23 July 2007;
+*Journal of Algebra and Its Applications* 7 (2008), 299-317,
+[DOI](https://doi.org/10.1142/S0219498808002813).
+
+Downloaded PDF:
+`/home/user1/algebraic-geometry/barakat-robertz-homalg-A-meta-package-for-homological-algebra-math-0701146v2.pdf`
+
+Reviewed lead: effective membership/syzygy operations, functor and induced-map
+interfaces, variance metadata, and long-exact construction through split
+resolution rows. No canonical remainder form is required.
+
+### HRI-16 - Mohamed Barakat And Markus Lange-Hegermann
+
+*An axiomatic setup for algorithmic homological algebra and an alternative
+approach to localization*, [arXiv:1003.1943v5](https://arxiv.org/abs/1003.1943v5),
+26 October 2017; *Journal of Algebra and Its Applications* 10 (2011), 269-293,
+[DOI](https://doi.org/10.1142/S0219498811004562).
+
+Downloaded PDF:
+`/home/user1/algebraic-geometry/barakat-lange-hegermann-An-axiomatic-setup-for-algorithmic-homological-algebra-1003.1943v5.pdf`
+
+Version caution: v5 corrects a typo in Lemma 4.3's proof. The localization
+result requires a commutative computable ring and a finitely generated
+maximal ideal. The operational checklist
+starts with an Abelian category; it does not prove Abelianity from unrelated
+algorithms alone.
+
+### HRI-17 - Mohamed Barakat, Markus Lange-Hegermann And Sebastian Posur
+
+*Elimination via saturation*, [arXiv:1707.00925v3](https://arxiv.org/abs/1707.00925v3),
+8 July 2020; original preprint submitted 4 July 2017.
+
+Downloaded PDF:
+`/home/user1/algebraic-geometry/barakat-lange-hegermann-posur-Elimination-via-saturation-1707.00925v3.pdf`
+
+Reviewed lead: homogenization plus saturation computes elimination using
+syzygies and membership without requiring block orders. Keep correctness,
+termination hypotheses and performance claims separate; the reported
+straightforward implementation was not faster than direct block elimination.
 
 ## User's Independent Directed-Spectrum Hypothesis
 

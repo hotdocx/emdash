@@ -693,7 +693,7 @@ was introduced to get a passing target.
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
-| `LEH-DIFFERENTIAL-13` | complete; four constant-field/CAP cases reviewed and green | field/CAP references | quotient-coordinate differential with no runtime dependency |
+| `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
 | `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
@@ -1682,6 +1682,58 @@ field/quotient-coordinate differential (13) is being implemented in a
 separate test-only file. No parallel worker may change the Core/kernel
 architecture, stage/commit, or merge another worktree. Their results require
 root review before promotion. The full objective remains active.
+
+### Reviewed Posur/homalg redesign references
+
+The user requested immediate substantive review, not only retention of
+citations. That review is now recorded in
+[Posur And Homalg: Constructive Categories And Proof-CAS Design](TYPESCRIPT_EMDASH_POSUR_HOMALG_REDESIGN_REVIEW.md),
+with versioned bibliography/local paths in
+[HRI-11 to HRI-17](TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md).
+It covers the four supplied Posur papers plus the original homalg paper,
+the axiomatic/localization paper and elimination via saturation. The three
+missing open-access preprints and their text extractions were downloaded;
+supplied source PDFs were not changed. Exact reading coverage and unexecuted
+examples are stated in the review.
+
+The active design must keep these distinctions:
+
+- A(P), image completion Q(P), and the free Abelian Adelman category are
+  different category constructors with different representations and
+  computational hypotheses. The current polynomial/Freyd carrier is not
+  already an Adelman implementation.
+- Actual selected universal objects need local capability data or comparison
+  isomorphisms. No paper justifies equating an abstract W's output with a
+  separately selected native presentation or decoding an arbitrary truncated
+  equality into an effective factor.
+- Effective witnesses are computational inputs: relation coefficients,
+  factor operations, syzygy transport and homotopies. The user's emphasis
+  remains usability, not compulsory kernel certification of every CAS step.
+  A trusted native provider is compatible with that emphasis; its promised
+  all-input operation is distinct from finitely many observed equations.
+- Universal theorem proving requires an encoded premise and an exact-functor
+  interpretation. Finite Z-linear universal diagrams are a concrete later
+  benchmark; current Q-linear examples do not establish universality for
+  every Abelian category. Zero-composition relations do not encode exactness
+  assumptions by themselves, and general Serre-quotient decision problems
+  are not solved by the cited paper.
+- Dowker's homology-map formula and the finite universal snake computation
+  are focused future comparisons with our retained reference construction.
+  A generalized-morphism compiler must discharge honesty/recovery before
+  returning an ordinary arrow; pseudo-inverses are not sections in the
+  original category.
+- Saturation-based elimination is a later consumer of the same syzygy and
+  membership engine, with explicit termination/ring hypotheses. It is not
+  a new prerequisite for this bounded long-exact objective.
+
+This review does not authorize replacing the ongoing implementation with a
+new free-syntax/decidability-proof project or expanding into spectral
+sequences. The checked boundary-epicity implementation and generic covered
+reconstruction have been preserved in the worktree for root integration;
+their registration/documentation/checkpoints remain distinct follow-ups.
+The stronger selected-cycle universality and generic window proofs remain
+required. The previous field-differential tranche was checkpointed as
+`1b36d4f9` before the review documentation was added.
 
 Raw formal-spine checkpoint: `c2358476`. Only the separate test-only field
 comparison remained untracked after that checkpoint; no parallel work was
