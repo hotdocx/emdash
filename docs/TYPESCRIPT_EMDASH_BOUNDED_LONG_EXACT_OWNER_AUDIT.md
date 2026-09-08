@@ -1189,3 +1189,28 @@ explicit reindexing adapter; this API does not silently substitute its
 derived pair for an existing stored one. No new rule, universal axiom or
 manual square structure is introduced. Normal lifting and source descent
 remain downstream of this covered factor.
+
+## Selected native providers and homology (rows 11E–11F)
+
+The selected-provider handles bind executable weak-kernel factor callbacks
+to the original two weak pullbacks, including their division bases. Formal
+provider introduction separates computed compatibility equations from
+explicitly trusted all-test semantics, then constructs the existing choice
+package at literal ranks and matrices. Both whole weak pullbacks and their
+factor/law observations remain available. This is not runtime evaluation of
+arbitrary Lambdapi applications by a CAS hook; delegation and trust remain
+explicit operations in the proof-CAS layer.
+
+The represented coefficient ring must be the native polynomial ring, not a
+nonzero quotient of that ring. The guard accepts a zero reduced ideal even
+when presented with redundant zero generators. Module relations over the
+same coefficient ring remain supported; they are not a coefficient-ring
+specialization. Universal weak kernels need not survive the latter change.
+
+The shared selected-homology core uses these choices, explicit adjacent-zero
+data, and an actual raw boundary with its reconstruction. It derives the
+existing witnessed cokernel and uses the same boundary for exactness. The
+old W interface has unchanged signatures and delegates through its original
+two choices. The raw chain owner, quotient agreement semantics and higher
+universal-operation inputs are unchanged; no closed quotient decoder,
+independent homology theory or new runtime rule is introduced.

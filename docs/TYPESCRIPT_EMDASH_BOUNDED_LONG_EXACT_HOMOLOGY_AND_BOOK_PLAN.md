@@ -684,7 +684,7 @@ was introduced to get a passing target.
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
-| `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; isolated quiet/warning checks green | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
+| `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
 | `LEH-TARGET-NORMAL-LIFT-7D2` | probe in progress | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -696,8 +696,10 @@ was introduced to get a passing target.
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
 | `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; checkpoint `5d2f8869` | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
-| `LEH-FORMAL-SELECTED-KERNEL-11D` | complete; root constructor compatibility and warning checks green | existing two weak pullbacks and their universal factor operations | per-choice embedding, lifting, reconstruction and uniqueness; W selector compatibility preserving original ranks/matrices and public signatures |
-| `LEH-FORMAL-SELECTED-PROVIDER-11E` | design audited; implementation next | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
+| `LEH-FORMAL-SELECTED-KERNEL-11D` | complete; checkpoint `f05c5d0e` | existing two weak pullbacks and their universal factor operations | per-choice embedding, lifting, reconstruction and uniqueness; W selector compatibility preserving original ranks/matrices and public signatures |
+| `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; root native/live formal consumers green | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
+| `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; old and downstream compatibility checks green | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
+| `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | next | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1897,6 +1899,17 @@ introduced by this rule-free tranche.
 
 ### Selected provider boundary for the proof-CAS consumer
 
+Checkpoint `f05c5d0e` completes the selected-kernel proof core and generic
+covered cycle factor. The continuation also audits the W-indexed formal
+homology layer: its only use of W is to select the outgoing kernel's two
+weak pullbacks. Probe a shared per-choice homology core and preserve the
+legacy signatures as selector wrappers. An introduction from an already
+computed boundary and its raw reconstruction agreement should reuse the
+existing witnessed cokernel operation. This permits the actual native
+boundary, rather than silently replacing its raw relation witness with the
+canonical lift's. No new chain datatype or quotient decoder is needed;
+the underlying existing zero-composite agreement is the chain input.
+
 The native kernel already retains U = WP(F,R_Q) and V = WP(p1,R_P).
 Their two ranks and V's first projection are exactly its presentation;
 no generator elimination or rank cast is required. A concrete formal
@@ -1922,6 +1935,85 @@ matrices agree; do not assume equality of the witness matrices. Provider
 interpretation is restricted to the represented ring, not arbitrary
 specializations of the free formal ring/coefficient symbols. Resource
 failure or unsupported inputs must not be reported as negative mathematics.
+
+The selected-provider implementation now supplies issued native handles
+with combined-cone and pair-facing factor callbacks. Their snapshots retain
+the actual division basis, ranks, matrices and chosen object identities;
+callbacks never reselect a kernel or weak pullback. The formal preparation
+fixes all coefficients before environment creation. Explicit adoption
+separates three matrix equations from two all-test provider assumptions
+classified `trusted-presentation-semantics`, then constructs the existing
+whole `CommRingFreydKernelChoices`. A matching original morphism law may
+be reused from the source at its exact type. The result retains both
+executable handles and both formal whole/factor/law observations.
+
+Root review caught and corrected a change-of-scalars boundary: merely
+matching the underlying polynomial ring allowed the reifier to describe a
+nonzero quotient of it. For example, multiplication by x has zero kernel
+over R = k[x] but becomes a zero map over R/(x), so its universal kernel
+cannot be transported by that substitution. This polynomial provider now
+requires a zero reduced quotient ideal, checked during every preparation
+revalidation. Redundant zero generators are accepted. This does not forbid
+modules such as R/(x) represented by relations over R; it forbids silently
+changing the coefficient ring of the provider. Generalized base change
+requires its own correctly justified provider contract.
+
+Native provider tests pass 5/5. Formal tests pass 6/6 with the live consumer
+enabled, including seven Lambdapi assertions for the actual choices and
+both whole weak pullbacks, factor operations and all-test laws. The literal
+LP provider adapter has nine positive/two negative reviewer assertions;
+its warning boundary remains 1,223/169. Seven additional cannot-solve
+diagnostics belong to the deliberate foreign-second-provider rejection.
+No global W, sampled proof of universality or formal exactness is claimed
+by 11E alone.
+
+The per-choice homology core now retains a supplied raw boundary and its
+reconstruction, derives its existing witnessed cokernel, and reads
+exactness as epicity of that same stored boundary. Its canonical constructor
+uses the selected kernel lift and delegates to this supplied-boundary
+introduction. The old homology API preserves all 20 signatures and the
+unchanged raw chain-pair owner; the other 19 bodies are selector wrappers.
+The positive consumer checks literal boundary preservation and exactness
+at that boundary, while the negative consumer rejects silently replacing
+the cycle choices. The first promotion failed because a mechanical wrapper
+matcher treated a symbol-name prefix as a whole name; exact-name matching
+corrected it. The shared-core probe had already passed. This was a wrapper
+editing error, not an infeasible homology interface or a reason for a new
+rewrite/unifier.
+
+Final root validation of 11E/11F passed: native provider tests 5/5, live
+formal provider tests 6/6 with seven LP assertions, root typecheck,
+changed-file lint and workspace contract. The new homology reviewer has
+eight positive/one negative assertions, including literal whole-constructor
+agreement between the old W API and the shared core. Final warning log:
+`commutative_ring_freyd_selected_homology-20260907-232013.log`.
+The original homology reviewer, functorial homology
+(`commutative_ring_freyd_functorial_homology-20260907-231847.log`) and
+bounded complexes (`commutative_ring_freyd_bounded_complexes-20260907-231933.log`)
+also pass. All 20 old signatures and the raw chain declaration were compared
+against `f05c5d0e`. Critical-pair/pattern warning multisets match the
+pre-refactor homology baseline at 1,223/169. Strict rule audits report zero
+clauses; catalog, source TOC, 16 metrics tests, Bash syntax and documentation
+hygiene pass. The unchanged full-health exception remains explicit; no
+unrelated aggregate is claimed.
+
+The next formal consumer is 11G, not another kernel algorithm. Prepare
+provider handles for each actual retained interior homology before fixing
+the coefficient environment. Combine the existing spine, epimorphism and
+provider signatures, then supply the actual incoming/outgoing arrows,
+boundary and reconstruction to the selected-homology constructor. A narrow
+transparent explicit-matrix helper may be required to expose the literal
+cycle presentation to the signature-only frontend, just as in 11A/11E;
+it must construct the original choices internally, not cast a projected
+rank or assume an object equality. Reuse adopted equations only at exact
+types; additional semantic-composition equations require explicit adoption.
+Reuse the already constructed boundary epicity as exactness at that same
+stored boundary. Preserve raw relation witnesses and use existing class-map
+comparisons where needed, rather than replacing native raw arrows.
+Check every constructed homology/exactness term and the all-position result,
+with guards against changed labels, pairs, choices and parent replay, and
+with no re-selection or homology recomputation. Generic 7D and generic
+bounded exactness remain separate required mathematical results.
 
 The shared selected kernel proof core is now promoted for qualification.
 The compatibility module supplies the three W-independent paths; embedding,

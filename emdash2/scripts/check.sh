@@ -329,6 +329,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_selected_kernel_lifting.lp)
   files+=(emdash3_2_commutative_algebra_freyd_selected_kernel_uniqueness.lp)
   files+=(emdash3_2_commutative_algebra_freyd_kernel_choices_from_weak_kernels.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_kernel_choice_providers.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_selected_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp)
   files+=(emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp)

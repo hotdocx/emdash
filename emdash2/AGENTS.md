@@ -345,11 +345,20 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   their all-test factor operations and the actual ranks and projections.
   Their constructors reuse generic weak-kernel and Sigma owners; finite
   matrix equations alone do not provide these universal operations.
+  Literal matrix-provider introductions retain those all-test operations
+  and laws at explicit ranks. The proof-CAS adapter binds native selected
+  algorithms through explicit trusted provider semantics for the represented
+  polynomial coefficient ring; it rejects nonzero coefficient-ring quotient
+  reification, without forbidding presented modules over the original ring.
   The selected-kernel embedding/lifting/uniqueness modules own the shared
   proof bodies at those two choices. The legacy W-indexed API selects its
   original packages and delegates, retaining its signatures and qualified
   helper names. Its first-stage observations remain independent of stage
   two; raw zero and reconstruction agreements are still explicit inputs.
+  The selected-homology core similarly retains per-arrow choices and either
+  the canonical lift or a supplied raw boundary with reconstruction. Its
+  cokernel and exactness refer to that same stored boundary. The original
+  W-indexed homology names remain selector wrappers with unchanged signatures.
   `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
   existing Freyd additive structure with both canonical constructions as one
   capability-parameterized witnessed surface. Its universal tests retain raw

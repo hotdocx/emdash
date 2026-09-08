@@ -967,6 +967,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   and selects the same two packages before delegating. Universal native
   provider semantics and closed quotient-path effectiveness are not inferred
   by this reparameterization.
+  The literal-provider adapter now binds the original native weak-pullback
+  factor algorithms to explicit all-test provider assumptions, separately
+  classified from computed matrix equations. Its actual-choice, whole
+  weak-pullback, factor and law terms are checked by live formal consumers.
+  This provider is interpreted over its original polynomial coefficient
+  ring: nonzero quotient reification is rejected because universal kernels
+  need not survive that change of scalars. Modules with relations over the
+  original ring remain supported. The selected-homology core then retains
+  those per-arrow choices and an actual boundary with reconstruction, deriving
+  the original witnessed cokernel and reading exactness at the stored boundary.
+  The W-indexed homology API retains all 20 signatures as the original chain
+  declaration and 19 selector wrappers. Complete formal exactness of the
+  retained bounded sequence still requires applying this interface to all
+  actual interior homologies; neither isolated provider tests nor epicity
+  witnesses alone establish that whole result.
 - `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
   partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
   beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout

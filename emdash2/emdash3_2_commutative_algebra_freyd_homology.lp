@@ -1,6 +1,8 @@
 /*
   Witnessed one-degree homology in the formal Freyd category.
 
+  This compatibility API selects its original W-kernel choices and delegates
+  to the shared selected-homology core. Every original signature is retained.
   An explicit agreement d o dNext ~ 0 feeds the existing Freyd kernel lift.
   The whole result stores that boundary, its reconstruction agreement, and the
   existing witnessed cokernel universal property. Exactness is the explicit
@@ -8,7 +10,7 @@
   image equality, rewrite rule, or unification rule is introduced.
 */
 
-require open emdash.emdash3_2_commutative_algebra_freyd_witnessed_abelian;
+require open emdash.emdash3_2_commutative_algebra_freyd_selected_homology;
 
 symbol CommRingFreydChainPair
   [R : τ CommRing]
@@ -31,7 +33,8 @@ symbol comm_ring_freyd_homology_cycle_presentation
   [dNext : τ (@CommRingPresentationMorphism R P2 P1)]
   (d : τ (@CommRingPresentationMorphism R P1 P0))
   : τ (@CommRingPresentation R)
-≔ @comm_ring_freyd_kernel_presentation R W P1 P0 d;
+≔ @comm_ring_freyd_selected_homology_cycle_presentation R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d);
 
 symbol comm_ring_freyd_homology_cycle_embedding_raw
   [R : τ CommRing]
@@ -44,7 +47,8 @@ symbol comm_ring_freyd_homology_cycle_embedding_raw
   : τ (@CommRingPresentationMorphism R
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
       P1)
-≔ @comm_ring_freyd_kernel_embedding_raw R W P1 P0 d;
+≔ @comm_ring_freyd_selected_homology_cycle_embedding_raw R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d);
 
 symbol comm_ring_freyd_homology_boundary_selected_raw
   [R : τ CommRing]
@@ -57,7 +61,8 @@ symbol comm_ring_freyd_homology_boundary_selected_raw
   (chain : τ (@CommRingFreydChainPair R P2 P1 P0 dNext d))
   : τ (@CommRingPresentationMorphism R P2
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d))
-≔ @comm_ring_freyd_kernel_lift_raw R W P1 P0 P2 d dNext chain;
+≔ @comm_ring_freyd_selected_homology_boundary_selected_raw R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain;
 
 symbol comm_ring_freyd_homology_boundary_selected_reconstruction_agreement
   [R : τ CommRing]
@@ -78,8 +83,8 @@ symbol comm_ring_freyd_homology_boundary_selected_reconstruction_agreement
           (@comm_ring_freyd_homology_boundary_selected_raw
             R W P2 P1 P0 dNext d chain)))
       (@comm_ring_presentation_morphism_map R P2 P1 dNext))
-≔ @comm_ring_freyd_kernel_reconstruction_agreement R W P1 P0 P2
-    d dNext chain;
+≔ @comm_ring_freyd_selected_homology_boundary_selected_reconstruction_agreement R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain;
 
 // Whole witnessed homology: boundary + reconstruction + its cokernel universal.
 symbol CommRingFreydWitnessedHomologyAt
@@ -92,21 +97,8 @@ symbol CommRingFreydWitnessedHomologyAt
   (d : τ (@CommRingPresentationMorphism R P1 P0))
   (chain : τ (@CommRingFreydChainPair R P2 P1 P0 dNext d))
   : Grpd
-≔ `Σ_ boundary : τ (@CommRingPresentationMorphism R P2
-      (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)),
-   @Product_grpd
-      (@CommRingPresentationMorphismAgreement R P2 P1
-        (@comm_ring_presentation_morphism_map R P2 P1
-          (@comm_ring_presentation_morphism_comp R P2
-            (@comm_ring_freyd_homology_cycle_presentation
-              R W P2 P1 P0 dNext d) P1
-            (@comm_ring_freyd_homology_cycle_embedding_raw
-              R W P2 P1 P0 dNext d)
-            boundary))
-        (@comm_ring_presentation_morphism_map R P2 P1 dNext))
-      (@CommRingFreydWitnessedCokernelUniversal R P2
-        (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-        boundary);
+≔ @CommRingFreydSelectedHomologyAt R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain;
 
 symbol comm_ring_freyd_witnessed_homology_at
   [R : τ CommRing]
@@ -118,33 +110,8 @@ symbol comm_ring_freyd_witnessed_homology_at
   (d : τ (@CommRingPresentationMorphism R P1 P0))
   (chain : τ (@CommRingFreydChainPair R P2 P1 P0 dNext d))
   : τ (@CommRingFreydWitnessedHomologyAt R W P2 P1 P0 dNext d chain)
-≔ @Struct_sigma
-    (@CommRingPresentationMorphism R P2
-      (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d))
-    (λ boundary : τ (@CommRingPresentationMorphism R P2
-        (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)),
-      @Product_grpd
-        (@CommRingPresentationMorphismAgreement R P2 P1
-          (@comm_ring_presentation_morphism_map R P2 P1
-            (@comm_ring_presentation_morphism_comp R P2
-              (@comm_ring_freyd_homology_cycle_presentation
-                R W P2 P1 P0 dNext d) P1
-              (@comm_ring_freyd_homology_cycle_embedding_raw
-                R W P2 P1 P0 dNext d)
-              boundary))
-          (@comm_ring_presentation_morphism_map R P2 P1 dNext))
-        (@CommRingFreydWitnessedCokernelUniversal R P2
-          (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-          boundary))
-    (@comm_ring_freyd_homology_boundary_selected_raw
-      R W P2 P1 P0 dNext d chain)
-    (@Product_pair_grpd _ _
-      (@comm_ring_freyd_homology_boundary_selected_reconstruction_agreement
-        R W P2 P1 P0 dNext d chain)
-      (@comm_ring_freyd_witnessed_cokernel_universal R P2
-        (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-        (@comm_ring_freyd_homology_boundary_selected_raw
-          R W P2 P1 P0 dNext d chain)));
+≔ @comm_ring_freyd_selected_witnessed_homology_at R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain;
 
 symbol comm_ring_freyd_homology_boundary_raw
   [R : τ CommRing]
@@ -158,7 +125,8 @@ symbol comm_ring_freyd_homology_boundary_raw
   (H : τ (@CommRingFreydWitnessedHomologyAt R W P2 P1 P0 dNext d chain))
   : τ (@CommRingPresentationMorphism R P2
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d))
-≔ sigma_Fst H;
+≔ @comm_ring_freyd_selected_homology_boundary_raw R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_boundary_reconstruction_agreement
   [R : τ CommRing]
@@ -180,7 +148,8 @@ symbol comm_ring_freyd_homology_boundary_reconstruction_agreement
           (@comm_ring_freyd_homology_boundary_raw
             R W P2 P1 P0 dNext d chain H)))
       (@comm_ring_presentation_morphism_map R P2 P1 dNext))
-≔ sigma_Fst (sigma_Snd H);
+≔ @comm_ring_freyd_selected_homology_boundary_reconstruction_agreement R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_cokernel_universal
   [R : τ CommRing]
@@ -196,7 +165,8 @@ symbol comm_ring_freyd_homology_cokernel_universal
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
       (@comm_ring_freyd_homology_boundary_raw
         R W P2 P1 P0 dNext d chain H))
-≔ sigma_Snd (sigma_Snd H);
+≔ @comm_ring_freyd_selected_homology_cokernel_universal R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_presentation
   [R : τ CommRing]
@@ -209,10 +179,8 @@ symbol comm_ring_freyd_homology_presentation
   [chain : τ (@CommRingFreydChainPair R P2 P1 P0 dNext d)]
   (H : τ (@CommRingFreydWitnessedHomologyAt R W P2 P1 P0 dNext d chain))
   : τ (@CommRingPresentation R)
-≔ @comm_ring_freyd_cokernel_presentation R P2
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_boundary_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_presentation R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_projection_raw
   [R : τ CommRing]
@@ -227,10 +195,8 @@ symbol comm_ring_freyd_homology_projection_raw
   : τ (@CommRingPresentationMorphism R
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
       (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H))
-≔ @comm_ring_freyd_cokernel_projection_raw R P2
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_boundary_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_projection_raw R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_projection_annihilation_agreement
   [R : τ CommRing]
@@ -260,10 +226,8 @@ symbol comm_ring_freyd_homology_projection_annihilation_agreement
         (@comm_ring_presentation_morphism_zero R P2
           (@comm_ring_freyd_homology_presentation
             R W P2 P1 P0 dNext d chain H))))
-≔ @comm_ring_freyd_cokernel_annihilation_agreement R P2
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_boundary_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_projection_annihilation_agreement R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 // Exactness at P1 is explicit epicity of the stored boundary map.
 symbol CommRingFreydExactnessAt
@@ -277,10 +241,8 @@ symbol CommRingFreydExactnessAt
   [chain : τ (@CommRingFreydChainPair R P2 P1 P0 dNext d)]
   (H : τ (@CommRingFreydWitnessedHomologyAt R W P2 P1 P0 dNext d chain))
   : Grpd
-≔ @CommRingFreydEpimorphismWitness R P2
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_boundary_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @CommRingFreydSelectedExactnessAt R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_exactness_projection_zero_agreement
   [R : τ CommRing]
@@ -308,7 +270,8 @@ symbol comm_ring_freyd_exactness_projection_zero_agreement
           (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
           (@comm_ring_freyd_homology_presentation
             R W P2 P1 P0 dNext d chain H))))
-≔ exact;
+≔ @comm_ring_freyd_selected_exactness_projection_zero_agreement R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H exact;
 
 symbol comm_ring_freyd_homology_boundary
   [R : τ CommRing]
@@ -322,10 +285,8 @@ symbol comm_ring_freyd_homology_boundary
   (H : τ (@CommRingFreydWitnessedHomologyAt R W P2 P1 P0 dNext d chain))
   : τ (@CommRingFreydHomSet R P2
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d))
-≔ @comm_ring_freyd_hom_class R P2
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_boundary_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_boundary R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_projection
   [R : τ CommRing]
@@ -340,11 +301,8 @@ symbol comm_ring_freyd_homology_projection
   : τ (@CommRingFreydHomSet R
       (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
       (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H))
-≔ @comm_ring_freyd_hom_class R
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)
-    (@comm_ring_freyd_homology_projection_raw
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_projection R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_boundary_reconstruction_path
   [R : τ CommRing]
@@ -363,16 +321,8 @@ symbol comm_ring_freyd_homology_boundary_reconstruction_path
         (@comm_ring_freyd_kernel_embedding R W P1 P0 d)
         (@comm_ring_freyd_homology_boundary R W P2 P1 P0 dNext d chain H))
       (@comm_ring_freyd_hom_class R P2 P1 dNext))
-≔ @comm_ring_freyd_agreement_path R P2 P1
-    (@comm_ring_presentation_morphism_comp R P2
-      (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-      P1
-      (@comm_ring_freyd_homology_cycle_embedding_raw R W P2 P1 P0 dNext d)
-      (@comm_ring_freyd_homology_boundary_raw
-        R W P2 P1 P0 dNext d chain H))
-    dNext
-    (@comm_ring_freyd_homology_boundary_reconstruction_agreement
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_boundary_reconstruction_path R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_homology_projection_annihilation_path
   [R : τ CommRing]
@@ -393,19 +343,8 @@ symbol comm_ring_freyd_homology_projection_annihilation_path
         (@comm_ring_freyd_homology_boundary R W P2 P1 P0 dNext d chain H))
       (@comm_ring_freyd_zero_class R P2
         (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)))
-≔ @comm_ring_freyd_agreement_path R P2
-    (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)
-    (@comm_ring_presentation_morphism_comp R P2
-      (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-      (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)
-      (@comm_ring_freyd_homology_projection_raw
-        R W P2 P1 P0 dNext d chain H)
-      (@comm_ring_freyd_homology_boundary_raw
-        R W P2 P1 P0 dNext d chain H))
-    (@comm_ring_presentation_morphism_zero R P2
-      (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H))
-    (@comm_ring_freyd_homology_projection_annihilation_agreement
-      R W P2 P1 P0 dNext d chain H);
+≔ @comm_ring_freyd_selected_homology_projection_annihilation_path R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H;
 
 symbol comm_ring_freyd_exactness_projection_zero_path
   [R : τ CommRing]
@@ -425,12 +364,5 @@ symbol comm_ring_freyd_exactness_projection_zero_path
       (@comm_ring_freyd_zero_class R
         (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
         (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)))
-≔ @comm_ring_freyd_agreement_path R
-    (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-    (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H)
-    (@comm_ring_freyd_homology_projection_raw R W P2 P1 P0 dNext d chain H)
-    (@comm_ring_presentation_morphism_zero R
-      (@comm_ring_freyd_homology_cycle_presentation R W P2 P1 P0 dNext d)
-      (@comm_ring_freyd_homology_presentation R W P2 P1 P0 dNext d chain H))
-    (@comm_ring_freyd_exactness_projection_zero_agreement
-      R W P2 P1 P0 dNext d chain H exact);
+≔ @comm_ring_freyd_selected_exactness_projection_zero_path R P2 P1 P0 dNext d
+    (@comm_ring_freyd_kernel_selected_choices R W P1 P0 d) chain H exact;
