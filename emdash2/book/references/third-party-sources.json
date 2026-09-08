@@ -715,6 +715,150 @@
       },
       "use": "Bibliographic and conceptual reference only; no copied or closely adapted prose.",
       "adaptations": []
+    },
+    {
+      "id": "posur-constructive-freyd",
+      "title": "A Constructive Approach to Freyd Categories",
+      "authors": "Sebastian Posur",
+      "arxiv": "1712.03492",
+      "version": "v1",
+      "year": 2017,
+      "canonicalUrl": "https://arxiv.org/abs/1712.03492v1",
+      "use": "Mathematical and algorithmic reference for Chapter 31; no source prose or code reproduced.",
+      "sourceMap": [
+        {
+          "section": "3",
+          "use": "presentation maps, coefficient agreement witnesses, cokernels, the two-weak-pullback kernel and normality constructions"
+        },
+        {
+          "section": "4",
+          "use": "effective ring and lifting requirements"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "barakat-robertz-homalg",
+      "title": "homalg: A Meta-Package for Homological Algebra",
+      "authors": "Mohamed Barakat and Daniel Robertz",
+      "arxiv": "math/0701146",
+      "version": "v2",
+      "year": 2007,
+      "canonicalUrl": "https://arxiv.org/abs/math/0701146v2",
+      "use": "Reference for the separation of ring algorithms and homological constructions in Chapter 31; no source prose or code reproduced.",
+      "sourceMap": [
+        {
+          "section": "1-7",
+          "use": "ring-independent homological operations and their computational ring requirements"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "barakat-lange-hegermann-axiomatic",
+      "title": "An Axiomatic Setup for Algorithmic Homological Algebra and an Alternative Approach to Localization",
+      "authors": "Mohamed Barakat and Markus Lange-Hegermann",
+      "arxiv": "1003.1943",
+      "version": "v5",
+      "versionDate": "2017-10-26",
+      "canonicalUrl": "https://arxiv.org/abs/1003.1943v5",
+      "use": "Reference for explicit constructive operation contracts; no source prose or code reproduced. The localization results are not claimed as implemented by Chapter 31.",
+      "sourceMap": [
+        {
+          "section": "1-7",
+          "use": "algorithmic Abelian operations and the distinction between universal requirements and selected computations"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "posur-constructive-methods",
+      "title": "Methods of Constructive Category Theory",
+      "authors": "Sebastian Posur",
+      "arxiv": "1908.04132",
+      "version": "v1",
+      "year": 2019,
+      "canonicalUrl": "https://arxiv.org/abs/1908.04132v1",
+      "use": "Comparative context for constructive categorical algorithms and generalized morphisms in Chapter 31; no source prose or code reproduced.",
+      "sourceMap": [
+        {
+          "pages": "26, 42, 44-45",
+          "use": "reviewed operation and relation-calculus examples; no general proof transfer is inferred"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "posur-image-completion",
+      "title": "Closing the Category of Finitely Presented Functors under Images Made Constructive",
+      "authors": "Sebastian Posur",
+      "arxiv": "1911.11469",
+      "version": "v3",
+      "year": 2020,
+      "canonicalUrl": "https://arxiv.org/abs/1911.11469v3",
+      "use": "Reference for distinguishing image completion from Freyd and free Abelian constructions; no source prose or code reproduced.",
+      "sourceMap": [
+        {
+          "section": "1-5",
+          "use": "cospan/image representation and constructive syzygy-inclusion requirements"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "posur-free-abelian-theorem-proving",
+      "title": "On Free Abelian Categories for Theorem Proving",
+      "authors": "Sebastian Posur",
+      "arxiv": "2103.08379",
+      "version": "v1",
+      "year": 2021,
+      "canonicalUrl": "https://arxiv.org/abs/2103.08379v1",
+      "use": "Reference for the prospective universal-diagram mode in Chapter 31; no source prose or code reproduced and no universal prover claimed.",
+      "sourceMap": [
+        {
+          "section": "1",
+          "use": "Adelman objects and two-sided homotopy solving"
+        },
+        {
+          "section": "2",
+          "use": "universal snake instances and exact-functor interpretation"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "cap-project",
+      "title": "Categories, Algorithms, and Programming",
+      "authors": "The CAP contributors",
+      "repository": "https://github.com/homalg-project/CAP_project",
+      "revision": "d21dc5f5f420",
+      "use": "Pinned design and differential reference for Chapter 31; no runtime dependency or reproduced software code.",
+      "sourceMap": [
+        {
+          "component": "CAP operations and derivations",
+          "use": "prerequisite-aware categorical computation"
+        },
+        {
+          "component": "CompilerForCAP",
+          "use": "categorical program compilation as design inspiration"
+        }
+      ],
+      "adaptations": []
+    },
+    {
+      "id": "homalg-project",
+      "title": "The homalg Project",
+      "authors": "The homalg contributors",
+      "repository": "https://github.com/homalg-project/homalg_project",
+      "revision": "802993da0095",
+      "use": "Pinned design reference for computational rings, matrices and homological operations; no runtime dependency or reproduced software code.",
+      "sourceMap": [
+        {
+          "component": "matrices, modules and ring dictionaries",
+          "use": "separation of computational ring services and categorical constructions"
+        }
+      ],
+      "adaptations": []
     }
   ]
 }

@@ -161,3 +161,22 @@ note for every stronger reading.
 The current development SOP remains the operational authority for rule design
 and validation. This appendix explains the mathematical reading needed by a
 book reader; it is not a replacement for that SOP.
+
+## E.8 Universal Factors And Computer Algebra
+
+The Abelian and homological constructions in [Chapter 31](#chapter-31)
+are transparent definitions over existing owners. Pair and record
+projections compute by the established calculus. Reconstruction, uniqueness,
+normality and exactness are theorem-level paths or supplied universal
+operations; their existence does not install new rewriting rules for
+generic composition. In particular, the current homology map laws are not
+a new runtime normalization theory for complexes.
+
+Polynomial algorithms provide a different computation layer. Their selected
+matrices, factors and witnesses can be reified into the formal language.
+Explicit adoption then makes the corresponding equations available to
+ordinary constructors. An all-test factor law is separately recorded as
+trusted provider semantics; it is not inferred from finitely many sample
+equations. The formal constructors retain the original selected objects and
+raw witnesses. Equality of serialized data is an implementation consistency
+check, not the definition of equality in the Freyd quotient category.

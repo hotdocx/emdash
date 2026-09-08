@@ -85,6 +85,26 @@ syntax.
 | $\mathsf{Laurent}(S,\Omega)$ | a common base and Laurent presentation on the literal rings and restrictions of the actual overlap $\Omega$ | `BinarySchemeLaurentOverlapPresentation K S overlap` |
 | $\mathsf{PLine}_{\mathrm{sup}}(\mathcal K)$ | an already-global binary scheme, its actual overlap, and its Laurent coordinate package | `SuppliedProjectiveLinePresentation K` |
 
+The homological notation in [Chapter 31](#chapter-31) keeps selected
+objects and their structural arrows visible.
+
+| Book notation | Reading | Current implementation witness |
+| --- | --- | --- |
+| $A\oplus B$, $0$ | the selected biproduct and zero object | `AdditiveCategory` |
+| $\sum_{u:T\to Z}(k\circ u=h)$ | the internal factor fibre of $h$ through $k$ | `HomPostcompFactor` |
+| $k_n:Z_n\to C_n$ | the actual cycle kernel embedding | `computational_homology_cycle_embedding` |
+| $b_n:C_{n+1}\to Z_n$ | the lifted incoming differential | `computational_homology_boundary` |
+| $q_n:Z_n\to H_n$ | the selected cokernel of that boundary | `computational_homology_projection` |
+| $\chi_f:\operatorname{Coim}(f)\to\operatorname{Im}(f)$ | the canonical coimage-image comparison | `coimage_image_comparison` |
+| $\partial$, $\partial_n$ | respectively the snake arrow and a homology connecting map | `abelian_snake_connecting`; the native homology-connecting operation |
+| $\rho_QW=F\rho_P$ | relation preservation for a column-matrix raw morphism | `CommRingPresentationMorphism` |
+| $\rho_QH=F-G$ | a coefficient witness for agreement of raw representatives | `CommRingPresentationMorphismAgreement` |
+| $QU+FV=\operatorname{id}$ | a boundary-epicity block equation | `CommRingFreydEpimorphismWitness` |
+
+Matrix products use the same composition order as categorical arrows: the
+rightmost matrix acts first. A selected presentation is not identified with
+another merely because both represent isomorphic modules.
+
 The bounded executable text bridge uses four intrinsic categorical lambda
 modes:
 

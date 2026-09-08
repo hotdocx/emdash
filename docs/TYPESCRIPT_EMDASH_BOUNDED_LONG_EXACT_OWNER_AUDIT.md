@@ -1270,3 +1270,22 @@ require a reviewed choice-parametric shared core, as was done for homology,
 or explicit comparison isomorphisms. It is not necessary merely to obtain
 the requested raw witnesses, and no such package is claimed here. The
 generic window theorem and finite generic assembly are still unfinished.
+
+## Book claim and artifact boundary (row 14A)
+
+Chapter 31 now exposes the checked generic six-term snake theorem as its
+central theorem. Generic homology maps and the homology-to-cokernel monic
+comparison are checked prerequisites; generic homology-window and bounded
+LES proofs remain visibly open. The selected native LES and its actual
+formal interior homology/exactness terms have separate operational and
+explicit-adoption accounts. No field differential or provider assumption is
+presented as a universal theorem. The reviewed Posur/homalg distinctions
+are also retained in the chapter's last section and provenance records.
+
+The integrated local 0.8.0-dev draft passes source/evidence/typography,
+bounded browser rendering, PDF checks and visual inspection. Its 398 pages
+and 177 cited claims are artifact evidence, not new proof authority. The
+public PDF copy is not promoted and nothing is published. A matrix escaping
+defect found by visual inspection is fixed in the authoring source; its
+underlying renderer-normalization issue is recorded as a later scoped
+maintenance consumer in the plan.

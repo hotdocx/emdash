@@ -6175,6 +6175,17 @@ Two independent releases produced that same checksum, and the promoted owner
 and public copy are byte-identical. This artifact status is publication
 evidence, not a new mathematical authority; no remote publication occurred.
 
+The bounded homological goal has also produced a locally checked, unpromoted
+`0.8.0-dev` draft dated 2026-09-08. It adds Chapter 31 and the homological
+appendix/evidence/provenance updates: 46 sources, 177 cited claims, 3,297 math
+spans, 398 pages and 19 embedded fonts. Its PDF SHA-256 is
+`4ad626d7d04cb5e393c8ecb65d200209b7c670dc6a67a35b974e00d120f877ac`.
+Source, browser, PDF and affected-page visual checks pass. This local export
+does not replace the promoted/public artifact above. The generic six-term
+snake is its checked central theorem; the generic homology-window and
+bounded LES proofs remain explicitly unfinished, separate from the working
+selected proof-CAS reconstruction.
+
 ```bash
 ./scripts/pnpmw run book:assemble
 ./scripts/pnpmw run book:typography

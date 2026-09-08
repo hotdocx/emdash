@@ -8,6 +8,20 @@ than to a page number that would change with paper size and typography.
 
 ## D.1 Glossary
 
+<a id="glossary-abelian-category"></a>
+
+**Abelian category, computational.** An additive category with selected
+kernels and cokernels and normal lift/colift operations. Monic and epic
+cancellation are distinguished from the normality operations that construct
+factors. See [Chapter 31](#chapter-31).
+
+<a id="glossary-additive-category"></a>
+
+**Additive category.** A category with set-valued abelian Hom groups,
+bilinear composition and selected finite biproducts. The implementation
+derives biproducts from its supplied cartesian structure. See
+[Chapter 31](#chapter-31).
+
 <a id="glossary-affine-chart-realization"></a>
 
 **Affine chart realization.** A selected region $U\to X$ together with a
@@ -720,7 +734,44 @@ encode-decode, while the active native theorem is the shaped co-Yoneda cut;
 full Cat-valued Yoneda remains a named boundary. See
 [Chapter 13](#chapter-13).
 
-## D.2 Index strategy
+## D.2 Homological Glossary
+
+The homological continuation also uses the following linked terms.
+
+<a id="glossary-homological-exactness"></a>
+
+**Exactness, selected.** Epicity of the actual boundary arrow into the
+selected cycle kernel. In an Abelian category, local epic-cover factors
+characterize this property. See [Chapter 31](#chapter-31).
+
+<a id="glossary-freyd-presentation"></a>
+
+**Freyd presentation.** A relation arrow into a generating object. Raw maps
+retain relation-preservation coefficients; equality of their induced
+quotient maps has separate coefficient witnesses. See
+[Chapter 31](#chapter-31).
+
+<a id="glossary-selected-homology"></a>
+
+**Selected homology.** A retained cycle kernel, the incoming differential
+lifted into it, and the cokernel of that boundary. Maps and exactness refer
+to these same choices. See [Chapter 31](#chapter-31).
+
+<a id="glossary-local-factor-cover"></a>
+
+**Local factor cover.** An epimorphism $e:T'\to T$ after which an
+annihilated test factors through the preceding arrow. It replaces an
+elementwise choice of preimages in the constructive snake proof. See
+[Chapter 31](#chapter-31).
+
+<a id="glossary-proof-cas-adoption"></a>
+
+**Proof-CAS adoption.** The explicit decision to add a computed equation
+or a selected algorithm's semantic contract to a proof source. Computation
+alone adds no assumption; subsequent formal checking is relative to the
+adopted statements. See [Chapter 31](#chapter-31).
+
+## D.3 Index Strategy
 
 This edition uses the linked concept index as its stable index. Terms
 are curated rather than extracted from raw identifier frequency; synonyms

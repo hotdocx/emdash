@@ -5,8 +5,8 @@
   "subtitle": "Univalent Foundations for Mathematics",
   "displayTitle": "Functorial Type Theory: Univalent Foundations for Mathematics",
   "edition": "expanded development edition",
-  "editionVersion": "0.7.0-dev",
-  "publicationDate": "2026-08-29",
+  "editionVersion": "0.8.0-dev",
+  "publicationDate": "2026-09-08",
   "status": "draft",
   "authors": [
     "The emdash contributors"
@@ -32,7 +32,7 @@
     "layout": "single-column"
   },
   "artifacts": {
-    "pdf": "output/pdf/functorial-type-theory-0.7.0-dev.pdf"
+    "pdf": "output/pdf/functorial-type-theory-0.8.0-dev.pdf"
   },
   "sources": [
     {
@@ -209,6 +209,11 @@
       "id": "chapter-30",
       "kind": "chapter",
       "path": "book/chapters/30-cartesian-structure-and-dependent-products.md"
+    },
+    {
+      "id": "chapter-31",
+      "kind": "chapter",
+      "path": "book/chapters/31-additive-abelian-and-homological-computation.md"
     },
     {
       "id": "appendix-notation",

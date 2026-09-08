@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "planId": "EMDASH-BOOK-CARTESIAN-INDEXED-STRUCTURE-EDITION-V0.7",
+  "planId": "TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK",
   "retainedChapterRange": [1, 8],
   "retainedChapterCentralTheorems": [
     {
@@ -506,7 +506,28 @@
         "ADJ-TRIANGLE-CUTS",
         "ADJ-HOM-PROF-COMPARISON"
       ],
-      "boundary": "selected products, terminality, pullbacks, and slice dependent products have whole computational owners and Došen-style cuts; weighted comparison remains supplied, while pushouts, Beck-Chevalley, Frobenius, derived slice exponentials, and the convention-sensitive final LCCC package remain later layers"
+      "boundary": "selected products, terminality, pullbacks, and slice dependent products have whole computational owners and Došen-style cuts; weighted comparison remains supplied, while general opposite-derived pushouts, Beck-Chevalley, Frobenius, derived slice exponentials, and the convention-sensitive final LCCC package remain later layers; Chapter 31 constructs additive fibre products and pushouts by difference kernels/cokernels"
+    },
+    {
+      "id": "chapter-31",
+      "number": 31,
+      "path": "book/chapters/31-additive-abelian-and-homological-computation.md",
+      "title": "Additive, Abelian, And Homological Computation",
+      "conceptualOwner": "internal universal factors, selected six-term snake exactness, and explicit proof-CAS homological computation",
+      "spiralFrom": ["chapter-5", "chapter-9", "chapter-21", "chapter-30"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "ABELIAN-SNAKE-SIX-TERM-EXACT"
+      },
+      "secondaryEvidence": [
+        "ADDITIVE-HOM-BIPRODUCTS", "INTERNAL-KERNEL-COKERNEL-FACTORS",
+        "ABELIAN-NORMALITY-IMAGES", "SELECTED-HOMOLOGY-MAPS",
+        "SELECTED-EXACTNESS-COVERS", "ABELIAN-FIBER-PUSHOUT-STABILITY",
+        "ABELIAN-SNAKE-CONNECTING", "HOMOLOGY-COKERNEL-INCLUSION",
+        "FREYD-FORMAL-RAW-SPINE", "FREYD-FORMAL-BOUNDARY-EPICITY",
+        "FREYD-SELECTED-HOMOLOGY-EXACTNESS", "FREYD-RAW-WITNESS-INTRO"
+      ],
+      "boundary": "the generic six-term snake is checked; native bounded long exact computations and formal selected interior homology/exactness terms are active with explicit provider trust; generic homology-window and bounded long-exact proofs, closed quotient effectiveness, and universal-diagram solving remain distinct unfinished layers"
     }
   ],
   "appendix": {

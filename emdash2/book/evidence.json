@@ -4391,6 +4391,378 @@
           "contains": "Eckmann-Hilton specialization"
         }
       ]
+    },
+    "ADDITIVE-HOM-BIPRODUCTS": {
+      "status": "checked",
+      "statement": "Set-valued abelian Hom structures and bilinear composition combine with selected cartesian structure to give biproducts and a terminal/initial zero object.",
+      "owners": [
+        {
+          "file": "emdash3_2_preadditive_categories.lp",
+          "symbol": "PreadditiveCategory"
+        },
+        {
+          "file": "emdash3_2_additive_categories.lp",
+          "symbol": "AdditiveCategory"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/additive_categories.lp",
+          "symbol": "AdditiveCategory"
+        },
+        {
+          "file": "examples/commutative_ring_finite_free_additive.lp",
+          "symbol": "comm_ring_finite_free_additive"
+        }
+      ]
+    },
+    "INTERNAL-KERNEL-COKERNEL-FACTORS": {
+      "status": "checked",
+      "statement": "Kernels and cokernels use contractible internal Hom-factor fibres, with selected factors, reconstruction, uniqueness and comparison maps between supplied choices.",
+      "owners": [
+        {
+          "file": "emdash3_2_hom_factor_spaces.lp",
+          "symbol": "HomPostcompFactor"
+        },
+        {
+          "file": "emdash3_2_hom_factor_spaces.lp",
+          "symbol": "HomPrecompFactor"
+        },
+        {
+          "file": "emdash3_2_kernels_cokernels.lp",
+          "symbol": "ComputationalKernel"
+        },
+        {
+          "file": "emdash3_2_kernels_cokernels.lp",
+          "symbol": "ComputationalCokernel"
+        },
+        {
+          "file": "emdash3_2_kernel_map_isos.lp",
+          "symbol": "computational_kernel_maps_iso"
+        },
+        {
+          "file": "emdash3_2_cokernel_map_isos.lp",
+          "symbol": "computational_cokernel_maps_iso"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/kernels_cokernels.lp",
+          "symbol": "ComputationalKernel"
+        },
+        {
+          "file": "examples/kernel_maps.lp",
+          "symbol": "computational_kernel_map"
+        },
+        {
+          "file": "examples/cokernel_maps.lp",
+          "symbol": "computational_cokernel_map"
+        }
+      ]
+    },
+    "ABELIAN-NORMALITY-IMAGES": {
+      "status": "checked",
+      "statement": "Computational Abelian normality constructs the coimage-image comparison, proves it monic and epic, and constructs its isomorphism without identifying the selected objects by fiat.",
+      "owners": [
+        {
+          "file": "emdash3_2_abelian_categories.lp",
+          "symbol": "ComputationalAbelianCategory"
+        },
+        {
+          "file": "emdash3_2_abelian_images.lp",
+          "symbol": "coimage_image_comparison"
+        },
+        {
+          "file": "emdash3_2_abelian_image_bimorphisms.lp",
+          "symbol": "coimage_image_comparison_is_monic"
+        },
+        {
+          "file": "emdash3_2_abelian_image_bimorphisms.lp",
+          "symbol": "coimage_image_comparison_is_epic"
+        },
+        {
+          "file": "emdash3_2_abelian_bimorphisms.lp",
+          "symbol": "computational_abelian_coimage_image_iso"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/abelian_images.lp",
+          "symbol": "coimage_image_comparison"
+        },
+        {
+          "file": "examples/abelian_image_bimorphisms.lp",
+          "symbol": "abelian_coimage_image_comparison_is_monic"
+        },
+        {
+          "file": "examples/abelian_bimorphisms.lp",
+          "symbol": "computational_abelian_coimage_image_iso"
+        }
+      ]
+    },
+    "SELECTED-HOMOLOGY-MAPS": {
+      "status": "checked",
+      "statement": "Selected homology retains its cycle kernel and boundary cokernel; chain-pair maps induce maps on these homologies with reconstruction and functoriality paths.",
+      "owners": [
+        {
+          "file": "emdash3_2_computational_homology.lp",
+          "symbol": "ComputationalHomologyAt"
+        },
+        {
+          "file": "emdash3_2_chain_pair_maps.lp",
+          "symbol": "ComputationalChainPairMap"
+        },
+        {
+          "file": "emdash3_2_homology_maps.lp",
+          "symbol": "computational_homology_map"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/computational_homology.lp",
+          "symbol": "ComputationalHomologyAt"
+        },
+        {
+          "file": "examples/homology_maps.lp",
+          "symbol": "computational_homology_map"
+        }
+      ]
+    },
+    "SELECTED-EXACTNESS-COVERS": {
+      "status": "checked",
+      "statement": "Exactness is epicity of the selected boundary; local epic-cover factorization characterizes it, and the dual local-extension family is a sufficient criterion.",
+      "owners": [
+        {
+          "file": "emdash3_2_short_exact_sequences.lp",
+          "symbol": "ComputationalExactAt"
+        },
+        {
+          "file": "emdash3_2_exactness_covers.lp",
+          "symbol": "computational_exact_at_from_covers"
+        },
+        {
+          "file": "emdash3_2_exactness_covers_from_exact.lp",
+          "symbol": "computational_exact_covers_from_exact"
+        },
+        {
+          "file": "emdash3_2_exactness_extensions_to_exact.lp",
+          "symbol": "computational_exact_at_from_extensions"
+        },
+        {
+          "file": "emdash3_2_short_exact_kernel_comparison.lp",
+          "symbol": "short_exact_kernel_comparison_iso"
+        },
+        {
+          "file": "emdash3_2_short_exact_cokernel_comparison.lp",
+          "symbol": "short_exact_cokernel_comparison_iso"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/short_exact_sequences.lp",
+          "symbol": "ComputationalExactAt"
+        },
+        {
+          "file": "examples/short_exact_comparisons.lp",
+          "symbol": "short_exact_kernel_comparison_iso"
+        },
+        {
+          "file": "examples/abelian_snake_exact_third.lp",
+          "symbol": "abelian_snake_exact_at_coker_alpha"
+        }
+      ]
+    },
+    "ABELIAN-FIBER-PUSHOUT-STABILITY": {
+      "status": "checked",
+      "statement": "Difference kernels and cokernels construct additive fibre products and pushouts; Abelian normality proves the corresponding pullback-epic and pushout-monic stability.",
+      "owners": [
+        {
+          "file": "emdash3_2_computational_fiber_products.lp",
+          "symbol": "ComputationalFiberProduct"
+        },
+        {
+          "file": "emdash3_2_computational_pushouts.lp",
+          "symbol": "ComputationalPushout"
+        },
+        {
+          "file": "emdash3_2_abelian_fiber_pushout_stability.lp",
+          "symbol": "abelian_fiber_product_epic_projection"
+        },
+        {
+          "file": "emdash3_2_abelian_fiber_pushout_stability.lp",
+          "symbol": "abelian_pushout_monic_injection"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/computational_fiber_products_pushouts.lp",
+          "symbol": "ComputationalFiberProduct"
+        },
+        {
+          "file": "examples/abelian_fiber_pushout_stability.lp",
+          "symbol": "abelian_fiber_product_epic_projection"
+        }
+      ]
+    },
+    "ABELIAN-SNAKE-CONNECTING": {
+      "status": "checked",
+      "statement": "A triple with zero composite constructs the snake connecting arrow, both normal factors and their reconstructions, including the original covered lambda-kernel factor.",
+      "owners": [
+        {
+          "file": "emdash3_2_abelian_snake_lemma.lp",
+          "symbol": "AbelianSnakeTriple"
+        },
+        {
+          "file": "emdash3_2_abelian_snake_connecting_result.lp",
+          "symbol": "abelian_snake_connecting_result"
+        },
+        {
+          "file": "emdash3_2_abelian_snake_covered_reconstruction.lp",
+          "symbol": "abelian_snake_connecting_after_p1_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/abelian_snake_connecting.lp",
+          "symbol": "abelian_snake_connecting"
+        },
+        {
+          "file": "examples/abelian_snake_covered_reconstruction.lp",
+          "symbol": "abelian_snake_connecting_after_p1_path"
+        }
+      ]
+    },
+    "ABELIAN-SNAKE-SIX-TERM-EXACT": {
+      "status": "checked",
+      "statement": "The selected generic six-term snake has five maps, four adjacent-zero paths and exactness at its four interior objects, indexed by the original snapshot.",
+      "owners": [
+        {
+          "file": "emdash3_2_abelian_snake_six_term_exact_result_foundation.lp",
+          "symbol": "AbelianSnakeSixTermExactResult"
+        },
+        {
+          "file": "emdash3_2_abelian_snake_six_term_exact_result.lp",
+          "symbol": "abelian_snake_six_term_exact_result"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/abelian_snake_six_term_exact_result.lp",
+          "symbol": "abelian_snake_six_term_exact_result"
+        }
+      ]
+    },
+    "HOMOLOGY-COKERNEL-INCLUSION": {
+      "status": "checked",
+      "statement": "The original cycle embedding induces H into the supplied cokernel of the incoming differential; this map is monic in a computational Abelian category.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_cokernel_inclusion.lp",
+          "symbol": "computational_homology_cokernel_inclusion"
+        },
+        {
+          "file": "emdash3_2_abelian_homology_cokernel_inclusion.lp",
+          "symbol": "abelian_homology_cokernel_inclusion_monic"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_cokernel_inclusion.lp",
+          "symbol": "abelian_homology_cokernel_inclusion_monic"
+        }
+      ]
+    },
+    "FREYD-FORMAL-RAW-SPINE": {
+      "status": "checked",
+      "statement": "Explicit matrix introductions construct original presentation morphisms and raw chain agreements, which assemble through the existing bounded Freyd-spine constructors.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_explicit_spines.lp",
+          "symbol": "comm_ring_presentation_morphism_from_matrices"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_explicit_spines.lp",
+          "symbol": "comm_ring_freyd_chain_pair_from_matrices"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_bounded_complexes.lp",
+          "symbol": "CommRingFreydBoundedComplex"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_freyd_explicit_spines.lp",
+          "symbol": "comm_ring_freyd_chain_pair_from_matrices"
+        }
+      ]
+    },
+    "FREYD-FORMAL-BOUNDARY-EPICITY": {
+      "status": "checked",
+      "statement": "The identity Q U + F V = id and the original relation-preservation law construct the existing formal Freyd epimorphism witness at that raw morphism.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_explicit_epimorphisms.lp",
+          "symbol": "comm_ring_freyd_epimorphism_from_matrices"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_freyd_explicit_epimorphisms.lp",
+          "symbol": "comm_ring_freyd_epimorphism_from_matrices"
+        }
+      ]
+    },
+    "FREYD-SELECTED-HOMOLOGY-EXACTNESS": {
+      "status": "checked",
+      "statement": "The two supplied whole weak-pullback providers construct the selected kernel; the actual raw boundary and reconstruction construct its homology, and its existing epicity witness is exactness at that same boundary.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_kernel_choices.lp",
+          "symbol": "CommRingFreydKernelChoices"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_kernel_choice_providers.lp",
+          "symbol": "CommRingFiniteFreeWeakPullbackMatrixProvider"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_selected_homology.lp",
+          "symbol": "CommRingFreydSelectedHomologyAt"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_actual_homology.lp",
+          "symbol": "comm_ring_freyd_exactness_from_matrix_providers"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_freyd_kernel_choice_providers.lp",
+          "symbol": "comm_ring_freyd_kernel_choices_from_matrix_providers"
+        },
+        {
+          "file": "examples/commutative_ring_freyd_actual_homology.lp",
+          "symbol": "comm_ring_freyd_exactness_from_matrix_providers"
+        }
+      ]
+    },
+    "FREYD-RAW-WITNESS-INTRO": {
+      "status": "checked",
+      "statement": "A retained coefficient matrix and its adopted equation construct the existing raw presentation-agreement value at literal source and target presentations.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_explicit_spines.lp",
+          "symbol": "CommRingPresentationAgreementAtMatrices"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_explicit_spines.lp",
+          "symbol": "comm_ring_presentation_agreement_from_matrices"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/commutative_ring_freyd_raw_witnesses.lp",
+          "symbol": "comm_ring_presentation_agreement_from_matrices"
+        }
+      ]
     }
   }
 }

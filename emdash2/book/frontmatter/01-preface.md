@@ -145,6 +145,16 @@ stops before Beck-Chevalley, Frobenius, pushout duality, derived slice
 exponentials, or a final convention-sensitive locally cartesian closed
 package.
 
+A seventh spiral, [Chapter 31](#chapter-31), puts universal factors to work
+in homological algebra. Addition turns selected products into biproducts;
+kernels and cokernels provide factors; Abelian normality and local covers
+make the snake construction possible without an elementwise choice of
+preimages. The chapter proves the selected six-term snake theorem, then
+explains how polynomial algorithms, categorical programs and explicit
+proof-CAS adoption retain a bounded long exact computation. Its constructed
+formal interior witnesses are distinguished from the generic long-exact
+theorem still under development.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel

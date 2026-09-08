@@ -64,5 +64,45 @@
     Parametricity in Indexed Form*. arXiv:2602.12689v1, 2026.
     [arXiv record](https://arxiv.org/abs/2602.12689).
 
-Items 6–7 identify proof infrastructure. Items 12–14 are comparative Chapter
-29 references and supply no adapted prose.
+15. <a id="ref-posur-freyd"></a>Sebastian Posur. *A Constructive Approach
+    to Freyd Categories*. Reviewed preprint arXiv:1712.03492v1, 2017.
+    [Pinned arXiv record](https://arxiv.org/abs/1712.03492v1).
+
+16. <a id="ref-homalg-meta"></a>Mohamed Barakat and Daniel Robertz.
+    *homalg: A Meta-Package for Homological Algebra*. Reviewed preprint
+    arXiv:math/0701146v2, 2007; *Journal of Algebra and Its Applications*
+    7 (2008), 299-317.
+    [Pinned arXiv record](https://arxiv.org/abs/math/0701146v2).
+
+17. <a id="ref-homalg-axiomatic"></a>Mohamed Barakat and Markus
+    Lange-Hegermann. *An Axiomatic Setup for Algorithmic Homological Algebra
+    and an Alternative Approach to Localization*. *Journal of Algebra and
+    Its Applications* 10 (2011), 269-293; reviewed preprint
+    arXiv:1003.1943v5, 2017.
+    [Pinned arXiv record](https://arxiv.org/abs/1003.1943v5).
+
+18. <a id="ref-posur-methods"></a>Sebastian Posur. *Methods of
+    Constructive Category Theory*. arXiv:1908.04132v1, 2019.
+    [Pinned arXiv record](https://arxiv.org/abs/1908.04132v1).
+
+19. <a id="ref-posur-images"></a>Sebastian Posur. *Closing the Category
+    of Finitely Presented Functors under Images Made Constructive*.
+    arXiv:1911.11469v3, 2020.
+    [Pinned arXiv record](https://arxiv.org/abs/1911.11469v3).
+
+20. <a id="ref-posur-free-abelian"></a>Sebastian Posur. *On Free Abelian
+    Categories for Theorem Proving*. arXiv:2103.08379v1, 2021.
+    [Pinned arXiv record](https://arxiv.org/abs/2103.08379v1).
+
+21. <a id="ref-cap-project"></a>The CAP contributors. *Categories,
+    Algorithms, and Programming*, including CompilerForCAP.
+    [Source repository](https://github.com/homalg-project/CAP_project),
+    reviewed at revision `d21dc5f5f420`.
+
+22. <a id="ref-homalg-project"></a>The homalg contributors. *The homalg
+    Project*. [Source repository](https://github.com/homalg-project/homalg_project),
+    reviewed at revision `802993da0095`.
+
+Items 6-7 identify proof infrastructure. Items 12-14 are comparative Chapter
+29 references. Items 15-22 give mathematical and algorithmic context for
+Chapter 31; no source prose or software code is reproduced in that chapter.

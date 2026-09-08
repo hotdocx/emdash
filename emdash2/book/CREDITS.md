@@ -115,3 +115,25 @@ combinatorially constructed higher-dimensional products from emdash's checked
 and deliberately narrower experiment—one profiled right closure and its
 walking-square interchanger. The exact sections and reference-only boundary
 are recorded in `references/third-party-sources.json`.
+
+## Constructive categories and homological algorithms
+
+Chapter 31 uses [Posur's constructive Freyd-category development](#ref-posur-freyd)
+as mathematical and algorithmic orientation for presentations, explicit
+agreement witnesses and the two-weak-pullback kernel construction. The
+[homalg meta-package paper](#ref-homalg-meta) and
+[axiomatic algorithmic setup](#ref-homalg-axiomatic) inform the separation
+between ring algorithms and categorical universal operations. The
+[CAP](#ref-cap-project) and [homalg](#ref-homalg-project) source reviews
+also inform the method/prerequisite architecture and the independent
+computational comparisons. They are references, not runtime dependencies
+of emdash's native implementation.
+
+The chapter's later research boundary distinguishes the constructions in
+Posur's [methods](#ref-posur-methods), [image-completion](#ref-posur-images),
+and [free-Abelian theorem-proving](#ref-posur-free-abelian) papers. It does
+not claim that a universal-diagram prover, generalized-morphism compiler,
+or comparison between these category constructors has been implemented.
+The exposition is newly written from the emdash construction; no source
+prose or software code is reproduced. The reference versions and uses are
+recorded in `references/third-party-sources.json`.

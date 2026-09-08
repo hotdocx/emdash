@@ -700,12 +700,12 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; checkpoint `9dc9b316` | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
 | `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
-| `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; focused and live checks green | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
+| `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; checkpoint `933aa435` | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
-| `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
-| `LEH-BOOK-DRAFT-14A` | in progress; new chapter prose only | checked owners and reviewed claim boundaries | Chapter 31 draft with uncompleted generic/formal exactness clearly distinguished; manifest/evidence/rendering remain downstream |
+| `LEH-BOOK-14` | in progress; current checked draft integrated; final generic-theorem updates remain | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
+| `LEH-BOOK-DRAFT-14A` | complete; local 0.8.0-dev export and visual checks green | checked owners and reviewed claim boundaries | Chapter 31, all planned appendices, 13 new evidence entries and reference provenance; generic-window/bounded-proof boundaries stated explicitly |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
 | `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
 
@@ -2189,6 +2189,60 @@ aligning the universal choices of those records with the selected native
 choices. Actual LES-interior homology/exactness already has that alignment
 through 11E–11G. The precise contract inventory is recorded in the owner
 audit; generic window and bounded exactness remain required work.
+
+### Book integration and local artifact review (row 14A)
+
+The new Chapter 31 is integrated after the cartesian/dependent-product
+chapter, as the seventh explanatory spiral. It develops additive Homs and
+biproducts, internal kernel/cokernel factors, normality and image comparison,
+selected homology, local cover/extension exactness, difference fibre
+products/pushouts and stability, the generic six-term snake theorem, native
+bounded LES operations, and the actual proof-CAS reconstruction. Its final
+section distinguishes remaining generic-window proofs from selected native
+exactness and records the Posur/homalg-inspired universal-diagram boundary.
+
+The preface and Appendices A, B, D, E and F now supply the corresponding
+notation, evidence roles, glossary, computation/trust distinctions and
+status. Thirteen new evidence entries have literal Lambdapi owners and
+reviewers. TypeScript operational and differential tests are named separately
+in prose; they are not misclassified as generic theorem proofs. Eight new
+reference-only provenance entries cover the reviewed constructive-category
+papers and pinned CAP/homalg source revisions. No source prose or software
+code was copied into the chapter. The manifest is the draft 0.8.0-dev edition,
+dated 2026-09-08. Neither the repository's public PDF copy nor remote Pages
+is updated by this local export.
+
+The owning `book:check`, browser render and local export pipeline pass:
+46 ordered source files, 177 registered/cited claims, 3,297 mathematical
+spans, 398 PDF pages and 19 embedded fonts. The final PDF checksum is
+`4ad626d7d04cb5e393c8ecb65d200209b7c670dc6a67a35b974e00d120f877ac`.
+The browser reports no console, page, request or render errors. The build's
+existing large-chunk advisory is unchanged; no renderer code or dependency
+changed. The named `book:release` script was used only as the repository's
+local check/export pipeline; it performs no promotion or publication.
+A final title-case-only correction was re-exported by `book:pdf` and passed
+`book:pdf:check`.
+
+Poppler visual review covers the complete Chapter 31 (PDF pp.252–264),
+the changed preface/contents, notation table, representative new evidence
+rows, glossary, computation/status appendices, bibliography and attribution.
+It caught an inline matrix row separator immediately followed by V being
+rewritten into an unknown TeX command by the existing renderer normalizer.
+Writing matrix rows on separate source lines fixes equation 31.20 without
+changing its mathematics or the renderer. The corrected page was rechecked;
+all other chapter PNGs were byte-identical. The final glossary headings
+were also visually rechecked after the title-case correction.
+
+The renderer issue is a specific later maintenance consumer: its current
+double-backslash-before-letter normalization should distinguish matrix row
+separators from escaped commands, and strict source KaTeX checking should
+be compared with the transformed runtime math. This goal uses the validated
+source spelling and does not expand into a shared-renderer migration.
+
+This is a coherent book checkpoint at the present checked boundary, not
+completion of row 14's final theorem update or of the persistent goal.
+The generic normal test/factor, source-boundary descent, three window
+exactness positions and generic finite assembly remain required.
 
 ### Constant-field differential (row 13)
 
