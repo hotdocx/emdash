@@ -1012,6 +1012,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   the actual inverse short-exact comparison, lambda lift and supplied
   cycle kernel in an ordinary Hom factor. A separately stored bounded
   column pair still needs explicit reindexing; no homology is replaced.
+  The normal-mono epic/cycle-factor and comparison-pasting owners now use
+  that same whole cycle factor to derive the normal test for the compared
+  snake arrow. `snake_row_target_homology_normal_test` takes the three
+  actual rows, their maps, middle chain law and the supplied H; the caller
+  supplies no normal test or new cycle choice. The corresponding factor
+  operation returns an existing `HomPostcompFactor`, whose arrow and path
+  satisfy j t = V partial. It is a target-homology factor, not yet the
+  homology connecting map: source-boundary descent and the generic window's
+  exactness remain required.
+  The target-cokernel comparison retains the same isomorphism construction,
+  selected cokernels and maps, using consistent named endpoint observations
+  in its declaration/body indices. Canonical reviewers retain both map
+  formulas, inverse laws and the wrong-cokernel guard, with separate checks
+  that the old/new object views are convertible. The implementation adds no
+  rule, unifier, primitive or opaque proof. Its heavy sources/reviewers use
+  the fresh bounded `check_snake_row_target_homology.sh` dependency chain.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

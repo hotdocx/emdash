@@ -1290,7 +1290,7 @@ defect found by visual inspection is fixed in the authoring source; its
 underlying renderer-normalization issue is recorded as a later scoped
 maintenance consumer in the plan.
 
-## Generic normal-test probe continuation (row 7D2)
+## Earlier normal-test probe boundary (row 7D2; resolved below)
 
 The actual target-cycle factor, monic homology inclusion, original covered
 snake reconstruction and target-cokernel comparison are available. The
@@ -1307,3 +1307,42 @@ open coercion boundary to that cover type; it does not construct the normal
 test or justify promoting the helper. The exact diagnostics and next
 whole-owner reindexing hypothesis are recorded in the plan. No active source,
 rule, proof opacity, universal choice or book theorem claim changes.
+
+## Target-homology normality and whole factor
+
+Consistent existing endpoint observations resolve the original cover-law
+application. The successful construction needs no classifier/object path
+transport. A generic epic-cover lemma supplies a normal test from a covered
+Hom-factor point; comparison pasting uses the original target factor and
+the actual cycle factor. The parameterized row operation reuses the existing
+`snake_row_target_cycle_factor` directly, rather than rebuilding an all-point
+cycle provider which the argument only applied once.
+
+The new normal-test operation takes three whole short-exact rows, the two
+row maps, the middle-column chain law and the supplied H_A on the derived
+source column. Its whole-factor companion selects the existing contractible
+normal lift space. The result retains an arrow t:Ker(gamma)→H_A and the
+reconstruction j t=V partial, with both projections exposed by ordinary
+Hom-factor operations. No desired normal test, selected factor or equality
+is an additional input. The output is an intermediate target factor, not
+an independently renamed homology object or the completed connecting map.
+
+The comparison-owner change updates only existing endpoint observations
+in types and body indices. The old/new object views are checked separately
+for conversion; canonical reviewers retain the same forward/reverse map
+formulas, inverse laws and wrong-choice negative. A signature-only edit
+failed its actual consumer and was not chosen. Neither opacity nor a new
+rewrite/unification rule is used to hide the proof conversion.
+
+Source-boundary annihilation/descent, exactness at the three window interiors,
+and generic finite assembly remain required. The bounded consumer still
+must align a separately stored column pair with the derived pair explicitly;
+this construction never changes the supplied homology silently.
+
+The active implementation is qualified by the 18-target quiet and warning
+chains recorded in the plan. Its actual whole-factor reviewer checks both
+projections and rejects a lift landing in the cycle object instead of the
+supplied homology. The normal-test reviewer separately checks that its
+retained arrow computes to the original compared snake arrow. The inherited
+strict warning inventory remains 1,217/169. The final quiet run uses the
+ordinary unpinned workflow, not a larger timeout or opaque proof.

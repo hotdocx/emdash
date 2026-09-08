@@ -182,6 +182,13 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_short_exact_row_chain_columns.lp"),
     Path("emdash3_2_snake_row_target_factors.lp"),
     Path("emdash3_2_snake_row_target_cycles.lp"),
+    Path("emdash3_2_normal_mono_epic_factors.lp"),
+    Path("emdash3_2_hom_factor_comparison_pasting.lp"),
+    Path("emdash3_2_normal_mono_cycle_factors.lp"),
+    Path("emdash3_2_cokernel_codomain_comparison_projection.lp"),
+    Path("emdash3_2_snake_row_target_cokernel_projection.lp"),
+    Path("emdash3_2_snake_row_target_homology_normal.lp"),
+    Path("emdash3_2_snake_row_target_homology_factor.lp"),
     Path("emdash3_2_kernel_short_exact_rows.lp"),
     Path("emdash3_2_selected_short_exact_rows.lp"),
     Path("emdash3_2_monic_image_comparison.lp"),
@@ -549,7 +556,16 @@ SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES = {
     Path("examples/snake_row_target_factor.lp"),
     Path("examples/snake_row_target_cycles.lp"),
 }
+SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES = {
+    Path("emdash3_2_snake_row_target_cokernel_projection.lp"),
+    Path("emdash3_2_snake_row_target_homology_normal.lp"),
+    Path("emdash3_2_snake_row_target_homology_factor.lp"),
+    Path("examples/snake_row_target_cokernel_projection.lp"),
+    Path("examples/snake_row_target_homology_normal.lp"),
+    Path("examples/snake_row_target_homology_factor.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES, "./scripts/check_snake_row_target_homology.sh"),
     (SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES, "./scripts/check_snake_row_target_cycles.sh"),
     (SPECIAL_SIX_TERM_CHECK_FILES, "./scripts/check_abelian_snake_six_term.sh"),
     (SPECIAL_NORMALIZATION_CHECK_FILES, "./scripts/check_short_exact_normalization.sh"),

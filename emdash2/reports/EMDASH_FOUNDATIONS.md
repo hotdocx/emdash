@@ -4116,6 +4116,17 @@ this from the four existing reconstruction paths. It gives an internal
 factor point usable in the next target-cycle argument, without introducing
 another cone or assuming a connecting formula.
 
+The target-homology factor now follows from this covered reconstruction.
+Write j:H_A→Coker(dNext_A) for the existing monic inclusion, and V for the
+actual target-cokernel comparison. The already selected cycle factor and
+quotient reconstruction give a factor of V partial after the original epic
+cover. The cokernel of j kills this covered factor, and epic cancellation
+therefore supplies the normal test before lifting. The result is the whole
+internal factor point t:Ker(gamma)→H_A with j t=V partial. All choices are
+the original ones, including the supplied H_A. Descending through the source
+homology boundary is a further construction; this factor is not presented
+as the completed homology connecting map or generic long-exact theorem.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

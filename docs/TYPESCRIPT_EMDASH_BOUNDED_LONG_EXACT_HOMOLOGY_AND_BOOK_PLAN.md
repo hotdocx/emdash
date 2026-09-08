@@ -685,7 +685,9 @@ was introduced to get a passing target.
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
-| `LEH-TARGET-NORMAL-LIFT-7D2` | probe in progress; comparison-law application now accepted, final cover-law alignment open | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
+| `LEH-TARGET-NORMAL-LIFT-7D2` | complete; active-source quiet/warning gates and whole-factor consumers green | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
+| `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
+| `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
@@ -1898,7 +1900,13 @@ loading the compiled core does not replay its print settings. Do not call
 those complete rendered logs byte-identical. No new warning family was
 introduced by this rule-free tranche.
 
-### Generic target-normality conversion boundary (row 7D2)
+### Target-normality implementation and probe history (row 7D2)
+
+Current result: the parameterized normal test and whole target-homology
+factor are implemented and checked. The intervening paragraphs retain the
+historical failed experiments and their corrections; they are not instructions
+to restart those probes. Final implementation/validation evidence follows
+the history below. Source descent is the next row, 7D3.
 
 The reviewed mathematical route is still sound: combine the actual target
 cycle factor with j q = c k, the original covered snake reconstruction,
@@ -1952,6 +1960,154 @@ same partial, p1, pi and original lift, but expose different presentations
 of their selected cokernel endpoint/projection. A later isolated runner may
 check multiple variants against one fresh, unchanged dependency set; that
 avoids repeated dependency work without importing unchecked or stale objects.
+
+The first paired reindex probes are not accepted. In
+`homology-target-reindex-variants-warnings-20260908-020025.log`, the complete
+successful-prefix module checks in 18 seconds, but equality of the two cover
+classifiers by `eq_refl` reaches 90 seconds before any aligned proof exists.
+The separate selected-cokernel-data experiment also reaches 90 seconds;
+its exact internal stage is not yet isolated, so this is not evidence that
+data reindexing is impossible. Both variants share one freshly checked,
+unchanged dependency tree and add no active source.
+
+Next owner-position hypothesis: the target-cokernel comparison currently
+spells its snake source using a raw cokernel projection and the selected
+row-homology cycle expression, while the cover theorem uses the named
+snake kernel/cokernel observations. Audit a full-file comparison-owner
+variant using those existing snake observations consistently. Its semantic
+body and selected choices must remain unchanged up to conversion, with no
+new primitive, rule or assumed equality. First qualify that declaration
+and the original reviewer, then its reconstruction laws and final consumer;
+do not promote a signature-only cosmetic variant that merely moves the
+same expensive conversion into its producer.
+
+The comparison-owner and reconstruction-law variants both pass their
+warning-enabled full-source probes. In the joined consumer
+`homology-target-consistent-owners-warnings-20260908-021741.log`, they check
+in two and 58 seconds respectively. Using the producer's same indexed
+snake observations also in the consumer now constructs `target_normal_test`
+from the actual comparison, covered cycle factor, quotient factor and
+original cover law. Thus neither a reflexive type transport nor an equality
+assumption is needed for this step. The joined target still reaches 90
+seconds at the following lift application, which reintroduced abbreviated
+source indices. The next probe keeps those indices literal, separates the
+checked normal test from its lift/reconstruction consumer, and also tests a
+comparison-owner variant whose semantic body is byte-for-byte unchanged.
+No variant is promoted before the complete consumer is qualified.
+
+The complete selected-input probe now passes:
+`homology-target-consistent-lift-warnings-20260908-023550.log`. The target
+normal-test module checks in 37 seconds, and the separately staged lift,
+reconstruction path and wrong-target guard check in one second. Both the
+source and target indices of the normal test must retain their actual
+producer forms; changing only the source still made the type assertion
+expand the target-cokernel expression. No equality transport is used in
+the passing construction.
+
+The smaller signature-only comparison variant checks alone, but its first
+reconstruction-law consumer times out in
+`homology-target-signature-only-warnings-20260908-024737.log`. Therefore
+the accepted candidate also uses the consistent existing endpoint
+observations in the body's implicit arguments. It keeps the same
+isomorphism constructor, maps, supplied cokernels and row evidence; it must
+not be described as a byte-identical semantic body. Packaging the complete
+construction as a parameterized row/homology operation, and original-API
+reviewers against the owner change, are the remaining promotion gates.
+
+The first parameterized implementation using many local let bindings reached
+90 seconds. Reusing the already checked `snake_row_target_cycle_factor`
+operation directly is both smaller conceptually and successful: the new
+generic helper consumes that one dependent factor point, rather than an
+unnecessarily strong all-point family which it only applied once. The
+parameterized operation retains the same three rows, row maps, middle chain
+law and supplied H_A; no normal test or cycle factor is an extra input.
+`homology-target-point-parametric-warnings-20260908-030616.log` checks the
+helper in one second, the parameterized operation in 16 seconds and its
+actual existing reviewer-input application in one second.
+
+The original row-comparison owner closure checks with the candidate, but
+the old target-isomorphism reviewer mixes the two endpoint presentations
+inside its large map expressions and times out. A focused reviewer variant
+keeps all its map and inverse-law assertions with consistent endpoint
+observations, and adds independent conversion assertions for the old/new
+kernel and cokernel object views. This is a pending semantic-preservation
+gate, not permission to discard the original computation claims.
+
+That canonical reviewer gate passes in
+`snake-row-owner-canonical-20260908-031515.log`: all existing row-comparison
+owners and reviewers check, retaining both map formulas, the inverse-law
+consumer and the wrong-cokernel guard. The added independent conversion
+assertions verify that the old/new kernel and cokernel object views reduce
+to the same objects. Thus the change selects no new universal object or map;
+the old mixed-index expression was a performance-sensitive spelling of the
+same claim. The whole target-factor wrapper, with arrow and reconstruction
+as one existing Hom-factor point, is now under its final parametric probe.
+
+Later unpinned factor-wrapper runs stopped in the previously green projection
+dependency before reaching the wrapper. The unchanged target-factor source
+also moved from 50–61 seconds to 82 seconds in those runs. The host has a
+heterogeneous CPU topology: allowed CPUs 0–11 advertise 4.7–4.8 GHz maxima,
+while CPUs 12–19 advertise 3.7 GHz. A scoped experiment launches the same
+checker sequence with `taskset -c 4`, changing affinity only for that child
+process tree and retaining the same 90-second ceiling. This tests a possible
+runtime-placement contribution; it does not yet establish the cause, change
+any proof/checking flag, or make an unpinned pass claim.
+
+The full factor-wrapper probe passes in
+`homology-target-factor-parametric-warnings-20260908-034134.log`, including
+the parameterized whole `HomPostcompFactor` and both of its projections.
+The wrapper and reviewer each take one second. This pinned run did not
+restore the earlier dependency timings (the same projection took 89 seconds),
+so CPU placement is not established as the sole explanation for the variance.
+
+The implementation now lives in seven one-way extension modules: generic
+epic-cover/normality factors, comparison pasting, cycle-point normal tests,
+the generic cokernel projection law, its row-specific projection, the
+parameterized target-homology normal test and the whole target factor.
+All public operations have explicit result classifiers. The four generic
+reviewers pass quietly and with warnings, with eight positive/two negative
+assertions. The three new row/homology reviewers add five positive/one
+negative assertions. The updated existing target-comparison reviewer has
+six positive/one negative assertions, preserving its old mathematical claims
+and independently checking the two endpoint-view conversions.
+
+The fresh active-source warning gate
+`snake-row-target-homology-warnings-20260908-035247.log` passes all 18
+independently bounded targets, including the core, exact prerequisites and
+the actual reviewer fixture. The projection, normal test and whole factor
+take 84, 24 and one second respectively; each new reviewer takes one second.
+The full strict warning inventory by category, head, family and location
+matches the inherited target-cycle baseline at 1,217 critical pairs and 169
+pattern reports. No new rule clause, primitive, unifier or opaque proof is
+introduced. A separate unpinned quiet run is the remaining final gate.
+
+The source/example dispatchers and metric registry include the new owners;
+the three heavy owners/reviewers share `check_snake_row_target_homology.sh`.
+Its prerequisites are explicit and do not become extra mathematical inputs
+or purportedly new results. Three focused dispatcher tests bring that suite
+to 19 passing tests. Strict audits, source TOC, catalog freshness and document
+hygiene pass. The existing full-health exception remains recorded; no unrelated
+TypeScript, book or repository aggregate is run for this tranche.
+
+The final default, unpinned quiet gate also passes all 18 targets:
+`snake-row-target-homology-quiet-20260908-040124.log`. The projection,
+normal test and factor take 81, 26 and one second; the three new reviewers
+take zero, two and one second respectively. No processor-affinity setting
+is required by the registered workflow. The measured large dependency
+remains near the ceiling and its variance is retained as performance
+evidence, not hidden by proof opacity or a larger timeout.
+
+This completes 7D2: the caller supplies the actual three rows, maps, chain
+law and H_A, and receives the constructed whole target factor. It does not
+complete the generic homology window. Row 7D3 must prove the upper-neighbor
+source-boundary annihilation and descend to the supplied source homology;
+7D4 and the generic bounded assembly remain subsequent required proofs.
+The seven new reviewer files have 13 positive/three negative assertions,
+in addition to the two endpoint-view checks added to the existing reviewer.
+All 19 metrics tests, exact staged whitespace, shell syntax, strict audits,
+catalog/TOC and documentation checks pass. The book draft remains the
+previously validated 0.8.0-dev snapshot; its final theorem/status update is
+still part of row 14 rather than an implicit publication of this checkpoint.
 
 ### Selected provider boundary for the proof-CAS consumer
 

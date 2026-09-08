@@ -335,6 +335,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   four reviewers against fresh exact dependency objects, with 90 seconds
   per target. This removes repeated import checking without hiding proof
   bodies; direct source/reviewer joins were measured near the ceiling.
+  The normal-mono epic/cycle-factor and Hom-factor-pasting modules derive
+  the target normal test from that existing cycle point. The row/homology
+  normal-test and factor owners preserve the supplied H and construct the
+  whole factor of the compared snake arrow through H's monic cokernel
+  inclusion. The comparison's projection law uses consistent existing
+  endpoint observations; no new primitive, rule, opacity or equality
+  assumption is introduced. `scripts/check_snake_row_target_homology.sh`
+  stages this dependency join with 90 seconds per source/reviewer. Source
+  boundary descent and full homology-window exactness remain downstream.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality
