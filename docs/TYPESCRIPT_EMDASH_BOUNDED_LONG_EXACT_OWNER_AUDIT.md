@@ -1346,3 +1346,20 @@ supplied homology. The normal-test reviewer separately checks that its
 retained arrow computes to the original compared snake arrow. The inherited
 strict warning inventory remains 1,217/169. The final quiet run uses the
 ordinary unpinned workflow, not a larger timeout or opaque proof.
+
+## Source-column construction for boundary descent
+
+`hom_precomp_factor_paste_zero_path` descends a chain law through an epic
+first vertical arrow using the existing whole factor-pasting operation.
+`short_exact_row_chain_target_pair` specializes this to the quotient/right
+column of three actual short-exact rows, while
+`short_exact_row_chain_projection` returns the whole chain-pair map from
+the unchanged middle column. The three row projections and original lower
+factor paths are retained, with the required symmetry for the second
+chain-pair compatibility. No new diagram carrier or choice is introduced.
+
+Eight positive and two negative reviewer assertions check the retained
+components, paths and non-collapse boundary. This completes only 7D3A:
+source-boundary annihilation and descent through the supplied homology
+cokernel remain the next constructions. The sources add definitions/proofs,
+not primitive symbols, rewrite rules or proof-time unifiers.

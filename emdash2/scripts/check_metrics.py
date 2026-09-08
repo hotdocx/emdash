@@ -180,6 +180,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_short_exact_cokernel_comparison.lp"),
     Path("emdash3_2_short_exact_rows.lp"),
     Path("emdash3_2_short_exact_row_chain_columns.lp"),
+    Path("emdash3_2_hom_factor_chain_zero.lp"),
+    Path("emdash3_2_short_exact_row_chain_projection.lp"),
     Path("emdash3_2_snake_row_target_factors.lp"),
     Path("emdash3_2_snake_row_target_cycles.lp"),
     Path("emdash3_2_normal_mono_epic_factors.lp"),

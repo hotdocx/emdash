@@ -1028,6 +1028,12 @@ belongs to the owning implementation plan rather than to standing guidance.
   that the old/new object views are convertible. The implementation adds no
   rule, unifier, primitive or opaque proof. Its heavy sources/reviewers use
   the fresh bounded `check_snake_row_target_homology.sh` dependency chain.
+  The Hom-factor chain-zero helper and short-exact-row projection module
+  additionally construct the quotient/right column and its whole projection
+  from the original middle column. The chain law descends through the top
+  row epimorphism; all components and compatibility paths retain their
+  original row-map owners. This rule-free prerequisite does not yet prove
+  source-boundary annihilation or complete homology descent.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -319,6 +319,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_short_exact_cokernel_comparison.lp)
   files+=(emdash3_2_short_exact_rows.lp)
   files+=(emdash3_2_short_exact_row_chain_columns.lp)
+  files+=(emdash3_2_hom_factor_chain_zero.lp)
+  files+=(emdash3_2_short_exact_row_chain_projection.lp)
   files+=(emdash3_2_snake_row_target_factors.lp)
   files+=(emdash3_2_snake_row_target_cycles.lp)
   files+=(emdash3_2_normal_mono_epic_factors.lp)

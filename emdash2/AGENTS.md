@@ -344,6 +344,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   assumption is introduced. `scripts/check_snake_row_target_homology.sh`
   stages this dependency join with 90 seconds per source/reviewer. Source
   boundary descent and full homology-window exactness remain downstream.
+  The Hom-factor chain-zero and short-exact-row projection modules derive
+  the right-column chain law and whole projection through the top row's
+  epic arrow, retaining the original components and compatibility paths.
+  They add no rule or unifier and do not yet supply source-boundary descent.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality

@@ -4127,6 +4127,15 @@ the original ones, including the supplied H_A. Descending through the source
 homology boundary is a further construction; this factor is not presented
 as the completed homology connecting map or generic long-exact theorem.
 
+On the source side, the right-hand column of three short-exact rows now has
+its derived chain law and whole projection from the middle column. Pasting
+the original Hom-precomposition factors shows that two successive right
+differentials compose to zero after the upper row projection; epic
+cancellation proves the column law. This keeps the original row projections
+and compatibility paths, without selecting sections. The further step of
+showing that the connecting factor annihilates this column's boundaries is
+still required before descending to its supplied homology.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

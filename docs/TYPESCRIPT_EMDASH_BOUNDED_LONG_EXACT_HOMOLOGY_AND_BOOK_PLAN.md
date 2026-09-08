@@ -685,8 +685,11 @@ was introduced to get a passing target.
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
-| `LEH-TARGET-NORMAL-LIFT-7D2` | complete; active-source quiet/warning gates and whole-factor consumers green | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
+| `LEH-TARGET-NORMAL-LIFT-7D2` | complete; checkpoint `3d62f060` | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
 | `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
+| `LEH-SOURCE-COLUMN-7D3A` | complete; focused quiet/warning reviewers green | three upper rows, their maps and middle-column zero | derive the right/quotient column chain law and its whole projection map; retain the actual supplied source homology |
+| `LEH-SOURCE-ANNIHILATION-7D3B` | pending | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
+| `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | pending | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -2108,6 +2111,55 @@ All 19 metrics tests, exact staged whitespace, shell syntax, strict audits,
 catalog/TOC and documentation checks pass. The book draft remains the
 previously validated 0.8.0-dev snapshot; its final theorem/status update is
 still part of row 14 rather than an implicit publication of this checkpoint.
+
+### Source-boundary descent architecture (row 7D3)
+
+Use three upper rows to construct the quotient/right column and its actual
+projection map. Pasting the existing lower Hom-precomposition factor points
+gives the right-column chain law after the top row's epimorphism; epic
+cancellation removes that cover. This is the direct counterpart of the
+existing left-column view, without changing that view or its proof terms.
+
+For source-boundary annihilation, reuse the checked inner snake zero
+`partial ∘ (Ker(beta) → Ker(gamma)) = 0`. The upper middle differential
+factors through the actual Ker(beta) by its chain-zero law. The source-cycle
+comparison, source boundary reconstruction and upper projection compatibility
+then identify its second-snake-map image with the compared source boundary
+after the top epic projection. Cancellation proves that partial kills the
+source boundary. Combining this with 7D2 and monicity of j proves the
+annihilation needed for the original source homology cokernel to descend.
+No section, new homology object, manual square datatype or desired zero path
+is an input. Source/target index views must stay aligned with their actual
+producer declarations, as established by the preceding target-factor work.
+
+The first subrow is implemented in `emdash3_2_hom_factor_chain_zero.lp`
+and `emdash3_2_short_exact_row_chain_projection.lp`. The generic helper
+pastes two existing Hom-precomposition factors and descends their chain-zero
+law through the epic first component. Its row specialization constructs the
+actual quotient-column pair and whole projection from the middle column.
+All three component arrows and both compatibility paths remain those of the
+original rows/maps; the earlier left/middle-column owners are unchanged.
+This adds no primitive, rewrite, unification rule, opacity or equality
+assumption. It does not yet prove the connecting arrow kills boundaries.
+
+The two independent reviewers have eight positive and two negative checks,
+including refusal to prove the descended zero by `eq_refl` alone and refusal
+to replace the original middle projection by an unrelated arrow. Quiet and
+warning runs pass within 90 seconds per target; the warning logs
+`hom_factor_chain_zero-20260908-042912.log` and
+`short_exact_row_chain_projection-20260908-042939.log` are recorded under
+`emdash2/logs/probes/`. Source/example registration uses ordinary dispatch.
+The standing unrelated full-health exception and remaining 7D3B/7D3C/7D4
+obligations are unchanged; no TypeScript or book aggregate is needed here.
+
+After removing terminal ANSI colour escapes, both warning logs have exactly
+the inherited strict inventory by category, location, head and rule family:
+1,217 critical pairs and 169 pattern reports, with no parser issue. The
+initial raw coloured-log comparison failed at the parser boundary, not at
+a changed rewrite interaction. A fresh continuation reviewer also passes in
+`short_exact_row_chain_projection-20260908-043750.log`. Strict source/reviewer
+audits, all 19 metrics-dispatch tests, shell syntax, catalog freshness, source
+TOC, active-reference and report-header checks pass.
 
 ### Selected provider boundary for the proof-CAS consumer
 
