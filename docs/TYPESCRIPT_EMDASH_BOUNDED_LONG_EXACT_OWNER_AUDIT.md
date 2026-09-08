@@ -1126,3 +1126,22 @@ import warning boundaries remain 1,223/169 for the Freyd constructor and
 positive/3 negative and 1 positive/1 negative assertions respectively.
 They extend registered source/example checking without changing central
 diagnostic assertions or resolving the standing full-health exception.
+
+## Whole boundary-witness family (row 11C)
+
+`algebra_formal_freyd_long_exact_epimorphisms.ts` constructs one existing
+formal epimorphism witness for every actual interior boundary in the
+retained native long-exact result. Preparation precedes coefficient binding;
+execution validates the original whole adoption, signature types, source
+and inventory. Existing relation-law references are reused only when their
+Core types match exactly. Missing relation equations use the existing
+small matrix batch; semantic block equations use the native epicity
+operation, not another homology calculation.
+
+The two-degree result has six witnesses, with three reused relation laws,
+three newly adopted relation laws and six new block laws. Each witness
+retains its position, degree, role, actual whole homology and boundary.
+Tests forbid downstream homology/window/whole-result recomputation and
+check all six constructed terms together in Lambdapi. These data complete
+the family of formal boundary epicities, but do not certify the selected
+cycle kernel or supply a global W.

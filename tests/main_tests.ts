@@ -309,6 +309,7 @@ import './v3_2_algebra_formal_freyd_homology_tests';
 import './v3_2_algebra_formal_freyd_long_exact_tests';
 import './v3_2_algebra_formal_freyd_spine_tests';
 import './v3_2_algebra_formal_freyd_epimorphism_tests';
+import './v3_2_algebra_formal_freyd_long_exact_epimorphisms_tests';
 import './v3_2_algebra_formal_freyd_snake_tests';
 import './v3_2_algebra_polynomial_freyd_homology_differential_tests';
 import './v3_2_algebra_polynomial_freyd_long_exact_differential_tests';

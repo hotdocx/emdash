@@ -683,7 +683,7 @@ was introduced to get a passing target.
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
 | `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
-| `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; root source/reviewer checks green | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
+| `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
@@ -692,13 +692,14 @@ was introduced to get a passing target.
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
 | `LEH-FORMAL-11` | in progress; raw spine 11A constructed, stronger homology/exactness alignment pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
-| `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; root live-enabled five-test suite green | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
-| `LEH-FORMAL-BOUNDARY-FAMILY-11C` | in progress | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
+| `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
+| `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; root live-enabled four-test suite green | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
 | `LEH-FORMAL-SELECTED-KERNEL-11D` | probe in progress | existing two weak pullbacks and their universal factor operations | per-choice kernel interface and W selector wrapper, preserving native rank/matrix presentations without equality casts |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | pending | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
+| `LEH-BOOK-DRAFT-14A` | in progress; new chapter prose only | checked owners and reviewed claim boundaries | Chapter 31 draft with uncompleted generic/formal exactness clearly distinguished; manifest/evidence/rendering remain downstream |
 | `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
 | `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
 
@@ -1778,6 +1779,34 @@ exclude the separate 11C files and the new ignored 7D/11D probes. These two
 small source additions are ready for a local checkpoint; the full goal is
 still active. The untouched health snapshot retains the previously recorded
 exception, and no repository aggregate is claimed.
+
+Boundary-epicity and covered-reconstruction checkpoint: `c0040858`.
+The separate whole-boundary module now prepares every interior boundary
+before coefficient-environment creation, verifies the original whole
+adoption and exact signature/inventory identity, and constructs each
+original epimorphism witness. The two-degree nonsplit result has six such
+boundaries: three relation laws are reused, three additional relation laws
+are adopted through the existing matrix batch, and six semantic block laws
+are adopted. Every result retains its original point, homology, boundary,
+position/degree/role, and labelled relation/block references.
+
+The downstream test replaces homology, window and whole-long-exact entry
+points with throwing spies and verifies that none is called. It checks
+each actual constructed term and all six together in one bounded Lambdapi
+consumer, and rejects changed profiles, upstream bundles, missing source
+adoption and stale labels/inventories. This remains boundary epicity only:
+the cycle universality that turns it into formal chain exactness is the
+separate selected-choice work. A Chapter 31 prose draft may proceed on the
+already checked owners while marking this boundary; it is not registered
+or rendered until the root's book integration/quality checks.
+
+Root qualification of 11C passed all four focused tests with
+`EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_EPIMORPHISMS=1`, including the
+single live Lambdapi consumer for all six constructed witnesses (no skipped
+test). Changed-file lint and root typecheck also passed. This tranche adds
+only the downstream consumer, its registered focused tests and the owner
+ledger; it changes neither shared checking semantics nor Lambdapi rules.
+Recent green upstream evidence is retained without an unrelated aggregate.
 
 Raw formal-spine checkpoint: `c2358476`. Only the separate test-only field
 comparison remained untracked after that checkpoint; no parallel work was

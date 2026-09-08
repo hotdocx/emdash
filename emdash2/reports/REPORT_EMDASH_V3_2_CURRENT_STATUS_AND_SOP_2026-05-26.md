@@ -948,6 +948,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   adds no rule, unifier, equality axiom or weak-kernel provider. This is
   formal boundary epicity; formal chain exactness still requires the actual
   cycle universality.
+  The whole-long-exact boundary consumer constructs these witnesses at all
+  retained interior positions, with explicit role/degree labels. Its
+  two-degree consumer reuses three relation laws, adopts three missing
+  relation laws and six block laws, and checks all six resulting witnesses
+  in Core and Lambdapi. Throwing spies verify that downstream construction
+  does not recompute homology or the whole sequence. The all-position
+  iteration does not remove the selected-cycle universality boundary.
 - `emdash3_2_abelian_snake_covered_reconstruction.lp` proves
   partial ∘ p1 = pi ∘ L, where L is the existing lambda-kernel lift of
   beta ∘ p2. The proof cancels q2 from its connecting/u/lift/pushout
