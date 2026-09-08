@@ -138,6 +138,14 @@ scaffold, so that experiment alone was not called a contradiction. The
 
 ## Recommended Repair Direction — Not Yet Implemented
 
+The [bounded repair plan](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md)
+now records a checked non-library Co₂/whole-action prototype. It also records
+a stronger copied-core control: removing the literal `op` declaration and
+its six direct rules still leaves `Op_catd(id_Cat)` able to reconstruct the
+same bad covariant operation and derive the native empty type. No kernel
+repair is promoted; unrestricted same-base opposite-family formation must
+be migrated together with the universe-level source.
+
 Preserve the intended directed functor categories and correct the variance of
 internal opposite. In the elementary 2-categorical reading, the required
 source is a co-opposite universe:

@@ -13,6 +13,9 @@ tip. See the [confirmed variance diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIA
 Do not qualify the formal boundary or finalize the book claims before a
 reviewed repair. The native CAS/reference work and full objective remain;
 the next required architectural decision is the variance-repair scope.
+The [bounded variance-repair plan](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md)
+now owns its isolated Co₂/action prototypes and family-propagation controls;
+no corrected kernel signature has been promoted yet.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:
