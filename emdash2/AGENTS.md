@@ -27,6 +27,13 @@ dependent formal claims as unqualified pending the documented variance
 repair; do not register the reproducer as a positive library example or
 interpret ordinary green checks as a consistency certificate.
 
+The same audit also confirms an independent Sigma-Hom/constant-product
+empty-type derivation, without calling the whole op or pointwise opposite
+families. See `audits/sigma_hom_empty_reproducer.lp` and
+`../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md`. Correcting the op
+signature alone is insufficient; Sigma Hom and its projections also require
+the documented variance repair before formal qualification.
+
 ## Authority And Document Roles
 
 Use this order:

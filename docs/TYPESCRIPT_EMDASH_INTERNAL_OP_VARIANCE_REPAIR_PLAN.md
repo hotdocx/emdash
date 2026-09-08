@@ -8,6 +8,8 @@ Parent: [bounded long-exact homology and book](TYPESCRIPT_EMDASH_BOUNDED_LONG_EX
 
 Finding: [confirmed internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 
+Additional finding: [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+
 ## Objective And Scope
 
 Correct the higher variance of internal opposite while retaining the existing
@@ -149,6 +151,7 @@ if another unrestricted constructor reinstates the same action.
 | OP-REPAIR-3 | family-only counterexample confirmed; propagation inventory still open | same-base family reconstruction control and source-level dependent-owner inventory |
 | OP-REPAIR-3A | whole-family prototype checked; not promoted | derive the correctly based operator, displayed map and reversed displayed-transformation action, with genuine base-2-cell computation and retained next Hom action |
 | OP-REPAIR-4 | isolated full-copy migration exposes negative-section and Homd-target boundaries | smallest coherent owner-position migration that removes the bad covariant surfaces and qualifies their legitimate consumers |
+| OP-REPAIR-SIGMA-4A | independent empty derivation confirmed; total-dual companion checked locally | correct Sigma Hom's fibre direction together with whole projections/maps and constant-family product compatibility |
 | OP-REPAIR-5 | pending | positive opposite regressions, exact variance-negative fixture, warnings/SOP/health qualification and downstream homology consumer |
 
 The append/import probes for row 2 establish local types and observations only:
@@ -424,6 +427,27 @@ two new files are not positive library targets. No active kernel/CAS source,
 book source, catalogue or health snapshot is changed, and no unrelated
 aggregate is run. The failed full-copy migration remains ignored, with its
 exact source and logs retained as recovery evidence.
+
+## Sigma Prerequisite Before A Total-Category Homd Target
+
+The next investigation considers a coupled relative/test-category target
+retaining the supplied family through the existing whole Hom and total
+projection. It has not yet been implemented or selected. Its prerequisite
+check discovers the independent Sigma-Hom defect described in the report
+linked above: generic Sigma Hom and constant-family products induce an
+object-fixing comparison with reversed fibre arrows, and a closed empty-type
+witness follows. Current, original-baseline, parallel and no-literal-op
+controls all accept the transparent derivation. This is additional evidence,
+not a restatement of a warning or proof of impossibility of the intended
+homological mathematics.
+
+The local contravariant-totalization candidate is derived through total
+duality, with no new primitive totalization constructor. Four positive and
+one negative checks establish its whole constant-family product reading,
+object projection, retained next Hom action and corrected constant Sigma-Hom
+reading. It is not a complete recursive Sigma repair. Migrate and qualify the
+Sigma-Hom/projection owners before relying on them for the proposed target.
+The original source, CAS algorithms, checkpoints and full goal remain intact.
 
 ## Validation And Handoff
 

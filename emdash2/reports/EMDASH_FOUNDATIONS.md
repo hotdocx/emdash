@@ -11,6 +11,11 @@ distinguish the intended mathematics from the current unsound declaration
 package. The exposition and checking evidence below must not be read as a
 consistency claim for that package pending repair.
 
+An [independent Sigma-Hom diagnostic](../../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+also derives the empty type from the generic Sigma-Hom and constant-product
+readings. Its repair must preserve fibre higher arrows; it is not solved by
+changing the type of internal op alone.
+
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory, its one-way derived native equality-valued hom-action
 extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property

@@ -11,6 +11,10 @@ Critical variance qualification (2026-09-08): the current whole internal
 It participates in the checked empty-type derivation documented in the
 [internal-op diagnostic](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
 Future co/higher-duality notation is a repair proposal, not active syntax.
+The [Sigma-Hom diagnostic](../../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+adds an independent constant-fibre direction defect. Its All/CoAll and
+contravariant-totalization candidates are likewise not active surface syntax
+or a claimed completed repair.
 
 Notation in this report is immediately authoritative for mathematical comments
 and examples. Most of it becomes parser syntax only after a separate

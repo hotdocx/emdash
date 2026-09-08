@@ -25,6 +25,10 @@ dependent-Hom-target variance obligations. A total-duality candidate restores
 the negative constant-family interface; the coupled presheaf target still
 needs reconstruction with the original family and jointly correct bases.
 The repair plan records the exact failures and scoped positive controls.
+The follow-up [Sigma-Hom audit](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+confirms an independent inherited empty-type derivation. Correcting Sigma's
+fibre direction and whole projection is also required before using totals in
+the replacement Homd target; the op-source change alone is not sufficient.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:

@@ -14,6 +14,12 @@ The validation evidence below records checking/computation, not consistency
 of the encoded theory. Formal qualification and new higher-opposite-dependent
 promotion require a reviewed repair; no such repair is claimed here.
 
+The [separate Sigma-Hom diagnostic](../../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+confirms another inherited empty-type derivation, independent of calling
+whole op or opposite-family formation. It exposes an incompatible fibre
+direction between generic Sigma Hom and constant-family products. Sigma
+projection/totalization qualification is therefore also a repair prerequisite.
+
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,
 not the chronological sequence of earlier candidates. Dated implementation

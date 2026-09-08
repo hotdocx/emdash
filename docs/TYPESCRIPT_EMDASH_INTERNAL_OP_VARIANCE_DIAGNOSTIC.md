@@ -10,6 +10,11 @@ Related: [foundational variance-owner inventory](TYPESCRIPT_EMDASH_HOMOLOGY_VARI
 
 ## Finding
 
+A subsequent [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+also yields the native empty type without invoking the whole op or pointwise
+opposite families. Both defects require repair; the op-source change alone
+cannot restore formal qualification.
+
 The committed categorical encoding accepts a closed defined term of
 `τ Empty_grpd`. That classifier decodes to the native inductive `empty`,
 which has no constructors. The reproducer uses only the committed kernel;
