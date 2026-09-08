@@ -10,13 +10,17 @@ Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_
 before further component-level window exactness. Connecting-map checkpoint:
 `b83a4d32`; the full goal remains active.
 
-The current implementation checkpoint is `c7eabd58`. The next audit compares
-native dependent-hom zero-triangles, existing combinatorial diagram shapes,
-and the cubical-from-simplicial machinery for maps. These are complementary
-resources, not an exclusive representation choice. The whole kernel/cokernel
-interface extensions remain probes, not promoted replacements for the
-existing capabilities. Preserve all alternatives and consult the pilot's
-current review before choosing a representation-specific prerequisite.
+The whole natural-family checkpoint is `c7eabd58`. The following bounded
+native comparison now implements the original chain pair as a flagged
+zero-triangle and its two factor points as derived cubical arrows. Both
+squares recover their shared original middle map; whole fixed-pair
+comparisons retain higher action. This is compatibility evidence, not yet
+a global category of complexes or a whole H. Native cells, combinatorial
+diagram shapes and cubical-from-simplicial maps remain complementary
+resources. The whole kernel/cokernel interface extensions remain probes,
+not promoted replacements for the existing capabilities. Preserve all
+alternatives and consult the pilot's current review before choosing a
+representation-specific prerequisite.
 
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 

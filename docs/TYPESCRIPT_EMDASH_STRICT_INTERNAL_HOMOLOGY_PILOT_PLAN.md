@@ -93,8 +93,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | native zero-triangle candidate under review | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
-| `HINT-COMPLEX-4A` | local compatibility probe green; next architecture audit | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
-| `HINT-COMPLEX-4B` | next bounded map comparison | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
+| `HINT-COMPLEX-4A` | local compatibility implemented; flag globalization still open | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
@@ -497,3 +497,114 @@ as review/backtracking evidence. Failed candidates remain classified by their
 actual failure (typing, projection matching, inverse computation or scope),
 not erased or rejected merely for warning totals. Any later consolidation
 must explain which parts are reused, replaced or retained as reference.
+
+## Native Compatibility Implementation: Zero-Triangles And Map Boundaries
+
+The next bounded slice promotes three rule-free modules:
+
+- `emdash2/emdash3_2_hom_factor_cubical.lp`: pre/postcomposition factor
+  points become arrows of the existing derived `LaxArrow_cat`; both
+  fixed-boundary comparisons are also whole functors from the corresponding
+  Path category, using the existing `path_lift_func`.
+- `emdash2/emdash3_2_chain_pair_cubical_maps.lp`: the two original factor
+  points of a `ComputationalChainPairMap` give the upper and lower native
+  squares. A whole fixed-source/target-pair functor returns both boundary
+  squares together.
+- `emdash2/emdash3_2_chain_pair_native_triangles.lp`: the original chain pair
+  becomes a native dependent zero-triangle. The initial vertex and first
+  differential are retained in the flag; its visible projections retain
+  the third vertex, zero long edge, second differential and original filler.
+
+For a map from A₀─e₀→B₀─d₀→D₀ to A₁─e₁→B₁─d₁→D₁, write its original
+components as a, b and c. The native boundary squares have cells
+
+```text
+upper: b ∘ e₀ ⇒ e₁ ∘ a,
+lower: c ∘ d₀ ⇒ d₁ ∘ b.
+```
+
+The upper factor originally reconstructs e₁∘a=b∘e₀, so its path is
+symmetrized before applying `path_to_hom`. The lower factor already has the
+native orientation. No additional equation or filler is supplied. The cell
+type is the existing Sigma-Hom projection of `homdc_int`, itself derived
+from `homd_int`; these aliases do not postulate another square theory.
+Both endpoint functors act computationally: upper gives a/b, lower gives
+b/c. In particular, the middle components agree by reduction, not by a newly
+stored gluing equality.
+
+All eight new symbols are transparent definitions. No rewrite or unification
+rule, stable primitive, opaque proof, reselected universal object or new
+strictness assumption is added. Whole comparison functors retain the next
+hom action instead of ending at their point formulas. The source of these
+whole comparisons is the Path category of the old equality-valued factor
+or map space; this does not invent arbitrary directed chain-map variations.
+
+Boundaries remain explicit:
+
+1. The paired-square target is a product of two native Homs. Its constructed
+   image shares b, but an arbitrary pair in that product need not share a
+   middle map. It is a boundary view, not `Complex_cat`.
+2. The native zero-triangle is a fixed-flag compatibility image, not a global
+   category of all three-term complexes. An arbitrary directed zero filler
+   is not silently converted into the old equality-valued chain law.
+3. The two squares do not by themselves supply the coherent prism between
+   the two zero-triangles. The source and target retain their original zero
+   witnesses separately. That coherence and flag globalization are the next
+   architecture checks, not completed consequences of this tranche.
+4. There is no claimed inverse/equivalence, homology functor, new exactness
+   theorem or fresh qualification of native CAS providers in this slice.
+   The original selected providers, connecting map and full-goal obligations
+   are unchanged.
+
+The reviewers `hom_factor_cubical.lp`, `chain_pair_cubical_maps.lp` and
+`chain_pair_native_triangles.lp` contain 22 positive and two negative checks.
+They test both retained cells and side actions, whole-to-point computation,
+further whole hom action, the shared middle map, all visible zero-triangle
+projections, noncollapse of distinct middle maps and rejection of a wrong
+initial differential flag. Their first promoted quiet logs are
+`hom_factor_cubical-20260908-110403.log`,
+`chain_pair_cubical_maps-20260908-110405.log`, and
+`chain_pair_native_triangles-20260908-110406.log`.
+
+The exact dependency-union warning baseline and candidate inventories agree
+in categories, source locations, term heads, rule families and parser issues:
+1,243 critical-pair reports / 169 pattern reports. This is the combined
+homological/native-simplex/cubical import boundary, not a change to the
+core-only 1,119/157 boundary. Baseline log:
+`hint_chain_pair_internalization_warning_baseline-20260908-110329.log`;
+candidate log:
+`hint_chain_pair_internalization_warning_candidate-20260908-110331.log`.
+The candidate adds no new rule interactions. Preserve the earlier ignored
+raw-data triangle and mate experiments as comparison evidence.
+
+The promoted-owner union repeats that exact inventory in
+`hint_chain_pair_internalization_warning_active-20260908-110809.log`.
+All three source modules and all three reviewers pass the ordinary scoped
+`scripts/check.sh` dispatch, with the unchanged 90-second bound per target.
+All six strict rule audits report zero clauses. The 42 focused metrics,
+source-TOC, registry and warning-parser tests pass; their printed timeout
+messages are expected mocked failure cases, not live Lambdapi timeouts.
+Catalog freshness/strict classification, source TOC, active-reference lint,
+report-header lint, shell syntax and exact-diff hygiene also pass.
+Sources are registered in both ordinary check/metrics lists; reviewer
+discovery remains automatic. No broad TypeScript/kernel/book aggregate or
+full health refresh is run; the parent scoped-validation exception remains
+explicit, with no claim of a refreshed repository-wide health snapshot.
+
+## Additional Cubical Reference Branch
+
+The user identifies `goal/opaque-action-profile-classifiers-v3.2` and its
+ancestors as additional cubical reference development, and authorizes
+selective cherry-picking if a concrete consumer needs it. The observed tip
+on 2026-09-08 is `114dc19fdee4b952f1c75be4e2000d6ff7195741`; this is a
+reference snapshot, not a requested merge or reset target.
+
+Do not merge the parallel branch or import its repository-wide migration
+away from global strictness as part of this pilot. The current native
+compatibility implementation needs no cherry-pick. For a later missing
+cubical owner, first inspect the exact source/history and dependency closure,
+separate the owner from profile-migration prerequisites, probe it against
+this branch's actual strict working profile, and audit the focused
+computations, subject reduction, warnings and noncollapse cases before
+importing a bounded reviewed change. Record selected commit(s) and any
+adaptation; keep unrelated parallel work untouched.

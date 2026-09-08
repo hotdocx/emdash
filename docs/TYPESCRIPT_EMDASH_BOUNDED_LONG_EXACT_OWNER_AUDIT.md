@@ -20,8 +20,14 @@ reducible target guard from the two `Prof_func_hom` projections. Whole
 variation now uses an actual transformation eta:F⇒G as a walking arrow in
 Functor_cat(K,C), followed by exchange. The whole family observations recover
 F/G/eta, and the terminal/initial variants supply the zero-arrow embeddings.
-Raw square-data realization and the kernel/cokernel/H universal interface
-remain distinct further questions; only the latter is the immediate goal.
+The current native compatibility slice uses the existing Hom-factor points
+as native cubical arrows and the existing chain-zero path as a native flagged
+triangle. Both chain-map squares compute their shared original middle map.
+Whole fixed-pair comparison functors retain higher action through path
+lifting. This does not yet globalize the simplex flags, supply a prism
+coherence, or identify all directed squares with equality-valued factors.
+The pilot compares these native owners with the complementary diagram-shape
+route before promoting the kernel/cokernel/H universal interface probes.
 
 ## Scope
 

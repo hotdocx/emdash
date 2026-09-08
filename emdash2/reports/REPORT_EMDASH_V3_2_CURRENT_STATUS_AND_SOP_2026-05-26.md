@@ -428,6 +428,23 @@ belongs to the owning implementation plan rather than to standing guidance.
   other choices by `IsoEvidence`, not object equality. These map operations
   and theorem paths are not a packaged category-of-complexes functor or a
   closed concrete formal Freyd capability.
+- `emdash3_2_hom_factor_cubical.lp` maps those existing factor points to
+  native squares in the derived `LaxArrow_cat`. Postcomposition reconstruction
+  is symmetrized to the native orientation; precomposition already has that
+  orientation. `emdash3_2_chain_pair_cubical_maps.lp` applies the comparison
+  to the two original chain-map factors. Native endpoint actions recover
+  next/middle and middle/previous, with the middle literally shared. Whole
+  fixed-pair comparisons use existing path lifting and retain further hom
+  action. Their target product is a boundary-view category, not the category
+  of chain maps: arbitrary square pairs need not share a side.
+  `emdash3_2_chain_pair_native_triangles.lp` sends the original chain pair to
+  the native fixed-flag zero triangle, retaining its differential and zero
+  filler. All eight definitions are transparent, with no primitive, rule,
+  unifier, new equality assumption or reselected homology. The 22 positive
+  and two negative reviewer checks do not claim a reverse comparison from
+  arbitrary directed cells, a coherent prism, a global complex category or
+  a whole homology functor. The strict internal homology pilot tracks those
+  remaining architecture gates.
 - The chain-pair-map snake and row-comparison extensions derive the snake
   triple from the existing middle component and factor points. The upper
   factor and lower row's zero law supply its triple-zero proof. Actual

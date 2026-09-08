@@ -115,6 +115,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the cokernel map on the original homologies. These are rule-free map
   operations/laws, not a new square grammar or a packaged complex-category
   functor, and do not close the formal Freyd effectiveness boundary.
+  The Hom-factor cubical and chain-pair cubical-map modules give rule-free
+  compatibility views in the existing derived `LaxArrow_cat`. Both squares
+  retain the same original middle component; whole fixed-pair comparisons
+  retain higher action through `path_lift_func`. The native-triangle adapter
+  uses the original chain-zero path in the flagged dependent simplex.
+  These are not a global category of complexes, a prism-coherence filler,
+  or an equivalence with arbitrary directed squares/zero-triangles.
   The chain-pair-map snake and row-comparison modules derive the existing
   snake triple from a row map, identify alpha/gamma through the short-exact
   comparisons, and construct the source-cycle and target-cokernel
