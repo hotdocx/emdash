@@ -15,21 +15,24 @@ window exactness, generic bounded assembly, final formal-boundary audits,
 and the final Chapter 31 update remain active requirements. The companion
 owner audit records these boundaries; no closed formal quotient effectiveness
 is claimed.
-Formal qualification is currently gated by the two inherited variance
-diagnostics recorded in the
+The two inherited variance diagnostics remain recorded in the
 [bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
-Its Sigma candidate now has a reproducible non-library owner-position patch,
-thirteen green direct reviewers and explicit rejection of the original
-Sigma cast, with retained whole action. The separate internal-op derivation
-remains accepted; no repaired active kernel or global consistency result is
-claimed. Broader duality design stays deferred behind the user's minimal
-repair scope.
+The user has deferred their general repair until after the homological-
+algebra goal. Both the Sigma-only candidate and the preferred total-Op/
+CoAbove2 prefix now have reproducible non-library patches and controls.
+No active-kernel repair or global consistency result is claimed. Current
+homology work resumes the constructive reference route, auditing its actual
+inferences and putting aside designs that need the known invalid reversals
+or regrading. Preserve the repair evidence without keeping this side task
+on the critical path of valid homological development.
 The independently named native homology-connecting operation and native
 bounded assembly and categorical/compiled consumers are implemented;
 selected proof–CAS replay/adoption and actual interior homology/exactness
-consumers are implemented. The current architectural slice is
+consumers are implemented. The retained architectural pilot is
 [the strict internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
 following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
+Its unsafe higher-op-dependent alternatives are now paused; generic window
+exactness is again the immediate implementation task.
 Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
 introduction are implemented. The latter uses scoped core cross computation;
 whole natural families now come from actual transformations via exchange,

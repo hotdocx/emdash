@@ -11,14 +11,23 @@ also reproduce it. See the
 [variance diagnostic](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 and [non-library reproducer](../audits/internal_op_empty_reproducer.lp).
 The validation evidence below records checking/computation, not consistency
-of the encoded theory. Formal qualification and new higher-opposite-dependent
-promotion require a reviewed repair; no such repair is claimed here.
+of the encoded theory. Global soundness qualification and new higher-
+opposite-dependent promotion require a reviewed repair; no such repair is
+claimed here.
 
 The [separate Sigma-Hom diagnostic](../../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
 confirms another inherited empty-type derivation, independent of calling
 whole op or opposite-family formation. It exposes an incompatible fibre
 direction between generic Sigma Hom and constant-family products. Sigma
 projection/totalization qualification is therefore also a repair prerequisite.
+
+The user has deferred this general repair until after the current homological-
+algebra goal. Its candidates and diagnostics are retained in the
+[repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
+Constructive homology/CAS development may continue with an explicit
+mathematical dependency review, excluding any essential use of the invalid
+reversals or regrading. This sequencing decision is not a consistency claim
+or permission to qualify the affected foundational interfaces.
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,

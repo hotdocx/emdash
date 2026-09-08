@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active bounded architectural slice within the long-exact goal
+Status: retained architectural pilot; unsafe higher-op-dependent alternatives paused; no longer a blocking predecessor of reference window exactness
 
 Critical current gate: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Promotion of
@@ -18,6 +18,20 @@ Worktree: `/home/user1/emdash1-long-exact-v1`
 Branch: `goal/bounded-long-exact-homology-book-v3.2`
 
 ## Decision And Scope
+
+Latest user sequencing decision (2026-09-08): defer the general op/Sigma
+repair until after the homological-algebra goal. Do not use a wrong-direction
+arrow or an unrestricted opposite-family regrading to make this pilot work.
+The hybrid varying-source/opposite-evaluation and structural-action probes
+below remain unpromoted and are put aside pending an independent semantic
+justification. They are not the required route to completing the current
+homology goal. Resume the existing constructive Hom-factor/kernel/cokernel
+reference route for the generic window and bounded assembly; a valid whole
+internal construction may later replace or simplify it without relying on
+the deferred defect. Keep all alternatives and checkpoints as evidence.
+
+The following original sequencing paragraph is historical, superseded by
+that decision:
 
 Following the [research review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
 and the user's continuation/strictness clarifications, develop the bounded
@@ -782,8 +796,9 @@ and baseline controls are in the
 [internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
 The same source-level construction yields `τ Empty_grpd` in the current core,
 the original main baseline and the separate post-migration tip. This changes
-the next priority: correct the variance of internal opposite and its family
-operations before adding more con/Op computation or certifying the homology
-interface. The hybrid native/diagram construction remains the leading
-homology candidate, conditional on that repair; the final foundation is not
-settled. Keep all prior checkpoints, code, CAS results and probe evidence.
+the earlier priority to variance repair. The user's subsequent deferral now
+supersedes that priority: do not add more con/Op computation or certify the
+hybrid construction through the defective interface. It is no longer the
+mandatory leading homology candidate. The final foundation is not settled;
+the mathematically justified reference route remains available. Keep all
+prior checkpoints, code, CAS results and probe evidence.

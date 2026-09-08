@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active; reproducible Sigma candidate passes its scoped gate; internal-op repair open; no kernel migration promoted
+Status: deferred by the user until after the homological-algebra goal; candidates and reproducible controls retained; no kernel migration promoted
 
 Parent: [bounded long-exact homology and book](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -11,6 +11,19 @@ Finding: [confirmed internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIAN
 Additional finding: [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
 
 ## Objective And Scope
+
+Latest sequencing decision: stop this side task now and return to the
+homological-algebra goal. The full active kernel is still unrepaired, so the
+user's conditional deferral applies. Homology designs must not essentially
+rely on the demonstrated invalid reversals or regrading; put such designs
+aside and choose a mathematically justified route. Preserve every useful
+repair candidate and its limitations for later continuation. Do not silently
+reactivate this plan merely because the next type mismatch is known.
+
+The following design discussion and next-step notes are recovery evidence
+for that later return, not the current goal's work queue. The preferred
+future basis remains total `Op_cat` plus `CoAbove2_cat`; the same-base
+internal-op interface is not endorsed by deferring its repair.
 
 Latest user clarification: prioritize reinterpreting the existing `Op_cat`
 as total duality, with `CoAbove2_cat` for the shifted universe/base duality.
@@ -706,6 +719,94 @@ Next: audit those variance-only Hom positions using the derived
 dimension-1 transpose `CoAbove2(Op(C))`, then test the complete preferred
 candidate. Do not continue developing the mixed-name public API or the
 relative-Hom alternative merely because those probes already exist.
+
+## Total-Op Prefix: Preserved Result At Deferral
+
+The preferred two-operation implementation is preserved as
+[`total_op_reinterpretation.patch`](../emdash2/audits/total_op_reinterpretation.patch),
+anchored to the active nucleus blob
+`5387c65ab75ddcfff4b5ffca9fb6f9d082084774` on the `db0ae967` worktree state.
+It changes only the copied nucleus, not the active source. The reproducible
+[`check_total_op_prefix.sh`](../emdash2/scripts/check_total_op_prefix.sh)
+stages that exact patch, retains the full incomplete candidate, and checks
+only the prefix before the old Homd target. It also checks the corresponding
+unchanged-source prefix as a same-scope control. Every Lambdapi invocation
+retains subject reduction and an individual 90-second bound. On source drift
+the script stops; recover the anchor in a separate source copy rather than
+resetting any descendant worktree.
+
+`Op_cat` is total in this candidate, and `CoAbove2_cat` reverses dimensions
+2 and higher. The three `Transpose_cat`/`Transpose_func`/`Transpose_transf`
+views are transparent definitions from those two dualities. They preserve
+ordinary Hom contravariance without introducing a third primitive duality.
+The candidate contains no `All_cat`, `CoAll_cat` or `Co2_cat` declaration.
+It migrates ordinary Hom and internal-action endpoints, section-base
+annotations, opposite-family formation/action, negative-section observations
+and the corrected Sigma Hom/projection. Existing arrow-composition
+accumulation directions are not reversed.
+
+The last complete prefix gate passed at
+`/tmp/emdash-total-op-prefix.V54Mja`, after the earlier run
+`/tmp/emdash-total-op-prefix.g7ejHz`. Its
+[`basis reviewer`](../emdash2/audits/total_op_basis_checks.lp) has twenty
+positive and three negative assertions plus a further whole-Hom-action type
+query. Its [Sigma reviewer](../emdash2/audits/total_op_sigma_checks.lp) adds
+five positive and two negative assertions. These cover total versus
+dimension-1 direction, dimension-three continuation, correctly typed whole
+op action, family/map involutions and components, a genuine nonidentity base
+2-cell, negative constant sections, forward Sigma fibre cells and whole
+base projection. The original direct-op, family-only and Sigma Empty
+derivations are all accepted on the original prefix and rejected at actual
+type mismatches on the candidate prefix. The Sigma fixture preserves its
+original dimension-1 meaning through `Transpose_cat`, so its rejection is
+not obtained by making the proposed comparison ill-formed.
+
+The complete candidate still fails at `Homd_target_section_catd`, with
+`CoAbove2_cat Z ≡ Z` unsolved
+(`hint_total_op_reinterpretation_core-20260908-182152.log`). No wrong-base
+cast or replacement family has been inserted. Prefix success is not full
+kernel qualification, an accepted replacement Homd target, or a global
+consistency result. That boundary is deliberately visible in the runner.
+
+Two false-negative controls are also retained. The derived transpose's
+whole action has the expected strong normal form, but a raw `assert` eagerly
+compares unreduced endpoint types. A transparent definition with canonical
+Hom endpoints makes the same comparison check. Similarly, spelling out the
+canonical source/target of the opposite-family Hom action makes the genuine
+base-2-cell consumer check. Neither required a new rewrite or unifier.
+The attempted direct `Hom(CoAbove2(Op(C)))` projection rule did not solve
+the raw assertion and is not retained. A control deleting the old general
+Obj/Hom and Obj/Functor unifiers failed an earlier subject-reduction check;
+it is not evidence that those helpers can simply be removed. Relevant
+scratch sources and logs retain the `hint_transpose_*` names, including
+`hint_transpose_normal_forms-20260908-182612.log` and
+`hint_transpose_unif_control-20260908-183112.log`.
+
+The same-prefix warning comparison is 935 critical pairs / 137 pattern
+reports against 855/137, with all pair structures parsed. Four newly unused
+involution-pattern variables were replaced by `_` after the first run;
+the final pattern count is unchanged. There are 94 added and 14 removed
+pair-family instances. The added families concern duality/involution,
+identity presentations, action/composition, component projections, ordinary
+Hom owners and adjunction observations; the removed families include the
+old same-base op bridge and generic-Sigma/constant-product overlap. This is
+an interaction inventory, not a joining proof or a warning veto. Both strict
+LHS audits pass; the candidate prefix has 35 annotated slots / 24 clauses
+and zero unreviewed compound inferred slots.
+The runner's shell syntax, active-reference and report-lifecycle checks and
+twelve focused warning-parser/report-registry tests also pass. No active
+kernel or CAS source, positive check registry, catalog, health snapshot or
+book source has been changed by this deferred audit tranche.
+
+All earlier tracked diagnostics/prototypes and the Sigma-only candidate in
+`c4f3e3d4` remain preserved. The ignored full-copy probes, including
+`hint_total_op_reinterpretation_core.lp`, `hint_total_op_prefix_core.lp`,
+`hint_op_sigma_combined_core.lp` and the earlier mixed-name copies, are not
+deleted. No source migration, branch merge, reset or rollback has occurred.
+When this side task is resumed later, first inspect the current source and
+these anchors, then review the Homd target and actual dependent consumers;
+do not rerun the entire search or infer that the historical prefix is the
+complete kernel.
 
 ## Validation And Handoff
 

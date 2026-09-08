@@ -6,43 +6,47 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
-Critical promotion gate (2026-09-08): the committed encoding admits a closed
-empty-type witness through the higher action of its covariant internal `op`.
-This also reproduces on the original baseline and the parallel post-migration
-tip. See the [confirmed variance diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
-Do not qualify the formal boundary or finalize the book claims before a
-reviewed repair. The native CAS/reference work and full objective remain;
-the next required architectural decision is the variance-repair scope.
-The [bounded variance-repair plan](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md)
-now owns its isolated Co₂/action prototypes and family-propagation controls;
-no corrected kernel signature has been promoted yet.
-The correctly based whole-family prototype now also computes displayed-map
-components, displayed-transformation components and nonidentity base-2-cell
-action, without a new opposite-family primitive or equality bridge. Active
-same-base consumer migration remains the next prerequisite.
-The first full-copy migration identifies separate negative-section and
-dependent-Hom-target variance obligations. A total-duality candidate restores
-the negative constant-family interface; the coupled presheaf target still
-needs reconstruction with the original family and jointly correct bases.
-The repair plan records the exact failures and scoped positive controls.
-The follow-up [Sigma-Hom audit](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
-confirms an independent inherited empty-type derivation. Correcting Sigma's
-fibre direction and whole projection is also required before using totals in
-the replacement Homd target; the op-source change alone is not sufficient.
-The Sigma half now has a reproducible owner-position patch with thirteen
-green immediate reviewers and directed/negative controls. Its whole
-projection and map actions remain available, and the original Sigma Empty
-cast is rejected. The repair plan owns the exact staged gate and warning
-inventory. This candidate is not yet promoted: the separate internal-op and
-same-base family defect remains accepted and is the next minimal repair.
-The latest user clarification prioritizes reusing `Op_cat` for total duality
-and `CoAbove2_cat` for its shifted source, rather than promoting the mixed
-All/Co₂/CoAll probe names. The repair plan records the first actual affected
-Hom-action owner; the two-operation migration is not yet qualified.
+User-directed sequencing change (2026-09-08): defer the unresolved general
+op/Sigma variance repair until after this homological-algebra goal. Preserve
+all source candidates, diagnostics, failed-probe evidence and recovery
+instructions in the
+[variance-repair plan](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
+No experimental variance migration has changed the active nucleus.
 
-Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
-before further component-level window exactness. Connecting-map checkpoint:
-`b83a4d32`; the full goal remains active.
+The [internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+and [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+remain confirmed limitations. Deferral does not declare the kernel sound or
+turn acceptance by it into a consistency certificate. It removes their
+general repair from this goal's prerequisite chain, not the prohibition on
+using an invalid inference. Do not use arbitrary directed-arrow reversal,
+unrestricted same-base opposite regrading, or the incompatible generic-Sigma/
+constant-product comparison to obtain a homology result.
+
+Current work: review the actual semantic dependencies of the homology
+alternatives, put aside any construction that essentially needs those
+invalid operations, and resume `LEH-WINDOW-EXACTNESS-7D4` from the existing
+constructive connecting map and universal-factor owners. The reference
+route uses original kernels/cokernels, monic/epic cancellation and witnessed
+comparison isomorphisms. A lexical scan finds no direct `op`, `Op_catd`,
+`Op_funcd`, `Op_cat`, `Op_func` or `homd_int` references in the implementation
+files named for homology, snake or chain pairs. That is an initial inventory,
+not proof of conservative isolation from the imported kernel: each newly
+used inference still needs a mathematical owner/variance review.
+
+The [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
+is no longer a blocking predecessor of window exactness. Its higher-Op-
+dependent hybrid/action probes are on hold; their green checks alone do not
+qualify them. Whole internalization may proceed only through an independently
+justified construction and does not justify restarting the general duality
+repair. No Git reset, history rewrite, broad code deletion or loss of the
+existing mathematical/CAS work is required. Connecting-map checkpoint:
+`b83a4d32`; the full homology/CAS/formal-interface/book objective remains active.
+
+Book and final evidence must distinguish the constructive mathematical
+reference implementation, executable CAS results and scoped term/computation
+checks from global soundness of the current categorical encoding. Document
+the deferred foundation issue rather than hiding it or delaying all valid
+homological work behind a comprehensive repair.
 
 The whole natural-family checkpoint is `c7eabd58`. The following bounded
 native comparison now implements the original chain pair as a flagged

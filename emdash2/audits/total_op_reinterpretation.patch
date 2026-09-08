@@ -1,0 +1,544 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -3281 +3281 @@
+-// Opposite category.
++// Total opposite category: every positive dimension is reversed.
+@@ -3291 +3291,2 @@
+-rule Hom_cat (Op_cat $A) $X $Y ↪ Hom_cat $A $Y $X;
++// Isolated preferred reinterpretation: reverse all positive dimensions.
++rule Hom_cat (Op_cat $A) $X $Y ↪ Op_cat (Hom_cat $A $Y $X);
+@@ -3298,0 +3300,14 @@
++// Reverse dimensions 2 and above; objects and 1-arrows are unchanged.
++injective symbol CoAbove2_cat : Cat → Cat;
++rule Obj (CoAbove2_cat $C) ↪ Obj $C;
++rule Hom_cat (CoAbove2_cat $C) $x $y ↪ Op_cat (Hom_cat $C $x $y);
++rule CoAbove2_cat (CoAbove2_cat $C) ↪ $C;
++rule Op_cat (CoAbove2_cat $C) ↪ CoAbove2_cat (Op_cat $C);
++rule @id (CoAbove2_cat $C) $x ↪ @id $C $x;
++rule @comp_fapp0 (CoAbove2_cat $C) $x $y $z $g $f
++  ↪ @comp_fapp0 $C $x $y $z $g $f;
++
++// Ordinary Hom contravariance needs only dimension 1. This is a transparent
++// view of the two selected dualities, not a third primitive category.
++symbol Transpose_cat (C : Cat) : Cat ≔ CoAbove2_cat (Op_cat C);
++
+@@ -7055,2 +7070,5 @@
+-// Full hom action of opposite reverses the source endpoints.
+-rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y ↪ @fapp1_func $A $B $F $Y $X;
++// Total opposite reverses endpoints and dualizes the whole Hom action.
++rule @fapp1_func _ _ (@Op_func $A $B $F) $X $Y
++  ↪ @Op_func (Hom_cat $A $Y $X)
++      (Hom_cat $B (@fapp0 $A $B $F $Y) (@fapp0 $A $B $F $X))
++      (@fapp1_func $A $B $F $Y $X);
+@@ -7068,0 +7087,27 @@
++injective symbol CoAbove2_func [A B : Cat] (F : τ (Functor A B))
++  : τ (Functor (CoAbove2_cat A) (CoAbove2_cat B));
++rule @fapp0 _ _ (@CoAbove2_func $A $B $F) $x ↪ @fapp0 $A $B $F $x;
++rule @fapp1_func _ _ (@CoAbove2_func $A $B $F) $x $y
++  ↪ @Op_func (Hom_cat $A $x $y)
++      (Hom_cat $B (@fapp0 $A $B $F $x) (@fapp0 $A $B $F $y))
++      (@fapp1_func $A $B $F $x $y);
++rule @fapp1_fapp0 _ _ (@CoAbove2_func $A $B $F) $x $y $p
++  ↪ @fapp1_fapp0 $A $B $F $x $y $p;
++rule @CoAbove2_func _ _ (@CoAbove2_func _ _ $F) ↪ $F;
++
++// Needed by the existing whole contravariant identity-action instance after
++// unfolding Transpose_func(id). This is duality-constructor normalization.
++rule @CoAbove2_func _ _ (@id Cat_cat $A)
++  ↪ @id Cat_cat (CoAbove2_cat $A);
++
++symbol Transpose_func [A B : Cat] (F : τ (Functor A B))
++  : τ (Functor (Transpose_cat A) (Transpose_cat B))
++≔ @CoAbove2_func (Op_cat A) (Op_cat B) (@Op_func A B F);
++
++// Whole shifted-duality action on functor categories.
++injective symbol CoAbove2_functor_cat_func (A B : Cat)
++  : τ (Functor (CoAbove2_cat (Functor_cat A B))
++      (Functor_cat (CoAbove2_cat A) (CoAbove2_cat B)));
++rule @fapp0 _ _ (CoAbove2_functor_cat_func $A $B) $F
++  ↪ @CoAbove2_func $A $B $F;
++
+@@ -7150 +7195 @@
+-//   op : Cat ⊢ Cat
++//   op : CoAbove2(Cat) ⊢ Cat
+@@ -7153 +7198 @@
+-constant symbol op : τ (Functor Cat_cat Cat_cat);
++constant symbol op : τ (Functor (CoAbove2_cat Cat_cat) Cat_cat);
+@@ -7155 +7200 @@
+-rule @fapp0 Cat_cat Cat_cat op $A ↪ Op_cat $A;
++rule @fapp0 _ _ op $A ↪ Op_cat $A;
+@@ -7157 +7202 @@
+-rule @fapp1_fapp0 Cat_cat Cat_cat op $A $B $F ↪ @Op_func $A $B $F;
++rule @fapp1_fapp0 _ _ op $A $B $F ↪ @Op_func $A $B $F;
+@@ -7167 +7212 @@
+-constant symbol Functor_cat_func : τ (Functor (Op_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
++constant symbol Functor_cat_func : τ (Functor (Transpose_cat Cat_cat) (Functor_cat Cat_cat Cat_cat));
+@@ -7190 +7235 @@
+-symbol Catd_cat_func : τ (Functor (Op_cat Cat_cat) Cat_cat)
++symbol Catd_cat_func : τ (Functor (Transpose_cat Cat_cat) Cat_cat)
+@@ -7192 +7237 @@
+-     (Op_cat Cat_cat)
++     (Transpose_cat Cat_cat)
+@@ -7201 +7246 @@
+-//   Catd_catd_con(K) : Catd(Op_cat L)
++//   Catd_catd_con(K) : Catd(Transpose_cat L)
+@@ -7207 +7252 @@
+-symbol Catd_catd_con [L : Cat] (K : τ (Catd L)) : τ (Catd (Op_cat L))
++symbol Catd_catd_con [L : Cat] (K : τ (Catd L)) : τ (Catd (Transpose_cat L))
+@@ -7209,2 +7254,2 @@
+-     (Op_cat L)
+-     (Op_cat Cat_cat)
++     (Transpose_cat L)
++     (Transpose_cat Cat_cat)
+@@ -7213 +7258 @@
+-     (@Op_func L Cat_cat K);
++     (@Transpose_func L Cat_cat K);
+@@ -7221 +7266,2 @@
+-injective symbol Op_catd_func (Z : Cat) : τ (Functor (Catd_cat Z) (Catd_cat Z));
++injective symbol Op_catd_func (Z : Cat)
++  : τ (Functor (CoAbove2_cat (Catd_cat Z)) (Catd_cat (CoAbove2_cat Z)));
+@@ -7901 +7947 @@
+-  : τ (Functor (Op_cat B) Cat_cat);
++  : τ (Functor (Transpose_cat B) Cat_cat);
+@@ -7922,3 +7968,3 @@
+-      (Op_cat $A) ≡ $A0;
+-      (Op_cat $B) ≡ $B0;
+-      $F0 ≡ (@Op_func $B $A $F)
++      (Transpose_cat $A) ≡ $A0;
++      (Transpose_cat $B) ≡ $B0;
++      $F0 ≡ (@Transpose_func $B $A $F)
+@@ -7988 +8034 @@
+-      (Hom_cat (Op_cat B) X Y)
++      (Hom_cat (Transpose_cat B) X Y)
+@@ -8417,3 +8463,3 @@
+-      (Op_cat $B) ≡ $B0;
+-      (Op_cat $A) ≡ $A0;
+-      $F ≡ (@Op_func $A0 $B0 $F0)
++      (Transpose_cat $B) ≡ $B0;
++      (Transpose_cat $A) ≡ $A0;
++      $F ≡ (@Transpose_func $A0 $B0 $F0)
+@@ -8430,3 +8476,3 @@
+-      (Op_cat $B) ≡ $B0;
+-      (Op_cat $A) ≡ $A0;
+-      $F ≡ (@Op_func $A0 $B0 $F0)
++      (Transpose_cat $B) ≡ $B0;
++      (Transpose_cat $A) ≡ $A0;
++      $F ≡ (@Transpose_func $A0 $B0 $F0)
+@@ -8443,3 +8489,3 @@
+-      (Op_cat $B) ≡ $B0;
+-      (Op_cat $A) ≡ $A0;
+-      $F ≡ (@Op_func $A0 $B0 $F0)
++      (Transpose_cat $B) ≡ $B0;
++      (Transpose_cat $A) ≡ $A0;
++      $F ≡ (@Transpose_func $A0 $B0 $F0)
+@@ -8456 +8502 @@
+-  : τ (Functor (Op_cat A) (Catd_cat B));
++  : τ (Functor (Transpose_cat A) (Catd_cat B));
+@@ -8471 +8517 @@
+-      (Hom_cat (Op_cat A) Y X)
++      (Hom_cat (Transpose_cat A) Y X)
+@@ -8481 +8527 @@
+-  (p : τ (Hom (Op_cat A) Y X))
++  (p : τ (Hom (Transpose_cat A) Y X))
+@@ -8509 +8555 @@
+-      (Op_cat $A) ≡ $A0;
++      (Transpose_cat $A) ≡ $A0;
+@@ -8519 +8565 @@
+-  : τ (Functor A (Catd_cat (Op_cat B)));
++  : τ (Functor A (Catd_cat (Transpose_cat B)));
+@@ -8537,3 +8583,3 @@
+-      (Op_cat $A) ≡ $A0;
+-      (Op_cat $B) ≡ $B0;
+-      $F0 ≡ (@Op_func $B $A $F)
++      (Transpose_cat $A) ≡ $A0;
++      (Transpose_cat $B) ≡ $B0;
++      $F0 ≡ (@Transpose_func $B $A $F)
+@@ -8549 +8595 @@
+-        (@Catd_cat (Op_cat B))
++        (@Catd_cat (Transpose_cat B))
+@@ -8559 +8605 @@
+-      (@Catd_cat (Op_cat B))
++      (@Catd_cat (Transpose_cat B))
+@@ -8588,3 +8634,3 @@
+-      (Op_cat $A) ≡ $A0;
+-      (Op_cat $B) ≡ $B0;
+-      $F0 ≡ (@Op_func $B $A $F)
++      (Transpose_cat $A) ≡ $A0;
++      (Transpose_cat $B) ≡ $B0;
++      $F0 ≡ (@Transpose_func $B $A $F)
+@@ -9824,0 +9871,21 @@
++// Derived dimension-1 transpose of a transformation. Its whole source is
++// the correctly shifted functor-category action, not a covariant op.
++symbol Transpose_transf [A B : Cat] [F G : τ (Functor A B)]
++  (eta : τ (Transf F G))
++  : τ (Transf (@Transpose_func A B G) (@Transpose_func A B F))
++≔ @fapp1_fapp0
++    (CoAbove2_cat (Functor_cat (Op_cat A) (Op_cat B)))
++    (Functor_cat (Transpose_cat A) (Transpose_cat B))
++    (CoAbove2_functor_cat_func (Op_cat A) (Op_cat B))
++    (@Op_func A B G) (@Op_func A B F) (@Op_transf A B F G eta);
++
++// Actual higher action of total opposite reverses a transformation and keeps
++// the next whole Hom action available through the same generic functor.
++rule @fapp1_fapp0 _ _
++      (@fapp1_func _ _ op $A $B) $F $G $eta
++  ↪ @Op_transf $A $B $G $F $eta;
++
++rule @tapp0_fapp0 _ _ _ _ $x
++      (@fapp1_fapp0 _ _ (CoAbove2_functor_cat_func $A $B) $F $G $eta)
++  ↪ @tapp0_fapp0 $A $B $F $G $x $eta;
++
+@@ -9892 +9959 @@
+-      (@fapp1_fapp0 (Op_cat $A) (@Catd_cat $B)
++      (@fapp1_fapp0 _ _
+@@ -10057 +10124 @@
+-      (Hom_cat (Op_cat $B) $b $c)
++      (Hom_cat (Transpose_cat $B) $b $c)
+@@ -10076 +10143 @@
+-          (Hom_cat (Op_cat $B) $b $c)
++          (Hom_cat (Transpose_cat $B) $b $c)
+@@ -10114 +10181,4 @@
+-  ↪ @tapp1_func $A $B $F $G $y $x $eta;
++  ↪ @Op_func
++      (Hom_cat $A $y $x)
++      (Hom_cat $B (@fapp0 $A $B $F $y) (@fapp0 $A $B $G $x))
++      (@tapp1_func $A $B $F $G $y $x $eta);
+@@ -10364,0 +10435,2 @@
++/* The old same-base op fold is not well-typed for total duality. The new
++   family operator must include CoAbove2 action before postcomposition.
+@@ -10366,0 +10439 @@
++*/
+@@ -12033 +12106 @@
+-          (@Op_func A B F))));
++          (@Transpose_func A B F))));
+@@ -12046 +12119 @@
+-        (@Op_func A B F)));
++        (@Transpose_func A B F)));
+@@ -12066 +12139 @@
+-            (@Op_func A B F)))
++            (@Transpose_func A B F)))
+@@ -12083 +12156 @@
+-        (@Op_func A B F)));
++        (@Transpose_func A B F)));
+@@ -12195 +12268 @@
+-      ≐ tapp1_int_fapp0_transf(Op_transf(epsilon)).
++      ≐ tapp1_int_fapp0_transf(Transpose_transf(epsilon)).
+@@ -12212,3 +12285,3 @@
+-        (Op_cat A)
+-        (Op_cat A)
+-        (@id_func (Op_cat A)))
++        (Transpose_cat A)
++        (Transpose_cat A)
++        (@id_func (Transpose_cat A)))
+@@ -12216,3 +12289,3 @@
+-        (Op_cat (Op_cat A))
+-        (Op_cat (Op_cat B))
+-        (@Catd_cat (Op_cat A))
++        (Transpose_cat (Transpose_cat A))
++        (Transpose_cat (Transpose_cat B))
++        (@Catd_cat (Transpose_cat A))
+@@ -12220,7 +12293,7 @@
+-          (Op_cat B)
+-          (Op_cat A)
+-          (@Op_func A B F))
+-        (@Op_func
+-          (Op_cat A)
+-          (Op_cat B)
+-          (@Op_func A B G))))
++          (Transpose_cat B)
++          (Transpose_cat A)
++          (@Transpose_func A B F))
++        (@Transpose_func
++          (Transpose_cat A)
++          (Transpose_cat B)
++          (@Transpose_func A B G))))
+@@ -12238 +12311 @@
+-    $epsilon1 ≡ (@Op_transf $A $B $F $G $epsilon2)
++    $epsilon1 ≡ (@Transpose_transf $A $B $F $G $epsilon2)
+@@ -12247,3 +12320,3 @@
+-        (Op_cat A)
+-        (Op_cat A)
+-        (@id_func (Op_cat A)))
++        (Transpose_cat A)
++        (Transpose_cat A)
++        (@id_func (Transpose_cat A)))
+@@ -12251,3 +12324,3 @@
+-        (Op_cat (Op_cat A))
+-        (Op_cat (Op_cat B))
+-        (@Catd_cat (Op_cat A))
++        (Transpose_cat (Transpose_cat A))
++        (Transpose_cat (Transpose_cat B))
++        (@Catd_cat (Transpose_cat A))
+@@ -12255,7 +12328,7 @@
+-          (Op_cat B)
+-          (Op_cat A)
+-          (@Op_func A B F))
+-        (@Op_func
+-          (Op_cat A)
+-          (Op_cat B)
+-          (@Op_func A B F))))
++          (Transpose_cat B)
++          (Transpose_cat A)
++          (@Transpose_func A B F))
++        (@Transpose_func
++          (Transpose_cat A)
++          (Transpose_cat B)
++          (@Transpose_func A B F))))
+@@ -12271 +12344 @@
+-    $F0 ≡ (@Op_func $A $B $F)
++    $F0 ≡ (@Transpose_func $A $B $F)
+@@ -12289 +12362 @@
+-  `tapp1_at_transf(Op_transf(epsilon))` presentation remains a proof-time
++  `tapp1_at_transf(Transpose_transf(epsilon))` presentation remains a proof-time
+@@ -12323 +12396 @@
+-    $epsilon1 ≡ (@Op_transf $A $B $F $G $epsilon2)
++    $epsilon1 ≡ (@Transpose_transf $A $B $F $G $epsilon2)
+@@ -12358 +12431 @@
+-    $F0 ≡ (@Op_func $A $B $F)
++    $F0 ≡ (@Transpose_func $A $B $F)
+@@ -12435 +12508 @@
+-  ↪ @hom_con $C $W (Op_cat $A)
++  ↪ @hom_con $C $W (Transpose_cat $A)
+@@ -12437 +12510 @@
+-        (Op_cat $A) $B $C
++        (Transpose_cat $A) $B $C
+@@ -12439 +12512 @@
+-        (@Op_func $A (Op_cat $B) $F));
++        (@Transpose_func $A (Transpose_cat $B) $F));
+@@ -12629 +12702 @@
+-  ↪ @Const_catd (Op_cat $B) (Hom_cat $A $u $W);
++  ↪ @Const_catd (Transpose_cat $B) (Hom_cat $A $u $W);
+@@ -12635 +12708 @@
+-  ↪ @Const_catd (Op_cat $B) Terminal_cat;
++  ↪ @Const_catd (Transpose_cat $B) Terminal_cat;
+@@ -12654 +12727 @@
+-// Fixed-base layer: pointwise opposite of a directed family.
++// Pointwise total opposite changes the base to CoAbove2(K).
+@@ -12658 +12731,2 @@
+-injective symbol Op_catd [K : Cat] (E : τ (Catd K)) : τ (Catd K);
++injective symbol Op_catd [K : Cat] (E : τ (Catd K))
++  : τ (Catd (CoAbove2_cat K));
+@@ -12665 +12739 @@
+-rule @comp_fapp0 Cat_cat $K Cat_cat Cat_cat op $E
++rule @comp_fapp0 Cat_cat _ _ _ op (@CoAbove2_func $K _ $E)
+@@ -12668 +12742 @@
+-rule @Pullback_catd $K Cat_cat op $E
++rule @Pullback_catd _ _ op (@CoAbove2_func $K _ $E)
+@@ -12679 +12753 @@
+-  ≡ @Pullback_catd $A $B $Eop $F
++  ≡ @Pullback_catd _ _ $Eop (@CoAbove2_func $A $B $F)
+@@ -12683 +12757 @@
+-rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
++rule @fapp0 _ _ (@Op_catd $K $E) $k
+@@ -12689 +12763 @@
+-      $K Cat_cat (@Op_catd $K $E) $x $y
++      _ _ (@Op_catd $K $E) $x $y
+@@ -12691,2 +12765,2 @@
+-      (Hom_cat $K $x $y)
+-      (Functor_cat (Fibre_cat $E $x) (Fibre_cat $E $y))
++      (Op_cat (Hom_cat $K $x $y))
++      (Op_cat (Functor_cat (Fibre_cat $E $x) (Fibre_cat $E $y)))
+@@ -12697 +12771 @@
+-        Cat_cat Cat_cat op
++        (CoAbove2_cat Cat_cat) Cat_cat op
+@@ -12700 +12774 @@
+-      (@fapp1_func $K Cat_cat $E $x $y);
++      (@Op_func _ _ (@fapp1_func $K Cat_cat $E $x $y));
+@@ -12705 +12779 @@
+-      $K Cat_cat (@Op_catd $K $E) $x $y $p
++      _ _ (@Op_catd $K $E) $x $y $p
+@@ -12712 +12786 @@
+-rule @Op_catd $K (@Op_catd $K $E) ↪ $E;
++rule @Op_catd _ (@Op_catd _ $E) ↪ $E;
+@@ -12714 +12788,2 @@
+-rule @Op_catd $K (@Const_catd $K $A) ↪ @Const_catd $K (Op_cat $A);
++rule @Op_catd $K (@Const_catd $K $A)
++  ↪ @Const_catd (CoAbove2_cat $K) (Op_cat $A);
+@@ -12723,0 +12799,3 @@
++rule @fapp1_fapp0 _ _ (@Op_catd_func $K) $E $D $FF
++  ↪ @Op_funcd $K $E $D $FF;
++
+@@ -12725 +12803 @@
+-rule @Op_funcd $K (@Op_catd $K $E) (@Op_catd $K $D) (@Op_funcd $K $E $D $FF)
++rule @Op_funcd _ _ _ (@Op_funcd _ _ _ $FF)
+@@ -12730 +12808 @@
+-  ↪ @id (@Catd_cat $K) (@Op_catd $K $E);
++  ↪ @id (@Catd_cat (CoAbove2_cat $K)) (@Op_catd $K $E);
+@@ -12736,2 +12814,2 @@
+-      $K
+-      Cat_cat
++      _
++      _
+@@ -13109 +13187 @@
+-      (@Const_catd (Op_cat Cat_cat) Cat_cat));
++      (@Const_catd (Transpose_cat Cat_cat) Cat_cat));
+@@ -13113 +13191 @@
+-      (Op_cat Cat_cat)
++      (Transpose_cat Cat_cat)
+@@ -13135 +13213 @@
+-  (G : τ (Functor K (Op_cat Cat_cat)))
++  (G : τ (Functor K (Transpose_cat Cat_cat)))
+@@ -13137 +13215 @@
+-      (@Pullback_catd K (Op_cat Cat_cat) Catd_cat_func G)
++      (@Pullback_catd K (Transpose_cat Cat_cat) Catd_cat_func G)
+@@ -13142 +13220 @@
+-      (@Catd_cat (Op_cat Cat_cat))
++      (@Catd_cat (Transpose_cat Cat_cat))
+@@ -13144 +13222 @@
+-      (@Pullback_catd_func $K (Op_cat Cat_cat) $G)
++      (@Pullback_catd_func $K (Transpose_cat Cat_cat) $G)
+@@ -13158 +13236 @@
+-  ↪ @Pi_func (@fapp0 $K (Op_cat Cat_cat) $G $x);
++  ↪ @Pi_func (@fapp0 $K (Transpose_cat Cat_cat) $G $x);
+@@ -13199 +13277 @@
+-//   homd_(FF,x,u,y,v) : Hom_Z(x,y)^op ⊢ Cat
++//   homd_(FF,x,u,y,v) : Transpose(Hom_Z(x,y)) ⊢ Cat
+@@ -13211 +13289 @@
+-  : τ (Functor (Op_cat (Hom_cat Z x y)) Cat_cat)
++  : τ (Functor (Transpose_cat (Hom_cat Z x y)) Cat_cat)
+@@ -13313,2 +13391,4 @@
+-//   Hom_{Σ E}((x,u),(y,v))
+-//     ↪ Op_cat(Σ (p : Hom_K(x,y)^op), homd_(id_E,x,u,y,v)[p]).
++//   H = homd_(id_E,x,u,y,v) : Transpose(Hom_K(x,y)) → Cat.
++//   Hom_{Σ E}((x,u),(y,v)) ↪ Op(Σ(Op_catd(H))).
++//   Op_catd(H) is over Op(Hom_K(x,y)); its fibre dual cancels the outer
++//   total dual, retaining the forward direction of higher fibre cells.
+@@ -13319 +13399,2 @@
+-        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v));
++        (@Op_catd (Transpose_cat (Hom_cat $K $x $y))
++          (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v)));
+@@ -13498,0 +13580,12 @@
++// Whole recursive projection of the corrected contravariant total Hom.
++rule @fapp1_func _ _ (@Sigma_proj1_func $K $E)
++      (Struct_sigma $x $u) (Struct_sigma $y $v)
++  ↪ @Op_func
++      (@Sigma_cat (Op_cat (Hom_cat $K $x $y))
++        (@Op_catd (Transpose_cat (Hom_cat $K $x $y))
++          (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v)))
++      (Op_cat (Hom_cat $K $x $y))
++      (@Sigma_proj1_func (Op_cat (Hom_cat $K $x $y))
++        (@Op_catd (Transpose_cat (Hom_cat $K $x $y))
++          (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v)));
++
+@@ -13607,23 +13700 @@
+-≔ @sigma_Fst
+-    (Obj
+-      (Op_cat
+-        (Hom_cat
+-          (Op_cat (Hom_cat K x y))
+-          q p)))
+-    (λ kappa : τ (Obj
+-        (Op_cat
+-          (Hom_cat
+-            (Op_cat (Hom_cat K x y))
+-            q p))),
+-      Obj
+-        (Fibre_cat
+-          (@homd_
+-            (Op_cat (Hom_cat K x y))
+-            (@homd_ K E E (@id_funcd K E) x u y v)
+-            (@homd_ K E E (@id_funcd K E) x u y v)
+-            (@id_funcd
+-              (Op_cat (Hom_cat K x y))
+-              (@homd_ K E E (@id_funcd K E) x u y v))
+-            q beta p alpha)
+-          kappa))
+-    theta;
++≔ sigma_Fst theta;
+@@ -13631 +13702 @@
+-// Stable head for the computationally important projection pullback. General
++// Stable head for the computationally important projection pullback
+@@ -14081 +14152 @@
+-      Cat_cat $A (Op_cat $C) Cat_cat
++      Cat_cat $A (Transpose_cat $C) Cat_cat
+@@ -14083 +14154 @@
+-        Cat_cat (Op_cat $C) (@Catd_cat $B) Cat_cat
++        Cat_cat (Transpose_cat $C) (@Catd_cat $B) Cat_cat
+@@ -14185 +14256 @@
+-  (A : τ (Catd (Op_cat K)))
++  (A : τ (Catd (Transpose_cat K)))
+@@ -14212 +14283 @@
+-        (@fapp1_func (Op_cat $K) Cat_cat $A $y $x)
++        (@fapp1_func (Transpose_cat $K) Cat_cat $A $y $x)
+@@ -14225 +14296 @@
+-      (@fapp1_fapp0 (Op_cat $K) Cat_cat $A $y $x $p)
++      (@fapp1_fapp0 (Transpose_cat $K) Cat_cat $A $y $x $p)
+@@ -14246 +14317 @@
+-          (@Functor_catd K (@Const_catd (Op_cat K) A) B)
++          (@Functor_catd K (@Const_catd (Transpose_cat K) A) B)
+@@ -14257 +14328 @@
+-      (Op_cat (Catd_cat (Op_cat K)))
++      (Transpose_cat (Catd_cat (Transpose_cat K)))
+@@ -14262 +14333 @@
+-  (A : τ (Catd (Op_cat K)))
++  (A : τ (Catd (Transpose_cat K)))
+@@ -14309 +14380 @@
+-            (Op_cat (Catd_cat (Op_cat $K)))
++            (Transpose_cat (Catd_cat (Transpose_cat $K)))
+@@ -14319 +14390 @@
+-      (@tapp0_fapp0 (Op_cat $K) Cat_cat $A' $A $k $L);
++      (@tapp0_fapp0 (Transpose_cat $K) Cat_cat $A' $A $k $L);
+@@ -14332 +14403 @@
+-  [A : τ (Catd (Op_cat K))]
++  [A : τ (Catd (Transpose_cat K))]
+@@ -14412 +14483 @@
+-  [A : τ (Catd (Op_cat K))]
++  [A : τ (Catd (Transpose_cat K))]
+@@ -14422 +14493 @@
+-          (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
++          (@Functor_catd K (@Const_catd (Transpose_cat K) X) B)))
+@@ -14453 +14524 @@
+-              (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
++              (@Functor_catd $K (@Const_catd (Transpose_cat $K) $X) $B)))
+@@ -14465 +14536 @@
+-              (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
++              (@Functor_catd $K (@Const_catd (Transpose_cat $K) $X) $B)))
+@@ -14490 +14561 @@
+-            (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
++            (@Functor_catd $K (@Const_catd (Transpose_cat $K) $X) $B)))
+@@ -14515 +14586 @@
+-      (@piapp0 $K (@Op_catd $K $E) $X $k)
++      (@piapp0 (CoAbove2_cat $K) (@Op_catd $K $E) $X $k)
+@@ -14528 +14599 @@
+-  (A : τ (Catd (Op_cat K)))
++  (A : τ (Catd (Transpose_cat K)))
+@@ -14537 +14608 @@
+-      (@piapp0 $K (@Op_catd $K (@Functor_catd $K $A $B)) $FF $k)
++      (@piapp0 (CoAbove2_cat $K) (@Op_catd $K (@Functor_catd $K $A $B)) $FF $k)
+@@ -14542 +14613 @@
+-  ↪ @Functor_catd $K (@Op_func $K (Op_cat Cat_cat) $X) $Y;
++  ↪ @Functor_catd $K (@Op_func (CoAbove2_cat $K) (Op_cat Cat_cat) $X) $Y;
+@@ -14566 +14637 @@
+-  : τ (Functor (Op_cat Z) (Catd_cat Z))
++  : τ (Functor (Transpose_cat Z) (Catd_cat Z))
+@@ -14575 +14646 @@
+-≔ @fapp0 (Op_cat Z) (Catd_cat Z) (@Rep_catd_func Z) x;
++≔ @fapp0 (Transpose_cat Z) (Catd_cat Z) (@Rep_catd_func Z) x;
+@@ -14597,4 +14668,6 @@
+-  : τ (Functor (Op_cat Z) (Catd_cat Z))
+-≔ comp_cat_fapp0
+-     (@Op_catd_func Z)
+-     (@hom_int Z Z (@id Cat_cat Z));
++  : τ (Functor (Op_cat Z) (Catd_cat (CoAbove2_cat Z)))
++≔ @comp_cat_fapp0
++    (Op_cat Z) (CoAbove2_cat (Catd_cat Z)) (Catd_cat (CoAbove2_cat Z))
++    (Op_catd_func Z)
++    (@CoAbove2_func (Transpose_cat Z) (Catd_cat Z)
++      (@hom_int Z Z (@id Cat_cat Z)));
+@@ -14608 +14681 @@
+-      (Op_cat (Catd_cat (Op_cat K)))
++      (Transpose_cat (Catd_cat (Transpose_cat K)))
+@@ -14619,4 +14692,6 @@
+-  : τ (Functor Z (Catd_cat (Op_cat Z)))
+-≔ comp_cat_fapp0
+-     (@Presheaf_catd_func (Op_cat Z))
+-     (@Op_func (Op_cat Z) (Catd_cat Z) (@Edge_catd_func Z));
++  : τ (Functor (CoAbove2_cat Z) (Catd_cat (Op_cat Z)))
++≔ @comp_cat_fapp0
++    (CoAbove2_cat Z) (Transpose_cat (Catd_cat (CoAbove2_cat Z)))
++    (Catd_cat (Op_cat Z))
++    (@Presheaf_catd_func (Op_cat Z))
++    (@Transpose_func (Op_cat Z) (Catd_cat (CoAbove2_cat Z)) (@Edge_catd_func Z));
+@@ -14651 +14726 @@
+-     (@fapp0 Z (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);
++     (@fapp0 (CoAbove2_cat Z) (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);

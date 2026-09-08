@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: reviewed inventory and selective ordinary-owner port; dependent mirror remains experimental
+Status: retained inventory and selective ordinary-owner port; dependent mirror paused with the user-deferred general variance repair
 
 Critical update: [the internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 derives the decoded empty carrier using the committed core alone. The
@@ -10,6 +10,9 @@ ordinary baseline and parallel post-migration core both reproduce it. The
 inventory below now informs a variance repair, not merely missing-head
 completion. In particular, do not fill the Op_catd action link or add higher
 Op/con mirrors before reviewing their actual source/target variance.
+The user has now deferred that general repair until after the homological-
+algebra goal. Preserve this audit; it is not a reason to block the existing
+constructive homology route or to rely on a known invalid reversal.
 
 Parent: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 
