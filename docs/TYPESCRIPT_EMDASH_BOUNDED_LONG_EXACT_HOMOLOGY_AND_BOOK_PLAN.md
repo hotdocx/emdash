@@ -22,6 +22,13 @@ not promoted replacements for the existing capabilities. Preserve all
 alternatives and consult the pilot's current review before choosing a
 representation-specific prerequisite.
 
+The next hybrid varying-source triangle prototype has nine green scoped
+observations, but its nonidentity edge action still needs a displayed
+evaluation projection. The user's con-owner/laxity-ladder review is tracked
+by the [foundational variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md).
+Its new interfaces and rewrite attempts remain probes, not active kernel
+changes or a qualified whole complex/homology implementation.
+
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 
 Branch: `goal/bounded-long-exact-homology-book-v3.2`

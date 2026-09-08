@@ -28,6 +28,14 @@ lifting. This does not yet globalize the simplex flags, supply a prism
 coherence, or identify all directed squares with equality-valued factors.
 The pilot compares these native owners with the complementary diagram-shape
 route before promoting the kernel/cokernel/H universal interface probes.
+The subsequent hybrid varying-source triangle-diagram prototype has working
+whole vertex observations and retained natural-transformation map data, with
+a remaining nonidentity edge-action projection. The
+[foundational variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
+distinguishes existing ordinary con/pre-laxity owners, absent dependent
+mirror names, checked native-variance aliases and the separate missing
+Op_catd action link. No candidate rule or complete complex category is yet
+promoted by that review.
 
 ## Scope
 

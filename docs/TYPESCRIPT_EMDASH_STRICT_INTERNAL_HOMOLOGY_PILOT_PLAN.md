@@ -6,6 +6,8 @@ Status: active bounded architectural slice within the long-exact goal
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
+Current sub-audit: [foundational variance owners and the dependent con ladder](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
+
 Worktree: `/home/user1/emdash1-long-exact-v1`
 
 Branch: `goal/bounded-long-exact-homology-book-v3.2`
@@ -92,10 +94,11 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | native zero-triangle candidate under review | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
-| `HINT-COMPLEX-4A` | local compatibility implemented; flag globalization still open | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4` | varying-source triangle-diagram prototype checked in part | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid global triangle prototype has nine green observations | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
+| `HINT-VARIANCE-6` | inventory and two con-interface probes checked; stable dependent mirror not implemented | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -638,3 +641,54 @@ resulting prismatic Hom. Compare with the whole shape-diagram route on the
 same original chain data. Do not replace a missing whole varying family by
 a Path lift that retains only equality variation of the flags, or silently
 treat strict structural naturality as discreteness of every ambient Hom.
+
+## Varying Triangle Prototype And Dependent Variance Review
+
+The next experiment combines the complementary shape and native routes:
+the inner walking-arrow diagram lives in the already native
+`PathOut_C(A)`, while `Functor_catd` internalizes its variation in A.
+The total is `Op(Σ A:Cᵒᵖ, Op(Functor([1],PathOut_C(A))))`. It uses
+existing mixed family, displayed evaluation, Sigma and Op owners and
+requires no whole `CubicalArrow:Cat→Cat` operation.
+
+`hint_triangle_diagram_family.lp` contains the prototype. A native triangle
+is introduced through the checked walking-arrow recursor. A total map is a
+base arrow a:A₀→A₁ and an actual natural transformation
+T₀⇒PathOut(a)∘T₁, not a manually supplied collection of square equations.
+Whole source, edge and other-vertex observations are typed. Nine runtime
+checks pass in `hint_triangle_diagram_family_checks-20260908-112410.log`:
+the three vertices, two outgoing edges, native triangle generator,
+nonidentity initial-vertex action and both retained map fields.
+
+The other edge action has a typed but noncomputing displayed-evaluation
+projection. Its exact retained term and the unsuccessful direct rule probes
+are recorded in the [variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md).
+The all-wildcard and partially guarded attempts fail subject reduction; no
+candidate rule is promoted and no warning threshold has been used as a veto.
+The explicit goal remains to make this nonidentity action compute, not to
+qualify the construction merely because its object formulas pass.
+
+The user's con-owner and laxity-ladder suggestions now govern the next
+sub-audit. Ordinary `hom_con_int` action and pre/right laxity already exist.
+The dependent named mirror is absent. A correctly covariant reversed-Hom
+family and a fixed-p native-typed opposite-action alias both pass scoped
+probes; neither yet supplies the complete dependent internalization or a
+stable runtime head. Audit the whole homd/action/identity-section ladder,
+including higher transfor directions, instead of adding an isolated capped
+mirror. Keep the separate `Op_catd_func`/`Op_funcd` action-link finding visible.
+
+All current triangle and variance additions in this slice remain ignored
+probes. Active implementation remains `febf287d`; existing dependent-Hom
+laxity regression passes in `dependent_hom_laxity-20260908-114029.log`.
+No parallel branch is imported and no new mathematical axiom or primitive
+has been added. The generic window exactness proofs, bounded assembly,
+provider qualification and final book update remain required by the parent.
+
+The user's later specific import request identifies the next reusable slice:
+`20c6dd2e8a7d939bf7f2b25a6578e5c072c6ccb3` stabilizes the four ordinary
+contravariant internal-action/fixed-target heads, with runtime projections
+and proof-time opposite comparisons. Port only that nucleus change and its
+applicable checks after a full-owner probe against the present kernel.
+Do not import the commit's gray-profile classifier changes, migrated
+strictness rules, generated health snapshot or unrelated prose. Record the
+selective provenance and this branch's own warning/regression evidence.
