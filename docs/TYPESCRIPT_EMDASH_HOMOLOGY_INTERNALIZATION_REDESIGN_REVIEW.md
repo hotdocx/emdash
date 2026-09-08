@@ -6,6 +6,18 @@ Status: researched architecture; bounded strict pilot active, not a completed re
 
 ## Conclusion And Decision Boundary
 
+Continuation clarification (2026-09-08): the user's native dependent-hom
+triangle suggestion supplies the next concrete representation candidate to
+audit, alongside the existing shape categories and the cubical construction
+from nested simplicial structure. These are complementary resources. A local
+conversion of the existing chain-zero data to the native triangle passes.
+Its fixed flags and the globally varying chain-map category still need
+qualification; no complex category built from ordinal joins has been
+implemented. The [pilot's current review](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#user-review-native-zero-triangles-as-the-complex-candidate)
+records the successful probe and remaining strict-zero/variance boundaries.
+The walking-arrow adjunction interface remains a reusable candidate, not a
+mandatory definition of complexes.
+
 The redesign need not wait for all component-level long-exact proofs. The
 recommended next architectural slice is a bounded whole
 diagram/kernel/cokernel/homology interface tied to concrete operations.

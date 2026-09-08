@@ -91,8 +91,10 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
-| `HINT-UNIVERSAL-3` | next | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | pending | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-COMPLEX-4` | native zero-triangle candidate under review | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-COMPLEX-4A` | local compatibility probe green; next architecture audit | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4B` | next bounded map comparison | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
@@ -344,3 +346,154 @@ reviewers independently: `emdash3_2_arrow_diagram_families-20260908-085346.log`,
 `zero_arrow_diagrams-20260908-085404.log`. All finish within the uniform
 90-second per-target bound. No repository-wide aggregate or book render is
 run for this tranche.
+
+## Whole Universal Interface: Candidate And Probe Evidence
+
+The candidate interface indexes the existing Adjunction notion by the actual
+zero-arrow embeddings and explicitly supplied whole kernel/cokernel
+functors. A selected zero object is a transparent pair of the existing
+terminal structures in C and Cᵒᵖ. No opaque witness asserting that every
+old PreAbelianCategory already supplies these whole adjunctions is allowed.
+The old factor-space capabilities remain the reference semantics; a
+choice-preserving adapter/qualification is a separate required substep.
+
+First construct the whole kernel inclusion by applying domain evaluation to
+the counit of J⊣K, and the whole cokernel projection by applying codomain
+evaluation to the unit of Q⊣I. Their intended endpoints are K⇒domain and
+codomain⇒Q. This creates a concrete consumer for the earlier whole
+evaluation-after-exchange beta probe: domain∘J and codomain∘I must compute
+as whole identity functors, not merely agree at isolated objects.
+
+Then expose the actual whole mate functors from the existing unit/counit
+and functor action, and test both ordinary inverse cuts and the nonidentity
+Došen rectangular cuts after all zero-embedding projections. Use duplicated
+instances only when a measured projection erases the generic triangle
+pattern. A checked capability interface by itself is not qualification of
+the native selected algorithms or a completed homology functor.
+
+The whole inclusion/projection declarations and all four point/mixed
+observations now pass in `hint_internal_kernel_interface.lp` and
+`hint_internal_kernel_components.lp`. The latter log is
+`hint_internal_kernel_components-20260908-093315.log`. Kernel-left and
+cokernel-right rectangular cuts initially failed because exchange had erased
+the generic fapp1 pattern. Two exchange-specific instances make all four
+kernel/cokernel rectangles pass in the `*_rectangular_*_joined.lp` probes
+(logs dated 20260908-092509 and 20260908-092515). Their image-object guards
+are genuine cut discriminators, not redundant inferred endpoint expressions.
+
+Literal whole mate formulas built from product composition compute their
+applications, but inverse application fails
+(`hint_adjunction_semantic_mates_inverse-20260908-093137.log`). The existing
+Adjunction_hom_prof_comparison can instead supply both whole mate functors
+through DefIso and fibre evaluation: no new primitive mate heads are needed.
+A direct Prof_cat/Functor_cat proof-time comparison is needed because the
+existing Prof→Catd and Catd→Functor comparisons are not transitively applied.
+Both whole and point inverse cuts now pass in
+`hint_adjunction_fibre_mate_inverse_captured-20260908-100717.log`.
+
+The failed whole inverse attempts reconstructed an endpoint Hom category on
+the RHS. Capturing the actual common category as a variable in the composition
+pattern and returning its identity fixes subject reduction without additional
+compound LHS guards. The first two point rules had already passed; the source
+location identifies the failure in the third, whole-composition rule.
+These remain ignored probes: owner-position warning audits, explicit
+unit/counit semantic usability links and choice-preserving qualification are
+not complete. No candidate rule or kernel/cokernel capability has been
+promoted beyond implementation checkpoint `c7eabd58`.
+
+## User Review: Native Zero-Triangles As The Complex Candidate
+
+The user's dependent-hom/simplicial suggestion is directly supported by the
+active native simplex owners. No category of complexes has yet been declared,
+and no decision to represent complexes by functors out of iterated joins has
+been implemented. The walking arrow currently supports single-arrow families
+and the candidate adjunction interface; it need not define complex syntax.
+
+For A─dNext→B─d→D, take E=Hom_C(A,−). A dependent arrow over d from dNext to
+the selected zero A→D is the native triangle
+
+```text
+E[d](dNext) → 0,
+```
+
+with the readable source d∘dNext. Equivalently, fix the initial edge
+e01=(B,dNext) in PathOut_C(A) and use an object of
+PathOut_(PathOut_C(A))(e01) whose long edge is (D,0).
+`DependentTriangle_catd`, `DependentTriangle_cat`,
+`DependentSimplex2_cat` and `dependent_simplex2_visible` already implement
+this local structure through homd_/Sigma; they are not an interpretation
+through an ordinal join. Their own header explicitly leaves the whole
+comparison with ordinal-functor categories unproved.
+
+The scoped compatibility probe `hint_chain_pair_native_zero_triangle.lp`
+passes (`hint_chain_pair_native_zero_triangle-20260908-101929.log`). It uses
+the existing chain-zero path to form the native cell, and three projections
+recover the original third object, zero long edge and second differential.
+The first differential remains in the fixed flag. No rule, primitive,
+replacement homology or manual square field is added by this probe.
+
+Important remaining architecture checks:
+
+1. The current native tower is flagged, not a global category of all
+   three-term complexes. Internalize the varying initial vertex/edge with
+   correct variance. A Hom in a fixed-flag triangle category is not
+   automatically an arbitrary chain map between three independently varying
+   terms; the resulting Hom must recover all three components and their
+   compatibility through the internal Hom/fibration machinery.
+2. A directed cell d∘dNext⇒0 is not automatically the old equality-valued
+   chain condition in a general higher category. Preserve the strict or
+   equality-valued zero fibre appropriate to the ordinary CAS models.
+   Structural laxity normalization does not itself impose d∘dNext=0. The
+   finite-free/Freyd Hom categories are actual Path categories of their
+   matrix/quotient sets; this is the relevant concrete specialization.
+3. The local bridge above is one direction, not yet a whole equivalence of
+   complex categories or a global homology functor. Its use of the old zero
+   proof is compatibility evidence, not a decision to store an additional
+   path field in the final native presentation.
+4. Compare direct hom/fibration or pullback-of-zero constructions of cycles
+   with the candidate J⊣K presentation. Do not make a full walking/ordinal
+   mapping-category inverse a prerequisite unless the chosen consumer needs
+   it. Preserve the selected native kernels, boundaries and homologies.
+
+The next architectural audit therefore tests the native zero-triangle route
+before promoting further representation-specific prerequisites. This is not
+a decision to exclude shape-indexed diagrams. It reorders the pilot, not
+the full goal: generic window exactness, bounded assembly, formal-boundary
+qualification and final book/consolidation work remain required.
+
+## Complementary Shapes, Cells And Cubical Maps
+
+The user's further clarification concerns reuse of the whole foundational
+architecture, not replacement of shape categories by cells. The longer and
+shorter appendices of `emdash2/tmp/EMAIL.md` have both been reviewed at their
+cubical and simplicial passages. Their account agrees with the active
+`emdash3_2_cubical_internalization.lp` and native simplex sources:
+
+| Resource | Homological role to investigate | Verified starting point |
+|---|---|---|
+| combinatorial simplex/ordinal categories and face codes | diagram shapes, indexing and composition/substitution | existing shape constructors and scoped realization interfaces |
+| native homd_/Sigma/PathOut simplicial cells | local zero-triangles, differentials and higher coherent data | existing triangle/tetrahedron owners; the chain-zero compatibility probe passes |
+| cubical structure derived from nested simplicial structure | varying endpoints, chain maps and their coherences | homdc_int and LaxArrow reuse ordinary homd_int after Sigma/opposite variance adjustment |
+
+In particular, homdc_int is homd_int applied to the appropriate opposite
+edge family. Its Sigma-Hom projection computes
+alpha:b∘u⇒v∘a. A chosen alpha is genuine cell data; what is absent is an
+independent square former or a separately postulated commutativity law.
+The complex-map investigation should reuse this same mechanism. A useful
+next bounded comparison translates the existing two chain-map factor points
+into the two corresponding derived squares, with their common middle map
+retained once, before claiming a global category of complex maps.
+
+Compare candidate presentations on the same three-term data, nonidentity
+chain maps and original nonsplit proof-CAS selections. Require whole actions,
+the correct strict/equality-valued zero condition, actual computations and
+honest capability boundaries. A local shape/native comparison can be enough;
+do not assume or require a global all-dimensional equivalence without a
+consumer. Conversely, do not discard the shape route merely because the
+first native point probe is simpler.
+
+Keep the current committed implementation and all ignored alternative probes
+as review/backtracking evidence. Failed candidates remain classified by their
+actual failure (typing, projection matching, inverse computation or scope),
+not erased or rejected merely for warning totals. Any later consolidation
+must explain which parts are reused, replaced or retained as reference.

@@ -10,6 +10,14 @@ Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_
 before further component-level window exactness. Connecting-map checkpoint:
 `b83a4d32`; the full goal remains active.
 
+The current implementation checkpoint is `c7eabd58`. The next audit compares
+native dependent-hom zero-triangles, existing combinatorial diagram shapes,
+and the cubical-from-simplicial machinery for maps. These are complementary
+resources, not an exclusive representation choice. The whole kernel/cokernel
+interface extensions remain probes, not promoted replacements for the
+existing capabilities. Preserve all alternatives and consult the pilot's
+current review before choosing a representation-specific prerequisite.
+
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 
 Branch: `goal/bounded-long-exact-homology-book-v3.2`
