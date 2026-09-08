@@ -35,6 +35,10 @@ projection and map actions remain available, and the original Sigma Empty
 cast is rejected. The repair plan owns the exact staged gate and warning
 inventory. This candidate is not yet promoted: the separate internal-op and
 same-base family defect remains accepted and is the next minimal repair.
+The latest user clarification prioritizes reusing `Op_cat` for total duality
+and `CoAbove2_cat` for its shifted source, rather than promoting the mixed
+All/Co₂/CoAll probe names. The repair plan records the first actual affected
+Hom-action owner; the two-operation migration is not yet qualified.
 
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:

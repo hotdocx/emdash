@@ -12,6 +12,29 @@ Additional finding: [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_H
 
 ## Objective And Scope
 
+Latest user clarification: prioritize reinterpreting the existing `Op_cat`
+as total duality, with `CoAbove2_cat` for the shifted universe/base duality.
+The separate `All_cat`, `CoAll_cat` and `Co2_cat` names below describe isolated
+comparison experiments, not a selected public multi-duality architecture.
+No such names have been added to the active nucleus. Test the preferred
+two-operation basis directly before continuing alternative target designs.
+
+In that basis the intended equations are
+
+```text
+Hom_Op(C)(x,y) = Op(Hom_C(y,x))
+Hom_CoAbove2(C)(x,y) = Op(Hom_C(x,y))
+op : CoAbove2(Cat) → Cat.
+```
+
+Ordinary dimension-1 transposition, where genuinely required for Hom
+contravariance, is expressible as `CoAbove2(Op(C))`; it need not be a third
+primitive duality. Whether existing explicit endpoint annotations and
+projection rules can be repaired locally remains a measured migration
+question, not an established no-change result. Do not silently preserve the
+old dimension-1 meaning merely to keep the old signatures, or conclude that
+the two-operation basis is infeasible from a partially edited source.
+
 Scope clarification from the user: this is a practical repair prerequisite,
 not a new comprehensive-duality goal. Select the smallest coherent formulation
 that removes the identified inconsistencies and preserves the computations
@@ -35,9 +58,9 @@ interfaces, run both actual Empty controls and the nearest required positive
 consumers, then return to the long-exact goal. Do not initiate a repo-wide
 semantic migration or unrelated aggregate from this side task.
 
-Correct the higher variance of internal opposite while retaining the existing
-directed categories, whole functor/transfor action, and legitimate local
-`Op_cat`, `Op_func`, and `Op_transf` observations. This is a prerequisite of
+Correct the higher variance of internal opposite while retaining directed
+categories, whole functor/transfor action and legitimate opposite
+observations, reformulating their signatures for the selected meaning. This is a prerequisite of
 the unchanged long-exact goal, not a replacement for its remaining homology,
 proof-CAS, and book work. Keep baseline `054b43bd` and all checkpoints.
 
@@ -45,9 +68,9 @@ The preceding clarification turn restated the confirmed diagnostic; it did
 not repair the encoding. This tranche must add discriminating implementation
 evidence, not merely repeat the soundness notice.
 
-## Small Foundational Candidate
+## Earlier Dimension-1/Co₂ Comparison Candidate
 
-For the current strict working interpretation, first probe a dimension-two
+The earlier strict-working-interpretation probe used a dimension-two
 opposite with unchanged objects and 1-arrows:
 
 ```text
@@ -631,11 +654,58 @@ The runner's shell syntax check, active-reference lint, report-lifecycle lint
 and twelve focused warning-parser/report-registry tests pass. The active
 kernel, positive registry, catalog and health snapshot are unchanged.
 
-Decision: retain this checked patch as the concrete Sigma half of the minimal
-repair. Do not broaden it into a public duality catalogue. Next resolve the
-unsafe whole `op` and unrestricted same-base opposite-family interfaces,
-then rerun both diagnostic negatives and the required positive consumers
-against the combined candidate before active-source promotion.
+Decision: retain this checked patch as Sigma repair evidence, not as a
+commitment to its temporary duality names. The latest user clarification
+selects the total-`Op_cat`/`CoAbove2_cat` basis for the next candidate. Reuse
+the Sigma evidence while reformulating the unsafe whole `op` and same-base
+family interfaces. Rerun both diagnostic negatives and the required positive
+consumers against that complete candidate before active-source promotion.
+
+## Continuation Evidence And Preferred Reinterpretation
+
+Checkpoint `c4f3e3d4` records the preceding reproducible Sigma candidate.
+The subsequent combined copy, `hint_op_sigma_combined_core.lp`, brings that
+Sigma repair together with the earlier corrected Co₂ opposite interfaces.
+Replacing the negative-section inputs of `Hom_catd` and `Transf_catd` by
+`Pi(All_catd(E))` passes the former constant-Cat subject-reduction boundary.
+The correctly based Edge and HomPresheaf pipelines then check, but
+`Homd_target_section_catd` still expects the original E at the wrong base:
+`Co2_cat Z ≡ Z` remains unsolved in
+`hint_op_sigma_combined_core-20260908-175439.log`. No regrading equation or
+replacement E is inserted.
+
+The source prefix preceding that target checks in
+`hint_op_sigma_prefix_core-20260908-175616.log`. Against this explicitly
+incomplete signature, the direct-op, opposite-family reconstruction and
+Sigma Empty fixtures all fail at their actual type mismatches:
+`hint_combined_op_empty-20260908-175641.log`,
+`hint_combined_family_empty-20260908-175641.log` and
+`hint_combined_sigma_empty-20260908-175641.log`.
+This is fault-isolation evidence, not a completed repaired kernel: the
+dependent-Hom target and all later declarations are deliberately excluded.
+An unpromoted relative-Sigma-Hom alternative checks its first three
+observations but fails its following whole-source-action assertion
+(`hint_relative_sigma_hom-20260908-175848.log`). It remains an experiment,
+not a chosen replacement or an asserted whole homology interface.
+
+After the user's naming/semantics clarification, the direct full-copy
+reinterpretation begins with the recursive total `Op_cat` Hom rule and
+recursive `Op_func` Hom action, without adding `All_cat` or `Co2_cat`.
+This initial two-rule edit reaches the target-internalized postcomposition
+projection before failing subject reduction:
+`hint_total_op_reinterpretation_core-20260908-180119.log`, with the precise
+warning-enabled location at lines 10054–10082 in
+`hint_total_op_reinterpretation_core-20260908-180135.log`.
+Its old RHS supplies a functor out of `Hom_B(c,b)` where the new domain is
+`Op(Hom_B(c,b))`. This identifies an actual contravariant-Hom consumer that
+needs review; it is not a warning veto, a timeout, or a rejection of a fully
+implemented total-Op/CoAbove2 solution. That partial copy has not yet migrated
+the whole `op` declaration, family operators, or other affected owners.
+
+Next: audit those variance-only Hom positions using the derived
+dimension-1 transpose `CoAbove2(Op(C))`, then test the complete preferred
+candidate. Do not continue developing the mixed-name public API or the
+relative-Hom alternative merely because those probes already exist.
 
 ## Validation And Handoff
 
