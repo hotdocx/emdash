@@ -18434,6 +18434,13 @@ rule @Prof_reindex
       $G
   ↪ @Const_catd (Product_cat (Op_cat $A') $B') $C;
 
+// A constant pair of represented endpoints selects the constant Hom family.
+// This whole-family fold lets an ordinary arrow introduce a join cross cell;
+// it does not choose a normal form for reindexed tensors or implications.
+rule @Prof_reindex _ _ _ _ (@Unit_prof $C)
+      (@Const_func $A _ $x) (@Const_func $B _ $y)
+  ↪ @Const_catd (Product_cat (Op_cat $A) $B) (Hom_cat $C $x $y);
+
 // 18f. Shaped profunctor cells and endpoint-changing application
 
 /*
@@ -18664,15 +18671,14 @@ rule @Prof_func_hom $A $A (@id Cat_cat $A)
   ↪ @Prof_id_hom $A;
 
 // Component of a functor-induced shaped unit is the ordinary hom-action.
-// lhs-audit: keep 1,3,4 -- the product/opposite base gives sigma_Fst/Snd
-// their profunctor endpoint types; the normalized representable families pin
-// the actual `Prof_func_hom` transfor shape and avoid unrelated Cat-valued
-// projection overlaps.
+// lhs-audit: keep 1,3 -- the product/opposite base types sigma_Fst/Snd and
+// the unit source retains the measured Cat-valued projection guard. The
+// target must stay inferred: constant endpoint reindexing reduces it away.
 rule @tapp0_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
       (@Unit_prof $A)
-      (@Prof_reindex $B $A $B $A (@Unit_prof $B) $F $F)
+      _
       $ab
       (@Prof_func_hom $A $B $F)
   ↪ @fapp1_func
@@ -18684,15 +18690,13 @@ rule @tapp0_fapp0
 
 // Capped product-base action of `Prof_func_hom` is the uncurried projection
 // of the existing internal ordinary hom-action, not a separate naturality law.
-// lhs-audit: keep 1,3,4 -- the product/opposite base gives sigma_Fst/Snd
-// their profunctor endpoint types; the normalized representable families pin
-// the actual `Prof_func_hom` transfor shape and avoid unrelated Cat-valued
-// projection overlaps.
+// lhs-audit: keep 1,3 -- as above, retain the measured base/source guards,
+// but not the reducible target family. Prof_func_hom still owns the action.
 rule @tapp1_fapp0
       (Product_cat (Op_cat $A) $A)
       Cat_cat
       (@Unit_prof $A)
-      (@Prof_reindex $B $A $B $A (@Unit_prof $B) $F $F)
+      _
       $ab
       $ab'
       (@Prof_func_hom $A $B $F)
@@ -19799,6 +19803,27 @@ with @fapp0
       (@join_elim_func $A $B $E _ $second _)
       (@fapp0 $B (@Join_cat $A $B) (@join_snd_func $A $B) $b)
   ↪ @fapp0 $B $E $second $b;
+
+// Ordinary whole hom action of a recursor on the generating cross functor.
+rule @comp_fapp0 Cat_cat _ _ _
+      (@fapp1_func _ _ (@join_elim_func $A $B $C $F $G $cross) _ _)
+      (@tapp0_fapp0 _ _ _ _ $ab (@join_cross_transf $A $B))
+  ↪ @tapp0_fapp0 (Product_cat (Op_cat $A) $B) Cat_cat
+      (@Terminal_prof $A $B)
+      (@Prof_reindex $C $A $C $B (@Unit_prof $C) $F $G)
+      $ab $cross;
+
+// Point projection joins evaluation before the whole cross beta.
+rule @fapp1_fapp0 _ _ (@join_elim_func $A $B $C $F $G $cross) _ _
+      (@fapp0 _ _
+        (@tapp0_fapp0 _ _ _ _ $ab (@join_cross_transf $A $B)) $t)
+  ↪ @fapp0 Terminal_cat
+      (@fapp0 (Product_cat (Op_cat $A) $B) Cat_cat
+        (@Prof_reindex $C $A $C $B (@Unit_prof $C) $F $G) $ab)
+      (@tapp0_fapp0 (Product_cat (Op_cat $A) $B) Cat_cat
+        (@Terminal_prof $A $B)
+        (@Prof_reindex $C $A $C $B (@Unit_prof $C) $F $G)
+        $ab $cross) $t;
 
 // -------------------------------------------------------------------------------------------------
 // 18z. Late cross-section normalization bridges

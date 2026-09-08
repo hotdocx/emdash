@@ -4160,8 +4160,13 @@ actual transformation ev_u:ev_i⇒ev_j; its component at F is F[u], and its
 mixed action at a transformation eta is eta[u]. Higher Hom action remains
 available. For the walking arrow this produces the universal differential
 between source/target evaluation functors, without a manually stored square
-or a new primitive. The whole kernel/cokernel/homology interfaces remain the
-next architectural layer.
+or a new primitive. Conversely, an ordinary f:x→y now defines a walking-arrow
+diagram by join recursion: its cross datum is the constant section selecting
+f in the represented Hom family. The whole generator action, its point
+projection, and evaluation by the universal differential return the supplied
+data computationally. This is a concrete introduction, not yet a whole
+equivalence varying both endpoints and f. That interface and whole
+kernel/cokernel/homology remain the next architectural layers.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

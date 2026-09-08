@@ -12,7 +12,12 @@ Current follow-up: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INT
 The initial whole evaluation owner is the existing `sym_func` applied to the
 identity on `Functor_cat(I,C)`, exposed by `emdash3_2_diagram_evaluation.lp`.
 Its walking-arrow consumer derives the differential transformation without
-new primitives or rules. Whole kernel/cokernel/H construction remains open.
+new primitives or rules. The next constructor
+`emdash3_2_walking_arrow_introduction.lp` uses a constant represented cross
+section and the original join recursor. Its required core changes are a
+represented constant-family fold, whole/point cross beta and removal of the
+reducible target guard from the two `Prof_func_hom` projections. Whole
+variation of arrow data and kernel/cokernel/H construction remain open.
 
 ## Scope
 

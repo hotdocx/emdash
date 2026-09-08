@@ -89,8 +89,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 
 | Row | Status | Required result |
 |---|---|---|
-| `HINT-EVAL-1` | implemented; focused checks green | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
-| `HINT-ARROW-2` | next | concrete arrow classification and relevant whole action using the existing walking-arrow/join owners; strict structural consumer audit |
+| `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
+| `HINT-ARROW-2` | in progress; concrete introduction and ordinary whole/point cross beta implemented | whole variation of the supplied arrow/endpoints, with a strict structural consumer; not just a pointwise inverse to evaluation |
 | `HINT-UNIVERSAL-3` | pending | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | pending | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
@@ -145,3 +145,82 @@ rule audits, catalog/TOC and relevant script tests. Retain the parent's
 unrelated full-health exception; do not rerun repository-wide TypeScript,
 Lambdapi or book aggregates for this independent helper. Local checkpoints
 follow the parent authorization; no push, merge or publication is included.
+
+## Walking-Arrow Introduction: Owner Audit
+
+The first concrete introduction failed before any candidate rule: a constant
+section selecting f:x→y was not accepted as a section of the still-rigid
+`Prof_reindex(Unit_prof(C),const(x),const(y))`. A whole constant-family
+normalization fixes the representation, without postulating cross data.
+The broad arbitrary-profunctor version passes but also overlaps tensor and
+both implications. The current consumer only needs the represented unit
+case, so select that narrower rule instead of choosing runtime normal forms
+for those unrelated constructions.
+
+The same experiment found an actual ancestry-rule issue: the two
+`Prof_func_hom` component/action rules required their reducible reindexed
+target family literally on the LHS. The constant-family fold erased that
+guard. Removing just that target guard restores the existing computation;
+the final `Prof_func_hom` head still supplies the endpoint functor. The
+product-base and unit-source guards remain for their previously measured
+roles. The canonical already-normalized-target regression passes.
+
+Join recursion also needed its ordinary hom-action beta on the actual
+generating cross functor. The prior primitive `join_elim_cross_transf`
+observation by itself does not make that ordinary action reduce. The
+candidate supplies one whole-functor cut and its point-first projection
+join, retaining the original supplied cross. These are constructor beta
+rules, not duplicate generic functoriality. They must occur after the join's
+endpoint betas for subject reduction: the earlier position failed because
+the endpoint reconstruction rules had not yet been declared.
+
+The full-owner candidate and independent consumer pass with subject
+reduction enabled. Its warning boundary is 1,108/157 versus the previous
+core-only 1,117/157, with no parser issues. The broad unselected experiment
+was 1,123/157; neither count is a veto or proof of correctness. The selected
+consumer checks whole and point-first cross computation, retained next Hom
+action, the actual ordinary arrow, the normalized-target regression and
+two noncollapse cases. Logs: `hint_join_arrow_unit_owner-20260908-075705.log`
+and `hint_join_arrow_unit_consumer-20260908-075707.log`.
+
+The promoted rules live at the corresponding profunctor/join positions in
+`emdash2/emdash3_2.lp`. The two semantic definitions in
+`emdash2/emdash3_2_walking_arrow_introduction.lp` construct the cross section
+and its join recursor; no new primitive or proof-time rule is introduced.
+`walking_arrow_func(f)` has the original endpoints and sends the actual
+walking generator to f. The preceding evaluation transformation therefore
+evaluates to f on this concrete diagram.
+
+The active generic/introduced-arrow reviewers have 11 positive and 5 negative
+checks. They include both revised `Prof_func_hom` projections with the target
+already normalized, arbitrary cross data at arbitrary endpoints, whole and
+point-first cross beta, the retained next Hom action, and noncollapse of
+endpoints/arrows. Quiet and warning-enabled runs pass. Final warning logs:
+`join_cross_computation-20260908-080301.log` and
+`walking_arrow_introduction-20260908-080300.log`.
+
+Warning classification: compared with the previous core, eleven canonical
+overlap shapes disappear and two become exposed by target-guard removal.
+The latter are generic transfor-naturality cuts whose syntactic unifier uses
+`Prof_func_hom(Cat,Catᵒᵖ×Cat,Unit_prof(Cat))`. Its purported functor has the
+source/target reversed: Unit_prof(Cat) has type `(Catᵒᵖ×Cat)→Cat`, not
+`Cat→(Catᵒᵖ×Cat)`. The focused `assertnot` rejects that exact typed fragment.
+These are not new well-typed computational overlaps. All 1,108 critical-pair
+blocks parse, and all 157 pattern reports remain classified. This review does
+not claim global confluence or use reduced totals as its correctness argument.
+
+The central `emdash3_2_checks.lp` passes under the 90-second ceiling
+(`emdash3_2_checks-20260908-080030.log`). Scoped regressions pass for directed
+join, weighted profunctors, walking arrow, both evaluation reviewers, join
+mapping recursion, both join compatibility reviewers and dependent-hom
+laxity. The core strict audit reports zero unreviewed compound slots, with
+61 annotated slots in 38 intentional clauses; the new source/reviewers
+have no rules of their own. Catalog/TOC, script tests and document hygiene
+are refreshed at the checkpoint. No unrelated aggregate or book render is
+run, and the parent full-health exception remains explicit.
+
+This completes the concrete introduction substep, not `HINT-ARROW-2` as a
+whole. The next experiment must vary the supplied cross/arrow internally,
+then qualify zero-arrow embeddings and the actual universal interface.
+Neither the existing propositional join mapping comparisons nor these
+pointwise introductions alone establish a whole mapping-category inverse.

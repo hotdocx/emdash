@@ -2393,8 +2393,13 @@ usability style; a general `make_*` constructor layer is not a prerequisite.
 This does not require spectra or shrink the full goal. Preserve the completed
 connecting-map checkpoint while the pilot qualifies whole owners. Its first
 rule-free diagram-evaluation layer now computes object, component and mixed
-transfor action with a retained next Hom functor; the kernel/cokernel/complex/H
-owners remain to be constructed.
+transfor action with a retained next Hom functor. Concrete ordinary arrows
+now also introduce walking-arrow diagrams through constant represented
+cross sections and the existing join recursor. Whole/point cross beta and
+two corrected inferred target guards make their actual generator action
+compute. The whole varying-arrow interface and kernel/cokernel/complex/H
+owners remain to be constructed; the pilot records scoped core validation
+and its current warning boundary separately from earlier subtree counts.
 
 ### Selected provider boundary for the proof-CAS consumer
 

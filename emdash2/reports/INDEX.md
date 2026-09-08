@@ -21,8 +21,10 @@ selected proof–CAS replay/adoption and actual interior homology/exactness
 consumers are implemented. The current architectural slice is
 [the strict internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
 following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
-Its first rule-free whole diagram-evaluation layer is implemented; whole
-kernel/cokernel/complex/homology owners remain under construction.
+Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
+introduction are implemented. The latter uses scoped core cross computation;
+whole variation of arrow data and kernel/cokernel/complex/homology owners
+remain under construction.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

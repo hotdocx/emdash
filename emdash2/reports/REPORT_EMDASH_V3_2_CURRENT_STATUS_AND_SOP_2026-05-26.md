@@ -1063,6 +1063,14 @@ belongs to the owning implementation plan rather than to standing guidance.
   with a nonidentity generator check. This rule-free prerequisite begins the
   strict internal homology pilot; it does not yet supply a complex category,
   kernel/cokernel adjunction or homology functor.
+  `emdash3_2_walking_arrow_introduction.lp` now constructs an actual diagram
+  from f:x→y by constant represented cross data and the original join
+  recursor. The core selects a constant Hom family for two constant represented
+  endpoints and supplies whole/point ordinary cross beta. The two
+  `Prof_func_hom` projections now infer their reducible target family, so
+  that normalization does not erase their matching guard. No primitive
+  cross datum or new equality bridge is introduced. Whole variation in the
+  supplied arrow and endpoints remains a further pilot substep.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

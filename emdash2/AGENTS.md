@@ -59,7 +59,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
 - `emdash3_2_diagram_evaluation.lp` derives whole varying-shape evaluation
   from existing argument exchange. Its walking-arrow reviewer supplies a
   universal differential transformation, not yet a kernel/cokernel
-  adjunction or whole complex/homology functor.
+  adjunction or whole complex/homology functor. The walking-arrow introduction
+  module constructs a diagram from an ordinary arrow via a constant
+  represented cross section and the original join recursor. Core whole/point
+  cross beta computes its generator; a whole varying-arrow inverse remains
+  a further interface, not an implicit consequence of those point formulas.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not
