@@ -25861,8 +25861,111 @@ assert (K : Cat) (E D : τ (Catd K)) (FF : τ (Functord E D))
       u (@fdapp1_comma_projection_transf K E D FF eta x y p);
 
 // catalog-area: Target-internalized ordinary hom action
+// Identity-category normalization does not erase the contravariant cut.
+
+assert [A B C : Cat]
+  (H : τ (Functor A (Product_cat B C))) ⊢
+  @tapp1_con_int_fapp0_transf A (Product_cat B C) H H
+    (@id (Product_cat (Functor_cat A B) (Functor_cat A C)) H)
+  ≡ @fapp1_con_int_transf A (Product_cat B C) H;
+
+assert [A B C : Cat]
+  (H : τ (Functor A (Product_cat B C))) (Y : τ (Obj A)) ⊢
+  @tapp1_con_at_transf A (Product_cat B C) H H
+    (@id (Product_cat (Functor_cat A B) (Functor_cat A C)) H) Y
+  ≡ @fapp1_con_at_transf A (Product_cat B C) H Y;
 // The arbitrary fixed-target mirror is the opposite specialization of the
 // existing internal action and projects to the same off-diagonal hom functor.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (Y : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Transf_cat
+      (Op_cat A)
+      Cat_cat
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)))
+    (@tapp1_con_at_transf A B F G epsilon Y)
+  : τ (@=
+      (Obj (@Transf_cat
+        (Op_cat A)
+        Cat_cat
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B G Y) A F)))
+      (@tapp0_fapp0
+        (Op_cat (Op_cat A))
+        (@Catd_cat (Op_cat A))
+        (@hom_int
+          (Op_cat A)
+          (Op_cat A)
+          (@id_func (Op_cat A)))
+        (@comp_cat_fapp0
+          (Op_cat (Op_cat A))
+          (Op_cat (Op_cat B))
+          (@Catd_cat (Op_cat A))
+          (@hom_int
+            (Op_cat B)
+            (Op_cat A)
+            (@Op_func A B F))
+          (@Op_func
+            (Op_cat A)
+            (Op_cat B)
+            (@Op_func A B G)))
+        Y
+        (@tapp1_con_int_fapp0_transf A B F G epsilon))
+      (@tapp1_con_at_transf A B F G epsilon Y));
+
+// The direct opposite presentation compares proof-time in both orientations.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (Y : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Transf_cat
+      (Op_cat A)
+      Cat_cat
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)))
+    (@tapp1_con_at_transf A B F G epsilon Y)
+  : τ (@=
+      (Obj (@Transf_cat
+        (Op_cat A)
+        Cat_cat
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B G Y) A F)))
+      (@tapp1_at_transf
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func A B G)
+        (@Op_func A B F)
+        Y
+        (@Op_transf A B F G epsilon))
+      (@tapp1_con_at_transf A B F G epsilon Y));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (Y : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Transf_cat
+      (Op_cat A)
+      Cat_cat
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B G Y) A F)))
+    (@tapp1_con_at_transf A B F G epsilon Y)
+  : τ (@=
+      (Obj (@Transf_cat
+        (Op_cat A)
+        Cat_cat
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B G Y) A F)))
+      (@tapp1_con_at_transf A B F G epsilon Y)
+      (@tapp1_at_transf
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func A B G)
+        (@Op_func A B F)
+        Y
+        (@Op_transf A B F G epsilon)));
+
 assert [A B : Cat] [F G : τ (Functor A B)]
   (epsilon : τ (Transf F G))
   (X Y : τ (Obj A)) ⊢
@@ -25875,13 +25978,82 @@ assert [A B : Cat] [F G : τ (Functor A B)]
     (@tapp1_con_at_transf A B F G epsilon Y)
   ≡ @tapp1_func A B F G X Y epsilon;
 
+// The identity-specialized internal and fixed-target owners compute in the
+// same stable contravariant ladder.
+assert [A B : Cat] (F : τ (Functor A B)) ⊢
+  @tapp1_con_int_fapp0_transf
+    A B F F (@id (Functor_cat A B) F)
+  ≡ @fapp1_con_int_transf A B F;
+
+assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢
+  @tapp0_fapp0
+    (Op_cat (Op_cat A))
+    (@Catd_cat (Op_cat A))
+    (@hom_int
+      (Op_cat A)
+      (Op_cat A)
+      (@id_func (Op_cat A)))
+    (@comp_cat_fapp0
+      (Op_cat (Op_cat A))
+      (Op_cat (Op_cat B))
+      (@Catd_cat (Op_cat A))
+      (@hom_int
+        (Op_cat B)
+        (Op_cat A)
+        (@Op_func A B F))
+      (@Op_func
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func A B F)))
+    Y
+    (@fapp1_con_int_transf A B F)
+  ≡ @fapp1_con_at_transf A B F Y;
+
+// The direct opposite identity-specialized action compares proof-time.
+assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢
+  @eq_refl
+    (Obj (@Transf_cat
+      (Op_cat A)
+      Cat_cat
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B F Y) A F)))
+    (@fapp1_con_at_transf A B F Y)
+  : τ (@=
+      (Obj (@Transf_cat
+        (Op_cat A)
+        Cat_cat
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B F Y) A F)))
+      (@fapp1_at_transf
+        (Op_cat A)
+        (Op_cat B)
+        (@Op_func A B F)
+        Y)
+      (@fapp1_con_at_transf A B F Y));
+
 // Identity specialization reuses the target-internalized functor action.
 assert [A B : Cat] (F : τ (Functor A B)) (Y : τ (Obj A)) ⊢
-  @tapp1_con_at_transf
-    A B F F
-    (@id (Functor_cat A B) F)
-    Y
-  ≡ @fapp1_con_at_transf A B F Y;
+  @eq_refl
+    (Obj (@Transf_cat
+      (Op_cat A)
+      Cat_cat
+      (@hom_con A Y A (@id_func A))
+      (@hom_con B (@fapp0 A B F Y) A F)))
+    (@tapp1_con_at_transf
+      A B F F
+      (@id (Functor_cat A B) F)
+      Y)
+  : τ (@=
+      (Obj (@Transf_cat
+        (Op_cat A)
+        Cat_cat
+        (@hom_con A Y A (@id_func A))
+        (@hom_con B (@fapp0 A B F Y) A F)))
+      (@tapp1_con_at_transf
+        A B F F
+        (@id (Functor_cat A B) F)
+        Y)
+      (@fapp1_con_at_transf A B F Y));
 
 assert [A B : Cat] (F : τ (Functor A B)) (X Y : τ (Obj A)) ⊢
   @tapp0_fapp0

@@ -1950,8 +1950,11 @@ action(epsilon,-,Y) : Hom_A(-,Y) => Hom_B(F[-],G[Y]).
 
 Their kernel owners are `tapp1_at_transf(epsilon,X)` and
 `tapp1_con_at_transf(epsilon,Y)`. Both project at `(X,Y)` to
-`tapp1_func(epsilon,X,Y)`; the second is the transparent opposite
-specialization, not a second square. The active whole ordinary notation is
+`tapp1_func(epsilon,X,Y)`; the second is a stable contravariant owner whose
+opposite presentation compares proof-time, not a second square. Its internal
+and identity-specialized companions are stable as well; whole projections
+and identity specialization compute in that ladder. The active whole
+ordinary notation is
 
 ```text
 post_laxity(epsilon,X,g) : G[g] o epsilon[-] ==> epsilon[g o -]

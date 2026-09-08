@@ -12188,10 +12188,11 @@ rule @tapp0_fapp0
 // 7f. Target-internalized ordinary hom-action mirror
 /*
   The target-internalized mirror is not an independent naturality square.
-  It applies the existing ordinary internal action to the opposite transfor:
+  Its four stable owners retain the contravariant projection ladder;
+  proof-time comparisons relate them to the ordinary action through Op:
 
     tapp1_con_int_fapp0_transf(epsilon)
-      = tapp1_int_fapp0_transf(Op_transf(epsilon)).
+      ≐ tapp1_int_fapp0_transf(Op_transf(epsilon)).
 
   Its native signature deliberately retains the opposite hom_int owner.  The
   active proof-time hom_int/hom_con_int comparison supplies the readable view
@@ -12202,7 +12203,7 @@ rule @tapp0_fapp0
   returned transfor already retains the whole source-variable action needed
   by ordinary pre/right laxity extraction.
 */
-symbol tapp1_con_int_fapp0_transf
+injective symbol tapp1_con_int_fapp0_transf
   [A B : Cat]
   [F G : τ (Functor A B)]
   (epsilon : τ (Transf F G))
@@ -12223,15 +12224,22 @@ symbol tapp1_con_int_fapp0_transf
           (Op_cat A)
           (Op_cat B)
           (@Op_func A B G))))
-≔ @tapp1_int_fapp0_transf
-    (Op_cat A)
-    (Op_cat B)
-    (@Op_func A B G)
-    (@Op_func A B F)
-    (@Op_transf A B F G epsilon);
+;
+
+// Proof-time comparison with the ordinary internal action of Op(epsilon).
+unif_rule
+  @tapp1_int_fapp0_transf
+      _ _ _ _
+      $epsilon1
+  ≡ @tapp1_con_int_fapp0_transf
+      $A $B $F $G
+      $epsilon2
+  ↪ [
+    $epsilon1 ≡ (@Op_transf $A $B $F $G $epsilon2)
+  ];
 
 // Identity-specialized target-internalized action.
-symbol fapp1_con_int_transf
+injective symbol fapp1_con_int_transf
   [A B : Cat]
   (F : τ (Functor A B))
   : τ (Transf
@@ -12251,14 +12259,37 @@ symbol fapp1_con_int_transf
           (Op_cat A)
           (Op_cat B)
           (@Op_func A B F))))
-≔ @fapp1_int_transf
-    (Op_cat A)
-    (Op_cat B)
-    (@Op_func A B F);
+;
 
-// Fixed-target projection of the arbitrary mirror:
-//   Hom_A(-,Y) => Hom_B(F[-],G[Y]).
-symbol tapp1_con_at_transf
+// Identity-specialized internal mirror of the ordinary action of Op(F).
+unif_rule
+  @fapp1_int_transf
+      _ _
+      $F0
+  ≡ @fapp1_con_int_transf $A $B $F
+  ↪ [
+    $F0 ≡ (@Op_func $A $B $F)
+  ];
+
+// Identity specialization computes within the stable contravariant ladder.
+// The inferred identity category may already have reduced to Product_cat.
+// Keep it wildcarded: the typed con owner determines the intended identity.
+rule @tapp1_con_int_fapp0_transf
+      $A $B $F $F
+      (@id _ $F)
+  ↪ @fapp1_con_int_transf $A $B $F;
+
+/*
+  Stable fixed-target projection of the arbitrary mirror:
+
+    Hom_A(-,Y) => Hom_B(F[-],G[Y]).
+
+  The whole owner is projected computationally from
+  `tapp1_con_int_fapp0_transf` below.  Its direct
+  `tapp1_at_transf(Op_transf(epsilon))` presentation remains a proof-time
+  variance comparison rather than a second runtime normal form.
+*/
+injective symbol tapp1_con_at_transf
   [A B : Cat]
   [F G : τ (Functor A B)]
   (epsilon : τ (Transf F G))
@@ -12266,57 +12297,81 @@ symbol tapp1_con_at_transf
   : τ (Transf
       (@hom_con A Y A (@id_func A))
       (@hom_con B (@fapp0 A B G Y) A F))
-≔ @tapp0_fapp0
-    (Op_cat (Op_cat A))
-    (@Catd_cat (Op_cat A))
-    (@hom_int
-      (Op_cat A)
-      (Op_cat A)
-      (@id_func (Op_cat A)))
-    (@comp_cat_fapp0
-      (Op_cat (Op_cat A))
-      (Op_cat (Op_cat B))
-      (@Catd_cat (Op_cat A))
-      (@hom_int
-        (Op_cat B)
-        (Op_cat A)
-        (@Op_func A B F))
-      (@Op_func
-        (Op_cat A)
-        (Op_cat B)
-        (@Op_func A B G)))
-    Y
-    (@tapp1_con_int_fapp0_transf A B F G epsilon);
+;
 
-// Identity-specialized fixed-target projection.
-symbol fapp1_con_at_transf
+// Whole projection computes from the stable internal contravariant action.
+rule
+  @tapp0_fapp0
+      _ _ _ _
+      $Y
+      (@tapp1_con_int_fapp0_transf $A $B $F $G $epsilon)
+  ↪ @tapp1_con_at_transf $A $B $F $G $epsilon $Y;
+
+/*
+  Direct opposite fixed-source action compares proof-time with the same stable
+  owner.  The constraint on epsilon1 carries all source/target category and
+  functor equations; both comparison orientations are validated by typed
+  consumers.
+*/
+unif_rule
+  @tapp1_at_transf
+      _ _ _ _
+      $Y
+      $epsilon1
+  ≡ @tapp1_con_at_transf $A $B $F $G $epsilon2 $Y
+  ↪ [
+    $epsilon1 ≡ (@Op_transf $A $B $F $G $epsilon2)
+  ];
+
+// Fixed-target object projection recovers the ordinary off-diagonal action.
+rule @tapp0_fapp0
+      _ Cat_cat _ _
+      $X
+      (@tapp1_con_at_transf $A $B $F $G $epsilon $Y)
+  ↪ @tapp1_func $A $B $F $G $X $Y $epsilon;
+
+// Stable identity-specialized fixed-target projection.
+injective symbol fapp1_con_at_transf
   [A B : Cat]
   (F : τ (Functor A B))
   (Y : τ (Obj A))
   : τ (Transf
       (@hom_con A Y A (@id_func A))
       (@hom_con B (@fapp0 A B F Y) A F))
-≔ @tapp0_fapp0
-    (Op_cat (Op_cat A))
-    (@Catd_cat (Op_cat A))
-    (@hom_int
-      (Op_cat A)
-      (Op_cat A)
-      (@id_func (Op_cat A)))
-    (@comp_cat_fapp0
-      (Op_cat (Op_cat A))
-      (Op_cat (Op_cat B))
-      (@Catd_cat (Op_cat A))
-      (@hom_int
-        (Op_cat B)
-        (Op_cat A)
-        (@Op_func A B F))
-      (@Op_func
-        (Op_cat A)
-        (Op_cat B)
-        (@Op_func A B F)))
-    Y
-    (@fapp1_con_int_transf A B F);
+;
+
+// Whole identity-specialized projection computes from its stable int owner.
+rule @tapp0_fapp0
+      _ _ _ _
+      $Y
+      (@fapp1_con_int_transf $A $B $F)
+  ↪ @fapp1_con_at_transf $A $B $F $Y;
+
+// Direct opposite fixed-source functor action compares proof-time.
+unif_rule
+  @fapp1_at_transf
+      _ _
+      $F0
+      $Y
+  ≡ @fapp1_con_at_transf $A $B $F $Y
+  ↪ [
+    $F0 ≡ (@Op_func $A $B $F)
+  ];
+
+// Identity specialization computes between the stable fixed-target owners.
+// As above, do not require the unreduced Functor_cat identity category.
+rule @tapp1_con_at_transf
+      $A $B $F $F
+      (@id _ $F)
+      $Y
+  ↪ @fapp1_con_at_transf $A $B $F $Y;
+
+// Fixed-target identity-specialized component recovers ordinary fapp1.
+rule @tapp0_fapp0
+      _ Cat_cat _ _
+      $X
+      (@fapp1_con_at_transf $A $B $F $Y)
+  ↪ @fapp1_func $A $B $F $X $Y;
 
 /*
   Ordinary internal hom-action package.

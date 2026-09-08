@@ -98,7 +98,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-COMPLEX-4A` | local compatibility implemented; hybrid global triangle prototype has nine green observations | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
-| `HINT-VARIANCE-6` | inventory and two con-interface probes checked; stable dependent mirror not implemented | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
+| `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -692,3 +692,19 @@ applicable checks after a full-owner probe against the present kernel.
 Do not import the commit's gray-profile classifier changes, migrated
 strictness rules, generated health snapshot or unrelated prose. Record the
 selective provenance and this branch's own warning/regression evidence.
+
+The selective port is now active: four ordinary con heads retain their
+existing signatures, with six runtime projection/identity rules and four
+proof-time opposite comparisons. No gray-profile classifier, ambient
+strictness rule, parallel book artifact or foreign health snapshot is
+imported. The two identity-category slots are additionally wildcarded after
+a full-owner subject-reduction probe and a neutral-product control confirm
+a real false negative with the original reducible guards.
+
+The [variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
+records exact provenance, the 17 positive/two negative owner tests, current
+1,125/157 warning boundary and its six classified identity-normalization
+reports, unchanged strict LHS audit, and the pre-existing fully expanded
+product-identity limitation. The new ordinary mirror does not by itself
+solve the separate Op_catd action-link or dependent evaluation projection;
+both pending probes were rerun and retain their documented outcomes.

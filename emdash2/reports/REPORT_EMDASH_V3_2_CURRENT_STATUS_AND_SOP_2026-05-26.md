@@ -4902,11 +4902,11 @@ rigid-`Hom` provenance. Opposite/identity presentations, independently
 factored pre/post cuts, and one-inactive-endpoint degenerations are related by
 narrow two-rigid-head `unif_rule`s. They are not global runtime folds.
 
-Section 7f now uses that existing variance comparison to expose the ordinary
-target-internalized action. `tapp1_con_int_fapp0_transf(epsilon)` is a
-transparent application of `tapp1_int_fapp0_transf` to
-`Op_transf(epsilon)` in the native opposite presentation. Its fixed-target
-projection
+Section 7f retains stable ordinary target-internalized action owners.
+`tapp1_con_int_fapp0_transf(epsilon)` and its identity-specialized
+`fapp1_con_int_transf(F)` compare proof-time with the ordinary action of
+`Op_transf(epsilon)` and `Op_func(F)`. Their fixed-target projections are
+also stable. In particular,
 
 ```text
 tapp1_con_at_transf(epsilon,Y)
@@ -4914,11 +4914,21 @@ tapp1_con_at_transf(epsilon,Y)
 ```
 
 computes at `X` to `tapp1_func(epsilon,X,Y)`. The identity-specialized owners
-are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`. Applying the
+are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`. Whole projection
+and identity specialization compute within this four-owner ladder. The
+opposite comparisons are four constraint-style unifiers, not runtime
+orientation of one variance into the other. Applying the
 active whole displayed laxity extractor to this fixed-target transfor yields
 the pre/right witness through `fdapp1_int_cell`; no independent ordinary
-naturality square or new runtime rule is installed. A functor varying higher
-arrows between `epsilon`s remains consumer-gated.
+naturality square is postulated. A functor varying higher arrows between
+`epsilon`s remains consumer-gated.
+
+The source-only owner change is selectively ported from `20c6dd2e`, without
+its gray-profile classifier changes or the parallel strictness migration.
+The new reviewer `examples/contravariant_action_owners.lp` checks all four
+proof-time bridges, runtime observations/identities, retained next action and
+noncollapse. The dependent `homd_con_*` / `fdapp1_con_*` / `tdapp1_con_*`
+inventory and current homology consumer remain in the living variance audit.
 
 Section 18zz now packages both ordinary variance directions without adding a
 second coherence calculus:

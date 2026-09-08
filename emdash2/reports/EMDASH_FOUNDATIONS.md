@@ -6029,13 +6029,22 @@ tapp1_con_at_transf(epsilon,Y)
   : Hom_A(-,Y) => Hom_B(F[-],G[Y]).
 ```
 
-The second owner is transparently the first internal action applied to
-`Op_transf(epsilon)`, in its native opposite presentation. Its component at
-`X` computes to the same `tapp1_func(epsilon,X,Y)` off-diagonal hom functor.
+The arbitrary and identity-specialized internal and fixed-target
+contravariant owners are now stable, matching the covariant ladder. Their
+direct `Op_transf(epsilon)` / `Op_func(F)` presentations compare proof-time;
+whole projection, component action and identity specialization compute within
+the stable ladder. Its component at `X` computes to the same
+`tapp1_func(epsilon,X,Y)` off-diagonal hom functor.
 Consequently applying `functord_laxity_transf` over an arrow `h : W -> X`
 extracts the pre/right witness from the existing `fdapp1_int_cell` ladder;
 no independent naturality square is declared. The identity specializations
 are `fapp1_con_int_transf(F)` and `fapp1_con_at_transf(F,Y)`.
+
+This stable-owner refinement is selectively reused from the parallel
+contravariant-action development; it does not import that branch's
+strictness/profile migration. It changes where computation retains the
+variance discriminator, not the source of the naturality data. The separate
+dependent contravariant ladder remains under review in the homology pilot.
 
 The ordinary public surfaces now retain that whole provenance explicitly:
 

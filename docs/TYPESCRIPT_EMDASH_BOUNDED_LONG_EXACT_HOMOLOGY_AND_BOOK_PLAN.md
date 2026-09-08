@@ -28,6 +28,10 @@ evaluation projection. The user's con-owner/laxity-ladder review is tracked
 by the [foundational variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md).
 Its new interfaces and rewrite attempts remain probes, not active kernel
 changes or a qualified whole complex/homology implementation.
+The subsequent selective ordinary con-owner port from `20c6dd2e` is active,
+with its own current-branch warning/SOP review. It does not import the
+parallel strictness migration or complete the dependent mirror; details and
+remaining consumers are tracked in that variance audit.
 
 Baseline: `054b43bd777d260f5da8b1242294ce0335780d0d`
 

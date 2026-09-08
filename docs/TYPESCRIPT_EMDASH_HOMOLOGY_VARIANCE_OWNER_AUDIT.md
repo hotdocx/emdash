@@ -2,11 +2,11 @@
 
 Date: 2026-09-08
 
-Status: reviewed inventory; dependent contravariant implementation remains experimental
+Status: reviewed inventory and selective ordinary-owner port; dependent mirror remains experimental
 
 Parent: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 
-Implementation baseline: `febf287d`; planning checkpoint: `b3144f40`.
+Compatibility baseline: `febf287d`; inventory checkpoint: `dee0b454`.
 
 ## Purpose And Scope
 
@@ -32,7 +32,7 @@ be a useful whole interface without becoming a discriminating rewrite head.
 | ordinary post/precomposition | `hom_postcomp_*` / `hom_precomp_along_*`, including telescope, whole Hom action, transfor and capped projections | Both polarities exist. Do not infer a gap from the different naming conventions. |
 | varying represented source/target | `hom_int_precomp_*` / `hom_con_int_postcomp_*` | Both are implemented; these are the relevant internal endpoint owners. |
 | composition in Cat | `comp_cat_cov_*` / `comp_cat_con_*` | Both delegate to the preceding generic owners and expose their transfor projections. |
-| ordinary internal functor/transfor action | `fapp1_int_transf`, `tapp1_int_*`; defined `fapp1_con_int_transf`, `tapp1_con_int_fapp0_transf`, `fapp1_con_at_transf`, `tapp1_con_at_transf` | The target-internalized mirror already exists through ordinary Op. It is not a missing independent theory. |
+| ordinary internal functor/transfor action | `fapp1_int_transf`, `tapp1_int_*`; now stable `fapp1_con_int_transf`, `tapp1_con_int_fapp0_transf`, `fapp1_con_at_transf`, `tapp1_con_at_transf` | The target-internalized mirror existed as Op-derived aliases. The selective port below stabilizes its four heads, retaining Op as proof-time comparison; no independent square theory is introduced. |
 | higher variation of the ordinary mirrored transfor | no named `tapp1_con_int_func_transf` or `tapp1_con_int_fapp1_func_transf` | Explicitly consumer-gated in the source header. The returned mirror transfor retains its source-variable action; a whole functor in epsilon is a distinct further interface. |
 | dependent endpoint Hom and its internal package | `homd_`, `homd_int`, `homd_src_func`, `homd_src_sec`, `homd_tgt_func` | No named dependent `homd_con_` / `homd_con_int` ladder in active source. A native reversed-Hom endpoint-family probe now passes; the full target family and internalization must still be designed. |
 | displayed functor internal action | `fdapp1_int_transfd`, section/target/presheaf/whole-Hom/capped/cell projections | No active `fdapp1_con_int_*` owners. The current concrete consumer reaches the existing ladder at `Op_funcd(FF)`. A fixed-base-arrow native-typed alias is checked, but it has no new runtime discriminator. |
@@ -121,8 +121,8 @@ fdapp1_con_int_hom_func(FF,p,u,v) :
 `hint_fdapp1_con_interface.lp` defines that functor transparently as the
 existing `fdapp1_int_hom_func` applied to `Op_funcd(FF)`, with the opposite
 families. A point alias applies the whole functor. Both declarations pass
-(`hint_fdapp1_con_interface-20260908-113637.log`). No new stable symbol,
-rewrite, unifier or equality assumption has been installed in active code.
+(`hint_fdapp1_con_interface-20260908-113637.log`). No new dependent stable
+symbol, rewrite, unifier or equality assumption is installed by this probe.
 This fixed-p test does not settle all variance in p or the varying endpoint
 families; that is why the full ladder must be reviewed before promotion.
 
@@ -197,15 +197,15 @@ but by itself it does not prove these separate typing obligations solved.
 
 ## Continuation Decision
 
-The user's subsequent historical pointer resolves an immediate reuse option:
+The user's subsequent historical pointer resolved an immediate reuse option:
 commit `20c6dd2e8a7d939bf7f2b25a6578e5c072c6ccb3` on the parallel branch
 stabilizes the four existing ordinary con aliases. Its nucleus-only change
 adds whole/fixed-target projection and identity computation plus proof-time
 Op comparisons. Its separate gray-profile/classifier changes are outside
-this branch's current scope. The next bounded tranche will selectively port
-and validate the nucleus owner change and its relevant reviewers before
-designing an independent dependent mirror. The inventory above records the
-pre-port baseline; it does not claim those stable heads are already active.
+this branch's current scope. The nucleus owner change and relevant reviewers
+are now selectively ported and validated, with the identity-slot refinement
+below. The inventory distinguishes this active ordinary mirror from the
+still-experimental dependent mirror.
 
 1. Design the dependent mirror as a coherent family of owners, starting with
    the native reversed-Hom family and its full varying-endpoint type.
@@ -224,3 +224,75 @@ This is a bounded architectural audit inside the original long-exact goal,
 not a replacement goal to complete every possible variance mirror. The
 original generic window exactness, bounded assembly, retained proof–CAS
 choices, formal-boundary audit and final book obligations remain open.
+
+## Selective Ordinary-Owner Port And SOP Refinement
+
+The active nucleus now includes only the four-head ordinary contravariant
+owner development from `20c6dd2e8a7d939bf7f2b25a6578e5c072c6ccb3`:
+six runtime projection/identity rules and four proof-time Op unifiers.
+The public signatures are unchanged. The four former definitions become
+stable heads so deeper internal-action projections can discriminate their
+variance without unfolding through Op. This is a selective source port, not
+a merge or a cherry-pick of the commit's unrelated profile migration.
+
+The original full-owner probe passes at this branch's 1,119/157 baseline
+with two additional Functor_cat/product-identity overlaps. The full set of
+imported and additional proof-time/whole-action checks also passes.
+
+SOP review then tests removing the reducible inferred identity-category
+guards from the two new identity-specialization rules. Subject reduction and
+the existing consumers pass. A neutral product-valued functor provides a
+real discriminator-erasure control: after its Functor_cat category reduces
+to Product_cat, the literal imported guard fails while `_` succeeds. Logs:
+
+- `con_action_identity_neutral_product_control-20260908-120339.log`:
+  expected failure of the verbatim guard;
+- `con_action_identity_neutral_product_relaxed-20260908-120337.log`:
+  both whole and fixed-target cases pass.
+
+The active port therefore uses `_` in those two inferred slots. The final
+core warning inventory is 1,125 critical-pair reports / 157 pattern reports,
+compared with 1,119/157 before the port. The six added reports are three
+identity-normalization families for each con head: Path identity, terminal
+identity and product identity. There are no removed old rule families or
+parser issues. This classified increase is accepted; it is not a confluence
+proof or a veto based on counts.
+
+The stronger case where a constructor-visible product identity has already
+become a pair of identity arrows still does not fold at the whole con head.
+Both the verbatim and inferred-slot candidates fail that test. A full-copy
+pre-port control also fails
+(`con_action_identity_product_pre_port-20260908-120542.log`), so this is a
+measured pre-existing expanded-identity limitation, not a claimed new
+computation or an unreported regression. Any future join belongs to the
+normalized-identity instance audit, not another inferred-category guard.
+
+Final core/central/reviewer logs are respectively
+`emdash3_2-20260908-120544.log` (warnings),
+`emdash3_2_checks-20260908-120543.log`, and
+`contravariant_action_owners-20260908-120546.log`. The reviewer has 17 positive
+and two negative checks, including all four proof-time bridges, identity
+specialization, the reduced-category cases, retained next hom action and
+noncollapse of unrelated transfors. The strict core LHS audit remains at
+62 annotated slots / 39 intentional clauses with zero unreviewed findings.
+
+The separate Op_catd action-link probe remains negative after this port
+(`hint_op_catd_action_owner_audit-20260908-115758.log`). The typed triangle
+edge-action comparison also still fails
+(`hint_triangle_diagram_edge_action_typed-20260908-115759.log`). Therefore
+the ordinary stable mirror is completed as a local prerequisite, not a
+claimed solution of the dependent homology-interface gap.
+
+Scoped regressions cover dependent-Hom laxity, Gray interchanger and its
+orientation, PathOut transformation lifting, cubical-arrow functor action,
+arrow/zero-arrow families, argument exchange and the recent chain-map
+cubical bridge. After the final identity-slot refinement, the closest three
+are rechecked at
+`dependent_hom_laxity-20260908-120815.log`,
+`gray_interchanger-20260908-120816.log`, and
+`chain_pair_cubical_maps-20260908-120817.log`, in addition to the final central
+diagnostic and dedicated owner reviewer above. All pass. The 42 focused
+metrics/TOC/registry/warning-parser tests and document checks pass; catalog
+generation and strict freshness are synchronized. No repository-wide
+TypeScript, source/reviewer aggregate, book render or full health refresh is
+run. The parent health exception and final book obligations remain explicit.

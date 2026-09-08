@@ -49,6 +49,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   Homs, functors, transfors, directed families, Sigma/Pi, internal dependent
   homs, represented actions, adjunctions, profunctors, and generic cut
   computation.
+  Its four ordinary `tapp1_con_int_fapp0_transf` / `fapp1_con_int_transf` /
+  `tapp1_con_at_transf` / `fapp1_con_at_transf` owners are stable, with
+  computing whole/component/identity projections and proof-time Op
+  comparisons. This selective owner refinement does not import the parallel
+  strictness migration or supply the separate dependent con ladder.
 - One-way standard-library extensions own equality-valued action and
   truncation, presheaves/sieves/sites/sheafification, commutative algebra and
   geometry, directed/groupoidal HITs, groupoidification, Gray/cubical and
