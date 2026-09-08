@@ -105,6 +105,48 @@ transformation profiles; they are not a ready-made proof of a dimension-1
 lax-profile implementation. The goal remains full omega-dimensional action,
 with no truncation or collapse of arbitrary higher cells.
 
+## Semantic Clarification: Co₂ Versus CoAbove₂
+
+The user's CoAbove₂ means reversing every dimension from 2 upwards, while
+leaving functors (universe 1-cells) forward. It is exactly the prototype's
+CoAll, not the total dual of the universe. Distinguish these paired operations:
+
+```text
+dimension-1 transpose of C  ↔ Co₂ source of the strict category universe
+total dual of C            ↔ CoAbove₂/CoAll source of the category universe.
+```
+
+They cannot be interchanged while preserving the same action on C. A
+modification is a universe 3-cell whose components are fibre 2-cells. The
+dimension-1 transpose does not reverse those components, whereas CoAbove₂
+would reverse that universe 3-cell. Total duality reverses both, consistently.
+At the ordinary 2-categorical boundary the distinction is invisible.
+
+For the general dependent/lax layer the primary-source review gives a
+stronger reason to prioritize the total-dual pair. Ara–Guetta,
+[sections 2.23–2.27](https://arxiv.org/pdf/2503.08832v3#page=25), prove that total
+duality is monoidal for the Gray tensor and preserves the corresponding
+oplax (respectively lax) internal-Hom convention. Its hom-wise action shifts
+the reversal to universe dimensions 2,3,... and gives a coherent enriched
+duality. Their dimension-1 transpose is not among the nontrivial monoidal or
+anti-monoidal Gray dualities. Thus the strict-cartesian Co₂ prototype must
+not be promoted as a blanket solution for arbitrary lax/oplax Hom universes.
+
+Use total duality/CoAbove₂ for the general totalization and negative-section
+repair direction, retaining ordinary dimension-1 transpose explicitly where
+ordinary Hom variance requires it. This does not silently redefine the old
+Op_cat, choose a new default strictness profile, or import the parallel
+migration. Any eventual general internal name must state which category-level
+duality and which transformation/enrichment profile it denotes. Typed
+projection probes are not a substitute for this semantic compatibility.
+
+The current Sigma full-copy experiment has advanced through the changed Hom
+and higher first projection. Its added CoAll-family operation and map-action
+rules still need declaration-order placement: the last run stopped because
+tapp1_func was referenced before its declaration
+(`hint_sigma_migrating_core-20260908-162751.log`). That scoping error is not
+a semantic counterexample or a reason to reject the total-dual construction.
+
 ## Propagation Is Part Of The Repair
 
 An arbitrary directed family `E : K → Cat` cannot simply retain its base and
