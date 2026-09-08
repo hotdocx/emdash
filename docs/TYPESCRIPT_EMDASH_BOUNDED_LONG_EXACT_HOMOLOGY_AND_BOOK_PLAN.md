@@ -700,6 +700,7 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-PROVIDER-11E` | complete; checkpoint `9dc9b316` | 11D and native selected weak-kernel factor algorithms | actual selected-provider handles and explicitly trusted all-test semantics, then literal formal choices at the retained native ranks/matrices |
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
 | `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
+| `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; focused and live checks green | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -2139,6 +2140,55 @@ needs the lower neighboring chain law and inclusion monicity; source
 descent needs the upper neighboring chain law and projection epicity. The
 two-row comparison alone does not supply those neighbors. These are scoped
 next proofs, not completed generic-window claims.
+
+### Typed raw witness inventory (row 11H)
+
+The explicit-spines owner now adds a transparent literal-presentation alias
+for `CommRingPresentationMorphismAgreement` and an introduction that delegates
+to its original constructor. The type is indexed by the original ranks,
+relation matrices and compared generator matrices. Its equation remains
+Q H = F − G; projecting the constructed value returns the supplied H.
+No primitive, rewrite, unifier or equality axiom is added.
+
+`algebra_formal_freyd_raw_witnesses.ts` prepares source-presentation
+coefficients before the proof environment is fixed, since those coefficients
+need not occur in an agreement equation. Its read-only constructor then
+validates the original whole replay/adoption, current equation inventory,
+reserved signature types and endpoint snapshots. It constructs every
+labelled morphism or agreement through the original explicit introductions
+and existing adopted laws. Identical term/type pairs share a representation;
+all labels and native selected values are retained. This step adds zero
+assumptions and performs zero CAS replays or kernel selections.
+
+The two-degree consumer covers all 422 retained labels. Its six tests pass
+with live Lambdapi enabled and no skips, including all distinct raw terms
+together with the spine and twelve homology/exactness terms in one target.
+The complete focused TS suite took 132 seconds; its single Lambdapi target
+took 23.3 seconds, within the uniform 90-second ceiling. The existing
+no-reselection spies also cover this constructor. Changed shape snapshots
+are rejected. The source reviewer has two positive/one negative assertions
+and passes afresh in
+`commutative_ring_freyd_raw_witnesses-20260908-011937.log`.
+
+The owner-position probe and warning-enabled reviewer are retained as
+`formal_freyd_raw_witness_reviewer-20260908-004251.log` and
+`commutative_ring_freyd_raw_witnesses-20260908-004717.log`. Complete strict
+warning inventories by category, term head, rule family and location match
+the actual-homology baseline at 1,223 critical pairs/169 pattern reports.
+Both strict rule audits report zero clauses. Root typecheck, changed-file
+lint, workspace validation, catalog/TOC, 16 metrics unit tests and document
+hygiene pass. The source owner is already registered, and the new reviewer
+uses ordinary example discovery. The unrelated full-health exception remains
+in force; no repository aggregate was run.
+
+This closes the raw-value construction, not every possible whole formal
+package. Degreewise mono/epi/short-exact and snake labels now have typed
+raw coefficient witnesses and morphisms. They are not being renamed into
+the older W-indexed row or snake records: that would additionally require
+aligning the universal choices of those records with the selected native
+choices. Actual LES-interior homology/exactness already has that alignment
+through 11E–11G. The precise contract inventory is recorded in the owner
+audit; generic window and bounded exactness remain required work.
 
 ### Constant-field differential (row 13)
 

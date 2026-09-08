@@ -933,8 +933,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   two transparent usability definitions over the original constructors;
   ordinary Lambdapi projections recover the original data. The TypeScript
   mirror is signature-only, not a full transfer of their source computation.
-  This raw formal sequence does not yet include formal exactness witnesses
-  or a concrete weak-kernel capability.
+  The same owner also supplies a transparent literal-presentation agreement
+  alias and introduction. A read-only whole-inventory consumer uses them and
+  the original morphism introduction to construct every labelled raw value
+  from already adopted equations. It adds no assumptions or CAS replay;
+  identical term/type pairs may share representation without losing labels.
+  The two-degree live consumer checks all distinct values from 422 labels
+  together with the formal spine and its interior homology/exactness terms.
+  Raw row/snake witnesses are not silently identified with old W-indexed
+  whole records whose universal choices have not been aligned.
+  The raw-spine constructor alone supplies neither formal exactness nor a
+  concrete weak-kernel capability; the selected-provider consumers below
+  construct the additional interior evidence.
 - `emdash3_2_commutative_algebra_freyd_explicit_epimorphisms.lp` and the
   formal epimorphism signature/adapter modules now construct the existing
   `CommRingFreydEpimorphismWitness` for an actual native homology boundary.

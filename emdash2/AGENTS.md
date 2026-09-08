@@ -199,8 +199,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   no rule or unifier.
   `emdash3_2_commutative_algebra_freyd_explicit_spines.lp` exposes transparent
   explicit-matrix introductions returning the original presentation-morphism
-  and chain-pair owners. These are proof-CAS usability definitions, not new
-  primitive structures, equality axioms, or computation rules.
+  and chain-pair owners. Its literal agreement alias/introduction similarly
+  retains the original raw coefficient witness; the whole replay consumer
+  constructs all labelled raw values without new adoption. These are
+  proof-CAS usability definitions, not new primitive structures, equality
+  axioms, or computation rules.
   The explicit-epimorphism extension constructs the existing Freyd witness
   from Q U + F V = id, retaining the vertical coefficient block. It proves
   boundary epicity, not cycle universality or a closed weak-kernel provider.

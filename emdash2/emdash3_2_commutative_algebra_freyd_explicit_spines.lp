@@ -63,3 +63,27 @@ symbol comm_ring_freyd_chain_pair_from_matrices
     (@comm_ring_presentation_intro R p0 r0 P0)
     (@comm_ring_matrix_comp R p0 p1 p2 G F)
     (@comm_ring_matrix_zero R p0 p2) H law;
+
+// Transparent alias for the original raw agreement at literal presentation data.
+symbol CommRingPresentationAgreementAtMatrices
+  (R : τ CommRing) (p pr q qr : τ Nat_grpd)
+  (P : τ (@CommRingMatrix R p pr)) (Q : τ (@CommRingMatrix R q qr))
+  (F G : τ (@CommRingMatrix R q p))
+  : Grpd
+≔ @CommRingPresentationMorphismAgreement R
+    (@comm_ring_presentation_intro R p pr P)
+    (@comm_ring_presentation_intro R q qr Q) F G;
+
+// R_Q H = F - G constructs the original coefficient witness and its law.
+symbol comm_ring_presentation_agreement_from_matrices
+  (R : τ CommRing) (p pr q qr : τ Nat_grpd)
+  (P : τ (@CommRingMatrix R p pr)) (Q : τ (@CommRingMatrix R q qr))
+  (F G : τ (@CommRingMatrix R q p))
+  (H : τ (@CommRingMatrix R qr p))
+  (law : τ (@= (@CommRingMatrix R q p)
+    (@comm_ring_matrix_comp R q qr p Q H)
+    (@comm_ring_matrix_sub R q p F G)))
+  : τ (@CommRingPresentationAgreementAtMatrices R p pr q qr P Q F G)
+≔ @comm_ring_presentation_morphism_agreement_intro R
+    (@comm_ring_presentation_intro R p pr P)
+    (@comm_ring_presentation_intro R q qr Q) F G H law;

@@ -1234,3 +1234,39 @@ consumer checks all 13 resulting spine/homology/exactness terms together.
 This closes the prior interior-universality/epicity alignment gap for the
 selected native result. It does not prove generic window exactness or close
 the broader formal-boundary audit automatically.
+
+## Typed raw witnesses and formal output coverage (row 11H)
+
+The literal-data agreement alias and introduction in the existing
+explicit-spines owner return the original raw agreement and preserve its
+coefficient matrix. The read-only TypeScript consumer constructs values
+from the retained adopted laws, not new assumptions. Source coefficients
+are prepared before environment creation; current replay, endpoint and
+signature checks precede construction. Identical typed terms may be shared,
+but every original label and selected native witness remains visible.
+
+| Required boundary output | Constructed evidence | Remaining distinction |
+|---|---|---|
+| Degreewise short-exact raw witnesses | `sequence/row/…` morphisms, chain-zero, kernel-zero, cokernel-zero and exactness agreement values | Raw data, not a claim that the selected rows are already whole values of the older W-indexed predicate |
+| Selected raw snake windows | `snake/…` and `snake-exact/…` maps, factors, zero and exactness agreements | Preserves each native window; does not infer global normality or quotient decoding |
+| Connecting raw morphisms | `connecting/…/map` and its reconstruction/comparison values | Same selected homology endpoints and generator/relation matrices |
+| Boundary-zero and cycle-factor agreements | `homology/…`, `induced/…`, `connecting/…` and exactness-labelled raw values | Each law addresses its stated matrices; no silent replacement by a semantic-composition law |
+| LES adjacent-zero agreements | All `long-exact/zero/…` values, plus the semantic chain agreements used by 11A | The latter construct the actual bounded formal spine |
+| Exactness at each displayed interior | 11G constructs the actual selected homology and exactness term at every retained pair | Relative to explicit selected-provider semantics and adopted equations, not a generic LES theorem |
+
+The focused two-degree consumer constructs every one of the 422 labelled
+raw entries, adds zero assumptions/replays, and retains the original whole
+result. All distinct raw terms are checked in one live Lambdapi target
+together with the existing spine and twelve homology/exactness terms. The
+six-test suite passes without skips. A wrong endpoint snapshot is rejected;
+the existing spies confirm no homology/kernel/weak-pullback reselection.
+The literal agreement reviewer has two positive/one negative assertions.
+No rule is added; scoped warning inventories remain 1,223/169.
+
+The open formal-packaging question is now precise. The old whole row/snake
+types select kernels through W, whereas this consumer retains actual native
+per-arrow choices. Packaging those raw values as the old whole types would
+require a reviewed choice-parametric shared core, as was done for homology,
+or explicit comparison isomorphisms. It is not necessary merely to obtain
+the requested raw witnesses, and no such package is claimed here. The
+generic window theorem and finite generic assembly are still unfinished.

@@ -21,7 +21,9 @@ import * as weakPullback from '../src/v3_2/algebra_polynomial_weak_pullback';
 import { polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
 import { algebraFormalFreydLongExactDelegationBundle, trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_freyd_long_exact';
-import { createFormalFreydActualHomologyProofEnvironment, FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
+import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
+import { createFormalFreydRawWitnessProofEnvironment, prepareAlgebraFormalFreydRawWitnesses,
+    constructAlgebraFormalFreydRawWitnesses, FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_raw_witnesses';
 import { FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_spine_signatures';
 import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
@@ -51,8 +53,9 @@ const construct = async () => {
     });
     const bundle = algebraFormalFreydLongExactDelegationBundle({ reifier, selected });
     const prepared = prepareAlgebraFormalFreydLongExactHomology(bundle);
+    const rawPreparation = prepareAlgebraFormalFreydRawWitnesses(bundle);
     const element = affineFormalRingElementType(R);
-    const environment = createFormalFreydActualHomologyProofEnvironment([
+    const environment = createFormalFreydRawWitnessProofEnvironment([
         { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: element },
         ...[...coefficients.values()].map(term => ({ name: term.name, type: element }))
     ]);
@@ -75,8 +78,9 @@ const construct = async () => {
         mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
     try {
         const result = await trustAlgebraFormalFreydLongExactHomology(input);
+        const raw = constructAlgebraFormalFreydRawWitnesses({ prepared: rawPreparation, adopted, source: result.source });
         spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
-        return { bundle, prepared, initial, adopted, input, result, decisions };
+        return { bundle, prepared, rawPreparation, raw, initial, adopted, input, result, decisions };
     } finally { spies.forEach(spy => spy.mock.restore()); }
 };
 let resultPromise: ReturnType<typeof construct> | undefined;
@@ -110,6 +114,23 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             checker.check(checker.rootContext, entry.constructed.exactness, entry.constructed.exactnessType);
         });
         assert.equal(ALGEBRA_FORMAL_FREYD_LONG_EXACT_HOMOLOGY_PROFILE.claimsGenericLongExactTheorem, false);
+    });
+
+    it('constructs every labelled raw witness without further assumptions or replay', async () => {
+        const v = await consumer();
+        assert.equal(v.raw.native.result, v.result.native);
+        assert.equal(v.raw.assumptionsAdded, 0);
+        assert.equal(v.raw.replays, 0);
+        assert.equal(v.raw.source.entries.length, v.result.source.entries.length);
+        assert.equal(v.raw.entries.length, v.bundle.equations.entries.length);
+        assert.equal(v.raw.unique.reduce((sum, group) => sum + group.labels.length, 0), v.raw.entries.length);
+        for (const prefix of ['sequence/row/', 'snake/', 'snake-exact/', 'connecting/', 'long-exact/']) {
+            assert.ok(v.raw.entries.some(entry => entry.id.startsWith(prefix)), prefix);
+        }
+        const checker = createCoreProofChecker(v.result.source.environment);
+        v.raw.unique.forEach(entry => checker.check(checker.rootContext, entry.term, entry.type));
+        assert.throws(() => constructAlgebraFormalFreydRawWitnesses({ prepared: { ...v.rawPreparation, shapeData: 'stale' },
+            adopted: v.adopted, source: v.result.source }), /changed/u);
     });
 
     it('rejects forged preparations, missing whole adoption and a foreign profile before trust', async () => {
@@ -149,16 +170,17 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
         assert.equal(v.decisions.length, before);
     });
 
-    it('checks the formal spine and all twelve constructed homology/exactness terms together', {
+    it('checks the formal spine, twelve homology/exactness terms and all distinct raw witnesses together', {
         skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_HOMOLOGY !== '1'
     }, async () => {
-        const { result } = await consumer();
+        const { result, raw } = await consumer();
         let environment = result.source.environment;
         const terms: [string, KernelExpression, KernelExpression][] = [['whole_actual_spine', result.spine.spine.term, result.spine.spine.type]];
         result.interiors.forEach(entry => {
             terms.push(['whole_actual_homology_' + entry.position, entry.constructed.term, entry.constructed.type]);
             terms.push(['whole_actual_exactness_' + entry.position, entry.constructed.exactness, entry.constructed.exactnessType]);
         });
+        raw.unique.forEach((entry, index) => terms.push(['whole_raw_witness_' + index, entry.term, entry.type]));
         const assertions = terms.map(([name, term, type], index) => {
             environment = environment.extend({ name, type, body: term, transparency: 'transparent', mode: binderMode('explicit', 'functorial'), provenance: p });
             return { label: name, term: kernelFree(name, p), type, span: sourceSpan('generated/whole-actual-homology.ts', index + 1, 1) };
@@ -167,7 +189,8 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
             ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
             ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
-            ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS
+            ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS
         }, assertions });
         const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;',
             'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;') },
