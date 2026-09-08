@@ -1045,9 +1045,16 @@ belongs to the owning implementation plan rather than to standing guidance.
   The consumer-compatible comparison classifier is retained after the
   faster isolated producer-only variant failed its covered-factor consumer.
   `check_snake_row_source_boundary.sh` stages the exact dependencies with a
-  separate 90-second bound per source/reviewer. The generic descent helpers
-  are only probed; the four-row connecting operation and window exactness
-  are not yet promoted results.
+  separate 90-second bound per source/reviewer.
+  `emdash3_2_cokernel_monic_factor_descent.lp` transfers that zero through
+  the target monic factor and descends through an already supplied cokernel.
+  The homology-connecting factor/observation modules apply it to four actual
+  rows and both supplied homologies. The public connecting arrow and its
+  reconstruction retain the original source quotient, target homology and
+  shared middle snake. `check_homology_connecting.sh` qualifies their exact
+  dependency join. Generic window exactness and bounded assembly remain
+  unfinished; a whole internal category of complexes/homology functor has
+  not been added by this arrow-level result.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

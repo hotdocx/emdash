@@ -2,7 +2,7 @@
 
 Date: 2026-09-07
 
-Status: reference inventory; HRI-11 to HRI-17 substantively reviewed, earlier items retain their stated review limits
+Status: reference inventory; HRI-11 to HRI-17 substantively reviewed; selected HRI-01/02/03 and HRI-18 material reviewed on 2026-09-08
 
 ## Purpose And Scope
 
@@ -11,8 +11,8 @@ baseline for bounded long exact homology. Keep them available for a later
 literature-informed redesign of the logical, computational, and internal
 formulation. Bibliographic metadata and the three supplied local PDF/text
 pairs were checked on the date above; detailed mathematical assessment,
-section-by-section reading, and reproduction of external formalizations are
-deferred for HRI-01 to HRI-10. Proposed relevance there is a research
+section-by-section reading, and reproduction of external formalizations were
+initially deferred for HRI-01 to HRI-10. Proposed relevance there is a research
 question, not an assertion that an emdash construction follows from a cited
 theorem.
 
@@ -27,6 +27,14 @@ The active implementation remains governed by
 [the bounded long-exact plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md).
 This inventory does not begin spectra, spectral sequences, unbounded
 complexes, derived categories, or an orthogonal strictness/cubical migration.
+
+The subsequent [homology internalization review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
+records selected reading of HRI-01's introduction/matrix construction/coherence
+statement, HRI-02's fiber-sequence, indexing and truncation strategy, and
+HRI-03's actual module-complex/exact-couple/cohomology source. It also records
+selected sections of the newly supplied Cisinski et al. draft (HRI-18).
+These are targeted readings, not full reviews of those books or successful
+builds of the historical Lean code.
 
 ## Coherence, Biproducts, And The Abelian Reference Layer
 
@@ -83,11 +91,15 @@ Shallow local checkout, acquired 2026-09-07:
 - verified entry points: `README.md`, `algebra/exact_couple.hlean`, and
   `cohomology/serre.hlean`
 
-Only metadata, the README, and file locations were inspected. No historical
+Initially only metadata, the README, and file locations were inspected. No historical
 toolchain was installed or executed and no build success is claimed. First
 locate the definitions and assumptions relevant to an actual redesign
 question before attempting reproduction. The checkout is external reference
 material, not vendored emdash source or an active runtime dependency.
+
+On 2026-09-08 the user also identified `/home/user1/cmu-phil-spectral`.
+It is clean at the same revision. The internalization review records the
+additional inspected source sections and preserves the no-build boundary.
 
 ### HRI-04 — Ulrik Buchholtz, Floris van Doorn, and Egbert Rijke
 
@@ -280,6 +292,29 @@ Reviewed lead: homogenization plus saturation computes elimination using
 syzygies and membership without requiring block orders. Keep correctness,
 termination hypotheses and performance claims separate; the reported
 straightforward implementation was not faster than direct block elimination.
+
+### HRI-18 — Cisinski, Cnossen, Nguyen And Walde
+
+*Synthetic Category Theory*, book project, supplied draft dated September 7,
+2026. The [author's publication page](https://cisinski.app.uni-regensburg.de/publikationen.html)
+links the evolving project; use the local dated copy for the reviewed section
+numbers rather than assuming every future online revision has the same text.
+
+Local PDF/text pair:
+`/home/user1/algebraic-geometry/cisinski-Book-project-Synthetic-Category-Theory-2026-sep-7.pdf`
+and the corresponding `.txt` file.
+
+Selected reading: introduction/contents; §5.9's functoriality of universals
+and pointwise adjunction criterion; Corollaries 11.9.35–37 on complete Segal
+animae/realization; Definition 15.1.1 and Definition 15.3.1, Lemma 15.3.2,
+Theorem 15.3.4. The rest is not claimed as read.
+
+The immediate design lead is assembling universal choices into whole
+adjoint sections of genuine fibrations. The completion/realization boundary
+also matters for `make_cat`-style constructors from ordinary data. The
+stable-category chapters are longer-term guidance for fiber/cofiber methods,
+not an implemented comparison with present module homology or authority to
+import new stable/spectral foundations into the active goal.
 
 ## User's Independent Directed-Spectrum Hypothesis
 

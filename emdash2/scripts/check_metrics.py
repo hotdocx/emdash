@@ -153,6 +153,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_hom_factor_composition.lp"),
     Path("emdash3_2_hom_factor_views.lp"),
     Path("emdash3_2_hom_factor_epic_descent.lp"),
+    Path("emdash3_2_cokernel_monic_factor_descent.lp"),
     Path("emdash3_2_iso_evidence_monic.lp"),
     Path("emdash3_2_kernel_maps.lp"),
     Path("emdash3_2_kernel_map_laws.lp"),
@@ -203,6 +204,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_snake_row_target_cokernel_projection.lp"),
     Path("emdash3_2_snake_row_target_homology_normal.lp"),
     Path("emdash3_2_snake_row_target_homology_factor.lp"),
+    Path("emdash3_2_homology_connecting_factor.lp"),
+    Path("emdash3_2_homology_connecting.lp"),
     Path("emdash3_2_kernel_short_exact_rows.lp"),
     Path("emdash3_2_selected_short_exact_rows.lp"),
     Path("emdash3_2_monic_image_comparison.lp"),
@@ -586,7 +589,14 @@ SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES = {
     Path("examples/snake_row_source_boundary_covered.lp"),
     Path("examples/snake_row_source_boundary_zero.lp"),
 }
+SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES = {
+    Path("emdash3_2_homology_connecting_factor.lp"),
+    Path("emdash3_2_homology_connecting.lp"),
+    Path("examples/homology_connecting_factor.lp"),
+    Path("examples/homology_connecting.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES, "./scripts/check_homology_connecting.sh"),
     (SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES, "./scripts/check_snake_row_source_boundary.sh"),
     (SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES, "./scripts/check_snake_row_target_homology.sh"),
     (SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES, "./scripts/check_snake_row_target_cycles.sh"),

@@ -1409,3 +1409,22 @@ only definitions/proofs. The unused probe-only second-map/quotient-factor
 repackagings are not promoted. The measured source/reviewer dependency join
 has its own fresh-object, individually bounded checker; full source-homology
 descent and window exactness remain separate required tasks.
+
+## Actual homology connecting arrow
+
+The source descent is now complete. A generic monic-factor lemma transfers
+the source-boundary zero through the already constructed target factor.
+The original source homology cokernel then returns a whole precomposition
+factor; its arrow is the public `short_exact_homology_connecting`, and its
+path reconstructs after the original source homology quotient. Both the
+source H_C and target H_A are supplied choices, not newly selected objects.
+The shared middle row map determines the same snake on both sides.
+
+The active three-module implementation and its three independent reviewers
+pass quiet/warning checks at the exact source boundary. The actual factor
+and observations check in seconds once their unchanged dependencies are
+compiled freshly. This is a homology-owned operation built using snake
+intermediates, not a second public snake datatype. Generic window exactness,
+bounded assembly and the proposed whole-functor internalization remain
+distinct work; no whole category of complexes or homology functor has been
+silently postulated by adding the arrow-level operation.

@@ -33,6 +33,7 @@ snake_rows_join_checked=0
 snake_target_cycles_join_checked=0
 snake_target_homology_join_checked=0
 snake_source_boundary_join_checked=0
+homology_connecting_join_checked=0
 
 is_abelian_snake_six_term_join() {
   case "$1" in
@@ -76,6 +77,13 @@ is_abelian_snake_six_term_join() {
 check_file() {
   local file="$1"
   case "$file" in
+    emdash3_2_homology_connecting_factor.lp|\
+    emdash3_2_homology_connecting.lp)
+      if [[ "$homology_connecting_join_checked" -eq 0 ]]; then
+        ./scripts/check_homology_connecting.sh
+        homology_connecting_join_checked=1
+      fi
+      return ;;
     emdash3_2_snake_row_source_second_comparison.lp|\
     emdash3_2_snake_row_source_boundary_covered.lp|\
     emdash3_2_snake_row_source_boundary_zero.lp)
@@ -301,6 +309,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_hom_factor_composition.lp)
   files+=(emdash3_2_hom_factor_views.lp)
   files+=(emdash3_2_hom_factor_epic_descent.lp)
+  files+=(emdash3_2_cokernel_monic_factor_descent.lp)
   files+=(emdash3_2_iso_evidence_monic.lp)
   files+=(emdash3_2_kernel_maps.lp)
   files+=(emdash3_2_kernel_map_laws.lp)
@@ -351,6 +360,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_snake_row_target_cokernel_projection.lp)
   files+=(emdash3_2_snake_row_target_homology_normal.lp)
   files+=(emdash3_2_snake_row_target_homology_factor.lp)
+  files+=(emdash3_2_homology_connecting_factor.lp)
+  files+=(emdash3_2_homology_connecting.lp)
   files+=(emdash3_2_kernel_short_exact_rows.lp)
   files+=(emdash3_2_selected_short_exact_rows.lp)
   files+=(emdash3_2_monic_image_comparison.lp)

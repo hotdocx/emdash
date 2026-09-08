@@ -676,21 +676,21 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | in progress; native window and generic inclusion/maps/row comparisons complete; full generic factor/descent/exactness remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | in progress; native window and generic inclusion/maps/comparisons/connecting complete; generic window exactness remains | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | complete through 7C1–7C2 | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
-| `LEH-WINDOW-GENERIC-EXACT-7D` | pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
+| `LEH-WINDOW-GENERIC-EXACT-7D` | in progress; connecting factor/descent complete, three window exactness proofs pending | rows 7B–7C and completed generic snake exactness | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
 | `LEH-TARGET-NORMAL-LIFT-7D2` | complete; checkpoint `3d62f060` | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |
-| `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | in progress; source annihilation complete, homology descent pending | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
+| `LEH-SOURCE-BOUNDARY-DESCENT-7D3` | complete through 7D3A/7D3B/7D3C | 7D2, supplied source homology, source-cycle comparison and upper neighboring chain law | prove source-boundary annihilation and descend the factor to the actual homology connecting map |
 | `LEH-SOURCE-COLUMN-7D3A` | complete; checkpoint `c000932c` | three upper rows, their maps and middle-column zero | derive the right/quotient column chain law and its whole projection map; retain the actual supplied source homology |
-| `LEH-SOURCE-ANNIHILATION-7D3B` | complete; active-source quiet/warning gates and independent reviewers green | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
+| `LEH-SOURCE-ANNIHILATION-7D3B` | complete; checkpoint `1a8da30a` | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
-| `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | in progress; generic helpers checked, actual four-row consumer drafted | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
+| `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
@@ -2297,7 +2297,8 @@ supplied cokernel descends that factor after a source-cycle map. The actual
 four-row, two-supplied-homology consumer is drafted in
 `tmp/probes/short_exact_homology_connecting_factor.lp` but not yet checked or
 promoted. It must reuse the shared middle snake and both original homologies;
-its success must not be inferred from the generic helper tests.
+its success must not be inferred from the generic helper tests. This was the
+pre-descent checkpoint; the completed actual application is recorded below.
 
 The final quiet gate
 `snake-row-source-boundary-quiet-20260908-055000.log` also succeeds at every
@@ -2322,6 +2323,71 @@ consolidation and book audits. This is a constructive reference proof layer
 using existing whole universal factors and explicit paths, not a claim of
 a whole internal complex category/homology functor or a Došen-style global
 normalization/decidability theorem for homology.
+
+### Actual homology connecting descent (row 7D3C)
+
+The four-row application now passes in the fresh, independently bounded
+warning chain `homology-connecting-descent-warnings-20260908-060029.log`.
+Its source and target branches are checked from the exact current source,
+then the two generic descent helpers and the actual application are checked
+against only those freshly produced objects. The application takes two
+seconds. The supplied source homology is on the quotient column of rows
+0/1/2; the supplied target homology is on the subobject column of rows
+1/2/3. Both branches use the same middle row map and snake construction.
+
+Monicity of the target homology inclusion transfers the already proved
+source-boundary zero to the target factor. The original source homology
+cokernel then supplies a whole precomposition factor, with descended arrow
+from H_C to H_A and reconstruction after the original source quotient.
+No normal test, source zero or connecting arrow is an additional input.
+The readable arrow/path observations and their independent reviewer then
+passed the same exact-source staged check. The following promotion record
+supersedes this initial probe boundary.
+
+The temporary exact-source tree is retained only for this bounded probe
+tranche so the new observations can be checked without repeating the two
+unchanged dependency branches. Active `.lp` files and `lambdapi.pkg` are
+byte-compared with the tree before reuse; changed consumers are copied and
+checked afresh. This tree must be removed before checkpointing, and no
+worktree object cache or opaque proof is introduced.
+
+After active-source and reviewer byte comparisons, the retained temporary
+tree was moved to recoverable system trash. The sources, ignored probe
+recipes and validation logs remain; no compiled worktree cache is retained.
+
+The three active modules are `emdash3_2_cokernel_monic_factor_descent.lp`,
+`emdash3_2_homology_connecting_factor.lp` and
+`emdash3_2_homology_connecting.lp`. They expose the generic monic-factor
+descent, the whole four-row factor, and the public homology connecting arrow
+with its reconstruction. The caller supplies the original four rows, three
+maps, two neighboring middle-column zero laws and the two actual homologies;
+snake intermediates are derived internally, not supplied as extra inputs.
+
+All promoted sources and three reviewers pass with warnings in the retained
+exact tree (`homology-descent-promoted-warnings-20260908.log`). The complete
+fresh quiet gate `homology-connecting-quiet-20260908-061435.log` then passes
+the full required dependency chain, both homology owners and both row-level
+reviewers. The factor/observations take three/two seconds, and those reviewers
+three/two seconds. The ordinary generic reviewer also passes a direct fresh
+quiet check. The three reviewers have six positive and three negative checks,
+including the original whole-factor projection and rejection of an unrelated
+factor/arrow. The strict warning inventory is unchanged at 1,217/169 across
+all categories, locations, heads and rule families; all six strict audits
+have zero clauses. The 25 dispatch tests, shell syntax, catalog/TOC and
+document hygiene pass. No new primitive, rule, unifier, object equality or
+opaque proof is introduced. The original homology selections remain intact.
+
+This completes 7D3C, not the generic window or bounded exactness theorem.
+The user's subsequent question asks whether whole-complex/homology
+internalization should precede the remaining component-level exactness
+proofs. The [research and sequencing review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
+recommends a bounded internalization pilot before 7D4, subject to user
+adoption. Following the user's clarification, prefer the existing primitive
+head/projection computation and proof-time usability style; a general
+`make_*` constructor layer is not a prerequisite. It does not claim that
+the pilot is implemented, require spectra,
+or shrink the full goal. Preserve this completed checkpoint while that
+architectural direction is reviewed.
 
 ### Selected provider boundary for the proof-CAS consumer
 

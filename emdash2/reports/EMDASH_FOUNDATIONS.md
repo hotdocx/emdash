@@ -4142,9 +4142,17 @@ checked comparison of existing universal constructions, not a newly chosen
 homology. The next comparison now proves g l = (s b) p_top, where g is
 the existing second snake map and l is the upper differential's original
 kernel lift. The known partial g = 0 then kills this composite after
-p_top, and epic cancellation proves partial(s b) = 0. Descending the
-target-homology factor through the original source homology cokernel remains
-a further construction; no source section is used in the annihilation proof.
+p_top, and epic cancellation proves partial(s b) = 0. No source section is
+used in the annihilation proof.
+
+Monicity of j now transfers this zero to t s b. The original cokernel of b,
+namely the supplied source homology, therefore descends t s to a connecting
+arrow H_C→H_A. Its reconstruction after the original quotient is retained
+in a whole Hom-precomposition factor. The public homology operation takes
+four rows, their maps, neighboring chain laws and both actual homologies;
+the shared snake remains a derived implementation intermediate. This
+constructs the connecting arrow, not yet all exactness statements in the
+homology window or a whole internal homology functor.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

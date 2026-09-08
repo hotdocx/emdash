@@ -355,8 +355,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   now identify the compared boundary after the top epic cover with a factor
   through the second snake map. The original inner zero law then proves its
   annihilation by the connecting arrow. The measured join is checked by
-  `scripts/check_snake_row_source_boundary.sh`; descent through the original
-  source homology cokernel and full window exactness remain downstream.
+  `scripts/check_snake_row_source_boundary.sh`.
+  The cokernel-monic-factor descent and homology-connecting modules now
+  descend through that original source homology cokernel. Their public arrow
+  goes between the two supplied homologies and retains reconstruction as a
+  whole Hom-precomposition factor. `scripts/check_homology_connecting.sh`
+  checks the exact source/target dependency join with individual bounds.
+  Generic window exactness and whole-complex/homology-functor packaging are
+  not supplied by this arrow-level construction.
   `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
   cokernel presentations, projections, and colifts parameterized by explicit
   zero-composite agreements. It does not decode arbitrary truncated equality
