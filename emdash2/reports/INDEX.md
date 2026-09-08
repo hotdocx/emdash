@@ -23,8 +23,10 @@ consumers are implemented. The current architectural slice is
 following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
 Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
 introduction are implemented. The latter uses scoped core cross computation;
-whole variation of arrow data and kernel/cokernel/complex/homology owners
-remain under construction.
+whole natural families now come from actual transformations via exchange,
+with exact whole observations and terminal/initial arrow embeddings.
+Kernel/cokernel/complex/homology owners remain under construction; no raw
+square-data mapping-category inverse is implicitly assumed.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

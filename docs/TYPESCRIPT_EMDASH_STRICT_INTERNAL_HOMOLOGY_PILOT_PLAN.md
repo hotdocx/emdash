@@ -90,8 +90,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | Row | Status | Required result |
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
-| `HINT-ARROW-2` | in progress; concrete introduction and ordinary whole/point cross beta implemented | whole variation of the supplied arrow/endpoints, with a strict structural consumer; not just a pointwise inverse to evaluation |
-| `HINT-UNIVERSAL-3` | pending | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
+| `HINT-UNIVERSAL-3` | next | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | pending | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 
@@ -224,3 +224,123 @@ whole. The next experiment must vary the supplied cross/arrow internally,
 then qualify zero-arrow embeddings and the actual universal interface.
 Neither the existing propositional join mapping comparisons nor these
 pointwise introductions alone establish a whole mapping-category inverse.
+
+## Naturally Varying Arrow Families: Construction And Qualification
+
+For an actual transformation eta:F⇒G with F,G:K→C, apply the new walking
+arrow introduction in the category `Functor_cat(K,C)`, then use argument
+exchange. This constructs a whole functor K→Functor_cat([1],C) whose two
+components are F and G and whose mixed generator action is eta[p]. The
+input is one existing transformation, not a collection of manual squares.
+This is the useful whole-family interface for universal constructions; it
+does not require first constructing a general inverse from raw arrow data.
+
+The first six component/mixed-action checks pass without new rules. The
+whole identity check then exposes a projection-order gap: `sym_func`'s
+fapp1 head reduces to `sym_tapp1_fapp0_transf` before generic identity matching.
+The candidate adds identity/composition joins only at that existing stable
+projection. Its eight checks pass, including composition on arbitrary base
+arrows. The composition rule needs the `Functor_cat(A,C)` ambient-category
+guard for subject reduction; all remaining inferred endpoint slots stay
+variable or wildcard. The owner-position and promotion evidence is recorded
+below.
+
+The first universal consumer is the existing terminal-arrow transfor
+id_C⇒const_t, giving the whole embedding X↦(X→t). The dual uses a supplied
+TerminalObject(Cᵒᵖ,t) via Op_transf. This does not silently derive a whole
+dual terminal structure from AdditiveCategory's currently objectwise initial
+Hom contractibility; the coherent provider boundary must remain explicit.
+
+Whole observations use exchange in the reverse direction: for D:K→(I→C),
+the i-component is `sym(D)[i]` and a shape arrow is `sym(D)[u]`. Double
+exchange then returns F, G and eta themselves for the introduced family,
+not just their object components. The successful whole-evaluation raw
+composition probe is retained as an alternative, but is not needed as an
+additional runtime owner when observations use this uniform exchange form.
+
+The initial-arrow consumer also exposes the missing capped instance of the
+already existing whole `tapp1_func(Op_transf(...))` rule. Its minimal direct
+projection join computes the mixed dual terminal action. A transparent
+initial component alias states its type as Hom_C(t,x), avoiding the measured
+opposite-endpoint inference false negative without an equality bridge,
+opaque operation or new primitive. Full owner-position qualification of
+double exchange and this opposite projection passes. Four preprojected
+exchange rungs also join the alternate normalization order: their results
+remain whole functors or original whole transformations. No pointwise
+extensionality assumption is used.
+
+The promoted owners are `diagram_family_at_func` and
+`diagram_family_transf` in `emdash3_2_diagram_evaluation.lp`,
+`transf_arrow_diagram_func` in `emdash3_2_arrow_diagram_families.lp`, and the
+four terminal/initial definitions in `emdash3_2_zero_arrow_diagrams.lp`.
+The whole observations compute as
+
+```text
+source(D_eta) → F,   target(D_eta) → G,   differential(D_eta) → eta.
+```
+
+Their full fapp1/tapp1 functors and the next Hom action recover those of the
+original F/eta. On parameter arrows, the diagram transformation has source
+F[p], target G[p] and mixed action eta[p]. This realizes internally natural
+arrow families without first defining a new category of raw square records.
+The zero embeddings then have whole source/target/differential observations
+id/const_t/terminal_arrow_transf and const_t/id/initial_arrow_transf.
+
+The core adds eight rules: the direct opposite tapp1 projection, exchanged
+action identity/composition joins, double exchange, and its four already-
+projected whole rungs. No new primitive or unifier is added. The generic
+identity rule retains the same base category and object in its identity
+argument; a merely wildcard-headed identity of an unrelated category is not
+the intended discriminator.
+
+Warning audit at the full owner gives 1,119/157 against 1,108/157. The eleven
+additional reports are two product-projection/opposite-action orders, four
+identity-normalization orders (Path, terminal, product and opposite), and
+five nested/double-exchange orders. Both ordinary opposite projection routes
+and both double-exchange whole/projection routes have typed positive checks.
+The specialized product/opposite and canonical-unit cases are recorded
+normal-form interactions, not evidence of subject-reduction failure or a
+global confluence claim. Do not present the generic identity test as an
+exhaustive audit of all already-reduced identity constructors; use the
+existing generic law views when a later consumer needs those comparisons,
+and add a narrow join at a measured consumer rather than broad identity eta.
+
+The native-C typed alias at the dual component and an analogous reviewer
+annotation avoid premature inferred comparison of opposite Hom wrappers.
+The kernel's Hom alias is marked injective as an inference aid; these
+annotations preserve the same reducible body and are not opaque seals or
+propositional bridges. General Hom-inference policy is not migrated here.
+
+The next row constructs or qualifies the whole kernel/cokernel universal
+interface over these actual embeddings. It must still distinguish existing
+objectwise contractible factors from a whole adjunction capability and retain
+the native-selected objects. The current tranche does not declare that
+adjunction, a complex category, a homology functor, or completed exactness.
+
+The three promoted reviewers have 39 positive and 4 negative checks. Their
+warning-enabled logs are `arrow_diagram_families-20260908-084626.log`,
+`diagram_exchange_computation-20260908-084631.log` and
+`zero_arrow_diagrams-20260908-084637.log`. The first two retain the exact
+core 1,119/157 inventory. The zero-arrow module imports terminal objects;
+its 1,126/159 inventory exactly equals the fresh terminal-object dependency
+check `terminal_objects-20260908-085118.log`, including locations, heads and
+families. No unclassified parser block is accepted.
+
+The central diagnostic passes (`emdash3_2_checks-20260908-084437.log`), as
+do the selected evaluation, walking-arrow, join-cross, dependent-hom-laxity
+and terminal reviewers. The seven strict audits pass; the core has 62
+annotated slots in 39 intentional clauses and zero unreviewed candidates.
+The 42 focused metrics/TOC/registry/warning tests, shell syntax, catalog/TOC,
+active references and report headers pass. The two new sources use ordinary
+bounded dispatch; no new cache or special checking runner is introduced.
+The existing full-health exception and the parent window-exactness,
+bounded-assembly, formal-audit and book obligations remain unchanged.
+
+The final exact-source quiet pass checks both new modules and all three
+reviewers independently: `emdash3_2_arrow_diagram_families-20260908-085346.log`,
+`emdash3_2_zero_arrow_diagrams-20260908-085350.log`,
+`arrow_diagram_families-20260908-085354.log`,
+`diagram_exchange_computation-20260908-085358.log` and
+`zero_arrow_diagrams-20260908-085404.log`. All finish within the uniform
+90-second per-target bound. No repository-wide aggregate or book render is
+run for this tranche.

@@ -2397,9 +2397,15 @@ transfor action with a retained next Hom functor. Concrete ordinary arrows
 now also introduce walking-arrow diagrams through constant represented
 cross sections and the existing join recursor. Whole/point cross beta and
 two corrected inferred target guards make their actual generator action
-compute. The whole varying-arrow interface and kernel/cokernel/complex/H
-owners remain to be constructed; the pilot records scoped core validation
-and its current warning boundary separately from earlier subtree counts.
+compute. Whole naturally varying arrows are now introduced from an actual
+transformation eta:F⇒G by performing this construction in Functor_cat(K,C)
+and exchanging the axes. Whole observations recover F, G and eta, including
+their retained higher actions. The existing terminal transfor and its
+explicit opposite dual give the whole zero-arrow embeddings. The
+kernel/cokernel/complex/H owners remain to be constructed; the pilot records
+scoped core validation and its current warning boundary separately from
+earlier subtree counts. No raw square-data category or homology reselection
+is introduced by this interface.
 
 ### Selected provider boundary for the proof-CAS consumer
 

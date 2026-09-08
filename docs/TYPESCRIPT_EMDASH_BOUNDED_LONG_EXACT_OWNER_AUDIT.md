@@ -17,7 +17,11 @@ new primitives or rules. The next constructor
 section and the original join recursor. Its required core changes are a
 represented constant-family fold, whole/point cross beta and removal of the
 reducible target guard from the two `Prof_func_hom` projections. Whole
-variation of arrow data and kernel/cokernel/H construction remain open.
+variation now uses an actual transformation eta:F⇒G as a walking arrow in
+Functor_cat(K,C), followed by exchange. The whole family observations recover
+F/G/eta, and the terminal/initial variants supply the zero-arrow embeddings.
+Raw square-data realization and the kernel/cokernel/H universal interface
+remain distinct further questions; only the latter is the immediate goal.
 
 ## Scope
 

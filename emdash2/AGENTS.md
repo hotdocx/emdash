@@ -64,6 +64,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   represented cross section and the original join recursor. Core whole/point
   cross beta computes its generator; a whole varying-arrow inverse remains
   a further interface, not an implicit consequence of those point formulas.
+  `emdash3_2_arrow_diagram_families.lp` supplies whole naturally varying
+  arrows from an actual transformation via introduction in Functor_cat and
+  exchange. Whole observations recover the original source/target functors
+  and transformation. `emdash3_2_zero_arrow_diagrams.lp` specializes this to
+  the terminal transfor and an explicitly supplied opposite-terminal
+  structure. These are not yet kernel/cokernel adjunction capabilities.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

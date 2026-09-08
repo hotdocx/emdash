@@ -1070,7 +1070,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   `Prof_func_hom` projections now infer their reducible target family, so
   that normalization does not erase their matching guard. No primitive
   cross datum or new equality bridge is introduced. Whole variation in the
-  supplied arrow and endpoints remains a further pilot substep.
+  supplied arrow and endpoints is now implemented for an actual natural
+  family eta:F⇒G by `emdash3_2_arrow_diagram_families.lp`: introduction in
+  Functor_cat(K,C) followed by exchange gives K→Arr(C). The whole family
+  component/differential observations recover F/G/eta and their higher action.
+  The core supplies double exchange with preprojected joins, exchanged-action
+  identity/composition joins, and the direct capped opposite action. The
+  zero-arrow-diagram module uses the original terminal transfor and an
+  explicitly supplied opposite-terminal structure for both whole embeddings.
+  No raw-square realization or kernel/cokernel adjunction is claimed yet.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

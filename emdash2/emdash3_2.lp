@@ -10113,6 +10113,11 @@ rule @tapp1_func
       (@Op_transf $A $B $F $G $eta)
   ↪ @tapp1_func $A $B $F $G $y $x $eta;
 
+// Direct capped projection joins the existing whole opposite action.
+rule @tapp1_fapp0 _ _ _ _ $x $y
+      (@Op_transf $A $B $F $G $eta) $p
+  ↪ @tapp1_fapp0 $A $B $F $G $y $x $eta $p;
+
 // Cat instance of product-composition arrow action. This is the generic
 // horizontal action owner for ordinary transfors; the older covariant and
 // contravariant Cat heads are compatibility surfaces for one-slot views.
@@ -17107,6 +17112,19 @@ rule fapp0 (@sym_fapp1_func $A $B $C $H $b $b') $q
 rule @fapp1_fapp0 _ _ (@sym_func $A $B $C $H) $b $b' $q
   ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b' $q;
 
+// Generic identity/composition can be projected before the ordinary
+// fapp1 head is matched; join at the stable exchanged-action projection.
+rule @sym_tapp1_fapp0_transf $A $B $C $H $b $b (@id $B $b)
+  ↪ @id (Functor_cat $A $C) (@sym_fapp0_func $A $B $C $H $b);
+
+// lhs-audit: keep 1 -- subject reduction cannot reconstruct an arbitrary
+// ambient category from its Hom objects; this pins the transfor category.
+rule @comp_fapp0 (Functor_cat $A $C) _ _ _
+      (@sym_tapp1_fapp0_transf $A $B $C $H $b' $b'' $q)
+      (@sym_tapp1_fapp0_transf _ _ _ $H $b $b' $p)
+  ↪ @sym_tapp1_fapp0_transf $A $B $C $H $b $b''
+      (@comp_fapp0 $B $b $b' $b'' $q $p);
+
 // Component at a: sym(H)[q][a] ↪ H[a][q].
 rule @tapp0_fapp0
       $A
@@ -17169,6 +17187,21 @@ rule @tapp0_fapp0
       (@fapp0 $A (Functor_cat $B $C) $K $a)
       $b
       (@tapp0_fapp0 $A (Functor_cat $B $C) $H $K $a $eta);
+
+// Double exchange and its preprojected whole-action rungs.
+rule @sym_func _ _ _ (@sym_func _ _ _ $H) ↪ $H;
+
+rule @sym_fapp0_func _ _ _ (@sym_func $A $B $C $H) $a
+  ↪ @fapp0 $A (Functor_cat $B $C) $H $a;
+
+rule @sym_fapp0_fapp1_func _ _ _ (@sym_func $A $B $C $H) $a $b $b'
+  ↪ @fapp1_func $B $C (@fapp0 $A (Functor_cat $B $C) $H $a) $b $b';
+
+rule @sym_fapp1_func _ _ _ (@sym_func $A $B $C $H) $a $a'
+  ↪ @fapp1_func $A (Functor_cat $B $C) $H $a $a';
+
+rule @sym_tapp1_fapp0_transf _ _ _ (@sym_func $A $B $C $H) $a $a' $p
+  ↪ @fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p;
 
 // Contraction/diagonal for ordinary functor categories.
 //

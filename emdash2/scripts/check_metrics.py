@@ -324,6 +324,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_walking_arrow.lp"),
     Path("emdash3_2_diagram_evaluation.lp"),
     Path("emdash3_2_walking_arrow_introduction.lp"),
+    Path("emdash3_2_arrow_diagram_families.lp"),
+    Path("emdash3_2_zero_arrow_diagrams.lp"),
     Path("emdash3_2_gray_right_closure.lp"),
     Path("emdash3_2_gray_walking_square.lp"),
     Path("emdash3_2_gray_interchanger.lp"),

@@ -4168,6 +4168,17 @@ data computationally. This is a concrete introduction, not yet a whole
 equivalence varying both endpoints and f. That interface and whole
 kernel/cokernel/homology remain the next architectural layers.
 
+For an already natural family eta:F⇒G, that whole variation now has a direct
+construction: regard eta as an arrow in Functor_cat(K,C), introduce its
+walking-arrow diagram there, and exchange the two variables. The resulting
+K→Arr(C) has map components F[p] and G[p], with mixed action eta[p]. Exchange
+back and observe a shape object/arrow to recover F, G and eta themselves,
+not merely their components; their whole higher actions remain available.
+Applying this to id_C⇒const_t supplies X↦(X→t). Its initial dual uses the
+actual opposite terminal structure and Op_transf, without a second primitive
+arrow theory. The required whole kernel/cokernel universal capabilities are
+the next step, not consequences asserted merely from these embeddings.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.
