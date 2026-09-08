@@ -6,6 +6,14 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Critical promotion gate (2026-09-08): the committed encoding admits a closed
+empty-type witness through the higher action of its covariant internal `op`.
+This also reproduces on the original baseline and the parallel post-migration
+tip. See the [confirmed variance diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
+Do not qualify the formal boundary or finalize the book claims before a
+reviewed repair. The native CAS/reference work and full objective remain;
+the next required architectural decision is the variance-repair scope.
+
 Current architectural slice: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 before further component-level window exactness. Connecting-map checkpoint:
 `b83a4d32`; the full goal remains active.

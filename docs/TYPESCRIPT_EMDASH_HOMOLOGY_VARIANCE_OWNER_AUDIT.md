@@ -4,6 +4,13 @@ Date: 2026-09-08
 
 Status: reviewed inventory and selective ordinary-owner port; dependent mirror remains experimental
 
+Critical update: [the internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+derives the decoded empty carrier using the committed core alone. The
+ordinary baseline and parallel post-migration core both reproduce it. The
+inventory below now informs a variance repair, not merely missing-head
+completion. In particular, do not fill the Op_catd action link or add higher
+Op/con mirrors before reviewing their actual source/target variance.
+
 Parent: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 
 Compatibility baseline: `febf287d`; inventory checkpoint: `dee0b454`.

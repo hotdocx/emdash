@@ -2,6 +2,15 @@
 
 Last reviewed: 2026-08-30
 
+Critical variance notice added 2026-09-08: the current encoding of whole
+internal opposite admits a closed inhabitant of the decoded empty type.
+The issue is inherited and independently reproduced, not introduced by the
+latest homology experiments. The
+[diagnostic and repair boundary](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+distinguish the intended mathematics from the current unsound declaration
+package. The exposition and checking evidence below must not be read as a
+consistency claim for that package pending repair.
+
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory, its one-way derived native equality-valued hom-action
 extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property

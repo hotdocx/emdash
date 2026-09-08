@@ -6,6 +6,12 @@ Last reviewed: 2026-08-30
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
 
+Critical variance qualification (2026-09-08): the current whole internal
+`op : Cat → Cat` declaration is not a validated higher-categorical duality.
+It participates in the checked empty-type derivation documented in the
+[internal-op diagnostic](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
+Future co/higher-duality notation is a repair proposal, not active syntax.
+
 Notation in this report is immediately authoritative for mathematical comments
 and examples. Most of it becomes parser syntax only after a separate
 elaboration and grammar implementation. The bounded TypeScript categorical

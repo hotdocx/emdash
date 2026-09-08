@@ -4,6 +4,16 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Critical current limitation (2026-09-08): the categorical encoding admits a
+closed `τ Empty_grpd` term via the higher action forced by the covariant
+internal `op`. The original goal baseline and separate post-migration tip
+also reproduce it. See the
+[variance diagnostic](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+and [non-library reproducer](../audits/internal_op_empty_reproducer.lp).
+The validation evidence below records checking/computation, not consistency
+of the encoded theory. Formal qualification and new higher-opposite-dependent
+promotion require a reviewed repair; no such repair is claimed here.
+
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,
 not the chronological sequence of earlier candidates. Dated implementation

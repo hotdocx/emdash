@@ -17,6 +17,16 @@ equation is not by itself authority for a new rule. Preserve semantic owners,
 variance, retained higher action, subject reduction, and explicit noncollapse
 boundaries.
 
+Critical variance notice (2026-09-08): the current categorical encoding admits
+a closed inhabitant of its decoded empty type through the whole internal
+`op`. The non-library fixture is `audits/internal_op_empty_reproducer.lp`;
+analysis and baseline controls are in
+`../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md`. This is an
+inherited soundness defect, not a warning-count issue. Treat higher-opposite-
+dependent formal claims as unqualified pending the documented variance
+repair; do not register the reproducer as a positive library example or
+interpret ordinary green checks as a consistency certificate.
+
 ## Authority And Document Roles
 
 Use this order:

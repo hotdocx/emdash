@@ -4,6 +4,11 @@ Date: 2026-09-08
 
 Status: active bounded architectural slice within the long-exact goal
 
+Critical current gate: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+is confirmed on the committed core and both reference baselines. Promotion of
+the experimental higher-opposite-dependent rules is paused for a reviewed
+variance repair. No new structural-action rules from this pilot are active.
+
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
 Current sub-audit: [foundational variance owners and the dependent con ladder](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
@@ -99,6 +104,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 | `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
+| `HINT-SOUNDNESS-7` | confirmed inherited defect; repair decision required | reject the closed native-empty derivation by correcting internal-op variance while retaining legitimate directed categories, functors and transfors |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -708,3 +714,76 @@ reports, unchanged strict LHS audit, and the pre-existing fully expanded
 product-identity limitation. The new ordinary mirror does not by itself
 solve the separate Op_catd action-link or dependent evaluation projection;
 both pending probes were rerun and retain their documented outcomes.
+
+## Structural-Action Alternative And Orientation Audit
+
+The next bounded experiment checks the actual opposite-evaluation consumer
+before assuming that a new dependent con primitive is necessary. The retained
+term contains composition of displayed functors, pointwise opposite,
+displayed pairing, identity, and a constant argument. The ignored
+`hint_displayed_action_composition.lp`,
+`hint_displayed_evaluation_covariant.lp`,
+`hint_displayed_evaluation_op_native_rhs.lp`,
+`hint_displayed_pair_action.lp` and
+`hint_displayed_identity_constant_action.lp` supply candidate projections
+through those existing operators. No new primitive or independent laxity
+witness is introduced. These rules are not yet promoted.
+
+The displayed-evaluation result must retain its native opposite Hom
+endpoints when the RHS is inferred. Reconstructing the same map immediately
+as an ordinary mixed Eval hom action produces unsatisfiable unification
+constraints; expressing it through the existing `Op_func` hom action passes
+subject reduction and subsequently reduces by the ordinary Eval rules.
+The fixed argument now uses the existing stable `section_weaken_funcd`,
+rather than rebuilding its terminal-source composition. Only an explicitly
+constant weakened section is collapsed; arbitrary sections and directed
+laxity cells are not.
+
+The actual nonidentity triangle action then reduces to `(a,eta[i])`. The
+remaining conversion failure was in hidden metadata: its target diagram was
+the canonical `Hom_fapp0(id,PathOut(a),T1)` owner while the original prototype
+annotated eta with raw `PathOut(a)∘T1`. The canonical prototype now retains
+the actual `Functor_catd` reindexing in its arrow constructor. Runtime edge
+action and a typed reflexivity comparison with raw composition both pass in
+`hint_triangle_structural_action_canonical-20260908-130513.log`.
+No global Hom-to-composition rewrite was introduced to make this pass.
+The earlier raw-annotation and whole-body-matcher probes remain available
+as diagnostic/backtracking evidence.
+
+The user's orientation requirement is explicit. The new decomposition
+candidates concern a composite displayed **operator** GG∘FF and mirror the
+existing hom action of a composite ordinary functor. They do not reverse the
+existing accumulation rule for composition of mapped **arrows**. The focused
+orientation reviewer passes unchanged arrow-action accumulation, equality of
+two-stage Sigma action with action of the composite displayed functor,
+associativity of the whole fixed-p hom action, and agreement between whole
+and capped composite projections. Log:
+`hint_displayed_action_orientation_checks-20260908-130957.log`.
+
+These positive tests are not a global confluence or termination proof.
+Warning classification, transported-identity/projection-order joins, full
+owner-position qualification and relevant regressions remain promotion
+gates. The correctly varianced native `homd_con_` and fixed-p con alias remain
+separate interface evidence; a full dependent mirror is not silently
+identified with pointwise opposite. The full long-exact goal is unchanged.
+
+The broad structural probe reports 1,190 critical pairs / 186 pattern
+diagnostics, versus the committed 1,125/157 boundary. Most added families
+involve the three unrestricted composition recognizers. A more targeted
+leading-Eval composition probe passes subject reduction, but its integrated
+qualification was not completed before the soundness finding. The attempted
+generic mapped-operator control fails while inferring the comparison's type;
+it is not presented as a verified conversion counterexample. All these
+alternatives remain ignored probes, not selected new kernel orientations.
+
+The subsequent audit of whole `op` confirms a more fundamental defect,
+independently of these candidate rules. The tracked non-library reproducer
+and baseline controls are in the
+[internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
+The same source-level construction yields `τ Empty_grpd` in the current core,
+the original main baseline and the separate post-migration tip. This changes
+the next priority: correct the variance of internal opposite and its family
+operations before adding more con/Op computation or certifying the homology
+interface. The hybrid native/diagram construction remains the leading
+homology candidate, conditional on that repair; the final foundation is not
+settled. Keep all prior checkpoints, code, CAS results and probe evidence.
