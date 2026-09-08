@@ -917,6 +917,24 @@ belongs to the owning implementation plan rather than to standing guidance.
   incoming/outgoing/pair/homology/exactness links before omitting redundant
   aliases. Valid native serialization is unchanged; broken sharing rejects,
   and actual coefficient-witness changes remain visible to whole replay.
+- The formal Freyd-spine signature, semantic-chain, bounded-spine and
+  long-exact-spine modules now construct an actual
+  `CommRingFreydBoundedComplex` term from that selected whole replay. The
+  displayed order is reversed explicitly into the existing P0/rightmost
+  convention. Adopted morphism equations are reused; only semantic
+  composition-zero equations are additionally replayed/adopted by the raw
+  chain-pair operation. The earlier literal-composite equations are not
+  silently treated as formal matrix-composition reduction. A final Core
+  check covers the constructed whole term, not just its equation types.
+  The nonsplit eight-presentation/seven-arrow consumer and its six chain
+  witnesses check in TypeScript and Lambdapi. Zero-/one-arrow recursion,
+  incorrect endpoints/laws, and foreign upstream/missing binding cases are
+  checked. `emdash3_2_commutative_algebra_freyd_explicit_spines.lp` supplies
+  two transparent usability definitions over the original constructors;
+  ordinary Lambdapi projections recover the original data. The TypeScript
+  mirror is signature-only, not a full transfer of their source computation.
+  This raw formal sequence does not yet include formal exactness witnesses
+  or a concrete weak-kernel capability.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

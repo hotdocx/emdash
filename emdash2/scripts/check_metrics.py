@@ -240,6 +240,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_functorial_homology.lp"),
     Path("emdash3_2_commutative_algebra_freyd_bounded_complexes.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_explicit_spines.lp"),
     Path("emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp"),
     Path("emdash3_2_commutative_algebra_freyd_short_exact_rows.lp"),
     Path("emdash3_2_commutative_algebra_freyd_bounded_short_exact.lp"),

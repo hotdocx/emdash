@@ -197,6 +197,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   recursive bounded spine. Its first interior-degree projection delegates to
   witnessed one-degree homology; it is not a second homology theory and adds
   no rule or unifier.
+  `emdash3_2_commutative_algebra_freyd_explicit_spines.lp` exposes transparent
+  explicit-matrix introductions returning the original presentation-morphism
+  and chain-pair owners. These are proof-CAS usability definitions, not new
+  primitive structures, equality axioms, or computation rules.
   `emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp` follows both
   actual bounded complex tails, retaining raw components and the existing
   presentation-morphism agreements. Its first two laws form the existing

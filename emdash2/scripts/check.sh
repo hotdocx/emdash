@@ -313,6 +313,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_functorial_homology.lp)
   files+=(emdash3_2_commutative_algebra_freyd_bounded_complexes.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_explicit_spines.lp)
   files+=(emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp)
   files+=(emdash3_2_commutative_algebra_freyd_short_exact_rows.lp)
   files+=(emdash3_2_commutative_algebra_freyd_bounded_short_exact.lp)

@@ -4072,6 +4072,25 @@ proof–CAS reference baseline on nonsplit nonzero examples, not a proof of
 CAS correctness or a substitute for the remaining generic exactness and
 witnessed formal whole-result constructions.
 
+The next interface now constructs the actual formal sequence from these
+equations. A presentation morphism is built from its generator matrix,
+relation-coefficient matrix and relation equation. For consecutive arrows,
+the additional equation concerns their formal matrix composition, rather
+than only the literal matrix previously returned by multiplication. It
+constructs the original Freyd chain-pair agreement, which the existing
+bounded constructors assemble into one whole sequence. The displayed
+left-to-right order is reversed into the formal P0/rightmost convention.
+
+The two explicit-matrix introductions are transparent definitions returning
+the existing whole objects. They make the small signature-only TypeScript
+proof interface usable without adding a projection rewrite to its checker;
+Lambdapi checks the source definitions and their ordinary projection
+computations. The nonsplit seven-arrow long-exact result is now constructed
+and checked by both backends as a raw formal sequence. Formal exactness is
+still a stronger requirement: it must supply the appropriate universal
+capabilities and relate their selections to the retained homology objects,
+not infer these merely from native exactness booleans.
+
 Functorial homology repeats the two universal steps. A chain map retains both
 adjacent square agreements. The lower square makes the middle component send
 source cycles into target cycles, so the target kernel constructs a cycles

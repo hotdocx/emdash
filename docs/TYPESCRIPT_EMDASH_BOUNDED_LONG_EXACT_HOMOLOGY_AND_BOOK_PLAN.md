@@ -689,7 +689,8 @@ was introduced to get a passing target.
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
-| `LEH-FORMAL-11` | pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
+| `LEH-FORMAL-11` | in progress; raw spine 11A constructed, stronger homology/exactness alignment pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
+| `LEH-FORMAL-RAW-SPINE-11A` | complete; actual whole-term Core/Lambdapi consumers green | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | pending | field/CAP references | quotient-coordinate differential with no runtime dependency |
@@ -1622,6 +1623,65 @@ relate to the native selections, rather than pretending that a matrix
 equation inventory alone supplies W or that arbitrary quotient paths decode
 to raw agreements. That is the next owner-position audit/consumer within
 row 11, not an established formal long-exact theorem in this checkpoint.
+
+Row 11A starts from clean `02866044`. The source bounded-Freyd module checks
+within 90 seconds, and workspace validation passes. The proof checker uses
+the existing signature-only matrix environment and does not accept a new
+runtime callback. An ordinary presentation-morphism constructor's input
+types mention projections from whole presentations; those projections do
+not unfold in that small signature profile. First probe transparent
+explicit-matrix introductions whose signatures expose the actual ranks,
+matrices and equation while returning the original whole presentation
+morphism/chain-pair types. They must delegate to existing constructors and
+check in Lambdapi, not postulate new objects or equations.
+
+There is also a substantive equation boundary: a native agreement for a
+computed composite uses its resulting literal matrix. Constructing the
+formal chain pair requires an equation for the *formal composition* of the
+two selected differential matrices. Reify and explicitly adopt that actual
+semantic chain-zero equation; do not pretend that an opaque matrix
+composition reduces in the TypeScript proof-signature profile. Qualify a
+nonzero polynomial differential and a nonzero relation-coefficient witness,
+then the full nonsplit long-exact spine with all its displayed arrows.
+
+Status checkpoint before final documentation: the implementation now builds
+the actual `CommRingFreydBoundedComplex` term from the retained two-degree
+nonsplit long-exact result: eight presentations, seven original morphisms,
+and six original-chain-pair constructors. The previous whole replay/adoption
+is retained; only six inexpensive semantic chain-pair equations are newly
+replayed/adopted. The final Core checker checks the constructed term, not
+merely its component equation types. The two transparent explicit-data
+introductions are now in `emdash3_2_commutative_algebra_freyd_explicit_spines.lp`.
+
+All six new focused tests pass with live Lambdapi enabled, including the
+whole seven-arrow term, original projection computation, zero-/one-arrow
+recursion cases, wrong types/endpoints, and foreign upstream/missing binding
+rejection. The standalone reviewer passes 16 positive and two negative
+assertions; its initial grouped top-level symbol declaration was corrected
+to six separately declared natural-number parameters. The source probes
+pass quietly and with warnings; the baseline and two-introduction import
+each report 1,223 critical pairs and 169 pattern-variable warnings, with no
+new rewrite/unification rule. Catalog and source-TOC checks pass unchanged.
+Standing-document synchronization and the local checkpoint remain to be
+finished. This is a formal raw spine, not yet a formal exactness theorem or
+a supplied weak-kernel capability.
+
+The final source/API review found no correctness issue in semantic claim
+construction, retained arrow identity, index reversal, or final whole-term
+checking. Standing authorities and the owner audit now describe this
+boundary explicitly. The registered source adds two transparent definitions
+and the independent reviewer adds 18 assertions; central catalog/TOC content
+is unchanged. Metrics-script unit tests pass (13 tests); the inherited full
+health snapshot exception remains recorded rather than running unrelated
+aggregates. The TypeScript probe helper's inherited 60-second cap is carried
+as a tooling limitation; the live consumers finish comfortably within it.
+
+Parallel bounded reviews now audit the remaining formal selected-choice
+boundary (row 11) and generic window proof (7D), while the independent
+field/quotient-coordinate differential (13) is being implemented in a
+separate test-only file. No parallel worker may change the Core/kernel
+architecture, stage/commit, or merge another worktree. Their results require
+root review before promotion. The full objective remains active.
 
 Use proportional, bounded checks. Do not run repository-wide TypeScript,
 kernel, book, print, package, or release aggregates merely for reassurance.

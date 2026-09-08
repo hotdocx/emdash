@@ -1034,3 +1034,47 @@ affected-file lint and document hygiene pass. The encoded whole adoption
 artifacts are 1,351,858 / 3,743,154 bytes for the two-/three-degree examples.
 This qualifies the selected operational reference, not the remaining
 generic or witnessed formal whole-result theorem.
+
+## Actual formal raw sequence (row 11A)
+
+The existing `CommRingFreydBoundedComplex`/`CommRingFreydChainTail` are the
+formal carrier. They already retain presentations, raw morphisms and their
+adjacent-zero agreements without demanding a weak-kernel provider. The
+TypeScript bounded-spine constructor builds applications of those original
+constructors, reversing the displayed order so P0 is the rightmost object;
+it is no longer a recipe or a list of unassembled matrix equations.
+
+The narrow proof-signature environment does not unfold presentation
+projections. Two transparent source definitions therefore expose explicit
+matrix ranks/data while returning the original presentation-morphism and
+chain-pair types. Their bodies delegate to existing constructors, and the
+Lambdapi reviewer checks original map/witness/law and tail projections.
+The TypeScript declarations mirror these signatures; they do not pretend
+to transfer all source reduction or extend the generic proof checker.
+
+For the chain point, the required equation is R₀ H = G F − 0 with G F a
+formal matrix-composition expression. The earlier agreement realization
+instead names the already computed literal matrix. The new raw-pair
+adapter replays the existing inexpensive chain calculation and explicitly
+adopts its semantic-composition equation. It does not rerun any homology,
+kernel/cokernel or whole long-exact calculation. The full constructor
+revalidates its original whole replay and equation source, reuses the
+adopted map proofs, checks adjacent presentation/map agreement, and finally
+checks the complete bounded term in Core.
+
+The two-degree nonsplit consumer retains the original eight presentations
+and seven maps and constructs six chain-pair terms. All six focused tests
+pass with both live Lambdapi checks enabled. The standalone reviewer has
+16 positive/two negative assertions. Baseline and new-source imports have
+the same scoped warning counts: 1,223 critical pairs and 169 pattern-variable
+reports. No rewrite, unifier, equality axiom or primitive structure was
+added. Source/check registration is extended; central check catalog and TOC
+are unchanged. The existing full-health exception remains and no unrelated
+aggregate is claimed.
+
+This completes the raw carrier consumer only. The stronger
+`CommRingFreydWitnessedHomologyAt W ...` chooses cycles through W, and
+`CommRingFreydExactnessAt H` depends on that actual stored homology boundary.
+Neither a ring-wide W nor the equality of its selected presentations with
+the native ones follows from the matrix equations. That is the explicit
+next formal boundary; the generic window theorem also remains required.
