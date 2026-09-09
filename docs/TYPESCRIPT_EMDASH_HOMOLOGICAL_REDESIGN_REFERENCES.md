@@ -316,6 +316,24 @@ stable-category chapters are longer-term guidance for fiber/cofiber methods,
 not an implemented comparison with present module homology or authority to
 import new stable/spectral foundations into the active goal.
 
+### HRI-19 — Martin Markl And Dominik Trnka
+
+*Kernels, lax algebras, décalage, and supercoherence*,
+[arXiv:2601.20322v1](https://arxiv.org/abs/2601.20322v1), 28 January 2026.
+
+Newly found during the 2026-09-09 adjunction-usability review. The abstract,
+introduction and accessible arrow-(co)monad statements were checked; a
+complete proof review or local PDF acquisition has not yet been performed.
+It characterizes kernels in pointed categories through an arrow 2-monad and
+relates them to a simplicial nerve/décalage formulation. This directly
+intersects the pilot's adjunction and complementary simplicial/cubical ideas.
+
+Do not identify the paper's lax-algebra comparisons with arbitrary emdash
+extracted laxity cells or assume that all should be identities. Its
+ordinary-category result is not automatically an arbitrary-omega emdash
+construction. Retain it as focused design evidence, not a new prerequisite
+to implement its entire theory before completing the homology/CAS goal.
+
 ## User's Independent Directed-Spectrum Hypothesis
 
 Preserve this separately from the literature: the user proposes a notion of

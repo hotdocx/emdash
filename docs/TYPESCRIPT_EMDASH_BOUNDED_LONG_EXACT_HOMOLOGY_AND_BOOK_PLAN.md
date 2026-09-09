@@ -6,6 +6,17 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Accepted continuation (2026-09-09): the user resumes this same goal with a
+declaration-plus-computation-plus-usability strategy for the whole
+kernel/cokernel/homology interfaces. The consolidated response is integrated
+in the [pilot's accepted continuation](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#declaration-backed-adjunctions-and-usability-accepted-continuation).
+This explicitly uses the adjunction-usability precedents, qualified local
+strictness computations and interpretation in the existing selected formal/
+CAS operations. An automatic arbitrary-omega reconstruction from every old
+capability is not a prerequisite for declared structures and concrete
+instances. The full goal scope, choice-preservation requirements, general
+op-repair deferral and local-checkpoint authorization remain unchanged.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

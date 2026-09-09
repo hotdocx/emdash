@@ -21,6 +21,15 @@ Branch: `goal/bounded-long-exact-homology-book-v3.2`
 
 ## Decision And Scope
 
+Current accepted refinement (2026-09-09): use the repository's
+declaration-and-usability technique for whole kernel/cokernel operations.
+The complete agreed explanation is integrated in
+[the declaration-backed continuation](#declaration-backed-adjunctions-and-usability-accepted-continuation).
+Constructing a general automatic extension of every old capability into an
+arbitrary-omega adjunction is not a prerequisite for a declared computational
+structure and its qualified concrete interpretation. The full parent goal,
+selected-data invariants and deferred general op repair are unchanged.
+
 Latest user clarification (2026-09-08): deferring the general op/Sigma repair
 does not abandon the pre-op whole-complex/homology redesign. The user linked
 responses 0140, 0141 and 0142 and specifically recalled the dependent con
@@ -113,12 +122,14 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | varying-source triangle-diagram prototype checked in part | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
-| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation recovered in scoped probes | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 | `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
 | `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
-| `HINT-RECOVERY-8` | pre-op state and narrow evaluation consumer recovered; owner-position qualification next | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
+| `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
+| `HINT-ZERO-9` | comparing native long-edge restriction and the internal zero-arrow comma presentation | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
+| `HINT-PRESENTATION-10` | declaration-backed kernel/cokernel object, component and map comparisons checked in probes; promotion gates in progress | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1046,3 +1057,226 @@ or turn objectwise factor contractibility into arbitrary-omega coherence.
 General op repair stays deferred and preserved. Generic window exactness,
 bounded assembly, retained proof–CAS choices and final book work are still
 required by the parent goal.
+
+## Zero-Restriction Continuation: Candidate Comparison
+
+The next bounded experiment compares the hybrid triangle's zero-long-edge
+restriction with the internal comma of the existing whole embedding
+`J(A) = (A → t)` into the arrow-diagram category. A comma object is
+`(A,d,h)` with one actual arrow-diagram transformation `h : J(A) ⇒ d`.
+Its maps are inherited from the existing nested homd/Sigma cubical total,
+not a new record of manually stated commuting-square equations. In an
+ordinary pointed category this encodes an incoming differential killed by d.
+In a general directed higher category, the exact strict/equality-valued
+boundary must still be checked; a directed filler alone is not renamed an
+equality.
+
+The comma presentation is attractive because the kernel adjunction sends
+h directly to a boundary `A → Ker(d)`, after which the whole cokernel
+interface can supply H. This is an experiment, not a declaration that the
+old objectwise universal capabilities already provide those whole
+adjunctions. First check the category, whole term observations, genuine
+nonidentity map action and extraction of the original chain condition.
+Compare with the retained native triangle on the same data before choosing
+the public complex owner. Do not introduce a general category-record
+constructor, discard directed flag variation via a Path lift, or silently
+truncate the ambient category to make the experiment pass.
+
+## Declaration-Backed Adjunctions And Usability: Accepted Continuation
+
+The user accepted the consolidated review headed “Adjunction usability should
+be part of the implementation” through “Revised continuation strategy”, and
+explicitly resumed the existing goal on 2026-09-09. Its objective already
+delegates evolving details to these living plans, so no replacement goal or
+smaller completion criterion is introduced.
+
+### 1. Adjunction usability is part of the implementation
+
+The declaration-and-usability approach is the right technique here. Earlier
+wording made reconstruction from the old records sound like a compulsory
+prerequisite; that was too restrictive. Distinguish introducing the intended
+computational structure with concrete interpretations from proving that every
+older capability automatically supplies that entire structure. We can pursue
+the former without first completing the latter.
+
+The existing pullback implementation rewrites generic adjunction observations
+to selected whole observations. It also contains whole-mate unifiers against
+unfolded semantic bodies, followed by explicit reflexivity comparison paths.
+See `emdash2/emdash3_2_pullbacks.lp`, the declaration-backed observations and
+“Proof-time whole-mate usability” sections. The monad implementation makes
+the complementary choice: its unit comparison stays proof-time so the unit
+remains a runtime discriminator; standard whole multiplication retains its
+semantic runtime projection. These are implementation precedents, not a
+requirement to copy their exact rule shapes.
+
+Use the same approach for kernels and cokernels:
+
+- declare the selected whole functors and their adjunction structure;
+- retain whole unit, counit and mate operations;
+- connect their observations to the original selected operations; and
+- supply the necessary runtime projections and proof-time usability links.
+
+General-purpose category/functor record constructors are not prerequisites.
+An automatic constructor from every old `PreAbelianCategory` into the full
+selected higher-coherent structure is a stronger separate claim. Do not
+postulate that conversion silently. A declaration-backed presentation may
+instead explicitly require a coherent realization of given old choices;
+the existence of arbitrary such realizations is not asserted by its type.
+
+### 2. The old/new links use computation, unification and derived paths
+
+The intended schematic agreements are:
+
+```text
+K[d]             ≐ selected kernel object of d
+κ[d]             ≐ selected kernel embedding
+kernel-mate(h)   ≐ selected kernel lift of the corresponding test
+Q[e]             ≐ selected cokernel object of e
+π[e]             ≐ selected cokernel projection
+H[X]             ≐ existing selected homology object
+H[m]             ≐ existing induced homology map.
+```
+
+These are contracts, not literal Lambdapi LHS patterns. Use a rewrite for an
+observation with one selected runtime result; use a narrow unifier when two
+presentations should coexist or a computational head must survive. Add a
+defined equality path, often `eq_refl` through the unifier, when consumers
+need the comparison as a reusable term. Prefer a transparent whole
+construction when it already computes; do not add a primitive only to rename
+it. Unifiers for semantic aliases must match their actual unfolded bodies,
+with non-discriminating inferred arguments left implicit.
+
+An `eq_refl` path checked through a new unifier packages that comparison; it
+is not independent justification for the unifier. Justify the relation
+mathematically, probe actual matching, and audit interactions. Mathematical
+isomorphism likewise does not identify unrelated matrix presentations or
+serialized choices. Retain the original kernels, boundary, cokernel,
+projections and reconstruction data whenever those are the interpretation.
+
+The intended layering is whole formal operations → selected formal
+kernel/lift/cokernel/homology operations → the existing categorical
+delegation interface → native polynomial/Freyd/matrix algorithms. This is
+not a claim that Lambdapi normalization itself launches TypeScript CAS code.
+Execution/adoption remains the explicit existing bridge, whose retained
+selection checks must also cover the new whole surface.
+
+### 3. Selected strictness computations are legitimate
+
+For a selected strict operation, an extracted structural comparison such as
+`K[g] ∘ K[f] ⇒ K[g ∘ f]` may have a narrowly owned identity computation.
+The same applies to selected naturality witnesses with correctly identified
+endpoints. Probe the surviving `*_laxity*`/internal-action head, use the
+proper discriminators and add needed projection-order instances. Warnings
+locate interactions; they are not vetoes.
+
+Distinguish these structural witnesses from an arbitrary cell supplied in a
+lax diagram or comma map. The latter is not an identity merely because it
+occurs in homology. We may choose or redesign the complex-map carrier so
+that the relevant comparisons are strict structural ones: an unnecessarily
+lax prototype is not immutable. This does not require a blanket local-
+discreteness assumption or the parallel global strictness migration.
+
+### 4. Mathematical provenance and current evidence
+
+The adjunctions `J(X)=(X→0), J⊣K` and `I(X)=(0→X), Q⊣I` are standard.
+Scholbach's [category theory notes](https://jakobscholbach.github.io/categories.pdf),
+Exercise 5.7, give the surrounding arrow-category adjoint string. Directly,
+`Hom_Arr(J(A),d)` is the annihilated-test space represented by `K(d)`.
+Thus the mate of `h:J(A)→d` is `β:A→K(d)`, and homology is `Q(β)`.
+
+Posur's [Methods](https://arxiv.org/abs/1908.04132), §2.4 Theorem 2.18,
+constructs induced cohomology maps by restriction to kernels followed by the
+cokernel functor. His [free-Abelian theorem-proving paper](https://arxiv.org/abs/2103.08379),
+Remark 1.2, treats homology functorially on composable pairs, with a more
+general subquotient when the composite is not zero. Our case is the
+zero-composite specialization. The emdash implementation through its own
+adjunction, internal Hom/diagram and usability owners is a design synthesis,
+not software packaging attributed to Posur or CAP.
+
+Markl–Trnka's [Kernels, lax algebras, décalage, and supercoherence](https://arxiv.org/abs/2601.20322v1)
+was newly found in this review, not used to produce the earlier code. Its
+kernel/arrow-2-monad/simplicial connection is a relevant further design lead.
+Only its introduction and accessible statements were reviewed, not its
+complete proofs. Its lax-algebra comparisons are not automatically our
+extracted functoriality witnesses, and its ordinary-category result is not
+an arbitrary-omega implementation theorem. Preserve it in the reference
+inventory without making a complete implementation of that paper a new gate.
+
+The interrupted zero-arrow-comma probes are now green: category/object
+observations (`hint_zero_arrow_cone_category-20260908-211928.log`), derived
+old chain-zero data (`hint_zero_arrow_cone_chain-20260908-212256.log`), and
+nonidentity map/mixed differential/further-Hom observations
+(`hint_zero_arrow_cone_maps-20260908-212406.log`). The chain-zero comparison
+uses existing strict-naturality usability and preadditive terminal results;
+it does not convert an arbitrary directed filler into equality. These remain
+experiments, not a final strict complex-map classification or whole H.
+
+### 5. Revised execution strategy
+
+1. Make kernel/cokernel structure explicitly declaration-plus-computation-
+   plus-usability. Start with a presentation indexed by the existing selected
+   operation data, rather than introducing an unqualified constructor from
+   every old capability. Test whole observations and the actual adjunction
+   cuts before hiding their normal forms behind helpers.
+2. Compare native-triangle and zero-arrow-comma presentations on the same
+   concrete computations and strict map behavior. Preserve both, including
+   failed probes and any needed comparison maps.
+3. Connect whole observations to original selected formal operations and
+   demonstrate the same nontrivial CAS result through the whole interface.
+   This vertical slice includes nonidentity maps, retained higher action,
+   and the actual replay/adoption boundary.
+4. Add only justified strictness/projection instances. Do not silently erase
+   arbitrary cells, reselect native objects, or use the known op defect.
+5. Return to the full generic window exactness, bounded theorem assembly,
+   formal-boundary and book obligations; none is removed by this refinement.
+
+### First Declaration-Backed Results
+
+The kernel and cokernel presentation probes index their whole functor and
+adjunction observation by the original `HasComputationalKernels` or
+`HasComputationalCokernels` family. A presentation is additional coherent
+structure over that family, not an automatically inhabited type for every
+old higher-categorical capability. Object observations, the counit's domain
+component/kernel embedding, and the unit's codomain component/cokernel
+projection now have explicit usability comparisons and defined reflexivity
+paths. Map comparisons call the existing `computational_kernel_map` and
+`computational_cokernel_map`, deriving their old Hom-factor inputs from the
+actual diagram transformation's strict naturality. No matrix routine, square
+input, selected kernel, or selected cokernel is replaced.
+
+The first object-runtime-fold variant exposes a real cut-erasure issue:
+`K[d]` unfolding breaks the right kernel rectangle
+(`hint_kernel_presentation_rectangle_right-20260909-071404.log`), and the
+dual `Q[d]` unfolding breaks the left cokernel rectangle
+(`hint_cokernel_presentation_runtime_rectangle_left-20260909-071741.log`).
+The selected candidates keep these observations formal at runtime and use
+typed object unifiers against the actual selected record projection. All
+four nonidentity rectangles then pass, while the component agreement paths
+still check by reflexivity. Kernel logs are
+`hint_kernel_presentation_unif_rectangle_left-20260909-071523.log` and
+`-right-20260909-071524.log`; cokernel logs are
+`hint_cokernel_presentation_unif_rectangle_left-20260909-071742.log` and
+`-right-20260909-071743.log`. Map comparison logs are
+`hint_kernel_presentation_maps-20260909-071853.log` and
+`hint_cokernel_presentation_maps-20260909-072101.log`.
+
+Their three shared exchange prerequisites have also been probed in a full
+core copy after generic whole Hom action. The initial whole evaluation rule
+contained a reducible `Functor_cat` guard inside its identity argument.
+Removing that redundant guard and capturing the actual exchange arguments
+passes subject reduction and the concrete product-valued control that the
+original rule fails. Final logs:
+`hint_adjunction_exchange_minimal_20260909-20260909-073041.log` and
+`hint_exchange_minimal_controls-20260909-073148.log`; failing control:
+`hint_exchange_guarded_controls-20260909-073147.log`. The core inventory is
+unchanged at 1,139/157 after this refinement. This is a measured false-negative
+repair, not a warning-count optimization. The two rectangle instances retain
+their documented ambient transfor-category subject-reduction guards.
+
+The fresh package `/tmp/emdash-kernel-presentations.KP5kBV` checks the core,
+the rule-free strict-component-naturality helper, both presentation-module
+candidates and both independent declaration/usability reviewers. The final
+minimal-core staging, focused regressions, source registration and authority
+synchronization remain before active-library promotion. This does not yet
+complete whole complex maps, the mate-to-old-lift comparison, whole H or the
+actual CAS vertical consumer.

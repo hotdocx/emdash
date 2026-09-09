@@ -6,6 +6,15 @@ Status: researched architecture; bounded strict pilot active, not a completed re
 
 ## Conclusion And Decision Boundary
 
+Accepted refinement (2026-09-09): the
+[declaration-backed continuation](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#declaration-backed-adjunctions-and-usability-accepted-continuation)
+supersedes any reading of this review that makes a general reconstruction
+of whole adjunctions from old records compulsory before usable declared
+instances. The selected whole structure may use primitive owners, computing
+projections, semantic unifiers and derived reflexivity paths in the normal
+repository style. Its interpretation and chosen data still require review;
+no arbitrary whole coherence or quotient effectiveness is inferred silently.
+
 Recovery clarification (2026-09-08): the user deferred the general op repair,
 not the whole-complex/homology redesign recommended here. The complete
 pre-op pilot and variance audit have been reread alongside responses
