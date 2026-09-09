@@ -33,7 +33,12 @@ The [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_
 again owns the next architectural slice. The four ordinary con heads ported
 in `6fc0b02e` remain active. The interrupted consumer was evaluation under
 `Op_funcd` in the varying triangle prototype; its narrower recovered rules
-now reproduce the nonidentity edge computation. An independent ordinary-
+are now qualified and active in the nucleus, including whole/point/cell
+projection-order joins, and reproduce the nonidentity edge computation.
+The [qualification ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#qualified-structural-evaluation-tranche)
+records the 31 runtime instances, 1,139/157 warning boundary, typed overlap
+controls, 18-target fresh staged check and preserved remaining obligations.
+No new primitive or unification rule is added. An independent ordinary-
 evaluation construction confirms the desired forward component, without
 using the bad universe-op action. This is local evidence, not qualification
 of the entire complex category or a complete dependent con ladder.
@@ -73,12 +78,14 @@ not promoted replacements for the existing capabilities. Preserve all
 alternatives and consult the pilot's current review before choosing a
 representation-specific prerequisite.
 
-The next hybrid varying-source triangle prototype has nine green scoped
-observations, but its nonidentity edge action still needs a displayed
-evaluation projection. The user's con-owner/laxity-ladder review is tracked
+The hybrid varying-source triangle prototype now has its required
+nonidentity displayed-evaluation computation, with whole action retained.
+The strict zero-long-edge restriction and coherent global maps remain the
+next representation gate. The user's con-owner/laxity-ladder review is tracked
 by the [foundational variance audit](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md).
-Its new interfaces and rewrite attempts remain probes, not active kernel
-changes or a qualified whole complex/homology implementation.
+The refined structural evaluation rules are active; broader dependent con
+interfaces and arbitrary-composite rewrite attempts remain probes. This is
+not yet a qualified whole complex/homology implementation.
 The subsequent selective ordinary con-owner port from `20c6dd2e` is active,
 with its own current-branch warning/SOP review. It does not import the
 parallel strictness migration or complete the dependent mirror; details and

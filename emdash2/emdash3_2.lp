@@ -17567,6 +17567,16 @@ injective symbol section_weaken_funcd [K : Cat]
   (s : τ (Obj (@Pi_cat K E)))
   : τ (Functord R E);
 
+// A constant section weakened over the terminal source is that same constant.
+// This joins the ordinary-function and displayed-component presentations.
+// Do not extend this to arbitrary s: that would introduce a whole 1→C eta
+// overlap between its neutral component and const(s[k]).
+// lhs-audit: keep 2,3 -- terminal source and constant target/section delimit
+// this structural case; there is no general section eta computation.
+rule @section_weaken_funcd $K (@Const_catd $K Terminal_cat) (@Const_catd $K $I)
+      (@Const_func $K $I $i)
+  ↪ @Const_func $K $I $i;
+
 // Fibre component: the weakened section is constant in the new source.
 rule @tapp0_fapp0
       $K Cat_cat $R $E $k
@@ -17589,6 +17599,281 @@ rule @fdapp1_int_cell
       $s
       $x $y $p
       Terminal_obj;
+
+// Structural evaluation instances for the whole varying-triangle consumer.
+// Eval_p(eta,q) = eta[q], pair_p(alpha) = (FF_p(alpha),GG_p(alpha)).
+// The whole/point/cell instances join the existing projection ladder; they
+// introduce no new primitive, universal laxity collapse, or mapped-cut owner.
+// A constant section of a constant family is still constant after opposite.
+// This whole fold joins the ordinary-function presentation exposed when
+// terminal-source weakening disappears. It never reverses a section arrow.
+// lhs-audit: keep 2,3 -- source and target identify the constant-section case,
+// not a general constant displayed operator with a nonterminal source.
+rule @Op_funcd $K (@Const_catd $K Terminal_cat) (@Const_catd $K $I)
+      (@Const_func $K $I $i)
+  ↪ @Const_func $K (Op_cat $I) $i;
+
+// Transported identity of a leading-Eval composite. These are the cell
+// projections of the existing whole/point composite instances, not an
+// independent orientation for composition of mapped arrows.
+// lhs-audit: keep 1 -- the nested Catd(K) composition category is an SR guard.
+rule @fdapp1_int_cell _ _ _
+      (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF)
+      $x $y $p $u
+  ↪ @fdapp1_int_hom_fapp0 $K $P $E (@Eval_funcd $K $I $E)
+      $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x) (@Fibre_func $K $R $P $FF $x) $u)
+      (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y) (@Fibre_func $K $R $P $FF $y)
+        (@fapp0 (Fibre_cat $R $x) (Fibre_cat $R $y) (@catd_transport_func $K $R $x $y $p) $u))
+      (@fdapp1_int_cell $K $R $P $FF $x $y $p $u);
+
+// lhs-audit: keep 1 -- same nested composition guard for the opposite instance.
+rule @fdapp1_int_cell _ _ _
+      (@Op_funcd _ _ _
+        (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF))
+      $x $y $p $u
+  ↪ @fdapp1_int_hom_fapp0 $K (@Op_catd $K $P) (@Op_catd $K $E)
+      (@Op_funcd $K $P $E (@Eval_funcd $K $I $E))
+      $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x) (@Fibre_func $K $R $P $FF $x) $u)
+      (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y) (@Fibre_func $K $R $P $FF $y)
+        (@fapp0 (Fibre_cat $R $x) (Fibre_cat $R $y) (@catd_transport_func $K $R $x $y $p) $u))
+      (@fdapp1_int_cell $K (@Op_catd $K $R) (@Op_catd $K $P)
+        (@Op_funcd $K $R $P $FF) $x $y $p $u);
+
+// The original constant-section cell is the generic weakening route's
+// normal form; only this explicitly constant section is strict here.
+// lhs-audit: keep 2,3 -- distinguish a section of the constant I-family
+// from a constant displayed functor with a nonterminal source family.
+rule @fdapp1_int_cell $K (@Const_catd $K Terminal_cat) (@Const_catd $K $I)
+      (@Const_func $K $I $i) _ _ _ _
+  ↪ @id $I $i;
+
+// The same constant-section case at whole Hom level is needed after the
+// terminal-source unit fold has erased the weakening owner.
+// lhs-audit: keep 2,3 -- same constant-section family discriminators.
+rule @fdapp1_int_hom_func $K (@Const_catd $K Terminal_cat) (@Const_catd $K $I)
+      (@Const_func $K $I $i) _ _ _ _ _
+  ↪ @Const_func Terminal_cat (Hom_cat $I $i $i) (@id $I $i);
+
+// Capping may expose neutral terminal arguments before the whole fold; the
+// existing literal Terminal_obj recognizer alone does not cover that order.
+// lhs-audit: keep 2,3 -- same constant-section family discriminators.
+rule @fdapp1_int_hom_fapp0 $K (@Const_catd $K Terminal_cat) (@Const_catd $K $I)
+      (@Const_func $K $I $i) _ _ _ _ _ _
+  ↪ @id $I $i;
+
+// Evaluation commutes with reindexing at a visible (diagram,index) pair.
+// This joins the canonical transported-identity projection of its Hom action.
+rule @fdapp1_int_cell $K _ _ (@Eval_funcd $K $I $E)
+      $x $y $p (Struct_sigma $U $i)
+  ↪ @id (Fibre_cat $E $y)
+      (@fapp0 (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p)
+        (@fapp0 $I (Fibre_cat $E $x) $U $i));
+
+// The opposite presentation of this same evaluation identity is still an
+// identity, obtained at the existing transported-identity projection.
+rule @fdapp1_int_cell $K _ _ (@Op_funcd $K _ _ (@Eval_funcd $K $I $E))
+      $x $y $p (Struct_sigma $U $i)
+  ↪ @id (Op_cat (Fibre_cat $E $y))
+      (@fapp0 (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p)
+        (@fapp0 $I (Fibre_cat $E $x) $U $i));
+
+// Pairing retains both extracted cells; neither component is made invertible
+// or identified with an identity unless its own structural rule says so.
+rule @fdapp1_int_cell $K _ _ (@Product_pair_funcd $K $R $E $D $FF $GG)
+      $x $y $p $u
+  ↪ Struct_sigma (@fdapp1_int_cell $K $R $E $FF $x $y $p $u)
+      (@fdapp1_int_cell $K $R $D $GG $x $y $p $u);
+
+rule @fdapp1_int_cell $K _ _
+      (@Op_funcd $K _ _ (@Product_pair_funcd $K $R $E $D $FF $GG))
+      $x $y $p $u
+  ↪ Struct_sigma
+      (@fdapp1_int_cell $K (@Op_catd $K $R) (@Op_catd $K $E)
+        (@Op_funcd $K $R $E $FF) $x $y $p $u)
+      (@fdapp1_int_cell $K (@Op_catd $K $R) (@Op_catd $K $D)
+        (@Op_funcd $K $R $D $GG) $x $y $p $u);
+
+/* Only a known leading evaluation operator opens a displayed composite.
+   Arbitrary composition and mapped-arrow accumulation remain untouched. */
+
+// lhs-audit: keep 1 -- nested comp_fapp0 category; wildcard and tied-base
+// variants fail subject reduction at this owner (guard probes in the pilot).
+rule @fdapp1_int_hom_func _ _ _ (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF)
+      $x $y $p $u $v
+  ↪ @comp_cat_fapp0 (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K $R $R (@id_funcd $K $R) $x $u $y $v) $p) (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K $R $P $FF $x (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) $y $v) $p) (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K $P $E (@Eval_funcd $K $I $E) $x
+          (@fapp0 (Fibre_cat $P $x) (Fibre_cat $E $x)
+            (@Fibre_func $K $P $E (@Eval_funcd $K $I $E) $x) (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u)) $y (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v)) $p)
+      (@fdapp1_int_hom_func $K $P $E (@Eval_funcd $K $I $E) $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v))
+      (@fdapp1_int_hom_func $K $R $P $FF $x $y $p $u $v);
+
+// lhs-audit: keep 1 -- same nested composition-category SR guard.
+rule @fdapp1_int_hom_fapp0 _ _ _ (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF)
+      $x $y $p $u $v $alpha
+  ↪ @fdapp1_int_hom_fapp0 $K $P $E (@Eval_funcd $K $I $E) $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v)
+      (@fdapp1_int_hom_fapp0 $K $R $P $FF $x $y $p $u $v $alpha);
+
+// lhs-audit: keep 1 -- same nested composition-category SR guard under Op.
+rule @fdapp1_int_hom_func _ _ _ (@Op_funcd _ _ _ (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF))
+      $x $y $p $u $v
+  ↪ @comp_cat_fapp0 (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K (@Op_catd $K $R) (@Op_catd $K $R) (@id_funcd $K (@Op_catd $K $R)) $x $u $y $v) $p) (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K (@Op_catd $K $R) (@Op_catd $K $P) (@Op_funcd $K $R $P $FF) $x (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) $y $v) $p) (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K (@Op_catd $K $P) (@Op_catd $K $E) (@Op_funcd $K $P $E (@Eval_funcd $K $I $E)) $x
+          (@fapp0 (Fibre_cat (@Op_catd $K $P) $x) (Fibre_cat (@Op_catd $K $E) $x)
+            (@Fibre_func $K (@Op_catd $K $P) (@Op_catd $K $E) (@Op_funcd $K $P $E (@Eval_funcd $K $I $E)) $x) (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u)) $y (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v)) $p)
+      (@fdapp1_int_hom_func $K (@Op_catd $K $P) (@Op_catd $K $E) (@Op_funcd $K $P $E (@Eval_funcd $K $I $E)) $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v))
+      (@fdapp1_int_hom_func $K (@Op_catd $K $R) (@Op_catd $K $P) (@Op_funcd $K $R $P $FF) $x $y $p $u $v);
+
+// lhs-audit: keep 1 -- same nested composition-category SR guard under Op.
+rule @fdapp1_int_hom_fapp0 _ _ _ (@Op_funcd _ _ _ (@comp_fapp0 (Catd_cat $K) $R $P $E (@Eval_funcd $K $I $E) $FF))
+      $x $y $p $u $v $alpha
+  ↪ @fdapp1_int_hom_fapp0 $K (@Op_catd $K $P) (@Op_catd $K $E) (@Op_funcd $K $P $E (@Eval_funcd $K $I $E)) $x $y $p (@fapp0 (Fibre_cat $R $x) (Fibre_cat $P $x)
+        (@Fibre_func $K $R $P $FF $x) $u) (@fapp0 (Fibre_cat $R $y) (Fibre_cat $P $y)
+        (@Fibre_func $K $R $P $FF $y) $v)
+      (@fdapp1_int_hom_fapp0 $K (@Op_catd $K $R) (@Op_catd $K $P) (@Op_funcd $K $R $P $FF) $x $y $p $u $v $alpha);
+
+/* Evaluation's projected hom action, in both ordinary and pointwise-opposite
+   presentations. The whole result remains the existing mixed Eval action. */
+
+rule @fdapp1_int_hom_func $K _ _ (@Eval_funcd $K $I $E)
+      $x $y $p (Struct_sigma $U $i) (Struct_sigma $V $j)
+  ↪ @Eval_fapp1_func $I (Fibre_cat $E $y)
+      (@comp_cat_fapp0 $I (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p) $U) $V $i $j;
+
+rule @fdapp1_int_hom_fapp0 $K _ _ (@Eval_funcd $K $I $E)
+      $x $y $p (Struct_sigma $U $i) (Struct_sigma $V $j)
+      (Struct_sigma $eta $q)
+  ↪ @tapp1_fapp0 $I (Fibre_cat $E $y)
+      (@comp_cat_fapp0 $I (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p) $U) $V $i $j $eta $q;
+
+/* Preserve the canonical opposite Hom endpoints while inferring the RHS.
+   Runtime then uses ordinary Op_func and Eval hom-action projection. */
+
+rule @fdapp1_int_hom_func $K _ _
+      (@Op_funcd $K _ _ (@Eval_funcd $K $I $E))
+      $x $y $p (Struct_sigma $U $i) (Struct_sigma $V $j)
+  ↪ @fapp1_func (Op_cat (Product_cat (Functor_cat $I (Fibre_cat $E $y)) $I)) (Op_cat (Fibre_cat $E $y))
+      (@Op_func (Product_cat (Functor_cat $I (Fibre_cat $E $y)) $I) (Fibre_cat $E $y) (@Eval_func $I (Fibre_cat $E $y)))
+      (@Product_pair (Op_cat (Functor_cat $I (Fibre_cat $E $y))) (Op_cat $I)
+        (@Hom_fapp0 Cat_cat $I $I (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@id Cat_cat $I) (@catd_transport_func $K $E $x $y $p) $U) $i)
+      (@Product_pair (Op_cat (Functor_cat $I (Fibre_cat $E $y))) (Op_cat $I) $V $j);
+
+rule @fdapp1_int_hom_fapp0 $K _ _
+      (@Op_funcd $K _ _ (@Eval_funcd $K $I $E))
+      $x $y $p (Struct_sigma $U $i) (Struct_sigma $V $j) $alpha
+  ↪ @fapp1_fapp0 (Op_cat (Product_cat (Functor_cat $I (Fibre_cat $E $y)) $I)) (Op_cat (Fibre_cat $E $y))
+      (@Op_func (Product_cat (Functor_cat $I (Fibre_cat $E $y)) $I) (Fibre_cat $E $y) (@Eval_func $I (Fibre_cat $E $y)))
+      (@Product_pair (Op_cat (Functor_cat $I (Fibre_cat $E $y))) (Op_cat $I)
+        (@Hom_fapp0 Cat_cat $I $I (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@id Cat_cat $I) (@catd_transport_func $K $E $x $y $p) $U) $i)
+      (@Product_pair (Op_cat (Functor_cat $I (Fibre_cat $E $y))) (Op_cat $I) $V $j) $alpha;
+
+/* Product pairing exposes its two displayed hom actions, preserving Op. */
+
+rule @fdapp1_int_hom_func $K _ _ (@Product_pair_funcd $K $E $B $C $FF $GG)
+      $x $y $p $u $v
+  ↪ Struct_sigma
+      (@fdapp1_int_hom_func $K $E $B $FF
+        $x $y $p $u $v)
+      (@fdapp1_int_hom_func $K $E $C $GG
+        $x $y $p $u $v);
+
+rule @fdapp1_int_hom_fapp0 $K _ _ (@Product_pair_funcd $K $E $B $C $FF $GG)
+      $x $y $p $u $v $alpha
+  ↪ Struct_sigma
+      (@fdapp1_int_hom_fapp0 $K $E $B $FF
+        $x $y $p $u $v $alpha)
+      (@fdapp1_int_hom_fapp0 $K $E $C $GG
+        $x $y $p $u $v $alpha);
+
+rule @fdapp1_int_hom_func $K _ _ (@Op_funcd $K _ _ (@Product_pair_funcd $K $E $B $C $FF $GG))
+      $x $y $p $u $v
+  ↪ Struct_sigma
+      (@fdapp1_int_hom_func $K (@Op_catd $K $E) (@Op_catd $K $B) (@Op_funcd $K $E $B $FF)
+        $x $y $p $u $v)
+      (@fdapp1_int_hom_func $K (@Op_catd $K $E) (@Op_catd $K $C) (@Op_funcd $K $E $C $GG)
+        $x $y $p $u $v);
+
+rule @fdapp1_int_hom_fapp0 $K _ _ (@Op_funcd $K _ _ (@Product_pair_funcd $K $E $B $C $FF $GG))
+      $x $y $p $u $v $alpha
+  ↪ Struct_sigma
+      (@fdapp1_int_hom_fapp0 $K (@Op_catd $K $E) (@Op_catd $K $B) (@Op_funcd $K $E $B $FF)
+        $x $y $p $u $v $alpha)
+      (@fdapp1_int_hom_fapp0 $K (@Op_catd $K $E) (@Op_catd $K $C) (@Op_funcd $K $E $C $GG)
+        $x $y $p $u $v $alpha);
+
+/* Identity and the existing weakened constant section, at whole and point
+   displayed-hom projections. No arbitrary section or laxity is collapsed. */
+
+// This identity category is a measured component-projection guard: without
+// it, existing tapp0/tapp1 identity rules do not establish type preservation.
+// The cell comes first so subsequent point-overlap checks see its normal form.
+// lhs-audit: keep 1 -- nested id category is the component-projection SR guard.
+rule @fdapp1_int_cell $K $E $E (@id (Catd_cat $K) $E) $x $y $p $u
+  ↪ @id (Fibre_cat $E $y)
+      (@fapp0 (Fibre_cat $E $x) (Fibre_cat $E $y)
+        (@catd_transport_func $K $E $x $y $p) $u);
+
+// lhs-audit: keep 1 -- same nested id-category SR guard.
+rule @fdapp1_int_hom_func $K $E $E (@id (Catd_cat $K) $E)
+      $x $y $p $u $v
+  ↪ @id Cat_cat
+      (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v) $p);
+
+// lhs-audit: keep 1 -- same nested id-category SR guard.
+rule @fdapp1_int_hom_fapp0 $K $E $E (@id (Catd_cat $K) $E)
+      _ _ _ _ _ $alpha
+  ↪ $alpha;
+
+// lhs-audit: keep 3 -- nested weakening's constant-family discriminator.
+rule @fdapp1_int_hom_func $K _ _ (@section_weaken_funcd $K $R (@Const_catd $K $I) (@Const_func $K $I $i))
+      $x $y $p $u $v
+  ↪ @Const_func
+      (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K $R $R (@id_funcd $K $R) $x $u $y $v) $p)
+      (Hom_cat $I $i $i) (@id $I $i);
+
+// lhs-audit: keep 3 -- same nested constant-family discriminator.
+rule @fdapp1_int_hom_fapp0 $K _ _ (@section_weaken_funcd $K _ (@Const_catd $K $I) (@Const_func $K $I $i))
+      _ _ _ _ _ _
+  ↪ @id $I $i;
+// lhs-audit: keep 3 -- same nested constant-family discriminator under Op.
+rule @fdapp1_int_cell $K _ _ (@Op_funcd $K _ _ (@section_weaken_funcd $K _ (@Const_catd $K $I) (@Const_func $K $I $i))) _ _ _ _
+  ↪ @id (Op_cat $I) $i;
+
+// lhs-audit: keep 3 -- same nested constant-family discriminator under Op.
+rule @fdapp1_int_hom_func $K _ _ (@Op_funcd $K _ _ (@section_weaken_funcd $K $R (@Const_catd $K $I) (@Const_func $K $I $i)))
+      $x $y $p $u $v
+  ↪ @Const_func
+      (@fapp0 (Op_cat (Hom_cat $K $x $y)) Cat_cat
+        (@homd_ $K (@Op_catd $K $R) (@Op_catd $K $R) (@id_funcd $K (@Op_catd $K $R)) $x $u $y $v) $p)
+      (Hom_cat (Op_cat $I) $i $i) (@id (Op_cat $I) $i);
+
+// lhs-audit: keep 3 -- same nested constant-family discriminator under Op.
+rule @fdapp1_int_hom_fapp0 $K _ _ (@Op_funcd $K _ _ (@section_weaken_funcd $K _ (@Const_catd $K $I) (@Const_func $K $I $i)))
+      _ _ _ _ _ _
+  ↪ @id (Op_cat $I) $i;
 
 // Internalized-x prerequisite: naturality component of Pi along a base functor.
 //

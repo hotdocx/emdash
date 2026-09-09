@@ -13,7 +13,10 @@ pre-op pilot and variance audit have been reread alongside responses
 consumer; reject only essential use of the demonstrated invalid reversal,
 not all Op-based formulations. The
 [pilot recovery section](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#recovery-of-the-pre-op-milestone)
-records the recovered implementation point and the narrower checked probe.
+records the recovered implementation point; its
+[qualification ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#qualified-structural-evaluation-tranche)
+now records the promoted local evaluation computation, whole/point/cell
+projection joins and preserved zero-complex/whole-H boundaries.
 
 Continuation clarification (2026-09-08): the user's native dependent-hom
 triangle suggestion supplies the next concrete representation candidate to

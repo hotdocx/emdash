@@ -32,8 +32,10 @@ or permission to qualify the affected foundational interfaces.
 The user's pre-op recovery clarification retains the whole-complex/homology
 pilot as the primary architectural direction. Its concrete evaluation
 instance is checked against an independent ordinary-Eval construction;
-general opposite repair remains deferred and all new rule promotion still
-requires the ordinary owner-position/SOP qualification.
+the refined structural evaluation rules are now active after scoped
+owner-position, projection-order and regression qualification. General
+opposite repair remains deferred; the strict zero-complex and whole-H
+interfaces are not yet completed by that local computation.
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,
@@ -5674,6 +5676,32 @@ of the new source-fibre object.  `sigma_functord_sec` then uncurries this
 displayed functor when a section over `Sigma(R)` is needed.  Generic
 `section_pullback_sec(F,E,s)` remains available and computes at literal base
 objects; it is no longer overloaded as the stable displayed weakening owner.
+
+The displayed-evaluation computation now follows those same whole/point/cell
+owners. A leading `Eval_funcd ∘ FF` exposes evaluation after FF; pairing keeps
+both displayed actions; identity acts as identity; an explicitly constant
+weakened section acts constantly at the appropriate identity. Opposite
+presentations have the same selected projections at their native Hom
+endpoints. The whole mixed Eval functor and its next Hom action remain
+available, not merely the component formula `eta[i]`.
+
+Transported-identity cells have explicit structural joins where the generic
+identity recognizer otherwise erases the whole/point discriminator. The
+terminal-source unit fold is restricted to a constant section of a constant
+family; its original whole/point/cell projections also compute after the
+weakening head disappears. There is no general section eta fold, arbitrary
+laxity-to-identity rule, unrestricted displayed-composite expansion or new
+primitive. The dedicated reviewer is
+[`displayed_evaluation.lp`](../examples/displayed_evaluation.lp); the
+[pilot ledger](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#qualified-structural-evaluation-tranche)
+records guards, competing projection orders and warning qualification.
+
+The concrete consumer is the whole edge observation of a varying triangle:
+an actual transformation `eta : T0 ⇒ PathOut(a) ∘ T1` is evaluated to
+`(a,eta[i])`. The local computation is independently checked using ordinary
+Eval and does not manufacture an inverse arrow. The hybrid triangle remains
+a prototype until its strict zero restriction and coherent maps are
+qualified; general op/Sigma repair is still deferred.
 
 The uncurrying operation is functorial at one whole owner:
 

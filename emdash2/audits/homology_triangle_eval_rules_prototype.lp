@@ -3,6 +3,9 @@
    bridge or covariant-universe op action is introduced. NON-LIBRARY: this is an append-only
    recovery candidate, not a promoted kernel rule set. Owner-position warning
    and inferred-slot qualification remain required before promotion. */
+// Historical append-only 21-rule experiment. The active nucleus now owns the
+// refined projection-order-complete instances; current consumers must import
+// the nucleus directly, not stack this earlier prototype on top of it.
 require open emdash.emdash3_2;
 
 /* Only a known leading evaluation operator opens a displayed composite.

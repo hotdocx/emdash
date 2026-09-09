@@ -78,6 +78,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   computing whole/component/identity projections and proof-time Op
   comparisons. This selective owner refinement does not import the parallel
   strictness migration or supply the separate dependent con ladder.
+  Structural displayed evaluation now computes through the existing whole,
+  point and extracted-cell owners for leading Eval, pairing, identity and
+  explicitly constant sections. The opposite instances evaluate supplied
+  arrows with the existing endpoints; they are not a general inverse-laxity
+  or Op_funcd-composition bridge. The homology pilot records the scoped
+  qualification and the still-open strict zero-complex/whole-H interface.
 - One-way standard-library extensions own equality-valued action and
   truncation, presheaves/sieves/sites/sheafification, commutative algebra and
   geometry, directed/groupoidal HITs, groupoidification, Gray/cubical and

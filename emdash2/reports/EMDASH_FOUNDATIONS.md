@@ -6025,6 +6025,30 @@ action in `u` rather than stopping at a pointwise cell. The public kernel owner
 is `functord_laxity_transf`. This construction exposes laxity already present
 in the internal action; it does not add an independent naturality square.
 
+Selected structural operations now compute within this same ladder. Displayed
+evaluation sends a transformation and a shape arrow to their ordinary mixed
+evaluation; with the shape arrow an identity, it returns the corresponding
+component. Pairing retains the pair of original actions, identity acts as
+identity, and an explicitly constant section acts constantly. Their whole
+Hom functors and further Hom actions remain available. Extracted-cell
+instances join the projection order in which the generic transported-
+identity recognizer has already replaced point action by `fdapp1_int_cell`.
+These are computations of existing internal structure, not additional
+naturality-square data or a collapse of arbitrary laxity witnesses.
+
+This suffices for the local varying-triangle observation
+`(a,eta) ↦ (a,eta[i])`, where eta is an actual transformation after source
+reindexing. Its selected opposite presentation has an independent ordinary-
+Eval interpretation with the same forward component, not an inverse to eta.
+The rules open only a composite whose leading displayed operator is Eval;
+ordinary mapped-arrow composition retains its existing accumulation
+orientation. The constant-section unit joins do not postulate whole section
+eta. See the [structural reviewer](../examples/displayed_evaluation.lp) and
+[qualification ledger](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#qualified-structural-evaluation-tranche).
+Strict zero-complex restriction, coherent global maps and whole H remain
+further work; the local result is not a repair or consistency claim for the
+known general op/Sigma issue.
+
 The existing transparent `piapp*` presentation is sufficient for this first
 consumer. A primitive redesign of section application remains consumer-gated.
 

@@ -1950,6 +1950,26 @@ it does not introduce a second square or law. For `h : u -> u'` in `E[x]`,
 the expression `laxity(FF,p)[h]` means the retained generic `tapp1` action of
 that same transformation.
 
+For the selected structural instances, the readable notation is:
+
+```text
+action_p(Eval)(eta,q)        → eta[q]
+action_p(⟨FF,GG⟩)(alpha)    → ⟨action_p(FF)(alpha), action_p(GG)(alpha)⟩
+action_p(id)(alpha)          → alpha
+cell(Eval,p,(U,i))           → id_(E[p](U[i])).
+```
+
+Here `action_p` denotes the existing `fdapp1_int_hom_func` and its
+`fdapp1_int_hom_fapp0` projection, not a new surface constructor. Whole mixed
+evaluation and further Hom action are retained. Ordinary and opposite
+presentations compute at their actual typed Hom endpoints; neither notation
+means reversing an arbitrary cell. Only leading-Eval composites are opened.
+Constant-section/terminal specializations have whole, point and cell joins;
+there is no general section eta syntax or law. The
+[dedicated reviewer](../examples/displayed_evaluation.lp) checks both
+projection orders and generic composition orientation. These computations do
+not yet define a whole zero-complex category or homology functor.
+
 For an ordinary `epsilon : F => G`, the two active fixed-object internal
 actions may be written
 

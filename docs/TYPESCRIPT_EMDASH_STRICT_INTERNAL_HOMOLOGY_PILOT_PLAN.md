@@ -2,14 +2,14 @@
 
 Date: 2026-09-08
 
-Status: active whole-complex/homology redesign; pre-op evaluation consumer recovered; general op repair deferred
+Status: active whole-complex/homology redesign; structural evaluation qualified and promoted; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
 repair is deferred. A pilot construction must have a justified mathematical
 meaning without essential use of that defect; the spelling `Op_funcd` alone
-is not a rejection criterion. No new structural-action rules from this pilot
-are active yet; scoped owner-position qualification remains required.
+is not a rejection criterion. The scoped structural evaluation tranche is
+now active; the complete zero-complex/whole-homology interface is not.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -877,7 +877,7 @@ append-only prototype. Both pass. This qualifies the first producer/consumer
 placement, not yet the remaining rule-hygiene, projection-order and
 regression requirements or active-kernel promotion.
 
-Next execution:
+Recovery execution sequence (item 1 is completed by the qualification below):
 
 1. Complete the narrow rules' owning-position qualification after the
    displayed weakening/evaluation declarations. Audit unused and reducible
@@ -904,3 +904,145 @@ as auxiliary reference work. Their final probes pass in
 `homology_maps_of_zero-20260908-190645.log`. They are not promoted and do not
 replace this whole-functor milestone. General op repair remains deferred;
 all of its checkpoints, source candidates and replay scripts are preserved.
+
+## Qualified Structural Evaluation Tranche
+
+The active nucleus now includes 31 runtime instances at the existing
+displayed evaluation/section-weakening owners. They introduce no primitive,
+unification rule, independently postulated laxity cell, or general duality
+bridge. The earlier 21-rule audit remains historical; the current recovered
+triangle consumer imports the nucleus directly. The independent native
+ordinary-Eval audit remains rule-free and Op-free.
+
+The rule inventory is:
+
+| Structural operation | Selected computation |
+|---|---|
+| Leading `Eval_funcd ∘ FF`, ordinary and opposite presentations | Whole, point, and extracted-cell action through Eval after FF; arbitrary displayed composites are not opened. |
+| `Eval_funcd`, ordinary and opposite presentations | Whole mixed Eval action, its point action on `(eta,q)`, and transported-identity cell at a visible `(U,i)`. |
+| Displayed pairing, ordinary and opposite presentations | Whole, point, and cell projections are pairs of the original actions/cells. |
+| Displayed identity | Whole identity Hom functor, unchanged point arrow, and transported-object identity cell. |
+| Explicitly constant weakened section, ordinary and opposite presentations | Whole constant Hom action and identity-valued point action; the ordinary cell uses the pre-existing weakening projection and the original constant section. |
+| Original constant section of a constant family | Whole constant Hom functor, point identity, and cell identity, including neutral terminal arguments. |
+| Constant-section presentation joins | Terminal-source weakening returns the same constant section; its opposite is constant at the same object of the opposite target. |
+
+Whole action is not inferred merely from the point formulas. The dedicated
+[`displayed_evaluation.lp`](../emdash2/examples/displayed_evaluation.lp)
+reviewer checks whole Hom functors, explicitly expanded competing projection
+orders, the next Hom action, and generic arrow-composition accumulation. It
+contains 32 positive assertions, one typed noncollapse negative, and one
+higher-action query. The current triangle audit computes the nonidentity
+edge observation to `(a,eta[i])`; no manual square/prism field is added.
+
+### What The Projection-Order Review Changed
+
+The first 21-rule candidate missed real transported-identity joins. Eval and
+constant weakening could compute by their point formula while the existing
+identity recognizer instead exposed an unreduced `fdapp1_int_cell`. Pairing
+and leading evaluation likewise needed the corresponding cell projections.
+These cells are extracted from the existing whole internal action. Pairing
+retains arbitrary component cells, and the leading-Eval cell applies Eval
+to the original FF cell; neither rule makes an arbitrary cell invertible.
+
+The review also exposed terminal specialization false negatives. A weakened
+constant section could acquire an ordinary `K → I` presentation before its
+displayed component reduced, leaving its object applications stuck. The
+narrow terminal/constant whole fold fixes that presentation, and the original
+constant-section whole/point computations join the order that erases the
+weakening head first. The point instance is needed even after the whole
+instance: neutral arguments of terminal type need not have the literal
+`Terminal_obj` syntax required by the older terminal-source recognizer.
+
+Do not generalize the terminal fold to arbitrary sections. That trial
+introduced a separate whole `1 → C` eta overlap between a neutral section
+component and the constant functor at its point. The chosen rule requires
+the explicitly constant target family and constant section, so it does not
+install that eta principle. The generic-section negative reviewer confirms
+that its extracted cell is not identified with an identity.
+
+Relevant failing controls remain in ignored probes/logs:
+`hint_eval_cell_order-20260908-201643.log`,
+`hint_constant_section_cell_order-20260908-201643.log`,
+`hint_eval_overlap_orders-20260908-204718.log`,
+`hint_eval_terminal_weakening_endpoints-20260908-204820.log`,
+`hint_eval_whole_owners-20260908-205437.log`, and
+`hint_eval_whole_owners-20260908-205620.log`.
+The completed whole reviewer passes in
+`hint_eval_whole_owners-20260908-205708.log`. These are concrete projection
+and endpoint tests, not a warning-count argument against intended rules.
+
+### LHS And Orientation Audit
+
+Twenty-nine unused candidate variables were replaced by `_`; no repeated
+equality guard was removed mechanically. The four leading-Eval whole/point
+rules retain the nested `Catd_cat(K)` composition category because both the
+wildcard trial and a tied-outer-base trial fail subject reduction
+(`hint_triangle_eval_guard_core-20260908-201442.log` and
+`hint_triangle_eval_guard_core-20260908-201830.log`). The corresponding cell
+rules use that same measured guard. Constant-section source/target families
+are genuine semantic discriminators: a constant displayed operator with a
+nonterminal source is a different case. Intentional nested guards are
+annotated; the generic strict LHS scan still reports 62 reviewed slots in
+39 clauses and no unreviewed candidates. Its limited head table does not
+replace this manual nested/dependent-head audit.
+
+Opening a displayed operator whose leading factor is Eval does not reverse
+the global accumulation of mapped arrows. Both `F[g] ∘ F[f] → F[g ∘ f]`
+and equality of two-stage Sigma evaluation with the action of the composite
+operator pass. The unrestricted displayed-composite and
+`Op_funcd(GG ∘ FF)` rules remain unpromoted historical probes.
+
+### Warning Classification And Validation
+
+The final active-core warning log is
+`emdash3_2-20260908-210011.log`: 1,139 critical-pair reports / 157 replaceable
+pattern reports, against the preceding 1,125/157 boundary. Every pair parses;
+there is no removed old rule-family count. The 14 added family instances are:
+
+| Family | Added reports | Typed control |
+|---|---:|---|
+| Point action versus transported-identity/terminal-source recognition | 8 | Op Eval (1), pairing (1), Op pairing (2), identity (2), and constant weakening (2); use the actual transported endpoint and its identity carrier. |
+| Constant weakening unit versus extracted cell | 2 | Ordinary and opposite terminal/constant cell orders. |
+| Constant weakening unit versus whole Hom action | 2 | Ordinary and opposite terminal/constant whole-functor orders. |
+| Constant weakening unit versus point action | 2 | Ordinary and opposite terminal/constant point orders, including neutral terminal data. |
+
+The raw overlap engine leaves endpoint/family variables independent which a
+typed instance relates. One identity overlap even instantiates object/arrow
+slots with a family and its category identity; it is not accepted as a
+well-typed generic consumer. The reviewer checks the meaningful typed cases
+and both explicitly exposed projection orders rather than declaring every
+raw warning harmless. Earlier source-order reports were also reduced by
+putting the existing selected cell joins before the corresponding point
+rules. The remaining counts are accepted diagnostic evidence, not a proof
+of global confluence, termination, or consistency.
+
+The exact fresh package `/tmp/emdash-displayed-eval-final.IM4Zui` checks the
+final nucleus, the dedicated reviewer, both native/recovered audits, central
+`emdash3_2_checks.lp`, and 13 existing reviewers: dependent-Hom laxity,
+ordinary con owners, products/Eval/curry, Sigma totalization, fibrewise Sigma,
+diagram evaluation, arrow/zero-arrow families, diagram exchange, chain-pair
+cubical/native views, PathOut transformation lift, and cubical-arrow functor
+action. All 18 targets pass, each with a 90-second ceiling and ordinary
+subject reduction. Logs are `logs/probes/final-staged-*.log`. Active-source
+and dedicated-reviewer checks also pass; the latter is
+`displayed_evaluation-20260908-210013.log`. The source bytes match the staged
+core exactly.
+
+The 42 focused metrics/TOC/registry/warning-parser tests, strict catalog
+freshness, source TOC and LHS checks pass. Source-only metrics collect 739
+registered files without checking unrelated targets. The parent full-health
+exception is retained; no repository-wide TypeScript, reviewer/source
+aggregate or book render is claimed.
+
+### Next Architecture Gate
+
+Resume the strict zero-long-edge restriction and coherent maps between the
+varying triangles. The actual transformation remains the source of the
+coherence/prism data; do not introduce a manual square record. Then qualify
+whole kernel/cokernel capabilities against the original selected operations,
+and build whole H. The present evaluation computation does not itself prove
+those universal interfaces, identify a directed zero cell with an equality,
+or turn objectwise factor contractibility into arbitrary-omega coherence.
+General op repair stays deferred and preserved. Generic window exactness,
+bounded assembly, retained proof–CAS choices and final book work are still
+required by the parent goal.

@@ -1,8 +1,9 @@
 /* NON-LIBRARY recovered triangle consumer. This records the actual
-   pre-op prototype and its constructor-visible nonidentity edge action.
+   pre-op prototype and its constructor-visible nonidentity edge action,
+   now using the qualified structural evaluation rules in the active nucleus.
    It is not a completed zero-complex category, whole H, or a claim of
    global consistency of the imported kernel. */
-require open emdash.audits.homology_triangle_eval_rules_prototype;
+require open emdash.emdash3_2;
 require open emdash.emdash3_2_walking_arrow_introduction;
 require open emdash.emdash3_2_dependent_simplex_native_dimensions;
 require open emdash.emdash3_2_cubical_internalization;

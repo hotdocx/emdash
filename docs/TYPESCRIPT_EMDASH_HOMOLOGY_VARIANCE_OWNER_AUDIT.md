@@ -328,8 +328,37 @@ It does not add the original unrestricted Op_funcd-composition bridge.
 The actual varying-triangle edge consumer passes with this bundle. Both
 native semantics and the recovered consumer are retained as tracked,
 non-library audits; their source names and final logs are in the pilot.
-Owner-position warning comparison, nested inferred-slot review, identity/
-composition projection orders and the full zero-prism/complex interface
-remain required. This recovery does not mark a full dependent con ladder
-implemented or identify arbitrary directed laxity cells with invertible
-ones.
+Owner-position warning comparison, nested inferred-slot review and identity/
+composition projection orders are now completed for this structural tranche;
+the full zero-prism/complex interface remains required. This does not mark a
+full dependent con ladder implemented or identify arbitrary directed laxity
+cells with invertible ones.
+
+## Qualified Local Evaluation, Not A General Con/Op Bridge
+
+The active nucleus now owns the refined 31-rule structural tranche. Its
+[full qualification ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#qualified-structural-evaluation-tranche)
+records actual failed projection-order controls, guarded subject-reduction
+experiments and the final typed reviewers. The operations are existing
+Eval, pairing, identity, and explicitly constant section/weakening actions;
+there is no new primitive, unifier, general displayed-composition fold, or
+map that reverses an arbitrary supplied laxity cell.
+
+Both whole Hom action and its capped/extracted-cell projections now survive
+the required evaluation and terminal/constant normalizations. The actual
+triangle consumer sends `(a,eta)` to `(a,eta[i])`, with eta an actual
+transformation. Its independent ordinary-Eval semantics remains available
+without Op or dependent Hom. The source-indexed hybrid category itself is
+still a prototype: this local qualification neither supplies strict zero
+restriction/prism coherence nor repairs the inherited general op/Sigma issue.
+
+The final 1,139/157 warning boundary has 14 added classified family instances
+relative to 1,125/157: eight point/point identity-or-terminal overlaps and
+six whole/point/cell versus constant-weakening-unit overlaps. Meaningful
+typed instances and explicit competing projection orders pass; independent
+metavariables in raw overlaps are not silently treated as valid typed data.
+All 18 scoped fresh-stage targets, the active core and the dedicated reviewer
+pass. The 42 focused tooling tests and strict LHS/TOC/catalog checks pass.
+The full-health exception and deferred general variance-repair ledger remain
+unchanged. Resume the whole-complex zero restriction next, not the general
+duality migration or a component-level replacement of the pilot.
