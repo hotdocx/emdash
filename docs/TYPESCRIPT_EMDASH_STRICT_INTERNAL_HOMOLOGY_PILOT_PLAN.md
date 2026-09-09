@@ -133,6 +133,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-PRESENTATION-10` | implemented and qualified at the scoped declaration boundary | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
 | `HINT-MATES-11` | implemented and qualified; six-module/four-reviewer tranche below | whole mate views from the existing adjunction ProfComparison, semantic unit/counit usability, and agreement with the original selected lift/colift on derived annihilator inputs |
 | `HINT-FAMILY-12` | implemented and qualified for already coherent families; global applicability remains in rows 4/5 | derive β = K(h) ∘ η_A and H = Q ∘ Arr(β) from a whole family h:J∘A⇒D; qualify maps/higher action and retain the global complex-category and concrete CAS obligations |
+| `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
+| `HINT-REALIZATION-14` | local Freyd cell/square-to-path diagnostic passes; whole realization remains to qualify | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1545,3 +1547,111 @@ accepting coherent A/D/h is now available. Preserve the existing native,
 triangle and comma experiments as evidence while selecting that universal
 family. The parent window-exactness, bounded formal assembly and final book
 requirements remain unchanged.
+
+### Strict Universal-Family Experiment
+
+The preceding turn made implementation progress at `1c09c14e`. This
+continuation rechecks its clean branch, baseline ancestry and the whole-H
+reviewer (`homology_families-20260909-101807.log`) before the next experiment.
+The recovered triangle and represented-comma probes retain genuine directed
+map actions, but the latter's arbitrary homdc filler cannot be used as the
+strict naturality of a universal h. No blanket local-discreteness assumption
+or conversion of that arbitrary filler into equality is proposed.
+
+Test a strict-comma classifier with whole projections p/q and an actual
+universal transformation α:F∘p⇒q. A coherent family G:X→A, H:X→B,
+η:F∘G⇒H is classified by a whole X→Comma(F) functor, with whole
+projection/transformation beta and canonical eta. Objects use only the
+existing dependent groupoid Sigma of (a,b,h:F(a)→b); no new manually stored
+square or cone-proof field is introduced. The generic category and whole
+universal operations may be primitive because their strict-map semantics
+are not those of the existing lax homdc total. This is an explicit synthetic
+universal-construction experiment, not a claim that the lax total already
+has that property. Its whole transformations retain arbitrary further Hom
+action; it is not a path category of complex objects.
+
+Specialize F to J:C→Arr(C), then apply the already constructed family H to
+the universal p/q/α. For original raw chain-pair objects, try the inverse
+kernel mate of their existing selected boundary lift to obtain the actual
+J(A)⇒d datum. This offers a transparent point introduction without a new
+manually assembled commuting square and should retain the same boundary
+and cokernel selection. Nonidentity classifying-family action, both whole
+projections, whole α recovery and the original selected object comparison
+are the first acceptance tests. Raw chain-map realization and the concrete
+proof–CAS consumer remain necessary: generic formation alone does not close
+those rows. Preserve the alternative triangle/diagram-restriction approaches
+and backtrack this classifier if its semantics or owner-position tests fail.
+
+### User-Requested Local-Truncation Review
+
+The user asks whether the generic formal diagram/complex theory should remain
+untruncated and naturally lax, with a truncation or realization profile at
+the CAS boundary. This is a serious alternative to making the generic source
+strict. Pause promotion of `strict_comma_classifier_20260909.lp` while
+qualifying it. That initial probe passes declaration checking and both whole
+projection betas (`strict_comma_classifier_20260909-20260909-102932.log`),
+but does not yet implement the whole universal-transformation beta, complete
+classification, or old-data consumer. Nothing from it has entered the active
+library. Preserve the probe as comparative evidence rather than declare it
+the final architecture.
+
+Three distinctions govern the reviewed continuation:
+
+- Strictness of an operation constrains its structural comparison cells; it
+  does not truncate all arbitrary cells of the ambient category. The parallel
+  branch's `emdash3_2_gray_profiles.lp` confirms that its strict functor and
+  transfor profiles constrain existing extracted compositor/naturality
+  witnesses. It does not supply a general locally discrete target theorem.
+  No code from that branch is imported by this review.
+- A suitable ordinary-category realization identifies higher comparison data
+  in its target, without reflecting those equalities back into the source.
+  For genuinely directed Hom categories, taking only the core and then its
+  connected components is different from identifying endpoints of arbitrary
+  directed cells. The latter requires the appropriate local groupoidification/
+  truncation or a given functor into an ordinary-category target.
+- Skeleton/normal-form selection chooses representatives; it is not the
+  operation that removes higher cells, and it does not permit unrelated raw
+  matrices or selected universal objects to be identified literally.
+
+The current Freyd target already has exactly relevant local structure:
+`CommRingFreydRawHomGroupoid` groupoidifies the original agreement category,
+`CommRingFreydHomSet` is its 0-truncation, and the whole Hom-category rule in
+`emdash3_2_commutative_algebra_freyd_presentations.lp` returns
+`Path_cat(CommRingFreydHomSet)`. This is stronger than merely knowing that
+the object carrier of an arbitrary Hom category is a set.
+
+The new diagnostic `freyd_local_truncation_boundary_20260909.lp` passes
+(`freyd_local_truncation_boundary_20260909-20260909-103435.log`). An existing
+directed 2-cell in that Freyd category is directly a path, and a native
+`homdc_fibre` square is directly an equality between its two composites.
+Both proof bodies are the supplied cell itself, with no new rule, equality
+axiom or opacity. The same attempted typing for an arbitrary category is a
+passing negative control. These facts suggest first qualifying the native
+triangle/comma theory in the already locally truncated formal CAS target,
+instead of immediately adding a second generic strict category.
+
+The proposed boundary is native whole omega/lax diagram → selected formal
+ordinary-category realization → existing CAS delegation/replay. The first
+whole realization and its selected-operation comparisons are not claimed
+implemented by this local diagnostic. A cell can imply equality after
+realization without being an equality upstairs. Truncation alone also does
+not establish preservation of the selected kernels, cokernels, homology or
+exactness; compute H in the realized target using the same selections and
+prove/declare only the justified compatibility contract. Nor may quotient
+paths be decoded back into raw coefficient witnesses: retain existing raw
+provenance or use the explicit CAS operation to obtain such data.
+
+For future higher homological algebra, a directed cell d²⇒0 is not by itself
+an invertible nullhomotopy. Appropriate higher/lax universal structure is
+still required before assigning an upstairs homology construction to every
+such diagram. Passing to an ordinary homotopy category is not an automatic
+route to an abelian category: Lurie's
+[stable-infinity-category paper](https://arxiv.org/abs/math/0608228)
+identifies its homotopy category as triangulated, while the heart of a chosen
+t-structure supplies an abelian layer. This is a scope distinction, not a
+new spectra/t-structure prerequisite for the current bounded CAS task.
+Lurie's [Higher Topos Theory](https://www.math.ias.edu/~lurie/papers/HTT.pdf),
+§1.2.3–1.2.4, gives the mapping-space homotopy-category comparison; its
+(infinity,1) setting must not be silently substituted for arbitrary directed
+omega Homs. Keep the local model/truncation contract explicit even when it
+is a trusted practical adapter invariant rather than a reconstructed proof.
