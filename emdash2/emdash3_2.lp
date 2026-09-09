@@ -17476,6 +17476,43 @@ rule @fapp1_fapp0
 // computation rules, because the primary curry package is a definition through
 // that telescope rather than a primitive object-action rewrite rule.
 
+// Whole evaluation after exchange. This joins domain/codomain of an
+// introduced diagram family before forming kernel/cokernel unit endpoints.
+rule @comp_fapp0 Cat_cat _ _ _
+      (@sym_fapp0_func _ $A $C (@id Cat_cat _) $a)
+      (@sym_func $A $B $C $H)
+  ↪ @fapp0 $A (Functor_cat $B $C) $H $a;
+
+// Došen rectangles after exchange has exposed its stable arrow projection.
+// These are instances of the generic adjunction cuts, not new adjunction laws.
+// lhs-audit: keep 1 -- ambient transfor category is the measured SR guard.
+// The nested counit source is the genuine left-adjoint image discriminator.
+rule @comp_fapp0 (Functor_cat $A $C) _ _ _
+      (@tapp1_fapp0 _ _ _ _
+        (@sym_fapp0_func $A $B $C $H $X') $Y
+        (@counit_adj_transf _ _ (@sym_func $A $B $C $H) $G $J) $f)
+      (@sym_tapp1_fapp0_transf _ _ _ $H $X _
+        (@tapp1_fapp0 _ _ _ _ $X $X'
+          (@unit_adj_transf _ _ (@sym_func $A $B $C $H) $G $J) $g))
+  ↪ @comp_fapp0 (Functor_cat $A $C)
+      (@sym_fapp0_func $A $B $C $H $X)
+      (@sym_fapp0_func $A $B $C $H $X') $Y
+      $f (@sym_tapp1_fapp0_transf $A $B $C $H $X $X' $g);
+
+// lhs-audit: keep 1 -- same ambient transfor-category guard.
+// The nested unit target is the genuine right-adjoint image discriminator.
+rule @comp_fapp0 (Functor_cat $A $C) _ _ _
+      (@sym_tapp1_fapp0_transf _ _ _ $H _ $Y
+        (@tapp1_fapp0 _ _ _ _ $Y' $Y
+          (@counit_adj_transf _ _ $F (@sym_func $A $B $C $H) $J) $g))
+      (@tapp1_fapp0 _ _ _ _ $X
+        (@sym_fapp0_func $A $B $C $H $Y')
+        (@unit_adj_transf _ _ $F (@sym_func $A $B $C $H) $J) $f)
+  ↪ @comp_fapp0 (Functor_cat $A $C) $X
+      (@sym_fapp0_func $A $B $C $H $Y')
+      (@sym_fapp0_func $A $B $C $H $Y)
+      (@sym_tapp1_fapp0_transf $A $B $C $H $Y' $Y $g) $f;
+
 // 17e. Section pullback and internal Pi action
 //
 // Internalized-x prerequisite: pull a section back along a base functor.

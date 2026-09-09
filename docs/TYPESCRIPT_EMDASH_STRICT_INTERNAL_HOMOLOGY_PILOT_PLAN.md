@@ -120,7 +120,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
-| `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-UNIVERSAL-3` | declaration-backed selected presentations implemented; full mate-to-old-lift and concrete realization remain | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | varying-source triangle-diagram prototype checked in part | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
@@ -129,7 +129,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
 | `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
 | `HINT-ZERO-9` | comparing native long-edge restriction and the internal zero-arrow comma presentation | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
-| `HINT-PRESENTATION-10` | declaration-backed kernel/cokernel object, component and map comparisons checked in probes; promotion gates in progress | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
+| `HINT-PRESENTATION-10` | implemented and qualified at the scoped declaration boundary | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1280,3 +1280,70 @@ minimal-core staging, focused regressions, source registration and authority
 synchronization remain before active-library promotion. This does not yet
 complete whole complex maps, the mate-to-old-lift comparison, whole H or the
 actual CAS vertical consumer.
+
+### Promoted Presentation Boundary
+
+The active modules are now:
+
+- `emdash2/emdash3_2_strict_transfor_component_paths.lp`: the rule-free
+  first-class strict component-naturality comparison;
+- `emdash2/emdash3_2_kernel_adjunction_presentations.lp`: kernel presentation,
+  whole functor/adjunction, derived whole inclusion, old selected object/map
+  views, and three usability comparisons with defined reflexivity paths;
+- `emdash2/emdash3_2_cokernel_adjunction_presentations.lp`: the corresponding
+  cokernel presentation and whole projection, over its original selections.
+
+Each presentation module has three primitive owners: the presentation
+classifier, the whole functor and the adjunction observation. It has no
+runtime object/map fold. Its three unifiers cover object observation,
+inclusion/projection component, and induced map. Semantic record/lift
+definitions are matched at their real Sigma-projection heads; the remaining
+selected data are reconstructed in side conditions. Unused zero-object,
+zero-structure and presentation arguments stay `_` on those LHSs. The
+comparison paths are actual definitions, not opaque equality witnesses.
+
+The core now owns the three qualified prerequisites: whole evaluation after
+exchange, and both Došen rectangles after exchanged action has projected to
+its stable head. The redundant Functor_cat guard is removed as established
+above. Final active core warning log `emdash3_2-20260909-074128.log` retains
+the previous 1,139/157 inventory. The strict LHS audit has no unreviewed
+findings and 64 annotated slots in 41 clauses. These three rules do not
+change the generic mapped-arrow accumulation orientation.
+
+The dependency-union warning baseline
+`kernel_presentations_dependency_baseline-20260909-074402.log` and both
+active presentation logs (`emdash3_2_kernel_adjunction_presentations-20260909-074130.log`,
+`emdash3_2_cokernel_adjunction_presentations-20260909-074131.log`) all report
+1,239/169 with identical rule-family counts and no parser issues. The higher
+count is inherited from their existing terminal/additive/universal
+dependencies, not added by the new presentation unifiers.
+
+The final fresh package `/tmp/emdash-kernel-presentations-final.GBDBfq`
+checks 20 targets, each bounded to 90 seconds: the core, three new modules,
+three new reviewers, diagram exchange, arrow/zero-arrow families, displayed
+evaluation, dependent-Hom laxity, old kernel/cokernel/homology maps, selected
+Freyd lifting and actual homology, monads, pullbacks and central diagnostics.
+All pass; logs are `logs/probes/presentation-final-*.log`. Active scoped
+`scripts/check.sh` also passes the three modules and three reviewers.
+The active core/modules match the staged source bytes.
+
+The new reviewers have 14 positive assertions, four negative controls and
+three further-Hom queries. They check typed object/map reflexivity through
+the unifiers, retention of formal runtime observations, generic identity/
+composition, rejection of an unrelated map of the same type, four actual
+nonidentity Došen rectangles, and the normalized product-valued evaluation
+case. Both whole unit/counit-derived comparison bodies are checked by their
+own source declarations.
+
+Source and reviewer registration is synchronized. The 42 focused metrics/
+TOC/registry/warning-parser tests, strict LHS and TOC, catalog freshness and
+document/shell hygiene pass. Source-only metrics now cover 745 files. The
+standing full-health exception remains explicit; no unrelated repository,
+TypeScript, source/reviewer aggregate or book render is claimed.
+
+This completes the declaration/usability tranche, not the full homology
+goal. Next qualify the actual mate-to-old-lift/colift relationship, use it
+in the whole complex/boundary/homology construction, and construct the
+concrete retained-selection proof–CAS consumer. No automatic presentation
+inhabitant, closed quotient effectiveness, general op repair, or conversion
+of arbitrary directed prism data into equality is supplied here.

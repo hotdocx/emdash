@@ -4190,8 +4190,33 @@ back and observe a shape object/arrow to recover F, G and eta themselves,
 not merely their components; their whole higher actions remain available.
 Applying this to id_C⇒const_t supplies X↦(X→t). Its initial dual uses the
 actual opposite terminal structure and Op_transf, without a second primitive
-arrow theory. The required whole kernel/cokernel universal capabilities are
-the next step, not consequences asserted merely from these embeddings.
+arrow theory. These embeddings alone do not assert the whole kernel/cokernel
+universal capabilities.
+
+The next layer now has declaration-backed presentations `J⊣K` and `Q⊣I`
+over the original selected kernel and cokernel families. A presentation is
+additional coherent structure realizing those choices; no constructor claims
+that every older higher-categorical family automatically has one. Its whole
+kernel inclusion is domain applied to the counit, and its whole cokernel
+projection is codomain applied to the unit. Object, component and induced-map
+observations compare proof-time with the original operations. The map
+comparison uses the existing selected lift/colift and derives compatibility
+from the actual arrow-diagram transformation, not from a new square input.
+
+This proof-time choice is computationally significant. The direct rewrite
+from a formal kernel/cokernel object to its selected record projection erased
+an adjunction-cut discriminator. Retaining `K[d]` and `Q[d]` at runtime while
+providing unifiers and defined reflexivity paths preserves both the original
+data and the nonidentity Došen rectangles. Whole functor action, generic
+identity/composition and further Hom action remain available. The core's
+whole evaluation-after-exchange and two projection-order rectangle instances
+support these declared adjunctions without a second adjunction calculus.
+
+This is infrastructure toward cycles as `K(d)`, boundary as the transpose
+of the zero-arrow datum, and homology as its cokernel. The mate-to-old-lift
+agreement, complete complex-map interface, whole H and concrete CAS
+presentation consumer remain further work. The declarations are not opaque
+equality bridges or a claim of arbitrary quotient effectiveness.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

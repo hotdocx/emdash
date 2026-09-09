@@ -1933,6 +1933,38 @@ explicit `apply` nodes. This notation does not select a text parser,
 explicit bracket punctuation, arbitrary mixed-domain evaluation, or a
 general dependent-chain lowering.
 
+## Selected Kernel And Cokernel Presentations
+
+The declaration-backed whole operations use the existing arrow-diagram
+category and zero-arrow embeddings:
+
+```text
+J(A) = (A → t),       J ⊣ K
+I(A) = (t → A),       Q ⊣ I
+κ : K ⇒ domain
+π : codomain ⇒ Q.
+```
+
+`KernelPresentation(S,T,W)` and `CokernelPresentation(S,Tᵒᵖ,W)` refer to
+coherent presentations of the supplied original selection family W. They
+are not automatic introductions from arbitrary old capabilities. Read the
+following as proof-time usability, not runtime arrow rewrites:
+
+```text
+K[d] ≐ selected kernel object      κ[d] ≐ selected kernel embedding
+Q[d] ≐ selected cokernel object    π[d] ≐ selected cokernel projection
+K[η] ≐ existing kernel map         Q[η] ≐ existing cokernel map.
+```
+
+The corresponding kernel owners have the `kernel_presentation_*` and
+`cokernel_presentation_*` prefixes. Defined reflexivity paths package these
+agreements. Formal whole action remains the runtime owner for generic
+functoriality and adjunction rectangles, and further Hom action is retained.
+The semantic map receives an actual diagram transformation η and derives
+its old factor-space input through the existing strict component-naturality
+comparison. No new manual square syntax is introduced. These interfaces do
+not yet name a completed whole homology functor or a concrete CAS instance.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

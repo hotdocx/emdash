@@ -1128,7 +1128,29 @@ belongs to the owning implementation plan rather than to standing guidance.
   identity/composition joins, and the direct capped opposite action. The
   zero-arrow-diagram module uses the original terminal transfor and an
   explicitly supplied opposite-terminal structure for both whole embeddings.
-  No raw-square realization or kernel/cokernel adjunction is claimed yet.
+  These embeddings alone do not supply a raw-square realization or a
+  kernel/cokernel adjunction; declaration-backed presentations are separate.
+- `emdash3_2_kernel_adjunction_presentations.lp` and
+  `emdash3_2_cokernel_adjunction_presentations.lp` own whole `J⊣K` and `Q⊣I`
+  presentations indexed by the original `HasComputationalKernels` and
+  `HasComputationalCokernels` data. Each has a presentation classifier, a
+  whole functor and its adjunction observation. There is no automatic
+  presentation constructor for arbitrary old higher-categorical data.
+  The kernel inclusion is domain applied to the counit; the cokernel
+  projection is codomain applied to the unit. Their components, objects and
+  induced maps compare by three narrow unifiers per presentation with the
+  original selected operations, accompanied by defined `eq_refl` paths.
+  Both induced-map semantic definitions obtain their old Hom-factor input
+  from the actual diagram transformation's strict naturality; they ask for
+  no separate commuting-square field and select no replacement universal.
+  Object and arrow observations remain formal at runtime so the generic
+  adjunction/functor cuts retain their discriminators. The core supplies
+  whole evaluation after exchange and two post-exchange rectangle instances.
+  `emdash3_2_strict_transfor_component_paths.lp` packages the existing strict
+  component comparison through explicit raw/post/pre/mixed usability heads;
+  it adds no rule and makes no assertion about arbitrary lax transformations.
+  The presentations retain further Hom action but do not yet supply whole H,
+  the mate-to-old-lift comparison or a concrete closed Freyd presentation.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

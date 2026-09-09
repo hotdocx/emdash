@@ -84,8 +84,11 @@ squares recover their shared original middle map; whole fixed-pair
 comparisons retain higher action. This is compatibility evidence, not yet
 a global category of complexes or a whole H. Native cells, combinatorial
 diagram shapes and cubical-from-simplicial maps remain complementary
-resources. The whole kernel/cokernel interface extensions remain probes,
-not promoted replacements for the existing capabilities. Preserve all
+resources. Declaration-backed whole kernel/cokernel presentations over the
+original selections are now active, with proof-time object/component/map
+comparisons and the actual nonidentity adjunction cuts. Their concrete CAS
+realization, mate-to-old-lift comparison and whole H remain further work;
+they do not automatically replace every old capability. Preserve all
 alternatives and consult the pilot's current review before choosing a
 representation-specific prerequisite.
 

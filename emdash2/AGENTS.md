@@ -105,6 +105,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   and transformation. `emdash3_2_zero_arrow_diagrams.lp` specializes this to
   the terminal transfor and an explicitly supplied opposite-terminal
   structure. These are not yet kernel/cokernel adjunction capabilities.
+- `emdash3_2_kernel_adjunction_presentations.lp` and its cokernel counterpart
+  declare whole adjunction presentations over original selected operation
+  families. Their object, inclusion/projection and induced-map observations
+  agree proof-time with those original choices, with defined reflexivity
+  paths; formal action remains available for generic functoriality and
+  Došen cuts. A presentation is additional coherent structure, not an
+  automatic inhabitant for every old capability or a closed Freyd provider.
+  The strict component-naturality helper uses the current strict usability
+  rules; it does not erase arbitrary laxity. Whole complex/H and the concrete
+  CAS presentation consumer remain further work.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not
