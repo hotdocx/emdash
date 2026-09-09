@@ -4324,7 +4324,19 @@ The nonsplit example doubles a nonzero projection and retains the original
 homology, kernel and cokernel selections. Its interpretation agreement is
 explicitly adopted as trusted presentation semantics; neither a general
 old/new H-map theorem nor a closed effective model is inferred from that
-adoption. All-position bounded-result observations remain a further step.
+adoption.
+
+The bounded consumer now applies that contract to every retained degree
+homology and every interior's exactness homology, together with both
+degreewise induced maps. It uses the actual adopted replay, keeps the
+earlier formal proofs, and reuses exact existing equations. The nonsplit
+two-degree example checks 18 homology points and eight induced maps without
+reselecting any universal object. Connecting arrows remain independently
+owned homological operations, not images of degree-preserving chain maps.
+Their whole-H/window interface and the generic long-exact theorem remain
+further work. New mathematics should use whole H; older formal wrappers may
+retire as their consumers migrate, while native matrix algorithms remain
+the implementation rather than a competing homology theory.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

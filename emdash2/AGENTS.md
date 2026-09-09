@@ -162,8 +162,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   seven original morphisms and two semantic-product equations. The first
   nonidentity TypeScript map consumer retains both original H selections,
   with explicit model-interpretation adoption and no endpoint transport.
-  All-window model binding and general old/new H-map proofs remain further
-  work; this does not construct a closed model from old providers.
+  The bounded model consumer now covers all retained degree/interior H
+  points and both degreewise induced maps in the actual adopted replay,
+  preserving earlier equations and selected formal exactness. The separate
+  connecting/window interface remains further work. Whole H is primary;
+  comparisons serve actual consumers, not exhaustive historical-wrapper
+  preservation. This does not construct a closed model from old providers.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

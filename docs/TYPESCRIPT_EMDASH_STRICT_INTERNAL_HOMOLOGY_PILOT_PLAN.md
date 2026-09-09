@@ -122,22 +122,22 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
-| `HINT-UNIVERSAL-3` | declaration-backed selected presentations and mate-to-old-lift/colift implemented; concrete realization remains | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | native global H implemented in the ordinary-target profile; raw entry/complete comparison/CAS consumer remain | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
-| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
-| `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
-| `HINT-CONSUMER-5` | point and nonidentity-map model consumers implemented; all-position result and expensive-consumer qualification remain | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
+| `HINT-UNIVERSAL-3` | selected presentations/mates qualified, with explicit bounded model interpretation; no automatic provider synthesis claimed | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-COMPLEX-4` | native global H, complete raw entry and bounded point/map CAS observations qualified; connecting/window continuation separate | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-COMPLEX-4A` | triangle alternative preserved; selected global implementation is the native zero-cone category in row 15 | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4B` | original components and native map entry qualified in row 16; no separate global legacy-map category required | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
+| `HINT-CONSUMER-5` | complete retained degree/interior point and induced-map consumer qualified; final performance/architecture audit remains | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 | `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
 | `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
 | `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
-| `HINT-ZERO-9` | comparing native long-edge restriction and the internal zero-arrow comma presentation | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
+| `HINT-ZERO-9` | native zero-arrow comma presentation selected and qualified in row 15; triangle experiments retained | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
 | `HINT-PRESENTATION-10` | implemented and qualified at the scoped declaration boundary | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
 | `HINT-MATES-11` | implemented and qualified; six-module/four-reviewer tranche below | whole mate views from the existing adjunction ProfComparison, semantic unit/counit usability, and agreement with the original selected lift/colift on derived annihilator inputs |
 | `HINT-FAMILY-12` | implemented and qualified for already coherent families; global applicability remains in rows 4/5 | derive β = K(h) ∘ η_A and H = Q ∘ Arr(β) from a whole family h:J∘A⇒D; qualify maps/higher action and retain the global complex-category and concrete CAS obligations |
-| `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
+| `HINT-STRICT-COMMA-13` | alternative superseded for this pilot by the existing native total plus the ordinary-target profile in row 15; probe preserved | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
-| `HINT-RAW-ENTRY-16` | formal object/map entry qualified; first point/map interpretation consumers implemented, all-position binding remains | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
+| `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -2473,7 +2473,122 @@ runner, public barrel, generic runtime and package setup are untouched.
 
 This completes the first model-aware map consumer, not the full pilot or
 goal. Next bind the retained degree/interior results under the same explicit
-model interpretation, without rerunning native windows. The general old/new
-H-map theorem, three generic window exactness proofs, bounded formal
+model interpretation, without rerunning native windows. Consumer-needed
+selected-operation links, three generic window exactness proofs, bounded formal
 assembly and final book review remain obligations. Preserve the existing
 op/Sigma repair deferral and its non-reliance boundary.
+
+### Retained Bounded Model Inventory: Current Work
+
+Checkpoint `12cbf68a` completes the first nonidentity map consumer. The next
+tranche lifts that same protocol over ONE already replayed bounded result:
+all A/B/C degree homologies (including the stored zero-extension degrees),
+both retained induced maps at each degree, and every displayed interior's
+original exactness homology. Prepare coefficient terms before closing the
+environment, then rebuild the observations from the actual replay output,
+checking against the prepared canonical inventory. Do not bind the earlier
+reference computation's object identities in place of the actual replay.
+
+Reuse existing adopted equations by their exact checked types. Add only
+missing raw relation/chain/semantic-product equations and explicit model
+interpretations; preserve the entire earlier source prefix and the actual
+formal interior/exactness terms. Each map must use the same model and its
+original source/target point observations. The connecting arrows remain
+the independently owned connecting construction already retained by the
+whole result, not fictitious images of degree-preserving chain maps under H.
+This inventory does not replace their remaining generic comparison/theorem.
+Reject changed labels, missing/foreign replay adoption, replaced choices,
+mixed models and forged preparations before asking for further trust.
+Focused existing tests will be extended in place; no shared runner, public
+barrel, generic runtime, new LP rule or whole-repository aggregate is needed.
+
+### Whole H Is Primary; Comparisons Are Implementation Links
+
+The user's follow-up distinguishes three layers: whole H and its ordinary
+functor action; the earlier formal `computational_homology_map` wrapper
+assembled from selected kernel/cokernel operations; and the native CAS
+algorithms that actually compute matrices, lifts and colifts. New mathematics
+should use whole H. Keep the native algorithms and the same selections as
+its implementation, and retain old formal wrappers only while consumers
+still need them. Their retirement is a consumer migration, not deletion of
+the CAS backend or permission to change homology choices.
+
+The existing `homology_family_map_path` already connects whole H action to
+the selected cokernel-map operation through presentation/usability data.
+Further links are justified when needed to interpret H in a retained native
+model or reuse an existing mathematical result. A comprehensive theorem
+comparing every old wrapper with every new expression is NOT an additional
+completion prerequisite merely for historical compatibility. Earlier broad
+references to a "general old/new H-map theorem" should be read with this
+clarification. No such broad comparison project replaces the pending generic
+window exactness, bounded formal theorem, or concrete model integration.
+
+### Retained Bounded Model Inventory: Qualified Result
+
+`algebra_formal_freyd_long_exact_model_preparation.ts` inventories every
+retained A/B/C degree homology, including both zero-extension degrees,
+every displayed interior's original exactness homology, and both induced
+maps at each degree. It composes existing private signature environments
+without adding new mathematical symbols. Preparation fixes all coefficients
+before the environment is closed. The issued preparation and canonical
+inventory protect labels, original complex/degree views, map endpoints and
+selected universal data.
+
+`algebra_formal_freyd_long_exact_model.ts` then reconstructs that inventory
+from the ACTUAL upstream replay, not the preliminary reference result. It
+requires the original replay adoption, checks both equation inventories and
+the same supplied coherent model, reuses previously adopted exact claim
+types, and sequentially appends only missing equations/interpretations.
+All earlier source entries and constructed formal homology/exactness terms
+remain usable. The output retains that exact native whole result and gives
+labelled point/map observations and explicit reuse/adoption counts. No
+homology, induced-map, weak-kernel, weak-pullback or window algorithm is run
+again. The adoption loop deliberately stays sequential because it extends
+one immutable source; independent arithmetic is not confused with concurrent
+source mutation.
+
+The nonsplit two-degree consumer has 18 points: 12 degree/role homologies
+over degrees −1, 0, 1, 2, plus the six displayed interior exactness homologies.
+Its eight map observations are the two DEGREE-PRESERVING induced maps at each
+stored degree. Connecting arrows remain the existing separate homological
+construction and are retained by the native result/raw-witness inventory;
+they are not mislabeled as H of a degree-preserving chain map. A model-level
+connecting/window interface is therefore still a genuine follow-up consumer.
+
+The focused nine-test run passes with both conformance flags enabled:
+`logs/probes/bounded-model-ts-fixed-20260909.log`. It checks the previous
+formal spine, all twelve homology/exactness terms and distinct raw witnesses,
+then every new formal/native point and complete H arrow, including the
+constructed original chain-map inputs. Both Lambdapi targets are accepted
+within the unchanged shared 60-second cap. All no-recomputation spies pass.
+Negative tests reject copied preparations, missing replay adoption,
+wrong-typed model inputs and changed degree labels/views/maps before further
+trust. The preceding run exposed only adapter mistakes: slash-containing
+proof-plan IDs and omitted source spans on combined-environment inputs.
+Both were fixed locally; neither shared checker nor mathematical source
+changed.
+
+Reproduce that focused run from the Git root with:
+
+```bash
+EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_HOMOLOGY=1 \
+EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_MODEL=1 \
+node --require ts-node/register --test tests/v3_2_algebra_formal_freyd_long_exact_homology_tests.ts
+```
+
+Measured scope: about 389 seconds for the entire focused suite; about 42.2
+seconds for the new observation test, 34.9 seconds for its conformance test,
+and 35.7 seconds for the preceding formal/raw conformance test. These latter
+timings include host-side document construction, not just Lambdapi. The
+pre-existing formal construction and raw-witness validation account for a
+large fraction of the total. This is useful baseline evidence, not a claim
+of interactive performance or a justification for a generic runtime rewrite.
+Workspace, TypeScript typechecking, affected-file lint and diff checks pass.
+No LP source, rule, unifier, shared runner, public barrel or package setup is
+changed; no unrelated repository aggregate is run.
+
+Next: audit the actual connecting/window consumer against whole H and its
+existing selected-operation usability, then continue the three generic
+window exactness proofs and bounded formal assembly. An old formal map
+wrapper need not receive an exhaustive compatibility theorem. The final
+book/architecture review and inherited op/Sigma/full-health caveats remain.

@@ -94,9 +94,29 @@ the same explicit model interpretation. The nonzero doubled-projection
 consumer passes with no kernel/cokernel/homology reselection or endpoint
 transport. The [map consumer ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#model-aware-map-result-implementation-and-qualification)
 records the exact boundary and validation. All-position model binding,
-general old/new map comparison, generic window exactness, bounded formal
+consumer-needed selected-operation links, generic window exactness, bounded formal
 assembly and final book consolidation remain required. No scope is removed
 by completing this first map consumer.
+
+Interface clarification (2026-09-09): whole H is the primary mathematical
+interface; the native lift/colift/matrix operations remain its implementation.
+The pilot's [implementation-link review](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#whole-h-is-primary-comparisons-are-implementation-links)
+distinguishes these from older formal wrappers, which may retire after their
+consumers migrate. Preserve meaningful model/selected-operation agreement,
+not an unnecessary theorem comparing every historical API expression. This
+does not relax preservation of the original homology or the generic
+window/long-exact theorem and final book obligations.
+
+Bounded model inventory (2026-09-09): the qualified consumer now interprets
+all retained degree/interior H points and both degreewise induced maps in
+ONE supplied model, rebuilding from the actual adopted replay and preserving
+the earlier formal/raw source. The nonsplit fixture checks 18 points and
+eight induced maps without recomputation; both new and preceding Lambdapi
+conformance targets pass. The pilot's
+[qualification ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#retained-bounded-model-inventory-qualified-result)
+records scope and cost. Connecting arrows are independently owned and are
+not silently treated as H-images; their whole-H/window consumer and the
+generic exactness/assembly/book obligations remain the next steps.
 
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
@@ -888,7 +908,7 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
 | `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; checkpoint `933aa435` | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
-| `LEH-BRIDGE-12` | pending | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
+| `LEH-BRIDGE-12` | whole replay, actual formal interiors and bounded model point/induced-map inventory qualified; connecting/window interface audit remains | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | in progress; current checked draft integrated; final generic-theorem updates remain | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |

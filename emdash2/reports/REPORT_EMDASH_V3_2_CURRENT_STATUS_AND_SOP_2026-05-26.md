@@ -1294,8 +1294,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   projection, retains its original source/target H and kernel/cokernel
   choices, and forbids reselection. Its complete-arrow agreement is explicit
   `trusted-presentation-semantics` adoption, not an endpoint transport or a
-  generic old/new map theorem. All-window model binding, the general
-  compatibility proof and the full goal's window/LES obligations remain.
+  generic old/new map theorem. Whole H is primary; selected-operation
+  comparisons are needed for actual implementation/theorem consumers, not
+  to preserve every old formal wrapper indefinitely.
+  The private `algebra_formal_freyd_long_exact_model_preparation.ts` and
+  `algebra_formal_freyd_long_exact_model.ts` extend this over the actual
+  adopted bounded result. They cover all retained degree/interior points
+  and both degreewise induced maps, reuse exact existing claim types and
+  preserve the entire prior source. The nonsplit fixture's 18 points and
+  eight induced maps pass with no recomputation; old and new conformance
+  targets both check. Connecting arrows retain their separate homological
+  owner, not a fictitious H-image. Their model/window interface and the
+  full goal's generic exactness/assembly/book obligations remain.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -2039,6 +2039,13 @@ endpoint cast or a new normalization law. The matrix usability constructor
 notion, preserving the seven morphisms and two original coefficient
 witnesses; its equations use semantic matrix products, not an opaque map.
 
+The bounded model consumer uses degree/role and interior-position labels
+for those same observations. It preserves the actual replay and previous
+adoption source; labels do not create new mathematical owners. Its induced
+map observations cover inclusions/projections degreewise. Connecting arrows
+keep their separate homology-owned meaning and are not written as H of an
+ordinary degree-preserving chain map.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity
