@@ -121,9 +121,18 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   transformations. `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing
-  operations, without runtime reselection or new primitive H. This is not
-  yet a global complex category, automatic coherent realization of arbitrary
-  raw data, or the concrete CAS presentation consumer.
+  operations, without runtime reselection or new primitive H.
+  `emdash3_2_zero_arrow_cones.lp` reuses the native homdc/Sigma comma category.
+  Its one-category extension supplies one canonical whole universal
+  transformation under the existing `IsNCat` profile; no new category or
+  manually supplied square/prism record is introduced. The chain-pair view
+  derives the two old factor agreements from whole naturality, while the
+  homology extension applies the existing H-family construction globally on
+  this native category. The Freyd model derives the local profile from its
+  existing Path-category Hom sets and fills it inside the model-facing alias.
+  No general truncation reflector, closed Freyd kernel provider or concrete
+  new whole-H CAS replay is supplied by that profile. Retained-selection
+  realization and full old/new homology-map agreement remain further work.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

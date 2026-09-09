@@ -17,7 +17,7 @@ capability is not a prerequisite for declared structures and concrete
 instances. The full goal scope, choice-preservation requirements, general
 op-repair deferral and local-checkpoint authorization remain unchanged.
 
-Latest bounded implementation tranche (2026-09-09): whole adjunction mates
+Preceding bounded implementation tranche (2026-09-09): whole adjunction mates
 now compute and meet original selected kernel lifts/cokernel colifts. The
 rule-free `homology_family_func` constructs H:B→C from an already coherent
 family h:J∘A⇒D, retaining whole β and higher action; defined object/map
@@ -27,6 +27,17 @@ records all six modules, positive/negative controls, exact warning delta,
 fresh source-only qualification and local checkpoint boundary. This does
 not complete the global complex category/universal h, concrete whole-interface
 CAS consumer, three generic window exactness proofs or bounded formal theorem.
+
+Latest native ordinary-target tranche (2026-09-09): the existing native
+zero-cone category now has the qualified whole universal transformation and
+global H, with derived old chain-map views and an automatically filled Freyd
+OneCat profile. No new strict category, general truncation operation or
+manual square interface is introduced. The
+[promotion ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#promoted-native-ordinary-target-tranche)
+records source ownership, concrete target checks, the narrow opposite-identity
+matching repair and preserved failed alternatives. The next primary consumer
+is the actual retained-selection proof–CAS example; generic exactness,
+bounded formal assembly and final book requirements are unchanged.
 
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve

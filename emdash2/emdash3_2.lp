@@ -17172,6 +17172,12 @@ rule @fapp1_fapp0 _ _ (@sym_func $A $B $C $H) $b $b' $q
 rule @sym_tapp1_fapp0_transf $A $B $C $H $b $b (@id $B $b)
   ↪ @id (Functor_cat $A $C) (@sym_fapp0_func $A $B $C $H $b);
 
+// An opposite identity may normalize to id(B,b) before this projection.
+// lhs-audit: keep 2 -- Op_cat(B) is the actual opposite-identity discriminator;
+// retaining the shared B excludes identities of an unrelated category.
+rule @sym_tapp1_fapp0_transf $A (Op_cat $B) $C $H $b $b (@id $B $b)
+  ↪ @id (Functor_cat $A $C) (@sym_fapp0_func $A (Op_cat $B) $C $H $b);
+
 // lhs-audit: keep 1 -- subject reduction cannot reconstruct an arbitrary
 // ambient category from its Hom objects; this pins the transfor category.
 rule @comp_fapp0 (Functor_cat $A $C) _ _ _

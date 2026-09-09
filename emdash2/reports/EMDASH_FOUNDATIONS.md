@@ -4231,12 +4231,31 @@ The proof applies the old dependent selector to an equality of complete
 runtime operation or a replacement selection. Its arrow comparison reuses
 the existing cokernel-map theorem at those boundary diagrams.
 
-The global complex category providing the universal coherent h, the complete
-comparison with the old homology-map recipe, and the concrete CAS
-presentation consumer remain further work. In particular, an arbitrary lax
-comma category is not asserted to supply this strict family. These
-declarations and defined comparisons are not opaque equality bridges or a
-claim of arbitrary quotient effectiveness.
+For the current ordinary CAS target, the native represented comma now
+provides the global source of that construction. Its objects retain
+(A,d,h:J(A)⇒d), and its maps are inherited native homdc/Sigma maps. The
+existing one-category profile says that the whole Hom categories of C are
+discrete; this makes the native modification data equality-valued and
+justifies a canonical whole universal transformation J∘first⇒diagram.
+One new assembly operation exposes that transformation and its computing
+components. No separate strict complex category or manual square record is
+introduced. Applying the H-family construction then gives global H on this
+native source, with identity/composition and further Hom action.
+
+The Freyd target already has Path-category Homs on 0-truncated quotient sets,
+so its one-category profile is a short derived definition. The model alias
+fills it automatically; a general truncation operation and an extra
+user-supplied proof are not prerequisites. The generic omega/lax diagram
+theory remains unchanged. This is a qualified model specialization, not a
+claim that arbitrary directed fillers are paths upstairs or that truncation
+preserves every universal construction.
+
+The native arrow also supplies the former chain-pair map and all three of
+its original components; both factor compatibilities are derived from whole
+naturality. Full comparison with the old homology-map recipe and the concrete
+retained-selection CAS replay through this new whole interface remain further
+work. These declarations and defined comparisons are not opaque equality
+bridges or a claim of arbitrary quotient effectiveness.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

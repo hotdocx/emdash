@@ -1174,9 +1174,37 @@ belongs to the owning implementation plan rather than to standing guidance.
   reselection. H's map comparison specializes the existing cokernel-map
   theorem at the boundary-diagram input; a direct large reflexivity search
   timed out and is not the public proof interface. A complete comparison to
-  the older homology-map recipe, the global complex category/universal h,
-  and the concrete retained-selection CAS consumer remain further work.
+  the older homology-map recipe and the concrete retained-selection CAS
+  consumer remain further work. The ordinary-target native specialization
+  below supplies the global source/universal h at that qualified boundary.
   This does not identify arbitrary lax comma/prism cells with strict paths.
+- The `zero_arrow_cones`, `one_cat_zero_cones`, `zero_arrow_cone_chain_pairs`
+  and `zero_arrow_cone_homology` modules reuse the existing native represented
+  comma of J:C→Arr(C). Its category, whole source/diagram/vertex functors
+  and outgoing differential are transparent homdc/Sigma/evaluation views.
+  Under the existing `IsNCat (cat_succ cat_zero) C` profile, one new canonical
+  assembly operation supplies the universal transformation J∘first⇒diagram;
+  its component returns the stored arrow-diagram transformation. It is not
+  a new strict category, arbitrary-cell collapse or opaque equality bridge.
+  This supplies global H on the native category via the prior rule-free
+  H-family constructor. The old chain-pair map is derived from native arrows
+  with all three original components; its two factor paths come from whole
+  naturality rather than caller-supplied square fields. The selected-object
+  comparison uses the original kernel lift and cokernel selection.
+- `emdash3_2_commutative_algebra_freyd_zero_cones.lp` derives the existing
+  one-category profile for the unchanged Freyd carrier and packages it as
+  `OneCat`. Its model-facing universal-transformation alias fills that proof
+  and the selected terminal zero internally. This uses already present
+  truncation, not a new truncation functor or user-side proof obligation.
+  Whole H identity/composition, a further-Hom identity, the raw-map components,
+  and the concrete Freyd target's local cell/square-to-path conversion check.
+  A narrow Op-identity instance of `sym_tapp1_fapp0_transf` repairs the measured
+  generic H identity false negative; the current core warning inventory is
+  1,144/157 and the homology dependency join is 1,249/169. Its five additional
+  reports expose inherited Path/terminal/product identity-normal-form gaps,
+  verified on both baselines and retained in the pilot ledger. No general
+  op/Sigma repair, closed quotient effectiveness or actual new whole-H CAS
+  replay is claimed by this tranche.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

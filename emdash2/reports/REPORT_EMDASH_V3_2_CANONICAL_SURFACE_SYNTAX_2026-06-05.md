@@ -1981,8 +1981,19 @@ H = Q∘Arr(β) : B→C.
 
 `homology_family_func` is a transparent definition. Its selected object/map
 comparison paths do not change its runtime owner or reselect universals.
-The global complex category supplying such a universal h and the concrete
-CAS instance remain separate implementation obligations.
+The native ordinary-target specialization uses `ZeroArrowCone_cat(C,T)`,
+the existing represented homdc comma with objects (A,d,h:J(A)⇒d). Its whole
+first/diagram projections and the profile-qualified
+`zero_arrow_cone_universal_transf` supply the universal family above.
+`zero_arrow_cone_homology_func` then defines global H on that native source.
+No new strict category or manually supplied square/prism field is involved.
+
+The profile is the existing `IsNCat (cat_succ cat_zero) C`, not mere sethood
+of Obj(C). For the Freyd model, `freyd_zero_cone_universal_transf(R)` fills
+that derived evidence internally. This is a model specialization, not a
+generic truncation operator. The concrete retained-selection CAS replay and
+the complete comparison with the older homology-map recipe remain further
+implementation obligations.
 
 ## Whole Displayed Laxity Notation
 

@@ -2,15 +2,16 @@
 
 Date: 2026-09-08
 
-Status: active whole-complex/homology redesign; whole mates and coherent-family homology qualified and promoted; general op repair deferred
+Status: active whole-complex/homology redesign; native whole homology in ordinary targets qualified and promoted; concrete CAS consumer next; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
 repair is deferred. A pilot construction must have a justified mathematical
 meaning without essential use of that defect; the spelling `Op_funcd` alone
 is not a rejection criterion. Structural evaluation, selected presentations
-and whole homology of already coherent families are active; the global
-zero-complex/universal-family interface remains open.
+and native whole homology in the ordinary-target profile are active. The
+retained-selection CAS consumer and complete old/new map comparison remain
+open; arbitrary omega-target homology is not asserted by this specialization.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -122,7 +123,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | declaration-backed selected presentations and mate-to-old-lift/colift implemented; concrete realization remains | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | whole H for already coherent families implemented; global complex category/universal family remains | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-COMPLEX-4` | native global H implemented in the ordinary-target profile; raw entry/complete comparison/CAS consumer remain | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
@@ -134,7 +135,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-MATES-11` | implemented and qualified; six-module/four-reviewer tranche below | whole mate views from the existing adjunction ProfComparison, semantic unit/counit usability, and agreement with the original selected lift/colift on derived annihilator inputs |
 | `HINT-FAMILY-12` | implemented and qualified for already coherent families; global applicability remains in rows 4/5 | derive β = K(h) ∘ η_A and H = Q ∘ Arr(β) from a whole family h:J∘A⇒D; qualify maps/higher action and retain the global complex-category and concrete CAS obligations |
 | `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
-| `HINT-REALIZATION-14` | local Freyd cell/square-to-path diagnostic passes; whole realization remains to qualify | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
+| `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
+| `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1655,3 +1657,173 @@ Lurie's [Higher Topos Theory](https://www.math.ias.edu/~lurie/papers/HTT.pdf),
 (infinity,1) setting must not be silently substituted for arbitrary directed
 omega Homs. Keep the local model/truncation contract explicit even when it
 is a trusted practical adapter invariant rather than a reconstructed proof.
+
+### MVP Clarification And The Feasible Existing Profile
+
+The user accepted the local-realization review (archived response 0160) and
+clarified that an initial MVP may use ordinary-category behavior as a scoped
+practical CAS-model invariant. Do not make a general truncation operation,
+reflection functor, explicit user-supplied truncation proof, or comprehensive
+profile migration a prerequisite. The subsequent clarification is equally
+important: do not weaken an already feasible good construction merely to
+label it an MVP. Use existing infrastructure when it checks cheaply, hide
+routine model evidence in the adapter, and retain pragmatic contracts only
+where genuinely needed. The generic omega/lax diagram layer remains intact.
+
+The existing core already defines `IsNCat (cat_succ cat_zero) C` by asking
+each whole Hom category to be discrete. The Freyd instance is a short
+definition using its existing Path-category Hom rule and Hom-set truncation
+witness. `freyd_one_cat_20260909.lp` passes (`-104553.log`) and packages the
+same carrier as `OneCat`, with no new classifier or truncation operation.
+`freyd_zero_cone_model_20260909.lp` passes (`-110848.log`): its public
+`freyd_zero_cone_universal_transf(R)` fills this evidence and the selected
+terminal zero internally. Thus the practical API does not burden the user
+with profile arguments even though its semantic justification is retained.
+
+The new whole observation is a single canonical assembly operation on the
+EXISTING `ZeroArrowCone_cat`, not a new strict comma category. It is
+parameterized by the local `IsNCat` evidence. A native comma arrow carries a
+modification of the relevant arrow diagrams; in the one-categorical target,
+its components provide equality-valued compatibility with unique higher
+coherence. This justifies the tautological whole transformation from
+J∘first to diagram. The assembly is explicitly a new primitive operation,
+as with the existing set-target pointwise-transformation constructor: it is
+not claimed to be a transparent derivation from the old opaque `Transf`
+classifier. Its constructor-visible component returns the original stored
+diagram transformation; it adds no caller-supplied square/prism field and no
+opaque equality witness.
+
+Applying the already defined homology-family functor to these whole
+projections and the universal transformation gives global native H in this
+ordinary-target setting. The rule-free raw-view adapter derives both old
+chain-map agreements from whole naturality and retains the original first,
+middle and last components. Probes pass for the whole operation, raw adapter,
+all three nonidentity component observations, homology composition and the
+original selected-object comparison. Generic H identity initially failed;
+the actual diagnosis and narrow repair are recorded below.
+
+This is specialization of the untruncated infrastructure to an existing
+ordinary target, not a newly constructed generic truncation functor R from
+all omega categories. Such a reflector is not an MVP prerequisite. Nor do
+these model observations supply a closed quotient-effective Freyd kernel
+family or automatically instantiate every coherent kernel/cokernel
+presentation. The concrete retained-selection CAS consumer is still required.
+
+Local reference copies supplied by the user are present, with matching text
+extractions. Use them for future review without re-downloading:
+
+- `/home/user1/algebraic-geometry/lurie-Stable-Infinity-Categories-0608228v5.pdf`
+  and `.txt`;
+- `/home/user1/algebraic-geometry/lurie-Higher-Algebra-HA.pdf` and `.txt`;
+- `/home/user1/algebraic-geometry/lurie-Higher-Topos-Theory-HTT.pdf` and `.txt`.
+
+### Exchanged Opposite Identity: Measured Owner Repair
+
+The failed generic and visible-object native H identity checks normalize to
+`sym_tapp1_fapp0_transf` with source `Op_cat B` but argument `id B b`: the
+existing opposite-identity rule has already reduced `id (Op_cat B) b`.
+The earlier exchanged-action identity rule requires that argument's category
+to be the literal source, so it misses this genuine identity. The readable
+normal-form probe is `one_cat_zero_cone_identity_readable_20260909.lp`, log
+`-111359.log`. Ordinary generic F identity on the same native source passes,
+so this is a projection-order false negative, not absence of a category law
+or failure of the OneCat witness.
+
+One Op-specific instance at the existing exchanged-action owner fixes the
+whole H identity, including visible objects. It retains the shared B in the
+identity argument and uses `Op_cat B` as the actual source discriminator;
+it does not erase the identity-category guard indiscriminately or change
+the global composition orientation. This is an identity-representation join,
+not a repair to the deferred universe-op/Sigma variance problem.
+
+The source-only copied kernel and the global H reviewer pass in
+`/tmp/emdash-onecat-zero-cone.23IDAI`. The complete reviewer now also checks
+a further-Hom identity and rejection of an unrelated H-map. The copied core
+warning count is 1,144/157, up from 1,139/157. The exact five new reports are
+three `id × sym_tapp1_fapp0_transf` and two
+`Op_cat × sym_tapp1_fapp0_transf` overlaps: Path/eq_refl, terminal identity,
+and product-pair identity normal forms. Focused controls for those other
+normal forms fail BOTH before and after this change; logs are
+`onecat-exchange-{path,terminal,product}-baseline-20260909.log` and the
+corresponding non-baseline logs. They are inherited projection-normal-form
+gaps, not newly introduced regressions and not used by the current H
+consumer. Preserve them for a later consumer-driven identity-family audit;
+do not claim all projected identity presentations or global confluence are
+now settled. The repair's direct Op-identity, whole action, component and
+nonidentity-loop controls pass.
+
+The alternative neutral-object observation investigation is preserved but
+not promoted. Writing the nested Sigma carrier as a groupoid Sigma fails
+subject reduction: only `τ(Obj(Sigma_cat E))`, not `Obj(Sigma_cat E)` itself,
+has that decoder. Using the actual `sigma_obj_base`/`sigma_obj_fibre`
+carriers makes the narrow inner-projection probe type-preserving and permits
+the neutral observation, but it does NOT solve H identity. It was therefore
+the wrong fix for this consumer. The native-carrier probe, both failed
+identity variants, and their logs remain in `tmp/probes/`; no generic Sigma
+projection or object-eta rule is added to the library by this tranche.
+
+### Promoted Native Ordinary-Target Tranche
+
+The active source files are:
+
+- `emdash3_2_zero_arrow_cones.lp`: transparent represented comma, native
+  zero-cone category and whole source/diagram/vertex/differential observations;
+- `emdash3_2_one_cat_zero_cones.lp`: the one new canonical whole universal
+  transformation, qualified by the existing OneCat property, with one
+  constructor-visible component rule;
+- `emdash3_2_zero_arrow_cone_chain_pairs.lp`: rule-free original chain-pair
+  and chain-map views; both factor compatibilities are derived and all three
+  original arrow components compute;
+- `emdash3_2_zero_arrow_cone_homology.lp`: defined global H and its original
+  selected-object comparison; and
+- `emdash3_2_commutative_algebra_freyd_zero_cones.lp`: the derived Freyd
+  OneCat evidence, same-carrier package and model alias filling it internally.
+
+There is no new primitive category, homology functor, truncation operation,
+unification rule, or general record-of-squares interface. The sole new
+primitive is the qualified universal-transformation assembly operation. The
+only nucleus edit is the narrow exchanged opposite-identity instance above.
+
+The immutable source-only qualification tree is
+`/tmp/emdash-onecat-zero-cone.23IDAI`. Source modules, the four independent
+reviewers, their combined import, and central diagnostics with the new
+sources already imported pass. All targets have the same 90-second bound.
+The final higher-Hom/negative-map reviewer passes in
+`onecat-stage-higher-hom-final-20260909.log`. The concrete Freyd H identity,
+with the derived profile filled rather than supplied, passes in
+`onecat-freyd-homology-identity-20260909.log` and the active model reviewer
+`freyd_zero_cones-20260909-120031.log`.
+
+The four reviewers have 15 positive assertions, four negative controls and
+one further-Hom query. Coverage includes generic and concrete-target H
+identity, H composition and further-Hom identity, original selected-object
+agreement, all three nonidentity raw-map components, model universal beta,
+actual Freyd two-cell/native-square path conversion, rejection of an
+unrelated H-map, and rejection of object-set evidence as a OneCat profile.
+The exact active source and reviewer bytes match the qualified copy.
+Scoped active `scripts/check.sh` passes the homology/raw-view/model sources
+and the four reviewers (`onecat-active-checks-20260909.log`); the model
+reviewer is separately rerun after adding its concrete H identity.
+
+Warning parsing is complete: current core 1,144/157 and the whole homology
+dependency join 1,249/169. The five new core reports are the inherited
+identity-normal-form families classified above; no other family is added or
+removed. The strict core audit still reports 64 reviewed slots in 41 clauses
+and no unreviewed findings; the Op discriminator is additionally documented
+beside the new rule. The new universal rule has no compound inferred-slot
+findings. The 42 focused tooling tests, source registration, catalog
+freshness, TOC and source-only metrics pass; the latter cover 764 files.
+The standing full-health exception is unchanged. No unrelated aggregate,
+TypeScript gate, book render, push or merge is included.
+
+Next implement the concrete retained-selection proof–CAS consumer through
+this whole interface, starting with introduction of the already computed
+chain pair and a nonidentity map. The selected-boundary inverse-kernel-mate
+route remains a candidate for the point introduction; use native square/
+diagram realization only where an actual raw-map consumer requires it.
+Keep the original matrix/presentation selections and explicit raw provenance.
+The new model profile does not construct an arbitrary quotient-effective
+kernel provider or automatically supply every whole kernel/cokernel
+presentation. Full old/new homology-map comparison, three generic window
+exactness proofs, bounded theorem assembly and final book work remain in
+the parent goal.
