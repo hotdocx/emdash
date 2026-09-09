@@ -156,7 +156,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   It does not construct a native/global model. The first TypeScript point
   consumer interprets a named supplied model at its retained native result,
   with explicit trusted-presentation-semantics adoption and no reselection.
-  Map-result/all-window model binding remains further work.
+  The model-map extension now defines actual H action and complete-arrow
+  observations in the existing LaxArrow object carrier. A transparent matrix
+  introduction constructs the original raw chain-map agreement from the
+  seven original morphisms and two semantic-product equations. The first
+  nonidentity TypeScript map consumer retains both original H selections,
+  with explicit model-interpretation adoption and no endpoint transport.
+  All-window model binding and general old/new H-map proofs remain further
+  work; this does not construct a closed model from old providers.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

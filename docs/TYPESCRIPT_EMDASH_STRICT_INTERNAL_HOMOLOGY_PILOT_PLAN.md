@@ -126,7 +126,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-COMPLEX-4` | native global H implemented in the ordinary-target profile; raw entry/complete comparison/CAS consumer remain | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
-| `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
+| `HINT-CONSUMER-5` | point and nonidentity-map model consumers implemented; all-position result and expensive-consumer qualification remain | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 | `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
 | `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
 | `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
@@ -137,7 +137,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
-| `HINT-RAW-ENTRY-16` | formal object/map entry and whole-H application qualified; concrete model realization and replay remain | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
+| `HINT-RAW-ENTRY-16` | formal object/map entry qualified; first point/map interpretation consumers implemented, all-position binding remains | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -2382,3 +2382,98 @@ its strict LHS audit has no findings. The 42 focused tooling tests, catalog,
 TOC, headers, active references, source registration and source-only health
 check pass; metrics cover 788 files. No full-health result or repo-wide
 aggregate is claimed. The public barrel/shared test runner were untouched.
+
+### Model-Aware Map Result: Current Work
+
+Checkpoint `1842d47c` is substantive point-consumer progress. The map
+continuation rechecked the clean worktree, all worktree heads, baseline
+ancestry, current owners and the existing actual-homology tests. It must
+construct the old chain-map agreement value from its retained matrix
+equations, not introduce an opaque replacement map assumption. The current
+raw-witness interface uses computed left/right matrices; this consumer
+needs the semantic matrix products of the original seven morphisms.
+
+Use a thin explicit-matrix introduction returning the EXISTING
+`CommRingFreydHomologyChainMap`, analogous to the retained spine constructors.
+Its two equations use target relations times the original coefficient
+witness equal to the difference of the two semantic products. Reuse the
+native agreement operation and original witnesses to supply those equations.
+The public mathematical map remains the existing raw/native/whole-H route.
+Compare the complete arrow observation (both endpoints and the arrow) when
+binding its native result, so no runtime endpoint transport is introduced.
+Keep model interpretation explicit and retain all original source/target
+homologies; generic model construction and quotient decoding remain outside
+this consumer's claims.
+
+### Model-Aware Map Result: Implementation And Qualification
+
+The promoted map layer has two rule-free LP owners:
+
+- `emdash3_2_commutative_algebra_freyd_chain_map_introduction.lp` constructs
+  the existing `CommRingFreydHomologyChainMap` from six presentations, seven
+  original raw morphisms, and their original upper/lower coefficient
+  witnesses. The laws have the semantic products as endpoints:
+  P₄ × upper = E₁ × A₂ − A₁ × E₀ and
+  P₅ × lower = D₁ × A₁ − A₀ × D₀. This is the existing raw-agreement
+  constructor, not an opaque replacement chain map or a new diagram record.
+- `emdash3_2_commutative_algebra_freyd_homology_model_maps.lp` defines the
+  actual whole H action and both formal/native complete-arrow observations.
+  Their common carrier is Obj(LaxArrow(Freyd(R))); existing Sigma projections
+  expose the original endpoints and arrow. No endpoint transport is needed.
+
+The private TypeScript signature mirrors, map preparation and observation
+bundles are in the three `algebra_formal_freyd_model_map_*` files. The
+preparation retains the original source/target homologies, target kernel
+lift, source cokernel colift and coefficient witnesses. The two semantic
+matrix equations use the existing native agreement operation, with ordinary
+computed-equation adoption. The final complete-arrow comparison instead
+requires explicit `trusted-presentation-semantics` adoption: it interprets
+the supplied coherent model at the original native result. It is not an
+`eq_refl` proof, a closed model construction, or arbitrary quotient decoding.
+
+The real nonsplit fixture uses twice the degree-zero projection. Its
+induced H map is nonzero and differs from the original projection. Both
+source/target selections are retained, and spies forbid homology, induced
+map, weak-kernel and weak-pullback recomputation during observation. Issued
+preparation handles, canonical formal/native snapshots and exact context
+checks reject copied/forged preparations, mixed models, replaced source or
+target choices, changed raw products/results and unrelated proof inputs.
+The complete input chain map is constructed and checked, not assumed.
+
+The active-source TypeScript run is
+`logs/probes/model-map-ts-active-20260909.log`: seven passes, no skips,
+about 38.0 seconds total; the emitted LP document checks in about 14.3
+seconds, within the unchanged shared 60-second cap. The document includes
+the previous actual H/exactness and model-point views, the new raw chain-map
+input and both complete-arrow observations. The source reviewer checks four
+retained witness/law projections and a same-typed noncollapse case; the
+model reviewer checks both endpoints, the H map, and a raw quotient-class
+projection. An initial negative compared differently typed matrices and
+failed to form a conversion query; it was corrected to a same-typed fresh
+matrix. No library rule was changed in response.
+
+Fresh-source qualification used `/tmp/emdash-model-map-qualify.QRPr3D`,
+with source files only and no copied compiled caches. The combined new
+reviewers plus the original model/raw-map reviewers passed quietly
+(`model_map_join-20260909-170015.log`). Warning-enabled checks of the exact
+predecessor dependency union (`model_map_baseline-20260909-170021.log`) and
+the new join (`model_map_join-20260909-170029.log`) both passed. After
+stripping ANSI decoration, every warning counter, location, term head and
+rule family is identical at 1,255 critical-pair / 169 pattern reports, with
+zero parser issues. Raw colored logs initially confused block-boundary
+parsing; normalization resolves that without changing the source or tools.
+All four promoted LP files are byte-identical to their staged counterparts.
+The two strict LHS audits have zero findings because the new modules have
+no rules or unifiers. Workspace validation, TypeScript typechecking,
+affected-file ESLint, 42 focused tooling tests, catalog/TOC, report headers,
+active references, shell syntax and diff hygiene pass. Source-only health
+is refreshed for 792 files; no full-health or unrelated aggregate is claimed.
+The standing full-health exception remains unchanged. The shared test
+runner, public barrel, generic runtime and package setup are untouched.
+
+This completes the first model-aware map consumer, not the full pilot or
+goal. Next bind the retained degree/interior results under the same explicit
+model interpretation, without rerunning native windows. The general old/new
+H-map theorem, three generic window exactness proofs, bounded formal
+assembly and final book review remain obligations. Preserve the existing
+op/Sigma repair deferral and its non-reliance boundary.

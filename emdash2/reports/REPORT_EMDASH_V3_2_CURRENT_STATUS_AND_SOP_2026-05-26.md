@@ -1276,7 +1276,26 @@ belongs to the owning implementation plan rather than to standing guidance.
   operation observes the retained result without kernel/weak-pullback/homology
   reselection, checks exact model/owner/context and selection data, and has
   separate model and observation IDs. The real nonsplit point consumer and
-  emitted Lambdapi source pass; map/all-window model consumers remain open.
+  emitted Lambdapi source pass.
+- `emdash3_2_commutative_algebra_freyd_chain_map_introduction.lp` gives the
+  transparent matrix introduction for the EXISTING raw chain-map owner.
+  Its seven original morphisms retain their relation witnesses; the upper
+  and lower equations are differences of their semantic matrix products,
+  with the original coefficient witnesses. There is no new square grammar,
+  rule, unifier or equality axiom.
+  `emdash3_2_commutative_algebra_freyd_homology_model_maps.lp` defines model
+  H action on that original raw input and complete-arrow observations in
+  Obj(LaxArrow(Freyd(R))). Endpoints and map compute by the existing Sigma
+  projections. The private TypeScript map-signature/preparation/observation
+  modules reuse native agreement operations for the two matrix equations
+  and observe the retained H-map result. Issued preparation handles and
+  canonical snapshots reject replaced selections, mixed models, altered
+  witnesses and foreign goals. The nonsplit consumer doubles a nonzero
+  projection, retains its original source/target H and kernel/cokernel
+  choices, and forbids reselection. Its complete-arrow agreement is explicit
+  `trusted-presentation-semantics` adoption, not an endpoint transport or a
+  generic old/new map theorem. All-window model binding, the general
+  compatibility proof and the full goal's window/LES obligations remain.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

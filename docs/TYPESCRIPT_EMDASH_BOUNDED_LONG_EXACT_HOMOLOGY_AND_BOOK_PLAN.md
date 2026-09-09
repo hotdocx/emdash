@@ -86,6 +86,18 @@ retains the remaining map/all-window binding, old/new H-map comparison,
 generic window/LES and final book obligations; this point is not completion
 of the full integration goal.
 
+First model-aware map consumer (2026-09-09): the original raw chain-map
+input is now constructed from its semantic matrix products and retained
+coefficient witnesses. Actual whole H acts on it; the complete arrow,
+including its endpoints, is compared with the retained native result under
+the same explicit model interpretation. The nonzero doubled-projection
+consumer passes with no kernel/cokernel/homology reselection or endpoint
+transport. The [map consumer ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#model-aware-map-result-implementation-and-qualification)
+records the exact boundary and validation. All-position model binding,
+general old/new map comparison, generic window exactness, bounded formal
+assembly and final book consolidation remain required. No scope is removed
+by completing this first map consumer.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

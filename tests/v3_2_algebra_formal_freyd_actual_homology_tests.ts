@@ -16,7 +16,9 @@ import { AlgebraFormalAssumptionSource, appendAlgebraFormalAssumption } from '..
 import { AlgebraFormalWorkflowInput, runAlgebraFormalWorkflow, trustAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 import { KernelExpression } from '../src/v3_2/kernel';
 import { coreProofPlanHole } from '../src/v3_2/proof_plan';
-import { polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
+import { isPolynomialFreydMorphismZero, polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
+import { algebraPolynomialPresentationMorphismAdd, algebraPolynomialPresentationMorphismCongruence } from '../src/v3_2/algebra_polynomial_freyd_category';
+import * as nativeFunctorialHomology from '../src/v3_2/algebra_polynomial_freyd_functorial_homology';
 import * as nativeHomology from '../src/v3_2/algebra_polynomial_freyd_homology';
 import * as weakKernel from '../src/v3_2/algebra_polynomial_weak_kernel';
 import * as weakPullback from '../src/v3_2/algebra_polynomial_weak_pullback';
@@ -30,7 +32,10 @@ import { algebraFormalFreydEpimorphismBlockDelegationBundle, algebraFormalFreydE
 import { createAlgebraPolynomialFreydAbelianEngine } from '../src/v3_2/algebra_polynomial_freyd_abelian_category';
 import { algebraFormalFreydActualHomologyReconstructionBundle, algebraFormalFreydActualHomologyTerm, defineAlgebraFormalFreydActualHomologyRealization } from '../src/v3_2/algebra_formal_freyd_actual_homology';
 import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
-import { algebraFormalFreydModelType, createFormalFreydModelProofEnvironment, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_signatures';
+import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_signatures';
+import { createFormalFreydModelMapProofEnvironment, FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_map_signatures';
+import { prepareAlgebraFormalFreydModelMap, algebraFormalFreydModelMapSquareBundle } from '../src/v3_2/algebra_formal_freyd_model_map_preparation';
+import { algebraFormalFreydModelMapObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_map_observation';
 import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydRetainedHomologyPresentation } from '../src/v3_2/algebra_formal_freyd_model_observation';
 import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
@@ -79,10 +84,27 @@ const construct = async () => {
         selected: createAlgebraPolynomialFreydKernelChoiceProviders({ id: 'actual-homology-cycles', ring, kernel: selected.cycles }) });
     const reconstruction = algebraFormalFreydActualHomologyReconstructionBundle({ reifier, selected, providers: prepared });
     algebraFormalFreydRetainedHomologyPresentation(reconstruction.realization);
+    const unscaled = whole.degrees[1].projection;
+    const oldMap = unscaled.chainMap;
+    const scaledChain = nativeFunctorialHomology.algebraPolynomialFreydHomologyChainMap({ source: oldMap.source, target: oldMap.target,
+        fNext: algebraPolynomialPresentationMorphismAdd(oldMap.fNext, oldMap.fNext),
+        f: algebraPolynomialPresentationMorphismAdd(oldMap.f, oldMap.f),
+        fPrev: algebraPolynomialPresentationMorphismAdd(oldMap.fPrev, oldMap.fPrev) });
+    const selectedMap = nativeFunctorialHomology.algebraPolynomialFreydInducedHomologyMap(scaledChain);
+    const mapPrepared = prepareAlgebraFormalFreydModelMap({ reifier, selected: selectedMap });
+    const actualPoint = (which: 'source' | 'target') => {
+        const selected = selectedMap.chainMap[which];
+        const providers = prepareAlgebraFormalFreydKernelChoiceProviders({ reifier,
+            selected: createAlgebraPolynomialFreydKernelChoiceProviders({ id: 'map-' + which + '-cycles', ring, kernel: selected.cycles }) });
+        const actual = defineAlgebraFormalFreydActualHomologyRealization({ reifier, selected, providers });
+        algebraFormalFreydRetainedHomologyPresentation(actual);
+        return actual;
+    };
+    const mapSourceActual = actualPoint('source'), mapTargetActual = actualPoint('target');
     const chain = algebraFormalFreydChainPairDelegationBundle({ reifier, selected: selected.pair });
     const epi = algebraFormalFreydEpimorphismBlockDelegationBundle({ reifier, selected: point.exactness.epimorphism! });
     const element = affineFormalRingElementType(R);
-    const environment = createFormalFreydModelProofEnvironment([
+    const environment = createFormalFreydModelMapProofEnvironment([
         { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: element },
         { name: formalModel.name, type: algebraFormalFreydModelType(R) },
         { name: otherModel.name, type: algebraFormalFreydModelType(R) },
@@ -109,7 +131,8 @@ const construct = async () => {
             belowLaw: providers.morphismLaw, chain: pair.term, boundaryLaw, reconstructionLaw: reconstructed.proof, epic: epic.term });
         spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
         return { whole, point, selected, reifier, prepared, providers, reconstruction, initial, source: epicity.source, result, epic,
-            formalModel, otherModel, aboveLaw, belowLaw: providers.morphismLaw, chainLaw: chainLaw.proof };
+            formalModel, otherModel, aboveLaw, belowLaw: providers.morphismLaw, chainLaw: chainLaw.proof,
+            unscaled, selectedMap, mapPrepared, mapSourceActual, mapTargetActual };
     } finally { spies.forEach(spy => spy.mock.restore()); }
 };
 let value: ReturnType<typeof construct> | undefined;
@@ -133,6 +156,45 @@ const observeModel = async () => {
 };
 let observed: ReturnType<typeof observeModel> | undefined;
 const modelConsumer = () => observed ??= observeModel();
+
+const observeMap = async () => {
+    const v = await consumer();
+    const start = v.source.entries.length;
+    const batch = await delegateAlgebraFormalPresentationMorphismEquations({ artifactId: 'model-map-inputs', reifier: v.reifier,
+        morphisms: [...v.mapPrepared.maps.map(m => m.selected), v.selectedMap.homologyMap], agreements: [], chainSquares: [],
+        source: v.source, fingerprint, decisionEvidence });
+    const laws = batch.source.entries.slice(start).map(e => e.reference);
+    const chainSBundle = algebraFormalFreydChainPairDelegationBundle({ reifier: v.reifier, selected: v.selectedMap.chainMap.source.pair });
+    const chainTBundle = algebraFormalFreydChainPairDelegationBundle({ reifier: v.reifier, selected: v.selectedMap.chainMap.target.pair });
+    const chainS = await adopt(batch.source, 'model-map-source-chain', chainSBundle.realization.claimType,
+        { adapter: chainSBundle.adapter, realization: chainSBundle.realization, engine: createAlgebraPolynomialFreydHomologyEngine(chainSBundle.model) });
+    const chainT = await adopt(chainS.source, 'model-map-target-chain', chainTBundle.realization.claimType,
+        { adapter: chainTBundle.adapter, realization: chainTBundle.realization, engine: createAlgebraPolynomialFreydHomologyEngine(chainTBundle.model) });
+    const upperBundle = algebraFormalFreydModelMapSquareBundle(v.mapPrepared, 'upper');
+    const lowerBundle = algebraFormalFreydModelMapSquareBundle(v.mapPrepared, 'lower');
+    const upper = await adopt(chainT.source, 'model-map-upper', upperBundle.realization.claimType, upperBundle);
+    const lower = await adopt(upper.source, 'model-map-lower', lowerBundle.realization.claimType, lowerBundle);
+    const sourcePoint = algebraFormalFreydModelHomologyObservationBundle({ modelId: 'actual-homology-model', observationId: 'degree0-B',
+        formalModel: v.formalModel, environment: lower.source.environment, actual: v.mapSourceActual,
+        aboveLaw: laws[0], belowLaw: laws[1], chainLaw: chainS.proof });
+    const targetPoint = algebraFormalFreydModelHomologyObservationBundle({ modelId: 'actual-homology-model', observationId: 'degree0-C',
+        formalModel: v.formalModel, environment: lower.source.environment, actual: v.mapTargetActual,
+        aboveLaw: laws[2], belowLaw: laws[3], chainLaw: chainT.proof });
+    const bundle = algebraFormalFreydModelMapObservationBundle({ observationId: 'twice-projection', source: sourcePoint, target: targetPoint,
+        prepared: v.mapPrepared, environment: lower.source.environment, componentLaws: [laws[4], laws[5], laws[6]],
+        upperLaw: upper.proof, lowerLaw: lower.proof, resultLaw: laws[7] });
+    const id = 'model-map-arrow';
+    const run = await runAlgebraFormalWorkflow({ ...bundle, goalId: id, document: { moduleId: lower.source.moduleId,
+        declarationId: id, environment: lower.source.environment, type: bundle.realization.claimType,
+        plan: coreProofPlanHole(id, { provenance: p, expectation: { contextDepth: 0, target: bundle.realization.claimType } }),
+        provenance: p, fingerprint: fingerprint(id) } });
+    const adoption = trustAlgebraFormalWorkflow({ run, assumptionName: 'model_map_arrow', decision: {
+        kind: 'trust-exact-algebra-computation', evidence: 'Interpret the supplied model at the retained complete homology arrow, with its original endpoints' } });
+    const source = appendAlgebraFormalAssumption({ source: lower.source, adoption, classification: bundle.profile.assumptionClassification });
+    return { v, sourcePoint, targetPoint, bundle, source, lower, laws, upper };
+};
+let observedMap: ReturnType<typeof observeMap> | undefined;
+const mapConsumer = () => observedMap ??= observeMap();
 
 describe('v3.2 actual formal interior homology', () => {
     it('constructs homology and exactness at the original native boundary', async () => {
@@ -201,16 +263,72 @@ describe('v3.2 actual formal interior homology', () => {
             formalModel: defined }), /reinterpret a defined model/iu);
     });
 
+    it('binds a nonzero nonidentity homology map as one complete arrow without reselection', async () => {
+        const v = await consumer();
+        assert.equal(isPolynomialFreydMorphismZero(v.selectedMap.homologyMap), false);
+        assert.equal(algebraPolynomialPresentationMorphismCongruence(v.selectedMap.homologyMap, v.unscaled.homologyMap).agrees, false);
+        const forbid = () => { throw new Error('Map observation must use the already computed map and universals'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(nativeFunctorialHomology, 'algebraPolynomialFreydInducedHomologyMap', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid), mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const { bundle, source } = await mapConsumer();
+            const checker = createCoreProofChecker(source.environment);
+            checker.validateEnvironment();
+            checker.check(checker.rootContext, bundle.realization.chain.term, bundle.realization.chain.type);
+            checker.check(checker.rootContext, bundle.realization.formalArrow, bundle.realization.observationType);
+            checker.check(checker.rootContext, bundle.realization.nativeArrow, bundle.realization.observationType);
+            assert.equal(bundle.realization.prepared.selected, v.selectedMap);
+            assert.equal(bundle.profile.endpointTransport, false);
+            assert.equal(source.entries.at(-1)!.classification, 'trusted-presentation-semantics');
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('rejects mixed models, replaced map selections, forged preparations and unrelated laws', async () => {
+        const { v, sourcePoint, targetPoint, bundle, lower, upper, laws } = await mapConsumer();
+        const args = { observationId: 'map-negative', source: sourcePoint, target: targetPoint, prepared: v.mapPrepared,
+            environment: lower.source.environment, componentLaws: [laws[4], laws[5], laws[6]] as const,
+            upperLaw: upper.proof, lowerLaw: lower.proof, resultLaw: laws[7] };
+        const otherTarget = algebraFormalFreydModelHomologyObservationBundle({ modelId: 'other-model', observationId: 'degree0-C',
+            formalModel: v.otherModel, environment: lower.source.environment, actual: v.mapTargetActual,
+            aboveLaw: targetPoint.realization.inputLaws.above, belowLaw: targetPoint.realization.inputLaws.below,
+            chainLaw: targetPoint.realization.inputLaws.chain });
+        assert.throws(() => algebraFormalFreydModelMapObservationBundle({ ...args, target: otherTarget }), /same supplied model/iu);
+        assert.throws(() => algebraFormalFreydModelMapObservationBundle({ ...args, source: targetPoint }), /original source\/target/iu);
+        assert.throws(() => algebraFormalFreydModelMapObservationBundle({ ...args, prepared: { ...v.mapPrepared } }), /issued/iu);
+        assert.throws(() => algebraFormalFreydModelMapSquareBundle({ ...v.mapPrepared,
+            upper: { ...v.mapPrepared.upper, claimType: v.mapPrepared.lower.claimType } }, 'upper'), /issued/iu);
+        assert.throws(() => algebraFormalFreydModelMapObservationBundle({ ...args, resultLaw: upper.proof }), /type|convert|unif/iu);
+        for (const selected of [
+            { ...v.selectedMap, homologyMap: v.unscaled.homologyMap },
+            { ...v.selectedMap, cyclesMap: { ...v.selectedMap.cyclesMap, kernel: v.selectedMap.chainMap.source.cycles } },
+            { ...v.selectedMap, chainMap: { ...v.selectedMap.chainMap, upperAgreement: v.selectedMap.chainMap.lowerAgreement } }
+        ]) assert.throws(() => prepareAlgebraFormalFreydModelMap({ reifier: v.reifier, selected }), /original|semantic products/iu);
+        assert.throws(() => bundle.adapter.normalizeRealization({ ...bundle.realization }, 'test'), /Foreign/iu);
+        const claim = sourcePoint.realization.claimType;
+        const goal = defineAlgebraFormalComputationGoal({ goalId: 'foreign-map-query', document: {
+            moduleId: lower.source.moduleId, declarationId: 'foreign-map-query', environment: lower.source.environment, type: claim,
+            plan: coreProofPlanHole('foreign-map-query', { provenance: p, expectation: { contextDepth: 0, target: claim } }),
+            provenance: p, fingerprint: fingerprint('foreign-map-query')
+        } });
+        assert.throws(() => bundle.adapter.acquire(goal, bundle.realization), /complete model arrow/iu);
+    });
+
     it('checks the constructed homology and exactness together in Lambdapi', {
         skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_ACTUAL_HOMOLOGY !== '1'
     }, async () => {
-        const { v, bundle, source } = await modelConsumer();
-        let environment = source.environment;
+        const { v, bundle } = await modelConsumer();
+        const map = await mapConsumer();
+        let environment = map.source.environment;
         const terms: readonly [string, KernelExpression, KernelExpression][] = [
             ['actual_interior_homology', v.result.term, v.result.type],
             ['actual_interior_exactness', v.result.exactness, v.result.exactnessType],
             ['actual_model_formal_point', bundle.realization.formalPoint, bundle.realization.pointType],
-            ['actual_model_native_point', bundle.realization.nativePoint, bundle.realization.pointType]
+            ['actual_model_native_point', bundle.realization.nativePoint, bundle.realization.pointType],
+            ['actual_model_chain_map', map.bundle.realization.chain.term, map.bundle.realization.chain.type],
+            ['actual_model_formal_arrow', map.bundle.realization.formalArrow, map.bundle.realization.observationType],
+            ['actual_model_native_arrow', map.bundle.realization.nativeArrow, map.bundle.realization.observationType]
         ];
         const assertions = terms.map(([name, term, type]) => {
             environment = environment.extend({ name, type, body: term,
@@ -222,10 +340,10 @@ describe('v3.2 actual formal interior homology', () => {
             ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
             ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
             ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
-            ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS
+            ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS
         }, assertions });
         const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;',
-            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\nrequire open emdash.emdash3_2_commutative_algebra_freyd_homology_models;') },
+            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\nrequire open emdash.emdash3_2_commutative_algebra_freyd_homology_models;\nrequire open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\nrequire open emdash.emdash3_2_commutative_algebra_freyd_homology_model_maps;') },
         { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
         assert.equal(checked.timedOut, false, checked.diagnostics);
         assert.equal(checked.accepted, true, checked.diagnostics.slice(-10000));

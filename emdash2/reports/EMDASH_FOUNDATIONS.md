@@ -4311,8 +4311,20 @@ presentation. It is recorded as trusted presentation semantics, not as an
 independent proof of the CAS or a closed quotient-effective model theorem.
 The point consumer retains the original input constructors, kernel choices
 and native result; it neither recomputes those universals nor replaces H
-with a second matrix algorithm. Extending this to map and whole bounded-result
-observations remains a separate integration step.
+with a second matrix algorithm.
+
+The first map consumer now follows the same interpretation contract. It
+constructs the original raw chain-map input from its seven morphisms and
+the original coefficient witnesses for their two semantic-product equations.
+The formal map is ordinary action of the existing whole H. To compare it
+with the native result, the consumer observes one complete arrow, including
+its source and target, as an object of the existing derived arrow category.
+It does not cast the runtime map along separately adopted endpoint paths.
+The nonsplit example doubles a nonzero projection and retains the original
+homology, kernel and cokernel selections. Its interpretation agreement is
+explicitly adopted as trusted presentation semantics; neither a general
+old/new H-map theorem nor a closed effective model is inferred from that
+adoption. All-position bounded-result observations remain a further step.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

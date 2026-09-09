@@ -107,7 +107,9 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
         }
     };
     const realization = Object.freeze({ profileRevision: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE.revision,
-        modelId: input.modelId, observationId: input.observationId, formalModel: modelReference, actual: input.actual, pair, formalPoint, nativePoint, pointType, claimType, formalData });
+        modelId: input.modelId, observationId: input.observationId, formalModel: modelReference, actual: input.actual, pair,
+        inputLaws: Object.freeze({ above: input.aboveLaw, below: input.belowLaw, chain: input.chainLaw }),
+        formalPoint, nativePoint, pointType, claimType, formalData });
     const id = 'proof-cas.freyd-model/' + input.modelId + '/homology-point/' + input.observationId;
     const schema = defineAlgebraRuntimeSchema<typeof actual.selected>({ id: id + '/retained-result', revision: 'v1', normalize(value) {
         if (value !== actual.selected) throw new AlgebraFormalDelegationError('INVALID_REALIZATION', 'freydModel.result', 'Expected the original retained homology result');

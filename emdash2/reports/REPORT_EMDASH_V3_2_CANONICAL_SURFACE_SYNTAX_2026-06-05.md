@@ -2029,6 +2029,16 @@ without an automatic model constructor, global rewrite or new equality axiom.
 This is external trusted adoption in the working document, not `eq_refl`
 or a claim that Lambdapi itself runs the CAS.
 
+`freyd_homology_model_map(M,chainS,chainT,m)` is ordinary H action on the
+original raw map. `freyd_homology_model_arrow_observation` and
+`freyd_raw_arrow_observation` package complete arrows in the existing
+Obj(LaxArrow(Freyd(R))) carrier. Read their adopted comparison as an explicit
+model interpretation of both endpoints AND the arrow, not as a runtime
+endpoint cast or a new normalization law. The matrix usability constructor
+`comm_ring_freyd_chain_map_from_matrices` returns the existing chain-map
+notion, preserving the seven morphisms and two original coefficient
+witnesses; its equations use semantic matrix products, not an opaque map.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity
