@@ -39,6 +39,19 @@ matching repair and preserved failed alternatives. The next primary consumer
 is the actual retained-selection proof–CAS example; generic exactness,
 bounded formal assembly and final book requirements are unchanged.
 
+Raw-entry continuation (2026-09-09): the original chain pair now enters the
+native category by inverse-mating its SAME selected boundary. Separate
+comparison modules reconstruct the incoming arrow and compare whole H with
+the original kernel/lift/cokernel recipe. The Freyd specialization retains
+the supplied raw representatives and agreement and exposes a whole-H alias
+with canonical structural data filled internally. The pilot's
+[raw-entry ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#concrete-consumer-entry-current-work)
+records the bounded experiments and qualification. These are rule-free
+formal adapters, not yet the concrete whole-interface replay or a generic
+constructor of coherent P/Q from the old witnessed providers. Runtime H is
+not implemented by the compatibility paths; model realization and a
+nonidentity raw-map consumer remain the next integration requirements.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

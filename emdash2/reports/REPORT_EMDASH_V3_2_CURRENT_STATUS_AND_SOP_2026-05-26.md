@@ -1205,6 +1205,23 @@ belongs to the owning implementation plan rather than to standing guidance.
   verified on both baselines and retained in the pilot ledger. No general
   op/Sigma repair, closed quotient effectiveness or actual new whole-H CAS
   replay is claimed by this tranche.
+- `emdash3_2_kernel_adjunction_unmates.lp` exposes the existing whole inverse
+  kernel mate. The separate `kernel_adjunction_unmate_paths` module derives
+  its original-embedding reconstruction and semantic cancellation. The
+  `chain_pair_zero_cones` module introduces an original chain pair as
+  (A,d,unmate(original boundary)), reusing the same W-selected kernel lift.
+  Its separate comparison module proves incoming reconstruction, boundary
+  agreement and the same V-selected cokernel recipe for H. These paths do
+  not implement the runtime functor or introduce operational recentering.
+  `emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp` turns the existing
+  raw chain agreement into the generic input and then that native object.
+  `freyd_zero_cone_homology_func` is the whole model-facing alias, filling the
+  canonical preadditive, zero/terminal and derived ordinary-category profile.
+  Coherent kernel/cokernel presentations remain explicit capabilities. This
+  is a rule-free formal entry, not a closed quotient-effective provider or
+  the completed whole-interface CAS replay. The exact dependency union stays
+  at 1,255 critical pairs and 169 pattern reports; its extra six inherited
+  pairs relative to the prior H-only join come from the raw Freyd imports.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

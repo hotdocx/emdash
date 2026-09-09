@@ -137,6 +137,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
+| `HINT-RAW-ENTRY-16` | formal input/cancellation/comparisons promoted and qualified; concrete model realization and replay remain | introduce the original raw chain pair into the native category without new choices/manual squares, then bind the same native computation to whole H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1827,3 +1828,172 @@ kernel provider or automatically supply every whole kernel/cokernel
 presentation. Full old/new homology-map comparison, three generic window
 exactness proofs, bounded theorem assembly and final book work remain in
 the parent goal.
+
+### Concrete Consumer Entry: Current Work
+
+Checkpoint `8efb4b69` is the validated native-H foundation. On continuation,
+the branch is clean and the concrete-target reviewer passes again
+(`freyd_zero_cones-20260909-123344.log`). The existing TypeScript selected
+consumer was inspected: it retains witnessed kernel-choice providers, the
+original raw boundary and reconstruction, and constructs
+`CommRingFreydSelectedHomologyAt`. It does not automatically supply a generic
+whole `KernelPresentation` or a closed quotient-effective kernel family.
+Keep model-realization assumptions explicit; do not silently reinterpret
+that signature-only selected interface as the stronger capability.
+
+Two entry prerequisites now check without new rules or assumptions:
+
+- `kernel_unlift_source_20260909.lp` defines the inverse kernel mate and
+  proves that its source component is the original selected embedding
+  composed with the supplied boundary. The proof applies the existing whole
+  untranspose semantic path and inclusion comparison, rather than postulating
+  a component equation. Log: `kernel_unlift_source_20260909-20260909-123519.log`.
+- `freyd_raw_chain_generic_20260909.lp` constructs the original generic
+  `ComputationalChainPair` from the retained raw Freyd pair and its existing
+  agreement. The generic/semantic composition path and original agreement
+  path provide its zero law. Log:
+  `freyd_raw_chain_generic_20260909-20260909-124001.log`.
+
+The next probe introduces the native zero-cone object by taking the inverse
+kernel mate of the SAME selected boundary lift. The combined declaration,
+mate-cancellation check and incoming-reconstruction proof reach 90 seconds
+both quietly (`chain_pair_zero_cone_input_20260909-20260909-123748.log`) and
+with warnings (`-124400.log`). This is not yet evidence that the introduction
+itself is infeasible: declarations, cancellation and reconstruction are now
+split into separate bounded consumers to locate the expensive obligation.
+Do not add a replacement primitive merely on the basis of that aggregate
+timeout. The generic inverse-mate operation is already checked; preserve the
+uncombined probe and subsequent alternatives for false-negative review.
+
+The split experiments now resolve that local uncertainty. The retained
+diagram's source, target and generator must also index the selected boundary
+lift consistently. This is the SAME W choice, not a replacement kernel:
+these observations reduce to the original B, D and d. The generic
+inverse-mate reconstruction passes in
+`kernel_unlift_lift_native_source_20260909-20260909-130423.log`; its aligned
+chain-pair specialization passes in
+`chain_pair_zero_cone_aligned_reconstruction_20260909-20260909-131059.log`.
+The boundary and selected-H comparisons pass in
+`chain_pair_zero_cone_native_boundary_20260909-20260909-130340.log` and
+`chain_pair_zero_cone_homology_20260909-20260909-130537.log`. The original
+raw Freyd input wrapper passes in
+`freyd_raw_native_zero_cone_20260909-20260909-131215.log`. These successes use
+slightly different imports; consolidation must qualify one consistent tree
+before promotion. They introduce no new rule, unifier, primitive or axiom.
+
+### Runtime Construction Versus Compatibility Proofs
+
+The user's equality-density review distinguishes three roles. The whole
+runtime operation is still the transparent construction beta = K(h) composed
+with eta, then H = Q composed with the boundary diagram functor. Its source
+is `emdash3_2_homology_families.lp`; the native specialization is in
+`emdash3_2_zero_arrow_cone_homology.lp`. Equality chains do not implement H.
+
+The old factor interfaces contain meaningful annihilation/reconstruction
+conditions. New native observations derive those conditions from actual
+whole transformations, rather than requiring new manually supplied squares.
+Separately, defined object/arrow paths compare the whole observations with
+the SAME selected kernel, boundary and cokernel operations. Congruence on a
+complete (target,arrow) input keeps the dependent selector well typed; it is
+not runtime recentering. These compatibility paths are neither a CAS
+certificate requirement nor a substitute for intended runtime cuts.
+
+Keep reusable comparisons, but do not allow optional proof-only refinements
+to displace the concrete whole-H/CAS consumer. The next gate is one coherent
+raw-entry source tree with original-selection, cancellation and non-collapse
+reviewers, then actual replay/adoption and a nonidentity map. The existing
+witnessed CAS providers do not silently provide global coherent P/Q; that
+model-realization boundary must remain explicit.
+
+The immediately preceding reply was a review/status turn, not an additional
+implementation checkpoint. This continuation revalidated the unchanged
+Freyd target (`freyd_zero_cones-20260909-132519.log`), baseline ancestry and
+dedicated worktree. Only this goal's unfinished plan change was present;
+there were no staged changes. No general op repair or unrelated aggregate
+is part of the raw-entry tranche.
+
+### Promoted Raw-Entry Boundary
+
+Five one-way modules now separate computation from compatibility:
+
+- `emdash3_2_kernel_adjunction_unmates.lp`: the whole inverse kernel mate,
+  a transparent specialization of the existing adjunction owner;
+- `emdash3_2_kernel_adjunction_unmate_paths.lp`: the reusable semantic,
+  original-embedding and lift-reconstruction comparisons;
+- `emdash3_2_chain_pair_zero_cones.lp`: the original outgoing diagram and
+  selected boundary, then native entry via that boundary's inverse mate;
+- `emdash3_2_chain_pair_zero_cone_comparisons.lp`: incoming reconstruction,
+  whole boundary agreement and original selected-H recipe comparison; and
+- `emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp`: original raw
+  agreement to generic chain pair/native entry, plus the whole model-facing
+  `freyd_zero_cone_homology_func` alias. Canonical structural/profile data
+  are filled inside the alias; T0/W/V are inferred from the explicit P/Q
+  model capabilities, not silently constructed.
+
+All seventeen symbols are transparent definitions. There are no new
+primitive classifiers/operations, rewrite rules, unifiers or equality axioms.
+In particular, the runtime input modules do not depend on the new optional
+inverse-mate/entry comparison modules. Whole H remains the prior functor
+composition, not a chain of paths or a second homology construction.
+
+The reviewer checks the actual retained W-selected kernel and its object,
+all three original vertices/outgoing differential, inverse/forward mate
+cancellation, incoming reconstruction, the selected-H comparison, both raw
+Freyd quotient classes, the raw zero law, and the actual whole-H application
+at a raw entry. It rejects an unrelated boundary and rejects treating a raw
+agreement as a coherent kernel presentation. There are fourteen positive
+assertions, two negative controls and two typed whole-action/application
+queries across three reviewers. The exact scoped active runner checks all
+five sources and all three reviewers independently in
+`logs/probes/raw-entry-active-20260909.log`.
+
+The immutable source-only package `/tmp/emdash-raw-entry-qualify.7NL9pb`
+checks the combined three-reviewer consumer quietly and with warnings:
+`raw_entry_join-20260909-134027.log` and `-134056.log`. Its eight promoted
+source/reviewer files are byte-identical to the active files. Existing whole
+H identity/composition/higher-action and adjunction-mate reviewers also pass
+there (`one_cat_zero_cone_homology-20260909-134057.log`,
+`adjunction_mates-20260909-134058.log`). No source object caches were copied.
+Every Lambdapi invocation retained normal subject reduction and the 90-second
+per-target ceiling.
+
+The exact pre-existing dependency union and final staged join both report
+1,255 critical pairs and 169 pattern reports. After removing ANSI escapes
+and the staging-root prefix, their complete term-head, two-rule-family and
+location inventories are identical and parse without exceptions. Six pairs
+above the earlier H-only 1,249/169 join are inherited raw-Freyd dependencies,
+not interactions introduced by these definitions. The raw ANSI input alone
+confused the participant parser; the original logs remain intact and the
+normalized comparison is the checked inventory.
+
+The full expanded-lift conversion test still reaches 90 seconds, independently
+and inside the first combined reviewer. The same experiment with a named raw
+body does not cure it; preserving a raw body while changing only its declared
+diagram-indexed type makes the reconstruction consumer expensive again.
+Those alternatives remain in `whole_homology_entry_runtime_part0_20260909.lp`,
+`whole_homology_entry_boundary_named_20260909.lp` and
+`whole_homology_raw_body_review_20260909.lp`. No rule was introduced to force
+this proof/normalization search. The promoted reviewer instead checks the
+original selected kernel and object before expanding the contractible lift,
+as well as the real mate cut and the named reconstruction/H comparisons.
+The lift body visibly calls the existing operation on that same selection
+and original annihilator. This is not evidence that every expanded raw
+spelling normalizes quickly, nor a claim that the timed-out assertion passed.
+
+The five modules have zero inferred-slot audit findings (they have no new
+rules). All 42 focused metrics/TOC/registry/warning tooling tests, source
+registration, catalog freshness, TOC, active-reference/report-header checks,
+and source-only health refresh pass. Metrics now cover 772 files. The
+standing full-health/aggregate exception is unchanged; no unrelated
+TypeScript, kernel, book, renderer or repository aggregate was run.
+The generated health report also catches up source-only rows accumulated
+since its September 2 snapshot. Its timing/check-result cells remain empty;
+this synchronization does not claim a fresh full-health check.
+
+Next implement the concrete retained-selection model binding and a
+nonidentity old/raw chain-map entry, then exercise whole H through the actual
+replay/adoption interface. An explicit coherent presentation is still
+additional model structure; this tranche does not manufacture it from the
+older witnessed providers. Full old/new homology-map agreement, the three
+generic window-exactness proofs, bounded formal assembly and final book work
+remain required in the parent goal.

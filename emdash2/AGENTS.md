@@ -133,6 +133,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   No general truncation reflector, closed Freyd kernel provider or concrete
   new whole-H CAS replay is supplied by that profile. Retained-selection
   realization and full old/new homology-map agreement remain further work.
+  The kernel-unmate and chain-pair zero-cone input modules now introduce an
+  original pair through the inverse mate of its original selected boundary.
+  Runtime definitions and reusable compatibility proofs live in separate
+  modules. The Freyd raw-input adapter keeps the quotient classes/agreement;
+  its whole-H alias fills canonical structural data but still requires the
+  coherent P/Q presentations. It does not construct those from a raw
+  agreement or run the native CAS. No new rule or primitive is added.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

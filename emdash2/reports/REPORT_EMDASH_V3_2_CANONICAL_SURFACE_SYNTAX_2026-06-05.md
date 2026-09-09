@@ -1995,6 +1995,16 @@ generic truncation operator. The concrete retained-selection CAS replay and
 the complete comparison with the older homology-map recipe remain further
 implementation obligations.
 
+For an original chain pair (e,d), the native entry is now the transparent
+`chain_pair_zero_cone`: retain the original boundary beta and take its
+inverse kernel mate to get (A,d,unmate(beta)). The raw Freyd specialization
+is `freyd_raw_chain_zero_cone`; it consumes the existing raw agreement.
+`freyd_zero_cone_homology_func` supplies the whole model-facing H, so its
+application to that entry is ordinary functor application. Canonical
+structural data are filled inside the alias; coherent P/Q capabilities stay
+explicit. The separate `*_path` observations are compatibility theorems,
+not additional runtime operations or caller-supplied square fields.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

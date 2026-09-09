@@ -4257,6 +4257,25 @@ retained-selection CAS replay through this new whole interface remain further
 work. These declarations and defined comparisons are not opaque equality
 bridges or a claim of arbitrary quotient effectiveness.
 
+Original chain data can now enter that native source through an inverse
+kernel mate. Keep the original chosen lift beta:A→K(d), and form the actual
+diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
+(A,d,unmate(beta)). Forward/inverse mate cancellation computes; the original
+kernel reconstruction proves that its incoming observation agrees with e.
+The raw Freyd adapter obtains the original generic chain-zero path from the
+supplied raw agreement, keeping both original quotient classes. No new
+manual square or replacement universal choice is an input.
+
+The runtime input and inverse-mate definitions are separated from their
+comparison theorems. Object/arrow equalities in those theorems connect the
+whole observations with the original selected operations; they are not how
+H computes and are not a demand for native CAS algorithm certificates. The
+model-facing whole-H alias fills the already available ordinary profile and
+canonical structural data. Its kernel/cokernel presentations are still
+explicit coherent model capabilities, not consequences of possessing a raw
+chain agreement. Realizing those capabilities in the concrete retained-choice
+CAS consumer, including a nonidentity map, remains the next integration step.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

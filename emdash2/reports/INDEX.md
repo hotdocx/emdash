@@ -42,8 +42,12 @@ Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
 introduction are implemented. The latter uses scoped core cross computation;
 whole natural families now come from actual transformations via exchange,
 with exact whole observations and terminal/initial arrow embeddings.
-Kernel/cokernel/complex/homology owners remain under construction; no raw
-square-data mapping-category inverse is implicitly assumed.
+Whole kernel/cokernel presentations and native ordinary-target homology are
+now implemented. The rule-free raw-entry adapter introduces the original
+chain pair by inverse-mating its selected boundary; separate comparisons
+retain the original choices. Concrete whole-interface CAS realization and
+full map compatibility remain active; no raw square-data mapping-category
+inverse or closed quotient-effective provider is implicitly assumed.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum
