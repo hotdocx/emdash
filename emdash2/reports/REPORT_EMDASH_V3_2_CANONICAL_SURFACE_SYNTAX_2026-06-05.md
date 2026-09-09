@@ -2005,6 +2005,16 @@ structural data are filled inside the alias; coherent P/Q capabilities stay
 explicit. The separate `*_path` observations are compatibility theorems,
 not additional runtime operations or caller-supplied square fields.
 
+The ordinary-target realization is `one_cat_arrow_diagram_func(C1)` from
+the existing native LaxArrow(C) to Arr(C). Its tautological transformation's
+component is the stored arrow. Read point compatibility as proof-time:
+`Arr(eta)[x] ≐ walking-arrow(eta[x])`; it is not a new runtime normalization.
+`chain_pair_outgoing_diagram_map_func` realizes the old lower-square Hom
+data with uncapped action, while `chain_pair_outgoing_diagram_map` is its
+transparent point view. The auxiliary `zero_cone_map_from_lifts` derives
+the native comparison cell from compatible mates; the complete raw-map
+wrapper must still derive that compatibility itself.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

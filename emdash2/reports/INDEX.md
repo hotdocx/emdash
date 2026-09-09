@@ -48,6 +48,10 @@ chain pair by inverse-mating its selected boundary; separate comparisons
 retain the original choices. Concrete whole-interface CAS realization and
 full map compatibility remain active; no raw square-data mapping-category
 inverse or closed quotient-effective provider is implicitly assumed.
+The ordinary-target arrow-diagram realization and whole lower-map adapter
+are now implemented, with generic inverse-mate naturality and a constructive
+native map introduction from compatible lifts. Complete raw-map entry and
+concrete model realization remain in the active pilot.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

@@ -4276,6 +4276,23 @@ explicit coherent model capabilities, not consequences of possessing a raw
 chain agreement. Realizing those capabilities in the concrete retained-choice
 CAS consumer, including a nonidentity map, remains the next integration step.
 
+For that map interface, ordinary-target native squares now realize as actual
+transformations of walking-arrow diagrams. On LaxArrow(C), the stored arrow
+is the component of the tautological transformation source⇒target. An
+explicit OneCat profile justifies its naturality; one canonical assembly
+operation exposes it, and the existing whole-family introduction supplies
+the diagram functor. Thus both components of a nonidentity square compute
+to its original side maps, with whole further-Hom action retained. A generic
+proof-time comparison aligns the whole family's point with the original
+pointwise diagram introduction, without changing either runtime owner.
+
+The old chain-map factor data feed this realization through their existing
+native lower square. Generic inverse-mate naturality also transports a
+compatibility of boundary lifts to the native cone-map comparison cell.
+This is an auxiliary constructive introduction, not a new square-record
+interface: deriving its premise from the actual raw/model input remains
+part of the unfinished complete map/CAS integration.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

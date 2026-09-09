@@ -52,6 +52,17 @@ constructor of coherent P/Q from the old witnessed providers. Runtime H is
 not implemented by the compatibility paths; model realization and a
 nonidentity raw-map consumer remain the next integration requirements.
 
+Native-map continuation (2026-09-09): the ordinary-target native arrow
+category now realizes as actual walking-arrow diagrams, and the original
+chain-map lower square supplies a whole fixed-pair transformation functor
+with computing original components. A generic proof-time point comparison
+aligns the original diagram inputs; generic inverse-mate naturality derives
+the native cone-map comparison from compatible boundary lifts. The
+[map-realization ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#concrete-map-realization-current-experiment)
+records the qualified owners and remaining raw-boundary premise. This does
+not close concrete model realization, full raw-map entry or whole-H replay,
+and it does not reopen the general op repair.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

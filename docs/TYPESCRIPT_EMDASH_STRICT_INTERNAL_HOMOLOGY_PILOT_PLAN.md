@@ -1997,3 +1997,152 @@ additional model structure; this tranche does not manufacture it from the
 older witnessed providers. Full old/new homology-map agreement, the three
 generic window-exactness proofs, bounded formal assembly and final book work
 remain required in the parent goal.
+
+### Concrete Map Realization: Current Experiment
+
+The raw-entry tranche is checkpointed at `8dfb163a`; it is substantive
+progress, not a completed whole-interface CAS realization. Continuation
+rechecked the clean dedicated branch, all worktree heads, baseline ancestry
+and `examples/freyd_zero_cone_inputs.lp` before further edits.
+
+The nonidentity raw-map consumer needs to turn the EXISTING native lower
+square into an actual transformation of walking-arrow diagrams. The current
+join-mapping module deliberately lacks a general square-data mapping-category
+inverse. Do not silently assume that missing higher-categorical interface.
+Test the narrower ordinary-target realization instead: for an existing
+OneCat profile on C, the native LaxArrow(C) has a tautological natural
+transformation source⇒target. Its components are the already stored arrows;
+its naturality follows from the native squares, which are equality-valued
+in this model. The generic omega/lax category is unchanged.
+
+The candidate is one profile-qualified canonical whole-transformation
+assembly owner, analogous to the qualified zero-cone universal already
+implemented, followed by the existing transparent
+`transf_arrow_diagram_func`. It introduces no manual square record. Require
+source/target/generator and nonidentity square-component computation,
+whole/further-Hom action, a boundary on arbitrary non-OneCat targets, and
+actual alignment with the original raw-entry diagram. If the latter fails,
+locate the exact whole-versus-point observation before changing public
+input identity or adding a projection rule. This bounded native realization
+is a prerequisite for the concrete raw-map consumer, not a general Gray
+equivalence or an op repair.
+
+The candidate's component/source/target/generator checks pass
+(`one_cat_arrow_diagrams_20260909-20260909-135202.log`), as do both components
+of a nonidentity native square (`one_cat_arrow_diagram_map_20260909-20260909-135305.log`).
+Whole point conversion and existing unification initially fail: the left
+normal form is `sym_fapp0_func(join_elim_func(...),edge)`, whereas the original
+pointwise introduction is `join_elim_func(Const(X),Const(Y),Const(u))`.
+No object or generator is missing. A general proof-time comparison between
+these two actual rigid heads, with the terminal join shape and component
+equations checked explicitly, passes both the general natural-family case
+and the OneCat specialization and rejects a different supplied arrow
+(`arrow_diagram_point_usability_20260909-20260909-135651.log`). It leaves both
+whole runtime owners intact. This unifier still needs owning-module and
+downstream warning qualification before promotion.
+
+With that comparison, `chain_pair_outgoing_diagram_map` is an actual
+transformation between the ORIGINAL two introduced differentials; both
+components compute to the old middle/prev maps. Its whole fixed-pair map
+functor composes the existing cubical-boundary functor, product projection,
+and uncapped Hom action of the realization functor. Point/whole agreement
+passes (`chain_pair_outgoing_diagram_map_20260909-20260909-140144.log`,
+`chain_pair_outgoing_diagram_map_whole_20260909-20260909-140146.log`).
+The first target-component assertion incorrectly used `next:A0→A1`; its
+failure correctly distinguished that from `prev:D0→D1`. The repaired
+assertion uses the actual lower component, not an endpoint coercion.
+
+To construct the native cone-map comparison without a new square field,
+the generic inverse-mate pre/postcomposition laws have now been derived
+from the existing whole semantic comparison, associativity and actual
+counit naturality. A direct all-at-once `eq_refl` was insufficient; the
+explicit three/five-step generic proofs pass
+(`adjunction_untranspose_precomp_20260909-20260909-140652.log`,
+`adjunction_untranspose_postcomp_20260909-20260909-140749.log`). These are
+reusable compatibility lemmas, not additional runtime composition rules or
+a new CAS certification gate. The next probe uses them to build the native
+comparison cell from the existing boundary compatibility, then must derive
+that boundary compatibility at the actual raw/model input.
+
+### Promoted Ordinary Arrow And Native-Map Prerequisites
+
+The owning `emdash3_2_arrow_diagram_families.lp` now contains that general
+point-introduction unifier and its defined `transf_arrow_diagram_point_path`.
+The two terminal join domains are genuine shape discriminators; all other
+inferred LHS arguments are variables or wildcards. The rule compares the
+unfolded rigid `sym_fapp0_func` and `join_elim_func` heads and checks both
+vertices and the component in constraints. It does not match a defined
+alias, install a runtime fold, or identify an unrelated arrow.
+
+Four new one-way modules implement the remaining qualified prerequisites:
+
+- `emdash3_2_one_cat_arrow_diagrams.lp`: one profile-qualified canonical
+  tautological transformation on the existing LaxArrow(C), its component
+  projection, and a derived whole diagram realization functor;
+- `emdash3_2_chain_pair_diagram_maps.lp`: the whole fixed-pair lower-map
+  realization, composed from the existing cubical-boundary functor, product
+  projection and uncapped Hom action; the point operation delegates to it;
+- `emdash3_2_adjunction_untranspose_naturality.lp`: four defined generic
+  compatibility paths, using the current strict-naturality interface; and
+- `emdash3_2_zero_arrow_cone_map_introduction.lp`: a transparent auxiliary
+  constructor of the existing native map from compatible right mates. Its
+  third Sigma component is the path-to-cell image of the DERIVED inverse-mate
+  square, not a new caller-supplied square field. The primary raw wrapper
+  still has to derive the right-mate compatibility from its original data.
+
+There is one new primitive transformation assembly, nine new defined symbols,
+one runtime component rule and one proof-time unifier across this tranche.
+No category, square/prism record, composition rule, opaque equality or global
+truncation operation is added. The OneCat profile qualifies the realization
+without changing the native omega/lax category. The generic mate proofs rely
+on the same historical strict-naturality interface as their existing owner;
+a later strictness migration must retain that hypothesis explicitly.
+
+The auxiliary native constructor checks in
+`zero_cone_map_from_lifts_20260909-20260909-141306.log`. Its independent
+reviewer then computes both original components and rejects an unrelated
+native map (`zero_arrow_cone_map_introduction-20260909-141830.log`). The
+source-only package `/tmp/emdash-native-map-qualify.5zauD7` checks all source
+owners together (`native_map_source_join-20260909-141520.log`) and all new
+reviewers together quietly and with warnings
+(`native_map_review_join-20260909-141730.log`, `-142019.log`). The final
+additional whole-Hom query passes independently in
+`chain_pair_diagram_maps-20260909-142318.log`. Four reviewers contain fifteen
+positive assertions, three negative controls and two whole-Hom queries.
+
+The same staged tree also passes the unchanged walking-arrow introduction,
+whole arrow-family/exchange, both kernel/cokernel presentation, whole
+homology-family, native-H and concrete Freyd raw-entry reviewers together:
+`native_map_old_homology_join-20260909-142017.log`. The active scoped runner
+checks all five affected sources and four new reviewers independently in
+`logs/probes/native-map-active-20260909.log`. All invocations retain ordinary
+subject reduction and the 90-second per-target ceiling; no .lpo cache is
+copied into the stage.
+
+The exact pre-existing dependency union
+(`native_map_baseline_20260909-20260909-141732.log`) and the staged owning
+source join (`native_map_source_join-20260909-141734.log`) both report
+1,249 critical pairs and 169 pattern warnings. After ANSI/staging-prefix
+normalization, every term-head, two-rule-family and source-location count
+is identical and the complete inventories parse without exceptions. The
+one new runtime clause has no compound inferred guards; the generic unifier's
+two nested terminal shape discriminators are documented above it. Strict
+owner audits have no unreviewed findings.
+
+The next primary operation must close the actual raw-map entry, rather than
+mistaking the auxiliary compatible-lifts constructor for that result. Its
+remaining premise is K[b] composed with beta0 = beta1 composed with a. The
+existing raw map supplies a as `next`, the realized b has `middle`/`prev`
+components, and the original upper factor plus both kernel reconstructions
+should supply this equality by the original target kernel's monicity. No
+new square is to be requested from the user. Then instantiate the explicit
+coherent model at the concrete retained-selection CAS boundary and exercise
+the actual whole-H replay. The global formal LES/window/book requirements
+are unchanged and the goal remains active.
+
+All nine affected source/reviewer files are byte-identical to the fresh
+staged copies. The 42 focused metrics/TOC/registry/warning tests, catalog
+freshness, TOC, report headers, active references, shell/diff hygiene and
+source-only health snapshot check pass; metrics now cover 780 files.
+The standing full-health exception is unchanged. No repository-wide
+TypeScript/kernel/book/print aggregate or general op repair was run.

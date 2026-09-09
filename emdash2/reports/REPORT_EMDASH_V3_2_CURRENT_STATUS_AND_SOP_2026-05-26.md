@@ -1222,6 +1222,25 @@ belongs to the owning implementation plan rather than to standing guidance.
   the completed whole-interface CAS replay. The exact dependency union stays
   at 1,255 critical pairs and 169 pattern reports; its extra six inherited
   pairs relative to the prior H-only join come from the raw Freyd imports.
+- `emdash3_2_arrow_diagram_families.lp` now compares a point of an introduced
+  whole natural family with the corresponding pointwise walking-arrow
+  introduction. The unifier matches actual `sym_fapp0_func`/`join_elim_func`
+  bodies, constrains the terminal shape and all three observed data, and has
+  a defined reflexivity path. It is not a runtime fold.
+  `emdash3_2_one_cat_arrow_diagrams.lp` adds one profile-qualified canonical
+  source-to-target transformation on the existing native `LaxArrow_cat`.
+  Its component returns the stored arrow; the actual diagram functor is
+  derived by the existing whole-family introduction. The chain-pair diagram
+  module realizes the original lower square as an actual transformation of
+  the two ORIGINAL outgoing diagrams, retaining middle/prev components and
+  whole fixed-pair Hom action. The untranspose-naturality module derives
+  generic pre/postcomposition and square compatibility from the current
+  strict counit naturality, not from new composition rules. The native map
+  introduction uses those paths to construct its internal comparison cell
+  from compatible lifts. Its compatibility premise must still be derived
+  for the complete raw-map/CAS consumer; no new manually supplied square
+  record or automatic coherent model is claimed. The exact dependency join
+  remains 1,249/169, with no new warning families.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -140,6 +140,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   its whole-H alias fills canonical structural data but still requires the
   coherent P/Q presentations. It does not construct those from a raw
   agreement or run the native CAS. No new rule or primitive is added.
+  The OneCat arrow-diagram module now supplies the native arrow category's
+  tautological whole transformation and derives its actual diagram functor.
+  A generic point-introduction unifier preserves whole runtime heads while
+  aligning introduced diagrams. Old chain-map lower squares then realize as
+  actual transformations, with a whole fixed-pair map functor. Generic
+  inverse-mate naturality constructs a native cone map from compatible lifts;
+  deriving that compatibility at the actual raw/model input remains required.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not
