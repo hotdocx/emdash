@@ -54,6 +54,10 @@ native map introduction from compatible lifts. Complete raw-map entry now
 derives that compatibility, including the Freyd raw-agreement specialization
 and an actual whole-H application. Concrete coherent-model realization and
 full old/new homology-map comparison remain in the active pilot.
+The supplied coherent model is now transparently packaged, and its first
+native object-point interpretation consumer is implemented with explicit
+trusted adoption and retained selections. Map/all-window model binding and
+the full generic theorem remain unfinished.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

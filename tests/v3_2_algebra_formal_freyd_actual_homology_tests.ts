@@ -29,7 +29,10 @@ import { createAlgebraPolynomialFreydHomologyEngine } from '../src/v3_2/algebra_
 import { algebraFormalFreydEpimorphismBlockDelegationBundle, algebraFormalFreydEpimorphismTerm } from '../src/v3_2/algebra_formal_freyd_epimorphism';
 import { createAlgebraPolynomialFreydAbelianEngine } from '../src/v3_2/algebra_polynomial_freyd_abelian_category';
 import { algebraFormalFreydActualHomologyReconstructionBundle, algebraFormalFreydActualHomologyTerm, defineAlgebraFormalFreydActualHomologyRealization } from '../src/v3_2/algebra_formal_freyd_actual_homology';
-import { createFormalFreydActualHomologyProofEnvironment, FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
+import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
+import { algebraFormalFreydModelType, createFormalFreydModelProofEnvironment, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_signatures';
+import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydRetainedHomologyPresentation } from '../src/v3_2/algebra_formal_freyd_model_observation';
+import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
 import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
 import { FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_spine_signatures';
@@ -59,6 +62,9 @@ const construct = async () => {
     const selected = point.exactness.homology;
     const ring = whole.sequence.ring;
     const R = kernelFree('actual_homology_R', p), x = kernelFree('actual_homology_x', p);
+    // Given coherent models; the test does not construct them from raw providers.
+    const formalModel = kernelFree('actual_homology_model', p);
+    const otherModel = kernelFree('actual_homology_other_model', p);
     const coefficients = new Map<string, ReturnType<typeof kernelFree>>();
     const reifier = defineAffineFormalPolynomialReifier({
         algebra: algebraPresentedAlgebra(algebraPolynomialQuotientRing(algebraPolynomialIdeal(ring, []))),
@@ -72,11 +78,14 @@ const construct = async () => {
     const prepared = prepareAlgebraFormalFreydKernelChoiceProviders({ reifier,
         selected: createAlgebraPolynomialFreydKernelChoiceProviders({ id: 'actual-homology-cycles', ring, kernel: selected.cycles }) });
     const reconstruction = algebraFormalFreydActualHomologyReconstructionBundle({ reifier, selected, providers: prepared });
+    algebraFormalFreydRetainedHomologyPresentation(reconstruction.realization);
     const chain = algebraFormalFreydChainPairDelegationBundle({ reifier, selected: selected.pair });
     const epi = algebraFormalFreydEpimorphismBlockDelegationBundle({ reifier, selected: point.exactness.epimorphism! });
     const element = affineFormalRingElementType(R);
-    const environment = createFormalFreydActualHomologyProofEnvironment([
+    const environment = createFormalFreydModelProofEnvironment([
         { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: element },
+        { name: formalModel.name, type: algebraFormalFreydModelType(R) },
+        { name: otherModel.name, type: algebraFormalFreydModelType(R) },
         ...[...coefficients.values()].map(term => ({ name: term.name, type: element }))
     ]);
     const initial = createAlgebraFormalAssumptionSource({ moduleId: 'proof.cas.actual-homology', sourceId: 'tests/actual-homology.assumptions', baseEnvironment: environment });
@@ -99,11 +108,31 @@ const construct = async () => {
         const result = algebraFormalFreydActualHomologyTerm(reconstruction.realization, { providers, aboveLaw,
             belowLaw: providers.morphismLaw, chain: pair.term, boundaryLaw, reconstructionLaw: reconstructed.proof, epic: epic.term });
         spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
-        return { whole, point, selected, reifier, prepared, providers, reconstruction, initial, source: epicity.source, result, epic };
+        return { whole, point, selected, reifier, prepared, providers, reconstruction, initial, source: epicity.source, result, epic,
+            formalModel, otherModel, aboveLaw, belowLaw: providers.morphismLaw, chainLaw: chainLaw.proof };
     } finally { spies.forEach(spy => spy.mock.restore()); }
 };
 let value: ReturnType<typeof construct> | undefined;
 const consumer = () => value ??= construct();
+
+const observeModel = async () => {
+    const v = await consumer();
+    const bundle = algebraFormalFreydModelHomologyObservationBundle({ modelId: 'actual-homology-model', observationId: 'interior-2',
+        formalModel: v.formalModel, environment: v.source.environment, actual: v.reconstruction.realization,
+        aboveLaw: v.aboveLaw, belowLaw: v.belowLaw, chainLaw: v.chainLaw });
+    const id = 'actual-model-whole-H';
+    const run = await runAlgebraFormalWorkflow({ ...bundle, goalId: id, document: {
+        moduleId: v.source.moduleId, declarationId: id, environment: v.source.environment, type: bundle.realization.claimType,
+        plan: coreProofPlanHole(id, { provenance: p, expectation: { contextDepth: 0, target: bundle.realization.claimType } }),
+        provenance: p, fingerprint: fingerprint(id)
+    } });
+    const adoption = trustAlgebraFormalWorkflow({ run, assumptionName: 'actual_model_whole_H',
+        decision: { kind: 'trust-exact-algebra-computation', evidence: 'Explicitly interpret the supplied coherent model at this retained native homology point' } });
+    const source = appendAlgebraFormalAssumption({ source: v.source, adoption, classification: bundle.profile.assumptionClassification });
+    return { v, bundle, source };
+};
+let observed: ReturnType<typeof observeModel> | undefined;
+const modelConsumer = () => observed ??= observeModel();
 
 describe('v3.2 actual formal interior homology', () => {
     it('constructs homology and exactness at the original native boundary', async () => {
@@ -128,14 +157,60 @@ describe('v3.2 actual formal interior homology', () => {
         ]) assert.throws(() => defineAlgebraFormalFreydActualHomologyRealization({ reifier: v.reifier, providers: v.prepared, selected }), /actual|original|retain|disagree/iu);
     });
 
+    it('uses the whole-H owner with an explicit model interpretation and no reselection', async () => {
+        await consumer();
+        const forbid = () => { throw new Error('Model observation must retain the already computed universals and homology'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const { v, bundle, source } = await modelConsumer();
+            const checker = createCoreProofChecker(source.environment);
+            checker.validateEnvironment();
+            checker.check(checker.rootContext, bundle.realization.formalPoint, bundle.realization.pointType);
+            checker.check(checker.rootContext, bundle.realization.nativePoint, bundle.realization.pointType);
+            assert.equal(bundle.realization.actual.selected, v.selected);
+            assert.equal(bundle.profile.constructsModel, false);
+            assert.equal(source.entries.length, v.source.entries.length + 1);
+            assert.equal(source.entries.at(-1)!.classification, 'trusted-presentation-semantics');
+            assert.ok(kernelExpressionEquals(source.entries.at(-1)!.declaration.type, bundle.realization.claimType));
+            assert.deepEqual(source.entries.slice(0, -1), v.source.entries);
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('rejects foreign model queries, forged bindings and stale choices', async () => {
+        const { v, bundle } = await modelConsumer();
+        const common = { modelId: 'other-model', observationId: 'interior-2', environment: v.source.environment, actual: v.reconstruction.realization,
+            aboveLaw: v.aboveLaw, belowLaw: v.belowLaw, chainLaw: v.chainLaw };
+        const other = algebraFormalFreydModelHomologyObservationBundle({ ...common, formalModel: v.otherModel });
+        const goal = defineAlgebraFormalComputationGoal({ goalId: 'foreign-model', document: {
+            moduleId: v.source.moduleId, declarationId: 'foreign-model', environment: v.source.environment, type: other.realization.claimType,
+            plan: coreProofPlanHole('foreign-model', { provenance: p, expectation: { contextDepth: 0, target: other.realization.claimType } }),
+            provenance: p, fingerprint: fingerprint('foreign-model')
+        } });
+        assert.throws(() => bundle.adapter.acquire(goal, bundle.realization), /exact model point/iu);
+        assert.throws(() => bundle.adapter.normalizeRealization({ ...bundle.realization }, 'test'), /Foreign/iu);
+        assert.throws(() => algebraFormalFreydModelHomologyObservationBundle({ ...common, formalModel: v.formalModel,
+            actual: { ...common.actual, formalData: 'stale' } }), /Stale/iu);
+        assert.throws(() => algebraFormalFreydModelHomologyObservationBundle({ ...common, formalModel: v.reifier.formalRing }), /type|convert|unif/iu);
+        const defined = kernelFree('defined_homology_model', p);
+        const definedEnvironment = v.source.environment.extend({ name: defined.name, type: algebraFormalFreydModelType(v.reifier.formalRing),
+            body: v.formalModel, transparency: 'transparent', mode: binderMode('explicit', 'functorial'), provenance: p });
+        assert.throws(() => algebraFormalFreydModelHomologyObservationBundle({ ...common, environment: definedEnvironment,
+            formalModel: defined }), /reinterpret a defined model/iu);
+    });
+
     it('checks the constructed homology and exactness together in Lambdapi', {
         skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_ACTUAL_HOMOLOGY !== '1'
     }, async () => {
-        const v = await consumer();
-        let environment = v.source.environment;
+        const { v, bundle, source } = await modelConsumer();
+        let environment = source.environment;
         const terms: readonly [string, KernelExpression, KernelExpression][] = [
             ['actual_interior_homology', v.result.term, v.result.type],
-            ['actual_interior_exactness', v.result.exactness, v.result.exactnessType]
+            ['actual_interior_exactness', v.result.exactness, v.result.exactnessType],
+            ['actual_model_formal_point', bundle.realization.formalPoint, bundle.realization.pointType],
+            ['actual_model_native_point', bundle.realization.nativePoint, bundle.realization.pointType]
         ];
         const assertions = terms.map(([name, term, type]) => {
             environment = environment.extend({ name, type, body: term,
@@ -146,10 +221,11 @@ describe('v3.2 actual formal interior homology', () => {
             ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
             ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
             ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
-            ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS
+            ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS
         }, assertions });
         const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;',
-            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;') },
+            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\nrequire open emdash.emdash3_2_commutative_algebra_freyd_homology_models;') },
         { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
         assert.equal(checked.timedOut, false, checked.diagnostics);
         assert.equal(checked.accepted, true, checked.diagnostics.slice(-10000));

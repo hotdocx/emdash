@@ -2273,3 +2273,112 @@ The standing full-health exception is retained; no unrelated aggregate or
 general op repair is included. This is fixed-pair map realization and an
 actual whole-H consumer, not a new claim of a global category/functor for
 every legacy raw representation or a completed concrete model interpreter.
+
+### Coherent Model Binding: Consumer Design
+
+Raw entry is checkpointed at `7dd71cf0`. The next concrete consumer should
+name ONE supplied coherent model, not silently reconstruct global W/P/Q from
+the older per-choice witnessed providers. First test a transparent dependent
+package of the existing opposite-terminal, kernel/cokernel selection and
+P/Q presentation inputs. Its constructor requires all those inputs; it adds
+no axiom of existence and makes no arbitrary quotient-effectiveness claim.
+Model-facing whole H, raw object/map entry and point observations are to be
+definitions through the already implemented whole operations.
+
+The CAS realization must identify its formal model and retain the exact
+existing native result, providers and raw representatives. Keep the semantic
+model-binding contract explicit and reject foreign/stale bindings or changed
+choices. Do not replace whole H with a second matrix algorithm. Where an
+external result is compared with the formal map, prefer the existing complete
+arrow-object observation (both endpoints and the arrow) over transporting
+the runtime map between independently presented endpoint objects. The exact
+proof-time/adoption policy is to be selected against the first real consumer,
+not installed as a speculative global rewrite or opaque equality bridge.
+
+The context prototype and its object/map/complete-arrow observations check
+(`freyd_homology_model_context_20260909-20260909-152519.log`,
+`freyd_homology_model_observations_20260909-20260909-152931.log`). The
+complete-arrow carrier reuses Obj(LaxArrow(Freyd(R))); it is not a new
+diagram grammar. Only the model context/object interface is needed by the
+first native consumer; the map-observation probe remains a successor input.
+
+The first TypeScript implementation now mirrors exactly the model type and
+whole-H object observation, without adding Core owners or runtime rules.
+It binds a NAMED SUPPLIED opaque model input to a retained native homology
+result and emits the exact model-point/native-presentation agreement. This
+is the same explicit interpretation boundary already used by the ring
+reifier/native-provider interfaces: it is not a proof that the older
+providers construct the global model. Requiring an opaque INPUT here does
+not seal an existing formula; defined models are rejected to prevent silent
+reinterpretation of their specified bodies. Broader defined-model binding
+requires its own explicit interpretation contract.
+
+The operation observes an already computed native whole result, as the
+existing selected-provider bindings do. It does not pretend to recompute
+homology, kernel choices or weak pullbacks. Adoption must be explicit and
+classified as `trusted-presentation-semantics`, because the agreement depends
+on that model interpretation, not only on a polynomial equality check.
+Model IDs and per-query observation IDs are distinct. Foreign model goals,
+forged realization handles, changed owners/model declarations and stale
+native/formal data must fail before adoption. The first tests use the
+existing nonsplit bounded-result fixture, preserve its actual input
+constructors and selected output, and forbid reselection with the existing
+native-operation spies. No global equality bridge or quotient decoder is
+installed by this protocol.
+
+### First Model-Aware Point Consumer: Implementation And Qualification
+
+`emdash3_2_commutative_algebra_freyd_homology_models.lp` now owns the
+transparent context, constructor, five projections, original whole H, raw
+input view and object observation. All ten symbols are defined. The separate
+map/complete-arrow observation candidate remains an ignored prototype until
+its actual map-result consumer is implemented.
+
+The two new private TypeScript modules mirror exactly the model type/object
+signature and implement the model-observation bundle. Result coefficients
+are prepared before the caller freezes the formal environment. The formal
+point is an application of the LP whole-H observation; the native point is
+the original presentation reified from the retained result. The operation
+observes that existing result using the same reference-engine/explicit
+adoption mechanism as the selected-provider bindings. It records model and
+per-query observation IDs and immutable canonical data, revalidates owners,
+the supplied model declaration and selection/formal snapshots, and does not
+reselect a kernel, weak pullback or homology. This is not described as a
+fresh execution of the homology algorithm or a certified construction of M.
+
+The existing actual-homology reviewer was extended in place, so no shared
+test runner, public barrel or generic Core runtime was changed. Its five
+tests now pass with conformance enabled: original actual homology/exactness,
+old selection negatives, model point/adoption with no-reselection spies,
+foreign/forged/stale/wrong-typed/defined-model rejection, and the emitted LP
+document containing both old results and the new formal/native point views.
+All old source entries are preserved; the added agreement is explicitly
+classified as `trusted-presentation-semantics`.
+
+The definitive run is `logs/probes/model-point-ts-active-20260909.log`: five
+passes, no skips, about 15.9 seconds overall, with the LP check about 6.5
+seconds. The first attempted 90-second host setting was rejected by the
+unchanged shared TypeScript probe API BEFORE invoking Lambdapi; its existing
+60-second maximum was then used successfully. No shared harness migration
+or broader timeout relaxation was performed. Independent LP checks retain
+the standard 90-second ceiling.
+
+The source-only stage `/tmp/emdash-model-point-qualify.6L3ORE` contains no
+copied object caches. The model-constructor and existing complete raw-map
+reviewers pass together quietly and with warnings
+(`model_point_join-20260909-161221.log`, `-161223.log`). Workspace validation,
+root TypeScript typechecking and affected-file ESLint pass. The full
+repository/TypeScript/book aggregates are intentionally not run: generic
+runtime, package setup, public exports and shared runner behavior are
+unchanged. This remains the first object-point consumer; map observations,
+all retained interior positions and the complete old/new H-map comparison
+are the next integration requirements, not silently completed by it.
+
+Final point-tranche audit: the active model source/reviewer are byte-identical
+to the source-only stage. The complete normalized warning inventory is
+unchanged from the matching raw-map dependency union at 1,255/169, including
+all rule-family and location counts. The source has no rules/unifiers and
+its strict LHS audit has no findings. The 42 focused tooling tests, catalog,
+TOC, headers, active references, source registration and source-only health
+check pass; metrics cover 788 files. No full-health result or repo-wide
+aggregate is claimed. The public barrel/shared test runner were untouched.

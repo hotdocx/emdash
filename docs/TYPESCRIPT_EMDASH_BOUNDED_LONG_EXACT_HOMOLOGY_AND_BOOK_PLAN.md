@@ -74,6 +74,18 @@ records the source/reviewer qualification. Concrete coherent-model/CAS
 binding, full old/new H-map comparison and the full generic window/LES/book
 obligations remain unfinished; no closed quotient effectiveness is claimed.
 
+First model-aware point consumer (2026-09-09): a transparent context packages
+the already supplied coherent model inputs. The TypeScript consumer uses
+the actual whole-H object observation and the original native homology
+presentation, with explicit model-interpretation adoption classified as
+trusted presentation semantics. It neither reconstructs the global model
+from older providers nor reselects kernels/homology. Its real nonsplit
+fixture, negative guards and emitted Lambdapi source pass. The
+[consumer ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#coherent-model-binding-consumer-design)
+retains the remaining map/all-window binding, old/new H-map comparison,
+generic window/LES and final book obligations; this point is not completion
+of the full integration goal.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

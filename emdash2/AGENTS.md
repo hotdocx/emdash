@@ -151,6 +151,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   All three original components compute, and the Freyd wrapper fills its
   existing OneCat evidence while retaining the raw agreements. Concrete
   coherent-model binding and full old/new H-map agreement remain required.
+  `emdash3_2_commutative_algebra_freyd_homology_models.lp` now transparently
+  packages the supplied coherent inputs and exposes whole H/object views.
+  It does not construct a native/global model. The first TypeScript point
+  consumer interprets a named supplied model at its retained native result,
+  with explicit trusted-presentation-semantics adoption and no reselection.
+  Map-result/all-window model binding remains further work.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

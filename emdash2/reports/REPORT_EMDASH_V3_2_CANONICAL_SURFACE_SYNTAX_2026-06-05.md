@@ -2020,6 +2020,15 @@ Freyd agreements and fills the OneCat profile. Its three observations are
 the original next/middle/prev quotient classes. Coherent model realization
 in the actual CAS replay is still an explicit further boundary.
 
+`FreydHomologyModel(R)` now packages the existing supplied coherent inputs;
+`freyd_homology_model_func(M)` is their original whole H. The readable
+`freyd_homology_model_object(M,e,d,chain)` is ordinary application of that H
+to the original raw entry. Its first native point observation records an
+explicit model-interpretation agreement with the retained presentation,
+without an automatic model constructor, global rewrite or new equality axiom.
+This is external trusted adoption in the working document, not `eq_refl`
+or a claim that Lambdapi itself runs the CAS.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

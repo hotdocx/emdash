@@ -4301,6 +4301,19 @@ internally. Thus applying whole H to that actual raw map is now well typed,
 without a new square-record interface. Concrete coherent-model/CAS binding
 and complete comparison with the former induced homology map remain open.
 
+The model boundary now has its first concrete point consumer. A transparent
+context packages the coherent operations already supplied to H; it does not
+prove that the native providers construct them. As with assigning a native
+interpretation to a supplied formal ring, the user may explicitly interpret
+a named supplied model at a retained native homology result. The resulting
+agreement compares the actual whole-H application with that original
+presentation. It is recorded as trusted presentation semantics, not as an
+independent proof of the CAS or a closed quotient-effective model theorem.
+The point consumer retains the original input constructors, kernel choices
+and native result; it neither recomputes those universals nor replaces H
+with a second matrix algorithm. Extending this to map and whole bounded-result
+observations remains a separate integration step.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

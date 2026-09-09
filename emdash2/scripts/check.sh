@@ -189,6 +189,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_kernel_presentation_boundary_naturality.lp)
   files+=(emdash3_2_chain_pair_zero_cone_maps.lp)
   files+=(emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_homology_models.lp)
   files+=(emdash3_2_finite_family_sums.lp)
   files+=(emdash3_2_commutative_algebra_matrix_blocks.lp)
   files+=(emdash3_2_commutative_algebra_matrix_block_laws.lp)

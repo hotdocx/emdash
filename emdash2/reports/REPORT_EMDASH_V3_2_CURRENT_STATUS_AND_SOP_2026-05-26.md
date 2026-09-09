@@ -1259,6 +1259,24 @@ belongs to the owning implementation plan rather than to standing guidance.
   This tranche adds no primitive, rule, unifier or quotient decoder. Its
   exact dependency warning inventory remains 1,255/169. Concrete CAS model
   realization and full old/new homology-map agreement are still separate.
+- `emdash3_2_commutative_algebra_freyd_homology_models.lp` defines the
+  coherent model context as a dependent package of the existing supplied
+  opposite-terminal, kernel/cokernel choices and P/Q presentations. Its
+  constructor requires those values, its projections retain them, and its
+  whole-H/input/object views delegate to the active operations. No primitive,
+  rule, unifier or automatic closed model instance is added.
+  `algebra_formal_freyd_model_signatures.ts` mirrors only the model type and
+  object observation; it does not transfer the whole categorical runtime to
+  TypeScript. `algebra_formal_freyd_model_observation.ts` binds a named supplied
+  model input to an already computed native homology and reifies that exact
+  presentation. The explicit agreement is adopted as
+  `trusted-presentation-semantics`, not claimed as a kernel proof of the
+  model or CAS. Defined model inputs are rejected to avoid silently
+  reinterpreting specified bodies; no existing formula is sealed. The
+  operation observes the retained result without kernel/weak-pullback/homology
+  reselection, checks exact model/owner/context and selection data, and has
+  separate model and observation IDs. The real nonsplit point consumer and
+  emitted Lambdapi source pass; map/all-window model consumers remain open.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary
