@@ -1149,8 +1149,34 @@ belongs to the owning implementation plan rather than to standing guidance.
   `emdash3_2_strict_transfor_component_paths.lp` packages the existing strict
   component comparison through explicit raw/post/pre/mixed usability heads;
   it adds no rule and makes no assertion about arbitrary lax transformations.
-  The presentations retain further Hom action but do not yet supply whole H,
-  the mate-to-old-lift comparison or a concrete closed Freyd presentation.
+  The presentations retain further Hom action; they do not supply an
+  automatic concrete closed Freyd presentation.
+- `emdash3_2_adjunction_mates.lp` defines whole transpose/untranspose as
+  evaluated views of the existing `Adjunction_hom_prof_comparison` DefIso.
+  Four projected cancellation rules preserve whole and point inverses;
+  proof-time comparisons meet the actual unit/counit formula bodies.
+  The `zero_arrow_universal_tests` and kernel/cokernel adjunction-mate
+  modules derive annihilator/coannihilator inputs from actual diagram
+  transformations, then compare with the original selected lifts/colifts.
+  Their operation-aware unifiers retain the selected universal and test
+  arrow, but ignore its incidental valid zero proof by universal uniqueness.
+  Actual J(X)/I(X) source/target constraints prevent a nonfaithfulness error.
+  Reconstruction uses the original universal factor spaces; no manual square
+  input or opaque equality is introduced.
+- `emdash3_2_homology_families.lp` is rule-free: for A:B→C, D:B→Arr(C) and
+  h:J∘A⇒D, form β=K(h)∘η_A, introduce its whole arrow-diagram family, and
+  compose with Q. Thus H:B→C retains the generic identity/composition and
+  higher action rather than reconstructing H object by object. The
+  `homology_family_selected_views` module compares β with the original
+  selected kernel lift and H's object with the original cokernel selection.
+  The latter comparison uses ordinary congruence on the existing PathOut
+  object carrier (target,arrow), not a new carrier, runtime recentering or
+  reselection. H's map comparison specializes the existing cokernel-map
+  theorem at the boundary-diagram input; a direct large reflexivity search
+  timed out and is not the public proof interface. A complete comparison to
+  the older homology-map recipe, the global complex category/universal h,
+  and the concrete retained-selection CAS consumer remain further work.
+  This does not identify arbitrary lax comma/prism cells with strict paths.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

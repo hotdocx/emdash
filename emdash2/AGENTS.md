@@ -113,8 +113,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   Došen cuts. A presentation is additional coherent structure, not an
   automatic inhabitant for every old capability or a closed Freyd provider.
   The strict component-naturality helper uses the current strict usability
-  rules; it does not erase arbitrary laxity. Whole complex/H and the concrete
-  CAS presentation consumer remain further work.
+  rules; it does not erase arbitrary laxity.
+  `emdash3_2_adjunction_mates.lp` evaluates the existing Hom-prof comparison
+  to whole forward/backward mates with projected cancellation and semantic
+  usability. The kernel/cokernel-mate modules compare with original selected
+  lifts/colifts; zero-arrow universal tests derive their inputs from actual
+  transformations. `emdash3_2_homology_families.lp` defines whole H for an
+  already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
+  Its selected-view module compares objects and maps with the existing
+  operations, without runtime reselection or new primitive H. This is not
+  yet a global complex category, automatic coherent realization of arbitrary
+  raw data, or the concrete CAS presentation consumer.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

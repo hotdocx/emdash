@@ -2,14 +2,15 @@
 
 Date: 2026-09-08
 
-Status: active whole-complex/homology redesign; structural evaluation qualified and promoted; general op repair deferred
+Status: active whole-complex/homology redesign; whole mates and coherent-family homology qualified and promoted; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
 repair is deferred. A pilot construction must have a justified mathematical
 meaning without essential use of that defect; the spelling `Op_funcd` alone
-is not a rejection criterion. The scoped structural evaluation tranche is
-now active; the complete zero-complex/whole-homology interface is not.
+is not a rejection criterion. Structural evaluation, selected presentations
+and whole homology of already coherent families are active; the global
+zero-complex/universal-family interface remains open.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -120,8 +121,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
-| `HINT-UNIVERSAL-3` | declaration-backed selected presentations implemented; full mate-to-old-lift and concrete realization remain | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | varying-source triangle-diagram prototype checked in part | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-UNIVERSAL-3` | declaration-backed selected presentations and mate-to-old-lift/colift implemented; concrete realization remains | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-COMPLEX-4` | whole H for already coherent families implemented; global complex category/universal family remains | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation qualified at `b4d92521` | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
@@ -130,6 +131,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
 | `HINT-ZERO-9` | comparing native long-edge restriction and the internal zero-arrow comma presentation | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
 | `HINT-PRESENTATION-10` | implemented and qualified at the scoped declaration boundary | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
+| `HINT-MATES-11` | implemented and qualified; six-module/four-reviewer tranche below | whole mate views from the existing adjunction ProfComparison, semantic unit/counit usability, and agreement with the original selected lift/colift on derived annihilator inputs |
+| `HINT-FAMILY-12` | implemented and qualified for already coherent families; global applicability remains in rows 4/5 | derive β = K(h) ∘ η_A and H = Q ∘ Arr(β) from a whole family h:J∘A⇒D; qualify maps/higher action and retain the global complex-category and concrete CAS obligations |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -1347,3 +1350,198 @@ in the whole complex/boundary/homology construction, and construct the
 concrete retained-selection proof–CAS consumer. No automatic presentation
 inhabitant, closed quotient effectiveness, general op repair, or conversion
 of arbitrary directed prism data into equality is supplied here.
+
+### Mate Continuation
+
+Reuse `Adjunction_hom_prof_comparison` rather than introduce unrelated
+primitive mate functors. Evaluate its existing computational isomorphism at
+the actual endpoint pair, retain whole forward/backward Hom functors and
+their higher action, and join canonical component-level cancellation only
+where evaluation has erased the generic DefIso/functor-action pattern.
+Compare these formal mate views with the transparent unit/counit formulas
+through the usual proof-time interface. Kernel/cokernel specializations must
+then meet the original chosen lift/colift, with annihilator/coannihilator
+inputs derived from actual arrow-diagram transformations, not supplied as
+new manual square fields. Keep all source/target reconstruction explicit on
+RHSs and in diagnostic types while leaving non-discriminating LHS slots
+implicit. This tranche does not replace the remaining whole H, concrete
+CAS consumer, generic window exactness or final book obligations.
+
+### Checked Mate And Coherent-Family Prototypes (2026-09-09)
+
+The declaration-backed continuation now has a working whole-family consumer,
+not merely signatures for prospective functors. The previous status-only turn
+made no implementation change; resumption rechecked branch `83cdd432`, the
+baseline ancestry, staged/unstaged state, and the bounded core baseline
+(`emdash3_2-20260909-095547.log`) before continuing qualification. The following
+results are probe evidence until their separately recorded promotion boundary.
+
+The generic mate prototype `adjunction_hom_mates_20260909.lp` evaluates
+`Adjunction_hom_prof_comparison` at the actual endpoint pair. Its two whole
+Hom functors are transparent `defiso_to`/`defiso_from` observations, not new
+primitive mate owners. Four projected cancellation instances retain whole
+and point inverse computation after evaluation has erased the original
+DefIso action pattern. Whole and point proof-time comparisons meet the
+actual unfolded unit/counit formulas, with defined whole reflexivity paths.
+A direct `Prof_cat`/`Functor_cat` shortcut replaces a nontransitive two-step
+usability search; the actual product base is reconstructed in a constraint.
+The current warning probe is `adjunction_hom_mates_20260909-20260909-094445.log`:
+1,144 critical pairs and 157 pattern reports, against the unchanged core's
+1,139/157. The five extra reports are one alternating point-cancellation
+overlap and four whole-cancellation/terminal-section projection overlaps.
+Their typed controls and detailed classification belong to this tranche;
+these counts are not a veto or a confluence claim.
+
+`arrow_universal_tests_20260909.lp` derives the original annihilator and
+coannihilator inputs from actual transformations J(X)⇒d and d⇒I(X), using
+the existing strict component-naturality path. The caller supplies no new
+square or chain-zero field. The initial-side endomorphism proof needs the
+explicit native carrier `Obj(Hom_cat C t t)` when applying contractibility.
+Omitting it had caused premature injective-Hom decomposition to request the
+incorrect equation `Op_cat C ≡ C`. The accepted proof adds no such rule,
+opposite preadditive structure, or arbitrary arrow reversal.
+
+The kernel/cokernel mate prototypes then identify those formal operations
+with the original selected lift/colift, and derive reconstruction through
+the original embedding/projection. Comparing the entire raw result, including
+its large annihilation-proof payload, timed out in the first family consumer
+(`homology_family_points_20260909-20260909-085758.log`, warning rerun
+`-090741.log`). The refined patterns discriminate on the selected factor
+operation and its test arrow. The factor carrier is independent of the
+particular valid annihilation proof; universal uniqueness identifies the
+resulting lifts. This is not a global proof-irrelevance rule. Positive
+alternative-proof and negative different-arrow controls are required.
+The raw unit/counit patterns also retain actual source J(X)/target I(X)
+guards as constraints: K and Q are not assumed faithful. The refined
+kernel/cokernel source probes pass (`-091753.log` and `-091754.log`).
+
+For an arbitrary base B, the rule-free prototype
+`homology_natural_families_20260909.lp` takes whole functors A:B→C and
+D:B→Arr(C), together with a whole transformation h:J∘A⇒D. It defines:
+
+```text
+cycles   = K ∘ D
+β        = K(h) ∘ η_A : A ⇒ cycles
+boundary = Arr(β) : B → Arr(C)
+H        = Q ∘ boundary : B → C.
+```
+
+All four are existing whole-operation composites; H is not a new primitive.
+The boundary diagram's whole generator observation returns β. Its source
+check (`homology_natural_families_20260909-20260909-084543.log`) uses only the
+active presentation modules, not the experimental mate unifiers. Thus whole
+functor formation and retained higher-action interfaces are separate from
+the proof-time comparison with the old selected algorithms.
+
+The β component agrees by typed reflexivity with the original selected kernel
+lift after the matcher refinement. H's point agrees directly with the old
+cokernel selector at the formal boundary input. Asking unification alone to
+propagate old/formal endpoint comparisons underneath that dependent selector
+fails. The successful `homology_family_compatibility_20260909.lp` instead
+packages the boundary target and arrow as one ordinary dependent Sigma input.
+The formal and original selected inputs agree by typed reflexivity; ordinary
+`eq_ap` of the original cokernel selector, composed with the existing
+cokernel-object comparison, proves the desired H-object agreement. Both
+Sigma inputs must be explicit in that `eq_ap` application: neither is
+reconstructible from the selector's result. Latest pass:
+`homology_family_compatibility_20260909-20260909-095000.log`.
+This is a comparison proof, not operational recentering or reselection, and
+introduces no new rule, equality axiom, or opaque proof.
+
+The reusable coherent-family constructor does not silently assert that the
+existing lax comma category provides its required strict universal h. The
+global complex category, full comparison with the old induced homology map,
+and concrete retained-selection proof–CAS consumer remain named tasks. After
+this tranche's warning/negative/higher-action qualification and checkpoint,
+apply the family constructor to the selected complex interface and actual
+nonsplit consumer. The three generic window exactness proofs, bounded theorem
+assembly, and final book/consolidation remain in the enclosing objective.
+
+### Promoted Whole-Mate And Homology-Family Boundary
+
+Six one-way modules now implement the checked design:
+
+- `emdash3_2_adjunction_mates.lp`: transparent evaluated Hom-DefIso views,
+  four whole/point cancellation instances, five usability rules, and defined
+  whole semantic comparison paths;
+- `emdash3_2_zero_arrow_universal_tests.lp`: rule-free derived kernel/cokernel
+  tests from actual zero-arrow-diagram transformations;
+- `emdash3_2_kernel_adjunction_mates.lp` and its cokernel counterpart:
+  transparent specialized mates, two operation-aware unifiers each, original
+  selected lift/colift comparisons and derived reconstruction;
+- `emdash3_2_homology_families.lp`: rule-free whole cycles, β, boundary
+  diagram and H construction; and
+- `emdash3_2_homology_family_selected_views.lp`: rule-free selected-boundary,
+  object and map comparison interface. The intermediate carrier reuses only
+  `Obj(PathOut_cat C X)`; the redundant family-specific carrier alias was
+  removed after `homology_family_pathout_20260909-20260909-100130.log` passed.
+
+There is no new primitive symbol in this tranche and no edit to the nucleus.
+Runtime composition keeps the existing mapped-arrow accumulation direction;
+the four new cancellations eliminate adjacent inverse mate operations.
+The formal/semantic bridge is proof-time, not a raw-arrow runtime fold.
+
+The four independent reviewers contain 27 positive assertions, 12 negative
+controls and three further-Hom queries. They include both whole and point
+mate inverses, alternating triple cuts, whole/point semantic reflexivity,
+retention of formal runtime heads, a typed terminal corner, and rejection of
+an incorrectly constant-terminal type for the generic Hom-prof comparison.
+Both specialized lift reviewers accept an arbitrary alternative valid zero
+proof, reject a different test arrow, retain the original reconstruction,
+and reject the raw lift as a runtime normal form. The H reviewer checks
+identity/composition, whole β recovery, both components of a nonidentity
+boundary map, the named object/map comparisons, a negative unrelated map,
+and identity computation at a further directed-Hom level.
+
+The direct large H-map `eq_refl` comparison reached the 90-second bound both
+quietly (`homology_family_controls_20260909-20260909-100038.log`) and with
+warnings (`-100247.log`). The selected proof interface instead specializes
+the existing `cokernel_presentation_map_path`, which passes in
+`homology_family_map_path_20260909-20260909-100251.log` and the final
+independent reviewer. No new equality rule or opaque proof was introduced
+to force that search. This map comparison is at the formal boundary diagram
+input; full compatibility with the former independently packaged homology
+map remains a separate named obligation.
+
+The immutable source-only package
+`/tmp/emdash-homology-family-qualify.qTcTMi` checks the selected-view owner,
+all four reviewers independently and together, central diagnostics with the
+new modules already imported, and both older nonidentity presentation
+rectangle reviewers. Each invocation is bounded to 90 seconds; all pass.
+Logs are `logs/probes/family-stage-*-20260909.log`. Its promoted source and
+reviewer bytes match the active files. Scoped active `scripts/check.sh`
+checks the selected-view and cokernel-mate owners plus all four reviewers;
+the successful log is `family-active-checks-20260909.log`.
+
+The warning-enabled source-only dependency join reports 1,244 critical pairs
+and 169 pattern reports, compared with the previous presentation dependency
+union's 1,239/169. After ANSI stripping, both logs parse completely. The
+exact new families are `fapp0 × fapp0` once and
+`comp_fapp0 × tapp0_fapp0` four times; no previous family disappears.
+The first is the alternating inverse-mate cut: the two typed triple-cut
+controls join. The latter four arise from untyped overlap of mate-component
+composition with the constant-terminal-section projection. The generic
+comparison is not of that constant-terminal type (negative control), while
+the actual fully terminal corner computes (two positive controls). No
+additional runtime joining rule is justified by a failing typed consumer.
+These remain explicitly reviewed overlap families, not a proof of global
+confluence or an assertion that every untyped critical pair is impossible.
+The core remains at 1,139/157. The six new modules' strict inferred-slot audits
+have no unreviewed findings; source code preserves J(X)/I(X) guards in
+constraints instead of adding reducible implicit-argument patterns.
+
+Source/reviewer registration, the 42 focused metrics/TOC/registry/warning
+tooling tests, catalog freshness, TOC, report headers, active references and
+shell/diff hygiene pass. Source-only metrics cover 755 files. The standing
+full-health/aggregate exception is retained; no repository-wide TypeScript,
+Lambdapi, health rebuild, CI aggregate or book render was run or claimed.
+
+Next apply this whole-family construction to the actual strict complex
+interface and a nonidentity retained-selection proof–CAS consumer. Do not
+substitute a constant or path-only family for the required chain-map action,
+do not assume that arbitrary directed lax prisms are equality proofs, and do
+not close the global complex-category row merely because an H constructor
+accepting coherent A/D/h is now available. Preserve the existing native,
+triangle and comma experiments as evidence while selecting that universal
+family. The parent window-exactness, bounded formal assembly and final book
+requirements remain unchanged.

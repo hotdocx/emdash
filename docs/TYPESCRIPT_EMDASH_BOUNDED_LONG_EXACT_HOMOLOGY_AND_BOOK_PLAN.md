@@ -17,6 +17,17 @@ capability is not a prerequisite for declared structures and concrete
 instances. The full goal scope, choice-preservation requirements, general
 op-repair deferral and local-checkpoint authorization remain unchanged.
 
+Latest bounded implementation tranche (2026-09-09): whole adjunction mates
+now compute and meet original selected kernel lifts/cokernel colifts. The
+rule-free `homology_family_func` constructs H:B→C from an already coherent
+family h:J∘A⇒D, retaining whole β and higher action; defined object/map
+comparisons meet the original selected operation families. The
+[promotion ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#promoted-whole-mate-and-homology-family-boundary)
+records all six modules, positive/negative controls, exact warning delta,
+fresh source-only qualification and local checkpoint boundary. This does
+not complete the global complex category/universal h, concrete whole-interface
+CAS consumer, three generic window exactness proofs or bounded formal theorem.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery

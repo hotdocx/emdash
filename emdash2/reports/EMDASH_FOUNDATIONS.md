@@ -4212,11 +4212,31 @@ identity/composition and further Hom action remain available. The core's
 whole evaluation-after-exchange and two projection-order rectangle instances
 support these declared adjunctions without a second adjunction calculus.
 
-This is infrastructure toward cycles as `K(d)`, boundary as the transpose
-of the zero-arrow datum, and homology as its cokernel. The mate-to-old-lift
-agreement, complete complex-map interface, whole H and concrete CAS
-presentation consumer remain further work. The declarations are not opaque
-equality bridges or a claim of arbitrary quotient effectiveness.
+The whole mate functors are now transparent evaluated views of the existing
+adjunction Hom-prof comparison. Their whole and point inverse cuts compute;
+the unit/counit formulas agree proof-time. At J(X)⇒d and d⇒I(X), the mates
+meet the original selected kernel lift and cokernel colift. Their test data
+come from actual transformations and strict naturality, not new manual square
+fields. The selected operation and test arrow remain fixed; universal
+uniqueness permits different valid annihilation proofs for that same arrow.
+
+This now gives whole homology for an already coherent family. Given A:B→C,
+D:B→Arr(C), and h:J∘A⇒D, form cycles K∘D and the actual transformation
+β=K(h)∘η_A. Introduce β as a whole B→Arr(C) diagram family and compose with
+Q. The result H:B→C is a defined whole functor, with generic identity,
+composition and higher Hom action; no primitive H or dimension cap is added.
+Its point agrees with the original selected kernel-lift/cokernel recipe.
+The proof applies the old dependent selector to an equality of complete
+(target,arrow) inputs. It is a comparison, not a transport inserted into the
+runtime operation or a replacement selection. Its arrow comparison reuses
+the existing cokernel-map theorem at those boundary diagrams.
+
+The global complex category providing the universal coherent h, the complete
+comparison with the old homology-map recipe, and the concrete CAS
+presentation consumer remain further work. In particular, an arbitrary lax
+comma category is not asserted to supply this strict family. These
+declarations and defined comparisons are not opaque equality bridges or a
+claim of arbitrary quotient effectiveness.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

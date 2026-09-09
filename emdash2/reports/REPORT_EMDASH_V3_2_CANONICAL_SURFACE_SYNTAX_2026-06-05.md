@@ -1962,8 +1962,27 @@ agreements. Formal whole action remains the runtime owner for generic
 functoriality and adjunction rectangles, and further Hom action is retained.
 The semantic map receives an actual diagram transformation η and derives
 its old factor-space input through the existing strict component-naturality
-comparison. No new manual square syntax is introduced. These interfaces do
-not yet name a completed whole homology functor or a concrete CAS instance.
+comparison. No new manual square syntax is introduced.
+
+Whole `adjunction_transpose_func` and `adjunction_untranspose_func` are
+evaluated views of the existing Hom-prof comparison; their inverses compute
+both as whole functors and on points. The `kernel_presentation_lift_func`
+and `cokernel_presentation_colift_func` specializations meet the original
+selected factor operations through proof-time comparisons and defined paths.
+
+For an already coherent family, the readable whole construction is:
+
+```text
+A:B→C,  D:B→Arr(C),  h:J∘A⇒D
+cycles = K∘D
+β = K(h)∘η_A : A⇒cycles
+H = Q∘Arr(β) : B→C.
+```
+
+`homology_family_func` is a transparent definition. Its selected object/map
+comparison paths do not change its runtime owner or reselect universals.
+The global complex category supplying such a universal h and the concrete
+CAS instance remain separate implementation obligations.
 
 ## Whole Displayed Laxity Notation
 
