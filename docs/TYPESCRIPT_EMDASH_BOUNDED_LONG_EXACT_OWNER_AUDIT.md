@@ -36,6 +36,13 @@ distinguishes existing ordinary con/pre-laxity owners, absent dependent
 mirror names, checked native-variance aliases and the separate missing
 Op_catd action link. No candidate rule or complete complex category is yet
 promoted by that review.
+The user subsequently deferred the general op repair while retaining this
+whole-complex/homology direction. The pre-op state is now recovered: the
+specific nonidentity evaluation under Op_funcd has a checked independent
+ordinary-Eval meaning and a successful narrower rule-bundle consumer. The
+pilot owns its remaining source-position audit, zero restriction/prism
+coherence and selected whole universal/H interfaces. The rule-free reference
+proofs remain useful evidence, not an automatic replacement architecture.
 
 ## Scope
 

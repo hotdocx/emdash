@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: retained inventory and selective ordinary-owner port; dependent mirror paused with the user-deferred general variance repair
+Status: active consumer-specific contravariant-action review; ordinary-owner port retained; general variance repair deferred
 
 Critical update: [the internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 derives the decoded empty carrier using the committed core alone. The
@@ -10,9 +10,13 @@ ordinary baseline and parallel post-migration core both reproduce it. The
 inventory below now informs a variance repair, not merely missing-head
 completion. In particular, do not fill the Op_catd action link or add higher
 Op/con mirrors before reviewing their actual source/target variance.
-The user has now deferred that general repair until after the homological-
-algebra goal. Preserve this audit; it is not a reason to block the existing
-constructive homology route or to rely on a known invalid reversal.
+The user has deferred the general repair and explicitly retained the
+whole-complex/homology redesign. An `Op_*` occurrence is not itself evidence
+of essential dependence on the defect. Review the actual operation: the
+specific evaluation instance has an independent ordinary-Eval interpretation,
+whereas an arbitrary reverse laxity map must not be inferred merely from the
+current Op signature. Resume the concrete consumer, not a general-duality
+project or an automatic fallback to component-level chases.
 
 Parent: [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
 
@@ -306,3 +310,26 @@ metrics/TOC/registry/warning-parser tests and document checks pass; catalog
 generation and strict freshness are synchronized. No repository-wide
 TypeScript, source/reviewer aggregate, book render or full health refresh is
 run. The parent health exception and final book obligations remain explicit.
+
+## Recovered Concrete Consumer After Deferring General Op Repair
+
+The full pre-op state is recovered in the
+[pilot recovery section](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#recovery-of-the-pre-op-milestone).
+The attempted `Op_funcd` rule concerns the opposite of displayed evaluation,
+ultimately sending an already supplied `eta:T0⇒G∘T1` to its forward
+component `eta[i]`. Its desired value is not an inverse arrow. An independent
+whole ordinary evaluation functor now checks that result, its general
+`(eta,q)` action, a further Hom action and rejection of the reverse Hom type
+without using an Op or homd operation.
+
+The narrower recovered bundle opens only a composite whose leading operator
+is `Eval_funcd`, then uses pairing/identity/constant-argument projections.
+It does not add the original unrestricted Op_funcd-composition bridge.
+The actual varying-triangle edge consumer passes with this bundle. Both
+native semantics and the recovered consumer are retained as tracked,
+non-library audits; their source names and final logs are in the pilot.
+Owner-position warning comparison, nested inferred-slot review, identity/
+composition projection orders and the full zero-prism/complex interface
+remain required. This recovery does not mark a full dependent con ladder
+implemented or identify arbitrary directed laxity cells with invertible
+ones.

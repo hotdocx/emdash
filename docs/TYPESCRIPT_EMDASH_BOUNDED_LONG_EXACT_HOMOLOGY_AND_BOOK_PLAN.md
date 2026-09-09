@@ -22,25 +22,38 @@ using an invalid inference. Do not use arbitrary directed-arrow reversal,
 unrestricted same-base opposite regrading, or the incompatible generic-Sigma/
 constant-product comparison to obtain a homology result.
 
-Current work: review the actual semantic dependencies of the homology
-alternatives, put aside any construction that essentially needs those
-invalid operations, and resume `LEH-WINDOW-EXACTNESS-7D4` from the existing
-constructive connecting map and universal-factor owners. The reference
-route uses original kernels/cokernels, monic/epic cancellation and witnessed
-comparison isomorphisms. A lexical scan finds no direct `op`, `Op_catd`,
-`Op_funcd`, `Op_cat`, `Op_func` or `homd_int` references in the implementation
-files named for homology, snake or chain pairs. That is an initial inventory,
-not proof of conservative isolation from the imported kernel: each newly
-used inference still needs a mathematical owner/variance review.
+Current work, clarified by the user after checkpoint `772f9d18`: recover and
+continue the pre-op whole-complex/homology-functor redesign, including its
+native simplicial and derived cubical mechanisms. Deferring the general
+repair does not mean abandoning that redesign or automatically resuming
+component-level exactness chases. The earlier routing to 7D4 in that
+checkpoint was too broad and is superseded here.
 
 The [strict internal homology pilot](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
-is no longer a blocking predecessor of window exactness. Its higher-Op-
-dependent hybrid/action probes are on hold; their green checks alone do not
-qualify them. Whole internalization may proceed only through an independently
-justified construction and does not justify restarting the general duality
-repair. No Git reset, history rewrite, broad code deletion or loss of the
-existing mathematical/CAS work is required. Connecting-map checkpoint:
-`b83a4d32`; the full homology/CAS/formal-interface/book objective remains active.
+again owns the next architectural slice. The four ordinary con heads ported
+in `6fc0b02e` remain active. The interrupted consumer was evaluation under
+`Op_funcd` in the varying triangle prototype; its narrower recovered rules
+now reproduce the nonidentity edge computation. An independent ordinary-
+evaluation construction confirms the desired forward component, without
+using the bad universe-op action. This is local evidence, not qualification
+of the entire complex category or a complete dependent con ladder.
+
+Judge each operation by its actual mathematical use, not whether its name
+contains `Op`. Legitimate local opposites and justified structural instances
+may be used; arbitrary directed-arrow inversion and wrong-base regrading may
+not. If a candidate essentially requires such an invalid step, backtrack
+that candidate and compare an alternative whole/internal construction.
+Neither blanket rejection of Op-based syntax nor a general variance-repair
+project is the current task. Kernel/cokernel choice coherence, the strict
+zero restriction and coherent prism/map structure remain real pilot gates.
+
+The existing constructive connecting/map/factor proofs remain reference and
+comparison evidence. Five new zero-map proofs have checked as ignored
+probes; retain them as auxiliary work, not a replacement primary direction.
+`LEH-WINDOW-EXACTNESS-7D4`, bounded assembly and final book/formal-interface
+obligations remain required after the architectural slice. No Git reset,
+history rewrite, broad deletion or homology reselection is involved.
+Connecting-map checkpoint: `b83a4d32`; the full goal remains active.
 
 Book and final evidence must distinguish the constructive mathematical
 reference implementation, executable CAS results and scoped term/computation
@@ -757,6 +770,7 @@ was introduced to get a passing target.
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
+| `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |

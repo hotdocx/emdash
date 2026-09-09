@@ -2,12 +2,14 @@
 
 Date: 2026-09-08
 
-Status: retained architectural pilot; unsafe higher-op-dependent alternatives paused; no longer a blocking predecessor of reference window exactness
+Status: active whole-complex/homology redesign; pre-op evaluation consumer recovered; general op repair deferred
 
-Critical current gate: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
-is confirmed on the committed core and both reference baselines. Promotion of
-the experimental higher-opposite-dependent rules is paused for a reviewed
-variance repair. No new structural-action rules from this pilot are active.
+Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+is confirmed on the committed core and both reference baselines. Its general
+repair is deferred. A pilot construction must have a justified mathematical
+meaning without essential use of that defect; the spelling `Op_funcd` alone
+is not a rejection criterion. No new structural-action rules from this pilot
+are active yet; scoped owner-position qualification remains required.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -19,19 +21,16 @@ Branch: `goal/bounded-long-exact-homology-book-v3.2`
 
 ## Decision And Scope
 
-Latest user sequencing decision (2026-09-08): defer the general op/Sigma
-repair until after the homological-algebra goal. Do not use a wrong-direction
-arrow or an unrestricted opposite-family regrading to make this pilot work.
-The hybrid varying-source/opposite-evaluation and structural-action probes
-below remain unpromoted and are put aside pending an independent semantic
-justification. They are not the required route to completing the current
-homology goal. Resume the existing constructive Hom-factor/kernel/cokernel
-reference route for the generic window and bounded assembly; a valid whole
-internal construction may later replace or simplify it without relying on
-the deferred defect. Keep all alternatives and checkpoints as evidence.
+Latest user clarification (2026-09-08): deferring the general op/Sigma repair
+does not abandon the pre-op whole-complex/homology redesign. The user linked
+responses 0140, 0141 and 0142 and specifically recalled the dependent con
+ladder and attempted `Op_funcd` rewrite. Recover that state and distinguish
+a legitimate local opposite computation from exploitation of the known
+inconsistency. Only a construction that essentially needs the invalid step
+should be put aside. The broad fallback-to-component-chases wording in
+`772f9d18` was an overinterpretation and is superseded by this clarification.
 
-The following original sequencing paragraph is historical, superseded by
-that decision:
+Accordingly, the following whole-functor-first sequencing remains current:
 
 Following the [research review](TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
 and the user's continuation/strictness clarifications, develop the bounded
@@ -114,11 +113,12 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | interface/rectangular/mate-inverse probes green; not promoted or qualified | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | varying-source triangle-diagram prototype checked in part | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
-| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid global triangle prototype has nine green observations | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
+| `HINT-COMPLEX-4A` | local compatibility implemented; hybrid nonidentity edge computation recovered in scoped probes | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | fixed-pair boundary comparison implemented; zero-prism coherence open | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
 | `HINT-CONSUMER-5` | pending | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
 | `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
-| `HINT-SOUNDNESS-7` | confirmed inherited defect; repair decision required | reject the closed native-empty derivation by correcting internal-op variance while retaining legitimate directed categories, functors and transfors |
+| `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
+| `HINT-RECOVERY-8` | pre-op state and narrow evaluation consumer recovered; owner-position qualification next | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -796,9 +796,111 @@ and baseline controls are in the
 [internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md).
 The same source-level construction yields `τ Empty_grpd` in the current core,
 the original main baseline and the separate post-migration tip. This changes
-the earlier priority to variance repair. The user's subsequent deferral now
-supersedes that priority: do not add more con/Op computation or certify the
-hybrid construction through the defective interface. It is no longer the
-mandatory leading homology candidate. The final foundation is not settled;
-the mathematically justified reference route remains available. Keep all
-prior checkpoints, code, CAS results and probe evidence.
+the earlier priority to variance repair. The user's subsequent deferral and
+pre-op recovery clarification supersede that priority. Continue the whole
+homology pilot through justified local operations; do not certify a candidate
+by exploiting the defect. The hybrid construction remains a candidate whose
+concrete evaluation instance is now recovered below, not a settled whole
+complex category. Keep all prior checkpoints, code, CAS results and probes.
+
+## Recovery Of The Pre-Op Milestone
+
+The 2026-09-08 recovery reads responses 0140, 0141 and 0142 and the complete
+current versions of this pilot, the variance-owner audit, the homology-
+internalization redesign review, the bounded long-exact owner audit and the
+master long-exact/book plan. The recovered sequence is:
+
+1. `febf287d`/`b3144f40`: native zero-triangle compatibility and both derived
+   chain-map squares; whole fixed-pair comparisons retain higher action.
+2. `6fc0b02e`: selective port of the four ordinary con heads from `20c6dd2e`,
+   including the inferred identity-slot correction; no parallel strictness
+   migration and no complete dependent con mirror.
+3. Varying triangle-diagram prototype: actual natural transformations supply
+   the map/prism data, rather than manual square records. The retained edge
+   action reaches `fdapp1_int_hom_fapp0(Op_funcd(eval_i), …, eta)`.
+4. Structural-action probes: after canonical reindexing annotations, the
+   nonidentity action computes to `(a, eta[i])`. Broad composition rules
+   were a preliminary route; a leading-Eval-only route was not yet fully
+   integrated when the independent op diagnostic intervened.
+
+The concrete intended mathematics is
+
+```text
+eta : T0 ⇒ G ∘ T1
+q : j → i
+evaluation(eta,q) : T0[j] → G(T1[i])
+evaluation(eta,id_i) = eta[i].
+```
+
+This uses ordinary evaluation, not an inverse to eta. The new independent
+[`homology_triangle_eval_native_semantics.lp`](../emdash2/audits/homology_triangle_eval_native_semantics.lp)
+derives the whole functor from `Eval_fapp1_func`, with G an arbitrary actual
+functor. Four positive assertions, a wrong-direction negative and a further
+whole Hom-action query pass. Neither op, Op_funcd, homd nor a new rule or
+unifier is used to obtain that native result. This does not require every
+selected implementation to be syntactically Op-free; it checks the meaning
+of this particular instance independently of the dubious universe action.
+
+The recovered rule candidate is
+[`homology_triangle_eval_rules_prototype.lp`](../emdash2/audits/homology_triangle_eval_rules_prototype.lp).
+Its 21 rules retain whole and point projections for leading evaluation,
+displayed pairing, identity and an explicitly constant weakened argument.
+It does not include the earlier unrestricted `Op_funcd(GG∘FF)` fold or the
+two arbitrary-composite displayed-action expansions. The dedicated
+[`recovery consumer`](../emdash2/audits/homology_triangle_eval_recovery_consumer.lp)
+preserves the original source-indexed PathOut/diagram construction and now
+computes the actual nonidentity edge to `(a,eta[i])`. Both it and the
+independent native reviewer pass at the final tracked names in
+`homology_triangle_eval_recovery_consumer-20260908-194831.log` and
+`homology_triangle_eval_native_semantics-20260908-194831.log`.
+
+The ignored broad pre-op consumer was also reproduced unchanged in
+`hint_triangle_structural_action_canonical-20260908-193303.log`.
+The narrowed consumer passes in
+`hint_triangle_narrow_eval_consumer-20260908-193524.log`. Its rule-only
+warning run (`hint_triangle_narrow_eval_rules-20260908-193658.log`) reports
+1,138 critical pairs / 186 pattern reports versus the imported 1,125/157
+core. All 1,138 pair structures parse. This is append-only diagnostic
+evidence, not a complete owner-position warning/joining audit. The advisory
+LHS scan finds no unreviewed tracked generic slots, but manual review of the
+dependent-action and nested constructor positions remains required.
+
+The first owning-position copy now also passes the complete nucleus source
+check with the rules immediately after the existing section-weakening
+projections (`hint_triangle_eval_owner_core-20260908-195941.log`). Its
+strictly parsed warning counts remain 1,138/186, and the full-core LHS audit
+retains 62 annotated slots / 39 clauses with no unreviewed generic slots.
+The exact fresh package `/tmp/emdash-homology-eval-owner.eck6Hh` compiles that
+core and checks both native semantics and the recovered nonidentity
+consumer, with the latter importing the modified core rather than the
+append-only prototype. Both pass. This qualifies the first producer/consumer
+placement, not yet the remaining rule-hygiene, projection-order and
+regression requirements or active-kernel promotion.
+
+Next execution:
+
+1. Complete the narrow rules' owning-position qualification after the
+   displayed weakening/evaluation declarations. Audit unused and reducible
+   inferred slots, subject reduction, both projection orders, retained whole
+   action and the existing arrow-composition accumulation orientation.
+2. Do not infer a general inverse to an arbitrary laxity cell from the
+   fixed-p con alias. If a broader dependent mirror becomes necessary, give
+   its native variance and actual coherence/strictness assumptions explicitly.
+   A new con name alone is not the current missing computation.
+3. Continue the zero-long-edge restriction and the genuine coherent maps
+   between varying triangles. Keep native cells and diagram shapes as
+   complementary options. A successful point computation does not complete
+   the zero-prism or whole complex-category interface.
+4. Qualify the kernel/cokernel whole universal interfaces and their agreement
+   with the original selected operations, then assemble whole homology and
+   test a nonsplit proof-CAS consumer. Do not silently turn objectwise
+   contractible factors into an arbitrary-omega whole adjunction, or treat
+   set-valued Obj(Hom) as discreteness of every higher Hom.
+
+The five rule-free zero-map proofs in the ignored
+`kernel_cokernel_maps_of_zero.lp` and `homology_maps_of_zero.lp` are retained
+as auxiliary reference work. Their final probes pass in
+`kernel_cokernel_maps_of_zero-20260908-190207.log` and
+`homology_maps_of_zero-20260908-190645.log`. They are not promoted and do not
+replace this whole-functor milestone. General op repair remains deferred;
+all of its checkpoints, source candidates and replay scripts are preserved.

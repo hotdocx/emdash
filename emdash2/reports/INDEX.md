@@ -21,18 +21,23 @@ The user has deferred their general repair until after the homological-
 algebra goal. Both the Sigma-only candidate and the preferred total-Op/
 CoAbove2 prefix now have reproducible non-library patches and controls.
 No active-kernel repair or global consistency result is claimed. Current
-homology work resumes the constructive reference route, auditing its actual
-inferences and putting aside designs that need the known invalid reversals
-or regrading. Preserve the repair evidence without keeping this side task
-on the critical path of valid homological development.
+homology work resumes the whole-complex/homology pilot, auditing its actual
+inferences and putting aside only designs that essentially need the known
+invalid reversals or regrading. A legitimate local Op_funcd evaluation
+instance is not rejected by name. Preserve the repair evidence without
+keeping this side task on the critical path of valid homological development.
 The independently named native homology-connecting operation and native
 bounded assembly and categorical/compiled consumers are implemented;
 selected proof–CAS replay/adoption and actual interior homology/exactness
-consumers are implemented. The retained architectural pilot is
+consumers are implemented. The active architectural pilot is
 [the strict internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
 following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
-Its unsafe higher-op-dependent alternatives are now paused; generic window
-exactness is again the immediate implementation task.
+The pre-op state has been recovered from the complete living plans and
+responses 0140–0142. Independent ordinary evaluation and a narrower
+Op_funcd rule-bundle consumer both compute the intended forward component.
+The owning-source audit, zero-complex/prism structure and whole universal/H
+interfaces are next; reference window exactness remains required, not a
+replacement primary direction.
 Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
 introduction are implemented. The latter uses scoped core cross computation;
 whole natural families now come from actual transformations via exchange,

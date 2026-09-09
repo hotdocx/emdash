@@ -11,9 +11,10 @@ also reproduce it. See the
 [variance diagnostic](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 and [non-library reproducer](../audits/internal_op_empty_reproducer.lp).
 The validation evidence below records checking/computation, not consistency
-of the encoded theory. Global soundness qualification and new higher-
-opposite-dependent promotion require a reviewed repair; no such repair is
-claimed here.
+of the encoded theory. Global soundness qualification requires a reviewed
+repair; no such repair is claimed here. A new construction may not rely on
+the invalid higher-op behavior, but a legitimately interpreted local opposite
+operation is not rejected merely because its name contains `Op`.
 
 The [separate Sigma-Hom diagnostic](../../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
 confirms another inherited empty-type derivation, independent of calling
@@ -28,6 +29,11 @@ Constructive homology/CAS development may continue with an explicit
 mathematical dependency review, excluding any essential use of the invalid
 reversals or regrading. This sequencing decision is not a consistency claim
 or permission to qualify the affected foundational interfaces.
+The user's pre-op recovery clarification retains the whole-complex/homology
+pilot as the primary architectural direction. Its concrete evaluation
+instance is checked against an independent ordinary-Eval construction;
+general opposite repair remains deferred and all new rule promotion still
+requires the ordinary owner-position/SOP qualification.
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,

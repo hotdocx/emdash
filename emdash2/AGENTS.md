@@ -27,6 +27,13 @@ dependent formal claims as unqualified pending the documented variance
 repair; do not register the reproducer as a positive library example or
 interpret ordinary green checks as a consistency certificate.
 
+The user has deferred the general repair while continuing the whole-
+complex/homology redesign. Distinguish essential use of the invalid action
+from a legitimate local `Op_*` computation with an independent mathematical
+interpretation. The former is not allowed; the latter may be qualified by
+the normal owner-position/variance/SOP checks. This is not a blanket ban on
+Op syntax and does not authorize another general repair detour.
+
 The same audit also confirms an independent Sigma-Hom/constant-product
 empty-type derivation, without calling the whole op or pointwise opposite
 families. See `audits/sigma_hom_empty_reproducer.lp` and

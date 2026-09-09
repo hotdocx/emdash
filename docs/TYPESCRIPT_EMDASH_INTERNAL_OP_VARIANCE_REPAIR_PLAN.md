@@ -20,6 +20,13 @@ aside and choose a mathematically justified route. Preserve every useful
 repair candidate and its limitations for later continuation. Do not silently
 reactivate this plan merely because the next type mismatch is known.
 
+The user's subsequent recovery clarification retains the whole-complex/
+homology redesign, including legitimate local `Op_funcd` computations.
+Deferral is not a ban on Op syntax and is not a direction to replace the
+whole-functor pilot by component-level chases. The pilot now owns the
+independently justified evaluation instance and its narrow rule audit;
+that work does not reactivate this general repair.
+
 The following design discussion and next-step notes are recovery evidence
 for that later return, not the current goal's work queue. The preferred
 future basis remains total `Op_cat` plus `CoAbove2_cat`; the same-base
