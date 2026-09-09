@@ -14,15 +14,24 @@ symbol kernel_presentation_lift_func [C : Cat] [S : τ (@PreadditiveCategory C)]
     (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
     (@kernel_presentation_adjunction C S t T W P) X d;
 
+// Original selected lift at a diagram-indexed annihilator test.
+symbol kernel_presentation_test_lift [C : Cat] [S : τ (@PreadditiveCategory C)]
+  (W : τ (@HasComputationalKernels C S)) (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
+  (e : τ (@WeakKernelAnnihilator C S
+    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
+    (@terminal_arrow_test_outgoing C d) X))
+  : τ (Hom C X (@kernel_presentation_selected_object C S W d))
+≔ @computational_kernel_lift C S
+    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
+    (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d) X e;
+
 symbol kernel_presentation_lift_semantic [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
   (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C
     (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
   : τ (Hom C X (@kernel_presentation_selected_object C S W d))
-≔ @computational_kernel_lift C S
-    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
-    (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d) X
+≔ @kernel_presentation_test_lift C S W X d
     (@terminal_arrow_kernel_test C S t T X d h);
 
 // Kernel universality identifies the canonical mate with this selected lift.

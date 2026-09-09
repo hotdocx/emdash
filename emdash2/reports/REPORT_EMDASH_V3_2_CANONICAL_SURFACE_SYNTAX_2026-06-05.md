@@ -2012,8 +2012,13 @@ component is the stored arrow. Read point compatibility as proof-time:
 `chain_pair_outgoing_diagram_map_func` realizes the old lower-square Hom
 data with uncapped action, while `chain_pair_outgoing_diagram_map` is its
 transparent point view. The auxiliary `zero_cone_map_from_lifts` derives
-the native comparison cell from compatible mates; the complete raw-map
-wrapper must still derive that compatibility itself.
+the native comparison cell from compatible mates. The complete
+`chain_pair_zero_cone_map` now derives that compatibility from the old
+chain-map data; `chain_pair_zero_cone_map_func` retains its whole fixed-pair
+action. `freyd_raw_chain_zero_cone_map` specializes this to the original raw
+Freyd agreements and fills the OneCat profile. Its three observations are
+the original next/middle/prev quotient classes. Coherent model realization
+in the actual CAS replay is still an explicit further boundary.
 
 ## Whole Displayed Laxity Notation
 

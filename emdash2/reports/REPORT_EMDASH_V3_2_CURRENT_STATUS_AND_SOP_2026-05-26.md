@@ -1241,6 +1241,24 @@ belongs to the owning implementation plan rather than to standing guidance.
   for the complete raw-map/CAS consumer; no new manually supplied square
   record or automatic coherent model is claimed. The exact dependency join
   remains 1,249/169, with no new warning families.
+- The complete raw-map entry is now in
+  `emdash3_2_chain_pair_zero_cone_maps.lp`. The original upper factor and
+  both kernel-lift reconstructions, together with actual inclusion
+  naturality, prove the boundary equation after the target inclusion;
+  its original monicity cancels it. The inclusion-properties module compares
+  the complete (kernel,embedding) presentation before transporting only the
+  monicity property. The boundary-naturality module performs the generic
+  seven-step calculation. No object or arrow is recentered at runtime.
+  The native map and its whole fixed-pair functor then use the existing
+  inverse-mate introduction with no additional caller-supplied equation.
+  `emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp` translates the old
+  raw agreement value into the existing generic factor map and specializes
+  that constructor, filling the Freyd OneCat profile. All original components
+  and an actual whole-H application check. The shared test-lift body now
+  belongs to the kernel-mate module; both earlier callers delegate to it.
+  This tranche adds no primitive, rule, unifier or quotient decoder. Its
+  exact dependency warning inventory remains 1,255/169. Concrete CAS model
+  realization and full old/new homology-map agreement are still separate.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

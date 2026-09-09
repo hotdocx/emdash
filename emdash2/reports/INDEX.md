@@ -50,8 +50,10 @@ full map compatibility remain active; no raw square-data mapping-category
 inverse or closed quotient-effective provider is implicitly assumed.
 The ordinary-target arrow-diagram realization and whole lower-map adapter
 are now implemented, with generic inverse-mate naturality and a constructive
-native map introduction from compatible lifts. Complete raw-map entry and
-concrete model realization remain in the active pilot.
+native map introduction from compatible lifts. Complete raw-map entry now
+derives that compatibility, including the Freyd raw-agreement specialization
+and an actual whole-H application. Concrete coherent-model realization and
+full old/new homology-map comparison remain in the active pilot.
 The native six-term snake-result operation is implemented as well, including
 reuse of an existing connecting construction. Future
 coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum

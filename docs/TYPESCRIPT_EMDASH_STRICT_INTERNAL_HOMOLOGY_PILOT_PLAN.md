@@ -137,7 +137,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-STRICT-COMMA-13` | initial classifier probe passes; promotion paused for the user's local-truncation alternative | test a strict comma universal transformation/classifying-functor interface, distinguish it from the existing lax total, and specialize to a global zero-complex category with the same H recipe |
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
-| `HINT-RAW-ENTRY-16` | formal input/cancellation/comparisons promoted and qualified; concrete model realization and replay remain | introduce the original raw chain pair into the native category without new choices/manual squares, then bind the same native computation to whole H |
+| `HINT-RAW-ENTRY-16` | formal object/map entry and whole-H application qualified; concrete model realization and replay remain | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -2146,3 +2146,130 @@ freshness, TOC, report headers, active references, shell/diff hygiene and
 source-only health snapshot check pass; metrics now cover 780 files.
 The standing full-health exception is unchanged. No repository-wide
 TypeScript/kernel/book/print aggregate or general op repair was run.
+
+### Raw-Map Boundary Closure: Current Work
+
+Checkpoint `0c566a89` completes the preceding diagram-map realization
+tranche, hence the previous goal turn made substantive progress. This
+continuation rechecked the clean dedicated worktree, all worktree heads,
+baseline ancestry and the whole chain-pair diagram-map reviewer. The next
+test uses the actual whole kernel inclusion: its naturality, both original
+lift reconstructions and the old upper factor should identify the two
+boundary composites after that inclusion; the original kernel's monicity
+then cancels it. This needs neither an additional square input nor an
+automatic construction of P/Q from arbitrary witnessed CAS providers.
+Keep formal diagram endpoints consistent, retain the same selected lift,
+and separate reusable comparison proofs from the native runtime map.
+
+The generic boundary equation now checks in
+`kernel_presentation_boundary_input_paths_20260909-20260909-143931.log`.
+Directly using the original monicity proof at the formal inclusion did not
+elaborate: the two source-and-embedding presentations survived underneath
+the expanded cancellation predicate. The corrected helper first compares
+the complete (kernel object,embedding) pair by the existing usability, then
+transports ONLY the monicity property along that derived path. This is not
+runtime recentering and adds no unifier or axiom. Formal lift reconstruction
+reuses the two already checked inverse-mate source/reconstruction paths.
+The seven-step inclusion calculation and cancellation then pass together.
+The old direct attempt and its diagnostics remain as failed-probe evidence.
+
+`chain_pair_zero_cone_maps_input_paths_20260909.lp` now applies that generic
+result to the original two chain-pair cones, the original `next` map, and
+the realized outgoing diagram transformation. Its compatibility argument is
+the symmetry of the EXISTING upper-factor path; the user supplies no new
+equation or square. The whole fixed-pair map functor uses the existing Path
+lift of this transparent construction. The complete constructor and its
+actual projection/higher-action consumers are the current qualification
+target, before concrete Freyd/model replay.
+
+The complete generic map and whole fixed-pair map functor pass
+(`chain_pair_zero_cone_maps_input_paths_20260909-20260909-144025.log`), as do
+all three original component projections, point/whole agreement and the
+unrelated-map negative (`chain_pair_zero_cone_maps_review_20260909-20260909-144123.log`).
+The Freyd wrapper then translates the EXISTING two raw square agreements
+through generic composition usability, constructs the old generic factor
+map, and fills the derived OneCat profile internally. It consumes only the
+original raw morphisms, chain-zero agreements and chain-map agreement value.
+The wrapper and its seven positive consumers pass
+(`freyd_raw_zero_cone_maps_20260909-20260909-144650.log`,
+`freyd_raw_zero_cone_maps_review_20260909-20260909-144912.log`). The seventh
+consumer is an actual whole-H application to that native raw-map entry,
+not merely an equality about a separately constructed map. P/Q remain
+explicit coherent model capabilities; actual CAS realization/replay remains.
+
+Source-only promotion qualification is using
+`/tmp/emdash-complete-map-qualify.XZQvAB`. The common diagram-indexed test lift
+is factored into the existing kernel-mate module; both its old semantic mate
+view and `chain_pair_selected_boundary` delegate to it. This removes duplicate
+semantic bodies without changing the original selected operation. Optional
+inclusion-property and boundary-naturality proofs remain in separate modules.
+The full new source/reviewer join, including two further whole-Hom queries,
+passes quietly and with warnings (`complete_native_map_join-20260909-145204.log`,
+`-145207.log`). All checks retain normal subject reduction and the 90-second
+per-target ceiling. No active rewrite or unification rule is changed.
+
+### Promoted Complete Raw-Map Entry
+
+Four one-way modules now complete the formal entry:
+
+- `emdash3_2_kernel_presentation_inclusion_properties.lp`: derived paired
+  presentation comparison, the formal inclusion's original monicity, and
+  formal-inclusion reconstruction of the original selected test lift;
+- `emdash3_2_kernel_presentation_boundary_naturality.lp`: the generic
+  seven-step inclusion calculation and monic cancellation;
+- `emdash3_2_chain_pair_zero_cone_maps.lp`: the complete native map and its
+  whole fixed-pair map functor from the original equality-valued map space;
+- `emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp`: raw-composite
+  agreement conversion, the original generic factor map and the concrete
+  Freyd native-map entry, with the already derived OneCat evidence filled.
+
+The original `kernel_presentation_lift_semantic` and
+`chain_pair_selected_boundary` now share `kernel_presentation_test_lift`
+in the existing kernel-mate module. The same original computational lift,
+kernel and test are retained; no semantic body is duplicated. All eleven
+new symbols are defined. No primitive, rewrite/unification rule, opaque
+equality, manual square record, new kernel choice or quotient decoder is
+introduced.
+
+The new two-reviewer join has twelve positive assertions, one unrelated-map
+negative and two whole-Hom queries. It checks all three generic and all
+three raw Freyd component observations, point/whole agreement, and actual
+whole-H action at the raw-map entry. The source-only joined check passed
+quietly and with warnings as recorded above. The same fresh staged tree
+also passes the six existing kernel-mate, raw-input, selected-H comparison,
+auxiliary native-map, whole-H and concrete Freyd input reviewers together:
+`complete_native_map_regressions-20260909-145626.log`.
+
+The active scoped runner checks all six affected sources and both new
+reviewers independently in `logs/probes/complete-native-map-active-20260909.log`;
+it has completed with exit 0. The status side-turn polled that exact live
+handle to completion rather than restarting it. This continuation resumes
+only synchronization/checkpointing and the concrete model boundary; no
+unrelated work or staged changes were present.
+
+The exact pre-existing dependency union
+(`complete_native_map_baseline_20260909-20260909-145205.log`) and final staged
+join (`complete_native_map_join-20260909-145207.log`) both report 1,255
+critical pairs and 169 pattern warnings. Their complete term-head,
+two-rule-family and location inventories are identical after ANSI/staging
+prefix normalization, with no parser exceptions. The older raw/whole
+selection comparisons remain proof-time; no new runtime normal form is
+claimed by these path proofs.
+
+This closes formal raw object/map entry, not concrete CAS realization.
+The next slice must bind the new whole interface to the SAME retained
+native results and an explicit coherent model. The existing witnessed
+providers do not silently furnish arbitrary quotient-effective W or P/Q.
+Full old/new H-map agreement, three generic window-exactness results,
+bounded formal assembly and final book/consolidation remain required.
+
+Final raw-map synchronization: all eight affected source/reviewer files
+match the source-only stage byte for byte. All six source audits have no
+unreviewed findings. The 42 focused metrics/TOC/registry/warning tests,
+catalog freshness, TOC, report headers, active references, shell/diff hygiene
+and source-only health check pass; metrics cover 786 files. The resumed
+concrete reviewer also passes (`freyd_zero_cone_maps-20260909-150149.log`).
+The standing full-health exception is retained; no unrelated aggregate or
+general op repair is included. This is fixed-pair map realization and an
+actual whole-H consumer, not a new claim of a global category/functor for
+every legacy raw representation or a completed concrete model interpreter.

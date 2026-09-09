@@ -14,11 +14,7 @@ symbol chain_pair_selected_boundary [C : Cat] [S : τ (@PreadditiveCategory C)]
   (W : τ (@HasComputationalKernels C S)) [A B D : τ (Obj C)]
   (pair : τ (@ComputationalChainPair C S A B D))
   : τ (Hom C A (@kernel_presentation_selected_object C S W (@chain_pair_outgoing_diagram C S A B D pair)))
-≔ @computational_kernel_lift C S
-    (@fapp0 WalkingArrow_cat C (@chain_pair_outgoing_diagram C S A B D pair) walking_arrow_src)
-    (@fapp0 WalkingArrow_cat C (@chain_pair_outgoing_diagram C S A B D pair) walking_arrow_tgt)
-    (@terminal_arrow_test_outgoing C (@chain_pair_outgoing_diagram C S A B D pair))
-    (@kernel_presentation_selected C S W (@chain_pair_outgoing_diagram C S A B D pair)) A
+≔ @kernel_presentation_test_lift C S W A (@chain_pair_outgoing_diagram C S A B D pair)
     (@computational_chain_pair_cone C S A B D pair);
 
 symbol chain_pair_zero_cone [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]

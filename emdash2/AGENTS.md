@@ -146,7 +146,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   aligning introduced diagrams. Old chain-map lower squares then realize as
   actual transformations, with a whole fixed-pair map functor. Generic
   inverse-mate naturality constructs a native cone map from compatible lifts;
-  deriving that compatibility at the actual raw/model input remains required.
+  the complete chain-pair map now derives that compatibility from the old
+  upper factor, actual inclusion naturality and original kernel monicity.
+  All three original components compute, and the Freyd wrapper fills its
+  existing OneCat evidence while retaining the raw agreements. Concrete
+  coherent-model binding and full old/new H-map agreement remain required.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

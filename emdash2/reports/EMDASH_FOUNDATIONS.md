@@ -4289,9 +4289,17 @@ pointwise diagram introduction, without changing either runtime owner.
 The old chain-map factor data feed this realization through their existing
 native lower square. Generic inverse-mate naturality also transports a
 compatibility of boundary lifts to the native cone-map comparison cell.
-This is an auxiliary constructive introduction, not a new square-record
-interface: deriving its premise from the actual raw/model input remains
-part of the unfinished complete map/CAS integration.
+The complete chain-map entry now derives that premise from the old upper
+factor and both original kernel reconstructions. Naturality of the actual
+whole inclusion compares the two composites after that inclusion, and its
+original monicity cancels it. Only the monicity property is transported
+between its two presentations; no object or arrow is recentered at runtime.
+The resulting native map retains the original next/middle/prev components
+and has a whole fixed-pair map functor. The Freyd specialization consumes
+the existing raw chain and map agreements and fills its ordinary profile
+internally. Thus applying whole H to that actual raw map is now well typed,
+without a new square-record interface. Concrete coherent-model/CAS binding
+and complete comparison with the former induced homology map remain open.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

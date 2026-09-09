@@ -63,6 +63,17 @@ records the qualified owners and remaining raw-boundary premise. This does
 not close concrete model realization, full raw-map entry or whole-H replay,
 and it does not reopen the general op repair.
 
+Complete raw-map entry (2026-09-09): the actual inclusion's naturality,
+original kernel reconstructions and original upper factor now derive the
+remaining compatibility; target-kernel monicity cancels the inclusion.
+The native map and whole fixed-pair map functor retain all three original
+components. The Freyd wrapper consumes the existing raw agreements and
+fills its ordinary-target profile, and whole H applies to that actual map.
+The [closure ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#raw-map-boundary-closure-current-work)
+records the source/reviewer qualification. Concrete coherent-model/CAS
+binding, full old/new H-map comparison and the full generic window/LES/book
+obligations remain unfinished; no closed quotient effectiveness is claimed.
+
 User-directed sequencing change (2026-09-08): defer the unresolved general
 op/Sigma variance repair until after this homological-algebra goal. Preserve
 all source candidates, diagnostics, failed-probe evidence and recovery
