@@ -141,6 +141,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
 | `HINT-DIRECT-CONNECTING-17` | direct point construction and literal whole-H endpoint consumer qualified; naturality/window/CAS connecting interpretation remain | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
 | `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
+| `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3319,3 +3320,139 @@ and canonical kernel/cokernel rows at retained choices. Connecting
 naturality, the selected native connecting interpretation, bounded formal
 assembly and final book work remain required. Do not conflate these zero
 laws with exactness or with a proof of global kernel soundness.
+
+### First Interior Exactness: Initial Cover Construction
+
+This initial state is retained as history; the qualification below records
+the completed first-interior construction and the resolved interfaces.
+
+The first interior proof starts with an arbitrary test killed by
+H(projection), pulls it back along the actual source homology quotient,
+and covers the resulting target-boundary test. Pulling the preceding row
+epi back along that boundary preimage will give a corrected source cycle;
+the original row kernel and actual left cycles then supply a covered
+preimage through H(inclusion). The existing exact-cover criterion is the
+intended final theorem, not a new definition of exactness.
+
+Checked prototypes now give boundary preservation from the actual whole
+beta transformation, a test pullback along a retained homology quotient,
+and local exact covers for an arbitrary retained cokernel. The last reuses
+the canonical cokernel theorem by deriving an annihilation test through
+the actual universal colift. Its test arrow and operational target quotient
+are unchanged; there is no object-equality transport or new universal
+capability. The returned cover-witness type depends on the same incoming
+arrow and test, so the canonical result supplies the retained-row witness.
+
+The first joined `homology_map_kernel_cover.lp` check reached 90 seconds
+after checking its dependencies. Warning-enabled command timing and a
+fresh exact-object stage are distinguishing import cost from a local
+elaboration problem. This is not yet a checked composite cover or any
+interior exactness witness. The original successful prerequisites and the
+joined candidate remain in `tmp/probes/`; no new rules are proposed.
+
+### First Interior Exactness Qualification
+
+`emdash3_2_homology_first_exactness.lp` now proves exactness at H(B)
+of the EXISTING whole-H window. Its public cover family and exactness
+witness take the original rows, row maps, middle-column zero laws and
+coherent H-model data. All cycle, quotient and boundary reconstructions
+are derived from the actual whole transformations; the caller supplies
+neither extra squares nor the desired factorization.
+
+For a test τ:T→H(B) killed by H(projection), the construction is:
+
+1. Pull τ back along the retained qB. Cover the resulting target-boundary
+   test using the retained target cokernel. This yields an epic e:E→T,
+   a source-cycle lift v:E→ZB and a boundary preimage w:E→Dm, with
+   qB∘v = τ∘e and βC∘w = Z(projection)∘v.
+2. Pull the preceding row epi pm:Bm→Dm back along w. Write its epic
+   projection as r:U→E and its other projection as s:U→Bm.
+3. Form c = v∘r − βB∘s in the ORIGINAL source cycle object. Whole beta
+   naturality proves Z(projection)∘c = 0. The retained quotient gives
+   qB∘c = τ∘e∘r.
+4. The original middle row kernel factors κB∘c through its inclusion.
+   Monicity of the next inclusion makes that factor a left-complex cycle.
+   The retained left kernel then lifts it to ZA, and the actual H
+   reconstruction factors identify its image under H(inclusion).
+5. The resulting all-test epic-cover witness proves the existing
+   `ComputationalExactAt` predicate by its established cover criterion.
+
+The homology object used inside that existing exactness predicate is the
+homology OF THE WINDOW PAIR. It does not replace any original H(A), H(B)
+or H(C). The independent reviewer also checks the result directly as
+epicity of that pair's actual selected boundary lift.
+
+Reusable additions include whole beta naturality, covers of retained
+cokernel records, lifting tests into retained cycles, boundary correction
+across an incoming epi, and a cycle-factor lemma for arbitrary target
+cycles. The older incoming-boundary-specific cycle interface is unchanged.
+No epi is split, no normal test is postulated and no object-equality cast
+defines a computational arrow.
+
+The retained-cokernel adapter uses a genuine universal colift to the
+canonical cokernel only to derive the required annihilation test. The
+test arrow is unchanged, and the canonical object is an AUXILIARY
+comparison, not a replacement H value. The returned exact-cover witness
+has the same incoming arrow and test.
+
+Two local LF issues were measured and resolved without new rules:
+
+- Direct application of the cover family timed out while reconstructing
+  its test from `computational_chain_pair_d(cokernel_record_row_pair(...))`.
+  An explicit point entry exposes the actual quotient as test owner and
+  delegates to the same family.
+- Consolidation exposed a second expensive conversion between
+  `preabelian_preadditive` and `computational_homology_preadditive` in that
+  point signature. Both definitions have the same body. Using the
+  homology observation consistently in the point interface makes the
+  consolidated consumer check. The universal family and algorithm are
+  unchanged. Direct Sigma observations retain the exact-cover point
+  without re-elaborating its erased row/test indices.
+
+The original application and the consolidated pre-refinement source
+both exceeded 90 seconds; their code and typing traces are preserved.
+The relevant logs include `homology-map-kernel-cover-typing-staged.log`,
+`first-covers-consolidated-typing.log` and the successful
+`first-covers-homology-owner-candidate.log`.
+
+All seven promoted owners and three reviewers pass
+`scripts/check_homology_first_exactness.sh`, including its unchanged
+whole-window prerequisite. The qualified driver is
+`logs/probes/homology-first-exactness-active-driver-qualified.log`
+and detailed log is
+`homology-first-exactness-quiet-20260910-021853.log`.
+The reviewers contain nine positive checks and one negative; the
+negative rejects runtime identification of an arbitrary retained
+quotient object with the canonical one.
+
+A monolithic warning check exceeded the per-target ceiling, so the
+warning comparison uses separate fresh exact-object stages, each bounded
+to 90 seconds per module. The control retains every import but omits the
+new definitions. Complete baseline/candidate inventories match at
+1,249/169, including categories, locations, term heads and rule families,
+with no parser issues. The logs are
+`first-exactness-staged-{baseline,candidate}-warnings.log`.
+The heaviest new warning-enabled source check is the kernel-cover owner
+at 57 seconds; the final exactness owner takes six seconds. Do not replace
+this evidence with an unbounded or stale-object aggregate.
+
+All seven strict LHS audits, catalog/TOC checks, 34 focused
+metrics/TOC/warning-parser tests, report headers, active links and shell/diff
+hygiene pass. The source-only health snapshot covers 843 files at
+`sha256:ecbff4c4c7957584717f498e3b3eecadf6001abcfa8651fe9ef2df0d21cbdd5b`.
+Every promoted source is byte-identical to the qualified warning-stage
+candidate. No unrelated TypeScript or book aggregate was run; inherited
+full-health and foundation-soundness qualifications remain.
+
+Two non-executable archive patches preserve 23 source/control/driver
+versions against `168c6cdb`, including the successful prototypes and the
+timed-out projected-test and preadditive-interface forms. Isolated
+index/object-store recovery verified every SHA-256 hash without changing
+the repository index or source tree. The archive now retains 134 embedded
+versions; its status labels are not mathematical validation of failed forms.
+
+No primitive, rewrite or unifier is added. The nucleus, native algorithms,
+TypeScript model/replay consumers, general op/Sigma repair and parallel
+strictness branch are unchanged. The second and third window interiors,
+connecting naturality, selected native connecting interpretation,
+bounded formal assembly and final book consolidation remain unfinished.

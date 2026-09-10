@@ -4410,6 +4410,18 @@ overlapping chain pairs share their literal H objects and arrows. Exactness
 at their interiors and naturality of delta itself are further results,
 not consequences of merely obtaining these zero composites.
 
+The first interior exactness proof now realizes this next step. A test into
+H(B) killed by H(projection) is lifted after an epic cover into ZB, and its
+image in ZC is covered by an actual boundary. A pullback of the preceding
+row epimorphism lifts that boundary preimage. Subtracting the resulting
+source boundary gives a cycle with zero projected image and the same
+covered homology class. The original row kernel and retained left cycles
+then give a preimage through H(inclusion). The existing local-cover
+criterion proves exactness at H(B), with no splitting or replacement H
+object. Whole beta naturality supplies boundary preservation alongside
+the already available cycle and quotient naturality. Exactness at the
+other two interior positions remains further work.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

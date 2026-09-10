@@ -41,9 +41,19 @@
       "artifact": "whole-window-zero-experiments.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 19
+    },
+    {
+      "artifact": "first-exactness-prototypes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 21
+    },
+    {
+      "artifact": "first-exactness-preadditive-owner.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 2
     }
   ],
-  "source_versions_sha256_verified": 111,
+  "source_versions_sha256_verified": 134,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

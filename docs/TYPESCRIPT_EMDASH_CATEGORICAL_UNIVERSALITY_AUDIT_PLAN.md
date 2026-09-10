@@ -148,6 +148,13 @@ Nineteen further prototype/control/driver files have verified recovery,
 bringing the archive to 111 embedded versions. Interior exactness and the
 retained connecting consumer still precede the broad migration gate.
 
+The first interior is now proved exact at H(B), using the retained quotient,
+boundary correction, original row kernel and left-cycle operations.
+Twenty-three further recovered source/control/driver versions preserve that
+construction and its LF interface experiments, for 134 embedded versions
+in total. The remaining two interiors and native connecting consumer still
+precede the broad migration gate.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their

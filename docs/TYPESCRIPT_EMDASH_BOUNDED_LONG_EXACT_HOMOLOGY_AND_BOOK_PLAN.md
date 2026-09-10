@@ -6,6 +6,17 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+First whole-H interior exactness (2026-09-10): the existing five-term
+window is now proved exact at H(B), using an all-test epic-cover
+construction at its retained objects and maps. The public
+`homology_whole_window_first_exact` derives its map and boundary
+reconstructions from whole naturality. The
+[pilot qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#first-interior-exactness-qualification)
+records the algorithm, point-interface refinements and bounded checks.
+Exactness at H(C) and H(A'), connecting naturality, the retained native
+connecting interpretation, bounded formal assembly and final book work
+remain required.
+
 Whole-H window zero tranche (2026-09-10): actual whole H action now supplies
 its cycle and quotient reconstruction factors by naturality. The direct
 connecting component satisfies both neighboring zero laws, and the two
@@ -941,7 +952,7 @@ was introduced to get a passing target.
 | `LEH-SOURCE-ANNIHILATION-7D3B` | complete; checkpoint `1a8da30a` | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
-| `LEH-WINDOW-EXACTNESS-7D4` | all three adjacent-zero laws and shared whole-H window pairs qualified; three exactness proofs pending | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18 and reusable exactness-cover/extension lemmas | exactness at the three actual window interiors, without changing any H object or map |
+| `LEH-WINDOW-EXACTNESS-7D4` | all three adjacent-zero laws and exactness at H(B) qualified; exactness at H(C) and H(A') pending | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18, HINT-WINDOW-EXACT-FIRST-19 and reusable exactness-cover/extension lemmas | exactness at the three actual window interiors, without changing any H object or map |
 | `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |

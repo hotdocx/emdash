@@ -1365,6 +1365,20 @@ belongs to the owning implementation plan rather than to standing guidance.
   `scripts/check_homology_window.sh`; the warning inventory remains 1,249/169.
   This is a chain window, not interior exactness, connecting naturality or
   the complete bounded formal LES. No primitive, rewrite or unifier is added.
+- `emdash3_2_homology_first_exactness.lp` proves exactness at H(B) in
+  that same whole-H window. An annihilated test is covered and corrected by
+  an actual boundary, then factored through the original row kernel and
+  retained left cycles. Whole beta naturality supplies the needed
+  preservation equation. The public theorem derives all factors and uses
+  the established exact-cover criterion; it neither reselects H nor
+  changes the induced-map algorithm. Retained-cokernel cover reuse changes
+  only a test's annihilation proof through a genuine colift. The point
+  interface uses the actual quotient and consistent homology-preadditive
+  observation to avoid measured LF reconstruction timeouts. Seven owners
+  and three reviewers pass `scripts/check_homology_first_exactness.sh`;
+  staged source-only warning inventories remain 1,249/169. The other two
+  interior exactness witnesses, connecting naturality and the final native/
+  bounded/book obligations remain open. No new primitive or rule is added.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -201,6 +201,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   commuting-square inputs. `scripts/check_homology_window.sh` is the focused
   gate. Interior exactness, connecting naturality and the native connecting
   interpretation remain distinct required work; no new runtime rule is added.
+  `emdash3_2_homology_first_exactness.lp` now proves the first interior,
+  at H(B), by all-test epic covers and boundary correction. Whole beta
+  naturality supplies boundary preservation; retained cokernel and cycle
+  interfaces supply the operations. The actual H objects/maps stay fixed.
+  Its point cover interface keeps the homology preadditive observation and
+  actual quotient owner explicit to avoid measured reconstruction timeouts.
+  `scripts/check_homology_first_exactness.sh` is the individually bounded
+  source/reviewer gate. The two remaining interiors are not yet proved.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

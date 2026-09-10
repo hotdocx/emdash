@@ -29,6 +29,10 @@ Its focused gate is `scripts/check_homology_window.sh`; the three interior
 exactness statements remain the next mathematical requirement. This
 supersedes the earlier pending zero-window notes, not the still-open
 connecting naturality, concrete connecting interpretation or bounded theorem.
+The first interior is now proved exact at H(B), with the original whole-H
+objects and maps retained. Its focused gate is
+`scripts/check_homology_first_exactness.sh`. Exactness at H(C) and H(A')
+and the other remaining integration/book requirements are still open.
 The two inherited variance diagnostics remain recorded in the
 [bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
 The user has deferred their general repair until after the homological-

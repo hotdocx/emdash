@@ -2064,6 +2064,12 @@ are the overlapping pairs of H(A)→H(B)→H(C)→H(A')→H(B').
 Their zero laws are proved paths, not added runtime rewrites. Do not print
 this chain window as an already proved exact sequence.
 
+`homology_whole_window_first_exact` is exactness at H(B), the first
+interior of this same window. It inhabits the existing
+`ComputationalExactAt` predicate, equivalently epicity of the actual
+boundary lift used by that predicate. It does not assert exactness at
+H(C) or H(A'), or denote a new homology object.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

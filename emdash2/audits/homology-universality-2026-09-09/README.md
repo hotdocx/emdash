@@ -29,10 +29,12 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [earlier-mixed-candidate.diff](earlier-mixed-candidate.diff) | `21099f51` | Earlier saved broad-alignment candidate; distinct from the last mixed stage. Not promoted. |
 | [direct-connecting-experiments.patch](direct-connecting-experiments.patch) | `31cd9770` | Direct whole-H-endpoint connecting prototypes, mixed-presentation timeouts, diagnostics and an unused checked generic alternative. The consistent step-pair implementation is promoted separately. |
 | [whole-window-zero-experiments.patch](whole-window-zero-experiments.patch) | `88591aaa` | Checked whole structural/action factors, all three adjacent-zero laws and shared window pairs before consolidation into library modules. The warning driver additionally needs the promoted owners. |
+| [first-exactness-prototypes.patch](first-exactness-prototypes.patch) | `168c6cdb` | First-interior proof prototypes and the timed-out projected-test application, with their controls/drivers. Promoted code uses the recorded point-signature refinement. |
+| [first-exactness-preadditive-owner.patch](first-exactness-preadditive-owner.patch) | `168c6cdb` | Two consolidated source files before the homology-preadditive point-interface fix; the consumer timed out at 90 seconds. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all eight patches apply to their pinned baselines, and all 111 embedded
+checks: all ten patches apply to their pinned baselines, and all 134 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -46,6 +48,12 @@ The whole-window addition preserves 19 further source/control/driver versions.
 All were recovered with matching SHA-256 hashes. Its mathematical prototypes
 are checked results, not a claim that the window's interior exactness or the
 complete long-exact theorem has been finished.
+
+The first-exactness addition preserves 23 further source/control/driver
+versions with verified recovery hashes. Status labels distinguish the
+successful prototypes from the timed-out projected-test and preadditive
+interface forms. The accepted result proves the FIRST window interior;
+it does not complete the remaining two interiors or the full goal.
 
 ## Recovery
 

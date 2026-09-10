@@ -780,6 +780,181 @@
           "status": "checked diagnostic driver; requires promoted owners from this tranche"
         }
       ]
+    },
+    {
+      "artifact": "first-exactness-prototypes.patch",
+      "base_commit": "168c6cdbc2172e488ca13a765f41d16306bac987",
+      "note": "Successful first-interior constructions plus the timed-out projected-test application and diagnostic drivers; promotion uses the documented point-signature owner refinement.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_boundary_naturality.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_boundary_naturality.lp",
+          "kind": "new",
+          "sha256": "7d1f46ae9c1c3da32704402efa2052fbeb470142a71bda2d9fabd1fbcbeb5987",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_record_test_change.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/cokernel_record_test_change.lp",
+          "kind": "new",
+          "sha256": "4d61b16cc3b7d6eaa73c24c25432da150d105b0998df35d748d6575d36523c69",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/abelian_cokernel_record_covers.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/abelian_cokernel_record_covers.lp",
+          "kind": "new",
+          "sha256": "94094c011d0618a8cda1c62150cafe3a62a3ebcc2f5d049fb80a162cec871259",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/abelian_cokernel_record_point_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/abelian_cokernel_record_point_cover.lp",
+          "kind": "new",
+          "sha256": "0550363e6ff56784424fadab5aeb623c202fe0b6c86b839875aeabafa363fa62",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_test_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_test_cover.lp",
+          "kind": "new",
+          "sha256": "e24ae3e6b31175a4aface6296a16a9cad678366cf56df55fa644a7fa24ad6376",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_kernel_boundary.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_kernel_boundary.lp",
+          "kind": "new",
+          "sha256": "35fd272bc406e9d2d4ce26dcd97bb839606b943a98eba40a15a28b675ee4b8ac",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_kernel_cover_point.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_kernel_cover_point.lp",
+          "kind": "new",
+          "sha256": "6856d24e74cc747e9e0680aa536ea038f22d3ebf691e5e8032c85e5d0af28db6",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_kernel_cover_views.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_kernel_cover_views.lp",
+          "kind": "new",
+          "sha256": "6360f19ee863cc292bdefa5b6873b43fd22bfbe652a5bad7a6992d76165e618d",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_correction_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_correction_cover.lp",
+          "kind": "new",
+          "sha256": "d1baf7640a377bccdc8fbe0ec9e2b93761be908ea108240a928c6889d2dd9dd6",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_correction_laws.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_correction_laws.lp",
+          "kind": "new",
+          "sha256": "f838bae9a294009aad4559614fe5053a419cc3993caf0fa45e9225b513e1c507",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/chain_pair_cycle_factor.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/chain_pair_cycle_factor.lp",
+          "kind": "new",
+          "sha256": "25f8513d731addbd509aa8eba84851b79adb0b2e5bd8587a1a857b696c0b6bf9",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_cycle_lift.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_cycle_lift.lp",
+          "kind": "new",
+          "sha256": "0cd2f454c9c20075380718c4555ba23ccbfe859e79d8a224d6d1c043a436a820",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_first_row_lift.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_first_row_lift.lp",
+          "kind": "new",
+          "sha256": "cd0a307ba245baafc77b155b533d1851fdeee40486e90a13bcdbff2c27b9bbcb",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_first_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_first_cover.lp",
+          "kind": "new",
+          "sha256": "056be876263dd39b95396bcfc52101f5141e43c645b6c99630a431d52260e674",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_first_exactness.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_first_exactness.lp",
+          "kind": "new",
+          "sha256": "01b9cee275af127d128a4be133d3a320eb1c39e3459d2b6cb13df38d8d6723dd",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_first_exactness.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_first_exactness.lp",
+          "kind": "new",
+          "sha256": "dd088281e59b1f2300474fd11058e638cc14c5f7e88aa39085daa20247e6a331",
+          "status": "checked prototype; promotion adds the documented point-signature owner refinement"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_kernel_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_kernel_cover.lp",
+          "kind": "new",
+          "sha256": "c6c7c63a6a0564d3d0747aa6629bcb2f34c92361d93de8dd23aaf01c8a973a92",
+          "status": "timed out at 90 seconds; projected-row test reconstruction"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_map_kernel_cover_typing.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_map_kernel_cover_typing.lp",
+          "kind": "new",
+          "sha256": "f891ad55df228319245c6ac80c6a558219b3c5a72fad5aa1af8706afab4226d2",
+          "status": "timed out at 90 seconds; projected-row test reconstruction"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_first_exactness_prototypes.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_first_exactness_prototypes.sh",
+          "kind": "new",
+          "sha256": "b39c67b6d2d3eb4fa1285b5ea9cdd986ccbdb01d85351aba8446507fe801e34a",
+          "status": "diagnostic driver; original aggregate form can time out and warning driver needs promoted owners"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_first_exactness_warning_control.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_first_exactness_warning_control.lp",
+          "kind": "new",
+          "sha256": "55130f15eb8e635fa0ef39d89487960aa4e594e30b2343c418c08a5a5b7d8a06",
+          "status": "checked existing-import control"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_first_exactness_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_first_exactness_warnings.sh",
+          "kind": "new",
+          "sha256": "6bb80838d4e8e0e144633dcc328475a4fa7b9894f1abdad17d0ddfe9f53a8b9a",
+          "status": "diagnostic driver; original aggregate form can time out and warning driver needs promoted owners"
+        }
+      ]
+    },
+    {
+      "artifact": "first-exactness-preadditive-owner.patch",
+      "base_commit": "168c6cdbc2172e488ca13a765f41d16306bac987",
+      "note": "Consolidated source pair before the preadditive observation in the point signature was aligned with homology callers; the combined consumer timed out at 90 seconds.",
+      "entries": [
+        {
+          "path": "emdash2/emdash3_2_cokernel_record_covers.lp",
+          "origin": "/tmp/emdash-first-exactness-warnings.8UOXPF/emdash3_2_cokernel_record_covers.lp",
+          "kind": "new",
+          "sha256": "bd7460b4f6991e0dc5705bfee8fd429a23343d6dc33deda475376962568dc743",
+          "status": "Before the homology-preadditive point-signature refinement"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_map_kernel_covers.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_map_kernel_covers.lp",
+          "kind": "new",
+          "sha256": "af126f86e6856e8dca762c2e0514691f05404b7d3cfd7bd497246eed16488464",
+          "status": "Consolidated consumer that timed out against the unrefined point signature"
+        }
+      ]
     }
   ]
 }
