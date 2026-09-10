@@ -1,0 +1,18 @@
+{
+  "baselineLog": "logs/probes/homology-adjacent-window-tail-canonical-warnings-20260910-111806.log",
+  "candidateLog": "logs/probes/homology-arrow-tails-warnings-20260910-122223.log",
+  "counts": {
+    "replaceable pattern variable": 169,
+    "unjoinable critical pair": 1249
+  },
+  "unchangedFields": {
+    "categories": true,
+    "locations": true,
+    "term_heads": true,
+    "rule_families": true,
+    "parser_issues": true
+  },
+  "newRules": 6,
+  "newUnifiers": 0,
+  "lhsUnreviewedCompoundSlots": 0
+}

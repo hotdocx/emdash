@@ -248,6 +248,9 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_homology_third_exactness.lp"),
     Path("emdash3_2_homology_exact_window.lp"),
     Path("emdash3_2_homology_exact_window_result.lp"),
+    Path("emdash3_2_finite_arrow_tails.lp"),
+    Path("emdash3_2_finite_arrow_tail_append.lp"),
+    Path("emdash3_2_computational_exact_arrow_tails.lp"),
     Path("emdash3_2_short_exact_row_families.lp"),
     Path("emdash3_2_homology_window_families.lp"),
     Path("emdash3_2_homology_window_columns.lp"),
@@ -695,7 +698,16 @@ SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES = {
     Path("examples/homology_window_connecting_transformation.lp"),
     Path("examples/homology_window_column_usability.lp"),
 }
+SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES = {
+    Path("emdash3_2_finite_arrow_tails.lp"),
+    Path("emdash3_2_finite_arrow_tail_append.lp"),
+    Path("emdash3_2_computational_exact_arrow_tails.lp"),
+    Path("examples/finite_arrow_tails.lp"),
+    Path("examples/computational_exact_arrow_tails.lp"),
+    Path("examples/homology_adjacent_window_tails.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES, "./scripts/check_homology_arrow_tails.sh"),
     (SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES, "./scripts/check_homology_window_families.sh"),
     (SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES, "./scripts/check_homology_exact_window.sh"),
     (SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES, "./scripts/check_homology_connecting.sh"),

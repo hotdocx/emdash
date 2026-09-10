@@ -740,6 +740,125 @@ Endpoint zero evidence must concern the actual outside-support H objects,
 not replacement objects chosen for convenient types. Preserve the existing
 native/witnessed bounded consumers while qualifying this generic layer.
 
+Current experiment (2026-09-10): the existing window reviewer remains green.
+The two-window probe fixes five arbitrary short-exact rows and four original
+row maps, then compares the common lower/upper inclusion. A version that
+reannotates whole-H outputs through short local aliases exceeds 90 seconds;
+the warning-enabled diagnostic reaches the upper third-pair declaration
+after all column definitions, with no reported type error. Preserve that
+version and test the same terms with endpoints inferred from their existing
+owners; do not add a rewrite to compensate for an alias-reconstruction cost.
+
+For finite result packaging, test a Nat-recursive arrow tail carrying a
+predicate of each adjacent pair. The concrete predicate retains the existing
+zero point and exactness of its actual canonical pair. A tail stores each
+new object/arrow once; appending over one shared final/initial arrow then
+models precisely the window overlap. This is a finite result/evidence
+iterator, not a replacement complex category, new homology operation or
+manually supplied naturality-square grammar. Reuse the existing Nat/Sigma
+recursion pattern from finite families and bounded Freyd spines. Promotion
+requires the real two-window consumer, not only tuple beta tests.
+
+The transparent annotation prototype passes its declarations and generic
+tail/append beta controls, but its real consumer exposes costly inference
+through the expanded zero/exactness Sigma. Explicit lengths resolve the
+non-invertible Nat index; canonical arrow endpoints allow both individual
+windows to check, while generic append at the final edge still reaches
+90 seconds. Test direct three-pair prepending to the retained lower tail,
+which is the natural recursive assembly and does not recompute a boundary
+cursor through an already built prefix.
+
+Also compare the usual indexed-record alternative for the annotation only:
+a rigid classifier with a constructor requiring the SAME zero and exactness
+inputs, plus local constructor/projection beta rules. Its semantic model is
+the current Sigma; it must not introduce a new homology, arbitrary exactness
+witness, equality bridge or hot-head rule. Retaining the f/g indices in this
+record type may avoid repeated universal-predicate reconstruction and improve
+implicit-argument usability. Preserve both variants and choose using the real
+window consumer and SOP audits, not a declaration-only success.
+
+Direct prepending reaches a checked six-interior `joined` declaration, but
+the later projections still exceed 90 seconds. Merely adding exact-tail
+aliases for those projections also times out while checking the aliases.
+The next controlled comparison therefore keeps BOTH the tail's length/edge
+indices and the annotation's f/g indices behind the usual rigid indexed
+record classifiers. Constructors must still require exactly the original
+data and evidence, with only fresh-head constructor/projection beta rules.
+This has the same Nat/Sigma semantic model as the transparent candidate;
+it is not a new exactness axiom or another homology implementation. Test
+whether the original inference-friendly consumer now works, before any
+promotion or final owner decision.
+
+### Finite Exact-Result Tails: Selected Indexed-Record Design
+
+The complete rigid-record consumer passes, including the original
+inference-friendly construction, shared-boundary append and its projections.
+Its warning-enabled final target takes eight seconds; the explicit-scope
+variant also passes in eleven seconds. The transparent record alternatives
+remain mathematical models and recovery evidence, but are not selected as
+the operational type presentation. No core rewrite orientation changes.
+
+The new owners are `emdash3_2_finite_arrow_tails.lp`,
+`emdash3_2_finite_arrow_tail_append.lp`, and
+`emdash3_2_computational_exact_arrow_tails.lp`:
+
+- `FiniteArrowTail(C,Q,n,A,B,f)` retains n further arrows after f:A→B,
+  with one Q-annotation on each adjacent pair. Length and boundary indices
+  stay visible in the classifier; each next object/arrow is stored once.
+- `ComputationalExactArrowStep` requires the original zero path and the
+  original `computational_exact_at_selected` witness. Its constructor does
+  not manufacture exactness. Its pair view and original-pair introduction
+  are transparent; the selected homology operations are unchanged.
+- Nat recursion supplies final-edge observations and append over that same
+  edge. The exact-tail alias specializes Q to the zero/exactness record.
+  This is finite result/evidence packaging, not another complex category,
+  homology functor or connecting algorithm. Whole K/Q/H/delta remain primary.
+
+There are eleven primitive classifier/constructor/projection symbols,
+nine transparent definitions and six local constructor beta rules, with no
+new unifier. All inferred non-discriminator LHS slots are wildcards; the
+only discriminating shapes are the new constructors. The checked Nat/Sigma
+versions supply a semantic model, not an asserted definitional equality or
+a proved whole equivalence between the two representations.
+
+The real reviewer joins two overlapping five-term windows into an eight-
+object/seven-arrow chain with all six existing interior exactness witnesses.
+The common H(i) is one runtime arrow with the same H endpoints on both sides;
+there is no endpoint cast, proof axiom or new H selection. It checks the
+shared edge, preserved first annotation, retained lower tail and final arrow.
+The generic reviewers add constructor beta, annotation preservation,
+wrong-shared-boundary and missing-exactness controls: 17 positive and four
+negative assertions in total. Older scalar suites with nested proof
+projections and a trailing wrong-interior negative remain timed-out
+diagnostics; the trailing negative is not thereby independently measured.
+They do not qualify universal conversion claims or invalidate the
+separately checked real consumer.
+
+The focused gate is `scripts/check_homology_arrow_tails.sh`, with each source
+and reviewer independently bounded by 90 seconds. Its source/example/health
+dispatch has dedicated success/failure/target-coverage tests. The warning
+inventory is unchanged in every field at 1,249 critical-pair and 169 pattern
+reports, and the two new rule-owning modules pass the strict inferred-slot
+audit. Prototype variants are preserved in
+[the bounded-assembly audit](../emdash2/audits/bounded-homology-assembly-2026-09-10/README.md).
+
+This settles the finite result-carrier choice and the two-window assembly
+gate. General iteration from a bounded sequence of coherent rows and the
+outside-support zero evidence are still required before row 8 is complete;
+the final book and architecture audit remain in scope.
+
+Final-source qualification: the warning gate log is
+`logs/probes/homology-arrow-tails-warnings-20260910-122223.log`; the quiet
+gate is `logs/probes/homology-arrow-tails-quiet-20260910-123051.log`.
+The real reviewer takes seven seconds in each run. All 34 focused health-
+dispatcher tests, shell syntax, strict LHS audits, catalog freshness and
+diff hygiene pass. Source-only health now covers 876 files at snapshot
+`f69bb0c1ac5c84ac9dbb6cd04f4b690614afecf77a6d0a0ed3971785b9cb28dc`.
+This refresh does not claim a repo-wide runtime health run; the validation
+scope is the new feature and its actual proof dependencies.
+Trailing empty lines were removed from the three reviewers and driver after
+qualification; their declarations, assertions and commands are unchanged.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather
@@ -1038,7 +1157,7 @@ was introduced to get a passing target.
 |---|---|---|---|
 | `LEH-PLAN-0` | complete; checkpoint `bf217fe9` | integrated baseline `054b43bd` | living plan, isolated branch/worktree, Git/scope boundary, persistent goal |
 | `LEH-AUDIT-1` | complete; checkpoint `01fd062c` | current exactness, snake, bounded-complex, book, CAP/homalg owners | exact owner/endpoint matrix, focused baselines, rejection signals, book chapter map |
-| `LEH-EXACT-SPINE-2` | pending | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
+| `LEH-EXACT-SPINE-2` | complete: indexed finite arrow/exactness tails and the two-window consumer qualified in final sources | `ComputationalExactAt`, finite families | reusable finite exact-sequence carrier or durable evidence that windows suffice |
 | `LEH-SNAKE-MAPS-3` | complete through checkpoint `17a7dd6a` | completed connecting result | remaining four snake maps, all adjacent-zero points, whole six-term result |
 | `LEH-SNAKE-KERNEL-MAPS-3A` | complete; checkpoint `dd330e5e` | snake spine and selected kernels | `Ker(alpha) -> Ker(beta) -> Ker(gamma)` as selected kernel lifts with both reconstruction paths |
 | `LEH-SNAKE-COKERNEL-MAPS-3B` | complete; checkpoint `737b36fe` | snake spine and selected cokernels | `Coker(alpha) -> Coker(beta) -> Coker(gamma)` as selected cokernel colifts with both reconstruction paths |
@@ -1079,7 +1198,7 @@ was introduced to get a passing target.
 | `LEH-WINDOW-EXACTNESS-7D4` | all adjacent-zero laws and all three interior exactness witnesses qualified | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18, HINT-WINDOW-EXACT-FIRST-19, HINT-WINDOW-EXACT-SECOND-20, HINT-WINDOW-EXACT-THIRD-21 and reusable cover lemmas | exactness at the three actual window interiors, without changing any H object or map |
 | `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
-| `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
+| `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |

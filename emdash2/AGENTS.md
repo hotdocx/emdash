@@ -280,6 +280,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   is `scripts/check_homology_window_families.sh`; the bounded native connecting
   interpretation is qualified, while generic bounded formal assembly and
   final book work remain required.
+- The finite-arrow-tail and computational-exact-arrow-tail modules package
+  bounded result data over the existing arrows and exactness witnesses.
+  Rigid indexed record classifiers retain length and f/g for reconstruction;
+  six local constructor/projection beta rules add no generic cut or unifier.
+  Nat append shares an actual boundary arrow. The two-window reviewer keeps
+  the same H objects/maps and all six original proofs, with no casts or new
+  universals. `scripts/check_homology_arrow_tails.sh` is the bounded gate.
+  These are result carriers, not new complex categories or a completed
+  generic bounded homology theorem; degree iteration and endpoint zeros
+  remain separate requirements.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

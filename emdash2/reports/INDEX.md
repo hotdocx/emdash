@@ -9,10 +9,15 @@ whole H. Its component computes to the existing direct delta. Whole column
 observations compute, with narrow proof-time usability for the explicitly
 expanded Hom-action order. The focused gate is
 `scripts/check_homology_window_families.sh`. The living pilot supersedes
-the historical pending-interface notes below; native connecting
-interpretation, complete bounded formal assembly and final book work remain
-required. No general variance repair or closed quotient effectiveness is
-claimed.
+the historical pending-interface notes below. Native connecting
+interpretation now covers every retained bounded window. The indexed
+finite-arrow/exactness result carriers also join two actual windows with
+the same H(i) boundary and all six original proofs; their focused gate is
+`scripts/check_homology_arrow_tails.sh`. General bounded row iteration,
+endpoint-zero evidence and final book work remain required. The
+[bounded-assembly audit](../audits/bounded-homology-assembly-2026-09-10/README.md)
+preserves the representation comparisons. No general variance repair or
+closed quotient effectiveness is claimed.
 
 `../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
 is the active continuation beyond the completed Abelian, homology, and snake

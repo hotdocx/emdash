@@ -4462,6 +4462,19 @@ preimage. All three interiors are now proved at the same retained H
 objects and arrows. Their indexed exact-window bundle stores the three
 witnesses, not another copy of those objects or another homology selection.
 
+The finite result layer now joins adjacent windows over their common H(i)
+arrow. A tail begins at one fixed arrow and stores each further object and
+arrow once, together with the existing zero and exactness evidence for each
+adjacent pair. Its indexed record types keep the length and boundary visible
+to the logical framework; expanding the equivalent Nat/Sigma representation
+too early caused measured reconstruction timeouts. Constructor projections
+compute the retained fields, and Nat recursion appends over the same boundary
+arrow. The checked two-window example retains eight objects, seven arrows
+and all six original interior proofs, with no endpoint casts or new universal
+choices. This is result packaging, not a new category of complexes or a
+replacement H. General bounded row iteration and the outside-support zero
+evidence remain the next formal assembly layer.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

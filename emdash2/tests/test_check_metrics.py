@@ -17,6 +17,7 @@ from scripts.check_metrics import (
     SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES,
     SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES,
     SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES,
+    SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES,
     check_content_snapshot,
     check_execution_order,
     format_report,
@@ -323,6 +324,41 @@ class CheckMetricsTests(unittest.TestCase):
             results, status = run_checks(sorted(SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES), "90s")
         self.assertNotEqual(status, 0)
         run_command.assert_called_once_with(["./scripts/check_homology_window_families.sh"])
+        self.assertTrue(all(result.returncode == 124 for result in results))
+
+    @patch("scripts.check_metrics.run_command")
+    def test_arrow_tail_targets_share_one_fresh_chain(self, run_command) -> None:
+        run_command.return_value = (0, "", 20.0)
+        files = sorted(SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES)
+        with redirect_stdout(StringIO()):
+            results, status = run_checks(files, "90s")
+        self.assertEqual(status, 0)
+        run_command.assert_called_once_with(["./scripts/check_homology_arrow_tails.sh"])
+        self.assertEqual([result.file for result in results], [str(path) for path in files])
+        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
+
+    def test_arrow_tail_dispatch_matches_script_targets(self) -> None:
+        script_dir = Path(__file__).resolve().parents[1] / "scripts"
+        source = (script_dir / "check_homology_arrow_tails.sh").read_text(encoding="utf-8")
+        sections = [re.search(rf"{name}=\((.*?)\n\)", source, re.DOTALL).group(1)
+                    for name in ("owners", "reviewers")]
+        targets = {Path(name) for section in sections for name in re.findall(
+            r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$", section, re.MULTILINE)}
+        self.assertEqual(targets - {
+            Path("emdash3_2_homology_exact_window.lp"),
+            Path("emdash3_2_homology_exact_window_result.lp"),
+        }, SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES)
+        for name in ("check.sh", "check_examples.sh"):
+            self.assertIn("./scripts/check_homology_arrow_tails.sh",
+                          (script_dir / name).read_text(encoding="utf-8"))
+
+    @patch("scripts.check_metrics.run_command")
+    def test_arrow_tail_failure_is_not_reported_as_checked(self, run_command) -> None:
+        run_command.return_value = (124, "arrow-tail timeout", 90.0)
+        with redirect_stdout(StringIO()):
+            results, status = run_checks(sorted(SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES), "90s")
+        self.assertNotEqual(status, 0)
+        run_command.assert_called_once_with(["./scripts/check_homology_arrow_tails.sh"])
         self.assertTrue(all(result.returncode == 124 for result in results))
 
     def test_near_timeout_checks_run_first_without_reordering_report_inputs(self) -> None:

@@ -1440,6 +1440,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   these owners; the warning-enabled source inventory remains 1,249/169.
   This result does not supply connecting naturality, a whole connecting
   transformation, bounded assembly or the retained connecting CAS model.
+- `emdash3_2_finite_arrow_tails.lp` owns an indexed finite result carrier,
+  with one annotation per adjacent pair and each next object/arrow stored
+  once. Its append module uses Nat recursion at the same shared final/initial
+  edge. `emdash3_2_computational_exact_arrow_tails.lp` specializes the annotation
+  to an original zero/exactness record, not a new exactness theorem. Rigid
+  classifier indices avoid the measured reconstruction cost of the expanded
+  Nat/Sigma representation. Six local beta rules compute only constructor
+  projections; there is no new unifier or global composition rule.
+  The real consumer joins two whole-H windows, retaining all six proofs and
+  the same overlapping H(i) arrow without endpoint transport or reselection.
+  The three reviewers have 17 positive/four negative assertions, and the
+  warning inventory is unchanged at 1,249/169. The focused source/reviewer
+  gate is `scripts/check_homology_arrow_tails.sh`. General bounded row
+  iteration and endpoint-zero evidence remain required. The archived
+  transparent variants and timed-out scalar controls are not a claim that
+  every equivalent type presentation is equally usable in the LF.
 - `emdash3_2_commutative_algebra_freyd_homology_model_records.lp` specializes
   the whole-owned homology record at the original supplied model and raw
   chain agreement. Its object computes to the already-used model H point;

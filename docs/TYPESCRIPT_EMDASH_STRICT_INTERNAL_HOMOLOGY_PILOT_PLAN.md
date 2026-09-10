@@ -151,6 +151,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 | `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer and complete bounded inventory qualified | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
+| `HINT-FINITE-RESULT-26` | indexed result carriers and the real two-window assembly qualified; bounded generator/endpoints remain | retain the same arrows and exactness in a finite tail, with a literal shared H(i) boundary and constructor computation |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -4475,3 +4476,25 @@ Next is the parent plan's two-adjacent-window formal assembly gate, followed
 by finite assembly/endpoint-zero evidence, final book updates and the
 architecture/effectiveness audit. This completes the retained connecting
 integration tranche, not the full persistent goal or a closed-model theorem.
+
+### Generic Finite Result Assembly: Indexed-Record Qualification
+
+The parent plan's
+[finite exact-result decision](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#finite-exact-result-tails-selected-indexed-record-design)
+records the new arrow-tail/append/exact-annotation owners and their real
+two-window consumer. The common H(i) and both endpoints compute identically;
+the successful record version preserves all six existing exactness proofs
+and computes the append/projection observations. It adds six local data
+constructor beta rules, not new functoriality, naturality or H rules.
+
+The Nat/Sigma variants remain meaningful semantic models, but their erased
+indices caused missing-inference and expensive reconstruction paths. Both
+the failures and the successful indexed-record prototypes are archived;
+warnings were compared rather than used as a veto. The complete imported
+inventory is unchanged in every field at 1,249/169. A generator-clipping
+syntax error in the first prepending fixture is separately labelled as a
+fixture defect, not mathematical counterevidence.
+
+The source/reviewer gate and health routing are scoped to this exact
+dependency join. The actual row-iteration and endpoint-zero obligations
+remain in the full parent goal, as do the final book and architecture audit.

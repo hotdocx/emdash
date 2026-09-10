@@ -2090,6 +2090,17 @@ It uses that pair's actual selected boundary in `ComputationalExactAt`.
 after delta. `HomologyWholeExactWindow` packages these three witnesses over
 the existing window pairs, without duplicating its H objects or arrows.
 
+Read `FiniteArrowTail(C,Q,n,A,B,f)` as n additional arrows after f:A→B,
+with Q-data on each adjacent pair. Thus there are n+2 objects, n+1 arrows
+and n annotated interior positions. `ComputationalExactArrowTail` chooses
+the original zero/exactness annotation. Its constructor requires that
+evidence; it does not prove exactness merely by forming a sequence.
+The append operation shares one boundary arrow and is finite-data
+concatenation, not ordinary categorical composition. In the checked
+two-window consumer it retains the common H(i) and all original H inputs.
+This notation does not assert the still-pending generic bounded generator
+or replace the whole-complex/H/delta operations.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

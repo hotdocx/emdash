@@ -1,0 +1,264 @@
+{
+  "baseline": "09f9dd1aece392be7deae0051f162d2dd025be94",
+  "date": "2026-09-10",
+  "status": "research artifacts, not active mathematical sources",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail.sh",
+      "sha256": "f69560683f8c96969192f67d9f9916f306a6d677c5e33884f1e61a51cf61f26b",
+      "bytes": 3578,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_canonical.sh",
+      "sha256": "c7074defa31d434d82303733573f04aa7e12cdd446772e5f684e7c1fe0e9847f",
+      "bytes": 3640,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_explicit.sh",
+      "sha256": "26a294a16d25a0f2db2213e13be98fc2e80dc44b0f9a80f3de093c693cd0645e",
+      "bytes": 3633,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_prepend.sh",
+      "sha256": "3c83c3c6fe7dfad9c6593f84511591a446af25d9fccbe3ad4b0f3e96dcf890f4",
+      "bytes": 3629,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_prepend_full.sh",
+      "sha256": "37779f78ffccb97f9e493e22c50005f500538d9ac6fe3a18d5d0639f962e22e8",
+      "bytes": 3660,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_views.sh",
+      "sha256": "67be5eae7775c65c9af7f7459c1121fbe00c3e4c6d87d97b758e7ea1f39708d3",
+      "bytes": 3672,
+      "status": "diagnostic-driver",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks.lp",
+      "sha256": "84cfc9a331a711c8bd02df7611abf9d633f0a67d990ce4aecaeb0f0217f7a9a4",
+      "bytes": 2104,
+      "status": "implicit-reconstruction-failure",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_explicit.lp",
+      "sha256": "fa39027862be9d4bbdbd89980d9a6260bf4b5519daa50542b6971706cb9104be",
+      "bytes": 2173,
+      "status": "unqualified-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_stable.lp",
+      "sha256": "3642a648329c8d170f2d286f888fa65a78457f08e720277b797b112b2175e534",
+      "bytes": 2112,
+      "status": "unqualified-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_views.lp",
+      "sha256": "53e35fc2d40509bbc3bc929538ae1e0ff562fe59c82dbcb205f789cf1cb68a85",
+      "bytes": 2064,
+      "status": "unqualified-projection-alias-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tails.lp",
+      "sha256": "50684cc4368032b59a3129940bfc7de2bebe7ceedf74c2726780245accbc368a",
+      "bytes": 4855,
+      "status": "checked",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tails_stable.lp",
+      "sha256": "5adec763fa21e67aed668d3588d3ce36d511dfc4ce93a08c3795b7e37b5324cc",
+      "bytes": 5357,
+      "status": "declarations-checked-alternative-consumer-unqualified",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_append.lp",
+      "sha256": "5c622cdc39b75aba78ecf6f5e168add2d4cd236a981d628afeed2acdc6557cb4",
+      "bytes": 5392,
+      "status": "checked",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_checks.lp",
+      "sha256": "e67a764f9f34b5f1e5e99c02dc827f86a9c8e80050ae53ede826560bef7fa8c7",
+      "bytes": 1782,
+      "status": "checked",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tails.lp",
+      "sha256": "fc0bfc922d616f9aa2d7a687b47ee1a737a2ddff11c203531894ee5eca143017",
+      "bytes": 3448,
+      "status": "checked",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail.lp",
+      "sha256": "8f3906a918a1ed91c258f66f553dcd133306ac00c882604383adb4f8aac82693",
+      "bytes": 3137,
+      "status": "implicit-reconstruction-failure",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_canonical.lp",
+      "sha256": "c65a109c811c16b4b580dc73f09aecf0bc2880685f0f347c03e09579aadd3e1a",
+      "bytes": 56066,
+      "status": "individual-windows-checked-append-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_explicit.lp",
+      "sha256": "3d0ab99e7d24c5ac6cc640ac1b2f1a3e7430f1b59e3780aa0f44ed8d668bf569",
+      "bytes": 3959,
+      "status": "unqualified-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_prepend.lp",
+      "sha256": "092074f68c36dfafe24ec7b40e09e22ec6a38cfb1ebd718f1ece7341a44cef15",
+      "bytes": 58977,
+      "status": "malformed-generator-fixture-not-mathematical-evidence",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_prepend_full.lp",
+      "sha256": "b01f0cffbec7ea2d0c14ea72463e6131efa49fd80e185499e606a80e45a9e70b",
+      "bytes": 59964,
+      "status": "joined-result-checked-observations-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_views.lp",
+      "sha256": "928746fd8dd7162e94eebfea58661e9fc2260ea2039cb4222744be29b6861771",
+      "bytes": 60113,
+      "status": "not-reached-after-projection-alias-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_windows.lp",
+      "sha256": "b9acdaf66987a0253cb07a70760309e61701d0544ce40c2138732d1fbdfdb370",
+      "bytes": 6639,
+      "status": "unqualified-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_windows_diagnostic.lp",
+      "sha256": "21992ed2bd86d38fb63f0f0a9a3e0ee2d136d68e1394a84496aa16b9ac43c330",
+      "bytes": 6750,
+      "status": "unqualified-timeout",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_windows_inferred.lp",
+      "sha256": "6405b592278c441bbab99fd4c45ee4323d76c8310a51d8873caa2301e7c21dc7",
+      "bytes": 6499,
+      "status": "checked",
+      "artifact": "prototypes.patch"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_rigid.sh",
+      "sha256": "6ee6046c15b5323e135b625d7ce2c8293979ba1087f4d077775419a5d0b14992",
+      "bytes": 3633,
+      "artifact": "indexed-records.patch",
+      "status": "diagnostic-driver"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_adjacent_window_tail_rigid_scoped.sh",
+      "sha256": "c193b0a454a493ad9b5c828e0b36a7302502655a01f9c676652958ac66c44d23",
+      "bytes": 3676,
+      "artifact": "indexed-records.patch",
+      "status": "diagnostic-driver"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_rigid.lp",
+      "sha256": "3c63cc0393b32d9f076e4cd50703789823462d20ef326da03ee5662c74a93d81",
+      "bytes": 2111,
+      "artifact": "indexed-records.patch",
+      "status": "unqualified-diagnostic-timeout"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_rigid_basic.lp",
+      "sha256": "883f7b45d7175fc3254ae7082a103eae534f5a90aa6a03bd5c3b89ddb237902e",
+      "bytes": 2069,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_rigid_diagnostic.lp",
+      "sha256": "7d614525908e317f9dc4e78acb20ed763509d18600ae0395567868383590171c",
+      "bytes": 2183,
+      "artifact": "indexed-records.patch",
+      "status": "unqualified-diagnostic-timeout"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tail_checks_rigid_scoped.lp",
+      "sha256": "262ae5d205a74ed84f0356afdcb56bf095b4920d80eff461a924c42a8867a5a9",
+      "bytes": 2422,
+      "artifact": "indexed-records.patch",
+      "status": "unqualified-diagnostic-timeout"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tails_rigid.lp",
+      "sha256": "ee9f333341f8b13dbc262d717edf63253185edd59a5c6ab67f905dd929538477",
+      "bytes": 5364,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_append_rigid.lp",
+      "sha256": "320c9adbdd537c720ddccd602168ef99d72664cbe9f14062946856045124abde",
+      "bytes": 5399,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_checks_rigid.lp",
+      "sha256": "ec490b80848925d6a554d863c1c8a3d69b74bc0727ed2c9ebfe3eb4360fcfab4",
+      "bytes": 1789,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tails_rigid.lp",
+      "sha256": "2dc66d931c4082d1071763d9a61681dd4edb6ee1fa4545b60b1fe220fbc13c06",
+      "bytes": 2843,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_rigid.lp",
+      "sha256": "e40c5ecf61d2b369b5f7b764185c58d24bff78218d010a5fc22f3c140e28fbd9",
+      "bytes": 3150,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_adjacent_window_tail_rigid_scoped.lp",
+      "sha256": "ce801cb35a8312860382d4a41c90fab6b98453780f0ad6df4f2904aca09896dc",
+      "bytes": 4193,
+      "artifact": "indexed-records.patch",
+      "status": "checked"
+    }
+  ],
+  "artifacts": [
+    "prototypes.patch",
+    "indexed-records.patch"
+  ],
+  "selected": "rigid indexed records; library owners and three reviewers promoted separately"
+}
