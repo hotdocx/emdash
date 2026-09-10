@@ -37,11 +37,12 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [connecting-characterization-model-prototypes.patch](connecting-characterization-model-prototypes.patch) | `bf83db97` | Covered connecting uniqueness, shared epicity/caller refactor and supplied-normality model enhancement, with source-comparison controls. |
 | [whole-connecting-family-prototypes.patch](whole-connecting-family-prototypes.patch) | `bd79a86a` | Declaration-first whole column/H/delta prototypes and checked components/whole observations; failed nested-record and Hom-projection-order alternatives remain explicitly unqualified. |
 | [connecting-family-usability-prototypes.patch](connecting-family-usability-prototypes.patch) | `361bd542` | Checked whole/expanded Hom usability and evaluation consumers, with failed controls and consolidated support. Requires the preceding whole-family artifact to materialize its temporary imports. |
+| [whole-observation-unification-alternative.patch](whole-observation-unification-alternative.patch) | `e1398d9e` | Successful whole-unification alternative and five omission controls. Not selected: the runtime structural-projection policy is retained. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all sixteen artifacts apply to their pinned baselines with their
-recorded prerequisites, and all 219 embedded
+checks: all seventeen artifacts apply to their pinned baselines with their
+recorded prerequisites, and all 227 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -102,6 +103,16 @@ is promoted library code; the living pilot records the remaining owner audit,
 native connecting interpretation, bounded assembly and book work.
 
 ## Recovery
+
+The whole-observation alternative preserves eight further source/control
+versions and their verified recovery hashes. It replaces four whole beta
+rewrites by unifiers and passes the same component/action consumers; four
+extra negative tests confirm that those whole comparisons no longer reduce.
+Removing each of the four Hom instances still fails its intended expanded
+comparison. Both policies have the same 1,249/169 warning inventory. The
+reviewed choice keeps e1398d9e's stronger whole projection computation and
+its smaller unification surface; this successful alternative remains
+available for future evidence-driven reconsideration.
 
 The usability addition preserves 20 more source/reviewer/gate versions.
 Its recovered sources pass all SHA-256 comparisons. The final consolidated

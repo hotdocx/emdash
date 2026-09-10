@@ -189,6 +189,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_chain_pair_zero_cone_maps.lp"),
     Path("emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology_models.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_homology_model_records.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology_model_normality.lp"),
     Path("emdash3_2_commutative_algebra_freyd_chain_map_introduction.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology_model_maps.lp"),

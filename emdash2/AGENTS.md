@@ -173,6 +173,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   and epic-colift families. The resulting Abelian capability projects to
   those same W/V, normality operations and whole H by computation. No
   object cast, replacement model or closed-provider synthesis is added.
+  The model-record extension specializes the existing whole-owned record
+  at the same raw chain input. Its object projects literally to the original
+  model H point; distinct model selections do not collapse. This rule-free
+  adapter prepares the retained connecting consumer, not a new H or provider.
   The kernel/cokernel-adjunction record modules now derive universal records
   at the actual whole K/Q objects and structural transformations. Their
   operational centres are explicit mate operations; comparison paths occur

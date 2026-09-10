@@ -6,6 +6,16 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Reviewed whole-observation policy (2026-09-10): the successful whole-unifier
+alternative is preserved but not selected. The
+[reviewed decision](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#reviewed-decision-keep-whole-projection-beta)
+retains e1398d9e's whole projection beta rewrites and scoped Hom usability.
+The alternative removes no Hom instances and improves no warning field,
+while making genuine whole projection computation proof-time only. The
+user agrees with retaining the stronger computational interface. Continue
+with the retained native connecting interpretation; generic orientations
+and the remaining goal scope are unchanged.
+
 Whole connecting implementation checkpoint (2026-09-10): the five
 row/window/column/usability/connecting modules and their focused consumers
 now pass, retaining whole H and the original direct delta component.

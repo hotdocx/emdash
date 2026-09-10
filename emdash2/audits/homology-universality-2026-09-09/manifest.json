@@ -1595,6 +1595,69 @@
           "status": "checked consolidated support/source/reviewer/gate"
         }
       ]
+    },
+    {
+      "artifact": "whole-observation-unification-alternative.patch",
+      "base_commit": "e1398d9e6397c7cfeb407311b27a63ac8b0bbda3",
+      "note": "Successful whole-unification alternative and five Hom-instance necessity controls. Not selected: retain structural whole beta plus Hom usability. Runtime source and prior variant remain independently recoverable.",
+      "entries": [
+        {
+          "path": "emdash2/emdash3_2_homology_window_columns.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_columns.lp",
+          "kind": "changed",
+          "sha256": "6b15107e39ed2f87cdc26561411abed9decfc485e40a92e94c4e6b6486fce477",
+          "status": "checked alternative; not selected as the final observation policy"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_window_column_usability.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_column_usability.lp",
+          "kind": "changed",
+          "sha256": "fe376b92b62b000a17254f897b6eb771adca20a37942318f106b5eddb8eca1d7",
+          "status": "checked alternative; not selected as the final observation policy"
+        },
+        {
+          "path": "emdash2/examples/homology_window_connecting_transformation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/examples/homology_window_connecting_transformation.lp",
+          "kind": "changed",
+          "sha256": "6a826791da831685e67a870edbebf2cc01483f94a54f0fc534659bdfadf6ca04",
+          "status": "checked alternative; not selected as the final observation policy"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_whole_only_control.lp",
+          "origin": "/tmp/emdash-whole-column-unif.WElXQo/tmp/probes/homology_window_whole_only_control.lp",
+          "kind": "new",
+          "sha256": "7dcaa5e2bc8fe91c1dbf65e74eebde4c4dd2108cd053db2d6e0070cd5c41e33f",
+          "status": "expected failure: removing all Hom instances leaves the first expanded proof unfinished"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_without_right_first.lp",
+          "origin": "/tmp/emdash-whole-column-unif.WElXQo/tmp/probes/homology_window_without_right_first.lp",
+          "kind": "new",
+          "sha256": "0922dbcc5207027fd66277b635ece6dd9ba13dfd61ee29a3a208887370670ecd",
+          "status": "expected failure: removing only right_first leaves its expanded proof unfinished"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_without_left_first.lp",
+          "origin": "/tmp/emdash-whole-column-unif.WElXQo/tmp/probes/homology_window_without_left_first.lp",
+          "kind": "new",
+          "sha256": "2a8eb849158305a3fad950403108e12fd5da8b3cd77a68391f726c253317f75b",
+          "status": "expected failure: removing only left_first leaves its expanded proof unfinished"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_without_right_diagram.lp",
+          "origin": "/tmp/emdash-whole-column-unif.WElXQo/tmp/probes/homology_window_without_right_diagram.lp",
+          "kind": "new",
+          "sha256": "876089c5d90822a211329e156807bc2ec0096c69a8ed4e519190fca9c475e35e",
+          "status": "expected failure: removing only right_diagram leaves its expanded proof unfinished"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_without_left_diagram.lp",
+          "origin": "/tmp/emdash-whole-column-unif.WElXQo/tmp/probes/homology_window_without_left_diagram.lp",
+          "kind": "new",
+          "sha256": "b4a6c06d0deaeb357cb6db134acdc2a9f6ce21b9da31c41bd7d5f82540eb0db0",
+          "status": "expected failure: removing only left_diagram leaves its expanded proof unfinished"
+        }
+      ]
     }
   ]
 }

@@ -1440,6 +1440,13 @@ belongs to the owning implementation plan rather than to standing guidance.
   these owners; the warning-enabled source inventory remains 1,249/169.
   This result does not supply connecting naturality, a whole connecting
   transformation, bounded assembly or the retained connecting CAS model.
+- `emdash3_2_commutative_algebra_freyd_homology_model_records.lp` specializes
+  the whole-owned homology record at the original supplied model and raw
+  chain agreement. Its object computes to the already-used model H point;
+  the independent reviewer rejects collapsing different model selections.
+  The adapter is one transparent definition with no new rule, unifier or
+  universal choice. Direct model connecting interpretation remains the
+  next consumer, rather than a result supplied by this record alone.
 - The short-exact-row-family and homology-window-family modules retain
   actual row functors and transformations in the ordinary target profile.
   Specialized window constructors/projections avoid deeply nested Sigma

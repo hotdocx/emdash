@@ -4165,3 +4165,119 @@ supporting sources. Its manifest explicitly requires the earlier whole-
 family artifact when recovering temporary imports. Together the archive
 retains 219 source/driver versions; recovery qualification is not a claim
 that rejected experiments typecheck.
+
+### Whole Observation Unification: Checked Alternative
+
+The owning-source comparison against e1398d9e succeeds. The experiment
+replaced four runtime whole column observation folds with four whole-functor
+unifiers, plus typed eq_refl witnesses. The new patterns use surviving primitive
+composition/projection/exchange heads; their frame/endpoint constraints
+are on the RHS. The earlier two compound inferred target guards are no
+longer needed. Point-column and delta-component runtime computations are
+unchanged. This removes the new whole-comp runtime competition without
+changing either generic kernel orientation or the mathematical operations.
+
+The four expanded-Hom unifiers remain necessary for the current usability
+interface: removing them all fails at the first expanded comparison, and
+four independent controls removing just one each fail at that corresponding
+expanded reflexivity proof while the other three remain. Thus the alternative
+has four whole and four Hom-level proof-time comparisons, not a
+claim that unification automatically propagates through projections.
+All whole observations are tested by typed reflexivity; four negative
+conversion tests explicitly confirm that they are not runtime folds.
+Existing point, delta-component, whole off-diagonal/next-Hom and arbitrary-
+arrow evaluation consumers still pass in the copied owner/consumer graph.
+The pre-alternative runtime version remains preserved at e1398d9e.
+
+Its fresh warning-enabled gate passes all 25 targets and preserves the
+1,249/169 warning inventory in every field. It passes 31 positive and nine
+negative new checks (four extra negatives demonstrate absence of whole
+runtime folds). Feasibility did not establish that this observation policy
+was preferable. The reviewed choice below supersedes its provisional
+selection; neither generic orientation nor general variance repair changes.
+
+### Reviewed Decision: Keep Whole Projection Beta
+
+After comparing the two working designs, retain e1398d9e's four whole
+projection beta rewrites and four scoped Hom-level unifiers. The user
+explicitly agrees with this recommendation. R is a column assembly from
+the original row data, and its projections recover that actual input;
+this is closer to a constructor/projection beta law than a comparison
+between independently chosen semantic presentations. Whole runtime
+projection is therefore meaningful computational content, not merely
+an optional equality certificate.
+
+The alternative neither eliminates any of the four Hom instances nor
+improves the warning inventory. It instead moves four whole computations
+into proof-time matching and adds whole equality wrappers. Its two fewer
+inferred target guards do not outweigh the loss of direct whole projection
+computation; the runtime version's guards are measured, documented and
+qualified. This is a semantic-owner and usability decision, not a rule
+count veto or a claim of global confluence. Whole unifiers remain suitable
+for genuinely different presentations or owners that must stay rigid.
+
+Restore the operational sources and standing descriptions byte-for-byte
+to e1398d9e where this experiment changed them, with apply_patch rather
+than reset/checkout/history rewriting. Archive the successful alternative
+and all five necessity controls at that baseline. The whole-unification
+fresh log is logs/probes/homology-window-families-warnings-20260910-074944.log;
+the restored source uses the already qualified e1398d9e gate and passes the
+focused resumption reviewer. Continue next with the retained native
+connecting interpretation; do not reopen this normalization-policy review
+without a new consumer or contradictory evidence. The full parent goal
+remains active.
+
+### Retained Model Connecting Consumer: Next Interface
+
+Resume the concrete consumer at the existing supplied coherent model, not
+by inventing a new native algorithm or transporting old endpoints. The
+current TypeScript bounded-model inventory already interprets every retained
+H point and both degreewise induced maps, but not delta. Its original model
+input and actual result/assumption source must remain fixed.
+
+First specialize the existing chain_pair_homology_record at that model and
+its original raw chain agreement. Its object projection must compute to
+the existing freyd_homology_model_object. This gives the direct connecting
+component the original consumer's retained cycles/boundary/quotient record,
+rather than selecting another H or constructing an object cast. Probe the
+literal equality before designing the connecting observation signature.
+Supplied normality and short-exact-row evidence remain explicit boundaries;
+do not infer closed quotient effectiveness from native agreement data.
+The subsequent complete-arrow observation should follow the established
+model-map consumer and explicit trusted-presentation-semantics classification.
+
+The first specialization is now implemented as
+emdash3_2_commutative_algebra_freyd_homology_model_records.lp. Its single
+transparent definition instantiates chain_pair_homology_record with the
+original model and original raw chain agreement. The independent reviewer
+checks its type, literal computation of the object to the existing model H
+point, and non-collapse of a different model's selection. Both standalone
+source/reviewer checks pass within 90 seconds. This is the retained-record
+prerequisite for the direct model connecting component, not a completed
+connecting interpretation, a new universal choice or a closed provider.
+
+Standalone source/reviewer logs are
+logs/probes/emdash3_2_commutative_algebra_freyd_homology_model_records-20260910-082103.log
+and logs/probes/freyd_homology_model_records-20260910-082106.log. The
+warning boundary is the two original imports, compared with the candidate
+under normal subject reduction in the 082303/082305 logs. The reviewer
+has two positive checks and one model-selection non-collapse negative.
+The source is registered in the standard source/health inventories and
+the reviewer is independently discovered; no new isolated dispatch group
+or unrelated aggregate is required for this small rule-free adapter.
+
+The warning inventories are identical in all fields at 1,255/169; this
+broader Freyd import boundary already contains the extra six critical
+pairs relative to the generic homology window. The adapter adds none.
+The source-only inventory is now 868 files with snapshot
+5ad1232716e41984b6db4ec9011b2e62e3f6313bbf7afc8d78715980ad7d737b.
+
+Next specialize the existing direct component using these original model
+records, supplied normality, and explicit short-exact-row/map data. Expose
+the result as the existing complete Freyd arrow observation, so the native
+consumer retains both actual H endpoints without transport. Determine the
+precise row-evidence boundary before mirroring that signature in TypeScript;
+do not silently treat raw finite agreements as closed all-test capability.
+Then extend the retained-result preparation/adoption inventory without
+re-running homology, replacing selections or introducing another native
+connecting algorithm. This is the next in-progress semantic consumer.

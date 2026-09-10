@@ -84,9 +84,14 @@
         "whole-connecting-family-prototypes.patch"
       ],
       "recovered_source_hashes_verified": 20
+    },
+    {
+      "artifact": "whole-observation-unification-alternative.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 8
     }
   ],
-  "source_versions_sha256_verified": 219,
+  "source_versions_sha256_verified": 227,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }
