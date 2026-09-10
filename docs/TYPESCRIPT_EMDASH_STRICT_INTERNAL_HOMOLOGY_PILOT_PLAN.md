@@ -2908,3 +2908,61 @@ do not make a terminal type conversion of the old delta or a complete old/new
 comparison theorem the new definition. The three generic window-exactness
 proofs, bounded formal assembly, concrete connecting consumer and final book
 obligations all remain active.
+
+### Direct Connecting: Row Universal Factors
+
+Checkpoint `74cefc18` supplies the whole-owned record layer. The next bounded
+experiment constructs universal row records at the original short-exact-row
+objects, so the connecting calculation can use those rows and the actual H
+cycle/quotient objects directly. Existing kernel-comparison isomorphisms are
+reusable mathematical data; they must not become a terminal endpoint cast of
+delta or force replacement of retained native selections.
+
+First qualify the generic fact that, for set-valued Homs, a factor fibre of
+a monomorphism is a proposition. A supplied factor therefore gives its
+contractible universal fibre, with that exact factor as computational centre.
+Use the original `HFiber`, Sigma-path and preadditive Hom-set owners, not a
+new cone/square grammar or an axiom of uniqueness. The dual epic-colift
+criterion is the corresponding row-cokernel route. Apply this only after
+constructing the relevant all-test factors; it does not postulate the
+connecting map, its normal tests, or a splitting of an arbitrary epimorphism.
+
+The factor-fibre criterion and both record constructors now check in
+`tmp/probes/homology_row_factor_contractibility.lp`. The kernel lift and
+cokernel colift projections reduce to the supplied factors' arrows, so the
+uniqueness proof does not choose different operational centres.
+
+Both concrete row applications also check:
+
+- `homology_short_exact_kernel_record.lp` constructs a kernel record for
+  the outgoing p with object literally A and inclusion literally i. Its lift
+  is the genuine inverse kernel-comparison arrow composed with the selected
+  lift, and its reconstruction is obtained by generic factor pasting.
+- `homology_short_exact_cokernel_record.lp` constructs a cokernel record for
+  i with object literally D and projection literally p. It uses the existing
+  normal-epi comparison inverse and cokernel colift, with the original
+  comparison reconstruction. No new dual comparison theorem is needed.
+
+Each application checks object, structural-arrow and lift/colift projection
+reductions. Logs are
+`homology_row_factor_contractibility-20260909-205057.log`,
+`homology_short_exact_kernel_record-20260909-205104.log` and
+`homology_short_exact_cokernel_record-20260909-205513.log` under
+`logs/probes/`. These remain isolated prototypes, not yet registered library
+owners or a completed delta. The generic source-isomorphism reconstruction
+in `homology_iso_source_reconstruction.lp` extracts the proof already in
+`kernel_domain_comparison_reverse_path` without its unused kernel arguments;
+before promotion, give that proof one generic owner and make the old wrapper
+delegate. Do not introduce irrelevant selected kernels just to satisfy
+unused parameters, or promote duplicate semantic proof bodies.
+
+The direct connecting route to qualify next is: pull the row epimorphism
+back along the source H-record's cycle inclusion; factor the next
+differential through the original left row and then the target H-record's
+cycles; descend through the epic cover; and descend through the source
+H-record's actual boundary cokernel. Construct all annihilation/normal tests
+from row reconstruction, chain-map compatibility and cancellation. Keep the
+original short exact rows and arbitrary nonsplit inputs; do not replace them
+by a restricted canonical-row problem. Whole-family naturality, generic
+window exactness, bounded assembly and the concrete retained-result consumer
+remain subsequent obligations of the same goal.
