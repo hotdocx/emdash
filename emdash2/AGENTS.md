@@ -177,6 +177,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   or a second homology functor. Canonical older wrappers remain unchanged
   while consumers migrate. A whole connecting transformation and generic
   window exactness are still downstream.
+  The Hom-factor universality and short-exact universal-record modules now
+  construct row kernels/cokernels at their original objects. Mono/epi
+  cancellation and the existing Hom-set property supply uniqueness around
+  the constructed factor centres. Genuine comparison arrows are used for
+  lifting, not object-equality casts. The generic source-isomorphism proof
+  is shared with the older kernel-domain comparison wrapper.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

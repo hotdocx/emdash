@@ -1,0 +1,496 @@
+diff --git a/emdash2/tmp/probes/homology_record_boundary_data_20260909.lp b/emdash2/tmp/probes/homology_record_boundary_data_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_record_boundary_data_20260909.lp
+@@ -0,0 +1,17 @@
++/* Homology data retains its ACTUAL boundary as an existing kernel factor. */
++require open emdash.emdash3_2_computational_homology;
++symbol HomologyRecord [C : Cat] (S : τ (@PreadditiveCategory C))
++  (A B D : τ (Obj C)) (pair : τ (@ComputationalChainPair C S A B D)) : Grpd
++≔ @Σ_ (@ComputationalKernel C S B D (@computational_chain_pair_d C S A B D pair))
++    (λ cycles : τ (@ComputationalKernel C S B D (@computational_chain_pair_d C S A B D pair)),
++      @Σ_ (@KernelFactorSpace C S B D (@computational_chain_pair_d C S A B D pair)
++        (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) cycles)
++        (@computational_kernel_morphism C S B D (@computational_chain_pair_d C S A B D pair) cycles)
++        A (@computational_chain_pair_cone C S A B D pair))
++      (λ boundary : τ (@KernelFactorSpace C S B D (@computational_chain_pair_d C S A B D pair)
++        (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) cycles)
++        (@computational_kernel_morphism C S B D (@computational_chain_pair_d C S A B D pair) cycles)
++        A (@computational_chain_pair_cone C S A B D pair)),
++        @ComputationalCokernel C S A
++          (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) cycles)
++          (sigma_Fst boundary)));
+diff --git a/emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp b/emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp
+@@ -0,0 +1,54 @@
++/* Whole K object/inclusion with the original selected lift as a mate. */
++require open emdash.emdash3_2_kernel_adjunction_unmate_paths;
++
++symbol kernel_record_frame [C : Cat] (A : τ (Obj C)) : Grpd
++≔ @Σ_ (Obj C) (λ K : τ (Obj C), Hom C K A);
++
++symbol kernel_record_frame_path [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@= (@kernel_record_frame C (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++    (@Struct_sigma (Obj C) (λ K : τ (Obj C), Hom C K (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
++    (@Struct_sigma (Obj C) (λ K : τ (Obj C), Hom C K (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@kernel_presentation_selected_object C S W d)
++      (@computational_kernel_morphism C S
++        (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++        (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d))))
++≔ @eq_refl (@kernel_record_frame C (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++    (@Struct_sigma (Obj C) (λ K : τ (Obj C), Hom C K (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)));
++
++symbol kernel_record_lift [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d) X))
++  : τ (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))
++≔ @fapp0 _ _ (@kernel_presentation_lift_func C S t T W P X d)
++    (@fapp0 _ _ (@kernel_presentation_unlift_func C S t T W P X d)
++      (@kernel_presentation_test_lift C S W X d e));
++
++symbol kernel_record_lift_reconstruction [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d) X))
++  : τ (@= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++    (@comp_fapp0 C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@fapp0 WalkingArrow_cat C d walking_arrow_src)
++      (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P))
++      (@kernel_record_lift C S t T W P d X e))
++    (@weak_kernel_annihilator_arrow C S
++      (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++      (@terminal_arrow_test_outgoing C d) X e))
++≔ @eq_trans (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) _ _ _
++    (@eq_sym _ _ _ (@kernel_presentation_unlift_source_semantic_path C S t T W P X d
++      (@kernel_record_lift C S t T W P d X e)))
++    (@kernel_presentation_unlift_lift_source_path C S t T W P X d e);
+diff --git a/emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp b/emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp
+@@ -0,0 +1,94 @@
++/* Universal proof over K[d], with an explicitly chosen operational centre. */
++require open emdash.tmp.probes.kernel_whole_record_foundation_20260909;
++
++symbol kernel_record_factor [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d) X))
++  : τ (@KernelFactorSpace C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d)
++    (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++    (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) X e)
++≔ @Struct_sigma
++    (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))
++    (λ u : τ (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)),
++      @= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++        (@comp_fapp0 C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++          (@fapp0 WalkingArrow_cat C d walking_arrow_src)
++          (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) u)
++        (@weak_kernel_annihilator_arrow C S
++          (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++          (@terminal_arrow_test_outgoing C d) X e))
++    (@kernel_record_lift C S t T W P d X e)
++    (@kernel_record_lift_reconstruction C S t T W P d X e);
++
++symbol kernel_record_universal [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d) X))
++  : τ (IsContr (@KernelFactorSpace C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d)
++    (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++    (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) X e))
++≔ @is_contr_recenter
++    (@KernelFactorSpace C S
++      (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++      (@terminal_arrow_test_outgoing C d)
++      (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) X e)
++    (@ind_eq (@kernel_record_frame C (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@Struct_sigma (Obj C) (λ K : τ (Obj C), Hom C K (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++        (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++        (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
++      (@Struct_sigma (Obj C) (λ K : τ (Obj C), Hom C K (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++        (@kernel_presentation_selected_object C S W d)
++        (@computational_kernel_morphism C S
++          (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++          (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d)))
++      (@kernel_record_frame_path C S t T W P d)
++      (λ frame : τ (@kernel_record_frame C (@fapp0 WalkingArrow_cat C d walking_arrow_src)),
++        IsContr (@KernelFactorSpace C S
++          (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++          (@terminal_arrow_test_outgoing C d) (sigma_Fst frame) (sigma_Snd frame) X e))
++      (@computational_kernel_factor_contr C S
++        (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++        (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d) X e))
++    (@kernel_record_factor C S t T W P d X e);
++
++symbol kernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@= (Hom C (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
++    (@comp_fapp0 C _ _ _ (@terminal_arrow_test_outgoing C d)
++      (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
++    (@preadditive_hom_zero C S (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)))
++≔ @terminal_arrow_test_chain_path C S t T
++    (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) d
++    (@tapp0_fapp0 _ _ _ _ d
++      (@counit_adj_transf C (Functor_cat WalkingArrow_cat C)
++        (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
++        (@kernel_presentation_adjunction C S t T W P)));
++
++symbol kernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@ComputationalKernel C S
++      (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++      (@terminal_arrow_test_outgoing C d))
++≔ @computational_kernel_intro C S
++    (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++    (@terminal_arrow_test_outgoing C d)
++    (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
++    (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P))
++    (@kernel_record_annihilation C S t T W P d)
++    (@kernel_record_universal C S t T W P d);
+diff --git a/emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp b/emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp
+@@ -0,0 +1,49 @@
++require open emdash.tmp.probes.cokernel_whole_record_foundation_20260909;
++
++symbol cokernel_record_factor [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C))
++  (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X))
++  : τ (@CokernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) X e)
++≔ @Struct_sigma (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X)
++    (λ u : τ (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X), @= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X)
++      (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X u (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)))
++      (@cokernel_coannihilator_arrow C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X e))
++    (@cokernel_record_colift C S t T W P d X e)
++    (@cokernel_record_colift_reconstruction C S t T W P d X e);
++
++symbol cokernel_record_universal [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C))
++  (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X))
++  : τ (IsContr (@CokernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) X e))
++≔ @is_contr_recenter (@CokernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) X e)
++    (@ind_eq (@Σ_ (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q)) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P))) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (@cokernel_presentation_selected_object C S W d) (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d)))
++      (@cokernel_record_frame_path C S t T W P d)
++      (λ frame : τ (@Σ_ (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q)),
++        IsContr (@CokernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++          (@terminal_arrow_test_outgoing C d) (sigma_Fst frame) (sigma_Snd frame) X e))
++      (@computational_cokernel_factor_contr C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++        (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d) X e))
++    (@cokernel_record_factor C S t T W P d X e);
++
++symbol cokernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d))
++      (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) (@terminal_arrow_test_outgoing C d))
++      (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)))
++≔ @initial_arrow_test_chain_path C S t T (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) d
++    (@tapp0_fapp0 _ _ _ _ d
++      (@unit_adj_transf (Functor_cat WalkingArrow_cat C) C
++        (@cokernel_presentation_func C S t T W P) (@initial_arrow_diagram_func C t T)
++        (@cokernel_presentation_adjunction C S t T W P)));
++
++symbol cokernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@ComputationalCokernel C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d))
++≔ @computational_cokernel_intro C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d)
++    (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P))
++    (@cokernel_record_annihilation C S t T W P d)
++    (@cokernel_record_universal C S t T W P d);
+diff --git a/emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp b/emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp
+@@ -0,0 +1,48 @@
++/* Boundary factor from an ACTUAL whole unit formula, not a chosen raw lift. */
++require open emdash.tmp.probes.kernel_whole_record_construction_20260909;
++
++symbol kernel_semantic_boundary [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
++  (h : τ (@Transf WalkingArrow_cat C
++    (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
++  : τ (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))
++≔ @fapp0 (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom_cat C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)) (@adjunction_transpose_semantic_func C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P) X d) h;
++
++symbol kernel_semantic_boundary_reconstruction [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
++  (h : τ (@Transf WalkingArrow_cat C
++    (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
++  : τ (@= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@comp_fapp0 C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) (@kernel_semantic_boundary C S t T W P X d h))
++      (@terminal_arrow_test_incoming C t T X d h))
++≔ @eq_trans (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) _ _ _
++    (@eq_sym _ _ _
++      (@eq_ap (Functor (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom_cat C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))) (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++        (λ L : τ (Functor (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom_cat C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))),
++          @comp_fapp0 C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) (@fapp0 (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom_cat C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)) L h))
++        (@kernel_presentation_lift_func C S t T W P X d) (@adjunction_transpose_semantic_func C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P) X d)
++        (@adjunction_transpose_semantic_path C (Functor_cat WalkingArrow_cat C)
++          (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
++          (@kernel_presentation_adjunction C S t T W P) X d)))
++    (@eq_sym _ _ _ (@kernel_presentation_unlift_source_semantic_path C S t T W P X d
++      (@fapp0 (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom_cat C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)) (@kernel_presentation_lift_func C S t T W P X d) h)));
++
++symbol kernel_semantic_boundary_factor [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
++  (h : τ (@Transf WalkingArrow_cat C
++    (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
++  : τ (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++      (@terminal_arrow_test_outgoing C d) (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) X
++      (@terminal_arrow_kernel_test C S t T X d h))
++≔ @Struct_sigma (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d))
++    (λ f : τ (Hom C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)), @= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
++      (@comp_fapp0 C X (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)) f)
++      (@terminal_arrow_test_incoming C t T X d h))
++    (@kernel_semantic_boundary C S t T W P X d h)
++    (@kernel_semantic_boundary_reconstruction C S t T W P X d h);
+diff --git a/emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp b/emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp
+@@ -0,0 +1,17 @@
++require open emdash.tmp.probes.cokernel_whole_record_construction_20260909;
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) ⊢ @computational_cokernel_object C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_record C S t T W P d) ≡ (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d);
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) ⊢ @computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_record C S t T W P d) ≡ (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P));
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C)) (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X)) ⊢
++  @computational_cokernel_colift C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_record C S t T W P d) X e
++  ≡ @computational_cokernel_colift C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d) X e;
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C)) (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X)) ⊢
++  @computational_cokernel_colift_path C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_record C S t T W P d) X e
++  ≡ @cokernel_record_colift_reconstruction C S t T W P d X e;
+diff --git a/emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp b/emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp
+@@ -0,0 +1,54 @@
++require open emdash.emdash3_2_cokernel_adjunction_mates;
++
++// Object and projection are the actual whole Q/unit observations.
++symbol cokernel_record_frame_path [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  : τ (@= (@Σ_ (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q)) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P))) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (@cokernel_presentation_selected_object C S W d) (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d))))
++≔ @eq_refl (@Σ_ (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q)) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)));
++
++symbol cokernel_record_colift [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X))
++  : τ (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X)
++≔ @fapp0 _ _ (@cokernel_presentation_colift_func C S t T W P d X)
++    (@fapp0 _ _ (@adjunction_transpose_func (Functor_cat WalkingArrow_cat C) C
++      (@cokernel_presentation_func C S t T W P) (@initial_arrow_diagram_func C t T)
++      (@cokernel_presentation_adjunction C S t T W P) d X) (@computational_cokernel_colift C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d) X e));
++
++// Compare the complete composable-arrow data, not the final runtime arrow.
++symbol cokernel_record_composition_frame_path [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C)) (f : τ (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X))
++  : τ (@= (@Σ_ (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X))) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X)) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@Product_pair_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)) (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) f)) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X)) (@cokernel_presentation_selected_object C S W d) (@Product_pair_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@cokernel_presentation_selected_object C S W d)) (Hom C (@cokernel_presentation_selected_object C S W d) X) (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d)) f)))
++≔ @eq_refl (@Σ_ (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X))) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X)) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@Product_pair_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)) (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) f));
++
++symbol cokernel_record_composition_path [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C)) (f : τ (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X))
++  : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X)
++      (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X f (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)))
++      (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@cokernel_presentation_selected_object C S W d) X f (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d))))
++≔ @eq_ap (@Σ_ (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X))) (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X)
++    (λ frame : τ (@Σ_ (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X))), @comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (sigma_Fst frame) X
++      (sigma_Snd (sigma_Snd frame)) (sigma_Fst (sigma_Snd frame)))
++    (@Struct_sigma (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X)) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@Product_pair_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)) (Hom C (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) f)) (@Struct_sigma (Obj C) (λ Q : τ (Obj C), @Product_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Q) (Hom C Q X)) (@cokernel_presentation_selected_object C S W d) (@Product_pair_grpd (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@cokernel_presentation_selected_object C S W d)) (Hom C (@cokernel_presentation_selected_object C S W d) X) (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d)) f))
++    (@cokernel_record_composition_frame_path C S t T W P d X f);
++
++symbol cokernel_record_colift_reconstruction [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]
++  (P : τ (@CokernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C))
++  (X : τ (Obj C))
++  (e : τ (@CokernelCoannihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X))
++  : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X)
++      (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) X
++        (@cokernel_record_colift C S t T W P d X e) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)))
++      (@cokernel_coannihilator_arrow C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X e))
++≔ @eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X) _ _ _
++    (@cokernel_record_composition_path C S t T W P d X (@cokernel_record_colift C S t T W P d X e))
++    (@computational_cokernel_colift_path C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
++      (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d) X e);
+diff --git a/emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp b/emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp
+@@ -0,0 +1,23 @@
++require open emdash.tmp.probes.kernel_whole_record_construction_20260909;
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) ⊢
++  @computational_kernel_object C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@kernel_presentation_record C S t T W P d)
++  ≡ @fapp0 _ _ (@kernel_presentation_func C S t T W P) d;
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) ⊢
++  @computational_kernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@kernel_presentation_record C S t T W P d)
++  ≡ @tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P);
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X)) ⊢
++  @computational_kernel_lift C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@kernel_presentation_record C S t T W P d) X e
++  ≡ @kernel_presentation_test_lift C S W X d e;
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) (X : τ (Obj C))
++  (e : τ (@WeakKernelAnnihilator C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) X)) ⊢
++  @computational_kernel_lift_path C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@kernel_presentation_record C S t T W P d) X e
++  ≡ @kernel_record_lift_reconstruction C S t T W P d X e;
+diff --git a/emdash2/tmp/probes/homology_record_family_20260909.lp b/emdash2/tmp/probes/homology_record_family_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_record_family_20260909.lp
+@@ -0,0 +1,64 @@
++/* All operational fields are the whole family's own observations. */
++require open emdash.tmp.probes.homology_record_boundary_data_20260909;
++require open emdash.tmp.probes.kernel_semantic_boundary_factor_20260909;
++require open emdash.tmp.probes.cokernel_whole_record_construction_20260909;
++require open emdash.emdash3_2_homology_families;
++
++symbol homology_record_family_pair [B C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
++  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
++    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
++  (b : τ (Obj B))
++  : τ (@ComputationalChainPair C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt))
++≔ @computational_chain_pair_intro C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt)
++    (@terminal_arrow_test_incoming C t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h)) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++    (@terminal_arrow_test_chain_path C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h));
++
++symbol homology_record_family_at [B C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
++  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
++    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
++  (b : τ (Obj B))
++  : τ (@HomologyRecord C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt)
++      (@homology_record_family_pair B C S t T T0 W V P Q A D h b))
++≔ @Struct_sigma (@ComputationalKernel C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)))
++    (λ cycles : τ (@ComputationalKernel C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))),
++      @Σ_ (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@computational_kernel_object C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) cycles)
++        (@computational_kernel_morphism C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) cycles) (@fapp0 B C A b) (@terminal_arrow_kernel_test C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h)))
++      (λ boundary : τ (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@computational_kernel_object C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) cycles)
++        (@computational_kernel_morphism C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) cycles) (@fapp0 B C A b) (@terminal_arrow_kernel_test C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))),
++        @ComputationalCokernel C S (@fapp0 B C A b)
++          (@computational_kernel_object C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) cycles) (sigma_Fst boundary)))
++    (@kernel_presentation_record C S t T W P (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++    (@Struct_sigma
++      (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@fapp0 _ _ (@kernel_presentation_func C S t T W P) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@tapp0_fapp0 _ _ _ _ (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@kernel_presentation_inclusion C S t T W P)) (@fapp0 B C A b) (@terminal_arrow_kernel_test C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h)))
++      (λ boundary : τ (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@fapp0 _ _ (@kernel_presentation_func C S t T W P) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
++        (@tapp0_fapp0 _ _ _ _ (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@kernel_presentation_inclusion C S t T W P)) (@fapp0 B C A b) (@terminal_arrow_kernel_test C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))),
++        @ComputationalCokernel C S (@fapp0 B C A b)
++          (@fapp0 _ _ (@kernel_presentation_func C S t T W P) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) (sigma_Fst boundary))
++      (@kernel_semantic_boundary_factor C S t T W P (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))
++      (@cokernel_presentation_record C S t T0 V Q
++        (@fapp0 B (Functor_cat WalkingArrow_cat C)
++          (@kernel_family_boundary_diagram_func B C S t T W P A D h) b)));
++
++assert [B C : Cat] [S : τ (@PreadditiveCategory C)]
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
++  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
++    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
++  (b : τ (Obj B)) ⊢
++  sigma_Fst (sigma_Snd (sigma_Snd (@homology_record_family_at B C S t T T0 W V P Q A D h b)))
++  ≡ @fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) b;
+diff --git a/emdash2/tmp/probes/homology_mixed_mate_cut_20260909.lp b/emdash2/tmp/probes/homology_mixed_mate_cut_20260909.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_mixed_mate_cut_20260909.lp
+@@ -0,0 +1,26 @@
++/* Mixed semantic/stable mate cancellation, then actual whole-H raw entry. */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++
++assert [R L : Cat] [F : τ (Functor R L)] [G : τ (Functor L R)]
++  (J : τ (@Adjunction R L F G)) (X : τ (Obj R)) (Y : τ (Obj L))
++  (k : τ (Hom R X (@fapp0 L R G Y))) ⊢
++  @comp_fapp0 R X (@fapp0 L R G (@fapp0 R L F X)) (@fapp0 L R G Y)
++    (@fapp1_fapp0 L R G (@fapp0 R L F X) Y
++      (@fapp0 _ _ (@adjunction_untranspose_func R L F G J X Y) k))
++    (@tapp0_fapp0 R R (@id_func R) (@comp_cat_fapp0 R L R G F) X (@unit_adj_transf R L F G J))
++  ≡ k;
++
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D)) ⊢
++  @tapp0_fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T)
++    (@kernel_family_func (@ZeroArrowCone_cat C t T) C S t T W P (@zero_arrow_cone_diagram_func C t T))
++    (@chain_pair_zero_cone C S t T W P A B D pair)
++    (@kernel_family_boundary_transf (@ZeroArrowCone_cat C t T) C S t T W P
++      (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
++      (@zero_arrow_cone_universal_transf C C1 t T))
++  ≡ @chain_pair_selected_boundary C S W A B D pair;

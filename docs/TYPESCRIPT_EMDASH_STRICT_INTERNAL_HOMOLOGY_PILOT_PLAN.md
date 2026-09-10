@@ -2966,3 +2966,127 @@ original short exact rows and arbitrary nonsplit inputs; do not replace them
 by a restricted canonical-row problem. Whole-family naturality, generic
 window exactness, bounded assembly and the concrete retained-result consumer
 remain subsequent obligations of the same goal.
+
+### Row Adapter Qualification And First Cover
+
+The row-universal source candidates are now active, with the generic
+source-isomorphism proof extracted once and the older kernel-domain wrapper
+delegating to it. Their seven active source/reviewer probes pass in
+`logs/probes/row-universals-active-checks.log`. Six nearby reviewers also pass
+in `/tmp/emdash-row-universals.99PwTn`: kernel-domain factors, kernel maps,
+cokernel maps, short-exact comparisons/sequences and homology maps. The
+three row reviewers have eight positive checks and four runtime boundaries;
+the latter do not deny the proved isomorphisms or uniqueness paths.
+
+Fresh source-only control/candidate inventories are identical at 1,244
+critical pairs and 169 replaceable-pattern reports, including every location,
+term head and rule-family count, with no parser issues. Logs are
+`row-universals-baseline-warnings.log` and
+`row-universals-candidate-warnings.log` under `logs/probes/`. No primitive,
+rewrite or unifier is added. All four source LHS audits and the focused
+registry/catalog/TOC checks pass. This tranche is adapter/reference work,
+not a new primary definition of categorical universality.
+
+The isolated `homology_direct_connecting_cover.lp` prototype constructs the
+existing selected pullback of a row epimorphism along the retained cycle
+inclusion. Both projections, epicity and the reconstruction path check.
+Its `homology_direct_connecting_cover_whole.lp` consumer checks the projection
+and epicity at the literal K[d] endpoint supplied by an actual whole-H
+record (`homology_direct_connecting_cover_whole-20260909-212605.log`). Both
+prototypes are preserved under `tmp/probes/`; neither is a completed delta.
+
+An additional reviewer confirms that `HomologyRecord`'s type ignores the
+chosen chain-zero proof once both arrows are fixed. This follows by existing
+definition reduction, with no new proof-irrelevance rule. It permits reusing
+the same retained record at another derivation of the same zero condition;
+it does not equate independently recomputed H-values. The original example
+and isolated probe both pass.
+
+### Categorical Universality Is Primary: Reviewed Continuation
+
+The user's latest design review correctly distinguishes the primary
+categorical universal structure from the groupoidal record facade. The
+adjunction already supplies `Adjunction_hom_prof_comparison`, and
+`adjunction_hom_component_iso` is an actual `DefIso Cat_cat` between whole
+Hom categories. The two mate functors retain higher action and have whole
+and point cancellation. They are not mere functions between sets of arrows.
+For the chosen zero-arrow embeddings, this directly gives the categorical
+kernel/cokernel interfaces:
+
+```text
+Hom_Arr(C)(J₀X,d) ≅ Hom_C(X,Kd)
+Hom_C(Qd,X)       ≅ Hom_Arr(C)(d,I₀X).
+```
+
+The old `ComputationalKernel` condition instead uses contractible `HFiber`
+spaces of arrows and equality paths. The recent whole-owned record proof
+reuses the old W-selected contractibility and fixes its operational fields
+to whole K/Q observations. This is a valid compatibility construction, not
+additional universality required by the already supplied adjunction.
+Allowing that old API to determine every new connecting proof would obscure
+the intended categorical architecture. Even the classifier of adjunction
+evidence is groupoidal; the important distinction is what universal
+condition it controls, not merely whether its data are packaged in a record.
+
+For the next experiment, use the actual Hom/diagram categories and whole
+mate functors directly. Start with the existing cover and qualify the
+needed diagram morphism into the row differential, then apply the kernel
+mate with its existing computational cuts. Identify a missing whole diagram
+constructor, action or projection join if one occurs. Do not infer that a
+new contractibility proof is intrinsic merely because an older helper
+expects an annihilator record. Keep W/V as selected-realization bindings
+while this consumer is qualified; prematurely removing those bindings is
+not required.
+
+Retain the checked row and homology records as ordinary/path-level adapters
+and regression/reference evidence. Where an ordinary consumer truly needs
+fibre contractibility, derive it from the categorical comparison after
+checking its test-representation adapter, rather than making it a second
+primary universal capability. Constructing that adapter without relying on
+an already selected raw lift is a concrete remaining check, not an assumed
+equivalence of all raw and directed test notions.
+
+Do not mechanically replace equality by directed Hom, or IsContr by a
+terminal-object assertion: this changes which comparison cells are allowed.
+Use the existing native internal-Hom/comma mechanism with the appropriate
+strict/lax/invertible boundary. The ordinary Freyd OneCat realization remains
+a qualified special case, not a general erasure of directed higher cells.
+Also, H itself is a composite built from K and Q; no separate adjunction
+for H has been declared. The connecting morphism, its naturality, window
+exactness, bounded assembly and book work still require construction.
+
+Conceptual references checked in this review are Riehl–Verity,
+[The 2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
+(comma objects and categorical lifting universal properties), and
+[Homotopy coherent adjunctions and the formal theory of monads](https://arxiv.org/abs/1310.8279)
+(categorical adjunction structure versus contractible spaces of coherent
+extensions). These guide the distinction; their (infinity,1)-categorical
+results do not automatically qualify emdash's directed omega implementation.
+
+### Sequencing Decision: Finish The Reference Window First
+
+The user proposed finishing the current fibre-adapter reference development
+to a settled feasibility milestone before attempting a broad categorical-
+universality migration. This is the recommended continuation and supersedes
+any reading of the preceding review as a demand to migrate the repository
+before constructing delta. Whole K/Q/H remain the mathematical interface;
+the checked records can implement the reference proofs without becoming the
+final definition of directed universality.
+
+The comparison milestone is one complete homology window, including delta
+at actual H endpoints, its adjacent-zero and three interior exactness
+statements, and the retained nonsplit proof–CAS consumer. The parent goal's
+bounded assembly and book requirements remain; a window alone is not full
+goal completion. Small categorical improvements may be used when they
+directly help a current consumer. The larger owner audit and any broad
+migration are consumer-gated in
+[the dedicated audit plan](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_AUDIT_PLAN.md).
+
+Temporary implementation states are now durably preserved as
+[non-executable source patches](../emdash2/audits/homology-universality-2026-09-09/README.md),
+not merely temporary-directory pointers. All six patches apply against their
+pinned Git baselines. Isolated index/object-store recovery reproduced all
+65 embedded source/driver versions with matching SHA-256 hashes; the earlier
+saved diff is byte-identical as well. Failed alternatives remain labelled
+as failures, not positive library checks. No active worktree, repository
+index or repository object store was changed by that recovery verification.

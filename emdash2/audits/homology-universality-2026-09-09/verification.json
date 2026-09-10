@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-09",
+  "method": "git apply in isolated temporary indexes/object directory; original repository index, worktree and object store not modified by recovery verification",
+  "artifacts": [
+    {
+      "artifact": "mixed-mate-last-stage.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 21
+    },
+    {
+      "artifact": "two-field-record-stage.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 8
+    },
+    {
+      "artifact": "actual-boundary-alias-stage.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 19
+    },
+    {
+      "artifact": "pre-record-probes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 10
+    },
+    {
+      "artifact": "current-reference-probes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 7
+    },
+    {
+      "artifact": "earlier-mixed-candidate.diff",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 0
+    }
+  ],
+  "source_versions_sha256_verified": 65,
+  "earlier_saved_diff_byte_identical": true,
+  "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
+}

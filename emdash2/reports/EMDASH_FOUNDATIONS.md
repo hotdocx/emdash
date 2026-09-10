@@ -4358,6 +4358,21 @@ kernel/lift/cokernel recipe also constructs this record with exactly its old
 selected values. Older canonical wrappers remain during consumer migration;
 there is no new homology functor or second diagram grammar.
 
+The record type depends on the incoming/outgoing arrows, not on which
+chain-zero proof formed their pair. Thus a retained record can be used with
+another derivation of that same zero relation by conversion alone. This
+does not equate independently recomputed H-values: it keeps the original
+kernel, actual boundary and quotient record unchanged.
+
+Short exact rows now also furnish their own universal records. For
+A→i B→p D, the derived kernel of p has object A and inclusion i, and the
+derived cokernel of i has object D and projection p. Actual inverse
+comparison arrows construct their lifts/colifts. Monicity or epicity makes
+each inhabited factor fibre contractible, using the existing set-valued Hom
+carriers; its centre is exactly the constructed factor. This reuses the
+original row instead of identifying its objects with independently selected
+kernel/cokernel objects by an equality cast.
+
 These records provide the intended endpoints for redeveloping the connecting
 operation. Reconstruction and uniqueness paths remain useful universal-law
 evidence, but the operational endpoints and arrows do not arise from those

@@ -6,6 +6,18 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Categorical-universality review (2026-09-09): the existing whole adjunction
+Hom-prof comparison is the primary universal interface. The pilot's
+[reviewed continuation](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#categorical-universality-is-primary-reviewed-continuation)
+separates it from the arrow/path-level universal records used by older
+proofs and concrete selected realizations. Following the user's later
+sequencing proposal, finish the reference homology window and retained
+proof–CAS consumer before any broad migration. Keep whole K/Q/H as the
+mathematical interface and permit the checked fibre adapters underneath.
+The [broader audit](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_AUDIT_PLAN.md)
+records alternatives and their gates; it does not block or replace this
+goal's remaining exactness, bounded assembly and book obligations.
+
 Whole-H connecting refinement (2026-09-09): the user requests that the
 connecting construction itself be developed in the whole K/Q/H setting,
 alongside derived universal records whose operational endpoints are literally

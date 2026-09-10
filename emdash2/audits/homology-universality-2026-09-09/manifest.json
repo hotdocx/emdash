@@ -1,0 +1,449 @@
+{
+  "date": "2026-09-09",
+  "role": "non-executable research source artifacts; not library validation",
+  "artifacts": [
+    {
+      "artifact": "mixed-mate-last-stage.patch",
+      "base_commit": "21099f5121d7cecff464f1b34cb51b659c159d32",
+      "note": "Last mixed-mate/endpoint-alignment experiment; superseded and not a validated final architecture.",
+      "entries": [
+        {
+          "path": "emdash2/composition_endpoint_alignment.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/composition_endpoint_alignment.lp",
+          "kind": "new",
+          "sha256": "069245c86d66d34e6181712f78697dfb92a375b4f3fe4a2733d80b823f1484cd"
+        },
+        {
+          "path": "emdash2/emdash3_2_adjunction_mates.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/emdash3_2_adjunction_mates.lp",
+          "kind": "changed",
+          "sha256": "edb1b76d2f24b8ebb5f727e7732a70c321363f85631ccbeef41b176df513530f"
+        },
+        {
+          "path": "emdash2/emdash3_2_chain_pair_homology_views.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/emdash3_2_chain_pair_homology_views.lp",
+          "kind": "new",
+          "sha256": "2841e5346e2fdd66431a9be19979b082b0ae2afd466dfb4fa2eb0c5ec677648b"
+        },
+        {
+          "path": "emdash2/emdash3_2_chain_pair_zero_cones.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/emdash3_2_chain_pair_zero_cones.lp",
+          "kind": "changed",
+          "sha256": "bd0dd2882eabdba5a5e9403a229a289f7347f5e553e9ce18c41076a89784d9fd"
+        },
+        {
+          "path": "emdash2/emdash3_2_kernel_adjunction_presentations.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/emdash3_2_kernel_adjunction_presentations.lp",
+          "kind": "changed",
+          "sha256": "e57a0aeb025c5504da7cde9c8f304cdd3ba1c1239eccd3265c1e10f210dee4cd"
+        },
+        {
+          "path": "emdash2/emdash3_2_whole_homology_connecting.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/emdash3_2_whole_homology_connecting.lp",
+          "kind": "new",
+          "sha256": "fa8023eddb9ab6af2543387fa10fcc69264f9a7bfd722b78a92ac50232981264"
+        },
+        {
+          "path": "emdash2/mixed_mate_context.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/mixed_mate_context.lp",
+          "kind": "new",
+          "sha256": "75e9bb0a139e92f029f6de18987a21016aeb53ff9b0a31f93306a12b928b467a"
+        },
+        {
+          "path": "emdash2/mixed_mate_cut.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/mixed_mate_cut.lp",
+          "kind": "new",
+          "sha256": "26ca3fecb02b82430c0cf37a87615897634dc67766d2d224b51218807c11b58b"
+        },
+        {
+          "path": "emdash2/mixed_mate_wrong_unit.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/mixed_mate_wrong_unit.lp",
+          "kind": "new",
+          "sha256": "60dae768ecb09893be45a44426c0b05c6d4cbe2ac2b663296e06393834a01b08"
+        },
+        {
+          "path": "emdash2/whole_h_bound_endpoint.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_bound_endpoint.lp",
+          "kind": "new",
+          "sha256": "4fce16767b4dea944ba19b09f4892a595272bef727b5f89ddb3c86640c043230"
+        },
+        {
+          "path": "emdash2/whole_h_boundary_coordinates.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_boundary_coordinates.lp",
+          "kind": "new",
+          "sha256": "08888af5f878d139ec3414cf0e6d1206e7b9e36bc19da106daad55ac984c6ca1"
+        },
+        {
+          "path": "emdash2/whole_h_direct_endpoint.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_direct_endpoint.lp",
+          "kind": "new",
+          "sha256": "d49b867a7ddfce6a01fac02480aab99c5c39d78aa2d378c85f9549ef09e46171"
+        },
+        {
+          "path": "emdash2/whole_h_endpoint_consumer.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_endpoint_consumer.lp",
+          "kind": "new",
+          "sha256": "fdd51188c0a4925dd0656516a25476728d923cf245e9f5f3998de285939d43bf"
+        },
+        {
+          "path": "emdash2/whole_h_endpoint_eq.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_endpoint_eq.lp",
+          "kind": "new",
+          "sha256": "38765015cce709d2e6187ca68375f322b65c8f84e118eef6e3a9d589585bead4"
+        },
+        {
+          "path": "emdash2/whole_h_endpoint_input.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_endpoint_input.lp",
+          "kind": "new",
+          "sha256": "30d3b0a22516fb870abe062933c39afd322f1a73c2076a945d58f1da7e93f59d"
+        },
+        {
+          "path": "emdash2/whole_h_endpoint_normal_forms.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_endpoint_normal_forms.lp",
+          "kind": "new",
+          "sha256": "dd3aa978efb2bd5859909ce804105f4e5e27d0b9c951050b05db2eec631d9b1f"
+        },
+        {
+          "path": "emdash2/whole_h_endpoint_via_view.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_endpoint_via_view.lp",
+          "kind": "new",
+          "sha256": "f04915daa71234df934896e8c38b1eb4b48fe65e6ec447424d4168d2102da2c1"
+        },
+        {
+          "path": "emdash2/whole_h_generic_input.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_generic_input.lp",
+          "kind": "new",
+          "sha256": "4dfc500a71f637f182688999e4522b44e8c92396e19cf96b8846ce0b9c562e55"
+        },
+        {
+          "path": "emdash2/whole_h_neutral_endpoint.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_neutral_endpoint.lp",
+          "kind": "new",
+          "sha256": "9e764041184e8e9655afc3e0b9bb3cb373d8a91fd41b95db5040b4caf150e531"
+        },
+        {
+          "path": "emdash2/whole_h_rigid_endpoint.lp",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/whole_h_rigid_endpoint.lp",
+          "kind": "new",
+          "sha256": "d8d8710a06e7237acd8ea390fc3b8089f6458f160b7000fe46721d021de43f0d"
+        },
+        {
+          "path": "emdash2/scripts/check_whole_homology_connecting_probe.sh",
+          "origin": "/tmp/emdash-homology-mate-cut.RS0dtQ/scripts/check_whole_homology_connecting_probe.sh",
+          "kind": "new-driver",
+          "sha256": "96a562496f02cbe44b6f904b1322af665b7139a9945097b35b977899fab8170b"
+        }
+      ],
+      "sha256": "cf7bb740481551ab2dddc5d136cc26670e1686dfd07c505022b7b6f07e100111"
+    },
+    {
+      "artifact": "two-field-record-stage.patch",
+      "base_commit": "21099f5121d7cecff464f1b34cb51b659c159d32",
+      "note": "Earlier two-field whole-owned homology record requiring the mixed-mate cut.",
+      "entries": [
+        {
+          "path": "emdash2/emdash3_2_adjunction_mates.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/emdash3_2_adjunction_mates.lp",
+          "kind": "changed",
+          "sha256": "0842ff0f4340a17e212c0f811cadce6e02cce70a8ed37b68c6ec84ad365efc14"
+        },
+        {
+          "path": "emdash2/whole_homology_record.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/whole_homology_record.lp",
+          "kind": "new",
+          "sha256": "9759ee75db17c55bcb2a2432479aa9b36c76d447a0f42a1a539ec457093fa01b"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/kernel_whole_record_projections_20260909.lp",
+          "kind": "new",
+          "sha256": "fa2bb9077677509ac8659c663b4af6b4a22b562ddf6277eb6f3479e87c47f525"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "bb9be880e0e50c27995432703b587838a937ef90f5f9277589dbba882ee34f47"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/cokernel_whole_record_projections_20260909.lp",
+          "kind": "new",
+          "sha256": "ee3c3b484d9fdcbc3043546cb8f21f55d92b52b809eef59ea0fb7b3a69e1793b"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "f6bac2d5d854896557e584cb17e214bc63cae553a56a4ab81be0cd7ee000471f"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "cd4b2d2ebbcd2b897b6d1370f091404426b3686395b573e8d011f88025126a7c"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "origin": "/tmp/emdash-whole-records.yWtfif/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "79d2cfc7791c78065a49264870e94ab19e3a4bd4159041cae2dbed4abd26ea2d"
+        }
+      ],
+      "sha256": "0c218cdcfe38cd3b61a4b03bac898f0d3c9e2ea70a081bed3300032c8fa3478d"
+    },
+    {
+      "artifact": "actual-boundary-alias-stage.patch",
+      "base_commit": "21099f5121d7cecff464f1b34cb51b659c159d32",
+      "note": "Three-field record with immediate legacy alias migration; also includes isolated failed second-comparison diagnostics.",
+      "entries": [
+        {
+          "path": "emdash2/emdash3_2_cokernel_adjunction_records.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/emdash3_2_cokernel_adjunction_records.lp",
+          "kind": "new",
+          "sha256": "c3e14eb8f8c9499caff7c7badf97882bd3801287b2c12e601f303885d3d2f6cf"
+        },
+        {
+          "path": "emdash2/emdash3_2_computational_homology.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/emdash3_2_computational_homology.lp",
+          "kind": "changed",
+          "sha256": "21337a2621d520923d4ae4d8b9f2829eec4b5d56ee9eae85b53cfadfa8f8e12e"
+        },
+        {
+          "path": "emdash2/emdash3_2_kernel_adjunction_records.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/emdash3_2_kernel_adjunction_records.lp",
+          "kind": "new",
+          "sha256": "c47a45c848b5a4c0bc73b2089b712e207e63c88dad34decf9c490ac0ae10f6af"
+        },
+        {
+          "path": "emdash2/emdash3_2_snake_row_source_second_comparison.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/emdash3_2_snake_row_source_second_comparison.lp",
+          "kind": "changed",
+          "sha256": "6375307cf5ea6f93ed0bb344288a2e448db2e4c2292dc312f15a90900c34e71b"
+        },
+        {
+          "path": "emdash2/row_second_congruence.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_congruence.lp",
+          "kind": "new",
+          "sha256": "68482ce1b494d2c3f09fdc7edcf9fea62b7c9ba2b566e1815c92faa36d9626aa"
+        },
+        {
+          "path": "emdash2/row_second_debug.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_debug.lp",
+          "kind": "new",
+          "sha256": "0016809405abf174264ec37f7d4bcb0c6dbfa0022ee90cf9a5e069d00bc5b270"
+        },
+        {
+          "path": "emdash2/row_second_explicit_endpoints.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_explicit_endpoints.lp",
+          "kind": "new",
+          "sha256": "0bdfc4597445958ef979cec1e827047c13cd7baeb5739b26732cb071b4edc340"
+        },
+        {
+          "path": "emdash2/row_second_step5.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_step5.lp",
+          "kind": "new",
+          "sha256": "3732522b5c103c3a739a72905e251fb1328b774356afa7e7e3afa257bc5e14f5"
+        },
+        {
+          "path": "emdash2/row_second_step6.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_step6.lp",
+          "kind": "new",
+          "sha256": "97e715d58c654b6ed0415d0f2c41fdf7e150c7609a40916df6d923b37720d788"
+        },
+        {
+          "path": "emdash2/row_second_steps_print.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_steps_print.lp",
+          "kind": "new",
+          "sha256": "3582cc08ab4bd4554f0af8903553a371a2823bce4239e9878541f9d80e492411"
+        },
+        {
+          "path": "emdash2/row_second_type_only.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/row_second_type_only.lp",
+          "kind": "new",
+          "sha256": "8cad23c88f5a7a7e1907ad9da907c52e7668e0fe2a8068263b13b5780ecc5e66"
+        },
+        {
+          "path": "emdash2/whole_homology_raw_record.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/whole_homology_raw_record.lp",
+          "kind": "new",
+          "sha256": "8ca140aaacdb6124cb6ab6ba9b7ba68b44cd500b772ab385ed3916ab087752cf"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "f6bac2d5d854896557e584cb17e214bc63cae553a56a4ab81be0cd7ee000471f"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "cd4b2d2ebbcd2b897b6d1370f091404426b3686395b573e8d011f88025126a7c"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "79d2cfc7791c78065a49264870e94ab19e3a4bd4159041cae2dbed4abd26ea2d"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_boundary_data_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/homology_record_boundary_data_20260909.lp",
+          "kind": "new",
+          "sha256": "4e1585b1341c48c31227e7602f0b9e8c3982fefd80181f46f58f96232b7b233f"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/kernel_semantic_boundary_factor_20260909.lp",
+          "kind": "new",
+          "sha256": "d44b93b51745f87a436159fbfb5404e2ed9dfb8f3ea9e75ab0c2a06627eab556"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "bb9be880e0e50c27995432703b587838a937ef90f5f9277589dbba882ee34f47"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_family_20260909.lp",
+          "origin": "/tmp/emdash-record-boundaries.m7DFe7/tmp/probes/homology_record_family_20260909.lp",
+          "kind": "new",
+          "sha256": "c62bea433ea388f0b832786eddcb6f56a6f7ea9059f8212be332ad5e349b54bf"
+        }
+      ],
+      "sha256": "536d95414bd11043a4621e5e9e13a47ef4521ddef023cd01b35d15721c9f8261"
+    },
+    {
+      "artifact": "pre-record-probes.patch",
+      "base_commit": "21099f5121d7cecff464f1b34cb51b659c159d32",
+      "note": "Original whole-owned record and boundary-family probes, kept as isolated sources.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_record_boundary_data_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_boundary_data_20260909.lp",
+          "kind": "new",
+          "sha256": "e6870b7a506b12b30f5e2005c505ac5b27fc20de867499e960ac1efd2790df74"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/kernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "cd4b2d2ebbcd2b897b6d1370f091404426b3686395b573e8d011f88025126a7c"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/kernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "f6bac2d5d854896557e584cb17e214bc63cae553a56a4ab81be0cd7ee000471f"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/cokernel_whole_record_construction_20260909.lp",
+          "kind": "new",
+          "sha256": "79d2cfc7791c78065a49264870e94ab19e3a4bd4159041cae2dbed4abd26ea2d"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/kernel_semantic_boundary_factor_20260909.lp",
+          "kind": "new",
+          "sha256": "d44b93b51745f87a436159fbfb5404e2ed9dfb8f3ea9e75ab0c2a06627eab556"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/cokernel_whole_record_projections_20260909.lp",
+          "kind": "new",
+          "sha256": "ee3c3b484d9fdcbc3043546cb8f21f55d92b52b809eef59ea0fb7b3a69e1793b"
+        },
+        {
+          "path": "emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/cokernel_whole_record_foundation_20260909.lp",
+          "kind": "new",
+          "sha256": "bb9be880e0e50c27995432703b587838a937ef90f5f9277589dbba882ee34f47"
+        },
+        {
+          "path": "emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/kernel_whole_record_projections_20260909.lp",
+          "kind": "new",
+          "sha256": "fa2bb9077677509ac8659c663b4af6b4a22b562ddf6277eb6f3479e87c47f525"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_family_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_family_20260909.lp",
+          "kind": "new",
+          "sha256": "c62bea433ea388f0b832786eddcb6f56a6f7ea9059f8212be332ad5e349b54bf"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_mixed_mate_cut_20260909.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_mixed_mate_cut_20260909.lp",
+          "kind": "new",
+          "sha256": "26ca3fecb02b82430c0cf37a87615897634dc67766d2d224b51218807c11b58b"
+        }
+      ],
+      "sha256": "cd56354c97776d0fe1b0d9f0e34be30509e2deca9b7ae756f16ea288b222dec9"
+    },
+    {
+      "artifact": "current-reference-probes.patch",
+      "base_commit": "2605f42e29dbac1da1703f4678b264d51e824257",
+      "note": "Direct row universals, current pullback cover and whole-H consumer, plus record zero-proof boundary.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover.lp",
+          "kind": "new",
+          "sha256": "e442c8ce62063f35dd782812502e9214cb7bb35fd29fbcac9366a663ab21e69f"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_row_factor_contractibility.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_row_factor_contractibility.lp",
+          "kind": "new",
+          "sha256": "abf3ed4d3514458a87901503d972c6112a470a849d551fa88b6f0b373970e88f"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_short_exact_kernel_record.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_short_exact_kernel_record.lp",
+          "kind": "new",
+          "sha256": "07fbd825191486435eeaf81d38496c925757f2ee24b412c76bcea0a5b4701715"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_iso_source_reconstruction.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_iso_source_reconstruction.lp",
+          "kind": "new",
+          "sha256": "7ce7567a261bcdcdfd9e8d2c3192a253f0c268cc6a75d8a3419f63d4be401692"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover_whole.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover_whole.lp",
+          "kind": "new",
+          "sha256": "643e12cd6052f9addaac84362791ebf797a9bd581fc511d03fbfaa7077eb6141"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_short_exact_cokernel_record.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_short_exact_cokernel_record.lp",
+          "kind": "new",
+          "sha256": "7207e8ec3e5ab699550cb85fb7fa6fdd7e4010066dd23a08dd6659782ea6ebf4"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_zero_proof_boundary.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_zero_proof_boundary.lp",
+          "kind": "new",
+          "sha256": "9f7050e071362d9c9f106f1fa84feee364da594f4b858da8903ef9aab9956e0b"
+        }
+      ],
+      "sha256": "4fd8746b2af9df7e955171c28cb0747b4b7b863f812652c681b3581ab1ce2878"
+    },
+    {
+      "artifact": "earlier-mixed-candidate.diff",
+      "base_commit": "21099f5121d7cecff464f1b34cb51b659c159d32",
+      "note": "Earlier saved broad-alignment candidate; distinct from the last mixed stage. Not promoted.",
+      "entries": [
+        {
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/whole_homology_connecting_candidate.patch",
+          "sha256": "a0245b5912392bb5d3cd23b0104c454c02131c61b4ce1701743f7ea45a52e0c9",
+          "kind": "saved-diff"
+        }
+      ],
+      "sha256": "a0245b5912392bb5d3cd23b0104c454c02131c61b4ce1701743f7ea45a52e0c9"
+    }
+  ]
+}

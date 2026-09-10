@@ -1324,6 +1324,19 @@ belongs to the owning implementation plan rather than to standing guidance.
   negatives. No primitive, rewrite, unifier or alternative H-functor is added.
   This is the record layer for the whole-H connecting redevelopment, not an
   already constructed connecting transformation or generic exactness theorem.
+- `emdash3_2_hom_factor_universality.lp` derives contractible factor fibres
+  from a constructed factor and mono/epi cancellation in the existing
+  set-valued Hom carriers. Its kernel/cokernel constructors retain those
+  supplied factors as computational centres. The generic source-isomorphism
+  reconstruction now lives in `emdash3_2_iso_comparison_reconstruction.lp`;
+  the old kernel-domain wrapper delegates with its original signature.
+  `emdash3_2_short_exact_universal_records.lp` then derives a kernel record
+  for p with object A/inclusion i and a cokernel record for i with object
+  D/projection p, from an arbitrary original short exact row A→B→D.
+  Their lifts/colifts use actual comparison inverses and the selected
+  universals. Neither the row objects nor factor syntax is runtime-collapsed
+  to an independent selection. These are rule-free row constructions for
+  direct connecting work, not a postulated connecting arrow or a splitting.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

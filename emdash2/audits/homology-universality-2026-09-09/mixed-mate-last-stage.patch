@@ -1,0 +1,583 @@
+diff --git a/emdash2/composition_endpoint_alignment.lp b/emdash2/composition_endpoint_alignment.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/composition_endpoint_alignment.lp
+@@ -0,0 +1,16 @@
++/* Same-factor endpoint alignment must not identify unrelated factorizations. */
++require open emdash.emdash3_2;
++assert [C : Cat] [a b c d : τ (Obj C)]
++  (f : τ (Hom C a b)) (g : τ (Hom C b c)) (h : τ (Hom C c d)) ⊢
++  eq_refl (@comp_fapp0 C a c d h (@comp_fapp0 C a b c g f))
++  : τ (@= (Hom C a d)
++      (@comp_fapp0 C a c d h (@comp_fapp0 C a b c g f))
++      (@comp_fapp0 C a b d (@comp_fapp0 C b c d h g) f));
++assertnot [C : Cat] [a b c : τ (Obj C)]
++  (f : τ (Hom C a b)) (g h : τ (Hom C b c)) ⊢
++  eq_refl (@comp_fapp0 C a b c g f)
++  : τ (@= (Hom C a c) (@comp_fapp0 C a b c g f) (@comp_fapp0 C a b c h f));
++assertnot [C : Cat] [a b c : τ (Obj C)]
++  (f k : τ (Hom C a b)) (g : τ (Hom C b c)) ⊢
++  eq_refl (@comp_fapp0 C a b c g f)
++  : τ (@= (Hom C a c) (@comp_fapp0 C a b c g f) (@comp_fapp0 C a b c g k));
+diff --git a/emdash2/emdash3_2_adjunction_mates.lp b/emdash2/emdash3_2_adjunction_mates.lp
+index 86b08c0d..ec31f83f 100644
+--- a/emdash2/emdash3_2_adjunction_mates.lp
++++ b/emdash2/emdash3_2_adjunction_mates.lp
+@@ -95,6 +95,15 @@ rule @fapp0 _ _ (@tapp0_fapp0 _ _ _ _ $ab
+           (@Adjunction_hom_prof_comparison $R $L $F $G $J))) $k)
+   ↪ $k;
+ 
++// Mixed cut: semantic forward mate after the stable inverse mate.
++// Inferred endpoints are not guards; J and its X/Y component discriminate.
++rule @comp_fapp0 _ _ _ _
++    (@fapp1_fapp0 _ _ $G _ $Y
++      (@fapp0 _ _ (@tapp0_fapp0 _ _ _ _ (Struct_sigma $X $Y)
++        (@defiso_from _ _ _ (@Adjunction_hom_prof_comparison $R $L $F $G $J))) $k))
++    (@tapp0_fapp0 _ _ _ _ $X (@unit_adj_transf $R $L $F $G $J))
++  ↪ $k;
++
+ // Capture the actual common category; do not reconstruct its Hom endpoints.
+ rule @comp_fapp0 Cat_cat $Source _ $Source (@tapp0_fapp0 _ _ _ _ $ab
+         (@defiso_from _ _ _
+diff --git a/emdash2/emdash3_2_chain_pair_homology_views.lp b/emdash2/emdash3_2_chain_pair_homology_views.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/emdash3_2_chain_pair_homology_views.lp
+@@ -0,0 +1,43 @@
++/* Selected and whole views share one original kernel/cokernel selection. */
++require open emdash.emdash3_2_chain_pair_zero_cones;
++require open emdash.emdash3_2_zero_arrow_cone_homology;
++
++symbol chain_pair_selected_homology_object [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Obj C)
++≔ @computational_cokernel_object C S A
++    (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair)))
++    (@chain_pair_selected_boundary C S W A B D pair)
++    (V A (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair)))
++      (@chain_pair_selected_boundary C S W A B D pair));
++
++symbol chain_pair_whole_homology_object [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Obj C)
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q)
++    (@chain_pair_zero_cone C S t T W P A B D pair);
++
++// An identity implementation, not transport along an object-equality path.
++symbol chain_pair_whole_homology_arrow [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  [A0 B0 D0 A1 B1 D1 : τ (Obj C)]
++  (p0 : τ (@ComputationalChainPair C S A0 B0 D0))
++  (p1 : τ (@ComputationalChainPair C S A1 B1 D1))
++  (f : τ (Hom C
++    (@chain_pair_selected_homology_object C S W V A0 B0 D0 p0)
++    (@chain_pair_selected_homology_object C S W V A1 B1 D1 p1)))
++  : τ (Hom C
++    (@chain_pair_whole_homology_object C S C1 t T T0 W V P Q A0 B0 D0 p0)
++    (@chain_pair_whole_homology_object C S C1 t T T0 W V P Q A1 B1 D1 p1))
++≔ f;
+diff --git a/emdash2/emdash3_2_chain_pair_zero_cones.lp b/emdash2/emdash3_2_chain_pair_zero_cones.lp
+index 178f8748..6cc0b07a 100644
+--- a/emdash2/emdash3_2_chain_pair_zero_cones.lp
++++ b/emdash2/emdash3_2_chain_pair_zero_cones.lp
+@@ -13,8 +13,12 @@ symbol chain_pair_outgoing_diagram [C : Cat] [S : τ (@PreadditiveCategory C)]
+ symbol chain_pair_selected_boundary [C : Cat] [S : τ (@PreadditiveCategory C)]
+   (W : τ (@HasComputationalKernels C S)) [A B D : τ (Obj C)]
+   (pair : τ (@ComputationalChainPair C S A B D))
+-  : τ (Hom C A (@kernel_presentation_selected_object C S W (@chain_pair_outgoing_diagram C S A B D pair)))
+-≔ @kernel_presentation_test_lift C S W A (@chain_pair_outgoing_diagram C S A B D pair)
++  : τ (Hom C A (@computational_kernel_object C S B D
++      (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair))))
++≔ @computational_kernel_lift C S B D
++    (@computational_chain_pair_d C S A B D pair)
++    (W B D (@computational_chain_pair_d C S A B D pair)) A
+     (@computational_chain_pair_cone C S A B D pair);
+ 
+ symbol chain_pair_zero_cone [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+diff --git a/emdash2/emdash3_2_kernel_adjunction_presentations.lp b/emdash2/emdash3_2_kernel_adjunction_presentations.lp
+index 80a0d703..184468f5 100644
+--- a/emdash2/emdash3_2_kernel_adjunction_presentations.lp
++++ b/emdash2/emdash3_2_kernel_adjunction_presentations.lp
+@@ -106,6 +106,26 @@ symbol kernel_presentation_object_path [C : Cat] [S : τ (@PreadditiveCategory C
+       (@kernel_presentation_selected_object C S W d))
+ ≔ @eq_refl (Obj C) (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d);
+ 
++// Same-factor composition usability at a kernel endpoint. The endpoint is
++// deliberately the discriminator after the morphism observations reduce.
++// lhs-audit: keep 1 -- the source kernel-functor point selects this comparison.
++unif_rule @comp_fapp0 $C0 $x0 $y0 $z0 $g $f
++  ≡ @comp_fapp0 $C1
++      (@fapp0 _ _ (@kernel_presentation_func $C $S $t $T $W $P) $d)
++      $y1 $z1 $g $f
++  ↪ [ $C0 ≡ $C; $C1 ≡ $C; $y0 ≡ $y1; $z0 ≡ $z1;
++      $x0 ≡ (@fapp0 (Functor_cat WalkingArrow_cat $C) $C
++        (@kernel_presentation_func $C $S $t $T $W $P) $d) ];
++
++// lhs-audit: keep 2 -- the middle kernel-functor point selects this comparison.
++unif_rule @comp_fapp0 $C0 $x0 $y0 $z0 $g $f
++  ≡ @comp_fapp0 $C1 $x1
++      (@fapp0 _ _ (@kernel_presentation_func $C $S $t $T $W $P) $d)
++      $z1 $g $f
++  ↪ [ $C0 ≡ $C; $C1 ≡ $C; $x0 ≡ $x1; $z0 ≡ $z1;
++      $y0 ≡ (@fapp0 (Functor_cat WalkingArrow_cat $C) $C
++        (@kernel_presentation_func $C $S $t $T $W $P) $d) ];
++
+ // Actual strict naturality of eta supplies the existing precomposition
+ // factor, so no separate square/reconstruction input is added.
+ symbol kernel_presentation_map_semantic [C : Cat] [S : τ (@PreadditiveCategory C)]
+diff --git a/emdash2/emdash3_2_whole_homology_connecting.lp b/emdash2/emdash3_2_whole_homology_connecting.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/emdash3_2_whole_homology_connecting.lp
+@@ -0,0 +1,34 @@
++/* The original connecting construction at the actual whole-H endpoints. */
++require open emdash.emdash3_2_homology_connecting;
++require open emdash.emdash3_2_chain_pair_homology_views;
++
++symbol short_exact_whole_homology_connecting
++  [C : Cat] [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t))
++  (M : τ (@HasLiftsAlongMonomorphisms C (@additive_preadditive C P t (@preabelian_additive C P t PA)) (@preabelian_cokernels C P t PA)))
++  (E : τ (@HasColiftsAlongEpimorphisms C (@additive_preadditive C P t (@preabelian_additive C P t PA)) (@preabelian_kernels C P t PA)))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  [A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3 : τ (Obj C)]
++  (r0 : τ (@ComputationalShortExactRow C P t PA A0 B0 D0))
++  (r1 : τ (@ComputationalShortExactRow C P t PA A1 B1 D1))
++  (r2 : τ (@ComputationalShortExactRow C P t PA A2 B2 D2))
++  (r3 : τ (@ComputationalShortExactRow C P t PA A3 B3 D3))
++  (F : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t PA A0 B0 D0 r0) (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1)))
++  (G : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2)))
++  (J : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A2 B2 D2 A3 B3 D3 (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) (@computational_short_exact_row_pair C P t PA A3 B3 D3 r3)))
++  (upper_zero : τ (@= (Hom C B0 B2) (@comp_fapp0 C B0 B1 B2 (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) G) (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t PA A0 B0 D0 r0) (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) F))
++    (@preadditive_hom_zero C (@additive_preadditive C P t (@preabelian_additive C P t PA)) B0 B2)))
++  (lower_zero : τ (@= (Hom C B1 B3) (@comp_fapp0 C B1 B2 B3 (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A2 B2 D2 A3 B3 D3 (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) (@computational_short_exact_row_pair C P t PA A3 B3 D3 r3) J) (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) G)) (@preadditive_hom_zero C (@additive_preadditive C P t (@preabelian_additive C P t PA)) B1 B3)))
++  : τ (Hom C
++      (@chain_pair_whole_homology_object C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP D0 D1 D2 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero))
++      (@chain_pair_whole_homology_object C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP A1 A2 A3 (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)))
++≔ @chain_pair_whole_homology_arrow C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP
++    D0 D1 D2 A1 A2 A3 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero) (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)
++    (@short_exact_homology_connecting C P t PA M E
++      A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3
++      r0 r1 r2 r3 F G J upper_zero lower_zero
++      (@computational_homology_at C P t PA D0 D1 D2 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero))
++      (@computational_homology_at C P t PA A1 A2 A3 (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)));
+diff --git a/emdash2/mixed_mate_context.lp b/emdash2/mixed_mate_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/mixed_mate_context.lp
+@@ -0,0 +1,11 @@
++require open emdash.emdash3_2_adjunction_mates;
++assert [R L : Cat] [F : τ (Functor R L)] [G : τ (Functor L R)]
++  (J : τ (@Adjunction R L F G)) (X Z : τ (Obj R)) (Y : τ (Obj L))
++  (k : τ (Hom R X (@fapp0 L R G Y)))
++  (q : τ (Hom R (@fapp0 L R G Y) Z)) ⊢
++  @comp_fapp0 R X (@fapp0 L R G Y) Z q
++    (@comp_fapp0 R X (@fapp0 L R G (@fapp0 R L F X)) (@fapp0 L R G Y)
++      (@fapp1_fapp0 L R G (@fapp0 R L F X) Y
++        (@fapp0 _ _ (@adjunction_untranspose_func R L F G J X Y) k))
++      (@tapp0_fapp0 R R (@id_func R) (@comp_cat_fapp0 R L R G F) X (@unit_adj_transf R L F G J)))
++  ≡ @comp_fapp0 R X (@fapp0 L R G Y) Z q k;
+diff --git a/emdash2/mixed_mate_cut.lp b/emdash2/mixed_mate_cut.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/mixed_mate_cut.lp
+@@ -0,0 +1,26 @@
++/* Mixed semantic/stable mate cancellation, then actual whole-H raw entry. */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++
++assert [R L : Cat] [F : τ (Functor R L)] [G : τ (Functor L R)]
++  (J : τ (@Adjunction R L F G)) (X : τ (Obj R)) (Y : τ (Obj L))
++  (k : τ (Hom R X (@fapp0 L R G Y))) ⊢
++  @comp_fapp0 R X (@fapp0 L R G (@fapp0 R L F X)) (@fapp0 L R G Y)
++    (@fapp1_fapp0 L R G (@fapp0 R L F X) Y
++      (@fapp0 _ _ (@adjunction_untranspose_func R L F G J X Y) k))
++    (@tapp0_fapp0 R R (@id_func R) (@comp_cat_fapp0 R L R G F) X (@unit_adj_transf R L F G J))
++  ≡ k;
++
++assert [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [W : τ (@HasComputationalKernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D)) ⊢
++  @tapp0_fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T)
++    (@kernel_family_func (@ZeroArrowCone_cat C t T) C S t T W P (@zero_arrow_cone_diagram_func C t T))
++    (@chain_pair_zero_cone C S t T W P A B D pair)
++    (@kernel_family_boundary_transf (@ZeroArrowCone_cat C t T) C S t T W P
++      (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
++      (@zero_arrow_cone_universal_transf C C1 t T))
++  ≡ @chain_pair_selected_boundary C S W A B D pair;
+diff --git a/emdash2/mixed_mate_wrong_unit.lp b/emdash2/mixed_mate_wrong_unit.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/mixed_mate_wrong_unit.lp
+@@ -0,0 +1,14 @@
++require open emdash.emdash3_2_adjunction_mates;
++assertnot [R L : Cat] [F : τ (Functor R L)] [G : τ (Functor L R)]
++  (J J2 : τ (@Adjunction R L F G)) (X : τ (Obj R)) (Y : τ (Obj L))
++  (k : τ (Hom R X (@fapp0 L R G Y))) ⊢
++  eq_refl
++    (@comp_fapp0 R X (@fapp0 L R G (@fapp0 R L F X)) (@fapp0 L R G Y)
++      (@fapp1_fapp0 L R G (@fapp0 R L F X) Y
++        (@fapp0 _ _ (@adjunction_untranspose_func R L F G J X Y) k))
++      (@tapp0_fapp0 R R (@id_func R) (@comp_cat_fapp0 R L R G F) X (@unit_adj_transf R L F G J2)))
++  : τ (@= (Hom R X (@fapp0 L R G Y))
++    (@comp_fapp0 R X (@fapp0 L R G (@fapp0 R L F X)) (@fapp0 L R G Y)
++      (@fapp1_fapp0 L R G (@fapp0 R L F X) Y
++        (@fapp0 _ _ (@adjunction_untranspose_func R L F G J X Y) k))
++      (@tapp0_fapp0 R R (@id_func R) (@comp_cat_fapp0 R L R G F) X (@unit_adj_transf R L F G J2))) k);
+diff --git a/emdash2/whole_h_bound_endpoint.lp b/emdash2/whole_h_bound_endpoint.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_bound_endpoint.lp
+@@ -0,0 +1,12 @@
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++flag "print_implicits" off;
++
++symbol whole_h_bound_endpoint_path [C : Cat] [S : τ (@PreadditiveCategory C)] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (@= (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) (@chain_pair_zero_cone C S t T W P A B D pair)) (@computational_cokernel_object C S A (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++  (W B D (@computational_chain_pair_d C S A B D pair))) (@chain_pair_selected_boundary C S W A B D pair) (V A (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++  (W B D (@computational_chain_pair_d C S A B D pair))) (@chain_pair_selected_boundary C S W A B D pair))))
++≔ @eq_refl (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) (@chain_pair_zero_cone C S t T W P A B D pair));
+diff --git a/emdash2/whole_h_boundary_coordinates.lp b/emdash2/whole_h_boundary_coordinates.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_boundary_coordinates.lp
+@@ -0,0 +1,11 @@
++require open emdash.whole_h_generic_input;
++symbol bd : τ (Functor WalkingArrow_cat C)
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@kernel_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T W KP
++      (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
++      (@zero_arrow_cone_universal_transf C C1 t T)) native;
++assert ⊢ @fapp0 WalkingArrow_cat C bd walking_arrow_src ≡ A;
++assert ⊢ @fapp0 WalkingArrow_cat C bd walking_arrow_tgt
++  ≡ @fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W KP)
++    (@chain_pair_outgoing_diagram C S A B D pair);
++assert ⊢ @fapp1_fapp0 WalkingArrow_cat C bd walking_arrow_src walking_arrow_tgt walking_arrow_generator ≡ beta;
+diff --git a/emdash2/whole_h_direct_endpoint.lp b/emdash2/whole_h_direct_endpoint.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_direct_endpoint.lp
+@@ -0,0 +1,31 @@
++/* Can a selected operation be consumed at the whole-H endpoint without transport? */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++
++symbol C : Cat;
++symbol Prod : τ (Functor (Product_cat C C) C);
++symbol t : τ (Obj C);
++symbol PA : τ (@PreAbelianCategory C Prod t);
++symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++symbol S : τ (@PreadditiveCategory C) ≔ @computational_homology_preadditive C Prod t PA;
++symbol T : τ (@TerminalObject C t) ≔ @additive_terminal_object C Prod t (@preabelian_additive C Prod t PA);
++symbol T0 : τ (@TerminalObject (Op_cat C) t);
++symbol W : τ (@HasComputationalKernels C S) ≔ @preabelian_kernels C Prod t PA;
++symbol V : τ (@HasComputationalCokernels C S) ≔ @preabelian_cokernels C Prod t PA;
++symbol KP : τ (@KernelPresentation C S t T W);
++symbol QP : τ (@CokernelPresentation C S t T0 V);
++symbol A : τ (Obj C);
++symbol B : τ (Obj C);
++symbol D : τ (Obj C);
++symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol native : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C S t T W KP A B D pair;
++symbol whole : τ (Obj C)
++≔ @fapp0 _ _ (@zero_arrow_cone_homology_func C S C1 t T T0 W V KP QP) native;
++symbol selected : τ (@ComputationalHomologyAt C Prod t PA A B D pair)
++≔ @computational_homology_at C Prod t PA A B D pair;
++symbol old : τ (Obj C)
++≔ @computational_homology_object C Prod t PA A B D pair selected;
++
++symbol endpoint_agreement : τ (@= (Obj C) whole old)
++≔ @eq_refl (Obj C) whole;
++symbol direct_consumer (f : τ (Hom C old old)) : τ (Hom C whole whole) ≔ f;
+diff --git a/emdash2/whole_h_endpoint_consumer.lp b/emdash2/whole_h_endpoint_consumer.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_endpoint_consumer.lp
+@@ -0,0 +1,2 @@
++require open emdash.whole_h_endpoint_input;
++symbol direct_consumer (f : τ (Hom C old old)) : τ (Hom C whole whole) ≔ f;
+diff --git a/emdash2/whole_h_endpoint_eq.lp b/emdash2/whole_h_endpoint_eq.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_endpoint_eq.lp
+@@ -0,0 +1,3 @@
++require open emdash.whole_h_endpoint_input;
++symbol endpoint_agreement : τ (@= (Obj C) whole old)
++≔ @eq_refl (Obj C) whole;
+diff --git a/emdash2/whole_h_endpoint_input.lp b/emdash2/whole_h_endpoint_input.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_endpoint_input.lp
+@@ -0,0 +1,27 @@
++/* Can a selected operation be consumed at the whole-H endpoint without transport? */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++
++symbol C : Cat;
++symbol Prod : τ (Functor (Product_cat C C) C);
++symbol t : τ (Obj C);
++symbol PA : τ (@PreAbelianCategory C Prod t);
++symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++symbol S : τ (@PreadditiveCategory C) ≔ @computational_homology_preadditive C Prod t PA;
++symbol T : τ (@TerminalObject C t) ≔ @additive_terminal_object C Prod t (@preabelian_additive C Prod t PA);
++symbol T0 : τ (@TerminalObject (Op_cat C) t);
++symbol W : τ (@HasComputationalKernels C S) ≔ @preabelian_kernels C Prod t PA;
++symbol V : τ (@HasComputationalCokernels C S) ≔ @preabelian_cokernels C Prod t PA;
++symbol KP : τ (@KernelPresentation C S t T W);
++symbol QP : τ (@CokernelPresentation C S t T0 V);
++symbol A : τ (Obj C);
++symbol B : τ (Obj C);
++symbol D : τ (Obj C);
++symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol native : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C S t T W KP A B D pair;
++symbol whole : τ (Obj C)
++≔ @fapp0 _ _ (@zero_arrow_cone_homology_func C S C1 t T T0 W V KP QP) native;
++symbol selected : τ (@ComputationalHomologyAt C Prod t PA A B D pair)
++≔ @computational_homology_at C Prod t PA A B D pair;
++symbol old : τ (Obj C)
++≔ @computational_homology_object C Prod t PA A B D pair selected;
+diff --git a/emdash2/whole_h_endpoint_normal_forms.lp b/emdash2/whole_h_endpoint_normal_forms.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_endpoint_normal_forms.lp
+@@ -0,0 +1,3 @@
++require open emdash.whole_h_endpoint_input;
++compute whole;
++compute old;
+diff --git a/emdash2/whole_h_endpoint_via_view.lp b/emdash2/whole_h_endpoint_via_view.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_endpoint_via_view.lp
+@@ -0,0 +1,7 @@
++require open emdash.whole_h_endpoint_input;
++require open emdash.emdash3_2_chain_pair_homology_views;
++
++// Reuse the generically checked transparent identity view at projected PA data.
++symbol direct_consumer (f : τ (Hom C old old)) : τ (Hom C whole whole)
++≔ @chain_pair_whole_homology_arrow C S C1 t T T0 W V KP QP
++    A B D A B D pair pair f;
+diff --git a/emdash2/whole_h_generic_input.lp b/emdash2/whole_h_generic_input.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_generic_input.lp
+@@ -0,0 +1,23 @@
++/* Neutral selected capabilities: no pre-Abelian projection expansion. */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++symbol C : Cat;
++symbol S : τ (@PreadditiveCategory C);
++symbol t : τ (Obj C);
++symbol T : τ (@TerminalObject C t);
++symbol T0 : τ (@TerminalObject (Op_cat C) t);
++symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++symbol W : τ (@HasComputationalKernels C S);
++symbol V : τ (@HasComputationalCokernels C S);
++symbol KP : τ (@KernelPresentation C S t T W);
++symbol QP : τ (@CokernelPresentation C S t T0 V);
++symbol A : τ (Obj C);
++symbol B : τ (Obj C);
++symbol D : τ (Obj C);
++symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol native : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C S t T W KP A B D pair;
++symbol whole : τ (Obj C)
++≔ @fapp0 _ _ (@zero_arrow_cone_homology_func C S C1 t T T0 W V KP QP) native;
++symbol K : τ (Obj C) ≔ @computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) (W B D (@computational_chain_pair_d C S A B D pair));
++symbol beta : τ (Hom C A K) ≔ @chain_pair_selected_boundary C S W A B D pair;
++symbol old : τ (Obj C) ≔ @computational_cokernel_object C S A K beta (V A K beta);
+diff --git a/emdash2/whole_h_neutral_endpoint.lp b/emdash2/whole_h_neutral_endpoint.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_neutral_endpoint.lp
+@@ -0,0 +1,24 @@
++/* Neutral selected capabilities: no pre-Abelian projection expansion. */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++symbol C : Cat;
++symbol S : τ (@PreadditiveCategory C);
++symbol t : τ (Obj C);
++symbol T : τ (@TerminalObject C t);
++symbol T0 : τ (@TerminalObject (Op_cat C) t);
++symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++symbol W : τ (@HasComputationalKernels C S);
++symbol V : τ (@HasComputationalCokernels C S);
++symbol KP : τ (@KernelPresentation C S t T W);
++symbol QP : τ (@CokernelPresentation C S t T0 V);
++symbol A : τ (Obj C);
++symbol B : τ (Obj C);
++symbol D : τ (Obj C);
++symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol native : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C S t T W KP A B D pair;
++symbol whole : τ (Obj C)
++≔ @fapp0 _ _ (@zero_arrow_cone_homology_func C S C1 t T T0 W V KP QP) native;
++symbol K : τ (Obj C) ≔ @computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) (W B D (@computational_chain_pair_d C S A B D pair));
++symbol beta : τ (Hom C A K) ≔ @chain_pair_selected_boundary C S W A B D pair;
++symbol old : τ (Obj C) ≔ @computational_cokernel_object C S A K beta (V A K beta);
++symbol endpoint_agreement : τ (@= (Obj C) whole old) ≔ @eq_refl (Obj C) whole;
+diff --git a/emdash2/whole_h_rigid_endpoint.lp b/emdash2/whole_h_rigid_endpoint.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/whole_h_rigid_endpoint.lp
+@@ -0,0 +1,24 @@
++/* Neutral selected capabilities: no pre-Abelian projection expansion. */
++require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
++symbol C : Cat;
++symbol S : τ (@PreadditiveCategory C);
++symbol t : τ (Obj C);
++symbol T : τ (@TerminalObject C t);
++symbol T0 : τ (@TerminalObject (Op_cat C) t);
++symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++constant symbol W : τ (@HasComputationalKernels C S);
++constant symbol V : τ (@HasComputationalCokernels C S);
++symbol KP : τ (@KernelPresentation C S t T W);
++symbol QP : τ (@CokernelPresentation C S t T0 V);
++symbol A : τ (Obj C);
++symbol B : τ (Obj C);
++symbol D : τ (Obj C);
++symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol native : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C S t T W KP A B D pair;
++symbol whole : τ (Obj C)
++≔ @fapp0 _ _ (@zero_arrow_cone_homology_func C S C1 t T T0 W V KP QP) native;
++symbol K : τ (Obj C) ≔ @computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair) (W B D (@computational_chain_pair_d C S A B D pair));
++symbol beta : τ (Hom C A K) ≔ @chain_pair_selected_boundary C S W A B D pair;
++symbol old : τ (Obj C) ≔ @computational_cokernel_object C S A K beta (V A K beta);
++symbol endpoint_agreement : τ (@= (Obj C) whole old) ≔ @eq_refl (Obj C) whole;
+diff --git a/emdash2/scripts/check_whole_homology_connecting_probe.sh b/emdash2/scripts/check_whole_homology_connecting_probe.sh
+new file mode 100755
+--- /dev/null
++++ b/emdash2/scripts/check_whole_homology_connecting_probe.sh
+@@ -0,0 +1,112 @@
++#!/usr/bin/env bash
++set -euo pipefail
++cd "$(dirname "$0")/.."
++
++# Keep each source and reviewer independently bounded while sharing only this
++# fresh exact-source dependency tree. No persistent object cache or opaque proof.
++: "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
++: "${EMDASH_LAMBDAPI_WARNINGS:=0}"
++warning_flags=(-w)
++case "$EMDASH_LAMBDAPI_WARNINGS" in
++  1|true|TRUE|yes|YES|on|ON) warning_flags=(); mode=warnings ;;
++  0|false|FALSE|no|NO|off|OFF) mode=quiet ;;
++  *) printf 'invalid warning setting: %s\n' "$EMDASH_LAMBDAPI_WARNINGS" >&2; exit 2 ;;
++esac
++extra_flags=()
++if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
++  read -r -a extra_flags <<< "$EMDASH_LAMBDAPI_FLAGS"
++fi
++
++prerequisites=(
++  emdash3_2_short_exact_row_chain_projection.lp
++  emdash3_2_snake_row_source_cycle_factor.lp
++  emdash3_2_abelian_snake_six_term_kernel_beta_foundation.lp
++  emdash3_2_iso_evidence_monic.lp
++  emdash3_2_hom_factor_epic_descent.lp
++  emdash3_2_snake_row_source_embedding_monic.lp
++  emdash3_2_abelian_snake_second_postcomposition.lp
++  emdash3_2_snake_row_source_upper_factor.lp
++  emdash3_2_snake_row_source_compared_boundary.lp
++  emdash3_2_abelian_snake_six_term_inner_kernel_factor.lp
++  emdash3_2_abelian_snake_connecting.lp
++  emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp
++  emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp
++  emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp
++  emdash3_2_snake_row_source_second_comparison.lp
++  emdash3_2_snake_row_source_boundary_covered.lp
++  emdash3_2_snake_row_source_boundary_zero.lp
++  emdash3_2_short_exact_row_chain_columns.lp
++  emdash3_2_snake_row_target_factors.lp
++  emdash3_2_snake_row_target_cycles.lp
++  emdash3_2_abelian_snake_covered_reconstruction.lp
++  emdash3_2_homology_cokernel_inclusion_monic.lp
++  emdash3_2_normal_mono_epic_factors.lp
++  emdash3_2_hom_factor_comparison_pasting.lp
++  emdash3_2_normal_mono_cycle_factors.lp
++  emdash3_2_cokernel_codomain_comparison_projection.lp
++  emdash3_2_snake_row_target_cokernel_iso.lp
++  emdash3_2_snake_row_target_cokernel_projection.lp
++  emdash3_2_snake_row_target_homology_normal.lp
++  emdash3_2_snake_row_target_homology_factor.lp
++  emdash3_2_cokernel_monic_factor_descent.lp
++)
++owners=(
++  emdash3_2_homology_connecting_factor.lp
++  emdash3_2_homology_connecting.lp
++  emdash3_2_chain_pair_homology_views.lp
++  emdash3_2_whole_homology_connecting.lp
++)
++reviewers=(
++  examples/homology_connecting_factor.lp
++  examples/homology_connecting.lp
++)
++mkdir -p logs/probes
++log_file="$(pwd)/logs/probes/homology-connecting-${mode}-$(date +%Y%m%d-%H%M%S).log"
++stage_root="$(mktemp -d /tmp/emdash-homology-connecting.XXXXXX)"
++cleanup() {
++  case "$stage_root" in
++    /tmp/emdash-homology-connecting.??????) ;;
++    *) printf 'unexpected temporary path: %s\n' "$stage_root" >&2; return 1 ;;
++  esac
++  local file
++  for file in "$stage_root"/*.lp "$stage_root"/*.lpo \
++      "$stage_root"/*.lpi "$stage_root"/*.lpj "$stage_root"/lambdapi.pkg \
++      "$stage_root"/examples/*.lp "$stage_root"/examples/*.lpo \
++      "$stage_root"/examples/*.lpi "$stage_root"/examples/*.lpj; do
++    if [[ -f "$file" || -L "$file" ]]; then unlink -- "$file"; fi
++  done
++  rmdir -- "$stage_root/examples" "$stage_root"
++}
++trap cleanup EXIT
++mkdir -p "$stage_root/examples"
++cp lambdapi.pkg ./*.lp "$stage_root/"
++for file in "${reviewers[@]}"; do cp "$file" "$stage_root/examples/"; done
++
++check_object() {
++  local file="$1" started="$SECONDS" rc elapsed
++  printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
++    "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode"
++  printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
++    "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode" >>"$log_file"
++  set +e
++  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
++    lambdapi check -c --no-colors "${warning_flags[@]}" "${extra_flags[@]}" \
++    "$file" >>"$log_file" 2>&1
++  rc=$?
++  set -e
++  elapsed=$((SECONDS - started))
++  printf 'finished %s: exit %s, elapsed %ss\n' "$file" "$rc" "$elapsed"
++  printf 'finished %s: exit %s, elapsed %ss\n' "$file" "$rc" "$elapsed" >>"$log_file"
++  if [[ "$rc" -ne 0 ]]; then
++    tail -30 "$log_file" >&2
++    printf 'check failed; log: %s\n' "$log_file" >&2
++    return "$rc"
++  fi
++}
++
++printf 'homology-connecting check log: %s\n' "$log_file"
++cd "$stage_root"
++check_object emdash3_2.lp
++for file in "${prerequisites[@]}" "${owners[@]}"; do check_object "$file"; done
++for file in "${reviewers[@]}"; do check_object "$file"; done
++printf 'homology-connecting checks succeeded; log: %s\n' "$log_file"

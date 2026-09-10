@@ -1,0 +1,133 @@
+--- a/emdash2/emdash3_2.lp
++++ b/emdash2/emdash3_2.lp
+@@ -3260,6 +3260,12 @@
+     $f
+   ↪ [ tt ≡ tt ];
+ 
++// Proof-time alignment only when both explicit factors are already the same.
++// No injectivity of composition or change of its runtime normal form is assumed.
++unif_rule @comp_fapp0 $C $a $b $c $g $f
++  ≡ @comp_fapp0 $D $x $y $z $g $f
++  ↪ [ $C ≡ $D; $a ≡ $x; $b ≡ $y; $c ≡ $z ];
++
+ // Propositional associativity witness, implemented by the proof-time equation.
+ symbol comp_assoc
+   [C : Cat]
+--- a/emdash2/emdash3_2_adjunction_mates.lp
++++ b/emdash2/emdash3_2_adjunction_mates.lp
+@@ -95,6 +95,15 @@
+           (@Adjunction_hom_prof_comparison $R $L $F $G $J))) $k)
+   ↪ $k;
+ 
++// Mixed cut: semantic forward mate after the stable inverse mate.
++// Inferred endpoints are not guards; J and its X/Y component discriminate.
++rule @comp_fapp0 _ _ _ _
++    (@fapp1_fapp0 _ _ $G _ $Y
++      (@fapp0 _ _ (@tapp0_fapp0 _ _ _ _ (Struct_sigma $X $Y)
++        (@defiso_from _ _ _ (@Adjunction_hom_prof_comparison $R $L $F $G $J))) $k))
++    (@tapp0_fapp0 _ _ _ _ $X (@unit_adj_transf $R $L $F $G $J))
++  ↪ $k;
++
+ // Capture the actual common category; do not reconstruct its Hom endpoints.
+ rule @comp_fapp0 Cat_cat $Source _ $Source (@tapp0_fapp0 _ _ _ _ $ab
+         (@defiso_from _ _ _
+--- a/emdash2/emdash3_2_chain_pair_zero_cones.lp
++++ b/emdash2/emdash3_2_chain_pair_zero_cones.lp
+@@ -13,8 +13,12 @@
+ symbol chain_pair_selected_boundary [C : Cat] [S : τ (@PreadditiveCategory C)]
+   (W : τ (@HasComputationalKernels C S)) [A B D : τ (Obj C)]
+   (pair : τ (@ComputationalChainPair C S A B D))
+-  : τ (Hom C A (@kernel_presentation_selected_object C S W (@chain_pair_outgoing_diagram C S A B D pair)))
+-≔ @kernel_presentation_test_lift C S W A (@chain_pair_outgoing_diagram C S A B D pair)
++  : τ (Hom C A (@computational_kernel_object C S B D
++      (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair))))
++≔ @computational_kernel_lift C S B D
++    (@computational_chain_pair_d C S A B D pair)
++    (W B D (@computational_chain_pair_d C S A B D pair)) A
+     (@computational_chain_pair_cone C S A B D pair);
+ 
+ symbol chain_pair_zero_cone [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+--- a/emdash2/emdash3_2_chain_pair_homology_views.lp
++++ b/emdash2/emdash3_2_chain_pair_homology_views.lp
+@@ -0,0 +1,43 @@
++/* Selected and whole views share one original kernel/cokernel selection. */
++require open emdash.emdash3_2_chain_pair_zero_cones;
++require open emdash.emdash3_2_zero_arrow_cone_homology;
++
++symbol chain_pair_selected_homology_object [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Obj C)
++≔ @computational_cokernel_object C S A
++    (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair)))
++    (@chain_pair_selected_boundary C S W A B D pair)
++    (V A (@computational_kernel_object C S B D (@computational_chain_pair_d C S A B D pair)
++      (W B D (@computational_chain_pair_d C S A B D pair)))
++      (@chain_pair_selected_boundary C S W A B D pair));
++
++symbol chain_pair_whole_homology_object [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Obj C)
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q)
++    (@chain_pair_zero_cone C S t T W P A B D pair);
++
++// An identity implementation, not transport along an object-equality path.
++symbol chain_pair_whole_homology_arrow [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
++  [A0 B0 D0 A1 B1 D1 : τ (Obj C)]
++  (p0 : τ (@ComputationalChainPair C S A0 B0 D0))
++  (p1 : τ (@ComputationalChainPair C S A1 B1 D1))
++  (f : τ (Hom C
++    (@chain_pair_selected_homology_object C S W V A0 B0 D0 p0)
++    (@chain_pair_selected_homology_object C S W V A1 B1 D1 p1)))
++  : τ (Hom C
++    (@chain_pair_whole_homology_object C S C1 t T T0 W V P Q A0 B0 D0 p0)
++    (@chain_pair_whole_homology_object C S C1 t T T0 W V P Q A1 B1 D1 p1))
++≔ f;
+--- a/emdash2/emdash3_2_whole_homology_connecting.lp
++++ b/emdash2/emdash3_2_whole_homology_connecting.lp
+@@ -0,0 +1,34 @@
++/* The original connecting construction at the actual whole-H endpoints. */
++require open emdash.emdash3_2_homology_connecting;
++require open emdash.emdash3_2_chain_pair_homology_views;
++
++symbol short_exact_whole_homology_connecting
++  [C : Cat] [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t))
++  (M : τ (@HasLiftsAlongMonomorphisms C (@additive_preadditive C P t (@preabelian_additive C P t PA)) (@preabelian_cokernels C P t PA)))
++  (E : τ (@HasColiftsAlongEpimorphisms C (@additive_preadditive C P t (@preabelian_additive C P t PA)) (@preabelian_kernels C P t PA)))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  [A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3 : τ (Obj C)]
++  (r0 : τ (@ComputationalShortExactRow C P t PA A0 B0 D0))
++  (r1 : τ (@ComputationalShortExactRow C P t PA A1 B1 D1))
++  (r2 : τ (@ComputationalShortExactRow C P t PA A2 B2 D2))
++  (r3 : τ (@ComputationalShortExactRow C P t PA A3 B3 D3))
++  (F : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t PA A0 B0 D0 r0) (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1)))
++  (G : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2)))
++  (J : τ (@ComputationalChainPairMap C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A2 B2 D2 A3 B3 D3 (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) (@computational_short_exact_row_pair C P t PA A3 B3 D3 r3)))
++  (upper_zero : τ (@= (Hom C B0 B2) (@comp_fapp0 C B0 B1 B2 (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) G) (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t PA A0 B0 D0 r0) (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) F))
++    (@preadditive_hom_zero C (@additive_preadditive C P t (@preabelian_additive C P t PA)) B0 B2)))
++  (lower_zero : τ (@= (Hom C B1 B3) (@comp_fapp0 C B1 B2 B3 (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A2 B2 D2 A3 B3 D3 (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) (@computational_short_exact_row_pair C P t PA A3 B3 D3 r3) J) (@computational_chain_pair_map_middle C (@additive_preadditive C P t (@preabelian_additive C P t PA)) A1 B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t PA A1 B1 D1 r1) (@computational_short_exact_row_pair C P t PA A2 B2 D2 r2) G)) (@preadditive_hom_zero C (@additive_preadditive C P t (@preabelian_additive C P t PA)) B1 B3)))
++  : τ (Hom C
++      (@chain_pair_whole_homology_object C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP D0 D1 D2 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero))
++      (@chain_pair_whole_homology_object C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP A1 A2 A3 (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)))
++≔ @chain_pair_whole_homology_arrow C (@computational_homology_preadditive C P t PA) C1 t (@additive_terminal_object C P t (@preabelian_additive C P t PA)) T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP
++    D0 D1 D2 A1 A2 A3 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero) (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)
++    (@short_exact_homology_connecting C P t PA M E
++      A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3
++      r0 r1 r2 r3 F G J upper_zero lower_zero
++      (@computational_homology_at C P t PA D0 D1 D2 (@short_exact_row_chain_target_pair C P t PA A0 B0 D0 A1 B1 D1 A2 B2 D2 r0 r1 r2 F G upper_zero))
++      (@computational_homology_at C P t PA A1 A2 A3 (@short_exact_row_chain_source_pair C P t PA A1 B1 D1 A2 B2 D2 A3 B3 D3 r1 r2 r3 G J lower_zero)));

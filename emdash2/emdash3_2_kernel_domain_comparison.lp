@@ -3,6 +3,7 @@
   actual whole kernels. The two internal factor points are derived.
 */
 require open emdash.emdash3_2_kernel_map_isos;
+require open emdash.emdash3_2_iso_comparison_reconstruction;
 
 symbol kernel_domain_comparison_reverse_path
   [C : Cat]
@@ -15,14 +16,7 @@ symbol kernel_domain_comparison_reverse_path
   (iso : τ (@IsoEvidence C A0 A1))
   (comparison : τ (@= (Hom C A0 B) d0 (@comp_fapp0 C A0 A1 B d1 (@iso_evidence_to C A0 A1 iso))))
   : τ (@= (Hom C A1 B) (@comp_fapp0 C A1 A0 B d0 (@iso_evidence_from C A0 A1 iso)) d1)
-≔ (@eq_trans _ _ _ _
-      (@eq_ap (Hom C A0 B) (Hom C A1 B)
-        (λ h : τ (Hom C A0 B), @comp_fapp0 C A1 A0 B h (@iso_evidence_from C A0 A1 iso)) _ _ comparison)
-      (@eq_trans _ _ _ _
-      (@eq_sym _ _ _ (@comp_assoc C A1 A0 A1 B d1 (@iso_evidence_to C A0 A1 iso) (@iso_evidence_from C A0 A1 iso)))
-      (@eq_ap (Hom C A1 A1) (Hom C A1 B)
-        (λ h : τ (Hom C A1 A1), @comp_fapp0 C A1 A1 B d1 h)
-        _ _ (@iso_evidence_right C A0 A1 iso))));
+≔ @iso_source_comparison_reverse_path C A0 A1 B d0 d1 iso comparison;
 
 symbol kernel_domain_comparison_forward_factor
   [C : Cat]

@@ -99,3 +99,12 @@ assert [C : Cat] [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
   @homology_record_object C (@computational_homology_preadditive C P t PA) A B D pair (@homology_record_selected C (@computational_homology_preadditive C P t PA) (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) A B D pair)
   ≡ @computational_homology_object C P t PA A B D pair
       (@computational_homology_at C P t PA A B D pair);
+
+// The record type ignores the chosen chain-zero proof when its two arrows agree.
+
+assert [C : Cat] [S : τ (@PreadditiveCategory C)]
+  [A B D : τ (Obj C)] (incoming : τ (Hom C A B)) (outgoing : τ (Hom C B D))
+  (z1 z2 : τ (@= (Hom C A D) (@comp_fapp0 C A B D outgoing incoming)
+    (@preadditive_hom_zero C S A D))) ⊢
+  @HomologyRecord C S A B D (@computational_chain_pair_intro C S A B D incoming outgoing z1)
+  ≡ @HomologyRecord C S A B D (@computational_chain_pair_intro C S A B D incoming outgoing z2);
