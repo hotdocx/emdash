@@ -1004,6 +1004,54 @@ subject reduction and the 90-second bound remained in force. This is research
 evidence only; promotion still requires final fresh-source checks. No active
 LP source, runtime rule or checker registry has changed in this experiment.
 
+Continuation after `66af5e8e`: the field-indexed ordinary Nat generator now
+source-checks in four seconds in the fresh exact-source gate
+`logs/probes/homology-row-fields-generator-quiet-20260910-145616.log`.
+The state-based span facade also passes the original 14 positive/one negative
+row-span controls, including whole transformation Hom action. The next gate
+checks empty/one/two-window reductions, literal retention of the second exact
+window, and the state-based generator wrapper before any promotion. The
+implementation keeps the original six row/map/zero observations as indices;
+it does not add primitive homology recursion, record eta or object casts.
+
+Proof-field comparison review (2026-09-10): the user suggested comparing
+proof-carrying record constructors through their data while ignoring proven
+irrelevant law fields. Treat this as an exploratory design, not a global
+instruction to collapse every groupoidal path. The current exact-step record
+is a suitable first owner: its z field is an equality in a set-valued Hom,
+and its exact field is the IsEpic cancellation property. The original
+preadditive structure already supplies Hom-set evidence. PA/K/Q selections,
+objects, arrows and explicit computational coefficient witnesses remain data.
+
+The installed Lambdapi unifier decomposes matching constant/injective heads
+before consulting custom unification rules. The small control
+`tmp/probes/record_proof_irrelevance_unif_review.lp` confirms that a proof-
+discarding same-head rule is bypassed for a constant introduction, but works
+for an ordinary stable `symbol` introduction. It also confirms that this is
+proof-time interoperability, not raw runtime convertibility or data erasure.
+
+A full owning-file copy,
+`tmp/probes/computational_exact_arrow_tails_proof_irrelevant.lp`, changes only
+the introduction's constant modifier and adds a unifier retaining every
+data index while ignoring z/exact. Its actual-record reviewer passes three
+positive/two negative controls: typed reflexivity with distinct proof
+payloads, both original proof projections, no runtime collapse, and rejection
+of an incorrectly typed exactness payload. The combined source/reviewer check
+takes 64.17 seconds with normal subject reduction; the LHS audit is clean.
+This is a checked prototype, not a promoted owner or proof that it fixes the
+whole iterator consumer.
+
+Prioritize this local proof-field policy before selecting an additional
+runtime iterator head. Test data/selection noncollapse and missing-evidence
+rejection, then repeat the actual iterator comparisons with typed eq_refl and
+independent runtime arrow/projection controls. Constructors must still require
+checked evidence; comparison erasure must not manufacture it. General paths
+in higher groupoids and chosen computational witnesses are outside this
+irrelevance policy. No active library source has changed in this review.
+The 20 follow-up prototypes and their precise qualification states are
+preserved, with byte-verified recovery, in
+[the proof-field audit](../emdash2/audits/bounded-homology-proof-fields-2026-09-10/README.md).
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather
@@ -1377,7 +1425,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
-| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed successor and candidate input carrier source-check; recursive generator and promotion remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
+| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; generic Nat iterator and state facade source-check; proof-field usability and full consumer qualification remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |

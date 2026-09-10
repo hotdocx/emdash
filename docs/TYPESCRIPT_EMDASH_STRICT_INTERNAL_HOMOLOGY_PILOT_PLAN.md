@@ -4531,3 +4531,13 @@ presentations. A field-indexed successor using the same actual rows/maps and
 window theorem checks in 3.59 seconds; its candidate input carrier also
 source-checks. The full field-indexed generator and its consumers are next.
 No active LP owner or H selection changes at this research checkpoint.
+
+The field-indexed ordinary Nat generator and its state facade now
+source-check; the facade preserves the original 14 positive/one negative
+row-span controls. The two-window value constructs, but its full comparison
+and later projection controls are not yet qualified. The next experiment is
+local proof-field unification at the exact-step introduction, not another H
+or a global equality-proof collapse. Both its generic backend control and
+the concrete record-layout copy pass. The parent plan and
+`emdash2/audits/bounded-homology-proof-fields-2026-09-10/` record the evidence,
+unreached controls and the remaining full-goal obligations.

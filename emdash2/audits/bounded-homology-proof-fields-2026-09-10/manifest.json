@@ -1,0 +1,127 @@
+{
+  "baseline": "66af5e8ed4e06a68160eaa9678d0ccc727bdaeab",
+  "date": "2026-09-10",
+  "artifact": "prototypes.patch",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator.lp",
+      "bytes": 88637,
+      "sha256": "cadbfaea640d8a89653ef3f7c4e01d3ec38b158521c924e55f5522275285f11c",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_spans_field_facade.lp",
+      "bytes": 6985,
+      "sha256": "2f0e2e0dc630df8f78631ad22627fe66b21fd7dad4ca8c5a76428721c53e27bb",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_spans_field_facade_checks.lp",
+      "bytes": 4286,
+      "sha256": "529585925fc3c83f7cdd687b91a24c88656f4cf5a080ac0078ec418ab7e932fa",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_checks.lp",
+      "bytes": 48158,
+      "sha256": "c7ba9c7ee1e371b2d9af320ed47cf1b2c93d24c932834fcd17419eabcd381898",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_facade.lp",
+      "bytes": 1761,
+      "sha256": "05c151407d7a3b5a34e6274010a1a0621ee95f0352381d6b9110572be4950ab9",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_verbose.lp",
+      "bytes": 48169,
+      "sha256": "c4b09b303cf665871d32ac4d5da6b0eb7714138275d1576d85bbf6d3235e310c",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_canonical_checks.lp",
+      "bytes": 62097,
+      "sha256": "8359ed9d088871c80776b78e855449424cd3029ab85fd14b424ab625a3ef6f95",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_init.lp",
+      "bytes": 3397,
+      "sha256": "1f0c84ec6f986444e0c38a024df8166dcbf864a755e64f7e95da912001340442",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_init_checks.lp",
+      "bytes": 750,
+      "sha256": "9c41fdc36ee809794f1db6ef5efb6f5f469eeeed090c5454f185a511ecd56054",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_length_owner.lp",
+      "bytes": 62135,
+      "sha256": "2e017f6b033894d09d4526fdbceb0e2c08145ab8d79d25116205ca2d0326ea88",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_named.lp",
+      "bytes": 44069,
+      "sha256": "2f047e0c09408bad8787205ccde1f546fa157872de5bb506c5800e5b4b96b66f",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_named_facade.lp",
+      "bytes": 1767,
+      "sha256": "84d3d01e2d3e3e4ae25d9bdd37e2b740d0c4f907bdfc7426bc371f9ae92dc424",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_named_checks.lp",
+      "bytes": 62141,
+      "sha256": "bd4526d9ca65adaa9fbab7a24e4e81a04dbeb375feb87fa215a1c883cc36191c",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_arrow_checks.lp",
+      "bytes": 45309,
+      "sha256": "9381337db887f167cf57194eff2760367fa1f949104df574748410cccd691f28",
+      "status": "90-second consumer timeout; later controls not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/record_proof_irrelevance_unif_review.lp",
+      "bytes": 1331,
+      "sha256": "39add24ff42ba4e3d58d50858f89b88b76db9d9d88a0509c8c7315ddf7e3fd9d",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_tails_proof_irrelevant.lp",
+      "bytes": 6078,
+      "sha256": "deae351894243e3bb67a340e04c176ee92274379426b28a616a19312cd06898f",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_exact_arrow_step_proof_irrelevant_checks.lp",
+      "bytes": 2020,
+      "sha256": "168a47974f03e73e3e37b6319b59686074dcf45c54a1e13ba30f50813225db0d",
+      "status": "source-checked; see README for scope"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_fields_generator.sh",
+      "bytes": 3710,
+      "sha256": "dc1cceaa92ea97e7bac382bb9dca3290090300818b468da1876ab2ca867e39a4",
+      "status": "diagnostic-driver"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_fields_consumer.sh",
+      "bytes": 3912,
+      "sha256": "972280910a26ed57f24611b2dcddeeb6c99078b6d6a337e5c0fca3e945ad1e67",
+      "status": "diagnostic-driver"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_field_research.sh",
+      "bytes": 4041,
+      "sha256": "66bab00ffe64331325767d10dcf9d3d7f87fa41dd6e40b3c5deb09066a93e40c",
+      "status": "diagnostic-driver"
+    }
+  ]
+}
