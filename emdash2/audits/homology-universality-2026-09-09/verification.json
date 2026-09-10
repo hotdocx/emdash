@@ -71,9 +71,14 @@
       "artifact": "connecting-characterization-model-prototypes.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 11
+    },
+    {
+      "artifact": "whole-connecting-family-prototypes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 26
     }
   ],
-  "source_versions_sha256_verified": 173,
+  "source_versions_sha256_verified": 199,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

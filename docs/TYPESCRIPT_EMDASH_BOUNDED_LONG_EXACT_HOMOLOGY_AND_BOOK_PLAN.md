@@ -6,6 +6,29 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Declaration-first family prototype (2026-09-10): specialized window
+projections, whole vertical column functors, their composites with the
+original H, and a whole delta with the original component computation now
+pass a fresh bounded source/reviewer check. The
+[prototype qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#declaration-first-family-prototype-qualification)
+records 23 positive/one negative checks, verified recovery of 26 versions,
+and the remaining Hom-action-first projection mismatch. This is a research
+checkpoint, not library promotion or completion of connecting qualification.
+The native connecting interpretation, bounded assembly and book obligations
+remain unchanged.
+
+Declaration-first connecting correction (2026-09-10): following the user's
+explicit clarification, the whole connecting transformation is the primary
+foundational operation. Fix its coherent whole-family endpoints, declare
+the whole operation and connect its projections to the existing component
+data by the usual runtime/proof-time observation policy. A separate
+naturality-square proof followed by a general `make_transf` is not an
+implementation prerequisite. The
+[accepted correction](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#declaration-first-whole-connecting-operation-accepted-correction)
+supersedes that sequencing in the earlier continuation notes. Preserve the
+covered-characterization and row-family probes as implementation data and
+semantic/regression evidence, not as a new gate delaying the whole owner.
+
 Connecting characterization and retained normality (2026-09-10): delta and
 its arbitrary postcomposites are now characterized by the original covered
 formula. The shared epicity proof is also reused by second-interior

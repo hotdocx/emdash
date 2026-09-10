@@ -145,7 +145,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 | `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
 | `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
-| `HINT-CONNECTING-NATURALITY-23` | covered characterization qualified; cover comparison and whole family remain | characterize delta by its epic covered formula, derive comparison of original covers from whole input actions, then qualify a whole connecting transformation |
+| `HINT-CONNECTING-NATURALITY-23` | declaration-first prototype checked at whole-H endpoints; Hom-action-first column comparison and promotion remain | specialized window projections, whole column/H/connecting declarations and computing component; qualify all projection orders before library promotion, without a make_transf/naturality-proof prerequisite |
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 
@@ -3898,3 +3898,182 @@ available to that proof/CAS interface, but supplying/interpreting its
 normality operations and the native connecting result are still required.
 The two family-architecture candidates above remain explicit alternatives,
 not a pretext to assert a whole transformation without its action.
+
+### Whole Row-Family Action: Active Qualification
+
+Qualify the native-family input route next. Retain one actual functor
+I→ZeroArrowCone_cat(C) together with pointwise short-exactness evidence
+for its existing row views. A transformation between two such functors is
+the row-family map; its naturality, not a new square field, must supply
+the compatibility needed by connecting-cover comparison.
+
+Observe the first vertex and the two diagram vertices by their existing
+whole functors. Postcomposition of actual transformations supplies whole
+observed transformations and their next Hom action. The row/property
+package is only an interface around that retained functor, not a new
+diagram category, a replacement H, or an assertion of connecting naturality.
+Probe the object, row-map and nonidentity base-arrow observations before
+building the original-cover comparison. The pointwise functor-category
+Abelian route remains an alternative; this input qualification must not
+silently assume its missing structure or use the deferred variance defects.
+
+### Declaration-First Whole Connecting Operation: Accepted Correction
+
+The user clarified that, for this foundational layer, delta should already
+be declared as a whole transformation and its tapp projections should
+compute or compare with the component data. This is the same declaration-
+and-observation design previously accepted for adjunctions and K/Q. The
+earlier sequence "prove component naturality, then package a transformation"
+was an unnecessarily strong implementation gate and is superseded here.
+No general `make_transf` or construction of an Abelian functor category is
+required before introducing the operational whole interface.
+
+Use coherent whole short-exact-window inputs in the current ordinary/strict
+target profile. Establish the actual whole source and shifted-target
+complex functors, using declaration/projection owners when a transparent
+construction is not already ready. Their homologies remain applications of
+the original whole H, not new selected objects. Declare delta between those
+whole functors, and give its component projection the original direct
+connecting computation. The generic fapp/tapp calculus owns naturality and
+higher action; preserve whole Hom-functor observations and add only measured
+projection/cut instances when existing heads no longer discriminate.
+
+The input still must express a genuine family of short-exact complex
+windows; declaring a transformation for arbitrary unrelated components
+would not be the same mathematical operation. Reuse the existing row and
+chain-zero data as needed, but do not introduce manually supplied
+naturality-square fields. The present row-family/whiskering probes already
+use actual functors and transformations and can supply this input surface.
+
+Runtime observations should reduce to the selected algorithm where that is
+the intended normal form. Proof-time unifiers, followed by typed reflexivity
+agreements where useful, are appropriate where reducing would erase an
+operational discriminator. LHS patterns must use the actual surviving
+primitive heads, with inferred non-discriminating slots wildcarded. Warning
+counts are evidence to classify, not a veto.
+
+The existing covered characterization and any naturality calculations are
+retained as semantic justification, regressions and alternative-construction
+evidence. They are not a required constructor for the declared whole delta.
+Do not impose additional presentation assumptions merely to postpone this
+canonical whole operation when the coherent window data already determines
+it. The full bounded/CAS/book objective and deferred variance repair remain
+unchanged.
+
+### Whole Column Endpoints And Specialized Window Observations
+
+On resumption, distinguish horizontal row families from the vertical
+complexes whose homology occurs in delta. Four short-exact rows in degrees
+n+1, n, n−1 and n−2 vary coherently over I. Successive vertical row maps
+are actual transformations. Observing their entries uses existing functor
+composition and whiskering, not manually supplied naturality squares. The
+two middle-column chain-zero hypotheses are the existing bounded input;
+row monicity/epicity derives the left/right chain conditions.
+
+The source column is C(n+1)→C(n)→C(n−1); the shifted target column is
+A(n)→A(n−1)→A(n−2). They give whole functors Cwin(S), Awin⁻(S) from I
+to the existing native zero-cone category in the ordinary-target profile.
+Their homologies are H∘Cwin(S) and H∘Awin⁻(S), using the original H.
+Applying H to the horizontal exact rows would compute the wrong homology.
+No unbounded complex category or general Abelian functor-category
+construction is needed. Declare delta between these composites and make
+its component observation use the existing direct connecting construction
+at the same selected endpoints. Column objects, base-arrow action and next
+Hom action require qualification; point-only column assignments are not
+sufficient. No object casts, H reselection or proof-first make_transf gate.
+
+The direct and flat nested-Sigma prototypes remain recovery evidence.
+The split typed row/window-data and point-view prototypes pass, including
+the fresh resumption baseline. Their success does not require that encoding
+to remain public. Use specialized window classifiers and constructors with
+typed stable projections and constructor beta rules to avoid repeatedly
+exposing deeply nested dependent fields. Preserve whole row functors/maps
+and original chain conditions. Test every projection beta and reject
+mismatched chain-data inputs; discriminate on actual constructors and
+wildcard inferred non-discriminating slots. Archive the alternatives and
+measure warning/subject-reduction effects before promotion.
+
+### Declaration-First Family Prototype Qualification
+
+The 2026-09-10 continuation is progress: it implements and checks the
+declaration-first family prototype, rather than restating the preceding
+design clarification. The active library baseline remains bd79a86a;
+the new work is preserved as a recoverable research artifact, not promoted
+or described as completion of HINT-CONNECTING-NATURALITY-23.
+
+The retained two-field ShortExactRowFamily alias already has a typed data
+projection and checks quickly. Replacing that small wrapper by primitives
+was unnecessary: both the all-wildcard and shared-variable evidence-beta
+variants timed out at 90 seconds during subject reduction, including the
+warning-enabled retry. Preserve them as failed alternatives. The actual
+specialization is the deeper window: primitive HomologyWindowRows and
+HomologyWindowFamily classifiers, constructors and typed projection heads.
+Seven core observations retain four actual row functors and three actual
+transformations; the outer package retains the two original chain laws.
+Its nine operational field observations and original point views check
+without exposing the former deep Sigma chain. No row map is replaced by
+hand-supplied naturality squares.
+
+The prototype column point functions reuse the original right-step pair
+and shifted left pair, then the existing chain_pair_zero_cone introduction.
+Two whole column functors have those point computations. The whole source
+and target homology functors are transparent compositions with the SAME
+zero_arrow_cone_homology_func. The new whole connecting transformation's
+tapp0 observation reduces to homology_record_connecting instantiated with
+the retained chain_pair_homology_record values. Its type is already the
+literal Hom between these two whole-H observations. No object cast,
+replacement kernel/cokernel choice, opaque bridge, naturality-square input
+or make_transf is used.
+
+Four whole structural observation rules also check: first-vertex and
+outgoing-diagram projection of either column recover the appropriate row
+observations. Their patterns use the real Op_func/Sigma projection heads.
+The outgoing-diagram rule needs one measured target-shape guard because SR
+cannot reconstruct it through the nested Sigma. The surviving guard is
+Functor_cat(Join_cat(Terminal_cat,Terminal_cat),C), NOT Hom_cat(Cat_cat,...):
+the latter passes SR but reduces away before matching, a verified false
+negative. This is an explicit exception to implicit-slot wildcarding,
+documented next to the rule; no reducible readability alias is matched.
+
+The remaining mismatch is precise. Whole projection after column computes,
+but fapp1_func can first expand the composite and remove that pattern.
+The corresponding direct Hom-action equality test fails. Two attempted
+post-expansion joins do not pass normal subject reduction, even after
+an opposite-base guard; they are archived, not installed. This does not
+remove the actual column functors, delta's whole off-diagonal tapp1_func,
+or its typed next Hom action. It does leave the comparison with the raw
+column action unqualified in that reduction order. Continue by inspecting
+the canonical typed Hom-action shape and selecting a valid projection or
+proof-time usability comparison; do not infer impossibility, suppress a
+valid rule merely for warning counts, add object casts, or restart the
+deferred general Op repair.
+
+The combined reviewer RE-RUNS its assertions with every accepted prototype
+rule in scope (it does not merely load prechecked reviewer objects):
+23 positive checks and one mismatched-data negative pass. They cover all
+seven core record betas, outer package/chain-law betas, four whole column
+observations, column point computations and typed Hom functors, whole delta,
+its actual component beta, off-diagonal evaluation and next Hom action.
+The failed Hom-action-first comparison is explicitly outside those green
+claims. A fresh source tree checked 27 individually bounded targets; the
+slowest was an existing connecting prerequisite at 14 seconds, and the
+combined new reviewer took 2 seconds. Log:
+`logs/probes/connecting-family-fresh-20260910-065202.log`.
+Separate exact-object warning-enabled checks of the four changed rule
+owners passed with no recognized local warning markers, as checked by
+warning_summary.py --strict-parse; this is NOT a fresh full-graph warning
+comparison or library-promotion audit. The latter remains required.
+The strict inferred-slot audit passes for those four prototype owners;
+only the two documented outgoing-diagram target guards are annotated.
+Report-header/reference lint, archive recovery and whitespace checks pass.
+
+`audits/homology-universality-2026-09-09/whole-connecting-family-prototypes.patch`
+preserves 26 source/reviewer/driver versions at baseline bd79a86a, with
+individual status labels and verified SHA-256 recovery in an isolated Git
+index/object directory. The fresh-source driver checks only the selected
+positive branch; failed record and Hom-join alternatives remain recovery
+evidence. No active kernel/library declaration, health boundary or book
+source was changed in this research checkpoint. Next: finish the column
+action comparison and owner audit, promote the coherent tranche, bind the
+retained native connecting result, then continue bounded assembly and the
+book/consolidation obligations. The full goal remains active.

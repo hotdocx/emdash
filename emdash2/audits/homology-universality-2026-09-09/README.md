@@ -35,10 +35,11 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [third-exactness-prototypes.patch](third-exactness-prototypes.patch) | `47c141ea` | Third-interior covered preimages, source cycles, original connecting lift, all-test exactness and whole-H instance, with stage/warning drivers. |
 | [exact-window-prototypes.patch](exact-window-prototypes.patch) | `a96fa507` | Indexed exact-window carrier/result and checker controls; the wrong-interior negative is preserved as a timeout, not a passed check. |
 | [connecting-characterization-model-prototypes.patch](connecting-characterization-model-prototypes.patch) | `bf83db97` | Covered connecting uniqueness, shared epicity/caller refactor and supplied-normality model enhancement, with source-comparison controls. |
+| [whole-connecting-family-prototypes.patch](whole-connecting-family-prototypes.patch) | `bd79a86a` | Declaration-first whole column/H/delta prototypes and checked components/whole observations; failed nested-record and Hom-projection-order alternatives remain explicitly unqualified. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all fourteen artifacts apply to their pinned baselines, and all 173 embedded
+checks: all fifteen artifacts apply to their pinned baselines, and all 199 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -86,6 +87,17 @@ supporting promoted owners. The normality constructor retains the model's
 original W/V and whole H by computation, but requires the two operational
 normality families as input. It does not construct a closed native provider
 or complete connecting naturality. Recovery verifies all eleven hashes.
+
+The whole-family addition preserves 26 source/reviewer/driver versions, all
+recovered with matching hashes. A fresh source stage checks the specialized
+window records, two column functors, their original-H composites and declared
+whole delta with its existing component. Its combined reviewer re-runs 23
+positive checks and one negative with all accepted prototype rules in scope.
+Whole column observations compute; the Hom-action-first comparison remains
+unqualified, and attempted joins fail subject reduction. The small primitive
+row-wrapper alternatives also remain timed-out probes. None of this tranche
+is promoted library code; the living pilot records the remaining owner audit,
+native connecting interpretation, bounded assembly and book work.
 
 ## Recovery
 

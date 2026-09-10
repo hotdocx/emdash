@@ -1256,6 +1256,195 @@
           "status": "checked promoted support owner"
         }
       ]
+    },
+    {
+      "artifact": "whole-connecting-family-prototypes.patch",
+      "base_commit": "bd79a86afb835665acf632704dd1e29051190b88",
+      "note": "Declaration-first window/column/connecting prototypes, checked components and whole observations, failed record/Hom-order alternatives, and the individually bounded exact-source driver. Hom-action-first comparison and library promotion remain open.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_families_direct.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_families_direct.lp",
+          "kind": "new",
+          "sha256": "5f5db789315ed5ed765940e9495e74b7d7a60fffc9af78969df08c857c71c2b3",
+          "status": "unqualified: direct final point view timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_families.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_families.lp",
+          "kind": "new",
+          "sha256": "bb06b7669f9d16a51725daa68bc64af7dbc75ac34f397291887489b92a568881",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_maps.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_maps.lp",
+          "kind": "new",
+          "sha256": "05f2784c718f73fb56ad30c715185aa57003389e8d7b4510d28f28c4143ce7c3",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_observations.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_observations.lp",
+          "kind": "new",
+          "sha256": "6fe01e2dc38ff2544cbd3c06455923056af4391bc535fb91464e975e140581f3",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_observation_paths.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_observation_paths.lp",
+          "kind": "new",
+          "sha256": "aed0297a82a5e1007f854b90f60aacdfdf075dd53c0c398c60a04976c3b25832",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_flat_data.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_flat_data.lp",
+          "kind": "new",
+          "sha256": "73a2c3a3deb0f38dfdb0337ae17e5fece648a7c43bb017a3e33e31c301a43485",
+          "status": "unqualified: flat nine-field dependent projection timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_data.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_data.lp",
+          "kind": "new",
+          "sha256": "c41caa6d517a4f28fb8cf0fd78a49dd7ed164f7c6b29c434bf85ab6fec8cb629",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_points.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_points.lp",
+          "kind": "new",
+          "sha256": "cec7621d787eabad48fa9a1c9ad3f28eba2b93c6023fefbc9a3c20d16627293d",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_records_unguarded.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_records_unguarded.lp",
+          "kind": "new",
+          "sha256": "fc0601594191c0a3ad79e0d5e81d504433483f6b0e7f7541166e679cb38224cb",
+          "status": "unqualified: dependent evidence projection SR timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_records.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_records.lp",
+          "kind": "new",
+          "sha256": "477de131a61e198ea2eaa48ff7c6849329728c1cf48d9fa41fb0f542d52b79fd",
+          "status": "unqualified: shared-variable guard variant still timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/short_exact_row_family_record_maps.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/short_exact_row_family_record_maps.lp",
+          "kind": "new",
+          "sha256": "25e82d4acaae0d6adc9a75b46cdacfb08679fea0e017d8f17650de816504742d",
+          "status": "unqualified dependent scaffold over the unsuccessful primitive-row variant"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_records.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_records.lp",
+          "kind": "new",
+          "sha256": "3541bdd58d0fef9570c8cfc6eff3001b37dd0148cea7ef17a5cacb2071198ded",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_record_points.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_record_points.lp",
+          "kind": "new",
+          "sha256": "c376051ed3140c63c8c8ffae110cd146f7909f486c9d37a943ced34090ae6bb8",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_points.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_points.lp",
+          "kind": "new",
+          "sha256": "a06a6dedd513bdf8ce552d3d9e996126be18144c50630cf986a006222a3036ed",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_functors.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_functors.lp",
+          "kind": "new",
+          "sha256": "509ed47c960abbe523c525f5500818a0ff2f5d9b17cea41563bab92dc22e6559",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_homology_functors.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_homology_functors.lp",
+          "kind": "new",
+          "sha256": "d5abdf7891713fb0f024a9a5767197095244701ab015bf85157854aca11732fa",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_connecting_point.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_connecting_point.lp",
+          "kind": "new",
+          "sha256": "b009767012a184a3cabd14e2f48d03b7c9d25072e42be8488a4e43883bfbcacb",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_connecting_transf.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_connecting_transf.lp",
+          "kind": "new",
+          "sha256": "6f825bafeba638fb907139d791dc300a80e842c2a526cba4400ff8c6ac868369",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_record_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_record_review.lp",
+          "kind": "new",
+          "sha256": "51a9e6bc4489712332e93c43b427e0c28b3a814e3f1980b247995f6f8009c339",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_connecting_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_connecting_review.lp",
+          "kind": "new",
+          "sha256": "b1ea215733a8f76defc2bd610e8acf3b58bf58d139715482013c6b92e27f5072",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_observations.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_observations.lp",
+          "kind": "new",
+          "sha256": "3fd591874b5b0cf30a3bf8af9429b8b07ba62aca245c0558619dbe327771db47",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_observation_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_observation_review.lp",
+          "kind": "new",
+          "sha256": "f2373e2973504aece286c6d1b43bd8d294f9de2c3f145d53b7564d9d73853436",
+          "status": "unqualified: whole observations pass, but Hom-action-first conversion assertions fail"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_whole_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_whole_review.lp",
+          "kind": "new",
+          "sha256": "ccb46e293e5a2cf405aede36c121dc705d1321f40e0c6b5e03cd7fe9d07e98bb",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_column_hom_join_rejected.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_column_hom_join_rejected.lp",
+          "kind": "new",
+          "sha256": "394dd9c6f8f589d79f34c9afd822e8deda890d6661e3e7b1802198b5c9d230a0",
+          "status": "rejected: attempted Hom-action joins fail normal subject reduction"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_family_join_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_family_join_review.lp",
+          "kind": "new",
+          "sha256": "95ea64f93fb2e25d0fd1d884a5a1abdbb6827a6b18384fa70ee85b527027d6a4",
+          "status": "checked prototype; not promoted library code"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_homology_window_family_prototypes.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_homology_window_family_prototypes.sh",
+          "kind": "new",
+          "sha256": "4a0f2db0fde778f021bfe912b24ad995b6f004363ba32c2befe9870977ece5f7",
+          "status": "exact-source driver for selected positive prototypes; excludes the timed/rejected variants"
+        }
+      ]
     }
   ]
 }
