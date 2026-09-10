@@ -859,6 +859,100 @@ scope is the new feature and its actual proof dependencies.
 Trailing empty lines were removed from the three reviewers and driver after
 qualification; their declarations, assertions and commands are unchanged.
 
+### Bounded Generator And Endpoint-Zero Continuation
+
+First turn the checked two-window expression into a generic window extension:
+given an exact tail beginning at the window's final H(i), prepend its three
+original pairs/proofs. This continuation form retains the shared arrow and
+supports Nat iteration without traversing or reselecting a prefix. Its empty
+continuation gives the existing single-window result.
+
+The bounded input must retain coherent row families and actual transformations
+between them. A sliding three-row state, with its two maps and original middle
+chain-zero data, extends by one row/map/zero datum. Each extension forms the
+existing four-row window; shifting reuses the same rows, maps and zero data.
+Do not accept arbitrary independent windows plus object-equality glue or
+replace the whole-family inputs by manually supplied naturality squares.
+
+Independently, derive the zero-endpoint theorem at the original H: a monic
+map into an object with zero identity has a zero-identity source; an epic
+map out of such an object has a zero-identity target. Apply these to the
+retained cycle embedding and homology projection. Thus a zero middle term
+has zero homology at the SAME selected object. Terminality of the original
+middle object supplies its zero identity through the existing additive lemma.
+This is property evidence, not an equality/cast to another chosen object.
+
+The prerequisite implementation now lives in six one-way modules:
+
+- `emdash3_2_preadditive_zero_identity.lp` transfers zero identity backwards
+  through a monomorphism and forwards through an epimorphism, using the
+  existing cancellation and zero-composition lemmas.
+- `emdash3_2_homology_record_zero.lp` applies those results to the original
+  cycle embedding and homology projection. `emdash3_2_homology_whole_zero.lp`
+  specializes it at the literal whole-H application. Terminality of the
+  original middle object suffices; no H object is replaced or reselected.
+- `emdash3_2_homology_window_extension.lp` prepends the three proved window
+  pairs to an arbitrary exact continuation, and specializes to the empty
+  continuation. The reviewer reconstructs the prior two-window result.
+- `emdash3_2_homology_row_triples.lp` and `emdash3_2_homology_row_spans.lp`
+  retain the three whole rows, their actual transformations and middle-zero
+  datum, then iterate coherent extensions. The remainder's type is indexed
+  by the shifted ORIGINAL state. Each four-row window is derived, not
+  independently supplied with an equality gluing field. Whole `tapp1_func`
+  controls retain transformation Hom action.
+
+The four zero/extension modules add only definitions/proofs. The two input
+record modules add ten constructor/projection beta rules, using only the
+new constructors as discriminants and wildcards in inferred non-owner
+slots. They add no global composition/naturality rule or new unifier.
+The source/reviewer gate is `scripts/check_homology_bounded_prerequisites.sh`.
+Its warning inventory is identical in every field to the preceding boundary
+at 1,249/169. Focused source/example/health dispatch tests include failure
+propagation. The initial row-window constructor probe used the wrong arity;
+that fixture defect is preserved separately, not treated as a mathematical
+objection to the design.
+
+Final prerequisite qualification (2026-09-10):
+
+- Both fresh exact-source gates pass, with normal subject reduction and a
+  90-second ceiling for every target:
+  `logs/probes/homology-bounded-prerequisites-warnings-20260910-132241.log`
+  and `logs/probes/homology-bounded-prerequisites-quiet-20260910-132823.log`.
+  The four new reviewers contain 20 positive and two negative controls;
+  the existing two-window reviewer is also rechecked. New owners and
+  reviewers take at most eight seconds individually in these runs.
+- Both rule-owning modules pass the strict inferred-slot audit, with no
+  reconstructible compound inferred slots or unreviewed candidates.
+  All 37 focused check-metrics tests and affected shell syntax checks pass.
+  Warning comparison preserves every inventory field at 1,249/169.
+- The strict catalog is fresh. Source-only health covers 886 registered
+  files at snapshot
+  `47129d2a9ec4ecde5d91cb0c1b9196d36d1183f687ad6e69dd939636644255e6`;
+  this is not a new repository-wide runtime check. No unrelated aggregate
+  is run.
+- `emdash2/audits/bounded-homology-generator-2026-09-10/` preserves all ten
+  prototype/driver versions, the constructor-arity mistake and its correction,
+  and the warning comparison. Patch recovery and every recorded byte count
+  and SHA-256 are verified against baseline `8999b047`.
+
+This is the prerequisite tranche, not the completed generator. Next derive
+the first H(inclusion) and its two H endpoints from a three-row state at x
+using the existing source/middle pairs and whole-H action. Then implement:
+
+```text
+generator(0, state, empty, x) = the empty exact tail at H(inclusion(state,x))
+generator(n+1, state, extension, x)
+  = window_extend(first_window(extension,x),
+      generator(n, shifted_state, remainder, x)).
+```
+
+The output has 3n annotated interiors and must reuse the same state/window
+observations. Slice the zero-padded result into the conventional degree/role
+order only through existing finite-tail observations, retaining all arrows
+and proofs. Apply the new zero-middle theorem to the actual outside-support
+input terms; do not assume zero homology as input. Final bounded assembly,
+its formal-boundary integration, book update and consolidation remain in scope.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather
@@ -1200,6 +1294,8 @@ was introduced to get a passing target.
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
+| `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
+| `LEH-LONG-EXACT-GENERATOR-8C` | next | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |

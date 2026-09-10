@@ -4475,6 +4475,22 @@ choices. This is result packaging, not a new category of complexes or a
 replacement H. General bounded row iteration and the outside-support zero
 evidence remain the next formal assembly layer.
 
+The coherent bounded input now retains a sliding three-row state: actual
+row-family functors, the transformations between them, and the original
+middle-chain-zero data. Extending this state fixes the overlapping remainder
+by its type and derives the corresponding four-row window. A generic
+window-extension operation prepends the three already proved exact pairs
+to a supplied continuation. It does not manufacture a new connecting map.
+
+The zero-endpoint prerequisite is also available at the same H. If the middle
+term has zero identity, monicity of the retained cycle embedding implies
+that the cycles have zero identity; epicity of the retained homology projection
+then gives zero identity on H itself. An original terminal middle term supplies
+the required first identity equation. This is a proof about the selected H,
+not an equality transporting it to another object or a new runtime collapse.
+The Nat-recursive bounded generator and application to its outside-support
+endpoints are the remaining assembly steps.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

@@ -251,6 +251,12 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_finite_arrow_tails.lp"),
     Path("emdash3_2_finite_arrow_tail_append.lp"),
     Path("emdash3_2_computational_exact_arrow_tails.lp"),
+    Path("emdash3_2_preadditive_zero_identity.lp"),
+    Path("emdash3_2_homology_record_zero.lp"),
+    Path("emdash3_2_homology_whole_zero.lp"),
+    Path("emdash3_2_homology_window_extension.lp"),
+    Path("emdash3_2_homology_row_triples.lp"),
+    Path("emdash3_2_homology_row_spans.lp"),
     Path("emdash3_2_short_exact_row_families.lp"),
     Path("emdash3_2_homology_window_families.lp"),
     Path("emdash3_2_homology_window_columns.lp"),
@@ -706,7 +712,20 @@ SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES = {
     Path("examples/computational_exact_arrow_tails.lp"),
     Path("examples/homology_adjacent_window_tails.lp"),
 }
+SPECIAL_HOMOLOGY_BOUNDED_PREREQUISITES = {
+    Path("emdash3_2_preadditive_zero_identity.lp"),
+    Path("emdash3_2_homology_record_zero.lp"),
+    Path("emdash3_2_homology_whole_zero.lp"),
+    Path("emdash3_2_homology_window_extension.lp"),
+    Path("emdash3_2_homology_row_triples.lp"),
+    Path("emdash3_2_homology_row_spans.lp"),
+    Path("examples/preadditive_zero_identity.lp"),
+    Path("examples/homology_whole_zero.lp"),
+    Path("examples/homology_window_extension.lp"),
+    Path("examples/homology_row_spans.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_HOMOLOGY_BOUNDED_PREREQUISITES, "./scripts/check_homology_bounded_prerequisites.sh"),
     (SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES, "./scripts/check_homology_arrow_tails.sh"),
     (SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES, "./scripts/check_homology_window_families.sh"),
     (SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES, "./scripts/check_homology_exact_window.sh"),

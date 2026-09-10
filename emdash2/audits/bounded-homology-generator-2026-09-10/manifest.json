@@ -1,0 +1,67 @@
+{
+  "baseline": "8999b04726e7c3c113c6779c9810952e801527c3",
+  "date": "2026-09-10",
+  "artifact": "prerequisites.patch",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/preadditive_zero_identity.lp",
+      "bytes": 1013,
+      "sha256": "b9305a1f3e025e5a62195c104d0838288d779a38c7ceb76039d64fc95b4d642c",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_middle_zero.lp",
+      "bytes": 1800,
+      "sha256": "01eb9eda69ef77841a8eb5fffcd724b6cf6d169d22befc68bcb47becddebbfad",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_whole_middle_zero.lp",
+      "bytes": 5510,
+      "sha256": "6cc8ca424c1210d648d78807e6dfef4bb20035c1ee242eb10a92741fb2485149",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_window_extension.lp",
+      "bytes": 35663,
+      "sha256": "7fcfa392a0f36848777a3003e6f13108f3db2fb8d7f3ebc79322c70913332b2a",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_window_extension_checks.lp",
+      "bytes": 773,
+      "sha256": "0f377b198d0f91706b7aaece947b5ddfcc7c26d5248c7ce92687c98c04acc27a",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_window_extension.sh",
+      "bytes": 3594,
+      "sha256": "b0db856a62f405ab3afa62c142131ff2d059ab043c77cc7111e116182077fca7",
+      "status": "checked-diagnostic-driver"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triples.lp",
+      "bytes": 6512,
+      "sha256": "e81250d890e574127b2ab1b0d882053159ca14666f61856431e36d9b934e0da2",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triples_wrong_constructor.lp",
+      "bytes": 6539,
+      "sha256": "846b355feccccedbbef4fd07ccce368fc5a55ac5614fefa9b4e883bd0fc9e782",
+      "status": "wrong-constructor-arity-not-mathematical-counterevidence"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_spans.lp",
+      "bytes": 5023,
+      "sha256": "27c18f7b88111b42bf2d4907ae04c4d17051b096a6e0a329a3940ecd4ff2c270",
+      "status": "checked"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_checks.lp",
+      "bytes": 4265,
+      "sha256": "189e02b2716726a6b7a0d56d7221c16a0e269354a086f260baacac32b51a11e5",
+      "status": "checked"
+    }
+  ]
+}

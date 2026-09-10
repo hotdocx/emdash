@@ -37,6 +37,7 @@ homology_connecting_join_checked=0
 homology_exact_window_join_checked=0
 homology_window_families_join_checked=0
 homology_arrow_tails_join_checked=0
+homology_bounded_prerequisites_checked=0
 
 is_abelian_snake_six_term_join() {
   case "$1" in
@@ -80,6 +81,17 @@ is_abelian_snake_six_term_join() {
 check_file() {
   local file="$1"
   case "$file" in
+    emdash3_2_preadditive_zero_identity.lp|\
+    emdash3_2_homology_record_zero.lp|\
+    emdash3_2_homology_whole_zero.lp|\
+    emdash3_2_homology_window_extension.lp|\
+    emdash3_2_homology_row_triples.lp|\
+    emdash3_2_homology_row_spans.lp)
+      if [[ "$homology_bounded_prerequisites_checked" -eq 0 ]]; then
+        ./scripts/check_homology_bounded_prerequisites.sh
+        homology_bounded_prerequisites_checked=1
+      fi
+      return ;;
     emdash3_2_finite_arrow_tails.lp|\
     emdash3_2_finite_arrow_tail_append.lp|\
     emdash3_2_computational_exact_arrow_tails.lp)
@@ -439,6 +451,12 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_finite_arrow_tails.lp)
   files+=(emdash3_2_finite_arrow_tail_append.lp)
   files+=(emdash3_2_computational_exact_arrow_tails.lp)
+  files+=(emdash3_2_preadditive_zero_identity.lp)
+  files+=(emdash3_2_homology_record_zero.lp)
+  files+=(emdash3_2_homology_whole_zero.lp)
+  files+=(emdash3_2_homology_window_extension.lp)
+  files+=(emdash3_2_homology_row_triples.lp)
+  files+=(emdash3_2_homology_row_spans.lp)
   files+=(emdash3_2_short_exact_row_families.lp)
   files+=(emdash3_2_homology_window_families.lp)
   files+=(emdash3_2_homology_window_columns.lp)

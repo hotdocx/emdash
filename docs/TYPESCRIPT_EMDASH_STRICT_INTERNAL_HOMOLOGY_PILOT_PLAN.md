@@ -152,6 +152,8 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 | `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer and complete bounded inventory qualified | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
 | `HINT-FINITE-RESULT-26` | indexed result carriers and the real two-window assembly qualified; bounded generator/endpoints remain | retain the same arrows and exactness in a finite tail, with a literal shared H(i) boundary and constructor computation |
+| `HINT-BOUNDED-INPUT-27` | coherent row spans and generic window extension qualified | derive each window from the shared sliding state, preserving whole functors/transfors and existing exactness |
+| `HINT-ZERO-MIDDLE-28` | retained-record and literal whole-H zero-identity theorem qualified; endpoint integration follows the generator | derive zero H from a zero/terminal middle term without selecting another object |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -4498,3 +4500,26 @@ fixture defect, not mathematical counterevidence.
 The source/reviewer gate and health routing are scoped to this exact
 dependency join. The actual row-iteration and endpoint-zero obligations
 remain in the full parent goal, as do the final book and architecture audit.
+
+### Coherent Bounded Inputs And The Same-H Zero Theorem
+
+The parent plan's
+[generator continuation](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#bounded-generator-and-endpoint-zero-continuation)
+records the six prerequisite modules. A sliding three-row state retains actual
+row functors and transformations. Its finite extension fixes the shifted
+remainder in its type, so neighboring windows share their original inputs
+without manual gluing equations. The generic window extension reuses the
+three existing exactness witnesses over any continuation.
+
+The endpoint lemma is a property of the original whole H: zero identity in
+the middle term passes through the monic cycle embedding and epic homology
+projection. Terminality provides that original zero identity. No H-object
+cast, new universal choice or global identity-to-zero rewrite is introduced.
+The actual Nat generator and its boundary application remain required.
+
+Both final-source quiet/warning gates pass, including 20 new positive and
+two negative controls. The two local-rule owners pass strict LHS auditing;
+all 37 focused metrics tests pass and the warning inventory is unchanged
+at 1,249/169. The parent plan records the exact logs, source-only health
+snapshot and byte-verified ten-version recovery archive. This qualifies the
+prerequisite tranche, not the complete bounded theorem or the final book.

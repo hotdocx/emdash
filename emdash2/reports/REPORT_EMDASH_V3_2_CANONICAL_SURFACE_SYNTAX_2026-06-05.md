@@ -2101,6 +2101,18 @@ two-window consumer it retains the common H(i) and all original H inputs.
 This notation does not assert the still-pending generic bounded generator
 or replace the whole-complex/H/delta operations.
 
+`HomologyRowTriple` is a sliding state of three whole row families, two
+actual transformations and the middle-chain-zero datum. `HomologyRowSpan`
+adds a finite number of coherent extensions; its remainder is indexed by
+the shifted original state. These are not independently chosen windows
+joined by object-equality proofs. `homology_whole_window_extend` prepends
+the existing three exact pairs to an exact continuation at the same H(i).
+
+`homology_whole_middle_zero` states id_H = 0 from id_B = 0 for the original
+middle term B. Its terminal-middle specialization uses the original
+terminality evidence. Neither notation means H ↪ a newly selected zero
+object, or a global runtime rule id_H ↪ 0.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

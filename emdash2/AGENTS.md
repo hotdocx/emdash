@@ -290,6 +290,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   These are result carriers, not new complex categories or a completed
   generic bounded homology theorem; degree iteration and endpoint zeros
   remain separate requirements.
+- The homology-row-triple/span modules retain coherent whole row functors,
+  transformations and chain-zero data, with typed shared-state extension.
+  Their ten local constructor beta rules do not add naturality squares or
+  generic cuts. The window-extension module prepends the three original
+  exact pairs to a supplied continuation. The preadditive-zero-identity and
+  homology-record/whole-zero modules prove zero identity at the SAME H
+  object when the original middle term is zero or terminal. No object cast,
+  new selection or global identity collapse is installed. The focused gate
+  is `scripts/check_homology_bounded_prerequisites.sh`; the complete bounded
+  generator and its endpoint application remain downstream.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

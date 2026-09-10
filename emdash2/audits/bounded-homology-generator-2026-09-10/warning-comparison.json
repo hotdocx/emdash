@@ -1,0 +1,17 @@
+{
+  "baselineLog": "logs/probes/homology-arrow-tails-warnings-20260910-122223.log",
+  "candidateLog": "logs/probes/homology-bounded-prerequisites-warnings-20260910-132241.log",
+  "counts": {
+    "replaceable pattern variable": 169,
+    "unjoinable critical pair": 1249
+  },
+  "unchangedFields": {
+    "categories": true,
+    "locations": true,
+    "term_heads": true,
+    "rule_families": true,
+    "parser_issues": true
+  },
+  "newLocalBetaRules": 10,
+  "newUnifiers": 0
+}

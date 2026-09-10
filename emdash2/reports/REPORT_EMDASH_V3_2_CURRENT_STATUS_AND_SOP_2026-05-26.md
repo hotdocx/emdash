@@ -1456,6 +1456,22 @@ belongs to the owning implementation plan rather than to standing guidance.
   iteration and endpoint-zero evidence remain required. The archived
   transparent variants and timed-out scalar controls are not a claim that
   every equivalent type presentation is equally usable in the LF.
+- The homology-row-triple/span modules provide coherent finite inputs for
+  bounded assembly. Each state retains three actual whole row families,
+  their two transformations and the existing middle-chain-zero datum.
+  Extending it fixes the shifted original state in the remainder's type;
+  the corresponding four-row window is derived. Whole Hom-action controls
+  and a wrong-remainder negative qualify this boundary. Ten local beta
+  rules add no manual naturality-square field or new global cut/unifier.
+  `emdash3_2_homology_window_extension.lp` prepends the three original proved
+  pairs to an arbitrary exact continuation. Its empty case recovers the
+  single window. The preadditive-zero-identity and homology-record/whole-zero
+  modules separately prove that a zero/terminal middle term gives zero
+  identity at the actual H object, by monic/epic cancellation. No alternate
+  H object or identity-to-zero runtime rule is introduced. The focused gate
+  is `scripts/check_homology_bounded_prerequisites.sh`. These are prerequisites:
+  Nat iteration and applying the boundary theorem to the generated endpoints
+  remain required for the generic bounded result.
 - `emdash3_2_commutative_algebra_freyd_homology_model_records.lp` specializes
   the whole-owned homology record at the original supplied model and raw
   chain agreement. Its object computes to the already-used model H point;

@@ -19,6 +19,12 @@ endpoint-zero evidence and final book work remain required. The
 preserves the representation comparisons. No general variance repair or
 closed quotient effectiveness is claimed.
 
+The bounded-generator prerequisites now retain coherent whole row spans,
+extend an exact continuation by one proved window, and prove zero identity
+at the same H when the original middle term is zero/terminal. Their focused
+gate is `scripts/check_homology_bounded_prerequisites.sh`. The actual Nat
+generator and application of this boundary theorem remain downstream.
+
 `../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
 is the active continuation beyond the completed Abelian, homology, and snake
 connecting plans. The complete generic six-term snake exact result and
