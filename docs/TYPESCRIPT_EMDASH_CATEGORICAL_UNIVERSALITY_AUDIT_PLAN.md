@@ -142,6 +142,12 @@ point construction now reaches literal whole-H endpoints, but the complete
 reference window and its connecting naturality/consumer remain unfinished.
 This progress does not by itself start or complete the broader migration.
 
+The whole-H window zero tranche now derives its cycle/quotient factors
+directly from whole naturality and proves all three adjacent-zero laws.
+Nineteen further prototype/control/driver files have verified recovery,
+bringing the archive to 111 embedded versions. Interior exactness and the
+retained connecting consumer still precede the broad migration gate.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their

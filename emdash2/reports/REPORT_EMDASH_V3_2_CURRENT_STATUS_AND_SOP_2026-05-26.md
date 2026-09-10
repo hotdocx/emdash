@@ -1350,6 +1350,21 @@ belongs to the owning implementation plan rather than to standing guidance.
   yet supply connecting naturality, the generic window exactness theorem
   or its retained native connecting interpretation. The pilot records the
   consistent step-pair endpoint fix and preserves the failed mixed forms.
+- `emdash3_2_homology_family_map_factors.lp` now obtains actual whole
+  cycle-inclusion and homology-projection transformations by whiskering the
+  existing K/Q observations. Their strict-profile naturality derives the
+  two map reconstruction factors. `chain_pair_homology_actions` evaluates
+  actual H/kernel Hom actions on the native chain map, retaining whole
+  fixed-pair action and computing factor projections; no second induced-map
+  algorithm is selected. Generic record cancellation, monic factor pasting
+  and epic descent prove the zero laws. The projection-zero and inclusion-zero
+  owners construct both connecting-adjacent laws, with their public whole-H
+  instances deriving every intermediate factor. `emdash3_2_homology_window.lp`
+  gives the three overlapping pairs at the SAME H objects/arrows, including
+  the outer inclusion/projection zero. Seven owners and three reviewers pass
+  `scripts/check_homology_window.sh`; the warning inventory remains 1,249/169.
+  This is a chain window, not interior exactness, connecting naturality or
+  the complete bounded formal LES. No primitive, rewrite or unifier is added.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

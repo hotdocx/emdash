@@ -4390,6 +4390,26 @@ short-exact-sequence source/action and naturality construction; neither that
 transformation nor the window exactness theorem follows merely by declaring
 whole H or by constructing delta's individual component.
 
+Whole H now supplies the map reconstructions used in this window directly.
+Whiskering the existing kernel inclusion and cokernel projection gives
+actual whole structural transformations. Their naturality reads
+κy∘Z(m) = middle(m)∘κx and H(m)∘qx = qy∘Z(m).
+For an original chain map, native map introduction and the original H Hom
+action provide these arrows; the factor records do not choose another map.
+Their whole action is retained, including the projection transformation's
+next Hom action.
+
+These facts prove all three adjacent-zero laws of the five-term window.
+The inclusion/projection composite is killed by the original row law.
+A projected middle cycle has zero differential, so its lifted connecting
+image vanishes. Conversely, the inclusion of a connecting lift is a middle
+boundary and is killed by that quotient. The retained epic factors descend
+both statements to homology. The public theorems derive the needed factors
+from whole naturality; no additional square data are requested. The three
+overlapping chain pairs share their literal H objects and arrows. Exactness
+at their interiors and naturality of delta itself are further results,
+not consequences of merely obtaining these zero composites.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

@@ -23,6 +23,12 @@ qualification supersedes earlier point-connecting pending notes below;
 whole connecting naturality, generic window exactness, the retained native
 connecting interpretation, bounded formal assembly and final book work
 remain active obligations.
+The next qualified tranche supplies the actual whole-H map reconstruction
+factors, all three adjacent-zero laws and the shared five-term chain window.
+Its focused gate is `scripts/check_homology_window.sh`; the three interior
+exactness statements remain the next mathematical requirement. This
+supersedes the earlier pending zero-window notes, not the still-open
+connecting naturality, concrete connecting interpretation or bounded theorem.
 The two inherited variance diagnostics remain recorded in the
 [bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
 The user has deferred their general repair until after the homological-

@@ -36,9 +36,14 @@
       "artifact": "direct-connecting-experiments.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 27
+    },
+    {
+      "artifact": "whole-window-zero-experiments.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 19
     }
   ],
-  "source_versions_sha256_verified": 92,
+  "source_versions_sha256_verified": 111,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

@@ -140,6 +140,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
 | `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
 | `HINT-DIRECT-CONNECTING-17` | direct point construction and literal whole-H endpoint consumer qualified; naturality/window/CAS connecting interpretation remain | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
+| `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3194,3 +3195,127 @@ consumer. Whole-family naturality, bounded formal assembly, final
 proof–CAS boundary review and book consolidation remain required.
 Do not replace this continuation with a broad universal-record migration
 or an exhaustive theorem comparing all historical wrappers.
+
+### Whole-H Window Naturality: Initial Consumer
+
+This initial probe state is retained as history; the qualification below
+records the subsequent promotion.
+
+Checkpoint `88591aaa` completes the direct connecting component. The next
+consumer uses the already existing whole kernel inclusion and cokernel
+projection, whiskered along the diagram and boundary families. Their
+strict-profile naturality derives the two retained Hom factors needed
+for an induced map: κ'∘Z(m) = middle(m)∘κ and H(m)∘q = q'∘Z(m).
+These are observations of existing whole transformations, not new square
+fields required from the window's caller.
+
+The structural-family, record-factor and original-chain-map prototypes
+check. The chain-map views are whole fixed-pair functors obtained by
+composing native map introduction with the actual H/kernel Hom actions;
+their point aliases do not select a second induced-map algorithm.
+Cancellation at the retained kernel/cokernel records is the next route to
+the adjacent-zero proofs. Do not make a comprehensive old/new map theorem,
+new runtime functoriality laws or a categorical-universality migration a
+prerequisite for this specific consumer. These prototypes are not yet
+promoted or a completed window.
+
+### Whole-H Window Adjacent-Zero Qualification
+
+The mathematical arrows are now the existing H action, not newly selected
+record-map algorithms. `homology_family_map_factors` defines two whole
+transformations by whiskering the existing kernel inclusion and cokernel
+projection along the diagram and boundary families. Their strict-profile
+naturality supplies the retained Hom factors
+
+```text
+κy ∘ Z(m) = middle(m) ∘ κx
+H(m) ∘ qx = qy ∘ Z(m).
+```
+
+Their record fields compute to those same structural components. The
+projection's next Hom action is also checked; these are genuine whole
+transformations, not point-only substitutes. The existing globally strict
+component-naturality helper remains the profile boundary: no claim is made
+about arbitrary lax transformations.
+
+`chain_pair_homology_actions` composes native chain-map introduction with
+the kernel/H Hom-action functors. Its whole fixed-pair views retain action
+on the raw-map parameter, and the point aliases simply evaluate them.
+The reconstructed factor arrows compute back to actual Z(m) and H(m).
+The derived zero-middle theorem and composite-factor cancellation do not
+add runtime zero/functoriality rules or a competing induced-map algorithm.
+
+For the five actual whole-H points in the window, all three laws now hold:
+
+```text
+H(projection) ∘ H(inclusion) = 0
+δ ∘ H(projection)            = 0
+H(next inclusion) ∘ δ        = 0.
+```
+
+The first pastes the actual cycle/quotient factors and uses the original
+middle row's zero law. For the second, a middle cycle lifts into the SAME
+connecting cover. Its differential is zero, so monicity of the original
+left row inclusion and target cycle embedding kills the connecting lift;
+the retained quotient and cover factors descend this annihilation.
+For the third, inclusion sends that lift to an actual middle boundary,
+annihilated by the retained middle quotient. The two original epic factors
+then descend the result. The previously archived monic-pasting helper now
+has this concrete consumer; it and the matching epic post-annihilation
+lemma have a shared generic Hom-factor owner.
+
+The public whole-H zero theorems take original rows, their maps and chain
+laws, plus the existing coherent model data. They do NOT ask the caller
+for the intermediate Hom factors, extra commuting squares or the
+connecting arrow. Their internal reference helpers may consume factors;
+the public instances derive them from the actual whole transformations.
+No homology is reselected, no epi is split and no object-equality cast
+defines an arrow.
+
+`emdash3_2_homology_window.lp` constructs the three overlapping
+`ComputationalChainPair` values using the same five H objects and four
+arrows. The reviewer checks the shared projection/connecting arrows and
+the exact supplied zero witnesses. This is a five-term CHAIN window,
+not yet the three interior exactness witnesses or a completed long exact
+sequence. The source-pair canonicalization from the preceding tranche is
+retained throughout.
+
+The seven source modules and three reviewers pass the fresh staged
+`scripts/check_homology_window.sh` gate. It also checks the unchanged
+direct-connecting prerequisite from source. The log is
+`logs/probes/homology-window-quiet-20260910-003212.log`, with the compact
+driver in `homology-window-active-driver.log`. The three reviewers contain
+15 positive checks and one negative; the latter rejects an arbitrary
+replacement for actual H action. The new chain-action owner took seven
+seconds, projection-zero five, inclusion-zero three, window three and
+the joint window reviewer five. All targets remain bounded to 90 seconds.
+
+Fresh source-only baseline/candidate warning inventories are identical at
+1,249/169, including categories, locations, term heads and rule families,
+with no parser issues. They are preserved as
+`homology-window-{baseline,candidate}-warnings.log`. No primitive, rewrite
+or unifier is added. The nucleus, native algorithms and TypeScript
+model/replay consumers are unchanged.
+
+All seven strict LHS audits pass (there are no new rules), as do the
+catalog/TOC checks, 34 focused metrics/TOC/warning-parser tests, report
+headers, active-reference checks and shell hygiene. The source-only health
+snapshot covers 833 files at
+`sha256:1a1cd034b7878a2f4ade90db1f627cf7012939e5f3c4c95935c2ed0b7cc08f42`.
+No unrelated TypeScript, kernel or book aggregate was run; the inherited
+full-health and op/Sigma soundness qualifications are unchanged.
+
+The original 17 mathematical prototypes and two warning control/driver
+files are preserved in `whole-window-zero-experiments.patch` against
+checkpoint `88591aaa`. Isolated index/object-store recovery verified all
+19 SHA-256 hashes; the archive now preserves 111 embedded versions.
+The warning driver additionally requires the promoted owners from this
+tranche, as recorded in its manifest. This is recoverable implementation
+evidence, not an assertion that the remaining exactness theorem is complete.
+
+Next prove exactness of the three actual window pairs, starting at the
+middle complex's H object. Use the existing exact-cover/extension criteria
+and canonical kernel/cokernel rows at retained choices. Connecting
+naturality, the selected native connecting interpretation, bounded formal
+assembly and final book work remain required. Do not conflate these zero
+laws with exactness or with a proof of global kernel soundness.

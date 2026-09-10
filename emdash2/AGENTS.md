@@ -193,6 +193,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `scripts/check_homology_record_connecting.sh`. Whole connecting naturality,
   generic window exactness and the native connecting interpretation remain
   downstream; no new primitive or rule is introduced by this reference layer.
+  The whole homology structural transformations now supply map reconstruction
+  factors by naturality; their chain-pair action views use the original
+  native map and actual whole H. `emdash3_2_homology_window.lp` retains the
+  three overlapping pairs of one five-term window and all three adjacent-zero
+  laws. Public zero theorems derive their factors rather than require new
+  commuting-square inputs. `scripts/check_homology_window.sh` is the focused
+  gate. Interior exactness, connecting naturality and the native connecting
+  interpretation remain distinct required work; no new runtime rule is added.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

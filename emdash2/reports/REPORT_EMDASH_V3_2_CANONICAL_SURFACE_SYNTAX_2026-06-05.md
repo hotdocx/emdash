@@ -2055,6 +2055,15 @@ These reconstruction equations are proved paths, not new runtime rewrites.
 This point operation is not notation for an already packaged whole
 connecting transformation or a completed window exactness theorem.
 
+`chain_pair_homology_action_func` is the whole fixed-pair view of H action
+after native map introduction; `chain_pair_homology_action` is its point
+observation. It is still written H(m), not a second induced-map notation.
+The whole structural transformations give κy∘Z(m) = middle(m)∘κx and
+H(m)∘qx = qy∘Z(m). The three `homology_whole_window_*_pair` observations
+are the overlapping pairs of H(A)→H(B)→H(C)→H(A')→H(B').
+Their zero laws are proved paths, not added runtime rewrites. Do not print
+this chain window as an already proved exact sequence.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

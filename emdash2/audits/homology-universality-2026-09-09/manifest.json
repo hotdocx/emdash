@@ -640,6 +640,146 @@
           "status": "checked prototype or control; see living ledger"
         }
       ]
+    },
+    {
+      "artifact": "whole-window-zero-experiments.patch",
+      "base_commit": "88591aaadc8b402dca00d31df4d7dfccba392306",
+      "note": "Checked whole naturality/action factors and all three whole-H window zero prototypes. The warning driver additionally expects their promoted owners; recovery checks preserve sources, not a new full validation claim.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_monic_factor_paste_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_monic_factor_paste_zero.lp",
+          "kind": "new",
+          "sha256": "fd7a936477b8c38eb3a0c8e804d2d5a40409fc95f8dd3cfd21c9bbf88d247611",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/epic_factor_postzero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/epic_factor_postzero.lp",
+          "kind": "new",
+          "sha256": "0744b9115318d735bf5c9f1b476b6865022228f2af3657725c17e3fd1777337e",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_cancellation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_cancellation.lp",
+          "kind": "new",
+          "sha256": "20b7efb5cdf7f0112ed90c978b05247c47bd1cd9d84b2cd8c969a8ce66ea368d",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_composite_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_composite_zero.lp",
+          "kind": "new",
+          "sha256": "87dd69576c4bb410251b2f6db9ae516bf4b6db002804251e6df952fdf43905c9",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_structural_maps.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_structural_maps.lp",
+          "kind": "new",
+          "sha256": "a242bea443e71b722e436db2a9296aa1285b367cfc46c37388e703f13f3b3212",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_record_map_factors.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_record_map_factors.lp",
+          "kind": "new",
+          "sha256": "49c47ef256db454f4d1c7769687b72b75ac18f6cef3b0c6ea6192db3dd80b92c",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_chain_pair_action_factors.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_chain_pair_action_factors.lp",
+          "kind": "new",
+          "sha256": "cfb9fea7d813d1a3200bf428014bb759d9858a638c3246520fd7134e122d5d7c",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_chain_pair_action_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_chain_pair_action_zero.lp",
+          "kind": "new",
+          "sha256": "78b925dcec5271026a62bd88814ebfc01ef8c3efebff93f085089591c8e8f408",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_projection_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_projection_cover.lp",
+          "kind": "new",
+          "sha256": "227398ad6af511f3c18cc29882a30484e79e64c68c954f0193ded4e91c4d92ad",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_projection_covered_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_projection_covered_zero.lp",
+          "kind": "new",
+          "sha256": "a44983d33c0cf7f4d2846b8557ee47ff7c2af2e0bc847a9fff36f14f0958c298",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting_projection_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting_projection_zero.lp",
+          "kind": "new",
+          "sha256": "d21442615dc3e3a498f58b95c90aff8e8ddf4636a69788d4d0312589cd46d3b6",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_connecting_projection_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_connecting_projection_zero.lp",
+          "kind": "new",
+          "sha256": "15f1c8afc13b305475ea669b2c198293b1e6ca708bf1b394134d2fa05495ed61",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_inclusion_covered_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_inclusion_covered_zero.lp",
+          "kind": "new",
+          "sha256": "6bc8d055ac16d82f5bbd52ebc398646d2a4bf206ff1e4c11cae1e1337b430392",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting_inclusion_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting_inclusion_zero.lp",
+          "kind": "new",
+          "sha256": "e255cfbf7f68bba39ea3470097ba0be77454cae9ef62a6295333cf27c81cde32",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_connecting_inclusion_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_connecting_inclusion_zero.lp",
+          "kind": "new",
+          "sha256": "f44b86ad598c0fd877374802c9e55664d146be4e5f8a19a4d9113483000385d8",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_row_actions_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_row_actions_zero.lp",
+          "kind": "new",
+          "sha256": "645930320f80b428f738fdd93a88d97f61124992da78c6d4b18f932b9574ee63",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_window_pairs.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_window_pairs.lp",
+          "kind": "new",
+          "sha256": "7300e8df4022ec70c424ec2d0cd825d7e2eb704bb3e406452fba7ee73d005816",
+          "status": "checked prototype; promoted with imports/consolidation documented in the living plan"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_warning_control.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_warning_control.lp",
+          "kind": "new",
+          "sha256": "5344566659ef4cd13e6e0b830f812bcd345e099409ad4c21261f852d46d3acb9",
+          "status": "checked existing-import warning control"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_homology_window_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_homology_window_warnings.sh",
+          "kind": "new",
+          "sha256": "0d606af9ebf7a08c50b0b6d4743f1f32934363f827afb7feb7c71c294ba90371",
+          "status": "checked diagnostic driver; requires promoted owners from this tranche"
+        }
+      ]
     }
   ]
 }

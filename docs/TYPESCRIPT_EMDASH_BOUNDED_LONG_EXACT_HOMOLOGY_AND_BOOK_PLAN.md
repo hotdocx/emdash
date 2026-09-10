@@ -6,6 +6,17 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Whole-H window zero tranche (2026-09-10): actual whole H action now supplies
+its cycle and quotient reconstruction factors by naturality. The direct
+connecting component satisfies both neighboring zero laws, and the two
+degree-preserving maps compose to zero. The three pairs of one five-term
+window are implemented with literal shared H objects/arrows in
+`emdash3_2_homology_window.lp`. The
+[pilot qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#whole-h-window-adjacent-zero-qualification)
+records the exact current boundary. The three interior exactness witnesses,
+connecting naturality, retained native connecting interpretation, bounded
+formal assembly and final book work remain unfinished.
+
 Direct whole-H-endpoint connecting tranche (2026-09-10): the new
 `homology_record_connecting` constructs delta through the original rows,
 the retained source cycles and the retained target cycles/quotient. Both
@@ -500,18 +511,19 @@ H_n(A) -> H_n(B) -> H_n(C)
        -> H_(n-1)(A) -> H_(n-1)(B).
 ```
 
-The first, second, and fourth arrows reuse the existing induced-homology-map
-owner. The middle arrow must be obtained from the generic snake construction
-with the degree substitution recorded above, followed by the canonical
-short-exact-row endpoint comparisons and the required homology descent/factor
-operations.
+The first, second, and fourth arrows use the existing whole H action on
+the native realizations of the original chain maps. Following the later
+whole-H redesign, the middle arrow is now the direct
+`homology_record_connecting` construction at the retained records.
+The earlier snake-based route and its endpoint comparisons remain checked
+reference evidence, not a mandatory implementation detour or public input.
 
 Retain:
 
 - all five homology objects;
 - all four arrows;
-- the raw snake result;
-- endpoint comparison isomorphisms;
+- the original raw snake result and endpoint comparisons as reference
+  evidence where that earlier implementation is being compared;
 - descent through source boundaries;
 - factorization into target cycles;
 - adjacent-zero agreements; and
@@ -929,7 +941,7 @@ was introduced to get a passing target.
 | `LEH-SOURCE-ANNIHILATION-7D3B` | complete; checkpoint `1a8da30a` | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
-| `LEH-WINDOW-EXACTNESS-7D4` | pending; use the new direct whole-H-endpoint connecting construction | HINT-DIRECT-CONNECTING-17, whole H induced maps and reusable exactness-cover/extension lemmas | adjacent-zero paths and exactness at the three actual window interiors |
+| `LEH-WINDOW-EXACTNESS-7D4` | all three adjacent-zero laws and shared whole-H window pairs qualified; three exactness proofs pending | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18 and reusable exactness-cover/extension lemmas | exactness at the three actual window interiors, without changing any H object or map |
 | `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
