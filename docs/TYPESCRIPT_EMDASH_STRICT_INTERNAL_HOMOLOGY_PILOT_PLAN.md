@@ -4523,3 +4523,11 @@ all 37 focused metrics tests pass and the warning inventory is unchanged
 at 1,249/169. The parent plan records the exact logs, source-only health
 snapshot and byte-verified ten-version recovery archive. This qualifies the
 prerequisite tranche, not the complete bounded theorem or the final book.
+
+The following row-recursion experiment is recorded in the parent plan and
+`emdash2/audits/bounded-homology-row-recursion-2026-09-10/`. The shifted-triple
+continuation comparison reaches 90 seconds in several otherwise equivalent
+presentations. A field-indexed successor using the same actual rows/maps and
+window theorem checks in 3.59 seconds; its candidate input carrier also
+source-checks. The full field-indexed generator and its consumers are next.
+No active LP owner or H selection changes at this research checkpoint.

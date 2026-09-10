@@ -953,6 +953,57 @@ and proofs. Apply the new zero-middle theorem to the actual outside-support
 input terms; do not assume zero homology as input. Final bounded assembly,
 its formal-boundary integration, book update and consolidation remain in scope.
 
+Generator experiment (2026-09-10, after checkpoint `64d5cd28`):
+
+- `tmp/probes/homology_row_triple_points.lp` checks the six transparent
+  original pair/inclusion and whole-H point/action views. The whole-row
+  inputs and original selections are unchanged.
+- Instantiating `homology_whole_window_extend` at those original row
+  observations, without restating its continuation type, checks in four
+  seconds in the warning-enabled exact-source comparison. This is
+  `homology_row_triple_extension_partial.lp`; it takes no new theorem or
+  equality assumption.
+- The version explicitly annotating its continuation/result through the
+  H-point aliases reaches the 90-second bound in quiet and warning modes.
+  Omitting only the result annotation still times out. The warning log is
+  `logs/probes/homology-row-extension-comparison-warnings-20260910-135407.log`.
+  This isolates an endpoint-annotation/conversion cost, not failure to
+  instantiate the window theorem. The original generator is not qualified:
+  its imported step stopped the check before the recursion was reached.
+- The next probe retains the same whole-H applications literally in the
+  continuation/motive types, following the already selected canonical-
+  endpoint policy. It changes no rule, choice or mathematical premise.
+- Independently, `finite_arrow_tail_take.lp` and its focused reviewer check
+  zero, proper and full prefixes and preservation of the original annotation,
+  with a distinct-witness negative. This Nat definition adds no rule or
+  primitive and will remove the extra boundary padding without rebuilding
+  any homology arrow.
+
+The subsequent checks locate the cost more precisely at conversion of the
+existing continuation, not at formation of the exact-tail family or the empty
+case. Literal H objects, direct boundary-arrow annotations, an explicit
+induction-hypothesis type, primitive Nat-recursion clauses, and explicit
+PA/normality parameters do not remove that shifted-record comparison cost.
+None is promoted as a solution. The constructor-guarded rule variant was
+prepared and LHS-audited but not checked.
+
+The field-indexed successor now checks in 3.59 seconds: it exposes the original
+R0/R1/R2, f/g and zero data directly in its type, then applies the same proved
+window theorem. The candidate `HomologyRowFieldSpan` source also checks, with
+four local constructor beta rules. The next step is its ordinary Nat generator
+and real empty/one/two-window consumers. If that succeeds, adapt the public
+triple/span facade without changing its whole row inputs, original H objects,
+maps or exactness witnesses. Do not add a record-eta axiom or object casts.
+
+All 38 source/driver versions and their distinct qualification states are
+preserved in
+[the row-recursion audit](../emdash2/audits/bounded-homology-row-recursion-2026-09-10/README.md).
+Later isolated research reused a temporary copy of the fresh checked dependency
+tree after comparing all 509 root LP source files with the worktree. Normal
+subject reduction and the 90-second bound remained in force. This is research
+evidence only; promotion still requires final fresh-source checks. No active
+LP source, runtime rule or checker registry has changed in this experiment.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather
@@ -1085,6 +1136,37 @@ but theorem-like claims become checked only after their owning implementation
 and reviewer are green. Do not hand-edit assembled Markdown or PDF artifacts.
 
 ## Architecture Review And Consolidation
+
+The final Chapter 31 revision must replace, not merely append to, the older
+reference-interface account. The current draft still describes whole H and
+the three generic window exactness proofs as future work. Its revision should:
+
+- retain the useful one-degree cycle/boundary explanation in 31.4, then make
+  the actual kernel/cokernel adjunction presentations and whole H primary:
+  the whole zero-cone input supplies h, its mate gives beta, and the original
+  whole cokernel gives H;
+- explain that row families and maps are actual functors/transformations in
+  the native internal category, with the ordinary-target profile explicit,
+  rather than suggesting manually provided naturality squares;
+- replace the older snake-comparison-centred public account in 31.9 by the
+  direct connecting component at those same H objects and its actual whole
+  transformation; the snake result remains a separately established theorem
+  and constructive reference, not an obligatory public endpoint adapter;
+- state the three proved generic window interiors accurately, and add the
+  final finite generator/endpoints only after their own qualification;
+- distinguish the retained concrete model interpretation in 31.10–31.11
+  from computed raw equations, including supplied normality and the explicit
+  trusted-presentation-semantics adoption, with no recomputation or reselection;
+- remove superseded open-window claims from 31.12 while preserving the real
+  quotient-effectiveness, closed-provider and general-normalization boundaries;
+  and
+- distinguish rule-free exactness proofs from the local data/whole-observation
+  beta rules now used by the surrounding computational interface. Do not
+  describe the entire expanded layer as rule-free.
+
+Synchronize the appendices, evidence registry and metadata with this narrative
+as one coherent final book tranche; do not promote a pending probe into book
+authority merely because its mathematical signature is plausible.
 
 Use this milestone to audit, not merely exercise, the current design:
 
@@ -1295,7 +1377,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
-| `LEH-LONG-EXACT-GENERATOR-8C` | next | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
+| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed successor and candidate input carrier source-check; recursive generator and promotion remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |

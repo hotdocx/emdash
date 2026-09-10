@@ -1,0 +1,272 @@
+{
+  "baseline": "64d5cd28",
+  "date": "2026-09-10",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_points.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 16981,
+      "sha256": "f924a6cd41cd8559dfcf0b76b429ef0b2c56bb824efffffb22cf5a84f84bd557",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 8909,
+      "sha256": "3d71594606320acea1325cad4b499c8a914c379884df70e89db71c7263311d88",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4625,
+      "sha256": "d54e94f0c2efeed552aa3ceb21177aa85d6acfa1c8c3677d3accd97d887564a8",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4368,
+      "sha256": "8b1e333af1069cd3db35a30c448be1570f067be1a4e0bc03e4b27281f22f0022",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_take.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 1601,
+      "sha256": "ecd99053af3c9691d25ad838e44bf9cc6e3a1bc5a2534b03e71e9c947b5c984e",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_take_checks.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 735,
+      "sha256": "dd0ae112e0b61f7f01dd434e223d05ceb0f302490e8cc2dfcede0afce69ff4ff",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_annotated_timeout.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 8908,
+      "sha256": "f5571ee57caa4bd23efb87f45619640ac64b7651dc69a691d2186238ba88dfe6",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_partial.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 7676,
+      "sha256": "68695ac14ad102015e44c92cb4ceeaaa34f0a0c45fea5401f9404a934d317a4e",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_inferred.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 8446,
+      "sha256": "2d9a78d32713a8bef54192442838b22de85e918791266961eaef389677e1066c",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_point_types.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 247,
+      "sha256": "ab7078d754e2ddb20708a58350a25cf673cc9d7f8a3852cafcf934719691d186",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_canonical.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 15647,
+      "sha256": "60a2f63df0fc38a15d4eeba59ed5761a6c5ce3b516d982d25bc963990907a395",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_canonical.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 14672,
+      "sha256": "37bdefae9a2bd50353be03996c4bfe0a75a74da2d3b935ed20f71e0f3e3a194f",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_canonical_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4378,
+      "sha256": "2a9fe6668b81919fb8a53e1334a216a8c5b8f6b2070c1970b50bad80c2ca3389",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_arrow_alias_type.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 920,
+      "sha256": "c3e090abdc42b0c0eed7f7334925e833cf6b9a40f294c07b7c2f28425ab7d1f8",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_arrow_canonical_type.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 3019,
+      "sha256": "96311eb3fa4429878d8e78d5f82348887bce9b81964ef15e1368f0de4213583d",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_inferred_step.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 14678,
+      "sha256": "585b30ede4246bebce9e188db81326231905fc291757032d3fc07ada19456ea6",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_inferred_step_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4398,
+      "sha256": "25e40b999a83a3a6dba96de3ad22504422582f2a7872308924722bf52449be51",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_window_extension_direct_edges.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 27193,
+      "sha256": "1b01e2380e1fe047e5819fd2d447b846009a7c86c5d516a73e49c234a2f03b03",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_direct_edges.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 7690,
+      "sha256": "42bf9a3a8b67d4959af3ebcb6e1f9e7d040ef34e4c5ec36a9b8e3bf2fee4f370",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_direct_edges.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 14683,
+      "sha256": "92133c0b20acffe06fa15c10ba2ba03ffb2cb856bc7b2c3010cab95e499ad381",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_direct_edges_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4397,
+      "sha256": "649d778bd37ecd9892bedc78ef2d433133fa1512ec735ec3d34069da4a62027d",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_empty_tail.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 1304,
+      "sha256": "31253849c24a406cb514c272f5838eaef0577816f34ba5d929d6a5afb683dee4",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_typed_direct_step.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 15674,
+      "sha256": "23c6f955ff875d3734570f58c28c3bea25f699d66a75c6cbf81dfc685661c459",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_explicit_ih.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 19075,
+      "sha256": "dce9293ddb0ee9304da7ae9531d81f6360a8dfaa1d0eccfb3afa950f427b92f9",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_constructor.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 9566,
+      "sha256": "b21b14ada0384b093fe47bce1e1a796ed05c8ac97c880b874571521cfe3d813a",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_constructor_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4396,
+      "sha256": "129ea09c2d4b2aad016f69784d6d911258f4a7f2220cd53b83db0f5fabee986d",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_nat_rules.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 10238,
+      "sha256": "0e70d30d2bfed6720fbaa0501e2fdee6c55b010e8a6478d04a4363b9a36c38a5",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_nat_rules_checks.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 4394,
+      "sha256": "6fd9d2c1be7170577b2f54befc50b92a0697debc16023fa8d128a56ddc5b0fa9",
+      "status": "prepared-not-qualified; dependent target not reached or not run"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_exact_family.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 1053,
+      "sha256": "58b12cac7c9549bd4ea8eb77614eb3af0346472b6d6615dc20f0a12fad16c236",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_extension_explicit_pa.lp",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 6296,
+      "sha256": "0554eb1fe56f69b994bee19f81a0d2c7f856adecdb7c53e29cafa6059a69d1c9",
+      "status": "90-second-timeout; not-qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_extension.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 45551,
+      "sha256": "3708eccc2497dfb92e8372f875ff080b600b5334b40cec4db9a3980315ac5992",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_spans.lp",
+      "artifact": "checked_building_blocks.patch",
+      "bytes": 6905,
+      "sha256": "2b74938b044df1b1437a9f7946b105ba6302070a5e247f1545289bf3c4755846",
+      "status": "source-checked; see README for consumer boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_span_generator.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3737,
+      "sha256": "381b3113b64b8a999feef16e503d250e05c54bd5cb448107f0cc051cf1bbab1e",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_extension_comparison.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3836,
+      "sha256": "bf4b8ce1a908da11fa59484feccade09c40f74e8c58266251c554b50be9e73ca",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_span_canonical.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3767,
+      "sha256": "d79e270d6141bb55adfad0d9e41fb8f0b8883fdb7d1d3403170af3d7ed4e99d1",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_span_inferred_step.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3793,
+      "sha256": "94a227a416da765add0f53fd3330c03dcf7c17fdf34718b536f51bd65ed30941",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_span_direct_edges.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3805,
+      "sha256": "b84901f03ecb7e13aeb66342577abddf0a9c5e687e1df993da104785285d3f6e",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_row_span_induction_boundaries.sh",
+      "artifact": "unqualified_assembly_trials.patch",
+      "bytes": 3918,
+      "sha256": "a67ec7bf92b09319d06838ef00ffcd775d049891116170745f0521ae01a494a6",
+      "status": "diagnostic-driver; records failed or unreached owner/reviewer boundaries"
+    }
+  ]
+}

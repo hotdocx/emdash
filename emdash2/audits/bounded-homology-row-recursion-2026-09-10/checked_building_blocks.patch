@@ -1,0 +1,1289 @@
+diff --git a/emdash2/tmp/probes/homology_row_triple_points.lp b/emdash2/tmp/probes/homology_row_triple_points.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_points.lp
+@@ -0,0 +1,176 @@
++/* Point views of a coherent row triple through the original whole-H owners. */
++require open emdash.emdash3_2_homology_row_spans;
++require open emdash.emdash3_2_short_exact_row_chain_columns;
++require open emdash.emdash3_2_chain_pair_homology_actions;
++
++symbol homology_row_triple_source_pair [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_source_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_middle_pair [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_middle_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_inclusion [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_inclusion C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_source_homology [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA)
++    C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 (@ZeroArrowCone_cat C
++    t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++    C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) (@homology_row_triple_source_pair I C C1 P t PA T
++    state x));
++
++symbol homology_row_triple_middle_homology [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA)
++    C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t
++    PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@homology_row_triple_middle_pair
++    I C C1 P t PA T state x));
++
++symbol homology_row_triple_homology_inclusion [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @chain_pair_homology_action C (@computational_homology_preadditive C P t PA) C1 t T T0 (@preabelian_kernels C P t
++    PA) (@preabelian_cokernels C P t PA) KP QP (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++    T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I
++    C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t
++    PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@homology_row_triple_source_pair I C C1 P t PA T state x) (@homology_row_triple_middle_pair I
++    C C1 P t PA T state x) (@homology_row_triple_inclusion I C C1 P t PA T state x);
++
+diff --git a/emdash2/tmp/probes/finite_arrow_tail_take.lp b/emdash2/tmp/probes/finite_arrow_tail_take.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/finite_arrow_tail_take.lp
+@@ -0,0 +1,30 @@
++/* Take an exact prefix without changing any retained object, arrow or annotation. */
++require open emdash.emdash3_2_finite_arrow_tails;
++
++symbol finite_arrow_tail_take
++  [C : Cat]
++  (Q : Π A : τ (Obj C), Π B : τ (Obj C), Π D : τ (Obj C),
++    τ (Hom C A B) → τ (Hom C B D) → Grpd)
++  (n m : τ Nat_grpd) [A B : τ (Obj C)] [f : τ (Hom C A B)]
++  (xs : τ (@FiniteArrowTail C Q (@nat_add n m) A B f))
++  : τ (@FiniteArrowTail C Q n A B f)
++≔ (@nat_elim
++    (λ n0 : τ Nat_grpd, @Pi_grpd (Obj C) (λ A0 : τ (Obj C),
++      @Pi_grpd (Obj C) (λ B0 : τ (Obj C),
++        @Pi_grpd (Hom C A0 B0) (λ f0 : τ (Hom C A0 B0),
++          @Function_grpd (@FiniteArrowTail C Q (@nat_add n0 m) A0 B0 f0)
++            (@FiniteArrowTail C Q n0 A0 B0 f0)))))
++    (λ A0 : τ (Obj C), λ B0 : τ (Obj C), λ f0 : τ (Hom C A0 B0),
++      λ _ : τ (@FiniteArrowTail C Q m A0 B0 f0),
++        @finite_arrow_tail_nil C Q A0 B0 f0)
++    (λ n0 : τ Nat_grpd, λ rec : τ _,
++      λ A0 : τ (Obj C), λ B0 : τ (Obj C), λ f0 : τ (Hom C A0 B0),
++      λ xs0 : τ (@FiniteArrowTail C Q (@nat_add (succ n0) m) A0 B0 f0),
++        @finite_arrow_tail_cons C Q n0 A0 B0 f0
++          (@finite_arrow_tail_next C Q (@nat_add n0 m) A0 B0 f0 xs0)
++          (@finite_arrow_tail_arrow C Q (@nat_add n0 m) A0 B0 f0 xs0)
++          (@finite_arrow_tail_step C Q (@nat_add n0 m) A0 B0 f0 xs0)
++          (rec B0 (@finite_arrow_tail_next C Q (@nat_add n0 m) A0 B0 f0 xs0)
++            (@finite_arrow_tail_arrow C Q (@nat_add n0 m) A0 B0 f0 xs0)
++            (@finite_arrow_tail_rest C Q (@nat_add n0 m) A0 B0 f0 xs0)))
++    n) A B f xs;
+diff --git a/emdash2/tmp/probes/finite_arrow_tail_take_checks.lp b/emdash2/tmp/probes/finite_arrow_tail_take_checks.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/finite_arrow_tail_take_checks.lp
+@@ -0,0 +1,12 @@
++/* Prefix extraction retains the original arrows and annotation witnesses. */
++require open emdash.examples.finite_arrow_tails;
++require open emdash.tmp.probes.finite_arrow_tail_take;
++
++assert ⊢ @finite_arrow_tail_take C Q zero (succ (succ zero)) A B f joined
++  ≡ @finite_arrow_tail_nil C Q A B f;
++assert ⊢ @finite_arrow_tail_take C Q (succ zero) (succ zero) A B f joined ≡ first;
++assert ⊢ @finite_arrow_tail_take C Q (succ (succ zero)) zero A B f joined ≡ joined;
++assert ⊢ @finite_arrow_tail_step C Q zero A B f
++  (@finite_arrow_tail_take C Q (succ zero) (succ zero) A B f joined) ≡ q;
++assertnot ⊢ @finite_arrow_tail_step C Q zero A B f
++  (@finite_arrow_tail_take C Q (succ zero) (succ zero) A B f joined) ≡ q_other;
+diff --git a/emdash2/tmp/probes/homology_row_triple_extension_partial.lp b/emdash2/tmp/probes/homology_row_triple_extension_partial.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_extension_partial.lp
+@@ -0,0 +1,77 @@
++/* Extend a coherent triple's exact continuation through its original four-row window. */
++require open emdash.tmp.probes.homology_row_triple_points;
++require open emdash.emdash3_2_homology_window_extension;
++
++symbol homology_row_triple_extend_partial [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++(KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T0 (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (state : τ (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T))
++(R : τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T)) (h : τ (@Transf I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state))
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R))) (z : τ
++    (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I
++    C C1 P t (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) R (@homology_row_triple_second I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) h))
++  (x : τ (Obj I))
++≔ @homology_whole_window_extend C P t Ab (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C
++    P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    R) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T R) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    R) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state) x)
++    (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I
++    C C1 P t (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T R x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_first I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_second I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) R h x) ((@homology_row_triple_zero I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (z x) C1 T T0 KP QP;
+diff --git a/emdash2/tmp/probes/homology_row_triple_point_types.lp b/emdash2/tmp/probes/homology_row_triple_point_types.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_point_types.lp
+@@ -0,0 +1,5 @@
++/* Inspect the inferred endpoint presentation without adding a rule. */
++require open emdash.tmp.probes.homology_row_triple_points;
++flag "print_implicits" on;
++print homology_row_triple_homology_inclusion;
++print homology_row_triple_source_homology;
+diff --git a/emdash2/tmp/probes/homology_row_triple_arrow_alias_type.lp b/emdash2/tmp/probes/homology_row_triple_arrow_alias_type.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_arrow_alias_type.lp
+@@ -0,0 +1,11 @@
++/* Isolate the inclusion's endpoint annotation, independently of exactness. */
++require open emdash.tmp.probes.homology_row_triple_points;
++
++assert [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I)) ⊢
++  (@homology_row_triple_homology_inclusion I C C1 P t PA T T0 KP QP state x) : τ (Hom C (@homology_row_triple_source_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_middle_homology I C C1 P t PA T T0 KP QP state x));
+diff --git a/emdash2/tmp/probes/homology_row_triple_arrow_canonical_type.lp b/emdash2/tmp/probes/homology_row_triple_arrow_canonical_type.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_arrow_canonical_type.lp
+@@ -0,0 +1,11 @@
++/* Isolate the inclusion's endpoint annotation, independently of exactness. */
++require open emdash.tmp.probes.homology_row_triple_points;
++
++assert [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I)) ⊢
++  (@homology_row_triple_homology_inclusion I C C1 P t PA T T0 KP QP state x) : τ (Hom C (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA) C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) (@homology_row_triple_source_pair I C C1 P t PA T state x))) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA) C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@homology_row_triple_middle_pair I C C1 P t PA T state x))));
+diff --git a/emdash2/tmp/probes/homology_window_extension_direct_edges.lp b/emdash2/tmp/probes/homology_window_extension_direct_edges.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_window_extension_direct_edges.lp
+@@ -0,0 +1,318 @@
++/* Signature probe: literal existing H(inclusion) edges replace pair-projection annotations.
++   The same H arrows and exactness construction are retained.
++   Extend an exact continuation by the three original whole-H window pairs.
++   No new primitive, rule, proof postulate, H selection or endpoint transport. */
++require open emdash.emdash3_2_homology_exact_window_result;
++require open emdash.emdash3_2_computational_exact_arrow_tails;
++
++symbol homology_whole_window_extend
++  [C : Cat] [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t))
++  [Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 : τ (Obj C)]
++  (rowm : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm))
++  (row0 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0))
++  (row1 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1))
++  (row2 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2))
++  (F : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) Am
++    Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm
++      rowm)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0)))
++  (G : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) A0
++    B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0
++      row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1)))
++  (J : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) A1
++    B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1
++      row1)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2 row2)))
++  (upper_zero : τ (@= (Hom C Bm B1) (@comp_fapp0 C Bm B0 B1 (@computational_chain_pair_map_middle C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) A0 B0 D0 A1 B1 D1
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1) G)
++    (@computational_chain_pair_map_middle C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian C P t Ab))
++    Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm
++      Dm rowm)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F))
++    (@preadditive_hom_zero C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) Bm B1)))
++  (lower_zero : τ (@= (Hom C B0 B2) (@comp_fapp0 C B0 B1 B2 (@computational_chain_pair_map_middle C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) A1 B1 D1 A2 B2 D2
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2 row2) J)
++    (@computational_chain_pair_map_middle C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian C P t Ab))
++    A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0
++      D0 row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1) G))
++    (@preadditive_hom_zero C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) B0 B2)))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P
++    t Ab)) t T0
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (n : τ Nat_grpd)
++  (rest : τ (@ComputationalExactArrowTail C P t (@computational_abelian_preabelian C P t Ab) n (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C
++      P t Ab)) KP QP)
++    (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP A0 A1 A2
++      (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP B0 B1 B2 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)))
++      (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP A0 A1 A2 B0 B1 B2
++  (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)
++  (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)
++  (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero))))
++  : τ (@ComputationalExactArrowTail C P t (@computational_abelian_preabelian C P t Ab) (succ (succ (succ n)))
++    (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Am A0 A1 (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Bm B0 B1 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)))
++      (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP Am A0 A1 Bm B0 B1
++  (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)
++  (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)
++  (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)))
++≔ @computational_exact_arrow_tail_cons_pair C P t (@computational_abelian_preabelian C P t Ab) (succ (succ n))
++  (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Am A0 A1 (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Bm B0 B1 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Dm D0 D1 (@homology_connecting_step_right_pair C P t Ab A0 B0
++      D0 A1 B1 D1 Dm
++    row0 row1 G (@computational_chain_pair_map_prev C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian
++    C P t Ab)) Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t
++      Ab) Am Bm Dm
++    rowm) (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F)
++    (@short_exact_row_chain_target_zero_path C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1
++      B1 D1 rowm row0
++    row1 F G upper_zero))))
++    (@homology_whole_window_first_pair C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0 row1 row2 F G J
++      upper_zero lower_zero C1 T T0 KP QP) (@homology_whole_window_first_exact C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1
++      A2 B2 D2 rowm row0 row1 row2 F G J upper_zero lower_zero C1 T T0 KP QP)
++    (@computational_exact_arrow_tail_cons_pair C P t (@computational_abelian_preabelian C P t Ab) (succ n) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Bm B0 B1 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Dm D0 D1 (@homology_connecting_step_right_pair C P t Ab A0 B0
++      D0 A1 B1 D1 Dm
++    row0 row1 G (@computational_chain_pair_map_prev C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian
++    C P t Ab)) Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t
++      Ab) Am Bm Dm
++    rowm) (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F)
++    (@short_exact_row_chain_target_zero_path C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1
++      B1 D1 rowm row0
++    row1 F G upper_zero)))) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C
++      P t Ab)) KP QP)
++    (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP A0 A1 A2
++      (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)))
++      (@homology_whole_window_second_pair C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0 row1 row2 F G J
++        upper_zero lower_zero C1 T T0 KP QP) (@homology_whole_window_second_exact C P t Ab Am Bm Dm A0 B0 D0 A1 B1
++        D1 A2 B2 D2 rowm row0 row1 row2 F G J upper_zero lower_zero C1 T T0 KP QP)
++      (@computational_exact_arrow_tail_cons_pair C P t (@computational_abelian_preabelian C P t Ab) n (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Dm D0 D1 (@homology_connecting_step_right_pair C P t Ab A0 B0
++      D0 A1 B1 D1 Dm
++    row0 row1 G (@computational_chain_pair_map_prev C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian
++    C P t Ab)) Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t
++      Ab) Am Bm Dm
++    rowm) (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F)
++    (@short_exact_row_chain_target_zero_path C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1
++      B1 D1 rowm row0
++    row1 F G upper_zero)))) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C
++      P t Ab)) KP QP)
++    (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP A0 A1 A2
++      (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP B0 B1 B2 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)))
++        (@homology_whole_window_third_pair C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0 row1 row2 F G J
++          upper_zero lower_zero C1 T T0 KP QP) (@homology_whole_window_third_exact C P t Ab Am Bm Dm A0 B0 D0 A1 B1
++          D1 A2 B2 D2 rowm row0 row1 row2 F G J upper_zero lower_zero C1 T T0 KP QP) rest));
++
++symbol homology_whole_window_tail
++  [C : Cat] [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t))
++  [Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 : τ (Obj C)]
++  (rowm : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm))
++  (row0 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0))
++  (row1 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1))
++  (row2 : τ (@ComputationalShortExactRow C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2))
++  (F : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) Am
++    Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm
++      rowm)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0)))
++  (G : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) A0
++    B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0
++      row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1)))
++  (J : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
++    C P t Ab)) A1
++    B1 D1 A2 B2 D2 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1
++      row1)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2 row2)))
++  (upper_zero : τ (@= (Hom C Bm B1) (@comp_fapp0 C Bm B0 B1 (@computational_chain_pair_map_middle C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) A0 B0 D0 A1 B1 D1
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1) G)
++    (@computational_chain_pair_map_middle C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian C P t Ab))
++    Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm
++      Dm rowm)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F))
++    (@preadditive_hom_zero C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) Bm B1)))
++  (lower_zero : τ (@= (Hom C B0 B2) (@comp_fapp0 C B0 B1 B2 (@computational_chain_pair_map_middle C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) A1 B1 D1 A2 B2 D2
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A2 B2 D2 row2) J)
++    (@computational_chain_pair_map_middle C (@computational_homology_preadditive C P t
++      (@computational_abelian_preabelian C P t Ab))
++    A0 B0 D0 A1 B1 D1 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0
++      D0 row0)
++    (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A1 B1 D1 row1) G))
++    (@preadditive_hom_zero C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) B0 B2)))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P
++    t Ab)) t T0
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab))))
++  : τ (@ComputationalExactArrowTail C P t (@computational_abelian_preabelian C P t Ab) (succ (succ (succ zero)))
++    (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Am A0 A1 (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP Bm B0 B1 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)))
++      (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP Am A0 A1 Bm B0 B1
++  (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)
++  (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)
++  (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G upper_zero)))
++≔ @homology_whole_window_extend C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0 row1 row2 F G J upper_zero
++  lower_zero C1 T T0 KP QP zero
++    (@computational_exact_arrow_tail_nil C P t (@computational_abelian_preabelian C P t Ab) (@fapp0
++      (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C
++      P t Ab)) KP QP)
++    (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++      Ab)) t T
++    (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP A0 A1 A2
++      (@short_exact_row_chain_source_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++      (@computational_abelian_preabelian C P t Ab))
++    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++      (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) KP B0 B1 B2 (@short_exact_row_chain_middle_pair C P t
++    (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)))
++      (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP A0 A1 A2 B0 B1 B2
++  (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)
++  (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)
++  (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 A1 B1 D1 A2 B2 D2 row0 row1 row2 G J lower_zero)));
+diff --git a/emdash2/tmp/probes/homology_row_triple_extension_direct_edges.lp b/emdash2/tmp/probes/homology_row_triple_extension_direct_edges.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_extension_direct_edges.lp
+@@ -0,0 +1,77 @@
++/* Extend a coherent triple's exact continuation through its original four-row window. */
++require open emdash.tmp.probes.homology_row_triple_points;
++require open emdash.tmp.probes.homology_window_extension_direct_edges;
++
++symbol homology_row_triple_extend_partial [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++(KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T0 (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (state : τ (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T))
++(R : τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T)) (h : τ (@Transf I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state))
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R))) (z : τ
++    (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I
++    C C1 P t (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) R (@homology_row_triple_second I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) h))
++  (x : τ (Obj I))
++≔ @homology_whole_window_extend C P t Ab (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C
++    P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    R) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t (@computational_abelian_preabelian C P t Ab) T R) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    R) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state) x)
++    (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I
++    C C1 P t (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T R x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_first I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) (@homology_row_triple_second I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (@short_exact_row_family_transf_at I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) R h x) ((@homology_row_triple_zero I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T state) x) (z x) C1 T T0 KP QP;
+diff --git a/emdash2/tmp/probes/homology_row_triple_empty_tail.lp b/emdash2/tmp/probes/homology_row_triple_empty_tail.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_empty_tail.lp
+@@ -0,0 +1,13 @@
++/* Empty result at the original H(inclusion), with no induction. */
++require open emdash.tmp.probes.homology_row_triple_points;
++require open emdash.emdash3_2_computational_exact_arrow_tails;
++
++symbol homology_row_triple_empty_tail [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++  : τ (@ComputationalExactArrowTail C P t PA zero (@homology_row_triple_source_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_middle_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_homology_inclusion I C C1 P t PA T T0 KP QP state x))
++≔ @computational_exact_arrow_tail_nil C P t PA (@homology_row_triple_source_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_middle_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_homology_inclusion I C C1 P t PA T T0 KP QP state x);
+diff --git a/emdash2/tmp/probes/homology_row_triple_exact_family.lp b/emdash2/tmp/probes/homology_row_triple_exact_family.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_exact_family.lp
+@@ -0,0 +1,12 @@
++/* Test formation of the exact-tail family without the recursive proof. */
++require open emdash.tmp.probes.homology_row_triple_points;
++require open emdash.emdash3_2_computational_exact_arrow_tails;
++
++symbol HomologyTripleExactTail [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t PA)))
++  (n : τ Nat_grpd) (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I)) : Grpd
++≔ @ComputationalExactArrowTail C P t PA n (@homology_row_triple_source_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_middle_homology I C C1 P t PA T T0 KP QP state x) (@homology_row_triple_homology_inclusion I C C1 P t PA T T0 KP QP state x);
+diff --git a/emdash2/tmp/probes/homology_row_fields_extension.lp b/emdash2/tmp/probes/homology_row_fields_extension.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_fields_extension.lp
+@@ -0,0 +1,411 @@
++/* Literal row/map-indexed step, preserving the same original H applications. */
++require open emdash.emdash3_2_homology_row_triples;
++require open emdash.tmp.probes.homology_window_extension_direct_edges;
++
++symbol homology_row_fields_extend [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++    Ab)) t T0 (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T R0) (@short_exact_row_family_func I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1)
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 R2 f g))
++  (R3 : τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T)) (h : τ (@Transf I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    R2) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3)))
++  (z1 : τ (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 R3 g h))
++  (x : τ (Obj I)) (n : τ Nat_grpd) (rest : τ (@ComputationalExactArrowTail C P t (@computational_abelian_preabelian C P
++    t Ab) n (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive
++    C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t
++    Ab)) KP QP)
++   (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++     (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) (@short_exact_row_chain_source_pair C P t
++     (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++     T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian
++     C P t Ab) T R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z1 x))))
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++     (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++     (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t
++     Ab)) KP QP)
++   (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++     (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src)
++     (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@short_exact_row_chain_middle_pair C P t
++     (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++     T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian
++     C P t Ab) T R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z1 x))))
++     (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++     Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P
++     t (@computational_abelian_preabelian C P t Ab)) KP QP (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t
++     T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src)
++     (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_src) (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z1 x))
++     (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat
++     C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++     C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_tgt)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z1 x))
++     (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C
++     t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++     C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_tgt)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R3) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z1 x)))))
++  : τ (@ComputationalExactArrowTail C P t (@computational_abelian_preabelian C P t Ab) (succ (succ (succ n))) (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++    (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t
++    Ab)) KP QP)
++   (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++     (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R0) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) (@short_exact_row_chain_source_pair C P t
++     (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++     T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian
++     C P t Ab) T R0) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x) (z0 x))))
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
++     (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t
++     (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t
++     Ab)) KP QP)
++   (@chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T
++     (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src)
++     (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@short_exact_row_chain_middle_pair C P t
++     (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++     T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian
++     C P t Ab) T R0) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x) (z0 x))))
++     (@chain_pair_homology_action C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t
++     Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P
++     t (@computational_abelian_preabelian C P t Ab)) KP QP (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R0) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++     (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t
++     T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_src)
++     (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_src) (@short_exact_row_chain_source_pair C P t (@computational_abelian_preabelian C P t Ab)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x) (z0 x))
++     (@short_exact_row_chain_middle_pair C P t (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat
++     C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++     C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_tgt)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x) (z0 x))
++     (@short_exact_row_chain_inclusion C P t (@computational_abelian_preabelian C P t Ab) (@fapp0 (@ZeroArrowCone_cat C
++     t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++     C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++     WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_tgt)
++     (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++     (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1) x)) (@fapp0
++     WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R1) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++     (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++     (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++     (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++     (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++     R2) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0
++     x) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++     (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++     (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x) (z0 x))))
++≔ @homology_whole_window_extend C P t Ab (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t
++  Ab) T R0) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T R0) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0)
++  x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1)
++  x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T R1) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1)
++  x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2)
++  x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T R2) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2)
++  x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3)
++  x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T R3) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3)
++  x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 x)
++  (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 x)
++  (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 x)
++  (@short_exact_row_family_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R3 x)
++  (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R0 R1 f x)
++  (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R1 R2 g x)
++  (@short_exact_row_family_transf_at I C C1 P t (@computational_abelian_preabelian C P t Ab) T R2 R3 h x) (z0 x) (z1 x)
++  C1 T T0 KP QP n rest;
+diff --git a/emdash2/tmp/probes/homology_row_field_spans.lp b/emdash2/tmp/probes/homology_row_field_spans.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_field_spans.lp
+@@ -0,0 +1,71 @@
++/* Coherent finite input with the original row/map/zero data retained as rigid indices. */
++require open emdash.emdash3_2_homology_row_triples;
++
++constant symbol HomologyRowFieldSpan [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (n : τ Nat_grpd) (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g)) : Grpd;
++
++constant symbol homology_row_field_span_nil [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g)) : τ (@HomologyRowFieldSpan I C C1 P t PA T zero R0 R1 R2 f g z0);
++
++constant symbol homology_row_field_span_cons [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  [n : τ Nat_grpd] (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g))
++  (R3 : τ (@ShortExactRowFamily I C C1 P t PA T)) (h : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R2) (@short_exact_row_family_func I C C1 P t PA T R3)))
++  (z1 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R1 R2 R3 g h))
++  (rest : τ (@HomologyRowFieldSpan I C C1 P t PA T n R1 R2 R3 g h z1))
++  : τ (@HomologyRowFieldSpan I C C1 P t PA T (succ n) R0 R1 R2 f g z0);
++
++symbol homology_row_field_span_next [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (n : τ Nat_grpd) (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g))
++  (span : τ (@HomologyRowFieldSpan I C C1 P t PA T (succ n) R0 R1 R2 f g z0))
++  : τ (@ShortExactRowFamily I C C1 P t PA T);
++rule @homology_row_field_span_next _ _ _ _ _ _ _ _ _ _ _ _ _ _
++  (@homology_row_field_span_cons _ _ _ _ _ _ _ _ _ _ _ _ _ _ $value _ _ _) ↪ $value;
++
++symbol homology_row_field_span_map [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (n : τ Nat_grpd) (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g))
++  (span : τ (@HomologyRowFieldSpan I C C1 P t PA T (succ n) R0 R1 R2 f g z0))
++  : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R2) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_field_span_next I C C1 P t PA T n R0 R1 R2 f g z0 span)));
++rule @homology_row_field_span_map _ _ _ _ _ _ _ _ _ _ _ _ _ _
++  (@homology_row_field_span_cons _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ $value _ _) ↪ $value;
++
++symbol homology_row_field_span_zero [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (n : τ Nat_grpd) (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g))
++  (span : τ (@HomologyRowFieldSpan I C C1 P t PA T (succ n) R0 R1 R2 f g z0))
++  : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R1 R2 (@homology_row_field_span_next I C C1 P t PA T n R0 R1 R2 f g z0 span) g (@homology_row_field_span_map I C C1 P t PA T n R0 R1 R2 f g z0 span));
++rule @homology_row_field_span_zero _ _ _ _ _ _ _ _ _ _ _ _ _ _
++  (@homology_row_field_span_cons _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ $value _) ↪ $value;
++
++symbol homology_row_field_span_rest [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (n : τ Nat_grpd) (R0 R1 R2 : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (f : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R0) (@short_exact_row_family_func I C C1 P t PA T R1))) (g : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T R1) (@short_exact_row_family_func I C C1 P t PA T R2)))
++  (z0 : τ (@RowFamilyMiddleChainZero I C C1 P t PA T R0 R1 R2 f g))
++  (span : τ (@HomologyRowFieldSpan I C C1 P t PA T (succ n) R0 R1 R2 f g z0))
++  : τ (@HomologyRowFieldSpan I C C1 P t PA T n R1 R2 (@homology_row_field_span_next I C C1 P t PA T n R0 R1 R2 f g z0 span) g (@homology_row_field_span_map I C C1 P t PA T n R0 R1 R2 f g z0 span) (@homology_row_field_span_zero I C C1 P t PA T n R0 R1 R2 f g z0 span));
++rule @homology_row_field_span_rest _ _ _ _ _ _ _ _ _ _ _ _ _ _
++  (@homology_row_field_span_cons _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ $value) ↪ $value;
