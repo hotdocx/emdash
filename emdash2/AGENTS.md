@@ -224,8 +224,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the same H objects/maps and takes no extra squares or factor choices.
   `scripts/check_homology_third_exactness.sh` checks the source graph and
   reviewer, including the negative distinction between boundary epicity
-  and epicity of delta. All three window interiors are proved; exact-window
-  packaging, connecting naturality, native interpretation and bounded/book
+  and epicity of delta. All three window interiors are proved.
+  `emdash3_2_homology_exact_window.lp` packages their predicates over the
+  existing window; its result module supplies the three original proofs.
+  The generic and canonical projections compute without a duplicated
+  object/arrow list. `scripts/check_homology_exact_window.sh` checks this
+  source join and its reviewer; the registered source/example/health
+  dispatchers use the same staged gate for these owners. A wrong-interior
+  negative timed out and is archived as unqualified; the rigid
+  unrelated-witness negative passes.
+  Connecting naturality, retained native interpretation and bounded/book
   obligations remain. No new primitive or rule is introduced.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow

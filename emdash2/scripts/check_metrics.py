@@ -241,6 +241,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_homology_epic_covers.lp"),
     Path("emdash3_2_homology_second_exactness.lp"),
     Path("emdash3_2_homology_third_exactness.lp"),
+    Path("emdash3_2_homology_exact_window.lp"),
+    Path("emdash3_2_homology_exact_window_result.lp"),
     Path("emdash3_2_kernel_domain_comparison_factors.lp"),
     Path("emdash3_2_cokernel_codomain_comparison.lp"),
     Path("emdash3_2_snake_row_source_cycle_iso.lp"),
@@ -668,7 +670,13 @@ SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES = {
     Path("examples/homology_connecting_factor.lp"),
     Path("examples/homology_connecting.lp"),
 }
+SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES = {
+    Path("emdash3_2_homology_exact_window.lp"),
+    Path("emdash3_2_homology_exact_window_result.lp"),
+    Path("examples/homology_exact_window.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES, "./scripts/check_homology_exact_window.sh"),
     (SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES, "./scripts/check_homology_connecting.sh"),
     (SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES, "./scripts/check_snake_row_source_boundary.sh"),
     (SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES, "./scripts/check_snake_row_target_homology.sh"),

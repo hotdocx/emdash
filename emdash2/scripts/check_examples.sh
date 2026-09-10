@@ -41,6 +41,7 @@ snake_target_cycles_examples_checked=0
 snake_target_homology_examples_checked=0
 snake_source_boundary_examples_checked=0
 homology_connecting_examples_checked=0
+homology_exact_window_examples_checked=0
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
@@ -103,6 +104,11 @@ for file in examples/*.lp; do
     if [[ "$homology_connecting_examples_checked" -eq 0 ]]; then
       ./scripts/check_homology_connecting.sh
       homology_connecting_examples_checked=1
+    fi
+  elif [[ "$file" == "examples/homology_exact_window.lp" ]]; then
+    if [[ "$homology_exact_window_examples_checked" -eq 0 ]]; then
+      ./scripts/check_homology_exact_window.sh
+      homology_exact_window_examples_checked=1
     fi
   else
     check_file "$file"

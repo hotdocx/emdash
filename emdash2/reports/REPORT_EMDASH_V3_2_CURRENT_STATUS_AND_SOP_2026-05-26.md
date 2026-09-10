@@ -1403,11 +1403,23 @@ belongs to the owning implementation plan rather than to standing guidance.
   additional square, split epi, homology choice or object-equality cast.
   The source/reviewer gate is `scripts/check_homology_third_exactness.sh`;
   its negative consumer distinguishes exactness from epicity of delta.
-  The complete window now has three proved interior witnesses. Whole-window
-  packaging, connecting naturality, retained native connecting semantics,
+  The complete window now has three proved interior witnesses. The next
+  owner packages them; connecting naturality, retained native connecting semantics,
   generic bounded assembly and final book consolidation remain required.
   The nineteen symbols are definitions and proofs, not new primitives,
   runtime rules or unification rules.
+- `emdash3_2_homology_exact_window.lp` and its result module give one
+  exactness bundle indexed by the original whole-H window. The carrier is
+  an existing groupoidal product of the three exactness predicates; the
+  canonical constructor reuses the three proved witnesses. No extra object,
+  arrow, zero-path or H selection is stored. Generic and canonical
+  projection computations pass, as does the unrelated-witness negative.
+  The slower wrong-interior negative is preserved as a timeout, not a
+  passed test. `scripts/check_homology_exact_window.sh` is the individually
+  bounded gate, also used by the source/example/health dispatchers for
+  these owners; the warning-enabled source inventory remains 1,249/169.
+  This result does not supply connecting naturality, a whole connecting
+  transformation, bounded assembly or the retained connecting CAS model.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

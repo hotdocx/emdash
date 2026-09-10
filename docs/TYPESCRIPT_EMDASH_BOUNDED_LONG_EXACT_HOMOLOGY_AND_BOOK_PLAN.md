@@ -6,6 +6,16 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Exact whole-window result (2026-09-10): `HomologyWholeExactWindow` now
+packages the three proved interior witnesses over the original whole-H
+window. The canonical result and generic/canonical projection computations
+are qualified. No objects, arrows or H selections are duplicated. The
+[pilot qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#exact-whole-window-result-qualification)
+records the negative-check refinement and scoped validation; its next
+owner audit identifies connecting naturality and the original-model
+normality enhancement. These, retained native connecting interpretation,
+bounded formal assembly and final book/consolidation work remain required.
+
 Third whole-H interior exactness (2026-09-10): the same window is now
 proved exact at H(A'), after delta. `homology_whole_window_third_exact`
 uses the retained inclusion-kernel cover, original row projection and
@@ -957,13 +967,13 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | native window and all three actual whole-H interior witnesses complete; whole packaging, connecting naturality and connecting-consumer qualification remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | native window and exact whole-H result complete; connecting naturality and connecting-consumer qualification remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | complete through 7C1–7C2 | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
 | `LEH-GENERIC-MAP-OPERATIONS-7C1` | complete; checkpoint `3df110ee` | existing Hom fibres and actual whole kernels/cokernels/homologies | maps, reconstruction, identity/composition/extensionality paths, inverse comparisons, and explicit choice isomorphisms |
 | `LEH-SNAKE-ROW-COMPARISONS-7C2` | complete; checkpoint `1967214f` | 7C1, row-5 short-exact comparisons, generic snake | actual short-exact-row map to snake triple; alpha/gamma comparisons; source-cycle and target-cokernel isomorphisms at the actual selected owners |
-| `LEH-WINDOW-GENERIC-EXACT-7D` | direct whole-H connecting and all three actual window interiors proved; whole packaging and downstream integration remain | rows 7B–7C and the current whole-H pilot | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
+| `LEH-WINDOW-GENERIC-EXACT-7D` | complete at the original whole-H window, including the indexed exact result; downstream naturality and consumer integration remain separate | rows 7B–7C and the current whole-H pilot | full generic homology connecting factor/descent and three interior exactness witnesses; no native decision substituted for the theorem |
 | `LEH-SNAKE-COVERED-RECONSTRUCTION-7D0` | complete; checkpoint `c0040858` | existing connecting/u/lift/pushout reconstructions and q2 monicity | partial ∘ p1 = pi ∘ original lambda lift, with an actual factor-space consumer |
 | `LEH-TARGET-CYCLE-FACTOR-7D1` | complete; checkpoint `f05c5d0e` | 7D0, actual short-exact row maps and supplied homology cycles | derived column views, source-isomorphism factor transfer and covered factor into the actual target cycles |
 | `LEH-TARGET-NORMAL-LIFT-7D2` | complete; checkpoint `3d62f060` | 7D1, covered reconstruction and target cokernel comparison | derive the normal test and factor the compared snake arrow through the homology inclusion |

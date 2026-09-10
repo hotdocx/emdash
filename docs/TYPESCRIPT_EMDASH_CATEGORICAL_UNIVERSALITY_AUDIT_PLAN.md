@@ -171,6 +171,14 @@ consumer still precede the broad universality-migration gate. This result
 strengthens the reference baseline, not a claim that the broad migration
 has been implemented or that the whole parent goal is complete.
 
+The three witnesses are now packaged in `HomologyWholeExactWindow`, indexed
+by the original whole-H inputs with no duplicate objects or arrows. Generic
+and canonical projections compute; a rigid unrelated-witness negative
+passes. The expanded wrong-interior negative remains a recorded timeout.
+Nine more recovered source/control versions bring the archive to 162.
+Connecting naturality and native interpretation remain ahead of the broad
+universality migration; packaging the proofs is not that migration.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their

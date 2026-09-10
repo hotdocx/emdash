@@ -144,6 +144,9 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 | `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
+| `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
+| `HINT-CONNECTING-NATURALITY-23` | next owner audit recorded; not implemented | characterize delta by its epic covered formula, derive comparison of original covers from whole input actions, then qualify a whole connecting transformation |
+| `HINT-FREYD-ABELIAN-MODEL-24` | concrete capability prerequisite identified | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3655,3 +3658,128 @@ Package the exact whole window, qualify connecting naturality and the
 retained native connecting interpretation, then complete bounded formal
 assembly and the final book/architecture evidence. The broader categorical
 universality migration and general variance repair remain separately gated.
+
+### Exact Whole-Window Packaging And Naturality Continuation
+
+Active continuation (2026-09-10): package the three completed exactness
+witnesses as one transparent dependent-Sigma result indexed by the existing
+whole-H window. The original input rows, whole H, induced maps, delta and
+three shared chain pairs remain the owners. Do not store another selection
+of the five objects or four arrows, or introduce a separate diagram grammar.
+Keep the result carrier/constructor/projections separate from the canonical
+theorem joining the three heavier exactness modules. Qualification requires
+typed canonical projection computations and a negative constructor-input
+check. The initial proposed wrong-interior comparison and its measured
+checking limit are retained in the qualification below; do not report a
+timeout as a successful negative test.
+
+This packaging is not connecting naturality. The next audit must identify
+the existing maps of input row diagrams and their whole actions, then
+derive the connecting comparison from original pullback lifts and quotient
+reconstructions. A manual list of newly assumed commuting squares is not
+the desired public input. Preserve this distinction when qualifying the
+bounded/CAS consumer: a collection of components and exactness proofs does
+not itself provide a whole connecting transformation.
+
+### Connecting Naturality And Model Boundary: Next Owner Audit
+
+The current source supports the following next proof strategy. First expose
+the existing connecting component's uniqueness from its covered formula:
+qC∘e is epic, so two candidate arrows out of H(C) agreeing after qC∘e
+are equal. This uses `homology_connecting_cover_epic`,
+`homology_record_projection_epic`, `is_epic_comp` and the existing covered
+reconstruction, not another descent algorithm or an inverse to an epi.
+
+For a map of input sequences, construct the map between the original
+connecting pullbacks from its actual cycle and middle actions. Source and
+target cycle monicity should identify the induced target lift. The covered
+formula then proves H(A')(u)∘δ_x = δ_y∘H(C)(u), by cancellation of
+the original qC∘e. The current whole H actions and structural
+transformations already supply their reconstruction factors.
+
+The public family input must still be qualified. There is no current whole
+category of short-exact-row diagrams in the owner inventory. A candidate
+is a family over a base B of the existing native zero-cone objects, with
+row maps as actual transformations; their action/naturality then supplies
+the needed compatibility rather than new hand-written square fields.
+`zero_arrow_cone_chain_pair_map`, the whole map-introduction interface and
+`strict_component_naturality_path` are the existing starting points. This
+is a direction for the next probe, not a claim that the family or a whole
+connecting transformation has already been constructed.
+
+The retained Freyd model has a separate, concrete capability boundary.
+`FreydHomologyModel` stores its initial-zero observation, W/V and coherent
+kernel/cokernel presentations. It does not contain the monic-lift and
+epic-colift families required by `ComputationalAbelianCategory` for the
+direct connecting construction. The existing `preabelian_category_intro`
+can retain the original W/V, and `computational_abelian_category_intro`
+can add explicitly supplied normality families over that same package.
+Probe that selection-preserving enhancement for the connecting consumer;
+do not silently install a second W/V, cast between H objects, or infer a
+closed quotient-level provider from the older raw witnessed capabilities.
+This audit identifies the next interface to implement, not a new axiom or
+an already completed native connecting interpretation.
+
+### Exact Whole-Window Result Qualification
+
+`emdash3_2_homology_exact_window.lp` defines `HomologyWholeExactWindow`,
+its constructor and three projections. It is the existing groupoidal
+product (constant-fibre Sigma) of the three exactness predicates at the
+original first/second/third pairs. The result is indexed by the original
+four rows, coherent model and whole-H window; it does not store another
+list of objects, arrows, zero paths or H choices.
+
+`emdash3_2_homology_exact_window_result.lp` constructs the canonical
+result from `homology_whole_window_first_exact`,
+`homology_whole_window_second_exact` and
+`homology_whole_window_third_exact`. The separation lets the light carrier
+be used without importing the heavier proof join. There are six defined
+symbols across the two owners and no new primitive, rewrite or unifier.
+The whole H and its higher action remain unchanged; this proof bundle is
+not a new functor or the still-missing whole connecting transformation.
+
+The reviewer checks the canonical result type, all three constructor beta
+laws at arbitrary witnesses, all three canonical projection computations,
+and rejection of a rigid unrelated witness for the second field. All seven
+positive checks and that negative pass. The earlier attempt to use a
+first-interior witness in the second field timed out at 90 seconds, both
+in its original reviewer and in isolation. It is explicitly unqualified,
+not evidence of rejection. Isolation also confirmed that the canonical
+projection computations themselves pass, contrary to the initial suspected
+cause; no runtime computation was removed and no rule was added to force
+the negative through.
+
+`scripts/check_homology_exact_window.sh` passes with the corrected
+reviewer. The fresh source graph checks core, the shared window and both
+cover owners, all three exactness modules, the two new owners and the
+reviewer individually under 90 seconds. The new owners took 2 and 4
+seconds; the reviewer took 4 seconds. Its log is
+`logs/probes/homology-exact-window-quiet-20260910-035420.log`, with compact
+output in `homology-exact-window-active-driver.log`. No unrelated aggregate
+was run.
+
+The warning-enabled source join also checks, with its full inventory equal
+to the preceding qualified parent boundary at 1,249/169 in categories,
+locations, term heads and rule families, with no parser issues. That run's
+obsolete wrong-interior reviewer timed out; the corrected reviewer passes
+separately with warnings enabled. The logs are
+`homology-exact-window-warnings-20260910-034614.log` and
+`homology-exact-window-final-reviewer-warnings.log`. Do not describe the
+obsolete full warning run as green. Both strict LHS audits, catalog/TOC,
+37 focused tooling tests and source-only health checks pass. The ordinary
+source/example dispatchers and health checker route the two new owners and
+their reviewer through the qualified staged gate. Three new tooling tests
+check one-run dispatch, exact owned-target coverage and failure propagation;
+no cold whole-join timeout is introduced for these registered targets.
+The source snapshot covers 852 files at
+`sha256:301b00714e18584edd82a44373eb203af66554d5493970fd16ae19e0b2943cea`.
+
+`exact-window-prototypes.patch`, pinned to `a96fa507`, preserves nine
+source/driver versions including the timed negatives and their successful
+controls' supporting owners. Isolated-index recovery verifies all nine
+hashes; the complete archive now contains 162 versions in thirteen
+artifacts. Accepted code and the final reviewer are the active authority.
+
+The exact window is now one reusable result. This resolves its packaging
+boundary, not bounded-spine sharing, connecting naturality, the native
+connecting interpretation or the final book/architecture completion audit.

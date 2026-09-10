@@ -1102,6 +1102,76 @@
           "qualification": "validation driver; stage paths identify the original source-check runs"
         }
       ]
+    },
+    {
+      "artifact": "exact-window-prototypes.patch",
+      "base_commit": "a96fa50782a2b683d7e3b5fd5781125a14297999",
+      "note": "Whole-window packaging prototypes and checker controls. Typed/generic/canonical positive consumers pass; the expanded wrong-interior negative is a 90-second timeout, not a passed negative. The final reviewer uses the checked rigid unrelated-witness control.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_foundation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_foundation.lp",
+          "kind": "new",
+          "sha256": "789eea3306e6cbcda3895a972baa93392fbc785832c563c8ba96462393cf02bb",
+          "status": "checked unformatted carrier prototype"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_result.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_result.lp",
+          "kind": "new",
+          "sha256": "1ddd2d1ad96724d22f62c523256ace2d217f0eb80556d15e22f4a794c80ab7e9",
+          "status": "checked canonical result prototype"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_baseline.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_baseline.sh",
+          "kind": "new",
+          "sha256": "4b96dc1537c4d7eb1840566b39168748ad524deb2b81f71b13c2c396e291a361",
+          "status": "checked staged prerequisite driver"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_check.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_check.sh",
+          "kind": "new",
+          "sha256": "7ab2aa1dafbe970922ff0d348b3e003e3844734de03d64066253e9a86c1ccb91",
+          "status": "initial promotion driver; obsolete reviewer timed out"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_canonical_beta_reviewer.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_canonical_beta_reviewer.lp",
+          "kind": "new",
+          "sha256": "7abf8bb9dc07dbf7b11b36c744eadbd184c90c7c86bdd09cfe8843edde3e2230",
+          "status": "90-second reviewer timeout; isolated type/canonical beta checks pass, wrong-interior negative does not qualify"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_exact_window_generic_wrong_reviewer.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_exact_window_generic_wrong_reviewer.lp",
+          "kind": "new",
+          "sha256": "8db99d0f157af9e9c65b06ef5516393e04785cc6d7f0f97aeba203ecdcba1f9c",
+          "status": "90-second reviewer timeout; isolated generic beta passes, same wrong-interior negative does not qualify"
+        },
+        {
+          "path": "emdash2/tmp/probes/exact_window_wrong_field.lp",
+          "origin": "/tmp/emdash-exact-window.ysXLEp/tmp/probes/exact_window_wrong_field.lp",
+          "kind": "new",
+          "sha256": "325215759abc6dd537534cd71ff0b1270ac723aa556d3ec1c90c62e59bef027d",
+          "status": "isolated wrong-interior negative timed out at 90 seconds; not a passed negative"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_exact_window.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_exact_window.lp",
+          "kind": "new",
+          "sha256": "e4080f1c2da5cadd274f11e4d4112812bdb26a5d539e6b42fa27d0f3ff4845ee",
+          "status": "checked promoted carrier needed by isolated reviewer probes"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_exact_window_result.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_exact_window_result.lp",
+          "kind": "new",
+          "sha256": "52593536d64f019b4555f49c188f6e72e967c690f455fa5f32c52b6dc99f0ea4",
+          "status": "checked promoted canonical result needed by isolated reviewer probes"
+        }
+      ]
     }
   ]
 }
