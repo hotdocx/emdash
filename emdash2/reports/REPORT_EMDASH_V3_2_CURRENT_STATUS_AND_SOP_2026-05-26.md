@@ -1337,6 +1337,19 @@ belongs to the owning implementation plan rather than to standing guidance.
   universals. Neither the row objects nor factor syntax is runtime-collapsed
   to an independent selection. These are rule-free row constructions for
   direct connecting work, not a postulated connecting arrow or a splitting.
+- `emdash3_2_homology_record_connecting.lp` and its direct dependencies
+  now construct delta at two retained homology records, including their
+  actual cycle embeddings, boundaries and quotient projections. The cover
+  kernel and the original source boundary are proved annihilated; normal-epi
+  colifting and the actual source cokernel then give delta and its two
+  reconstructions. The whole-H reviewer checks literal whole-H endpoints,
+  not an endpoint-converted older connecting arrow. Twelve sources and four
+  reviewers pass `scripts/check_homology_record_connecting.sh`; the
+  source-only warning inventory is unchanged at 1,249/169. No primitive,
+  rewrite or unifier is added. This reference point construction does not
+  yet supply connecting naturality, the generic window exactness theorem
+  or its retained native connecting interpretation. The pilot records the
+  consistent step-pair endpoint fix and preserves the failed mixed forms.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

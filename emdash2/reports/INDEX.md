@@ -15,6 +15,14 @@ window exactness, generic bounded assembly, final formal-boundary audits,
 and the final Chapter 31 update remain active requirements. The companion
 owner audit records these boundaries; no closed formal quotient effectiveness
 is claimed.
+The current direct connecting tranche constructs delta from the original
+rows at retained whole-H endpoints, deriving both descent tests and both
+reconstruction laws. Its focused source/reviewer gate is
+`scripts/check_homology_record_connecting.sh`. The pilot's latest
+qualification supersedes earlier point-connecting pending notes below;
+whole connecting naturality, generic window exactness, the retained native
+connecting interpretation, bounded formal assembly and final book work
+remain active obligations.
 The two inherited variance diagnostics remain recorded in the
 [bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
 The user has deferred their general repair until after the homological-

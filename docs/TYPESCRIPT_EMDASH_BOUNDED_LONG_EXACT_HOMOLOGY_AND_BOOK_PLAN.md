@@ -6,6 +6,19 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Direct whole-H-endpoint connecting tranche (2026-09-10): the new
+`homology_record_connecting` constructs delta through the original rows,
+the retained source cycles and the retained target cycles/quotient. Both
+cover-kernel and source-boundary annihilation are derived, followed by the
+two actual descents. Its whole-H reviewer has literal H source and target
+observations, not an old connecting arrow followed by endpoint conversions.
+The [pilot qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#direct-connecting-at-retained-whole-h-endpoints)
+records the implementation, the measured mixed-presentation failure and the
+consistent endpoint fix. This completes the reference point construction,
+not connecting naturality, three window exactness results, the native
+connecting interpretation, bounded formal assembly or final book work.
+The reference-window-first policy below remains unchanged.
+
 Categorical-universality review (2026-09-09): the existing whole adjunction
 Hom-prof comparison is the primary universal interface. The pilot's
 [reviewed continuation](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#categorical-universality-is-primary-reviewed-continuation)
@@ -916,7 +929,7 @@ was introduced to get a passing target.
 | `LEH-SOURCE-ANNIHILATION-7D3B` | complete; checkpoint `1a8da30a` | 7D3A, source-cycle comparison, existing inner snake zero | factor the source boundary through the second snake map after the upper epic projection, then cancel that cover |
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
-| `LEH-WINDOW-EXACTNESS-7D4` | pending | 7D3, generic induced maps and existing snake exactness | adjacent-zero paths and exactness at the three actual window interiors |
+| `LEH-WINDOW-EXACTNESS-7D4` | pending; use the new direct whole-H-endpoint connecting construction | HINT-DIRECT-CONNECTING-17, whole H induced maps and reusable exactness-cover/extension lemmas | adjacent-zero paths and exactness at the three actual window interiors |
 | `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly complete; generic theorem/assembly pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |

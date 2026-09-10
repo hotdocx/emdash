@@ -139,6 +139,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
 | `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
+| `HINT-DIRECT-CONNECTING-17` | direct point construction and literal whole-H endpoint consumer qualified; naturality/window/CAS connecting interpretation remain | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3090,3 +3091,106 @@ pinned Git baselines. Isolated index/object-store recovery reproduced all
 saved diff is byte-identical as well. Failed alternatives remain labelled
 as failures, not positive library checks. No active worktree, repository
 index or repository object store was changed by that recovery verification.
+
+### Direct Connecting At Retained Whole-H Endpoints
+
+The reference-first tranche now constructs delta itself, rather than
+retyping the older snake comparison. The implementation is in
+`emdash3_2_homology_record_connecting.lp` and its direct connecting
+dependencies; `scripts/check_homology_record_connecting.sh` owns the
+fresh-source, individually bounded qualification.
+
+For four original short-exact rows Am→Bm→Dm, A0→B0→D0,
+A1→B1→D1 and A2→B2→D2, retain the three original row maps and the
+two middle-column chain-zero laws. Hs is the supplied record of the
+right-column pair Dm→D0→D1; Ht is the supplied record of
+A0→A1→A2. Write their actual structural arrows as
+κs:Zs→D0, βs:Dm→Zs, qs:Zs→Hs and κt:Zt→A1, qt:Zt→Ht.
+
+The construction uses only the existing selected operations:
+
+1. Pull back the row epi p0:B0→D0 along κs. The retained cover has
+   e:E→Zs epic, b:E→B0 and p0∘b = κs∘e.
+2. Lift the middle differential of b through the original row inclusion
+   i1:A1→B1, obtaining a:E→A1. The next column zero law makes a a
+   target-cycle test; the retained target kernel supplies v:E→Zt.
+3. Put w = qt∘v. On the actual kernel of e, a is an incoming target
+   boundary. The new generic `homology_record_boundary_factors` helper
+   proves that every such cycle factor is killed by the retained quotient.
+   Thus w kills Ker(e), and the existing normal-epi operation gives
+   u:Zs→Ht with u∘e = w.
+4. The preceding row lifts βs∘pm into E. Its second projection is the
+   preceding middle differential. The upper column zero law, then i1
+   and κt monicity, make w vanish on this lift. Epic pm cancellation
+   proves u∘βs = 0.
+5. The actual source boundary cokernel now supplies delta:Hs→Ht,
+   retaining the whole Hom-precomposition factor delta∘qs = u and
+   the covered reconstruction delta∘qs∘e = w.
+
+No epimorphism is split, no normal test is postulated, no homology is
+reselected and no terminal object-equality transport defines delta. The
+original row comparison inverses remain genuine lift operations inside
+the checked row adapters. The record-based universal-law proofs are still
+explicit paths, as permitted by the reference-first decision. This does
+not redefine directed universality or imply a new normalization calculus.
+
+`examples/homology_record_connecting_whole.lp` instantiates both records
+with `chain_pair_homology_record` and checks the result at literal
+`fapp0` observations of the existing whole H. The ordinary record reviewer
+also checks that the selected delta is the actual source cokernel colift,
+checks its reconstruction and rejects the preceding chain object as its
+source. The four reviewers have seven positive checks and one negative.
+This is a point connecting operation with whole-H endpoints, not yet a
+packaged whole connecting transformation or its naturality law.
+
+The important LF failure was a mixed presentation of the SAME chain pair
+inside the selected cover object. The initial, explicit-path-endpoint and
+explicit-composition-endpoint variants exceeded 90 seconds. The typing
+trace in `direct-source-left-typing-staged.log` locates the delay at
+conversion between cover objects indexed by
+`short_exact_row_chain_target_pair` and
+`homology_connecting_step_right_pair`, before checking the cancellation
+proof. The H-record input type itself had already converted. Using the
+same step-pair expression throughout the cover, factor and descent
+interfaces makes the actual cancellation and both descents check.
+No unifier, primitive or equality cast was needed. A separately checked
+generic monic-pasting helper is archived but was not promoted because
+the endpoint correction sufficed.
+
+All twelve source modules and four reviewers pass the fresh staged
+gate in `logs/probes/homology-record-connecting-active-driver.log`
+(detailed source log
+`homology-record-connecting-quiet-20260909-233821.log`).
+The final source-boundary zero check took seven seconds; the two final
+descent/connecting modules took two seconds each. The literal whole-H
+consumer took five seconds. These are measured checks, not a promise
+that all larger future consumers will have the same cost.
+Fresh source-only baseline/candidate warning inventories are identical
+at 1,249 critical-pair and 169 replaceable-pattern reports, including
+categories, locations, term heads and rule families, with no parser issues.
+The logs are `direct-record-connecting-{baseline,candidate}-warnings.log`.
+No primitive, rewrite or unification rule is introduced; the nucleus and
+native TypeScript algorithms are unchanged.
+
+All twelve strict LHS audits pass (there are no new rules). Catalog and
+source-TOC checks, all 34 focused metrics/TOC/warning-parser tests, report
+headers, active links and shell/diff hygiene pass. The source-only health
+snapshot covers 823 files at
+`sha256:5cd61857da6a216e67f98c1fb2db01d86296e0c0cfd329e37b3354c2d585840b`.
+That refresh does not claim a new full-health run; inherited health and
+op/Sigma soundness qualifications remain. No unrelated aggregate, native
+TypeScript suite, book render or general variance repair was run.
+
+The added non-executable `direct-connecting-experiments.patch` preserves
+27 prototype/control/driver files against checkpoint `31cd9770`, including
+timed-out and unqualified alternatives with explicit status labels.
+Isolated-index recovery reproduced all 27 SHA-256 hashes without modifying
+the repository index, worktree or object store. Together with the preceding
+archive, 92 embedded source/driver versions are preserved.
+
+Next implement the adjacent-zero and three interior exactness results
+at the actual H window, then qualify its retained nonsplit connecting
+consumer. Whole-family naturality, bounded formal assembly, final
+proof–CAS boundary review and book consolidation remain required.
+Do not replace this continuation with a broad universal-record migration
+or an exhaustive theorem comparing all historical wrappers.

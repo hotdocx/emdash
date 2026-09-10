@@ -136,6 +136,12 @@ All six patches pass isolated-index applicability checks; 65 embedded
 source/driver versions were recovered with their original SHA-256 hashes.
 Accepted code and its reviewer history remain authoritative.
 
+The later direct-connecting tranche adds 27 recovered prototype/driver
+versions, including failed mixed-presentation alternatives. Its selected
+point construction now reaches literal whole-H endpoints, but the complete
+reference window and its connecting naturality/consumer remain unfinished.
+This progress does not by itself start or complete the broader migration.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their

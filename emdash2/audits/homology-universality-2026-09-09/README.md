@@ -27,12 +27,19 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [pre-record-probes.patch](pre-record-probes.patch) | `21099f51` | Original whole-owned record and boundary-family probes, kept as isolated sources. |
 | [current-reference-probes.patch](current-reference-probes.patch) | `2605f42e` | Direct row universals, current pullback cover and whole-H consumer, plus record zero-proof boundary. |
 | [earlier-mixed-candidate.diff](earlier-mixed-candidate.diff) | `21099f51` | Earlier saved broad-alignment candidate; distinct from the last mixed stage. Not promoted. |
+| [direct-connecting-experiments.patch](direct-connecting-experiments.patch) | `31cd9770` | Direct whole-H-endpoint connecting prototypes, mixed-presentation timeouts, diagnostics and an unused checked generic alternative. The consistent step-pair implementation is promoted separately. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all six patches apply to their pinned baselines, and all 65 embedded
+checks: all seven patches apply to their pinned baselines, and all 92 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
+
+The direct-connecting addition was independently verified on 2026-09-10.
+Its manifest distinguishes checked prototypes, 90-second timeouts,
+unqualified dependent scaffolding and diagnostic drivers. Original trailing
+blank lines are preserved in these archived sources; their applicability
+warnings do not indicate a hash mismatch or qualify a failed experiment.
 
 ## Recovery
 

@@ -4373,12 +4373,22 @@ carriers; its centre is exactly the constructed factor. This reuses the
 original row instead of identifying its objects with independently selected
 kernel/cokernel objects by an equality cast.
 
-These records provide the intended endpoints for redeveloping the connecting
-operation. Reconstruction and uniqueness paths remain useful universal-law
-evidence, but the operational endpoints and arrows do not arise from those
-paths. A whole connecting transformation still needs its short-exact-sequence
-source/action and naturality construction; it is not supplied merely by
-whole H or by the new point records.
+The direct connecting operation now uses these records at their actual
+endpoints. Pull the middle row epimorphism back along the source cycle
+embedding, lift the middle differential through the original row and into
+the target cycles, and project to target homology. This covered arrow kills
+the cover kernel, so normal-epi colifting gives an arrow from source cycles.
+The preceding row and its chain law prove that it kills the retained source
+boundary. Descending through that boundary's actual cokernel gives delta.
+Both descents retain their reconstruction factors, and no epimorphism is
+split. Instantiating the records from K/Q/H gives literal H endpoints,
+without transporting the old connecting arrow along object equalities.
+
+Reconstruction and uniqueness paths remain universal-law evidence in this
+reference construction. A whole connecting transformation still needs its
+short-exact-sequence source/action and naturality construction; neither that
+transformation nor the window exactness theorem follows merely by declaring
+whole H or by constructing delta's individual component.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

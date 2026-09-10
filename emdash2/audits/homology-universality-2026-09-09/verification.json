@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-09",
+  "date": "2026-09-10",
   "method": "git apply in isolated temporary indexes/object directory; original repository index, worktree and object store not modified by recovery verification",
   "artifacts": [
     {
@@ -31,9 +31,14 @@
       "artifact": "earlier-mixed-candidate.diff",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 0
+    },
+    {
+      "artifact": "direct-connecting-experiments.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 27
     }
   ],
-  "source_versions_sha256_verified": 65,
+  "source_versions_sha256_verified": 92,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

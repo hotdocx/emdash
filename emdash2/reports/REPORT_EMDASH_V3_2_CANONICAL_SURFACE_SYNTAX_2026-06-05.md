@@ -2046,6 +2046,15 @@ map observations cover inclusions/projections degreewise. Connecting arrows
 keep their separate homology-owned meaning and are not written as H of an
 ordinary degree-preserving chain map.
 
+The direct record-level `homology_record_connecting` is read as
+delta:Hs→Ht. Its retained factor reads delta∘qs = u, and its covered
+reconstruction reads delta∘qs∘e = qt∘v. Here qs and qt are the actual
+record projections, not newly selected quotients. Instantiating the records
+at the whole-H interface gives literal H source/target observations.
+These reconstruction equations are proved paths, not new runtime rewrites.
+This point operation is not notation for an already packaged whole
+connecting transformation or a completed window exactness theorem.
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

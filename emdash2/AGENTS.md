@@ -183,6 +183,16 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the constructed factor centres. Genuine comparison arrows are used for
   lifting, not object-equality casts. The generic source-isomorphism proof
   is shared with the older kernel-domain comparison wrapper.
+  The direct `homology_record_connecting` construction now uses those
+  original rows and the retained source/target H records. Both normal-epi
+  and source-boundary descent tests are derived. Its final Hom factor
+  reconstructs the cycle-level and covered arrows, and its whole-H consumer
+  checks literal H endpoints without transport. Keep one consistent
+  step-pair presentation inside the selected cover: mixed equivalent
+  presentations caused a measured conversion timeout. The focused gate is
+  `scripts/check_homology_record_connecting.sh`. Whole connecting naturality,
+  generic window exactness and the native connecting interpretation remain
+  downstream; no new primitive or rule is introduced by this reference layer.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

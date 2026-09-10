@@ -444,6 +444,202 @@
         }
       ],
       "sha256": "a0245b5912392bb5d3cd23b0104c454c02131c61b4ce1701743f7ea45a52e0c9"
+    },
+    {
+      "artifact": "direct-connecting-experiments.patch",
+      "base_commit": "31cd977020dd7802c737d0bd9cda8c25c0725ce0",
+      "note": "Complete direct connecting prototypes plus timed-out mixed-presentation alternatives. The consistent step-pair variant is promoted; the explicit generic monic helper is checked but unused.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/check_direct_connecting_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_direct_connecting_warnings.sh",
+          "kind": "new",
+          "sha256": "39d79b2ea3629481cb3e29e96232e075149d050a54d770b14b8cb3b28594bdb1",
+          "status": "diagnostic driver"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_direct_homology_record_connecting.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_direct_homology_record_connecting.sh",
+          "kind": "new",
+          "sha256": "3a8fdb051d9568253cfe6862c85b51849aa188b3dcb5edfd7531aa4262847ff3",
+          "status": "diagnostic driver"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover.lp",
+          "kind": "new",
+          "sha256": "e442c8ce62063f35dd782812502e9214cb7bb35fd29fbcac9366a663ab21e69f",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover_kernel.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover_kernel.lp",
+          "kind": "new",
+          "sha256": "6ab97edc754ecc2dea9782caf87c8f0d2aa74b6cca856356cfffa43d19c6852b",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover_kernel_boundary.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover_kernel_boundary.lp",
+          "kind": "new",
+          "sha256": "10119c34e2193955b8c35edca1ce1e4ae53581bf4017bdb36b1b54ddd74a0cad",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover_kernel_left.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover_kernel_left.lp",
+          "kind": "new",
+          "sha256": "f8cfdc909434537dd6afed4a0ee861c476cd7252e42382b95f0c3617b9663204",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cover_whole.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cover_whole.lp",
+          "kind": "new",
+          "sha256": "643e12cd6052f9addaac84362791ebf797a9bd581fc511d03fbfaa7077eb6141",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_cycles_descent.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_cycles_descent.lp",
+          "kind": "new",
+          "sha256": "d98387c238cd857b4b096b9cfbaeea2c6938aa121a2df8cec6c67441b8b4ce00",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_left_lift.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_left_lift.lp",
+          "kind": "new",
+          "sha256": "d0311375d2f5a63db21aabb4c97282f46f37e421268823c0ee5473ec76d8b2ab",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover.lp",
+          "kind": "new",
+          "sha256": "5f8fa7a0129f942e052e6fa75781ea039cfae81e571a3df74244a1aa1be69f03",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover_canonical.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover_canonical.lp",
+          "kind": "new",
+          "sha256": "7ede34448912076aa5502c3259b1ecd7df5d821477396acef54689223212c33b",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover_step.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_cover_step.lp",
+          "kind": "new",
+          "sha256": "19dccd045b67ce6dddd165c3bb4a59116de4e6603868bd73c9d3dde2d9067a8d",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_descent.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_descent.lp",
+          "kind": "new",
+          "sha256": "312bf876ad4000d249ae2de90923408ce0ff8091410a6512afd173f9a2af55f2",
+          "status": "unqualified intermediate depending on timed-out variant"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_descent_step.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_descent_step.lp",
+          "kind": "new",
+          "sha256": "8c919362909f88f68e5e83895f7874adbc73d5bac3e7391cb5cad3f26b8b98fe",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_debug.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_debug.lp",
+          "kind": "new",
+          "sha256": "5a89639ebb47c5be7ccd007566668b2735e2c0d64a24c5cf15b6bdeb37f6d7dd",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_endpoints.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_endpoints.lp",
+          "kind": "new",
+          "sha256": "a653a4fb64db0827b292cd6e9b72a1b9afbf8d004581a706e724b2bce43732ab",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_typing.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_left_typing.lp",
+          "kind": "new",
+          "sha256": "c352554c8348708c93a2d206f123c9e877754767c27346c5c0ac3f55375baf22",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero.lp",
+          "kind": "new",
+          "sha256": "8544c6fb55e81746f305f838d610295c8576898defc63db49be0d754d97aa6f4",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero_explicit.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero_explicit.lp",
+          "kind": "new",
+          "sha256": "c8f2fb451706b08a5847e6f54a89cb71dfa82a990ad4bfa9ceb69f528770845f",
+          "status": "timed out at 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero_step.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_source_boundary_zero_step.lp",
+          "kind": "new",
+          "sha256": "41c7a8aa0a358c5ef92385aa0c41c834b148169cb2e655f02cea9c3b3ce3af4c",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_direct_connecting_target_cycles.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_connecting_target_cycles.lp",
+          "kind": "new",
+          "sha256": "1e2ad47a79406d2f18a46381e02808d10a9dd735ac18e4cf3afd0a8de48e1f94",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_monic_factor_paste_zero.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_monic_factor_paste_zero.lp",
+          "kind": "new",
+          "sha256": "fd7a936477b8c38eb3a0c8e804d2d5a40409fc95f8dd3cfd21c9bbf88d247611",
+          "status": "checked generic alternative; not needed for the selected endpoint fix"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_boundary_factors.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_boundary_factors.lp",
+          "kind": "new",
+          "sha256": "79e4e2c52a44bad73e851b64283724f2093f9d9fe914ec46062c5ec32606f73a",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting.lp",
+          "kind": "new",
+          "sha256": "189b1a05897fc0a2698b58a08a7526b4e68302bd72b3f136dd4073fef13c8ac2",
+          "status": "unqualified intermediate depending on timed-out variant"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting_step.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting_step.lp",
+          "kind": "new",
+          "sha256": "157917038d237dbbddade6ab7455bf947bb57ef138a6f070a9a1b6756a61afa8",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting_warning_control.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting_warning_control.lp",
+          "kind": "new",
+          "sha256": "670cc773b438a5f00abc1f2ab40b76e20b18aea01726fc124958d0c55348262f",
+          "status": "checked prototype or control; see living ledger"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_record_connecting_whole.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_record_connecting_whole.lp",
+          "kind": "new",
+          "sha256": "053e7ef2c6174144fce6e9171ea600c1e10bfa4c1cfd970b87bec48461116cdd",
+          "status": "checked prototype or control; see living ledger"
+        }
+      ]
     }
   ]
 }
