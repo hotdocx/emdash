@@ -9,6 +9,8 @@ import { algebraFormalFreydModelMapObservationBundle } from './algebra_formal_fr
 import { algebraFormalFreydModelMapSquareBundle } from './algebra_formal_freyd_model_map_preparation';
 import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
 import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_map_signatures';
+import { FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS, algebraFormalFreydModelNormalityType } from './algebra_formal_freyd_model_connecting_signatures';
+import { trustAlgebraFormalFreydModelConnecting } from './algebra_formal_freyd_model_connecting_workflow';
 import { algebraFormalFreydChainPairDelegationBundle } from './algebra_formal_freyd_chain_pair';
 import { algebraFormalPresentationMorphismDelegationBundle } from './algebra_formal_presentation_morphism_delegation';
 import { AlgebraFormalPresentationMorphismRealization } from './algebra_formal_presentation_morphism';
@@ -24,10 +26,11 @@ import { createCoreProofChecker } from './proof_checker';
 import { serializeCoreExpression } from './core_serialization';
 
 export const ALGEBRA_FORMAL_FREYD_LONG_EXACT_MODEL_PROFILE = Object.freeze({
-    revision: 'emdash-formal-bounded-homology-model-observations-v1' as const,
+    revision: 'emdash-formal-bounded-homology-model-observations-v2' as const,
     input: 'one-retained-whole-replay-and-adoption' as const,
     points: 'all-retained-degrees-and-interior-exactness-homologies' as const,
     maps: 'both-retained-degreewise-induced-maps' as const,
+    connectings: 'all-retained-windows-when-normality-is-supplied' as const,
     interpretation: 'explicit-trusted-presentation-semantics' as const,
     replaysWholeHomology: false as const, reselectsUniversals: false as const,
     transportsEndpoints: false as const, constructsModel: false as const,
@@ -38,6 +41,8 @@ export async function trustAlgebraFormalFreydLongExactModel<P extends AlgebraPar
     readonly artifactId: string;
     readonly modelId: string;
     readonly formalModel: KernelExpression;
+    /** Request the complete connecting inventory by supplying the model's normality enhancement. */
+    readonly normality?: KernelExpression;
     readonly prepared: AlgebraFormalFreydLongExactModelPreparation<P, C, I>;
     readonly adopted: AlgebraFormalFreydLongExactAdoption<P, C, I>;
     readonly source?: AlgebraFormalAssumptionSource;
@@ -62,7 +67,8 @@ export async function trustAlgebraFormalFreydLongExactModel<P extends AlgebraPar
     const inventory = algebraFormalFreydLongExactModelInventory(bundle, upstream.computed.value);
     if (inventory.data !== input.prepared.inventory.data) throw new Error('Actual replay differs from the prepared bounded model inventory');
     const expected = createFormalFreydLongExactModelProofEnvironment([]);
-    for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS })) {
+    for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
+        ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })) {
         const declaration = source.environment.lookup(name);
         if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, expected.lookup(name)!.type)) {
             throw new Error('Missing or changed bounded model signature ' + name);
@@ -74,6 +80,9 @@ export async function trustAlgebraFormalFreydLongExactModel<P extends AlgebraPar
     }
     const checker = createCoreProofChecker(source.environment);
     checker.check(checker.rootContext, model, algebraFormalFreydModelType(bundle.reifier.formalRing));
+    if (input.normality !== undefined) {
+        checker.check(checker.rootContext, input.normality, algebraFormalFreydModelNormalityType(bundle.reifier.formalRing, model));
+    }
     const before = source.entries.length;
     const known = new Map(source.entries.map(entry => [serializeCoreExpression(entry.declaration.type), entry.reference]));
     let reused = 0;
@@ -136,10 +145,38 @@ export async function trustAlgebraFormalFreydLongExactModel<P extends AlgebraPar
         const proof = await ensure(entry.key + '/interpretation', observation.realization.claimType, 'trusted-presentation-semantics', () => observation);
         maps.push(Object.freeze({ entry, observation, proof }));
     }
+    const connectings = [];
+    if (input.normality !== undefined) {
+        for (const entry of inventory.connectings) {
+            const result = await trustAlgebraFormalFreydModelConnecting({ artifactId: input.artifactId + '/' + entry.key,
+                prepared: entry.prepared, modelSource: byKey.get(entry.sourceKey)!, modelTarget: byKey.get(entry.targetKey)!,
+                normality: input.normality, source, fingerprint: input.fingerprint, decisionEvidence: input.decisionEvidence });
+            source = result.source;
+            reused += result.counts.reusedClaims;
+            connectings.push(Object.freeze({ entry, observation: result.observation, proof: result.proof, rows: result.rows }));
+        }
+    }
+    // A view of the same observations in displayed order, not a second arrow construction.
+    const spineArrows = input.normality === undefined ? [] : [
+        ...maps.flatMap(value => value.entry.position === undefined ? [] : [Object.freeze({
+            position: value.entry.position, kind: value.entry.role, entry: value.entry,
+            observation: value.observation, proof: value.proof
+        })]),
+        ...connectings.map(value => Object.freeze({ position: value.entry.position, kind: 'connecting' as const,
+            entry: value.entry, observation: value.observation, proof: value.proof }))
+    ].sort((a, b) => a.position - b.position);
+    if (input.normality !== undefined && (spineArrows.length !== upstream.computed.value.result.arrows.length ||
+        spineArrows.some((value, i) => value.position !== i ||
+            value.entry.prepared.selected.homologyMap !== upstream.computed.value.result.arrows[i]))) {
+        throw new Error('The complete model arrow spine must retain every displayed native arrow');
+    }
     assertAlgebraFormalComputationResultCurrent(upstream, upstream.request);
     return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_LONG_EXACT_MODEL_PROFILE,
         native: upstream.computed.value.result, upstreamAdoption: input.adopted, source,
-        points: Object.freeze(points), maps: Object.freeze(maps), inventoryData: inventory.data,
-        counts: Object.freeze({ points: points.length, maps: maps.length, reusedClaims: reused,
-            newAssumptions: source.entries.length - before, wholeHomologyReplays: 0 as const, universalReselections: 0 as const }) });
+        points: Object.freeze(points), maps: Object.freeze(maps), connectings: Object.freeze(connectings),
+        spineArrows: Object.freeze(spineArrows), inventoryData: inventory.data,
+        connectingCoverage: input.normality === undefined ? 'not-requested' as const : 'all-retained-windows' as const,
+        counts: Object.freeze({ points: points.length, maps: maps.length, connectings: connectings.length, reusedClaims: reused,
+            newAssumptions: source.entries.length - before, wholeHomologyReplays: 0 as const,
+            universalReselections: 0 as const, connectingReplays: 0 as const }) });
 }

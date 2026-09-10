@@ -2046,14 +2046,27 @@ map observations cover inclusions/projections degreewise. Connecting arrows
 keep their separate homology-owned meaning and are not written as H of an
 ordinary degree-preserving chain map.
 
+`freyd_homology_model_connecting_observation` observes that separate operation
+at the two original model H inputs. It additionally takes supplied model
+normality and model-side short-exact-row evidence; a raw chain-zero proof is
+not a substitute. The bounded consumer explicitly interprets these rows and
+the retained complete connecting arrows as trusted presentation semantics.
+Its displayed arrow order is a view of the same observations and proofs, not
+a new kernel operation or generic finite exactness theorem. Without supplied
+normality, the point/map-only consumer reports that connecting interpretation
+was not requested.
+
 The direct record-level `homology_record_connecting` is read as
 delta:Hs→Ht. Its retained factor reads delta∘qs = u, and its covered
 reconstruction reads delta∘qs∘e = qt∘v. Here qs and qt are the actual
 record projections, not newly selected quotients. Instantiating the records
 at the whole-H interface gives literal H source/target observations.
 These reconstruction equations are proved paths, not new runtime rewrites.
-This point operation is not notation for an already packaged whole
-connecting transformation or a completed window exactness theorem.
+The whole counterpart is `homology_window_connecting_transf`, an actual
+transformation between the two whole H-column functors. Its component
+computes to the direct operation through `homology_window_connecting_at`;
+generic transfor action retains naturality and higher action. The point
+notation alone does not assert a generic bounded exactness theorem.
 
 `chain_pair_homology_action_func` is the whole fixed-pair view of H action
 after native map introduction; `chain_pair_homology_action` is its point
@@ -2072,8 +2085,10 @@ H(C) or H(A'), or denote a new homology object.
 
 `homology_whole_window_second_exact` is the separate exactness witness
 at H(C), immediately before delta, for the existing second window pair.
-It uses that pair's actual selected boundary in `ComputationalExactAt`;
-it does not assert the still-pending exactness at H(A').
+It uses that pair's actual selected boundary in `ComputationalExactAt`.
+`homology_whole_window_third_exact` separately proves exactness at H(A'),
+after delta. `HomologyWholeExactWindow` packages these three witnesses over
+the existing window pairs, without duplicating its H objects or arrows.
 
 ## Whole Displayed Laxity Notation
 

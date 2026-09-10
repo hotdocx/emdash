@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active; native whole H/window and first retained connecting consumer qualified; all-degree connecting integration in progress; general op repair deferred
+Status: active; native whole H/window and all-degree retained model connecting consumer qualified; generic bounded formal assembly next; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
@@ -12,8 +12,8 @@ is not a rejection criterion. Structural evaluation, selected presentations
 and native whole homology in the ordinary-target profile are active. The
 retained-selection bounded CAS consumer is qualified at the explicit model-
 interpretation boundary. All three generic window interiors and the whole
-connecting interface are qualified. All-degree connecting integration,
-bounded formal assembly and final book/audit remain open; arbitrary
+connecting interface and all-degree retained connecting integration are
+qualified. Bounded formal assembly and final book/audit remain open; arbitrary
 omega-target homology is not asserted by this specialization.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
@@ -150,7 +150,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-CONNECTING-NATURALITY-23` | qualified; whole projection beta plus scoped Hom usability selected, successful alternative archived | whole column/H/delta operations with computing component and scoped Hom usability; retain the reviewed stronger whole runtime observations |
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
-| `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer qualified; all-degree integration next | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
+| `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer and complete bounded inventory qualified | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -4399,3 +4399,79 @@ snapshot and warning evidence therefore remain unchanged. No repository
 aggregate was run. Next extend the original bounded model inventory and
 append-only adoption with every retained connecting window, testing shared
 row/equation reuse and both zero endpoints before generic bounded assembly.
+
+### All-Degree Retained Connecting Integration: Qualified Tranche
+
+Extend the existing private bounded-model inventory with every stored
+window's connecting result, its degree labels and its exact displayed arrow
+position. Validate the original degree H selections and window/spine sharing
+before interpreting anything. Prepare all required coefficients before the
+immutable formal environment is built. Reuse the qualified one-window
+workflow and its explicit computed-equation versus model-semantics policy.
+
+The model's normality enhancement remains optional for the already useful
+point/induced-map prefix. Supplying it to the bounded workflow requests all
+retained connecting windows; validate it before any new adoption and return
+an explicit coverage discriminator. Omitting it must report that connecting
+interpretation was not requested, never silently claim a complete model
+sequence. Test the upgrade of an already adopted prefix, exact row/claim
+sharing, no-reselection spies, both boundary zeros, a nonzero delta, replay
+without new decisions and invalid inventory/normality rejection. The active
+source signatures and generic exactness theorem are unchanged.
+
+When connecting coverage is complete, also expose the existing observations
+in displayed arrow order. This is an indexed view of the same point/map/delta
+results and proofs, not a new arrow construction or a generic finite
+exactness theorem. Its degree-to-position checks must fail before adoption
+if a stored induced or connecting arrow differs from the native spine.
+
+The first retained-arrow tranche is checkpointed at `bebb86bf`. The bounded
+extension now adds every original window to
+`algebra_formal_freyd_long_exact_model_preparation.ts`. It checks the exact
+degree labels, source/target H references and displayed arrow positions,
+and includes their retained preparation data in the canonical inventory.
+No original H result, row, induced map or connecting result is reconstructed
+by a universal algorithm. The corresponding model workflow reuses the
+one-window interpreter sequentially in the same append-only source. Its
+v2 profile reports `connectingCoverage` explicitly and returns `spineArrows`
+as a sorted view of the same observations/proofs. Normality is checked
+before new adoption; without it, the prior point/map-only prefix remains
+available and reports `not-requested`.
+
+The nonsplit two-degree fixture retains 18 H observations, eight induced-map
+observations and three connecting observations. The seven displayed arrows
+are delta, inclusion, projection, delta, inclusion, projection, delta;
+the first and last connecting arrows are zero, and the middle one is
+nonzero. All original prefix proofs remain the same references, neighboring
+windows share the same model-row shortness proofs, and repeating the complete
+workflow adds no assumptions or decisions. All no-recomputation spies pass.
+Incomplete/reordered windows, changed H selections and invalid normality
+fail before additional trust. The complete-arrow row-term/map arrays are
+frozen as well as their enclosing observation.
+
+Final qualification (2026-09-10):
+
+- The complete affected bounded-consumer file passes ten tests, with the two
+  unchanged prior conformance targets intentionally skipped and their green
+  evidence carried forward. This run enables
+  `EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_CONNECTING=1` and checks all three
+  concrete connecting observations, their nine raw row-map terms and their
+  interpretation assumptions in three independently bounded Lambdapi targets.
+  Each uses the unchanged 60-second helper cap; no target timed out.
+- The scoped suite takes 452.61 seconds including native replay, the old
+  formal spine/interior construction, source validation, negative cases and
+  all conformance. The three-target conformance test takes 85.21 seconds
+  combined; no single Lambdapi invocation has that duration. The model upgrade
+  takes 98.79 seconds and the replay/negative test 102.25 seconds. These are
+  baseline performance data, not an interactive-latency claim or a reason to
+  change generic runtime rewriting.
+- The nearest actual-homology test file passes 11 tests with two opt-in skips
+  after the array-freezing refinement. Root typecheck, affected-file eslint
+  and exact diff hygiene pass. There is no new LF/kernel owner, rule, signature,
+  public barrel or runner change in this extension. Source-health and warning
+  inventories are unchanged; no unrelated aggregate is run.
+
+Next is the parent plan's two-adjacent-window formal assembly gate, followed
+by finite assembly/endpoint-zero evidence, final book updates and the
+architecture/effectiveness audit. This completes the retained connecting
+integration tranche, not the full persistent goal or a closed-model theorem.

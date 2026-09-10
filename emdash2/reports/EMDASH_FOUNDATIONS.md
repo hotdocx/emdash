@@ -4331,9 +4331,16 @@ homology and every interior's exactness homology, together with both
 degreewise induced maps. It uses the actual adopted replay, keeps the
 earlier formal proofs, and reuses exact existing equations. The nonsplit
 two-degree example checks 18 homology points and eight induced maps without
-reselecting any universal object. Connecting arrows remain independently
-owned homological operations, not images of degree-preserving chain maps.
-Their whole-H/window interface and the generic long-exact theorem remain
+reselecting any universal object. With explicitly supplied model normality,
+the consumer now also interprets every retained connecting arrow: both zero
+endpoints and the nonzero middle delta. Native row shortness and complete-
+arrow interpretation are explicitly adopted as model semantics, not inferred
+as universal theorems from finite matrix equations. Neighboring windows reuse
+the same row proofs, and the displayed-order view reuses the same arrow
+observations. No connecting algorithm or homology selection is rerun.
+Connecting arrows remain independently owned homological operations, not
+images of degree-preserving chain maps. Their whole-H/window interface is
+qualified; generic bounded formal assembly and final consolidation remain
 further work. New mathematics should use whole H; older formal wrappers may
 retire as their consumers migrate, while native matrix algorithms remain
 the implementation rather than a competing homology theory.

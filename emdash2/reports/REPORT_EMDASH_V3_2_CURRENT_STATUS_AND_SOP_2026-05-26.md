@@ -1463,8 +1463,18 @@ belongs to the owning implementation plan rather than to standing guidance.
   trusted presentation semantics, not deductions from finite zero tests.
   Supplied normality is checked before further adoption. The concrete
   Lambdapi consumer, unchanged-result replay, no-reselection checks and
-  stale/foreign-input controls qualify this slice. All-degree connecting
-  inventory integration is still required.
+  stale/foreign-input controls qualify this slice. The original private
+  bounded-model inventory/workflow now integrates every retained connecting
+  window under explicitly supplied normality. It preserves earlier adopted
+  points/maps, shares row proofs and provides the same observations in
+  displayed arrow order. Omitting normality retains the old prefix with
+  explicit `not-requested` connecting coverage. The nonsplit two-degree
+  consumer checks 18 H points, eight induced maps and three connecting maps,
+  including both zero endpoints and the nonzero middle delta. All three
+  connecting observations and their raw row-map inputs pass individual
+  bounded Lambdapi conformance; no homology, connecting or universal-selection
+  algorithm is rerun.
+  Generic bounded formal assembly and the final boundary audit remain.
 - The short-exact-row-family and homology-window-family modules retain
   actual row functors and transformations in the ordinary target profile.
   Specialized window constructors/projections avoid deeply nested Sigma
@@ -1485,9 +1495,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   comparisons are proof-time usability. Their evaluations do not assert
   that every independently capped expression has the same runtime normal
   form. `scripts/check_homology_window_families.sh` is the exact-source,
-  individually bounded gate. The first native connecting interpretation is
-  qualified; all-degree integration, bounded formal assembly and final
-  book/consolidation work remain required.
+  individually bounded gate. All-degree native connecting interpretation is
+  qualified; generic bounded formal assembly and final book/consolidation
+  work remain required.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

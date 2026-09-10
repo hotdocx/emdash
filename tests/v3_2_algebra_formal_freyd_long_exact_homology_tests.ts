@@ -14,11 +14,12 @@ import {
 } from '../src/v3_2';
 import { KernelExpression } from '../src/v3_2/kernel';
 import * as nativeHomology from '../src/v3_2/algebra_polynomial_freyd_homology';
+import * as nativeConnecting from '../src/v3_2/algebra_polynomial_freyd_homology_connecting';
 import * as nativeWindow from '../src/v3_2/algebra_polynomial_freyd_homology_window';
 import * as nativeLongExact from '../src/v3_2/algebra_polynomial_freyd_long_exact';
 import * as weakKernel from '../src/v3_2/algebra_polynomial_weak_kernel';
 import * as weakPullback from '../src/v3_2/algebra_polynomial_weak_pullback';
-import { polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
+import { isPolynomialFreydMorphismZero, polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
 import { algebraFormalFreydLongExactDelegationBundle, trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_freyd_long_exact';
 import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
@@ -35,6 +36,7 @@ import { createFormalFreydLongExactModelProofEnvironment, prepareAlgebraFormalFr
 import { trustAlgebraFormalFreydLongExactModel } from '../src/v3_2/algebra_formal_freyd_long_exact_model';
 import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_signatures';
 import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_map_signatures';
+import { algebraFormalFreydModelNormalityType, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
 import * as nativeFunctorialHomology from '../src/v3_2/algebra_polynomial_freyd_functorial_homology';
 
 const p = provenance('surface', 'whole actual formal homology', sourceSpan('tests/whole-actual-homology.ts', 1, 1));
@@ -47,6 +49,7 @@ const construct = async () => {
     const selected = algebraPolynomialFreydLongExactSnakeReferences(nativeLongExact.algebraPolynomialFreydBoundedLongExactHomology(sequence));
     const R = kernelFree('whole_actual_R', p), x = kernelFree('whole_actual_x', p);
     const model = kernelFree('whole_actual_model', p);
+    const normality = kernelFree('whole_actual_normality', p);
     const coefficients = new Map<string, ReturnType<typeof kernelFree>>();
     const reifier = defineAffineFormalPolynomialReifier({
         algebra: algebraPresentedAlgebra(algebraPolynomialQuotientRing(algebraPolynomialIdeal(sequence.ring, []))),
@@ -65,6 +68,7 @@ const construct = async () => {
     const environment = createFormalFreydLongExactModelProofEnvironment([
         { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: element },
         { name: model.name, type: algebraFormalFreydModelType(R) },
+        { name: normality.name, type: algebraFormalFreydModelNormalityType(R, model) },
         ...[...coefficients.values()].map(term => ({ name: term.name, type: element }))
     ]);
     const initial = createAlgebraFormalAssumptionSource({ moduleId: 'proof.cas.whole-actual-homology',
@@ -88,7 +92,7 @@ const construct = async () => {
         const result = await trustAlgebraFormalFreydLongExactHomology(input);
         const raw = constructAlgebraFormalFreydRawWitnesses({ prepared: rawPreparation, adopted, source: result.source });
         spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
-        return { bundle, prepared, rawPreparation, raw, initial, adopted, input, result, decisions, model, modelPreparation };
+        return { bundle, prepared, rawPreparation, raw, initial, adopted, input, result, decisions, model, normality, modelPreparation };
     } finally { spies.forEach(spy => spy.mock.restore()); }
 };
 let resultPromise: ReturnType<typeof construct> | undefined;
@@ -106,16 +110,29 @@ const observeModels = async () => {
 let modelPromise: ReturnType<typeof observeModels> | undefined;
 const modelConsumer = () => modelPromise ??= observeModels();
 
+const observeConnectings = async () => {
+    const prefix = await modelConsumer(), decisions: string[] = [];
+    const input = { ...prefix.input, artifactId: 'bounded-model-complete', normality: prefix.v.normality,
+        source: prefix.result.source, decisionEvidence: (id: string) => {
+            decisions.push(id); return 'Explicit retained connecting interpretation/equation ' + id;
+        } };
+    const result = await trustAlgebraFormalFreydLongExactModel(input);
+    return { prefix, input, result, decisions };
+};
+let connectingPromise: ReturnType<typeof observeConnectings> | undefined;
+const connectingConsumer = () => connectingPromise ??= observeConnectings();
+
 const bindings = {
     ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
     ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
     ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
     ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
-    ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS
+    ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
+    ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS
 };
 const imports = 'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
     'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
-    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_maps;';
+    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;';
 
 describe('v3.2 whole long-exact actual formal homologies', () => {
     it('constructs all six homologies and exactness witnesses over the actual formal spine', async () => {
@@ -214,6 +231,9 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             assert.equal(result.native, v.result.native);
             assert.equal(result.points.length, 18);
             assert.equal(result.maps.length, 8);
+            assert.equal(result.connectingCoverage, 'not-requested');
+            assert.equal(result.connectings.length, 0);
+            assert.equal(result.spineArrows.length, 0);
             assert.equal(result.counts.wholeHomologyReplays, 0);
             assert.equal(result.counts.universalReselections, 0);
             assert.ok(result.counts.reusedClaims > 0);
@@ -249,6 +269,104 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             { ...degree, A: { ...degree.A, complex: degree.B.complex } }
         ]) assert.throws(() => prepareAlgebraFormalFreydLongExactModel({ ...v.bundle, selected: { ...selected,
             result: { ...selected.result, degrees: [selected.result.degrees[0], changed, ...selected.result.degrees.slice(2)] } } }), /degree|view|selection/iu);
+    });
+
+    it('upgrades the adopted prefix with every retained connecting arrow, including both endpoints', async () => {
+        await modelConsumer();
+        const forbid = () => { throw new Error('The connecting inventory must reuse every retained algorithm result'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(nativeFunctorialHomology, 'algebraPolynomialFreydInducedHomologyMap', forbid),
+            mock.method(nativeConnecting, 'algebraPolynomialFreydHomologyConnecting', forbid),
+            mock.method(nativeWindow, 'algebraPolynomialFreydHomologyWindow', forbid),
+            mock.method(nativeLongExact, 'algebraPolynomialFreydBoundedLongExactHomology', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const { prefix, result } = await connectingConsumer();
+            assert.equal(result.native, prefix.result.native);
+            assert.equal(result.connectingCoverage, 'all-retained-windows');
+            assert.equal(result.connectings.length, 3);
+            assert.equal(result.counts.connectings, result.native.windows.length);
+            assert.equal(result.counts.connectingReplays, 0);
+            assert.equal(result.counts.wholeHomologyReplays, 0);
+            assert.equal(result.counts.universalReselections, 0);
+            assert.deepEqual(result.source.entries.slice(0, prefix.result.source.entries.length), prefix.result.source.entries);
+            for (const role of ['points', 'maps'] as const) {
+                result[role].forEach((point, i) => assert.equal(point.proof, prefix.result[role][i].proof));
+            }
+            assert.deepEqual(result.connectings.map(({ entry }) => [entry.degree, entry.position]), [[0, 6], [1, 3], [2, 0]]);
+            assert.deepEqual(result.spineArrows.map(arrow => arrow.kind),
+                ['connecting', 'inclusion', 'projection', 'connecting', 'inclusion', 'projection', 'connecting']);
+            result.spineArrows.forEach((value, position) => {
+                assert.equal(value.position, position);
+                assert.equal(value.entry.prepared.selected.homologyMap, result.native.arrows[position]);
+                const owner = value.kind === 'connecting' ? result.connectings : result.maps;
+                assert.ok(owner.some(entry => entry.observation === value.observation && entry.proof === value.proof));
+            });
+            assert.deepEqual(result.connectings.map(({ entry }) => isPolynomialFreydMorphismZero(entry.prepared.selected.homologyMap)),
+                [true, false, true]);
+            const checker = createCoreProofChecker(result.source.environment);
+            for (const { entry, observation, proof } of result.connectings) {
+                const value = observation.realization;
+                assert.equal(entry.prepared.selected, result.native.windows[entry.degree].connecting);
+                assert.equal(entry.prepared.selected.homologyMap, result.native.arrows[entry.position]);
+                assert.equal(value.source.actual.selected, result.native.degrees[entry.degree + 1].C.homology);
+                assert.equal(value.target.actual.selected, result.native.degrees[entry.degree].A.homology);
+                checker.check(checker.rootContext, proof, value.claimType);
+                for (const row of value.rowMaps) checker.check(checker.rootContext, row.term, row.type);
+                const recorded = result.source.entries.find(e => kernelExpressionEquals(e.reference, proof));
+                assert.equal(recorded?.classification, 'trusted-presentation-semantics');
+            }
+            // Consecutive windows share the very same model-side row proofs.
+            for (let i = 0; i < result.connectings.length - 1; i++) {
+                for (let row = 0; row < 3; row++) {
+                    assert.equal(result.connectings[i].rows[row].exact, result.connectings[i + 1].rows[row + 1].exact);
+                }
+            }
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('reuses all connecting claims and rejects incomplete or mismatched windows before trust', async () => {
+        const { prefix, input, result, decisions } = await connectingConsumer(), before = decisions.length;
+        const replay = await trustAlgebraFormalFreydLongExactModel({ ...input, source: result.source });
+        assert.equal(replay.counts.newAssumptions, 0);
+        assert.equal(decisions.length, before);
+        replay.connectings.forEach((entry, i) => assert.equal(entry.proof, result.connectings[i].proof));
+        await assert.rejects(() => trustAlgebraFormalFreydLongExactModel({ ...input, normality: prefix.v.model }), /type|convert|unif/iu);
+        assert.equal(decisions.length, before);
+        const bundle = prefix.v.bundle, selected = bundle.selected, original = selected.result;
+        for (const windows of [
+            original.windows.slice(1),
+            [...original.windows].reverse(),
+            [{ ...original.windows[0], connecting: original.windows[1].connecting }, ...original.windows.slice(1)],
+            [{ ...original.windows[0], connecting: { ...original.windows[0].connecting,
+                source: original.windows[1].connecting.source } }, ...original.windows.slice(1)]
+        ]) assert.throws(() => prepareAlgebraFormalFreydLongExactModel({ ...bundle,
+            selected: { ...selected, result: { ...original, windows } } }), /retain|window|degree/iu);
+    });
+
+    it('checks the complete bounded connecting inventory against Lambdapi', {
+        skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_CONNECTING !== '1'
+    }, async () => {
+        const { result } = await connectingConsumer();
+        // Separate independently bounded targets for the two zero endpoints and nonzero middle.
+        for (const { entry, observation, proof } of result.connectings) {
+            const value = observation.realization;
+            const triples: [string, KernelExpression, KernelExpression][] = [
+                ['model_delta', value.formalArrow, value.observationType],
+                ['native_delta', value.nativeArrow, value.observationType],
+                ['delta_interpretation', proof, value.claimType],
+                ...value.rowMaps.map((row, i): [string, KernelExpression, KernelExpression] => ['row_map_' + i, row.term, row.type])
+            ];
+            const assertions = triples.map(([name, term, type]) => ({ label: name + '_' + entry.degree,
+                term, type, span: sourceSpan('generated/bounded-connecting.ts', 1, 1) }));
+            const serialized = serializeCoreLfKernelProbe({ environment: result.source.environment, externalFreeReferences: bindings, assertions });
+            const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;', imports) },
+                { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
+            assert.equal(checked.timedOut, false, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-5000));
+            assert.equal(checked.accepted, true, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-10000));
+        }
     });
 
     it('checks every bounded model point, raw map input and complete H arrow in Lambdapi', {

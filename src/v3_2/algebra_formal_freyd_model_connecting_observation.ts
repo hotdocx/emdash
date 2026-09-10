@@ -160,14 +160,14 @@ export function algebraFormalFreydModelConnectingObservationBundle<P extends Alg
     const context = modelContext(input.environment, prepared.reifier.formalRing, s.formalModel);
     const checker = createCoreProofChecker(input.environment);
     checker.check(checker.rootContext, input.normality, algebraFormalFreydModelNormalityType(prepared.reifier.formalRing, context.model));
-    const rowTerms = prepared.rowPairs.map((row, i) => algebraFormalFreydChainPairTerm(row,
-        input.rows[i].above, input.rows[i].below, input.rows[i].chain));
+    const rowTerms = Object.freeze(prepared.rowPairs.map((row, i) => algebraFormalFreydChainPairTerm(row,
+        input.rows[i].above, input.rows[i].below, input.rows[i].chain)));
     const components = [[input.vertical.am, input.vertical.bm, s.inputLaws.above],
         [t.inputLaws.above, input.vertical.b0, s.inputLaws.below], [t.inputLaws.below, input.vertical.b1, input.vertical.d1]];
-    const rowMaps = prepared.rowMaps.map((_, i) => algebraFormalFreydConnectingRowMapTerm(prepared, i as 0 | 1 | 2, {
+    const rowMaps = Object.freeze(prepared.rowMaps.map((_, i) => algebraFormalFreydConnectingRowMapTerm(prepared, i as 0 | 1 | 2, {
         morphisms: [input.rows[i].above, input.rows[i].below, input.rows[i + 1].above, input.rows[i + 1].below, ...components[i]],
         ...input.squares[i]
-    }));
+    })));
     const upper = algebraFormalFreydChainPairTerm(prepared.upper, input.vertical.bm, input.vertical.b0, input.upperZero);
     const lower = algebraFormalFreydChainPairTerm(prepared.lower, input.vertical.b0, input.vertical.b1, input.lowerZero);
     const values: Record<string, KernelExpression> = { R: prepared.reifier.formalRing, M: context.model, N: input.normality,

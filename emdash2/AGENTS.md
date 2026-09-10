@@ -188,7 +188,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   selections. Native row/model interpretations are explicitly trusted
   presentation semantics, distinct from computed matrix equations; supplied
   normality is checked before adoption. No homology, connecting or universal
-  selection is rerun. All-degree connecting integration remains required.
+  selection is rerun. The bounded model consumer also covers every retained
+  connecting window when supplied normality is requested, with shared row
+  proofs and an indexed view of the original displayed arrows. Without
+  normality its prior point/map prefix reports narrower coverage explicitly.
+  Generic bounded formal assembly and the final audit remain required.
   The kernel/cokernel-adjunction record modules now derive universal records
   at the actual whole K/Q objects and structural transformations. Their
   operational centres are explicit mate operations; comparison paths occur
@@ -273,9 +277,9 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   order; typed equality witnesses retain the whole functors and their
   arbitrary-arrow evaluations. They do not install new runtime Hom cuts
   or change either generic composition orientation. The exact-source gate
-  is `scripts/check_homology_window_families.sh`; the first native connecting
-  interpretation is qualified, while all-degree integration, bounded formal
-  assembly and final book work remain required.
+  is `scripts/check_homology_window_families.sh`; the bounded native connecting
+  interpretation is qualified, while generic bounded formal assembly and
+  final book work remain required.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not
