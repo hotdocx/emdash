@@ -4488,8 +4488,22 @@ that the cycles have zero identity; epicity of the retained homology projection
 then gives zero identity on H itself. An original terminal middle term supplies
 the required first identity equation. This is a proof about the selected H,
 not an equality transporting it to another object or a new runtime collapse.
-The Nat-recursive bounded generator and application to its outside-support
-endpoints are the remaining assembly steps.
+The Nat-recursive implementation now assembles any finite number of windows
+over the original row-family data. It retains the three initial rows, their
+two whole transformations and the chain-zero datum directly as indices.
+A constructor case exposes the next row and map before invoking the existing
+window extension; it is ordinary finite-data elimination, not a new law for
+homology. The two-window consumer retains all seven arrows and six original
+exactness annotations. No equality-proof-erasing unifier is required.
+
+The direct field-indexed entry is the checked implementation candidate.
+Comparing its result with a packed-state convenience wrapper still exposes
+an expensive H(inclusion) index; that wrapper is not a second H or a promoted
+computation rule. Prefix trimming retains every earlier arrow and annotation.
+For the remaining endpoint application, a short exact row's zero middle
+term also gives zero identity on its original outer terms by mono/epi
+cancellation. The conventional zero-padded bounded result and its final
+public interface are not supplied merely by the iterator.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

@@ -300,6 +300,18 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   new selection or global identity collapse is installed. The focused gate
   is `scripts/check_homology_bounded_prerequisites.sh`; the complete bounded
   generator and its endpoint application remain downstream.
+- The field-span/case/extension and bounded-generator modules now implement
+  Nat iteration over directly indexed original whole row/map/zero data.
+  Four input projections and one constructor-case beta expose those data
+  before expanding the existing window continuation. They add no new H,
+  delta, exactness law or proof-field unifier. The finite-tail arrow view
+  retains complete arrows; init retains the original prefix annotations.
+  The short-exact-row-zero lemmas transfer zero identity from the middle
+  to both original outer objects. The scoped final-source gate is
+  `scripts/check_homology_bounded_generator.sh`.
+  The packed-state result comparison still has an expanded H(inclusion)
+  index timeout and is not promoted. This is the iterator implementation
+  layer, not the final zero-padded bounded theorem or its public interface.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

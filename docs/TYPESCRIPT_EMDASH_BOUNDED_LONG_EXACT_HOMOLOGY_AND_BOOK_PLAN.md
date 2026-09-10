@@ -1052,6 +1052,135 @@ The 20 follow-up prototypes and their precise qualification states are
 preserved, with byte-verified recovery, in
 [the proof-field audit](../emdash2/audits/bounded-homology-proof-fields-2026-09-10/README.md).
 
+Integrated-owner follow-up: the fresh graph in
+`logs/probes/homology-proof-field-owner-warnings-20260910-161216.log` checks
+the modified record owner, generator and facade. Its local proof-comparison,
+projection and invalid/missing-evidence controls pass. A corrected distinct-
+arrow-data negative also passes; the first variant placed a differently
+indexed record in an ill-formed expected equality type and is preserved as
+a fixture defect, not a failed semantic boundary.
+
+The full two-window typed eq_refl comparison and combined arrow reviewer
+still reach 90 seconds. Isolating the second-rest typing declaration checks
+successfully, while a standalone whole comparison also times out. A generic
+complete-arrow-family observer source-checks in 0.49 seconds and its common
+two-window fixture in 3.85 seconds, but whole equality of its data-only
+families still reaches the bound. Therefore do not describe the remaining
+cost as exclusively proof normalization or claim the local irrelevance rule
+has solved the iterator. The next audit must qualify individual practical
+data observations and identify the precise remaining conversion/typing cost.
+The original exactness construction, H objects and selections remain intact;
+no candidate in this follow-up is promoted yet.
+
+Constructor-elimination follow-up: the conversion trace shows that delayed
+row-span projections reach the expanded connecting construction before the
+next row/map/zero fields are exposed. A local nonrecursive case eliminator
+at the field-span constructor now exposes those inputs before invoking the
+existing Nat-recursive continuation. The complete seven-arrow runtime
+comparison passes in five seconds in the research stage, and wrong-length
+and wrong-overlap controls finish successfully. This keeps the same H,
+delta, Nat iterator and exactness constructions; it adds no homology law.
+
+Diagnostic correction: Lambdapi's `handle/query.ml` prints the line
+`assertion: it is true ...` BEFORE checking an assertion. Therefore the
+six displayed lines in the combined reviewer do not mean six completed
+checks: subsequent declarations establish that the first five finish,
+but the final public-state-wrapper comparison is the remaining timeout.
+Do not attribute this to module serialization or to proof normalization
+without further evidence. Split the core and wrapper consumers. A fresh
+unchanged-exact-step-owner graph will test whether the case correction is
+independent of the proof-field-unification experiment. If the public wrapper
+has the same delayed-projection issue, test ordinary dependent elimination
+of its original triple constructor rather than adding H-specific cuts,
+record eta, object casts, or a global irrelevance rule.
+
+Fresh unchanged-owner result: `check_homology_case_owner.sh` completes the
+whole relevant source graph and four reviewers in
+`logs/probes/homology-case-owner-quiet-20260910-171734.log`.
+The original constant exact-step introduction and its original two beta
+rules are unchanged. The five core controls, the complete seven-arrow
+comparison and both negative boundaries all pass (four to five seconds
+per reviewer). Thus the case correction does not require proof-field
+irrelevance. Keep that separate proposal as independently checked research.
+
+The original-state facade still has an expensive comparison. Ordinary
+dependent triple elimination itself checks, but its explicitly typed
+wrapper and the specialized constructor-beta wrapper each reach the
+90-second source-check bound. These alternatives are not promoted.
+The field-indexed construction remains the qualified candidate; the
+wrapper boundary is being isolated before selecting the final public
+entry point. None of this changes the required endpoint-zero, bounded
+ordering, proof–CAS or final book obligations.
+
+Final-source integration in progress: install the field-indexed iterator
+implementation, not either failed packed-state wrapper. The new owners are
+`homology_row_field_spans`, `homology_row_field_span_case`,
+`homology_row_fields_extension`, and `homology_bounded_generator`.
+The existing window extension now states its boundary arrows through their
+literal whole-H actions. This changes no underlying arrow or selected proof.
+The additional finite-tail arrow view/init and short-exact-row-zero owners
+prepare conventional ordering and both original zero endpoints.
+
+The final-source gate is `scripts/check_homology_bounded_generator.sh`.
+It rechecks the old window/span consumers as well as the new constructor,
+higher-action, finite-generator, complete-arrow, prefix and row-zero controls.
+All 40 focused check-metrics tests currently pass, including new dispatcher
+coverage and failure propagation; both new rule owners pass strict LHS audit.
+Source-level integration is not completion of row 8C: the original full
+bounded theorem, endpoint application, final public interface and book
+deliverables remain unchanged requirements.
+
+Public-interface clarification: the direct field-indexed entry is canonical
+for continuation. Its indices are the original whole row families and
+transformations, not raw matrix flattening. The packed-state wrapper is only
+a redundant convenience presentation. Its timeout occurs while comparing
+result types, at H(inclusion), and therefore can affect a consumer that mixes
+the two presentations; it is not merely normalization of assurance proofs.
+No current TypeScript consumer uses that wrapper. Preserve its evidence,
+but do not gate the bounded theorem or proof–CAS integration on comprehensive
+agreement with it. Revisit it for a concrete consumer, without introducing
+object casts or another H owner.
+
+For complexes supported in degrees 0 through L, use L+2 windows, beginning
+at the outside-support centre L+1 and ending at centre -1. The full iterator
+has 3L+6 annotated interiors. Dropping its first two arrows and its last
+arrow leaves 3L+3 interiors in conventional order, beginning at the original
+H(C) in degree L+1 and ending at the original H(A) in degree -1. Derive zero
+identity on these actual endpoints from the corresponding outside-support
+middle row terms; do not replace either H object by a selected zero object.
+Using n = 3L+3 in the generic three-arrow trimming signature avoids a new
+open Nat-addition conversion obligation.
+
+Final iterator qualification (2026-09-10):
+
+- The final-path warning and quiet gates both complete with normal subject
+  reduction and 90 seconds per target:
+  `logs/probes/homology-bounded-generator-warnings-20260910-173329.log`
+  and `logs/probes/homology-bounded-generator-quiet-20260910-174228.log`.
+  All five new reviewers pass 19 positive and five negative controls;
+  the old adjacent-window, extension, span and zero reviewers also pass.
+  New owners/reviewers take at most five seconds individually.
+- There are eight new primitive data heads, eight definitions/proofs,
+  five constructor beta clauses and no unifier. H, delta, the original
+  exact-step introduction and its two proof projections are unchanged.
+  Both new rule owners pass strict inferred-slot auditing. The warning
+  inventory is identical in every field at 1,249/169.
+- All 40 focused metrics tests and four warning-summary tests pass.
+  Affected shell syntax, active references, report headers and exact
+  whitespace checks pass. The strict catalog is fresh; source-only health
+  covers 898 files at snapshot
+  `9a827c2e5fef5443c4a83f4e35f9bf30ffd6d4025cba3e72ed719031b208c3f2`.
+  This is not a new repository-wide runtime or book check.
+- `emdash2/audits/bounded-homology-case-iteration-2026-09-10/` preserves
+  all 36 follow-up research versions, the diagnostic correction, failed
+  packed-state wrappers, final warning comparison and byte/hash recovery.
+  No compiled objects or large debug logs are archived.
+
+The finite iterator is qualified. Row 8C remains in progress for conventional
+zero-padded ordering and actual endpoint evidence, followed by the final
+formal/native and book boundaries. The redundant packed-state agreement is
+consumer-gated, not a new prerequisite for those obligations.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather
@@ -1425,7 +1554,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
-| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; generic Nat iterator and state facade source-check; proof-field usability and full consumer qualification remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
+| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed Nat iterator and full two-window controls qualified; zero-padded ordering and actual endpoint evidence remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |

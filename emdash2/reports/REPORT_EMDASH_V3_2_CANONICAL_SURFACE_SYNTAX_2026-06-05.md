@@ -2098,7 +2098,7 @@ evidence; it does not prove exactness merely by forming a sequence.
 The append operation shares one boundary arrow and is finite-data
 concatenation, not ordinary categorical composition. In the checked
 two-window consumer it retains the common H(i) and all original H inputs.
-This notation does not assert the still-pending generic bounded generator
+This notation does not by itself assert the full zero-padded bounded theorem
 or replace the whole-complex/H/delta operations.
 
 `HomologyRowTriple` is a sliding state of three whole row families, two
@@ -2107,6 +2107,16 @@ adds a finite number of coherent extensions; its remainder is indexed by
 the shifted original state. These are not independently chosen windows
 joined by object-equality proofs. `homology_whole_window_extend` prepends
 the existing three exact pairs to an exact continuation at the same H(i).
+
+`HomologyRowFieldSpan(n,R0,R1,R2,f,g,z)` keeps those original inputs
+directly as indices. Its case operation eliminates one extension constructor.
+`homology_row_field_span_exact_tail` iterates the same window construction;
+n extensions give 3n annotated interiors, 3n+1 arrows and 3n+2 objects.
+This is the finite assembler, not a new H or the completed zero-padded
+long exact sequence. `finite_arrow_tail_arrows` observes complete arrows;
+`finite_arrow_tail_init` removes the last arrow and its final annotation.
+The packed-state generator comparison remains an unqualified convenience
+interface, not an installed usability equation.
 
 `homology_whole_middle_zero` states id_H = 0 from id_B = 0 for the original
 middle term B. Its terminal-middle specialization uses the original

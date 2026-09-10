@@ -22,8 +22,12 @@ closed quotient effectiveness is claimed.
 The bounded-generator prerequisites now retain coherent whole row spans,
 extend an exact continuation by one proved window, and prove zero identity
 at the same H when the original middle term is zero/terminal. Their focused
-gate is `scripts/check_homology_bounded_prerequisites.sh`. The actual Nat
-generator and application of this boundary theorem remain downstream.
+gate is `scripts/check_homology_bounded_prerequisites.sh`. The field-indexed
+Nat assembler is now implemented, with its own scoped gate
+`scripts/check_homology_bounded_generator.sh`. Its input-constructor case
+retains the original whole row data, H and exactness witnesses. The full
+zero-padded ordering, endpoint application and public result remain downstream;
+the slow packed-state wrapper comparison is not promoted.
 
 `../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
 is the active continuation beyond the completed Abelian, homology, and snake

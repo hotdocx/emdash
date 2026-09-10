@@ -4541,3 +4541,31 @@ or a global equality-proof collapse. Both its generic backend control and
 the concrete record-layout copy pass. The parent plan and
 `emdash2/audits/bounded-homology-proof-fields-2026-09-10/` record the evidence,
 unreached controls and the remaining full-goal obligations.
+
+The constructor-case experiment now passes both fresh quiet and warning
+graphs with the ORIGINAL exact-step introduction. It exposes extension
+inputs before the existing semantic continuation expands, retaining ordinary
+Nat recursion and all H/delta/exactness selections. The five core controls,
+seven-arrow comparison and two negative boundaries finish successfully.
+The first final integration installs that implementation layer and its
+scoped gate, plus annotation-preserving prefix trimming and zero-identity
+lemmas at a short exact row's original outer objects.
+
+Do not confuse that result with a completed public bounded theorem. The
+packed-state result comparison times out while unifying an expanded
+H(inclusion) index, before comparing the proof-bearing values. Ordinary
+dependent-eliminator and specialized-beta wrappers also time out at their
+source checks and are preserved, not promoted. The final input/result
+interface, zero-padded ordering and endpoint application remain part of the
+parent goal. Local proof-field irrelevance is separately checked research,
+not a requirement of the successful iterator.
+
+Final source-path qualification now passes both quiet and warning gates:
+19 new positive and five negative reviewer assertions, plus all affected
+older window/span controls. The five new constructor beta clauses pass
+strict LHS audit, and warnings match every prior inventory field at
+1,249/169. The parent plan records source-only health, the focused tooling
+checks and verified recovery of 36 research versions. The direct indexed
+entry is canonical for the remaining bounded construction; the redundant
+packed-state agreement is consumer-gated. The full endpoint and book scope
+is unchanged.

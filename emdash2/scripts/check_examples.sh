@@ -45,6 +45,7 @@ homology_exact_window_examples_checked=0
 homology_window_families_examples_checked=0
 homology_arrow_tails_examples_checked=0
 homology_bounded_prerequisites_checked=0
+homology_bounded_generator_checked=0
 for file in examples/*.lp; do
   printf 'checking %s\n' "$file"
   if [[ "$file" == "examples/abelian_snake_six_term_inner_zero.lp" ||
@@ -114,6 +115,15 @@ for file in examples/*.lp; do
     if [[ "$homology_window_families_examples_checked" -eq 0 ]]; then
       ./scripts/check_homology_window_families.sh
       homology_window_families_examples_checked=1
+    fi
+  elif [[ "$file" == "examples/finite_arrow_tail_init.lp" ||
+          "$file" == "examples/short_exact_row_zero.lp" ||
+          "$file" == "examples/homology_row_field_spans.lp" ||
+          "$file" == "examples/homology_bounded_generator.lp" ||
+          "$file" == "examples/homology_bounded_generator_arrows.lp" ]]; then
+    if [[ "$homology_bounded_generator_checked" -eq 0 ]]; then
+      ./scripts/check_homology_bounded_generator.sh
+      homology_bounded_generator_checked=1
     fi
   elif [[ "$file" == "examples/preadditive_zero_identity.lp" ||
           "$file" == "examples/homology_whole_zero.lp" ||

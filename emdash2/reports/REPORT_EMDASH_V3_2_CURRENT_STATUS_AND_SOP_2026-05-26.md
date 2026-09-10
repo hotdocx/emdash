@@ -1470,8 +1470,26 @@ belongs to the owning implementation plan rather than to standing guidance.
   identity at the actual H object, by monic/epic cancellation. No alternate
   H object or identity-to-zero runtime rule is introduced. The focused gate
   is `scripts/check_homology_bounded_prerequisites.sh`. These are prerequisites:
-  Nat iteration and applying the boundary theorem to the generated endpoints
-  remain required for the generic bounded result.
+  Applying the boundary theorem to the generated endpoints remains required
+  for the generic bounded result; the iterator implementation follows below.
+- The homology-row-field-span and case modules retain the original three
+  whole row families, two transformations and chain-zero datum as rigid
+  classifier indices. Four projection beta rules and one constructor-case
+  beta avoid expanding the connecting construction before exposing the
+  extension's data. The field-extension module applies the SAME proved
+  window extension; `emdash3_2_homology_bounded_generator.lp` uses ordinary
+  Nat recursion to produce 3n original exactness annotations. No new H,
+  delta or exactness theorem is postulated, and the exact-step constructor
+  remains unchanged: local proof irrelevance was not needed for this fix.
+  The seven-arrow and retained-proof two-window controls distinguish this
+  actual computation from source checking alone. The packed-state wrapper
+  comparison remains unqualified at an expanded H(inclusion) index and is
+  preserved only in research. The finite-tail arrow and init modules provide
+  data observation and annotation-preserving trimming. The short-exact-row-zero
+  module proves zero at both original outer objects from zero in the middle.
+  `scripts/check_homology_bounded_generator.sh` is the exact-source scoped
+  gate. Conventional zero-padded ordering, endpoint application, final
+  formal/native audit and book work remain required.
 - `emdash3_2_commutative_algebra_freyd_homology_model_records.lp` specializes
   the whole-owned homology record at the original supplied model and raw
   chain agreement. Its object computes to the already-used model H point;

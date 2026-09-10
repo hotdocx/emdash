@@ -1,0 +1,222 @@
+{
+  "baseline": "b15bad4272c99ed78035d1c49ef613a7214481c0",
+  "date": "2026-09-10",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/check_homology_arrow_positions.sh",
+      "bytes": 773,
+      "sha256": "3919974c15f071622e6bde2ff9c6b80ec4d6525b3afac20eca5c2d38db374e1f",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_case_owner.sh",
+      "bytes": 4351,
+      "sha256": "0c5f5256de4c110669085ea5c165cd655a24d058e81c3425cc113b1455ecd7f0",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_proof_field_owner.sh",
+      "bytes": 4318,
+      "sha256": "f7b94fae30bf2e311df132308df2390a42d073046a778112ea2ed76490456471",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/exact_arrow_step_data_illformed_target.lp",
+      "bytes": 903,
+      "sha256": "c33642f307822079dbdc7a45ee2e1993f7582c3e3fa6ed09c35fb3031b9ca66f",
+      "status": "fixture defect: differently indexed value in ill-formed expected equality"
+    },
+    {
+      "path": "emdash2/tmp/probes/exact_arrow_step_proof_irrelevance_data_checks.lp",
+      "bytes": 693,
+      "sha256": "39b50a47987a01f77fd94e313b07016e12ce87d5942d4f16f299d0fb0bb4f43b",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/exact_arrow_step_proof_irrelevance_owner_checks.lp",
+      "bytes": 2135,
+      "sha256": "7a2c3b52705b573eafc8878dfab33b5c0de86d7479e3c29cf88d28a8d7501466",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_arrows.lp",
+      "bytes": 1589,
+      "sha256": "0edc8c681c636d79217f5ac7ad4882513dfc0b96cb6ac8850f049bfe513ce52e",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_case.lp",
+      "bytes": 1452,
+      "sha256": "ad283eaf2aeea7976ce436223abf04a1d020a7e83632f5818f447db6f056f0a5",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_0.lp",
+      "bytes": 270,
+      "sha256": "5a0aa5bd25fad3a217cc5a51aac08d170a99525d0bb3b628edd71b45e026839a",
+      "status": "isolated scalar comparison completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_1.lp",
+      "bytes": 372,
+      "sha256": "0f3af0a548968854c2fa145e5b8b347a9f290822687de81adbcf9aca768f9549",
+      "status": "isolated scalar comparison completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_2.lp",
+      "bytes": 474,
+      "sha256": "3384627afff3ad6a9c614185d1a11a488fcca070ae3c2a27c81d3083ee21aa50",
+      "status": "90-second bound reached in isolated scalar comparison"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_3.lp",
+      "bytes": 578,
+      "sha256": "326f6e285322ded63c0293dc40e977cb14f090a75d988a936dfee51fbd262359",
+      "status": "isolated scalar comparison completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_4.lp",
+      "bytes": 678,
+      "sha256": "94816e5b82f98ae31ba79a3223737168326125ce249fdbbaeaa55e0beb8434e2",
+      "status": "90-second bound reached in isolated scalar comparison"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_5.lp",
+      "bytes": 778,
+      "sha256": "636efdf041c22e8892277155be5fcc57af29ad02f0c06a06cff7df68e4e70a43",
+      "status": "90-second bound reached in isolated scalar comparison"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_6.lp",
+      "bytes": 880,
+      "sha256": "2cda82fe211f1a6d80495bafcde59bcb83843e3a5de30ae6228f8370c9acb701",
+      "status": "isolated scalar comparison completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_arrow_fixture.lp",
+      "bytes": 528,
+      "sha256": "41f3652b59e1e41c03456da28871f6dd375b682b48d3cc8f42d808cd81ab029b",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_complete_arrows.lp",
+      "bytes": 658,
+      "sha256": "8b41b40a46e136d35578e727df1bd657d51096648b1822a8bb20374fb6343933",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_core_checks.lp",
+      "bytes": 61494,
+      "sha256": "31ee4a720596c54309f49f79c4e46866add568991ba5ca7119e2d40cf76302dd",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_full_checks.lp",
+      "bytes": 62102,
+      "sha256": "80b0e6c595b4f87df1d7dc0f2eced415e98a909a6f64c2f79eebfc4ca68356d4",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_length_negative.lp",
+      "bytes": 140,
+      "sha256": "9ac3813eabf74324481e99acb90b959796f44c0633c59c59ef872138a9877d20",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_overlap_negative.lp",
+      "bytes": 209,
+      "sha256": "d1eca9f68638785dfc90d6a2f7fadc7feb26ae77050773e5841727c15c5b7269",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_positive.lp",
+      "bytes": 61782,
+      "sha256": "03a916b230ff1b74e7f315161d30441059ed14dd9adb0e3e9b2272969f4103e4",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_public_comparison.lp",
+      "bytes": 432,
+      "sha256": "d4750e45db94715bd0da19c26fbeb0000f5bf38534b8f38a3a553bf59c78aa99",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_case_runtime_fixture.lp",
+      "bytes": 41932,
+      "sha256": "5b52d80b230c14469e0829ef679fbc14ead9ba8ea62f792bdf5bfffbc2f1077f",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_complete_arrows.lp",
+      "bytes": 653,
+      "sha256": "bb330ce5af26ccac865721b3a8585cb4a56358bd5a447ad79ae9bcecd188b323",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_generator_case.lp",
+      "bytes": 108318,
+      "sha256": "f160d01646a088b70a9f4eecfb11ff7a88dd9210ffaf1978b92623e91a93d017",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_runtime_fixture.lp",
+      "bytes": 41927,
+      "sha256": "538b72a4a549cc1a1749fefd095ec19714c48a1ee8e70849c52919638744b04e",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_whole_path_single.lp",
+      "bytes": 38060,
+      "sha256": "75fb0fa387cccb3cdb679066728d4294126c10cc9447afcd7cfbd92a69df1e83",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_beta_facade.lp",
+      "bytes": 30821,
+      "sha256": "00824c561db5ad7d264ceb0f33ef1a81a0549fcb8d80a90275117987d4230988",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_case_facade.lp",
+      "bytes": 1766,
+      "sha256": "709d219cc2d60e6eab5f75d3b4f63a16e6d31ae1f511cc3092777d64031d4c79",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_span_generator_elim_facade.lp",
+      "bytes": 32019,
+      "sha256": "ffe0f828e59e43e93d130b8984d9674514f891466f2271990b7e9c7242ca385c",
+      "status": "90-second bound reached; not qualified"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_triple_elim.lp",
+      "bytes": 1293,
+      "sha256": "a02b6035ddc9e4ff13f7886a8074a1c246bb19c02ef867417008341861355d2e",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_second_rest_typing_trace.lp",
+      "bytes": 42090,
+      "sha256": "82b7c3bc15be1010ad4d024b781614513aee557df33a7d2aee96e85afb5449fa",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_short_exact_row_zero.lp",
+      "bytes": 1996,
+      "sha256": "04598f9b2d0a9cf6b967d40f031a368a69a7e4665dac0231c3dabd0b78a553cc",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_short_exact_row_zero_checks.lp",
+      "bytes": 1195,
+      "sha256": "c292ecd88a8302f20b805902d876044a871864f56673601a70a2fa17d22d261c",
+      "status": "bounded source/control check completed"
+    },
+    {
+      "path": "emdash2/tmp/probes/run_homology_leaf.sh",
+      "bytes": 829,
+      "sha256": "14c3a5467737ae8e80de45550ac601606648b44f42377a1d001f7b8461b6d9a7",
+      "status": "preserved research source/driver; see README for qualification boundary"
+    }
+  ]
+}
