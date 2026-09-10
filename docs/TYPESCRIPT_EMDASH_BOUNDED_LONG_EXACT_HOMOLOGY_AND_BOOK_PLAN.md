@@ -1181,6 +1181,157 @@ zero-padded ordering and actual endpoint evidence, followed by the final
 formal/native and book boundaries. The redundant packed-state agreement is
 consumer-gated, not a new prerequisite for those obligations.
 
+Checkpoint `ff139362` records that qualified iterator tranche.
+Boundary continuation: the rule-free
+`tmp/probes/finite_arrow_tail_trim_boundary.lp` removes two leading arrows
+and the last arrow. Its four positive/one negative controls pass, retaining
+the exact original middle annotation and rejecting a distinct one.
+The homology-specific conventional-order specialization and its real
+two-window consumer are now being checked against a fresh source graph.
+
+For generic endpoint proofs, retain the original last middle row as a Nat-
+recursive observation of the same field span. The right endpoint before
+trimming is the final H(A) source; prove its zero identity from zero at that
+row's original B term using row monicity and the existing whole-H zero
+theorem. The init endpoint-property lemma then applies that property to the
+actual clipped target without an object-equality cast. The left endpoint
+uses row epicity and the same H theorem at the original top H(C).
+Dependent elimination of the positive input record may be needed to prove
+these properties at a neutral span: its constructor case was deliberately
+kept visible to control computation. This is ordinary record induction,
+not an extra universality or equality assumption.
+
+The conventional-order specialization and its actual two-window consumer
+complete the fresh boundary-research graph
+`logs/probes/homology-boundary-research-quiet-20260910-175019.log`.
+The last-middle-row observation and dependent positive-span case also
+source-check. The generic last-source zero theorem checks in 42 seconds,
+and its two-window use at the SAME final H(A) and its original last row
+checks in 13 seconds.
+
+The separate left-endpoint probe initially missed the finite-tail-append
+import; that fixture is preserved. After fixing the import, the source-H
+control completes but the target-H comparison times out. Review identifies
+an owner mismatch: the existing window uses
+`homology_connecting_step_right_pair`, while the first target-zero helper
+used the equivalent generic `short_exact_row_chain_target_pair`.
+Use the window's actual step-pair presentation directly, following the
+already recorded retained-selection policy; do not launch a new comparison
+or object-transport proof project between the two presentations.
+
+The selected step-pair target-zero helper and both actual endpoint controls
+now pass (seven seconds for the combined consumer). The generic first-target
+zero proof checks in 12 seconds, and its clipped left-endpoint specialization
+checks in 14 seconds. Generic trimming transfers a property from the original
+penultimate object to the actual new target; its preservation/noncollapse
+reviewer passes. These are properties of the same H objects, not object casts.
+
+Right-endpoint attachment remains a source-check boundary. Annotated,
+inferred-result, explicit-input, zero-specialized and two-constructor-case
+variants each reach 90 seconds. The warning/debug trace of the specialized
+version repeatedly compares `last_target(trim(generator(...)))` with
+`last_target(homology_bounded_row_sequence(...))` after expanding the common
+Nat endpoint observer. The next specific probe uses the SAME literal
+trim/generator expression in the declared endpoint and body. Do not treat
+this as a new mathematical missing lemma: the generic endpoint proof and
+generic trimming property are individually checked, and the actual sequence
+already computes. No unsupported equality or global rewriting is installed.
+
+The literal-endpoint variant also reaches the bound. The next bounded
+owner-position experiment therefore targets the generic final-target
+observer itself, rather than H or another whole-result alias. Its current
+transparent Nat definition expands into repeated higher-order recursor
+constraints at neutral lengths. The candidate keeps the SAME zero/successor
+recursion under a stable `finite_arrow_tail_last_target` head. The two rules
+discriminate only on the explicit Nat argument, with variables/wildcards in
+all other LHS positions. This is not an injectivity declaration, a new
+endpoint equality, proof erasure or a generic category cut. Test the full
+owning-file replacement and all affected append/init/endpoint consumers
+before deciding whether to promote it; preserve the current definition.
+
+That stable-target-only experiment preserves the affected append/init,
+sequence-computation and original endpoint consumers, but the decisive
+right-endpoint attachment still reaches 90 seconds. It is not promoted.
+The recorded original trace has 364 unsuccessful unification-rule attempts
+and no successful unification-rule application on those endpoint constraints;
+this is not evidence of a looping custom rule or proof-term equality.
+
+The endpoint proof is already a separate theorem declaration. Its types
+nevertheless inspect an exact tail carrying interior law annotations.
+Test a minimal symbolic-length alias comparison with arbitrary annotation,
+Unit-only annotation, and a zero-identity property before attributing the
+cost to those proofs. If necessary compare a genuinely data-first generator
+with side predicates, not merely a lazy forgetful view that still contains
+the proof-bearing input term. The operational API remains primary, while
+the requested generic zero-ended theorem stays an explicit completion
+obligation; no formal claim is silently dropped.
+
+Minimal isolation results: arbitrary-annotation, Unit-annotation and
+zero-property alias controls all complete in under one second. Controls
+with the actual symbolic threefold-length arithmetic and with a preadditive
+structure obtained from an Abelian package complete in 20–21 seconds.
+These do NOT reproduce the failure and do not establish proof annotations
+as its cause. Forming the full homology endpoint statement separately
+checks in 15 seconds; specializing the original endpoint proof separately
+to L+2 windows checks in 12 seconds. The next experiment composes those
+already checked interfaces, retaining the original computation and all
+theorem premises, before changing the operational representation.
+
+The two separately typed-cut compositions still reach 90 seconds, as does
+a version taking the already-proved endpoint law as a parameter. An opaque
+exact tail at the ACTUAL whole-H initial objects/arrow also reaches the
+bound: that test constructs neither the sequence nor its proof payloads.
+Thus normalization of the particular proof body is not necessary for the
+failure. The next two-factor control separates the exact-step annotation
+classifier from the computed H objects/initial-arrow indices. Preserve
+these negative results rather than claim proof irrelevance or a stable
+observer alone has resolved the issue.
+
+The exact-step classifier with bare object/arrow indices passes the symbolic
+alias control in eight seconds. Conversely, the actual H indices with only
+Unit annotations still reach 90 seconds. Thus the annotation's exactness
+proof payloads are not necessary for this failure; the computed initial H
+objects/arrow are the remaining differentiating factor. The next control
+keeps the same H objects but makes the initial arrow an explicit opaque
+parameter, to distinguish that arrow index from the object indices before
+selecting any representation change.
+
+Keeping the actual H objects but making the initial arrow an opaque typed
+parameter completes the same test in 65 seconds. The computed arrow index
+therefore materially increases the conversion cost; neither a constructed
+proof payload nor a particular endpoint proof is needed to reproduce it.
+Before a data-carrier migration, test the equivalent clipping order
+`drop_two(init(xs))` instead of `init(drop_two(xs))`. This keeps the
+original first-edge indices during the generic right-endpoint theorem and
+moves the two leading projections afterwards. It retains precisely the
+same middle arrows and annotations, and adds no runtime rule.
+
+All 55 endpoint/conversion prototypes and drivers are now preserved in
+`emdash2/audits/bounded-homology-endpoints-2026-09-10/`, with successful
+patch application and exact byte/SHA-256 recovery. The archive explicitly
+separates checked endpoint lemmas and computation from timed-out attachments
+and invalid fixtures. The local whitespace attribute applies only to the
+non-executable raw patch so its original whitespace-only lines are preserved;
+active-source whitespace policy is unchanged.
+
+The sequential init-first rerun checks its source and displayed-arrow
+reviewer in four/six seconds, but the right-endpoint attachment again
+reaches 90 seconds:
+`logs/probes/homology_bounded_right_zero_init_first-leaf-20260910-194408.log`.
+Do not select that clipping-order change as a solution. The successful
+generic and homology endpoint ingredients, computational ordering, all
+failed alternatives and minimal type-index controls are now recoverable.
+This is a research checkpoint; active LP owners and the qualified iterator
+remain at `ff139362`.
+
+The next owner-level question is whether a narrowly typed congruence
+unifier for a stable endpoint observer can compare its actual typed
+arguments without repeatedly expanding a higher-order recursor. Such a
+probe must retain sufficient data/index constraints, be a conservative
+comparison aid rather than an injectivity assertion, and pass the real
+consumer plus noncollapse tests before promotion. The controls do not
+justify erasing exactness proofs or changing H/its selections.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather

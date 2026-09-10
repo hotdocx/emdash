@@ -4569,3 +4569,20 @@ checks and verified recovery of 36 research versions. The direct indexed
 entry is canonical for the remaining bounded construction; the redundant
 packed-state agreement is consumer-gated. The full endpoint and book scope
 is unchanged.
+
+The parent plan's boundary continuation now has checked conventional
+ordering, a generic original-right-endpoint zero theorem and its concrete
+consumer, and a generic clipped-left-endpoint zero theorem. A mismatch
+between equivalent target-pair presentations was corrected by using the
+window's original `homology_connecting_step_right_pair`, not by replacing H
+or transporting endpoint objects.
+
+The remaining right-endpoint attachment is isolated in a separate theorem
+declaration. Minimal controls pass for generic/Unit/exact-step annotations
+with bare indices, and the complete statement and untrimmed proof each
+check separately. The opaque-tail test still times out with the actual H
+indices and Unit annotations; making the initial arrow an opaque parameter
+checks in 65 seconds. Therefore proof payload normalization is not necessary
+for this failure. Stable-observer-only, typed-cut and clipping-order variants
+have not solved it. The 55-version endpoint audit preserves the evidence;
+no new active runtime rule or mathematical assumption is installed.

@@ -1,0 +1,2 @@
+# Preserve the exact bytes of historical, non-executable probe snapshots.
+prototypes.patch -whitespace

@@ -1,0 +1,282 @@
+{
+  "baseline": "ff139362be71dfec03142d05dda2dc123b3624a5",
+  "date": "2026-09-10",
+  "qualification": "See README and living plan; preservation does not imply passing checks.",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/check_homology_boundary_research.sh",
+      "bytes": 4125,
+      "sha256": "e09b7ae669aefc5fea7472603302478adde16663e29b07a099a3fad3b9260f65"
+    },
+    {
+      "path": "emdash2/tmp/probes/check_homology_stable_target.sh",
+      "bytes": 4883,
+      "sha256": "f8b21e269cc910a02881c57e727ee1da079322800004cd1aa91d596684c2cba9"
+    },
+    {
+      "path": "emdash2/tmp/probes/computational_bounded_exact_arrow_tails.lp",
+      "bytes": 4765,
+      "sha256": "35e76e25014d755963de3ba1e130765861e8c5e23afcd40db69e9ecd51ddc0b3"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_append_stable_target.lp",
+      "bytes": 5234,
+      "sha256": "14d1b5453d95272fcaa558b92e48da70bb868c13bbde7a9f74364a7170d059ec"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_first_source.lp",
+      "bytes": 401,
+      "sha256": "b672c9439b81b2a36283929004b980032af2c256e451567fd764de570799a3be"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary.lp",
+      "bytes": 1204,
+      "sha256": "1543e1579a8289e65b761a651c094fbfc6b17cde065d3fa912eff9603abb1070"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary_checks.lp",
+      "bytes": 1730,
+      "sha256": "e27a2d6c85ce39c96ba05e1e8c9e38ce4e1417bb37c06aebca01e25c00024478"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary_init_first.lp",
+      "bytes": 1402,
+      "sha256": "404273fa271f74b32bb1ecf4d878a8461e9e0722290ca788468f5613276aec05"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary_target_property.lp",
+      "bytes": 1471,
+      "sha256": "abc65c643516b144f84632a1e93cc1a0850e3555f1e825c725196dfdf7ef554a"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary_target_property_checks.lp",
+      "bytes": 626,
+      "sha256": "88439cb4b5426ae59a6bc460c8e4ec3dabc9fb295c013e7aa2943d2eb2dc29e3"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_arrow_tail_trim_boundary_target_zero.lp",
+      "bytes": 1758,
+      "sha256": "f39b0fe2f42df1f12bc16c1b1ae2fe3411eeda63da80641f3c6339b4c958c0ea"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_ab.lp",
+      "bytes": 1526,
+      "sha256": "2525fb4f4f780628eb75f7951c9e5bc080a857dbcf920611bcf14e0bf5ec20a0"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_exact.lp",
+      "bytes": 1491,
+      "sha256": "69ed19e009e1ab3af88db322a713c277ab80112224804b6db99966533be29d8f"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_generic.lp",
+      "bytes": 881,
+      "sha256": "3c6ac27f3ac9338324512989c5ec99a7e547e883b35043dc67b935b60eda8bf5"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_triple.lp",
+      "bytes": 1222,
+      "sha256": "1f82b30b142044050b02b67f0bf39732e5a21f5b670880b7d057357f79f68383"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_unit.lp",
+      "bytes": 852,
+      "sha256": "da1e7a1b6b23ecd8bbb84f795127c38d7b6499af702c2f9e0aac5ff4dc1a2be9"
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_alias_zero.lp",
+      "bytes": 1012,
+      "sha256": "e345d8e52767c623fb2eea1fea2c393daeaf91d61b274aa96b780f4b8b841079"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_exact_arrow_tail_carrier.lp",
+      "bytes": 4758,
+      "sha256": "70c349ac2b13fca100b7bc9cf9be8daa9ad7a056892bbb9fab66189a9c20292a"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_init_first_checks.lp",
+      "bytes": 1188,
+      "sha256": "d78d4cdbdbaffa48eeb891c2950570887eee1c1f696610432f7cdb8ba41783f1"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_right_zero_cut.lp",
+      "bytes": 4116,
+      "sha256": "82df9549e3e56ef7326c12a933e970343da5c5ecc836aa6a42ec93ea8e6a7b25"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_right_zero_cut_statement.lp",
+      "bytes": 2796,
+      "sha256": "4e0d501ead150137cd9780810fd665dc25079729e95de8b4bdc378303d95c9ed"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_right_zero_from_parameter.lp",
+      "bytes": 5327,
+      "sha256": "3b706ef436958d5ebba91acd7e1a5f602b899cad52887a78c01b99f724f62fee"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_right_zero_init_first.lp",
+      "bytes": 4222,
+      "sha256": "95d9a295e994b4d97ef5d5cc8fa9e3ff503d8988f91a18002b1ef7f11eaa111a"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_right_zero_statement.lp",
+      "bytes": 3353,
+      "sha256": "d38d04188bafac871ec3f8357fb7554c40c2be739d55dfe971967220b8632f42"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence.lp",
+      "bytes": 2110,
+      "sha256": "a5dd6b81512d9bf027e9d28a0c8b56cd171ae3060c506b88d99272c1ac35a0fe"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_checks.lp",
+      "bytes": 1177,
+      "sha256": "1e32128e5ee3f7bd80e2d024a6cb0bc3b9ea6836227ec96859ff0790b0a81681"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_init_first.lp",
+      "bytes": 2121,
+      "sha256": "6dfe7141e9cd12dd39cf0d062e7604c1ba37825947181510d6d81018a86a7615"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_left_zero.lp",
+      "bytes": 3584,
+      "sha256": "2658f6f45ba855b0d66b7f31b36d1f5da055718e3c2323ed54e37fd1d84ff50e"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero.lp",
+      "bytes": 4216,
+      "sha256": "f03dcdcd492ae783f3c4fe20500a48e48f31ab282d68d4847916cd0a71116924"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_cases.lp",
+      "bytes": 10656,
+      "sha256": "f88abe6a80c327bc4af4acd92f1019fa06e2620a72649f1416dbae6c42115a4d"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_explicit.lp",
+      "bytes": 22381,
+      "sha256": "5ee348079660d8530319e64e0f7c76adbd6f076ce4373acbe5a7941257948c25"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_inferred.lp",
+      "bytes": 2728,
+      "sha256": "c83c1819748a87c79c3e7014e6c1ec9bfa89ca37a7af8a649c20468a4fd6fefb"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_literal.lp",
+      "bytes": 5177,
+      "sha256": "ffb42439ca77c6297fa69adbb74547dce8de1ee8bbfacf20f2e6163de2cee21b"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_specialized.lp",
+      "bytes": 4142,
+      "sha256": "3113c1db3061954410c47adfb8bc76e8d513af7e1f6197d1c4c1126b49b06d2d"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_row_sequence_right_zero_trace.lp",
+      "bytes": 4153,
+      "sha256": "8e3214cea5ca99b52dbd3a01c828ebff4820c59b818451ae3e81e9d4aeb37c6f"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_bounded_untrimmed_right_zero.lp",
+      "bytes": 2238,
+      "sha256": "1954ed2498350c772cd08aa6d0a9960ce832fad0d7c3157b7a7a9f19372fc84a"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_endpoint_opaque_arrow.lp",
+      "bytes": 119038,
+      "sha256": "1c6832157c07acb96491c1a55189c603f31208e21a5d090b3a7651bc54d2b32c"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_endpoint_opaque_tail.lp",
+      "bytes": 241039,
+      "sha256": "ce46d1cd147c564890b0ca893d84215fc770f0b1a5f078b927e2a73a15b6030d"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_endpoint_opaque_tail_unit.lp",
+      "bytes": 241621,
+      "sha256": "72f27c69891fdcab08940969875c2fe36018acad317c5ed4b94bdc0efc071e6d"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_dependent_case.lp",
+      "bytes": 1695,
+      "sha256": "67edc46a46a9213dc3fc5f7dc6536dbddaf9e5ae48e429789daeab2b2aa46711"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_first_target_zero.lp",
+      "bytes": 6130,
+      "sha256": "470578792ad1fe6c4771155fa0d0811877569218b394656a48ef7818aabaa8f0"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_last_middle.lp",
+      "bytes": 5274,
+      "sha256": "31c18da180401890e453730bf2fdf6f9be587bce87eab91a99caea1977074c46"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_last_source_zero.lp",
+      "bytes": 16370,
+      "sha256": "6cfd496d4e64e99192328eba9bab45bcf883247d83e5f73842afd628257cd22c"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_field_span_last_source_zero_checks.lp",
+      "bytes": 1542,
+      "sha256": "49da85bfc4a9f4c41af623d2c01e0d73219bf5ce058a736796fa14e745b069a8"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_endpoint_zero_checks.lp",
+      "bytes": 3932,
+      "sha256": "680d736c1792841a380fecc0928683c10301ad551e993b5b66e9fb8b32617a2d"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_endpoint_zero_missing_import.lp",
+      "bytes": 3876,
+      "sha256": "735a77804e1740013c5d322d389f75050ee94e5c700706ccb9c29ff392df6c7b"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_endpoint_zero_trace.lp",
+      "bytes": 3996,
+      "sha256": "fc1697fa509bbc226ebe6b54b580198275ef082f9e65ddf4d51223e6cee97eda"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_selected_endpoint_zero_checks.lp",
+      "bytes": 3941,
+      "sha256": "6abb2e5348c1c11783bda2b18c1b327a4983824f3021c7c556ede33a2fee5392"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_source_zero.lp",
+      "bytes": 8347,
+      "sha256": "0c8ecfdaa6dc21d5688d06644184eaf0d254611a73e39ec6d69174a6c824dcdf"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_source_zero_annotated.lp",
+      "bytes": 29620,
+      "sha256": "2d6b10ab27b63afa209584af063591ac2dde54deea8a2b2384d2f24ff003ec33"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_target_zero.lp",
+      "bytes": 8599,
+      "sha256": "7acb8d22f156f5798649e0e7a6336385ee2ce8c145620e891921b2a7647d9116"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_target_zero_annotated.lp",
+      "bytes": 31092,
+      "sha256": "7775f53ca00681a2ce9f1f33689058f8b524b1d980ea1e174133cf4cf80ca870"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_fields_target_zero_selected.lp",
+      "bytes": 14724,
+      "sha256": "edc9cec0f9b23363a1f8f781e88e5bae286cc1dfd6338321bd1b2959861ecf6f"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_middle_zero_property.lp",
+      "bytes": 1791,
+      "sha256": "d973e6a886dc19988bdbddab44f03248695e07dea06b40dd7bba93a0f2e9f425"
+    },
+    {
+      "path": "emdash2/tmp/probes/run_homology_boundary_leaf.sh",
+      "bytes": 829,
+      "sha256": "26ad8a48d928301f9de69e9a25900062917d2aadccf9b39563540a196310d402"
+    }
+  ]
+}
