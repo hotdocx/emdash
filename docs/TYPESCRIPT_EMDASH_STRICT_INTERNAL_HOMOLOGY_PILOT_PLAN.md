@@ -145,8 +145,9 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 | `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
 | `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
-| `HINT-CONNECTING-NATURALITY-23` | next owner audit recorded; not implemented | characterize delta by its epic covered formula, derive comparison of original covers from whole input actions, then qualify a whole connecting transformation |
-| `HINT-FREYD-ABELIAN-MODEL-24` | concrete capability prerequisite identified | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
+| `HINT-CONNECTING-NATURALITY-23` | covered characterization qualified; cover comparison and whole family remain | characterize delta by its epic covered formula, derive comparison of original covers from whole input actions, then qualify a whole connecting transformation |
+| `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
+| `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3783,3 +3784,117 @@ artifacts. Accepted code and the final reviewer are the active authority.
 The exact window is now one reusable result. This resolves its packaging
 boundary, not bounded-spine sharing, connecting naturality, the native
 connecting interpretation or the final book/architecture completion audit.
+
+### Covered Connecting Characterization: Active Tranche
+
+The next source slice factors the already-used epicity of qC∘e into a
+shared interface over the original row and homology record. The existing
+second-interior presentation will delegate to that proof. Use its
+extensionality to characterize delta, including postcomposition into an
+arbitrary target, by the original covered reconstruction. Neither an epi
+section nor another connecting arrow is introduced.
+
+This supplies the cancellation boundary for HINT-CONNECTING-NATURALITY-23
+and a retained-operation comparison for the future connecting CAS model.
+It does not yet construct maps between input row families or assert full
+connecting naturality. The probe must preserve the original source step
+pair, original cover and actual H endpoints; reject any route using
+object casts or additional reconstruction axioms. Check the shared owner,
+characterization consumers and the existing second-exactness caller with
+normal subject reduction and the per-source 90-second bound.
+
+Retain a second naturality architecture candidate for the next audit:
+apply the same generic connecting construction in `Functor_cat(B,C)`.
+Its output would already be an actual transformation between functors.
+This requires a coherent pointwise Abelian/kernel/cokernel presentation,
+with evaluation recovering the original C-level selections; it does not
+follow merely from naming a pointwise object operation. Existing whole
+K/Q, argument exchange and adjunction lifting are the prospective owners.
+Compare this with the native zero-cone-family route before introducing a
+new diagram grammar or assuming a whole connecting transformation. The
+current covered characterization supports either route and remains useful
+for matching a concrete native connecting computation.
+
+### Covered Characterization And Retained Model Normality Qualification
+
+`emdash3_2_homology_connecting_cover_quotient.lp` proves that the
+original connecting cover followed by the retained homology quotient is
+epic and exposes its extensionality. The existing
+`homology_connecting_epic_presentation` now delegates to this shared proof;
+its signature, original step pair, cover, quotient and connecting arrow
+are unchanged. This is a proof refactor, not a new epi section or a
+replacement presentation.
+
+`emdash3_2_homology_connecting_characterization.lp` proves the covered
+reconstruction for k∘δ and its uniqueness, for any target and any k out
+of the target homology. In notation e:E→ZC, qC:ZC→H(C), and
+w:E→H(A'), the hypothesis u∘(qC∘e) = k∘w implies u = k∘δ.
+The identity specialization characterizes the original delta itself.
+Both use the existing covered formula and epic cancellation; neither
+postulates a reconstruction equation. These five new symbols are all
+definitions/proofs, with no primitive or rewrite/unification rule.
+
+The generic reviewer checks epicity, arbitrary-map cancellation and the
+negative control that omitting the covered-equality premise cannot produce
+the equality conclusion. The delta reviewer checks an arbitrary candidate,
+the actual delta, arbitrary postcomposition and its canonical candidate.
+All six positive checks and the negative pass. The two owners check in
+one and two seconds in the fresh source stage; the modified second-exactness
+owner checks in thirteen seconds and its existing reviewer passes.
+`scripts/check_homology_exact_window.sh` also passes after the refactor,
+including the canonical three-witness result and its projections. Logs:
+`homology-connecting-characterization-stage.log`,
+`homology-connecting-{cover-quotient,characterization}-reviewer.log`,
+`homology-connecting-characterization-second-reviewer.log` and
+`homology-characterization-exact-window.log` under `logs/probes/`.
+
+The Freyd-side module
+`emdash3_2_commutative_algebra_freyd_homology_model_normality.lp`
+constructs the pre-Abelian package from the original model's W/V and the
+existing additive structure. `FreydHomologyModelNormality` is the existing
+product of monic-lift and epic-colift families at those exact choices.
+Supplying it yields `freyd_homology_model_abelian` through the existing
+generic constructor. It does not manufacture these operational families
+from raw matrix agreements or claim a closed native provider.
+
+Its six positive checks verify the resulting Abelian type, original W/V,
+original whole H functor and the two supplied normality projections.
+These are actual computations, not object transports or propositional
+old/new-model comparisons. The negative rejects omitting the normality
+input. Both raw prototypes and the promoted reviewer pass; the latter
+log is `logs/probes/freyd_homology_model_normality-20260910-044511.log`.
+There are four new defined symbols in this module and no new rule.
+
+The parent goal remains capability-indexed: this enhancement must not turn
+into a new requirement to synthesize a closed normality provider for
+arbitrary formal quotient arrows. The native consumer can bind supplied
+operational families through the existing explicit presentation-semantics
+adoption boundary, while retaining the required raw agreements for its
+represented inputs. That binding is not implemented by this constructor.
+
+Two fresh warning controls use the same respective import graphs. The
+connecting baseline restores the second-exactness source byte-for-byte
+from `bf83db97` and omits only the new owners' definitions. Complete
+baseline/candidate inventories agree at 1,249/169. The broader Freyd-model
+control agrees at 1,255/169. The six-report difference is already present
+in that broader baseline, not introduced by the normality module. Both
+comparisons include categories, locations, term heads and rule families,
+with no parser issue. Logs are
+`connecting-characterization-{baseline,candidate}-warnings.log` and
+`freyd-normality-{baseline,candidate}-warnings.log`.
+
+Four strict source LHS audits, catalog/TOC, 37 focused tooling tests and
+source-only health checks pass. All Lambdapi invocations stay within the
+90-second ceiling; no unrelated aggregate is run. The snapshot covers
+858 files at `sha256:1b479edde9049ac912c7830a909ed51fd4413dd95fc3e7d731273d48975492de`.
+`connecting-characterization-model-prototypes.patch` preserves eleven
+source/driver versions against `bf83db97`, with verified isolated-index
+recovery hashes. The archive now contains 173 versions in fourteen
+artifacts.
+
+Next construct the comparison of original connecting covers under whole
+input actions and qualify full naturality. The new model enhancement is
+available to that proof/CAS interface, but supplying/interpreting its
+normality operations and the native connecting result are still required.
+The two family-architecture candidates above remain explicit alternatives,
+not a pretext to assert a whole transformation without its action.

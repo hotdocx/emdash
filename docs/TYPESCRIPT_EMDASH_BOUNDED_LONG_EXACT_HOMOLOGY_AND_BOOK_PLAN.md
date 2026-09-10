@@ -6,6 +6,17 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Connecting characterization and retained normality (2026-09-10): delta and
+its arbitrary postcomposites are now characterized by the original covered
+formula. The shared epicity proof is also reused by second-interior
+exactness. The Freyd homology model can be enhanced with explicitly
+supplied normality families, retaining W/V and the entire whole H by
+computation. The
+[pilot qualification](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#covered-characterization-and-retained-model-normality-qualification)
+records these conditional constructions and their tests. Full connecting
+naturality, native normality/connecting interpretation, bounded assembly
+and final book/consolidation work remain required.
+
 Exact whole-window result (2026-09-10): `HomologyWholeExactWindow` now
 packages the three proved interior witnesses over the original whole-H
 window. The canonical result and generic/canonical projection computations

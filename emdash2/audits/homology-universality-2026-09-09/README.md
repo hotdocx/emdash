@@ -34,10 +34,11 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [second-exactness-prototypes.patch](second-exactness-prototypes.patch) | `9965ae79` | Epic-presentation and second-interior exactness prototypes, with their staged source driver. |
 | [third-exactness-prototypes.patch](third-exactness-prototypes.patch) | `47c141ea` | Third-interior covered preimages, source cycles, original connecting lift, all-test exactness and whole-H instance, with stage/warning drivers. |
 | [exact-window-prototypes.patch](exact-window-prototypes.patch) | `a96fa507` | Indexed exact-window carrier/result and checker controls; the wrong-interior negative is preserved as a timeout, not a passed check. |
+| [connecting-characterization-model-prototypes.patch](connecting-characterization-model-prototypes.patch) | `bf83db97` | Covered connecting uniqueness, shared epicity/caller refactor and supplied-normality model enhancement, with source-comparison controls. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all thirteen artifacts apply to their pinned baselines, and all 162 embedded
+checks: all fourteen artifacts apply to their pinned baselines, and all 173 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -78,6 +79,13 @@ negative instead. Both promoted supporting owners are included so the
 isolated reviewer sources can be recovered from the pinned baseline.
 Packaging the exact window does not finish the parent goal or prove
 connecting naturality.
+
+The characterization/model addition preserves eleven checked source/driver
+versions, including the same-signature second-exactness delegation and
+supporting promoted owners. The normality constructor retains the model's
+original W/V and whole H by computation, but requires the two operational
+normality families as input. It does not construct a closed native provider
+or complete connecting naturality. Recovery verifies all eleven hashes.
 
 ## Recovery
 

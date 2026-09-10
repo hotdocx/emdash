@@ -1265,6 +1265,15 @@ belongs to the owning implementation plan rather than to standing guidance.
   constructor requires those values, its projections retain them, and its
   whole-H/input/object views delegate to the active operations. No primitive,
   rule, unifier or automatic closed model instance is added.
+  `emdash3_2_commutative_algebra_freyd_homology_model_normality.lp`
+  additionally builds the pre-Abelian package from this model's own W/V
+  and accepts supplied monic-lift/epic-colift operations at those choices.
+  The resulting Abelian capability retains W/V and the entire whole H by
+  computation, as well as both supplied normality operations. The missing-
+  normality negative passes. This does not synthesize a closed provider
+  or bind native algorithms automatically; the represented-input adoption
+  boundary remains explicit. Its own warning control is unchanged at
+  1,255/169.
   `algebra_formal_freyd_model_signatures.ts` mirrors only the model type and
   object observation; it does not transfer the whole categorical runtime to
   TypeScript. `algebra_formal_freyd_model_observation.ts` binds a named supplied
@@ -1350,6 +1359,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   yet supply connecting naturality, the generic window exactness theorem
   or its retained native connecting interpretation. The pilot records the
   consistent step-pair endpoint fix and preserves the failed mixed forms.
+- `emdash3_2_homology_connecting_cover_quotient.lp` shares the proof that
+  the original cover followed by the retained homology quotient is epic.
+  Second-interior exactness now delegates to that proof without a signature
+  or selection change. `emdash3_2_homology_connecting_characterization.lp`
+  characterizes delta, and any k∘delta, by the original covered formula.
+  The missing-covered-equality negative rejects cancellation without its
+  required premise. Both owners, their consumers, the affected second
+  interior and the existing exact-window result are qualified; their
+  warning control is unchanged at 1,249/169. There is no new arrow choice,
+  epi inverse, primitive, runtime rule or unifier. Full connecting
+  naturality and native connecting interpretation remain downstream.
 - `emdash3_2_homology_family_map_factors.lp` now obtains actual whole
   cycle-inclusion and homology-projection transformations by whiskering the
   existing K/Q observations. Their strict-profile naturality derives the

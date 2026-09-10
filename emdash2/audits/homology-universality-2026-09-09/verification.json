@@ -66,9 +66,14 @@
       "artifact": "exact-window-prototypes.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 9
+    },
+    {
+      "artifact": "connecting-characterization-model-prototypes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 11
     }
   ],
-  "source_versions_sha256_verified": 162,
+  "source_versions_sha256_verified": 173,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

@@ -168,6 +168,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   connecting/window interface remains further work. Whole H is primary;
   comparisons serve actual consumers, not exhaustive historical-wrapper
   preservation. This does not construct a closed model from old providers.
+  The homology-model-normality extension now builds the pre-Abelian package
+  from that model's original W/V and adds explicitly supplied monic-lift
+  and epic-colift families. The resulting Abelian capability projects to
+  those same W/V, normality operations and whole H by computation. No
+  object cast, replacement model or closed-provider synthesis is added.
   The kernel/cokernel-adjunction record modules now derive universal records
   at the actual whole K/Q objects and structural transformations. Their
   operational centres are explicit mate operations; comparison paths occur
@@ -193,6 +198,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `scripts/check_homology_record_connecting.sh`. Whole connecting naturality,
   generic window exactness and the native connecting interpretation remain
   downstream; no new primitive or rule is introduced by this reference layer.
+  The cover-quotient and connecting-characterization modules now share
+  the epicity of qC∘e with second-interior exactness and characterize
+  delta and its arbitrary postcomposites by their original covered formula.
+  Their reviewer rejects cancellation without the covered-equality premise.
+  Full connecting naturality and native interpretation remain separate;
+  these proofs introduce no new primitive, rewrite or unification rule.
   The whole homology structural transformations now supply map reconstruction
   factors by naturality; their chain-pair action views use the original
   native map and actual whole H. `emdash3_2_homology_window.lp` retains the

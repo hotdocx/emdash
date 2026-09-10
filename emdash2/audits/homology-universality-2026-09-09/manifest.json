@@ -1172,6 +1172,90 @@
           "status": "checked promoted canonical result needed by isolated reviewer probes"
         }
       ]
+    },
+    {
+      "artifact": "connecting-characterization-model-prototypes.patch",
+      "base_commit": "bf83db9794f80dec652bbf180718a8087d5e135a",
+      "note": "Covered connecting characterization, shared epicity/caller refactor, and supplied-normality enhancement retaining the original Freyd model. Supporting sources and warning controls are included; full connecting naturality and a native normality provider are not claimed.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_cover_quotient.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_cover_quotient.lp",
+          "kind": "new",
+          "sha256": "79df93b519769dcf2156388a1cd1dfb97458a4c3f6609b977bfb31a09875905f",
+          "status": "checked generic cover-quotient prototype"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_characterization.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_characterization.lp",
+          "kind": "new",
+          "sha256": "362fbc90981b1143c0b1295df221f1e3e11d9e73ccb25ad52645a5b4f1b66a1a",
+          "status": "checked connecting characterization prototype"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_characterization_stage.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_characterization_stage.sh",
+          "kind": "new",
+          "sha256": "c4e671c0b123e2ad57d7ad83271e015d14a12e420327d82205b4511b211bfd61",
+          "status": "checked staged caller-refactor driver"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_characterization_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_characterization_warnings.sh",
+          "kind": "new",
+          "sha256": "45e5581bc5840d07d9349bf8d30271464a616ddd03e97b00e7c6fb42105785f0",
+          "status": "checked baseline/candidate warning driver"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_connecting_cover_quotient.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_connecting_cover_quotient.lp",
+          "kind": "new",
+          "sha256": "2f680cdba53c27949c6d4cbdaceede150c3bd0b1906b95c67f734930d4191924",
+          "status": "checked promoted support owner"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_connecting_characterization.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_connecting_characterization.lp",
+          "kind": "new",
+          "sha256": "8d87d14509f1005ffac447333e4909cd13a1907e28c58c1e9977a05021040a28",
+          "status": "checked promoted support owner"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_second_exactness.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_second_exactness.lp",
+          "kind": "changed",
+          "sha256": "7f0330ca8dcc01d6d71f34ab6b0c7c5cf54ac86e660c52583e601c6c0c8d0334",
+          "status": "checked caller delegation; same signature and original choices"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_homology_model_normality.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_homology_model_normality.lp",
+          "kind": "new",
+          "sha256": "ee76787bc068044fe737c6cfccb93771ca47e62c1a8027140bd8f29c5682b022",
+          "status": "checked model-preserving normality prototype"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_homology_model_normality_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_homology_model_normality_review.lp",
+          "kind": "new",
+          "sha256": "d3c388d3e440c368123e148f544719205fc9a15de975053c2cd1d855a2e34550",
+          "status": "checked whole-H/selection preservation and missing-normality negative"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_homology_model_normality_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_homology_model_normality_warnings.sh",
+          "kind": "new",
+          "sha256": "8d216a71c0132b7763ddd990c9855831e1e64f124b94e3d380edf513ab8f2c81",
+          "status": "model normality source-comparison driver"
+        },
+        {
+          "path": "emdash2/emdash3_2_commutative_algebra_freyd_homology_model_normality.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_normality.lp",
+          "kind": "new",
+          "sha256": "4878a56c1ff2a0aa73cafd1b589e11da09fcde15fdb8f1f9a16c0d64b829364e",
+          "status": "checked promoted support owner"
+        }
+      ]
     }
   ]
 }

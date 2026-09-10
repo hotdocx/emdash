@@ -179,6 +179,16 @@ Nine more recovered source/control versions bring the archive to 162.
 Connecting naturality and native interpretation remain ahead of the broad
 universality migration; packaging the proofs is not that migration.
 
+The covered connecting characterization now gives uniqueness of the
+original delta and any of its postcomposites, using the original epic
+cover/quotient. The same epicity proof serves second-interior exactness.
+The Freyd model also accepts supplied normality operations over its own
+W/V, yielding an Abelian capability with definitionally unchanged whole H.
+This is a conditional interface, not closed-provider synthesis or the broad
+universality migration. Eleven further source/driver versions have verified
+recovery, for 173 in total. Full naturality and the native connecting
+interpretation remain required before the broad migration gate.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their
