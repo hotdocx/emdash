@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active whole-complex/homology redesign; native whole homology in ordinary targets qualified and promoted; concrete CAS consumer next; general op repair deferred
+Status: active; native whole H and bounded model point/map consumers qualified; connecting/window integration in progress; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
@@ -10,12 +10,13 @@ repair is deferred. A pilot construction must have a justified mathematical
 meaning without essential use of that defect; the spelling `Op_funcd` alone
 is not a rejection criterion. Structural evaluation, selected presentations
 and native whole homology in the ordinary-target profile are active. The
-retained-selection CAS consumer and complete old/new map comparison remain
-open; arbitrary omega-target homology is not asserted by this specialization.
+retained-selection bounded CAS consumer is qualified at the explicit model-
+interpretation boundary. Connecting/window integration and generic exactness
+remain open; arbitrary omega-target homology is not asserted by this specialization.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
-Current sub-audit: [foundational variance owners and the dependent con ladder](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
+Retained sub-audit: [foundational variance owners and the dependent con ladder](TYPESCRIPT_EMDASH_HOMOLOGY_VARIANCE_OWNER_AUDIT.md)
 
 Worktree: `/home/user1/emdash1-long-exact-v1`
 
@@ -2592,3 +2593,239 @@ existing selected-operation usability, then continue the three generic
 window exactness proofs and bounded formal assembly. An old formal map
 wrapper need not receive an exhaustive compatibility theorem. The final
 book/architecture review and inherited op/Sigma/full-health caveats remain.
+
+### Connecting Consumer: Mixed Mate Cut Audit
+
+Historical candidate, superseded for the current implementation by the
+shared actual-boundary record below. Preserve this evidence, but do not
+promote its mixed-cut or composition-alignment experiments as prerequisites
+of the revised whole-H connecting interface.
+
+Checkpoint `21099f51` closes the retained bounded point/induced-map consumer.
+The connecting owner already acts between supplied selected homologies; the
+new consumer should expose those same objects through whole H without adding
+runtime endpoint transports or an exhaustive old-map comparison theorem.
+The immediate owner gap is mixed mate cancellation: H's boundary uses the
+semantic unit formula K(h) ∘ η, while raw entry uses the stable inverse mate
+from the existing adjunction Hom comparison. Their composite currently has a
+derived path, but no selected runtime reduction to the original lift.
+
+Probe the mathematically ordinary mixed cut
+G[untranspose(k)] ∘ η_X → k at the generic adjunction-mate owner, with
+inferred endpoints left as wildcards and the same J/X/Y as actual
+discriminators. Audit the dual mixed cut only if the same owner/consumer
+needs it. Test direct generic cancellation, the whole-H boundary at original
+chain input, and dependent cokernel selection before deciding whether any
+additional usability rule is needed. Keep the whole semantic family and
+higher action intact. A successful isolated point is not enough: use a full
+owner-position staged copy, compare warnings and check the relevant original
+mate/native-H consumers. No broad object-equality transport, new primitive,
+op repair or general normalization claim is authorized by this experiment.
+
+The first full-owner candidate passes the generic mixed cut and direct raw-
+input boundary computation, with the predecessor warning inventory unchanged
+at 1,249/169. Existing family/native-H and raw-map reviewers also pass. A
+direct endpoint `eq_refl` then exposes a DIFFERENT proof-time issue: the
+remaining compositions have identical explicit factors but differing
+inferred endpoint presentations. A same-factor-only composition unifier,
+requiring equality of all four inferred arguments, solves the bound-parameter
+endpoint comparison. It passes the integrated kernel checks, associativity
+and two unrelated-factor rejection tests. The core warning categories remain
+1,144/157. This does not assume composition is injective or change runtime
+association. An attempted cleanup of three exchange-rule endpoint guards did
+not help and was reverted in the stage; it is not a promotion candidate.
+
+The transparent `chain_pair_whole_homology_arrow` view checks generically
+with body exactly its supplied arrow, not an object-path transport. Direct
+large pre-Abelian projection instances still reached the bound, so the next
+candidate canonicalizes the selected boundary directly at the original raw
+pair's B/D/d inputs, avoiding reconstruction of those indices through the
+walking-arrow diagram. The original W and its selected kernel lift are
+unchanged. A whole-H connecting consumer reuses the existing construction at
+those canonical selected homologies. Its large original proof dependencies
+need the already established fresh-object staged checker; a one-invocation
+source check stopped in the old dependencies before reaching the new owner.
+These changes remain staged experiments until the concrete consumer and
+remaining warning/negative checks are qualified.
+
+Recovery stage: `/tmp/emdash-homology-mate-cut.RS0dtQ`. The ignored
+`tmp/probes/whole_homology_connecting_candidate.patch` preserves the candidate
+source delta. Failure logs and isolated endpoint/boundary probes remain in
+that stage; the runtime mixed-cut probe is also retained under the worktree's
+`tmp/probes/homology_mixed_mate_cut_20260909.lp`. The general op/Sigma repair
+remains deferred throughout this audit.
+
+### Architectural Review Before Promotion
+
+The user flagged the cast-like appearance of the connecting experiments.
+This is a real interface seam: whole K/Q/H and the earlier universal records
+currently expose different endpoint presentations. The identity-body arrow
+view adds no runtime path transport, but it IS a type-level adapter. Passing
+its declaration does not establish that proliferating such adapters is the
+best architecture.
+
+One broad-alignment variant passed the full staged connecting dependency
+check, including the new connecting owner. A later raw-map warning check
+reached the time bound; the initial more narrowly kernel-discriminated
+replacement also reached the bound. These are not promoted or declared
+final. Active mathematical sources remain at checkpoint `21099f51`; the
+stage/patch preserve the candidate work. Do not present the earlier successful
+stage as qualification of every later variant.
+
+Before further promotion, compare ownership choices on this SAME connecting
+consumer: whole K/Q as primary with derived selected universal records, or
+one canonical selected-data package shared by the whole and raw observations.
+The desired outcome is a connecting construction already at H endpoints,
+without a growing layer of endpoint realignment. Deriving those universal
+records is a construction to test, not an already established capability.
+Preserve the current native algorithms, original selections and baseline;
+do not start a bulk migration or exhaustive old/new comparison project.
+
+### Redevelop Universal Records And Connecting At Whole-H Endpoints
+
+The user's further clarification makes the direction explicit: develop
+updated analogues of the universal-property records in the whole K/Q/H
+setting, and develop the connecting construction there. This is not a plan
+to keep wrapping the old connecting arrow in type-level casts.
+
+The new records must have their object fields literally K[d], Q[d], or H[z],
+with inclusion/projection supplied by the actual natural transformations
+and lift/colift operations supplied by the adjunction machinery. Preserve
+the contractible factor spaces and make their selected centres compute to
+those same operations. Proofs of universal laws may use ordinary paths;
+those paths must not manufacture the runtime endpoint objects or maps.
+Use the old records, constructive lemmas and native CAS algorithms as
+implementation/reference evidence, not as compulsory public endpoints.
+
+The connecting operation should be constructed at the actual whole-H
+objects and, where the bounded diagram interface supports it, as a coherent
+family. Naturality/whole-action claims require their own actual source and
+action checks. The old connecting proof remains available for reusable
+mathematical steps; there is no requirement to preserve its wrapper or to
+obtain the new operation by a final endpoint conversion. Qualify this
+direction against the existing nonsplit retained-result consumer before
+retiring any working baseline code.
+
+### Whole-Owned Kernel Record Prototype
+
+The first construction is a fresh record with object exactly K[d] and
+inclusion exactly the counit-derived component. Its lift is the existing
+forward mate applied to the inverse mate of the retained selected lift;
+the existing mate cancellation computes it back to that original value.
+The raw test enters through the presentation's existing W-backed usability
+interface; this is not yet a construction of a global kernel capability
+from a bare adjunction with no selected implementation data.
+
+Universality is handled separately from the operational fields. The
+presentation's existing object/inclusion agreement transfers the old factor-
+space contractibility proof. `is_contr_recenter` then fixes its centre to
+the explicitly constructed mate factor and its reconstruction proof. Because
+IsContr contains computational data, this separation must be checked by
+actual projection reductions: object to K[d], inclusion to the counit,
+lift to the retained value, and reconstruction to the supplied derived law.
+Do not describe the transferred proof as erasure or allow it to choose the
+runtime centre. The two current probes are
+`kernel_whole_record_foundation_20260909.lp` and
+`kernel_whole_record_construction_20260909.lp` under `tmp/probes/`.
+They use the unmodified active kernel, with none of the earlier broad or
+narrow composition-alignment experiments installed.
+
+### Actual Boundary Data: Shared Record Refinement
+
+Both whole-owned kernel/cokernel constructions and their four projection
+tests pass on the unmodified active kernel. The initial raw-input homology
+record also checked in a separate stage, but still forced its boundary to
+the old canonical kernel-lift expression. That restriction is unnecessary:
+homology needs the actual boundary as a point of the existing contractible
+`KernelFactorSpace`, not one particular expression for its centre.
+
+The refined `HomologyRecord` therefore retains a kernel, its ACTUAL boundary
+factor, and the cokernel of that factor's arrow. The coherent-family
+constructor uses the already whole beta = K(h) ∘ eta and its derived
+reconstruction. Its object projection computes directly to the existing
+whole H at ANY supplied coherent-family point. This prototype passes without
+the earlier mixed-cut or composition-alignment changes.
+
+A full-file staged refinement of `emdash3_2_computational_homology.lp` makes
+the existing `ComputationalHomologyAt` name a context alias of that shared
+record. Its original canonical constructor fills the factor from the
+original kernel contraction centre; its object, boundary and cokernel values
+are unchanged. The boundary/path accessors read the retained factor rather
+than assuming an expression for it. The revised owner, new coherent-family
+constructor and existing generic homology-map owner all pass. The remaining
+direct consumers must be checked before promotion; old proofs may need to
+use the retained reconstruction where they previously unfolded a canonical
+lift. This is one shared record refinement, not a second homology theory.
+
+Recovery stage: `/tmp/emdash-record-boundaries.m7DFe7`. The unmodified-kernel
+probes are `homology_record_boundary_data_20260909.lp`,
+`kernel_semantic_boundary_factor_20260909.lp` and
+`homology_record_family_20260909.lp` under the worktree's `tmp/probes/`.
+
+### Whole-H Connecting Replacement: Interface And Proof Roles
+
+The user's connecting-map clarification applies the same ownership decision
+to delta itself. Develop the connecting construction directly between the
+actual whole homologies of the right-hand window and shifted left-hand
+window. Do not make its public definition an endpoint conversion of an older
+connecting arrow. In the cochain convention its intended point type is
+delta: Hⁿ(right) → Hⁿ⁺¹(left).
+
+Whole H alone does not supply delta: the latter also depends on the short
+exact sequence, and is not the H-image of a degree-preserving chain map.
+For a coherent family of such sequences, the intended whole form is a
+transformation between H composed with the two window-selection functors.
+Those source/action and naturality obligations must be implemented and
+checked before claiming a whole connecting transformation. Merely replacing
+the point type with H-expressions does not establish them.
+
+The immediate implementation direction is:
+
+- take cycles, boundary and quotient from whole K/Q/H;
+- derive their universal records with those same operational fields;
+- construct the necessary lift/descent factors at those fields, reusing
+  applicable generic factorization and snake lemmas;
+- obtain delta through the resulting cokernel operation, already at H's
+  endpoints; and
+- interpret that operation at the retained native connecting result under
+  the same explicit model boundary as the point/induced-map consumer.
+
+This is a replacement of the formal interface, not a demand to duplicate
+the native algorithm or discard correct general proof steps. A generic lemma
+applied to a record whose object is literally H is not an endpoint cast.
+Conversely, retaining an old wrapper merely to prove its agreement with
+every new expression is not required. Reconstruction/uniqueness paths may
+remain in universal-law evidence; runtime endpoints and maps must not be
+manufactured from those paths. Keep the old checked implementation until
+the replacement and nonsplit consumer are qualified.
+
+### Shared-Record Dependent Checks And Baseline Control
+
+The staged record refinement passes the existing homology maps, map laws,
+map isomorphisms, short-exact-sequence owner and original computational-
+homology reviewer. The whole-family prototype also has an original-raw-input
+version (`whole_homology_raw_record.lp` in the recovery stage). It retains
+the actual whole boundary, proves its reconstruction to the original
+incoming arrow, and its object/boundary projections runtime-reduce to whole
+H and its actual beta component. No mixed-cut or composition-alignment rule
+is needed for those results.
+
+The full affected connecting dependency check reached the 90-second bound at
+the existing `emdash3_2_snake_row_source_second_comparison.lp`. A source-only
+control at the unchanged active mathematical baseline, staged at
+`/tmp/emdash-homology-record-control.dUOaTj`, reaches the same bound. In both
+trees the kernel, source-cycle-factor and second-postcomposition prerequisite
+checks pass. Thus this failure does not isolate a regression caused by the
+record refinement; it also does not qualify the unfinished dependency check.
+
+The statement alone and each of its two proof steps check independently;
+combining them is the measured elaboration problem. Spelling out the
+`eq_trans` endpoints did not fix it. The diagnostic variant is preserved as
+`row_second_explicit_endpoints.lp` in the record stage; the actual source
+file there has been restored to its original contents. Logs are the
+`*.record-control.log` files in both stages and the record stage's
+`logs/probes/row-second-*` / `row_second_step*` logs. No opaque proof,
+new rule/unifier, or active mathematical-source change results from this
+diagnostic. Qualify the remaining consumers before promoting the shared
+record; do not characterize this local LF problem as a mathematical
+obstruction to whole-H connecting construction.
