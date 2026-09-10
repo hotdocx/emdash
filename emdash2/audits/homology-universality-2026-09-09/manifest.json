@@ -1445,6 +1445,156 @@
           "status": "exact-source driver for selected positive prototypes; excludes the timed/rejected variants"
         }
       ]
+    },
+    {
+      "artifact": "connecting-family-usability-prototypes.patch",
+      "base_commit": "361bd542297bdca1d07fc0b1d7fc8c8a804c4070",
+      "requires_artifacts": [
+        "whole-connecting-family-prototypes.patch"
+      ],
+      "note": "Whole/expanded comparison controls and checked normalized usability, with consolidated supporting owners. Materialize the required parent prototype artifact first; no general orientation or variance repair is applied.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_join_guarded.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_join_guarded.lp",
+          "kind": "new",
+          "sha256": "d87c19dd31df08b4f72da7a5f58d3f22b02c4d58c92f4cf928f599cfc15a66c5",
+          "status": "unqualified: shared Sigma guard runtime rule exceeds 90-second SR bound"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_usability.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_usability.lp",
+          "kind": "new",
+          "sha256": "12141b61a35ec98e7c98ba814aa29433877c81d8bf56705d6bb913384a144063",
+          "status": "partial candidate: whole-expression proofs pass; later explicit-left comparison fails"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_no_unif.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_no_unif.lp",
+          "kind": "new",
+          "sha256": "8d14fea6b9959d7594384edf05e4fb5b9c3f51e1682ca377bee658d972e02939",
+          "status": "checked control: whole-expression reflexivity does not require the new unifier"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_diagram_hom_inspection.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_diagram_hom_inspection.lp",
+          "kind": "new",
+          "sha256": "87a7c599c4577d03fe65e7a14224b048a6370742bb609084e1c5d301b08f195d",
+          "status": "unqualified diagnostic: full normalization exceeds 90 seconds"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_hom_comparison_control.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_hom_comparison_control.lp",
+          "kind": "new",
+          "sha256": "43733e3f06b9e154ff834c518acfefc9c85986ad9cb9a9d2395ba7fac0805c75",
+          "status": "negative control: explicitly expanded first comparison fails without usability"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_usability_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_usability_review.lp",
+          "kind": "new",
+          "sha256": "7fb9b973722f9fb61c17588bbb8512143aa09943feef2ab3f0ef7fdae41cfeb7",
+          "status": "partial: right expanded comparison passes, left expanded comparison fails with the unnormalized RHS"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_usability_normalized.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_usability_normalized.lp",
+          "kind": "new",
+          "sha256": "f655b0bd33e9145a8e72a7f011d4325f935ec3816f115ab5313f38737b9d34bd",
+          "status": "checked candidate: normalized opposite RHS"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_first_hom_normalized_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_first_hom_normalized_review.lp",
+          "kind": "new",
+          "sha256": "b886d4558d2763be2ab753882c24dd05f12d744fe2c8d90d8f991fb6cb5fdf1e",
+          "status": "checked: both whole and expanded first comparisons"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_diagram_hom_no_unif.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_diagram_hom_no_unif.lp",
+          "kind": "new",
+          "sha256": "30be5578809db3815e395d847ec2d1820bd100b62f7d90eb41e7f906d359a2d0",
+          "status": "negative control: expanded outgoing-diagram comparison fails without usability"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_diagram_hom_usability.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_diagram_hom_usability.lp",
+          "kind": "new",
+          "sha256": "10a36e48dcab44712be61ceb3751509e71c9a95b716dd575d5c41dbc111e55e8",
+          "status": "checked: whole/expanded diagram comparisons for both columns"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_window_capped_action_paths_rejected.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_window_capped_action_paths_rejected.lp",
+          "kind": "new",
+          "sha256": "96044238504bc6465c227b126abf3ef40b930c867b07f499d136ef185f24e268",
+          "status": "unqualified: independently capped arrow endpoint conversion fails; final owners evaluate whole Hom functors"
+        },
+        {
+          "path": "emdash2/emdash3_2_short_exact_row_families.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_short_exact_row_families.lp",
+          "kind": "new",
+          "sha256": "35e3d28dff63bd383497a459335483e744e0db457f91a571cadeb41e787a2ae2",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_window_families.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_families.lp",
+          "kind": "new",
+          "sha256": "86a1e84bf4b6dd59a05303aeec581db4845e1c3154428d27e2b94dd88e3cfd82",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_window_columns.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_columns.lp",
+          "kind": "new",
+          "sha256": "e6963d497b9a084c5ab93e454f398efe94f8a8a02032b96d787b93ee3dca1661",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_window_column_usability.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_column_usability.lp",
+          "kind": "new",
+          "sha256": "4936fbda35942e785a9e752317dfde3f859a7224459bd00daa6addc14a581f6d",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/emdash3_2_homology_window_connecting_transformation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/emdash3_2_homology_window_connecting_transformation.lp",
+          "kind": "new",
+          "sha256": "dbd9c292d76543aee32d5e246d3856319e4344e4ba7db853649b7beb35828b37",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/examples/homology_window_families.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/examples/homology_window_families.lp",
+          "kind": "new",
+          "sha256": "bd393265a7dbb7565be1efe1b3454a0a8e7352478cf0ca0aa73da1a701399db7",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/examples/homology_window_column_usability.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/examples/homology_window_column_usability.lp",
+          "kind": "new",
+          "sha256": "62e4ff294a32dc05185ff43c38f46d89db5742f37ccc7ae882c552a85bc2f682",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/examples/homology_window_connecting_transformation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/examples/homology_window_connecting_transformation.lp",
+          "kind": "new",
+          "sha256": "790de413964424daafb2e6ef4554e5404c72a52e7e56e744464126873419b652",
+          "status": "checked consolidated support/source/reviewer/gate"
+        },
+        {
+          "path": "emdash2/scripts/check_homology_window_families.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/scripts/check_homology_window_families.sh",
+          "kind": "new",
+          "sha256": "d7d37c2b743cffdf572927188d76bf31ba8cefa8daee5c41f769b08583c9c8f9",
+          "status": "checked consolidated support/source/reviewer/gate"
+        }
+      ]
     }
   ]
 }

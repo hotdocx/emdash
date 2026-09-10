@@ -246,6 +246,11 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_homology_third_exactness.lp"),
     Path("emdash3_2_homology_exact_window.lp"),
     Path("emdash3_2_homology_exact_window_result.lp"),
+    Path("emdash3_2_short_exact_row_families.lp"),
+    Path("emdash3_2_homology_window_families.lp"),
+    Path("emdash3_2_homology_window_columns.lp"),
+    Path("emdash3_2_homology_window_column_usability.lp"),
+    Path("emdash3_2_homology_window_connecting_transformation.lp"),
     Path("emdash3_2_kernel_domain_comparison_factors.lp"),
     Path("emdash3_2_cokernel_codomain_comparison.lp"),
     Path("emdash3_2_snake_row_source_cycle_iso.lp"),
@@ -678,7 +683,18 @@ SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES = {
     Path("emdash3_2_homology_exact_window_result.lp"),
     Path("examples/homology_exact_window.lp"),
 }
+SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES = {
+    Path("emdash3_2_short_exact_row_families.lp"),
+    Path("emdash3_2_homology_window_families.lp"),
+    Path("emdash3_2_homology_window_columns.lp"),
+    Path("emdash3_2_homology_window_column_usability.lp"),
+    Path("emdash3_2_homology_window_connecting_transformation.lp"),
+    Path("examples/homology_window_families.lp"),
+    Path("examples/homology_window_connecting_transformation.lp"),
+    Path("examples/homology_window_column_usability.lp"),
+}
 ISOLATED_CHECK_GROUPS = (
+    (SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES, "./scripts/check_homology_window_families.sh"),
     (SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES, "./scripts/check_homology_exact_window.sh"),
     (SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES, "./scripts/check_homology_connecting.sh"),
     (SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES, "./scripts/check_snake_row_source_boundary.sh"),

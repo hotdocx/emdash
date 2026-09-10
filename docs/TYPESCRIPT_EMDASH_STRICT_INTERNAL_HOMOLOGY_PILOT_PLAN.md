@@ -145,7 +145,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 | `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
 | `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
-| `HINT-CONNECTING-NATURALITY-23` | declaration-first prototype checked at whole-H endpoints; Hom-action-first column comparison and promotion remain | specialized window projections, whole column/H/connecting declarations and computing component; qualify all projection orders before library promotion, without a make_transf/naturality-proof prerequisite |
+| `HINT-CONNECTING-NATURALITY-23` | implemented/validated baseline; whole-observation unification alternative under review | whole column/H/delta operations with computing component and scoped Hom usability; preserve this checkpoint while comparing the whole-runtime versus whole-proof-time observation policy |
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 
@@ -4077,3 +4077,91 @@ source was changed in this research checkpoint. Next: finish the column
 action comparison and owner audit, promote the coherent tranche, bind the
 retained native connecting result, then continue bounded assembly and the
 book/consolidation obligations. The full goal remains active.
+
+### Column Action Usability: Consolidation In Progress
+
+The clarification distinguishes a mathematical column restriction from
+the LF order of observing its Hom action. The latter is an interface issue,
+not another homology/naturality theorem. Runtime joining of every form is
+not a prerequisite when a valid proof-time comparison retains whole action.
+The resumption from 361bd542 is progress: the explicitly expanded first-
+vertex AND outgoing-diagram Hom comparisons now check for both columns.
+
+Controls matter. Writing the first comparison through the whole composite
+already checks by eq_refl without a new unifier; that alone did not test
+the missing route. Explicitly expanding the Hom composite leaves an
+unsolved equation without the new comparison. Four narrow unification rules
+at the surviving composition/projection/exchange heads make these expanded
+comparisons check, with no runtime Hom-action join. Their RHS constrains
+the original frame, supplied points, row observations and index endpoints.
+For the left first projection, its opposite action must be written in the
+normalized Sigma-projection form with exchanged endpoints: the transparent
+Op form leaves premature same-head unification constraints Op(C)≡C and
+x≡y. No such constraints are assumed. The two outgoing-diagram comparisons
+match the actual displayed Sigma projection action and preserve its points;
+they do not invert arbitrary cells or reopen the general variance repair.
+
+The draft consolidation is in short_exact_row_families, homology_window_families,
+homology_window_columns, homology_window_column_usability and
+homology_window_connecting_transformation (emdash3_2_*.lp). The whole endpoint
+and connecting design is unchanged. Next qualify point consumers/negative
+controls, warning interactions, source/reviewer registration and standing
+documentation before the next semantic checkpoint. Native connecting
+interpretation, bounded assembly and final book work remain required.
+
+The orientation clarification preserves the existing generic owners:
+F[g]∘F[f]→F[g∘f] is the single-functor cut, whereas
+(F∘G)[f]→F[G[f]] and (F∘G)₍x,y₎→F₍Gx,Gy₎∘G₍x,y₎ evaluate a
+composite functor's action. The latter does not reverse the former.
+Both are already explicit in the kernel (strict composition cut and
+section 17d). The column observation's overlap with composite-action beta
+is handled by the scoped usability comparison, not a global orientation
+change. No generic functoriality/naturality rule is duplicated here.
+
+### Whole Observation Usability Alternative: Active Comparison
+
+The user proposes treating e⁺∘R ≐ C(n+1) and the outgoing-diagram
+counterpart as whole-functor usability, rather than runtime folds. Test
+this in a full owning-source copy before settling the pending tranche.
+Retain the checked runtime version and all point/connecting computations.
+The hypothesis is that whole unifiers remove the new runtime competition
+without losing needed consumers; Hom-level instances may still be needed
+after their whole matching shape expands. Compare both orders, actual
+components, higher action and non-collapse controls. Do not infer that
+whole unification automatically propagates after normalization, nor that
+the existing four runtime folds are necessary simply because they pass.
+The mathematical column/H/delta construction and the full goal scope stay
+unchanged. The pre-alternative fresh warning gate passes with unchanged
+1,249 critical-pair and 169 pattern reports in every inventory field.
+
+Before that alternative changes any operational source, checkpoint the
+currently green runtime-fold/Hom-usability version as historical evidence,
+as explicitly requested by the user. It is a working implementation
+baseline, not a claim that the runtime whole folds are the final preferred
+choice. The five modules, three reviewers and isolated source gate now
+pass: 31 positive and five negative new checks, plus the pre-existing
+whole-connecting reviewer. Four evaluation paths apply the whole Hom
+comparisons at arbitrary arrows. Their canonical endpoints are evaluations
+of whole Hom functors; the stronger independently capped point spelling
+failed conversion and is preserved, not assumed.
+
+`logs/probes/homology-window-families-warnings-20260910-072835.log` records
+the final exact-source run (25 separately bounded sources/reviewers,
+maximum 15 seconds). Splitting at BASELINE_BOUNDARY and comparing the full
+warning inventories gives identical categories, locations, heads, rule
+families and parser issues: 1,249/169. The earlier six unused-KP pattern
+reports were removed by a separately checked owning-position wildcard
+probe. Source/example/health dispatchers all route these eight new targets
+through scripts/check_homology_window_families.sh. Rule audits, 40 focused
+tooling tests, source TOC, catalog, document/reference lint and source-only
+health refresh pass. The latter is not a repository-wide or full-health
+claim; no unrelated aggregate was run. The native connecting interpretation,
+bounded formal assembly and book work still remain.
+
+The additional comparison history is preserved in
+`audits/homology-universality-2026-09-09/connecting-family-usability-prototypes.patch`:
+20 versions with verified recovery hashes, including all consolidated
+supporting sources. Its manifest explicitly requires the earlier whole-
+family artifact when recovering temporary imports. Together the archive
+retains 219 source/driver versions; recovery qualification is not a claim
+that rejected experiments typecheck.

@@ -246,6 +246,19 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   unrelated-witness negative passes.
   Connecting naturality, retained native interpretation and bounded/book
   obligations remain. No new primitive or rule is introduced.
+- The short-exact-row-family and homology-window-family modules now retain
+  whole row functors/maps behind typed specialized window projections.
+  The column module supplies the two vertical native-complex functors and
+  computing point/whole observations. The connecting-transformation module
+  applies the original whole H and declares delta, with its component
+  computing to the existing direct construction at literal H endpoints.
+  No make_transf, square input, object cast or new H selection is required.
+  Four column-usability unifiers cover the expanded Hom-action projection
+  order; typed equality witnesses retain the whole functors and their
+  arbitrary-arrow evaluations. They do not install new runtime Hom cuts
+  or change either generic composition orientation. The exact-source gate
+  is `scripts/check_homology_window_families.sh`; native connecting
+  interpretation, bounded assembly and final book work remain required.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

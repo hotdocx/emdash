@@ -2,6 +2,18 @@
 
 Date: 2026-09-02
 
+Latest homology interface (2026-09-10): the complete three-interior exact
+window is available, and the declaration-first whole connecting interface
+now retains coherent row families, vertical column functors and the original
+whole H. Its component computes to the existing direct delta. Whole column
+observations compute, with narrow proof-time usability for the explicitly
+expanded Hom-action order. The focused gate is
+`scripts/check_homology_window_families.sh`. The living pilot supersedes
+the historical pending-interface notes below; native connecting
+interpretation, complete bounded formal assembly and final book work remain
+required. No general variance repair or closed quotient effectiveness is
+claimed.
+
 `../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
 is the active continuation beyond the completed Abelian, homology, and snake
 connecting plans. The complete generic six-term snake exact result and

@@ -4385,10 +4385,26 @@ split. Instantiating the records from K/Q/H gives literal H endpoints,
 without transporting the old connecting arrow along object equalities.
 
 Reconstruction and uniqueness paths remain universal-law evidence in this
-reference construction. A whole connecting transformation still needs its
-short-exact-sequence source/action and naturality construction; neither that
-transformation nor the window exactness theorem follows merely by declaring
-whole H or by constructing delta's individual component.
+reference construction. The whole connecting interface now retains four
+short-exact row families over I, with actual transformations between rows.
+Its two vertical restrictions select C(n+1)→C(n)→C(n−1) and
+A(n)→A(n−1)→A(n−2) as functors into the existing native complex category.
+Their compositions with the original whole H are delta's source and target.
+Delta is declared as a transformation from the outset, and its component
+observation computes to the direct connecting construction above. There is
+no manual naturality-square input or proof-first make_transf assembly.
+
+Whole vertex/diagram observations of the columns compute to the retained
+row data. Generic Hom action can expand a functor composite before those
+observations fold; narrow proof-time comparisons relate that expanded form
+to the original row action, with reusable equality witnesses. Evaluating
+these whole Hom comparisons gives ordinary-arrow comparisons without
+replacing their higher action by capped primitives. This concerns
+(F∘G)[f]→F[G[f]], not the distinct single-functor cut
+F[g]∘F[f]→F[g∘f]. Both generic orientations are unchanged. The current
+construction uses the ordinary-target profile and is not an assertion about
+arbitrary lax complexes. Native connecting interpretation and the complete
+bounded formal assembly remain later consumers of this interface.
 
 Whole H now supplies the map reconstructions used in this window directly.
 Whiskering the existing kernel inclusion and cokernel projection gives
@@ -4407,8 +4423,8 @@ boundary and is killed by that quotient. The retained epic factors descend
 both statements to homology. The public theorems derive the needed factors
 from whole naturality; no additional square data are requested. The three
 overlapping chain pairs share their literal H objects and arrows. Exactness
-at their interiors and naturality of delta itself are further results,
-not consequences of merely obtaining these zero composites.
+at their interiors is established by the following constructions, not
+inferred merely from these zero composites.
 
 The first interior exactness proof now realizes this next step. A test into
 H(B) killed by H(projection) is lifted after an epic cover into ZB, and its
@@ -4420,7 +4436,7 @@ then give a preimage through H(inclusion). The existing local-cover
 criterion proves exactness at H(B), with no splitting or replacement H
 object. Whole beta naturality supplies boundary preservation alongside
 the already available cycle and quotient naturality. Exactness at the
-other two interior positions remains further work.
+other two interior positions is supplied by the subsequent constructions.
 
 Exactness at H(C), immediately before delta, is now established as well.
 Pull a delta-annihilated test back along the epic composite of the
@@ -4431,7 +4447,13 @@ reconstructions make the correction a middle cycle with the original
 covered C homology class. The retained middle kernel and H(projection)
 therefore provide the required preimage. The same exact-cover criterion
 proves this second interior without changing the H objects or delta.
-Exactness at H(A') remains the window's last unfinished interior.
+The third interior, at H(A'), follows by covering a test killed by
+H(inclusion), lifting its middle-boundary preimage and projecting that
+preimage into the original C cycles. Row and cycle monicity identify the
+target lift, and delta's covered reconstruction supplies the required
+preimage. All three interiors are now proved at the same retained H
+objects and arrows. Their indexed exact-window bundle stores the three
+witnesses, not another copy of those objects or another homology selection.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

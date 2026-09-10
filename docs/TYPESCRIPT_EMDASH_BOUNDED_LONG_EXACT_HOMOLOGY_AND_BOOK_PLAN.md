@@ -6,6 +6,17 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Whole connecting implementation checkpoint (2026-09-10): the five
+row/window/column/usability/connecting modules and their focused consumers
+now pass, retaining whole H and the original direct delta component.
+The exact-source warning gate preserves the 1,249/169 inventory in every
+field; 31 positive and five negative new assertions pass. The
+[whole-observation alternative](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#whole-observation-usability-alternative-active-comparison)
+remains under review: preserve this green runtime-fold version before
+testing the user's whole-unification alternative. Neither variant changes
+the mathematical construction or closes the remaining native connecting
+interpretation, bounded formal assembly and final book obligations.
+
 Declaration-first family prototype (2026-09-10): specialized window
 projections, whole vertical column functors, their composites with the
 original H, and a whole delta with the original component computation now

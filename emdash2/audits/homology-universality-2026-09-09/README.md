@@ -36,10 +36,12 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [exact-window-prototypes.patch](exact-window-prototypes.patch) | `a96fa507` | Indexed exact-window carrier/result and checker controls; the wrong-interior negative is preserved as a timeout, not a passed check. |
 | [connecting-characterization-model-prototypes.patch](connecting-characterization-model-prototypes.patch) | `bf83db97` | Covered connecting uniqueness, shared epicity/caller refactor and supplied-normality model enhancement, with source-comparison controls. |
 | [whole-connecting-family-prototypes.patch](whole-connecting-family-prototypes.patch) | `bd79a86a` | Declaration-first whole column/H/delta prototypes and checked components/whole observations; failed nested-record and Hom-projection-order alternatives remain explicitly unqualified. |
+| [connecting-family-usability-prototypes.patch](connecting-family-usability-prototypes.patch) | `361bd542` | Checked whole/expanded Hom usability and evaluation consumers, with failed controls and consolidated support. Requires the preceding whole-family artifact to materialize its temporary imports. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all fifteen artifacts apply to their pinned baselines, and all 199 embedded
+checks: all sixteen artifacts apply to their pinned baselines with their
+recorded prerequisites, and all 219 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -100,6 +102,17 @@ is promoted library code; the living pilot records the remaining owner audit,
 native connecting interpretation, bounded assembly and book work.
 
 ## Recovery
+
+The usability addition preserves 20 more source/reviewer/gate versions.
+Its recovered sources pass all SHA-256 comparisons. The final consolidated
+version uses four scoped Hom unifiers and preserves the whole operations;
+the preceding runtime whole-observation folds remain a checked baseline
+while the user's whole-unification alternative is investigated. Controls
+distinguish whole-expression reflexivity from the genuinely missing expanded
+comparison, and preserve the rejected independently capped point spelling.
+Apply whole-connecting-family-prototypes.patch before this artifact when
+recovering from its pinned baseline; that dependency supplies the original
+ignored prototype imports. No compiled object or raw warning log is needed.
 
 Treat each patch as an independent experiment unless its dependencies and
 the living ledger explicitly say otherwise. Several patches contain

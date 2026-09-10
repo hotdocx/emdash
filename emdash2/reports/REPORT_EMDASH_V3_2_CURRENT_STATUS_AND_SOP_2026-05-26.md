@@ -1440,6 +1440,28 @@ belongs to the owning implementation plan rather than to standing guidance.
   these owners; the warning-enabled source inventory remains 1,249/169.
   This result does not supply connecting naturality, a whole connecting
   transformation, bounded assembly or the retained connecting CAS model.
+- The short-exact-row-family and homology-window-family modules retain
+  actual row functors and transformations in the ordinary target profile.
+  Specialized window constructors/projections avoid deeply nested Sigma
+  reconstruction. The column module selects the two vertical native
+  complexes; its point and whole vertex/diagram observations compute to
+  the original rows. The homology-window-connecting-transformation module
+  composes those columns with the existing whole H and declares delta as
+  an actual transformation. Its component computes to the original direct
+  connecting construction at literal H endpoints, without casts, new
+  choices, manual naturality-square inputs or a make_transf gate.
+  The column-usability module supplies four narrow proof-time comparisons
+  for the Hom-action-first projection order, with defined reflexivity
+  witnesses and their ordinary-arrow evaluation consequences. Generic
+  fapp/tapp retains all higher action; it is not replaced by capped rules.
+  The single-functor cut F[g]∘F[f]→F[g∘f] is distinct from evaluation
+  (F∘G)[f]→F[G[f]]; neither generic orientation changes. Whole column
+  observations compute at runtime, while the explicitly expanded Hom
+  comparisons are proof-time usability. Their evaluations do not assert
+  that every independently capped expression has the same runtime normal
+  form. `scripts/check_homology_window_families.sh` is the exact-source,
+  individually bounded gate. Native connecting interpretation, bounded
+  formal assembly and final book/consolidation work remain required.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary
