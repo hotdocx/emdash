@@ -177,6 +177,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   at the same raw chain input. Its object projects literally to the original
   model H point; distinct model selections do not collapse. This rule-free
   adapter prepares the retained connecting consumer, not a new H or provider.
+  The model-connecting extension now instantiates the direct component at
+  those records and exposes an existing complete Freyd arrow observation.
+  Both H endpoints and the arrow project by computation. Normality and
+  model-side short-exact evidence are explicit; a raw chain-zero witness
+  cannot replace that evidence. Four transparent definitions add no rule,
+  unifier or primitive. Private TypeScript signature mirrors and their
+  conditional-call conformance are checked; native connecting adoption
+  remains the next integration step.
   The kernel/cokernel-adjunction record modules now derive universal records
   at the actual whole K/Q objects and structural transformations. Their
   operational centres are explicit mate operations; comparison paths occur

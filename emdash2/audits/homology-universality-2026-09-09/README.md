@@ -38,11 +38,12 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [whole-connecting-family-prototypes.patch](whole-connecting-family-prototypes.patch) | `bd79a86a` | Declaration-first whole column/H/delta prototypes and checked components/whole observations; failed nested-record and Hom-projection-order alternatives remain explicitly unqualified. |
 | [connecting-family-usability-prototypes.patch](connecting-family-usability-prototypes.patch) | `361bd542` | Checked whole/expanded Hom usability and evaluation consumers, with failed controls and consolidated support. Requires the preceding whole-family artifact to materialize its temporary imports. |
 | [whole-observation-unification-alternative.patch](whole-observation-unification-alternative.patch) | `e1398d9e` | Successful whole-unification alternative and five omission controls. Not selected: the runtime structural-projection policy is retained. |
+| [direct-model-connecting-prototypes.patch](direct-model-connecting-prototypes.patch) | `6c666f03` | Checked explicit model-side row predicate, direct connecting component at original H points, complete-arrow observations and warning baseline. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all seventeen artifacts apply to their pinned baselines with their
-recorded prerequisites, and all 227 embedded
+checks: all eighteen artifacts apply to their pinned baselines with their
+recorded prerequisites, and all 232 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -103,6 +104,13 @@ is promoted library code; the living pilot records the remaining owner audit,
 native connecting interpretation, bounded assembly and book work.
 
 ## Recovery
+
+The direct-model addition preserves five checked source/reviewer/baseline
+versions, recovered with matching SHA-256 hashes. The component retains the
+original model H points, with supplied normality and model-side short-exact
+evidence. The four final library helpers are transparent. Their private
+TypeScript mirrors and conditional call have bounded LF conformance; native
+retained-result preparation and connecting adoption remain further work.
 
 The whole-observation alternative preserves eight further source/control
 versions and their verified recovery hashes. It replaces four whole beta

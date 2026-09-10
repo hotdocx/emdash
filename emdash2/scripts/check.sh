@@ -214,6 +214,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp)
   files+=(emdash3_2_commutative_algebra_freyd_homology_models.lp)
   files+=(emdash3_2_commutative_algebra_freyd_homology_model_records.lp)
+  files+=(emdash3_2_commutative_algebra_freyd_homology_model_connecting.lp)
   files+=(emdash3_2_commutative_algebra_freyd_homology_model_normality.lp)
   files+=(emdash3_2_commutative_algebra_freyd_chain_map_introduction.lp)
   files+=(emdash3_2_commutative_algebra_freyd_homology_model_maps.lp)

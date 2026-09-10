@@ -1658,6 +1658,48 @@
           "status": "expected failure: removing only left_diagram leaves its expanded proof unfinished"
         }
       ]
+    },
+    {
+      "artifact": "direct-model-connecting-prototypes.patch",
+      "base_commit": "6c666f03c7c187f96f1acd0b6a505340a8012cb8",
+      "note": "Checked model-side row predicate, direct component at original H endpoints, complete-arrow observations and warning baseline. Normality and row evidence remain supplied; no concrete native adoption is claimed.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/freyd_model_short_exact_rows.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_model_short_exact_rows.lp",
+          "kind": "new",
+          "sha256": "b78650000d96f7536e5b83d775b540a8c4c60dea4abd5800a048347545cddab5",
+          "status": "checked prototype or original-import warning baseline"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_model_connecting.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_model_connecting.lp",
+          "kind": "new",
+          "sha256": "6f6de8319d9b29d744eff3bb2982ed49994c5acba29265fb4f49fce03d7da14f",
+          "status": "checked prototype or original-import warning baseline"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_model_connecting_observation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_model_connecting_observation.lp",
+          "kind": "new",
+          "sha256": "6b93253ebc076c962813427f18aaf5841786cc74ac2ce55cc04782eb0dd08904",
+          "status": "checked prototype or original-import warning baseline"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_model_connecting_review.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_model_connecting_review.lp",
+          "kind": "new",
+          "sha256": "38a8bda89d1388969b3acf60295bf3c98d6514529f5b4507f8cb70b294eb92b7",
+          "status": "checked prototype or original-import warning baseline"
+        },
+        {
+          "path": "emdash2/tmp/probes/freyd_model_connecting_baseline.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/freyd_model_connecting_baseline.lp",
+          "kind": "new",
+          "sha256": "a915b8ea0a6f09550efc060fc80465a2fecb8cf05e5477520a51fa73a3c8b343",
+          "status": "checked prototype or original-import warning baseline"
+        }
+      ]
     }
   ]
 }

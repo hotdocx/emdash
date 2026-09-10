@@ -4281,3 +4281,72 @@ do not silently treat raw finite agreements as closed all-test capability.
 Then extend the retained-result preparation/adoption inventory without
 re-running homology, replacing selections or introducing another native
 connecting algorithm. This is the next in-progress semantic consumer.
+
+The model-side input audit distinguishes the old effective Freyd row
+package from the generic all-test short-exact predicate used by the direct
+component. They are not silently identified. Probe a transparent model-
+indexed alias of the latter predicate over the ORIGINAL raw row pair,
+plus its existing generic row constructor. Raw vertical agreements already
+enter generic chain maps through freyd_raw_chain_map_generic. Use those
+maps, the original source/target raw chain agreements and the model-owned
+records in homology_record_connecting. The target type must mention the
+same two freyd_homology_model_object terms used by existing consumers.
+Supplied model normality and four model-side short-exact witnesses remain
+explicit assumptions; this is not a construction of closed Freyd
+effectiveness from finite agreements. Qualify this precise formal boundary
+before TypeScript signature/adoption work.
+
+The direct model component now checks at the two original model H terms.
+Its complete-arrow observation uses the existing FreydArrowObservation
+carrier, and both endpoint projections plus the underlying arrow compute.
+The model-side short-exact predicate is a transparent alias and its generic
+row is constructed from the original raw pair. No new primitive, rewrite,
+unifier or endpoint transport is used. The new private TypeScript signature
+module mirrors normality, model-side short exactness and the complete-arrow
+operation through the existing scoped LF builder. It preserves the exact
+47-argument telescope and implicit roles, and rejects omitted normality,
+foreign fields or a raw-zero proof substituted for short exactness. This
+signature tranche does not yet perform the concrete connecting adoption.
+
+Qualification: the consolidated source/reviewer are
+emdash3_2_commutative_algebra_freyd_homology_model_connecting.lp and
+examples/freyd_homology_model_connecting.lp. All four symbols are transparent
+definitions. Four positive LP checks cover the arrow type and all complete-
+arrow observations; two negatives reject raw zero as short exactness and
+omitted normality. Both standalone checks pass in the 092259/092301 logs.
+The 092840 candidate and 093021 five-import baseline warning inventories
+are identical in every field at 1,255/169.
+
+src/v3_2/algebra_formal_freyd_model_connecting_signatures.ts is private,
+signature-only and uses the existing scoped LF builder. Its 47-argument
+ordering/plicity, missing/foreign input and wrong-evidence checks pass.
+EMDASH_RUN_PROOF_CAS_FREYD_MODEL_CONNECTING_SIGNATURES=1 with the focused
+model-connecting-signatures test filter passes all three tests, including
+the actual source signatures and conditional call in Lambdapi (28.5 seconds).
+The existing checkLambdapiProbe API has a 60-second cap, which is within the
+90-second SOP ceiling; it was not broadened. Full unsaturated signature
+assertions require explicit @ names, while the actual call is emitted
+normally. The test verifies the expected assertion before that syntax-only
+adjustment. Earlier bare-name attempts failed at implicit insertion, not
+at the mathematical operation or its component.
+
+The complete affected TypeScript test file passes eight tests with two
+opt-in conformance skips; the new opt-in was separately run as above.
+Workspace check, root typecheck and changed-file lint pass. No generic
+checker/serializer/runtime, public barrel or test runner changed, and no
+unrelated aggregate was run. Next implement retained native window
+preparation and explicit model/row interpretation/adoption; do not label
+the signature conformance as that missing concrete consumer.
+
+The source-only inventory is 870 files at snapshot
+2b94f776ecf6e50ff8bfb06f38c97b0724137cbcdaa7baa0e889b816d19bf461.
+The five original model-component probes are preserved at 6c666f03 in
+direct-model-connecting-prototypes.patch, with verified recovery hashes.
+The next continuation should build retained-window preparation and a
+complete-arrow interpretation bundle using these qualified signatures.
+Keep supplied normality explicit and classify model-side row interpretation
+as trusted presentation semantics if adopted from the native row, not as
+a kernel-derived consequence of a finite zero agreement. Preserve the
+original source/target chain terms, model binding and already adopted
+homologies; do not re-run their universal algorithms. Integrate the actual
+bounded connecting inventory only after that concrete slice is qualified.

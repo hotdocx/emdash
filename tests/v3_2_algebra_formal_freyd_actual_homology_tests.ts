@@ -37,6 +37,12 @@ import { createFormalFreydModelMapProofEnvironment, FORMAL_FREYD_MODEL_MAP_SIGNA
 import { prepareAlgebraFormalFreydModelMap, algebraFormalFreydModelMapSquareBundle } from '../src/v3_2/algebra_formal_freyd_model_map_preparation';
 import { algebraFormalFreydModelMapObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_map_observation';
 import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydRetainedHomologyPresentation } from '../src/v3_2/algebra_formal_freyd_model_observation';
+import {
+    algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType,
+    createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS,
+    FREYD_MODEL_CONNECTING_ARGUMENTS
+} from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
+import { kernelInstantiate } from '../src/v3_2/kernel';
 import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
 import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
@@ -347,5 +353,86 @@ describe('v3.2 actual formal interior homology', () => {
         { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
         assert.equal(checked.timedOut, false, checked.diagnostics);
         assert.equal(checked.accepted, true, checked.diagnostics.slice(-10000));
+    });
+});
+
+
+describe('v3.2 model connecting signatures', () => {
+    const fixture = () => {
+        let environment = createFormalFreydModelConnectingProofEnvironment([]);
+        let target = environment.lookup('bridge_freyd_homology_model_connecting_observation')!.type;
+        const values: Record<string, KernelExpression> = {};
+        for (const field of FREYD_MODEL_CONNECTING_ARGUMENTS) {
+            assert.equal(target.tag, 'pi');
+            if (target.tag !== 'pi') throw new Error('Connecting telescope ended early');
+            assert.equal(target.binder.mode.plicity, field.implicit ? 'implicit' : 'explicit');
+            const value = kernelFree('connecting_input_' + field.name, p);
+            environment = environment.extend({ name: value.name, type: target.binder.type,
+                mode: binderMode('explicit', 'functorial'), provenance: p });
+            values[field.name] = value;
+            target = kernelInstantiate(target.body, value);
+        }
+        return { environment, values, target, term: algebraFormalFreydModelConnectingObservationTerm(values) };
+    };
+
+    it('constructs the exact conditional connecting call without changing Core owners', () => {
+        const v = fixture(), checker = createCoreProofChecker(v.environment);
+        assert.equal(FREYD_MODEL_CONNECTING_ARGUMENTS.length, 47);
+        assert.equal(new Set(FREYD_MODEL_CONNECTING_ARGUMENTS.map(field => field.name)).size, 47);
+        checker.check(checker.rootContext, v.term, v.target);
+        checker.check(checker.rootContext, v.values.N, algebraFormalFreydModelNormalityType(v.values.R, v.values.M));
+        for (const name of Object.keys(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS)) {
+            assert.equal(v.environment.lookup(name)!.body, undefined);
+        }
+    });
+
+    it('rejects missing normality, foreign fields and raw-zero evidence in place of short exactness', () => {
+        const v = fixture(), checker = createCoreProofChecker(v.environment);
+        const { N: _N, ...missing } = v.values;
+        assert.throws(() => algebraFormalFreydModelConnectingObservationTerm(missing), /every exact/iu);
+        assert.throws(() => algebraFormalFreydModelConnectingObservationTerm({ ...v.values, foreign: v.values.R }), /foreign/iu);
+        assert.throws(() => checker.check(checker.rootContext,
+            algebraFormalFreydModelConnectingObservationTerm({ ...v.values, N: v.values.cm }), v.target));
+        assert.throws(() => checker.check(checker.rootContext,
+            algebraFormalFreydModelConnectingObservationTerm({ ...v.values, x0: v.values.c0 }), v.target));
+    });
+
+    it('checks the exact connecting signatures and conditional call in Lambdapi', {
+        skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_MODEL_CONNECTING_SIGNATURES !== '1'
+    }, () => {
+        const v = fixture();
+        const assertions: { label: string; term: KernelExpression; type: KernelExpression;
+            span: ReturnType<typeof sourceSpan> }[] = Object.keys(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS).map(name => ({
+            label: name, term: kernelFree(name, p), type: v.environment.lookup(name)!.type,
+            span: sourceSpan('generated/model-connecting-signatures.ts', 1, 1)
+        }));
+        assertions.push({ label: 'conditional_connecting', term: v.term, type: v.target,
+            span: sourceSpan('generated/model-connecting-signatures.ts', 2, 1) });
+        const serialized = serializeCoreLfKernelProbe({ environment: v.environment, externalFreeReferences: {
+            ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
+            ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
+            ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS
+        }, assertions });
+        const imports = [
+            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;',
+            'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;',
+            'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;'
+        ].join('\n');
+        // Bare LF names insert leading implicits. These three assertions
+        // intentionally inspect the full unsaturated external signature.
+        let source = serialized.source.replace('require open emdash.emdash3_2;', imports);
+        for (const name of Object.values(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS)) {
+            const assertion = 'assert ⊢ ' + name + ' :';
+            assert.ok(source.includes(assertion), 'Expected the unsaturated signature assertion for ' + name);
+            source = source.replace(assertion, 'assert ⊢ @' + name + ' :');
+        }
+        const checked = checkLambdapiProbe({ ...serialized,
+            source
+        }, { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
+        assert.equal(checked.timedOut, false, checked.diagnostics.slice(-8000));
+        assert.equal(checked.accepted, true, checked.diagnostics.slice(-12000));
     });
 });

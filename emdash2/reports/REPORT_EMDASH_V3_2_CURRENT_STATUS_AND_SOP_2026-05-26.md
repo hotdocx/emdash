@@ -1445,8 +1445,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   chain agreement. Its object computes to the already-used model H point;
   the independent reviewer rejects collapsing different model selections.
   The adapter is one transparent definition with no new rule, unifier or
-  universal choice. Direct model connecting interpretation remains the
-  next consumer, rather than a result supplied by this record alone.
+  universal choice. The model-connecting extension now uses these records
+  in the original direct component and exposes its complete Freyd arrow
+  observation at the same two model H points. Its model-side short-exact
+  predicate is a transparent alias, and the generic row constructor retains
+  the original raw pair. Normality and four such row witnesses stay explicit;
+  the old effective raw-row package is not silently promoted to all-test
+  capability. Four positive LP checks and two negatives pass. The private
+  TypeScript mirror checks the exact 47-argument telescope, missing/foreign
+  input rejection and full LF signature/call conformance. It changes no
+  Core owner, runtime rule or public barrel. Concrete retained-result
+  preparation/adoption for delta still remains to be implemented.
 - The short-exact-row-family and homology-window-family modules retain
   actual row functors and transformations in the ordinary target profile.
   Specialized window constructors/projections avoid deeply nested Sigma

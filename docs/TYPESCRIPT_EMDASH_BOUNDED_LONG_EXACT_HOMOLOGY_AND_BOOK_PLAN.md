@@ -6,6 +6,14 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Model connecting interface (2026-09-10): the direct component now has a
+transparent supplied-model specialization and complete-arrow observation
+at the original H endpoints. Normality and model-side short-exact witnesses
+remain explicit. The private TypeScript signature/conditional-call bridge
+passes its bounded Lambdapi conformance; retained native window preparation
+and connecting adoption are still the next integration step. See the
+[model-consumer ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#retained-model-connecting-consumer-next-interface).
+
 Reviewed whole-observation policy (2026-09-10): the successful whole-unifier
 alternative is preserved but not selected. The
 [reviewed decision](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#reviewed-decision-keep-whole-projection-beta)
