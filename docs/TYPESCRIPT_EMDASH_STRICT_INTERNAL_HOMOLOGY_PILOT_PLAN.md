@@ -123,7 +123,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 |---|---|---|
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
-| `HINT-UNIVERSAL-3` | selected presentations/mates qualified, with explicit bounded model interpretation; no automatic provider synthesis claimed | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
+| `HINT-UNIVERSAL-3` | selected presentations, mates and whole-owned records qualified, with explicit bounded model interpretation; no automatic provider synthesis claimed | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
 | `HINT-COMPLEX-4` | native global H, complete raw entry and bounded point/map CAS observations qualified; connecting/window continuation separate | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | triangle alternative preserved; selected global implementation is the native zero-cone category in row 15 | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | original components and native map entry qualified in row 16; no separate global legacy-map category required | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
@@ -2829,3 +2829,82 @@ new rule/unifier, or active mathematical-source change results from this
 diagnostic. Qualify the remaining consumers before promoting the shared
 record; do not characterize this local LF problem as a mathematical
 obstruction to whole-H connecting construction.
+
+### Whole-Owned Records: Qualified Source Candidate
+
+The next isolated source candidate is
+`/tmp/emdash-whole-record-promotion.kRY51I`. It adds the actual-boundary
+`HomologyRecord`, its constructor/canonical selector and readable projections
+to the homology owner, without changing any existing canonical-wrapper
+definition. This is phased replacement: new whole-H consumers use the new
+record now; migrating/retiring old formal wrappers is not an exhaustive
+old/new proof prerequisite. The earlier immediate alias migration remains
+preserved in the preceding stage, not silently promoted.
+
+The new `kernel_adjunction_records`, `cokernel_adjunction_records`,
+`homology_family_records` and `chain_pair_homology_records` source candidates
+all check. The family record uses the shared constructor instead of repeating
+its Sigma body. The original-input record retains whole H and the actual
+boundary component, with unused presentation parameters removed from its
+auxiliary input views. Five independent reviewers pass, including actual
+operational-field reductions, the unchanged canonical selected values, and
+rejection of a quotient at a different supplied boundary. The explicit
+boundary is not runtime-replaced by the canonical contraction centre.
+
+Every new source/reviewer target checks within eight seconds after its exact
+dependencies; the fresh nucleus checks in seven seconds. The candidate adds
+no primitive, rewrite or unification rule. Warning comparison, remaining
+focused regressions, registration/catalog/health synchronization and active
+promotion are still required. Active mathematical sources remain unchanged;
+this is not a completed connecting/window or whole delta transformation.
+
+The inherited second-snake-comparison diagnostic also tried direct pasting
+and a same-explicit-factors congruence unifier. Both still reached the bound;
+neither is promoted or used by the record candidate. These attempts remain
+in the earlier record stage as `row_second_direct_paste` evidence and
+`row_second_congruence.lp`. The actual connecting redevelopment must use
+whole-H-owned factors, not require preserving every older wrapper first.
+
+### Promoted Whole-Owned Record Layer
+
+The five source candidates and five reviewers are now in the active library.
+The changed homology owner only adds the actual-boundary record API; every
+older definition is unchanged. The kernel/cokernel records derive literal
+whole K/Q fields and explicit mate centres, while the family/original-input
+records retain the actual beta and project directly to H. This is phased
+formal-interface replacement, not a new H implementation or a requirement
+to preserve all obsolete wrappers. Supplied coherent presentations remain
+inputs; no automatic closed model or new quotient effectiveness is claimed.
+
+All ten active source/reviewer probes pass in
+`logs/probes/whole-records-active-checks.log`. The five reviewers contain 21
+positive checks and two negatives: a quotient at a different boundary is
+rejected, and a supplied boundary is not collapsed to the canonical lift.
+Eight existing reviewers pass in the exact-source promotion stage:
+computational homology, homology maps/families, ordinary-target whole H,
+both mate interfaces and both Freyd model point/map interfaces. The
+ordinary-target dependency join took 26 seconds; the other regressions took
+at most six seconds. No TypeScript behavior or native algorithm changed.
+
+The fresh source-only warning control and candidate both report 1,249
+critical pairs and 169 replaceable-pattern reports. Their complete category,
+location, term-head and two-rule-family inventories are identical, with no
+parser issues. Logs are `whole-records-baseline-warnings.log` and
+`whole-records-candidate-warnings.log` under `logs/probes/`. The candidate
+introduces no primitive, rewrite or unification rule; the nucleus is unchanged.
+All five source LHS audits pass. Source registration, catalog/TOC and 34
+focused metrics/TOC/warning-parser tests pass. Report headers, active links,
+shell/diff hygiene and the source-only health snapshot check pass; metrics
+cover 801 files at
+`sha256:833b323a038f43ecb24721adfb2edcc2d5a5ab3f9e2b13600dab6305e5145c6e`.
+The ten promoted source/reviewer files match the final promotion stage byte
+for byte. No unrelated aggregate or general variance repair
+is included, and the inherited health/soundness qualifications remain.
+
+The next mathematical construction is delta at these actual H endpoints.
+Use the original short-exact-sequence and native algorithm data, with the
+new records for its cycle/quotient factors. Reuse genuinely generic lemmas;
+do not make a terminal type conversion of the old delta or a complete old/new
+comparison theorem the new definition. The three generic window-exactness
+proofs, bounded formal assembly, concrete connecting consumer and final book
+obligations all remain active.

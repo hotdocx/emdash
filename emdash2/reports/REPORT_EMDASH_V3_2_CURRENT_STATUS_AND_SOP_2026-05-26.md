@@ -1306,6 +1306,24 @@ belongs to the owning implementation plan rather than to standing guidance.
   targets both check. Connecting arrows retain their separate homological
   owner, not a fictitious H-image. Their model/window interface and the
   full goal's generic exactness/assembly/book obligations remain.
+- `emdash3_2_kernel_adjunction_records.lp` and its cokernel counterpart
+  derive existing computational universal records whose object and
+  inclusion/projection are the actual K/Q and counit/unit observations.
+  The contractibility proof uses the selected interpretation, then explicitly
+  installs the mate factor as centre; it does not choose runtime fields by
+  transporting an old object or map. The new `HomologyRecord` in
+  `emdash3_2_computational_homology.lp` retains that kernel, an actual boundary
+  factor and its cokernel. Its original-selector constructor computes the
+  previous selected values; the old canonical wrappers are unchanged.
+  `emdash3_2_homology_family_records.lp` observes any already coherent whole
+  H-family, using its actual beta = K(h) composed with eta. The original-input
+  `emdash3_2_chain_pair_homology_records.lp` retains that same beta and proves
+  reconstruction to the original incoming arrow. Both record-object
+  projections reduce literally to whole H. Five reviewers cover retained
+  operational fields, original selections and two noncollapse/type-boundary
+  negatives. No primitive, rewrite, unifier or alternative H-functor is added.
+  This is the record layer for the whole-H connecting redevelopment, not an
+  already constructed connecting transformation or generic exactness theorem.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

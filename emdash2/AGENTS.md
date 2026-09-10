@@ -168,6 +168,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   connecting/window interface remains further work. Whole H is primary;
   comparisons serve actual consumers, not exhaustive historical-wrapper
   preservation. This does not construct a closed model from old providers.
+  The kernel/cokernel-adjunction record modules now derive universal records
+  at the actual whole K/Q objects and structural transformations. Their
+  operational centres are explicit mate operations; comparison paths occur
+  only in universal-law evidence. `HomologyRecord` retains an actual boundary
+  factor and its cokernel. The family and original-chain-pair record modules
+  project literally to whole H and beta, without a final endpoint conversion
+  or a second homology functor. Canonical older wrappers remain unchanged
+  while consumers migrate. A whole connecting transformation and generic
+  window exactness are still downstream.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

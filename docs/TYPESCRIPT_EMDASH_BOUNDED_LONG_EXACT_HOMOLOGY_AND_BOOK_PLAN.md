@@ -13,9 +13,10 @@ those whole observations. The
 [pilot's replacement-interface decision](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#whole-h-connecting-replacement-interface-and-proof-roles)
 owns this continuation. Reusable general factorization proofs and the native
 algorithms remain implementation evidence; an old connecting arrow followed
-by endpoint conversions is not the selected public design. The shared
-actual-boundary record is currently a checked prototype, not promoted code
-or a completed whole connecting transformation. All remaining exactness,
+by endpoint conversions is not the selected public design. The actual-
+boundary record layer is now implemented at whole K/Q/H, with canonical
+older wrappers unchanged during consumer migration. This is not a completed
+whole connecting transformation. All remaining exactness,
 bounded assembly, concrete consumer and book obligations stay in scope.
 
 Accepted continuation (2026-09-09): the user resumes this same goal with a

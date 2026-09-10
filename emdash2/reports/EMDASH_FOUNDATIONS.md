@@ -4338,6 +4338,33 @@ further work. New mathematics should use whole H; older formal wrappers may
 retire as their consumers migrate, while native matrix algorithms remain
 the implementation rather than a competing homology theory.
 
+The universal records now also have a whole-owned presentation. Their kernel
+object and inclusion are literally K[d] and its counit-derived component;
+dually the cokernel object and projection are Q[d] and the unit-derived
+component. Their lift/colift centres use the existing mates. Agreement with
+the selected implementation transfers the universal-law evidence, after
+which the operational centre is explicitly installed. Contractibility carries
+data here: it is not being treated as erased proof. The projection tests
+ensure that this proof comparison does not choose the runtime object or map.
+
+The important homology refinement is to retain the actual boundary factor,
+not force it to be one particular expression for the selected kernel lift.
+`HomologyRecord` stores the kernel, that point of the existing factor fibre,
+and its cokernel. For a whole family it stores beta = K(h) composed with eta,
+so its homology-object projection is literally the existing H-point. The
+original-input version proves beta's reconstruction to the original incoming
+arrow without changing beta or converting H's endpoints. The original
+kernel/lift/cokernel recipe also constructs this record with exactly its old
+selected values. Older canonical wrappers remain during consumer migration;
+there is no new homology functor or second diagram grammar.
+
+These records provide the intended endpoints for redeveloping the connecting
+operation. Reconstruction and uniqueness paths remain useful universal-law
+evidence, but the operational endpoints and arrows do not arise from those
+paths. A whole connecting transformation still needs its short-exact-sequence
+source/action and naturality construction; it is not supplied merely by
+whole H or by the new point records.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.
