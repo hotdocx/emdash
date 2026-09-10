@@ -43,6 +43,13 @@ import {
     FREYD_MODEL_CONNECTING_ARGUMENTS
 } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
 import { kernelInstantiate } from '../src/v3_2/kernel';
+import { prepareAlgebraFormalFreydModelConnecting, assertAlgebraFormalFreydModelConnectingPreparationCurrent }
+    from '../src/v3_2/algebra_formal_freyd_model_connecting_preparation';
+import * as nativeConnecting from '../src/v3_2/algebra_polynomial_freyd_homology_connecting';
+import { trustAlgebraFormalFreydModelConnecting } from '../src/v3_2/algebra_formal_freyd_model_connecting_workflow';
+import { algebraFormalPresentationMorphismDelegationBundle } from '../src/v3_2/algebra_formal_presentation_morphism_delegation';
+import { createAlgebraTypeScriptReferenceEngine } from '../src/v3_2/algebra_reference_engine';
+import { serializeCoreExpression } from '../src/v3_2/core_serialization';
 import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
 import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
@@ -358,6 +365,178 @@ describe('v3.2 actual formal interior homology', () => {
 
 
 describe('v3.2 model connecting signatures', () => {
+    it('adopts a retained nonsplit connecting arrow with explicit row semantics and no reselection', async () => {
+        const v = await consumer(), selected = v.whole.windows[1].connecting;
+        assert.equal(isPolynomialFreydMorphismZero(selected.homologyMap), false);
+        const R = kernelFree('connecting_R', p), x = kernelFree('connecting_x', p);
+        const M = kernelFree('connecting_model', p), N = kernelFree('connecting_normality', p);
+        const coefficients = new Map<string, ReturnType<typeof kernelFree>>();
+        const reifier = defineAffineFormalPolynomialReifier({
+            algebra: algebraPresentedAlgebra(algebraPolynomialQuotientRing(algebraPolynomialIdeal(selected.sequence.ring, []))),
+            formalRing: R, generatorTerms: [x], coefficientReifier: coefficient => {
+                const key = RATIONAL_DOMAIN.text(coefficient);
+                let term = coefficients.get(key);
+                if (!term) { term = kernelFree('connecting_c_' + [...key].map(c => c.codePointAt(0)!.toString(16)).join('_'), p); coefficients.set(key, term); }
+                return term;
+            }, status: 'trusted-computation'
+        });
+        const prepared = prepareAlgebraFormalFreydModelConnecting({ reifier, selected });
+        const actual = (which: 'source' | 'target') => {
+            const H = selected[which];
+            const providers = prepareAlgebraFormalFreydKernelChoiceProviders({ reifier,
+                selected: createAlgebraPolynomialFreydKernelChoiceProviders({ id: 'connecting/' + which,
+                    ring: selected.sequence.ring, kernel: H.cycles }) });
+            const result = defineAlgebraFormalFreydActualHomologyRealization({ reifier, selected: H, providers });
+            algebraFormalFreydRetainedHomologyPresentation(result);
+            return result;
+        };
+        const sourceActual = actual('source'), targetActual = actual('target');
+        const environment = createFormalFreydModelConnectingProofEnvironment([
+            { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: affineFormalRingElementType(R) },
+            { name: M.name, type: algebraFormalFreydModelType(R) }, { name: N.name, type: algebraFormalFreydModelNormalityType(R, M) },
+            ...[...coefficients.values()].map(term => ({ name: term.name, type: affineFormalRingElementType(R) }))
+        ]);
+        let source = createAlgebraFormalAssumptionSource({ moduleId: 'proof.cas.connecting', sourceId: 'tests/connecting.assumptions', baseEnvironment: environment });
+        const known = new Map<string, KernelExpression>();
+        const append = async <Q, A, B>(id: string, claimType: KernelExpression,
+            classification: 'computed-equation' | 'trusted-presentation-semantics',
+            bundle: Pick<AlgebraFormalWorkflowInput<Q, A, B>, 'adapter' | 'realization' | 'engine'>) => {
+            const key = serializeCoreExpression(claimType), old = known.get(key);
+            if (old) return old;
+            const run = await runAlgebraFormalWorkflow({ ...bundle, goalId: id, document: {
+                moduleId: source.moduleId, declarationId: id, environment: source.environment, type: claimType,
+                plan: coreProofPlanHole(id, { provenance: p, expectation: { contextDepth: 0, target: claimType } }),
+                provenance: p, fingerprint: fingerprint(id)
+            } });
+            const adoption = trustAlgebraFormalWorkflow({ run, assumptionName: id,
+                decision: { kind: 'trust-exact-algebra-computation', evidence: 'Explicit connecting model/equation interpretation ' + id } });
+            source = appendAlgebraFormalAssumption({ source, adoption, classification });
+            const proof = source.entries.at(-1)!.reference;
+            known.set(key, proof); return proof;
+        };
+        const point = async (a: typeof sourceActual, name: string) => {
+            const morph = async (value: typeof a.chain.above, which: string) => {
+                const bundle = algebraFormalPresentationMorphismDelegationBundle({ reifier, selected: value.selected });
+                return append(name + '_' + which, value.claimType, 'computed-equation', { ...bundle,
+                    engine: createAlgebraTypeScriptReferenceEngine({ id: name + '/' + which, revision: 'v1', implementations: bundle.operations.implementations }) });
+            };
+            const aboveLaw = await morph(a.chain.above, 'above'), belowLaw = await morph(a.chain.below, 'below');
+            const chain = algebraFormalFreydChainPairDelegationBundle({ reifier, selected: a.selected.pair });
+            const chainLaw = await append(name + '_chain', a.chain.claimType, 'computed-equation', { ...chain,
+                engine: createAlgebraPolynomialFreydHomologyEngine(chain.model) });
+            const result = algebraFormalFreydModelHomologyObservationBundle({ modelId: 'connecting-model', observationId: name,
+                formalModel: M, environment: source.environment, actual: a, aboveLaw, belowLaw, chainLaw });
+            await append(name + '_model', result.realization.claimType, 'trusted-presentation-semantics', result);
+            return result;
+        };
+        const modelSource = await point(sourceActual, 'connecting_source'), modelTarget = await point(targetActual, 'connecting_target');
+        const before = source.entries.length;
+        const forbid = () => { throw new Error('Connecting interpretation must retain the original computation'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(nativeConnecting, 'algebraPolynomialFreydHomologyConnecting', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const result = await trustAlgebraFormalFreydModelConnecting({ artifactId: 'connecting-retained', prepared,
+                modelSource, modelTarget, normality: N, source, fingerprint, decisionEvidence });
+            assert.equal(result.prepared.selected, selected);
+            assert.equal(result.observation.realization.source.actual.selected, selected.source);
+            assert.equal(result.observation.realization.target.actual.selected, selected.target);
+            assert.equal(result.rows.length, 4);
+            assert.equal(result.counts.homologyReplays, 0);
+            assert.equal(result.counts.universalReselections, 0);
+            assert.equal(result.counts.connectingReplays, 0);
+            assert.ok(result.source.entries.length > before);
+            assert.equal(result.source.entries.at(-1)!.classification, 'trusted-presentation-semantics');
+            assert.ok(result.source.entries.slice(before).some(entry => entry.classification === 'computed-equation'));
+            const checker = createCoreProofChecker(result.source.environment);
+            checker.check(checker.rootContext, result.proof, result.observation.realization.claimType);
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+            const decisions: string[] = [];
+            const replay = await trustAlgebraFormalFreydModelConnecting({ artifactId: 'connecting-reuse', prepared,
+                modelSource, modelTarget, normality: N, source: result.source, fingerprint,
+                decisionEvidence: id => { decisions.push(id); return 'Unexpected duplicate decision'; } });
+            assert.equal(replay.counts.newAssumptions, 0);
+            assert.deepEqual(decisions, []);
+            assert.equal(replay.proof, result.proof);
+            await assert.rejects(() => trustAlgebraFormalFreydModelConnecting({ artifactId: 'connecting-bad-normality', prepared,
+                modelSource, modelTarget, normality: modelSource.realization.pair.term, source, fingerprint,
+                decisionEvidence: id => { decisions.push(id); return 'Unexpected invalid-input decision'; } }));
+            assert.deepEqual(decisions, []);
+            assert.throws(() => result.observation.adapter.normalizeRealization({ ...result.observation.realization }, 'forged'), /Foreign/iu);
+            const wrongType = modelSource.realization.claimType;
+            const wrongGoal = defineAlgebraFormalComputationGoal({ goalId: 'wrong_connecting_claim', document: {
+                moduleId: result.source.moduleId, declarationId: 'wrong_connecting_claim', environment: result.source.environment,
+                type: wrongType, plan: coreProofPlanHole('wrong_connecting_claim', { provenance: p,
+                    expectation: { contextDepth: 0, target: wrongType } }), provenance: p, fingerprint: fingerprint('wrong_connecting_claim')
+            } });
+            assert.throws(() => result.observation.adapter.acquire(wrongGoal, result.observation.realization), /Goal differs/iu);
+            if (process.env.EMDASH_RUN_PROOF_CAS_FREYD_MODEL_CONNECTING_ADOPTION === '1') {
+                const value = result.observation.realization;
+                const assertions = [
+                    { label: 'retained_formal_connecting', term: value.formalArrow, type: value.observationType, span: sourceSpan('generated/retained-connecting.ts', 1, 1) },
+                    { label: 'retained_native_connecting', term: value.nativeArrow, type: value.observationType, span: sourceSpan('generated/retained-connecting.ts', 2, 1) },
+                    { label: 'connecting_interpretation', term: result.proof, type: value.claimType, span: sourceSpan('generated/retained-connecting.ts', 3, 1) },
+                    ...value.rowMaps.map((map, i) => ({ label: 'connecting_row_map_' + i, term: map.term, type: map.type,
+                        span: sourceSpan('generated/retained-connecting.ts', 4 + i, 1) }))
+                ];
+                const serialized = serializeCoreLfKernelProbe({ environment: result.source.environment, externalFreeReferences: {
+                    ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
+                    ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
+                    ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
+                    ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
+                    ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
+                    ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS
+                }, assertions });
+                const imports = [
+                    'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;',
+                    'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;',
+                    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;'
+                ].join('\n');
+                const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;', imports) },
+                    { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
+                assert.equal(checked.timedOut, false, checked.diagnostics.slice(-8000));
+                assert.equal(checked.accepted, true, checked.diagnostics.slice(-12000));
+            }
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('prepares the retained connecting window without homology or universal reselection', async () => {
+        const v = await consumer(), selected = v.whole.windows[1].connecting;
+        const forbid = () => { throw new Error('Connecting preparation must not re-run selected universal algorithms'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(nativeConnecting, 'algebraPolynomialFreydHomologyConnecting', forbid),
+            mock.method(nativeFunctorialHomology, 'algebraPolynomialFreydInducedHomologyMap', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const prepared = prepareAlgebraFormalFreydModelConnecting({ reifier: v.reifier, selected });
+            assert.equal(prepared.selected, selected);
+            assert.equal(prepared.source.selected, selected.source.pair);
+            assert.equal(prepared.target.selected, selected.target.pair);
+            assert.equal(prepared.result.selected, selected.homologyMap);
+            assert.deepEqual(prepared.rows.map(row => row.degree), [2, 1, 0, -1]);
+            assert.equal(prepared.rowMaps.length, 3);
+            assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+            assert.throws(() => assertAlgebraFormalFreydModelConnectingPreparationCurrent({ ...prepared }), /issued/iu);
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('rejects changed connecting endpoints or an arrow inconsistent with the retained trace', async () => {
+        const v = await consumer(), selected = v.whole.windows[1].connecting;
+        const changed = algebraPolynomialPresentationMorphismAdd(selected.homologyMap, selected.homologyMap);
+        assert.throws(() => prepareAlgebraFormalFreydModelConnecting({ reifier: v.reifier,
+            selected: { ...selected, homologyMap: changed } }), /reconstruction/iu);
+        assert.throws(() => prepareAlgebraFormalFreydModelConnecting({ reifier: v.reifier,
+            selected: { ...selected, source: selected.target } }), /original H/iu);
+        let active = selected;
+        const proxy = new Proxy({ ...selected }, { get: (_target, key) => Reflect.get(active, key) });
+        const prepared = prepareAlgebraFormalFreydModelConnecting({ reifier: v.reifier, selected: proxy });
+        active = { ...selected, homologyMap: changed };
+        assert.throws(() => assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared), /Stale|reconstruction/iu);
+    });
+
     const fixture = () => {
         let environment = createFormalFreydModelConnectingProofEnvironment([]);
         let target = environment.lookup('bridge_freyd_homology_model_connecting_observation')!.type;

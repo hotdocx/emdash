@@ -2,7 +2,7 @@
 
 Date: 2026-09-08
 
-Status: active; native whole H and bounded model point/map consumers qualified; connecting/window integration in progress; general op repair deferred
+Status: active; native whole H/window and first retained connecting consumer qualified; all-degree connecting integration in progress; general op repair deferred
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
@@ -11,8 +11,10 @@ meaning without essential use of that defect; the spelling `Op_funcd` alone
 is not a rejection criterion. Structural evaluation, selected presentations
 and native whole homology in the ordinary-target profile are active. The
 retained-selection bounded CAS consumer is qualified at the explicit model-
-interpretation boundary. Connecting/window integration and generic exactness
-remain open; arbitrary omega-target homology is not asserted by this specialization.
+interpretation boundary. All three generic window interiors and the whole
+connecting interface are qualified. All-degree connecting integration,
+bounded formal assembly and final book/audit remain open; arbitrary
+omega-target homology is not asserted by this specialization.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -139,15 +141,16 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
 | `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
-| `HINT-DIRECT-CONNECTING-17` | direct point construction and literal whole-H endpoint consumer qualified; naturality/window/CAS connecting interpretation remain | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
+| `HINT-DIRECT-CONNECTING-17` | direct point, literal whole-H endpoints, whole transformation/window and first retained CAS connecting interpretation qualified | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
 | `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
 | `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 | `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
 | `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
-| `HINT-CONNECTING-NATURALITY-23` | implemented/validated baseline; whole-observation unification alternative under review | whole column/H/delta operations with computing component and scoped Hom usability; preserve this checkpoint while comparing the whole-runtime versus whole-proof-time observation policy |
+| `HINT-CONNECTING-NATURALITY-23` | qualified; whole projection beta plus scoped Hom usability selected, successful alternative archived | whole column/H/delta operations with computing component and scoped Hom usability; retain the reviewed stronger whole runtime observations |
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
 | `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
+| `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer qualified; all-degree integration next | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -4350,3 +4353,49 @@ a kernel-derived consequence of a finite zero agreement. Preserve the
 original source/target chain terms, model binding and already adopted
 homologies; do not re-run their universal algorithms. Integrate the actual
 bounded connecting inventory only after that concrete slice is qualified.
+
+The retained-window preparation will read four already stored short-exact
+rows and the actual adjacent differentials. It may form/check their raw
+chain agreements, but must not call homology, kernel/cokernel selection or
+connecting algorithms. Preserve the supplied source/target H results and
+their original chain terms. Raw matrix equations remain computed-equation
+claims; any model-side short-exactness interpretation is a separate
+trusted-presentation-semantics adoption. Normality stays supplied. Use
+the existing append-only source protocol rather than injecting unrecorded
+proof declarations after freezing its environment.
+
+The first retained connecting consumer is now implemented in three private
+TypeScript modules: model_connecting_preparation, model_connecting_observation
+and model_connecting_workflow (algebra_formal_freyd_*.ts). Preparation reads
+the four stored rows and original differentials, retains the original
+source/target H pairs and result arrow, and forms only raw agreement data.
+It rejects mismatched endpoints/trace and brands issued preparations.
+Observation retains the existing complete Freyd arrow carrier. Four model-
+side row interpretations are separate trusted-presentation-semantics claims,
+not computed-equation claims or a deduction from zero alone. The final
+complete-arrow interpretation has the same classification. Model normality
+remains an explicitly supplied term, checked before further adoption.
+
+The nonsplit degree-one consumer adopts the actual retained nonzero delta
+between its original H points. Spies forbid homology, connecting and weak
+universal-selection calls during interpretation; none are called. Repeating
+the workflow with its resulting assumption source reuses every claim and
+requests no further decisions. Wrong normality, forged preparations/bindings,
+changed result/endpoint data and unrelated claim targets are negative cases.
+EMDASH_RUN_PROOF_CAS_FREYD_MODEL_CONNECTING_ADOPTION=1 checks the concrete
+formal arrow, native arrow, explicit interpretation assumption and all three
+raw row-map terms in Lambdapi. This is the first concrete slice, not yet
+the all-degree bounded connecting inventory or the full goal completion.
+
+Qualification (2026-09-10): the affected test file passes 11 tests with two
+separately gated conformance skips. The final concrete opt-in rerun passes
+after the freshness/foreign-goal controls: 54.05 seconds for the selected
+test, 62.06 seconds for the complete Node process; its individual Lambdapi
+invocation remains bounded by the existing 60-second helper. Workspace
+check, root typecheck, changed-file eslint and exact diff hygiene pass.
+No Lambdapi source, generic TypeScript checker/runtime, public barrel or
+test runner changed in this tranche; the recorded 870-file source-health
+snapshot and warning evidence therefore remain unchanged. No repository
+aggregate was run. Next extend the original bounded model inventory and
+append-only adoption with every retained connecting window, testing shared
+row/equation reuse and both zero endpoints before generic bounded assembly.

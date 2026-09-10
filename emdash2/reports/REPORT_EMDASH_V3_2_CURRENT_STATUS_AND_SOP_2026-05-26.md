@@ -1454,8 +1454,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   capability. Four positive LP checks and two negatives pass. The private
   TypeScript mirror checks the exact 47-argument telescope, missing/foreign
   input rejection and full LF signature/call conformance. It changes no
-  Core owner, runtime rule or public barrel. Concrete retained-result
-  preparation/adoption for delta still remains to be implemented.
+  Core owner, runtime rule or public barrel. The three private TypeScript
+  `algebra_formal_freyd_model_connecting_{preparation,observation,workflow}`
+  modules now prepare and adopt the first retained nonsplit nonzero delta.
+  They read the original four rows, reuse both adopted H points and preserve
+  the actual result arrow. Raw equations remain computed-equation claims;
+  model-side shortness and the complete-arrow interpretation are explicitly
+  trusted presentation semantics, not deductions from finite zero tests.
+  Supplied normality is checked before further adoption. The concrete
+  Lambdapi consumer, unchanged-result replay, no-reselection checks and
+  stale/foreign-input controls qualify this slice. All-degree connecting
+  inventory integration is still required.
 - The short-exact-row-family and homology-window-family modules retain
   actual row functors and transformations in the ordinary target profile.
   Specialized window constructors/projections avoid deeply nested Sigma
@@ -1476,8 +1485,9 @@ belongs to the owning implementation plan rather than to standing guidance.
   comparisons are proof-time usability. Their evaluations do not assert
   that every independently capped expression has the same runtime normal
   form. `scripts/check_homology_window_families.sh` is the exact-source,
-  individually bounded gate. Native connecting interpretation, bounded
-  formal assembly and final book/consolidation work remain required.
+  individually bounded gate. The first native connecting interpretation is
+  qualified; all-degree integration, bounded formal assembly and final
+  book/consolidation work remain required.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

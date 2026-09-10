@@ -1,0 +1,204 @@
+/** Explicit model interpretation of retained short rows and connecting arrows. */
+import { AlgebraElement, AlgebraParent } from './algebra_parent';
+import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnectingRowMapTerm,
+    assertAlgebraFormalFreydModelConnectingPreparationCurrent } from './algebra_formal_freyd_model_connecting_preparation';
+import { algebraFormalFreydModelHomologyObservationBundle } from './algebra_formal_freyd_model_observation';
+import { algebraFormalFreydChainPairTerm, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
+import { algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType,
+    createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS }
+    from './algebra_formal_freyd_model_connecting_signatures';
+import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
+import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_map_signatures';
+import { CoreLfDeclarationEnvironment } from './lf_declarations';
+import { CoreLfScopedBuilder } from './lf_builder';
+import { createCoreProofChecker } from './proof_checker';
+import { KernelExpression, KernelReference, kernelExpressionEquals, kernelFree, provenance } from './kernel';
+import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
+import { serializeCoreExpression } from './core_serialization';
+import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
+import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeSchema } from './algebra_engine';
+import { createAlgebraTypeScriptReferenceEngine, defineAlgebraReferenceImplementation } from './algebra_reference_engine';
+import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } from './algebra_formal_delegation';
+
+type Point<P extends AlgebraParent, C extends AlgebraElement<P>, I> =
+    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>>;
+export interface AlgebraFormalFreydConnectingRowLaws {
+    readonly above: KernelExpression;
+    readonly below: KernelExpression;
+    readonly chain: KernelExpression;
+    readonly exact: KernelExpression;
+}
+
+export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
+    revision: 'emdash-formal-freyd-model-connecting-observations-v1' as const,
+    classification: 'trusted-presentation-semantics' as const,
+    requiresSuppliedNormality: true as const,
+    constructsModel: false as const, claimsClosedQuotientEffectiveness: false as const,
+    reselectsHomology: false as const, endpointTransport: false as const,
+    replaysConnecting: false as const, addsCoreOwner: false as const
+});
+
+function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression) {
+    if (M.tag !== 'reference' || M.namespace !== 'free') throw new Error('A named supplied coherent model is required');
+    const model: KernelReference = Object.freeze(kernelFree(M.name, M.provenance));
+    const expected = createFormalFreydModelConnectingProofEnvironment([]);
+    const check = (env: CoreLfDeclarationEnvironment) => {
+        for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })) {
+            const value = env.lookup(name);
+            if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, expected.lookup(name)!.type)) {
+                throw new Error('Changed model connecting signature ' + name);
+            }
+        }
+        const declaration = env.lookup(model.name);
+        if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, algebraFormalFreydModelType(R))) {
+            throw new Error('Changed supplied coherent model declaration');
+        }
+    };
+    check(environment);
+    return { model, check };
+}
+
+export function assertAlgebraFormalFreydModelConnectingContext(
+    environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression
+): void {
+    modelContext(environment, R, M);
+}
+
+function retainedInterpretation<T, R extends { readonly claimType: KernelExpression; readonly formalData: string }>(
+    id: string, realization: R, value: T, data: string, current: () => void,
+    assertContext: (environment: CoreLfDeclarationEnvironment) => void, summary: string
+) {
+    const schema = defineAlgebraRuntimeSchema<T>({ id: id + '/retained', revision: 'v1', normalize(candidate) {
+        current(); if (candidate !== value) throw new Error('Foreign retained model value'); return value;
+    } });
+    const operation = defineAlgebraOperation({ id, revision: 'v1', input: schema, output: schema });
+    const implementation = defineAlgebraReferenceImplementation({ operation,
+        algorithm: algebraAlgorithmIdentity(id + '/interpret-retained', 'v1'), execute(input) { current(); return input; } });
+    const engine = createAlgebraTypeScriptReferenceEngine({ id: id + '/engine', revision: 'v1', implementations: [implementation] });
+    const adapter = defineAlgebraFormalComputationAdapter({ id,
+        revision: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE.revision, operation,
+        normalizeRealization(candidate: unknown) {
+            if (candidate !== realization) throw new Error('Foreign model connecting realization');
+            current(); return realization;
+        }, serializeRealization: () => realization.formalData,
+        acquire(goal) {
+            assertContext(goal.document.environment); current();
+            if (!kernelExpressionEquals(goal.target, realization.claimType)) throw new AlgebraFormalDelegationError(
+                'CLAIM_TARGET_MISMATCH', 'modelConnecting.goal', 'Goal differs from this retained model interpretation');
+            return value;
+        }, serializeInput: () => data,
+        serializeOutput: candidate => { current(); if (candidate !== value) throw new Error('Retained model result changed'); return data; },
+        interpret: ({ goal, computed }) => {
+            current();
+            return computed.value === value ? { kind: 'claim' as const, claimType: goal.target, summary }
+                : { kind: 'observation' as const, summary: 'Retained model result differs' };
+        }
+    });
+    return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE, realization, adapter, engine });
+}
+
+const stable = (value: string) => {
+    if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(value)) throw new Error('A stable model observation ID is required');
+    return value;
+};
+
+/** This is model-side row semantics, not an inferred all-test proof from raw zero. */
+export function algebraFormalFreydModelShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+    readonly modelId: string; readonly observationId: string; readonly formalModel: KernelExpression;
+    readonly prepared: AlgebraFormalFreydModelConnectingPreparation<P, C, I>;
+    readonly index: 0 | 1 | 2 | 3; readonly environment: CoreLfDeclarationEnvironment;
+    readonly laws: Omit<AlgebraFormalFreydConnectingRowLaws, 'exact'>;
+}) {
+    const prepared = input.prepared;
+    assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
+    if (!Number.isInteger(input.index) || input.index < 0 || input.index > 3) throw new Error('Invalid connecting row');
+    const context = modelContext(input.environment, prepared.reifier.formalRing, input.formalModel);
+    const raw = prepared.rowPairs[input.index];
+    const pair = algebraFormalFreydChainPairTerm(raw, input.laws.above, input.laws.below, input.laws.chain);
+    const checker = createCoreProofChecker(input.environment);
+    checker.check(checker.rootContext, pair.term, pair.type);
+    const b = new CoreLfScopedBuilder(provenance('derived', 'retained model short-exact row')), L = formalFreydSpineLanguage(b);
+    const R = b.embed(prepared.reifier.formalRing);
+    const values = [R, b.embed(context.model), ...raw.presentations.map(t => b.embed(t)), b.embed(pair.above), b.embed(pair.below), b.embed(pair.term)];
+    const claimType = b.lower(L.tau(b.call(b.free('bridge_FreydHomologyModelShortExact'), values.map((value, i) => ({ value,
+        plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const })))));
+    const serialize = () => serializeCoreLfWorkspaceCanonicalJson({ prepared: prepared.formalData, row: input.index,
+        model: serializeCoreExpression(context.model), claim: serializeCoreExpression(claimType) }, 'modelShortExactObservation');
+    const formalData = serialize();
+    const realization = Object.freeze({ prepared, index: input.index, pair, claimType, formalData });
+    return retainedInterpretation('proof-cas.freyd-model/' + stable(input.modelId) + '/short-row/' + stable(input.observationId),
+        realization, prepared.rows[input.index].triple, prepared.selectedData,
+        () => {
+            assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
+            if (serialize() !== formalData) throw new Error('Changed model row interpretation');
+        }, context.check,
+        'explicitly interpret this retained native short-exact row in the supplied model; no closed capability is synthesized');
+}
+
+export function algebraFormalFreydModelConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+    readonly observationId: string; readonly source: Point<P, C, I>; readonly target: Point<P, C, I>;
+    readonly prepared: AlgebraFormalFreydModelConnectingPreparation<P, C, I>; readonly environment: CoreLfDeclarationEnvironment;
+    readonly normality: KernelExpression; readonly rows: readonly AlgebraFormalFreydConnectingRowLaws[];
+    readonly vertical: Readonly<Record<'am' | 'bm' | 'b0' | 'b1' | 'd1', KernelExpression>>;
+    readonly squares: readonly { readonly upper: KernelExpression; readonly lower: KernelExpression }[];
+    readonly upperZero: KernelExpression; readonly lowerZero: KernelExpression; readonly resultLaw: KernelExpression;
+}) {
+    const prepared = input.prepared, s = input.source.realization, t = input.target.realization;
+    if (input.rows.length !== 4 || input.squares.length !== 3) throw new Error('Four rows and three row maps are required');
+    const currentInputs = () => {
+        assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
+        input.source.adapter.normalizeRealization(s, 'modelConnecting.source');
+        input.target.adapter.normalizeRealization(t, 'modelConnecting.target');
+        if (s.modelId !== t.modelId || !kernelExpressionEquals(s.formalModel, t.formalModel) ||
+            s.actual.reifier !== prepared.reifier || t.actual.reifier !== prepared.reifier ||
+            s.actual.selected !== prepared.selected.source || t.actual.selected !== prepared.selected.target) {
+            throw new Error('Connecting requires one model and the original source/target H selections');
+        }
+    };
+    currentInputs();
+    const context = modelContext(input.environment, prepared.reifier.formalRing, s.formalModel);
+    const checker = createCoreProofChecker(input.environment);
+    checker.check(checker.rootContext, input.normality, algebraFormalFreydModelNormalityType(prepared.reifier.formalRing, context.model));
+    const rowTerms = prepared.rowPairs.map((row, i) => algebraFormalFreydChainPairTerm(row,
+        input.rows[i].above, input.rows[i].below, input.rows[i].chain));
+    const components = [[input.vertical.am, input.vertical.bm, s.inputLaws.above],
+        [t.inputLaws.above, input.vertical.b0, s.inputLaws.below], [t.inputLaws.below, input.vertical.b1, input.vertical.d1]];
+    const rowMaps = prepared.rowMaps.map((_, i) => algebraFormalFreydConnectingRowMapTerm(prepared, i as 0 | 1 | 2, {
+        morphisms: [input.rows[i].above, input.rows[i].below, input.rows[i + 1].above, input.rows[i + 1].below, ...components[i]],
+        ...input.squares[i]
+    }));
+    const upper = algebraFormalFreydChainPairTerm(prepared.upper, input.vertical.bm, input.vertical.b0, input.upperZero);
+    const lower = algebraFormalFreydChainPairTerm(prepared.lower, input.vertical.b0, input.vertical.b1, input.lowerZero);
+    const values: Record<string, KernelExpression> = { R: prepared.reifier.formalRing, M: context.model, N: input.normality,
+        upper: upper.term, lower: lower.term, source_chain: s.pair.term, target_chain: t.pair.term };
+    for (const [i, suffix] of ['m', '0', '1', '2'].entries()) {
+        ['A', 'B', 'D'].forEach((name, j) => { values[name + suffix] = prepared.rowPairs[i].presentations[j]; });
+        values['i' + suffix] = rowTerms[i].above; values['p' + suffix] = rowTerms[i].below;
+        values['c' + suffix] = rowTerms[i].term; values['x' + suffix] = input.rows[i].exact;
+    }
+    for (const [i, suffix] of ['m', '0', '1'].entries()) {
+        ['a', 'b', 'd'].forEach((name, j) => { values[name + suffix] = rowMaps[i].morphisms[j + 4]; });
+        values[['fm', 'gm', 'jm'][i]] = rowMaps[i].term;
+    }
+    for (const [actual, expected] of [[values.dm, s.pair.above], [values.d0, s.pair.below],
+        [values.a0, t.pair.above], [values.a1, t.pair.below]]) {
+        if (!kernelExpressionEquals(actual, expected)) throw new Error('Connecting input changed an original H chain term');
+    }
+    const formalArrow = algebraFormalFreydModelConnectingObservationTerm(values);
+    const b = new CoreLfScopedBuilder(provenance('derived', 'retained complete connecting arrow')), L = formalFreydSpineLanguage(b);
+    const R = b.embed(prepared.reifier.formalRing), resultMap = algebraFormalFreydMorphismTerm(prepared.result, input.resultLaw);
+    const nativeArrow = b.lower(L.call('bridge_freyd_raw_arrow_observation',
+        [R, b.embed(s.nativePoint), b.embed(t.nativePoint), b.embed(resultMap)], 3));
+    const observationType = b.lower(L.tau(L.call('bridge_FreydArrowObservation', [R])));
+    checker.check(checker.rootContext, formalArrow, observationType); checker.check(checker.rootContext, nativeArrow, observationType);
+    const claimType = b.lower(L.equality(L.call('bridge_FreydArrowObservation', [R]), b.embed(formalArrow), b.embed(nativeArrow)));
+    const serialize = () => serializeCoreLfWorkspaceCanonicalJson({ observationId: input.observationId, prepared: prepared.formalData,
+        source: s.formalData, target: t.formalData, expressions: [formalArrow, nativeArrow, claimType].map(v => serializeCoreExpression(v)) }, 'modelConnectingObservation');
+    const formalData = serialize(), current = () => { currentInputs(); if (serialize() !== formalData) throw new Error('Changed connecting observation'); };
+    const realization = Object.freeze({ prepared, source: s, target: t, rowTerms, rowMaps, values: Object.freeze(values),
+        formalArrow, nativeArrow, observationType, claimType, formalData });
+    return retainedInterpretation('proof-cas.freyd-model/' + stable(s.modelId) + '/connecting/' + stable(input.observationId),
+        realization, prepared.selected, prepared.selectedData, current, context.check,
+        'explicitly interpret the retained connecting arrow in the supplied model, with original H endpoints and no reselection');
+}

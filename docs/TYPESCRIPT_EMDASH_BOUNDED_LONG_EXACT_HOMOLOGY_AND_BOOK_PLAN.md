@@ -10,8 +10,11 @@ Model connecting interface (2026-09-10): the direct component now has a
 transparent supplied-model specialization and complete-arrow observation
 at the original H endpoints. Normality and model-side short-exact witnesses
 remain explicit. The private TypeScript signature/conditional-call bridge
-passes its bounded Lambdapi conformance; retained native window preparation
-and connecting adoption are still the next integration step. See the
+passes its bounded Lambdapi conformance. The first retained nonsplit nonzero
+connecting preparation/adoption now preserves both original H points and
+the actual result arrow, with explicit row/model interpretation and no
+universal reselection. All-degree bounded connecting integration is next;
+generic bounded assembly and final book/audit remain required. See the
 [model-consumer ledger](TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md#retained-model-connecting-consumer-next-interface).
 
 Reviewed whole-observation policy (2026-09-10): the successful whole-unifier
@@ -1030,7 +1033,7 @@ was introduced to get a passing target.
 | `LEH-BOUNDED-SHORT-EXACT-FORMAL-6B` | complete through 6B1–6B2 | formal bounded Freyd spine and witnessed morphisms | corresponding bounded chain-map/short-exact interface without claiming closed quotient effectiveness |
 | `LEH-BOUNDED-FREYD-CHAIN-MAPS-6B1` | complete; checkpoint `3b87d386` | formal bounded Freyd complexes and one-degree chain-map agreements | whole dependent map iterator, constructor/projection computation, direct one-degree homology consumer |
 | `LEH-BOUNDED-FREYD-EXACT-ROWS-6B2` | complete; checkpoint `10f57b4b` | 6B1 and witnessed one-degree Freyd homology/mono/epi | explicit exact-row witnesses indexed by the actual two stored chain maps, retained homology identity |
-| `LEH-WINDOW-7` | native window and exact whole-H result complete; connecting naturality and connecting-consumer qualification remain | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
+| `LEH-WINDOW-7` | native window, exact whole-H result and whole connecting qualified; first retained connecting consumer checked, all-degree integration remains | rows 4–6 and bounded homology | one five-term homology window, endpoint comparisons, connecting descent/factor, three exactness witnesses |
 | `LEH-WINDOW-NATIVE-7A` | complete; checkpoint `cae22d6b` | degreewise native sequence and existing snake/homology/normality operations | full native five-term window, four comparison isomorphisms, target factor/source descent, all zeros and exactness, endpoint windows, full serialization |
 | `LEH-WINDOW-HOMOLOGY-INCLUSION-7B` | complete; checkpoint `8161a141` | generic homology, canonical cokernel exactness or monic pushout stability | constructed canonical homology-to-differential-cokernel arrow, reconstruction, and generic monicity theorem |
 | `LEH-WINDOW-GENERIC-MAPS-7C` | complete through 7C1–7C2 | generic kernel/cokernel Hom-fibres and actual selected homologies | generic induced homology maps and selected endpoint-comparison consequences matching the native/witnessed Freyd owners |
@@ -1062,7 +1065,7 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
 | `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; checkpoint `933aa435` | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
-| `LEH-BRIDGE-12` | whole replay, actual formal interiors and bounded model point/induced-map inventory qualified; connecting/window interface audit remains | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
+| `LEH-BRIDGE-12` | whole replay, actual formal interiors, bounded model point/induced-map inventory and first retained model connecting qualified; all-degree connecting integration remains | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
 | `LEH-BOOK-14` | in progress; current checked draft integrated; final generic-theorem updates remain | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
