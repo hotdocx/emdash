@@ -1032,6 +1032,76 @@
           "status": "staged diagnostic driver"
         }
       ]
+    },
+    {
+      "artifact": "third-exactness-prototypes.patch",
+      "base_commit": "47c141eaa29142081fe7131496493852e79984b1",
+      "note": "Seven checked third-interior source prototypes and their two stage/warning drivers. The unstaged first probe timed out in existing imports; exact-source staging checks the new proofs.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_third_boundary.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_boundary.lp",
+          "kind": "new",
+          "sha256": "20dc1d897f12158a9ba1580824e0742a6c60a1184246ac111b22d2177e7bbaa3",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_source_cycle.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_source_cycle.lp",
+          "kind": "new",
+          "sha256": "a028a3056fe57993bfb835041ec48f571ae8558cb09393fd5128047c7d544c7e",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_cover_lift.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_cover_lift.lp",
+          "kind": "new",
+          "sha256": "6d73219853abd8d5961c99b3e66fd7d54b7fdd3fa5115531d685d26662ec843c",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_target.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_target.lp",
+          "kind": "new",
+          "sha256": "cb4ef6e76093178302d6c96b327a4b86cf7b5cb8ce1b42ad3b0b913698ee3b9e",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_homology.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_homology.lp",
+          "kind": "new",
+          "sha256": "743dbdb244cc6be187855de9419bd3d28ca893a68fc3bb8b2712666bfbb841b3",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_exact.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_exact.lp",
+          "kind": "new",
+          "sha256": "0b85eead06880555c9d6e1460584c5205b7c8bb75fa8586d77c5f7c61941a308",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_whole.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_whole.lp",
+          "kind": "new",
+          "sha256": "de23bd30e940357e5e9d8d22e7666f86bf3b04f6b7e9eac0e4688e7466df8511",
+          "qualification": "checked prototype in fresh exact-source stage"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_initial_stage.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_initial_stage.sh",
+          "kind": "new",
+          "sha256": "ed954b3bf597c57ff2f5b6672a5244e69d87fd2bca75a162bed7b544908b54cc",
+          "qualification": "validation driver; stage paths identify the original source-check runs"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_third_warnings.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_third_warnings.sh",
+          "kind": "new",
+          "sha256": "e9868982336a80d0f2c64e04c51e7367076ec0dbf0c6a318653fc77ca91ae3b0",
+          "qualification": "validation driver; stage paths identify the original source-check runs"
+        }
+      ]
     }
   ]
 }

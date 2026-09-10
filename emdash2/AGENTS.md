@@ -208,14 +208,25 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   Its point cover interface keeps the homology preadditive observation and
   actual quotient owner explicit to avoid measured reconstruction timeouts.
   `scripts/check_homology_first_exactness.sh` is the individually bounded
-  source/reviewer gate. The two remaining interiors are not yet proved.
+  source/reviewer gate. The following owners supply the other two interiors.
   `emdash3_2_homology_second_exactness.lp` now proves exactness at H(C)
   using an epic presentation of delta, a retained target-boundary cover
   and a corrected middle cycle. Its public instance uses the actual H
   projection and no extra square/factor hypotheses.
   `scripts/check_homology_second_exactness.sh` checks the exact source
-  dependency graph under the 90-second per-target bound. H(A') remains
-  the unproved window interior; no kernel rule is added by this tranche.
+  dependency graph under the 90-second per-target bound; no kernel rule
+  is added by this tranche.
+  `emdash3_2_homology_third_exactness.lp` proves the final interior at
+  H(A'). The existing H(i')-kernel cover supplies a middle-boundary
+  preimage; its row projection enters the retained C cycles and the
+  original connecting pullback. Row/cycle monicity and delta's covered
+  reconstruction produce all-test preimages. The public theorem retains
+  the same H objects/maps and takes no extra squares or factor choices.
+  `scripts/check_homology_third_exactness.sh` checks the source graph and
+  reviewer, including the negative distinction between boundary epicity
+  and epicity of delta. All three window interiors are proved; exact-window
+  packaging, connecting naturality, native interpretation and bounded/book
+  obligations remain. No new primitive or rule is introduced.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

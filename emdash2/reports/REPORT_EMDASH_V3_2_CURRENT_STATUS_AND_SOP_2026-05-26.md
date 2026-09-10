@@ -1376,9 +1376,10 @@ belongs to the owning implementation plan rather than to standing guidance.
   interface uses the actual quotient and consistent homology-preadditive
   observation to avoid measured LF reconstruction timeouts. Seven owners
   and three reviewers pass `scripts/check_homology_first_exactness.sh`;
-  staged source-only warning inventories remain 1,249/169. The other two
-  interior exactness witnesses, connecting naturality and the final native/
-  bounded/book obligations remain open. No new primitive or rule is added.
+  staged source-only warning inventories remain 1,249/169. The following
+  owners supply the other two interior exactness witnesses. Connecting
+  naturality and the final native/bounded/book obligations remain open.
+  No new primitive or rule is added.
 - `emdash3_2_homology_epic_covers.lp` gives retained target-boundary
   covers for an epic presentation of a map. The direct delta supplies
   that presentation in `emdash3_2_homology_second_exactness.lp`.
@@ -1388,8 +1389,25 @@ belongs to the owning implementation plan rather than to standing guidance.
   window. Two owners and two reviewers pass the individually bounded
   `scripts/check_homology_second_exactness.sh` gate. No epi is split,
   H object replaced or extra square supplied by the public caller.
-  Exactness at H(A'), connecting naturality and the remaining native/
-  bounded/book requirements are still open. No new primitive or rule is added.
+  The following owner supplies exactness at H(A'); connecting naturality
+  and the remaining native/bounded/book requirements are still open.
+  No new primitive or rule is added.
+- `emdash3_2_homology_third_exactness.lp` proves the final interior,
+  at H(A'), with the same literal whole-H endpoints and induced action.
+  An H(i')-kernel cover gives a middle-boundary preimage. Its row
+  projection is a C cycle, whose retained kernel lift enters the original
+  connecting pullback. Cancelling the original row and cycle monomorphisms
+  identifies its target lift. Delta's covered reconstruction then supplies
+  all-test preimages, and the existing cover criterion proves exactness.
+  The public interface derives its reconstruction factors and needs no
+  additional square, split epi, homology choice or object-equality cast.
+  The source/reviewer gate is `scripts/check_homology_third_exactness.sh`;
+  its negative consumer distinguishes exactness from epicity of delta.
+  The complete window now has three proved interior witnesses. Whole-window
+  packaging, connecting naturality, retained native connecting semantics,
+  generic bounded assembly and final book consolidation remain required.
+  The nineteen symbols are definitions and proofs, not new primitives,
+  runtime rules or unification rules.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -143,6 +143,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
 | `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
+| `HINT-WINDOW-EXACT-THIRD-21` | qualified at the actual whole-H window | cover H(i')-kernel tests, lift their middle-boundary preimages into the original connecting cover and prove exactness at H(A') |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3564,3 +3565,93 @@ Next prove exactness at H(A'), using the retained kernel-cover machinery
 for H(A')→H(B') and the original connecting cover. Connecting naturality,
 the selected native connecting interpretation, bounded formal assembly
 and final book work remain required after the window's third interior.
+
+### Third Interior Exactness: Retained Cover Construction
+
+Initial plan (2026-09-10; qualification follows below): for a test into H(A') killed by H(i'),
+reuse `homology_map_kernel_cover`. Its cycle lift v and middle-boundary
+preimage b satisfy βB'∘b = Z(i')∘v. Whole cycle reconstruction therefore
+gives dB∘b = i1∘κA'∘v. Project b along the original row quotient p0;
+the row-map law and p1∘i1 = 0 make p0∘b a C cycle. The retained source
+kernel supplies c with κC∘c = p0∘b.
+
+The pair (c,b) now enters the original connecting pullback through its
+existing cone introduction, not a new cone record or a reselected cover.
+Cancel the original row and cycle monomorphisms to identify its target
+cycle lift with v. The already-checked covered formula for delta then
+gives a covered preimage of the original test through delta. Apply the
+existing all-test exact-cover criterion at the third actual window pair.
+
+This was the hypothesis before the separate cycle, pullback, all-test and
+whole-H probes. Preserve the original source step-pair presentation;
+reject any route requiring a new H selection, an object-equality cast,
+an epi section, or essential use of the deferred variance defects. The
+validation scope is the new owners, their direct dependency graph and
+reviewers, warning comparison and standard source/metadata hygiene—not
+an unrelated repository aggregate.
+
+### Third Interior Exactness Qualification
+
+`emdash3_2_homology_third_exactness.lp` proves exactness at H(A') of
+the same five-term whole-H window. Its public all-test cover and exactness
+theorems derive the cycle and H(i') reconstruction factors from the
+existing whole action. No additional square, factor, splitting or homology
+choice is a public input.
+
+For a test τ:T→H(A') killed by H(i'), the retained homology-map kernel
+cover gives an epic ρ:U→T, v:U→ZA' and b:U→B0 with
+qA'∘v = τ∘ρ and βB'∘b = Z(i')∘v. Boundary and cycle reconstruction
+give dB∘b = i1∘κA'∘v. The original row-map law and p1∘i1 = 0
+therefore make p0∘b a C cycle. Lift it through the retained kernel to
+c:U→ZC, satisfying κC∘c = p0∘b.
+
+The existing pullback cone introduction places (c,b) in the original
+connecting cover E. Its universal lift h:U→E reconstructs both c and b.
+Cancel the original monic i1 and retained monic κA' to identify the
+connecting target-cycle lift at h with v. The original covered formula
+for delta then gives δ∘qC∘c = qA'∘v = τ∘ρ. This is the required
+covered preimage, so `computational_exact_at_from_covers` proves the
+unchanged exactness predicate. Every operation retains its original
+selection; object-equality transport is not used to define an arrow.
+
+All seven source prototypes pass in a fresh exact-source stage. Their
+consolidation contains nineteen defined symbols, no primitive, runtime
+rewrite or unifier. The single owner and reviewer pass
+`scripts/check_homology_third_exactness.sh`: core 3 seconds, unchanged
+window 40 seconds, reusable kernel covers 64 seconds, new owner 7 seconds,
+reviewer 3 seconds. Every invocation has the normal 90-second ceiling.
+The log is `logs/probes/homology-third-exactness-quiet-20260910-032422.log`,
+with compact output in `homology-third-active-driver.log`.
+Final owner/reviewer rechecks after EOF whitespace hygiene also pass;
+their logs are `homology-third-final-quiet-{owner,reviewer}.log`.
+
+The three positive reviewer checks exercise the all-test family, the
+literal third-pair exactness predicate and its actual-boundary epicity
+reading. The negative check rejects treating this witness as epicity of
+delta itself. The initial unstaged probe timed out in existing imports,
+before the new proof; exact-source staging resolves that checking join,
+without changing proof bodies or relaxing subject reduction.
+
+Fresh staged warning controls preserve the exact import graph and omit
+only the new owner's definitions on the baseline side. The complete
+baseline/candidate inventories agree at 1,249/169, including all categories,
+locations, term heads and rule families, with no parser issue. Candidate
+kernel-cover/source checks took 66 and 7 seconds. Logs are
+`third-exactness-staged-{baseline,candidate}-warnings.log`; their full
+`warning_summary.py --strict-parse --top 100000` outputs compare identically.
+The strict LHS audit, catalog/TOC, 34 focused tooling tests, report headers,
+active references and shell/diff checks pass. Source-only health covers
+849 files at `sha256:01a50b58cb13666fe97b87f62af357ffc18a9399288881aa4b84b6ef16113d15`.
+This is not a new full-health or repository-aggregate claim.
+
+`third-exactness-prototypes.patch` preserves seven source prototypes and
+their two validation drivers against `47c141ea`. Isolated-index recovery
+verifies all nine SHA-256 hashes; the archive retains 153 embedded versions
+in twelve artifacts. Applicability preserves the prototypes' original
+trailing whitespace, not a claim that every unstaged command passed.
+
+The completed three interior witnesses do not finish the parent goal.
+Package the exact whole window, qualify connecting naturality and the
+retained native connecting interpretation, then complete bounded formal
+assembly and the final book/architecture evidence. The broader categorical
+universality migration and general variance repair remain separately gated.

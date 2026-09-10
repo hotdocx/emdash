@@ -161,6 +161,16 @@ have verified recovery hashes, for 144 embedded versions. The final
 H(A') interior and retained connecting consumer remain before the broad
 migration gate.
 
+The third interior, at H(A'), is now proved using the original connecting
+cover and retained source cycles. Its covered target lift is identified
+by the original row/cycle monomorphisms, without object-equality casts.
+Nine further prototype/driver versions have verified recovery, bringing
+the archive to 153 versions. All three interior witnesses are complete;
+exact-window packaging, connecting naturality and the retained connecting
+consumer still precede the broad universality-migration gate. This result
+strengthens the reference baseline, not a claim that the broad migration
+has been implemented or that the whole parent goal is complete.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their

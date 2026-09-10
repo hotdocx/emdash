@@ -56,9 +56,14 @@
       "artifact": "second-exactness-prototypes.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 10
+    },
+    {
+      "artifact": "third-exactness-prototypes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 9
     }
   ],
-  "source_versions_sha256_verified": 144,
+  "source_versions_sha256_verified": 153,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

@@ -32,10 +32,11 @@ and [the broader universality audit](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL
 | [first-exactness-prototypes.patch](first-exactness-prototypes.patch) | `168c6cdb` | First-interior proof prototypes and the timed-out projected-test application, with their controls/drivers. Promoted code uses the recorded point-signature refinement. |
 | [first-exactness-preadditive-owner.patch](first-exactness-preadditive-owner.patch) | `168c6cdb` | Two consolidated source files before the homology-preadditive point-interface fix; the consumer timed out at 90 seconds. |
 | [second-exactness-prototypes.patch](second-exactness-prototypes.patch) | `9965ae79` | Epic-presentation and second-interior exactness prototypes, with their staged source driver. |
+| [third-exactness-prototypes.patch](third-exactness-prototypes.patch) | `47c141ea` | Third-interior covered preimages, source cycles, original connecting lift, all-test exactness and whole-H instance, with stage/warning drivers. |
 
 [manifest.json](manifest.json) records each source path, original temporary
 location and SHA-256. [verification.json](verification.json) records recovery
-checks: all eleven patches apply to their pinned baselines, and all 144 embedded
+checks: all twelve artifacts apply to their pinned baselines, and all 153 embedded
 source/driver versions were recovered with matching SHA-256 checksums. The
 earlier saved diff was also preserved byte for byte.
 
@@ -59,6 +60,14 @@ it does not complete the remaining two interiors or the full goal.
 The second-exactness addition preserves ten further checked source/driver
 versions. Their recovery hashes are verified. The accepted result proves
 the second interior at H(C), not the remaining H(A') interior or the full goal.
+
+The third-exactness addition preserves seven checked source prototypes and
+two validation drivers, all with verified recovery hashes. Together with
+the preceding two tranches, the accepted implementation proves all three
+whole-H window interiors. Connecting naturality, native connecting
+interpretation, bounded formal assembly and final book work remain open.
+The first unstaged third-interior probe timed out in existing imports;
+the unchanged new proof passes in the documented exact-source stage.
 
 ## Recovery
 
