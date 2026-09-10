@@ -51,9 +51,14 @@
       "artifact": "first-exactness-preadditive-owner.patch",
       "apply_check": "passed",
       "recovered_source_hashes_verified": 2
+    },
+    {
+      "artifact": "second-exactness-prototypes.patch",
+      "apply_check": "passed",
+      "recovered_source_hashes_verified": 10
     }
   ],
-  "source_versions_sha256_verified": 134,
+  "source_versions_sha256_verified": 144,
   "earlier_saved_diff_byte_identical": true,
   "qualification": "Patch applicability and source preservation, not mathematical validation of experimental variants."
 }

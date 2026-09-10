@@ -209,6 +209,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   actual quotient owner explicit to avoid measured reconstruction timeouts.
   `scripts/check_homology_first_exactness.sh` is the individually bounded
   source/reviewer gate. The two remaining interiors are not yet proved.
+  `emdash3_2_homology_second_exactness.lp` now proves exactness at H(C)
+  using an epic presentation of delta, a retained target-boundary cover
+  and a corrected middle cycle. Its public instance uses the actual H
+  projection and no extra square/factor hypotheses.
+  `scripts/check_homology_second_exactness.sh` checks the exact source
+  dependency graph under the 90-second per-target bound. H(A') remains
+  the unproved window interior; no kernel rule is added by this tranche.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

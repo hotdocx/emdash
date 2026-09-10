@@ -1379,6 +1379,17 @@ belongs to the owning implementation plan rather than to standing guidance.
   staged source-only warning inventories remain 1,249/169. The other two
   interior exactness witnesses, connecting naturality and the final native/
   bounded/book obligations remain open. No new primitive or rule is added.
+- `emdash3_2_homology_epic_covers.lp` gives retained target-boundary
+  covers for an epic presentation of a map. The direct delta supplies
+  that presentation in `emdash3_2_homology_second_exactness.lp`.
+  Its middle lift is corrected by an actual left boundary, lifted into
+  the retained H(B), and compared through the original cycle/quotient
+  observations. All-test covers prove exactness at H(C) in the same
+  window. Two owners and two reviewers pass the individually bounded
+  `scripts/check_homology_second_exactness.sh` gate. No epi is split,
+  H object replaced or extra square supplied by the public caller.
+  Exactness at H(A'), connecting naturality and the remaining native/
+  bounded/book requirements are still open. No new primitive or rule is added.
 - `src/v3_2/algebra_polynomial_freyd_functorial_homology.ts`: induced maps on
   one-degree polynomial Freyd homology. Both chain-square agreements are
   retained. A target-kernel lift constructs the cycles map; explicit boundary

@@ -398,6 +398,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_chain_pair_cycle_factors.lp)
   files+=(emdash3_2_homology_record_cycle_lifts.lp)
   files+=(emdash3_2_homology_first_exactness.lp)
+  files+=(emdash3_2_homology_epic_covers.lp)
+  files+=(emdash3_2_homology_second_exactness.lp)
   files+=(emdash3_2_kernel_domain_comparison_factors.lp)
   files+=(emdash3_2_cokernel_codomain_comparison.lp)
   files+=(emdash3_2_snake_row_source_cycle_iso.lp)

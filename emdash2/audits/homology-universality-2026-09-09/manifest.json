@@ -955,6 +955,83 @@
           "status": "Consolidated consumer that timed out against the unrefined point signature"
         }
       ]
+    },
+    {
+      "artifact": "second-exactness-prototypes.patch",
+      "base_commit": "9965ae7948743c39fafbd7f4a9400d79e6781833",
+      "note": "Checked epic-presentation and second-interior exactness prototypes, before consolidation. Staged checks preserve the uniform 90-second source bound.",
+      "entries": [
+        {
+          "path": "emdash2/tmp/probes/homology_epic_presentation_cover.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_epic_presentation_cover.lp",
+          "kind": "new",
+          "sha256": "9179c35efe35a77af47161157f516827b13b685cc3419e07a14fa84661ae8d82",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_epic_presentation_cover_views.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_epic_presentation_cover_views.lp",
+          "kind": "new",
+          "sha256": "099905dca1a7970a8c92e5b26666f190daac3bd573c302534c3052fa6929e848",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_connecting_epic_presentation.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_connecting_epic_presentation.lp",
+          "kind": "new",
+          "sha256": "3b945dcf6aebb4eff41192367457e8ee674b69c55366798f6279c42af5daffbd",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_second_correction.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_second_correction.lp",
+          "kind": "new",
+          "sha256": "599c448eb0095d969529e798ce09d6590bd28247762360350cce8a924ea32500",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_second_corrected_cycle.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_second_corrected_cycle.lp",
+          "kind": "new",
+          "sha256": "4480ebb3066601ed2bdec88b0d921b4b5dc76c5f4e2afb93532905f85701ef7b",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_second_corrected_projection.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_second_corrected_projection.lp",
+          "kind": "new",
+          "sha256": "8984e9ffd2be647d11540893aec825671ac0b09fcad644faa4843097edbb14da",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_second_homology_factor.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_second_homology_factor.lp",
+          "kind": "new",
+          "sha256": "ff32aae448589d864b06518647b080f6a08127a817caec5221b196f918bec477",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_second_exactness.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_second_exactness.lp",
+          "kind": "new",
+          "sha256": "b43ea4340f4340d1df9be9a3719b1b1c08aa21b738ddd98deb68343e1a29614f",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/homology_whole_second_exactness.lp",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_whole_second_exactness.lp",
+          "kind": "new",
+          "sha256": "345ea2bf2381d7b2d48f01f6e5c05b7dcf1f74ab67cf5413184552cc32914d67",
+          "status": "checked prototype; unstaged final joins exceeded the per-target bound during imports"
+        },
+        {
+          "path": "emdash2/tmp/probes/check_second_exactness_prototypes.sh",
+          "origin": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/check_second_exactness_prototypes.sh",
+          "kind": "new",
+          "sha256": "e18b29b8ef46ba5c97706612014dcc211c13244cef77bdabc1c854ff6991f23e",
+          "status": "staged diagnostic driver"
+        }
+      ]
     }
   ]
 }

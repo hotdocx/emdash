@@ -238,6 +238,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_chain_pair_cycle_factors.lp"),
     Path("emdash3_2_homology_record_cycle_lifts.lp"),
     Path("emdash3_2_homology_first_exactness.lp"),
+    Path("emdash3_2_homology_epic_covers.lp"),
+    Path("emdash3_2_homology_second_exactness.lp"),
     Path("emdash3_2_kernel_domain_comparison_factors.lp"),
     Path("emdash3_2_cokernel_codomain_comparison.lp"),
     Path("emdash3_2_snake_row_source_cycle_iso.lp"),

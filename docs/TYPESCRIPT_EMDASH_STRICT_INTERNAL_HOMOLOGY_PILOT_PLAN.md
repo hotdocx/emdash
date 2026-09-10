@@ -142,6 +142,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-DIRECT-CONNECTING-17` | direct point construction and literal whole-H endpoint consumer qualified; naturality/window/CAS connecting interpretation remain | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
 | `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
 | `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
+| `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.
@@ -3456,3 +3457,110 @@ TypeScript model/replay consumers, general op/Sigma repair and parallel
 strictness branch are unchanged. The second and third window interiors,
 connecting naturality, selected native connecting interpretation,
 bounded formal assembly and final book consolidation remain unfinished.
+
+### Second Interior Exactness: Initial Connecting Kernel Covers
+
+This initial construction state is historical; the qualification below
+records its completion.
+
+The next proof treats a test into H(C) killed by delta. Pull it back along
+the composite of the retained connecting cover and source quotient, which
+is epic. The covered connecting formula makes the target-cycle image a
+boundary test for the actual target quotient. After covering that boundary,
+subtract its original row inclusion from the lifted middle arrow. The
+result should be a middle cycle with the original covered H(C) class,
+giving a factor through H(projection) and the existing exact-cover
+criterion.
+
+The reusable prerequisite under test is an epic presentation of a map as
+an existing Hom-precomposition factor. It uses the ordinary selected
+pullback and retained-cokernel covers, not a new cone grammar, an epi
+section, or a manually supplied normal test. The direct connecting
+construction will supply this factor and its epicity. No first-interior
+algorithm or whole-H owner is being replaced.
+
+The epic-presentation cover, its observations, the direct connecting
+presentation, corrected middle cycle and preserved projection have checked
+as separate probes. The middle homology factor also checks. The full
+second-interior cover/whole-H theorem is now being checked in a fresh
+exact-object stage, because the unstaged join exceeded 90 seconds while
+loading its existing dependencies. No new rule is proposed.
+
+The dependency-ready third-interior route can reuse the first proof's
+homology-map kernel cover for H(A')→H(B'). It gives a target middle-boundary
+preimage. Project that preimage to the C term, lift it into the retained
+C cycles, then compare its connecting lift with the original A' cycle
+using the row and cycle monomorphisms. This should yield the required
+covered preimage through delta. It remains a plan, not a checked theorem.
+
+### Second Interior Exactness Qualification
+
+`emdash3_2_homology_second_exactness.lp` now proves exactness at H(C)
+of the same whole-H window. The public theorem derives the connecting
+presentation and the H(projection) reconstruction factors. It does not ask
+the caller for extra squares, a normal test or a factor through delta.
+
+Write the original connecting cover as e:E→ZC and b:E→B0, with
+p0∘b = κC∘e, and its target-cycle lift as v:E→ZA'. Its checked formula is
+δ∘qC∘e = qA'∘v. The composite qC∘e is epic. For a test τ:T→H(C)
+annihilated by delta:
+
+1. Pull τ back along that composite epic presentation.
+2. The connecting formula supplies a test killed by the actual qA'.
+   The retained-cokernel cover gives an epic r:U→T, a lift x:U→E and
+   a boundary preimage a:U→A0 satisfying βA'∘a = v∘x.
+3. Correct the middle lift to c = b∘x − i0∘a. The original row-map
+   law, retained boundary reconstruction and connecting reconstructions
+   prove that c is a middle cycle.
+4. The original row zero law gives p0∘c = κC∘e∘x. Lift c through the
+   retained middle kernel. Monicity of κC then identifies its cycle
+   projection with e∘x; actual H naturality identifies its homology image.
+5. This is the required covered factor through H(projection). The
+   established all-test exact-cover criterion proves the existing
+   `ComputationalExactAt` predicate at H(C).
+
+The generic epic-presentation cover in `emdash3_2_homology_epic_covers.lp`
+uses the existing Hom-precomposition factor, selected pullback and retained
+target cokernel. The connecting instance constructs that factor from the
+existing covered formula. No epi is split, no homology is reselected and
+no object-equality transport defines a computational arrow.
+
+The two owners and two reviewers pass
+`scripts/check_homology_second_exactness.sh`, including the unchanged
+whole-window prerequisite. The log is
+`logs/probes/homology-second-exactness-quiet-20260910-025717.log`,
+with compact output in `second-exactness-active-driver.log`. The six
+positive reviewer checks include both cover reconstructions, total
+epicity and the final exactness witness as epicity of the actual window
+boundary. Source checks took 74 seconds for the generic epic covers and
+16 seconds for the second-exactness owner; reviewers took one and three
+seconds. Keep the individually bounded gate, not an unbounded whole-tree
+join. The unstaged final probes exceeded 90 seconds during imports;
+fresh exact-object staging checks the same source graph under the ceiling.
+
+The fresh staged warning control preserves the source import graph while
+omitting the two new owners' definitions. Complete baseline/candidate
+inventories are identical at 1,249/169, including categories, locations,
+term heads and rule families, with no parser issues. Logs are
+`second-exactness-staged-{baseline,candidate}-warnings.log`; the candidate
+owner checks took 59 and 12 seconds. Both strict LHS audits, catalog/TOC,
+34 focused tooling tests, report headers, active links and shell/diff
+hygiene pass. Source-only health covers 847 files at
+`sha256:99f8ce9f4d7342ee74d0806564c89d523c1698f9d331fddf44117e0c4fc660c5`.
+No unrelated aggregate was run.
+
+`second-exactness-prototypes.patch` preserves ten source/driver versions
+against `9965ae79`. Isolated recovery verifies all SHA-256 hashes without
+changing the repository index or worktree; the archive now retains
+144 embedded versions. Current source remains the authority for the
+qualified second-interior theorem.
+
+No primitive, rewrite or unifier is added. Whole H and its existing
+runtime action remain the map owners. The first-interior construction,
+native algorithms, TypeScript model/replay boundary, general op/Sigma
+repair and parallel strictness branch are unchanged.
+
+Next prove exactness at H(A'), using the retained kernel-cover machinery
+for H(A')→H(B') and the original connecting cover. Connecting naturality,
+the selected native connecting interpretation, bounded formal assembly
+and final book work remain required after the window's third interior.

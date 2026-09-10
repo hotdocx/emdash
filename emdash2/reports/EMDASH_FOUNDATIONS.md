@@ -4422,6 +4422,17 @@ object. Whole beta naturality supplies boundary preservation alongside
 the already available cycle and quotient naturality. Exactness at the
 other two interior positions remains further work.
 
+Exactness at H(C), immediately before delta, is now established as well.
+Pull a delta-annihilated test back along the epic composite of the
+connecting cover with qC. The covered connecting formula makes its
+target-cycle image a boundary test. After covering that test, subtract
+the lifted left boundary from the middle arrow. The row and boundary
+reconstructions make the correction a middle cycle with the original
+covered C homology class. The retained middle kernel and H(projection)
+therefore provide the required preimage. The same exact-cover criterion
+proves this second interior without changing the H objects or delta.
+Exactness at H(A') remains the window's last unfinished interior.
+
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation
 constructs the homologies and connecting maps in its own quotient bases.

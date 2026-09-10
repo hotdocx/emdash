@@ -2070,6 +2070,11 @@ interior of this same window. It inhabits the existing
 boundary lift used by that predicate. It does not assert exactness at
 H(C) or H(A'), or denote a new homology object.
 
+`homology_whole_window_second_exact` is the separate exactness witness
+at H(C), immediately before delta, for the existing second window pair.
+It uses that pair's actual selected boundary in `ComputationalExactAt`;
+it does not assert the still-pending exactness at H(A').
+
 ## Whole Displayed Laxity Notation
 
 For `FF : E ⊢_K D` and `p : x ->^K y`, write the active whole laxity

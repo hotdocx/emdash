@@ -155,6 +155,12 @@ construction and its LF interface experiments, for 134 embedded versions
 in total. The remaining two interiors and native connecting consumer still
 precede the broad migration gate.
 
+The second interior, at H(C), is also now proved by an epic presentation
+of delta and a corrected middle cycle. Ten further source/driver versions
+have verified recovery hashes, for 144 embedded versions. The final
+H(A') interior and retained connecting consumer remain before the broad
+migration gate.
+
 Riehl–Verity's
 [2-category theory of quasi-categories](https://arxiv.org/abs/1306.5144)
 uses comma objects and lifting universal properties; their
