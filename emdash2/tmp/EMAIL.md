@@ -1460,6 +1460,9 @@ has already been completed.
 SHORTER TECHNICAL APPENDIX
 ==========================
 
+Book: https://doi.org/10.5281/zenodo.21544186
+Code: https://github.com/hotdocx/emdash
+
 This is a development snapshot, not a global consistency claim. Known
 variance/soundness defects in the whole-opposite and Sigma-Hom encodings
 remain separately tracked; formal claims depending on those higher-variance

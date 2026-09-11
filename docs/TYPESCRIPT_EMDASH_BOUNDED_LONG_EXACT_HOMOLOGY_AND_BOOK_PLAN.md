@@ -92,8 +92,8 @@ Delivery qualification:
   `assets/emdash-book-2-cmDjaR.pdf` and `assets/emdash3_2-BM41_hAg.pdf`.
   Both HTTP downloads are byte-identical to the promoted PDFs: 3,622,803
   bytes for the book and 742,587 for the overview, with the hashes above.
-- This final delivery-record checkpoint changes only the plan, not any
-  Pages build input. Its fast-forward/push does not require another asset
+- The delivery-record and standalone-email reference follow-ups change no
+  Pages build input. Their fast-forward/push does not require another asset
   deployment. No tag, npm publication, Zenodo deposit or history rewrite
   was performed.
 
@@ -158,6 +158,8 @@ Status: standalone text and notation audit complete. The shorter appendix
 now locally types U/D/h and beta/H, explains the unit and Arr, and introduces
 the other construction-specific symbols at first use. It is approximately
 half the length of the longer appendix, which is byte-for-byte unchanged.
+It also carries its own Book DOI and Code URL, without relying on the longer
+appendix for project references.
 Standalone Markdown parsing passes for all 46 formula blocks; introduced
 contexts, Unicode notation and line wrapping are checked. This documentation
 tranche changes no mathematical declaration or runtime behavior. Publication
