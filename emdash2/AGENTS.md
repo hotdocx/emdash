@@ -748,6 +748,17 @@ the iterated-hom architecture to the omega setting.
 
 ## Avoid Hung Typechecks
 
+Interactive probes now run through `scripts/lambdapi_resource_guard.sh`:
+one checker at a time, at most 2 GiB address space per process, 64 MiB per
+file, no core dumps and a hard 90-second deadline. On this workstation its
+user-systemd scope additionally limits aggregate test/descendant memory to
+2 GiB and disables swap. The `prlimit` fallback is per-process only. Do not
+bypass this guard for expensive normalization experiments or alternate
+checker binaries. Apply it to each command in a staged gate, not to the
+whole multi-target gate; resource exhaustion is not a mathematical
+counterexample. The active homology plan records the motivating global OOM
+events and requires serial, memory-bounded compiler experiments too.
+
 Early-development hangs usually signal rewrite/unification trouble. Keep
 every Lambdapi invocation bounded by the uniform 90-second per-target ceiling.
 The central diagnostics and several focused consumers now have measured green

@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# One bounded checker command. No unbounded fallback and no parallel heap spikes.
+set -euo pipefail
+
+[[ $# -gt 0 ]] || { printf 'usage: %s command [args...]\n' "$0" >&2; exit 2; }
+memory_mib="${EMDASH_LP_MEMORY_MIB:-2048}"
+file_mib="${EMDASH_LP_FILE_MIB:-64}"
+duration="${EMDASH_LP_TIMEOUT:-90s}"
+backend="${EMDASH_LP_RESOURCE_BACKEND:-auto}"
+
+# Overrides may lower these safety ceilings, not silently raise them.
+for value in "$memory_mib" "$file_mib"; do
+  [[ "$value" =~ ^[1-9][0-9]{0,3}$ ]] || { printf 'invalid resource limit\n' >&2; exit 2; }
+done
+(( memory_mib >= 32 && memory_mib <= 2048 && file_mib <= 64 )) || {
+  printf 'limits must be memory 32..2048 MiB and file size 1..64 MiB\n' >&2; exit 2;
+}
+[[ "$duration" =~ ^([1-9][0-9]?)(s)?$ ]] || {
+  printf 'timeout must be 1..90 whole seconds (optional s suffix)\n' >&2; exit 2;
+}
+seconds="${BASH_REMATCH[1]}"
+(( seconds <= 90 )) || { printf 'timeout exceeds 90 seconds\n' >&2; exit 2; }
+case "$backend" in auto|systemd|prlimit) ;; *) printf 'invalid resource backend\n' >&2; exit 2 ;; esac
+for required in prlimit timeout flock nice; do
+  command -v "$required" >/dev/null || { printf 'required guard tool missing: %s\n' "$required" >&2; exit 2; }
+done
+
+umask 077
+resource_dir="${XDG_RUNTIME_DIR:-/tmp}/emdash-lambdapi-resources-${UID}"
+[[ ! -L "$resource_dir" ]] || { printf 'unsafe resource lock directory\n' >&2; exit 2; }
+mkdir -p -m 700 "$resource_dir"
+[[ -O "$resource_dir" && -d "$resource_dir" ]] || {
+  printf 'resource lock directory is not owned by this user\n' >&2; exit 2;
+}
+[[ ! -L "$resource_dir/checker.lock" ]] || { printf 'unsafe resource lock file\n' >&2; exit 2; }
+exec 9>>"$resource_dir/checker.lock"
+flock -n 9 || { printf 'another guarded check is running; retry serially\n' >&2; exit 75; }
+
+memory_bytes=$((memory_mib * 1024 * 1024))
+file_bytes=$((file_mib * 1024 * 1024))
+if [[ "$backend" == auto ]]; then
+  if command -v systemd-run >/dev/null && command -v systemctl >/dev/null &&
+      systemctl --user is-active --quiet default.target; then
+    backend=systemd
+  else
+    backend=prlimit
+  fi
+fi
+printf 'resource guard: backend=%s memory=%sMiB file=%sMiB time=%ss serial=yes\n' \
+  "$backend" "$memory_mib" "$file_mib" "$seconds" >&2
+
+# RLIMIT_AS is per process, inherited by children. On this desktop the cgroup
+# additionally caps aggregate charged memory and disallows swap for the group.
+# SIGKILL enforces the full 90-second ceiling even if a checker ignores signals.
+limited=(prlimit "--as=$memory_bytes:$memory_bytes" "--fsize=$file_bytes:$file_bytes"
+  --core=0:0 -- nice -n 10 timeout --signal=KILL "${seconds}s" "$@")
+if [[ "$backend" == systemd ]]; then
+  command -v systemd-run >/dev/null || { printf 'systemd-run unavailable\n' >&2; exit 2; }
+  # Keep this shell alive holding FD 9: the command may close inherited FDs.
+  systemd-run --user --scope --quiet --collect \
+    --property="MemoryMax=$memory_bytes" --property=MemorySwapMax=0 \
+    "${limited[@]}"
+else
+  "${limited[@]}"
+fi

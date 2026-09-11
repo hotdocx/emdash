@@ -43,12 +43,8 @@ log_file="logs/probes/${base}-${stamp}.log"
 printf 'checking %s with timeout %s (warnings=%s)\n' \
   "$probe_file" "$EMDASH_PROBE_TIMEOUT" "$EMDASH_LAMBDAPI_WARNINGS"
 set +e
-if command -v timeout >/dev/null 2>&1; then
-  timeout --signal=INT "$EMDASH_PROBE_TIMEOUT" \
-    lambdapi check "${warning_flags[@]}" "${extra_flags[@]}" "$probe_file" >"$log_file" 2>&1
-else
+EMDASH_LP_TIMEOUT="$EMDASH_PROBE_TIMEOUT" bash scripts/lambdapi_resource_guard.sh \
   lambdapi check "${warning_flags[@]}" "${extra_flags[@]}" "$probe_file" >"$log_file" 2>&1
-fi
 rc=$?
 set -e
 

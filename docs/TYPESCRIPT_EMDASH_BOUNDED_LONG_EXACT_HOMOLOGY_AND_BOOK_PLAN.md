@@ -6,6 +6,68 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+Execution safety requirement (2026-09-10, user-requested): all further
+checker experiments in this goal must use
+`emdash2/scripts/lambdapi_resource_guard.sh`, including alternate checker
+binaries. It enforces a 2 GiB per-process address-space ceiling, a 64 MiB
+per-file ceiling, no core dumps, a hard 90-second deadline and a shared
+nonblocking serialization lock. On this host the user-systemd scope also
+enforces 2 GiB aggregate test/descendant memory and zero swap. The headless
+fallback is explicitly labelled per-process `prlimit`, not an aggregate
+memory guarantee. Environment overrides may lower, not raise, the ceilings.
+Run checker stages and any further compiler builds serially; use `dune -j 1`
+for builds and retain appropriate memory bounds. Do not resume unguarded
+comparison/debug commands. The ordinary probe wrapper and current private
+leaf/diagnostic drivers are wired to the guard; other affected drivers must
+be routed through it before use, not presumed covered automatically.
+
+Kernel journal entries at 21:20:55, 21:56:33 and 22:00:25 report global OOM
+kills of `lambdapi`/`lambdapi.exe` processes with approximately 22–23 GiB
+anonymous resident memory. Missing terminal records during that period
+therefore must not be attributed only to normal continuation interruptions.
+The evidence supports actual host memory pressure, not a mathematical
+counterexample. Preserve the historical logs and statuses; do not repeat
+these checks without the new bounds. No checker/compiler was still running
+when the guard was installed. Guard qualification includes inherited limits,
+allocation/file-growth refusal, hard timeout, exit propagation, rejected
+limit increases, serial admission, actual cgroup values and a bounded LP
+reviewer. Resource-limit failures remain distinct from type errors and
+from successful mathematical qualification.
+
+The guard's eight focused safety tests pass, including actual user-cgroup
+limits and cross-process serialization. The finite-index reviewer also
+passes under the default cgroup/address-space bounds. No aggregate of
+unrelated mathematical files was rerun for this tooling change.
+
+Current review policy: do not treat the degree/role presentation as a proven
+complete remedy, or attribute every failure to proof equality. Preserve and
+compare these alternatives under the resource guard:
+
+- Existing rule matching: audit reducible and repeated implicit arguments
+  in relevant generic action rules, distinguishing genuine endpoint guards
+  from unnecessary comparisons. Inspect matching order before relaxing a
+  guard; type/variance validity and owner-position checks remain required.
+- Operation construction: `chain_pair_zero_cone` currently enters through a
+  selected kernel lift followed by an inverse mate. Review whether the now
+  available OneCat arrow-diagram infrastructure can introduce the original
+  chain-zero triangle directly, without kernel universality merely to form
+  the input complex. This is a hypothesis, not an approved replacement;
+  native selections, whole action and real consumers must be preserved.
+- Existing usability: the same-boundary selected-cokernel view has checked
+  generic comparisons, but its canonical delta consumer is not yet qualified.
+  Keep it separate from a change to H or from object-equality transport.
+- LF implementation: the correct installed source is pinned revision
+  `db4f7809961b8c107247613067fb567491fb0b84`, despite reporting 3.0.0. A release-
+  cache rebuild is not the appropriate control. The first same-head-first
+  comparison experiment regressed an existing prerequisite; a whole-spine
+  comparison experiment remains diagnostic only. Do not install a modified
+  checker or promote source validated only by it.
+
+The desired end state remains the complete bounded formal/CAS result and
+book, not an accumulation of auxiliary comparison proofs. Prefer a root
+improvement or a coherent input/output formulation when evidence warrants
+it; preserve the working reference and failed experiments for backtracking.
+
 Model connecting interface (2026-09-10): the direct component now has a
 transparent supplied-model specialization and complete-arrow observation
 at the original H endpoints. Normality and model-side short-exact witnesses
