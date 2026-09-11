@@ -6750,17 +6750,22 @@ Two independent releases produced that same checksum, and the promoted owner
 and public copy are byte-identical. This artifact status is publication
 evidence, not a new mathematical authority; no remote publication occurred.
 
-The bounded homological goal has also produced a locally checked, unpromoted
-`0.8.1-dev` draft dated 2026-09-11. Chapter 31 and its appendices now explain
+The bounded homological goal and its worked-example follow-up have produced
+a locally checked, unpromoted `0.8.2-dev` draft dated 2026-09-11. Chapter 31
+and its appendices explain
 the coherent K/Q presentations, derived whole H, direct and whole connecting
 interfaces, three checked window interiors, finite iterator and retained
-proof-CAS model interpretation: 46 sources, 184 cited claims, 3,344 math
-spans, 407 tagged Letter pages and 19 embedded fonts. Two final exports have
+proof-CAS model interpretation. A worked nonsplit two-degree example now
+traces the retained matrices, zero-composite witness and whole-H/model
+bindings; its exact matrices and presentations have a focused native
+regression. The draft has 46 sources, 184 cited claims, 3,397 math spans,
+409 tagged Letter pages and 19 embedded fonts. Two final exports have
 the identical PDF SHA-256
-`703f9b80ced232d77cca833e332fcb932b724f8fef3326480e75741c39c4427b`.
+`eca5d51db8a13af2263c218f0f7c5adf613b863248e8e59df3b891f8cc2dc13e`.
 Source, browser, PDF and affected-page visual checks pass. This local export
 does not replace the promoted/public artifact above; the earlier `0.8.0-dev`
-PDF is also preserved. The final symbolic zero-endpoint attachment remains
+and `0.8.1-dev` PDFs are also preserved. The final symbolic zero-endpoint
+attachment remains
 explicitly user-deferred, separate from the checked finite iterator and the
 complete native endpoint calculations. Supplied model normality and trusted
 presentation semantics are distinguished from computed matrix equations.

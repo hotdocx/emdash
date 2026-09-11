@@ -103,6 +103,7 @@ objects and their structural arrows visible.
 | $\chi_f:\operatorname{Coim}(f)\to\operatorname{Im}(f)$ | the canonical coimage-image comparison | `coimage_image_comparison` |
 | $\partial$, $\partial_n$ | respectively the snake arrow and the homology connecting component | `abelian_snake_connecting`; `homology_record_connecting` |
 | $\partial_w:H\circ R\Rightarrow H\circ L$ | the whole connecting transformation of a window family | `homology_window_connecting_transf` |
+| $\operatorname{obs}(f)$ | a complete arrow observation, retaining source, target and arrow in the existing arrow-object carrier | `FreydArrowObservation`; `freyd_raw_arrow_observation` |
 | $\rho_QW=F\rho_P$ | relation preservation for a column-matrix raw morphism | `CommRingPresentationMorphism` |
 | $\rho_QH=F-G$ | a coefficient witness for agreement of raw representatives | `CommRingPresentationMorphismAgreement` |
 | $QU+FV=\operatorname{id}$ | a boundary-epicity block equation | `CommRingFreydEpimorphismWitness` |

@@ -772,6 +772,8 @@ They check selected-object reuse, bounded output, compiled agreement and
 coordinate comparisons. Native endpoint computation and the checked
 generic window theorem must not be confused with the deferred final
 symbolic endpoint attachment.
+The [worked nonsplit example](#homology-nonsplit-worked-example) below
+follows one such computation through to its whole-H interpretation.
 
 ## 31.10 Presentations, Matrices, And Formal Replay
 
@@ -1008,17 +1010,176 @@ The same reviewers cover the retained whole-model point, induced-map and
 connecting interpretations described in Section 31.10, including explicit
 coverage, unchanged selections and rejection of mismatched model inputs.
 
+<a id="homology-nonsplit-worked-example"></a>
+
+### A Nonsplit Example From Computation To Whole H
+
+Take $R=\mathbb Q[x]$ and $S=R/(x)$, always regarded as an $R$-module.
+Consider the complexes supported in degrees one and zero:
+
+$$
+A_\bullet=(R\xrightarrow{x}R),\qquad
+B_\bullet=(R\xrightarrow{x}R),\qquad
+C_\bullet=(S\xrightarrow{0}S).
+$$
+
+Multiplication by $x$ defines the inclusion $i:A_\bullet\to B_\bullet$,
+and quotient projection defines $p:B_\bullet\to C_\bullet$. In both
+supported degrees the row is
+
+$$
+0\longrightarrow R\xrightarrow{x}R\longrightarrow S\longrightarrow0.
+$$
+
+This row is nonsplit. An $R$-linear map $s:S\to R$ would satisfy
+$x s(\overline 1)=s(x\overline 1)=0$. Since multiplication by $x$ is
+injective on $R$, every such map is zero; none is a section of the quotient
+projection. The computation therefore cannot obtain its connecting map by
+choosing a linear section.
+
+The homology calculation gives
+
+$$
+\begin{aligned}
+H_1(A)&=H_1(B)=0, & H_0(A)&\cong H_0(B)\cong S,\\
+H_1(C)&\cong S, & H_0(C)&\cong S.
+\end{aligned}
+$$
+
+After omitting the leading zero terms and identifying the displayed
+homologies with $S$, the long exact sequence reads
+
+$$
+0\longrightarrow S\xrightarrow{\partial_1}S
+\xrightarrow{0}S\xrightarrow{\operatorname{id}}S\longrightarrow0,
+\qquad \partial_1=\operatorname{id}.
+$$
+
+To see the connecting map, represent a class of $H_1(C)$ by
+$\overline r$, lift it to $r\in B_1$, and apply the differential.
+The result $xr\in B_0$ is the image of $r\in A_0$, whose homology
+class is again $\overline r$. Replacing the representative by $r+xu$
+changes the resulting element of $A_0$ by the boundary $xu$, so the
+class is independent of that choice. This is a calculation with a
+representative, not a linear section $S\to R$. The native algorithm
+implements the corresponding universal lifting and descent operations.
+
+The actual matrices retain more information than this simplified display.
+The differential of $C$ is stored as $[x]$ between presentations with
+relation matrix $[x]$; it is zero as a quotient map, not as a raw matrix.
+The returned connecting and induced maps are
+
+$$
+\partial_1=[1],\qquad H_0(i)=[x],\qquad H_0(p)=[1].
+$$
+
+The selected $H_0(C)$ has one generator and relation matrix $[x\ x]$.
+Its cokernel construction retains both the original relation and the image
+of the incoming differential. The two columns generate the same relation
+submodule as $[x]$, but the result is not silently replaced by that smaller
+presentation. Neighboring windows and formal observations refer to the
+original selected object.
+
+The same distinction explains a concrete adjacent-zero witness. The
+composite $H_0(i)\circ\partial_1$ has raw matrix $[x][1]=[x]$, while
+its target $H_0(B)$ has relation matrix $\rho=[x]$. The coefficient
+matrix $[1]$ witnesses
+
+$$
+\rho[1]=[x]=[x][1]-[0].
+$$
+
+This is an instance of (31.18). Reifying the coefficient witness gives a
+formal zero-composite agreement without falsely reducing the raw matrix
+$[x]$ to zero. A relation-preservation witness for each individual arrow
+still has its separate role in (31.17).
+
+Now interpret the retained calculation in a supplied coherent model $M$.
+Its whole functor $H_M$ is the construction of Section 31.4, obtained by
+applying the whole cokernel functor to the boundary diagram. In particular,
+the two inputs relevant to the nonzero connecting map are
+
+$$
+H_1(C):\quad 0\longrightarrow S\xrightarrow{[x]}S,
+\qquad
+H_0(A):\quad R\xrightarrow{[x]}R\longrightarrow0.
+$$
+
+The original raw arrows and chain agreement introduce each input into the
+native zero-diagram category. Applying $H_M$ gives its formal homology
+point. Applying the Hom action of $H_M$ to an introduced chain map gives
+the formal induced map. The connecting component has those whole-H points
+as its source and target; its family-level owner is the actual connecting
+transformation of Section 31.9. No second H object is chosen merely to
+state the component.
+
+For this example the proof-CAS workflow first replays the whole categorical
+program and checks agreement with the selected result. Explicit adoption
+then makes the computed equations available in the proof environment.
+The formal constructors build the bounded raw sequence and its six
+interior homology/exactness pairs from the retained maps, boundary witnesses
+and selected universal-provider contracts.
+
+The model-observation stage adds a different kind of binding. Write $P_z$
+for the reified selected homology presentation of an input $z$, and
+$\operatorname{obs}(f)$ for a complete arrow observation in the existing
+arrow-object carrier: source, target and arrow together. The bindings have
+the form
+
+$$
+H_M[z]=P_z,\qquad
+\operatorname{obs}(\partial_{1,M})
+=\operatorname{obs}(\partial_{1,\mathrm{native}}).
+$$
+
+Here the native arrow is the reified $[1]$ between the two retained
+homologies. These are explicitly adopted model interpretations, not new
+runtime rewrites that make every occurrence of $H_M$ call the CAS. The
+coherent model and its normality enhancement remain supplied inputs.
+
+The complete consumer keeps eighteen H observations: twelve degreewise
+points for the three complexes in degrees $-1,0,1,2$, and six homologies
+of the adjacent pairs in the long exact sequence used to express interior
+exactness. It also retains eight degreewise induced-map observations and
+three connecting observations. Only the connecting map at degree one is
+nonzero. All seven displayed arrows refer to these original observations.
+During interpretation the test forbids calls that would rerun homology,
+connecting or the kernel/weak-pullback algorithms; mismatched selections
+are rejected and existing adopted claims are reused.
+
+The runnable entry is `polynomialFreydHomologyFixture('two')`. Its fixture,
+displayed-matrix regression and complete formal/model consumer are,
+respectively:
+
+- `tests/v3_2_algebra_polynomial_freyd_homology_fixtures.ts`
+- `tests/v3_2_algebra_polynomial_freyd_long_exact_tests.ts`
+- `tests/v3_2_algebra_formal_freyd_long_exact_homology_tests.ts`
+
+> **Formal status — mathematical development.** This worked module
+> calculation is exercised by the named native regression and formal/model
+> consumer. It illustrates the checked conditional interfaces above; it
+> is not a closed construction of the supplied model, a correctness proof
+> for all native algorithms, or a proof of the deferred symbolic endpoint
+> theorem. The native result retains its two actual outside-support zero
+> homologies and their witnesses.
+
 ## 31.12 Boundaries Of The Integration
 
 The generic and selected-result developments now meet at a useful
 computational interface, but their conclusions must be kept separate.
 
-| Layer | What is available | What it does not supply automatically |
-| --- | --- | --- |
-| Whole formal H and connecting | Coherent K/Q presentations, derived H, a direct connecting component and a whole transformation | A coherent presentation for every older universal-operation family |
-| Generic exactness and finite assembly | Three exact window interiors and a field-indexed iterator retaining their arrows and evidence | The final conventional zero-ended symbolic theorem |
-| Native bounded computation | The complete selected sequence, interior witnesses and actual outside-support zero data | A theorem for every category from tests of this implementation |
-| Retained proof-CAS interpretation | Formal raw terms, selected interior exactness, and supplied-model H/map/connecting observations | Arbitrary quotient-witness extraction or an automatically constructed closed model |
+- Whole formal H and connecting use coherent K/Q presentations, a derived
+  H and a whole connecting transformation. They do not construct a coherent
+  presentation for every older universal-operation family.
+- Generic exactness supplies three exact window interiors and a finite
+  iterator retaining their arrows and evidence, not the final conventional
+  zero-ended symbolic theorem.
+- Native bounded computation supplies the complete selected sequence,
+  interior witnesses and outside-support zero data. Its tests do not prove
+  a theorem for every category.
+- Retained proof-CAS interpretation supplies formal raw terms, selected
+  interior exactness and model H/map/connecting observations. It does not
+  extract arbitrary quotient witnesses or construct a closed model.
 
 The remaining endpoint issue is an interface problem, not an absent native
 endpoint calculation. Separate formal zero-object lemmas are available, but

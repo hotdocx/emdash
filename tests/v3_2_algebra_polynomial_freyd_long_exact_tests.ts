@@ -17,6 +17,7 @@ import {
     algebraPolynomialFreydHomologyWindow
 } from '../src/v3_2/algebra_polynomial_freyd_homology_window';
 import { serializeAlgebraPolynomialFreydHomologyWindow } from '../src/v3_2/algebra_polynomial_freyd_homology_window_serialization';
+import { algebraPolynomialText } from '../src/v3_2/algebra_polynomial';
 import {
     polynomialFreydHomologyFixture as fixture,
     isPolynomialFreydMorphismZero as isZero
@@ -28,6 +29,37 @@ const indexError = (error: unknown) => error instanceof AlgebraPolynomialFreydLo
     ['DEGREE_OUT_OF_RANGE', 'POSITION_OUT_OF_RANGE', 'INVALID_ROLE'].includes(error.code);
 
 describe('v3.2 bounded long exact polynomial Freyd homology', () => {
+    it('matches the book nonsplit calculation at the retained presentation matrices', () => {
+        const sequence = fixture('two');
+        const result = algebraPolynomialFreydBoundedLongExactHomology(sequence);
+        const columns = (map: (typeof result.arrows)[number]['map']) =>
+            map.columns.map(vector => vector.components.map(algebraPolynomialText));
+        const quotientDifferential = sequence.quotientComplex.differentials[0].morphism;
+        assert.deepEqual(columns(quotientDifferential.map), [['1*x']]);
+        assert.equal(isZero(quotientDifferential), true);
+        assert.deepEqual(result.terms.map(term => [term.degree, term.role]),
+            [[2, 'C'], [1, 'A'], [1, 'B'], [1, 'C'], [0, 'A'], [0, 'B'], [0, 'C'], [-1, 'A']]);
+        assert.deepEqual(result.terms.map(term => term.view.homology.homologyObject.ambient.rank),
+            [0, 0, 0, 1, 1, 1, 1, 0]);
+        assert.deepEqual(result.terms.slice(3, 7).map(term =>
+            term.view.homology.homologyObject.relations.generators.map(vector => vector.components.map(algebraPolynomialText))),
+        [[['1*x']], [['1*x']], [['1*x']], [['1*x'], ['1*x']]]);
+        assert.equal(result.arrows[3], result.windows[1].connecting.homologyMap);
+        assert.deepEqual(result.arrows.slice(3, 6).map(arrow => columns(arrow.map)),
+            [[['1']], [['1*x']], [['1']]]);
+        assert.deepEqual(result.arrows.map(isZero), [true, true, true, false, true, false, true]);
+        // H0(i) after delta1 is raw [x], killed by the target relation [x].
+        const agreement = result.interior[3].pair.chainAgreement;
+        assert.deepEqual(columns(agreement.left), [['1*x']]);
+        assert.deepEqual(columns(agreement.right), [['0']]);
+        assert.deepEqual(columns(agreement.agreementWitness), [['1']]);
+        assert.deepEqual(columns(agreement.targetAfterWitness), [['1*x']]);
+        assert.equal(agreement.agrees, true);
+        assert.equal(result.interior.length, 6);
+        assert.ok(result.interior.every(point => point.exactness.exact && point.exactness.epimorphism));
+        assert.ok(result.endpoints.initialZero.agrees && result.endpoints.finalZero.agrees);
+    });
+
     it('constructs every displayed term, arrow, zero pair, and exactness witness', () => {
         const sequence = fixture('boundary');
         const result = algebraPolynomialFreydBoundedLongExactHomology(sequence);

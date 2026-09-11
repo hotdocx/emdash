@@ -756,7 +756,8 @@ quotient maps has separate coefficient witnesses. See
 **Selected homology.** A retained cycle kernel, the incoming differential
 lifted into it, and the cokernel of that boundary. Maps and exactness refer
 to these same choices. Whole H is the primary coherent-family interface;
-its record views retain the actual H objects. See [Chapter 31](#chapter-31).
+its record views retain the actual H objects. See [Chapter 31](#chapter-31)
+and the [worked nonsplit example](#homology-nonsplit-worked-example).
 
 <a id="glossary-coherent-kernel-presentation"></a>
 

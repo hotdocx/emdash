@@ -6,6 +6,81 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: completed user-directed remainder on the dedicated branch/worktree; final symbolic endpoint theorem deferred
 
+## Book Follow-Up: One Nonsplit Calculation
+
+2026-09-11, requested after the completed goal: integrate the accepted
+walkthrough of `polynomialFreydHomologyFixture('two')`. Decision response
+`0215_2026-09-11T08-15-25Z_01a08f83-b03a-73c3-8ad7-5c601a05225d.md`
+is preserved in the session archive; active source and the native rerun
+remain the computation authority. This is a bounded exposition/test
+follow-up, not resumption of the endpoint investigation or the persistent
+goal.
+
+At `3de4f861`, Chapter 31 named the fixture and its consumer but did not
+walk through the example. This follow-up adds one worked subsection at the
+end of 31.11, after both the generic whole-H story and the provider/model
+distinctions have been explained. The bounded-computation discussion and
+selected-homology glossary link to it. Existing section/equation numbers
+are preserved.
+
+The example must show:
+
+- R = ℚ[x], S = R/(x), the two copies of R ─x→ R, their quotient
+  complex, and why each supported row is nonsplit;
+- the nonzero connecting matrix [1], the induced [x] that is zero modulo
+  relations, and the retained H0(C) presentation with relations [x,x];
+- one actual adjacent-zero coefficient witness, not a claim that the raw
+  composite matrix is literally zero;
+- whole H as Q applied to the whole boundary diagram, and original raw
+  chain inputs/induced maps as observations of that same functor;
+- explicit equation adoption, retained universal-provider semantics and
+  whole-model interpretation, without presenting a supplied model as an
+  automatically constructed closed model or an automatic CAS rewrite;
+- the 18 point/eight map/three connecting observations in the existing
+  formal consumer, with their distinct roles and no reselection; and
+- the unchanged symbolic endpoint and inherited foundational boundaries.
+
+Add a focused native regression for the exact matrices/presentations printed
+in the example. No algorithm, LF declaration, rule, unifier or formal model
+consumer changes are needed. Preserve the prior PDF and export a new local
+`0.8.2-dev` draft through the owning renderer. Validate the affected native
+test file and its lint, book source/evidence/typography, bounded production
+render/PDF, determinism, affected-page visual review and document hygiene.
+Do not run unrelated aggregates, publish, merge or reopen checker work.
+
+Authoring and regression qualification:
+
+- The affected native test file passes all twelve tests, including the new
+  exact-matrix/presentation/witness regression. The complete run took
+  19.69 seconds under a 2 GiB/no-swap cgroup and 90-second command bound;
+  affected-file ESLint also passes. The native algorithms, formal model
+  consumer, LF owners and renderer sources are unchanged.
+- Book source/evidence/typography pass: 46 sources, 184 cited claims and
+  3,397 math spans. No new external prose/code or third-party adaptation
+  was introduced. The existing reference and conditional-interface evidence
+  remain authoritative; the concrete calculation is explicitly labelled
+  mathematical development with its native/formal consumer evidence.
+- PDF review refined the long source references into a readable list and
+  replaced the following short boundary table by a four-item summary to
+  avoid an orphaned table header. All four scope distinctions remain.
+  No renderer or global pagination policy changed.
+
+Final artifact qualification: local `book:release` source/build/browser/PDF
+checks pass under the 3 GiB/no-swap scope. The unchanged Vite large-chunk
+warning is retained; no browser console, page, request or render error
+occurred. Two final exports of the same build produce SHA-256
+`eca5d51db8a13af2263c218f0f7c5adf613b863248e8e59df3b891f8cc2dc13e`:
+409 tagged Letter pages and 19 embedded fonts. Visual review covers the
+title, forward reference, all three worked-example pages (267–269), the
+following boundary summary, notation and glossary. The orphaned table
+header and stretched source-reference paragraph are resolved. Earlier
+`0.8.1-dev` and `0.8.0-dev` PDFs remain preserved; no artifact is promoted
+or published. The standing book report/index are synchronized, and local
+reference, report-header and exact-diff checks pass.
+
+Status: complete; local book/test checkpoint only. The persistent goal and
+its explicitly deferred endpoint/variance work are not reopened.
+
 ## Final Remainder Closure
 
 2026-09-11: the requested remainder is complete, subject to the explicit

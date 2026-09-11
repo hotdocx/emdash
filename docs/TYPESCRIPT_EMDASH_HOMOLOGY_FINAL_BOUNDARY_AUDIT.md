@@ -4,6 +4,13 @@ Date: 2026-09-11
 Goal: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 Status: complete for the user-directed remainder; symbolic endpoint attachment explicitly deferred
 
+Book follow-up: the later local `0.8.2-dev` draft adds the worked nonsplit
+example and its native matrix regression. Its qualification is recorded in
+the [book follow-up ledger](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#book-follow-up-one-nonsplit-calculation).
+The implementation audit and `0.8.1-dev` closure evidence below remain the
+original snapshot; no formal/CAS library or model consumer changed in that
+exposition follow-up.
+
 ## Scope After The User's Deferral
 
 The user explicitly deferred the symbolic endpoint-proof attachment and
