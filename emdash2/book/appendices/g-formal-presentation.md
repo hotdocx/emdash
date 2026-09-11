@@ -958,6 +958,46 @@ Frobenius coherence of a convention-sensitive LCCC package.
 > reviewer. They establish the displayed local cut computations, not global
 > existence, a free syntax, or coherence layers explicitly listed as future.
 
+### Whole Homological Operations And Their Record Views
+
+[Chapter 31](#chapter-31) uses the same declaration/observation discipline
+for homology. The kernel and cokernel presentations supply actual functors
+and adjunctions over retained universal-operation families. Whole H is a
+definition from those owners, while its operational records are views at
+the actual selected objects.
+
+| Interface | Principal owner | Computational boundary |
+| --- | --- | --- |
+| Coherent kernels and cokernels | `KernelPresentation`, `CokernelPresentation` | Whole adjunction cuts and proof-time agreement with original selections; coherent structure is supplied |
+| Whole one-degree H | `homology_family_func`, `zero_arrow_cone_homology_func` | Derived from the whole boundary and Q; generic functor and further Hom action remain available |
+| Connecting family | `homology_window_connecting_transf` | Component beta returns the direct construction at the same H endpoints |
+| Finite exact tail | `homology_row_field_span_exact_tail` | Nat iteration over coherent rows retains existing arrows and interior evidence; final symbolic endpoint attachment is deferred |
+| Supplied Freyd model | `FreydHomologyModel` | Actual H observations and normality-indexed connecting observations; no automatic closed-model construction |
+
+The input zero diagrams and row maps use actual internal functors and
+transformations. They are not a new record grammar of manually supplied
+commuting squares. The whole connecting transformation is declared with
+its source and target functors, then related to the direct component by
+projection computation. The surrounding universal-record reconstructions
+and exactness laws remain explicit proofs; the presence of whole operations
+does not turn every such proof into a runtime rewrite.
+
+The proof-CAS layer interprets selected observations through explicit
+bindings and adoption. Computed equations, all-test provider semantics and
+whole-model interpretations retain separate classifications. This is a
+reviewed interface to the native algebra engine, not unrestricted execution
+of arbitrary formal terms or a claim of whole-library TypeScript transfer.
+
+<!-- evidence:WHOLE-KERNEL-COKERNEL-PRESENTATIONS -->
+<!-- evidence:WHOLE-HOMOLOGY-FUNCTOR -->
+<!-- evidence:HOMOLOGY-CONNECTING-TRANSFORMATION -->
+<!-- evidence:HOMOLOGY-BOUNDED-ITERATOR -->
+<!-- evidence:FREYD-WHOLE-HOMOLOGY-MODEL -->
+
+> **Formal status — checked.** The cited owners and reviewers establish
+> these conditional interfaces and their selected computations. Their
+> coherent-model premises and the deferred endpoint theorem remain explicit.
+
 <a id="appendix-formal-presentation-g5"></a>
 
 ## G.5 Elaboration And Canonical Surface Syntax

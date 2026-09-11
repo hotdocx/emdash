@@ -312,6 +312,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   The packed-state result comparison still has an expanded H(inclusion)
   index timeout and is not promoted. This is the iterator implementation
   layer, not the final zero-padded bounded theorem or its public interface.
+  Current closure (2026-09-11): the user explicitly deferred that final
+  symbolic endpoint attachment and further LF/checker debugging. The
+  field-indexed iterator, complete native result and retained whole-model
+  point/map/connecting interpretation are the qualified baseline. The
+  book/audit remainder is complete; see
+  `../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md` for the
+  current owner, validation and trust boundaries. Earlier pending-step
+  descriptions above record construction order, not unfinished requirements.
+  Preserve the archived representation/checker experiments and the later
+  primitive-projection record option; do not restart them without a new
+  request or claim that this closure repairs the inherited variance defects.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not

@@ -4472,8 +4472,8 @@ compute the retained fields, and Nat recursion appends over the same boundary
 arrow. The checked two-window example retains eight objects, seven arrows
 and all six original interior proofs, with no endpoint casts or new universal
 choices. This is result packaging, not a new category of complexes or a
-replacement H. General bounded row iteration and the outside-support zero
-evidence remain the next formal assembly layer.
+replacement H. The coherent bounded row iteration is described below;
+the final outside-support endpoint attachment is a separate interface.
 
 The coherent bounded input now retains a sliding three-row state: actual
 row-family functors, the transformations between them, and the original
@@ -4496,14 +4496,21 @@ window extension; it is ordinary finite-data elimination, not a new law for
 homology. The two-window consumer retains all seven arrows and six original
 exactness annotations. No equality-proof-erasing unifier is required.
 
-The direct field-indexed entry is the checked implementation candidate.
+The direct field-indexed entry is the checked implementation interface.
 Comparing its result with a packed-state convenience wrapper still exposes
 an expensive H(inclusion) index; that wrapper is not a second H or a promoted
 computation rule. Prefix trimming retains every earlier arrow and annotation.
 For the remaining endpoint application, a short exact row's zero middle
 term also gives zero identity on its original outer terms by mono/epi
 cancellation. The conventional zero-padded bounded result and its final
-public interface are not supplied merely by the iterator.
+public interface are not supplied merely by the iterator. The user has
+deferred this final symbolic endpoint attachment and its LF investigation;
+the checked iterator, complete native result and retained proof-CAS model
+interpretation remain the current computational baseline. Record structures
+with primitive projections are retained as a later design option, not
+rejected by the narrow failed experiments. The
+[current boundary audit](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+records the implemented formal and proof-CAS interfaces.
 
 The complete native long-exact calculation also has an independent
 constant-field comparison. Over Q itself, a field-linear implementation

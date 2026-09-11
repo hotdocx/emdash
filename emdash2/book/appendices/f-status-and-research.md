@@ -4,8 +4,9 @@
 
 This appendix summarizes the boundary of the higher-categorical development
 edition through the seventh, additive and homological spiral. The generated
-[evidence register](#appendix-evidence) remains the detailed claim-by-claim
-authority.
+[evidence register](#appendix-evidence) provides the detailed claim-by-claim
+traceability view; active declarations and their checked consumers remain
+the implementation authority.
 
 ## F.1 Status Matrix
 
@@ -27,7 +28,7 @@ authority.
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Monads and cartesian/indexed structure | Whole monad extension with ambient beta/accumulation; selected triangular products and terminality; chosen pullback base change with point/whole mates; selected dependent products and $\Sigma_u\dashv u^*\dashv\Pi_u$ | No free-monad syntax, explicit Kleisli category, automatic weighted-product witness, pushout duality, Beck–Chevalley, Frobenius, derived slice exponentials, or final convention-sensitive LCCC package |
 | Additive and Abelian structure | Abelian Hom groups, selected biproducts and zero objects; contractible kernel/cokernel factors; normality, coimage-image isomorphism, fibre products, pushouts and stability | The concrete witnessed Freyd interface does not decode arbitrary quotient paths or supply a closed ring-wide Abelian capability |
-| Snake and homological computation | Generic six-term snake with four interior exactness proofs; selected homology maps; native bounded long exact sequences; constructed formal interior homology/exactness and typed raw witnesses relative to explicit adoption | Generic homology-window and bounded long-exact proofs remain in progress; no universal-diagram prover, derived category or spectral-sequence theory is claimed |
+| Snake and homological computation | Generic six-term snake; coherent K/Q presentations and derived whole H on native zero diagrams; direct and whole connecting interfaces; three exact window interiors and finite iteration; retained native/model computation | Final symbolic zero-endpoint attachment is deferred; coherent presentations/normality stay explicit; no closed model, universal-diagram prover, derived category or spectral-sequence theory is claimed |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
 | Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
 | Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
@@ -67,14 +68,20 @@ prove its identity and composition laws by whole uniqueness, and only then
 package the adjunction with the path-category functor. The mapping theorem
 should not be renamed an adjunction before that source action exists.
 
-The homological continuation has a separate next theorem. The generic
-six-term snake must be related to the actual homology objects at neighboring
-degrees, with the required normal test and source-boundary annihilation
-proved before factorization and descent. Native long exact computations
-and their selected formal reconstruction already exercise this design,
-but do not discharge the generic proof. A whole internal category of
-complexes and homology functor is another explicit interface beyond the
-currently checked map operations and paths.
+The homological continuation now has whole K/Q presentations, derived
+one-degree H on the native zero-cone category, a direct connecting component
+and its whole transformation. The required normal tests and source-boundary
+annihilation are proved, as are all three window interiors. A field-indexed
+finite iterator retains those exactness results and their actual arrows.
+
+The remaining symbolic zero-endpoint attachment has been deferred separately
+from these checked constructions. Native bounded computation already retains
+its endpoint zero data, and the supplied-model interface interprets all
+retained H points/maps and connecting windows when normality is provided.
+More economical structure/record encodings with primitive projections remain
+a later interface-design option. Neither this option nor the current whole
+one-degree H should be mistaken for a packaged category of all unbounded
+complexes or a general homological normalization theorem.
 
 ## F.3 Foundational Extensions
 
@@ -148,6 +155,15 @@ stated fragment: typing, substitution, subject reduction, normalization or a
 weaker operational theorem, and interpretation in a suitable strict/lax
 omega-categorical model. The current executable artifact is evidence for
 specific interfaces, not a substitute for that theorem.
+
+There are also known defects, not merely missing metatheorems. Variance
+diagnostics for the current whole opposite action and Sigma-Hom encoding
+can construct an inhabitant of the encoded empty type. These are tracked
+encoding defects, not admitted mathematical principles. Consequently,
+“checked” in this development edition records typechecking and specified
+computations in an experimental calculus; it is not a soundness certificate
+for arbitrary consequences. Repair of these encodings remains a separate
+foundational task.
 
 The renewed TypeScript product now elaborates a bounded direct-TypeScript and
 categorical-text surface into backend-neutral explicit Core, then checks and

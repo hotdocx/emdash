@@ -755,7 +755,24 @@ quotient maps has separate coefficient witnesses. See
 
 **Selected homology.** A retained cycle kernel, the incoming differential
 lifted into it, and the cokernel of that boundary. Maps and exactness refer
-to these same choices. See [Chapter 31](#chapter-31).
+to these same choices. Whole H is the primary coherent-family interface;
+its record views retain the actual H objects. See [Chapter 31](#chapter-31).
+
+<a id="glossary-coherent-kernel-presentation"></a>
+
+**Coherent kernel/cokernel presentation.** Supplied whole functors and
+adjunctions over the original selected universal operations, with
+proof-time usability for their observations. Such a presentation is
+additional coherent structure, not a consequence of finitely many computed
+matrix equations. See [Chapter 31](#chapter-31).
+
+<a id="glossary-whole-homology"></a>
+
+**Whole homology.** The functor obtained by forming the boundary
+transformation through K and applying Q to its arrow-diagram family. On
+the native zero-cone category this is a whole one-degree homology functor;
+it is not an unbounded-complex or global graded-homology package. See
+[Chapter 31](#chapter-31).
 
 <a id="glossary-local-factor-cover"></a>
 

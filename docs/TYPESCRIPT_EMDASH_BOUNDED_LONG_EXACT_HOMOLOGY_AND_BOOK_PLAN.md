@@ -4,7 +4,47 @@ Date: 2026-09-03
 
 Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
-Status: active on a dedicated branch/worktree
+Status: completed user-directed remainder on the dedicated branch/worktree; final symbolic endpoint theorem deferred
+
+## Final Remainder Closure
+
+2026-09-11: the requested remainder is complete, subject to the explicit
+endpoint deferral below. The checked mathematical baseline remains
+`ff139362`, the retained all-window model integration remains `09f9dd1a`,
+and `29df63dd` preserves the final endpoint/checker experiments without
+promoting them. No mathematical or TypeScript implementation changed in the
+closing book/audit tranche.
+
+Chapter 31 now makes coherent K/Q presentations, derived whole H and the
+direct/whole connecting interface primary. It states the three checked
+window interiors and finite iterator separately from the deferred final
+zero-ended symbolic theorem. The appendices and evidence registry retain
+the same computational, model-semantics and inherited soundness boundaries.
+The [final boundary audit](TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+maps the completed interfaces, concrete consumer coverage and successor
+obligations to their implementation owners.
+
+Closing validation:
+
+- 23 fresh focused native/categorical/differential tests pass in 37.31s
+  under the serial 2 GiB/no-swap bound; unchanged formal/model qualification
+  is carried forward by exact source comparison.
+- Book source/evidence/typography checks pass: 46 sources, 184 cited claims
+  and 3,344 math spans. Local production/render/PDF checks pass for
+  `0.8.1-dev`, dated 2026-09-11: 407 tagged Letter pages and 19 embedded fonts.
+- Two final exports are byte-identical, SHA-256
+  `703f9b80ced232d77cca833e332fcb932b724f8fef3326480e75741c39c4427b`.
+  All Chapter 31 pages and the affected appendix/title pages were visually
+  reviewed. The PDF is local and unpromoted; the prior draft is preserved.
+- Report/link/diff hygiene and the source-only health exception are recorded
+  in the audit. No unrelated aggregate, new LP probe, private-checker change,
+  publication, merge or cleanup was performed for this closure.
+
+The older progress and diagnostic paragraphs below are retained history.
+They do not automatically reopen a completed row or the user-deferred
+endpoint investigation. A later request can select the record/projection
+redesign, a broader computational calculus, or a foundational repair with
+its own bounded plan; none is silently included in this completion.
 
 ## Current User Direction: Finish The Remainder, Defer Endpoint Debugging
 
@@ -1839,6 +1879,22 @@ categorical, formal, or proof–CAS result may depend on its availability.
 
 ## Book Architecture And Content
 
+Final remainder tranche (2026-09-11): retain Sections 31.1–31.3 and the
+independent snake theorem, then make coherent J/K and Q/I presentations,
+the native one-degree zero-cone category and the derived whole H central
+to 31.2/31.4. Rewrite 31.9 around the direct connecting construction,
+the three checked window interiors and declaration-backed whole delta;
+describe the native snake trace as an implementation strategy, not the
+public formal interface. Present the qualified Nat iterator without
+claiming the deferred final zero-endpoint attachment. Extend 31.10–31.11
+with the retained whole-model point/map/connecting interpretation and its
+explicit normality/adoption boundary. Replace the stale open-window claims
+in 31.12 and Appendices E/F, synchronize notation/glossary/evidence, and
+keep inherited foundational soundness qualifications explicit. Use a new
+local draft artifact version, preserving the old PDF. Carry forward exact
+unchanged mathematical validation; run the owning book checks and bounded
+render/export, not an unrelated repository aggregate.
+
 The current book ends with Chapter 30 and has no dedicated additive or
 homological-algebra chapter. Add Chapter 31, provisionally titled:
 
@@ -2119,7 +2175,7 @@ was introduced to get a passing target.
 | `LEH-SOURCE-CYCLE-BOUNDARY-7D3B1` | complete; checkpoint `d71683ae` | 7D3A and original source-cycle isomorphism | retain that isomorphism as a whole Hom factor and compose it with the supplied source homology's original boundary |
 | `LEH-HOMOLOGY-CONNECTING-DESCENT-7D3C` | complete; promoted owners and independent reviewers pass quiet/warning gates | 7D2 and 7D3B | compose the source-cycle comparison with the target factor and descend through the original source boundary cokernel |
 | `LEH-WINDOW-EXACTNESS-7D4` | all adjacent-zero laws and all three interior exactness witnesses qualified | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18, HINT-WINDOW-EXACT-FIRST-19, HINT-WINDOW-EXACT-SECOND-20, HINT-WINDOW-EXACT-THIRD-21 and reusable cover lemmas | exactness at the three actual window interiors, without changing any H object or map |
-| `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
+| `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | retained auxiliary probes; promotion deferred unless a consumer needs the older map interface, superseded here by whole-H window zero owners | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
 | `LEH-LONG-EXACT-8` | native assembly and generic field-indexed bounded iterator qualified; final symbolic endpoint-proof attachment deferred by user on 2026-09-11 | native 7A/7E; generic exactness additionally requires 7D | bounded computation with retained interior exactness; report the deferred formal endpoint theorem separately |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
@@ -2129,7 +2185,7 @@ was introduced to get a passing target.
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
-| `LEH-FORMAL-11` | in progress; actual interior homology/exactness constructed, full boundary audit pending | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
+| `LEH-FORMAL-11` | complete and audited in the final boundary report; supplied-capability and quotient-effectiveness distinctions retained | witnessed formal Freyd capabilities | maximal capability-indexed formal result with explicit effective agreements |
 | `LEH-FORMAL-RAW-SPINE-11A` | complete; checkpoint `c2358476` | 12A, existing formal presentation and bounded-chain constructors | actual checked formal bounded Freyd sequence from selected data/equations, with explicit index reversal; no exactness or weak-kernel provider inferred |
 | `LEH-FORMAL-BOUNDARY-EPIC-11B` | complete; checkpoint `c0040858` | 11A and existing witnessed epimorphism/block operations | existing formal epicity witness at an actual native boundary; no W or chain-exactness claim |
 | `LEH-FORMAL-BOUNDARY-FAMILY-11C` | complete; checkpoint `5d2f8869` | 11B, actual whole replay and retained interior homologies | constructed epicity witnesses for all interior boundaries, reusing exact adopted claims and explicitly adding missing semantic equations |
@@ -2138,13 +2194,13 @@ was introduced to get a passing target.
 | `LEH-FORMAL-SELECTED-HOMOLOGY-11F` | complete; checkpoint `9dc9b316` | 11D and witnessed cokernel/epimorphism owners | shared per-choice homology and exactness interfaces, retaining an actual boundary and reconstruction; old W API delegates without changing public signatures |
 | `LEH-FORMAL-ACTUAL-INTERIOR-EXACTNESS-11G` | complete; checkpoint `a8356452` | 11A/11C, 11E/11F and actual whole replay | construct selected homology and exactness terms for every retained interior pair using the actual provider choices, boundary and adopted agreements |
 | `LEH-FORMAL-RAW-WITNESS-INVENTORY-11H` | complete; checkpoint `933aa435` | retained 12A inventory and original presentation/aggregate constructors | expose all retained morphism and agreement entries as actual typed raw terms, without new adoption or kernel selection |
-| `LEH-BRIDGE-12` | whole replay, actual formal interiors and complete bounded model point/induced/connecting inventory qualified; final formal-boundary audit remains | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
+| `LEH-BRIDGE-12` | complete and audited: whole replay, actual formal interiors and bounded model point/induced/connecting coverage, with explicit trust and normality | rows 9–11 | proof–CAS replay/adoption of whole result and exact selected equations |
 | `LEH-BRIDGE-SELECTED-12A` | complete; checkpoint `9a1381ab` | row 10 and existing formal equation/adoption interfaces | selected end-to-end proof–CAS baseline with one whole replay and explicit adoption of the indexed equations; no generic quotient effectiveness claim |
 | `LEH-DIFFERENTIAL-13` | complete; checkpoint `1b36d4f9` | field/CAP references | quotient-coordinate differential with no runtime dependency |
-| `LEH-BOOK-14` | in progress; current checked draft integrated; final generic-theorem updates remain | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
+| `LEH-BOOK-14` | complete; local 0.8.1-dev source/render/PDF and affected-page visual checks pass; final endpoint theorem explicitly deferred | checked rows 2–13 | Chapter 31, appendices, evidence/provenance, focused book checks and render |
 | `LEH-BOOK-DRAFT-14A` | complete; checkpoint `365b60fd`; local 0.8.0-dev export and visual checks green | checked owners and reviewed claim boundaries | Chapter 31, all planned appendices, 13 new evidence entries and reference provenance; generic-window/bounded-proof boundaries stated explicitly |
-| `LEH-CONSOLIDATE-15` | pending | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
-| `LEH-CLOSE-16` | pending | all scoped rows | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
+| `LEH-CONSOLIDATE-15` | complete; final boundary audit, standing reports and artifact/ledger synchronized | architecture findings | necessary corrections complete; broader side tasks recorded without orthogonal expansion |
+| `LEH-CLOSE-16` | complete for the user-directed remainder; final local book/audit checkpoint records closure | all scoped rows, with explicit user deferral of 8D | authorities, validation evidence, checkpoints, health exception audit, successor boundary |
 
 Rows may be split or reordered when an owner-position audit refines the
 dependency graph. A row may be rejected or deferred only with durable evidence
@@ -4280,6 +4336,13 @@ Refine or reject a candidate when it:
 
 ## Completion Boundary
 
+Apply the explicit 2026-09-11 user deferral at the top of this plan: the
+final symbolic zero-endpoint attachment and LF investigation are not a gate
+for completing the requested remainder. They must remain visible as
+deferred, never reported as proved. The
+[final boundary audit](TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+records the implementation evidence and qualifications.
+
 The goal is complete only when:
 
 - the complete generic six-term snake sequence and its four interior exactness
@@ -4289,8 +4352,10 @@ The goal is complete only when:
 - degreewise short-exact bounded complexes are available;
 - one five-term homology window solves the snake-to-homology endpoint bridge and
   is exact at all three interior terms;
-- the entire bounded long exact homology sequence is assembled with endpoint
-  zeros and exactness at every displayed interior term;
+- the native bounded long exact sequence retains actual endpoint-zero data
+  and every interior witness, and the generic formal finite-window iterator
+  retains its original arrows and interior evidence; the final conventional
+  symbolic endpoint-proof attachment is explicitly user-deferred;
 - a genuinely nonsplit multi-degree polynomial Freyd example computes;
 - categorical direct and compiled execution agree canonically;
 - the witnessed formal boundary checks without quotient decoding;

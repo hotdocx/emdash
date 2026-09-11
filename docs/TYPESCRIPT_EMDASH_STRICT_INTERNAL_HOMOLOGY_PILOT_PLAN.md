@@ -2,7 +2,26 @@
 
 Date: 2026-09-08
 
-Status: active; native whole H/window and all-degree retained model connecting consumer qualified; generic bounded formal assembly next; general op repair deferred
+Status: completed scoped pilot and parent remainder; final symbolic endpoint attachment and general op/Sigma repair deferred
+
+## Final Scoped Status
+
+2026-09-11: the parent goal's requested remainder is complete. The native
+whole H, direct/whole connecting interface, all three window interiors,
+retained all-window model interpretation and field-indexed finite iterator
+remain the qualified baseline. The final symbolic zero-endpoint attachment
+and its LF investigation were explicitly deferred by the user. No private
+checker patch or experimental degree/role replacement is promoted.
+
+The closing Chapter 31/appendix update and local `0.8.1-dev` PDF describe
+these interfaces and their limits. The
+[final boundary audit](TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+records the actual consumer coverage, validation and supplied-model trust
+boundary. Its ordinary-target qualification is not a soundness claim for
+the inherited op/Sigma defects. The later primitive-projection record
+alternative and all rejected experiments remain available for a separately
+requested continuation. Historical next-step paragraphs below do not reopen
+that investigation automatically.
 
 Known limitation: [the internal-op empty-type diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 is confirmed on the committed core and both reference baselines. Its general
@@ -13,8 +32,9 @@ and native whole homology in the ordinary-target profile are active. The
 retained-selection bounded CAS consumer is qualified at the explicit model-
 interpretation boundary. All three generic window interiors and the whole
 connecting interface and all-degree retained connecting integration are
-qualified. Bounded formal assembly and final book/audit remain open; arbitrary
-omega-target homology is not asserted by this specialization.
+qualified. The field-indexed bounded iterator and final book/audit are also
+complete; the symbolic endpoint attachment is deferred. Arbitrary omega-target
+homology is not asserted by this specialization.
 
 Parent: [bounded long exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
@@ -126,13 +146,13 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-EVAL-1` | complete; checkpoint `e8af9cfc` | whole varying-shape evaluation, component/mixed computation and retained next Hom action |
 | `HINT-ARROW-2` | whole natural-family route and terminal/initial embeddings implemented | actual eta:F⇒G yields K→Arr(C); whole observations recover F/G/eta and retained higher action; no raw mapping-category inverse claimed |
 | `HINT-UNIVERSAL-3` | selected presentations, mates and whole-owned records qualified, with explicit bounded model interpretation; no automatic provider synthesis claimed | whole kernel/cokernel interfaces with actual universal transformations, selected choices and justified capability boundary |
-| `HINT-COMPLEX-4` | native global H, complete raw entry and bounded point/map CAS observations qualified; connecting/window continuation separate | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
+| `HINT-COMPLEX-4` | native whole H, complete raw entry and bounded point/map/connecting CAS observations qualified in the ordinary-target profile | bounded three-term complex category and whole H; identity, nonidentity composition, differential/reconstruction computation and retained higher action |
 | `HINT-COMPLEX-4A` | triangle alternative preserved; selected global implementation is the native zero-cone category in row 15 | globalize the native zero-triangle with correct flag variance and genuine chain-map Homs; do not require an ordinal/join interpretation as a prerequisite |
 | `HINT-COMPLEX-4B` | original components and native map entry qualified in row 16; no separate global legacy-map category required | re-present the existing chain-map factors through the derived cubical/internal-Hom owners, retaining the shared middle component and zero compatibility |
-| `HINT-CONSUMER-5` | complete retained degree/interior point and induced-map consumer qualified; final performance/architecture audit remains | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
-| `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror remains experimental | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
-| `HINT-SOUNDNESS-7` | general repair explicitly deferred; local non-reliance review remains | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
-| `HINT-RECOVERY-8` | structural evaluation qualified and promoted at `b4d92521`; zero-complex continuation active | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
+| `HINT-CONSUMER-5` | retained all-degree point/induced/connecting consumer qualified; final performance and boundary audit complete | original nonsplit proof-CAS example plus one formerly expensive consumer, with complete dependency/observation timings |
+| `HINT-VARIANCE-6` | inventory checked; ordinary stable-owner port implemented; dependent mirror preserved for separately requested variance repair | audit the complete internal-action/identity-section extraction ladder and the separate Op owner link; qualify the actual nonidentity edge observation |
+| `HINT-SOUNDNESS-7` | general repair explicitly deferred; scoped construction audit recorded without claiming kernel soundness | preserve the diagnostic and repair evidence; do not exploit invalid inversion/regrading in the homology construction |
+| `HINT-RECOVERY-8` | structural evaluation qualified at `b4d92521`; native zero-complex/H continuation completed in rows 15–25 | justify the native forward evaluation, qualify only the needed structural rules, then continue zero-complex/prism and whole universal/H interfaces |
 | `HINT-ZERO-9` | native zero-arrow comma presentation selected and qualified in row 15; triangle experiments retained | whole varying zero-complex structure with inherited map/prism Homs and original chain-pair compatibility; no manually stored square law |
 | `HINT-PRESENTATION-10` | implemented and qualified at the scoped declaration boundary | whole adjunctions over retained choices, actual Došen cuts and typed usability paths, without automatic whole-coherence claims for arbitrary old data |
 | `HINT-MATES-11` | implemented and qualified; six-module/four-reviewer tranche below | whole mate views from the existing adjunction ProfComparison, semantic unit/counit usability, and agreement with the original selected lift/colift on derived annihilator inputs |
@@ -141,7 +161,7 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-REALIZATION-14` | existing native infrastructure specialized to the ordinary Freyd target with a derived profile; no general truncation functor introduced | retain native omega/lax diagrams, use a scoped ordinary-category realization at the formal CAS target, and compare the same selected H without asserting truncation preserves all universals |
 | `HINT-NATIVE-ONECAT-15` | native whole H, derived raw chain-map observations and automatic Freyd profile implemented and qualified | reuse the existing native zero-cone category at a one-categorical target, expose its universal transformation, preserve original selected operations and then instantiate the concrete CAS consumer |
 | `HINT-RAW-ENTRY-16` | formal object/map entry and all-position bounded point/induced-map interpretation qualified | introduce the original raw chain pair and map into the native category without new choices/manual squares, then bind the same native computation to whole H |
-| `HINT-DIRECT-CONNECTING-17` | direct point, literal whole-H endpoints, whole transformation/window and first retained CAS connecting interpretation qualified | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
+| `HINT-DIRECT-CONNECTING-17` | direct point, literal whole-H endpoints, whole transformation/window and all-window retained CAS connecting interpretation qualified | construct delta from original rows and retained whole-owned records, derive both descent tests and retain the reconstruction factor |
 | `HINT-WINDOW-ZERO-18` | whole H reconstruction factors, all three adjacent-zero laws and the shared window pairs qualified | use actual H action and delta at the same five objects; derive factors from whole naturality rather than require extra square inputs |
 | `HINT-WINDOW-EXACT-FIRST-19` | qualified at the actual whole-H window | construct all-test epic covers and prove exactness at H(B), retaining the original H objects and induced maps |
 | `HINT-WINDOW-EXACT-SECOND-20` | qualified at the actual whole-H window | cover connecting-kernel tests, correct their middle lifts and prove exactness at H(C) without replacing delta or any H object |
@@ -149,11 +169,11 @@ implementation detail; Posur's homology-map formulation is also a candidate.
 | `HINT-WINDOW-RESULT-22` | qualified indexed result | package the three original exactness witnesses without duplicating objects/maps; typed, generic/canonical beta and negative constructor-input checks |
 | `HINT-CONNECTING-NATURALITY-23` | qualified; whole projection beta plus scoped Hom usability selected, successful alternative archived | whole column/H/delta operations with computing component and scoped Hom usability; retain the reviewed stronger whole runtime observations |
 | `HINT-CONNECTING-CHARACTERIZATION-23A` | qualified | shared epic cover/quotient cancellation, uniqueness of the original delta and its arbitrary postcomposites |
-| `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement qualified; native normality provider/interpretation remains separate | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
+| `HINT-FREYD-ABELIAN-MODEL-24` | conditional enhancement and explicit supplied-normality interpretation qualified; closed model synthesis remains outside scope | add supplied normality families over the original model's W/V through existing package constructors, preserving its actual H |
 | `HINT-RETAINED-CONNECTING-25` | first nonsplit nonzero consumer and complete bounded inventory qualified | read original stored windows, reuse adopted model H points, explicitly interpret row shortness and the complete connecting arrow without replay or reselection |
-| `HINT-FINITE-RESULT-26` | indexed result carriers and the real two-window assembly qualified; bounded generator/endpoints remain | retain the same arrows and exactness in a finite tail, with a literal shared H(i) boundary and constructor computation |
+| `HINT-FINITE-RESULT-26` | indexed carriers, two-window consumer and field-indexed Nat generator qualified; final symbolic endpoint attachment user-deferred | retain the same arrows and exactness in a finite tail, with a literal shared H(i) boundary and constructor computation |
 | `HINT-BOUNDED-INPUT-27` | coherent row spans and generic window extension qualified | derive each window from the shared sliding state, preserving whole functors/transfors and existing exactness |
-| `HINT-ZERO-MIDDLE-28` | retained-record and literal whole-H zero-identity theorem qualified; endpoint integration follows the generator | derive zero H from a zero/terminal middle term without selecting another object |
+| `HINT-ZERO-MIDDLE-28` | retained-record and literal whole-H zero-identity theorem qualified; final endpoint attachment user-deferred | derive zero H from a zero/terminal middle term without selecting another object |
 
 This pilot does not claim a general Došen-style homology decidability theorem,
 complete universal quotient effectiveness, or stable/derived/spectral theory.

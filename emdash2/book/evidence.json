@@ -4744,6 +4744,254 @@
         }
       ]
     },
+    "WHOLE-KERNEL-COKERNEL-PRESENTATIONS": {
+      "status": "checked",
+      "statement": "Supplied coherent kernel/cokernel presentations provide whole functors and adjunctions over the original selected operations; mate and universal-record interfaces retain those objects with proof-time usability.",
+      "owners": [
+        {
+          "file": "emdash3_2_kernel_adjunction_presentations.lp",
+          "symbol": "KernelPresentation"
+        },
+        {
+          "file": "emdash3_2_cokernel_adjunction_presentations.lp",
+          "symbol": "CokernelPresentation"
+        },
+        {
+          "file": "emdash3_2_kernel_adjunction_records.lp",
+          "symbol": "kernel_presentation_record"
+        },
+        {
+          "file": "emdash3_2_cokernel_adjunction_records.lp",
+          "symbol": "cokernel_presentation_record"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/kernel_adjunction_presentations.lp",
+          "symbol": "kernel_presentation_adjunction"
+        },
+        {
+          "file": "examples/cokernel_adjunction_presentations.lp",
+          "symbol": "cokernel_presentation_adjunction"
+        },
+        {
+          "file": "examples/kernel_adjunction_records.lp",
+          "symbol": "kernel_presentation_record"
+        },
+        {
+          "file": "examples/cokernel_adjunction_records.lp",
+          "symbol": "cokernel_presentation_record"
+        }
+      ]
+    },
+    "WHOLE-HOMOLOGY-FUNCTOR": {
+      "status": "checked",
+      "statement": "Whole homology is derived from the boundary transformation K(h) composed with the unit and the whole cokernel functor; its native one-degree source uses the ordinary-target profile, and record views retain the actual H objects.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_families.lp",
+          "symbol": "kernel_family_boundary_transf"
+        },
+        {
+          "file": "emdash3_2_homology_families.lp",
+          "symbol": "homology_family_func"
+        },
+        {
+          "file": "emdash3_2_zero_arrow_cone_homology.lp",
+          "symbol": "zero_arrow_cone_homology_func"
+        },
+        {
+          "file": "emdash3_2_homology_family_records.lp",
+          "symbol": "homology_family_record"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_families.lp",
+          "symbol": "homology_family_func"
+        },
+        {
+          "file": "examples/one_cat_zero_cone_homology.lp",
+          "symbol": "zero_arrow_cone_homology_func"
+        },
+        {
+          "file": "examples/homology_family_records.lp",
+          "symbol": "homology_family_record"
+        }
+      ]
+    },
+    "HOMOLOGY-DIRECT-CONNECTING": {
+      "status": "checked",
+      "statement": "The direct homology connecting construction derives its normal tests, covered factor and source-boundary descent at the retained H records, with reconstruction and no endpoint transport.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_record_connecting.lp",
+          "symbol": "homology_record_connecting"
+        },
+        {
+          "file": "emdash3_2_homology_record_connecting.lp",
+          "symbol": "homology_record_connecting_covered_reconstruction"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_record_connecting.lp",
+          "symbol": "homology_record_connecting"
+        },
+        {
+          "file": "examples/homology_record_connecting_whole.lp",
+          "symbol": "homology_record_connecting"
+        }
+      ]
+    },
+    "HOMOLOGY-WINDOW-EXACTNESS": {
+      "status": "checked",
+      "statement": "The actual five-term whole-H window has all three adjacent-zero laws and exactness at all three interior objects, packaged over the same retained arrows.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_first_exactness.lp",
+          "symbol": "homology_whole_window_first_exact"
+        },
+        {
+          "file": "emdash3_2_homology_second_exactness.lp",
+          "symbol": "homology_whole_window_second_exact"
+        },
+        {
+          "file": "emdash3_2_homology_third_exactness.lp",
+          "symbol": "homology_whole_window_third_exact"
+        },
+        {
+          "file": "emdash3_2_homology_exact_window_result.lp",
+          "symbol": "homology_whole_exact_window"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_window.lp",
+          "symbol": "homology_whole_connecting_projection_zero"
+        },
+        {
+          "file": "examples/homology_first_exactness.lp",
+          "symbol": "homology_whole_window_first_exact"
+        },
+        {
+          "file": "examples/homology_second_exactness.lp",
+          "symbol": "homology_whole_window_second_exact"
+        },
+        {
+          "file": "examples/homology_third_exactness.lp",
+          "symbol": "homology_whole_window_third_exact"
+        },
+        {
+          "file": "examples/homology_exact_window.lp",
+          "symbol": "homology_whole_exact_window"
+        }
+      ]
+    },
+    "HOMOLOGY-CONNECTING-TRANSFORMATION": {
+      "status": "checked",
+      "statement": "A whole connecting transformation between H of the two native vertical columns has the retained direct component computation and generic off-diagonal and higher action; no caller-supplied naturality square is added.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_window_connecting_transformation.lp",
+          "symbol": "homology_window_source_homology_func"
+        },
+        {
+          "file": "emdash3_2_homology_window_connecting_transformation.lp",
+          "symbol": "homology_window_target_homology_func"
+        },
+        {
+          "file": "emdash3_2_homology_window_connecting_transformation.lp",
+          "symbol": "homology_window_connecting_transf"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_window_connecting_transformation.lp",
+          "symbol": "homology_window_connecting_transf"
+        },
+        {
+          "file": "examples/homology_window_column_usability.lp",
+          "symbol": "homology_window_right_diagram_action_path"
+        }
+      ]
+    },
+    "HOMOLOGY-BOUNDED-ITERATOR": {
+      "status": "checked",
+      "statement": "A field-indexed Nat iterator assembles finitely many coherent whole-H windows, retaining original arrows and zero/exactness annotations. Separate same-H zero-middle lemmas are checked; the final symbolic endpoint attachment is not claimed.",
+      "owners": [
+        {
+          "file": "emdash3_2_homology_row_field_spans.lp",
+          "symbol": "HomologyRowFieldSpan"
+        },
+        {
+          "file": "emdash3_2_computational_exact_arrow_tails.lp",
+          "symbol": "ComputationalExactArrowTail"
+        },
+        {
+          "file": "emdash3_2_homology_bounded_generator.lp",
+          "symbol": "homology_row_field_span_exact_tail"
+        },
+        {
+          "file": "emdash3_2_homology_whole_zero.lp",
+          "symbol": "homology_whole_middle_zero"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/homology_bounded_generator.lp",
+          "symbol": "homology_row_field_span_exact_tail"
+        },
+        {
+          "file": "examples/homology_bounded_generator_arrows.lp",
+          "symbol": "generated2"
+        },
+        {
+          "file": "examples/homology_whole_zero.lp",
+          "symbol": "homology_whole_terminal_middle_zero"
+        }
+      ]
+    },
+    "FREYD-WHOLE-HOMOLOGY-MODEL": {
+      "status": "checked",
+      "statement": "A supplied coherent Freyd model exposes whole H, original object/map observations and, with supplied normality and model-side short-exact rows, the direct connecting observation without replacing its universal selections.",
+      "owners": [
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_homology_models.lp",
+          "symbol": "FreydHomologyModel"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_homology_model_maps.lp",
+          "symbol": "freyd_homology_model_map"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_homology_model_normality.lp",
+          "symbol": "FreydHomologyModelNormality"
+        },
+        {
+          "file": "emdash3_2_commutative_algebra_freyd_homology_model_connecting.lp",
+          "symbol": "freyd_homology_model_connecting"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/freyd_homology_models.lp",
+          "symbol": "freyd_homology_model_func"
+        },
+        {
+          "file": "examples/freyd_homology_model_maps.lp",
+          "symbol": "freyd_homology_model_map"
+        },
+        {
+          "file": "examples/freyd_homology_model_normality.lp",
+          "symbol": "freyd_homology_model_abelian"
+        },
+        {
+          "file": "examples/freyd_homology_model_connecting.lp",
+          "symbol": "freyd_homology_model_connecting"
+        }
+      ]
+    },
     "FREYD-RAW-WITNESS-INTRO": {
       "status": "checked",
       "statement": "A retained coefficient matrix and its adopted equation construct the existing raw presentation-agreement value at literal source and target presentations.",

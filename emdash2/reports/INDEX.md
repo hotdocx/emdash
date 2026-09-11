@@ -2,118 +2,55 @@
 
 Date: 2026-09-02
 
-Latest homology interface (2026-09-10): the complete three-interior exact
-window is available, and the declaration-first whole connecting interface
-now retains coherent row families, vertical column functors and the original
-whole H. Its component computes to the existing direct delta. Whole column
-observations compute, with narrow proof-time usability for the explicitly
-expanded Hom-action order. The focused gate is
-`scripts/check_homology_window_families.sh`. The living pilot supersedes
-the historical pending-interface notes below. Native connecting
-interpretation now covers every retained bounded window. The indexed
-finite-arrow/exactness result carriers also join two actual windows with
-the same H(i) boundary and all six original proofs; their focused gate is
-`scripts/check_homology_arrow_tails.sh`. General bounded row iteration,
-endpoint-zero evidence and final book work remain required. The
-[bounded-assembly audit](../audits/bounded-homology-assembly-2026-09-10/README.md)
-preserves the representation comparisons. No general variance repair or
-closed quotient effectiveness is claimed.
+Latest homology status (2026-09-11): the user-directed remainder of the
+[bounded long exact homology and book plan](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
+is complete. The final symbolic zero-endpoint attachment and its LF
+investigation are explicitly deferred, not proved. The
+[final formal/proof-CAS boundary audit](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+is the concise current owner, validation and trust map.
 
-The bounded-generator prerequisites now retain coherent whole row spans,
-extend an exact continuation by one proved window, and prove zero identity
-at the same H when the original middle term is zero/terminal. Their focused
-gate is `scripts/check_homology_bounded_prerequisites.sh`. The field-indexed
-Nat assembler is now implemented, with its own scoped gate
-`scripts/check_homology_bounded_generator.sh`. Its input-constructor case
-retains the original whole row data, H and exactness witnesses. The full
-zero-padded ordering, endpoint application and public result remain downstream;
-the slow packed-state wrapper comparison is not promoted.
+The checked formal interface includes the complete six-term snake and four
+interiors, short-exact-row comparisons/normalization, coherent kernel and
+cokernel presentations, derived whole one-degree H on native zero diagrams,
+the direct connecting construction, all three exact window interiors and
+an actual whole connecting transformation. Whole column observations compute,
+with scoped proof-time usability for the alternative Hom-action order.
+The field-indexed Nat iterator retains those actual H/delta arrows and
+interior annotations. Its focused gate is
+`scripts/check_homology_bounded_generator.sh`; the whole family gate is
+`scripts/check_homology_window_families.sh`. The
+[internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md)
+retains the complete construction/alternative history and earlier gates.
 
-`../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md`
-is the active continuation beyond the completed Abelian, homology, and snake
-connecting plans. The complete generic six-term snake exact result and
-short-exact-row normalization are implemented. The current bounded-complex
-tranche supplies native degreewise short-exact sequences, formal bounded
-Freyd chain maps, formal effective row iteration, and a native exact five-term
-homology window. Generic homology maps and row-to-snake endpoint comparisons
-are constructed. The generic homology connecting map now descends through
-the original source quotient into the supplied target homology. Generic
-window exactness, generic bounded assembly, final formal-boundary audits,
-and the final Chapter 31 update remain active requirements. The companion
-owner audit records these boundaries; no closed formal quotient effectiveness
-is claimed.
-The current direct connecting tranche constructs delta from the original
-rows at retained whole-H endpoints, deriving both descent tests and both
-reconstruction laws. Its focused source/reviewer gate is
-`scripts/check_homology_record_connecting.sh`. The pilot's latest
-qualification supersedes earlier point-connecting pending notes below;
-whole connecting naturality, generic window exactness, the retained native
-connecting interpretation, bounded formal assembly and final book work
-remain active obligations.
-The next qualified tranche supplies the actual whole-H map reconstruction
-factors, all three adjacent-zero laws and the shared five-term chain window.
-Its focused gate is `scripts/check_homology_window.sh`; the three interior
-exactness statements remain the next mathematical requirement. This
-supersedes the earlier pending zero-window notes, not the still-open
-connecting naturality, concrete connecting interpretation or bounded theorem.
-The first interior is now proved exact at H(B), with the original whole-H
-objects and maps retained. Its focused gate is
-`scripts/check_homology_first_exactness.sh`. Exactness at H(C) and H(A')
-and the other remaining integration/book requirements are still open.
-The second interior, at H(C), is now proved by the retained epic
-presentation of delta and a corrected middle-cycle lift. Its focused
-gate is `scripts/check_homology_second_exactness.sh`. Exactness at H(A')
-remains, together with the other still-open goal requirements.
-The two inherited variance diagnostics remain recorded in the
+The native bounded sequence, categorical lowering, selected proof-CAS
+replay/adoption, formal raw spine and selected interior exactness are
+implemented. Supplied-model interpretation covers every retained H point,
+induced map and, with explicit normality, connecting window. No universal
+operation is rerun merely to interpret those observations. Computed matrix
+equations, all-test provider contracts and model-presentation semantics are
+separate evidence classes; no closed quotient-effective model is inferred.
+Chapter 31 and its appendices describe this boundary in the locally checked,
+unpromoted `0.8.1-dev` draft. No public artifact was replaced.
+
+The [assembly comparisons](../audits/bounded-homology-assembly-2026-09-10/README.md)
+and [final endpoint/checker archive](../audits/bounded-homology-endpoint-deferral-2026-09-11/README.md)
+preserve the experiments. Primitive-projection record structures remain a
+later design option; neither the failed packed-state wrapper nor a private
+checker patch is promoted. Historical pending-step notes in the plans are
+not instructions to restart the user-deferred investigation.
+
+The two inherited variance defects remain recorded in the
 [bounded repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
-The user has deferred their general repair until after the homological-
-algebra goal. Both the Sigma-only candidate and the preferred total-Op/
-CoAbove2 prefix now have reproducible non-library patches and controls.
-No active-kernel repair or global consistency result is claimed. Current
-homology work resumes the whole-complex/homology pilot, auditing its actual
-inferences and putting aside only designs that essentially need the known
-invalid reversals or regrading. A legitimate local Op_funcd evaluation
-instance is not rejected by name. Preserve the repair evidence without
-keeping this side task on the critical path of valid homological development.
-The independently named native homology-connecting operation and native
-bounded assembly and categorical/compiled consumers are implemented;
-selected proof–CAS replay/adoption and actual interior homology/exactness
-consumers are implemented. The active architectural pilot is
-[the strict internal homology pilot](../../docs/TYPESCRIPT_EMDASH_STRICT_INTERNAL_HOMOLOGY_PILOT_PLAN.md),
-following the [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md).
-The pre-op state has been recovered from the complete living plans and
-responses 0140–0142. Independent ordinary evaluation and a narrower
-Op_funcd rule-bundle consumer both compute the intended forward component.
-The owning-source audit, zero-complex/prism structure and whole universal/H
-interfaces are next; reference window exactness remains required, not a
-replacement primary direction.
-Its first rule-free whole diagram-evaluation layer and concrete walking-arrow
-introduction are implemented. The latter uses scoped core cross computation;
-whole natural families now come from actual transformations via exchange,
-with exact whole observations and terminal/initial arrow embeddings.
-Whole kernel/cokernel presentations and native ordinary-target homology are
-now implemented. The rule-free raw-entry adapter introduces the original
-chain pair by inverse-mating its selected boundary; separate comparisons
-retain the original choices. Concrete whole-interface CAS realization and
-full map compatibility remain active; no raw square-data mapping-category
-inverse or closed quotient-effective provider is implicitly assumed.
-The ordinary-target arrow-diagram realization and whole lower-map adapter
-are now implemented, with generic inverse-mate naturality and a constructive
-native map introduction from compatible lifts. Complete raw-map entry now
-derives that compatibility, including the Freyd raw-agreement specialization
-and an actual whole-H application. Concrete coherent-model realization and
-full old/new homology-map comparison remain in the active pilot.
-The supplied coherent model is now transparently packaged, and its first
-native object-point interpretation consumer is implemented with explicit
-trusted adoption and retained selections. Map/all-window model binding and
-the full generic theorem remain unfinished.
-The native six-term snake-result operation is implemented as well, including
-reuse of an existing connecting construction. Future
-coherence, synthetic homotopy, spectral-sequence, and categorical-spectrum
-references, together with the user's non-loop directed-spectrum hypothesis,
-are retained in
-`../../docs/TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md` without
-expanding this goal into the deferred spectral work.
+Both the Sigma-only candidate and the total-Op/CoAbove2 prefix have
+reproducible non-library patches and controls. No active-kernel repair or
+global consistency result is claimed by the homology closure. A local
+opposite computation requires its independent mathematical interpretation;
+the known invalid reversals/regrading cannot serve as constructions.
+The [research review](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_INTERNALIZATION_REDESIGN_REVIEW.md)
+and [redesign references](../../docs/TYPESCRIPT_EMDASH_HOMOLOGICAL_REDESIGN_REFERENCES.md)
+retain the alternative coherence, synthetic homotopy, spectral-sequence and
+categorical-spectrum directions, including the user's non-loop hypothesis.
+Those remain separate follow-ups, not silently added implementation scope.
 
 `../../docs/TYPESCRIPT_EMDASH_FREYD_ABELIAN_COMPUTATION_PLAN.md` records the completed
 constructive continuation from the completed Freyd pre-Abelian boundary. It

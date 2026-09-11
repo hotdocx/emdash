@@ -28,13 +28,16 @@ artifact, not the mathematics printed inside it.
 
 Chapter 31 uses two complementary evidence routes. The register records
 Lambdapi declarations and focused formal reviewers, including the generic
-snake theorem and transparent matrix introductions. Native computations,
+snake and homology-window theorems, whole H/connecting interfaces, finite
+iteration and transparent matrix introductions. Native computations,
 categorical-program comparisons and field differentials have their own
 TypeScript reviewers, named in the prose. A test of a polynomial example is
 not entered as a generic categorical theorem. Likewise, a formal term built
 after explicit provider adoption is checked relative to those assumptions;
 the register does not turn that trust decision into a proof of the native
 algorithm's universal correctness.
+The deferred symbolic endpoint-proof attachment is not entered as a
+checked consequence of the finite iterator or native zero-endpoint tests.
 
 > **Formal status — checked.** This appendix describes traceability; the
 > [accompanying emdash artifact](#ref-emdash-artifact) remains the proof

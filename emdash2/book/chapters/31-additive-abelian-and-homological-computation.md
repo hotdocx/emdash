@@ -10,20 +10,25 @@ only after an epimorphic cover; a lift must respect relations; a quotient map
 requires an annihilation equation. The choices must also agree with the
 homology objects already in use.
 
-The answer developed here makes these obligations internal. A universal
-factor consists of an arrow and its reconstruction path. Contractibility
-selects such a factor and compares it with every competitor. Addition allows
-one to correct a candidate by a difference; monic and epic cancellation then
-turn local reconstructions into global equations. These operations suffice
-for the checked six-term snake theorem.
+The answer developed here has two complementary levels. Internal factor
+spaces give the selected lifts, quotients and reconstruction laws needed
+by a constructive chase. Coherent kernel and cokernel presentations make
+these operations whole functors. Their adjunctions then build homology as
+a whole functor on an existing category of zero-composition diagrams.
+Addition and monic/epic cancellation supply the exactness arguments; actual
+transformations retain the naturality of the resulting operations.
 
 The same constructions have an executable interpretation in polynomial
 Freyd categories. There the result is a bounded long exact sequence with
 retained maps, equations, and exactness witnesses. Its formal reconstruction
 retains the same raw chain spine and constructs homology and exactness at
 every interior position, relative to explicitly adopted equations and
-selected-provider semantics. This result is distinct from the generic
-homology-window theorem, whose formal proof remains in progress.
+selected-provider semantics. The generic five-term homology window and its
+three interior exactness results are also checked, as is finite iteration
+over coherent rows. Attaching the final symbolic zero-endpoint theorem to
+the conventional bounded display remains a separate, deferred interface.
+The formal-status notes describe the current research calculus, with the
+foundational qualifications recorded in [Appendix F](#appendix-status).
 
 ## 31.1 Addition Belongs To The Homs
 
@@ -128,10 +133,44 @@ its object silently.
 > comparisons between supplied universal objects.
 
 The associated equations are theorem-level paths. Projecting a constructed
-pair computes by the existing pair calculus; arbitrary reconstruction and
-uniqueness are consumed as equality evidence. This distinction allows the
-new Abelian constructions to remain transparent definitions without adding
-their own rewrite or unification rules.
+factor computes; arbitrary reconstruction and uniqueness are consumed as
+equality evidence. These factor spaces are the operational interface to
+universality, not a requirement that every later construction be assembled
+as an isolated arrow calculation.
+
+For coherent families, use the arrow-diagram category
+$\mathcal D_C=\operatorname{Functor}(\mathbf 2,C)$, where $\mathbf 2$ is
+the walking arrow. The zero object gives whole functors
+
+$$
+J(A)=(A\longrightarrow0),\qquad
+I(A)=(0\longrightarrow A).
+$$
+
+A kernel presentation supplies a whole $K:\mathcal D_C\to C$ and an
+adjunction $J\dashv K$ over the original selected kernels. A cokernel
+presentation supplies $Q:\mathcal D_C\to C$ and $Q\dashv I$ over the
+original selected cokernels. Evaluating their counit and unit gives the
+kernel embedding and cokernel projection. Transposition gives the universal
+lifts and colifts. Thus the adjunction and factor-space descriptions are
+two interfaces to the retained universal operations.
+
+The presentation includes coherent structure: it is not an automatically
+constructed witness for every previously supplied kernel or cokernel family.
+Proof-time usability relates its observations to those original choices,
+while the whole functor heads remain available for the generic adjunction
+cuts. Conversely, the adjunctions supply operational universal records at
+their actual objects, so a later construction need not move between two
+independently selected kernels merely to use universality.
+
+<!-- evidence:WHOLE-KERNEL-COKERNEL-PRESENTATIONS -->
+
+> **Formal status — checked.** Evidence
+> `WHOLE-KERNEL-COKERNEL-PRESENTATIONS`. The two presentation classifiers
+> supply actual functors and adjunctions, with object, structural-arrow and
+> map usability for the original selections. Their mate and record interfaces
+> retain the universal factors. Existence of a coherent presentation remains
+> an explicit input, not a consequence inferred from finite matrix tests.
 
 ## 31.3 Normality And The Image Comparison
 
@@ -187,7 +226,7 @@ objects by fiat.
 > owners derive (31.4) and the comparison isomorphism. These generic
 > capabilities remain explicit when passed to a concrete implementation.
 
-## 31.4 Homology Retains Its Cycles And Boundary
+## 31.4 Whole Homology Retains Its Cycles And Boundary
 
 Consider a chain pair
 
@@ -227,20 +266,78 @@ H_n(f)\circ q_n=q'_n\circ z.
 \tag{31.6}
 $$
 
-Identity and composition laws follow from the same uniqueness arguments.
-They compare maps between the supplied homologies. Other choices of whole
-homology receive comparison isomorphisms, preserving the distinction between
-an invariant object up to isomorphism and the particular object used in a
-calculation.
+These constructions give a useful selected-record interface. Its map laws
+follow from uniqueness and compare maps between the supplied homologies.
+Other choices receive comparison isomorphisms, preserving the distinction
+between an invariant up to isomorphism and the particular object used in
+a calculation.
 
 <!-- evidence:SELECTED-HOMOLOGY-MAPS -->
 
 > **Formal status — checked.** Evidence `SELECTED-HOMOLOGY-MAPS`.
 > `ComputationalHomologyAt` retains the actual cycle kernel and boundary
 > cokernel. The chain-pair-map and homology-map owners construct the cycle
-> action, boundary compatibility, induced map, and its laws. A separately
-> packaged internal category-of-complexes homology functor is a further
-> construction; the checked map laws do not assert that package implicitly.
+> action, boundary compatibility, induced map, and its laws. The whole
+> functor below supplies the primary interface for coherent families.
+
+Now let a category $\mathcal B$ parameterize the data. Supply actual functors
+$A:\mathcal B\to C$ and $D:\mathcal B\to\mathcal D_C$, together with an
+actual transformation $h:J\circ A\Rightarrow D$. The kernel adjunction
+constructs the boundary transformation directly:
+
+$$
+\beta=K(h)\circ\eta_A:A\Longrightarrow K\circ D.
+$$
+
+At a point this is precisely the lift of the incoming differential into
+cycles. But the formula is already a composition of whole transformations;
+there is no additional family of naturality squares to supply. Introducing
+its walking-arrow diagram gives a functor
+$\operatorname{Arr}(\beta):\mathcal B\to\mathcal D_C$. Define
+
+$$
+H_{A,D,h}=Q\circ\operatorname{Arr}(\beta):\mathcal B\longrightarrow C.
+$$
+
+This is a derived whole functor, not a new primitive homology algorithm.
+Its identity and composition computations are the existing generic functor
+computations, including the accumulation direction
+$H(g)\circ H(f)\longrightarrow H(g\circ f)$. Its Hom actions remain
+available at further dimensions. The selected-record views recover its
+actual cycles, boundary and quotient; in particular, the record's homology
+object is the original $H[b]$, not a replacement object reached by transport.
+
+There is also one native source for these coherent diagrams:
+
+$$
+\mathcal Z_C=(J\downarrow\operatorname{id}_{\mathcal D_C}).
+$$
+
+This uses the existing internal Hom-comma construction. An object is
+$(A,d,h)$ with $h:J(A)\Rightarrow d$. Its source component is the incoming
+arrow; naturality and the zero-object property give the zero composite with
+the differential of $d$. Maps and their compatibility come from the native
+Hom structure, not a newly introduced datatype of hand-written commuting
+squares. In the ordinary-target profile used here, where $C$ is used as a
+one-category, the tautological whole transformation is available. Applying
+the preceding family construction to
+it gives $H:\mathcal Z_C\to C$.
+
+This is whole one-degree homology on zero-composition diagrams. It is not a
+claim that every possible category of bounded or unbounded complexes, or a
+global graded homology functor, has already been packaged. The local
+ordinary-target hypothesis and the two coherent presentations stay explicit;
+the polynomial Freyd interface fills its ordinary-target profile from its
+existing set-valued Hom presentation.
+
+<!-- evidence:WHOLE-HOMOLOGY-FUNCTOR -->
+
+> **Formal status — checked.** Evidence `WHOLE-HOMOLOGY-FUNCTOR`.
+> `homology_family_func` derives the whole functor; its boundary is an actual
+> transformation. `zero_arrow_cone_homology_func` specializes it to the
+> native source with the ordinary-target profile. The family-record
+> projection returns the same H object. Reviewers exercise nonidentity
+> action, generic identity/composition and further Hom action.
 
 ## 31.5 Exactness Is A Property Of The Actual Boundary
 
@@ -480,79 +577,176 @@ because its object names look similar.
 > `abelian_snake_six_term_exact_result` constructs
 > `AbelianSnakeSixTermExactResult` from the original Abelian capability and
 > triple. Its projections recover the canonical five arrows, four zero
-> paths, and four exactness instances. This is the generic theorem of this
-> chapter; it is independent of the concrete polynomial tests below.
+> paths, and four exactness instances. This generic snake theorem is
+> independent of the concrete polynomial tests below.
 
-## 31.9 Bounded Complexes And The Homology Connecting Map
+## 31.9 Exact Homology Windows And Bounded Assembly
 
 A bounded complex retains a finite family of objects and differentials,
-together with the adjacent-zero laws. One-degree homology applies to each
-neighboring pair. A bounded chain map retains its components and their
-compatibilities. A degreewise short exact sequence retains three such
-complexes and the existing inclusion and projection maps, with a whole
-short exact row in every degree.
+together with the adjacent-zero laws. A degreewise short exact sequence
+retains three such complexes and their inclusion and projection maps, with
+a short exact row in each degree. In the coherent formal interface, the
+rows are whole functors into the native zero-cone category and their maps
+are actual transformations. Four consecutive rows provide one homology
+window; shifting the window reuses three of those rows.
 
-For such a sequence $0\to A_\bullet\to B_\bullet\to C_\bullet\to0$,
-the homological target is
+**Theorem 31.2 (selected homology window).** In an ordinary-target
+computational Abelian category with supplied coherent kernel and cokernel
+presentations, such a window determines
 
 $$
-\cdots\longrightarrow H_n(A)\longrightarrow H_n(B)
-\longrightarrow H_n(C)\xrightarrow{\partial_n}H_{n-1}(A)
-\longrightarrow\cdots.
+\begin{aligned}
+H_n(A)&\xrightarrow{H(i_n)}H_n(B)\xrightarrow{H(p_n)}H_n(C)\\
+&\xrightarrow{\partial_n}H_{n-1}(A)
+\xrightarrow{H(i_{n-1})}H_{n-1}(B).
+\end{aligned}
 \tag{31.14}
 $$
 
-The public connecting operation has precisely the homology endpoints in
-(31.14). Its present native implementation uses the snake construction as
-a method. The two rows at degrees $n$ and $n-1$ give the snake input;
-short-exact comparison isomorphisms relate its source to the supplied
-cycles of $C$ and its target to the cokernel of the incoming differential
-of $A$.
+The three adjacent composites are zero, and the sequence is exact at its
+three interior objects. Its homologies are the actual whole-H observations
+of Section 31.4. No replacement homology object or endpoint transport is
+needed to state the connecting map.
 
-There is a canonical monomorphism
+Here is the constructive idea behind the direct connecting operation.
+Pull back the row projection $p_n:B_n\to C_n$ along the actual cycle
+embedding $k_C:Z_n(C)\to C_n$. Write its legs as
+$e:E\to Z_n(C)$ and $b:E\to B_n$, so
+$p_n b=k_C e$; the first leg is epic. Applying the middle differential
+to $b$ gives an arrow killed by the next row projection. That row's
+kernel property lifts it through its original inclusion into $B_{n-1}$.
+The following chain law and monicity then force this lift into the actual
+cycles of $A$. Write the resulting cycle arrow as
+$c:E\to Z_{n-1}(A)$.
+
+The normal universal operations descend $q_Ac$ along the cover, and the
+upper neighboring row proves that the resulting map kills the source
+boundary. Cokernel universality therefore gives $\partial_n$, with
+
+$$
+\partial_n\circ q_C\circ e=q_A\circ c.
+$$
+
+All tests needed for these operations are derived. The caller does not
+provide a section of $e$, a connecting arrow, or extra normal-test
+equations. Since $q_C\circ e$ is epic, the covered formula also
+characterizes the resulting arrow.
+
+The exactness proofs use the same cover-and-correction method. At
+$H_n(B)$, represent a test by a middle cycle after an epic cover. Its
+projection is a boundary; lift a boundary preimage through the upper row,
+then subtract its middle differential. The corrected cycle has zero
+projection and hence comes from the left column.
+
+At $H_n(C)$, a class killed by $\partial_n$ has a covered lift whose
+left-column cycle is a boundary. Subtract the corresponding inclusion
+from its middle-column lift. The corrected lift is a middle cycle and
+reconstructs the original class under $H(p_n)$.
+
+At $H_{n-1}(A)$, a class killed by $H(i_{n-1})$ becomes a middle
+boundary after a cover. Projecting a boundary preimage to the right column
+gives a cycle. The covered connecting formula sends its class back to the
+original left-column class. These all-test constructions establish the
+three exactness predicates at the same H objects.
+
+<!-- evidence:HOMOLOGY-DIRECT-CONNECTING -->
+<!-- evidence:HOMOLOGY-WINDOW-EXACTNESS -->
+
+> **Formal status — checked.** Evidence `HOMOLOGY-DIRECT-CONNECTING` and
+> `HOMOLOGY-WINDOW-EXACTNESS`. The direct connecting factor, source-boundary
+> descent and covered reconstruction are constructed at the retained
+> homologies. The first, second and third window owners prove all three
+> interiors; `homology_whole_exact_window` packages those original witnesses.
+> These are generic formal results, not deductions from polynomial examples.
+
+Naturality is also a whole interface. For a window family over
+$\mathcal B$, let $R,L:\mathcal B\to\mathcal Z_C$ be its right and left
+vertical zero-diagram functors in degrees $n$ and $n-1$, respectively.
+Composing them with H gives the source and target homology functors.
+The connecting interface is an actual transformation
+
+$$
+\partial_w:H\circ R\Longrightarrow H\circ L.
+$$
+
+Its component observation computes to the direct connecting construction.
+Generic transfor action supplies the naturality and further Hom-action
+interfaces; no separately supplied naturality square or transformation
+constructor is part of the input. Whole column observations retain the
+original row functors, with proof-time comparisons for the alternative
+Hom-action projection order.
+
+<!-- evidence:HOMOLOGY-CONNECTING-TRANSFORMATION -->
+
+> **Formal status — checked.** Evidence
+> `HOMOLOGY-CONNECTING-TRANSFORMATION`. The whole source and target are
+> composites with the original H. `homology_window_connecting_transf`
+> has the retained component computation and ordinary off-diagonal/higher
+> transfor action. The whole transformation is present from the outset;
+> pointwise naturality proofs are not additional caller inputs.
+
+The native implementation retains a snake-based trace of the same public
+homology operation. A useful comparison in that trace is the canonical
+monomorphism
 
 $$
 j_A:H_{n-1}(A)\longrightarrow\operatorname{Coker}(d^A_n).
 \tag{31.15}
 $$
 
-It is induced from the actual cycle embedding and boundary cokernel; its
-monicity is a checked generic consequence of pushout stability.
+It is induced from the actual cycle embedding and boundary cokernel.
+Its monicity follows generically from pushout stability.
 
 <!-- evidence:HOMOLOGY-COKERNEL-INCLUSION -->
 
 > **Formal status — checked.** Evidence `HOMOLOGY-COKERNEL-INCLUSION`.
 > The homology-inclusion owner constructs $j_A$ at the supplied whole
-> homology, and `abelian_homology_cokernel_inclusion_monic` proves its
-> monicity. It preserves the original cycles and boundary cokernel.
+> homology and proves it monic, retaining the original cycles and quotient.
 
-The native method factors the compared snake arrow through $j_A$, then descends
-through the source homology projection. If $s$ and $v$ denote the source
-and target comparison isomorphisms, its retained reconstruction is
+If $s$ compares source cycles with the snake kernel and $v$ compares
+the snake cokernel with the differential cokernel, the retained native
+reconstruction is
 
 $$
 j_A\circ\partial_n\circ q_C=v\circ\partial\circ s.
 \tag{31.16}
 $$
 
-Both factor operations retain their effective tests. This avoids requiring
-a global lift from source cycles into raw target cycles. A different future
-algorithm can implement the same homology operation, provided it preserves
-the supplied objects and proves the corresponding comparison.
+This explains the implementation trace without making its intermediate
+isomorphisms the public definition of the formal connecting interface.
+The supplied-model interpretation in Section 31.10 records the connection
+to the native selected arrow explicitly.
 
-The native polynomial implementation assembles all windows into one bounded
-sequence. It constructs each degree's homologies and ordinary induced maps
+Finite formal assembly starts with an actual H-inclusion arrow. Each window
+extension prepends its three arrows and the three existing zero/exactness
+annotations to a retained continuation. A field-indexed Nat iterator repeats
+this operation over coherent rows and transformations. Adjacent windows share
+their boundary arrow; they are not independent windows joined by
+object-equality fields. For two windows, the result has eight objects,
+seven arrows and six interior exactness annotations.
+
+<!-- evidence:HOMOLOGY-BOUNDED-ITERATOR -->
+
+> **Formal status — checked.** Evidence `HOMOLOGY-BOUNDED-ITERATOR`.
+> `homology_row_field_span_exact_tail` iterates any finite number of
+> windows. Its data projections retain the actual arrows and original
+> annotations. The conventional zero-ended symbolic theorem, including
+> its final endpoint-proof attachment, is deferred; it is not implied
+> merely by this checked iterator.
+
+The native polynomial implementation already assembles the complete bounded
+display. It constructs each degree's homologies and ordinary induced maps
 once, then shares them between neighboring windows. Exactness at $H_n(B)$
-and $H_n(C)$ comes from the window at $n$; exactness at $H_n(A)$ comes from
-the window at $n+1$. The retained witnesses refer to the actual displayed
-adjacent pairs. Outside finite support, the endpoints are the selected
-outside-support homologies with explicit zero-object witnesses.
+and $H_n(C)$ comes from the window at $n$; exactness at $H_n(A)$
+comes from the window at $n+1$. Its outside-support endpoints retain their
+true neighboring differentials and explicit zero-identity witnesses, not
+replacement zero presentations.
 
-These are also whole operations in the computational category interface.
-A retained program declares its kernel, cokernel, normal-factor, and other
-prerequisites; compilation lowers the operation to the native algebra
-engine. Observations return the stored homologies and windows. Direct and
-compiled execution are compared on their complete serialized results.
+These are whole operations in the computational category interface. A
+retained program declares its kernel, cokernel, normal-factor and other
+prerequisites; compilation lowers the operation to the native algebra engine.
+Observations return stored homologies and windows. Direct and compiled
+execution are compared on complete serialized results.
 
 This operation-and-prerequisite design takes inspiration from
 [CAP](#ref-cap-project) and the separation of categorical algorithms from
@@ -560,29 +754,24 @@ ring computations in [homalg](#ref-homalg-meta). The native emdash
 implementation owns its polynomial algorithms; those reference systems
 are not required at runtime.
 
-The examples exercise nonsplit polynomial rows, nonzero boundaries, and
+The examples exercise nonsplit polynomial rows, nonzero boundaries and
 nonzero connecting maps. An independent field-linear calculation over
-$\mathbb Q$ compares the results in explicit quotient coordinates,
-including connecting maps of both signs and endpoint cases. This comparison
-uses constant polynomials, where the coefficient ring is already
-$\mathbb Q$. It does not specialize a polynomial variable and assume that
-exactness survives such a change of scalars.
+$\mathbb Q$ compares results in explicit quotient coordinates, including
+both signs and endpoint cases. It uses constant polynomials, where the
+coefficient ring is already $\mathbb Q$; it does not specialize a
+polynomial variable and assume that exactness survives.
 
-> **Formal status — mathematical development.** The generic long exact
-> homology theorem (31.14) remains a formalization target. The native
-> homology-connecting, window, bounded-long-exact, and categorical-program
-> implementations already compute the described selected results.
-> Their focused tests and field/quotient-coordinate comparisons provide
-> executable evidence, separate from the Lambdapi theorem register. They
-> do not supply a generic homology-window or bounded long-exact proof.
+Executable reviewers:
 
-The executable reviewers are
-`tests/v3_2_algebra_polynomial_freyd_homology_connecting_tests.ts`,
-`tests/v3_2_algebra_polynomial_freyd_long_exact_tests.ts`,
-`tests/v3_2_algebra_polynomial_freyd_long_exact_category_tests.ts`, and
-`tests/v3_2_algebra_polynomial_freyd_long_exact_differential_tests.ts` in the
-root workbench. They check selected-object reuse, the full bounded output,
-compiled agreement, and the independent coordinate comparisons respectively.
+- `tests/v3_2_algebra_polynomial_freyd_homology_connecting_tests.ts`
+- `tests/v3_2_algebra_polynomial_freyd_long_exact_tests.ts`
+- `tests/v3_2_algebra_polynomial_freyd_long_exact_category_tests.ts`
+- `tests/v3_2_algebra_polynomial_freyd_long_exact_differential_tests.ts`
+
+They check selected-object reuse, bounded output, compiled agreement and
+coordinate comparisons. Native endpoint computation and the checked
+generic window theorem must not be confused with the deferred final
+symbolic endpoint attachment.
 
 ## 31.10 Presentations, Matrices, And Formal Replay
 
@@ -627,6 +816,37 @@ proof environment. Running the computation alone changes no proof
 assumptions. Adoption is a recorded trust decision; the subsequent typecheck
 checks the construction relative to those adopted equations.
 
+The whole-H interface adds a further connection. A supplied coherent Freyd
+homology model retains its kernel and cokernel operations and their
+presentations. Its formal H points and induced maps can be interpreted at
+the native results already stored by a replay. With the same model's
+normality enhancement, this includes every retained connecting window and
+the complete displayed arrow order. The interpretation does not run
+homology or connecting again, or select another kernel to make the types fit.
+
+Three kinds of information remain distinct. Matrix equations justify
+particular raw morphisms and agreements. Selected-provider contracts supply
+all-test universal operations. Whole-model interpretations identify the
+formal H observations, model-side short-exact rows and connecting arrows
+with the retained computational data. The latter two are explicitly recorded
+trusted presentation semantics, not theorems inferred from a finite list of
+equations. Model normality is a typed supplied input.
+
+<!-- evidence:FREYD-WHOLE-HOMOLOGY-MODEL -->
+
+> **Formal status — checked.** Evidence `FREYD-WHOLE-HOMOLOGY-MODEL`.
+> `FreydHomologyModel` packages the supplied coherent data. Its object,
+> complete-arrow and connecting observations use the original H; the
+> normality enhancement retains its original kernel/cokernel selections.
+> This is an interface for a supplied model, not a closed construction of
+> a polynomial Freyd Abelian model from matrix equations alone.
+
+Without normality, the workflow still exposes the useful point/induced-map
+prefix and reports that connecting interpretation was not requested. With
+normality, it checks that every displayed arrow is the original retained
+arrow before returning the complete observation view. Repeating an adoption
+reuses existing claims rather than silently adding duplicate assumptions.
+
 Those equations can also be consumed as data. A transparent introduction
 packages a retained coefficient matrix and its equation as the original
 raw agreement value. The whole inventory can therefore expose its
@@ -642,7 +862,7 @@ construction needs no additional trust decision.
 > quotient equality or turn a literal matrix equation into an unproved
 > semantic-composition equation.
 
-The next step now constructs an actual formal raw spine. Each displayed
+The adopted equations construct a formal raw spine. Each displayed
 arrow is built by (31.17) using the original generator and relation data.
 For consecutive arrows $F:P_2\to P_1$ and $G:P_1\to P_0$, the retained
 equation
@@ -660,8 +880,9 @@ the formal convention in which index zero names the rightmost object.
 
 The completed term is checked as a whole. This goes beyond checking a list
 of equation types: the constructors must fit together at their actual
-endpoints, with every projected arrow preserved. It establishes a formal
-chain spine. It does not yet establish its exactness.
+endpoints, with every projected arrow preserved. Taken by itself, this
+establishes a formal chain spine. Section 31.11 adds the separate
+selected-homology and exactness evidence.
 
 <!-- evidence:FREYD-FORMAL-RAW-SPINE -->
 
@@ -672,9 +893,12 @@ chain spine. It does not yet establish its exactness.
 > the existing bounded constructors. No primitive matrix algorithm, quotient
 > decoder, or new Core structure is introduced.
 
-The executable bridge and its trust boundary are reviewed separately in
-`tests/v3_2_algebra_formal_freyd_long_exact_tests.ts` and
-`tests/v3_2_algebra_formal_freyd_spine_tests.ts`. Their live consumers check
+The executable bridge and its trust boundary have separate reviewers:
+
+- `tests/v3_2_algebra_formal_freyd_long_exact_tests.ts`
+- `tests/v3_2_algebra_formal_freyd_spine_tests.ts`
+
+Their live consumers check
 the constructed whole term, including nontrivial bounded and short-tail
 cases, relative to the explicitly adopted equations.
 
@@ -744,11 +968,13 @@ $k[x]/(x)$ as a $k[x]$-module, remain ordinary supported inputs.
 > equations. The provider and homology constructions below supply the
 > separate cycle and boundary data needed to use it as exactness.
 
-The root reviewers
-`tests/v3_2_algebra_formal_freyd_epimorphism_tests.ts` and
-`tests/v3_2_algebra_formal_freyd_long_exact_epimorphisms_tests.ts` exercise
-the explicit-equation bridge and its application to every retained interior
-boundary. They separately check original-morphism preservation, adoption
+The explicit-equation bridge and its application to every retained interior
+boundary are exercised by:
+
+- `tests/v3_2_algebra_formal_freyd_epimorphism_tests.ts`
+- `tests/v3_2_algebra_formal_freyd_long_exact_epimorphisms_tests.ts`
+
+These reviewers separately check original-morphism preservation, adoption
 bindings, and the constructed formal witness terms.
 
 With those cycle choices fixed, the homology constructor accepts the
@@ -771,31 +997,51 @@ The whole-result consumer performs this construction at every retained
 interior position. One proof environment contains the original spine and
 the homology/exactness terms for each displayed pair. The two-degree
 nonsplit example checks the spine and all twelve interior terms together,
-without another kernel or homology selection. The executable reviewers are
-`tests/v3_2_algebra_formal_freyd_actual_homology_tests.ts` and
-`tests/v3_2_algebra_formal_freyd_long_exact_homology_tests.ts`.
+without another kernel or homology selection. The executable reviewers are:
+
+- `tests/v3_2_algebra_formal_freyd_actual_homology_tests.ts`
+- `tests/v3_2_algebra_formal_freyd_long_exact_homology_tests.ts`
+
 Their conclusion is relative to the recorded equation and provider
 assumptions, not a generic theorem about arbitrary Abelian categories.
+The same reviewers cover the retained whole-model point, induced-map and
+connecting interpretations described in Section 31.10, including explicit
+coverage, unchanged selections and rejection of mismatched model inputs.
 
-## 31.12 The Remaining Universal Obligations
+## 31.12 Boundaries Of The Integration
 
-The generic homology-window proof must still connect the theorem of
-Section 31.8 to the actual homologies in (31.14). The checked row
-comparisons and monic inclusion (31.15) provide its endpoints. To factor the
-compared snake arrow through that inclusion, one must prove the required
-normal test. To descend through $q_C$, one must prove annihilation of the
-actual source boundary. The neighboring chain laws and degreewise
-monic/epic maps enter these arguments; the two snake rows alone do not
-supply all of them. Exactness at the three positions of the homology window
-and its generic bounded iteration then require their own proofs.
+The generic and selected-result developments now meet at a useful
+computational interface, but their conclusions must be kept separate.
 
-> **Formal status — research boundary.** Generic homology-window and
-> bounded long-exact exactness remain open in the formal development.
-> Formal exactness at all interior positions of the selected native spine
-> is already reconstructed relative to its explicit provider semantics.
-> The checked generic snake theorem, selected-result construction, and
-> prospective generic long-exact theorem have different hypotheses and
-> conclusions.
+| Layer | What is available | What it does not supply automatically |
+| --- | --- | --- |
+| Whole formal H and connecting | Coherent K/Q presentations, derived H, a direct connecting component and a whole transformation | A coherent presentation for every older universal-operation family |
+| Generic exactness and finite assembly | Three exact window interiors and a field-indexed iterator retaining their arrows and evidence | The final conventional zero-ended symbolic theorem |
+| Native bounded computation | The complete selected sequence, interior witnesses and actual outside-support zero data | A theorem for every category from tests of this implementation |
+| Retained proof-CAS interpretation | Formal raw terms, selected interior exactness, and supplied-model H/map/connecting observations | Arbitrary quotient-witness extraction or an automatically constructed closed model |
+
+The remaining endpoint issue is an interface problem, not an absent native
+endpoint calculation. Separate formal zero-object lemmas are available, but
+their final symbolic attachment to the conventional bounded display is
+deferred. The checked iterator and practical model interpretation do not
+require that deferred attachment as an input. This edition states the
+boundary rather than replacing the actual H endpoints by convenient zero
+objects.
+
+> **Formal status — research boundary.** The deferred claim is the final
+> zero-ended bounded theorem with its symbolic endpoint evidence, not the
+> checked window and finite-iterator interfaces above. Coherent model
+> existence, arbitrary quotient
+> effectiveness and a general normalization calculus for homological
+> algebra remain separate obligations.
+
+The current formulation is a constructive reference implementation with
+whole functors and transformations. Its algebraic reconstruction and
+exactness laws still use explicit paths. A later, more economical record
+and projection design may improve the dependent interfaces; a Došen-style
+normalization theorem for this whole homological layer has not been proved.
+Unbounded complexes, derived categories and spectral sequences are also
+later developments, not implicit consequences of the bounded result.
 
 A possible later computation mode would represent a universal diagram and
 solve its witness equations once. To turn that calculation into a theorem

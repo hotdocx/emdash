@@ -165,12 +165,26 @@ book reader; it is not a replacement for that SOP.
 ## E.8 Universal Factors And Computer Algebra
 
 The Abelian and homological constructions in [Chapter 31](#chapter-31)
-are transparent definitions over existing owners. Pair and record
-projections compute by the established calculus. Reconstruction, uniqueness,
-normality and exactness are theorem-level paths or supplied universal
-operations; their existence does not install new rewriting rules for
-generic composition. In particular, the current homology map laws are not
-a new runtime normalization theory for complexes.
+separate whole operations, data observations and theorem-level laws.
+Coherent kernel/cokernel presentations expose actual adjunctions over the
+original selected operations. Their proof-time usability leaves the whole
+K/Q heads available for the generic cut calculus. Whole H is then derived
+from the boundary transformation and Q; it inherits the existing functor
+identity/composition computations and further Hom action.
+
+The whole connecting transformation has a component rule returning the
+direct construction. Row/window observations and finite-result records have
+local projection beta rules; the bounded iterator uses ordinary Nat
+recursion. Thus this entire interface is no longer accurately described as
+rule-free. The new rules concern retained data and whole observations, not
+a second set of generic category laws.
+
+Reconstruction, uniqueness, normality and exactness remain theorem-level
+paths or supplied universal operations. They are not all runtime reductions,
+and the checked window theorem does not establish a general normalization
+calculus for complexes. The final symbolic zero-endpoint attachment is a
+separate deferred interface; computational consumers retain their arrows
+without requiring normalization of that theorem's evidence.
 
 Polynomial algorithms provide a different computation layer. Their selected
 matrices, factors and witnesses can be reified into the formal language.
@@ -180,3 +194,9 @@ trusted provider semantics; it is not inferred from finitely many sample
 equations. The formal constructors retain the original selected objects and
 raw witnesses. Equality of serialized data is an implementation consistency
 check, not the definition of equality in the Freyd quotient category.
+
+The supplied-model layer also interprets actual whole-H points, induced
+maps and, with explicit normality, every retained connecting window. These
+interpretations are recorded separately from computed equations. The same
+native results are reused; a model-observation request neither reselects
+universal objects nor reruns the whole homology computation.

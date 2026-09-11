@@ -1488,8 +1488,11 @@ belongs to the owning implementation plan rather than to standing guidance.
   data observation and annotation-preserving trimming. The short-exact-row-zero
   module proves zero at both original outer objects from zero in the middle.
   `scripts/check_homology_bounded_generator.sh` is the exact-source scoped
-  gate. Conventional zero-padded ordering, endpoint application, final
-  formal/native audit and book work remain required.
+  gate. The user has deferred the final conventional symbolic endpoint
+  attachment and its checker investigation. The checked field-indexed
+  interface is the basis for the completed book/boundary audit; experimental
+  indexed replacements and private checker changes are not promoted. See the
+  [final boundary audit](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md).
 - `emdash3_2_commutative_algebra_freyd_homology_model_records.lp` specializes
   the whole-owned homology record at the original supplied model and raw
   chain agreement. Its object computes to the already-used model H point;
@@ -6748,15 +6751,22 @@ and public copy are byte-identical. This artifact status is publication
 evidence, not a new mathematical authority; no remote publication occurred.
 
 The bounded homological goal has also produced a locally checked, unpromoted
-`0.8.0-dev` draft dated 2026-09-08. It adds Chapter 31 and the homological
-appendix/evidence/provenance updates: 46 sources, 177 cited claims, 3,297 math
-spans, 398 pages and 19 embedded fonts. Its PDF SHA-256 is
-`4ad626d7d04cb5e393c8ecb65d200209b7c670dc6a67a35b974e00d120f877ac`.
+`0.8.1-dev` draft dated 2026-09-11. Chapter 31 and its appendices now explain
+the coherent K/Q presentations, derived whole H, direct and whole connecting
+interfaces, three checked window interiors, finite iterator and retained
+proof-CAS model interpretation: 46 sources, 184 cited claims, 3,344 math
+spans, 407 tagged Letter pages and 19 embedded fonts. Two final exports have
+the identical PDF SHA-256
+`703f9b80ced232d77cca833e332fcb932b724f8fef3326480e75741c39c4427b`.
 Source, browser, PDF and affected-page visual checks pass. This local export
-does not replace the promoted/public artifact above. The generic six-term
-snake is its checked central theorem; the generic homology-window and
-bounded LES proofs remain explicitly unfinished, separate from the working
-selected proof-CAS reconstruction.
+does not replace the promoted/public artifact above; the earlier `0.8.0-dev`
+PDF is also preserved. The final symbolic zero-endpoint attachment remains
+explicitly user-deferred, separate from the checked finite iterator and the
+complete native endpoint calculations. Supplied model normality and trusted
+presentation semantics are distinguished from computed matrix equations.
+The [final boundary audit](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+records closure of the requested remainder and the inherited foundational
+qualification; this book update is not a consistency certificate.
 
 ```bash
 ./scripts/pnpmw run book:assemble

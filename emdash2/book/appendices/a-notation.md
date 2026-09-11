@@ -92,11 +92,17 @@ objects and their structural arrows visible.
 | --- | --- | --- |
 | $A\oplus B$, $0$ | the selected biproduct and zero object | `AdditiveCategory` |
 | $\sum_{u:T\to Z}(k\circ u=h)$ | the internal factor fibre of $h$ through $k$ | `HomPostcompFactor` |
+| $\mathcal D_C=\operatorname{Functor}(\mathbf 2,C)$ | the category of walking-arrow diagrams | `Functor_cat WalkingArrow_cat C` |
+| $J\dashv K$, $Q\dashv I$ | coherent kernel and cokernel presentations over the original selections | `KernelPresentation`; `CokernelPresentation` |
+| $\mathcal Z_C=(J\downarrow\operatorname{id}_{\mathcal D_C})$ | the native category of one-degree zero-composition diagrams | `ZeroArrowCone_cat` |
+| $\beta=K(h)\circ\eta_A$ | the whole boundary transformation of a coherent family | `kernel_family_boundary_transf` |
+| $H=Q\circ\operatorname{Arr}(\beta)$ | whole homology of that family | `homology_family_func` |
 | $k_n:Z_n\to C_n$ | the actual cycle kernel embedding | `computational_homology_cycle_embedding` |
 | $b_n:C_{n+1}\to Z_n$ | the lifted incoming differential | `computational_homology_boundary` |
 | $q_n:Z_n\to H_n$ | the selected cokernel of that boundary | `computational_homology_projection` |
 | $\chi_f:\operatorname{Coim}(f)\to\operatorname{Im}(f)$ | the canonical coimage-image comparison | `coimage_image_comparison` |
-| $\partial$, $\partial_n$ | respectively the snake arrow and a homology connecting map | `abelian_snake_connecting`; the native homology-connecting operation |
+| $\partial$, $\partial_n$ | respectively the snake arrow and the homology connecting component | `abelian_snake_connecting`; `homology_record_connecting` |
+| $\partial_w:H\circ R\Rightarrow H\circ L$ | the whole connecting transformation of a window family | `homology_window_connecting_transf` |
 | $\rho_QW=F\rho_P$ | relation preservation for a column-matrix raw morphism | `CommRingPresentationMorphism` |
 | $\rho_QH=F-G$ | a coefficient witness for agreement of raw representatives | `CommRingPresentationMorphismAgreement` |
 | $QU+FV=\operatorname{id}$ | a boundary-epicity block equation | `CommRingFreydEpimorphismWitness` |
