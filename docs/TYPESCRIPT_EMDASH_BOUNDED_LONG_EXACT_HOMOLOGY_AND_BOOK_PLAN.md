@@ -34,10 +34,13 @@ limit increases, serial admission, actual cgroup values and a bounded LP
 reviewer. Resource-limit failures remain distinct from type errors and
 from successful mathematical qualification.
 
-The guard's eight focused safety tests pass, including actual user-cgroup
+The guard's original eight focused safety tests pass, including actual user-cgroup
 limits and cross-process serialization. The finite-index reviewer also
 passes under the default cgroup/address-space bounds. No aggregate of
 unrelated mathematical files was rerun for this tooling change.
+The follow-up scope-wide `RuntimeMaxSec`/`KillSignal` guard also terminates
+debugger descendants at the same deadline. Nine tests now pass, including
+a child that starts a separate process session and cannot escape the scope.
 
 Current review policy: do not treat the degree/role presentation as a proven
 complete remedy, or attribute every failure to proof equality. Preserve and
@@ -1393,6 +1396,56 @@ changing H or its selections, or declaring an endpoint observer injective.
 
 ### Degree/Role Indexing: Current Representation Experiment
 
+Resource-bounded isolation (2026-09-11, after `fb5a9c09`): the shared row,
+its whole functor, its point and its source vertex compare in two seconds.
+Both differentials of the derived source chain pair also compare in two
+seconds. Comparing the complete pair, its derived chain-zero proof, or
+the selected lower-row monicity observation exhausts the 2 GiB guard in
+seven to eight seconds. Each chain-zero proof separately typechecks in one
+second; its reflexivity comparison still exhausts the guard. This is not
+a missing annihilation theorem or a need to rerun the CAS.
+
+The tested owner-position hypothesis was narrower than changing H or the
+whole row-family representation: `ComputationalShortExactTriple` is a
+nested generic product whose monicity projection carries the unused
+selected-homology/exactness classifier in its implicit motive. The private
+experiment used an ordinary specialized evidence record with the SAME
+monic/epic/exact fields and three constructor/projection beta rules. No proof
+was erased, made opaque, or newly postulated. Its rejection criterion was
+continued failure of the real shared-pair/H/delta controls or existing field
+consumers; the active owner was kept unchanged.
+
+Results: the specialized short-exact evidence record passes its source,
+strict LHS audit and affected prerequisites, but monicity sharing still
+exhausts the guard (14 seconds). Combining it with a stable row-family
+record fails at that owner's function-valued data beta (18 seconds). Both
+an applied point-beta alternative and explicitly repeated flat-index guards
+also fail source checking. These are not promoted, and the hypothesis that
+the unused exactness motive alone explains the failure is not established.
+The earlier boxed-evidence family likewise preserved source checks without
+fixing native-input sharing. Do not keep stacking record variants without
+a smaller reproduction or a concrete computational improvement.
+
+The direct OneCat chain input separately checks six runtime observations
+and whole fixed-pair Hom action without selecting a kernel merely to form
+the input. However, its shared-input and H-image comparisons still fail;
+general map compatibility and retained selections would need qualification
+before any replacement. Generic same-boundary cokernel usability checks,
+but its canonical delta consumer also fails under the guard. Neither is
+selected as a performance fix.
+
+All these sources, drivers, isolated checker patches and record alternatives
+are now preserved in
+`emdash2/audits/bounded-homology-proof-projection-2026-09-11/`. Forty-three
+recovered source/patch files pass exact byte/SHA-256 verification; two small
+additional record variants are retained as separately applicable patches.
+The installed checker and active LP/CAS owners remain unchanged. Continue
+from the reduced proof-observation/implicit-motive boundary, comparing a
+smaller neutral-data fixture and the existing generic projection matching
+before any further owner migration. Keep the complete finite formal/CAS
+and book obligations open, rather than turn this into proof-erasure or
+exhaustive old/new comparison work.
+
 The van Doorn reference is directly relevant to this boundary. In
 §4.1.1 of [the dissertation](https://arxiv.org/abs/1808.10690v1), printed
 pages 68–69, a flat natural-number index makes the three families at
@@ -1536,8 +1589,9 @@ Canonical-degree continuation (2026-09-10, after `69679ca7`):
   promoted as a successful solution. Keep the successful operations in their
   independent source, not behind the unfinished connecting declaration.
 
-The installed package reports Lambdapi 3.0.0. Its available source under
-`/home/user1/.opam/default/.opam-switch/sources/lambdapi.3.0.0/src/core/`
+The installed package reports Lambdapi 3.0.0 but is pinned to revision
+`db4f7809961b8c107247613067fb567491fb0b84`. Its actual source under
+`/home/user1/.opam/default/.opam-switch/sources/lambdapi/src/core/`
 shows that `sym_sym_whnf` sends a shared non-injective head to
 `add_to_unsolved`, which attempts `Eval.pure_eq_modulo` before custom
 unification rules. `eval.ml` weak-head-normalizes unequal applications
@@ -1547,6 +1601,10 @@ too late. It is source-level mechanism evidence, not yet a profile proving
 the cause of this particular timeout. Do not declare a functor/object
 operation injective merely to bypass the comparison, seal its definition,
 or add an equality axiom.
+The earlier release-cache inspection found the same broad mechanism but
+was not the correct installed-source baseline. Fresh isolated pinned-copy
+checks and their unsuccessful alternatives are recorded in the later
+proof-projection archive; no modified checker was installed.
 
 Next isolate this comparison cost while preserving the canonical degree
 architecture and the whole-window baseline. An experimental checker copy,

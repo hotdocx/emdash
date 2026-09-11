@@ -4514,6 +4514,17 @@ large sharing consumer remains unqualified. The parent plan and
 checked results, actual timeouts and interrupted checks. No active owner
 or installed checker is changed.
 
+The guarded continuation narrows the failure before H: both source
+differentials compare, but the derived chain-zero proof and the selected
+lower-row monicity observation exhaust the 2 GiB limit. Both proofs separately
+typecheck. Direct native input and specialized evidence-record alternatives
+have not removed the critical failure; none is promoted. The parent ledger
+and `emdash2/audits/bounded-homology-proof-projection-2026-09-11/` preserve
+43 source/patch snapshots and two further record variants with explicit
+statuses. All future checker experiments must use the resource guard,
+including isolated checker binaries. The next step is smaller proof-observer
+and implicit-motive isolation, not another unmeasured representation migration.
+
 ### Generic Finite Result Assembly: Indexed-Record Qualification
 
 The parent plan's

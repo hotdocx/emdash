@@ -1,0 +1,1845 @@
+diff --git a/emdash2/tmp/probes/homology_finite_constructor_context.lp b/emdash2/tmp/probes/homology_finite_constructor_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_finite_constructor_context.lp
+@@ -0,0 +1,89 @@
++/* Symbolic finite row data; every window uses overlapping original indices. */
++require open emdash.tmp.probes.homology_finite_row_lookup;
++require open emdash.emdash3_2_homology_window_connecting_transformation;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++constant symbol P : τ (Functor (Product_cat C C) C);
++constant symbol t : τ (Obj C);
++constant symbol Add : τ (@AdditiveCategory C P t);
++constant symbol K : τ (@HasComputationalKernels C (@additive_preadditive C P t Add));
++constant symbol V : τ (@HasComputationalCokernels C (@additive_preadditive C P t Add));
++symbol PA : τ (@PreAbelianCategory C P t)
++≔ @preabelian_category_intro C P t Add K V;
++constant symbol Mono : τ (@HasLiftsAlongMonomorphisms C
++  (@additive_preadditive C P t Add) V);
++constant symbol Epi : τ (@HasColiftsAlongEpimorphisms C
++  (@additive_preadditive C P t Add) K);
++symbol Ab : τ (@ComputationalAbelianCategory C P t)
++≔ @computational_abelian_category_intro C P t PA Mono Epi;
++constant symbol T : τ (@TerminalObject C t);
++constant symbol T0 : τ (@TerminalObject (Op_cat C) t);
++constant symbol KP : τ (@KernelPresentation C
++  (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab))
++  t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)));
++constant symbol QP : τ (@CokernelPresentation C
++  (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab))
++  t T0 (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)));
++constant symbol n : τ Nat_grpd;
++constant symbol rows : τ (FiniteDegree (succ (succ (succ n)))) →
++  τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T);
++constant symbol maps : Π j : τ (FiniteDegree (succ (succ n))),
++  τ (@Transf I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab)
++      T (rows (@finite_degree_weaken (succ (succ n)) j)))
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab)
++      T (rows (finite_degree_next (succ (succ n)) j))));
++constant symbol zeros : Π j : τ (FiniteDegree (succ n)),
++  τ (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (rows (@finite_degree_weaken (succ (succ n))
++      (@finite_degree_weaken (succ n) j)))
++    (rows (finite_degree_next (succ (succ n))
++      (@finite_degree_weaken (succ n) j)))
++    (rows (finite_degree_next (succ (succ n))
++      (finite_degree_next (succ n) j)))
++    (maps (@finite_degree_weaken (succ n) j))
++    (maps (finite_degree_next (succ n) j)));
++constant symbol j : τ (FiniteDegree n);
++constant symbol x : τ (Obj I);
++constant symbol y : τ (Obj I);
++
++symbol window (k : τ (FiniteDegree n)) : τ (@HomologyWindowFamily I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T)
++≔ @homology_finite_row_window I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T n rows maps zeros k;
++
++symbol next_state (k : τ (FiniteDegree n))
++≔ @homology_finite_row_triple I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T (succ n)
++  rows maps zeros (finite_degree_next n k);
++
++// Lower triple and upper lookup share actual data, not an equality glue input.
++assert ⊢ @homology_window_family_row0 I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T (window j)
++  ≡ @homology_row_triple_row0 I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (next_state j);
++assert ⊢ @homology_window_family_G I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T (window j)
++  ≡ @homology_row_triple_first I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (next_state j);
++assert ⊢ @homology_window_family_lower_zero I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T (window j)
++  ≡ zeros (finite_degree_next n j);
++
++// Direct whole H endpoints of the first and last connecting arrows.
++symbol first_HC : τ (Functor I C)
++≔ @homology_window_source_homology_func I C C1 P t Ab T KP T0 QP
++    (window (finite_degree_first n));
++symbol last_HA : τ (Functor I C)
++≔ @homology_window_target_homology_func I C C1 P t Ab T KP T0 QP
++    (window (finite_degree_last n));
++symbol last_delta
++≔ @homology_window_connecting_transf I C C1 P t Ab T KP T0 QP
++    (window (finite_degree_last n));
++assert ⊢ @tapp0_fapp0 I C _ last_HA x last_delta
++  : τ (Hom C
++    (@fapp0 I C (@homology_window_source_homology_func I C C1 P t Ab T KP T0 QP
++      (window (finite_degree_last n))) x)
++    (@fapp0 I C last_HA x));
+diff --git a/emdash2/tmp/probes/homology_finite_constructor_operations.lp b/emdash2/tmp/probes/homology_finite_constructor_operations.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_finite_constructor_operations.lp
+@@ -0,0 +1,38 @@
++/* Canonical degree operations: each state selects H and its maps once. */
++require open emdash.tmp.probes.homology_finite_constructor_context;
++require open emdash.tmp.probes.homology_row_triple_right_points;
++
++symbol degree_triple (k : τ (FiniteDegree (succ n)))
++≔ @homology_finite_row_triple I C C1 P t (@computational_abelian_preabelian C P t Ab) T (succ n)
++    rows maps zeros k;
++
++symbol degree_object (k : τ (FiniteDegree (succ n))) (role : τ HomologyRole)
++  : τ (Obj C)
++≔ @homology_role_choose (Obj C)
++    (@homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_middle_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_right_homology I C C1 P t Ab T T0 KP QP (degree_triple k) x)
++    role;
++
++symbol degree_inclusion (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_a) (degree_object k homology_role_b))
++≔ @homology_row_triple_homology_inclusion I C C1 P t (@computational_abelian_preabelian C P t Ab)
++    T T0 KP QP (degree_triple k) x;
++symbol degree_projection (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_b) (degree_object k homology_role_c))
++≔ @homology_row_triple_homology_projection I C C1 P t Ab
++    T T0 KP QP (degree_triple k) x;
++
++// The existing connecting component uses the same upper/lower degree choices.
++symbol degree_connecting (k : τ (FiniteDegree n))
++  : τ (Hom C
++    (degree_object (@finite_degree_weaken n k) homology_role_c)
++    (degree_object (finite_degree_next n k) homology_role_a))
++≔ @homology_window_connecting_at I C C1 P t Ab T KP T0 QP (window k) x;
++
++// Whole action in the groupoidal finite-degree parameter uses existing lifting.
++// This is NOT a newly constructed whole I-action on the complete LES.
++symbol degree_object_func (role : τ HomologyRole)
++  : τ (Functor (Path_cat (FiniteDegree (succ n))) C)
++≔ @fapp0 _ _ (@path_lift_func (FiniteDegree (succ n)) C)
++    (λ k : τ (FiniteDegree (succ n)), degree_object k role);
+diff --git a/emdash2/tmp/probes/homology_same_boundary_usability.lp b/emdash2/tmp/probes/homology_same_boundary_usability.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_same_boundary_usability.lp
+@@ -0,0 +1,64 @@
++/* Usability through Q's original selection at the SAME whole boundary.
++   No alternate boundary, new selection, object transport or new unifier. */
++require open emdash.emdash3_2_zero_arrow_cone_homology;
++
++symbol homology_same_boundary_diagram [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (Q : τ (@CokernelPresentation C S t T0 V))
++  (z : τ (Obj (@ZeroArrowCone_cat C t T)))
++  : τ (Functor WalkingArrow_cat C)
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@kernel_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T W P
++      (@zero_arrow_cone_first_func C t T)
++      (@zero_arrow_cone_diagram_func C t T)
++      (@zero_arrow_cone_universal_transf C C1 t T)) z;
++
++symbol homology_same_boundary_selected_object [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (Q : τ (@CokernelPresentation C S t T0 V))
++  (z : τ (Obj (@ZeroArrowCone_cat C t T))) : τ (Obj C)
++≔ @sigma_Fst _ _ (@cokernel_presentation_selected C S V
++    (@homology_same_boundary_diagram C S C1 t T T0 W V P Q z));
++
++symbol homology_same_boundary_selected_path [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (Q : τ (@CokernelPresentation C S t T0 V))
++  (z : τ (Obj (@ZeroArrowCone_cat C t T)))
++  : τ (@= (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z) (@homology_same_boundary_selected_object C S C1 t T T0 W V P Q z))
++≔ @eq_refl (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z);
++
++symbol homology_to_selected_hom [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (Q : τ (@CokernelPresentation C S t T0 V))
++  [z0 z1 : τ (Obj (@ZeroArrowCone_cat C t T))]
++  (f : τ (Hom C (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z0) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z1)))
++  : τ (Hom C (@homology_same_boundary_selected_object C S C1 t T T0 W V P Q z0) (@homology_same_boundary_selected_object C S C1 t T T0 W V P Q z1))
++≔ f;
++
++symbol homology_from_selected_hom [C : Cat] [S : τ (@PreadditiveCategory C)]
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
++  [T0 : τ (@TerminalObject (Op_cat C) t)]
++  [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
++  (P : τ (@KernelPresentation C S t T W))
++  (Q : τ (@CokernelPresentation C S t T0 V))
++  [z0 z1 : τ (Obj (@ZeroArrowCone_cat C t T))]
++  (f : τ (Hom C (@homology_same_boundary_selected_object C S C1 t T T0 W V P Q z0) (@homology_same_boundary_selected_object C S C1 t T T0 W V P Q z1)))
++  : τ (Hom C (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z0) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z1))
++≔ f;
+diff --git a/emdash2/tmp/probes/homology_row_triple_native_inputs.lp b/emdash2/tmp/probes/homology_row_triple_native_inputs.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_native_inputs.lp
+@@ -0,0 +1,26 @@
++/* The original native inputs, named before applying the whole H. */
++require open emdash.tmp.probes.homology_row_triple_right_points;
++
++symbol homology_row_triple_source_input [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (state : τ (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T)) (x : τ (Obj I))
++  : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP
++    (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++    (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T state x);
++
++symbol homology_row_triple_right_input [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (Ab : τ (@ComputationalAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))))
++  (state : τ (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T)) (x : τ (Obj I))
++  : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) KP
++    (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_tgt)
++    (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_tgt)
++    (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x)) walking_arrow_tgt)
++    (@homology_row_triple_right_pair I C C1 P t Ab T state x);
+diff --git a/emdash2/tmp/probes/homology_finite_connecting_selected_usability.lp b/emdash2/tmp/probes/homology_finite_connecting_selected_usability.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_finite_connecting_selected_usability.lp
+@@ -0,0 +1,15 @@
++/* Existing Q usability mediates the typing; both identities erase to f. */
++require open emdash.tmp.probes.homology_finite_degree_point_operations;
++require open emdash.tmp.probes.homology_row_triple_native_inputs;
++require open emdash.tmp.probes.homology_same_boundary_usability;
++
++symbol degree_connecting_selected (k : τ (FiniteDegree n))
++  : τ (Hom C (@homology_same_boundary_selected_object C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP (@homology_row_triple_right_input I C C1 P t Ab T KP (degree_triple (@finite_degree_weaken n k)) x)) (@homology_same_boundary_selected_object C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP (@homology_row_triple_source_input I C C1 P t Ab T KP (degree_triple (finite_degree_next n k)) x)))
++≔ @homology_window_connecting_at I C C1 P t Ab T KP T0 QP (window k) x;
++
++symbol degree_connecting_via_selected (k : τ (FiniteDegree n))
++  : τ (Hom C (degree_object (@finite_degree_weaken n k) homology_role_c)
++    (degree_object (finite_degree_next n k) homology_role_a))
++≔ @homology_from_selected_hom C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)) (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP
++    (@homology_row_triple_right_input I C C1 P t Ab T KP (degree_triple (@finite_degree_weaken n k)) x) (@homology_row_triple_source_input I C C1 P t Ab T KP (degree_triple (finite_degree_next n k)) x)
++    (degree_connecting_selected k);
+diff --git a/emdash2/tmp/probes/homology_direct_native_input.lp b/emdash2/tmp/probes/homology_direct_native_input.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_native_input.lp
+@@ -0,0 +1,72 @@
++/* Direct ordinary-target native input from the ORIGINAL chain-zero triangle.
++   The comparison cell is derived from the existing zero path; no new cone,
++   square equation, kernel choice or caller-supplied naturality field is added. */
++require open emdash.emdash3_2_chain_pair_zero_cones;
++require open emdash.emdash3_2_one_cat_arrow_diagrams;
++require open emdash.emdash3_2_additive_categories;
++
++symbol direct_chain_zero_cell
++  [C : Cat] (S : τ (@PreadditiveCategory C))
++  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Hom (Hom_cat C A D)
++      (@comp_fapp0 C A t D (@preadditive_hom_zero C S t D)
++        (@terminal_arrow_fapp0 C t T A))
++      (@comp_fapp0 C A B D (@computational_chain_pair_d C S A B D pair)
++        (@computational_chain_pair_dnext C S A B D pair)))
++≔ @path_to_hom (Hom_cat C A D) _ _
++    (@eq_trans (Hom C A D) _ _ _
++      (@preadditive_comp_zero_left_path C S A t D
++        (@terminal_arrow_fapp0 C t T A))
++      (@eq_sym _ _ _ (@computational_chain_pair_path C S A B D pair)));
++
++symbol direct_chain_zero_square
++  [C : Cat] (S : τ (@PreadditiveCategory C))
++  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++≔ @lax_square C A B t D
++    (@terminal_arrow_fapp0 C t T A)
++    (@computational_chain_pair_d C S A B D pair)
++    (@computational_chain_pair_dnext C S A B D pair)
++    (@preadditive_hom_zero C S t D)
++    (@direct_chain_zero_cell C S t T A B D pair);
++
++// This is an actual transformation, supplied by the existing whole functor.
++symbol direct_chain_zero_transf
++  [C : Cat] (S : τ (@PreadditiveCategory C))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (@Transf WalkingArrow_cat C
++      (@walking_arrow_func C A t (@terminal_arrow_fapp0 C t T A))
++      (@chain_pair_outgoing_diagram C S A B D pair))
++≔ @fapp1_fapp0 (@LaxArrow_cat C) (Functor_cat WalkingArrow_cat C)
++    (@one_cat_arrow_diagram_func C C1)
++    (@lax_edge C A t (@terminal_arrow_fapp0 C t T A))
++    (@lax_edge C B D (@computational_chain_pair_d C S A B D pair))
++    (@direct_chain_zero_square C S t T A B D pair);
++
++// Forming this native complex needs no kernel/cokernel capability.
++symbol one_cat_chain_pair_zero_cone
++  [C : Cat] (S : τ (@PreadditiveCategory C))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
++  [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
++  : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @zero_arrow_cone_obj C t T A
++    (@chain_pair_outgoing_diagram C S A B D pair)
++    (@direct_chain_zero_transf C S C1 t T A B D pair);
++
++// Whole action in the existing groupoidal fixed-vertex pair parameter.
++// This does not yet replace the general raw chain-map adapter.
++symbol one_cat_chain_pair_zero_cone_func
++  [C : Cat] (S : τ (@PreadditiveCategory C))
++  (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
++  (A B D : τ (Obj C))
++  : τ (Functor (Path_cat (@ComputationalChainPair C S A B D))
++      (@ZeroArrowCone_cat C t T))
++≔ @fapp0 _ _ (@path_lift_func (@ComputationalChainPair C S A B D)
++    (@ZeroArrowCone_cat C t T))
++    (λ pair : τ (@ComputationalChainPair C S A B D),
++      @one_cat_chain_pair_zero_cone C S C1 t T A B D pair);
+diff --git a/emdash2/tmp/probes/homology_direct_native_input_checks.lp b/emdash2/tmp/probes/homology_direct_native_input_checks.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_native_input_checks.lp
+@@ -0,0 +1,35 @@
++/* Original observations; no kernel/cokernel capability is present. */
++require open emdash.tmp.probes.homology_direct_native_input;
++require open emdash.emdash3_2_one_cat_zero_cones;
++
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol A : τ (Obj C);
++constant symbol B : τ (Obj C);
++constant symbol D : τ (Obj C);
++constant symbol pair : τ (@ComputationalChainPair C S A B D);
++symbol input ≔ @one_cat_chain_pair_zero_cone C S C1 t T A B D pair;
++symbol incoming ≔ @tapp0_fapp0 _ _ _ _ input
++  (@zero_arrow_cone_universal_transf C C1 t T);
++
++assert ⊢ @fapp0 _ _ (@zero_arrow_cone_first_func C t T) input ≡ A;
++assert ⊢ @fapp0 _ _ (@zero_arrow_cone_diagram_func C t T) input
++  ≡ @chain_pair_outgoing_diagram C S A B D pair;
++assert ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_src incoming
++  ≡ @computational_chain_pair_dnext C S A B D pair;
++assert ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_tgt incoming
++  ≡ @preadditive_hom_zero C S t D;
++assert ⊢ @fapp1_fapp0 WalkingArrow_cat C
++  (@fapp0 _ _ (@zero_arrow_cone_diagram_func C t T) input)
++  walking_arrow_src walking_arrow_tgt walking_arrow_generator
++  ≡ @computational_chain_pair_d C S A B D pair;
++assert ⊢ @fapp0 _ _ (@one_cat_chain_pair_zero_cone_func C S C1 t T A B D) pair
++  ≡ input;
++
++// The parameter action remains a whole Hom functor, not a capped point rule.
++constant symbol other : τ (@ComputationalChainPair C S A B D);
++type @fapp1_func _ _ (@one_cat_chain_pair_zero_cone_func C S C1 t T A B D)
++  pair other;
+diff --git a/emdash2/tmp/probes/homology_direct_source_homology.lp b/emdash2/tmp/probes/homology_direct_source_homology.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_source_homology.lp
+@@ -0,0 +1,22 @@
++/* Same global H, applied to the direct ordinary-target native input. */
++require open emdash.tmp.probes.homology_row_triple_points;
++require open emdash.tmp.probes.homology_direct_native_input;
++
++symbol homology_row_triple_direct_source_homology [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA)
++    C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@one_cat_chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t PA) C1 t T (@fapp0 (@ZeroArrowCone_cat C
++    t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++    C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) (@homology_row_triple_source_pair I C C1 P t PA T
++    state x));
+diff --git a/emdash2/tmp/probes/homology_source_image_sharing_old.lp b/emdash2/tmp/probes/homology_source_image_sharing_old.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_image_sharing_old.lp
+@@ -0,0 +1,6 @@
++/* Paired comparison on the same original row data. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++symbol upper_H ≔ @homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP upper_triple x;
++symbol lower_H ≔ @homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP lower_triple x;
++assert ⊢ upper_H ≡ lower_H;
+diff --git a/emdash2/tmp/probes/homology_source_image_sharing_direct.lp b/emdash2/tmp/probes/homology_source_image_sharing_direct.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_image_sharing_direct.lp
+@@ -0,0 +1,6 @@
++/* Paired comparison on the same original row data. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_direct_source_homology;
++symbol upper_H ≔ @homology_row_triple_direct_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP upper_triple x;
++symbol lower_H ≔ @homology_row_triple_direct_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP lower_triple x;
++assert ⊢ upper_H ≡ lower_H;
+diff --git a/emdash2/tmp/probes/homology_direct_input_sharing_context.lp b/emdash2/tmp/probes/homology_direct_input_sharing_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_input_sharing_context.lp
+@@ -0,0 +1,14 @@
++/* Isolate native input equality from its homology image. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_direct_native_input;
++require open emdash.tmp.probes.homology_row_triple_points;
++symbol direct_input (state : τ (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T))
++  : τ (Obj (@ZeroArrowCone_cat C t T))
++≔ @one_cat_chain_pair_zero_cone C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) C1 t T
++  (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++  (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++  (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T state)) x))
++  (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T state x);
+diff --git a/emdash2/tmp/probes/homology_direct_input_sharing.lp b/emdash2/tmp/probes/homology_direct_input_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_input_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_direct_input_sharing_context;
++assert ⊢ direct_input upper_triple ≡ direct_input lower_triple;
+diff --git a/emdash2/tmp/probes/homology_opaque_image_sharing.lp b/emdash2/tmp/probes/homology_opaque_image_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_opaque_image_sharing.lp
+@@ -0,0 +1,4 @@
++require open emdash.tmp.probes.homology_direct_input_sharing_context;
++constant symbol F : τ (Functor (@ZeroArrowCone_cat C t T) C);
++assert ⊢ @fapp0 _ _ F (direct_input upper_triple)
++  ≡ @fapp0 _ _ F (direct_input lower_triple);
+diff --git a/emdash2/tmp/probes/homology_direct_input_match_trace.lp b/emdash2/tmp/probes/homology_direct_input_match_trace.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_direct_input_match_trace.lp
+@@ -0,0 +1,7 @@
++/* Diagnostic only: reduced printing while observing existing rule matching. */
++require open emdash.tmp.probes.homology_direct_input_sharing_context;
++flag "print_implicits" off;
++flag "print_domains" off;
++flag "print_contexts" off;
++flag "print_meta_args" off;
++assert ⊢ direct_input upper_triple ≡ direct_input lower_triple;
+diff --git a/emdash2/tmp/probes/homology_source_path_declarations.lp b/emdash2/tmp/probes/homology_source_path_declarations.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_path_declarations.lp
+@@ -0,0 +1,5 @@
++/* Check each derived path separately before comparing proofs. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++symbol upper_path ≔ @computational_chain_pair_path C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x);
++symbol lower_path ≔ @computational_chain_pair_path C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x);
+diff --git a/emdash2/tmp/probes/homology_source_path_refl.lp b/emdash2/tmp/probes/homology_source_path_refl.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_path_refl.lp
+@@ -0,0 +1,4 @@
++/* Proof-time comparison rather than raw proof conversion. */
++require open emdash.tmp.probes.homology_source_path_declarations;
++symbol same_path : τ (@= _ upper_path lower_path)
++≔ @eq_refl _ upper_path;
+diff --git a/emdash2/tmp/probes/homology_source_mono_context.lp b/emdash2/tmp/probes/homology_source_mono_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_mono_context.lp
+@@ -0,0 +1,13 @@
++/* Locate the chain-zero proof's selected monicity boundary. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++
++symbol PA0 ≔ @computational_abelian_preabelian C P t Ab;
++symbol S0 ≔ @computational_homology_preadditive C P t PA0;
++symbol row2 (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @short_exact_row_family_at I C C1 P t PA0 T
++    (@homology_row_triple_row2 I C C1 P t PA0 T state) x;
++symbol mono2 (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @computational_short_exact_monic C P t PA0 _ _ _
++    (@computational_short_exact_row_pair C P t PA0 _ _ _ (row2 state))
++    (@computational_short_exact_row_evidence C P t PA0 _ _ _ (row2 state));
+diff --git a/emdash2/tmp/probes/homology_source_mono_sharing.lp b/emdash2/tmp/probes/homology_source_mono_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_mono_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++assert ⊢ mono2 upper_triple ≡ mono2 lower_triple;
+diff --git a/emdash2/tmp/probes/homology_source_row2_sharing.lp b/emdash2/tmp/probes/homology_source_row2_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_source_row2_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++assert ⊢ row2 upper_triple ≡ row2 lower_triple;
+diff --git a/emdash2/tmp/probes/homology_row_triple_points.lp b/emdash2/tmp/probes/homology_row_triple_points.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_triple_points.lp
+@@ -0,0 +1,176 @@
++/* Point views of a coherent row triple through the original whole-H owners. */
++require open emdash.emdash3_2_homology_row_spans;
++require open emdash.emdash3_2_short_exact_row_chain_columns;
++require open emdash.emdash3_2_chain_pair_homology_actions;
++
++symbol homology_row_triple_source_pair [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_source_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_middle_pair [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_middle_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_inclusion [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @short_exact_row_chain_inclusion C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C
++    C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t
++    T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1
++    P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t
++    PA T state)) x)) walking_arrow_tgt) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row0 I C C1
++    P t PA T state) x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    x) (@short_exact_row_family_at I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)
++    (@homology_row_triple_row1 I C C1 P t PA T state) (@homology_row_triple_first I C C1 P t PA T state) x)
++    (@short_exact_row_family_transf_at I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)
++    (@homology_row_triple_row2 I C C1 P t PA T state) (@homology_row_triple_second I C C1 P t PA T state) x)
++    ((@homology_row_triple_zero I C C1 P t PA T state) x);
++
++symbol homology_row_triple_source_homology [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA)
++    C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 (@ZeroArrowCone_cat C
++    t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C
++    C1 P t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t
++    PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) (@homology_row_triple_source_pair I C C1 P t PA T
++    state x));
++
++symbol homology_row_triple_middle_homology [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t PA)
++    C1 t T T0 (@preabelian_kernels C P t PA) (@preabelian_cokernels C P t PA) KP QP) (@chain_pair_zero_cone C
++    (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA) KP (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I C C1 P t
++    PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x)) walking_arrow_src) (@homology_row_triple_middle_pair
++    I C C1 P t PA T state x));
++
++symbol homology_row_triple_homology_inclusion [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (T0 : τ (@TerminalObject (Op_cat C) t))
++  (KP : τ (@KernelPresentation C (@computational_homology_preadditive C P t PA) t T (@preabelian_kernels C P t PA)))
++(QP : τ (@CokernelPresentation C (@computational_homology_preadditive C P t PA) t T0 (@preabelian_cokernels C P t
++    PA)))
++  (state : τ (@HomologyRowTriple I C C1 P t PA T)) (x : τ (Obj I))
++≔ @chain_pair_homology_action C (@computational_homology_preadditive C P t PA) C1 t T T0 (@preabelian_kernels C P t
++    PA) (@preabelian_cokernels C P t PA) KP QP (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t
++    T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row0 I
++    C C1 P t PA T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t PA
++    T state)) x)) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA
++    T state)) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P
++    t PA T (@homology_row_triple_row0 I C C1 P t PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row1 I C C1 P t
++    PA T state)) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T (@homology_row_triple_row2 I C C1 P t PA T state)) x))
++    walking_arrow_src) (@homology_row_triple_source_pair I C C1 P t PA T state x) (@homology_row_triple_middle_pair I
++    C C1 P t PA T state x) (@homology_row_triple_inclusion I C C1 P t PA T state x);
++
+diff --git a/emdash2/tmp/probes/run_homology_boundary_leaf.sh b/emdash2/tmp/probes/run_homology_boundary_leaf.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_homology_boundary_leaf.sh
+@@ -0,0 +1,22 @@
++#!/usr/bin/env bash
++set -u
++cd "$(dirname "$0")/../.."
++stage="${1:?stage required}"
++module="${2:?module required}"
++case "$stage" in /tmp/emdash-homology-boundary-research.??????) ;; *) exit 2 ;; esac
++case "$module" in tmp/probes/homology_*.lp|tmp/probes/exact_*.lp|tmp/probes/finite_*.lp) ;; *) exit 2 ;; esac
++shift 2
++if [[ ! -d "$stage" || ! -f "$module" ]]; then exit 2; fi
++mkdir -p logs/probes
++name="$(basename "$module" .lp)"
++log="$(pwd)/logs/probes/$name-leaf-$(date +%Y%m%d-%H%M%S).log"
++cp "$module" "$stage/$module"
++printf 'checking %s; log: %s\n' "$module" "$log"
++cd "$stage"
++started=$SECONDS
++bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++  lambdapi check -c --no-colors "$@" "$module" >"$log" 2>&1
++rc=$?
++printf 'finished %s: exit %s, elapsed %ss\n' "$module" "$rc" "$((SECONDS-started))" | tee -a "$log"
++tail -8 "$log" | cut -c1-260
++exit "$rc"
+diff --git a/emdash2/tmp/probes/run_tracked_leaf.sh b/emdash2/tmp/probes/run_tracked_leaf.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_tracked_leaf.sh
+@@ -0,0 +1,14 @@
++#!/usr/bin/env bash
++set -u
++job="${1:?job directory required}"
++stage="${2:?stage required}"
++target="${3:?target required}"
++case "$job" in /tmp/emdash-tracked-leaf.??????) ;; *) exit 2 ;; esac
++case "$stage" in /tmp/emdash-homology-boundary-research.??????) ;; *) exit 2 ;; esac
++case "$target" in tmp/probes/homology_*.lp|tmp/probes/finite_*.lp) ;; *) exit 2 ;; esac
++shift 3
++bash /home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_homology_boundary_leaf.sh \
++  "$stage" "$target" "$@" > "$job/output.log" 2>&1
++rc=$?
++printf '%s\n' "$rc" > "$job/exit-code"
++exit "$rc"
+diff --git a/emdash2/tmp/probes/run_row_family_owner_probe.sh b/emdash2/tmp/probes/run_row_family_owner_probe.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_row_family_owner_probe.sh
+@@ -0,0 +1,41 @@
++#!/usr/bin/env bash
++set -euo pipefail
++stage="${1:?stage required}"
++case "$stage" in /tmp/emdash-row-family-owner.??????) ;; *) exit 2 ;; esac
++cd "$stage"
++graph="$(node - <<'NODE'
++const fs=require('fs');
++const changed='emdash3_2_short_exact_row_families.lp';
++const roots=['examples/homology_window_families.lp',
++ 'tmp/probes/homology_finite_indexed_data_sharing.lp',
++ 'tmp/probes/homology_direct_input_sharing.lp',
++ 'tmp/probes/homology_source_image_sharing_old.lp',
++ 'tmp/probes/homology_finite_degree_operations.lp'];
++const dependencies=new Map(),order=[],visiting=new Set();
++function visit(f){if(visiting.has(f))throw Error('cycle '+f);if(dependencies.has(f))return;
++ visiting.add(f);const s=fs.readFileSync(f,'utf8');
++ const ds=[...s.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g)].map(m=>m[1].slice(7).replaceAll('.','/')+'.lp');
++ dependencies.set(f,ds);ds.forEach(visit);visiting.delete(f);order.push(f);}
++roots.forEach(visit);
++const affected=new Set();
++for(const f of order){if(f===changed||dependencies.get(f).some(d=>affected.has(d)))affected.add(f);}
++for(const f of affected){for(const ext of ['lpo','lpi','lpj']){const p=f.replace(/\.lp$/,'.'+ext);if(fs.existsSync(p))fs.unlinkSync(p);}}
++console.log(order.filter(f=>affected.has(f)||roots.includes(f)||!fs.existsSync(f.replace(/\.lp$/,'.lpo'))).join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$graph"
++log="/home/user1/emdash1-long-exact-v1/emdash2/logs/probes/row-family-owner-$(date +%Y%m%d-%H%M%S).log"
++printf 'stage=%s targets=%s\n' "$stage" "${#targets[@]}" > "$log"
++printf 'checking %s affected/missing targets; log=%s\n' "${#targets[@]}" "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    lambdapi check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then tail -8 "$log" | cut -c1-220; exit "$rc"; fi
++done
++printf 'owner-position checks completed; log=%s\n' "$log"
+diff --git a/emdash2/tmp/probes/run_short_evidence_owner_probe.sh b/emdash2/tmp/probes/run_short_evidence_owner_probe.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_short_evidence_owner_probe.sh
+@@ -0,0 +1,41 @@
++#!/usr/bin/env bash
++set -euo pipefail
++stage="${1:?stage required}"
++case "$stage" in /tmp/emdash-short-evidence-owner.??????) ;; *) exit 2 ;; esac
++cd "$stage"
++graph="$(node - <<'NODE'
++const fs=require('fs');
++const changed='emdash3_2_short_exact_sequences.lp';
++const roots=[
++ 'tmp/probes/homology_source_mono_sharing.lp',
++ 'tmp/probes/homology_projection_isolation_5.lp',
++ 'tmp/probes/homology_source_image_sharing_old.lp',
++ 'tmp/probes/homology_finite_degree_operations.lp'];
++const dependencies=new Map(),order=[],visiting=new Set();
++function visit(f){if(visiting.has(f))throw Error('cycle '+f);if(dependencies.has(f))return;
++ visiting.add(f);const s=fs.readFileSync(f,'utf8');
++ const ds=[...s.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g)].map(m=>m[1].slice(7).replaceAll('.','/')+'.lp');
++ dependencies.set(f,ds);ds.forEach(visit);visiting.delete(f);order.push(f);}
++roots.forEach(visit);
++const affected=new Set();
++for(const f of order){if(f===changed||dependencies.get(f).some(d=>affected.has(d)))affected.add(f);}
++for(const f of affected){for(const ext of ['lpo','lpi','lpj']){const p=f.replace(/\.lp$/,'.'+ext);if(fs.existsSync(p))fs.unlinkSync(p);}}
++console.log(order.filter(f=>affected.has(f)||roots.includes(f)||!fs.existsSync(f.replace(/\.lp$/,'.lpo'))).join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$graph"
++log="/home/user1/emdash1-long-exact-v1/emdash2/logs/probes/short-evidence-owner-$(date +%Y%m%d-%H%M%S).log"
++printf 'stage=%s targets=%s\n' "$stage" "${#targets[@]}" > "$log"
++printf 'checking %s affected/missing targets; log=%s\n' "${#targets[@]}" "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    lambdapi check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then tail -8 "$log" | cut -c1-220; exit "$rc"; fi
++done
++printf 'owner-position checks completed; log=%s\n' "$log"
+diff --git a/emdash2/tmp/probes/run_short_evidence_family_owner_probe.sh b/emdash2/tmp/probes/run_short_evidence_family_owner_probe.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_short_evidence_family_owner_probe.sh
+@@ -0,0 +1,41 @@
++#!/usr/bin/env bash
++set -euo pipefail
++stage="${1:?stage required}"
++case "$stage" in /tmp/emdash-short-evidence-owner.??????) ;; *) exit 2 ;; esac
++cd "$stage"
++graph="$(node - <<'NODE'
++const fs=require('fs');
++const changed=new Set(['emdash3_2_short_exact_sequences.lp','emdash3_2_short_exact_row_families.lp']);
++const roots=[
++ 'tmp/probes/homology_source_mono_sharing.lp',
++ 'tmp/probes/homology_projection_isolation_5.lp',
++ 'tmp/probes/homology_source_image_sharing_old.lp',
++ 'tmp/probes/homology_finite_degree_operations.lp'];
++const dependencies=new Map(),order=[],visiting=new Set();
++function visit(f){if(visiting.has(f))throw Error('cycle '+f);if(dependencies.has(f))return;
++ visiting.add(f);const s=fs.readFileSync(f,'utf8');
++ const ds=[...s.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g)].map(m=>m[1].slice(7).replaceAll('.','/')+'.lp');
++ dependencies.set(f,ds);ds.forEach(visit);visiting.delete(f);order.push(f);}
++roots.forEach(visit);
++const affected=new Set();
++for(const f of order){if(changed.has(f)||dependencies.get(f).some(d=>affected.has(d)))affected.add(f);}
++for(const f of affected){for(const ext of ['lpo','lpi','lpj']){const p=f.replace(/\.lp$/,'.'+ext);if(fs.existsSync(p))fs.unlinkSync(p);}}
++console.log(order.filter(f=>affected.has(f)||roots.includes(f)||!fs.existsSync(f.replace(/\.lp$/,'.lpo'))).join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$graph"
++log="/home/user1/emdash1-long-exact-v1/emdash2/logs/probes/short-evidence-owner-$(date +%Y%m%d-%H%M%S).log"
++printf 'stage=%s targets=%s\n' "$stage" "${#targets[@]}" > "$log"
++printf 'checking %s affected/missing targets; log=%s\n' "${#targets[@]}" "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    lambdapi check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then tail -8 "$log" | cut -c1-220; exit "$rc"; fi
++done
++printf 'owner-position checks completed; log=%s\n' "$log"
+diff --git a/emdash2/tmp/probes/run_lp_congruence_diagnostic.sh b/emdash2/tmp/probes/run_lp_congruence_diagnostic.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_lp_congruence_diagnostic.sh
+@@ -0,0 +1,56 @@
++#!/usr/bin/env bash
++set -euo pipefail
++experiment="${1:?experiment directory required}"
++mode="${2:?control or trial required}"
++case "$experiment" in /tmp/emdash-lp-congruence.??????) ;; *) exit 2 ;; esac
++case "$mode" in control|trial) ;; *) exit 2 ;; esac
++stage="$experiment/$mode-env"
++checker="$experiment/$mode/_build/default/src/cli/lambdapi.exe"
++[[ -d "$stage" && -x "$checker" ]] || exit 2
++cd "$stage"
++
++# These are private copied compilation artifacts, not the installed checker's
++# validated objects. Rebuild them for each binary; never bypass ABI checking.
++node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const root=fs.realpathSync('.');
++if(!/^\/tmp\/emdash-lp-congruence\.[A-Za-z0-9]{6}\/(control|trial)-env$/.test(root))throw Error(root);
++let count=0;
++function clean(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())clean(p);else if(e.isFile()&&/\.(lpo|lpi|lpj)$/.test(e.name)){fs.unlinkSync(p);count++;}}}
++clean(root);console.log(`Removed ${count} private copied object files; source and original objects retained.`);
++NODE
++
++dependency_graph="$(node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const seen=new Set(),active=new Set(),order=[];
++function visit(file){
++ if(active.has(file))throw Error('cycle: '+file);
++ if(seen.has(file))return;
++ if(file.includes('..')||path.isAbsolute(file))throw Error(file);
++ active.add(file);const text=fs.readFileSync(file,'utf8');
++ for(const m of text.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g))visit(m[1].slice(7).replaceAll('.','/')+'.lp');
++ active.delete(file);seen.add(file);order.push(file);
++}
++visit('tmp/probes/homology_finite_direct_action_sharing.lp');
++console.log(order.join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$dependency_graph"
++log="$experiment/$mode-fresh.log"
++printf 'mode=%s targets=%s\n' "$mode" "${#targets[@]}" > "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    "$checker" check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then
++    printf '%s failed: %s; log=%s\n' "$mode" "$target" "$log"
++    tail -6 "$log" | cut -c1-220
++    exit "$rc"
++  fi
++done
++printf '%s completed %s fresh targets; log=%s\n' "$mode" "${#targets[@]}" "$log"
+diff --git a/emdash2/tmp/probes/run_lp_pinned_congruence_diagnostic.sh b/emdash2/tmp/probes/run_lp_pinned_congruence_diagnostic.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_lp_pinned_congruence_diagnostic.sh
+@@ -0,0 +1,56 @@
++#!/usr/bin/env bash
++set -euo pipefail
++experiment="${1:?experiment directory required}"
++mode="${2:?control or trial required}"
++case "$experiment" in /tmp/emdash-lp-congruence.??????) ;; *) exit 2 ;; esac
++case "$mode" in control|trial) ;; *) exit 2 ;; esac
++stage="$experiment/$mode-env"
++checker="$experiment/pin-$mode/_build/default/src/cli/lambdapi.exe"
++[[ -d "$stage" && -x "$checker" ]] || exit 2
++cd "$stage"
++
++# These are private copied compilation artifacts, not the installed checker's
++# validated objects. Rebuild them for each binary; never bypass ABI checking.
++node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const root=fs.realpathSync('.');
++if(!/^\/tmp\/emdash-lp-congruence\.[A-Za-z0-9]{6}\/(control|trial)-env$/.test(root))throw Error(root);
++let count=0;
++function clean(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())clean(p);else if(e.isFile()&&/\.(lpo|lpi|lpj)$/.test(e.name)){fs.unlinkSync(p);count++;}}}
++clean(root);console.log(`Removed ${count} private copied object files; source and original objects retained.`);
++NODE
++
++dependency_graph="$(node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const seen=new Set(),active=new Set(),order=[];
++function visit(file){
++ if(active.has(file))throw Error('cycle: '+file);
++ if(seen.has(file))return;
++ if(file.includes('..')||path.isAbsolute(file))throw Error(file);
++ active.add(file);const text=fs.readFileSync(file,'utf8');
++ for(const m of text.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g))visit(m[1].slice(7).replaceAll('.','/')+'.lp');
++ active.delete(file);seen.add(file);order.push(file);
++}
++visit('tmp/probes/homology_finite_direct_action_sharing.lp');
++console.log(order.join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$dependency_graph"
++log="$experiment/$mode-pinned-fresh.log"
++printf 'mode=%s targets=%s\n' "$mode" "${#targets[@]}" > "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    "$checker" check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then
++    printf '%s failed: %s; log=%s\n' "$mode" "$target" "$log"
++    tail -6 "$log" | cut -c1-220
++    exit "$rc"
++  fi
++done
++printf '%s completed %s fresh targets; log=%s\n' "$mode" "${#targets[@]}" "$log"
+diff --git a/emdash2/tmp/probes/run_lp_spine_diagnostic.sh b/emdash2/tmp/probes/run_lp_spine_diagnostic.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_lp_spine_diagnostic.sh
+@@ -0,0 +1,56 @@
++#!/usr/bin/env bash
++set -euo pipefail
++experiment="${1:?experiment directory required}"
++mode="${2:?control or trial required}"
++case "$experiment" in /tmp/emdash-lp-congruence.??????) ;; *) exit 2 ;; esac
++case "$mode" in control|trial|spine) ;; *) exit 2 ;; esac
++stage="$experiment/$mode-env"
++checker="$experiment/pin-$mode/_build/default/src/cli/lambdapi.exe"
++[[ -d "$stage" && -x "$checker" ]] || exit 2
++cd "$stage"
++
++# These are private copied compilation artifacts, not the installed checker's
++# validated objects. Rebuild them for each binary; never bypass ABI checking.
++node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const root=fs.realpathSync('.');
++if(!/^\/tmp\/emdash-lp-congruence\.[A-Za-z0-9]{6}\/(control|trial|spine)-env$/.test(root))throw Error(root);
++let count=0;
++function clean(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())clean(p);else if(e.isFile()&&/\.(lpo|lpi|lpj)$/.test(e.name)){fs.unlinkSync(p);count++;}}}
++clean(root);console.log(`Removed ${count} private copied object files; source and original objects retained.`);
++NODE
++
++dependency_graph="$(node - <<'NODE'
++const fs=require('fs'),path=require('path');
++const seen=new Set(),active=new Set(),order=[];
++function visit(file){
++ if(active.has(file))throw Error('cycle: '+file);
++ if(seen.has(file))return;
++ if(file.includes('..')||path.isAbsolute(file))throw Error(file);
++ active.add(file);const text=fs.readFileSync(file,'utf8');
++ for(const m of text.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g))visit(m[1].slice(7).replaceAll('.','/')+'.lp');
++ active.delete(file);seen.add(file);order.push(file);
++}
++visit('tmp/probes/homology_finite_direct_action_sharing.lp');
++console.log(order.join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$dependency_graph"
++log="$experiment/$mode-pinned-fresh.log"
++printf 'mode=%s targets=%s\n' "$mode" "${#targets[@]}" > "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    "$checker" check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then
++    printf '%s failed: %s; log=%s\n' "$mode" "$target" "$log"
++    tail -6 "$log" | cut -c1-220
++    exit "$rc"
++  fi
++done
++printf '%s completed %s fresh targets; log=%s\n' "$mode" "${#targets[@]}" "$log"
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_1.lp b/emdash2/tmp/probes/homology_projection_isolation_1.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_1.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 1; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple) ≡ (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple);
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_2.lp b/emdash2/tmp/probes/homology_projection_isolation_2.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_2.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 2; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple)) ≡ (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple));
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_3.lp b/emdash2/tmp/probes/homology_projection_isolation_3.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_3.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 3; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple)) x) ≡ (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple)) x);
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_4.lp b/emdash2/tmp/probes/homology_projection_isolation_4.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_4.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 4; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple)) x)) ≡ (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple)) x));
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_5.lp b/emdash2/tmp/probes/homology_projection_isolation_5.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_5.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 5; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x) ≡ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x);
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_6.lp b/emdash2/tmp/probes/homology_projection_isolation_6.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_6.lp
+@@ -0,0 +1,6 @@
++/* Separate a source-chain-pair field at shared original row data. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++
++assert ⊢ (@computational_chain_pair_dnext C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x))
++  ≡ (@computational_chain_pair_dnext C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x));
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_7.lp b/emdash2/tmp/probes/homology_projection_isolation_7.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_7.lp
+@@ -0,0 +1,6 @@
++/* Separate a source-chain-pair field at shared original row data. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++
++assert ⊢ (@computational_chain_pair_d C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x))
++  ≡ (@computational_chain_pair_d C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x));
+diff --git a/emdash2/tmp/probes/homology_projection_isolation_8.lp b/emdash2/tmp/probes/homology_projection_isolation_8.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_projection_isolation_8.lp
+@@ -0,0 +1,6 @@
++/* Separate a source-chain-pair field at shared original row data. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++
++assert ⊢ (@computational_chain_pair_path C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x))
++  ≡ (@computational_chain_pair_path C (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) _ _ _ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x));
+diff --git a/variants/row-family-stable/emdash3_2_short_exact_row_families.lp b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+new file mode 100644
+--- /dev/null
++++ b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+@@ -0,0 +1,203 @@
++/*
++  A whole native row family with short-exactness evidence at its row views.
++  The actual functor owns all base and higher actions. No square field or
++  second row/complex grammar is introduced.
++*/
++require open emdash.emdash3_2_zero_arrow_cone_chain_pairs;
++require open emdash.emdash3_2_short_exact_rows;
++
++symbol ShortExactRowFamilyData [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T))) : Grpd
++≔ @Pi_grpd (Obj I) (λ x : τ (Obj I), (@ComputationalShortExactTriple C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C
++  (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++  (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x))
++  walking_arrow_tgt) (@zero_arrow_cone_chain_pair C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) R x))));
++
++constant symbol ShortExactRowFamily [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t)) : Grpd;
++
++constant symbol short_exact_row_family_intro [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T))) (short : τ (@ShortExactRowFamilyData I C C1 P t PA T R))
++  : τ (@ShortExactRowFamily I C C1 P t PA T);
++
++symbol short_exact_row_family_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) : τ (Functor I (@ZeroArrowCone_cat C t T));
++rule @short_exact_row_family_func _ _ _ _ _ _ _
++  (@short_exact_row_family_intro _ _ _ _ _ _ _ $F _) ↪ $F;
++
++symbol short_exact_row_family_data [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (@ShortExactRowFamilyData I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F));
++rule @short_exact_row_family_data _ _ _ _ _ _ _
++  (@short_exact_row_family_intro _ _ _ _ _ _ _ _ $data) ↪ $data;
++
++symbol short_exact_row_family_value [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T)))
++  (short : τ (@ShortExactRowFamilyData I C C1 P t PA T R))
++  (x : τ (Obj I))
++  : τ (@ComputationalShortExactRow C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src)
++    (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_tgt))
++≔ @computational_short_exact_row_intro C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++  WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src)
++  (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_tgt)
++    (@zero_arrow_cone_chain_pair C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++      T) R x)) (short x);
++
++symbol short_exact_row_family_at [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) (x : τ (Obj I))
++  : τ (@ComputationalShortExactRow C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt))
++≔ @short_exact_row_family_value I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_data I C C1 P t PA T F) x;
++
++/* Existing native Hom action supplies the original row-map views. */
++
++symbol short_exact_row_family_map [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) [x y : τ (Obj I)] (u : τ (Hom I x y))
++  : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t PA) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_tgt)
++    (@computational_short_exact_row_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F x)) (@computational_short_exact_row_pair C P t PA (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) y)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++    (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F y)))
++≔ @zero_arrow_cone_chain_pair_map C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++  T) (@short_exact_row_family_func I C C1 P t PA T F) x) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func
++  I C C1 P t PA T F) y) (@fapp1_fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x y u);
++
++symbol short_exact_row_family_transf_at [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F G : τ (@ShortExactRowFamily I C C1 P t PA T)) (eta : τ (@Transf I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) (@short_exact_row_family_func I C C1 P t PA T G))) (x : τ (Obj I))
++  : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t PA) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_tgt)
++    (@computational_short_exact_row_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F x)) (@computational_short_exact_row_pair C P t PA (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T G) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++    (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T G x)))
++≔ @zero_arrow_cone_chain_pair_map C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++  T) (@short_exact_row_family_func I C C1 P t PA T F) x) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func
++  I C C1 P t PA T G) x) (@tapp0_fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G) x eta);
++
++/*
++  Vertex observations use the existing whole postcomposition functors.
++  Maps of row families are actual transformations; their higher actions
++  remain in the original transfor categories.
++*/
++
++symbol short_exact_row_family_observe_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (Functor I C)
++≔ @comp_cat_fapp0 I (@ZeroArrowCone_cat C t T) C V (@short_exact_row_family_func I C C1 P t PA T F);
++
++symbol short_exact_row_family_observe_transf_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (Functor (@Transf_cat I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)) (@Transf_cat I C (@short_exact_row_family_observe_func I C C1 P t PA T
++    V F) (@short_exact_row_family_observe_func I C C1 P t PA T V G)))
++≔ @comp_cat_cov_fapp1_func I (@ZeroArrowCone_cat C t T) C V (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G);
++
++symbol short_exact_row_family_observe_transf [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (eta : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)))
++  : τ (@Transf I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) (@short_exact_row_family_observe_func I C C1 P
++    t PA T V G))
++≔ @fapp0 (@Transf_cat I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G)) (@Transf_cat I C (@short_exact_row_family_observe_func I C C1 P t PA T V
++  F) (@short_exact_row_family_observe_func I C C1 P t PA T V G)) (@short_exact_row_family_observe_transf_func I C C1 P t PA
++  T V F G) eta;
++
++symbol short_exact_row_family_observe_naturality [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (eta : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)))
++  [x y : τ (Obj I)] (u : τ (Hom I x y))
++  : τ (@= (Hom C (@fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) x) (@fapp0 I C
++    (@short_exact_row_family_observe_func I C C1 P t PA T V G) y))
++      (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V G) x y u) (@tapp0_fapp0
++        I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) (@short_exact_row_family_observe_func I C C1 P t PA T
++        V G) x (@short_exact_row_family_observe_transf I C C1 P t PA T V F G eta)))
++      (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
++        (@short_exact_row_family_observe_func I C C1 P t PA T V G) y (@short_exact_row_family_observe_transf I C C1 P t PA T
++        V F G eta)) (@fapp1_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) x y u)))
++≔ @strict_component_naturality_path I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
++  (@short_exact_row_family_observe_func I C C1 P t PA T V G) (@short_exact_row_family_observe_transf I C C1 P t PA T V F G
++  eta) x y u;
+diff --git a/variants/row-family-boxed/emdash3_2_short_exact_row_families.lp b/variants/row-family-boxed/emdash3_2_short_exact_row_families.lp
+new file mode 100644
+--- /dev/null
++++ b/variants/row-family-boxed/emdash3_2_short_exact_row_families.lp
+@@ -0,0 +1,227 @@
++/*
++  A whole native row family with short-exactness evidence at its row views.
++  The actual functor owns all base and higher actions. No square field or
++  second row/complex grammar is introduced.
++*/
++require open emdash.emdash3_2_zero_arrow_cone_chain_pairs;
++require open emdash.emdash3_2_short_exact_rows;
++
++symbol ShortExactRowFamilyData [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T))) : Grpd
++≔ @Pi_grpd (Obj I) (λ x : τ (Obj I), (@ComputationalShortExactTriple C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C
++  (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0
++  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++  (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x))
++  walking_arrow_tgt) (@zero_arrow_cone_chain_pair C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I
++  (@ZeroArrowCone_cat C t T) R x))));
++
++/* Store evidence behind its indexed classifier; retain the original
++   function-valued evidence as the public introduction/elimination API. */
++constant symbol ShortExactRowEvidenceBox [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T))) : Grpd;
++constant symbol short_exact_row_evidence_box [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T)))
++  (short : τ (@ShortExactRowFamilyData I C C1 P t PA T R))
++  : τ (@ShortExactRowEvidenceBox I C C1 P t PA T R);
++symbol short_exact_row_evidence_unbox [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  [R : τ (Functor I (@ZeroArrowCone_cat C t T))]
++  (boxed : τ (@ShortExactRowEvidenceBox I C C1 P t PA T R))
++  : τ (@ShortExactRowFamilyData I C C1 P t PA T R);
++rule @short_exact_row_evidence_unbox _ _ _ _ _ _ _ _
++  (@short_exact_row_evidence_box _ _ _ _ _ _ _ _ $short) ↪ $short;
++
++symbol ShortExactRowFamily [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t)) : Grpd
++≔ `Σ_ R : τ (Functor I (@ZeroArrowCone_cat C t T)), (@ShortExactRowEvidenceBox I C C1 P t PA T R);
++
++symbol short_exact_row_family_intro [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T))) (short : τ (@ShortExactRowFamilyData I C C1 P t PA T R))
++  : τ (@ShortExactRowFamily I C C1 P t PA T)
++≔ @Struct_sigma (Functor I (@ZeroArrowCone_cat C t T)) (λ R : τ (Functor I (@ZeroArrowCone_cat C t T)),
++  (@ShortExactRowEvidenceBox I C C1 P t PA T R)) R
++  (@short_exact_row_evidence_box I C C1 P t PA T R short);
++
++symbol short_exact_row_family_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) : τ (Functor I (@ZeroArrowCone_cat C t T))
++≔ sigma_Fst F;
++
++symbol short_exact_row_family_data [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (@ShortExactRowFamilyData I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F))
++≔ @short_exact_row_evidence_unbox I C C1 P t PA T
++    (@short_exact_row_family_func I C C1 P t PA T F) (sigma_Snd F);
++
++symbol short_exact_row_family_value [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (R : τ (Functor I (@ZeroArrowCone_cat C t T)))
++  (short : τ (@ShortExactRowFamilyData I C C1 P t PA T R))
++  (x : τ (Obj I))
++  : τ (@ComputationalShortExactRow C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++    WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src)
++    (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_tgt))
++≔ @computational_short_exact_row_intro C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++  (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
++  WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_src)
++  (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++  (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) R x)) walking_arrow_tgt)
++    (@zero_arrow_cone_chain_pair C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++      T) R x)) (short x);
++
++symbol short_exact_row_family_at [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) (x : τ (Obj I))
++  : τ (@ComputationalShortExactRow C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0
++    I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt))
++≔ @short_exact_row_family_value I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_data I C C1 P t PA T F) x;
++
++/* Existing native Hom action supplies the original row-map views. */
++
++symbol short_exact_row_family_map [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F : τ (@ShortExactRowFamily I C C1 P t PA T)) [x y : τ (Obj I)] (u : τ (Hom I x y))
++  : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t PA) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_tgt)
++    (@computational_short_exact_row_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F x)) (@computational_short_exact_row_pair C P t PA (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) y)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++    (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) y)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F y)))
++≔ @zero_arrow_cone_chain_pair_map C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++  T) (@short_exact_row_family_func I C C1 P t PA T F) x) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func
++  I C C1 P t PA T F) y) (@fapp1_fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x y u);
++
++symbol short_exact_row_family_transf_at [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (F G : τ (@ShortExactRowFamily I C C1 P t PA T)) (eta : τ (@Transf I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T F) (@short_exact_row_family_func I C C1 P t PA T G))) (x : τ (Obj I))
++  : τ (@ComputationalChainPairMap C (@computational_homology_preadditive C P t PA) (@fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T
++    F) x)) walking_arrow_tgt) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_tgt)
++    (@computational_short_exact_row_pair C P t PA (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
++    (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) (@fapp0 WalkingArrow_cat C
++    (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_src) (@fapp0
++    WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C
++    t T) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T F x)) (@computational_short_exact_row_pair C P t PA (@fapp0
++    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T G) x)) (@fapp0 WalkingArrow_cat C (@fapp0 (@ZeroArrowCone_cat C t T)
++    (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0
++    (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@fapp0 I
++    (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T G) x)) walking_arrow_tgt)
++    (@short_exact_row_family_at I C C1 P t PA T G x)))
++≔ @zero_arrow_cone_chain_pair_map C C1 t T (@computational_homology_preadditive C P t PA) (@fapp0 I (@ZeroArrowCone_cat C t
++  T) (@short_exact_row_family_func I C C1 P t PA T F) x) (@fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func
++  I C C1 P t PA T G) x) (@tapp0_fapp0 I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G) x eta);
++
++/*
++  Vertex observations use the existing whole postcomposition functors.
++  Maps of row families are actual transformations; their higher actions
++  remain in the original transfor categories.
++*/
++
++symbol short_exact_row_family_observe_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (Functor I C)
++≔ @comp_cat_fapp0 I (@ZeroArrowCone_cat C t T) C V (@short_exact_row_family_func I C C1 P t PA T F);
++
++symbol short_exact_row_family_observe_transf_func [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  : τ (Functor (@Transf_cat I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)) (@Transf_cat I C (@short_exact_row_family_observe_func I C C1 P t PA T
++    V F) (@short_exact_row_family_observe_func I C C1 P t PA T V G)))
++≔ @comp_cat_cov_fapp1_func I (@ZeroArrowCone_cat C t T) C V (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G);
++
++symbol short_exact_row_family_observe_transf [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (eta : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)))
++  : τ (@Transf I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) (@short_exact_row_family_observe_func I C C1 P
++    t PA T V G))
++≔ @fapp0 (@Transf_cat I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++  (@short_exact_row_family_func I C C1 P t PA T G)) (@Transf_cat I C (@short_exact_row_family_observe_func I C C1 P t PA T V
++  F) (@short_exact_row_family_observe_func I C C1 P t PA T V G)) (@short_exact_row_family_observe_transf_func I C C1 P t PA
++  T V F G) eta;
++
++symbol short_exact_row_family_observe_naturality [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
++  [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
++  (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
++  (V : τ (Functor (@ZeroArrowCone_cat C t T) C)) (F G : τ (@ShortExactRowFamily I C C1 P t PA T))
++  (eta : τ (@Transf I (@ZeroArrowCone_cat C t T) (@short_exact_row_family_func I C C1 P t PA T F)
++    (@short_exact_row_family_func I C C1 P t PA T G)))
++  [x y : τ (Obj I)] (u : τ (Hom I x y))
++  : τ (@= (Hom C (@fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) x) (@fapp0 I C
++    (@short_exact_row_family_observe_func I C C1 P t PA T V G) y))
++      (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V G) x y u) (@tapp0_fapp0
++        I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) (@short_exact_row_family_observe_func I C C1 P t PA T
++        V G) x (@short_exact_row_family_observe_transf I C C1 P t PA T V F G eta)))
++      (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
++        (@short_exact_row_family_observe_func I C C1 P t PA T V G) y (@short_exact_row_family_observe_transf I C C1 P t PA T
++        V F G eta)) (@fapp1_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) x y u)))
++≔ @strict_component_naturality_path I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
++  (@short_exact_row_family_observe_func I C C1 P t PA T V G) (@short_exact_row_family_observe_transf I C C1 P t PA T V F G
++  eta) x y u;
+diff --git a/variants/short-exact-stable/emdash3_2_short_exact_sequences.lp b/variants/short-exact-stable/emdash3_2_short_exact_sequences.lp
+new file mode 100644
+--- /dev/null
++++ b/variants/short-exact-stable/emdash3_2_short_exact_sequences.lp
+@@ -0,0 +1,136 @@
++/*
++  Witness-rich exactness and short exact triples.
++
++  Exactness at B for A --i--> B --p--> D is epicity of the selected lift
++  A -> Ker(p). A short exact triple additionally retains monicity of i and
++  epicity of p. No image/kernel object equality, manual diagram, rule, or
++  unification clause is introduced.
++*/
++
++require open emdash.emdash3_2_computational_homology;
++require open emdash.emdash3_2_abelian_categories;
++
++symbol ComputationalExactAt
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  (Abl : τ (@PreAbelianCategory C P t))
++  [A B D : τ (Obj C)]
++  (pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D))
++  (H : τ (@ComputationalHomologyAt C P t Abl A B D pair))
++  : Grpd
++≔ @IsEpic C A
++    (@computational_homology_cycle_object C P t Abl A B D pair H)
++    (@computational_homology_boundary C P t Abl A B D pair H);
++
++symbol computational_exact_at_selected
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  (Abl : τ (@PreAbelianCategory C P t))
++  [A B D : τ (Obj C)]
++  (pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D))
++  : Grpd
++≔ @ComputationalExactAt C P t Abl A B D pair
++    (@computational_homology_at C P t Abl A B D pair);
++
++constant symbol ComputationalShortExactTriple
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  (Abl : τ (@PreAbelianCategory C P t))
++  [A B D : τ (Obj C)]
++  (pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D))
++  : Grpd;
++
++constant symbol computational_short_exact_intro
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  [Abl : τ (@PreAbelianCategory C P t)]
++  [A B D : τ (Obj C)]
++  [pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D)]
++  (monic : τ (@IsMonic C A B
++    (@computational_chain_pair_dnext C
++      (@computational_homology_preadditive C P t Abl) A B D pair)))
++  (epic : τ (@IsEpic C B D
++    (@computational_chain_pair_d C
++      (@computational_homology_preadditive C P t Abl) A B D pair)))
++  (exact : τ (@computational_exact_at_selected C P t Abl A B D pair))
++  : τ (@ComputationalShortExactTriple C P t Abl A B D pair);
++
++symbol computational_short_exact_monic
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  [Abl : τ (@PreAbelianCategory C P t)]
++  [A B D : τ (Obj C)]
++  [pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D)]
++  (S : τ (@ComputationalShortExactTriple C P t Abl A B D pair))
++  : τ (@IsMonic C A B
++      (@computational_chain_pair_dnext C
++        (@computational_homology_preadditive C P t Abl) A B D pair))
++;
++
++// Specialized record beta; inferred indices do not discriminate.
++rule @computational_short_exact_monic _ _ _ _ _ _ _ _
++    (@computational_short_exact_intro _ _ _ _ _ _ _ _ $monic _ _)
++  ↪ $monic;
++
++symbol computational_short_exact_epic
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  [Abl : τ (@PreAbelianCategory C P t)]
++  [A B D : τ (Obj C)]
++  [pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D)]
++  (S : τ (@ComputationalShortExactTriple C P t Abl A B D pair))
++  : τ (@IsEpic C B D
++      (@computational_chain_pair_d C
++        (@computational_homology_preadditive C P t Abl) A B D pair))
++;
++
++// Specialized record beta; inferred indices do not discriminate.
++rule @computational_short_exact_epic _ _ _ _ _ _ _ _
++    (@computational_short_exact_intro _ _ _ _ _ _ _ _ _ $epic _)
++  ↪ $epic;
++
++symbol computational_short_exact_at
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  [Abl : τ (@PreAbelianCategory C P t)]
++  [A B D : τ (Obj C)]
++  [pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D)]
++  (S : τ (@ComputationalShortExactTriple C P t Abl A B D pair))
++  : τ (@computational_exact_at_selected C P t Abl A B D pair)
++;
++
++// Specialized record beta; inferred indices do not discriminate.
++rule @computational_short_exact_at _ _ _ _ _ _ _ _
++    (@computational_short_exact_intro _ _ _ _ _ _ _ _ _ _ $exact)
++  ↪ $exact;
++
++// The exactness witness concerns the actual selected boundary lift.
++symbol computational_short_exact_boundary_epic
++  [C : Cat]
++  [P : τ (Functor (Product_cat C C) C)]
++  [t : τ (Obj C)]
++  [Abl : τ (@PreAbelianCategory C P t)]
++  [A B D : τ (Obj C)]
++  [pair : τ (@ComputationalChainPair C
++    (@computational_homology_preadditive C P t Abl) A B D)]
++  (S : τ (@ComputationalShortExactTriple C P t Abl A B D pair))
++  : τ (@IsEpic C A
++      (@computational_homology_cycle_object C P t Abl A B D pair
++        (@computational_homology_at C P t Abl A B D pair))
++      (@computational_homology_boundary C P t Abl A B D pair
++        (@computational_homology_at C P t Abl A B D pair)))
++≔ @computational_short_exact_at C P t Abl A B D pair S;
+diff --git a/variants/checker/congruence_smoke.lp b/variants/checker/congruence_smoke.lp
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/congruence_smoke.lp
+@@ -0,0 +1,18 @@
++/* Conversion diagnostic: congruence must not become injectivity. */
++constant symbol T : TYPE;
++constant symbol a : T;
++constant symbol b : T;
++symbol erase : T → T;
++rule erase _ ↪ a;
++symbol f : T → T;
++symbol g : T → T;
++rule g $x ↪ f $x;
++assert ⊢ erase a ≡ erase b;
++assertnot ⊢ f a ≡ f b;
++assert ⊢ g a ≡ f a;
++constant symbol Pair : TYPE;
++constant symbol pair : T → T → Pair;
++symbol first : Pair → T;
++rule first (pair $x _) ↪ $x;
++assert ⊢ first (pair a a) ≡ first (pair a b);
++assertnot ⊢ first (pair a b) ≡ b;
+diff --git a/variants/checker/pinned-congruence.patch b/variants/checker/pinned-congruence.patch
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/pinned-congruence.patch
+@@ -0,0 +1,29 @@
++diff --git a/src/core/eval.ml b/src/core/eval.ml
++index 0eaf29c5..a842c63f 100644
++--- a/src/core/eval.ml
+++++ b/src/core/eval.ml
++@@ -159,6 +159,24 @@ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++       | ((Vari _|Meta _|Prod _|Abst _), Symb f)) when is_constant f ->
++       raise Exit
++     | _ ->
+++    (* Diagnostic only: sufficient same-head congruence, with rollback and
+++       fallback. No injectivity assumption or new mathematical equation. *)
+++    let congruent =
+++      match a, b with
+++      | Appl _, Appl _ ->
+++          let h1, ts1 = get_args a and h2, ts2 = get_args b in
+++          begin match h1, h2 with
+++          | Symb s1, Symb s2 when s1 == s2
+++              && List.length ts1 = List.length ts2 ->
+++              Timed.pure_test
+++                (fun () ->
+++                  try eq cfg (List.combine ts1 ts2); true with Exit -> false)
+++                ()
+++          | _ -> false
+++          end
+++      | _ -> false
+++    in
+++    if congruent then eq cfg l else
++     let a = whnf cfg a and b = whnf cfg b in
++     if Logger.log_enabled () then log_conv "whnf: %a ≡ %a" term a term b;
++     match a, b with
+diff --git a/variants/checker/pinned-spine.patch b/variants/checker/pinned-spine.patch
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/pinned-spine.patch
+@@ -0,0 +1,19 @@
++diff --git a/src/core/eval.ml b/src/core/eval.ml
++index 0eaf29c5..4f5011f0 100644
++--- a/src/core/eval.ml
+++++ b/src/core/eval.ml
++@@ -176,7 +176,13 @@ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++       let x,b = unbind b in eq cfg ((b, mk_Appl(t, mk_Vari x))::l)
++     | Meta(m1,a1), Meta(m2,a2) when m1 == m2 ->
++       eq cfg (if a1 == a2 then l else List.add_array2 a1 a2 l)
++-    | Appl(t1,u1), Appl(t2,u2) -> eq cfg ((u1,u2)::(t1,t2)::l)
+++    | Appl(t1,u1), Appl(t2,u2) ->
+++        (* Diagnostic: preserve head normalization, then compare a complete
+++           application spine without re-normalizing each partial prefix. *)
+++        let h1, ts1 = get_args a and h2, ts2 = get_args b in
+++        if List.length ts1 = List.length ts2 then
+++          eq cfg ((h1,h2)::(List.combine ts1 ts2 @ l))
+++        else eq cfg ((u1,u2)::(t1,t2)::l)
++     | Bvar _, _ | _, Bvar _ -> assert false
++     | _ -> raise Exit
++   in
+diff --git a/variants/checker/release-congruence.patch b/variants/checker/release-congruence.patch
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/release-congruence.patch
+@@ -0,0 +1,31 @@
++diff --git a/src/core/eval.ml b/src/core/eval.ml
++index 61061fcb..4121636a 100644
++--- a/src/core/eval.ml
+++++ b/src/core/eval.ml
++@@ -155,6 +155,26 @@ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++       | ((Vari _|Meta _|Prod _|Abst _), Symb f)) when is_constant f ->
++       raise Exit
++     | _ ->
+++    (* Diagnostic only: try sufficient application congruence before expanding
+++       a shared symbolic head. Failure falls back to the original conversion;
+++       this does not assume that the head is injective. Roll back speculative
+++       rewriting effects even when the sufficient check fails. *)
+++    let congruent =
+++      match a, b with
+++      | Appl _, Appl _ ->
+++          let h1, ts1 = get_args a and h2, ts2 = get_args b in
+++          begin match h1, h2 with
+++          | Symb s1, Symb s2 when s1 == s2
+++              && List.length ts1 = List.length ts2 ->
+++              Timed.pure_test
+++                (fun () ->
+++                  try eq cfg (List.combine ts1 ts2); true with Exit -> false)
+++                ()
+++          | _ -> false
+++          end
+++      | _ -> false
+++    in
+++    if congruent then eq cfg l else
++     let a = whnf cfg a and b = whnf cfg b in
++     if Logger.log_enabled () then log_conv "whnf: %a ≡ %a" term a term b;
++     match a, b with

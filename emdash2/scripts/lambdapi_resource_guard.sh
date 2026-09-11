@@ -59,6 +59,7 @@ if [[ "$backend" == systemd ]]; then
   # Keep this shell alive holding FD 9: the command may close inherited FDs.
   systemd-run --user --scope --quiet --collect \
     --property="MemoryMax=$memory_bytes" --property=MemorySwapMax=0 \
+    --property="RuntimeMaxSec=${seconds}s" --property=KillSignal=SIGKILL \
     "${limited[@]}"
 else
   "${limited[@]}"

@@ -1,6 +1,7 @@
 """Focused safety checks; deliberately allocate only under small hard limits."""
 import os
 from pathlib import Path
+import signal
 import subprocess
 import tempfile
 import time
@@ -126,6 +127,48 @@ else:
         failure = subprocess.run(["bash", str(GUARD), "/bin/sh", "-c", "exit 7"],
                                  env=env, capture_output=True, text=True, timeout=5)
         self.assertEqual(failure.returncode, 7, failure.stderr)
+
+    def test_systemd_deadline_covers_detached_descendant(self):
+        manager = subprocess.run(["systemctl", "--user", "is-active", "--quiet",
+                                  "default.target"], capture_output=True)
+        if manager.returncode:
+            self.skipTest("no active user systemd manager")
+        env = dict(os.environ, EMDASH_LP_RESOURCE_BACKEND="systemd",
+                   EMDASH_LP_MEMORY_MIB="64", EMDASH_LP_FILE_MIB="1",
+                   EMDASH_LP_TIMEOUT="1s")
+        # Escaping timeout's process group must not escape the systemd scope.
+        # The child also exits by itself after four seconds if the guard fails.
+        marker = "emdash-guard-detached-child-test"
+        code = ("import subprocess, sys, time; "
+                "child = subprocess.Popen([sys.executable, '-c', "
+                "'import time; time.sleep(4)', sys.argv[1]], "
+                "start_new_session=True); "
+                "print(child.pid, flush=True); time.sleep(4)")
+        started = time.monotonic()
+        first = subprocess.Popen(
+            ["bash", str(GUARD), "python3", "-c", code, marker], env=env,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        child_pid = None
+        try:
+            child_pid = int(first.stdout.readline().strip())
+            _, errors = first.communicate(timeout=6)
+            self.assertNotEqual(first.returncode, 0, errors)
+            self.assertLess(time.monotonic() - started, 3)
+            # A reparented zombie is dead even if its /proc entry still exists.
+            stat = Path(f"/proc/{child_pid}/stat")
+            if stat.exists():
+                self.assertEqual(stat.read_text().split(")", 1)[1].split()[0], "Z")
+        finally:
+            if first.poll() is None:
+                first.kill()
+                first.communicate(timeout=6)
+            if child_pid is not None:
+                cmdline = Path(f"/proc/{child_pid}/cmdline")
+                try:
+                    if marker.encode() in cmdline.read_bytes():
+                        os.kill(child_pid, signal.SIGKILL)
+                except (FileNotFoundError, ProcessLookupError):
+                    pass
 
 
 if __name__ == "__main__":

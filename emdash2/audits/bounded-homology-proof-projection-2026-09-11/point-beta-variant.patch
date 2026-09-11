@@ -1,0 +1,13 @@
+diff --git a/variants/row-family-stable/emdash3_2_short_exact_row_families.lp b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+index 89356ed0..76f68d79 100644
+--- a/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
++++ b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+@@ -41,7 +41,7 @@ symbol short_exact_row_family_data [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_ze
+   (F : τ (@ShortExactRowFamily I C C1 P t PA T))
+   : τ (@ShortExactRowFamilyData I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F));
+ rule @short_exact_row_family_data _ _ _ _ _ _ _
+-  (@short_exact_row_family_intro _ _ _ _ _ _ _ _ $data) ↪ $data;
++  (@short_exact_row_family_intro _ _ _ _ _ _ _ _ $data) $x ↪ $data $x;
+ 
+ symbol short_exact_row_family_value [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+   [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]

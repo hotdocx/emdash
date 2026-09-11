@@ -1,0 +1,308 @@
+{
+  "baseline": "fb5a9c09238af3010cb7d70a8cc2068a84f679a8",
+  "activeLpBaseline": "ff139362be71dfec03142d05dda2dc123b3624a5",
+  "checkerRevision": "db4f7809961b8c107247613067fb567491fb0b84",
+  "files": [
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_finite_constructor_context.lp",
+      "path": "emdash2/tmp/probes/homology_finite_constructor_context.lp",
+      "status": "checked: constructor-exposed Abelian context",
+      "bytes": 4570,
+      "sha256": "85160e6a5eb98f7bae692c587db999580c6ffa334032f9b49b6a93055d8eaf15"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_finite_constructor_operations.lp",
+      "path": "emdash2/tmp/probes/homology_finite_constructor_operations.lp",
+      "status": "90-second timeout before resource guard: canonical delta typing unqualified",
+      "bytes": 2109,
+      "sha256": "beb7b61fa7de3b3a21ba4b8383ee2b0e3e8b54a86afe7c6bb4e1b8b845e30963"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_same_boundary_usability.lp",
+      "path": "emdash2/tmp/probes/homology_same_boundary_usability.lp",
+      "status": "checked: same-boundary selected-cokernel view; no object transport",
+      "bytes": 3893,
+      "sha256": "32df6147412776549760af016a2980fa0ce6a89d304ccbf99e85a72f83eb9bd9"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_row_triple_native_inputs.lp",
+      "path": "emdash2/tmp/probes/homology_row_triple_native_inputs.lp",
+      "status": "checked: transparent original native input views",
+      "bytes": 3899,
+      "sha256": "3fbdac2afcffbf11dda18aa0d7c3a66bafc4127529b5c72e022b3ed94a3548e3"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_finite_connecting_selected_usability.lp",
+      "path": "emdash2/tmp/probes/homology_finite_connecting_selected_usability.lp",
+      "status": "guarded allocation failure exit 134: actual delta consumer unqualified",
+      "bytes": 1947,
+      "sha256": "ee0dfbf97d6578f3a696fbd46e7d92f1c343dffc1f86c270ee54346415649384"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_native_input.lp",
+      "path": "emdash2/tmp/probes/homology_direct_native_input.lp",
+      "status": "checked: direct OneCat native input; no kernel used merely to form input",
+      "bytes": 3434,
+      "sha256": "7478a09bc0841d438bbdd6c54ea4666c03094f18fbbfdaf9a55628fbbd3352a6"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_native_input_checks.lp",
+      "path": "emdash2/tmp/probes/homology_direct_native_input_checks.lp",
+      "status": "checked: six runtime observations and whole fixed-pair Hom-action query",
+      "bytes": 1683,
+      "sha256": "2bee7173ed18df0e431985397d711bbd6670b5cb07047ff248c17baea4e2e75c"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_source_homology.lp",
+      "path": "emdash2/tmp/probes/homology_direct_source_homology.lp",
+      "status": "checked generic helper; critical image consumer unqualified",
+      "bytes": 1800,
+      "sha256": "ef60e9c0131f34f14384df65d1ef530fabf22d981fa73d835c2432d99979d890"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_image_sharing_old.lp",
+      "path": "emdash2/tmp/probes/homology_source_image_sharing_old.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 493,
+      "sha256": "6e7586f67a0a8126eebe2a684feea38e82d68b162d19bf6a240ca13fb4898d91"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_image_sharing_direct.lp",
+      "path": "emdash2/tmp/probes/homology_source_image_sharing_direct.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 512,
+      "sha256": "a1842a25e1a0cc4a0d0d37e2588a01ad72d393e18453f1bb762ed3df8ddb9b54"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_input_sharing_context.lp",
+      "path": "emdash2/tmp/probes/homology_direct_input_sharing_context.lp",
+      "status": "checked generic helper",
+      "bytes": 1535,
+      "sha256": "9bcc944cfccb1443609b1b7f7b41350da728bd8830aab202ef9cd2f473990bb4"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_input_sharing.lp",
+      "path": "emdash2/tmp/probes/homology_direct_input_sharing.lp",
+      "status": "guarded allocation failure exit 134 before applying H",
+      "bytes": 138,
+      "sha256": "35090d2cf1b9af4bb084036f0f864830ba60857bc12062ed037d852e5e9c0a9b"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_opaque_image_sharing.lp",
+      "path": "emdash2/tmp/probes/homology_opaque_image_sharing.lp",
+      "status": "prepared, not run",
+      "bytes": 233,
+      "sha256": "d25a0cb23324cd5b13f9a654541b1c17d69d4671f3061f81ef3f9d7e72982d4c"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_direct_input_match_trace.lp",
+      "path": "emdash2/tmp/probes/homology_direct_input_match_trace.lp",
+      "status": "file-size cap exit 153; diagnostic, not mathematical qualification",
+      "bytes": 327,
+      "sha256": "0a65ea62294468ea9ac21086984be048e1735b3e0d957db81a9badcda4a9ae40"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_path_declarations.lp",
+      "path": "emdash2/tmp/probes/homology_source_path_declarations.lp",
+      "status": "checked: both derived proofs separately typecheck in one second",
+      "bytes": 712,
+      "sha256": "7458c53bd58e2e0ebe4b440fe65162c5d83d790eef3c3f3b09f9d4b6726e7fb7"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_path_refl.lp",
+      "path": "emdash2/tmp/probes/homology_source_path_refl.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 206,
+      "sha256": "9c71b98a15a0aa5fe10256db7f57fc4667f8ef20cc988c3995c784002a90ac9e"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_mono_context.lp",
+      "path": "emdash2/tmp/probes/homology_source_mono_context.lp",
+      "status": "checked: selected lower-row monicity helper",
+      "bytes": 746,
+      "sha256": "34ca036c4ceb7e481fccb91abb5d76ec7ea4c669e084efcc26c1a770eadb4237"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_mono_sharing.lp",
+      "path": "emdash2/tmp/probes/homology_source_mono_sharing.lp",
+      "status": "guarded allocation failure exit 134; short-exact-record variant also fails",
+      "bytes": 115,
+      "sha256": "4538c25cef84b0b6751a1f0609f3325e3354a7830d29db1383c31e84213e3c2b"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_source_row2_sharing.lp",
+      "path": "emdash2/tmp/probes/homology_source_row2_sharing.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 113,
+      "sha256": "5a41f02d98532891660ffeba4c26f10c480b6f15494c720502d12f96bf6add53"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_row_triple_points.lp",
+      "path": "emdash2/tmp/probes/homology_row_triple_points.lp",
+      "status": "checked reused transparent helpers; retained dependency snapshot",
+      "bytes": 16981,
+      "sha256": "f924a6cd41cd8559dfcf0b76b429ef0b2c56bb824efffffb22cf5a84f84bd557"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_homology_boundary_leaf.sh",
+      "path": "emdash2/tmp/probes/run_homology_boundary_leaf.sh",
+      "status": "guarded installed-checker leaf driver, used by current tests",
+      "bytes": 890,
+      "sha256": "cd13afa93d54e393305f16bb1e948d0ae8d0c7d403b6bcdb6b9fc356798e1db3"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_tracked_leaf.sh",
+      "path": "emdash2/tmp/probes/run_tracked_leaf.sh",
+      "status": "detached job bookkeeping driver; no mathematical qualification",
+      "bytes": 569,
+      "sha256": "9091e79c1df693e8bc5425709687ed8500b7c11b799fba25e3afaf3b421f5779"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_row_family_owner_probe.sh",
+      "path": "emdash2/tmp/probes/run_row_family_owner_probe.sh",
+      "status": "guarded owner-position driver for rejected stable/boxed row-family variants",
+      "bytes": 2124,
+      "sha256": "4c24241647d82c47a68570124bc099ed5e3bbbdc1bad2b6aa09534b6fbfa2599"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_short_evidence_owner_probe.sh",
+      "path": "emdash2/tmp/probes/run_short_evidence_owner_probe.sh",
+      "status": "guarded owner-position driver; short-exact record insufficient",
+      "bytes": 2084,
+      "sha256": "1488f147d59ba50620f50607f69f6e958494adf10a302fb2480d05a16c6cd94f"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_short_evidence_family_owner_probe.sh",
+      "path": "emdash2/tmp/probes/run_short_evidence_family_owner_probe.sh",
+      "status": "guarded owner-position driver; combined record source fails",
+      "bytes": 2138,
+      "sha256": "dcbb4d4329fb55ccb29a835e14d33c8254a7156d004efc98e68695377b8523fc"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_lp_congruence_diagnostic.sh",
+      "path": "emdash2/tmp/probes/run_lp_congruence_diagnostic.sh",
+      "status": "guarded revision of release-cache diagnostic driver; release is not installed baseline",
+      "bytes": 2486,
+      "sha256": "6e8321e3844302f2e3fec805a01b5464e93b713921136da9b6ee24642f29f5b0"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_lp_pinned_congruence_diagnostic.sh",
+      "path": "emdash2/tmp/probes/run_lp_pinned_congruence_diagnostic.sh",
+      "status": "guarded revision of pinned diagnostic driver; no checker installed",
+      "bytes": 2497,
+      "sha256": "44813bb2f306fc0505600a7e08dd9362b2c5e1828e1d188da0d4515e4ef2c5fd"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/run_lp_spine_diagnostic.sh",
+      "path": "emdash2/tmp/probes/run_lp_spine_diagnostic.sh",
+      "status": "guarded revision of pinned spine driver; final comparison unqualified",
+      "bytes": 2509,
+      "sha256": "ef8cf9cae9740657b71fb2e776f3a9bec7ffb1c318c2d4bc924df6c715fa4324"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_1.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_1.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 411,
+      "sha256": "17e9f8052676588627e98e9fa06bac7ba30c8283d83e8cb5fbfb3585b10e03f6"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_2.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_2.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 589,
+      "sha256": "4598038f7e032804cf088d501f3fe6638ef0848882548a96f56e21757c5bc23f"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_3.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_3.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 669,
+      "sha256": "e6b052cbf923e7bdd83e69c85a086f0b4511cc225042db6882c2ed1d1d110eb5"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_4.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_4.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 817,
+      "sha256": "fe4ed58b7a05d2b001cdfbb9cb00ec207c1ad4234b3914abfc7ed3c9b626491d"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_5.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_5.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 429,
+      "sha256": "1c5250280b5a0162cd21a903c96cd29f6d652e11dc091947bd03b090e0f4a9d6"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_6.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_6.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 695,
+      "sha256": "cbccb0196805ea82ffcc6d5efa3c05eb311bcba42dd4151192f2c345657d3ced"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_7.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_7.lp",
+      "status": "checked: two-second projection comparison",
+      "bytes": 687,
+      "sha256": "33e6fc5d21772cea9b198df1c6affb2f6d219e02cca047765057c2d1efe4265b"
+    },
+    {
+      "source": "/home/user1/emdash1-long-exact-v1/emdash2/tmp/probes/homology_projection_isolation_8.lp",
+      "path": "emdash2/tmp/probes/homology_projection_isolation_8.lp",
+      "status": "guarded allocation failure exit 134",
+      "bytes": 693,
+      "sha256": "a1b936ad7e37098cd7e776f1a7928a3b63554b2290b7eabf43e6c2dee5c2f8bc"
+    },
+    {
+      "source": "/tmp/emdash-row-family-owner.JZcFIY/emdash3_2_short_exact_row_families.lp",
+      "path": "variants/row-family-stable/emdash3_2_short_exact_row_families.lp",
+      "status": "unqualified: owner source allocation failure at data beta",
+      "bytes": 17195,
+      "sha256": "c01dd918adac6cd480ddbbbe32ee3dd0fbab542f26d40b1755e203211f53766f"
+    },
+    {
+      "source": "/tmp/emdash-row-family-owner.hrjQSg/emdash3_2_short_exact_row_families.lp",
+      "path": "variants/row-family-boxed/emdash3_2_short_exact_row_families.lp",
+      "status": "owner/prerequisites check; direct input sharing still allocation failure",
+      "bytes": 18730,
+      "sha256": "91fe66ed400364bcf2c4eaa93110fea6edcf924a1b674c1757fdac7c6a467eeb"
+    },
+    {
+      "source": "/tmp/emdash-short-evidence-owner.GtM1eh/emdash3_2_short_exact_sequences.lp",
+      "path": "variants/short-exact-stable/emdash3_2_short_exact_sequences.lp",
+      "status": "owner and prerequisites check; monicity sharing still allocation failure",
+      "bytes": 4951,
+      "sha256": "492c69635129b62b1b1550adbe9a924453bbb5dae4c391ff4404793ffde33776"
+    },
+    {
+      "source": "/tmp/emdash-lp-congruence.SCMIrk/control-env/tmp/probes/congruence_smoke.lp",
+      "path": "variants/checker/congruence_smoke.lp",
+      "status": "smoke controls passed in isolated variants; not qualification of kernel or checker",
+      "bytes": 544,
+      "sha256": "2b24b368d8618132659561cfa23ef5c96206ef873478ab0221ced21b6a8b0928"
+    },
+    {
+      "source": "/tmp/emdash-lp-congruence.SCMIrk/pin-trial/src/core/eval.ml",
+      "path": "variants/checker/pinned-congruence.patch",
+      "status": "diagnostic only: regresses existing homology source-boundary-zero prerequisite to 90-second timeout",
+      "bytes": 1155,
+      "sha256": "f1752b3e00883375067a56c19423c0a226767a20cf2329ef81c24c96aba0de12"
+    },
+    {
+      "source": "/tmp/emdash-lp-congruence.SCMIrk/pin-spine/src/core/eval.ml",
+      "path": "variants/checker/pinned-spine.patch",
+      "status": "diagnostic only: prerequisites pass; final sharing has no completion record",
+      "bytes": 945,
+      "sha256": "d6212d5f08fd68b597968190c1313b668e1e525800b0bdab097303e883ec41a1"
+    },
+    {
+      "source": "/tmp/emdash-lp-congruence.SCMIrk/trial/src/core/eval.ml",
+      "path": "variants/checker/release-congruence.patch",
+      "status": "diagnostic only: release-cache revision differs from installed pinned checker; kernel fresh checks time out",
+      "bytes": 1307,
+      "sha256": "942c6a23a60f1c2f7f6467fc84a4ea98850590ad4e69e13f4881edda0a8bb33a"
+    }
+  ]
+}

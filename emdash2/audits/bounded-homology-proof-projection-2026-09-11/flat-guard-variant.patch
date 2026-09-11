@@ -1,0 +1,16 @@
+diff --git a/variants/row-family-stable/emdash3_2_short_exact_row_families.lp b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+index 89356ed0..80a8e828 100644
+--- a/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
++++ b/variants/row-family-stable/emdash3_2_short_exact_row_families.lp
+@@ -40,8 +40,9 @@ symbol short_exact_row_family_data [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_ze
+   (PA : τ (@PreAbelianCategory C P t)) (T : τ (@TerminalObject C t))
+   (F : τ (@ShortExactRowFamily I C C1 P t PA T))
+   : τ (@ShortExactRowFamilyData I C C1 P t PA T (@short_exact_row_family_func I C C1 P t PA T F));
+-rule @short_exact_row_family_data _ _ _ _ _ _ _
+-  (@short_exact_row_family_intro _ _ _ _ _ _ _ _ $data) ↪ $data;
++// Diagnostic: retain shared flat indices to test SR reconstruction cost.
++rule @short_exact_row_family_data $I $C $C1 $P $t $PA $T
++  (@short_exact_row_family_intro $I $C $C1 $P $t $PA $T _ $data) ↪ $data;
+ 
+ symbol short_exact_row_family_value [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+   [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
