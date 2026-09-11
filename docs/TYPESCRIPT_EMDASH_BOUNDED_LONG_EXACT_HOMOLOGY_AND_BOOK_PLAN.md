@@ -76,8 +76,31 @@ Local artifact qualification:
   static assets. This is the relevant delivery gate, not a root or kernel
   aggregate; the existing Vite chunk-size advisory is retained.
 
-Status: local qualification complete; final checkpoint, main fast-forward,
-push and served-artifact verification in progress.
+Delivery qualification:
+
+- Publication checkpoint `5be1f6a3` includes the reviewed sources, README
+  corrections, page-policy tests and both promoted artifact pairs.
+- Main in `/home/user1/emdash1` was clean and fast-forwarded from `054b43bd`
+  to that checkpoint; 628 newly tracked paths were checked for collisions
+  before the update. The parallel opaque-action/strictness tip is not an
+  ancestor and was not merged. Dependency manifests were unchanged.
+- The explicit `git push origin main` advanced origin from `9edbdb2a` to
+  `5be1f6a3`. [Pages run 34654059814](https://github.com/hotdocx/emdash/actions/runs/34654059814)
+  completed both build and deploy successfully at that exact artifact commit.
+- The live reviewer at `https://hotdocx.github.io/emdash/` was fetched and
+  its actual entry script inspected. It references
+  `assets/emdash-book-2-cmDjaR.pdf` and `assets/emdash3_2-BM41_hAg.pdf`.
+  Both HTTP downloads are byte-identical to the promoted PDFs: 3,622,803
+  bytes for the book and 742,587 for the overview, with the hashes above.
+- This final delivery-record checkpoint changes only the plan, not any
+  Pages build input. Its fast-forward/push does not require another asset
+  deployment. No tag, npm publication, Zenodo deposit or history rewrite
+  was performed.
+
+Status: complete. Standalone shorter prose, self-references, README updates,
+artifact promotion, historical-main fast-forward and GitHub Pages delivery
+are finished. The original mathematical goal and its deferred work remain
+closed at the previously recorded boundary.
 
 ## External Appendix Follow-Up
 
