@@ -1444,6 +1444,66 @@ from the operational data. Only then select/promote the representation and
 update the generic bounded theorem and book claims. The successful endpoint
 prototype is a concrete improvement, not completion of row 8 or the goal.
 
+Canonical-degree continuation (2026-09-10, after `69679ca7`):
+
+- The two separately constructed H(inclusion) projections both typecheck,
+  but their runtime comparison and its typed-reflexivity alternative reach
+  90 seconds. The direct-index-observation and first-constructor variants
+  were interrupted without a completion record; they remain unqualified,
+  not reported as successful or as measured timeouts.
+- Comparing the underlying overlapping three-row records succeeds in four
+  seconds, including a reflexivity path. Applying one complete H-inclusion
+  observation to that shared data yields an equality of existing LaxArrow
+  objects by ordinary `eq_ap`, in two seconds. This qualifies input-level
+  sharing and the single-operation complete-arrow comparison; it does NOT
+  establish the timed-out comparison of the two older projected expressions.
+- Four transparent right-column/projection helpers now check in one second.
+  They retain `homology_connecting_step_right_pair`, the actual whole H and
+  existing induced-map operation. No new universe, selection, primitive or
+  rewrite/unifier is introduced. An initially guessed import filename was
+  corrected using the actual defining module.
+- Canonical `degree_object`, `degree_inclusion` and `degree_projection`
+  functions check against A/B/C role endpoints. Existing `path_lift_func`
+  also supplies their object family's action in the groupoidal finite-degree
+  parameter. This is NOT a newly constructed whole I-action on the complete
+  LES. Original whole row inputs, whole H and whole delta remain available.
+  The independent point-operation reviewer completes in two seconds.
+- Typing delta against those canonical role endpoints reaches 90 seconds,
+  both through the existing whole-window component and through the same
+  connecting algorithm supplied with canonical H records. The latter is not
+  promoted as a successful solution. Keep the successful operations in their
+  independent source, not behind the unfinished connecting declaration.
+
+The installed package reports Lambdapi 3.0.0. Its available source under
+`/home/user1/.opam/default/.opam-switch/sources/lambdapi.3.0.0/src/core/`
+shows that `sym_sym_whnf` sends a shared non-injective head to
+`add_to_unsolved`, which attempts `Eval.pure_eq_modulo` before custom
+unification rules. `eval.ml` weak-head-normalizes unequal applications
+before decomposing them. Since generic `fapp0` is not injective, this is a
+plausible explanation for why an additional comparison unifier might arrive
+too late. It is source-level mechanism evidence, not yet a profile proving
+the cause of this particular timeout. Do not declare a functor/object
+operation injective merely to bypass the comparison, seal its definition,
+or add an equality axiom.
+
+Next isolate this comparison cost while preserving the canonical degree
+architecture and the whole-window baseline. An experimental checker copy,
+if used diagnostically, must not replace the installed conformance oracle;
+passing only on that copy cannot qualify promoted mathematical source.
+The remaining complete finite result, exactness linkage, retained input/CAS
+consumer and book obligations stay unchanged.
+
+Before a checker experiment, a smaller same-operation definition is also
+under test: `chain_pair_homology_action_direct` applies H directly to the
+existing native map instead of evaluating the composed raw-map action
+functor. Its generic signature and reflexivity agreement with the current
+definition check in one second. It retains the whole raw-map action and
+adds no rule, primitive or opacity. The finite-sharing consumer was
+interrupted without a completion record and must not be reported as
+qualified. No active owner has been replaced. These twelve sources are
+preserved, with statuses and exact recovery, in
+`emdash2/audits/bounded-homology-canonical-degrees-2026-09-10/`.
+
 ## Native Polynomial Freyd Specialization
 
 Extend the existing native bounded-complex and snake implementations rather

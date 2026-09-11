@@ -4504,6 +4504,16 @@ the experiment. The complete degree/role output family, finite input
 adapter and retained native consumer remain before promotion. This does
 not change the active H, delta or qualified field-span iterator.
 
+The following canonical-degree tranche checks shared three-row data,
+complete-arrow congruence, the three role objects and both induced maps.
+Delta's type at those role endpoints still exceeds the LF bound; the
+existing whole-window delta remains qualified. A direct H(native-map)
+point definition has a checked generic reflexivity comparison, but its
+large sharing consumer remains unqualified. The parent plan and
+`emdash2/audits/bounded-homology-canonical-degrees-2026-09-10/` distinguish
+checked results, actual timeouts and interrupted checks. No active owner
+or installed checker is changed.
+
 ### Generic Finite Result Assembly: Indexed-Record Qualification
 
 The parent plan's
