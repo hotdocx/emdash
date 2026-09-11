@@ -1,0 +1,73 @@
+{
+  "baseline": "581d3a2642b0d989e60f2da1e37ed8a54d7d554d",
+  "files": 11,
+  "allVerified": true,
+  "checks": [
+    {
+      "path": "emdash2/tmp/probes/finite_role_indices.lp",
+      "bytes": 1723,
+      "sha256": "8e1ee3b931ac3fd1e2c745898170c1f0572056878637fc13555c270471f6544e",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_role_indices_checks.lp",
+      "bytes": 1263,
+      "sha256": "0a4d53126fee4d6c91e20bf31a46612b20be0f5d0b700a397813ca2217319f01",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_row_lookup.lp",
+      "bytes": 3174,
+      "sha256": "af5e14484a5dccee3324037939175f3d328913014f10f728a0a67bbe33b25e43",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_row_context.lp",
+      "bytes": 4008,
+      "sha256": "b355ee28f84b438dabe690355400cb905cd84728b0954401a8760153e87565b5",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_indexed_endpoint_zero.lp",
+      "bytes": 3067,
+      "sha256": "d92ca5b73572071761ff70b0c07f83684f08ea2ecfa33bdcfaf815aa87d7041b",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_indexed_endpoint_direct.lp",
+      "bytes": 3583,
+      "sha256": "c5956560b94c2ec1a71424f8328c44706d2066667ccb8d6e8bd04e556c3a1e9f",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_indexed_first_zero_direct.lp",
+      "bytes": 3841,
+      "sha256": "f6d2e1d3fd82e7cbc7d3189d75de74f5effdb14bfde36f3a5114089452dcd94b",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_window_endpoint_zero_direct.lp",
+      "bytes": 12737,
+      "sha256": "2d55b773bae95f44c888c996bdd0dfdd57a2d33b73bb1fc7c3eacdee0bce1921",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_indexed_endpoint_checks.lp",
+      "bytes": 2139,
+      "sha256": "f4585cc09e9959e04e489ee2677847e78e5f7b03099cf62fc1e6ec60ac64558d",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_finite_indexed_exactness.lp",
+      "bytes": 16454,
+      "sha256": "06d5ec72042ae7b16f5a2d4af68759372b6634e9652ada1602edb9efc1c5e71a",
+      "verified": true
+    },
+    {
+      "path": "emdash2/tmp/probes/finite_endpoint_congruence_consumer.lp",
+      "bytes": 519,
+      "sha256": "021f1c0a5b4ed57da0f09a37860fbd9260179bf526377ffdf7c504e39b73ce0d",
+      "verified": true
+    }
+  ]
+}

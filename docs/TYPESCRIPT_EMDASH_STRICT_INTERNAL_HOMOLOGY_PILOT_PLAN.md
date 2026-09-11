@@ -4479,6 +4479,31 @@ by finite assembly/endpoint-zero evidence, final book updates and the
 architecture/effectiveness audit. This completes the retained connecting
 integration tranche, not the full persistent goal or a closed-model theorem.
 
+### Current Bounded Endpoint Representation Review
+
+The parent plan's [degree/role indexing experiment](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#degreerole-indexing-current-representation-experiment)
+is the current continuation after research checkpoint `581d3a26`.
+Van Doorn's degree × three-role presentation is relevant to naming the
+actual H endpoints directly, without reconstructing their types from a
+trimmed flat sequence. The native CAS result already has these labels.
+This does not alter whole H, the original selected pairs, delta, the three
+window exactness proofs, or the obligation to prove both actual endpoint
+zeros. The qualified finite iterator remains intact. The next experiment
+uses bounded constructor indices and coherent whole row/map lookup; it
+must pass a symbolic-bound endpoint consumer before selection. No global
+proof irrelevance, new endpoint equality, object cast or unbounded complex
+development is authorized by this representation experiment.
+
+The first prototype now checks both direct indexed H endpoint-zero proofs
+at a symbolic bound, and reuses all three window exactness theorems. The
+whole-window zero lemmas and their finite consumer pass without a new
+unifier or object conversion. The older row-field-helper re-expression
+still times out and is preserved. The parent plan records timings and
+controls; `emdash2/audits/bounded-homology-indexing-2026-09-10/` preserves
+the experiment. The complete degree/role output family, finite input
+adapter and retained native consumer remain before promotion. This does
+not change the active H, delta or qualified field-span iterator.
+
 ### Generic Finite Result Assembly: Indexed-Record Qualification
 
 The parent plan's

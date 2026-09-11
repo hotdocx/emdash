@@ -1324,13 +1324,125 @@ failed alternatives and minimal type-index controls are now recoverable.
 This is a research checkpoint; active LP owners and the qualified iterator
 remain at `ff139362`.
 
-The next owner-level question is whether a narrowly typed congruence
-unifier for a stable endpoint observer can compare its actual typed
-arguments without repeatedly expanding a higher-order recursor. Such a
-probe must retain sufficient data/index constraints, be a conservative
-comparison aid rather than an injectivity assertion, and pass the real
-consumer plus noncollapse tests before promotion. The controls do not
-justify erasing exactness proofs or changing H/its selections.
+The subsequent all-argument congruence probe also reaches 90 seconds. It
+adds no qualified solution and is not promoted. Together these controls
+justify reviewing the indexed representation, not erasing exactness proofs,
+changing H or its selections, or declaring an endpoint observer injective.
+
+### Degree/Role Indexing: Current Representation Experiment
+
+The van Doorn reference is directly relevant to this boundary. In
+§4.1.1 of [the dissertation](https://arxiv.org/abs/1808.10690v1), printed
+pages 68–69, a flat natural-number index makes the three families at
+positions 3n, 3n+1 and 3n+2 inconvenient to compare judgmentally with
+their intended homotopy groups. The replacement uses a degree and one of
+three roles, with an explicitly defined successor. His sequences point
+from the successor to the current index; our displayed homological sequence
+uses descending degree in the forward display direction. Keep that
+orientation distinction explicit. The claim about what ordinary Nat
+elimination cannot make definitional is not an impossibility theorem for
+Lambdapi, which also admits user rewrite rules.
+
+Our exact failure is different but closely related: the actual H(inclusion)
+in the initial index of a recursively observed tail materially increases
+conversion cost. It can fail even with an opaque tail and an already supplied
+endpoint proof. Neither comparing two proof bodies nor constructing the
+interior exactness payload is necessary. The new experiment therefore names
+the mathematical objects and arrows directly:
+
+```text
+E(n,A) ≔ Hₙ(A)       E(n,B) ≔ Hₙ(B)       E(n,C) ≔ Hₙ(C)
+H(iₙ) : E(n,A) → E(n,B)
+H(pₙ) : E(n,B) → E(n,C)
+δₙ    : E(n,C) → E(n−1,A).
+```
+
+Use bounded constructor indices internally, with a downward offset instead
+of integer subtraction in dependent types. Index weakening and successor
+must compute on their own constructors. A finite row family, its actual
+transformations and its existing middle-chain-zero observations then give
+overlapping three-row states and four-row windows by lookup. Adjacent
+windows share the original rows, maps and zero data; they do not take
+object-equality gluing fields. This is a finite functional input/view, not
+an unbounded-complex development.
+
+The initial prototype must test both boundary positions at arbitrary
+symbolic bound, not only concrete lengths. Where possible, retain the whole
+I→C functors as the family values and the actual transformations as its
+arrows; point observations continue through the existing fapp/tapp owners.
+The C-role must keep the original selected step-right pair, and the A-role
+must keep the original source pair. Do not replace either by a merely
+equivalent presentation for notation convenience.
+
+Exactness is a separate indexed law of these operations: the existing
+window's first, second and third proofs concern B(n), C(n), and A(n−1).
+Zero laws concern the SAME outside-support H objects at the two named
+boundary indices. Thus the change is where their types obtain their
+endpoints, not whether the laws are required. A serialized flat sequence
+and the qualified field-span iterator remain useful downstream views and
+reference implementations. They should not define the public endpoint
+types by `last_target(trim(generator(...)))`.
+
+The native result already exposes degree/role observations in
+`src/v3_2/algebra_polynomial_freyd_long_exact.ts`. Reuse that mathematical
+indexing and all retained native choices; no CAS recomputation is intended.
+The first comparison gate is: coherent bounded row lookup, unchanged H/δ
+observations, side exactness, and actual boundary-zero consumers, followed
+by one retained native-model consumer. A declaration-only index prototype
+does not complete row 8. If the symbolic boundary still needs expensive
+reconstruction or hidden transports, refine or reject this representation
+before promotion.
+
+Posur's Dowker formula is a separate construction-level redesign option.
+It is not needed to test this indexing change and should not replace the
+already qualified connecting construction merely to repair endpoint types.
+
+First indexed-prototype result (2026-09-10):
+
+- Constructor indices `FiniteDegree(n)` represent 0,…,n. Weakening preserves
+  the ordinal value; `next` increments it. Their two computation clauses
+  and two native-carrier decoding clauses have no compound inferred LHS
+  guards and pass the strict audit. Role selection can return an actual
+  whole functor, retaining its point and Hom action. Six positive and three
+  negative controls cover symbolic beta, endpoints, role separation and
+  the bound. No new rule warning is emitted by the owner probe.
+- `homology_finite_row_triple` and `homology_finite_row_window` are
+  transparent bounded lookups from original whole rows/maps/zero data.
+  The source checks in one second. Three overlap controls and the final
+  connecting-component type check in three seconds for arbitrary symbolic
+  n. No independent window or overlap-equality input is used.
+- Both boundary identity-zero proofs check in three seconds each at the
+  direct whole source/target H functors of the first/last windows. They
+  use the original column pair, row mono/epi cancellation and the existing
+  whole-H zero-middle theorem. Abstracting these into reusable whole-window
+  lemmas checks in two seconds; their bounded consumer also checks in two
+  seconds, including higher-action and wrong-object/missing-proof controls.
+  This is side-law evidence at the actual H objects, not object replacement,
+  comparison of two proof bodies, proof erasure or a new runtime law.
+- Applying the three existing exactness theorems to every indexed window
+  checks in three seconds. This qualifies the local B/C/next-A laws at the
+  original observations; a completed globally indexed exact-sequence carrier
+  and its public projections are not claimed yet.
+- The first alternative passed the projected rows back through the older
+  row-field zero helper. That still times out before the first H-zero
+  declaration completes, in quiet and verbose runs. The direct column-pair
+  route passes without a new unifier. Preserve both: constructor indexing
+  helps name endpoints, but does not make arbitrary re-expressions cheap.
+
+The exact retained research graph matches all 516 active root LP sources
+byte-for-byte. These are bounded normal-subject-reduction prototype checks,
+not a new library promotion or repository-wide runtime gate. Active LP
+owners, the registered 898-file health boundary and the qualified generator
+remain unchanged. Recovery is in
+`emdash2/audits/bounded-homology-indexing-2026-09-10/`.
+
+Next qualify the complete finite degree/role object-and-arrow family and
+its role-specific law observations from these same bounded rows. Check
+neighboring-window H(inclusion) sharing, a real finite input adapter and the
+retained native-model observations. Keep exactness and endpoint laws separate
+from the operational data. Only then select/promote the representation and
+update the generic bounded theorem and book claims. The successful endpoint
+prototype is a concrete improvement, not completion of row 8 or the goal.
 
 ## Native Polynomial Freyd Specialization
 
@@ -1705,7 +1817,7 @@ was introduced to get a passing target.
 | `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
-| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed Nat iterator and full two-window controls qualified; zero-padded ordering and actual endpoint evidence remain | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
+| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed Nat iterator qualified; degree/role-indexed public endpoint representation under qualification after flat-tail conversion audit | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
