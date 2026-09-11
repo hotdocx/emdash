@@ -1,0 +1,207 @@
+{
+  "allHashesMatch": true,
+  "patchApplies": true,
+  "recoveryDirectory": "/tmp/emdash-endpoint-deferral-recovery.u11JId",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/homology_row2_evidence_type_sharing.lp",
+      "sha256": "f966f0eb1bae1ffaaa7d137414fe23aa9679a358f8fc3774695ef4a8d03bf184",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_pair_isolation_context.lp",
+      "sha256": "b77f0fe3acb12da217037a1af8308955fb15c584f72bde97a06f7c1570dc82de",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_pair_isolation_incoming.lp",
+      "sha256": "8381b73960f6ee2c2eb558908da367ed6783b1ad2726ce44b61e59b04eab30a0",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_pair_isolation_outgoing.lp",
+      "sha256": "0cdac0223bf1d3b890a33b24977c18c9fcc4bbc0c930ce0f743e86e264ff78e5",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_pair_isolation_zero.lp",
+      "sha256": "c27fa32916cc530ce59771c2a6ee9ce980dedc1b023007f49c5feb12f6fbe10e",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row_pair_isolation_pair.lp",
+      "sha256": "61ec0eb4bf5c973938a680dcd539236e97b6dd4db59760889c5c9d06ad1640e4",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_naturality_direct_left.lp",
+      "sha256": "b21785c6bbfc12857e86143acaa1cf321bf603eb62af455be789e63a65d93d89",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_naturality_direct_offdiag.lp",
+      "sha256": "64e3c0b8838e9c166852ee759d7c34827fc8ba4330112e9cfff069ed91f45df1",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_naturality_direct_usability.lp",
+      "sha256": "b324cb0cfcb9e49bf9ffffb39123eda5cddd920d87e3384eac4aa7b37a3e59e4",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_naturality_direct_checks.lp",
+      "sha256": "8b93995ff836bb585dd3326686270427e4c03a881580dc6086597f2234b8d546",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/run_naturality_owner_probe.sh",
+      "sha256": "e2fba8217ea0240b41ef42e088fd2b7a75c419ba52125af0bccee56fbc1aa517",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_native_zero_isolation_context.lp",
+      "sha256": "1b6084de87ac3ed8ab87ac208a191b997f15ea62f284983c34035d122c003a3f",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_native_zero_isolation_h.lp",
+      "sha256": "1d5eaffeef10dcc05a4ac19bbc616dab8ff5a3e0f2c0ab0507f6df59dfe5ea6d",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_native_zero_isolation_nat.lp",
+      "sha256": "4eed14f1f576e78837e1bbe8cfeb7c51fa8259cebb35dc103a317f95ec5e9925",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_native_zero_isolation_tip_zero.lp",
+      "sha256": "37ace014c345f7a60a4d491c1146909defd09518d8564f66334184842522b93d",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_native_zero_isolation_comp_zero.lp",
+      "sha256": "26dcdb98b52fb5597c8cdc3fce7ec2d2a24fcba8fb658e7e0e19fdab1decc43b",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_comp_flat_structure.lp",
+      "sha256": "e0784645f7d8606ceaf162e2b0a87f63f508d64e1f3eb7f46c72769d85350bc0",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_tip_flat_structure.lp",
+      "sha256": "40555a091ff9647874bb3bb67faffececd453f3d0c5115cc2de5cd1521393299",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_index.lp",
+      "sha256": "282b3fe62518e42d181e43dd7998227e24543d61ad8587090f06b705efe54c74",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_native.lp",
+      "sha256": "d3ad7590c74b0b5cc644208535c596d254bb3c3f406b37a7bb8b20d68812e993",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_opaque_views.lp",
+      "sha256": "0e1e7cdcacb38e310455fd41fee97cd4136b8c50445b74ae3ad781359ac19890",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_opaque_category.lp",
+      "sha256": "9cd73a56e1a62819951b383dda7fe563605332a2d33a940198443a93b881377c",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_source_only.lp",
+      "sha256": "cedab82ff16691591dbb8d3d0bb8c3cd807b995ead6981d711652fbce2eb4d8d",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_minimal_target_only.lp",
+      "sha256": "3bb3fbbaa21c32ef68a72be58ab1c3d4f3d518792951761e9a7308ee299ee22e",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_direct_target_context.lp",
+      "sha256": "3f990112b82ab4ce237b6d00359582d7f36907dc163f214006dfe48d4c824f91",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_direct_target_same_point.lp",
+      "sha256": "9093e5914b23ec7610c1dd2205b517a53c2aa254fb738832e844968afbd0220e",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_zero_direct_target_law.lp",
+      "sha256": "79b84f20a27e388cd0c09d97efb9adfd4a8b2fa58ee37e85a025f4ec6f65140d",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_target_normal_form.lp",
+      "sha256": "c318a8f2d45cfcdb67ed86b28f32cc62c42faeed23aeb6560976bde0456963dc",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_owner.lp",
+      "sha256": "d41be8dae2f8afda48454b308fc8e67e3221ecff7a9d4bc83ffd0199e0575147",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_minimal_check.lp",
+      "sha256": "ce3255e4be69313d8fc38cb53bfd2cf05238633893ac6bab16996fcc42a20fa9",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_row_zero_check.lp",
+      "sha256": "00e50740a9c1b8347712fabadebdfa0d11ff2a6f0a3c95430a0b2274f6457682",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_source_pair_check.lp",
+      "sha256": "38cb2cb524dae921f0ba4a2e05293548c85e56e4635798d33204bb4e1c878a54",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_degree_check.lp",
+      "sha256": "53ef5c7f8238190bb3c30ea5fa0dcc428c5c7663cd3481c09594424996bc68fe",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_normal_form.lp",
+      "sha256": "6e4dc9f1deeb216b617ea67c770fa6e774ebd071ff2b8c3ee95e66bddf926978",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_normal_form_first.lp",
+      "sha256": "624ab51a7abfb31f48d9c83826c918e1ac4843453c3877133d46edf53145e0df",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_nested_target_minimal_last.lp",
+      "sha256": "ad6f8704267589e0c11b6e07ead09accc656b13ba1d1fe04840c1ee29eacc80a",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_congruence_budget_smoke.lp",
+      "sha256": "c55898e51ce092742e8d77734a8fabad27ba564b5b761dcc5e99346a976877e5",
+      "sourceMatches": true
+    },
+    {
+      "path": "emdash2/tmp/probes/run_lp_bounded_congruence_probe.sh",
+      "sha256": "20ab98f54e4aee18ca0faf4fbbdfa25c10b576d8160e205668f65756c6f31d0e",
+      "sourceMatches": true
+    },
+    {
+      "path": "variants/checker/left-first.patch",
+      "sha256": "0d23dde4c908205140dac02745caa5f0aef44ea2890ece6ac06345f2ad83aff8",
+      "sourceMatches": null
+    },
+    {
+      "path": "variants/checker/right-first.patch",
+      "sha256": "a1b4b925929280e334a414c130b74035ad3fdbf9ca911f9ad425468472b0f6d9",
+      "sourceMatches": null
+    }
+  ]
+}

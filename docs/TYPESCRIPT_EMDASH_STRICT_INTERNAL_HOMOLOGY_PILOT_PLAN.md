@@ -4481,6 +4481,15 @@ integration tranche, not the full persistent goal or a closed-model theorem.
 
 ### Current Bounded Endpoint Representation Review
 
+**User-directed deferral, 2026-09-11.** Stop endpoint-proof/Lambdapi
+debugging and finish the parent goal's book, formal/proof–CAS audit and
+consolidation from the checked field-indexed iterator. The parent plan's
+current-direction section supersedes the historical next-step text below.
+The final symbolic endpoint-proof attachment and experimental indexed
+replacement remain deferred. Primitive-projection record structures are
+retained as a later design option. The final experiments are preserved in
+`emdash2/audits/bounded-homology-endpoint-deferral-2026-09-11/`.
+
 The parent plan's [degree/role indexing experiment](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#degreerole-indexing-current-representation-experiment)
 is the current continuation after research checkpoint `581d3a26`.
 Van Doorn's degree × three-role presentation is relevant to naming the

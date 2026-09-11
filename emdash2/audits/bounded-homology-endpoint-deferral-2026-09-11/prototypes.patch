@@ -1,0 +1,1086 @@
+diff --git a/emdash2/tmp/probes/homology_row2_evidence_type_sharing.lp b/emdash2/tmp/probes/homology_row2_evidence_type_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row2_evidence_type_sharing.lp
+@@ -0,0 +1,4 @@
++/* Compare classifiers separately from their evidence inhabitants. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++assert ⊢ (@ShortExactRowFamilyData I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple)))
++  ≡ (@ShortExactRowFamilyData I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab) T (@homology_row_triple_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple)));
+diff --git a/emdash2/tmp/probes/homology_row_pair_isolation_context.lp b/emdash2/tmp/probes/homology_row_pair_isolation_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_pair_isolation_context.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++symbol row_pair (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @computational_short_exact_row_pair C P t PA0 _ _ _ (row2 state);
+diff --git a/emdash2/tmp/probes/homology_row_pair_isolation_incoming.lp b/emdash2/tmp/probes/homology_row_pair_isolation_incoming.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_pair_isolation_incoming.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_row_pair_isolation_context;
++assert ⊢ @computational_chain_pair_dnext C S0 _ _ _ (row_pair upper_triple)
++  ≡ @computational_chain_pair_dnext C S0 _ _ _ (row_pair lower_triple);
+diff --git a/emdash2/tmp/probes/homology_row_pair_isolation_outgoing.lp b/emdash2/tmp/probes/homology_row_pair_isolation_outgoing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_pair_isolation_outgoing.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_row_pair_isolation_context;
++assert ⊢ @computational_chain_pair_d C S0 _ _ _ (row_pair upper_triple)
++  ≡ @computational_chain_pair_d C S0 _ _ _ (row_pair lower_triple);
+diff --git a/emdash2/tmp/probes/homology_row_pair_isolation_zero.lp b/emdash2/tmp/probes/homology_row_pair_isolation_zero.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_pair_isolation_zero.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_row_pair_isolation_context;
++assert ⊢ @computational_chain_pair_path C S0 _ _ _ (row_pair upper_triple)
++  ≡ @computational_chain_pair_path C S0 _ _ _ (row_pair lower_triple);
+diff --git a/emdash2/tmp/probes/homology_row_pair_isolation_pair.lp b/emdash2/tmp/probes/homology_row_pair_isolation_pair.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row_pair_isolation_pair.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_row_pair_isolation_context;
++assert ⊢ row_pair upper_triple
++  ≡ row_pair lower_triple;
+diff --git a/emdash2/tmp/probes/homology_naturality_direct_left.lp b/emdash2/tmp/probes/homology_naturality_direct_left.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_naturality_direct_left.lp
+@@ -0,0 +1,13 @@
++/* First-class component naturality in the current globally strict profile.
++   This rule-free proof explicitly crosses the existing raw/post/pre/mixed
++   usability owners. It is not a theorem about arbitrary lax transformations;
++   a later strictness migration must keep its strict hypothesis explicit. */
++require open emdash.emdash3_2;
++
++symbol strict_component_naturality_direct_left
++  [I C : Cat] [F G : τ (Functor I C)] (eta : τ (Transf F G))
++  [x y : τ (Obj I)] (p : τ (Hom I x y))
++  : τ (@= (Hom C (@fapp0 I C F x) (@fapp0 I C G y))
++      (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C G x y p) (@tapp0_fapp0 I C F G x eta))
++      (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C F G y eta) (@fapp1_fapp0 I C F x y p)))
++≔ @eq_refl _ (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C G x y p) (@tapp0_fapp0 I C F G x eta));
+diff --git a/emdash2/tmp/probes/homology_naturality_direct_offdiag.lp b/emdash2/tmp/probes/homology_naturality_direct_offdiag.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_naturality_direct_offdiag.lp
+@@ -0,0 +1,13 @@
++/* First-class component naturality in the current globally strict profile.
++   This rule-free proof explicitly crosses the existing raw/post/pre/mixed
++   usability owners. It is not a theorem about arbitrary lax transformations;
++   a later strictness migration must keep its strict hypothesis explicit. */
++require open emdash.emdash3_2;
++
++symbol strict_component_naturality_direct_offdiag
++  [I C : Cat] [F G : τ (Functor I C)] (eta : τ (Transf F G))
++  [x y : τ (Obj I)] (p : τ (Hom I x y))
++  : τ (@= (Hom C (@fapp0 I C F x) (@fapp0 I C G y))
++      (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C G x y p) (@tapp0_fapp0 I C F G x eta))
++      (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C F G y eta) (@fapp1_fapp0 I C F x y p)))
++≔ @eq_refl _ (@tapp1_fapp0 I C F G x y eta p);
+diff --git a/emdash2/tmp/probes/homology_naturality_direct_usability.lp b/emdash2/tmp/probes/homology_naturality_direct_usability.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_naturality_direct_usability.lp
+@@ -0,0 +1,28 @@
++/* First-class component naturality in the current globally strict profile.
++   This rule-free proof explicitly crosses the existing raw/post/pre/mixed
++   usability owners. It is not a theorem about arbitrary lax transformations;
++   a later strictness migration must keep its strict hypothesis explicit. */
++require open emdash.emdash3_2;
++
++/* Direct proof-time readings of the current strict off-diagonal owner.
++   Flat family/endpoint indices correlate the naturality square: equal
++   evaluated objects alone do not identify the original base points. */
++unif_rule @tapp1_fapp0 $I $C $F $G $x $y $eta $p
++  ≡ @comp_fapp0 _ _ _ _
++      (@fapp1_fapp0 $I $C $G $x $y $p)
++      (@tapp0_fapp0 $I $C $F $G $x $eta)
++  ↪ [ tt ≡ tt ];
++
++unif_rule @tapp1_fapp0 $I $C $F $G $x $y $eta $p
++  ≡ @comp_fapp0 _ _ _ _
++      (@tapp0_fapp0 $I $C $F $G $y $eta)
++      (@fapp1_fapp0 $I $C $F $x $y $p)
++  ↪ [ tt ≡ tt ];
++
++symbol strict_component_naturality_path
++  [I C : Cat] [F G : τ (Functor I C)] (eta : τ (Transf F G))
++  [x y : τ (Obj I)] (p : τ (Hom I x y))
++  : τ (@= (Hom C (@fapp0 I C F x) (@fapp0 I C G y))
++      (@comp_fapp0 C _ _ _ (@fapp1_fapp0 I C G x y p) (@tapp0_fapp0 I C F G x eta))
++      (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C F G y eta) (@fapp1_fapp0 I C F x y p)))
++≔ @eq_refl _ (@tapp1_fapp0 I C F G x y eta p);
+diff --git a/emdash2/tmp/probes/homology_naturality_direct_checks.lp b/emdash2/tmp/probes/homology_naturality_direct_checks.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_naturality_direct_checks.lp
+@@ -0,0 +1,31 @@
++/* Direct strict naturality usability; runtime owners remain separate. */
++require open emdash.emdash3_2_strict_transfor_component_paths;
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol F : τ (Functor I C);
++constant symbol G : τ (Functor I C);
++constant symbol x : τ (Obj I);
++constant symbol y : τ (Obj I);
++constant symbol p : τ (Hom I x y);
++constant symbol q : τ (Hom I x y);
++constant symbol eta : τ (@Transf I C F G);
++constant symbol theta : τ (@Transf I C F G);
++symbol cut_off ≔ @tapp1_fapp0 I C F G x y eta p;
++symbol cut_left ≔ @comp_fapp0 C _ _ _
++  (@fapp1_fapp0 I C G x y p) (@tapp0_fapp0 I C F G x eta);
++symbol cut_right ≔ @comp_fapp0 C _ _ _
++  (@tapp0_fapp0 I C F G y eta) (@fapp1_fapp0 I C F x y p);
++
++assert ⊢ @eq_refl _ cut_off : τ (@= _ cut_off cut_left);
++assert ⊢ @eq_refl _ cut_off : τ (@= _ cut_off cut_right);
++assert ⊢ @eq_refl _ cut_off : τ (@= _ cut_left cut_off);
++assert ⊢ @eq_refl _ cut_off : τ (@= _ cut_right cut_off);
++assert ⊢ @eq_refl _ cut_off : τ (@= _ cut_left cut_right);
++assertnot ⊢ cut_off ≡ cut_left;
++assertnot ⊢ cut_off ≡ cut_right;
++assertnot ⊢ @eq_refl _ cut_off : τ (@= _ cut_off
++  (@comp_fapp0 C _ _ _
++    (@fapp1_fapp0 I C G x y q) (@tapp0_fapp0 I C F G x eta)));
++assertnot ⊢ @eq_refl _ cut_off : τ (@= _ cut_off
++  (@comp_fapp0 C _ _ _
++    (@tapp0_fapp0 I C F G y theta) (@fapp1_fapp0 I C F x y p)));
+diff --git a/emdash2/tmp/probes/run_naturality_owner_probe.sh b/emdash2/tmp/probes/run_naturality_owner_probe.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_naturality_owner_probe.sh
+@@ -0,0 +1,42 @@
++#!/usr/bin/env bash
++set -euo pipefail
++stage="${1:?stage required}"
++case "$stage" in /tmp/emdash-naturality-owner.??????) ;; *) exit 2 ;; esac
++cd "$stage"
++graph="$(node - <<'NODE'
++const fs=require('fs');
++const changed='emdash3_2_strict_transfor_component_paths.lp';
++const roots=[
++ 'tmp/probes/homology_naturality_direct_checks.lp',
++ 'tmp/probes/homology_row_pair_isolation_zero.lp',
++ 'tmp/probes/homology_row2_evidence_type_sharing.lp',
++ 'tmp/probes/homology_finite_degree_operations.lp',
++ 'tmp/probes/homology_finite_direct_action_sharing.lp'];
++const dependencies=new Map(),order=[],visiting=new Set();
++function visit(f){if(visiting.has(f))throw Error('cycle '+f);if(dependencies.has(f))return;
++ visiting.add(f);const s=fs.readFileSync(f,'utf8');
++ const ds=[...s.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g)].map(m=>m[1].slice(7).replaceAll('.','/')+'.lp');
++ dependencies.set(f,ds);ds.forEach(visit);visiting.delete(f);order.push(f);}
++roots.forEach(visit);
++const affected=new Set();
++for(const f of order){if(f===changed||dependencies.get(f).some(d=>affected.has(d)))affected.add(f);}
++for(const f of affected){for(const ext of ['lpo','lpi','lpj']){const p=f.replace(/\.lp$/,'.'+ext);if(fs.existsSync(p))fs.unlinkSync(p);}}
++console.log(order.filter(f=>affected.has(f)||roots.includes(f)||!fs.existsSync(f.replace(/\.lp$/,'.lpo'))).join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$graph"
++log="/home/user1/emdash1-long-exact-v1/emdash2/logs/probes/naturality-owner-$(date +%Y%m%d-%H%M%S).log"
++printf 'stage=%s targets=%s\n' "$stage" "${#targets[@]}" > "$log"
++printf 'checking %s affected/missing targets; log=%s\n' "${#targets[@]}" "$log"
++for target in "${targets[@]}"; do
++  started=$SECONDS
++  printf 'checking %s\n' "$target" >> "$log"
++  set +e
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    lambdapi check -c --no-colors -w "$target" >> "$log" 2>&1
++  rc=$?
++  set -e
++  printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++  if [[ "$rc" != 0 ]]; then tail -8 "$log" | cut -c1-220; exit "$rc"; fi
++done
++printf 'owner-position checks completed; log=%s\n' "$log"
+diff --git a/emdash2/tmp/probes/homology_native_zero_isolation_context.lp b/emdash2/tmp/probes/homology_native_zero_isolation_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_native_zero_isolation_context.lp
+@@ -0,0 +1,29 @@
++/* Split the already derived native-row chain-zero proof. */
++require open emdash.tmp.probes.homology_source_mono_context;
++symbol native_z (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t PA0 T
++      (@homology_row_triple_row2 I C C1 P t PA0 T state)) x;
++symbol native_a (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (native_z state);
++symbol native_d (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (native_z state);
++symbol native_h (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @tapp0_fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@comp_cat_fapp0 (@ZeroArrowCone_cat C t T) C (Functor_cat WalkingArrow_cat C)
++      (@terminal_arrow_diagram_func C t T) (@zero_arrow_cone_first_func C t T))
++    (@zero_arrow_cone_diagram_func C t T) (native_z state)
++    (@zero_arrow_cone_universal_transf C C1 t T);
++symbol native_nat (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @terminal_arrow_test_naturality_path C t T
++    (native_a state) (native_d state) (native_h state);
++symbol native_tip_zero (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @preadditive_terminal_to_zero_path C S0 t
++    (@fapp0 WalkingArrow_cat C (native_d state) walking_arrow_tgt) T
++    (@terminal_arrow_test_tip C t T (native_a state) (native_d state) (native_h state));
++symbol native_comp_zero (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @preadditive_comp_zero_left_path C S0 (native_a state) t
++    (@fapp0 WalkingArrow_cat C (native_d state) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (native_a state));
+diff --git a/emdash2/tmp/probes/homology_native_zero_isolation_h.lp b/emdash2/tmp/probes/homology_native_zero_isolation_h.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_native_zero_isolation_h.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++assert ⊢ native_h upper_triple ≡ native_h lower_triple;
+diff --git a/emdash2/tmp/probes/homology_native_zero_isolation_nat.lp b/emdash2/tmp/probes/homology_native_zero_isolation_nat.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_native_zero_isolation_nat.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++assert ⊢ native_nat upper_triple ≡ native_nat lower_triple;
+diff --git a/emdash2/tmp/probes/homology_native_zero_isolation_tip_zero.lp b/emdash2/tmp/probes/homology_native_zero_isolation_tip_zero.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_native_zero_isolation_tip_zero.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++assert ⊢ native_tip_zero upper_triple ≡ native_tip_zero lower_triple;
+diff --git a/emdash2/tmp/probes/homology_native_zero_isolation_comp_zero.lp b/emdash2/tmp/probes/homology_native_zero_isolation_comp_zero.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_native_zero_isolation_comp_zero.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++assert ⊢ native_comp_zero upper_triple ≡ native_comp_zero lower_triple;
+diff --git a/emdash2/tmp/probes/homology_zero_comp_flat_structure.lp b/emdash2/tmp/probes/homology_zero_comp_flat_structure.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_comp_flat_structure.lp
+@@ -0,0 +1,8 @@
++/* Change only the preadditive argument, not the native objects/arrows. */
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++constant symbol flat_S : τ (@PreadditiveCategory C);
++symbol flat_zero (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @preadditive_comp_zero_left_path C flat_S (native_a state) t
++    (@fapp0 WalkingArrow_cat C (native_d state) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (native_a state));
++assert ⊢ flat_zero upper_triple ≡ flat_zero lower_triple;
+diff --git a/emdash2/tmp/probes/homology_zero_tip_flat_structure.lp b/emdash2/tmp/probes/homology_zero_tip_flat_structure.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_tip_flat_structure.lp
+@@ -0,0 +1,8 @@
++/* Change only the preadditive argument, not the native objects/arrows. */
++require open emdash.tmp.probes.homology_native_zero_isolation_context;
++constant symbol flat_S : τ (@PreadditiveCategory C);
++symbol flat_zero (state : τ (@HomologyRowTriple I C C1 P t PA0 T))
++≔ @preadditive_terminal_to_zero_path C flat_S t
++    (@fapp0 WalkingArrow_cat C (native_d state) walking_arrow_tgt) T
++    (@terminal_arrow_test_tip C t T (native_a state) (native_d state) (native_h state));
++assert ⊢ flat_zero upper_triple ≡ flat_zero lower_triple;
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_index.lp b/emdash2/tmp/probes/homology_zero_minimal_index.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_index.lp
+@@ -0,0 +1,19 @@
++/* No rows, H, exactness or terminal object: a single indexed additive law. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol A : τ (FiniteDegree (succ (succ n))) → τ (Obj C);
++constant symbol B : τ (FiniteDegree (succ (succ n))) → τ (Obj C);
++constant symbol D : τ (FiniteDegree (succ (succ n))) → τ (Obj C);
++constant symbol f : Π k : τ (FiniteDegree (succ (succ n))),
++  τ (Hom C (A k) (B k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ @preadditive_comp_zero_left_path C S (A k0) (B k0) (D k0) (f k0)
++  ≡ @preadditive_comp_zero_left_path C S (A k1) (B k1) (D k1) (f k1);
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_native.lp b/emdash2/tmp/probes/homology_zero_minimal_native.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_native.lp
+@@ -0,0 +1,34 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_opaque_views.lp b/emdash2/tmp/probes/homology_zero_minimal_opaque_views.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_opaque_views.lp
+@@ -0,0 +1,37 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++constant symbol source_view : τ (Functor (@ZeroArrowCone_cat C t T) C);
++constant symbol target_view : τ (Functor (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C));
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    source_view (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    target_view (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_opaque_category.lp b/emdash2/tmp/probes/homology_zero_minimal_opaque_category.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_opaque_category.lp
+@@ -0,0 +1,38 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol Z : Cat;
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I Z);
++constant symbol x : τ (Obj I);
++
++constant symbol source_view : τ (Functor Z C);
++constant symbol target_view : τ (Functor Z (Functor_cat WalkingArrow_cat C));
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I Z (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 Z C
++    source_view (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 Z (Functor_cat WalkingArrow_cat C)
++    target_view (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_source_only.lp b/emdash2/tmp/probes/homology_zero_minimal_source_only.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_source_only.lp
+@@ -0,0 +1,36 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++constant symbol target_view : τ (Functor (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C));
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    target_view (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_zero_minimal_target_only.lp b/emdash2/tmp/probes/homology_zero_minimal_target_only.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_minimal_target_only.lp
+@@ -0,0 +1,36 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++constant symbol source_view : τ (Functor (@ZeroArrowCone_cat C t T) (C));
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    source_view (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_zero_direct_target_context.lp b/emdash2/tmp/probes/homology_zero_direct_target_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_direct_target_context.lp
+@@ -0,0 +1,34 @@
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (z k);
++
++/* The target coordinate of the existing nested Sigma object. */
++symbol direct_d (k : τ (FiniteDegree (succ (succ n))))
++≔ sigma_Fst (sigma_Snd (z k));
++symbol direct_law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (direct_d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
+diff --git a/emdash2/tmp/probes/homology_zero_direct_target_same_point.lp b/emdash2/tmp/probes/homology_zero_direct_target_same_point.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_direct_target_same_point.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++assert ⊢ d k0 ≡ direct_d k0;
+diff --git a/emdash2/tmp/probes/homology_zero_direct_target_law.lp b/emdash2/tmp/probes/homology_zero_direct_target_law.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_zero_direct_target_law.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++assert ⊢ direct_law k0 ≡ direct_law k1;
+diff --git a/emdash2/tmp/probes/homology_target_normal_form.lp b/emdash2/tmp/probes/homology_target_normal_form.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_target_normal_form.lp
+@@ -0,0 +1,3 @@
++/* Inspect the current target projection independently of additive proof terms. */
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++compute d k0;
+diff --git a/emdash2/tmp/probes/homology_nested_target_owner.lp b/emdash2/tmp/probes/homology_nested_target_owner.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_owner.lp
+@@ -0,0 +1,31 @@
++/* Stable object observation for the second coordinate of a nested Sigma.
++   The existing whole/displayed projection functors retain all higher action.
++   Opposite fibres have the same object carrier; no arrow is reversed here. */
++require open emdash.emdash3_2_cubical_square_total;
++
++symbol sigma_nested_target_obj [K A : Cat]
++  (G : τ (Functor K (Catd_cat A)))
++  (q : τ (Obj (@Sigma_cat K
++    (@comp_cat_fapp0 K (Catd_cat A) Cat_cat (@Sigma_func A) G))))
++  : τ (Obj A);
++
++rule @sigma_nested_target_obj _ _ _ (Struct_sigma _ (Struct_sigma $a _))
++  ↪ $a;
++
++// Canonical product-functor projection after totalizing the displayed map.
++rule @fapp0 _ _
++    (@sigma_Snd _ _
++      (@sigma_map_func _ _ _ (@sigma_proj1_family_funcd $K $A $G))) $q
++  ↪ @sigma_nested_target_obj $K $A $G $q;
++
++// The object-level opposite instance; the whole Op/displayed actions remain.
++rule @fapp0 _ _
++    (@sigma_Snd _ _
++      (@sigma_map_func _ _ _
++        (@Op_funcd _ _ _ (@sigma_proj1_family_funcd $K $A $G)))) $q
++  ↪ @sigma_nested_target_obj $K $A $G $q;
++
++// The existing raw pair view is a proof-time reading for neutral objects.
++unif_rule @sigma_nested_target_obj _ _ _ $q
++  ≡ @sigma_Fst _ _ (@sigma_Snd _ _ $q)
++  ↪ [ tt ≡ tt ];
+diff --git a/emdash2/tmp/probes/homology_nested_target_minimal_check.lp b/emdash2/tmp/probes/homology_nested_target_minimal_check.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_minimal_check.lp
+@@ -0,0 +1,35 @@
++require open emdash.tmp.probes.homology_nested_target_owner;
++/* Native projections but no short-exact records, windows, H or Abelian package. */
++require open emdash.tmp.probes.finite_role_indices;
++require open emdash.emdash3_2_zero_arrow_cones;
++require open emdash.emdash3_2_additive_categories;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol S : τ (@PreadditiveCategory C);
++constant symbol t : τ (Obj C);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol n : τ Nat_grpd;
++constant symbol j : τ (FiniteDegree n);
++symbol k0 ≔ @finite_degree_weaken (succ n) (finite_degree_next n j);
++symbol k1 ≔ finite_degree_next (succ n) (@finite_degree_weaken n j);
++constant symbol F : τ (FiniteDegree (succ (succ n))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol x : τ (Obj I);
++
++symbol z (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 I (@ZeroArrowCone_cat C t T) (F k) x;
++symbol a (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) C
++    (@zero_arrow_cone_first_func C t T) (z k);
++symbol d (k : τ (FiniteDegree (succ (succ n))))
++≔ @fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
++    (@zero_arrow_cone_diagram_func C t T) (z k);
++symbol law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++
++assert ⊢ k0 ≡ k1;
++assert ⊢ a k0 ≡ a k1;
++assert ⊢ law k0 ≡ law k1;
+diff --git a/emdash2/tmp/probes/homology_nested_target_row_zero_check.lp b/emdash2/tmp/probes/homology_nested_target_row_zero_check.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_row_zero_check.lp
+@@ -0,0 +1,4 @@
++require open emdash.tmp.probes.homology_nested_target_owner;
++require open emdash.tmp.probes.homology_row_pair_isolation_context;
++assert ⊢ @computational_chain_pair_path C S0 _ _ _ (row_pair upper_triple)
++  ≡ @computational_chain_pair_path C S0 _ _ _ (row_pair lower_triple);
+diff --git a/emdash2/tmp/probes/homology_nested_target_source_pair_check.lp b/emdash2/tmp/probes/homology_nested_target_source_pair_check.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_source_pair_check.lp
+@@ -0,0 +1,5 @@
++require open emdash.tmp.probes.homology_nested_target_owner;
++/* Projection isolation 5; identical original data on both sides. */
++require open emdash.tmp.probes.homology_finite_indexed_data_sharing;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x) ≡ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x);
+diff --git a/emdash2/tmp/probes/homology_nested_target_degree_check.lp b/emdash2/tmp/probes/homology_nested_target_degree_check.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_degree_check.lp
+@@ -0,0 +1,39 @@
++require open emdash.tmp.probes.homology_nested_target_owner;
++/* Canonical degree operations: each state selects H and its maps once. */
++require open emdash.tmp.probes.homology_finite_row_context;
++require open emdash.tmp.probes.homology_row_triple_right_points;
++
++symbol degree_triple (k : τ (FiniteDegree (succ n)))
++≔ @homology_finite_row_triple I C C1 P t (@computational_abelian_preabelian C P t Ab) T (succ n)
++    rows maps zeros k;
++
++symbol degree_object (k : τ (FiniteDegree (succ n))) (role : τ HomologyRole)
++  : τ (Obj C)
++≔ @homology_role_choose (Obj C)
++    (@homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_middle_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_right_homology I C C1 P t Ab T T0 KP QP (degree_triple k) x)
++    role;
++
++symbol degree_inclusion (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_a) (degree_object k homology_role_b))
++≔ @homology_row_triple_homology_inclusion I C C1 P t (@computational_abelian_preabelian C P t Ab)
++    T T0 KP QP (degree_triple k) x;
++symbol degree_projection (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_b) (degree_object k homology_role_c))
++≔ @homology_row_triple_homology_projection I C C1 P t Ab
++    T T0 KP QP (degree_triple k) x;
++
++// The existing connecting component uses the same upper/lower degree choices.
++symbol degree_connecting (k : τ (FiniteDegree n))
++  : τ (Hom C
++    (degree_object (@finite_degree_weaken n k) homology_role_c)
++    (degree_object (finite_degree_next n k) homology_role_a))
++≔ @homology_window_connecting_at I C C1 P t Ab T KP T0 QP (window k) x;
++
++// Whole action in the groupoidal finite-degree parameter uses existing lifting.
++// This is NOT a newly constructed whole I-action on the complete LES.
++symbol degree_object_func (role : τ HomologyRole)
++  : τ (Functor (Path_cat (FiniteDegree (succ n))) C)
++≔ @fapp0 _ _ (@path_lift_func (FiniteDegree (succ n)) C)
++    (λ k : τ (FiniteDegree (succ n)), degree_object k role);
+diff --git a/emdash2/tmp/probes/homology_nested_target_normal_form.lp b/emdash2/tmp/probes/homology_nested_target_normal_form.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_normal_form.lp
+@@ -0,0 +1,4 @@
++/* Check that the proposed fold actually fires after the full consumer imports. */
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++require open emdash.tmp.probes.homology_nested_target_owner;
++compute d k0;
+diff --git a/emdash2/tmp/probes/homology_nested_target_normal_form_first.lp b/emdash2/tmp/probes/homology_nested_target_normal_form_first.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_normal_form_first.lp
+@@ -0,0 +1,3 @@
++require open emdash.tmp.probes.homology_nested_target_owner;
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++compute d k0;
+diff --git a/emdash2/tmp/probes/homology_nested_target_minimal_last.lp b/emdash2/tmp/probes/homology_nested_target_minimal_last.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_nested_target_minimal_last.lp
+@@ -0,0 +1,7 @@
++require open emdash.tmp.probes.homology_zero_direct_target_context;
++require open emdash.tmp.probes.homology_nested_target_owner;
++symbol checked_law (k : τ (FiniteDegree (succ (succ n))))
++≔ @preadditive_comp_zero_left_path C S (a k) t
++    (@fapp0 WalkingArrow_cat C (d k) walking_arrow_tgt)
++    (@terminal_arrow_fapp0 C t T (a k));
++assert ⊢ checked_law k0 ≡ checked_law k1;
+diff --git a/emdash2/tmp/probes/homology_congruence_budget_smoke.lp b/emdash2/tmp/probes/homology_congruence_budget_smoke.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_congruence_budget_smoke.lp
+@@ -0,0 +1,22 @@
++/* Congruence is sufficient, not injectivity; budget exhaustion must fall back. */
++constant symbol T : TYPE;
++constant symbol a : T;
++constant symbol b : T;
++symbol erase : T → T;
++rule erase _ ↪ a;
++symbol f : T → T;
++symbol g : T → T;
++rule g $x ↪ f $x;
++assert ⊢ erase a ≡ erase b;
++assertnot ⊢ f a ≡ f b;
++assert ⊢ g a ≡ f a;
++constant symbol Pair : TYPE;
++constant symbol pair : T → T → Pair;
++symbol first : Pair → T;
++rule first (pair $x _) ↪ $x;
++assert ⊢ first (pair a a) ≡ first (pair a b);
++assertnot ⊢ first (pair a b) ≡ b;
++symbol same : T → T → T;
++rule same $x $x ↪ a;
++assert ⊢ same (erase b) a ≡ a;
++assertnot ⊢ same a b ≡ a;
+diff --git a/emdash2/tmp/probes/run_lp_bounded_congruence_probe.sh b/emdash2/tmp/probes/run_lp_bounded_congruence_probe.sh
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/run_lp_bounded_congruence_probe.sh
+@@ -0,0 +1,60 @@
++#!/usr/bin/env bash
++set -euo pipefail
++stage="${1:?private stage required}"
++checker="${2:?private checker required}"
++fuel="${3:?fuel required}"
++shift 3
++case "$stage" in /tmp/emdash-lp-bounded-env.??????) ;; *) exit 2 ;; esac
++case "$checker" in /tmp/emdash-lp-bounded-congruence.??????/_build/default/src/cli/lambdapi.exe) ;; *) exit 2 ;; esac
++[[ "$fuel" =~ ^[0-9]{1,4}$ ]] && ((fuel <= 4096)) || exit 2
++[[ -d "$stage" && -x "$checker" && $# -gt 0 ]] || exit 2
++cd /home/user1/emdash1-long-exact-v1/emdash2
++graph="$(node - "$stage" "$checker" "$@" <<'NODE'
++const fs=require('fs'),path=require('path'),crypto=require('crypto');
++const [stage,checker,...roots]=process.argv.slice(2);
++const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
++const binaryHash=hash(fs.readFileSync(checker));
++const stamp=path.join(stage,'checker-identity.json');
++if(fs.existsSync(stamp)){
++ const previous=JSON.parse(fs.readFileSync(stamp,'utf8'));
++ if(previous.sha256!==binaryHash)throw Error('binary changed: use a fresh stage');
++}else fs.writeFileSync(stamp,JSON.stringify({checker,sha256:binaryHash},null,2)+'\n');
++const seen=new Set(),active=new Set(),order=[];
++function visit(file){
++ if(active.has(file))throw Error('cycle '+file);if(seen.has(file))return;
++ if(file.includes('..')||path.isAbsolute(file)||!file.endsWith('.lp'))throw Error(file);
++ active.add(file);const bytes=fs.readFileSync(file),s=bytes.toString('utf8');
++ for(const m of s.matchAll(/\brequire\s+(?:open\s+)?(emdash(?:\.[A-Za-z0-9_]+)+)\s*;/g)){
++  visit(m[1].slice(7).replaceAll('.','/')+'.lp');
++ }
++ active.delete(file);seen.add(file);
++ const dest=path.join(stage,file);fs.mkdirSync(path.dirname(dest),{recursive:true});
++ if(fs.existsSync(dest)){
++  if(!bytes.equals(fs.readFileSync(dest)))throw Error('source changed: use a fresh stage: '+file);
++ }else fs.copyFileSync(file,dest);
++ if(roots.includes(file)||!fs.existsSync(dest.replace(/\.lp$/,'.lpo')))order.push(file);
++}
++roots.forEach(visit);
++const pkg=path.join(stage,'lambdapi.pkg');
++if(!fs.existsSync(pkg))fs.copyFileSync('lambdapi.pkg',pkg);
++process.stdout.write(order.join('\n'));
++NODE
++)"
++mapfile -t targets <<< "$graph"
++log="/home/user1/emdash1-long-exact-v1/emdash2/logs/probes/bounded-congruence-fuel${fuel}-$(date +%Y%m%d-%H%M%S).log"
++printf 'checker=%s stage=%s fuel=%s targets=%s\n' "$checker" "$stage" "$fuel" "${#targets[@]}" > "$log"
++printf 'checking %s required targets with fuel %s; log=%s\n' "${#targets[@]}" "$fuel" "$log"
++cd "$stage"
++for target in "${targets[@]}"; do
++ started=$SECONDS
++ printf 'checking %s\n' "$target" >> "$log"
++ set +e
++ LAMBDAPI_QUICK_CONGRUENCE_FUEL="$fuel" \
++  bash /home/user1/emdash1-long-exact-v1/emdash2/scripts/lambdapi_resource_guard.sh \
++    "$checker" check -c --no-colors -w "$target" >> "$log" 2>&1
++ rc=$?
++ set -e
++ printf '%s exit=%s elapsed=%ss\n' "$target" "$rc" "$((SECONDS-started))" >> "$log"
++ if [[ "$rc" != 0 ]]; then tail -8 "$log" | cut -c1-240; exit "$rc"; fi
++done
++printf 'bounded checker diagnostic completed; log=%s\n' "$log"
+diff --git a/variants/checker/left-first.patch b/variants/checker/left-first.patch
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/left-first.patch
+@@ -0,0 +1,117 @@
++diff --git a/src/core/eval.ml b/src/core/eval.ml
++index 0eaf29c5..d796b9dc 100644
++--- a/src/core/eval.ml
+++++ b/src/core/eval.ml
++@@ -43,6 +43,23 @@ let eta_equality : bool Timed.ref = Console.register_flag "eta_equality" false
++ 
++ (** Counter used to preserve physical equality in {!val:whnf}. *)
++ let steps : int Stdlib.ref = Stdlib.ref 0
+++let depth = Stdlib.ref 0
+++
+++(* Private diagnostic: optional bounded sufficient-congruence attempt.
+++   Zero selects the original evaluation order. No conversion rule is added. *)
+++let quick_congruence_fuel =
+++  match Sys.getenv_opt "LAMBDAPI_QUICK_CONGRUENCE_FUEL" with
+++  | None -> 0
+++  | Some s ->
+++      (try max 0 (min 4096 (int_of_string s)) with Failure _ -> 0)
+++
+++exception Quick_congruence_exhausted
+++
+++let spend_quick_fuel = function
+++  | None -> ()
+++  | Some fuel ->
+++      if Stdlib.(!fuel) = 0 then raise Quick_congruence_exhausted;
+++      Stdlib.decr fuel
++ 
++ (** {1 Define reduction functions parametrised by {!whnf}} *)
++ 
++@@ -90,7 +107,8 @@ module Config = struct
++     ; rewrite : bool (** Whether to apply user-defined rewriting rules. *)
++     ; expand_defs : bool (** Whether to expand definitions. *)
++     ; beta : bool (** Whether to beta-normalise *)
++-    ; dtree : sym -> dtree (** Retrieves the dtree of a symbol *) }
+++    ; dtree : sym -> dtree (** Retrieves the dtree of a symbol *)
+++    ; quick_fuel : int Stdlib.ref option (** Private diagnostic budget. *) }
++ 
++   (** [make ?dtree ?rewrite c] creates a new configuration with
++       tags [?rewrite] (being empty if not provided), context [c] and
++@@ -101,7 +119,8 @@ module Config = struct
++     let beta = not @@ List.mem `NoBeta tags in
++     let expand_defs = not @@ List.mem `NoExpand tags in
++     let rewrite = not @@ List.mem `NoRw tags in
++-    {varmap = Ctxt.to_map context; rewrite; expand_defs; beta; dtree}
+++    {varmap = Ctxt.to_map context; rewrite; expand_defs; beta; dtree;
+++     quick_fuel = None}
++ 
++   (** [unfold cfg a] unfolds [a] if it's a variable defined in the
++       configuration [cfg]. *)
++@@ -123,6 +142,7 @@ type config = Config.t
++ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++   fun whnf ->
++   let rec eq : config -> (term * term) list -> unit = fun cfg l ->
+++    spend_quick_fuel cfg.Config.quick_fuel;
++     match l with
++     | [] -> ()
++     | (a,b)::l ->
++@@ -159,6 +179,44 @@ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++       | ((Vari _|Meta _|Prod _|Abst _), Symb f)) when is_constant f ->
++       raise Exit
++     | _ ->
+++    let quick_args =
+++      match cfg.Config.quick_fuel, a, b with
+++      | None, _, _ when quick_congruence_fuel = 0 -> None
+++      | _, Appl _, Appl _ ->
+++          let h1, ts1 = get_args a and h2, ts2 = get_args b in
+++          begin match h1, h2 with
+++          | Symb s1, Symb s2 when s1 == s2
+++              && List.length ts1 = List.length ts2 ->
+++              Some (List.combine ts1 ts2)
+++          | _ -> None
+++          end
+++      | _ -> None
+++    in
+++    match cfg.Config.quick_fuel, quick_args with
+++    | Some _, Some args ->
+++        (* A sufficient test only. A mismatch/fuel exhaustion escapes to the
+++           outer attempt, which rolls back and uses the original algorithm. *)
+++        eq cfg (args @ l)
+++    | _ ->
+++    let quick_success =
+++      match cfg.Config.quick_fuel, quick_args with
+++      | None, Some _ ->
+++          let saved_steps = Stdlib.(!steps) in
+++          let saved_depth = Stdlib.(!depth) in
+++          let result = Timed.pure_test
+++            (fun () ->
+++              try
+++                eq {cfg with Config.quick_fuel =
+++                  Some (Stdlib.ref quick_congruence_fuel)} [(a,b)]; true
+++              with Exit | Quick_congruence_exhausted -> false)
+++            ()
+++          in
+++          depth := saved_depth;
+++          if not result then steps := saved_steps;
+++          result
+++      | _ -> false
+++    in
+++    if quick_success then eq cfg l else
++     let a = whnf cfg a and b = whnf cfg b in
++     if Logger.log_enabled () then log_conv "whnf: %a ≡ %a" term a term b;
++     match a, b with
++@@ -197,7 +255,6 @@ let to_tref : term -> term = fun t ->
++   | t -> t
++ 
++ (** {1 Define the main {!whnf} function that takes a {!config} as argument} *)
++-let depth = Stdlib.ref 0
++ 
++ (** [whnf cfg t] computes a whnf of the term [t] wrt configuration [c]. *)
++ let rec whnf : config -> term -> term = fun cfg t ->
++@@ -208,6 +265,7 @@ let rec whnf : config -> term -> term = fun cfg t ->
++ (** [whnf_stk cfg t stk] computes a whnf of [add_args t stk] wrt
++     configuration [c]. *)
++ and whnf_stk : config -> term -> stack -> term * stack = fun cfg t stk ->
+++  spend_quick_fuel cfg.Config.quick_fuel;
++   if Logger.log_enabled () then
++     log_whnf "%awhnf_stk %a %a" D.depth !depth term t (D.list term) stk;
++   let t = unfold t in
+diff --git a/variants/checker/right-first.patch b/variants/checker/right-first.patch
+new file mode 100644
+--- /dev/null
++++ b/variants/checker/right-first.patch
+@@ -0,0 +1,119 @@
++diff --git a/src/core/eval.ml b/src/core/eval.ml
++index 0eaf29c5..4e683bc3 100644
++--- a/src/core/eval.ml
+++++ b/src/core/eval.ml
++@@ -43,6 +43,23 @@ let eta_equality : bool Timed.ref = Console.register_flag "eta_equality" false
++ 
++ (** Counter used to preserve physical equality in {!val:whnf}. *)
++ let steps : int Stdlib.ref = Stdlib.ref 0
+++let depth = Stdlib.ref 0
+++
+++(* Private diagnostic: optional bounded sufficient-congruence attempt.
+++   Zero selects the original evaluation order. No conversion rule is added. *)
+++let quick_congruence_fuel =
+++  match Sys.getenv_opt "LAMBDAPI_QUICK_CONGRUENCE_FUEL" with
+++  | None -> 0
+++  | Some s ->
+++      (try max 0 (min 4096 (int_of_string s)) with Failure _ -> 0)
+++
+++exception Quick_congruence_exhausted
+++
+++let spend_quick_fuel = function
+++  | None -> ()
+++  | Some fuel ->
+++      if Stdlib.(!fuel) = 0 then raise Quick_congruence_exhausted;
+++      Stdlib.decr fuel
++ 
++ (** {1 Define reduction functions parametrised by {!whnf}} *)
++ 
++@@ -90,7 +107,8 @@ module Config = struct
++     ; rewrite : bool (** Whether to apply user-defined rewriting rules. *)
++     ; expand_defs : bool (** Whether to expand definitions. *)
++     ; beta : bool (** Whether to beta-normalise *)
++-    ; dtree : sym -> dtree (** Retrieves the dtree of a symbol *) }
+++    ; dtree : sym -> dtree (** Retrieves the dtree of a symbol *)
+++    ; quick_fuel : int Stdlib.ref option (** Private diagnostic budget. *) }
++ 
++   (** [make ?dtree ?rewrite c] creates a new configuration with
++       tags [?rewrite] (being empty if not provided), context [c] and
++@@ -101,7 +119,8 @@ module Config = struct
++     let beta = not @@ List.mem `NoBeta tags in
++     let expand_defs = not @@ List.mem `NoExpand tags in
++     let rewrite = not @@ List.mem `NoRw tags in
++-    {varmap = Ctxt.to_map context; rewrite; expand_defs; beta; dtree}
+++    {varmap = Ctxt.to_map context; rewrite; expand_defs; beta; dtree;
+++     quick_fuel = None}
++ 
++   (** [unfold cfg a] unfolds [a] if it's a variable defined in the
++       configuration [cfg]. *)
++@@ -123,6 +142,7 @@ type config = Config.t
++ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++   fun whnf ->
++   let rec eq : config -> (term * term) list -> unit = fun cfg l ->
+++    spend_quick_fuel cfg.Config.quick_fuel;
++     match l with
++     | [] -> ()
++     | (a,b)::l ->
++@@ -159,6 +179,46 @@ let eq_modulo : (config -> term -> term) -> config -> term -> term -> bool =
++       | ((Vari _|Meta _|Prod _|Abst _), Symb f)) when is_constant f ->
++       raise Exit
++     | _ ->
+++    let quick_args =
+++      match cfg.Config.quick_fuel, a, b with
+++      | None, _, _ when quick_congruence_fuel = 0 -> None
+++      | _, Appl _, Appl _ ->
+++          let h1, ts1 = get_args a and h2, ts2 = get_args b in
+++          begin match h1, h2 with
+++          | Symb s1, Symb s2 when s1 == s2
+++              && List.length ts1 = List.length ts2 ->
+++              (* As in the original evaluator, inspect later arguments first.
+++                 Earlier implicit classifier arguments may be very expensive. *)
+++              Some (List.rev (List.combine ts1 ts2))
+++          | _ -> None
+++          end
+++      | _ -> None
+++    in
+++    match cfg.Config.quick_fuel, quick_args with
+++    | Some _, Some args ->
+++        (* A sufficient test only. A mismatch/fuel exhaustion escapes to the
+++           outer attempt, which rolls back and uses the original algorithm. *)
+++        eq cfg (args @ l)
+++    | _ ->
+++    let quick_success =
+++      match cfg.Config.quick_fuel, quick_args with
+++      | None, Some _ ->
+++          let saved_steps = Stdlib.(!steps) in
+++          let saved_depth = Stdlib.(!depth) in
+++          let result = Timed.pure_test
+++            (fun () ->
+++              try
+++                eq {cfg with Config.quick_fuel =
+++                  Some (Stdlib.ref quick_congruence_fuel)} [(a,b)]; true
+++              with Exit | Quick_congruence_exhausted -> false)
+++            ()
+++          in
+++          depth := saved_depth;
+++          if not result then steps := saved_steps;
+++          result
+++      | _ -> false
+++    in
+++    if quick_success then eq cfg l else
++     let a = whnf cfg a and b = whnf cfg b in
++     if Logger.log_enabled () then log_conv "whnf: %a ≡ %a" term a term b;
++     match a, b with
++@@ -197,7 +257,6 @@ let to_tref : term -> term = fun t ->
++   | t -> t
++ 
++ (** {1 Define the main {!whnf} function that takes a {!config} as argument} *)
++-let depth = Stdlib.ref 0
++ 
++ (** [whnf cfg t] computes a whnf of the term [t] wrt configuration [c]. *)
++ let rec whnf : config -> term -> term = fun cfg t ->
++@@ -208,6 +267,7 @@ let rec whnf : config -> term -> term = fun cfg t ->
++ (** [whnf_stk cfg t stk] computes a whnf of [add_args t stk] wrt
++     configuration [c]. *)
++ and whnf_stk : config -> term -> stack -> term * stack = fun cfg t stk ->
+++  spend_quick_fuel cfg.Config.quick_fuel;
++   if Logger.log_enabled () then
++     log_whnf "%awhnf_stk %a %a" D.depth !depth term t (D.list term) stk;
++   let t = unfold t in

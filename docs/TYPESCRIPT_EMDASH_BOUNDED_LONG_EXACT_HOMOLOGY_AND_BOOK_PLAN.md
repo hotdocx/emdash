@@ -6,6 +6,50 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: active on a dedicated branch/worktree
 
+## Current User Direction: Finish The Remainder, Defer Endpoint Debugging
+
+2026-09-11: the user explicitly requested deferring/skipping the endpoint
+proof issue and stopping the Lambdapi debugging detour. This decision
+supersedes the diagnostic continuation instructions later in this plan.
+Those sections are retained as history, not a queue to resume automatically.
+
+Continue from the checked field-indexed bounded iterator at `ff139362` and
+its original whole H, delta, window zero/exactness proofs and retained native
+model consumer. Do not promote the experimental degree/role formal interface,
+projection/naturality rules, record variants or private checker patches.
+The symbolic zero-endpoint attachment and its LF investigation are deferred
+to a separately requested follow-up. Existing endpoint-zero lemmas and native
+zero-endpoint results remain available; do not describe the missing final
+formal attachment as proved.
+
+The user also explicitly retained a later redesign option: structure/record
+types with primitive projections instead of nested Sigma encodings. The
+failed narrow record probes do not rule out that broader owner-level design.
+Preserve them and the small reproducer as evidence for that later review;
+do not resume the investigation during the current remainder tranche.
+
+The active completion path is now:
+
+1. preserve the unfinished experiments and their exact statuses in a local
+   research checkpoint, without additional debugger/checker development;
+2. finish the formal/proof–CAS boundary audit, distinguishing computed native
+   data, checked raw equations, supplied coherent structures and generic
+   theorems; reuse the already checked iterator rather than add an endpoint
+   conversion dependency to a computational consumer;
+3. finish Chapter 31 and its appendices/evidence/provenance around the actual
+   whole K/Q/H/delta development, window exactness, bounded computation and
+   retained model integration;
+4. consolidate relevant standing claims and successor boundaries, with scoped
+   validation and local checkpoints; and
+5. audit completion of that remainder while reporting the user-deferred
+   endpoint theorem and checker experiments explicitly.
+
+No checker/debug process was running when this deferral was recorded. The
+installed Lambdapi and active mathematical/CAS owners remain unchanged.
+The final unpromoted sources and both bounded private-checker patches are
+preserved in `emdash2/audits/bounded-homology-endpoint-deferral-2026-09-11/`,
+with exact byte/hash recovery for all forty source/patch snapshots.
+
 Execution safety requirement (2026-09-10, user-requested): all further
 checker experiments in this goal must use
 `emdash2/scripts/lambdapi_resource_guard.sh`, including alternate checker
@@ -1460,6 +1504,75 @@ Keep these negative results distinct from the successful data-first API
 principle and qualified field-indexed iterator; they do not justify proof
 erasure or any further blind record migration.
 
+Further isolation distinguishes proof values from proof-bearing classifiers:
+the `ShortExactRowFamilyData` classifiers themselves also exhaust the guard,
+without supplying any evidence inhabitants. The row's inclusion and
+projection compare in two seconds; its native chain-zero path does not.
+Core `sigma_Snd` and `ind_eqr` decision trees inspect the data/proof argument
+first, so the evidence does not justify blindly dropping their implicit
+guards. The pinned assertion handler checks types before value conversion;
+the earlier captured backtrace was in its final value-conversion call.
+
+New bounded hypothesis: shorten the existing strict component-naturality
+proof, which currently chains four proof-time raw/post/off-diagonal/pre
+comparisons. Direct reflexivity attempts fail immediately with the existing
+rules. Two direct proof-time readings of `tapp1_fapp0` as its strict raw
+cuts make the SAME generic theorem check by reflexivity in under a second.
+Their LHSs retain flat functor/base-point indices to correlate the square
+but leave compound evaluated composition endpoints implicit; strict LHS
+audit passes. This is not a runtime naturality cut or an equality-eliminator
+relaxation. Test negative ownership controls and a full owning-module copy
+against the real chain-zero/classifier/H consumers before promotion. A
+shorter proof alone is not a solution to the bounded output interface.
+
+The naturality variant's owner and five positive/four negative usability
+controls pass, but the real native-row zero comparison still exhausts the
+guard; it is not promoted. On the unchanged owner, the whole native
+transformation and its naturality proof already compare in two seconds.
+The additive terminal-to-zero and zero-composition proofs fail, even with
+an independent flat preadditive parameter. A small indexed additive law
+without native projections passes in one second.
+
+The new reduced fixture needs no short-exactness, windows, H or Abelian
+package: native zero-cone endpoint projections alone reproduce the failure.
+Abstract projection functors over the SAME native source category pass;
+the concrete source projection with abstract target passes, while concrete
+target with abstract source fails. The problematic runtime target form is
+`fapp0 (sigma_Snd (sigma_map_func (Op_funcd (sigma_proj1_family_funcd G)))) q`.
+It is not runtime-convertible to the direct nested-pair target, because
+arbitrary Sigma-map objects currently have a proof-time view. The direct
+nested-pair target still fails the additive-law comparison, so merely
+promoting that existing Sigma-map unifier is not established as a remedy.
+
+Next bounded candidate: one stable object observation for the second
+coordinate of a nested Sigma, with constructor beta and folds at the
+canonical covariant/opposite Sigma-map projection forms. Whole/displayed
+functors and their higher actions remain the existing owners. Opposite
+fibres share object carriers; this must not introduce an arrow-reversal
+rule or reopen the deferred variance migration. All LHS implicit slots are
+wildcards except the displayed projection head's parameters used on the
+RHS. First check source/SR and the reduced real consumer; then audit full
+owning-position interactions and higher-action/type boundaries if it helps.
+
+That projection candidate passes source/SR and LHS audit, and normal-form
+queries confirm its fold actually fires in both import orders. Nevertheless
+the reduced law, row zero, source pair and canonical delta still exhaust
+the guard; it is not promoted. The active mathematical owner is unchanged.
+
+The reduced reproducer now motivates a bounded private checker experiment,
+not another unmeasured mathematical record change. Starting from pinned
+`db4f7809961b8c107247613067fb567491fb0b84`, try a sufficient same-head
+congruence check with a shared fuel budget covering comparison AND recursive
+weak-head evaluation. On failure or exhausted fuel, roll back speculative
+reference updates and use the original evaluator. This addresses the
+previous unbounded attempt's prerequisite regression. A private environment
+switch of zero keeps the original order; no new conversion equation,
+injectivity claim, proof opacity or installed-binary replacement is allowed.
+Compile serially under the resource guard, use binary-compatible dependency
+objects, and compare the reduced case, erasing-rule negatives and the
+previously regressed prerequisite before drawing a conclusion. Private-
+checker success alone still does not qualify a library promotion.
+
 The van Doorn reference is directly relevant to this boundary. In
 §4.1.1 of [the dissertation](https://arxiv.org/abs/1808.10690v1), printed
 pages 68–69, a flat natural-number index makes the three families at
@@ -2008,10 +2121,11 @@ was introduced to get a passing target.
 | `LEH-WINDOW-EXACTNESS-7D4` | all adjacent-zero laws and all three interior exactness witnesses qualified | HINT-DIRECT-CONNECTING-17, HINT-WINDOW-ZERO-18, HINT-WINDOW-EXACT-FIRST-19, HINT-WINDOW-EXACT-SECOND-20, HINT-WINDOW-EXACT-THIRD-21 and reusable cover lemmas | exactness at the three actual window interiors, without changing any H object or map |
 | `LEH-HOMOLOGY-ZERO-MAPS-7D4A` | five rule-free proofs checked in ignored probes; auxiliary, not the current architecture milestone | existing kernel/cokernel-map uniqueness and homology-map composition | a zero middle map induces zero on cycles/homology; composable middle maps with zero composite induce a zero composite on the original homologies |
 | `LEH-HOMOLOGY-CONNECTING-API-7E` | complete; checkpoint `db73ea79` | native window 7A and the 2026-09-07 priority clarification | independently named homology-connecting operation preserving actual selected homology and retaining its algorithm trace without making snake intermediates public inputs |
-| `LEH-LONG-EXACT-8` | native assembly complete; generic finite result/two-window join qualified; bounded row iterator and endpoint-zero evidence pending | native 7A/7E; generic exactness additionally requires 7D | complete bounded long exact sequence with endpoint zeros and all interior exactness |
+| `LEH-LONG-EXACT-8` | native assembly and generic field-indexed bounded iterator qualified; final symbolic endpoint-proof attachment deferred by user on 2026-09-11 | native 7A/7E; generic exactness additionally requires 7D | bounded computation with retained interior exactness; report the deferred formal endpoint theorem separately |
 | `LEH-LONG-EXACT-NATIVE-8A` | complete; checkpoint `2355af36` | 7A/7E and retained degree/map selections | native whole bounded long exact result, actual shared windows/arrow pairs, endpoint zeros, indexed observations and full serialization |
 | `LEH-LONG-EXACT-PREREQUISITES-8B` | complete and qualified; coherent input spans, generic window extension and same-H zero-middle theorem | exact window and indexed finite result tails | shared-state inputs, reusable extension and zero evidence without casts or reselection |
-| `LEH-LONG-EXACT-GENERATOR-8C` | in progress; field-indexed Nat iterator qualified; degree/role-indexed public endpoint representation under qualification after flat-tail conversion audit | 8B | Nat iteration, zero-padded degree/role order and endpoint evidence at the same H objects |
+| `LEH-LONG-EXACT-GENERATOR-8C` | computational iterator qualified at `ff139362`; use this checked interface for the remainder | 8B | field-indexed Nat iteration retaining the actual H/delta arrows and interior evidence |
+| `LEH-LONG-EXACT-ENDPOINT-8D` | deferred by explicit user direction, 2026-09-11 | future separately requested LF/interface review | symbolic endpoint-proof attachment; experimental degree/role replacement and checker optimization are not prerequisites for the current book/audit tranche |
 | `LEH-NATIVE-9` | complete for the bounded result through 8A | operational polynomial Freyd provider | nonsplit multi-degree whole result, failures, deterministic serialization |
 | `LEH-CATEGORY-10` | complete; checkpoint `57330594` | categorical compiler and row 9 | operation roles, prerequisite trace, lowering, direct/graph agreement |
 | `LEH-NATIVE-SNAKE-RESULT-10A` | complete; checkpoint `1b870fe4` | existing native snake connecting, kernels/cokernels, exactness | native full six-term result for the named snake-exact-sequence operation and five-map/four-zero proof–CAS coverage, reusing an existing connecting result when supplied |
