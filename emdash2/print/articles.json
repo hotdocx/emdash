@@ -9,8 +9,8 @@
         "The emdash contributors"
       ],
       "edition": "overview research article",
-      "editionVersion": "0.3.0-dev",
-      "publicationDate": "2026-08-21",
+      "editionVersion": "0.3.1-dev",
+      "publicationDate": "2026-09-11",
       "status": "draft",
       "keywords": [
         "functorial type theory",
@@ -20,7 +20,7 @@
         "proof assistants",
         "emdash"
       ],
-      "artifact": "emdash2/output/pdf/emdash-v3.2-overview-0.3.0-dev.pdf",
+      "artifact": "emdash2/output/pdf/emdash-v3.2-overview-0.3.1-dev.pdf",
       "distribution": {
         "markdown": "docs/emdash3_2.md",
         "pdf": "docs/emdash3_2.pdf"
@@ -28,13 +28,15 @@
       "pageBudget": {
         "minimum": 14,
         "target": 16,
-        "maximum": 18
+        "maximum": null
       },
       "requiredText": [
         "Functorial Type Theory",
         "Synthetic Arrow Induction",
         "Usable Categorical Binders",
-        "Research Boundaries"
+        "Research Boundaries",
+        "10.5281/zenodo.21544186",
+        "github.com/hotdocx/emdash"
       ]
     }
   ]

@@ -5,7 +5,7 @@
   "subtitle": "Univalent Foundations for Mathematics",
   "displayTitle": "Functorial Type Theory: Univalent Foundations for Mathematics",
   "edition": "expanded development edition",
-  "editionVersion": "0.8.2-dev",
+  "editionVersion": "0.8.3-dev",
   "publicationDate": "2026-09-11",
   "status": "draft",
   "authors": [
@@ -32,7 +32,7 @@
     "layout": "single-column"
   },
   "artifacts": {
-    "pdf": "output/pdf/functorial-type-theory-0.8.2-dev.pdf"
+    "pdf": "output/pdf/functorial-type-theory-0.8.3-dev.pdf"
   },
   "sources": [
     {

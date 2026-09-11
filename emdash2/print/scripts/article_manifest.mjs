@@ -176,13 +176,18 @@ export function validateArticleManifest(
     if (!budget || typeof budget !== 'object' || Array.isArray(budget)) {
       fail(context, 'pageBudget must be an object');
     }
-    for (const field of ['minimum', 'target', 'maximum']) {
+    for (const field of ['minimum', 'target']) {
       if (!Number.isSafeInteger(budget[field]) || budget[field] < 1) {
         fail(context, 'pageBudget.' + field + ' must be a positive integer');
       }
     }
-    if (!(budget.minimum <= budget.target && budget.target <= budget.maximum)) {
-      fail(context, 'pageBudget must satisfy minimum <= target <= maximum');
+    if (budget.maximum !== null &&
+        (!Number.isSafeInteger(budget.maximum) || budget.maximum < 1)) {
+      fail(context, 'pageBudget.maximum must be a positive integer or null');
+    }
+    if (budget.minimum > budget.target ||
+        (budget.maximum !== null && budget.target > budget.maximum)) {
+      fail(context, 'pageBudget must satisfy minimum <= target <= maximum when bounded');
     }
   }
 
@@ -191,6 +196,12 @@ export function validateArticleManifest(
 
 export function loadArticleManifest() {
   return validateArticleManifest(readJson());
+}
+
+/** An explicit null maximum removes only the editorial page ceiling. */
+export function articlePageCountAllowed(pageCount, budget) {
+  return Number.isSafeInteger(pageCount) && pageCount >= budget.minimum &&
+    (budget.maximum === null || pageCount <= budget.maximum);
 }
 
 export function selectArticle(id) {

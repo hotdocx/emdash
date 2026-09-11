@@ -73,6 +73,12 @@ The active article is authored once under `public/` and paired with the
 metadata, page budget, generated PDF, and distribution paths in
 `articles.json`.
 
+The overview no longer has an 18-page ceiling. Its `pageBudget.maximum` is
+explicitly `null`; `minimum` remains a short-output sanity check and `target`
+an editorial guide, not a limit. Numeric maxima remain enforced for bounded
+article profiles. This changes no timeout, nonblank-page, typography,
+accessibility, metadata or PDF-structure check.
+
 ```bash
 ./scripts/pnpmw run article:check
 ./scripts/pnpmw run article:render

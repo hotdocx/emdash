@@ -29,11 +29,14 @@ induced map and, with explicit normality, connecting window. No universal
 operation is rerun merely to interpret those observations. Computed matrix
 equations, all-test provider contracts and model-presentation semantics are
 separate evidence classes; no closed quotient-effective model is inferred.
-Chapter 31 and its appendices describe this boundary in the locally checked,
-unpromoted `0.8.2-dev` draft. The worked-example follow-up now traces the
+Chapter 31 and its appendices describe this boundary in the checked,
+promoted `0.8.3-dev` draft. The worked-example follow-up traces the
 nonsplit two-degree calculation from retained matrices and relation
 witnesses to whole-H and model interpretation, with a focused regression.
-No public artifact was replaced.
+The later publication continuation adds Book/Code self-references to both
+the book and the `0.3.1-dev` overview, removes the overview's 18-page ceiling
+without dropping quality checks, and records the explicitly authorized
+GitHub delivery in the parent plan.
 
 The [assembly comparisons](../audits/bounded-homology-assembly-2026-09-10/README.md)
 and [final endpoint/checker archive](../audits/bounded-homology-endpoint-deferral-2026-09-11/README.md)

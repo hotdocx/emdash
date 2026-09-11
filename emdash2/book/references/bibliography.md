@@ -33,6 +33,7 @@
 7. <a id="ref-emdash-artifact"></a>The emdash contributors. *emdash v3.2
    Lambdapi Sources*. Accompanying computational artifact for this development
    edition: `emdash3_2.lp` and its one-way extension modules.
+   [Code repository](https://github.com/hotdocx/emdash).
 
 8. <a id="ref-dosen-cut-elimination"></a>Kosta Došen. *Cut Elimination in
    Categories*. Trends in Logic 6. Kluwer Academic Publishers, Dordrecht,
@@ -103,6 +104,13 @@
     Project*. [Source repository](https://github.com/homalg-project/homalg_project),
     reviewed at revision `802993da0095`.
 
-Items 6-7 identify proof infrastructure. Items 12-14 are comparative Chapter
+23. <a id="ref-emdash-book"></a>The emdash contributors. *Functorial Type
+    Theory: Univalent Foundations for Mathematics*. Ongoing book, 2026.
+    [Book DOI 10.5281/zenodo.21544186](https://doi.org/10.5281/zenodo.21544186).
+    [Code and source repository](https://github.com/hotdocx/emdash).
+
+Items 6-7 identify proof infrastructure. Item 23 is this book's self-reference;
+its published record and ongoing source have independent version histories.
+Items 12-14 are comparative Chapter
 29 references. Items 15-22 give mathematical and algorithmic context for
 Chapter 31; no source prose or software code is reproduced in that chapter.

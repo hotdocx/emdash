@@ -2,6 +2,13 @@
 
 # Preface
 
+The emdash contributors maintain this book and its accompanying code together.
+The [book DOI](https://doi.org/10.5281/zenodo.21544186) identifies the published
+book record; [the source repository](https://github.com/hotdocx/emdash) holds
+the ongoing mathematical and software development. A full citation appears
+in the [bibliography](#ref-emdash-book). This draft's own version and date
+are given in its opening material.
+
 Type theory is often introduced through terms and substitution. Category
 theory is often introduced through objects and arrows. Functorial type theory
 starts from the conviction that these are not two unrelated beginnings.
@@ -149,11 +156,14 @@ A seventh spiral, [Chapter 31](#chapter-31), puts universal factors to work
 in homological algebra. Addition turns selected products into biproducts;
 kernels and cokernels provide factors; Abelian normality and local covers
 make the snake construction possible without an elementwise choice of
-preimages. The chapter proves the selected six-term snake theorem, then
-explains how polynomial algorithms, categorical programs and explicit
-proof-CAS adoption retain a bounded long exact computation. Its constructed
-formal interior witnesses are distinguished from the generic long-exact
-theorem still under development.
+preimages. Coherent kernel/cokernel adjunctions then make homology a whole
+functor on native zero diagrams. The chapter proves the selected six-term
+snake theorem and all three interiors of a homology window, supplies a
+whole connecting transformation and finite iteration, and follows a
+nonsplit polynomial example through categorical execution and explicit
+proof-CAS interpretation. The final symbolic zero-endpoint attachment stays
+deferred, separate from the native endpoint computation and the checked
+window/iterator interfaces.
 
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through

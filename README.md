@@ -19,6 +19,18 @@ geometry organized by the invertibility sieve $D_R(f)$, site-relative
 schemes, and a supplied projective-line presentation. These layers keep
 representability, locality, and construction hypotheses explicit.
 
+A native TypeScript algebra engine now complements that formal layer with
+exact polynomial/module algorithms and categorical whole-operation lowering.
+Typed proof–CAS bindings retain the actual presentations, relation witnesses
+and universal choices. Coherent kernel/cokernel adjunctions give whole H;
+snake and homology-window exactness, a whole connecting transformation and
+finite assembly meet nonsplit polynomial-module computations. The
+[worked book example](./emdash2/book/chapters/31-additive-abelian-and-homological-computation.md#homology-nonsplit-worked-example)
+and [boundary audit](./docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+explain both the connection and its supplied-model assumptions. Native affine
+localization and varying-ring Čech cochains are also available; Čech
+cohomology is not yet supplied by that cochain layer.
+
 Its universal-construction layer now also combines whole monad extension with
 selected finite Cartesian and indexed computation. A chosen product functor,
 whole projections, pairing, and a terminal-arrow transfor support Došen-style
@@ -148,12 +160,14 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.7.0-dev`, 374 pages, locally promoted;
-[Zenodo record and DOI for the latest public release](https://doi.org/10.5281/zenodo.21544186),
+(`0.8.3-dev`;
+[archived book record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
-[`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with the modules it
-imports.
+[`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with its one-way
+extension modules under `emdash2/`. The maintained code repository is
+[hotdocx/emdash](https://github.com/hotdocx/emdash); the archived book and
+ongoing source need not have the same version date.
 
 Use the
 [live integrated reviewer](https://hotdocx.github.io/emdash/)
@@ -264,6 +278,8 @@ are in the
 | TypeScript surface and explicit Core | Recursively elaborates a reviewed direct-TypeScript and textual surface into backend-neutral explicit owners. |
 | Generic TypeScript dependent LF | Checks explicit Core, performs conversion and bounded reduction, and runs entirely in the client for the reviewer profile. |
 | Lambdapi conformance route | Optionally emits deterministic judgments and compares selected results with the active kernel. It is a development oracle, not a production backend. |
+| Native algebra and categorical programs | Execute exact algorithms over explicit presentations, retaining whole results and their prerequisite/lowering information. Heavy CAS work is not hidden in Core conversion. |
+| Proof–CAS realization | Reifies selected data and records explicit equation/provider/model bindings. It does not automatically construct a closed coherent model or verify every native algorithm. |
 
 The TypeScript implementation is therefore a real small checker/evaluator,
 but only for its recorded profile. Readable syntax may omit parameters that
@@ -272,6 +288,12 @@ external naturality evidence when no internal construction owns it.
 
 ## Current Boundaries
 
+- The current whole-opposite and Sigma-Hom encodings have known
+  variance/soundness defects, including diagnostics that inhabit the encoded
+  empty type. Higher-variance-dependent formal claims remain unqualified
+  pending repair. See the [opposite diagnostic](./docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
+  and [Sigma-Hom diagnostic](./docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md).
+  Passing local checks is not a consistency certificate.
 - The text adapter is not a parser for every notation in the book or for
   arbitrary Lambdapi source. It accepts the reviewed mathematical
   constructions and fails closed outside them.
@@ -291,6 +313,12 @@ external naturality evidence when no internal construction owns it.
   and locality capabilities. The projective-line package retains its global
   object and actual overlap; representation-independent schemes, graded
   `Proj`, and general projective space remain open.
+- Whole H and connecting use supplied coherent universal presentations and
+  normality. The native bounded result and checked formal finite-window
+  iterator are available; the final symbolic zero-endpoint attachment is
+  explicitly deferred. Closed quotient-effective models, unrestricted CAS
+  reduction and Čech cohomology are separate work, not consequences of the
+  displayed examples.
 - Systematic groupoidal specialization for every former, a generic
   category-to-groupoid reflector, and general normalization, confluence,
   canonicity, consistency, and semantic soundness for the combined calculus

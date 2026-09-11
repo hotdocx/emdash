@@ -4,6 +4,7 @@ import test from 'node:test';
 
 import {
   ARTICLE_MANIFEST_PATH,
+  articlePageCountAllowed,
   loadArticleManifest,
   validateArticleManifest,
 } from './article_manifest.mjs';
@@ -46,4 +47,34 @@ test('the page budget is ordered', () => {
     () => validateArticleManifest(manifest, { registry: loadDocumentRegistry() }),
     /minimum <= target <= maximum/
   );
+});
+
+test('an explicit null maximum permits a longer overview but keeps minimum and target', () => {
+  const manifest = fixture();
+  manifest.articles[0].pageBudget = { minimum: 14, target: 16, maximum: null };
+  const budget = validateArticleManifest(manifest).articles[0].pageBudget;
+  assert.equal(articlePageCountAllowed(19, budget), true);
+  assert.equal(articlePageCountAllowed(40, budget), true);
+  for (const count of [0, 13, 18.5, NaN, Infinity]) {
+    assert.equal(articlePageCountAllowed(count, budget), false);
+  }
+});
+
+test('a numeric maximum still constrains other bounded article profiles', () => {
+  const manifest = fixture();
+  manifest.articles[0].pageBudget = { minimum: 14, target: 16, maximum: 18 };
+  const budget = validateArticleManifest(manifest).articles[0].pageBudget;
+  assert.equal(articlePageCountAllowed(18, budget), true);
+  assert.equal(articlePageCountAllowed(19, budget), false);
+});
+
+test('uncapped budgets still reject reversed lower bounds and malformed maxima', () => {
+  const reversed = fixture();
+  reversed.articles[0].pageBudget = { minimum: 17, target: 16, maximum: null };
+  assert.throws(() => validateArticleManifest(reversed), /minimum <= target/);
+  for (const maximum of [undefined, 0, -1, 18.5, 'none', Infinity]) {
+    const manifest = fixture();
+    manifest.articles[0].pageBudget.maximum = maximum;
+    assert.throws(() => validateArticleManifest(manifest), /positive integer or null/);
+  }
 });

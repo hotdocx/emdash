@@ -6741,37 +6741,43 @@ chapter files are authoring sources; the ignored
 the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
 
-The current locally promoted artifact is the draft expanded development
-edition `0.7.0-dev`, dated 2026-08-29: 45 ordered sources, 164 cited evidence
-claims, 3,091 mathematical spans, 374 tagged US Letter pages, 18 embedded
-fonts, and PDF SHA-256
-`d15287f7a841dfd25ad441c7fc8ff804425659ae0c292c2d8ae726fb46c9204b`.
-Two independent releases produced that same checksum, and the promoted owner
-and public copy are byte-identical. This artifact status is publication
-evidence, not a new mathematical authority; no remote publication occurred.
+The current checked distribution book is the draft expanded development
+edition `0.8.3-dev`, dated 2026-09-11: 46 ordered sources, 184 cited evidence
+claims, 3,397 mathematical spans, 409 tagged Letter pages and 19 embedded
+fonts. Its PDF SHA-256 is
+`3bf4c6173cb96e1e7c1e80cbce59c574cf7361f243eb271e54fb22f3e52dbd54`.
+The overview is `0.3.1-dev`, also dated 2026-09-11, with 19 tagged Letter
+pages, 14 embedded fonts and PDF SHA-256
+`bd42f3a9a8e519e24339bf5f8c253c6b00b4e8272d8b205763f501a23415c152`.
+Both have byte-identical repeated exports and checked promoted copies in
+the root `docs/` distribution paths. Both now contain the book self-reference,
+Book DOI and Code links in opening material and bibliography/references.
 
-The bounded homological goal and its worked-example follow-up have produced
-a locally checked, unpromoted `0.8.2-dev` draft dated 2026-09-11. Chapter 31
-and its appendices explain
+The overview's 18-page ceiling was explicitly removed by the user.
+`pageBudget.maximum = null` disables only that ceiling; lower-bound sanity,
+resource limits, metadata, nonblank pages, links, fonts and rendering checks
+remain. Numeric maxima still constrain bounded article profiles. The
+publication/registry tests exercise both policies. Visual review corrected
+two stranded article headings with existing full-width source groups and
+split two overwide equations; no renderer CSS change was retained.
+
+Chapter 31 and its appendices explain
 the coherent K/Q presentations, derived whole H, direct and whole connecting
 interfaces, three checked window interiors, finite iterator and retained
 proof-CAS model interpretation. A worked nonsplit two-degree example now
 traces the retained matrices, zero-composite witness and whole-H/model
 bindings; its exact matrices and presentations have a focused native
-regression. The draft has 46 sources, 184 cited claims, 3,397 math spans,
-409 tagged Letter pages and 19 embedded fonts. Two final exports have
-the identical PDF SHA-256
-`eca5d51db8a13af2263c218f0f7c5adf613b863248e8e59df3b891f8cc2dc13e`.
-Source, browser, PDF and affected-page visual checks pass. This local export
-does not replace the promoted/public artifact above; the earlier `0.8.0-dev`
-and `0.8.1-dev` PDFs are also preserved. The final symbolic zero-endpoint
-attachment remains
+regression. Source, browser, PDF and affected-page visual checks pass; earlier
+draft artifacts remain preserved. The final symbolic zero-endpoint attachment remains
 explicitly user-deferred, separate from the checked finite iterator and the
 complete native endpoint calculations. Supplied model normality and trusted
 presentation semantics are distinguished from computed matrix equations.
 The [final boundary audit](../../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
 records closure of the requested remainder and the inherited foundational
 qualification; this book update is not a consistency certificate.
+The [publication continuation](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md#documentation-and-publication-continuation)
+records the user's GitHub authorization, exact artifact identities and
+delivery verification. It does not create a new Zenodo deposit or npm release.
 
 ```bash
 ./scripts/pnpmw run book:assemble

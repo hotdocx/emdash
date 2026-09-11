@@ -5,7 +5,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { PDFDocument, PDFName } from 'pdf-lib';
 
-import { GIT_ROOT, selectArticle } from './article_manifest.mjs';
+import { GIT_ROOT, selectArticle, articlePageCountAllowed } from './article_manifest.mjs';
 
 const PIPELINE_NAME = 'emdash deterministic article pipeline';
 const ARTICLE_ID = process.argv[2] || 'emdash-v3-2-overview';
@@ -87,13 +87,10 @@ async function main() {
   }
 
   const pageCount = pdf.getPageCount();
-  if (
-    pageCount < article.pageBudget.minimum ||
-    pageCount > article.pageBudget.maximum
-  ) {
+  if (!articlePageCountAllowed(pageCount, article.pageBudget)) {
     fail(
       'PDF page count ' + pageCount + ' is outside ' +
-      article.pageBudget.minimum + '-' + article.pageBudget.maximum
+      article.pageBudget.minimum + '-' + (article.pageBudget.maximum ?? 'unbounded')
     );
   }
   for (const [index, page] of pdf.getPages().entries()) {

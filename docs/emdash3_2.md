@@ -3,13 +3,24 @@ title: Functorial Type Theory: An Executable Architecture for Directed Dependenc
 authors: The emdash contributors
 edition: overview research article
 status: research draft
-date: 2026-08-21
+date: 2026-09-11
 ---
 
 > **Research-draft status.** This article describes the checked emdash v3.2
 > development and a bounded TypeScript reviewer. It is not a released
 > foundation, a venue submission, or a claim that the full research programme
 > is complete. The active Lambdapi sources remain the mathematical authority.
+
+Companion book [8]: [10.5281/zenodo.21544186](https://doi.org/10.5281/zenodo.21544186).
+Code [4]: [github.com/hotdocx/emdash](https://github.com/hotdocx/emdash).
+The published book record and ongoing source may carry different versions.
+
+This overview concentrates on the foundational architecture. The companion
+book also develops the newer monad and Cartesian/indexed interfaces, whole
+kernel/cokernel and homology operations, and retained proof-CAS computation.
+The current whole-opposite and Sigma-Hom encodings have known soundness
+defects; higher-variance-dependent formal claims remain unqualified pending
+repair. Local checks in the research artifact are not a consistency certificate.
 
 # Abstract
 
@@ -365,9 +376,11 @@ The stable `Pi_cat` facade exposes section objects and the next displayed hom.
 Evaluation and section action project through the generic displayed
 application tower. They are not a second primitive function calculus.
 
-## 3.1 Dependent hom as shared infrastructure
+<div class="fullwidth">
+<h2>3.1 Dependent hom as shared infrastructure</h2>
+<p>The common shape behind total arrows and section action is the dependent hom.</p>
+</div>
 
-The common shape behind total arrows and section action is the dependent hom.
 Given
 
 $$
@@ -455,9 +468,11 @@ past data whose type depends on it. The distinction is the familiar
 structural discipline of dependent type theory, now interpreted over objects
 and arrows of a category.
 
-# 4. Synthetic Arrow Induction
+<div class="fullwidth">
+<h1>4. Synthetic Arrow Induction</h1>
+<p>The mathematical anchor of v3.2 is a directed analogue of path induction.</p>
+</div>
 
-The mathematical anchor of v3.2 is a directed analogue of path induction.
 Fix $x$ in a category $Z$. The covariant representable family is
 
 $$
@@ -911,12 +926,14 @@ a base arrow and let $u$ be an internalized arrow in the displayed source.
 The capped cell of the pairing owner reduces componentwise:
 
 $$
-\\mathrm{cell}(\\langle FF,GG\\rangle,p,u)
-  =
+\\begin{aligned}
+&\\mathrm{cell}(\\langle FF,GG\\rangle,p,u)\\\\
+&\\quad =
 \\bigl\\langle
   \\mathrm{cell}(FF,p,u),
   \\mathrm{cell}(GG,p,u)
 \\bigr\\rangle.
+\\end{aligned}
 $$
 
 The active kernel expresses this at the generic `fdapp1_int_cell` projection
@@ -1148,7 +1165,9 @@ $R$ on $U$, whole matching families and whole sections are hom-categories
 
 $$
 \\operatorname{Match}_P(R)=\\operatorname{Hom}(\\widehat R,P),
-\\qquad
+$$
+
+$$
 \\operatorname{Sect}_P(U)=\\operatorname{Hom}(yU,P).
 $$
 
@@ -1284,10 +1303,10 @@ $$
 $$
 
 projected from whole internal laxity. In a path target this cell is invertible;
-for a decoded strict-functor code it computes to identity; in an arbitrary
+strictness identifies it with an equality-induced arrow; in an arbitrary
 directed target it may remain noninvertible. Emdash reuses that distinction in
 the profiled category $\\mathsf{GrayHom}_{\\mathrm{lax}}(A,B)$: objects are
-computationally strict functor codes, while arrows and all higher homs come
+functors paired with their strictness property, while arrows and all higher Homs come
 from the ambient transfor tower.
 
 One selected right closure is checked:
@@ -1385,7 +1404,7 @@ The principal open boundaries are:
   full combined calculus. Lambdapi's local rule checks and the project's
   diagnostics are implementation evidence, not replacements for those
   theorems.
-- **Higher categories.** Whole laxity, computational strict-functor codes, one
+- **Higher categories.** Whole laxity, strict-functor property packages, one
   profiled right Gray closure, and its walking interchanger are checked. The
   mirror closure, tensor functoriality and coherence, full Crans--Gray
   monoidality, global migration of historical strict endpoint cuts, and a
@@ -1448,9 +1467,14 @@ losing that internalized, normalization-first discipline.
 3. The Lambdapi contributors. *Lambdapi User Manual*.
    [lambdapi.readthedocs.io](https://lambdapi.readthedocs.io/).
 4. The emdash contributors. *emdash v3.2 sources*. Accompanying artifact.
+   [Code repository](https://github.com/hotdocx/emdash).
 5. Max Zeuner. *Univalent Foundations of Constructive Algebraic Geometry*.
    arXiv:2407.17362v1, 2024.
 6. Pierre-Marie Pédrot. “Pursuing Shtuck.” Preprint, 2023. HAL:
    hal-04251754v1.
 7. Amar Hadzihasanovic. *Combinatorics of Higher-Categorical Diagrams*.
    arXiv:2404.07273v2, 2024.
+8. The emdash contributors. *Functorial Type Theory: Univalent Foundations
+   for Mathematics*. Ongoing book, 2026.
+   [Book DOI 10.5281/zenodo.21544186](https://doi.org/10.5281/zenodo.21544186).
+   [Code and source repository](https://github.com/hotdocx/emdash).

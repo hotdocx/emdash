@@ -14,7 +14,7 @@ import {
   PDFString,
 } from 'pdf-lib';
 
-import { GIT_ROOT, selectArticle } from './article_manifest.mjs';
+import { GIT_ROOT, selectArticle, articlePageCountAllowed } from './article_manifest.mjs';
 import { documentQuery } from './document_registry.mjs';
 import {
   startPreviewServer,
@@ -238,13 +238,10 @@ async function main() {
     if (renderErrors.length > 0) {
       failures.push('rendered error box: ' + renderErrors.slice(0, 3).join(' / '));
     }
-    if (
-      pageCount < article.pageBudget.minimum ||
-      pageCount > article.pageBudget.maximum
-    ) {
+    if (!articlePageCountAllowed(pageCount, article.pageBudget)) {
       failures.push(
         'page count ' + pageCount + ' is outside article budget ' +
-        article.pageBudget.minimum + '-' + article.pageBudget.maximum
+        article.pageBudget.minimum + '-' + (article.pageBudget.maximum ?? 'unbounded')
       );
     }
     if (failures.length > 0) {

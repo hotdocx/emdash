@@ -17,9 +17,16 @@ codes, directed join, and iterated outgoing paths to construct canonical
 dependent simplexes in variable dimension. A sixth returns to universal
 structure: adjunctions generate monads, finite products acquire a triangular
 cut calculus, and slice base change extends to the chain
-$\Sigma_u\dashv u^*\dashv\Pi_u$. Chapter details, notation, and cross-references
+$\Sigma_u\dashv u^*\dashv\Pi_u$. A seventh connects selected universal
+operations to whole homology, exact windows, and retained computer-algebra
+results. Chapter details, notation, and cross-references
 may still change. The active implementation remains authoritative whenever
 prose and code disagree.
+
+Book record: [10.5281/zenodo.21544186](https://doi.org/10.5281/zenodo.21544186).
+Code and source: [github.com/hotdocx/emdash](https://github.com/hotdocx/emdash).
+The [bibliographic self-reference](#ref-emdash-book) identifies the book;
+the archived editions and current source may have different version dates.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See

@@ -10,6 +10,9 @@ the [book follow-up ledger](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BO
 The implementation audit and `0.8.1-dev` closure evidence below remain the
 original snapshot; no formal/CAS library or model consumer changed in that
 exposition follow-up.
+The subsequent Book/Code reference and GitHub publication work is recorded
+in the same plan's publication-continuation section; it preserves these
+mathematical and trust boundaries.
 
 ## Scope After The User's Deferral
 

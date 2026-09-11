@@ -31,7 +31,8 @@ deferrals explicit rather than repairing or hiding them for publication.
 
 Initial Git review: the target worktree was clean at `e494f486`; main in the
 historical worktree was clean, and is an ancestor of the homology branch.
-No remote write or artifact promotion has occurred yet. PDF skill instructions
+At that initial review no remote write or artifact promotion had occurred.
+PDF skill instructions
 were read and the required edit marker ran successfully once for this
 two-artifact continuation. The owning book/print workflows remain mandatory.
 The selected new drafts are book `0.8.3-dev` and overview `0.3.1-dev`.
@@ -40,8 +41,43 @@ the remote as hotdocx/emdash. Fetched origin/main is `9edbdb2a`, an ancestor
 of this branch. Publishing here means the requested GitHub research snapshot
 and Pages artifacts, not a new Zenodo version, npm package or tagged release.
 
-Status: shorter appendix edits underway; README, book/article reference and
-publication-workflow review in progress.
+The shorter-appendix review is checkpointed at `e94448fb`. Both root and
+emdash2 READMEs now describe the homology/proof-CAS boundary, explicitly
+disclose the known encoding defects and distinguish the kernel from its
+one-way extensions. The book's edition notice, preface and bibliography and
+the overview's opening material/references carry the requested self-reference.
+The overview's maximum is explicitly null; 17 publication/registry tests
+pass, including numeric-bound preservation and malformed-budget rejection.
+
+Local artifact qualification:
+
+- Book `0.8.3-dev`: 409 pages, 19 embedded fonts, 46 sources, 184 cited
+  claims and 3,397 math spans; repeated SHA-256
+  `3bf4c6173cb96e1e7c1e80cbce59c574cf7361f243eb271e54fb22f3e52dbd54`.
+- Overview `0.3.1-dev`: 19 pages and 14 embedded fonts; repeated final SHA-256
+  `bd42f3a9a8e519e24339bf5f8c253c6b00b4e8272d8b205763f501a23415c152`.
+- Source, browser and PDF gates pass under 3 GiB/no-swap process scopes.
+  The book's changed opening/bibliography pages and all overview pages were
+  reviewed visually. Both PDFs contain actual clickable Book DOI and Code
+  URI annotations, not merely printed URL text.
+- Visual review caught two overwide overview equations and two orphaned
+  headings. An article-only CSS avoidance probe changed no PDF bytes and was
+  discarded. Existing full-width source groups now keep those headings with
+  their first sentences; line-broken formulas avoid column collisions.
+  No renderer source/CSS change remains.
+- `publication:promote` verified and copied both PDFs and Markdown sources to
+  the existing root docs distribution paths. Earlier versioned PDFs remain.
+  No mathematical, algorithm or package dependency change is made here.
+- The first local reviewer build invocation through pnpm hit standalone
+  auto-install resolution (pnpm was absent on the subprocess PATH). The
+  existing Pages workflow uses the fixture's npm lock; its exact `npm ci`
+  setup completed without lockfile changes. The subsequent `npm run build`
+  passed in 1.83 seconds and emitted the promoted PDFs as fingerprinted
+  static assets. This is the relevant delivery gate, not a root or kernel
+  aggregate; the existing Vite chunk-size advisory is retained.
+
+Status: local qualification complete; final checkpoint, main fast-forward,
+push and served-artifact verification in progress.
 
 ## External Appendix Follow-Up
 

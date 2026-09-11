@@ -3,16 +3,19 @@
 This directory is the authoring source for *Functorial Type Theory: Univalent
 Foundations for Mathematics*.
 
-The chapter files are authoritative. The assembled
-`print/public/emdash-book.md` file is generated and must not be
+Book record: [10.5281/zenodo.21544186](https://doi.org/10.5281/zenodo.21544186).
+Code and source: [hotdocx/emdash](https://github.com/hotdocx/emdash).
+The opening material and bibliography include the same self-reference.
+
+The chapter files own authored prose. The assembled
+`../print/public/emdash-book.md` file is generated and must not be
 edited by hand.
 
 ## Source map
 
 - `book.json` owns metadata, source order, and the output target.
-- `expansion.json` owns the retained Chapter 1--8 central-theorem audit and
-  the ratified Chapter 9--17 migration, conceptual ownership,
-  central-theorem/status targets, terminology, and translation contracts.
+- `expansion.json` owns the staged chapter-group architecture, conceptual
+  ownership, theorem/status targets, terminology and translation contracts.
 - `STYLE.md` owns prose, formal-status, and attribution conventions.
 - `evidence.json` maps checked claims to active Lambdapi declarations
   and reviewer evidence.
@@ -53,7 +56,10 @@ From `emdash2/`, use the same root-owned commands through the wrapper:
 The development edition is theorem-led. Chapters 1--7 are driven by the
 prerequisites of the WalkingEnd/Nat computation; Chapter 8 contains the
 central proof; Chapters 9--17 form the ratified category-theory, universal-
-construction, and directed-duality spiral. Appendix G owns the formal
+construction, and directed-duality spiral. Chapters 18--24 develop local
+geometry, 25--28 groupoidal and Gray structure, 29 dependent simplexes,
+30 Cartesian/indexed constructions, and 31 homology and proof-CAS integration.
+Appendix G owns the formal
 presentation. Contents and the evidence appendix are generated from
 their structured authorities.
 

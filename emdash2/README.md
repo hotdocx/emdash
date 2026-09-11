@@ -10,8 +10,17 @@ presentations.
 
 The surrounding repository also contains a bounded TypeScript checker,
 elaborator, text adapter, and browser reviewer. Those are executable
-compilation and review layers. The Lambdapi sources imported by
-`emdash3_2.lp` remain the mathematical authority.
+compilation and review layers. The Lambdapi kernel `emdash3_2.lp` and its
+one-way extension modules remain the mathematical authority.
+
+Book: [Functorial Type Theory](../docs/emdash-book.pdf), with
+[archived book DOI](https://doi.org/10.5281/zenodo.21544186).
+Code: [github.com/hotdocx/emdash](https://github.com/hotdocx/emdash).
+
+Research qualification: the current whole-opposite and Sigma-Hom encodings
+have known variance/soundness defects. Their diagnostics and deferred repair
+are tracked in `AGENTS.md` and the current status report; passing local
+checks is not a consistency certificate.
 
 ## Headline results
 
@@ -57,6 +66,15 @@ These are staged results, not one unrestricted completeness theorem. In
 particular, constructed Cat-valued sheafification is distinct from the
 supplied commutative-ring-valued structure-sheaf and locality capabilities
 used by the current scheme presentations.
+
+The additive/homological layer now supplies coherent kernel/cokernel
+adjunction presentations, derived whole homology on native zero diagrams,
+direct and whole connecting interfaces, generic snake/window exactness and
+finite assembly. The native polynomial Freyd implementation computes
+nonsplit bounded examples, and typed proof–CAS bindings reuse their exact
+presentations and witnesses. The [final audit](../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+distinguishes supplied model semantics, native effectiveness and the deferred
+final symbolic endpoint theorem.
 
 ## Where to start
 
@@ -459,6 +477,10 @@ degree-zero parts, `Proj`, general projective space, or non-affineness.
 
 ## Computation and authority boundaries
 
+- The native TypeScript CAS and categorical programs are a distinct
+  computation layer. Formal reification/adoption does not turn heavyweight
+  algebra algorithms into kernel conversion or infer universal laws from
+  finite equations.
 - A runtime rewrite chooses an operational normal form. A proof-time
   unification rule may compare two stable presentations without orienting
   evaluation.
@@ -538,6 +560,12 @@ profiled Gray interchanger. Chapter 29 begins a fifth spiral: injective faces,
 join-built ordinals, and iterated outgoing paths construct canonical dependent
 simplexes in variable dimension while preserving the exact
 mapping-category and degeneracy boundaries.
+
+Chapter 30 adds selected Cartesian and indexed structures. Chapter 31 adds
+whole K/Q/H and connecting, generic exactness, and a worked nonsplit example
+showing how the native matrices and relation witnesses enter the formal
+interface. The opening material and bibliography give the book DOI and code
+repository; publication versions remain distinct from the current source.
 
 From the repository root:
 
