@@ -1469,8 +1469,15 @@ that those foundational repairs or the separate strictness migration are
 complete.
 
 The basic construction underneath the emdash kernel/book is the
-ω-categorical directed dependent hom. For a category-valued family
-`E : K ⊢ Cat`, and `x : K`, `u : E[x]`, emdash forms
+ω-categorical directed dependent hom. Here `Cat` is the category universe,
+`Obj(C)` and `Hom_C(x,y)` denote objects and the iterable Hom, and
+`F : A ⊢ B` means a functor from `A` to `B`. Brackets denote its object or
+arrow action; `⇒` denotes a transformation or directed higher cell. `Σ`
+forms a dependent total and `Π` a section category. The arrows `⇝` and `↝`
+mark computation; `≐` marks proof-time comparison, not runtime expansion.
+
+For a category-valued family `E : K ⊢ Cat`, fixed `x : K` and `u : E[x]`,
+emdash forms
 
 ```
 homd_E(x,u)
@@ -1478,21 +1485,24 @@ homd_E(x,u)
 ```
 
 whose value at `y`, `v : E[y]`, and `f : x → y` is
-`Hom_{E[y]}(E[f](u),v)`. It organizes arrows in Sigma totals:
+`Hom_{E[y]}(E[f](u),v)`. Here `K^op` is the opposite base, `y^-` marks the
+contravariant E-slot, and `⊢_[y]` is the displayed functor category with
+endpoints varying over `y`. This hom organizes arrows in Sigma totals:
 
 ```
 Hom_{ΣE}((x,u),(y,v))
   = Σ(f : x → y), Hom_{E[y]}(E[f](u),v).
 ```
 
-For a category `Z`, define the outgoing-arrow category
+For a category `Z` and object `x : Z`, define the outgoing-arrow category
 
 ```
 PathOut_Z(x) := x ↓ Z = Σ(y : Z), Hom_Z(x,y).
 ```
 
-The reflexive object is `(x,id_x)`; write its canonical arrow to `(y,p)`
-simply as `p`. Thus, for
+The reflexive object is `(x,id_x)`. For `p : x → y`, its canonical arrow is
+`ρ_{x,y,p} = (p,id_p) : (x,id_x) → (y,p)`: the second component is an
+identity in the transported Hom fibre. Thus, for
 
 ```
 E : (x ↓ Z) ⊢ Cat
@@ -1504,26 +1514,29 @@ directed arrow induction has the compact form
 ```
 Ind_x(E,u) : Π(a : x ↓ Z), E(a)
 
-Ind_x(E,u)(y,p) = E(p)(u).
+Ind_x(E,u)(y,p) = E[ρ_{x,y,p}](u).
 ```
 
-For `E[(y,p)] := Rep_Z(y) ⊢ Rep_Z(x)` and reflexive datum `id`, it computes
-ordinary composition:
+Write `Rep_Z(x)[z] = Hom_Z(x,z)` for the represented family. For the motive
+`E[(y,p)] := Rep_Z(y) ⊢ Rep_Z(x)` and reflexive datum the identity on
+`Rep_Z(x)`, induction computes composition of `p : x → y` and `q : y → z`:
 
 ```
 Ind_x(E,id)[(y,p)][z][q] ↝ q ∘ p.
 ```
 
 The current TypeScript elaborator lets the same internal operations be
-authored with familiar bound variables—e.g. `λ^f x. (H x) (K x)` and
-displayed/natural variants—then lowers them to explicit emdash Core. The Core
+authored with familiar bound variables—e.g. `λ^f x. (H x) (K x)` for given
+functors `H,K` of suitable types. The marks `^f`, `^n`, `^fd`, `^nd` select
+functorial, natural, displayed-functorial and displayed-natural binders.
+Elaboration lowers them to explicit emdash Core. The Core
 is checked by TypeScript/emdash; selected judgments are also emitted to the
 authoritative Lambdapi/emdash backend for conformance.
 
 ---
 
-The first concrete directed HIT is opaque rather than defined by its desired
-endomorphism type:
+The first concrete directed higher inductive type (HIT) is opaque and
+one-dimensional, rather than defined by its desired endomorphism type:
 
 ```
 constant WalkingEnd : Cat
@@ -1532,7 +1545,9 @@ base : Obj(WalkingEnd)
 loop : Hom_WalkingEnd(base,base).
 ```
 
-Its whole recursor sends `base` to `ℕ` and `loop` to successor:
+Its whole recursor targets the internal category universe `Cat_cat`, sending
+`base` to the equality-local natural-number category `ℕ` and `loop` to its
+successor functor `Succ`:
 
 ```
 Code := rec_WalkingEnd(Cat_cat; ℕ,Succ)
@@ -1541,22 +1556,23 @@ Code[base] = ℕ
 Code[loop] = Succ.
 ```
 
-For a based arrow `p`, define `encode_x(p)=Code[p](0)`. In the other
-direction,
+For `p : base → x`, define `encode_x(p)=Code[p](0) : Obj(Code[x])`. In the
+other direction, powers of the generator satisfy
 
 ```
 power(0)   = id_base
 power(n+1) = loop ∘ power(n),
 ```
 
-and a spiral coherence
+and, writing `Rep_base = Rep_WalkingEnd(base)`, a spiral coherence
 
 ```
 Rep_base[loop] ∘ power ⇒ power ∘ Succ
 ```
 
-feeds the contextual displayed eliminator. It returns a coherent decoder and
-a directed normalization cell
+feeds the contextual displayed eliminator. It returns a coherent decoder
+from `Obj(Code[x])` to `Hom_WalkingEnd(base,x)`, equal to `power` at the base,
+and a directed normalization cell inside that Hom:
 
 ```
 p → decode_x(encode_x(p)).
@@ -1575,7 +1591,8 @@ Hom_WalkingEnd(base,base) ≃ ℕ
 The result is `ℕ`, not `ℤ`, because `loop` is directed and has no right
 inverse.
 
-At the next hom level, Eckmann–Hilton gives
+For an object `x` of a category `B`, the next hom level gives the
+Eckmann–Hilton calculation on 2-endomorphisms of `id_x`:
 
 ```
 2End_B(x) = Hom_{Hom_B(x,x)}(id_x,id_x)
@@ -1588,22 +1605,27 @@ where `·` is vertical composition and `*` is horizontal composition.
 
 ---
 
-The groupoidal return keeps the same computational distinction. The Circle
-has `base`, `loop : base = base`, judgmental point and dependent-loop
+The groupoidal return keeps the same computational distinction. In the
+groupoidal universe `Grpd`, Circle has `base`, `loop : base = base`,
+judgmental point and dependent-loop
 computation, and a successor-localized universal cover with
 
 ```
 Hom_Circle(base,base) ≃ ℤ.
 ```
 
-WalkingEnd maps its forward powers to the nonnegative Circle powers. For an
-arbitrary directed category, one whole unit
+Here the Circle Hom is its based path type, and `ℤ` is the Integer
+classifier obtained by making successor invertible. WalkingEnd maps its
+forward powers to the nonnegative Circle powers. For a groupoid `G`,
+`Path(G)` is the category with objects `G` and Homs `(x = y)`. For a directed
+category `C`, `Groupoidify(C)` freely realizes its arrows as paths. One unit
 
 ```
 η_C : C → Path(Groupoidify(C))
 ```
 
-gives the target-side mapping equivalence
+gives, for every `G`, the target-side equivalence of whole mapping categories
+(denoted `≃_ω`):
 
 ```
 Hom_Grpd(Groupoidify(C),G)
@@ -1614,31 +1636,37 @@ The recursor computes on represented points and dependent first cells and
 retains higher action. Source functoriality and the packaged adjunction remain
 separate.
 
-The generic compositor `F[g] ∘ F[f] ⇒ F[g ∘ f]` becomes invertible in a path
-target but may remain directed otherwise. `IsStrictFunctor(F)` and
-`IsPseudoFunctor(F)` constrain that same existing internal action; the strict
-package is exactly `Σ(F : A ⊢ B), IsStrictFunctor(F)`, not a decoded parallel
-grammar. One selected strict-object/lax-arrow right closure
+For `F : A ⊢ B` and composable `f,g`, the compositor
+`F[g] ∘ F[f] ⇒ F[g ∘ f]` is invertible in a path target but may remain
+directed otherwise. `IsStrictFunctor(F)` identifies it with the
+equality-induced arrow; `IsPseudoFunctor(F)` equips it with an equivalence.
+Both constrain the existing action. The strict package is
+`Σ(F : A ⊢ B), IsStrictFunctor(F)`, not a parallel functor grammar.
+`GrayHom_lax(A,B)` has strict functors as objects and ambient lax transfors
+and their higher Homs as arrows. Its selected right-Gray product `⊗_R` gives
 
 ```
 GrayHom_lax(A ⊗_R B,C)
   ≃_ω GrayHom_lax(A,GrayHom_lax(B,C))
 ```
 
-derives the nonidentity walking-square interchanger
-`a₁ ∘ b₀ ⇒ b₁ ∘ a₀` from whole laxity. This is a profiled coherence test,
+and derives an interchanger from whole laxity. Calling the two routes around
+the walking square `a₁ ∘ b₀` and `b₁ ∘ a₀`, it is the nonidentity cell
+`a₁ ∘ b₀ ⇒ b₁ ∘ a₀`. This is a profiled coherence test,
 not the full Crans–Gray monoidal theory or the still-separate global migration
 of historical strict cuts.
 
-The square is another use of the same triangular formula
+For a Cat-valued family `D`, the square is another use of the same
+triangular formula
 
 ```
 Hom_{ΣD}((x,u),(y,v))
   = Σ(p : x → y), Hom_{D[y]}(D[p](u),v).
 ```
 
-For `E : K₁^op ⊢ Catd(K₂)`, first make edges into objects and correct the
-variance:
+Let `Catd_cat(K₂)` be the category of covariant Cat-valued families over
+`K₂`. For a mixed family `E : K₁^op ⊢ Catd_cat(K₂)`, first make edges into
+objects and correct the variance:
 
 ```
 Edge_E[x₁] := Σ(x₂ : K₂), E[x₁][x₂]
@@ -1647,65 +1675,79 @@ D_E[x₁]    := Edge_E[x₁]^op
 homdc_int(E) := homd_int(id_{D_E}).
 ```
 
-After fixing edge objects `(x₂,u)`, `(y₂,v)`, and `a : x₁ → y₁`, generic
-Sigma-Hom exposes
+Here `homd_int` is the whole internal dependent hom above, applied to the
+identity displayed functor of `D_E`. Take `u : E[x₁][x₂]`,
+`v : E[y₁][y₂]` and `a : x₁ → y₁`. Between their edge objects `(x₂,u)`
+and `(y₂,v)`, generic Sigma-Hom exposes
 
 ```
 b : x₂ → y₂
 α : E[x₁][b](u) → E[a^op][y₂](v).
 ```
 
-For `E = hom_int(id_C)`, ordinary post- and precomposition reduce this to
+For the ordinary internal Hom family `E = hom_int(id_C)`, whose value at
+`(x,y)` is `Hom_C(x,y)`, post- and precomposition reduce this to
 
 ```
 α : b ∘ u ⇒ v ∘ a.
 ```
 
 Thus a square is a triangular `homd_int` arrow between edge objects. The
-derived total has objects `u` and arrows `(a,(b,α))`; the readable
-`lax_square(a,b,α)` only packages this canonical nested Sigma term. It does
-not introduce a square record or a separate commutativity law. Iteration then
-gives native cubical levels
+derived edge category is
+
+```
+LaxArrow(C) := (Σ(x : C^op), (Σ(y : C), Hom_C(x,y))^op)^op.
+```
+
+It has edges `u` as objects and `(a,(b,α))` as arrows. The readable
+`lax_square(a,b,α)` only packages this nested Sigma term, not a separate
+square former or commutativity law. Iteration gives native cubical levels
 
 ```
 Cube_C(0)   = C
 Cube_C(n+1) = LaxArrow(Cube_C(n)),
 ```
 
-while intrinsically indexed `{L,R,*}` words compute face substitution and act
-by whole restriction functors. They assemble a semicubical nerve
-`N_□(C) : SemiCubePlus^op ⊢ Cat`, retain higher action, and expose all `2n`
-immediate faces. A fixed-bracketing right-Gray cube decoder maps strict Gray
-cube diagrams to native cubes; dimensions one through three are checked, and
+while intrinsically indexed words in `{L,R,*}` encode faces: `L` and `R`
+fix a coordinate at source or target, and `*` retains it. Their category is
+`SemiCubePlus`; substitution computes and whole restriction functors give
+`N_□(C) : SemiCubePlus^op ⊢ Cat` with `N_□(C)[n] = Cube_C(n)`. Higher action
+and all `2n` immediate faces remain available. A decoder maps strict diagrams
+on right-bracketed Gray tensor powers of the walking arrow to native cubes;
+dimensions one through three are checked, and
 dimension two recovers the walking-square interchanger. No inverse decoder,
 whole mapping equivalence, degeneracies, connections, Kan fillers, alternate
 bracketings, or Gray monoidal coherence is claimed.
 
 ---
 
-Injective face codes, directed joins, and iterated outgoing paths also give a
-compact internal semisimplicial layer:
+Injective ordinal maps are represented by skip/keep vertex-selection codes
+(`FaceCode`), with computing identity and composition. Let `1` be the terminal
+category and `*` here denote directed join. Ordinal shapes and iterated
+outgoing paths give a compact internal semisimplicial layer:
 
 ```
-Delta[n+1] = Delta[n] * 1
+Delta[0] = 1,     Delta[n+1] = Delta[n] * 1
 S_0(C) = C
 S_{k+1} = PathOut_{S_k}(s_k).
 ```
 
-The internal dependent hom supplies the inner base-arrow-and-comparison pair,
-while the outer `PathOut` Sigma supplies the varying target edge. For
-`e₀₁=(x₁,p₀₁)`, a triangle therefore has the nested form
+At each stage choose `s_k : Obj(S_k)`, starting with `s_0=x₀` in `C`.
+The inner dependent hom supplies a base arrow and comparison; the outer
+`PathOut` retains the varying target edge. For the chosen next source
+`e₀₁=(x₁,p₀₁)`, with `p₀₁ : x₀ → x₁`, a triangle has the nested form
 
 ```
 t₀₁₂ = (e₀₂,q₀₁₂),
-e₀₂  = (x₂,p₀₂),
-q₀₁₂ = (p₁₂,α₀₁₂).
+e₀₂  = (x₂,p₀₂),       p₀₂ : x₀ → x₂,
+q₀₁₂ = (p₁₂,α₀₁₂),    p₁₂ : x₁ → x₂.
 ```
 
 Here `α₀₁₂ : p₁₂ ∘ p₀₁ ⇒ p₀₂`.
 
 Two whole projections return the target edge `e₀₂=(x₂,p₀₂)` and the base edge
-`e₁₂=(x₂,p₁₂)`. For a volume `Θ : t₀₁₂ → t₀₁₃`, their hom actions give faces
+`e₁₂=(x₂,p₁₂)`. For another triangle `t₀₁₃` sharing `e₀₁` and a volume
+`Θ : t₀₁₂ → t₀₁₃`, their hom actions give faces
 `023` and `123`; ordinary source and target give `012` and `013`. The boundary
 therefore comes from nested functorial projections, not a separate record,
 and the next internal action remains available.
@@ -1713,13 +1755,14 @@ and the next internal action remains available.
 One Nat recursion constructs the canonical ordinal dependent simplex at
 variable `n`; arbitrary `H : Functor(Delta[n],C)` maps it into `C`, and the
 existing nonempty `FaceCode` action exposes its faces while retaining higher
-action. Dimensions zero through four are checked. This is not yet a whole
-`Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)` equivalence, and it adds
-no degeneracies or general Kan/Segal/Rezk theorem.
+action. Dimensions zero through four are checked. A whole category
+`DependentSimplex_cat(C,n)` of native dependent simplexes, and its equivalence
+with `Functor_cat(Delta[n],C)`, remain future work, as do degeneracies and
+general Kan/Segal/Rezk structure.
 
 ---
 
-Cat-valued profunctors are directed families
+For categories `A,B`, Cat-valued profunctors are directed families
 
 ```
 Prof(A,B) = A^op × B ⊢ Cat.
@@ -1727,8 +1770,9 @@ Prof(A,B) = A^op × B ⊢ Cat.
 
 Emdash includes representables, endpoint reindexing, shaped cells, selected
 tensor/co-Yoneda/internal-hom operations, and weighted universal comparisons.
-For a weight `W : J ⇸ J′`, a selected `W`-weighted colimit `C` of
-`F : J → A`, and an adjunction `S ⊣ R`,
+Write `J ⇸ J′` for the profunctor type. For a weight `W : J ⇸ J′`,
+`F : J ⊢ A`, a selected colimit family `C : J′ ⊢ A`, and adjoint functors
+`S : A ⊢ B`, `R : B ⊢ A` with `S ⊣ R`,
 
 ```
 W-Colim_A(F,C)
@@ -1740,7 +1784,7 @@ opposite normalization, rather than by duplicating the proof.
 
 ---
 
-For `T : A ⊢ A`, the monad interface combines whole transformations
+For an endofunctor `T : A ⊢ A`, a chosen monad structure supplies
 
 ```
 η : id_A ⇒ T
@@ -1748,7 +1792,10 @@ For `T : A ⊢ A`, the monad interface combines whole transformations
 ```
 
 with a whole extension functor sending `f : X → T(Y)` to
-`f* : T(X) → T(Y)`. Ordinary composition computes the Došen-oriented laws
+`f* : T(X) → T(Y)`. For `f : X → Y`, the consequential action
+`ηᶜ(f) : X → T(Y)` is the off-diagonal unit action, with semantic value
+`η_Y ∘ f`. Ordinary composition computes the following well-typed
+Došen-oriented laws:
 
 ```
 ηᶜ(g) ∘ f   ⇝ ηᶜ(g ∘ f)
@@ -1767,8 +1814,11 @@ multiplication components use the same triangular language:
 
 ---
 
-A selected binary product is a whole functor `P : C × C ⊢ C` with whole
-projections and whole represented-family pairing. Its triangular cuts compute:
+A selected binary product is a whole functor `P : C × C ⊢ C` with natural
+projections `κ₁ : P ⇒ pr₁`, `κ₂ : P ⇒ pr₂`; here `pr₁,pr₂` project the two
+coordinates. Pairing sends `f : X → A`, `g : X → B` to
+`⟨f,g⟩ : X → P(A,B)` and retains whole Hom action. Write
+`Kᵢᵃ(h) = h ∘ κᵢ` for the antecedential projection action. The cuts compute:
 
 ```
 K₁ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ f
@@ -1777,9 +1827,9 @@ K₂ᵃ(h) ∘ ⟨f,g⟩ ⇝ h ∘ g
 ⟨κ₁,κ₂⟩ ⇝ id.
 ```
 
-The whole action `P[f,g]` agrees at proof time with
-`⟨K₁ᵃ(f),K₂ᵃ(g)⟩`; it is not expanded as a competing runtime form. A
-selected terminal object has
+For `f : A → A′`, `g : B → B′`, the whole action `P[f,g]` agrees at proof
+time with `⟨K₁ᵃ(f),K₂ᵃ(g)⟩`; it is not expanded as a competing runtime form. A
+selected terminal object `t : C` has, with `Const_t` the constant functor,
 
 ```
 ! : id_C ⇒ Const_t
@@ -1789,7 +1839,8 @@ selected terminal object has
 while arbitrary uniqueness follows from contractibility of `Hom_C(A,t)`
 rather than a variable-headed rule.
 
-For `u : X → Y`, postcomposition in slices always supplies `Σ_u : C/X ⊢ C/Y`.
+The slice `C/X` has arrows into `X` as objects. For `u : X → Y`,
+postcomposition supplies `Σ_u : C/X ⊢ C/Y`, sending `a : W → X` to `u ∘ a`.
 Chosen pullbacks and dependent products add whole functors
 
 ```
@@ -1799,11 +1850,12 @@ u*  : C/Y ⊢ C/X
 Σ_u ⊣ u* ⊣ Π_u.
 ```
 
-Both adjunctions retain actual whole unit/counit transfors, the full Došen
-rectangles, whole mate action, and Hom-category comparison. The pullback of
-`g : Z → Y` is the selected slice object `u*(g)`; its counit supplies the
-second projection and directed square. Thus a cone is an object of
-`Hom_{C/Y}(Σ_u(a),g)`, not a separately stored pair of legs and equation.
+Both adjunctions retain whole unit/counit transfors and generic adjunction
+cuts. For `a : W → X` and `g : Z → Y`, the first has inverse whole mates
+between `Hom_{C/Y}(Σ_u(a),g)` and `Hom_{C/X}(a,u*(g))`. Its pullback object
+is `u*(g)=(Q,π₁ : Q → X)`; the counit supplies `π₂ : Q → Z` and
+`g ∘ π₂ ⇒ u ∘ π₁`. Thus a cone is already an object of the first Hom,
+not a separately stored pair of legs and equation.
 Beck–Chevalley, Frobenius, derived slice exponentials, and the final
 convention-sensitive LCCC package remain later layers.
 
@@ -1824,8 +1876,10 @@ whole result. Execution may return ordinary data, reified formal terms or an
 explicitly adopted claim; merely running the CAS adds no theorem. Heavy
 algebraic algorithms remain explicit operations, not hidden conversion rules.
 
-For a presentation `ρ_P : R^r_P → R^g_P`, a raw map and an agreement have
-different coefficient witnesses:
+Over a commutative ring `R`, a presentation `P` has relation matrix
+`ρ_P : R^r_P → R^g_P`, with finite relation and generator ranks. For a
+target presentation `Q`, `F` is the generator map and `W` transports
+relations. Parallel matrices `F,G` agree through a further witness `L`:
 
 ```
 ρ_Q W = F ρ_P             — relation preservation
@@ -1837,43 +1891,65 @@ groupoidification and set truncation of raw agreements. Native algorithms
 produce usable witnesses; the formal interface does not decode arbitrary
 truncated paths into chosen matrices.
 
-Whole kernel and cokernel presentations relate to these selected operations
-through adjunctions. With `2` the walking arrow and `D_C = Functor_cat(2,C)`,
+For an ordinary-target additive category `C` with selected zero object `0`,
+write `2` for the walking arrow and put `D_C = Functor_cat(2,C)`.
+Coherent presentations supply kernel and cokernel functors
+`K,Q : D_C ⊢ C` and zero-arrow embeddings `J,I : C ⊢ D_C` with adjunctions
 
 ```
 J(A) = (A → 0),       J ⊣ K
 I(A) = (0 → A),       Q ⊣ I.
 ```
 
-For a coherent family `h : J ∘ U ⇒ D`, the whole boundary and homology are
+Let `B` parameterize the diagrams. The functor `U : B ⊢ C` gives their
+incoming objects, `D : B ⊢ D_C` gives their outgoing differentials, and
+`h : J ∘ U ⇒ D` is an actual transformation. Its source component is the
+incoming differential; naturality expresses the zero composite. If
+`η : id_C ⇒ K ∘ J` is the kernel-adjunction unit, write `η_U` for its
+whiskering by `U`. Then the whole boundary and homology are
 
 ```
-β = K[h] ∘ η_U
-H = Q ∘ Arr(β).
+β = K[h] ∘ η_U : U ⇒ K ∘ D
+H = Q ∘ Arr(β) : B ⊢ C.
 ```
 
-The native one-degree source is the existing comma category `(J ↓ id_D_C)`
-in the ordinary-target profile. Its diagram objects and maps reuse internal
-Hom/Sigma structure; no new list of naturality squares is an input. H is an
-actual derived functor with generic cut computation and further Hom action,
-and its operational record views retain the same selected objects.
+Here `K[h]` is the action of K on the whole transformation. The functor
+`Arr(β) : B ⊢ D_C` introduces its components as walking-arrow diagrams.
+Pointwise, `K ∘ D` gives cycles, β lifts the incoming differential into
+cycles, and Q takes its cokernel. Applying this construction to the
+tautological family on `Z_C=(J ↓ id_D_C)` gives `H : Z_C ⊢ C`.
+This native comma category has objects `(A,d,h : J(A) ⇒ d)` and reuses
+internal Hom/Sigma structure for its maps. H retains generic computation,
+higher Hom action and the same selected objects in its record views.
 
-The generic six-term snake has four interior exactness results. The whole-H
-window has three, and connecting is an actual transformation between H of
-its two vertical column functors. Its component computes to the direct
-lifting/descent construction at those same H endpoints. Finite iteration
+Assume now that C also has a computational Abelian structure. The generic
+six-term snake has four interior exactness results. A degreewise
+short exact sequence `0 → A_• ─i→ B_• ─p→ C_• → 0` gives the whole-H window
+
+```
+H_n(A) → H_n(B) → H_n(C) ─δ_n→ H_(n−1)(A) → H_(n−1)(B),
+```
+
+exact at its three interior objects. In a window family over `B`, let
+`V_C,V_A : B ⊢ Z_C` select the right and shifted left vertical complexes.
+Connecting is a whole transformation `δ : H ∘ V_C ⇒ H ∘ V_A`; its
+component computes to the direct lifting/descent construction. Finite
+iteration
 retains the original arrows and interior evidence; the final symbolic
 zero-endpoint attachment is deferred, although native bounded computations
 already retain their outside-support zero data. These interfaces do not yet
 constitute a general homological normalization calculus.
 
-For the concrete nonsplit example, set `R=ℚ[x]`, `S=R/(x)` and take
+For the concrete nonsplit example, set `R=ℚ[x]`, take `S=R/(x)` as an
+R-module, and use the complexes in degrees one and zero
 
 ```
 A : R ─x→ R,     B : R ─x→ R,     C : S ─0→ S.
 ```
 
-The rows `0 → R ─x→ R → S → 0` admit no `R`-linear section. Nevertheless the
+Here `i` is multiplication by x and `p` is quotient projection. The rows
+`0 → R ─x→ R → S → 0` admit no `R`-linear section. The groups H₁(A), H₁(B)
+vanish; H₁(C), H₀(A), H₀(B), H₀(C) are each isomorphic to S. Nevertheless the
 connecting map is nonzero: a representative `r` has middle differential
 `xr`, lifts through the inclusion as `r`, and gives `δ₁(r̄)=r̄`. The retained
 matrices are `[1]`, `[x]`, `[1]` for `δ₁`, `H₀(i)`, `H₀(p)`. The middle
@@ -1881,19 +1957,21 @@ map is quotient-zero, witnessed by the target relation `[x]`, while `H₀(C)`
 retains its original relation columns `[x,x]` rather than substituting a
 smaller presentation.
 
-The formal consumer uses these same choices. For a supplied coherent model
-`M`, computed equations, all-test universal-provider semantics and whole-model
-interpretation stay distinct:
+The formal consumer uses these same choices. A supplied coherent model `M`
+provides the whole functor `H_M`. Let `z` be an original chain input in
+`Z_C`, `P_z` its reified selected homology, `δ_M` the formal connecting
+component and `δ_native` the reified computed map. The bindings are
 
 ```
 H_M[z] = P_z
 Obs(δ_M) = Obs(δ_native).
 ```
 
-Here `P_z` is the reified selected presentation, and `Obs` retains source,
-target and arrow together. These are explicit semantic bindings, not new
-runtime CAS rewrites. The coherent model and its normality are supplied;
-their existence is not inferred from finite matrix tests. All retained
+Here `Obs` is an object of the existing lax-arrow category retaining source,
+target and arrow together. Computed equations, all-test provider semantics
+and model interpretation remain distinct. These bindings are not runtime CAS
+rewrites. The model and its normal mono/epi factor operations are supplied,
+not inferred from finite matrix tests. All retained
 degree maps and connecting windows are interpreted without another kernel,
 homology or connecting selection. This is a usable formal/CAS interface,
 not a claim of closed quotient effectiveness or verification of every native
@@ -1901,8 +1979,10 @@ algorithm.
 
 ---
 
-For local geometry, let `O : K^op ⊢ CommRing`, `s : O(U)`, and
-`p : V → U`. Define the invertibility sieve
+For local geometry, let `K` be a category of stages and
+`O : K^op ⊢ CommRing` a presheaf of commutative rings. For `U : K`,
+`s : O(U)` and `p : V → U`, write `p^*s = O[p](s)`. With `Unit` denoting
+invertibility evidence, define the sieve
 
 ```
 D_U(s)(p) := Unit_{O(V)}(p^*s).
@@ -1913,7 +1993,8 @@ invertibility's sieve, not a previously chosen invertibility open. A compact
 open may represent this sieve in a coherent/posetal setting, but
 representability is an additional theorem.
 
-For affine tests,
+For a commutative ring `R`, element `f` and test ring `S`, affine probes
+are ring maps `h : R → S`, so
 
 ```
 D_R(f)(S) = Σ(h : R → S), Unit_S(h(f)),
@@ -1921,20 +2002,24 @@ D_R(f)(S) = Σ(h : R → S), Unit_S(h(f)),
 Hom_CommRing(R[1/f],S) ≃ D_R(f)(S)
 ```
 
-for every supplied localization and test ring `S`. Moreover
+for every supplied localization. For `f,g : R`, moreover,
 `D_R(fg) ≃ D_R(f) ∩ D_R(g)` pointwise, while finite unit-ideal families
 generate the big Zariski topology.
 
-For a covering sieve `R` on `U` and a Cat-valued presheaf `P`,
+Now fix a site `(K,J)`, where J specifies covering sieves. For a covering
+sieve `R` on `U`, write `R̂` for its presheaf extension and
+`yU = Hom_K(−,U)` for the representable. For a Cat-valued presheaf P,
+matching families and sections are whole presheaf mapping categories:
 
 ```
 Match_P(R) = Hom(R̂,P)
 Sect_P(U)  = Hom(yU,P).
 ```
 
-Sheafhood says that restriction from sections to matching families is an
-equivalence. Direct cover completion constructs sheafification by a
-categorical HIT with
+Restriction is precomposition with `R̂ → yU`. Sheafhood says that this map
+from sections to matching families is an equivalence for every covering
+sieve. Direct cover completion constructs `aP` by a categorical HIT with,
+for each such covering question,
 
 ```
 return : P → aP
@@ -1942,7 +2027,7 @@ glue   : Match_{aP}(R) → Sect_{aP}(U)
 silent : glue ∘ restriction = id,
 ```
 
-followed by a recursor and whole uniqueness:
+followed by a recursor and whole uniqueness for every J-sheaf Y:
 
 ```
 Hom(aP,Y) ≃ Hom(P,Y)
@@ -1950,6 +2035,9 @@ Hom(aP,Y) ≃ Hom(P,Y)
 a : Psh_Cat(K) ⇄ Sh_Cat(K,J) : i,
                   a ⊣ i.
 ```
+
+Here `Psh_Cat(K)` is the Cat-valued presheaf category, `Sh_Cat(K,J)` its
+sheaf category, and `i` the inclusion.
 
 The construction lives directly in ordinary categorical semantics—actual
 presheaves, sieves, sites, and functors—made computationally internal by the
@@ -1960,8 +2048,9 @@ The affine layer connects `D(f)`, localization, intersections, finite covers,
 the coordinate presheaf, and an assumption-explicit reflective structure
 sheaf. A global-first binary scheme presentation retains one ringed object,
 one covering sieve, two affine generators, local-ring behavior, and inherited
-restrictions and overlaps. On a supplied projective-line presentation, the
-actual overlap carries the Laurent changes
+restrictions and overlaps. On a supplied projective-line presentation over
+a base ring A, the two affine-line chart coordinates are t and u. Their
+actual overlap makes both coordinates invertible and carries the changes
 
 ```
 t ↦ u⁻¹,
@@ -1972,15 +2061,18 @@ This is a checked site-relative/projective-line capability, not yet an
 atlas-first gluing theorem. Graded rings, homogeneous localization, `Proj`,
 general projective space `Pⁿ`, and non-affineness remain future work.
 
-The native affine computation now also realizes localization by adjoining
-an inverse, `R[1/f] = R[t]/(tf−1)`, and retains relation-checked algebra maps,
+For an affine base ring R and element f, native computation also realizes
+localization by adjoining an inverse, `R[1/f] = R[t]/(tf−1)`, and retains
+relation-checked algebra maps,
 tensor products, finite charts and overlap data. The proof–CAS cover adapter
 reifies the unit-ideal coefficients and inverse equations, separately binds
 the selected universal semantics, then derives face units and overlap
 factors through the existing formal constructors.
 
-For a presented module `M` over the base ring, the finite Čech cochains of
-its localization diagram are heterogeneous additive tuples:
+Choose a finite basic-open cover `D(f₁),…,D(f_r)` and a presented R-module M.
+Its degree-n Čech cochains are heterogeneous additive tuples. For `s : Cⁿ`
+and an increasing target tuple J with n+2 entries, `res_(J,p)` restricts
+from the face omitting position p, numbered from zero:
 
 ```
 Cⁿ = ∏_(i₀<⋯<iₙ) M[1/(f_i₀⋯f_iₙ)]

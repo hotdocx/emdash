@@ -6,6 +6,43 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: completed user-directed remainder on the dedicated branch/worktree; final symbolic endpoint theorem deferred
 
+## Documentation And Publication Continuation
+
+2026-09-11: after requesting a standalone review of the shorter email,
+the user additionally authorized updating relevant READMEs, fast-forwarding
+main in `/home/user1/emdash1`, and pushing/deploying to GitHub in this turn.
+The later clarification adds a book self-reference, with author "The emdash
+contributors", full title, Book DOI `https://doi.org/10.5281/zenodo.21544186`
+and Code URL `https://github.com/hotdocx/emdash`, both in the bibliography and
+opening material, and analogous references in the research overview. The
+overview's 18-page ceiling is explicitly relaxed/removed; unrelated paper
+limits and all other quality/resource checks stay in force.
+
+This new authorization supersedes the older no-push boundary only for this
+documentation/GitHub Pages continuation. It does not authorize importing
+the parallel strictness history, npm publication, a new Zenodo deposit,
+history rewriting or worktree cleanup. Preserve the shorter-review edits
+already underway and keep the longer email unchanged. Check source/doc
+owners, regenerate and visually inspect book/overview PDFs, promote through
+the existing artifact scripts, checkpoint, recheck main/remote ancestry,
+fast-forward without force, push the selected refs and verify deployment
+and the served book artifact. Keep the inherited soundness and endpoint
+deferrals explicit rather than repairing or hiding them for publication.
+
+Initial Git review: the target worktree was clean at `e494f486`; main in the
+historical worktree was clean, and is an ancestor of the homology branch.
+No remote write or artifact promotion has occurred yet. PDF skill instructions
+were read and the required edit marker ran successfully once for this
+two-artifact continuation. The owning book/print workflows remain mandatory.
+The selected new drafts are book `0.8.3-dev` and overview `0.3.1-dev`.
+The Book DOI resolves with HTTP 200 to Zenodo record 22212939; gh identifies
+the remote as hotdocx/emdash. Fetched origin/main is `9edbdb2a`, an ancestor
+of this branch. Publishing here means the requested GitHub research snapshot
+and Pages artifacts, not a new Zenodo version, npm package or tagged release.
+
+Status: shorter appendix edits underway; README, book/article reference and
+publication-workflow review in progress.
+
 ## External Appendix Follow-Up
 
 2026-09-11: update both versions of `emdash2/tmp/EMAIL.md` for an external
@@ -43,6 +80,30 @@ and all 161 fenced formula blocks, with balanced fences in each appendix.
 New text uses Unicode arrows and contains no internal worktree/log/checkpoint
 details. Exact diff and document hygiene pass. No email was sent, artifact
 published, mathematical code changed, or aggregate rerun.
+
+### Shorter Appendix Standalone Review
+
+The user's next review identified undeclared U/D in the whole-H formula.
+Audit the entire shorter appendix independently, preserving the longer
+appendix byte-for-byte. Introduce project-specific notation and the first
+use of each construction's data locally: representables and the actual
+Sigma transport arrow; HIT code/decoder, Path/Groupoidify and Gray/cube
+notation; simplex flags; unit action and product projections; whole K/Q,
+the parameter category and U/D/h, unit whiskering and Arr(beta); the
+homology window, concrete i/p and model observations; site, sieve and Čech
+indices. Prefer short type/context clauses, not copied proofs or a second
+long appendix. This is exposition only, with the same existing mathematical
+and supplied-structure boundaries.
+
+Status: standalone text and notation audit complete. The shorter appendix
+now locally types U/D/h and beta/H, explains the unit and Arr, and introduces
+the other construction-specific symbols at first use. It is approximately
+half the length of the longer appendix, which is byte-for-byte unchanged.
+Standalone Markdown parsing passes for all 46 formula blocks; introduced
+contexts, Unicode notation and line wrapping are checked. This documentation
+tranche changes no mathematical declaration or runtime behavior. Publication
+and the additional book/article/README tasks follow the newer authorization
+at the top of this plan.
 
 ## Book Follow-Up: One Nonsplit Calculation
 
