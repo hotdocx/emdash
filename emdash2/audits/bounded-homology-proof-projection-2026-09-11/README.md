@@ -34,6 +34,21 @@ be reproduced before applying the selected monicity proof. This is narrower
 than saying that H itself fails. It does not prove that every earlier
 timeout has this same cause or that proof irrelevance alone will fix it.
 
+The follow-up narrows the boundary further: the last row family itself
+compares in two seconds, but its evidence function and that function's value
+at a point fail in nine/seven seconds. An unrelated neutral row's monicity
+observation compares with its identity-wrapper expression in two seconds.
+The expensive case is therefore not every projection of this evidence type.
+
+A data-first finite input supplies whole row functors and their short-exact
+evidence separately, then uses the existing row-family constructor. Its
+context checks, but the shared source pair, H image and canonical delta
+typing still fail. Combining this input with the stable short-exact-triple
+variant also fails those three controls. Neither is selected as a remedy.
+The first degree-control copy inadvertently retained its old context import;
+that run is not evidence about constructor rows. The corrected source was
+then checked separately and also failed under the guard.
+
 In particular, an earlier control with an opaque tail and Unit annotations
 still contained a computed H arrow in its type indices. That H input in
 turn contains derived chain-zero evidence. The earlier result excludes the
@@ -135,6 +150,14 @@ indexing and canonical-degree archives. Variant files are deliberately under
 `variants/`, not mixed into active source paths. The local whitespace exemption
 preserves raw patch contents only. Logs, compiled objects and binaries are not
 committed.
+
+[followup.patch](followup.patch) preserves these eight additional controls;
+its [manifest](followup-manifest.json) and
+[verification](followup-verification.json) record successful exact recovery
+alongside the first 43 files. This adds no active mathematical owner. The
+next diagnostic should identify the smaller neutral-data/motive comparison
+and relevant generic matching behavior, not keep layering unqualified record
+variants over the same failed consumer.
 
 Representative logs under `emdash2/logs/probes/`:
 

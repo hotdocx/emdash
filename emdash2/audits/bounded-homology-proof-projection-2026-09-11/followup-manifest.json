@@ -1,0 +1,53 @@
+{
+  "baseline": "f688c93d",
+  "files": [
+    {
+      "path": "emdash2/tmp/probes/homology_row2_family_sharing.lp",
+      "status": "checked, 2 seconds",
+      "bytes": 193,
+      "sha256": "75442775a203255c8d637c7a810b52a6727ee0e8da1483845d542e23e560e499"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row2_evidence_family_sharing.lp",
+      "status": "guarded allocation failure, 9 seconds",
+      "bytes": 289,
+      "sha256": "7621e3f8754d79360707bf472074e6af2c1ed989f65f3ebf33d30f883062d55b"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_row2_evidence_point_sharing.lp",
+      "status": "guarded allocation failure, 7 seconds",
+      "bytes": 293,
+      "sha256": "eeccfa359291122b30a7b92e118efba024c09e6e4591d2c2318c8ff8e08da295"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_neutral_family_monic_control.lp",
+      "status": "checked, 2 seconds; neutral row and identity wrapper",
+      "bytes": 755,
+      "sha256": "2c5dc9aaf49cadad147ba75524b0064c5460ae09d3115e3899e583eef5628380"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_constructor_rows_context.lp",
+      "status": "checked, 3 seconds; whole row functors and separate evidence",
+      "bytes": 5266,
+      "sha256": "71628828c93a4388cba76721056a7f7655a9464df57d77c9aa5ff376d910beab"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_constructor_rows_pair_sharing.lp",
+      "status": "guarded allocation failure in baseline and stable short-exact-record variant",
+      "bytes": 426,
+      "sha256": "ccc74409f61fb20195db20821a2ddfa3bf88ace4a068519a0d7075964716c0f6"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_constructor_rows_image_sharing.lp",
+      "status": "guarded allocation failure in baseline and stable short-exact-record variant",
+      "bytes": 490,
+      "sha256": "79391c669c2a7aa58af1fb741b44387e2787d1675b1e9f544a409ef87c597985"
+    },
+    {
+      "path": "emdash2/tmp/probes/homology_constructor_rows_degree_operations.lp",
+      "status": "corrected constructor-context import; guarded allocation failure in both variants",
+      "bytes": 2107,
+      "sha256": "951d35bcddbaccd04b42079a53f3ec5b1f01b3d646844efe81e9151844e5220c"
+    }
+  ]
+}

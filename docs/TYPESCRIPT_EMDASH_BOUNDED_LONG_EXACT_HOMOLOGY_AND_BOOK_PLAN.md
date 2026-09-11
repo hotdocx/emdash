@@ -1446,6 +1446,20 @@ before any further owner migration. Keep the complete finite formal/CAS
 and book obligations open, rather than turn this into proof-erasure or
 exhaustive old/new comparison work.
 
+Post-checkpoint follow-up: the last indexed row family compares in two
+seconds, while its evidence function and point value fail in nine/seven
+seconds. A neutral row's monicity projection versus an identity wrapper
+passes in two seconds. Exposing the finite input as whole row functors plus
+separate short-exact evidence, using only the existing row constructor,
+checks its context but does not fix source-pair/H-image/delta comparisons.
+Combining that data-first input with the stable short-exact evidence record
+also fails. The corrected degree-control import was rerun explicitly; the
+initial old-context copy is not evidence for the alternative. Eight further
+sources are recovered and verified in that archive's `followup.patch`.
+Keep these negative results distinct from the successful data-first API
+principle and qualified field-indexed iterator; they do not justify proof
+erasure or any further blind record migration.
+
 The van Doorn reference is directly relevant to this boundary. In
 §4.1.1 of [the dissertation](https://arxiv.org/abs/1808.10690v1), printed
 pages 68–69, a flat natural-number index makes the three families at

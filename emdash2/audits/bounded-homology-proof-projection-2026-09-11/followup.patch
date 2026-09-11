@@ -1,0 +1,197 @@
+diff --git a/emdash2/tmp/probes/homology_row2_family_sharing.lp b/emdash2/tmp/probes/homology_row2_family_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row2_family_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++assert ⊢ (@homology_row_triple_row2 I C C1 P t PA0 T upper_triple) ≡ (@homology_row_triple_row2 I C C1 P t PA0 T lower_triple);
+diff --git a/emdash2/tmp/probes/homology_row2_evidence_family_sharing.lp b/emdash2/tmp/probes/homology_row2_evidence_family_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row2_evidence_family_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++assert ⊢ (@short_exact_row_family_data I C C1 P t PA0 T (@homology_row_triple_row2 I C C1 P t PA0 T upper_triple)) ≡ (@short_exact_row_family_data I C C1 P t PA0 T (@homology_row_triple_row2 I C C1 P t PA0 T lower_triple));
+diff --git a/emdash2/tmp/probes/homology_row2_evidence_point_sharing.lp b/emdash2/tmp/probes/homology_row2_evidence_point_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_row2_evidence_point_sharing.lp
+@@ -0,0 +1,2 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++assert ⊢ (@short_exact_row_family_data I C C1 P t PA0 T (@homology_row_triple_row2 I C C1 P t PA0 T upper_triple)) x ≡ (@short_exact_row_family_data I C C1 P t PA0 T (@homology_row_triple_row2 I C C1 P t PA0 T lower_triple)) x;
+diff --git a/emdash2/tmp/probes/homology_neutral_family_monic_control.lp b/emdash2/tmp/probes/homology_neutral_family_monic_control.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_neutral_family_monic_control.lp
+@@ -0,0 +1,12 @@
++require open emdash.tmp.probes.homology_source_mono_context;
++
++/* Compare one unrelated neutral family with an identity-wrapper expression. */
++constant symbol neutral_F : τ (@ShortExactRowFamily I C C1 P t PA0 T);
++symbol neutral_id (F : τ (@ShortExactRowFamily I C C1 P t PA0 T)) ≔ F;
++symbol neutral_row (F : τ (@ShortExactRowFamily I C C1 P t PA0 T))
++≔ @short_exact_row_family_at I C C1 P t PA0 T F x;
++symbol neutral_mono (F : τ (@ShortExactRowFamily I C C1 P t PA0 T))
++≔ @computational_short_exact_monic C P t PA0 _ _ _
++  (@computational_short_exact_row_pair C P t PA0 _ _ _ (neutral_row F))
++  (@computational_short_exact_row_evidence C P t PA0 _ _ _ (neutral_row F));
++assert ⊢ neutral_mono neutral_F ≡ neutral_mono (neutral_id neutral_F);
+diff --git a/emdash2/tmp/probes/homology_constructor_rows_context.lp b/emdash2/tmp/probes/homology_constructor_rows_context.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_constructor_rows_context.lp
+@@ -0,0 +1,91 @@
++/* Symbolic finite row data; every window uses overlapping original indices. */
++require open emdash.tmp.probes.homology_finite_row_lookup;
++require open emdash.emdash3_2_homology_window_connecting_transformation;
++
++constant symbol I : Cat;
++constant symbol C : Cat;
++constant symbol C1 : τ (IsNCat (cat_succ cat_zero) C);
++constant symbol P : τ (Functor (Product_cat C C) C);
++constant symbol t : τ (Obj C);
++constant symbol Ab : τ (@ComputationalAbelianCategory C P t);
++constant symbol T : τ (@TerminalObject C t);
++constant symbol T0 : τ (@TerminalObject (Op_cat C) t);
++constant symbol KP : τ (@KernelPresentation C
++  (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab))
++  t T (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab)));
++constant symbol QP : τ (@CokernelPresentation C
++  (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab))
++  t T0 (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)));
++constant symbol m : τ Nat_grpd;
++symbol n : τ Nat_grpd ≔ succ m;
++/* Primary whole row functors and side evidence; use the existing constructor. */
++constant symbol row_functors : τ (FiniteDegree (succ (succ (succ n)))) →
++  τ (Functor I (@ZeroArrowCone_cat C t T));
++constant symbol row_evidence : Π k : τ (FiniteDegree (succ (succ (succ n)))),
++  τ (@ShortExactRowFamilyData I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T (row_functors k));
++symbol rows (k : τ (FiniteDegree (succ (succ (succ n)))))
++  : τ (@ShortExactRowFamily I C C1 P t (@computational_abelian_preabelian C P t Ab) T)
++≔ @short_exact_row_family_intro I C C1 P t
++    (@computational_abelian_preabelian C P t Ab) T
++    (row_functors k) (row_evidence k);
++constant symbol maps : Π j : τ (FiniteDegree (succ (succ n))),
++  τ (@Transf I (@ZeroArrowCone_cat C t T)
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab)
++      T (rows (@finite_degree_weaken (succ (succ n)) j)))
++    (@short_exact_row_family_func I C C1 P t (@computational_abelian_preabelian C P t Ab)
++      T (rows (finite_degree_next (succ (succ n)) j))));
++constant symbol zeros : Π j : τ (FiniteDegree (succ n)),
++  τ (@RowFamilyMiddleChainZero I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++    (rows (@finite_degree_weaken (succ (succ n))
++      (@finite_degree_weaken (succ n) j)))
++    (rows (finite_degree_next (succ (succ n))
++      (@finite_degree_weaken (succ n) j)))
++    (rows (finite_degree_next (succ (succ n))
++      (finite_degree_next (succ n) j)))
++    (maps (@finite_degree_weaken (succ n) j))
++    (maps (finite_degree_next (succ n) j)));
++constant symbol j : τ (FiniteDegree n);
++constant symbol x : τ (Obj I);
++constant symbol y : τ (Obj I);
++
++symbol window (k : τ (FiniteDegree n)) : τ (@HomologyWindowFamily I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T)
++≔ @homology_finite_row_window I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T n rows maps zeros k;
++
++symbol next_state (k : τ (FiniteDegree n))
++≔ @homology_finite_row_triple I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T (succ n)
++  rows maps zeros (finite_degree_next n k);
++
++
++/* Compare original data before applying the expensive homology operation. */
++constant symbol q : τ (FiniteDegree m);
++symbol wu ≔ window (@finite_degree_weaken m q);
++symbol wl ≔ window (finite_degree_next m q);
++symbol upper_triple ≔ @homology_row_triple_intro I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++  (@homology_window_family_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu)
++  (@homology_window_family_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu)
++  (@homology_window_family_row2 I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu)
++  (@homology_window_family_G I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu)
++  (@homology_window_family_J I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu)
++  (@homology_window_family_lower_zero I C C1 P t (@computational_abelian_preabelian C P t Ab) T wu);
++symbol lower_triple ≔ @homology_row_triple_intro I C C1 P t (@computational_abelian_preabelian C P t Ab) T
++  (@homology_window_family_rowm I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl)
++  (@homology_window_family_row0 I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl)
++  (@homology_window_family_row1 I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl)
++  (@homology_window_family_F I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl)
++  (@homology_window_family_G I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl)
++  (@homology_window_family_upper_zero I C C1 P t (@computational_abelian_preabelian C P t Ab) T wl);
++assert ⊢ upper_triple ≡ lower_triple;
++symbol triple_path : τ (@= (@HomologyRowTriple I C C1 P t (@computational_abelian_preabelian C P t Ab) T)
++  upper_triple lower_triple)
++≔ @eq_refl _ upper_triple;
++
++constant symbol foreign_triple : τ (@HomologyRowTriple I C C1 P t
++  (@computational_abelian_preabelian C P t Ab) T);
++assertnot ⊢ @eq_refl _ upper_triple
++  : τ (@= (@HomologyRowTriple I C C1 P t
++      (@computational_abelian_preabelian C P t Ab) T)
++    upper_triple foreign_triple);
+diff --git a/emdash2/tmp/probes/homology_constructor_rows_pair_sharing.lp b/emdash2/tmp/probes/homology_constructor_rows_pair_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_constructor_rows_pair_sharing.lp
+@@ -0,0 +1,4 @@
++/* Projection isolation 5; identical original data on both sides. */
++require open emdash.tmp.probes.homology_constructor_rows_context;
++require open emdash.tmp.probes.homology_row_triple_points;
++assert ⊢ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T upper_triple x) ≡ (@homology_row_triple_source_pair I C C1 P t (@computational_abelian_preabelian C P t Ab) T lower_triple x);
+diff --git a/emdash2/tmp/probes/homology_constructor_rows_image_sharing.lp b/emdash2/tmp/probes/homology_constructor_rows_image_sharing.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_constructor_rows_image_sharing.lp
+@@ -0,0 +1,6 @@
++/* Paired comparison on the same original row data. */
++require open emdash.tmp.probes.homology_constructor_rows_context;
++require open emdash.tmp.probes.homology_row_triple_points;
++symbol upper_H ≔ @homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP upper_triple x;
++symbol lower_H ≔ @homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP lower_triple x;
++assert ⊢ upper_H ≡ lower_H;
+diff --git a/emdash2/tmp/probes/homology_constructor_rows_degree_operations.lp b/emdash2/tmp/probes/homology_constructor_rows_degree_operations.lp
+new file mode 100644
+--- /dev/null
++++ b/emdash2/tmp/probes/homology_constructor_rows_degree_operations.lp
+@@ -0,0 +1,38 @@
++/* Canonical degree operations: each state selects H and its maps once. */
++require open emdash.tmp.probes.homology_constructor_rows_context;
++require open emdash.tmp.probes.homology_row_triple_right_points;
++
++symbol degree_triple (k : τ (FiniteDegree (succ n)))
++≔ @homology_finite_row_triple I C C1 P t (@computational_abelian_preabelian C P t Ab) T (succ n)
++    rows maps zeros k;
++
++symbol degree_object (k : τ (FiniteDegree (succ n))) (role : τ HomologyRole)
++  : τ (Obj C)
++≔ @homology_role_choose (Obj C)
++    (@homology_row_triple_source_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_middle_homology I C C1 P t (@computational_abelian_preabelian C P t Ab) T T0 KP QP (degree_triple k) x)
++    (@homology_row_triple_right_homology I C C1 P t Ab T T0 KP QP (degree_triple k) x)
++    role;
++
++symbol degree_inclusion (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_a) (degree_object k homology_role_b))
++≔ @homology_row_triple_homology_inclusion I C C1 P t (@computational_abelian_preabelian C P t Ab)
++    T T0 KP QP (degree_triple k) x;
++symbol degree_projection (k : τ (FiniteDegree (succ n)))
++  : τ (Hom C (degree_object k homology_role_b) (degree_object k homology_role_c))
++≔ @homology_row_triple_homology_projection I C C1 P t Ab
++    T T0 KP QP (degree_triple k) x;
++
++// The existing connecting component uses the same upper/lower degree choices.
++symbol degree_connecting (k : τ (FiniteDegree n))
++  : τ (Hom C
++    (degree_object (@finite_degree_weaken n k) homology_role_c)
++    (degree_object (finite_degree_next n k) homology_role_a))
++≔ @homology_window_connecting_at I C C1 P t Ab T KP T0 QP (window k) x;
++
++// Whole action in the groupoidal finite-degree parameter uses existing lifting.
++// This is NOT a newly constructed whole I-action on the complete LES.
++symbol degree_object_func (role : τ HomologyRole)
++  : τ (Functor (Path_cat (FiniteDegree (succ n))) C)
++≔ @fapp0 _ _ (@path_lift_func (FiniteDegree (succ n)) C)
++    (λ k : τ (FiniteDegree (succ n)), degree_object k role);
