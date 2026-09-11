@@ -13,7 +13,7 @@ directed dependent theory of categories, Cat-valued families, Sigma totals,
 sections, dependent homs, functors, transfors, profunctors, and selected
 universal constructions.
 
-Eight mathematical threads expose the architecture. Directed arrow induction
+Several mathematical threads expose the architecture. Directed arrow induction
 transports reflexive data along a canonical Sigma arrow and computes ordinary
 composition. A monad-primary full-functor interface combines whole unit and
 multiplication observations with whole Kleisli extension, while ordinary
@@ -45,6 +45,17 @@ constructs a canonical ordinal source in variable dimension, maps it into
 arbitrary target categories, exposes every nonempty face, and retains another
 higher action; selected computations are checked through dimension four.
 
+A further algebraic thread connects these internal structures to a focused
+native TypeScript computer-algebra engine. Categorical programs lower whole
+universal operations to polynomial and matrix computations while retaining
+their selected objects, maps, relations, and factor data. Coherent kernel and
+cokernel adjunctions make homology a whole functor; a whole connecting
+transformation, three exact homology-window interiors, and finite assembly
+are exercised by a nonsplit polynomial-module computation. Explicit proof–CAS
+bindings then let the formal layer use the same results without running the
+universal algorithms again or pretending that finite equations establish
+every universal-property contract.
+
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
 variable notation for a reviewed ordinary/natural/displayed fragment and
@@ -58,6 +69,16 @@ source, explicit Core, inferred type, computation, and rejection evidence
 without requiring a production Lambdapi process in the browser.
 
 Book: https://doi.org/10.5281/zenodo.21544186
+
+Research status. This appendix includes development-branch work; publishing
+updated book artifacts is a separate step. The current whole-opposite and
+Sigma-Hom encodings have known variance/soundness defects awaiting a separate
+repair. “Checked” below records particular typechecks and computational
+interfaces in this research calculus, not a global consistency certificate.
+Formal claims depending on those higher-variance encodings remain unqualified
+pending repair. The local ordinary-category interpretation of the homological
+constructions must be distinguished from an unrestricted higher-categorical
+semantics.
 
 
 Directed dependent hom and arrow induction
@@ -899,6 +920,290 @@ exponentials, Beck–Chevalley, Frobenius, pushout duality, and comparison with
 independently selected weighted pullbacks remain later coherence layers.
 
 
+An algebra engine beneath categorical programs
+-----------------------------------------------
+
+Which computations belong to the categorical calculus, and which need an
+effective algebraic presentation? Emdash now has both layers. Its own
+TypeScript engine implements exact integer/rational arithmetic, sparse
+multivariate polynomials, Gröbner and membership computations, elimination
+and saturation, polynomial-module syzygies, and bounded resolution
+constructions. Coefficients, polynomial rings, monomial orders, module ranks,
+and presentations remain explicit. A matrix over one parent is not silently
+used over another.
+
+A mathematical operation is separate from its algorithm and execution
+engine. For example, a categorical program may request a kernel once, retain
+its whole result, and use the same selected object and embedding in later
+lifting operations. Primitive and derived operation roles record their
+prerequisites. Explicit bindings lower these whole categorical operations to
+typed algebra computation graphs, whose native and compiled results can be
+compared without choosing new universal objects.
+
+This takes inspiration from CAP/homalg: ring algorithms and constructive
+categorical operations are separate reusable layers. The present compiler
+performs explicit whole-operation lowering; it is not yet a general optimizer
+or an automatic inliner for arbitrary categorical algorithms. CAP, homalg,
+and Singular are useful design references or optional differential oracles,
+not runtime prerequisites of the native computations.
+
+The results are mathematical data, not merely answers or certificates. A
+membership calculation retains coefficients and a remainder; a kernel
+calculation retains a presentation and its structural maps; a bounded
+homology calculation retains the actual degree objects, induced maps,
+connecting windows, and factor witnesses. These data are needed by the next
+computation even when no proof assistant is involved.
+
+The proof assistant adds a typed realization of a particular formal question:
+
+```
+formal goal and selected computational presentation
+  → typed operation and categorical/algebraic program
+  → native whole result
+  → observation, formal data, or explicit adoption.
+```
+
+Running a computation alone adds no theorem. Its data can be reified into
+explicit emdash Core, its equations can be adopted with an explicit trust
+decision, and a checked proof-plan route is available where useful. The
+operation, coefficient bindings, exact goal, selected result and subsequent
+interpretation stay connected. A changed target or different selection is
+not accepted merely because a similar-looking calculation succeeded.
+
+Large Gröbner or homology computations are explicit operations, not hidden
+inside logical-framework conversion. This keeps ordinary categorical cuts
+predictable while allowing algorithms, execution limits and implementations
+to evolve. The integration is therefore computation-first: verification may
+be useful, but proving the CAS correct is not a prerequisite for using it.
+
+
+Presentations, universal operations, and whole homology
+-------------------------------------------------------
+
+The effective module representation is categorical. A presentation over `R`
+is a relation map, and a raw morphism retains both generator and relation
+matrices:
+
+```
+ρ_P : R^r_P → R^g_P
+
+F : R^g_P → R^g_Q
+W : R^r_P → R^r_Q
+ρ_Q W = F ρ_P.
+```
+
+Two generator matrices induce the same quotient map when a coefficient
+matrix `L` satisfies
+
+```
+ρ_Q L = F − G.
+```
+
+Relation preservation and equality of represented maps are different jobs.
+The formal Freyd category forms its quotient Homs by groupoidifying the raw
+agreement category and taking its set truncation. Presentations remain the
+primary objects; element semantics can be derived representably. The native
+solver supplies actual coefficient witnesses, whereas the formal interface
+does not extract a chosen matrix witness from an arbitrary truncated
+quotient path.
+
+Generic preadditive and additive structure provides abelian Hom groups,
+bilinear composition, biproducts and a zero object. Kernel and cokernel
+interfaces retain universal factors and their reconstruction laws. Normal
+mono/epi operations then construct image/coimage comparisons, their
+isomorphism, and the fibre-product/pushout stability used in homological
+arguments. These are not declarations that selected image and kernel objects
+are literally identical.
+
+The whole-functor interface organizes the same universal choices. In an
+ordinary-category working profile, write `2` for the walking arrow and let
+
+```
+D_C = Functor_cat(2,C)
+J(A) = (A → 0)
+I(A) = (0 → A).
+```
+
+Coherent presentations provide
+
+```
+K : D_C ⊢ C             J ⊣ K
+Q : D_C ⊢ C             Q ⊣ I.
+```
+
+The counit of the first adjunction supplies kernel embeddings; the unit of
+the second supplies cokernel projections. Their mates supply lifts and
+colifts. Proof-time usability relates these observations to the original
+selected operations while leaving the whole functor heads available for
+generic adjunction computation. A coherent presentation is supplied
+structure, not an automatic consequence of finitely many matrix equations.
+
+For a coherent family of zero-composition diagrams,
+
+```
+U : B ⊢ C
+D : B ⊢ D_C
+h : J ∘ U ⇒ D,
+```
+
+the kernel adjunction constructs the whole boundary transformation, and the
+cokernel functor constructs homology:
+
+```
+β = K[h] ∘ η_U : U ⇒ K ∘ D
+
+H = Q ∘ Arr(β) : B ⊢ C.
+```
+
+Here `Arr(β)` is the whole walking-arrow diagram family introduced by the
+actual transformation `β`. At a point this is the familiar construction
+
+```
+Z = Ker(d)
+k : Z → source(d)
+b : source(dNext) → Z,     k ∘ b = dNext
+H = Coker(b).
+```
+
+But the family formula already has functoriality and higher Hom action;
+there is no separate list of naturality squares to supply. The existing
+generic cut remains the owner of
+
+```
+H[g] ∘ H[f] ⇝ H[g ∘ f].
+```
+
+The native source category is the existing internal comma construction
+
+```
+Z_C = (J ↓ id_D_C).
+```
+
+Its objects are `h : J(A) ⇒ d`; the source component is the incoming arrow,
+and naturality gives its zero composite with the differential of `d`.
+The category and its maps reuse internal Hom/Sigma structure, rather than a
+new grammar of complexes with manually stored commuting squares. Its
+ordinary-target specialization gives a whole one-degree functor
+`H : Z_C ⊢ C`. Operational universal records are views at that same H object,
+not a second homology reached by an object-equality cast.
+
+Exactness still expresses a universal property: the actual boundary into
+the selected cycle kernel is epic. The generic six-term snake sequence has
+all four interior exactness results. At whole-H endpoints, a direct
+connecting construction uses an epic cover of source cycles, lifting into
+target cycles, and descent through the original boundary cokernel. The
+five-term window
+
+```
+H_n(A) → H_n(B) → H_n(C) ─δ_n→ H_(n−1)(A) → H_(n−1)(B)
+```
+
+has all three adjacent-zero laws and all three interior exactness results.
+For a coherent window family, its vertical columns are whole functors
+`V_C,V_A : B ⊢ Z_C`, and connecting is an actual transformation
+
+```
+δ : H ∘ V_C ⇒ H ∘ V_A.
+```
+
+Its component computes to the direct lifting/descent construction. Generic
+transfor action supplies naturality and further action; the caller does not
+prove an extra naturality square and then package a transformation.
+
+A finite iterator assembles coherent windows while retaining their original
+arrows and interior evidence. The native bounded result also retains its
+actual outside-support zero homologies. The final symbolic zero-endpoint
+attachment is separately deferred. Reconstruction and exactness proofs still
+use explicit paths; this is a constructive reference implementation with
+whole operations, not a claimed Došen-style decision procedure for all
+homological arrow expressions or a category of unbounded complexes.
+
+
+A nonsplit calculation at the proof–CAS boundary
+------------------------------------------------
+
+Let `R = ℚ[x]` and `S = R/(x)`, viewed as an `R`-module. Take the two-degree
+complexes
+
+```
+A : R ─x→ R
+B : R ─x→ R
+C : S ─0→ S,
+```
+
+with inclusion `i` given by multiplication by `x` and projection `p` given
+by quotient. Each supported row is
+
+```
+0 → R ─x→ R → S → 0.
+```
+
+It is nonsplit: every `R`-linear map `S → R` has image annihilated by `x`,
+hence is zero. No section of the quotient projection can be used. The
+nontrivial homology sequence is
+
+```
+0 → H₁(C) ─δ₁→ H₀(A) ─H₀(i)→ H₀(B) ─H₀(p)→ H₀(C) → 0
+
+0 → S ─id→ S ─0→ S ─id→ S → 0.
+```
+
+For a representative `r` of a class in `H₁(C)`, its middle differential is
+`xr`, which lifts through the inclusion as `r`. Passing to target homology
+therefore gives `δ₁(r̄) = r̄`. This is independent of changing a representative
+by `xu`; it is not a choice of an `R`-linear section.
+
+The actual returned matrices are
+
+```
+δ₁ = [1],       H₀(i) = [x],       H₀(p) = [1].
+```
+
+The middle matrix is zero in the target quotient, not as a raw matrix. The
+composite after connecting retains the coefficient witness
+
+```
+ρ_target [1] = [x] = [x][1] − [0],     ρ_target = [x].
+```
+
+Even the selected `H₀(C)` retains one generator with relation columns
+`[x,x]`: the original relation and the incoming boundary. It represents
+`S`, but no smaller presentation is substituted behind the formal consumer.
+The whole bounded result shares its selected homologies and maps across
+neighboring windows rather than recomputing them at each occurrence.
+
+The formal connection has three distinct kinds of information. Computed
+equations justify individual raw maps and agreements. Selected-provider
+semantics bind the all-test factor operations at the retained kernel choices.
+Whole-model interpretation binds the actual formal H and connecting
+observations to those same native results. For an introduced chain map `m`,
+write `F_native` for its reified induced arrow. With `P_z` the reified
+selected presentation and `Obs` the existing complete arrow-object
+observation,
+
+```
+H_M[z] = P_z
+Obs(H_M[m]) = Obs(F_native)
+Obs(δ_M)   = Obs(δ_native).
+```
+
+An arrow observation includes its source, target and arrow together. These
+are explicitly adopted semantic bindings, not runtime rules that make every
+H expression invoke the CAS. The coherent model `M` is supplied, and its
+normality enhancement is required for the connecting interpretation; a
+finite list of matrix equations does not construct that model automatically.
+
+The end-to-end consumer constructs a formal raw sequence and selected
+homology/exactness at every displayed interior, then interprets the retained
+whole-H points, induced maps, and all three connecting windows. Only the
+middle connecting is nonzero. The interpretation preserves the original
+objects, arrows and shared row evidence, and makes no new kernel, homology or
+connecting selection. Thus formal mathematics can use an actual H term and
+its action while native algebra supplies its effective presentation. Neither
+an unrestricted quotient-witness decoder nor a proof of every native
+algorithm is inserted as an implicit prerequisite.
+
+
 From invertibility sieves to sheafification
 -------------------------------------------
 
@@ -1083,14 +1388,67 @@ machinery and the stated boundary for a future construction of
 Pⁿ_A = Proj A[x₀,…,xₙ].
 ```
 
+
+Finite affine computation and varying-ring Čech cochains
+--------------------------------------------------------
+
+The native affine layer realizes principal localization by adjoining an
+inverse. For a presented algebra `R = k[x₁,…,x_m]/I`,
+
+```
+R[1/f] = k[x₁,…,x_m,t]/(I,tf−1).
+```
+
+Relation-checked algebra maps, presented tensor products and affine fibre
+products reuse the same exact polynomial operations. A successful
+unit-ideal calculation retains coefficients `Σᵢ aᵢfᵢ = 1` and the selected
+basic-open charts, rather than only returning a cover Boolean.
+
+The proof–CAS adapter reifies those coefficients and inverse equations,
+explicitly binds the selected localization's universal semantics, and uses
+the existing formal localization and cover constructors. Face-denominator
+units and overlap factors are then derived formally from those same
+localizations; the caller does not handwrite a new equation for every face.
+This separates an effective presentation from its universal-property
+interpretation without preventing ordinary affine computation.
+
+For a presented `R`-module `M`, modules over its different localizations need
+not share one scalar parent. The native varying-ring diagram retains
+semilinear restriction maps and forms finite additive cochain groups
+
+```
+Cⁿ = ∏_(i₀<⋯<iₙ) M[1/(f_i₀⋯f_iₙ)].
+```
+
+Each component lives over its own actual localized ring. The differential
+adds signed face images only after they land in the same target component:
+
+```
+(d s)_J = Σ_p (−1)^p res_(J,p)(s_(J without p)).
+```
+
+The two routes through every repeated face have equal composite images and
+opposite signs, so the implementation retains their cancellations and
+computes `d²(s)=0` on the supported degrees. The input is the existing face
+diagram, not an additional collection of commuting-square witnesses.
+
+This is finite cochain computation, not yet Čech cohomology. A localization
+is not silently treated as a finitely presented module over the original
+ring, and the final retained degree is not given an invented zero successor.
+Connecting these heterogeneous cochains to a cohomology solver requires its
+own justified effective representation; the fixed-ring bounded homology
+engine is not applied merely because both constructions use differentials.
+
 These qualifications are part of the result. Emdash currently demonstrates
 that directed dependency, readable categorical binders, higher-inductive
 normalization, monad and cartesian cut elimination, indexed
 `Σ_u ⊣ u* ⊣ Π_u` structure, weighted universal constructions,
 sieve-centered local geometry, a Cat-valued sheafification reflector, free
-groupoidal realization, profiled Gray interchange, native cubical action, and
-variable-dimensional dependent-simplex recursion inhabit one executable
-architecture. It does
+groupoidal realization, profiled Gray interchange, native cubical action,
+variable-dimensional dependent-simplex recursion, and retained proof–CAS
+computation inhabit one development architecture. Whole kernel/cokernel and
+homology operations, generic snake/window exactness, nonsplit bounded
+computations and finite affine cochains now test that connection. It does
 not claim that every displayed variance, every groupoidal closure, every
 coefficient category, or the representation-independent theory of schemes
 has already been completed.
@@ -1101,6 +1459,14 @@ has already been completed.
 
 SHORTER TECHNICAL APPENDIX
 ==========================
+
+This is a development snapshot, not a global consistency claim. Known
+variance/soundness defects in the whole-opposite and Sigma-Hom encodings
+remain separately tracked; formal claims depending on those higher-variance
+encodings remain unqualified pending repair. The checked interfaces below
+and the local ordinary-category homological interpretation do not assert
+that those foundational repairs or the separate strictness migration are
+complete.
 
 The basic construction underneath the emdash kernel/book is the
 ω-categorical directed dependent hom. For a category-valued family
@@ -1443,6 +1809,98 @@ convention-sensitive LCCC package remain later layers.
 
 ---
 
+The same mathematics now has a focused native TypeScript algebra engine:
+exact arithmetic, sparse polynomials, Gröbner/membership operations, syzygies,
+presented modules, and bounded homological computation. Operations are
+separate from algorithms and engines. CAP/homalg-inspired categorical roles
+record prerequisites, and explicitly bound whole operations lower to typed
+algebra computation graphs. This is not yet a general optimizing compiler,
+and external CAS systems are optional references or oracles.
+
+Results retain the data needed by later mathematics: coefficients, relations,
+structural maps, selected universal objects and factor witnesses. The formal
+interface binds a named goal to its selected computational presentation and
+whole result. Execution may return ordinary data, reified formal terms or an
+explicitly adopted claim; merely running the CAS adds no theorem. Heavy
+algebraic algorithms remain explicit operations, not hidden conversion rules.
+
+For a presentation `ρ_P : R^r_P → R^g_P`, a raw map and an agreement have
+different coefficient witnesses:
+
+```
+ρ_Q W = F ρ_P             — relation preservation
+ρ_Q L = F − G             — agreement of quotient maps.
+```
+
+The Freyd category keeps presentations primary and obtains quotient Homs by
+groupoidification and set truncation of raw agreements. Native algorithms
+produce usable witnesses; the formal interface does not decode arbitrary
+truncated paths into chosen matrices.
+
+Whole kernel and cokernel presentations relate to these selected operations
+through adjunctions. With `2` the walking arrow and `D_C = Functor_cat(2,C)`,
+
+```
+J(A) = (A → 0),       J ⊣ K
+I(A) = (0 → A),       Q ⊣ I.
+```
+
+For a coherent family `h : J ∘ U ⇒ D`, the whole boundary and homology are
+
+```
+β = K[h] ∘ η_U
+H = Q ∘ Arr(β).
+```
+
+The native one-degree source is the existing comma category `(J ↓ id_D_C)`
+in the ordinary-target profile. Its diagram objects and maps reuse internal
+Hom/Sigma structure; no new list of naturality squares is an input. H is an
+actual derived functor with generic cut computation and further Hom action,
+and its operational record views retain the same selected objects.
+
+The generic six-term snake has four interior exactness results. The whole-H
+window has three, and connecting is an actual transformation between H of
+its two vertical column functors. Its component computes to the direct
+lifting/descent construction at those same H endpoints. Finite iteration
+retains the original arrows and interior evidence; the final symbolic
+zero-endpoint attachment is deferred, although native bounded computations
+already retain their outside-support zero data. These interfaces do not yet
+constitute a general homological normalization calculus.
+
+For the concrete nonsplit example, set `R=ℚ[x]`, `S=R/(x)` and take
+
+```
+A : R ─x→ R,     B : R ─x→ R,     C : S ─0→ S.
+```
+
+The rows `0 → R ─x→ R → S → 0` admit no `R`-linear section. Nevertheless the
+connecting map is nonzero: a representative `r` has middle differential
+`xr`, lifts through the inclusion as `r`, and gives `δ₁(r̄)=r̄`. The retained
+matrices are `[1]`, `[x]`, `[1]` for `δ₁`, `H₀(i)`, `H₀(p)`. The middle
+map is quotient-zero, witnessed by the target relation `[x]`, while `H₀(C)`
+retains its original relation columns `[x,x]` rather than substituting a
+smaller presentation.
+
+The formal consumer uses these same choices. For a supplied coherent model
+`M`, computed equations, all-test universal-provider semantics and whole-model
+interpretation stay distinct:
+
+```
+H_M[z] = P_z
+Obs(δ_M) = Obs(δ_native).
+```
+
+Here `P_z` is the reified selected presentation, and `Obs` retains source,
+target and arrow together. These are explicit semantic bindings, not new
+runtime CAS rewrites. The coherent model and its normality are supplied;
+their existence is not inferred from finite matrix tests. All retained
+degree maps and connecting windows are interpreted without another kernel,
+homology or connecting selection. This is a usable formal/CAS interface,
+not a claim of closed quotient effectiveness or verification of every native
+algorithm.
+
+---
+
 For local geometry, let `O : K^op ⊢ CommRing`, `s : O(U)`, and
 `p : V → U`. Define the invertibility sieve
 
@@ -1513,3 +1971,25 @@ u ↦ t⁻¹.
 This is a checked site-relative/projective-line capability, not yet an
 atlas-first gluing theorem. Graded rings, homogeneous localization, `Proj`,
 general projective space `Pⁿ`, and non-affineness remain future work.
+
+The native affine computation now also realizes localization by adjoining
+an inverse, `R[1/f] = R[t]/(tf−1)`, and retains relation-checked algebra maps,
+tensor products, finite charts and overlap data. The proof–CAS cover adapter
+reifies the unit-ideal coefficients and inverse equations, separately binds
+the selected universal semantics, then derives face units and overlap
+factors through the existing formal constructors.
+
+For a presented module `M` over the base ring, the finite Čech cochains of
+its localization diagram are heterogeneous additive tuples:
+
+```
+Cⁿ = ∏_(i₀<⋯<iₙ) M[1/(f_i₀⋯f_iₙ)]
+(d s)_J = Σ_p (−1)^p res_(J,p)(s_(J without p)).
+```
+
+Each signed contribution lands in its actual target module before addition.
+Repeated-face composites agree and their signs cancel, giving native `d²=0`
+computations without new caller-supplied square witnesses. This does not
+assume that all localizations are finitely presented over the original ring
+or that a truncated diagram has an extra zero differential. Čech cohomology,
+derived categories and spectral sequences remain further developments.

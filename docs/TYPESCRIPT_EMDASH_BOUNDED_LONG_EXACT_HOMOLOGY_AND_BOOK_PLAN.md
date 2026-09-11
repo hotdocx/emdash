@@ -6,6 +6,44 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: completed user-directed remainder on the dedicated branch/worktree; final symbolic endpoint theorem deferred
 
+## External Appendix Follow-Up
+
+2026-09-11: update both versions of `emdash2/tmp/EMAIL.md` for an external
+mathematical audience. Its last content checkpoint is `0e61a799`, before the
+focused CAS and subsequent affine/module/Freyd/homological development.
+Preserve the existing Setext headings, compact Unicode formulas and
+explanatory prose; add key insights rather than an internal checkpoint log.
+
+The reviewed scope is native coefficient-aware algebra, CAP/homalg-inspired
+categorical whole-operation lowering, typed proof-CAS delegation/adoption,
+presentation/quotient semantics, coherent K/Q and whole H, direct/whole
+connecting and bounded exactness, the nonsplit example, and the affine
+localization/varying-ring Čech continuation. Preserve the distinction between
+computed equations, all-test provider semantics and supplied whole-model
+interpretation. Do not claim a general optimizer, automatic model synthesis,
+arbitrary quotient-witness extraction, Čech cohomology, or the deferred
+symbolic endpoint theorem. State the known op/Sigma soundness qualification
+without reopening that repair or importing the parallel strictness migration.
+
+Authorities reviewed: the complete existing email, current focused-CAS,
+affine/localization/Čech and formal-Freyd plan boundaries; active categorical
+compiler, formal localization/Čech, whole-H and model observation owners;
+the final homology audit and the worked-example source/regression. This is
+documentation only: exact diff, formula/Markdown hygiene and new local-link
+checks suffice. No book render, CAS aggregate or Lambdapi recheck is needed.
+Drafting does not send the email, publish an artifact or reopen the goal.
+
+Status: complete. Both appendices now include the native/CAP-inspired
+execution architecture, Freyd presentation agreements, whole K/Q/H and
+connecting, nonsplit retained-data/model interpretation, and the affine/
+varying-ring Čech boundary. The long abstract and conclusion are synchronized;
+both standalone versions state the inherited soundness and deferred endpoint
+qualifications. Markdown parsing verifies all four new long section headings
+and all 161 fenced formula blocks, with balanced fences in each appendix.
+New text uses Unicode arrows and contains no internal worktree/log/checkpoint
+details. Exact diff and document hygiene pass. No email was sent, artifact
+published, mathematical code changed, or aggregate rerun.
+
 ## Book Follow-Up: One Nonsplit Calculation
 
 2026-09-11, requested after the completed goal: integrate the accepted
