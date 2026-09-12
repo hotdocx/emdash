@@ -22,8 +22,12 @@ whole op or opposite-family formation. It exposes an incompatible fibre
 direction between generic Sigma Hom and constant-family products. Sigma
 projection/totalization qualification is therefore also a repair prerequisite.
 
-The user has deferred this general repair until after the current homological-
-algebra goal. Its candidates and diagnostics are retained in the
+The earlier homological-algebra goal deferred this general repair. The
+2026-09-12 [native-universality successor](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+now resumes a design-led coupled repair in its dedicated worktree, preserving
+foundational hom_int/homd_int and excluding spectral/stabilization research.
+No repaired kernel or new semantic qualification is claimed by the launch.
+Candidates and diagnostics are retained in the
 [repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).
 Constructive homology/CAS development may continue with an explicit
 mathematical dependency review, excluding any essential use of the invalid
@@ -33,9 +37,11 @@ The user's pre-op recovery clarification retains the whole-complex/homology
 pilot as the primary architectural direction. Its concrete evaluation
 instance is checked against an independent ordinary-Eval construction;
 the refined structural evaluation rules are now active after scoped
-owner-position, projection-order and regression qualification. General
-opposite repair remains deferred; the strict zero-complex and whole-H
-interfaces are not yet completed by that local computation.
+owner-position, projection-order and regression qualification. That local
+computation alone did not complete the general opposite repair or the
+strict zero-complex/whole-H interfaces. Later homology interfaces and their
+separate current qualification boundaries are recorded below and in the
+linked successor plan.
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
 for changing it safely. It intentionally records the current selected design,

@@ -2,11 +2,19 @@
 
 Date: 2026-09-12
 
-Status: proposed semantic design and further review; no implementation migration started
+Status: accepted architectural direction; execution delegated to the native-universality plan, spectral research deferred
 
 Parent: [homology retrospective](TYPESCRIPT_EMDASH_HOMOLOGY_RETROSPECTIVE_REVIEW.md)
 
-Governing implementation ledger: [bounded long-exact plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
+Governing implementation ledger: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+
+2026-09-12 execution boundary: the user accepted the consolidated response
+and authorized a dedicated implementation worktree and persistent goal.
+Spectra, categorical spectra, Heine generalization, dependent stabilization,
+suspension research and beyond are explicitly deferred and must not be
+investigated further now. Their discussion below is retained brainstorming,
+not an active task or prerequisite. The living implementation plan selects
+the current non-spectral work and preserves the native hom_int/homd_int owners.
 
 ## Current Architectural Corrections
 
@@ -27,10 +35,10 @@ These supersede the earlier review's contrary recommendations:
    the other. The identity at c provides the distinguished point. The earlier
    two-pole suspension example was not an adequate formulation of that idea.
 
-The goal is to generalize the role of endomorphisms to an internal dependent
-Hom family and its simplicial iteration. Whether the resulting stabilization
-and representability results generalize all of Heine's theory is a research
-objective, not an established consequence of the existing constructors.
+The historical brainstorm generalizes the role of endomorphisms to an
+internal dependent Hom family and its simplicial iteration. The subsequent
+launch explicitly defers this research; it is not an objective of the active
+goal or an established consequence of the existing constructors.
 
 ## Revised Recommendation
 
@@ -625,7 +633,10 @@ not a legitimate automation shortcut. Conversely, requiring every user to
 write the comparisons by hand is unnecessary; universal uniqueness can
 supply them through reusable code and proofs.
 
-## 6. Anticipate Ext, Stable Homology And Directed Spectra
+## 6. Deferred Brainstorming: Ext, Stable Homology And Directed Spectra
+
+This section is retained for future recovery only. Do not investigate,
+implement or turn these suggestions into prerequisites of the active goal.
 
 ### Ordinary chain maps do not yet give chain homotopies
 

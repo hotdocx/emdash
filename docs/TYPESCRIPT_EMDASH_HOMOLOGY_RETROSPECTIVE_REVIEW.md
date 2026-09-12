@@ -6,6 +6,12 @@ Status: review and proposed sequencing; no mathematical implementation or deferr
 
 Parent: [bounded long-exact homology and book plan](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
+Execution continuation (2026-09-12): the user accepted the corrected review
+and launched the [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+in a dedicated worktree. That living plan controls current scope and
+validation; spectra/Heine/dependent stabilization research is explicitly
+deferred, as are the endpoint checker experiments.
+
 Follow-up: the [semantic architecture review](TYPESCRIPT_EMDASH_HOMOLOGY_SEMANTIC_ARCHITECTURE_REVIEW.md)
 addresses universality, the global duality and native-Hom story, native
 simplicial/cubical diagrams, automatic model/reifier setup and future

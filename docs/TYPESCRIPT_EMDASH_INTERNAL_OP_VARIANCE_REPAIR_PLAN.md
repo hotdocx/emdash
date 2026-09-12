@@ -2,13 +2,22 @@
 
 Date: 2026-09-08
 
-Status: deferred by the user until after the homological-algebra goal; candidates and reproducible controls retained; no kernel migration promoted
+Status: resumed through the design-led native-universality successor; historical candidates retained and no kernel migration yet promoted
 
 Parent: [bounded long-exact homology and book](TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 
 Finding: [confirmed internal-op diagnostic](TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md)
 
 Additional finding: [independent Sigma-Hom diagnostic](TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md)
+
+Current direction (2026-09-12): the user has launched the
+[native universality and homology goal](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+in its dedicated branch/worktree. That plan resumes the coupled repair only
+after a coherent native-owner/variance design. Preserve hom_int/homd_int as
+foundations and the original supplied families; no total-Hom-first
+replacement or arbitrary regrading is allowed. The deferred instructions
+below describe the earlier LES continuation and are historical. The new
+plan controls execution; no spectral/stabilization research is in scope.
 
 ## Objective And Scope
 

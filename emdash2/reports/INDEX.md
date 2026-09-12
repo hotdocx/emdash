@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Current implementation continuation (2026-09-12): the accepted
+[native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+is active in its dedicated worktree, with an
+[owner/variance ledger](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md).
+It begins with coherent native-owner design before the coupled variance
+repair and whole-universality dependency refactor. Spectra, Heine
+generalization and dependent stabilization are explicitly deferred and must
+not be investigated. The completed LES baseline and its symbolic endpoint
+deferral below remain reference evidence; the launch changes no LP source.
+
 Latest homology status (2026-09-11): the user-directed remainder of the
 [bounded long exact homology and book plan](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 is complete. The final symbolic zero-endpoint attachment and its LF
@@ -1435,6 +1445,13 @@ record.
 ## Active Plans
 
 These ledgers contain genuinely active or incrementally open work. A completed plan must not remain in this section merely because its result is current architecture.
+
+- `../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md`:
+  active dedicated goal for native-owner/variance design, the scoped coupled
+  op/Sigma/Homd repair, whole categorical universality as the formal
+  computational owner, and retained homology/proof-CAS consumers. It
+  preserves hom_int/homd_int, the selected native computations and explicit
+  trust boundaries; no spectral or endpoint-checker investigation is included.
 
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
