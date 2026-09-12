@@ -6,6 +6,40 @@ Plan-ID: `TS-EMDASH-BOUNDED-LONG-EXACT-HOMOLOGY-AND-BOOK`
 
 Status: completed user-directed remainder on the dedicated branch/worktree; final symbolic endpoint theorem deferred
 
+## Retrospective Review
+
+2026-09-12: the user requested a careful review of deferred endpoint,
+duality, homological computation, indexing and snake/LES design questions.
+The [retrospective review](TYPESCRIPT_EMDASH_HOMOLOGY_RETROSPECTIVE_REVIEW.md)
+recovers their exact statuses and proposes bounded follow-ups. It distinguishes
+the direct formal connecting construction from the still-snake-based native
+method, and the promising degree/role prototype from the qualified iterator.
+This is analysis and proposed sequencing; no deferred experiment, foundation
+migration, checker modification or implementation goal is resumed by it.
+
+The user's further questions are reviewed in the
+[semantic architecture companion](TYPESCRIPT_EMDASH_HOMOLOGY_SEMANTIC_ARCHITECTURE_REVIEW.md).
+It proposes specifying global variance and universality before further
+repair code, distinguishes ordinary and coherent higher complexes, and
+separates reusable model/reifier automation from proving a backend's
+universal contracts. Future Ext and directed/stable comparisons inform the
+proposed interfaces without reopening implementation here.
+
+The subsequent user clarification fixes the native `hom_int`/`homd_int`
+constructors as foundational; total-Hom projections are only derived
+observations/comparisons. It selects whole Došen-style universality as the
+formal computational owner, with factor/IsContr interfaces secondary to
+that structure. The spectral research direction fixes one endpoint c,
+varies the other, and retains the whole family Hom(c,−) and its native
+simplicial iteration. The companion has been corrected in place; its
+earlier total-Hom-first and two-pole organizing proposals are withdrawn.
+
+The user authorizes local documentation checkpoints for this ongoing
+exploration. No implementation experiment is started by this review. Further
+conversation recovery is in
+`emdash2/tmp/ai-responses/sessions/2026-09-12_01a096616c4a/responses/`;
+response 0002 is the preceding review, not the latest architectural authority.
+
 ## Documentation And Publication Continuation
 
 2026-09-11: after requesting a standalone review of the shorter email,
