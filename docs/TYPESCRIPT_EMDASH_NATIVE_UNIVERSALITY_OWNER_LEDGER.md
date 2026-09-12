@@ -184,6 +184,67 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1B2a: Derived negative-section operator
+
+Hypothesis: in the preferred total-duality basis, the native negative-section
+category can be defined as NΠ_K(E)=O(Π_R(K)(Eᴼ)). Its whole constructor is
+obtained by dualizing the existing Pi/Op-family composite with the correctly
+shifted domain. For constant E it should recover the ordinary functor
+direction T(K)→C. This supplies an internal candidate ingredient for the
+target-polarity repair; it does not complete the general Homd target.
+
+Test it on the preserved preferred source prefix, which contains Pi and the
+correctly based dual-family operators. Retain the prefix limitation and
+ordinary installed checker, stage copies only, and use the current resource
+guard. Qualify whole construction, constant-family introduction/elimination,
+nonidentity arrow action and wrong-direction controls without adding a new
+rewrite or unifier. Full source migration and rejection of the Homd Empty
+diagnostic remain separate requirements.
+
+The first prefix prototype checks the category expression and constant-family
+whole readback, including a nonidentity arrow and a further Hom action.
+However, its tentative unrestricted constructor on Catd(K) is not selected:
+for a lax displayed F:E→D, the available comparison is
+D(p)∘Fₓ⇒Fᵧ∘E(p). Mapping a negative section needs the opposite direction.
+Typechecking the old shifted-duality prototype does not justify that inverse.
+
+Refine the map interface to accept an actual whole map G:Eᴼ→Dᴼ over R(K).
+Its section action comes from Π(G), followed by total duality. The whole
+map operator has source O(Functord(Eᴼ,Dᴼ)) and target
+Functor(NΠ(E),NΠ(D)); this uses existing whole actions and requires no
+manufactured inverse to F's laxity. Check point action against the existing
+section_postcomp_sec(G,s) and reject an ordinary F:E→D as the wrong input.
+The initial unrestricted source is retained as an unselected experiment,
+not promoted as a general negative-section functor.
+
+The refined [prototype](../emdash2/audits/native_negative_pi_prototype.lp)
+checks in the preferred prefix. NΠ is a defined category expression. Its
+whole map functor accepts O(Functord(Eᴼ,Dᴼ)); the point action agrees by a
+typed reflexivity path with the existing Π section_postcomp_sec(G,s).
+An ordinary lax F:E→D is rejected as that input. Constant-family
+introduction/readback returns the original functor, its nonidentity arrow
+action checks and a further whole Hom action remains available. No rule,
+unifier, new primitive section operation or inverse-laxity witness is added.
+
+The [guarded driver](../emdash2/scripts/check_native_negative_pi.sh) stages
+both the exact current and historical patched prefixes and checks their
+byte identity before the prototype. It retains the untested complete
+candidate separately and explicitly records `fullKernelChecked: false`.
+The gate at `/tmp/emdash-native-negative-pi.kVNMc2` passes baseline and
+prototype with ordinary subject reduction; complete warning inventories
+agree at 935 critical pairs / 137 pattern reports. The prototype's strict
+LHS audit reports no rule clauses. Source- and patch-anchor checks prevent
+silent replay on drifted owners. The initial unrestricted variant remains
+in `tmp/probes/nuh_negative_pi_unrestricted_v1.lp` and the earlier temporary
+stage, not as the selected interface.
+
+This qualifies a native direction-correct ingredient on the retained
+preferred prefix, not the complete Homd target or a repair of the active
+nucleus. The next design must supply the appropriate negative-family maps
+from the actual target construction; it cannot pass arbitrary old lax maps
+through a covariant NΠ wrapper. The original target, all Empty controls and
+the 328 current post-prefix source additions remain to be migrated.
+
 ### NUH-1B1: Terminal-family section polarity probe
 
 Hypothesis under test: the old positive section over the opposite y-base
@@ -242,6 +303,7 @@ projections and computation must be specified together before promotion.
 | NUH-1A source/dependency inventory and baseline | established; launch checkpoint records the exact anchors and controls |
 | NUH-1B1 terminal-family polarity control | complete diagnostic tranche; reverse Hom and Empty reproduced, lawful forward companion checked |
 | NUH-1B2 complete native Homd target variance/polarity design | active; resolve the corrected section direction and all bases/profiles together |
+| NUH-1B2a negative-section ingredient | refined object/whole-map and constant-family prototype checked on preferred prefix; unrestricted lax covariance rejected |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 

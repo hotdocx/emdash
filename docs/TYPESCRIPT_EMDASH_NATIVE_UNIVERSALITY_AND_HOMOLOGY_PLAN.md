@@ -265,6 +265,7 @@ must not label those alternatives validated implementations.
 | D-NUH-006 | The mixed-functor dimension-2 action constrains its negative source variance; replacing transposition by total duality solely to fit the old E input is not a semantic repair |
 | D-NUH-007 | The archived patch is zero-context and passes a matching dry-run check on the new anchor; its mechanical applicability does not qualify the 328 later added source lines or the full native Homd target |
 | D-NUH-008 | The native-target positive-section polarity admits a reverse Hom functor and Empty; correct section direction together with base variance and add this route to the repair's negative controls |
+| D-NUH-009 | Negative sections act through actual maps between the dual families; do not infer unrestricted covariance on old lax Catd(K) by inverting its comparison cells |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -318,6 +319,16 @@ Active-reference and report-lifecycle checks pass, as do exact diff and all
 files pass the strict LHS audit and remain absent from positive registries.
 The checkpoint adds no active-core or TypeScript change; its nucleus remains
 the recorded `91f1974e` blob. The full implementation goal remains active.
+
+The next bounded prototype derives NΠ_K(E)=O(Π_R(K)(Eᴼ)) and its whole action
+on actual dual-family maps. The constant-family view recovers T(K)→C,
+including nonidentity action and its next Hom. The initially attempted
+unrestricted covariant constructor on Catd(K) was rejected by the laxity
+direction audit; the refined input is O(Functord(Eᴼ,Dᴼ)), and an ordinary
+old F:E→D is a checked wrong-input case. The guarded source-prefix driver
+and exact scope/evidence are recorded in NUH-1B2a of the owner ledger.
+This is an unpromoted ingredient. Full native target construction, coupled
+repair and the later universality/homology consumers remain outstanding.
 
 ## Persistent Goal Launch Prompt
 
