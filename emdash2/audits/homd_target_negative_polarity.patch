@@ -1,0 +1,101 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -12646,0 +12647,20 @@
++// NON-LIBRARY polarity experiment: proof-time constant-owner comparisons.
++// These compare the same strict constant family without choosing a runtime
++// fold or equating arbitrary family objects.
++unif_rule @Const_catd $K $A
++  ≡ @Const_func $L Cat_cat $B
++  ↪ [ $K ≡ $L; $A ≡ $B ];
++
++// Postcomposition of an ordinary constant functor, read at the rigid Hom
++// point owner. Its runtime Hom_fapp0 head is preserved.
++unif_rule @Hom_fapp0 Cat_cat $A $A $B $C (@id Cat_cat $A) $F
++      (@Const_func $A $B $b)
++  ≡ @Const_func $A1 $C1 $c
++  ↪ [ $A ≡ $A1; $C ≡ $C1; @fapp0 $B $C $F $b ≡ $c ];
++
++// Reindexing a constant Cat-valued family, read at the same rigid Hom owner.
++unif_rule @Hom_fapp0 Cat_cat $A $B Cat_cat Cat_cat _ (@id Cat_cat Cat_cat)
++      (@Const_catd $A $C)
++  ≡ @Const_catd $B1 $C1
++  ↪ [ $B ≡ $B1; $C ≡ $C1 ];
++
+@@ -14636 +14656 @@
+-    HomdTarget_E[x]           = Π y :^n Z^op, HomdTargetSection_E(x)[y]
++    HomdTarget_E[x]           = NΠ_(Z^op)(HomdTargetSection_E(x))
+@@ -14643,0 +14664,9 @@
++
++// NON-LIBRARY polarity isolation under unchanged old variance conventions.
++symbol Homd_negative_pi_cat [K : Cat] (E : τ (Catd K)) : Cat
++≔ Op_cat (@Pi_cat K (@Op_catd K E));
++
++symbol homd_negative_eval_func [K : Cat] (E : τ (Catd K)) (y : τ (Obj K))
++  : τ (Functor (@Homd_negative_pi_cat K E) (Fibre_cat E y))
++≔ @Op_func (@Pi_cat K (@Op_catd K E)) (Op_cat (Fibre_cat E y))
++    (@piapp0_func K (@Op_catd K E) y);
+@@ -14657 +14686,3 @@
+-//     Π y :^n Z^op, E[y^-] ⊢_[y] HomPsh_Z(x)[y].
++//     NΠ_(Z^op)(y ↦ E[y^-] ⊢_[y] HomPsh_Z(x)[y]).
++// This full expression intentionally retains the inherited old op action.
++// It isolates polarity and is NOT the preferred total-duality candidate.
+@@ -14660,5 +14691,6 @@
+-≔ comp_cat_fapp0
+-     (comp_cat_fapp0
+-       (@Pi_func (Op_cat Z))
+-       (fapp0 (@Functor_catd_func (Op_cat Z)) E))
+-     (@HomPresheaf_catd_func Z);
++≔ @comp_cat_fapp0 Z Cat_cat Cat_cat op
++    (@comp_cat_fapp0 Z (Catd_cat (Op_cat Z)) Cat_cat (@Pi_func (Op_cat Z))
++      (@comp_cat_fapp0 Z (Catd_cat (Op_cat Z)) (Catd_cat (Op_cat Z))
++        (@Op_catd_func (Op_cat Z))
++        (@comp_cat_fapp0 Z (Catd_cat (Op_cat Z)) (Catd_cat (Op_cat Z))
++          (@Functor_catd_fapp0_func (Op_cat Z) E) (@HomPresheaf_catd_func Z))));
+@@ -14811 +14843 @@
+-        (Pi_cat (@Homd_target_section_catd Z D x)));
++        (@Homd_negative_pi_cat (Op_cat Z) (@Homd_target_section_catd Z D x)));
+@@ -14834 +14866 @@
+-  : τ (Obj (Pi_cat (@Homd_target_section_catd Z D x)));
++  : τ (Obj (@Homd_negative_pi_cat (Op_cat Z) (@Homd_target_section_catd Z D x)));
+@@ -14845 +14877 @@
+-      (Pi_cat (@Homd_target_section_catd $Z $D $x))
++      (@Homd_negative_pi_cat (Op_cat $Z) (@Homd_target_section_catd $Z $D $x))
+@@ -14883 +14915 @@
+-      (Fibre_cat (@Homd_target_section_catd $Z $D $x) $y)
++      (Op_cat (Fibre_cat (@Homd_target_section_catd $Z $D $x) $y))
+@@ -15774 +15806 @@
+-  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
++  : τ (Obj (@Homd_negative_pi_cat (Op_cat K) (@Homd_target_section_catd K E x)))
+@@ -15790 +15822 @@
+-  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
++  : τ (Obj (@Homd_negative_pi_cat (Op_cat K) (@Homd_target_section_catd K E x)))
+@@ -16395 +16427 @@
+-  : τ (Obj (Pi_cat (Homd_target_section_catd E x)))
++  : τ (Obj (@Homd_negative_pi_cat (Op_cat K) (@Homd_target_section_catd K E x)))
+@@ -16682,0 +16715,15 @@
++
++// Polarity-isolation beta for native Homd with terminal probe family and
++// constant coefficient family. Its result is a whole transformation.
++// The two constant family heads discriminate this constructor degeneration;
++// arbitrary D/E and all outer inferred family slots remain untouched.
++rule @fdapp1_int_cell _ _ _
++      (@homd_src_sec $Z (@Const_catd $Z Terminal_cat) (@Const_catd $Z $C)
++        $F $x0 $u) $y $z $p Terminal_obj
++  ↪ @Const_transf Terminal_cat (Functor_cat (Op_cat (Hom_cat $Z $x0 $z)) Cat_cat)
++      (@Const_catd (Op_cat (Hom_cat $Z $x0 $z)) (Hom_cat $C $u (@fapp0 $Z $C $F $z)))
++      (@Const_catd (Op_cat (Hom_cat $Z $x0 $z)) (Hom_cat $C $u (@fapp0 $Z $C $F $y)))
++      (@Const_transf (Op_cat (Hom_cat $Z $x0 $z)) Cat_cat
++        (Hom_cat $C $u (@fapp0 $Z $C $F $z))
++        (Hom_cat $C $u (@fapp0 $Z $C $F $y))
++        (@fapp1_fapp0 $Z Cat_cat (@hom_ $C $Z $F $u) $z $y $p));
+@@ -20598 +20645,3 @@
+-// arrow between sections at y.
++// arrow between negative sections at y. The underlying positive-section
++// arrow has reversed endpoints; evaluation in the opposite fibre reverses
++// them back. No endpoint equality or change to the supplied eta is used.
+@@ -20613 +20662,2 @@
+-    (@Homd_target_section_catd K E x)
++    (@Op_catd (Op_cat K) (@Homd_target_section_catd K E x))
++    (@homd_ff_src_sec K E D FF x u)
+@@ -20615 +20664,0 @@
+-    (@homd_ff_src_sec K E D FF x u)

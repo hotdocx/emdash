@@ -266,6 +266,7 @@ must not label those alternatives validated implementations.
 | D-NUH-007 | The archived patch is zero-context and passes a matching dry-run check on the new anchor; its mechanical applicability does not qualify the 328 later added source lines or the full native Homd target |
 | D-NUH-008 | The native-target positive-section polarity admits a reverse Hom functor and Empty; correct section direction together with base variance and add this route to the repair's negative controls |
 | D-NUH-009 | Negative sections act through actual maps between the dual families; do not infer unrestricted covariance on old lax Catd(K) by inverting its comparison cells |
+| D-NUH-010 | The full-source old-variance polarity isolation qualifies a native terminal/constant beta and direction constraint only; combine it with the preferred shifted bases and arbitrary-family profiles before proposing the final target |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -329,6 +330,25 @@ old F:E→D is a checked wrong-input case. The guarded source-prefix driver
 and exact scope/evidence are recorded in NUH-1B2a of the owner ledger.
 This is an unpromoted ingredient. Full native target construction, coupled
 repair and the later universality/homology consumers remain outstanding.
+
+NUH-1B2b now completes a separate full-source polarity isolation. A private
+patch changes the native target to negative sections while deliberately
+retaining old op/Sigma conventions. Whole/point forward action computes to
+the existing represented Hom action, including h ↦ F(p)∘h and its next Hom;
+the old positive-section Empty route rejects at its intended type mismatch.
+Three proof-time comparisons of strict constant constructions support one
+constructor beta, with changed-parameter and runtime-noncollapse controls.
+The first beta failed subject reduction before those comparisons; the
+ledger preserves that failure and the exact final guarded gate.
+
+The final copied source/reviewers and strict LHS audits pass. Warning
+inventories agree with the exact baseline after source-line mapping, at
+1,144 critical pairs / 157 pattern reports. The worktree's active nucleus
+is unchanged. No full repair, arbitrary-family base-action theorem or
+library-consumer migration is claimed. NUH-1B2 remains active: specify the
+joint native variance/profile table and resolve the shifted-base input
+problem before the coupled full-owner candidate. The universality/homology
+refactors and model/reifier work have not started implementation.
 
 ## Persistent Goal Launch Prompt
 

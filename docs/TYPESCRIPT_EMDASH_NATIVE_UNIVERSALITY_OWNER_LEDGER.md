@@ -245,6 +245,94 @@ from the actual target construction; it cannot pass arbitrary old lax maps
 through a covariant NΠ wrapper. The original target, all Empty controls and
 the 328 current post-prefix source additions remain to be migrated.
 
+### NUH-1B2b: Full-file polarity isolation
+
+Hypothesis: replacing the old positive target section by the negative
+section expression, and updating its actual native projection types, can
+remove the polarity route while preserving the foundational homd/action
+ladder. First test this in a copied full source with the old variance
+conventions deliberately retained. This isolates section polarity from
+the separately required total-duality migration; it is not a candidate
+replacement for that migration and cannot establish a repaired kernel.
+
+Use only derived negative-section expressions and the existing Π/Op/action
+owners. Keep homd_int and its named whole/endpoint projections. Correct the
+section-arrow projection by the negative-section interpretation rather than
+an equality cast. Check the full source at its owning positions, then the
+new Empty diagnostic and native forward/component consumers. A source/SR
+failure identifies a coupled owner to examine; no failed check is hidden
+behind opacity, an unreviewed unifier or a larger deadline.
+
+The first copied full source checks after seven named polarity/projection
+changes. The old Empty diagnostic rejects the positive-section type.
+Native component/endpoint projections and their next action check, and a
+transparent generic opposite-arrow view exposes the intended forward Hom
+functor. At that stage a direct proof that its point action is F(p)∘h did
+not check: normalization stopped at fdapp1_int_cell applied to homd_src_sec.
+
+The next tested hypothesis supplies that constructor's semantic action in
+the terminal-D/constant-E case as whole constant transformations built from
+the existing represented Hom postcomposition. This is a beta observation
+of the Homd constructor, not a rule for preservation of identity or
+composition. Its first subject-reduction check failed at three comparisons:
+the constant-family and constant-functor presentations, rigid Hom action on
+a constant functor, and constant-presheaf reindexing. That failed version is
+retained as `polarity_rejected_beta_v1.lp` with `logs/source-beta.log` in
+`/tmp/emdash-homd-polarity-full._k66kvz6`; the earlier seven-change source is
+`polarity_before_beta.lp`. Neither failure nor initial source success was
+treated as the final consumer result.
+
+Three narrowly typed proof-time comparisons now expose those same strict
+constant constructions. They preserve K/A and the image of the supplied
+object; no runtime constant-family fold is installed. The final source adds
+one constructor beta whose result remains a whole transformation, alongside
+the two transparent negative-section/evaluation expressions. Original
+homd_int and its named projection/action owners remain in place.
+
+The [preserved patch](../emdash2/audits/homd_target_negative_polarity.patch)
+is applied only in an isolated full copy by the
+[guarded driver](../emdash2/scripts/check_homd_target_negative_polarity.sh).
+The [native reviewer](../emdash2/audits/homd_target_negative_polarity_controls.lp)
+checks whole equality with the existing represented Hom action, the actual
+formula h ↦ F(p)∘h for arbitrary p, retention of p at an identity source
+arrow, and the next whole Hom action in h. Original component/endpoint
+observations also check for arbitrary supplied D/E, as do their further Hom
+types. These generic component checks do not establish the missing general
+base action. Wrong forward endpoints and the old positive section type are
+rejected. The unchanged Empty reproducer fails at precisely the recorded
+positive-family versus opposite-family goal.
+
+The [constant comparison reviewer](../emdash2/audits/homd_target_constant_comparison_controls.lp)
+uses typed reflexivity for all three proof-time comparisons and rejects
+changed category/object parameters. Separate conversion negatives confirm
+that their runtime heads remain distinct. The inferred unused reindexing
+map slot is `_`; its identity is irrelevant to a constant-family value.
+
+Final gate: `/tmp/emdash-homd-negative-polarity.QV3mOi`, with exact source
+and reviewer SHA-256 identities in `manifest.json`. The guarded baseline,
+full candidate, both reviewers, intended Empty rejection and strict LHS
+audits all pass. Both cores report 1,144 critical pairs / 157 pattern reports;
+categories, heads, rule families and locations agree after mapping unchanged
+source lines. Each reviewer has the exact candidate warning inventory.
+The new beta introduces no reported critical pair. This is scoped check
+evidence, not a confluence or consistency theorem.
+
+The patch is serialized with zero context, avoiding trailing spaces from
+blank context lines. A fresh replay from the recorded source anchor and
+`git apply --check --unidiff-zero` both succeed; the replayed full source is
+byte-identical to the checked candidate, SHA-256
+`8512aaf1c86afdba01e0a34d8bab03ca2c0a64d52b83a2dfd1b7db27c447e26e`.
+
+**Disposition:** NUH-1B2b is complete as an unpromoted polarity isolation.
+The old op/Sigma defects remain explicitly present. No active LP source,
+positive diagnostic registry, catalog or health snapshot was changed; the
+private patch/reviewers do not establish library compatibility. For example,
+the active diagnostic still contains positive-Π target observations, which
+must migrate with the final design. The preferred shifted-duality full
+target, arbitrary-family base action, noninvertible base-2-cell behavior and
+the coupled soundness controls remain NUH-1B2/NUH-2 obligations. Do not extend
+the inherited old-op target into a second proposed final architecture.
+
 ### NUH-1B1: Terminal-family section polarity probe
 
 Hypothesis under test: the old positive section over the opposite y-base
@@ -304,11 +392,15 @@ projections and computation must be specified together before promotion.
 | NUH-1B1 terminal-family polarity control | complete diagnostic tranche; reverse Hom and Empty reproduced, lawful forward companion checked |
 | NUH-1B2 complete native Homd target variance/polarity design | active; resolve the corrected section direction and all bases/profiles together |
 | NUH-1B2a negative-section ingredient | refined object/whole-map and constant-family prototype checked on preferred prefix; unrestricted lax covariance rejected |
+| NUH-1B2b full-source polarity isolation | complete as an unpromoted experiment; terminal/constant whole and point beta, further Hom and rejection controls pass under explicitly retained old variance |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue with NUH-1B2, reading the current native projection ladder and the
-preserved full candidate side by side. Keep the new Empty route as a
-rejection control. Record a typed mathematical proposal and its projection
-controls before generating a new full-source copy. All
+Continue with NUH-1B2 by joining the preferred-basis NΠ ingredient and the
+qualified polarity constraint at the semantic interface. Write the complete
+x/u/y/v/base-Hom variance table, including transformation profiles, for the
+original D/E inputs before another coupled source candidate. The unresolved
+R(Z) versus Z mismatch and unrestricted lax-map obstruction are still real;
+the old-variance isolation does not discharge them. Keep all Empty routes
+as rejection controls and specify noninvertible base-2-cell action. All
 spectral/stabilization brainstorming is out of scope and is not a dependency.
