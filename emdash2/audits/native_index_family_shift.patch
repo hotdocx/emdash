@@ -1,0 +1,47 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -3309,0 +3310,15 @@
++// NON-LIBRARY strict-reference shift: reverse dimensions 3 and above.
++injective symbol CoAbove3_cat : Cat → Cat;
++rule Obj (CoAbove3_cat $C) ↪ Obj $C;
++rule Hom_cat (CoAbove3_cat $C) $x $y ↪ CoAbove2_cat (Hom_cat $C $x $y);
++rule CoAbove3_cat (CoAbove3_cat $C) ↪ $C;
++rule Op_cat (CoAbove3_cat $C) ↪ CoAbove3_cat (Op_cat $C);
++rule CoAbove3_cat (CoAbove2_cat $C) ↪ CoAbove2_cat (CoAbove3_cat $C);
++rule @id (CoAbove3_cat $C) $x ↪ @id $C $x;
++rule @comp_fapp0 (CoAbove3_cat $C) $x $y $z $g $f
++  ↪ @comp_fapp0 $C $x $y $z $g $f;
++
++// Semantic mask aliases, not additional category primitives.
++symbol CoOnly2_cat (C : Cat) : Cat ≔ CoAbove2_cat (CoAbove3_cat C);
++symbol Reverse12_cat (C : Cat) : Cat ≔ CoAbove3_cat (Op_cat C);
++
+@@ -7102,0 +7118,17 @@
++// External D≥3 action on a strict reference functor, with its whole Hom.
++injective symbol CoAbove3_func [A B : Cat] (F : τ (Functor A B))
++  : τ (Functor (CoAbove3_cat A) (CoAbove3_cat B));
++rule @fapp0 _ _ (@CoAbove3_func $A $B $F) $x ↪ @fapp0 $A $B $F $x;
++rule @fapp1_func _ _ (@CoAbove3_func $A $B $F) $x $y
++  ↪ @CoAbove2_func (Hom_cat $A $x $y)
++      (Hom_cat $B (@fapp0 $A $B $F $x) (@fapp0 $A $B $F $y))
++      (@fapp1_func $A $B $F $x $y);
++rule @fapp1_fapp0 _ _ (@CoAbove3_func $A $B $F) $x $y $p
++  ↪ @fapp1_fapp0 $A $B $F $x $y $p;
++rule @CoAbove3_func _ _ (@CoAbove3_func _ _ $F) ↪ $F;
++
++// External dimension-2-only action, derived from the two homwise shifts.
++symbol CoOnly2_func [A B : Cat] (F : τ (Functor A B))
++  : τ (Functor (CoOnly2_cat A) (CoOnly2_cat B))
++≔ @CoAbove2_func (CoAbove3_cat A) (CoAbove3_cat B) (@CoAbove3_func A B F);
++
+@@ -7190,0 +7223,10 @@
++
++// Whole R in the strict-cartesian reference environment. Its source shifts
++// again: universe transformations reverse from dimension 3, not dimension 2.
++// Arbitrary lax/Gray-profile qualification is explicitly not supplied here.
++constant symbol native_homwise_dual : τ (Functor (CoAbove3_cat Cat_cat) Cat_cat);
++rule @fapp0 _ _ native_homwise_dual $A ↪ CoAbove2_cat $A;
++rule @fapp1_func _ _ native_homwise_dual $A $B
++  ↪ CoAbove2_functor_cat_func $A $B;
++rule @fapp1_fapp0 _ _ native_homwise_dual $A $B $F
++  ↪ @CoAbove2_func $A $B $F;

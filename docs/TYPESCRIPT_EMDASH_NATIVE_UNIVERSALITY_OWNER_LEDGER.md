@@ -184,6 +184,81 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1B2e: Whole source-family internalization
+
+The preceding `6ed30b7d` turn is progress: it constructed the native index
+carrier/arrow/projection before homd_int and qualified the negative source
+direction. The worktree is clean at resumption and its baseline ancestry is
+preserved. Continue with the strict reference whole source family, retaining
+the separate generic-profile obligation.
+
+Hypothesis: one further shifted dual, D≥₃, permits the existing homwise
+duality R to be internalized with its correct universe source. The native
+index then varies over D₁₂(Z); its functor-category target and fibre
+transpose vary over D₂(Z). Add the prototype operators at their actual
+owning positions in a copied candidate, and check the source prefix plus
+whole/point and dimension-2/3 controls before any promotion. A checked
+strict-reference expression does not authorize arbitrary lax-profile action.
+
+Sigma_func and the object action of Sigma maps are already available before
+homd_int. Their capped arrow computation is later, at the native displayed
+action owners. Test the whole x-family and selected source-arrow point
+action first, then identify the exact remaining arrow/higher-action head.
+Do not postulate a generic inverse laxity cell to fill that computation.
+
+The [shift patch](../emdash2/audits/native_index_family_shift.patch) now adds
+the three experimental owners CoAbove3_cat, CoAbove3_func and
+native_homwise_dual at their intended positions in the copied preferred
+candidate, with 14 projection/duality rules. CoOnly2_cat, Reverse12_cat and
+CoOnly2_func are derived views. This is a strict-reference prototype;
+unrestricted lax/Gray semantics of these operators are not qualified.
+
+The [whole-family reviewer](../emdash2/audits/native_index_family_prototype.lp)
+constructs J, S, P_D and the fibre-transpose family at the actual shifted
+bases. Whole source action along r:x→x′ computes on points to
+((y,v),a)↦((y,v),a∘r). The target computes H↦H∘S(r), and a source
+2-cell has the correct reversed transformation type. Dimension-2/3,
+identity/composition, involution and whole/capped projection controls check;
+the wrong R(Z) target base and total-O fibre view reject.
+
+The first P_D body used Functor_cat_func's fixed-codomain presentation;
+its source-action point comparison did not compute. Replacing that body by
+the existing hom_con(Cat,Cat,id) owner gives the same object family and the
+computing whole precomposition action, without another rule or unifier.
+The initial raw identity/composition conversion queries compared distinct
+unreduced lambda result classifiers; explicit typed 1-arrow views pass.
+Those failed variants/logs remain in
+`/tmp/emdash-native-index-family.gvye214p` as
+`family_rejected_constructor_action.lp` / `logs/family-source-point.log`
+and `family_rejected_raw_dual_id.lp` / `logs/family-qualified-warnings.log`.
+
+The [arrow observation](../emdash2/audits/native_index_source_arrow_observation.lp)
+types, but normalization stops at fapp1_fapp0 of
+sigma_map_func(Op_funcd(hom_int_precomp_func(…))). This is the exact
+remaining source-arrow computation boundary, not a failed direction or
+object cast. The next required construction is its structural represented
+precomposition action, with retained triangle and base-2-cell observations,
+before claiming a computing whole index action.
+
+The [guarded gate](../emdash2/scripts/check_native_index_family.sh) passes at
+`/tmp/emdash-native-index-family.Q2l6wf`. It checks the preferred baseline,
+owning-position shifted prefix, both reviewers and strict LHS audits. The
+candidate/reviewer warning inventories agree exactly at 1,014 critical pairs
+/ 137 pattern reports. Relative to the baseline, 79 reported pairs are new;
+each contains CoAbove3 or native_homwise_dual. Their family classification
+and unresolved scope are recorded in the design document. The gate guards
+the complete family-count delta and explicitly records that source action
+on index arrows does not yet compute. Exact source identities and all
+incomplete qualification flags are in its manifest.
+
+**Disposition:** whole x-family formation and source-point/target
+precomposition computations checked in the strict reference prototype.
+This is not full native Homd, generic lax-profile, or full-kernel
+qualification. The shifted source rules are not promoted to the active
+nucleus. Next derive the structural Sigma source-arrow and 2-cell action
+without calling the dependent-Hom action being defined; retain the separate
+general D-map/module and profile obligations.
+
 ### NUH-1B2d: Native shared-index carrier and source duality
 
 The continuation from `7565d935` is progress: the preceding tranche refuted
@@ -513,16 +588,17 @@ projections and computation must be specified together before promotion.
 | NUH-1B2b full-source polarity isolation | complete as an unpromoted experiment; terminal/constant whole and point beta, further Hom and rejection controls pass under explicitly retained old variance |
 | NUH-1B2c shared-index target design | old y-local architecture refuted by strict finite coefficient models; candidate shared index/source variance checked at dimension 2, full native higher target pending |
 | NUH-1B2d native shared-index ingredient | carrier/arrow/whole projection and source-Hom direction check before homd_int; whole x-family and D-map/profile qualification pending |
+| NUH-1B2e whole x-family | strict-reference S/P_D and fibre transpose typecheck; source points and H-precomposition compute; source action on index arrows and generic profiles remain unqualified |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue with whole x-family internalization of the native shared index in
-NUH-1B2d, using the strict reference source masks as a constraint and
-qualifying the actual transformation environment. Preserve T in the native
-negative fibre-Hom slot; do not extrapolate the finite R(Z) shorthand to
-the full higher family. The native carrier/first projection already check
-without homd_int; general D-map action and the mixed internal-action profile
-remain to qualify before the coupled full source candidate. The old y-local
-target is rejected; its finite counterexamples and all Empty routes remain
-rejection controls. The full ω-dimensional target remains unqualified. All
+Continue at NUH-1B2e's measured Sigma-map boundary: derive source action on
+index arrows and its source-2-cell components for the actual opposite
+represented precomposition map, with retained triangle and no generic
+inverse laxity. The whole family and its source-point/target precomposition
+already check at the proper shifted bases. General D-map/module action,
+mixed profiles and full native Homd migration remain to qualify. The old
+y-local target is rejected; its finite counterexamples and all Empty routes
+remain rejection controls. The full ω-dimensional target remains
+unqualified. All
 spectral/stabilization brainstorming is out of scope and is not a dependency.

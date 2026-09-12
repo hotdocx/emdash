@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active design evidence for NUH-1B2c/d; finite model and native index ingredient checked, full ω-categorical target not yet qualified
+Status: active design evidence for NUH-1B2c/d/e; strict-reference whole family and point action checked, full ω-categorical target not yet qualified
 
 Parent: [implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -329,10 +329,58 @@ then compares complete warning inventories and strict LHS audits. Whole
 x-family internalization, general D-map action and generic lax profiles
 are explicitly outside this prototype's claimed qualification.
 
-Next: specify the general shared index/module target and its transformation
-profile in native terms, with the correct higher base/fibre cells; preserve
-the original D/E inputs and explain the noncircular source dependency.
-Use these finite counterexamples to reject the old y-local architecture.
-Only then build a full-source LP candidate. The preferred-basis NΠ and the
-old-variance polarity isolation remain useful constraints and computations,
-but neither is the final general target on its own.
+The subsequent [whole-family prototype](../emdash2/audits/native_index_family_prototype.lp)
+now constructs J, S, P_D and T_*(E) at their actual shifted bases. The
+[experimental owner patch](../emdash2/audits/native_index_family_shift.patch)
+adds D≥₃ and its functor action, and internal R with source D≥₃(Cat).
+These are three additional prototype primitives with 14 rules; the
+dimension-2 and dimension-1/2 views are derived. Nothing is installed in
+the active kernel by this experiment, and arbitrary lax/Gray interpretation
+is not supplied by its passing typechecks.
+
+Source action along r computes on points to ((y,v),a∘r). P_D acts on H
+by precomposition with that same source functor. The point-identical
+Functor_cat_func presentation left this latter action opaque; the native
+hom_con(Cat,Cat,id) presentation computes through the existing ordinary
+Hom owners. Identity/composition, involution, whole/capped action and
+dimension-2/3 controls check, including rejection of the incorrect R(Z)
+target base. The source 2-cell has its expected reversed transformation
+type; its full component computation is still required.
+
+The [guarded whole-family gate](../emdash2/scripts/check_native_index_family.sh)
+checks exact source/reviewer identities and records the remaining
+[source-arrow observation](../emdash2/audits/native_index_source_arrow_observation.lp):
+normalization stops at Sigma applied to the opposite represented
+precomposition map. Its source-arrow and higher-component beta must be
+derived without using the dependent-Hom action that this target supports.
+
+The owning-position warning comparison adds 79 reported critical pairs to
+the preferred prefix's 935; pattern reports remain 137. Every new block
+contains a new shifted owner. Their families are:
+
+| Reported interaction group | Added pairs |
+| --- | ---: |
+| Identity folds with Hom/pre/postcomposition/transfor action | 15 |
+| Category composition with composition/functor action | 28 |
+| Functor action with functor/postcomposition action | 23 |
+| Product object projections and ordinary evaluation | 4 |
+| Op commutation with action and the existing adjunction mirrors | 7 |
+| New functor involution and whole/capped projection | 2 |
+
+The involution and whole/capped projection instances have explicit typed
+consumer checks. Identity/composition and mask controls test the new
+normal-form decisions. The six additional Op-adjunction/unit/counit
+instances expose the existing mirror patterns after a changed implicit
+category presentation; their generic runtime joins are not established by
+this tranche. None of the table is a confluence certificate or a promise
+that every interaction is resolved. The exact complete family-count delta
+is guarded, the reviewers add no further warnings, and full-kernel/profile
+qualification remains necessary before promotion.
+
+Next: derive the structural Sigma action for represented precomposition,
+including the retained triangle and source-2-cell components, then qualify
+the general D-map/module and actual transformation profiles. Preserve the
+original inputs and the noncircular native dependency. The finite
+counterexamples continue to reject the old y-local architecture. The
+preferred-basis NΠ and old-variance polarity isolation remain scoped
+constraints/computations; neither is the final general target on its own.

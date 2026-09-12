@@ -271,6 +271,7 @@ must not label those alternatives validated implementations.
 | D-NUH-011 | Strict finite coefficient models refute either base-2-cell orientation of the old unrestricted y-local target; pursue the native shared triangular index/module target with original D/E inputs, preserving homd_int ownership and noncircular dependencies |
 | D-NUH-012 | Native Hom contravariance in u requires dimension-1 transposition T; the strict reference family base is D₂(Z), not the finite model's indistinguishable R(Z) shorthand. Track the further source shifts when internalizing R; preserve total O/R for their actual roles |
 | D-NUH-013 | The shared-index carrier and first projection can use the corrected pre-homd_int Sigma substrate. Qualify whole x/D actions separately; do not conflate that independent carrier with the later Sigma map action's native-laxity dependency |
+| D-NUH-014 | The strict-reference whole x-family computes its source-point and H-precomposition views through native Hom owners; its remaining index-arrow computation is the specific Sigma map of opposite represented precomposition. Derive that structural action without assuming inverse laxity or claiming generic-profile qualification |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -387,6 +388,20 @@ indistinguishable from the earlier shorthand in the finite ordinary-fibre
 test. Next implement and qualify whole varying-x action and its actual
 profiles, then the D-map/module action and full native target. The active
 nucleus, ordinary homology implementation and TypeScript remain unchanged.
+
+NUH-1B2e constructs the whole x-family in an isolated strict-reference
+candidate with the further shifted-duality owners. Its S/P_D/T_*(E)
+signatures, source-point action a↦a∘r and target precomposition H↦H∘S(r)
+check, along with dimension-2/3 and wrong-base controls. Source action on an
+index arrow stops at the recorded Sigma-map head. The guarded gate and
+complete warning classification (+79 reported pairs, no new pattern reports)
+are recorded in the owner ledger/design; the extra rules remain unpromoted,
+and the full candidate and generic lax profiles remain unqualified.
+
+Next is the structural represented-precomposition Sigma action and its
+higher components, followed by general module/profile and full native Homd
+qualification. The active mathematical sources and homology/TypeScript
+implementation are unchanged; no spectral or endpoint-checker work resumed.
 
 ## Persistent Goal Launch Prompt
 
