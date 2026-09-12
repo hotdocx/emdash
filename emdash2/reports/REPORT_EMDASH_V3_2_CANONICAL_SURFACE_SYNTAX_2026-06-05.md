@@ -16,6 +16,13 @@ adds an independent constant-fibre direction defect. Its All/CoAll and
 contravariant-totalization candidates are likewise not active surface syntax
 or a claimed completed repair.
 
+The [native-target polarity diagnostic](../../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+records a further Empty route through the current Homd target section.
+Its positive section over the opposite y-base supplies an invalid reverse
+Hom action. Preserve native Hom notation/owners while correcting that
+polarity and the coupled bases; the formulas below do not independently
+certify the unrepaired encoding.
+
 Notation in this report is immediately authoritative for mathematical comments
 and examples. Most of it becomes parser syntax only after a separate
 elaboration and grammar implementation. The bounded TypeScript categorical

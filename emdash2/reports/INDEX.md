@@ -12,6 +12,14 @@ generalization and dependent stabilization are explicitly deferred and must
 not be investigated. The completed LES baseline and its symbolic endpoint
 deferral below remain reference evidence; the launch changes no LP source.
 
+NUH-1B1 now records the
+[Homd target polarity diagnostic](../../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md):
+the old positive section over the opposite y-base yields reverse Hom action
+and Empty, including a walking-arrow specialization. A separate forward
+companion checks the valid direction and retained next action. These are
+non-library diagnostics, not a repair or a claim of a third independent
+defect. NUH-1B2 must correct target polarity together with base variance.
+
 Latest homology status (2026-09-11): the user-directed remainder of the
 [bounded long exact homology and book plan](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 is complete. The final symbolic zero-endpoint attachment and its LF

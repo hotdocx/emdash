@@ -16,6 +16,13 @@ also derives the empty type from the generic Sigma-Hom and constant-product
 readings. Its repair must preserve fibre higher arrows; it is not solved by
 changing the type of internal op alone.
 
+The [native Homd target diagnostic](../../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+also derives Empty through the current positive section over the opposite
+target base. It identifies an incorrect reverse-Hom action in the coupled
+package; independence from the earlier defects is not established. Native
+hom_int/homd_int remain foundational, but their target polarity must be
+repaired alongside variance before these interfaces are qualified.
+
 Draft status: this document is a mathematician-facing reading guide for the
 current `emdash3_2.lp` theory, its one-way derived native equality-valued hom-action
 extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property

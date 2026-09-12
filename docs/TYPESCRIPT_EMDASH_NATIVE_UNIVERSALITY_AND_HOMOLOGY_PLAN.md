@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active; launch complete and NUH-1B native Homd variance design in progress
+Status: active; NUH-1B1 polarity diagnostic complete, NUH-1B2 native target redesign in progress
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -140,7 +140,7 @@ The same root hook configuration is retained; no new hook is installed.
 | --- | --- | --- |
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
 | NUH-1 | active design tranche | Exact native-owner/variance/dependency table; coherent meanings and rejection criteria before semantic source edits |
-| NUH-2 | pending NUH-1 | Coupled full-owner op/family/Sigma/native-Hom repair; genuine positive consumers and correct rejection of all three known Empty routes |
+| NUH-2 | pending NUH-1 | Coupled full-owner op/family/Sigma/native-Hom repair; genuine positive consumers and correct rejection of the three earlier Empty routes plus the native-target polarity route |
 | NUH-3 | pending NUH-1/2 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
 | NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
@@ -186,6 +186,14 @@ An arbitrary R(Z)=Z equation or new replacement-family input rejects the
 candidate. A separate question is which previously prototyped shifted-dual
 actions need a stricter or changed laxity profile; do not assume every such
 action follows from the object-level duality formulas.
+
+NUH-1B1 adds a necessary polarity constraint: the old positive section over
+the opposite target base produces a reverse Hom action and a closed Empty
+witness, including a walking-arrow specialization. The
+[polarity diagnostic](TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+is an additional required negative control. A repaired base annotation alone
+does not qualify the native target. Independence of this route from the
+older op/Sigma defects has not been established.
 
 ## Universal Structure And First Vertical Consumer
 
@@ -256,6 +264,7 @@ must not label those alternatives validated implementations.
 | D-NUH-005 | Endpoint checker/debugging remains deferred; do not conflate it with the native universality refactor |
 | D-NUH-006 | The mixed-functor dimension-2 action constrains its negative source variance; replacing transposition by total duality solely to fit the old E input is not a semantic repair |
 | D-NUH-007 | The archived patch is zero-context and passes a matching dry-run check on the new anchor; its mechanical applicability does not qualify the 328 later added source lines or the full native Homd target |
+| D-NUH-008 | The native-target positive-section polarity admits a reverse Hom functor and Empty; correct section direction together with base variance and add this route to the repair's negative controls |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -288,6 +297,27 @@ Next: continue NUH-1B, the joint variance design of the native Homd target,
 before candidate source edits. The first dimension-2 constraint is recorded
 in the owner ledger. The separate whole-universality dependency design is
 inventoried in NUH-1C. No spectral or endpoint-checker research was started.
+
+2026-09-12 continuation: the prior goal turn is classified as progress
+(dedicated worktree, active plan/goal and fresh baseline at `190cd14f`). The
+current worktree was clean and its nucleus hash unchanged at resumption.
+NUH-1B1 now has a new closed target-polarity diagnostic, its walking-arrow
+specialization and a separate lawful forward-action reviewer. All final
+guarded runs pass in their recorded roles; accepting the Empty terms is
+failure evidence for the encoding. The warning inventories of the core-only
+diagnostic and companion agree completely at 1,144 critical pairs / 157
+pattern reports. No active LP rule or installed checker was changed.
+
+The first two raw forward-control assertion forms failed at elaboration;
+the final explicitly typed reflexivity paths pass without new rules or
+unifiers. Those statuses remain distinct in the diagnostic. Next is
+NUH-1B2: qualify the native target's correct y-action in the terminal/constant
+case, then resolve varying families and higher-base variance jointly.
+Active-reference and report-lifecycle checks pass, as do exact diff and all
+33 links in the affected diagnostic/plan/ledger. The three non-library LP
+files pass the strict LHS audit and remain absent from positive registries.
+The checkpoint adds no active-core or TypeScript change; its nucleus remains
+the recorded `91f1974e` blob. The full implementation goal remains active.
 
 ## Persistent Goal Launch Prompt
 

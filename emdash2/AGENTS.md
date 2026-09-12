@@ -47,6 +47,15 @@ families. See `audits/sigma_hom_empty_reproducer.lp` and
 signature alone is insufficient; Sigma Hom and its projections also require
 the documented variance repair before formal qualification.
 
+The native-universality audit also reproduces Empty through the old
+`homd_src_sec` positive-section target over the opposite y-base. See
+`../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md` and the
+non-library `audits/homd_target_empty_reproducer.lp`. This route's independence
+from the op/Sigma defects is not established. The coupled repair must reject
+it for the correct target polarity/type reason while preserving native Hom
+owners and legitimate forward action; a base-annotation fix alone is not
+qualification.
+
 ## Authority And Document Roles
 
 Use this order:

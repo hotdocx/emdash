@@ -22,6 +22,13 @@ whole op or opposite-family formation. It exposes an incompatible fibre
 direction between generic Sigma Hom and constant-family products. Sigma
 projection/totalization qualification is therefore also a repair prerequisite.
 
+The 2026-09-12 [native-target polarity diagnostic](../../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+adds a closed Empty derivation through the current positive Homd section,
+including a walking-arrow-base instance. Its independence from the earlier
+defects is not established. The target's y-action, as well as its base
+variance, needs correction. The diagnostic and its separate lawful forward
+controls are non-library evidence; no active native Hom owner was changed.
+
 The earlier homological-algebra goal deferred this general repair. The
 2026-09-12 [native-universality successor](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 now resumes a design-led coupled repair in its dedicated worktree, preserving

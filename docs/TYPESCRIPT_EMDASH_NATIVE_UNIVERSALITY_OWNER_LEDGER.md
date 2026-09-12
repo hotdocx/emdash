@@ -184,14 +184,69 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1B1: Terminal-family section polarity probe
+
+Hypothesis under test: the old positive section over the opposite y-base
+has the wrong direction even before the full higher-base mismatch is
+considered. For a covariant F:Z→C, terminal D, constant E=C, and fixed x,u,
+the endpoint observation is p↦HomC(u,F(y)). Section action along p:x→y
+would send its y-value (restricted along p) to its x-value. Evaluating at
+idₓ would therefore appear to give HomC(u,F(y))→HomC(u,F(x)), which is not
+available for arbitrary F and p.
+
+Test this in a non-library file using only existing definitions and actions.
+No primitive witness, rewrite or unifier is to be added. If the term checks,
+retain it as a diagnostic of the current coupled package, not as a valid
+feature; independence from the already known defects requires separate
+controls. If it fails, inspect the exact action/endpoint that rejects it
+before selecting a replacement target. The intended native homd constructor
+remains foundational throughout.
+
+Result: the [tracked diagnostic](TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+accepts the complete reverse functor and a closed Empty witness. Its
+walking-arrow specialization also accepts. The separate forward-action
+companion checks typed reconstruction/identity paths, retains the next Hom
+action and rejects the reverse function type. Warning-enabled runs have
+identical complete 1,144/157 inventories and all three audit files contain
+zero new rule clauses. Exact source/log/status details are in the diagnostic.
+
+This changes the next action: correcting only the R(Z) versus Z type
+mismatch is insufficient. The target's section polarity must also be
+corrected. The result belongs to the existing coupled package; independence
+from the earlier op/Sigma faults is not established. Retain the three
+earlier negative controls and add this route to full-repair qualification.
+
+### NUH-1B2: Direction-correct native target
+
+The required y-action in the strict working transport case is
+
+```text
+Mᵧ(q,v) → M_z(p∘q, D(p)(v)),
+Mᵧ(q,v)=HomEᵧ(E(q)(u),Fᵧ(v)).
+```
+
+The old positive section over the opposite y-base supplies the converse.
+First qualify a native negative/mixed-section target in the terminal and
+constant case, with preserved whole projection/action. Then combine it with
+varying D/E and noninvertible base-2-cell controls. A lax-comma interpretation
+is a candidate semantic comparison for the target, not a new definition of
+homd_int. Its complete higher variance remains to be established.
+
+A limited primary-source review of comma polarity and dependent two-sided
+fibrations is recorded in the diagnostic. It does not start a general
+external calculus or a spectral research task. The new target's type,
+projections and computation must be specified together before promotion.
+
 | Subrow | State |
 | --- | --- |
 | NUH-1A source/dependency inventory and baseline | established; launch checkpoint records the exact anchors and controls |
-| NUH-1B complete native Homd target variance design | active; resolve all bases/profiles together before candidate source edits |
+| NUH-1B1 terminal-family polarity control | complete diagnostic tranche; reverse Hom and Empty reproduced, lawful forward companion checked |
+| NUH-1B2 complete native Homd target variance/polarity design | active; resolve the corrected section direction and all bases/profiles together |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue with NUH-1B, reading the current native projection ladder and the
-preserved full candidate side by side. Record a typed mathematical proposal
-and its rejection controls before generating a new full-source copy. All
+Continue with NUH-1B2, reading the current native projection ladder and the
+preserved full candidate side by side. Keep the new Empty route as a
+rejection control. Record a typed mathematical proposal and its projection
+controls before generating a new full-source copy. All
 spectral/stabilization brainstorming is out of scope and is not a dependency.
