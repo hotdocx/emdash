@@ -111,6 +111,14 @@ def precompose_arrow(arrow, r):
 
 
 def audit():
+    # Independent fibre-2-cell discriminator. In the walking 2-cell category,
+    # Hom(-,y) sends p/q to the functors 1→[1] selecting p/q. Total source
+    # reversal would demand the missing component q→p; dimension-1
+    # transposition retains the available component p→q.
+    precompose_p = base_compose("iy", "p")
+    precompose_q = base_compose("iy", "q")
+    assert base_cell(precompose_p, precompose_q)
+    assert not base_cell(precompose_q, precompose_p)
     sx, sy = NativeIndexModel("x"), NativeIndexModel("y")
     for index in (sx, sy):
         index.validate()
@@ -202,6 +210,7 @@ def audit():
     return {
         "scope": "strict walking-2-cell base, finite ordinary fibres; no Lambdapi or omega qualification",
         "old_local_target": "neither orientation of the base 2-cell works for all original inputs",
+        "negative_fibre_source": "dimension-1 transpose preserves p⇒q; total reversal demands missing q⇒p",
         "supporting_index": {
             "S_x_objects": len(sx.objects), "S_x_arrows": len(sx.arrows),
             "S_x_nonidentity_2_cells": len(nonidentity),

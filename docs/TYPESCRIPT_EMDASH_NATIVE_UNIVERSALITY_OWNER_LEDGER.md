@@ -184,6 +184,76 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1B2d: Native shared-index carrier and source duality
+
+The continuation from `7565d935` is progress: the preceding tranche refuted
+the y-local target with independent finite models and selected a shared
+index to investigate. The worktree is clean at resumption, the comparison
+baseline remains an ancestor and the active nucleus blob is unchanged.
+
+Current source inventory distinguishes the Sigma carrier/first projection
+from its later displayed-map action. Sigma Hom uses homd_, which is already
+defined through ordinary hom_con and fibre evaluation before homd_int.
+The whole first projection also precedes homd_int. By contrast, homdc_int
+explicitly calls homd_int, and the later total-map action extracts its
+displayed laxity. Do not classify every use of the Sigma carrier as the
+same circular dependency.
+
+Tested hypothesis: for C=ΣD and π:C→Z, the shared index has the
+native expression R(Σ_(R C)(Hₓᴼ)), where Hₓ=HomZ(x,π(−)). Its target
+projection is π∘R(π_inner). Probe its actual object/arrow formation and
+whole projection on the preferred source prefix BEFORE homd_int, preserving
+D over Z. This is an ingredient test, not a repaired full nucleus; no
+arbitrary lax-map action of R is assumed.
+
+The finite model had ordinary fibres and therefore did not distinguish O
+from T in the negative u-slot. With a genuine fibre 2-cell, the representable
+HomC(−,z) requires T(C), not O(C). The strict higher-reference dimension
+bookkeeping consequently needs the source shift for dimension-1
+transposition (dimension 2 only). Audit that shift and the whole index's
+external x variance before extrapolating the earlier finite R(Z) signature.
+
+The [native prototype](../emdash2/audits/native_homd_index_prototype.lp)
+checks this carrier and its nested point/arrow constructors, whole target
+projection, original point/arrow projection comparisons, retained triangle
+and the projection's next Hom action. It rejects a reversed triangle.
+No new category primitive, runtime rule or unifier is introduced. The
+initial raw arrow introduction and triangle observation failed during
+elaboration of compound opposite Homs. Explicit typed opposite-arrow views
+with bodies equal to the original supplied arrow resolve those boundaries;
+they add no endpoint equality. Rejected variants and logs remain in
+`/tmp/emdash-native-homd-index.kxse0r0n` as
+`native_index_rejected_arrow_raw.lp` / `logs/prototype-first.log` and
+`native_index_rejected_triangle_raw.lp` / `logs/prototype-triangle.log`.
+
+The same prototype checks the original represented source 2-cell direction
+over T(C) and rejects total O(C) and the reversed 2-cell. The independent
+finite audit now includes the walking-fibre-2-cell obstruction. The
+[refined design](TYPESCRIPT_EMDASH_NATIVE_HOMD_INDEX_TARGET_DESIGN.md#native-carrier-and-higher-source-shifts)
+records the strict reference calculation:
+J:O(Z)→Cat, S:D₁₂(Z)→Cat, P_D:D₂(Z)→Cat, with negative source T_*(E).
+The additional shift D≥₃ is needed when internalizing R itself. These are
+semantic mask calculations, not newly installed operators or automatic
+generic lax-profile qualifications. The earlier finite R(Z) shorthand did
+not distinguish D₂ from R; it is not the proposed full higher signature.
+
+Final gate: the [guarded driver](../emdash2/scripts/check_native_homd_index.sh)
+passes at `/tmp/emdash-native-homd-index.XrDjky`. Its source-prefix SHA-256
+is the unchanged `c120edf0…`; the complete identities are in the manifest.
+The driver verifies that homd_int and its extracted-action owners are absent
+from this prefix and that the reviewer does not call the later Sigma map
+action. Prefix and reviewer have identical complete warning inventories:
+935 critical pairs / 137 pattern reports. Strict LHS audits pass for both.
+The copied full kernel remains explicitly untested by this ingredient gate.
+
+**Disposition:** native shared-index carrier/projection ingredient checked.
+The next step is whole varying-x internalization at the correct shifted
+bases and actual transformation profiles, then the D-map/module action and
+complete native Homd target. The carrier's independent construction removes
+one circularity concern; it does not automatically qualify those later
+actions or the whole repaired nucleus. Active kernel and TypeScript sources
+are unchanged.
+
 ### NUH-1B2c: Shared target index and genuine base 2-cells
 
 The continuation from `4c6d19af` is progress: the preceding tranche preserved
@@ -212,8 +282,9 @@ The proposed supporting index Sₓ(D) retains objects (y,v,a:x→y), arrows
 2-cells. It keeps D over Z. The native source-fixed Hom formula is a whole
 functor on this shared index in the strict 2-dimensional reference profile.
 Source change is S(r):Sₓ′→Sₓ; a source 2-cell r⇒r′ gives S(r′)⇒S(r).
-Thus the candidate P_D(x)=Fun(Sₓ(D),Cat) has the expected R(Z) source base
-without replacing the original D by a family over R(Z).
+Thus the candidate P_D(x)=Fun(Sₓ(D),Cat) has the expected reversal of the
+source 2-cell without regrading the original D. The finite R(Z) shorthand
+is refined to D₂(Z) by the higher-slot audit in NUH-1B2d.
 
 The independent [finite model audit](../emdash2/audits/homd_target_mixed_variance_model.py)
 passes both countermodels and all index axioms, strict source functors and
@@ -441,15 +512,17 @@ projections and computation must be specified together before promotion.
 | NUH-1B2a negative-section ingredient | refined object/whole-map and constant-family prototype checked on preferred prefix; unrestricted lax covariance rejected |
 | NUH-1B2b full-source polarity isolation | complete as an unpromoted experiment; terminal/constant whole and point beta, further Hom and rejection controls pass under explicitly retained old variance |
 | NUH-1B2c shared-index target design | old y-local architecture refuted by strict finite coefficient models; candidate shared index/source variance checked at dimension 2, full native higher target pending |
+| NUH-1B2d native shared-index ingredient | carrier/arrow/whole projection and source-Hom direction check before homd_int; whole x-family and D-map/profile qualification pending |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue with the shared-index/module target in NUH-1B2c. Its finite model
-now supplies the x/u/y/v/base-Hom direction table and a correct source
-2-cell comparison while keeping D over Z. Extend that account to the actual
-native higher context and retained transformation profiles, with an explicit
-noncircular dependency, before another coupled source candidate. The old
-y-local target is rejected; its finite counterexamples and all Empty routes
-remain rejection controls. The unrestricted lax-map obstruction is still
-real and the full ω-dimensional target is not yet qualified. All
+Continue with whole x-family internalization of the native shared index in
+NUH-1B2d, using the strict reference source masks as a constraint and
+qualifying the actual transformation environment. Preserve T in the native
+negative fibre-Hom slot; do not extrapolate the finite R(Z) shorthand to
+the full higher family. The native carrier/first projection already check
+without homd_int; general D-map action and the mixed internal-action profile
+remain to qualify before the coupled full source candidate. The old y-local
+target is rejected; its finite counterexamples and all Empty routes remain
+rejection controls. The full ω-dimensional target remains unqualified. All
 spectral/stabilization brainstorming is out of scope and is not a dependency.

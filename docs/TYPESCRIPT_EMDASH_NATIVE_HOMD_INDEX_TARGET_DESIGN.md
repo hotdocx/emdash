@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active design evidence for NUH-1B2c; finite strict 2-dimensional model checked, ω-categorical target not yet qualified
+Status: active design evidence for NUH-1B2c/d; finite model and native index ingredient checked, full ω-categorical target not yet qualified
 
 Parent: [implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -142,19 +142,24 @@ the triangle a∘r⇒a∘r′. This retains the noninvertible cell; it is not
 an equality of the two source-change functors.
 
 At this profile and dimension, S is contravariant in both source arrows
-and source 2-cells. Applying the strict functor-category construction gives
-the following candidate whole target, with the appropriate universe levels:
+and source 2-cells. The original finite calculation abbreviated the resulting
+P_D source as R(Z), since Z has no nontrivial cells above dimension 2.
+That abbreviation cannot determine the higher source duality or the
+negative u-slot when fibres themselves contain 2-cells. The refined strict
+reference signature is:
 
 ```text
 P_D(x) = Fun(Sₓ(D), Cat),
-P_D : R(Z) → Cat,
-homd_int(F) : Eᴼ ⇒ P_D over R(Z).
+P_D : D₂(Z) → Cat,
+homd_int(F) : T_*(E) ⇒ P_D over D₂(Z).
 ```
 
-Here R reverses dimensions from 2 upwards and O reverses all positive
-dimensions. In this strict 2-dimensional model only their dimensions 1/2
-are tested. The displayed whole signature is a design target, not a checked
-new LP declaration or proof of the ω-dimensional extrapolation.
+Here D₂ reverses dimension 2 only; T reverses dimension 1 only, and
+T_*(E) has fibre T(Eₓ) and the corresponding D₂(Z) base. The displayed
+whole signature is a design target, not a checked new LP declaration or
+qualification for an arbitrary lax/Gray universe. The next section derives
+these shifts and distinguishes them from total duality O and the homwise
+dual R.
 
 | Variable or action | Required reading in the reference model | Native owner to preserve |
 | --- | --- | --- |
@@ -163,7 +168,7 @@ new LP declaration or proof of the ω-dimensional extrapolation.
 | a in HomZ(x,y) | contravariant: precompose E(a⇒a′) | homd_ |
 | target y change | shared index arrow (s,β,θ), with its actual compatibility | homd_src_sec and its whole action; revise its classifier |
 | source r:x→x′ | P_D(r) is restriction along S(r) | homd_int |
-| source ρ:r⇒r′ | P_D reverses the 2-cell; Eᴼ has the same base variance | native internal Hom action and higher projections |
+| source ρ:r⇒r′ | P_D reverses the 2-cell; T_*(E) has the same base variance | native internal Hom action and higher projections |
 | general D input | D remains over Z; Sₓ(D) retains its original action | no D↦D′ over R(Z) premise |
 
 Variation of the family input also has a concrete reference direction. For
@@ -191,10 +196,71 @@ with correcting that classifier. Do not silently infer the old whole type
 from the valid fixed-source formula.
 
 This resolves the old input-base mismatch at the level of the proposed
-strict 2-dimensional target expression: D is an input to Sₓ(D), rather
-than being incorrectly inserted into a mixed-family constructor over
-R(Z). It does not establish that the higher-dimensional constructor exists
-with every current generic profile.
+target expression: D is an input to Sₓ(D), rather than being incorrectly
+inserted into a mixed-family constructor over a changed base. It does not
+establish that the higher-dimensional constructor exists with every current
+generic profile.
+
+## Native Carrier And Higher Source Shifts
+
+Let C=ΣD and π:C→Z be the existing first projection. The shared index has
+the following candidate native expression, with Hₓ=HomZ(x,π(−)):
+
+```text
+Jₓ = Σ_(R C)(Hₓᴼ),
+Sₓ(D) = R(Jₓ),
+π_S = π∘R(π_J).
+```
+
+An object is the existing nested pair ((y,v),a). An arrow retains a total
+arrow m:(y,v)→(z,w) and θ:b⇒π(m)∘a. For the finite ordinary-fibre
+model, this gives exactly β and θ in the shared index above. The outer R
+restores the base 2-cell direction after the fibre duality. For arbitrary
+higher cells this remains a candidate whose transformation environment
+must be qualified, not a claim that arbitrary dualities preserve laxity.
+
+There is an important source dependency distinction. The current Sigma
+carrier/Hom and its first projection precede homd_int. Sigma Hom uses homd_,
+which is already defined through ordinary hom_con and fibre evaluation.
+The later Sigma *map action* uses extracted displayed laxity; homdc_int
+explicitly calls homd_int. The carrier/first-projection expression above
+can therefore be tested before homd_int exists, without importing that
+later map-action dependency. Its whole x and D actions still require their
+own dependency audit.
+
+The strict-cartesian reference dimensions are determined as follows. Write
+D≥₃ for reversal of dimensions 3 and above, D₁₂ for reversal of dimensions
+1 and 2, and D₂ for reversal of dimension 2 only. These are semantic masks
+here, not new installed primitives.
+
+```text
+H_int : T(Z) → Catd(C),
+R(H_int), pointwise family O and totalization give J : O(Z) → Cat,
+internal R has source D≥₃(Cat),
+S : D≥₃(O(Z))=D₁₂(Z) → Cat,
+P_D : T(D₁₂(Z))=D₂(Z) → Cat.
+```
+
+The shift for internal R follows from components: an n-transformation is
+an (n+1)-cell of the category universe. Reversing component dimensions
+2,3,… therefore reverses universe dimensions 3,4,… . Similarly,
+dimension-1 fibre transposition has universe/base source D₂, not R.
+These bookkeeping identities hold in the strict reference environment;
+the availability of each enriched operator for a lax profile is separate.
+
+A second finite counterexample fixes the u-slot independently. Let C be
+the walking 2-cell p⇒q:x→y and consider HomC(−,y). Its arrow images are
+the two functors 1→[1] selecting p and q. A total-dual source O(C) would
+require a transformation in the direction q→p, which does not exist.
+The source T(C) retains the available direction p→q. This extends the
+earlier finite audit, whose ordinary fibres could not distinguish O from T
+on this axis. In particular, do not replace T_*(E) by Eᴼ merely to use the
+already prototyped total-op family operator.
+
+O/R remain the preferred public total-duality basis. They do not exhaust
+the shifts required to internalize their own operations or ordinary Hom
+transposition. This refines the finite target signature; it does not revive
+the old covariant op:Cat→Cat or unrestricted same-base opposite families.
 
 ## Profiles And Foundational Ownership
 
@@ -249,6 +315,19 @@ action, and exact source-transport comparisons. Noninvertible source
 This checks finite reference models, not an emdash proof or general
 ω-category theorem. No active kernel source, rule, profile, positive
 registry, catalog or health snapshot is changed by this design tranche.
+
+The [native index prototype](../emdash2/audits/native_homd_index_prototype.lp)
+checks the carrier expression, point and arrow introductions, whole target
+projection, literal point/arrow projection comparisons, retention of the
+original triangle, and the projection's next Hom action on the preferred
+prefix ending before homd_int. It also checks native represented source
+2-cell action over T(C) and rejects total O(C), reversed source 2-cells
+and reversed triangles. The
+[guarded driver](../emdash2/scripts/check_native_homd_index.sh) checks exact
+prefix identity and absence of the native dependent-Hom action owners,
+then compares complete warning inventories and strict LHS audits. Whole
+x-family internalization, general D-map action and generic lax profiles
+are explicitly outside this prototype's claimed qualification.
 
 Next: specify the general shared index/module target and its transformation
 profile in native terms, with the correct higher base/fibre cells; preserve

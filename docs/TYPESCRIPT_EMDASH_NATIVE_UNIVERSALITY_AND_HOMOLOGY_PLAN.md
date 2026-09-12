@@ -269,6 +269,8 @@ must not label those alternatives validated implementations.
 | D-NUH-009 | Negative sections act through actual maps between the dual families; do not infer unrestricted covariance on old lax Catd(K) by inverting its comparison cells |
 | D-NUH-010 | The full-source old-variance polarity isolation qualifies a native terminal/constant beta and direction constraint only; combine it with the preferred shifted bases and arbitrary-family profiles before proposing the final target |
 | D-NUH-011 | Strict finite coefficient models refute either base-2-cell orientation of the old unrestricted y-local target; pursue the native shared triangular index/module target with original D/E inputs, preserving homd_int ownership and noncircular dependencies |
+| D-NUH-012 | Native Hom contravariance in u requires dimension-1 transposition T; the strict reference family base is D₂(Z), not the finite model's indistinguishable R(Z) shorthand. Track the further source shifts when internalizing R; preserve total O/R for their actual roles |
+| D-NUH-013 | The shared-index carrier and first projection can use the corrected pre-homd_int Sigma substrate. Qualify whole x/D actions separately; do not conflate that independent carrier with the later Sigma map action's native-laxity dependency |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -368,6 +370,23 @@ the complete native shared-index/module target, avoiding a definition
 through Sigma/comma code that already requires the same homd action.
 No active LP source or TypeScript implementation changed in this design
 tranche. No spectral or endpoint-checker research was started.
+
+NUH-1B2d now supplies a checked native shared-index ingredient on the
+preferred prefix ending before homd_int. Existing Sigma, represented Hom
+and duality owners define its carrier, point/arrow introductions and whole
+projection, with actual arrow projection, retained triangle and further Hom
+controls. No new primitive, rule or unifier is added. The guarded driver
+checks the missing dependency boundary and identical complete warning
+inventories (935 critical pairs / 137 pattern reports), with strict LHS
+audits. This does not qualify the untested full kernel or general lax maps.
+
+A genuine fibre 2-cell also separates the native T source from total O.
+The design now records the strict higher shifts for the whole index and
+target: S over D₁₂(Z), P_D and T_*(E) over D₂(Z). Those masks were
+indistinguishable from the earlier shorthand in the finite ordinary-fibre
+test. Next implement and qualify whole varying-x action and its actual
+profiles, then the D-map/module action and full native target. The active
+nucleus, ordinary homology implementation and TypeScript remain unchanged.
 
 ## Persistent Goal Launch Prompt
 
