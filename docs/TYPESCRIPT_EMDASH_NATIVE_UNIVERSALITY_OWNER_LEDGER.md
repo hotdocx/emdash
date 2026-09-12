@@ -61,8 +61,8 @@ observations of this source identity, not enduring authority.
 | internal displayed hom action and extracted laxity | After the native homd ladder; Sigma consumes this action | Preserve the noncircular dependency: native homd action → extracted laxity → Sigma action |
 | current displayed Eval/pairing/identity additions | Four post-anchor source hunks | Retain their legitimate computations while migrating every affected opposite/base annotation; historical prefix cannot validate them |
 
-The source types are not a semantic consistency certificate. The two known
-defects are still present, and the prospective repair must interpret the
+The source types are not a semantic consistency certificate. The known
+inherited defects are still present, and the prospective repair must interpret the
 whole collection together.
 
 ## First Coupled Target Question
@@ -183,6 +183,53 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-1B2c: Shared target index and genuine base 2-cells
+
+The continuation from `4c6d19af` is progress: the preceding tranche preserved
+a qualified full-source polarity isolation. At resumption the dedicated
+worktree was clean, its baseline ancestor and active source blob unchanged;
+all 62 worktrees were inspected, with no unrelated changes made.
+
+The [shared-index target design](TYPESCRIPT_EMDASH_NATIVE_HOMD_INDEX_TARGET_DESIGN.md)
+now strengthens the base-2-cell obstruction. On a strict walking α:p⇒q,
+the old local target requires comparison between H(D(p)*,p) and
+H(D(q)*,q). The two coordinates have opposite variance. Two finite strict
+coefficient models realize diagonal values (1,0) and (0,1), where 0 is Empty
+and 1 is Terminal. Either orientation of a putative whole base action would
+therefore require a functor 1→0. The examples come from the original native
+endpoint formula with actual E/D and strict F; they are not excluded by
+restricting to native Hom values. This is a semantic counterexample,
+independent of the inherited LP inconsistencies and of normalization.
+
+Consequently, stop trying to repair this y-local family by changing only its
+base annotation, its fibre-op spelling or its section polarity. The negative
+section experiments remain legitimate scoped constraints/computations, but
+do not by themselves supply the general target architecture.
+
+The proposed supporting index Sₓ(D) retains objects (y,v,a:x→y), arrows
+(s,β:D(s)v→w,θ:b⇒s∘a), and their actual triangular compatibility at
+2-cells. It keeps D over Z. The native source-fixed Hom formula is a whole
+functor on this shared index in the strict 2-dimensional reference profile.
+Source change is S(r):Sₓ′→Sₓ; a source 2-cell r⇒r′ gives S(r′)⇒S(r).
+Thus the candidate P_D(x)=Fun(Sₓ(D),Cat) has the expected R(Z) source base
+without replacing the original D by a family over R(Z).
+
+The independent [finite model audit](../emdash2/audits/homd_target_mixed_variance_model.py)
+passes both countermodels and all index axioms, strict source functors and
+their comparison, native Hom observations and source/fibre action checks.
+The x-index has 5 objects, 14 arrows and one nonidentity noninvertible
+2-cell. Some source-2-cell observations are actual Empty→Terminal functors,
+so the model does not identify them with invertible cells. This is finite
+strict 2-dimensional evidence; it is not a Lambdapi or ω-level qualification.
+
+The design records the general family-map direction and the remaining
+mixed-profile tdapp1_int/fdapp1_int obligation. It also explicitly forbids
+defining the target via a Sigma/comma operation that already depends on the
+same native Hom action. Next qualify the supporting native context/index
+and its full higher action, including laxity profiles and this noncircular
+dependency, before proposing another full LP candidate. No new primitive,
+active rule, registry or TypeScript behavior is installed by this tranche.
 
 ### NUH-1B2a: Derived negative-section operator
 
@@ -393,14 +440,16 @@ projections and computation must be specified together before promotion.
 | NUH-1B2 complete native Homd target variance/polarity design | active; resolve the corrected section direction and all bases/profiles together |
 | NUH-1B2a negative-section ingredient | refined object/whole-map and constant-family prototype checked on preferred prefix; unrestricted lax covariance rejected |
 | NUH-1B2b full-source polarity isolation | complete as an unpromoted experiment; terminal/constant whole and point beta, further Hom and rejection controls pass under explicitly retained old variance |
+| NUH-1B2c shared-index target design | old y-local architecture refuted by strict finite coefficient models; candidate shared index/source variance checked at dimension 2, full native higher target pending |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue with NUH-1B2 by joining the preferred-basis NΠ ingredient and the
-qualified polarity constraint at the semantic interface. Write the complete
-x/u/y/v/base-Hom variance table, including transformation profiles, for the
-original D/E inputs before another coupled source candidate. The unresolved
-R(Z) versus Z mismatch and unrestricted lax-map obstruction are still real;
-the old-variance isolation does not discharge them. Keep all Empty routes
-as rejection controls and specify noninvertible base-2-cell action. All
+Continue with the shared-index/module target in NUH-1B2c. Its finite model
+now supplies the x/u/y/v/base-Hom direction table and a correct source
+2-cell comparison while keeping D over Z. Extend that account to the actual
+native higher context and retained transformation profiles, with an explicit
+noncircular dependency, before another coupled source candidate. The old
+y-local target is rejected; its finite counterexamples and all Empty routes
+remain rejection controls. The unrestricted lax-map obstruction is still
+real and the full ω-dimensional target is not yet qualified. All
 spectral/stabilization brainstorming is out of scope and is not a dependency.

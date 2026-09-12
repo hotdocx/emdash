@@ -179,13 +179,14 @@ drift. A prefix is useful isolation evidence but not a full-kernel repair.
 Do not run an old driver that bypasses the current resource guard. Do not
 reset a worktree or accept an old patched binary to recover its result.
 
-The first design question is the full native `Homd_target_section_catd`
-boundary after corrected duality: preserve the original supplied family and
-native constructor while jointly correcting the mixed-family target's base.
-An arbitrary R(Z)=Z equation or new replacement-family input rejects the
-candidate. A separate question is which previously prototyped shifted-dual
-actions need a stricter or changed laxity profile; do not assume every such
-action follows from the object-level duality formulas.
+The first target review exposed both the native section-polarity defect and
+the shifted-base mismatch. NUH-1B2c now refutes the old unrestricted y-local
+target on strict finite coefficient models, so changing its annotations is
+no longer the proposed architecture. Qualify the shared native index/module
+target, preserving the original supplied families and homd constructor.
+An arbitrary R(Z)=Z equation or new replacement-family input still rejects
+a candidate. Previously prototyped shifted-dual actions also need their
+actual strict/lax profiles; they do not follow just from object formulas.
 
 NUH-1B1 adds a necessary polarity constraint: the old positive section over
 the opposite target base produces a reverse Hom action and a closed Empty
@@ -267,6 +268,7 @@ must not label those alternatives validated implementations.
 | D-NUH-008 | The native-target positive-section polarity admits a reverse Hom functor and Empty; correct section direction together with base variance and add this route to the repair's negative controls |
 | D-NUH-009 | Negative sections act through actual maps between the dual families; do not infer unrestricted covariance on old lax Catd(K) by inverting its comparison cells |
 | D-NUH-010 | The full-source old-variance polarity isolation qualifies a native terminal/constant beta and direction constraint only; combine it with the preferred shifted bases and arbitrary-family profiles before proposing the final target |
+| D-NUH-011 | Strict finite coefficient models refute either base-2-cell orientation of the old unrestricted y-local target; pursue the native shared triangular index/module target with original D/E inputs, preserving homd_int ownership and noncircular dependencies |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -349,6 +351,23 @@ library-consumer migration is claimed. NUH-1B2 remains active: specify the
 joint native variance/profile table and resolve the shifted-base input
 problem before the coupled full-owner candidate. The universality/homology
 refactors and model/reifier work have not started implementation.
+
+NUH-1B2c now rules out the old local target independently of LP checking.
+Two strict finite coefficient models on a walking noninvertible 2-cell force
+1→0 under either attempted base-2-cell orientation. Their native Hom values
+work instead on a proposed shared triangular index Sₓ(D). Its finite
+semantic audit checks all index axioms, source action and native Hom
+observations, including noninvertible Empty→Terminal components. The
+[target design](TYPESCRIPT_EMDASH_NATIVE_HOMD_INDEX_TARGET_DESIGN.md) records
+the joint direction table, original D/E inputs, actual mathematical
+counterexamples, and the remaining ω/profile and native dependency gates.
+
+The prior full-source negative-section experiment is preserved as scoped
+evidence; it is not extended into the final general architecture. Next is
+the complete native shared-index/module target, avoiding a definition
+through Sigma/comma code that already requires the same homd action.
+No active LP source or TypeScript implementation changed in this design
+tranche. No spectral or endpoint-checker research was started.
 
 ## Persistent Goal Launch Prompt
 
