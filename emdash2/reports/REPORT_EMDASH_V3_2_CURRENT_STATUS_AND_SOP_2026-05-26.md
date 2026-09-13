@@ -199,9 +199,14 @@ are derived. The [exactness interface](../emdash3_2_one_cat_categorical_exactnes
 is fixed-map OmegaEquivAlong on this e, with a whole native zero-cone
 specialization and no supplied exactness inhabitant. Nineteen definitions,
 four proof-time comparisons and 34 new assertions retain the original data
-and action, adding no primitive or runtime rule. Native short-exact row
-comparisons, δ and its exactness proofs remain. The owner ledger records
-exact qualification and the ordinary-profile boundary.
+and action, adding no primitive or runtime rule. C5 now supplies
+[whole short-exact row comparisons and inverses](../emdash3_2_one_cat_short_exact_families.lp).
+The original h derives the whole zero law; native descent constructs γ,
+and fixed-map evidence on β/γ defines the kernel-cokernel pair. Both
+selected inverses retain whole action, with γ⁻¹ landing in the original
+Q(f). Nine definitions and 22 assertions add no primitive or rule. Whole
+fibre products/cover/δ and derived output exactness remain. The owner ledger
+records exact qualification and the ordinary-profile boundary.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

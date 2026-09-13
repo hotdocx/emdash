@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
+Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -158,14 +158,40 @@ same introduced constructor; exact comparison with their old bodies passes.
 The original a, its normality data and H selections therefore keep their
 computational owners. No new primitive, runtime rule or unifier is added.
 
-C5 is the next construction: obtain the whole cokernel row comparison
-γ:Q(f)⇒E₁D from the original h and its derived whole g∘f=0 cell, using the
-qualified descent. Together with the original kernel mate β:A⇒K(g), fixed-map
-OmegaEquivAlong evidence for β and γ expresses a whole kernel-cokernel pair.
-Construct both comparisons before packaging their invertibility. This will
-supply the short-exact row inverses used by the whole cover/covered-map/δ
-construction below. Do not run the old ordinary-record algorithm as the
-primary program or treat output exactness as a supplied capability.
+C5 now constructs the
+[whole cokernel row comparison and kernel-cokernel pair](../emdash2/emdash3_2_one_cat_short_exact_families.lp).
+Generic ordinary naturality of the exchanged h and initial-family uniqueness
+derive g∘f=0 as one whole path. The existing descent at F=Arr(f) gives
+
+```text
+γ : Q∘F ⇒ E₁D         E₁(transpose_Q(γ)) = g
+β : A ⇒ K∘D           (the original whole H boundary)
+ShortExactFamily(h) = OmegaEquivAlong(β) × OmegaEquivAlong(γ).
+```
+
+Both comparison maps are defined before their invertibility is supplied.
+The kernel inverse is a whole K(g)⇒A; the cokernel inverse is a whole
+E₁D⇒Q(f). The latter is not a section into the middle term E₀D. Existing
+inverse-candidate laws give both equations for each selected inverse, and
+generic action gives component and further Hom observations. There is no
+new equivalence grammar, ordinary factor dictionary, primitive, rewrite or
+unifier. The construction does not need global normality merely to express
+a kernel-cokernel pair; the connecting theorem retains the original Abelian
+normality where required.
+
+This is the whole short-exact input interface, not an output exactness proof
+or a concrete model constructor. The LES still has to derive its actual
+comparison invertibility. Formal comparisons with the retained ordinary
+row/exactness views remain obligations at their actual consumers.
+
+C6 next constructs the whole fibre-product family and its projections used
+by the connecting cover. Start from the existing whole categorical products
+and universal operations, with the original P/Q selections. Derive the
+required whole maps and compatibility cells internally; do not rebuild
+per-object cones or silently assume a whole additive/fibre-product interface
+that the current owners do not provide. Then construct the cover, covered
+map and coimage descent below and prove output exactness from the original
+short-exact-family data and Abelian structure.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

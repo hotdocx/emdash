@@ -4530,8 +4530,13 @@ Exactness of a chosen coherent family is now OmegaEquivAlong on this actual
 e in its functor category. The whole native zero-cone specialization does
 not assert that all zero pairs are exact. Point evidence is an observation
 of supplied whole evidence; LES exactness must still be proved from the
-short-exact input. The next construction supplies whole kernel-cokernel row
-comparisons for that input, then the connecting cover and universal descent.
+short-exact input. Whole kernel-cokernel row comparisons now supply that
+input interface. The original h derives g∘f=0, so γ:Q(f)⇒C is constructed
+by whole descent. ShortExactFamily(h) retains fixed-map invertibility of
+this γ and the original β:A⇒K(g). Their inverse candidates are whole
+transformations; γ⁻¹ targets Q(f), with no selected section into B.
+This is input structure, not a proof of output exactness or a concrete
+model. Whole fibre-product/cover and connecting descent remain next.
 Four proof-time comparisons preserve runtime owners, and the original H
 boundary and K/Q/N choices remain fixed. No general higher interchange or
 new homological normalization theorem is claimed by this ordinary scope.

@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
+Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,24 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C4b milestone (2026-09-13): the
+Current C5 milestone (2026-09-13): the
+[whole short-exact-family interface](../emdash2/emdash3_2_one_cat_short_exact_families.lp)
+retains invertibility of the actual kernel comparison β:A⇒K(g) and the
+constructed cokernel comparison γ:Q(f)⇒C. The original whole h derives
+g∘f=0, so γ is defined by native descent without a new caller square or
+zero proof. Native inverse mating reconstructs g. Both selected inverses
+are whole transformations; γ⁻¹ lands in Q(f), with no section into B.
+Nine definitions and 22 assertions add no primitive, rewrite or unifier.
+Normality is not needed merely to define this kernel-cokernel pair.
+
+C6 next forms the whole fibre-product family and its projections for the
+connecting cover, using the original categorical product/universal owners.
+The cover, covered map, quotient descent and derived output exactness remain
+required. Keep formal programs independent of ordinary factor dictionaries;
+record and qualify any missing whole interface at its actual consumer.
+Concrete model/reifier construction and the snake comparison remain later.
+
+The completed C4b milestone (2026-09-13): the
 [canonical whole image-to-kernel comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp)
 is constructed from the existing H boundary, its derived whole annihilation,
 original cokernel descent and the same selected Coim⇒Im inverse. It satisfies
@@ -38,9 +55,9 @@ Whole incoming observations precede K/Q selection. The original H boundary,
 K/Q and normality choices are retained. Nineteen definitions and four
 proof-time comparisons add no primitive, runtime rewrite or nucleus edit.
 The ordinary C1 scope is explicit; general lax/oplax interchange and the
-separate profile migration remain unqualified here. C5 next constructs whole
-short-exact row comparisons and their inverse interface, then the cover,
-covered map and universal descent for δ. The LES must derive exactness at
+separate profile migration remain unqualified here. C5 now supplies whole
+short-exact row comparisons and their inverse interface; the cover, covered
+map and universal descent for δ remain next. The LES must derive exactness at
 its output positions; it cannot assume the new predicate as its theorem.
 
 The completed C4a milestone (2026-09-13):
@@ -454,7 +471,8 @@ at the actual comparison, with its whole inverse and family restriction.
 C4a now supplies whole cokernel descent at arbitrary original diagram
 families, with reconstruction and uniqueness. C4b now constructs the
 canonical whole image-to-kernel comparison and its exactness predicate.
-Next construct whole short-exact row comparisons and build δ by universal
+C5 now constructs whole short-exact row comparisons and their inverse
+interface. Next build the whole fibre-product/cover and δ by universal
 descent, deriving its exactness comparisons at the actual output. The
 ordinary all-arrow/category bridge is optional compatibility work, not a primary prerequisite. Do not
 infer normality from K/Q existence or postulate LES exactness. Concrete
@@ -677,6 +695,7 @@ must not label those alternatives validated implementations.
 | D-NUH-046 | C4a derives whole cokernel descent from one whole annihilation cell at an arbitrary original diagram family D. The accepted reconstruction of Sym(D) in Functor_cat(B,C) forms the mate input while Q is evaluated on D itself. Native cancellation recovers the whole input; its target and uniqueness reconstruct the original u. Share the introduced constructor with canonical Coim⇒Im, preserving its old computation. No new primitive, rule or universal selection is added |
 | D-NUH-047 | C4b retains the original H boundary β, derives its whole incoming-kernel annihilation, descends through the original Q and composes with the same selected a_F inverse. Whole reconstruction and uniqueness characterize e:Im(f)⇒K(g). ExactFamily is existing OmegaEquivAlong on this actual e, not an exactness inhabitant or an isomorphism between independently selected objects. The native zero-cone specialization retains whole action |
 | D-NUH-048 | Use Cat-specific prewhiskering action views and keep native indices inside inverse/evidence eliminations. Four measured proof-time comparisons cover shape-arrow reindexing, constant precomposition, guarded shape-map composition and represented outer associativity. They preserve runtime heads and all relevant data; no object cast, new universality primitive or generic naturality rewrite is installed |
+| D-NUH-049 | C5 derives the original whole g∘f=0 from h, constructs γ:Q(f)⇒C by native descent, and retains fixed-map invertibility of the actual β and γ as OneCatShortExactFamily. Both inverses are selected from that same evidence; γ⁻¹ lands in Q(f), not B. No new splitting, comparison primitive or exactness theorem is supplied. Whole fibre products/cover/δ and derived output exactness remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -851,9 +870,9 @@ authority for evolving scope, decisions, implementation rows, experiments,
 validation and progress, under all active AGENTS/SOP instructions. Preserve
 foundational hom_int/homd_int. Continue from the implemented C2c4 whole
 comparison, native Abelian package, whole cokernel descent and C4b canonical
-image-to-kernel/exactness interface through native short-exact families,
-connecting/exactness proofs and retained homology/proof-CAS model/reifier
-work.
+image-to-kernel/exactness and C5 short-exact-family interfaces through whole
+fibre products, connecting/exactness proofs and retained homology/proof-CAS
+model/reifier work.
 Work autonomously through bounded reviewed tranches and
 make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running

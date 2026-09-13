@@ -3,6 +3,8 @@
    functor category or caller naturality squares are required. */
 require open emdash.emdash3_2_one_cat_cokernel_family_inputs;
 require open emdash.emdash3_2_one_cat_adjunction_family_views;
+require open emdash.emdash3_2_zero_arrow_family_observations;
+require open emdash.emdash3_2_zero_arrow_family_action_paths;
 
 // Prewhiskering preserves the canonical whole zero by initial/terminal uniqueness.
 symbol one_cat_zero_family_prewhisker_path [A B C : Cat]
@@ -107,3 +109,65 @@ symbol one_cat_zero_composite_prewhisker_path [A B C : Cat]
   C X F) (@comp_cat_fapp0 A B C Z F)) (λ h : τ (@Transf B C X Z), (@fapp1_fapp0 (Functor_cat B C) (Functor_cat A C)
   (@comp_cat_con_func A B C F) X Z h)) (@comp_fapp0 (Functor_cat B C) X Y Z u k) (@zero_arrow_family_zero_transf B C t
   T T0 X Z) p) (@one_cat_zero_family_prewhisker_path A B C C1 t T T0 F X Z));
+
+// The original whole h:J∘A⇒D derives g∘f=0 by generic naturality and initiality.
+symbol one_cat_zero_family_chain_path [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
+  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+    (@terminal_arrow_diagram_func C t T) A) D))
+  : τ (@= (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)) (@comp_fapp0 (Functor_cat
+    B C) A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func B
+    WalkingArrow_cat C D walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src
+    walking_arrow_tgt walking_arrow_generator) (@zero_arrow_family_incoming_transf B C t T A D h))
+    (@zero_arrow_family_zero_transf B C t T T0 A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)))
+≔ @eq_trans (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)) (@comp_fapp0
+  (Functor_cat B C) A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func B
+  WalkingArrow_cat C D walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src
+  walking_arrow_tgt walking_arrow_generator) (@zero_arrow_family_incoming_transf B C t T A D h)) (@comp_fapp0
+  (Functor_cat B C) A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func B
+  WalkingArrow_cat C D walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src
+  walking_arrow_tgt walking_arrow_generator) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C
+  (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_src))
+  (@zero_arrow_family_zero_transf B C t T T0 A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
+    (@eq_ap (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)) (@Transf B C A
+      (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
+      (λ v : τ (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)), (@comp_fapp0
+        (Functor_cat B C) A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)
+        (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat
+        C D walking_arrow_src walking_arrow_tgt walking_arrow_generator) v)) (@zero_arrow_family_incoming_transf B C t
+        T A D h) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+        (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_src)
+      (eq_refl (@zero_arrow_family_incoming_transf B C t T A D h)))
+    (@eq_trans (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)) (@comp_fapp0
+      (Functor_cat B C) A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func
+      B WalkingArrow_cat C D walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src
+      walking_arrow_tgt walking_arrow_generator) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C
+      (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_src)) (@comp_fapp0
+      (Functor_cat B C) A (@Const_func B C t) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)
+      (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+      (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_tgt) (@diagram_family_transf B WalkingArrow_cat C
+      (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) walking_arrow_src
+      walking_arrow_tgt walking_arrow_generator)) (@zero_arrow_family_zero_transf B C t T T0 A
+      (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
+      (@strict_component_naturality_path WalkingArrow_cat (Functor_cat B C)
+        (@sym_func B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+          (@terminal_arrow_diagram_func C t T) A)) (@sym_func B WalkingArrow_cat C D)
+        (@sym_func_func_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+          (@terminal_arrow_diagram_func C t T) A) D h)
+        walking_arrow_src walking_arrow_tgt walking_arrow_generator)
+      (@eq_ap (@Transf B C (@Const_func B C t) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
+        (@Transf B C A (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
+        (λ v : τ (@Transf B C (@Const_func B C t) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)),
+          (@comp_fapp0 (Functor_cat B C) A (@Const_func B C t) (@diagram_family_at_func B WalkingArrow_cat C D
+          walking_arrow_tgt) v (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat
+          WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) walking_arrow_src walking_arrow_tgt
+          walking_arrow_generator))) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat
+          WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_tgt) (@diagram_family_transf B
+          WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t
+          T0) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)) walking_arrow_src walking_arrow_tgt
+          walking_arrow_generator)
+        (@one_cat_initial_family_arrow_path B C C1 t T0 (@diagram_family_at_func B WalkingArrow_cat C D
+          walking_arrow_tgt) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat
+          WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D h walking_arrow_tgt))));

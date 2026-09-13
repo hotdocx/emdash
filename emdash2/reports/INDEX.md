@@ -92,7 +92,10 @@ constructor; its old computation is preserved. C4b now constructs the
 with derived annihilation, native reconstruction and uniqueness. Its
 [categorical exactness interface](../emdash3_2_one_cat_categorical_exactness.lp)
 uses fixed-map evidence on that comparison and supplies no exactness
-inhabitant. Whole short-exact row comparisons, δ and exactness proofs remain.
+inhabitant. C5 now supplies [whole short-exact row comparisons and inverses](../emdash3_2_one_cat_short_exact_families.lp)
+from the original h, retaining the actual kernel-cokernel pair and a
+cokernel inverse into Q(f). Whole fibre products/cover, δ and its derived
+exactness proofs remain.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

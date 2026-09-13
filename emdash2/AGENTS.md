@@ -224,7 +224,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   existing OmegaEquivAlong on this actual e, with a whole native zero-cone
   specialization and no exactness inhabitant. Nineteen definitions and four
   proof-time comparisons add no primitive, runtime rule or object cast.
-  Native short-exact row comparisons and whole δ/exactness proofs remain.
+  The short-exact-family owner now derives g∘f=0 from the original whole h,
+  constructs γ by descent and retains fixed-map invertibility of β and γ.
+  Both inverses are whole; the cokernel inverse lands in Q(f), not the
+  middle term. Nine definitions add no primitive, rule or extra caller
+  square. Whole fibre-product/cover/δ and output exactness proofs remain.
   General lax/oplax interchange is not qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
+Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,67 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C5: Whole short-exact row comparisons and inverses
+
+**Implemented after bb83a8b0.** The existing
+[whole zero-family path owner](../emdash2/emdash3_2_one_cat_zero_family_paths.lp)
+adds one derived g∘f=0 path for the original h:J∘A⇒D. Exchange puts h in
+WalkingArrow→Functor_cat(B,C); the existing ordinary naturality theorem
+and initial-family uniqueness prove the equation. The incoming native parent
+view is compared through the existing sufficient whole-evaluation congruence.
+No additional zero/naturality input is requested, and no rule is added.
+
+The eight-definition
+[short-exact-family owner](../emdash2/emdash3_2_one_cat_short_exact_families.lp)
+constructs γ:Q(f)⇒E₁D by the original whole descent. Its native inverse mate
+recovers the complete coherent input, and whole target reconstruction
+returns the original outgoing g. The original kernel mate β is the existing
+H boundary, with no replacement program or selection.
+
+OneCatShortExactFamily is the product of existing OmegaEquivAlong evidence
+on these actual β and γ. Its constructor/projections retain both supplied
+witnesses. Whole inverse operations select their existing left inverse
+candidates. The already proved inverse-candidate law supplies each other
+inverse equation. In particular γ⁻¹:E₁D⇒Q(f) does not select a section into
+E₀D; non-split rows are not excluded by this interface. No global normality
+input is needed merely to define the kernel-cokernel pair.
+
+There are 22 new assertions: constructor/evidence retention, both whole
+inverse equations for both maps, their component and Hom/next-Hom actions,
+rejection of evidence on unrelated maps, rejection of the incorrect middle-
+term target for γ⁻¹, native whole input cancellation, reconstruction of g,
+and the original Q(f) point plus whole/next-Hom reconstruction observations.
+No primitive, rewrite, unifier, object cast or ordinary universal dictionary
+is introduced. This package supplies the short-exact input condition; it
+is not a proof of LES exactness or a construction of concrete row evidence.
+
+Final warning-enabled, serial resource-guarded checks use ≤90 seconds per
+target. Source logs are `emdash3_2_one_cat_zero_family_paths-20260913-183247.log`
+and `emdash3_2_one_cat_short_exact_families-20260913-183251.log`; the complete
+reviewer passes in `one_cat_short_exact_families-20260913-183124.log`, all under
+`emdash2/logs/probes/`. Retained exactness and comparison consumers pass in
+`one_cat_categorical_exactness-20260913-183303.log` and
+`one_cat_image_kernel_comparison-20260913-183308.log`. The pre-edit exactness
+baseline passed in `one_cat_categorical_exactness-20260913-181946.log`.
+
+The new source and reviewer match their same-order dependency-only joins
+`nuh4c5_dependencies-20260913-183255.log` and
+`nuh4c5_reviewer_dependencies-20260913-183259.log` exactly at 1208 critical
+pairs / 159 replaceable-pattern warnings. Categories, source locations,
+term heads, participant-rule families and parser diagnostics all match.
+Both edited/new sources pass strict rule-LHS audits (no clauses added).
+Strict catalog freshness, shell syntax, active-reference/header lint and
+source-only health pass (995 registered files, with no aggregate checker
+run). Changed Markdown links, source/prototype agreement and the exact
+staged scope are checked before checkpointing. No TypeScript or repository-
+wide typecheck is run.
+
+C6 next forms the whole fibre-product family and its projections for the
+connecting cover. The cover/covered map, its universal descent, derived
+output exactness, retained-model comparisons, model/reifier automation and
+the snake comparison remain required. The goal stays active and all user
+deferrals remain unchanged.
+
 ### NUH-4C4b: Canonical whole image-to-kernel comparison and exactness
 
 **Implemented after 917a2981.** Nineteen new definitions across five new
@@ -424,7 +485,7 @@ No TypeScript or repository-wide typecheck is run. The proof-time rule
 controls also passed at both full temporary owners before promotion in
 `nuh4c4_rule_controls-20260913-174729.log`.
 
-C5 next constructs the actual whole cokernel row comparison γ alongside the
+**Historical C4b boundary, advanced by C5 above:** construct the actual whole cokernel row comparison γ alongside the
 existing kernel mate β, then packages their fixed-map invertibility as the
 short-exact-family interface. Whole cover/covered-map/δ, its derived exactness,
 concrete model/reifier automation and the snake comparison remain required.

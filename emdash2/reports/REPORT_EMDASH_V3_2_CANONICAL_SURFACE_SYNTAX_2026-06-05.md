@@ -2025,6 +2025,13 @@ is existing OmegaEquivAlong on this specific map, not arbitrary object
 isomorphism or an exactness axiom. `zero_arrow_cone_image_kernel_transf`
 specializes the whole map to the existing native input category.
 
+`one_cat_zero_family_chain_path` derives g∘f=0 from the original whole h.
+`one_cat_row_cokernel_comparison` is γ:Q(f)⇒C; its native reconstruction
+path returns g. `OneCatShortExactFamily` retains OmegaEquivAlong on the
+actual β and γ, with constructor, evidence projections and whole inverse
+operations. `one_cat_short_exact_family_cokernel_inverse` targets Q(f),
+not B; this notation introduces no splitting or new equivalence type.
+
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these
 agreements. Formal whole action remains the runtime owner for generic
