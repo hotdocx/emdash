@@ -1,5 +1,5 @@
 require open emdash.emdash3_2_one_cat_arrow_diagrams;
-require open emdash.emdash3_2_chain_pair_zero_cones;
+require open emdash.emdash3_2_chain_pair_diagrams;
 require open emdash.emdash3_2_chain_pair_cubical_maps;
 
 /* Retain whole action in the original equality-valued raw-map parameter. */

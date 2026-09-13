@@ -73,8 +73,19 @@ with explicit P/Q. The [shared raw data](../emdash3_2_commutative_algebra_freyd_
 and legacy selected definitions are unchanged. Six focused checks retain
 the raw classes/agreement, actual H and incoming-boundary reconstruction;
 exact dependency and legacy warning comparisons pass. No new rule or
-primitive is added. Native map migration is next; concrete whole-model and
-reifier construction remain pending.
+primitive is added.
+
+NUH-4B1/2 now builds [direct native maps](../emdash3_2_one_cat_chain_pair_native_maps.lp)
+from the original chain-map factors without K/P or extra caller coherence
+premises. Its private ordinary comparison retains the native Hom's
+represented postcomposition endpoint; an existing proof-time comparison
+supplies the raw reading without changing a rule. The whole map action
+then [composes with H's Hom action](../emdash3_2_one_cat_chain_pair_homology_maps.lp).
+Original components, actual H and record endpoints, and next Hom actions
+check. The outgoing-diagram map definitions are unchanged apart from their
+narrower import; complete warning deltas are classified in the ledger.
+Freyd raw-map specialization, concrete whole-model and reifier construction
+remain pending.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

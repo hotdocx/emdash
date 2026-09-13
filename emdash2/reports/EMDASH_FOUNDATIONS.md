@@ -4392,7 +4392,17 @@ H and its original-pair record; the original quotient classes, agreement
 observation, actual H and incoming-boundary reconstruction are retained.
 This separates raw input formation from whole model structure. It does
 not construct P/Q from matrix equations or finish model/reifier automation.
-Native map specialization remains the next consumer migration.
+
+Direct native maps are now constructed from the original generic chain-map
+factors before kernel selection. In the ordinary profile, the upper factor
+and terminal-zero property determine the required comparison between
+b∘h₀ and h₁∘J(a). The existing diagram comparison derives this cell; callers
+supply no additional naturality law. The native Hom retains its represented
+postcomposition endpoint, related to raw composition by the existing typed
+comparison. Whole PathLift action in the raw-map parameter then composes
+with H's original Hom functor. All original components and the same record
+H endpoints are retained, including the next Hom action. Freyd raw-map
+specialization remains the next consumer migration.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

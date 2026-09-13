@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-3 and NUH-4A1/2 checkpointed; NUH-4A3 direct Freyd input/record path checked; native map migration next; NUH-1/2 duality work user-deferred
+Status: NUH-3 and NUH-4A1–3 checkpointed; NUH-4B1/2 native and whole-H maps checked; Freyd map specialization next; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -247,6 +247,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
 | [direct original-pair input](../emdash2/emdash3_2_one_cat_chain_pair_inputs.lp) and [its H record](../emdash2/emdash3_2_one_cat_chain_pair_homology_records.lp) | Original fields enter the existing native source without K/Q; the record then observes whole P/Q at the same pair | NUH-4A2 implemented; specialize to raw Freyd agreements and migrate actual map consumers next |
 | [direct Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_native_inputs.lp) and [its whole H/record](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology.lp) | Original raw morphisms/agreement form input without W/P; H then uses whole P/Q with the existing local categorical data | NUH-4A3 implemented; raw classes, agreement and H endpoint check; migrate native maps and model binding next |
+| [direct native maps](../emdash2/emdash3_2_one_cat_chain_pair_native_maps.lp) and [whole H action](../emdash2/emdash3_2_one_cat_chain_pair_homology_maps.lp) | Original raw-map factors and a derived ordinary comparison produce the native map without K/P; whole action feeds H | NUH-4B1/2 implemented; original components and record/H endpoints check; specialize to Freyd raw maps next |
 | [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [raw tests at original diagrams](../emdash2/emdash3_2_one_cat_zero_diagram_inputs.lp) | Actual reconstruction maps compose canonical raw tests into J(X)⇒d or d⇒I(X), retaining the original arbitrary d and raw b | NUH-3C3 implemented; use these inputs for ordinary records at K(d)/Q(d), without new selection or object casts |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
@@ -289,6 +290,84 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4B1/2: Native maps before kernel selection and whole H action
+
+**Implemented after b012be50.** The existing whole outgoing-diagram map
+functor now imports the independent outgoing-diagram owner. Both of its
+definitions are unchanged. The
+[direct native-map module](../emdash2/emdash3_2_one_cat_chain_pair_native_maps.lp)
+derives b∘h₀ ⇒ h₁∘J(a) at OneCat: the original upper factor supplies the
+source-component equality, and terminal-zero structure supplies equality
+of the target components. The existing whole-reconstruction/diagram-map
+comparison produces the private ordinary comparison. The public map uses
+the existing nested-Sigma Hom constructor and takes no K/P, extra equality,
+naturality or functoriality premise. Its whole action in the existing raw-map
+path category is obtained through PathLift.
+
+The first full prototype failed only when installing that comparison in
+the native Hom: the raw composite of two images under D had already reduced
+to a single D-action, whereas the native fibre retained represented
+postcomposition. The separate composites and ordinary comparison checked.
+The accepted construction keeps that native postcomposition endpoint and
+uses a private typed reflexivity view of the existing identity-family
+postcomposition/raw-composition unifier. It adds no computation rule or
+unifier, does not change native Hom, and does not reopen the Op/profile work.
+This is a representation comparison for composition, not a new naturality law.
+
+The [H-map module](../emdash2/emdash3_2_one_cat_chain_pair_homology_maps.lp)
+composes the whole native-map realization with H's existing whole Hom
+functor. Its point view is the same functor's application. It does not import
+the ordinary H-record module; those records are optional endpoint views in
+the reviewer. No H operation or per-map coherence structure is redefined.
+
+The [native-map reviewer](../emdash2/examples/one_cat_chain_pair_native_maps.lp)
+checks the original next component, outgoing diagram map, middle and previous
+components, and whole/point agreement; its retained negative distinguishes
+an unrelated map. The next Hom action is available. The
+[H-map reviewer](../emdash2/examples/one_cat_chain_pair_homology_maps.lp)
+has four checks: actual H application, both original-pair record endpoints,
+the whole map functor at those endpoints, and its next Hom action.
+
+Serial guarded, warning-enabled evidence in `emdash2/logs/probes/`:
+
+- baselines `chain_pair_zero_cone_maps-20260913-075743.log` and
+  `emdash3_2_chain_pair_diagram_maps-20260913-080025.log`;
+- raw native-fibre mismatch `nuh4b_native_maps-20260913-080227.log`;
+- prefixes `nuh4b_native_composites-20260913-080552.log` and
+  `nuh4b_native_comparison-20260913-080720.log` (the latter's completed log
+  was recovered after its tool handle expired; no checker remained running);
+- corrected native prototype `nuh4b_native_maps_postcomp-20260913-081249.log`;
+- H prototype `nuh4b_homology_maps-20260913-081713.log`;
+- H-map source `emdash3_2_one_cat_chain_pair_homology_maps-20260913-081940.log`;
+- native reviewer `one_cat_chain_pair_native_maps-20260913-082221.log`;
+- H-record reviewer `one_cat_chain_pair_homology_maps-20260913-082602.log`;
+- narrowed owner `emdash3_2_chain_pair_diagram_maps-20260913-082852.log`;
+- legacy reviewer `chain_pair_zero_cone_maps-20260913-083119.log`;
+- exact joins `nuh4b_diagram_map_dependencies-20260913-083209.log`,
+  `nuh4b_native_map_dependencies-20260913-083215.log`,
+  `nuh4b_homology_map_dependencies-20260913-083221.log` and
+  `nuh4b_homology_map_record_dependencies-20260913-083228.log`.
+
+The narrowed diagram owner matches its exact join at 1,244/169. Relative to
+the former 1,249/169 source, five adjunction-mate overlaps are no longer
+loaded; two existing composition overlaps between terminal_arrow_fapp0 and
+binary_products_K1a_fapp0/K2a_fapp0 are attributed at terminal_objects:96
+instead of triangular_binary_products:256/266 due to import order. Their
+actual participant rules were inspected. No new term head or participant
+family appears. Native map and H-map checks match their exact joins at
+1,279/169; the H-record
+reviewer matches its extended join at 1,284/169. The selected legacy reviewer
+retains its complete 1,249/169 inventory. All comparisons include locations,
+heads and participant families with zero parser issues. LHS audits and
+catalog pass; source-only health is refreshed to 944 files. Validation is local.
+
+**Next NUH-4B3:** move the existing raw Freyd composite-agreement and generic
+chain-map observations into a data owner without selected map adapters.
+Specialize the new native map and H action to that original raw data,
+filling the known local categorical observations. Preserve raw f₂/f₁/f₀
+and source/target H endpoints. Whole model binding, connecting/exactness,
+reifier automation and snake comparison remain later consumers.
 
 ### NUH-4A3: Direct Freyd raw inputs and whole-adjunction records
 

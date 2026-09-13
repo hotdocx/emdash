@@ -264,6 +264,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_commutative_algebra_freyd_native_inputs.lp)
   files+=(emdash3_2_commutative_algebra_freyd_adjunction_homology.lp)
   files+=(emdash3_2_chain_pair_diagram_maps.lp)
+  files+=(emdash3_2_one_cat_chain_pair_native_maps.lp)
+  files+=(emdash3_2_one_cat_chain_pair_homology_maps.lp)
   files+=(emdash3_2_adjunction_untranspose_naturality.lp)
   files+=(emdash3_2_zero_arrow_cone_map_introduction.lp)
   files+=(emdash3_2_kernel_presentation_inclusion_properties.lp)

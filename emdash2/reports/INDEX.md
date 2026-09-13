@@ -49,7 +49,10 @@ at the literal original pair. NUH-4A3 adds
 [direct Freyd input](../emdash3_2_commutative_algebra_freyd_native_inputs.lp)
 and [whole-adjunction H/record views](../emdash3_2_commutative_algebra_freyd_adjunction_homology.lp),
 preserving the raw morphism classes/agreement and actual H endpoint.
-Native map migration is next; concrete-model work remains later.
+NUH-4B1/2 adds [direct native maps](../emdash3_2_one_cat_chain_pair_native_maps.lp)
+and [whole H action](../emdash3_2_one_cat_chain_pair_homology_maps.lp), preserving
+the original components and record endpoints without selected kernel lifts.
+Raw Freyd map specialization is next; concrete-model work remains later.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
