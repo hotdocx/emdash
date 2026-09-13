@@ -14,8 +14,12 @@ and [mate functors](../emdash3_2_kernel_cokernel_adjunction_mates.lp).
 The [reviewer](../examples/kernel_cokernel_adjunctions.lp) checks whole/point
 cancellation and arbitrary diagram action without W/V inputs. Legacy
 presentations adapt into the new interface and reuse its structural maps;
-their regressions pass. Whole H-family and concrete-model migration remain
-the next active work in the living plan.
+their regressions pass. NUH-3B now supplies the
+[independent whole H-family](../emdash3_2_homology_adjunction_families.lp) and
+[native global H](../emdash3_2_zero_arrow_cone_adjunction_homology.lp), retaining
+the explicit ordinary target profile. Whole-functor comparisons and selected
+views pass. Derived ordinary universal records, raw input conversion and
+concrete-model migration remain active work in the living plan.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

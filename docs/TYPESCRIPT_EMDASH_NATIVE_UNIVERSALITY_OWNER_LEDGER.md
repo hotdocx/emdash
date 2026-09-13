@@ -25,8 +25,9 @@ The worktree starts at `cbef77e76fc292453c8814b5ecc6d62e84132f01`.
 Its active nucleus Git blob is
 `91f1974ece225e399604dce24710bf1437ad3ef5`. At launch the active LP sources
 and reviewers matched the final mathematical checkpoint `ff139362`.
-NUH-3A now adds independent whole-adjunction extensions and refactors the
-two legacy structural-map bodies. The nucleus itself remains unchanged.
+NUH-3A/B now add independent whole-adjunction and H-family extensions;
+legacy structural maps and H operations delegate into them. The nucleus
+itself remains unchanged.
 
 The preserved total-op patch is anchored to nucleus blob
 `5387c65ab75ddcfff4b5ffca9fb6f9d082084774`. The current nucleus adds 328 lines
@@ -154,13 +155,13 @@ presheaf argument's variance while preserving the native homd owners.
 | Owner | Current dependency | Intended next boundary |
 | --- | --- | --- |
 | [generic adjunction mates](../emdash2/emdash3_2_adjunction_mates.lp) | Defined whole Hom views of the existing adjunction comparison, with whole and point cancellation | Reuse as primary operation owners; preserve cut discriminators |
-| [whole K/Q structures](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp) and [their mates](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp) | Whole functors and native adjunction evidence; no W/V or selected-factor dependency | NUH-3A implemented; migrate H-family and derived ordinary views to this interface |
+| [whole K/Q structures](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp) and [their mates](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp) | Whole functors and native adjunction evidence; no W/V or selected-factor dependency | NUH-3A implemented; H-family migrated in NUH-3B; derive ordinary views next |
 | [kernel presentation](../emdash2/emdash3_2_kernel_adjunction_presentations.lp) and [cokernel presentation](../emdash2/emdash3_2_cokernel_adjunction_presentations.lp) | Legacy W/V-indexed choices, with adapters into the independent structures; structural maps now delegate there | Keep selected realization one-way; no mandatory old factor dictionary for new formal operations |
 | [kernel record](../emdash2/emdash3_2_kernel_adjunction_records.lp) and [cokernel record](../emdash2/emdash3_2_cokernel_adjunction_records.lp) | Whole endpoints; old selected universal evidence is transferred/recentered | Derive ordinary factor/uniqueness observations from the whole comparison at the stated profile |
 | [native zero cone](../emdash2/emdash3_2_zero_arrow_cones.lp) | Represented comma built from native homdc/Sigma | Reuse native ownership, with repaired variance; no independent cone grammar |
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
-| [whole H](../emdash2/emdash3_2_homology_families.lp) | β=K(h)∘η; H=Q∘Arr(β), currently parameterized by selected presentations | Keep this whole composite and migrate its structure dependencies |
+| [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
 | [direct connecting](../emdash2/emdash3_2_homology_record_connecting.lp) | Retained homology records and universal factors | Reuse mathematics and nonzero consumers while moving primary construction to whole universality |
 | [whole connecting](../emdash2/emdash3_2_homology_window_connecting_transformation.lp) | Declared whole transfor whose component is the direct construction | Preserve actual endpoints and generic action; audit the declaration/interpretation contract |
 | [finite iterator](../emdash2/emdash3_2_homology_bounded_generator.lp) | Retained row/map fields and whole H/δ with interior evidence | Reference consumer; symbolic endpoint debugging remains deferred |
@@ -168,8 +169,8 @@ presheaf argument's variance while preserving the native homd owners.
 | [native connecting](../src/v3_2/algebra_polynomial_freyd_homology_connecting.ts) | Snake method with retained endpoint comparisons/descent | Preserve as computational method; compare against the whole formal characterization |
 | [bounded model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts) | Supplied model and optional normality, prepared observations and explicit adoption | Automate repetitive model/reifier plumbing for the supported backend without upgrading trust claims silently |
 
-NUH-3A supplies the first whole K/Q and mate interface without W/V inputs.
-The full vertical consumer still needs the native H/input migration and a
+NUH-3A/B supply whole K/Q, mates and H without W/V inputs. The full vertical
+consumer still needs raw input conversion, derived ordinary records and a
 retained nonzero result with its realization contract. Adjunction triangles
 alone do not establish all interacting exactness laws.
 
@@ -198,6 +199,73 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-3B: Independent whole H-family and native input-category consumer
+
+**Implemented (2026-09-13), following c897aa0c.** The semantic chain
+K∘D, β=K(h)∘η_A and H=Q∘Arr(β) now lives in
+[homology_adjunction_families](../emdash2/emdash3_2_homology_adjunction_families.lp),
+whose inputs are KernelAdjunctionStructure/CokernelAdjunctionStructure.
+The six old W/V-indexed names delegate through the presentation adapters;
+there is one semantic implementation. The
+[native global application](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp)
+uses the existing zero-arrow-cone category and its explicit OneCat profile.
+This adds seven definitions and no primitives, rewrites or unifiers.
+
+The independent family and global H have ten- and sixteen-module transitive
+source dependency graphs respectively. Neither contains selected W/V,
+ComputationalKernel/Cokernel or KernelPresentation/CokernelPresentation
+owners. The native input constructor retains (A,d,h:J(A)⇒d) without any K/Q
+selection. This does not yet convert raw chain-pair zero evidence into h;
+the older chain-pair adapter still uses its selected boundary lift.
+
+The [family reviewer](../emdash2/examples/homology_adjunction_families.lp)
+checks the whole boundary source/target and generator, nonidentity boundary
+and H action, further-Hom identity, and rejection of an unrelated arrow.
+The [native reviewer](../emdash2/examples/zero_arrow_cone_adjunction_homology.lp)
+checks input formation, retained h, the actual mate boundary, and H at the
+actual introduced diagram. The
+[legacy comparison](../emdash2/examples/homology_adjunction_legacy_views.lp)
+checks whole β, family H and global H conversion through the adapters.
+
+The pre-edit native selected-point regression exceeded the 2 GiB guard,
+including alone in a fresh compiled-dependency stage. Its assertion is now
+checked compositionally: the unchanged retained path with its named target,
+the generic selected-object recipe, and the three native input projections.
+All of these pass against both the pre-edit c897aa0c sources and the current
+sources under the same guard. No implementation theorem, selected value or
+premise was weakened; no resource limit was raised. The old expanded
+assertion's resource failure is not mathematical counterevidence.
+
+Final serial, warning-enabled guarded probe logs in `emdash2/logs/probes/`:
+
+- `emdash3_2_zero_arrow_cone_adjunction_homology-20260913-031404.log`;
+- `homology_adjunction_families-20260913-032749.log`;
+- `zero_arrow_cone_adjunction_homology-20260913-033250.log`;
+- `homology_families-20260913-034631.log`;
+- `one_cat_zero_cone_homology-20260913-034639.log`;
+- `homology_adjunction_legacy_views-20260913-035044.log`;
+- `homology_adjunction_dependency_baseline-20260913-035052.log`.
+
+New consumers and their dependency-only join retain the complete 1,151
+critical-pair / 159 pattern-warning inventory. Both legacy regressions retain
+their complete pre-edit 1,249/169 inventory, including heads, rule families
+and locations; the whole legacy comparison has that same inventory. ANSI
+codes were stripped before parsing, with zero parser issues. The baseline
+global reviewer failed only after all imports had finished, so its import
+warning comparison does not misrepresent it as a passing regression.
+Strict LHS audits pass for all nine affected source/reviewer files. The
+catalog check passes and health source metrics are refreshed with
+`--no-check`; no aggregate typecheck was run.
+
+**Next NUH-3C:** derive the ordinary universal records from the whole
+adjunction comparison without W/V. The current kernel/cokernel record
+modules still mate/unmate an old selected lift and transfer its IsContr
+evidence, so renaming their inputs is insufficient. Establish the needed
+native diagram introduction/observation at the explicit ordinary profile,
+then derive the factor and uniqueness views. Raw chain-pair conversion,
+concrete models, connecting and exactness remain subsequent work. Op,
+strict/lax migration and symbolic endpoint debugging stay deferred.
 
 ### NUH-3A: Whole K/Q structures without selected W/V inputs
 
@@ -255,7 +323,7 @@ against the respective pre-edit 022458/022506 logs. Strict LHS audits pass.
 The central catalog is unchanged and checked; health source metrics were
 refreshed with `--no-check`, explicitly without a repository-wide typecheck.
 
-**Next NUH-3B:** move the whole H-family semantic implementation to these
+**Then scheduled NUH-3B (now implemented above):** move the whole H-family semantic implementation to these
 independent structures, leaving selected presentations as realization
 adapters. Derive the needed ordinary universal views and preserve actual H
 selections in subsequent consumers. Do not resume Op work as a prerequisite.
@@ -272,7 +340,7 @@ The last complete qualified checkpoint is 29f847f7. The latest candidate
 still fails subject reduction at its whole y-projection fold; earlier
 object/restriction checks passed, and arrow retyping exposed a represented
 unit comparison. Do not resume these experiments until the deferred work
-is explicitly reactivated. NUH-3A is the current task.
+is explicitly reactivated. NUH-3 is the current task.
 
 The preceding `29f847f7` turn is progress: the direct target now preserves
 the native primitive/Op source and reaches a specific downstream y-view.

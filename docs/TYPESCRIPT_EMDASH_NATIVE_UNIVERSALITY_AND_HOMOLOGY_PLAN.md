@@ -222,10 +222,18 @@ NUH-3A now implements whole K/Q structures introduced directly from whole
 functors and adjunction evidence, independent of W/V. Their structural maps
 and mates compute through existing native owners; old selected presentations
 adapt into the new interface and reuse its structural maps. The new reviewer
-and both selected-presentation regressions pass. NUH-3 continues with the
-whole H-family dependency migration and derived ordinary views. Continue on
-the current preadditive/ordinary homology baseline and preserve its explicit
-interpretation qualifications.
+and both selected-presentation regressions pass. NUH-3B now moves the whole
+H-family implementation and its native zero-arrow-cone application to these
+independent structures. The legacy names delegate through the presentation
+adapters, preserving the whole functors and selected views. The global native
+application retains its explicit OneCat profile. Focused action, whole
+comparison and legacy checks pass with unchanged warning inventories.
+
+Next NUH-3C: derive the needed ordinary universal records from the whole
+adjunction comparison, without transferring uniqueness from W/V. Raw
+chain-pair input conversion, connecting/exactness and concrete model/reifier
+migration remain outstanding. Continue on the current preadditive/ordinary
+homology baseline and preserve its explicit interpretation qualifications.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -422,6 +430,7 @@ must not label those alternatives validated implementations.
 | D-NUH-024 | Retain the definition-only HomPresheaf correction: its fibre agrees with native homd_ and both argument actions compute through existing Hom owners. No rule is added or moved; higher-component qualification and the original-D target slot remain pending |
 | D-NUH-025 | The direct Homd candidate uses the homwise-dual shared-index value category, preserving the original primitive homd_int, Op_catd source and Op_funcd composition. Fixed-y,v restriction and first source/action projections check; whole-v projection and the expanded Hom-order join remain open |
 | D-NUH-026 | User defers Op/duality migration until after this goal. Preserve all checkpoints and the unfinished NUH-1D6 stage; remove NUH-1/2 from current prerequisites and completion gates; start NUH-3 on the unchanged active nucleus |
+| D-NUH-027 | Whole K/Q structures and their mates now take native functors and adjunction evidence without W/V. The single whole H-family implementation takes these structures; legacy presentations delegate through one-way adapters. Ordinary records and raw input conversion must remove their remaining selected dependencies separately |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

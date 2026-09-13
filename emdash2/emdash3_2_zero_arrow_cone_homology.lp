@@ -1,6 +1,6 @@
 /* Whole homology on the native zero-cone category in an ordinary target.
    C1 is a local target profile, not a truncation of arbitrary source data. */
-require open emdash.emdash3_2_one_cat_zero_cones;
+require open emdash.emdash3_2_zero_arrow_cone_adjunction_homology;
 require open emdash.emdash3_2_homology_family_selected_views;
 
 // Global H on the native cone category, via the already qualified family H.
@@ -10,9 +10,9 @@ symbol zero_arrow_cone_homology_func [C : Cat] [S : τ (@PreadditiveCategory C)]
   [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
   (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V))
   : τ (Functor (@ZeroArrowCone_cat C t T) C)
-≔ @homology_family_func (@ZeroArrowCone_cat C t T) C S t T T0 W V P Q
-    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
-    (@zero_arrow_cone_universal_transf C C1 t T);
+≔ @zero_arrow_cone_adjunction_homology_func C S C1 t T T0
+    (@kernel_presentation_structure C S t T W P)
+    (@cokernel_presentation_structure C S t T0 V Q);
 
 /* Selected-object compatibility for the GLOBAL native zero-cone H. */
 

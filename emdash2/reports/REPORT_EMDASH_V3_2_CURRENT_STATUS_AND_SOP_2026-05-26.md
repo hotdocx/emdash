@@ -12,8 +12,13 @@ The active continuation is whole universality on the current nucleus.
 and [their mates](../emdash3_2_kernel_cokernel_adjunction_mates.lp) are now
 implemented without selected W/V prerequisites. The old presentations adapt
 into them and share their inclusion/projection implementation. Focused
-whole/point cancellation and legacy regressions pass; native H-family and
-model/reifier migration remain pending. No new primitive or rule is added.
+whole/point cancellation and legacy regressions pass. NUH-3B now supplies the
+[independent whole H-family](../emdash3_2_homology_adjunction_families.lp) and
+[its native global application](../emdash3_2_zero_arrow_cone_adjunction_homology.lp),
+with one semantic implementation and legacy adapters. Whole boundary/H
+action and selected views pass focused checks with unchanged warning
+inventories. Derived ordinary records, raw input conversion and model/reifier
+migration remain pending. No new primitive, rewrite or unifier is added.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

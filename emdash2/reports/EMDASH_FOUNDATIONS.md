@@ -4220,11 +4220,15 @@ family or manually supplied factor operation. Existence of a concrete whole
 structure is still supplied; it does not follow from matrix equations alone.
 
 The old selected presentations now adapt into these structures and delegate
-their inclusion/projection implementation to them. Their selected comparison
-semantics described below remain available. Migrating the whole H-family and
-concrete model/reifier consumers to the independent interface is the next
-step. The Op/duality migration is separately preserved and user-deferred
-until after the universality/homology goal.
+their inclusion/projection implementation to them. NUH-3B also moves the
+single whole H-family implementation, β=K(h)∘η and H=Q∘Arr(β), to the
+independent structures. Its native zero-arrow-cone application retains the
+explicit ordinary target profile. The legacy H operations delegate through
+the same adapters, preserving their whole functors and the selected
+comparison semantics described below. Ordinary universal records, raw
+chain-pair input conversion and concrete model/reifier migration remain
+further work. The Op/duality migration is separately preserved and
+user-deferred until after the universality/homology goal.
 
 The legacy realization layer retains declaration-backed presentations `J⊣K` and `Q⊣I`
 over the original selected kernel and cokernel families. A presentation is

@@ -110,3 +110,16 @@ assert [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   @fapp1_fapp0 (Hom_cat B b c) (Hom_cat C (@fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) b) (@fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) c))
     (@fapp1_func B C (@homology_family_func B C S t T T0 W V P Q A D h) b c) p p (@id (Hom_cat B b c) p)
   ≡ @id (Hom_cat C (@fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) b) (@fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) c)) (@fapp1_fapp0 B C (@homology_family_func B C S t T T0 W V P Q A D h) b c p);
+
+// Generic selected recipe, before specializing large native input terms.
+assert [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t))
+  (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
+  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
+  (b : τ (Obj B)) ⊢
+  @homology_family_selected_object B C S t T W V A D h b
+  ≡ @computational_cokernel_object C S (@fapp0 B C A b) (@kernel_presentation_selected_object C S W (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
+      (@kernel_presentation_lift_semantic C S t T W (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))
+      (V (@fapp0 B C A b) (@kernel_presentation_selected_object C S W (@fapp0 B (Functor_cat WalkingArrow_cat C) D b)) (@kernel_presentation_lift_semantic C S t T W (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h)));
