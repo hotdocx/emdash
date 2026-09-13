@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; not a completed exactness/connecting theorem
+Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and two whole factors checked; canonical Coim⇒Im next; not a completed exactness/connecting theorem
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -119,6 +119,44 @@ covered map, annihilation cell, comparison inverse and their computations
 are implementation obligations. Generic naturality must not be replaced
 with caller-supplied squares or construction-specific naturality rules.
 
+## Whole Terminal/Initial Presentation Boundary
+
+The retained TerminalObject interface supplies a whole canonical arrow
+transformation and pointwise IsContr uniqueness. C2b now adds a one-way
+[native family-universality extension](../emdash2/emdash3_2_one_cat_terminal_family_universality.lp)
+with two primitive ordinary-target operations of the existing DefIso type,
+for F:B→C:
+
+```text
+h:F⇒const_t   ↦   Arr(h) ≅ J∘F       when t is terminal;
+h:const_t⇒F   ↦   Arr(h) ≅ I∘F       when t is initial.
+```
+
+Both directions have identity components at both walking-arrow endpoints.
+Use the selected inverse from DefIso, with its existing inverse cuts; do
+not invent another equivalence type or a separate inverse choice. Each
+instance requires OneCat(C) and the corresponding original terminal/initial
+capability. It does not assert this stronger presentation for arbitrary
+directed higher categories from groupoidal pointwise contractibility.
+
+Semantically, ordinary terminal/initial uniqueness makes the original and
+canonical arrows equal at every parameter. Identity endpoint maps then give
+the unique comparison of arrow diagrams, and their naturality follows from
+the original whole transformations. This is the usual ordinary
+[arrow-isomorphism construction](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Comma/Arrow.html#CategoryTheory.Arrow.isoMk)
+specialized to identity endpoint isomorphisms. This mathematical explanation
+is not a derivation in the current Lambdapi interface.
+
+The promoted normalizers are an explicit computational universality
+extension beyond the current β interface, not derived theorems from the
+old pointwise contractibility operations. Their primitive status, eight
+identity endpoint rules and model interpretation are recorded in the owner
+ledger. The presentation remains revisitable under the same
+computational/internal criterion as the retained reconstruction law.
+This is terminal/initial universality, not an axiom for the canonical
+Coim⇒Im map, Abelian normality, connecting or exactness. Those constructions
+and their required comparisons must still be implemented and qualified.
+
 ## Current Code And Next Tranche
 
 `homology_window_connecting_transf` is already declared as a whole
@@ -148,20 +186,33 @@ no new primitive or naturality-square input is introduced. The transpose
 interface explicitly takes OneCat(C), without claiming arbitrary lax/oplax
 interchange.
 
-Next NUH-4C2b constructs the whole terminal/initial universal comparisons
-for the remaining zero-end columns. Write ZP for the retained t→ev₁
-column of the kernel counit and ZQ for the ev₀→t column of the cokernel
-unit. The implemented cells have types Arr(κ)⇒ZP and ZQ⇒Arr(q).
-They still need the appropriate whole comparisons with I∘ev₁ and
-J∘ev₀ before they can serve as the desired mate inputs. Keep the same
-columns and adjunctions; do not replace this step with pointwise equations
-or new caller coherence data. The ZP comparison must retain the identity
-component at ev₁, and the ZQ comparison the identity component at ev₀;
-an arbitrary natural isomorphism that changes the nonzero endpoint would
-not preserve the intended canonical factor. These must be observations of
-the constructed comparisons, not extra caller equations.
-The subsequent mate assembly must actually
-construct a:Coim⇒Im, not postulate it or its invertibility.
+NUH-4C2b now [specializes the universal comparisons](../emdash2/emdash3_2_one_cat_adjunction_zero_columns.lp)
+at the original zero-end columns ZP/ZQ. Their identity components retain
+the nonzero endpoints. Composing with the original transposed cells gives
+actual whole mate inputs Arr(κ)⇒I∘ev₁ and J∘ev₀⇒Arr(q), without casts or
+caller square equations.
+
+The [whole cokernel-family mate](../emdash2/emdash3_2_cokernel_adjunction_families.lp)
+is defined by ε∘Q(h). Together with the existing whole kernel-family mate,
+it defines [two canonical whole factors](../emdash2/emdash3_2_one_cat_image_coimage_factors.lp):
+
+```text
+v:Coim⇒ev₁       u:ev₀⇒Im.
+```
+
+At every original d, the native mate reconstruction laws prove
+v_d∘π_d = d[0→1] and ι_d∘u_d = d[0→1]. These are derived reviewer
+observations; the direct runtime conversion assertion for reconstruction
+did not pass. The primary programs contain no ordinary factor dictionaries
+or equation-proof operations. Do not advertise the observations as new
+judgmental reconstruction cuts.
+
+Next NUH-4C2c must construct a:Coim⇒Im and its whole factorization data.
+The two pointwise reconstruction observations do not themselves construct
+the required coherent annihilation/mate input. Keep the existing whole
+units, counits and comparisons as program data; do not rebuild pointwise
+cones or add a primitive comparison/exactness inhabitant. Abelian
+invertibility of a remains genuine subsequent input structure.
 Use these owners to formulate normality and exactness before migrating the
 connecting program. Keep all source transformations, signs and actual H
 selections explicit. Do not expand this into the deferred indexing/debugging

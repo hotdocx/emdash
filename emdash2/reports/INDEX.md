@@ -63,9 +63,14 @@ directly from K/Q and κ/q. Sixteen focused checks retain whole/point and
 next Hom action, with unchanged dependency warnings. NUH-4C2a now supplies
 [ordinary-target whole transposition](../emdash3_2_one_cat_diagram_transpose.lp)
 and [its actual kernel/cokernel instances](../emdash3_2_one_cat_kernel_cokernel_transposes.lp).
-The remaining zero-end columns need whole universal comparisons before
-canonical Coim⇒Im can be assembled. Normality, direct whole δ/exactness
-and concrete-model work remain further steps.
+NUH-4C2b now adds an explicit [native terminal/initial family presentation](../emdash3_2_one_cat_terminal_family_universality.lp):
+two ordinary-target DefIso primitives with identity endpoints. Their
+[actual-column instances](../emdash3_2_one_cat_adjunction_zero_columns.lp)
+and whole mates define [Coim⇒ev₁ and ev₀⇒Im](../emdash3_2_one_cat_image_coimage_factors.lp),
+with native reconstruction proofs. The primitive boundary is explicit in
+the subplan; it is not derived from the old pointwise β interface.
+Canonical Coim⇒Im, normality, direct whole δ/exactness and concrete-model
+work remain further steps.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

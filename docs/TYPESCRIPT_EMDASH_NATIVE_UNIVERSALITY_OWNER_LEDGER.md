@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and whole factors checked; canonical Coim⇒Im next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -300,6 +300,90 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C2b: Native whole terminal/initial family universality
+
+**Implemented and locally qualified after c38f6c0f.** The
+[terminal/initial family-universality owner](../emdash2/emdash3_2_one_cat_terminal_family_universality.lp)
+adds two explicit primitive operations:
+`one_cat_terminal_arrow_family_iso` and
+`one_cat_initial_arrow_family_iso`. They have the existing DefIso type and
+require OneCat(C), the original terminal/initial capability, F:B→C and the
+actual whole h with the appropriate constant endpoint. Eight shape-guarded
+rules make both endpoint components of both directions identities. The
+inverse is selected through the existing DefIso operation, with its generic
+inverse cuts; there is no independently chosen inverse or new equivalence
+grammar.
+
+**Primitive/model boundary:** this is an additional native computational
+presentation of ordinary terminal/initial family universality. It is not
+claimed as a formal theorem derived from the old pointwise IsContr/β
+interface. The categorical subplan records the ordinary mathematical
+justification and the explicit strength of this extension. Keep it visible
+in the later trust/model audit and revisitable under the user's
+computational/internal criterion. It does not assert a general directed
+higher-category result from groupoidal pointwise contractibility, and it
+does not postulate a, normality, δ or exactness.
+
+The [zero-column owner](../emdash2/emdash3_2_one_cat_adjunction_zero_columns.lp)
+defines the two actual-column instances and the normalized whole mate
+inputs. The original ZP/ZQ, κ/q and nonzero endpoints are retained, with
+no object cast or caller square equation. The
+[whole cokernel-family owner](../emdash2/emdash3_2_cokernel_adjunction_families.lp)
+defines Q∘D, the whiskered counit, Q(h), and the colift ε∘Q(h).
+Together with the existing kernel-family mate, this gives the
+[two canonical whole factors](../emdash2/emdash3_2_one_cat_image_coimage_factors.lp)
+v:Coim⇒ev₁ and u:ev₀⇒Im. These ten defined operations introduce no further
+primitive, rewrite, unifier or ordinary factor dictionary. The primary
+import graph includes no ordinary record-conversion owner.
+
+The three new reviewers contain 28 assertions: 26 positive and two negative.
+They cover all endpoint identities, both whole inverse cuts, retained next
+Hom action, rejection of nonzero endpoint families, actual-column
+specialization, the original horizontal components of the mate inputs, and
+the whole factors' action. The reconstruction reviewer proves
+v_d∘π_d=f_d and ι_d∘u_d=f_d through the existing native mate reconstruction
+laws and their semantic comparison. Its ordinary reference import and one
+dual semantic-reconstruction helper are reviewer-only, not prerequisites
+of the operational programs.
+
+The direct conversion assertion for reconstruction did not pass
+(`nuh4c_canonical_factor_reconstruction-20260913-103052.log`). The equation
+witnesses pass (`nuh4c_factor_reconstruction_views-20260913-103358.log`)
+and are not advertised as judgmental reconstruction cuts. No extra runtime
+rule is installed to force those equations. Whole coherent factorization
+data for a remain separate work.
+
+Final warning-enabled, serial resource-guarded ≤90-second checks:
+
+- source: `emdash3_2_one_cat_image_coimage_factors-20260913-104217.log`;
+- universal-family reviewer: `one_cat_terminal_family_universality-20260913-104220.log`;
+- whole-factor reviewer: `one_cat_image_coimage_factors-20260913-104224.log`;
+- reconstruction reviewer: `one_cat_image_coimage_factor_reconstruction-20260913-104227.log`;
+- source dependency baseline: `nuh4c_factor_dependencies-20260913-104347.log`;
+- exact reconstruction join: `nuh4c_factor_reconstruction_dependencies-20260913-104350.log`;
+- reference reconstruction join without new primitives: `nuh4c_reference_reconstruction_dependencies-20260913-104355.log`;
+- combined retained transposition, H-family and adjunction-mate reviewers: `nuh4c_family_retained_consumers-20260913-104359.log`.
+
+Every old warning inventory entry is preserved. The eight new component
+rules add exactly 16 overlaps with the inherited constant-family tapp0
+projection, once at the outer component and once at the inner component
+for each rule. The head and both participant heads are tapp0_fapp0, at
+the normalizer owner lines 19, 27, 35, 43, 60, 68, 76 and 84. No generic
+naturality rule is added or changed. The source/first two reviewers have
+1,171 critical pairs / 159 replaceable-pattern warnings; the reconstruction
+reviewer matches its exact dependency join at 1,269 / 169, and the retained
+consumer join has 1,176 / 159. Exact categories, locations, heads and
+participant-family deltas are checked, with no removals or parser issues.
+Four LHS audits, catalog freshness and shell syntax checks pass; source-only
+health is refreshed to 963 files. No aggregate or TypeScript check ran.
+
+**Next NUH-4C2c:** construct the canonical whole a:Coim⇒Im and its coherent
+factorization data from the original whole universal operations. The two
+proved pointwise reconstruction observations do not themselves give the
+required coherent annihilation/mate input. Do not rebuild pointwise cones,
+make ordinary dictionaries operational prerequisites, or postulate a or
+its Abelian invertibility to complete the construction.
+
 ### NUH-4C2a: Whole ordinary-target diagram transposition
 
 **Implemented and locally qualified after 49ef915e.** The selected route
@@ -373,12 +457,13 @@ check ran. Earlier failed transpose orders, the unneeded extra congruence
 prototype and all qualification logs remain in ignored probes; only the
 selected original-family route is promoted.
 
-**Next NUH-4C2b:** construct whole terminal/initial comparisons of ZP with
+**Original C2b continuation, now implemented above:** whole terminal/initial comparisons of ZP with
 I∘ev₁ and ZQ with J∘ev₀, retaining the identity component at the respective
-nonzero endpoint, then the canonical mate assembly. Transposition
-does not supply those universal comparisons, a:Coim⇒Im, or its Abelian
-invertibility. Do not replace the remaining whole construction with
-pointwise equations, independently rebuilt columns or caller square proofs.
+nonzero endpoint. The later C2b implementation supplies those comparisons
+through its explicitly recorded native presentation extension and derives
+the two factor maps. Canonical a:Coim⇒Im and its whole factorization data
+remain required; no pointwise cone rebuilding or caller square proofs are
+introduced as a replacement.
 
 ### NUH-4C: Direct categorical exactness and connecting
 

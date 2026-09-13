@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; ordinary bridge optional; Op/duality migration deferred
+Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and whole factors checked; canonical Coim⇒Im next; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -356,9 +356,17 @@ computes before or after Hom projection; three narrow proof-time comparisons
 retain the existing evaluation and arrow-introduction owners. No new
 primitive or caller square-proof input is introduced.
 
-Next NUH-4C2b constructs the whole terminal/initial comparisons of the
-remaining zero-end columns and the mate assembly for canonical Coim⇒Im.
-The transposed cells alone do not supply that comparison. Then express
+NUH-4C2b now adds two explicit native terminal/initial family-universality
+primitives in the ordinary target, with identity endpoint computations and
+existing DefIso inverse cuts. This is a recorded extension of the old
+pointwise-uniqueness interface, not a derived β theorem. Their instances
+at the actual ZP/ZQ columns supply whole mate inputs. The defined whole
+cokernel and kernel mates then give Coim⇒ev₁ and ev₀⇒Im. Native mate
+reconstruction proves their original-arrow factor equations as reviewer
+observations; no ordinary dictionaries enter the primary programs.
+
+Next NUH-4C2c constructs canonical Coim⇒Im and its coherent whole
+factorization data; the two factors alone do not supply it. Then express
 Abelian normality and exactness by invertibility of the actual comparison
 maps, and build δ by whole universal descent. The ordinary all-arrow/category
 bridge is optional compatibility work, not a primary prerequisite. Do not
@@ -575,6 +583,7 @@ must not label those alternatives validated implementations.
 | D-NUH-039 | Connecting and exactness must use whole categorical universality directly. The ordinary category bridge stays optional. Whole Coim/Im and canonical comparison invertibility express Abelian normality/exactness; δ is to be built by whole universal descent. A whole declaration whose component invokes the old record algorithm is reference evidence, not completion of this migration |
 | D-NUH-040 | Whole Coim/Im and their projection/inclusion are direct composites and whiskerings of the original K/Q and κ/q. Retain these functors and their higher action. The canonical Coim⇒Im comparison remains a separate construction; neither its implementation nor its Abelian invertibility is supplied by the six definitions |
 | D-NUH-041 | Ordinary-target transposition first exchanges the original whole transformation, then forms its arrow family and exchanges the remaining arguments. Retain column observations of that single functor. Two whole evaluation projection folds and three proof-time comparisons qualify its actual κ/q endpoints. Whole zero-column universal comparisons and canonical mate assembly remain required; no pointwise cone rebuilding or new exactness axiom is admitted |
+| D-NUH-042 | Terminal/initial whole family universality is now an explicit ordinary-target native presentation extension: two DefIso primitives with eight identity endpoint rules, not theorems derived from the old pointwise IsContr interface. Their actual-column instances and whole K/Q mates define Coim⇒ev₁ and ev₀⇒Im. Reconstruction is proved through native mate laws as a reviewer observation, not a new runtime cut. Canonical Coim⇒Im and exactness remain to be constructed |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

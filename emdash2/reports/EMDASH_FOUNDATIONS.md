@@ -4428,9 +4428,25 @@ The construction exchanges the given whole transformation and introduces
 its arrow family internally; it takes no extra naturality square.
 Columns and shape-arrow maps remain observations of one whole functor.
 
-The zero-end columns still require whole universal comparisons with
-I∘ev₁ and J∘ev₀. The canonical Coim⇒Im comparison then remains to be
-constructed by mate assembly. Its
+The terminal/initial interface now has an explicit native whole family
+presentation in this ordinary scope. For h:F⇒const_t, it supplies
+Arr(h)≅J∘F; dually h:const_t⇒F gives Arr(h)≅I∘F. Both endpoint components
+of both directions are identities. These are two new computational DefIso
+primitives, with generic inverse cuts, extending the old pointwise
+contractibility interface. They are not claimed as formal derivations
+from its existing β rules. Ordinary terminal/initial uniqueness justifies
+the identity-endpoint comparisons, and the original whole transformations
+give their naturality.
+
+Their instances at ZP/ZQ now give the actual whole mate inputs. Cokernel
+colifting, defined by ε∘Q(h), and the existing kernel mate produce
+v:Coim⇒ev₁ and u:ev₀⇒Im. The native mate laws prove v_d∘π_d=f_d and
+ι_d∘u_d=f_d at every original diagram d. Those are derived equation
+observations, not new runtime cuts; the primary programs carry no ordinary
+factor dictionaries or manual naturality equations.
+
+The canonical Coim⇒Im comparison and its coherent whole factorization
+data still remain to be constructed. Its
 invertibility will be genuine Abelian structure, not a consequence of
 having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
 comparison at a native zero pair; a freely chosen isomorphism between

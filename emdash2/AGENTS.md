@@ -176,9 +176,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   The ordinary-target diagram-transpose and kernel/cokernel-transpose
   modules now transpose the original whole unit/counit at actual κ/q
   arrow-family endpoints. Columns and shape-arrow action stay observations
-  of one internal functor. Their remaining zero-end columns still require
-  whole terminal/initial universal comparisons before canonical mate
-  assembly; pointwise equations do not replace that step.
+  of one internal functor. The ordinary terminal-family-universality module
+  now adds two explicit native DefIso presentation primitives with identity
+  endpoints; this is an extension beyond the old pointwise β interface.
+  Actual zero-column instances and the defined whole cokernel-family mate
+  yield Coim⇒ev₁ and ev₀⇒Im. Native mate reconstruction is verified as a
+  reviewer observation, without ordinary record inputs to the programs.
+  Canonical Coim⇒Im and its whole factorization data remain separate work;
+  no comparison or exactness axiom is introduced to finish that step.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

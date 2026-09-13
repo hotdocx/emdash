@@ -117,6 +117,21 @@ comparison after exchange. No primitive declaration is changed and no
 square-proof premise is added. Whole terminal/initial comparisons of the
 remaining zero-end columns are still required before canonical Coim⇒Im.
 
+NUH-4C2b now supplies those comparisons through an explicit
+[native terminal/initial family-universality extension](../emdash3_2_one_cat_terminal_family_universality.lp).
+Its two ordinary-target DefIso primitives and eight identity endpoint rules
+are additional computational presentation laws, not theorems derived from
+the old pointwise IsContr interface. Generic inverse cuts are reused. The
+[original zero-column instances](../emdash3_2_one_cat_adjunction_zero_columns.lp)
+produce the actual whole mate inputs. The
+[whole cokernel-family mate](../emdash3_2_cokernel_adjunction_families.lp)
+is defined from Q(h) and the counit; together with the existing kernel mate
+it defines [Coim⇒ev₁ and ev₀⇒Im](../emdash3_2_one_cat_image_coimage_factors.lp).
+Native mate laws prove their original-arrow reconstruction in the reviewer.
+The primary programs import no ordinary record interface, and the proved
+equations are not runtime reconstruction cuts. Canonical Coim⇒Im and its
+whole factorization data remain required before the normality/exactness layer.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip
