@@ -139,7 +139,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
 - `emdash3_2_monads.lp` owns monad-primary triangular extension and its narrow
   opposite-derived computational mirror.
 - `emdash3_2_diagram_evaluation.lp` derives whole varying-shape evaluation
-  from existing argument exchange. Its walking-arrow reviewer supplies a
+  from existing argument exchange. Fixed-shape evaluation also computes
+  through precomposition before or after its Hom projection; whole
+  evaluation/postwhiskering comparisons remain proof-time views.
+  Its walking-arrow reviewer supplies a
   universal differential transformation, not yet a kernel/cokernel
   adjunction or whole complex/homology functor. The walking-arrow introduction
   module constructs a diagram from an ordinary arrow via a constant
@@ -170,6 +173,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   their projection/inclusion directly from K/Q and κ/q, retaining whole
   action without ordinary factor inputs. Its canonical Coim⇒Im comparison
   remains separate work under the direct categorical continuation.
+  The ordinary-target diagram-transpose and kernel/cokernel-transpose
+  modules now transpose the original whole unit/counit at actual κ/q
+  arrow-family endpoints. Columns and shape-arrow action stay observations
+  of one internal functor. Their remaining zero-end columns still require
+  whole terminal/initial universal comparisons before canonical mate
+  assembly; pointwise equations do not replace that step.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

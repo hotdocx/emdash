@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: direct input/map migration checkpointed through ae2719d7; NUH-4C1 whole Coim/Im checked; canonical comparison next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -300,6 +300,86 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C2a: Whole ordinary-target diagram transposition
+
+**Implemented and locally qualified after 49ef915e.** The selected route
+exchanges the original whole h:F⇒G first, introduces its arrow family in
+Functor_cat(B,C), then exchanges the remaining walking-arrow/B arguments.
+Columns are observations of that one whole family; do not reconstruct
+them independently. This retains the original κ/q endpoints of the
+transposed kernel counit and cokernel unit. The new transpose interface
+has an explicit OneCat(C) parameter, so this is not a general lax/oplax
+interchange claim.
+
+The [diagram-evaluation owner](../emdash2/emdash3_2_diagram_evaluation.lp)
+adds whole evaluation-after-precomposition computation at its functor and
+preprojected Hom owners, plus two proof-time evaluation/postwhiskering
+comparisons. The [arrow-family owner](../emdash2/emdash3_2_arrow_diagram_families.lp)
+adds the existing introduced-arrow comparison observed through exchange.
+Thus the source change has two runtime projection folds and three
+unifiers, with no primitive declaration change. These are structural
+computation/comparison, not new naturality premises or selected kernel
+operations. The nucleus blob remains 91f1974ece225e399604dce24710bf1437ad3ef5.
+
+The [ordinary transpose owner](../emdash2/emdash3_2_one_cat_diagram_transpose.lp)
+defines one whole family and its column/shape-arrow observations. The
+[adjunction instances](../emdash2/emdash3_2_one_cat_kernel_cokernel_transposes.lp)
+define the two retained zero-end columns ZP/ZQ and the transposed cells
+Arr(κ)⇒ZP and ZQ⇒Arr(q). Their source/target zero and evaluation functors
+compute as whole functors. Horizontal components recover the original
+differential and canonical terminal/initial arrow. The original κ/q are
+literal endpoints of the typed whole transformations.
+
+The three new reviewers contain 31 assertions: 26 positive and five
+negative. They exercise typed proof-time comparisons, retained whole
+columns, nonidentity shape arrows, next shape Hom and parameter Hom action,
+the actual unit/counit components, and independent input retention. Further
+action remains at the existing generic fapp/tapp owners; these checks do
+not assert a complete higher normalization theorem.
+
+**Projection-order correction:** the whole-functor fold alone did not join
+the already projected `sym_fapp0_fapp1_func` route
+(`nuh4c_evaluation_projection_order-20260913-095523.log`). The second fold
+repairs that measured case. Whole Hom, capped arrow and next Hom comparisons
+all pass in `nuh4c_evaluation_projection_owner-20260913-095644.log` and the
+promoted evaluation reviewer. The source contains no duplicate point rule.
+
+Final warning-enabled, serial resource-guarded ≤90-second checks:
+
+- source: `emdash3_2_one_cat_kernel_cokernel_transposes-20260913-095803.log`;
+- final source comment hygiene: `emdash3_2_one_cat_kernel_cokernel_transposes-20260913-100109.log`;
+- evaluation reviewer: `diagram_evaluation_usability-20260913-095806.log`;
+- transpose reviewer: `one_cat_diagram_transpose-20260913-095809.log`;
+- adjunction reviewer: `one_cat_kernel_cokernel_transposes-20260913-095812.log`;
+- retained evaluation/arrow-family reviewers: `diagram_evaluation-20260913-095815.log`, `arrow_diagram_families-20260913-095818.log`;
+- retained adjunction/H/Coim reviewers: `kernel_cokernel_adjunctions-20260913-095821.log`, `homology_adjunction_families-20260913-095825.log`, `image_coimage_adjunction_families-20260913-095828.log`.
+
+Exact warning comparisons preserve every old entry and add four classified
+critical pairs: each projection fold overlaps the product-swap cancellation
+and product-map composition schemas. The raw schemas have Product_cat
+codomains where evaluation requires Functor_cat(I,C); focused typed
+negative consumers reject both mismatches. No suppression rule or extra
+compound inferred-slot guard is installed. The two heads are
+`sym_fapp0_func` and `sym_fapp0_fapp1_func`, each paired twice with
+`comp_fapp0`, at diagram_evaluation:50 and :56. The final adjunction-transpose
+source and retained H/Coim reviewers have 1,155 critical pairs / 159
+replaceable-pattern warnings; the retained adjunction-mate reviewer has
+1,160 / 159. Locations, heads, participant families and parser issues are
+audited against the recorded predecessors, with no removals or parser issues.
+
+Four source LHS audits, catalog freshness and shell syntax checks pass.
+Source-only health is refreshed to 956 files. No aggregate or TypeScript
+check ran. Earlier failed transpose orders, the unneeded extra congruence
+prototype and all qualification logs remain in ignored probes; only the
+selected original-family route is promoted.
+
+**Next NUH-4C2b:** construct whole terminal/initial comparisons of ZP with
+I∘ev₁ and ZQ with J∘ev₀, retaining the identity component at the respective
+nonzero endpoint, then the canonical mate assembly. Transposition
+does not supply those universal comparisons, a:Coim⇒Im, or its Abelian
+invertibility. Do not replace the remaining whole construction with
+pointwise equations, independently rebuilt columns or caller square proofs.
+
 ### NUH-4C: Direct categorical exactness and connecting
 
 **Current primary continuation.** Follow the categorical subplan linked
@@ -366,7 +446,7 @@ heads and participant families and zero parser issues. Focused LHS audit,
 catalog freshness and shell syntax checks pass. Source-only health is
 refreshed to 951 registered files; no aggregate or TypeScript check ran.
 
-**Next NUH-4C2:** qualify whole zero-triangle rotation and mate assembly for
+**Initial NUH-4C2 probe, superseded by C2a above:** whole zero-triangle rotation and mate assembly for
 the canonical comparison. The temporary `nuh4c_square_transpose.lp` uses
 only arrow introduction and internal argument exchange. Its first whole
 column-observation assertion fails because the resulting whole endpoint
@@ -376,11 +456,10 @@ functors do not unify with evaluation postwhiskering
 component computations (`nuh4c_square_transpose_points-20260913-092445.log`).
 This isolates an unqualified whole computational comparison; it is not a
 mathematical counterexample or an implementation of the canonical comparison.
-No part of that experiment is promoted and no new equality/unification
-axiom is added to bypass it. Whole alignment is required before using
-the transposed unit/counit as native mate input. Their zero-end columns
-also need the appropriate terminal/initial universal comparison; mere
-pointwise agreement cannot stand in for either whole construction.
+The original ordering was not promoted. C2a now supplies a better ordered
+whole assembly with qualified projection/comparison support. The zero-end
+columns still need the appropriate terminal/initial universal comparisons;
+mere pointwise agreement cannot stand in for those whole constructions.
 
 ### NUH-4B3: Raw Freyd maps use the direct native input path
 

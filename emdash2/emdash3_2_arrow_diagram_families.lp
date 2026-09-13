@@ -5,7 +5,7 @@
   walking-arrow diagram there, then exchange the shape and parameter axes.
   Source, target and differential whole observations recover F, G and eta;
   the parameter action has components F[p], G[p] and mixed action eta[p].
-  No arrow-data square record, new primitive, or equality bridge is added.
+  No arrow-data square record or new functor primitive is added.
 */
 require open emdash.emdash3_2_walking_arrow_introduction;
 require open emdash.emdash3_2_diagram_evaluation;
@@ -42,3 +42,21 @@ symbol transf_arrow_diagram_point_path
 ≔ @eq_refl (Functor WalkingArrow_cat C)
     (@fapp0 K (Functor_cat WalkingArrow_cat C)
       (@transf_arrow_diagram_func K C F G eta) x);
+
+// Proof-time comparison of the introduced arrow family after exchange.
+// The two Terminal domains are walking-arrow discriminators; whole runtime
+// heads are retained. This is the existing point-introduction comparison
+// observed through exchange, not injectivity of arbitrary functor action.
+unif_rule
+  @sym_func _ $B $C
+    (@sym_fapp0_func _ $I _
+      (@join_elim_func Terminal_cat Terminal_cat _
+        (@Const_func _ _ $F) (@Const_func _ _ $G) (@Const_func _ _ $eta)) $i)
+  ≡ @sym_func _ $B1 $C1
+      (@join_elim_func $L $R $D
+        (@Const_func _ _ $Fi) (@Const_func _ _ $Gi) (@Const_func _ _ $etai))
+  ↪ [ $B1 ≡ $B; $C1 ≡ $C; $L ≡ Terminal_cat; $R ≡ Terminal_cat;
+      $D ≡ (Functor_cat $B $C);
+      $Fi ≡ (@fapp0 $I (Functor_cat $B $C) $F $i);
+      $Gi ≡ (@fapp0 $I (Functor_cat $B $C) $G $i);
+      $etai ≡ (@tapp0_fapp0 $I (Functor_cat $B $C) $F $G $i $eta) ];

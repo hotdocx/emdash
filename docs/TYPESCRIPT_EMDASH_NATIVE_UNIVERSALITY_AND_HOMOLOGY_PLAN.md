@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: direct input/map migration checkpointed through ae2719d7; NUH-4C1 whole Coim/Im checked; canonical comparison next; ordinary bridge optional; Op/duality migration deferred
+Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -348,7 +348,17 @@ cover the original structural transformations, nonidentity diagram-map
 components, whole Hom action, structural components, next Hom action and
 noncollapse of independent selections.
 
-Next NUH-4C2 constructs the canonical whole comparison. Then express
+NUH-4C2a now supplies [ordinary-target whole diagram transposition](../emdash2/emdash3_2_one_cat_diagram_transpose.lp)
+and [the original K/Q unit/counit instances](../emdash2/emdash3_2_one_cat_kernel_cokernel_transposes.lp).
+The family remains one internal functor, with columns and shape-arrow
+actions as its observations. Whole evaluation through precomposition now
+computes before or after Hom projection; three narrow proof-time comparisons
+retain the existing evaluation and arrow-introduction owners. No new
+primitive or caller square-proof input is introduced.
+
+Next NUH-4C2b constructs the whole terminal/initial comparisons of the
+remaining zero-end columns and the mate assembly for canonical Coim⇒Im.
+The transposed cells alone do not supply that comparison. Then express
 Abelian normality and exactness by invertibility of the actual comparison
 maps, and build δ by whole universal descent. The ordinary all-arrow/category
 bridge is optional compatibility work, not a primary prerequisite. Do not
@@ -564,6 +574,7 @@ must not label those alternatives validated implementations.
 | D-NUH-038 | Freyd raw-agreement PathMap composes with the existing direct native/H map functors. Original raw component classes and H-record endpoints remain literal observations. Whole action is in the existing agreement parameter at fixed raw morphisms; no new raw-complex category or joint directed action is claimed |
 | D-NUH-039 | Connecting and exactness must use whole categorical universality directly. The ordinary category bridge stays optional. Whole Coim/Im and canonical comparison invertibility express Abelian normality/exactness; δ is to be built by whole universal descent. A whole declaration whose component invokes the old record algorithm is reference evidence, not completion of this migration |
 | D-NUH-040 | Whole Coim/Im and their projection/inclusion are direct composites and whiskerings of the original K/Q and κ/q. Retain these functors and their higher action. The canonical Coim⇒Im comparison remains a separate construction; neither its implementation nor its Abelian invertibility is supplied by the six definitions |
+| D-NUH-041 | Ordinary-target transposition first exchanges the original whole transformation, then forms its arrow family and exchanges the remaining arguments. Retain column observations of that single functor. Two whole evaluation projection folds and three proof-time comparisons qualify its actual κ/q endpoints. Whole zero-column universal comparisons and canonical mate assembly remain required; no pointwise cone rebuilding or new exactness axiom is admitted |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

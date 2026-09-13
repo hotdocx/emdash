@@ -4419,7 +4419,18 @@ Coim=Q∘Arr(κ) and Im=K∘Arr(q). Whiskering q by Arr(κ) gives π:ev₀⇒Coi
 whiskering κ by Arr(q) gives ι:Im⇒ev₁. These are actual internal functors
 and transformations with the original diagram-map and higher action.
 
-The canonical Coim⇒Im comparison remains to be constructed. Its
+Whole transposition of the original kernel counit and cokernel unit is
+now implemented in the explicit ordinary-target scope. It yields cells
+Arr(κ)⇒ZP and ZQ⇒Arr(q), where ZP is the original t→ev₁ column and ZQ is
+the original ev₀→t column. Their horizontal components recover the
+original diagram differential and canonical terminal/initial arrows.
+The construction exchanges the given whole transformation and introduces
+its arrow family internally; it takes no extra naturality square.
+Columns and shape-arrow maps remain observations of one whole functor.
+
+The zero-end columns still require whole universal comparisons with
+I∘ev₁ and J∘ev₀. The canonical Coim⇒Im comparison then remains to be
+constructed by mate assembly. Its
 invertibility will be genuine Abelian structure, not a consequence of
 having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
 comparison at a native zero pair; a freely chosen isomorphism between

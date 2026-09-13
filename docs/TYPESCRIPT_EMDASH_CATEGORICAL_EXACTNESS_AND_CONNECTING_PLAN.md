@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: NUH-4C1 whole Coim/Im implemented; NUH-4C2 canonical comparison next; not a completed exactness/connecting theorem
+Status: NUH-4C1 checkpoint 49ef915e; NUH-4C2a whole transposition checked; zero-column universal comparisons next; not a completed exactness/connecting theorem
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -51,7 +51,7 @@ construction, introduce a duplicate equivalence grammar, or choose a second
 independent inverse merely to make a later comparison typecheck.
 
 The required native assembly includes whole rotations of zero-triangle
-data and whole mate action. A useful concrete route to test is transposing
+data and whole mate action. The current route transposes
 the walking-arrow square of a unit/counit through the existing internal
 argument-exchange owners. In the ordinary target this rotates the same
 commuting square. It must be qualified at its actual endpoints and action;
@@ -136,14 +136,32 @@ No new rule, primitive or ordinary factor input is added. The
 [owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
 records the exact local qualification and warning comparison.
 
-The next bounded tranche qualifies the whole comparison a and the
-zero-triangle/mate assemblies needed for it. A preliminary square-transpose
-probe computes all four corners and both column components, but does not
-yet identify its whole column endpoint functors with the required
-evaluation whiskerings. Resolve that owner-level comparison or use a
-better existing native assembly; do not turn component equations into
-caller-supplied naturality data. The terminal/initial universal comparison
-for each unit/counit's zero-end column is a further whole obligation.
+NUH-4C2a resolves the earlier transpose-alignment boundary. The
+[ordinary-target transpose owner](../emdash2/emdash3_2_one_cat_diagram_transpose.lp)
+first exchanges h, introduces its arrow family in Functor_cat(B,C), and
+exchanges the remaining arguments. Columns are observations of that one
+whole functor. The
+[unit/counit instances](../emdash2/emdash3_2_one_cat_kernel_cokernel_transposes.lp)
+now retain the actual Arr(κ)/Arr(q) endpoints. Two whole evaluation folds
+and three narrow proof-time comparisons supply the required computation;
+no new primitive or naturality-square input is introduced. The transpose
+interface explicitly takes OneCat(C), without claiming arbitrary lax/oplax
+interchange.
+
+Next NUH-4C2b constructs the whole terminal/initial universal comparisons
+for the remaining zero-end columns. Write ZP for the retained t→ev₁
+column of the kernel counit and ZQ for the ev₀→t column of the cokernel
+unit. The implemented cells have types Arr(κ)⇒ZP and ZQ⇒Arr(q).
+They still need the appropriate whole comparisons with I∘ev₁ and
+J∘ev₀ before they can serve as the desired mate inputs. Keep the same
+columns and adjunctions; do not replace this step with pointwise equations
+or new caller coherence data. The ZP comparison must retain the identity
+component at ev₁, and the ZQ comparison the identity component at ev₀;
+an arbitrary natural isomorphism that changes the nonzero endpoint would
+not preserve the intended canonical factor. These must be observations of
+the constructed comparisons, not extra caller equations.
+The subsequent mate assembly must actually
+construct a:Coim⇒Im, not postulate it or its invertibility.
 Use these owners to formulate normality and exactness before migrating the
 connecting program. Keep all source transformations, signs and actual H
 selections explicit. Do not expand this into the deferred indexing/debugging

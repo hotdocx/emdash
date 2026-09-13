@@ -105,6 +105,18 @@ the direct dependency. The canonical comparison Coim⇒Im and its Abelian
 invertibility are separate next work, followed by direct categorical
 exactness/connecting and concrete whole-model/reifier construction.
 
+NUH-4C2a now implements [ordinary-target diagram transposition](../emdash3_2_one_cat_diagram_transpose.lp)
+as one internal functor, first exchanging the given h, then introducing
+its arrow family and exchanging the remaining arguments. Column and
+shape-arrow observations retain its original action. The
+[kernel counit and cokernel unit instances](../emdash3_2_one_cat_kernel_cokernel_transposes.lp)
+have the actual Arr(κ)/Arr(q) endpoints. The diagram-evaluation owner adds
+two whole projection folds, including the preprojected Hom case, and two
+proof-time evaluation comparisons. Arrow introduction adds one narrow
+comparison after exchange. No primitive declaration is changed and no
+square-proof premise is added. Whole terminal/initial comparisons of the
+remaining zero-end columns are still required before canonical Coim⇒Im.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

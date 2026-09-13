@@ -60,9 +60,12 @@ The user has selected a [direct categorical exactness/connecting continuation](.
 Ordinary category bridges remain optional compatibility views. NUH-4C1 now
 provides [whole Coim/Im and their structural transformations](../emdash3_2_image_coimage_adjunction_families.lp)
 directly from K/Q and κ/q. Sixteen focused checks retain whole/point and
-next Hom action, with unchanged dependency warnings. The canonical
-Coim⇒Im comparison is next; normality, direct whole δ/exactness and
-concrete-model work remain further steps.
+next Hom action, with unchanged dependency warnings. NUH-4C2a now supplies
+[ordinary-target whole transposition](../emdash3_2_one_cat_diagram_transpose.lp)
+and [its actual kernel/cokernel instances](../emdash3_2_one_cat_kernel_cokernel_transposes.lp).
+The remaining zero-end columns need whole universal comparisons before
+canonical Coim⇒Im can be assembled. Normality, direct whole δ/exactness
+and concrete-model work remain further steps.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

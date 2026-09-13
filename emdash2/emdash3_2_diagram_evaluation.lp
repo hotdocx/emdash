@@ -3,8 +3,8 @@
 
   Exchange applied to the identity of Functor_cat(I,C) gives i ↦ ev_i.
   Its arrow action is an actual transformation and its mixed action is
-  ordinary off-diagonal transfor evaluation. This is a transparent use of
-  existing structural owners, not a new category, functor primitive or rule.
+  ordinary off-diagonal transfor evaluation. Definitions use existing owners;
+  the later projection folds and proof-time comparisons retain whole action.
 */
 require open emdash.emdash3_2;
 
@@ -44,3 +44,35 @@ symbol diagram_family_transf
       (@diagram_family_at_func K I C D i)
       (@diagram_family_at_func K I C D j))
 ≔ @fapp1_fapp0 I (Functor_cat K C) (@sym_func K I C D) i j u;
+
+// Whole evaluation after precomposition: (D∘F)(−)[i] = D(−)[i]∘F.
+// This preserves the whole remaining parameter action.
+rule @sym_fapp0_func _ $I $C
+      (@comp_fapp0 Cat_cat $A $B _ $D $F) $i
+  ↪ @comp_cat_fapp0 $A $B $C (@sym_fapp0_func $B $I $C $D $i) $F;
+
+// The same evaluation fold after its Hom projection has already occurred.
+// A measured preprojected consumer otherwise retains a different whole head.
+rule @sym_fapp0_fapp1_func _ $I $C
+      (@comp_fapp0 Cat_cat $A $B _ $D $F) $i $x $y
+  ↪ @fapp1_func $A $C
+      (@comp_cat_fapp0 $A $B $C (@sym_fapp0_func $B $I $C $D $i) $F) $x $y;
+
+// Proof-time whole evaluation comparison; retain both runtime owners.
+unif_rule
+  @sym_fapp0_func _ $I $C $F $i
+  ≡ @comp_fapp0 Cat_cat _ _ _
+      (@sym_fapp0_func _ $I1 $C1 (@id Cat_cat _) $i1) $F1
+  ↪ [ $I1 ≡ $I; $C1 ≡ $C; $F1 ≡ $F; $i1 ≡ $i ];
+
+// Whole transformation evaluation, after the Cat-specialized postwhiskering
+// projection has exposed product composition. The identity second component
+// is the genuine postwhiskering discriminator.
+unif_rule
+  @sym_transf_tapp0_transf _ $I $C $F $G $h $i
+  ≡ @comp_prod_fapp1_fapp0 Cat_cat _ _ _
+      (@Struct_sigma _ _ $F1
+        (@sym_fapp0_func _ $I1 $C1 (@id Cat_cat _) $i1))
+      (@Struct_sigma _ _ $G1 _)
+      (@Struct_sigma _ _ $h1 (@id _ _))
+  ↪ [ $I1 ≡ $I; $C1 ≡ $C; $F1 ≡ $F; $G1 ≡ $G; $h1 ≡ $h; $i1 ≡ $i ];
