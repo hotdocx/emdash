@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-3 and NUH-4A1–3 checkpointed; NUH-4B1/2 native and whole-H maps checked; Freyd map specialization next; NUH-1/2 duality work user-deferred
+Status: NUH-4B1/2 checkpoint 0a313a2a; NUH-4B3 Freyd maps checked; derived ordinary category interfaces next; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -248,6 +248,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [direct original-pair input](../emdash2/emdash3_2_one_cat_chain_pair_inputs.lp) and [its H record](../emdash2/emdash3_2_one_cat_chain_pair_homology_records.lp) | Original fields enter the existing native source without K/Q; the record then observes whole P/Q at the same pair | NUH-4A2 implemented; specialize to raw Freyd agreements and migrate actual map consumers next |
 | [direct Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_native_inputs.lp) and [its whole H/record](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology.lp) | Original raw morphisms/agreement form input without W/P; H then uses whole P/Q with the existing local categorical data | NUH-4A3 implemented; raw classes, agreement and H endpoint check; migrate native maps and model binding next |
 | [direct native maps](../emdash2/emdash3_2_one_cat_chain_pair_native_maps.lp) and [whole H action](../emdash2/emdash3_2_one_cat_chain_pair_homology_maps.lp) | Original raw-map factors and a derived ordinary comparison produce the native map without K/P; whole action feeds H | NUH-4B1/2 implemented; original components and record/H endpoints check; specialize to Freyd raw maps next |
+| [direct Freyd maps](../emdash2/emdash3_2_commutative_algebra_freyd_native_maps.lp) and [whole H action](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology_maps.lp) | Existing raw-agreement conversion feeds the generic whole native/H map functors | NUH-4B3 implemented; all raw classes and actual H/record endpoints check; model and connecting integration remain |
 | [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [raw tests at original diagrams](../emdash2/emdash3_2_one_cat_zero_diagram_inputs.lp) | Actual reconstruction maps compose canonical raw tests into J(X)⇒d or d⇒I(X), retaining the original arbitrary d and raw b | NUH-3C3 implemented; use these inputs for ordinary records at K(d)/Q(d), without new selection or object casts |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
@@ -291,9 +292,65 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4B3: Raw Freyd maps use the direct native input path
+
+**Implemented after 0a313a2a.** The
+[shared raw-map data](../emdash2/emdash3_2_commutative_algebra_freyd_chain_map_data.lp)
+owns the unchanged `freyd_raw_composite_agreement_path` and
+`freyd_raw_chain_map_generic`. The old selected map definition is unchanged;
+all three original bodies/signatures were compared explicitly. No TypeScript
+source refers to the moved helpers. The data module adds
+`freyd_raw_chain_map_path_func` through the existing PathMap owner.
+
+The [native wrappers](../emdash2/emdash3_2_commutative_algebra_freyd_native_maps.lp)
+compose this with the generic direct native-map functor and project its
+point view. They take no W/P/Q. The
+[H-map wrappers](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology_maps.lp)
+compose it with the generic whole H-map functor, using whole P/Q and the
+existing Freyd local categorical data. Their point operation is the same
+functor's application. The raw morphisms and endpoint pairs are fixed
+parameters of the agreement action; this is not a new raw-complex category
+or a claimed joint directed action in raw representatives. The underlying
+generic native/H map functors retain their full action.
+
+The [native reviewer](../emdash2/examples/freyd_native_maps.lp) has four
+checks for the original f₂/f₁/f₀ classes and point/whole agreement. The
+[H reviewer](../emdash2/examples/freyd_adjunction_homology_maps.lp) has four
+checks for actual H application, original record endpoints, the whole map
+functor at those endpoints and its next Hom action. No new primitive,
+rewrite, unifier, equation proof or caller coherence field is added.
+Raw matrix/model interpretation remains a separate obligation.
+
+Serial guarded, warning-enabled logs in `emdash2/logs/probes/`:
+
+- baseline `freyd_zero_cone_maps-20260913-084100.log`;
+- prototype `nuh4b3_freyd_native_maps-20260913-084325.log`;
+- H-map source `emdash3_2_commutative_algebra_freyd_adjunction_homology_maps-20260913-084539.log`;
+- native reviewer `freyd_native_maps-20260913-084719.log`;
+- H reviewer `freyd_adjunction_homology_maps-20260913-084947.log`;
+- legacy reviewer `freyd_zero_cone_maps-20260913-085033.log`;
+- exact joins `nuh4b3_freyd_native_dependencies-20260913-085102.log`,
+  `nuh4b3_freyd_homology_dependencies-20260913-085111.log` and
+  `nuh4b3_freyd_homology_record_dependencies-20260913-085119.log`.
+
+Native/H checks match their exact dependency inventories at 1,285/169;
+the H-record reviewer matches its extended join at 1,290/169. The legacy
+reviewer preserves 1,255/169. Locations, heads and participant families
+agree, with zero parser issues. Three focused LHS audits and the catalog
+pass; source-only health is refreshed to 949 files. No aggregate ran.
+
+**Next NUH-4C:** derive HasComputationalKernels/HasComputationalCokernels
+as ordinary all-arrow views of whole P/Q at canonical walking-arrow input.
+Feed those derived views, rather than independently supplied W/V, to the
+existing pre-Abelian constructor. A subsequent Abelian view must keep the
+existing normality evidence explicit and indexed by those same derived
+views; K/Q existence alone does not imply Abelian normality. This prepares
+the actual connecting/exactness consumers while keeping whole universality
+primary. Whole-model/reifier construction and snake comparison remain later.
+
 ### NUH-4B1/2: Native maps before kernel selection and whole H action
 
-**Implemented after b012be50.** The existing whole outgoing-diagram map
+**Checkpoint 0a313a2a, after b012be50.** The existing whole outgoing-diagram map
 functor now imports the independent outgoing-diagram owner. Both of its
 definitions are unchanged. The
 [direct native-map module](../emdash2/emdash3_2_one_cat_chain_pair_native_maps.lp)

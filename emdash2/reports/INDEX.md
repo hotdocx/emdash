@@ -52,7 +52,10 @@ preserving the raw morphism classes/agreement and actual H endpoint.
 NUH-4B1/2 adds [direct native maps](../emdash3_2_one_cat_chain_pair_native_maps.lp)
 and [whole H action](../emdash3_2_one_cat_chain_pair_homology_maps.lp), preserving
 the original components and record endpoints without selected kernel lifts.
-Raw Freyd map specialization is next; concrete-model work remains later.
+NUH-4B3 specializes that action to [raw Freyd maps](../emdash3_2_commutative_algebra_freyd_native_maps.lp)
+and [their H action](../emdash3_2_commutative_algebra_freyd_adjunction_homology_maps.lp),
+preserving the original raw classes and H-record endpoints. Derived ordinary
+category interfaces for connecting/exactness are next; concrete-model work remains later.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

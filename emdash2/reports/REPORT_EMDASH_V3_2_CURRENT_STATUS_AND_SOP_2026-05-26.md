@@ -84,8 +84,16 @@ then [composes with H's Hom action](../emdash3_2_one_cat_chain_pair_homology_map
 Original components, actual H and record endpoints, and next Hom actions
 check. The outgoing-diagram map definitions are unchanged apart from their
 narrower import; complete warning deltas are classified in the ledger.
-Freyd raw-map specialization, concrete whole-model and reifier construction
-remain pending.
+
+NUH-4B3 now specializes the action to
+[raw Freyd maps](../emdash3_2_commutative_algebra_freyd_native_maps.lp) and
+[their whole H action](../emdash3_2_commutative_algebra_freyd_adjunction_homology_maps.lp).
+The [shared raw-map data](../emdash3_2_commutative_algebra_freyd_chain_map_data.lp)
+preserves both old conversions and exposes their PathMap action. Eight
+checks retain raw f₂/f₁/f₀, actual H and original record endpoints, and next
+Hom action. No new rule or primitive is added. Derived ordinary category
+interfaces for connecting/exactness, concrete whole-model and reifier
+construction remain pending.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

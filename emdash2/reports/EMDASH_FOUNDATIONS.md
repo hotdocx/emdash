@@ -4401,8 +4401,15 @@ supply no additional naturality law. The native Hom retains its represented
 postcomposition endpoint, related to raw composition by the existing typed
 comparison. Whole PathLift action in the raw-map parameter then composes
 with H's original Hom functor. All original components and the same record
-H endpoints are retained, including the next Hom action. Freyd raw-map
-specialization remains the next consumer migration.
+H endpoints are retained, including the next Hom action.
+
+Freyd raw maps now use that same action. The existing conversion of raw
+agreements to generic chain-map factors is shared unchanged, then mapped
+through PathMap and the generic native/H map functors. The original raw
+component classes and record H endpoints are retained. Whole action is in
+the existing raw-agreement parameter at fixed raw morphisms and endpoints;
+no new category of all raw complexes is claimed. The next integration uses
+ordinary category interfaces derived from whole P/Q for connecting/exactness.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
