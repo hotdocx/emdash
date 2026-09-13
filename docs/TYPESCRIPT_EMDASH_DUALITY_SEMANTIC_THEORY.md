@@ -42,7 +42,7 @@ been replaced by the prototype.
 | CoAbove2_cat | absent | native category constructor, with Hom computing to Op of the original Hom |
 | CoAbove3_cat | absent | supporting shifted constructor, with Hom computing to CoAbove2 of the original Hom |
 | Transpose_cat / CoOnly2_cat / Reverse12_cat | absent | transparent compositions of the selected constructors |
-| Homd target | old section-family composite | corrected HomPresheaf composition checked in isolation; surrounding target unfinished; shared index remains an alternative candidate |
+| Homd target | old section-family composite | direct shared-index candidate with homwise-dual whole target preserves original Op source; first projections checked, whole-v/higher joins unfinished |
 | general D_S API | absent | not proposed or implemented |
 
 The relevant source artifacts are the
@@ -281,8 +281,26 @@ native_homd_target_family(D) : Catd(CoOnly2_cat(Z))
 native_transpose_family(E) : Catd(CoOnly2_cat(Z)).
 ```
 
-The intended homd_int(FF) relates the last two families. Its source-fixed
-value is a whole functor on S_x(D), whose endpoint observation is
+Those last two families form the earlier unshifted reference presentation.
+The subsequent [direct native-owner candidate](../emdash2/audits/native_homd_direct_owner.patch)
+instead applies homwise duality to the whole target:
+
+```text
+P_D(x) ≔ Functor_cat(S_x(D),Cat)
+Homd_target_catd(D) ≔ native_homwise_dual ∘ CoAbove3_func(P_D)
+Homd_target_catd(D) : Catd(CoAbove2_cat(Z))
+Homd_target_catd(D)[x] ↪ CoAbove2_cat(P_D(x)).
+```
+
+This keeps the original primitive declaration
+homd_int(FF):Functord(Op_catd(E),Homd_target_catd(D)) and its existing
+Op_funcd composition in the displayed-Hom action. The source component
+has type Op(E[x])→CoAbove2(P_D(x)); applying CoAbove2_func recovers the
+ordinary Transpose(E[x])→P_D(x) view. It introduces no new primitive or
+pointwise-transpose family requirement. Original D and E remain over Z.
+
+The source-fixed object still decodes to a whole functor on S_x(D), whose
+endpoint observation is
 
 ```text
 Hom_(E[y])(E[a](u),FF[y](v)).
@@ -292,10 +310,13 @@ This is still homd_int's internal operation and projection ladder. The
 supporting index does not redefine dependent Hom from a total-category
 projection. Nor is a manual cone/factor record the primary program.
 
-The remaining work includes the family-map/module action, complete native
-homd source/target and projections, and their downstream consumers.
-Existing point and source-action computations do not certify that the
-entire ladder is already implemented.
+The [focused direct-owner gate](../emdash2/scripts/check_native_homd_direct_owner.sh)
+checks the x/u projections, whole restriction at fixed y,v, its native
+homd_ result and the first displayed-Hom source-component fold. Whole
+variation in v and the explicitly expanded Hom-projection order remain
+unqualified. The full copied candidate stops at the old homd_id_tgt_func
+y-only evaluation; its repair is the next native consumer. None of these
+candidate changes is yet installed in the active nucleus.
 
 The immediate priority is the direct homd_int source/target and projection
 adjustment. The explored G:D→D′ index map concerns additional naturality

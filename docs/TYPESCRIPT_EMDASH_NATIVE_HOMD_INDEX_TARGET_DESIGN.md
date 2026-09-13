@@ -10,9 +10,12 @@ Ledger: [native owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER
 
 Current execution priority (2026-09-13): this document records an alternative
 target-packaging candidate. Its necessity and minimality are not established.
-NUH-1D4 first repairs the existing defined HomPresheaf classifier and then
-the direct homd_int target/projection types, following the user's request
-to preserve existing native owners and rewrite/unification architecture.
+NUH-1D4 repaired the existing defined HomPresheaf classifier. NUH-1D5 now
+checks a direct native-owner candidate using the homwise-dual value category
+CoAbove2(Functor(S_x(D),Cat)), preserving the original homd_int/Op_catd
+source and Op_funcd composition. Its fixed-y,v restriction and first source
+projections check; whole-v and expanded-Hom joins remain pending. This
+follows the user's request to preserve native owners and rule architecture.
 General G:D→D′ index action remains parked. The finite analysis below is
 retained evidence, not an instruction to expand this auxiliary construction.
 

@@ -1,0 +1,158 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -14798,18 +14798,39 @@
+-/*
+-  Homd target architecture note:
+-
+-  Mathematical notation:
+-
+-    Edge_Z(x)(y)              = Hom_Z(x,y)^op
+-    HomPsh_Z(x)(y)            = Functor_cat(Hom_Z(x,y)^op, Cat)
+-    HomdTargetSection_E(x)(y) = E[y^-] ⊢_[y] HomPsh_Z(x)[y]
+-    HomdTarget_E[x]           = Π y :^n Z^op, HomdTargetSection_E(x)[y]
+-
+-  `Homd_target_section_catd` and `Homd_target_catd` name these target-family
+-  expressions for readability and assertions. They are not used as required
+-  discriminants in the projection-rule LHSs below, because those positions are
+-  inferred implicit arguments and may reduce to canonical compound terms before
+-  matching.
+-*/
+-
+-symbol Homd_target_section_catd [Z : Cat] (E : τ (Catd Z))
++/* Candidate direct native Homd target:
++   P_D(x) = Functor(native_index_cat(D,x),Cat).
++   Homd_target_catd(D)[x] = CoAbove2_cat(P_D(x)), over CoAbove2_cat(Z).
++   homd_int(FF) keeps its primitive head and original Op_catd(E) source.
++   Homwise duality relates Op(E[x]) -> CoAbove2(P_D(x)) to the ordinary
++   source-contravariant form Transpose(E[x]) -> P_D(x).
++   Original D/E remain over Z. Whole local v-action remains to be qualified. */
++
++// Supporting native target context; original D remains over Z.
++symbol native_index_hom_catd [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z))
++  : τ (Catd (@Sigma_cat Z D))
++≔ @hom_ Z (@Sigma_cat Z D) (@Sigma_proj1_func Z D) x;
++
++symbol native_index_inner_cat [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) : Cat
++≔ @Sigma_cat (CoAbove2_cat (@Sigma_cat Z D))
++    (@Op_catd (@Sigma_cat Z D) (@native_index_hom_catd Z D x));
++
++symbol native_index_cat [Z : Cat] (D : τ (Catd Z)) (x : τ (Obj Z)) : Cat
++≔ CoAbove2_cat (@native_index_inner_cat Z D x);
++
++symbol native_index_inner_func [Z : Cat] (D : τ (Catd Z))
++  : τ (Functor (Op_cat Z) Cat_cat)
++≔ @comp_cat_fapp0 (Op_cat Z) (Catd_cat (CoAbove2_cat (@Sigma_cat Z D))) Cat_cat
++    (@Sigma_func (CoAbove2_cat (@Sigma_cat Z D)))
++    (@comp_cat_fapp0 (Op_cat Z) (CoAbove2_cat (Catd_cat (@Sigma_cat Z D)))
++      (Catd_cat (CoAbove2_cat (@Sigma_cat Z D)))
++      (@Op_catd_func (@Sigma_cat Z D))
++      (@CoAbove2_func (Transpose_cat Z) (Catd_cat (@Sigma_cat Z D))
++        (@hom_int Z (@Sigma_cat Z D) (@Sigma_proj1_func Z D))));
++
++symbol native_index_family [Z : Cat] (D : τ (Catd Z))
++  : τ (Functor (Reverse12_cat Z) Cat_cat)
++≔ @comp_cat_fapp0 (Reverse12_cat Z) (CoAbove3_cat Cat_cat) Cat_cat
++    native_homwise_dual
++    (@CoAbove3_func (Op_cat Z) Cat_cat (@native_index_inner_func Z D));
++
++
++
++symbol Homd_target_section_catd [Z : Cat] (D : τ (Catd Z))
+@@ -14817,5 +14838,2 @@
+-  : τ (Catd (Op_cat Z))
+-≔ @Functor_catd
+-     (Op_cat Z)
+-     E
+-     (@fapp0 (CoAbove2_cat Z) (Catd_cat (Op_cat Z)) (@HomPresheaf_catd_func Z) x);
++  : τ (Catd (@native_index_cat Z D x))
++≔ @Const_catd (@native_index_cat Z D x) Cat_cat;
+@@ -14826,9 +14844,16 @@
+-//   HomdTarget_E[x] =
+-//     Π y :^n Z^op, E[y^-] ⊢_[y] HomPsh_Z(x)[y].
+-symbol Homd_target_catd [Z : Cat] (E : τ (Catd Z))
+-  : τ (Catd Z)
+-≔ comp_cat_fapp0
+-     (comp_cat_fapp0
+-       (@Pi_func (Op_cat Z))
+-       (fapp0 (@Functor_catd_func (Op_cat Z)) E))
+-     (@HomPresheaf_catd_func Z);
++//   P_D(x) = native_index_cat(D,x) ⊢ Cat.
++//   This unshifted value category is Pi of Homd_target_section_catd(D,x).
++//   The actual whole Homd target below keeps its required homwise dual.
++symbol native_homd_local_value_family [Z : Cat] (D : τ (Catd Z))
++  : τ (Catd (CoOnly2_cat Z))
++≔ @comp_cat_fapp0 (CoOnly2_cat Z) (Transpose_cat Cat_cat) Cat_cat
++    (@hom_con Cat_cat Cat_cat Cat_cat (@id_func Cat_cat))
++    (@Transpose_func (Reverse12_cat Z) Cat_cat (@native_index_family Z D));
++
++// Homwise-dual target keeps the original pointwise-total-opposite source.
++symbol Homd_target_catd [Z : Cat] (D : τ (Catd Z))
++  : τ (Catd (CoAbove2_cat Z))
++≔ @comp_cat_fapp0 (CoAbove2_cat Z) (CoAbove3_cat Cat_cat) Cat_cat
++    native_homwise_dual
++    (@CoAbove3_func (CoOnly2_cat Z) Cat_cat
++      (@native_homd_local_value_family Z D));
+@@ -14897 +14922 @@
+-    (Op_cat K)
++    (Transpose_cat K)
+@@ -14908 +14933 @@
+-    (Op_cat K)
++    (Transpose_cat K)
+@@ -14964 +14989,2 @@
+-    homd_src_sec(FF,x,u) at y       ↪ homd_tgt_func(FF,x,u,y)
++    homd_src_sec(FF,x,u) restricted at (y,v) ↪ homd_(FF,x,u,y,v)
++    whole variation of this restriction in v remains to be qualified
+@@ -14975 +15001 @@
+-//   homd_src_func(FF,x) : E[x]^op ⊢ Π y :^n Z^op, ...
++//   homd_src_func(FF,x) : Op(E[x]) ⊢ CoAbove2(native_index_cat(D,x) ⊢ Cat).
+@@ -14981 +15007 @@
+-        (Pi_cat (@Homd_target_section_catd Z D x)));
++        (CoAbove2_cat (Functor_cat (@native_index_cat Z D x) Cat_cat)));
+@@ -14985 +15011 @@
+-// as `fapp0 (Op_catd_func Z) E` and `Homd_target_catd E`.  The Transf_cat
++// as `Op_catd E` and `Homd_target_catd D`. The Transf_cat
+@@ -14988 +15014 @@
+-      $Z
++      _
+@@ -14999 +15025 @@
+-//   homd_src_sec(FF,x,u)[y] = homd_tgt_func(FF,x,u,y).
++//   homd_src_sec(FF,x,u)[((y,v),a)] = homd_(FF,x,u,y,v)[a].
+@@ -15004 +15030 @@
+-  : τ (Obj (Pi_cat (@Homd_target_section_catd Z D x)));
++  : τ (Functor (@native_index_cat Z D x) Cat_cat);
+@@ -15015 +15041 @@
+-      (Pi_cat (@Homd_target_section_catd $Z $D $x))
++      (CoAbove2_cat (Functor_cat (@native_index_cat $Z $D $x) Cat_cat))
+@@ -15018 +15044,2 @@
+-// General inner endpoint functor after projecting the source-fixed section at y.
++// Existing local y-functor. Its fixed-v points agree with restrictions of
++// the source-fixed native value; the whole v-comparison is still pending.
+@@ -15029 +15056 @@
+-        (Functor_cat (Op_cat (Hom_cat Z x y)) Cat_cat));
++        (Functor_cat (Transpose_cat (Hom_cat Z x y)) Cat_cat));
+@@ -15040,0 +15068,4 @@
++/* Old y-section projection suspended in this candidate: the source-fixed
++   object now lives on the shared index. Its whole local restriction is
++   checked at the existing Sigma introduction below; v-variation remains
++   a separate qualification obligation.
+@@ -15054,0 +15086,8 @@
++
++*/
++// Native point observation after the local-inclusion constructor has reduced.
++rule @fapp0 _ Cat_cat
++      (@homd_src_sec $Z $D $E $FF $x $u)
++      (Struct_sigma (Struct_sigma $y $v) $a)
++  ↪ @fapp0 (Transpose_cat (Hom_cat $Z $x $y)) Cat_cat
++      (@homd_ $Z $D $E $FF $x $u $y $v) $a;
+@@ -15999 +16038 @@
+-        $K
++        _
+@@ -16952,0 +16992,8 @@
++
++// Whole native homd restriction along the existing Sigma fibre inclusion.
++// The outer composition and shifted-functor endpoints are inferred.
++rule @comp_fapp0 Cat_cat _ _ Cat_cat
++      (@homd_src_sec $Z $D $E $FF $x $u)
++      (@CoAbove2_func _ _
++        (@sigma_intro_tapp0_func _ _ (Struct_sigma $y $v)))
++  ↪ @homd_ $Z $D $E $FF $x $u $y $v;

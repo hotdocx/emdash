@@ -192,6 +192,112 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1D5: Original-family input and direct native projections
+
+The previous `f5954098` turn is progress: it preserved a checked
+definition-only HomPresheaf correction and changed the next action to the
+surrounding target. At resumption all worktrees are clean, the comparison
+baseline is an ancestor and the active nucleus is unchanged.
+
+The remaining input distinction is now checked: the corrected HomPresheaf
+y-base is Reverse12(Z), so Functor_catd requires its negative input over
+Transpose(Reverse12(Z))=CoOnly2(Z). Original D is over Z. Pointwise
+transpose has the required base but changes the v-fibre to Transpose(D[y]);
+the positive/negative controls reject treating it as the original input.
+
+**Selected continuation (2026-09-13):** retain the shared native index as
+the current target candidate, but homwise-dualize its whole value category
+so that the original primitive source and displayed-map interface survive:
+
+```text
+P_D(x) ≔ Functor_cat(native_index_cat(D,x),Cat)
+P_D : CoOnly2_cat(Z) → Cat
+Homd_target_catd(D) ≔ native_homwise_dual ∘ CoAbove3_func(P_D)
+Homd_target_catd(D) : CoAbove2_cat(Z) → Cat
+Homd_target_catd(D)[x] ↪ CoAbove2_cat(P_D(x))
+
+homd_int(FF) : Functord(Op_catd(E), Homd_target_catd(D))
+homd_src_func(FF,x) : Op(E[x]) → CoAbove2_cat(P_D(x))
+homd_src_sec(FF,x,u) : Functor(native_index_cat(D,x),Cat).
+```
+
+The declaration of homd_int is literally unchanged from the preceding
+duality prototype, including its original Op_catd(E) source. hom_int,
+homd_, Op_catd and Op_funcd also retain their declarations. No new
+primitive or unifier is introduced. Applying CoAbove2_func to the source
+functor gives the ordinary Transpose(E[x])→P_D(x) view; this is an actual
+derived functor, not a primitive redefinition or a category-equality cast.
+
+The first candidate used that unshifted target and changed the source to a
+pointwise transpose family. Its initial projections typed, but the full
+candidate stopped at tdapp1_int_func_transfd's existing Op_funcd(FF)
+composition. Simultaneously dualizing source and target is a smaller
+correction: it preserves that composition and checks the existing whole
+internal displayed-Hom action declarations. The first source-component
+fold then needs only its inferred tdapp0 base changed from $K to `_`.
+The first homd_int component fold likewise infers its corrected base.
+
+For fixed y,v, the local inclusion I(y,v):Transpose(Hom_Z(x,y))→S_D(x)
+is CoAbove2_func of the existing sigma_intro_tapp0_func at (y,v).
+Its point is ((y,v),a). A whole local restriction fold gives
+homd_src_sec(FF,x,u)∘I(y,v) ↪ homd_(FF,x,u,y,v). Its constructor-visible
+point counterpart covers evaluation after I(y,v)[a] has already reduced.
+Both point orders, the restricted whole Hom action and a genuine base
+2-cell observation pass. These two native projection rules replace the
+old y-only section projection in the copied candidate; that old rule is
+commented with its restoration/qualification boundary. Generic runtime
+owners and the existing rewrite/unification roles are preserved.
+
+The earlier product/base-change attempt retained a pulled-back opposite
+family instead of identifying its total with the expected product. No
+reindexing unifier, category cast or Sigma rule was added to force it.
+The selected fixed-y,v inclusion reuses the existing Sigma introduction.
+General G-family action remains parked.
+
+**Remaining projection boundary:** the explicitly expanded alternative
+Hom order retains
+`comp(fapp1_func(homd_src_sec), Op_func(fapp1_func(sigma_intro_tapp0_func)))`.
+It is well typed, but its comparison with the folded restricted Hom action
+is not qualified. More importantly, whole variation of the local restriction
+in v is still pending. The retained full-source attempt reaches
+homd_id_tgt_func, whose old body piapp0(homd_id_src_sec(...),y) supplies
+y where the new shared index requires ((y,v),a). That is the next actual
+native consumer to repair; it is not a timeout or an Empty diagnostic.
+
+Durable evidence:
+
+- [copied native-owner patch](../emdash2/audits/native_homd_direct_owner.patch);
+- [original-family input controls](../emdash2/audits/native_homd_direct_input_controls.lp);
+- [primitive, projection and displayed-action controls](../emdash2/audits/native_homd_direct_owner_controls.lp);
+- [expanded Hom-order observation](../emdash2/audits/native_homd_direct_expanded_hom_review.lp);
+- [guarded reproducer](../emdash2/scripts/check_native_homd_direct_owner.sh).
+
+The reproducer passed in `/tmp/emdash-homd-direct-owner.y67JN6`: five
+positive source/reviewer checks, strict LHS audits, and one bounded full
+owner attempt confirming the precise unmigrated y-projection boundary.
+The focused prefix extends through the first displayed-Hom source-component
+fold and includes only its independent later dependencies in source order.
+The copied full candidate keeps those later owners at their original
+positions. There are 1,101 critical-pair and 139 replaceable-pattern warnings;
+the complete reviewer inventories agree. Comparing the same migrated
+declarations with/without the two local folds gives zero warning delta,
+including locations mapped through unchanged source lines. This is not
+a comparison against the old ill-typed full target or a confluence claim.
+
+The manifest records all hashes and open boundaries. Candidate full source:
+`401221ac2b5039341e65c184b3061645a978af209fc5d052036b6c22a9e61ee9`;
+accepted focused slice:
+`6ec6f50b45b831d54f8f36bb59c74afc4d9d9ee1860a6dd5e99bd080c6f3e073`.
+Earlier attempts, including the unselected transpose-source variant, are
+retained in `/tmp/emdash-native-homd-direct.ap7vqgzr`.
+
+**Next:** use the preserved native homd_tgt_func to repair the y/v views
+and their whole projection/action relationship to the shared-index value.
+Address the measured expanded-Hom comparison at its native owner; do not
+start a generic whiskering/profile or auxiliary G-map project. The active
+nucleus, registered catalog and health evidence remain unchanged. NUH-1
+and native integration are still open; no full kernel repair is claimed.
+
 ### NUH-1D4: Correct the existing HomPresheaf composition
 
 The preceding `8321a9d3` turn is progress: the direct source/fibre review

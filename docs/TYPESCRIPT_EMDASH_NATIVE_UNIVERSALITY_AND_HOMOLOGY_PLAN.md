@@ -195,14 +195,16 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending preceding rows | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint |
 
-Current concrete progress (2026-09-13): NUH-1D4's isolated correction of
-the existing defined HomPresheaf classifier computes the required
-Functor(Transpose(Hom_Z(x,y)),Cat) fibre and both nonidentity argument
-actions; the original homd_ endpoint types there. It adds no primitive or
-rewrite/unification rule relative to the duality prototype. Its source
-2-cell is typed, but the final component formula and surrounding original-D
-target input remain unqualified. The active nucleus is unchanged. See
-[NUH-1D4 evidence and next action](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md#nuh-1d4-correct-the-existing-hompresheaf-composition).
+Current concrete progress (2026-09-13): NUH-1D4 corrected the defined
+HomPresheaf fibre and its two argument actions. NUH-1D5 now retains a
+direct native-owner candidate with target CoAbove2(Functor(S_D(x),Cat)).
+This preserves the original primitive homd_int declaration, Op_catd source
+and Op_funcd composition; the x/u projections, fixed-y,v whole restriction
+to homd_ and first displayed-Hom source-component fold check. The full
+candidate reaches the old homd_id_tgt_func y-only evaluation. Whole-v
+projection and the expanded Hom-action comparison remain pending. The
+active nucleus is unchanged. See
+[NUH-1D5 evidence and next action](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md#nuh-1d5-original-family-input-and-direct-native-projections).
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -381,7 +383,7 @@ must not label those alternatives validated implementations.
 | D-NUH-009 | Negative sections act through actual maps between the dual families; do not infer unrestricted covariance on old lax Catd(K) by inverting its comparison cells |
 | D-NUH-010 | The full-source old-variance polarity isolation qualifies a native terminal/constant beta and direction constraint only; combine it with the preferred shifted bases and arbitrary-family profiles before proposing the final target |
 | D-NUH-011 | Strict finite coefficient models refute either base-2-cell orientation of the old unrestricted y-local target; pursue the native shared triangular index/module target with original D/E inputs, preserving homd_int ownership and noncircular dependencies |
-| D-NUH-012 | Native Hom contravariance in u requires dimension-1 transposition T; the strict reference family base is D₂(Z), not the finite model's indistinguishable R(Z) shorthand. Track the further source shifts when internalizing R; preserve total O/R for their actual roles |
+| D-NUH-012 | For the ordinary unshifted Hom target, source contravariance in u uses T and its family base is D₂(Z). D-NUH-025 uses the simultaneously homwise-dual presentation to retain the original O source over R(Z); these are distinct whole target presentations |
 | D-NUH-013 | The shared-index carrier and first projection can use the corrected pre-homd_int Sigma substrate. Qualify whole x/D actions separately; do not conflate that independent carrier with the later Sigma map action's native-laxity dependency |
 | D-NUH-014 | The strict-reference whole x-family computes its source-point and H-precomposition views through native Hom owners; its remaining index-arrow computation is the specific Sigma map of opposite represented precomposition. Derive that structural action without assuming inverse laxity or claiming generic-profile qualification |
 | D-NUH-015 | Selected structural index action now computes complete stable/raw arrows and source-2-cell components before homd_int; classifier/profile and affected full-source qualification remain separate |
@@ -394,6 +396,7 @@ must not label those alternatives validated implementations.
 | D-NUH-022 | User confirms primitive pointwise Op_catd, distinct from Op_func on a classifying functor or total projection. CoAbove2_func(E) keeps object value E[x], so the internal op composite has fibre Op_cat(E[x]), not a fibre transpose; preserve the primitive head |
 | D-NUH-023 | Preserve the existing rewrite/unif architecture during the Op migration. Adapt variance within existing owners first; additions or relocations require an actual core consumer, not auxiliary-prototype or prefix-check convenience |
 | D-NUH-024 | Retain the definition-only HomPresheaf correction: its fibre agrees with native homd_ and both argument actions compute through existing Hom owners. No rule is added or moved; higher-component qualification and the original-D target slot remain pending |
+| D-NUH-025 | The direct Homd candidate uses the homwise-dual shared-index value category, preserving the original primitive homd_int, Op_catd source and Op_funcd composition. Fixed-y,v restriction and first source/action projections check; whole-v projection and the expanded Hom-order join remain open |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
