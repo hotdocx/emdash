@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,76 +310,82 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
-### NUH-4C6a: Whole product pairing — unpromoted experiment
+### NUH-4C6a: Whole product pairing and native inverse action
 
-**Active after e9611e3c; no library source mutation.** The categorical
-subplan records the owner audit: BinaryProducts retains the original whole
-P and projection transformations, but its represented pairing only varies
-the source with the two targets fixed. PreadditiveCategory does not supply
-a whole varying-family addition transfor. The separate PullbackStructure
-capability has not been constructed from the native Abelian package.
+**Implemented after 720807ee.** Three new one-way owners provide the
+product prerequisite for the connecting cover:
 
-The proposed ordinary structural presentation supplies Δ⊣P over the same
-P/BP, with counit (π₁,π₂) and unit components the original diagonal pairing.
-An ordinary product-category profile is the other proposed structural
-operation. Both would be explicit primitive/model obligations, as the
-current opaque classifiers do not derive them from their β interface.
-Neither has been promoted. No whole fibre product, cover or δ is supplied
-by this experiment.
+- [product-family views](../emdash2/emdash3_2_product_family_views.lp):
+  the defined diagonal, a derived product-component path and nine sufficient
+  proof-time comparisons;
+- [ordinary product presentation](../emdash2/emdash3_2_one_cat_product_adjunction.lp):
+  two explicit structural primitives and two unit/counit coupling rules;
+- [whole family pairing](../emdash2/emdash3_2_one_cat_product_families.lp):
+  four defined pair/unpair operations and two derived whole/component paths.
 
-Recovery files under `emdash2/tmp/probes/`:
+The ordinary product-category profile and Δ⊣P at the original P/BP are
+structural/model obligations, not theorems derived from today's opaque
+classifier β interface. The whole counit retains the original π₁/π₂;
+the unit components retain the original diagonal pairing. Native family
+mates construct the pair/unpair functors, and their original inverse cuts
+recover whole inputs and further Hom action. No replacement P is selected.
 
-- `nuh4c6_product_adjunction.lp`: candidate presentation and diagonal rules;
-- `nuh4c6_product_family_pairing.lp`: four defined native pair/unpair
-  operations and both inverse-cancellation assertions;
-- `build_nuh4c6_pair_point.py` and `nuh4c6_pair_point.lp`: whole formula and
-  original component-agreement attempt;
-- `nuh4c6_diagonal_corners.lp`: six typed reduction-order controls;
-- `nuh4c6b_product_adjunction.lp`: rejected proof-time-only alternative for
-  the raw/native object folds, including projected endpoint comparisons.
+The component agreement follows from the existing whole mate formula,
+a paired-component view and the original product-action comparison/cuts.
+The two original selected projections consequently recover the original
+f/g components. The runtime counit constructor retains native projected
+endpoint annotations; its two whole projections return the original
+projection transformations. Native indices inside mate applications and
+the original explicit input-pair annotations are likewise retained.
 
-Native pair/unpair checks pass in
-`nuh4c6_product_family_pairing-20260913-190019.log`. Whole formula alignment
-advanced after a narrow associativity comparison, but component agreement
-still fails in `nuh4c6_pair_point-20260913-190440.log`: evaluation of the
-paired transformation remains a different presentation from the pair of
-evaluated components. This is an unfinished comparison, not evidence that
-the mathematical product pairing is invalid.
+The nine unifiers comprise four projected raw/native diagonal comparisons,
+two sufficient projected-composition comparisons, two constant-coordinate
+views and one whole paired-component view. They compare all relevant
+functors, cells, endpoints and parameters. Composite and constant input
+tests preserve the existing runtime forms; unrelated factors, coordinates
+and cells are rejected. The generic product-component path supplies the
+underlying projection/path semantics without new naturality input.
 
-Fresh unchanged-dependency baseline
-`nuh4c6_product_dependencies-20260913-191045.log` passes with 1214 critical
-pairs / 167 replaceable-pattern warnings. The corner reviewer passes in
-`nuh4c6_diagonal_corners-20260913-191348.log`, with 1222 / 167. The exact
-warning delta is six comp_fapp0/comp_fapp0 and two
-hom_postcomp_fapp0/hom_postcomp_fapp0 instances, located at the two new
-object folds; no warnings disappear and neither inventory has parser
-diagnostics. The six raw-composition instances involve associativity,
-identity, constant composition, native precomposition and the two original
-triangular projection actions. The two native-postcomposition instances
-involve nested postcomposition and identity.
+The earlier raw/native diagonal runtime-fold experiment and its eight
+overlaps are not installed. Its evidence and the rejected first proof-time
+variant are preserved in checkpoint 720807ee and the ignored C6a probes.
+The successful refinement omits unnecessary inferred arguments in projected
+unifiers and emits an explicit equality obligation for the retained functor.
+A direct view at the paired-component owner avoids rebuilding caller
+naturality data or adding runtime distribution/eta rules.
 
-The typed corner reviewer confirms that (G,G)∘F and (G∘F,G∘F) retain
-different whole normal forms, although their object and arrow actions
-agree. The corresponding constant-composition forms likewise remain
-distinct while their object observations agree. The identity corner joins.
-The negative assertions record missing conversion, not inequivalence.
-Full qualification of all eight families is therefore still open.
+Final serial, resource-guarded checks (each ≤90 seconds), all under
+emdash2/logs/probes/:
 
-The proof-time-only alternative fails counit subject reduction in
-`nuh4c6b_product_adjunction-20260913-191158.log` and, after adding projected
-endpoint comparisons, `nuh4c6b_product_adjunction-20260913-191243.log`.
-The unresolved type equations are σᵢ(Δ∘P)=P. Do not promote this alternative
-or bypass subject reduction. All logs above are under `emdash2/logs/probes/`;
-all checker runs are serial, guarded and bounded by 90 seconds.
+| Target | Final log |
+| --- | --- |
+| Product-family views | emdash3_2_product_family_views-20260913-194128.log |
+| Product adjunction | emdash3_2_one_cat_product_adjunction-20260913-194947.log |
+| Whole pairing and paths | emdash3_2_one_cat_product_families-20260913-194208.log |
+| Generic view reviewer | product_family_views-20260913-194214.log |
+| Whole product reviewer | one_cat_product_families-20260913-194219.log |
+| Retained product, family-adjunction and short-exact reviewers with new owners loaded | nuh4c6_retained_consumers-20260913-194238.log |
 
-**Next:** refine the native whole/projection presentation while preserving
-existing composition, constant and triangular owners. Require original
-component agreement, whole inverse/projection recovery, retained Hom action,
-and typed overlap qualification before installing a product-adjunction
-presentation. Do not solve the local failure by a blanket product-composition
-or constant-family normalization change. C5 remains the latest implemented
-milestone; fibre-product/cover/δ, output exactness and the later model/reifier
-and snake work are unchanged obligations.
+The two reviewers have 37 assertions: 28 positive and nine negative.
+Views/source and its reviewer exactly match the dependency-only join
+nuh4c6_final_dependency_views-20260913-194225.log at 1146 critical pairs /
+157 replaceable-pattern warnings. Both product sources and their reviewer
+match nuh4c6_final_dependency_family-20260913-194230.log at 1214 / 167.
+Categories, locations, term heads, participant-rule families and parser
+diagnostics all match, with no added or removed warning. The fresh pre-edit
+dependency baseline passed in
+nuh4c6_product_dependencies-20260913-191824.log.
+
+Strict rule-LHS audits, catalog freshness, shell syntax and source-only
+health pass; registration now contains 1000 files. The nucleus is unchanged.
+Final document/link hygiene and exact staging are required before the
+checkpoint. No TypeScript or repository-wide typecheck is run.
+
+**Next C6b:** construct the whole fibre-product family and its projections
+through the original categorical product and K/Q owners. Whole addition
+and a derived PullbackStructure are not silently supplied by C6a. The
+cover/covered map, δ descent, output exactness, model/reifier synthesis and
+snake comparison remain required. All user deferrals remain in force.
 
 ### NUH-4C5: Whole short-exact row comparisons and inverses
 

@@ -208,6 +208,17 @@ Q(f). Nine definitions and 22 assertions add no primitive or rule. Whole
 fibre products/cover/δ and derived output exactness remain. The owner ledger
 records exact qualification and the ordinary-profile boundary.
 
+C6a now [constructs whole product-family pairing and its inverse](../emdash3_2_one_cat_product_families.lp)
+through the existing native family mates at the original P/BP. The
+[ordinary product presentation](../emdash3_2_one_cat_product_adjunction.lp)
+adds two explicit structural/model obligations: the product-category profile
+and Δ⊣P. Two coupling rules retain original whole counit projections and
+unit components. Eight definitions and nine proof-time views retain native
+indices, whole inverse action and derived component agreement. All 37
+assertions pass with unchanged dependency warning inventories. Runtime
+diagonal/composition folds are not installed. Whole fibre products, the
+connecting cover/δ and output exactness remain required.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

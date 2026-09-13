@@ -4541,6 +4541,19 @@ Four proof-time comparisons preserve runtime owners, and the original H
 boundary and K/Q/N choices remain fixed. No general higher interchange or
 new homological normalization theorem is claimed by this ordinary scope.
 
+The product prerequisite now has a whole ordinary presentation. For the
+original selected product functor P:C×C→C, the native adjunction Δ⊣P induces
+mutually inverse functors between Transf(X,F)×Transf(X,G) and
+Transf(X,P∗(F,G)). Thus all three endpoint families can vary over the
+parameter category. The same native mate cuts compute inverse action.
+Component agreement with the original selected pairing, and its original
+projection equations, are derived observations. The product-category
+ordinary profile and Δ⊣P are explicit structural primitives extending the
+current opaque classifiers, with original counit/unit coupling and pending
+model interpretation obligations. Proof-time product-family views preserve
+the existing runtime owners; no pointwise naturality input is supplied.
+This constructs a prerequisite for the connecting cover, not the cover or δ.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

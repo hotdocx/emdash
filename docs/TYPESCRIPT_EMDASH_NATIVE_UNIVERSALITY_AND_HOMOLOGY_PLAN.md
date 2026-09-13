@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,32 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C5 milestone (2026-09-13): the
+Current C6a milestone (2026-09-13): [whole product-family pairing is constructed](../emdash2/emdash3_2_one_cat_product_families.lp)
+through the original P and native family mates for Δ⊣P. Its inverse retains
+the complete pair of original transformations; whole inverse functors and
+higher action compute. The component agreement with the original selected
+pairing is derived, so its original projections recover the original f/g
+components. The [ordinary product presentation](../emdash2/emdash3_2_one_cat_product_adjunction.lp)
+adds two explicit structural/model obligations: the product-category profile
+and Δ⊣P at the original P/BP. Its whole counit and unit components reuse
+the existing projections and diagonal pairing.
+
+Eight definitions, two primitives, two structure-specific runtime rules
+and nine proof-time views add no nucleus or runtime diagonal/composition
+rewrite. The earlier diagonal-fold experiment and its eight overlaps were
+not promoted. All 37 reviewer assertions pass; source/reviewer warning
+inventories exactly match their unchanged dependencies. Whole fibre
+products/cover/δ, output exactness and concrete model synthesis remain
+required. The owner ledger records the boundary and exact qualification.
+
+C6b next constructs the whole fibre-product family and its projections for the
+connecting cover, using the original categorical product/universal owners.
+The cover, covered map, quotient descent and derived output exactness remain
+required. Keep formal programs independent of ordinary factor dictionaries;
+record and qualify any missing whole interface at its actual consumer.
+Concrete model/reifier construction and the snake comparison remain later.
+
+The completed C5 milestone (2026-09-13): the
 [whole short-exact-family interface](../emdash2/emdash3_2_one_cat_short_exact_families.lp)
 retains invertibility of the actual kernel comparison β:A⇒K(g) and the
 constructed cokernel comparison γ:Q(f)⇒C. The original whole h derives
@@ -33,23 +58,6 @@ zero proof. Native inverse mating reconstructs g. Both selected inverses
 are whole transformations; γ⁻¹ lands in Q(f), with no section into B.
 Nine definitions and 22 assertions add no primitive, rewrite or unifier.
 Normality is not needed merely to define this kernel-cokernel pair.
-
-C6 next forms the whole fibre-product family and its projections for the
-connecting cover, using the original categorical product/universal owners.
-The cover, covered map, quotient descent and derived output exactness remain
-required. Keep formal programs independent of ordinary factor dictionaries;
-record and qualify any missing whole interface at its actual consumer.
-Concrete model/reifier construction and the snake comparison remain later.
-
-C6a is currently an unpromoted product-interface experiment. Native whole
-pairing and both inverse-mate cuts check in the prototype, but agreement
-with the original selected pairing at each object remains unfinished.
-The proposed literal-diagonal runtime folds introduce eight overlaps;
-typed composite/constant corners retain different whole normal forms even
-where object and arrow observations agree. A proof-time-only alternative
-fails counit subject reduction. No C6a source or rule is installed in the
-active library. The categorical subplan and owner ledger record the exact
-evidence and the next interface-qualification boundary.
 
 The completed C4b milestone (2026-09-13): the
 [canonical whole image-to-kernel comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp)
@@ -706,6 +714,7 @@ must not label those alternatives validated implementations.
 | D-NUH-047 | C4b retains the original H boundary β, derives its whole incoming-kernel annihilation, descends through the original Q and composes with the same selected a_F inverse. Whole reconstruction and uniqueness characterize e:Im(f)⇒K(g). ExactFamily is existing OmegaEquivAlong on this actual e, not an exactness inhabitant or an isomorphism between independently selected objects. The native zero-cone specialization retains whole action |
 | D-NUH-048 | Use Cat-specific prewhiskering action views and keep native indices inside inverse/evidence eliminations. Four measured proof-time comparisons cover shape-arrow reindexing, constant precomposition, guarded shape-map composition and represented outer associativity. They preserve runtime heads and all relevant data; no object cast, new universality primitive or generic naturality rewrite is installed |
 | D-NUH-049 | C5 derives the original whole g∘f=0 from h, constructs γ:Q(f)⇒C by native descent, and retains fixed-map invertibility of the actual β and γ as OneCatShortExactFamily. Both inverses are selected from that same evidence; γ⁻¹ lands in Q(f), not B. No new splitting, comparison primitive or exactness theorem is supplied. Whole fibre products/cover/δ and derived output exactness remain required |
+| D-NUH-050 | C6a supplies the ordinary product-category profile and Δ⊣P as explicit structural/model obligations over the original P/BP. Native family mates construct whole pairing and inverse computation; component agreement and original projection recovery are derived. Preserve native indices inside applications and keep diagonal/composite/constant/component comparisons at proof time. The rejected runtime diagonal folds are not installed; this prerequisite supplies no fibre product, cover or δ |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C5 whole short-exact kernel-cokernel pairs and inverses qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -193,48 +193,40 @@ that the current owners do not provide. Then construct the cover, covered
 map and coimage descent below and prove output exactness from the original
 short-exact-family data and Abelian structure.
 
-Current C6a owner audit: BinaryProducts retains a whole P and whole
-projections, but its pairing is only supplied at fixed target objects.
-PreadditiveCategory retains ordinary Hom-group operations, not a whole
-varying-family addition transfor. PullbackStructure is a separate coherent
-slice-base-change capability; the current Abelian package does not derive
-or supply it. Do not silently import that capability as the fibre-product
-construction promised here.
+C6a resolves the whole-product prerequisite. BinaryProducts already retained
+the original whole P and projection transformations, but its represented
+pairing only varied the source with the two targets fixed. The
+[ordinary Δ⊣P presentation](../emdash2/emdash3_2_one_cat_product_adjunction.lp)
+and [whole family mates](../emdash2/emdash3_2_one_cat_product_families.lp) now give
 
-The proposed first prerequisite is the native ordinary product adjunction
-Δ⊣P at that same P/BP. The existing Adjunction classifier has no constructor
-from its current unit/counit β interface. Its proposed explicit ordinary
-structural presentation has counit equal to the existing pair of whole
-projections and unit components equal to the existing diagonal pairing.
-The ordinary product-category profile is likewise a structural closure
-operation: today's groupoidal-product comparison stops before a whole
-inverse constructor. Record both operations as primitive/model obligations,
-not derived β theorems. Generic family adjunction lifting and native mate
-cuts must then construct whole varying-target pairing, preserving P and its
-existing components/actions. This is a prerequisite, not a completed
-pullback, cover or connecting construction.
+    pair : Transf(X,F) × Transf(X,G) → Transf(X,P∗(F,G))
+    unpair : Transf(X,P∗(F,G)) → Transf(X,F) × Transf(X,G).
 
-The current ignored C6a prototype supplies these two structural operations
-and constructs native whole pair/unpair functors by the existing family
-mates. Both inverse cancellations check, retaining the complete input.
-This does not yet qualify the interface: the original component-pairing
-agreement proof is unfinished, and the literal-diagonal runtime folds
-introduce eight additional overlap instances. In particular, existing
-associativity leaves (G,G)∘F where the new diagonal fold leaves
-(G∘F,G∘F); existing constant composition likewise retains a different
-whole owner. Typed tests show distinct whole normal forms with agreeing
-object/arrow observations, not a mathematical inequivalence.
+These are whole internal functors with computing inverse composites and
+retained higher action. Native endpoint annotations stay inside mate
+applications. Component agreement with the original selected pairing is
+derived from the whole mate formula, the existing product action comparison
+and its original cuts. Both original component projections recover f/g.
+No caller naturality squares or new product selection are introduced.
 
-Replacing the raw and native object-level folds with proof-time comparisons
-has also been tried. It fails subject reduction of the counit rule at the
-projected source σᵢ(Δ∘P), including a variant with projection comparisons.
-That rejected alternative is not an installed rule. Preserve both
-experiments, refine the whole/projection interface, and qualify the
-remaining overlap families and actual component/action agreement before
-promotion. Do not broaden product-composition or constant-family runtime
-normalization merely to close this probe. No C6a implementation or new
-primitive is currently in the active library. The owner ledger records
-the bounded logs and recovery paths.
+The product-category ordinary profile and Δ⊣P at the same P/BP are two
+explicit structural primitives. Today's opaque classifiers do not construct
+them from their β interface; they remain model interpretation obligations.
+Two structure-specific runtime rules retain the original whole counit
+(π₁,π₂) and original diagonal unit components. Nine proof-time views handle
+literal-diagonal projections, existing composite/constant normal forms and
+paired components. They preserve runtime owners and all relevant data.
+The earlier runtime diagonal folds, which introduced eight overlaps, were
+not promoted. Thirty-seven assertions and exact unchanged-dependency
+warning comparisons qualify this ordinary presentation.
+
+PreadditiveCategory still supplies ordinary Hom-group operations without a
+whole varying-family addition transfor. PullbackStructure remains a separate
+coherent slice-base-change capability, not yet constructed from this native
+Abelian package. C6b must now construct the whole fibre-product family and
+its projections through the original product/K/Q owners, then the cover,
+covered map and descent for δ. Do not silently supply either missing
+capability or turn the new exactness predicate into an assumed theorem.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

@@ -2922,6 +2922,22 @@ Pointwise pair/unpair composites have internal equality paths. Do not promote
 those paths to equality of whole functors or to `OmegaEquivAlong` unless a
 separate whole assembly owner is supplied.
 
+The ordinary whole-family extension now supplies such an owner at the
+original P/BP. With OneCat(C), write Δ⊣P for
+one_cat_binary_product_adjunction and use
+one_cat_product_family_pair_func / one_cat_product_family_unpair_func for
+the native functors
+
+    Transf(X,F) × Transf(X,G) ⇄ Transf(X,P∗(F,G)).
+
+Their point aliases retain whole transformations, and both inverse
+composites compute through the original mate comparison. The component
+agreement with the original selected pairing is a derived path. Native
+endpoint annotations remain inside applications; projected diagonal,
+composition, constant and component comparisons are proof-time views.
+The ordinary product-category profile and adjunction are explicit
+structural/model obligations, not derived old pointwise β theorems.
+
 For a selected terminal object
 
 ```text

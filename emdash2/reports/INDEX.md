@@ -97,6 +97,14 @@ from the original h, retaining the actual kernel-cokernel pair and a
 cokernel inverse into Q(f). Whole fibre products/cover, δ and its derived
 exactness proofs remain.
 
+C6a now adds [whole product-family pairing and its inverse](../emdash3_2_one_cat_product_families.lp),
+with original component/projection agreement and retained higher action.
+The original P/BP supplies an explicit ordinary Δ⊣P presentation and
+product-category profile; these two structural primitives remain model
+obligations. Nine proof-time views preserve existing runtime owners.
+Thirty-seven assertions and unchanged dependency warning inventories
+qualify this prerequisite; fibre-product/cover/δ and output exactness remain.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an
