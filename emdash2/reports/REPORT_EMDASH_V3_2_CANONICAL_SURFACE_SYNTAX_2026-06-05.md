@@ -2014,6 +2014,17 @@ native mate to give Q∘D⇒Y, with `*_reconstruction` and `*_unique` as whole
 path observations. The native inverse returns the full coherent input.
 These names introduce no pointwise cone syntax or new runtime inverse law.
 
+`zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
+observe f=E₀(h) and Arr(f) before any K/Q selection. The new
+`one_cat_coimage_to_kernel_transf` descends the original H boundary at the
+original restricted kernel-arrow family. `one_cat_image_to_kernel_transf`
+then composes with the same selected inverse of a. Its `*_reconstruction_path`
+and native reconstruction views are whole paths; `one_cat_image_kernel_unique`
+expresses uniqueness through the actual a_F. `OneCatAdjunctionExactFamily`
+is existing OmegaEquivAlong on this specific map, not arbitrary object
+isomorphism or an exactness axiom. `zero_arrow_cone_image_kernel_transf`
+specializes the whole map to the existing native input category.
+
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these
 agreements. Formal whole action remains the runtime owner for generic

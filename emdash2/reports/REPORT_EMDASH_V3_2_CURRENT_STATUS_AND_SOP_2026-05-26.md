@@ -190,9 +190,18 @@ D⇒I∘Y from one whole annihilation cell, preserving D as Q's actual argument.
 Native cancellation, whole target recovery and uniqueness are derived;
 component and next Hom action retain the same input. Canonical Coim⇒Im
 shares its introduced constructor with unchanged computation. Nine new
-definitions and 16 assertions add no primitive, rewrite or unifier. C4b must
-still construct the actual image-to-kernel comparison before exactness/δ.
-The owner ledger records exact validation and the preserved next experiment.
+definitions and 16 assertions add no primitive, rewrite or unifier.
+C4b now [constructs canonical whole Im(f)⇒K(g)](../emdash3_2_one_cat_image_kernel_comparison.lp).
+Whole restriction of the original counit, inverse-mate reconstruction and
+faithfulness derive the actual H boundary's annihilation. Original cokernel
+descent and the same a_F inverse define e; whole reconstruction and uniqueness
+are derived. The [exactness interface](../emdash3_2_one_cat_categorical_exactness.lp)
+is fixed-map OmegaEquivAlong on this e, with a whole native zero-cone
+specialization and no supplied exactness inhabitant. Nineteen definitions,
+four proof-time comparisons and 34 new assertions retain the original data
+and action, adding no primitive or runtime rule. Native short-exact row
+comparisons, δ and its exactness proofs remain. The owner ledger records
+exact qualification and the ordinary-profile boundary.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

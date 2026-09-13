@@ -1,5 +1,5 @@
 /* Proof-time views of native whole-family adjunction mates.
-   The four comparison helpers preserve the existing runtime owners.
+   The seven comparison helpers preserve the existing runtime owners.
    Congruence is sufficient: corresponding operands and endpoints must
    compare. This does not assert mathematical injectivity of composition.
    Whole formula agreement and reconstruction are derived through the
@@ -38,6 +38,33 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C
     (@comp_fapp0 Cat_cat $A $D $C $G $F) $X
   ≡ @comp_fapp0 Cat_cat $B $D $C $G
     (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $D $F $X)
+  ↪ [ tt ≡ tt ];
+
+// Proof-time constant precomposition; the source and selected value are retained.
+unif_rule @hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $C $A _ _
+    (@Const_func _ _ $t)
+  ≡ @Const_func $A $C $t
+  ↪ [ tt ≡ tt ];
+
+// Sufficient congruence for a composite of two whole shape-arrow observations.
+// Guard both operands so generic associativity remains the owner of composites.
+unif_rule @comp_fapp0 (Functor_cat $B $C) $X $Y $Z
+    (@sym_tapp1_fapp0_transf $Bg $Ig $Cg $Dg $ig $jg $ug)
+    (@sym_tapp1_fapp0_transf $Bf $If $Cf $Df $if $jf $uf)
+  ≡ @comp_fapp0 (Functor_cat $B0 $C0) $X0 $Y0 $Z0
+    (@sym_tapp1_fapp0_transf $Bg0 $Ig0 $Cg0 $Dg0 $ig0 $jg0 $ug0)
+    (@sym_tapp1_fapp0_transf $Bf0 $If0 $Cf0 $Df0 $if0 $jf0 $uf0)
+  ↪ [ $B ≡ $B0; $C ≡ $C0; $X ≡ $X0; $Y ≡ $Y0; $Z ≡ $Z0;
+      (@sym_tapp1_fapp0_transf $Bg $Ig $Cg $Dg $ig $jg $ug)
+        ≡ (@sym_tapp1_fapp0_transf $Bg0 $Ig0 $Cg0 $Dg0 $ig0 $jg0 $ug0);
+      (@sym_tapp1_fapp0_transf $Bf $If $Cf $Df $if $jf $uf)
+        ≡ (@sym_tapp1_fapp0_transf $Bf0 $If0 $Cf0 $Df0 $if0 $jf0 $uf0) ];
+
+// Companion associativity view with represented outer postcomposition.
+// The actual Q,G,F and every endpoint are the same on both sides.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $D $C $Q
+    (@comp_fapp0 Cat_cat $B $A $D $G $F)
+  ≡ @comp_fapp0 Cat_cat $B $A $C (@comp_fapp0 Cat_cat $A $D $C $Q $G) $F
   ↪ [ tt ≡ tt ];
 
 // Observation of a whole family mate in the original whiskering formula.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C4a whole cokernel descent at original diagram families qualified; C4b canonical image-to-kernel comparison next; exactness/connecting unfinished; Op/duality deferred
+Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -84,22 +84,46 @@ construction and comparison with the old normality providers remain later
 model obligations. This is the native condition and its computational
 consumer, not a proof that every whole pre-Abelian presentation is Abelian.
 
-C4b is the next construction. For whole h:J∘A⇒D over an arbitrary B, put
-f=E₀(h) and β=mate_P(h):A⇒K∘D. At the original Arr(f), derive β∘κ_f=0
-through whole projected inverse-mate faithfulness, then use native cokernel
-mating to obtain β̄:Coim∘Arr(f)⇒K∘D. Define
+C4b now constructs the
+[canonical comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp).
+For whole h:J∘A⇒D over B, let f be the original source observation of h and
+F=Arr(f). Both are [defined before universal selection](../emdash2/emdash3_2_zero_arrow_family_observations.lp).
+Keep β as the existing whole H boundary `kernel_adjunction_family_boundary_transf`.
+The original counit, whole prewhiskering of zero and native mate faithfulness
+derive β∘κ_F=0, with the actual restricted kernel-arrow family. Then
 
 ```text
-e = β̄ ∘ (a restricted to Arr(f))⁻¹ : Im∘Arr(f) ⇒ K∘D.
+β̄ = cokernel descent of β : Coim∘F ⇒ K∘D
+e = β̄ ∘ (a restricted to F)⁻¹ : Im∘F ⇒ K∘D
+e∘a_F = β̄.
 ```
 
-This must be a constructed whole transformation at the original endpoints,
-with reconstruction and retained action. Generalize the already qualified
-whole descent machinery as needed; do not substitute a per-object cone
-algorithm or a new comparison axiom. Applying it to the existing
-ZeroArrowCone category gives the canonical exactness owner. Its
-invertibility is the exactness condition; the LES proof must derive that
-condition at its actual output, rather than assume the desired theorem.
+The original Q is evaluated at Arr(κ)∘F; no reconstructed kernel arrow or
+new universal selection supplies the source of descent. Native inverse
+mating of β̄, and of e∘a_F, reconstructs the original whole β. Its kernel
+inverse-mate projection reconstructs f. Whole reconstruction through a_F
+determines e uniquely. These are defined paths and native cuts, with
+component, arbitrary base-arrow and next Hom observations; no caller
+pointwise cone or naturality dictionary enters the program.
+
+`OneCatAdjunctionExactFamily` is existing OmegaEquivAlong on this actual e
+in Functor_cat(B,C). It is a condition on the chosen coherent family, not
+an automatically supplied inhabitant. The whole specialization to the
+existing ZeroArrowCone category uses its existing tautological transformation;
+it does not assert that every zero pair is exact. Generic evaluation derives
+point evidence from supplied whole exactness evidence. The LES must still
+prove the condition at its own output positions from the short-exact input.
+
+The current comparison follows the planned Abelian coimage route and takes
+the original normality N. Its four proof-time comparisons are required by
+actual native/whole consumers: shape-arrow reindexing, constant precomposition,
+congruence of a composite of two shape observations, and represented outer
+associativity. The congruence guards both operands and compares complete
+maps/endpoints; it asserts no injectivity. Cat-specific action views preserve
+the raw observation signatures while native indices remain inside inverse
+and evidence eliminations. No runtime head is merged, no new primitive or
+naturality rewrite is supplied, and the general lax/oplax profile boundary
+is unchanged. The owner ledger records failures, refinements and exact checks.
 
 C4a now provides [whole original-family inputs](../emdash2/emdash3_2_one_cat_cokernel_family_inputs.lp)
 and [cokernel descent with characterization](../emdash2/emdash3_2_one_cat_cokernel_family_descent.lp).
@@ -134,14 +158,14 @@ same introduced constructor; exact comparison with their old bodies passes.
 The original a, its normality data and H selections therefore keep their
 computational owners. No new primitive, runtime rule or unifier is added.
 
-C4b remains: for β=mate_P(h) at a whole zero-family, derive β∘κ_f=0,
-apply this descent to the original restricted Arr(κ), and compose with
-(a restricted to Arr(f))⁻¹. A successful full-owner temporary comparison
-relates diagram-family shape-arrow evaluation to prewhiskering by the same
-family. It is not promoted: the actual restricted κ/annihilation consumer,
-retained action and negative controls must qualify any required comparison.
-Do not infer that the canonical image-to-kernel map or exactness theorem is
-already constructed from the general descent helper alone.
+C5 is the next construction: obtain the whole cokernel row comparison
+γ:Q(f)⇒E₁D from the original h and its derived whole g∘f=0 cell, using the
+qualified descent. Together with the original kernel mate β:A⇒K(g), fixed-map
+OmegaEquivAlong evidence for β and γ expresses a whole kernel-cokernel pair.
+Construct both comparisons before packaging their invertibility. This will
+supply the short-exact row inverses used by the whole cover/covered-map/δ
+construction below. Do not run the old ordinary-record algorithm as the
+primary program or treat output exactness as a supplied capability.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes
@@ -167,7 +191,7 @@ expresses the usual image/kernel definition categorically, without an
 object-equality cast. In the abelian setting it is equivalently expressed
 by the actual H(f,g)=Q(β(f,g)) being a zero object.
 
-For a coherent family, construct e as a whole transformation. Exactness
+For a coherent family, e is now a constructed whole transformation. Exactness
 evidence for a family/LES position must apply to that whole comparison;
 ordinary per-position predicates can be derived observations. Use existing
 native zero-pair/window data and whole K/Q, not a separate cone grammar.
@@ -479,9 +503,10 @@ are qualified by localized reviewers. The owner ledger records exact warning
 comparisons, inference-slot audits and the rejected alternatives.
 
 C3 above now attaches existing invertibility evidence to this actual a.
-Next construct the canonical Im(f)→K(g) at native zero data and use its
-invertibility for exactness. This is additional Abelian/exactness structure,
-not a consequence of K/Q existence or of the two reconstruction paths. Continue to whole
+C4b constructs the canonical Im(f)→K(g) at native zero data and uses its
+invertibility as the exactness condition. This is additional Abelian/exactness
+structure, not a consequence of K/Q existence or of the two reconstruction
+paths. Continue to whole
 universal descent for δ; do not run the old ordinary-record program as the
 primary implementation.
 

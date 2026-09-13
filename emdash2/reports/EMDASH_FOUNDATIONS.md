@@ -4518,8 +4518,23 @@ exchange. The original cokernel mate gives Q∘D⇒Y; it is still Q(D), not a
 new selection on a reconstructed diagram. Its inverse returns the entire
 input, whose target is u. This whole reconstruction characterizes descent
 uniquely. Canonical Coim⇒Im shares the introduced case with unchanged
-computation. The kernel-mate annihilation needed for Im(f)→K(g) remains
-further work, followed by exactness and the connecting construction.
+computation. The original whole kernel mate β now has the required
+annihilation against the actual incoming kernel, derived by restricting
+the counit and reflecting its inverse-mate projection. Descending β gives
+β̄:Coim(f)⇒K(g); composing with the same a_f inverse constructs e:Im(f)⇒K(g).
+The whole equation e∘a_f=β̄ and native inverse-mate reconstruction recover
+β, and whole reconstruction determines e uniquely. No pointwise cone or
+caller naturality field enters this program.
+
+Exactness of a chosen coherent family is now OmegaEquivAlong on this actual
+e in its functor category. The whole native zero-cone specialization does
+not assert that all zero pairs are exact. Point evidence is an observation
+of supplied whole evidence; LES exactness must still be proved from the
+short-exact input. The next construction supplies whole kernel-cokernel row
+comparisons for that input, then the connecting cover and universal descent.
+Four proof-time comparisons preserve runtime owners, and the original H
+boundary and K/Q/N choices remain fixed. No general higher interchange or
+new homological normalization theorem is claimed by this ordinary scope.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

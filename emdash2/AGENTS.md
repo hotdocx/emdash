@@ -216,7 +216,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   its argument. Native cancellation, whole target recovery and uniqueness
   are derived; canonical Coim⇒Im shares the introduced constructor with
   unchanged computation. Nine definitions add no primitive or rule. The
-  actual kernel-mate annihilation and image-to-kernel comparison remain next.
+  actual kernel-mate annihilation is now derived by whole restriction,
+  inverse-mate reconstruction and faithfulness. Incoming observations remain
+  independent of K/Q selection. The image/kernel owner constructs e:Im(f)⇒K(g)
+  by original coimage descent and the same selected inverse; whole native
+  reconstruction and uniqueness are derived. Categorical exactness is
+  existing OmegaEquivAlong on this actual e, with a whole native zero-cone
+  specialization and no exactness inhabitant. Nineteen definitions and four
+  proof-time comparisons add no primitive, runtime rule or object cast.
+  Native short-exact row comparisons and whole δ/exactness proofs remain.
   General lax/oplax interchange is not qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).

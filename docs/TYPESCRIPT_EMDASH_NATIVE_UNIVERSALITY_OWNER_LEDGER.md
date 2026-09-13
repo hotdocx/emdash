@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C4a whole cokernel descent at original diagram families qualified; C4b canonical image-to-kernel comparison next; exactness/connecting unfinished; Op/duality deferred
+Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,128 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C4b: Canonical whole image-to-kernel comparison and exactness
+
+**Implemented after 917a2981.** Nineteen new definitions across five new
+one-way modules and the existing evaluator owner construct the actual
+whole comparison. Four proof-time comparisons add no runtime rewrite,
+primitive, nucleus edit, caller coherence field or replacement selection.
+
+- [Incoming observations](../emdash2/emdash3_2_zero_arrow_family_observations.lp)
+  define f=E₀(h) and F=Arr(f) before K/Q selection. Native parent annotations
+  are retained inside the projection; point observations recover the same h.
+- [Whole zero paths](../emdash2/emdash3_2_one_cat_zero_family_paths.lp) transport
+  canonical zero and annihilation by prewhiskering, using whole initial/
+  terminal uniqueness and generic action. They require no new additive
+  structure on the functor category.
+- [Kernel-family restriction paths](../emdash2/emdash3_2_one_cat_kernel_family_restriction_paths.lp)
+  align the whole zero view, restrict original counit annihilation, reconstruct
+  the actual H boundary under inverse mating, reflect projected annihilation,
+  and prove β∘κ_F=0. The existing raw H boundary is retained literally.
+- [Image-to-kernel comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp)
+  descends β at the original Arr(κ)∘F and composes with the same selected
+  a_F inverse. The six definitions include e∘a_F=β̄, native inverse-mate
+  reconstruction of both sides to the original β, and uniqueness from whole
+  reconstruction. Components and higher action are observations of these
+  whole terms, not rebuilt pointwise maps.
+- [Categorical exactness](../emdash2/emdash3_2_one_cat_categorical_exactness.lp)
+  is existing OmegaEquivAlong at this actual e. The native zero-cone
+  specialization is a whole transformation on its existing category and
+  tautological input. No exactness inhabitant is declared; the whole map on
+  all zero-cones is not asserted invertible.
+
+The evaluator gains a proof-time shape-arrow/prewhiskering comparison and
+two defined paths with OneCat(C) explicit. The comparison retains both
+family factors, endpoint evaluations and the original shape arrow. The
+family-view owner gains constant precomposition, guarded congruence for a
+composite of two shape-arrow observations, and represented outer associativity
+Q∗(G∘F) ≐ (Q∘G)∘F. The first legitimately forgets the precomposing map while
+retaining the constant's value; the others compare all corresponding data.
+Guarding both shape-map operands preserves generic associativity when an
+operand is itself a composite. These are sufficient comparisons, not
+mathematical injectivity or new constructor-specific naturality laws.
+The qualification is the ordinary target; general lax/oplax interchange and
+profile migration are not settled by these consumers.
+
+Important failed/refined probes:
+
+- `nuh4c4_whiskered_zero-20260913-170006.log` exposed native precomposition of
+  a constant versus the literal constant-family view; the narrow comparison
+  resolved it (`170139`).
+- `nuh4c4_kernel_family_annihilation-20260913-170336.log` used generic action
+  with native evaluation parents. Cat-specific prewhiskering removed those
+  failures (`170746`) without adding a native evaluation rewrite. The
+  remaining zero view was derived by initial-family uniqueness; guarded
+  composition comparison handled its endpoint annotations (`171252`).
+- The actual boundary annihilation passed in `171845`, and the complete
+  comparison in `172314`. Native indices must remain inside IsoEvidence
+  projections: using raw endpoints before elimination failed in
+  `nuh4c4_image_kernel_paths-20260913-172740.log`; preserving the original
+  indices passed in `172931`.
+- Native coimage reconstruction exposed the represented outer associativity
+  comparison (`nuh4c4_image_kernel_characterization-20260913-173322.log`);
+  its qualified companion passed the complete characterization in `173744`.
+- The first direct incoming point conversion used raw parent annotations;
+  the maintained reviewer uses the actual native parent and recovers the
+  same original h. This was a view correction, not a changed incoming map
+  or a proof of a new raw judgmental equality.
+
+There are 34 new assertions: twelve typed comparison/identity/noncollapse
+controls in the existing owner reviewers, six incoming-observation controls,
+ten complete comparison/reconstruction/action controls and six exactness/
+zero-cone controls. The latter reject evidence about an unrelated map and
+obtain point evidence only by evaluating supplied whole evidence. Exactness
+is not inferred from K/Q or from normality alone.
+
+All checks are warning-enabled, serial and resource-guarded, with ≤90
+seconds per target. Final source logs under `emdash2/logs/probes/` are:
+
+| Owner | Log |
+| --- | --- |
+| Evaluator and new shape views | `emdash3_2_diagram_evaluation-20260913-180712.log` |
+| Family proof-time views | `emdash3_2_one_cat_adjunction_family_views-20260913-180718.log` |
+| Incoming observations | `emdash3_2_zero_arrow_family_observations-20260913-180721.log` |
+| Whole zero prewhiskering | `emdash3_2_one_cat_zero_family_paths-20260913-180724.log` |
+| Whole kernel restriction/annihilation | `emdash3_2_one_cat_kernel_family_restriction_paths-20260913-180728.log` |
+| Complete comparison | `emdash3_2_one_cat_image_kernel_comparison-20260913-180732.log` |
+| Exactness interface/zero-cone specialization | `emdash3_2_one_cat_categorical_exactness-20260913-180737.log` |
+
+Final reviewers are `zero_arrow_family_observations-20260913-180356.log`,
+`one_cat_image_kernel_comparison-20260913-180251.log` and
+`one_cat_categorical_exactness-20260913-180439.log`. The extended existing
+owner reviewers pass in `diagram_evaluation-20260913-180932.log` and
+`one_cat_adjunction_family_views-20260913-180935.log`. Retained descent and
+canonical Coim⇒Im consumers pass in `one_cat_cokernel_family_descent-20260913-180938.log`
+and `one_cat_image_coimage_comparison-20260913-180942.log`.
+
+The evaluator matches its exact HEAD owner copy
+`nuh4c4b_eval_baseline-20260913-180709.log` at 1150 critical pairs / 157
+replaceable-pattern warnings. The family views match
+`nuh4c4b_family_views_baseline-20260913-180715.log` at 1151/157. Only the
+temporary source path is normalized for these comparisons; no warning
+family or source-local diagnostic is omitted. Complete comparison and
+exactness source/reviewers match their same-order dependency joins
+`nuh4c4b_comparison_dependencies-20260913-180946.log` and
+`nuh4c4b_exactness_dependencies-20260913-180950.log` exactly at 1208/159.
+Every comparison covers categories, locations, term heads, participant
+families and parser diagnostics.
+
+All seven changed/new source owners pass strict LHS audits. Strict catalog
+freshness, shell syntax, active-reference/header lint and generated source-
+only health pass (993 registered files; no aggregate checker run). The
+staged diff, source scope and changed links are checked before checkpointing.
+No TypeScript or repository-wide typecheck is run. The proof-time rule
+controls also passed at both full temporary owners before promotion in
+`nuh4c4_rule_controls-20260913-174729.log`.
+
+C5 next constructs the actual whole cokernel row comparison γ alongside the
+existing kernel mate β, then packages their fixed-map invertibility as the
+short-exact-family interface. Whole cover/covered-map/δ, its derived exactness,
+concrete model/reifier automation and the snake comparison remain required.
+The corresponding formal comparisons with the retained H-zero/ordinary
+exactness views are still obligations for their actual consumers. The goal
+stays active, with all user deferrals unchanged.
+
 ### NUH-4C4a: Whole cokernel descent at the original diagram family
 
 **Implemented after 65faa183.** The two new owners contain nine definitions.
@@ -386,18 +508,18 @@ source-only health pass (985 registered files; no aggregate typecheck).
 Changed Markdown links, exact staged scope and whitespace are checked before
 the local checkpoint. No TypeScript or repository-wide checker is run.
 
-C4b next derives the whole kernel mate's annihilation at the incoming
+**Historical C4a boundary, resolved by C4b above:** derive the whole kernel mate's annihilation at the incoming
 arrow family. The preserved experiment
 `nuh4c4_family_differential_reindex_candidate.lp` passes two whole evaluation/
 prewhiskering views against the full temporary owner
 `nuh4c4_differential_reindex_owner.lp`; the earlier direct view failed in
-`nuh4c4_family_differential_view-20260913-163105.log`. This proposed proof-time
-comparison is not installed. It compares original family factors, endpoint
+`nuh4c4_family_differential_view-20260913-163105.log`. At C4a this proposed proof-time
+comparison was not installed; C4b above qualifies its refined form. It compares original family factors, endpoint
 evaluations and the shape arrow; an actual restricted-κ consumer and full
 SOP qualification remain required before promotion. Keep all active
 runtime and unification owners unchanged for this C4a checkpoint.
 
-The canonical Im(f)→K(g), categorical exactness and δ remain unfinished;
+At C4a the canonical Im(f)→K(g), categorical exactness and δ were unfinished;
 concrete model/reifier work and the snake comparison are still required.
 The active goal and all user deferrals are unchanged.
 

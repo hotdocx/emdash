@@ -87,8 +87,12 @@ supplied; canonical exactness, direct whole δ and concrete-model/reifier
 construction remain required. C4a now supplies [whole cokernel descent](../emdash3_2_one_cat_cokernel_family_descent.lp)
 at arbitrary original diagram families, with native reconstruction,
 uniqueness and retained action. Canonical Coim⇒Im shares its introduced
-constructor; its old computation is preserved. C4b must still construct
-the actual image-to-kernel comparison before exactness and δ.
+constructor; its old computation is preserved. C4b now constructs the
+[actual whole image-to-kernel comparison](../emdash3_2_one_cat_image_kernel_comparison.lp),
+with derived annihilation, native reconstruction and uniqueness. Its
+[categorical exactness interface](../emdash3_2_one_cat_categorical_exactness.lp)
+uses fixed-map evidence on that comparison and supplies no exactness
+inhabitant. Whole short-exact row comparisons, δ and exactness proofs remain.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

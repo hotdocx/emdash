@@ -366,3 +366,61 @@ assertnot (B A D C : Cat) (F : τ (Functor A D)) (G : τ (Functor D C)) (X Y : �
     : τ (@= (Functor B C)
       (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C (@comp_cat_fapp0 A D C G F) X)
       (@comp_cat_fapp0 B D C G (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A D F Y)));
+
+// Whole family proof-time comparisons retain all relevant data.
+assert (A B C : Cat) (t : τ (Obj C)) (F : τ (Functor A B))
+  ⊢ eq_refl (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C A B F (@Const_func B C t)) : τ (@=
+    (Functor A C) (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C A B F (@Const_func B C t))
+    (@Const_func A C t));
+
+assertnot (A B C : Cat) (t s : τ (Obj C)) (F : τ (Functor A B))
+  ⊢ eq_refl (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C A B F (@Const_func B C t)) : τ (@=
+    (Functor A C) (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C A B F (@Const_func B C t))
+    (@Const_func A C s));
+
+assert (B C : Cat) (t : τ (Obj C))
+  ⊢ eq_refl (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C B B (@id_func B) (@Const_func B C t))
+    : τ (@= (Functor B C)
+      (@hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) C B B (@id_func B) (@Const_func B C t))
+      (@Const_func B C t));
+
+assert (B I C : Cat) (D : τ (Functor B (Functor_cat I C))) (i j k : τ (Obj I)) (u : τ (Hom I i j)) (v v0 : τ (Hom I j
+    k))
+  ⊢ eq_refl (@comp_fapp0 (Functor_cat B C) (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j)
+    (@diagram_family_at_func B I C D k) (@diagram_family_transf B I C D j k v) (@diagram_family_transf B I C D i j u))
+    : τ (@= (@Transf B C (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D k)) (@comp_fapp0
+    (Functor_cat B C) (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j) (@diagram_family_at_func
+    B I C D k) (@diagram_family_transf B I C D j k v) (@diagram_family_transf B I C D i j u)) (@comp_fapp0
+    (Functor_cat B C) (@comp_cat_fapp0 B (Functor_cat I C) C (@diagram_evaluation_at_func I C i) D) (@comp_cat_fapp0 B
+    (Functor_cat I C) C (@diagram_evaluation_at_func I C j) D) (@comp_cat_fapp0 B (Functor_cat I C) C
+    (@diagram_evaluation_at_func I C k) D) (@diagram_family_transf B I C D j k v) (@diagram_family_transf B I C D i j
+    u)));
+
+assertnot (B I C : Cat) (D : τ (Functor B (Functor_cat I C))) (i j k : τ (Obj I)) (u : τ (Hom I i j)) (v v0 : τ (Hom I
+    j k))
+  ⊢ eq_refl (@comp_fapp0 (Functor_cat B C) (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j)
+    (@diagram_family_at_func B I C D k) (@diagram_family_transf B I C D j k v) (@diagram_family_transf B I C D i j u))
+    : τ (@= (@Transf B C (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D k)) (@comp_fapp0
+    (Functor_cat B C) (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j) (@diagram_family_at_func
+    B I C D k) (@diagram_family_transf B I C D j k v) (@diagram_family_transf B I C D i j u)) (@comp_fapp0
+    (Functor_cat B C) (@comp_cat_fapp0 B (Functor_cat I C) C (@diagram_evaluation_at_func I C i) D) (@comp_cat_fapp0 B
+    (Functor_cat I C) C (@diagram_evaluation_at_func I C j) D) (@comp_cat_fapp0 B (Functor_cat I C) C
+    (@diagram_evaluation_at_func I C k) D) (@diagram_family_transf B I C D j k v0) (@diagram_family_transf B I C D i j
+    u)));
+
+assert (B A D C : Cat) (F F0 : τ (Functor B A)) (G : τ (Functor A D)) (Q : τ (Functor D C))
+  ⊢ eq_refl (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B D C Q (@comp_cat_fapp0 B A D G F)) : τ (@=
+    (Functor B C) (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B D C Q (@comp_cat_fapp0 B A D G F))
+    (@comp_cat_fapp0 B A C (@comp_cat_fapp0 A D C Q G) F));
+
+assertnot (B A D C : Cat) (F F0 : τ (Functor B A)) (G : τ (Functor A D)) (Q : τ (Functor D C))
+  ⊢ eq_refl (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B D C Q (@comp_cat_fapp0 B A D G F)) : τ (@=
+    (Functor B C) (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B D C Q (@comp_cat_fapp0 B A D G F))
+    (@comp_cat_fapp0 B A C (@comp_cat_fapp0 A D C Q G) F0));
+
+assert (B A C : Cat) (F : τ (Functor B A)) (Q : τ (Functor A C))
+  ⊢ eq_refl (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C Q
+      (@comp_cat_fapp0 B A A (@id_func A) F))
+    : τ (@= (Functor B C)
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C Q (@comp_cat_fapp0 B A A (@id_func A) F))
+      (@comp_cat_fapp0 B A C (@comp_cat_fapp0 A A C Q (@id_func A)) F));

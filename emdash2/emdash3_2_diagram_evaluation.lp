@@ -86,6 +86,21 @@ unif_rule
       (@Struct_sigma _ _ $h1 (@id _ _))
   ↪ [ $I1 ≡ $I; $C1 ≡ $C; $F1 ≡ $F; $G1 ≡ $G; $h1 ≡ $h; $i1 ≡ $i ];
 
+// Proof-time shape-arrow evaluation through prewhiskering by the same family.
+// Compare both factors, their endpoint evaluations, and the original shape arrow.
+unif_rule
+  @sym_tapp1_fapp0_transf $A $I $C $E $i $j $u
+  ≡ @comp_prod_fapp1_fapp0 Cat_cat $A1 $B $C1
+      (@Struct_sigma _ _ $F1 $Ei)
+      (@Struct_sigma _ _ $F2 $Ej)
+      (@Struct_sigma _ _ (@id _ $F3)
+        (@sym_tapp1_fapp0_transf $B1 $I1 $C2 $D $i1 $j1 $u1))
+  ↪ [ $A1 ≡ $A; $B1 ≡ $B; $I1 ≡ $I; $C1 ≡ $C; $C2 ≡ $C;
+      $F2 ≡ $F1; $F3 ≡ $F1; $i1 ≡ $i; $j1 ≡ $j; $u1 ≡ $u;
+      $E ≡ (@comp_cat_fapp0 $A $B (Functor_cat $I $C) $D $F1);
+      $Ei ≡ (@sym_fapp0_func $B $I $C $D $i);
+      $Ej ≡ (@sym_fapp0_func $B $I $C $D $j) ];
+
 // Existing generic composition evidence at the ordinary family target.
 symbol one_cat_diagram_family_evaluation_comp_path [B I C : Cat]
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) (i : τ (Obj I))
@@ -99,3 +114,28 @@ symbol one_cat_diagram_family_evaluation_comp_path [B I C : Cat]
         (@sym_transf_tapp0_transf B I C G H g i) (@sym_transf_tapp0_transf B I C F G f i)))
 ≔ @fapp1_comp_path (Functor_cat B (Functor_cat I C)) (Functor_cat B C)
     (@diagram_family_evaluation_func B I C i) F G H g f;
+
+// Whole shape-arrow observation in the qualified ordinary target.
+symbol one_cat_diagram_family_transf_whisker_path [B I C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (D : τ (Functor B (Functor_cat I C))) [i j : τ (Obj I)] (u : τ (Hom I i j))
+  : τ (@= (@Transf B C (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j))
+      (@diagram_family_transf B I C D i j u)
+      (@fapp0 _ _ (@comp_cat_con_fapp1_func B (Functor_cat I C) C D
+        (@diagram_evaluation_at_func I C i) (@diagram_evaluation_at_func I C j))
+        (@diagram_evaluation_transf I C i j u)))
+≔ eq_refl (@diagram_family_transf B I C D i j u);
+
+// Whole shape-arrow observation in the qualified ordinary target.
+symbol one_cat_diagram_family_transf_reindex_path [A B I C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (D : τ (Functor B (Functor_cat I C))) (F : τ (Functor A B))
+  [i j : τ (Obj I)] (u : τ (Hom I i j))
+  : τ (@= (@Transf A C
+      (@comp_cat_fapp0 A B C (@diagram_family_at_func B I C D i) F)
+      (@comp_cat_fapp0 A B C (@diagram_family_at_func B I C D j) F))
+      (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u)
+      (@fapp0 _ _ (@comp_cat_con_fapp1_func A B C F
+        (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j))
+        (@diagram_family_transf B I C D i j u)))
+≔ eq_refl (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u);

@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C4a whole cokernel descent at original diagram families qualified; C4b canonical image-to-kernel comparison next; exactness/connecting unfinished; Op/duality deferred
+Status: C4b canonical whole image-to-kernel comparison and categorical exactness interface qualified; native short-exact families and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,26 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C4a milestone (2026-09-13):
+Current C4b milestone (2026-09-13): the
+[canonical whole image-to-kernel comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp)
+is constructed from the existing H boundary, its derived whole annihilation,
+original cokernel descent and the same selected Coim⇒Im inverse. It satisfies
+e∘a_F=β̄; native inverse mating recovers the original whole β. Reconstruction
+through a_F determines e uniquely. The
+[exactness interface](../emdash2/emdash3_2_one_cat_categorical_exactness.lp)
+is existing OmegaEquivAlong on this actual map, with a whole specialization
+to the native zero-cone category. It supplies no exactness inhabitant.
+
+Whole incoming observations precede K/Q selection. The original H boundary,
+K/Q and normality choices are retained. Nineteen definitions and four
+proof-time comparisons add no primitive, runtime rewrite or nucleus edit.
+The ordinary C1 scope is explicit; general lax/oplax interchange and the
+separate profile migration remain unqualified here. C5 next constructs whole
+short-exact row comparisons and their inverse interface, then the cover,
+covered map and universal descent for δ. The LES must derive exactness at
+its output positions; it cannot assume the new predicate as its theorem.
+
+The completed C4a milestone (2026-09-13):
 [whole cokernel descent](../emdash2/emdash3_2_one_cat_cokernel_family_descent.lp)
 now works at an arbitrary original diagram family D:B→Arr(C). One whole
 u:E₁D⇒Y and its internally supplied annihilation cell u∘∂D=0 give a whole
@@ -35,11 +54,10 @@ changing D as the argument to Q. The original Coim⇒Im input and target proof
 now share the introduced-diagram constructor with unchanged computation.
 Nine definitions and 16 new reviewer assertions add no primitive or rule.
 
-C4b must derive the kernel mate's whole annihilation at the incoming arrow,
-then apply this descent and the already selected comparison inverse. The
-actual Im(f)→K(g), its exactness condition/theorems and δ remain unfinished.
-An experimental differential/prewhiskering comparison is preserved but is
-not installed in the evaluator; qualify it at that actual consumer first.
+C4b now derives the required annihilation and constructs Im(f)→K(g).
+The qualified differential/prewhiskering comparison and three family views
+support that actual construction while preserving runtime owners. Exactness
+is defined on its actual map; the LES exactness proofs and δ remain required.
 
 The completed C3 milestone (2026-09-13):
 [normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp) is existing
@@ -53,7 +71,7 @@ including its whole binary-product functor. Normality is supplied structure,
 not proved from K/Q existence; this package does not construct a concrete
 Freyd model. Nine definitions and 18 assertions add no primitive or rule.
 
-Next C4b constructs canonical Im(f)→K(g) from a whole native zero-family input.
+C4b now constructs canonical Im(f)→K(g) from a whole native zero-family input.
 Use its kernel mate, derive whole annihilation against K(f), descend through
 Q(K(f)), then compose with the same a_f⁻¹. Exactness concerns this actual
 comparison; the later LES theorem must derive its invertibility.
@@ -434,9 +452,11 @@ whole annihilation input, constructs canonical Coim⇒Im, and proves its
 native whole factorization and uniqueness. C3 now packages Abelian normality
 at the actual comparison, with its whole inverse and family restriction.
 C4a now supplies whole cokernel descent at arbitrary original diagram
-families, with reconstruction and uniqueness. Next construct the canonical
-exactness comparisons and build δ by whole universal descent. The ordinary all-arrow/category
-bridge is optional compatibility work, not a primary prerequisite. Do not
+families, with reconstruction and uniqueness. C4b now constructs the
+canonical whole image-to-kernel comparison and its exactness predicate.
+Next construct whole short-exact row comparisons and build δ by universal
+descent, deriving its exactness comparisons at the actual output. The
+ordinary all-arrow/category bridge is optional compatibility work, not a primary prerequisite. Do not
 infer normality from K/Q existence or postulate LES exactness. Concrete
 whole models, reifier automation and snake comparison remain later.
 
@@ -655,6 +675,8 @@ must not label those alternatives validated implementations.
 | D-NUH-044 | Promote only the four introduced-arrow evaluation clauses and two sufficient proof-time comparisons required by C2c4. Reject the generic evaluator/postcomposition fold because its identity-postcomposition corner changes the established owner. Keep native mate cancellation computational; whole factorization is a derived path, not a new runtime cut or separately packaged factorization functor |
 | D-NUH-045 | C3 uses existing OmegaEquivAlong on the actual whole a, selects its supplied left inverse, and reuses the existing inverse-candidate law for the other equation. Ordinary IsoEvidence is a derived whole view retaining literal a; generic functor action owns family/component restriction. The native Abelian package keeps the original AdditiveCategory (including binary products), whole P/Q and fixed-a normality. It supplies no new primitive or concrete model normality |
 | D-NUH-046 | C4a derives whole cokernel descent from one whole annihilation cell at an arbitrary original diagram family D. The accepted reconstruction of Sym(D) in Functor_cat(B,C) forms the mate input while Q is evaluated on D itself. Native cancellation recovers the whole input; its target and uniqueness reconstruct the original u. Share the introduced constructor with canonical Coim⇒Im, preserving its old computation. No new primitive, rule or universal selection is added |
+| D-NUH-047 | C4b retains the original H boundary β, derives its whole incoming-kernel annihilation, descends through the original Q and composes with the same selected a_F inverse. Whole reconstruction and uniqueness characterize e:Im(f)⇒K(g). ExactFamily is existing OmegaEquivAlong on this actual e, not an exactness inhabitant or an isomorphism between independently selected objects. The native zero-cone specialization retains whole action |
+| D-NUH-048 | Use Cat-specific prewhiskering action views and keep native indices inside inverse/evidence eliminations. Four measured proof-time comparisons cover shape-arrow reindexing, constant precomposition, guarded shape-map composition and represented outer associativity. They preserve runtime heads and all relevant data; no object cast, new universality primitive or generic naturality rewrite is installed |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -828,8 +850,10 @@ Continue the native whole-universality and homology implementation in
 authority for evolving scope, decisions, implementation rows, experiments,
 validation and progress, under all active AGENTS/SOP instructions. Preserve
 foundational hom_int/homd_int. Continue from the implemented C2c4 whole
-comparison, fixed-map normality, native Abelian package and C4a whole
-cokernel descent through categorical exactness/connecting and retained homology/proof-CAS model/reifier work.
+comparison, native Abelian package, whole cokernel descent and C4b canonical
+image-to-kernel/exactness interface through native short-exact families,
+connecting/exactness proofs and retained homology/proof-CAS model/reifier
+work.
 Work autonomously through bounded reviewed tranches and
 make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running

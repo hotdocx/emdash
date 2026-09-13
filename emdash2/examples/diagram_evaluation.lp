@@ -62,3 +62,36 @@ assert [B I C : Cat] (i : τ (Obj I))
   (h : τ (@Transf B (Functor_cat I C) F G))
   ⊢ @fapp1_fapp0 _ _ (@diagram_family_evaluation_func B I C i) F G h
     ≡ @sym_transf_tapp0_transf B I C F G h i;
+
+// Whole family proof-time comparisons retain all relevant data.
+assert (A B I C : Cat) (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat I C))) (F : τ (Functor A
+  B)) (i j : τ (Obj I)) (u v : τ (Hom I i
+    j))
+  ⊢ eq_refl (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u) : τ (@= (@Transf A C
+    (@comp_cat_fapp0 A B C (@diagram_family_at_func B I C D i) F) (@comp_cat_fapp0 A B C (@diagram_family_at_func B I
+    C D j) F)) (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u) (@fapp0 _ _
+    (@comp_cat_con_fapp1_func A B C F (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j))
+    (@diagram_family_transf B I C D i j u)));
+
+assertnot (A B I C : Cat) (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat I C))) (F : τ
+  (Functor A B)) (i j : τ (Obj I)) (u v : τ (Hom
+    I i j))
+  ⊢ eq_refl (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u) : τ (@= (@Transf A C
+    (@comp_cat_fapp0 A B C (@diagram_family_at_func B I C D i) F) (@comp_cat_fapp0 A B C (@diagram_family_at_func B I
+    C D j) F)) (@diagram_family_transf A I C (@comp_cat_fapp0 A B (Functor_cat I C) D F) i j u) (@fapp0 _ _
+    (@comp_cat_con_fapp1_func A B C F (@diagram_family_at_func B I C D i) (@diagram_family_at_func B I C D j))
+    (@diagram_family_transf B I C D i j v)));
+
+assert (B I C : Cat) (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat I C))) (i j : τ (Obj I))
+  (u v : τ (Hom I i j))
+  ⊢ eq_refl (@diagram_family_transf B I C D i j u) : τ (@= (@Transf B C (@diagram_family_at_func B I C D i)
+    (@diagram_family_at_func B I C D j)) (@diagram_family_transf B I C D i j u) (@fapp0 _ _ (@comp_cat_con_fapp1_func
+    B (Functor_cat I C) C D (@diagram_evaluation_at_func I C i) (@diagram_evaluation_at_func I C j))
+    (@diagram_evaluation_transf I C i j u)));
+
+assertnot (B I C : Cat) (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat I C))) (i j : τ (Obj
+  I)) (u v : τ (Hom I i j))
+  ⊢ eq_refl (@diagram_family_transf B I C D i j u) : τ (@= (@Transf B C (@diagram_family_at_func B I C D i)
+    (@diagram_family_at_func B I C D j)) (@diagram_family_transf B I C D i j u) (@fapp0 _ _ (@comp_cat_con_fapp1_func
+    B (Functor_cat I C) C D (@diagram_evaluation_at_func I C i) (@diagram_evaluation_at_func I C j))
+    (@diagram_evaluation_transf I C i j v)));
