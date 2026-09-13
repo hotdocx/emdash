@@ -23,7 +23,10 @@ through existing whole square action; their components and whole H consumer
 pass. NUH-3C2 derives [reconstruction and annihilation](../emdash3_2_kernel_cokernel_adjunction_observations.lp)
 from whole mates and the unit/counit; legacy proofs delegate to these
 independent observations. Full ordinary uniqueness still needs a native
-diagram-faithfulness comparison. Packaged input and model/reifier migration
+diagram-faithfulness comparison. NUH-3C3 now supplies the
+[whole native observation functor](../emdash3_2_walking_arrow_native_observation.lp),
+with checked map components and next Hom; its whole inverse comparison
+remains open. Packaged input and model/reifier migration
 remain pending. No new primitive, rewrite or unifier is added in these tranches.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a

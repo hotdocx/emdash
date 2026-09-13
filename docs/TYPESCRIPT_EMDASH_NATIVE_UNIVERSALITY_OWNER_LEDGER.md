@@ -205,6 +205,52 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-3C3: Whole observation of walking-arrow diagrams
+
+**First gate implemented (2026-09-13), following 4d3c88da.** The defined
+[observation functor](../emdash2/emdash3_2_walking_arrow_native_observation.lp)
+E_C:Arr(C)→LaxArrow(C) is the existing native graph of the whole evaluation
+transformation at the walking-arrow generator. It adds one definition and
+no primitive, rewrite or unifier. Its seventeen-module source graph contains
+no selected universal owner.
+
+The [reviewer](../emdash2/examples/walking_arrow_native_observation.lp)
+checks the actual generating arrow, both components of arbitrary diagram
+maps and the whole next Hom action. At the explicit ordinary profile,
+D_C=`one_cat_arrow_diagram_func(C1)` is the existing return functor, and
+E_C(D_C(edge)) computes to the original constructor-visible edge.
+
+The separate diagnostic `tmp/probes/nuh3c_diagram_native_observation.lp`
+also checks that reflexivity does not currently prove D_C(E_C(d))=d for an
+arbitrary d. This is a computation boundary, not evidence against the
+mathematical representation theorem. That negative diagnostic is not
+registered as a permanent library requirement against a future inverse law.
+
+The required direction for ordinary uniqueness is faithfulness of E_C.
+The observed object round trip proves no whole faithfulness statement.
+Even a whole inverse law for E_C∘D_C would establish faithfulness of D_C;
+the required E_C direction instead needs the comparison involving D_C∘E_C
+on arbitrary diagrams and maps. Preserve this distinction in the next gate.
+
+Guarded, warning-enabled logs under `emdash2/logs/probes/`:
+
+- `gray_transformation_graph-20260913-043120.log` (existing owner baseline);
+- `nuh3c_diagram_native_observation-20260913-043248.log` (diagnostic);
+- `walking_arrow_native_observation-20260913-043430.log`;
+- `nuh3c_native_observation_dependency_baseline-20260913-043435.log`.
+
+The registered reviewer and exact dependency join have identical complete
+1,165 critical-pair / 157 pattern inventories, with no parser issues after
+stripping ANSI codes. Both focused LHS audits and the catalog check pass;
+source health is refreshed without aggregate typechecking.
+
+**NUH-3C3 remains active:** establish the whole ordinary representation
+comparison at these actual E_C/D_C owners, then derive the required
+faithfulness and ordinary uniqueness. Review the missing categorical
+shape-universality law explicitly; do not introduce a per-test injectivity
+premise, infer a whole inverse from the constructor observations, or replace
+the native Hom foundations. Op/profile work remains deferred.
+
 ### NUH-3C2: Reconstruction from whole mates and structural maps
 
 **Implemented (2026-09-13), following 6b4500e2.** The ten existing ordinary
@@ -253,7 +299,7 @@ against 042224/042230. The new reviewer matches its dependency-only join at
 issues after stripping ANSI codes. Seven focused LHS audits and the catalog
 check pass. Health is refreshed with `--no-check`; validation stays local.
 
-**Next NUH-3C3:** establish the missing ordinary diagram-faithfulness or
+**Then scheduled NUH-3C3 (first gate implemented above):** establish the missing ordinary diagram-faithfulness or
 whole representation comparison before deriving full ordinary uniqueness.
 An exact existing candidate for observation is the native graph
 `gray_transf_graph_func(diagram_evaluation_transf(generator))`, from Arr(C)

@@ -24,7 +24,10 @@ through the existing native square action, with a passing whole H consumer.
 NUH-3C2 derives [reconstruction and annihilation](../emdash3_2_kernel_cokernel_adjunction_observations.lp)
 from whole mates and the unit/counit, with passing raw-input and legacy
 consumers. Ordinary uniqueness needs the whole diagram representation or
-faithfulness comparison. Packaged input-adapter migration and concrete-model
+faithfulness comparison. NUH-3C3 supplies its
+[native observation functor](../emdash3_2_walking_arrow_native_observation.lp),
+including arbitrary diagram-map components and next Hom; the whole inverse
+law is still open. Packaged input-adapter migration and concrete-model
 work remain active in the living plan.
 
 Current implementation continuation (2026-09-12): the accepted

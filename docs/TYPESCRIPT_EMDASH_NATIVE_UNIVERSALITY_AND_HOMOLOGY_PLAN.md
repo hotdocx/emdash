@@ -238,9 +238,15 @@ cancellation, and both structural zero equations from the unit/counit.
 Independent diagram observations no longer import selected universal owners;
 the old proof bodies delegate through the presentation adapters.
 
-Next NUH-3C3: establish the needed whole diagram representation/faithfulness
-comparison, then derive full ordinary uniqueness without W/V. Arbitrary
-diagram eta is not yet proved. Migration of the packaged chain-pair and
+NUH-3C3 now has the whole native observation E_C:Arr(C)→LaxArrow(C), derived
+from the existing graph of the evaluation transformation. Its arbitrary-map
+components and next Hom action check. The ordinary return functor D_C is
+already present; the constructor-visible E_C(D_C(edge)) round trip checks.
+The required whole representation/faithfulness comparison is still open.
+
+Next: complete that whole comparison and derive full ordinary uniqueness
+without W/V. Arbitrary diagram eta is not yet proved; the object round trip
+does not supply it. Migration of the packaged chain-pair and
 Freyd inputs, connecting/exactness and concrete model/reifier workflow remain
 outstanding. Continue on the current preadditive/ordinary homology baseline
 and preserve its explicit interpretation qualifications.

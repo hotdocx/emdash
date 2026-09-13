@@ -4314,6 +4314,14 @@ Full ordinary uniqueness still needs the native diagram representation or
 faithfulness comparison; it is not inferred merely from observing equal
 components of two arbitrary diagram transformations.
 
+The native observation functor for that comparison is now defined
+(NUH-3C3): take the existing graph of the whole evaluation transformation at
+the walking-arrow generator. It maps a diagram to its native arrow and a
+diagram transformation to its native square, retaining further Hom action.
+Observing a realized constructor-visible edge recovers that edge. The whole
+inverse comparison on arbitrary diagrams remains to be established; the
+object computation alone does not prove faithfulness.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
