@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; presentation comparison and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,76 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C2c2: Whole formula agreement and inverse reconstruction
+
+**Implemented after e8dda02f.** The optional
+[family-view owner](../emdash2/emdash3_2_one_cat_adjunction_family_views.lp)
+resolves C2c1's native/raw formula boundary with three proof-time helpers:
+congruence of a pair of Cat horizontal actions under whole-transformation
+composition; congruence of the horizontal actions; and associativity with
+an inner represented postcomposition. Every corresponding operand and
+endpoint must compare. This is a sufficient elaboration procedure, not a
+claim that mathematical composition is injective.
+
+The whole-composition helper is guarded by both horizontal-action heads.
+An initially unguarded version proved the desired family comparisons but
+shadowed the existing generic associativity rule. The regression at
+`nuh4c2_views_review-20260913-124327.log` rejected it. The guarded version
+preserves associativity and passes the actual family/factor consumers.
+A fourth, broader represented/raw-operand comparison proved unnecessary
+and was dropped. Removing either required congruence helper failed the
+actual comparison (`nuh4c2_compare_without_0-20260913-123350.log` and
+`nuh4c2_compare_without_1-20260913-123456.log`); removal of the broader
+helper passed (`nuh4c2_compare_without_2-20260913-123553.log`).
+
+Four defined paths expose native/raw whole mate agreement in both
+directions and whole inverse-mate reconstruction of the raw formulas.
+They use the original Hom comparison, equality action and its same
+selected inverse. The actual input h is retained throughout. There is no
+ordinary universal-factor dictionary, additional naturality-square field,
+new primitive or runtime rewrite. The original H and two factor programs
+are unchanged. Reconstruction for a raw formula is proved equality;
+judgmental cancellation remains at the native mate pair.
+
+The [reviewer](../emdash2/examples/one_cat_adjunction_family_views.lp)
+contains two defined generic K/Q comparison witnesses, twelve positive
+assertions and four negative assertions. It covers whole inverse recovery,
+components and whole off-diagonal Hom action in the family parameter B, the original published
+Coim/Im factors at their actual normalized inputs, retained ordinary
+associativity, and the mixed comparison. Unrelated input transformations
+and changed operands are rejected; mixed associativity remains proof-time,
+not a runtime conversion. The retained family/adjunction/H/factor reviewers
+also pass with the new comparison extension loaded.
+
+**Next C2c3:** whole evaluation of the normalized input, then coherent
+annihilation and a. The focused
+`nuh4c2_whole_zero_endpoints-20260913-125108.log` stops at
+`sym_transf_tapp0_transf` of the normalized cokernel-unit input when the
+expected whole observation is `diagram_evaluation_transf`. Only its first
+assertion was reached. The existing pointwise endpoint observations remain
+green, but do not prove this whole equation. Start with the existing whole
+evaluation/postwhiskering comparison and original terminal-family
+normalizer, preserving the same input. Qualify any required whole
+projection at its actual owner. This is part of the current internal
+construction, not a reopening of the old LES endpoint-checker work,
+general terminality, strictness profiles or duality repair.
+
+Final warning-enabled, serial resource-guarded ≤90-second checks:
+
+- promoted source: `emdash3_2_one_cat_adjunction_family_views-20260913-124844.log`;
+- promoted reviewer: `one_cat_adjunction_family_views-20260913-124948.log`;
+- exact reviewer dependency join: `nuh4c2_views_dependencies-20260913-125153.log`;
+- retained family/adjunction/H/factor reviewers: `nuh4c2_view_retained-20260913-125314.log`.
+
+The source exactly matches the unchanged family-adjunction dependency
+inventory at 1,149 critical pairs / 157 replaceable-pattern warnings. The
+reviewer matches its exact join at 1,176 / 159. The retained join matches
+the C2c1 retained inventory at 1,176 / 159. Categories, locations, term
+heads, participant families and parser issues match exactly; no additional
+warning family is reported. Strict LHS audit, catalog freshness, shell
+syntax and source-only health freshness pass. Health inventories 968 files.
+No aggregate or TypeScript typecheck ran, and the nucleus is unchanged.
+
 ### NUH-4C2c1: Native adjunctions on whole functor families
 
 **Structural substep implemented after c475bfe7; canonical a remains open.**
@@ -350,7 +420,7 @@ yield the original Coim/Im endpoint types; inverse mating recovers each
 entire input and its component at any original diagram. The latter test
 needed explicit existing projection endpoints; no rule was added for it.
 
-**Remaining presentation boundary:** generic and specialized attempts to
+**Historical presentation boundary, resolved by C2c2 above:** generic and specialized attempts to
 identify the native result with the older raw K(h)∘η / ε∘Q(h) whole formulas
 did not qualify. Initial failures involved raw endpoint annotations hiding
 the native composition cuts. Keeping native endpoints resolves generic
@@ -369,8 +439,8 @@ The native generic normal-form inspection is
 These are local annotation/comparison experiments, not the deferred old
 LES endpoint-checker investigation or evidence of a mathematical failure.
 
-Keep the original H and raw factor programs until their actual whole
-comparison is qualified. C2c must still assemble the coherent annihilation
+The comparison obligation from this checkpoint is now discharged by C2c2;
+the original H and raw factor programs remain unchanged. C2c must still assemble the coherent annihilation
 input and define the canonical a, with factorization and higher action
 from that whole program. This structural lifting does not construct a,
 postulate its Abelian invertibility, or prove categorical exactness/δ.

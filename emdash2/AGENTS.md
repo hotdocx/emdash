@@ -187,10 +187,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   The ordinary family-adjunction module now exposes (F∘−)⊣(G∘−) through
   explicit structural adjunction/profile primitives. Whole unit/counit
   rules retain the existing tele-postcomposition owner and native mate
-  inverse cuts. Actual zero-column inputs and recovery check; the older
-  raw-family formula comparison is still open. Preserve that boundary and
-  the original H/factor programs; no experimental comparison unifier is
-  installed to bypass it.
+  inverse cuts. The optional family-view extension now proves whole
+  agreement with the older K/Q formulas and whole inverse-mate recovery
+  through three guarded proof-time comparisons. Original H/factor bodies
+  and native runtime cuts remain the owners. Whole evaluation of the
+  normalized input and canonical Coim⇒Im remain required; do not replace
+  them with pointwise cone reconstruction or a new comparison axiom.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

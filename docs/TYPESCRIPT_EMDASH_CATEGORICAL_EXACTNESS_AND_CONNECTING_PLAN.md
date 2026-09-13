@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; raw-family comparison and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
+Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -281,18 +281,37 @@ postcomposition endpoints. The original normalized C2b inputs yield the
 expected Coim/Im endpoint types, and both inverse operations recover the
 entire original coherent input, including its component at any diagram.
 
-This completes the structural substep, not a:Coim⇒Im. The attempted
-comparison with the older raw family formulas still stops at their
-represented-versus-raw composition and product annotations, including a
-component comparison attempt. Merely suppressing printed implicit arguments
-makes the generic displayed normal forms look identical; that is not a
-typed equality proof. No experimental raw-formula comparison rule is
-promoted. Keep the original H and factor implementations. Qualify the
-needed presentation comparison before substituting these native mates
-for them. The owner ledger records the failed probes and next boundary.
-The canonical comparison must still be a constructed whole transformation;
-its point and higher observations must come from that same term. This work
-does not activate the deferred terminality or profile migration.
+C2c2 now resolves the whole formula comparison in an optional
+[family-view extension](../emdash2/emdash3_2_one_cat_adjunction_family_views.lp).
+Three proof-time helpers compare two compositions of Cat horizontal actions,
+the horizontal actions themselves, and mixed represented/raw associativity.
+Corresponding operands and endpoints must compare; this asserts no
+mathematical injectivity of composition. Guarding both horizontal-action
+heads preserves the existing generic associativity rule. The earlier
+unguarded congruence candidate shadowed that rule and was rejected.
+
+Four defined paths prove the whole native/raw mate agreement in each
+direction and reconstruct the entire original input by applying the same
+inverse mate to the raw formula. These paths use the original adjunction
+Hom comparison, equality action and native inverse cuts. They add no
+universality primitive or runtime rewrite. The actual K/Q formulas and both
+published Coim/Im factors pass, including component and whole Hom-action
+comparisons and rejection of unrelated inputs. Original H and factor bodies
+remain unchanged. Raw-formula reconstruction is a proved equality, while
+the original native mate pair retains its judgmental cancellation.
+
+Next C2c3 must connect these whole input equations to their whole evaluation
+observations, then assemble the coherent annihilation input and canonical
+a:Coim⇒Im. A focused probe of the normalized cokernel-unit input stops at
+`sym_transf_tapp0_transf` when compared with `diagram_evaluation_transf`.
+Its existing component-at-each-diagram check is not a whole evaluation
+proof. Start with the existing evaluation/postwhiskering comparison and
+retain the original normalized input and terminal-family comparison.
+Qualify any missing whole projection at that actual owner; do not replace
+it with a pointwise cone reconstruction or a primitive a/exactness witness.
+The final comparison's components and higher observations must come from
+that same constructed term. The terminality/profile generalization and the
+old LES endpoint-checker investigation remain deferred.
 
 Use these owners to formulate normality and exactness before migrating the
 connecting program. Keep all source transformations, signs and actual H

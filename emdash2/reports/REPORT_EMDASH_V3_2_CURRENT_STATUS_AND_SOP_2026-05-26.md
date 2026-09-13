@@ -138,10 +138,17 @@ functors and supply the ordinary functor-category profile. Two whole
 unit/counit rules reuse the original cells through tele-postcomposition.
 Defined mate functors retain native endpoints, whole inverse cuts and
 next Hom action. The original C2b zero-column inputs recover by whole
-inverse mating at their actual Coim/Im endpoint types. The comparison with
-the older raw family formulas remains open, as does canonical Coim⇒Im.
-These structural primitives are explicit model obligations; no extra
-raw-formula unifier or ordinary factor input is introduced.
+inverse mating at their actual Coim/Im endpoint types. These structural
+primitives are explicit model obligations.
+
+C2c2 now proves [whole family formula agreement and inverse reconstruction](../emdash3_2_one_cat_adjunction_family_views.lp).
+Three guarded proof-time comparisons expose the same horizontal-action
+data and mixed represented/raw associativity. Four defined paths use the
+original Hom comparison and its same inverse. The actual K/Q formulas,
+published factors, component and Hom action, unrelated-input rejection and
+retained associativity/mate consumers pass. There is no new primitive or
+runtime rule. Whole evaluation of the normalized input is the next owner
+boundary; canonical Coim⇒Im and coherent annihilation remain unconstructed.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

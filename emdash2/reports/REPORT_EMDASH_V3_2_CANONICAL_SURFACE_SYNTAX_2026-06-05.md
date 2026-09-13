@@ -1967,10 +1967,14 @@ For ordinary targets, `one_cat_postcomp_adjunction` expresses
 (F∘−)⊣(G∘−) at the existing postcomposition functors.
 `one_cat_adjunction_family_transpose_func` and its `untranspose` companion
 act on whole transformations. Their types retain native postcomposition
-endpoints for inverse computation. The readable raw-composition formulas
-remain presentation views; the current K/Q-family comparison between those
-forms is still open. The lift and ordinary functor-category profile are
-explicit structural primitives, with whole unit/counit rules.
+endpoints for inverse computation. The lift and ordinary functor-category
+profile are explicit structural primitives, with whole unit/counit rules.
+The optional `one_cat_adjunction_family_views` module now exposes
+`one_cat_adjunction_family_transpose_agrees` and its inverse-direction
+companion for the existing whole whiskering formulas. Their
+`*_reconstruction` paths recover the entire input through the same native
+inverse. These are equality witnesses using three guarded proof-time
+comparisons; raw-formula reconstruction is not a new judgmental cut.
 
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these

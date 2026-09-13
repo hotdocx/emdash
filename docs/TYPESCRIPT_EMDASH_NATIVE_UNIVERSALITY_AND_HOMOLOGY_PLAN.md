@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; presentation comparison and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
+Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,16 +24,17 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C2c1 structural step (2026-09-13): the original adjunction now lifts
-to whole functor families through two explicit structural primitives and
-two whole unit/counit rules. Defined native mate functors retain existing
-inverse cuts and higher action. Concrete zero-column inputs and their
-whole recovery check. The comparison with older raw family formulas remains
-open; H and those factors are unchanged. The categorical subplan and owner
-ledger distinguish this qualified structural step from the still-required
-construction of a:Coim⇒Im. The user's intended interface is one whole
-comparison with projected components/action, without manually carried
-naturality or functoriality square proofs.
+Current C2c2 step (2026-09-13): the whole family adjunction now has proved
+agreement with the existing K/Q whiskering formulas, including the actual
+Coim/Im factors. Applying its same inverse reconstructs the entire original
+input by a defined equality path. Three guarded proof-time comparisons
+resolve the former annotation boundary without changing H/factor bodies
+or adding a runtime rewrite or universality primitive. Native mate cuts
+remain the computational owner. The next C2c3 step is whole evaluation of
+the original normalized inputs and construction of coherent factorization
+for a:Coim⇒Im. The categorical subplan and owner ledger record that precise
+remaining boundary. The intended comparison is one whole term with
+projected components/action, without manually carried naturality squares.
 
 Deferred terminality refinement (2026-09-13): the user accepts the current
 ordinary-target normalizers for now and proposes later upgrading the
@@ -385,7 +386,11 @@ cokernel and kernel mates then give Coim⇒ev₁ and ev₀⇒Im. Native mate
 reconstruction proves their original-arrow factor equations as reviewer
 observations; no ordinary dictionaries enter the primary programs.
 
-Next NUH-4C2c constructs canonical Coim⇒Im and its coherent whole
+NUH-4C2c1/2 now supply whole family adjunctions, native/raw formula agreement
+and whole inverse-mate reconstruction at the original published factors.
+Next C2c3 qualifies whole evaluation of the original normalized input; the
+current probe stops at its `sym_transf_tapp0_transf` observation. NUH-4C2c
+must then construct canonical Coim⇒Im and its coherent whole
 factorization data; the two factors alone do not supply it. Then express
 Abelian normality and exactness by invertibility of the actual comparison
 maps, and build δ by whole universal descent. The ordinary all-arrow/category

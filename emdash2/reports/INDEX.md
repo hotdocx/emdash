@@ -71,9 +71,11 @@ with native reconstruction proofs. The primitive boundary is explicit in
 the subplan; it is not derived from the old pointwise β interface.
 NUH-4C2c1 supplies [whole family adjunctions and native mates](../emdash3_2_one_cat_adjunction_families.lp),
 with explicit structural primitives and whole unit/counit action. Native
-inverse cuts and actual zero-column inputs check. Comparison with the
-older raw family formulas, canonical Coim⇒Im, normality, direct whole
-δ/exactness and concrete-model work remain further steps.
+inverse cuts and actual zero-column inputs check. C2c2 now supplies
+[whole formula agreement and inverse reconstruction](../emdash3_2_one_cat_adjunction_family_views.lp)
+at the original K/Q formulas and published factors, preserving component
+and Hom action. Whole evaluation of the normalized input, canonical
+Coim⇒Im, normality, direct whole δ/exactness and concrete-model work remain.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

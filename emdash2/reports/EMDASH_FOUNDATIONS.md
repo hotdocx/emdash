@@ -4468,8 +4468,13 @@ uses two explicit primitives for adjunction lifting and functor-category
 truncation, extending the current opaque classifiers. It is not claimed as
 a derivation from their β interface. The original zero-column families
 give the expected selected Coim/Im endpoint types and recover by inverse
-mating. Comparing these native results with the older raw whole formulas
-still requires qualification; no H or factor program has been replaced.
+mating. A separate family-view extension now proves equality with the
+older whole whiskering formulas and reconstructs the entire original input
+by applying the same inverse mate. Components and whole Hom action are
+projections of this agreement. Three guarded proof-time comparison helpers
+resolve the composition presentations; they introduce no universality
+axiom or runtime rewrite. The original H and factor programs are retained.
+Whole evaluation of the normalized input is the next computational step.
 
 The canonical Coim⇒Im comparison and its coherent whole factorization
 data still remain to be constructed. Its
