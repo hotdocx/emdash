@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
+Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -300,18 +300,48 @@ comparisons and rejection of unrelated inputs. Original H and factor bodies
 remain unchanged. Raw-formula reconstruction is a proved equality, while
 the original native mate pair retains its judgmental cancellation.
 
-Next C2c3 must connect these whole input equations to their whole evaluation
-observations, then assemble the coherent annihilation input and canonical
-a:Coim⇒Im. A focused probe of the normalized cokernel-unit input stops at
-`sym_transf_tapp0_transf` when compared with `diagram_evaluation_transf`.
-Its existing component-at-each-diagram check is not a whole evaluation
-proof. Start with the existing evaluation/postwhiskering comparison and
-retain the original normalized input and terminal-family comparison.
-Qualify any missing whole projection at that actual owner; do not replace
-it with a pointwise cone reconstruction or a primitive a/exactness witness.
-The final comparison's components and higher observations must come from
-that same constructed term. The terminality/profile generalization and the
-old LES endpoint-checker investigation remain deferred.
+C2c3 now proves the two whole evaluation observations. Write ∂ for the
+original `diagram_evaluation_transf` of the walking-arrow generator, and
+Eᵢ for the whole evaluator on diagram families. At the original normalized
+inputs h_Q:J∘ev₀⇒Arr(q) and h_P:Arr(κ)⇒I∘ev₁:
+
+```text
+E₀(h_Q) = ∂       E₁(h_P) = ∂.
+```
+
+The [whole evaluator](../emdash2/emdash3_2_diagram_evaluation.lp) is defined
+as value evaluation after the existing argument exchange. The old component
+alias delegates to it with the same normal form. Its ordinary composition
+observation is an instance of the existing generic `fapp1_comp_path`;
+no constructor-specific functoriality rule or caller square is supplied.
+
+Two nucleus projection rules complete double exchange for the whole
+transformation and its already-projected component. This follows the
+ordinary [functorial flipping](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Functor/Currying.html#CategoryTheory.Functor.flipping)
+interpretation. The qualification here does not establish arbitrary
+lax/oplax interchange or integrate the deferred profile migration.
+Eight whole endpoint rules complete the same terminal/initial normalizer
+presentation at `sym_transf_tapp0_transf`: the result is the identity of F
+or const_t, including its whole parameter action. The original eight
+point clauses remain because the earlier direct component consumers need
+them. Both typed projection orders meet at the same endpoint identity.
+These are computational clauses for the existing OneCat presentation;
+its primitives, C1 guards and initial/terminal inputs are unchanged.
+
+The [actual zero-column views](../emdash2/emdash3_2_one_cat_adjunction_zero_column_views.lp)
+derive the displayed whole equations by the generic evaluator composition
+path and those projection computations. They do not import the optional
+mate-formula views or ordinary universal records. Whole, component,
+Hom-functor and arbitrary diagram-map observations check. The equations
+are proved whole paths; they are not new direct runtime rules for ∂.
+
+Next C2c4 must combine these observations with whole inverse-mate
+reconstruction to assemble coherent factorization and annihilation data,
+then define a:Coim⇒Im. Preserve the original K/Q/H selections and source
+transformations. Do not replace that construction with pointwise cones,
+ordinary factor dictionaries or an opaque comparison/exactness witness.
+The terminality generalization, old LES endpoint-checker work, strictness
+migration and duality repair remain deferred.
 
 Use these owners to formulate normality and exactness before migrating the
 connecting program. Keep all source transformations, signs and actual H

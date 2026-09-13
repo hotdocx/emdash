@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
+Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,17 +24,18 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C2c2 step (2026-09-13): the whole family adjunction now has proved
-agreement with the existing K/Q whiskering formulas, including the actual
-Coim/Im factors. Applying its same inverse reconstructs the entire original
-input by a defined equality path. Three guarded proof-time comparisons
-resolve the former annotation boundary without changing H/factor bodies
-or adding a runtime rewrite or universality primitive. Native mate cuts
-remain the computational owner. The next C2c3 step is whole evaluation of
-the original normalized inputs and construction of coherent factorization
-for a:Coim⇒Im. The categorical subplan and owner ledger record that precise
-remaining boundary. The intended comparison is one whole term with
-projected components/action, without manually carried naturality squares.
+Current C2c3 step (2026-09-13): both original normalized adjunction inputs
+now observe the universal differential as a whole transformation. The
+whole evaluator is defined from existing exchange and value evaluation;
+its composition path uses generic functoriality. Two nucleus exchange
+projection rules and eight whole normalizer endpoint rules supply the
+missing computation, retaining the old direct point route. No universality
+primitive or generic functoriality/naturality rule is added. Ordinary C1
+scope and the original initial/terminal structures remain explicit.
+The next C2c4 step assembles coherent factorization and annihilation from
+these whole observations and inverse-mate reconstruction, then constructs
+a:Coim⇒Im. The categorical subplan and owner ledger retain the exact
+qualification, warning comparisons and remaining obligations.
 
 Deferred terminality refinement (2026-09-13): the user accepts the current
 ordinary-target normalizers for now and proposes later upgrading the
@@ -388,9 +389,9 @@ observations; no ordinary dictionaries enter the primary programs.
 
 NUH-4C2c1/2 now supply whole family adjunctions, native/raw formula agreement
 and whole inverse-mate reconstruction at the original published factors.
-Next C2c3 qualifies whole evaluation of the original normalized input; the
-current probe stops at its `sym_transf_tapp0_transf` observation. NUH-4C2c
-must then construct canonical Coim⇒Im and its coherent whole
+C2c3 now qualifies whole evaluation of both original normalized inputs,
+including their complete diagram-map observations. C2c4 must assemble the
+coherent annihilation input and construct canonical Coim⇒Im and its whole
 factorization data; the two factors alone do not supply it. Then express
 Abelian normality and exactness by invertibility of the actual comparison
 maps, and build δ by whole universal descent. The ordinary all-arrow/category

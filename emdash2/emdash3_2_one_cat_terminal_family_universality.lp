@@ -86,3 +86,55 @@ rule @tapp0_fapp0 _ _ _ _
       (@tapp0_fapp0 _ _ _ _ $b
         (@defiso_from _ _ _ (@one_cat_initial_arrow_family_iso $B $C _ _ _ $F _)))
   ↪ @id $C (@fapp0 $B $C $F $b);
+
+// Whole endpoint components of the same selected presentation.
+// These retain B and its entire action before taking points. The earlier
+// direct double-component clauses remain for the already-projected route;
+// both typed routes are checked to meet at the same endpoint identity.
+// terminal to, whole fst endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_to _ _ _ (@one_cat_terminal_arrow_family_iso $B $C _ _ _ $F _))
+      (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) $F;
+
+// terminal to, whole snd endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_to _ _ _ (@one_cat_terminal_arrow_family_iso $B $C _ $t _ _ _))
+      (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) (@Const_func $B $C $t);
+
+// terminal from, whole fst endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_from _ _ _ (@one_cat_terminal_arrow_family_iso $B $C _ _ _ $F _))
+      (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) $F;
+
+// terminal from, whole snd endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_from _ _ _ (@one_cat_terminal_arrow_family_iso $B $C _ $t _ _ _))
+      (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) (@Const_func $B $C $t);
+
+// initial to, whole fst endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_to _ _ _ (@one_cat_initial_arrow_family_iso $B $C _ $t _ _ _))
+      (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) (@Const_func $B $C $t);
+
+// initial to, whole snd endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_to _ _ _ (@one_cat_initial_arrow_family_iso $B $C _ _ _ $F _))
+      (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) $F;
+
+// initial from, whole fst endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_from _ _ _ (@one_cat_initial_arrow_family_iso $B $C _ $t _ _ _))
+      (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) (@Const_func $B $C $t);
+
+// initial from, whole snd endpoint.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@defiso_from _ _ _ (@one_cat_initial_arrow_family_iso $B $C _ _ _ $F _))
+      (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @id (Functor_cat $B $C) $F;

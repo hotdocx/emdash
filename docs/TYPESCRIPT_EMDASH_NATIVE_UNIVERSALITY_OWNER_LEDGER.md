@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C2c2 whole family formula agreement and inverse reconstruction qualified; whole evaluation and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,99 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C2c3: Whole evaluation of the original normalized inputs
+
+**Implemented after 2a419dde.** The original h_Q and h_P now satisfy
+E₀(h_Q)=∂ and E₁(h_P)=∂ as equalities of whole transformations D→C,
+where D=Functor_cat(WalkingArrow_cat,C). The actual
+[zero-column views](../emdash2/emdash3_2_one_cat_adjunction_zero_column_views.lp)
+contain two defined proof terms, with the original Q or P and original
+initial/terminal structures. They import the operational zero-column owner;
+there is no ordinary-record or optional mate-formula-view dependency.
+
+The [evaluator owner](../emdash2/emdash3_2_diagram_evaluation.lp) defines
+`diagram_family_evaluation_func` as value evaluation after exchange and
+routes the old component alias through it with unchanged computation.
+`one_cat_diagram_family_evaluation_comp_path` is defined by the existing
+generic `fapp1_comp_path`, with the ordinary C1 scope explicit. It adds no
+new composition-preservation rule or manually supplied naturality square.
+
+Two nucleus rules complete the existing double-exchange ladder for the
+whole transformation and its preprojected component. Whole cancellation,
+three-exchange overlap orders, the projected route, original Hom action
+and its next projection check. The ordinary flipping interpretation is
+linked in the subplan. This is not a qualification of arbitrary lax/oplax
+interchange, nor an integration of the deferred profile branch.
+
+Eight [whole normalizer endpoint rules](../emdash2/emdash3_2_one_cat_terminal_family_universality.lp)
+return the identity transformation of F or const_t. The original primitive,
+OneCat guard and terminal/initial inputs remain unchanged. These complete
+its intended ordinary identity-endpoint presentation; they are not a new
+terminality interface or a derivation of whole extensionality from the old
+point β rules. Removing the original direct point clauses fails their
+retained consumer (`nuh4c3_terminal_old_points_without-20260913-134315.log`),
+so both routes are kept and explicitly checked to agree. Further action
+returns the original endpoint functor's Hom action, including the constant
+endpoint case; it does not collapse nontrivial base arrows to identities.
+
+The original whole-endpoint baseline failed
+(`nuh4c3_whole_terminal_endpoint_baseline-20260913-130813.log`). The normalizer
+projection alone passed but did not finish the composed input observation.
+The existing generic evaluator composition path and the double-exchange
+rungs then completed both input equations. The minimal-import experiment
+`nuh4c3_full_evaluation_minimal-20260913-134530.log` confirms that the previous
+optional family-view comparisons are unnecessary here.
+
+There are 38 added reviewer assertions: seven for exchange, two for the
+whole evaluator, 21 for normalizer endpoints/routes/action and eight for
+the actual input observations. The latter cover whole equality, components,
+whole off-diagonal Hom functors and arbitrary original diagram maps. The
+retained evaluator, adjunction/family and factor-reconstruction consumers
+also pass. No new primitive, unifier, H selection or factor implementation
+is introduced. There are ten runtime projection rules and four defined
+operations/proof views across the four owners.
+
+The next C2c4 step is coherent factorization/annihilation and a:Coim⇒Im,
+using the actual whole inverse-mate reconstruction and evaluation evidence.
+Neither these observations nor the two existing factors constitute a.
+Keep their complete source data and avoid a pointwise cone rebuild or an
+opaque comparison/exactness witness. General terminality, the old LES
+endpoint-checker investigation, strictness migration and Op repair remain
+deferred.
+
+Final warning-enabled, serial resource-guarded ≤90-second checks:
+
+- nucleus baseline: `emdash3_2-20260913-132913.log`;
+- normalizer baseline: `emdash3_2_one_cat_terminal_family_universality-20260913-133258.log`;
+- promoted nucleus: `emdash3_2-20260913-141123.log`;
+- promoted normalizer: `emdash3_2_one_cat_terminal_family_universality-20260913-141232.log`;
+- whole input-view source: `emdash3_2_one_cat_adjunction_zero_column_views-20260913-141703.log`;
+- whole input-view reviewer: `one_cat_adjunction_zero_column_views-20260913-141433.log`;
+- final evaluator reviewer, checking its original native normal form: `diagram_evaluation-20260913-142431.log`;
+- retained exchange/evaluation/normalizer/family/factor-reconstruction reviewers: `nuh4c3_retained-20260913-140410.log`.
+
+The nucleus inventory changes from 1,144 / 157 to 1,146 / 157 critical
+pairs / replaceable-pattern warnings. Its two new overlap families are
+three successive exchanges (`sym_func_func_transf` with itself) and
+preprojected cancellation (`sym_transf_tapp0_transf` with
+`sym_func_func_transf`), at owner lines 17268 and 17273. The reviewer checks
+both typed orders with the actual swapped arguments. The raw critical-pair
+warnings remain recorded; this is not a global confluence certificate.
+
+The eight whole normalizer endpoint clauses add no further reported
+overlap: its inventory changes from 1,171 / 159 to 1,173 / 159 solely through
+those two nucleus families. The new source/reviewer have 1,173 / 159.
+The retained join has 1,271 / 169, exactly the earlier reconstruction
+dependency inventory plus those same two families. Categories, locations
+(accounting for inserted source lines), term heads, participant families
+and parser issues were compared; there are no removals or new parser issues.
+The final nucleus blob is e465551f2e115f303cc28676d1021440544036ca.
+
+All three affected LHS audits pass. Catalog freshness, shell syntax,
+Markdown/diff hygiene and source-only health freshness pass; health now
+inventories 970 files. Validation is localized; no repository-wide or
+TypeScript aggregate ran.
+
 ### NUH-4C2c2: Whole formula agreement and inverse reconstruction
 
 **Implemented after e8dda02f.** The optional
@@ -351,7 +444,7 @@ and changed operands are rejected; mixed associativity remains proof-time,
 not a runtime conversion. The retained family/adjunction/H/factor reviewers
 also pass with the new comparison extension loaded.
 
-**Next C2c3:** whole evaluation of the normalized input, then coherent
+**Historical C2c3 boundary, resolved above:** whole evaluation of the normalized input, then coherent
 annihilation and a. The focused
 `nuh4c2_whole_zero_endpoints-20260913-125108.log` stops at
 `sym_transf_tapp0_transf` of the normalized cokernel-unit input when the

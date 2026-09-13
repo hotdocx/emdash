@@ -190,9 +190,14 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   inverse cuts. The optional family-view extension now proves whole
   agreement with the older K/Q formulas and whole inverse-mate recovery
   through three guarded proof-time comparisons. Original H/factor bodies
-  and native runtime cuts remain the owners. Whole evaluation of the
-  normalized input and canonical Coim⇒Im remain required; do not replace
-  them with pointwise cone reconstruction or a new comparison axiom.
+  and native runtime cuts remain the owners. Whole evaluation of both
+  original normalized inputs now derives the universal differential through
+  generic evaluator functoriality, two double-exchange projection rules and
+  eight whole normalizer endpoint rules. The old point route is retained
+  and checked against the whole route. Coherent factorization/annihilation
+  and canonical Coim⇒Im remain required; do not replace them with pointwise
+  cones or a new comparison axiom. General lax/oplax interchange is not
+  qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

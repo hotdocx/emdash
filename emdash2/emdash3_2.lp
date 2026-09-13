@@ -17264,6 +17264,16 @@ rule @sym_fapp1_func _ _ _ (@sym_func $A $B $C $H) $a $a'
 rule @sym_tapp1_fapp0_transf _ _ _ (@sym_func $A $B $C $H) $a $a' $p
   ↪ @fapp1_fapp0 $A (Functor_cat $B $C) $H $a $a' $p;
 
+// Two exchanges restore the whole transformation, including its action.
+rule @sym_func_func_transf _ _ _ _ _
+      (@sym_func_func_transf _ _ _ _ _ $eta)
+  ↪ $eta;
+
+// The same cancellation after the outer component has already projected.
+rule @sym_transf_tapp0_transf _ _ _ _ _
+      (@sym_func_func_transf $A $B $C $H $K $eta) $a
+  ↪ @tapp0_fapp0 $A (Functor_cat $B $C) $H $K $a $eta;
+
 // Contraction/diagonal for ordinary functor categories.
 //
 // Surface/formula:

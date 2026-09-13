@@ -52,3 +52,13 @@ assert (I C : Cat) (i j : τ (Obj I)) (u : τ (Hom I i j))
 assertnot (I C : Cat) (i : τ (Obj I))
   (F : τ (Functor I C)) (other : τ (Obj C))
   ⊢ @fapp0 (Functor_cat I C) C (@diagram_evaluation_at_func I C i) F ≡ other;
+
+assert [B I C : Cat] (i : τ (Obj I))
+  (F : τ (Functor B (Functor_cat I C)))
+  ⊢ @fapp0 _ _ (@diagram_family_evaluation_func B I C i) F
+    ≡ @sym_fapp0_func B I C F i;
+assert [B I C : Cat] (i : τ (Obj I))
+  (F G : τ (Functor B (Functor_cat I C)))
+  (h : τ (@Transf B (Functor_cat I C) F G))
+  ⊢ @fapp1_fapp0 _ _ (@diagram_family_evaluation_func B I C i) F G h
+    ≡ @sym_transf_tapp0_transf B I C F G h i;

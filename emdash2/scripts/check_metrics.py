@@ -162,6 +162,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_image_coimage_adjunction_families.lp"),
     Path("emdash3_2_one_cat_kernel_cokernel_transposes.lp"),
     Path("emdash3_2_one_cat_adjunction_zero_columns.lp"),
+    Path("emdash3_2_one_cat_adjunction_zero_column_views.lp"),
     Path("emdash3_2_one_cat_image_coimage_factors.lp"),
     Path("emdash3_2_kernel_adjunction_presentations.lp"),
     Path("emdash3_2_cokernel_adjunction_presentations.lp"),

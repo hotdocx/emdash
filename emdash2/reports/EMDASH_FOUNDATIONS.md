@@ -4474,7 +4474,15 @@ by applying the same inverse mate. Components and whole Hom action are
 projections of this agreement. Three guarded proof-time comparison helpers
 resolve the composition presentations; they introduce no universality
 axiom or runtime rewrite. The original H and factor programs are retained.
-Whole evaluation of the normalized input is the next computational step.
+Whole evaluation of both original normalized inputs now gives the universal
+diagram differential as a whole transformation. The evaluator acts on whole
+families and their transformations through exchange and value evaluation.
+Its composition observation uses generic functoriality. The double-exchange
+ladder now restores whole transformations and preprojected components, and
+the normalizer's whole endpoints compute to identity transformations with
+the original endpoint functor's action. These computations retain the
+ordinary C1 scope of the normalizer and its existing point projections;
+they do not generalize terminality or qualify arbitrary lax interchange.
 
 The canonical Coim⇒Im comparison and its coherent whole factorization
 data still remain to be constructed. Its

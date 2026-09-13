@@ -1976,6 +1976,16 @@ companion for the existing whole whiskering formulas. Their
 inverse. These are equality witnesses using three guarded proof-time
 comparisons; raw-formula reconstruction is not a new judgmental cut.
 
+`diagram_family_evaluation_func(i)` evaluates whole diagram families and
+their transformations at i. Its object observation is the existing
+`diagram_family_at_func`; its map observation is
+`sym_transf_tapp0_transf`. The ordinary composition path is derived from
+generic functoriality. The normalizer now computes identity transformations
+at both whole walking-arrow endpoints, with the old point route retained.
+`one_cat_cokernel_unit_source_transf_path` and
+`one_cat_kernel_counit_target_transf_path` identify the original normalized
+input's whole observations with the universal diagram differential.
+
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these
 agreements. Formal whole action remains the runtime owner for generic

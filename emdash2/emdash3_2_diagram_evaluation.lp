@@ -26,6 +26,14 @@ symbol diagram_evaluation_transf
 ≔ @fapp1_fapp0 I (Functor_cat (Functor_cat I C) C)
     (@diagram_evaluation_func I C) i j u;
 
+// Whole evaluation on families, retaining the family itself as a variable.
+// Its action on transformations computes to sym_transf_tapp0_transf.
+symbol diagram_family_evaluation_func [K I C : Cat] (i : τ (Obj I))
+  : τ (Functor (Functor_cat K (Functor_cat I C)) (Functor_cat K C))
+≔ @comp_cat_fapp0 (Functor_cat K (Functor_cat I C))
+    (Functor_cat I (Functor_cat K C)) (Functor_cat K C)
+    (@fapp0_func I (Functor_cat K C) i) (@sym_func_func K I C);
+
 // Whole component functor of a naturally varying diagram D:K→(I→C).
 // Exchange retains K as a functorial variable, rather than evaluating D at
 // one object and reconstructing its action separately.
@@ -33,7 +41,8 @@ symbol diagram_family_at_func
   [K I C : Cat]
   (D : τ (Functor K (Functor_cat I C))) (i : τ (Obj I))
   : τ (Functor K C)
-≔ @fapp0 I (Functor_cat K C) (@sym_func K I C D) i;
+≔ @fapp0 (Functor_cat K (Functor_cat I C)) (Functor_cat K C)
+    (@diagram_family_evaluation_func K I C i) D;
 
 // A shape arrow induces an actual whole transformation of component functors.
 symbol diagram_family_transf
@@ -76,3 +85,17 @@ unif_rule
       (@Struct_sigma _ _ $G1 _)
       (@Struct_sigma _ _ $h1 (@id _ _))
   ↪ [ $I1 ≡ $I; $C1 ≡ $C; $F1 ≡ $F; $G1 ≡ $G; $h1 ≡ $h; $i1 ≡ $i ];
+
+// Existing generic composition evidence at the ordinary family target.
+symbol one_cat_diagram_family_evaluation_comp_path [B I C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) (i : τ (Obj I))
+  (F G H : τ (Functor B (Functor_cat I C)))
+  (g : τ (@Transf B (Functor_cat I C) G H))
+  (f : τ (@Transf B (Functor_cat I C) F G))
+  : τ (@= (@Transf B C (@diagram_family_at_func B I C F i) (@diagram_family_at_func B I C H i))
+      (@sym_transf_tapp0_transf B I C F H (@comp_fapp0 (Functor_cat B (Functor_cat I C)) F G H g f) i)
+      (@comp_fapp0 (Functor_cat B C)
+        (@diagram_family_at_func B I C F i) (@diagram_family_at_func B I C G i) (@diagram_family_at_func B I C H i)
+        (@sym_transf_tapp0_transf B I C G H g i) (@sym_transf_tapp0_transf B I C F G f i)))
+≔ @fapp1_comp_path (Functor_cat B (Functor_cat I C)) (Functor_cat B C)
+    (@diagram_family_evaluation_func B I C i) F G H g f;

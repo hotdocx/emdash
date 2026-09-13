@@ -74,8 +74,10 @@ with explicit structural primitives and whole unit/counit action. Native
 inverse cuts and actual zero-column inputs check. C2c2 now supplies
 [whole formula agreement and inverse reconstruction](../emdash3_2_one_cat_adjunction_family_views.lp)
 at the original K/Q formulas and published factors, preserving component
-and Hom action. Whole evaluation of the normalized input, canonical
-Coim⇒Im, normality, direct whole δ/exactness and concrete-model work remain.
+and Hom action. C2c3 now derives [whole input evaluation](../emdash3_2_one_cat_adjunction_zero_column_views.lp)
+from the evaluator, completed exchange projections and whole normalizer
+endpoints. Coherent factorization/annihilation, canonical Coim⇒Im,
+normality, direct whole δ/exactness and concrete-model work remain.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

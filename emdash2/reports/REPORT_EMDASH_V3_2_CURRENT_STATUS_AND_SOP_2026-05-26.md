@@ -147,8 +147,20 @@ data and mixed represented/raw associativity. Four defined paths use the
 original Hom comparison and its same inverse. The actual K/Q formulas,
 published factors, component and Hom action, unrelated-input rejection and
 retained associativity/mate consumers pass. There is no new primitive or
-runtime rule. Whole evaluation of the normalized input is the next owner
-boundary; canonical Coim⇒Im and coherent annihilation remain unconstructed.
+runtime rule.
+
+C2c3 now derives [whole differential observations of both normalized inputs](../emdash3_2_one_cat_adjunction_zero_column_views.lp).
+The whole family evaluator is defined as value evaluation after exchange;
+the old component alias retains its computation through that owner. Its
+ordinary composition path uses the existing generic functoriality theorem.
+Two nucleus rules complete double exchange of transformations and the
+preprojected component. Eight whole endpoint rules return the normalizer's
+identity transformation, retaining the original point route and C1 guards.
+Whole, component, Hom-functor and arbitrary diagram-map observations pass.
+No new universality primitive, unifier or constructor-specific naturality
+rule is added. The two new exchange overlap families are classified in the
+living ledger. General lax/oplax interchange remains unqualified here;
+coherent factorization/annihilation and canonical Coim⇒Im remain next work.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
