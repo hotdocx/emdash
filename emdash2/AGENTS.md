@@ -67,11 +67,15 @@ connected naturality profiles must be qualified while retaining generic
 directed section action; the recorded subtraction variants are not a repair.
 Subsequent user direction for the native-universality goal defers further
 Empty audits and prototype strictness migration. Its current priority is
-the mathematical duality specification in
+the native syntactic duality design in
 `../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md` and useful native
 operations. The separate `goal/opaque-action-profile-classifiers-v3.2`
 branch will be integrated after this goal. Do not treat that integration
 or further consistency probes as a prerequisite for this goal's work.
+The user also clarified that the general D_S/set-of-dimensions exposition
+is not an implementation API. Use selected native category constructors,
+internal functors and their fapp/tapp/Hom rules. External semantic transport
+does not stand in for a required native whole owner or its computation.
 
 ## Authority And Document Roles
 

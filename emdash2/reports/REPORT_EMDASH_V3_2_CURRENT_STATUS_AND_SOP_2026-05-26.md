@@ -42,10 +42,11 @@ The non-library subtraction variants isolate causes; no repair is promoted.
 
 Subsequent user direction sets further prototype strictness/Empty auditing
 aside for the native-universality goal. The current
-[mathematical duality specification](../../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
-gives the coherent dimension-set, universe and family action framework.
-Native target/module and homology implementation continue under that
-mathematical account. Integration of
+[native duality owner design](../../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+records the selected finite constructors, their internal functors and
+their code status. The former general dimension-set/tensor-transport
+exposition is not the architecture being implemented. Native target/module
+and homology implementation continue through actual native owners. Integration of
 `goal/opaque-action-profile-classifiers-v3.2` comes after this goal and
 does not block its completion.
 

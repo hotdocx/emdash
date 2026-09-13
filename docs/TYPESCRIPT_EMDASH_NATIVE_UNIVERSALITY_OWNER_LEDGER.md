@@ -7,7 +7,7 @@ Status: active NUH-1 design; source inventory established, coupled target design
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
 Current user direction (2026-09-12): use the
-[mathematical duality specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+[native duality owner design](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
 to continue native operations. Prototype strictness migration and Empty
 audits are deferred; their earlier acceptance/next-action language below
 is historical and does not govern this continuation. Integration of
@@ -192,20 +192,93 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
-### NUH-1D: Mathematical duality framework and native application
+### NUH-1D3: Direct homd_int adjustment before auxiliary expansion
 
-The current [duality specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
-provides the coherent reference theory: dimension-set dualities, recursive
-Hom action, the shifted internal universe/family action, and transport of
-enriched structures when a transformation context changes. Total O,
-homwise R and transpose T have distinct specified roles. This settles the
-meaning of the duality operations; it does not claim that every native
-Homd target or implementation clause is already complete.
+The current task is to compare the existing homd_int declaration, target
+constructor and projection ladder with the smallest internally coherent
+duality correction. Preserve the fixed-endpoint homd_ meaning and the
+primary homd_int(FF) constructor. Identify exactly which old target
+factorization fails and whether it can be repaired with the existing
+owners before committing to a replacement target classifier.
+Preserve the existing rewrite/unif split, normal forms and owner placement.
+Do not import auxiliary comparison/relocation experiments merely because
+they made a copied prefix easier to check.
 
-The next implementation work resumes the shared native index/module,
-its D-map action and the complete homd_int source/target, then follows
-NUH-2 through the whole-universality and homology rows. Use the mathematical
-specification and the existing positive native computations. Do not reopen
+The shared index bundles existing y,v,a arguments; it is a candidate
+target-packaging change, not a new foundation. Its minimality has not
+been established. General G:D→D′ index action is auxiliary and does not
+precede this direct review. Do not use the auxiliary action to reconstruct
+homd_int(FF) from an identity case as its primary definition.
+
+Keep candidate construction files separate from reviewer assertions.
+Typed eq_refl tests of a unifier are checks, not equality-based family
+constructions. The quoted native_op_pullback_agrees temporary test was
+rewritten as an explicit typed assert; the focused check still passes.
+No such symbol is part of the active library.
+
+The subsequent Op_catd clarification is settled: it remains primitive
+pointwise opposite. Op_func(E):O(K)→O(Cat) and Op_func(π):O(ΣE)→O(K)
+are separate operations. No total-projection reinterpretation of Op_catd
+is being pursued. The focused assert-only reviewer
+`emdash2/tmp/probes/native_op_catd_pointwise_review.lp` passes on the
+unchanged preferred prefix in `/tmp/emdash-pointwise-op-review.m_iorhfg`.
+It checks the primitive/composite fold, unchanged object values under
+CoAbove2_func(E), total opposite at the fibre and its next Hom, and the
+reversed base-2-cell action. No rule or theory declaration is added by
+that reviewer, and the active nucleus remains unchanged.
+
+### NUH-1D2: Auxiliary family-map action — parked
+
+The previous `5b2714c0` turn supplied semantic explanation, but the user
+clarified that the implementation is the selected finite native syntax,
+not a general D_S API. The current design now records that distinction.
+The existing native source-arrow reviewer passed at resumption on the
+unchanged copied prefix; all worktrees and baseline ancestry were checked.
+
+For G:D→D′, set g=Sigma(G). The existing whole projection rule gives
+π′∘g=π. Thus the represented family hom_(π′,x), reindexed along g,
+recovers hom_(π,x). Apply the native opposite-family reindexing interface,
+then sigma_pullback_total_func(CoAbove2_func(g),...), then CoAbove2_func.
+This should define S_x(G):S_x(D)→S_x(D′) with point action
+(y,v,a)↦(y,G_y(v),a). It uses existing internal functor constructors.
+
+The whole functor and its point projection check, as does the target's
+contravariant precomposition. The arrow application normalizes to a pair
+of Sigma(G)[m] and the original theta. A separately reintroduced raw pair
+did not elaborate at opaque Sigma endpoint/projection comparisons; that
+observation remains unqualified. No new comparison was added to force it.
+
+The complete retained stage is
+`/tmp/emdash-native-index-family-map._ytjursm`, with a parked source patch,
+manifest and logs. This experiment introduced one proof-time reindexing
+comparison in copied sources, moved existing pullback/base-change rules
+earlier and added the stable-constructor beta instance. It changes no
+active LP source and is not promoted. The source and tests are outside
+the active queue until a direct native action consumer needs this work.
+
+The original opposite/reindexing compatibility was already a unif_rule,
+matching Op_catd of a literal composite. The preserved total-op patch
+first adapted that same rule to CoAbove2_func(F), with the outer Pullback
+base slots wildcarded. The v1 consumer failed after its represented family
+had reduced beyond that literal-composite pattern. The additional copied
+comparison handled that shape, but its necessity versus a better consumer
+presentation has not been established. It is not selected for promotion.
+Explicit CoAbove2_cat(A/B) arguments in typed test expressions are not
+rule-LHS guards; both candidate unif patterns used `_` in those outer slots.
+
+### NUH-1D: Selected native duality owners and internal application
+
+The current [native owner design](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+records actual code status and the selected Op_cat/CoAbove2_cat constructors,
+the supporting CoAbove3_cat prototype, derived transpose operations and
+their internal functor/projection ladders. The general D_S and transported
+tensor exposition in `5b2714c0` was not an implementation; the user's
+clarification rejects treating it as the architecture. Native Homd target
+and action integration remain unfinished.
+
+The next work is NUH-1D3's direct homd_int owner review and adjustment,
+then NUH-2 through the whole-universality and homology rows. Use the actual
+native owner types and existing positive computations. Do not reopen
 prototype strictness or Empty experiments to select that next action.
 
 ### NUH-1B2h: Prototype strictness/profile continuation deferred
@@ -752,14 +825,16 @@ projections and computation must be specified together before promotion.
 | NUH-1B2g family/section profile diagnostic | complete diagnostic tranche; three Empty routes and discriminating subtraction variants preserved, no profile repair promoted |
 | NUH-1B2h connected naturality profiles | deferred by subsequent user direction; not a prerequisite for this goal |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
-| NUH-1D mathematical duality framework | specified; apply its universe/family shifts and transported contexts to the complete native target/module |
+| NUH-1D native duality owners | finite signatures/prototypes specified; no generic external D_S API; complete the actual internal target/module |
+| NUH-1D2 auxiliary family-map action | parked; whole/point and target action checked in copies, raw opaque-arrow reintroduction unqualified; no active source change |
+| NUH-1D3 direct homd_int owner adjustment | current next task; justify the required target change against existing declarations and preserve the native projection ladder |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue from NUH-1D's mathematical framework and the computing structural
-index in NUH-1B2f. Complete the native D-map/module and evaluation
-interfaces, then full native integration. Keep the whole higher action and
-actual mathematical context explicit. Use localized checks of affected
-owners/features/files and reuse unchanged evidence. Empty audits and the
+Continue with NUH-1D3's direct homd_int declaration/target/projection
+review. Keep the shared index as a candidate and the D-map expansion
+parked. Complete the required native adjustment and integration, keeping
+whole higher action and actual mathematical context explicit. Use localized
+checks of affected owners/features/files and reuse unchanged evidence. Empty audits and the
 prototype strictness migration are deferred, as is integration of the other
 profile branch until after this goal. The full native target implementation
 remains unfinished. Spectral/stabilization work stays out of scope.

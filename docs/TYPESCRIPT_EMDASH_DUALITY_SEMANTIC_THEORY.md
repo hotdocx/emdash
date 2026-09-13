@@ -1,387 +1,320 @@
-# Native Duality: Mathematical Specification
+# Native Duality: Syntactic Owners And Internal Computation
 
 Date: 2026-09-12
 
-Status: active semantic specification; implementation follows the living plan
+Status: selected finite operator design; isolated prototypes checked; active kernel migration pending
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
-## Current Direction
+## Architectural Clarification
 
-The user has clarified the priority: formulate an ordinary, coherent and
-usable mathematical theory of opposites/duality. Prototype global
-strictness rules and handcrafted Empty derivations are outside the current
-work queue. The separate `goal/opaque-action-profile-classifiers-v3.2`
-branch will be integrated after this goal, not during it.
+The implementation uses selected native category constructors, internal
+functors and their fapp/tapp/Hom projection rules. It does not introduce an
+operation indexed by arbitrary sets of dimensions, an external category
+model interpreter, or a generic tensor/profile-transport service.
 
-This document specifies the mathematics independently of those rewrite
-issues. It starts with strict ω-categories and strict ω-functors, where
-dimension-selected duality is unambiguous. Cartesian, lax and oplax
-transformation contexts are named when they matter. Their mathematical
-distinction does not launch a strictness-rule migration here.
+The previous revision's D_S notation explained possible semantics. Calling
+that exposition the implemented architectural specification was misleading.
+Its arbitrary-set calculus and transported-tensor construction are removed
+from the active design. A semantic explanation may check an intended native
+rule; it does not supply that rule's internal term, higher action or
+computational qualification.
 
-Native hom_int/homd_int remain foundational syntactic owners. The formulas
-below interpret and organize their operations; they do not redefine them
-through an external total-category Hom projection.
+The selected O/R/T meanings are coherent. The complete internal calculus,
+especially its native Homd target/module and downstream projection ladder,
+is still being implemented. No claim that a general external account has
+completed that work is intended.
 
-## 1. Reverse A Specified Set Of Dimensions
+The user's other scope directions remain in force: preserve hom_int and
+homd_int as foundations; set further Empty/prototype-strictness audits aside;
+integrate `goal/opaque-action-profile-classifiers-v3.2` after this goal.
 
-For S⊆ℕ₊, let D_S(C) reverse the n-cells of C exactly when n∈S. Write
+## 1. What Actually Exists In The Code
 
-```text
-S↓ = {n≥1 | n+1∈S},       S↑ = {n+1 | n∈S}.
+The active nucleus is [emdash3_2.lp](../emdash2/emdash3_2.lp), still at blob
+`91f1974ece225e399604dce24710bf1437ad3ef5`. Its declarations have not yet
+been replaced by the prototype.
 
-D_∅ = Id
-D_S D_T = D_(S△T)
-D_S² = Id.
-```
-
-The last two formulas express coherent involutions; one can choose strict
-representatives for this dimension calculus. They do not require an
-implementation to erase every distinct presentation by rewriting.
-
-Objects are unchanged. The recursive Hom formula is
-
-```text
-Hom_(D_S C)(x,y) = D_(S↓)(Hom_C(y,x))    if 1∈S,
-Hom_(D_S C)(x,y) = D_(S↓)(Hom_C(x,y))    if 1∉S.
-```
-
-This gives the intended principal operations:
-
-| Name | Reversed dimensions | Hom formula |
+| Interface | Active nucleus | Isolated native prototype |
 | --- | --- | --- |
-| O(C), proposed public Op_cat(C) | all n≥1 | O(Hom_C(y,x)) |
-| R(C), prototype CoAbove2_cat(C) | all n≥2 | O(Hom_C(x,y)) |
-| T(C)=R(O(C)) | dimension 1 only | Hom_C(y,x) |
-| D₂(C) | dimension 2 only | T(Hom_C(x,y)) |
-| D≥3(C) | all n≥3 | R(Hom_C(x,y)) |
-| D₁₂(C)=D≥3(O(C)) | dimensions 1 and 2 | T(Hom_C(y,x)) |
+| Op_cat | Hom(Op A)(x,y) reduces to Hom(A)(y,x) | Hom(Op A)(x,y) reduces to Op(Hom(A)(y,x)) |
+| op | Functor(Cat,Cat) | Functor(CoAbove2_cat(Cat),Cat) |
+| CoAbove2_cat | absent | native category constructor, with Hom computing to Op of the original Hom |
+| CoAbove3_cat | absent | supporting shifted constructor, with Hom computing to CoAbove2 of the original Hom |
+| Transpose_cat / CoOnly2_cat / Reverse12_cat | absent | transparent compositions of the selected constructors |
+| Homd target | old section-family composite | shared native index and whole target-family prototype; native integration unfinished |
+| general D_S API | absent | not proposed or implemented |
 
-In particular, the user's proposed recursive rule has exactly the intended
-total-duality meaning:
+The relevant source artifacts are the
+[total-op patch](../emdash2/audits/total_op_reinterpretation.patch),
+[further-shift patch](../emdash2/audits/native_index_family_shift.patch),
+[structural Sigma patch](../emdash2/audits/native_sigma_precomp.patch),
+[index prototype](../emdash2/audits/native_homd_index_prototype.lp) and
+[whole-family prototype](../emdash2/audits/native_index_family_prototype.lp).
+They run against copied owner-position prefixes. They are not imported into
+the active library.
 
-```text
-Hom_cat (Op_cat A) X Y  ↪  Op_cat (Hom_cat A Y X).
-```
+Reviewer declarations such as a typed eq_refl assertion are tests of those
+candidate rules. They are not the operations implementing duality. In
+particular, the temporary native_op_pullback_agrees check was replaced by
+an explicit typed assert, avoiding the appearance of an exported theorem.
+The SOP requires typed reflexivity when testing a unif_rule; plain
+`assert t ≡ u` checks conversion instead. Neither test constructs a family
+by transporting along a path of family objects.
 
-Ordinary Hom contravariance uses T, since reversing its source variable
-should reverse the 1-arrows in that variable while keeping the higher Hom
-action in its required direction. Total O and transpose T consequently
-have different jobs, even though they coincide on an ordinary 1-category.
+## 2. Selected Category Constructors
 
-## 2. Functors And The Shift At The Universe
-
-Every strict F:A→B has a strict dual
-
-```text
-D_S F : D_S A → D_S B.
-```
-
-It has the same object assignment. Its full Hom action is D_(S↓) applied
-to the original Hom action, with the two endpoints exchanged exactly when
-1∈S. This specifies the complete action recursively, including every
-higher dimension.
-
-Let 𝒞 be the Cartesian ω-category of strict ω-categories, strict
-ω-functors and strict higher transformations. Write [A,B]ₛ for its Hom.
-Since D_S preserves Cartesian products, it transports Cartesian internal
-Homs:
+O and R are mathematical shorthand for the proposed native names Op_cat
+and CoAbove2_cat. Their defining Hom computations are:
 
 ```text
-D_S([A,B]ₛ) ≅ [D_S A,D_S B]ₛ.
+Obj(Op_cat C) ↪ Obj C
+Hom_cat(Op_cat C,x,y) ↪ Op_cat(Hom_cat(C,y,x))
+
+Obj(CoAbove2_cat C) ↪ Obj C
+Hom_cat(CoAbove2_cat C,x,y) ↪ Op_cat(Hom_cat(C,x,y)).
 ```
 
-The corresponding internal universe operation has type
+The first reverses all positive-dimensional cells; the second keeps
+1-arrows and reverses their higher cells. Iteration is obtained by applying
+the existing Hom eliminator again. No external enumeration of cell
+dimensions is involved.
+
+The transpose is an ordinary definition:
 
 ```text
-d_S : D_(S↑)(𝒞) → 𝒞.
+Transpose_cat C ≔ CoAbove2_cat(Op_cat C)
+Hom_cat(Transpose_cat C,x,y) ↪ Hom_cat(C,y,x).
 ```
 
-The shift is forced by the dimensions: a component k-cell of a higher
-transformation is a (k+1)-cell in the universe. Functors remain covariant;
-the reversal of their transformations starts one dimension higher.
+This is the source variance needed by the native ordinary Hom owners.
+The prototype changes their actual source types to Transpose_cat where
+appropriate; it does not replace hom_int by an external construction.
 
-The three useful instances are therefore
+Involution and the required commutations are computational clauses at
+these same owners. They must be checked with the affected projection rules,
+as with any other native constructor.
+
+## 3. The Internal Operation op
+
+Op_cat is a category-forming syntactic constructor. The lowercase op is
+its whole internal functor, with the proposed type
+
+```lambdapi
+constant symbol op
+  : τ (Functor (CoAbove2_cat Cat_cat) Cat_cat);
+```
+
+Its observations stay in the ordinary native functor calculus:
 
 ```text
-op  : R(𝒞)   → 𝒞,       A ↦ O(A)
-r   : D≥3(𝒞) → 𝒞,       A ↦ R(A)
-t   : D₂(𝒞)  → 𝒞,       A ↦ T(A).
+fapp0(op,A) ↪ Op_cat A
+fapp1_fapp0(op,F) ↪ Op_func F.
 ```
 
-Thus `op : Op2 Cat → Cat` is mathematically appropriate if Op2 means R
-and Op_cat means total O. If Op_cat instead meant dimension-1 transpose,
-its universe source would be D₂(Cat), not R(Cat).
-
-This also explains the ordinary-category convention. On the external
-1-category of categories and functors, opposite is a covariant functor
-Cat₁→Cat₁. In the 2-category retaining natural transformations its source
-is Cat₂ᶜᵒ. On individual 1-categories O=T and R=Id; the universe of those
-categories still has nontrivial natural transformations in dimension 2.
-
-## 3. Families: Dualize Fibres And Shift The Base
-
-For a strict family E:K→𝒞 define
+Op_func(F) is itself a functor Op(A)→Op(B). Its full Hom action computes
+through another Op_func at the original reversed-endpoint Hom action:
 
 ```text
-E^S = d_S ∘ D_(S↑)(E) : D_(S↑)(K) → 𝒞.
-
-E^S(k) = D_S(E(k)).
+(Op_func F)_(x,y)
+  ↪ Op_func(F_(y,x)).
 ```
 
-The base change is part of the construction. In the Cartesian family
-classifier Famₛ(K)=[K,𝒞]ₛ, the whole operation is
+Thus transformations and further cells are handled by the next existing
+Hom/fapp projection. The changed source of op records their variance
+internally. A pointwise assignment A↦Op(A), without this whole action,
+would not implement the required operation.
+
+The ordinary-category convention remains understandable: opposite is
+covariant on categories and functors, while natural transformations add
+the next dimension. The native source CoAbove2_cat(Cat_cat) retains that
+distinction in the type itself.
+
+## 4. The Further Shift Used By The Current Prototype
+
+The whole varying-source index construction also internalizes R. Its
+current supporting constructor is:
 
 ```text
-D_(S↑)(Famₛ(K)) → Famₛ(D_(S↑)(K)).
+Obj(CoAbove3_cat C) ↪ Obj C
+Hom_cat(CoAbove3_cat C,x,y) ↪ CoAbove2_cat(Hom_cat(C,x,y)).
 ```
 
-On a family map η:E→F, its fibre component is the ordinary dual functor
-D_S(η_k). Higher family transformations follow the same shifted rule.
-This determines the operation on the whole family classifier rather than
-only on family objects.
+The actual whole functor in the prototype is:
 
-For total duality:
+```lambdapi
+constant symbol native_homwise_dual
+  : τ (Functor (CoAbove3_cat Cat_cat) Cat_cat);
+```
+
+Its object projection is CoAbove2_cat; its whole Hom projection is the
+existing experimental CoAbove2_functor_cat_func. This is why the current
+prototype has a third supporting constructor. It is a concrete dependency
+of that native whole action, not the first installment of an arbitrary
+set-indexed duality API. Its final placement belongs to native integration.
+
+Two useful aliases remain definitions:
 
 ```text
-E^O : R(K) → 𝒞
-Op_family : R(Famₛ(K)) → Famₛ(R(K)).
+CoOnly2_cat C ≔ CoAbove2_cat(CoAbove3_cat C)
+Reverse12_cat C ≔ CoAbove3_cat(Op_cat C).
 ```
 
-For an ordinary 1-category K, R(K)=K, so the familiar pointwise opposite
-really is a same-base construction at that level. With higher base cells,
-the shifted base remains visible. Reindexing is compatible in the precise
-form
+They reverse dimension 2 alone and dimensions 1–2 respectively. Their
+Hom computations follow from the selected constructors. The prototype's
+native_transpose_universe and native_transpose_family are likewise
+internal compositions, retaining the CoOnly2 source in their types.
+
+## 5. Families Use Native Internal Action
+
+The user's final clarification confirms that Op_catd means pointwise
+opposite. It is not the opposite of the entire total projection. Keep E
+for the family, E[x] for its fibre and π:Sigma_cat(E)→K for its total
+projection, so these different inputs are not conflated.
+
+The proposed family constructor has this actual native type:
+
+```lambdapi
+injective symbol Op_catd [K : Cat] (E : τ (Catd K))
+  : τ (Catd (CoAbove2_cat K));
+```
+
+It remains an injective primitive symbol. There is no `≔` body and no
+primitive-to-defined-symbol migration. The composite-to-constructor fold
+is a separate computational clause:
 
 ```text
-(E∘F)^S = E^S ∘ D_(S↑)(F).
+op ∘ CoAbove2_func(E) ↪ Op_catd(E).
 ```
 
-This is the equation to use when transporting a whole family operation
-through a changed base.
+This clause relates the native internal action to its stable primitive
+head. It is not a metalevel definition by applying an external model.
 
-## 4. Lax/Oplax Contexts: Transport The Structure Too
+The operation levels are distinct:
 
-A duality transports the chosen transformation structure along with the
-objects. There is a general mathematical construction that makes this
-coherent without guessing a same-profile signature.
+| Native term | Type in the corrected prototype | Object value at x |
+| --- | --- | --- |
+| Op_func(E), with E:K→Cat | O(K)→O(Cat) | E[x], viewed as an object of O(Cat) |
+| CoAbove2_func(E) | R(K)→R(Cat) | E[x], viewed as an object of R(Cat) |
+| Op_catd(E) | R(K)→Cat | O(E[x]) |
+| Op_func(π), with π:ΣE→K | O(ΣE)→O(K) | the ordinary total-functor dualization |
 
-Given a monoidal tensor ⊗ on strict ω-categories, define its transported
-tensor and internal Homs by
+In particular, CoAbove2_func(E) does not first replace the fibre E[x]
+by R(E[x]). Composing with the internal op therefore produces O(E[x]),
+not T(E[x]). Pointwise opposite and opposite of the total projection must
+not be identified by an unqualified formula for Sigma totals.
+
+Its whole constructor package is:
 
 ```text
-A ⊗^S B = D_S(D_S A ⊗ D_S B)
-[A,B]^S = D_S([D_S A,D_S B]).
+Op_catd_func K
+  : Functor(CoAbove2_cat(Catd_cat K),
+            Catd_cat(CoAbove2_cat K)).
 ```
 
-Here each left/right internal Hom is transported with its matching
-adjunction. Units, associators, evaluation and composition are transported
-by the same equivalence. In particular,
+At points the result computes to Op_cat(E[k]). At arrows the package
+projects to Op_funcd; its fibre component projects to Op_func of the
+original fibre component. The family is built through the internal op and
+CoAbove2_func action, with a constructor fold for the resulting composite.
+It is not computed by an external procedure on semantic family records.
+
+The base change is explicit. For a base functor F, the corresponding
+reindexing comparison uses CoAbove2_func(F). An ordinary 1-category K
+has no higher directed cells to reverse, which explains the familiar
+same-base presentation in that specialization.
+
+The first higher base cell explains the shift directly. If α:p⇒q in K,
+then E(α):E(p)⇒E(q). Reversing the component arrows inside the fibres
+gives E(α)ᴼ:E(q)ᴼ⇒E(p)ᴼ. Base 1-arrows still act by functors
+E(x)ᴼ→E(y)ᴼ, while base 2-cells act in the reversed direction.
+CoAbove2_cat(K) records exactly this behavior and its higher iterations.
+The internal construction is the composite
 
 ```text
-D_S(A⊗B) ≅ D_S A ⊗^S D_S B
-D_S([A,B]) ≅ [D_S A,D_S B]^S.
+CoAbove2_cat(K) ─CoAbove2_func(E)→ CoAbove2_cat(Cat_cat) ─op→ Cat_cat.
 ```
 
-Transport twice combines the labels by symmetric difference. Applying
-D_S to the Homs of an enriched category gives a category enriched in
-⊗^S, with the induced shift of ambient cell dimensions. This supplies a
-coherent meaning for every dimension set S. When the transported tensor
-has a familiar name, that name can be used through its canonical comparison.
+Lax/oplax directions must be read from the particular native operator's
+type and action. This design supplies no generic external mechanism that
+silently converts one context to another. Concrete native comparison and
+projection owners must express any needed passage. The separate global
+strictness migration remains outside this goal.
 
-For the standard Gray tensor, total O preserves the tensor; odd-dimensional
-and even-dimensional duals reverse its factor order. The corresponding
-lax/oplax Hom comparisons exchange the two orientations for the odd/even
-duals and preserve them for total O. Arbitrary dimension-selected duals
-need not preserve that particular tensor. These standard identifications
-are recorded in Ara–Guetta,
-[§§2.22–2.27](https://arxiv.org/pdf/2503.08832v3#page=24).
+## 6. Native Homd Keeps Its Syntactic Ownership
 
-Our R and T must not be confused with the even/odd duals in that notation:
-R reverses every dimension ≥2, and T reverses only dimension 1. They
-coincide with the even/odd choices only through dimension 2. The transport
-construction above specifies their meaning when an unchanged standard
-Gray profile is unavailable.
+The proposed shared index changes the target classifier of homd_int. It
+bundles the existing y,v,a arguments of homd_(FF,x,u,y,v)[a]; it does not
+add a new kind of dependent Hom. This is a substantive packaging proposal,
+so its necessity must be justified against the direct old/new owner types.
+Its minimality has not been established by the auxiliary prototypes.
 
-For example, a lax family comparison
+The shared index is a supporting native construction. In the current
+prototype, with C=Sigma_cat(D), it is assembled from:
 
 ```text
-F(p)∘η_x ⇒ η_y∘E(p)
+native_index_hom_catd(D,x) ≔ hom_(Sigma_proj1_func(D),x)
+J_x ≔ Sigma_cat(Op_catd(native_index_hom_catd(D,x)))
+S_x(D) ≔ CoAbove2_cat(J_x).
 ```
 
-is transported with its direction and whole higher action. It is not
-declared to belong to the original transformation classifier solely
-because the fibre functors have the expected object values. This is
-mathematical bookkeeping for the operation, not an instruction to migrate
-this branch's prototype strictness rules.
+The suppressed bases in this display are explicit in the checked LP
+prototype: Op_catd changes C to CoAbove2_cat(C). Its points are native
+Sigma constructors retaining (y,v,a:x→y), and its arrows retain
+(s,β:D(s)v→w,θ:b⇒s∘a). The existing prototype computes structural source
+arrows and source-2-cell components through native owners.
 
-## 5. Sections And Totals By Their Whole Universal Interfaces
-
-Sections 1–4 specify the duality framework itself. The following sections
-apply it to the native section, total and Homd interfaces. They distinguish
-the chosen universal constructions from the still-unfinished full native
-target/module implementation.
-
-Fix a family-map profile p. Its section category is the native Hom
+The whole family and target are also actual internal compositions:
 
 ```text
-Π_(p,K)(E) = Hom_(Fam_p(K))(const_K(1),E).
+native_index_family(D) : Reverse12_cat(Z) → Cat
+native_homd_target_family(D) : Catd(CoOnly2_cat(Z))
+native_transpose_family(E) : Catd(CoOnly2_cat(Z)).
 ```
 
-For the positive section convention, the observed base-arrow component is
-E(a)(s_x)→s_y. Constant-family positive sections are ordinary functors
-K→A. A Cartesian strictly natural family-map profile and this positive
-section profile have different meanings and should carry the appropriate
-mathematical names.
-
-The constant view can be checked by interpreting positive sections as
-sections of π:Σ⁺E→K, with their chosen higher structure over K. For a
-constant family this projection is K×A→K, whose strict section category is
-[K,A]ₛ. This is a semantic interpretation of the native section owner; it
-is not an identification with every possible lax higher-transformation
-classifier or a replacement of the syntactic foundations.
-
-Let U=S↑ and p^U denote the transported family-map profile from §4. The
-whole family duality then gives
+The intended homd_int(FF) relates the last two families. Its source-fixed
+value is a whole functor on S_x(D), whose endpoint observation is
 
 ```text
-D_S(Π_(p,K)(E)) ≅ Π_(p^U,D_U K)(E^S).
+Hom_(E[y])(E[a](u),FF[y](v)).
 ```
 
-This follows by applying the Hom formula to the whole family classifier:
-1∉U, so the two family endpoints stay in order and U↓=S. It accounts for
-both the changed base and the changed section profile.
+This is still homd_int's internal operation and projection ladder. The
+supporting index does not redefine dependent Hom from a total-category
+projection. Nor is a manual cone/factor record the primary program.
 
-Likewise, specify a totalization through its whole cocone interface
+The remaining work includes the family-map/module action, complete native
+homd source/target and projections, and their downstream consumers.
+Existing point and source-action computations do not certify that the
+entire ladder is already implemented.
 
-```text
-[Σ_(p,K)(E),C]ₛ ≅ Hom_(Fam_p(K))(E,const_K(C)).
-```
+The immediate priority is the direct homd_int source/target and projection
+adjustment. The explored G:D→D′ index map concerns additional naturality
+in the family parameter and is parked until a direct native consumer needs
+it. It must not replace the primary homd_int(FF) constructor by an
+identity-specialized Hom followed by auxiliary map operations.
 
-Transporting this universal construction gives
+## 7. What Is And Is Not Settled
 
-```text
-D_S(Σ_(p,K)(E)) ≅ Σ_(p^U,D_U K)(E^S).
-```
+The selected dual constructors have clear intended meanings and a concrete
+syntactic implementation strategy. Several corresponding native operations
+already compute in the isolated prototypes. That is the established
+boundary.
 
-The total's projection is transported too. If π:ΣE→K, its dual lands in
-D_S K. One must not independently assign it the family base D_U K: these
-are different axes of the construction. This distinction is already
-visible for total O, where the total projection reverses base arrows while
-the pointwise-dual family's base is R(K).
+The full internal duality/Homd calculus is not yet completed. In particular,
+mathematical notation for a duality cannot stand in for a missing internal
+whole constructor, a required comparison, or its next action. The earlier
+claim that an external general framework settled the internal architecture
+was too broad.
 
-These are universal categorical interfaces, not instructions for users to
-assemble pointwise cone records in the formal layer.
+Proceed with the selected native owners and make the direct homd_int
+adjustment explicit before expanding auxiliary index functoriality. Finish
+native target integration and the universality/homology rows. Validate the
+affected whole action and its concrete projections with localized guarded checks.
+No D_S API, arbitrary tensor transport, further Empty audit, or integration
+of the other profile branch is scheduled in this goal.
 
-## 6. Covariant And Contravariant Totalizations
-
-Write Σ⁺_K(E) for positive Grothendieck totalization of E:K→𝒞. For a
-presheaf H:T(K)→𝒞 define the contravariant version by
-
-```text
-Σ⁻_K(H) = O(Σ⁺_(O K)(H^O)).
-```
-
-It is well typed: H^O has base R(TK)=OK. The outer O sends the total's
-projection to a projection over K, and restores its original fibres.
-
-The familiar arrow observations make the distinction concrete:
-
-```text
-Σ⁺E: (x,u)→(y,v) is (a:x→y, β:E(a)u→v).
-Σ⁻H: (x,u)→(y,v) is (a:x→y, β:u→H(a)v).
-```
-
-For constant families both totals have the expected product K×A. The
-inner fibre dual and outer total dual serve distinct roles; the recursive
-Hom rule determines their higher-cell action.
-
-The dependent-Hom observation
-
-```text
-χ_(x,u;y,v)(a) = Hom_(E(y))(E(a)u,v)
-χ_(x,u;y,v) : T(Hom_K(x,y)) → 𝒞
-```
-
-therefore yields the mathematical Sigma-Hom formula
-
-```text
-Hom_(Σ⁺E)((x,u),(y,v)) ≅ Σ⁻_(Hom_K(x,y))(χ_(x,u;y,v)).
-```
-
-In emdash, χ is the existing native dependent-Hom observation at id_E.
-This formula relates the native Hom and Sigma owners. It does not replace
-homd_int by a definition using a total-category projection.
-
-## 7. Negative Sections And The Native Shared Index
-
-The earlier negative-section expression has a useful direct meaning:
-
-```text
-Π⁻_K(E) = O(Π⁺_(R K)(E^O)).
-```
-
-It switches the section profile as explained in §5. In particular,
-
-```text
-Π⁻_K(const_K(A)) ≅ [T(K),A]ₛ,
-```
-
-because O([RK,OA]ₛ)≅[O(RK),A]ₛ and O(RK)=TK. This derives the constant
-view from ordinary duality rather than postulating another section rule.
-
-The existing [shared native index design](TYPESCRIPT_EMDASH_NATIVE_HOMD_INDEX_TARGET_DESIGN.md)
-can use the same dimension calculus. With C=Σ⁺D, π:C→Z and the native
-represented family H_x=hom_int(π)[x], its carrier expression is
-
-```text
-J_x = Σ⁺_(R C)(H_x^O)
-S_x(D) = R(J_x).
-```
-
-Its points retain (y,v,a:x→y), and its arrows retain the triangle
-(s,β:D(s)v→w,θ:b⇒s∘a). The native dependent-Hom value remains
-
-```text
-M_(x,u)(y,v,a) = Hom_(E(y))(E(a)u,FF_y(v)).
-```
-
-For strict E and a family comparison E(s)FF_y⇒FF_zD(s), the arrow
-observation sends h to the composite
-
-```text
-E(b)u → E(sa)u = E(s)E(a)u
-      → E(s)FF_y(v) → FF_zD(s)(v) → FF_z(w).
-```
-
-The successive actions are E(θ), E(s)(h), the supplied family's own
-comparison, and FF_z(β). No inverse comparison is inserted. This formula
-explains the intended mathematical action; full native packaging remains
-the implementation row recorded in the shared-index plan.
-
-The previously derived Cartesian source dimensions fit the uniform shifts:
-
-```text
-S : D₁₂(Z) → 𝒞
-P_D : D₂(Z) → 𝒞,       P_D(x) = [S_x(D),𝒞]ₛ
-T_*(E) : D₂(Z) → 𝒞.
-```
-
-Thus the intended native homd source/target use the same base D₂(Z), and
-the source fibre is T(E(x)). Its exact whole transformation context is
-carried with the supplied family data. The dimensions are not inferred
-from an equality of bases or from a replacement input family.
-
-## Implementation Direction
-
-Use total O as Op_cat and retain R as its homwise shift. Derive T=R∘O,
-D₂=R∘D≥3 and D₁₂=D≥3∘O. The public mathematical account should expose
-the dimension sets and the shift rule, so the additional operators do not
-look like unrelated special cases.
-
-Resume the native shared-index/module construction using these meanings,
-then the whole-universality and homology rows of the living plan. Validate
-the affected operations through their typed whole action, nonidentity
-examples and higher projections. Prototype strictness migration, Empty
-reproducer work and the unrelated branch integration remain deferred.
+Preserve the existing rewrite/unif architecture while making the required
+variance adjustments. In particular, opposite/reindexing naturality was
+already a proof-time unification comparison; its two runtime histories
+should not be collapsed just to accommodate a new consumer. Additional
+comparisons or rule moves must be justified at a concrete core owner.

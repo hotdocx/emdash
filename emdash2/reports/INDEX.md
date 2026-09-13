@@ -29,10 +29,15 @@ while retaining ordinary section evaluation. These are non-library
 diagnostics, with a guarded reproducible driver; no profile repair or
 active LP change is claimed. Subsequent user direction defers NUH-1B2h and
 further Empty audits. The active continuation uses the
-[mathematical duality specification](../../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+[native duality owner design](../../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
 to complete the native target/module and universality/homology work.
 `goal/opaque-action-profile-classifiers-v3.2` is to be integrated after
 this goal, not as a prerequisite for it.
+The further user clarification keeps the implementation syntactic and
+internal: selected Op/shifted-dual heads and actual projection rules, with
+no generic D_S or external tensor-transport API. The linked design records
+the difference between active source, isolated prototypes and unfinished
+native integration.
 
 Latest homology status (2026-09-11): the user-directed remainder of the
 [bounded long exact homology and book plan](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)

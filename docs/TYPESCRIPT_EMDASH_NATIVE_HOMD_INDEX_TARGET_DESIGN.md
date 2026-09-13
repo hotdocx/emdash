@@ -268,7 +268,7 @@ The [family/section profile diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE
 is retained as historical prototype evidence. The user has deferred
 further strictness/Empty audits and will integrate the other profile
 branch after this goal. Continue from the
-[mathematical duality specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+[native duality owner design](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
 and its explicit universe/family shifts. The reference calculations here
 keep their stated mathematical context; implementing the prototype
 strictness migration is not their current prerequisite.

@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active; semantic duality framework specified, native target/module continuation in progress; prototype strictness migration deferred
+Status: active; finite native duality operators selected, internal target/module continuation in progress; prototype strictness migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -47,6 +47,42 @@ will be integrated **after this goal**, not during it and not as a
 prerequisite for finishing it. Preserve existing diagnostics as historical
 evidence; do not continue their investigation or use them to redirect the
 current implementation queue.
+
+**Further architectural clarification:** the implementation must remain
+syntactic, computational and internal. Use the selected Op_cat,
+CoAbove2_cat and required supporting native heads, their internal functors
+and fapp/tapp/Hom computation. The general D_S/set-of-dimensions exposition
+was semantic background, not an implemented or selected type-theoretic
+API. Its arbitrary tensor/profile transport is not an implementation plan.
+The internal design is not complete until its actual whole owners and
+projection/action ladders are implemented.
+
+The shared-index construction is a candidate replacement for the target
+classifier of homd_int, bundling its existing y,v,a arguments. It is not a
+replacement for native dependent Hom. Its necessity and scope must be
+made explicit through the direct old/new owner comparison. General
+functoriality in a family map G:D→D′ is auxiliary work and is parked until
+an actual native action consumer needs it. Do not expand that interface
+ahead of the direct homd_int adjustment.
+
+The user subsequently confirmed that Op_catd is intended as **pointwise
+opposite**, and must remain primitive. The briefly considered opposite of
+the total projection is a distinct operation, owned by Op_func on that
+projection. Do not substitute that interpretation for Op_catd. The
+pointwise proposal under total Op has base CoAbove2_cat(K), with fibre
+Op_cat(E[x]); its composite fold is not a primitive-to-defined migration.
+Preserve existing native primitive heads. A semantic comparison or
+constructor fold must not be described or implemented as replacing such
+a primitive by a transparent definition.
+
+For this Op migration, preserve the existing rewrite/unification
+architecture by default: primitive and stable heads, runtime normal forms,
+rewrite-versus-unification roles and owner placement. Adapt necessary
+variance arguments and inferred-slot patterns in the existing rules first.
+An additional comparison or relocation needs a concrete core consumer and
+an explanation of why the existing architecture is insufficient. Auxiliary
+prototype convenience or availability in a truncated prefix is not itself
+a reason to change the final source organization.
 
 **Spectra, categorical spectra, Heine generalization, dependent stabilization
 and suspension research are explicitly deferred by the launch. Do not
@@ -151,7 +187,7 @@ The same root hook configuration is retained; no new hook is installed.
 | Row | State | Required outcome |
 | --- | --- | --- |
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
-| NUH-1 | active design tranche | Coherent mathematical Op/duality specification and exact native-owner/variance/dependency table; complete its application to the native target/module |
+| NUH-1 | active design tranche | Selected native duality signatures/computation and exact owner/variance/dependency table; complete the internal target/module design |
 | NUH-2 | pending NUH-1 | Implement the coupled op/family/Sigma/native-Hom operations with their stated mathematical meanings, whole action and affected nonidentity/higher-action consumers; prototype strictness migration stays deferred |
 | NUH-3 | pending NUH-1/2 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
 | NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
@@ -167,12 +203,28 @@ from a genuinely blocked goal.
 
 ## NUH-1: Design Before Rules
 
-The current mathematical specification is
-[Native Duality: Mathematical Specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md).
-Its dimension-set calculus, shifted universe action and transport of
-enriched structures provide the coherent reference theory. Completing the
-native Homd target/module and its implementation remains work; it is not
-the same question as giving Op a mathematical meaning.
+The current native design is
+[Native Duality: Syntactic Owners And Internal Computation](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md).
+It distinguishes the unchanged active nucleus from the finite native
+operator prototypes and gives their actual types and computation owners.
+The earlier general external exposition does not complete the internal
+design and is not the architecture being implemented. Complete the native
+Homd target/module and its projection ladder using the selected owners.
+
+Keep the artifact roles explicit:
+
+| Artifact | Role |
+| --- | --- |
+| Active emdash3_2.lp and registered extension modules | The current implemented theory |
+| Isolated owner-position patches and prototype files | Candidate source changes; not active library functionality |
+| Reviewer/control files and typed asserts | Checks of computation, typing and proof-time unification; not primary mathematical constructions |
+| Ignored tmp/probes and retained /tmp stages | Disposable experiments and their logs; not additional authorities or an implementation queue |
+| Linked historical diagnostics and session archives | Recovery evidence only; current plan/user direction selects what remains in scope |
+
+In particular, `assert ⊢ eq_refl(...) : τ(@= ...)` is the SOP's way to
+exercise a unification comparison. It does not construct a family by an
+equality cast. Prefer that explicit test spelling over a named `_agrees`
+symbol in a temporary reviewer when the symbol has no actual consumer.
 
 The design ledger is
 [native owner and variance ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md).
@@ -326,6 +378,10 @@ must not label those alternatives validated implementations.
 | D-NUH-017 | Constant-section comparisons plus unrestricted strict naturality derive Empty; retain generic directed section action and qualify strict equality at an actual profile. Audit whole/capped/object/stable comparisons together; the four-cut diagnostic subtraction is not a repair |
 | D-NUH-018 | Subsequent user direction sets Empty audits and prototype global strictness migration aside. D-NUH-017 is historical evidence, not the current work queue. Integrate goal/opaque-action-profile-classifiers-v3.2 only after this goal |
 | D-NUH-019 | Use the dimension-set duality calculus, shifted universe/family actions and transported enrichment in TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md as the coherent mathematical reference; continue native target/module construction and then the universality/homology migration |
+| D-NUH-020 | User clarification supersedes D-NUH-019's architectural wording: no generic D_S API or external tensor/profile transport is being implemented. Use selected native duality heads and their internal functors/projections; the full internal design remains unfinished |
+| D-NUH-021 | Prioritize the direct homd_int source/target and projection adjustment. The shared index is a target-packaging candidate; G:D→D′ module functoriality is auxiliary and parked. Mark typed equality probes as tests, not theory constructions |
+| D-NUH-022 | User confirms primitive pointwise Op_catd, distinct from Op_func on a classifying functor or total projection. CoAbove2_func(E) keeps object value E[x], so the internal op composite has fibre Op_cat(E[x]), not a fibre transpose; preserve the primitive head |
+| D-NUH-023 | Preserve the existing rewrite/unif architecture during the Op migration. Adapt variance within existing owners first; additions or relocations require an actual core consumer, not auxiliary-prototype or prefix-check convenience |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -480,11 +536,12 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 
 ## Persistent Goal Launch Prompt
 
-Current continuation boundary: the mathematical duality framework is now
-specified in `TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md`. Native target
-and module integration, followed by the remaining universality/homology
-rows, is still implementation work. The user's latest direction supersedes
-the preceding historical profile-audit next steps. The documentation
+Current continuation boundary: the selected native duality owners and
+their code status are specified in `TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md`.
+No generic set-indexed duality or external tensor transport is an
+implementation target. Native target/module integration and the remaining
+universality/homology rows are unfinished. The user's latest direction
+supersedes the preceding historical profile-audit next steps. The documentation
 checkpoint passes changed-link, Unicode/fence, active-reference, lifecycle
 and exact-diff hygiene; it changes no active LP or TypeScript source.
 
@@ -501,8 +558,11 @@ make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running
 repository-wide typechecks or automatic aggregates as the user requested.
 Keep the ledger current and preserve unrelated work and reference history.
-Focus on the mathematical duality/native-operation theory. Empty proof
-audits and prototype global strictness migration are deferred. Integrate
+Focus on the selected syntactic and internal duality/native-operation design.
+Do not implement the former general D_S or external transport exposition.
+Prioritize the direct homd_int declaration/target/projection adjustment;
+auxiliary G:D→D′ index action is parked until an actual consumer needs it.
+Empty proof audits and prototype global strictness migration are deferred. Integrate
 `goal/opaque-action-profile-classifiers-v3.2` only after this goal, not as
 a prerequisite for its completion.
 Spectra, Heine generalization,
