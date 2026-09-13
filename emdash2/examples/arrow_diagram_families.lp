@@ -112,3 +112,66 @@ assertnot (K C : Cat) (F G : τ (Functor K C))
   ⊢ @diagram_family_transf K WalkingArrow_cat C
       (@transf_arrow_diagram_func K C F G eta)
       walking_arrow_src walking_arrow_tgt walking_arrow_generator ≡ other;
+// Constructor-specific evaluation after represented postcomposition.
+assert (B A C : Cat) (F G : τ (Functor A C)) (eta : τ (@Transf A C F G))
+  ⊢ @comp_cat_fapp0 (Functor_cat B A) (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+      (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src)
+      (@comp_cat_cov_func B A (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func A C F G eta))
+    ≡ @comp_cat_cov_func B A C F;
+
+assert (B A C : Cat) (F G : τ (Functor A C)) (eta : τ (@Transf A C F G))
+  ⊢ @comp_cat_fapp0 (Functor_cat B A) (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+      (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt)
+      (@comp_cat_cov_func B A (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func A C F G eta))
+    ≡ @comp_cat_cov_func B A C G;
+
+assert (B A C : Cat) (F G : τ (Functor A C)) (eta : τ (@Transf A C F G)) (X : τ (Functor B A))
+  ⊢ @fapp0 _ _ (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src)
+      (@fapp0 _ _ (@comp_cat_cov_func B A (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func A C F G eta))
+        X)
+    ≡ @fapp0 _ _ (@comp_cat_cov_func B A C F) X;
+
+assert (B A C : Cat) (F G : τ (Functor A C)) (eta : τ (@Transf A C F G)) (X : τ (Functor B A))
+  ⊢ @fapp0 _ _ (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt)
+      (@fapp0 _ _ (@comp_cat_cov_func B A (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func A C F G eta))
+        X)
+    ≡ @fapp0 _ _ (@comp_cat_cov_func B A C G) X;
+
+// Identity endpoint, through the same constructor fold.
+assert (B A : Cat) (F G : τ (Functor A A)) (eta : τ (@Transf A A (@id_func A) G))
+  ⊢ (@comp_cat_fapp0 (Functor_cat B A) (Functor_cat B (Functor_cat WalkingArrow_cat A)) (Functor_cat B A)
+    (@diagram_family_evaluation_func B WalkingArrow_cat A walking_arrow_src) (@comp_cat_cov_func B A (Functor_cat
+    WalkingArrow_cat A) (@transf_arrow_diagram_func A A (@id_func A) G eta))) ≡ @id_func (Functor_cat B A);
+
+// Identity endpoint, through the same constructor fold.
+assert (B A : Cat) (F G : τ (Functor A A)) (eta : τ (@Transf A A F (@id_func A)))
+  ⊢ (@comp_cat_fapp0 (Functor_cat B A) (Functor_cat B (Functor_cat WalkingArrow_cat A)) (Functor_cat B A)
+    (@diagram_family_evaluation_func B WalkingArrow_cat A walking_arrow_tgt) (@comp_cat_cov_func B A (Functor_cat
+    WalkingArrow_cat A) (@transf_arrow_diagram_func A A F (@id_func A) eta))) ≡ @id_func (Functor_cat B A);
+
+// Generic identity postcomposition keeps the established evaluator owner.
+assert (B C : Cat)
+  ⊢ @comp_cat_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+      (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+      (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src)
+      (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)
+        (@id_func (Functor_cat WalkingArrow_cat C)))
+    ≡ @diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src;
+
+// Generic identity postcomposition keeps the established evaluator owner.
+assert (B C : Cat)
+  ⊢ @comp_cat_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+      (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+      (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt)
+      (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)
+        (@id_func (Functor_cat WalkingArrow_cat C)))
+    ≡ @diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt;
+
+// Evaluation retains the selected endpoint functor, not an arbitrary one.
+assertnot (B A C : Cat) (F G H : τ (Functor A C)) (eta : τ (@Transf A C F G))
+  ⊢ @eq_refl (Functor (Functor_cat B A) (Functor_cat B C))
+      (@comp_cat_fapp0 (Functor_cat B A) (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+        (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src)
+        (@comp_cat_cov_func B A (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func A C F G eta)))
+    : τ (@= (Functor (Functor_cat B A) (Functor_cat B C))
+        (@comp_cat_cov_func B A C F) (@comp_cat_cov_func B A C H));

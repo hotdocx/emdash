@@ -1973,8 +1973,10 @@ The optional `one_cat_adjunction_family_views` module now exposes
 `one_cat_adjunction_family_transpose_agrees` and its inverse-direction
 companion for the existing whole whiskering formulas. Their
 `*_reconstruction` paths recover the entire input through the same native
-inverse. These are equality witnesses using three guarded proof-time
+inverse. These are equality witnesses using guarded proof-time
 comparisons; raw-formula reconstruction is not a new judgmental cut.
+The additional mixed-associativity view retains the native `(G∘F)∗X`
+owner while comparing with `G∘(F∗X)` on the same data.
 
 `diagram_family_evaluation_func(i)` evaluates whole diagram families and
 their transformations at i. Its object observation is the existing
@@ -1985,6 +1987,17 @@ at both whole walking-arrow endpoints, with the old point route retained.
 `one_cat_cokernel_unit_source_transf_path` and
 `one_cat_kernel_counit_target_transf_path` identify the original normalized
 input's whole observations with the universal diagram differential.
+
+`one_cat_coimage_image_comparison` is the defined whole a:Coim⇒Im.
+Its input is the internally constructed `one_cat_coimage_image_mate_input`;
+the original native cokernel mate and inverse cuts own its computation.
+Whole source-to-image annihilation and input-target recovery are derived
+paths. `one_cat_coimage_image_factorization_value(b)` abbreviates the whole
+observation E₀(unmate_P(E₁(transpose_Q(b)))); its `*_path` reconstructs ∂
+and `*_unique` proves b=a from that whole condition. These names do not
+introduce an opaque comparison, pointwise cone syntax or new factorization
+runtime cut. The function in b is not separately packaged as an internal
+functor. Abelian invertibility remains evidence about this actual a.
 
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these

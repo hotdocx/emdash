@@ -1,5 +1,5 @@
 /* Proof-time views of native whole-family adjunction mates.
-   The three comparison helpers preserve the existing runtime owners.
+   The four comparison helpers preserve the existing runtime owners.
    Congruence is sufficient: corresponding operands and endpoints must
    compare. This does not assert mathematical injectivity of composition.
    Whole formula agreement and reconstruction are derived through the
@@ -31,6 +31,13 @@ unif_rule @comp_prod_fapp1_fapp0 Cat_cat $B $C $D $fg $fg' $theta
 unif_rule @comp_fapp0 Cat_cat $B $L $R $G
     (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $C $L $F $A)
   ≡ @comp_fapp0 Cat_cat $B $C $R (@comp_fapp0 Cat_cat $C $L $R $G $F) $A
+  ↪ [ tt ≡ tt ];
+
+// Companion view: (G∘F)∗X compares with G∘(F∗X), retaining every operand.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C
+    (@comp_fapp0 Cat_cat $A $D $C $G $F) $X
+  ≡ @comp_fapp0 Cat_cat $B $D $C $G
+    (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $D $F $X)
   ↪ [ tt ≡ tt ];
 
 // Observation of a whole family mate in the original whiskering formula.

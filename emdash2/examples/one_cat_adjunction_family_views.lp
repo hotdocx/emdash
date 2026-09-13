@@ -351,3 +351,18 @@ assertnot (B C L R : Cat) (A A' : τ (Functor B C)) (F : τ (Functor C L)) (G : 
 assertnot (B C L R : Cat) (A : τ (Functor B C)) (F : τ (Functor C L)) (G : τ (Functor L R))
   ⊢ @comp_cat_fapp0 B L R G (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id_func Cat_cat) B C L F A)
     ≡ @comp_cat_fapp0 B C R (@comp_cat_fapp0 C L R G F) A;
+
+// Native (G∘F)∗X and raw G∘(F∗X) keep their distinct runtime owners.
+assert (B A D C : Cat) (F : τ (Functor A D)) (G : τ (Functor D C)) (X : τ (Functor B A))
+  ⊢ eq_refl (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C
+      (@comp_cat_fapp0 A D C G F) X)
+    : τ (@= (Functor B C)
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C (@comp_cat_fapp0 A D C G F) X)
+      (@comp_cat_fapp0 B D C G (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A D F X)));
+
+assertnot (B A D C : Cat) (F : τ (Functor A D)) (G : τ (Functor D C)) (X Y : τ (Functor B A))
+  ⊢ eq_refl (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C
+      (@comp_cat_fapp0 A D C G F) X)
+    : τ (@= (Functor B C)
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C (@comp_cat_fapp0 A D C G F) X)
+      (@comp_cat_fapp0 B D C G (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A D F Y)));

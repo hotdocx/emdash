@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
+Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility next; exactness/connecting unfinished
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -37,9 +37,9 @@ Here Arr is owned by `transf_arrow_diagram_func`, not a new arrow-data
 record. Its application to the existing κ/q retains parameter and higher
 action. Composition is `comp_cat_fapp0`.
 
-Construct the canonical whole comparison a:Coim⇒Im from the existing
-units/counits and mate operations. Abelian structure requires invertibility
-of this actual comparison. Kernel/cokernel existence alone does not imply
+The canonical whole comparison a:Coim⇒Im is now constructed from the existing
+units/counits and mate operations in C2c4 below. Abelian structure requires
+invertibility of this actual comparison. Kernel/cokernel existence alone does not imply
 that condition. This is the usual coimage/image criterion in
 [Stacks, Definition 12.5.1](https://stacks.math.columbia.edu/tag/00ZX).
 
@@ -256,7 +256,8 @@ did not pass. The primary programs contain no ordinary factor dictionaries
 or equation-proof operations. Do not advertise the observations as new
 judgmental reconstruction cuts.
 
-Next NUH-4C2c must construct a:Coim⇒Im and its whole factorization data.
+The C2b milestone left a:Coim⇒Im and its whole factorization data to C2c,
+now completed through C2c4 below.
 The two pointwise reconstruction observations do not themselves construct
 the required coherent annihilation/mate input. Keep the existing whole
 units, counits and comparisons as program data; do not rebuild pointwise
@@ -335,11 +336,62 @@ mate-formula views or ordinary universal records. Whole, component,
 Hom-functor and arbitrary diagram-map observations check. The equations
 are proved whole paths; they are not new direct runtime rules for ∂.
 
-Next C2c4 must combine these observations with whole inverse-mate
-reconstruction to assemble coherent factorization and annihilation data,
-then define a:Coim⇒Im. Preserve the original K/Q/H selections and source
-transformations. Do not replace that construction with pointwise cones,
-ordinary factor dictionaries or an opaque comparison/exactness witness.
+C2c4 now constructs the
+[canonical whole comparison](../emdash2/emdash3_2_one_cat_image_coimage_comparison.lp)
+and proves its native whole factorization and uniqueness. The construction
+uses the following derived whole observations, with OneCat(C) explicit:
+
+```text
+E₀(unmate_P(u)) = ∂        ∂∘κ = 0        u∘κ = 0
+h_a : Arr(κ) ⇒ I∘Im       E₁(h_a) = u
+a = untranspose_Q(h_a) : Coim ⇒ Im
+transpose_Q(a) ≡ h_a.
+```
+
+Whole terminal/initial-family uniqueness and diagram-map reflection give
+faithfulness of the projected inverse mates. Precomposition and zero
+compatibility then derive u∘κ=0 from the original counit. An existing native
+square in Functor_cat(D,C) uses that internally derived whole cell; realize
+it as a walking-arrow map there, exchange back, and apply the existing
+initial-family normalizer. This gives h_a at the original native Im and
+Arr(κ) endpoints. No per-object naturality or cone dictionary is supplied.
+The comparison itself is the original cokernel family mate applied to h_a.
+
+For an arbitrary whole b:Coim⇒Im, the transparent observation
+
+```text
+fact(b) = E₀(unmate_P(E₁(transpose_Q(b))))
+fact(a) = ∂                  fact(b) = ∂ ⇒ b = a
+```
+
+retains both whole adjunctions. This is a function on whole transformations,
+not a separately packaged internal functor in b. Its factorization and
+uniqueness are derived paths; only the original native mate cancellation
+above is judgmental. No ordinary factor records, comparison axiom or new
+universality primitive enters the construction. Existing accepted shape,
+terminal-family and lifted-adjunction primitives remain explicit model
+obligations; this result does not derive them from their old β interface.
+
+The implementation adds five one-way modules with 24 definitions, four
+introduced-arrow evaluation clauses and two proof-time comparisons. The
+four clauses compute E₀/E₁ after postcomposition by Arr(η), including the
+object-first route. They do not install a general evaluator/postcomposition
+fold or constructor-specific naturality. A generic fold was rejected by
+its identity-postcomposition corner. The comparisons retain all supplied
+operands and indices; they add no runtime normalization or injectivity law.
+
+Whole/native reconstruction, actual component and diagram-map action, the
+next Hom functor with its original endpoints, and unrelated-input rejection
+are qualified by localized reviewers. The owner ledger records exact warning
+comparisons, inference-slot audits and the rejected alternatives.
+
+Next attach existing invertibility evidence to this actual a, then construct
+the canonical Im(f)→K(g) at native zero data and use its invertibility for
+exactness. This is additional Abelian/exactness structure, not a consequence
+of K/Q existence or of the two reconstruction paths. Continue to whole
+universal descent for δ; do not run the old ordinary-record program as the
+primary implementation.
+
 The terminality generalization, old LES endpoint-checker work, strictness
 migration and duality repair remain deferred.
 

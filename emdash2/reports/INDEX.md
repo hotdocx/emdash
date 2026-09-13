@@ -76,8 +76,11 @@ inverse cuts and actual zero-column inputs check. C2c2 now supplies
 at the original K/Q formulas and published factors, preserving component
 and Hom action. C2c3 now derives [whole input evaluation](../emdash3_2_one_cat_adjunction_zero_column_views.lp)
 from the evaluator, completed exchange projections and whole normalizer
-endpoints. Coherent factorization/annihilation, canonical Coim⇒Im,
-normality, direct whole δ/exactness and concrete-model work remain.
+endpoints. C2c4 now [constructs canonical whole Coim⇒Im](../emdash3_2_one_cat_image_coimage_comparison.lp)
+through faithful whole inverse mating, derived annihilation, native square
+realization and the original cokernel mate. Whole factorization, uniqueness,
+original selections and Hom action are qualified. Abelian invertibility,
+direct whole δ/exactness and concrete-model/reifier work remain.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

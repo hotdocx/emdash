@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility and categorical exactness/connecting next; NUH-1/2 duality user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,133 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C2c4: Canonical whole comparison and its characterization
+
+**Implemented after c1a79176.** The canonical a:Coim⇒Im is a defined whole
+transformation using the original K/Q structures. There are no new
+primitives, ordinary-factor program inputs, object casts or changed H
+selections. Five new one-way owners supply 24 definitions:
+
+- [zero-arrow action paths](../emdash2/emdash3_2_zero_arrow_family_action_paths.lp):
+  three composition/embedding observations, with one protected generic helper;
+- [terminal-family paths](../emdash2/emdash3_2_one_cat_terminal_family_paths.lp):
+  two whole initial/terminal uniqueness consequences of the existing normalizers;
+- [diagram-family paths](../emdash2/emdash3_2_one_cat_diagram_family_paths.lp):
+  whole endpoint reflection and the two one-endpoint universal test cases;
+- [kernel/cokernel-family paths](../emdash2/emdash3_2_one_cat_kernel_cokernel_family_paths.lp):
+  eight native projection-faithfulness, structural, annihilation,
+  precomposition and zero observations;
+- [image/coimage comparison](../emdash2/emdash3_2_one_cat_image_coimage_comparison.lp):
+  eight definitions for u reconstruction/annihilation, its coherent mate
+  input, a, input-target recovery and whole factorization/uniqueness.
+
+Whole diagram reflection exchanges into WalkingArrow→Functor_cat(B,C),
+applies the original OneCat diagram reflection, and exchanges back. Its
+premises compare entire endpoint transformations. Whole initial/terminal
+uniqueness removes the unused endpoint premise for J∘A⇒D and D⇒I∘A.
+Original native inverse cuts then give faithfulness of the projected mates.
+The original counit and generic naturality derive ∂∘κ=0, and the dual unit
+proves q∘∂=0. Projected kernel mating respects whole precomposition and
+zero. Together with E₀(unmate_P(u))=∂, faithfulness derives u∘κ=0.
+
+The resulting cell forms one existing native square **in Functor_cat(D,C)**.
+Its realization, exchange and the original initial-family normalizer
+construct h_a:Arr(κ)⇒I∘Im. Cokernel untransposition defines a. Native
+transposition computes back to the whole h_a, and E₁(h_a)=u is proved as a
+whole path. No componentwise naturality/functoriality proof is supplied as
+program data. The accepted ordinary shape/family presentations and the
+lifted adjunction remain explicit primitives/model obligations; no arbitrary
+higher lax interchange is claimed.
+
+The transparent function fact(b)=E₀(unmate_P(E₁(transpose_Q(b)))) satisfies
+fact(a)=∂, and projected mate faithfulness proves fact(b)=∂ ⇒ b=a. This is
+whole factorization/uniqueness; it is not a separately packaged internal
+functor in b or a new runtime factorization cut. The actual a is a whole
+internal transformation with original parameter and Hom action.
+
+Four runtime clauses are added at the
+[introduced-arrow owner](../emdash2/emdash3_2_arrow_diagram_families.lp):
+E₀/E₁ after postcomposition by Arr(η) compute to postcomposition by F/G.
+Two functor clauses retain the iterable owner; two object-first clauses
+complete the competing route after that composite head has been erased.
+Every inferred slot is a wildcard except the required Cat/id, shape and
+retained data discriminators. Typed whole/object-first, identity-endpoint,
+generic identity-postcomposition and noncollapse controls pass.
+
+Two sufficient proof-time comparisons preserve runtime heads. Same-head
+`sym_transf_tapp0_transf` congruence compares every index, parent family and
+whole transformation, aligning native/raw parent annotations without erasing
+data. The existing family-view owner gains the companion mixed associativity
+view `(G∘F)∗X ≐ G∘(F∗X)` at the same G,F,X. Typed eq_refl controls exercise
+both helpers; unrelated transformations, shape observations and retained
+input families are rejected.
+
+Rejected experiments are kept as ignored probes:
+`nuh4c4_evaluation_owner.lp` proposed a generic Eᵢ/postcomposition fold;
+its generic identity-postcomposition corner failed in
+`nuh4c4_eval_identity_corner-20260913-145518.log`. Only constructor-scoped
+clauses are promoted. Raw parent annotations *inside* mate composites also
+failed; native postcomposition endpoints are kept there, with raw views
+only at the qualified observation interface. Separate internal-functor
+packaging of fact failed on nested native/raw annotations and is not
+promoted or claimed. The explicit whole-transformation function is checked.
+An early negative index-control used an unqualified constant-exchange fold;
+its expected type was ill formed. The maintained control instead uses
+Arr(η:F⇒F), whose two endpoint families compute to the same F, and verifies
+that the two observations of an arbitrary h still do not collapse.
+
+All checks are warning-enabled, serial, resource-guarded and ≤90 seconds.
+The [comparison reviewer](../emdash2/examples/one_cat_image_coimage_comparison.lp)
+checks actual Coim/Im endpoints, whole input cancellation, original u,
+factorization and uniqueness, wrong-input rejection, raw whole-formula
+agreement, components, arbitrary diagram maps and the next Hom functor
+packaged with its original endpoints in the existing native arrow carrier.
+The projection helpers are not substituted by per-object proof hypotheses.
+
+There are 27 added assertions: 13 comparison/characterization/action checks,
+three whole-evaluation comparison controls, nine constructor/identity/noncollapse
+checks and two mixed-associativity controls. Final focused logs are:
+
+| Target | Warning-enabled log under `emdash2/logs/probes/` |
+| --- | --- |
+| Introduced-arrow owner | `emdash3_2_arrow_diagram_families-20260913-160314.log` |
+| Existing family-view owner | `emdash3_2_one_cat_adjunction_family_views-20260913-160317.log` |
+| New zero-arrow action paths | `emdash3_2_zero_arrow_family_action_paths-20260913-160321.log` |
+| New whole terminal-family paths | `emdash3_2_one_cat_terminal_family_paths-20260913-160324.log` |
+| New whole diagram-family paths | `emdash3_2_one_cat_diagram_family_paths-20260913-160328.log` |
+| New whole kernel/cokernel-family paths | `emdash3_2_one_cat_kernel_cokernel_family_paths-20260913-160332.log` |
+| New whole comparison source | `emdash3_2_one_cat_image_coimage_comparison-20260913-155706.log` |
+| Complete comparison reviewer | `one_cat_image_coimage_comparison-20260913-160255.log` |
+| Constructor evaluation reviewer | `arrow_diagram_families-20260913-160010.log` |
+| Whole-evaluation view controls | `zero_arrow_family_action_paths-20260913-160219.log` |
+| Existing/new family-view controls | `one_cat_adjunction_family_views-20260913-160344.log` |
+| Retained whole zero-input mate consumer | `one_cat_adjunction_family_zero_inputs-20260913-160352.log` |
+| Retained K/Q and ordinary observations | `kernel_cokernel_adjunctions-20260913-160358.log`, `kernel_cokernel_adjunction_observations-20260913-160402.log` |
+| Dependency-only join in the same import order | `nuh4c4_retained_dependencies_ordered-20260913-160747.log` |
+
+The arrow owner matches its pre-edit `154727` baseline exactly at 1150
+critical pairs / 157 replaceable-pattern warnings; the family-view owner
+matches its `155448` baseline at 1151/157. Full comparison source and reviewer
+match the dependency-only join exactly at 1208/159. Comparisons include
+categories, source locations, term heads, participant-rule families and
+parser diagnostics; no new warning family or source-local warning is hidden
+by equal counts. An earlier dependency-only join used a different import
+order and moved one pre-existing overlap's reported location from the Gray
+profile to the terminal owner. Preserving the actual traversal resolves that
+reporting difference; the same-order inventory is identical.
+
+The three changed/new rule owners pass strict LHS audits. Catalog generation
+and strict freshness pass; the generated source-only health snapshot covers
+977 files and deliberately runs no aggregate typecheck. Shell syntax,
+active-reference/header lint, changed Markdown links and exact staged diff
+are checked before the local checkpoint. Source metrics are bookkeeping,
+not extra formal qualification or resumable aggregate evidence.
+
+Next is Abelian invertibility of this actual a, then canonical exactness and
+whole universal descent for δ. Concrete model/reifier automation and the
+snake comparison remain in the active goal; general terminality, old LES
+endpoint debugging, duality and strictness migration remain deferred.
+
 ### NUH-4C2c3: Whole evaluation of the original normalized inputs
 
 **Implemented after 2a419dde.** The original h_Q and h_P now satisfy
@@ -362,7 +489,7 @@ also pass. No new primitive, unifier, H selection or factor implementation
 is introduced. There are ten runtime projection rules and four defined
 operations/proof views across the four owners.
 
-The next C2c4 step is coherent factorization/annihilation and a:Coim⇒Im,
+**Historical boundary, resolved by C2c4 above:** coherent factorization/annihilation and a:Coim⇒Im,
 using the actual whole inverse-mate reconstruction and evaluation evidence.
 Neither these observations nor the two existing factors constitute a.
 Keep their complete source data and avoid a pointwise cone rebuild or an
@@ -634,7 +761,7 @@ participant-family deltas are checked, with no removals or parser issues.
 Four LHS audits, catalog freshness and shell syntax checks pass; source-only
 health is refreshed to 963 files. No aggregate or TypeScript check ran.
 
-**Next NUH-4C2c:** construct the canonical whole a:Coim⇒Im and its coherent
+**Historical C2b boundary, resolved by C2c4 above:** construct the canonical whole a:Coim⇒Im and its coherent
 factorization data from the original whole universal operations. The two
 proved pointwise reconstruction observations do not themselves give the
 required coherent annihilation/mate input. Do not rebuild pointwise cones,

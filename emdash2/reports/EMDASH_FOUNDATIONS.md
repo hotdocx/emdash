@@ -4484,10 +4484,20 @@ the original endpoint functor's action. These computations retain the
 ordinary C1 scope of the normalizer and its existing point projections;
 they do not generalize terminality or qualify arbitrary lax interchange.
 
-The canonical Coim⇒Im comparison and its coherent whole factorization
-data still remain to be constructed. Its
-invertibility will be genuine Abelian structure, not a consequence of
-having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
+The canonical a:Coim⇒Im is now defined by whole cokernel mating. Whole
+kernel inverse-mate faithfulness derives u∘κ=0 internally. Regard it as
+one cell in Functor_cat(D,C); existing native square realization, exchange
+and the initial-family normalizer give a coherent mate input h_a. Native
+inverse mating recovers h_a, whose whole target is the original u. The
+transparent observation fact(b)=E₀(unmate_P(E₁(transpose_Q(b)))) satisfies
+fact(a)=∂ and determines a uniquely. These are paths of whole
+transformations; no per-object naturality or factor dictionary enters the
+construction. Four constructor evaluation clauses and two proof-time
+comparisons add no universality primitive. The existing ordinary
+presentation/model obligations remain explicit.
+
+Invertibility of this actual a will be genuine Abelian structure, not a
+consequence of having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
 comparison at a native zero pair; a freely chosen isomorphism between
 those objects would not suffice. The
 [direct categorical subplan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md)

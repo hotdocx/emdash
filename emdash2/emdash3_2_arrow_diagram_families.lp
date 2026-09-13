@@ -60,3 +60,44 @@ unif_rule
       $Fi ≡ (@fapp0 $I (Functor_cat $B $C) $F $i);
       $Gi ≡ (@fapp0 $I (Functor_cat $B $C) $G $i);
       $etai ≡ (@tapp0_fapp0 $I (Functor_cat $B $C) $F $G $i $eta) ];
+
+// E₀/E₁ after postcomposition by Arr(η) compute to postcomposition by F/G.
+// Cat/id and the two Terminal domains discriminate the existing represented
+// action and walking-arrow constructor. This is constructor evaluation.
+rule @comp_fapp0 Cat_cat _ _ _
+      (@comp_fapp0 Cat_cat _ _ _
+        (@fapp0_func _ _ (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj))
+        (@sym_func_func $B _ $C))
+      (@hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A _
+        (@sym_func _ $A $C
+          (@join_elim_func Terminal_cat Terminal_cat _
+            (@Const_func _ _ $F) (@Const_func _ _ _) (@Const_func _ _ _))))
+  ↪ @comp_cat_cov_func $B $A $C $F;
+
+rule @comp_fapp0 Cat_cat _ _ _
+      (@comp_fapp0 Cat_cat _ _ _
+        (@fapp0_func _ _ (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj))
+        (@sym_func_func $B _ $C))
+      (@hom_postcomp_func Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A _
+        (@sym_func _ $A $C
+          (@join_elim_func Terminal_cat Terminal_cat _
+            (@Const_func _ _ _) (@Const_func _ _ $G) (@Const_func _ _ _))))
+  ↪ @comp_cat_cov_func $B $A $C $G;
+
+// The object-first route has already erased the composite-functor head.
+// Complete the same constructor projection there; both routes retain X.
+rule @sym_fapp0_func _ _ $C
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A _
+        (@sym_func _ $A $C
+          (@join_elim_func Terminal_cat Terminal_cat _
+            (@Const_func _ _ $F) (@Const_func _ _ _) (@Const_func _ _ _))) $X)
+      (@fapp0 _ _ (@join_fst_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C $F $X;
+
+rule @sym_fapp0_func _ _ $C
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A _
+        (@sym_func _ $A $C
+          (@join_elim_func Terminal_cat Terminal_cat _
+            (@Const_func _ _ _) (@Const_func _ _ $G) (@Const_func _ _ _))) $X)
+      (@fapp0 _ _ (@join_snd_func Terminal_cat Terminal_cat) Terminal_obj)
+  ↪ @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C $G $X;

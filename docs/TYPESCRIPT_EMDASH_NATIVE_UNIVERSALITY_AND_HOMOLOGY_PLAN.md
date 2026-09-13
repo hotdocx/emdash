@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C2c3 whole normalized-input evaluation qualified; coherent factorization and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
+Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility and categorical exactness/connecting next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,18 +24,23 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C2c3 step (2026-09-13): both original normalized adjunction inputs
-now observe the universal differential as a whole transformation. The
-whole evaluator is defined from existing exchange and value evaluation;
-its composition path uses generic functoriality. Two nucleus exchange
-projection rules and eight whole normalizer endpoint rules supply the
-missing computation, retaining the old direct point route. No universality
-primitive or generic functoriality/naturality rule is added. Ordinary C1
-scope and the original initial/terminal structures remain explicit.
-The next C2c4 step assembles coherent factorization and annihilation from
-these whole observations and inverse-mate reconstruction, then constructs
-a:Coim⇒Im. The categorical subplan and owner ledger retain the exact
-qualification, warning comparisons and remaining obligations.
+Current C2c4 milestone (2026-09-13): the
+[canonical a:Coim⇒Im](../emdash2/emdash3_2_one_cat_image_coimage_comparison.lp)
+is defined by the original whole cokernel mate. Whole kernel inverse-mate
+faithfulness derives u∘κ=0; its existing native square in Functor_cat(D,C)
+realizes one internally derived cell, then exchange and the initial-family
+normalizer supply the entire mate input. No caller naturality square,
+per-object cone dictionary or opaque comparison is supplied.
+
+The native whole factorization recovers ∂ and determines a uniquely.
+Whole formula agreement, original Coim/Im components, arbitrary diagram-map
+action and the next Hom projection check. This tranche adds 24 definitions,
+four constructor-scoped evaluation rules and two proof-time comparisons,
+with no new primitive or nucleus edit. It retains the accepted ordinary
+family/shape presentations and their OneCat qualification. The next step
+attaches existing categorical invertibility evidence to this actual a,
+then constructs categorical exactness and δ by whole universal descent.
+The subplan and owner ledger contain the exact qualification and deferrals.
 
 Deferred terminality refinement (2026-09-13): the user accepts the current
 ordinary-target normalizers for now and proposes later upgrading the
@@ -389,12 +394,12 @@ observations; no ordinary dictionaries enter the primary programs.
 
 NUH-4C2c1/2 now supply whole family adjunctions, native/raw formula agreement
 and whole inverse-mate reconstruction at the original published factors.
-C2c3 now qualifies whole evaluation of both original normalized inputs,
-including their complete diagram-map observations. C2c4 must assemble the
-coherent annihilation input and construct canonical Coim⇒Im and its whole
-factorization data; the two factors alone do not supply it. Then express
-Abelian normality and exactness by invertibility of the actual comparison
-maps, and build δ by whole universal descent. The ordinary all-arrow/category
+C2c3 qualifies whole evaluation of both original normalized inputs,
+including their complete diagram-map observations. C2c4 now derives the
+whole annihilation input, constructs canonical Coim⇒Im, and proves its
+native whole factorization and uniqueness. Next express Abelian normality
+and exactness by invertibility of the actual comparison maps, and build δ
+by whole universal descent. The ordinary all-arrow/category
 bridge is optional compatibility work, not a primary prerequisite. Do not
 infer normality from K/Q existence or postulate LES exactness. Concrete
 whole models, reifier automation and snake comparison remain later.
@@ -610,12 +615,17 @@ must not label those alternatives validated implementations.
 | D-NUH-040 | Whole Coim/Im and their projection/inclusion are direct composites and whiskerings of the original K/Q and κ/q. Retain these functors and their higher action. The canonical Coim⇒Im comparison remains a separate construction; neither its implementation nor its Abelian invertibility is supplied by the six definitions |
 | D-NUH-041 | Ordinary-target transposition first exchanges the original whole transformation, then forms its arrow family and exchanges the remaining arguments. Retain column observations of that single functor. Two whole evaluation projection folds and three proof-time comparisons qualify its actual κ/q endpoints. Whole zero-column universal comparisons and canonical mate assembly remain required; no pointwise cone rebuilding or new exactness axiom is admitted |
 | D-NUH-042 | Terminal/initial whole family universality is now an explicit ordinary-target native presentation extension: two DefIso primitives with eight identity endpoint rules, not theorems derived from the old pointwise IsContr interface. Their actual-column instances and whole K/Q mates define Coim⇒ev₁ and ev₀⇒Im. Reconstruction is proved through native mate laws as a reviewer observation, not a new runtime cut. Canonical Coim⇒Im and exactness remain to be constructed |
+| D-NUH-043 | C2c4 constructs a:Coim⇒Im through whole inverse-mate faithfulness, internally derived u∘κ=0, existing native square realization in Functor_cat(D,C), exchange and the original cokernel mate. Native factorization recovers ∂ and characterizes a uniquely. Preserve this actual transformation and its original K/Q selections; Abelian invertibility remains further structure |
+| D-NUH-044 | Promote only the four introduced-arrow evaluation clauses and two sufficient proof-time comparisons required by C2c4. Reject the generic evaluator/postcomposition fold because its identity-postcomposition corner changes the established owner. Keep native mate cancellation computational; whole factorization is a derived path, not a new runtime cut or separately packaged factorization functor |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
 renaming it as a prerequisite.
 
-## Launch Evidence And Next Action
+## Historical Launch Evidence And Current Continuation Prompt
+
+The following launch record is historical. The current queue is C2c4 and its
+successors above, with NUH-1/2 explicitly deferred by later user direction.
 
 2026-09-12: main was clean at `cbef77e7` with no staged or unstaged changes.
 The new branch/worktree was created at that commit. Bootstrap succeeded with
@@ -779,18 +789,19 @@ Continue the native whole-universality and homology implementation in
 `docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md` as the living
 authority for evolving scope, decisions, implementation rows, experiments,
 validation and progress, under all active AGENTS/SOP instructions. Preserve
-foundational hom_int/homd_int. Complete the scoped coupled variance repair,
-whole-universality dependency refactor and native homology/proof-CAS consumer
-work recorded there. Work autonomously through bounded reviewed tranches and
+foundational hom_int/homd_int. Continue from the implemented C2c4 whole
+comparison and characterization through Abelian invertibility, categorical
+exactness/connecting and retained homology/proof-CAS model/reifier work.
+Work autonomously through bounded reviewed tranches and
 make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running
 repository-wide typechecks or automatic aggregates as the user requested.
 Keep the ledger current and preserve unrelated work and reference history.
-Focus on the selected syntactic and internal duality/native-operation design.
-Do not implement the former general D_S or external transport exposition.
-Prioritize the direct homd_int declaration/target/projection adjustment;
-auxiliary G:D→D′ index action is parked until an actual consumer needs it.
-Empty proof audits and prototype global strictness migration are deferred. Integrate
+Op/duality migration and its native Homd experiments remain preserved and
+deferred until after this goal. They are not prerequisites or completion
+gates for the active universality/homology work. Do not investigate the old
+Empty audits, general D_S design or prototype global strictness migration.
+Integrate
 `goal/opaque-action-profile-classifiers-v3.2` only after this goal, not as
 a prerequisite for its completion.
 Spectra, Heine generalization,

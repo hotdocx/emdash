@@ -172,7 +172,7 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `emdash3_2_image_coimage_adjunction_families.lp` defines whole Coim/Im and
   their projection/inclusion directly from K/Q and κ/q, retaining whole
   action without ordinary factor inputs. Its canonical Coim⇒Im comparison
-  remains separate work under the direct categorical continuation.
+  is constructed by the ordinary whole comparison owner described below.
   The ordinary-target diagram-transpose and kernel/cokernel-transpose
   modules now transpose the original whole unit/counit at actual κ/q
   arrow-family endpoints. Columns and shape-arrow action stay observations
@@ -182,8 +182,8 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   Actual zero-column instances and the defined whole cokernel-family mate
   yield Coim⇒ev₁ and ev₀⇒Im. Native mate reconstruction is verified as a
   reviewer observation, without ordinary record inputs to the programs.
-  Canonical Coim⇒Im and its whole factorization data remain separate work;
-  no comparison or exactness axiom is introduced to finish that step.
+  The subsequent C2c4 construction supplies canonical Coim⇒Im and its native
+  whole factorization without a comparison or exactness axiom.
   The ordinary family-adjunction module now exposes (F∘−)⊣(G∘−) through
   explicit structural adjunction/profile primitives. Whole unit/counit
   rules retain the existing tele-postcomposition owner and native mate
@@ -194,10 +194,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   original normalized inputs now derives the universal differential through
   generic evaluator functoriality, two double-exchange projection rules and
   eight whole normalizer endpoint rules. The old point route is retained
-  and checked against the whole route. Coherent factorization/annihilation
-  and canonical Coim⇒Im remain required; do not replace them with pointwise
-  cones or a new comparison axiom. General lax/oplax interchange is not
-  qualified by these ordinary consumers.
+  and checked against the whole route. The new zero-arrow, terminal-family,
+  diagram-family and kernel/cokernel-family path modules derive whole
+  inverse-mate faithfulness, annihilation and compatibility. The ordinary
+  image/coimage-comparison owner now constructs a:Coim⇒Im through existing
+  native square realization in Functor_cat(D,C), exchange and cokernel
+  mating. Its whole factorization and uniqueness are proved; no caller
+  per-object square, factor record or new primitive is supplied. Four
+  introduced-arrow evaluation clauses and two sufficient proof-time
+  comparisons complete the required computation. Abelian invertibility,
+  canonical exactness and whole δ remain next work. General lax/oplax
+  interchange is not qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

@@ -101,9 +101,10 @@ now defines Arr(κ), Arr(q), Coim=Q∘Arr(κ), Im=K∘Arr(q), π:ev₀⇒Coim an
 arbitrary diagram-map components, whole Hom composites and next transfor
 Hom action pass sixteen checks. There are no new primitives, rules,
 unifiers or ordinary factor inputs; the full warning inventory matches
-the direct dependency. The canonical comparison Coim⇒Im and its Abelian
-invertibility are separate next work, followed by direct categorical
-exactness/connecting and concrete whole-model/reifier construction.
+the direct dependency. The canonical comparison Coim⇒Im is supplied by
+C2c4 below. Its Abelian
+invertibility, direct categorical exactness/connecting and concrete
+whole-model/reifier construction remain further work.
 
 NUH-4C2a now implements [ordinary-target diagram transposition](../emdash3_2_one_cat_diagram_transpose.lp)
 as one internal functor, first exchanging the given h, then introducing
@@ -115,7 +116,7 @@ two whole projection folds, including the preprojected Hom case, and two
 proof-time evaluation comparisons. Arrow introduction adds one narrow
 comparison after exchange. No primitive declaration is changed and no
 square-proof premise is added. Whole terminal/initial comparisons of the
-remaining zero-end columns are still required before canonical Coim⇒Im.
+remaining zero-end columns are supplied by C2b below.
 
 NUH-4C2b now supplies those comparisons through an explicit
 [native terminal/initial family-universality extension](../emdash3_2_one_cat_terminal_family_universality.lp).
@@ -130,7 +131,7 @@ it defines [Coim⇒ev₁ and ev₀⇒Im](../emdash3_2_one_cat_image_coimage_fact
 Native mate laws prove their original-arrow reconstruction in the reviewer.
 The primary programs import no ordinary record interface, and the proved
 equations are not runtime reconstruction cuts. Canonical Coim⇒Im and its
-whole factorization data remain required before the normality/exactness layer.
+whole factorization data are constructed by C2c4 below.
 
 NUH-4C2c1 now supplies [native family adjunctions](../emdash3_2_one_cat_adjunction_families.lp).
 Two explicit structural primitives lift F⊣G to existing postcomposition
@@ -160,7 +161,23 @@ Whole, component, Hom-functor and arbitrary diagram-map observations pass.
 No new universality primitive, unifier or constructor-specific naturality
 rule is added. The two new exchange overlap families are classified in the
 living ledger. General lax/oplax interchange remains unqualified here;
-coherent factorization/annihilation and canonical Coim⇒Im remain next work.
+the ordinary qualification remains explicit in the C2c4 continuation.
+
+C2c4 now [constructs canonical whole Coim⇒Im and proves its characterization](../emdash3_2_one_cat_image_coimage_comparison.lp).
+Whole native inverse-mate faithfulness derives u∘κ=0. Existing native square
+realization in Functor_cat(D,C), exchange and the initial-family normalizer
+construct the entire cokernel-mate input; the original mate defines a.
+Its native inverse recovers that whole input. Projected inverse mating
+recovers ∂ and proves uniqueness among whole transformations with the same
+factorization. The comparison, original Coim/Im components, arbitrary
+parameter-map action and next Hom functor are qualified by focused reviewers.
+Five one-way modules add 24 definitions, with four constructor-scoped
+evaluation clauses and two sufficient proof-time comparisons in their
+owners. No primitive, ordinary-factor input, nucleus edit or new runtime
+factorization cut is added. Whole characterization is a function on whole
+transformations, not a separately packaged internal functor in its input.
+Abelian invertibility of this actual a, categorical exactness/δ and concrete
+model/reifier work remain; the owner ledger retains exact qualification.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
