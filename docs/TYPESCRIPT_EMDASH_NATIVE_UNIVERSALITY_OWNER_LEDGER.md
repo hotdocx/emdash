@@ -204,6 +204,31 @@ Preserve the existing rewrite/unif split, normal forms and owner placement.
 Do not import auxiliary comparison/relocation experiments merely because
 they made a copied prefix easier to check.
 
+The first direct review now checks the old recipe against two small
+substitutions, using only assertions on the unchanged preferred Op prefix.
+The reviewer is
+`emdash2/tmp/probes/native_homd_target_minimal_variance_review.lp`; its
+guarded log is
+`/tmp/emdash-pointwise-op-review.m_iorhfg/minimal-target-review.log`.
+The check passes with the expected type rejections and positive fibre
+observations; it introduces no declaration, rule or unifier.
+
+| Existing recipe or substitution | Checked result |
+| --- | --- |
+| Functor_catd(Op Z,D,HomPresheaf(x)) | D is over Z but its slot requires Catd(Transpose(Op Z))=Catd(R Z) |
+| Change only that outer base to Transpose Z | D's slot fits, but HomPresheaf(x) remains over Op Z |
+| Supply Op_catd(D) at the original Op Z base | This application types, but its fibre has source Op(D[y]); it changes the intended covariant v-input |
+| HomPresheaf(x)[y] in the preferred prefix | Computes to Functor(Op(Hom_Z(x,y)),Cat) |
+| Corrected native homd_(FF,x,u,y,v) | Has source Transpose(Hom_Z(x,y)), rather than total Op of that Hom |
+
+Thus neither simple substitution is an accepted repair. There is also a
+separate variance-only-versus-total-dual issue inside the existing
+presheaf-classifier pipeline. Address that pipeline's actual source/fibre
+types next, preserving the primitive pointwise Op_catd meaning and existing
+rule architecture. These checks do not prove that every repair using the
+existing target architecture fails, or that the shared-index replacement
+is minimal. The active nucleus remains unchanged.
+
 The shared index bundles existing y,v,a arguments; it is a candidate
 target-packaging change, not a new foundation. Its minimality has not
 been established. General G:D→D′ index action is auxiliary and does not
