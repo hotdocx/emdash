@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active design evidence for NUH-1B2c/d/e; strict-reference whole family and point action checked, full ω-categorical target not yet qualified
+Status: active design evidence for NUH-1B2c–f; selected structural source-arrow/2-cell action checked, full ω-categorical target not yet qualified
 
 Parent: [implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -377,10 +377,60 @@ that every interaction is resolved. The exact complete family-count delta
 is guarded, the reviewers add no further warnings, and full-kernel/profile
 qualification remains necessary before promotion.
 
-Next: derive the structural Sigma action for represented precomposition,
-including the retained triangle and source-2-cell components, then qualify
-the general D-map/module and actual transformation profiles. Preserve the
-original inputs and the noncircular native dependency. The finite
-counterexamples continue to reject the old y-local architecture. The
-preferred-basis NΠ and old-variance polarity isolation remain scoped
-constraints/computations; neither is the final general target on its own.
+## Structural Source Action Qualified In The Prefix
+
+The [structural patch](../emdash2/audits/native_sigma_precomp.patch) supplies
+the selected source action before homd_int. For r:x₀→x it computes
+
+```text
+((d,a) ─(m,θ)→ (e,b)) ↦ ((d,a∘r) ─(m,θ⋆r)→ (e,b∘r)),
+θ:b⇒π(m)∘a,      θ⋆r:b∘r⇒π(m)∘(a∘r).
+```
+
+The mapping of θ is the existing whole precomposition functor's action.
+The endpoint join is ordinary associativity between retained pre- and
+postcomposition presentations. A single proof-time comparison preserves
+both runtime owners; its side conditions check identity, image endpoints
+and the actual middle composite. Tests reject changed arrows and an
+arbitrary middle arrow without the required factorization. One defined
+body serves the stable and raw Sigma constructor clauses.
+
+For α:r⇒s the complete source component now computes to
+
+```text
+S(s)⇒S(r),       component at (d,a) = (id_d,a⋆α).
+```
+
+Whiskering uses the existing generic horizontal action on (α,id_a).
+The original directed cell is retained, and the reversed component type
+is rejected. Two component projections expose whole ordinary
+transformations; no inverse laxity is postulated.
+
+Three existing rules move earlier in the copied source: full Hom action of
+ordinary identity/composition and the Sigma-transfor point component. The
+last uses ordinary evaluator owners, which later project to the old
+Fibre/tdapp views. The selected computation therefore does not call
+homd_int or the displayed-laxity action it is intended to support.
+
+The [arrow controls](../emdash2/audits/native_sigma_precomp_controls.lp) and
+[2-cell controls](../emdash2/audits/native_sigma_source_two_cell_controls.lp)
+check complete arrows, both Sigma presentations and the same retained
+data/endpoints. The [localized driver](../emdash2/scripts/check_native_sigma_precomp.sh)
+checks the affected prefixes and reviewers. Their candidate warning
+inventories agree at 1,023 critical pairs / 137 pattern reports. Two new
+reports concern the relocated full Hom rules, six concern component
+projection against arrow action, and one concerns normalization of the
+shifted-base guard. Global joins of those reports are not established.
+Interactions with the later generic Sigma action remain an affected
+full-source obligation; no active kernel rule changes in this experiment.
+
+Next: settle actual Catd/Functord/Pi and native-Homd classifier profiles,
+then general D-map/module and evaluation action for native integration.
+A later source comment calling a Functord comparison strict does not by
+itself restrict every section interface: the constant-section comparison
+retains arbitrary Functor(K,A) base action. Preserve that requirement and
+the represented maps' established strictness without identifying them
+silently. Further higher-action and affected-source checks remain explicit,
+using the user's localized-validation policy. The finite counterexamples
+still reject the old y-local target; the strict-reference computations are
+ingredients rather than the final general target by themselves.

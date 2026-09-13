@@ -184,6 +184,88 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1B2f: Structural Sigma action before native Homd
+
+The preceding `39f5669e` turn is progress: the whole x-family and its
+source-point/target-precomposition computations were qualified as a strict
+reference experiment. At resumption the worktree is clean, baseline
+ancestry and active nucleus identity are preserved.
+
+Hypothesis: Sigma of the actual opposite represented precomposition map
+acts on a constructed arrow (m,θ) by retaining m and applying the existing
+whole opposite fibre precomposition functor to θ. The required endpoint
+comparison is the ordinary pre/postcomposition interchange already owned
+by the Hom calculus. Probe this structural constructor beta at the Sigma
+map owner before homd_int; do not use the later generic displayed-laxity
+extraction or supply an inverse laxity cell. Then test the original triangle,
+source-arrow action and base-2-cell components, with warning comparisons.
+
+The active source's later strict-Functord comparison comment is not blanket
+authority to reinterpret every family/section interface as strict. In
+particular, the constant-section comparison with ordinary Functor(K,A)
+retains arbitrary base-arrow action. This experiment uses the specific
+represented precomposition map's mathematical strictness; the general
+profile boundary remains an explicit obligation.
+
+The [structural patch](../emdash2/audits/native_sigma_precomp.patch) now
+provides one defined arrow-map body shared by stable and raw Sigma
+constructors. It retains m and maps θ by the existing whole opposite fibre
+precomposition functor. One consumed-point unifier compares the two
+associative pre/postcomposition presentations. Its side conditions retain
+identity, image endpoints and the actual middle composite; it does not
+infer an arbitrary factorization.
+
+The first rule failed subject reduction at that interchange. An initial
+literal-endpoint comparison passed the rule but failed after the concrete
+Sigma projection's image endpoint reduced. The complete-arrow test then
+exposed a raw-composition presentation of the middle arrow. The final
+comparison abstracts those reducible slots and checks their exact values
+as side conditions. Typed controls reject changed r, changed m and an
+arbitrary g without the required factorization. No endpoint/object cast is
+added. These stages remain in `/tmp/emdash-native-sigma-precomp.wdnpzaph`,
+including `rejected_structural_without_interchange.lp`,
+`rejected_interchange_literal_endpoints.lp`,
+`rejected_interchange_literal_middle.lp` and their corresponding logs.
+
+Source-2-cell computation needed ordinary owners placed later in the full
+source. The copied candidate moves the existing full Hom-action rules for
+ordinary identity/composition into section 3e. It moves the existing Sigma
+transfor component to its Sigma owner, expressing late Fibre/tdapp views
+through earlier ordinary tapp owners. Two component projections, for
+opposite families and represented Hom action, return the existing whole
+ordinary transformations. Their base/Cat slots are measured SR guards;
+all-inferred variants failed. The represented component uses the actual
+precomposition telescope action, whose result is its whole transfor.
+This tranche adds no primitive: it has four new runtime clauses, one
+unifier, one defined helper and three relocated rules.
+
+The [arrow reviewer](../emdash2/audits/native_sigma_precomp_controls.lp)
+checks complete beta for both Sigma presentations, with the same m and
+θ⋆r. The [2-cell reviewer](../emdash2/audits/native_sigma_source_two_cell_controls.lp)
+checks the complete component of S(s)⇒S(r) as (id_d,a⋆α), through generic
+horizontal composition, and rejects its reversed direction. Its
+[observation](../emdash2/audits/native_index_source_two_cell_observation.lp)
+now normalizes to that pair; the former opaque Sigma/component heads are
+gone from this selected computation.
+
+The [guarded gate](../emdash2/scripts/check_native_sigma_precomp.sh) passes
+at `/tmp/emdash-native-sigma-precomp.3oqxJs`. Its manifest records exact
+source identities and explicitly false full-kernel/generic-profile flags.
+The prefix ends before homd_int and its extracted-action owners. Baseline,
+candidate, both reviewers and strict LHS audits pass. Candidate/reviewers
+have identical complete warning inventories: 1,023 critical pairs / 137
+pattern reports. The +9 prefix delta is classified in the design document;
+interactions with the later generic Sigma action remain to qualify on the
+full candidate. No repository-wide typecheck was used for this tranche.
+
+**Disposition:** selected source-arrow and source-2-cell computations
+qualified before homd_int, with both Sigma presentations and negative
+controls. Next audit the actual Catd/Functord/Pi and native-Homd classifier
+profiles, then the general D-map/module and evaluation interfaces. Do not
+promote this strict-reference prototype by assuming every family map
+strict. Further higher-action and affected full-source interactions remain
+explicit obligations, under the user's localized-validation policy.
+
 ### NUH-1B2e: Whole source-family internalization
 
 The preceding `6ed30b7d` turn is progress: it constructed the native index
@@ -589,16 +671,17 @@ projections and computation must be specified together before promotion.
 | NUH-1B2c shared-index target design | old y-local architecture refuted by strict finite coefficient models; candidate shared index/source variance checked at dimension 2, full native higher target pending |
 | NUH-1B2d native shared-index ingredient | carrier/arrow/whole projection and source-Hom direction check before homd_int; whole x-family and D-map/profile qualification pending |
 | NUH-1B2e whole x-family | strict-reference S/P_D and fibre transpose typecheck; source points and H-precomposition compute; source action on index arrows and generic profiles remain unqualified |
+| NUH-1B2f structural source action | stable/raw arrow beta and source-2-cell components compute before homd_int; classifier/profile and native-Homd integration remain pending |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue at NUH-1B2e's measured Sigma-map boundary: derive source action on
-index arrows and its source-2-cell components for the actual opposite
-represented precomposition map, with retained triangle and no generic
-inverse laxity. The whole family and its source-point/target precomposition
-already check at the proper shifted bases. General D-map/module action,
-mixed profiles and full native Homd migration remain to qualify. The old
-y-local target is rejected; its finite counterexamples and all Empty routes
-remain rejection controls. The full ω-dimensional target remains
-unqualified. All
-spectral/stabilization brainstorming is out of scope and is not a dependency.
+Continue from the computing structural index in NUH-1B2f. Audit the actual
+Catd/Functord/Pi and native-Homd classifier profiles, preserving arbitrary
+constant-section action and the represented maps' established strictness.
+Then qualify general D-map/module and evaluation interfaces before full
+native integration. Keep further higher-action and affected source
+interactions explicit; the selected arrow/2-cell beta does not prove them
+automatically. Use localized checks of affected owners/features/files and
+reuse unchanged evidence, as the user requested. The old y-local target
+and all Empty routes remain rejection controls. The full ω-dimensional
+target remains unqualified. Spectral/stabilization work stays out of scope.

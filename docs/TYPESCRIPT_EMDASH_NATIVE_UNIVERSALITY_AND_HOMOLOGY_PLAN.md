@@ -225,6 +225,14 @@ coefficient rings follows from the effective polynomial instance.
 
 ## Validation And Promotion
 
+**User direction, 2026-09-12:** avoid long-running repository-wide
+typechecks for this goal. Localize checks to affected aspects, features
+and files wherever possible. This goal-specific direction supersedes
+blanket aggregate requirements in the earlier plan/SOP workflow. Reuse
+recent evidence for unchanged dependencies. Broaden only for a concrete
+affected dependency or unresolved concern, with the reason and bounded
+scope recorded; no automatic repository-wide gate is scheduled.
+
 All Lambdapi experiments use `emdash2/scripts/lambdapi_resource_guard.sh`:
 one checker at a time, at most 90 seconds, 2 GiB per-process address space,
 64 MiB per file, no core dumps; use the existing aggregate memory scope
@@ -239,15 +247,18 @@ positive/negative consumers. Put rule changes at the intended position in a
 full-source copy, compare warning families, audit inferred LHS slots and
 confirm whole higher action. Negative fixtures must fail at the intended
 type mismatch: syntax errors, missing imports and timeouts are not repairs.
-After meaningful promoted LP changes run the required examples, catalog,
-health and full CI under the nested SOP. Source-only health is not runtime
-validation; record exactly what ran.
+For promoted LP changes, select the affected owner files and nearest
+positive/negative and higher-action consumers. Preserve owning-position
+SR/warning/LHS checks and affected catalog/health synchronization, without
+automatically running all examples or full CI. A bounded check of an
+affected monolithic kernel owner is a local owner check, not a reason to
+expand to the repository aggregate. Record exactly what ran and its limits.
 
-For TypeScript changes use workspace check, typecheck/lint and affected tests.
-Run one `check:ts` at a changed shared TypeScript boundary after focused work
-is green; `check:all` belongs to the affected final cross-layer integration.
-Use existing conformance workflows and preserve the explicit Core/checker
-boundary. No remote publishing follows from any green aggregate.
+For TypeScript changes use affected typecheck/lint, focused tests and the
+relevant conformance consumers. Workspace checks apply to changed workspace
+configuration. Shared-boundary changes require an explicit affected-feature
+selection rather than automatic check:ts/check:all. Preserve the explicit
+Core/checker boundary; source-only metrics are not runtime validation.
 
 Checkpoint only a coherent green tranche after synchronizing the ledger,
 reviewing exact staged paths and `git diff --cached --check`. Research
@@ -272,6 +283,8 @@ must not label those alternatives validated implementations.
 | D-NUH-012 | Native Hom contravariance in u requires dimension-1 transposition T; the strict reference family base is D₂(Z), not the finite model's indistinguishable R(Z) shorthand. Track the further source shifts when internalizing R; preserve total O/R for their actual roles |
 | D-NUH-013 | The shared-index carrier and first projection can use the corrected pre-homd_int Sigma substrate. Qualify whole x/D actions separately; do not conflate that independent carrier with the later Sigma map action's native-laxity dependency |
 | D-NUH-014 | The strict-reference whole x-family computes its source-point and H-precomposition views through native Hom owners; its remaining index-arrow computation is the specific Sigma map of opposite represented precomposition. Derive that structural action without assuming inverse laxity or claiming generic-profile qualification |
+| D-NUH-015 | Selected structural index action now computes complete stable/raw arrows and source-2-cell components before homd_int; classifier/profile and affected full-source qualification remain separate |
+| D-NUH-016 | Follow the user's localized-validation policy for this goal: affected owners/features/files, recent unchanged evidence, and no automatic long-running repository-wide typecheck or aggregate |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -403,6 +416,27 @@ higher components, followed by general module/profile and full native Homd
 qualification. The active mathematical sources and homology/TypeScript
 implementation are unchanged; no spectral or endpoint-checker work resumed.
 
+NUH-1B2f closes the selected structural Sigma source-action computation.
+A shared defined body handles both arrow constructors and retains m and
+θ⋆r; the source-2-cell component computes to (id_d,a⋆α). The ordinary
+interchange comparison checks explicit side conditions, with changed-data,
+missing-factorization and reversed-direction negatives. Existing full Hom
+and Sigma-component rules move earlier in the copied candidate, and two
+component projections expose the existing whole transformations.
+
+The localized guarded gate passes with identical candidate/reviewer
+inventories at 1,023 critical pairs / 137 pattern reports and a classified
++9 prefix delta. The full kernel and generic profiles remain unqualified;
+no active mathematical or TypeScript source changed. Next settle the actual
+family/section/native-Homd classifier profiles and general D-map/evaluation
+interfaces before native integration. Preserve arbitrary constant-section
+action; a strict-comparison comment alone cannot restrict it. The owner
+ledger records source/log identities and failed intermediate forms.
+
+The user has explicitly requested localized checks for subsequent work.
+The validation section and launch prompt now carry that preference; this
+tranche used only its affected owner prefixes, reviewers and document checks.
+
 ## Persistent Goal Launch Prompt
 
 Continue the native whole-universality and homology implementation in
@@ -414,8 +448,11 @@ validation and progress, under all active AGENTS/SOP instructions. Preserve
 foundational hom_int/homd_int. Complete the scoped coupled variance repair,
 whole-universality dependency refactor and native homology/proof-CAS consumer
 work recorded there. Work autonomously through bounded reviewed tranches and
-make local green checkpoint commits. Keep the ledger current and preserve
-unrelated work and reference history. Spectra, Heine generalization,
+make local green checkpoint commits. Localize validation to affected owners,
+features and files, reuse recent unchanged evidence, and avoid long-running
+repository-wide typechecks or automatic aggregates as the user requested.
+Keep the ledger current and preserve unrelated work and reference history.
+Spectra, Heine generalization,
 dependent stabilization, suspension research and beyond are deferred and
 must not be investigated. Do not resume the separately deferred endpoint
 checker experiments. No remote or destructive Git action is authorized.

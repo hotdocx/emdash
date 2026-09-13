@@ -1,0 +1,204 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -5684,0 +5685,26 @@
++// Moved unchanged from the later ordinary hom-action section so native
++// target formation can use whole action before homd_int is declared.
++// Generic full hom-action for identity and composition of ordinary functors.
++// These rules let semantic aliases such as curry expose functor-level action
++// instead of falling back to capped `fapp1_fapp0` computation only.
++rule @fapp1_func $A $A (@id Cat_cat $A) $x $y ↪ @id Cat_cat (Hom_cat $A $x $y);
++
++// Hom-action of a composite: (F ∘ G)_1 ↪ F_1 ∘ G_1.
++rule @fapp1_func $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y
++  ↪ @comp_fapp0
++      Cat_cat
++      (Hom_cat $A $x $y)
++      (Hom_cat $B
++        (@fapp0 $A $B $G $x)
++        (@fapp0 $A $B $G $y))
++      (Hom_cat $C
++        (@fapp0 $B $C $F (@fapp0 $A $B $G $x))
++        (@fapp0 $B $C $F (@fapp0 $A $B $G $y)))
++      (@fapp1_func
++        $B
++        $C
++        $F
++        (@fapp0 $A $B $G $x)
++        (@fapp0 $A $B $G $y))
++      (@fapp1_func $A $B $G $x $y);
++
+@@ -8301,0 +8328,12 @@
++// NON-LIBRARY measured consumed-point interchange for a represented source
++// map. The two whole pre/postcomposition paths express the same associative
++// composite; point projection has erased those whole functor heads. Keep
++// both runtime owners and compare only these rigid typed presentations.
++unif_rule
++  @hom_precomp_along_fapp0 $A $A $I $fy $v $u $r $g
++  ≡ @hom_postcomp_fapp0 $A $B $F $v $x $y $m
++      (@hom_precomp_along_fapp0 $A $A $J $fx $v $u $r $a)
++  ↪ [ $I ≡ (@id Cat_cat $A); $J ≡ (@id Cat_cat $A);
++      $fx ≡ (@fapp0 $B $A $F $x); $fy ≡ (@fapp0 $B $A $F $y);
++      $g ≡ (@hom_postcomp_fapp0 $A $B $F $u $x $y $m $a) ];
++
+@@ -10012,0 +10051,13 @@
++
++// Component of represented-source Hom action on a genuine source 2-cell.
++// The result remains a whole ordinary transformation; its next component
++// is owned by the existing precomposition telescope.
++// lhs-audit: keep 1,2 -- measured base and category-universe SR guards.
++rule @tapp0_hom_fapp0 $B Cat_cat _ _ _ _ $k
++      (@fapp1_fapp0 _ _
++        (@hom_int_precomp_tele_func $A $B $F $Y $X) $r $s $alpha)
++  ↪ @fapp1_fapp0 (Hom_cat $A $X $Y)
++      (Functor_cat (Hom_cat $A $Y (@fapp0 $B $A $F $k))
++        (Hom_cat $A $X (@fapp0 $B $A $F $k)))
++      (@hom_precomp_along_tele_func $A $A (@id_func $A)
++        (@fapp0 $B $A $F $k) $X $Y) $r $s $alpha;
+@@ -12866,0 +12918,13 @@
++// Strict-reference component of the already-prototyped opposite-family
++// action. The supplied modification is reversed in the source Hom; no
++// inverse comparison cell is constructed. This does not qualify arbitrary
++// same-profile lax family covariance.
++// lhs-audit: keep 1,2 -- measured shifted base and Cat-valued component SR guards.
++rule @tapp0_hom_fapp0 (CoAbove2_cat $K) Cat_cat _ _ _ _ $k
++      (@fapp1_fapp0 _ _
++        (@fapp1_func _ _ (@Op_catd_func $K) $E $D) $FF $GG $eta)
++  ↪ @Op_transf (Fibre_cat $E $k) (Fibre_cat $D $k)
++      (@tapp0_fapp0 $K Cat_cat $E $D $k $GG)
++      (@tapp0_fapp0 $K Cat_cat $E $D $k $FF)
++      (@tapp0_hom_fapp0 $K Cat_cat $E $D $GG $FF $k $eta);
++
+@@ -14023,0 +14088,78 @@
++// Early form of the existing Sigma-transfor component, through ordinary
++// evaluator owners. Later tdapp0 projection selects the former normal form.
++// Point component of the totalized displayed transfor at (k,u): the
++// fibrewise component lies over the identity base arrow.
++rule @tapp0_fapp0
++      _ _
++      _ _
++      (Struct_sigma $k $u)
++      (@sigma_map_transf $K $E $D $FF $GG $eta)
++  ↪ @sigma_arrow
++      $K $D
++      $k $k
++      (@fapp0
++        (Fibre_cat $E $k)
++        (Fibre_cat $D $k)
++        (@tapp0_fapp0 $K Cat_cat $E $D $k $FF)
++        $u)
++      (@fapp0
++        (Fibre_cat $E $k)
++        (Fibre_cat $D $k)
++        (@tapp0_fapp0 $K Cat_cat $E $D $k $GG)
++        $u)
++      (@id $K $k)
++      (@tapp0_fapp0
++        (Fibre_cat $E $k)
++        (Fibre_cat $D $k)
++        (@tapp0_fapp0 $K Cat_cat $E $D $k $FF)
++        (@tapp0_fapp0 $K Cat_cat $E $D $k $GG)
++        $u
++        (@tapp0_hom_fapp0 $K Cat_cat $E $D $FF $GG $k $eta));
++
++// Structural Sigma arrow map for represented precomposition. This defined
++// body is shared by the stable and raw Sigma constructors; no second
++// functoriality or displayed-laxity owner is introduced.
++symbol sigma_op_hom_precomp_arrow [Z C : Cat] (P : τ (Functor C Z))
++  (u v : τ (Obj Z)) (r : τ (Hom Z v u))
++  (d e : τ (Obj C))
++  (a : τ (Hom Z u (@fapp0 C Z P d))) (b : τ (Hom Z u (@fapp0 C Z P e)))
++  (m : τ (Hom C d e))
++  (theta : τ (Hom (Op_cat (Hom_cat Z u (@fapp0 C Z P e)))
++      (@hom_postcomp_fapp0 Z C P u d e m a) b))
++  : τ (Hom (@Sigma_cat (CoAbove2_cat C) (@Op_catd C (@hom_ Z C P v)))
++      (Struct_sigma d (@hom_precomp_along_fapp0 Z Z (@id_func Z) (@fapp0 C Z P d) v u r a))
++      (Struct_sigma e (@hom_precomp_along_fapp0 Z Z (@id_func Z) (@fapp0 C Z P e) v u r b)))
++≔ @sigma_arrow_intro (CoAbove2_cat C)
++      (@Op_catd C (@hom_ Z C P v))
++      (Struct_sigma d
++        (@hom_precomp_along_fapp0 Z Z (@id_func Z)
++          (@fapp0 C Z P d) v u r a))
++      (Struct_sigma e
++        (@hom_precomp_along_fapp0 Z Z (@id_func Z)
++          (@fapp0 C Z P e) v u r b))
++      m
++      (@fapp1_fapp0
++        (Op_cat (Hom_cat Z u (@fapp0 C Z P e)))
++        (Op_cat (Hom_cat Z v (@fapp0 C Z P e)))
++        (@Op_func (Hom_cat Z u (@fapp0 C Z P e))
++          (Hom_cat Z v (@fapp0 C Z P e))
++          (@hom_precomp_along_func Z Z (@id_func Z)
++            (@fapp0 C Z P e) v u r))
++        (@hom_postcomp_fapp0 Z C P u d e m a)
++        b theta);
++
++// NON-LIBRARY structural beta for the actual opposite represented map.
++// Both retained Sigma arrow presentations use the same semantic body.
++rule @fapp1_fapp0 _ _
++      (@sigma_map_func _ _ _
++        (@Op_funcd $C _ _ (@hom_int_precomp_func $Z $C $P $u $v $r)))
++      (Struct_sigma $d $a) (Struct_sigma $e $b)
++      (@sigma_arrow_intro _ _ _ _ $m $theta)
++  ↪ @sigma_op_hom_precomp_arrow $Z $C $P $u $v $r $d $e $a $b $m $theta
++with @fapp1_fapp0 _ _
++      (@sigma_map_func _ _ _
++        (@Op_funcd $C _ _ (@hom_int_precomp_func $Z $C $P $u $v $r)))
++      (Struct_sigma $d $a) (Struct_sigma $e $b)
++      (Struct_sigma $m $theta)
++  ↪ @sigma_op_hom_precomp_arrow $Z $C $P $u $v $r $d $e $a $b $m $theta;
++
+@@ -15460,28 +15602 @@
+-// Point component of the totalized displayed transfor at (k,u): the
+-// fibrewise component lies over the identity base arrow.
+-rule @tapp0_fapp0
+-      _ _
+-      _ _
+-      (Struct_sigma $k $u)
+-      (@sigma_map_transf $K $E $D $FF $GG $eta)
+-  ↪ @sigma_arrow
+-      $K $D
+-      $k $k
+-      (@fapp0
+-        (Fibre_cat $E $k)
+-        (Fibre_cat $D $k)
+-        (@Fibre_func $K $E $D $FF $k)
+-        $u)
+-      (@fapp0
+-        (Fibre_cat $E $k)
+-        (Fibre_cat $D $k)
+-        (@Fibre_func $K $E $D $GG $k)
+-        $u)
+-      (@id $K $k)
+-      (@tapp0_fapp0
+-        (Fibre_cat $E $k)
+-        (Fibre_cat $D $k)
+-        (@Fibre_func $K $E $D $FF $k)
+-        (@Fibre_func $K $E $D $GG $k)
+-        $u
+-        (@tdapp0_fapp0 $K $E $D $FF $GG $k $eta));
++// Sigma-transfor component beta is owned earlier with Sigma maps.
+@@ -17505,23 +17620 @@
+-// Generic full hom-action for identity and composition of ordinary functors.
+-// These rules let semantic aliases such as curry expose functor-level action
+-// instead of falling back to capped `fapp1_fapp0` computation only.
+-rule @fapp1_func $A $A (@id Cat_cat $A) $x $y ↪ @id Cat_cat (Hom_cat $A $x $y);
+-
+-// Hom-action of a composite: (F ∘ G)_1 ↪ F_1 ∘ G_1.
+-rule @fapp1_func $A $C (@comp_fapp0 Cat_cat $A $B $C $F $G) $x $y
+-  ↪ @comp_fapp0
+-      Cat_cat
+-      (Hom_cat $A $x $y)
+-      (Hom_cat $B
+-        (@fapp0 $A $B $G $x)
+-        (@fapp0 $A $B $G $y))
+-      (Hom_cat $C
+-        (@fapp0 $B $C $F (@fapp0 $A $B $G $x))
+-        (@fapp0 $B $C $F (@fapp0 $A $B $G $y)))
+-      (@fapp1_func
+-        $B
+-        $C
+-        $F
+-        (@fapp0 $A $B $G $x)
+-        (@fapp0 $A $B $G $y))
+-      (@fapp1_func $A $B $G $x $y);
++// Generic ordinary identity/composition Hom action is owned earlier in 3e.
