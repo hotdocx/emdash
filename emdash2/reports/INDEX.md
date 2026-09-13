@@ -69,18 +69,22 @@ two ordinary-target DefIso primitives with identity endpoints. Their
 and whole mates define [Coim⇒ev₁ and ev₀⇒Im](../emdash3_2_one_cat_image_coimage_factors.lp),
 with native reconstruction proofs. The primitive boundary is explicit in
 the subplan; it is not derived from the old pointwise β interface.
-Canonical Coim⇒Im, normality, direct whole δ/exactness and concrete-model
-work remain further steps.
+NUH-4C2c1 supplies [whole family adjunctions and native mates](../emdash3_2_one_cat_adjunction_families.lp),
+with explicit structural primitives and whole unit/counit action. Native
+inverse cuts and actual zero-column inputs check. Comparison with the
+older raw family formulas, canonical Coim⇒Im, normality, direct whole
+δ/exactness and concrete-model work remain further steps.
 
-Current implementation continuation (2026-09-12): the accepted
+Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an
 [owner/variance ledger](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md).
-It begins with coherent native-owner design before the coupled variance
-repair and whole-universality dependency refactor. Spectra, Heine
+Its active tranche is the direct whole-universality homology construction;
+the Op/duality repair and its historical diagnostic work below are deferred
+until after this goal. Spectra, Heine
 generalization and dependent stabilization are explicitly deferred and must
 not be investigated. The completed LES baseline and its symbolic endpoint
-deferral below remain reference evidence; the launch changes no LP source.
+deferral below remain reference evidence.
 
 NUH-1B1 now records the
 [Homd target polarity diagnostic](../../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md):

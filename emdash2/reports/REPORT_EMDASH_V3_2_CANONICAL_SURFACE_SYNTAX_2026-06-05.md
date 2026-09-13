@@ -1963,6 +1963,15 @@ Q[d] ≐ selected cokernel object    π[d] ≐ selected cokernel projection
 K[η] ≐ existing kernel map         Q[η] ≐ existing cokernel map.
 ```
 
+For ordinary targets, `one_cat_postcomp_adjunction` expresses
+(F∘−)⊣(G∘−) at the existing postcomposition functors.
+`one_cat_adjunction_family_transpose_func` and its `untranspose` companion
+act on whole transformations. Their types retain native postcomposition
+endpoints for inverse computation. The readable raw-composition formulas
+remain presentation views; the current K/Q-family comparison between those
+forms is still open. The lift and ordinary functor-category profile are
+explicit structural primitives, with whole unit/counit rules.
+
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these
 agreements. Formal whole action remains the runtime owner for generic

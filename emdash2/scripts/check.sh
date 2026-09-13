@@ -226,6 +226,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_kernel_adjunction_presentations.lp)
   files+=(emdash3_2_cokernel_adjunction_presentations.lp)
   files+=(emdash3_2_adjunction_mates.lp)
+  files+=(emdash3_2_one_cat_adjunction_families.lp)
   files+=(emdash3_2_kernel_cokernel_adjunction_mates.lp)
   files+=(emdash3_2_zero_arrow_diagram_observations.lp)
   files+=(emdash3_2_zero_arrow_universal_tests.lp)

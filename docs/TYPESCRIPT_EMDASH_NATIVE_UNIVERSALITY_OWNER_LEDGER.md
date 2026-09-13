@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and whole factors checked; canonical Coim⇒Im next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
+Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; presentation comparison and canonical Coim⇒Im remain; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,90 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C2c1: Native adjunctions on whole functor families
+
+**Structural substep implemented after c475bfe7; canonical a remains open.**
+The [family-adjunction owner](../emdash2/emdash3_2_one_cat_adjunction_families.lp)
+adds two explicit structural primitives. `one_cat_postcomp_adjunction`
+takes the original F⊣G and the ordinary profiles of its two categories,
+and retains `comp_cat_cov_func(F)` and `comp_cat_cov_func(G)` as the
+adjoint functors. `one_cat_functor_category` supplies the ordinary profile
+of Functor_cat(B,C) from OneCat(C), used for the actual K/Q specializations.
+It is one-way evidence, not a classifier-equality rewrite.
+
+**Primitive/model boundary:** these are native structural presentation
+operations extending opaque Adjunction/profile interfaces. They are not
+formal derivations from their current β rules. The categorical subplan
+links the ordinary whiskering theorem. Qualification here uses ordinary
+targets; it supplies no general lax/oplax adjunction interchange theorem.
+The eventual model audit must interpret these structural operations along
+with the retained reconstruction and terminal-family presentation laws.
+
+Two whole unit/counit rules expose existing tele-postcomposition of the
+original unit/counit. The first component-only candidate was superseded by
+this whole-owner version: its components and further action follow from
+the inherited owner. Two transparent family mate functors then project the
+existing Hom comparison and its selected inverse. Native postcomposition
+endpoints remain in their types so the original inverse cuts are visible.
+No new unifier or constructor-specific naturality/functoriality rule is
+installed, and no ordinary factor dictionary is imported.
+
+The [generic reviewer](../emdash2/examples/one_cat_adjunction_families.lp)
+has 16 positive and four negative assertions: whole input cancellation in
+both directions, whole functor cancellation, next Hom projections, original
+unit/counit components and action on an arbitrary family transformation,
+and the existing whole semantic comparison at native endpoints. The
+negative cases reject unrelated transformations and mate functors.
+The [actual zero-input reviewer](../emdash2/examples/one_cat_adjunction_family_zero_inputs.lp)
+has six positive assertions: the two original normalized C2b families
+yield the original Coim/Im endpoint types; inverse mating recovers each
+entire input and its component at any original diagram. The latter test
+needed explicit existing projection endpoints; no rule was added for it.
+
+**Remaining presentation boundary:** generic and specialized attempts to
+identify the native result with the older raw K(h)∘η / ε∘Q(h) whole formulas
+did not qualify. Initial failures involved raw endpoint annotations hiding
+the native composition cuts. Keeping native endpoints resolves generic
+whole cancellation, but the raw whole-formula and component comparisons
+still encounter composition/product annotations. The generic printed
+normal forms agree with implicits hidden, which is diagnostic evidence,
+not a typed proof. The proposed extra formula unifiers also failed and
+remain ignored experiments. They are not promoted or used by the goal.
+
+Relevant unsuccessful logs: `nuh4c_kernel_cokernel_family_mates_paths-20260913-120208.log`,
+`nuh4c_kernel_cokernel_family_formula_review-20260913-120535.log`,
+`nuh4c_kernel_cokernel_family_components_native-20260913-121025.log`, and
+`nuh4c_kernel_cokernel_family_mates_paths_native-20260913-121039.log`.
+The native generic normal-form inspection is
+`nuh4c_family_mate_normal_forms-20260913-120251.log`.
+These are local annotation/comparison experiments, not the deferred old
+LES endpoint-checker investigation or evidence of a mathematical failure.
+
+Keep the original H and raw factor programs until their actual whole
+comparison is qualified. C2c must still assemble the coherent annihilation
+input and define the canonical a, with factorization and higher action
+from that whole program. This structural lifting does not construct a,
+postulate its Abelian invertibility, or prove categorical exactness/δ.
+
+Final warning-enabled, serial resource-guarded ≤90-second checks:
+
+- adjunction dependency baseline: `emdash3_2_adjunction_mates-20260913-115105.log`;
+- promoted source: `emdash3_2_one_cat_adjunction_families-20260913-121639.log`;
+- final generic reviewer: `one_cat_adjunction_families-20260913-122014.log`;
+- exact zero-input dependency join: `nuh4c_family_zero_dependencies-20260913-121334.log`;
+- final zero-input reviewer: `one_cat_adjunction_family_zero_inputs-20260913-122032.log`;
+- retained adjunction/H/whole-factor reviewers: `nuh4c_whole_mate_retained-20260913-121522.log`.
+
+Source and generic reviewer exactly match the dependency baseline at
+1,149 critical pairs / 157 replaceable-pattern warnings. The zero-input
+reviewer matches its exact join at 1,176 / 159. The retained reviewer join
+matches the earlier C2b retained inventory at 1,176 / 159. Categories,
+locations, term heads, participant families and parser issues match
+exactly in each comparison; the new whole rules add no reported overlap.
+Strict LHS audit, catalog freshness, shell syntax and source-only health
+freshness pass. Health now inventories 966 files; no aggregate or TypeScript
+check ran. The nucleus blob remains 91f1974ece225e399604dce24710bf1437ad3ef5.
 
 ### NUH-4C2b: Native whole terminal/initial family universality
 

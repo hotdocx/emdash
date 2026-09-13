@@ -4459,6 +4459,18 @@ v:Coim⇒ev₁ and u:ev₀⇒Im. The native mate laws prove v_d∘π_d=f_d and
 observations, not new runtime cuts; the primary programs carry no ordinary
 factor dictionaries or manual naturality equations.
 
+The original adjunction is now available on whole functor families:
+(F∘−)⊣(G∘−). Its whole unit and counit are the existing postcomposition
+action on the original cells; their components are η whiskered by A and
+ε whiskered by D. Native mate functors and their inverse cuts therefore
+apply to entire transformations. This ordinary structural presentation
+uses two explicit primitives for adjunction lifting and functor-category
+truncation, extending the current opaque classifiers. It is not claimed as
+a derivation from their β interface. The original zero-column families
+give the expected selected Coim/Im endpoint types and recover by inverse
+mating. Comparing these native results with the older raw whole formulas
+still requires qualification; no H or factor program has been replaced.
+
 The canonical Coim⇒Im comparison and its coherent whole factorization
 data still remain to be constructed. Its
 invertibility will be genuine Abelian structure, not a consequence of

@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and whole factors checked; canonical Coim⇒Im next; ordinary bridge optional; Op/duality migration deferred
+Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; presentation comparison and canonical Coim⇒Im remain; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,17 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Current C2c1 structural step (2026-09-13): the original adjunction now lifts
+to whole functor families through two explicit structural primitives and
+two whole unit/counit rules. Defined native mate functors retain existing
+inverse cuts and higher action. Concrete zero-column inputs and their
+whole recovery check. The comparison with older raw family formulas remains
+open; H and those factors are unchanged. The categorical subplan and owner
+ledger distinguish this qualified structural step from the still-required
+construction of a:Coim⇒Im. The user's intended interface is one whole
+comparison with projected components/action, without manually carried
+naturality or functoriality square proofs.
 
 Deferred terminality refinement (2026-09-13): the user accepts the current
 ordinary-target normalizers for now and proposes later upgrading the

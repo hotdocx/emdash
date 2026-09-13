@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and two whole factors checked; canonical Coim⇒Im next; not a completed exactness/connecting theorem
+Status: C2b whole factors checked; C2c1 structural family adjunctions locally qualified; raw-family comparison and canonical Coim⇒Im remain; not a completed exactness/connecting theorem
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -262,6 +262,38 @@ the required coherent annihilation/mate input. Keep the existing whole
 units, counits and comparisons as program data; do not rebuild pointwise
 cones or add a primitive comparison/exactness inhabitant. Abelian
 invertibility of a remains genuine subsequent input structure.
+
+C2c1 now supplies the [structural family adjunction](../emdash2/emdash3_2_one_cat_adjunction_families.lp)
+(F∘−)⊣(G∘−), retaining the existing postcomposition functors. This is the
+ordinary [whiskering of an adjunction](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Adjunction/Whiskering.html).
+Two explicit structural primitives supply the lifted adjunction and the
+OneCat profile of a functor category with ordinary target. The current
+opaque classifiers have no constructors deriving these operations from
+their β interface. Record them as primitive/model obligations.
+
+Two whole unit/counit rules route to existing tele-postcomposition of the
+original cells. Components and further action are projections of those
+whole owners; separate component rules and caller naturality squares are
+unnecessary. Defined forward/backward mate functors reuse the existing
+Hom comparison and inverse cuts. Cancellation of whole transformations,
+whole mate functors and their next Hom projections checks at the native
+postcomposition endpoints. The original normalized C2b inputs yield the
+expected Coim/Im endpoint types, and both inverse operations recover the
+entire original coherent input, including its component at any diagram.
+
+This completes the structural substep, not a:Coim⇒Im. The attempted
+comparison with the older raw family formulas still stops at their
+represented-versus-raw composition and product annotations, including a
+component comparison attempt. Merely suppressing printed implicit arguments
+makes the generic displayed normal forms look identical; that is not a
+typed equality proof. No experimental raw-formula comparison rule is
+promoted. Keep the original H and factor implementations. Qualify the
+needed presentation comparison before substituting these native mates
+for them. The owner ledger records the failed probes and next boundary.
+The canonical comparison must still be a constructed whole transformation;
+its point and higher observations must come from that same term. This work
+does not activate the deferred terminality or profile migration.
+
 Use these owners to formulate normality and exactness before migrating the
 connecting program. Keep all source transformations, signs and actual H
 selections explicit. Do not expand this into the deferred indexing/debugging

@@ -166,6 +166,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_kernel_adjunction_presentations.lp"),
     Path("emdash3_2_cokernel_adjunction_presentations.lp"),
     Path("emdash3_2_adjunction_mates.lp"),
+    Path("emdash3_2_one_cat_adjunction_families.lp"),
     Path("emdash3_2_kernel_cokernel_adjunction_mates.lp"),
     Path("emdash3_2_zero_arrow_diagram_observations.lp"),
     Path("emdash3_2_zero_arrow_universal_tests.lp"),

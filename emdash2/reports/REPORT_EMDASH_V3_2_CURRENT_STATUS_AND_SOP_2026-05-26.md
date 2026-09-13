@@ -132,6 +132,17 @@ The primary programs import no ordinary record interface, and the proved
 equations are not runtime reconstruction cuts. Canonical Coim⇒Im and its
 whole factorization data remain required before the normality/exactness layer.
 
+NUH-4C2c1 now supplies [native family adjunctions](../emdash3_2_one_cat_adjunction_families.lp).
+Two explicit structural primitives lift F⊣G to existing postcomposition
+functors and supply the ordinary functor-category profile. Two whole
+unit/counit rules reuse the original cells through tele-postcomposition.
+Defined mate functors retain native endpoints, whole inverse cuts and
+next Hom action. The original C2b zero-column inputs recover by whole
+inverse mating at their actual Coim/Im endpoint types. The comparison with
+the older raw family formulas remains open, as does canonical Coim⇒Im.
+These structural primitives are explicit model obligations; no extra
+raw-formula unifier or ordinary factor input is introduced.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip
