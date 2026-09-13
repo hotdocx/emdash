@@ -2,13 +2,21 @@
 
 Date: 2026-09-12
 
-Status: reproduced and isolated; no profile repair promoted
+Status: historical diagnostic; further investigation deferred by user direction
 
 Parent: [native universality/homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md), NUH-1B2g
 
 Ledger: [native owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
 
 Source: active nucleus blob `91f1974ece225e399604dce24710bf1437ad3ef5`
+
+Subsequent user direction: do not continue this audit or make it a
+prerequisite for the current native-universality/homology goal. Focus on
+the [mathematical duality theory](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md).
+The prototype strictness migration in
+`goal/opaque-action-profile-classifiers-v3.2` will be integrated after that
+goal. The experiment instructions and proposed next steps below are
+historical evidence, not the active work queue.
 
 ## Finding
 

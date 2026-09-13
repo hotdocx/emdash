@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active; NUH-1B1 polarity diagnostic complete, NUH-1B2 native target redesign in progress
+Status: active; semantic duality framework specified, native target/module continuation in progress; prototype strictness migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -38,6 +38,15 @@ in the original worktree's
 The current launch additionally authorizes a new branch/worktree, proceeding
 with the plan, and starting a corresponding persistent goal. Earlier local
 checkpoint authorization carries into this dedicated worktree.
+
+**Subsequent user direction, 2026-09-12:** focus on a usual mathematical,
+semantically coherent theory of Op/duality and its useful native operations.
+Set handcrafted Empty proofs and this branch's prototype global strictness
+rules aside. The migration in `goal/opaque-action-profile-classifiers-v3.2`
+will be integrated **after this goal**, not during it and not as a
+prerequisite for finishing it. Preserve existing diagnostics as historical
+evidence; do not continue their investigation or use them to redirect the
+current implementation queue.
 
 **Spectra, categorical spectra, Heine generalization, dependent stabilization
 and suspension research are explicitly deferred by the launch. Do not
@@ -106,7 +115,10 @@ that specific evidence; it does not license a separate checker investigation.
 Keep the working field-indexed iterator and native bounded sequence as
 reference consumers throughout.
 
-Also deferred: unbounded/derived-category implementation, Ext construction,
+Also deferred: prototype global strictness-rule migration and further
+Empty/inconsistency audits; integration of
+`goal/opaque-action-profile-classifiers-v3.2` until after this goal;
+unbounded/derived-category implementation, Ext construction,
 spectral algebraic geometry, general homological normalization or Adelman
 theorem-proving, a new frontend/parser, unrelated strictness/profile branch
 integration, and exhaustive preservation of obsolete wrappers. These are not
@@ -139,8 +151,8 @@ The same root hook configuration is retained; no new hook is installed.
 | Row | State | Required outcome |
 | --- | --- | --- |
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
-| NUH-1 | active design tranche | Exact native-owner/variance/dependency table; coherent meanings and rejection criteria before semantic source edits |
-| NUH-2 | pending NUH-1 | Coupled full-owner op/family/Sigma/native-Hom and affected profile repair; genuine positive consumers and correct rejection of the earlier op/Sigma, native-target polarity and family/section profile Empty routes |
+| NUH-1 | active design tranche | Coherent mathematical Op/duality specification and exact native-owner/variance/dependency table; complete its application to the native target/module |
+| NUH-2 | pending NUH-1 | Implement the coupled op/family/Sigma/native-Hom operations with their stated mathematical meanings, whole action and affected nonidentity/higher-action consumers; prototype strictness migration stays deferred |
 | NUH-3 | pending NUH-1/2 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
 | NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
@@ -154,6 +166,13 @@ Record missing prerequisites precisely and distinguish experiment rejection
 from a genuinely blocked goal.
 
 ## NUH-1: Design Before Rules
+
+The current mathematical specification is
+[Native Duality: Mathematical Specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md).
+Its dimension-set calculus, shifted universe action and transport of
+enriched structures provide the coherent reference theory. Completing the
+native Homd target/module and its implementation remains work; it is not
+the same question as giving Op a mathematical meaning.
 
 The design ledger is
 [native owner and variance ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md).
@@ -188,24 +207,27 @@ An arbitrary R(Z)=Z equation or new replacement-family input still rejects
 a candidate. Previously prototyped shifted-dual actions also need their
 actual strict/lax profiles; they do not follow just from object formulas.
 
-NUH-1B1 adds a necessary polarity constraint: the old positive section over
+Historical NUH-1B1 records a polarity constraint: the old positive section over
 the opposite target base produces a reverse Hom action and a closed Empty
 witness, including a walking-arrow specialization. The
 [polarity diagnostic](TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
-is an additional required negative control. A repaired base annotation alone
-does not qualify the native target. Independence of this route from the
-older op/Sigma defects has not been established.
+is retained as diagnostic evidence. Under the subsequent user direction,
+its Empty route is not an active acceptance gate. The functional constraint
+still matters: the native target must have its intended mathematical
+section direction as well as its correct base. No further independence
+investigation is scheduled.
 
-NUH-1B2g now reproduces a separate family/section profile conflict:
+Historical NUH-1B2g reproduces a separate family/section profile conflict:
 unrestricted strict naturality plus the constant-section interface derives
 F(x)=F(y) along every base arrow and hence Empty. Earlier routes persist
 before Sigma/native-Homd, without the late theorem or its two whole
 comparison unifiers.
 The [profile diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
-records the exact isolation and its limits. NUH-1B2h must qualify the
-connected ordinary/displayed naturality profiles, retaining generic
-directed section action. A blanket strict reading of Functord, or removal
-of only the late theorem, is no longer an admissible repair proposal.
+records the exact isolation and its limits. The user has subsequently
+deferred that investigation and the associated NUH-1B2h migration. It is
+historical prototype evidence, not a prerequisite for the current
+mathematical duality/native-operation continuation. The mathematical
+contexts remain explicit; no source comment is used as a new theorem.
 
 ## Universal Structure And First Vertical Consumer
 
@@ -248,6 +270,11 @@ All Lambdapi experiments use `emdash2/scripts/lambdapi_resource_guard.sh`:
 one checker at a time, at most 90 seconds, 2 GiB per-process address space,
 64 MiB per file, no core dumps; use the existing aggregate memory scope
 when available. Do not raise limits or bypass ordinary subject reduction.
+
+Do not rerun or expand the Empty reproducers or pursue global strictness
+migration as an acceptance gate for this goal. Use the affected operation's
+mathematical type, whole action and ordinary nonidentity/higher-cell
+consumers. Integration of the other profile branch belongs after this goal.
 
 Documentation/design-only checkpoints need exact diff and link/Markdown,
 active-reference and report-lifecycle hygiene, not repository aggregates.
@@ -297,6 +324,8 @@ must not label those alternatives validated implementations.
 | D-NUH-015 | Selected structural index action now computes complete stable/raw arrows and source-2-cell components before homd_int; classifier/profile and affected full-source qualification remain separate |
 | D-NUH-016 | Follow the user's localized-validation policy for this goal: affected owners/features/files, recent unchanged evidence, and no automatic long-running repository-wide typecheck or aggregate |
 | D-NUH-017 | Constant-section comparisons plus unrestricted strict naturality derive Empty; retain generic directed section action and qualify strict equality at an actual profile. Audit whole/capped/object/stable comparisons together; the four-cut diagnostic subtraction is not a repair |
+| D-NUH-018 | Subsequent user direction sets Empty audits and prototype global strictness migration aside. D-NUH-017 is historical evidence, not the current work queue. Integrate goal/opaque-action-profile-classifiers-v3.2 only after this goal |
+| D-NUH-019 | Use the dimension-set duality calculus, shifted universe/family actions and transported enrichment in TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md as the coherent mathematical reference; continue native target/module construction and then the universality/homology migration |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -451,6 +480,14 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 
 ## Persistent Goal Launch Prompt
 
+Current continuation boundary: the mathematical duality framework is now
+specified in `TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md`. Native target
+and module integration, followed by the remaining universality/homology
+rows, is still implementation work. The user's latest direction supersedes
+the preceding historical profile-audit next steps. The documentation
+checkpoint passes changed-link, Unicode/fence, active-reference, lifecycle
+and exact-diff hygiene; it changes no active LP or TypeScript source.
+
 Continue the native whole-universality and homology implementation in
 `/home/user1/emdash1-native-universality-v1` on
 `goal/native-universality-homology-v3.2`, using
@@ -464,6 +501,10 @@ make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running
 repository-wide typechecks or automatic aggregates as the user requested.
 Keep the ledger current and preserve unrelated work and reference history.
+Focus on the mathematical duality/native-operation theory. Empty proof
+audits and prototype global strictness migration are deferred. Integrate
+`goal/opaque-action-profile-classifiers-v3.2` only after this goal, not as
+a prerequisite for its completion.
 Spectra, Heine generalization,
 dependent stabilization, suspension research and beyond are deferred and
 must not be investigated. Do not resume the separately deferred endpoint

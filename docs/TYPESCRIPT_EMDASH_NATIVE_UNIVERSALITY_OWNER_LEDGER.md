@@ -6,6 +6,13 @@ Status: active NUH-1 design; source inventory established, coupled target design
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
+Current user direction (2026-09-12): use the
+[mathematical duality specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+to continue native operations. Prototype strictness migration and Empty
+audits are deferred; their earlier acceptance/next-action language below
+is historical and does not govern this continuation. Integration of
+`goal/opaque-action-profile-classifiers-v3.2` comes after this goal.
+
 ## Source Identity And Recovery
 
 The worktree starts at `cbef77e76fc292453c8814b5ecc6d62e84132f01`.
@@ -185,28 +192,36 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
-### NUH-1B2h: Qualify the connected naturality profiles
+### NUH-1D: Mathematical duality framework and native application
 
-The NUH-1B2g diagnostic below makes the profile boundary concrete. Before
-further native integration, specify the generic/strict/opposite-profile
-carriers, their permitted comparisons and inclusions, and the action of
-the native Hom/section owners on them. Preserve the ordinary functor carried
-by a constant-family section. For a generic FF the comparison
-D(p)∘FF(x)⇒FF(y)∘E(p) retains directed data; its two endpoints are not
-generically equal. For a strict construction, qualify equality at its
-actual profile rather than recover strictness from arbitrary family data.
+The current [duality specification](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
+provides the coherent reference theory: dimension-set dualities, recursive
+Hom action, the shifted internal universe/family action, and transport of
+enriched structures when a transformation context changes. Total O,
+homwise R and transpose T have distinct specified roles. This settles the
+meaning of the duality operations; it does not claim that every native
+Homd target or implementation clause is already complete.
 
-The next bounded experiment should cover arbitrary constant sections
-and one represented strict map, with their nonidentity and next-Hom action.
-Include the one-object idempotent-monoid and group controls in the
-diagnostic: equal endpoints do not make a section comparison an identity,
-and an invertible comparison need not be strict.
-Audit the connected whole/capped/object/stable naturality family together
-with the late displayed comparisons. The four-cut subtraction below is
-only an isolation: other strict ordinary cuts remain. Do not promote it
-as a repair, reinstate the late theorem without a profile, or import the
-unrelated in-flight strictness branch. Native hom_int/homd_int ownership,
-the original family inputs, local validation and existing deferrals stand.
+The next implementation work resumes the shared native index/module,
+its D-map action and the complete homd_int source/target, then follows
+NUH-2 through the whole-universality and homology rows. Use the mathematical
+specification and the existing positive native computations. Do not reopen
+prototype strictness or Empty experiments to select that next action.
+
+### NUH-1B2h: Prototype strictness/profile continuation deferred
+
+The preceding `66e5f87c` checkpoint recorded the profile diagnostic.
+The user subsequently directed us to set that investigation aside and
+focus on the mathematical Op/duality theory. The independent migration in
+`goal/opaque-action-profile-classifiers-v3.2` will be integrated only after
+this goal; it is not a current prerequisite and no merge is scheduled here.
+
+A finite comparison-leg experiment begun before the clarification is
+retained only as ignored recovery material in
+`emdash2/tmp/probes/native_transformation_profile_model_deferred.py`.
+It is outside the active queue. No profile source patch was made.
+The earlier directive below to continue this row before native integration
+is superseded by the user's clarification and NUH-1D above.
 
 ### NUH-1B2g: Family/section profile inconsistency isolated
 
@@ -735,18 +750,16 @@ projections and computation must be specified together before promotion.
 | NUH-1B2e whole x-family | strict-reference S/P_D and fibre transpose typecheck; source points and H-precomposition compute; source action on index arrows and generic profiles remain unqualified |
 | NUH-1B2f structural source action | stable/raw arrow beta and source-2-cell components compute before homd_int; classifier/profile and native-Homd integration remain pending |
 | NUH-1B2g family/section profile diagnostic | complete diagnostic tranche; three Empty routes and discriminating subtraction variants preserved, no profile repair promoted |
-| NUH-1B2h connected naturality profiles | next bounded prerequisite; retain generic section action and qualify strict/mixed-profile native operations |
+| NUH-1B2h connected naturality profiles | deferred by subsequent user direction; not a prerequisite for this goal |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
+| NUH-1D mathematical duality framework | specified; apply its universe/family shifts and transported contexts to the complete native target/module |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue NUH-1B2h from the profile inconsistency isolated in NUH-1B2g.
-The computing structural index in NUH-1B2f remains a strict-reference
-ingredient. Preserve arbitrary constant-section action while specifying
-the native Catd/Functord/Pi, duality and Homd profiles. Then qualify general
-D-map/module and evaluation interfaces before full native integration.
-Keep further higher-action and affected source interactions explicit; the
-selected arrow/2-cell beta does not prove them automatically. Use localized
-checks of affected owners/features/files and reuse unchanged evidence, as
-the user requested. All Empty routes, including the three profile routes,
-remain rejection controls. The full ω-dimensional target remains
-unqualified. Spectral/stabilization work stays out of scope.
+Continue from NUH-1D's mathematical framework and the computing structural
+index in NUH-1B2f. Complete the native D-map/module and evaluation
+interfaces, then full native integration. Keep the whole higher action and
+actual mathematical context explicit. Use localized checks of affected
+owners/features/files and reuse unchanged evidence. Empty audits and the
+prototype strictness migration are deferred, as is integration of the other
+profile branch until after this goal. The full native target implementation
+remains unfinished. Spectral/stabilization work stays out of scope.

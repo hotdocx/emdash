@@ -65,6 +65,13 @@ three non-library fixtures. Do not use the strict-Functord source comment
 as blanket semantic authority for all family/section interfaces. The
 connected naturality profiles must be qualified while retaining generic
 directed section action; the recorded subtraction variants are not a repair.
+Subsequent user direction for the native-universality goal defers further
+Empty audits and prototype strictness migration. Its current priority is
+the mathematical duality specification in
+`../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md` and useful native
+operations. The separate `goal/opaque-action-profile-classifiers-v3.2`
+branch will be integrated after this goal. Do not treat that integration
+or further consistency probes as a prerequisite for this goal's work.
 
 ## Authority And Document Roles
 
