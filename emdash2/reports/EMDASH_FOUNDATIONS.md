@@ -1309,6 +1309,14 @@ that erase the ordinary hierarchy. `Catd_cat`, `Functord_cat`, and
 `Functor_cat`, `Transf_cat`, and iterated-hom presentations. Their object and
 hom projections provide the runtime passage between the two views.
 
+Current implementation limitation: the
+[family/section profile diagnostic](../../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+shows that unrestricted strict-naturality equalities are incompatible with
+the constant-section interface below. They derive Empty. The generic
+directed comparison must retain its data, and strict equality needs an
+actual qualified profile. The names and projections described here remain
+the active source interfaces; their coexistence is not a soundness claim.
+
 A natural family morphism has fibre functors:
 
 ```text
@@ -6431,9 +6439,12 @@ fapp1_compositor(F,g,f) : F[g] o F[f] ==> F[g o f]
 
 is the post/left cell of the identity transfor. These names add no runtime or
 proof-time rule; their displayed `functord_transport_*_func` endpoints remain
-the computational types. Existing whole strict naturality paths compare those
-owners with the readable raw-composition presentation, so no duplicate capped
-pre/post unification rule is installed.
+the computational types. The current implementation compares those owners
+with the readable raw-composition presentation through whole strict
+naturality paths. Their unrestricted form participates in the
+[family/section profile collapse](../../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+and requires profile qualification. No duplicate capped pre/post comparison
+would repair that semantic boundary.
 
 That pre/right surface now has a generic outgoing-path successor. At a fixed
 `x : A`, an ordinary transformation `epsilon : F => G` induces
@@ -6448,11 +6459,11 @@ The component over `(y,p)` is the Sigma arrow whose base is `epsilon[y]` and
 whose fibre is `tapp1_pre_laxity_cell(epsilon,p,id_y)`. Its formal
 internal-action endpoints and literal Sigma endpoints are related by
 first-class paths through the existing post/precomposition and whole
-Functord-transport owners. Thus the construction is computational at the
-constructor component and remains iterable through `tapp1_func`, without
-turning a genuinely lax cell into an equality or adding a new endpoint
-normalization. This is the reusable successor needed by the next
-dependent-simplex dimension.
+Functord-transport owners. The construction computes at the constructor
+component and remains iterable through `tapp1_func`. Its reliance on the
+unrestricted endpoint paths is now an explicit profile-repair dependency;
+the computation alone does not qualify its generic lax interpretation.
+This successor's intended role is the next dependent-simplex dimension.
 
 ### Path Realization: Laxity Becomes Pseudo
 

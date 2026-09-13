@@ -264,6 +264,15 @@ the old covariant op:Cat→Cat or unrestricted same-base opposite families.
 
 ## Profiles And Foundational Ownership
 
+The [family/section profile diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+now confirms that the active unrestricted strict-naturality interfaces
+cannot be combined with their constant-section comparisons: they derive
+F(x)=F(y) along every arrow and hence Empty. Generic sections must retain
+their actual directed action. The strict reference calculations in this
+document are conditional constructions; the active Functord facade does
+not by itself certify their required profile. Qualify the connected
+ordinary/displayed naturality owners before generic native integration.
+
 Keep distinct the external action of dimension-selected dualities on strict
 ω-categories/functors and their action on internal functor categories.
 For a transformation with comparison G(f)∘ηₓ⇒ηᵧ∘F(f), applying homwise

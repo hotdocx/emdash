@@ -140,7 +140,7 @@ The same root hook configuration is retained; no new hook is installed.
 | --- | --- | --- |
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
 | NUH-1 | active design tranche | Exact native-owner/variance/dependency table; coherent meanings and rejection criteria before semantic source edits |
-| NUH-2 | pending NUH-1 | Coupled full-owner op/family/Sigma/native-Hom repair; genuine positive consumers and correct rejection of the three earlier Empty routes plus the native-target polarity route |
+| NUH-2 | pending NUH-1 | Coupled full-owner op/family/Sigma/native-Hom and affected profile repair; genuine positive consumers and correct rejection of the earlier op/Sigma, native-target polarity and family/section profile Empty routes |
 | NUH-3 | pending NUH-1/2 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
 | NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
@@ -195,6 +195,17 @@ witness, including a walking-arrow specialization. The
 is an additional required negative control. A repaired base annotation alone
 does not qualify the native target. Independence of this route from the
 older op/Sigma defects has not been established.
+
+NUH-1B2g now reproduces a separate family/section profile conflict:
+unrestricted strict naturality plus the constant-section interface derives
+F(x)=F(y) along every base arrow and hence Empty. Earlier routes persist
+before Sigma/native-Homd, without the late theorem or its two whole
+comparison unifiers.
+The [profile diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+records the exact isolation and its limits. NUH-1B2h must qualify the
+connected ordinary/displayed naturality profiles, retaining generic
+directed section action. A blanket strict reading of Functord, or removal
+of only the late theorem, is no longer an admissible repair proposal.
 
 ## Universal Structure And First Vertical Consumer
 
@@ -285,6 +296,7 @@ must not label those alternatives validated implementations.
 | D-NUH-014 | The strict-reference whole x-family computes its source-point and H-precomposition views through native Hom owners; its remaining index-arrow computation is the specific Sigma map of opposite represented precomposition. Derive that structural action without assuming inverse laxity or claiming generic-profile qualification |
 | D-NUH-015 | Selected structural index action now computes complete stable/raw arrows and source-2-cell components before homd_int; classifier/profile and affected full-source qualification remain separate |
 | D-NUH-016 | Follow the user's localized-validation policy for this goal: affected owners/features/files, recent unchanged evidence, and no automatic long-running repository-wide typecheck or aggregate |
+| D-NUH-017 | Constant-section comparisons plus unrestricted strict naturality derive Empty; retain generic directed section action and qualify strict equality at an actual profile. Audit whole/capped/object/stable comparisons together; the four-cut diagnostic subtraction is not a repair |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

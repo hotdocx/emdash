@@ -20,6 +20,16 @@ companion checks the valid direction and retained next action. These are
 non-library diagnostics, not a repair or a claim of a third independent
 defect. NUH-1B2 must correct target polarity together with base variance.
 
+NUH-1B2g adds the
+[family/section profile diagnostic](../../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md).
+Constant-section comparisons and unrestricted strict naturality derive
+Empty through both late displayed and earlier ordinary owners. Local
+subtraction variants distinguish object cuts from stable-head comparisons
+while retaining ordinary section evaluation. These are non-library
+diagnostics, with a guarded reproducible driver; no profile repair or
+active LP change is claimed. NUH-1B2h must qualify the connected profiles
+before generic native-Homd integration.
+
 Latest homology status (2026-09-11): the user-directed remainder of the
 [bounded long exact homology and book plan](../../docs/TYPESCRIPT_EMDASH_BOUNDED_LONG_EXACT_HOMOLOGY_AND_BOOK_PLAN.md)
 is complete. The final symbolic zero-endpoint attachment and its LF

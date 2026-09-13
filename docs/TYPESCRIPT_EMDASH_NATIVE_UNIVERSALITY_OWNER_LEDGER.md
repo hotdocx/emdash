@@ -47,6 +47,7 @@ observations of this source identity, not enduring authority.
 | `Op_catd_func`, `Op_catd`, `Op_funcd` | Lines 7221/12658/12720; unrestricted same-base formation/action | Base change and displayed-transformation variance are part of the repair; family-only reconstruction of bad op must fail |
 | `hom_con`, `hom_int` | Lines 7900/8455; fixed-target and whole internal Hom owners | Preserve their ownership, cuts and distinct pre/postcomposition; classify each opposite slot by actual dimension/profile |
 | `Pi_func` and negative-section observations | Line 13054 and mixed-section consumers | Preserve internal section calculus; test constant families and actual section components at the corrected bases |
+| generic family/section profiles and strict naturality | Ordinary §6d, constant-section comparisons/evaluation and displayed §16a | NUH-1B2g derives Empty from their combined endpoint collapse; preserve generic directed section action and qualify strict equality at the actual profile |
 | `homd_` | Line 13205; endpoint-observation family over opposite base Hom | Preserve relation to `homd_int`; audit variance of the base-Hom argument separately from total fibre duality |
 | `Sigma_cat`, `Sigma_func` | Line 13258; totalization and constant-family product rule | Preserve existing owner; correct Hom totalization coherently rather than cancel only its visible base reversal |
 | Sigma Hom | Line 13315; outer Op of a total of the dependent-Hom family | Terminal-base constant family must retain full fibre Hom direction; independent Sigma Empty derivation must fail |
@@ -183,6 +184,67 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-1B2h: Qualify the connected naturality profiles
+
+The NUH-1B2g diagnostic below makes the profile boundary concrete. Before
+further native integration, specify the generic/strict/opposite-profile
+carriers, their permitted comparisons and inclusions, and the action of
+the native Hom/section owners on them. Preserve the ordinary functor carried
+by a constant-family section. For a generic FF the comparison
+D(p)∘FF(x)⇒FF(y)∘E(p) retains directed data; its two endpoints are not
+generically equal. For a strict construction, qualify equality at its
+actual profile rather than recover strictness from arbitrary family data.
+
+The next bounded experiment should cover arbitrary constant sections
+and one represented strict map, with their nonidentity and next-Hom action.
+Include the one-object idempotent-monoid and group controls in the
+diagnostic: equal endpoints do not make a section comparison an identity,
+and an invertible comparison need not be strict.
+Audit the connected whole/capped/object/stable naturality family together
+with the late displayed comparisons. The four-cut subtraction below is
+only an isolation: other strict ordinary cuts remain. Do not promote it
+as a repair, reinstate the late theorem without a profile, or import the
+unrelated in-flight strictness branch. Native hom_int/homd_int ownership,
+the original family inputs, local validation and existing deferrals stand.
+
+### NUH-1B2g: Family/section profile inconsistency isolated
+
+The preceding `0b419ddb` turn is progress: structural source arrows and
+source-2-cell components now compute in the isolated native-index
+prototype. The active worktree is clean at resumption and baseline ancestry
+is preserved. Validation remains localized under the user's instruction.
+
+The hypothesis is confirmed. A rule-free consumer of
+functord_transport_strict_naturality, with FF an arbitrary ordinary F:K→A
+viewed as const(1)→const(A), derives F(x)=F(y) for every p:x→y. The
+specialization K=A=Grpd, F=id and p:Empty→Unit then yields τ Empty_grpd
+by ordinary equality elimination. No homology/exactness or earlier Empty
+witness is used.
+
+The [profile diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+preserves three rule-free routes. Earlier ordinary object-level cuts also
+derive Empty. In a preferred-total-op slice before Sigma, Op_catd and
+homd_int, subtracting those two cuts rejects that route but leaves an
+Empty derivation through two stable-head ordinary naturality comparisons.
+Subtracting those comparisons too rejects both recorded earlier routes.
+Constant-section views, evaluation and ordinary forward action still
+check. Remaining strict whole/capped cuts are not yet qualified.
+
+The reproducible guarded gate is
+`emdash2/scripts/check_family_section_profile.sh`; its complete retained
+stage is `/tmp/emdash-family-section-profile.GGJG5j`. The active source
+consumer retains 1,144 critical-pair / 157 pattern warnings. All three
+prefix variants retain 856 / 134, with complete inventories agreeing after
+unchanged-line mapping; rule-free positive inventories agree exactly.
+All three source LHS audits and four fixture audits pass. No active LP
+source changed, and no repository-wide typecheck ran.
+
+This rejects the blanket strict reading of Functord while retaining the
+native-index prototype's conditional strict-reference meaning. The result
+is a scoped native-family prerequisite, not a reason to replace native
+Hom foundations or to investigate the deferred endpoint checker. Continue
+with NUH-1B2h's connected profile design before generic native integration.
 
 ### NUH-1B2f: Structural Sigma action before native Homd
 
@@ -672,16 +734,19 @@ projections and computation must be specified together before promotion.
 | NUH-1B2d native shared-index ingredient | carrier/arrow/whole projection and source-Hom direction check before homd_int; whole x-family and D-map/profile qualification pending |
 | NUH-1B2e whole x-family | strict-reference S/P_D and fibre transpose typecheck; source points and H-precomposition compute; source action on index arrows and generic profiles remain unqualified |
 | NUH-1B2f structural source action | stable/raw arrow beta and source-2-cell components compute before homd_int; classifier/profile and native-Homd integration remain pending |
+| NUH-1B2g family/section profile diagnostic | complete diagnostic tranche; three Empty routes and discriminating subtraction variants preserved, no profile repair promoted |
+| NUH-1B2h connected naturality profiles | next bounded prerequisite; retain generic section action and qualify strict/mixed-profile native operations |
 | NUH-1C whole-universality/realization separation design | initial dependency inventory established; exact native interface remains to qualify |
 | NUH-2A repaired full-owner candidate | not started; requires NUH-1B |
 
-Continue from the computing structural index in NUH-1B2f. Audit the actual
-Catd/Functord/Pi and native-Homd classifier profiles, preserving arbitrary
-constant-section action and the represented maps' established strictness.
-Then qualify general D-map/module and evaluation interfaces before full
-native integration. Keep further higher-action and affected source
-interactions explicit; the selected arrow/2-cell beta does not prove them
-automatically. Use localized checks of affected owners/features/files and
-reuse unchanged evidence, as the user requested. The old y-local target
-and all Empty routes remain rejection controls. The full ω-dimensional
-target remains unqualified. Spectral/stabilization work stays out of scope.
+Continue NUH-1B2h from the profile inconsistency isolated in NUH-1B2g.
+The computing structural index in NUH-1B2f remains a strict-reference
+ingredient. Preserve arbitrary constant-section action while specifying
+the native Catd/Functord/Pi, duality and Homd profiles. Then qualify general
+D-map/module and evaluation interfaces before full native integration.
+Keep further higher-action and affected source interactions explicit; the
+selected arrow/2-cell beta does not prove them automatically. Use localized
+checks of affected owners/features/files and reuse unchanged evidence, as
+the user requested. All Empty routes, including the three profile routes,
+remain rejection controls. The full ω-dimensional target remains
+unqualified. Spectral/stabilization work stays out of scope.

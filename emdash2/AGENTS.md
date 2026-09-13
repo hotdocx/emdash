@@ -56,6 +56,16 @@ it for the correct target polarity/type reason while preserving native Hom
 owners and legitimate forward action; a base-annotation fix alone is not
 qualification.
 
+The family/section profile audit also derives Empty from unrestricted
+strict naturality combined with constant-family sections viewed as ordinary
+functors. Earlier ordinary-cut routes persist before Sigma/native Homd and
+without the late displayed transport theorems. See
+`../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md` and its
+three non-library fixtures. Do not use the strict-Functord source comment
+as blanket semantic authority for all family/section interfaces. The
+connected naturality profiles must be qualified while retaining generic
+directed section action; the recorded subtraction variants are not a repair.
+
 ## Authority And Document Roles
 
 Use this order:

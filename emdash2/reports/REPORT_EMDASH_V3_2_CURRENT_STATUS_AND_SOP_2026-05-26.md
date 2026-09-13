@@ -29,6 +29,17 @@ defects is not established. The target's y-action, as well as its base
 variance, needs correction. The diagnostic and its separate lawful forward
 controls are non-library evidence; no active native Hom owner was changed.
 
+The 2026-09-12 [family/section profile diagnostic](../../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+confirms another incompatible interface combination: constant sections
+are arbitrary ordinary functors, while unrestricted strict naturality
+identifies their endpoint values along every base arrow. This yields Empty.
+Earlier ordinary object-cut and stable-head routes survive before
+Sigma/native Homd and without the late family-transport theorems. Generic
+directed section action must remain available while the connected
+naturality profiles are repaired. Strict-naturality prose below records
+the current implementation, not blanket qualification for a lax consumer.
+The non-library subtraction variants isolate causes; no repair is promoted.
+
 The earlier homological-algebra goal deferred this general repair. The
 2026-09-12 [native-universality successor](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 now resumes a design-led coupled repair in its dedicated worktree, preserving
