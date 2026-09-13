@@ -242,11 +242,16 @@ NUH-3C3 now has the whole native observation E_C:Arr(C)→LaxArrow(C), derived
 from the existing graph of the evaluation transformation. Its arbitrary-map
 components and next Hom action check. The ordinary return functor D_C is
 already present; the constructor-visible E_C(D_C(edge)) round trip checks.
-The required whole representation/faithfulness comparison is still open.
+The second gate now adds the missing ordinary shape-universality law
+explicitly: a whole natural DefIso D_C∘E_C ≅ id in End(Arr(C)), with four
+computing endpoint projections. This is one new declaration-backed primitive,
+not a derivation from the older join β rules. Faithfulness of E_C is derived
+from that natural comparison and the existing inverse/naturality machinery.
+Actual comparison maps also let raw zero tests enter the original arbitrary
+diagram d, preserving their supplied arrows and future K(d)/Q(d) endpoints.
 
-Next: complete that whole comparison and derive full ordinary uniqueness
-without W/V. Arbitrary diagram eta is not yet proved; the object round trip
-does not supply it. Migration of the packaged chain-pair and
+Next NUH-3C4: derive native-square equality at OneCat, then monicity/epicity
+and full ordinary universal records without W/V. Migration of the packaged chain-pair and
 Freyd inputs, connecting/exactness and concrete model/reifier workflow remain
 outstanding. Continue on the current preadditive/ordinary homology baseline
 and preserve its explicit interpretation qualifications.
@@ -449,6 +454,8 @@ must not label those alternatives validated implementations.
 | D-NUH-027 | Whole K/Q structures and their mates now take native functors and adjunction evidence without W/V. The single whole H-family implementation takes these structures; legacy presentations delegate through one-way adapters. Ordinary records and raw input conversion must remove their remaining selected dependencies separately |
 | D-NUH-028 | Raw zero-composite data now enters native zero-arrow cones via the existing whole square action, with explicit OneCat and canonical introduced diagram endpoints. Keep this as an input adapter; derive ordinary universality from the adjunction, without assuming arbitrary diagram eta or introducing factor dictionaries |
 | D-NUH-029 | Reconstruction and structural annihilation now derive from whole mate cancellation and the unit/counit, independently of W/V. Full ordinary uniqueness still needs the native walking-arrow representation/faithfulness comparison; do not infer equality of arbitrary transformations from component observations alone |
+| D-NUH-030 | Supply the missing ordinary walking-arrow shape-universality assembly explicitly as a whole natural DefIso D_C∘E_C ≅ id in End(Arr(C)), with OneCat and computing identity endpoint components. This is a new primitive law, not a theorem derived from existing join β rules or a judgmental equality of inverse functors. Derive map reflection from its whole inverse and naturality |
+| D-NUH-031 | Use the actual reconstruction maps to form J(X)⇒d and d⇒I(X) at an arbitrary original d. Preserve d and the original supplied raw arrows; use no diagram object cast, replacement selection or per-test injectivity premise |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

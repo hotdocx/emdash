@@ -22,12 +22,19 @@ inventories. NUH-3C1 supplies
 through existing whole square action; their components and whole H consumer
 pass. NUH-3C2 derives [reconstruction and annihilation](../emdash3_2_kernel_cokernel_adjunction_observations.lp)
 from whole mates and the unit/counit; legacy proofs delegate to these
-independent observations. Full ordinary uniqueness still needs a native
-diagram-faithfulness comparison. NUH-3C3 now supplies the
+independent observations. NUH-3C3 supplies the
 [whole native observation functor](../emdash3_2_walking_arrow_native_observation.lp),
-with checked map components and next Hom; its whole inverse comparison
-remains open. Packaged input and model/reifier migration
-remain pending. No new primitive, rewrite or unifier is added in these tranches.
+with checked map components and next Hom. Its
+[reconstruction owner](../emdash3_2_one_cat_diagram_reconstruction.lp) now adds
+one explicit ordinary shape-universality primitive: a whole natural DefIso
+D∘E ≅ id in End(Arr(C)), with four endpoint rules. It is not claimed as a
+derivation from the older join β interface. Faithfulness and
+[raw tests at the original d](../emdash3_2_one_cat_zero_diagram_inputs.lp) are
+derived consumers. Eight added constant-family component overlaps are
+classified in the living ledger; focused subject reduction and consumers
+pass. Full ordinary universal records, packaged input and model/reifier
+migration remain pending. The earlier NUH-3A/B/C1/C2 tranches added no
+primitive or rule.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

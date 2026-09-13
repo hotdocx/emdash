@@ -4310,17 +4310,34 @@ adjunctions without the old selected records (NUH-3C2). The inverse kernel
 mate has source component k∘f; cancelling the whole mate pair proves
 k∘lift(h)=h₀. Dually, colift(h)∘q=h₁. The counit and unit also give
 d∘k=0 and q∘d=0. These are derived observations of the whole operations.
-Full ordinary uniqueness still needs the native diagram representation or
-faithfulness comparison; it is not inferred merely from observing equal
-components of two arbitrary diagram transformations.
+Full ordinary uniqueness additionally needs equality of native squares at
+the ordinary profile and the diagram-faithfulness comparison below. It is
+not inferred merely from observing equal components of arbitrary diagram
+transformations.
 
 The native observation functor for that comparison is now defined
 (NUH-3C3): take the existing graph of the whole evaluation transformation at
 the walking-arrow generator. It maps a diagram to its native arrow and a
 diagram transformation to its native square, retaining further Hom action.
-Observing a realized constructor-visible edge recovers that edge. The whole
-inverse comparison on arbitrary diagrams remains to be established; the
+Observing a realized constructor-visible edge recovers that edge. That
 object computation alone does not prove faithfulness.
+
+The missing ordinary shape-universality assembly is now explicit. A new
+primitive, parameterized by OneCat(C), supplies a whole natural DefIso
+D∘E ≅ id in End(Arr(C)). Both comparison directions have identity components
+at the walking-arrow endpoints; the existing DefIso machinery owns their
+inverse cuts. This is a new formal shape law, not a theorem derived from the
+current join β recursor, and it does not identify D∘E with id as functors.
+Conjugating a diagram map's reconstructed image by this actual natural
+comparison derives faithfulness of E.
+
+Its component maps also extend raw zero-test introduction to an arbitrary
+original diagram d. Compose Arr(d[generator])⇒d with the canonical kernel
+test, or compose the canonical cokernel test with d⇒Arr(d[generator]). The
+supplied raw arrow is recovered by the identity endpoint components. The
+operation retains d and therefore its eventual K(d)/Q(d); there is no object
+cast or replacement selection. Full ordinary factor uniqueness and concrete
+whole-model construction remain subsequent work.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
