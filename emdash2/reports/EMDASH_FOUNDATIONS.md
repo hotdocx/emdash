@@ -4383,7 +4383,16 @@ record indexed by that same raw pair. Its factor is the already derived
 semantic boundary at the constructed input transformation; no equality
 proof or transport of a reconstructed pair record is added. The native
 vertices and differentials, actual β/H and H action at those record
-endpoints all check. Freyd input and map specialization remain next.
+endpoints all check.
+
+The Freyd specialization now takes raw e, d and their existing agreement
+directly into that native source, filling the known local categorical data.
+It needs no kernel presentation to form the input. Whole P/Q then supply
+H and its original-pair record; the original quotient classes, agreement
+observation, actual H and incoming-boundary reconstruction are retained.
+This separates raw input formation from whole model structure. It does
+not construct P/Q from matrix equations or finish model/reifier automation.
+Native map specialization remains the next consumer migration.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

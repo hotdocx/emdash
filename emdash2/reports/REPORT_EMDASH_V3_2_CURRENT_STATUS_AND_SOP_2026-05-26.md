@@ -63,8 +63,18 @@ and [whole-H records at the original pair](../emdash3_2_one_cat_chain_pair_homol
 The input needs no K/Q. Its record reuses the actual semantic factor with
 no new path proof or record cast; ten focused input/record checks pass.
 The outgoing-diagram observation is moved unchanged and the legacy
-regression/warning inventory is preserved. Freyd input and map migration
-are next; concrete model/reifier work remains pending.
+regression/warning inventory is preserved.
+
+NUH-4A3 specializes that path to
+[raw Freyd input](../emdash3_2_commutative_algebra_freyd_native_inputs.lp)
+without kernel-presentation parameters and to
+[whole-adjunction H/records](../emdash3_2_commutative_algebra_freyd_adjunction_homology.lp)
+with explicit P/Q. The [shared raw data](../emdash3_2_commutative_algebra_freyd_chain_pair_data.lp)
+and legacy selected definitions are unchanged. Six focused checks retain
+the raw classes/agreement, actual H and incoming-boundary reconstruction;
+exact dependency and legacy warning comparisons pass. No new rule or
+primitive is added. Native map migration is next; concrete whole-model and
+reifier construction remain pending.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

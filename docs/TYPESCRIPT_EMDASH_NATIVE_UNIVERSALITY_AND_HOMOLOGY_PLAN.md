@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: NUH-3 checkpointed; NUH-4A1/2 independent family and original-pair records checked; Freyd input migration next; Op/duality migration deferred
+Status: NUH-3 and NUH-4A1/2 checkpointed; NUH-4A3 direct Freyd inputs/records checked; native map migration next; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -239,7 +239,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: NUH-4A1/2 checked; Freyd input and map migration next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: NUH-4A1–3 checked; native map migration next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -310,10 +310,16 @@ input. Original vertices/differentials, actual β/H, boundary reconstruction
 and H action at two such record endpoints check. No record cast, new path
 proof, primitive or rule is introduced in this tranche.
 
-Next NUH-4A3: specialize direct input formation and the new record to raw
-Freyd agreements, filling the existing local categorical data. Then migrate
-the actual induced-map consumers. Connecting/exactness, concrete whole
-models, reifier automation and snake comparison remain later obligations.
+NUH-4A3 now specializes direct input formation and the new record to raw
+Freyd agreements, filling the existing local categorical data. Input
+formation takes no kernel presentation; H and its record use explicit whole
+P/Q. The original raw classes, agreement observation and actual H endpoint
+check. Existing selected wrappers and their warning inventory are preserved.
+
+Next NUH-4B: construct native maps between the direct inputs from the original
+chain-map data, before any kernel selection, and apply the existing whole H
+action. Connecting/exactness, concrete whole models, reifier automation and
+snake comparison remain later obligations.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -519,6 +525,7 @@ must not label those alternatives validated implementations.
 | D-NUH-033 | Retain the ordinary whole reconstruction DefIso after the user's computational/internal review. Its inverse and naturality come from generic owners; derived equality proofs supply no caller coherence fields. A full E/D equivalence is not a current prerequisite. Keep the primitive-law, OneCat and strict-component qualifications explicit |
 | D-NUH-034 | The independent homology-family record observes K, actual β=K(h)∘η and Q at the whole boundary diagram; it takes no W/V. Its arrow and Hom actions are those of the existing H. Generic boundary data and the unchanged pair observation are shared with legacy wrappers; no new primitive, rule or coherence field is introduced |
 | D-NUH-035 | Original raw chain pairs form native inputs before any universal selection. Their whole-H record keeps the original pair as its literal index and reuses the existing semantic boundary factor; no reconstructed-pair transport, new equality proof or coherence field is needed |
+| D-NUH-036 | Raw Freyd agreements now form native inputs without kernel presentations, with canonical local categorical data filled. Whole P/Q remain explicit for H and its record; the raw agreement is not treated as a universal provider or model. Shared raw observations and selected legacy definitions are unchanged |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-3 checkpointed at 1ea98f63; NUH-4A1/2 independent record/input paths checked; Freyd input migration next; NUH-1/2 duality work user-deferred
+Status: NUH-3 and NUH-4A1/2 checkpointed; NUH-4A3 direct Freyd input/record path checked; native map migration next; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -246,6 +246,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
 | [direct original-pair input](../emdash2/emdash3_2_one_cat_chain_pair_inputs.lp) and [its H record](../emdash2/emdash3_2_one_cat_chain_pair_homology_records.lp) | Original fields enter the existing native source without K/Q; the record then observes whole P/Q at the same pair | NUH-4A2 implemented; specialize to raw Freyd agreements and migrate actual map consumers next |
+| [direct Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_native_inputs.lp) and [its whole H/record](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology.lp) | Original raw morphisms/agreement form input without W/P; H then uses whole P/Q with the existing local categorical data | NUH-4A3 implemented; raw classes, agreement and H endpoint check; migrate native maps and model binding next |
 | [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [raw tests at original diagrams](../emdash2/emdash3_2_one_cat_zero_diagram_inputs.lp) | Actual reconstruction maps compose canonical raw tests into J(X)⇒d or d⇒I(X), retaining the original arbitrary d and raw b | NUH-3C3 implemented; use these inputs for ordinary records at K(d)/Q(d), without new selection or object casts |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
@@ -289,9 +290,71 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4A3: Direct Freyd raw inputs and whole-adjunction records
+
+**Implemented after 515b7187.** The
+[shared raw data](../emdash2/emdash3_2_commutative_algebra_freyd_chain_pair_data.lp)
+owns the unchanged `freyd_raw_chain_zero_path` and
+`freyd_raw_chain_pair_generic`. All four original definitions across that
+module and the legacy selected input/H source are unchanged after stripping
+comments/imports/whitespace. No TypeScript source refers to the moved names.
+
+The [native input](../emdash2/emdash3_2_commutative_algebra_freyd_native_inputs.lp)
+defines `freyd_raw_chain_native_cone` from the original raw e, d and chain
+agreement, without W/P/Q arguments. It fills the existing Freyd OneCat,
+preadditive and terminal-zero observations. The
+[whole H/record module](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_homology.lp)
+defines `freyd_zero_cone_adjunction_homology_func` and
+`freyd_raw_chain_adjunction_homology_record` from explicit whole P/Q. It
+retains the original generic pair and actual H at the direct native input.
+P/Q still express whole model structure; these wrappers do not construct
+that structure from raw agreements or complete model/reifier automation.
+
+All three new operations are definitions through existing generic owners,
+with no new primitive, rule, unifier, equality proof or coherence field.
+The data imports retain existing classifier vocabulary; no hidden selected
+factor operation occurs in the new input or H/record bodies.
+The [input reviewer](../emdash2/examples/freyd_native_inputs.lp) checks the
+original first presentation, incoming/outgoing raw morphism classes and
+existing agreement observation, with no kernel/cokernel parameters.
+The [record reviewer](../emdash2/examples/freyd_adjunction_homology.lp)
+checks the actual H object and boundary reconstruction to the original
+incoming class. These six checks and the existing selected consumer pass.
+
+Serial guarded, warning-enabled logs in `emdash2/logs/probes/`:
+
+- baseline `freyd_zero_cone_inputs-20260913-072822.log`;
+- prototype `nuh4a3_freyd_native_homology-20260913-073443.log`;
+- input source `emdash3_2_commutative_algebra_freyd_native_inputs-20260913-073716.log`;
+- H/record source `emdash3_2_commutative_algebra_freyd_adjunction_homology-20260913-073903.log`;
+- input reviewer `freyd_native_inputs-20260913-074036.log`;
+- record reviewer `freyd_adjunction_homology-20260913-074201.log`;
+- legacy reviewer `freyd_zero_cone_inputs-20260913-074351.log`;
+- record join `nuh4a3_freyd_record_dependencies-20260913-074518.log`;
+- input join `nuh4a3_freyd_input_dependencies-20260913-074558.log`.
+
+The input source/reviewer match their exact source dependency inventory at
+1,250 critical pairs / 169 pattern warnings; the H/record pair match their
+join at 1,290/169. The legacy reviewer preserves 1,255/169. All compared
+locations, heads and participant families agree; parser issues are zero.
+Three focused LHS audits and the catalog pass; source-only health is
+refreshed to 940 files. No repository aggregate or TypeScript check ran.
+
+**Next NUH-4B:** the old `chain_pair_zero_cone_map` still introduces maps
+through selected lifts and inverse mates. Reuse the existing whole
+`chain_pair_outgoing_diagram_map_func`, narrowing its unnecessary selected
+input import to the shared outgoing-diagram owner. Construct the map
+between the new direct native inputs from the original chain-map fields;
+any required comparison cell must be derived internally, with no extra
+caller naturality/functoriality-square premise and no kernel selection.
+Use existing native Hom constructors and whole action; retain the stated
+OneCat profile and the revisitable owner criterion. Then specialize to the
+raw Freyd map and apply the original H functor at actual record endpoints.
+Connecting/exactness and whole-model/reifier construction remain later.
+
 ### NUH-4A2: Original chain pairs enter H before kernel selection
 
-**Implemented after b9e5e0e5.** The unchanged outgoing-diagram observation
+**Checkpoint 515b7187, after b9e5e0e5.** The unchanged outgoing-diagram observation
 now lives in [chain-pair diagrams](../emdash2/emdash3_2_chain_pair_diagrams.lp).
 All three original definitions across the split are unchanged after comments
 and whitespace are removed. No TypeScript source refers to the moved name.

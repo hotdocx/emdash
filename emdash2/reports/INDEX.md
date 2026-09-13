@@ -45,8 +45,11 @@ NUH-3 is implemented at its ordinary-view boundary. NUH-4A1 now supplies the
 preserving actual β/H and the original whole action at record endpoints.
 NUH-4A2 adds [direct original-pair input](../emdash3_2_one_cat_chain_pair_inputs.lp)
 before universal selection and [its whole-H record](../emdash3_2_one_cat_chain_pair_homology_records.lp)
-at the literal original pair. Freyd input and map migration are next;
-concrete-model work remains later.
+at the literal original pair. NUH-4A3 adds
+[direct Freyd input](../emdash3_2_commutative_algebra_freyd_native_inputs.lp)
+and [whole-adjunction H/record views](../emdash3_2_commutative_algebra_freyd_adjunction_homology.lp),
+preserving the raw morphism classes/agreement and actual H endpoint.
+Native map migration is next; concrete-model work remains later.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
