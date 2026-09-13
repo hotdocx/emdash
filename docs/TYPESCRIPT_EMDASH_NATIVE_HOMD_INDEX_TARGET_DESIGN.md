@@ -2,11 +2,19 @@
 
 Date: 2026-09-12
 
-Status: active design evidence for NUH-1B2c–f; selected structural source-arrow/2-cell action checked, full ω-categorical target not yet qualified
+Status: retained shared-index candidate for NUH-1B2c–f; structural source-arrow/2-cell action checked, full ω-categorical target not yet qualified
 
 Parent: [implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
 Ledger: [native owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
+
+Current execution priority (2026-09-13): this document records an alternative
+target-packaging candidate. Its necessity and minimality are not established.
+NUH-1D4 first repairs the existing defined HomPresheaf classifier and then
+the direct homd_int target/projection types, following the user's request
+to preserve existing native owners and rewrite/unification architecture.
+General G:D→D′ index action remains parked. The finite analysis below is
+retained evidence, not an instruction to expand this auxiliary construction.
 
 ## Decision From The New Counterexample
 

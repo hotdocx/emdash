@@ -192,6 +192,96 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-1D4: Correct the existing HomPresheaf composition
+
+The preceding `8321a9d3` turn is progress: the direct source/fibre review
+isolated the mismatch between total Op(Hom_Z(x,y)) in HomPresheaf and
+Transpose(Hom_Z(x,y)) in the corrected native homd_ endpoint. Worktrees,
+baseline ancestry and the unchanged active source were checked at resumption.
+
+**Result (2026-09-13):** the isolated definition-only correction computes
+the required presheaf fibre and both nonidentity argument actions. The
+existing native homd_ endpoint inhabits that computed fibre. Retain this
+candidate for the direct target repair; it does not yet complete Homd.
+
+The existing defined HomPresheaf owner now has candidate type and point:
+
+```text
+HomPresheaf_catd_func : CoOnly2_cat(Z) → Catd(Reverse12_cat(Z))
+HomPresheaf(x)[y] ↪ Functor(Transpose(Hom_Z(x,y)),Cat).
+```
+
+Its body uncurries hom_int(id_Z), applies the selected internal presheaf
+operation and curries by postcomposition after Product_pair_tele_func.
+Four defined helpers provide the existing transpose-universe composition,
+an actual product-coordinate functor, the presheaf-universe composition and
+the uncurried bifunctor. The product map uses CoAbove3_func and ordinary
+projections/pairing. No category equality, cast or product-distribution rule
+is introduced. Existing primitive heads and all rewrite/unification rules
+retain their roles and full-file positions.
+
+The literal curry_func presentation typed but its point evaluation retained
+hom_precomp_along_fapp0. Changing only the observation's Catd/Functor façade
+did not resolve it. The accepted fixed-functor curry presentation uses
+existing postcomposition and pairing computation; no evaluator change was
+made to force the earlier body.
+
+For r:x→x′, the source action sends H to its precomposition along
+Transpose_func(Hom_func(r,id_y)); for s:y→y′, the contravariant y-action
+uses Transpose_func(Hom_func(id_x,s)). Both whole-function conversion checks
+pass at these existing rigid Hom owners. The source action's readable
+unary-precomposition comparison uses the existing head-local unifier via
+typed eq_refl, followed by eq_ap congruence in a TEST ONLY assertion.
+A larger direct eq_refl comparison did not propagate through the nested
+context. No extra unifier was added.
+
+The source 2-cell α:r⇒s gives a well-typed transformation from the s-action
+to the r-action, as required by CoOnly2_cat(Z). Its point component is also
+well typed. The observed normal form still contains generic higher
+postcomposition/action projections; the final expected component formula
+is **not qualified**. The focused slice excludes later Homd-dependent
+component specializations, so this observation is not a claim that the
+complete kernel fails to normalize it. Further generic whiskering/profile
+work is not selected by this result.
+
+Durable sources and gate:
+
+- [definition-only owner patch](../emdash2/audits/hom_presheaf_transpose.patch);
+- [point and actual homd_ endpoint controls](../emdash2/audits/hom_presheaf_transpose_controls.lp);
+- [source/target arrow controls](../emdash2/audits/hom_presheaf_transpose_action_controls.lp);
+- [typed source-2-cell observation](../emdash2/audits/hom_presheaf_transpose_two_cell_review.lp);
+- [guarded focused driver](../emdash2/scripts/check_hom_presheaf_transpose.sh).
+
+The driver passed in `/tmp/emdash-hom-presheaf-transpose.b0DD7D`. It checks
+baseline/candidate slices and all three reviewers serially with ordinary
+SR and the resource guard. Every stream has 1,055 critical-pair and 137
+replaceable-pattern warnings; complete inventories agree after mapping
+unchanged source lines. Strict LHS audits pass with zero unreviewed slots.
+
+The baseline includes the earlier total-op/further-shift patches. Relative
+to it this tranche adds zero primitives, rewrite rules or unification
+rules and relocates no existing rule. The copied full candidate is retained
+but not checked as a complete kernel. Its SHA-256 is
+`95c8898dd8b87f4122c2860acd1c089e0810f8e6ccb7f8ca4d896ce7d25284ea`;
+the checked candidate slice is
+`910b2c9cf0609b14be233cb5275e87058bbe14066ffcc680815480f5aac4fcf3`.
+The manifest pins baseline/reviewer hashes and records the unqualified
+higher-component and full-kernel boundaries explicitly.
+
+The focused view retains independent later constant-section/pairing and
+full fapp1 identity/composition dependencies in their original relative
+source order. These are not moved in the full candidate. The driver checks
+that all code outside the defined HomPresheaf region remains identical.
+The reviewers are non-library evidence; registered checks, catalog and
+health source metrics remain unchanged, so no aggregate was run.
+
+**Next:** repair the surrounding target's original D-family slot and the
+native projection ladder using this corrected presheaf variance. Evaluate
+the smallest existing-owner composition before selecting additional target
+packaging. Keep the primary homd_int(FF), its native meaning, primitive
+pointwise Op_catd and existing rule architecture. Auxiliary G-family action
+remains parked. NUH-1 stays active and NUH-2 source promotion is pending.
+
 ### NUH-1D3: Direct homd_int adjustment before auxiliary expansion
 
 The current task is to compare the existing homd_int declaration, target

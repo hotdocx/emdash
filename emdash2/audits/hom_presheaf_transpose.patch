@@ -1,0 +1,79 @@
+--- a/emdash3_2.lp
++++ b/emdash3_2.lp
+@@ -14673 +14673 @@
+-    HomPresheaf_Z(x)[y]       = Functor_cat(Hom_Z(x,y)^op,Cat)
++    HomPresheaf_Z(x)[y]       = Functor_cat(Transpose_cat(Hom_Z(x,y)),Cat)
+@@ -14729,4 +14729,53 @@
+-// Internalized classifier: hom-presheaf family for a represented object.
+-//
+-// Surface/formula:
+-//   HomPresheaf_Z(x)[y] = Hom_Z(x,y)^op ⊢ Cat.
++// Candidate source definitions for the existing HomPresheaf owner.
++// These are actual native functor terms, not test equality declarations.
++
++// Reuse the previously prototyped whole transpose action.
++symbol native_transpose_universe : τ (Functor (CoOnly2_cat Cat_cat) Cat_cat)
++≔ @comp_cat_fapp0 (CoOnly2_cat Cat_cat) (CoAbove3_cat Cat_cat) Cat_cat
++    native_homwise_dual
++    (@CoAbove3_func (CoAbove2_cat Cat_cat) Cat_cat op);
++
++// Native introduction into the shifted product. Apply the involutive
++// functor action to the pair of shifted projections; no category cast or
++// distribution rewrite is used.
++symbol native_shift_product_intro (A B : Cat)
++  : τ (Functor (Product_cat (CoAbove3_cat A) (CoAbove3_cat B))
++      (CoAbove3_cat (Product_cat A B)))
++≔ @CoAbove3_func
++    (CoAbove3_cat (Product_cat (CoAbove3_cat A) (CoAbove3_cat B)))
++    (Product_cat A B)
++    (Struct_sigma
++      (@CoAbove3_func (Product_cat (CoAbove3_cat A) (CoAbove3_cat B))
++        (CoAbove3_cat A) (@Product_projL_func (CoAbove3_cat A) (CoAbove3_cat B)))
++      (@CoAbove3_func (Product_cat (CoAbove3_cat A) (CoAbove3_cat B))
++        (CoAbove3_cat B) (@Product_projR_func (CoAbove3_cat A) (CoAbove3_cat B))));
++
++// C ↦ Functor(Transpose(C),Cat), with its two reversed source dimensions.
++symbol native_presheaf_universe
++  : τ (Functor (Reverse12_cat Cat_cat) Cat_cat)
++≔ @comp_cat_fapp0 (Reverse12_cat Cat_cat) (Transpose_cat Cat_cat) Cat_cat
++    (@hom_con Cat_cat Cat_cat Cat_cat (@id_func Cat_cat))
++    (@Transpose_func (CoOnly2_cat Cat_cat) Cat_cat native_transpose_universe);
++
++// Uncurry the existing internal Hom, apply the required dual functor action
++// and presheaf operation, then use the actual product-coordinate functor.
++symbol native_hom_presheaf_bifunctor [Z : Cat]
++  : τ (Functor (Product_cat (CoOnly2_cat Z) (Reverse12_cat Z)) Cat_cat)
++≔ @comp_cat_fapp0
++    (Product_cat (CoOnly2_cat Z) (Reverse12_cat Z))
++    (Reverse12_cat (Product_cat (Transpose_cat Z) Z))
++    Cat_cat
++    (@comp_cat_fapp0
++      (Reverse12_cat (Product_cat (Transpose_cat Z) Z))
++      (Reverse12_cat Cat_cat) Cat_cat
++      native_presheaf_universe
++      (@CoAbove3_func (Op_cat (Product_cat (Transpose_cat Z) Z)) (Op_cat Cat_cat)
++        (@Op_func (Product_cat (Transpose_cat Z) Z) Cat_cat
++          (@uncurry_func (Transpose_cat Z) Z Cat_cat
++            (@hom_int Z Z (@id_func Z))))))
++    (@native_shift_product_intro (CoAbove2_cat Z) (Op_cat Z));
++
++// Hom-presheaf family with the variance-only Hom source, still built
++// from native internal Hom and ordinary curry/uncurry. The fixed-functor
++// curry presentation uses postcomposition after pairing; existing generic
++// curry rules and their runtime normal forms remain unchanged.
+@@ -14734 +14783 @@
+-  : τ (Functor (CoAbove2_cat Z) (Catd_cat (Op_cat Z)))
++  : τ (Functor (CoOnly2_cat Z) (Catd_cat (Reverse12_cat Z)))
+@@ -14736,4 +14785,8 @@
+-    (CoAbove2_cat Z) (Transpose_cat (Catd_cat (CoAbove2_cat Z)))
+-    (Catd_cat (Op_cat Z))
+-    (@Presheaf_catd_func (Op_cat Z))
+-    (@Transpose_func (Op_cat Z) (Catd_cat (CoAbove2_cat Z)) (@Edge_catd_func Z));
++    (CoOnly2_cat Z)
++    (Functor_cat (Reverse12_cat Z)
++      (Product_cat (CoOnly2_cat Z) (Reverse12_cat Z)))
++    (Catd_cat (Reverse12_cat Z))
++    (@comp_cat_cov_func (Reverse12_cat Z)
++      (Product_cat (CoOnly2_cat Z) (Reverse12_cat Z)) Cat_cat
++      (@native_hom_presheaf_bifunctor Z))
++    (@Product_pair_tele_func (CoOnly2_cat Z) (Reverse12_cat Z));

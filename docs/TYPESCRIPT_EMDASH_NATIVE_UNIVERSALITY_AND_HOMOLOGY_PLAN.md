@@ -195,6 +195,15 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending preceding rows | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint |
 
+Current concrete progress (2026-09-13): NUH-1D4's isolated correction of
+the existing defined HomPresheaf classifier computes the required
+Functor(Transpose(Hom_Z(x,y)),Cat) fibre and both nonidentity argument
+actions; the original homd_ endpoint types there. It adds no primitive or
+rewrite/unification rule relative to the duality prototype. Its source
+2-cell is typed, but the final component formula and surrounding original-D
+target input remain unqualified. The active nucleus is unchanged. See
+[NUH-1D4 evidence and next action](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md#nuh-1d4-correct-the-existing-hompresheaf-composition).
+
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
 evidence to revise the design, not permission to skip an essential outcome.
@@ -251,13 +260,15 @@ Do not run an old driver that bypasses the current resource guard. Do not
 reset a worktree or accept an old patched binary to recover its result.
 
 The first target review exposed both the native section-polarity defect and
-the shifted-base mismatch. NUH-1B2c now refutes the old unrestricted y-local
-target on strict finite coefficient models, so changing its annotations is
-no longer the proposed architecture. Qualify the shared native index/module
-target, preserving the original supplied families and homd constructor.
-An arbitrary R(Z)=Z equation or new replacement-family input still rejects
-a candidate. Previously prototyped shifted-dual actions also need their
-actual strict/lax profiles; they do not follow just from object formulas.
+the shifted-base mismatch. NUH-1B2c's strict finite coefficient models
+constrain the old unrestricted y-local target. The shared native index/module
+remains a possible replacement, not a selected minimal repair. The current
+NUH-1D continuation first corrects the existing presheaf pipeline and reviews
+the surrounding native target directly, preserving the original supplied
+families and homd constructor. An arbitrary R(Z)=Z equation or new
+replacement-family input still rejects a candidate. Prototyped shifted-dual
+actions need their actual whole action; object formulas alone do not qualify
+them. Prototype strictness migration remains deferred.
 
 Historical NUH-1B1 records a polarity constraint: the old positive section over
 the opposite target base produces a reverse Hom action and a closed Empty
@@ -382,6 +393,7 @@ must not label those alternatives validated implementations.
 | D-NUH-021 | Prioritize the direct homd_int source/target and projection adjustment. The shared index is a target-packaging candidate; G:D→D′ module functoriality is auxiliary and parked. Mark typed equality probes as tests, not theory constructions |
 | D-NUH-022 | User confirms primitive pointwise Op_catd, distinct from Op_func on a classifying functor or total projection. CoAbove2_func(E) keeps object value E[x], so the internal op composite has fibre Op_cat(E[x]), not a fibre transpose; preserve the primitive head |
 | D-NUH-023 | Preserve the existing rewrite/unif architecture during the Op migration. Adapt variance within existing owners first; additions or relocations require an actual core consumer, not auxiliary-prototype or prefix-check convenience |
+| D-NUH-024 | Retain the definition-only HomPresheaf correction: its fibre agrees with native homd_ and both argument actions compute through existing Hom owners. No rule is added or moved; higher-component qualification and the original-D target slot remain pending |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

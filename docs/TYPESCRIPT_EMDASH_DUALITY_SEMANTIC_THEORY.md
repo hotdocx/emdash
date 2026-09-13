@@ -42,7 +42,7 @@ been replaced by the prototype.
 | CoAbove2_cat | absent | native category constructor, with Hom computing to Op of the original Hom |
 | CoAbove3_cat | absent | supporting shifted constructor, with Hom computing to CoAbove2 of the original Hom |
 | Transpose_cat / CoOnly2_cat / Reverse12_cat | absent | transparent compositions of the selected constructors |
-| Homd target | old section-family composite | shared native index and whole target-family prototype; native integration unfinished |
+| Homd target | old section-family composite | corrected HomPresheaf composition checked in isolation; surrounding target unfinished; shared index remains an alternative candidate |
 | general D_S API | absent | not proposed or implemented |
 
 The relevant source artifacts are the
@@ -53,6 +53,16 @@ The relevant source artifacts are the
 [whole-family prototype](../emdash2/audits/native_index_family_prototype.lp).
 They run against copied owner-position prefixes. They are not imported into
 the active library.
+
+The subsequent [HomPresheaf owner patch](../emdash2/audits/hom_presheaf_transpose.patch)
+corrects an existing defined classifier. Its guarded
+[focused gate](../emdash2/scripts/check_hom_presheaf_transpose.sh) checks the
+fibre Functor(Transpose(Hom_Z(x,y)),Cat), the actual homd_ endpoint and
+both nonidentity argument actions. This tranche introduces only defined
+helper terms and changes that defined composition; it adds or relocates
+no rewrite/unification rule. Its typed source-2-cell component is an
+observation, not yet a verified component formula. The remaining target
+input/projection work is recorded in NUH-1D4 of the owner ledger.
 
 Reviewer declarations such as a typed eq_refl assertion are tests of those
 candidate rules. They are not the operations implementing duality. In
