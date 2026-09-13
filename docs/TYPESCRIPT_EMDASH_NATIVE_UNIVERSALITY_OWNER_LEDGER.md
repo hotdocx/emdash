@@ -310,6 +310,77 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6a: Whole product pairing — unpromoted experiment
+
+**Active after e9611e3c; no library source mutation.** The categorical
+subplan records the owner audit: BinaryProducts retains the original whole
+P and projection transformations, but its represented pairing only varies
+the source with the two targets fixed. PreadditiveCategory does not supply
+a whole varying-family addition transfor. The separate PullbackStructure
+capability has not been constructed from the native Abelian package.
+
+The proposed ordinary structural presentation supplies Δ⊣P over the same
+P/BP, with counit (π₁,π₂) and unit components the original diagonal pairing.
+An ordinary product-category profile is the other proposed structural
+operation. Both would be explicit primitive/model obligations, as the
+current opaque classifiers do not derive them from their β interface.
+Neither has been promoted. No whole fibre product, cover or δ is supplied
+by this experiment.
+
+Recovery files under `emdash2/tmp/probes/`:
+
+- `nuh4c6_product_adjunction.lp`: candidate presentation and diagonal rules;
+- `nuh4c6_product_family_pairing.lp`: four defined native pair/unpair
+  operations and both inverse-cancellation assertions;
+- `build_nuh4c6_pair_point.py` and `nuh4c6_pair_point.lp`: whole formula and
+  original component-agreement attempt;
+- `nuh4c6_diagonal_corners.lp`: six typed reduction-order controls;
+- `nuh4c6b_product_adjunction.lp`: rejected proof-time-only alternative for
+  the raw/native object folds, including projected endpoint comparisons.
+
+Native pair/unpair checks pass in
+`nuh4c6_product_family_pairing-20260913-190019.log`. Whole formula alignment
+advanced after a narrow associativity comparison, but component agreement
+still fails in `nuh4c6_pair_point-20260913-190440.log`: evaluation of the
+paired transformation remains a different presentation from the pair of
+evaluated components. This is an unfinished comparison, not evidence that
+the mathematical product pairing is invalid.
+
+Fresh unchanged-dependency baseline
+`nuh4c6_product_dependencies-20260913-191045.log` passes with 1214 critical
+pairs / 167 replaceable-pattern warnings. The corner reviewer passes in
+`nuh4c6_diagonal_corners-20260913-191348.log`, with 1222 / 167. The exact
+warning delta is six comp_fapp0/comp_fapp0 and two
+hom_postcomp_fapp0/hom_postcomp_fapp0 instances, located at the two new
+object folds; no warnings disappear and neither inventory has parser
+diagnostics. The six raw-composition instances involve associativity,
+identity, constant composition, native precomposition and the two original
+triangular projection actions. The two native-postcomposition instances
+involve nested postcomposition and identity.
+
+The typed corner reviewer confirms that (G,G)∘F and (G∘F,G∘F) retain
+different whole normal forms, although their object and arrow actions
+agree. The corresponding constant-composition forms likewise remain
+distinct while their object observations agree. The identity corner joins.
+The negative assertions record missing conversion, not inequivalence.
+Full qualification of all eight families is therefore still open.
+
+The proof-time-only alternative fails counit subject reduction in
+`nuh4c6b_product_adjunction-20260913-191158.log` and, after adding projected
+endpoint comparisons, `nuh4c6b_product_adjunction-20260913-191243.log`.
+The unresolved type equations are σᵢ(Δ∘P)=P. Do not promote this alternative
+or bypass subject reduction. All logs above are under `emdash2/logs/probes/`;
+all checker runs are serial, guarded and bounded by 90 seconds.
+
+**Next:** refine the native whole/projection presentation while preserving
+existing composition, constant and triangular owners. Require original
+component agreement, whole inverse/projection recovery, retained Hom action,
+and typed overlap qualification before installing a product-adjunction
+presentation. Do not solve the local failure by a blanket product-composition
+or constant-family normalization change. C5 remains the latest implemented
+milestone; fibre-product/cover/δ, output exactness and the later model/reifier
+and snake work are unchanged obligations.
+
 ### NUH-4C5: Whole short-exact row comparisons and inverses
 
 **Implemented after bb83a8b0.** The existing

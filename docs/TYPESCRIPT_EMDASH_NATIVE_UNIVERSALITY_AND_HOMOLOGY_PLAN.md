@@ -41,6 +41,16 @@ required. Keep formal programs independent of ordinary factor dictionaries;
 record and qualify any missing whole interface at its actual consumer.
 Concrete model/reifier construction and the snake comparison remain later.
 
+C6a is currently an unpromoted product-interface experiment. Native whole
+pairing and both inverse-mate cuts check in the prototype, but agreement
+with the original selected pairing at each object remains unfinished.
+The proposed literal-diagonal runtime folds introduce eight overlaps;
+typed composite/constant corners retain different whole normal forms even
+where object and arrow observations agree. A proof-time-only alternative
+fails counit subject reduction. No C6a source or rule is installed in the
+active library. The categorical subplan and owner ledger record the exact
+evidence and the next interface-qualification boundary.
+
 The completed C4b milestone (2026-09-13): the
 [canonical whole image-to-kernel comparison](../emdash2/emdash3_2_one_cat_image_kernel_comparison.lp)
 is constructed from the existing H boundary, its derived whole annihilation,

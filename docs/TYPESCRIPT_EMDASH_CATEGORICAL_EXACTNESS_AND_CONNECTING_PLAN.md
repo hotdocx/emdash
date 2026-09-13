@@ -193,6 +193,49 @@ that the current owners do not provide. Then construct the cover, covered
 map and coimage descent below and prove output exactness from the original
 short-exact-family data and Abelian structure.
 
+Current C6a owner audit: BinaryProducts retains a whole P and whole
+projections, but its pairing is only supplied at fixed target objects.
+PreadditiveCategory retains ordinary Hom-group operations, not a whole
+varying-family addition transfor. PullbackStructure is a separate coherent
+slice-base-change capability; the current Abelian package does not derive
+or supply it. Do not silently import that capability as the fibre-product
+construction promised here.
+
+The proposed first prerequisite is the native ordinary product adjunction
+Δ⊣P at that same P/BP. The existing Adjunction classifier has no constructor
+from its current unit/counit β interface. Its proposed explicit ordinary
+structural presentation has counit equal to the existing pair of whole
+projections and unit components equal to the existing diagonal pairing.
+The ordinary product-category profile is likewise a structural closure
+operation: today's groupoidal-product comparison stops before a whole
+inverse constructor. Record both operations as primitive/model obligations,
+not derived β theorems. Generic family adjunction lifting and native mate
+cuts must then construct whole varying-target pairing, preserving P and its
+existing components/actions. This is a prerequisite, not a completed
+pullback, cover or connecting construction.
+
+The current ignored C6a prototype supplies these two structural operations
+and constructs native whole pair/unpair functors by the existing family
+mates. Both inverse cancellations check, retaining the complete input.
+This does not yet qualify the interface: the original component-pairing
+agreement proof is unfinished, and the literal-diagonal runtime folds
+introduce eight additional overlap instances. In particular, existing
+associativity leaves (G,G)∘F where the new diagonal fold leaves
+(G∘F,G∘F); existing constant composition likewise retains a different
+whole owner. Typed tests show distinct whole normal forms with agreeing
+object/arrow observations, not a mathematical inequivalence.
+
+Replacing the raw and native object-level folds with proof-time comparisons
+has also been tried. It fails subject reduction of the counit rule at the
+projected source σᵢ(Δ∘P), including a variant with projection comparisons.
+That rejected alternative is not an installed rule. Preserve both
+experiments, refine the whole/projection interface, and qualify the
+remaining overlap families and actual component/action agreement before
+promotion. Do not broaden product-composition or constant-family runtime
+normalization merely to close this probe. No C6a implementation or new
+primitive is currently in the active library. The owner ledger records
+the bounded logs and recovery paths.
+
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes
 the walking-arrow square of a unit/counit through the existing internal
