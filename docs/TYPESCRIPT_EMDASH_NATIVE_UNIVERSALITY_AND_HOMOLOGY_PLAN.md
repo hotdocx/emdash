@@ -233,12 +233,17 @@ NUH-3C1 now constructs native inputs directly from b,d,d∘b=0, and supplies
 the initial dual, using the existing whole native square action with explicit
 OneCat. The resulting input enters whole H before any kernel selection.
 
-Next NUH-3C2: derive reconstruction and the needed ordinary universal records
-from the whole adjunction comparison, without transferring uniqueness from
-W/V or assuming arbitrary diagram eta. Migration of the packaged chain-pair
-and Freyd inputs, connecting/exactness and concrete model/reifier workflow
-remain outstanding. Continue on the current preadditive/ordinary homology
-baseline and preserve its explicit interpretation qualifications.
+NUH-3C2 now derives k∘lift(h)=h₀ and colift(h)∘q=h₁ by whole mate
+cancellation, and both structural zero equations from the unit/counit.
+Independent diagram observations no longer import selected universal owners;
+the old proof bodies delegate through the presentation adapters.
+
+Next NUH-3C3: establish the needed whole diagram representation/faithfulness
+comparison, then derive full ordinary uniqueness without W/V. Arbitrary
+diagram eta is not yet proved. Migration of the packaged chain-pair and
+Freyd inputs, connecting/exactness and concrete model/reifier workflow remain
+outstanding. Continue on the current preadditive/ordinary homology baseline
+and preserve its explicit interpretation qualifications.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -437,6 +442,7 @@ must not label those alternatives validated implementations.
 | D-NUH-026 | User defers Op/duality migration until after this goal. Preserve all checkpoints and the unfinished NUH-1D6 stage; remove NUH-1/2 from current prerequisites and completion gates; start NUH-3 on the unchanged active nucleus |
 | D-NUH-027 | Whole K/Q structures and their mates now take native functors and adjunction evidence without W/V. The single whole H-family implementation takes these structures; legacy presentations delegate through one-way adapters. Ordinary records and raw input conversion must remove their remaining selected dependencies separately |
 | D-NUH-028 | Raw zero-composite data now enters native zero-arrow cones via the existing whole square action, with explicit OneCat and canonical introduced diagram endpoints. Keep this as an input adapter; derive ordinary universality from the adjunction, without assuming arbitrary diagram eta or introducing factor dictionaries |
+| D-NUH-029 | Reconstruction and structural annihilation now derive from whole mate cancellation and the unit/counit, independently of W/V. Full ordinary uniqueness still needs the native walking-arrow representation/faithfulness comparison; do not infer equality of arbitrary transformations from component observations alone |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

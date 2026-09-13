@@ -1,5 +1,6 @@
 /* Reusable compatibility proofs; not the implementation of whole H. */
 require open emdash.emdash3_2_kernel_adjunction_unmates;
+require open emdash.emdash3_2_kernel_cokernel_adjunction_observations;
 
 // The standard counit formula, observed at the walking-arrow source.
 symbol kernel_presentation_unlift_source_semantic_path [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
@@ -9,13 +10,8 @@ symbol kernel_presentation_unlift_source_semantic_path [C : Cat] [S : τ (@Pread
   : τ (@= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
       (@terminal_arrow_test_incoming C t T X d (@fapp0 _ _ (@kernel_presentation_unlift_func C S t T W P X d) f))
       (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_presentation_inclusion C S t T W P)) f))
-≔ @eq_ap
-    (Functor (Hom_cat C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d)) (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
-    (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
-    (λ L : τ (Functor (Hom_cat C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d)) (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d)),
-      @tapp0_fapp0 WalkingArrow_cat C (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d walking_arrow_src (@fapp0 _ _ L f))
-    (@adjunction_untranspose_func C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P) X d) (@adjunction_untranspose_semantic_func C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P) X d)
-    (@adjunction_untranspose_semantic_path C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P) X d);
+≔ @kernel_adjunction_unlift_source_path C S t T
+    (@kernel_presentation_structure C S t T W P) X d f;
 
 // Package the common-middle choice together with both arrows.
 symbol kernel_presentation_unlift_composition_input_path [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]

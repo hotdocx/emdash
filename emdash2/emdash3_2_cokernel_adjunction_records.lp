@@ -5,6 +5,7 @@
    primitive, rewrite or unification rule is introduced. Proof transport is
    confined to universality; its computational centre is explicitly installed. */
 require open emdash.emdash3_2_cokernel_adjunction_mates;
+require open emdash.emdash3_2_kernel_cokernel_adjunction_observations;
 
 // Object and projection are the actual whole Q/unit observations.
 symbol cokernel_record_frame_path [C : Cat] [S : τ (@PreadditiveCategory C)]
@@ -93,11 +94,8 @@ symbol cokernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
   : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d))
       (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) (@terminal_arrow_test_outgoing C d))
       (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)))
-≔ @initial_arrow_test_chain_path C S t T (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) d
-    (@tapp0_fapp0 _ _ _ _ d
-      (@unit_adj_transf (Functor_cat WalkingArrow_cat C) C
-        (@cokernel_presentation_func C S t T W P) (@initial_arrow_diagram_func C t T)
-        (@cokernel_presentation_adjunction C S t T W P)));
+≔ @cokernel_adjunction_annihilation C S t T
+    (@cokernel_presentation_structure C S t T W P) d;
 
 symbol cokernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]

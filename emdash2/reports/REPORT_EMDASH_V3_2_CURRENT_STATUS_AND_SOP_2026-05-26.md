@@ -20,9 +20,11 @@ action and selected views pass focused checks with unchanged warning
 inventories. NUH-3C1 supplies
 [direct raw zero-composite inputs](../emdash3_2_one_cat_zero_arrow_inputs.lp)
 through existing whole square action; their components and whole H consumer
-pass. Derived ordinary records, migration of packaged input adapters and
-model/reifier work remain pending. No new primitive, rewrite or unifier is
-added in these tranches.
+pass. NUH-3C2 derives [reconstruction and annihilation](../emdash3_2_kernel_cokernel_adjunction_observations.lp)
+from whole mates and the unit/counit; legacy proofs delegate to these
+independent observations. Full ordinary uniqueness still needs a native
+diagram-faithfulness comparison. Packaged input and model/reifier migration
+remain pending. No new primitive, rewrite or unifier is added in these tranches.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

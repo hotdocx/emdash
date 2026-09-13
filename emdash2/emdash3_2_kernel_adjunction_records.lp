@@ -132,12 +132,8 @@ symbol kernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
       (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
     (@preadditive_hom_zero C S (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
       (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)))
-≔ @terminal_arrow_test_chain_path C S t T
-    (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) d
-    (@tapp0_fapp0 _ _ _ _ d
-      (@counit_adj_transf C (Functor_cat WalkingArrow_cat C)
-        (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
-        (@kernel_presentation_adjunction C S t T W P)));
+≔ @kernel_adjunction_annihilation C S t T
+    (@kernel_presentation_structure C S t T W P) d;
 
 symbol kernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]

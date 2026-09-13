@@ -4305,6 +4305,15 @@ boundary agrees with the actual mate by the whole adjunction comparison.
 This does not assert arbitrary diagram eta or yet derive every ordinary
 universal record.
 
+Reconstruction and structural annihilation now derive from the whole
+adjunctions without the old selected records (NUH-3C2). The inverse kernel
+mate has source component k∘f; cancelling the whole mate pair proves
+k∘lift(h)=h₀. Dually, colift(h)∘q=h₁. The counit and unit also give
+d∘k=0 and q∘d=0. These are derived observations of the whole operations.
+Full ordinary uniqueness still needs the native diagram representation or
+faithfulness comparison; it is not inferred merely from observing equal
+components of two arbitrary diagram transformations.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
