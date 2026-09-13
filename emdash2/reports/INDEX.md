@@ -84,7 +84,11 @@ original selections and Hom action are qualified. C3 now supplies the
 and [native Abelian package](../emdash3_2_one_cat_abelian_adjunctions.lp),
 retaining the original additive structure and whole K/Q. Normality remains
 supplied; canonical exactness, direct whole δ and concrete-model/reifier
-construction remain required.
+construction remain required. C4a now supplies [whole cokernel descent](../emdash3_2_one_cat_cokernel_family_descent.lp)
+at arbitrary original diagram families, with native reconstruction,
+uniqueness and retained action. Canonical Coim⇒Im shares its introduced
+constructor; its old computation is preserved. C4b must still construct
+the actual image-to-kernel comparison before exactness and δ.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

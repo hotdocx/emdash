@@ -173,6 +173,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_terminal_family_paths.lp"),
     Path("emdash3_2_one_cat_diagram_family_paths.lp"),
     Path("emdash3_2_one_cat_kernel_cokernel_family_paths.lp"),
+    Path("emdash3_2_one_cat_cokernel_family_inputs.lp"),
+    Path("emdash3_2_one_cat_cokernel_family_descent.lp"),
     Path("emdash3_2_one_cat_image_coimage_comparison.lp"),
     Path("emdash3_2_one_cat_adjunction_normality.lp"),
     Path("emdash3_2_one_cat_abelian_adjunctions.lp"),

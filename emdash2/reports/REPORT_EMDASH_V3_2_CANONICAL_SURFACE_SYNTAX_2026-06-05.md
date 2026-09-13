@@ -2006,6 +2006,14 @@ native precomposition endpoints. `OneCatAbelianAdjunctionStructure` stores
 original P/Q and that fixed-a normality over an existing AdditiveCategory;
 it does not infer normality or introduce a second equivalence grammar.
 
+`one_cat_cokernel_family_input(D,Y,u,z)` forms the whole D⇒I∘Y at the
+original D, where z is one whole u∘∂D=0 cell. Its introduced-diagram case
+is `one_cat_cokernel_family_introduced_input`; canonical Coim⇒Im now shares
+that constructor. `one_cat_cokernel_family_descent` applies the original
+native mate to give Q∘D⇒Y, with `*_reconstruction` and `*_unique` as whole
+path observations. The native inverse returns the full coherent input.
+These names introduce no pointwise cone syntax or new runtime inverse law.
+
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these
 agreements. Formal whole action remains the runtime owner for generic

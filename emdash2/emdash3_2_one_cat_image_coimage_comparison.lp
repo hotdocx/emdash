@@ -9,6 +9,7 @@ require open emdash.emdash3_2_one_cat_adjunction_family_views;
 require open emdash.emdash3_2_one_cat_adjunction_zero_column_views;
 require open emdash.emdash3_2_one_cat_image_coimage_factors;
 require open emdash.emdash3_2_one_cat_arrow_diagrams;
+require open emdash.emdash3_2_one_cat_cokernel_family_inputs;
 
 // The original whole u:ev₀⇒Im reconstructs ∂ under projected inverse mating.
 symbol one_cat_source_to_image_projection_path [C : Cat] [S : τ (@PreadditiveCategory C)]
@@ -346,82 +347,13 @@ symbol one_cat_coimage_image_mate_input [C : Cat] [S : τ (@PreadditiveCategory 
     WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
     WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
     (@cokernel_adjunction_arrow_func C S t T0 Q))))
-≔ @comp_fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C))
-  (@kernel_adjunction_arrow_func C S t T P) (@transf_arrow_diagram_func (Functor_cat WalkingArrow_cat C) C
-  (@Const_func (Functor_cat WalkingArrow_cat C) C t) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C)
-  (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-  WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-  (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-  WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-  (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-  WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-  WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-  (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-  (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C
-  t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat
-  (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat
-  WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q)))
-  (@defiso_to _ _ _ (@one_cat_initial_arrow_family_iso (Functor_cat WalkingArrow_cat C) C C1 t T0 (@fapp0 (Functor_cat
-  (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-  (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S
-  t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-  WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-  (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-  WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-  WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-  (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
-  (@sym_func_func_transf WalkingArrow_cat (Functor_cat WalkingArrow_cat C) C (@walking_arrow_func (Functor_cat
-  (Functor_cat WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@diagram_evaluation_at_func
-  WalkingArrow_cat C walking_arrow_src) (@kernel_adjunction_inclusion C S t T P)) (@walking_arrow_func (Functor_cat
-  (Functor_cat WalkingArrow_cat C) C) (@Const_func (Functor_cat WalkingArrow_cat C) C t) (@fapp0 (Functor_cat
-  (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-  (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S
-  t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-  WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-  (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-  WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-  WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-  (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-  (@one_cat_square_diagram_transf (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@one_cat_functor_category
-  (Functor_cat WalkingArrow_cat C) C C1)
-      (@kernel_adjunction_func C S t T P) (@Const_func (Functor_cat WalkingArrow_cat C) C t)
-        (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@fapp0 (Functor_cat (Functor_cat
-        WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-        (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
-        (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))
-      (@kernel_adjunction_inclusion C S t T P) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-        WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-        (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-        WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-        WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-        (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
-        (@diagram_family_transf (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat
-        WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
-        (@kernel_adjunction_func C S t T P)) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
-        (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q) (@path_to_hom (Hom_cat (Functor_cat (Functor_cat
-        WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat
-        C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func
-        (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-        (@cokernel_adjunction_arrow_func C S t T0 Q))) (@comp_fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-        (@kernel_adjunction_func C S t T P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@fapp0
-        (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat
-        WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
-        (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))
-        (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q) (@kernel_adjunction_inclusion C S t T P)) (@comp_fapp0
-        (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@Const_func (Functor_cat
-        WalkingArrow_cat C) C t) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat
-        C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C)
-        (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t
-        T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0
-        (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0)
-        (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat
-        (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat
-        WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q)))
-        walking_arrow_src walking_arrow_tgt walking_arrow_generator) (@diagram_family_transf (Functor_cat
-        WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat
-        WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P))
-        walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-      (@one_cat_source_to_image_kills_kernel_path C S C1 t T T0 P Q))));
+≔ @one_cat_cokernel_family_introduced_input (Functor_cat WalkingArrow_cat C) C C1 t T T0
+    (@kernel_adjunction_func C S t T P)
+    (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src)
+    (@fapp0 _ _ (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
+      (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))
+    (@kernel_adjunction_inclusion C S t T P) (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q)
+    (@one_cat_source_to_image_kills_kernel_path C S C1 t T T0 P Q);
 
 // The canonical a:Coim⇒Im is the original whole cokernel mate of that input.
 symbol one_cat_coimage_image_comparison [C : Cat] [S : τ (@PreadditiveCategory C)]
@@ -456,82 +388,13 @@ symbol one_cat_coimage_image_input_target_path [C : Cat] [S : τ (@PreadditiveCa
         WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
         (@cokernel_adjunction_arrow_func C S t T0 Q))) (@one_cat_coimage_image_mate_input C S C1 t T T0 P Q)
         walking_arrow_tgt) (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q))
-≔ @one_cat_diagram_family_evaluation_comp_path (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C C1
-  walking_arrow_tgt
-    (@kernel_adjunction_arrow_func C S t T P) (@transf_arrow_diagram_func (Functor_cat WalkingArrow_cat C) C
-      (@Const_func (Functor_cat WalkingArrow_cat C) C t) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C)
-      (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func
-      (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-      WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-      (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-      WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-      (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-      (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-      WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q))) (@defiso_to _ _ _ (@one_cat_initial_arrow_family_iso (Functor_cat
-      WalkingArrow_cat C) C C1 t T0 (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-      WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-      WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-      (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-      WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
-      (@sym_func_func_transf WalkingArrow_cat (Functor_cat WalkingArrow_cat C) C (@walking_arrow_func (Functor_cat
-      (Functor_cat WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@diagram_evaluation_at_func
-      WalkingArrow_cat C walking_arrow_src) (@kernel_adjunction_inclusion C S t T P)) (@walking_arrow_func
-      (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@Const_func (Functor_cat WalkingArrow_cat C) C t) (@fapp0
-      (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat
-      WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
-      (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q)) (@diagram_family_transf
-      (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C
-      (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-      (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func
-      C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt
-      walking_arrow_generator)) (@one_cat_square_diagram_transf (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-      (@one_cat_functor_category (Functor_cat WalkingArrow_cat C) C C1) (@kernel_adjunction_func C S t T P)
-      (@Const_func (Functor_cat WalkingArrow_cat C) C t) (@diagram_evaluation_at_func WalkingArrow_cat C
-      walking_arrow_src) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C))
-      (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C)
-      (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t
-      T0 Q)) (@kernel_adjunction_inclusion C S t T P) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-      WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-      (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat
-      WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat
-      WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
-      (@diagram_family_transf (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat
-      WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
-      (@kernel_adjunction_func C S t T P)) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
-      (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q) (@path_to_hom (Hom_cat (Functor_cat (Functor_cat
-      WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C)
-      (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func
-      (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
-      (@cokernel_adjunction_arrow_func C S t T0 Q))) (@comp_fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) C)
-      (@kernel_adjunction_func C S t T P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@fapp0
-      (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat
-      WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
+≔ @one_cat_cokernel_family_introduced_target_path (Functor_cat WalkingArrow_cat C) C C1 t T T0
+    (@kernel_adjunction_func C S t T P)
+    (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src)
+    (@fapp0 _ _ (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
       (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))
-      (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q) (@kernel_adjunction_inclusion C S t T P)) (@comp_fapp0
-      (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@kernel_adjunction_func C S t T P) (@Const_func (Functor_cat
-      WalkingArrow_cat C) C t) (@fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C))
-      (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C)
-      (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t
-      T0 Q)) (@diagram_family_transf (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat
-      WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) (@fapp0 (Functor_cat
-      (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (Functor_cat (Functor_cat WalkingArrow_cat C)
-      C) (@comp_cat_cov_func (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C
-      (@kernel_adjunction_func C S t T P)) (@cokernel_adjunction_arrow_func C S t T0 Q))) walking_arrow_src
-      walking_arrow_tgt walking_arrow_generator) (@diagram_family_transf (Functor_cat WalkingArrow_cat C)
-      WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-      (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P)) walking_arrow_src walking_arrow_tgt
-      walking_arrow_generator)) (@one_cat_source_to_image_kills_kernel_path C S C1 t T T0 P Q))));
+    (@kernel_adjunction_inclusion C S t T P) (@one_cat_adjunction_source_to_image C S C1 t T T0 P Q)
+    (@one_cat_source_to_image_kills_kernel_path C S C1 t T T0 P Q);
 
 // Observe a supplied whole b by E₀(unmate_P(E₁(transpose_Q(b)))).
 // This is a function on whole transformations, not a new categorical primitive

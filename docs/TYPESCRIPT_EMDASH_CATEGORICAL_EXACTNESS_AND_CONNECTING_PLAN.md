@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C3 fixed-comparison normality, whole inverse and native Abelian package qualified; canonical exactness/connecting next; Op/duality deferred
+Status: C4a whole cokernel descent at original diagram families qualified; C4b canonical image-to-kernel comparison next; exactness/connecting unfinished; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -84,7 +84,7 @@ construction and comparison with the old normality providers remain later
 model obligations. This is the native condition and its computational
 consumer, not a proof that every whole pre-Abelian presentation is Abelian.
 
-C4 is the next construction. For whole h:J∘A⇒D over an arbitrary B, put
+C4b is the next construction. For whole h:J∘A⇒D over an arbitrary B, put
 f=E₀(h) and β=mate_P(h):A⇒K∘D. At the original Arr(f), derive β∘κ_f=0
 through whole projected inverse-mate faithfulness, then use native cokernel
 mating to obtain β̄:Coim∘Arr(f)⇒K∘D. Define
@@ -100,6 +100,48 @@ algorithm or a new comparison axiom. Applying it to the existing
 ZeroArrowCone category gives the canonical exactness owner. Its
 invertibility is the exactness condition; the LES proof must derive that
 condition at its actual output, rather than assume the desired theorem.
+
+C4a now provides [whole original-family inputs](../emdash2/emdash3_2_one_cat_cokernel_family_inputs.lp)
+and [cokernel descent with characterization](../emdash2/emdash3_2_one_cat_cokernel_family_descent.lp).
+For D:B→Arr(C), u:E₁D⇒Y and one whole annihilation cell z:u∘∂D=0:
+
+```text
+ρ_D : D ⇒ Arr(∂D)
+h(D,u,z) : D ⇒ I∘Y
+desc(D,u,z) = untranspose_Q(h(D,u,z)) : Q∘D ⇒ Y
+transpose_Q(desc(D,u,z)) ≡ h(D,u,z)
+E₁(transpose_Q(desc(D,u,z))) = u.
+```
+
+The canonical zero is the whole composite through const_t, using the
+original terminal/initial arrow families. An introduced-diagram input comes
+from one native square in Functor_cat(B,C), exchange, and the initial-family
+normalizer. For an arbitrary D, apply the existing reconstruction inverse
+to Sym(D) in Functor_cat(B,C) and exchange back to ρ_D. Its whole endpoints
+are identities; compose the introduced input with ρ_D. This leaves D itself
+as the argument of Q, so no reconstructed diagram or replacement universal
+selection becomes the result's endpoint. Input formation and both target
+observations depend only on the diagram/terminal-family interfaces; the
+cokernel structure enters at descent, not during input formation.
+
+The native inverse mate recovers this entire coherent input. Whole evaluation
+recovers u, and the existing projected mate faithfulness gives uniqueness:
+E₁(transpose_Q(b))=u ⇒ b=desc(D,u,z). These are internal whole paths, not
+caller per-object cone/naturality premises. Generic raw-formula agreement
+retains components, arbitrary parameter maps and the next Hom functor.
+The original C2c4 comparison input and its target-view proof now call the
+same introduced constructor; exact comparison with their old bodies passes.
+The original a, its normality data and H selections therefore keep their
+computational owners. No new primitive, runtime rule or unifier is added.
+
+C4b remains: for β=mate_P(h) at a whole zero-family, derive β∘κ_f=0,
+apply this descent to the original restricted Arr(κ), and compose with
+(a restricted to Arr(f))⁻¹. A successful full-owner temporary comparison
+relates diagram-family shape-arrow evaluation to prewhiskering by the same
+family. It is not promoted: the actual restricted κ/annihilation consumer,
+retained action and negative controls must qualify any required comparison.
+Do not infer that the canonical image-to-kernel map or exactness theorem is
+already constructed from the general descent helper alone.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

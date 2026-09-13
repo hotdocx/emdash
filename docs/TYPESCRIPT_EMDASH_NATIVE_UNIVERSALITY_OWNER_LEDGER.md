@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C3 fixed-comparison normality, whole inverse and native Abelian package qualified; canonical exactness/connecting next; Op/duality deferred
+Status: C4a whole cokernel descent at original diagram families qualified; C4b canonical image-to-kernel comparison next; exactness/connecting unfinished; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,97 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C4a: Whole cokernel descent at the original diagram family
+
+**Implemented after 65faa183.** The two new owners contain nine definitions.
+The [input owner](../emdash2/emdash3_2_one_cat_cokernel_family_inputs.lp)
+defines canonical whole zero, introduced input, family reconstruction,
+original-family input and both whole target observations (six definitions).
+Its imports require no kernel/cokernel structure. The three-definition
+[descent owner](../emdash2/emdash3_2_one_cat_cokernel_family_descent.lp)
+then introduces the cokernel adjunction, applies the native mate, and proves
+reconstruction and uniqueness. No primitive, runtime rule,
+unifier, ordinary universal record or replacement selection is introduced.
+
+The introduced case reuses the native square in Functor_cat(B,C), exchange
+and the accepted initial-family normalizer. A single whole z:u∘k=0 supplies
+its internal cell. The arbitrary-family case uses the existing reconstruction
+inverse at Sym(D) in Functor_cat(B,C), with its existing OneCat profile.
+Exchanging back gives ρ_D:D⇒Arr(∂D) with identity whole endpoints.
+The resulting h:D⇒I∘Y therefore retains u as its entire target. The
+cokernel mate is evaluated at D itself, not at Arr(∂D). This is the
+retained-selection boundary needed by later exactness and δ.
+
+Native inverse cancellation returns the full h, including its reconstruction
+data. Whole target reconstruction gives E₁(transpose_Q(desc))=u. Existing
+projected cokernel-mate faithfulness proves uniqueness against a competing
+whole map with that same reconstruction. The zero cell and comparison
+proofs are whole internal data; no per-object naturality/functoriality
+premise is added to the formal program.
+
+The canonical Coim⇒Im input and its whole target proof now delegate to the
+introduced constructor and its view. Exact comparison with the original
+source bodies confirms unchanged computation for both. Canonical a and its
+inverse/normality interfaces continue to pass; this is sharing an existing
+program, not substituting an isomorphic selected input.
+
+There are 16 new assertions: seven for both reconstruction endpoints, their
+parameter Hom action, whole u recovery and noncollapse; nine for whole native
+cancellation, original Q(D(b)) endpoints, reconstruction/uniqueness, wrong-
+input rejection, raw whole-formula agreement, components, arbitrary base
+arrows and the next Hom functor with its retained endpoints. One reviewer
+helper derives raw-formula agreement through the existing family mate view.
+All operations remain internal transformations with the B-action retained.
+
+Final warning-enabled, serial resource-guarded checks (≤90 seconds each)
+are recorded under `emdash2/logs/probes/`:
+
+| Target | Log |
+| --- | --- |
+| Input source | `emdash3_2_one_cat_cokernel_family_inputs-20260913-165316.log` |
+| Descent source | `emdash3_2_one_cat_cokernel_family_descent-20260913-165320.log` |
+| Input reviewer | `one_cat_cokernel_family_inputs-20260913-165324.log` |
+| Descent reviewer | `one_cat_cokernel_family_descent-20260913-165327.log` |
+| Exact old/new input and proof conversion | `nuh4c4_old_input_conversion-20260913-165331.log` |
+| Initial introduced-input specialization | `nuh4c4_input_specialization-20260913-164116.log` |
+| Retained full comparison/characterization | `one_cat_image_coimage_comparison-20260913-165336.log` |
+| Retained fixed-a normality/inverse | `one_cat_adjunction_normality-20260913-165344.log` |
+| Input dependency-only join | `nuh4c4_inputs_dependencies-20260913-165210.log` |
+| Descent dependency-only join | `nuh4c4_descent_dependencies-20260913-165214.log` |
+| Descent reviewer dependency-only join | `nuh4c4_descent_reviewer_dependencies-20260913-165218.log` |
+
+Sources and reviewers match the appropriate dependency-only joins exactly
+at 1208 critical pairs / 159 replaceable-pattern warnings. Retained comparison
+and normality match the pre-edit normality baseline `162714` exactly too.
+The comparisons include categories, locations, term heads, participant-rule
+families and parser diagnostics. No new warning or source-local warning is
+hidden by counts. The old/new conversion probe retains the literal prior
+source bodies and checks both the shared input and its target proof by
+conversion; all public types and the original canonical a body are unchanged.
+
+The input owner's 35-module import closure contains no kernel/cokernel
+module; the whole structure first enters at descent. All three edited/new
+sources pass the strict LHS audit (no clauses added).
+Strict catalog freshness, shell syntax, active-reference/header lint and
+source-only health pass (985 registered files; no aggregate typecheck).
+Changed Markdown links, exact staged scope and whitespace are checked before
+the local checkpoint. No TypeScript or repository-wide checker is run.
+
+C4b next derives the whole kernel mate's annihilation at the incoming
+arrow family. The preserved experiment
+`nuh4c4_family_differential_reindex_candidate.lp` passes two whole evaluation/
+prewhiskering views against the full temporary owner
+`nuh4c4_differential_reindex_owner.lp`; the earlier direct view failed in
+`nuh4c4_family_differential_view-20260913-163105.log`. This proposed proof-time
+comparison is not installed. It compares original family factors, endpoint
+evaluations and the shape arrow; an actual restricted-κ consumer and full
+SOP qualification remain required before promotion. Keep all active
+runtime and unification owners unchanged for this C4a checkpoint.
+
+The canonical Im(f)→K(g), categorical exactness and δ remain unfinished;
+concrete model/reifier work and the snake comparison are still required.
+The active goal and all user deferrals are unchanged.
+
 ### NUH-4C3: Fixed-comparison normality and native Abelian structure
 
 **Implemented after 61b3158d.** The four-definition
@@ -369,7 +460,7 @@ and generated source-only health pass (981 registered files, no aggregate
 checker run). Changed links and the exact staged diff are checked before
 checkpointing. No TypeScript or repository-wide typecheck is run.
 
-C4 next constructs e:Im(f)⇒K(g) on whole native zero-family inputs by
+C4a above supplies general descent; C4b next constructs e:Im(f)⇒K(g) on whole native zero-family inputs by
 cokernel descent of the actual kernel mate and the restricted a⁻¹. The
 subplan fixes that route. C4 reconstruction/action, exactness, whole δ,
 concrete model/reifier work and the snake comparison remain required.

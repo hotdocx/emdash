@@ -233,6 +233,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_one_cat_terminal_family_paths.lp)
   files+=(emdash3_2_one_cat_diagram_family_paths.lp)
   files+=(emdash3_2_one_cat_kernel_cokernel_family_paths.lp)
+  files+=(emdash3_2_one_cat_cokernel_family_inputs.lp)
+  files+=(emdash3_2_one_cat_cokernel_family_descent.lp)
   files+=(emdash3_2_one_cat_image_coimage_comparison.lp)
   files+=(emdash3_2_one_cat_adjunction_normality.lp)
   files+=(emdash3_2_one_cat_abelian_adjunctions.lp)

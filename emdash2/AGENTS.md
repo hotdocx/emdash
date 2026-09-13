@@ -210,6 +210,13 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   capability, including binary products. These are nine definitions with
   no new primitive or rule; normality remains supplied structure. Canonical
   exactness, whole δ and concrete model construction remain next work.
+  Whole cokernel input/descent modules now accept an arbitrary original
+  diagram family and one whole annihilation cell. Reconstruction in the
+  existing functor category forms the coherent input while Q keeps D as
+  its argument. Native cancellation, whole target recovery and uniqueness
+  are derived; canonical Coim⇒Im shares the introduced constructor with
+  unchanged computation. Nine definitions add no primitive or rule. The
+  actual kernel-mate annihilation and image-to-kernel comparison remain next.
   General lax/oplax interchange is not qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).

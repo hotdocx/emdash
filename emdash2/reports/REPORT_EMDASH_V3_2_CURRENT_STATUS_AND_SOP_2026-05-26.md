@@ -184,7 +184,15 @@ keeps original P/Q and fixed-a normality over the original AdditiveCategory,
 including its binary products. Nine transparent definitions and 18 focused
 assertions add no primitive, rule or unifier. Normality is supplied structure;
 canonical exactness/δ and concrete model/reifier synthesis remain required.
-The owner ledger records exact validation and the next whole descent route.
+C4a now supplies [whole cokernel descent at the original diagram family](../emdash3_2_one_cat_cokernel_family_descent.lp).
+Existing shape reconstruction in Functor_cat(B,C) forms a coherent input
+D⇒I∘Y from one whole annihilation cell, preserving D as Q's actual argument.
+Native cancellation, whole target recovery and uniqueness are derived;
+component and next Hom action retain the same input. Canonical Coim⇒Im
+shares its introduced constructor with unchanged computation. Nine new
+definitions and 16 assertions add no primitive, rewrite or unifier. C4b must
+still construct the actual image-to-kernel comparison before exactness/δ.
+The owner ledger records exact validation and the preserved next experiment.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

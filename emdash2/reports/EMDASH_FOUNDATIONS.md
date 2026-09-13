@@ -4511,6 +4511,16 @@ those objects would not suffice. The
 records whole universal descent for δ and the remaining implementation
 obligations. No new exactness or connecting axiom is supplied by Coim/Im.
 
+Whole cokernel descent now retains any original diagram family D:B→Arr(C).
+One whole u:E₁D⇒Y and u∘∂D=0 form a coherent D⇒I∘Y using the existing
+shape reconstruction in Functor_cat(B,C), native square realization and
+exchange. The original cokernel mate gives Q∘D⇒Y; it is still Q(D), not a
+new selection on a reconstructed diagram. Its inverse returns the entire
+input, whose target is u. This whole reconstruction characterizes descent
+uniquely. Canonical Coim⇒Im shares the introduced case with unchanged
+computation. The kernel-mate annihilation needed for Im(f)→K(g) remains
+further work, followed by exactness and the connecting construction.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
