@@ -2,11 +2,16 @@
 
 Date: 2026-09-12
 
-Status: retained shared-index candidate for NUH-1B2c–f; structural source-arrow/2-cell action checked, full ω-categorical target not yet qualified
+Status: user-deferred after the universality/homology goal; retained shared-index evidence, full ω-categorical target unqualified
 
 Parent: [implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
 Ledger: [native owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
+
+The latest user direction defers this work until after the remaining goal.
+The following priorities describe the preserved experiment, not the active
+queue. Its partial y-projection work is retained in the
+[resumption bundle](../emdash2/audits/deferred_native_homd_y/README.md).
 
 Current execution priority (2026-09-13): this document records an alternative
 target-packaging candidate. Its necessity and minimality are not established.

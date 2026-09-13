@@ -1,6 +1,6 @@
 /* Cokernel presentation over the original selected cokernels. Its witness
    supplies coherent structure; no automatic introduction from old data. */
-require open emdash.emdash3_2_zero_arrow_diagrams;
+require open emdash.emdash3_2_kernel_cokernel_adjunctions;
 require open emdash.emdash3_2_strict_transfor_component_paths;
 require open emdash.emdash3_2_cokernel_maps;
 
@@ -29,6 +29,17 @@ injective symbol cokernel_presentation_adjunction [C : Cat] [S : τ (@Preadditiv
   : τ (@Adjunction (Functor_cat WalkingArrow_cat C) C
       (@cokernel_presentation_func C S t T W P) (@initial_arrow_diagram_func C t T));
 
+// One-way adapter from the original selected presentation. The new whole
+// adjunction interface itself has no selected W/V prerequisite.
+symbol cokernel_presentation_structure [C : Cat] [S : τ (@PreadditiveCategory C)]
+  [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)]
+  [W : τ (@HasComputationalCokernels C S)]
+  (P : τ (@CokernelPresentation C S t T W))
+  : τ (@CokernelAdjunctionStructure C S t T)
+≔ @cokernel_adjunction_intro C S t T
+    (@cokernel_presentation_func C S t T W P)
+    (@cokernel_presentation_adjunction C S t T W P);
+
 // Proof-time object observation retains Q[d] for adjunction cuts.
 unif_rule
   @fapp0 _ _ (@cokernel_presentation_func $C $S _ _ $W _) $d
@@ -41,21 +52,8 @@ symbol cokernel_presentation_projection [C : Cat] [S : τ (@PreadditiveCategory 
   (P : τ (@CokernelPresentation C S t T W))
   : τ (@Transf (Functor_cat WalkingArrow_cat C) C
       (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_tgt) (@cokernel_presentation_func C S t T W P))
-≔ @fapp0
-    (@Transf_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)
-      (@id_func (Functor_cat WalkingArrow_cat C))
-      (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-        (@initial_arrow_diagram_func C t T) (@cokernel_presentation_func C S t T W P)))
-    (@Transf_cat (Functor_cat WalkingArrow_cat C) C
-      (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_tgt) (@cokernel_presentation_func C S t T W P))
-    (@comp_cat_cov_fapp1_func
-      (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_tgt)
-      (@id_func (Functor_cat WalkingArrow_cat C))
-      (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-        (@initial_arrow_diagram_func C t T) (@cokernel_presentation_func C S t T W P)))
-    (@unit_adj_transf (Functor_cat WalkingArrow_cat C) C
-      (@cokernel_presentation_func C S t T W P) (@initial_arrow_diagram_func C t T)
-      (@cokernel_presentation_adjunction C S t T W P));
+≔ @cokernel_adjunction_projection C S t T
+    (@cokernel_presentation_structure C S t T W P);
 
 unif_rule
   @tapp0_fapp0 _ _ _ _ $i

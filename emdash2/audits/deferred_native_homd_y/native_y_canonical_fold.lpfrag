@@ -1,0 +1,5 @@
+// Native y-projection at the canonical normal form of the defined
+// restriction. A literal native_y_restriction_func pattern is hidden by
+// delta-reduction; the semantic helper itself remains defined.
+rule hom_postcomp_fapp0 (id Cat_cat Cat_cat) (fapp0 $D $y) (comp_fapp0 (hom_postcomp_func (id Cat_cat Cat_cat) (CoAbove2_cat (Op_cat (Hom_cat $Z $x $y))) (comp_fapp0 Eval_func (Struct_sigma (comp_fapp0 Product_projL_func Product_projL_func) (comp_fapp0 (comp_fapp0 (CoAbove2_func (sigma_pullback_total_func (CoAbove2_func (comp_fapp0 (sigma_pullback_total_func (Const_func $y) $D) (Struct_sigma (id Cat_cat (fapp0 $D $y)) (id Cat_cat (fapp0 $D $y))))) (Op_catd (hom_ (Sigma_proj1_func $D) $x)))) (CoAbove2_func (Struct_sigma (CoAbove2_func Product_projL_func) (CoAbove2_func Product_projR_func)))) (Struct_sigma (comp_fapp0 Product_projR_func Product_projL_func) Product_projR_func))))) Product_pair_tele_func) (Struct_sigma (Const_func (@homd_src_sec $Z $D $E $FF $x $u)) (id Cat_cat (fapp0 $D $y)))
+  ↪ @homd_tgt_func $Z $D $E $FF $x $u $y;

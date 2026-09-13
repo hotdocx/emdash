@@ -2,6 +2,21 @@
 
 Date: 2026-09-02
 
+Goal reorganization (2026-09-13): the user deferred the Op/duality migration
+until after the native universality/homology goal and directed NUH-3 to start
+on the current nucleus. Checkpoints and the latest unfinished experiment are
+preserved in [the resumption bundle](../audits/deferred_native_homd_y/README.md).
+The following duality continuation history is not the active work queue.
+
+NUH-3A now provides independent
+[whole K/Q adjunction structures](../emdash3_2_kernel_cokernel_adjunctions.lp)
+and [mate functors](../emdash3_2_kernel_cokernel_adjunction_mates.lp).
+The [reviewer](../examples/kernel_cokernel_adjunctions.lp) checks whole/point
+cancellation and arbitrary diagram action without W/V inputs. Legacy
+presentations adapt into the new interface and reuse its structural maps;
+their regressions pass. Whole H-family and concrete-model migration remain
+the next active work in the living plan.
+
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

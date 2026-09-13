@@ -1,0 +1,7 @@
+// Proof-time constant degeneration of the existing opposite/reindexing
+// comparison. The underlying pullback must be the dual constant family.
+unif_rule
+  @Pullback_catd _ _ (@Op_catd $B $E) (@CoAbove2_func $A $B $F)
+  ≡ @Const_catd $RA $C
+  ↪ [ $RA ≡ CoAbove2_cat $A;
+      @Pullback_catd $A $B $E $F ≡ @Const_catd $A (Op_cat $C) ];

@@ -1,0 +1,24 @@
+{
+  "status": "deferred by user; unqualified latest candidate",
+  "lastCheckedCheckpoint": "29f847f7",
+  "baseFullSha256": "401221ac2b5039341e65c184b3061645a978af209fc5d052036b6c22a9e61ee9",
+  "noActiveKernelChange": true,
+  "latestRun": "logs/y-fold-v4.log",
+  "latestRunExitCode": 1,
+  "localArchive": "/home/user1/emdash1-native-universality-v1/emdash2/tmp/deferred-native-duality/2026-09-13-nuh1d6",
+  "candidateFullSha256": "a686557ac0a552f8acd34b7750dee918d5ad13b0e31807c219b59c9a37ee3442",
+  "files": {
+    "candidate.patch": "12783fd0ba4ce17eeeb0783f92df9388a2efb3eac40233b52e67468b8d4a5cad",
+    "native_y_canonical_fold.lpfrag": "fadaeb1b9810f7ce0c7742f5237216b861e4e247b673e6e65ff6bbbc9f167dee",
+    "native_y_context.lp": "7605487d6ab531bc08bf5183b99aa3b15f00c8edccf1b042acb2b56ac4e0ab79",
+    "native_y_fold_controls.lp": "cb88700822098abf01f9a6e37a3468a6173e556e735fa0df2336498e4a82a387",
+    "native_y_index_arrow_review.lp": "d541bcd631738f47ec59674a0d289cbbde0356f854577ea3a9cff307f3165780",
+    "native_y_index_controls.lp": "cc90cbbc96eb163328b138cb10c510252d993d66daece83da317d8d5459b4fe4",
+    "native_y_restriction_controls.lp": "85e3354f8d59c15bc321dea6d15859389c871ba080e6bc4e824a6206d729a883",
+    "native_y_value_observation.lp": "22edf408eb433a091fa008c2d69bc1e8a69d2022ae073f45efea0699c28373fb",
+    "op_constant_comparison.lpfrag": "f3359f2c146c6b3e112bd88ebc050f28870f67342ba8e825c5d01ebb2f327c29",
+    "sigma_product_comparison.lpfrag": "486ebad1b4e85f902c0dbbf27831dcb6d9b68bce4d6345be41b8b49bee6483b7",
+    "sigma_vertical_units.lpfrag": "f93d2dd7ffc43a971d1b9f7de8227cfc54160eb9996d505bcd4a6c80150ebdf2"
+  },
+  "trackedSnippetsTrimTrailingBlankLines": true
+}

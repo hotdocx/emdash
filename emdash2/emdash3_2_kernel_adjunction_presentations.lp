@@ -1,7 +1,7 @@
 /* Declaration-backed whole kernel over the original selected operation data.
    Presentation is additional coherent structure, not an automatically
    inhabited consequence of every old higher-categorical kernel family. */
-require open emdash.emdash3_2_zero_arrow_diagrams;
+require open emdash.emdash3_2_kernel_cokernel_adjunctions;
 require open emdash.emdash3_2_strict_transfor_component_paths;
 require open emdash.emdash3_2_kernel_maps;
 
@@ -31,6 +31,17 @@ injective symbol kernel_presentation_adjunction [C : Cat] [S : τ (@PreadditiveC
   : τ (@Adjunction C (Functor_cat WalkingArrow_cat C)
       (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P));
 
+// One-way adapter from the original selected presentation. The new whole
+// adjunction interface itself has no selected W/V prerequisite.
+symbol kernel_presentation_structure [C : Cat] [S : τ (@PreadditiveCategory C)]
+  [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
+  [W : τ (@HasComputationalKernels C S)]
+  (P : τ (@KernelPresentation C S t T W))
+  : τ (@KernelAdjunctionStructure C S t T)
+≔ @kernel_adjunction_intro C S t T
+    (@kernel_presentation_func C S t T W P)
+    (@kernel_presentation_adjunction C S t T W P);
+
 // Proof-time object observation preserves K[d] as an adjunction discriminator.
 unif_rule
   @fapp0 _ _ (@kernel_presentation_func $C $S _ _ $W _) $d
@@ -43,21 +54,8 @@ symbol kernel_presentation_inclusion [C : Cat] [S : τ (@PreadditiveCategory C)]
   (P : τ (@KernelPresentation C S t T W))
   : τ (@Transf (Functor_cat WalkingArrow_cat C) C
       (@kernel_presentation_func C S t T W P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src))
-≔ @fapp0
-    (@Transf_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)
-      (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-        (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P))
-      (@id_func (Functor_cat WalkingArrow_cat C)))
-    (@Transf_cat (Functor_cat WalkingArrow_cat C) C
-      (@kernel_presentation_func C S t T W P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src))
-    (@comp_cat_cov_fapp1_func
-      (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) C (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src)
-      (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
-        (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P))
-      (@id_func (Functor_cat WalkingArrow_cat C)))
-    (@counit_adj_transf C (Functor_cat WalkingArrow_cat C)
-      (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
-      (@kernel_presentation_adjunction C S t T W P));
+≔ @kernel_adjunction_inclusion C S t T
+    (@kernel_presentation_structure C S t T W P);
 
 // Proof-time interpretation at the canonical unfolded counit component and
 // selected-kernel projection. Endpoint/category slots are not discriminators.

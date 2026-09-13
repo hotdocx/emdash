@@ -3,6 +3,7 @@
 .gemini/
 tmp/probes/
 tmp/ai-responses/
+tmp/deferred-native-duality/
 *.lpo
 *.lpi
 *.lpj

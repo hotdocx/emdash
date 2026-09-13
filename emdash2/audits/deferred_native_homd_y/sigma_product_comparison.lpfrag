@@ -1,0 +1,5 @@
+// Proof-time exposure of an already constant-family total. This only
+// compares Sigma(E) with a product when E matches the required constant.
+unif_rule
+  @Sigma_cat $A $E ≡ Product_cat $B $C
+  ↪ [ $A ≡ $B; $E ≡ @Const_catd $B $C ];

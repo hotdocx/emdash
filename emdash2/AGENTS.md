@@ -79,6 +79,15 @@ does not stand in for a required native whole owner or its computation.
 
 ## Authority And Document Roles
 
+Latest native-universality goal direction (2026-09-13): the user has deferred
+the Op/duality migration until after that goal because it may interact with
+strict/lax structure. Preserve its checkpoints and partial experiments; do
+not continue those probes as prerequisites for the remaining work. The
+active tranche is NUH-3 whole kernel/cokernel universality on the current
+nucleus. The living plan and `audits/deferred_native_homd_y/README.md` record
+the new queue and later resumption boundary. Existing semantic qualifications
+remain explicit; this deferral is not a claim that the nucleus is repaired.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

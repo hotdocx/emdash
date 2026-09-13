@@ -1,0 +1,11 @@
+// A vertical Sigma arrow projects to id_y. Its represented postcomposition
+// is therefore the identity. These are the whole and already-capped
+// projections of that same first-projection/unit computation.
+rule @hom_postcomp_func _ _ (@Sigma_proj1_func $K $D) $x
+      (Struct_sigma $y _) (Struct_sigma $y _)
+      (Struct_sigma (@id $K $y) _)
+  ↪ @id_func (Hom_cat $K $x $y);
+rule @hom_postcomp_fapp0 _ _ (@Sigma_proj1_func $K $D) $x
+      (Struct_sigma $y _) (Struct_sigma $y _)
+      (Struct_sigma (@id $K $y) _) $a
+  ↪ $a;

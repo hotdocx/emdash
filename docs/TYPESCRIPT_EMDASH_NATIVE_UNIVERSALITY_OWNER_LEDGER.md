@@ -2,11 +2,17 @@
 
 Date: 2026-09-12
 
-Status: active NUH-1 design; source inventory established, coupled target design not yet qualified
+Status: active NUH-3 whole universality; NUH-1/2 duality work preserved and user-deferred after this goal
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
-Current user direction (2026-09-12): use the
+Latest user direction (2026-09-13): park the Op/duality migration because
+of its possible strict/lax interaction, preserve its partial results, and
+start whole kernel/cokernel universality now. The earlier duality next-action
+language below is resumption evidence only. No Op experiment is part of the
+current completion gate or a prerequisite for NUH-3–7.
+
+Earlier user direction (2026-09-12): use the
 [native duality owner design](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
 to continue native operations. Prototype strictness migration and Empty
 audits are deferred; their earlier acceptance/next-action language below
@@ -17,8 +23,10 @@ is historical and does not govern this continuation. Integration of
 
 The worktree starts at `cbef77e76fc292453c8814b5ecc6d62e84132f01`.
 Its active nucleus Git blob is
-`91f1974ece225e399604dce24710bf1437ad3ef5`. Active LP sources/reviewers have
-no diff from the final mathematical checkpoint `ff139362`.
+`91f1974ece225e399604dce24710bf1437ad3ef5`. At launch the active LP sources
+and reviewers matched the final mathematical checkpoint `ff139362`.
+NUH-3A now adds independent whole-adjunction extensions and refactors the
+two legacy structural-map bodies. The nucleus itself remains unchanged.
 
 The preserved total-op patch is anchored to nucleus blob
 `5387c65ab75ddcfff4b5ffca9fb6f9d082084774`. The current nucleus adds 328 lines
@@ -146,7 +154,8 @@ presheaf argument's variance while preserving the native homd owners.
 | Owner | Current dependency | Intended next boundary |
 | --- | --- | --- |
 | [generic adjunction mates](../emdash2/emdash3_2_adjunction_mates.lp) | Defined whole Hom views of the existing adjunction comparison, with whole and point cancellation | Reuse as primary operation owners; preserve cut discriminators |
-| [kernel presentation](../emdash2/emdash3_2_kernel_adjunction_presentations.lp) and [cokernel presentation](../emdash2/emdash3_2_cokernel_adjunction_presentations.lp) | Whole K/Q and adjunction heads parameterized by old selected W/V | Separate whole structure from its selected realization; no mandatory old factor dictionary for every formal operation |
+| [whole K/Q structures](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp) and [their mates](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp) | Whole functors and native adjunction evidence; no W/V or selected-factor dependency | NUH-3A implemented; migrate H-family and derived ordinary views to this interface |
+| [kernel presentation](../emdash2/emdash3_2_kernel_adjunction_presentations.lp) and [cokernel presentation](../emdash2/emdash3_2_cokernel_adjunction_presentations.lp) | Legacy W/V-indexed choices, with adapters into the independent structures; structural maps now delegate there | Keep selected realization one-way; no mandatory old factor dictionary for new formal operations |
 | [kernel record](../emdash2/emdash3_2_kernel_adjunction_records.lp) and [cokernel record](../emdash2/emdash3_2_cokernel_adjunction_records.lp) | Whole endpoints; old selected universal evidence is transferred/recentered | Derive ordinary factor/uniqueness observations from the whole comparison at the stated profile |
 | [native zero cone](../emdash2/emdash3_2_zero_arrow_cones.lp) | Represented comma built from native homdc/Sigma | Reuse native ownership, with repaired variance; no independent cone grammar |
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
@@ -159,12 +168,10 @@ presheaf argument's variance while preserving the native homd owners.
 | [native connecting](../src/v3_2/algebra_polynomial_freyd_homology_connecting.ts) | Snake method with retained endpoint comparisons/descent | Preserve as computational method; compare against the whole formal characterization |
 | [bounded model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts) | Supplied model and optional normality, prepared observations and explicit adoption | Automate repetitive model/reifier plumbing for the supported backend without upgrading trust claims silently |
 
-The first universality prototype should expose whole K/Q, units/counits,
-nonidentity action and mate cancellation without taking W/V as their
-defining formal inputs. Its realization adapter must still retain and
-justify a selected native result. This is a bounded vertical gate, not
-permission to add a second checker or claim all interacting exactness laws
-from adjunction triangles alone.
+NUH-3A supplies the first whole K/Q and mate interface without W/V inputs.
+The full vertical consumer still needs the native H/input migration and a
+retained nonzero result with its realization contract. Adjunction triangles
+alone do not establish all interacting exactness laws.
 
 ## Fresh Baseline Evidence
 
@@ -191,6 +198,107 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-3A: Whole K/Q structures without selected W/V inputs
+
+**Implemented first slice (2026-09-13).** The active nucleus remains at blob
+91f1974ece225e399604dce24710bf1437ad3ef5. New registered extensions provide:
+
+```text
+KernelAdjunctionStructure ≔ Σ K : Functor(Arr(C),C), Adjunction(J,K)
+CokernelAdjunctionStructure ≔ Σ Q : Functor(Arr(C),C), Adjunction(Q,I)
+
+J(X) = (X→0),       I(X) = (0→X).
+```
+
+The preadditive context and selected terminal/initial structures remain
+explicit. Constructors take only the whole functor and its native adjunction
+evidence. K/Q action is the existing fapp calculus. Domain of the counit
+gives the whole kernel inclusion; codomain of the unit gives the whole
+cokernel projection. Forward/backward universal maps reuse the native
+adjunction Hom comparison and its whole/point cancellation. No new primitive,
+rewrite, unifier or per-test factor dictionary is introduced.
+
+The [structure module](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp)
+and [mate module](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp)
+have an eleven-module transitive source dependency graph containing no
+HasComputationalKernels/Cokernels, ComputationalKernel/Cokernel or old
+KernelPresentation/CokernelPresentation dependency. This is an independent
+entry point, not a wrapper requiring the old selections.
+
+The two old presentation modules now expose explicit one-way adapters into
+these structures. Their inclusion/projection bodies delegate to the new
+implementation, retaining the original K/Q, adjunction evidence and selected
+comparisons. The old selected data do not disappear from those legacy
+interfaces or become automatically derivable from a raw algorithm. Concrete
+whole-model construction and reifier automation remain NUH-5 work.
+
+The [new reviewer](../emdash2/examples/kernel_cokernel_adjunctions.lp)
+checks direct introduction, arbitrary diagram-map action, whole and point
+mate cancellation, rejection of unrelated arrows, and actual unit/counit
+components. Both old selected-presentation reviewers remain green.
+
+Validation used serial guarded probes with warnings enabled. Logs under
+`emdash2/logs/probes/`:
+
+- `emdash3_2_zero_arrow_diagrams-20260913-021825.log` — dependency baseline;
+- `emdash3_2_kernel_cokernel_adjunction_mates-20260913-022044.log` — both new sources;
+- `kernel_cokernel_adjunctions-20260913-022706.log` — new reviewer;
+- `kernel_adjunction_presentations-20260913-023015.log` and
+  `cokernel_adjunction_presentations-20260913-023020.log` — legacy regressions;
+- `whole_adjunction_dependency_baseline-20260913-023656.log` — exact dependency join.
+
+New reviewer/dependency inventories agree at 1,156 critical-pair and 159
+replaceable-pattern warnings. Each legacy reviewer retains its complete
+1,244/169 inventory, with locations mapped through unchanged source lines
+against the respective pre-edit 022458/022506 logs. Strict LHS audits pass.
+The central catalog is unchanged and checked; health source metrics were
+refreshed with `--no-check`, explicitly without a repository-wide typecheck.
+
+**Next NUH-3B:** move the whole H-family semantic implementation to these
+independent structures, leaving selected presentations as realization
+adapters. Derive the needed ordinary universal views and preserve actual H
+selections in subsequent consumers. Do not resume Op work as a prerequisite.
+
+### NUH-1D6: Whole local y/v projection — user-deferred
+
+This experiment is parked without promotion. Its source variants, helper
+terms and logs have been copied from /tmp into
+`emdash2/tmp/deferred-native-duality/2026-09-13-nuh1d6/`, with a manifest
+hashing all 30 preserved files. The latest candidate and review sources are
+also tracked under
+[deferred_native_homd_y](../emdash2/audits/deferred_native_homd_y/README.md).
+The last complete qualified checkpoint is 29f847f7. The latest candidate
+still fails subject reduction at its whole y-projection fold; earlier
+object/restriction checks passed, and arrow retyping exposed a represented
+unit comparison. Do not resume these experiments until the deferred work
+is explicitly reactivated. NUH-3A is the current task.
+
+The preceding `29f847f7` turn is progress: the direct target now preserves
+the native primitive/Op source and reaches a specific downstream y-view.
+At resumption the worktrees are clean and the baseline/source anchors agree.
+
+First route the existing defined homd_id_tgt_func/homd_ff_tgt_func views
+through the preserved primitive homd_tgt_func, with its Transpose(Hom)
+codomain. This alone does not establish their projection from the whole
+shared-index value or repair the following displayed-action fold.
+
+Test the whole local inclusion D[y]×Transpose(Hom_Z(x,y))→S_D(x), using
+native Sigma base change and dual functors. The earlier attempt stopped
+at a pulled-back opposite family whose total should be a constant-family
+product. Check existing comparisons first. If proof-time normalized-head
+comparisons are necessary, isolate them at their Op/reindexing and Sigma
+owners; preserve the original runtime histories. This is now a direct
+native y-projection consumer, not auxiliary G-family work. Qualify its
+whole restriction and the actual following displayed-action projection
+before describing the local y/v relationship as repaired.
+
+User clarification during this continuation: strict structural functor/
+transfor comparison cells may be rewritten to identity at their actual
+coincident endpoints. Such a computation can remove a displayed-laxity
+dependency in a structural Sigma-map route; it is not forbidden by the
+deferred profile migration. Use it for a concrete strict owner when useful.
+Integration of the other profile branch still belongs after this goal.
 
 ### NUH-1D5: Original-family input and direct native projections
 

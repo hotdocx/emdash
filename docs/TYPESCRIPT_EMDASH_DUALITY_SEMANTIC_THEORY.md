@@ -2,9 +2,16 @@
 
 Date: 2026-09-12
 
-Status: selected finite operator design; isolated prototypes checked; active kernel migration pending
+Status: selected finite operator design and partial prototypes preserved; migration user-deferred until after the universality/homology goal
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+
+Latest user direction (2026-09-13) parks this migration because of possible
+strict/lax interactions. Its checkpoints remain in history and its unfinished
+y-projection experiment is preserved in
+[the resumption bundle](../emdash2/audits/deferred_native_homd_y/README.md).
+The current work is NUH-3 whole kernel/cokernel universality on the unchanged
+active nucleus. The continuation language below is for later resumption.
 
 ## Architectural Clarification
 

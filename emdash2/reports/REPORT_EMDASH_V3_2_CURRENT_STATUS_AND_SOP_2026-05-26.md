@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native universality update (2026-09-13): the user has deferred the Op/duality
+migration until after this goal; its partial work is preserved in
+[the resumption bundle](../audits/deferred_native_homd_y/README.md).
+The active continuation is whole universality on the current nucleus.
+[Whole K/Q adjunction structures](../emdash3_2_kernel_cokernel_adjunctions.lp)
+and [their mates](../emdash3_2_kernel_cokernel_adjunction_mates.lp) are now
+implemented without selected W/V prerequisites. The old presentations adapt
+into them and share their inclusion/projection implementation. Focused
+whole/point cancellation and legacy regressions pass; native H-family and
+model/reifier migration remain pending. No new primitive or rule is added.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip
@@ -45,15 +56,18 @@ aside for the native-universality goal. The current
 [native duality owner design](../../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md)
 records the selected finite constructors, their internal functors and
 their code status. The former general dimension-set/tensor-transport
-exposition is not the architecture being implemented. Native target/module
-and homology implementation continue through actual native owners. Integration of
+exposition is not the architecture being implemented. Under the later scope
+revision, native target/module prototypes are parked while whole
+universality and homology continue through the current native owners. Integration of
 `goal/opaque-action-profile-classifiers-v3.2` comes after this goal and
 does not block its completion.
 
 The earlier homological-algebra goal deferred this general repair. The
 2026-09-12 [native-universality successor](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
-now resumes a design-led coupled repair in its dedicated worktree, preserving
-foundational hom_int/homd_int and excluding spectral/stabilization research.
+began a design-led coupled repair in its dedicated worktree. The subsequent
+2026-09-13 reorganization now parks that work and prioritizes whole
+universality/homology, preserving hom_int/homd_int and excluding
+spectral/stabilization research.
 No repaired kernel or new semantic qualification is claimed by the launch.
 Candidates and diagnostics are retained in the
 [repair plan](../../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_REPAIR_PLAN.md).

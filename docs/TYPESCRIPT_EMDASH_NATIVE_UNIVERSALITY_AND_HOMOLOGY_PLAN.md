@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active; finite native duality operators selected, internal target/module continuation in progress; prototype strictness migration deferred
+Status: active NUH-3 whole-universality refactor; Op/duality migration preserved and deferred until after this goal
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,12 +24,22 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Implement the accepted native universality/homology redesign, beginning with
-the semantic and computational owner review and the coupled variance repair,
-then making whole categorical universality primary in formal homology and
+Implement the accepted native universality/homology redesign on the current
+kernel baseline, making whole categorical universality primary in formal homology and
 connecting its actual operations to a usable retained-result proof-CAS path.
 The persistent goal delegates evolving implementation details, experiments,
 validation and next actions to this living plan and its linked design ledger.
+
+**Latest user reorganization, 2026-09-13:** defer the Op/duality migration
+until after this goal because it may interact with strict/lax structure.
+Preserve its checkpoints and partial experiments for later integration, and
+start NUH-3 now. NUH-1/2 are no longer prerequisites or completion gates for
+the remaining universality/homology work. This direction supersedes the
+earlier execution priorities below. No deferred patch is installed in the
+active nucleus. The retained work and resumption instructions are in
+[the deferred experiment](../emdash2/audits/deferred_native_homd_y/README.md).
+The persistent objective delegates its evolving scope here; its older
+coupled-repair wording is superseded by this explicit user reorganization.
 
 The user accepted the consolidated response archived as
 `0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md`
@@ -136,8 +146,7 @@ are recovery and design evidence, not queues to resume indiscriminately.
 
 ## Scope And Deferrals
 
-In scope: the coupled op/family/Sigma/native-Hom prerequisite; whole
-universality dependency refactor; native whole H and connecting/window
+In scope: whole universality dependency refactor; native whole H and connecting/window
 consumers; a scoped whole-H snake/direct/native comparison; reusable
 model/reifier setup for the already supported polynomial/Freyd backend;
 necessary public/private TypeScript transfer and conformance; owning
@@ -151,7 +160,9 @@ that specific evidence; it does not license a separate checker investigation.
 Keep the working field-indexed iterator and native bounded sequence as
 reference consumers throughout.
 
-Also deferred: prototype global strictness-rule migration and further
+Also deferred until after this goal: the coupled op/family/Sigma/native-Hom
+variance migration, with all completed and partial work retained;
+prototype global strictness-rule migration and further
 Empty/inconsistency audits; integration of
 `goal/opaque-action-profile-classifiers-v3.2` until after this goal;
 unbounded/derived-category implementation, Ext construction,
@@ -187,15 +198,15 @@ The same root hook configuration is retained; no new hook is installed.
 | Row | State | Required outcome |
 | --- | --- | --- |
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
-| NUH-1 | active design tranche | Selected native duality signatures/computation and exact owner/variance/dependency table; complete the internal target/module design |
-| NUH-2 | pending NUH-1 | Implement the coupled op/family/Sigma/native-Hom operations with their stated mathematical meanings, whole action and affected nonidentity/higher-action consumers; prototype strictness migration stays deferred |
-| NUH-3 | pending NUH-1/2 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
+| NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
+| NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
+| NUH-3 | active | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
 | NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
-| NUH-7 | pending preceding rows | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint |
+| NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
-Current concrete progress (2026-09-13): NUH-1D4 corrected the defined
+Preserved duality progress (2026-09-13): NUH-1D4 corrected the defined
 HomPresheaf fibre and its two argument actions. NUH-1D5 now retains a
 direct native-owner candidate with target CoAbove2(Functor(S_D(x),Cat)).
 This preserves the original primitive homd_int declaration, Op_catd source
@@ -203,8 +214,18 @@ and Op_funcd composition; the x/u projections, fixed-y,v whole restriction
 to homd_ and first displayed-Hom source-component fold check. The full
 candidate reaches the old homd_id_tgt_func y-only evaluation. Whole-v
 projection and the expanded Hom-action comparison remain pending. The
-active nucleus is unchanged. See
-[NUH-1D5 evidence and next action](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md#nuh-1d5-original-family-input-and-direct-native-projections).
+active nucleus is unchanged. The later NUH-1D6 experiment is now parked,
+including its failed final fold. See the
+[owner ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md).
+
+NUH-3A now implements whole K/Q structures introduced directly from whole
+functors and adjunction evidence, independent of W/V. Their structural maps
+and mates compute through existing native owners; old selected presentations
+adapt into the new interface and reuse its structural maps. The new reviewer
+and both selected-presentation regressions pass. NUH-3 continues with the
+whole H-family dependency migration and derived ordinary views. Continue on
+the current preadditive/ordinary homology baseline and preserve its explicit
+interpretation qualifications.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -212,7 +233,10 @@ evidence to revise the design, not permission to skip an essential outcome.
 Record missing prerequisites precisely and distinguish experiment rejection
 from a genuinely blocked goal.
 
-## NUH-1: Design Before Rules
+## NUH-1: Deferred Design And Resumption Evidence
+
+This section records the parked design obligations. It is not the active
+work queue and does not delay NUH-3–7 under the latest user direction.
 
 The current native design is
 [Native Duality: Syntactic Owners And Internal Computation](TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md).
@@ -397,6 +421,7 @@ must not label those alternatives validated implementations.
 | D-NUH-023 | Preserve the existing rewrite/unif architecture during the Op migration. Adapt variance within existing owners first; additions or relocations require an actual core consumer, not auxiliary-prototype or prefix-check convenience |
 | D-NUH-024 | Retain the definition-only HomPresheaf correction: its fibre agrees with native homd_ and both argument actions compute through existing Hom owners. No rule is added or moved; higher-component qualification and the original-D target slot remain pending |
 | D-NUH-025 | The direct Homd candidate uses the homwise-dual shared-index value category, preserving the original primitive homd_int, Op_catd source and Op_funcd composition. Fixed-y,v restriction and first source/action projections check; whole-v projection and the expanded Hom-order join remain open |
+| D-NUH-026 | User defers Op/duality migration until after this goal. Preserve all checkpoints and the unfinished NUH-1D6 stage; remove NUH-1/2 from current prerequisites and completion gates; start NUH-3 on the unchanged active nucleus |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

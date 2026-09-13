@@ -4208,7 +4208,25 @@ actual opposite terminal structure and Op_transf, without a second primitive
 arrow theory. These embeddings alone do not assert the whole kernel/cokernel
 universal capabilities.
 
-The next layer now has declaration-backed presentations `J⊣K` and `Q⊣I`
+The current whole-universality interface (NUH-3A, 2026-09-13) separates those
+capabilities from the older per-arrow selections. In the preadditive setting,
+`KernelAdjunctionStructure` stores one whole K:Arr(C)→C and J⊣K;
+`CokernelAdjunctionStructure` stores one whole Q:Arr(C)→C and Q⊣I.
+Their constructors take the functor and adjunction evidence directly. Domain
+of the counit and codomain of the unit provide their structural maps, while
+the existing adjunction Hom comparison provides the whole mate functors and
+their computing cancellations. This interface requires no selected W/V
+family or manually supplied factor operation. Existence of a concrete whole
+structure is still supplied; it does not follow from matrix equations alone.
+
+The old selected presentations now adapt into these structures and delegate
+their inclusion/projection implementation to them. Their selected comparison
+semantics described below remain available. Migrating the whole H-family and
+concrete model/reifier consumers to the independent interface is the next
+step. The Op/duality migration is separately preserved and user-deferred
+until after the universality/homology goal.
+
+The legacy realization layer retains declaration-backed presentations `J⊣K` and `Q⊣I`
 over the original selected kernel and cokernel families. A presentation is
 additional coherent structure realizing those choices; no constructor claims
 that every older higher-categorical family automatically has one. Its whole
