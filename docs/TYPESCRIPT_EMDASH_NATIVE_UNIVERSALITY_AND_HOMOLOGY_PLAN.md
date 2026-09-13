@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility and categorical exactness/connecting next; Op/duality deferred
+Status: C3 fixed-comparison normality, whole inverse and native Abelian package qualified; canonical exactness/connecting next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,24 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C2c4 milestone (2026-09-13): the
+Current C3 milestone (2026-09-13):
+[normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp) is existing
+OmegaEquivAlong evidence on the actual whole a. Its selected left inverse
+is a whole transformation; existing inverse-candidate laws give both
+ordinary inverse equations. Generic functor action restricts this evidence
+to whole diagram families and their components, preserving the same inverse.
+The [native Abelian package](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp)
+adds whole P/Q and that fixed-a normality over the original AdditiveCategory,
+including its whole binary-product functor. Normality is supplied structure,
+not proved from K/Q existence; this package does not construct a concrete
+Freyd model. Nine definitions and 18 assertions add no primitive or rule.
+
+Next C4 constructs canonical Im(f)→K(g) from a whole native zero-family input.
+Use its kernel mate, derive whole annihilation against K(f), descend through
+Q(K(f)), then compose with the same a_f⁻¹. Exactness concerns this actual
+comparison; the later LES theorem must derive its invertibility.
+
+The completed C2c4 milestone (2026-09-13): the
 [canonical a:Coim⇒Im](../emdash2/emdash3_2_one_cat_image_coimage_comparison.lp)
 is defined by the original whole cokernel mate. Whole kernel inverse-mate
 faithfulness derives u∘κ=0; its existing native square in Functor_cat(D,C)
@@ -37,9 +54,9 @@ Whole formula agreement, original Coim/Im components, arbitrary diagram-map
 action and the next Hom projection check. This tranche adds 24 definitions,
 four constructor-scoped evaluation rules and two proof-time comparisons,
 with no new primitive or nucleus edit. It retains the accepted ordinary
-family/shape presentations and their OneCat qualification. The next step
-attaches existing categorical invertibility evidence to this actual a,
-then constructs categorical exactness and δ by whole universal descent.
+family/shape presentations and their OneCat qualification. C3 now
+attaches the existing categorical invertibility evidence to this actual a;
+categorical exactness and δ by whole universal descent remain next.
 The subplan and owner ledger contain the exact qualification and deferrals.
 
 Deferred terminality refinement (2026-09-13): the user accepts the current
@@ -397,9 +414,10 @@ and whole inverse-mate reconstruction at the original published factors.
 C2c3 qualifies whole evaluation of both original normalized inputs,
 including their complete diagram-map observations. C2c4 now derives the
 whole annihilation input, constructs canonical Coim⇒Im, and proves its
-native whole factorization and uniqueness. Next express Abelian normality
-and exactness by invertibility of the actual comparison maps, and build δ
-by whole universal descent. The ordinary all-arrow/category
+native whole factorization and uniqueness. C3 now packages Abelian normality
+at the actual comparison, with its whole inverse and family restriction.
+Next construct the canonical exactness comparisons and build δ by whole
+universal descent. The ordinary all-arrow/category
 bridge is optional compatibility work, not a primary prerequisite. Do not
 infer normality from K/Q existence or postulate LES exactness. Concrete
 whole models, reifier automation and snake comparison remain later.
@@ -617,6 +635,7 @@ must not label those alternatives validated implementations.
 | D-NUH-042 | Terminal/initial whole family universality is now an explicit ordinary-target native presentation extension: two DefIso primitives with eight identity endpoint rules, not theorems derived from the old pointwise IsContr interface. Their actual-column instances and whole K/Q mates define Coim⇒ev₁ and ev₀⇒Im. Reconstruction is proved through native mate laws as a reviewer observation, not a new runtime cut. Canonical Coim⇒Im and exactness remain to be constructed |
 | D-NUH-043 | C2c4 constructs a:Coim⇒Im through whole inverse-mate faithfulness, internally derived u∘κ=0, existing native square realization in Functor_cat(D,C), exchange and the original cokernel mate. Native factorization recovers ∂ and characterizes a uniquely. Preserve this actual transformation and its original K/Q selections; Abelian invertibility remains further structure |
 | D-NUH-044 | Promote only the four introduced-arrow evaluation clauses and two sufficient proof-time comparisons required by C2c4. Reject the generic evaluator/postcomposition fold because its identity-postcomposition corner changes the established owner. Keep native mate cancellation computational; whole factorization is a derived path, not a new runtime cut or separately packaged factorization functor |
+| D-NUH-045 | C3 uses existing OmegaEquivAlong on the actual whole a, selects its supplied left inverse, and reuses the existing inverse-candidate law for the other equation. Ordinary IsoEvidence is a derived whole view retaining literal a; generic functor action owns family/component restriction. The native Abelian package keeps the original AdditiveCategory (including binary products), whole P/Q and fixed-a normality. It supplies no new primitive or concrete model normality |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -790,8 +809,8 @@ Continue the native whole-universality and homology implementation in
 authority for evolving scope, decisions, implementation rows, experiments,
 validation and progress, under all active AGENTS/SOP instructions. Preserve
 foundational hom_int/homd_int. Continue from the implemented C2c4 whole
-comparison and characterization through Abelian invertibility, categorical
-exactness/connecting and retained homology/proof-CAS model/reifier work.
+comparison, fixed-map normality and native Abelian package through
+categorical exactness/connecting and retained homology/proof-CAS model/reifier work.
 Work autonomously through bounded reviewed tranches and
 make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running

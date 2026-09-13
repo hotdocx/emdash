@@ -176,8 +176,15 @@ evaluation clauses and two sufficient proof-time comparisons in their
 owners. No primitive, ordinary-factor input, nucleus edit or new runtime
 factorization cut is added. Whole characterization is a function on whole
 transformations, not a separately packaged internal functor in its input.
-Abelian invertibility of this actual a, categorical exactness/δ and concrete
-model/reifier work remain; the owner ledger retains exact qualification.
+C3 now [expresses normality on this actual a and selects its whole inverse](../emdash3_2_one_cat_adjunction_normality.lp).
+Existing OmegaEquivAlong and inverse-candidate laws supply both ordinary
+inverse equations; generic action retains the same inverse on families and
+components. The [native Abelian package](../emdash3_2_one_cat_abelian_adjunctions.lp)
+keeps original P/Q and fixed-a normality over the original AdditiveCategory,
+including its binary products. Nine transparent definitions and 18 focused
+assertions add no primitive, rule or unifier. Normality is supplied structure;
+canonical exactness/δ and concrete model/reifier synthesis remain required.
+The owner ledger records exact validation and the next whole descent route.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

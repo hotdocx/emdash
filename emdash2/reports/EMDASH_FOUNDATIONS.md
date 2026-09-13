@@ -4496,9 +4496,16 @@ construction. Four constructor evaluation clauses and two proof-time
 comparisons add no universality primitive. The existing ordinary
 presentation/model obligations remain explicit.
 
-Invertibility of this actual a will be genuine Abelian structure, not a
-consequence of having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
-comparison at a native zero pair; a freely chosen isomorphism between
+Invertibility of this actual a is now the native fixed-map normality
+condition OmegaEquivAlong(a). Its selected left inverse is a whole
+transformation; the existing inverse-candidate theorem gives its other
+inverse equation. Generic precomposition transports the evidence and that
+same inverse to whole diagram families. A thin native Abelian package stores
+P/Q and this condition over the original AdditiveCategory, retaining its
+whole binary products. These are transparent definitions of the condition
+and its consumers; normality remains supplied structure, not a consequence
+of having K/Q or a closed concrete-model construction. Likewise exactness
+concerns the canonical Im(f)→K(g) comparison at a native zero pair; a freely chosen isomorphism between
 those objects would not suffice. The
 [direct categorical subplan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md)
 records whole universal descent for δ and the remaining implementation

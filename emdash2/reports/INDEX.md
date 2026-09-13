@@ -79,8 +79,12 @@ from the evaluator, completed exchange projections and whole normalizer
 endpoints. C2c4 now [constructs canonical whole Coim⇒Im](../emdash3_2_one_cat_image_coimage_comparison.lp)
 through faithful whole inverse mating, derived annihilation, native square
 realization and the original cokernel mate. Whole factorization, uniqueness,
-original selections and Hom action are qualified. Abelian invertibility,
-direct whole δ/exactness and concrete-model/reifier work remain.
+original selections and Hom action are qualified. C3 now supplies the
+[fixed-a normality/inverse interface](../emdash3_2_one_cat_adjunction_normality.lp)
+and [native Abelian package](../emdash3_2_one_cat_abelian_adjunctions.lp),
+retaining the original additive structure and whole K/Q. Normality remains
+supplied; canonical exactness, direct whole δ and concrete-model/reifier
+construction remain required.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

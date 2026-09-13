@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility and categorical exactness/connecting next; NUH-1/2 duality user-deferred
+Status: C3 fixed-comparison normality, whole inverse and native Abelian package qualified; canonical exactness/connecting next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,71 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C3: Fixed-comparison normality and native Abelian structure
+
+**Implemented after 61b3158d.** The four-definition
+[normality owner](../emdash2/emdash3_2_one_cat_adjunction_normality.lp)
+uses the existing OmegaEquivAlong at the actual whole a:Coim⇒Im. It defines
+the selected whole inverse, an ordinary whole IsoEvidence view with forward
+arrow literally a, and restriction to an arbitrary whole diagram family.
+Existing generic functor action owns the latter and its inverse projections.
+No new operation-specific naturality or functoriality rule is introduced.
+
+OmegaEquivAlong stores supplied left/right inverse candidates. The inverse
+operation selects its existing left candidate. The equality-evidence
+extension already has `omega_equiv_left_as_right_law`, which derives its
+second law through the comparison of those candidates. The initial probe
+reproved that lemma; it remains ignored and is not promoted. Both equations
+are proved paths, not new judgmental cuts or a stronger DefIso assumption.
+
+The five-definition
+[Abelian owner](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp)
+is additional structure on the original AdditiveCategory A, OneCat(C) and
+initial presentation at t. A retains the whole binary-product functor,
+preadditivity and terminal structure. The dependent Sigma stores whole P/Q
+and normality of their actual comparison. Its constructor and projections
+retain those structures literally; it introduces no W/V dictionaries.
+This meets the usual additive + kernels/cokernels + canonical-comparison
+criterion in [Stacks 12.5.1](https://stacks.math.columbia.edu/tag/00ZX).
+Normality is supplied structure, not a theorem from K/Q existence or a
+closed concrete provider. No comparison with old normality families or
+concrete model synthesis is claimed by this package.
+
+There are 18 reviewer assertions. Twelve cover retained forward/inverse,
+both whole inverse equations, rejection of unrelated forward/inverse maps,
+actual component evidence, and family restriction through whole and next
+Hom action. Six cover package projections, unchanged H application and
+rejection of a different selected kernel or evidence about a different map.
+All nine definitions are transparent. No primitive, rewrite, unifier,
+nucleus edit, object cast or new caller coherence field is added.
+
+All checks used serial warning-enabled resource-guarded invocations, each
+bounded to 90 seconds. Source logs are
+`emdash3_2_one_cat_adjunction_normality-20260913-162013.log` and
+`emdash3_2_one_cat_abelian_adjunctions-20260913-162017.log`; final reviewers
+are `one_cat_adjunction_normality-20260913-162601.log` and
+`one_cat_abelian_adjunctions-20260913-162339.log`, under
+`emdash2/logs/probes/`. The C2c4 baseline reviewer also passes in
+`one_cat_image_coimage_comparison-20260913-161233.log`.
+
+Normality source/reviewer match their exact ordered dependency join
+`nuh4c3_normality_dependencies-20260913-162030.log` at 1208 critical pairs /
+159 replaceable-pattern warnings. The additive package source/reviewer
+match `nuh4c3_abelian_dependencies-20260913-162034.log` at 1280/169.
+Categories, locations, term heads, participant families and parser diagnostics
+all agree; the larger package inventory is inherited from the additive
+join, with no source-local or new warning. Rule audits find no clauses to
+review. Strict catalog freshness, shell syntax, active-reference/header lint
+and generated source-only health pass (981 registered files, no aggregate
+checker run). Changed links and the exact staged diff are checked before
+checkpointing. No TypeScript or repository-wide typecheck is run.
+
+C4 next constructs e:Im(f)⇒K(g) on whole native zero-family inputs by
+cokernel descent of the actual kernel mate and the restricted a⁻¹. The
+subplan fixes that route. C4 reconstruction/action, exactness, whole δ,
+concrete model/reifier work and the snake comparison remain required.
+The goal is active; deferred Op/profile/terminality work is unchanged.
+
 ### NUH-4C2c4: Canonical whole comparison and its characterization
 
 **Implemented after c1a79176.** The canonical a:Coim⇒Im is a defined whole
@@ -432,7 +497,7 @@ active-reference/header lint, changed Markdown links and exact staged diff
 are checked before the local checkpoint. Source metrics are bookkeeping,
 not extra formal qualification or resumable aggregate evidence.
 
-Next is Abelian invertibility of this actual a, then canonical exactness and
+**Historical C2c4 boundary, advanced by C3 above:** Abelian invertibility of this actual a, then canonical exactness and
 whole universal descent for δ. Concrete model/reifier automation and the
 snake comparison remain in the active goal; general terminality, old LES
 endpoint debugging, duality and strictness migration remain deferred.

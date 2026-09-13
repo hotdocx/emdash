@@ -1997,7 +1997,14 @@ observation E₀(unmate_P(E₁(transpose_Q(b)))); its `*_path` reconstructs ∂
 and `*_unique` proves b=a from that whole condition. These names do not
 introduce an opaque comparison, pointwise cone syntax or new factorization
 runtime cut. The function in b is not separately packaged as an internal
-functor. Abelian invertibility remains evidence about this actual a.
+functor. `OneCatAdjunctionNormality` is existing OmegaEquivAlong on this
+actual a. `one_cat_coimage_image_inverse_transf` selects its supplied left
+inverse; `one_cat_coimage_image_iso_evidence` derives both ordinary inverse
+laws with literal a as forward arrow. Family restriction uses generic action
+through `one_cat_adjunction_normality_family`, with the same inverse and
+native precomposition endpoints. `OneCatAbelianAdjunctionStructure` stores
+original P/Q and that fixed-a normality over an existing AdditiveCategory;
+it does not infer normality or introduce a second equivalence grammar.
 
 The corresponding kernel owners have the `kernel_presentation_*` and
 `cokernel_presentation_*` prefixes. Defined reflexivity paths package these

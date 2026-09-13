@@ -202,9 +202,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   mating. Its whole factorization and uniqueness are proved; no caller
   per-object square, factor record or new primitive is supplied. Four
   introduced-arrow evaluation clauses and two sufficient proof-time
-  comparisons complete the required computation. Abelian invertibility,
-  canonical exactness and whole δ remain next work. General lax/oplax
-  interchange is not qualified by these ordinary consumers.
+  comparisons complete the required computation. The ordinary adjunction-
+  normality owner now uses fixed-a OmegaEquivAlong, selects the existing
+  whole inverse and derives an IsoEvidence view through generic inverse
+  laws. Generic functor action restricts it to families. The native Abelian
+  package stores original P/Q and that normality over the original additive
+  capability, including binary products. These are nine definitions with
+  no new primitive or rule; normality remains supplied structure. Canonical
+  exactness, whole δ and concrete model construction remain next work.
+  General lax/oplax interchange is not qualified by these ordinary consumers.
   `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing

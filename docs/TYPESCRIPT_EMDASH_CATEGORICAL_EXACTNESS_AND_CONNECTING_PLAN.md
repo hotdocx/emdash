@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C2c4 canonical whole Coim⇒Im and native factorization/uniqueness qualified; Abelian invertibility next; exactness/connecting unfinished
+Status: C3 fixed-comparison normality, whole inverse and native Abelian package qualified; canonical exactness/connecting next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -49,6 +49,57 @@ explicitly: OmegaEquivAlong has equality-valued inverse laws; DefIso has
 judgmental inverse cuts. Do not infer one from the other without a qualified
 construction, introduce a duplicate equivalence grammar, or choose a second
 independent inverse merely to make a later comparison typecheck.
+
+C3 now implements [fixed-comparison normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp):
+
+```text
+Normality(P,Q) = OmegaEquivAlong(a)    in Functor_cat(D,C)
+a⁻¹ = left_inv(N) : Im ⇒ Coim
+a⁻¹∘a = id_Coim                     a∘a⁻¹ = id_Im.
+```
+
+The existing `omega_equiv_left_as_right_law` derives the second equation
+for the same selected inverse from the original left/right candidates.
+The whole `IsoEvidence` view retains a literally as its forward arrow.
+These are ordinary equation witnesses, not new DefIso judgmental cuts.
+Precomposition by a whole diagram family F:B→D transports fixed-a evidence
+using the existing generic functor action. The inverse of the restriction
+computes to the restriction of that same whole inverse. Components and
+further Hom action remain native observations, with no caller square proof.
+
+The [native Abelian adjunction structure](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp)
+is indexed by the original AdditiveCategory A (including selected whole
+binary products and terminal t), OneCat(C), and the original initial
+presentation at t. It stores P, Q and Normality(P,Q) in dependent Sigma.
+Projections retain these actual structures and the same whole H program.
+The additive hypothesis is required by the standard Abelian criterion;
+K/Q existence and comparison invertibility alone do not supply binary
+products. The nine definitions introduce no new classifier primitive,
+rewrite, unifier or ordinary universal dictionary. The initial prototype's
+inverse-law proof duplicated an existing library lemma and was not promoted.
+
+Normality remains supplied Abelian structure. The package constructor does
+not infer it from K/Q or build a closed concrete Freyd model. Concrete
+construction and comparison with the old normality providers remain later
+model obligations. This is the native condition and its computational
+consumer, not a proof that every whole pre-Abelian presentation is Abelian.
+
+C4 is the next construction. For whole h:J∘A⇒D over an arbitrary B, put
+f=E₀(h) and β=mate_P(h):A⇒K∘D. At the original Arr(f), derive β∘κ_f=0
+through whole projected inverse-mate faithfulness, then use native cokernel
+mating to obtain β̄:Coim∘Arr(f)⇒K∘D. Define
+
+```text
+e = β̄ ∘ (a restricted to Arr(f))⁻¹ : Im∘Arr(f) ⇒ K∘D.
+```
+
+This must be a constructed whole transformation at the original endpoints,
+with reconstruction and retained action. Generalize the already qualified
+whole descent machinery as needed; do not substitute a per-object cone
+algorithm or a new comparison axiom. Applying it to the existing
+ZeroArrowCone category gives the canonical exactness owner. Its
+invertibility is the exactness condition; the LES proof must derive that
+condition at its actual output, rather than assume the desired theorem.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes
@@ -385,10 +436,10 @@ next Hom functor with its original endpoints, and unrelated-input rejection
 are qualified by localized reviewers. The owner ledger records exact warning
 comparisons, inference-slot audits and the rejected alternatives.
 
-Next attach existing invertibility evidence to this actual a, then construct
-the canonical Im(f)→K(g) at native zero data and use its invertibility for
-exactness. This is additional Abelian/exactness structure, not a consequence
-of K/Q existence or of the two reconstruction paths. Continue to whole
+C3 above now attaches existing invertibility evidence to this actual a.
+Next construct the canonical Im(f)→K(g) at native zero data and use its
+invertibility for exactness. This is additional Abelian/exactness structure,
+not a consequence of K/Q existence or of the two reconstruction paths. Continue to whole
 universal descent for δ; do not run the old ordinary-record program as the
 primary implementation.
 
