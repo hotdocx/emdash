@@ -17,8 +17,12 @@ whole/point cancellation and legacy regressions pass. NUH-3B now supplies the
 [its native global application](../emdash3_2_zero_arrow_cone_adjunction_homology.lp),
 with one semantic implementation and legacy adapters. Whole boundary/H
 action and selected views pass focused checks with unchanged warning
-inventories. Derived ordinary records, raw input conversion and model/reifier
-migration remain pending. No new primitive, rewrite or unifier is added.
+inventories. NUH-3C1 supplies
+[direct raw zero-composite inputs](../emdash3_2_one_cat_zero_arrow_inputs.lp)
+through existing whole square action; their components and whole H consumer
+pass. Derived ordinary records, migration of packaged input adapters and
+model/reifier work remain pending. No new primitive, rewrite or unifier is
+added in these tranches.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

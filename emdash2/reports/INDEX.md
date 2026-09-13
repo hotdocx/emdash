@@ -18,8 +18,11 @@ their regressions pass. NUH-3B now supplies the
 [independent whole H-family](../emdash3_2_homology_adjunction_families.lp) and
 [native global H](../emdash3_2_zero_arrow_cone_adjunction_homology.lp), retaining
 the explicit ordinary target profile. Whole-functor comparisons and selected
-views pass. Derived ordinary universal records, raw input conversion and
-concrete-model migration remain active work in the living plan.
+views pass. NUH-3C1 adds
+[direct raw zero-composite inputs](../emdash3_2_one_cat_zero_arrow_inputs.lp)
+through the existing native square action, with a passing whole H consumer.
+Derived ordinary universal records, packaged input-adapter migration and
+concrete-model work remain active in the living plan.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

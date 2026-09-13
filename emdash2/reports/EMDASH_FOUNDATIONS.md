@@ -4225,8 +4225,8 @@ single whole H-family implementation, β=K(h)∘η and H=Q∘Arr(β), to the
 independent structures. Its native zero-arrow-cone application retains the
 explicit ordinary target profile. The legacy H operations delegate through
 the same adapters, preserving their whole functors and the selected
-comparison semantics described below. Ordinary universal records, raw
-chain-pair input conversion and concrete model/reifier migration remain
+comparison semantics described below. Ordinary universal records, packaged
+chain-pair input migration and concrete model/reifier construction remain
 further work. The Op/duality migration is separately preserved and
 user-deferred until after the universality/homology goal.
 
@@ -4294,8 +4294,19 @@ retained-selection CAS replay through this new whole interface remain further
 work. These declarations and defined comparisons are not opaque equality
 bridges or a claim of arbitrary quotient effectiveness.
 
-Original chain data can now enter that native source through an inverse
-kernel mate. Keep the original chosen lift beta:A→K(d), and form the actual
+There is now also a direct raw-input construction (NUH-3C1). Given b:X→A,
+d:A→B and d∘b=0, the existing whole native square action produces
+h:J(X)⇒Arr(d), with components b and 0:t→B. The path supplies its directed
+square filler through the existing core inclusion. Its initial dual produces
+Arr(d)⇒I(X) from a zero composite on the other side. These input adapters
+retain the explicit ordinary profile and select no kernel or cokernel.
+The resulting native cone enters the independent whole H directly; its
+boundary agrees with the actual mate by the whole adjunction comparison.
+This does not assert arbitrary diagram eta or yet derive every ordinary
+universal record.
+
+The legacy packaged chain adapter still enters that native source through an
+inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
 (A,d,unmate(beta)). Forward/inverse mate cancellation computes; the original
 kernel reconstruction proves that its incoming observation agrees with e.

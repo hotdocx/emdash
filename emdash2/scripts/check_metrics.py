@@ -185,6 +185,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_chain_pair_homology_records.lp"),
     Path("emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp"),
     Path("emdash3_2_one_cat_arrow_diagrams.lp"),
+    Path("emdash3_2_one_cat_zero_arrow_inputs.lp"),
     Path("emdash3_2_chain_pair_diagram_maps.lp"),
     Path("emdash3_2_adjunction_untranspose_naturality.lp"),
     Path("emdash3_2_zero_arrow_cone_map_introduction.lp"),

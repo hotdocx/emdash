@@ -26,8 +26,9 @@ Its active nucleus Git blob is
 `91f1974ece225e399604dce24710bf1437ad3ef5`. At launch the active LP sources
 and reviewers matched the final mathematical checkpoint `ff139362`.
 NUH-3A/B now add independent whole-adjunction and H-family extensions;
-legacy structural maps and H operations delegate into them. The nucleus
-itself remains unchanged.
+legacy structural maps and H operations delegate into them. NUH-3C1 adds
+native input construction from raw zero-composite data. The nucleus itself
+remains unchanged.
 
 The preserved total-op patch is anchored to nucleus blob
 `5387c65ab75ddcfff4b5ffca9fb6f9d082084774`. The current nucleus adds 328 lines
@@ -161,6 +162,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [native zero cone](../emdash2/emdash3_2_zero_arrow_cones.lp) | Represented comma built from native homdc/Sigma | Reuse native ownership, with repaired variance; no independent cone grammar |
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
+| [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
 | [direct connecting](../emdash2/emdash3_2_homology_record_connecting.lp) | Retained homology records and universal factors | Reuse mathematics and nonzero consumers while moving primary construction to whole universality |
 | [whole connecting](../emdash2/emdash3_2_homology_window_connecting_transformation.lp) | Declared whole transfor whose component is the direct construction | Preserve actual endpoints and generic action; audit the declaration/interpretation contract |
@@ -170,8 +172,9 @@ presheaf argument's variance while preserving the native homd owners.
 | [bounded model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts) | Supplied model and optional normality, prepared observations and explicit adoption | Automate repetitive model/reifier plumbing for the supported backend without upgrading trust claims silently |
 
 NUH-3A/B supply whole K/Q, mates and H without W/V inputs. The full vertical
-consumer still needs raw input conversion, derived ordinary records and a
-retained nonzero result with its realization contract. Adjunction triangles
+consumer now has a direct raw-input constructor; packaged input migration,
+derived ordinary records and a retained nonzero result with its realization
+contract remain. Adjunction triangles
 alone do not establish all interacting exactness laws.
 
 ## Fresh Baseline Evidence
@@ -199,6 +202,70 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-3C1: Native introduction of ordinary zero-composite inputs
+
+**Implemented (2026-09-13), following bc6bf2bd.** The existing whole
+`one_cat_arrow_diagram_func` now has a defined view of its native square
+action at canonical walking-arrow endpoints. The new
+[input module](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) uses this
+action to introduce J(X)⇒Arr(d) from b,d,d∘b=0 and, dually, Arr(d)⇒I(X)
+from d,b,b∘d=0. `path_to_hom` turns the given equation into the existing
+native square filler, retaining its required direction. The kernel-side
+input also forms an object of the existing ZeroArrowCone_cat directly.
+OneCat remains explicit. No kernel is selected merely to form an input.
+
+These are realization-facing raw-data adapters. They do not replace native
+diagram/Hom ownership or make manual factor operations the formal program.
+Universality remains the whole adjunction mate; H remains Q∘Arr(K(h)∘η).
+All four new implementation symbols are definitions, with no new primitive,
+rewrite, unifier or object cast. The input module's eighteen-module transitive
+source graph has no selected universal owner. Existing packaged chain-pair
+and Freyd adapters are not yet migrated to this direct constructor.
+
+The [input reviewer](../emdash2/examples/one_cat_zero_arrow_inputs.lp)
+checks the actual source/target components in both directions, the original
+native first/diagram data, and rejection of an arbitrary pair with no
+zero-composite evidence. The
+[H consumer](../emdash2/examples/zero_composite_adjunction_homology.lp)
+checks retained whole h, the boundary's mate characterization and global H
+formation using only the independent K/Q structures.
+
+A direct reflexivity assertion for the last mate characterization failed to
+compose two established diagram-point unifiers (040929 log). The reviewer
+instead specializes a generic proof obtained by applying the existing whole
+`adjunction_transpose_semantic_path`. That proof passes at the actual raw
+input. It is test evidence, not an installed equality rule or an object cast.
+No failed comparison was hidden by changing the native input or its result.
+
+Final guarded, warning-enabled logs under `emdash2/logs/probes/`:
+
+- `one_cat_zero_arrow_inputs-20260913-040913.log`;
+- `zero_composite_adjunction_homology-20260913-041519.log`;
+- `one_cat_arrow_diagrams-20260913-041154.log` (legacy regression);
+- `nuh3c_input_dependency_baseline-20260913-041158.log`;
+- `nuh3c_homology_input_baseline-20260913-041254.log`.
+
+The legacy reviewer retains its complete 1,144 critical-pair / 157 pattern
+inventory. The input reviewer matches its dependency-only join at 1,216/169;
+the H consumer matches its join at 1,221/169. Categories, locations, heads
+and rule families agree, with zero parser issues after stripping ANSI codes.
+The H baseline follows the consumer's dependency import order: a different
+order moved two existing terminal/product critical-pair report locations,
+without changing the pairs themselves.
+
+Strict LHS audits pass for all four affected source/reviewer files. Catalog
+and source-only health are synchronized; no aggregate typecheck was run.
+
+**Next NUH-3C2:** derive reconstruction at the actual kernel/cokernel mate
+and structural maps, then the ordinary universal records. The remaining
+diagram reconstruction/faithfulness evidence must be proved at the stated
+ordinary profile. Do not infer arbitrary diagram eta or equality of
+diagrams merely from their observed generator, and do not transfer the old
+W/V uniqueness evidence into a renamed interface. The new constructors
+currently concern introduced diagrams; extend their scope only with the
+required native comparison. Packaged input and concrete model migration,
+connecting and exactness remain subsequent work.
 
 ### NUH-3B: Independent whole H-family and native input-category consumer
 
@@ -258,7 +325,7 @@ Strict LHS audits pass for all nine affected source/reviewer files. The
 catalog check passes and health source metrics are refreshed with
 `--no-check`; no aggregate typecheck was run.
 
-**Next NUH-3C:** derive the ordinary universal records from the whole
+**Then scheduled NUH-3C (started above):** derive the ordinary universal records from the whole
 adjunction comparison without W/V. The current kernel/cokernel record
 modules still mate/unmate an old selected lift and transfer its IsContr
 evidence, so renaming their inputs is insufficient. Establish the needed
