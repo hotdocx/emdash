@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active NUH-3 whole-universality refactor; Op/duality migration preserved and deferred until after this goal
+Status: NUH-3 implementation locally checked; ordinary reconstruction retained after review; C4 checkpoint preparation; NUH-4 queued; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,44 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Consolidated reconstruction review (2026-09-13): the user's latest direction
+allows retaining r_C:D_C∘E_C≅id for now, provided the implementation remains
+computational and internal and does not require manually carried naturality
+or functoriality squares. Retain the current OneCat-restricted whole DefIso
+instance under this criterion. Its to/from transformations, inverse cuts,
+components and further action use existing generic owners. The four new
+endpoint rules compute identity components; there is no new per-map
+naturality premise or construction-specific naturality rule. This remains
+an explicit shape-universality primitive, not a theorem from the current
+Join β rules or a proof of a general normalization result.
+
+The ordinary faithfulness and record lemmas contain internal equality
+proofs, including an application of the generic strict-component naturality
+theorem. These are derived ordinary observations, not coherence parameters
+to the homology program or primary definitions of K/Q/H. Keep that profile
+qualification explicit; do not advertise the generic helper as a theorem
+about arbitrary lax comparisons. The source/signature audit confirms that
+the independent whole K/Q, mates and H sources do not import this record
+proof route. The scoped review therefore creates no replacement-owner
+prerequisite for NUH-4; finish C4's exact checkpoint review, then continue.
+The user's continuation explicitly keeps this design revisitable. If a
+consumer turns naturality/functoriality squares or their equality proofs
+into manually maintained primary data, revisit the construction and its
+generic owner; a green checkpoint does not waive this requirement.
+
+NativeArr(C) was only prose for the existing LaxArrow_cat C. E_C and D_C
+are existing functor definitions. The inverse projected from the present
+DefIso is r_C⁻¹, not D_C as an inverse of E_C. Only faithfulness of E_C is
+used here, and the one-sided comparison suffices in the ordinary scope.
+The earlier proposal to require a full fixed-forward E/D equivalence was
+premature and is withdrawn as a current gate. If such a comparison is later
+needed, reuse existing inverse machinery at its actual strength. Matching
+lax transformation profiles can support the usual interval/arrow
+classification, whereas strict diagram maps and genuinely lax squares
+cannot be interchanged. Merely weakening the naturality equation does not
+establish inverse laws. This clarification does not reopen the deferred
+Op/profile migration or authorize a general higher equivalence declaration.
 
 Implement the accepted native universality/homology redesign on the current
 kernel baseline, making whole categorical universality primary in formal homology and
@@ -200,8 +238,8 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-0 | complete in this launch checkpoint | Dedicated bootstrapped worktree, accepted directions registered, persistent goal started and scoped launch checks passed |
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
-| NUH-3 | active | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary views |
-| NUH-4 | pending NUH-3 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-3 | implementation checked; ordinary reconstruction retained; checkpoint preparation | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
+| NUH-4 | queued after C4 checkpoint | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -250,11 +288,20 @@ from that natural comparison and the existing inverse/naturality machinery.
 Actual comparison maps also let raw zero tests enter the original arbitrary
 diagram d, preserving their supplied arrows and future K(d)/Q(d) endpoints.
 
-Next NUH-3C4: derive native-square equality at OneCat, then monicity/epicity
-and full ordinary universal records without W/V. Migration of the packaged chain-pair and
-Freyd inputs, connecting/exactness and concrete model/reifier workflow remain
-outstanding. Continue on the current preadditive/ordinary homology baseline
-and preserve its explicit interpretation qualifications.
+NUH-3C4 now derives native-square equality at OneCat, cancellation of both
+whole structural maps, and complete ordinary kernel/cokernel records without
+W/V inputs. Their centres compute to the actual mates, and their lift/colift
+operations agree propositionally with the retained presentation records.
+Focused reviewers and dependency/warning audits pass. No primitive or rule
+was added in NUH-3C4. Whole K/Q existence and concrete model semantics remain
+supplied; NUH-3 completion is not completion of the whole goal.
+
+Next NUH-4A: migrate homology-family records and packaged chain-pair inputs
+to the independent structures. Preserve the actual β=K(h)∘η factor and Q
+observation on its whole introduced boundary diagram. The existing
+HomologyRecord stores that boundary factor separately, so a canonical test
+lift need not replace the actual β. Connecting/exactness, concrete models,
+reifier automation and snake comparison remain later obligations.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -456,6 +503,8 @@ must not label those alternatives validated implementations.
 | D-NUH-029 | Reconstruction and structural annihilation now derive from whole mate cancellation and the unit/counit, independently of W/V. Full ordinary uniqueness still needs the native walking-arrow representation/faithfulness comparison; do not infer equality of arbitrary transformations from component observations alone |
 | D-NUH-030 | Supply the missing ordinary walking-arrow shape-universality assembly explicitly as a whole natural DefIso D_C∘E_C ≅ id in End(Arr(C)), with OneCat and computing identity endpoint components. This is a new primitive law, not a theorem derived from existing join β rules or a judgmental equality of inverse functors. Derive map reflection from its whole inverse and naturality |
 | D-NUH-031 | Use the actual reconstruction maps to form J(X)⇒d and d⇒I(X) at an arbitrary original d. Preserve d and the original supplied raw arrows; use no diagram object cast, replacement selection or per-test injectivity premise |
+| D-NUH-032 | At OneCat, derive native-square equality by constructor congruence and proposition-valued fillers at the actual native Hom. This yields diagram-map equality, whole K/Q cancellation and ordinary factor contractions. New records use actual mate centres and no W/V inputs; selected-view comparisons are one-way consequences, not the source of universality |
+| D-NUH-033 | Retain the ordinary whole reconstruction DefIso after the user's computational/internal review. Its inverse and naturality come from generic owners; derived equality proofs supply no caller coherence fields. A full E/D equivalence is not a current prerequisite. Keep the primitive-law, OneCat and strict-component qualifications explicit |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

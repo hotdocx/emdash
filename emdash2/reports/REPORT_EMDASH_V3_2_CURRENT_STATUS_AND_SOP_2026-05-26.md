@@ -4,6 +4,13 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Reconstruction review (2026-09-13): retain the ordinary reconstruction law as
+a whole instance of the existing DefIso notion. Generic projections and
+inverse/naturality owners keep its use computational and internal, with no
+caller-supplied coherence squares. Derived equality proofs retain their
+ordinary/strict-component scope. The law remains a new shape primitive;
+a full E/D equivalence is not a current gate. C4 checkpoint review is next.
+
 Native universality update (2026-09-13): the user has deferred the Op/duality
 migration until after this goal; its partial work is preserved in
 [the resumption bundle](../audits/deferred_native_homd_y/README.md).
@@ -32,9 +39,14 @@ derivation from the older join β interface. Faithfulness and
 [raw tests at the original d](../emdash3_2_one_cat_zero_diagram_inputs.lp) are
 derived consumers. Eight added constant-family component overlaps are
 classified in the living ledger; focused subject reduction and consumers
-pass. Full ordinary universal records, packaged input and model/reifier
-migration remain pending. The earlier NUH-3A/B/C1/C2 tranches added no
-primitive or rule.
+pass. NUH-3C4 now derives [ordinary kernel/cokernel records](../emdash3_2_one_cat_adjunction_records.lp)
+without W/V, through native square equality, whole map reflection and mate
+cancellation. Their centres compute to the actual mates; their
+[selected-view comparisons](../emdash3_2_one_cat_adjunction_selected_views.lp)
+preserve the old lift/colift operations at the same endpoints. NUH-3 is
+implemented at this ordinary-view boundary. Homology-record/input migration
+follows the C4 checkpoint; concrete model/reifier work remains pending. NUH-3C4 adds no
+primitive, rewrite or unifier, as in the earlier NUH-3A/B/C1/C2 tranches.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

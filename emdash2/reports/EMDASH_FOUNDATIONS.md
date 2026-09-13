@@ -4331,13 +4331,41 @@ current join β recursor, and it does not identify D∘E with id as functors.
 Conjugating a diagram map's reconstructed image by this actual natural
 comparison derives faithfulness of E.
 
+The subsequent user review retains this whole comparison for now under the
+computational/internal requirement. The program does not carry a separately
+supplied naturality square for each diagram map: generic tapp/fapp and
+DefIso own its action and cancellation. The derived ordinary equality proof
+applies the current strict-component naturality theorem; it is not a claim
+about arbitrary lax reconstruction. Its DefIso inverse is the inverse of
+the comparison transformation, not a declaration that D is inverse to E.
+The law remains explicit primitive shape-universality evidence. A full E/D
+equivalence or a stronger general Join interface is not a prerequisite for
+the current homology work.
+
 Its component maps also extend raw zero-test introduction to an arbitrary
 original diagram d. Compose Arr(d[generator])⇒d with the canonical kernel
 test, or compose the canonical cokernel test with d⇒Arr(d[generator]). The
 supplied raw arrow is recovered by the identity endpoint components. The
 operation retains d and therefore its eventual K(d)/Q(d); there is no object
-cast or replacement selection. Full ordinary factor uniqueness and concrete
-whole-model construction remain subsequent work.
+cast or replacement selection.
+
+Ordinary factor uniqueness is now derived as well (NUH-3C4). At OneCat(C),
+the filler of a native square lies in a Hom of a discrete Hom-category and
+is therefore proposition-valued. Congruence of the native square constructor
+turns the two side-arrow paths into equality at its actual native Hom.
+Diagram faithfulness then gives equality of two inverse mates with the same
+structural image; mate cancellation gives equality of the factors.
+
+This constructs ordinary kernel/cokernel records from the whole adjunctions,
+without W/V selections. Their objects and structural arrows are the literal
+whole observations, and their contractible-fibre centres compute to the
+actual mates of the original-diagram tests. The old generic HFiber theorem
+supplies the contraction from the derived cancellation and Hom sethood.
+These IsContr records are derived ordinary views; whole categorical
+universality remains primary. Their lift/colift operations agree with the
+retained presentation-record operations at the same endpoints. Concrete
+whole-model construction and migration of the remaining homology consumers
+are still further work.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

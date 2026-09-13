@@ -1,0 +1,47 @@
+/* Cancellation of whole kernel/cokernel structural maps, with no W/V. */
+require open emdash.emdash3_2_one_cat_diagram_map_paths;
+require open emdash.emdash3_2_kernel_cokernel_adjunction_observations;
+
+symbol kernel_adjunction_cancel_path [C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  [t : τ (Obj C)] (T : τ (@TerminalObject C t))
+  (U : τ (@KernelAdjunctionStructure C S t T))
+  (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
+  (f g : τ (Hom C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d)))
+  (p : τ (@= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) f) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) g)))
+  : τ (@= (Hom C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d)) f g)
+≔ @eq_ap (@Transf WalkingArrow_cat C (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d) (Hom C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d))
+    (λ h : τ (@Transf WalkingArrow_cat C (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d), @fapp0 _ _ (@kernel_adjunction_lift_func C S t T U X d) h)
+    (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) f) (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g)
+    (@one_cat_diagram_map_path C C1 (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) f) (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g)
+      (@eq_trans (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@terminal_arrow_test_incoming C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) f)) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) f) (@terminal_arrow_test_incoming C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g))
+        (@kernel_adjunction_unlift_source_path C S t T U X d f)
+        (@eq_trans (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) f) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) g) (@terminal_arrow_test_incoming C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g)) p
+          (@eq_sym (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@terminal_arrow_test_incoming C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g)) (@comp_fapp0 C X (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T U) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@kernel_adjunction_inclusion C S t T U)) g)
+            (@kernel_adjunction_unlift_source_path C S t T U X d g))))
+      (@eq_trans (Hom C t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (@terminal_arrow_test_tip C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) f)) (@preadditive_hom_zero C S t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (@terminal_arrow_test_tip C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g))
+        (@preadditive_terminal_to_zero_path C S t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) T (@terminal_arrow_test_tip C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) f)))
+        (@eq_sym (Hom C t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (@terminal_arrow_test_tip C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g)) (@preadditive_hom_zero C S t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
+          (@preadditive_terminal_to_zero_path C S t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) T (@terminal_arrow_test_tip C t T X d (@fapp0 _ _ (@kernel_adjunction_unlift_func C S t T U X d) g))))));
+
+symbol cokernel_adjunction_cancel_path [C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  [t : τ (Obj C)] (T : τ (@TerminalObject (Op_cat C) t))
+  (U : τ (@CokernelAdjunctionStructure C S t T))
+  (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
+  (f g : τ (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X))
+  (p : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X f (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U))) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X g (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U)))))
+  : τ (@= (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X) f g)
+≔ @eq_ap (@Transf WalkingArrow_cat C d (@fapp0 C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T) X)) (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X)
+    (λ h : τ (@Transf WalkingArrow_cat C d (@fapp0 C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T) X)), @fapp0 _ _ (@cokernel_adjunction_colift_func C S t T U X d) h)
+    (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) f) (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)
+    (@one_cat_diagram_map_path C C1 d (@fapp0 C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T) X) (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) f) (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)
+      (@eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) t) (@initial_arrow_test_tip C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) f)) (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) t) (@initial_arrow_test_tip C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g))
+        (@preadditive_initial_incoming_zero_path C S t (@fapp0 WalkingArrow_cat C d walking_arrow_src) T (@initial_arrow_test_tip C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) f)))
+        (@eq_sym (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) t) (@initial_arrow_test_tip C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)) (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) t)
+          (@preadditive_initial_incoming_zero_path C S t (@fapp0 WalkingArrow_cat C d walking_arrow_src) T (@initial_arrow_test_tip C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)))))
+      (@eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X) (@initial_arrow_test_outgoing C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) f)) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X f (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U))) (@initial_arrow_test_outgoing C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g))
+        (@cokernel_adjunction_uncolift_target_path C S t T U X d f)
+        (@eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X f (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U))) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X g (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U))) (@initial_arrow_test_outgoing C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)) p
+          (@eq_sym (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) X) (@initial_arrow_test_outgoing C t T X d (@fapp0 _ _ (@cokernel_adjunction_uncolift_func C S t T U X d) g)) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T U) d) X g (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d (@cokernel_adjunction_projection C S t T U)))
+            (@cokernel_adjunction_uncolift_target_path C S t T U X d g)))));

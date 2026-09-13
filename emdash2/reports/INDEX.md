@@ -2,6 +2,12 @@
 
 Date: 2026-09-02
 
+Reconstruction review (2026-09-13): retain the ordinary whole DefIso instance
+under the user's computational/internal criterion. Its inverse, action and
+naturality use generic owners; no caller coherence squares are added.
+The primitive shape law and ordinary/strict-component scope remain explicit.
+A full E/D equivalence is not a prerequisite; C4 checkpoint review is next.
+
 Goal reorganization (2026-09-13): the user deferred the Op/duality migration
 until after the native universality/homology goal and directed NUH-3 to start
 on the current nucleus. Checkpoints and the latest unfinished experiment are
@@ -28,8 +34,12 @@ consumers. NUH-3C3 supplies the
 and an explicit [ordinary reconstruction law](../emdash3_2_one_cat_diagram_reconstruction.lp):
 a new whole natural DefIso D∘E ≅ id, with identity endpoint computations.
 Faithfulness and [raw tests at original diagrams](../emdash3_2_one_cat_zero_diagram_inputs.lp)
-are derived from that law. Full ordinary universal records, packaged input
-migration and concrete-model work remain active in the living plan.
+are derived from that law. NUH-3C4 now supplies the complete
+[ordinary K/Q records](../emdash3_2_one_cat_adjunction_records.lp), with derived
+uniqueness and computing mate centres, plus
+[retained lift/colift comparisons](../emdash3_2_one_cat_adjunction_selected_views.lp).
+NUH-3 is implemented at its ordinary-view boundary. Homology-record and
+packaged input migration follow the C4 checkpoint; concrete-model work remains later.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

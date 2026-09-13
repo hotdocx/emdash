@@ -2,9 +2,87 @@
 
 Date: 2026-09-12
 
-Status: active NUH-3 whole universality; NUH-1/2 duality work preserved and user-deferred after this goal
+Status: NUH-3 implementation checked; ordinary reconstruction retained after review; C4 checkpoint preparation; NUH-4 queued; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+
+Consolidated user review (2026-09-13): retain the present
+r_C:DefIso(End(Diag(C)),D_C∘E_C,id) for the ordinary-target use, provided
+everything remains computational/internal and the program does not manually
+carry naturality/functoriality squares. The implementation meets that scoped
+criterion: r_C is one whole internal witness; defiso_to/from select its two
+transformations, generic DefIso cuts cancel them, and tapp/fapp expose their
+components and higher action. Four endpoint rules compute identities. No
+per-diagram naturality premise or specialized naturality rule is introduced.
+The checked computations cover endpoint projections, inverse cuts and the
+ordinary consumers; typed further action is not a claim of complete higher
+normalization. The shape-law instance is still primitive rather than
+derived from the beta-only Join interface.
+
+There are actual equality proofs in functor_reconstruction_paths and the
+ordinary square/cancellation/record modules. They apply generic naturality,
+congruence and inverse computation to derive ordinary observations. They
+do not provide a second functor/transfor structure or ask callers to supply
+coherence squares. In particular, the reconstruction helper currently uses
+strict_component_naturality_path. Its application here is OneCat-restricted;
+do not generalize that equality argument to arbitrary lax transformations
+without its needed profile. Prototype strictness migration stays deferred.
+
+The dependency audit confirms that independent K/Q structures, their mates,
+the H-family and native global H have 9/11/10/16-module source graphs with
+no reconstruction, ordinary square-path or ordinary record dependency.
+Thus this comparison is in the derived ordinary-view lane, not a truncation
+of the generic primary K/Q/H program.
+
+NativeArr(C) is prose for LaxArrow_cat C, not a new declaration. E_C and D_C
+are already defined functors. The projected inverse of the current DefIso
+is r_C⁻¹; it does not designate D_C as an inverse of E_C. The ordinary proof
+uses only E_C's faithfulness, derived from this one-sided reconstruction.
+The earlier proposal to replace it immediately by a full fixed-forward
+equivalence was too strong and is withdrawn as an implementation gate.
+Preserve the existing evidence and proceed to C4 checkpoint review/NUH-4.
+The user explicitly retains the right to revisit this design against the
+computational/internal criterion, including avoiding manually carried
+naturality/functoriality square proofs or equations. Apply that criterion
+at each new consumer; do not use checkpoint status to freeze the design.
+
+The lax question has two different levels. In the standard strict
+2-categorical model, strict interval functors with lax transformations and
+modifications describe the usual lax-arrow category, with matching filler
+orientation. Strict transformations instead describe commuting squares;
+arbitrary unnormalised lax interval functors can carry additional unit data.
+Thus a full interval/arrow comparison depends on the selected profiles, not
+just on replacing an equality by a lax cell. One-sided lax naturality alone
+does not supply either missing inverse laws or ordinary equality reflection.
+The distinction between strict functors with lax transformations and lax
+functors themselves is explicit in
+[Nikolić's primary reference](https://tac.mta.ca/tac/volumes/34/22/34-22abs.html).
+This semantic clarification is not a new higher/profile implementation row.
+If a full comparison is later consumed, use the existing fixed-forward
+machinery at the strength actually established. OmegaEquivAlong currently
+has equality-valued inverse laws; DefIso has judgmental inverse cuts and
+no existing DefIsoAlong classifier. Neither follows just from an arbitrary
+lax reconstruction cell.
+
+An additional reconstruction-action review probe at 062809 did not establish
+the proposed raw mixed-action conversions. It is exploratory evidence only,
+not a current consumer prerequisite. Do not expand the projection bridge
+without a concrete required observation. All checked code and checkpoint
+323e71fc are preserved; the present clarification changes documents only.
+
+Semantic clarification: in the standard ordinary-category interpretation,
+Diag(C)=Fun([1],C), while NativeArr(C) has arrows as objects and commuting
+squares as maps. E extracts d(0→1); D builds the [1]-diagram of that arrow.
+For every d, r_d:D(E(d))⇒d has identity components at 0 and 1. Its inverse
+has the same endpoint components, and naturality for h:d⇒e reads
+r_e∘D(E(h))=h∘r_d; both sides have h's two components. Thus the whole
+natural isomorphism is mathematically valid in that ordinary interpretation.
+The existing DefIso in End(Diag(C)) records this particular comparison.
+This validates its intended semantics, not derivability from the current
+β-only Join interface or its architectural placement as a new primitive.
+No unrestricted higher/lax extension is being claimed. The usual arrow-
+category interpretation is also explicit in the
+[mathlib arrow-category reference](https://leanprover-community.github.io/mathlib4_docs/Mathlib/CategoryTheory/Comma/Arrow.html).
 
 Latest user direction (2026-09-13): park the Op/duality migration because
 of its possible strict/lax interaction, preserve its partial results, and
@@ -159,11 +237,11 @@ presheaf argument's variance while preserving the native homd owners.
 | Owner | Current dependency | Intended next boundary |
 | --- | --- | --- |
 | [generic adjunction mates](../emdash2/emdash3_2_adjunction_mates.lp) | Defined whole Hom views of the existing adjunction comparison, with whole and point cancellation | Reuse as primary operation owners; preserve cut discriminators |
-| [whole K/Q structures](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp) and [their mates](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp) | Whole functors and native adjunction evidence; no W/V or selected-factor dependency | NUH-3A implemented; H-family migrated in NUH-3B; derive ordinary views next |
+| [whole K/Q structures](../emdash2/emdash3_2_kernel_cokernel_adjunctions.lp) and [their mates](../emdash2/emdash3_2_kernel_cokernel_adjunction_mates.lp) | Whole functors and native adjunction evidence; no W/V or selected-factor dependency | NUH-3A implemented; H-family migrated in NUH-3B; ordinary views derived in NUH-3C4 |
 | [kernel presentation](../emdash2/emdash3_2_kernel_adjunction_presentations.lp) and [cokernel presentation](../emdash2/emdash3_2_cokernel_adjunction_presentations.lp) | Legacy W/V-indexed choices, with adapters into the independent structures; structural maps now delegate there | Keep selected realization one-way; no mandatory old factor dictionary for new formal operations |
 | [kernel record](../emdash2/emdash3_2_kernel_adjunction_records.lp) and [cokernel record](../emdash2/emdash3_2_cokernel_adjunction_records.lp) | Whole endpoints; old selected universal evidence is transferred/recentered | Derive ordinary factor/uniqueness observations from the whole comparison at the stated profile |
-| [independent mate observations](../emdash2/emdash3_2_kernel_cokernel_adjunction_observations.lp) | Inverse-mate component formulas, reconstruction by cancellation, and annihilation from counit/unit, without W/V | NUH-3C2 implemented; NUH-3C3 supplies diagram faithfulness; derive full ordinary uniqueness next |
-| [ordinary diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp) | New whole natural DefIso D∘E≅id at OneCat, with four endpoint rules; faithfulness is derived | NUH-3C3 implemented; retain the primitive shape law in the trust audit and derive native-square/ordinary factor uniqueness next |
+| [independent mate observations](../emdash2/emdash3_2_kernel_cokernel_adjunction_observations.lp) | Inverse-mate component formulas, reconstruction by cancellation, and annihilation from counit/unit, without W/V | NUH-3C2 implemented; diagram faithfulness and full ordinary uniqueness derived in NUH-3C3/C4 |
+| [ordinary diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp) | New whole natural DefIso D∘E≅id at OneCat, with four endpoint rules; faithfulness is derived | NUH-3C3 retained after review; keep the primitive shape law and ordinary/strict-component scope in the trust audit |
 | [native zero cone](../emdash2/emdash3_2_zero_arrow_cones.lp) | Represented comma built from native homdc/Sigma | Reuse current native ownership at the stated profile; the coupled Op migration is separately deferred; no independent cone grammar |
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
@@ -208,6 +286,99 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-3C4: Ordinary uniqueness from native square paths
+
+**Implemented (2026-09-13), following 323e71fc.** The
+[native square paths](../emdash2/emdash3_2_one_cat_native_square_paths.lp)
+use OneCat(C) to derive proposition-valued filler Homs. Path induction on the
+two side-arrow paths and congruence of the existing square constructor then
+prove equality at the actual native Hom classifier. The first flattened-Σ
+attempt did not compare with that classifier; the accepted proof preserves
+the native codomain rather than adding a classifier equality or rewrite.
+
+The [diagram-map paths](../emdash2/emdash3_2_one_cat_diagram_map_paths.lp)
+reflect this native square equality through the NUH-3C3 reconstruction law.
+The [adjunction cancellation proofs](../emdash2/emdash3_2_one_cat_adjunction_cancellation.lp)
+apply it to inverse mates. Equality after the kernel inclusion gives their
+source-side path, and preadditive terminality identifies their zero tips.
+Whole map equality and mate cancellation then give f=g. The cokernel proof
+uses the dual endpoint observations and the original initial structure.
+There is no W/V lookup or selected uniqueness proof in either derivation.
+
+The [ordinary records](../emdash2/emdash3_2_one_cat_adjunction_records.lp)
+now expose `kernel_adjunction_record` and `cokernel_adjunction_record` from
+S, OneCat(C), the terminal/initial structures, whole adjunction structure and
+the original diagram d. Their objects and structural maps are literally
+K(d), Q(d) and the counit/unit observations. Every factor centre is the actual
+mate of the original-diagram test introduced from its raw annihilator data.
+The native reconstruction theorem proves the factor equation, and the newly
+derived cancellation plus Hom sethood supplies its IsContr evidence.
+The factor's local λh retains h's own endpoint until its concrete test is
+substituted, so no additional equality premise is smuggled into the proof.
+
+The two existing generic HFiber proofs were moved unchanged into
+[hfiber_cancellation](../emdash2/emdash3_2_hfiber_cancellation.lp).
+The old hom_factor_universality module imports them; all six original
+signatures and bodies across that split are verified unchanged. The new
+record source imports the legacy record classifiers/constructors as output
+vocabulary, but has no W/V capability, presentation, or selected-contraction
+reference. Its ordinary interpretation retains the explicit C1; the generic
+whole H interface has not been truncated.
+
+The [selected views](../emdash2/emdash3_2_one_cat_adjunction_selected_views.lp)
+prove that the new lift/colift agrees with the retained presentation-record
+operation at the same endpoints. They use new cancellation and both
+reconstruction equations; they do not transfer the old uniqueness evidence
+into the new records or claim equality of complete record packages.
+
+The [record reviewer](../emdash2/examples/one_cat_adjunction_records.lp)
+checks literal object/structural projections, computed mate centres, original
+raw-arrow reconstruction, and public uniqueness for both records. The
+[square reviewer](../emdash2/examples/one_cat_native_square_paths.lp)
+checks ordinary filler independence and preserves the nontruncated boundary.
+The old factor-universality consumer remains green. This tranche introduces
+no primitive, runtime rule or unifier; it uses the explicit ordinary shape
+law added in NUH-3C3.
+
+Serial guarded, warning-enabled logs in `emdash2/logs/probes/`:
+
+- `one_cat_adjunction_records-20260913-055613.log`;
+- `one_cat_native_square_paths-20260913-060423.log`;
+- `emdash3_2_hom_factor_universality-20260913-060428.log`;
+- `hom_factor_universality-20260913-060433.log`;
+- `nuh3c_record_dependency_baseline-20260913-060439.log`;
+- `emdash3_2_one_cat_adjunction_selected_views-20260913-060446.log`;
+- `nuh3c_selected_record_dependency_baseline-20260913-060453.log`.
+
+After the reconstruction review, the unchanged record and native-square
+reviewers passed again in `one_cat_adjunction_records-20260913-065713.log`
+and `one_cat_native_square_paths-20260913-065741.log`. The clarification
+itself changes documents only; no broader typecheck was run.
+
+The old factor source and consumer preserve the complete 1,244 critical-pair
+/ 169 pattern inventory against the 054703 source baseline. Both new record
+and selected-view consumers match their exact dependency joins at 1,286/169,
+including locations, heads and participant families. ANSI-stripped parsing
+has no issues. Nine focused LHS audits and the catalog check pass; source
+health is refreshed with `--no-check`. All validation remains localized.
+
+**NUH-3 implementation checks pass at its stated ordinary-view boundary;
+the subsequent review retains the whole reconstruction under the explicit
+computational/internal criterion above. C4 checkpoint review is next.**
+Whole K/Q/mates and H have independent entry points, and the ordinary records
+are now derived without W/V inputs. Whole structure existence is still
+supplied; this does not construct a concrete model or finish the whole goal.
+
+**Next NUH-4A:** migrate the homology-family record consumer to independent
+U/Q and C1. The existing HomologyRecord already stores its actual boundary
+factor separately, so retain β=K(h)∘η rather than substitute the ordinary
+record's canonical test lift. Keep the actual Q observation on the whole
+introduced boundary diagram. Also introduce packaged chain-pair inputs
+through the direct raw constructor before any kernel selection. Preserve
+legacy realization comparisons and the later connecting/exactness, model and
+snake-comparison obligations. Op, spectral research and old symbolic endpoint
+experiments remain deferred.
 
 ### NUH-3C3: Whole observation of walking-arrow diagrams
 
@@ -327,7 +498,7 @@ The registered reviewer and exact dependency join have identical complete
 stripping ANSI codes. Both focused LHS audits and the catalog check pass;
 source health is refreshed without aggregate typechecking.
 
-**Next NUH-3C4:** derive equality of native squares from equality of their
+**Then scheduled NUH-3C4 (implemented above):** derive equality of native squares from equality of their
 two side arrows at OneCat, using proposition-valued filler Homs. Apply the
 new faithfulness theorem to inverse mates, deriving monicity/epicity of the
 whole structural maps. Reconstruction supplies the chosen factors; Hom
