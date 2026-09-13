@@ -54,8 +54,15 @@ and [whole H action](../emdash3_2_one_cat_chain_pair_homology_maps.lp), preservi
 the original components and record endpoints without selected kernel lifts.
 NUH-4B3 specializes that action to [raw Freyd maps](../emdash3_2_commutative_algebra_freyd_native_maps.lp)
 and [their H action](../emdash3_2_commutative_algebra_freyd_adjunction_homology_maps.lp),
-preserving the original raw classes and H-record endpoints. Derived ordinary
-category interfaces for connecting/exactness are next; concrete-model work remains later.
+preserving the original raw classes and H-record endpoints.
+
+The user has selected a [direct categorical exactness/connecting continuation](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md).
+Ordinary category bridges remain optional compatibility views. NUH-4C1 now
+provides [whole Coim/Im and their structural transformations](../emdash3_2_image_coimage_adjunction_families.lp)
+directly from K/Q and κ/q. Sixteen focused checks retain whole/point and
+next Hom action, with unchanged dependency warnings. The canonical
+Coim⇒Im comparison is next; normality, direct whole δ/exactness and
+concrete-model work remain further steps.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

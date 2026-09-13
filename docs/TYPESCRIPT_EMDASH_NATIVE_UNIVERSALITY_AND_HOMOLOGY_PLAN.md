@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: NUH-4B1/2 checkpoint 0a313a2a; NUH-4B3 Freyd maps checked; derived ordinary category interfaces next; Op/duality migration deferred
+Status: direct input/map migration checkpointed through ae2719d7; NUH-4C1 whole Coim/Im checked; canonical comparison next; ordinary bridge optional; Op/duality migration deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,16 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Latest connecting/exactness direction (2026-09-13): use whole categorical
+universality directly for the primary construction. Do not first convert
+K/Q to ordinary factor/IsContr dictionaries to run the old point program.
+The checked ordinary category-view prototype is retained only as optional
+compatibility evidence. The
+[categorical exactness and connecting subplan](TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md)
+now owns NUH-4C: whole Coim/Im, their canonical comparison and Abelian
+invertibility, canonical image-to-kernel exactness comparisons, and whole
+universal descent for δ. Existing ordinary proofs remain reference consumers.
 
 Consolidated reconstruction review (2026-09-13): the user's latest direction
 allows retaining r_C:D_C∘E_C≅id for now, provided the implementation remains
@@ -239,7 +249,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: direct inputs/maps through Freyd checked; category/connecting consumers next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: direct inputs/maps through Freyd checked; categorical exactness/connecting owners next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -329,11 +339,21 @@ The original component classes, whole action in the raw-agreement parameter,
 actual H application and original record endpoints check. Existing raw
 conversion and selected-map definitions remain unchanged.
 
-Next NUH-4C: derive the ordinary all-arrow kernel/cokernel interfaces from
-whole P/Q, then use those derived views for the pre-Abelian/Abelian
-interfaces required by connecting/exactness consumers. Normality remains
-explicit evidence; it must not be inferred merely from K/Q existence.
-Concrete whole models, reifier automation and snake comparison remain later.
+NUH-4C1 follows the direct categorical subplan. The
+[whole image/coimage owner](../emdash2/emdash3_2_image_coimage_adjunction_families.lp)
+now defines Arr(κ), Arr(q), Coim=Q∘Arr(κ), Im=K∘Arr(q), and their structural
+projection/inclusion. Six transparent definitions add no primitive, rule,
+unifier or ordinary factor dictionary. Sixteen focused reviewer assertions
+cover the original structural transformations, nonidentity diagram-map
+components, whole Hom action, structural components, next Hom action and
+noncollapse of independent selections.
+
+Next NUH-4C2 constructs the canonical whole comparison. Then express
+Abelian normality and exactness by invertibility of the actual comparison
+maps, and build δ by whole universal descent. The ordinary all-arrow/category
+bridge is optional compatibility work, not a primary prerequisite. Do not
+infer normality from K/Q existence or postulate LES exactness. Concrete
+whole models, reifier automation and snake comparison remain later.
 
 Split these rows into bounded subrows when concrete owners and hypotheses are
 known. Keep one current semantic experiment at a time. A failed candidate is
@@ -542,6 +562,8 @@ must not label those alternatives validated implementations.
 | D-NUH-036 | Raw Freyd agreements now form native inputs without kernel presentations, with canonical local categorical data filled. Whole P/Q remain explicit for H and its record; the raw agreement is not treated as a universal provider or model. Shared raw observations and selected legacy definitions are unchanged |
 | D-NUH-037 | Direct native maps derive their ordinary comparison internally from original raw-map factors and terminal-zero structure, without K/P. Preserve the native Hom's represented postcomposition head using the existing proof-time comparison as a typed view. Whole raw-map action composes with H's original Hom action; no new caller coherence fields or runtime rules |
 | D-NUH-038 | Freyd raw-agreement PathMap composes with the existing direct native/H map functors. Original raw component classes and H-record endpoints remain literal observations. Whole action is in the existing agreement parameter at fixed raw morphisms; no new raw-complex category or joint directed action is claimed |
+| D-NUH-039 | Connecting and exactness must use whole categorical universality directly. The ordinary category bridge stays optional. Whole Coim/Im and canonical comparison invertibility express Abelian normality/exactness; δ is to be built by whole universal descent. A whole declaration whose component invokes the old record algorithm is reference evidence, not completion of this migration |
+| D-NUH-040 | Whole Coim/Im and their projection/inclusion are direct composites and whiskerings of the original K/Q and κ/q. Retain these functors and their higher action. The canonical Coim⇒Im comparison remains a separate construction; neither its implementation nor its Abelian invertibility is supplied by the six definitions |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

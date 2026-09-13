@@ -2,9 +2,17 @@
 
 Date: 2026-09-12
 
-Status: NUH-4B1/2 checkpoint 0a313a2a; NUH-4B3 Freyd maps checked; derived ordinary category interfaces next; NUH-1/2 duality work user-deferred
+Status: direct input/map migration checkpointed through ae2719d7; NUH-4C1 whole Coim/Im checked; canonical comparison next; ordinary category bridge optional; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+
+Latest correction (2026-09-13): the primary connecting/exactness construction
+must continue through whole categorical universal operations. The proposed
+ordinary category-view bridge is optional compatibility work. The new
+[categorical subplan](TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md)
+records whole image/coimage comparisons, exactness and universal descent
+for δ, with explicit implementation obligations. No whole exactness or
+connecting theorem is claimed merely from this formulation.
 
 Consolidated user review (2026-09-13): retain the present
 r_C:DefIso(End(Diag(C)),D_C∘E_C,id) for the ordinary-target use, provided
@@ -292,6 +300,88 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C: Direct categorical exactness and connecting
+
+**Current primary continuation.** Follow the categorical subplan linked
+above. Coim=Q∘Arr(κ) and Im=K∘Arr(q) are now whole native functors (C1
+below). Next construct the canonical whole comparison and correctly indexed
+invertibility evidence. Exactness concerns the canonical Im(f)→K(g)
+comparison; connecting is a whole cokernel/mate descent through its
+canonical cover. All required cells and inverse data must be constructed
+or identified as genuine input structure, not hidden in new axioms.
+
+The existing whole connecting declaration remains backed by its ordinary
+record component; it is a reference to compare against, not the desired
+final definition. Coherent row/window data and native Hom owners remain
+the input language. No new naturality-square premises or primary IsContr
+factor dictionaries are introduced.
+
+**Preserved optional prototype:** `tmp/probes/nuh4c_category_views.lp`
+defines ordinary all-arrow K/Q views and pre-Abelian/Abelian packaging.
+It passes `nuh4c_category_views-20260913-085741.log`; its dependency join
+passes `nuh4c_category_view_dependencies-20260913-085825.log`. It adds no
+primitive/rule/unifier and keeps normality explicit. It was not promoted
+to active source before the user's correction and is not a prerequisite
+for the direct categorical continuation. Reuse only for an actual later
+compatibility or CAS observation.
+
+### NUH-4C1: Whole Coim/Im and their structural transformations
+
+**Implemented after ae2719d7.** The
+[image/coimage adjunction owner](../emdash2/emdash3_2_image_coimage_adjunction_families.lp)
+contains six transparent definitions:
+
+- `kernel_adjunction_arrow_func` = Arr(κ);
+- `cokernel_adjunction_arrow_func` = Arr(q);
+- `adjunction_coimage_func` = Q∘Arr(κ);
+- `adjunction_image_func` = K∘Arr(q);
+- `adjunction_coimage_projection` = q whiskered by Arr(κ);
+- `adjunction_image_inclusion` = κ whiskered by Arr(q).
+
+The inputs are the original whole P/Q. The definitions use only existing
+arrow introduction, composition and prewhiskering. There are no new
+primitive, rewrite, unification or equality-proof declarations, and no
+W/V, ordinary record or selected factor prerequisites. The canonical
+comparison, its invertibility and exactness/connecting are not postulated.
+
+The [reviewer](../emdash2/examples/image_coimage_adjunction_families.lp)
+checks 14 positive and two negative assertions. Whole diagram observations
+recover κ/q; an arbitrary diagram map retains K[u], u₀, u₁ and Q[u] in
+the appropriate components. Coim/Im retain their original whole Hom
+composites; structural components recover the original q/κ, and a further
+Hom of their transfor action remains typed. Independently supplied P/Q
+selections do not collapse.
+
+Warning-enabled, serial resource-guarded ≤90-second evidence:
+
+- dependency baseline: `emdash3_2_kernel_cokernel_adjunctions-20260913-091647.log`;
+- prototype owner: `nuh4c_image_coimage_families-20260913-091802.log`;
+- prototype reviewer: `nuh4c_image_coimage_review-20260913-091958.log`;
+- promoted owner: `emdash3_2_image_coimage_adjunction_families-20260913-092113.log`;
+- promoted reviewer, also checking the final source comment: `image_coimage_adjunction_families-20260913-092200.log`.
+
+All inventories match the single direct dependency exactly: 1,151 critical
+pairs and 159 replaceable-pattern warnings, with matching locations, term
+heads and participant families and zero parser issues. Focused LHS audit,
+catalog freshness and shell syntax checks pass. Source-only health is
+refreshed to 951 registered files; no aggregate or TypeScript check ran.
+
+**Next NUH-4C2:** qualify whole zero-triangle rotation and mate assembly for
+the canonical comparison. The temporary `nuh4c_square_transpose.lp` uses
+only arrow introduction and internal argument exchange. Its first whole
+column-observation assertion fails because the resulting whole endpoint
+functors do not unify with evaluation postwhiskering
+(`nuh4c_square_transpose-20260913-092243.log`). The companion
+`nuh4c_square_transpose_points.lp` passes all four corner and two column
+component computations (`nuh4c_square_transpose_points-20260913-092445.log`).
+This isolates an unqualified whole computational comparison; it is not a
+mathematical counterexample or an implementation of the canonical comparison.
+No part of that experiment is promoted and no new equality/unification
+axiom is added to bypass it. Whole alignment is required before using
+the transposed unit/counit as native mate input. Their zero-end columns
+also need the appropriate terminal/initial universal comparison; mere
+pointwise agreement cannot stand in for either whole construction.
+
 ### NUH-4B3: Raw Freyd maps use the direct native input path
 
 **Implemented after 0a313a2a.** The
@@ -339,14 +429,10 @@ reviewer preserves 1,255/169. Locations, heads and participant families
 agree, with zero parser issues. Three focused LHS audits and the catalog
 pass; source-only health is refreshed to 949 files. No aggregate ran.
 
-**Next NUH-4C:** derive HasComputationalKernels/HasComputationalCokernels
-as ordinary all-arrow views of whole P/Q at canonical walking-arrow input.
-Feed those derived views, rather than independently supplied W/V, to the
-existing pre-Abelian constructor. A subsequent Abelian view must keep the
-existing normality evidence explicit and indexed by those same derived
-views; K/Q existence alone does not imply Abelian normality. This prepares
-the actual connecting/exactness consumers while keeping whole universality
-primary. Whole-model/reifier construction and snake comparison remain later.
+**Next NUH-4C:** the subsequent user correction selects the direct categorical
+subplan above. The ordinary category-view experiment is retained as optional
+compatibility evidence, not the primary connecting/exactness implementation.
+Whole-model/reifier construction and snake comparison remain later.
 
 ### NUH-4B1/2: Native maps before kernel selection and whole H action
 

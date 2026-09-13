@@ -91,9 +91,19 @@ NUH-4B3 now specializes the action to
 The [shared raw-map data](../emdash3_2_commutative_algebra_freyd_chain_map_data.lp)
 preserves both old conversions and exposes their PathMap action. Eight
 checks retain raw f₂/f₁/f₀, actual H and original record endpoints, and next
-Hom action. No new rule or primitive is added. Derived ordinary category
-interfaces for connecting/exactness, concrete whole-model and reifier
-construction remain pending.
+Hom action. No new rule or primitive is added.
+
+NUH-4C follows the user's [direct categorical continuation](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md);
+ordinary factor/category bridges are optional compatibility views. The
+[whole image/coimage owner](../emdash3_2_image_coimage_adjunction_families.lp)
+now defines Arr(κ), Arr(q), Coim=Q∘Arr(κ), Im=K∘Arr(q), π:ev₀⇒Coim and
+ι:Im⇒ev₁ through six transparent definitions. Whole structural observations,
+arbitrary diagram-map components, whole Hom composites and next transfor
+Hom action pass sixteen checks. There are no new primitives, rules,
+unifiers or ordinary factor inputs; the full warning inventory matches
+the direct dependency. The canonical comparison Coim⇒Im and its Abelian
+invertibility are separate next work, followed by direct categorical
+exactness/connecting and concrete whole-model/reifier construction.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

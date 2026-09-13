@@ -83,8 +83,10 @@ Latest native-universality goal direction (2026-09-13): the user has deferred
 the Op/duality migration until after that goal because it may interact with
 strict/lax structure. Preserve its checkpoints and partial experiments; do
 not continue those probes as prerequisites for the remaining work. The
-active tranche is NUH-3 whole kernel/cokernel universality on the current
-nucleus. The living plan and `audits/deferred_native_homd_y/README.md` record
+whole kernel/cokernel universality is implemented at its ordinary-view
+boundary. The active NUH-4 continuation uses whole universality directly for
+categorical exactness/connecting; ordinary record bridges are optional.
+The living plan and `audits/deferred_native_homd_y/README.md` record
 the new queue and later resumption boundary. Existing semantic qualifications
 remain explicit; this deferral is not a claim that the nucleus is repaired.
 
@@ -163,7 +165,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   to whole forward/backward mates with projected cancellation and semantic
   usability. The kernel/cokernel-mate modules compare with original selected
   lifts/colifts; zero-arrow universal tests derive their inputs from actual
-  transformations. `emdash3_2_homology_families.lp` defines whole H for an
+  transformations. The independent
+  `emdash3_2_image_coimage_adjunction_families.lp` defines whole Coim/Im and
+  their projection/inclusion directly from K/Q and κ/q, retaining whole
+  action without ordinary factor inputs. Its canonical Coim⇒Im comparison
+  remains separate work under the direct categorical continuation.
+  `emdash3_2_homology_families.lp` defines whole H for an
   already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
   Its selected-view module compares objects and maps with the existing
   operations, without runtime reselection or new primitive H.

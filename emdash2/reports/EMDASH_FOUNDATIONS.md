@@ -4408,8 +4408,25 @@ agreements to generic chain-map factors is shared unchanged, then mapped
 through PathMap and the generic native/H map functors. The original raw
 component classes and record H endpoints are retained. Whole action is in
 the existing raw-agreement parameter at fixed raw morphisms and endpoints;
-no new category of all raw complexes is claimed. The next integration uses
-ordinary category interfaces derived from whole P/Q for connecting/exactness.
+no new category of all raw complexes is claimed.
+
+The subsequent connecting/exactness continuation uses categorical
+universality directly; ordinary record/category interfaces are optional
+compatibility views. Its first construction is already whole. With
+D=Functor_cat(WalkingArrow_cat,C), κ:K⇒ev₀ and q:ev₁⇒Q, the existing
+transformation-to-diagram operation gives Arr(κ),Arr(q):D→D. Define
+Coim=Q∘Arr(κ) and Im=K∘Arr(q). Whiskering q by Arr(κ) gives π:ev₀⇒Coim;
+whiskering κ by Arr(q) gives ι:Im⇒ev₁. These are actual internal functors
+and transformations with the original diagram-map and higher action.
+
+The canonical Coim⇒Im comparison remains to be constructed. Its
+invertibility will be genuine Abelian structure, not a consequence of
+having K/Q. Likewise exactness concerns the canonical Im(f)→K(g)
+comparison at a native zero pair; a freely chosen isomorphism between
+those objects would not suffice. The
+[direct categorical subplan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_EXACTNESS_AND_CONNECTING_PLAN.md)
+records whole universal descent for δ and the remaining implementation
+obligations. No new exactness or connecting axiom is supplied by Coim/Im.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
