@@ -4374,7 +4374,16 @@ same cycles, β, H and quotient map. The original H functor's arrow and
 whole Hom actions typecheck at the record H endpoints directly; no separate
 mapwise coherence data are introduced. The shared generic boundary/pair
 observations remain available to the legacy selected wrappers with their
-original signatures. Packaged raw input migration remains the next layer.
+original signatures.
+
+Original raw chain pairs now enter the native source directly. The existing
+zero-composite constructor uses their dNext, d and original zero witness
+before any K/Q structure is supplied. Whole P/Q then produce a homology
+record indexed by that same raw pair. Its factor is the already derived
+semantic boundary at the constructed input transformation; no equality
+proof or transport of a reconstructed pair record is added. The native
+vertices and differentials, actual β/H and H action at those record
+endpoints all check. Freyd input and map specialization remain next.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

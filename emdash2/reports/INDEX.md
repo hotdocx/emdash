@@ -43,7 +43,10 @@ uniqueness and computing mate centres, plus
 NUH-3 is implemented at its ordinary-view boundary. NUH-4A1 now supplies the
 [independent homology-family record](../emdash3_2_one_cat_homology_adjunction_records.lp),
 preserving actual β/H and the original whole action at record endpoints.
-Packaged raw input migration is next; concrete-model work remains later.
+NUH-4A2 adds [direct original-pair input](../emdash3_2_one_cat_chain_pair_inputs.lp)
+before universal selection and [its whole-H record](../emdash3_2_one_cat_chain_pair_homology_records.lp)
+at the literal original pair. Freyd input and map migration are next;
+concrete-model work remains later.
 
 Current implementation continuation (2026-09-12): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-3 checkpointed at 1ea98f63; NUH-4A1 independent homology records checked; packaged input migration next; NUH-1/2 duality work user-deferred
+Status: NUH-3 checkpointed at 1ea98f63; NUH-4A1/2 independent record/input paths checked; Freyd input migration next; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -245,6 +245,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [native zero cone](../emdash2/emdash3_2_zero_arrow_cones.lp) | Represented comma built from native homdc/Sigma | Reuse current native ownership at the stated profile; the coupled Op migration is separately deferred; no independent cone grammar |
 | [ordinary-target universal transformation](../emdash2/emdash3_2_one_cat_zero_cones.lp) | Existing OneCat profile exposes a whole family | Keep the ordinary specialization explicit; do not impose it on generic higher categories |
 | [chain input](../emdash2/emdash3_2_chain_pair_zero_cones.lp) and [raw Freyd input](../emdash2/emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp) | Original selected boundary lift is unmated to introduce the native input | Input formation should use its native differential/zero structure before any kernel selection |
+| [direct original-pair input](../emdash2/emdash3_2_one_cat_chain_pair_inputs.lp) and [its H record](../emdash2/emdash3_2_one_cat_chain_pair_homology_records.lp) | Original fields enter the existing native source without K/Q; the record then observes whole P/Q at the same pair | NUH-4A2 implemented; specialize to raw Freyd agreements and migrate actual map consumers next |
 | [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [raw tests at original diagrams](../emdash2/emdash3_2_one_cat_zero_diagram_inputs.lp) | Actual reconstruction maps compose canonical raw tests into J(X)⇒d or d⇒I(X), retaining the original arbitrary d and raw b | NUH-3C3 implemented; use these inputs for ordinary records at K(d)/Q(d), without new selection or object casts |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
@@ -287,6 +288,59 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4A2: Original chain pairs enter H before kernel selection
+
+**Implemented after b9e5e0e5.** The unchanged outgoing-diagram observation
+now lives in [chain-pair diagrams](../emdash2/emdash3_2_chain_pair_diagrams.lp).
+All three original definitions across the split are unchanged after comments
+and whitespace are removed. No TypeScript source refers to the moved name.
+
+The [ordinary native inputs](../emdash2/emdash3_2_one_cat_chain_pair_inputs.lp)
+package the existing raw zero-composite transformation and native cone from
+the pair's original dNext, d and zero witness. Neither definition takes a
+kernel/cokernel structure or selected capability. The zero witness is input
+chain data; callers supply no new naturality law or square proof.
+
+The [original-pair record](../emdash2/emdash3_2_one_cat_chain_pair_homology_records.lp)
+takes whole P/Q after input formation. Its type is literally
+HomologyRecord(C,S,A,B,D,pair). The existing semantic boundary-factor
+observation at `chain_pair_native_transf` already has the required endpoints,
+so the record adds no equality proof, reconstructed-pair transport, or chosen
+test lift. It observes the original whole β and Q boundary-diagram family.
+This tranche adds no primitive, rewrite, unifier or coherence field.
+
+The [input reviewer](../emdash2/examples/one_cat_chain_pair_inputs.lp)
+checks the first vertex, outgoing diagram, whole universal observation,
+incoming differential and outgoing generator, all without K/Q in context.
+The [record reviewer](../emdash2/examples/one_cat_chain_pair_homology_records.lp)
+checks cycles, actual β/H, reconstruction of the original dNext and the
+original H action on a native map between two raw inputs at record endpoints.
+Thus all ten checks preserve the required staging and actual outputs.
+
+Serial guarded, warning-enabled logs in `emdash2/logs/probes/`:
+
+- original baseline `chain_pair_homology_records-20260913-071600.log`;
+- prototype `nuh4a2_chain_pair_records-20260913-071834.log`;
+- source `emdash3_2_one_cat_chain_pair_homology_records-20260913-072038.log`;
+- input reviewer `one_cat_chain_pair_inputs-20260913-072206.log`;
+- record reviewer `one_cat_chain_pair_homology_records-20260913-072304.log`;
+- legacy reviewer `chain_pair_homology_records-20260913-072416.log`;
+- exact join `nuh4a2_record_dependency_baseline-20260913-072508.log`.
+
+The new source/reviewer match the complete exact-join inventory at
+1,284 critical pairs / 169 pattern warnings; the legacy reviewer retains
+1,249/169. Locations, heads and participant families agree, with no parser
+issues. Three focused LHS audits and the catalog pass. Source-only health
+is refreshed to 935 files. No repository aggregate was run.
+
+**Next NUH-4A3:** move the existing raw Freyd chain-zero/pair observations
+into a data owner without selected input adapters, then specialize this
+direct native input path and whole-adjunction record. Fill the existing
+Freyd OneCat, preadditive and terminal-zero observations in the wrappers.
+Whole P/Q interpretation remains an explicit later model-construction
+boundary; raw agreement data do not create it. Afterwards migrate the
+actual raw chain-map-to-native-map consumer before connecting/exactness.
 
 ### NUH-4A1: Homology records observe independent whole adjunctions
 

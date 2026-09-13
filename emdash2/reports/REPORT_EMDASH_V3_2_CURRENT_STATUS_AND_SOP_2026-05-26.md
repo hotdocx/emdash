@@ -58,7 +58,13 @@ legacy names delegate with unchanged signatures. Six focused checks cover
 cycle, boundary, H and quotient projections plus the existing H arrow and
 whole Hom actions at record endpoints. No new rule or primitive is added;
 legacy warnings are unchanged and the new source matches its exact join.
-Packaged raw input migration is next; concrete model/reifier work remains pending.
+NUH-4A2 now supplies [direct raw-pair native inputs](../emdash3_2_one_cat_chain_pair_inputs.lp)
+and [whole-H records at the original pair](../emdash3_2_one_cat_chain_pair_homology_records.lp).
+The input needs no K/Q. Its record reuses the actual semantic factor with
+no new path proof or record cast; ten focused input/record checks pass.
+The outgoing-diagram observation is moved unchanged and the legacy
+regression/warning inventory is preserved. Freyd input and map migration
+are next; concrete model/reifier work remains pending.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
