@@ -9,7 +9,9 @@ a whole instance of the existing DefIso notion. Generic projections and
 inverse/naturality owners keep its use computational and internal, with no
 caller-supplied coherence squares. Derived equality proofs retain their
 ordinary/strict-component scope. The law remains a new shape primitive;
-a full E/D equivalence is not a current gate. C4 checkpoint review is next.
+a full E/D equivalence is not a current gate. C4 is checkpointed at 1ea98f63;
+the design remains revisitable if consumers must manually carry coherence
+square proofs or equations.
 
 Native universality update (2026-09-13): the user has deferred the Op/duality
 migration until after this goal; its partial work is preserved in
@@ -44,9 +46,19 @@ without W/V, through native square equality, whole map reflection and mate
 cancellation. Their centres compute to the actual mates; their
 [selected-view comparisons](../emdash3_2_one_cat_adjunction_selected_views.lp)
 preserve the old lift/colift operations at the same endpoints. NUH-3 is
-implemented at this ordinary-view boundary. Homology-record/input migration
-follows the C4 checkpoint; concrete model/reifier work remains pending. NUH-3C4 adds no
+implemented at this ordinary-view boundary. NUH-3C4 adds no
 primitive, rewrite or unifier, as in the earlier NUH-3A/B/C1/C2 tranches.
+
+NUH-4A1 now derives the
+[ordinary whole-H record](../emdash3_2_one_cat_homology_adjunction_records.lp)
+from independent P/Q, keeping the actual β and quotient at its whole boundary
+diagram. The [shared record data](../emdash3_2_homology_adjunction_record_data.lp)
+also owns the unchanged pair observation and generic boundary views;
+legacy names delegate with unchanged signatures. Six focused checks cover
+cycle, boundary, H and quotient projections plus the existing H arrow and
+whole Hom actions at record endpoints. No new rule or primitive is added;
+legacy warnings are unchanged and the new source matches its exact join.
+Packaged raw input migration is next; concrete model/reifier work remains pending.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

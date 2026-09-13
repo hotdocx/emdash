@@ -4367,6 +4367,15 @@ retained presentation-record operations at the same endpoints. Concrete
 whole-model construction and migration of the remaining homology consumers
 are still further work.
 
+The independent homology-family record now uses those derived K/Q records.
+Its boundary field is the actual β=K(h)∘η, so its quotient is Q applied to
+the existing whole boundary-diagram family. Record projections recover the
+same cycles, β, H and quotient map. The original H functor's arrow and
+whole Hom actions typecheck at the record H endpoints directly; no separate
+mapwise coherence data are introduced. The shared generic boundary/pair
+observations remain available to the legacy selected wrappers with their
+original signatures. Packaged raw input migration remains the next layer.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

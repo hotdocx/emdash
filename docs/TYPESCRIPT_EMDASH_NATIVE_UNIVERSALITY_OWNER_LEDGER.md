@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: NUH-3 implementation checked; ordinary reconstruction retained after review; C4 checkpoint preparation; NUH-4 queued; NUH-1/2 duality work user-deferred
+Status: NUH-3 checkpointed at 1ea98f63; NUH-4A1 independent homology records checked; packaged input migration next; NUH-1/2 duality work user-deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -40,7 +40,7 @@ is r_C⁻¹; it does not designate D_C as an inverse of E_C. The ordinary proof
 uses only E_C's faithfulness, derived from this one-sided reconstruction.
 The earlier proposal to replace it immediately by a full fixed-forward
 equivalence was too strong and is withdrawn as an implementation gate.
-Preserve the existing evidence and proceed to C4 checkpoint review/NUH-4.
+Preserve the existing evidence; C4 is checkpointed at 1ea98f63 and NUH-4 is active.
 The user explicitly retains the right to revisit this design against the
 computational/internal criterion, including avoiding manually carried
 naturality/functoriality square proofs or equations. Apply that criterion
@@ -248,6 +248,7 @@ presheaf argument's variance while preserving the native homd owners.
 | [direct raw input](../emdash2/emdash3_2_one_cat_zero_arrow_inputs.lp) | Raw b,d,d∘b=0 enter the existing native source via whole square action, with explicit OneCat and no K/Q | NUH-3C1 implemented; migrate the packaged chain-pair/Freyd adapters and derive their comparisons separately |
 | [raw tests at original diagrams](../emdash2/emdash3_2_one_cat_zero_diagram_inputs.lp) | Actual reconstruction maps compose canonical raw tests into J(X)⇒d or d⇒I(X), retaining the original arbitrary d and raw b | NUH-3C3 implemented; use these inputs for ordinary records at K(d)/Q(d), without new selection or object casts |
 | [whole H](../emdash2/emdash3_2_homology_adjunction_families.lp) and [native global H](../emdash2/emdash3_2_zero_arrow_cone_adjunction_homology.lp) | β=K(h)∘η; H=Q∘Arr(β), with independent K/Q structures; the global application retains explicit OneCat | NUH-3B implemented; old selected APIs delegate here, with the original comparison views |
+| [independent homology record data](../emdash2/emdash3_2_homology_adjunction_record_data.lp) and [ordinary homology record](../emdash2/emdash3_2_one_cat_homology_adjunction_records.lp) | Actual β, original h/pair and derived K/Q records; no W/V inputs or new H | NUH-4A1 implemented; whole object, boundary, quotient, arrow and Hom-action endpoints check; package original raw inputs next |
 | [direct connecting](../emdash2/emdash3_2_homology_record_connecting.lp) | Retained homology records and universal factors | Reuse mathematics and nonzero consumers while moving primary construction to whole universality |
 | [whole connecting](../emdash2/emdash3_2_homology_window_connecting_transformation.lp) | Declared whole transfor whose component is the direct construction | Preserve actual endpoints and generic action; audit the declaration/interpretation contract |
 | [finite iterator](../emdash2/emdash3_2_homology_bounded_generator.lp) | Retained row/map fields and whole H/δ with interior evidence | Reference consumer; symbolic endpoint debugging remains deferred |
@@ -286,6 +287,67 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4A1: Homology records observe independent whole adjunctions
+
+**Implemented after checkpoint 1ea98f63.** The
+[independent data owner](../emdash2/emdash3_2_homology_adjunction_record_data.lp)
+extracts the existing actual boundary β=K(h)∘η, its reconstruction and factor
+view, plus the unchanged `homology_family_pair` observation of h. The three
+legacy boundary names delegate through the presentation-to-structure
+adapter. All four remaining legacy signatures and the old complete record
+body are unchanged; no OneCat argument is added to those generic names.
+No TypeScript source refers to the moved pair or boundary names.
+
+The [ordinary record](../emdash2/emdash3_2_one_cat_homology_adjunction_records.lp)
+defines `homology_adjunction_family_record` from whole P/Q and OneCat(C),
+without W/V. It retains the actual semantic β field and uses Q on the
+original whole boundary-diagram family. The primary K/Q/mates/H graphs
+remain independent of all these derived record modules (9/11/10/16 files).
+The new sources contain no selected capability/presentation arguments,
+new primitive, rewrite, unifier or coherence field. Their imports include
+the established record vocabulary, not supplied selections hidden in bodies.
+
+The [reviewer](../emdash2/examples/one_cat_homology_adjunction_records.lp)
+has six successful checks: literal cycle, actual whole β, H and quotient
+projections, plus the original H's arbitrary-arrow and whole Hom actions at
+the record H endpoints. It adds no naturality or functoriality proof to the
+consumer. The record never substitutes the canonical lift of an extracted
+raw test for β, and does not cast to another H object.
+
+Prototype observations are retained. The first pass lacked the existing
+`zero_arrow_universal_tests` import. A proposed one-line replacement of the
+semantic reconstruction proof did not compare the native mate application
+with its unit formula under composition. The accepted proof shares the
+existing whole mate/semantic comparison in the derived reconstruction; no
+unifier or new naturality equation was added to force the shorter term.
+Those probes are `nuh4a_homology_adjunction_records-20260913-070226.log`,
+`...-070342.log` and the corrected passing `...-070407.log`.
+
+Serial guarded, warning-enabled qualification in `emdash2/logs/probes/`:
+
+- baseline `emdash3_2_homology_family_records-20260913-065912.log`;
+- new source `emdash3_2_one_cat_homology_adjunction_records-20260913-070548.log`;
+- six-check reviewer `one_cat_homology_adjunction_records-20260913-070706.log`;
+- legacy source `emdash3_2_homology_family_records-20260913-070741.log`;
+- legacy reviewer `homology_family_records-20260913-070833.log`;
+- exact join `nuh4a_record_dependency_baseline-20260913-070920.log`.
+
+Legacy source/reviewer preserve the complete baseline inventory at
+1,249 critical pairs / 169 pattern warnings. The new source/reviewer match
+their exact dependency join at 1,284/169, including locations, heads and
+participant families; parser issues are zero. Rule audits and catalog pass.
+Source-only health is refreshed to 930 files; no aggregate typecheck ran.
+
+**Next NUH-4A2:** package the existing `zero_composite_native_cone` directly
+from a ComputationalChainPair's dNext, d and original zero witness, before
+any kernel selection. Give its outgoing-diagram observation an independent
+owner if needed. Construct the whole-H record over the original pair,
+retaining actual β and H, rather than transporting a reconstructed pair
+record. Keep old input interpretations as explicit comparisons where an
+actual consumer requires them; do not assume equality with another H input.
+Then migrate the packaged Freyd input and induced-map consumers. Connecting,
+exactness, concrete-model and snake-comparison work remain later subrows.
 
 ### NUH-3C4: Ordinary uniqueness from native square paths
 
@@ -365,7 +427,7 @@ health is refreshed with `--no-check`. All validation remains localized.
 
 **NUH-3 implementation checks pass at its stated ordinary-view boundary;
 the subsequent review retains the whole reconstruction under the explicit
-computational/internal criterion above. C4 checkpoint review is next.**
+computational/internal criterion above. Checkpoint: 1ea98f63.**
 Whole K/Q/mates and H have independent entry points, and the ordinary records
 are now derived without W/V inputs. Whole structure existence is still
 supplied; this does not construct a concrete model or finish the whole goal.
