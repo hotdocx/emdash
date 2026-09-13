@@ -4438,6 +4438,20 @@ from its existing β rules. Ordinary terminal/initial uniqueness justifies
 the identity-endpoint comparisons, and the original whole transformations
 give their naturality.
 
+The user accepts this ordinary presentation provisionally and proposes a
+later general terminal/initial interface. The intended general property
+contracts the whole Hom category to Terminal_cat, coherently in its native
+family. IsContr(Obj(Hom_cat(C,x,t))) alone contracts only its object/core
+groupoid; object-univalence still leaves noninvertible directed cells.
+Category equivalence with Terminal_cat, or the corresponding equality of
+category values under suitable univalence, is the stronger appropriate
+condition. A whole terminal adjunction is a natural primary presentation.
+Ordinary IsContr already suffices when those Hom categories are groupoidal.
+The current OneCat guard records qualification, not an essential dimension
+restriction on terminality. Generalizing the interface and qualifying its
+strict/lax coherence and computational inverse cuts remain later work,
+as recorded in the categorical subplan; the active homology queue is unchanged.
+
 Their instances at ZP/ZQ now give the actual whole mate inputs. Cokernel
 colifting, defined by ε∘Q(h), and the existing kernel mate produce
 v:Coim⇒ev₁ and u:ev₀⇒Im. The native mate laws prove v_d∘π_d=f_d and

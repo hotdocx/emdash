@@ -157,6 +157,55 @@ This is terminal/initial universality, not an axiom for the canonical
 Coim⇒Im map, Abelian normality, connecting or exactness. Those constructions
 and their required comparisons must still be implemented and qualified.
 
+### Deferred generalization: categorical terminality and univalence
+
+User clarification (2026-09-13): the current OneCat presentation is
+acceptable for now, but the original terminal/initial interface should
+eventually be reviewed for a primary general categorical formulation.
+This is a deferred foundational refinement, not a prerequisite for C2c.
+
+OneCat(C) is a current qualification guard, not a mathematical restriction
+on terminality. The existing contractibility field reads
+IsContr(Hom C x t) = IsContr(Obj(Hom_cat C x t)). That field by itself
+contracts the object/core groupoid; it does not account for noninvertible
+higher arrows of the Hom category. Object-univalence identifies paths with
+equivalences, not arbitrary directed arrows. For example, the one-object
+category with endomorphism monoid (ℕ,+) has only the identity isomorphism,
+so its object/core groupoid is contractible and it satisfies ordinary
+object-univalence, while the category is not equivalent to Terminal_cat.
+The relevant distinction follows the standard
+[univalent-category definition](https://arxiv.org/abs/1303.0584).
+
+The appropriate categorical contraction is equivalence of the whole
+category D to Terminal_cat. A proposed native expression is
+OmegaEquivAlong(Cat_cat,D,Terminal_cat,Terminal_func(D)), keeping the
+canonical forward functor. Equivalently, choose d and a whole natural
+equivalence between id_D and const_d; an objectwise groupoidal Σ/Π of
+equivalences is insufficient. Under the appropriate universe/functor-category
+univalence, this can be read as D=Terminal_cat. It is not the assertion
+IsContr(Obj D). The current OmegaEquivAlong has equality-valued inverse
+laws, so their higher interpretation must be qualified at the corresponding
+functor-category level.
+
+Apply categorical contraction to Hom_cat(C,x,t), coherently in the native
+Hom family, rather than to C itself. A Došen-style primary formulation is
+the higher/coherent adjunction Terminal_func(C) ⊣ Obj_func(C,t), with the
+dual adjunction for initiality. Preserve hom_int/homd_int as owners. The
+existing whole terminal transformation may already supply some required
+coherence under an appropriate strict/pseudo profile; no claim that the
+entire present TerminalObject package is insufficient is established here.
+Univalence alone does not qualify that profile or turn lax comparison cells
+into equivalences.
+
+When the relevant Hom categories are already groupoidal, ordinary IsContr
+is the appropriate contraction condition; this can apply beyond OneCat(C).
+The later review should make categorical universality primary and derive
+the current pointwise/ordinary views and family normalizers where justified.
+Equivalence/equality presentations must remain distinct from DefIso's
+chosen judgmental inverse cuts: univalence does not supply those rewrite
+laws automatically. Keep the current code and C1 guards until that general
+construction and its computation have actually been qualified.
+
 ## Current Code And Next Tranche
 
 `homology_window_connecting_transf` is already declared as a whole

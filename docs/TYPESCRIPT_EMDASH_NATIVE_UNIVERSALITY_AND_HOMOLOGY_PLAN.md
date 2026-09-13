@@ -24,6 +24,15 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Deferred terminality refinement (2026-09-13): the user accepts the current
+ordinary-target normalizers for now and proposes later upgrading the
+original terminal/initial interface to general categorical universality.
+The categorical subplan records the distinction between contraction of a
+whole Hom category and its object/core groupoid, the role of univalence,
+and the proposed native whole-Hom/adjunction presentation. OneCat remains
+a current qualification guard; this later refinement does not block C2c
+or reopen the deferred strictness/duality migration.
+
 Latest connecting/exactness direction (2026-09-13): use whole categorical
 universality directly for the primary construction. Do not first convert
 K/Q to ordinary factor/IsContr dictionaries to run the old point program.

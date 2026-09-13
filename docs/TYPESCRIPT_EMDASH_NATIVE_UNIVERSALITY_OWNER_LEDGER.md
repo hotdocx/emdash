@@ -6,6 +6,16 @@ Status: NUH-4C2a checkpoint c38f6c0f; C2b native zero-column comparisons and who
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
+Deferred user refinement (2026-09-13): C2b's ordinary-target presentation
+is accepted for now. Later review should consider upgrading TerminalObject
+itself to whole categorical terminality, without an intrinsic OneCat
+restriction. The categorical subplan records the precise univalence/core
+distinction and the native Hom-family/adjunction formulation. Do not merely
+replace equality by OmegaEquiv inside the old objectwise groupoidal
+quantifiers or remove C1 on the strength of univalence alone. The existing
+whole terminal transformation's strict/lax profile is part of that later
+review. This is not a new prerequisite for the active C2c construction.
+
 Latest correction (2026-09-13): the primary connecting/exactness construction
 must continue through whole categorical universal operations. The proposed
 ordinary category-view bridge is optional compatibility work. The new
