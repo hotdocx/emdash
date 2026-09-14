@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: native-window exactness, raw assembly and H-point comparison qualified; model/reifier integration active; Op/duality deferred
+Status: native-window exactness, raw assembly and retained column-H comparisons qualified; TypeScript observation migration active; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,39 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-5B2c2: Derived columns compare with original raw and retained H
+
+**Qualified after 5925c5b1 (2026-09-14), through both column comparisons.**
+The raw specializations retain the existing whole column inputs and derive
+their incoming point observations from whole source recovery. Ordinary
+diagram reflection and terminal-tip uniqueness compare the two original
+transformations at the actual outgoing diagram. Existing fibre inclusion
+and canonical point introduction give fixed-map input equivalences.
+The original raw column chain witness remains the comparison target; it
+is not a new input to δ or a supplied naturality square.
+
+Original whole H maps those comparisons and selected inverses. Composition
+with the inverse of the earlier retained/native comparison lands in the
+older model's exact H objects, using existing IsoEvidence and OmegaEquivAlong
+owners. The native core still needs no W/V dictionaries. The actual whole
+δ/component/Hom-action reviewer checks these column H endpoints and the
+resulting raw-H arrow. No new natural comparison in x is asserted.
+
+Twenty-three definitions in seven new owners add no primitive, runtime
+rule, unifier or earlier LP edit. Three reviewers contain 25 passing assertions.
+The subplan records localized validation and the larger all-exactness
+import experiment's allocation boundary. Use the actual column/H/connecting
+dependencies for these observations; keep every resource guard unchanged.
+Complete warning inventories and raw blocks match controls at 1,489/169
+(native/retained H) and 1,490/169 (connecting) critical-pair/pattern reports.
+Affected strict audits, catalog, source TOC and report headers pass;
+source-only health metrics cover 1,203 files. No TypeScript source changed.
+
+Next NUH-5B2d migrates TypeScript model observations to the native whole
+owners. Native normality and raw-row shortness remain explicit supplied
+contracts. Retained nonsplit replay/adoption, exactness observations, snake
+comparison and final qualification remain required.
 
 ### NUH-5B2c1: H-family point and global H at the observed input
 

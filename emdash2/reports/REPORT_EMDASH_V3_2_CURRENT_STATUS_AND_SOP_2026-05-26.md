@@ -4,6 +4,21 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Column/H comparison update (2026-09-14): the
+[raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp)
+retain their existing native owners, and whole source recovery derives the
+incoming point laws. [Input comparisons](../emdash3_2_commutative_algebra_freyd_native_column_input_comparisons.lp)
+use ordinary diagram reflection, terminal-tip uniqueness and whole fibre
+inclusion, retaining the actual diagram and original raw chain witness.
+[Original H](../emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp)
+maps both comparisons and their selected inverses; the
+[retained-model adapter](../emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
+lands in the older model's exact H objects. The actual whole δ's endpoints
+and its component between raw H objects check. Twenty-three definitions
+add no primitive or rule; 25 assertions cover these interfaces. The
+point comparisons do not assert a new whole natural comparison in x.
+TypeScript observation migration and retained nonsplit adoption remain next.
+
 H-family point comparison (2026-09-14): the
 [native input observer](../emdash3_2_zero_arrow_family_point_inputs.lp)
 retains A[x], D[x], h[x] before P/Q selection. The

@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2c1 H-family point comparison qualified; derived-column inputs, retained observations and later adoption remain required
+Status: NUH-5B2c2 column/input/H comparisons qualified; TypeScript observation migration and retained nonsplit adoption remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -256,6 +256,65 @@ the actual column input with the original raw input. Compose that comparison
 with this H-point bridge and the retained/direct input equivalence before
 migrating the retained TypeScript observations. NUH-5B2 is still open.
 
+NUH-5B2c2 experiment (2026-09-14): observe the existing whole incoming
+recovery law at x, then use ordinary diagram-map reflection and the native
+fibre inclusion to compare with the original raw column input. The raw
+column chain witness belongs to the retained comparison target; it is not
+a new input to δ or an extra caller naturality square. Keep its original
+identity and derive the incoming-arrow comparison from whole recovery and
+the raw row-map projections. Reuse the already qualified outgoing-diagram
+introduction view. Reject any route needing arbitrary diagram equality,
+an H-object cast, or a new universal selection.
+
+NUH-5B2c2 qualification (2026-09-14): both original whole column inputs
+now have [raw-row specializations](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_inputs.lp).
+Their incoming point laws observe the existing whole source-recovery law;
+the first attempt through the alternate postcomposition parent did not
+join, while the original source-evaluation parent does. The
+[ordinary input comparison](../emdash2/emdash3_2_one_cat_terminal_input_comparisons.lp)
+retains both transformations at their actual outgoing diagram. Ordinary
+diagram reflection derives their equality from the incoming observation
+and terminal-tip uniqueness, then the existing whole fibre inclusion maps
+the comparison and selected inverse. The
+[introduced-point specialization](../emdash2/emdash3_2_one_cat_introduced_terminal_input_comparisons.lp)
+uses the existing canonical diagram-introduction view; no new diagram
+equality or normalization rule is added.
+
+The [raw input comparisons](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_input_comparisons.lp)
+retain each original raw column chain witness as their target data. They
+derive the incoming comparison internally. Original whole H then gives
+[both H comparisons](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp),
+including fixed-map equivalence and the same selected inverse. The
+[retained-model comparisons](../emdash2/emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
+compose with the inverse of the existing retained-to-native comparison.
+Existing IsoEvidence symmetry and OmegaEquivAlong composition preserve
+the older model's exact H objects; W/V remain in this optional adapter,
+not in the native construction. Twenty-three definitions add no primitive,
+runtime rule, unifier or edit to an earlier LP owner.
+
+The connecting-endpoint reviewer uses the actual four-row whole δ. Both
+column H maps have its original source/target points, and composing its
+component with the selected source inverse and target comparison gives an
+arrow between the original raw H objects. δ and its whole Hom action remain
+the original owners. The comparison is qualified at points; no new whole
+natural transformation into a constant raw-H presentation is asserted.
+
+An exploratory reviewer imported all three exactness proof implementations
+while checking these point comparisons. Several expanded equivalence and
+inverse observations exceeded the unchanged memory guard. The same
+interfaces pass with their actual column/H dependencies, and the separate
+connecting-endpoint reviewer passes with the actual connecting owner. Keep
+these observation dependencies focused; this is not a qualification of the
+oversized all-exactness probe or permission to raise resource limits.
+
+Next NUH-5B2d migrates the TypeScript observations to these native owners
+and the actual whole δ. Preserve the original result, raw column chains,
+row maps, H selections and sign. Register native whole normality and raw-row
+shortness as explicit supplied contracts where still needed; do not infer
+them from the old pointwise contracts or matrix equations. The retained
+nonsplit replay/adoption and native exactness observations still require
+qualification. NUH-5, NUH-6 snake comparison and NUH-7 remain open.
+
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
 `OneCatAdjunctionNormality` owners. Prefer a native model surface indexed by
@@ -276,6 +335,30 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B2c2: seven new owners and three reviewers cover 23 definitions and
+25 passing assertions. The reviewers check whole column inputs, both fixed-base
+input projections, original input/H endpoints, both fixed-map equivalences,
+the same selected inverses, the older retained H objects, and actual whole
+δ/component/Hom-action endpoint compatibility. Checks remain localized
+under the serial 90-second/2-GiB guard. No TypeScript implementation changed.
+
+Final owner logs span `190816`–`190856`; the reviewer logs are
+`freyd_native_column_comparisons-20260914-190908.log`,
+`freyd_retained_column_comparisons-20260914-190918.log` and
+`freyd_native_connecting_endpoints-20260914-190931.log`, under
+`emdash2/logs/probes/`. Their import-only controls at `191133`, `191143`
+and `191159` match complete inventories and raw warning blocks: 1,489/169
+for native and retained column observations, and 1,490/169 for the actual
+connecting consumer. The native/retained H owners match those same
+controls. Exact evidence is `emdash2/tmp/probes/nuh5b2c2_warning_comparison.json`.
+
+Affected strict LHS audits, catalog, source TOC and report-header checks
+pass. Source-only health metrics cover 1,203 files. Earlier unchanged
+whole exactness and TypeScript evidence is carried forward. The failed
+all-exactness probes, smaller passing controls and generation scripts
+remain under `emdash2/tmp/probes/nuh5b2c2_*`; active owners and this ledger
+govern continuation. No repository-wide typecheck or aggregate was run.
 
 NUH-5B2c1: two owners and two reviewers pass under the unchanged serial
 90-second/2-GiB guard. Seven assertions cover all three stored point-input

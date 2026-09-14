@@ -2372,6 +2372,18 @@ The two auxiliary diagram paths use canonical introduction comparisons;
 they are neither arbitrary diagram extensionality nor H-object casts.
 These are point observations, not a new whole natural comparison in x.
 
+`freyd_raw_native_right_column_input` and its left counterpart retain the
+original whole column transformations from three raw rows. Their
+`*_column_incoming_path` operations observe whole source recovery.
+`*_column_input_map` and `*_column_input_equiv` compare with the original
+raw column chain input; this chain witness is target data, not a new δ
+premise. `*_column_homology_map` and `*_column_homology_equiv` apply original
+whole H and compose the existing point comparison, retaining both H objects
+and selected inverses. `freyd_retained_right_column_homology_map` and its
+left/equivalence counterparts land in the older model's exact H objects
+through its existing adapter. These operations add no primitive or new rule.
+The whole δ and its Hom action remain the existing native owners.
+
 `zero_arrow_cone_fibre_inclusion_func(C1,T,A,d)` is a whole inclusion of the
 existing transformation Hom into the ordinary zero-cone category. Its point
 is the original `(A,d,h)`; its arrow keeps both base identities and the fibre
@@ -2384,8 +2396,8 @@ These are categorical comparisons at retained endpoints, not object casts.
 `freyd_raw_native_row_family` and `freyd_raw_native_row_map` are constant
 parameter families of the original raw native inputs/maps. The corresponding
 `*_map_func` preserves whole action in the existing raw-agreement parameter.
-No K/Q or new coherence field is an input. Full four-row and derived-column
-assembly remains further work.
+No K/Q or new coherence field is an input. The four-row and derived-column
+assembly reuses those same families; TypeScript observation migration remains.
 
 `FreydAdjunctionModel(R)` packages supplied initial-zero and whole P/Q data.
 `freyd_adjunction_model_func(M)` is the existing native whole H, with no

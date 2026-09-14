@@ -4976,7 +4976,25 @@ Applying the original Q to this comparison and its selected inverse gives
 an equivalence at the two actual H objects. No intermediate quotient or
 new universal selection is made. This is a derived point observation,
 including Q's full Hom action; a whole natural comparison in x is not
-asserted. The derived-column input comparison remains the next step.
+asserted. This is the H-point stage of the column comparisons below.
+
+Both column-input comparisons are now constructed. The original whole
+source-recovery law gives the incoming-arrow observation at a point.
+Ordinary diagram reflection and terminal-tip uniqueness then compare the
+two transformations at their actual outgoing diagram. The existing whole
+fibre inclusion carries this comparison and its selected inverse to the
+native input category. Canonical diagram-point introduction retains the
+original raw column chain as the target data; δ itself acquires no new
+chain or coherence input.
+
+Original whole H acts on these comparisons. Composing with the inverse
+of the earlier retained/native comparison lands in the older model's exact
+H objects, with the same selected inverses. The actual whole δ has these
+column H points as its source and target; its component therefore gives
+an arrow between the original raw H objects after the two comparisons.
+This observes the original whole transformation, without introducing a
+second connecting construction or a new whole natural comparison in x.
+TypeScript observation migration and retained nonsplit adoption remain.
 
 The retained inverse-mate input now has a derived categorical equivalence
 to the direct raw input at the same outgoing diagram. Ordinary diagram
@@ -4991,8 +5009,8 @@ Fixed raw rows and their maps also enter as whole constant parameter
 families. Their points, three raw map components, off-diagonal action and
 action in the original raw-agreement parameter are retained by the existing
 weakening functor. They require no K/Q or additional coherence square.
-The complete four-row window and comparison of its derived column inputs
-remain subsequent steps before the retained TypeScript observations migrate.
+These families feed the four-row window and column comparisons above.
+Migration of the retained TypeScript observations remains required.
 
 The native model context now packages the initial-zero capability and whole
 P/Q directly as `FreydAdjunctionModel(R)`. Its whole H needs no normality
@@ -5002,8 +5020,9 @@ original generic whole owners, with all row families, H endpoints and
 selected inverses retained. The older `FreydHomologyModel` adapts to this
 context without changing its whole H, native inputs or Hom action; its
 pointwise normality does not automatically provide the new whole contract.
-Concrete raw-window assembly and retained CAS-observation migration remain
-further work. Neither model context is a closed model constructor.
+Raw-window assembly and retained column comparisons are available; retained
+CAS-observation migration remains further work. Neither model context is a
+closed model constructor.
 
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not
