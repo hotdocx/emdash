@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6b2b native kernel pullback comparison qualified; cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6c1 whole quotient/row cancellation and canonical ρ map qualified; native window, cover epicity and θ/δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -308,12 +308,41 @@ inverse nor its universal law. Thirty-four definitions, two primitives and
 38 assertions qualify this ordinary cartesian comparison without new
 runtime/unification rules or a general coherent PullbackStructure.
 
-Next C6c constructs the canonical whole epic cover ρ and covered map θ
-from this square and the original short-exact-family data. Prove epicity and
-annihilation before using normality and native cokernel descent to form δ.
-Output exactness, concrete model/reifier construction and snake comparison
-remain required. C6a's product capability remains available; whole varying-
-family addition is not silently supplied by this kernel construction.
+C6c1 now [derives the original whole cokernel target observation](../emdash2/emdash3_2_one_cat_cokernel_family_projection_paths.lp).
+Target evaluation after the native transpose is an actual Hom functor;
+its application computes and its whole ambient path is Λ_D(v)=v∘q_D.
+[Reconstruction and equality reflection](../emdash2/emdash3_2_one_cat_cokernel_family_reconstruction.lp)
+retain the original D/Q and whole input u. Descent does not depend on which
+annihilation witness was supplied.
+
+The [whole short-exact row reconstruction](../emdash2/emdash3_2_one_cat_short_exact_family_cancellation.lp)
+gives κ_D∘β=i and γ∘q_F=g at the original maps. Kernel and quotient
+reflection, followed by cancellation using the original fixed-forward
+β/γ inverse laws, prove incoming and outgoing whole row cancellation.
+The reconstruction lemmas require only their respective K or Q; the row
+cancellation consumers retain the original combined row evidence.
+
+The [canonical map ρ=q_H∘r](../emdash2/emdash3_2_one_cat_homology_cover_maps.lp)
+is now constructed. Its original q_H is Q's projection at the same whole
+boundary diagram used by H. It has whole quotient cancellation and retains
+component/further-Hom action. The present map interface takes the original
+coherent right-column h and p; native window assembly and epicity of r/ρ
+remain obligations. Nineteen definitions and 23 assertions add no primitive,
+runtime rewrite or unifier. No cover property is assumed by the constructor.
+
+Next C6c2 assembles the native window and covered map θ. Prove r/ρ epicity
+and θ's actual annihilation before using normality and native cokernel
+descent for δ. Output exactness, concrete model/reifier construction and
+snake comparison remain required. C6a's product capability remains
+available; whole varying-family addition is not silently supplied.
+
+For the native window continuation, retain original row functors into
+ZeroArrowCone_cat and whole transformations between them. Their native
+higher action must supply the commuting row squares. Whole middle-column
+chain-zero data is mathematical input; per-object naturality squares and
+old PreAbelianCategory/ComputationalAbelianCategory providers are not new
+primary input fields. Derive the other column zeros using whole row
+cancellation before feeding those columns into the original H construction.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

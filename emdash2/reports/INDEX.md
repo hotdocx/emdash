@@ -119,7 +119,12 @@ with both whole functor laws and original-leg recovery. Its two explicit
 profile closures cover ordinary slices and functors into discrete targets;
 the other 34 operations are derived definitions. All 38 assertions pass,
 with no new rewrite/unifier and unchanged dependency warning inventories.
-The canonical cover/covered map, δ and output exactness remain next.
+C6c1 now supplies [whole quotient and row cancellation](../emdash3_2_one_cat_short_exact_family_cancellation.lp)
+and [the canonical map ρ=q_H∘r](../emdash3_2_one_cat_homology_cover_maps.lp).
+Original quotient reconstruction, β/γ factorization and cancellation remain
+whole operations on the same K/Q and inputs. Nineteen definitions and 23
+assertions add no primitive/rule. Native window assembly, r/ρ epicity,
+the covered map θ, δ and output exactness remain required.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

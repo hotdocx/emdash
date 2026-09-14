@@ -245,6 +245,17 @@ and 38 assertions add no runtime/unification rule or nucleus edit.
 Dependency warnings match exactly. The cover/covered map, δ and derived
 output exactness remain next; general PullbackStructure remains separate.
 
+C6c1 now [derives whole quotient reconstruction/cancellation](../emdash3_2_one_cat_cokernel_family_reconstruction.lp)
+from E₁ after the original native transpose. The whole observer computes
+at native Hom endpoints and satisfies Λ_D(v)=v∘q_D. The
+[actual row maps](../emdash3_2_one_cat_short_exact_family_cancellation.lp)
+reconstruct through original β/γ, giving whole incoming/outgoing
+cancellation. The [canonical map ρ](../emdash3_2_one_cat_homology_cover_maps.lp)
+is q_H∘r at the original pullback and H; q_H cancellation is proved.
+Nineteen definitions and 23 assertions add no primitive, runtime rule,
+unifier or nucleus edit. All dependency warning inventories match.
+Native window assembly, r/ρ epicity, θ/δ and output exactness remain next.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

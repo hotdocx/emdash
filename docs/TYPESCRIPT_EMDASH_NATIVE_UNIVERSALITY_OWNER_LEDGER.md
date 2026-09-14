@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6b2b native kernel pullback comparison qualified; cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6c1 whole quotient/row cancellation and canonical ρ map qualified; native window, cover epicity and θ/δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,90 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c1: Whole quotient/row cancellation and the canonical ρ map
+
+**Implemented after 017a861d.** The cover route first needs whole quotient
+cancellation and actual row reconstruction. This stage derives them from
+the original native mates, then constructs the canonical map to the
+original H. No ordinary IsEpic/kernel/cokernel factor dictionary is a
+primary input and no cover property is assumed.
+
+**Original cokernel observation.**
+
+- The existing [image/coimage graph owner](../emdash2/emdash3_2_image_coimage_adjunction_families.lp)
+  now also names q_D through the original quotient graph restriction.
+  It requires only the original Q and D; no kernel selection is involved.
+- The [native target observer](../emdash2/emdash3_2_one_cat_cokernel_family_projection_paths.lp)
+  composes E₁ Hom action with the original family transpose. Literal native
+  source/middle/target indices preserve its application beta. Unit
+  restriction, the existing whole whiskering comparison, initial-family
+  action and generic evaluation-composition give Λ_D(v)=v∘q_D.
+- [Ambient reconstruction](../emdash2/emdash3_2_one_cat_cokernel_family_reconstruction.lp)
+  gives descent(u,z)∘q_D=u and equality reflection through q_D. Distinct
+  annihilation witnesses for the same u yield equal whole descents.
+
+**Actual row and H consumers.**
+
+The [row cancellation owner](../emdash2/emdash3_2_one_cat_short_exact_family_cancellation.lp)
+derives κ_D∘β=i and γ∘q_F=g. Kernel/quotient reflection and the
+[existing fixed-forward equivalence laws](../emdash2/emdash3_2_omega_equiv_cancellation_paths.lp)
+then give incoming/outgoing cancellation for entire transformations.
+The two inverse directions use their respective supplied left/right laws;
+no extra inverse is selected. The original row evidence remains unchanged.
+
+The [H quotient and cover-map owner](../emdash2/emdash3_2_one_cat_homology_cover_maps.lp)
+restricts the same q to the original whole H boundary, derives q_H
+cancellation and defines ρ=q_H∘r. This retains the original K(d∘p), r and
+H. Its current parameters are the original coherent right-column h and p.
+Producing those from the native window, proving r/ρ epicity, constructing θ
+and deriving the required annihilation still remain. No splitting or
+normality/epicity witness is added to the map constructor.
+
+**Qualification.** Nineteen definitions across five new owners and one
+existing-owner alias; no primitive, rewrite, unifier or nucleus edit.
+All 23 assertions pass: 17 positive and six negative. They check the
+original q component, native observer beta and Hom action, ambient
+reconstruction, arbitrary quotient cancellation, independence from the
+annihilation witness, the two original β/γ factorizations, both whole row
+cancellation directions, q_H cancellation, actual ρ component and further
+Hom action. They reject arbitrary equality and changed Q/p inputs.
+
+All Lambdapi targets use the serial resource guard, warnings and ≤90-second
+limits. Exact categories, locations, term heads, rule families and parser
+diagnostics match unchanged dependencies. Counts are 1208 critical pairs /
+159 pattern warnings for quotient/row owners and their reviewers, 1146 /
+157 for generic equivalence cancellation, and 1381 / 159 for the ρ owner
+and reviewer. The changed existing graph owner also exactly matches its
+pre-edit warning inventory. No warning family is added or removed.
+
+| Target | Passing log under emdash2/logs/probes | Unchanged dependency / pre-edit control |
+| --- | --- | --- |
+| emdash3_2_one_cat_cokernel_family_projection_paths | emdash3_2_one_cat_cokernel_family_projection_paths-20260913-233041.log | nuh4c6c1_deps_cokernel-20260913-233131.log |
+| emdash3_2_one_cat_cokernel_family_reconstruction | emdash3_2_one_cat_cokernel_family_reconstruction-20260913-233048.log | nuh4c6c1_deps_cokernel-20260913-233131.log |
+| one_cat_cokernel_family_reconstruction | one_cat_cokernel_family_reconstruction-20260913-232937.log | nuh4c6c1_deps_cokernel-20260913-233131.log |
+| emdash3_2_omega_equiv_cancellation_paths | emdash3_2_omega_equiv_cancellation_paths-20260913-233054.log | nuh4c6c1_deps_equiv-20260913-233138.log |
+| emdash3_2_one_cat_short_exact_family_cancellation | emdash3_2_one_cat_short_exact_family_cancellation-20260913-232629.log | nuh4c6c1_deps_row-20260913-233143.log |
+| one_cat_short_exact_family_cancellation | one_cat_short_exact_family_cancellation-20260913-233115.log | nuh4c6c1_deps_row-20260913-233143.log |
+| emdash3_2_one_cat_homology_cover_maps | emdash3_2_one_cat_homology_cover_maps-20260913-233059.log | nuh4c6c1_deps_cover-20260913-233149.log |
+| one_cat_homology_cover_maps | one_cat_homology_cover_maps-20260913-233122.log | nuh4c6c1_deps_cover-20260913-233149.log |
+| emdash3_2_image_coimage_adjunction_families | emdash3_2_image_coimage_adjunction_families-20260913-233110.log | emdash3_2_image_coimage_adjunction_families-20260913-214332.log |
+
+Retained H-family, kernel-pullback and short-exact reviewers pass with both
+new consumer owners imported in nuh4c6c1_retained_consumers-20260913-233159.log.
+The start-of-tranche baseline is
+one_cat_kernel_pullback_universality-20260913-230958.log.
+All six source LHS audits, catalog, shell/Python syntax and source-only
+health pass (1030 registered files). Exact source/staged-scope and
+Markdown/link checks apply before checkpointing. No aggregate is run.
+
+**Next C6c2:** use the existing native row functors and transformations to
+assemble window columns, obtaining commuting squares from whole action.
+Whole middle-column chain-zero data remains mathematical input; derive the
+other column zeros with the new row cancellation. Construct θ, prove
+r/ρ epicity and annihilation, then use original normality and Q descent
+for δ. Output exactness, concrete model/reifier synthesis and snake
+comparison remain required. User deferrals stay in force.
+
 ### NUH-4C6b2b: Native cartesian comparison of the original kernel square
 
 **Implemented after f388ed78.** For 𝒞=Functor_cat(B,C), retain the original
@@ -401,11 +485,10 @@ Strict LHS audits report zero candidates in the eight new owners. Catalog,
 source-only health (1022 registered files), syntax/document/link hygiene and
 exact staged-scope checks pass; no aggregate is run.
 
-**Next C6c:** construct the canonical whole epic cover ρ and covered map θ
-from the original window and short-exact comparisons. Prove their actual
-annihilation/epicity before normality and original cokernel descent produce
-δ. Derived output exactness, concrete model/reifier synthesis and the snake
-comparison remain required. All user deferrals stay in force.
+**Then-next C6c:** C6c1 above now supplies quotient/row cancellation and
+the canonical ρ map. Native window assembly, r/ρ epicity, θ/δ, output
+exactness, concrete model/reifier synthesis and snake comparison remain
+required. All user deferrals stay in force.
 
 ### NUH-4C6b2a: Whole source projection and original kernel reconstruction
 

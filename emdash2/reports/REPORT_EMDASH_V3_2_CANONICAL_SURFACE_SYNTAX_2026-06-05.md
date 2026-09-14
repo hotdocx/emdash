@@ -2048,6 +2048,20 @@ The one_cat_slice_category and discrete_functor_category declarations are
 explicit ordinary/discrete profile closures; general PullbackStructure is
 not an argument or a result of this particular comparison.
 
+cokernel_adjunction_family_projection_transf names the original restricted
+q_D. one_cat_cokernel_family_projection_func is E₁ after the original
+native transpose; its *_beta keeps native Hom indices and its
+*_functor_path gives Λ_D(v)=v∘q_D. The *_descent_ambient_reconstruction
+and *_quotient_reflect_path operations expose the original quotient laws.
+one_cat_short_exact_family_incoming_reflect_path and its outgoing companion
+cancel the actual row maps using the same original β/γ evidence.
+
+homology_adjunction_family_projection_transf restricts q to the original
+H boundary. one_cat_homology_cover_transf is ρ=q_H∘r with the original
+pullback source and H target. It takes the original coherent h and p;
+its type supplies a whole transformation. Cover epicity, the assembled
+window and θ/δ remain further constructions, not additional input fields.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

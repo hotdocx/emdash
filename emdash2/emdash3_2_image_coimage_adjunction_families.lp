@@ -37,6 +37,16 @@ symbol cokernel_adjunction_arrow_func [C : Cat] [S : τ (@PreadditiveCategory C)
     (@cokernel_adjunction_func C S t T0 Q)
     (@cokernel_adjunction_projection C S t T0 Q);
 
+// Original whole quotient map, restricted through its existing graph.
+symbol cokernel_adjunction_family_projection_transf [B C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+  (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0))
+  (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+  : τ (@Transf B C (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt) (@comp_cat_fapp0 B (Functor_cat
+    WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) D))
+≔ @diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) (Functor_cat
+  WalkingArrow_cat C) (@cokernel_adjunction_arrow_func C S t T0 Q) D)
+    walking_arrow_src walking_arrow_tgt walking_arrow_generator;
+
 // Coim(f) = Q(κ_f), with its entire diagram-map action.
 symbol adjunction_coimage_func [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)]

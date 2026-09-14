@@ -4590,6 +4590,23 @@ functors into a discrete category form a discrete category. These closures
 do not supply the cartesian inverse or its laws. The whole cover/covered
 map, δ and output exactness remain subsequent constructions.
 
+The dual whole cokernel observation is now derived as well. Target
+evaluation after the native transpose is an internal Hom functor whose
+ambient observation is Λ_D(v)=v∘q_D. This gives original-quotient
+reconstruction after descent, independence from the annihilation witness,
+and whole equality reflection through q_D. The original short-exact maps
+factor as i=κ_D∘β and g=γ∘q_F. Their supplied fixed-forward β/γ inverse
+laws therefore give cancellation through the whole incoming and outgoing
+row maps, without ordinary universal factor dictionaries.
+
+Restricting q to the same original H boundary gives q_H, with its whole
+quotient cancellation. The canonical map from the kernel pullback is now
+ρ=q_H∘r. It retains the original H and pullback family; the current
+interface accepts the coherent right-column h and p directly. Native
+window assembly, epicity of r/ρ, the covered map θ and final descent for δ
+are the subsequent proof obligations. These new operations are definitions
+using the existing whole universality and add no new primitive or rule.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
