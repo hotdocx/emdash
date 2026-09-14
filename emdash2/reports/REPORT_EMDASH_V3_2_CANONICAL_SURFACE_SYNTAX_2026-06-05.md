@@ -2221,6 +2221,20 @@ supply the two zero pairs involving δ. The source, middle and target
 `..._exact_comparison` operations are the existing actual Im⇒K maps;
 no invertibility evidence is implied by those names or declarations.
 
+`one_cat_zero_cokernel_retraction` is the original Q descent of id for an
+actual zero differential. `one_cat_zero_cokernel_omega` retains that inverse.
+`one_cat_zero_kernel_cokernel_omega` combines the original two universal
+zeros and normality to invert the actual differential.
+
+`one_cat_image_kernel_ambient_inclusion_path` gives κ_g e=ι_f.
+`one_cat_image_kernel_comparison_kernel_zero` and the three native-window
+`..._comparison_kernel_zero` instances retain the original comparisons.
+`one_cat_image_kernel_exact_from_boundary_zero` constructs the inverse of
+e from a proved zero original boundary quotient. The original short-exact
+row instance derives that premise; the LES instances must still do so.
+The middle-window specialization uses the literal original row-triple
+diagram, avoiding a costly expansion through an equivalent endpoint alias.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

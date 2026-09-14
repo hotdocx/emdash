@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6e1 adjacent H maps and all three zero pairs qualified; comparison inverses next; Op/duality deferred
+Status: C6e2a comparison kernels and conditional inverses qualified; LES boundary-quotient zeros next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,24 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6e1 milestone (2026-09-14): the adjacent whole H(i) and H(p)
+Current C6e2a milestone (2026-09-14): all three actual native-window Im⇒K
+comparisons have proved zero kernel inclusions. The generic comparison
+retains its original image inclusion: κ_g∘e=ι_f. Original image-kernel
+cancellation supplies the zero-kernel proof without any new monicity input.
+
+A native inverse criterion now constructs an inverse of that same e once
+the original quotient of β:A⇒K(g) is proved zero. The original short-exact
+row supplies a qualifying instance through its existing β equivalence.
+The criterion uses the original Q of a zero arrow, original K/Q cancellation,
+and original normality. Seventeen definitions add no primitive, rewrite,
+unifier or earlier LP edit.
+
+The three LES boundary-quotient zeros still require proofs from the native
+window. The conditional criterion and zero-kernel results do not yet prove
+output exactness. Deriving those zeros is the next C6e2b obligation; model/
+reifier automation, snake comparison and final qualification remain later.
+
+Completed C6e1 milestone (2026-09-14): the adjacent whole H(i) and H(p)
 maps are constructed through the original K and Q functor actions. Their
 boundary maps use the existing native arrow-family realization, and the
 original quotient characterization is proved. The middle-column input is
@@ -646,7 +663,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: adjacent H maps, three zero composites and actual comparisons qualified; comparison inverses next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: comparison zero kernels and conditional inverses qualified; LES boundary-quotient zero proofs next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -1011,6 +1028,7 @@ must not label those alternatives validated implementations.
 | D-NUH-061 | C6c3e2 derives the covers of the original r and ρ and instantiates them at the existing native window. The auxiliary kernel lifts into the original L; whole coimage descent, second-leg cancellation and first-projection reflection force the actual cokernel of r to zero. Original q_H cancellation then forces the actual cokernel of ρ to zero. The native row E0 derives the general helper's zero-cokernel premise for p. Thirty-five definitions add no primitive, rewrite, unifier or earlier LP edit. Whole descent and its reconstruction retain original diagrams and selected inverses. Cover evidence is invertibility of the actual Coim(r)⇒K(d) / Coim(ρ)⇒H factors, not invertibility of r or ρ themselves. θκ_ρ=0, δ and output exactness still require proof |
 | D-NUH-062 | C6d1 constructs the original native-window δ by two universal descents. θ kills K(r), yielding γ; a lift of the upper middle differential and original upper-row cancellation prove γβ_C=0, yielding δ through the original q_C. Whole reconstruction δρ=θ gives θκ_ρ=0 and, through the existing cover, uniqueness. The single descent along ρ is proved equal as a whole transformation, without asserting judgmental identity. Twenty-eight definitions add no primitive, rewrite, unifier or earlier LP edit. The unconstrained symbolic δ=0 rejection query exceeds the memory guard and remains an unpromoted computational boundary; component reconstruction and whole Hom-action checks pass. Actual output exactness and the remaining model/reifier and snake work are still required |
 | D-NUH-063 | C6e1 constructs whole induced H maps through the original K/Q actions and native boundary-diagram maps, with original quotient characterization. Native row maps derive the needed compatibility, and the original middle input precedes K/Q. All three whole zero composites H(p)H(i), δH(p), H(i)δ are proved and their actual Im⇒K comparisons are formed. Fifty-two definitions and two guarded proof-time unit views add no primitive/runtime rewrite or earlier LP edit. Native mate naturality and staged unit comparisons give K/Q action observations without asserting a broad evaluation-functor equality. Invertibility of the three actual comparisons remains the next proof obligation |
+| D-NUH-064 | C6e2a derives κ_g e=ι_f and zero kernel inclusions for the actual comparisons, including all three native-window instances. The original cokernel of zero is invertible, and original normality gives an inverse of an arrow when its original kernel inclusion and cokernel projection are both zero. A proved zero quotient of the original boundary β forces q_e=0 and constructs an inverse of e; an original short-exact row derives that premise from its β equivalence. Seventeen definitions add no primitive, rewrite, unifier or earlier LP edit. The middle-window specialization must retain the literal original row-triple diagram to avoid needless deep endpoint expansion. The three LES boundary-quotient zero proofs remain required; the conditional criterion is not an output exactness assumption |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

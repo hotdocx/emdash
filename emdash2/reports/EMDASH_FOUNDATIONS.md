@@ -4826,6 +4826,25 @@ exactness: the next proofs must construct inverses of these specific maps
 from the original short-exact data and normality. No output exactness
 inhabitant is supplied by the present zero-composite results.
 
+The actual comparison e:Im(f)⇒K(g) now retains the original inclusion
+through κ_g e=ι_f. Its kernel inclusion is zero by the original image-kernel
+cancellation. This specializes to all three actual native-window comparisons.
+
+There is also a native inverse criterion. The original Q of a zero
+arrow has invertible projection: descend id and use quotient cancellation
+for the second inverse law. If an arrow's original kernel inclusion and
+cokernel projection are both zero, this result and original normality
+construct an inverse of that same arrow. For e, a proved zero original
+quotient of β:A⇒K(g) forces q_e=0 through the existing factorization and
+native cancellation. The criterion then supplies the inverse of e.
+An original short-exact row derives the needed boundary-zero premise from
+its fixed-forward β equivalence.
+
+The LES positions still require their own boundary-quotient zero proofs
+from the original window. A conditional criterion is not an output
+exactness assumption. No universal choice is replaced, and no new ordinary
+provider dictionary, primitive or computation rule is introduced.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

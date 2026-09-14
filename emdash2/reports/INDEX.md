@@ -199,6 +199,13 @@ are formed, with their inverse proofs still pending. Fifty-two definitions
 and two guarded proof-time unit views add no primitive or runtime rewrite.
 Model/reifier and snake work remain after output exactness.
 
+C6e2a proves [zero kernels of the actual native-window comparisons](../emdash3_2_one_cat_native_exact_comparison_kernels.lp)
+and provides a [native inverse criterion](../emdash3_2_one_cat_image_kernel_exactness.lp)
+from a proved zero original boundary quotient. Original Q/K, normality and
+selected maps are retained; an original short-exact row derives a qualifying
+instance. Seventeen definitions add no primitive, rewrite or unifier. The
+three LES boundary-quotient zero proofs remain next.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

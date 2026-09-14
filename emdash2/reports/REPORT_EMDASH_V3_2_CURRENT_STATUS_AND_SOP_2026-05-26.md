@@ -373,6 +373,16 @@ arrow, identity classifier and relevant endpoints. Broad evaluation-functor
 comparison experiments remain unpromoted; native mate naturality supplies
 the required K/Q action observations.
 
+C6e2a proves [zero kernels of the three actual comparison maps](../emdash3_2_one_cat_native_exact_comparison_kernels.lp).
+The generic relation κ_g e=ι_f and original image-kernel cancellation give
+this result. The [native inverse criterion](../emdash3_2_one_cat_image_kernel_exactness.lp)
+constructs an inverse of that same e once the original boundary quotient
+is proved zero. It uses the original cokernel of zero, K/Q cancellation and
+normality. An original short-exact row derives the premise through its β
+equivalence. Seventeen definitions add no primitive, rewrite or unifier.
+The three LES boundary-quotient zero proofs remain outstanding; the
+conditional criterion does not itself establish output exactness.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6e1 adjacent H maps and all three zero pairs qualified; comparison inverses next; Op/duality deferred
+Status: C6e2a comparison kernels and conditional inverses qualified; LES boundary-quotient zeros next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -525,6 +525,17 @@ now form the actual Im⇒K comparisons at all three positions. C6e2 must
 still construct their inverses from the original short-exact input; no
 output exactness inhabitant has been supplied. Fifty-two definitions and
 two guarded unit comparisons add no primitive or runtime rewrite.
+
+C6e2a now proves zero kernel inclusions for all three actual native-window
+comparisons. The generic identity κ_g e=ι_f and original image-kernel
+cancellation give this result. The
+[native inverse criterion](../emdash2/emdash3_2_one_cat_image_kernel_exactness.lp)
+constructs an inverse of e when the original quotient of β:A⇒K(g) is
+proved zero, using original Q/K cancellation and normality. An original
+short-exact row derives this premise through its β equivalence. The three
+LES instances must still derive their own boundary-quotient zeros from the
+window; no such zero or output exactness witness is assumed. Seventeen
+definitions add no primitive, rewrite or unifier.
 
 ## Connecting As Whole Universal Descent
 

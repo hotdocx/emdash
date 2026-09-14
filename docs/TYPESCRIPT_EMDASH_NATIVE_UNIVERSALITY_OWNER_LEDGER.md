@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6e1 adjacent H maps and all three zero pairs qualified; comparison inverses next; Op/duality deferred
+Status: C6e2a comparison kernels and conditional inverses qualified; LES boundary-quotient zeros next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,100 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6e2a: Comparison kernels and inverses from the original boundary quotient
+
+**Qualified after 02d39d88 (2026-09-14).**
+The original comparison e:Im(f)⇒K(g) satisfies κ_g∘e=ι_f and has zero
+kernel inclusion. All three actual native-window comparisons now have this
+zero-kernel result. An inverse of e is constructed once the original
+quotient of β:A⇒K(g) is proved zero. The original short-exact row provides
+a derived instance, using its existing fixed-forward β equivalence.
+
+Seventeen definitions across five one-way owners introduce no primitive,
+runtime rewrite, unifier or edit to earlier LP sources. Original universal
+objects, maps, diagrams and inverse choices remain fixed. The three LES
+boundary-quotient zero proofs are still outstanding; this conditional
+criterion is not an output exactness assumption or completion claim.
+
+**Construction and ownership.**
+
+- [Original cokernel of zero](../emdash2/emdash3_2_one_cat_zero_cokernel_families.lp)
+  descends id through the original Q. Its reconstruction and original
+  quotient cancellation give both inverse laws for the same retraction.
+- [Inverse from universal zeros](../emdash2/emdash3_2_one_cat_inverse_from_universal_zeros.lp)
+  keeps the original kernel-arrow diagram. Whole terminal/initial uniqueness
+  presents κ=0 at that same diagram; its original Q projection is invertible.
+  The existing zero-cokernel cover and original normality make φ invertible.
+  Their composite reconstructs the actual differential, giving its inverse.
+- [Comparison inclusion paths](../emdash2/emdash3_2_one_cat_image_kernel_inclusion_paths.lp)
+  use original native mate projection to obtain β̄q_κ=β. Original quotient
+  cancellation identifies κ_gβ̄ with φ_f. Original normality then gives
+  κ_g e=ι_f. Applying the original image-kernel cancellation to K(e) proves
+  that the actual κ_e is zero.
+- [Comparison inverse criterion](../emdash2/emdash3_2_one_cat_image_kernel_exactness.lp)
+  uses a proved zero original boundary quotient to cancel β. Since q_e e=0,
+  the existing factorization through e gives q_eβ=0, hence q_e=0. The two
+  original universal zeros now construct fixed-forward OmegaEquivAlong(e).
+  The original short-exact row derives the boundary-zero premise from its
+  β equivalence; it does not supply a separate exactness witness.
+- [Native comparison kernels](../emdash2/emdash3_2_one_cat_native_exact_comparison_kernels.lp)
+  instantiate the zero-kernel theorem at the original source, middle and
+  target comparison maps of the existing native window.
+
+**Experiments and resource boundary.** Missing owning imports were added
+before the complete criterion checked. A generator wrapped a long line
+comment without continuing `//`; a guarded parser-only check isolated that
+syntax error, and comment preservation fixed it. This was not a theory
+change. The combined window probe then reached the 2 GiB guard. Isolating
+positions showed that source and target passed, while the middle failed.
+The middle specialization had rebuilt the row-triple outgoing diagram with
+a native-window endpoint alias. Retaining the literal original row-triple
+diagram makes the middle check pass (`113259`) and the combined file pass
+(`113455`). No object cast, new comparison rule or raised resource limit
+was used. The earlier guarded failure logs at `112802` and `113044` remain
+recovery evidence.
+
+**Qualification.** All five owners and three reviewer files pass serial,
+warning-enabled, resource-guarded checks within the 90-second per-target
+ceiling. The 12 assertions comprise ten positive observations and two
+unrelated-map rejection controls. They retain the original Q retraction,
+both inverse laws, the actual comparison forward map, an original
+short-exact-row instance and the component observations of all three
+native-window zero-kernel results.
+
+Final owner logs span `113953`–`114028`. Reviewer logs are
+`one_cat_zero_cokernel_families-20260914-114042.log`,
+`one_cat_image_kernel_exactness-20260914-114048.log` and
+`one_cat_native_exact_comparison_kernels-20260914-114059.log`.
+The existing native-window zero-input and connecting reviewers still pass
+after the new comparison-kernel owner, at
+`nuh4c6e2_retained_homology-20260914-114312.log`.
+Six original dependency-load-order baselines pass at `114329`–`114422`.
+All nine final warning inventories exactly match their corresponding
+baselines in categories, locations, term heads, rule families and parser
+issues. Exact logs and checked source hashes are retained in
+`tmp/probes/nuh4c6e2_warning_comparison.json`.
+
+Strict catalog, report-header/reference lint, shell syntax, unique
+symbols, exact owner registration, added local links and diff hygiene pass.
+All 17 symbols are definitions; no new primitive or rule requires a new
+LHS audit. The generated source-only health report records 1,137 files and
+snapshot `a7e65c5a64709499bb7ca1070fe5aee4ca36f3a29d1cd8d2bb287a91b56ffadb`.
+No repository-wide, TypeScript or aggregate typecheck was run. These checks
+qualify the stated zero-kernel results and conditional inverse criterion;
+they do not prove the remaining LES boundary-quotient zeros or infer
+concrete model closure or deferred Op/profile qualification.
+
+**Next C6e2b: derive the LES boundary-quotient zeros.** At each output
+position, prove that the original quotient of the actual boundary into the
+original kernel is zero, using the original short-exact window, native K/Q,
+whole reconstruction and derived covers. Feed these derived zeros to the
+new inverse criterion at the original comparison. Do not supply those
+zeros as new input assumptions or rename the conditional theorem as a
+completed LES exactness theorem. Model/reifier automation, snake/direct/
+native comparison and final qualification remain required; all agreed
+Op/profile and endpoint-debugging deferrals remain in force.
 
 ### NUH-4C6e1: Adjacent whole homology maps and all three zero pairs
 
