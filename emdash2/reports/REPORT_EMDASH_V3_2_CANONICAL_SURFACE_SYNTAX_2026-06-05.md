@@ -2204,6 +2204,23 @@ retain the original ρ and θ. The `*_single_descent_path` compares the
 single-ρ and two-step programs as whole maps, retaining component and next
 Hom observations. No new equivalence classifier or runtime rule is added.
 
+`one_cat_square_family_transf` exchanges the existing native square action;
+its source and target paths recover the original whole maps.
+`kernel_adjunction_family_map_transf` and its cokernel counterpart retain
+original functor action. Their inclusion/projection observations use native
+mate naturality and staged unit comparisons. The two proof-time unit views
+retain the identity classifier, matching endpoints and original arrow.
+
+`one_cat_homology_family_map_transf` applies Q to the original whole boundary
+map. The row-triple incoming/outgoing homology maps instantiate it using
+original row naturality, with quotient characterization and H(p)H(i)=0.
+`one_cat_native_window_homology_projection` / `..._inclusion` retain the
+original H_C/H_A endpoints and the new middle-column H functors. The
+`..._connecting_projection_zero` / `..._incoming_connecting_zero` paths
+supply the two zero pairs involving δ. The source, middle and target
+`..._exact_comparison` operations are the existing actual Im⇒K maps;
+no invertibility evidence is implied by those names or declarations.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

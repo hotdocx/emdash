@@ -4804,6 +4804,28 @@ are checked. The two descent programs are equal as whole transformations;
 they are not asserted to be judgmentally identical. Exactness at the
 resulting LES positions remains a separate proof obligation.
 
+The adjacent whole homology maps now use the original K/Q functor actions.
+A whole square is realized in the existing native arrow category of
+Functor_cat(B,C), then exchanged into an arrow-diagram family. Kernel
+naturality and original boundary reconstruction supply the map between the
+original boundary diagrams; Q acts on it. Its quotient characterization
+retains both original H objects and the original induced cycle map. For
+row triples, the necessary relations are derived from whole row naturality,
+without caller pointwise cone or naturality dictionaries.
+
+The original zero row, kernel cancellation and quotient cancellation give
+H(p)H(i)=0. For δH(p), the original middle kernel inclusion lifts into L;
+its r-image is the induced right cycle map and its θ-image is zero. Existing
+γ/δ reconstruction and quotient cancellation give δH(p)=0. For H(i)δ,
+the induced covered left cycle is the original middle boundary; its quotient
+kills it, and δρ=θ together with the proved cover cancels ρ.
+
+The native window exposes all three resulting zero-pair inputs and their
+actual Im⇒K comparison maps. Forming these maps does not establish
+exactness: the next proofs must construct inverses of these specific maps
+from the original short-exact data and normality. No output exactness
+inhabitant is supplied by the present zero-composite results.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

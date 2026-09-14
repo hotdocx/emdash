@@ -192,6 +192,13 @@ definitions add no primitive, rewrite or unifier. Component and whole Hom
 observations pass; the unconstrained δ=0 comparison remains a guarded
 resource boundary. Output exactness, model/reifier and snake work are next.
 
+C6e1 constructs the [adjacent H maps and all three exactness inputs](../emdash3_2_one_cat_native_homology_window_exact_inputs.lp).
+Original K/Q actions and row naturality give the maps and quotient laws;
+all three whole zero composites are proved. The actual Im⇒K comparisons
+are formed, with their inverse proofs still pending. Fifty-two definitions
+and two guarded proof-time unit views add no primitive or runtime rewrite.
+Model/reifier and snake work remain after output exactness.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

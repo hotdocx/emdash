@@ -361,6 +361,18 @@ edit. Component reconstruction and whole Hom observations pass; an optional
 unconstrained δ=0 comparison exceeds the memory guard and is not promoted.
 Actual output exactness, model/reifier work and snake comparison remain open.
 
+C6e1 constructs [adjacent native-window H maps and exactness inputs](../emdash3_2_one_cat_native_homology_window_exact_inputs.lp).
+Original K/Q functor actions on whole boundary-diagram maps provide H(i)
+and H(p), with original quotient characterization. Row naturality supplies
+the compatibility; the middle-column input precedes K/Q. All three whole
+zero composites H(p)H(i), δH(p) and H(i)δ are proved, and the actual Im⇒K
+comparisons are formed. Their invertibility remains unproved. Fifty-two
+definitions and two guarded proof-time category-unit views add no primitive,
+runtime rewrite or earlier LP edit. The unit views compare the original
+arrow, identity classifier and relevant endpoints. Broad evaluation-functor
+comparison experiments remain unpromoted; native mate naturality supplies
+the required K/Q action observations.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

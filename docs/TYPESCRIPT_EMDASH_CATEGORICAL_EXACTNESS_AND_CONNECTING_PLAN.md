@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6d1 native δ, reconstruction and uniqueness qualified; output exactness next; Op/duality deferred
+Status: C6e1 adjacent H maps and all three zero pairs qualified; comparison inverses next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -514,6 +514,17 @@ A→K(p) and Q(i)→C as invertible: a categorical kernel-cokernel pair.
 The LES exactness theorem must derive these comparison isomorphisms from
 the short-exact input and Abelian structure. It must not postulate their
 invertibility or assume the theorem through an exactness capability.
+
+C6e1 now constructs the adjacent whole H(i)/H(p) maps using original K/Q
+functor action on native whole boundary-diagram maps. Existing row naturality
+supplies their compatibility, and original quotient laws characterize the
+induced cycle maps. The middle-column input precedes K/Q selection.
+All three zero composites H(p)H(i), δH(p) and H(i)δ are proved. The
+[native-window exactness inputs](../emdash2/emdash3_2_one_cat_native_homology_window_exact_inputs.lp)
+now form the actual Im⇒K comparisons at all three positions. C6e2 must
+still construct their inverses from the original short-exact input; no
+output exactness inhabitant has been supplied. Fifty-two definitions and
+two guarded unit comparisons add no primitive or runtime rewrite.
 
 ## Connecting As Whole Universal Descent
 

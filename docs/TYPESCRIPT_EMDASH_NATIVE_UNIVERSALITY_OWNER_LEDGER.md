@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6d1 native δ, reconstruction and uniqueness qualified; output exactness next; Op/duality deferred
+Status: C6e1 adjacent H maps and all three zero pairs qualified; comparison inverses next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,132 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6e1: Adjacent whole homology maps and all three zero pairs
+
+**Qualified after ff37f33d (2026-09-14).**
+The native window now has whole H(i) and H(p), their original quotient
+characterizations, and the three zero composites
+
+```text
+H(p)∘H(i)=0,       δ∘H(p)=0,       H(i)∘δ=0.
+```
+
+The existing actual Im⇒K comparisons are formed for the middle, source-of-δ
+and target-of-δ positions. These are maps, not exactness inhabitants; their
+invertibility remains unproved. Original H choices, δ, row data and K/Q
+structures are retained. The tranche adds 52 definitions and two guarded
+proof-time unit views, with no new primitive, runtime rewrite or earlier
+LP edit.
+
+**Construction and ownership.**
+
+- [Arrow-family maps](../emdash2/emdash3_2_one_cat_arrow_family_maps.lp)
+  realize a whole square through the existing native arrow category in
+  Functor_cat(B,C), then exchange the parameter and shape axes. Both whole
+  endpoint maps compute. This introduces no new square carrier.
+- [K/Q family maps](../emdash2/emdash3_2_one_cat_kernel_cokernel_family_maps.lp)
+  retain the original functor actions. Their inclusion/projection laws are
+  derived through native mate naturality, inverse cuts and shape evaluation.
+- [Whole H family maps](../emdash2/emdash3_2_one_cat_homology_family_maps.lp)
+  use original kernel cancellation and boundary reconstruction to obtain
+  the boundary-diagram map, then apply the original Q action. Whole quotient
+  naturality characterizes the induced cycle map. No ordinary universal
+  provider dictionary or caller pointwise naturality field is used.
+- [Middle-column input](../emdash2/emdash3_2_one_cat_middle_column_inputs.lp)
+  forms its actual diagram and native input from the original whole middle
+  chain law before selecting any K/Q. Its H then uses the original program.
+- [Row homology maps](../emdash2/emdash3_2_one_cat_row_homology_maps.lp)
+  derive both required commuting relations from the existing whole row
+  transformations and generic naturality. Their cycle and quotient
+  observations retain the original inclusions/projections.
+- [Middle zero pair](../emdash2/emdash3_2_one_cat_row_homology_zero_pairs.lp)
+  uses the original zero row, kernel cancellation and quotient cancellation
+  to prove H(p)H(i)=0 and form its native input and actual comparison.
+- [Covered middle cycles](../emdash2/emdash3_2_one_cat_covered_middle_cycles.lp)
+  prove θs=0 whenever the original covered middle differential is zero.
+  Original incoming/kernel cancellation supplies the argument.
+- [δ after H(p)](../emdash2/emdash3_2_one_cat_native_connecting_projection_zero.lp)
+  lifts the original middle kernel inclusion into the existing L. Its
+  r-image is the actual induced right cycle map, and θ kills it. The
+  existing γ/δ reconstruction and original quotient cancellation yield
+  δH(p)=0.
+- [H(i) after δ](../emdash2/emdash3_2_one_cat_native_connecting_inclusion_zero.lp)
+  identifies the induced covered left cycle with the original middle
+  boundary. The original quotient kills that boundary; δρ=θ and the
+  existing categorical cover cancellation yield H(i)δ=0.
+- [Native-window exactness inputs](../emdash2/emdash3_2_one_cat_native_homology_window_exact_inputs.lp)
+  expose the two middle H functors and adjacent maps at the original native
+  H_C/H_A endpoints. The proved zeros form the native inputs, and the
+  original comparison owner supplies all three actual Im⇒K maps. No output
+  exactness or inverse is assumed.
+
+**Action observations and unit views.** The first direct K/Q naturality
+observation stopped at native shape evaluation versus postcomposition by
+evaluation. A broad equality of those evaluation functors did not check
+(`nuh4c6e1_eval_views-20260914-100403.log`) and is not introduced. Instead,
+existing native untranspose/transpose naturality supplies the required
+whole action laws, followed by the existing shape evaluator.
+
+Mixed native/raw presentations of the same intermediate functor prevented
+the old runtime unit patterns from matching. The
+[unit views](../emdash2/emdash3_2_functor_category_unit_views.lp) apply those
+same unit laws proof-time in the existing functor category, comparing the
+identity classifier, both relevant endpoints and the original arrow.
+They do not remove or reorient the runtime rules at core lines 5659/5662.
+The unit comparison must be staged as an equality before applying the mate
+functor: burying it inside fapp0 does not make unification transitive.
+Removing both views fails the K consumer
+(`nuh4c6e1_kq_no_units-20260914-103518.log`); retaining only the right view
+fails the Q consumer (`nuh4c6e1_kq_right_unit_only-20260914-104542.log`).
+Both views therefore have concrete consumers. The direct evaluation
+comparison remains an unpromoted experiment, not a new categorical premise.
+
+The initial wrong-endpoint/classifier negative fixtures put an ill-typed
+composition inside the expected equality type, so the checker rejected that
+type before evaluating the negative assertion. The corrected fixtures check
+the bad term against a well-formed Hom type. All six arrow/endpoint/classifier
+rejection controls pass; no theory change was made for that fixture repair.
+
+**Qualification.** All eleven owners and three reviewer files pass serial,
+warning-enabled, resource-guarded checks within the 90-second per-target
+ceiling. The 14 assertions comprise eight positive component/Hom-action
+observations and six negative arrow/identity-endpoint/classifier controls.
+Actual non-definitional unit presentations exercise both new comparisons;
+changed data are rejected. H-map quotient equations and both zero composites
+involving δ have their original component and whole next-Hom observations.
+
+Final owner logs span `105020`–`105200`. Reviewer logs are
+`functor_category_unit_views-20260914-105401.log`,
+`one_cat_homology_family_maps-20260914-105409.log` and
+`one_cat_native_homology_window_exact_inputs-20260914-105419.log`.
+The existing native-window connecting and cover reviewers still pass after
+the new exactness-input owner, at
+`nuh4c6e1_retained_homology-20260914-105600.log`.
+Eleven original dependency-load-order baselines pass at `105617`–`105755`.
+All fifteen final warning inventories exactly match their corresponding
+baselines in categories, locations, term heads, rule families and parser
+issues. Exact logs and checked source hashes are retained in
+`tmp/probes/nuh4c6e1_warning_comparison.json`.
+
+Strict LHS audit, strict catalog, report-header/reference lint, shell syntax,
+unique declarations, exact registration, added local links and diff hygiene
+pass. The source-only health report records 1,129 files and snapshot
+`ea0178f42c8560ea6956e98b06e9e13cadc2492fff44dea2da06a91ad619d09b`.
+No repository-wide, TypeScript or aggregate typecheck was run. This qualifies
+the stated whole maps, zero laws and comparison constructions; it does not
+supply the still-required comparison inverses, concrete model closure or
+deferred Op/profile qualification.
+
+**Next C6e2: prove output exactness.** Construct inverses of the three actual
+comparison maps from the original short-exact data and normality, preserving
+their original H, image and kernel objects. The zero composites and formed
+comparisons alone do not imply exactness. Continue through native K/Q,
+whole reconstruction and derived covers; do not add an exactness capability
+as an assumption or switch to ordinary universal-provider dictionaries.
+Model/reifier automation, snake/direct/native comparison and final
+qualification remain required. Existing Op/profile and endpoint-debugging
+deferrals remain in force.
 
 ### NUH-4C6d1: Two native descents construct the connecting map
 
