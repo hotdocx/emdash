@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2b qualified through raw four-row δ/exactness assembly; derived-column comparisons, retained observations and later adoption remain required
+Status: NUH-5B2c1 H-family point comparison qualified; derived-column inputs, retained observations and later adoption remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -217,6 +217,45 @@ native window's H endpoints; it is not yet the final retained-CAS observation
 interface. TypeScript migration, the nonsplit end-to-end consumer and later
 adoption remain required.
 
+NUH-5B2c experiment (2026-09-14): separate two observations before changing
+any interface. First compare a whole H-family point with original global H
+applied to the observed native input. Then compare the actual derived
+column diagram/transformation with the original raw input. These are
+diagnostic conversion/reflexivity checks, not object-equality transport in
+the theory. If an arbitrary diagram requires reconstruction, use the existing
+categorical reconstruction comparison and retain its endpoints; do not add
+a general diagram-object equality or reselect H.
+
+NUH-5B2c1 qualification (2026-09-14): the
+[point-input observer](../emdash2/emdash3_2_zero_arrow_family_point_inputs.lp)
+retains `(A[x], D[x], h[x])` in the existing native zero-cone category.
+It needs no P/Q, additive structure or ordinary-category profile. The
+[H-point comparison](../emdash2/emdash3_2_homology_family_point_comparisons.lp)
+then compares H(A,D,h)[x] with global H at that exact input, under the
+global H owner's existing ordinary profile and the same whole P/Q.
+
+The literal H-point conversion and typed-reflexivity diagnostics did not
+join: the two actual boundary diagrams still occur beneath Q. Both are
+canonical introductions of the same boundary, so the existing typed
+point-introduction paths compare those diagrams. The construction maps
+their categorical comparison through the original Q once. Existing
+OmegaEquivAlong action retains its selected inverse and both actual H
+objects. There is no intermediate quotient, H-object cast, new universal
+choice or caller coherence proof. The diagram paths are derived canonical
+introduction comparisons, not an equality of arbitrary diagrams or an
+equality-based replacement for universality. Five definitions add no
+primitive, runtime rule, unifier or change to an earlier LP owner.
+
+This qualifies a point observation, including Q's full Hom action at those
+endpoints; it does not assert a new whole natural comparison as x varies.
+The outgoing right-column diagram also passes an existing typed
+point-introduction comparison with the raw diagram in a diagnostic probe.
+Its failed literal-conversion alternative does not require a new diagram
+rule. Next NUH-5B2c2 derives the incoming-arrow observation and compares
+the actual column input with the original raw input. Compose that comparison
+with this H-point bridge and the retained/direct input equivalence before
+migrating the retained TypeScript observations. NUH-5B2 is still open.
+
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
 `OneCatAdjunctionNormality` owners. Prefer a native model surface indexed by
@@ -237,6 +276,31 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B2c1: two owners and two reviewers pass under the unchanged serial
+90-second/2-GiB guard. Seven assertions cover all three stored point-input
+projections without P/Q, the actual H-map endpoints, fixed-map equivalence,
+the mapped selected inverse and Q's full Hom action. The existing H-family
+consumer also passes with the new comparison module imported. No
+repository-wide typecheck or aggregate was run.
+
+Strict affected-owner LHS audits, the check catalog and source TOC pass.
+Source-only health metrics cover 1,193 files; these metrics do not replace
+the focused runtime checks above.
+
+Owner logs are `emdash3_2_zero_arrow_family_point_inputs-20260914-182938.log`
+and `emdash3_2_homology_family_point_comparisons-20260914-182941.log`;
+reviewers are `zero_arrow_family_point_inputs-20260914-182945.log` and
+`homology_family_point_comparisons-20260914-182948.log`, under
+`emdash2/logs/probes/`. The import-only controls at `182953` and `182957`
+match both complete inventories and raw warning blocks: respectively
+1,157/159 and 1,255/169 critical-pair/pattern reports. Exact evidence is
+`emdash2/tmp/probes/nuh5b2c1_warning_comparison.json`. The outgoing-diagram
+diagnostic is `nuh5b2c_right_diagram_point_typed-20260914-180850.log`;
+the H-point comparison failure is recorded at `181247`. Neither failed
+literal comparison is promoted as a theory-level equality assumption.
+The existing-consumer log is
+`nuh5b2c1_h_family_regression-20260914-183050.log`.
 
 NUH-5B2b: the changed evaluation owner, seven new owners and four reviewers
 pass under the unchanged 90-second/2-GiB serial guard. Sixteen assertions

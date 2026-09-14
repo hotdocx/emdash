@@ -4967,6 +4967,17 @@ postcomposition action. The native window's H endpoints are preserved;
 comparison of its derived column inputs with the original raw homology
 inputs remains necessary before the retained TypeScript observations migrate.
 
+At a parameter x, the coherent whole input already provides the native
+point `(A[x], D[x], h[x])`, independently of kernel/cokernel choices.
+The point of its whole H-family now compares categorically with global H
+at that same input. The two boundary diagrams are canonical introductions
+of the same boundary, and their existing introduction paths compare them.
+Applying the original Q to this comparison and its selected inverse gives
+an equivalence at the two actual H objects. No intermediate quotient or
+new universal selection is made. This is a derived point observation,
+including Q's full Hom action; a whole natural comparison in x is not
+asserted. The derived-column input comparison remains the next step.
+
 The retained inverse-mate input now has a derived categorical equivalence
 to the direct raw input at the same outgoing diagram. Ordinary diagram
 reflection compares their whole J(A)⇒d transformations using the original

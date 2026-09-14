@@ -4,6 +4,20 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+H-family point comparison (2026-09-14): the
+[native input observer](../emdash3_2_zero_arrow_family_point_inputs.lp)
+retains A[x], D[x], h[x] before P/Q selection. The
+[derived comparison](../emdash3_2_homology_family_point_comparisons.lp)
+relates the actual H-family point to global H at that input under its
+existing ordinary profile. Both boundary diagrams are canonical
+introductions of the same boundary; their existing point-introduction
+paths give a categorical comparison that original Q maps once. Both H
+objects and the selected inverse are retained. Five definitions add no
+primitive or new rule; seven focused assertions and unchanged complete
+warning inventories qualify this point observation and Q's Hom action.
+Derived-column input comparisons and retained TypeScript observations
+remain next; no new whole natural comparison in x is asserted.
+
 Raw native window update (2026-09-14): four original raw rows and their maps
 now instantiate [whole δ](../emdash3_2_commutative_algebra_freyd_raw_window_connecting.lp)
 and [all three exactness witnesses](../emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp).

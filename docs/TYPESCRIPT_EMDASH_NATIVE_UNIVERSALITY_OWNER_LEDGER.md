@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6e2c all three native-window exactness comparisons qualified; model/reifier next; Op/duality deferred
+Status: native-window exactness, raw assembly and H-point comparison qualified; model/reifier integration active; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,34 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-5B2c1: H-family point and global H at the observed input
+
+**Qualified after ae266507 (2026-09-14), through the point comparison.**
+The point-input observer retains the original A[x], D[x] and h[x] before
+any P/Q choice. Under the existing global-H ordinary profile, the two
+actual boundary diagrams compare through their existing canonical
+point-introduction paths. Original Q maps that categorical comparison
+once, preserving both actual H objects and the selected inverse via
+OmegaEquivAlong action. No intermediate quotient, object cast, reselection
+or caller coherence proof is introduced. This is a point observation with
+the full Q Hom functor, not a new whole natural comparison in x.
+
+Five definitions in two new owners add no primitive, rule, unifier or edit
+to earlier LP owners. Two reviewers contain seven passing assertions;
+an existing H-family consumer also passes with the new owner imported.
+Complete warning inventories and raw blocks match import-only controls
+at 1,157/159 and 1,255/169 critical-pair/pattern reports. The
+[model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records exact logs and the outgoing-column typed-introduction diagnostic.
+Strict affected-owner audits, catalog and source TOC pass; source-only
+health metrics cover 1,193 files. No TypeScript implementation changed.
+
+Next NUH-5B2c2 derives the column incoming-arrow observation, compares
+the actual column input with the original raw input, and composes these
+comparisons with the retained/direct input equivalence. Retained TypeScript
+observations, nonsplit adoption, snake comparison and final qualification
+remain required. NUH-5B2 is not complete.
 
 ### NUH-5B2b: Four raw rows instantiate whole δ and native exactness
 

@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: native construction/model/input comparisons and raw four-row δ/exactness assembly qualified; derived-column and retained observations next; Op/duality deferred
+Status: native construction, raw four-row δ/exactness and H-family point comparison qualified; derived-column inputs and retained observations next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,19 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Current NUH-5B2c1 milestone (2026-09-14): the whole H-family's point now
+has a derived categorical comparison with global H at its observed native
+input. That input retains A[x], D[x], h[x] before P/Q selection. Existing
+canonical introduction paths compare the two actual boundary diagrams;
+the original Q maps the comparison and its selected inverse, keeping both
+H objects. Five definitions add no primitive or new rule. Seven focused
+assertions pass with unchanged complete warning inventories. This is a
+point comparison; a new whole natural comparison in x is not claimed.
+Next NUH-5B2c2 compares the derived column input with the original raw
+input before composing retained-H observations and migrating TypeScript.
+The [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records qualification and the still-open nonsplit adoption boundary.
 
 Current NUH-5B2b milestone (2026-09-14): four original raw rows and
 their three raw maps now instantiate the existing whole δ and all three
@@ -789,7 +802,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: preparation/model/input comparisons and raw four-row δ/exactness qualified; derived-column comparisons, retained observations and later adoption remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
+| NUH-5 | active: preparation/model/input comparisons, raw four-row δ/exactness and H-family point comparison qualified; derived-column inputs, retained observations and later adoption remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | queued after NUH-5; generic NUH-4 construction available | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
@@ -1161,6 +1174,7 @@ must not label those alternatives validated implementations.
 | D-NUH-069 | NUH-5B1 supplies a native Freyd model context over original whole P/Q and separate whole Coim⇒Im normality. The one-way legacy adapter retains identical whole H, original native inputs and Hom action. Whole δ and all three fixed-comparison exactness witnesses specialize the existing generic owners with their original row-family telescope and selected inverses. Twelve definitions introduce no primitive, rewrite, unifier or earlier LP edit. Fifteen assertions pass with unchanged complete warning inventories. Literal generic additive projections avoid expanding the dependent normality comparison, and the native core omits an unnecessary ordinary-record dependency. Concrete raw-window assembly, retained TypeScript observations and later adoption remain required; no closed model or old-to-native normality theorem is inferred |
 | D-NUH-070 | NUH-5B2a derives a categorical equivalence from the retained inverse-mate input to the direct raw input at the same outgoing diagram. Existing reconstruction and ordinary diagram reflection give the whole fibre comparison; native fibre inclusion retains both base identities and the original cell. Original whole H maps the comparison and its selected inverse, without object casts or universal reselection. Raw rows/maps enter as constant parameter families with original three map components and whole agreement action. Thirteen definitions add no primitive, rewrite, unifier or earlier LP edit. Nineteen assertions and identical complete warning inventories qualify this boundary. Full four-row assembly, whole chain-zero inputs, derived column comparison and retained TypeScript observations remain required |
 | D-NUH-071 | NUH-5B2b assembles the four original raw rows and three maps into the existing whole δ and all three native exactness witnesses. Original raw middle-column agreements derive both whole zero inputs through weakening and categorical initial/terminal uniqueness; only native model normality and row shortness remain supplied contracts. Twelve definitions add no primitive. Two constant-evaluation runtime folds at the existing owner close whole/preprojected computation; one guarded Cat horizontal-action comparison is proof-time only. Sixteen assertions and five affected existing consumers pass, with no evaluation warning-body delta. Derived column-input comparison, retained TypeScript observations, later adoption and snake comparison remain required |
+| D-NUH-072 | NUH-5B2c1 observes the original native input before universal selection and derives a categorical comparison from the actual H-family point to global H at that input. Existing canonical diagram-introduction paths compare the actual boundaries; original Q maps the comparison and selected inverse once, preserving both H objects. Five definitions add no primitive, rule, unifier or earlier LP edit. Seven assertions and complete unchanged warning inventories qualify the point observation and full Q Hom action; no new whole natural comparison in x is claimed. Derived-column inputs, retained TypeScript observations and nonsplit adoption remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -1321,9 +1335,10 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
 NUH-5A automates retained rational model preparation and replay. Continue
-NUH-5B2c under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: the raw
+NUH-5B2c2 under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: the raw
 four-row assembly now instantiates whole δ/exactness and derives its whole
-zero inputs. Compare its derived column inputs with the original raw inputs,
+zero inputs, and H-family points compare categorically with global H at
+the observed native input. Compare derived column inputs with the original raw inputs,
 use the retained/direct equivalences to retain H, migrate observations, keep supplied
 model semantics explicit, and qualify the later retained adoption workflow.
 Then complete NUH-6 snake/native comparison and NUH-7 final qualification.

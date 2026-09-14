@@ -2363,6 +2363,15 @@ arbitrary pointwise extensionality or claim general facade/lax normalization.
 Derived column-input and retained TypeScript observation comparisons remain
 subsequent work.
 
+`zero_arrow_family_point_input(T,A,D,h,x)` stores the original
+`(A[x],D[x],h[x])` in the existing native cone, before P/Q selection.
+`homology_family_global_point_map` compares the actual H-family point
+with global H at that input. Its `*_equiv` is existing OmegaEquivAlong
+evidence, retaining the map and the inverse obtained through original Q.
+The two auxiliary diagram paths use canonical introduction comparisons;
+they are neither arbitrary diagram extensionality nor H-object casts.
+These are point observations, not a new whole natural comparison in x.
+
 `zero_arrow_cone_fibre_inclusion_func(C1,T,A,d)` is a whole inclusion of the
 existing transformation Hom into the ordinary zero-cone category. Its point
 is the original `(A,d,h)`; its arrow keeps both base identities and the fibre

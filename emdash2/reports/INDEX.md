@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+NUH-5B2c1 (2026-09-14): the
+[native point-input observer](../emdash3_2_zero_arrow_family_point_inputs.lp)
+and [H-family point comparison](../emdash3_2_homology_family_point_comparisons.lp)
+retain the original input and both actual H objects. Existing canonical
+boundary-diagram introduction paths feed original Q's categorical action,
+including the same selected inverse. Five definitions add no primitive or
+new rule; seven focused assertions pass with unchanged warning inventories.
+Derived-column inputs and retained observations remain next under the
+[model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 NUH-5B2b (2026-09-14): the
 [raw four-row connecting constructor](../emdash3_2_commutative_algebra_freyd_raw_window_connecting.lp)
 and [three exactness constructors](../emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp)
