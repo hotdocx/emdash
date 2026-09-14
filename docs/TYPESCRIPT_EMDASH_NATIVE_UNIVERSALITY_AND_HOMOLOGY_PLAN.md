@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6c3c2 whole inverses/difference cancellation qualified; categorical cover and δ next; Op/duality deferred
+Status: C6c3e1 auxiliary difference cover qualified; original r/ρ covers and δ next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,27 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6c3c2 milestone (2026-09-14): [whole additive inverses](../emdash2/emdash3_2_one_cat_additive_family_inverse.lp)
+Current C6c3e1 milestone (2026-09-14): the
+[auxiliary difference cover](../emdash2/emdash3_2_one_cat_difference_covers.lp)
+is derived from the original whole short-exact row and its supplied Abelian
+normality. For p:M⇒Z and any whole f:X⇒Z, let D=f∘π₁−p∘π₂ on the
+original product. The original cokernel projection q_D is proved zero;
+whole kernel lifting makes the original image inclusion invertible, and
+normality makes the existing Coim(D)⇒Z factor invertible. No cover or
+epicity premise, new primitive, rewrite or unifier is added.
+
+Twenty-six definitions also derive the original whole factorization
+ι∘a=φ, retaining the earlier coimage-to-target program φ. The native/raw
+mate comparison is used explicitly; the two factors are not presumed equal.
+Endpoint presentations of zero are aligned by existing whole terminal/
+initial uniqueness. The original K/Q and inverse selections are preserved.
+
+Next C6c3e2 applies this auxiliary cover to the original kernel square to
+prove the covers for r and ρ. Then prove θκ_ρ=0, descend θ to δ, and prove
+output exactness. Model/reifier, snake comparison and final qualification
+remain required. The auxiliary cover is not yet the homology cover.
+
+Completed C6c3c2 milestone (2026-09-14): [whole additive inverses](../emdash2/emdash3_2_one_cat_additive_family_inverse.lp)
 and [cancellation](../emdash2/emdash3_2_one_cat_additive_family_cancellation.lp)
 now give f+(−f)=0, f−f=0, cancellation of a common left summand, and
 f−g=0 ⇒ f=g. Original whole negation is invertible and reflects equality.
@@ -42,10 +62,9 @@ proof-time comparisons add no primitive, runtime rule or earlier LP edit.
 The selected comparisons retain all functors, the same adjunction and the
 same mate input; two unused comparison experiments are not promoted.
 
-Next C6c3e constructs the categorical cover comparison from the original
-kernel/cokernel/normality data. Use the proved zero-difference criterion for
-kernel-of-difference comparisons. Derive the actual cover property rather
-than supplying it. Whole θ-on-kernel annihilation, δ descent and output
+C6c3e1 above derives the auxiliary difference cover from the original
+kernel/cokernel/normality data. C6c3e2 must use it at the original kernel
+square to derive the actual r/ρ covers. No cover property is supplied. Whole θ-on-kernel annihilation, δ descent and output
 exactness still require proof, followed by model/reifier construction and
 snake comparison. No additional unit/associativity laws or complete
 PreadditiveCategory(Functor_cat(B,C)) are claimed merely from this tranche.
@@ -567,7 +586,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: native window, ρ/θ and whole signed operations, bilinearity and difference cancellation qualified; cover epicity/annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: native window, ρ/θ, whole arithmetic and auxiliary difference cover qualified; original r/ρ covers, annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -928,6 +947,7 @@ must not label those alternatives validated implementations.
 | D-NUH-057 | C6c3b constructs native whole shear before proving its components invertible. Existing fixed-forward pointwise-to-whole ΩAlong assembly yields its whole inverse, retaining the concrete scalar inverse in both component evidence slots. Extract −id using native projections/injection, then generic restriction and postcomposition construct whole negation; Product_map_func supplies subtraction's signed input. Whole signed composition laws use inherited naturality. All 41 operations are definitions, with no new primitive/rule/unifier or earlier LP edit. Native unpair component readback uses Sigma elimination plus the forward mate cut, avoiding raw-projection casts and metadata folds. Whole additive cancellation/bilinearity and cover stability remain required; point readbacks do not supply them |
 | D-NUH-058 | C6c3c1 derives both whole addition/subtraction bilinearity laws from native mate naturality, whole projection β and product/coproduct distribution. Original product-map action and diagonal pairing retain P(W,W)/P(X,X); no new whole additive capability or pointwise equality assembly is supplied. Thirty-one definitions and five proof-time views preserve runtime owners. Complete diagonal Hom action, typed identity evaluation, native projected composition and unchanged-composite endpoint congruence are qualified together; the last view repeats both arrows so associativity remains owned by the existing rule. General Sigma β/η experiments are not promoted. Whole zero/cancellation laws and cover/δ proofs remain required |
 | D-NUH-059 | C6c3c2 derives id+N from the original whole shear, proves restriction of the original mate/pair/copair/addition operations, and transfers the law to the existing universal restriction. Whole f+(−f)=0 and f−f=0, common-left-summand cancellation, fixed-forward invertibility of original N, negation reflection, zero-difference reflection and composed-difference zero laws follow. Thirty-eight definitions and eight sufficient proof-time views add no primitive/runtime rule or earlier LP edit. The direct and restricted negative identities are compared by whole inverse uniqueness. Unused mixed native point and literal paired-Hom experiments are not promoted. C6c3e must derive the actual categorical cover using kernel-of-difference, original cokernel-zero proofs and normality; no cover flag, full additive capability or unproved unit law is supplied |
+| D-NUH-060 | C6c3e1 derives the actual auxiliary difference cover from the original whole short-exact row: q_D=0, original image inclusion invertible, and original Coim(D)⇒Z factor invertible under the supplied normality. Whole native/raw mate reconstruction proves ι∘a=φ for the existing φ. Twenty-six definitions add no primitive, runtime rule, unifier or earlier LP edit. Original inverse choices are retained through existing IsoEvidence composition and explicit inverse laws. An unused mate-reindex import is removed after a successful ablation. This does not yet prove the original r/ρ covers, θκ_ρ=0, δ or output exactness |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

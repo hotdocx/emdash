@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c3c2 whole inverses/difference cancellation qualified; categorical cover and δ next; Op/duality deferred
+Status: C6c3e1 auxiliary difference cover qualified; original r/ρ covers and δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -450,12 +450,20 @@ original endpoints/inputs and native inverse cuts remain the owners.
 Two unused comparison experiments are not promoted. This does not supply
 a full additive capability on the functor category or unstated unit laws.
 
-Next C6c3e uses K(κ∘π₁−p∘π₂), original cokernel-zero arguments and
-Coim⇒Im normality to derive the categorical cover for the existing r and
-ρ. The owner ledger gives the proposed whole descent proof. No cover
-property is mathematical input. Then prove θκ_ρ=0, perform original
-coimage/cokernel descent for δ and prove output exactness. Concrete
-model/reifier and snake comparison obligations remain open.
+C6c3e1 now derives the [auxiliary categorical difference cover](../emdash2/emdash3_2_one_cat_difference_covers.lp).
+For D=f∘π₁−p∘π₂ with p the original short-exact row's outgoing map,
+whole pairing and difference cancellation imply q_Dp=0, hence q_D=0.
+Lifting id through the original K(q_D) makes the image inclusion
+invertible. Original Coim⇒Im normality then makes the existing Coim(D)⇒Z
+factor invertible. The original factor agrees with ι∘a by native/raw mate
+reconstruction and whole quotient cancellation. Twenty-six definitions add
+no primitive, runtime rule or unifier.
+
+C6c3e2 next specializes f=κ_d, compares K(D) with the original L=K(d∘p),
+and uses the proved auxiliary cover to derive coker(r)=0 and the covers
+for r and ρ. No cover property is supplied as input. Then prove θκ_ρ=0,
+descend to δ and prove output exactness. Concrete model/reifier and snake
+comparison obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

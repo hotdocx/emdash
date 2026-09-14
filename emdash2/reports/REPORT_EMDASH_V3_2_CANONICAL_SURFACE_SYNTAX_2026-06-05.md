@@ -2152,6 +2152,24 @@ the input equality. `one_cat_negative_family_shear_path` compares the two
 already constructed whole negative identities. No new primitive, runtime
 rewrite, operation reselection or full additive capability is added.
 
+`one_cat_zero_kernel_section` is the original kernel mate applied to id;
+`one_cat_zero_kernel_omega` retains that section as the inverse of the
+actual inclusion. `omega_equiv_along_comp` reuses IsoEvidence composition;
+`omega_equiv_along_equal` keeps the same selected inverse and proves its
+laws for an equal whole forward map. Neither operation casts an object.
+
+`one_cat_coimage_target_image_factor_path` gives ι∘a=φ for the earlier
+whole φ. `one_cat_difference_cospan_transf` forms f∘π₁−g∘π₂ through
+existing whole projections/subtraction. Its pairing and annihilator paths
+retain the two original legs. `one_cat_difference_row_cokernel_zero`
+uses the original OneCatShortExactFamily, and
+`one_cat_difference_row_cover_omega` returns fixed-forward evidence on
+the existing Coim(D)⇒Z factor under original normality. Its source is the
+actual coimage of the introduced difference diagram; no cover or epicity
+argument is present. `one_cat_zero_cokernel_cover_omega` is the reusable
+zero-cokernel construction behind this row instance. Their components and
+Hom action remain observations of the whole original terms.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

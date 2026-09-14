@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3c2 whole inverses/difference cancellation qualified; categorical cover and δ next; Op/duality deferred
+Status: C6c3e1 auxiliary difference cover qualified; original r/ρ covers and δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,113 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c3e1: Derived categorical cover of the whole difference map
+
+**Qualified after 612ab396 (2026-09-14).**
+For the original whole short-exact row's p:M⇒Z and any f:X⇒Z, form
+
+```text
+D = f∘π₁ − p∘π₂ : Prod(X,M) ⇒ Z.
+q_D = 0;
+φ_D : Coim(D) ⇒ Z is invertible under the original supplied normality.
+```
+
+The first conclusion uses no normality. The second is fixed-forward
+OmegaEquivAlong on the existing coimage-to-target factor, not an arbitrary
+equivalence between its endpoints. All data remain whole internal terms.
+Twenty-six definitions across eight one-way owners introduce no primitive,
+runtime rewrite, unifier or change to earlier LP sources.
+
+**Construction and semantic boundary.**
+
+- [Kernel of zero](../emdash2/emdash3_2_one_cat_zero_kernel_families.lp)
+  lifts id through the original K(D). Native mate reconstruction gives one
+  inverse law; original kernel cancellation gives the other for the same
+  section. No replacement zero diagram or kernel selection is used.
+- [Fixed-forward composition](../emdash2/emdash3_2_omega_equiv_composition.lp)
+  uses the existing IsoEvidence constructor/composition and the original
+  selected left inverse in both inverse slots. For an equal whole forward
+  map, it retains that inverse and proves the two required laws by
+  congruence. It introduces neither a new equivalence type nor an object cast.
+- [Whole coimage factor paths](../emdash2/emdash3_2_one_cat_coimage_factor_paths.lp)
+  give a∘q_κ=u, κ_q∘u=∂ and φ∘q_κ=∂. Native inverse mating and the
+  existing native/raw mate comparison prove these equations. Original
+  quotient cancellation then proves ι∘a=φ for the earlier φ program.
+- [Whole difference cospans](../emdash2/emdash3_2_one_cat_difference_cospans.lp)
+  form D from the original two projections. Native product β and whole
+  bilinearity prove D∘⟨a,b⟩=f∘a−p∘b and its postcomposition law. Applying
+  this at ⟨0,id⟩ and using zero-difference reflection gives hD=0 ⇒ hp=0.
+  No unproved additive unit law or full additive functor-category structure
+  is assumed.
+- [Cokernel annihilation](../emdash2/emdash3_2_one_cat_cokernel_family_annihilation.lp)
+  restricts the original whole unit annihilation to the actual D. Existing
+  whole terminal uniqueness aligns its source presentation; no new square
+  or annihilation primitive is supplied.
+- [Difference cokernels](../emdash2/emdash3_2_one_cat_difference_cokernels.lp)
+  apply that result to the original q_D, so q_Dp=0. The original whole
+  short-exact row's outgoing cancellation forces q_D=0.
+- [Zero-cokernel covers](../emdash2/emdash3_2_one_cat_zero_cokernel_covers.lp)
+  keep the original image diagram Arr(q)∘D. Whole terminal/initial
+  uniqueness presents q_D=0 at precisely that diagram; the kernel-of-zero
+  construction makes its original inclusion invertible. Restriction,
+  original normality and ι∘a=φ give invertibility of the original φ_D.
+- [Difference covers](../emdash2/emdash3_2_one_cat_difference_covers.lp)
+  combine those constructions for the original row. Their arguments contain
+  no cover/epicity flag or independently supplied inverse.
+
+**Refinements.** The first factor reconstruction attempt mixed the native
+image endpoint with its raw composition presentation. Keeping the actual
+native intermediate and reusing the existing same-composite endpoint view
+resolved it. The older φ is a unit/counit formula, so its reconstruction
+must first use the existing native/raw mate comparison. A proposed import
+of mate-reindex comparisons proved unnecessary and was removed after
+`nuh4c6c3e_factor_import_ablation-20260914-065408.log` passed. The image
+inverse first stopped at the two zero-family endpoint presentations;
+existing whole terminal/initial uniqueness supplied the needed equations.
+No new proof-time comparison or runtime rule was required.
+
+**Qualification.** Eight owners and three reviewer files pass serial,
+warning-enabled, resource-guarded checks with a 90-second ceiling per
+Lambdapi invocation. The 22 assertions comprise 17 positive observations
+and five rejection controls. They retain original forwards and selected
+inverses, both inverse laws at the same inverse, independent paired
+inputs, the actual row's cokernel-zero result and whole Hom action. An
+unrelated map cannot replace the indexed forward arrow, and changing a
+cospan leg is not silently erased.
+
+Final owner logs span `065448`–`065548`. Reviewer logs are
+`omega_equiv_composition-20260914-065600.log`,
+`one_cat_zero_cokernel_covers-20260914-065607.log` and
+`one_cat_difference_covers-20260914-065615.log`.
+The retained original kernel-pullback and native homology-window reviewers
+pass together with the new cover at
+`nuh4c6c3e_retained_homology-20260914-065803.log`.
+Nine original dependency-load-order baseline files pass at `065817`–`065929`.
+All twelve final warning inventories match their corresponding baselines
+exactly in categories, locations, term heads, rule families and parser
+issues; logs and exact source hashes are recorded in
+`tmp/probes/nuh4c6c3e_warning_comparison.json`.
+
+Strict catalog, report-header/reference lint, shell syntax, added local
+links and diff hygiene pass. All 26 owner symbols are unique definitions;
+there is no new primitive or rule requiring a new LHS audit. The refreshed
+source-only health report records 1,096 files and source snapshot
+`8ff201ab8ab9080711df22aaf6f5649c19f8616c55e6de2eb468e1977d1347a0`.
+No repository-wide, TypeScript or aggregate typecheck was run. These are
+scoped ordinary whole constructions under the stated original structural
+and normality assumptions; deferred Op/profile work remains separate.
+
+**Next C6c3e2.** Specialize f to the original κ_d. The kernel of D gives a
+compatible pair; lift its second projection into the original L=K(d∘p)
+and use kernel cancellation to identify its first projection with r after
+that lift. Then descend coker(r)∘π₁ through this proved auxiliary cover.
+The second injection and original p cancellation force the descended map
+to zero, and the first injection gives coker(r)=0. Apply the same original
+zero-cokernel cover construction to r, then to ρ=q_H∘r. Retain the actual
+L, r, ρ and H endpoints. These r/ρ results, θκ_ρ=0, δ and output exactness
+are not established by the present auxiliary cover alone. Model/reifier
+and snake comparison work, and the agreed deferrals, remain unchanged.
+
 ### NUH-4C6c3c2: Whole inverses, restriction and zero-difference cancellation
 
 **Qualified after 4db39ec6 (2026-09-14).** This tranche proves
@@ -405,7 +512,7 @@ No repository-wide, TypeScript or aggregate check was run. This is focused
 qualification of the stated ordinary whole constructions, not completion
 of the cover theorem or qualification of the deferred profile migration.
 
-**Next C6c3e: categorical cover construction.** The current proof route
+**C6c3e design, partly implemented by C6c3e1 above.** The proof route
 uses the zero-difference criterion rather than assuming unproved additive
 unit laws. For the original p:M⇒Z and κ:K(d)⇒Z, form
 

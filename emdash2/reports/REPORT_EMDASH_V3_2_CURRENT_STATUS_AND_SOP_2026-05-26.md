@@ -325,6 +325,18 @@ The next cover proof uses K(κπ₁−pπ₂), original cokernel-zero arguments 
 normality; cover/δ/output exactness and model/reifier/snake work remain open.
 No full additive functor-category capability or unproved unit law is supplied.
 
+C6c3e1 derives the [auxiliary difference cover](../emdash3_2_one_cat_difference_covers.lp).
+For the original row's outgoing p and any whole f into its target,
+D=f∘π₁−p∘π₂ has its actual cokernel projection q_D=0. Native pairing,
+whole difference reflection and original row cancellation prove this.
+Lifting id through the original K(q_D) makes the original image inclusion
+invertible. Supplied normality and a derived whole equality ι∘a=φ then
+make the existing Coim(D)⇒Z factor invertible. The raw/native mate bridge
+is explicit, and original whole inverse choices remain fixed.
+Twenty-six definitions add no primitive, runtime rewrite, unifier or
+change to earlier LP owners. Original r/ρ covers, θκ_ρ=0, δ, output
+exactness and model/reifier/snake work remain open.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

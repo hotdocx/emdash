@@ -4739,6 +4739,28 @@ planned kernel-of-difference cover construction through the original K/Q
 and normality. This does not yet prove that cover or give a complete
 additive capability on the functor category.
 
+The auxiliary categorical cover is now derived. For a whole short-exact
+row with outgoing map p:M⇒Z and any whole f:X⇒Z, set
+D=f∘π₁−p∘π₂:Prod(X,M)⇒Z using the original product. Pairing and
+bilinearity give D∘⟨a,b⟩=f∘a−p∘b. Consequently hD=0 implies hp=0
+by evaluating the second injection and reflecting zero differences.
+Apply this to the original cokernel projection q_D. Its native whole
+annihilation and original row cancellation prove q_D=0.
+
+The kernel of that actual zero quotient has invertible inclusion: lift id
+through its original kernel and use kernel cancellation for the second
+inverse law. This is the original image inclusion. Under the supplied
+Abelian normality, composing it with the actual Coim⇒Im comparison is
+invertible. Whole native/raw mate reconstruction and quotient cancellation
+identify this composite with the existing Coim(D)⇒Z factor. No epicity,
+cover, new inverse, pointwise cone dictionary or naturality square is
+supplied by the caller. Original terminal/initial family uniqueness aligns
+the zero presentations without changing diagrams or universal choices.
+
+This proves the auxiliary difference cover. Applying it to the original
+L=K(d∘p) and deriving the covers of r and ρ, followed by annihilation,
+connecting descent and output exactness, remain subsequent constructions.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
