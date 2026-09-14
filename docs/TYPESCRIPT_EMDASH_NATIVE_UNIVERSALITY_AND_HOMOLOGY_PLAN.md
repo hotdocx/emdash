@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2b native kernel pullback comparison qualified; cover and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,33 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6b2a milestone (2026-09-13): the
+Current C6b2b milestone (2026-09-13): the
+[native kernel pullback comparison](../emdash2/emdash3_2_one_cat_kernel_pullback_universality.lp)
+is now an actual internal functor with a constructed inverse and both whole
+functor inverse paths. Existing OmegaEquivAlong packages that evidence on
+the original forward comparison. Both legs of the original square are
+recovered for arbitrary native slice-Hom inputs, with the original D/K
+and whole parameter category B retained.
+
+The inverse uses the existing whole kernel mate and core reflection in the
+genuine zero-dimensional cone Homs. It recovers its original object program
+by a derived path; no extra judgmental object or inverse-composition beta is
+installed. Two explicit structural/model obligations extend the opaque
+profiles: OneCat(C)→OneCat(C/X) and discreteness of Functor_cat(A,B) when
+B is discrete. Native slice equality reflection itself is derived by Sigma
+elimination at the actual classifier and proposition-valued triangle fibres.
+
+Thirty-four definitions and two primitives add no rewrite, unifier or nucleus
+edit. All 38 assertions, retained consumers and exact dependency warning
+comparisons pass. This proves the cartesian comparison needed here;
+a general coherent PullbackStructure is a separate construction.
+
+Next C6c constructs the whole canonical cover ρ and covered map θ, proves
+cover epicity and the required annihilation, then forms δ by original
+cokernel/coimage descent. Derived output exactness, concrete model/reifier
+construction and the snake comparison remain required.
+
+The completed C6b2a milestone (2026-09-13): the
 [whole native kernel source observer](../emdash2/emdash3_2_one_cat_kernel_family_projection_paths.lp)
 is an internal functor Γ_D, composing the original inverse mate with source
 evaluation. Its application computes at native Hom endpoints. The new
@@ -39,12 +65,8 @@ computation. Fifteen definitions and four proof-time Hom-action views
 add no primitive, runtime rewrite or nucleus edit. All 22 new assertions
 and retained consumers pass, with exact unchanged-dependency warnings.
 
-Next C6b2b constructs the native cartesian universal comparison for this
-square, retaining whole inverse/action and both original legs. The square
-and Γ's action on whole transformations are proved; no complete
-PullbackStructure or formal cartesian universal theorem is asserted yet.
-The cover, δ, derived output exactness, concrete model/reifier construction
-and snake comparison remain required.
+C6b2b above resolves the subsequent native cartesian universal comparison.
+The original Γ and square remain the inputs to that construction.
 
 The completed C6b1 milestone (2026-09-13): [whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
 now retains an arbitrary original diagram D. The
@@ -394,7 +416,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: direct inputs/maps through Freyd checked; categorical exactness/connecting owners next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: canonical comparisons and kernel pullback qualified; cover/δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -748,6 +770,7 @@ must not label those alternatives validated implementations.
 | D-NUH-050 | C6a supplies the ordinary product-category profile and Δ⊣P as explicit structural/model obligations over the original P/BP. Native family mates construct whole pairing and inverse computation; component agreement and original projection recovery are derived. Preserve native indices inside applications and keep diagonal/composite/constant/component comparisons at proof time. The rejected runtime diagonal folds are not installed; this prerequisite supplies no fibre product, cover or δ |
 | D-NUH-051 | For the actual connecting pullback along a kernel, pursue K(d∘p). C6b1 derives whole lifting at the original D, with native reconstruction and uniqueness, then constructs this kernel family and both maps using the same K. Its current second-map reconstruction is E₀(untranspose(r))=p∘κ(d∘p); derive the ambient κ(d)∘r equation and the native cartesian universal comparison before calling it a completed pullback. No whole-addition capability, ordinary factor dictionary or new universal primitive is supplied |
 | D-NUH-052 | C6b2a defines Γ as the existing whole source-evaluation Hom functor after the native inverse mate, retaining literal native indices inside compositions and applications. Existing rigid Hom_func factorizations and four sufficient proof-time views derive whole whiskering, Γ_D(v)=κ_D∘v, lift reconstruction, inclusion equality reflection and κ(d)∘r=p∘κ(d∘p). No primitive, runtime fold or nucleus edit is added. Native cartesian universality remains the next gate |
+| D-NUH-053 | C6b2b constructs the native slice-Hom comparison and its inverse from the original kernel mate, then derives both whole functor inverse paths and OmegaEquivAlong on that actual comparison. Ordinary native slice equality follows by Sigma elimination in the original classifier. Core reflection internalizes the inverse with propositional object agreement. The slice ordinary profile and discrete-target functor profile are two explicit structural/model obligations, not cartesian or inverse axioms. No runtime/unification rule is added; no judgmental inverse beta or general PullbackStructure is claimed. Cover/δ and output exactness remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2b native kernel pullback comparison qualified; cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,103 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6b2b: Native cartesian comparison of the original kernel square
+
+**Implemented after f388ed78.** For 𝒞=Functor_cat(B,C), retain the original
+K, D, p:X⇒Y, L=K(d∘p), a₀=κ_(d∘p), κ_d and r:L⇒K(d). The existing
+square κ_d∘r=p∘a₀ defines a slice arrow Σ_p(a₀)→κ_d. Its native Hom
+comparison at an arbitrary original a:𝒞/X is now constructed and proved
+invertible with the existing fixed-forward OmegaEquivAlong.
+
+**Owners and trust boundary.**
+
+- [Comparison](../emdash2/emdash3_2_one_cat_kernel_pullback_comparison.lp):
+  original inclusion objects, native square arrow and the actual forward
+  functor Φₐ, using Σ_p Hom action then postcomposition.
+- [Lifts](../emdash2/emdash3_2_one_cat_kernel_pullback_lifts.lp): a native
+  cone object gives one whole annihilation path; the original K mate gives
+  its lift and reconstructs both original ambient legs.
+- [Universality](../emdash2/emdash3_2_one_cat_kernel_pullback_universality.lp):
+  actual inverse functor, object agreement, both recovered ambient legs,
+  both whole inverse paths and constructed OmegaEquivAlong on Φₐ. No comparison inverse is postulated.
+- [Native slice paths](../emdash2/emdash3_2_one_cat_slice_paths.lp): equality
+  reflection is derived by Sigma elimination at the actual native Hom,
+  using proposition-valued triangle fibres. The OneCat slice closure is
+  an explicit structural/model primitive extending the opaque profile.
+- [Core object maps](../emdash2/emdash3_2_groupoidal_object_maps.lp) and
+  [discrete functor paths](../emdash2/emdash3_2_discrete_functor_paths.lp):
+  existing core inversion/Path_map supplies automatic higher action, and
+  the existing set-target transformation assembly supplies whole paths.
+  Discrete-target functor closure is the second explicit profile primitive.
+- [Slice action paths](../emdash2/emdash3_2_slice_sigma_arrow_paths.lp) and
+  [ordinary postcomposition observation](../emdash2/emdash3_2_one_cat_functor_postcomposition_paths.lp):
+  derive the actual underlying-arrow observation without new runtime rules.
+
+The two profile closures are ordinary/discrete structural facts, not new
+kernel, cartesian or inverse axioms. Their closed model implementations
+remain NUH-5 obligations. The inverse functor's object action agrees with
+the existing lift by a derived core-reflection path; it is not an extra
+judgmental beta. Both full functor inverse laws are paths. General coherent
+SliceBaseChange_catd/PullbackStructure over all base arrows is separate.
+The original parameter category B, original K and diagrams are retained.
+
+**Rejected shortcuts and computation findings.** A raw reflexivity check
+for arbitrary Σ_p input does not expose its constructor action. Eliminating
+the two native endpoint objects and arrow with sigma_ind derives the same
+observation; no Sigma eta or projection rewrite is needed. Likewise a raw
+postcomposition equation at an already normalized opposite source misses
+the generic comparison. Stage the existing comparison before specialization,
+then use fapp1_comp_path in the ordinary target. The earlier proposed
+higher-Sigma filler route for slice equality was unnecessary:
+constructor congruence and native-classifier motives suffice.
+
+**Qualification.** Thirty-four definitions, two profile primitives, zero
+runtime rules, zero unifiers, no nucleus edit. All 38 reviewer assertions
+pass: 29 positive and nine negative. They cover arbitrary native slice
+inputs, both original legs, fixed-forward evidence, selected inverse
+projections, whole inverse laws and next Hom action; they reject changed
+inputs, arbitrary equality, over-truncation and judgmental inverse/object
+beta. The wrong-p negative is a typing rejection at its actual changed
+source, not an ill-typed conversion comparison.
+
+All checks use the serial resource guard, warning output and ≤90 seconds
+per target. Exact warning inventories match categories, locations, term
+heads, rule families and parser diagnostics against unchanged dependencies.
+Counts are 1146 critical pairs / 157 pattern warnings for the core,
+discrete, ordinary slice and functor-observation owners; 1317 / 157 for
+slice postcomposition and its combined reviewer; and 1381 / 159 for the
+kernel comparison/lifts/universality and its reviewer. The additional
+baseline warnings in the latter joins come from the existing pullbacks
+imports. No warning is introduced or removed by this tranche.
+
+| Target | Passing log under emdash2/logs/probes | Unchanged dependency join |
+| --- | --- | --- |
+| emdash3_2_groupoidal_object_maps | emdash3_2_groupoidal_object_maps-20260913-225556.log | nuh4c6b2b_deps_core-20260913-225651.log |
+| emdash3_2_discrete_functor_paths | emdash3_2_discrete_functor_paths-20260913-225603.log | nuh4c6b2b_deps_discrete-20260913-225656.log |
+| discrete_functor_paths | discrete_functor_paths-20260913-225646.log | nuh4c6b2b_deps_discrete-20260913-225656.log |
+| emdash3_2_one_cat_slice_paths | emdash3_2_one_cat_slice_paths-20260913-225609.log | nuh4c6b2b_deps_slice-20260913-225702.log |
+| emdash3_2_slice_sigma_arrow_paths | emdash3_2_slice_sigma_arrow_paths-20260913-225614.log | nuh4c6b2b_deps_sigma-20260913-225709.log |
+| emdash3_2_one_cat_functor_postcomposition_paths | emdash3_2_one_cat_functor_postcomposition_paths-20260913-225620.log | nuh4c6b2b_deps_functor-20260913-225714.log |
+| emdash3_2_one_cat_kernel_pullback_comparison | emdash3_2_one_cat_kernel_pullback_comparison-20260913-225624.log | nuh4c6b2b_deps_kernel-20260913-225719.log |
+| emdash3_2_one_cat_kernel_pullback_lifts | emdash3_2_one_cat_kernel_pullback_lifts-20260913-225632.log | nuh4c6b2b_deps_kernel-20260913-225719.log |
+| emdash3_2_one_cat_kernel_pullback_universality | emdash3_2_one_cat_kernel_pullback_universality-20260913-230522.log | nuh4c6b2b_deps_whole-20260913-225727.log |
+| one_cat_kernel_pullback_universality | one_cat_kernel_pullback_universality-20260913-230531.log | nuh4c6b2b_deps_whole-20260913-225727.log |
+| one_cat_slice_paths | one_cat_slice_paths-20260913-225640.log | nuh4c6b2b_deps_slice_join-20260913-225919.log |
+
+The retained original reconstruction and short-exact reviewers also pass
+with the new modules imported: nuh4c6b2b_retained_consumers-20260913-225735.log. The recovery baseline was
+nuh4c6b2b_discrete_functors-20260913-224009.log; the preceding committed
+reconstruction baseline was one_cat_kernel_family_reconstruction-20260913-215639.log.
+Strict LHS audits report zero candidates in the eight new owners. Catalog,
+source-only health (1022 registered files), syntax/document/link hygiene and
+exact staged-scope checks pass; no aggregate is run.
+
+**Next C6c:** construct the canonical whole epic cover ρ and covered map θ
+from the original window and short-exact comparisons. Prove their actual
+annihilation/epicity before normality and original cokernel descent produce
+δ. Derived output exactness, concrete model/reifier synthesis and the snake
+comparison remain required. All user deferrals stay in force.
+
 ### NUH-4C6b2a: Whole source projection and original kernel reconstruction
 
 **Implemented after 8db57db1.** The
@@ -397,12 +494,11 @@ health pass; registration contains 1011 files. Exact source/prototype,
 Markdown/link and staged-scope checks apply before checkpointing. Only
 localized checks are run; the nucleus remains unchanged.
 
-**Next C6b2b:** construct the native cartesian universal comparison for
-the now-commuting original square, with complete inverse/action and both
-legs retained. Use existing native slice Hom/cone owners and the derived
-ambient reconstruction/reflection; do not substitute per-object cone
-records. The cartesian theorem, epic cover/δ, output exactness, concrete
-model/reifier synthesis and snake comparison remain required.
+**Then-next C6b2b, now qualified above:** construct the native cartesian
+universal comparison for the original square, with complete inverse/action and both
+legs retained. That native comparison is now constructed above. The epic
+cover/δ, output exactness, concrete model/reifier synthesis and snake
+comparison remain required.
 
 ### NUH-4C6b1: Whole kernel lifting and precomposition maps
 

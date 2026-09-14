@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2b native kernel pullback comparison qualified; cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -235,9 +235,8 @@ reason is K(d)=C×_D0 and pullback associativity, giving
 B×_C K(d)≅B×_D0. This is an application of
 [the represented-functor/pasting description of fibre products](https://stacks.math.columbia.edu/tag/001U),
 not a new general PullbackStructure assumption. It addresses precisely the
-pullback needed for the original cover. The maps below are now constructed;
-their ambient reconstruction and native cartesian universal comparison
-remain to be proved.
+pullback needed for the original cover. The maps, ambient reconstruction
+and native cartesian universal comparison are now constructed below.
 
 C6b1 now [implements whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
 at an arbitrary original D, with whole input reconstruction, source recovery
@@ -268,14 +267,53 @@ no primitive or runtime rule. The proved Γ equation is an observation
 on whole transformations; a separate whole natural comparison in the test
 variable is not silently assumed.
 
-Next C6b2b constructs the cartesian universal comparison of p and κ(d).
-Use the existing native slice-Hom/cone interfaces and mate functors; do not
-introduce a separate record of per-object cones or naturality squares.
-The new ambient reconstruction and equality reflection supply the two
-recovery arguments. Verify the whole inverse/action and both original legs.
-The cartesian theorem, epic cover and δ remain unfinished. C6a's product
-capability remains available; no whole addition or general PullbackStructure
-is silently supplied by the kernel-precomposition construction.
+C6b2b now [constructs the cartesian universal comparison](../emdash2/emdash3_2_one_cat_kernel_pullback_universality.lp).
+Write 𝒞=Functor_cat(B,C), Y=E₀D and a:𝒞/X. Its actual forward functor is
+
+```text
+Φₐ : Hom_(𝒞/X)(a,κ_(d∘p)) → Hom_(𝒞/Y)(Σ_p(a),κ_d).
+```
+
+The target is the existing pullback_cone_cat, which takes no
+PullbackStructure argument. Φₐ composes native Σ_p Hom action with
+postcomposition by the already proved square. The original two inclusion
+objects require only their original K/diagram data.
+
+The [inverse object program](../emdash2/emdash3_2_one_cat_kernel_pullback_lifts.lp)
+reads the native slice cell in a genuine zero-Hom, derives one whole
+annihilation path and applies the original whole kernel mate. Its first
+leg recovers the original test arrow; original kernel equality reflection
+recovers the second leg. This supplies no caller naturality square.
+
+[Native slice equality](../emdash2/emdash3_2_one_cat_slice_paths.lp) is derived
+by Sigma elimination with equality in the actual native Hom as the motive.
+The triangle fibre is proposition-valued at OneCat(C); no arbitrary Sigma
+eta or classifier cast is introduced. Existing constructor action similarly
+derives arbitrary-input preservation of the slice domain arrow.
+
+The genuine zero-Hom profiles let the existing core inverse and Path_map
+[internalize the inverse object program](../emdash2/emdash3_2_groupoidal_object_maps.lp).
+Core reflection gives propositional agreement with that original program.
+The existing set-target whole transformation assembly then derives both
+whole functor paths Iₐ∘Φₐ=id and Φₐ∘Iₐ=id. Existing OmegaEquivAlong packages
+these laws, selecting the same constructed Iₐ in both inverse slots.
+The actual inverse also exposes both recovered ambient legs directly.
+No new judgmental point or inverse-composition beta is installed.
+
+The two explicit structural/model primitives are
+OneCat(C)→OneCat(C/X) and IsDiscreteCat(B)→IsDiscreteCat(Functor_cat(A,B)).
+These extend the current opaque profile interface with standard closure in
+the ordinary/discrete interpretation. They supply neither the comparison's
+inverse nor its universal law. Thirty-four definitions, two primitives and
+38 assertions qualify this ordinary cartesian comparison without new
+runtime/unification rules or a general coherent PullbackStructure.
+
+Next C6c constructs the canonical whole epic cover ρ and covered map θ
+from this square and the original short-exact-family data. Prove epicity and
+annihilation before using normality and native cokernel descent to form δ.
+Output exactness, concrete model/reifier construction and snake comparison
+remain required. C6a's product capability remains available; whole varying-
+family addition is not silently supplied by this kernel construction.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

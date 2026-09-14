@@ -4572,8 +4572,23 @@ existing rigid Hom factorizations give whole whiskering agreement, so
 lifting and reflects equality through the original inclusion. In particular
 κ(d)∘r=p∘a, as a whole equation. Four proof-time comparisons preserve
 runtime owners; no new universal axiom or naturality field is supplied.
-The cartesian universal comparison, beyond this commuting square, remains
-the next native proof obligation.
+The cartesian universal comparison is now constructed at the native slice
+Hom. Its inverse takes one native cone, derives annihilation and applies
+the original kernel mate. Both original ambient legs reconstruct; equality
+of full native slice arrows follows by Sigma elimination with a native-Hom
+motive and proposition-valued triangle fibres. No pointwise naturality
+square is supplied by a caller.
+
+Since these cone Homs are genuine zero-categories, core reflection and
+Path_map internalize the inverse object program. Existing set-target
+transformation assembly gives both whole functor inverse paths; the
+existing OmegaEquivAlong constructor retains the actual forward comparison
+and the same constructed inverse. Core reflection supplies a propositional
+object agreement, not a new judgmental beta. Two explicit structural/model
+operations extend the opaque profiles: ordinary slices are ordinary and
+functors into a discrete category form a discrete category. These closures
+do not supply the cartesian inverse or its laws. The whole cover/covered
+map, δ and output exactness remain subsequent constructions.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

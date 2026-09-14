@@ -233,7 +233,17 @@ proof-time comparisons. Γ(v)=κ_D∘v reconstructs the original lift source,
 reflects equality through κ_D and proves κ(d)∘r=p∘κ(d∘p). Fifteen
 definitions and 22 assertions add no primitive, runtime rule or nucleus
 edit; the first projection shares its unchanged original-inclusion alias.
-Native cartesian universality and the cover/δ remain next.
+C6b2b now [constructs native cartesian universality for this square](../emdash3_2_one_cat_kernel_pullback_universality.lp).
+The actual slice-Hom comparison has a constructed inverse and both whole
+functor inverse paths, packaged by existing OmegaEquivAlong. Native slice
+equality reflection uses Sigma elimination at the original classifier.
+Core reflection and set-target assembly retain automatic higher action;
+the inverse object agreement is propositional. Two structural profile
+primitives cover ordinary slices and discrete-target functor categories,
+with closed model interpretations still required. Thirty-four definitions
+and 38 assertions add no runtime/unification rule or nucleus edit.
+Dependency warnings match exactly. The cover/covered map, δ and derived
+output exactness remain next; general PullbackStructure remains separate.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
