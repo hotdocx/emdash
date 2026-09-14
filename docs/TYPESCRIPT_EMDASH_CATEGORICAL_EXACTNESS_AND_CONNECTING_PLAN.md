@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6e2b1 representative covers and corrected-cycle lifts qualified; middle exactness next; Op/duality deferred
+Status: C6e2b2 middle exactness qualified; two δ-adjacent positions next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -544,10 +544,39 @@ K(p)w=0. The [original left cycle lift](../emdash2/emdash3_2_one_cat_middle_homo
 gives K(i)a=w, and all three cover-cancellation instances are derived.
 The equivalences certify the original Coim(r)⇒target factors, not splittings
 or inverses of the cover maps r. Fifty-six definitions add no new primitive,
-rewrite or unifier. To finish middle exactness, derive the whole additive
-unit/difference law giving q_Mw=q_Mb, compare through the original K(H(p))
-inclusion, and cancel the covers to prove the actual boundary quotient zero.
-All three LES output exactness proofs remain outstanding.
+rewrite or unifier. C6e2b2 completes this middle proof below.
+
+C6e2b2 derives [whole additive unit laws](../emdash2/emdash3_2_one_cat_additive_family_units.lp)
+from the original coproduct injection and native mate cuts. They give
+q_Mw=q_Mb. Original K reconstruction and the H(i) quotient law identify
+β_H(q_Aa)=r₁r₂r₃. Original Q annihilation and three cover cancellations
+prove the actual boundary quotient zero, so the existing criterion gives
+an inverse of the [original middle comparison](../emdash2/emdash3_2_one_cat_middle_homology_exactness.lp).
+Its native-window specialization retains the literal original row-triple
+diagram. Twenty-eight definitions and six proof-time reindexing views add
+no primitive or runtime rewrite. The exactness positions H(p),δ and δ,H(i)
+remain next, followed by model/reifier and snake comparison work.
+
+The next two proofs should reuse the same representative programs and
+original inverse criterion:
+
+1. For H(p),δ, cover the actual K(δ) through the original ρ:L⇒H_C.
+   Since δρ=θ, its lifted left cycle has zero H_A class. The existing
+   boundary-representative cover gives a left boundary. Subtract its image
+   from the original middle lift, use the whole difference laws to obtain
+   a middle cycle, and reconstruct the original right class through H(p).
+   Original kernel cancellation and the covers must force the actual
+   boundary quotient zero.
+2. For δ,H(i), cover the actual K(H(i)) through the original q_A. Its
+   induced middle cycle has zero middle homology class, so the existing
+   boundary-representative program gives a middle boundary representative.
+   Its original row projection is a right cycle. Lift that same middle
+   representative into the original L and use δρ=θ to reconstruct the
+   original left class. Cancel the covers to obtain the actual boundary
+   quotient zero, then certify the original comparison.
+
+These are whole native construction sketches, not supplied output evidence
+or completed proofs. Preserve all original H, L, ρ, θ and selected inverses.
 
 ## Connecting As Whole Universal Descent
 

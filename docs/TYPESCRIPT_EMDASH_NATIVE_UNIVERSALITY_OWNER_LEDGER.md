@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6e2b1 representative covers and corrected-cycle lifts qualified; middle exactness next; Op/duality deferred
+Status: C6e2b2 middle exactness qualified; two δ-adjacent positions next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,133 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6e2b2: Whole additive units and middle exactness
+
+**Qualified after 1a64449f (2026-09-14).**
+The actual Im(H(i))⇒K(H(p)) comparison has a derived inverse, including
+the original native-window middle instance. Twenty-eight definitions in
+five new owners and six proof-time comparisons in the existing product
+reindexing owner add no primitive or runtime rewrite. Original K/Q, H,
+diagrams, normality inverse and cover projections remain fixed.
+
+**Native computation and ownership.**
+
+- [Product-family reindexing](../emdash2/emdash3_2_product_family_reindex.lp)
+  adds raw/native β views for each projection of a literal paired functor,
+  plus whole Hom-action comparisons over a literal paired base functor
+  when either endpoint is the actual identity on C×C and the other is a
+  diagonal composite. Both component
+  reindexing functors retain the original family, projection and base map.
+  No product η or global naturality/functoriality rule is installed.
+- [Biproduct injection restriction](../emdash2/emdash3_2_one_cat_biproduct_injection_reindex.lp)
+  stages the original whole mate input and preserves its identity target.
+  Whole identity/zero preservation and original terminal/initial uniqueness
+  compare its native and local presentations. Its restriction is the
+  existing product pairing ⟨id,0⟩.
+- [Coproduct injection paths](../emdash2/emdash3_2_one_cat_copair_injection_paths.lp)
+  keep the original whole unit and diagonal Hom action as finite pairs of
+  whole maps. The native mate formula and inverse cut give [f,g]∘ι₁=f.
+  This uses whole categorical structure, not componentwise equality assembly.
+- [Whole additive units](../emdash2/emdash3_2_one_cat_additive_family_units.lp)
+  derive f+0=f from that injection law and existing pairing/copairing
+  composition. Whole negation gives −0=0, then f−0=f. If h∘g=0,
+  whole bilinearity gives h∘(f−g)=h∘f.
+- [Middle exactness](../emdash2/emdash3_2_one_cat_middle_homology_exactness.lp)
+  applies that law to the actual correction: q_Mw=q_Mb. Original kernel
+  reconstruction, H(i)'s quotient law and K(i)a=w identify
+  β_H(q_Aa)=r₁r₂r₃. The original quotient kills β_H. Three original cover
+  cancellations therefore prove q_β_H=0; the existing inverse criterion
+  yields OmegaEquivAlong on the actual Im(H(i))⇒K(H(p)) map.
+- [Native middle instance](../emdash2/emdash3_2_one_cat_native_middle_homology_exactness.lp)
+  retains the literal original upper row-triple diagram, avoiding the
+  previously diagnosed expensive endpoint-alias expansion.
+
+**Experiments.** The initial restriction probe at `124039` exposed native
+projection/action comparisons at an identity endpoint. Keeping literal
+restricted endpoint annotations and staging whole input comparisons
+resolved the intermediate typing failures; original terminal/initial
+uniqueness resolved the zero presentation. The complete injection probe
+passes at `125144`. Whole unit/diagonal pairs and an explicit intermediate
+composition presentation make the coproduct law pass at `125754`.
+The additive unit laws pass at `125958`, middle exactness at `130325`,
+and the native-window instance at `130600`.
+
+A first ablation generator incorrectly stopped at semicolons inside the
+constraint list; those parser failures are not necessity evidence. The
+corrected parser preserves complete rule clauses and its unchanged-copy
+control passes at `130910`. Valid deletion probes retain the four raw/
+native projection views and two identity-endpoint Hom views, with actual
+typing failures. Removing the extra diagonal-associativity view passes
+at `130949`; it is not promoted. The full native-window probe with the
+six retained views passes at `131054`.
+
+The first broader reviewer used an opaque U:A⇒C×C. Its Hom-comparison
+type could not align the opaque functor's projections with composition
+by the two product projections; the four literal-pair projection checks
+pass separately at `132046`. Rather than introducing general product η,
+the two new Hom views are scoped to the literal paired base maps used by
+the program. The reviewer still varies the original family F arbitrarily
+and retains both whole Hom actions; it passes at `132407`. This is an
+explicit computational presentation boundary, not a mathematical
+counterexample or a restriction on the original LES inputs. No checker
+patch, resource-limit increase or new mathematical assumption was used.
+
+The first complete warning comparison isolates eight replaceable-pattern
+warnings in the four projection views: their captured C/D parameters are
+unused on the right. A full-owner probe replaces those inferred slots by
+`_` and its focused reviewer passes at `133024`. The same cleanup is
+installed in the existing owner; the two guarded Hom rules retain their
+actual category, paired-base and identity discriminators. The warning
+comparison found no new critical-pair warnings.
+
+**Qualification.** The changed reindexing owner, five new owners, three
+reviewers and retained-consumer join pass warning-enabled resource-guarded
+`scripts/probe.sh` checks. Eighteen assertions (15 positive, 3 negative)
+cover raw/native product projections, both identity-endpoint Hom actions
+for an arbitrary original family over paired bases, whole additive units,
+annihilated-correction preservation, the derived actual boundary quotient
+zero, the original comparison's forward projection and both inverse laws,
+and the native-window specialization. Rejection checks retain the original
+coordinate, result and comparison map.
+
+- `emdash3_2_product_family_reindex.lp`: `emdash3_2_product_family_reindex-20260914-133151.log`.
+- `emdash3_2_one_cat_biproduct_injection_reindex.lp`: `emdash3_2_one_cat_biproduct_injection_reindex-20260914-133155.log`.
+- `emdash3_2_one_cat_copair_injection_paths.lp`: `emdash3_2_one_cat_copair_injection_paths-20260914-133201.log`.
+- `emdash3_2_one_cat_additive_family_units.lp`: `emdash3_2_one_cat_additive_family_units-20260914-133209.log`.
+- `emdash3_2_one_cat_middle_homology_exactness.lp`: `emdash3_2_one_cat_middle_homology_exactness-20260914-133220.log`.
+- `emdash3_2_one_cat_native_middle_homology_exactness.lp`: `emdash3_2_one_cat_native_middle_homology_exactness-20260914-133233.log`.
+- `product_identity_family_reindex.lp`: `product_identity_family_reindex-20260914-133248.log`.
+- `one_cat_additive_family_units.lp`: `one_cat_additive_family_units-20260914-133253.log`.
+- `one_cat_middle_homology_exactness.lp`: `one_cat_middle_homology_exactness-20260914-133304.log`.
+- `nuh4c6e4_retained_homology.lp`: `nuh4c6e4_retained_homology-20260914-133321.log`.
+
+Seven exact original import-order baselines were checked before changing
+`product_family_reindex`; its original bytes and hash are retained in the
+ignored experiment evidence. The final ten complete inventories match those
+original baselines, including categories, locations, heads, rule families
+and parser issues. The owner/reindex reviewer preserve 1,151 critical-pair /
+157 pattern warnings; injection/copair preserve 1,278 / 169; addition and
+its reviewer preserve 1,482 / 169; middle/window and retained consumers
+preserve 1,484 / 169. The temporary eight pattern warnings are eliminated.
+
+All ten checked source hashes match, the 28 new definition names and five
+new registry entries are unique, and source-only health covers 1,154 files
+with snapshot
+`a3c48688715e9a78639cd737225f1f12d10d1781aaaa61b4f5631dc355881b82`.
+Strict catalog, LHS, report-header, active-reference and shell checks pass.
+The central diagnostic catalog is unchanged. Only localized serial Lambdapi
+checks ran, each under the existing 90-second/2-GiB guard. No repository
+aggregate, TypeScript check, model/CAS run or Op/profile migration was run.
+
+**Next C6e2c: the two positions adjacent to δ.** Derive zero of the actual
+boundary quotient for H(p) followed by δ, and for δ followed by H(i),
+using the original window, whole representative programs, original
+δ∘ρ=θ reconstruction and native universal operations. Apply the same
+inverse criterion to their original comparison maps. Model/reifier
+automation, snake/direct comparison and final qualification remain later;
+middle exactness does not complete the long exact sequence or the goal.
+
 
 ### NUH-4C6e2b1: Whole representative covers for the LES boundary proofs
 

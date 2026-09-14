@@ -45,6 +45,39 @@ unif_rule @comp_fapp0 Cat_cat $A $B $E
       $F0 ≡ @comp_fapp0 Cat_cat $A $B $C $F $U;
       $G0 ≡ @comp_fapp0 Cat_cat $A $B $D $G $U ];
 
+
+// Whole projection of a literal paired functor retains its selected coordinate.
+unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projL_func _ _) (Struct_sigma $F _)
+  ≡ $F0 ↪ [ $F ≡ $F0 ];
+unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _) (Struct_sigma _ $G)
+  ≡ $G0 ↪ [ $G ≡ $G0 ];
+
+// Native projection views of the same literal paired restriction.
+unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat) _ _ _ (Struct_sigma $F _) (@Product_projL_func _ _)
+  ≡ $F0 ↪ [ $F ≡ $F0 ];
+unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat) _ _ _ (Struct_sigma _ $G) (@Product_projR_func _ _)
+  ≡ $G0 ↪ [ $G ≡ $G0 ];
+
+// A literal paired base retains both native Hom actions at the actual identity target.
+unif_rule @hom_precomp_along_fapp1_func _ _ (@id Cat_cat Cat_cat) (Product_cat $C $C) $A _ (Struct_sigma $U0 $U1)
+    (@comp_fapp0 Cat_cat _ _ _ (Struct_sigma (@id Cat_cat $C) (@id Cat_cat $C)) $X)
+    (@id Cat_cat (Product_cat $C $C))
+  ≡ @Product_map_func _ _ _ _ $HC $HD
+  ↪ [ $HC ≡ @hom_precomp_along_fapp1_func Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        $C $A (Product_cat $C $C) (Struct_sigma $U0 $U1) $X (@Product_projL_func $C $C);
+      $HD ≡ @hom_precomp_along_fapp1_func Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        $C $A (Product_cat $C $C) (Struct_sigma $U0 $U1) $X (@Product_projR_func $C $C) ];
+
+// The corresponding identity-source restriction keeps the same paired base and incoming legs.
+unif_rule @hom_precomp_along_fapp1_func _ _ (@id Cat_cat Cat_cat) (Product_cat $C $C) $A _ (Struct_sigma $U0 $U1)
+    (@id Cat_cat (Product_cat $C $C))
+    (@comp_fapp0 Cat_cat _ _ _ (Struct_sigma (@id Cat_cat $C) (@id Cat_cat $C)) $Y)
+  ≡ @Product_map_func _ _ _ _ $HC $HD
+  ↪ [ $HC ≡ @hom_precomp_along_fapp1_func Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        $C $A (Product_cat $C $C) (Struct_sigma $U0 $U1) (@Product_projL_func $C $C) $Y;
+      $HD ≡ @hom_precomp_along_fapp1_func Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        $C $A (Product_cat $C $C) (Struct_sigma $U0 $U1) (@Product_projR_func $C $C) $Y ];
+
 // Whole Hom action at the original diagonal source presentation.
 symbol mate_input_source_reindex_hom_path [A B C : Cat] (U : τ (Functor A B)) (X F G : τ (Functor B C))
   : τ (@= (Functor (Hom_cat (Functor_cat B (Product_cat C C)) (@comp_cat_fapp0 B C (Product_cat C C)

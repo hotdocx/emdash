@@ -380,8 +380,9 @@ constructs an inverse of that same e once the original boundary quotient
 is proved zero. It uses the original cokernel of zero, K/Q cancellation and
 normality. An original short-exact row derives the premise through its β
 equivalence. Seventeen definitions add no primitive, rewrite or unifier.
-The three LES boundary-quotient zero proofs remain outstanding; the
-conditional criterion does not itself establish output exactness.
+Each LES instance must derive its own boundary-quotient zero; the middle
+instance is constructed below. The conditional criterion alone does not
+establish output exactness.
 
 C6e2b1 derives [whole cospan projection covers](../emdash3_2_one_cat_cospan_kernel_covers.lp)
 and [cycle/boundary representatives](../emdash3_2_one_cat_homology_representatives.lp)
@@ -389,9 +390,17 @@ through the original K/Q and normality. Applied to K(H(p)), three covers
 produce a corrected middle cycle w. The [original left cycle lift](../emdash3_2_one_cat_middle_homology_cycles.lp)
 satisfies K(i)a=w; all three cover-cancellation instances are derived.
 Fifty-six definitions add no primitive, rewrite, unifier or earlier LP edit.
-The whole additive unit law needed to preserve the homology class and the
-middle boundary-quotient zero proof remain next. No LES output comparison
-is yet certified invertible; model/reifier and snake work remain later.
+C6e2b2 below completes its middle boundary-quotient zero proof.
+
+C6e2b2 derives [whole additive units](../emdash3_2_one_cat_additive_family_units.lp)
+through the original biproduct injection and native product/coproduct mates.
+Thus the corrected cycle retains its original homology class. Original
+kernel reconstruction and three cover cancellations prove the middle
+boundary quotient zero, yielding an inverse of the [actual middle comparison](../emdash3_2_one_cat_middle_homology_exactness.lp).
+The original native-window instance uses its literal upper row-triple
+diagram. Twenty-eight definitions and six proof-time reindexing views add
+no primitive or runtime rewrite. The two δ-adjacent exactness positions,
+model/reifier automation and snake comparison remain open.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

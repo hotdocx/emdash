@@ -4840,8 +4840,9 @@ native cancellation. The criterion then supplies the inverse of e.
 An original short-exact row derives the needed boundary-zero premise from
 its fixed-forward β equivalence.
 
-The LES positions still require their own boundary-quotient zero proofs
-from the original window. A conditional criterion is not an output
+Each LES position requires its own boundary-quotient zero proof from the
+original window. The middle construction below supplies this instance;
+the two positions adjacent to δ remain open. A conditional criterion is not an output
 exactness assumption. No universal choice is replaced, and no new ordinary
 provider dictionary, primitive or computation rule is introduced.
 
@@ -4866,9 +4867,24 @@ Subtracting the resulting original middle boundary gives w=b−β_Mb₀,
 with K(p)w=0. The original middle-row inverse mate lifts κ_Mw into A₁;
 lower-row cancellation makes it a cycle. The original left K mate gives a
 with K(i)a=w. Each of the three cover cancellations is derived from the
-original data. The next proof must show q_Mw=q_Mb using a derived whole
-additive unit/difference law, then cancel covers to annihilate the original
-middle boundary quotient. Output exactness has not yet been proved.
+original data.
+
+The whole additive unit law is now derived from those same native
+structures. Restrict the original biproduct injection at its identity
+diagram endpoint; whole identity/zero preservation and terminal/initial
+uniqueness give the native pairing ⟨id,0⟩. Whole coproduct unit/action
+and mate inverse cuts give [f,g]ι₁=f. Existing pairing/copairing composition
+then proves f+0=f. Negation preserves zero, so f−0=f. In particular,
+h∘g=0 implies h∘(f−g)=h∘f. This is not supplied additive structure on
+the functor category or a componentwise equality-assembly principle.
+
+Applying this to the actual middle quotient gives q_Mw=q_Mb. The original
+kernel reconstruction and induced H(i) quotient equation now identify
+β_H(q_Aa)=r₁r₂r₃. The original quotient kills β_H; cancellation of the
+three original covers proves q_β_H=0. The existing inverse criterion
+therefore certifies the actual Im(H(i))⇒K(H(p)) comparison, including the
+native-window middle instance at its literal original row-triple diagram.
+The two δ-adjacent positions remain separate exactness obligations.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

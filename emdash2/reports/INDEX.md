@@ -210,8 +210,12 @@ C6e2b1 derives [whole representative covers](../emdash3_2_one_cat_homology_repre
 and a [left-cycle lift of the corrected middle cycle](../emdash3_2_one_cat_middle_homology_cycles.lp),
 with all three cover-cancellation instances. Original K/Q, normality and
 row data supply the constructions. Fifty-six definitions add no primitive,
-rewrite or unifier. The required whole additive unit law and actual middle
-boundary-quotient zero proof remain next; no output exactness is claimed.
+rewrite or unifier. C6e2b2 now supplies the needed [whole additive units](../emdash3_2_one_cat_additive_family_units.lp)
+and proves zero of the actual middle boundary quotient. Its [original comparison](../emdash3_2_one_cat_native_middle_homology_exactness.lp)
+is certified invertible by the existing criterion, including the native
+window. Twenty-eight definitions and six proof-time reindexing comparisons
+add no primitive or runtime rewrite. The two δ-adjacent exactness positions,
+model/reifier and snake work remain required.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

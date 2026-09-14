@@ -2245,8 +2245,17 @@ not a new pointwise representative or cone language.
 
 `one_cat_middle_left_cycle_map_path` states K(i)a=w for the original
 corrected cycle w=b−β_Mb₀. The three `..._cover_reflect_path` instances
-derive whole cancellation from the original data. Preserving the homology
-class and proving the actual middle boundary quotient zero remain next.
+derive whole cancellation from the original data.
+
+`one_cat_additive_family_right_zero_path` and
+`one_cat_difference_family_right_zero_path` are derived whole f+0=f and
+f−0=f laws. `one_cat_difference_killed_second_path` gives h(f−g)=hf
+from hg=0. `one_cat_middle_corrected_homology_path` applies this to the
+original middle quotient; `one_cat_middle_boundary_quotient_zero` cancels
+the three original covers. `one_cat_row_triple_homology_exact_omega` and
+`one_cat_native_window_middle_exact_omega` certify the actual original
+middle comparison via existing OmegaEquivAlong. The two δ-adjacent
+comparisons still require their own inverse proofs.
 
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
