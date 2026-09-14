@@ -383,6 +383,16 @@ equivalence. Seventeen definitions add no primitive, rewrite or unifier.
 The three LES boundary-quotient zero proofs remain outstanding; the
 conditional criterion does not itself establish output exactness.
 
+C6e2b1 derives [whole cospan projection covers](../emdash3_2_one_cat_cospan_kernel_covers.lp)
+and [cycle/boundary representatives](../emdash3_2_one_cat_homology_representatives.lp)
+through the original K/Q and normality. Applied to K(H(p)), three covers
+produce a corrected middle cycle w. The [original left cycle lift](../emdash3_2_one_cat_middle_homology_cycles.lp)
+satisfies K(i)a=w; all three cover-cancellation instances are derived.
+Fifty-six definitions add no primitive, rewrite, unifier or earlier LP edit.
+The whole additive unit law needed to preserve the homology class and the
+middle boundary-quotient zero proof remain next. No LES output comparison
+is yet certified invertible; model/reifier and snake work remain later.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

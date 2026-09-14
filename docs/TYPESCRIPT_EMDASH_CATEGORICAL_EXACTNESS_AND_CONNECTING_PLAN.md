@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6e2a comparison kernels and conditional inverses qualified; LES boundary-quotient zeros next; Op/duality deferred
+Status: C6e2b1 representative covers and corrected-cycle lifts qualified; middle exactness next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -536,6 +536,18 @@ short-exact row derives this premise through its β equivalence. The three
 LES instances must still derive their own boundary-quotient zeros from the
 window; no such zero or output exactness witness is assumed. Seventeen
 definitions add no primitive, rewrite or unifier.
+
+C6e2b1 now derives [whole cycle and boundary representatives](../emdash2/emdash3_2_one_cat_homology_representatives.lp)
+after categorical covers, using the original quotient and normality.
+Applied to the actual K(H(p)), three covers produce w=b−β_Mb₀ with
+K(p)w=0. The [original left cycle lift](../emdash2/emdash3_2_one_cat_middle_homology_cycles.lp)
+gives K(i)a=w, and all three cover-cancellation instances are derived.
+The equivalences certify the original Coim(r)⇒target factors, not splittings
+or inverses of the cover maps r. Fifty-six definitions add no new primitive,
+rewrite or unifier. To finish middle exactness, derive the whole additive
+unit/difference law giving q_Mw=q_Mb, compare through the original K(H(p))
+inclusion, and cancel the covers to prove the actual boundary quotient zero.
+All three LES output exactness proofs remain outstanding.
 
 ## Connecting As Whole Universal Descent
 

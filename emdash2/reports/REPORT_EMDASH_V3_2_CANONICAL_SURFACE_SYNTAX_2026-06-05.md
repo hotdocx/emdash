@@ -2235,6 +2235,19 @@ row instance derives that premise; the LES instances must still do so.
 The middle-window specialization uses the literal original row-triple
 diagram, avoiding a costly expansion through an equivalent endpoint alias.
 
+`one_cat_cospan_kernel_first_cover` certifies the original Coim(r)⇒X
+factor of the first projection of K(fπ₁−gπ₂). Its zero-cokernel premise
+for g is derived for original quotient and short-exact row projections.
+`one_cat_homology_representative_path` states vr=q_Hb;
+`one_cat_boundary_representative_path` states βb=vr.
+These are equations of whole transformations after the constructed covers,
+not a new pointwise representative or cone language.
+
+`one_cat_middle_left_cycle_map_path` states K(i)a=w for the original
+corrected cycle w=b−β_Mb₀. The three `..._cover_reflect_path` instances
+derive whole cancellation from the original data. Preserving the homology
+class and proving the actual middle boundary quotient zero remain next.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

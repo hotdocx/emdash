@@ -206,6 +206,13 @@ selected maps are retained; an original short-exact row derives a qualifying
 instance. Seventeen definitions add no primitive, rewrite or unifier. The
 three LES boundary-quotient zero proofs remain next.
 
+C6e2b1 derives [whole representative covers](../emdash3_2_one_cat_homology_representatives.lp)
+and a [left-cycle lift of the corrected middle cycle](../emdash3_2_one_cat_middle_homology_cycles.lp),
+with all three cover-cancellation instances. Original K/Q, normality and
+row data supply the constructions. Fifty-six definitions add no primitive,
+rewrite or unifier. The required whole additive unit law and actual middle
+boundary-quotient zero proof remain next; no output exactness is claimed.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

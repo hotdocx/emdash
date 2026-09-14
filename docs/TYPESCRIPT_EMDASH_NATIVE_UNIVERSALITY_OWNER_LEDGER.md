@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6e2a comparison kernels and conditional inverses qualified; LES boundary-quotient zeros next; Op/duality deferred
+Status: C6e2b1 representative covers and corrected-cycle lifts qualified; middle exactness next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,106 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6e2b1: Whole representative covers for the LES boundary proofs
+
+**Qualified after 6bf3785d (2026-09-14).**
+Six one-way owners contain 56 definitions, with no new primitive, runtime
+rewrite, unifier or change to an earlier LP owner. They derive representative
+covers and lift the corrected middle cycle into the original left cycle
+object. They do not yet prove the middle boundary quotient is zero or
+certify any of the three LES output comparisons as invertible.
+
+**Whole construction and retained choices.**
+
+- [Cospan kernel covers](../emdash2/emdash3_2_one_cat_cospan_kernel_covers.lp)
+  use the original K of Δ=fπ₁−gπ₂ for f:X⇒Z and g:Y⇒Z. Its original
+  projections r,s satisfy fr=gs. A proved zero actual cokernel of g gives
+  the cover of r by auxiliary difference descent and original injections.
+  The equivalence is on the original Coim(r)⇒X factor; r is not asserted
+  invertible. Whole cancellation uses that factor's selected inverse.
+- [Quotient cokernel zero](../emdash2/emdash3_2_one_cat_quotient_cokernel_zero.lp)
+  derives the required premise for an original quotient q_D: its actual
+  cokernel projection is zero by original Q annihilation and cancellation.
+  This does not say q_D itself is zero.
+- [Homology representatives](../emdash2/emdash3_2_one_cat_homology_representatives.lp)
+  apply that cospan program to v:X⇒H and the original homology quotient.
+  The derived cover r:R⇒X and whole cycle representative b retain
+  v∘r=q_H∘b. The caller supplies v, not a representative or cover.
+- [Boundary representatives](../emdash2/emdash3_2_one_cat_boundary_representatives.lp)
+  lift a cycle v with q_H∘v=0 into the original image. The original
+  normality inverse gives its coimage lift; the original coimage quotient
+  gives a derived cover r and boundary representative b with β∘b=v∘r.
+- [Middle representatives](../emdash2/emdash3_2_one_cat_middle_homology_representatives.lp)
+  apply those constructions to the actual K(H(p)), then lift the right
+  boundary through the original previous short-exact row. Three retained
+  projections give a covered middle cycle b and original boundary β_M∘b₀.
+  Their induced right cycles agree. Whole difference produces
+  w=b−β_M∘b₀ with K(p)∘w=0.
+- [Middle cycle lift](../emdash2/emdash3_2_one_cat_middle_homology_cycles.lp)
+  uses the original middle-row inverse mate to lift κ_M∘w into A₁.
+  Original lower-row cancellation proves it is a left cycle. The original
+  K mate then gives a:R₃⇒K_A, and original kernel cancellation proves
+  K(i)∘a=w. All three cover-cancellation instances are derived from the
+  original row and quotient data, with no extra cover assumption.
+
+The successful full representative probe is `121550`; the resumed baseline
+is `122414`. The added left-cycle lift and all three cover-cancellation
+instances pass the full probe at `122833`. A reviewer-generator variable
+name was corrected before any reviewer check; this was not an LP or theory
+failure. No resource limit was raised and no checker patch was used.
+
+**Qualification.** Six owners and three reviewers pass the resource-guarded,
+warning-enabled `scripts/probe.sh` checks, with 15 assertions (13 positive,
+2 negative). The observations cover original projection computation,
+component cospan compatibility, fixed-forward cover evidence, retained
+normality inverse, whole representative reconstruction, the actual
+K(i)∘a=w comparison and component observation, typed generic Hom action,
+and all three derived cover cancellations. Negative assertions reject
+substituting an unrelated forward map or representative equation.
+
+- `emdash3_2_one_cat_cospan_kernel_covers.lp`: `emdash3_2_one_cat_cospan_kernel_covers-20260914-123139.log`.
+- `emdash3_2_one_cat_quotient_cokernel_zero.lp`: `emdash3_2_one_cat_quotient_cokernel_zero-20260914-123147.log`.
+- `emdash3_2_one_cat_homology_representatives.lp`: `emdash3_2_one_cat_homology_representatives-20260914-123153.log`.
+- `emdash3_2_one_cat_boundary_representatives.lp`: `emdash3_2_one_cat_boundary_representatives-20260914-123207.log`.
+- `emdash3_2_one_cat_middle_homology_representatives.lp`: `emdash3_2_one_cat_middle_homology_representatives-20260914-123220.log`.
+- `emdash3_2_one_cat_middle_homology_cycles.lp`: `emdash3_2_one_cat_middle_homology_cycles-20260914-123232.log`.
+- `one_cat_cospan_kernel_covers.lp`: `one_cat_cospan_kernel_covers-20260914-123245.log`.
+- `one_cat_homology_representatives.lp`: `one_cat_homology_representatives-20260914-123255.log`.
+- `one_cat_middle_homology_cycles.lp`: `one_cat_middle_homology_cycles-20260914-123309.log`.
+
+The retained join with the existing native-window exactness-input and
+comparison-inverse reviewers passes at `123335`. Six exact original
+dependency-load-order baselines pass at `123348`–`123448`. Every complete
+warning inventory matches, including categories, locations, term heads,
+rule families and parser issues: 1,484 critical-pair / 169 pattern warnings
+throughout, except the smaller quotient-zero owner at 1,381 / 159. These
+are inherited inventories, not new warnings.
+
+All nine checked source hashes match the final files; the 56 definition
+names and six registry entries are unique. Source-only health covers 1,146
+files, with snapshot
+`a25a6041e852cf8cf26e050d2843b6e03325104d9d174a0e1876d3261f088ee0`.
+Strict catalog, report-header and active-reference checks pass; the central
+diagnostic catalog is unchanged. Only affected serial Lambdapi targets were
+checked under the existing 90-second/2-GiB guard. No repository aggregate,
+TypeScript check, Op/profile experiment or model/CAS run was performed.
+
+**Next C6e2b2: preserve the homology class and finish the middle proof.**
+Derive the whole additive unit/difference law needed for
+q_M∘(b−β_M∘b₀)=q_M∘b from the original native product/coproduct mates.
+The library does not yet provide this whole unit law or a complete
+PreadditiveCategory(Functor_cat(B,C)); neither may be silently assumed.
+Do not assemble a transformation equality from component equations.
+Then compare the original boundary into K(H(p)) on q_A∘a with the
+composite of the three original covers. Original Q annihilation and those
+cover cancellations must prove the actual boundary quotient zero. Apply
+the existing inverse criterion only to that derived proof.
+
+Specialization to the original native window, the other two output positions,
+model/reifier automation, snake comparison and final qualification remain
+required. No splitting, representative, cover or output exactness witness
+has become a new caller assumption.
 
 ### NUH-4C6e2a: Comparison kernels and inverses from the original boundary quotient
 

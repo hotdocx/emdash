@@ -4845,6 +4845,31 @@ from the original window. A conditional criterion is not an output
 exactness assumption. No universal choice is replaced, and no new ordinary
 provider dictionary, primitive or computation rule is introduced.
 
+Whole representatives can now be constructed after derived categorical
+covers. For a cospan f:X⇒Z and g:Y⇒Z, use the original K of fπ₁−gπ₂.
+Its original projections satisfy fr=gs. If the original cokernel of g has
+zero projection, the original Q descent and difference cover prove the same
+for r. Original normality gives invertibility of Coim(r)⇒X, hence whole
+cancellation of r. It does not make r itself invertible or select a splitting.
+
+An original quotient q_D supplies this premise: its actual cokernel
+projection is zero by original quotient cancellation. Applying the cospan
+program to a whole class v:X⇒H and q_H gives vr=q_Hb. If a whole cycle v
+satisfies q_Hv=0, the original K of q_H gives an image lift, the original
+normality inverse gives a coimage lift, and the original coimage quotient
+gives a cover and boundary representative with βb=vr. No element decoder,
+ordinary factor dictionary or caller representative is introduced.
+
+For middle LES exactness, apply these programs to the actual K(H(p)).
+A third cover through the original preceding row lifts the right boundary.
+Subtracting the resulting original middle boundary gives w=b−β_Mb₀,
+with K(p)w=0. The original middle-row inverse mate lifts κ_Mw into A₁;
+lower-row cancellation makes it a cycle. The original left K mate gives a
+with K(i)a=w. Each of the three cover cancellations is derived from the
+original data. The next proof must show q_Mw=q_Mb using a derived whole
+additive unit/difference law, then cancel covers to annihilate the original
+middle boundary quotient. Output exactness has not yet been proved.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
