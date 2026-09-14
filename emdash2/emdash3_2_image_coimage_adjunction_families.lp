@@ -16,6 +16,17 @@ symbol kernel_adjunction_arrow_func [C : Cat] [S : τ (@PreadditiveCategory C)]
     (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src)
     (@kernel_adjunction_inclusion C S t T P);
 
+// The original kernel inclusion restricted to the original whole diagram family.
+symbol kernel_adjunction_family_inclusion_transf
+  [B C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (P : τ (@KernelAdjunctionStructure C S t T))
+  (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+  : τ (@Transf B C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) D)
+    (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src))
+≔ (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_arrow_func C S t T P) D) walking_arrow_src walking_arrow_tgt
+  walking_arrow_generator);
+
 // The naturally varying cokernel arrow q:ev₁⇒Q, as a diagram family.
 symbol cokernel_adjunction_arrow_func [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T0 : τ (@TerminalObject (Op_cat C) t)]

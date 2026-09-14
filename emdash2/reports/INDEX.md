@@ -109,9 +109,12 @@ C6b1 adds [whole kernel lifting](../emdash3_2_one_cat_kernel_family_lift.lp)
 and [kernel-precomposition maps](../emdash3_2_one_cat_kernel_precomposition.lp).
 The original D/K are retained, native inversion reconstructs the whole
 source, and uniqueness is derived. K(d∘p) and its map into K(d) now exist
-with native reconstruction; the ambient square and cartesian universal
-comparison remain unproved. Fourteen definitions and 22 assertions add
-no primitive or rule, with unchanged dependency warning inventories.
+with native reconstruction. C6b2a supplies
+[whole Γ and ambient reconstruction](../emdash3_2_one_cat_kernel_family_reconstruction.lp):
+Γ(v)=κ_D∘v, inclusion equality reflection and κ(d)∘r=p∘κ(d∘p).
+Its 15 definitions, four proof-time views and 22 assertions preserve all
+runtime owners, with no new primitive and unchanged dependency warnings.
+The native cartesian universal comparison and cover/δ remain next.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

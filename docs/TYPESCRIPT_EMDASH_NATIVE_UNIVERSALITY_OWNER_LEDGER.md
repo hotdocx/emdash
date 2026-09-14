@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,100 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6b2a: Whole source projection and original kernel reconstruction
+
+**Implemented after 8db57db1.** The
+[Hom-action views](../emdash2/emdash3_2_hom_action_factorization_views.lp)
+add four proof-time comparisons: the next-Hom functors of the two existing
+Hom_func factorizations, the raw Cat triple-composition point view, and
+its identity-middle projection-order companion. Every relevant endpoint
+arrow, input object and intermediate image is retained. These complete
+comparison of existing owners; they install no runtime distribution.
+
+The [ordinary whiskering owner](../emdash2/emdash3_2_one_cat_whiskering_paths.lp)
+has four derived paths. The two next-Hom composites use the common native
+Hom endpoints explicitly, so applying their functor equality computes.
+Applying them to the original transformation gives whole pre/postwhiskering
+agreement. A Cat-specialized raw-parent view then applies at the actual
+counit. This publishes the ordinary-target qualification and asserts no
+general lax/oplax interchange theorem.
+
+The [kernel projection owner](../emdash2/emdash3_2_one_cat_kernel_family_projection_paths.lp)
+has seven definitions. Γ_D is an actual functor: source-evaluation Hom
+action after the original native inverse mate. Its native source, middle
+and target categories are retained literally in the composition and
+applications. Its beta returns the complete source observation. Whiskering
+agreement identifies the counit source with the original restricted κ;
+generic evaluation of composition and the original J action then prove
+Γ_D(v)=κ_D∘v for a whole transformation v.
+
+The [reconstruction owner](../emdash2/emdash3_2_one_cat_kernel_family_reconstruction.lp)
+has three derived paths. It reconstructs k after the original lift, reflects
+equality through κ_D using existing inverse-mate faithfulness, and proves
+κ(d)∘r=p∘κ(d∘p) for the existing kernel-precomposition family. The
+generic restricted inclusion is one new definition in the
+[image/coimage family owner](../emdash2/emdash3_2_image_coimage_adjunction_families.lp).
+The old first projection delegates to this alias with unchanged computation.
+No K/D choice, diagram object or H selection changes.
+
+Fifteen definitions and four unifiers add no primitive, runtime rule,
+nucleus edit, caller naturality premise or ordinary universal dictionary.
+The Γ equation concerns whole v; it is not a separately asserted equality
+of the complete Γ functor with a postcomposition functor.
+
+The earlier direct-reflexivity counit comparison and the path-to-identity
+component route are retained in ignored C6b2 probes. They were not promoted.
+The working route uses the existing rigid Hom owner as the common functor.
+Applying equal functors with foreign, merely proof-time-compatible
+codomain annotations hid generic composition beta. Choosing literal native
+Hom indices resolves that measured failure without modifying generic
+application/composition rules. The middle-identity test separately required
+the fourth view because raw composition had erased one factor.
+
+Final serial, resource-guarded checks (each ≤90 seconds), under
+emdash2/logs/probes/:
+
+| Target | Final log |
+| --- | --- |
+| Hom-action views | emdash3_2_hom_action_factorization_views-20260913-214309.log |
+| Whole whiskering paths | emdash3_2_one_cat_whiskering_paths-20260913-214314.log |
+| Native Γ and projection paths | emdash3_2_one_cat_kernel_family_projection_paths-20260913-214319.log |
+| Ambient reconstruction and square | emdash3_2_one_cat_kernel_family_reconstruction-20260913-214325.log |
+| Shared inclusion owner | emdash3_2_image_coimage_adjunction_families-20260913-214332.log |
+| Retained first projection | emdash3_2_one_cat_kernel_precomposition-20260913-214337.log |
+| Hom/whiskering reviewer | one_cat_whiskering_paths-20260913-214344.log |
+| Kernel reconstruction reviewer | one_cat_kernel_family_reconstruction-20260913-214349.log |
+| Retained lift, precomposition, product, image-kernel and short-exact reviewers | nuh4c6b2a_retained_consumers-20260913-214414.log |
+
+There are 22 assertions: 16 positive and six negative. They check both
+next-Hom views, all three identity corners of the Cat point view, retained
+raw/runtime distinction, rejection of changed D/V/F/alpha, native Γ beta
+and Hom action, lift reconstruction, equality reflection at two supplied
+annihilation witnesses, the original first projection, the actual whole
+square and its component, and rejection of an unrelated p.
+
+Exact dependency warning inventories match in categories, locations,
+term heads, participant-rule families and parser diagnostics:
+1146 / 157 for Hom views, 1151 / 157 for whiskering and its reviewer, and
+1208 / 159 for kernel projection/reconstruction and its reviewer. The
+matching joins are nuh4c6b2a_deps_views-20260913-214356.log,
+nuh4c6b2a_deps_whiskering-20260913-214402.log and
+nuh4c6b2a_deps_kernel-20260913-214408.log. No warning is added or removed.
+The pre-edit baseline was
+one_cat_kernel_precomposition-20260913-202330.log.
+
+Strict source audits, catalog freshness, shell syntax and source-only
+health pass; registration contains 1011 files. Exact source/prototype,
+Markdown/link and staged-scope checks apply before checkpointing. Only
+localized checks are run; the nucleus remains unchanged.
+
+**Next C6b2b:** construct the native cartesian universal comparison for
+the now-commuting original square, with complete inverse/action and both
+legs retained. Use existing native slice Hom/cone owners and the derived
+ambient reconstruction/reflection; do not substitute per-object cone
+records. The cartesian theorem, epic cover/δ, output exactness, concrete
+model/reifier synthesis and snake comparison remain required.
 
 ### NUH-4C6b1: Whole kernel lifting and precomposition maps
 

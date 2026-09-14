@@ -2024,6 +2024,16 @@ retain its original kernel and inclusion; one_cat_kernel_precomposition_second_t
 is the native lift into K(D). These names describe kernel-precomposition
 data. Their cartesian universal comparison is still a separate obligation.
 
+one_cat_kernel_family_projection_func is Γ_D: the native inverse mate
+followed by source evaluation. Its one_cat_kernel_family_projection_beta and
+one_cat_kernel_family_projection_functor_path observations retain native
+applications and give Γ_D(v)=κ_D∘v for whole v.
+kernel_adjunction_family_inclusion_transf names the original restricted
+inclusion. one_cat_kernel_family_lift_ambient_reconstruction and
+one_cat_kernel_family_inclusion_reflect_path expose its reconstruction and
+equality reflection; one_cat_kernel_precomposition_square_path gives
+κ(d)∘r=p∘κ(d∘p). These are whole paths, not a new pullback classifier.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

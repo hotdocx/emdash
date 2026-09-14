@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,29 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6b1 milestone (2026-09-13): [whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
+Current C6b2a milestone (2026-09-13): the
+[whole native kernel source observer](../emdash2/emdash3_2_one_cat_kernel_family_projection_paths.lp)
+is an internal functor Γ_D, composing the original inverse mate with source
+evaluation. Its application computes at native Hom endpoints. The new
+[ambient reconstruction paths](../emdash2/emdash3_2_one_cat_kernel_family_reconstruction.lp)
+prove Γ_D(v)=κ_D∘v for whole v, reconstruct k after the existing kernel lift,
+and derive equality reflection through the original inclusion.
+
+The already constructed r:K(d∘p)⇒K(d) now satisfies the whole equation
+κ(d)∘r=p∘κ(d∘p), using the same original kernel inclusions. The first
+projection shares the new generic restriction alias with unchanged
+computation. Fifteen definitions and four proof-time Hom-action views
+add no primitive, runtime rewrite or nucleus edit. All 22 new assertions
+and retained consumers pass, with exact unchanged-dependency warnings.
+
+Next C6b2b constructs the native cartesian universal comparison for this
+square, retaining whole inverse/action and both original legs. The square
+and Γ's action on whole transformations are proved; no complete
+PullbackStructure or formal cartesian universal theorem is asserted yet.
+The cover, δ, derived output exactness, concrete model/reifier construction
+and snake comparison remain required.
+
+The completed C6b1 milestone (2026-09-13): [whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
 now retains an arbitrary original diagram D. The
 [input constructor](../emdash2/emdash3_2_one_cat_kernel_family_inputs.lp)
 uses the accepted whole shape/terminal presentations and one whole
@@ -39,15 +61,6 @@ Its annihilation is derived from the original composite-kernel law.
 Native inverse-mate source evaluation reconstructs p∘κ(d∘p). Fourteen
 definitions and 22 reviewer assertions add no primitive, rewrite, unifier,
 ordinary universal dictionary or new K selection.
-
-C6b2 must now identify this native source observation with κ(d)∘r as a
-whole path and construct the cartesian universal comparison. The carrier
-and maps are qualified kernel-precomposition data, not a completed
-PullbackStructure or a formal pullback theorem. For the actual connecting
-kernel leg, pullback associativity motivates the K(d∘p) route; the
-categorical subplan records that argument and its native proof obligations.
-The cover, δ, derived output exactness, concrete model/reifier construction
-and snake comparison remain required.
 
 The completed C6a milestone (2026-09-13): [whole product-family pairing is constructed](../emdash2/emdash3_2_one_cat_product_families.lp)
 through the original P and native family mates for Δ⊣P. Its inverse retains
@@ -734,6 +747,7 @@ must not label those alternatives validated implementations.
 | D-NUH-049 | C5 derives the original whole g∘f=0 from h, constructs γ:Q(f)⇒C by native descent, and retains fixed-map invertibility of the actual β and γ as OneCatShortExactFamily. Both inverses are selected from that same evidence; γ⁻¹ lands in Q(f), not B. No new splitting, comparison primitive or exactness theorem is supplied. Whole fibre products/cover/δ and derived output exactness remain required |
 | D-NUH-050 | C6a supplies the ordinary product-category profile and Δ⊣P as explicit structural/model obligations over the original P/BP. Native family mates construct whole pairing and inverse computation; component agreement and original projection recovery are derived. Preserve native indices inside applications and keep diagonal/composite/constant/component comparisons at proof time. The rejected runtime diagonal folds are not installed; this prerequisite supplies no fibre product, cover or δ |
 | D-NUH-051 | For the actual connecting pullback along a kernel, pursue K(d∘p). C6b1 derives whole lifting at the original D, with native reconstruction and uniqueness, then constructs this kernel family and both maps using the same K. Its current second-map reconstruction is E₀(untranspose(r))=p∘κ(d∘p); derive the ambient κ(d)∘r equation and the native cartesian universal comparison before calling it a completed pullback. No whole-addition capability, ordinary factor dictionary or new universal primitive is supplied |
+| D-NUH-052 | C6b2a defines Γ as the existing whole source-evaluation Hom functor after the native inverse mate, retaining literal native indices inside compositions and applications. Existing rigid Hom_func factorizations and four sufficient proof-time views derive whole whiskering, Γ_D(v)=κ_D∘v, lift reconstruction, inclusion equality reflection and κ(d)∘r=p∘κ(d∘p). No primitive, runtime fold or nucleus edit is added. Native cartesian universality remains the next gate |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

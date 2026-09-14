@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b2a whole kernel reconstruction and commuting square qualified; native cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -252,14 +252,30 @@ If Γ_D is source evaluation after the native kernel inverse mate, the
 checked reconstruction is Γ_D(r)=p∘a. All 14 operations are definitions;
 22 assertions pass without new primitive or rule.
 
-Next C6b2 must derive Γ_D(v)=κ(d)∘v at whole families, then construct the
-cartesian universal comparison of the original p and κ(d). Use the existing
-native slice-Hom/cone interfaces and mate functors; do not introduce a
-separate record of per-object cones or naturality squares. Verify recovery
-of both legs and the whole inverse/action, not just the displayed carrier
-and arrow types. This theorem, the epic cover and δ remain unfinished.
-C6a's product capability remains available to later consumers; no whole
-addition or general PullbackStructure is silently assumed here.
+C6b2a now [defines Γ_D as a first-class internal functor](../emdash2/emdash3_2_one_cat_kernel_family_projection_paths.lp).
+Its native Hom endpoints remain literal inside composition and application,
+so source evaluation after inverse mating computes. Existing rigid Hom_func
+factorizations provide the whole whiskering comparison. Four sufficient
+proof-time views cover the next-Hom factorizations, raw Cat composition and
+the identity-middle projection order. Runtime owners are unchanged.
+
+The [reconstruction owner](../emdash2/emdash3_2_one_cat_kernel_family_reconstruction.lp)
+proves Γ_D(v)=κ_D∘v for an entire transformation v, reconstructs the original
+k after lifting, and derives equality reflection through κ_D. Specializing
+to r gives the actual whole equation κ(d)∘r=p∘a. Both original inclusions
+and the same K/D are retained. Fifteen definitions and 22 assertions add
+no primitive or runtime rule. The proved Γ equation is an observation
+on whole transformations; a separate whole natural comparison in the test
+variable is not silently assumed.
+
+Next C6b2b constructs the cartesian universal comparison of p and κ(d).
+Use the existing native slice-Hom/cone interfaces and mate functors; do not
+introduce a separate record of per-object cones or naturality squares.
+The new ambient reconstruction and equality reflection supply the two
+recovery arguments. Verify the whole inverse/action and both original legs.
+The cartesian theorem, epic cover and δ remain unfinished. C6a's product
+capability remains available; no whole addition or general PullbackStructure
+is silently supplied by the kernel-precomposition construction.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

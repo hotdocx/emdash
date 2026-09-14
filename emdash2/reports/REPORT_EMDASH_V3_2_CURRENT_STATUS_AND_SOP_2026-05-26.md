@@ -225,8 +225,15 @@ Its [precomposition family](../emdash3_2_one_cat_kernel_precomposition.lp)
 constructs K(d∘p), the original inclusion and a native lift into K(D).
 The reconstructed inverse-mate source is p∘κ(d∘p). Fourteen definitions
 and 22 assertions add no primitive or rule, with unchanged dependency
-warning inventories. The ambient κ_D∘r observation and cartesian universal
-comparison remain next; no complete pullback/cover/δ theorem is claimed.
+warning inventories. C6b2a now defines
+[the whole native source observer Γ](../emdash3_2_one_cat_kernel_family_projection_paths.lp)
+and derives [original-inclusion reconstruction](../emdash3_2_one_cat_kernel_family_reconstruction.lp).
+The existing rigid Hom owner supplies whiskering agreement through four
+proof-time comparisons. Γ(v)=κ_D∘v reconstructs the original lift source,
+reflects equality through κ_D and proves κ(d)∘r=p∘κ(d∘p). Fifteen
+definitions and 22 assertions add no primitive, runtime rule or nucleus
+edit; the first projection shares its unchanged original-inclusion alias.
+Native cartesian universality and the cover/δ remain next.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

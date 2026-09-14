@@ -18,9 +18,8 @@ symbol kernel_precomposition_first_transf [B C : Cat] [S : τ (@PreadditiveCateg
     (Functor_cat WalkingArrow_cat C)))
   (p : τ (@Transf B C X (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)))
   : τ (@Transf B C (@kernel_precomposition_family_func B C S t T P X D p) X)
-≔ (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) (Functor_cat
-  WalkingArrow_cat C) (@kernel_adjunction_arrow_func C S t T P) (@precomposed_diagram_family_func B C X D p))
-  walking_arrow_src walking_arrow_tgt walking_arrow_generator);
+≔ @kernel_adjunction_family_inclusion_transf B C S t T P
+    (@precomposed_diagram_family_func B C X D p);
 
 // Associativity reads the original composite-kernel annihilation at D.
 symbol one_cat_kernel_precomposition_projection_zero_path [B C : Cat] [S : τ (@PreadditiveCategory C)] (C1 : τ (IsNCat

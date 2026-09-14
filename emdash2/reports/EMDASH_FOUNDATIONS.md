@@ -4562,10 +4562,18 @@ and this determines the lift uniquely. The selected result is independent
 of the annihilation witness. Applying this to the whole composite d∘p
 constructs L=K(d∘p), its original inclusion a and a map r:L⇒K(d) whose
 native inverse source reconstructs p∘a. This is the intended carrier and
-maps for the connecting kernel pullback. The ambient reconstruction and
-cartesian universal comparison still need native proofs. These operations
-are definitions over the existing capabilities; no new universal axiom,
-ordinary factor dictionary or caller naturality field is supplied.
+maps for the connecting kernel pullback.
+
+The ambient comparison is now derived. Γ_D is a whole internal functor,
+composing source-evaluation Hom action with the native inverse mate.
+Keeping its native indices literal lets its application compute. The
+existing rigid Hom factorizations give whole whiskering agreement, so
+Γ_D(v)=κ_D∘v for an entire transformation v. This reconstructs k after
+lifting and reflects equality through the original inclusion. In particular
+κ(d)∘r=p∘a, as a whole equation. Four proof-time comparisons preserve
+runtime owners; no new universal axiom or naturality field is supplied.
+The cartesian universal comparison, beyond this commuting square, remains
+the next native proof obligation.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
