@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,96 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6c3a: Whole copairing and addition at the original product
+
+**Implemented after aa67d2e1 (2026-09-14).** This is the arithmetic
+prerequisite identified while preparing the proof that the native cover is
+epic. No epicity, θ-on-kernel annihilation or connecting map is postulated.
+
+**Semantic and model boundary.** For ordinary C, the original additive
+product is also a coproduct. Bilinearity makes the old copairing natural,
+and its original injection/reconstruction laws give Prod⊣Δ. The current
+opaque Adjunction interface does not assemble that whole evidence from
+point laws. Therefore `one_cat_biproduct_adjunction` is explicitly one new
+structural/model primitive, dependent on C1, the original Prod/t/A and the
+supplied original T0. A concrete model must interpret this presentation;
+green checking does not discharge that obligation.
+
+**Owners.**
+
+- [Whole injections](../emdash2/emdash3_2_one_cat_biproduct_injections.lp)
+  are derived by the existing product-family mate from (id,0) and (0,id).
+  The target diagram is literally id_(C×C), avoiding a new product η fold.
+  Zero is the original terminal/initial-family composite; T0 is retained.
+- [The biproduct presentation](../emdash2/emdash3_2_one_cat_biproduct_adjunction.lp)
+  supplies Prod⊣Δ at that same Prod. Its two runtime clauses expose the
+  whole pair of those injections and the original codiagonal component.
+  They do not install generic naturality or composition rules.
+- [Whole copairing and its inverse](../emdash2/emdash3_2_one_cat_copair_families.lp)
+  are the native untranspose/transpose functors. Both inverse composites
+  reduce to identity, including arrow and next Hom action. Literal native
+  Hom parents are retained inside applications and compositions.
+- [Generic component observations](../emdash2/emdash3_2_whiskering_component_paths.lp)
+  stage existing whiskering computation while the functors/transfor are
+  variable. Two reflexivity paths suffice; no metadata rewrite is added.
+- [Copairing readback](../emdash2/emdash3_2_one_cat_copair_family_paths.lp)
+  derives the whole counit/action formula and component agreement with the
+  original additive copairing. Projection naturality comes from the
+  existing whole projection transfors, not a caller-supplied square.
+- [Whole addition](../emdash2/emdash3_2_one_cat_additive_families.lp)
+  precomposes native copairing with the existing whole product diagonal.
+  [Its readback](../emdash2/emdash3_2_one_cat_additive_family_paths.lp)
+  proves the whole formula and original componentwise sum through the
+  original bilinearity and product β laws. The program accepts only whole
+  f/g; point equalities are downstream observations of that program.
+
+The tranche has 16 definitions, one primitive, two runtime coupling rules
+and no new unifier. It adds seven LP owners and three reviewer examples,
+with no edit to earlier LP sources. The ordinary-target scope and explicit
+model obligation are deliberate; there is no claimed higher additive
+closure or automatic model construction.
+
+**Prototype findings.** The unit's constant Sigma family must be explicitly
+typed in both its rule RHS and reviewer RHS. Generic whiskering component
+paths avoid premature expansion of the concrete counit/product metadata.
+Scalar [f,g]∘Δ=f+g needs the existing propositional associativity witness
+before projection β; no new associativity fold is introduced.
+
+**Qualification (2026-09-14).** All seven final owner files and the three
+reviewers pass serial warning-enabled guarded checks, each bounded to 90s.
+The reviewers contain 26 assertions: 22 positive and four negative. They
+cover the original unit/counit, both whole mate inverse cuts, input
+recovery, nonidentity base action, next Hom action, component copair/sum
+readbacks and rejection of unrelated input/capability substitution. The
+combined retained product-family/native-window reviewer also passes.
+
+Final owner logs under `emdash2/logs/probes/` have timestamps
+`015110`, `015120`, `015130`, `015141`, `015147`, `015156`, `015205`;
+reviewer logs are `one_cat_biproduct_adjunction-20260914-015213.log`,
+`one_cat_copair_families-20260914-015221.log` and
+`one_cat_additive_families-20260914-015229.log`. Retained consumers are
+`nuh4c6c3a_retained_consumers-20260914-015237.log`.
+
+Every warning inventory matches its unchanged dependency join exactly in
+categories, locations, term heads, rule families and parser diagnostics.
+The ordinary owners/reviewers retain 1,278 critical-pair and 169 replaceable-
+pattern warnings; generic component observations retain 1,151/157; the
+retained-consumer join retains 1,451/169. No new warning family is introduced.
+The comparison and checked-source hashes are retained in ignored
+`tmp/probes/nuh4c6c3a_warning_comparison.json`. The strict LHS audit passes.
+The central check catalog remains current; source-only health now lists
+1,053 registered files. Report/reference lint and exact diff hygiene pass.
+No aggregate, repository-wide or TypeScript typecheck was run.
+
+**Next C6c3b.** Construct the signed operations and whole laws actually
+needed for cover stability from these native operations and the original
+additive data. Then prove r/ρ epicity and θκ_ρ=0 and use original Q/coimage
+descent for δ. Do not infer a whole PreadditiveCategory(Functor_cat(B,C)),
+a general PullbackStructure or the cover theorem from these component
+readbacks alone. Output exactness, model/reifier construction and snake
+comparison remain subsequent obligations. Op and profile integration stay
+deferred.
 
 ### NUH-4C6c2: Native row/window assembly and the covered map θ
 

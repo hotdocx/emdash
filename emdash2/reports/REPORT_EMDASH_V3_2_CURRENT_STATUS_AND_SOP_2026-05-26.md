@@ -269,6 +269,19 @@ assertions add no primitive/runtime rule or change to an earlier LP owner.
 Exact dependency warning inventories match. Cover epicity/annihilation,
 δ and output exactness remain required.
 
+C6c3a now [constructs whole copairing](../emdash3_2_one_cat_copair_families.lp)
+and [addition](../emdash3_2_one_cat_additive_families.lp) at the original Prod.
+One explicit ordinary structural/model primitive supplies Prod⊣Δ; its
+whole unit is the pair of injections derived by the original product mate,
+and its counit components are the original codiagonal. These are two
+coupling rules, not generic naturality rules. Native mates supply both
+inverse functor cuts with retained higher action. Sixteen definitions
+include generic whiskering observations and original component copair/sum
+readbacks. The three reviewers have 26 assertions. No existing LP owner
+or unification rule changes. The opaque adjunction assembly remains a
+concrete model obligation. Signed whole laws, cover epicity/annihilation,
+δ and output exactness remain required.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

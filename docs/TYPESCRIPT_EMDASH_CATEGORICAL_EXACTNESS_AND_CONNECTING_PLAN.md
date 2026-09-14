@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -379,11 +379,33 @@ runtime rule or edit of an earlier LP owner.
 Next C6c3 derives r/ρ epicity and θ∘κ_ρ=0 from the original short-exact
 rows and Abelian normality. Check which whole additive and further cover
 operations this proof actually needs; construct them before use. C6a's
-product-family pairing is available. No whole varying-family addition or
-general coherent PullbackStructure is assumed merely from the previous
-kernel-square proof. Then apply the original coimage/cokernel descent for
+product-family pairing is available; C6c3a below supplies whole copairing
+and addition. Signed whole laws and general coherent PullbackStructure
+are not assumed merely from the previous kernel-square proof. Then apply the original coimage/cokernel descent for
 δ and prove its reconstruction. Output exactness, concrete model/reifier
 construction and snake comparison remain required.
+
+C6c3a now supplies [whole copairing](../emdash2/emdash3_2_one_cat_copair_families.lp)
+and [whole addition](../emdash2/emdash3_2_one_cat_additive_families.lp).
+The native transpose/untranspose pair of Prod⊣Δ gives both whole inverse
+cuts and higher action. Precomposition with the existing product-family
+diagonal gives addition. Derived component paths recover the original
+additive copairing and sum, with no caller pointwise naturality fields.
+
+The [ordinary Prod⊣Δ presentation](../emdash2/emdash3_2_one_cat_biproduct_adjunction.lp)
+is one explicit structural/model primitive at the same original Prod/t/A
+and supplied original T0. Its whole unit is the pair of injections already
+constructed by Δ⊣Prod; counit components are the original codiagonal.
+Today's opaque Adjunction classifier does not assemble this from point
+laws. This model obligation and its two runtime coupling rules are explicit;
+the other 16 operations are definitions, with no new unifier or earlier LP
+edit. The owner ledger records qualification and the native-parent staging.
+
+Next C6c3b constructs the signed operations and whole laws required for
+pullback stability. Neither a whole additive structure on Functor_cat(B,C)
+nor cover epicity follows merely from the component observations. Prove
+r/ρ epicity and θκ_ρ=0 before using original coimage/cokernel descent for δ;
+output exactness and concrete model obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

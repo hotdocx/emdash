@@ -134,6 +134,15 @@ assertions add no primitive/runtime rule or earlier LP edit. Warning
 inventories match unchanged dependencies. Cover epicity/annihilation,
 δ and derived output exactness remain next.
 
+C6c3a now adds [whole copairing](../emdash3_2_one_cat_copair_families.lp)
+and [whole addition](../emdash3_2_one_cat_additive_families.lp). The explicit
+ordinary Prod⊣Δ presentation has the original derived injections and
+codiagonal as unit/counit; its primitive assembly remains a model obligation.
+Native inverse functor cuts, higher action and original component readbacks
+are checked. Sixteen definitions, one primitive and two coupling rules add
+no unifier or earlier LP edit; three reviewers contain 26 assertions.
+Signed whole laws and cover stability precede epicity, annihilation and δ.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

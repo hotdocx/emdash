@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,23 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6c2 milestone (2026-09-14): the
+Current C6c3a prerequisite (2026-09-14): [whole copairing](../emdash2/emdash3_2_one_cat_copair_families.lp)
+and [whole addition](../emdash2/emdash3_2_one_cat_additive_families.lp)
+now use native mates at the same original product functor. Both copairing
+inverse cuts compute as whole functors, with retained arrow and next Hom
+action. Component observations recover the original additive copairing and
+sum; no caller component naturality proof is required.
+
+The ordinary [Prod⊣Δ presentation](../emdash2/emdash3_2_one_cat_biproduct_adjunction.lp)
+is one explicit structural/model primitive with two coupling rules. Its
+whole unit uses injections already derived from Δ⊣Prod; counit components
+are the original codiagonal. This is not a theorem assembled from today's
+opaque Adjunction classifier. Sixteen further operations are definitions;
+no new unification rule or earlier LP edit is introduced. Signed operations,
+the needed whole additive laws and cover stability remain next, before
+ρ epicity, θκ_ρ=0 and δ descent. Details and validation are in the owner ledger.
+
+Completed C6c2 milestone (2026-09-14): the
 [native four-row assembly](../emdash2/emdash3_2_one_cat_native_homology_window_maps.lp)
 now constructs both ρ and θ with the same literal kernel pullback source
 and the original source/target H. Its inputs are four original row functors
@@ -50,10 +66,11 @@ unchanged-dependency warning inventories.
 
 Next C6c3 proves epicity of the cover and θ's annihilation on its actual
 kernel before native coimage/cokernel descent defines δ. Audit and construct
-any required whole additive/normality operations explicitly; product-family
-pairing is available, but varying-family addition and a general coherent
-PullbackStructure are not silently supplied. Derived output exactness,
-concrete model/reifier construction and snake comparison remain required.
+any required whole additive/normality operations explicitly. C6c3a now
+supplies varying-family copairing/addition; signed operations, their whole
+laws and a general coherent PullbackStructure are not silently supplied.
+Derived output exactness, concrete model/reifier construction and snake
+comparison remain required.
 
 The completed C6c1 milestone (2026-09-13): the
 [whole cokernel observer](../emdash2/emdash3_2_one_cat_cokernel_family_projection_paths.lp)
@@ -827,6 +844,7 @@ must not label those alternatives validated implementations.
 | D-NUH-053 | C6b2b constructs the native slice-Hom comparison and its inverse from the original kernel mate, then derives both whole functor inverse paths and OmegaEquivAlong on that actual comparison. Ordinary native slice equality follows by Sigma elimination in the original classifier. Core reflection internalizes the inverse with propositional object agreement. The slice ordinary profile and discrete-target functor profile are two explicit structural/model obligations, not cartesian or inverse axioms. No runtime/unification rule is added; no judgmental inverse beta or general PullbackStructure is claimed. Cover/δ and output exactness remain required |
 | D-NUH-054 | C6c1 derives the original cokernel observer Λ_D(v)=v∘q_D, ambient descent reconstruction and quotient equality reflection. Original β/γ reconstruction and fixed-forward inverse evidence give whole incoming/outgoing row cancellation. The canonical map ρ=q_H∘r uses the same H and pullback family; only q_H cancellation is proved here. All 19 operations are definitions, with no new primitive/rule. Native window assembly, r/ρ epicity, θ and δ remain required; no ordinary universal dictionary or assumed cover property is introduced |
 | D-NUH-055 | C6c2 derives whole native row squares, the other column-zero laws, original incoming recovery, row lifting and θ, then assembles ρ/θ from the same four-row inputs at the same literal pullback source and original H endpoints. The two middle-chain zero laws remain whole mathematical input; no caller naturality squares or new window carrier are introduced. Two proof-time views handle accumulated evaluation and native/raw composed parents while retaining every operand and runtime owner. All 42 operations are definitions. Cover epicity, θ-on-kernel annihilation and δ descent still require proof; missing whole additive/normality operations must be resolved explicitly |
+| D-NUH-056 | C6c3a adds ordinary Prod⊣Δ at the original product as one explicit structural/model primitive, with whole derived injections as unit and the original codiagonal as counit components. Native inverse mates construct whole copairing; precomposition with the original product-family diagonal constructs whole addition. Both inverse functor cuts and higher action compute, and component copair/sum agreements are derived. Sixteen definitions and two coupling rules add no unifier or earlier LP edit. The opaque Adjunction assembly is an explicit model obligation; signed laws, cover stability, epicity, annihilation and δ are not supplied by this prerequisite |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

@@ -4631,6 +4631,32 @@ composition indices while postcomposition retains the original K(D).
 Epimorphicity of r/ρ, θ's annihilation on Kρ and descent to δ remain the
 next mathematical proof obligations, followed by output exactness.
 
+Whole copairing and addition are now available over the same original
+additive product. For ordinary C, the product mate constructs the whole
+injections from (id,0) and (0,id). The explicit structural presentation
+Prod⊣Δ uses these injections as its unit and the original codiagonal
+[id,id] as its counit components. Mathematically, the old additive
+copairing laws and bilinearity justify this adjunction. Syntactically, the
+opaque Adjunction classifier lacks an assembly constructor, so this
+presentation is an explicit model obligation, not a derived β theorem.
+
+For X,Y,Z:B→C, its lifted native mate yields
+
+```text
+Copair : Transf(X,Z) × Transf(Y,Z) → Transf(Prod∘(X,Y),Z)
+Uncopair ∘ Copair = id,       Copair ∘ Uncopair = id
+f + g = Copair(f,g) ∘ Δ_X.
+```
+
+The inverse equations compute as whole functors and at their higher
+projections. The last line defines a whole transformation from whole f/g;
+its component is proved equal to the original Hom sum. These component
+paths observe the categorical program and do not supply its naturality.
+Both original adjunctions use the same Prod, terminal structure and supplied
+initial structure. No whole signed structure or pullback stability theorem
+is inferred merely from the component readback; those laws remain the
+next prerequisite for epicity and descent.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

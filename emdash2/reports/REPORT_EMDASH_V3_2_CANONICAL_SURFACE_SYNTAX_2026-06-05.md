@@ -2079,6 +2079,22 @@ literal source. These are assembly operations on the original row data;
 there is no additional window category or opaque constructor. Epicity,
 annihilation and δ remain subsequent proofs.
 
+`one_cat_biproduct_inj1` / `one_cat_biproduct_inj2` are whole product mates.
+`one_cat_biproduct_adjunction` is the explicit ordinary Prod⊣Δ structural
+presentation at original Prod/t/A/T0. Its unit is their whole pair; counit
+components are the original additive codiagonal. This primitive and its two
+coupling rules have a model obligation; they do not derive from opaque
+Adjunction's old β interface.
+
+`one_cat_copair_family_func` / `one_cat_uncopair_family_func` are native
+inverse mate functors; their point aliases retain literal native Hom
+indices. Both whole inverse cuts and higher action compute.
+`one_cat_additive_family_add_func` composes copairing with precomposition
+by the original product diagonal; `one_cat_additive_family_add` applies it
+to whole f/g. The `*_formula_path` and `*_component_path` operations are
+derived observations. Component paths are not inputs to those programs,
+and signed whole laws/cover stability are not asserted by these aliases.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the
