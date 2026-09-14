@@ -349,6 +349,18 @@ cover input. Thirty-five definitions add no primitive, runtime rule,
 unifier or earlier LP edit. θκ_ρ=0, δ and output exactness remain open;
 model/reifier and snake comparison work remain later obligations.
 
+C6d1 constructs the [direct native connecting map](../emdash3_2_one_cat_native_homology_window_connecting.lp)
+δ:H_C⇒H_A at the existing native-window homology functors. Original row,
+kernel and quotient operations first prove θ kills K(r), giving γ by the
+proved r cover. Lifting the original upper middle differential and using
+original upper-row cancellation then proves γβ_C=0, giving δ through the
+original q_C. Whole laws give δq_C=γ, δρ=θ, θκ_ρ=0 and uniqueness.
+The single descent along ρ is proved equal as a whole transformation.
+Twenty-eight definitions add no primitive, rewrite, unifier or earlier LP
+edit. Component reconstruction and whole Hom observations pass; an optional
+unconstrained δ=0 comparison exceeds the memory guard and is not promoted.
+Actual output exactness, model/reifier work and snake comparison remain open.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

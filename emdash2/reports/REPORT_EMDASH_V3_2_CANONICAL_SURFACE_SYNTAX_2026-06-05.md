@@ -2187,6 +2187,23 @@ proof at the existing native window using E0 and original normality. Its
 fixed forward arrow is the existing coimage-to-target factor for ρ; no
 separate cover input or inverse choice is accepted by the window operation.
 
+`one_cat_kernel_input_boundary_reconstruction` recovers the original
+whole arrow from its original input boundary. The
+`one_cat_native_r_zero_*` paths identify a covered left cycle with the
+original boundary when rs=0. `one_cat_native_theta_kernel_r_zero` gives
+the input for `one_cat_native_cycles_connecting_transf`, whose whole
+reconstruction is γr=θ.
+
+`one_cat_native_upper_lift_transf` uses the original composite kernel;
+its r-image is β_Cp_m and its θ-image is zero.
+`one_cat_native_connecting_transf` is the original Q descent after proving
+γβ_C=0. `one_cat_native_window_connecting_transf` exposes it at the
+existing source/target homology functors. Its `*_reconstruction`,
+`*_unique` and `one_cat_native_window_theta_kernel_rho_zero` observations
+retain the original ρ and θ. The `*_single_descent_path` compares the
+single-ρ and two-step programs as whole maps, retaining component and next
+Hom observations. No new equivalence classifier or runtime rule is added.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

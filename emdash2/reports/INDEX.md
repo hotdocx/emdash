@@ -185,6 +185,13 @@ coker(ρ)=0. The native row E0 supplies the p premise, with original
 normality providing the cover factors. Thirty-five definitions add no
 primitive, runtime rule or unifier. θκ_ρ=0, δ and output exactness are next.
 
+C6d1 constructs [δ at the original native window](../emdash3_2_one_cat_native_homology_window_connecting.lp)
+through two whole descents, with δq_C=γ, δρ=θ, θκ_ρ=0 and uniqueness.
+The single descent along ρ agrees as a whole transformation. Twenty-eight
+definitions add no primitive, rewrite or unifier. Component and whole Hom
+observations pass; the unconstrained δ=0 comparison remains a guarded
+resource boundary. Output exactness, model/reifier and snake work are next.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

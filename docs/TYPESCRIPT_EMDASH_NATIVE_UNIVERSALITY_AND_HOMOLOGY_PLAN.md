@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6c3e2 original r/ρ covers qualified at native window; θ annihilation, δ and exactness next; Op/duality deferred
+Status: C6d1 native δ, reconstruction and uniqueness qualified; output exactness next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,30 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6c3e2 milestone (2026-09-14): the original
+Current C6d1 milestone (2026-09-14): the
+[direct native connecting map](../emdash2/emdash3_2_one_cat_native_homology_window_connecting.lp)
+δ:H_C⇒H_A is constructed at the original native-window homology functors.
+Two universal descents give γr=θ, δq_C=γ and δρ=θ. The same construction
+proves θκ_ρ=0, whole uniqueness of δ from that reconstruction, and whole
+agreement with the single descent along ρ. No snake-lemma input, cover
+assumption or output exactness inhabitant is supplied.
+
+The first descent uses the original row E0 to show θs=0 whenever rs=0.
+The upper middle differential lifts into the original L; its r-image is
+β_Cp_m and its θ-image is zero. The original upper-row cancellation
+therefore makes γ kill β_C, allowing the second descent through the
+original q_C. Original P/Q, r, ρ, θ, H_C and H_A remain the actual terms.
+Twenty-eight definitions add no primitive, rewrite, unifier or earlier LP
+edit. Component reconstruction and whole Hom-action observations are
+checked; an unconstrained δ=0 comparison hit the memory guard and is not
+promoted as a successful rejection test.
+
+Next C6e proves the actual output exactness comparisons from the original
+short-exact input. Model/reifier automation, snake/direct/native comparison
+and final qualification remain required. The construction is scoped to the
+stated ordinary setting and original structural/normality assumptions.
+
+Completed C6c3e2 milestone (2026-09-14): the original
 [kernel-square cover](../emdash2/emdash3_2_one_cat_kernel_precomposition_covers.lp)
 and [homology cover](../emdash2/emdash3_2_one_cat_homology_covers.lp)
 are derived. The auxiliary kernel maps into the existing L=K(d∘p), and
@@ -608,7 +631,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: native window and original r/ρ covers qualified; θ annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: native δ, reconstruction, annihilation and uniqueness qualified; output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -971,6 +994,7 @@ must not label those alternatives validated implementations.
 | D-NUH-059 | C6c3c2 derives id+N from the original whole shear, proves restriction of the original mate/pair/copair/addition operations, and transfers the law to the existing universal restriction. Whole f+(−f)=0 and f−f=0, common-left-summand cancellation, fixed-forward invertibility of original N, negation reflection, zero-difference reflection and composed-difference zero laws follow. Thirty-eight definitions and eight sufficient proof-time views add no primitive/runtime rule or earlier LP edit. The direct and restricted negative identities are compared by whole inverse uniqueness. Unused mixed native point and literal paired-Hom experiments are not promoted. C6c3e must derive the actual categorical cover using kernel-of-difference, original cokernel-zero proofs and normality; no cover flag, full additive capability or unproved unit law is supplied |
 | D-NUH-060 | C6c3e1 derives the actual auxiliary difference cover from the original whole short-exact row: q_D=0, original image inclusion invertible, and original Coim(D)⇒Z factor invertible under the supplied normality. Whole native/raw mate reconstruction proves ι∘a=φ for the existing φ. Twenty-six definitions add no primitive, runtime rule, unifier or earlier LP edit. Original inverse choices are retained through existing IsoEvidence composition and explicit inverse laws. An unused mate-reindex import is removed after a successful ablation. This does not yet prove the original r/ρ covers, θκ_ρ=0, δ or output exactness |
 | D-NUH-061 | C6c3e2 derives the covers of the original r and ρ and instantiates them at the existing native window. The auxiliary kernel lifts into the original L; whole coimage descent, second-leg cancellation and first-projection reflection force the actual cokernel of r to zero. Original q_H cancellation then forces the actual cokernel of ρ to zero. The native row E0 derives the general helper's zero-cokernel premise for p. Thirty-five definitions add no primitive, rewrite, unifier or earlier LP edit. Whole descent and its reconstruction retain original diagrams and selected inverses. Cover evidence is invertibility of the actual Coim(r)⇒K(d) / Coim(ρ)⇒H factors, not invertibility of r or ρ themselves. θκ_ρ=0, δ and output exactness still require proof |
+| D-NUH-062 | C6d1 constructs the original native-window δ by two universal descents. θ kills K(r), yielding γ; a lift of the upper middle differential and original upper-row cancellation prove γβ_C=0, yielding δ through the original q_C. Whole reconstruction δρ=θ gives θκ_ρ=0 and, through the existing cover, uniqueness. The single descent along ρ is proved equal as a whole transformation, without asserting judgmental identity. Twenty-eight definitions add no primitive, rewrite, unifier or earlier LP edit. The unconstrained symbolic δ=0 rejection query exceeds the memory guard and remains an unpromoted computational boundary; component reconstruction and whole Hom-action checks pass. Actual output exactness and the remaining model/reifier and snake work are still required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

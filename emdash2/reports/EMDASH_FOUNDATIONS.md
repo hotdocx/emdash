@@ -4782,6 +4782,28 @@ cover inverse, with whole reconstruction and cancellation laws. No ordinary
 universal-provider dictionary or caller naturality square is involved.
 Proving θκ_ρ=0 is now the next prerequisite for δ and output exactness.
 
+The direct connecting map is now constructed by two whole universal
+descents. If rs=0, the original row E0 lifts a_Ls into A0. Original row
+naturality and incoming/kernel cancellation identify the corresponding left
+cycle with the original boundary. The target quotient therefore gives
+θs=0. Applying this to K(r) and the proved cover of r produces
+γ:K(d_C)⇒H_A with γr=θ.
+
+The original upper middle differential lifts into the same L. Its r-image
+is β_Cp_m and its θ-image is zero, by the upper chain law and original
+incoming/kernel cancellation. Consequently γβ_Cp_m=0. The original upper
+row cancels p_m, giving γβ_C=0. The original right homology quotient now
+produces δ:H_C⇒H_A with δq_C=γ and δρ=θ. The latter also proves θκ_ρ=0.
+The already derived cover of ρ makes this whole reconstruction characterize
+δ uniquely, and proves agreement with the single descent along ρ.
+
+This is an internal categorical construction from the original K/Q and
+whole row data, with no snake-lemma input, new cover premise or caller
+naturality square. Its component equation and whole Hom-action observations
+are checked. The two descent programs are equal as whole transformations;
+they are not asserted to be judgmentally identical. Exactness at the
+resulting LES positions remains a separate proof obligation.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

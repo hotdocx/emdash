@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3e2 original r/ρ covers qualified at native window; θ annihilation, δ and exactness next; Op/duality deferred
+Status: C6d1 native δ, reconstruction and uniqueness qualified; output exactness next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,123 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6d1: Two native descents construct the connecting map
+
+**Qualified after e1182a38 (2026-09-14).**
+The direct native δ:H_C⇒H_A now exists at the original native-window
+homology functors. Its whole laws are
+
+```text
+γr=θ,       δq_C=γ,       δρ=θ,       θκ_ρ=0,
+vρ=θ ⇒ v=δ.
+```
+
+The previously planned single descent along ρ is proved equal to this
+construction as a whole transformation. No judgmental identity between the
+two programs is claimed. Twenty-eight definitions in six one-way owners
+add no primitive, runtime rewrite, unifier or earlier LP edit. Original
+P/Q, L, r, ρ, θ, H_C, H_A and selected inverse choices are retained.
+
+**Construction and owners.**
+
+- [Kernel input boundaries](../emdash2/emdash3_2_one_cat_kernel_input_boundaries.lp)
+  compose existing native input recovery and whole boundary reconstruction
+  to identify the original kernel boundary with its original input arrow.
+- [Kernel-side connecting paths](../emdash2/emdash3_2_one_cat_native_connecting_kernel_paths.lp)
+  prove θs=0 whenever rs=0. The original square gives p₀a_Ls=0; the
+  original row E0 lifts a_Ls to A0. Whole row naturality and original
+  incoming cancellation identify the covered left lift with d_A times that
+  row lift. Original kernel cancellation identifies the entire left cycle
+  with β_A times the lift, and the original target quotient kills it.
+  All equations concern whole maps; no caller naturality square is supplied.
+- [Cycles connecting](../emdash2/emdash3_2_one_cat_native_cycles_connecting.lp)
+  specializes this to the original K(r), then applies the proved coimage
+  cover descent to obtain γ:K(d_C)⇒H_A with γr=θ. Full AdditiveCategory
+  and original normality enter here through the existing cover of r; the
+  preceding annihilation proof requires only the stated original row/K/Q
+  data and ordinary profile.
+- [Upper lifts](../emdash2/emdash3_2_one_cat_native_connecting_upper_lifts.lp)
+  lift the original upper middle differential into the existing L. The
+  original first projection reconstructs it; original kernel cancellation
+  proves its r-image is β_Cp_m. The upper middle chain-zero law, original
+  incoming cancellation and original kernel cancellation make its θ-image
+  zero. No new cover, representative choice or splitting is introduced.
+- [Native connecting](../emdash2/emdash3_2_one_cat_native_connecting.lp)
+  uses these facts and the original upper-row outgoing cancellation to
+  prove γβ_C=0. The original Q at the original boundary diagram then
+  constructs δ. Its two reconstruction laws yield δρ=θ and θκ_ρ=0.
+  The already derived cover of ρ makes that whole reconstruction determine
+  δ uniquely.
+- [Native-window connecting](../emdash2/emdash3_2_one_cat_native_homology_window_connecting.lp)
+  exposes δ at the existing window and its original source/target homology
+  functors. Its whole reconstruction, annihilation and uniqueness use the
+  same original ρ and θ. Applying uniqueness to the original single-descent
+  program proves agreement between the two native constructions.
+
+**Plan refinement.** Two successive descents use the already available r
+cover and q_C quotient directly. This refines the earlier schedule that
+first sought θκ_ρ=0 using an additional cover. The required annihilation
+and the original single-descent specification are both recovered as
+proved consequences. It does not make the snake lemma a prerequisite,
+change any H choice, or assume output exactness.
+
+**Observed checker boundary.** All theory-owner probes pass. The initial
+combined connecting reviewer hit the 2 GiB guard while checking its final
+unconstrained δ=0 rejection query, with exit 134 (minor-GC allocation
+failure). Isolating its six queries showed that the first five—including
+the original component equation, reconstruction and uniqueness—all pass.
+Only the δ=0 query reproduces the guarded failure:
+`nuh4c6d1_delta_review_6-20260914-092806.log` (combined failure at `092525`).
+That query remains ignored recovery evidence and is not promoted as a
+successful negative test. The retained suite checks reconstruction,
+components, Hom action and unrelated-map retention. No memory limit was
+raised and no additional rewrite or unifier was introduced to force this
+optional comparison. Concrete nonzero model tests remain in the model
+qualification work; this resource failure is not a mathematical zero claim.
+
+**Qualification.** Six owners and three reviewer files pass serial,
+warning-enabled, resource-guarded checks within the 90-second per-target
+ceiling. The promoted suite has 16 assertions: 14 positive observations and
+two unrelated-map rejection controls. These include the original lift and
+boundary comparisons, δq_C=γ, δρ=θ, θκ_ρ=0, whole uniqueness, the component
+equation δ_x∘ρ_x=θ_x and whole next-Hom action of the single-descent
+comparison. The separate δ=0 resource failure above is excluded from this
+passing count.
+
+Final owner logs span `092353`–`092456`. Reviewer logs are
+`one_cat_native_connecting_lifts-20260914-092512.log`,
+`one_cat_native_connecting-20260914-093008.log` and
+`one_cat_native_homology_window_connecting-20260914-093022.log`.
+The existing native-window cover and map reviewers still pass when imported
+after the new connecting owner, at
+`nuh4c6d1_retained_homology-20260914-093743.log`.
+Three original dependency-load-order baselines pass at `093758`–`093819`.
+All ten final warning inventories exactly match their corresponding
+baselines in categories, locations, term heads, rule families and parser
+issues. Exact logs and final checked source hashes are retained in
+`tmp/probes/nuh4c6d1_warning_comparison.json`.
+
+Strict catalog, report-header/reference lint, shell syntax, exact owner
+registration, unique declarations, added local links and diff hygiene pass.
+All 28 owner symbols are definitions; no new primitive or rule requires a
+new LHS audit. The generated source-only health report records 1,115 files
+and snapshot
+`2718d87d09096a558493833c42757d4c41e5b911c05bb12cbb606a4e83517351`.
+No repository-wide, TypeScript or aggregate typecheck was run. Qualification
+is scoped to the stated ordinary whole construction and its original
+structural/normality assumptions; model closure and deferred Op/profile
+qualification are not inferred from these checks.
+
+**Next C6e: output exactness.** Construct the actual adjacent whole homology
+maps and their zero-pair inputs, then prove fixed-forward invertibility of
+the existing Im⇒K comparisons at the LES positions. The δ construction
+and its uniqueness alone do not provide these exactness inhabitants.
+Retain the original H choices and use native K/Q and derived covers;
+ordinary per-position records remain derived observations. Model/reifier
+automation, snake/direct/native comparison and final qualification remain
+required. Op/duality, later strictness-profile integration and the separate
+endpoint-debugging experiments remain deferred.
 
 ### NUH-4C6c3e2: Original kernel-square and native homology covers
 
