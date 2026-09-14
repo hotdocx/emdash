@@ -256,6 +256,19 @@ Nineteen definitions and 23 assertions add no primitive, runtime rule,
 unifier or nucleus edit. All dependency warning inventories match.
 Native window assembly, r/ρ epicity, θ/δ and output exactness remain next.
 
+C6c2 now [constructs the native window and covered map θ](../emdash3_2_one_cat_native_homology_window_maps.lp).
+Original row functors and whole transformations supply the row squares;
+only the two whole middle-chain zero laws are input. Row cancellation
+derives the other column zeros, whose native input observations recover
+the original differentials. Whole row lifting uses the original K mate and
+β inverse, then original left cycles and H quotient produce θ. The
+assembled ρ and θ share the same literal pullback and original H endpoints.
+Two proof-time views handle accumulated evaluation and native/raw parent
+observations, preserving all runtime owners. Forty-two definitions and 41
+assertions add no primitive/runtime rule or change to an earlier LP owner.
+Exact dependency warning inventories match. Cover epicity/annihilation,
+δ and output exactness remain required.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

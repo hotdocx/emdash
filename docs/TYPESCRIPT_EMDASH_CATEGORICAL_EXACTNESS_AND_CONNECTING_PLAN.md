@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c1 whole quotient/row cancellation and canonical ρ map qualified; native window, cover epicity and θ/δ next; Op/duality deferred
+Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,19 +330,60 @@ coherent right-column h and p; native window assembly and epicity of r/ρ
 remain obligations. Nineteen definitions and 23 assertions add no primitive,
 runtime rewrite or unifier. No cover property is assumed by the constructor.
 
-Next C6c2 assembles the native window and covered map θ. Prove r/ρ epicity
-and θ's actual annihilation before using normality and native cokernel
-descent for δ. Output exactness, concrete model/reifier construction and
-snake comparison remain required. C6a's product capability remains
-available; whole varying-family addition is not silently supplied.
+C6c2 now [assembles the native window maps](../emdash2/emdash3_2_one_cat_native_homology_window_maps.lp).
+Four original row functors Rₘ,R₀,R₁,R₂:B→ZeroArrowCone_cat and three whole
+transformations supply all vertices and maps. The two middle-column
+chain-zero laws are whole mathematical input. Each row's short-exactness
+is the existing fixed-map β/γ evidence at its original whole zero datum;
+no new window carrier, opaque constructor or ordinary factor dictionary
+is introduced.
 
-For the native window continuation, retain original row functors into
-ZeroArrowCone_cat and whole transformations between them. Their native
-higher action must supply the commuting row squares. Whole middle-column
-chain-zero data is mathematical input; per-object naturality squares and
-old PreAbelianCategory/ComputationalAbelianCategory providers are not new
-primary input fields. Derive the other column zeros using whole row
-cancellation before feeding those columns into the original H construction.
+[Whole postcomposition-family action](../emdash2/emdash3_2_one_cat_family_naturality_paths.lp)
+gives the two commuting row squares. [Native row observations](../emdash2/emdash3_2_one_cat_zero_cone_row_families.lp)
+retain the original row functor before K/Q selection. Incoming cancellation
+at the last row derives the left column zero; outgoing cancellation at
+the first row derives the right column zero. The
+[column input constructors](../emdash2/emdash3_2_one_cat_zero_cone_column_inputs.lp)
+then call the existing whole kernel-input builder. The
+[native incoming observation](../emdash2/emdash3_2_one_cat_kernel_input_observation_paths.lp)
+recovers the original whole differential in each column.
+
+The [whole row lift](../emdash2/emdash3_2_one_cat_short_exact_family_lifts.lp)
+is a native Hom functor: the original K transpose followed by β⁻¹
+postcomposition. Its original-diagram input and reconstruction remain
+whole. Applied to the covered middle differential, it gives λ:L⇒A₁ with
+i₁∘λ=d_B∘a_L. The next row's incoming cancellation and the middle chain
+law show d_A∘λ=0. The original left kernel gives v:L⇒K(d_A), with
+κ_A∘v=λ, and the [covered map](../emdash2/emdash3_2_one_cat_homology_covered_maps.lp)
+is θ=q_A∘v. The first row lift requires only its two adjacent rows and
+next-row β evidence; the following row and chain law enter when making
+it a left cycle.
+
+The assembly returns ρ:L⇒H_C and θ:L⇒H_A with the same literal
+L=K(d_C∘p₀). H_C and H_A are the original H constructions at the derived
+native column inputs; no object cast or new selection aligns their types.
+The original short-exactness evidence E₀ for R₀ remains in the window
+interface for the upcoming cover-epicity proof; map construction does not
+yet consume it.
+
+Two [proof-time comparisons](../emdash2/emdash3_2_diagram_reindex_views.lp)
+resolve actual owner-presentation gaps: accumulated evaluation versus
+composition with the evaluator, and the same whole h observed under
+native/raw composed parents. Both retain every original functor, point,
+target and transformation. They add no runtime fold. Source recovery is
+staged while h is a variable, then instantiated at the actual input;
+that is necessary for compound column functors. Forty-two definitions,
+two unifiers and 41 assertions qualify this stage without a new primitive,
+runtime rule or edit of an earlier LP owner.
+
+Next C6c3 derives r/ρ epicity and θ∘κ_ρ=0 from the original short-exact
+rows and Abelian normality. Check which whole additive and further cover
+operations this proof actually needs; construct them before use. C6a's
+product-family pairing is available. No whole varying-family addition or
+general coherent PullbackStructure is assumed merely from the previous
+kernel-square proof. Then apply the original coimage/cokernel descent for
+δ and prove its reconstruction. Output exactness, concrete model/reifier
+construction and snake comparison remain required.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

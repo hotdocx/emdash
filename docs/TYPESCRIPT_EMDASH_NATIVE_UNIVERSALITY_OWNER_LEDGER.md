@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c1 whole quotient/row cancellation and canonical ρ map qualified; native window, cover epicity and θ/δ next; Op/duality deferred
+Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,120 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c2: Native row/window assembly and the covered map θ
+
+**Implemented after 2e3300c7 (2026-09-14).** The original native row
+functors, transformations and whole short-exact evidence now construct
+ρ and θ on a common literal kernel pullback. Only the two whole middle-
+column chain-zero laws are mathematical input. All other column zeros,
+row squares, lifts and prequotient reconstructions are derived.
+
+**Owners and construction.**
+
+- [Family naturality/whiskering](../emdash2/emdash3_2_one_cat_family_naturality_paths.lp)
+  restricts the existing whole transformations. The ordinary C1 scope is
+  explicit; no pointwise naturality field is added.
+- [Native row families](../emdash2/emdash3_2_one_cat_zero_cone_row_families.lp)
+  retain the original ZeroArrowCone_cat row functor and expose whole
+  vertices, row maps and both commuting squares. The short-exact condition
+  is the existing OneCatShortExactFamily at those actual observations.
+- [Whole zero postcomposition](../emdash2/emdash3_2_one_cat_zero_family_postcomposition_paths.lp)
+  follows from original initial-family uniqueness; the existing whole
+  zero-precomposition path is reused.
+- [Column inputs](../emdash2/emdash3_2_one_cat_zero_cone_column_inputs.lp)
+  derive left/right chain zero by original row cancellation, then call the
+  existing whole input constructor. Outgoing diagrams precede K/Q choices.
+- [Native input observation](../emdash2/emdash3_2_one_cat_kernel_input_observation_paths.lp)
+  recovers the original whole differential with the native composed parent.
+- [Whole row lifts](../emdash2/emdash3_2_one_cat_short_exact_family_lifts.lp)
+  are actual Hom functors from the original K mate and β inverse. The
+  original incoming map reconstructs the complete input k.
+- [Covered maps](../emdash2/emdash3_2_one_cat_homology_covered_maps.lp)
+  derive λ:L⇒A₁, i₁λ=d_B a_L, d_Aλ=0 and the original left-cycle lift v,
+  with κ_A v=λ. Then θ=q_A v, using the original H quotient.
+- [Four-row assembly](../emdash2/emdash3_2_one_cat_native_homology_window_maps.lp)
+  constructs both native column inputs, the original H_C/H_A and ρ/θ.
+  Their source is the same literal K(d_C p₀). E₀ is retained for the later
+  cover-epicity proof. No new window category/opaque constructor is added.
+
+**Measured presentation boundaries.**
+
+The two new [proof-time views](../emdash2/emdash3_2_diagram_reindex_views.lp)
+retain existing runtime owners. The first compares (ev_i∘F)∘D with
+F(−)[i]∘D; the prior evaluator comparison did not automatically extend
+through that accumulated composition. The second observes the same h
+under its native postcomposition parent and raw composed parent. It
+retains the original F, X, target G, h, shape I/C and point i. Neither
+comparison changes an object or installs runtime cancellation.
+
+A direct specialization of generic whiskering failed at the nested
+whole-evaluation endpoints. Staging the shape-specific statement at
+variable F/G and using the first view resolves it. The column reviewer
+then exposed native/raw input recovery at compound right-column functors.
+A direct recovery-wrapper body still failed; compare parent observations
+while h is a variable using the second view, then instantiate the existing
+recovery path. The resulting native incoming observer recovers both actual
+column differentials.
+
+The row Hom functor retains the native intermediate Hom of K∗D inside
+its composition, while its postcomposition operator names the original
+K(D), which is β⁻¹'s source. This lets its object projection expose the
+original raw β⁻¹∘lift_K comparison through existing proof-time rules.
+The unsuccessful route through explicit identity-functor actions is not
+promoted, and no new identity or inverse runtime rule is installed.
+
+**Qualification.** Forty-two definitions and two proof-time unifiers in
+nine new owners, with no primitive, runtime rule or earlier LP edit.
+All 41 reviewer assertions pass: 29 positive and 12 negative. They check
+retained evaluator operands and runtime distinction, both native row
+squares and actual vertex-map components, both column-zero laws and
+native incoming recovery, row-lift point/reconstruction/further-Hom
+observations, original H endpoints, the common source and ρ/θ components
+and Hom action. Changed diagram/reindexing/shape/whole-cell, k, Q and p
+inputs are rejected; no arbitrary equality is reflected by a runtime rule.
+
+The source checks, reviewers and controls run serially under the resource
+guard with warning output and ≤90 seconds per target. Exact categories,
+locations, term heads, rule families and parser diagnostics match unchanged
+dependencies: 1150 critical pairs / 157 pattern warnings for the view owner
+and reviewer; 1155 / 157 for family naturality; 1208 / 159 for rows, input
+observation and row lifts; 1381 / 159 for zero postcomposition, columns,
+covered/window maps and their consumers. These counts describe the
+respective import joins; no warning is added or removed by this stage.
+
+| Target | Passing log under emdash2/logs/probes | Unchanged dependency join |
+| --- | --- | --- |
+| emdash3_2_diagram_reindex_views | emdash3_2_diagram_reindex_views-20260914-003947.log | nuh4c6c2_deps_view-20260914-004058.log |
+| diagram_reindex_views | diagram_reindex_views-20260914-004207.log | nuh4c6c2_deps_view-20260914-004058.log |
+| emdash3_2_one_cat_family_naturality_paths | emdash3_2_one_cat_family_naturality_paths-20260914-003952.log | nuh4c6c2_deps_family-20260914-004104.log |
+| emdash3_2_one_cat_zero_cone_row_families | emdash3_2_one_cat_zero_cone_row_families-20260914-003958.log | nuh4c6c2_deps_row-20260914-004110.log |
+| emdash3_2_one_cat_kernel_input_observation_paths | emdash3_2_one_cat_kernel_input_observation_paths-20260914-004009.log | nuh4c6c2_deps_input-20260914-004117.log |
+| emdash3_2_one_cat_zero_family_postcomposition_paths | emdash3_2_one_cat_zero_family_postcomposition_paths-20260914-004015.log | nuh4c6c2_deps_zero-20260914-004123.log |
+| emdash3_2_one_cat_zero_cone_column_inputs | emdash3_2_one_cat_zero_cone_column_inputs-20260914-004023.log | nuh4c6c2_deps_columns-20260914-004130.log |
+| one_cat_zero_cone_column_inputs | one_cat_zero_cone_column_inputs-20260914-003634.log | nuh4c6c2_deps_columns-20260914-004130.log |
+| emdash3_2_one_cat_short_exact_family_lifts | emdash3_2_one_cat_short_exact_family_lifts-20260914-004031.log | nuh4c6c2_deps_lift-20260914-004138.log |
+| one_cat_short_exact_family_lifts | one_cat_short_exact_family_lifts-20260914-003642.log | nuh4c6c2_deps_lift-20260914-004138.log |
+| emdash3_2_one_cat_homology_covered_maps | emdash3_2_one_cat_homology_covered_maps-20260914-004038.log | nuh4c6c2_deps_covered-20260914-004145.log |
+| emdash3_2_one_cat_native_homology_window_maps | emdash3_2_one_cat_native_homology_window_maps-20260914-004048.log | nuh4c6c2_deps_covered-20260914-004145.log |
+| one_cat_native_homology_window_maps | one_cat_native_homology_window_maps-20260914-003649.log | nuh4c6c2_deps_covered-20260914-004145.log |
+
+The affected earlier ρ-map, kernel-pullback and row-cancellation reviewers
+pass with the new window imported in
+nuh4c6c2_retained_consumers-20260914-004155.log.
+The start baseline is one_cat_short_exact_family_cancellation-20260913-233937.log.
+Owner-position view probes and all nine strict LHS audits pass. Catalog,
+shell/Python syntax and source-only health pass (1043 registered files). Exact staged
+scope and Markdown/link hygiene apply before checkpointing; no aggregate
+is run. All original LP owners remain byte-identical to 2e3300c7.
+
+**Next C6c3:** prove r/ρ epicity and θκ_ρ=0 at the actual new window.
+Resolve required whole additive/normality/further-cover operations before
+using them; no old per-arrow W/V dictionary or unconstructed general
+PullbackStructure is a shortcut. Apply original coimage/cokernel descent
+to obtain δ, then prove its reconstruction and output exactness. Concrete
+model/reifier synthesis, the snake comparison and final qualification stay
+required. The user-deferred Op/profile and spectral work remains deferred.
+
 ### NUH-4C6c1: Whole quotient/row cancellation and the canonical ρ map
 
 **Implemented after 017a861d.** The cover route first needs whole quotient
@@ -386,13 +500,10 @@ All six source LHS audits, catalog, shell/Python syntax and source-only
 health pass (1030 registered files). Exact source/staged-scope and
 Markdown/link checks apply before checkpointing. No aggregate is run.
 
-**Next C6c2:** use the existing native row functors and transformations to
-assemble window columns, obtaining commuting squares from whole action.
-Whole middle-column chain-zero data remains mathematical input; derive the
-other column zeros with the new row cancellation. Construct θ, prove
-r/ρ epicity and annihilation, then use original normality and Q descent
-for δ. Output exactness, concrete model/reifier synthesis and snake
-comparison remain required. User deferrals stay in force.
+**Then-next C6c2, now qualified above:** native row action, column inputs
+and ρ/θ assembly are constructed. Cover epicity/annihilation, δ and output
+exactness remain, along with concrete model/reifier synthesis and snake
+comparison. User deferrals stay in force.
 
 ### NUH-4C6b2b: Native cartesian comparison of the original kernel square
 

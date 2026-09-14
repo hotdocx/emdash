@@ -4607,6 +4607,30 @@ window assembly, epicity of r/ρ, the covered map θ and final descent for δ
 are the subsequent proof obligations. These new operations are definitions
 using the existing whole universality and add no new primitive or rule.
 
+The native four-row assembly is now constructed. Each original row is a
+functor into ZeroArrowCone_cat; the vertical maps are whole transformations.
+Their existing family action gives both commuting squares. The two whole
+middle-column chain-zero laws are mathematical input. Incoming row
+cancellation derives the left column zero, outgoing cancellation derives
+the right column zero, and the existing native input builder recovers both
+original column differentials. There are no caller-supplied pointwise
+naturality squares.
+
+On L=K(d_C p₀), the original row β inverse and kernel mate lift the covered
+middle differential to λ:L⇒A₁, with i₁λ=d_B a_L. The following row and the
+middle chain law make λ a left cycle. The original left K gives v with
+κ_A v=λ, and θ=q_A v uses the same original H quotient. The assembly
+retains literal source agreement between ρ and θ and the original H_C/H_A.
+Its operations introduce no separate window carrier or opaque constructor.
+
+Two proof-time comparisons retain the evaluator/composition and native/raw
+parent presentations; no new runtime fold or primitive is introduced.
+Source recovery is first staged on a variable whole h, then instantiated
+at the actual compound column input. Whole row Hom action keeps native
+composition indices while postcomposition retains the original K(D).
+Epimorphicity of r/ρ, θ's annihilation on Kρ and descent to δ remain the
+next mathematical proof obligations, followed by output exactness.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

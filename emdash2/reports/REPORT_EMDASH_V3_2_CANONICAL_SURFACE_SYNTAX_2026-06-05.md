@@ -2062,6 +2062,23 @@ pullback source and H target. It takes the original coherent h and p;
 its type supplies a whole transformation. Cover epicity, the assembled
 window and θ/δ remain further constructions, not additional input fields.
 
+The zero_cone_row_family_* operations observe the original row functor;
+one_cat_zero_cone_row_*_square_path derives the whole row squares.
+OneCatZeroConeShortExactFamily specializes the existing whole β/γ evidence.
+The one_cat_zero_cone_*_column_zero_path and *_column_input operations
+derive native column inputs from the whole middle-chain law. Their source
+recovery uses one_cat_kernel_family_input_incoming_path at the native parent.
+
+one_cat_short_exact_family_lift_func is an actual Hom functor; its point
+constructor and reconstruction retain the original K/β and input. The
+one_cat_native_cover_* operations construct the covered row lift and left
+cycle. one_cat_native_covered_homology_transf is θ. Finally,
+one_cat_native_window_source_homology_func / target_homology_func and
+cover_transf / covered_transf assemble the original H and ρ/θ at the same
+literal source. These are assembly operations on the original row data;
+there is no additional window category or opaque constructor. Epicity,
+annihilation and δ remain subsequent proofs.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

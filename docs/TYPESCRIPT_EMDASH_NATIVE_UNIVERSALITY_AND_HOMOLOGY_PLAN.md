@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6c1 whole quotient/row cancellation and canonical ρ map qualified; native window, cover epicity and θ/δ next; Op/duality deferred
+Status: C6c2 native window and covered map θ qualified; cover epicity/annihilation and δ next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,38 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6c1 milestone (2026-09-13): the
+Current C6c2 milestone (2026-09-14): the
+[native four-row assembly](../emdash2/emdash3_2_one_cat_native_homology_window_maps.lp)
+now constructs both ρ and θ with the same literal kernel pullback source
+and the original source/target H. Its inputs are four original row functors
+into ZeroArrowCone_cat, three whole transformations, two whole middle-chain
+zero laws and the original whole short-exact evidence. It introduces no
+new window category or opaque window constructor.
+
+[Whole row action](../emdash2/emdash3_2_one_cat_zero_cone_row_families.lp)
+derives both commuting squares. Row cancellation then derives the other
+[column-zero laws and native inputs](../emdash2/emdash3_2_one_cat_zero_cone_column_inputs.lp).
+The native incoming observer recovers their original differentials through
+a derived parent-presentation view. [Whole row lifting](../emdash2/emdash3_2_one_cat_short_exact_family_lifts.lp)
+uses the original K mate and β inverse; the original incoming map
+reconstructs its entire input.
+
+The [covered map θ](../emdash2/emdash3_2_one_cat_homology_covered_maps.lp)
+lifts the covered middle differential into the next left row, then into
+the original left cycles, and finally applies the original H quotient.
+Both prequotient reconstructions are derived. Forty-two definitions and
+two proof-time comparisons add no primitive, runtime rule or original LP
+edit. All 41 reviewer assertions and retained consumers pass with exact
+unchanged-dependency warning inventories.
+
+Next C6c3 proves epicity of the cover and θ's annihilation on its actual
+kernel before native coimage/cokernel descent defines δ. Audit and construct
+any required whole additive/normality operations explicitly; product-family
+pairing is available, but varying-family addition and a general coherent
+PullbackStructure are not silently supplied. Derived output exactness,
+concrete model/reifier construction and snake comparison remain required.
+
+The completed C6c1 milestone (2026-09-13): the
 [whole cokernel observer](../emdash2/emdash3_2_one_cat_cokernel_family_projection_paths.lp)
 now composes target evaluation with the original native transpose. Its
 application computes at native Hom endpoints; the whole ambient path is
@@ -46,11 +77,8 @@ quotient alias lives with the existing image/coimage graph owner. All other
 previous semantic definitions are unchanged. No old factor dictionary or
 new epicity/normality assumption drives these operations.
 
-Next C6c2 assembles the native window and its column-zero data, then the
-covered map θ. Prove epicity of r/ρ and the required annihilation before
-using original normality and cokernel/coimage descent for δ. Derived output
-exactness, concrete model/reifier construction and snake comparison remain
-required.
+C6c2 above supplies the native window, derived column data and θ. Cover
+epicity, annihilation and final descent to δ remain unfinished.
 
 The completed C6b2b milestone (2026-09-13): the
 [native kernel pullback comparison](../emdash2/emdash3_2_one_cat_kernel_pullback_universality.lp)
@@ -442,7 +470,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: whole row cancellation and ρ map qualified; native window, cover epicity/θ/δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: native window and ρ/θ qualified; cover epicity/annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -798,6 +826,7 @@ must not label those alternatives validated implementations.
 | D-NUH-052 | C6b2a defines Γ as the existing whole source-evaluation Hom functor after the native inverse mate, retaining literal native indices inside compositions and applications. Existing rigid Hom_func factorizations and four sufficient proof-time views derive whole whiskering, Γ_D(v)=κ_D∘v, lift reconstruction, inclusion equality reflection and κ(d)∘r=p∘κ(d∘p). No primitive, runtime fold or nucleus edit is added. Native cartesian universality remains the next gate |
 | D-NUH-053 | C6b2b constructs the native slice-Hom comparison and its inverse from the original kernel mate, then derives both whole functor inverse paths and OmegaEquivAlong on that actual comparison. Ordinary native slice equality follows by Sigma elimination in the original classifier. Core reflection internalizes the inverse with propositional object agreement. The slice ordinary profile and discrete-target functor profile are two explicit structural/model obligations, not cartesian or inverse axioms. No runtime/unification rule is added; no judgmental inverse beta or general PullbackStructure is claimed. Cover/δ and output exactness remain required |
 | D-NUH-054 | C6c1 derives the original cokernel observer Λ_D(v)=v∘q_D, ambient descent reconstruction and quotient equality reflection. Original β/γ reconstruction and fixed-forward inverse evidence give whole incoming/outgoing row cancellation. The canonical map ρ=q_H∘r uses the same H and pullback family; only q_H cancellation is proved here. All 19 operations are definitions, with no new primitive/rule. Native window assembly, r/ρ epicity, θ and δ remain required; no ordinary universal dictionary or assumed cover property is introduced |
+| D-NUH-055 | C6c2 derives whole native row squares, the other column-zero laws, original incoming recovery, row lifting and θ, then assembles ρ/θ from the same four-row inputs at the same literal pullback source and original H endpoints. The two middle-chain zero laws remain whole mathematical input; no caller naturality squares or new window carrier are introduced. Two proof-time views handle accumulated evaluation and native/raw composed parents while retaining every operand and runtime owner. All 42 operations are definitions. Cover epicity, θ-on-kernel annihilation and δ descent still require proof; missing whole additive/normality operations must be resolved explicitly |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

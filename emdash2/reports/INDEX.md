@@ -125,6 +125,14 @@ Original quotient reconstruction, β/γ factorization and cancellation remain
 whole operations on the same K/Q and inputs. Nineteen definitions and 23
 assertions add no primitive/rule. Native window assembly, r/ρ epicity,
 the covered map θ, δ and output exactness remain required.
+C6c2 now [assembles the native four-row window and ρ/θ](../emdash3_2_one_cat_native_homology_window_maps.lp).
+Whole row action derives the squares, cancellation derives the other
+column-zero laws, and the original K mate/β inverse constructs the covered
+left cycle and θ. Both maps share the same literal source and original H
+endpoints. Forty-two definitions, two proof-time comparisons and 41
+assertions add no primitive/runtime rule or earlier LP edit. Warning
+inventories match unchanged dependencies. Cover epicity/annihilation,
+δ and derived output exactness remain next.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
