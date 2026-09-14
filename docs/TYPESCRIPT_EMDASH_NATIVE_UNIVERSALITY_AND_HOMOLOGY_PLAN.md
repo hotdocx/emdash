@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6e2c all three native-window exactness comparisons qualified; model/reifier next; Op/duality deferred
+Status: whole H/δ and all three native-window exactness comparisons qualified; NUH-5A preparation/replay qualified; native model observations next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,19 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Current NUH-5A milestone (2026-09-14): the
+[model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) now
+owns concrete preparation and observation migration. An issued rational
+backend contract and one name prefix prepare the retained inventories,
+coefficient declarations, named model/normality inputs and immutable source.
+Four focused preparation/replay tests, localized TypeScript compilation and
+ESLint, and six generated Lambdapi input-reference checks pass. Model inputs remain
+supplied assumptions, not a constructed closed model. The existing concrete
+connecting observation still uses the older component interface; NUH-5B
+must link retained observations to the qualified whole δ and exactness
+owners. The original full later adoption case also remains an explicit
+resource boundary. These obligations are not waived by setup automation.
 
 Current C6e2c milestone (2026-09-14): both comparisons adjacent to the
 whole connecting transformation δ now have derived inverses:
@@ -736,8 +749,8 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | next: supported model/reifier contract inventory | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
-| NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
+| NUH-5 | active: rational preparation/replay qualified; native observation migration and later adoption remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
+| NUH-6 | queued after NUH-5; generic NUH-4 construction available | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
 Preserved duality progress (2026-09-13): NUH-1D4 corrected the defined
@@ -1104,6 +1117,7 @@ must not label those alternatives validated implementations.
 | D-NUH-065 | C6e2b1 derives cospan projection covers from a proved zero original cokernel, then supplies whole homology and boundary representatives through original quotient cancellation and the same normality inverse. Applied to K(H(p)), three original covers give a corrected middle cycle w and a left cycle a with K(i)∘a=w. All three cover cancellations are derived from original row/quotient data. Fifty-six definitions add no primitive, rewrite, unifier or earlier LP edit. The whole additive unit/difference law needed for q_Mw=q_Mb and the actual middle boundary-quotient zero proof remain next; neither output exactness nor a representative/cover/splitting is supplied |
 | D-NUH-066 | C6e2b2 derives whole f+0=f, −0=0 and f−0=f from the original biproduct injection, whole product/coproduct mates and their inverse cuts. Six proof-time reindexing views retain the literal paired coordinates and both Hom actions at identity endpoints; an extra associativity view is removed by a valid ablation. The corrected middle cycle keeps its original homology class. Its original boundary reconstructs the three covers, whose cancellation proves the actual boundary quotient zero. The existing inverse criterion certifies the actual Im(H(i))⇒K(H(p)) comparison, including the native-window specialization at its literal original row-triple diagram. Twenty-eight definitions introduce no primitive or runtime rewrite. The two δ-adjacent output positions, model/reifier and snake work remain required |
 | D-NUH-067 | C6e2c derives both δ-adjacent comparison inverses from original K/Q, rows, normality and representative covers. At the source, a boundary correction yields a middle cycle whose H(p) image is the original covered class. At the target, native K lifts the middle boundary into the original L and δρ=θ reconstructs the original left class. Original kernel/cover cancellation forces both actual boundary quotients zero, and the same inverse criterion certifies the original maps. Sixty-one definitions add no primitive, rule, unifier or earlier LP edit. δ is a whole transformation throughout. All three native-window positions are now proved; supported model/reifier automation, retained nonsplit realization, snake comparison and final qualification remain required |
+| D-NUH-068 | NUH-5A automates retained rational Freyd context preparation through an issued backend-contract registration and deterministic namespace. The original selected result feeds the existing equation, homology, raw-witness and model inventories before coefficient declarations are sealed. Model and normality remain supplied inputs; setup adopts no claim and constructs no closed model. Four focused tests, localized TypeScript compilation and ESLint, and six generated Lambdapi input-reference checks pass. The inherited later adoption case still exceeds the unchanged resource guard. NUH-5B must migrate the older component connecting observation to the actual whole δ and exactness owners; setup convenience does not discharge this obligation |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -1111,8 +1125,8 @@ renaming it as a prerequisite.
 
 ## Historical Launch Evidence And Current Continuation Prompt
 
-The following launch record is historical. The current queue is C2c4 and its
-successors above, with NUH-1/2 explicitly deferred by later user direction.
+The following launch record is historical. The current queue is NUH-5B,
+then NUH-6/7, with NUH-1/2 explicitly deferred by later user direction.
 
 2026-09-12: main was clean at `cbef77e7` with no staged or unstaged changes.
 The new branch/worktree was created at that commit. Bootstrap succeeded with
@@ -1261,14 +1275,14 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 
 ## Persistent Goal Launch Prompt
 
-Current continuation boundary: the selected native duality owners and
-their code status are specified in `TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md`.
-No generic set-indexed duality or external tensor transport is an
-implementation target. Native target/module integration and the remaining
-universality/homology rows are unfinished. The user's latest direction
-supersedes the preceding historical profile-audit next steps. The documentation
-checkpoint passes changed-link, Unicode/fence, active-reference, lifecycle
-and exact-diff hygiene; it changes no active LP or TypeScript source.
+Current continuation boundary: whole K/Q, H, δ and all three native-window
+exactness comparisons are qualified at their stated ordinary boundary.
+NUH-5A automates retained rational model preparation and replay. Continue
+NUH-5B under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: expose the
+actual whole δ/exactness in retained concrete observations, keep supplied
+model semantics explicit, and qualify the later retained adoption workflow.
+Then complete NUH-6 snake/native comparison and NUH-7 final qualification.
+The earlier Op/profile experiments remain resumption history only.
 
 Continue the native whole-universality and homology implementation in
 `/home/user1/emdash1-native-universality-v1` on
@@ -1276,11 +1290,9 @@ Continue the native whole-universality and homology implementation in
 `docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md` as the living
 authority for evolving scope, decisions, implementation rows, experiments,
 validation and progress, under all active AGENTS/SOP instructions. Preserve
-foundational hom_int/homd_int. Continue from the implemented C2c4 whole
-comparison, native Abelian package, whole cokernel descent and C4b canonical
-image-to-kernel/exactness and C5 short-exact-family interfaces through whole
-fibre products, connecting/exactness proofs and retained homology/proof-CAS
-model/reifier work.
+foundational hom_int/homd_int. Retain the implemented native whole
+universality, Abelian normality, H/δ and exactness owners while completing
+the model/reifier, comparison and qualification rows above.
 Work autonomously through bounded reviewed tranches and
 make local green checkpoint commits. Localize validation to affected owners,
 features and files, reuse recent unchanged evidence, and avoid long-running

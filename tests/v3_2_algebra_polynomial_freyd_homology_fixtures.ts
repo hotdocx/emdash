@@ -1,23 +1,13 @@
 /** Shared genuinely nonsplit examples for homology operations. */
 
-import {
-    RATIONAL_DOMAIN,
-    algebraPolynomialFreeModule,
-    algebraPolynomialFreydBoundedChainMap,
-    algebraPolynomialFreydBoundedComplex,
-    algebraPolynomialFreydCokernel,
-    algebraPolynomialModuleMap,
-    algebraPolynomialModuleVector,
-    algebraPolynomialOne,
-    algebraPolynomialPresentationMorphism,
-    algebraPolynomialPresentationMorphismCongruence,
-    algebraPolynomialPresentationMorphismZero,
-    algebraPolynomialRing,
-    algebraPolynomialSubmodule,
-    algebraPolynomialVariable,
-    algebraPolynomialZero,
-    algebraPresentedPolynomialModule
-} from '../src/v3_2';
+import { RATIONAL_DOMAIN } from '../src/v3_2/algebra_exact';
+import { algebraPolynomialFreeModule, algebraPolynomialModuleVector, algebraPolynomialSubmodule } from '../src/v3_2/algebra_polynomial_module';
+import { algebraPolynomialFreydBoundedChainMap, algebraPolynomialFreydBoundedComplex } from '../src/v3_2/algebra_polynomial_freyd_bounded_complex';
+import { algebraPolynomialFreydCokernel } from '../src/v3_2/algebra_polynomial_freyd_cokernel';
+import { algebraPolynomialModuleMap, algebraPresentedPolynomialModule } from '../src/v3_2/algebra_polynomial_presentation';
+import { algebraPolynomialOne, algebraPolynomialRing, algebraPolynomialVariable, algebraPolynomialZero } from '../src/v3_2/algebra_polynomial';
+import { algebraPolynomialPresentationMorphism } from '../src/v3_2/algebra_polynomial_presentation_morphism';
+import { algebraPolynomialPresentationMorphismCongruence, algebraPolynomialPresentationMorphismZero } from '../src/v3_2/algebra_polynomial_freyd_category';
 import { algebraPolynomialFreydBoundedShortExactSequence } from '../src/v3_2/algebra_polynomial_freyd_bounded_short_exact';
 // All rows are R^r --x--> R^r → (R/(x))^r and are genuinely nonsplit.
 export const polynomialFreydHomologyFixture = (shape: 'one' | 'two' | 'boundary' = 'two', variable = 'x') => {

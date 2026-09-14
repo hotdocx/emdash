@@ -3,15 +3,21 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { describe, it, mock } from 'node:test';
-import {
-    AFFINE_FORMAL_FINITE_MODULE_BINDINGS, AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
-    AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS, AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS,
-    RATIONAL_DOMAIN, affineFormalCommRingType, affineFormalRingElementType,
-    algebraPolynomialIdeal, algebraPolynomialQuotientRing, algebraPresentedAlgebra,
-    binderMode, checkLambdapiProbe, coreProofPlanHole, createAlgebraFormalAssumptionSource,
-    createCoreProofArtifactFingerprint, createCoreProofChecker, defineAffineFormalPolynomialReifier,
-    kernelExpressionEquals, kernelFree, provenance, runAlgebraFormalWorkflow, serializeCoreLfKernelProbe, sourceSpan
-} from '../src/v3_2';
+import { AFFINE_FORMAL_FINITE_MODULE_BINDINGS } from '../src/v3_2/algebra_formal_finite_module';
+import { AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS } from '../src/v3_2/algebra_formal_localization_signatures';
+import { AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS } from '../src/v3_2/algebra_formal_presentation_morphism';
+import { AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_zariski_signatures';
+import { INTEGER_DOMAIN, RATIONAL_DOMAIN } from '../src/v3_2/algebra_exact';
+import { algebraPolynomialConstant } from '../src/v3_2/algebra_polynomial';
+import { affineFormalRingElementType } from '../src/v3_2/algebra_formal_conformance';
+import { binderMode, kernelExpressionEquals, kernelFree, provenance, sourceSpan } from '../src/v3_2/kernel';
+import { checkLambdapiProbe } from '../src/v3_2/probe';
+import { coreProofPlanHole } from '../src/v3_2/proof_plan';
+import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
+import { createCoreProofChecker } from '../src/v3_2/proof_checker';
+import { defineAffineFormalPolynomialReifier } from '../src/v3_2/algebra_formal_reifier';
+import { runAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
+import { serializeCoreLfKernelProbe } from '../src/v3_2/lf_probe';
 import { KernelExpression } from '../src/v3_2/kernel';
 import * as nativeHomology from '../src/v3_2/algebra_polynomial_freyd_homology';
 import * as nativeConnecting from '../src/v3_2/algebra_polynomial_freyd_homology_connecting';
@@ -32,47 +38,41 @@ import {
     ALGEBRA_FORMAL_FREYD_LONG_EXACT_HOMOLOGY_PROFILE,
     prepareAlgebraFormalFreydLongExactHomology, trustAlgebraFormalFreydLongExactHomology
 } from '../src/v3_2/algebra_formal_freyd_long_exact_homology';
-import { createFormalFreydLongExactModelProofEnvironment, prepareAlgebraFormalFreydLongExactModel } from '../src/v3_2/algebra_formal_freyd_long_exact_model_preparation';
+import { algebraFormalFreydLongExactModelInventory, prepareAlgebraFormalFreydLongExactModel } from '../src/v3_2/algebra_formal_freyd_long_exact_model_preparation';
 import { trustAlgebraFormalFreydLongExactModel } from '../src/v3_2/algebra_formal_freyd_long_exact_model';
 import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_signatures';
 import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_map_signatures';
 import { algebraFormalFreydModelNormalityType, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
 import * as nativeFunctorialHomology from '../src/v3_2/algebra_polynomial_freyd_functorial_homology';
+import { defineAlgebraFormalFreydRationalBackend, prepareAlgebraFormalFreydRationalModelContext } from '../src/v3_2/algebra_formal_freyd_rational_model_context';
 
 const p = provenance('surface', 'whole actual formal homology', sourceSpan('tests/whole-actual-homology.ts', 1, 1));
 const fingerprint = (id: string) => createCoreProofArtifactFingerprint({
     source: { id: 'tests/' + id + '.ts', sha256: 'sha256:' + '1'.repeat(64) }, profileSha256: 'sha256:' + '2'.repeat(64)
 });
 
-const construct = async () => {
+const backend = defineAlgebraFormalFreydRationalBackend({
+    id: 'tests.retained-polynomial-freyd', revision: 'v1',
+    coefficientContract: 'Interpret the formal ring and coefficient names in the retained rational polynomial ring.',
+    modelContract: 'Supply the coherent Freyd model matching the retained choices; no closed model is derived here.',
+    normalityContract: 'Supply the normality enhancement of that same retained model.'
+});
+let retainedSelection: ReturnType<typeof selectResult> | undefined;
+const selectResult = () => {
     const sequence = polynomialFreydHomologyFixture('two');
-    const selected = algebraPolynomialFreydLongExactSnakeReferences(nativeLongExact.algebraPolynomialFreydBoundedLongExactHomology(sequence));
-    const R = kernelFree('whole_actual_R', p), x = kernelFree('whole_actual_x', p);
-    const model = kernelFree('whole_actual_model', p);
-    const normality = kernelFree('whole_actual_normality', p);
-    const coefficients = new Map<string, ReturnType<typeof kernelFree>>();
-    const reifier = defineAffineFormalPolynomialReifier({
-        algebra: algebraPresentedAlgebra(algebraPolynomialQuotientRing(algebraPolynomialIdeal(sequence.ring, []))),
-        formalRing: R, generatorTerms: [x], coefficientReifier: coefficient => {
-            const key = RATIONAL_DOMAIN.text(coefficient);
-            let term = coefficients.get(key);
-            if (!term) { term = kernelFree('whole_actual_c_' + [...key].map(c => c.codePointAt(0)!.toString(16)).join('_'), p); coefficients.set(key, term); }
-            return term;
-        }, status: 'trusted-computation'
-    });
-    const bundle = algebraFormalFreydLongExactDelegationBundle({ reifier, selected });
-    const prepared = prepareAlgebraFormalFreydLongExactHomology(bundle);
-    const rawPreparation = prepareAlgebraFormalFreydRawWitnesses(bundle);
-    const modelPreparation = prepareAlgebraFormalFreydLongExactModel(bundle);
-    const element = affineFormalRingElementType(R);
-    const environment = createFormalFreydLongExactModelProofEnvironment([
-        { name: R.name, type: affineFormalCommRingType() }, { name: x.name, type: element },
-        { name: model.name, type: algebraFormalFreydModelType(R) },
-        { name: normality.name, type: algebraFormalFreydModelNormalityType(R, model) },
-        ...[...coefficients.values()].map(term => ({ name: term.name, type: element }))
-    ]);
-    const initial = createAlgebraFormalAssumptionSource({ moduleId: 'proof.cas.whole-actual-homology',
-        sourceId: 'tests/whole-actual-homology.assumptions', baseEnvironment: environment });
+    return algebraPolynomialFreydLongExactSnakeReferences(nativeLongExact.algebraPolynomialFreydBoundedLongExactHomology(sequence));
+};
+const selectedResult = () => retainedSelection ??= selectResult();
+let preparedContext: ReturnType<typeof prepareAlgebraFormalFreydRationalModelContext> | undefined;
+const modelContext = () => preparedContext ??= prepareAlgebraFormalFreydRationalModelContext({
+    backend, selected: selectedResult(), namePrefix: 'whole_actual',
+    moduleId: 'proof.cas.whole-actual-homology', sourceId: 'tests/whole-actual-homology.assumptions'
+});
+
+const construct = async () => {
+    const setup = modelContext();
+    const { bundle, preparedHomology: prepared, preparedRaw: rawPreparation,
+        preparedModel: modelPreparation, formalModel: model, normality, environment, initialSource: initial } = setup;
     const target = bundle.realization.claimType, goalId = 'whole-actual-homology-replay';
     const run = await runAlgebraFormalWorkflow({ document: { moduleId: initial.moduleId, declarationId: goalId,
         environment, type: target, plan: coreProofPlanHole(goalId, { provenance: p, expectation: { contextDepth: 0, target } }),
@@ -135,6 +135,102 @@ const imports = 'require open emdash.emdash3_2_commutative_algebra_freyd_actual_
     'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;';
 
 describe('v3.2 whole long-exact actual formal homologies', () => {
+    it('prepares a registered rational model context without reselection or adoption', () => {
+        const selected = selectedResult();
+        const forbid = () => { throw new Error('Context preparation must retain the original computations'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(nativeWindow, 'algebraPolynomialFreydHomologyWindow', forbid),
+            mock.method(nativeLongExact, 'algebraPolynomialFreydBoundedLongExactHomology', forbid),
+            mock.method(nativeConnecting, 'algebraPolynomialFreydHomologyConnecting', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            // The prepared engine retains its implementation function values. Keep
+            // this no-execution probe separate from the later replay fixture.
+            const setup = prepareAlgebraFormalFreydRationalModelContext({ backend, selected, namePrefix: 'guarded_setup' });
+            assert.equal(setup.selected, selected);
+            assert.equal(setup.bundle.selected, selected);
+            assert.equal(setup.preparedHomology.bundle, setup.bundle);
+            assert.equal(setup.preparedRaw.bundle, setup.bundle);
+            assert.equal(setup.preparedModel.bundle, setup.bundle);
+            assert.equal(setup.initialSource.entries.length, 0);
+            assert.equal(setup.initialSource.environment, setup.environment);
+            assert.equal(setup.profile.constructsModel, false);
+            assert.equal(setup.profile.nativeWholeConnectingObservation, false);
+            assert.deepEqual(setup.suppliedInputs.map(value => value.role),
+                ['coefficient-interpretation', 'coherent-model', 'normality']);
+            assert.ok(setup.suppliedInputs.every(value => value.classification === 'supplied-input'));
+            const checker = createCoreProofChecker(setup.environment);
+            checker.check(checker.rootContext, setup.formalModel, algebraFormalFreydModelType(setup.formalRing));
+            checker.check(checker.rootContext, setup.normality, algebraFormalFreydModelNormalityType(setup.formalRing, setup.formalModel));
+            for (const term of [...setup.generatorTerms, ...setup.coefficients.map(value => value.term)]) {
+                checker.check(checker.rootContext, term, affineFormalRingElementType(setup.formalRing));
+            }
+            const names = [setup.formalRing, setup.formalModel, setup.normality,
+                ...setup.generatorTerms, ...setup.coefficients.map(value => value.term)].map(term => term.name);
+            assert.equal(new Set(names).size, names.length);
+            assert.ok(Object.isFrozen(setup) && Object.isFrozen(setup.coefficients) && Object.isFrozen(setup.backend));
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+    it('prepares registered rational model inventories identically to the retained manual interfaces', () => {
+        const setup = modelContext();
+        const coefficients = new Map(setup.coefficients.map(entry => [entry.value, entry.term]));
+        const manualReifier = defineAffineFormalPolynomialReifier({ algebra: setup.reifier.algebra,
+            formalRing: setup.formalRing, generatorTerms: setup.generatorTerms,
+            coefficientReifier: value => {
+                const term = coefficients.get(RATIONAL_DOMAIN.text(value));
+                assert.ok(term, 'The automatic context must include every manually requested coefficient');
+                return term;
+            }, status: 'trusted-computation' });
+        const manual = algebraFormalFreydLongExactDelegationBundle({ selected: setup.selected, reifier: manualReifier });
+        assert.equal(manual.equationsData, setup.bundle.equationsData);
+        assert.equal(prepareAlgebraFormalFreydLongExactHomology(manual).entriesData, setup.preparedHomology.entriesData);
+        assert.equal(prepareAlgebraFormalFreydLongExactModel(manual).inventory.data, setup.preparedModel.inventory.data);
+        const again = prepareAlgebraFormalFreydRationalModelContext({ backend, selected: setup.selected, namePrefix: 'whole_actual' });
+        assert.equal(again.bundle.equationsData, setup.bundle.equationsData);
+        assert.deepEqual(again.coefficients.map(c => [c.value, c.term.name]), setup.coefficients.map(c => [c.value, c.term.name]));
+        const another = prepareAlgebraFormalFreydRationalModelContext({ backend, selected: setup.selected, namePrefix: 'another_scope' });
+        assert.notEqual(another.formalRing.name, setup.formalRing.name);
+        assert.notEqual(another.formalModel.name, setup.formalModel.name);
+    });
+    it('rejects invalid registered rational model contexts and coefficients after sealing', () => {
+        const setup = modelContext(), base = { backend, selected: setup.selected, namePrefix: 'valid_scope' };
+        assert.throws(() => prepareAlgebraFormalFreydRationalModelContext({ ...base, backend: { ...backend } }), /issued/iu);
+        for (const namePrefix of ['', 'a/b', 'a-b', '1bad', 'a'.repeat(129)]) {
+            assert.throws(() => prepareAlgebraFormalFreydRationalModelContext({ ...base, namePrefix }), /identifier/iu);
+        }
+        assert.throws(() => defineAlgebraFormalFreydRationalBackend({ ...backend, modelContract: ' ' }), /contract/iu);
+        const selected = { ...setup.selected, result: { ...setup.selected.result,
+            sequence: { ...setup.selected.result.sequence, ring: { ...setup.selected.result.sequence.ring,
+                coefficientDomain: INTEGER_DOMAIN } } } };
+        assert.throws(() => prepareAlgebraFormalFreydRationalModelContext({ ...base, selected: selected as unknown as typeof setup.selected }), /rational polynomial/iu);
+        const before = setup.coefficients.map(c => c.term.name);
+        const unknown = algebraPolynomialConstant(setup.selected.result.sequence.ring, '987654321');
+        assert.throws(() => setup.reifier.reifyPolynomial(unknown), /not included/iu);
+        assert.deepEqual(setup.coefficients.map(c => c.term.name), before);
+        assert.equal(setup.initialSource.entries.length, 0);
+        const known = RATIONAL_DOMAIN.normalize(setup.coefficients[0].value);
+        const a = algebraPolynomialConstant(setup.selected.result.sequence.ring, known);
+        const b = algebraPolynomialConstant(setup.selected.result.sequence.ring,
+            { numerator: known.numerator * 2n, denominator: known.denominator * 2n });
+        assert.ok(kernelExpressionEquals(setup.reifier.reifyPolynomial(a), setup.reifier.reifyPolynomial(b)));
+    });
+    it('replays the retained nonsplit result from a registered rational model context without adopting claims', async () => {
+        const setup = modelContext(), goalId = 'registered-rational-model-replay';
+        const target = setup.bundle.realization.claimType;
+        const run = await runAlgebraFormalWorkflow({
+            document: { moduleId: setup.initialSource.moduleId, declarationId: goalId,
+                environment: setup.environment, type: target,
+                plan: coreProofPlanHole(goalId, { provenance: p, expectation: { contextDepth: 0, target } }),
+                provenance: p, fingerprint: fingerprint(goalId) },
+            goalId, adapter: setup.bundle.adapter, realization: setup.bundle.realization, engine: setup.bundle.engine
+        });
+        assert.equal(run.result.interpretation.kind, 'claim');
+        assert.equal(algebraFormalFreydLongExactModelInventory(setup.bundle, run.result.computed.value).data,
+            setup.preparedModel.inventory.data);
+        assert.equal(setup.initialSource.entries.length, 0);
+    });
     it('constructs all six homologies and exactness witnesses over the actual formal spine', async () => {
         const v = await consumer();
         assert.equal(v.result.native, v.adopted.adoption.result.computed.value.result);

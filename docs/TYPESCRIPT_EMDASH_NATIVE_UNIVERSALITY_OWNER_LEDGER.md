@@ -310,6 +310,41 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5A: Supported model/reifier preparation
+
+**Qualified after 69bf3577 (2026-09-14), at preparation/replay only.**
+Follow the [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+The new [rational context preparation](../src/v3_2/algebra_formal_freyd_rational_model_context.ts)
+automates coefficient names, generator/model/normality references, all
+existing inventories and the immutable environment for one retained result.
+An issued immutable registration records explicitly supplied coefficient,
+coherent-model and normality contracts. The coefficient inventory seals
+before the environment is built. Preparation does not adopt any claim,
+construct a closed model, or reselect a universal object.
+
+The existing nonsplit consumer now uses the helper. Four focused tests pass:
+no reselection/adoption during preparation, agreement with the independent
+manual preparation interfaces, deterministic and scoped names, typed model
+inputs, unsupported/forged/sealed-input rejection, and actual retained
+nonsplit replay without adoption. The test and shared fixture use their exact
+defining imports instead of the whole workbench barrel. No public barrel,
+Core checker or mathematical signature is changed.
+
+Localized TypeScript compilation and ESLint pass, together with all four
+focused runtime tests and six generated Lambdapi input-reference checks.
+The subplan records exact local evidence. The generated probe checks typed
+inputs; it does not discharge the supplied semantic contracts.
+
+The original full observation baseline hits the resource guard. A compiled
+instrumented copy locates the delay after whole adoption and before
+selected-homology adoption finishes; preparation itself is about one second.
+Explicit Node heaps, localized compilation and runtime separation keep the
+new checks within the unchanged bounds. The complete later adoption case
+remains open and must not be described as green. The existing concrete
+connecting observation still uses the older component interface; NUH-5B
+must connect it to the new whole δ and exactness owners before NUH-5 is
+complete. The subplan records these distinct remaining obligations.
+
 Terminology clarification (2026-09-14): δ is the whole internal connecting
 transformation H_C⇒H_A in Functor_cat(B,C). Its components are observations
 of that single term. “Direct” describes its construction by the original
