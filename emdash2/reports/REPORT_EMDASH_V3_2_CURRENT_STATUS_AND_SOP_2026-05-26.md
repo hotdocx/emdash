@@ -4,6 +4,18 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Raw native window update (2026-09-14): four original raw rows and their maps
+now instantiate [whole δ](../emdash3_2_commutative_algebra_freyd_raw_window_connecting.lp)
+and [all three exactness witnesses](../emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp).
+The two whole zero inputs are derived from the original raw middle-column
+agreements through whole constant-chain laws and categorical initial/terminal
+uniqueness. Row shortness and normality remain supplied native model data;
+no output exactness or additional coherence square is supplied. Constant
+diagram evaluation now computes at the existing whole owner and its
+preprojected Hom view. One guarded proof-time constant postcomposition
+comparison preserves the original functor, endpoints and arrow. Derived
+column-input comparisons and retained TypeScript observations remain next.
+
 Native input comparison (2026-09-14): the
 [ordinary zero-cone fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp)
 maps a fibre cell to an arrow with both base components identities. Existing

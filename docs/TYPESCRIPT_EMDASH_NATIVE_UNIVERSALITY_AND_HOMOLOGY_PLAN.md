@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: whole H/δ/exactness, native model, input equivalences and raw-row families qualified; full raw-window observations next; Op/duality deferred
+Status: native construction/model/input comparisons and raw four-row δ/exactness assembly qualified; derived-column and retained observations next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,20 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Current NUH-5B2b milestone (2026-09-14): four original raw rows and
+their three raw maps now instantiate the existing whole δ and all three
+native exactness witnesses. The original middle-column agreements derive
+both whole zero inputs, using constant-family action and whole categorical
+uniqueness. Native row shortness and normality remain supplied model
+contracts; no output exactness or extra coherence proof is supplied.
+Twelve definitions add no primitive. Two constant-evaluation folds close
+the existing whole/projected computation, and one guarded proof-time view
+handles constant-transformation postcomposition. Sixteen new assertions and
+five affected existing consumers pass, with no evaluation warning-body delta.
+Next compare the derived
+column inputs and migrate the retained observations under the
+[model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Current NUH-5B2a milestone (2026-09-14): the retained inverse-mate and
 direct raw inputs now have a derived categorical equivalence. Whole H acts
@@ -775,7 +789,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: preparation/native model, input equivalences and raw-row families qualified; full raw-window observations and later adoption remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
+| NUH-5 | active: preparation/model/input comparisons and raw four-row δ/exactness qualified; derived-column comparisons, retained observations and later adoption remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | queued after NUH-5; generic NUH-4 construction available | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
@@ -1146,6 +1160,7 @@ must not label those alternatives validated implementations.
 | D-NUH-068 | NUH-5A automates retained rational Freyd context preparation through an issued backend-contract registration and deterministic namespace. The original selected result feeds the existing equation, homology, raw-witness and model inventories before coefficient declarations are sealed. Model and normality remain supplied inputs; setup adopts no claim and constructs no closed model. Four focused tests, localized TypeScript compilation and ESLint, and six generated Lambdapi input-reference checks pass. The inherited later adoption case still exceeds the unchanged resource guard. NUH-5B must migrate the older component connecting observation to the actual whole δ and exactness owners; setup convenience does not discharge this obligation |
 | D-NUH-069 | NUH-5B1 supplies a native Freyd model context over original whole P/Q and separate whole Coim⇒Im normality. The one-way legacy adapter retains identical whole H, original native inputs and Hom action. Whole δ and all three fixed-comparison exactness witnesses specialize the existing generic owners with their original row-family telescope and selected inverses. Twelve definitions introduce no primitive, rewrite, unifier or earlier LP edit. Fifteen assertions pass with unchanged complete warning inventories. Literal generic additive projections avoid expanding the dependent normality comparison, and the native core omits an unnecessary ordinary-record dependency. Concrete raw-window assembly, retained TypeScript observations and later adoption remain required; no closed model or old-to-native normality theorem is inferred |
 | D-NUH-070 | NUH-5B2a derives a categorical equivalence from the retained inverse-mate input to the direct raw input at the same outgoing diagram. Existing reconstruction and ordinary diagram reflection give the whole fibre comparison; native fibre inclusion retains both base identities and the original cell. Original whole H maps the comparison and its selected inverse, without object casts or universal reselection. Raw rows/maps enter as constant parameter families with original three map components and whole agreement action. Thirteen definitions add no primitive, rewrite, unifier or earlier LP edit. Nineteen assertions and identical complete warning inventories qualify this boundary. Full four-row assembly, whole chain-zero inputs, derived column comparison and retained TypeScript observations remain required |
+| D-NUH-071 | NUH-5B2b assembles the four original raw rows and three maps into the existing whole δ and all three native exactness witnesses. Original raw middle-column agreements derive both whole zero inputs through weakening and categorical initial/terminal uniqueness; only native model normality and row shortness remain supplied contracts. Twelve definitions add no primitive. Two constant-evaluation runtime folds at the existing owner close whole/preprojected computation; one guarded Cat horizontal-action comparison is proof-time only. Sixteen assertions and five affected existing consumers pass, with no evaluation warning-body delta. Derived column-input comparison, retained TypeScript observations, later adoption and snake comparison remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -1306,10 +1321,10 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
 NUH-5A automates retained rational model preparation and replay. Continue
-NUH-5B2b under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: native
-model/δ/exactness, retained/direct input equivalences and raw-row families
-are qualified; assemble the original four-row window and whole chain-zero
-data, compare its derived column inputs, migrate retained observations, keep supplied
+NUH-5B2c under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: the raw
+four-row assembly now instantiates whole δ/exactness and derives its whole
+zero inputs. Compare its derived column inputs with the original raw inputs,
+use the retained/direct equivalences to retain H, migrate observations, keep supplied
 model semantics explicit, and qualify the later retained adoption workflow.
 Then complete NUH-6 snake/native comparison and NUH-7 final qualification.
 The earlier Op/profile experiments remain resumption history only.

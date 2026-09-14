@@ -2346,6 +2346,23 @@ Freyd agreements and fills the OneCat profile. Its three observations are
 the original next/middle/prev quotient classes. Coherent model realization
 in the actual CAS replay is still an explicit further boundary.
 
+`freyd_raw_native_window_connecting` assembles four original raw rows and
+their three raw maps into the existing whole δ. Its two raw middle-column
+agreements produce the whole zero inputs internally. `FreydRawNativeRowShortExact`
+is the original native whole P/Q predicate at the actual row, supplied as
+model structure. The three `freyd_raw_native_window_*_exact` operations
+instantiate the existing fixed-comparison exactness theorems at the same
+assembly; no output exactness witness or additional coherence field is input.
+
+Constant shape evaluation has the runtime form
+`sym_fapp0_func(const(D),i) ↪ const(D[i])`, including its preprojected Hom
+companion. Constant-transformation postcomposition is a guarded proof-time
+comparison at the canonical Cat horizontal-action head. Preserve the same
+functor in both pairs and the identity second component. This does not add
+arbitrary pointwise extensionality or claim general facade/lax normalization.
+Derived column-input and retained TypeScript observation comparisons remain
+subsequent work.
+
 `zero_arrow_cone_fibre_inclusion_func(C1,T,A,d)` is a whole inclusion of the
 existing transformation Hom into the ordinary zero-cone category. Its point
 is the original `(A,d,h)`; its arrow keeps both base identities and the fibre

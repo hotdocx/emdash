@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+NUH-5B2b (2026-09-14): the
+[raw four-row connecting constructor](../emdash3_2_commutative_algebra_freyd_raw_window_connecting.lp)
+and [three exactness constructors](../emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp)
+apply the existing native owners at original raw rows/maps. Whole zero
+inputs are derived from their raw middle-column agreements; native row
+shortness and normality remain supplied contracts. Two constant-evaluation
+folds and one guarded proof-time postcomposition view support the assembly.
+The [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+continues through derived-column comparisons and retained observations.
+
 NUH-5B2a (2026-09-14): [retained/direct native inputs](../emdash3_2_one_cat_chain_pair_input_comparisons.lp)
 now have a derived categorical equivalence through the
 [ordinary fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp).

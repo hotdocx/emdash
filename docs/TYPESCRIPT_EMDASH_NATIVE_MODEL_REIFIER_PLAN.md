@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5A/B1/B2a qualified through input equivalences and raw-row families; full raw-window observations and later adoption remain required
+Status: NUH-5B2b qualified through raw four-row δ/exactness assembly; derived-column comparisons, retained observations and later adoption remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -151,6 +151,72 @@ TypeScript observation migration and the complete retained nonsplit consumer
 are still required. None of these obligations is discharged merely by the
 row-family constructors or input equivalence.
 
+NUH-5B2b experiment (2026-09-14): derive the whole zero-composite input
+for constant raw row families through the existing weakening functor and
+whole initial/terminal-family uniqueness. Compare the native whole row
+projections with their constant raw morphisms, then apply these constructors
+to all four original rows and three original row maps. The raw matrix
+agreements must produce the two whole chain-zero inputs; no new caller
+naturality or coherence-square proof is proposed. Native row shortness and
+whole normality remain the explicitly supplied model contracts already
+recorded above.
+
+The first literal and typed-reflexivity probes do not compare the whole
+constant-family observations, although their points already compute. A
+first proof-time evaluation view fixes the immediate row projection but
+still fails under the zero's nested initial/terminal compositions. The
+accepted candidate instead adds the intended constant-diagram reduction
+at the existing whole evaluation owner, together with its preprojected Hom
+companion. Both normalization orders retain the original diagram and shape
+point. This is a computation for literal constant diagrams, not arbitrary
+pointwise extensionality.
+
+One guarded proof-time comparison remains for the canonical Cat horizontal
+action on a constant transformation. It retains both bases, the same
+functor in both pairs, the original endpoints/arrow and an identity second
+component. Its positive canonical-head query and changed-arrow/nonidentity-
+second-component controls pass. Removing this view makes the positive query
+fail. The raw row consumers supply its actual ordinary-target use. Generic
+upstream facade queries stopped at their existing represented-parent typing
+boundary; no additional facade theorem or arbitrary lax/profile claim is
+promoted. The current constant-composition presentation must be requalified
+when the deferred profile migration is integrated.
+
+An ignored source overlay checks the full evaluation owner at its intended
+position, while every other source remains a link to the current checkout.
+The two runtime folds add no warning bodies or rule-family deltas relative
+to the original owner. The four-row whole δ and all three raw exactness
+specializations check in that overlay, as do the closest existing evaluation,
+terminal-family, native connecting and model-window consumers.
+
+NUH-5B2b qualification: [constant chain-zero laws](../emdash2/emdash3_2_one_cat_constant_chain_zeros.lp)
+derive the whole zero from existing weakening and categorical initial/terminal
+uniqueness. [Whole raw-row projections](../emdash2/emdash3_2_commutative_algebra_freyd_native_row_paths.lp)
+retain all three original morphisms. The
+[middle-column zero constructor](../emdash2/emdash3_2_commutative_algebra_freyd_native_row_zeros.lp)
+then derives each actual native-window zero input from its original raw
+middle-column agreement. It retains the literal additive projections used
+by the generic window interface.
+
+[Native raw-row shortness](../emdash2/emdash3_2_commutative_algebra_freyd_native_row_short_exact.lp)
+is the existing whole P/Q predicate at that row; it remains supplied model
+structure. The [four-row connecting constructor](../emdash2/emdash3_2_commutative_algebra_freyd_raw_window_connecting.lp)
+uses the original raw rows and three raw maps, derives both whole zero
+inputs, and applies the existing whole δ. The
+[three exactness constructors](../emdash2/emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp)
+instantiate the same native fixed-comparison theorems at those identical
+inputs. No output exactness, splitting, cover or new coherence proof is
+supplied. Twelve definitions add no primitive. The only runtime changes
+are the two constant-evaluation folds in the existing evaluation owner;
+one guarded constant-transformation proof-time view is added separately.
+
+Next NUH-5B2c must compare the derived column inputs with the original raw
+homology inputs, then use the retained/direct input equivalences to preserve
+the original selected H observations. This assembly currently retains the
+native window's H endpoints; it is not yet the final retained-CAS observation
+interface. TypeScript migration, the nonsplit end-to-end consumer and later
+adoption remain required.
+
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
 `OneCatAdjunctionNormality` owners. Prefer a native model surface indexed by
@@ -171,6 +237,32 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B2b: the changed evaluation owner, seven new owners and four reviewers
+pass under the unchanged 90-second/2-GiB serial guard. Sixteen assertions
+(13 positive, three rejection controls) cover whole/projected constant
+evaluation and both reduction orders, the guarded Cat horizontal view,
+whole zero derivation, actual raw-window H endpoints, full δ Hom action,
+and all three original exactness witnesses. The five affected existing
+evaluation, terminal-family, native-connecting and model-window consumers
+also pass. No repository-wide typecheck or aggregate was run.
+
+Final owning-file logs span `175420`–`175530`; new reviewer logs are
+`diagram_constant_evaluation-20260914-175553.log`,
+`one_cat_constant_transformation_views-20260914-175558.log`,
+`one_cat_constant_chain_zeros-20260914-175623.log` and
+`freyd_raw_native_window-20260914-175651.log` under `emdash2/logs/probes/`.
+The existing-consumer checks span `175738`–`175832`. Complete owner/reviewer
+inventories match: respectively 1,150/157, 1,150/157, 1,280/169 and 1,490/169
+critical-pair/pattern reports. The original evaluation owner at `173719`
+has the same warning bodies, heads and rule families; only source location
+lines move at the two inserted rules. Exact evidence is
+`emdash2/tmp/probes/nuh5b2b_final_warning_comparison.json`.
+
+Strict affected-owner LHS audits, the check catalog and source TOC pass.
+Source-only health metrics cover 1,189 files. The source overlay and failed
+intermediate comparisons are retained under `emdash2/tmp/probes/` as
+experimental evidence; active source and this plan govern continuation.
 
 NUH-5B2a: five owners and three reviewers pass under the unchanged serial
 90-second/2-GiB guard. Nineteen assertions cover point/fibre inclusion,

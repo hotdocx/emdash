@@ -4950,6 +4950,23 @@ internally. Thus applying whole H to that actual raw map is now well typed,
 without a new square-record interface. Concrete coherent-model/CAS binding
 and complete comparison with the former induced homology map remain open.
 
+The four raw rows and three original row maps now assemble into the native
+whole window. Their two given middle-column zero agreements lift through
+the existing constant-family action and categorical initial/terminal
+uniqueness to the required whole zero inputs. Native row shortness and
+normality are the supplied model contracts; output exactness is derived.
+The assembly applies the existing whole connecting transformation and all
+three exactness theorems at the same inputs. It introduces no independent
+connecting algorithm or caller-supplied naturality square.
+
+Literal constant diagrams now evaluate to whole constant parameter functors,
+including the already-projected Hom action. This computational form lets
+the native zero's nested initial/terminal families retain their actual
+endpoints. A guarded proof-time view handles the corresponding constant
+postcomposition action. The native window's H endpoints are preserved;
+comparison of its derived column inputs with the original raw homology
+inputs remains necessary before the retained TypeScript observations migrate.
+
 The retained inverse-mate input now has a derived categorical equivalence
 to the direct raw input at the same outgoing diagram. Ordinary diagram
 reflection compares their whole J(A)⇒d transformations using the original

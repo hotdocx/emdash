@@ -310,6 +310,47 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5B2b: Four raw rows instantiate whole δ and native exactness
+
+**Qualified after 1f89653b (2026-09-14), through the raw whole-window assembly.**
+Whole constant chain-zero laws use existing weakening, its composition law
+and whole initial/terminal uniqueness. The original three raw row-map
+projections have whole comparisons with the same raw morphisms. Together
+these derive both native-window middle-column zero inputs from the original
+raw agreements. The result retains the literal generic additive projections.
+
+The new raw-row shortness alias is the existing whole P/Q predicate at the
+actual constant row. The four-row constructor applies the existing whole δ;
+three further definitions apply the same native exactness theorems at the
+same assembled inputs. Row shortness and normality remain supplied model
+contracts. No output exactness, representative, cover, splitting or additional
+coherence proof is supplied. Twelve definitions add no primitive.
+
+An initial proof-time constant-evaluation view solved the immediate row
+projection but failed under the nested zero-family parents. Its replacement
+is two runtime folds at the existing evaluation owner: whole constant
+evaluation and its preprojected Hom companion. A full source overlay checks
+their owning position and both reduction orders. The remaining guarded
+postcomposition view is proof-time only and retains the same functor and
+identity second component. Its canonical-head and actual raw-row consumers
+pass; removing the view rejects the positive query. Unchanged generic
+represented-parent facade typing is not claimed as a new qualified boundary.
+
+The changed evaluation owner, seven new owners and four reviewers pass.
+Sixteen new assertions include 13 positives and three rejection controls;
+five affected existing consumers also pass. Complete owner/reviewer warning
+inventories match (1,150/157; 1,150/157; 1,280/169; 1,490/169 critical-pair/
+pattern reports). The original evaluation owner has no warning-body, head
+or rule-family delta. The subplan records the full logs and warning JSON.
+Affected strict LHS audits, catalog and source TOC pass; source-only health
+metrics cover 1,189 files. No TypeScript implementation changed.
+
+Next NUH-5B2c compares the derived column inputs with the original raw
+homology inputs, then retains the original H through the proved categorical
+input equivalences. Native raw-window H endpoints are already retained;
+the final retained-CAS observation interface, TypeScript migration, nonsplit
+end-to-end consumer, later adoption and snake comparison remain required.
+
 ### NUH-5B2a: Retained/direct input equivalence and native raw-row families
 
 **Qualified after c10b82d3 (2026-09-14), through input comparison and raw rows.**

@@ -60,12 +60,21 @@ rule @sym_fapp0_func _ $I $C
       (@comp_fapp0 Cat_cat $A $B _ $D $F) $i
   ↪ @comp_cat_fapp0 $A $B $C (@sym_fapp0_func $B $I $C $D $i) $F;
 
+// Constant diagrams evaluate to an actual constant parameter functor.
+// Keep the whole functor as owner, with the original diagram and shape point.
+rule @sym_fapp0_func $K $I $C (@Const_func _ _ $D) $i
+  ↪ @Const_func $K $C (@fapp0 $I $C $D $i);
+
 // The same evaluation fold after its Hom projection has already occurred.
 // A measured preprojected consumer otherwise retains a different whole head.
 rule @sym_fapp0_fapp1_func _ $I $C
       (@comp_fapp0 Cat_cat $A $B _ $D $F) $i $x $y
   ↪ @fapp1_func $A $C
       (@comp_cat_fapp0 $A $B $C (@sym_fapp0_func $B $I $C $D $i) $F) $x $y;
+
+// Companion after projection to Hom: reuse the original constant-functor action.
+rule @sym_fapp0_fapp1_func $K $I $C (@Const_func _ _ $D) $i $x $y
+  ↪ @fapp1_func $K $C (@Const_func $K $C (@fapp0 $I $C $D $i)) $x $y;
 
 // Proof-time whole evaluation comparison; retain both runtime owners.
 unif_rule
