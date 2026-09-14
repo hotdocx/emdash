@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3b whole negation/subtraction qualified; whole additive laws and cover/δ next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,30 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6c3a prerequisite (2026-09-14): [whole copairing](../emdash2/emdash3_2_one_cat_copair_families.lp)
+Current C6c3b milestone (2026-09-14): [whole negation](../emdash2/emdash3_2_one_cat_negative_families.lp)
+and [whole subtraction](../emdash2/emdash3_2_one_cat_difference_families.lp)
+are constructed, with their original additive component observations and
+whole signed composition laws. The native shear S(x,y)=(x,x+y) is built
+from whole product pairing/addition; original scalar inverse proofs feed
+the existing fixed-forward pointwise-to-whole ΩAlong operation. Its whole
+inverse supplies −id, which is then restricted and composed through the
+existing generic action. The programs require no caller naturality squares.
+
+All 41 new operations are definitions. No primitive, runtime rule, unifier,
+new universal choice or earlier LP edit is added. Native inverse pairing
+supplies the projections; its component readback follows from Sigma
+elimination and the forward mate's existing inverse cut. Existing
+Product_map_func supplies the signed input map for subtraction, retaining addition's native
+intermediate Hom. The original fixed-forward inverse remains visible at
+components, with both whole inverse laws proved.
+
+Next C6c3c derives additive cancellation and bilinearity as whole equations,
+then the cover stability/epicity and θκ_ρ=0 proofs needed for δ descent.
+Point readbacks alone are not a whole PreadditiveCategory(Functor_cat(B,C))
+or a cover theorem. Output exactness, concrete model/reifier construction
+and snake comparison remain required.
+
+Completed C6c3a prerequisite (2026-09-14): [whole copairing](../emdash2/emdash3_2_one_cat_copair_families.lp)
 and [whole addition](../emdash2/emdash3_2_one_cat_additive_families.lp)
 now use native mates at the same original product functor. Both copairing
 inverse cuts compute as whole functors, with retained arrow and next Hom
@@ -36,9 +59,10 @@ is one explicit structural/model primitive with two coupling rules. Its
 whole unit uses injections already derived from Δ⊣Prod; counit components
 are the original codiagonal. This is not a theorem assembled from today's
 opaque Adjunction classifier. Sixteen further operations are definitions;
-no new unification rule or earlier LP edit is introduced. Signed operations,
-the needed whole additive laws and cover stability remain next, before
-ρ epicity, θκ_ρ=0 and δ descent. Details and validation are in the owner ledger.
+no new unification rule or earlier LP edit is introduced. C6c3b above now
+supplies signed operations; the remaining whole additive laws and cover
+stability precede ρ epicity, θκ_ρ=0 and δ descent. Details and validation
+are in the owner ledger.
 
 Completed C6c2 milestone (2026-09-14): the
 [native four-row assembly](../emdash2/emdash3_2_one_cat_native_homology_window_maps.lp)
@@ -67,8 +91,9 @@ unchanged-dependency warning inventories.
 Next C6c3 proves epicity of the cover and θ's annihilation on its actual
 kernel before native coimage/cokernel descent defines δ. Audit and construct
 any required whole additive/normality operations explicitly. C6c3a now
-supplies varying-family copairing/addition; signed operations, their whole
-laws and a general coherent PullbackStructure are not silently supplied.
+supplies varying-family copairing/addition and C6c3b supplies signed
+operations. Further whole additive laws and a general coherent
+PullbackStructure are not silently supplied.
 Derived output exactness, concrete model/reifier construction and snake
 comparison remain required.
 
@@ -487,7 +512,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: native window and ρ/θ qualified; cover epicity/annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-4 | active: native window, ρ/θ and whole signed operations qualified; whole additive laws, cover epicity/annihilation, δ and output exactness next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
@@ -845,6 +870,7 @@ must not label those alternatives validated implementations.
 | D-NUH-054 | C6c1 derives the original cokernel observer Λ_D(v)=v∘q_D, ambient descent reconstruction and quotient equality reflection. Original β/γ reconstruction and fixed-forward inverse evidence give whole incoming/outgoing row cancellation. The canonical map ρ=q_H∘r uses the same H and pullback family; only q_H cancellation is proved here. All 19 operations are definitions, with no new primitive/rule. Native window assembly, r/ρ epicity, θ and δ remain required; no ordinary universal dictionary or assumed cover property is introduced |
 | D-NUH-055 | C6c2 derives whole native row squares, the other column-zero laws, original incoming recovery, row lifting and θ, then assembles ρ/θ from the same four-row inputs at the same literal pullback source and original H endpoints. The two middle-chain zero laws remain whole mathematical input; no caller naturality squares or new window carrier are introduced. Two proof-time views handle accumulated evaluation and native/raw composed parents while retaining every operand and runtime owner. All 42 operations are definitions. Cover epicity, θ-on-kernel annihilation and δ descent still require proof; missing whole additive/normality operations must be resolved explicitly |
 | D-NUH-056 | C6c3a adds ordinary Prod⊣Δ at the original product as one explicit structural/model primitive, with whole derived injections as unit and the original codiagonal as counit components. Native inverse mates construct whole copairing; precomposition with the original product-family diagonal constructs whole addition. Both inverse functor cuts and higher action compute, and component copair/sum agreements are derived. Sixteen definitions and two coupling rules add no unifier or earlier LP edit. The opaque Adjunction assembly is an explicit model obligation; signed laws, cover stability, epicity, annihilation and δ are not supplied by this prerequisite |
+| D-NUH-057 | C6c3b constructs native whole shear before proving its components invertible. Existing fixed-forward pointwise-to-whole ΩAlong assembly yields its whole inverse, retaining the concrete scalar inverse in both component evidence slots. Extract −id using native projections/injection, then generic restriction and postcomposition construct whole negation; Product_map_func supplies subtraction's signed input. Whole signed composition laws use inherited naturality. All 41 operations are definitions, with no new primitive/rule/unifier or earlier LP edit. Native unpair component readback uses Sigma elimination plus the forward mate cut, avoiding raw-projection casts and metadata folds. Whole additive cancellation/bilinearity and cover stability remain required; point readbacks do not supply them |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

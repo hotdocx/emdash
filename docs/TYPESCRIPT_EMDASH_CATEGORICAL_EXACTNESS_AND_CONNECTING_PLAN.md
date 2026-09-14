@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3b whole negation/subtraction qualified; whole additive laws and cover/δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -381,9 +381,10 @@ rows and Abelian normality. Check which whole additive and further cover
 operations this proof actually needs; construct them before use. C6a's
 product-family pairing is available; C6c3a below supplies whole copairing
 and addition. Signed whole laws and general coherent PullbackStructure
-are not assumed merely from the previous kernel-square proof. Then apply the original coimage/cokernel descent for
-δ and prove its reconstruction. Output exactness, concrete model/reifier
-construction and snake comparison remain required.
+are not assumed merely from the previous kernel-square proof. Then apply
+the original coimage/cokernel descent for δ and prove its reconstruction.
+Output exactness, concrete model/reifier construction and snake comparison
+remain required.
 
 C6c3a now supplies [whole copairing](../emdash2/emdash3_2_one_cat_copair_families.lp)
 and [whole addition](../emdash2/emdash3_2_one_cat_additive_families.lp).
@@ -401,11 +402,28 @@ laws. This model obligation and its two runtime coupling rules are explicit;
 the other 16 operations are definitions, with no new unifier or earlier LP
 edit. The owner ledger records qualification and the native-parent staging.
 
-Next C6c3b constructs the signed operations and whole laws required for
-pullback stability. Neither a whole additive structure on Functor_cat(B,C)
-nor cover epicity follows merely from the component observations. Prove
-r/ρ epicity and θκ_ρ=0 before using original coimage/cokernel descent for δ;
-output exactness and concrete model obligations remain open.
+C6c3b now [constructs the whole shear and its inverse](../emdash2/emdash3_2_one_cat_shear_families.lp),
+then [whole negation](../emdash2/emdash3_2_one_cat_negative_families.lp) and
+[subtraction](../emdash2/emdash3_2_one_cat_difference_families.lp). The whole
+S(x,y)=(x,x+y) is formed before its scalar inverse is proved. Existing
+fixed-forward pointwise-to-whole ΩAlong assembly then gives S⁻¹, preserving
+the literal original scalar inverse. Extract −id=(π₂∘S⁻¹)∘ι₁ and restrict
+that universal transfor through generic whiskering/postcomposition.
+Whole naturality proves both signed composition laws. Product_map_func
+constructs subtraction's signed input at addition's native Hom endpoint.
+
+All 41 operations are definitions, with no new primitive, rewrite, unifier,
+product selection, caller naturality square or Q argument. Native
+unpair(id) supplies whole projections; Sigma elimination and the forward
+mate cut derive their original component readbacks. No raw projection or
+counit metadata fold is needed. The owner ledger records the resolved
+experiments and final qualification.
+
+Next C6c3c derives whole additive cancellation and bilinearity, then proves
+cover stability, r/ρ epicity and θκ_ρ=0 before original coimage/cokernel
+descent for δ. Neither the complete whole additive structure nor cover
+stability follows merely from the component observations. Output exactness
+and concrete model obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

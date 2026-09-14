@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3a whole copairing/addition qualified; cover epicity/annihilation and δ next; Op/duality deferred
+Status: C6c3b whole negation/subtraction qualified; whole additive laws and cover/δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,114 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c3b: Whole shear inverse, negation and subtraction
+
+**Implemented after e3e9fdea (2026-09-14).** Negation and subtraction are
+now actual internal Hom functors. The construction adds 41 definitions,
+seven LP owners and three reviewers, with no primitive, runtime rule,
+unifier, new product/zero choice or edit to an earlier LP source.
+
+**Whole construction and its semantic boundary.**
+
+1. [Native product inverse components](../emdash2/emdash3_2_one_cat_product_family_inverse_components.lp)
+   are derived by Sigma elimination on the input of the existing whole
+   pairing functor. Instantiate at unpair(h); its native forward/inverse
+   cut recovers the same arbitrary h. Original projection β then reads
+   both components. No new Sigma η or projection-composition fold is needed.
+2. [Scalar shear arithmetic](../emdash2/emdash3_2_additive_shears.lp)
+   proves both inverses for S(x,y)=(x,x+y) and S⁻¹(x,y)=(x,−x+y) from the
+   original additive/product laws. These are component inverse proofs,
+   not an assembly of pointwise naturality squares.
+3. [The whole shear](../emdash2/emdash3_2_one_cat_shear_families.lp)
+   is constructed first, using projections selected by native unpair(id)
+   and the existing whole pairing/addition. Its actual component agrees
+   with the original scalar S. Fixed-forward ΩAlong evidence keeps the
+   literal scalar inverse in both inverse slots and compares the forward
+   arrow in the two law proofs. This preserves component computation;
+   transporting an opaque evidence package is unnecessary.
+4. The existing `strict_transf_pointwise_omega_along` operation constructs
+   the whole inverse of that already formed S. The ordinary C1 scope is
+   explicit. Both whole inverse laws hold for the same selected left
+   inverse, using the existing inverse-candidate comparison for the right
+   law. This consumes an existing generic assembly interface and adds no
+   new primitive or caller naturality field.
+5. [The original zero component](../emdash2/emdash3_2_preadditive_zero_family_components.lp)
+   is read through the existing terminal/initial factorization. Together
+   with product pairing it gives the whole ι₁=(id,0).
+   [Whole negative identity](../emdash2/emdash3_2_one_cat_negative_identity.lp)
+   is (π₂∘S⁻¹)∘ι₁. Its component is proved to be the original −id. Fix this
+   once on id_C; later restrictions use generic prewhiskering.
+6. [Whole negation](../emdash2/emdash3_2_one_cat_negative_families.lp)
+   restricts that one transfor and applies the native Hom-postcomposition
+   functor. Existing whole naturality proves centrality and both
+   −(g∘f)=(−g)∘f and −(g∘f)=g∘(−f). Component proofs observe original
+   Hom negation and are not input to the whole program.
+7. [Whole subtraction](../emdash2/emdash3_2_one_cat_difference_families.lp)
+   composes the existing Product_map_func(id,Neg) with native addition.
+   Its point is f+(−g), and its component is the original scalar
+   difference. The source product and addition's literal native
+   intermediate Hom are both retained; all higher action comes from
+   existing internal functor composition.
+
+**Resolved experiments.** Raw π∘(X,X) and projected raw counit routes
+stopped at source-family comparisons. Native unpair(id) supplies the
+projection without those comparisons. Reading it through the forward
+mate cut avoids premature counit expansion. A manually written pair of
+projection composites for the signed input similarly obscured the native
+middle; existing Product_map_func and the correct native middle recover
+its computation. None of these failures requires a new rewrite/unifier,
+object cast or alternate product. Failed probes remain ignored recovery
+evidence, not active theory.
+
+**Qualification (2026-09-14).** All seven final owners and three reviewers
+pass serial warning-enabled checks under the 90s/2GiB guard. The reviewers
+contain 25 assertions: 20 positive and five negative. They cover scalar and
+whole shear inverse laws at the same selected inverse, its computational
+component, arbitrary base-arrow and next Hom action, native inverse-pair
+component recovery, whole centrality and both signed composition laws,
+negation/subtraction higher action, original component subtraction and
+unrelated-input rejection. The combined retained addition/copairing/native
+homology-window reviewer also passes.
+
+Final owner log timestamps under `emdash2/logs/probes/` are
+`022445`, `022450`, `022456`, `022506`, `022513`, `022521`, `022530`.
+Reviewer logs are `one_cat_shear_families-20260914-022538.log`,
+`one_cat_product_family_inverse_components-20260914-022546.log` and
+`one_cat_negative_families-20260914-022552.log`. Retained consumers are
+`nuh4c6c3b_retained_consumers-20260914-022603.log`.
+
+Exact warning inventories match in categories, locations, term heads,
+rule families and parser diagnostics. Counts (critical pairs / replaceable
+patterns) are 1,246/169 for scalar shear, 1,214/167 for product inverse
+components, 1,280/169 for zero components, 1,307/169 for whole shear and
+signed owners/reviewers, and 1,482/169 for the retained join. Baselines must
+preserve the source's first dependency-load order: an initially sorted
+import list changed inherited diagnostic locations and two counts despite
+containing the same dependencies. Matching ordered baselines resolve that
+control issue without editing any LP source or suppressing warnings.
+Source hashes, log paths and exact comparisons are in ignored
+`tmp/probes/nuh4c6c3b_warning_comparison.json`; the ordered dependency map
+is `tmp/probes/nuh4c6c3b_baseline_mapping.json`.
+
+The rule/unification surface is unchanged. The central catalog is current,
+source-only health now covers 1,063 registered files, report/reference
+lint passes, and the exact diff/added local links are checked. No aggregate,
+repository-wide or TypeScript typecheck was run.
+
+**Next C6c3c.** Derive whole additive cancellation/bilinearity and the
+specific identities needed by cover stability. The whole shear inverse
+laws provide a concrete start: at B=C and X=id_C, restrict S∘S⁻¹=id
+along ι₁ and observe its two native product coordinates to derive the
+additive inverse law for the universal negative identity. Prove the needed
+reindexing/operation comparisons before using that law for the restricted
+N_X; do not identify it silently with a newly assembled inverse shear over X. Qualify those operations through whole mates, not by assuming
+pointwise equality implies a whole law. Then prove r/ρ epicity and
+θκ_ρ=0, perform original coimage/cokernel descent for δ, and prove output
+exactness. No whole PreadditiveCategory(Functor_cat(B,C)), general
+PullbackStructure or cover property is inferred merely from component
+readbacks. The existing structural/model obligations, model/reifier and
+snake work remain open; Op/profile integration stays deferred.
+
 ### NUH-4C6c3a: Whole copairing and addition at the original product
 
 **Implemented after aa67d2e1 (2026-09-14).** This is the arithmetic
@@ -391,7 +499,7 @@ The central check catalog remains current; source-only health now lists
 1,053 registered files. Report/reference lint and exact diff hygiene pass.
 No aggregate, repository-wide or TypeScript typecheck was run.
 
-**Next C6c3b.** Construct the signed operations and whole laws actually
+**Then-next C6c3b, now implemented above.** Construct the signed operations and whole laws actually
 needed for cover stability from these native operations and the original
 additive data. Then prove r/ρ epicity and θκ_ρ=0 and use original Q/coimage
 descent for δ. Do not infer a whole PreadditiveCategory(Functor_cat(B,C)),

@@ -282,6 +282,20 @@ or unification rule changes. The opaque adjunction assembly remains a
 concrete model obligation. Signed whole laws, cover epicity/annihilation,
 δ and output exactness remain required.
 
+C6c3b now [constructs whole negation](../emdash3_2_one_cat_negative_families.lp)
+and [subtraction](../emdash3_2_one_cat_difference_families.lp) with no new
+primitive or rule. Native pairing/addition form the whole shear; original
+scalar inverse proofs feed the existing fixed-forward pointwise-to-whole
+ΩAlong assembly. Its whole inverse supplies −id, whose generic restriction
+and postcomposition give native negation. Existing Product_map_func and
+addition give subtraction at the native intermediate Hom. Whole naturality
+proves both signed composition laws. Native unpair(id) supplies projections;
+Sigma elimination and the forward mate cut derive their original component
+observations. Forty-one definitions and 25 reviewer assertions add no
+unifier, object cast or earlier LP edit. Whole additive cancellation and
+bilinearity, cover stability/epicity, annihilation, δ and output exactness
+remain required. Existing structural/model obligations remain unchanged.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

@@ -2095,6 +2095,24 @@ to whole f/g. The `*_formula_path` and `*_component_path` operations are
 derived observations. Component paths are not inputs to those programs,
 and signed whole laws/cover stability are not asserted by these aliases.
 
+`one_cat_product_family_unpair1_component_path` / `unpair2_component_path`
+read the native inverse through forward-mate computation and Sigma
+elimination. `one_cat_double_family_proj1` / `proj2` use native unpair(id).
+`one_cat_shear_family` is the whole ⟨π₁,π₁+π₂⟩. Its `*_omega` evidence
+comes from the existing strict pointwise-to-whole ΩAlong operation, after
+constructing actual component inverses; `*_inverse` selects that same
+whole inverse, with original component computation and both whole laws.
+
+`one_cat_negative_identity_transf` extracts −id from this inverse shear.
+`one_cat_negative_family_transf` restricts that one universal transfor;
+`one_cat_negative_family_func` / `one_cat_negative_family` retain native
+Hom-postcomposition as runtime owner. The formula/component paths and
+whole centrality/signed composition laws are derived observations.
+`one_cat_difference_family_func` composes Product_map_func(id,Neg) with
+addition at its native intermediate Hom; its point is f+(−g). None of
+these names is a new primitive, unifier or runtime rule. Whole additive
+cancellation/bilinearity and cover stability remain further proofs.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

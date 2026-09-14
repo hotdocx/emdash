@@ -4657,6 +4657,33 @@ initial structure. No whole signed structure or pullback stability theorem
 is inferred merely from the component readback; those laws remain the
 next prerequisite for epicity and descent.
 
+Whole negation and subtraction are now constructed. At the original double
+product of X:B→C, form the whole shear
+
+```text
+S = ⟨π₁, π₁+π₂⟩,
+S⁻¹ = ⟨π₁, −π₁+π₂⟩  at components,
+N_X = (π₂∘S⁻¹)∘ι₁.
+```
+
+The first line is a whole categorical program. Original additive laws prove
+both scalar inverse equations in the second line. Existing fixed-forward
+pointwise-to-whole ΩAlong assembly inverts that already constructed whole
+S; it requires no separate pointwise naturality. Its selected inverse
+components remain the literal original scalar inverse. Native unpair(id)
+supplies the whole projections. Their scalar observations follow from
+Sigma elimination and forward/inverse mate computation, without rewriting
+raw projected compositions.
+
+N_X has component −id. Fix it once on id_C, then restrict it along every
+family using generic action. Native postcomposition gives Neg(f)=N_Y∘f.
+Whole naturality proves f∘N_X=N_Y∘f and hence
+−(g∘f)=(−g)∘f=g∘(−f). Product_map_func(id,Neg), followed by the original
+whole addition, gives the internal subtraction functor. Component
+observations recover the original f−g. No new primitive or rule is used.
+Whole additive cancellation/bilinearity and cover stability still require
+proof; these component observations do not establish them by themselves.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

@@ -143,6 +143,15 @@ are checked. Sixteen definitions, one primitive and two coupling rules add
 no unifier or earlier LP edit; three reviewers contain 26 assertions.
 Signed whole laws and cover stability precede epicity, annihilation and δ.
 
+C6c3b now adds [whole negation](../emdash3_2_one_cat_negative_families.lp)
+and [subtraction](../emdash3_2_one_cat_difference_families.lp), derived from
+the inverse of the native whole shear. Existing fixed-forward ΩAlong
+assembly uses proved component inverses; whole naturality gives the signed
+composition laws. Native product inverse observations preserve original
+selections. Forty-one definitions and 25 assertions add no primitive,
+rewrite, unifier or earlier LP edit. Whole additive cancellation/bilinearity,
+cover stability/epicity, annihilation and δ remain next.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an
