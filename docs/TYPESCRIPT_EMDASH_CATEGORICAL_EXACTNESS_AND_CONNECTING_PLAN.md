@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c3b whole negation/subtraction qualified; whole additive laws and cover/δ next; Op/duality deferred
+Status: C6c3c1 whole bilinearity qualified; additive cancellation and cover/δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -419,11 +419,26 @@ mate cut derive their original component readbacks. No raw projection or
 counit metadata fold is needed. The owner ledger records the resolved
 experiments and final qualification.
 
-Next C6c3c derives whole additive cancellation and bilinearity, then proves
-cover stability, r/ρ epicity and θκ_ρ=0 before original coimage/cokernel
-descent for δ. Neither the complete whole additive structure nor cover
-stability follows merely from the component observations. Output exactness
-and concrete model obligations remain open.
+C6c3c1 now proves [whole addition bilinearity](../emdash2/emdash3_2_one_cat_additive_family_bilinearity.lp)
+and [whole subtraction bilinearity](../emdash2/emdash3_2_one_cat_difference_family_bilinearity.lp)
+on both sides of composition. Original native mate naturality gives whole
+product projection β, pair/copair distribution and diagonal naturality at
+the same selected product-family endpoints. No pointwise equality assembly
+or whole additive-functor-category capability is supplied.
+
+Thirty-one definitions and five proof-time comparisons add no primitive,
+runtime rule or earlier LP edit. Native diagonal Hom action and identity
+application, native projected composition, and unchanged whole composites
+under endpoint presentations are the qualified comparison boundaries.
+Both actual arrows are repeated in the composite view; existing
+associativity remains available. Literal native Sigma parameters matter
+inside observations. General Sigma β/η experiments are not promoted.
+The owner ledger records the consumers, controls and warning evidence.
+
+Next C6c3c2 proves the whole zero/cancellation laws from the shear inverse
+and these projection/bilinearity laws. Then prove cover stability, r/ρ
+epicity and θκ_ρ=0 before original coimage/cokernel descent for δ.
+Output exactness and concrete model obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

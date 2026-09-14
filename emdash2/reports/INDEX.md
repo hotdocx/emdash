@@ -152,6 +152,15 @@ selections. Forty-one definitions and 25 assertions add no primitive,
 rewrite, unifier or earlier LP edit. Whole additive cancellation/bilinearity,
 cover stability/epicity, annihilation and δ remain next.
 
+C6c3c1 now proves [whole addition](../emdash3_2_one_cat_additive_family_bilinearity.lp)
+and [subtraction](../emdash3_2_one_cat_difference_family_bilinearity.lp)
+bilinearity. Whole product/coproduct distribution and projection β come
+from the original native mates. Product-map action and diagonal naturality
+retain the original selected product families. Thirty-one definitions and
+five proof-time views add no primitive/runtime rule or earlier LP edit.
+Whole zero/cancellation laws, cover stability/epicity, annihilation and δ
+remain next; no complete additive functor-category capability is inferred.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

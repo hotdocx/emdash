@@ -2113,6 +2113,24 @@ addition at its native intermediate Hom; its point is f+(−g). None of
 these names is a new primitive, unifier or runtime rule. Whole additive
 cancellation/bilinearity and cover stability remain further proofs.
 
+`one_cat_product_family_proj1` / `proj2` are the original native unpair(id)
+coordinates. Their `*_unpair1_path` / `*_unpair2_path` observations express
+composition with the same whole projection; `*_pair_proj1_path` /
+`*_pair_proj2_path` recover the original whole pairing arguments.
+`product_family_map_func` and `product_family_map` expose original
+postcomposition Hom action without an additional universal-property input.
+
+`one_cat_product_pair_precompose_path`, `one_cat_product_pair_target_path`,
+`one_cat_copair_postcompose_path` and `one_cat_copair_source_path` are
+whole native mate distribution laws. `one_cat_product_diagonal_naturality_path`
+stays at the original product-family endpoints. The
+`one_cat_additive_family_precompose_path` / `postcompose_path` and
+`one_cat_difference_family_precompose_path` / `postcompose_path` operations
+prove both whole bilinearity laws. Five proof-time comparisons retain the
+complete diagonal Hom owner, identity input/classifiers, native projection
+factors and unchanged composite operands. No runtime rewrite, object cast,
+primitive additive capability or pointwise naturality assembly is added.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

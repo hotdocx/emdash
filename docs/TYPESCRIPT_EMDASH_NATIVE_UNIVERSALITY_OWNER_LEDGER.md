@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3b whole negation/subtraction qualified; whole additive laws and cover/δ next; Op/duality deferred
+Status: C6c3c1 whole bilinearity qualified; additive cancellation and cover/δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,120 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c3c1: Whole bilinearity through native mate distribution
+
+**Implemented after e2fb6740 (2026-09-14).** Both composition laws for
+whole addition and subtraction are proved at the original functors:
+
+```text
+h∘(f+g) = h∘f + h∘g,       (f+g)∘h = f∘h + g∘h,
+h∘(f−g) = h∘f − h∘g,       (f−g)∘h = f∘h − g∘h.
+```
+
+These proofs use whole mates and existing whole naturality. No caller
+component square, pointwise equality assembly, new selected product or
+whole PreadditiveCategory capability is introduced. The tranche adds 31
+definitions and five unifiers across nine owners, with no primitive,
+runtime rule or edit to an earlier LP owner.
+
+**Owners and construction.**
+
+- [Product composition paths](../emdash2/emdash3_2_product_composition_paths.lp)
+  derive coordinate composition from existing generic projection-functor
+  action, including opaque product objects.
+- [Product-family action views](../emdash2/emdash3_2_product_family_action_views.lp)
+  compare native diagonal Hom action with the duplicating Hom functor;
+  identity application checks the original source/target Transf classifiers
+  and input. Two native projected-composition comparisons retain both
+  original factors and all category parameters. The final view compares
+  endpoint presentations of the same whole composite, with both arrow
+  operands repeated literally. It cannot select different factors in
+  place of the existing associativity computation. Three derived paths
+  expose complete diagonal Hom action and its two native coordinates.
+- [Ordinary transpose paths](../emdash2/emdash3_2_one_cat_adjunction_transpose_paths.lp)
+  give the forward-mate counterparts of existing inverse-mate naturality.
+  The original unit and whole action supply the laws; ordinary R1/L1
+  profiles remain explicit.
+- [Native tuple paths](../emdash2/emdash3_2_product_family_tuple_paths.lp)
+  preserve complete tuples and their original arrows under diagonal and
+  paired composition. Literal native Sigma parameters are retained before
+  specializing components to identities.
+- [Whole product projections](../emdash2/emdash3_2_one_cat_product_family_projection_paths.lp)
+  use the original native unpair(id). Inverse-mate naturality proves
+  unpair(h)ᵢ=πᵢ∘h, then native inverse cuts prove πᵢ∘pair(f,g)=f/g as whole
+  equations.
+- [Product-family maps](../emdash2/emdash3_2_product_family_maps.lp)
+  are the original postcomposition Hom action and its native point. No
+  C1 or BinaryProducts argument is required merely to construct this map.
+- [Whole biproduct distribution](../emdash2/emdash3_2_one_cat_biproduct_family_distribution.lp)
+  derives pair precomposition, pair target action, copair postcomposition
+  and copair source action. Two input-presentation paths keep the original
+  f/g while naming their literal native Hom inside the mate application.
+- [Whole addition bilinearity](../emdash2/emdash3_2_one_cat_additive_family_bilinearity.lp)
+  combines those laws with the original diagonal pairing. Its naturality
+  is proved at the original P(W,W)/P(X,X), rather than replacing the
+  selected product-family endpoints by a new object presentation.
+  [Subtraction bilinearity](../emdash2/emdash3_2_one_cat_difference_family_bilinearity.lp)
+  then follows from existing whole negation composition laws and the same
+  addition operation.
+
+**Resolved comparison boundary.** The initial proofs stopped at native
+versus public inferred parameters inside Sigma projections and whole
+composites. The selected solution keeps literal native Sigma annotations
+and uses sufficient proof-time comparisons at the complete Hom-action and
+composition owners. The unchanged-composite comparison repeats both
+operands; it is not an injectivity assertion for composition. Independent
+Sigma β-view and Sigma η-representation experiments were unnecessary:
+the complete product projection and tuple consumers pass with those views
+removed (`nuh4c6c3c_beta_ablation-20260914-034607.log`). They remain ignored
+historical probes and are not imported by any promoted owner. No runtime
+diagonal fold or broad Sigma rewrite is introduced.
+
+**Qualification (2026-09-14).** All nine final owners and three reviewers
+pass serial warning-enabled guarded checks, each bounded to 90s. The
+reviewers contain 28 assertions: 22 positive and six negative. They cover
+complete diagonal Hom action and native coordinates, arbitrary base-arrow
+and next Hom observations, both native projection factors, identity input
+preservation, unchanged-composite endpoint comparison, retained generic
+associativity, product projection β, all four mate distribution directions,
+product-map Hom action, and all four bilinearity laws. Changed factors,
+inputs and unrelated endofunctors are rejected. The retained arithmetic
+and kernel-pullback/native-window joins both pass.
+
+Final owner log timestamps under `emdash2/logs/probes/` are
+`040733`, `040737`, `040742`, `040747`, `040753`, `040759`, `040806`,
+`040815`, `040823`. Final reviewer logs are
+`product_family_action_views-20260914-041157.log`,
+`one_cat_biproduct_family_distribution-20260914-041435.log` and
+`one_cat_additive_family_bilinearity-20260914-041214.log`.
+Retained joins are `nuh4c6c3c_retained_arithmetic-20260914-041443.log`
+and `nuh4c6c3c_retained_homology-20260914-041452.log`.
+
+Every warning inventory matches the unchanged dependency load order in
+categories, locations, term heads, rule families and parser diagnostics.
+Counts (critical pairs / replaceable patterns) are 1,146/157 for the
+generic product/action/tuple/map owners, 1,151/157 for transpose paths,
+1,214/167 for whole product projection paths, 1,278/169 for distribution
+and addition bilinearity, 1,307/169 for subtraction and retained arithmetic,
+and 1,482/169 for the retained homology join. Exact comparisons and checked
+source hashes are in ignored `tmp/probes/nuh4c6c3c_warning_comparison.json`;
+the dependency map is `tmp/probes/nuh4c6c3c_baseline_mapping.json`.
+
+The strict LHS audit passes. The central catalog is current; source-only
+health covers 1,075 registered files. Report/reference lint, shell syntax,
+exact diff hygiene and added local links are checked. No aggregate,
+repository-wide or TypeScript typecheck was run.
+
+**Next C6c3c2.** Prove the whole zero/additive-inverse laws needed for
+cancellation, then use them in cover stability. At B=C, X=id_C, let
+u=S⁻¹∘ι₁. The existing S∘S⁻¹=id and new projection β laws give
+π₁u=id and (π₁+π₂)u=0. Whole precomposition bilinearity identifies the
+latter with id+N. Retain the original universal N and prove any required
+reindexing comparisons before using the corresponding restricted-family
+law. Then prove r/ρ epicity, θκ_ρ=0, original coimage/cokernel descent for δ
+and output exactness. Concrete model/reifier and snake comparison work
+remain required; Op/profile integration stays deferred.
+
 ### NUH-4C6c3b: Whole shear inverse, negation and subtraction
 
 **Implemented after e3e9fdea (2026-09-14).** Negation and subtraction are
@@ -404,13 +518,14 @@ source-only health now covers 1,063 registered files, report/reference
 lint passes, and the exact diff/added local links are checked. No aggregate,
 repository-wide or TypeScript typecheck was run.
 
-**Next C6c3c.** Derive whole additive cancellation/bilinearity and the
+**Then-next C6c3c, bilinearity now implemented above.** Derive whole additive cancellation/bilinearity and the
 specific identities needed by cover stability. The whole shear inverse
 laws provide a concrete start: at B=C and X=id_C, restrict S∘S⁻¹=id
 along ι₁ and observe its two native product coordinates to derive the
 additive inverse law for the universal negative identity. Prove the needed
 reindexing/operation comparisons before using that law for the restricted
-N_X; do not identify it silently with a newly assembled inverse shear over X. Qualify those operations through whole mates, not by assuming
+N_X; do not identify it silently with a newly assembled inverse shear over X.
+Qualify those operations through whole mates, not by assuming
 pointwise equality implies a whole law. Then prove r/ρ epicity and
 θκ_ρ=0, perform original coimage/cokernel descent for δ, and prove output
 exactness. No whole PreadditiveCategory(Functor_cat(B,C)), general

@@ -296,6 +296,20 @@ unifier, object cast or earlier LP edit. Whole additive cancellation and
 bilinearity, cover stability/epicity, annihilation, δ and output exactness
 remain required. Existing structural/model obligations remain unchanged.
 
+C6c3c1 now proves [whole addition bilinearity](../emdash3_2_one_cat_additive_family_bilinearity.lp)
+and [whole subtraction bilinearity](../emdash3_2_one_cat_difference_family_bilinearity.lp)
+on both sides of composition. Original native mate naturality gives whole
+projection β, pair/copair distribution and diagonal naturality at the same
+P(W,W)/P(X,X). The product-map Hom functor requires no product-evidence
+argument merely for its action. Thirty-one definitions and five proof-time
+comparisons add no primitive, runtime rule or earlier LP edit. The views
+retain complete diagonal Hom action, original identity input/classifiers,
+both factors of native projected composition, and both unchanged arrow
+operands in composite endpoint comparisons. Existing associativity remains
+available. Native Sigma annotations are retained in observations; broader
+Sigma β/η experiments are not promoted. Whole zero/cancellation laws and
+cover stability/epicity, annihilation, δ and output exactness remain open.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

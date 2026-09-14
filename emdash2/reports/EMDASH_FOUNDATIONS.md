@@ -4684,6 +4684,35 @@ observations recover the original f−g. No new primitive or rule is used.
 Whole additive cancellation/bilinearity and cover stability still require
 proof; these component observations do not establish them by themselves.
 
+Whole bilinearity is now proved directly through the original categorical
+universality. Native unpair(id) supplies π₁/π₂. Inverse-mate naturality gives
+unpair(h)ᵢ=πᵢ∘h; the original whole inverse cuts then yield
+π₁∘pair(f,g)=f and π₂∘pair(f,g)=g.
+
+Forward- and inverse-mate naturality also give the whole distribution laws
+
+```text
+⟨f,g⟩∘a = ⟨f∘a,g∘a⟩,
+P(a,b)∘⟨f,g⟩ = ⟨a∘f,b∘g⟩,
+a∘[f,g] = [a∘f,a∘g],
+[f,g]∘P(a,b) = [f∘a,g∘b].
+```
+
+Here P(a,b) is the original whole postcomposition Hom action. Applying
+these laws to the original diagonal pairing proves both composition laws
+for addition; existing whole negation laws then give both laws for
+subtraction. The diagonal comparison stays at the original P(W,W) and
+P(X,X). No replacement product family, ordinary factor dictionary or
+pointwise naturality proof is input to these constructions.
+
+Five sufficient proof-time comparisons and literal native Sigma annotations
+make the observations check while retaining runtime owners. The composite
+comparison repeats both original arrows and only compares their endpoint
+presentations; it does not assert injectivity of composition or replace
+associativity. Whole additive zero/cancellation and the cover theorem still
+require proof. Bilinearity alone does not supply a complete additive
+capability on the functor category.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is
