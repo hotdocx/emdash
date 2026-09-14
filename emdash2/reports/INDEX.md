@@ -178,6 +178,13 @@ Whole factor reconstruction explicitly compares the earlier factor with
 ι∘a. Twenty-six definitions add no primitive, runtime rule or unifier.
 The original r/ρ covers, annihilation, δ and output exactness remain next.
 
+C6c3e2 derives the [native-window cover](../emdash3_2_one_cat_native_homology_window_covers.lp)
+for the existing ρ and its original H endpoint. Whole kernel lifting and
+coimage descent prove coker(r)=0; original q_H cancellation proves
+coker(ρ)=0. The native row E0 supplies the p premise, with original
+normality providing the cover factors. Thirty-five definitions add no
+primitive, runtime rule or unifier. θκ_ρ=0, δ and output exactness are next.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

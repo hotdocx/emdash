@@ -337,6 +337,18 @@ Twenty-six definitions add no primitive, runtime rewrite, unifier or
 change to earlier LP owners. Original r/ρ covers, θκ_ρ=0, δ, output
 exactness and model/reifier/snake work remain open.
 
+C6c3e2 now derives the [original kernel-square cover](../emdash3_2_one_cat_kernel_precomposition_covers.lp)
+and [native-window homology cover](../emdash3_2_one_cat_native_homology_window_covers.lp).
+The auxiliary kernel lifts into the existing L=K(d∘p), with both original
+projection comparisons. Whole coimage-cover descent then forces the actual
+cokernel of r to zero. Original q_H cancellation forces the actual
+cokernel of ρ=q_H∘r to zero. Supplied normality gives the respective
+Coim(r)⇒K(d) and Coim(ρ)⇒H cover equivalences. The existing native
+window derives the p premise from its original row E0, with no separate
+cover input. Thirty-five definitions add no primitive, runtime rule,
+unifier or earlier LP edit. θκ_ρ=0, δ and output exactness remain open;
+model/reifier and snake comparison work remain later obligations.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

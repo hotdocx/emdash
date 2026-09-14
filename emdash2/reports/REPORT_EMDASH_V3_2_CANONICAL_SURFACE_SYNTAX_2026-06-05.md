@@ -2170,6 +2170,23 @@ argument is present. `one_cat_zero_cokernel_cover_omega` is the reusable
 zero-cokernel construction behind this row instance. Their components and
 Hom action remain observations of the whole original terms.
 
+`one_cat_coimage_cover_descent` descends a whole kernel-annihilating map
+through the original coimage and the selected inverse of its proved cover
+factor. `one_cat_coimage_cover_descent_reconstruction` recovers that input
+after the original differential. Its quotient, inverse-factorization and
+reflection paths retain the same original diagram.
+
+`one_cat_kernel_difference_diagram` introduces κ_d∘π₁−p∘π₂. Its original
+kernel maps into the existing L through
+`one_cat_difference_kernel_to_precomposition`; both projection paths retain
+the original r. `one_cat_kernel_precomposition_cokernel_zero` and
+`one_cat_kernel_precomposition_cover_omega` derive its actual zero cokernel
+and categorical cover. `one_cat_homology_cover_omega` preserves the existing
+ρ and original H. `one_cat_native_window_cover_omega` instantiates that
+proof at the existing native window using E0 and original normality. Its
+fixed forward arrow is the existing coimage-to-target factor for ρ; no
+separate cover input or inverse choice is accepted by the window operation.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

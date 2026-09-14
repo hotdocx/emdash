@@ -4761,6 +4761,27 @@ This proves the auxiliary difference cover. Applying it to the original
 L=K(d∘p) and deriving the covers of r and ρ, followed by annihilation,
 connecting descent and output exactness, remain subsequent constructions.
 
+The original kernel-square and homology covers are now derived. The
+auxiliary kernel of Δ=κ_d∘π₁−p∘π₂ has compatible projections. Native
+kernel lifting maps it into the existing L=K(d∘p); the original first
+projection reconstructs its input, and kernel cancellation identifies its
+other projection with the existing r after that lift.
+
+Consequently w=coker(r)∘π₁ annihilates K(Δ). Whole coimage-cover descent
+gives ψ∘Δ=w. The second injection gives ψp=0, cancellation of the original
+p gives ψ=0, and the first injection gives coker(r)=0. Original normality
+therefore gives the categorical cover of r. Original q_H cancellation then
+forces coker(ρ)=0 for ρ=q_H∘r, giving its categorical cover. These cover
+equivalences concern Coim(r)⇒K(d) and Coim(ρ)⇒H; they do not state that
+r or ρ itself is invertible.
+
+The native-window construction obtains the p premise from its original
+whole short-exact row E0 and uses the original H input. The reusable descent
+program retains Q at the original kernel-arrow diagram and its selected
+cover inverse, with whole reconstruction and cancellation laws. No ordinary
+universal-provider dictionary or caller naturality square is involved.
+Proving θκ_ρ=0 is now the next prerequisite for δ and output exactness.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

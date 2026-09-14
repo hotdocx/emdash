@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3e1 auxiliary difference cover qualified; original r/ρ covers and δ next; Op/duality deferred
+Status: C6c3e2 original r/ρ covers qualified at native window; θ annihilation, δ and exactness next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,111 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c3e2: Original kernel-square and native homology covers
+
+**Qualified after e1a9a07f (2026-09-14).**
+The original r:L⇒K(d), L=K(d∘p), and ρ=q_H∘r now have derived
+categorical covers. The fixed-forward evidence concerns the existing
+Coim(r)⇒K(d) and Coim(ρ)⇒H factors; it does not assert that r or ρ
+is itself invertible. Their actual cokernel projections are proved zero.
+The existing native window supplies the necessary p evidence from E0.
+
+Thirty-five definitions in seven one-way owners preserve the earlier LP
+sources, original diagrams, L, r, ρ, H and selected inverse choices. No
+primitive, runtime rewrite, unifier, ordinary universal dictionary or
+caller naturality/functoriality square is introduced.
+
+**Construction and ownership.**
+
+- [Coimage cover descent](../emdash2/emdash3_2_one_cat_coimage_cover_descent.lp)
+  restricts the original quotient of the original kernel diagram and proves
+  φ_D∘q_κ=∂D. Given a whole u with uκ_D=0, it descends through that same
+  Q and composes with the selected inverse of the proved φ_D. Whole
+  reconstruction gives desc(u)∘∂D=u. The inverse factorization and
+  original quotient cancellation also derive cancellation of ∂D. These
+  are the generic internal operations later needed for δ.
+- [Difference cover closure](../emdash2/emdash3_2_one_cat_difference_cover_closure.lp)
+  derives the auxiliary difference cover when the actual second leg p has
+  zero cokernel. Its proof uses the preceding categorical cancellation,
+  without an IsEpic dictionary. A separate definition derives this premise
+  from the original whole OneCatShortExactFamily.
+- [Auxiliary kernel lifts](../emdash2/emdash3_2_one_cat_kernel_difference_lifts.lp)
+  introduce D′=κ_d∘π₁−p∘π₂. Its original K(D′) projects to K(d) and M;
+  whole difference-zero reflection supplies their compatibility. Native
+  kernel lifting sends the second projection into the existing L=K(d∘p).
+  Its original first projection reconstructs that input; original kernel
+  cancellation proves r∘lift equals the first auxiliary projection. No
+  replacement pullback object, ordinary cone record or slice dictionary
+  enters this construction.
+- [Difference factor paths](../emdash2/emdash3_2_one_cat_difference_factor_paths.lp)
+  prove ψ∘D′=a∘π₁ ⇒ ψ∘p=0 by the original second injection and whole
+  difference reflection. The original first injection proves a∘π₁=0 ⇒ a=0.
+- [Kernel precomposition covers](../emdash2/emdash3_2_one_cat_kernel_precomposition_covers.lp)
+  form w=coker(r)∘π₁. Its annihilation of K(D′) follows through the proved
+  lift and the original cokernel annihilation. Whole cover descent gives
+  ψ∘D′=w. The second injection and cancellation of p force ψ=0, and
+  the first injection gives coker(r)=0. Original normality yields the
+  actual cover factor and cancellation of the existing r.
+- [Homology covers](../emdash2/emdash3_2_one_cat_homology_covers.lp)
+  use the just-derived r cancellation and original q_H cancellation to
+  prove coker(ρ)=0. Original normality yields its categorical cover with
+  the actual original homology endpoint.
+- [Native window covers](../emdash2/emdash3_2_one_cat_native_homology_window_covers.lp)
+  connect these programs to the existing Rm/R0/R1/R2 window and its
+  original whole maps and input chain-zero laws. E0 derives the outgoing
+  p premise; the previous right-column input supplies the original H
+  family. The public window operation accepts no separate cover, inverse
+  or epicity evidence. Full AdditiveCategory and the original normality
+  are explicit, as required by the Abelian proof.
+
+**Experiment notes.** The first coimage-input generator had a parenthesis
+error, corrected before checking. All semantic owner probes then checked
+without new proof-time comparisons or computation rules. Original graph
+source presentations of zero are aligned by existing whole terminal-family
+uniqueness. The selected inverse remains fixed throughout descent and
+reflection; no object transport or universal-choice replacement is used.
+
+**Qualification.** All seven owners and three reviewer files pass serial,
+warning-enabled, resource-guarded checks within the 90-second per-target
+ceiling. The 19 assertions contain 15 positive observations and four
+rejection controls. They check original descent reconstruction, retained
+kernel-square projections, actual cover forwards, both laws at the same
+selected inverse, whole Hom action and the original native-window endpoint.
+The cover evidence cannot certify that r itself is invertible or replace
+the indexed factor by an unrelated map.
+
+Final owner logs span `072912`–`073025`. Reviewer logs are
+`one_cat_coimage_cover_descent-20260914-073040.log`,
+`one_cat_kernel_precomposition_covers-20260914-073048.log` and
+`one_cat_native_homology_window_covers-20260914-073101.log`.
+The original kernel-pullback and native-window-map reviewers still pass
+when imported after the new window-cover owner, at
+`nuh4c6c3f_retained_homology-20260914-073240.log`.
+Seven original dependency-load-order baselines pass at `073254`–`073408`.
+All eleven final warning inventories exactly match their corresponding
+baselines in categories, locations, term heads, rule families and parser
+issues; exact logs and checked source hashes are retained in
+`tmp/probes/nuh4c6c3f_warning_comparison.json`.
+
+Strict catalog, report-header/reference lint, shell syntax, exact owner
+registration, unique declarations, added local links and diff hygiene pass.
+All 35 symbols are definitions; no new primitive or rule requires a new
+LHS audit. The generated source-only health report records 1,106 files and
+snapshot `4c6479344102e23bcc365a5a3d1ad0612bfd51bc2d2c6b7677d360db4adfeb21`.
+No repository-wide, TypeScript or aggregate typecheck was run. Qualification
+is scoped to these ordinary whole constructions and their stated original
+structural/normality assumptions; deferred Op/profile work remains separate.
+
+**Next C6d: annihilation and connecting descent.** Prove the original whole
+θ∘κ_ρ=0 from the input window, preserving the already constructed θ and
+ρ. Then apply the new coimage-cover descent at Arr(ρ) to construct δ
+and prove its reconstruction and output exactness. Additional cover
+constructions needed to establish that annihilation must likewise be
+derived through native K/Q; do not assume the output zero law or exactness.
+Concrete model/reifier automation, snake/direct/native comparison and
+final qualification remain required. Op/duality and the later strictness-
+profile integration remain deferred.
+
 ### NUH-4C6c3e1: Derived categorical cover of the whole difference map
 
 **Qualified after 612ab396 (2026-09-14).**
@@ -406,7 +511,7 @@ No repository-wide, TypeScript or aggregate typecheck was run. These are
 scoped ordinary whole constructions under the stated original structural
 and normality assumptions; deferred Op/profile work remains separate.
 
-**Next C6c3e2.** Specialize f to the original κ_d. The kernel of D gives a
+**C6c3e2 design, implemented above.** Specialize f to the original κ_d. The kernel of D gives a
 compatible pair; lift its second projection into the original L=K(d∘p)
 and use kernel cancellation to identify its first projection with r after
 that lift. Then descend coker(r)∘π₁ through this proved auxiliary cover.

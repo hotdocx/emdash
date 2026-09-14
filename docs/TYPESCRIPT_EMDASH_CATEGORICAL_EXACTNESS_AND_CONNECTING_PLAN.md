@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c3e1 auxiliary difference cover qualified; original r/ρ covers and δ next; Op/duality deferred
+Status: C6c3e2 original r/ρ covers qualified at native window; θ annihilation, δ and exactness next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -459,11 +459,20 @@ factor invertible. The original factor agrees with ι∘a by native/raw mate
 reconstruction and whole quotient cancellation. Twenty-six definitions add
 no primitive, runtime rule or unifier.
 
-C6c3e2 next specializes f=κ_d, compares K(D) with the original L=K(d∘p),
-and uses the proved auxiliary cover to derive coker(r)=0 and the covers
-for r and ρ. No cover property is supplied as input. Then prove θκ_ρ=0,
-descend to δ and prove output exactness. Concrete model/reifier and snake
-comparison obligations remain open.
+C6c3e2 now [derives the original r cover](../emdash2/emdash3_2_one_cat_kernel_precomposition_covers.lp).
+K(κ_d∘π₁−p∘π₂) maps into the original L=K(d∘p), with both projection
+comparisons. Descending coker(r)∘π₁ through the auxiliary cover, then
+using the second and first injections, proves coker(r)=0. Original q_H
+cancellation then proves coker(ρ)=0. The existing native window obtains
+both results from its original row E0 and supplied normality; no separate
+cover or epicity argument is present.
+
+The new [whole coimage-cover descent](../emdash2/emdash3_2_one_cat_coimage_cover_descent.lp)
+retains the original Q at the original kernel-arrow diagram. It reconstructs
+u after the original differential and uses the same selected cover inverse.
+Thirty-five definitions add no primitive, runtime rule or unifier. Next
+prove θκ_ρ=0, use this descent to construct δ and prove output exactness.
+Concrete model/reifier and snake comparison obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes
