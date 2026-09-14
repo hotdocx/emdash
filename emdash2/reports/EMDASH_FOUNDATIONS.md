@@ -4950,6 +4950,22 @@ internally. Thus applying whole H to that actual raw map is now well typed,
 without a new square-record interface. Concrete coherent-model/CAS binding
 and complete comparison with the former induced homology map remain open.
 
+The retained inverse-mate input now has a derived categorical equivalence
+to the direct raw input at the same outgoing diagram. Ordinary diagram
+reflection compares their whole J(A)⇒d transformations using the original
+kernel reconstruction. A whole fibre inclusion into the existing zero-cone
+category keeps both bases fixed and retains the fibre cell. It carries the
+derived comparison to the existing fixed-forward equivalence type; original
+whole H then maps both the comparison and its selected inverse. This does
+not cast either H object or reselect a universal construction.
+
+Fixed raw rows and their maps also enter as whole constant parameter
+families. Their points, three raw map components, off-diagonal action and
+action in the original raw-agreement parameter are retained by the existing
+weakening functor. They require no K/Q or additional coherence square.
+The complete four-row window and comparison of its derived column inputs
+remain subsequent steps before the retained TypeScript observations migrate.
+
 The native model context now packages the initial-zero capability and whole
 P/Q directly as `FreydAdjunctionModel(R)`. Its whole H needs no normality
 enhancement. Connecting and exactness additionally use the existing whole

@@ -4,6 +4,19 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native input comparison (2026-09-14): the
+[ordinary zero-cone fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp)
+maps a fibre cell to an arrow with both base components identities. Existing
+source reconstruction and diagram reflection derive the
+[retained/direct input equivalence](../emdash3_2_one_cat_chain_pair_input_comparisons.lp).
+The [Freyd comparison](../emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+applies original whole H and preserves the selected inverse. No H endpoint
+is cast or reselected. [Raw row families](../emdash3_2_commutative_algebra_freyd_native_row_families.lp)
+and their maps retain the original native inputs and all three raw map
+components through existing constant-family action. Thirteen definitions
+add no primitive or new rule; 19 focused assertions pass. Four-row assembly,
+derived column-input comparison and retained TypeScript observations remain.
+
 Native model update (2026-09-14):
 [FreydAdjunctionModel](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
 packages supplied whole P/Q independently of ordinary W/V dictionaries.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5A preparation/replay and NUH-5B1 native model/whole δ/exactness interface qualified; raw-window observation migration and full later adoption remain required
+Status: NUH-5A/B1/B2a qualified through input equivalences and raw-row families; full raw-window observations and later adoption remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -114,10 +114,42 @@ into this native window, then migrate the TypeScript observations to it.
 The current supplied arbitrary row-family consumer is not yet that retained
 nonsplit end-to-end consumer. Preserve every original selection and classify
 the model/normality, row and complete-arrow interpretation contracts.
-Whole-H retention is established at the same input; it does not yet identify
-the legacy inverse-mate input with a direct raw input or a window's derived
-column input. Establish the required input/observation comparisons at the
-original H during this assembly, without endpoint casts or reselection.
+
+NUH-5B2a qualification (2026-09-14): the retained inverse-mate input and
+direct raw input now have a derived categorical equivalence. Existing source
+reconstruction and ordinary diagram reflection compare their whole
+transformations J(A)⇒d. The [fibre inclusion](../emdash2/emdash3_2_one_cat_zero_cone_fibre_inclusion.lp)
+uses existing Sigma/base-change/Op_func computation and retains both base
+identities and the actual fibre cell. Its zero-cone interface is explicitly
+restricted to ordinary C; no general higher-duality extension is asserted.
+
+The [input comparison](../emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp)
+carries that derived fibre path through the whole inclusion functor. It uses
+the existing `OmegaEquivAlong`, with the actual comparison fixed. The
+[Freyd specialization](../emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+then applies the original whole H to the same comparison. Its inverse is
+the image of the original selected input inverse. Neither H endpoint is
+cast, replaced or reselected; there is no `Obj(C)` equality transport in this
+construction. The original W/presentation occurs only in this legacy-input
+adapter, not as a prerequisite of the independent native H construction.
+
+The [raw-row family constructors](../emdash2/emdash3_2_commutative_algebra_freyd_native_row_families.lp)
+embed a fixed raw row as a constant parameter family. Existing raw map
+agreements feed the whole constant-transformation functor. Row points,
+all three raw map components, off-diagonal action and higher action in the
+agreement parameter are retained. These constructors need no K/Q, model,
+normality or additional coherence-square input. Thirteen definitions add
+no primitive, rewrite, unifier or earlier LP edit.
+
+Next NUH-5B2b must assemble all four original rows and their maps, produce
+the required whole chain-zero inputs from the existing raw agreements, and
+connect the derived column inputs to the retained H observations. The
+new equivalence covers the retained/direct input comparison at the same
+outgoing diagram; a window's derived column input remains a further
+comparison. Native row shortness stays an explicit model contract.
+TypeScript observation migration and the complete retained nonsplit consumer
+are still required. None of these obligations is discharged merely by the
+row-family constructors or input equivalence.
 
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
@@ -139,6 +171,26 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B2a: five owners and three reviewers pass under the unchanged serial
+90-second/2-GiB guard. Nineteen assertions cover point/fibre inclusion,
+both base identities and the retained cell, fixed-input and H equivalences,
+the mapped selected inverse, all three raw row-map components and whole
+parameter Hom actions. No normality or extra coherence witness is needed
+for these input comparisons. The earlier owner/window evidence is retained.
+
+Final owner logs span `164422`–`164456`. Reviewer logs are
+`one_cat_zero_cone_fibre_inclusion-20260914-164508.log`,
+`freyd_native_input_comparisons-20260914-164514.log` and
+`freyd_native_row_families-20260914-164527.log` under `emdash2/logs/probes/`.
+Their import-only controls at `164535`, `164541` and `164553` have identical
+complete inventories and raw warning blocks: respectively 1,157/159,
+1,296/169 and 1,291/169 critical-pair/pattern reports. Exact comparison data
+is in `emdash2/tmp/probes/nuh5b2_warning_comparison.json`. Catalog and source
+TOC checks pass; source-only health metrics now cover 1,178 registered files.
+All 13 production declarations are definitions; no primitive/rule/unifier
+or earlier LP source was changed. No TypeScript implementation changed in
+this tranche.
 
 NUH-5B1: all five owners and both reviewers pass warning-enabled checks
 under the existing serial 90-second/2-GiB guard. The 15 assertions include

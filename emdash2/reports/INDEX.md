@@ -2,6 +2,18 @@
 
 Date: 2026-09-02
 
+NUH-5B2a (2026-09-14): [retained/direct native inputs](../emdash3_2_one_cat_chain_pair_input_comparisons.lp)
+now have a derived categorical equivalence through the
+[ordinary fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp).
+The [Freyd comparison](../emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+maps it through original whole H, preserving endpoints and the selected
+inverse. [Raw row families/maps](../emdash3_2_commutative_algebra_freyd_native_row_families.lp)
+retain all original components through existing whole action. Nineteen
+assertions pass with unchanged complete warning inventories and no new
+primitive/rule/unifier. The next boundary is the complete four-row window,
+its derived column inputs and retained TypeScript observations, as recorded
+in the [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 NUH-5B1 (2026-09-14): the supplied
 [native Freyd model](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
 now retains whole P/Q, with a separate

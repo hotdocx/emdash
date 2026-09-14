@@ -2346,6 +2346,21 @@ Freyd agreements and fills the OneCat profile. Its three observations are
 the original next/middle/prev quotient classes. Coherent model realization
 in the actual CAS replay is still an explicit further boundary.
 
+`zero_arrow_cone_fibre_inclusion_func(C1,T,A,d)` is a whole inclusion of the
+existing transformation Hom into the ordinary zero-cone category. Its point
+is the original `(A,d,h)`; its arrow keeps both base identities and the fibre
+cell. `freyd_homology_model_native_input_equiv` is a derived fixed-forward
+equivalence from the retained inverse-mate input to the direct raw input.
+`freyd_homology_model_native_homology_map` is original H applied to that
+comparison; its `*_equiv` evidence maps the same selected inverse.
+These are categorical comparisons at retained endpoints, not object casts.
+
+`freyd_raw_native_row_family` and `freyd_raw_native_row_map` are constant
+parameter families of the original raw native inputs/maps. The corresponding
+`*_map_func` preserves whole action in the existing raw-agreement parameter.
+No K/Q or new coherence field is an input. Full four-row and derived-column
+assembly remains further work.
+
 `FreydAdjunctionModel(R)` packages supplied initial-zero and whole P/Q data.
 `freyd_adjunction_model_func(M)` is the existing native whole H, with no
 ordinary W/V or normality input. `FreydAdjunctionModelNormality(M)` is the

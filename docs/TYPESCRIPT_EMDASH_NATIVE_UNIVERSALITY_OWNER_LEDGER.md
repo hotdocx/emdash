@@ -310,6 +310,41 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5B2a: Retained/direct input equivalence and native raw-row families
+
+**Qualified after c10b82d3 (2026-09-14), through input comparison and raw rows.**
+Existing reconstruction and ordinary diagram reflection derive the whole
+J(A)⇒d comparison between the retained inverse-mate input and direct raw
+input. A whole fibre inclusion into the original zero-cone category maps
+that fibre path to a categorical equivalence, using existing
+`OmegaEquivAlong`. Both base components are identities and the fibre cell
+is retained. The zero-cone inclusion's scope is ordinary C; no general
+higher-duality repair or foundational replacement is introduced.
+
+The Freyd adapter applies original whole H to the same input comparison;
+its inverse is the image of the selected input inverse. Neither endpoint
+is cast or reselected. The legacy W/presentation data is confined to that
+comparison adapter. Independent raw-row families and maps use the existing
+native raw constructors and constant-family action, with no K/Q or extra
+coherence premise. All three original raw map components and both parameter
+actions are retained. Thirteen definitions in five owners add no primitive,
+rewrite, unifier or earlier LP edit. Three focused reviewers contain 19
+assertions.
+
+All five owners and three reviewers pass. Complete warning inventories and
+raw warning blocks equal their import-only controls: 1,157/159 for the fibre
+inclusion, 1,296/169 for the retained-model comparison, and 1,291/169 for raw
+rows (critical pairs/pattern reports). The subplan records exact logs and
+the comparison JSON. Catalog and source TOC pass; source-only health metrics
+cover 1,178 registered files. No TypeScript implementation changed.
+
+Next NUH-5B2b assembles four original rows/maps, derives whole chain-zero
+inputs from raw agreements and compares the window's derived column inputs
+at the retained H. The present input equivalence covers the same outgoing
+diagram, not that whole column assembly. Native row shortness remains an
+explicit model contract. TypeScript observations, the nonsplit end-to-end
+consumer, later adoption, snake comparison and final qualification remain.
+
 ### NUH-5B1: Native model and whole connecting/exactness observations
 
 **Qualified after 4c5e55ab (2026-09-14), at the native whole-model interface.**
