@@ -310,6 +310,43 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5B1: Native model and whole connecting/exactness observations
+
+**Qualified after 4c5e55ab (2026-09-14), at the native whole-model interface.**
+The [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+owns the next consumer boundary. `FreydAdjunctionModel` contains the
+initial-zero capability and whole P/Q, with H delegated directly to the
+native owner. Separate `FreydAdjunctionModelNormality` refers to the actual
+whole Coim⇒Im. The old model adapts into these same P/Q with identical
+whole H and original input/point/Hom observations.
+
+The whole connecting and three exactness operations specialize their
+existing owners. Their remaining dependent telescope is inferred from the
+original whole interface, preserving every row, H endpoint, comparison and
+selected inverse. No pointwise coherence proof is added. Twelve definitions
+in five owners introduce no primitive, rewrite, unifier or earlier LP edit.
+Two reviewers contain 15 assertions, including retained whole Hom action
+and a changed-kernel rejection control.
+
+All five owners and both reviewers pass under the unchanged guard. Complete
+warning inventories and raw warning blocks equal their import-only controls:
+1,263 critical pairs / 169 pattern reports for the model adapter and
+1,490 / 169 for the whole window. The subplan records exact logs. Catalog
+and source TOC checks pass; source-only health metrics cover 1,170 files.
+
+The first redundant combined-package wrapper exhausted the memory guard.
+The native normality type alone checked. Keeping its literal generic
+additive projections makes the whole δ specialization check without new
+comparison rules. Removing an unnecessary ordinary-record import from the
+model core also brings the combined exactness consumer within the original
+guard. The native model needs no new combined Abelian package wrapper.
+
+Next NUH-5B2 must assemble the original concrete raw window and migrate
+TypeScript observations to these actual whole owners. Native normality
+remains explicitly supplied; its derivation from old pointwise normality
+is not asserted. Retained nonsplit observations, later assumption adoption,
+snake/native comparison and final goal qualification remain required.
+
 ### NUH-5A: Supported model/reifier preparation
 
 **Qualified after 69bf3577 (2026-09-14), at preparation/replay only.**

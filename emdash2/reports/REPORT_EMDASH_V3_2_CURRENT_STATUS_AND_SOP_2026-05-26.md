@@ -4,6 +4,21 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native model update (2026-09-14):
+[FreydAdjunctionModel](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
+packages supplied whole P/Q independently of ordinary W/V dictionaries.
+Its [legacy adapter](../emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+retains the identical whole H, including original native inputs and Hom
+action. [Native normality](../emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp)
+is a separate supplied capability over the actual whole Coim⇒Im. The
+[connecting](../emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp)
+and [exactness](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp)
+specializations inherit the original whole row-family interface and selected
+inverses. Twelve definitions add no primitive or new computation/comparison
+rule. Concrete raw-window assembly and migration of retained TypeScript
+observations remain required; this is not a closed model construction or
+a derivation of whole normality from the old pointwise capabilities.
+
 Reconstruction review (2026-09-13): retain the ordinary reconstruction law as
 a whole instance of the existing DefIso notion. Generic projections and
 inverse/naturality owners keep its use computational and internal, with no

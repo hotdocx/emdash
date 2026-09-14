@@ -2,6 +2,20 @@
 
 Date: 2026-09-02
 
+NUH-5B1 (2026-09-14): the supplied
+[native Freyd model](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
+now retains whole P/Q, with a separate
+[whole normality enhancement](../emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp).
+The [legacy adapter](../emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+preserves identical whole H and its original native-input observations.
+[Whole δ](../emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp)
+and [all three exactness witnesses](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp)
+specialize the original owners. Fifteen focused assertions pass with
+unchanged complete warning inventories and no new primitive/rule/unifier.
+The [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+continues through concrete raw-window assembly, retained TypeScript
+observations and later proof adoption. A closed model is not constructed.
+
 Reconstruction review (2026-09-13): retain the ordinary whole DefIso instance
 under the user's computational/internal criterion. Its inverse, action and
 naturality use generic owners; no caller coherence squares are added.

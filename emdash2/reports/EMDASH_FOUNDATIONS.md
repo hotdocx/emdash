@@ -4950,7 +4950,18 @@ internally. Thus applying whole H to that actual raw map is now well typed,
 without a new square-record interface. Concrete coherent-model/CAS binding
 and complete comparison with the former induced homology map remain open.
 
-The model boundary now has its first concrete point consumer. A transparent
+The native model context now packages the initial-zero capability and whole
+P/Q directly as `FreydAdjunctionModel(R)`. Its whole H needs no normality
+enhancement. Connecting and exactness additionally use the existing whole
+Coim⇒Im normality over those same P/Q. They are specializations of the
+original generic whole owners, with all row families, H endpoints and
+selected inverses retained. The older `FreydHomologyModel` adapts to this
+context without changing its whole H, native inputs or Hom action; its
+pointwise normality does not automatically provide the new whole contract.
+Concrete raw-window assembly and retained CAS-observation migration remain
+further work. Neither model context is a closed model constructor.
+
+The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not
 prove that the native providers construct them. As with assigning a native
 interpretation to a supplied formal ring, the user may explicitly interpret

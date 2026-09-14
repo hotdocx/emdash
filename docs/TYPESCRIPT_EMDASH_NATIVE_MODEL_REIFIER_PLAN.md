@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5A preparation and replay qualified; native model observation migration and full later adoption remain required
+Status: NUH-5A preparation/replay and NUH-5B1 native model/whole δ/exactness interface qualified; raw-window observation migration and full later adoption remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -83,6 +83,42 @@ still NUH-5B work.
 
 ## NUH-5B: Native Model Observation Migration
 
+NUH-5B1 qualification (2026-09-14):
+[FreydAdjunctionModel](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
+transparently packages the original initial-zero capability and independent
+whole P/Q. H delegates directly to the existing whole owner; its model core
+does not import the ordinary homology-record adapter. The separate
+[normality enhancement](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp)
+is the existing `OneCatAdjunctionNormality` at these same projections. H
+does not require normality. The existing combined Abelian classifier remains
+available; no additional combined-package wrapper is needed here.
+
+The [legacy adapter](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+retains the old model's P/Q and identical whole H functor. Its original
+native inputs, H points and whole Hom action are preserved by conversion.
+No object cast or reselection is introduced. Native whole normality remains
+an explicit contract over these same P/Q; it is not inferred from the old
+pointwise lift/colift capabilities.
+
+The [whole connecting specialization](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp)
+and [three exactness specializations](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp)
+are transparent partial applications of the existing owners. They inherit
+the original dependent row-family telescope, original H endpoints, maps,
+comparisons and inverse selections. Twelve definitions add no primitive,
+runtime rewrite, unifier or earlier LP edit. The focused reviewers exercise
+retained P/Q/H, independent native input, whole δ/Hom action and the three
+actual fixed-comparison exactness witnesses.
+
+Next, NUH-5B2 must assemble the concrete original raw rows and their maps
+into this native window, then migrate the TypeScript observations to it.
+The current supplied arbitrary row-family consumer is not yet that retained
+nonsplit end-to-end consumer. Preserve every original selection and classify
+the model/normality, row and complete-arrow interpretation contracts.
+Whole-H retention is established at the same input; it does not yet identify
+the legacy inverse-mate input with a direct raw input or a window's derived
+column input. Establish the required input/observation comparisons at the
+original H during this assembly, without endpoint casts or reselection.
+
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
 `OneCatAdjunctionNormality` owners. Prefer a native model surface indexed by
@@ -103,6 +139,33 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B1: all five owners and both reviewers pass warning-enabled checks
+under the existing serial 90-second/2-GiB guard. The 15 assertions include
+14 positive observations and one changed-kernel rejection. Owning-file
+logs span `161424`–`161500`; final reviewers, repeated after removing two
+trailing blank lines, cover the exact final sources. Their logs are
+`freyd_adjunction_models-20260914-162057.log` and
+`freyd_adjunction_model_window-20260914-162110.log` under
+`emdash2/logs/probes/`. Import-only controls at `161547` and `161557`
+have identical complete warning inventories and raw warning blocks:
+1,263 critical pairs / 169 pattern reports for the model adapter and
+1,490 / 169 for the whole window. The comparison is recorded in
+`emdash2/tmp/probes/nuh5b_warning_comparison.json`.
+
+The first normality spelling used reduced Freyd projections. Its type
+checked alone, but the later whole dependent comparison exhausted memory.
+Keeping the original generic additive-projection expressions makes the
+same specialization check without a new equality/comparison rule. The
+redundant combined-package wrapper was not retained. The model core also
+now imports the native whole H directly, without the unnecessary ordinary
+record dependency; this makes the combined exactness check fit the guard.
+No source or target is cast, no model is reselected, and no bound is raised.
+
+The check catalog and source TOC pass; source-only health metrics include
+the five new owners and two reviewers (1,170 registered files). The affected
+metrics tool's 40 unit tests also pass. This is
+localized qualification, not a new repository-wide typecheck claim.
 
 Follow the root TypeScript handoff and nested Lambdapi SOP. The user's
 localized-check policy overrides repository aggregates for this goal.

@@ -2346,7 +2346,21 @@ Freyd agreements and fills the OneCat profile. Its three observations are
 the original next/middle/prev quotient classes. Coherent model realization
 in the actual CAS replay is still an explicit further boundary.
 
-`FreydHomologyModel(R)` now packages the existing supplied coherent inputs;
+`FreydAdjunctionModel(R)` packages supplied initial-zero and whole P/Q data.
+`freyd_adjunction_model_func(M)` is the existing native whole H, with no
+ordinary W/V or normality input. `FreydAdjunctionModelNormality(M)` is the
+existing whole fixed-comparison normality at the same P/Q. The literal
+additive projections in its definition preserve the generic consumers'
+dependent endpoints. `freyd_adjunction_model_connecting_transf(M,N)` and
+the three `freyd_adjunction_model_*_exact_omega(M,N)` operations are transparent
+partial applications: the remaining row-family telescope is inherited from
+the original owner, and δ remains one whole transformation. Their types are
+inferred from those exact applications, without a duplicated window grammar.
+`freyd_homology_model_adjunctions` adapts the legacy context while retaining
+the identical whole H and its original native-input observations. Raw-window
+and retained TypeScript observation migration remain subsequent work.
+
+`FreydHomologyModel(R)` packages the older supplied coherent inputs;
 `freyd_homology_model_func(M)` is their original whole H. The readable
 `freyd_homology_model_object(M,e,d,chain)` is ordinary application of that H
 to the original raw entry. Its first native point observation records an
