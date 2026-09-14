@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,32 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6a milestone (2026-09-13): [whole product-family pairing is constructed](../emdash2/emdash3_2_one_cat_product_families.lp)
+Current C6b1 milestone (2026-09-13): [whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
+now retains an arbitrary original diagram D. The
+[input constructor](../emdash2/emdash3_2_one_cat_kernel_family_inputs.lp)
+uses the accepted whole shape/terminal presentations and one whole
+annihilation cell. Native inverse mating recovers the complete input;
+its source is the original k, and that condition determines the lift
+uniquely, independently of the annihilation witness.
+
+The [kernel-precomposition family](../emdash2/emdash3_2_one_cat_kernel_precomposition.lp)
+then constructs K(d∘p), its original inclusion into the source of p, and
+r:K(d∘p)⇒K(d) through the same K mate, with d read from the original D.
+Its annihilation is derived from the original composite-kernel law.
+Native inverse-mate source evaluation reconstructs p∘κ(d∘p). Fourteen
+definitions and 22 reviewer assertions add no primitive, rewrite, unifier,
+ordinary universal dictionary or new K selection.
+
+C6b2 must now identify this native source observation with κ(d)∘r as a
+whole path and construct the cartesian universal comparison. The carrier
+and maps are qualified kernel-precomposition data, not a completed
+PullbackStructure or a formal pullback theorem. For the actual connecting
+kernel leg, pullback associativity motivates the K(d∘p) route; the
+categorical subplan records that argument and its native proof obligations.
+The cover, δ, derived output exactness, concrete model/reifier construction
+and snake comparison remain required.
+
+The completed C6a milestone (2026-09-13): [whole product-family pairing is constructed](../emdash2/emdash3_2_one_cat_product_families.lp)
 through the original P and native family mates for Δ⊣P. Its inverse retains
 the complete pair of original transformations; whole inverse functors and
 higher action compute. The component agreement with the original selected
@@ -41,13 +66,6 @@ not promoted. All 37 reviewer assertions pass; source/reviewer warning
 inventories exactly match their unchanged dependencies. Whole fibre
 products/cover/δ, output exactness and concrete model synthesis remain
 required. The owner ledger records the boundary and exact qualification.
-
-C6b next constructs the whole fibre-product family and its projections for the
-connecting cover, using the original categorical product/universal owners.
-The cover, covered map, quotient descent and derived output exactness remain
-required. Keep formal programs independent of ordinary factor dictionaries;
-record and qualify any missing whole interface at its actual consumer.
-Concrete model/reifier construction and the snake comparison remain later.
 
 The completed C5 milestone (2026-09-13): the
 [whole short-exact-family interface](../emdash2/emdash3_2_one_cat_short_exact_families.lp)
@@ -715,6 +733,7 @@ must not label those alternatives validated implementations.
 | D-NUH-048 | Use Cat-specific prewhiskering action views and keep native indices inside inverse/evidence eliminations. Four measured proof-time comparisons cover shape-arrow reindexing, constant precomposition, guarded shape-map composition and represented outer associativity. They preserve runtime heads and all relevant data; no object cast, new universality primitive or generic naturality rewrite is installed |
 | D-NUH-049 | C5 derives the original whole g∘f=0 from h, constructs γ:Q(f)⇒C by native descent, and retains fixed-map invertibility of the actual β and γ as OneCatShortExactFamily. Both inverses are selected from that same evidence; γ⁻¹ lands in Q(f), not B. No new splitting, comparison primitive or exactness theorem is supplied. Whole fibre products/cover/δ and derived output exactness remain required |
 | D-NUH-050 | C6a supplies the ordinary product-category profile and Δ⊣P as explicit structural/model obligations over the original P/BP. Native family mates construct whole pairing and inverse computation; component agreement and original projection recovery are derived. Preserve native indices inside applications and keep diagonal/composite/constant/component comparisons at proof time. The rejected runtime diagonal folds are not installed; this prerequisite supplies no fibre product, cover or δ |
+| D-NUH-051 | For the actual connecting pullback along a kernel, pursue K(d∘p). C6b1 derives whole lifting at the original D, with native reconstruction and uniqueness, then constructs this kernel family and both maps using the same K. Its current second-map reconstruction is E₀(untranspose(r))=p∘κ(d∘p); derive the ambient κ(d)∘r equation and the native cartesian universal comparison before calling it a completed pullback. No whole-addition capability, ordinary factor dictionary or new universal primitive is supplied |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

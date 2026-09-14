@@ -2014,6 +2014,16 @@ native mate to give Q∘D⇒Y, with `*_reconstruction` and `*_unique` as whole
 path observations. The native inverse returns the full coherent input.
 These names introduce no pointwise cone syntax or new runtime inverse law.
 
+The dual one_cat_kernel_family_input(X,D,k,z) forms J∘X⇒D, retaining
+the original D. Here z is one whole ∂D∘k=0 cell.
+one_cat_kernel_family_lift gives X⇒K(D), and its reconstruction/unique
+paths observe source evaluation after native inverse mating.
+precomposed_diagram_family_func forms Arr(∂D∘p) before K selection.
+kernel_precomposition_family_func and kernel_precomposition_first_transf
+retain its original kernel and inclusion; one_cat_kernel_precomposition_second_transf
+is the native lift into K(D). These names describe kernel-precomposition
+data. Their cartesian universal comparison is still a separate obligation.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

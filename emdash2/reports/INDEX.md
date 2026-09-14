@@ -105,6 +105,14 @@ obligations. Nine proof-time views preserve existing runtime owners.
 Thirty-seven assertions and unchanged dependency warning inventories
 qualify this prerequisite; fibre-product/cover/δ and output exactness remain.
 
+C6b1 adds [whole kernel lifting](../emdash3_2_one_cat_kernel_family_lift.lp)
+and [kernel-precomposition maps](../emdash3_2_one_cat_kernel_precomposition.lp).
+The original D/K are retained, native inversion reconstructs the whole
+source, and uniqueness is derived. K(d∘p) and its map into K(d) now exist
+with native reconstruction; the ambient square and cartesian universal
+comparison remain unproved. Fourteen definitions and 22 assertions add
+no primitive or rule, with unchanged dependency warning inventories.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

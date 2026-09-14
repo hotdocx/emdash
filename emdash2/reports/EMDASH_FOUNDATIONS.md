@@ -4554,6 +4554,19 @@ model interpretation obligations. Proof-time product-family views preserve
 the existing runtime owners; no pointwise naturality input is supplied.
 This constructs a prerequisite for the connecting cover, not the cover or δ.
 
+Whole kernel lifting now also works at any original diagram family D.
+One whole k:X⇒E₀D and annihilation cell ∂D∘k=0 form J(X)⇒D through the
+accepted shape/terminal presentation; the original kernel mate gives
+X⇒K(D). Its inverse returns that same input, source evaluation returns k,
+and this determines the lift uniquely. The selected result is independent
+of the annihilation witness. Applying this to the whole composite d∘p
+constructs L=K(d∘p), its original inclusion a and a map r:L⇒K(d) whose
+native inverse source reconstructs p∘a. This is the intended carrier and
+maps for the connecting kernel pullback. The ambient reconstruction and
+cartesian universal comparison still need native proofs. These operations
+are definitions over the existing capabilities; no new universal axiom,
+ordinary factor dictionary or caller naturality field is supplied.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

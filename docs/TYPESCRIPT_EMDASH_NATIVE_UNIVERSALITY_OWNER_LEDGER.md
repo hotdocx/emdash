@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,80 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-4C6b1: Whole kernel lifting and precomposition maps
+
+**Implemented after 32518b25.** The actual connecting pullback has the
+kernel inclusion of d as one leg. Its semantic carrier can be K(d∘p), by
+the kernel-as-zero-pullback description and pullback associativity. The
+categorical subplan records the source and distinguishes this argument
+from the pending native cartesian proof.
+
+The [kernel-family input owner](../emdash2/emdash3_2_one_cat_kernel_family_inputs.lp)
+has six definitions. It forms Arr(d∘p) before a kernel is selected, adds the
+forward whole reconstruction at the original D, constructs J(X)⇒D from
+one whole annihilation cell, and derives source recovery. Existing native
+square action in Functor_cat(B,C), exchange and the accepted terminal/shape
+presentations do the assembly. No per-object naturality field is supplied.
+
+The [kernel lift owner](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
+has three definitions. The original native mate gives X⇒K(D); its inverse
+returns the complete input. Source evaluation recovers k, and the existing
+whole inverse-mate faithfulness proves uniqueness. The reviewer specializes
+this uniqueness to two annihilation witnesses, proving the same whole lift.
+The same actual D and K remain in all operations.
+
+The [precomposition owner](../emdash2/emdash3_2_one_cat_kernel_precomposition.lp)
+has five definitions. It applies K to the introduced composite diagram,
+retains the original restricted kernel inclusion a:L⇒X, derives
+d∘p∘a=0 from the existing whole annihilation, and lifts p∘a into K(D).
+The output r:L⇒K(D) is a constructed whole transformation. Its native
+inverse-mate source recovers p∘a. The code does not yet state the ambient
+κ_D∘r equation or a cartesian universal comparison.
+
+Fourteen definitions add no primitive, rewrite, unification rule, ordinary
+universal dictionary, model capability or kernel choice. Both existing
+OneCat shape/terminal qualifications and all user deferrals remain.
+
+Final serial, resource-guarded checks (each ≤90 seconds), under
+emdash2/logs/probes/:
+
+| Target | Final log |
+| --- | --- |
+| Input/precomposed diagram owner | emdash3_2_one_cat_kernel_family_inputs-20260913-200952.log |
+| Whole lift and paths | emdash3_2_one_cat_kernel_family_lift-20260913-201051.log |
+| Kernel-precomposition maps | emdash3_2_one_cat_kernel_precomposition-20260913-201057.log |
+| Lift reviewer | one_cat_kernel_family_lift-20260913-201106.log |
+| Precomposition reviewer | one_cat_kernel_precomposition-20260913-201112.log |
+| Product views loaded before new kernel, retained cokernel and short-exact reviewers | nuh4c6b_retained_consumers-20260913-201137.log |
+
+The reviewers have 22 assertions: 20 positive and two negative. They cover
+complete native input recovery, original K(D) observations, forward
+reconstruction endpoints, independence of the annihilation witness,
+whole/point/next-Hom action, original composite endpoints/differential,
+the derived annihilation and rejection of unrelated k/p data.
+
+All three sources and both reviewers exactly match their unchanged
+dependency joins at 1208 critical pairs / 159 replaceable-pattern warnings.
+The baseline joins are nuh4c6b_dependencies_inputs-20260913-201118.log,
+nuh4c6b_dependencies_lift-20260913-201124.log and
+nuh4c6b_dependencies_precomposition-20260913-201131.log. Categories,
+locations, term heads, participant-rule families and parser diagnostics
+all match, with no added or removed warning. The fresh pre-edit product
+reviewer passed in one_cat_product_families-20260913-195307.log.
+
+Strict source LHS audits, catalog freshness, shell syntax and source-only
+health pass; 1005 files are registered. Final exact staging and changed
+Markdown/link checks apply before checkpointing. The nucleus is unchanged;
+no TypeScript or repository-wide typecheck is run.
+
+**Next C6b2:** derive the whole comparison Γ_D(v)=κ_D∘v for source
+evaluation Γ after the native inverse mate. Then construct the cartesian
+universal comparison using existing native slice-Hom/cone interfaces,
+with whole inverse/action and both original legs retained. The carrier
+L and r are currently kernel-precomposition data; their formal pullback
+universality, epic cover/δ, output exactness, model/reifier synthesis and
+snake comparison remain required.
 
 ### NUH-4C6a: Whole product pairing and native inverse action
 

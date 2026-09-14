@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6a whole product pairing qualified; whole fibre-product/cover and connecting/exactness proofs next; Op/duality deferred
+Status: C6b1 whole kernel lifting and precomposition maps qualified; cartesian comparison/cover and connecting/exactness proofs next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -228,6 +228,39 @@ its projections through the original product/K/Q owners, then the cover,
 covered map and descent for δ. Do not silently supply either missing
 capability or turn the new exactness predicate into an assumed theorem.
 
+Current C6b refinement: the actual connecting pullback has a kernel
+inclusion as its right leg. For p:B→C and d:C→D, construct its carrier as
+K(d∘p), with κ(d∘p) to B and the native kernel mate to K(d). The semantic
+reason is K(d)=C×_D0 and pullback associativity, giving
+B×_C K(d)≅B×_D0. This is an application of
+[the represented-functor/pasting description of fibre products](https://stacks.math.columbia.edu/tag/001U),
+not a new general PullbackStructure assumption. It addresses precisely the
+pullback needed for the original cover. The maps below are now constructed;
+their ambient reconstruction and native cartesian universal comparison
+remain to be proved.
+
+C6b1 now [implements whole kernel lifting](../emdash2/emdash3_2_one_cat_kernel_family_lift.lp)
+at an arbitrary original D, with whole input reconstruction, source recovery
+and uniqueness. The annihilation witness does not change the resulting
+whole lift. Its kernel-independent input owner also forms Arr(d∘p) directly
+from the original whole d and p.
+
+The [precomposition owner](../emdash2/emdash3_2_one_cat_kernel_precomposition.lp)
+constructs L=K(d∘p), a=κ(d∘p):L⇒B and r:L⇒K(d). The existing kernel
+annihilation gives d∘p∘a=0; r is the native lift into the original D.
+If Γ_D is source evaluation after the native kernel inverse mate, the
+checked reconstruction is Γ_D(r)=p∘a. All 14 operations are definitions;
+22 assertions pass without new primitive or rule.
+
+Next C6b2 must derive Γ_D(v)=κ(d)∘v at whole families, then construct the
+cartesian universal comparison of the original p and κ(d). Use the existing
+native slice-Hom/cone interfaces and mate functors; do not introduce a
+separate record of per-object cones or naturality squares. Verify recovery
+of both legs and the whole inverse/action, not just the displayed carrier
+and arrow types. This theorem, the epic cover and δ remain unfinished.
+C6a's product capability remains available to later consumers; no whole
+addition or general PullbackStructure is silently assumed here.
+
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes
 the walking-arrow square of a unit/counit through the existing internal
@@ -270,9 +303,9 @@ the usual connecting map has a categorical construction. One useful
 whole-program specification is the following, with every object/map varying
 internally over the existing short-exact-window input.
 
-1. Form Pₙ = Bₙ ×_{Cₙ} K(d⁽ᶜ⁾ₙ) categorically. The pullback can be obtained
-   from whole biproduct and kernel operations; no element lift or splitting
-   of Bₙ→Cₙ is selected.
+1. Form Pₙ = Bₙ ×_{Cₙ} K(d⁽ᶜ⁾ₙ) categorically. For this kernel leg, use
+   K(d⁽ᶜ⁾ₙ∘pₙ) and derive its cartesian comparison through native mates;
+   no element lift or splitting of Bₙ→Cₙ is selected.
 2. Construct the canonical epic cover ρ:Pₙ→Hₙ(C) and the covered map
    θ:Pₙ→Hₙ₋₁(A) using the differential, row comparison inverses and whole
    kernel/cokernel mates. Derive the native cell expressing that θ kills Kρ

@@ -219,6 +219,15 @@ assertions pass with unchanged dependency warning inventories. Runtime
 diagonal/composition folds are not installed. Whole fibre products, the
 connecting cover/δ and output exactness remain required.
 
+C6b1 now [derives whole kernel lifting at the original D](../emdash3_2_one_cat_kernel_family_lift.lp),
+with complete native input recovery, source reconstruction and uniqueness.
+Its [precomposition family](../emdash3_2_one_cat_kernel_precomposition.lp)
+constructs K(d∘p), the original inclusion and a native lift into K(D).
+The reconstructed inverse-mate source is p∘κ(d∘p). Fourteen definitions
+and 22 assertions add no primitive or rule, with unchanged dependency
+warning inventories. The ambient κ_D∘r observation and cartesian universal
+comparison remain next; no complete pullback/cover/δ theorem is claimed.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip
