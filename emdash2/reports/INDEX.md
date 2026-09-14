@@ -214,8 +214,13 @@ rewrite or unifier. C6e2b2 now supplies the needed [whole additive units](../emd
 and proves zero of the actual middle boundary quotient. Its [original comparison](../emdash3_2_one_cat_native_middle_homology_exactness.lp)
 is certified invertible by the existing criterion, including the native
 window. Twenty-eight definitions and six proof-time reindexing comparisons
-add no primitive or runtime rewrite. The two δ-adjacent exactness positions,
-model/reifier and snake work remain required.
+add no primitive or runtime rewrite. C6e2c now proves the [source](../emdash3_2_one_cat_connecting_source_exactness.lp)
+and [target](../emdash3_2_one_cat_connecting_target_exactness.lp) positions using
+original representative covers, native K/Q and the whole δρ=θ law.
+All three original comparison maps have derived inverses. Sixty-one
+definitions add no primitive, rewrite or unifier. Supported model/reifier
+automation, retained realization, snake comparison and final qualification
+remain required.
 
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)

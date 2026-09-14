@@ -2254,8 +2254,15 @@ from hg=0. `one_cat_middle_corrected_homology_path` applies this to the
 original middle quotient; `one_cat_middle_boundary_quotient_zero` cancels
 the three original covers. `one_cat_row_triple_homology_exact_omega` and
 `one_cat_native_window_middle_exact_omega` certify the actual original
-middle comparison via existing OmegaEquivAlong. The two δ-adjacent
-comparisons still require their own inverse proofs.
+middle comparison via existing OmegaEquivAlong.
+
+`one_cat_native_window_source_exact_omega` and
+`one_cat_native_window_target_exact_omega` now certify the two original
+comparisons adjacent to δ. Their source/target `..._preimage_reconstruction`
+paths retain whole maps after derived covers, and their
+`..._boundary_quotient_zero` paths are derived inputs to the original inverse
+criterion. δ itself remains `Transf B C H_C H_A`; “direct” describes its
+native universal-descent construction, not a family of separate components.
 
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new

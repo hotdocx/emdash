@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6e2b2 middle exactness qualified; two δ-adjacent positions next; Op/duality deferred
+Status: C6e2c all three native-window exactness comparisons qualified; model/reifier next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,130 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+Terminology clarification (2026-09-14): δ is the whole internal connecting
+transformation H_C⇒H_A in Functor_cat(B,C). Its components are observations
+of that single term. “Direct” describes its construction by the original
+K/Q universal descents without a snake-lemma input; it does not mean a
+componentwise reconstruction. Prefer “whole connecting transformation δ”
+in progress reports.
+
+### NUH-4C6e2c: Both positions adjacent to the whole connecting transformation
+
+**Qualified after 8403cfa0 (2026-09-14).**
+The actual Im(H(p))⇒K(δ) and Im(δ)⇒K(H(i)) comparisons have derived
+inverses. Together with the middle result, all three recurring native-window
+positions are exact in the stated ordinary setting. Sixty-one definitions
+in six new owners add no primitive, runtime rewrite, unifier or change to
+an earlier LP owner. Original H, δ, K/Q, normality and cover choices remain
+the actual terms.
+
+**Source of δ.**
+
+- [Representatives](../emdash2/emdash3_2_one_cat_connecting_source_representatives.lp)
+  cover the actual K(δ) through the original ρ:L⇒H_C. Its proved zero
+  cokernel supplies the cospan cover. Original δρ=θ makes the induced
+  left cycle have zero H_A class; the original boundary representative
+  program supplies a second cover and a left boundary representative.
+- [Corrected middle cycles](../emdash2/emdash3_2_one_cat_connecting_source_cycles.lp)
+  subtract that representative's incoming-row image from the original
+  middle lift. Native row/kernel reconstruction proves equality of their
+  differentials, so whole difference gives a cycle. Original K lifts it
+  into the original upper middle cycle object. The difference unit law
+  preserves its outgoing projection.
+- [Source exactness](../emdash2/emdash3_2_one_cat_connecting_source_exactness.lp)
+  uses original cycle and quotient naturality to reconstruct the covered
+  class through H(p). Original kernel cancellation gives β_source(pre)=R
+  for the composite of the two covers. The original quotient kills that
+  boundary; cover cancellation forces the actual quotient zero. The
+  existing criterion certifies the original Im(H(p))⇒K(δ) comparison.
+
+**Target of δ.**
+
+- [Representatives](../emdash2/emdash3_2_one_cat_connecting_target_representatives.lp)
+  cover the actual K(H(i)) through the original q_A. The induced middle
+  cycle has zero class by the original H(i) quotient law and kernel
+  condition. Its original boundary quotient gives the second cover and
+  a middle boundary representative.
+- [Lift into the original L](../emdash2/emdash3_2_one_cat_connecting_target_lifts.lp)
+  derives annihilation by the original precomposed differential, then
+  applies the original K mate. Incoming-row and kernel cancellation
+  identify its covered left cycle with the first representative. The
+  original ρ supplies the right class, and δρ=θ reconstructs the covered
+  original left class.
+- [Target exactness](../emdash2/emdash3_2_one_cat_connecting_target_exactness.lp)
+  identifies the actual boundary on that preimage with the two-cover
+  composite. Original Q annihilation and cover cancellation prove the
+  actual target boundary quotient zero. The same inverse criterion gives
+  OmegaEquivAlong on the original Im(δ)⇒K(H(i)) comparison.
+
+No pointwise representative selection or caller naturality/functoriality
+square is introduced. All constructions and reconstruction equations are
+whole internal maps over B. The existing structural/profile assumptions and
+ordinary OneCat boundary remain explicit.
+
+**Experiments.** The resumed whole-δ baseline passes at `134151`. Source
+representatives pass at `142144`. The first source-cycle probe found the
+missing owning import for `zero_cone_middle_column_outgoing_func`; adding
+the existing row-homology-map dependency makes it pass at `142640`.
+Source exactness passes at `143033`. Target representatives, original-L
+lifting and target exactness pass at `143548`, `143929` and `144305`.
+No new rule, checker patch or enlarged resource limit was needed.
+
+**Qualification.** All six owners and three reviewers pass warning-enabled
+resource-guarded `scripts/probe.sh` checks. Nineteen assertions (17 positive,
+2 negative) cover whole and component preimage reconstruction, the actual
+boundary-quotient zeros, retained forward maps, both inverse laws, and
+rejection of unrelated comparison maps. The combined reviewer checks the
+whole δ type and δρ=θ, then all three original comparison witnesses on
+one and the same native window.
+
+- `emdash3_2_one_cat_connecting_source_representatives.lp`: `emdash3_2_one_cat_connecting_source_representatives-20260914-145058.log`.
+- `emdash3_2_one_cat_connecting_source_cycles.lp`: `emdash3_2_one_cat_connecting_source_cycles-20260914-145115.log`.
+- `emdash3_2_one_cat_connecting_source_exactness.lp`: `emdash3_2_one_cat_connecting_source_exactness-20260914-145131.log`.
+- `emdash3_2_one_cat_connecting_target_representatives.lp`: `emdash3_2_one_cat_connecting_target_representatives-20260914-145148.log`.
+- `emdash3_2_one_cat_connecting_target_lifts.lp`: `emdash3_2_one_cat_connecting_target_lifts-20260914-145207.log`.
+- `emdash3_2_one_cat_connecting_target_exactness.lp`: `emdash3_2_one_cat_connecting_target_exactness-20260914-145224.log`.
+- `one_cat_connecting_source_exactness.lp`: `one_cat_connecting_source_exactness-20260914-145241.log`.
+- `one_cat_connecting_target_exactness.lp`: `one_cat_connecting_target_exactness-20260914-145300.log`.
+- `one_cat_native_homology_window_exactness.lp`: `one_cat_native_homology_window_exactness-20260914-145319.log`.
+
+The retained join with the existing middle-exactness and whole-connecting
+reviewers passes at `145727`. Seven exact original dependency-load-order
+baselines pass at `145747`–`145928`. All ten complete warning inventories
+match: 1,484 critical-pair and 169 pattern warnings, including locations,
+heads, rule families and parser issues. No new warning is introduced.
+
+The nine checked library/reviewer hashes match the final files; all 61
+new definition names and six registry entries are unique. Source-only
+health covers 1,163 files, with snapshot
+`f9c26037656458a8a91068649efe93b9abbf5dbbeae9ee842a4fea0823dc059d`.
+Strict catalog, report-header, active-reference and shell checks pass;
+the central diagnostic catalog is unchanged. Only localized serial
+Lambdapi checks ran under the existing 90-second/2-GiB guard. No repository
+aggregate, TypeScript execution, model/CAS replay or Op/profile migration
+was run. The TypeScript work this turn was read-only recovery/inventory.
+
+**Next NUH-5: retained supported model/reifier preparation.** Inventory the
+current nonsplit proof–CAS consumer and its actual model contracts. Remove
+repeated manual coefficient-name, environment, model-reference and
+observation-inventory construction for supported backends. Preserve original
+whole H/δ and exactness selections; distinguish computed equations from
+supplied universal-provider, normality and whole-model semantics. A reusable
+explicitly trusted backend contract is allowed by the master plan; do not
+relabel it as a closed derived correctness theorem. The snake/direct/native
+comparison, sign/endpoint checks and final qualification remain required.
+
+Initial read-only inventory locates
+[prepareAlgebraFormalFreydLongExactHomology](../src/v3_2/algebra_formal_freyd_long_exact_homology.ts),
+[retained model observations](../src/v3_2/algebra_formal_freyd_model_observation.ts),
+and [model connecting observations](../src/v3_2/algebra_formal_freyd_model_connecting_observation.ts).
+The latter two explicitly classify adopted agreement as trusted presentation
+semantics; the homology preparation reuses the selected provider and
+reconstruction bundles. Start from these active consumers and their focused
+tests, under the TypeScript handoff, before selecting a supported model
+registration/preparation change. No TypeScript implementation or execution
+has occurred in this tranche.
 
 ### NUH-4C6e2b2: Whole additive units and middle exactness
 

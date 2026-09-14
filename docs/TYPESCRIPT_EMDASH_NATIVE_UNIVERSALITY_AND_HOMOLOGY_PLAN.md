@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: C6e2b2 middle exactness qualified; two δ-adjacent positions next; Op/duality deferred
+Status: C6e2c all three native-window exactness comparisons qualified; model/reifier next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,7 +24,36 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
-Current C6e2b2 milestone (2026-09-14): the actual middle comparison
+Current C6e2c milestone (2026-09-14): both comparisons adjacent to the
+whole connecting transformation δ now have derived inverses:
+Im(H(p))⇒K(δ) and Im(δ)⇒K(H(i)). Together with C6e2b2, all three actual
+native-window comparison maps are invertible in the stated ordinary
+Abelian setting. Each original boundary quotient is proved zero from the
+original row data, whole K/Q and normality. No output exactness witness,
+splitting, representative or extra cover is supplied.
+
+At the source of δ, the original ρ yields a derived cover of K(δ). The
+δρ=θ equation makes the covered left cycle a boundary after a second cover. Subtracting its
+incoming-row image gives a middle cycle representing the original class
+through H(p). At the target of δ, the original q_A yields a cover of
+K(H(i)); a second cover supplies a middle boundary representative. Native K lifts
+that same map into the original L, and δρ=θ reconstructs the left class.
+Original kernel and cover cancellation finish both quotient-zero proofs.
+
+Sixty-one definitions in six new owners add no primitive, runtime rewrite,
+unifier or earlier LP edit. δ remains one whole internal transformation
+H_C⇒H_A in Functor_cat(B,C), with components obtained by observation.
+“Direct” describes its construction by native descents, not a componentwise
+replacement or a snake-lemma input.
+
+Next NUH-5 inventories and automates supported model/reifier preparation
+while retaining the original whole H, δ and exactness observations in the
+nonsplit end-to-end consumer. Classify constructed, supplied and trusted
+contracts accurately. Snake/direct/native comparison and final qualification
+remain required; these generic proofs do not construct a closed concrete
+model or establish a general homology-normalization theorem.
+
+Completed C6e2b2 milestone (2026-09-14): the actual middle comparison
 Im(H(i))⇒K(H(p)) now has a derived inverse. The original middle boundary
 quotient is proved zero by cancelling the three previously constructed
 covers, then the existing inverse criterion certifies the original map.
@@ -706,8 +735,8 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | active: middle Im(H(i))⇒K(H(p)) invertibility qualified; two δ-adjacent exactness positions next | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | pending NUH-3/4 | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
+| NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-5 | next: supported model/reifier contract inventory | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | pending NUH-4 | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
@@ -1074,6 +1103,7 @@ must not label those alternatives validated implementations.
 | D-NUH-064 | C6e2a derives κ_g e=ι_f and zero kernel inclusions for the actual comparisons, including all three native-window instances. The original cokernel of zero is invertible, and original normality gives an inverse of an arrow when its original kernel inclusion and cokernel projection are both zero. A proved zero quotient of the original boundary β forces q_e=0 and constructs an inverse of e; an original short-exact row derives that premise from its β equivalence. Seventeen definitions add no primitive, rewrite, unifier or earlier LP edit. The middle-window specialization must retain the literal original row-triple diagram to avoid needless deep endpoint expansion. The three LES boundary-quotient zero proofs remain required; the conditional criterion is not an output exactness assumption |
 | D-NUH-065 | C6e2b1 derives cospan projection covers from a proved zero original cokernel, then supplies whole homology and boundary representatives through original quotient cancellation and the same normality inverse. Applied to K(H(p)), three original covers give a corrected middle cycle w and a left cycle a with K(i)∘a=w. All three cover cancellations are derived from original row/quotient data. Fifty-six definitions add no primitive, rewrite, unifier or earlier LP edit. The whole additive unit/difference law needed for q_Mw=q_Mb and the actual middle boundary-quotient zero proof remain next; neither output exactness nor a representative/cover/splitting is supplied |
 | D-NUH-066 | C6e2b2 derives whole f+0=f, −0=0 and f−0=f from the original biproduct injection, whole product/coproduct mates and their inverse cuts. Six proof-time reindexing views retain the literal paired coordinates and both Hom actions at identity endpoints; an extra associativity view is removed by a valid ablation. The corrected middle cycle keeps its original homology class. Its original boundary reconstructs the three covers, whose cancellation proves the actual boundary quotient zero. The existing inverse criterion certifies the actual Im(H(i))⇒K(H(p)) comparison, including the native-window specialization at its literal original row-triple diagram. Twenty-eight definitions introduce no primitive or runtime rewrite. The two δ-adjacent output positions, model/reifier and snake work remain required |
+| D-NUH-067 | C6e2c derives both δ-adjacent comparison inverses from original K/Q, rows, normality and representative covers. At the source, a boundary correction yields a middle cycle whose H(p) image is the original covered class. At the target, native K lifts the middle boundary into the original L and δρ=θ reconstructs the original left class. Original kernel/cover cancellation forces both actual boundary quotients zero, and the same inverse criterion certifies the original maps. Sixty-one definitions add no primitive, rule, unifier or earlier LP edit. δ is a whole transformation throughout. All three native-window positions are now proved; supported model/reifier automation, retained nonsplit realization, snake comparison and final qualification remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

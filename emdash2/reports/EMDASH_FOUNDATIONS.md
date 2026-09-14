@@ -4841,8 +4841,7 @@ An original short-exact row derives the needed boundary-zero premise from
 its fixed-forward β equivalence.
 
 Each LES position requires its own boundary-quotient zero proof from the
-original window. The middle construction below supplies this instance;
-the two positions adjacent to δ remain open. A conditional criterion is not an output
+original window. The constructions below now supply all three instances. A conditional criterion is not an output
 exactness assumption. No universal choice is replaced, and no new ordinary
 provider dictionary, primitive or computation rule is introduced.
 
@@ -4884,7 +4883,28 @@ kernel reconstruction and induced H(i) quotient equation now identify
 three original covers proves q_β_H=0. The existing inverse criterion
 therefore certifies the actual Im(H(i))⇒K(H(p)) comparison, including the
 native-window middle instance at its literal original row-triple diagram.
-The two δ-adjacent positions remain separate exactness obligations.
+The two positions adjacent to the whole connecting transformation δ are
+now proved as well. At its source, cover K(δ) through the original ρ.
+The equation δρ=θ makes the resulting left cycle a boundary after another
+derived cover. Subtract its incoming-row image from the original middle
+lift. Whole difference and native kernel lifting produce a middle cycle
+whose H(p) image is the covered original class.
+
+At the target, cover K(H(i)) through q_A. The induced middle cycle has
+zero homology class, so the original boundary program supplies its middle
+representative after a second cover. The original K mate lifts it into the
+same L. Original row/kernel cancellation identifies its left cycle, and
+δρ=θ reconstructs the original left class from the right class ρ supplies.
+
+For both positions, original kernel cancellation identifies the actual
+homology boundary on the constructed preimage with the composite cover.
+The original quotient kills that boundary; cancelling the two covers proves
+the actual boundary quotient zero. The existing inverse criterion supplies
+inverses of the original Im(H(p))⇒K(δ) and Im(δ)⇒K(H(i)) comparisons.
+Thus all three native-window positions are exact under the original
+ordinary structural and normality hypotheses. These internal proofs do not
+construct a closed concrete model or a general homology-normalization
+theorem; supported realization and comparison work remain further tasks.
 
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual

@@ -399,8 +399,16 @@ kernel reconstruction and three cover cancellations prove the middle
 boundary quotient zero, yielding an inverse of the [actual middle comparison](../emdash3_2_one_cat_middle_homology_exactness.lp).
 The original native-window instance uses its literal upper row-triple
 diagram. Twenty-eight definitions and six proof-time reindexing views add
-no primitive or runtime rewrite. The two δ-adjacent exactness positions,
-model/reifier automation and snake comparison remain open.
+no primitive or runtime rewrite. C6e2c completes the two adjacent positions.
+
+C6e2c derives the [source](../emdash3_2_one_cat_connecting_source_exactness.lp)
+and [target](../emdash3_2_one_cat_connecting_target_exactness.lp) comparison inverses
+around the whole connecting transformation δ. The original covers and
+δρ=θ provide whole preimages; kernel and cover cancellation prove the
+actual boundary quotients zero. All three original native-window comparisons
+are now invertible in the stated ordinary setting. Sixty-one definitions
+add no primitive, runtime rewrite, unifier or earlier LP edit. Model/reifier
+automation, retained concrete realization and snake comparison remain open.
 
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant

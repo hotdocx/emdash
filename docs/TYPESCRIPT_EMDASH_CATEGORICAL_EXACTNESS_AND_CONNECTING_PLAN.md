@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6e2b2 middle exactness qualified; two δ-adjacent positions next; Op/duality deferred
+Status: C6e2c all three native-window exactness comparisons qualified; model/reifier next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -554,11 +554,11 @@ prove the actual boundary quotient zero, so the existing criterion gives
 an inverse of the [original middle comparison](../emdash2/emdash3_2_one_cat_middle_homology_exactness.lp).
 Its native-window specialization retains the literal original row-triple
 diagram. Twenty-eight definitions and six proof-time reindexing views add
-no primitive or runtime rewrite. The exactness positions H(p),δ and δ,H(i)
-remain next, followed by model/reifier and snake comparison work.
+no primitive or runtime rewrite. C6e2c below completes the H(p),δ and
+δ,H(i) positions; model/reifier and snake comparison work follow.
 
-The next two proofs should reuse the same representative programs and
-original inverse criterion:
+C6e2c uses the following two constructions through the same representative
+programs and original inverse criterion:
 
 1. For H(p),δ, cover the actual K(δ) through the original ρ:L⇒H_C.
    Since δρ=θ, its lifted left cycle has zero H_A class. The existing
@@ -575,8 +575,15 @@ original inverse criterion:
    original left class. Cancel the covers to obtain the actual boundary
    quotient zero, then certify the original comparison.
 
-These are whole native construction sketches, not supplied output evidence
-or completed proofs. Preserve all original H, L, ρ, θ and selected inverses.
+C6e2c now implements both sketches through the original whole operations.
+The source and target boundary quotients are proved zero, and the original
+Im(H(p))⇒K(δ) and Im(δ)⇒K(H(i)) comparisons have derived inverses.
+All three native-window positions are therefore proved in the stated
+ordinary setting. The [source proof](../emdash2/emdash3_2_one_cat_connecting_source_exactness.lp)
+and [target proof](../emdash2/emdash3_2_one_cat_connecting_target_exactness.lp)
+retain the original H, L, ρ, θ and inverse selections. Sixty-one definitions
+add no primitive, rewrite, unifier or earlier LP edit. Supported model/reifier
+realization, snake comparison and final qualification remain required.
 
 ## Connecting As Whole Universal Descent
 
