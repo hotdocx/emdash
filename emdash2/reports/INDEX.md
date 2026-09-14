@@ -161,6 +161,15 @@ five proof-time views add no primitive/runtime rule or earlier LP edit.
 Whole zero/cancellation laws, cover stability/epicity, annihilation and δ
 remain next; no complete additive functor-category capability is inferred.
 
+C6c3c2 now proves [whole additive inverses](../emdash3_2_one_cat_additive_family_inverse.lp)
+and [difference-zero cancellation](../emdash3_2_one_cat_additive_family_cancellation.lp).
+Restriction preserves the original native mate and arithmetic programs;
+the original shear and negative identity supply the inverse/cancellation
+laws. Thirty-eight definitions and eight proof-time comparisons add no
+primitive/runtime rule or earlier LP edit. The next categorical cover
+construction uses kernel-of-difference, original cokernel-zero arguments
+and normality. Cover/δ/exactness, model/reifier and snake work remain open.
+
 Current implementation continuation (2026-09-13): the accepted
 [native universality and homology plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 is active in its dedicated worktree, with an

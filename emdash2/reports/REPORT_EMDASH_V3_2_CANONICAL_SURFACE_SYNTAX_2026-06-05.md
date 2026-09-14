@@ -2131,6 +2131,27 @@ complete diagonal Hom owner, identity input/classifiers, native projection
 factors and unchanged composite operands. No runtime rewrite, object cast,
 primitive additive capability or pointwise naturality assembly is added.
 
+`one_cat_shear_inverse_first_column` is S⁻¹∘ι₁. Its whole reconstruction
+and row observations give `one_cat_negative_identity_add_path` at the
+original universal N. `one_cat_transpose_reindex_path` /
+`one_cat_untranspose_reindex_path` retain the same original adjunction and
+restricted families. `one_cat_product_pair_reindex_path`,
+`one_cat_copair_reindex_path` and `one_cat_additive_family_reindex_path`
+transport the existing operations, with explicit native Hom parents.
+
+`one_cat_negative_family_add_path` and
+`one_cat_additive_family_inverse_path` express id+N_X=0 and f+(−f)=0;
+`one_cat_difference_family_self_path` gives f−f=0.
+`one_cat_additive_family_left_cancel` cancels a common left summand.
+`one_cat_negative_family_omega` is fixed-forward evidence on the original
+N_X, and `one_cat_negative_family_reflect_path` cancels whole negation.
+`one_cat_difference_family_zero_reflect` returns f=g from the actual
+whole difference-zero witness. The `*_precompose_zero_path` /
+`*_postcompose_zero_path` observations use original bilinearity and retain
+the input equality. `one_cat_negative_family_shear_path` compares the two
+already constructed whole negative identities. No new primitive, runtime
+rewrite, operation reselection or full additive capability is added.
+
 `zero_arrow_family_incoming_transf` and `zero_arrow_family_incoming_func`
 observe f=E₀(h) and Arr(f) before any K/Q selection. The new
 `one_cat_coimage_to_kernel_transf` descends the original H boundary at the

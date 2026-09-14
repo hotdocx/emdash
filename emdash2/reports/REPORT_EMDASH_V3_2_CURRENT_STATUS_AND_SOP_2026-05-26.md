@@ -310,6 +310,21 @@ available. Native Sigma annotations are retained in observations; broader
 Sigma β/η experiments are not promoted. Whole zero/cancellation laws and
 cover stability/epicity, annihilation, δ and output exactness remain open.
 
+C6c3c2 now proves [whole inverses](../emdash3_2_one_cat_additive_family_inverse.lp)
+and [zero-difference cancellation](../emdash3_2_one_cat_additive_family_cancellation.lp).
+The original shear inverse gives id+N=0; checked restriction of the original
+mate, pair, copair and addition programs transfers the law to the existing
+N_X. Thus f+(−f)=0 and f−f=0 hold wholly. The shear cancels a common left
+summand. Original whole N is invertible through existing fixed-forward
+component-to-whole evidence and restriction, so negation reflects equality;
+these facts prove f−g=0 ⇒ f=g. Equal composites have zero composed
+difference, and direct-shear N agrees with universal restriction.
+Thirty-eight definitions and eight proof-time comparisons add no primitive,
+runtime rule or earlier LP edit. Two unused view experiments are omitted.
+The next cover proof uses K(κπ₁−pπ₂), original cokernel-zero arguments and
+normality; cover/δ/output exactness and model/reifier/snake work remain open.
+No full additive functor-category capability or unproved unit law is supplied.
+
 Critical current limitation (2026-09-08): the categorical encoding admits a
 closed `τ Empty_grpd` term via the higher action forced by the covariant
 internal `op`. The original goal baseline and separate post-migration tip

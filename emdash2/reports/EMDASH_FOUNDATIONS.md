@@ -4713,6 +4713,32 @@ associativity. Whole additive zero/cancellation and the cover theorem still
 require proof. Bilinearity alone does not supply a complete additive
 capability on the functor category.
 
+Whole additive inverses and the zero-difference criterion are now proved.
+For u=S⁻¹∘ι₁, the original whole inverse law gives Su=ι₁. Product
+projection β yields π₁u=id and (π₁+π₂)u=0; whole bilinearity identifies
+the second equation with id+N=0. The proof then establishes restriction
+of the original adjunction mates, pairing, copairing and addition. This
+transfers the universal negative identity's law to the existing N_X and
+gives f+(−f)=0 and f−f=0 for arbitrary whole transformations.
+
+The original shear acts on paired maps by
+S∘⟨a,b⟩=⟨a,a+b⟩. Its invertibility therefore cancels a common left
+summand. Original whole N is itself invertible: its components are the
+original scalar −id, and the existing fixed-forward component-to-whole
+interface supplies the inverse of that already formed whole map. Generic
+restriction preserves this evidence. Consequently whole negation reflects
+equality, and left-summand cancellation proves f−g=0 ⇒ f=g. The same
+uniqueness identifies direct-shear N with universal restriction.
+
+These are internal constructions on the existing whole maps, without
+caller-supplied naturality squares or pointwise equality assembly. Eight
+sufficient proof-time comparisons retain the original functors, adjunction
+and mate input while comparing their presentations. No new primitive or
+runtime rewrite is used. The zero-difference criterion now supports the
+planned kernel-of-difference cover construction through the original K/Q
+and normality. This does not yet prove that cover or give a complete
+additive capability on the functor category.
+
 The legacy packaged chain adapter still enters that native source through an
 inverse kernel mate. It keeps the original chosen lift beta:A→K(d), and forms the actual
 diagram transformation unmate(beta):J(A)⇒d. The resulting native object is

@@ -2,7 +2,7 @@
 
 Date: 2026-09-13
 
-Status: C6c3c1 whole bilinearity qualified; additive cancellation and cover/δ next; Op/duality deferred
+Status: C6c3c2 whole inverses/difference cancellation qualified; categorical cover and δ next; Op/duality deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -435,10 +435,27 @@ associativity remains available. Literal native Sigma parameters matter
 inside observations. General Sigma β/η experiments are not promoted.
 The owner ledger records the consumers, controls and warning evidence.
 
-Next C6c3c2 proves the whole zero/cancellation laws from the shear inverse
-and these projection/bilinearity laws. Then prove cover stability, r/ρ
-epicity and θκ_ρ=0 before original coimage/cokernel descent for δ.
-Output exactness and concrete model obligations remain open.
+C6c3c2 now proves [whole additive inverse laws](../emdash2/emdash3_2_one_cat_additive_family_inverse.lp)
+and [cancellation](../emdash2/emdash3_2_one_cat_additive_family_cancellation.lp).
+The original shear gives id+N=0. Checked restriction of the original
+mate/pair/copair/addition programs transfers this to the existing N_X,
+yielding f+(−f)=0 and f−f=0. The shear cancels a common left summand;
+fixed-forward invertibility of original whole N gives negation reflection.
+Together they prove f−g=0 ⇒ f=g. Equal pre/postcomposites yield zero
+composed differences, and direct-shear N agrees with universal restriction.
+
+Thirty-eight definitions and eight proof-time views add no primitive,
+runtime rule, operation reselection or earlier LP edit. Whole action,
+original endpoints/inputs and native inverse cuts remain the owners.
+Two unused comparison experiments are not promoted. This does not supply
+a full additive capability on the functor category or unstated unit laws.
+
+Next C6c3e uses K(κ∘π₁−p∘π₂), original cokernel-zero arguments and
+Coim⇒Im normality to derive the categorical cover for the existing r and
+ρ. The owner ledger gives the proposed whole descent proof. No cover
+property is mathematical input. Then prove θκ_ρ=0, perform original
+coimage/cokernel descent for δ and prove output exactness. Concrete
+model/reifier and snake comparison obligations remain open.
 
 The required native assembly includes whole rotations of zero-triangle
 data and whole mate action. The current route transposes

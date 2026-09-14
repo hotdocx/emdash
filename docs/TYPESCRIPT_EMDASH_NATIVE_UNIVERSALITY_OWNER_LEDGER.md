@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: C6c3c1 whole bilinearity qualified; additive cancellation and cover/δ next; Op/duality deferred
+Status: C6c3c2 whole inverses/difference cancellation qualified; categorical cover and δ next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,138 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-4C6c3c2: Whole inverses, restriction and zero-difference cancellation
+
+**Qualified after 4db39ec6 (2026-09-14).** This tranche proves
+
+```text
+id+N_X=0,       f+(−f)=0,       f−f=0,
+a+b=a+c ⇒ b=c,       −f=−g ⇒ f=g,       f−g=0 ⇒ f=g.
+```
+
+It also derives zero composed differences from equality of either pair of
+pre/postcomposites and proves the direct shear negative equal to the
+original universal restriction. All inputs and conclusions are whole
+transformations. The development adds 38 definitions and eight unifiers
+across seven LP owners, with no primitive, runtime rule, new operation
+selection or edit to earlier LP owners.
+
+**Construction and owners.**
+
+- [Shear inverse paths](../emdash2/emdash3_2_one_cat_shear_additive_inverse_paths.lp)
+  form u=S⁻¹∘ι₁. Whole inverse cancellation gives Su=ι₁; native projection
+  β then yields π₁u=id and (π₁+π₂)u=0. Whole bilinearity turns the latter
+  into id+N=0. Specialization at B=C, X=id_C gives the original universal
+  negative identity's law.
+- [Restriction composition](../emdash2/emdash3_2_reindex_composition_paths.lp)
+  first stages generic Hom action before specializing the precomposition
+  functors. The full Hom comparison and its point recover successive
+  restriction. A single native-precomposition/raw-associativity view
+  retains the original three functors; identity and composition
+  observations use existing generic functoriality.
+- [Native mate restriction](../emdash2/emdash3_2_one_cat_adjunction_family_reindex.lp)
+  transports the original unit/action formula. Restriction composition
+  and existing whole whiskering prove the forward law; native inverse
+  cuts derive the backward law. Two endpoint-presentation comparisons
+  retain the same R/L/F/G/J and the exact same input h. They neither select
+  a different adjunction nor erase an input.
+- [Paired restriction](../emdash2/emdash3_2_product_family_reindex.lp)
+  keeps literal paired functors and original diagonal source/target
+  presentations. Five sufficient views cover the full paired restriction,
+  its two postcomposed object presentations, and the two complete Hom
+  actions. The four Hom/point observations preserve both input arrows.
+- [Whole biproduct restriction](../emdash2/emdash3_2_one_cat_biproduct_family_reindex.lp)
+  applies those laws to the same product/coproduct mates, then the original
+  diagonal and addition. The reindexed product families compare directly
+  with the original selected products of the restricted families; no
+  object cast or replacement product is used.
+- [Whole inverse laws](../emdash2/emdash3_2_one_cat_additive_family_inverse.lp)
+  restrict the universal id+N law, retain the existing N_X, and use original
+  zero restriction and whole bilinearity to derive f+(−f)=0 and f−f=0.
+- [Cancellation](../emdash2/emdash3_2_one_cat_additive_family_cancellation.lp)
+  computes S∘pair(a,b)=pair(a,a+b), then cancels the original invertible
+  shear to cancel a common left summand. Original scalar −id is invertible;
+  the existing fixed-forward pointwise-to-whole operation gives ΩAlong on
+  the already constructed universal N, and generic restriction retains
+  that evidence for N_X. Its whole inverse gives negation reflection.
+  Left-summand cancellation and negation reflection prove f−g=0 ⇒ f=g.
+  The same uniqueness proves direct-shear N equals restricted N. No
+  additional inverse transformation or naturality square is supplied by
+  callers.
+
+**Selected comparison boundary.** Direct raw prewhiskering associativity
+first stopped at endpoint presentations. Staging the complete generic Hom
+action supplies its native proof, and the original Cat associativity view
+supplies the raw consumer. Paired restrictions similarly retain the whole
+Hom owner and the same mate input. The mixed-native-point and unrestricted
+literal paired-Hom candidate views were unnecessary: the entire inverse/
+cancellation consequence probe passes with both removed
+(`nuh4c6c3d_inverse_consequences-20260914-055839.log`). Their unused
+observation probes are not promoted. No runtime opposite, diagonal or
+Sigma normalization change is installed.
+
+**Qualification.** All seven owners, three reviewers and two retained
+consumer probes pass serial warning-enabled resource-guarded checks, each
+within the 90-second ceiling. The reviewers contain 31 assertions: 22
+positive and nine negative, including controls for changed restriction,
+product, functor, adjunction and mate input. Owner logs span
+`060622`–`060709`, with the restriction-composition owner rechecked at
+`063043` after removing its trailing blank line; reviewer logs are
+`one_cat_biproduct_family_reindex-20260914-061424.log`,
+`one_cat_additive_family_inverse-20260914-061432.log` and
+`one_cat_additive_family_cancellation-20260914-061444.log`.
+Retained arithmetic and homology consumers pass at `061637` and `061651`.
+Their twelve warning inventories exactly match the eight corresponding
+dependency-load-order baselines (`061924`–`062026`) in categories,
+locations, term heads, rule families and parser issues. The final checked
+source hashes are retained in
+`tmp/probes/nuh4c6c3d_warning_comparison.json`.
+
+All three affected rule-owner LHS audits, strict catalog check, report and
+active-reference lint, shell syntax and diff hygiene pass. The generated
+source-only health report records 1,085 registered files and snapshot
+`7f1de06f0281f6545ab07bf408e2746ffe30a35ca4206d0d291ac10265e9f8c2`.
+No repository-wide, TypeScript or aggregate check was run. This is focused
+qualification of the stated ordinary whole constructions, not completion
+of the cover theorem or qualification of the deferred profile migration.
+
+**Next C6c3e: categorical cover construction.** The current proof route
+uses the zero-difference criterion rather than assuming unproved additive
+unit laws. For the original p:M⇒Z and κ:K(d)⇒Z, form
+
+```text
+D = κ∘π₁ − p∘π₂ : Prod(K(d),M) ⇒ Z.
+```
+
+The original K(D) gives a compatible pair by the proved difference-zero
+reflection. Lift its second projection through the original L=K(d∘p);
+original kernel cancellation identifies the first projection with r after
+that lift. Keep the original L and r.
+
+To make the auxiliary cover categorical, show the original cokernel
+projection of D is zero: compose its annihilation with the second product
+injection, use bilinearity/projection β to obtain a zero difference, then
+use zero-difference reflection and the original row's outgoing
+cancellation. The kernel inclusion defining Im(D) is consequently an
+isomorphism by whole kernel lifting at that same zero arrow. Original
+Coim⇒Im normality then gives ΩAlong on the canonical Coim(D)⇒Z.
+
+Apply its whole descent to coker(r)∘π₁, whose kernel annihilation follows
+from the preceding lift and coker(r)∘r=0. The second injection and original
+p cancellation force the descended map to zero; the first injection then
+forces coker(r)=0. Original image/kernel lifting and normality should give
+the actual Coim(r)⇒K(d) equivalence. Derive the corresponding cover for
+ρ=q_H∘r through the original quotient cancellation. This is the next
+construction/qualification plan, not an already proved cover theorem.
+General kernel-of-difference pullbacks may share these operations when
+later exactness covers require arbitrary legs.
+
+Whole θκ_ρ=0, δ descent and output exactness remain required. Do not
+postulate r/ρ epicity, switch to ordinary W/V provider inputs, infer a
+complete additive capability on Functor_cat, or silently use unproved
+zero-unit/associativity laws. Concrete model/reifier and snake comparison
+work remain open; Op/profile integration remains deferred.
+
 ### NUH-4C6c3c1: Whole bilinearity through native mate distribution
 
 **Implemented after e2fb6740 (2026-09-14).** Both composition laws for
@@ -414,7 +546,7 @@ health covers 1,075 registered files. Report/reference lint, shell syntax,
 exact diff hygiene and added local links are checked. No aggregate,
 repository-wide or TypeScript typecheck was run.
 
-**Next C6c3c2.** Prove the whole zero/additive-inverse laws needed for
+**Then-next C6c3c2, now implemented above at the stated boundary.** Prove the whole zero/additive-inverse laws needed for
 cancellation, then use them in cover stability. At B=C, X=id_C, let
 u=S⁻¹∘ι₁. The existing S∘S⁻¹=id and new projection β laws give
 π₁u=id and (π₁+π₂)u=0. Whole precomposition bilinearity identifies the
