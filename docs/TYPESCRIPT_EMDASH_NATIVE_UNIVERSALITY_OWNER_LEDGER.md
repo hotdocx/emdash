@@ -319,8 +319,8 @@ matrices, witnesses, results and provenance; do not conflate that retention
 with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
-Next are NUH-5N1 native context/signature preparation and NUH-5N2 native
-whole consumers with coherent CAS realization. Native snake/LES work and
+NUH-5N1 native context/signature preparation is qualified. Next is NUH-5N2
+native whole consumers with coherent CAS realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -328,6 +328,28 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N1: Direct native model/context — qualified 2026-09-15
+
+Implemented exact private mirrors of `FreydAdjunctionModel(R)` and
+`FreydAdjunctionModelNormality(M)`, plus a separately issued native rational
+backend/context. It declares M/N directly without the legacy model or adapter.
+Coefficient collection and selected CAS inventories are factored into one
+model-independent preparation shared with the compatible old context.
+
+Five native tests pass (29.91s), including negative legacy/model/ring checks
+and the original nonsplit replay: 55 computed-equation assumptions cover 422
+labels, whose typed raw witnesses require no extra assumptions. Four legacy
+preparation/replay tests pass (9.51s). Focused types, lint, workspace checks
+and six warning-enabled Lambdapi input assertions pass. No active Lambdapi
+owner/rule changed and no repository aggregate ran. Evidence is recorded in
+the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md#nuh-5n1-direct-native-context--qualified).
+
+This turn is **progress**, not blocked: native context preparation and CAS
+equations now work directly. M/N remain supplied inputs, and model-specific
+H/maps/δ realization, row contracts and native exactness consumers remain
+NUH-5N2. No output exactness is assumed. Do not describe the successful CAS
+equation run as the completed native model realization.
 
 ### NUH-5B2d2b: Complete retained model workflow qualification
 

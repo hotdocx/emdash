@@ -86,8 +86,9 @@ not continue those probes as prerequisites for the remaining work. The
 whole kernel/cokernel universality is implemented at its ordinary-view
 boundary. NUH-4 implements whole H/δ and the three categorical exactness
 comparisons through whole universality under its recorded ordinary/Abelian
-assumptions. NUH-5 now qualifies retained model observations; native exactness
-observations are next. Ordinary record bridges remain optional.
+assumptions. NUH-5 has qualified retained model observations and direct native
+model context preparation; native realization and exactness consumers are next.
+Ordinary record bridges remain optional.
 The living plan and `audits/deferred_native_homd_y/README.md` record
 the new queue and later resumption boundary. Existing semantic qualifications
 remain explicit; this deferral is not a claim that the nucleus is repaired.
@@ -102,6 +103,13 @@ experiments are deferred; their resumption bundle is
 prerequisites for the new primary route. Actual native consumer typing,
 computation and coherent CAS realization remain required. Do not assume
 output exactness to bypass a missing construction.
+
+NUH-5N1 qualification (2026-09-15): TypeScript now has exact private mirrors
+and a direct `FreydAdjunctionModel`/native-normality context, sharing the
+original CAS inventories with the legacy context. Native equation adoption
+and raw witnesses pass without a legacy model declaration. This does not yet
+realize native H/maps/δ on the computed outputs; that and the native exactness
+consumers remain NUH-5N2. No active Lambdapi owner or runtime rule changed.
 
 Use this order:
 

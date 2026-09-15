@@ -1,8 +1,8 @@
 # Native Homology Model And Reifier: Living Implementation Plan
 
-Date: 2026-09-14
+Date: 2026-09-15
 
-Status: active — direct native model/contracts integration next; legacy formal-diagram comparisons and auxiliary projection-normalization work deferred
+Status: active — NUH-5N1 native context qualified; NUH-5N2 native consumers and realization next; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -19,9 +19,9 @@ workflow available as compatibility evidence.
 
 Use the existing `FreydAdjunctionModel R` (whole P/Q, with H derived from
 them), its native normality and native row hypotheses as the primary formal
-model input. The current TypeScript context still declares the older
-`FreydHomologyModel` and reaches the native model through its adapter; that
-is the interface to migrate. State native realization contracts explicitly
+model input. NUH-5N1 now provides a separate TypeScript context declaring
+this native model directly. The older `FreydHomologyModel` context and its
+adapter remain available for compatibility. State native realization contracts explicitly
 and qualify their connection to the actual CAS data. Do not replace a
 missing theorem by assuming output exactness or silently strengthen an old
 contract. Exactness must continue to come from the existing native theorem.
@@ -49,8 +49,8 @@ resumption boundary are in `emdash2/audits/deferred-native-exactness-observation
 The whole-interface prototype is available for the new route: twelve
 comparison/type/evidence definitions and three constructor/predicate checks
 pass. The latter evidence is `logs/probes/nuh5b2e1_whole_type_review-20260914-234202.log`.
-It adds no axiom or opaque certificate. This does not yet implement the new
-TypeScript native-model context or its complete CAS consumer.
+It adds no axiom or opaque certificate. The separate NUH-5N1 context is now
+qualified below; its complete native H/maps/δ/exactness consumer remains NUH-5N2.
 
 Current NUH-5B2e clarification (2026-09-14): "exactness observations" means
 formal model-facing terms and diagram comparisons, not empirical testing.
@@ -95,6 +95,66 @@ Keep these distinctions explicit:
 | Universal providers and coherent model | Supplied/trusted semantic contracts, not derived from finite matrix equations | Retain their classification and provenance |
 | Model normality | Supplied model enhancement | Do not manufacture a correctness theorem by declaring its type |
 | Whole δ and categorical exactness observations | Generic native theorem is qualified; retained concrete observation migration remains | Connect the model consumer to those actual native owners before NUH-5 completion |
+
+## NUH-5N1: Direct Native Context — Qualified
+
+The new [native rational context](../src/v3_2/algebra_formal_freyd_native_rational_model_context.ts)
+accepts an issued native backend registration and the original supported CAS
+selection. Its formal model inputs are exactly:
+
+```text
+M : FreydAdjunctionModel(R)
+N : FreydAdjunctionModelNormality(M)
+```
+
+The [private signature mirrors](../src/v3_2/algebra_formal_freyd_native_model_signatures.ts)
+map to the existing Lambdapi owners, including the implicit R of normality.
+They introduce no mathematical primitive, runtime rule or formal adapter.
+The environment contains neither `FreydHomologyModel` nor its H observer or
+native-normality adapter. Native and legacy registrations are separately
+issued; the native registration requires `adjunctionModelContract`, so an
+older model contract cannot silently be relabelled.
+
+Both contexts use the same [rational preparation](../src/v3_2/algebra_formal_freyd_rational_preparation.ts).
+It collects and seals coefficient names while reading the original equation,
+raw-witness and selected-result inventories. It takes no formal model value
+or model type. Its existing `preparedModel` field denotes the CAS inventory
+(18 H selections, eight maps and three windows in this fixture), not an old
+formal model. This reuse does not require reconstructing the old formal H
+objects or proving comparison with them.
+
+Five focused tests pass in 29.91s. They check typed native inputs and dependent
+normality, absence of legacy model signatures, immutable preparations,
+unsupported/missing inputs, and no CAS universal/homology reselection during
+preparation. Native and legacy contexts produce identical selected-data
+inventories. Cross-model and cross-ring checks reject old models, old
+normality, and normality belonging to another native model. The native CAS
+consumer replays the original nonsplit result, explicitly adopts 55 computed
+equations for 422 original labels, and constructs their typed raw witnesses
+in the same native environment, adding no model-realization or exactness
+assumptions. Four existing legacy preparation/replay tests pass in 9.51s.
+
+Localized TypeScript compilation, affected-file ESLint and workspace checks
+pass. The emitted native input probe passes six assertions against the active
+Lambdapi owners with warnings enabled and the default 90s guard. No active
+Lambdapi source, warning owner or generated catalog changed; prior mathematical
+qualification evidence is carried forward. No repository aggregate ran.
+
+Evidence under `emdash2/`: `tmp/probes/nuh5n1_types.txt`,
+`nuh5n1_lint.txt`, `nuh5n1_tests.txt`, `nuh5n1_legacy_regression.txt` and
+`nuh5n1_lambdapi.txt` in that same probe directory. The generated artifact is
+`tmp/probes/nuh5n1_native_context.lp`; its full conformance log is
+`logs/probes/nuh5n1_native_context-20260915-000534.log`.
+
+**Boundary:** M, N and coefficient interpretation remain supplied inputs.
+This is a checked native context and CAS equation/raw-witness integration,
+not yet a realization of native H/maps/δ on those selected results and not
+a closed construction of the native model. NUH-5N2 must expose those actual
+native owners, connect them coherently to the computed data under explicit
+realization and row contracts, and use the already derived whole exactness
+theorems. Whole action must stay with the native functors/transformations;
+caller-supplied naturality squares and assumed output exactness are not a
+replacement. The deferred legacy comparisons and projection probes stay deferred.
 
 ## NUH-5A: Supported Retained-Model Preparation
 
