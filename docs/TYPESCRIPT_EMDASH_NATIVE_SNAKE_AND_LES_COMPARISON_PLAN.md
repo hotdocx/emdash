@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: whole LES-to-snake input qualified; endpoint/sign comparisons next; six-term comparison/witness observation gap retained
+Status: whole LES-to-snake input and original cycle comparison qualified; homology endpoint/sign comparisons next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: whole window-to-triple input qualified; endpoint/sign comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: input and original left-cycle comparison qualified; homology endpoint/sign comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -797,7 +797,19 @@ and the source-only health refresh pass. The health snapshot covers 1,290
 files at `sha256:c4f60a3b1eef0f5f954618b2385de8c9f3ccf12a2ab9f8bcafdf1951ef6b4160`.
 No repository aggregate or TypeScript check ran.
 
-### NUH-6D2: Next Native Universal Comparisons
+### NUH-6D2a: Original Left-Cycle Comparison
+
+The 6D2a experiment starts from checkpoint `446288a7` (the previous goal
+turn made implementation and qualification progress). All worktrees are
+clean, and the bounded window-input baseline passes with warnings enabled.
+Construct u:Z(A₁)⇒K(c) by lifting i₁∘κ_Z. Construct v:K(c)⇒Z(A₁)
+through the original row lift, then prove vu=id and uv=id through the
+original inclusions. Supply fixed-forward ΩAlong(u) using those derived
+maps and laws. No new normality premise, output-equivalence assumption,
+object cast or caller naturality field is permitted. The original row
+short-exactness evidence E₁/E₂ may be consumed; the forward map should
+need only the original kernel structure and row-map action. Qualify the
+whole inverse data and reconstruction, not just point types.
 
 Start with K(c) and the original lower-left cycles Z(A₁). The row inclusion
 i₁ sends left cycles into K(c), using b₁∘i₁=i₂∘a₁ and p₁∘i₁=0.
@@ -806,6 +818,52 @@ map into A₁. The next row's incoming cancellation proves it lands in
 Z(A₁). Original kernel inclusions and row cancellation should prove the
 two composites are identities. Use the existing fixed-forward equivalence
 interface, and retain both original kernel choices.
+
+The [cycle comparison owner](../emdash2/emdash3_2_one_cat_native_window_snake_cycles.lp)
+now implements this construction. Whole pairing projections applied to
+c∘κ_c=0 derive b₁∘κ_c=0 and p₁∘κ_c=0. The original row lift gives
+v₀:K(c)⇒A₁ with i₁∘v₀=κ_c. The original next-row inclusion cancels
+the row-map reconstruction to prove a₁∘v₀=0, and the original kernel
+mate gives v. The forward map u is the original lift of i₁∘κ_Z.
+
+```text
+κ_c∘u = i₁∘κ_Z,       κ_Z∘v = v₀,       i₁∘v₀ = κ_c;
+v∘u = id_Z,            u∘v = id_K(c).
+```
+
+The last two whole equations are proved by the original row/kernel
+cancellation operations. `OmegaEquivAlong(u)` is constructed with this
+same v in both inverse slots. No independent inverse choice, normality,
+output equivalence or object equality is assumed. Forward construction
+uses only P and the original row-map action; reverse construction uses
+the original P/Q-indexed short-exact row capabilities E₁/E₂.
+
+Thirteen transparent definitions add no primitive, rewrite, unifier or
+opacity. Eight consumer assertions exercise both selected inverse
+projections, retained inverse Hom action, cancellation and ambient
+reconstruction on arbitrary whole maps, and rejection of an arbitrary
+replacement inverse. The owner check proves the named construction laws;
+the reviewer tests their use after composition. The original Z(A₁) is
+K applied to the existing `zero_cone_left_column_outgoing_func`; K(c)
+is K at the actual 6D1 outgoing diagram. This qualifies the cycle
+comparison; the homology endpoints and ∂/δ agreement remain required.
+
+The owner passes in 13.400s with `OCAMLRUNPARAM=o=20,v=1024`, under
+90s/2GiB. The eight-consumer reviewer passes in 13.184s with that profile
+and 12.521s with both GC variables unset. All warning inventories match
+the exact import control: 1,451 critical-pair and 169 replaceable-pattern
+reports, matching locations, term heads and rule families, with no parser
+issues. The owner is registered for normal checks and needs no special
+GC routing. Strict LHS, catalog/TOC, source-only health and document checks
+are localized; no repository aggregate runs.
+
+Evidence: `emdash2/tmp/probes/nuh6d2_conformance.json`,
+`nuh6d2_warnings.json`, `nuh6d2_source_audit.json` and the final
+`nuh6d2_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,292 files at
+`sha256:adf63d5d6a331db5c24f1c5ae33d3fa0fe8609c85e8d19849551b974444cdf3f`.
+
+### NUH-6D2b: Homology Endpoints And Sign — Next
 
 Then compare α with the original left boundary and descend to
 Q(α)→H(A₁). On the right, the original quotient of the recovered incoming
@@ -817,3 +875,14 @@ diagram or Q selection by an object-equality cast. Finally compare the
 positive covered reconstructions ∂∘ρ=θ and the existing native δ formula.
 General reference-snake comparison and six-term concrete qualification also
 remain required; 6D1 does not narrow the arbitrary-a/arbitrary-c snake scope.
+
+For the next left-H experiment, first prove v∘α=[0,β_A] through the
+original inclusions, using 6D1 incoming recovery, b₀∘bₘ=0 and the
+original boundary reconstruction κ_Z∘β_A=a₀. The original Q-unit q_A
+then makes q_A∘v kill α and supplies Q(α)→H(A₁) by native descent.
+For the reverse descent, apply the existing whole uncopairing inverse
+mate to recover the second coordinate of a vanishing copair. This should
+prove that π_α∘u kills β_A; it does not require new pointwise cone fields
+or an independent second-injection choice. Derive inverse laws by the
+original quotient cancellation and the checked u/v inverse laws. This is
+the next construction plan, not a claimed homology equivalence.

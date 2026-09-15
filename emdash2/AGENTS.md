@@ -205,8 +205,11 @@ NUH-6D1 now qualifies the original whole four-row window as a native
 general-snake input: a=[bₘ,i₀], b=b₀, c=⟨b₁,p₁⟩, with cba=0 derived
 from the original whole row maps and column-zero laws. Input formation
 requires no P/Q, short-exactness or normality; its first native α/γ
-consumers qualify. Next construct the original native endpoint comparisons
-and compare the positive ∂/δ formulas. LES/sign comparison and NUH-5
+consumers qualify. NUH-6D2a now constructs the whole cycle comparison
+u:Z(A₁)⇒K(c), its inverse v and fixed-forward ΩAlong(u) through original
+row/kernel mates and inclusion cancellation. Both inverse slots and their
+whole Hom action qualify. Next derive the original homology endpoint
+comparisons and compare the positive ∂/δ formulas. LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

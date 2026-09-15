@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — whole LES-to-snake input qualified; native endpoint/sign comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — whole LES-to-snake input and cycle comparison qualified; homology endpoint/sign comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,25 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D2a: Original cycle comparison — qualified 2026-09-15
+
+The [cycle owner](../emdash2/emdash3_2_one_cat_native_window_snake_cycles.lp)
+constructs u:Z(A₁)⇒K(c) and v:K(c)⇒Z(A₁) through original whole row
+and kernel mates. Original inclusion cancellation proves both inverse laws.
+Fixed-forward ΩAlong(u) retains the same v in both inverse slots; their
+projections and inverse Hom action check. Thirteen transparent definitions
+and eight consumer assertions add no primitive, rule, opacity or normality premise.
+The original P/Q and short-exact row capabilities remain explicit, and
+an arbitrary replacement inverse is rejected by the reviewer.
+
+Next: v∘α=[0,β_A], the whole Q(α)≃H(A₁) comparison, the right endpoint,
+then the positive ∂/δ and general reference comparisons. The original
+quotients and boundary choices must remain; this cycle equivalence alone
+does not prove a homology endpoint comparison. The six-term observation
+gap, displayed CAS integration and final qualification remain required.
+Details and evidence are in the
+[snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D1: Whole LES-to-snake input — qualified 2026-09-15
 

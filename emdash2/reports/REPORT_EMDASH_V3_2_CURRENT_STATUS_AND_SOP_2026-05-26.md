@@ -4,6 +4,16 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Original cycle comparison (2026-09-15): the
+[cycle owner](../emdash3_2_one_cat_native_window_snake_cycles.lp) uses whole
+row and kernel mates to construct u:Z(A₁)⇒K(c) and its inverse v. Native
+inclusion cancellation proves both inverse laws; fixed-forward ΩAlong(u)
+retains v in both inverse slots. Thirteen transparent definitions and
+eight consumer assertions qualify reconstruction, original inverse data and its Hom
+action without a new primitive, rule, opacity or normality premise.
+The homology endpoint and ∂/δ sign comparisons remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Whole LES-to-snake input (2026-09-15): the
 [window owner](../emdash3_2_one_cat_native_window_snake_inputs.lp) forms
 a=[bₘ,i₀], b=b₀ and c=⟨b₁,p₁⟩ from the original whole rows. Existing

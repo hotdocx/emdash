@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Original cycle comparison (2026-09-15): the
+[cycle owner](../emdash3_2_one_cat_native_window_snake_cycles.lp) constructs
+u:Z(A₁)⇒K(c), its whole inverse v, and fixed-forward ΩAlong(u).
+Original row/kernel cancellation proves both inverse laws; the original
+P/Q and row capabilities are retained. Thirteen transparent definitions
+and eight consumer assertions qualify the maps, reconstruction, both inverse slots
+and inverse Hom action. The left/right homology endpoints and positive
+∂/δ comparison remain next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Whole LES-to-snake input (2026-09-15): the
 [window owner](../emdash3_2_one_cat_native_window_snake_inputs.lp) forms
 a=[bₘ,i₀], b=b₀ and c=⟨b₁,p₁⟩. The original whole row maps and column
