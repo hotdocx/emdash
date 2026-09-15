@@ -4,6 +4,20 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native whole exactness interface (2026-09-15): the
+[whole comparison/type/evidence owner](../emdash3_2_commutative_algebra_freyd_native_exactness_observations.lp)
+and [Terminal views](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness_observations.lp)
+retain the original Ω-equivalence proofs and inverse choices. Eighteen
+definitions add no primitive or rule. The frontend now constructs the three
+actual theorem applications on a concrete native window without adding a
+source assumption. Exactness conformance retains and rechecks its complete
+declaration dependency closure; the unused δ realization is not a premise.
+The shared [row contract](../emdash3_2_commutative_algebra_freyd_adjunction_model_row_context.lp)
+avoids loading unrelated δ point-comparison definitions. Combined loading of
+both heavy interfaces still exceeds 2GiB and is unqualified. Full H/map
+assembly, displayed-diagram transport/coherence and the later sign comparison
+remain in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Native model observer update (2026-09-14): the
 [native context aliases](../emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
 and [complete-arrow observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
@@ -16,9 +30,10 @@ TypeScript uses distinct native normality/row/observer mirror names and
 requires `nativeNormalityContract`. Eight focused tests and the concrete
 nonsplit emitted observer pass through the
 [separately bounded gate](../scripts/check_freyd_native_model_connecting.sh).
-Model/row/arrow interpretations remain supplied or trusted. Complete automatic
-bounded-model adoption still reaches the guard, and native exactness
-observations remain required; no closed-model or full-goal completion is claimed.
+Model/row/arrow interpretations remain supplied or trusted. Complete retained
+bounded-model adoption is now qualified, and the direct native workflow covers
+all three connecting windows. Native whole exactness evidence is available as
+described above; no closed-model or full-goal completion is claimed.
 
 Column/H comparison update (2026-09-14): the
 [raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp)

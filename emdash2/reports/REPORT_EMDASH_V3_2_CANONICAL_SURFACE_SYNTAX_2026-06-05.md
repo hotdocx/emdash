@@ -2454,6 +2454,18 @@ owner. These two definitions add no primitive or computation/comparison
 rule. Their TypeScript interpretation keeps row semantics and the δ
 agreement explicit, distinct from the computed matrix equations.
 
+Whole exactness has the three `FreydRawNativeWindow*Exactness` predicates and
+`freyd_raw_native_window_*_exact_evidence` constructors. Each predicate is
+the existing `OmegaEquivAlong` at the actual named comparison in
+`Functor_cat K (CommRingFreydPresentation_cat R)`. The evidence is the
+original native exactness theorem. `FreydAdjunctionModel*Exactness` and
+`freyd_adjunction_model_*_exact_evidence` are Terminal partial applications
+of those same owners. Their frontend telescope has 45 original window
+arguments, omitting only the two endpoint-chain views specific to the δ
+observer. The derived proofs require no δ interpretation or output-exactness
+assumption. Their exact modular dependency closures are checked separately
+from the heavier δ point-observer imports.
+
 `FreydHomologyModel(R)` packages the older supplied coherent inputs;
 `freyd_homology_model_func(M)` is their original whole H. The readable
 `freyd_homology_model_object(M,e,d,chain)` is ordinary application of that H

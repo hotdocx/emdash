@@ -320,8 +320,9 @@ with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
 NUH-5N1 native context/signature preparation, the first native H/map and all
-connecting-window realizations are qualified. Next are native exactness,
-full H/map assembly and the complete bounded diagram with coherent
+connecting-window realizations and the native whole exactness interface are
+qualified. Next are full H/map assembly, displayed-diagram exactness transport
+and the complete bounded diagram with coherent
 realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
@@ -330,6 +331,33 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2E: Native whole exactness evidence — qualified 2026-09-15
+
+The twelve whole API definitions name the original model/raw comparison
+functors, their Ω predicates and the original derived evidence. Six Terminal
+aliases serve the frontend. The terminal row contract was extracted unchanged
+to a small shared owner. There is no primitive, rule, independent inverse or
+output-exactness assumption. Native context v5 includes the six exact mirrors;
+the pure constructor applies all three theorem owners to the actual window.
+
+The concrete consumer retains its 69 source assumptions. Its checked
+dependency closure contains 59 declarations and excludes the unused δ
+interpretation reference. All original model/row/matrix dependencies remain
+and are rechecked. General/Terminal reviewers, symbolic/concrete emitted
+proofs and the native δ regression total 17 passing LP assertions. Three
+exactness tests pass (77.57s, reviewed 120s guard), three legacy regressions
+pass (3.26s), and focused types/lint plus static metadata checks pass.
+
+The combined δ-point-observer/exactness import exhausts 2GiB in either order,
+before new consumer terms are checked. Narrow shared-row ownership and exact
+proof dependency closures qualify the actual proofs; they do not fix that
+loader boundary. No failed point/inverse-projection probe was resumed.
+
+This turn is **progress**. Full H/map assembly, transport from the original
+whole exactness families to the displayed diagram, its coherence and the
+later snake/LES sign comparison remain. See the
+[model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) for evidence.
 
 ### NUH-5N2D: All native connecting windows — qualified 2026-09-15
 

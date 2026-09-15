@@ -2,11 +2,11 @@
 import { affineFormalCommRingType, affineFormalRingElementType } from './algebra_formal_conformance';
 import { AlgebraFormalFreydRationalSelectedResult, prepareAlgebraFormalFreydRationalInputs } from './algebra_formal_freyd_rational_preparation';
 import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from './algebra_formal_freyd_native_model_signatures';
-import { createFormalFreydNativeConnectingProofEnvironment } from './algebra_formal_freyd_native_connecting_signatures';
+import { createFormalFreydNativeExactnessProofEnvironment } from './algebra_formal_freyd_native_exactness_signatures';
 import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption_source';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-rational-freyd-context-v4' as const,
+    revision: 'emdash-formal-native-rational-freyd-context-v5' as const,
     backend: 'rational-polynomial-freyd' as const,
     modelInterface: 'supplied-whole-adjunction-model-and-native-normality' as const,
     coefficientNames: 'canonical-rational-codepoints' as const,
@@ -19,6 +19,7 @@ export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freez
     nativeHomologyObservations: true as const,
     nativeCompleteArrowObservations: true as const,
     nativeWholeConnectingObservation: true as const,
+    nativeCategoricalExactnessEvidence: true as const,
     requiresNativeRowInterpretations: true as const,
     suppliesOutputExactness: false as const,
     addsCoreOwner: false as const,
@@ -82,7 +83,7 @@ export function prepareAlgebraFormalFreydNativeRationalModelContext(input: {
     const element = affineFormalRingElementType(formalRing);
     const modelType = algebraFormalFreydNativeModelType(formalRing);
     const normalityType = algebraFormalFreydNativeModelNormalityType(formalRing, formalModel);
-    const environment = createFormalFreydNativeConnectingProofEnvironment([
+    const environment = createFormalFreydNativeExactnessProofEnvironment([
         { name: formalRing.name, type: affineFormalCommRingType() },
         ...generatorTerms.map(term => ({ name: term.name, type: element })),
         ...coefficients.map(({ term }) => ({ name: term.name, type: element })),

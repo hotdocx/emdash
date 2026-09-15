@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Native whole exactness (2026-09-15):
+[comparison/predicate/evidence definitions](../emdash3_2_commutative_algebra_freyd_native_exactness_observations.lp)
+and [Terminal views](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness_observations.lp)
+now have a concrete proof–CAS consumer producing three derived theorem
+applications without another source assumption. Their modular dependency
+closures pass; combined loading with the δ point observer remains above the
+2GiB guard. Full H/map assembly and displayed-diagram transport/coherence
+remain in the living plan; no deferred projection experiment was resumed.
+
 Native-model priority update (2026-09-14): direct use of
 [`FreydAdjunctionModel`](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
 and native whole model contracts is now primary. Retain CAS-selected data;

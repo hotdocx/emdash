@@ -110,15 +110,38 @@ export function extendFormalFreydConnectingSignatures(environment: CoreLfDeclara
     const ring = () => L.tau(b.free('bridge_CommRing'));
     const model = (s: Scope) => L.tau(L.call(names.model, [s.R]));
     const grpd = () => b.application('groupoid-universe', []);
-    const short = (s: Scope, A: string, B: string, D: string, e: string, d: string, chain: string) =>
-        L.tau(b.call(b.free(names.shortExact),
-            [s.R, s.M, s[A], s[B], s[D], s[e], s[d], s[chain]].map((value, i) => ({ value,
-                plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const }))));
     if (names.declareNormality) add(names.normality, [['R', ring, 'implicit'], ['M', model]], grpd);
     add(names.shortExact, [['R', ring, 'implicit'], ['M', model],
         ...['A', 'B', 'D'].map(name => [name, (s: Scope) => L.presentationType(s.R), 'implicit'] as Field),
         ['e', s => L.morphismType(s.R, s.A, s.B)], ['d', s => L.morphismType(s.R, s.B, s.D)],
         ['chain', s => L.chainType(s.R, s.A, s.B, s.D, s.e, s.d)]], grpd);
+    const fields = formalFreydWindowFields(b, names);
+    add(names.observation, fields,
+        s => L.tau(L.call('bridge_FreydArrowObservation', [s.R])));
+    inputs.forEach((input, index) => {
+        environment = environment.extend({ ...input, mode: input.mode ?? binderMode('explicit', 'functorial'),
+            provenance: provenance('surface', 'model-connecting input ' + input.name,
+                sourceSpan('generated/formal-freyd-model-connecting.ts', index + 1, 1)) });
+    });
+    return environment;
+}
+
+export type FormalFreydWindowScope = Readonly<Record<string, Term>>;
+export type FormalFreydWindowField = readonly [string, (s: FormalFreydWindowScope) => Term, ('explicit' | 'implicit')?];
+
+/** Original raw-window telescope; endpoint chains belong only to the δ view. */
+export function formalFreydWindowFields(b: CoreLfScopedBuilder,
+    names: { readonly model: string; readonly normality: string; readonly shortExact: string }, includeEndpointChains = true
+): readonly FormalFreydWindowField[] {
+    const L = formalFreydSpineLanguage(b);
+    type Scope = FormalFreydWindowScope;
+    type Field = FormalFreydWindowField;
+    const ring = () => L.tau(b.free('bridge_CommRing'));
+    const model = (s: Scope) => L.tau(L.call(names.model, [s.R]));
+    const short = (s: Scope, A: string, B: string, D: string, e: string, d: string, chain: string) =>
+        L.tau(b.call(b.free(names.shortExact),
+            [s.R, s.M, s[A], s[B], s[D], s[e], s[d], s[chain]].map((value, i) => ({ value,
+                plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const }))));
     const fields: Field[] = [['R', ring, 'implicit'], ['M', model],
         ['N', s => L.tau(L.call(names.normality, [s.R, s.M], 1))]];
     rows.forEach(row => row.slice(0, 3).forEach(name => fields.push([name, s => L.presentationType(s.R), 'implicit'])));
@@ -133,13 +156,6 @@ export function extendFormalFreydConnectingSignatures(environment: CoreLfDeclara
             ...source.slice(0, 3).map(n => s[n]), ...target.slice(0, 3).map(n => s[n]),
             s[source[3]], s[source[4]], s[target[3]], s[target[4]], s[a], s[bb], s[d]], 7))]);
     }
-    chains.forEach(([name, A, B, D, e, d]) => fields.push([name, s => L.chainType(s.R, s[A], s[B], s[D], s[e], s[d])]));
-    add(names.observation, fields,
-        s => L.tau(L.call('bridge_FreydArrowObservation', [s.R])));
-    inputs.forEach((input, index) => {
-        environment = environment.extend({ ...input, mode: input.mode ?? binderMode('explicit', 'functorial'),
-            provenance: provenance('surface', 'model-connecting input ' + input.name,
-                sourceSpan('generated/formal-freyd-model-connecting.ts', index + 1, 1)) });
-    });
-    return environment;
+    (includeEndpointChains ? chains : chains.slice(0, 2)).forEach(([name, A, B, D, e, d]) => fields.push([name, s => L.chainType(s.R, s[A], s[B], s[D], s[e], s[d])]));
+    return fields;
 }

@@ -5061,6 +5061,15 @@ one complete δ agreement, with automatic matrix preparation and no separate
 point agreements. Native exactness realization and coherence across the
 complete bounded diagram remain the next integration boundary.
 
+The native whole exactness interface now exposes the original comparisons
+Im(H(i))⇒Ker(H(p)), Im(H(p))⇒Ker(δ), and Im(δ)⇒Ker(H(i)) with their existing
+`OmegaEquivAlong` evidence in the functor category. The proof constructors
+specialize the already derived native theorems; they do not request output
+exactness as new model structure. The concrete frontend builds all three
+proof terms without adding an assumption. These proofs concern the original
+whole window families. Transport to the complete displayed CAS diagram and
+coherence of that realization remain further work.
+
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not
 prove that the native providers construct them. As with assigning a native

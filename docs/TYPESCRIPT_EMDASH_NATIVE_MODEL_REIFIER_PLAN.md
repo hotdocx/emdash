@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — native H/map and all connecting-window realizations qualified at their recorded consumers; native exactness, full H/map assembly and whole-diagram qualification remain; legacy comparisons and auxiliary normalization deferred
+Status: active — native whole exactness evidence and H/map/δ consumers qualified at their recorded boundaries; full H/map assembly and whole-diagram transport/coherence remain; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -480,6 +480,111 @@ complete native H/map assembly alongside these windows, and qualify the
 whole bounded diagram and its coherence. The same-model/source check is a
 necessary integration invariant, not a proof of whole-diagram coherence.
 Keep the later snake/LES sign comparison and NUH-6/7 requirements intact.
+
+## NUH-5N2E: Native Categorical Exactness Evidence — Qualified Whole Interface
+
+The three active `freyd_raw_native_window_*_exact` operations already derive
+whole `OmegaEquivAlong` evidence from the same native M/N and raw-window
+inputs used by δ. The frontend now needs named exactness types and proof
+constructors for those actual operations, not an assumed output predicate.
+
+Use the preserved `whole_api`/`whole_type_review` prototype as a candidate
+for this required native consumer. Its twelve definitions name the original
+model/raw comparison functors, their existing Ω-equivalence predicates, and
+the original derived evidence. Qualify those definitions against the current
+owners before promotion. Keep the explicit `Functor_cat K Freyd(R)` category
+at the Ω predicate, which is the previously qualified typing boundary.
+Add thin Terminal specializations for the concrete proof–CAS window interface.
+Do not resume the failed point/inverse-projection experiments or replace the
+existing comparisons/inverse choices.
+
+The proof–CAS constructor must use the original window's checked values and
+produce ordinary checked Core theorem applications, adding no source
+assumption or trust decision for output exactness. Qualification must check
+the actual whole predicates/evidence and concrete native window applications.
+Full H/map assembly, relation to the complete displayed diagram, its coherence
+and the later snake/LES comparison remain required after this interface step.
+
+Current dependency finding: loading the raw-H δ observer and all exactness
+proof modules together exceeds the 2GiB guard during dependency checking,
+even in an import-only probe and in either import order. The whole API alone
+passes. Extract the unchanged terminal row contract to a small shared owner
+so exactness does not import the unused native column-comparison machinery.
+The resulting Terminal exactness owner/reviewer passes. For proof–CAS
+conformance, retain the dependency closure of each exactness term and type,
+including the original M/N, raw data and row proofs, but omit unrelated δ
+interpretation declarations. Rebuild/check that closure with the unchanged
+Core environment API. This is modular proof checking, not omission of an
+exactness premise or a claim that the combined import resource limit is fixed.
+
+For the concrete exactness test group, use a reviewed 120s limit with the
+unchanged memory/heap guards. Its prerequisite middle-window construction
+previously took 60.72s; this group additionally checks three whole proof
+applications, rebuilds their declaration dependency closure and runs the
+symbolic positive/negative controls. Record its combined time. Compiler and
+individual LP checks remain at 90s.
+
+The [whole exactness owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_exactness_observations.lp)
+now contains the twelve reviewed model/raw comparison, predicate and evidence
+definitions. Three [Terminal predicate/constructor pairs](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_exactness_observations.lp)
+specialize that interface without changing the original comparison or inverse.
+The unchanged native row contract has its own small
+[shared owner](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_row_context.lp),
+used by δ and exactness. These are definitions over the existing whole
+theorems and `OmegaEquivAlong`; no primitive, rewrite or unification rule
+is introduced. General K and Terminal reviewers each pass three assertions.
+
+The [native exactness mirrors](../src/v3_2/algebra_formal_freyd_native_exactness_signatures.ts)
+reuse the original 45-argument raw-window telescope, excluding only the two
+raw H endpoint chains used by the δ observation. Native context profile v5
+includes those six exact type/proof mirrors. The
+[pure constructor](../src/v3_2/algebra_formal_freyd_native_exactness.ts)
+checks the actual native window and produces three ordinary Core applications
+of the derived proof owners. It executes no CAS algorithm, requests no trust
+decision and adds no assumption. The evidence remains whole categorical
+exactness in `Functor_cat(Terminal,Freyd(R))`; it is not yet transported to
+the complete displayed CAS diagram.
+
+The concrete middle-window test retains all 69 existing source assumptions
+and adds none. Its checked declaration dependency closure has 59 entries,
+including the original M/N and needed raw matrix/row evidence; the δ
+interpretation reference is absent because it is not an exactness premise.
+The test-only closure helper preserves original types/terms and declaration
+order, rejects intrinsic definitions and body-bearing selected declarations, and rechecks the selected
+environment through the unchanged Core API. This gives a complete modular
+LP proof artifact without loading unrelated δ point-comparison definitions.
+The combined-import memory failure remains recorded and unqualified; it was
+not repaired by an axiom, opacity rule, larger memory limit or omitted proof
+dependency. No failed point/inverse-projection reviewer was resumed.
+
+Three exactness tests pass in 77.57s under the reviewed 120s guard, and three
+legacy signature/rejection regressions pass in 3.26s at 90s. Symbolic and
+concrete emitted exactness each pass three LP assertions. Together with the
+two three-assertion whole/Terminal reviewers and the five-assertion native δ
+regression, 17 affected formal assertions pass at 90s with warnings enabled.
+Focused types/lint, catalog, static health and source TOC checks pass. No
+repository aggregate ran.
+
+Final metadata review adds an explicit identity check between the window
+preparation and the observation's original preparation. The focused concrete
+case, including rejection of a substituted preparation, passes again in
+72.45s; `nuh5n2e_binding_regression.txt` and `nuh5n2e_binding_lint.txt` retain
+that evidence. The proof terms and LP artifacts are unchanged.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2e_candidate.txt`,
+`nuh5n2e_terminal_owners.txt`, `nuh5n2e_tests.txt`, `nuh5n2e_types.txt`,
+`nuh5n2e_lint.txt`, `nuh5n2e_legacy_regression.txt`, `nuh5n2e_conformance.txt`
+and `nuh5n2e_delta_regression.txt`. The symbolic/concrete artifacts are
+`nuh5n2e_symbolic.lp` (13,695 bytes) and `nuh5n2e_concrete.lp` (299,273 bytes).
+Their logs are `logs/probes/nuh5n2e_symbolic-20260915-023737.log` and
+`logs/probes/nuh5n2e_concrete-20260915-023756.log`. Failed combined imports
+are retained in `nuh5n2e_combined_imports.txt` and the original owner log.
+
+**Next:** assemble all native H/maps alongside the qualified δ windows, then
+connect the whole exactness families to the complete displayed diagram and
+qualify its coherence. The later snake/LES sign comparison remains required.
+Do not describe this whole-interface proof as an already completed displayed-
+diagram exactness transport or as resolution of the import memory boundary.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

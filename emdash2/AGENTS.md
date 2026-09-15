@@ -124,6 +124,14 @@ whole bounded diagram/coherence remain NUH-5N2; sharing that source or
 adopting individual arrows does not establish whole coherence or the later
 snake/LES sign comparison. The combined three-window/reuse group has a
 reviewed 240s guard (measured 157.71s); individual LP checks remain at 90s.
+NUH-5N2E now qualifies the original whole Ω-exactness predicates/proofs and
+a pure frontend constructor on a concrete native window, without adding an
+output assumption. Terminal row contracts have a small shared owner. The
+combined δ-point-observer/exactness import exceeds 2GiB; exactness artifacts
+instead retain and recheck their complete declaration dependency closure,
+excluding unrelated δ interpretation declarations. This does not fix the
+loader boundary or establish displayed-diagram transport/coherence, which
+remain required. Do not resume the deferred point/inverse projection checks.
 
 Use this order:
 

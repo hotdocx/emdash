@@ -1,18 +1,11 @@
 /* Direct native row contracts and complete-arrow observation of whole δ.
    The concrete CAS interface uses Terminal as its index; native whole owners
    retain their general base and action. No legacy H comparison is involved. */
-require open emdash.emdash3_2_commutative_algebra_freyd_native_row_short_exact;
+require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_row_context;
 require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_normality;
 require open emdash.emdash3_2_commutative_algebra_freyd_raw_window_connecting_observation;
 require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_observations;
 require open emdash.emdash3_2_commutative_algebra_freyd_arrow_observations;
-
-// Original whole P/Q shortness at the original constant raw row.
-symbol FreydAdjunctionModelRowShortExact [R : τ CommRing] (M : τ (FreydAdjunctionModel R))
-  [A B D : τ (@CommRingPresentation R)]
-  (e : τ (@CommRingPresentationMorphism R A B)) (d : τ (@CommRingPresentationMorphism R B D))
-  (chain : τ (@CommRingFreydChainPair R A B D e d)) : Grpd
-≔ @FreydRawNativeRowShortExact Terminal_cat R M A B D e d chain;
 
 // Complete-arrow observation of the original whole native δ.
 symbol freyd_adjunction_model_connecting_observation [R : τ CommRing]
