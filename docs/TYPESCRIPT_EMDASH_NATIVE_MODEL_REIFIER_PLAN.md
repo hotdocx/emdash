@@ -977,6 +977,92 @@ realization contract, output-exactness assumption, or caller-written
 naturality square is permitted as a substitute. NUH-6/7 and existing
 deferrals remain as previously recorded.
 
+G3B experiment (2026-09-15, after `d0d638d3`): first compare the evaluated
+canonical family comparison with the existing universal comparison at
+`zero_arrow_family_point_input(A,D,h,x)`. This tests whether the original
+native input can directly index the point certificate. Use the existing
+`ZeroArrowCone_cat` and `zero_arrow_cone_image_kernel_transf`; do not introduce
+another input category or accept an arbitrary invertible arrow. A failure
+of conversion requires an explicit categorical comparison, not a new fold.
+The concrete δ observer additionally conjugates the original component by
+the existing left/right column homology equivalences. These comparisons must
+be retained when identifying the two displayed arrows; raw components alone
+are insufficient. This is the next required consumer, under the unchanged
+90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
+
+### NUH-5N2G3B1: Original Window Arrow-Pair Observations — Qualified
+
+The [generic observation owner](../emdash2/emdash3_2_zero_arrow_pair_observations.lp)
+observes both arrows of the existing whole input A,D,h together. Its input
+is independent of K/Q selection; the original whole incoming transformation
+and the differential of D retain their action. `ArrowPairObservation` is
+ordered result data with typed projections, not another category of complexes
+or a new exactness predicate. The
+[native window owner](../emdash2/emdash3_2_commutative_algebra_freyd_window_pair_observations.lp)
+specializes this observation to the actual A,D,h occurring in each original
+middle/source/target Im→Ker comparison. It exposes the input pair of the
+existing theorem, not an arbitrary pair inferred from the comparison's
+endpoints. Seven definitions add no primitive, rewrite or unifier.
+
+All three pairs are observed in each of the original zero/nonzero/zero
+windows. The final artifacts reuse the same source declarations and raw
+window terms as G3A, excluding its unused exactness assertions and imports;
+no source theorem body is converted to an assumption. Twelve assertions per
+window check the pair, both typed arrows and their shared endpoint. They
+pass in 18.46s, 16.40s and 17.13s. Six generic checks retain arrow order,
+the original whole components and shared endpoint, including a rejection of
+swapping arbitrary inputs. The two owners check in 3.65s and 16.98s; the
+generic reviewer checks in 4.45s. Thus 42 assertions are qualified. All LP
+checks use the unchanged 90s/2GiB guard. There is no TypeScript change or
+repository aggregate in this tranche.
+
+Full diagnostic inventories match import-only controls for both owners,
+the reviewer and all three concrete files: generic 1,157 critical-pair/159
+pattern reports; native/concrete 1,490/169. Categories, locations, term heads,
+rule families and parser issues are compared. Strict LHS scans have no rules
+or candidates. The catalog/TOC and generated source-health snapshot are
+current. A structural source audit also verifies that each specialization
+uses exactly K,C,t,T,A,D,h from the existing canonical comparison body,
+retaining every original raw parameter and adding only the observation x.
+
+The attempted combined certificate is **not qualified or promoted**. Several
+larger presentations exceeded 2GiB: storing the entire functor-valued input
+with its proof, naming the original whole proof first, expanding the native
+pair predicate, retaining the original whole-predicate head, and checking a
+modular pair/certificate consumer. The simpler pair observations qualify
+without importing the whole exactness theorem module. This narrows the
+required integration issue; it does not solve the existing combined
+observation/exactness memory boundary. The relative-certificate prototypes
+must not be mistaken for a proved exactness predicate on the displayed
+diagram. No stronger model contract or output-exactness assumption was added.
+
+The initial family→universal-point comparison also remains unpromoted.
+The kernel target converts, while the incoming/image side retains different
+diagram and parent-composition presentations. A raw-postcomposition incoming
+observation lemma checks, but it does not complete the full comparison.
+Neither this comparison nor the attempted decoded-comma presentation is a
+new prerequisite for the primary route. Preserve the original whole
+parameters and comparisons rather than introducing another input category.
+
+Evidence is recorded under `emdash2/tmp/probes/` in
+`nuh5n2g3b_conformance.json`, `nuh5n2g3b_controls.json`,
+`nuh5n2g3b_warnings.json` and `nuh5n2g3b_qualification.json`.
+The final concrete files are `nuh5n2g3b_final_window_0.lp`, `_1.lp`, `_2.lp`.
+The unpromoted experiments retain the `nuh5n2g3b_compare`, `typed`,
+`input_paths`, `native_incoming`, `family_data`, `concrete_pairs`, and
+`modular_pair_certificates` stems. The qualification record identifies the
+exact successful sources and failed logs separately.
+
+**Work order:** advance NUH-6 now using the completed general NUH-4 whole
+construction; its mathematical snake/LES comparison does not depend on this
+concrete CAS certificate join. Preserve general six-term scope and signs.
+NUH-5N2G3B2 remains required before NUH-7: relate the original observed pairs
+to the public native H/map/δ pairs through their existing column comparisons,
+then index/transport exactness to the CAS diagram and qualify the combined
+consumer. The displayed-exactness flag stays false. This reorders work around
+the measured resource issue; it does not defer required displayed exactness
+out of the goal. Existing Op/profile and optional projection deferrals remain.
+
 ## NUH-5A: Supported Retained-Model Preparation
 
 Start with rational polynomial rings, the supported coefficient backend of

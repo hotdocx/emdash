@@ -23,6 +23,16 @@ below and the combined δ-point/exactness import remain unqualified; do not
 interpret this consumer result as their resolution. Displayed-diagram
 exactness transport is still required in the living plan.
 
+Further required-consumer result (2026-09-15, G3B1): the original incoming/
+outgoing pairs now have checked observations in all three concrete windows.
+The promoted pair observer imports the input/construction owners without
+the whole exactness theorem module. The combined pair/exactness certificate
+still exceeds 2GiB, including its modular variant; that prototype is not
+promoted. The living model/reifier plan records exact logs and keeps this
+integration required before NUH-7, while scheduling the independent general
+NUH-6 snake/LES comparison next. This is not permission to resume optional
+inverse normalization or to assume displayed exactness.
+
 The original native whole exactness theorems remain qualified. The generic
 evaluation lemma checks, as do the twelve whole-API prototype definitions.
 The middle point-proof definition is accepted with its inferred type. Its

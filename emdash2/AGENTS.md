@@ -171,6 +171,14 @@ or new rule was added. G3B must relate the actual comparisons to the displayed
 arrow pairs and finish exactness transport. Existing inverse/projection
 deferrals and the combined-import boundary are not thereby resolved.
 
+Current work order after NUH-5N2G3B1 (2026-09-15): the original input-pair
+observations qualify in all three concrete windows, with 42 assertions and
+no new primitive/rule. Their combined exactness certificate still exceeds
+2GiB and is not promoted. Advance the independent general NUH-6 snake/LES
+comparison from NUH-4, then finish required G3B2 pair alignment and displayed
+exactness integration before NUH-7. The living plan retains both obligations;
+this does not change the displayed-exactness flag or the Op/profile deferrals.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

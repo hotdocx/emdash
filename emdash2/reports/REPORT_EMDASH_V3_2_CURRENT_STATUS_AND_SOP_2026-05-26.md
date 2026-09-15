@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native exactness input-pair observations (2026-09-15): the
+[generic observer](../emdash3_2_zero_arrow_pair_observations.lp) and
+[three window specializations](../emdash3_2_commutative_algebra_freyd_window_pair_observations.lp)
+observe the actual A,D,h of the original canonical comparisons. All three
+concrete windows retain both arrows and their shared endpoint; seven
+definitions and 42 assertions add no primitive or rule. The combined
+pair/exactness certificate still exhausts 2GiB and is not promoted. NUH-6
+can advance from the completed general construction; pair alignment,
+displayed exactness transport and the combined consumer remain required
+before NUH-7. TypeScript profiles and model contracts are unchanged.
+
 Native exactness point observations (2026-09-15): a
 [Sigma observation of the existing arrow/Ω witness](../emdash3_2_arrow_equivalence_observations.lp)
 and [native point interface](../emdash3_2_commutative_algebra_freyd_adjunction_model_point_exactness.lp)

@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Native exactness input pairs (2026-09-15): the
+[whole-input observer](../emdash3_2_zero_arrow_pair_observations.lp) and
+[window specializations](../emdash3_2_commutative_algebra_freyd_window_pair_observations.lp)
+retain both original arrows and their shared endpoint in all three concrete
+windows. Seven definitions and 42 assertions qualify. Combined pair/exactness
+certificates still exceed 2GiB and remain unpromoted. The
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+advances the general snake/LES comparison next while retaining required
+displayed exactness integration before final qualification.
+
 Native exactness point observations (2026-09-15): the
 [generic data view](../emdash3_2_arrow_equivalence_observations.lp) and
 [native interface](../emdash3_2_commutative_algebra_freyd_adjunction_model_point_exactness.lp)

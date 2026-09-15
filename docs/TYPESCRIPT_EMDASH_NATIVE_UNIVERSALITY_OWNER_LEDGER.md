@@ -331,6 +331,28 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-5N2G3B1: Original input-pair observations — qualified 2026-09-15
+
+The original A,D,h of each whole canonical Im→Ker comparison now supplies a
+paired observation of its incoming and outgoing arrows. This uses existing
+whole transformations and adds only result data/projections, with no new
+category, universal structure, rule or primitive. Seven definitions qualify
+all nine pairs across the original zero/nonzero/zero windows. Thirty-six
+concrete assertions and six generic checks pass under 90s/2GiB.
+
+The combined pair/exactness certificate remains unqualified: both larger
+input packages and direct/modular certificate variants exhaust 2GiB. These
+experiments are not promoted. Existing whole proofs, point Ω observations
+and the finite native→CAS path remain intact; neither the pair data nor
+that path alone proves displayed exactness. Exact artifacts, rejected
+alternatives and validation are in the
+[model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
+This turn is **progress**. NUH-6 is next from the completed general NUH-4
+construction, preserving six-term scope/signs. G3B2's pair alignment,
+exactness transport and combined consumer remain required before NUH-7.
+No TypeScript profile or displayed-exactness flag changes in this tranche.
+
 ### NUH-5N2G3A: Original exactness point observations — qualified 2026-09-15
 
 The required point consumer exposed the existing 2GiB boundary again. A

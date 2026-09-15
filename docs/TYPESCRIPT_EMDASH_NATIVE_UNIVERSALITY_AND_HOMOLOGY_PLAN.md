@@ -46,6 +46,15 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
 
+Current NUH-5N2G3B1 milestone (2026-09-15): the two original input arrows of
+each whole exactness comparison now have checked observations in all three
+concrete windows. Seven definitions add no primitive or rule; 42 assertions
+pass. Combining these observations with the whole exactness certificates
+still exceeds 2GiB, and the certificate prototypes remain unpromoted.
+Advance the general NUH-6 snake/LES comparison next from NUH-4. Return to
+the required pair alignment and displayed exactness integration before NUH-7;
+the full goal and displayed-exactness flag are unchanged.
+
 Current NUH-5N2G3A milestone (2026-09-15): all three original whole exactness
 proofs now have typed point observations, including both zero windows. A
 Sigma of the existing arrow and Ω witness, checked native constructors and
@@ -997,8 +1006,8 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: native finite-diagram coherence and typed observations of original whole exactness qualified | Relate the observed comparisons to adjacent displayed arrows, then index and transport categorical exactness under the existing model/row contracts |
-| NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
+| NUH-5 | active: original exactness and input-pair observations qualified separately; combined certificate memory boundary remains | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
+| NUH-6 | next tranche, using the completed general NUH-4 construction while the concrete certificate join remains open | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
@@ -1389,8 +1398,10 @@ renaming it as a prerequisite.
 
 ## Historical Launch Evidence And Current Continuation Prompt
 
-The following launch record is historical. The current queue is NUH-5B,
-then NUH-6/7, with NUH-1/2 explicitly deferred by later user direction.
+The following launch record is historical. The current queue advances NUH-6
+from the completed general NUH-4 construction, then returns to required
+NUH-5N2G3B2 displayed exactness integration before NUH-7. NUH-1/2 remain
+explicitly deferred by later user direction.
 
 2026-09-12: main was clean at `cbef77e7` with no staged or unstaged changes.
 The new branch/worktree was created at that commit. Bootstrap succeeded with
@@ -1544,8 +1555,11 @@ exactness comparisons are qualified at their stated ordinary boundary.
 The retained workflow is qualified through 0caa19d0. Follow the later user
 priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
 native context/signatures, complete H/map/δ observation assembly, finite
-diagram coherence and whole exactness evidence are qualified; continue
-NUH-5N2 categorical exactness transport to the actual selected CAS diagram.
+diagram coherence, whole exactness evidence and input-pair observations are
+qualified. The combined pair/certificate consumer exceeds 2GiB. Advance the
+general NUH-6 snake/LES comparison now, then return to required NUH-5N2G3B2
+categorical exactness transport to the actual selected CAS diagram before
+NUH-7. This changes work order, not completion criteria.
 Retain coherent model/realization, normality and row contracts explicitly;
 derive output exactness from the native theorem. Older formal presentations
 are compatibility evidence, not mandatory intermediate targets. Continue
