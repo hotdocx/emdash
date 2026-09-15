@@ -240,6 +240,16 @@ consumers before retiring obsolete dependencies. Earlier milestone queues
 requiring a general reference-snake comparison are superseded by this
 direction and the current living plan.
 
+NUH-6E1 now qualifies direct raw Freyd triple input, all five native whole
+snake maps and their complete-arrow observations. Input formation uses the
+existing matrix agreement and constant-family action before P/Q selection.
+The 24 combined consumers pass with default GC at 90s/2GiB. Retain the
+literal generic additive/terminal projections in dependent ∂ annotations;
+reducing those aliases prematurely caused an avoidable allocation failure.
+No primitive, rule, ordinary universal record or old-snake comparison is
+added. Concrete nonsplit CAS adoption and derived exactness remain 6E2;
+the separate 6C3b and displayed LES exactness obligations remain open.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

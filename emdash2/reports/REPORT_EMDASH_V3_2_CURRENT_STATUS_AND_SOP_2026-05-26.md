@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Direct native Freyd snake observations (2026-09-15): the
+[raw input](../emdash3_2_commutative_algebra_freyd_native_snake_inputs.lp)
+uses matrix agreement and constant-family action before universal selection.
+The [five maps](../emdash3_2_commutative_algebra_freyd_native_snake_maps.lp)
+and their [observations](../emdash3_2_commutative_algebra_freyd_native_snake_observations.lp)
+retain the supplied whole P/Q and native normality. Sixteen transparent
+definitions and 24 consumer assertions add no primitive or rule; the
+combined reviewer passes under default GC at 90s/2GiB. Concrete nonsplit
+adoption and derived exactness remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Native replacement scope correction (2026-09-15): user direction removes
 NUH-6D4, the former raw-snake comparison, from the goal. The qualified
 native snake–native LES comparison is retained. Direct native concrete

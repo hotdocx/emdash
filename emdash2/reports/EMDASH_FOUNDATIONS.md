@@ -5040,6 +5040,18 @@ observation are available. Complete bounded retained adoption is qualified;
 direct native realization is the current integration task.
 Neither model context is a closed model constructor.
 
+The same native Freyd model now supports the general snake directly.
+A raw matrix agreement c∘(b∘a)=0 yields a quotient-class equation,
+then enters the whole native input by constant-family action over K.
+This happens before P/Q selection. The five resulting transformations
+k₁,k₂,∂,q₁,q₂ are applications of the existing whole snake owners;
+only ∂ additionally uses native normality. Their complete-arrow
+observations evaluate those same transformations, retaining all six
+original universal endpoints. Point reconstruction, input recovery and
+off-diagonal Hom action check without old formal-snake comparisons,
+ordinary universal dictionaries or new axioms. Concrete CAS interpretation
+and derived exactness qualification remain separate obligations.
+
 The direct native model now has readable H and map observations. The H value
 is application of its existing whole functor to the original raw input;
 the map is application of the existing internal raw-map functor specialized

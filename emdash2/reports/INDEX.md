@@ -2,6 +2,13 @@
 
 Date: 2026-09-02
 
+Direct native Freyd snake observations (2026-09-15): raw matrix agreements
+now enter the whole snake before P/Q selection. The five native maps retain
+their original model endpoints in the existing complete-arrow carrier.
+Sixteen definitions and 24 projection/reconstruction/Hom-action checks add
+no primitive or rule. Concrete nonsplit adoption and derived exactness are
+next in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Native replacement scope correction (2026-09-15): user direction removes
 NUH-6D4, the former raw-snake comparison, from the goal. The qualified
 native snake–native LES comparison is retained. Direct native concrete

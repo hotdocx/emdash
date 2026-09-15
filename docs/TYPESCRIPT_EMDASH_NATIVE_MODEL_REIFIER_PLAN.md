@@ -10,6 +10,14 @@ Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALI
 
 ## Scope And Existing Boundary
 
+NUH-6E1 now supplies the direct Freyd snake input and five whole-map/
+complete-arrow observations. Its 24 formal consumers pass at the original
+model and P/Q endpoints, without new assumptions or rules. The next 6E2
+step uses those operations in the TypeScript preparation/realization
+workflow for the nonsplit triple (x,id_R,0), with the original six CAS
+terms and five maps. Concrete adoption and derived exactness are still
+required; this formal bridge alone does not complete that acceptance case.
+
 User clarification (2026-09-15, D-NUH-078): the same replacement policy
 applies to the former raw snake interface. Native concrete snake consumers
 must use whole P/Q and native model/realization contracts directly; agreement

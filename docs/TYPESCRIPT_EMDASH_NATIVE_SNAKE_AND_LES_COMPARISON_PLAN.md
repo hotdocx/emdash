@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native LES endpoint, connecting/sign and surrounding-map comparisons qualified; direct concrete qualification next; six-term observation gap retained; old-snake comparison withdrawn
+Status: native LES comparison and direct Freyd snake input/maps/observations qualified; concrete CAS adoption next; six-term observation gap retained; old-snake comparison withdrawn
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -70,7 +70,7 @@ comparison with the former raw connecting algorithm is required.
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
 | NUH-6D | qualified native LES endpoint, connecting/sign and surrounding-map comparisons; 6D4 withdrawn by user direction | Whole native LES specialization/comparison on the common short-exact inputs and fixed sign; no old/new snake comparison |
-| NUH-6E | next; advance direct consumers independently of the retained 6C3b gap | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
+| NUH-6E | 6E1 native Freyd input/maps/observations qualified; concrete adoption and derived exactness next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
 derive their whole reconstruction equations. A failure requiring ordinary
@@ -1378,3 +1378,79 @@ NUH-6C3b native comparison/witness observations and NUH-5N2G3B2 displayed
 CAS exactness alignment/transport before NUH-7. The 6C3b comparisons concern
 the actual native Im⇒K maps and evidence, not old/new implementations.
 The qualified native snake–native LES comparison remains intact.
+
+#### NUH-6E1: Native Freyd Input And Five Whole Maps — Qualified
+
+Starts at `1c24faac`; all 62 worktrees are clean and `cbef77e7` is an
+ancestor. The bounded native-input baseline passes with warnings enabled
+in `logs/probes/emdash3_2_native_snake_inputs-20260915-150124.log`.
+The existing raw CAS agreement for c∘(b∘a)=0 should enter the native input
+through constant-family action, before selecting any K/Q. Specialize the
+five existing whole maps directly to the supplied `FreydAdjunctionModel`
+and normality. Their concrete complete-arrow observations must evaluate
+those same transformations, retaining the original P/Q endpoints.
+
+Reject a candidate that needs old formal-snake comparisons, selected W/V
+records, a splitting, caller naturality proofs or an output-exactness
+assumption. Check incoming-map recovery, original quotient classes, actual
+whole Hom action and all five observation projections under bounded serial
+probes. No new primitive or rewrite/unification rule is proposed. The
+subsequent concrete adoption and four derived exactness consumers remain
+required; input/arrow specialization alone does not qualify them.
+
+The [constant-input owner](../emdash2/emdash3_2_one_cat_constant_snake_inputs.lp)
+maps a scalar triple-zero path into the existing whole native input through
+`Const_func_func` action and the existing constant-chain zero theorem.
+The [Freyd input owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_inputs.lp)
+uses the original raw matrix agreement for c∘(b∘a)=0. Quotient-class
+composition and that agreement derive the scalar zero, then the constant
+input retains the original three classes. Input formation needs only the
+initial-zero capability, no P/Q or ordinary universal records.
+
+The [five-map owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_maps.lp)
+specializes the original whole k₁,k₂,∂,q₁,q₂ to the supplied model's
+P/Q over arbitrary K. Only ∂ additionally requires native normality.
+Their [complete-arrow observations](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_observations.lp)
+evaluate those transformations at Terminal in the existing
+`FreydArrowObservation` carrier. Sixteen transparent definitions add no
+primitive, rewrite, unifier, opacity, splitting or old-snake comparison.
+
+The [combined reviewer](../emdash2/examples/freyd_native_snake_observations.lp)
+passes 24 assertions: all fifteen source/target/arrow projections, the five
+structural reconstruction laws at arbitrary points, recovery of the original
+raw a, both input-diagram endpoint actions, and off-diagonal Hom action of
+the positive connecting reconstruction. It passes with `o=20,v=1024` in the
+prototype and, after exact import renaming, in 15.772s with both runtime
+profile variables unset. All checks use the serial 90s/2GiB guard and
+normal subject-reduction checking.
+
+The first combined reviewer and its isolated connecting group exceeded
+2GiB when the expected ∂ endpoints used reduced Freyd aliases in place of
+the original generic additive/terminal projections. Retaining those literal
+generic projections in the dependent annotations resolves this local
+comparison cost; the whole implementation and all 24 consumer obligations
+are unchanged. A preliminary misspelling of `tapp0_fapp0` was corrected.
+Neither experiment establishes a resolution of the separate 6C3b gap.
+
+Exact warning inventories match the dependency-only control: 1,490
+unjoinable pairs and 169 pattern warnings, identical categories, locations,
+term heads and rule families, with no parser issue. All four new owners
+pass the strict LHS audit. Evidence is in `emdash2/tmp/probes/`:
+`nuh6e1_promoted_checks.json`, `nuh6e1_warnings.json`,
+`nuh6e1_source_audit.json` and `nuh6e1_qualification.json`.
+The catalog and source TOC are synchronized. The source-only health snapshot
+covers 1,322 files at
+`sha256:91c6fb960507ba18e0ba005e818aa9dd3f279c86d6367895da3976a2c93ae6a7`;
+no repository-wide typecheck or TypeScript check ran.
+
+#### NUH-6E2: Concrete Nonsplit Adoption And Exactness — Next
+
+Use the new native observations in the existing TypeScript proof–CAS
+preparation/realization workflow. Reuse the computed triple (x,id_R,0)
+and its matrix agreement, with the six original CAS terms and five maps.
+Check positive ∂=id_S through the declared native model/interpretation
+boundary, without a legacy formal result or universal reselection. Shared
+formal/CAS endpoints and reuse must remain explicit. Then specialize the
+four original derived native exactness witnesses and qualify their concrete
+consumers; do not supply output exactness as a model assumption. Full 6E,
+6C3b, displayed LES exactness transport and NUH-7 remain required.

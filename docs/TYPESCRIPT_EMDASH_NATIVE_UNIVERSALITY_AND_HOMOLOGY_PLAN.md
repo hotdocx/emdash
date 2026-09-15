@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native snake/LES comparisons qualified; direct concrete qualification next; six-term observation gap and displayed CAS transport still required; old-snake comparison removed from scope
+Status: active — native snake/LES comparison and direct Freyd snake input/maps/observations qualified; concrete CAS adoption next; six-term observation gap and displayed CAS transport still required
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,15 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+NUH-6E1 now connects raw Freyd triple-zero agreements to the existing whole
+snake input before P/Q selection, specializes all five native transformations
+to the supplied model, and exposes their complete-arrow observations.
+Sixteen transparent definitions and 24 projection/reconstruction/Hom-action
+assertions add no primitive, rule or interpretation assumption. The combined
+reviewer passes under the default runtime profile at 90s/2GiB. Next is
+concrete nonsplit CAS adoption and derived exactness in the
+[snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Latest scope correction (2026-09-15, D-NUH-078): the native reformulation
 replaces the former raw snake interface. Agreement with that old formal
@@ -1145,7 +1154,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | native LES comparisons qualified; direct concrete qualification next; 6C3b gap retained; old-snake comparison withdrawn | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
+| NUH-6 | native LES comparison and Freyd input/maps/observations qualified; concrete CAS adoption next; 6C3b gap retained | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
@@ -1699,7 +1708,8 @@ diagram coherence, whole exactness evidence and input-pair observations are
 qualified. The formerly failing combined pair/certificate artifact now
 passes unchanged at 2GiB with GC tuning; public alignment/transport remains
 required. Native snake/LES endpoint, connecting/sign and surrounding-map
-comparisons are qualified. Advance NUH-6E direct concrete qualification,
+comparisons and NUH-6E1 input/map observations are qualified. Advance
+NUH-6E2 concrete CAS adoption and derived exactness,
 then return to NUH-6C3b native evidence observations and NUH-5N2G3B2
 categorical exactness transport to the actual selected CAS diagram before
 NUH-7. NUH-6D4 old-snake comparison is removed from the completion criteria

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparisons qualified; direct concrete qualification next; old-snake comparison withdrawn; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — native LES comparison and Freyd snake input/maps/observations qualified; concrete CAS adoption next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,32 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-6E1: Native Freyd Snake Input And Five-Arrow Observations — Qualified
+
+The [input](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_inputs.lp)
+maps the original raw c∘(b∘a)=0 agreement to a whole constant-family
+native input, before P/Q selection. The
+[five whole transformations](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_maps.lp)
+specialize the existing native snake using only the supplied model and,
+for ∂, its normality. Their
+[observations](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_observations.lp)
+evaluate the same maps in the existing complete-arrow carrier.
+
+Sixteen transparent definitions add no primitive, rule, unifier, opacity,
+ordinary universal record or old-snake comparison. The 24-assertion reviewer
+checks all five maps' projections and reconstruction, original input
+recovery and its two endpoint actions, and off-diagonal connecting Hom
+action. Its promoted form passes in 15.772s with default GC, under 90s/2GiB.
+The warning inventory matches the existing-dependency control exactly.
+Retaining the original generic additive/terminal projections in dependent
+∂ annotations resolves the earlier local comparison allocation failure.
+The separate 6C3b obligation is unchanged. Source/control logs and manifests
+are recorded in the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
+Next is 6E2: actual nonsplit CAS adoption using these observations, then the
+four derived exactness consumers. No TypeScript source or model contract
+changed in 6E1, so the concrete acceptance case is not yet fully qualified.
 
 ### Scope Correction: Replace The Former Snake Without A Compatibility Gate
 

@@ -2425,7 +2425,18 @@ the identical whole H and its original native-input observations. Raw-window
 assembly and the retained TypeScript connecting observation are available;
 direct native complete-arrow/δ/exactness realization remains subsequent work.
 
-The direct native observation spelling is now
+For the general snake, `freyd_raw_native_snake_input(T0,a,b,c,z)` takes
+the original raw matrix agreement z for c∘(b∘a)=0. The base K and
+presentations remain implicit; it forms the whole constant-family input
+before P/Q selection. The five `freyd_raw_native_snake_*_transf(M,…)`
+operations specialize the original whole native maps, with N additionally
+supplied for ∂. Their `*_observation` operations evaluate those maps at
+Terminal in the existing `FreydArrowObservation` carrier, retaining the
+original endpoints. They add no ordinary universal record or old-snake
+comparison. The formal projection/reconstruction/Hom-action boundary is
+qualified; concrete CAS realization and exactness remain subsequent work.
+
+The direct native H observation spelling is
 `freyd_adjunction_model_object(M,e,d,chain)`, defined by applying that whole
 H to `freyd_raw_chain_native_cone(e,d,chain)`. For raw chain maps,
 `freyd_adjunction_model_map_func(M,chainS,chainT)` specializes the existing
