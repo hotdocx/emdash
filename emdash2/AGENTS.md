@@ -216,8 +216,13 @@ relation χ∘φ=γ with χ=⟨0,d̄₀ᴰ⟩, and its native whole diagram map.
 The inverse data, whole reconstruction and diagram endpoint actions check.
 NUH-6D2c2 now derives K(γ)≃K(d̄₀ᴰ) through the original whole K action
 and kernel inclusion cancellation. Both selected inverse projections,
-Hom action and ambient reconstruction qualify. Next identify this kernel
-with the original right H, then compare the positive ∂/δ formulas.
+Hom action and ambient reconstruction qualify. NUH-6D2c3 now proves
+the generic H=Q(β)≃K(ḡ) comparison from original P/Q and native
+normality/cover descent, then identifies the original K(γ) with the
+existing right-window H. Both endpoint comparisons and inverse data
+qualify. Next compare the positive ∂/δ formulas and the surrounding maps
+through their original cycle/quotient factors; do not identify all snake
+objects with LES H objects.
 LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped

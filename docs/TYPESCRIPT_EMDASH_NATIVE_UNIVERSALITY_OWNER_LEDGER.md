@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — original right kernel comparison qualified; right H identification/sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,24 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D2c3: Original right H identification — qualified 2026-09-15
+
+The [generic equivalence](../emdash2/emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
+derives H=Q(β)≃K(ḡ) through original whole P/Q operations. Kernel-
+precomposition and image-source covers supply the required cancellations
+under original normality; cover and annihilation evidence are proved.
+The [window comparison](../emdash2/emdash3_2_one_cat_native_window_snake_right_homology.lp)
+then identifies the original K(γ) with the existing native right H, retaining
+its quotient and selected inverse data. Thirty-five definitions and sixteen
+actual whole consumers add no primitive, rule, unifier or opacity.
+
+Next prove the positive L∘∂∘R⁻¹=δ relation using the original LES cover,
+then the surrounding-map factorizations. K(b₀)/Q(b₀) must not be called
+literal H(B₀)/H(B₁); their cycle/quotient factors are part of the comparison.
+General reference-snake, concrete, six-term observations, displayed CAS
+and final qualification remain required in the
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D2c2: Original right kernel comparison — qualified 2026-09-15
 

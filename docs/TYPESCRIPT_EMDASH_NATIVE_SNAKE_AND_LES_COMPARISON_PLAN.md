@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: original right kernel comparison qualified; right H identification and sign comparisons next; six-term observation gap retained
+Status: both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: left H and original right kernel comparison qualified; right H identification/sign next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -1099,7 +1099,15 @@ Evidence: `emdash2/tmp/probes/nuh6d2d_conformance.json`,
 snapshot covers 1,304 files at
 `sha256:c1ccffc07326993b5a858262ca036fc9d647d864c57f0d18873e800d9f81b840`.
 
-### NUH-6D2c3: Original Right H Identification — Next
+### NUH-6D2c3: Original Right H Identification
+
+Current experiment starts at `d67b72c4`; the previous goal turn qualified
+the original K(γ)≃K(d̄₀ᴰ) comparison. All 62 worktrees are clean and the
+bounded kernel-comparison baseline passes. Construct the generic whole
+comparison for original f/g/z first, then derive its cover inverse under
+the original native normality assumptions and specialize at the actual
+right-window input. New output exactness, cover or equivalence premises
+would reject this route. Preserve original K/Q objects and whole action.
 
 Use the original whole maps f=dₘᴰ, g=d₀ᴰ and their derived whole zero z.
 Let β:A⇒K(g) be the existing boundary at the native input constructed from
@@ -1114,5 +1122,82 @@ by lifting its ambient image into Im(f), using the existing whole image
 source cover and β reconstruction. Native cover descent then gives
 s:K(ḡ)⇒H with s∘ρ=π_β. Original quotient and cover cancellation should
 prove sk=id and ks=id. Compare with the actual window H, then combine
-with w to obtain K(γ)≃H(D₀). This is a proposed next construction, not
-an output-equivalence premise or a claim of a general normalization theorem.
+with w to obtain K(γ)≃H(D₀). The implementation now follows this route,
+without an output-equivalence premise or a general normalization claim.
+
+The [generic comparison owner](../emdash2/emdash3_2_one_cat_native_homology_quotient_comparison.lp)
+constructs ρ and k through the original P/Q mates. The original native input
+recovers f and β; κ_g∘β=f, κ_ḡ∘ρ=π_f∘κ_g and k∘π_β=ρ are proved
+as whole equations without normality.
+
+The [cover-source owner](../emdash2/emdash3_2_one_cat_native_homology_quotient_cover_source.lp)
+maps the original E=K(ḡ∘π_f) into K(g), preserving its ambient inclusion
+and reconstructing the existing E→K(ḡ) cover. The
+[cover owner](../emdash2/emdash3_2_one_cat_native_homology_quotient_covers.lp)
+uses the original Q-unit's zero cokernel and native normality to derive
+ρ cancellation, zero cokernel and actual cover evidence. Cover evidence
+is on Coim(ρ)⇒K(ḡ); no inverse of ρ is assumed.
+
+The [image owner](../emdash2/emdash3_2_one_cat_native_homology_quotient_image.lp)
+retains Im(f) as the original K of the original Q-arrow family. Its lift
+v:Im(f)⇒K(g) reconstructs f through the original source-image map. Native
+image-cover cancellation proves π_β∘v=0, and the original K(ρ) image
+lift proves π_β∘κ_ρ=0. The
+[equivalence owner](../emdash2/emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
+therefore constructs s:K(ḡ)⇒H by original cover descent, with
+
+```text
+k∘π_β = ρ,       s∘ρ = π_β,       sk=id_H,       ks=id_K(ḡ).
+```
+
+The [window owner](../emdash2/emdash3_2_one_cat_native_window_snake_right_homology.lp)
+specializes at the original right-column f/g/z, composes s with the previous
+w:K(γ)⇒K(d̄₀ᴰ), and proves fixed-forward ΩAlong at the existing native
+right-window H. Its inverse reconstructs on the actual original H quotient.
+Thus both required central H endpoint comparisons now have actual whole
+programs and inverse data at the existing LES H choices.
+
+Thirty-five transparent definitions (31 generic and four window operations/
+laws) add no primitive, rule, unifier or opacity. Normality is used through
+the original declared capability to prove the cover and image cancellation;
+no output exactness or cover premise is supplied. Sixteen actual whole
+consumer assertions cover inverse data, Hom action, cancellation and both
+quotient/cover reconstructions, including the existing window H endpoint.
+An initial reviewer generator reused its congruence helper's bound name;
+fresh test-map binders fixed that test-only capture without a theory change.
+
+The six owners pass in 10.401s, 8.689s, 13.385s, 10.721s, 15.999s
+and 18.847s. Generic/window consumers pass in 16.696s/24.218s with
+`OCAMLRUNPARAM=o=20,v=1024`, and 9.812s/12.998s with both GC variables
+unset, all under 90s/2GiB. Exact import-control warning inventories match
+for every owner and reviewer, including locations, heads and rule families;
+no parser issues remain. Source registration uses normal routing. Strict
+LHS, catalog/TOC, source-only health and document checks are localized.
+No earlier LP owner, resource guard or runtime profile changes.
+
+Evidence: `emdash2/tmp/probes/nuh6d3_conformance.json`,
+`nuh6d3_warnings.json`, `nuh6d3_source_audit.json` and the final
+`nuh6d3_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,312 files at
+`sha256:80ab47efad297386cc3729d56f6edeac4681d7c46e05f9ac6fde14b7be8b43a8`.
+
+### NUH-6D3: Connecting And Surrounding-Map Comparison — Next
+
+Let L:Q(α)⇒H(A₁) and R:K(γ)⇒H(D₀) be the two original whole comparisons.
+Prove L∘∂∘R⁻¹=δ using the existing LES cover e:E_LES⇒H(D₀). Lift its
+original ambient B₀ map into the snake cover E_snake=K(γ∘π_a). The
+original inclusions and quotient reconstructions should prove
+R⁻¹∘e=ρ_snake∘u. The original left-cycle/row inclusions should identify
+L∘θ_snake∘u with θ_LES. Both connecting reconstruction laws and original
+LES-cover cancellation then give the desired whole equality, fixing the
+positive sign without selecting a new δ.
+
+The surrounding snake objects are K(b₀) and Q(b₀), not automatically
+H(B₀) and H(B₁). Qualify the corresponding whole factorization comparisons:
+the incoming map to K(γ), after R, should agree with H(p₀) after the
+original middle-cycle quotient; the outgoing map from Q(α), after L⁻¹,
+should agree with H(i₁) followed by the original H(B₁)→Q(b₀) inclusion.
+Do not describe all six snake objects as literally the LES H objects.
+The general reference-snake comparison still retains its arbitrary-a/
+arbitrary-c six-term scope. Concrete, 6C3b, displayed CAS and final
+qualification remain required.

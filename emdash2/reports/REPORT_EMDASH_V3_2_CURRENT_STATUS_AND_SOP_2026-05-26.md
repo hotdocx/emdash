@@ -4,6 +4,18 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Original right H identification (2026-09-15): the
+[generic equivalence](../emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
+derives H=Q(β)≃K(ḡ) by original P/Q and native cover descent. Original
+quotient/kernel-precomposition and image covers prove the required cover
+and annihilation evidence under native normality. The
+[window owner](../emdash3_2_one_cat_native_window_snake_right_homology.lp)
+retains the existing right H and its original quotient. Thirty-five
+definitions and sixteen actual whole consumers qualify both endpoint
+comparisons and inverse data without new primitives, rules or opacity.
+Connecting/sign and surrounding-map comparisons remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right kernel comparison (2026-09-15): the
 [composite owner](../emdash3_2_one_cat_native_window_snake_right_kernels.lp)
 derives K(γ)≃K(d̄₀ᴰ) using original whole K action on native diagram maps

@@ -2,6 +2,17 @@
 
 Date: 2026-09-02
 
+Original right H identification (2026-09-15): the
+[generic proof](../emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
+constructs H=Q(β)≃K(ḡ), deriving cover and annihilation evidence through
+original P/Q and native normality. The
+[window comparison](../emdash3_2_one_cat_native_window_snake_right_homology.lp)
+then lands in the existing right-window H. Thirty-five transparent
+definitions and sixteen whole consumers retain original choices and
+inverse data without new primitives, rules or opacity. Both central H
+endpoints qualify; connecting/sign and surrounding-map comparisons remain
+next in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right kernel comparison (2026-09-15): the
 [composite owner](../emdash3_2_one_cat_native_window_snake_right_kernels.lp)
 constructs K(γ)≃K(d̄₀ᴰ) through original whole K action and inclusion
