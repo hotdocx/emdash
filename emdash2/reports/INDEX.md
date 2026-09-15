@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Whole surrounding-map comparisons (2026-09-15): the
+[owner](../emdash3_2_one_cat_native_window_snake_surrounding_maps.lp)
+proves R∘k₂=H(p₀)∘q_B and q₁∘L⁻¹=j_B∘H(i₁), retaining the
+original cycle quotient and homology inclusion. Eight definitions and ten
+whole consumers qualify both factorizations, native diagram endpoints and
+Hom action without new primitives or rules. The native LES comparison is
+qualified; general reference-snake and concrete qualification remain next
+under the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Whole connecting/sign comparison (2026-09-15): the
 [comparison owner](../emdash3_2_one_cat_native_window_snake_connecting_comparison.lp)
 proves L∘∂∘R⁻¹=δ and L∘∂=δ∘R for the original whole connecting

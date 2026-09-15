@@ -307,6 +307,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_native_window_snake_right_homology.lp"),
     Path("emdash3_2_one_cat_native_window_snake_connecting_covers.lp"),
     Path("emdash3_2_one_cat_native_window_snake_connecting_comparison.lp"),
+    Path("emdash3_2_one_cat_native_window_snake_surrounding_maps.lp"),
     Path("emdash3_2_functor_category_unit_views.lp"),
     Path("emdash3_2_one_cat_arrow_family_maps.lp"),
     Path("emdash3_2_one_cat_kernel_cokernel_family_maps.lp"),

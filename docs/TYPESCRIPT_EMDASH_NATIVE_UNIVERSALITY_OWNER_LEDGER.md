@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — native LES comparisons qualified; general reference/concrete qualification next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,24 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D3b: Original surrounding-map factorizations — qualified 2026-09-15
+
+The [surrounding-map owner](../emdash2/emdash3_2_one_cat_native_window_snake_surrounding_maps.lp)
+proves R∘k₂=H(p₀)∘q_B and q₁∘L⁻¹=j_B∘H(i₁) through original
+row homology and kernel/cokernel reconstruction. The native diagram maps
+retain q_B/R and L⁻¹/j_B endpoint actions, including their whole Hom
+action. Eight definitions and ten consumers add no primitive, rule,
+unifier, opacity or caller naturality field. Actual cycles and cokernels
+remain distinct from middle H objects.
+
+The native LES endpoint, connecting/sign and incident-map comparisons
+are now qualified. Next inventory and compare the general reference
+`AbelianSnakeTriple` construction at all six terms/maps, preserving
+arbitrary a/c. Existing native ordinary record views may serve that
+reference boundary without changing native program prerequisites.
+Concrete, six-term observations, displayed CAS and final qualification
+remain required under the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D3a: Original whole connecting/sign comparison — qualified 2026-09-15
 

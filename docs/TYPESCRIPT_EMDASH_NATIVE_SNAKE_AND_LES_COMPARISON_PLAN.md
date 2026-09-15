@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: original whole connecting/sign comparison qualified; surrounding-map comparisons next; six-term observation gap retained
+Status: native LES endpoint, connecting/sign and surrounding-map comparisons qualified; general reference/concrete qualification next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | native LES endpoint, connecting/sign and surrounding-map comparisons qualified; general reference comparison next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -1254,7 +1254,15 @@ Evidence: `emdash2/tmp/probes/nuh6d4_conformance.json`,
 snapshot covers 1,315 files at
 `sha256:e1e8d6127d951353433650cf5970375a46aba87e0065e4ba5a421b872de3c808`.
 
-### NUH-6D3b: Surrounding-Map Factorizations — Next
+### NUH-6D3b: Original Surrounding-Map Factorizations
+
+Current experiment starts at `ce1f4d42`; the previous goal turn qualified
+the whole connecting/sign comparison. All worktrees are clean and the
+bounded connecting-owner baseline passes. Derive both factorization laws
+from original homology projection and kernel/cokernel action laws, then
+form the corresponding native whole diagram maps. Preserve the cycle
+quotient and homology-to-cokernel inclusion; do not add endpoint casts,
+comparison assumptions or pointwise naturality fields.
 
 Use the original `one_cat_native_snake_kernel_second` map k₂:K(b₀)⇒K(γ)
 and the original upper-middle homology quotient q_B. Prove
@@ -1268,4 +1276,58 @@ comparison. Use `one_cat_row_triple_incoming_homology_projection_path`,
 the original H quotient, left-H inverse reconstruction and native kernel
 map reconstruction. Retain the actual cycle/quotient factors; do not replace
 K(b₀)/Q(b₀) by H(B₀)/H(B₁). General reference, concrete, 6C3b, displayed
+CAS and final qualification remain required.
+
+The [surrounding-map owner](../emdash2/emdash3_2_one_cat_native_window_snake_surrounding_maps.lp)
+now proves the two whole factorization laws at the original objects:
+
+```text
+R∘k₂ = H(p₀)∘q_B,
+q₁∘L⁻¹ = j_B∘H(i₁),       j_B∘q_B₁ = π_b₀∘κ_b₁.
+```
+
+The incoming proof uses the original right kernel/H comparison, original
+K/Q action and the native row homology projection law. The outgoing proof
+constructs j_B from the already derived generic H-to-quotient-kernel map,
+then cancels the original left H quotient. No cycle, H object, quotient
+or endpoint comparison is reselected.
+
+These equations supply two actual native whole diagram maps: Arr(k₂)⇒Arr(H(p₀))
+with endpoint actions q_B/R, and Arr(H(i₁))⇒Arr(q₁) with endpoint actions
+L⁻¹/j_B. Their different directions retain the actual cycle quotient and
+homology inclusion. Eight transparent definitions and ten whole consumers
+qualify both factorizations, arbitrary whole-map precomposition, the four
+diagram endpoint projections and whole Hom actions. No primitive, rule,
+unifier, opacity or caller naturality field is added.
+
+The owner passes in 20.779s. The ten-consumer reviewer passes in 21.402s
+with `OCAMLRUNPARAM=o=20,v=1024` and 13.918s with both GC variables unset,
+under 90s/2GiB. Exact import-control warning inventories match; normal
+source routing suffices. Strict LHS, catalog/TOC, source-only health and
+document checks are localized.
+
+Evidence: `emdash2/tmp/probes/nuh6d5_conformance.json`,
+`nuh6d5_warnings.json`, `nuh6d5_source_audit.json` and the final
+`nuh6d5_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,317 files at
+`sha256:9e6c90412ded491ed10a63f3ba959c2529e3c82838b8aaa9aa9d98ac0cd43629`.
+
+### NUH-6D4: General Reference-Snake Comparison — Next
+
+The active general reference owner remains `emdash3_2_abelian_snake_lemma.lp`
+with `ComputationalAbelianCategory` and an arbitrary `AbelianSnakeTriple`.
+Its connecting owner and covered-reconstruction owner retain the positive
+CAP characterization; its six-term result remains the comparison scope.
+Do not replace this by the already qualified short-exact-window case or
+assume a monic or c epic.
+
+First inventory the reference capability projections and the existing
+native ordinary record views in `emdash3_2_one_cat_adjunction_records.lp`.
+Choose a reviewed comparison boundary that retains the original native
+P/Q choices and all six reference terms/maps. Do not infer that native
+normality already supplies a closed `ComputationalAbelianCategory`
+constructor. Ordinary record views may serve this reference comparison;
+they must not become prerequisites of the native primary programs.
+Construct needed universal comparison maps and check the original covered
+connecting formula and sign. Reference, concrete six-term, 6C3b, displayed
 CAS and final qualification remain required.

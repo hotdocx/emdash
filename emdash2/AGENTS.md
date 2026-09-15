@@ -223,10 +223,12 @@ existing right-window H. Both endpoint comparisons and inverse data
 qualify. NUH-6D3a now proves the positive whole equations L∘∂∘R⁻¹=δ
 and L∘∂=δ∘R by original cover and cycle reconstruction and existing
 LES uniqueness. Its native connecting-diagram map retains R/L endpoint
-actions and whole Hom action. Next compare surrounding maps through
-their original cycle/quotient factors; do not identify all snake objects
-with LES H objects.
-LES/sign comparison and NUH-5
+actions and whole Hom action. NUH-6D3b now proves the whole surrounding-map
+factorizations through original cycle quotients and homology inclusions;
+their native diagram endpoint and Hom actions qualify. The native LES
+comparison is qualified at those actual factors, without identifying all
+snake objects with LES H objects. General reference-snake/concrete
+qualification and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
