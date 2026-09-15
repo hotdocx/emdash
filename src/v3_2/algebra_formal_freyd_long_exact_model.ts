@@ -26,14 +26,16 @@ import { createCoreProofChecker } from './proof_checker';
 import { serializeCoreExpression } from './core_serialization';
 
 export const ALGEBRA_FORMAL_FREYD_LONG_EXACT_MODEL_PROFILE = Object.freeze({
-    revision: 'emdash-formal-bounded-homology-model-observations-v2' as const,
+    revision: 'emdash-formal-bounded-homology-model-observations-v3' as const,
     input: 'one-retained-whole-replay-and-adoption' as const,
     points: 'all-retained-degrees-and-interior-exactness-homologies' as const,
     maps: 'both-retained-degreewise-induced-maps' as const,
-    connectings: 'all-retained-windows-when-normality-is-supplied' as const,
+    connectings: 'all-retained-windows-via-native-whole-delta' as const,
     interpretation: 'explicit-trusted-presentation-semantics' as const,
     replaysWholeHomology: false as const, reselectsUniversals: false as const,
-    transportsEndpoints: false as const, constructsModel: false as const,
+    endpointCasts: false as const, constructsModel: false as const,
+    endpointComparisons: 'original-selected-categorical-equivalences' as const,
+    nativeWholeConnectingObservation: true as const,
     claimsGenericLongExactTheorem: false as const
 });
 
@@ -41,7 +43,7 @@ export async function trustAlgebraFormalFreydLongExactModel<P extends AlgebraPar
     readonly artifactId: string;
     readonly modelId: string;
     readonly formalModel: KernelExpression;
-    /** Request the complete connecting inventory by supplying the model's normality enhancement. */
+    /** Request the complete connecting inventory by supplying native whole normality for the original model's P/Q adapter. */
     readonly normality?: KernelExpression;
     readonly prepared: AlgebraFormalFreydLongExactModelPreparation<P, C, I>;
     readonly adopted: AlgebraFormalFreydLongExactAdoption<P, C, I>;

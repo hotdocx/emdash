@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: native-window exactness, raw assembly and retained column-H comparisons qualified; TypeScript observation migration active; Op/duality deferred
+Status: native connecting observations and a retained nonsplit window qualified; complete bounded adoption/native exactness observations active; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,44 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-5B2d1: Native TypeScript connecting observation at retained H
+
+**Qualified after 96ddecaa (2026-09-14), through one retained nonsplit window.**
+The new context aliases native whole normality/row shortness at the original
+model's P/Q adapter. A raw point observer applies the existing whole δ and
+selected column comparisons; a general-K retained-model stage uses the
+existing input equivalences, and the outer complete-arrow observer fixes
+Terminal_obj. Five definitions add no primitive, rewrite or unifier.
+
+The earlier input comparison now directly uses the same incoming-source
+law instead of importing unused whole-H recipe comparison proofs. Its
+proof is unchanged after the old alias unfolds. This dependency narrowing
+and the staged observation make the source join fit the existing guard.
+The failed combined-import/object experiments are not qualified alternatives.
+
+TypeScript preserves the 47-field layout and original raw/H selections but
+uses three distinct native mirror names. Old normality/row terms are rejected.
+Registration requires `nativeNormalityContract`; profile revisions record
+native whole δ and selected categorical comparisons, with no endpoint casts.
+The existing Core/checker/evaluator and public barrel are unchanged.
+
+Eight focused tests cover contracts, automatic preparation/replay and
+nonzero nonsplit adoption/reuse without reselection. The new focused gate
+checks compilation, adoption/emission and the actual emitted LP in separate
+bounded processes. Model, normality, row and arrow semantics remain supplied
+or trusted, not closed constructions. The subplan records validation details.
+Six registered LP assertions, four generic emitted assertions and nine
+concrete emitted assertions pass. Complete owner/reviewer warning blocks
+match controls at 1,490/169; the narrowed input owner stays at 1,290/169.
+Two existing comparison reviewers, affected audits/catalog/TOC/report checks,
+localized TypeScript compilation and ESLint pass. Source-only health covers
+1,207 files. Complete bounded adoption still terminates under the guard;
+its current costly phase remains to be isolated.
+
+Next NUH-5B2d2: complete automatic bounded-model adoption and native exactness
+observations. Then NUH-6 snake/native comparison and NUH-7 final qualification.
+The single-window result does not close the parent goal.
 
 ### NUH-5B2c2: Derived columns compare with original raw and retained H
 

@@ -1,6 +1,7 @@
 /* Comparison of the original inverse-mate input with the direct raw input. */
 require open emdash.emdash3_2_one_cat_zero_cone_fibre_inclusion;
-require open emdash.emdash3_2_chain_pair_zero_cone_comparisons;
+require open emdash.emdash3_2_kernel_adjunction_unmate_paths;
+require open emdash.emdash3_2_chain_pair_zero_cones;
 require open emdash.emdash3_2_one_cat_chain_pair_inputs;
 require open emdash.emdash3_2_one_cat_diagram_map_paths;
 
@@ -30,7 +31,8 @@ symbol chain_pair_retained_native_transf_path [C : Cat] [S : τ (@PreadditiveCat
     (@chain_pair_outgoing_diagram C S A B D pair)
     (@chain_pair_retained_transf C S t T W P A B D pair)
     (@chain_pair_native_transf C S C1 t T A B D pair)
-    (@chain_pair_zero_cone_incoming_path C S t T W P A B D pair)
+    (@kernel_presentation_unlift_lift_source_path C S t T W P A
+      (@chain_pair_outgoing_diagram C S A B D pair) (@computational_chain_pair_cone C S A B D pair))
     (@preadditive_terminal_to_zero_path C S t D T
       (@terminal_arrow_test_tip C t T A (@chain_pair_outgoing_diagram C S A B D pair)
         (@chain_pair_retained_transf C S t T W P A B D pair)));

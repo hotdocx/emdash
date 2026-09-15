@@ -4994,7 +4994,18 @@ column H points as its source and target; its component therefore gives
 an arrow between the original raw H objects after the two comparisons.
 This observes the original whole transformation, without introducing a
 second connecting construction or a new whole natural comparison in x.
-TypeScript observation migration and retained nonsplit adoption remain.
+The TypeScript connecting observation now uses this native construction.
+
+Its model-facing formula is δ_ret = c_target⁻¹ ∘ δ_raw ∘ c_source, where
+the c maps are the existing retained-to-native H comparisons. Here δ_raw
+already observes the original whole δ through its column comparisons.
+The raw and retained stages keep K and its point general; the complete-arrow
+wrapper then evaluates at Terminal_obj. The private TypeScript signatures
+name the native whole normality and row contracts explicitly, so old contract
+terms cannot silently enter the new observer. A nonzero retained nonsplit
+adoption and its emitted Lambdapi artifact check in separate bounded stages.
+These results retain supplied model and interpretation semantics. Complete
+automatic bounded-model adoption and native exactness observations remain.
 
 The retained inverse-mate input now has a derived categorical equivalence
 to the direct raw input at the same outgoing diagram. Ordinary diagram
@@ -5020,9 +5031,9 @@ original generic whole owners, with all row families, H endpoints and
 selected inverses retained. The older `FreydHomologyModel` adapts to this
 context without changing its whole H, native inputs or Hom action; its
 pointwise normality does not automatically provide the new whole contract.
-Raw-window assembly and retained column comparisons are available; retained
-CAS-observation migration remains further work. Neither model context is a
-closed model constructor.
+Raw-window assembly, retained column comparisons and native connecting
+observation are available. Complete bounded adoption remains further work.
+Neither model context is a closed model constructor.
 
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not

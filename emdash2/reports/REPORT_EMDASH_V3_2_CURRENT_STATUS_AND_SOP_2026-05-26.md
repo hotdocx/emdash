@@ -4,6 +4,22 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native model observer update (2026-09-14): the
+[native context aliases](../emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
+and [complete-arrow observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+use the original whole δ, its raw column comparisons and the existing
+retained/native H equivalences. General K/x stages precede the final
+Terminal observation; both old H objects remain literal endpoints. Five
+definitions add no primitive or rule. The input-comparison owner now calls
+the same incoming-source law directly, avoiding unused old H-recipe proofs.
+TypeScript uses distinct native normality/row/observer mirror names and
+requires `nativeNormalityContract`. Eight focused tests and the concrete
+nonsplit emitted observer pass through the
+[separately bounded gate](../scripts/check_freyd_native_model_connecting.sh).
+Model/row/arrow interpretations remain supplied or trusted. Complete automatic
+bounded-model adoption still reaches the guard, and native exactness
+observations remain required; no closed-model or full-goal completion is claimed.
+
 Column/H comparison update (2026-09-14): the
 [raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp)
 retain their existing native owners, and whole source recovery derives the

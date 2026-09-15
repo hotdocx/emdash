@@ -1,17 +1,27 @@
 /** One actual interior homology and exactness term, not an opaque exactness claim. */
 
 import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, it, mock } from 'node:test';
-import {
-    AFFINE_FORMAL_FINITE_MODULE_BINDINGS, AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
-    AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS, AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS,
-    RATIONAL_DOMAIN, affineFormalCommRingType, affineFormalRingElementType,
-    algebraPolynomialIdeal, algebraPolynomialQuotientRing, algebraPresentedAlgebra,
-    binderMode, checkLambdapiProbe, createAlgebraFormalAssumptionSource,
-    createCoreProofArtifactFingerprint, createCoreProofChecker, defineAffineFormalPolynomialReifier,
-    kernelExpressionEquals, kernelFree, provenance, serializeCoreLfKernelProbe, sourceSpan
-} from '../src/v3_2';
+import { AFFINE_FORMAL_FINITE_MODULE_BINDINGS } from '../src/v3_2/algebra_formal_finite_module';
+import { AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS } from '../src/v3_2/algebra_formal_localization_signatures';
+import { AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS } from '../src/v3_2/algebra_formal_presentation_morphism';
+import { AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_zariski_signatures';
+import { RATIONAL_DOMAIN } from '../src/v3_2/algebra_exact';
+import { affineFormalCommRingType, affineFormalRingElementType } from '../src/v3_2/algebra_formal_conformance';
+import { algebraPolynomialIdeal } from '../src/v3_2/algebra_ideal';
+import { algebraPolynomialQuotientRing } from '../src/v3_2/algebra_quotient';
+import { algebraPresentedAlgebra } from '../src/v3_2/algebra_presented_algebra';
+import { binderMode, kernelExpressionEquals, kernelFree, provenance, sourceSpan } from '../src/v3_2/kernel';
+import { checkLambdapiProbe } from '../src/v3_2/probe';
+import { createAlgebraFormalAssumptionSource } from '../src/v3_2/algebra_formal_assumption_source';
+import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
+import { createCoreProofChecker } from '../src/v3_2/proof_checker';
+import { defineAffineFormalPolynomialReifier } from '../src/v3_2/algebra_formal_reifier';
+import { serializeCoreLfKernelProbe } from '../src/v3_2/lf_probe';
+import { CoreLfScopedBuilder } from '../src/v3_2/lf_builder';
+import { formalFreydSpineLanguage } from '../src/v3_2/algebra_formal_freyd_spine_signatures';
 import { AlgebraFormalAssumptionSource, appendAlgebraFormalAssumption } from '../src/v3_2/algebra_formal_assumption_source';
 import { AlgebraFormalWorkflowInput, runAlgebraFormalWorkflow, trustAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 import { KernelExpression } from '../src/v3_2/kernel';
@@ -40,7 +50,7 @@ import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydRet
 import {
     algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType,
     createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS,
-    FREYD_MODEL_CONNECTING_ARGUMENTS
+    FREYD_MODEL_CONNECTING_ARGUMENTS, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_PROFILE
 } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
 import { kernelInstantiate } from '../src/v3_2/kernel';
 import { prepareAlgebraFormalFreydModelConnecting, assertAlgebraFormalFreydModelConnectingPreparationCurrent }
@@ -365,7 +375,7 @@ describe('v3.2 actual formal interior homology', () => {
 
 
 describe('v3.2 model connecting signatures', () => {
-    it('adopts a retained nonsplit connecting arrow with explicit row semantics and no reselection', async () => {
+    it('adopts a retained nonsplit connecting arrow with explicit row semantics and no reselection', async testContext => {
         const v = await consumer(), selected = v.whole.windows[1].connecting;
         assert.equal(isPolynomialFreydMorphismZero(selected.homologyMap), false);
         const R = kernelFree('connecting_R', p), x = kernelFree('connecting_x', p);
@@ -442,6 +452,12 @@ describe('v3.2 model connecting signatures', () => {
             assert.equal(result.prepared.selected, selected);
             assert.equal(result.observation.realization.source.actual.selected, selected.source);
             assert.equal(result.observation.realization.target.actual.selected, selected.target);
+            assert.equal(result.observation.profile.nativeWholeConnectingObservation, true);
+            assert.equal(result.observation.profile.endpointCasts, false);
+            assert.match(serializeCoreExpression(result.observation.realization.formalArrow),
+                /bridge_freyd_homology_model_native_connecting_observation/u);
+            assert.equal(result.observation.realization.values.source_chain, modelSource.realization.pair.term);
+            assert.equal(result.observation.realization.values.target_chain, modelTarget.realization.pair.term);
             assert.equal(result.rows.length, 4);
             assert.equal(result.counts.homologyReplays, 0);
             assert.equal(result.counts.universalReselections, 0);
@@ -474,6 +490,10 @@ describe('v3.2 model connecting signatures', () => {
             if (process.env.EMDASH_RUN_PROOF_CAS_FREYD_MODEL_CONNECTING_ADOPTION === '1') {
                 const value = result.observation.realization;
                 const assertions = [
+                    ...Object.keys(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS).map(name => ({
+                        label: name, term: kernelFree(name, p), type: result.source.environment.lookup(name)!.type,
+                        span: sourceSpan('generated/retained-connecting-signatures.ts', 1, 1)
+                    })),
                     { label: 'retained_formal_connecting', term: value.formalArrow, type: value.observationType, span: sourceSpan('generated/retained-connecting.ts', 1, 1) },
                     { label: 'retained_native_connecting', term: value.nativeArrow, type: value.observationType, span: sourceSpan('generated/retained-connecting.ts', 2, 1) },
                     { label: 'connecting_interpretation', term: result.proof, type: value.claimType, span: sourceSpan('generated/retained-connecting.ts', 3, 1) },
@@ -491,12 +511,22 @@ describe('v3.2 model connecting signatures', () => {
                 const imports = [
                     'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;',
                     'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;',
-                    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;'
+                    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_native_connecting;'
                 ].join('\n');
-                const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;', imports) },
-                    { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
-                assert.equal(checked.timedOut, false, checked.diagnostics.slice(-8000));
-                assert.equal(checked.accepted, true, checked.diagnostics.slice(-12000));
+                let source = serialized.source.replace('require open emdash.emdash3_2;', imports);
+                for (const name of Object.values(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS)) {
+                    source = source.replace('assert ⊢ ' + name + ' :', 'assert ⊢ @' + name + ' :');
+                }
+                const output = process.env.EMDASH_PROOF_CAS_NATIVE_CONNECTING_PROBE_OUTPUT;
+                if (output) {
+                    writeFileSync(output, source, 'utf8');
+                    testContext.diagnostic('Emitted the retained native connecting probe; Lambdapi validation is a separate bounded stage.');
+                } else {
+                    const checked = checkLambdapiProbe({ ...serialized, source },
+                        { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
+                    assert.equal(checked.timedOut, false, checked.diagnostics.slice(-8000));
+                    assert.equal(checked.accepted, true, checked.diagnostics.slice(-12000));
+                }
             }
         } finally { spies.forEach(spy => spy.mock.restore()); }
     });
@@ -539,7 +569,7 @@ describe('v3.2 model connecting signatures', () => {
 
     const fixture = () => {
         let environment = createFormalFreydModelConnectingProofEnvironment([]);
-        let target = environment.lookup('bridge_freyd_homology_model_connecting_observation')!.type;
+        let target = environment.lookup('bridge_freyd_homology_model_native_connecting_observation')!.type;
         const values: Record<string, KernelExpression> = {};
         for (const field of FREYD_MODEL_CONNECTING_ARGUMENTS) {
             assert.equal(target.tag, 'pi');
@@ -556,6 +586,10 @@ describe('v3.2 model connecting signatures', () => {
 
     it('constructs the exact conditional connecting call without changing Core owners', () => {
         const v = fixture(), checker = createCoreProofChecker(v.environment);
+        assert.equal(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_PROFILE.sourceOperations,
+            'native-whole-delta-at-retained-H-endpoints');
+        assert.equal(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS.bridge_freyd_homology_model_native_connecting_observation,
+            'freyd_homology_model_native_connecting_observation');
         assert.equal(FREYD_MODEL_CONNECTING_ARGUMENTS.length, 47);
         assert.equal(new Set(FREYD_MODEL_CONNECTING_ARGUMENTS.map(field => field.name)).size, 47);
         checker.check(checker.rootContext, v.term, v.target);
@@ -563,6 +597,37 @@ describe('v3.2 model connecting signatures', () => {
         for (const name of Object.keys(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS)) {
             assert.equal(v.environment.lookup(name)!.body, undefined);
         }
+    });
+
+    it('rejects legacy normality and row contracts at the native connecting interface', () => {
+        const v = fixture();
+        let environment = v.environment;
+        for (const [native, legacy] of [
+            ['bridge_FreydHomologyModelNativeNormality', 'bridge_FreydHomologyModelNormality'],
+            ['bridge_FreydHomologyModelNativeShortExact', 'bridge_FreydHomologyModelShortExact']
+        ]) {
+            assert.equal(environment.lookup(legacy), undefined);
+            environment = environment.extend({ ...environment.lookup(native)!, name: legacy });
+        }
+        const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
+        const oldNormalityType = b.lower(L.tau(L.call('bridge_FreydHomologyModelNormality',
+            [b.embed(v.values.R), b.embed(v.values.M)], 1)));
+        const rowValues = ['R', 'M', 'A0', 'B0', 'D0', 'i0', 'p0', 'c0'].map(name => b.embed(v.values[name]));
+        const oldRowType = b.lower(L.tau(b.call(b.free('bridge_FreydHomologyModelShortExact'),
+            rowValues.map((value, i) => ({ value,
+                plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const })))));
+        const oldNormality = kernelFree('legacy_normality', p), oldRow = kernelFree('legacy_row', p);
+        for (const [reference, type] of [[oldNormality, oldNormalityType], [oldRow, oldRowType]] as const) {
+            environment = environment.extend({ name: reference.name, type,
+                mode: binderMode('explicit', 'functorial'), provenance: p });
+        }
+        const checker = createCoreProofChecker(environment);
+        checker.check(checker.rootContext, oldNormality, oldNormalityType);
+        checker.check(checker.rootContext, oldRow, oldRowType);
+        assert.throws(() => checker.check(checker.rootContext,
+            algebraFormalFreydModelConnectingObservationTerm({ ...v.values, N: oldNormality }), v.target));
+        assert.throws(() => checker.check(checker.rootContext,
+            algebraFormalFreydModelConnectingObservationTerm({ ...v.values, x0: oldRow }), v.target));
     });
 
     it('rejects missing normality, foreign fields and raw-zero evidence in place of short exactness', () => {
@@ -595,11 +660,7 @@ describe('v3.2 model connecting signatures', () => {
             ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
             ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS
         }, assertions });
-        const imports = [
-            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;',
-            'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;',
-            'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;'
-        ].join('\n');
+        const imports = 'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_native_connecting;';
         // Bare LF names insert leading implicits. These three assertions
         // intentionally inspect the full unsaturated external signature.
         let source = serialized.source.replace('require open emdash.emdash3_2;', imports);

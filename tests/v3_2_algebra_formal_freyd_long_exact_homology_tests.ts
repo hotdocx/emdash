@@ -55,7 +55,7 @@ const backend = defineAlgebraFormalFreydRationalBackend({
     id: 'tests.retained-polynomial-freyd', revision: 'v1',
     coefficientContract: 'Interpret the formal ring and coefficient names in the retained rational polynomial ring.',
     modelContract: 'Supply the coherent Freyd model matching the retained choices; no closed model is derived here.',
-    normalityContract: 'Supply the normality enhancement of that same retained model.'
+    nativeNormalityContract: 'Supply native whole Coim⇒Im normality for the retained model\'s original P/Q adapter.'
 });
 let retainedSelection: ReturnType<typeof selectResult> | undefined;
 const selectResult = () => {
@@ -132,7 +132,7 @@ const bindings = {
 };
 const imports = 'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
     'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
-    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_connecting;';
+    'require open emdash.emdash3_2_commutative_algebra_freyd_homology_model_native_connecting;';
 
 describe('v3.2 whole long-exact actual formal homologies', () => {
     it('prepares a registered rational model context without reselection or adoption', () => {
@@ -156,9 +156,10 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             assert.equal(setup.initialSource.entries.length, 0);
             assert.equal(setup.initialSource.environment, setup.environment);
             assert.equal(setup.profile.constructsModel, false);
-            assert.equal(setup.profile.nativeWholeConnectingObservation, false);
+            assert.equal(setup.profile.nativeWholeConnectingObservation, true);
+            assert.equal(setup.profile.requiresNativeRowInterpretations, true);
             assert.deepEqual(setup.suppliedInputs.map(value => value.role),
-                ['coefficient-interpretation', 'coherent-model', 'normality']);
+                ['coefficient-interpretation', 'coherent-model', 'native-whole-normality']);
             assert.ok(setup.suppliedInputs.every(value => value.classification === 'supplied-input'));
             const checker = createCoreProofChecker(setup.environment);
             checker.check(checker.rootContext, setup.formalModel, algebraFormalFreydModelType(setup.formalRing));
@@ -201,6 +202,10 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             assert.throws(() => prepareAlgebraFormalFreydRationalModelContext({ ...base, namePrefix }), /identifier/iu);
         }
         assert.throws(() => defineAlgebraFormalFreydRationalBackend({ ...backend, modelContract: ' ' }), /contract/iu);
+        const { nativeNormalityContract, ...legacyBackend } = backend;
+        assert.throws(() => defineAlgebraFormalFreydRationalBackend({ ...legacyBackend,
+            normalityContract: nativeNormalityContract } as unknown as Parameters<typeof defineAlgebraFormalFreydRationalBackend>[0]),
+        /native whole normality contract/iu);
         const selected = { ...setup.selected, result: { ...setup.selected.result,
             sequence: { ...setup.selected.result.sequence, ring: { ...setup.selected.result.sequence.ring,
                 coefficientDomain: INTEGER_DOMAIN } } } };

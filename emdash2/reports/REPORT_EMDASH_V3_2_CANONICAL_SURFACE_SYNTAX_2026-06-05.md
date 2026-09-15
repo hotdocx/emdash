@@ -2384,6 +2384,17 @@ left/equivalence counterparts land in the older model's exact H objects
 through its existing adapter. These operations add no primitive or new rule.
 The whole δ and its Hom action remain the existing native owners.
 
+`FreydHomologyModelNativeNormality(R,M)` and
+`FreydHomologyModelNativeShortExact(R,M,…)` are transparent aliases of the
+native whole contracts through M's original P/Q adapter. The latter fixes
+the raw parameter family at Terminal. `freyd_raw_native_window_connecting_at`
+and `freyd_homology_model_native_connecting_at` keep K/x general while
+observing the original whole δ. `freyd_homology_model_native_connecting_observation`
+then packages its Terminal component at the original retained H objects.
+The TypeScript mirror names explicitly include `Native`/`native`; they are
+distinct from the older component interface. This adds no new Core owner,
+runtime rule or equivalence grammar.
+
 `zero_arrow_cone_fibre_inclusion_func(C1,T,A,d)` is a whole inclusion of the
 existing transformation Hom into the ordinary zero-cone category. Its point
 is the original `(A,d,h)`; its arrow keeps both base identities and the fibre
@@ -2397,7 +2408,7 @@ These are categorical comparisons at retained endpoints, not object casts.
 parameter families of the original raw native inputs/maps. The corresponding
 `*_map_func` preserves whole action in the existing raw-agreement parameter.
 No K/Q or new coherence field is an input. The four-row and derived-column
-assembly reuses those same families; TypeScript observation migration remains.
+assembly and native TypeScript connecting observer reuse those same families.
 
 `FreydAdjunctionModel(R)` packages supplied initial-zero and whole P/Q data.
 `freyd_adjunction_model_func(M)` is the existing native whole H, with no

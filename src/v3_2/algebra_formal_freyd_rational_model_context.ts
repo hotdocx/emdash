@@ -16,16 +16,17 @@ import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption
 import { kernelFree, provenance, sourceSpan } from './kernel';
 
 export const ALGEBRA_FORMAL_FREYD_RATIONAL_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-retained-rational-freyd-context-v1' as const,
+    revision: 'emdash-formal-retained-rational-freyd-context-v2' as const,
     backend: 'rational-polynomial-freyd' as const,
-    modelInterface: 'supplied-retained-model-and-normality' as const,
+    modelInterface: 'supplied-retained-model-and-native-whole-normality' as const,
     coefficientNames: 'canonical-rational-codepoints' as const,
     environment: 'sealed-after-all-existing-preparations' as const,
     constructsModel: false as const,
     adoptsClaims: false as const,
     replaysWholeHomology: false as const,
     reselectsUniversals: false as const,
-    nativeWholeConnectingObservation: false as const,
+    nativeWholeConnectingObservation: true as const,
+    requiresNativeRowInterpretations: true as const,
     addsCoreOwner: false as const,
     performsIo: false as const
 });
@@ -37,8 +38,8 @@ export interface AlgebraFormalFreydRationalBackendInput {
     readonly coefficientContract: string;
     /** Coherent model semantics; this text is not a derived model inhabitant. */
     readonly modelContract: string;
-    /** The supplied model's normality enhancement. */
-    readonly normalityContract: string;
+    /** Native whole Coim⇒Im normality of the same model's P/Q adapter. */
+    readonly nativeNormalityContract: string;
 }
 
 const backends = new WeakSet<object>();
@@ -59,7 +60,7 @@ export function defineAlgebraFormalFreydRationalBackend(input: AlgebraFormalFrey
         id, revision: portableText(input.revision, 'backend revision'),
         coefficientContract: portableText(input.coefficientContract, 'coefficient contract'),
         modelContract: portableText(input.modelContract, 'coherent model contract'),
-        normalityContract: portableText(input.normalityContract, 'normality contract')
+        nativeNormalityContract: portableText(input.nativeNormalityContract, 'native whole normality contract')
     });
     backends.add(backend);
     return backend;
@@ -71,8 +72,9 @@ export type AlgebraFormalFreydRationalSelectedResult = AlgebraPolynomialFreydLon
 
 /**
  * Prepare existing inventories and all their free inputs before fixing the environment.
- * Model and normality references remain supplied assumptions. In particular, this
- * retained-model workflow does not yet observe the newly constructed whole δ.
+ * Model and native whole normality references remain supplied assumptions. The
+ * prepared workflow observes whole δ through the original retained H comparisons;
+ * native row interpretations are adopted separately by its explicit trust workflow.
  */
 export function prepareAlgebraFormalFreydRationalModelContext(input: {
     readonly backend: AlgebraFormalFreydRationalBackend;
@@ -142,8 +144,8 @@ export function prepareAlgebraFormalFreydRationalModelContext(input: {
             references: Object.freeze([formalRing, ...generatorTerms, ...coefficients.map(c => c.term)]) }),
         Object.freeze({ role: 'coherent-model' as const, classification: 'supplied-input' as const,
             contract: input.backend.modelContract, reference: formalModel, type: modelType }),
-        Object.freeze({ role: 'normality' as const, classification: 'supplied-input' as const,
-            contract: input.backend.normalityContract, reference: normality, type: normalityType })
+        Object.freeze({ role: 'native-whole-normality' as const, classification: 'supplied-input' as const,
+            contract: input.backend.nativeNormalityContract, reference: normality, type: normalityType })
     ]);
     return Object.freeze({
         profile: ALGEBRA_FORMAL_FREYD_RATIONAL_CONTEXT_PROFILE, backend: input.backend,

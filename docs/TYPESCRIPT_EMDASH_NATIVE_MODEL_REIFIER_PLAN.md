@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2c2 column/input/H comparisons qualified; TypeScript observation migration and retained nonsplit adoption remain required
+Status: NUH-5B2d1 native connecting observation and one retained nonsplit adoption/oracle qualified; complete bounded adoption and native exactness observations remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -23,9 +23,10 @@ the immutable environment. NUH-5A now automates this mechanical work.
 
 The existing `FreydHomologyModel` is a supplied coherent legacy presentation:
 it stores Z, W/V and whole presentations over those choices. Its H ultimately
-uses the native whole owner. Its current connecting observation still uses
-`homology_record_connecting` through the older model component interface.
-Automating that context does not qualify a new whole-δ model consumer.
+uses the native whole owner. Its legacy formal connecting entry still uses
+`homology_record_connecting`; that entry remains available for the later
+comparison. The TypeScript observation now uses the native whole-δ observer
+described below, with distinct native normality and row contracts.
 
 Keep these distinctions explicit:
 
@@ -67,10 +68,13 @@ bundle, the three existing issued preparations, the sealed coefficient
 inventory, model/normality references, environment and initial source.
 
 Model and normality inputs are explicitly classified as supplied inputs;
-`constructsModel`, `adoptsClaims` and `nativeWholeConnectingObservation`
-remain false in this preparation profile. There is no public-barrel,
-checker, Core-owner or mathematical-signature change. The retained nonsplit
-consumer now calls this helper instead of constructing its inputs by hand.
+`constructsModel` and `adoptsClaims` remain false in this preparation profile.
+NUH-5B2d1 upgrades it to native connecting observations and requires the
+explicit `nativeNormalityContract` registration field. Native row
+interpretations remain separately adopted supplied contracts. NUH-5A changed
+no public barrel, checker, Core owner or mathematical signature; NUH-5B2d1's
+new observation signatures are explicit below. The retained nonsplit consumer
+calls this helper instead of constructing its inputs by hand.
 
 Four focused tests cover no homology/universal/connecting reselection,
 typed references and distinct namespaces, agreement with the independent
@@ -315,6 +319,74 @@ them from the old pointwise contracts or matrix equations. The retained
 nonsplit replay/adoption and native exactness observations still require
 qualification. NUH-5, NUH-6 snake comparison and NUH-7 remain open.
 
+NUH-5B2d experiment (2026-09-14): replace the observation builder's old
+component target with an explicit native wrapper: specialize the original
+whole δ to the four raw rows over Terminal, then compose the retained-column
+H comparisons at Terminal_obj. Package that arrow in the existing complete
+arrow observation. Its formal normality and short-row aliases refer to the
+native whole contracts through the original model adapter. Give all three
+private LF signature mirrors new native names, so the checker rejects old
+normality/row assumptions instead of silently reinterpreting their symbols.
+Retain existing raw preparation, coefficient collection, H choices and
+computed equation evidence. Row/whole-model semantics remain explicitly
+supplied interpretations; this migration does not derive them from matrices.
+
+The first combined checks exhausted the guard while rechecking imported
+legacy comparison or native upper-lift modules, before reaching the new
+wrapper body. Changing import order moved that boundary; a fresh dependency-
+object experiment also exhausted the guard and is not the selected workflow.
+The retained-input comparison now calls its existing incoming-source law
+directly, without importing the unused whole-H recipe comparison proofs.
+This preserves its proof body up to the old transparent alias. The native
+raw-point and retained-model observation stages keep K and its point general;
+only the final complete-arrow observation specializes to Terminal_obj.
+These source checks pass without cached objects, new comparison assumptions
+or raised limits. The failure was computational, not a mathematical rejection
+of the native construction.
+
+NUH-5B2d1 qualification (2026-09-14): the
+[native model context](../emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
+aliases native whole normality and shortness at the same original P/Q.
+The [raw point observer](../emdash2/emdash3_2_commutative_algebra_freyd_raw_window_connecting_observation.lp)
+uses the original whole δ and selected column comparisons. The
+[retained-model observer](../emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+then applies the existing retained/native input comparisons at general K
+and x; only its final complete-arrow wrapper fixes Terminal_obj. Both
+original H objects remain literal observations. These are five definitions,
+with no new primitive, rewrite or unifier. The narrower input-comparison
+dependency preserves the old proof after unfolding its transparent alias.
+
+The TypeScript builder now targets `freyd_homology_model_native_connecting_observation`.
+All 47 argument positions and original raw/H selections remain unchanged.
+The three private LF mirror names explicitly identify native normality,
+native whole row shortness and the native observer. Valid legacy normality
+or row terms are rejected at the new interface. Observation/registration
+profiles advance to v2 and the bounded model profile to v3; the required
+backend field is now `nativeNormalityContract`. The profiles explicitly
+record categorical endpoint comparisons and no endpoint casts. No Core,
+checker, evaluator or public-barrel implementation changed.
+
+Eight focused TypeScript tests cover these contract distinctions, automatic
+rational preparation/replay, retained nonzero nonsplit connecting adoption,
+reuse without duplicate claims, original H chain identity and no universal,
+homology or connecting reselection. The concrete emitted observation also
+checks in Lambdapi. Its model, native normality, whole row shortness and
+complete-arrow interpretation are still explicit supplied/trusted contracts;
+the test does not construct a closed model or prove a general CAS realization.
+
+[The focused gate](../emdash2/scripts/check_freyd_native_model_connecting.sh)
+compiles only the affected test dependency tree, runs adoption/emission,
+and checks the exact emitted LP artifact as separate guarded stages. A test
+emission reports that oracle checking is pending; only the gate's final
+Lambdapi stage establishes conformance. The combined adoption/oracle run
+exceeded the guard and is not claimed green. No stage raises the existing
+90-second/2-GiB limits or uses cached proof objects.
+
+Next NUH-5B2d2 qualifies the complete automatic bounded-model adoption and
+native exactness observations, keeping their supplied-contract boundary
+explicit. The single-window gate does not discharge those requirements.
+NUH-6 snake/native comparison and NUH-7 final qualification remain open.
+
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
 `OneCatAdjunctionNormality` owners. Prefer a native model surface indexed by
@@ -335,6 +407,47 @@ snake/direct/native comparison and NUH-7 final qualification remain separate
 requirements of the parent goal.
 
 ## Validation
+
+NUH-5B2d1: the modified input-comparison owner and all three new owners pass
+warning-enabled source checks. Six registered reviewer assertions check
+the native contract aliases, original H endpoints and the stored complete
+arrow. Four emitted generic assertions check the three exact private
+signatures and the unchanged 47-argument conditional call.
+
+Localized TypeScript compilation and ESLint pass. The focused gate runs
+four tests (one nonzero nonsplit adoption/emission and three signature/legacy-
+contract controls), then checks its exact 223,966-byte LP artifact with nine
+assertions. Four automatic rational preparation/replay tests also pass.
+The gate's test phase took about 33 seconds, under the unchanged guard.
+No universal or connecting replay is introduced by model interpretation.
+
+Owner logs span `194441`–`194506`; reviewer and generic conformance logs are
+`freyd_homology_model_native_connecting-20260914-195745.log` and
+`nuh5b2d_native_signatures-20260914-195543.log` under `emdash2/logs/probes/`.
+The observer, reviewer and generic conformance inventories/raw warning
+blocks match the import-only control at `201238`: 1,490 critical-pair and
+169 pattern reports. The modified input owner matches its original at
+`194319`: 1,290/169, with no warning-body or source-location delta. Exact
+comparison data is `emdash2/tmp/probes/nuh5b2d_warning_comparison.json`.
+
+The complete focused gate log is
+`emdash2/logs/probes/native_connecting_20260914_201253_2325640.log`;
+its exact emitted artifact is
+`emdash2/tmp/probes/native_connecting_20260914_201253_2325640.lp`, checked
+in `native_connecting_20260914_201253_2325640-20260914-201330.log`.
+The broader automatic bounded-model adoption was reattempted separately
+and still terminated under the guard; see
+`emdash2/tmp/probes/nuh5b2d_bounded_model_adoption.txt`. Its current phase
+has not yet been isolated. NUH-5B2d2 must locate that cost and qualify the
+complete workflow; do not repeat the monolithic check merely for reassurance.
+
+The existing native-input and retained-column reviewers also pass after the
+dependency change (`202102` and `202124`). Affected strict LHS audits,
+catalog, source TOC, report headers, script syntax and source-only health
+checks pass; the health inventory covers 1,207 files. The focused gate
+rechecks its affected TypeScript dependency tree, and the separate final
+ESLint check is recorded in `nuh5b2d_lint_final.txt`. No repository-wide
+typecheck, aggregate or general endpoint-checker experiment was run.
 
 NUH-5B2c2: seven new owners and three reviewers cover 23 definitions and
 25 passing assertions. The reviewers check whole column inputs, both fixed-base

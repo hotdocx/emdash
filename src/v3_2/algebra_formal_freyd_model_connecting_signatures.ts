@@ -1,4 +1,4 @@
-/** Exact private LF signatures for the retained-model connecting operation. */
+/** Exact private LF signatures for the native whole-δ observation at retained H objects. */
 import { CoreLfBuilderTerm as Term, CoreLfScopedBuilder } from './lf_builder';
 import { binderMode, KernelExpression, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
@@ -6,16 +6,18 @@ import { createFormalFreydModelMapProofEnvironment } from './algebra_formal_frey
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
 
 export const FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS = Object.freeze({
-    bridge_FreydHomologyModelNormality: 'FreydHomologyModelNormality',
-    bridge_FreydHomologyModelShortExact: 'FreydHomologyModelShortExact',
-    bridge_freyd_homology_model_connecting_observation: 'freyd_homology_model_connecting_observation'
+    bridge_FreydHomologyModelNativeNormality: 'FreydHomologyModelNativeNormality',
+    bridge_FreydHomologyModelNativeShortExact: 'FreydHomologyModelNativeShortExact',
+    bridge_freyd_homology_model_native_connecting_observation: 'freyd_homology_model_native_connecting_observation'
 });
 
 export const FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_PROFILE = Object.freeze({
-    revision: 'emdash-formal-freyd-model-connecting-signatures-v1' as const,
+    revision: 'emdash-formal-freyd-model-connecting-signatures-v2' as const,
     policy: 'exact-opaque-signature-mirrors' as const,
-    sourceOperations: 'transparent-retained-model-connecting-component' as const,
+    sourceOperations: 'native-whole-delta-at-retained-H-endpoints' as const,
     requiresSuppliedNormality: true as const,
+    normality: 'native-whole-Coim-Im' as const,
+    rowUniversality: 'native-whole-PQ' as const,
     requiresModelShortExactness: true as const,
     constructsModel: false as const,
     infersClosedCapabilityFromRawAgreements: false as const,
@@ -51,9 +53,9 @@ export const FREYD_MODEL_CONNECTING_ARGUMENTS = Object.freeze([
 ].map(value => Object.freeze(value)));
 
 export function algebraFormalFreydModelNormalityType(R: KernelExpression, M: KernelExpression): KernelExpression {
-    const b = new CoreLfScopedBuilder(provenance('derived', 'supplied model normality'));
+    const b = new CoreLfScopedBuilder(provenance('derived', 'supplied native whole model normality'));
     const L = formalFreydSpineLanguage(b);
-    return b.lower(L.tau(L.call('bridge_FreydHomologyModelNormality', [b.embed(R), b.embed(M)], 1)));
+    return b.lower(L.tau(L.call('bridge_FreydHomologyModelNativeNormality', [b.embed(R), b.embed(M)], 1)));
 }
 
 export function algebraFormalFreydModelConnectingObservationTerm(
@@ -64,15 +66,15 @@ export function algebraFormalFreydModelConnectingObservationTerm(
         FREYD_MODEL_CONNECTING_ARGUMENTS.some(field => values[field.name] === undefined)) {
         throw new Error('Supply every exact model-connecting argument and no foreign field');
     }
-    const b = new CoreLfScopedBuilder(provenance('derived', 'retained model connecting observation'));
-    return b.lower(b.call(b.free('bridge_freyd_homology_model_connecting_observation'),
+    const b = new CoreLfScopedBuilder(provenance('derived', 'native whole connecting observation at retained H'));
+    return b.lower(b.call(b.free('bridge_freyd_homology_model_native_connecting_observation'),
         FREYD_MODEL_CONNECTING_ARGUMENTS.map(field => ({ value: b.embed(values[field.name]),
             plicity: field.implicit ? 'implicit' as const : 'explicit' as const }))));
 }
 
 export function createFormalFreydModelConnectingProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
     let environment = createFormalFreydModelMapProofEnvironment([]);
-    const p = provenance('derived', 'retained model connecting signatures');
+    const p = provenance('derived', 'native whole connecting signatures');
     const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
     type Scope = Readonly<Record<string, Term>>;
     type Field = readonly [string, (s: Scope) => Term, ('explicit' | 'implicit')?];
@@ -88,16 +90,16 @@ export function createFormalFreydModelConnectingProofEnvironment(inputs: readonl
     const model = (s: Scope) => L.tau(L.call('bridge_FreydHomologyModel', [s.R]));
     const grpd = () => b.application('groupoid-universe', []);
     const short = (s: Scope, A: string, B: string, D: string, e: string, d: string, chain: string) =>
-        L.tau(b.call(b.free('bridge_FreydHomologyModelShortExact'),
+        L.tau(b.call(b.free('bridge_FreydHomologyModelNativeShortExact'),
             [s.R, s.M, s[A], s[B], s[D], s[e], s[d], s[chain]].map((value, i) => ({ value,
                 plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const }))));
-    add('bridge_FreydHomologyModelNormality', [['R', ring, 'implicit'], ['M', model]], grpd);
-    add('bridge_FreydHomologyModelShortExact', [['R', ring, 'implicit'], ['M', model],
+    add('bridge_FreydHomologyModelNativeNormality', [['R', ring, 'implicit'], ['M', model]], grpd);
+    add('bridge_FreydHomologyModelNativeShortExact', [['R', ring, 'implicit'], ['M', model],
         ...['A', 'B', 'D'].map(name => [name, (s: Scope) => L.presentationType(s.R), 'implicit'] as Field),
         ['e', s => L.morphismType(s.R, s.A, s.B)], ['d', s => L.morphismType(s.R, s.B, s.D)],
         ['chain', s => L.chainType(s.R, s.A, s.B, s.D, s.e, s.d)]], grpd);
     const fields: Field[] = [['R', ring, 'implicit'], ['M', model],
-        ['N', s => L.tau(L.call('bridge_FreydHomologyModelNormality', [s.R, s.M], 1))]];
+        ['N', s => L.tau(L.call('bridge_FreydHomologyModelNativeNormality', [s.R, s.M], 1))]];
     rows.forEach(row => row.slice(0, 3).forEach(name => fields.push([name, s => L.presentationType(s.R), 'implicit'])));
     for (const [A, B, D, e, d, chain, exact] of rows) fields.push(
         [e, s => L.morphismType(s.R, s[A], s[B])], [d, s => L.morphismType(s.R, s[B], s[D])],
@@ -111,7 +113,7 @@ export function createFormalFreydModelConnectingProofEnvironment(inputs: readonl
             s[source[3]], s[source[4]], s[target[3]], s[target[4]], s[a], s[bb], s[d]], 7))]);
     }
     chains.forEach(([name, A, B, D, e, d]) => fields.push([name, s => L.chainType(s.R, s[A], s[B], s[D], s[e], s[d])]));
-    add('bridge_freyd_homology_model_connecting_observation', fields,
+    add('bridge_freyd_homology_model_native_connecting_observation', fields,
         s => L.tau(L.call('bridge_FreydArrowObservation', [s.R])));
     inputs.forEach((input, index) => {
         environment = environment.extend({ ...input, mode: input.mode ?? binderMode('explicit', 'functorial'),

@@ -2,6 +2,17 @@
 
 Date: 2026-09-02
 
+NUH-5B2d1 (2026-09-14): the
+[native model observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+uses whole δ at original retained H endpoints, under explicitly named native
+normality and row contracts. TypeScript's new private mirror names reject
+legacy contracts. Five definitions and one narrower proof dependency add no
+primitive or rule. Eight focused tests and the concrete emitted nonsplit
+observer pass through the
+[bounded gate](../scripts/check_freyd_native_model_connecting.sh).
+Complete automatic bounded adoption and native exactness observations remain
+open in the [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 NUH-5B2c2 (2026-09-14): the
 [raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp),
 [input comparisons](../emdash3_2_commutative_algebra_freyd_native_column_input_comparisons.lp),

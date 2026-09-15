@@ -1,4 +1,4 @@
-/** Explicit model interpretation of retained short rows and connecting arrows. */
+/** Explicit native whole-row and whole-δ interpretations at retained H objects. */
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnectingRowMapTerm,
     assertAlgebraFormalFreydModelConnectingPreparationCurrent } from './algebra_formal_freyd_model_connecting_preparation';
@@ -30,11 +30,14 @@ export interface AlgebraFormalFreydConnectingRowLaws {
 }
 
 export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
-    revision: 'emdash-formal-freyd-model-connecting-observations-v1' as const,
+    revision: 'emdash-formal-freyd-model-connecting-observations-v2' as const,
     classification: 'trusted-presentation-semantics' as const,
     requiresSuppliedNormality: true as const,
     constructsModel: false as const, claimsClosedQuotientEffectiveness: false as const,
-    reselectsHomology: false as const, endpointTransport: false as const,
+    reselectsHomology: false as const, endpointCasts: false as const,
+    endpointComparisons: 'original-selected-categorical-equivalences' as const,
+    nativeWholeConnectingObservation: true as const,
+    rowUniversality: 'native-whole-PQ' as const,
     replaysConnecting: false as const, addsCoreOwner: false as const
 });
 
@@ -69,13 +72,13 @@ function retainedInterpretation<T, R extends { readonly claimType: KernelExpress
     id: string, realization: R, value: T, data: string, current: () => void,
     assertContext: (environment: CoreLfDeclarationEnvironment) => void, summary: string
 ) {
-    const schema = defineAlgebraRuntimeSchema<T>({ id: id + '/retained', revision: 'v1', normalize(candidate) {
+    const schema = defineAlgebraRuntimeSchema<T>({ id: id + '/retained', revision: 'v2', normalize(candidate) {
         current(); if (candidate !== value) throw new Error('Foreign retained model value'); return value;
     } });
-    const operation = defineAlgebraOperation({ id, revision: 'v1', input: schema, output: schema });
+    const operation = defineAlgebraOperation({ id, revision: 'v2', input: schema, output: schema });
     const implementation = defineAlgebraReferenceImplementation({ operation,
-        algorithm: algebraAlgorithmIdentity(id + '/interpret-retained', 'v1'), execute(input) { current(); return input; } });
-    const engine = createAlgebraTypeScriptReferenceEngine({ id: id + '/engine', revision: 'v1', implementations: [implementation] });
+        algorithm: algebraAlgorithmIdentity(id + '/interpret-retained', 'v2'), execute(input) { current(); return input; } });
+    const engine = createAlgebraTypeScriptReferenceEngine({ id: id + '/engine', revision: 'v2', implementations: [implementation] });
     const adapter = defineAlgebraFormalComputationAdapter({ id,
         revision: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE.revision, operation,
         normalizeRealization(candidate: unknown) {
@@ -103,7 +106,7 @@ const stable = (value: string) => {
     return value;
 };
 
-/** This is model-side row semantics, not an inferred all-test proof from raw zero. */
+/** Native whole P/Q row semantics remain supplied; raw zero equations do not derive this contract. */
 export function algebraFormalFreydModelShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
     readonly modelId: string; readonly observationId: string; readonly formalModel: KernelExpression;
     readonly prepared: AlgebraFormalFreydModelConnectingPreparation<P, C, I>;
@@ -121,7 +124,7 @@ export function algebraFormalFreydModelShortExactObservationBundle<P extends Alg
     const b = new CoreLfScopedBuilder(provenance('derived', 'retained model short-exact row')), L = formalFreydSpineLanguage(b);
     const R = b.embed(prepared.reifier.formalRing);
     const values = [R, b.embed(context.model), ...raw.presentations.map(t => b.embed(t)), b.embed(pair.above), b.embed(pair.below), b.embed(pair.term)];
-    const claimType = b.lower(L.tau(b.call(b.free('bridge_FreydHomologyModelShortExact'), values.map((value, i) => ({ value,
+    const claimType = b.lower(L.tau(b.call(b.free('bridge_FreydHomologyModelNativeShortExact'), values.map((value, i) => ({ value,
         plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const })))));
     const serialize = () => serializeCoreLfWorkspaceCanonicalJson({ prepared: prepared.formalData, row: input.index,
         model: serializeCoreExpression(context.model), claim: serializeCoreExpression(claimType) }, 'modelShortExactObservation');
@@ -133,7 +136,7 @@ export function algebraFormalFreydModelShortExactObservationBundle<P extends Alg
             assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
             if (serialize() !== formalData) throw new Error('Changed model row interpretation');
         }, context.check,
-        'explicitly interpret this retained native short-exact row in the supplied model; no closed capability is synthesized');
+        'explicitly interpret this retained row in the supplied native whole P/Q model; no closed capability is synthesized');
 }
 
 export function algebraFormalFreydModelConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
@@ -200,5 +203,5 @@ export function algebraFormalFreydModelConnectingObservationBundle<P extends Alg
         formalArrow, nativeArrow, observationType, claimType, formalData });
     return retainedInterpretation('proof-cas.freyd-model/' + stable(s.modelId) + '/connecting/' + stable(input.observationId),
         realization, prepared.selected, prepared.selectedData, current, context.check,
-        'explicitly interpret the retained connecting arrow in the supplied model, with original H endpoints and no reselection');
+        'explicitly interpret the original whole δ at the retained H endpoints using the selected categorical comparisons; no H or connecting computation is reselected');
 }
