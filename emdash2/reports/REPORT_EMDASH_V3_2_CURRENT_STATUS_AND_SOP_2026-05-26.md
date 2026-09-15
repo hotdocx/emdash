@@ -4,6 +4,16 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Whole connecting/sign comparison (2026-09-15): the
+[comparison owner](../emdash3_2_one_cat_native_window_snake_connecting_comparison.lp)
+derives L∘∂∘R⁻¹=δ and L∘∂=δ∘R through original LES/snake cover
+and left-cycle reconstruction, then the existing whole δ uniqueness
+theorem. Its native whole connecting-diagram map retains R/L endpoint
+actions. Ten transparent definitions and eight whole consumers add no
+primitive, rule, unifier, opacity or caller square. Surrounding-map and
+general reference comparisons remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right H identification (2026-09-15): the
 [generic equivalence](../emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
 derives H=Q(β)≃K(ḡ) by original P/Q and native cover descent. Original

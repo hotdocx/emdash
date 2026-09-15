@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; six-term observation gap and displayed CAS transport still required
+Status: active — original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; six-term observation gap and displayed CAS transport still required
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,15 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+NUH-6D3a now proves L∘∂∘R⁻¹=δ and L∘∂=δ∘R for the original
+whole connecting programs, fixing the positive sign under the original
+H comparisons. Original LES/snake cover and left-cycle reconstruction feed
+the existing whole δ uniqueness theorem. A native whole arrow-diagram map
+retains endpoint actions R and L. Ten transparent definitions and eight
+whole consumers add no primitive, rule, opacity or comparison premise.
+Next compare surrounding maps through their original cycle/quotient factors
+under the [snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 NUH-6D2c3 now constructs the original right H comparison through native
 quotient and cover descent. The generic H=Q(β)≃K(ḡ) proof derives its
@@ -1101,7 +1110,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | active: both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; 6C3b gap retained | Complete LES/reference/sign work and the retained comparison/witness qualification before NUH-7 |
+| NUH-6 | active: original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; 6C3b gap retained | Complete LES/reference/sign work and the retained comparison/witness qualification before NUH-7 |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 

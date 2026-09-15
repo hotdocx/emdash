@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; six-term observation gap retained
+Status: original whole connecting/sign comparison qualified; surrounding-map comparisons next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -1181,7 +1181,16 @@ Evidence: `emdash2/tmp/probes/nuh6d3_conformance.json`,
 snapshot covers 1,312 files at
 `sha256:80ab47efad297386cc3729d56f6edeac4681d7c46e05f9ac6fde14b7be8b43a8`.
 
-### NUH-6D3: Connecting And Surrounding-Map Comparison — Next
+### NUH-6D3a: Original Whole Connecting And Sign Comparison
+
+Current connecting experiment starts at `9b20827e`; the previous goal turn
+qualified the original right H comparison. All worktrees are clean and
+the bounded right-H baseline passes. Lift the original LES cover into
+the original snake cover, compare their right-H projections and left-cycle
+maps through the original inclusions, and invoke the existing whole δ
+uniqueness theorem. Derive the positive comparison and a native whole
+arrow-diagram map; no new δ, cover, equality premise or caller square is
+permitted. Surrounding-map comparisons remain a separate required step.
 
 Let L:Q(α)⇒H(A₁) and R:K(γ)⇒H(D₀) be the two original whole comparisons.
 Prove L∘∂∘R⁻¹=δ using the existing LES cover e:E_LES⇒H(D₀). Lift its
@@ -1201,3 +1210,62 @@ Do not describe all six snake objects as literally the LES H objects.
 The general reference-snake comparison still retains its arbitrary-a/
 arbitrary-c six-term scope. Concrete, 6C3b, displayed CAS and final
 qualification remain required.
+
+The [cover comparison owner](../emdash2/emdash3_2_one_cat_native_window_snake_connecting_covers.lp)
+uses the original whole kernel mate to construct u:E_LES⇒E_snake, with
+κ_snake∘u=κ_LES. Original quotient and kernel reconstructions prove
+ρ_H∘r_LES=w∘ρ_snake∘u, then R⁻¹∘e=ρ_snake∘u. The right-H inverse
+and original H quotient are the already qualified ones; no cover inverse
+or new projection is selected.
+
+The [connecting comparison owner](../emdash2/emdash3_2_one_cat_native_window_snake_connecting_comparison.lp)
+uses the original left row/cycle inclusions to identify the covered cycle
+maps. Original Q reconstruction gives L∘θ_snake∘u=θ_LES. The existing
+whole LES connecting uniqueness theorem therefore proves
+
+```text
+L∘∂∘R⁻¹ = δ,       L∘∂ = δ∘R.
+```
+
+This fixes the positive sign under the original H endpoint comparisons.
+The second equation gives an actual native whole arrow-diagram map
+Arr(∂)⇒Arr(δ), whose endpoint actions are R and L. No replacement δ,
+assumed comparison equation, caller square, primitive or rewrite is added.
+All ten new definitions are transparent.
+
+Eight actual whole consumers check both connecting equations after arbitrary
+whole maps, the diagram endpoint projections and whole Hom action, and the
+original cover inclusion/projection reconstructions. An unrelated endpoint
+map cannot replace L. These results compare the actual original whole
+connecting programs; surrounding-map and general reference-snake comparison
+remain separate required work.
+
+Both owners pass in 16.621s and 18.686s. The eight-consumer reviewer
+passes in 18.937s with `OCAMLRUNPARAM=o=20,v=1024` and 14.392s with
+both GC variables unset, under the normal 90s/2GiB guard. Warning
+inventories match exact import controls: 1,482 critical-pair and 169
+replaceable-pattern reports, including locations, heads and rule families,
+with no parser issues. Normal source routing suffices. Strict LHS,
+catalog/TOC, source-only health and document checks are localized.
+
+Evidence: `emdash2/tmp/probes/nuh6d4_conformance.json`,
+`nuh6d4_warnings.json`, `nuh6d4_source_audit.json` and the final
+`nuh6d4_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,315 files at
+`sha256:e1e8d6127d951353433650cf5970375a46aba87e0065e4ba5a421b872de3c808`.
+
+### NUH-6D3b: Surrounding-Map Factorizations — Next
+
+Use the original `one_cat_native_snake_kernel_second` map k₂:K(b₀)⇒K(γ)
+and the original upper-middle homology quotient q_B. Prove
+R∘k₂=H(p₀)∘q_B through the original right-H/kernel inclusion and native
+row-map homology projection laws. The relevant existing owner is
+`one_cat_row_triple_outgoing_homology_projection_path`.
+
+For q₁:Q(α)⇒Q(b₀), prove q₁∘L⁻¹=j_B∘H(i₁), where j_B is the
+original whole H(B₁)→Q(b₀) inclusion from the generic H-to-quotient-kernel
+comparison. Use `one_cat_row_triple_incoming_homology_projection_path`,
+the original H quotient, left-H inverse reconstruction and native kernel
+map reconstruction. Retain the actual cycle/quotient factors; do not replace
+K(b₀)/Q(b₀) by H(B₀)/H(B₁). General reference, concrete, 6C3b, displayed
+CAS and final qualification remain required.

@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Whole connecting/sign comparison (2026-09-15): the
+[comparison owner](../emdash3_2_one_cat_native_window_snake_connecting_comparison.lp)
+proves L∘∂∘R⁻¹=δ and L∘∂=δ∘R for the original whole connecting
+programs. Original covers, left-cycle reconstruction and existing LES
+uniqueness fix the positive sign. A native whole arrow-diagram map retains
+R/L endpoint actions. Ten definitions and eight whole consumers add no
+primitive, rule or opacity. Surrounding-map and general reference comparisons
+remain next under the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right H identification (2026-09-15): the
 [generic proof](../emdash3_2_one_cat_native_homology_quotient_equivalence.lp)
 constructs H=Q(β)≃K(ḡ), deriving cover and annihilation evidence through

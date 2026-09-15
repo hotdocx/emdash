@@ -220,9 +220,12 @@ Hom action and ambient reconstruction qualify. NUH-6D2c3 now proves
 the generic H=Q(β)≃K(ḡ) comparison from original P/Q and native
 normality/cover descent, then identifies the original K(γ) with the
 existing right-window H. Both endpoint comparisons and inverse data
-qualify. Next compare the positive ∂/δ formulas and the surrounding maps
-through their original cycle/quotient factors; do not identify all snake
-objects with LES H objects.
+qualify. NUH-6D3a now proves the positive whole equations L∘∂∘R⁻¹=δ
+and L∘∂=δ∘R by original cover and cycle reconstruction and existing
+LES uniqueness. Its native connecting-diagram map retains R/L endpoint
+actions and whole Hom action. Next compare surrounding maps through
+their original cycle/quotient factors; do not identify all snake objects
+with LES H objects.
 LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped

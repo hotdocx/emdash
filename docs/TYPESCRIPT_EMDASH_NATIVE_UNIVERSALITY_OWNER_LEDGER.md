@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — both original H endpoint comparisons qualified; connecting/sign and surrounding-map comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — original whole connecting/sign comparison qualified; surrounding-map and reference comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,21 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D3a: Original whole connecting/sign comparison — qualified 2026-09-15
+
+The [connecting comparison](../emdash2/emdash3_2_one_cat_native_window_snake_connecting_comparison.lp)
+proves L∘∂∘R⁻¹=δ and L∘∂=δ∘R using the original LES cover,
+original snake cover, whole left-cycle reconstruction and existing native
+δ uniqueness. Its actual whole arrow-diagram map retains R/L as endpoint
+actions. Ten definitions and eight whole consumers add no primitive, rule,
+unifier, opacity or caller square; no connecting map is reselected.
+
+Next compare the surrounding maps through the original K(b₀) cycle and
+Q(b₀) quotient factors. Do not identify those objects with middle H objects.
+General reference-snake, concrete, six-term observations, displayed CAS
+and final qualification remain required in the
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D2c3: Original right H identification — qualified 2026-09-15
 
