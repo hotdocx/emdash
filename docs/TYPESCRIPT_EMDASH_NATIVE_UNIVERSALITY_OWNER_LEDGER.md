@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — retained bounded model adoption/reuse and native connecting observations qualified; native exactness observations next; Op/duality deferred
+Status: active — direct native model/contracts route next; retained workflow qualified; legacy/projection comparisons and Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,25 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### Priority Correction: Native Contracts Before Legacy Comparison
+
+The user requests direct interaction between the new whole K/Q/H/δ/exactness
+development and declared native model contracts. `FreydAdjunctionModel`
+already provides the mathematical model surface. Preserve CAS-selected
+matrices, witnesses, results and provenance; do not conflate that retention
+with a requirement to reproduce the older formal H/map/δ objects and syntax.
+The qualified retained workflow stays available as compatibility evidence.
+
+Next are NUH-5N1 native context/signature preparation and NUH-5N2 native
+whole consumers with coherent CAS realization. Native snake/LES work and
+final qualification follow. The older formal-diagram comparisons and recent
+auxiliary projection-normalization experiments are deferred, with snapshots
+in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
+The latter also affect native expressions, so the direct route is not a
+claim that all projection normalization is fixed. Required native consumer
+checks remain mandatory; report a demonstrated dependency if one arises.
+Do not replace a missing output theorem by a stronger model assumption.
 
 ### NUH-5B2d2b: Complete retained model workflow qualification
 

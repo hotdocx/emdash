@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — retained bounded model adoption/reuse and native connecting observations qualified; native exactness observations next; Op/duality deferred
+Status: active — direct native model/contracts integration next; retained workflow qualified; legacy comparison and auxiliary normalization work deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,27 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Latest priority correction (2026-09-14): use the new native whole K/Q model
+directly as the proof–CAS interface. The existing `FreydAdjunctionModel`
+already supplies that mathematical input. Retaining CAS-selected matrices,
+witnesses and results does not require retaining the older formal H/maps/δ
+presentation. Preserve the qualified 0caa19d0 compatibility workflow, but
+move comparisons with that older presentation and the recent auxiliary
+point/projection-normalization experiments out of the primary prerequisites.
+
+Proceed with NUH-5N1 direct native context/signatures and NUH-5N2 whole
+H/maps/δ/exactness interaction with declared native model/realization
+contracts, then the native snake/LES work and final qualification. Coherent
+CAS realization and actual native theorem/consumer checks remain required;
+do not assume output exactness or silently convert old contracts into new
+ones. Preserve the general six-term snake scope and sign requirements.
+Later compatibility/normalization investigations are separately selected
+work, unless a concrete required native consumer demonstrates a dependency.
+The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
+[resumption note](../emdash2/audits/deferred-native-exactness-observations/README.md)
+record the distinction and snapshots. This supersedes earlier instructions
+making the old retained-formal-diagram bridge a completion prerequisite.
 
 Current NUH-5B2d2b milestone (2026-09-14): the original combined
 bounded source, all 18 model H points, eight induced maps, three connecting
@@ -803,8 +824,11 @@ necessary public/private TypeScript transfer and conformance; owning
 documentation, provenance and checks.
 
 The original final symbolic endpoint-wrapper theorem remains explicitly
-deferred. Do not restart private-checker patches, endpoint debug sessions,
-blind record variants, or resource-limit experiments. If the new primary
+deferred. The recent auxiliary native point/projection-normalization checks
+and old-formal-diagram compatibility comparisons are also deferred by the
+later user direction above. Do not restart private-checker patches, endpoint
+debug sessions or blind record variants. Reviewed runtime limits for an
+actual selected consumer follow the validation policy below. If the new primary
 interface naturally makes a required boundary comparison available, record
 that specific evidence; it does not license a separate checker investigation.
 Keep the working field-indexed iterator and native bounded sequence as
@@ -852,9 +876,10 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: complete retained bounded model adoption/reuse and all native δ windows qualified; native exactness observations remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
-| NUH-6 | queued after NUH-5; generic NUH-4 construction available | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
+| NUH-5 | active: qualified retained workflow preserved; direct native model/contracts route is now primary | NUH-5N1 native context/reifier and NUH-5N2 whole H/maps/δ/exactness consumers, with coherent CAS realization and explicit contracts |
+| NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
+| NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
 Preserved duality progress (2026-09-13): NUH-1D4 corrected the defined
 HomPresheaf fibre and its two argument actions. NUH-1D5 now retains a
@@ -1234,6 +1259,7 @@ must not label those alternatives validated implementations.
 | D-NUH-074 | NUH-5B2d1 separates raw native δ observation, retained-model comparison at general K/x and the outer Terminal complete-arrow wrapper. Native context aliases and five definitions introduce no new primitive/rule; a direct use of the existing incoming-source law removes an unused old whole-H proof dependency without changing the proof. TypeScript retains all 47 fields and H selections, uses distinct native normality/row/observer mirror names, and requires nativeNormalityContract. Eight focused tests and the concrete emitted nonsplit observer pass in separately bounded compilation, adoption/emission and LP stages. No Core/checker/evaluator/barrel implementation changed. Complete automatic bounded adoption, native exactness observations, snake comparison and final qualification remain required |
 | D-NUH-075 | NUH-5B2d2a adds a body-free opaque batch at the LF declaration owner and uses it only in assumption-source replay. Fresh ordered scopes, complete type validation with the original checker factory, all adoption-current checks and final source comparison remain mandatory. No validity cache or conversion change is introduced. Eighteen LF/source tests, three bounded-H/raw-witness tests and the four-test native δ gate pass; its emitted LP artifact is byte-identical to cc8a4dc0. Measured replay cost drops, but the full model run still fails near the guard boundary. Audit the test's independent model prerequisites next; preserve combined-source integration, all three windows, reuse and explicit contracts. Native exactness observations and NUH-6/7 remain open |
 | D-NUH-076 | NUH-5B2d2b qualifies the original combined bounded model source, all 18 H points, eight maps, three native δ windows and full reuse/rejection checks. Respect the user's reviewed time extensions: the complete five-test stage passes in 267 seconds under 300 seconds; routine LP targets stay at 90 seconds. Verify inherited Node worker heap limits, use lossless table transport for row/δ payloads and retain only required private signature declarations. All original checks, selections, formal terms and supplied/trusted contract classifications remain. Five full-workflow tests and all 18 emitted LP assertions pass; the wrapper's four-versus-six count typo is corrected and exact artifacts resumed without repeating adoption. Nine single-window LP assertions and exact payload round trips also pass. Native exactness observations, NUH-6 and NUH-7 remain required |
+| D-NUH-077 | User reprioritizes direct native whole K/Q/H/maps/δ/exactness interaction with native model/realization contracts. Retain CAS-selected data and the qualified compatibility workflow, but defer agreement with older formal presentations and auxiliary projection-normalization studies. The existing FreydAdjunctionModel is the primary mathematical input; direct TypeScript context/consumer work is next. Actual native theorem and coherent CAS-realization checks remain required, with no assumed output exactness. The older zero-endpoint/additive-law failure and newer exactness-projection failures share a broad conversion layer; a common cause is not established. Preserve snapshots and resume only for selected later work or a demonstrated required native consumer |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -1393,13 +1419,16 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 
 Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
-NUH-5A automates retained rational model preparation and replay. Continue
-NUH-5B2d2 under `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: the native
-TypeScript connecting observation and one retained nonsplit window now pass
-the separately bounded frontend/adoption/oracle gate. Complete automatic
-bounded-model adoption and native exactness observations, retaining original
-selections and explicit native whole normality/row/model contracts.
-Then complete NUH-6 snake/native comparison and NUH-7 final qualification.
+The retained workflow is qualified through 0caa19d0. Follow the later user
+priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: implement
+NUH-5N1 direct native model/context signatures and NUH-5N2 native whole
+H/maps/δ/exactness interaction with the actual selected CAS result.
+Retain coherent model/realization, normality and row contracts explicitly;
+derive output exactness from the native theorem. Older formal presentations
+are compatibility evidence, not mandatory intermediate targets. Continue
+native snake/LES work and NUH-7 qualification, preserving the general
+six-term scope and sign requirements. Do not resume the deferred auxiliary
+point/projection-normalization or legacy-comparison experiments automatically.
 The earlier Op/profile experiments remain resumption history only.
 
 Continue the native whole-universality and homology implementation in

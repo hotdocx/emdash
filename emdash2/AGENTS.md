@@ -92,6 +92,17 @@ The living plan and `audits/deferred_native_homd_y/README.md` record
 the new queue and later resumption boundary. Existing semantic qualifications
 remain explicit; this deferral is not a claim that the nucleus is repaired.
 
+Latest native-model priority (2026-09-14): the user requests direct use of
+`FreydAdjunctionModel` and native whole K/Q/H/maps/δ/exactness with declared
+model/realization contracts. Preserve the CAS-selected data and the qualified
+retained workflow, but treat the older formal-diagram comparisons as later
+compatibility work. Recent auxiliary point/inverse-projection normalization
+experiments are deferred; their resumption bundle is
+`audits/deferred-native-exactness-observations/README.md`. They are not
+prerequisites for the new primary route. Actual native consumer typing,
+computation and coherent CAS realization remain required. Do not assume
+output exactness to bypass a missing construction.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

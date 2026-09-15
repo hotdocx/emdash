@@ -5004,8 +5004,12 @@ wrapper then evaluates at Terminal_obj. The private TypeScript signatures
 name the native whole normality and row contracts explicitly, so old contract
 terms cannot silently enter the new observer. A nonzero retained nonsplit
 adoption and its emitted Lambdapi artifact check in separate bounded stages.
-These results retain supplied model and interpretation semantics. Complete
-automatic bounded-model adoption and native exactness observations remain.
+These results retain supplied model and interpretation semantics. The complete
+retained bounded consumer now checks all 18 H points, eight maps and three
+native δ windows, including both endpoints and full reuse. Its emitted
+Lambdapi windows are checked separately. This qualification preserves the
+formal terms and uses explicit worker limits and lossless metadata transport;
+native categorical exactness observations remain the next boundary.
 
 The retained inverse-mate input now has a derived categorical equivalence
 to the direct raw input at the same outgoing diagram. Ordinary diagram

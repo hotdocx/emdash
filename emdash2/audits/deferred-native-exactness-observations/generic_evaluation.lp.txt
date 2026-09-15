@@ -1,0 +1,23 @@
+require open emdash.emdash3_2;
+
+// Evaluation maps the original whole equivalence and both selected inverses.
+symbol transf_omega_equiv_at [K C : Cat] [F G : τ (Functor K C)]
+  [h : τ (@Transf K C F G)]
+  (u : τ (@OmegaEquivAlong (Functor_cat K C) F G h)) (x : τ (Obj K))
+  : τ (@OmegaEquivAlong C (@fapp0 K C F x) (@fapp0 K C G x)
+      (@tapp0_fapp0 K C F G x h))
+≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat K C) C
+    (@fapp0_func K C x) F G h u;
+
+symbol K : Cat;
+symbol C : Cat;
+symbol F : τ (Functor K C);
+symbol G : τ (Functor K C);
+symbol h : τ (@Transf K C F G);
+symbol u : τ (@OmegaEquivAlong (Functor_cat K C) F G h);
+symbol x : τ (Obj K);
+assert ⊢ transf_omega_equiv_at u x : τ (OmegaEquivAlong (tapp0_fapp0 x h));
+assert ⊢ omega_equiv_along_left_inv (transf_omega_equiv_at u x)
+  ≡ tapp0_fapp0 x (omega_equiv_along_left_inv u);
+assert ⊢ omega_equiv_along_right_inv (transf_omega_equiv_at u x)
+  ≡ tapp0_fapp0 x (omega_equiv_along_right_inv u);

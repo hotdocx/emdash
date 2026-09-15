@@ -2,6 +2,24 @@
 
 Date: 2026-09-02
 
+Native-model priority update (2026-09-14): direct use of
+[`FreydAdjunctionModel`](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
+and native whole model contracts is now primary. Retain CAS-selected data;
+older formal-diagram comparisons and auxiliary projection-normalization
+experiments are deferred in the
+[resumption note](../audits/deferred-native-exactness-observations/README.md).
+The [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+keeps native theorem/consumer and coherent realization checks mandatory.
+
+NUH-5B2d2b (2026-09-14, checkpoint `0caa19d0`): complete retained bounded
+model adoption and reuse are qualified for all 18 H points, eight maps and
+three native δ windows. Five focused workflow tests and all 18 emitted LP
+assertions pass through the [staged gate](../scripts/check_freyd_native_model_connecting.sh).
+Worker heap settings, lossless payload transport and retained signature
+metadata account for the runtime qualification; formal terms and explicit
+model/interpretation contracts are preserved. Native categorical exactness
+observations are next in the [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 NUH-5B2d1 (2026-09-14): the
 [native model observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
 uses whole δ at original retained H endpoints, under explicitly named native
@@ -10,8 +28,9 @@ legacy contracts. Five definitions and one narrower proof dependency add no
 primitive or rule. Eight focused tests and the concrete emitted nonsplit
 observer pass through the
 [bounded gate](../scripts/check_freyd_native_model_connecting.sh).
-Complete automatic bounded adoption and native exactness observations remain
-open in the [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+Native exactness observations remain open in the
+[model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md);
+the later d2b checkpoint above qualifies complete bounded adoption.
 
 NUH-5B2c2 (2026-09-14): the
 [raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp),

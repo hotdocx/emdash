@@ -2,13 +2,71 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2d2b complete retained bounded model adoption/reuse and native connecting observations qualified; NUH-5B2e native exactness observations next
+Status: active — direct native model/contracts integration next; legacy formal-diagram comparisons and auxiliary projection-normalization work deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
 Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
 
 ## Scope And Existing Boundary
+
+Latest user-directed priority (2026-09-14): make the native whole development
+interact directly with native model contracts. Preserve CAS-selected matrices,
+witnesses, results and their provenance; preserving the older formal
+H/maps/δ presentation is a separate compatibility requirement and is no
+longer a prerequisite for the primary route. Keep the qualified 0caa19d0
+workflow available as compatibility evidence.
+
+Use the existing `FreydAdjunctionModel R` (whole P/Q, with H derived from
+them), its native normality and native row hypotheses as the primary formal
+model input. The current TypeScript context still declares the older
+`FreydHomologyModel` and reaches the native model through its adapter; that
+is the interface to migrate. State native realization contracts explicitly
+and qualify their connection to the actual CAS data. Do not replace a
+missing theorem by assuming output exactness or silently strengthen an old
+contract. Exactness must continue to come from the existing native theorem.
+
+Priority order:
+
+1. NUH-5N1: direct native model/reifier context and exact signature mirrors,
+   reusing the already selected supported CAS result and coefficient inventory;
+2. NUH-5N2: native whole H/maps/δ/exactness consumers under those contracts,
+   with checked concrete interaction and explicit trust/realization boundaries;
+3. NUH-6: native snake/LES work, retaining the general six-term scope and sign
+   requirements, followed by NUH-7 qualification; and
+4. later compatibility work: agreement with older formal presentations and
+   optional point/projection normalization. Reopen a deferred experiment only
+   for a separately selected task or a demonstrated necessary native consumer.
+
+The recent point-predicate/inverse-projection resource probes are deferred.
+They involve the native exactness interface too, so bypassing the legacy
+model does not establish that every such normalization problem disappears.
+The primary route keeps whole categorical proofs and only requires the
+observations its actual consumers use. Required native typing, computation
+and CAS-realization checks remain completion gates. Snapshots and the
+resumption boundary are in `emdash2/audits/deferred-native-exactness-observations/`.
+
+The whole-interface prototype is available for the new route: twelve
+comparison/type/evidence definitions and three constructor/predicate checks
+pass. The latter evidence is `logs/probes/nuh5b2e1_whole_type_review-20260914-234202.log`.
+It adds no axiom or opaque certificate. This does not yet implement the new
+TypeScript native-model context or its complete CAS consumer.
+
+Current NUH-5B2e clarification (2026-09-14): "exactness observations" means
+formal model-facing terms and diagram comparisons, not empirical testing.
+The required output connects the whole native Im⇒K equivalences with the
+native model's H/maps/δ and their CAS realization under the declared
+contracts. It does not require the older formal presentation as an
+intermediate diagram.
+The CAS computations, native δ integration and generic whole exactness
+theorems already work. A particular explicit point-predicate normalization
+is not itself a prerequisite for the computational/internal architecture.
+Prioritize the whole categorical exactness interface and the required whole
+diagram comparisons. Keep the failed pointwise probes as unqualified
+experiments; resume them only for a concrete consumer. This does not waive
+the native-diagram/CAS realization bridge or turn it into optional external
+assurance. The subsequent priority above moves only the older formal
+presentation comparison out of the primary route.
 
 The native ordinary construction now supplies whole H, its induced maps,
 the whole connecting transformation δ and all three native-window exactness
@@ -587,6 +645,47 @@ The next observer must expose the actual comparison and its evidence, and
 check its relation to retained-H endpoints before claiming exactness at a
 retained displayed position. This inventory is a construction starting point,
 not a completed point-observation or retained-endpoint theorem.
+
+Earlier NUH-5B2e1 experiments (preserved history, superseded as an active queue
+by the direct native priority above): expose the original whole raw-window comparisons as
+thin specializations of `one_cat_native_window_*_exact_comparison`. Define
+their point observations through `tapp0_fapp0`, and express point exactness
+as existing `OmegaEquivAlong` on those actual arrows. Map the already derived
+whole evidence through the existing `fapp0_func(x)` using
+`omega_equiv_along_fapp1_fapp0`; the selected inverse must be that same
+functor's action on the original inverse. Add no primitive, rewrite, unifier
+or caller-supplied coherence equation. Qualify the whole comparisons, their
+Hom action, point evidence and selected inverse observations on the original
+raw window. This is the native observation prerequisite. The subsequent
+retained-H/arrow comparison and TypeScript adoption remain required before
+NUH-5B2e completion; point evaluation alone does not discharge them.
+
+The first combined e1 probe exceeds the memory guard. Prefix checks isolate
+the cost: all six model/raw whole-comparison definitions, the first point
+arrow and its `OmegaEquivAlong` type check. Adding the direct fully
+instantiated `omega_equiv_along_fapp1_fapp0` proof exhausts allocation.
+The generic evaluation lemma over abstract F/G/h checks, including both
+selected inverse projections. Test that derived lemma as the window proof's
+application boundary; it adds no primitive or reduction rule. The generic
+pass alone does not qualify the instantiated native observation.
+
+The whole witness checks against the newly named comparison when its
+category is explicitly `Functor_cat K (CommRingFreydPresentation_cat R)`.
+Letting that category be inferred through Hom led to a failed sort problem.
+The next point-proof probe retains this explicit whole type in a local
+evidence binder before applying evaluation. This compares the same original
+proof with the actual comparison; it introduces no cast, new inverse or
+pointwise exactness premise.
+
+The point proof is accepted with its inferred result type, but explicit
+predicate/inverse review still exceeds the allocation guard. Before changing
+any formal owner, test the same term with earlier major collection. The
+installed OCaml 5.4 `Gc.control` documentation gives `space_overhead` default
+120 and specifies that a lower value collects unreachable blocks earlier;
+`startup_aux.c` maps runtime option `o` to that control. Probe `o=20` with the
+unchanged 2-GiB guard, ordinary checker and subject reduction. This is runtime
+configuration, not an endpoint-normalizer or opacity change. The review
+remains required even though declaration inference succeeds.
 
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and
