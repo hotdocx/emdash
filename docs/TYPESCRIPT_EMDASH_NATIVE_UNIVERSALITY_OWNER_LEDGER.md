@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — original left H comparison qualified; right endpoint/sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — left H and right quotient/γ-diagram comparisons qualified; right kernel/H and sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,25 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D2c1: Original right quotient and γ diagram — qualified 2026-09-15
+
+The [quotient owner](../emdash2/emdash3_2_one_cat_native_window_snake_right_quotients.lp)
+derives Q(a)≃Q(dₘᴰ) by original whole row/quotient descents. The new
+row colift uses the existing row cokernel inverse into Q(i), with no
+section into the middle object. Original row/Q cancellation proves both
+inverse laws. The [γ owner](../emdash2/emdash3_2_one_cat_native_window_snake_right_gamma.lp)
+constructs d̄₀ᴰ and χ=⟨0,d̄₀ᴰ⟩, proves χ∘φ=γ, and supplies its native
+whole arrow-diagram map with endpoint actions φ and id.
+
+Twenty-four new definitions and twelve actual whole consumers retain the
+original P/Q and Em/E₀. No primitive, rule, unifier, opacity or normality
+premise is added. The recovered a keeps its original diagram and Q choice.
+Next compare K(γ), K(χ) and K(d̄₀ᴰ), then construct the original right-H
+comparison with the required native normality/cover assumptions. Sign,
+general reference, concrete, six-term observation, displayed CAS and final
+qualification remain required in the
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D2b: Original left H comparison — qualified 2026-09-15
 

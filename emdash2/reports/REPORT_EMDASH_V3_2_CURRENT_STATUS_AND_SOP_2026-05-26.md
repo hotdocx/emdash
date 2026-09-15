@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Original right quotient and γ comparison (2026-09-15): the
+[quotient owner](../emdash3_2_one_cat_native_window_snake_right_quotients.lp)
+constructs Q(a)≃Q(dₘᴰ) using original whole row/quotient descents.
+The [γ owner](../emdash3_2_one_cat_native_window_snake_right_gamma.lp)
+proves χ∘φ=γ for χ=⟨0,d̄₀ᴰ⟩ and forms its actual whole arrow-diagram
+map with endpoint actions φ and id. Twenty-four new definitions and
+twelve whole consumers add no primitive, rule, unifier, opacity or
+normality premise. The original right kernels and H, then the positive
+∂/δ comparison, remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original left homology comparison (2026-09-15): the
 [comparison owner](../emdash3_2_one_cat_native_window_snake_left_homology.lp)
 uses the original Q-units and whole descents to derive Q(α)≃H(A₁).

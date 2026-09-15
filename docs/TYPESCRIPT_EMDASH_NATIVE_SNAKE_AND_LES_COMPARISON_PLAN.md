@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: original left homology endpoint comparison qualified; right endpoint/sign comparisons next; six-term observation gap retained
+Status: left H, right quotient and γ-diagram comparisons qualified; right kernel/H and sign comparisons next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: input, cycles and original left H comparison qualified; right endpoint/sign next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: left H and right quotient/γ-diagram comparisons qualified; right kernel/H and sign next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -944,7 +944,16 @@ Evidence: `emdash2/tmp/probes/nuh6d2b_conformance.json`,
 snapshot covers 1,296 files at
 `sha256:c6d61684e68553541c9356b6169b3ef1ad87c90266ff297bb5e0f7d6f0f1f9ab`.
 
-### NUH-6D2c: Original Right Homology Endpoint — Next
+### NUH-6D2c1: Original Right Quotient And γ Diagram
+
+Current 6D2c1 experiment starts at `426aea28`; the previous goal turn
+qualified the original left H comparison. All 62 worktrees are clean and
+the bounded left-H owner baseline passes. Derive a whole row colift from
+the original Q mate and the existing row cokernel inverse, then compare
+Q(a) with Q(dₘᴰ). Derive both inverse laws and test actual quotient
+reconstruction and inverse consumers. Neither a new colift primitive nor
+a replacement a/Q selection is permitted. This quotient comparison alone
+will not qualify K(γ)≃H(D₀).
 
 First compare the original Q(a), with a recovered from the native snake
 input, to Q(dₘᴰ), where dₘᴰ:Dₘ⇒D₀ is the original upper-right map.
@@ -962,3 +971,75 @@ rather than infer it from endpoint resemblance or kernel/cokernel existence
 alone. Then compare the positive covered ∂/δ formulas under both original
 H comparisons. General reference-snake and concrete qualification remain
 required, alongside 6C3b and displayed CAS transport.
+
+The [whole row colift owner](../emdash2/emdash3_2_one_cat_short_exact_family_colifts.lp)
+now composes the original Q descent with the existing row cokernel inverse.
+It proves γ_i⁻¹∘p=π_i and colift(u)∘p=u for the original arbitrary
+row diagram. This inverse lands in Q(i), so no section into the middle
+row object is chosen. A first-coordinate observation of the already
+qualified whole uncopairing equality complements its existing second one.
+
+The [quotient owner](../emdash2/emdash3_2_one_cat_native_window_snake_right_quotients.lp)
+constructs φ:Q(a)⇒Q(dₘᴰ) and ψ in the reverse direction. Its equations are
+
+```text
+φ∘π_a = q_d∘p₀,       x∘p₀ = π_a,       ψ∘q_d = x;
+ψ∘φ = id_Q(a),        φ∘ψ = id_Q(dₘᴰ).
+```
+
+The original row colift constructs x. Original pₘ cancellation proves
+x∘dₘᴰ=0; original Q and p₀ cancellation prove both inverse laws.
+Fixed-forward ΩAlong(φ) retains that same ψ. Q(a) remains Q at the
+original recovered incoming diagram; its comparison with [bₘ,i₀] uses
+the checked whole input-recovery path, without replacing the diagram.
+
+The [γ owner](../emdash2/emdash3_2_one_cat_native_window_snake_right_gamma.lp)
+descends d₀ᴰ to d̄₀ᴰ:Q(dₘᴰ)⇒D₁, constructs χ=⟨0,d̄₀ᴰ⟩, and proves
+
+```text
+d̄₀ᴰ∘q_d = d₀ᴰ,       χ∘q_d = ⟨0,d₀ᴰ⟩,       χ∘φ = γ.
+```
+
+The last whole path produces an actual native arrow-diagram transformation
+Arr(γ)⇒Arr(χ), with source action φ and target action id. Callers supply
+no extra square. Twenty-four new transparent definitions (one shared
+observation, three row-colift definitions, fourteen quotient definitions
+and six γ definitions) add no primitive, rule, unifier, opacity or
+normality premise. The original P/Q, Em/E₀ and chain-zero data remain.
+
+Twelve whole-consumer assertions exercise inverse data and Hom action,
+cancellation after arbitrary whole maps, both quotient reconstructions,
+row-colift reconstruction, γ compatibility and both diagram endpoint
+projections. A distinct arbitrary inverse is rejected. This qualifies the
+original quotient comparison and γ-diagram map; it does not yet identify
+K(γ) with right H.
+
+The four affected owners pass in 13.346s, 10.613s, 14.066s and 14.246s.
+The twelve-consumer reviewer passes in 14.260s with
+`OCAMLRUNPARAM=o=20,v=1024` and 10.905s with both GC variables unset.
+The existing nine-consumer left-H reviewer passes in 20.893s after the
+shared owner extension. That owner's original prefix is byte-for-byte
+unchanged. All checks use 90s/2GiB, with no special runner required.
+Warning inventories match exact import controls, including locations,
+term heads and rule families. Strict LHS, catalog/TOC, source-only health
+and document checks are localized; no repository aggregate runs.
+
+Evidence: `emdash2/tmp/probes/nuh6d2c_conformance.json`,
+`nuh6d2c_warnings.json`, `nuh6d2c_source_audit.json` and the final
+`nuh6d2c_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,300 files at
+`sha256:f6ec6e600bbf96869768391c9e2cc69ef57aa7c8c4bf00629106cfcecd380054`.
+
+### NUH-6D2c2: Original Right Kernel And H — Next
+
+Use the native γ-diagram map and the original K action to compare K(γ)
+with K(χ). Derive its reverse from ψ and χ∘φ=γ; original kernel inclusion
+cancellation and the φ/ψ inverse laws should prove both inverse identities.
+The product projections then compare K(⟨0,d̄₀ᴰ⟩) with K(d̄₀ᴰ).
+Retain the actual original K choices and diagram action throughout.
+
+The remaining H(D₀)=Q(β_D) comparison with K(d̄₀ᴰ) must be constructed
+through the existing native normality/cover machinery where required.
+It is not inferred from the quotient comparison, an endpoint equality, or
+kernel/cokernel existence alone. Preserve the subsequent positive ∂/δ,
+general reference, concrete, 6C3b and displayed CAS qualification obligations.

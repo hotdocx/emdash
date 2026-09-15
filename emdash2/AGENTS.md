@@ -211,8 +211,11 @@ row/kernel mates and inclusion cancellation. Both inverse slots and their
 whole Hom action qualify. NUH-6D2b now derives the original left H
 comparison Q(α)≃H(A₁) through whole quotient descents and cancellation.
 Its inverse data, arbitrary whole-map consumers and existing native LES H
-endpoint qualify. Next derive the right H comparison and compare the
-positive ∂/δ formulas. LES/sign comparison and NUH-5
+endpoint qualify. NUH-6D2c1 now derives Q(a)≃Q(dₘᴰ), the original γ
+relation χ∘φ=γ with χ=⟨0,d̄₀ᴰ⟩, and its native whole diagram map.
+The inverse data, whole reconstruction and diagram endpoint actions check.
+Next compare the original right kernels and H, then the positive ∂/δ
+formulas. LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
