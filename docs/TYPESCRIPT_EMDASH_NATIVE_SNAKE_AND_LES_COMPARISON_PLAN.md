@@ -776,6 +776,63 @@ should identify the narrower expansion before proposing another carrier,
 opacity boundary, checker change or larger resource limit. The original
 comparison/witness/inverse observation obligation remains unchanged.
 
+Continuation at `499a8645`: all 62 worktrees are clean and the six-term
+input reviewer passes again. Separate controls qualify the original first
+exactness classifier and standalone theorem. The actual stored witness
+also checks when its definition's type is inferred. Checking it against
+the original predicate still exhausts 2GiB, whether that predicate is
+supplied immediately or compared after naming the inferred definition.
+This narrows the failure to reconciliation of the projected and original
+dependent types, rather than proving that extraction itself is unavailable.
+
+NUH-6C3b1 now qualifies the
+[whole-tail observer](../emdash2/emdash3_2_one_cat_native_exact_tail_observations.lp).
+It applies the existing `OmegaArrowData` packaging inside a generic finite
+tail, before the concrete step's annotation is specialized. Its two
+transparent definitions change neither result storage nor P/Q/H/δ or its
+evidence. No primitive, rule, proof opacity or output assumption is added.
+
+The [generic reviewer](../emdash2/examples/one_cat_native_exact_tail_observations.lp)
+checks five constructor/field equations, including the original witness and
+both of its inverse projections. The
+[whole-result reviewer](../emdash2/examples/one_cat_native_snake_six_term_data.lp)
+checks twenty explicit consumer definitions: package, complete arrow, Ω
+witness and both selected inverses at each of the four actual interiors.
+These operate on the original assembled result, not newly supplied fields.
+The later tails retain their actual projected indices. This qualifies
+typed access to the relevant data; it does not assert conversion to the
+standalone theorem presentations.
+
+The owner and generic reviewer pass in 6.381s and 7.870s. The complete
+four-position reviewer passes in 27.383s under the normal 90s/2GiB guard
+with `o=20`.
+Diagnostic inventories match their import controls in categories, locations,
+heads and rule families: 1,208 critical-pair/159 pattern reports for the
+generic boundary, and 1,484/169 for the whole result, with no parser issues.
+The existing scoped GC runner now also registers this owner and the two
+reviewers; its five routing/provenance tests pass. Default resource limits
+are unchanged. Evidence is in `nuh6c3b_observer_checks.json` and
+`nuh6c3b_observer_warnings.json` under ignored `emdash2/tmp/probes/`.
+
+NUH-6C3b2 remains open: direct reconciliation with the original canonical
+comparisons and standalone witnesses. A complete-package comparison still
+exhausts 2GiB and 6GiB. Merely replacing that comparison with a generic
+equality-valued β lemma also fails at 2GiB; an extra direct tail β assertion
+does too. Those experiments remain outside the positive library. The
+remaining investigation distinguishes comparisons of the forward/inverse
+maps from comparisons of the entire law-carrying witness. No computational
+data has been hidden to obtain the qualified access above.
+
+The first forward-arrow-only comparison also fails at 2GiB; there is no
+evidence yet that hiding only proof laws would resolve the remaining gap.
+One remaining runtime control is justified before another interface change:
+replay the unchanged compact complete-package comparison at 6GiB with
+`o=1,v=1024` and a reviewed 300s deadline. Its `o=20` control already failed
+by allocation at 6GiB/180s. The earlier `o=1` experiment stopped during
+imports at 90s, so it did not test this consumer. Retain the serial/no-swap
+guard and exact source identities; the longer deadline pays for the more
+frequent collection and is not a new default.
+
 The first bare comparison of a concretely extracted Im→Ker map with its
 standalone presentation exceeds 2GiB. Typed reflexivity, Σ elimination
 before reconstruction and direct Σ/Product construction do not resolve it.

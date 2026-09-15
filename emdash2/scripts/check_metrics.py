@@ -286,6 +286,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_native_snake_fourth_representatives.lp"),
     Path("emdash3_2_one_cat_native_snake_fourth_exactness.lp"),
     Path("emdash3_2_one_cat_native_exact_arrow_pairs.lp"),
+    Path("emdash3_2_one_cat_native_exact_tail_observations.lp"),
     Path("emdash3_2_one_cat_native_snake_six_term_result.lp"),
     Path("emdash3_2_one_cat_biproduct_family_zeros.lp"),
     Path("emdash3_2_one_cat_native_window_snake_inputs.lp"),
@@ -1039,10 +1040,13 @@ ISOLATED_CHECK_GROUPS = (
 )
 NATIVE_SIX_TERM_GC_CHECK_FILES = {
     Path("emdash3_2_one_cat_native_exact_arrow_pairs.lp"),
+    Path("emdash3_2_one_cat_native_exact_tail_observations.lp"),
     Path("emdash3_2_one_cat_native_snake_six_term_result.lp"),
     Path("examples/one_cat_native_exact_arrow_pairs.lp"),
+    Path("examples/one_cat_native_exact_tail_observations.lp"),
     Path("examples/one_cat_native_snake_six_term_result.lp"),
     Path("examples/one_cat_native_snake_six_term_inputs.lp"),
+    Path("examples/one_cat_native_snake_six_term_data.lp"),
 }
 NATIVE_SIX_TERM_GC_SCRIPT = "scripts/check_native_snake_six_term.sh"
 NATIVE_SNAKE_PAIR_CHECK_FILES = {

@@ -277,6 +277,14 @@ The heavy pair/certificate owners and reviewer use the measured profile in
 `scripts/check_native_snake_pairs.sh`; other checks retain default limits.
 NUH-6C3b and displayed LES exactness transport remain required.
 
+NUH-6C3b1 now qualifies a generic finite-tail observer that packages the
+original comparison and Ω witness before specializing its annotation.
+Five generic field/inverse equations and twenty typed consumers of the
+actual four interiors, including eight inverse maps, pass at 90s/2GiB
+with `o=20`. The two definitions add no primitive or rule. Direct comparison
+with the original canonical maps/witnesses remains NUH-6C3b2; do not describe
+the new access as completing that comparison or displayed LES transport.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

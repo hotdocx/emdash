@@ -25,6 +25,19 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
+Whole native six-term data access (2026-09-15): the
+[observer](../emdash3_2_one_cat_native_exact_tail_observations.lp) packages
+the canonical comparison and its existing Ω witness while the finite
+tail is still generic. The
+[generic reviewer](../examples/one_cat_native_exact_tail_observations.lp)
+preserves constructor fields and inverse choices. The
+[actual result reviewer](../examples/one_cat_native_snake_six_term_data.lp)
+checks twenty typed consumers across all four interiors, including both
+inverse maps at each. The existing 90s/2GiB GC profile suffices. Two
+transparent definitions add no primitive, rule, opacity or assumption.
+Direct reconciliation with standalone canonical maps/witnesses remains
+NUH-6C3b2 in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Nonsplit native snake realization (2026-09-15): the standalone native
 TypeScript context and workflow retain all six terms and five arrows of
 (x,id_R,0), with ∂ represented by [1] on R/(x). A transparent

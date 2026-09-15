@@ -310,6 +310,25 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-6C3b1: Whole-Result Data And Inverse Access — Qualified
+
+The [observer](../emdash2/emdash3_2_one_cat_native_exact_tail_observations.lp)
+packages the original comparison and Ω evidence before specializing a
+generic tail. Five generic constructor/field assertions preserve the
+original witness and inverse choices. Twenty typed consumers access all
+four actual packages, complete arrows, witnesses and eight inverse maps
+from the assembled snake result at 90s/2GiB with `o=20`. Two transparent
+definitions add no primitive, rule, opacity or supplied assumption.
+
+Source/control warning inventories match. The scoped runner includes the
+three new targets; its five routing/provenance tests pass. The
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records the checked boundary and measurements. NUH-6C3b2 still concerns
+direct reconciliation with the original canonical maps/witnesses: whole
+package comparison fails at 2GiB and 6GiB. Compare computational fields
+separately before concluding that full proof-law normalization is needed.
+Displayed LES transport and NUH-7 remain required after the six-term gap.
+
 ### NUH-6C3b: Resource Controls And Reuse Of Prior Techniques — In Progress
 
 The unchanged retained reviewer still fails at 6GiB/180s with `o=20`.

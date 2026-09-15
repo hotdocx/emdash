@@ -9,10 +9,13 @@ export OCAMLRUNPARAM
 
 files=(
   emdash3_2_one_cat_native_exact_arrow_pairs.lp
+  emdash3_2_one_cat_native_exact_tail_observations.lp
   emdash3_2_one_cat_native_snake_six_term_result.lp
   examples/one_cat_native_exact_arrow_pairs.lp
+  examples/one_cat_native_exact_tail_observations.lp
   examples/one_cat_native_snake_six_term_result.lp
   examples/one_cat_native_snake_six_term_inputs.lp
+  examples/one_cat_native_snake_six_term_data.lp
 )
 if [[ $# -gt 1 ]]; then
   printf 'usage: %s [registered-target.lp]\n' "$0" >&2

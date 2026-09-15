@@ -16,6 +16,15 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Whole native six-term data access (2026-09-15): the
+[observer](../emdash3_2_one_cat_native_exact_tail_observations.lp) packages
+comparison/evidence data before specializing a finite tail. Five generic
+field checks and twenty actual typed consumers qualify all four packages,
+arrows, witnesses and eight inverse maps at 90s/2GiB with `o=20`.
+Two transparent definitions add no primitive, rule or opacity. Direct
+reconciliation with the original canonical maps/witnesses remains required
+under NUH-6C3b2 in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Nonsplit native snake realization (2026-09-15): all five arrows of the
 original (x,id_R,0) calculation now enter through a standalone native
 context. Nine matrix equations, five explicit model interpretations and

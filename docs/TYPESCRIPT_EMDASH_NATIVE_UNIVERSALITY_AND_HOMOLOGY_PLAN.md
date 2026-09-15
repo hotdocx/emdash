@@ -24,6 +24,16 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+NUH-6C3b1 now qualifies typed access to all four comparison/evidence packages
+and all eight selected inverses from the original whole six-term result.
+The generic observer packages the data before specializing the dependent
+annotation, using two transparent definitions and the existing carriers.
+Five generic assertions and twenty actual typed consumers pass under the
+90s/2GiB GC profile. Direct reconciliation with the original canonical
+maps/witnesses remains NUH-6C3b2; the new access does not close that check.
+Then complete displayed LES transport and NUH-7 under the
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 NUH-6E2b2 now qualifies the single formal exactness certificate indexed by
 the actual nonsplit CAS snake diagram. The four original certified input
 pairs are linked to the public arrows and transported through the existing

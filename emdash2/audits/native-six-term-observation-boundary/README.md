@@ -6,6 +6,15 @@ Authority: [native snake/LES plan](../../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_
 NUH-6C3b. The user permits advancing independent LES work and returning to
 this gap before final goal qualification.
 
+NUH-6C3b1 now qualifies [typed whole-result data access](../../emdash3_2_one_cat_native_exact_tail_observations.lp).
+It packages data inside the generic tail before specializing the annotation.
+Five generic field equations and twenty actual typed consumers cover all
+four comparisons/witnesses and eight inverse maps at 90s/2GiB with `o=20`.
+The complete observed-package comparison with the original canonical
+theorem packages still fails at 2GiB and 6GiB. The remaining gap is
+NUH-6C3b2; this bundle's older failures describe their respective interfaces,
+not an inability to form any well-typed observation of the data.
+
 The native six-term constructor retains all five original whole maps and
 all four original exactness witnesses. Its type, map observations, native
 input recovery and zero-pair observations check with `OCAMLRUNPARAM=o=20`

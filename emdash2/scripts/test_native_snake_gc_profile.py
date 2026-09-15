@@ -45,7 +45,7 @@ class NativeGcProfileTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         rows = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
         self.assertEqual({Path(row["args"][0]) for row in rows}, metrics.NATIVE_SIX_TERM_GC_CHECK_FILES)
-        self.assertEqual(len(rows), 5)
+        self.assertEqual(len(rows), 8)
         self.assertTrue(all(row["gc"] == "o=20" for row in rows))
 
     def test_selected_target_and_explicit_profile(self):
