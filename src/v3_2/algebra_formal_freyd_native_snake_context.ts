@@ -5,16 +5,18 @@ import { affineFormalCommRingType, affineFormalRingElementType } from './algebra
 import { prepareAlgebraFormalFreydRationalInventory } from './algebra_formal_freyd_rational_preparation';
 import { AlgebraFormalFreydNativeRationalBackend, assertAlgebraFormalFreydNativeRationalBackend } from './algebra_formal_freyd_native_rational_model_context';
 import { prepareAlgebraFormalFreydNativeSnake } from './algebra_formal_freyd_native_snake_preparation';
-import { createFormalFreydNativeSnakeExactnessProofEnvironment } from './algebra_formal_freyd_native_snake_exactness_signatures';
+import { createFormalFreydNativeSnakeCertificateProofEnvironment } from './algebra_formal_freyd_native_snake_certificate_signatures';
 import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from './algebra_formal_freyd_native_model_signatures';
 import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption_source';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_SNAKE_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-rational-snake-context-v2' as const,
+    revision: 'emdash-formal-native-rational-snake-context-v4' as const,
     requiresLegacyModel: false as const, requiresLongExactInput: false as const,
     constructsModel: false as const, adoptsClaims: false as const,
     reselectsUniversals: false as const, suppliesOutputExactness: false as const,
     nativeExactnessConstructors: true as const,
+    nativeDiagramPaths: true as const,
+    nativeIndexedExactnessCertificates: true as const,
     addsCoreOwner: false as const, performsIo: false as const
 });
 
@@ -34,7 +36,7 @@ export function prepareAlgebraFormalFreydNativeRationalSnakeContext(input: {
     const element = affineFormalRingElementType(formalRing);
     const modelType = algebraFormalFreydNativeModelType(formalRing);
     const normalityType = algebraFormalFreydNativeModelNormalityType(formalRing, formalModel);
-    const environment = createFormalFreydNativeSnakeExactnessProofEnvironment([
+    const environment = createFormalFreydNativeSnakeCertificateProofEnvironment([
         { name: formalRing.name, type: affineFormalCommRingType() },
         ...generatorTerms.map(term => ({ name: term.name, type: element })),
         ...coefficients.map(({ term }) => ({ name: term.name, type: element })),

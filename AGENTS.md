@@ -216,7 +216,9 @@ Lambdapi invocation bounded as required by the nested SOP: 90 seconds by
 default. For the native-universality goal, the user now authorizes reviewed
 per-target extensions; the current guard permits an explicit limit up to
 600 seconds with the reason and measurement recorded in its living plan.
-Memory/file limits and serial execution remain in force. The separate proportional-
+The memory default remains 2 GiB; reviewed native-snake pair checks use an
+explicit 6 GiB/180s profile under the user's memory-extension authorization.
+File limits and serial execution remain in force. The separate proportional-
 validation policy still forbids unnecessary aggregates.
 
 For Lambdapi allocation failures or timeouts, follow the repository-wide

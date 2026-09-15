@@ -4,6 +4,16 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Displayed native snake exactness (2026-09-15):
+[pair certificates](../emdash3_2_commutative_algebra_freyd_native_snake_pair_exactness.lp)
+retain the original whole Ω data and the checked native-input/public/CAS
+pair paths. The [diagram predicate](../emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp)
+indexes all four at the actual coherent five-arrow diagram. Its concrete
+nonsplit constructor is checked without new assumptions or trust decisions.
+Thirty-two transparent definitions add no primitive or rule; nine workflow
+tests and 46 formal assertions pass under the recorded scoped limits.
+Full-result observations and displayed LES transport remain separate.
+
 Native snake exactness observations (2026-09-15): the
 [exactness owner](../emdash3_2_commutative_algebra_freyd_native_snake_exactness.lp)
 specializes the four original proofs at their fixed comparisons. Its

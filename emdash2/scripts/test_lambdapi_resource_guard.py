@@ -74,7 +74,7 @@ else:
         self.assertLess(time.monotonic() - started, 5)
 
     def test_ceiling_cannot_be_raised_by_environment(self):
-        for env in ({"EMDASH_LP_MEMORY_MIB": "4096"},
+        for env in ({"EMDASH_LP_MEMORY_MIB": "6145"},
                     {"EMDASH_LP_TIMEOUT": "601s"},
                     {"EMDASH_LP_TIMEOUT": "180.5s"},
                     {"EMDASH_LP_TIMEOUT": "0"},
@@ -82,6 +82,26 @@ else:
                     {"EMDASH_LP_MEMORY_MIB": "bad"}):
             with self.subTest(env=env):
                 self.assertEqual(self.run_guard("/bin/true", **env).returncode, 2)
+
+    def test_reviewed_memory_extension_keeps_other_limits(self):
+        for memory in ("4096", "6144"):
+            with self.subTest(memory=memory):
+                result = self.run_guard("python3", "-c", """
+import resource, sys
+assert resource.getrlimit(resource.RLIMIT_AS) == (int(sys.argv[1])*1024**2,)*2
+assert resource.getrlimit(resource.RLIMIT_FSIZE) == (1024**2,)*2
+assert resource.getrlimit(resource.RLIMIT_CORE) == (0, 0)
+""", memory, EMDASH_LP_MEMORY_MIB=memory)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_default_memory_remains_two_gib(self):
+        env = dict(self.env)
+        env.pop("EMDASH_LP_MEMORY_MIB")
+        result = subprocess.run(["bash", str(GUARD), "python3", "-c", """
+import resource
+assert resource.getrlimit(resource.RLIMIT_AS) == (2048*1024**2,)*2
+"""], env=env, capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_reviewed_time_extension_keeps_other_limits(self):
         for duration in ("120", "180s", "240s", "300s", "450s", "600s"):

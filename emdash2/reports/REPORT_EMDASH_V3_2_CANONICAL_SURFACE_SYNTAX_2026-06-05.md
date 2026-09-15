@@ -2451,6 +2451,16 @@ unchanged with the LES interface. The frontend constructs all four proof
 and point-observation terms; public-pair alignment and displayed transport
 remain separate required consumers.
 
+`FreydNativeSnakeFirstExactAt` through `FourthExactAt` index the original
+whole witnesses by their observed target pairs. The corresponding
+`freyd_native_snake_*_exact_at` constructors compose the checked pair links
+with existing complete-arrow interpretations while retaining the witness
+as data. `FreydNativeSnakeDiagramExactness(...,d)` indexes all four at the
+adjacent pairs of one `FreydArrowObservationDiagram R 4`.
+`freyd_native_snake_exact_diagram_intro` retains its five actual arrows,
+matching proof and four certificates. This displayed nonsplit snake
+boundary is now qualified; the source model contracts are unchanged.
+
 The direct native H observation spelling is
 `freyd_adjunction_model_object(M,e,d,chain)`, defined by applying that whole
 H to `freyd_raw_chain_native_cone(e,d,chain)`. For raw chain maps,

@@ -443,6 +443,11 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_native_snake_matrices.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_maps.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_observations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_matching.lp"),
+    Path("emdash3_2_one_cat_kernel_input_pair_observations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_pair_exactness.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp"),
     Path("emdash3_2_commutative_algebra_freyd_arrow_equivalence_observations.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_exactness.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_point_exactness.lp"),
@@ -1040,6 +1045,13 @@ NATIVE_SIX_TERM_GC_CHECK_FILES = {
     Path("examples/one_cat_native_snake_six_term_inputs.lp"),
 }
 NATIVE_SIX_TERM_GC_SCRIPT = "scripts/check_native_snake_six_term.sh"
+NATIVE_SNAKE_PAIR_CHECK_FILES = {
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_pair_exactness.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp"),
+    Path("examples/freyd_native_snake_pair_exactness.lp"),
+}
+NATIVE_SNAKE_PAIR_SCRIPT = "scripts/check_native_snake_pairs.sh"
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
 HEALTH_STATE = ROOT / "logs" / "check-health-state.json"
@@ -1098,6 +1110,8 @@ def check_files() -> list[Path]:
 
 
 def lambdapi_check_command(path: Path) -> list[str]:
+    if path in NATIVE_SNAKE_PAIR_CHECK_FILES:
+        return [f"./{NATIVE_SNAKE_PAIR_SCRIPT}", str(path)]
     if path in NATIVE_SIX_TERM_GC_CHECK_FILES:
         return [f"./{NATIVE_SIX_TERM_GC_SCRIPT}", str(path)]
     warnings = os.environ.get("EMDASH_LAMBDAPI_WARNINGS", "0").lower()
@@ -1238,6 +1252,12 @@ def check_state_identity(
         "extra_lambdapi_flags": os.environ.get("EMDASH_LAMBDAPI_FLAGS", ""),
         "ocamlrunparam": os.environ.get("OCAMLRUNPARAM", ""),
         "camlrunparam": os.environ.get("CAMLRUNPARAM", ""),
+        "memory_mib": os.environ.get("EMDASH_LP_MEMORY_MIB", "2048"),
+        "probe_timeout": os.environ.get("EMDASH_PROBE_TIMEOUT", ""),
+        "resource_guard": hashlib.sha256((ROOT / "scripts/lambdapi_resource_guard.sh").read_bytes()).hexdigest(),
+        "native_snake_pair_script": hashlib.sha256(
+            (ROOT / NATIVE_SNAKE_PAIR_SCRIPT).read_bytes()
+        ).hexdigest(),
         "native_six_term_gc_script": hashlib.sha256(
             (ROOT / NATIVE_SIX_TERM_GC_SCRIPT).read_bytes()
         ).hexdigest(),
@@ -1261,7 +1281,11 @@ def resume_identity_is_compatible(
         "extra_lambdapi_flags",
         "ocamlrunparam",
         "camlrunparam",
+        "memory_mib",
+        "probe_timeout",
+        "resource_guard",
         "native_six_term_gc_script",
+        "native_snake_pair_script",
     )
     if any(previous.get(key) != current.get(key) for key in stable_keys):
         return False
@@ -1397,7 +1421,8 @@ def run_checks(
                     break
             continue
         cmd = lambdapi_check_command(rel)
-        rc, output, duration = run_command(cmd, timeout_value)
+        # The selected wrapper enforces its own reviewed hard deadline.
+        rc, output, duration = run_command(cmd, None if rel in NATIVE_SNAKE_PAIR_CHECK_FILES else timeout_value)
         results_by_file[str(rel)] = CheckResult(str(rel), rc, duration)
         print(f"{rel}: exit {rc}, {duration:.3f}s")
         if rc == 0 and save_success is not None:

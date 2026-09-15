@@ -200,3 +200,16 @@ symbol freyd_arrow_tail_diagram [R : τ CommRing] (Q : Π A : τ (@CommRingPrese
       (λ a : τ (FreydArrowObservation R), @FreydArrowMatchingTail R a n
         (@finite_family_tail (FreydArrowObservation R) n (@finite_arrow_tail_arrows
           (@CommRingFreydPresentation_cat R) Q n A B f xs))) (@freyd_arrow_tail_matching R Q n A B f xs));
+
+// Transport only the proposition-valued endpoint matching along the arrow paths.
+symbol freyd_arrow_matching_transport [R : τ CommRing] [n : τ Nat_grpd]
+  [a b : τ (FreydArrowObservation R)]
+  [xs ys : τ (@FiniteFamily (FreydArrowObservation R) n)]
+  (m : τ (@FreydArrowMatchingTail R a n xs))
+  (p : τ (@= (FreydArrowObservation R) a b))
+  (q : τ (@= (@FiniteFamily (FreydArrowObservation R) n) xs ys))
+  : τ (@FreydArrowMatchingTail R b n ys)
+≔ @ind_eq (FreydArrowObservation R) b a (@eq_sym _ _ _ p)
+    (λ u : τ (FreydArrowObservation R), @FreydArrowMatchingTail R u n ys)
+    (@ind_eq (@FiniteFamily (FreydArrowObservation R) n) ys xs (@eq_sym _ _ _ q)
+      (λ zs : τ (@FiniteFamily (FreydArrowObservation R) n), @FreydArrowMatchingTail R a n zs) m);

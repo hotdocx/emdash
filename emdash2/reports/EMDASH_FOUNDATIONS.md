@@ -5070,6 +5070,19 @@ must still be related to the public arrows and their interpretations with
 shared endpoint coherence; four invertible comparisons alone do not make
 that link.
 
+For the nonsplit snake, that link is now checked. Each indexed pair
+certificate contains the original whole exactness witness and a path from
+its own native input's observed pair to the requested two arrows. The
+constructors derive the public-pair link from whole source reconstruction
+and compose it with the existing model interpretations. They keep the Ω
+data unchanged; only the path field is transported. A single predicate on
+the coherent five-arrow diagram then stores all four adjacent certificates.
+The original endpoint matching and presentation setness supply the whole
+diagram path. The concrete proof–CAS constructor checks this certificate
+with no new assumptions or trust decisions. Its displayed snake exactness
+claim is relative to the same supplied model/interpretation contracts;
+displayed LES transport remains a separate obligation.
+
 The direct native model now has readable H and map observations. The H value
 is application of its existing whole functor to the original raw input;
 the map is application of the existing internal raw-map functor specialized

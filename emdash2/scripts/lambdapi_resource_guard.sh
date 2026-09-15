@@ -8,13 +8,13 @@ file_mib="${EMDASH_LP_FILE_MIB:-64}"
 duration="${EMDASH_LP_TIMEOUT:-90s}"
 backend="${EMDASH_LP_RESOURCE_BACKEND:-auto}"
 
-# Memory/file ceilings stay fixed. The native-homology goal authorizes a
-# measured per-target time extension to 600s; the default remains 90s.
+# Reviewed native-homology checks may explicitly use up to 6 GiB and 600s.
+# Defaults remain 2 GiB/90s; file, core, no-swap and serial limits stay fixed.
 for value in "$memory_mib" "$file_mib"; do
   [[ "$value" =~ ^[1-9][0-9]{0,3}$ ]] || { printf 'invalid resource limit\n' >&2; exit 2; }
 done
-(( memory_mib >= 32 && memory_mib <= 2048 && file_mib <= 64 )) || {
-  printf 'limits must be memory 32..2048 MiB and file size 1..64 MiB\n' >&2; exit 2;
+(( memory_mib >= 32 && memory_mib <= 6144 && file_mib <= 64 )) || {
+  printf 'limits must be memory 32..6144 MiB and file size 1..64 MiB\n' >&2; exit 2;
 }
 [[ "$duration" =~ ^([1-9][0-9]{0,2})(s)?$ ]] || {
   printf 'timeout must be 1..600 whole seconds (optional s suffix)\n' >&2; exit 2;

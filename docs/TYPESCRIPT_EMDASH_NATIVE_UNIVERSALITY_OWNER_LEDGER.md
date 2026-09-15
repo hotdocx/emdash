@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; pair alignment/transport next; six-term observation gap retained; Op/duality deferred
+Status: active — native LES comparison and nonsplit displayed snake exactness qualified; retained 6C3b and displayed LES transport next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,32 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-6E2b2: Exactness Indexed By The Displayed CAS Snake — Qualified
+
+The [pair links](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp)
+retain each original exactness input. The
+[certificates](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_pair_exactness.lp)
+keep its original Ω witness and compose only the observed-pair path with
+the existing arrow interpretations. A
+[single diagram predicate](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp)
+indexes all four at the adjacent pairs of the actual five-arrow diagram.
+Matching and the whole diagram path are derived through the existing
+presentation-setness/finite-family owners. No new interpretation is supplied.
+
+The frontend now checks that certificate on (x,id_R,0) with the original
+six CAS presentations, including ∂=[1] on R/(x). The displayed-exactness
+result is true; the source remains the same fourteen-claim arrow realization.
+Nine workflow tests and 46 formal assertions pass. Thirty-two transparent
+definitions introduce no primitive or rewrite/unification rule. The heavy
+pair/certificate checks use their measured 6GiB/180s profile; the default
+remains 2GiB/90s. Guard/profile tests and nineteen unchanged existing
+signature comparisons qualify the tooling changes. Details and evidence
+are in the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
+NUH-6E is complete at its stated model boundary. Next is the retained
+NUH-6C3b full-result observation gap, then NUH-5N2G3B2 displayed LES
+transport and the final NUH-7 audit. This is not goal completion.
 
 ### NUH-6E2b1: Original Whole Exactness And Point Evidence — Qualified
 

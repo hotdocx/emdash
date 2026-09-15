@@ -2,6 +2,13 @@
 
 Date: 2026-09-02
 
+Displayed native snake exactness (2026-09-15): the original four Ω witnesses
+now yield one checked certificate for the nonsplit CAS diagram, through
+derived input/public-pair links and existing arrow interpretations. No
+assumption or trust decision is added. NUH-6E is qualified; retained full-result
+observations and displayed LES transport remain under the
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
+
 Native snake exactness observations (2026-09-15): all four original whole
 proofs and their evaluated Ω data now have concrete frontend consumers,
 with no new assumptions. Twelve generic inverse/projection checks and

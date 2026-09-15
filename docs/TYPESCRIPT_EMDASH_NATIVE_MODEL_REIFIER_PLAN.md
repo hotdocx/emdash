@@ -2,13 +2,22 @@
 
 Date: 2026-09-15
 
-Status: active — native finite-diagram coherence and whole exactness evidence qualified; displayed categorical exactness transport remains; legacy comparisons and auxiliary normalization deferred
+Status: active — displayed native snake exactness qualified; displayed LES exactness transport remains; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
 Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
 
 ## Scope And Existing Boundary
+
+NUH-6E2b2 now qualifies displayed categorical exactness for the nonsplit
+native snake. Four certificates retain their original whole Ω data and
+the checked input/public/CAS pair links; one formal predicate indexes them
+at the actual coherent five-arrow diagram. Construction adds no assumptions
+or trust decisions to the existing nine-equation/five-interpretation source.
+This result's displayed-exactness flag is true. The separate native LES
+displayed-exactness flag remains false pending NUH-5N2G3B2. Finish the
+retained NUH-6C3b observations next, then return to that LES transport.
 
 NUH-6E2b1 now constructs the four native whole snake exactness proofs and
 their point comparison/evidence observations on the same nonsplit input.

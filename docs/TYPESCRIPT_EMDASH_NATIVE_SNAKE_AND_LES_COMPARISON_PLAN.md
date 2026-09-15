@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; public-pair alignment and displayed transport next; six-term observation gap retained
+Status: native snake/LES comparison and nonsplit displayed CAS exactness qualified; retained six-term observation gap and displayed LES integration remain
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -70,7 +70,7 @@ comparison with the former raw connecting algorithm is required.
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
 | NUH-6D | qualified native LES endpoint, connecting/sign and surrounding-map comparisons; 6D4 withdrawn by user direction | Whole native LES specialization/comparison on the common short-exact inputs and fixed sign; no old/new snake comparison |
-| NUH-6E | nonsplit arrows and 6E2b1 whole/point exactness witnesses qualified; public-pair alignment and transport next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
+| NUH-6E | qualified nonsplit arrow, native proof, pair alignment and displayed diagram certificate | Direct native proof–CAS interaction under the recorded model contracts; no general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
 derive their whole reconstruction equations. A failure requiring ordinary
@@ -1604,7 +1604,7 @@ Evidence under `emdash2/tmp/probes/`: `nuh6e3_conformance.json`,
 `nuh6e3_qualification.json`. The final emitted artifacts are byte-identical
 to the checked focused artifacts. No repository-wide typecheck ran.
 
-#### NUH-6E2b2: Index Certificates At Public And CAS Pairs — Next
+#### NUH-6E2b2: Index Certificates At Public And CAS Pairs — Qualified
 
 Retain the original native zero input behind each canonical comparison.
 Use [zero-arrow pair observation](../emdash2/emdash3_2_zero_arrow_pair_observations.lp)
@@ -1623,3 +1623,103 @@ deferred checker experiments. Snake pair alignment has no LES column-H
 conjugation, but still requires its own checked source-recovery link.
 `provesDisplayedCasExactness` remains false until this alignment/transport
 is qualified. NUH-5 displayed LES transport, 6C3b and NUH-7 remain required.
+
+6E2b2 begins at `8d3a5830`, with all 62 worktrees clean and the bounded
+native exactness reviewer passing. First derive a generic observation path
+from an introduced whole kernel input to its original two whole maps, using
+the existing incoming-source reconstruction. Specialize that path at each
+snake exactness input. Index each existing whole exactness proof by the
+pair observed from that same input, then transport to the actual public/CAS
+pair. Retain shared endpoints and the existing finite-diagram matching
+structure; standalone invertible arrows or independently chosen middle
+isomorphisms are insufficient. No new universality or interpretation premise
+is proposed.
+
+Targeted resource experiment: the generic pair path, first native input
+pair and first public pair check at 2GiB; their first instantiated path
+exceeds that limit. Replay that exact path at 6GiB under the user's earlier
+memory-extension authorization. Available memory is about 11GiB. Use a
+temporary copy of the current guard with only its accepted memory ceiling
+raised; preserve the 90s deadline, serial lock, no-swap cgroup, file limit
+and subject-reduction checks. Keep the repository guard/default unchanged.
+
+The unchanged first path passes at 6GiB in 42.157s. Qualify the complete
+four-path module at that same memory limit with a reviewed 180s deadline:
+four first-case costs would be about 169s, while shared imports may reduce
+the total. This is one required local module, not a repository aggregate.
+No source, proof data or comparison assumption is changed by this replay.
+
+The complete unchanged module passes at 6GiB in 80.049s. Its peak OCaml
+heap is about 4.6GiB. Generic-before-Freyd factoring also checks at 2GiB,
+but the final complete-arrow view comparisons still exceed 2GiB. Use the
+already authorized reviewed memory range through the standard guard rather
+than retaining a temporary guard copy: allow explicit limits up to 6144MiB,
+keep the default at 2048MiB, and preserve all other resource protections.
+Register only the affected heavy checks with their measured profile.
+This revises the earlier guard-copy-only execution choice; it changes no
+mathematical assumption, rewrite rule or comparison obligation.
+
+The [generic observation owner](../emdash2/emdash3_2_one_cat_kernel_input_pair_observations.lp)
+derives the input-to-public-pair path from the existing whole source
+reconstruction. Its small parent-presentation comparison needs the existing
+`zero_arrow_family_action_paths` congruence owner; no new rewrite/unifier
+is added. The [Freyd pair owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp)
+applies that path at all four original exactness inputs and the actual
+public k₁,k₂,∂,q₁,q₂ observations.
+
+The [indexed pair certificates](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_pair_exactness.lp)
+retain the original whole Ω witness and a path from that same input's
+observed pair to the requested two arrows. Their constructors compose
+the checked public-pair link with the two existing model-interpretation
+paths. They do not accept an unrelated invertible arrow. Only the path
+field changes: projections recover the original Ω witness even when the
+interpretation paths are opaque.
+
+The [diagram predicate](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp)
+indexes the four certificates at the four adjacent pairs of one existing
+`FreydArrowObservationDiagram R 4`. Its introduction retains all five
+arrows and their matching proof. Native matching comes from the original
+shared endpoints; the existing finite-family paths transport only the
+proposition-valued matching data. Existing diagram path construction then
+gives one coherent native→CAS path. Presentation setness, not a supplied
+naturality square or new coherence assumption, justifies the matching
+compatibility.
+
+The [displayed exactness constructor](../src/v3_2/algebra_formal_freyd_native_snake_displayed_exactness.ts)
+now builds and checks that single formal certificate for the original
+nonsplit CAS diagram. `provesDisplayedCasExactness` is true on this result.
+The nine matrix equations, five explicit arrow interpretations and three
+supplied backend/model contracts are unchanged. Certificate construction
+adds zero assumptions and zero trust decisions. The ordinary arrow-only
+and whole-proof-only results retain their narrower flags.
+
+Nine workflow tests pass in 65.791s. The eighteen diagram signatures and
+three concrete diagram assertions pass at 2GiB in 26.346s and 31.188s.
+The ten generic certificate-data assertions, ten certificate signatures
+and five actual CAS pair/diagram assertions pass at 6GiB in 92.496s,
+101.891s and 99.903s, respectively, each under its reviewed 180s guard.
+Nineteen existing diagram signature types remain unchanged after factoring
+their shared structural builder. Twelve guard tests and ten scoped-profile
+tests pass; resume identity now includes memory, deadline and guard/profile
+hashes. The normal 2GiB/90s defaults remain unchanged.
+
+Thirty-two transparent definitions across the observation, matching,
+certificate and diagram owners add no primitive or new rewrite/unifier.
+The 6GiB profile is registered for only the pair/certificate owners and
+their reviewer. Generic-before-Freyd experiments remain recovery evidence,
+not an alternative public interface or a new prerequisite. This completes
+the concrete NUH-6E acceptance case under declared model semantics.
+Next return to the required NUH-6C3b full-result observations, then the
+separate NUH-5N2G3B2 displayed LES transport and NUH-7 final audit.
+
+Final warning inventories match the original-dependency control exactly:
+1,490 unjoinable pairs and 169 pattern warnings, with matching categories,
+locations, term heads and rule families and no parser issue. Six affected
+owners pass strict LHS review. Focused types/lint, catalog/TOC and source-only
+health checks pass. The snapshot covers 1,334 files at
+`sha256:3b2e04dbbeb9f9668dbd8d34373caf20348bac7b73e3d6b7aa5119836893b9b8`.
+Evidence under `emdash2/tmp/probes/`: `nuh6e4_conformance.json`,
+`nuh6e4_warnings.json`, `nuh6e4_source_audit.json`, `nuh6e4_6g_result.json`,
+`nuh6e4_all_6g_result.json` and `nuh6e4_qualification.json`. The concrete
+artifact is `nuh6e4_cas_exact.lp`; failed smaller-memory presentations remain
+unpromoted evidence. No repository-wide typecheck ran.

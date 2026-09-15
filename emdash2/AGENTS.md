@@ -268,6 +268,15 @@ The old LES owner imports them unchanged. Public-pair alignment and
 displayed CAS transport remain required; merely having four invertible
 arrows does not certify a displayed diagram.
 
+NUH-6E2b2 now qualifies the nonsplit CAS snake's displayed exactness.
+Its indexed certificates retain each original whole Ω witness and the
+checked path from that input's pair to the public/CAS arrows. The diagram
+certificate additionally retains derived matching and the whole observation
+path. This uses the existing model interpretations without new assumptions.
+The heavy pair/certificate owners and reviewer use the measured profile in
+`scripts/check_native_snake_pairs.sh`; other checks retain default limits.
+NUH-6C3b and displayed LES exactness transport remain required.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 
@@ -1090,10 +1099,10 @@ they do not establish that all old endpoint or inverse-projection failures
 are fixed. This procedure is repository-wide, not specific to those goals.
 
 Interactive probes now run through `scripts/lambdapi_resource_guard.sh`:
-one checker at a time, at most 2 GiB address space per process, 64 MiB per
+one checker at a time, 2 GiB address space per process by default, 64 MiB per
 file, no core dumps and a hard deadline (90 seconds by default). On this workstation its
 user-systemd scope additionally limits aggregate test/descendant memory to
-2 GiB and disables swap. The `prlimit` fallback is per-process only. Do not
+the chosen limit (2 GiB by default) and disables swap. The `prlimit` fallback is per-process only. Do not
 bypass this guard for expensive normalization experiments or alternate
 checker binaries. Apply it to each command in a staged gate, not to the
 whole multi-target gate; resource exhaustion is not a mathematical
@@ -1103,12 +1112,21 @@ events and requires serial, memory-bounded compiler experiments too.
 User direction for the native-universality goal (2026-09-14) permits reviewed
 time-limit increases. The guard now accepts an explicit `EMDASH_LP_TIMEOUT`
 up to 600 seconds, while retaining the 90-second default and the existing
-memory/file/serial restrictions. Use an increased limit only for a measured
+file/serial restrictions. Use an increased limit only for a measured
 target, recording the reason, exact limit and result in its living plan.
 The first selected experiment is the complete bounded model adoption with
 its second connecting/reuse pass. A time increase does not resolve a memory
 failure or qualify an incomplete computation. Longer probes use the existing
 `EMDASH_PROBE_TIMEOUT` override; do not bypass the guard or subject reduction.
+
+The same user authorization permits reviewed memory increases. The guard
+accepts an explicit `EMDASH_LP_MEMORY_MIB` up to 6144 while retaining its
+2048 default. `scripts/check_native_snake_pairs.sh` selects the measured
+6 GiB/180s profile only for its registered pair/certificate owners and
+reviewer. Keep the normal guard, serial lock, file/core limits and no-swap
+scope; record resource measurements and do not turn this into a global
+default increase. Guard/profile tests exercise the bounds without allocating
+large heaps.
 
 For Node 24.11.1 here, isolated `node --test` workers do not inherit V8 heap
 flags supplied only on the command line. Pass those limits through

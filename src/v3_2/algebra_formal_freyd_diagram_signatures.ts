@@ -1,5 +1,6 @@
 /** Exact private mirrors for derived finite-diagram paths and endpoint β views. */
 import { CoreLfBuilderTerm as Term, CoreLfScopedBuilder } from './lf_builder';
+import { CoreLfDeclarationEnvironment } from './lf_declarations';
 import { KernelBinder, KernelExpression, binderMode, kernelBound, kernelCall, kernelFree, kernelPi, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
@@ -13,13 +14,14 @@ const names = ['eq_refl', 'eq_sym', 'eq_trans', 'finite_family_cons_path',
     'freyd_arrow_observation_source', 'freyd_arrow_observation_target', 'FreydArrowMatchingTail',
     'freyd_arrow_matching_nil', 'freyd_arrow_matching_cons', 'FreydArrowObservationDiagram',
     'freyd_arrow_diagram_intro', 'freyd_arrow_diagram_arrows', 'freyd_arrow_diagram_path'];
+export const FORMAL_FREYD_DIAGRAM_STRUCTURE_SIGNATURE_BINDINGS: Readonly<Record<string, string>> = Object.freeze(
+    Object.fromEntries(names.map(name => ['bridge_' + name, name])));
 export const FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS: Readonly<Record<string, string>> = Object.freeze(Object.fromEntries([
     ...names.map(name => ['bridge_' + name, name]),
     ...arrowOwners.flatMap(owner => sides.map(side => [owner + '_' + side + '_beta', owner.slice(7) + '_' + side + '_beta']))
 ]));
 
-export function createFormalFreydDiagramProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
-    let environment = createFormalFreydNativeExactnessProofEnvironment([]);
+export function extendFormalFreydDiagramStructureSignatures(environment: CoreLfDeclarationEnvironment) {
     const p = provenance('derived', 'finite native diagram proof signatures');
     const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
     type Scope = Readonly<Record<string, Term>>;
@@ -76,6 +78,13 @@ export function createFormalFreydDiagramProofEnvironment(inputs: readonly Affine
         ['p', s => L.equality(obs(s), s.a, s.b)], ['q', s => L.equality(family(obs(s), s.n), s.xs, s.ys)]],
     s => L.equality(diagram(s), intro(s, s.a, s.xs, s.mx), intro(s, s.b, s.ys, s.my)));
 
+    return environment;
+}
+
+export function createFormalFreydDiagramProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
+    let environment = extendFormalFreydDiagramStructureSignatures(createFormalFreydNativeExactnessProofEnvironment([]));
+    const p = provenance('derived', 'finite native diagram proof signatures');
+    const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
     // Preserve each original observer telescope verbatim; only replace its result
     // by the corresponding defined endpoint β theorem's exact result type.
     for (const owner of arrowOwners) for (const side of sides) {

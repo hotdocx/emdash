@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native snake/LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; public-pair alignment and displayed transport next; six-term observation gap retained
+Status: active — native snake/LES comparison and nonsplit displayed CAS snake exactness qualified; retained six-term observations and displayed LES transport next
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,18 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+NUH-6E2b2 now qualifies the single formal exactness certificate indexed by
+the actual nonsplit CAS snake diagram. The four original certified input
+pairs are linked to the public arrows and transported through the existing
+five model interpretations; the original Ω data remains accessible. Shared
+endpoint matching and one whole diagram path are derived. No assumption or
+trust decision is added, and displayed snake exactness is now true under
+the existing declared contracts. Nine workflow tests and 46 focused formal
+assertions pass. NUH-6E is complete; next qualify the retained NUH-6C3b
+full-result observations, then NUH-5N2G3B2 displayed LES transport and NUH-7.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md) records
+the measured 6GiB/180s pair-check profile and unchanged default limits.
 
 NUH-6E2b1 now constructs all four original whole snake exactness proofs
 and their evaluated fixed-comparison witnesses on the nonsplit input.
@@ -1177,7 +1189,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | native LES comparison, nonsplit arrows and whole/point exactness witnesses qualified; pair alignment/transport next; 6C3b gap retained | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
+| NUH-6 | native LES comparison and displayed nonsplit CAS exactness qualified; only retained 6C3b observations remain | Qualify retained full-result comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
@@ -1438,15 +1450,20 @@ affected dependency or unresolved concern, with the reason and bounded
 scope recorded; no automatic repository-wide gate is scheduled.
 
 All Lambdapi experiments use `emdash2/scripts/lambdapi_resource_guard.sh`:
-one checker at a time, 90 seconds by default, 2 GiB per-process address space,
+one checker at a time, 90 seconds and 2 GiB per-process address space by default,
 64 MiB per file, no core dumps; use the existing aggregate memory scope
 when available. User direction on 2026-09-14 permits reviewed time increases.
 The current guard allows an explicit limit up to 600 seconds; record the
 target, evidence and chosen limit in its subplan. The retained model adoption
 and connecting/reuse tests use a reviewed 300-second limit; full native
 diagram assembly/reuse uses 600 seconds (measured 429.00s). Keep
-memory/file limits and ordinary subject reduction; this permission does not
+file limits and ordinary subject reduction; this permission does not
 authorize broader test scope or a new mathematical assumption.
+
+The user also authorizes reviewed memory increases. The standard guard now
+accepts an explicit memory limit up to 6144MiB with the 2048MiB default
+unchanged. Native snake pair/certificate checks have a measured 6GiB/180s
+profile. Keep all other protections and record exact target/profile evidence.
 
 Do not rerun or expand the Empty reproducers or pursue global strictness
 migration as an acceptance gate for this goal. Use the affected operation's
@@ -1732,9 +1749,8 @@ qualified. The formerly failing combined pair/certificate artifact now
 passes unchanged at 2GiB with GC tuning; public alignment/transport remains
 required. Native snake/LES endpoint, connecting/sign and surrounding-map
 comparisons and NUH-6E1 input/map observations are qualified. Advance
-NUH-6E2b2 public-pair alignment and displayed transport after the qualified
-four whole/point exactness witnesses,
-then return to NUH-6C3b native evidence observations and NUH-5N2G3B2
+NUH-6C3b full-result observations after the qualified displayed snake
+exactness certificate, followed by NUH-5N2G3B2
 categorical exactness transport to the actual selected CAS diagram before
 NUH-7. NUH-6D4 old-snake comparison is removed from the completion criteria
 by D-NUH-078; do not resume its record-comparison experiment.

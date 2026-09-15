@@ -26,6 +26,8 @@ class NativeGcProfileTests(unittest.TestCase):
         scripts.mkdir()
         self.runner = scripts / "check_native_snake_six_term.sh"
         shutil.copyfile(SCRIPTS / self.runner.name, self.runner)
+        shutil.copyfile(SCRIPTS / "check_native_snake_pairs.sh", scripts / "check_native_snake_pairs.sh")
+        shutil.copyfile(SCRIPTS / "lambdapi_resource_guard.sh", scripts / "lambdapi_resource_guard.sh")
         stub = scripts / "probe.sh"
         stub.write_text("#!/usr/bin/env python3\nimport json,os,sys\nprint(json.dumps({'args':sys.argv[1:],'gc':os.environ.get('OCAMLRUNPARAM')}))\n")
         stub.chmod(0o755)
