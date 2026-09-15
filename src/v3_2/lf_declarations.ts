@@ -559,6 +559,84 @@ export class CoreLfDeclarationEnvironment {
     }
 
     /**
+     * Append body-free opaque declarations atomically. Core construction still
+     * checks each scope in order; the unchanged checker validates all types
+     * once. With no new delta bodies, the earlier LF environment stays this
+     * base throughout the batch. No partially checked environment is returned.
+     */
+    extendOpaqueBatch(
+        inputs: readonly CoreLfDeclarationInput[],
+        checkerFactory: CoreLfDeclarationCheckerFactory = this.checkerFactory
+    ): CoreLfDeclarationEnvironment {
+        if (inputs.length === 0) return this;
+        let coreEnvironment = this.coreEnvironment;
+        const declarations: CoreLfDeclaration[] = [];
+        for (const input of inputs) {
+            if (
+                input.body !== undefined ||
+                (input.transparency !== undefined && input.transparency !== 'opaque')
+            ) {
+                throw new CoreLfDeclarationError(
+                    'INVALID_DECLARATION', input.provenance,
+                    'An opaque declaration batch accepts no bodies or transparent declarations');
+            }
+            try {
+                coreEnvironment = coreEnvironment.extend({
+                    name: input.name,
+                    type: input.type,
+                    mode: input.mode,
+                    provenance: input.provenance
+                });
+            } catch (error: unknown) {
+                throw new CoreLfDeclarationError(
+                    error instanceof CoreContextError && error.code === 'DUPLICATE_DECLARATION'
+                        ? 'DUPLICATE_DECLARATION' : 'INVALID_DECLARATION_TYPE',
+                    input.provenance,
+                    `Invalid scope for opaque declaration '${input.name}': ` + errorText(error),
+                    error instanceof Error ? error : undefined);
+            }
+            const declaration = coreEnvironment.lookup(input.name)!;
+            declarations.push(Object.freeze({
+                ...declaration,
+                body: undefined,
+                transparency: 'opaque' as const,
+                ordinal: this.declarations.length + this.intrinsicDefinitions.length + declarations.length,
+                bodyDependencies: Object.freeze([]),
+                bodyOwnerDependencies: Object.freeze([])
+            }));
+        }
+        const last = inputs[inputs.length - 1];
+        try {
+            // Terms can be mutable even when their declaration records are
+            // frozen. Recheck the retained scopes too, without replacing the
+            // original prefix declaration objects in the returned environment.
+            let scopes = CoreDeclarationEnvironment.empty();
+            for (const declaration of coreEnvironment.declarations) {
+                scopes = scopes.extend(declaration);
+            }
+            const checker = checkerFactory(coreEnvironment, {
+                phase: 'declaration-type',
+                lfEnvironment: this
+            });
+            if (checker.rootContext.environment !== coreEnvironment) {
+                throw new CoreLfDeclarationError('INVALID_DECLARATION_TYPE', last.provenance,
+                    'Opaque-batch checker belongs to a foreign declaration environment');
+            }
+            checker.validateEnvironment();
+        } catch (error: unknown) {
+            throw new CoreLfDeclarationError('INVALID_DECLARATION_TYPE', last.provenance,
+                'Invalid opaque declaration batch: ' + errorText(error),
+                error instanceof Error ? error : undefined);
+        }
+        return new CoreLfDeclarationEnvironment(
+            coreEnvironment,
+            [...this.declarations, ...declarations],
+            this.intrinsicDefinitions,
+            checkerFactory
+        );
+    }
+
+    /**
      * Install a checked transparent body for an existing semantic owner.
      *
      * Free references must already exist. Owner references may have been

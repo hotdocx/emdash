@@ -3,34 +3,20 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
-import {
-    ALGEBRA_FORMAL_ASSUMPTION_SOURCE_PROFILE,
-    AlgebraFormalAssumptionSourceError,
-    AlgebraFormalAssumptionClassification,
-    CoreLfDeclarationEnvironment,
-    algebraAlgorithmIdentity,
-    algebraReferenceExecutionResult,
-    appendAlgebraFormalAssumption,
-    binderMode,
-    checkLambdapiProbe,
-    coreProofPlanHole,
-    createAlgebraFormalAssumptionSource,
-    createAlgebraTypeScriptReferenceEngine,
-    createCoreProofArtifactFingerprint,
-    defineAlgebraFormalComputationAdapter,
-    defineAlgebraOperation,
-    defineAlgebraReferenceImplementation,
-    defineAlgebraRuntimeSchema,
-    kernelFree,
-    kernelUniverse,
-    provenance,
-    runAlgebraFormalWorkflow,
-    serializeAlgebraFormalAssumptionKernelProbe,
-    serializeAlgebraFormalAssumptionSource,
-    sourceSpan,
-    trustAlgebraFormalWorkflow,
-    validateAlgebraFormalAssumptionSource
-} from '../src/v3_2';
+import { ALGEBRA_FORMAL_ASSUMPTION_SOURCE_PROFILE, AlgebraFormalAssumptionSourceError,
+    AlgebraFormalAssumptionClassification, appendAlgebraFormalAssumption, createAlgebraFormalAssumptionSource,
+    serializeAlgebraFormalAssumptionKernelProbe, serializeAlgebraFormalAssumptionSource,
+    validateAlgebraFormalAssumptionSource } from '../src/v3_2/algebra_formal_assumption_source';
+import { CoreLfDeclarationEnvironment } from '../src/v3_2/lf_declarations';
+import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeSchema } from '../src/v3_2/algebra_engine';
+import { algebraReferenceExecutionResult, createAlgebraTypeScriptReferenceEngine,
+    defineAlgebraReferenceImplementation } from '../src/v3_2/algebra_reference_engine';
+import { defineAlgebraFormalComputationAdapter } from '../src/v3_2/algebra_formal_delegation';
+import { binderMode, kernelFree, kernelUniverse, provenance, sourceSpan } from '../src/v3_2/kernel';
+import { checkLambdapiProbe } from '../src/v3_2/probe';
+import { coreProofPlanHole } from '../src/v3_2/proof_plan';
+import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
+import { runAlgebraFormalWorkflow, trustAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 
 const mode = binderMode('explicit', 'functorial');
 const because = (detail: string) => provenance('surface', detail);
@@ -61,7 +47,7 @@ const baseEnvironment = () => {
     return environment;
 };
 
-const operationFixture = () => {
+const operationFixture = (beforeSerializeOutput?: () => void) => {
     const schema = defineAlgebraRuntimeSchema<number>({
         id: 'assumption-source.number',
         revision: 'v1',
@@ -109,7 +95,10 @@ const operationFixture = () => {
         serializeRealization: value => `${JSON.stringify(value)}\n`,
         acquire: (_goal, value) => value.value,
         serializeInput: value => `${value}\n`,
-        serializeOutput: value => `${value}\n`,
+        serializeOutput: value => {
+            beforeSerializeOutput?.();
+            return `${value}\n`;
+        },
         interpret: ({ goal, computed }) => computed.value > 0
             ? {
                 kind: 'claim',
@@ -156,9 +145,10 @@ const adopt = async (
     environment: CoreLfDeclarationEnvironment,
     claimName: string,
     goalId: string,
-    assumptionName: string
+    assumptionName: string,
+    fixture = operationFixture()
 ) => {
-    const { adapter, engine } = operationFixture();
+    const { adapter, engine } = fixture;
     const run = await runAlgebraFormalWorkflow({
         document: document(environment, claimName, goalId),
         goalId,
@@ -177,6 +167,34 @@ const adopt = async (
 };
 
 describe('ALC-SOURCE-2A computed-assumption source', () => {
+    it('rechecks every adoption on repeated source validation and rejects later drift', async () => {
+        const visits = [0, 0];
+        let stale = false;
+        let source = createAlgebraFormalAssumptionSource({
+            moduleId: 'proof.cas.fresh-batch',
+            sourceId: 'generated/fresh-batch.ts',
+            baseEnvironment: baseEnvironment()
+        });
+        for (const [index, name] of ['ComputedClaimA', 'ComputedClaimB'].entries()) {
+            const fixture = operationFixture(() => {
+                visits[index]++;
+                if (stale && index === 1) throw new Error('retained computation drifted');
+            });
+            source = appendAlgebraFormalAssumption({
+                source,
+                adoption: await adopt(source.environment, name, 'fresh-' + index, 'fresh_' + index, fixture),
+                classification: 'computed-equation'
+            });
+        }
+        for (let i = 0; i < 2; i++) {
+            const before = [...visits];
+            assert.equal(validateAlgebraFormalAssumptionSource(source), source);
+            assert.ok(visits.every((count, index) => count > before[index]));
+        }
+        stale = true;
+        assert.throws(() => validateAlgebraFormalAssumptionSource(source), sourceError('SOURCE_DRIFT'));
+    });
+
     it('accumulates classified adoptions in exact dependency order',
         async () => {
             const base = baseEnvironment();

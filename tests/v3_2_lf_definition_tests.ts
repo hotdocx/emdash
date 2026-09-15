@@ -4,30 +4,16 @@
 
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import {
-    CoreLfDeclarationEnvironment,
-    CoreLfDeclarationError,
-    CoreLfDeclarationInput,
-    CoreLfEvaluationError,
-    KernelCall,
-    KernelExpression,
-    binderMode,
-    coreLfBetaWeakHead,
-    coreLfDeltaReduceHead,
-    coreLfDeltaWeakHead,
-    kernelApplication,
-    kernelBinder,
-    kernelBound,
-    kernelCall,
-    kernelExpressionEquals,
-    kernelFree,
-    kernelLambda,
-    kernelPi,
-    kernelUniverse,
-    provenance,
-    serializeKernelExpression,
-    sourceSpan
-} from '../src/v3_2';
+import { CoreLfDeclarationEnvironment, CoreLfDeclarationError, CoreLfDeclarationInput,
+    coreLfDeltaReduceHead, coreLfDeltaWeakHead } from '../src/v3_2/lf_declarations';
+import { CoreLfEvaluationError, coreLfBetaWeakHead } from '../src/v3_2/lf';
+import { KernelCall, KernelExpression, binderMode, kernelApplication, kernelBinder, kernelBound,
+    kernelCall, kernelExpressionEquals, kernelFree, kernelLambda, kernelPi, kernelUniverse,
+    provenance, sourceSpan } from '../src/v3_2/kernel';
+import { serializeKernelExpression } from '../src/v3_2/lambdapi';
+import { CoreChecker } from '../src/v3_2/checker';
+import { CoreElaborationSession } from '../src/v3_2/session';
+import { createCoreLfTransferDeclarationCheckerFactory } from '../src/v3_2/lf_transfer_compiler';
 
 const fixture = 'tests/fixtures/v3_2_lf_definition.surface.ts';
 const at = (
@@ -99,6 +85,88 @@ const categoryIdentityBody = (line: number): KernelExpression =>
     );
 
 describe('TypeScript v3.2 DTTLF LF-1B checked definitions and delta', () => {
+    it('checks a dependent opaque batch once and preserves sequential declaration data', () => {
+        const base = CoreLfDeclarationEnvironment.empty();
+        const p = because(90, 'opaque batch');
+        const A = kernelFree('batch_A', p);
+        const inputs = [
+            declaration('batch_A', kernelUniverse(p), 90),
+            declaration('batch_x', A, 91),
+            declaration('batch_f', kernelPi(kernelBinder('x', A, explicitFunctorial, p), A, p), 92)
+        ];
+        const checkedSizes: number[] = [];
+        const batch = base.extendOpaqueBatch(inputs, (environment, context) => {
+            checkedSizes.push(environment.declarations.length);
+            assert.equal(context.phase, 'declaration-type');
+            assert.equal(context.lfEnvironment, base);
+            return new CoreChecker(new CoreElaborationSession(environment));
+        });
+        const sequential = inputs.reduce((environment, input) => environment.extend(input), base);
+        assert.deepEqual(batch.declarations, sequential.declarations);
+        assert.deepEqual(batch.coreEnvironment.declarations, sequential.coreEnvironment.declarations);
+        assert.deepEqual(checkedSizes, [3]);
+        assert.equal(batch.extendOpaqueBatch([]), batch);
+        assert.equal(base.lookup('batch_A'), undefined);
+        assert.ok(Object.isFrozen(batch) && Object.isFrozen(batch.declarations));
+    });
+
+    it('rejects invalid opaque batches atomically with scope and type checks intact', () => {
+        const base = CoreLfDeclarationEnvironment.empty();
+        const p = because(93, 'invalid opaque batch');
+        const A = kernelFree('batch_A', p), x = kernelFree('batch_x', p);
+        const invalid: CoreLfDeclarationInput[][] = [
+            [declaration('early', kernelFree('later', p), 93), declaration('later', kernelUniverse(p), 94)],
+            [declaration('self', kernelFree('self', p), 93)],
+            [declaration('batch_A', kernelUniverse(p), 93), declaration('batch_A', kernelUniverse(p), 94)],
+            [declaration('batch_A', kernelUniverse(p), 93), declaration('batch_x', A, 94), declaration('bad', x, 95)],
+            [declaration('body', kernelUniverse(p), 93, { body: A })],
+            [declaration('transparent', kernelUniverse(p), 93, { transparency: 'transparent' })]
+        ];
+        for (const inputs of invalid) {
+            assert.throws(() => base.extendOpaqueBatch(inputs), CoreLfDeclarationError);
+            assert.deepEqual(base.declarations, []);
+        }
+        assert.throws(() => base.extendOpaqueBatch([declaration('A', kernelUniverse(p), 93)],
+            () => new CoreChecker(new CoreElaborationSession(base.coreEnvironment))), CoreLfDeclarationError);
+    });
+
+    it('retains the reviewed checker factory and transparent prefix for opaque batches', () => {
+        const p = because(95, 'opaque batch over transparent prefix');
+        const A = kernelFree('A', p), B = kernelFree('B', p);
+        const factory = createCoreLfTransferDeclarationCheckerFactory();
+        const base = CoreLfDeclarationEnvironment.empty()
+            .extend(declaration('A', kernelUniverse(p), 95), factory)
+            .extend(declaration('B', kernelUniverse(p), 95, { body: A, transparency: 'transparent' }))
+            .extend(declaration('P', kernelPi(kernelBinder('a', A, explicitFunctorial, p), kernelUniverse(p), p), 95));
+        const inputs = [
+            declaration('x', B, 95),
+            declaration('Px', kernelCall(kernelFree('P', p), [{ value: kernelFree('x', p), plicity: 'explicit' }], p), 95)
+        ];
+        // Px needs B to unfold to A when P is applied to the new x.
+        const batch = base.extendOpaqueBatch(inputs);
+        const sequential = inputs.reduce((environment, input) => environment.extend(input), base);
+        assert.deepEqual(batch.declarations, sequential.declarations);
+        assert.equal(batch.lookup('B'), base.lookup('B'));
+        assert.throws(() => base.extendOpaqueBatch(inputs,
+            environment => new CoreChecker(new CoreElaborationSession(environment))), CoreLfDeclarationError);
+    });
+
+    it('rechecks current base declaration types on each opaque batch', () => {
+        const p = because(96, 'fresh opaque batch');
+        const mutableType = kernelUniverse(p);
+        const base = CoreLfDeclarationEnvironment.empty().extend(declaration('mutable_A', mutableType, 96));
+        base.extendOpaqueBatch([declaration('first', kernelFree('mutable_A', p), 97)]);
+        Object.assign(mutableType, { tag: 'reference', namespace: 'free', name: 'missing_type' });
+        assert.throws(() => base.extendOpaqueBatch([declaration('second', kernelFree('mutable_A', p), 98)]),
+            CoreLfDeclarationError);
+        Object.assign(mutableType, { name: 'later_type' });
+        assert.throws(() => base.extendOpaqueBatch([
+            declaration('earlier_type', kernelUniverse(p), 99),
+            declaration('later_type', kernelUniverse(p), 100)
+        ]), CoreLfDeclarationError);
+        assert.equal(base.lookup('second'), undefined);
+    });
+
     it('extends checked declaration state persistently with explicit transparency', () => {
         const empty = CoreLfDeclarationEnvironment.empty();
         const withA = categoryAssumption(empty, 'lf_def_A', 10);

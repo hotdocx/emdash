@@ -24,6 +24,18 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Current NUH-5B2d2a milestone (2026-09-14): assumption-source replay now batches
+body-free opaque declarations at the existing LF owner. It retains fresh
+scope/type checks, the reviewed checker factory, every adoption-current check
+and the original source comparison. Eighteen LF/source tests, three affected
+bounded-H/raw-witness tests and the four-test native δ gate pass; the emitted
+LP source is unchanged byte for byte. The nine measured replay validations
+drop from 41.16 to 16.01 seconds. Full bounded model adoption still fails
+under the resource guard; no native exactness-observation completion is
+claimed. Next audit the focused model consumer's prerequisites, preserving
+the existing larger combined-source integration case. Details and remaining
+gates are in the [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Current NUH-5B2d1 milestone (2026-09-14): the TypeScript connecting builder
 now observes the original whole δ at the original retained H objects.
 Native whole normality and row shortness have distinct private signature
@@ -1200,6 +1212,7 @@ must not label those alternatives validated implementations.
 | D-NUH-072 | NUH-5B2c1 observes the original native input before universal selection and derives a categorical comparison from the actual H-family point to global H at that input. Existing canonical diagram-introduction paths compare the actual boundaries; original Q maps the comparison and selected inverse once, preserving both H objects. Five definitions add no primitive, rule, unifier or earlier LP edit. Seven assertions and complete unchanged warning inventories qualify the point observation and full Q Hom action; no new whole natural comparison in x is claimed. Derived-column inputs, retained TypeScript observations and nonsplit adoption remain required |
 | D-NUH-073 | NUH-5B2c2 derives both column incoming observations from whole source recovery, then uses ordinary diagram reflection, terminal-tip uniqueness and fibre inclusion at the actual diagram. Canonical point introduction supplies raw input equivalences; original H and existing IsoEvidence symmetry/OmegaEquivAlong composition retain both raw and older H objects and selected inverses. The actual whole δ's endpoints and its component between raw H objects check. Twenty-three definitions add no primitive, rule, unifier or earlier LP edit; 25 assertions cover the native, retained and connecting consumers. Keep observation imports focused: the larger all-exactness probe exceeded the unchanged guard. TypeScript migration, explicit model/row contracts and retained nonsplit adoption remain required |
 | D-NUH-074 | NUH-5B2d1 separates raw native δ observation, retained-model comparison at general K/x and the outer Terminal complete-arrow wrapper. Native context aliases and five definitions introduce no new primitive/rule; a direct use of the existing incoming-source law removes an unused old whole-H proof dependency without changing the proof. TypeScript retains all 47 fields and H selections, uses distinct native normality/row/observer mirror names, and requires nativeNormalityContract. Eight focused tests and the concrete emitted nonsplit observer pass in separately bounded compilation, adoption/emission and LP stages. No Core/checker/evaluator/barrel implementation changed. Complete automatic bounded adoption, native exactness observations, snake comparison and final qualification remain required |
+| D-NUH-075 | NUH-5B2d2a adds a body-free opaque batch at the LF declaration owner and uses it only in assumption-source replay. Fresh ordered scopes, complete type validation with the original checker factory, all adoption-current checks and final source comparison remain mandatory. No validity cache or conversion change is introduced. Eighteen LF/source tests, three bounded-H/raw-witness tests and the four-test native δ gate pass; its emitted LP artifact is byte-identical to cc8a4dc0. Measured replay cost drops, but the full model run still fails near the guard boundary. Audit the test's independent model prerequisites next; preserve combined-source integration, all three windows, reuse and explicit contracts. Native exactness observations and NUH-6/7 remain open |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

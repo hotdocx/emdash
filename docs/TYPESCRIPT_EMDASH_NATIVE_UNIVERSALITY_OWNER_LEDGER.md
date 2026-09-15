@@ -310,6 +310,33 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5B2d2a: Fresh batched declaration replay
+
+**Qualified after cc8a4dc0 (2026-09-14).** The measured bottleneck is repeated
+typechecking of declaration prefixes during assumption-source validation.
+The additive LF `extendOpaqueBatch` operation checks ordered scopes and the
+complete declaration types afresh once. It preserves the original prefix,
+transparent definitions and reviewed checker factory; new bodies/transparent
+declarations are rejected. Source replay keeps every adoption-current check
+and the original final environment comparison. No cached validity, new
+conversion rule, mathematical primitive or LP source change is introduced.
+
+Eighteen focused LF/source tests and the existing three-test six-H/raw-witness
+consumer pass. The latter completes in about 66 seconds. The native δ gate
+passes its four adoption/emission tests and nine LP assertions; its emitted
+source is byte-identical to cc8a4dc0. Focused compilation and affected-file
+ESLint pass. The [subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records commands, logs, exact artifact identity and measured phase costs.
+
+The full model run is still unqualified: all 18 point and eight map observation
+builders return, then allocation fails near 89.5 seconds before the model
+workflow returns. Next NUH-5B2d2b audits the test's model prerequisites:
+it currently first runs the separate older six-H/raw-witness consumers, while
+the model API accepts the retained whole adoption directly. Keep the larger
+combined-source case and all required checks/windows/contracts. Do not claim
+model completion from the successful observation builders alone. Native
+exactness observations, snake/native comparison and final qualification remain.
+
 ### NUH-5B2d1: Native TypeScript connecting observation at retained H
 
 **Qualified after 96ddecaa (2026-09-14), through one retained nonsplit window.**

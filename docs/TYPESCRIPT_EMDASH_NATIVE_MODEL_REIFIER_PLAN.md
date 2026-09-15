@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2d1 native connecting observation and one retained nonsplit adoption/oracle qualified; complete bounded adoption and native exactness observations remain required
+Status: NUH-5B2d2a fresh declaration replay qualified; native connecting observation and one retained nonsplit adoption/oracle retained; complete bounded adoption and native exactness observations remain required
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -386,6 +386,72 @@ Next NUH-5B2d2 qualifies the complete automatic bounded-model adoption and
 native exactness observations, keeping their supplied-contract boundary
 explicit. The single-window gate does not discharge those requirements.
 NUH-6 snake/native comparison and NUH-7 final qualification remain open.
+
+NUH-5B2d2a experiment (2026-09-14): the phase profile reaches six actual
+homology terms around 82 seconds; their term construction itself takes only
+milliseconds. Nine source validations consume about 41 seconds. A second
+profile separates unchanged adoption-current checks (roughly two seconds
+per validation) from repeatedly rebuilding/typechecking declaration prefixes
+(growing from roughly two to four seconds per validation). Test a body-free
+opaque-declaration batch at the existing LF environment owner. Keep sequential
+scope/duplicate checks, the same checker factory, a fresh full environment
+typecheck, all adoption-current checks and final source/environment comparison.
+No cached validity, skipped proof check, new conversion rule or general
+endpoint-normalizer change is part of this experiment.
+
+The implemented batch is `CoreLfDeclarationEnvironment.extendOpaqueBatch`.
+Only `validateAlgebraFormalAssumptionSource` adopts it in this tranche.
+It preserves the original prefix declarations and reviewed checker factory,
+checks all scopes afresh in declaration order, then checks every declaration
+type once through the existing checker. Bodies and transparent additions are
+rejected; an existing transparent prefix remains available to its checker.
+Every original adoption-current check and final retained-environment
+comparison still runs. No validity cache or mathematical primitive is added.
+
+The focused LF/source suite passes 18 tests, including dependent batches,
+atomic failures, foreign checkers, existing transparent definitions, mutated
+base types/forward references and repeated freshness checks on all adoptions.
+The existing six-H/raw-witness/rejection consumer passes three tests in about
+66 seconds. These are the existing selected terms and provider contracts;
+this performance improvement does not turn them into native model exactness
+observations. Focused compilation and ESLint pass. The existing staged native
+δ gate passes its four tests and nine emitted LP assertions. The emitted
+223,966-byte artifact is byte-identical to the preceding checkpoint's
+artifact, SHA-256 `b898f3d82636b6d6835e8fd26ec4b9ec4a8b16f91a95d8b474bc76ca6a6113df`.
+No LP source, rewrite, unifier, checker/conversion implementation or public
+barrel changes. The generic LF declaration owner changes only by the additive
+opaque-batch method. Validation stays local under D-NUH-016.
+
+Measured evidence under the unchanged 90-second/2-GiB guard:
+
+| Probe | Result |
+| --- | --- |
+| `tmp/probes/nuh5b2d2_phase_profile.txt` | Before batching: nine source validations take 41.16 seconds; actual-H construction returns at 82.32 seconds; the run expires during raw witnesses |
+| `tmp/probes/nuh5b2d2_validate_profile.txt` | Separates repeated declaration-prefix checking from unchanged adoption-current checks |
+| `tmp/probes/nuh5b2d2_model_profile.txt` | After batching: the nine validations take 16.01 seconds; actual-H returns at 54.10 seconds and raw witnesses at 58.28 seconds; all 18 point and eight map observation builders return; allocation fails near 89.5 seconds before the model workflow returns |
+| `tmp/probes/nuh5b2d2_bounded_homology_tests.txt` | Uninstrumented affected six-H/raw-witness/rejection consumer: three passes in 65.94 seconds |
+| `tmp/probes/nuh5b2d2_declaration_source_tests.txt` | Eighteen LF/source tests pass |
+| `tmp/probes/nuh5b2d2_native_connecting_gate.txt` | Separate focused compilation, four adoption/emission tests and the actual emitted native δ LP target pass; detailed log is `logs/probes/native_connecting_20260914_205721_2451188.log` |
+| `tmp/probes/nuh5b2d2_native_artifact_comparison.json` | Exact emitted source matches the preceding checkpoint |
+| `tmp/probes/nuh5b2d2_typecheck.txt`, `tmp/probes/nuh5b2d2_lint.txt` | Focused compilation and affected-file lint pass |
+
+These timings diagnose this fixture, not a general benchmark. The newest
+full-run failure is an allocation failure, not a completed adoption or a
+mathematical counterexample. Per-observation private signature construction
+takes about 0.15–0.22 seconds and is secondary to the complete workflow cost.
+
+Next NUH-5B2d2b should first audit the model test's actual prerequisites.
+Its present fixture runs the older six-H construction and all raw witnesses,
+then observes the model twice (points/maps first, then connecting upgrade).
+The public model consumer accepts the retained whole adoption directly and
+constructs its own missing input claims. Test a separate minimal model
+consumer at that boundary, keeping the original selection, every required
+adoption/current/type check and the larger combined-source integration case.
+Do not remove either endpoint window, the nonzero middle δ, reuse tests or
+supplied-contract classifications to fit the guard. If that boundary is still
+too expensive, profile its remaining adoption/freshness and allocation costs
+before selecting another local optimization. Native exactness observations,
+NUH-6 and NUH-7 remain required.
 
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and

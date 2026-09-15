@@ -13,6 +13,7 @@ import {
 } from './core_serialization';
 import {
     CoreLfDeclaration,
+    CoreLfDeclarationInput,
     CoreLfDeclarationEnvironment
 } from './lf_declarations';
 import {
@@ -272,6 +273,7 @@ export function validateAlgebraFormalAssumptionSource(
     source: AlgebraFormalAssumptionSource
 ): AlgebraFormalAssumptionSource {
     let environment = source.baseEnvironment;
+    const declarations: CoreLfDeclarationInput[] = [];
     source.entries.forEach((entry, index) => {
         if (
             entry.index !== index ||
@@ -293,7 +295,7 @@ export function validateAlgebraFormalAssumptionSource(
                 entry.adoption.result,
                 entry.adoption.result.request
             );
-            environment = environment.extend({
+            declarations.push({
                 name: entry.declaration.name,
                 type: entry.declaration.type,
                 mode: entry.declaration.mode,
@@ -308,6 +310,12 @@ export function validateAlgebraFormalAssumptionSource(
             );
         }
     });
+    try {
+        environment = environment.extendOpaqueBatch(declarations);
+    } catch (error: unknown) {
+        return fail('SOURCE_DRIFT', 'assumptionSource.environment',
+            'Assumption declaration types no longer replay', error);
+    }
     if (
         environment.declarations.length !== source.environment.declarations.length ||
         environment.declarations.some((declaration, index) => {
