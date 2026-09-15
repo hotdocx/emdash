@@ -55,6 +55,18 @@ Advance the general NUH-6 snake/LES comparison next from NUH-4. Return to
 the required pair alignment and displayed exactness integration before NUH-7;
 the full goal and displayed-exactness flag are unchanged.
 
+NUH-6 now follows the [native snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+The general reference input is a triple with c∘b∘a=0; a need not be monic
+and c need not be epic. The first native slice derives α and γ as whole
+kernel/cokernel mates on that scope. Short-exact-row specialization alone
+does not satisfy the general six-term requirement. NUH-6A and the first
+cover/covered-map part of 6B now qualify: whole α/γ with reconstruction,
+the original E/ρ and derived coimage-cover cancellation, and θ:E⇒Q(α).
+Twenty-three definitions and 20 assertions add no primitive or rule. Next
+derive θ∘κ_ρ=0 and descend to ∂; six-term exactness and the final
+LES/sign comparison remain required. The separate NUH-5 certificate join
+is still required before final qualification.
+
 Current NUH-5N2G3A milestone (2026-09-15): all three original whole exactness
 proofs now have typed point observations, including both zero windows. A
 Sigma of the existing arrow and Ω witness, checked native constructors and
@@ -1007,7 +1019,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: original exactness and input-pair observations qualified separately; combined certificate memory boundary remains | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | next tranche, using the completed general NUH-4 construction while the concrete certificate join remains open | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
+| NUH-6 | active: general whole input, α/γ, cover/cancellation and θ qualified; final descent next | Prove θ∘κ_ρ=0, construct whole ∂ and full six-term exactness, then qualify the LES/reference comparison and fixed sign |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 

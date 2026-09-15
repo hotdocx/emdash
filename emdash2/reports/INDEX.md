@@ -2,6 +2,17 @@
 
 Date: 2026-09-02
 
+General native snake construction (2026-09-15): the
+[whole input](../emdash3_2_native_snake_inputs.lp),
+[α/γ factors](../emdash3_2_one_cat_native_snake_factors.lp),
+[coimage cover/cancellation](../emdash3_2_one_cat_native_snake_cover.lp) and
+[covered map θ](../emdash3_2_one_cat_native_snake_covered_map.lp) qualify
+without assuming a monic or c epic. Twenty-three definitions and 20 scoped
+assertions add no primitive or rule. The
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+keeps θ∘κ_ρ=0, whole ∂, six-term exactness and LES/sign comparison open,
+alongside the separate required NUH-5 integration.
+
 Native exactness input pairs (2026-09-15): the
 [whole-input observer](../emdash3_2_zero_arrow_pair_observations.lp) and
 [window specializations](../emdash3_2_commutative_algebra_freyd_window_pair_observations.lp)

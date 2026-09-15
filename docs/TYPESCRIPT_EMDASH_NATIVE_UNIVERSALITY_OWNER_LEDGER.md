@@ -331,6 +331,29 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6A / 6B first part: General native snake factors and cover — qualified 2026-09-15
+
+The [snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+preserves the general a,b,c triple: neither monicity of a nor epicity of c
+is assumed. The native input is the existing whole h:J∘A⇒Arr(c∘b),
+with an input constructor/recovery for a supplied whole triple-zero path.
+Original P/Q mating constructs α:A⇒K(c) and γ:Q(a)⇒D and both
+whole reconstruction laws. No ordinary W/V factor record drives them.
+
+The original E=K(γ∘π_a) supplies ρ:E⇒K(γ). The existing quotient-zero
+and kernel-precomposition cover theorems derive ΩAlong on Coim(ρ)⇒K(γ);
+native cancellation consumes that same proof. There is no inverse of ρ.
+Original kernel lifting then gives ℓ:E⇒K(c), and θ=π_α∘ℓ is a whole
+map E⇒Q(α) with computing point composition. Twenty-three definitions
+add no primitive/rule/unifier; 20 focused assertions qualify the interfaces.
+Expanded/global cover-review variants hit 2GiB and are recorded separately;
+the final parameter-scope cancellation and pre-Abelian covered-map reviewers
+pass. No TypeScript profile or model contract changed.
+
+This is **progress**. The next proof is θ∘κ_ρ=0; the current
+`covered_zero` proves only c∘b∘j=0. Whole ∂, the full six-term exactness,
+LES/sign comparison, NUH-5 displayed integration and NUH-7 remain required.
+
 ### NUH-5N2G3B1: Original input-pair observations — qualified 2026-09-15
 
 The original A,D,h of each whole canonical Im→Ker comparison now supplies a

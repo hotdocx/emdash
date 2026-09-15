@@ -4,6 +4,19 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native general snake factors/cover (2026-09-15): the
+[new subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+retains arbitrary whole a,b,c with c∘b∘a=0. Original K/Q mates now
+construct α and γ with whole reconstruction. The existing quotient-zero
+and kernel-precomposition theorems derive a coimage-cover certificate and
+cancellation for ρ:K(γ∘π_a)⇒K(γ); no section of ρ is supplied.
+Original kernel lifting gives ℓ and θ=π_α∘ℓ. Twenty-three definitions
+and 20 assertions qualify; no primitive/rule or ordinary factor-record
+dependency is added. The expanded/global cover review hit 2GiB, while the
+final scoped cancellation/covered-map consumers pass. The required
+θ∘κ_ρ=0 proof, whole ∂, six-term exactness, LES/sign comparison and
+concrete displayed integration remain open.
+
 Native exactness input-pair observations (2026-09-15): the
 [generic observer](../emdash3_2_zero_arrow_pair_observations.lp) and
 [three window specializations](../emdash3_2_commutative_algebra_freyd_window_pair_observations.lp)
