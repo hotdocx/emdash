@@ -8,18 +8,19 @@ file_mib="${EMDASH_LP_FILE_MIB:-64}"
 duration="${EMDASH_LP_TIMEOUT:-90s}"
 backend="${EMDASH_LP_RESOURCE_BACKEND:-auto}"
 
-# Overrides may lower these safety ceilings, not silently raise them.
+# Memory/file ceilings stay fixed. The native-homology goal authorizes a
+# measured per-target time extension to 300s; the default remains 90s.
 for value in "$memory_mib" "$file_mib"; do
   [[ "$value" =~ ^[1-9][0-9]{0,3}$ ]] || { printf 'invalid resource limit\n' >&2; exit 2; }
 done
 (( memory_mib >= 32 && memory_mib <= 2048 && file_mib <= 64 )) || {
   printf 'limits must be memory 32..2048 MiB and file size 1..64 MiB\n' >&2; exit 2;
 }
-[[ "$duration" =~ ^([1-9][0-9]?)(s)?$ ]] || {
-  printf 'timeout must be 1..90 whole seconds (optional s suffix)\n' >&2; exit 2;
+[[ "$duration" =~ ^([1-9][0-9]{0,2})(s)?$ ]] || {
+  printf 'timeout must be 1..300 whole seconds (optional s suffix)\n' >&2; exit 2;
 }
 seconds="${BASH_REMATCH[1]}"
-(( seconds <= 90 )) || { printf 'timeout exceeds 90 seconds\n' >&2; exit 2; }
+(( seconds <= 300 )) || { printf 'timeout exceeds 300 seconds\n' >&2; exit 2; }
 case "$backend" in auto|systemd|prlimit) ;; *) printf 'invalid resource backend\n' >&2; exit 2 ;; esac
 for required in prlimit timeout flock nice; do
   command -v "$required" >/dev/null || { printf 'required guard tool missing: %s\n' "$required" >&2; exit 2; }
@@ -51,7 +52,7 @@ printf 'resource guard: backend=%s memory=%sMiB file=%sMiB time=%ss serial=yes\n
 
 # RLIMIT_AS is per process, inherited by children. On this desktop the cgroup
 # additionally caps aggregate charged memory and disallows swap for the group.
-# SIGKILL enforces the full 90-second ceiling even if a checker ignores signals.
+# SIGKILL enforces the selected deadline even if a checker ignores signals.
 limited=(prlimit "--as=$memory_bytes:$memory_bytes" "--fsize=$file_bytes:$file_bytes"
   --core=0:0 -- nice -n 10 timeout --signal=KILL "${seconds}s" "$@")
 if [[ "$backend" == systemd ]]; then

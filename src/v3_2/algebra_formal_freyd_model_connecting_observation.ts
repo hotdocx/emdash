@@ -19,6 +19,7 @@ import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
 import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeSchema } from './algebra_engine';
 import { createAlgebraTypeScriptReferenceEngine, defineAlgebraReferenceImplementation } from './algebra_reference_engine';
 import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } from './algebra_formal_delegation';
+import { encodeAlgebraFormalFreydLongExactData } from './algebra_formal_freyd_long_exact_encoding';
 
 type Point<P extends AlgebraParent, C extends AlgebraElement<P>, I> =
     ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>>;
@@ -30,7 +31,7 @@ export interface AlgebraFormalFreydConnectingRowLaws {
 }
 
 export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
-    revision: 'emdash-formal-freyd-model-connecting-observations-v2' as const,
+    revision: 'emdash-formal-freyd-model-connecting-observations-v3' as const,
     classification: 'trusted-presentation-semantics' as const,
     requiresSuppliedNormality: true as const,
     constructsModel: false as const, claimsClosedQuotientEffectiveness: false as const,
@@ -38,19 +39,24 @@ export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.
     endpointComparisons: 'original-selected-categorical-equivalences' as const,
     nativeWholeConnectingObservation: true as const,
     rowUniversality: 'native-whole-PQ' as const,
+    payloadTransport: 'lossless-shared-json-table-v1' as const,
     replaysConnecting: false as const, addsCoreOwner: false as const
 });
 
 function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression) {
     if (M.tag !== 'reference' || M.namespace !== 'free') throw new Error('A named supplied coherent model is required');
     const model: KernelReference = Object.freeze(kernelFree(M.name, M.provenance));
-    const expected = createFormalFreydModelConnectingProofEnvironment([]);
+    const expected = (() => {
+        const signatures = createFormalFreydModelConnectingProofEnvironment([]);
+        return Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS,
+            ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })
+            .map(name => signatures.lookup(name)!);
+    })();
     const check = (env: CoreLfDeclarationEnvironment) => {
-        for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS,
-            ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })) {
-            const value = env.lookup(name);
-            if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, expected.lookup(name)!.type)) {
-                throw new Error('Changed model connecting signature ' + name);
+        for (const signature of expected) {
+            const value = env.lookup(signature.name);
+            if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, signature.type)) {
+                throw new Error('Changed model connecting signature ' + signature.name);
             }
         }
         const declaration = env.lookup(model.name);
@@ -72,6 +78,11 @@ function retainedInterpretation<T, R extends { readonly claimType: KernelExpress
     id: string, realization: R, value: T, data: string, current: () => void,
     assertContext: (environment: CoreLfDeclarationEnvironment) => void, summary: string
 ) {
+    // Keep the original snapshots and all current() checks. Only their wire
+    // representation changes: nested JSON text must not expand at every
+    // request/result/adoption layer. The existing table codec is lossless.
+    const realizationData = encodeAlgebraFormalFreydLongExactData(realization.formalData);
+    const retainedData = encodeAlgebraFormalFreydLongExactData(data);
     const schema = defineAlgebraRuntimeSchema<T>({ id: id + '/retained', revision: 'v2', normalize(candidate) {
         current(); if (candidate !== value) throw new Error('Foreign retained model value'); return value;
     } });
@@ -84,14 +95,14 @@ function retainedInterpretation<T, R extends { readonly claimType: KernelExpress
         normalizeRealization(candidate: unknown) {
             if (candidate !== realization) throw new Error('Foreign model connecting realization');
             current(); return realization;
-        }, serializeRealization: () => realization.formalData,
+        }, serializeRealization: () => realizationData,
         acquire(goal) {
             assertContext(goal.document.environment); current();
             if (!kernelExpressionEquals(goal.target, realization.claimType)) throw new AlgebraFormalDelegationError(
                 'CLAIM_TARGET_MISMATCH', 'modelConnecting.goal', 'Goal differs from this retained model interpretation');
             return value;
-        }, serializeInput: () => data,
-        serializeOutput: candidate => { current(); if (candidate !== value) throw new Error('Retained model result changed'); return data; },
+        }, serializeInput: () => retainedData,
+        serializeOutput: candidate => { current(); if (candidate !== value) throw new Error('Retained model result changed'); return retainedData; },
         interpret: ({ goal, computed }) => {
             current();
             return computed.value === value ? { kind: 'claim' as const, claimType: goal.target, summary }

@@ -2,7 +2,7 @@
 
 Date: 2026-09-14
 
-Status: NUH-5B2d2a fresh declaration replay qualified; native connecting observation and one retained nonsplit adoption/oracle retained; complete bounded adoption and native exactness observations remain required
+Status: NUH-5B2d2b complete retained bounded model adoption/reuse and native connecting observations qualified; NUH-5B2e native exactness observations next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -452,6 +452,141 @@ supplied-contract classifications to fit the guard. If that boundary is still
 too expensive, profile its remaining adoption/freshness and allocation costs
 before selecting another local optimization. Native exactness observations,
 NUH-6 and NUH-7 remain required.
+
+User direction during NUH-5B2d2b (2026-09-14) permits increasing the previous
+90-second check limit after review. The complete model test was still
+progressing through its first observation pass at 86 seconds and then has
+a second connecting/reuse pass to perform. Allow an explicit 180-second
+guarded experiment for that selected test, retaining the 90-second default,
+2-GiB memory cap, serial lock, file cap and ordinary checker. Record phase
+times and memory use. A time increase alone cannot explain away the previous
+allocation failure. This supersedes the earlier blanket time-limit ceiling,
+not the localized-validation requirement or any mathematical gate.
+
+The 180-second control at a 512-MiB V8 old-space allowance fails by allocation
+at 99.3 seconds, after all eight induced-map observations. A 384-MiB control
+returns the first model pass at 98.0 seconds and reaches the first connecting
+workflow at 109.6 seconds, then fails by allocation at 111.5 seconds. Its
+observed virtual peak is 2,096,952 KiB, very close to the 2-GiB address-space
+cap; physical peak is about 733 MiB. These controls establish that raising
+time alone is insufficient. Their logs are
+`tmp/probes/nuh5b2d2b_model_180s_memory.txt` and
+`tmp/probes/nuh5b2d2b_model_180s_heap384.txt`.
+
+The next gate keeps the original combined fixture and tests a bounded young
+generation (`--max-old-space-size=384 --max-semi-space-size=4`) within the
+same process/aggregate memory limits. The new `--bounded` mode of
+`scripts/check_freyd_native_model_connecting.sh` selects the original complete
+point/map, rejection, connecting-upgrade and reuse tests, then emits all three
+window probes. Each LP target is checked separately. The gate is an experiment
+until every stage passes; emission marks its manifest as awaiting independent
+Lambdapi validation. The smaller model-only fixture remains a possible
+dependency test, not a replacement for the retained combined integration.
+
+The first gate with CLI heap flags again fails by allocation. A small worker
+probe then identifies the actual configuration error: this Node 24.11.1
+build drops those V8 CLI flags when starting isolated test workers. The
+worker's heap limit was 1,174,405,120 bytes, so the preceding 512/384/young-space
+launcher comparisons are **not** evidence that those worker limits changed.
+Passing the same flags through `NODE_OPTIONS` yields the intended 415,236,096
+byte worker heap limit. The bounded gate now verifies this in a separate
+worker preflight before the expensive fixture; the single-window gate also
+passes its existing 512-MiB selection through the inherited environment.
+Logs: `tmp/probes/nuh5b2d2b_node_heap_probe.txt` and
+`tmp/probes/nuh5b2d2b_node_heap_inherited.txt`. All OS memory/serial/file caps
+remain unchanged. Retest the complete gate under the verified worker limit.
+
+That verified 396-MiB worker reaches the first connecting observer but exhausts
+its JavaScript heap at 155.7 seconds. A preparation-only size probe measures
+5.8 MB of connecting-preparation snapshots and a 12.5-MB model inventory.
+Those already nested JSON strings are embedded again in request, result and
+adoption records. Test the existing lossless shared-JSON-table codec only at
+the connecting/row adapter's transport boundary. Keep original realization
+snapshots, every current check, selected values and formal terms unchanged;
+record the transport in observation profile v3 and test exact decoding back
+to the original payload. This adds no validity cache or mathematical rule.
+The complete gate and the original nonsplit gate must pass before promotion.
+
+The compact-transport single-window gate passes focused compilation, four
+adoption/signature tests (including exact payload round trips) and nine LP
+assertions. Its emitted source remains byte-identical to cc8a4dc0/3871827c:
+223,966 bytes, SHA-256
+`b898f3d82636b6d6835e8fd26ec4b9ec4a8b16f91a95d8b474bc76ca6a6113df`.
+Logs: `tmp/probes/nuh5b2d2b_single_compact_gate.txt`,
+`logs/probes/native_connecting_20260914_212552_2517645.log`, and
+`tmp/probes/nuh5b2d2b_compact_artifact_comparison.json`. The complete gate
+with the same transport and verified worker limits is the next required
+validation; its current run is recorded in
+`tmp/probes/nuh5b2d2b_bounded_compact_gate.txt`.
+
+The compact 396-MiB run completes the first connecting workflow at 158.4
+seconds, then exhausts its V8 heap at the second; the guard subsequently
+terminates the failed process at 180 seconds. Its virtual peak was 1,907,460
+KiB. Select 512 MiB of old space with the same 4-MiB semispace and verify
+the inherited worker limit (524 MiB on this build). This fits the remaining
+address-space margin without raising the 2-GiB OS cap. The complete five-test
+gate includes two more windows, a full connecting replay and rejection
+checks after that first 158-second prefix; its reviewed deadline is now
+240 seconds. The guard keeps 90 seconds as the default and permits this
+explicit extension. No test/window/check is removed to meet the deadline.
+
+The 524-MiB/240-second run completes all three connecting workflows at
+151.9, 168.9 and 181.3 seconds, then exhausts its heap during the later full
+reuse pass (207.6 seconds). Inspect adapter closure retention before another
+limit change. Point/map/connecting adapters each retain an entire private
+signature environment while comparing only their declared interface names.
+A pure 18-point retention probe measures about 11.9 MB for those complete
+environments. Keep the very same checked declaration objects needed for each
+comparison, releasing only unused prerequisite-environment storage. Construction,
+body rejection and every exact type comparison remain unchanged. This is
+neither a proof-validity cache nor a change of signature/semantic policy.
+
+With that retention fix, all three connecting workflows and the full reuse
+pass return; the latter returns at 234.2 seconds. The 240-second deadline
+then interrupts the final wrong-normality rejection, after its source check.
+Unlike the preceding runs, this is a deadline exhaustion without a V8/OS
+allocation failure. Select 300 seconds for the complete five-test gate,
+including its final rejection and all-window emission; retain the verified
+524-MiB worker heap and 2-GiB OS cap. Ordinary LP targets still default to
+90 seconds. Evidence: `tmp/probes/nuh5b2d2b_bounded_trimmed_gate.txt` and
+`logs/probes/native_connecting_20260914_220723_2582969.log`.
+
+NUH-5B2d2b qualification: all five complete-workflow tests pass in 267.08
+seconds under the 300-second deadline and verified 524-MiB V8 heap limit.
+This retains all 18 H points, eight maps, all three connecting windows, both
+zero endpoints and the nonzero middle, the complete source prefix, shared
+row proofs, no-reselection assertions, full reuse and negative cases. The
+connecting upgrade reuses 210 claims and adds 11 entries; the resulting
+source contains 143 entries, of which 38 are explicitly trusted semantic
+claims. Coherent model and normality remain supplied inputs.
+
+The wrapper initially expected four assertions per emitted window; the
+existing test emits six (both δ arrows, the interpretation proof and three
+row maps). The count was corrected, the same manifest revalidated and the
+three exact emitted files checked separately at 90 seconds each. All 18 LP
+assertions pass. Do not describe the initial wrapper exit as a mathematical
+failure or repeat the already passed adoption stage for that metadata typo.
+
+The receipt `tmp/probes/nuh5b2d2b_qualification.json` records checked source
+hashes, window hashes, counts, limits and logs. The complete TypeScript log is
+`logs/probes/native_connecting_20260914_221409_2598565.log`; LP logs are
+`logs/probes/connecting_0-20260914-221948.log`,
+`logs/probes/connecting_1-20260914-222151.log`, and
+`logs/probes/connecting_2-20260914-222303.log`. Focused compilation, affected
+ESLint and ten resource-guard tests pass. Source-only LP inventories are
+unchanged; no LP owner, rewrite or unifier was edited.
+
+Next NUH-5B2e, native exactness observation owner inventory: the three
+`freyd_raw_native_window_{middle,source,target}_exact` definitions already
+return fixed-forward `OmegaEquivAlong` evidence on the original whole
+Im⇒K comparisons. The existing `omega_equiv_along_fapp1_fapp0` can map that
+evidence through an internal evaluation functor, retaining the selected
+inverse action. The retained-model adapter supplies the same whole P/Q;
+no ordinary kernel/cokernel record conversion is needed for this route.
+The next observer must expose the actual comparison and its evidence, and
+check its relation to retained-H endpoints before claiming exactness at a
+retained displayed position. This inventory is a construction starting point,
+not a completed point-observation or retained-endpoint theorem.
 
 Audit the current model's P/Q projections and normality against the new
 independent `KernelAdjunctionStructure`, `CokernelAdjunctionStructure` and

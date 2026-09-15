@@ -60,12 +60,17 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
     const suppliedModel = validateAffineFormalCoreTerm(input.formalModel, 'freydModel.reference');
     if (suppliedModel.tag !== 'reference') throw new Error('The initial model binding requires a named supplied model');
     const modelReference = Object.freeze(kernelFree(suppliedModel.name, suppliedModel.provenance));
-    const expectedOwners = createFormalFreydModelProofEnvironment([]);
+    // Retain exactly the checked private signatures this adapter compares,
+    // not another copy of their full prerequisite environment per H point.
+    const expectedOwners = (() => {
+        const environment = createFormalFreydModelProofEnvironment([]);
+        return Object.keys(FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS).map(name => environment.lookup(name)!);
+    })();
     const assertOwners = (environment: CoreLfDeclarationEnvironment) => {
-        for (const name of Object.keys(FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS)) {
-            const actual = environment.lookup(name), expected = expectedOwners.lookup(name)!;
+        for (const expected of expectedOwners) {
+            const actual = environment.lookup(expected.name);
             if (!actual || actual.body !== undefined || !kernelExpressionEquals(actual.type, expected.type)) {
-                throw new AlgebraFormalDelegationError('INVALID_REALIZATION', 'freydModel.owner', 'Missing or changed model signature ' + name);
+                throw new AlgebraFormalDelegationError('INVALID_REALIZATION', 'freydModel.owner', 'Missing or changed model signature ' + expected.name);
             }
         }
     };

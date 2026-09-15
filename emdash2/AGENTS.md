@@ -84,8 +84,10 @@ the Op/duality migration until after that goal because it may interact with
 strict/lax structure. Preserve its checkpoints and partial experiments; do
 not continue those probes as prerequisites for the remaining work. The
 whole kernel/cokernel universality is implemented at its ordinary-view
-boundary. The active NUH-4 continuation uses whole universality directly for
-categorical exactness/connecting; ordinary record bridges are optional.
+boundary. NUH-4 implements whole H/δ and the three categorical exactness
+comparisons through whole universality under its recorded ordinary/Abelian
+assumptions. NUH-5 now qualifies retained model observations; native exactness
+observations are next. Ordinary record bridges remain optional.
 The living plan and `audits/deferred_native_homd_y/README.md` record
 the new queue and later resumption boundary. Existing semantic qualifications
 remain explicit; this deferral is not a claim that the nucleus is repaired.
@@ -873,7 +875,7 @@ the iterated-hom architecture to the omega setting.
 
 Interactive probes now run through `scripts/lambdapi_resource_guard.sh`:
 one checker at a time, at most 2 GiB address space per process, 64 MiB per
-file, no core dumps and a hard 90-second deadline. On this workstation its
+file, no core dumps and a hard deadline (90 seconds by default). On this workstation its
 user-systemd scope additionally limits aggregate test/descendant memory to
 2 GiB and disables swap. The `prlimit` fallback is per-process only. Do not
 bypass this guard for expensive normalization experiments or alternate
@@ -882,8 +884,24 @@ whole multi-target gate; resource exhaustion is not a mathematical
 counterexample. The active homology plan records the motivating global OOM
 events and requires serial, memory-bounded compiler experiments too.
 
-Early-development hangs usually signal rewrite/unification trouble. Keep
-every Lambdapi invocation bounded by the uniform 90-second per-target ceiling.
+User direction for the native-universality goal (2026-09-14) permits reviewed
+time-limit increases. The guard now accepts an explicit `EMDASH_LP_TIMEOUT`
+up to 300 seconds, while retaining the 90-second default and the existing
+memory/file/serial restrictions. Use an increased limit only for a measured
+target, recording the reason, exact limit and result in its living plan.
+The first selected experiment is the complete bounded model adoption with
+its second connecting/reuse pass. A time increase does not resolve a memory
+failure or qualify an incomplete computation. Longer probes use the existing
+`EMDASH_PROBE_TIMEOUT` override; do not bypass the guard or subject reduction.
+
+For Node 24.11.1 here, isolated `node --test` workers do not inherit V8 heap
+flags supplied only on the command line. Pass those limits through
+`NODE_OPTIONS` and verify the worker's `v8.getHeapStatistics().heap_size_limit`.
+The native connecting gate includes this preflight. Do not infer worker heap
+limits from launcher arguments; the OS guard remains independently enforced.
+
+Early-development hangs can signal rewrite/unification trouble. Keep
+every Lambdapi invocation bounded by its recorded per-target deadline.
 The central diagnostics and several focused consumers now have measured green
 runs near 60 seconds, so the former 60-second distinction between probes and
 registered checks can produce false failures. A healthy focused check still

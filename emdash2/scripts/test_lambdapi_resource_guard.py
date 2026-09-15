@@ -75,11 +75,25 @@ else:
 
     def test_ceiling_cannot_be_raised_by_environment(self):
         for env in ({"EMDASH_LP_MEMORY_MIB": "4096"},
-                    {"EMDASH_LP_TIMEOUT": "91s"},
+                    {"EMDASH_LP_TIMEOUT": "301s"},
+                    {"EMDASH_LP_TIMEOUT": "180.5s"},
+                    {"EMDASH_LP_TIMEOUT": "0"},
                     {"EMDASH_LP_FILE_MIB": "65"},
                     {"EMDASH_LP_MEMORY_MIB": "bad"}):
             with self.subTest(env=env):
                 self.assertEqual(self.run_guard("/bin/true", **env).returncode, 2)
+
+    def test_reviewed_time_extension_keeps_other_limits(self):
+        for duration in ("120", "180s", "240s", "300s"):
+            with self.subTest(duration=duration):
+                result = self.run_guard("python3", "-c", """
+import resource
+assert resource.getrlimit(resource.RLIMIT_AS) == (64*1024**2,)*2
+assert resource.getrlimit(resource.RLIMIT_FSIZE) == (1024**2,)*2
+assert resource.getrlimit(resource.RLIMIT_CORE) == (0, 0)
+""", EMDASH_LP_TIMEOUT=duration)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn("time=" + duration.removesuffix("s") + "s", result.stderr)
 
     def test_parallel_check_is_rejected(self):
         first = subprocess.Popen(

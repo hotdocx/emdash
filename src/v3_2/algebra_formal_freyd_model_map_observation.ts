@@ -52,11 +52,15 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
         }
     };
     currentInputs();
-    const expected = createFormalFreydModelMapProofEnvironment([]);
+    const expected = (() => {
+        const environment = createFormalFreydModelMapProofEnvironment([]);
+        return Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS })
+            .map(name => environment.lookup(name)!);
+    })();
     const assertContext = (environment: CoreLfDeclarationEnvironment) => {
-        for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS })) {
-            const value = environment.lookup(name);
-            if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, expected.lookup(name)!.type)) throw new Error('Changed model map signature ' + name);
+        for (const signature of expected) {
+            const value = environment.lookup(signature.name);
+            if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, signature.type)) throw new Error('Changed model map signature ' + signature.name);
         }
         const declaration = environment.lookup(s.formalModel.name);
         if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, algebraFormalFreydModelType(prepared.reifier.formalRing))) {

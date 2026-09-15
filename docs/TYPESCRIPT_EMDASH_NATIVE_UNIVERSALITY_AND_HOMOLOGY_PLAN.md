@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: native TypeScript connecting observation and one retained nonsplit window qualified; complete bounded adoption/native exactness observations next; Op/duality deferred
+Status: active — retained bounded model adoption/reuse and native connecting observations qualified; native exactness observations next; Op/duality deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,16 +24,31 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Current NUH-5B2d2b milestone (2026-09-14): the original combined
+bounded source, all 18 model H points, eight induced maps, three connecting
+windows and complete reuse/rejection tests are qualified. The focused gate verifies
+inherited V8 worker limits, uses lossless table transport for row/δ payloads,
+and retains only the private signatures actually compared by each adapter.
+All original freshness/type checks, selected values and formal terms remain.
+The user permits reviewed deadline extensions; this measured five-test
+workflow uses 300 seconds with the existing 2-GiB OS cap and passes in 267
+seconds. Its three emitted LP files pass 18 assertions at the ordinary
+90-second per-target limit. The wrapper's four-versus-six assertion-count
+error was corrected and the exact emitted files resumed; no passed adoption
+stage was repeated. The single-window transport regression also passes and
+emits identical LP bytes. Native exactness observations (NUH-5B2e) and
+NUH-6/7 remain open; supplied model/normality and interpretation contracts
+retain their explicit classification.
+
 Current NUH-5B2d2a milestone (2026-09-14): assumption-source replay now batches
 body-free opaque declarations at the existing LF owner. It retains fresh
 scope/type checks, the reviewed checker factory, every adoption-current check
 and the original source comparison. Eighteen LF/source tests, three affected
 bounded-H/raw-witness tests and the four-test native δ gate pass; the emitted
 LP source is unchanged byte for byte. The nine measured replay validations
-drop from 41.16 to 16.01 seconds. Full bounded model adoption still fails
-under the resource guard; no native exactness-observation completion is
-claimed. Next audit the focused model consumer's prerequisites, preserving
-the existing larger combined-source integration case. Details and remaining
+drop from 41.16 to 16.01 seconds. Full bounded model adoption was not yet
+qualified at that checkpoint; d2b above completes it while retaining the
+larger combined-source integration case. Details and remaining
 gates are in the [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Current NUH-5B2d1 milestone (2026-09-14): the TypeScript connecting builder
@@ -837,7 +852,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: native connecting observation and a retained nonsplit window qualified; complete automatic bounded adoption and native exactness observations remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
+| NUH-5 | active: complete retained bounded model adoption/reuse and all native δ windows qualified; native exactness observations remain | Registered supported model/reifier preparation; retained nonsplit end-to-end consumer with explicit, accurately classified contracts |
 | NUH-6 | queued after NUH-5; generic NUH-4 construction available | Whole-H snake/direct/native connecting comparison with fixed sign and original endpoint comparisons; preserve general six-term scope |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 
@@ -1098,9 +1113,14 @@ affected dependency or unresolved concern, with the reason and bounded
 scope recorded; no automatic repository-wide gate is scheduled.
 
 All Lambdapi experiments use `emdash2/scripts/lambdapi_resource_guard.sh`:
-one checker at a time, at most 90 seconds, 2 GiB per-process address space,
+one checker at a time, 90 seconds by default, 2 GiB per-process address space,
 64 MiB per file, no core dumps; use the existing aggregate memory scope
-when available. Do not raise limits or bypass ordinary subject reduction.
+when available. User direction on 2026-09-14 permits reviewed time increases.
+The current guard allows an explicit limit up to 300 seconds; record the
+target, evidence and chosen limit in its subplan. The complete model adoption
+and connecting/reuse tests now use a reviewed 300-second limit. Keep
+memory/file limits and ordinary subject reduction; this permission does not
+authorize broader test scope or a new mathematical assumption.
 
 Do not rerun or expand the Empty reproducers or pursue global strictness
 migration as an acceptance gate for this goal. Use the affected operation's
@@ -1213,6 +1233,7 @@ must not label those alternatives validated implementations.
 | D-NUH-073 | NUH-5B2c2 derives both column incoming observations from whole source recovery, then uses ordinary diagram reflection, terminal-tip uniqueness and fibre inclusion at the actual diagram. Canonical point introduction supplies raw input equivalences; original H and existing IsoEvidence symmetry/OmegaEquivAlong composition retain both raw and older H objects and selected inverses. The actual whole δ's endpoints and its component between raw H objects check. Twenty-three definitions add no primitive, rule, unifier or earlier LP edit; 25 assertions cover the native, retained and connecting consumers. Keep observation imports focused: the larger all-exactness probe exceeded the unchanged guard. TypeScript migration, explicit model/row contracts and retained nonsplit adoption remain required |
 | D-NUH-074 | NUH-5B2d1 separates raw native δ observation, retained-model comparison at general K/x and the outer Terminal complete-arrow wrapper. Native context aliases and five definitions introduce no new primitive/rule; a direct use of the existing incoming-source law removes an unused old whole-H proof dependency without changing the proof. TypeScript retains all 47 fields and H selections, uses distinct native normality/row/observer mirror names, and requires nativeNormalityContract. Eight focused tests and the concrete emitted nonsplit observer pass in separately bounded compilation, adoption/emission and LP stages. No Core/checker/evaluator/barrel implementation changed. Complete automatic bounded adoption, native exactness observations, snake comparison and final qualification remain required |
 | D-NUH-075 | NUH-5B2d2a adds a body-free opaque batch at the LF declaration owner and uses it only in assumption-source replay. Fresh ordered scopes, complete type validation with the original checker factory, all adoption-current checks and final source comparison remain mandatory. No validity cache or conversion change is introduced. Eighteen LF/source tests, three bounded-H/raw-witness tests and the four-test native δ gate pass; its emitted LP artifact is byte-identical to cc8a4dc0. Measured replay cost drops, but the full model run still fails near the guard boundary. Audit the test's independent model prerequisites next; preserve combined-source integration, all three windows, reuse and explicit contracts. Native exactness observations and NUH-6/7 remain open |
+| D-NUH-076 | NUH-5B2d2b qualifies the original combined bounded model source, all 18 H points, eight maps, three native δ windows and full reuse/rejection checks. Respect the user's reviewed time extensions: the complete five-test stage passes in 267 seconds under 300 seconds; routine LP targets stay at 90 seconds. Verify inherited Node worker heap limits, use lossless table transport for row/δ payloads and retain only required private signature declarations. All original checks, selections, formal terms and supplied/trusted contract classifications remain. Five full-workflow tests and all 18 emitted LP assertions pass; the wrapper's four-versus-six count typo is corrected and exact artifacts resumed without repeating adoption. Nine single-window LP assertions and exact payload round trips also pass. Native exactness observations, NUH-6 and NUH-7 remain required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by

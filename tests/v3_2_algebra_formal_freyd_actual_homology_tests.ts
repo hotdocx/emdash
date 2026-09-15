@@ -2,6 +2,7 @@
 
 import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
+import { decodeAlgebraFormalFreydLongExactData } from '../src/v3_2/algebra_formal_freyd_long_exact_encoding';
 import { resolve } from 'node:path';
 import { describe, it, mock } from 'node:test';
 import { AFFINE_FORMAL_FINITE_MODULE_BINDINGS } from '../src/v3_2/algebra_formal_finite_module';
@@ -453,6 +454,14 @@ describe('v3.2 model connecting signatures', () => {
             assert.equal(result.observation.realization.source.actual.selected, selected.source);
             assert.equal(result.observation.realization.target.actual.selected, selected.target);
             assert.equal(result.observation.profile.nativeWholeConnectingObservation, true);
+            const observation = result.observation;
+            assert.equal(decodeAlgebraFormalFreydLongExactData(
+                observation.adapter.serializeRealization(observation.realization)), observation.realization.formalData);
+            assert.equal(decodeAlgebraFormalFreydLongExactData(
+                observation.adapter.serializeInput(selected)), prepared.selectedData);
+            assert.equal(decodeAlgebraFormalFreydLongExactData(
+                observation.adapter.serializeOutput(selected)), prepared.selectedData);
+            assert.ok(observation.adapter.serializeInput(selected).length < prepared.selectedData.length);
             assert.equal(result.observation.profile.endpointCasts, false);
             assert.match(serializeCoreExpression(result.observation.realization.formalArrow),
                 /bridge_freyd_homology_model_native_connecting_observation/u);

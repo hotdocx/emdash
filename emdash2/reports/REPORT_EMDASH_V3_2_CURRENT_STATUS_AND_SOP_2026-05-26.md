@@ -6995,8 +6995,12 @@ timeout 90s lambdapi check emdash3_2.lp
 make check-warnings
 ```
 
-The 90-second value is a uniform per-file ceiling for focused probes, warning
-checks, registered aggregates, and health traversals. The central diagnostics
+The 90-second value is the default per-file limit for focused probes, warning
+checks, registered aggregates, and health traversals. The native-universality
+goal's 2026-09-14 user direction permits measured extensions; the guard accepts
+an explicit limit up to 300 seconds while preserving memory/file bounds and
+serial execution. Its model/reifier subplan records the selected target and
+evidence. The central diagnostics
 and several focused consumers now have measured green runs near 60 seconds, so
 the older split limits could classify the same valid import path differently.
 This is a timeout ceiling, not permission to run broad aggregates for

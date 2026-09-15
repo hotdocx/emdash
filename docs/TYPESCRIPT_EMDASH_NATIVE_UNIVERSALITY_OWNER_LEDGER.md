@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: native connecting observations and a retained nonsplit window qualified; complete bounded adoption/native exactness observations active; Op/duality deferred
+Status: active — retained bounded model adoption/reuse and native connecting observations qualified; native exactness observations next; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,41 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-5B2d2b: Complete retained model workflow qualification
+
+**Qualified after 3871827c.** The original combined fixture is retained,
+including all six older selected H constructions, raw witnesses, 18 model
+points, eight maps, all three connecting windows, and later reuse/rejection
+tests. The user authorizes reviewed extensions of the former 90-second limit;
+the selected complete five-test gate now has a measured 300-second deadline.
+Its OS memory/file/serial bounds remain unchanged.
+
+A worker probe found that this Node build does not forward V8 CLI heap flags
+to isolated tests. The gate supplies them through `NODE_OPTIONS` and checks
+the actual worker heap limit before adoption. Connecting/row adapter profile
+v3 uses the existing lossless table codec for request payloads. Original
+realizations, values, formal terms and current checks remain intact. Adapter
+closures retain the exact checked private declarations they compare instead
+of copies of their entire prerequisite environments. No proof-validity cache,
+Core/checker rule or mathematical primitive is added.
+
+The single-window regression passes four tests, exact payload round trips and
+nine LP assertions, with byte-identical emitted source. All five full-workflow
+tests pass in 267 seconds: complete adoption, both endpoint windows, the
+nonzero middle δ, shared row proofs, reuse and rejection checks. The resulting
+source has 143 entries, including 38 explicitly trusted semantic claims;
+model/normality inputs remain separately supplied. The three emitted LP
+files pass all 18 assertions. A wrapper count typo (four instead of six)
+was corrected, and the exact emitted files checked without repeating the
+passed adoption stage. The receipt records their hashes and stage evidence.
+Ten resource-guard tests, the worker preflight, focused compilation, lint and
+document hygiene pass. The [subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records the controls and qualification.
+
+Next NUH-5B2e: native categorical exactness observations, using the existing
+whole Im⇒K evidence and the original retained-H comparisons. NUH-6
+snake/native comparison and NUH-7 final qualification remain open.
 
 ### NUH-5B2d2a: Fresh batched declaration replay
 

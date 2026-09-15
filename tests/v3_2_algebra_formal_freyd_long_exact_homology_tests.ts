@@ -1,7 +1,8 @@
 /** Every retained interior becomes a formal selected homology/exactness pair. */
 
 import assert from 'node:assert/strict';
-import { resolve } from 'node:path';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { isAbsolute, join, resolve } from 'node:path';
 import { describe, it, mock } from 'node:test';
 import { AFFINE_FORMAL_FINITE_MODULE_BINDINGS } from '../src/v3_2/algebra_formal_finite_module';
 import { AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS } from '../src/v3_2/algebra_formal_localization_signatures';
@@ -448,9 +449,16 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
     });
 
     it('checks the complete bounded connecting inventory against Lambdapi', {
-        skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_CONNECTING !== '1'
-    }, async () => {
+        skip: process.env.EMDASH_RUN_PROOF_CAS_FREYD_LONG_EXACT_CONNECTING !== '1' &&
+            !process.env.EMDASH_PROOF_CAS_BOUNDED_CONNECTING_PROBE_DIR
+    }, async testContext => {
+        const output = process.env.EMDASH_PROOF_CAS_BOUNDED_CONNECTING_PROBE_DIR;
+        if (output) {
+            assert.ok(isAbsolute(output), 'The bounded probe output directory must be absolute');
+            mkdirSync(output, { recursive: true });
+        }
         const { result } = await connectingConsumer();
+        const emitted: { degree: number; position: number; file: string; assertions: number }[] = [];
         // Separate independently bounded targets for the two zero endpoints and nonzero middle.
         for (const { entry, observation, proof } of result.connectings) {
             const value = observation.realization;
@@ -463,10 +471,29 @@ describe('v3.2 whole long-exact actual formal homologies', () => {
             const assertions = triples.map(([name, term, type]) => ({ label: name + '_' + entry.degree,
                 term, type, span: sourceSpan('generated/bounded-connecting.ts', 1, 1) }));
             const serialized = serializeCoreLfKernelProbe({ environment: result.source.environment, externalFreeReferences: bindings, assertions });
-            const checked = checkLambdapiProbe({ ...serialized, source: serialized.source.replace('require open emdash.emdash3_2;', imports) },
-                { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
-            assert.equal(checked.timedOut, false, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-5000));
-            assert.equal(checked.accepted, true, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-10000));
+            let source = serialized.source.replace('require open emdash.emdash3_2;', imports);
+            for (const name of Object.values(FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS)) {
+                source = source.replace('assert ⊢ ' + name + ' :', 'assert ⊢ @' + name + ' :');
+            }
+            if (output) {
+                const file = 'connecting_' + entry.degree + '.lp';
+                writeFileSync(join(output, file), source, { encoding: 'utf8', flag: 'wx' });
+                emitted.push({ degree: entry.degree, position: entry.position, file, assertions: assertions.length });
+            } else {
+                const checked = checkLambdapiProbe({ ...serialized, source },
+                    { packageRoot: resolve(__dirname, '..', 'emdash2'), timeoutMs: 60_000 });
+                assert.equal(checked.timedOut, false, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-5000));
+                assert.equal(checked.accepted, true, 'degree ' + entry.degree + '\n' + checked.diagnostics.slice(-10000));
+            }
+        }
+        if (output) {
+            assert.equal(emitted.length, result.native.windows.length);
+            writeFileSync(join(output, 'manifest.json'), JSON.stringify({
+                windows: emitted, counts: result.counts,
+                classifications: result.source.entries.map(entry => entry.classification),
+                lambdapiValidation: 'pending-separate-stages'
+            }, null, 2) + '\n', { encoding: 'utf8', flag: 'wx' });
+            testContext.diagnostic('Emitted every retained connecting window; Lambdapi validation is a separate bounded stage.');
         }
     });
 
