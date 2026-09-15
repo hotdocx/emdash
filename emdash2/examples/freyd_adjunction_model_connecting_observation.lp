@@ -1,0 +1,62 @@
+/* Native contracts and complete-arrow observations at the original retained H objects. */
+require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation;
+symbol R : τ CommRing;
+symbol M : τ (FreydAdjunctionModel R);
+symbol N : τ (@FreydAdjunctionModelNormality R M);
+symbol Am : τ (@CommRingPresentation R);
+symbol Bm : τ (@CommRingPresentation R);
+symbol Dm : τ (@CommRingPresentation R);
+symbol A0 : τ (@CommRingPresentation R);
+symbol B0 : τ (@CommRingPresentation R);
+symbol D0 : τ (@CommRingPresentation R);
+symbol A1 : τ (@CommRingPresentation R);
+symbol B1 : τ (@CommRingPresentation R);
+symbol D1 : τ (@CommRingPresentation R);
+symbol A2 : τ (@CommRingPresentation R);
+symbol B2 : τ (@CommRingPresentation R);
+symbol D2 : τ (@CommRingPresentation R);
+symbol im : τ (@CommRingPresentationMorphism R Am Bm);
+symbol pm : τ (@CommRingPresentationMorphism R Bm Dm);
+symbol cm : τ (@CommRingFreydChainPair R Am Bm Dm im pm);
+symbol xm : τ (@FreydAdjunctionModelRowShortExact R M Am Bm Dm im pm cm);
+symbol i0 : τ (@CommRingPresentationMorphism R A0 B0);
+symbol p0 : τ (@CommRingPresentationMorphism R B0 D0);
+symbol c0 : τ (@CommRingFreydChainPair R A0 B0 D0 i0 p0);
+symbol x0 : τ (@FreydAdjunctionModelRowShortExact R M A0 B0 D0 i0 p0 c0);
+symbol i1 : τ (@CommRingPresentationMorphism R A1 B1);
+symbol p1 : τ (@CommRingPresentationMorphism R B1 D1);
+symbol c1 : τ (@CommRingFreydChainPair R A1 B1 D1 i1 p1);
+symbol x1 : τ (@FreydAdjunctionModelRowShortExact R M A1 B1 D1 i1 p1 c1);
+symbol i2 : τ (@CommRingPresentationMorphism R A2 B2);
+symbol p2 : τ (@CommRingPresentationMorphism R B2 D2);
+symbol c2 : τ (@CommRingFreydChainPair R A2 B2 D2 i2 p2);
+symbol x2 : τ (@FreydAdjunctionModelRowShortExact R M A2 B2 D2 i2 p2 c2);
+symbol am : τ (@CommRingPresentationMorphism R Am A0);
+symbol bm : τ (@CommRingPresentationMorphism R Bm B0);
+symbol dm : τ (@CommRingPresentationMorphism R Dm D0);
+symbol fm : τ (@CommRingFreydHomologyChainMap R Am Bm Dm A0 B0 D0 im pm i0 p0 am bm dm);
+symbol a0 : τ (@CommRingPresentationMorphism R A0 A1);
+symbol b0 : τ (@CommRingPresentationMorphism R B0 B1);
+symbol d0 : τ (@CommRingPresentationMorphism R D0 D1);
+symbol gm : τ (@CommRingFreydHomologyChainMap R A0 B0 D0 A1 B1 D1 i0 p0 i1 p1 a0 b0 d0);
+symbol a1 : τ (@CommRingPresentationMorphism R A1 A2);
+symbol b1 : τ (@CommRingPresentationMorphism R B1 B2);
+symbol d1 : τ (@CommRingPresentationMorphism R D1 D2);
+symbol jm : τ (@CommRingFreydHomologyChainMap R A1 B1 D1 A2 B2 D2 i1 p1 i2 p2 a1 b1 d1);
+symbol upper : τ (@CommRingFreydChainPair R Bm B0 B1 bm b0);
+symbol lower : τ (@CommRingFreydChainPair R B0 B1 B2 b0 b1);
+symbol source_chain : τ (@CommRingFreydChainPair R Dm D0 D1 dm d0);
+symbol target_chain : τ (@CommRingFreydChainPair R A0 A1 A2 a0 a1);
+symbol observation ≔ @freyd_adjunction_model_connecting_observation R M N Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2
+  D2 im pm cm xm i0 p0 c0 x0 i1 p1 c1 x1 i2 p2 c2 x2 am bm dm fm a0 b0 d0 gm a1 b1 d1 jm upper lower
+  source_chain target_chain;
+// These hypotheses are the native whole contracts at the original native model.
+assert ⊢ @FreydAdjunctionModelRowShortExact R M A0 B0 D0 i0 p0 c0 ≡ @FreydRawNativeRowShortExact Terminal_cat R M A0 B0 D0 i0 p0 c0;
+// Both native H objects and the complete arrow are original observations.
+assert ⊢ sigma_Fst observation ≡ (@freyd_adjunction_model_object R M Dm D0 D1 dm d0 source_chain);
+assert ⊢ sigma_Fst (sigma_Snd observation) ≡ (@freyd_adjunction_model_object R M A0 A1 A2 a0 a1 target_chain);
+assert ⊢ sigma_Snd (sigma_Snd observation) : τ (@CommRingFreydHomSet R (@freyd_adjunction_model_object R M Dm D0
+  D1 dm d0 source_chain) (@freyd_adjunction_model_object R M A0 A1 A2 a0 a1 target_chain));
+assert ⊢ sigma_Snd (sigma_Snd observation) ≡ @freyd_raw_native_window_connecting_at Terminal_cat R M N Am Bm
+  Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 im pm cm xm i0 p0 c0 x0 i1 p1 c1 x1 i2 p2 c2 x2 am bm dm fm a0 b0 d0 gm a1 b1 d1
+  jm upper lower source_chain target_chain Terminal_obj;

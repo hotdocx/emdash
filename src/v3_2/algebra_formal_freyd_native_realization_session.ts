@@ -2,7 +2,7 @@
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { AlgebraFormalFreydActualHomologyRealization, defineAlgebraFormalFreydActualHomologyRealization } from './algebra_formal_freyd_actual_homology';
 import { algebraFormalFreydNativeModelHomologyObservationBundle } from './algebra_formal_freyd_model_observation';
-import { algebraFormalFreydChainPairDelegationBundle } from './algebra_formal_freyd_chain_pair';
+import { algebraFormalFreydChainPairDelegationBundle, AlgebraFormalFreydChainPairRealization } from './algebra_formal_freyd_chain_pair';
 import { algebraFormalPresentationMorphismDelegationBundle } from './algebra_formal_presentation_morphism_delegation';
 import { createAlgebraTypeScriptReferenceEngine } from './algebra_reference_engine';
 import { createAlgebraPolynomialFreydHomologyEngine } from './algebra_polynomial_freyd_homology_category';
@@ -77,6 +77,11 @@ export function createAlgebraFormalFreydNativeRealizationSession<P extends Algeb
             return { ...operation, engine: createAlgebraTypeScriptReferenceEngine({ id: input.artifactId + '/' + key,
                 revision: 'v1', implementations: operation.operations.implementations }) };
         });
+    const chain = (key: string, value: AlgebraFormalFreydChainPairRealization<P, C, I>) =>
+        ensure(key, value.claimType, 'computed-equation', () => {
+            const operation = algebraFormalFreydChainPairDelegationBundle({ reifier: value.reifier, selected: value.selected });
+            return { ...operation, engine: createAlgebraPolynomialFreydHomologyEngine(operation.model) };
+        });
     const point = async (observationId: string, value: AlgebraFormalFreydActualHomologyRealization<P, C, I>) => {
         if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(observationId)) throw new Error('A stable native H observation ID is required');
         const actual = defineAlgebraFormalFreydActualHomologyRealization(value);
@@ -85,16 +90,13 @@ export function createAlgebraFormalFreydNativeRealizationSession<P extends Algeb
         checker.check(checker.rootContext, model, algebraFormalFreydNativeModelType(actual.reifier.formalRing));
         const aboveLaw = await morphism(observationId + '/above', actual.chain.above);
         const belowLaw = await morphism(observationId + '/below', actual.chain.below);
-        const chainLaw = await ensure(observationId + '/chain', actual.chain.claimType, 'computed-equation', () => {
-            const operation = algebraFormalFreydChainPairDelegationBundle({ reifier: actual.reifier, selected: actual.selected.pair });
-            return { ...operation, engine: createAlgebraPolynomialFreydHomologyEngine(operation.model) };
-        });
+        const chainLaw = await chain(observationId + '/chain', actual.chain);
         const observationInput = { modelId: input.modelId, observationId, formalModel: model,
             environment: source.environment, actual, aboveLaw, belowLaw, chainLaw };
         const observation = algebraFormalFreydNativeModelHomologyObservationBundle(observationInput);
         return Object.freeze({ observation, observationInput });
     };
-    return Object.freeze({ ensure, morphism, point,
+    return Object.freeze({ ensure, morphism, chain, point,
         get source() { return source; },
         get counts() { return Object.freeze({ reused, computedEquations, interpretationClaims,
             newAssumptions: source.entries.length - before, homologyReplays: 0 as const, universalReselections: 0 as const }); }

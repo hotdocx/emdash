@@ -32,8 +32,8 @@ presentation. Preserve the qualified 0caa19d0 compatibility workflow, but
 move comparisons with that older presentation and the recent auxiliary
 point/projection-normalization experiments out of the primary prerequisites.
 
-NUH-5N1 direct native context/signatures and the first NUH-5N2 native H and
-complete-arrow realizations are qualified. Continue NUH-5N2 whole
+NUH-5N1 direct native context/signatures and the first NUH-5N2 native H,
+complete-arrow and middle-window δ realizations are qualified. Continue NUH-5N2 whole
 H/maps/δ/exactness interaction with declared native model/realization
 contracts, then the native snake/LES work and final qualification. Coherent
 CAS realization and actual native theorem/consumer checks remain required;
@@ -45,6 +45,17 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 [resumption note](../emdash2/audits/deferred-native-exactness-observations/README.md)
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
+
+Current NUH-5N2C milestone (2026-09-15): a direct native δ observer uses
+the original whole operation with native H endpoints and the original whole
+P/Q row predicate at Terminal. The CAS workflow forms all matrix inputs,
+adopts native row interpretations and one complete δ agreement, without
+legacy H comparisons or standalone point claims. The middle nonzero window
+reuses 23 claims and adds eleven computed equations plus three interpretations
+(two distinct row predicates and δ). Repeat use reuses all 37 requests.
+Twenty-one focused TypeScript tests and 30 affected Lambdapi assertions pass.
+The two zero endpoint windows, native exactness realization, complete bounded
+diagram/coherence and later snake/LES sign comparison remain required.
 
 Current NUH-5N2B milestone (2026-09-15): the native complete-arrow observer
 uses the existing LaxArrow carrier, moved to a model-independent owner.
@@ -915,7 +926,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: direct native context, first H and complete-arrow realizations qualified; retained workflow preserved | Native δ/exactness consumers and complete bounded diagram realization with coherent model/row contracts |
+| NUH-5 | active: native context, H/map and middle-window δ realizations qualified; retained workflow preserved | Zero endpoint windows, native exactness and complete bounded diagram realization with coherent model/row contracts |
 | NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
@@ -1460,7 +1471,7 @@ Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
 The retained workflow is qualified through 0caa19d0. Follow the later user
 priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
-native context/signatures and the first direct H/complete-arrow realizations are qualified;
+native context/signatures, first direct H/complete-arrow and middle-window δ realizations are qualified;
 continue NUH-5N2 native whole
 H/maps/δ/exactness interaction with the actual selected CAS result.
 Retain coherent model/realization, normality and row contracts explicitly;

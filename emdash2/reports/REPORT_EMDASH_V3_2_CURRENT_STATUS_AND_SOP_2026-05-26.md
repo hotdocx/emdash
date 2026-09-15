@@ -106,8 +106,14 @@ carrier. Its [shared carrier owner](../emdash3_2_commutative_algebra_freyd_arrow
 also serves the unchanged legacy observer. Native matrix preparation can
 form point queries without adopting point agreements; the complete-arrow
 workflow records one combined interpretation. The nonsplit x map is its
-qualified nonzero/nonidentity consumer. Native δ/exactness and realization
-coherence for the complete bounded diagram remain
+qualified nonzero/nonidentity consumer. The
+[direct δ observer](../emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp)
+now applies the original raw-window δ to the native model/normality, using
+the original whole P/Q row predicate at Terminal. Its complete LaxArrow
+value has direct native H endpoints. A corresponding CAS workflow prepares
+all matrix inputs and adopts explicit native row interpretations and one δ
+agreement. No legacy H comparison or separate point agreement is required.
+Native exactness and realization coherence for the complete bounded diagram remain
 in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Reconstruction review (2026-09-13): retain the ordinary reconstruction law as

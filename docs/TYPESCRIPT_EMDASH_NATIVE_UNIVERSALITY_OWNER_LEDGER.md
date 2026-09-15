@@ -320,8 +320,9 @@ with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
 NUH-5N1 native context/signature preparation and the first NUH-5N2 native H/
-complete-arrow realizations are qualified. Next are native δ/exactness and
-the complete bounded diagram with coherent realization. Native snake/LES work and
+complete-arrow/middle-window δ realizations are qualified. Next are the zero
+endpoint windows, native exactness and complete bounded diagram with coherent
+realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -329,6 +330,35 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2C: Direct native middle-window δ realization — qualified 2026-09-15
+
+Two definitions expose the existing whole P/Q row predicate at Terminal and
+the complete arrow of the original native raw-window δ. The H endpoints stay
+native; no legacy H comparison is inserted. Native context v4 and exact
+47-argument mirrors use that interface. The row/δ adapters share unchanged
+lossless transport and current-data validation, with distinct native model,
+row/observer and operation choices. No primitive or rule was added.
+
+The automatic native workflow prepares source/target raw H inputs, rows,
+row maps and matrix facts; it records native row interpretations and one δ
+agreement. The middle nonzero two-term nonsplit window reuses 23 claims,
+adds eleven computed equations and three interpretations (two row predicates
+covering four rows, plus δ). There are no standalone point interpretations
+or output-exactness assumptions. Reuse needs no new source or decision and
+covers all 37 requests. Wrong normality, legacy/mixed models, forged data and
+raw chain-zero proofs used as row shortness are rejected.
+
+Four native δ tests pass (81.69s), nine native context/H regressions pass
+(55.25s), four complete-arrow regressions pass (30.74s) and four legacy δ
+regressions pass (39.54s), each in its own 90s guarded process. Focused types/
+lint and 30 affected LP assertions pass. Static catalog/health/TOC are current;
+no aggregate or deferred normalization experiment ran. Full evidence is in
+the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
+This turn is **progress**. The zero endpoint windows, native exactness,
+complete bounded diagram/coherence and later snake/LES sign comparison remain.
+The explicit δ interpretation is not a derivation of that comparison.
 
 ### NUH-5N2B: Complete native H-arrow realization — qualified 2026-09-15
 

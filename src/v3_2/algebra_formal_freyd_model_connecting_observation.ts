@@ -2,7 +2,8 @@
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnectingRowMapTerm,
     assertAlgebraFormalFreydModelConnectingPreparationCurrent } from './algebra_formal_freyd_model_connecting_preparation';
-import { algebraFormalFreydModelHomologyObservationBundle } from './algebra_formal_freyd_model_observation';
+import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydNativeModelHomologyObservationBundle,
+    ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { algebraFormalFreydChainPairTerm, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
 import { algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType,
     createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS }
@@ -20,9 +21,13 @@ import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeS
 import { createAlgebraTypeScriptReferenceEngine, defineAlgebraReferenceImplementation } from './algebra_reference_engine';
 import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } from './algebra_formal_delegation';
 import { encodeAlgebraFormalFreydLongExactData } from './algebra_formal_freyd_long_exact_encoding';
+import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType, FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_signatures';
+import { FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_observation_signatures';
+import { createFormalFreydNativeConnectingProofEnvironment, algebraFormalFreydNativeConnectingObservationTerm, FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_connecting_signatures';
 
 type Point<P extends AlgebraParent, C extends AlgebraElement<P>, I> =
-    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>>;
+    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>> |
+    ReturnType<typeof algebraFormalFreydNativeModelHomologyObservationBundle<P, C, I>>;
 export interface AlgebraFormalFreydConnectingRowLaws {
     readonly above: KernelExpression;
     readonly below: KernelExpression;
@@ -43,13 +48,52 @@ export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.
     replaysConnecting: false as const, addsCoreOwner: false as const
 });
 
-function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression) {
+export const ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
+    ...ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE,
+    revision: 'emdash-formal-freyd-native-connecting-observations-v1' as const,
+    endpointComparisons: 'native-column-input-comparisons' as const,
+    requiresLegacyModel: false as const
+});
+
+interface ConnectingOwner<Profile extends { readonly revision: string }> {
+    readonly profile: Profile;
+    readonly pointProfile: string;
+    readonly createEnvironment: () => CoreLfDeclarationEnvironment;
+    readonly bindings: Readonly<Record<string, string>>;
+    readonly modelType: (R: KernelExpression) => KernelExpression;
+    readonly normalityType: (R: KernelExpression, M: KernelExpression) => KernelExpression;
+    readonly rowOwner: string;
+    readonly connectingTerm: (values: Readonly<Record<string, KernelExpression>>) => KernelExpression;
+    readonly operationPrefix: string;
+}
+const legacyOwner = Object.freeze({
+    profile: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE,
+    pointProfile: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE.revision,
+    createEnvironment: () => createFormalFreydModelConnectingProofEnvironment([]),
+    bindings: { ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
+        ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS },
+    modelType: algebraFormalFreydModelType, normalityType: algebraFormalFreydModelNormalityType,
+    rowOwner: 'bridge_FreydHomologyModelNativeShortExact', connectingTerm: algebraFormalFreydModelConnectingObservationTerm,
+    operationPrefix: 'proof-cas.freyd-model/'
+});
+const nativeOwner = Object.freeze({
+    profile: ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE,
+    pointProfile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE.revision,
+    createEnvironment: () => createFormalFreydNativeConnectingProofEnvironment([]),
+    bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS,
+        ...FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS },
+    modelType: algebraFormalFreydNativeModelType, normalityType: algebraFormalFreydNativeModelNormalityType,
+    rowOwner: 'bridge_FreydAdjunctionModelRowShortExact', connectingTerm: algebraFormalFreydNativeConnectingObservationTerm,
+    operationPrefix: 'proof-cas.freyd-native-model/'
+});
+
+function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression,
+    owner: ConnectingOwner<{ readonly revision: string }>) {
     if (M.tag !== 'reference' || M.namespace !== 'free') throw new Error('A named supplied coherent model is required');
     const model: KernelReference = Object.freeze(kernelFree(M.name, M.provenance));
     const expected = (() => {
-        const signatures = createFormalFreydModelConnectingProofEnvironment([]);
-        return Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS,
-            ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })
+        const signatures = owner.createEnvironment();
+        return Object.keys(owner.bindings)
             .map(name => signatures.lookup(name)!);
     })();
     const check = (env: CoreLfDeclarationEnvironment) => {
@@ -60,7 +104,7 @@ function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpres
             }
         }
         const declaration = env.lookup(model.name);
-        if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, algebraFormalFreydModelType(R))) {
+        if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, owner.modelType(R))) {
             throw new Error('Changed supplied coherent model declaration');
         }
     };
@@ -71,11 +115,18 @@ function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpres
 export function assertAlgebraFormalFreydModelConnectingContext(
     environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression
 ): void {
-    modelContext(environment, R, M);
+    modelContext(environment, R, M, legacyOwner);
 }
 
-function retainedInterpretation<T, R extends { readonly claimType: KernelExpression; readonly formalData: string }>(
-    id: string, realization: R, value: T, data: string, current: () => void,
+export function assertAlgebraFormalFreydNativeConnectingContext(
+    environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression
+): void {
+    modelContext(environment, R, M, nativeOwner);
+}
+
+function retainedInterpretation<T, R extends { readonly claimType: KernelExpression; readonly formalData: string },
+    Profile extends { readonly revision: string }>(
+    profile: Profile, id: string, realization: R, value: T, data: string, current: () => void,
     assertContext: (environment: CoreLfDeclarationEnvironment) => void, summary: string
 ) {
     // Keep the original snapshots and all current() checks. Only their wire
@@ -91,7 +142,7 @@ function retainedInterpretation<T, R extends { readonly claimType: KernelExpress
         algorithm: algebraAlgorithmIdentity(id + '/interpret-retained', 'v2'), execute(input) { current(); return input; } });
     const engine = createAlgebraTypeScriptReferenceEngine({ id: id + '/engine', revision: 'v2', implementations: [implementation] });
     const adapter = defineAlgebraFormalComputationAdapter({ id,
-        revision: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE.revision, operation,
+        revision: profile.revision, operation,
         normalizeRealization(candidate: unknown) {
             if (candidate !== realization) throw new Error('Foreign model connecting realization');
             current(); return realization;
@@ -109,7 +160,7 @@ function retainedInterpretation<T, R extends { readonly claimType: KernelExpress
                 : { kind: 'observation' as const, summary: 'Retained model result differs' };
         }
     });
-    return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE, realization, adapter, engine });
+    return Object.freeze({ profile, realization, adapter, engine });
 }
 
 const stable = (value: string) => {
@@ -118,16 +169,26 @@ const stable = (value: string) => {
 };
 
 /** Native whole P/Q row semantics remain supplied; raw zero equations do not derive this contract. */
-export function algebraFormalFreydModelShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+export interface AlgebraFormalFreydShortExactObservationInput<P extends AlgebraParent, C extends AlgebraElement<P>, I> {
     readonly modelId: string; readonly observationId: string; readonly formalModel: KernelExpression;
     readonly prepared: AlgebraFormalFreydModelConnectingPreparation<P, C, I>;
     readonly index: 0 | 1 | 2 | 3; readonly environment: CoreLfDeclarationEnvironment;
     readonly laws: Omit<AlgebraFormalFreydConnectingRowLaws, 'exact'>;
-}) {
+}
+export function algebraFormalFreydModelShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydShortExactObservationInput<P, C, I>
+) { return shortExactObservation(input, legacyOwner); }
+
+export function algebraFormalFreydNativeShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydShortExactObservationInput<P, C, I>
+) { return shortExactObservation(input, nativeOwner); }
+
+function shortExactObservation<P extends AlgebraParent, C extends AlgebraElement<P>, I,
+    Profile extends { readonly revision: string }>(input: AlgebraFormalFreydShortExactObservationInput<P, C, I>, owner: ConnectingOwner<Profile>) {
     const prepared = input.prepared;
     assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
     if (!Number.isInteger(input.index) || input.index < 0 || input.index > 3) throw new Error('Invalid connecting row');
-    const context = modelContext(input.environment, prepared.reifier.formalRing, input.formalModel);
+    const context = modelContext(input.environment, prepared.reifier.formalRing, input.formalModel, owner);
     const raw = prepared.rowPairs[input.index];
     const pair = algebraFormalFreydChainPairTerm(raw, input.laws.above, input.laws.below, input.laws.chain);
     const checker = createCoreProofChecker(input.environment);
@@ -135,13 +196,13 @@ export function algebraFormalFreydModelShortExactObservationBundle<P extends Alg
     const b = new CoreLfScopedBuilder(provenance('derived', 'retained model short-exact row')), L = formalFreydSpineLanguage(b);
     const R = b.embed(prepared.reifier.formalRing);
     const values = [R, b.embed(context.model), ...raw.presentations.map(t => b.embed(t)), b.embed(pair.above), b.embed(pair.below), b.embed(pair.term)];
-    const claimType = b.lower(L.tau(b.call(b.free('bridge_FreydHomologyModelNativeShortExact'), values.map((value, i) => ({ value,
+    const claimType = b.lower(L.tau(b.call(b.free(owner.rowOwner), values.map((value, i) => ({ value,
         plicity: [0, 2, 3, 4].includes(i) ? 'implicit' as const : 'explicit' as const })))));
     const serialize = () => serializeCoreLfWorkspaceCanonicalJson({ prepared: prepared.formalData, row: input.index,
         model: serializeCoreExpression(context.model), claim: serializeCoreExpression(claimType) }, 'modelShortExactObservation');
     const formalData = serialize();
     const realization = Object.freeze({ prepared, index: input.index, pair, claimType, formalData });
-    return retainedInterpretation('proof-cas.freyd-model/' + stable(input.modelId) + '/short-row/' + stable(input.observationId),
+    return retainedInterpretation(owner.profile, owner.operationPrefix + stable(input.modelId) + '/short-row/' + stable(input.observationId),
         realization, prepared.rows[input.index].triple, prepared.selectedData,
         () => {
             assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
@@ -150,17 +211,30 @@ export function algebraFormalFreydModelShortExactObservationBundle<P extends Alg
         'explicitly interpret this retained row in the supplied native whole P/Q model; no closed capability is synthesized');
 }
 
-export function algebraFormalFreydModelConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+export interface AlgebraFormalFreydConnectingObservationInput<P extends AlgebraParent, C extends AlgebraElement<P>, I> {
     readonly observationId: string; readonly source: Point<P, C, I>; readonly target: Point<P, C, I>;
     readonly prepared: AlgebraFormalFreydModelConnectingPreparation<P, C, I>; readonly environment: CoreLfDeclarationEnvironment;
     readonly normality: KernelExpression; readonly rows: readonly AlgebraFormalFreydConnectingRowLaws[];
     readonly vertical: Readonly<Record<'am' | 'bm' | 'b0' | 'b1' | 'd1', KernelExpression>>;
     readonly squares: readonly { readonly upper: KernelExpression; readonly lower: KernelExpression }[];
     readonly upperZero: KernelExpression; readonly lowerZero: KernelExpression; readonly resultLaw: KernelExpression;
-}) {
+}
+export function algebraFormalFreydModelConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydConnectingObservationInput<P, C, I>
+) { return connectingObservation(input, legacyOwner); }
+
+export function algebraFormalFreydNativeConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydConnectingObservationInput<P, C, I>
+) { return connectingObservation(input, nativeOwner); }
+
+function connectingObservation<P extends AlgebraParent, C extends AlgebraElement<P>, I,
+    Profile extends { readonly revision: string }>(input: AlgebraFormalFreydConnectingObservationInput<P, C, I>, owner: ConnectingOwner<Profile>) {
     const prepared = input.prepared, s = input.source.realization, t = input.target.realization;
     if (input.rows.length !== 4 || input.squares.length !== 3) throw new Error('Four rows and three row maps are required');
     const currentInputs = () => {
+        if (input.source.profile.revision !== owner.pointProfile || input.target.profile.revision !== owner.pointProfile) {
+            throw new Error('Connecting requires matching native or legacy point observation profiles');
+        }
         assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
         input.source.adapter.normalizeRealization(s, 'modelConnecting.source');
         input.target.adapter.normalizeRealization(t, 'modelConnecting.target');
@@ -171,9 +245,9 @@ export function algebraFormalFreydModelConnectingObservationBundle<P extends Alg
         }
     };
     currentInputs();
-    const context = modelContext(input.environment, prepared.reifier.formalRing, s.formalModel);
+    const context = modelContext(input.environment, prepared.reifier.formalRing, s.formalModel, owner);
     const checker = createCoreProofChecker(input.environment);
-    checker.check(checker.rootContext, input.normality, algebraFormalFreydModelNormalityType(prepared.reifier.formalRing, context.model));
+    checker.check(checker.rootContext, input.normality, owner.normalityType(prepared.reifier.formalRing, context.model));
     const rowTerms = Object.freeze(prepared.rowPairs.map((row, i) => algebraFormalFreydChainPairTerm(row,
         input.rows[i].above, input.rows[i].below, input.rows[i].chain)));
     const components = [[input.vertical.am, input.vertical.bm, s.inputLaws.above],
@@ -199,7 +273,7 @@ export function algebraFormalFreydModelConnectingObservationBundle<P extends Alg
         [values.a0, t.pair.above], [values.a1, t.pair.below]]) {
         if (!kernelExpressionEquals(actual, expected)) throw new Error('Connecting input changed an original H chain term');
     }
-    const formalArrow = algebraFormalFreydModelConnectingObservationTerm(values);
+    const formalArrow = owner.connectingTerm(values);
     const b = new CoreLfScopedBuilder(provenance('derived', 'retained complete connecting arrow')), L = formalFreydSpineLanguage(b);
     const R = b.embed(prepared.reifier.formalRing), resultMap = algebraFormalFreydMorphismTerm(prepared.result, input.resultLaw);
     const nativeArrow = b.lower(L.call('bridge_freyd_raw_arrow_observation',
@@ -212,7 +286,7 @@ export function algebraFormalFreydModelConnectingObservationBundle<P extends Alg
     const formalData = serialize(), current = () => { currentInputs(); if (serialize() !== formalData) throw new Error('Changed connecting observation'); };
     const realization = Object.freeze({ prepared, source: s, target: t, rowTerms, rowMaps, values: Object.freeze(values),
         formalArrow, nativeArrow, observationType, claimType, formalData });
-    return retainedInterpretation('proof-cas.freyd-model/' + stable(s.modelId) + '/connecting/' + stable(input.observationId),
+    return retainedInterpretation(owner.profile, owner.operationPrefix + stable(s.modelId) + '/connecting/' + stable(input.observationId),
         realization, prepared.selected, prepared.selectedData, current, context.check,
         'explicitly interpret the original whole δ at the retained H endpoints using the selected categorical comparisons; no H or connecting computation is reselected');
 }

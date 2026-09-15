@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — native context, H and complete-arrow realization qualified at their recorded consumers; native δ/exactness and whole-diagram coherence next; legacy comparisons and auxiliary normalization deferred
+Status: active — native H/map and middle-window δ realization qualified; endpoint-window, native exactness and whole-diagram qualification remain; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -332,6 +332,84 @@ model/row contracts, followed by the complete bounded native diagram and
 its coherence/qualification. Continue to retain the original CAS choices
 and derived native output theorem. The one-arrow agreement does not close
 the remaining whole-diagram coherence requirement.
+
+## NUH-5N2C: Native Whole δ Realization — Middle Window Qualified
+
+Use `freyd_raw_native_window_connecting_at` directly with the native model
+and native normality. Its H endpoints are already the direct native inputs.
+A defined terminal-index alias of `FreydRawNativeRowShortExact` will expose
+the original whole P/Q row contract to the concrete frontend, and a complete
+LaxArrow observation will retain δ and both endpoints. The original whole
+connecting transformation remains the owner. No legacy H comparison or
+ordinary kernel/cokernel record is a prerequisite.
+
+Reuse the original selected connecting window and its matrix preparations.
+The native workflow must automatically form raw H inputs, rows and row maps,
+adopting the native row-interpretation contracts explicitly and one complete
+δ realization. It must not require separately adopted H-point agreements,
+reselect universals, replay H/δ, or assume output exactness. The middle nonzero
+window of the original two-term nonsplit example is the initial consumer;
+both endpoint windows and complete bounded/coherence qualification remain
+required. Preserve the later snake/LES sign comparison rather than treating
+an explicit δ interpretation as a derivation of that comparison.
+
+The [direct native δ observation](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp)
+now supplies those two definitions. Its five reviewer checks establish the
+exact native row predicate, native H endpoints, arrow type and application
+of the original `freyd_raw_native_window_connecting_at`. No primitive or
+rewrite/unification rule was added. The whole transformation and existing
+native column-input comparisons remain the semantic owners.
+
+The [native connecting mirrors](../src/v3_2/algebra_formal_freyd_native_connecting_signatures.ts)
+use the same exact 47-argument signature shape as the compatibility interface,
+with native M/N and row classifiers. The native context advances to profile
+v4. Row/δ adapters share the existing lossless payload transport and current-
+data checks, with distinct native models, point profiles, row/observer names
+and operation IDs. No legacy model type is present in the native environment.
+
+The [native δ workflow](../src/v3_2/algebra_formal_freyd_native_connecting_workflow.ts)
+automatically wraps the original two CAS H selections, forms raw inputs,
+prepares four rows and three row maps, and computes/reuses their matrix
+facts. It records native row-shortness interpretations and one complete δ
+agreement; it does not adopt independent point-realization or output-exactness
+claims. The reused matrix preparation now has a shared chain operation as
+well as its original morphism/point operations.
+
+The middle nonzero window of the original two-term nonsplit sequence passes
+four native tests in 81.69s under the default 90s guard. The first realization
+reuses 23 claims and adds eleven computed equations plus three interpretation
+claims: two distinct native row predicates cover the four rows, and the last
+claim interprets the complete δ. The result has 66 computed equations and
+three supplied-model interpretations. Repeating the call reuses all 37
+requests without a new decision or source change. Wrong normality, mixed or
+legacy model profiles, forged preparations and raw chain-zero evidence used
+as row shortness are rejected. H, δ and universal algorithms are not replayed
+or reselected during realization.
+
+The emitted native δ passes three Lambdapi assertions. Nine native context/H
+regressions pass in 55.25s, four native complete-arrow regressions in 30.74s,
+and four legacy connecting regressions in 39.54s. Each group runs separately
+under the 90s guard. Focused TypeScript compilation and lint pass. All five
+emitted regression probes pass: the legacy connecting interface/consumer
+(nine assertions), native inputs/H/map (ten), and the native complete arrow
+(three). With the five new owner assertions and three native δ assertions,
+this qualifies 30 affected formal assertions. Catalog, static health and
+source TOC checks pass; no repository aggregate or deferred probe ran.
+Complete bounded/native-exactness qualification is still separate.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2c_types.txt`, `nuh5n2c_lint.txt`,
+`nuh5n2c_native_owner.txt`, `nuh5n2c_native_tests.txt`,
+`nuh5n2c_delta_conformance.txt`, `nuh5n2c_context_regression.txt`,
+`nuh5n2c_map_regression.txt`, `nuh5n2c_legacy_tests.txt` and
+`nuh5n2c_regression_conformance.txt`. The native δ artifact is
+`nuh5n2c_native_delta.lp` (313,277 bytes); its full log is
+`logs/probes/nuh5n2c_native_delta-20260915-014244.log`.
+
+**Next:** qualify both zero endpoint windows and the native exactness
+consumer, assemble/realize the complete bounded diagram, and establish its
+required coherence. The later snake/LES sign comparison remains required.
+Do not treat the explicit middle-window δ agreement as a proof of that
+comparison or of whole-diagram coherence.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

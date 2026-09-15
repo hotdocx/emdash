@@ -2444,6 +2444,16 @@ arrow agreement, including both endpoints; it does not need separate point
 agreements or caller-written naturality proofs. This is explicit selected
 model interpretation and does not yet establish whole-diagram coherence.
 
+The direct row spelling `FreydAdjunctionModelRowShortExact(M,e,d,chain)` is
+an alias of the existing `FreydRawNativeRowShortExact` at Terminal.
+`freyd_adjunction_model_connecting_observation(M,N,…)` packages application
+of `freyd_raw_native_window_connecting_at` in that same LaxArrow carrier,
+with direct native H endpoints. Its remaining arguments preserve the
+original four rows, three maps and chain data; native whole δ stays the
+owner. These two definitions add no primitive or computation/comparison
+rule. Their TypeScript interpretation keeps row semantics and the δ
+agreement explicit, distinct from the computed matrix equations.
+
 `FreydHomologyModel(R)` packages the older supplied coherent inputs;
 `freyd_homology_model_func(M)` is their original whole H. The readable
 `freyd_homology_model_object(M,e,d,chain)` is ordinary application of that H

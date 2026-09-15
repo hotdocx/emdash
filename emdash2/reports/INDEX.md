@@ -18,8 +18,11 @@ The direct TypeScript native-model workflow now automates matrix prerequisites
 for an explicitly classified CAS H-realization claim. The
 [complete-arrow observer](../emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp)
 and its automated realization now cover a nonzero/nonidentity x map with one
-agreement including both endpoints. Native δ/exactness and whole-diagram
-coherence remain in the living plan; no old-model comparison
+agreement including both endpoints. The
+[direct native δ observer](../emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp)
+uses the original whole operation and row predicates without legacy H
+comparisons. Native exactness and whole-diagram coherence remain in the
+living plan; no old-model comparison
 is a prerequisite and no output exactness is assumed.
 
 NUH-5B2d2b (2026-09-14, checkpoint `0caa19d0`): complete retained bounded

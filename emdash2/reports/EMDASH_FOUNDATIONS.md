@@ -5053,8 +5053,13 @@ the two native H endpoints and the actual H map in the existing LaxArrow
 carrier, and records one agreement with the selected CAS arrow. It prepares
 matrix inputs automatically and requires no independent point-realization
 claims. Multiplication by x in the nonsplit sequence is a nonzero/nonidentity
-consumer. Native δ/exactness realization and coherence across the complete
-bounded diagram remain the next integration boundary.
+consumer. The direct native δ observer now uses the original raw-window
+connecting operation and native H endpoints. Its row-shortness inputs are
+the original whole P/Q predicates, specialized to the concrete terminal
+index. The CAS workflow keeps those row interpretations explicit and records
+one complete δ agreement, with automatic matrix preparation and no separate
+point agreements. Native exactness realization and coherence across the
+complete bounded diagram remain the next integration boundary.
 
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not

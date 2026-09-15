@@ -115,8 +115,12 @@ claim. Three semantic definitions add no primitive or rewrite/unification
 rule. NUH-5N2B now qualifies one complete native H-arrow realization using
 the existing LaxArrow carrier, shared with the old workflow. Its matrix
 prerequisites are automatic and it needs no independent point-realization
-claims. Native δ/exactness and the complete bounded diagram remain NUH-5N2;
-neither a point nor a single-arrow agreement establishes whole coherence.
+claims. NUH-5N2C now qualifies the direct native δ realization for the middle
+nonzero window, with explicit native whole-row contracts and automatic matrix
+inputs. Its two observation definitions add no primitive or rule. The zero
+endpoint windows, native exactness and complete bounded diagram remain
+NUH-5N2; neither a point nor a single-arrow agreement establishes whole
+coherence or the later snake/LES sign comparison.
 
 Use this order:
 
