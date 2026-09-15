@@ -108,8 +108,12 @@ NUH-5N1 qualification (2026-09-15): TypeScript now has exact private mirrors
 and a direct `FreydAdjunctionModel`/native-normality context, sharing the
 original CAS inventories with the legacy context. Native equation adoption
 and raw witnesses pass without a legacy model declaration. This does not yet
-realize native H/maps/δ on the computed outputs; that and the native exactness
-consumers remain NUH-5N2. No active Lambdapi owner or runtime rule changed.
+realize native H/maps/δ on the computed outputs. The subsequent NUH-5N2A
+slice now qualifies native H/map application views and a first direct CAS H
+realization, with automatic matrix prerequisites and an explicit interpretation
+claim. Three semantic definitions add no primitive or rewrite/unification
+rule. Complete-arrow, δ and exactness realization with coherent contracts
+remain NUH-5N2; a point agreement does not itself establish whole coherence.
 
 Use this order:
 

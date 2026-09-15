@@ -85,9 +85,22 @@ is a separate supplied capability over the actual whole Coim⇒Im. The
 and [exactness](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp)
 specializations inherit the original whole row-family interface and selected
 inverses. Twelve definitions add no primitive or new computation/comparison
-rule. Concrete raw-window assembly and migration of retained TypeScript
-observations remain required; this is not a closed model construction or
+rule. Concrete raw-window assembly and the retained TypeScript observation
+workflow are now available; this is not a closed model construction or
 a derivation of whole normality from the old pointwise capabilities.
+
+Direct native observations (2026-09-15): the
+[model observation module](../emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp)
+defines `freyd_adjunction_model_object` by application of the existing whole
+H to the original native raw input. `freyd_adjunction_model_map_func`
+specializes the existing raw-map functor to M's P/Q; its application is
+`freyd_adjunction_model_map`. These three definitions retain the whole Hom
+action and add no primitive, rewrite or unification rule. They require no
+ordinary H record, legacy model or normality enhancement. The TypeScript
+native context mirrors the object/map observations; its realization workflow
+automates matrix prerequisites and records the separate supplied-model/CAS
+agreement explicitly. Native complete-arrow/δ/exactness realization remains
+in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Reconstruction review (2026-09-13): retain the ordinary reconstruction law as
 a whole instance of the existing DefIso notion. Generic projections and

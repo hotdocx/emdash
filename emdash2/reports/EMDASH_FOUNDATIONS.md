@@ -5036,8 +5036,20 @@ selected inverses retained. The older `FreydHomologyModel` adapts to this
 context without changing its whole H, native inputs or Hom action; its
 pointwise normality does not automatically provide the new whole contract.
 Raw-window assembly, retained column comparisons and native connecting
-observation are available. Complete bounded adoption remains further work.
+observation are available. Complete bounded retained adoption is qualified;
+direct native realization is the current integration task.
 Neither model context is a closed model constructor.
+
+The direct native model now has readable H and map observations. The H value
+is application of its existing whole functor to the original raw input;
+the map is application of the existing internal raw-map functor specialized
+to the model's P/Q. Hom action remains available before any CAS realization.
+At the CAS boundary, the direct native workflow prepares matrix proofs
+automatically and records agreement with the computed H presentation as
+explicit model interpretation. This agreement is supplied semantics, not a
+theorem about an arbitrary native model. It needs no old formal H object or
+ordinary selected-provider proof. Complete native arrow/δ/exactness
+realization is the next integration boundary.
 
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not

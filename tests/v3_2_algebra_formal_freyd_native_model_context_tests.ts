@@ -9,6 +9,7 @@ import { kernelFree, kernelExpressionEquals, binderMode, provenance, sourceSpan 
 import { coreProofPlanHole } from '../src/v3_2/proof_plan';
 import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
 import { createCoreProofChecker } from '../src/v3_2/proof_checker';
+import { isCoreKind } from '../src/v3_2/checker';
 import { runAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 import { trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_freyd_long_exact';
 import { constructAlgebraFormalFreydRawWitnesses, FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_raw_witnesses';
@@ -28,6 +29,13 @@ import { FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_forma
 import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
 import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
 import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
+import { FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_model_observation_signatures';
+import { algebraFormalFreydNativeModelHomologyObservationBundle, algebraFormalFreydModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
+import { trustAlgebraFormalFreydNativeHomologyPoint } from '../src/v3_2/algebra_formal_freyd_native_homology_workflow';
+import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
+import { serializeCoreExpression } from '../src/v3_2/core_serialization';
+import { CoreLfScopedBuilder } from '../src/v3_2/lf_builder';
+import { formalFreydSpineLanguage } from '../src/v3_2/algebra_formal_freyd_spine_signatures';
 import * as nativeHomology from '../src/v3_2/algebra_polynomial_freyd_homology';
 import * as nativeConnecting from '../src/v3_2/algebra_polynomial_freyd_homology_connecting';
 import * as nativeWindow from '../src/v3_2/algebra_polynomial_freyd_homology_window';
@@ -56,6 +64,45 @@ let prepared: ReturnType<typeof prepareAlgebraFormalFreydNativeRationalModelCont
 const context = () => prepared ??= prepareAlgebraFormalFreydNativeRationalModelContext({
     backend, selected: selection(), namePrefix: 'native_context'
 });
+
+const adoptEquations = async () => {
+    const v = context(), goalId = 'native-context-replay', target = v.bundle.realization.claimType;
+    const run = await runAlgebraFormalWorkflow({ document: {
+        moduleId: v.initialSource.moduleId, declarationId: goalId, environment: v.environment, type: target,
+        plan: coreProofPlanHole(goalId, { provenance: p, expectation: { contextDepth: 0, target } }),
+        provenance: p, fingerprint: fingerprint(goalId)
+    }, goalId, adapter: v.bundle.adapter, realization: v.bundle.realization, engine: v.bundle.engine });
+    const adopted = await trustAlgebraFormalFreydLongExact({ artifactId: 'native-context-equations', bundle: v.bundle,
+        run, source: v.initialSource, fingerprint, decisionEvidence: id => 'Explicitly adopt original CAS equation ' + id });
+    return { v, adopted };
+};
+let adoptedEquations: ReturnType<typeof adoptEquations>;
+const equationConsumer = () => adoptedEquations ??= adoptEquations();
+const observeNative = async () => {
+    const { v, adopted } = await equationConsumer();
+    const actual = v.preparedModel.inventory.points.find(x => x.key === 'degree/1/C')!.actual;
+    const result = await trustAlgebraFormalFreydNativeHomologyPoint({ artifactId: 'native-model-H',
+        modelId: 'native-rational-model', observationId: 'degree/1/C', formalModel: v.formalModel,
+        actual, source: adopted.source, fingerprint,
+        decisionEvidence: id => 'Explicit native model realization or computed matrix equation: ' + id });
+    return { v, adopted, result, input: result.observationInput, bundle: result.observation, source: result.source };
+};
+let nativeObservation: ReturnType<typeof observeNative>;
+const nativeConsumer = () => nativeObservation ??= observeNative();
+
+const nativeProbe = (environment: Parameters<typeof serializeCoreLfKernelProbe>[0]['environment'],
+    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) =>
+    serializeCoreLfKernelProbe({ environment, externalFreeReferences: { ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
+                ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
+                ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
+                ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
+                ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS,
+                ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS }, assertions }).source.replace(
+        'require open emdash.emdash3_2;',
+        'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
+        'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
+        'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_normality;\n' +
+        'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_observations;');
 
 describe('v3.2 direct native Freyd model context', () => {
     it('prepares native inputs without model adaptation, CAS recomputation or adoption', () => {
@@ -152,18 +199,8 @@ describe('v3.2 direct native Freyd model context', () => {
     it('emits the actual native model input owners for Lambdapi conformance', () => {
         const v = context();
         const terms = [v.formalRing, ...v.generatorTerms, ...v.coefficients.map(c => c.term), v.formalModel, v.normality];
-        const probe = serializeCoreLfKernelProbe({ environment: v.environment,
-            externalFreeReferences: { ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
-                ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
-                ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS },
-            assertions: terms.map(term => ({ label: term.name, term, type: v.environment.lookup(term.name)!.type, span: p.span! }))
-        });
-        const source = probe.source.replace('require open emdash.emdash3_2;',
-            'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
-            'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
-            'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_normality;');
+        const source = nativeProbe(v.environment,
+            terms.map(term => ({ label: term.name, term, type: v.environment.lookup(term.name)!.type, span: p.span! })));
         assert.match(source, /FreydAdjunctionModel/u);
         assert.match(source, /FreydAdjunctionModelNormality/u);
         assert.doesNotMatch(source, /FreydHomologyModel|freyd_homology_model/u);
@@ -173,14 +210,7 @@ describe('v3.2 direct native Freyd model context', () => {
     });
 
     it('replays and adopts the selected CAS equations directly in the native context', async t => {
-        const v = context(), goalId = 'native-context-replay', target = v.bundle.realization.claimType;
-        const run = await runAlgebraFormalWorkflow({ document: {
-            moduleId: v.initialSource.moduleId, declarationId: goalId, environment: v.environment, type: target,
-            plan: coreProofPlanHole(goalId, { provenance: p, expectation: { contextDepth: 0, target } }),
-            provenance: p, fingerprint: fingerprint(goalId)
-        }, goalId, adapter: v.bundle.adapter, realization: v.bundle.realization, engine: v.bundle.engine });
-        const adopted = await trustAlgebraFormalFreydLongExact({ artifactId: 'native-context-equations', bundle: v.bundle,
-            run, source: v.initialSource, fingerprint, decisionEvidence: id => 'Explicitly adopt original CAS equation ' + id });
+        const { v, adopted } = await equationConsumer();
         assert.equal(adopted.adoption.execution.state.status, 'complete');
         assert.equal(adopted.source.entries.length, v.bundle.equations.claims.length);
         assert.equal(adopted.bindings.flatMap(x => x.labels).length, v.bundle.equations.entries.length);
@@ -193,5 +223,107 @@ describe('v3.2 direct native Freyd model context', () => {
         assert.equal(v.initialSource.entries.length, 0);
         t.diagnostic(adopted.source.entries.length + ' computed equations; ' + adopted.bindings.flatMap(x => x.labels).length +
             ' original labels; no model realization or output exactness assumed');
+    });
+
+    it('realizes native whole H on the selected CAS result without old model or provider adoption', async () => {
+        await equationConsumer();
+        const forbid = () => { throw new Error('Native observation must reuse the existing CAS homology and universals'); };
+        const spies = [mock.method(nativeHomology, 'algebraPolynomialFreydHomologyAt', forbid),
+            mock.method(weakKernel, 'algebraPolynomialModuleMapWeakKernel', forbid),
+            mock.method(weakPullback, 'algebraPolynomialModuleMapWeakPullback', forbid)];
+        try {
+            const { v, adopted, input, bundle, result, source } = await nativeConsumer();
+            assert.equal(bundle.realization.actual.selected, v.selected.result.degrees[2].C.homology);
+            assert.equal(bundle.profile.requiresLegacyModel, false);
+            assert.equal(bundle.profile.constructsModel, false);
+            assert.equal(source.entries.length, adopted.source.entries.length + result.counts.computedEquations + 1);
+            assert.equal(result.counts.interpretationClaims, 1);
+            assert.equal(result.counts.homologyReplays, 0);
+            assert.equal(result.counts.universalReselections, 0);
+            assert.ok(source.entries.slice(0, -1).every(e => e.classification === 'computed-equation'));
+            assert.equal(source.entries.at(-1)!.classification, 'trusted-presentation-semantics');
+            assert.equal(source.environment.lookup('bridge_FreydHomologyModel'), undefined);
+            const checker = createCoreProofChecker(source.environment);
+            checker.check(checker.rootContext, bundle.realization.formalPoint, bundle.realization.pointType);
+            checker.check(checker.rootContext, source.entries.at(-1)!.reference, bundle.realization.claimType);
+            assert.match(serializeCoreExpression(bundle.realization.formalPoint), /bridge_freyd_adjunction_model_object/u);
+            const sourceText = nativeProbe(source.environment, [
+                { label: 'native whole H observation', term: bundle.realization.formalPoint, type: bundle.realization.pointType, span: p.span! },
+                { label: 'original CAS H presentation', term: bundle.realization.nativePoint, type: bundle.realization.pointType, span: p.span! },
+                { label: 'explicit native model realization', term: source.entries.at(-1)!.reference, type: bundle.realization.claimType, span: p.span! }
+            ]);
+            assert.doesNotMatch(sourceText, /FreydHomologyModel|freyd_homology_model/u);
+            if (process.env.EMDASH_PROOF_CAS_NATIVE_H_PROBE_OUTPUT) {
+                writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_H_PROBE_OUTPUT, sourceText);
+            }
+            spies.forEach(spy => assert.equal(spy.mock.callCount(), 0));
+        } finally { spies.forEach(spy => spy.mock.restore()); }
+    });
+
+    it('rejects legacy observations, foreign native queries and forged realization data', async () => {
+        const { input, bundle } = await nativeConsumer();
+        assert.throws(() => algebraFormalFreydModelHomologyObservationBundle(input), /Missing or changed model signature/iu);
+        assert.throws(() => bundle.adapter.normalizeRealization({ ...bundle.realization }, 'test'), /Foreign/iu);
+        assert.throws(() => algebraFormalFreydNativeModelHomologyObservationBundle({ ...input,
+            actual: { ...input.actual, formalData: 'changed' } }), /Stale/iu);
+        const otherM = kernelFree('other_native_query', p);
+        const environment = input.environment.extend({ name: otherM.name,
+            type: algebraFormalFreydNativeModelType(input.actual.reifier.formalRing), mode: binderMode('explicit', 'functorial'), provenance: p });
+        const other = algebraFormalFreydNativeModelHomologyObservationBundle({ ...input, environment, formalModel: otherM });
+        const goalId = 'foreign-native-query', target = other.realization.claimType;
+        const goal = defineAlgebraFormalComputationGoal({ goalId, document: {
+            moduleId: 'proof.cas.native-foreign', declarationId: goalId, environment, type: target,
+            plan: coreProofPlanHole(goalId, { provenance: p, expectation: { contextDepth: 0, target } }),
+            provenance: p, fingerprint: fingerprint(goalId)
+        } });
+        assert.throws(() => bundle.adapter.acquire(goal, bundle.realization), /exact model point/iu);
+        await assert.rejects(trustAlgebraFormalFreydNativeHomologyPoint({ artifactId: 'native-reject',
+            modelId: input.modelId, observationId: input.observationId, formalModel: context().normality,
+            actual: input.actual, source: (await nativeConsumer()).source, fingerprint,
+            decisionEvidence: () => { assert.fail('Reject an incorrectly typed model before any adoption'); } }));
+    });
+
+    it('reuses the checked native H realization and matrix prerequisites without another decision', async () => {
+        const { input, source } = await nativeConsumer();
+        const again = await trustAlgebraFormalFreydNativeHomologyPoint({ artifactId: 'native-reuse',
+            modelId: input.modelId, observationId: input.observationId, formalModel: input.formalModel,
+            actual: input.actual, source, fingerprint,
+            decisionEvidence: () => { assert.fail('The four existing claims must be reused'); } });
+        assert.equal(again.source, source);
+        assert.equal(again.counts.reused, 4);
+        assert.equal(again.counts.newAssumptions, 0);
+        assert.equal(again.counts.computedEquations, 0);
+        assert.equal(again.counts.interpretationClaims, 0);
+    });
+
+    it('checks the native induced-map signature at the original H endpoints', () => {
+        const v = context();
+        let environment = v.environment;
+        const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b), R = b.embed(v.formalRing);
+        const declare = (name: string, type: Parameters<typeof b.lower>[0]) => {
+            const term = b.free('native_map_' + name);
+            environment = environment.extend({ name: 'native_map_' + name, type: b.lower(type),
+                mode: binderMode('explicit', 'functorial'), provenance: p });
+            return term;
+        };
+        const objects = ['S2', 'S1', 'S0', 'T2', 'T1', 'T0'].map(name => declare(name, L.presentationType(R)));
+        const maps = [['sdNext', 0, 1], ['sd', 1, 2], ['tdNext', 3, 4], ['td', 4, 5],
+            ['f2', 0, 3], ['f1', 1, 4], ['f0', 2, 5]].map(([name, i, j]) =>
+            declare(String(name), L.morphismType(R, objects[Number(i)], objects[Number(j)])));
+        const chainS = declare('chainS', L.chainType(R, objects[0], objects[1], objects[2], maps[0], maps[1]));
+        const chainT = declare('chainT', L.chainType(R, objects[3], objects[4], objects[5], maps[2], maps[3]));
+        const m = declare('m', L.tau(L.call('bridge_CommRingFreydHomologyChainMap', [R, ...objects, ...maps], 7)));
+        const term = b.lower(b.call(b.free('bridge_freyd_adjunction_model_map'),
+            [R, b.embed(v.formalModel), ...objects, ...maps, chainS, chainT, m].map((value, i) => ({ value,
+                plicity: (i === 0 || (i >= 2 && i < 15) ? 'implicit' : 'explicit') as 'implicit' | 'explicit' }))));
+        const checker = createCoreProofChecker(environment);
+        const { type } = checker.infer(checker.rootContext, term);
+        if (isCoreKind(type)) throw new Error('A native H map must have an ordinary Core type');
+        assert.match(serializeCoreExpression(type), /bridge_freyd_adjunction_model_object/u);
+        const source = nativeProbe(environment, [{ label: 'native H map', term, type, span: p.span! }]);
+        assert.doesNotMatch(source, /FreydHomologyModel|freyd_homology_model/u);
+        if (process.env.EMDASH_PROOF_CAS_NATIVE_H_MAP_PROBE_OUTPUT) {
+            writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_H_MAP_PROBE_OUTPUT, source);
+        }
     });
 });

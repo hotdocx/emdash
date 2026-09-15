@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — NUH-5N1 native context qualified; NUH-5N2 native consumers and realization next; legacy comparisons and auxiliary normalization deferred
+Status: active — native context and first direct H realization qualified; native complete-arrow/δ/exactness realization next; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -155,6 +155,96 @@ realization and row contracts, and use the already derived whole exactness
 theorems. Whole action must stay with the native functors/transformations;
 caller-supplied naturality squares and assumed output exactness are not a
 replacement. The deferred legacy comparisons and projection probes stay deferred.
+
+## NUH-5N2A: Native H And Map Realization — First H Consumer Qualified
+
+The next concrete interface is H_M(e,d,chain), defined by applying the existing
+`freyd_adjunction_model_func M` to `freyd_raw_chain_native_cone e d chain`.
+Its raw-map action specializes the existing
+`freyd_raw_chain_adjunction_homology_map_func` to the P/Q projections of M.
+Keep that internal functor as the owner; a readable map is its application,
+not a separate map choice or manually supplied naturality proof. These
+definitions require no old formal model, ordinary H record or output
+exactness premise.
+
+First qualify these native observations at their existing whole owners and
+expose exact TypeScript signature mirrors. Then let the selected CAS H
+presentation interact with that native H through an explicit realization
+claim, classified as supplied/trusted presentation semantics. Such a claim
+must not be described as a theorem for arbitrary M. Reuse model-independent
+matrix/chain preparation and the original CAS result; no old H comparison
+or selected-homology-provider adoption is a prerequisite. Whole H remains
+the formal owner even when the CAS boundary requests one concrete observation.
+
+Reject this design if the native terms require legacy W/V, replace the
+whole action, lose the original raw endpoints, or can silently reinterpret
+a legacy model as native. Required localized evidence: owner/application
+checks in Lambdapi, exact frontend conformance, original nonsplit CAS
+realization with an explicit trust boundary, and legacy observation regression
+checks if shared implementation changes. Native complete-arrow/δ realization,
+native row contracts and the whole exactness consumer remain subsequent
+NUH-5N2 requirements.
+
+The [native observation owner](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp)
+now implements those three definitions. Its five reviewer checks retain the
+original whole H application, original raw-map functor, native map action,
+literal H endpoints and Hom action. No primitive, rewrite or unification rule
+was added. Both the affected predecessor reviewer and this reviewer pass
+with warnings enabled and zero warnings.
+
+The [native signature mirrors](../src/v3_2/algebra_formal_freyd_native_model_observation_signatures.ts)
+add exact object/map observations and reuse the existing two model-independent
+raw-chain-map mirrors. The native rational context advances to profile v2.
+Legacy and native point observation adapters share the unchanged selected-data
+checking/transport implementation, with separate model types, owner names,
+operation IDs and profile revisions. Native queries cannot be mistaken for
+legacy queries.
+
+The [native H workflow](../src/v3_2/algebra_formal_freyd_native_homology_workflow.ts)
+accepts a native model, original selected H realization and source. It finds
+existing matrix proofs by their exact type, computes missing matrix facts
+through the original CAS adapters, and constructs the original raw pair and
+native H query. Callers do not assemble its proof references. The concrete
+consumer uses degree-1 C from the original nonsplit result. Its 55 previously
+adopted equations do not contain the precise semantic chain-zero formula used
+by this observation, so one additional computed equation is needed. The
+workflow computes it without replaying H or reselecting any universal.
+
+It then records exactly one `trusted-presentation-semantics` claim identifying
+this native H observation with the selected CAS presentation. This is a
+selection-specific interpretation condition on the supplied model, not a
+theorem for arbitrary P/Q and not a proof of whole realization coherence.
+There are 56 computed equations and one model interpretation in the resulting
+source; no old model, ordinary selected-provider proof, or output exactness
+assumption is introduced. Repeating the request reuses all four prerequisite/
+interpretation claims without another decision or source change.
+
+Nine native tests pass in 53.85s, including wrong-model/foreign-query/stale-data
+rejection and the map signature at actual native H endpoints. Four legacy
+H/map observation regression tests pass in 7.68s. Focused TypeScript
+compilation and lint pass. Three emitted Lambdapi files pass ten assertions:
+six native inputs, the native H/CAS presentation/explicit realization, and
+the native induced map. Together with the five owner reviewer assertions,
+these are the affected formal checks. All use the default 90s guard.
+The source-metrics registry/health report, catalog and source TOC checks are
+current; health was refreshed with `--no-check`, not a repository typecheck.
+No aggregate ran and the deferred normalization probes were not resumed.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2a_types.txt`, `nuh5n2a_lint.txt`,
+`nuh5n2a_tests.txt`, `nuh5n2a_legacy_regression.txt`,
+`nuh5n2a_native_observations.txt`, `nuh5n2a_conformance.txt`,
+`nuh5n2a_catalog.txt`, `nuh5n2a_health.txt` and `nuh5n2a_toc.txt`.
+The generated native context/H/map probes are respectively 2,052/172,465/4,341
+bytes. Full logs are `logs/probes/freyd_adjunction_model_observations-20260915-001426.log`
+and `logs/probes/nuh5n2a_native_{context,H,map}-20260915-{003403,003412,003420}.log`
+(matching context/H/map in order).
+
+**Next:** use the now-qualified native map owner for complete-arrow CAS
+realization, then the native whole δ and categorical exactness consumers
+with coherent realization and row contracts. A point agreement alone does
+not supply that coherence. Preserve the original whole operations and use
+the derived native exactness theorem; no return to the old formal diagram
+or deferred projection-normalization studies is needed for this checkpoint.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

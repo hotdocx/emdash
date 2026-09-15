@@ -1,12 +1,12 @@
 /** Direct native model inputs over the original selected rational CAS data. */
 import { affineFormalCommRingType, affineFormalRingElementType } from './algebra_formal_conformance';
 import { AlgebraFormalFreydRationalSelectedResult, prepareAlgebraFormalFreydRationalInputs } from './algebra_formal_freyd_rational_preparation';
-import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType,
-    createFormalFreydNativeModelProofEnvironment } from './algebra_formal_freyd_native_model_signatures';
+import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from './algebra_formal_freyd_native_model_signatures';
+import { createFormalFreydNativeModelObservationProofEnvironment } from './algebra_formal_freyd_native_model_observation_signatures';
 import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption_source';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-rational-freyd-context-v1' as const,
+    revision: 'emdash-formal-native-rational-freyd-context-v2' as const,
     backend: 'rational-polynomial-freyd' as const,
     modelInterface: 'supplied-whole-adjunction-model-and-native-normality' as const,
     coefficientNames: 'canonical-rational-codepoints' as const,
@@ -16,6 +16,7 @@ export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freez
     replaysWholeHomology: false as const,
     reselectsUniversals: false as const,
     requiresLegacyModel: false as const,
+    nativeHomologyObservations: true as const,
     suppliesOutputExactness: false as const,
     addsCoreOwner: false as const,
     performsIo: false as const
@@ -78,7 +79,7 @@ export function prepareAlgebraFormalFreydNativeRationalModelContext(input: {
     const element = affineFormalRingElementType(formalRing);
     const modelType = algebraFormalFreydNativeModelType(formalRing);
     const normalityType = algebraFormalFreydNativeModelNormalityType(formalRing, formalModel);
-    const environment = createFormalFreydNativeModelProofEnvironment([
+    const environment = createFormalFreydNativeModelObservationProofEnvironment([
         { name: formalRing.name, type: affineFormalCommRingType() },
         ...generatorTerms.map(term => ({ name: term.name, type: element })),
         ...coefficients.map(({ term }) => ({ name: term.name, type: element })),

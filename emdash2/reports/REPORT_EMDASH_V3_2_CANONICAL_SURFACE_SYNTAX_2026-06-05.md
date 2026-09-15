@@ -2422,7 +2422,18 @@ the original owner, and δ remains one whole transformation. Their types are
 inferred from those exact applications, without a duplicated window grammar.
 `freyd_homology_model_adjunctions` adapts the legacy context while retaining
 the identical whole H and its original native-input observations. Raw-window
-and retained TypeScript observation migration remain subsequent work.
+assembly and the retained TypeScript connecting observation are available;
+direct native complete-arrow/δ/exactness realization remains subsequent work.
+
+The direct native observation spelling is now
+`freyd_adjunction_model_object(M,e,d,chain)`, defined by applying that whole
+H to `freyd_raw_chain_native_cone(e,d,chain)`. For raw chain maps,
+`freyd_adjunction_model_map_func(M,chainS,chainT)` specializes the existing
+internal map functor, and `freyd_adjunction_model_map(M,chainS,chainT,m)` is
+its application. Raw endpoint and map arguments stay implicit. These are
+three definitions, with no new runtime or proof-time rule; the functor keeps
+Hom action. Their private TypeScript object/map mirrors support direct
+native-model realization without going through `FreydHomologyModel`.
 
 `FreydHomologyModel(R)` packages the older supplied coherent inputs;
 `freyd_homology_model_func(M)` is their original whole H. The readable

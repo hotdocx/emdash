@@ -319,8 +319,9 @@ matrices, witnesses, results and provenance; do not conflate that retention
 with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
-NUH-5N1 native context/signature preparation is qualified. Next is NUH-5N2
-native whole consumers with coherent CAS realization. Native snake/LES work and
+NUH-5N1 native context/signature preparation and the first NUH-5N2 native H
+realization are qualified. Next are complete-arrow CAS realization and native
+δ/exactness consumers with coherent realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -328,6 +329,31 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2A: Native H observations and first CAS realization — qualified 2026-09-15
+
+Three definitions expose application of the original whole H, its raw-map
+functor specialized to M's P/Q, and that functor's application. Their five
+reviewer assertions preserve original native inputs, endpoints and Hom
+action; no primitive or rule was added. Exact frontend object/map mirrors
+extend the native context to profile v2. Legacy observation transport is
+shared with distinct native owners, model type, profile and operation IDs.
+
+The new native H workflow automates reuse/computation of the three matrix
+prerequisites and the explicit selected-presentation realization. The
+nonsplit degree-1 C consumer needs one additional computed chain equation
+beyond its original 55; it adds one separately classified model-interpretation
+claim, requiring no old model or formal selected-provider proof. Reuse adds
+nothing and requests no further decision. Nine native tests pass in 53.85s;
+four legacy H/map regression tests pass in 7.68s. Focused types/lint and ten
+emitted LP assertions pass, in addition to the five owner checks. Catalog,
+static health and source TOC are current; no aggregate or deferred probe ran.
+
+This turn is **progress**. The remaining NUH-5N2 boundary is complete-arrow
+CAS realization, native whole δ and categorical exactness under coherent
+realization/row contracts. The point agreement is a selection-specific
+interpretation condition, not whole coherence or output exactness. Full
+evidence is in the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 ### NUH-5N1: Direct native model/context — qualified 2026-09-15
 

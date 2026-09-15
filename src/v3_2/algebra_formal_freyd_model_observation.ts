@@ -19,6 +19,8 @@ import { AlgebraFormalFreydActualHomologyRealization, defineAlgebraFormalFreydAc
 import { algebraFormalFreydModelType, createFormalFreydModelProofEnvironment, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
 import { serializeAlgebraPolynomialFreydHomologyAt } from './algebra_polynomial_freyd_homology_reference_operations';
 import { validateAffineFormalCoreTerm } from './algebra_formal_realization';
+import { algebraFormalFreydNativeModelType, FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_signatures';
+import { createFormalFreydNativeModelObservationProofEnvironment, FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_observation_signatures';
 
 export const ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE = Object.freeze({
     revision: 'emdash-formal-freyd-model-point-observation-v1' as const,
@@ -33,6 +35,13 @@ export const ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE = Object.freeze({
     performsIo: false as const
 });
 
+export const ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE = Object.freeze({
+    ...ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE,
+    revision: 'emdash-formal-freyd-native-model-point-observation-v1' as const,
+    inputModel: 'named-opaque-supplied-whole-adjunction-model' as const,
+    requiresLegacyModel: false as const
+});
+
 /** Prepare result coefficients before the caller freezes its formal environment. */
 export function algebraFormalFreydRetainedHomologyPresentation<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
     actual: AlgebraFormalFreydActualHomologyRealization<P, C, I>
@@ -45,7 +54,7 @@ export function algebraFormalFreydRetainedHomologyPresentation<P extends Algebra
         L.nat(object.relations.generators.length), b.embed(relations)));
 }
 
-export function algebraFormalFreydModelHomologyObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+export interface AlgebraFormalFreydModelObservationInput<P extends AlgebraParent, C extends AlgebraElement<P>, I> {
     readonly modelId: string;
     readonly observationId: string;
     readonly formalModel: KernelExpression;
@@ -54,6 +63,42 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
     readonly aboveLaw: KernelExpression;
     readonly belowLaw: KernelExpression;
     readonly chainLaw: KernelExpression;
+}
+
+/** Compatibility observation at the older selected-dictionary model. */
+export function algebraFormalFreydModelHomologyObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydModelObservationInput<P, C, I>
+) {
+    return modelHomologyObservation(input, {
+        profile: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE,
+        createEnvironment: () => createFormalFreydModelProofEnvironment([]),
+        bindings: FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS,
+        modelType: algebraFormalFreydModelType, pointOwner: 'bridge_freyd_homology_model_object',
+        operationPrefix: 'proof-cas.freyd-model/'
+    });
+}
+
+/** Explicit CAS realization of the direct native whole-H observation. */
+export function algebraFormalFreydNativeModelHomologyObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydModelObservationInput<P, C, I>
+) {
+    return modelHomologyObservation(input, {
+        profile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE,
+        createEnvironment: () => createFormalFreydNativeModelObservationProofEnvironment([]),
+        bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS },
+        modelType: algebraFormalFreydNativeModelType, pointOwner: 'bridge_freyd_adjunction_model_object',
+        operationPrefix: 'proof-cas.freyd-native-model/'
+    });
+}
+
+function modelHomologyObservation<P extends AlgebraParent, C extends AlgebraElement<P>, I,
+    Profile extends { readonly revision: string }>(input: AlgebraFormalFreydModelObservationInput<P, C, I>, owner: {
+    readonly profile: Profile;
+    readonly createEnvironment: () => CoreLfDeclarationEnvironment;
+    readonly bindings: Readonly<Record<string, string>>;
+    readonly modelType: (R: KernelExpression) => KernelExpression;
+    readonly pointOwner: string;
+    readonly operationPrefix: string;
 }) {
     if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(input.modelId)) throw new Error('A stable coherent-model interpretation ID is required');
     if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(input.observationId)) throw new Error('A stable model-observation ID is required');
@@ -63,8 +108,8 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
     // Retain exactly the checked private signatures this adapter compares,
     // not another copy of their full prerequisite environment per H point.
     const expectedOwners = (() => {
-        const environment = createFormalFreydModelProofEnvironment([]);
-        return Object.keys(FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS).map(name => environment.lookup(name)!);
+        const environment = owner.createEnvironment();
+        return Object.keys(owner.bindings).map(name => environment.lookup(name)!);
     })();
     const assertOwners = (environment: CoreLfDeclarationEnvironment) => {
         for (const expected of expectedOwners) {
@@ -80,7 +125,7 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
     const actual = defineAlgebraFormalFreydActualHomologyRealization(input.actual);
     if (actual.formalData !== input.actual.formalData) throw new Error('Stale actual homology realization');
     const checker = createCoreProofChecker(input.environment);
-    checker.check(checker.rootContext, modelReference, algebraFormalFreydModelType(actual.reifier.formalRing));
+    checker.check(checker.rootContext, modelReference, owner.modelType(actual.reifier.formalRing));
     const pair = algebraFormalFreydChainPairTerm(actual.chain, input.aboveLaw, input.belowLaw, input.chainLaw);
     checker.check(checker.rootContext, pair.term, pair.type);
 
@@ -89,7 +134,7 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
     const R = b.embed(actual.reifier.formalRing);
     const values = [R, b.embed(modelReference), ...actual.chain.presentations.map(x => b.embed(x)),
         b.embed(pair.above), b.embed(pair.below), b.embed(pair.term)];
-    const formalPoint = b.lower(b.call(b.free('bridge_freyd_homology_model_object'), values.map((value, index) => ({
+    const formalPoint = b.lower(b.call(b.free(owner.pointOwner), values.map((value, index) => ({
         value, plicity: ([0, 2, 3, 4].includes(index) ? 'implicit' : 'explicit') as 'implicit' | 'explicit'
     }))));
     const nativePoint = algebraFormalFreydRetainedHomologyPresentation(actual);
@@ -111,11 +156,11 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
             throw new AlgebraFormalDelegationError('INVALID_REALIZATION', 'freydModel.selection', 'The original homology or provider choices changed');
         }
     };
-    const realization = Object.freeze({ profileRevision: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE.revision,
+    const realization = Object.freeze({ profileRevision: owner.profile.revision,
         modelId: input.modelId, observationId: input.observationId, formalModel: modelReference, actual: input.actual, pair,
         inputLaws: Object.freeze({ above: input.aboveLaw, below: input.belowLaw, chain: input.chainLaw }),
         formalPoint, nativePoint, pointType, claimType, formalData });
-    const id = 'proof-cas.freyd-model/' + input.modelId + '/homology-point/' + input.observationId;
+    const id = owner.operationPrefix + input.modelId + '/homology-point/' + input.observationId;
     const schema = defineAlgebraRuntimeSchema<typeof actual.selected>({ id: id + '/retained-result', revision: 'v1', normalize(value) {
         if (value !== actual.selected) throw new AlgebraFormalDelegationError('INVALID_REALIZATION', 'freydModel.result', 'Expected the original retained homology result');
         current(); return actual.selected;
@@ -150,5 +195,5 @@ export function algebraFormalFreydModelHomologyObservationBundle<P extends Algeb
                 : { kind: 'observation' as const, summary: 'retained homology differs from this model binding' };
         }
     });
-    return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE, realization, adapter, engine });
+    return Object.freeze({ profile: owner.profile, realization, adapter, engine });
 }
