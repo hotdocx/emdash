@@ -4,6 +4,16 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Original right kernel comparison (2026-09-15): the
+[composite owner](../emdash3_2_one_cat_native_window_snake_right_kernels.lp)
+derives K(γ)≃K(d̄₀ᴰ) using original whole K action on native diagram maps
+and original kernel inclusion cancellation. Twenty-three definitions and
+ten actual whole consumers retain inverse data, Hom action and both
+ambient reconstruction laws without a new primitive, rule, opacity or
+normality premise. Original right H identification and positive ∂/δ
+agreement remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right quotient and γ comparison (2026-09-15): the
 [quotient owner](../emdash3_2_one_cat_native_window_snake_right_quotients.lp)
 constructs Q(a)≃Q(dₘᴰ) using original whole row/quotient descents.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — left H and right quotient/γ-diagram comparisons qualified; right kernel/H and sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — original right kernel comparison qualified; right H identification/sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,24 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D2c2: Original right kernel comparison — qualified 2026-09-15
+
+The [kernel comparison](../emdash2/emdash3_2_one_cat_native_window_snake_right_kernels.lp)
+composes K(γ)≃K(χ) and K(χ)≃K(d̄₀ᴰ). Original whole K action maps
+native diagram transformations; original inclusion cancellation proves
+the inverse laws. The paired-zero diagram maps need not be inverse on
+their targets. The composed w and its selected inverse reconstruct through
+the original φ/ψ and kernel inclusions.
+
+Twenty-three definitions and ten actual whole consumers add no primitive,
+rule, unifier, opacity or normality premise. Both selected inverses and
+their Hom action are retained. The original γ-diagram owner is the source
+of K(γ). Next construct the original H(D₀)≃K(d̄₀ᴰ) comparison using
+native normality/covers; right H, sign, general reference, concrete,
+six-term observations, displayed CAS and final qualification remain required.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records the planned original-quotient/cover descent proof.
 
 ### NUH-6D2c1: Original right quotient and γ diagram — qualified 2026-09-15
 

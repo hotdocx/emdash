@@ -214,8 +214,11 @@ Its inverse data, arbitrary whole-map consumers and existing native LES H
 endpoint qualify. NUH-6D2c1 now derives Q(a)≃Q(dₘᴰ), the original γ
 relation χ∘φ=γ with χ=⟨0,d̄₀ᴰ⟩, and its native whole diagram map.
 The inverse data, whole reconstruction and diagram endpoint actions check.
-Next compare the original right kernels and H, then the positive ∂/δ
-formulas. LES/sign comparison and NUH-5
+NUH-6D2c2 now derives K(γ)≃K(d̄₀ᴰ) through the original whole K action
+and kernel inclusion cancellation. Both selected inverse projections,
+Hom action and ambient reconstruction qualify. Next identify this kernel
+with the original right H, then compare the positive ∂/δ formulas.
+LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

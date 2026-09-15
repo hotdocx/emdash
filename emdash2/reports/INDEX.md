@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Original right kernel comparison (2026-09-15): the
+[composite owner](../emdash3_2_one_cat_native_window_snake_right_kernels.lp)
+constructs K(γ)≃K(d̄₀ᴰ) through original whole K action and inclusion
+cancellation. Twenty-three definitions and ten whole consumers retain
+both original kernels, selected inverse data, Hom action and ambient
+reconstruction without new primitives or rules. Identifying this kernel
+with the original right H and comparing ∂/δ remain next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original right quotient and γ comparison (2026-09-15): the
 [quotient owner](../emdash3_2_one_cat_native_window_snake_right_quotients.lp)
 derives Q(a)≃Q(dₘᴰ) through original whole row/quotient descents.
