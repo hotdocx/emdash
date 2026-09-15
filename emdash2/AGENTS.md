@@ -179,15 +179,16 @@ comparison from NUH-4, then finish required G3B2 pair alignment and displayed
 exactness integration before NUH-7. The living plan retains both obligations;
 this does not change the displayed-exactness flag or the Op/profile deferrals.
 
-NUH-6A and the first part of 6B now qualify the general whole snake input,
-α/γ reconstruction, E=K(γ∘π_a), the actual coimage cover/cancellation of
-ρ:E⇒K(γ), and θ:E⇒Q(α). No monic-a or epic-c hypothesis is added.
-Follow `../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md`:
-next prove θ∘κ_ρ=0 and derive whole ∂. The existing `covered_zero`
-instead proves c∘b∘j=0. Full six-term exactness, LES/sign comparison and
-NUH-5 integration remain required; do not mark any of these complete from
-the new factors/cover alone. The broader expanded/global cover reviewer
-hit 2GiB; qualified parameter-scope and pre-Abelian consumers are recorded.
+NUH-6A/6B now qualify the general whole snake input, α/γ reconstruction,
+E=K(γ∘π_a), the actual coimage cover/cancellation of ρ, and θ:E⇒Q(α).
+The original image factorization and native kernel lifts derive θ∘κ_ρ=0;
+whole descent constructs ∂:K(γ)⇒Q(α) with ∂∘ρ=θ and uniqueness.
+No monic-a, epic-c or new annihilation hypothesis is added. Follow
+`../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md`:
+next construct the surrounding whole maps, four zeros and four interior
+exactness proofs. LES/sign comparison and NUH-5 integration remain required.
+The older expanded/global cover reviewer hit 2GiB; its qualified scoped
+consumers and the new connecting consumers are recorded separately.
 
 Use this order:
 

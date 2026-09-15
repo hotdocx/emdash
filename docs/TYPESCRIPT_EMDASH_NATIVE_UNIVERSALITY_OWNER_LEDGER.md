@@ -331,6 +331,29 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6B: Derived annihilation and whole connecting ∂ — qualified 2026-09-15
+
+Original coimage quotient cancellation and fixed-comparison normality make
+s_a:A⇒Im(a) a whole cover. The image remains K on the original Q-arrow
+family; no identification with a separately reconstructed kernel is assumed.
+Native lifting gives v:Im(a)⇒K(c), and reconstruction yields v∘s_a=α.
+Cancellation derives π_α∘v=0. The original ρ square lifts j∘κ_ρ into
+this same image, and native kernel cancellation then proves θ∘κ_ρ=0.
+
+Existing whole coimage-cover descent now constructs ∂:K(γ)⇒Q(α).
+Its actual reconstruction is ∂∘ρ=θ, with uniqueness from the same
+cover. The general a,b,c scope, all original P/Q selections and the
+positive covered formula are retained. Twenty-two definitions and eleven
+reviewer assertions add no primitive, rule, unifier or output assumption.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records owner/consumer checks, diagnostics and the unsuccessful direct
+kernel-reindex presentation separately.
+
+This is **progress**. NUH-6C must construct all surrounding whole maps,
+four adjacent zeros and four interior exactness comparisons. NUH-6D/6E,
+NUH-5 displayed integration and NUH-7 remain required; the sign comparison
+is not yet supplied merely by the positive ∂ construction.
+
 ### NUH-6A / 6B first part: General native snake factors and cover — qualified 2026-09-15
 
 The [snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)

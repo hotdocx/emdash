@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: NUH-6A and the cover/covered-map part of 6B qualified; final descent next
+Status: NUH-6A/6B native connecting construction qualified; six-term maps/exactness next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -34,9 +34,8 @@ axiom, choice of inverse, global strictness rule or foundation is authorized.
 
 ## Native Construction And Sign
 
-First derive α and γ by the existing whole kernel lift and cokernel descent.
-For the connecting construction, investigate the following native descent
-using already qualified NUH-4 owners:
+The native connecting construction uses the following descent through the
+existing whole kernel/cokernel owners:
 
 1. Form E=K(γ∘π_a), retaining its inclusion E→B and the induced
    ρ:E→K(γ). The existing quotient-cokernel-zero theorem and kernel
@@ -45,9 +44,9 @@ using already qualified NUH-4 owners:
    Prove that θ kills the original kernel of ρ using whole reconstruction.
 3. Descend θ through that cover to ∂:K(γ)⇒Q(α), with ∂∘ρ=θ.
 
-These are proof obligations, not current claims of implementation. This
-route retains the general triple without requiring a new whole category of
-complexes or a conversion to old ordinary universal records.
+All three stages are implemented below. This route retains the general
+triple without requiring a new whole category of complexes or a conversion
+to old ordinary universal records.
 
 Fix the positive sign by that reconstruction. The existing CAP-style snake
 owner uses q₂∘∂∘p₁=q₁∘b∘p₂. Comparison maps must retain their original
@@ -60,8 +59,8 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | Row | State | Required outcome |
 | --- | --- | --- |
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
-| NUH-6B | E, ρ, cover/cancellation and θ qualified; annihilation/descent pending | Derive θ∘κ_ρ=0 and construct ∂ by the original whole coimage-cover descent |
-| NUH-6C | pending 6B | All six terms/five arrows, four adjacent zeros and exactness of the actual four interior comparisons |
+| NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
+| NUH-6C | next | All six terms/five arrows, four adjacent zeros and exactness of the actual four interior comparisons |
 | NUH-6D | pending 6B/6C | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
@@ -155,12 +154,71 @@ variants remain unqualified in `nuh6b_cover_reviewer_expanded.lp`,
 `emdash2/tmp/probes/`. No opacity, new assumption or memory-limit change
 was used. This does not resolve the separate concrete NUH-5 certificate join.
 
-**Next — NUH-6B:** prove θ∘κ_ρ=0 at the original kernel of ρ, then
-apply `one_cat_coimage_cover_descent` using the existing cover evidence.
-`one_cat_native_snake_covered_zero` currently proves c∘b∘j=0; it is
-not the required θ∘κ_ρ=0 statement. Do not replace the missing proof
-by an input assumption. Descent must produce the actual whole
-∂:K(γ)⇒Q(α), its reconstruction ∂∘ρ=θ and uniqueness from the
-qualified cancellation. Then construct all six terms, five arrows, four
-adjacent zeros and four interior exactness comparisons before the final
-LES/reference-snake comparison and its sign qualification.
+At checkpoint `715932c9`, θ∘κ_ρ=0 and the final descent were still
+required. They are now derived below. The earlier
+`one_cat_native_snake_covered_zero` retains its separate c∘b∘j=0 type;
+the new `one_cat_native_snake_theta_kernel_zero` supplies the final
+annihilation used by ∂.
+
+### NUH-6B Completion: Derived Annihilation And Whole ∂
+
+The [image-family owner](../emdash2/emdash3_2_one_cat_image_family_covers.lp)
+defines s_F as the original coimage quotient followed by the fixed
+Coim→Im comparison. Whole quotient cancellation and the original normality
+evidence prove cancellation through s_F. Reindexing the original kernel
+inclusion and the existing coimage factorization gives κ_Im∘s_F=f.
+
+The direct typed-reflexivity attempt comparing K(Arr(π_F)) with Im∘F
+did not finish (`nuh6b_image_reindex-20260915-075400.log`). No new fold or
+cast was introduced. The selected route instead uses the original diagram
+Arr(π)∘F, on which the existing image is already K. Its differential is
+the original family quotient by definition. Thus all later image lifts use
+the same original K and Q, with no alternate kernel selection.
+
+The [snake image owner](../emdash2/emdash3_2_one_cat_native_snake_image.lp)
+derives v:Im(a)⇒K(c) from b∘κ_Im. Whole reconstruction gives
+v∘s_a=α. Applying the original quotient π_α and cancelling s_a proves
+π_α∘v=0. This uses normality; it is not an input annihilation premise.
+
+The [kernel-annihilation owner](../emdash2/emdash3_2_one_cat_native_snake_kernel_annihilation.lp)
+uses κ_γ∘ρ=π_a∘j and ρ∘κ_ρ=0 to lift j∘κ_ρ into that same
+image. Native kernel reconstruction identifies ℓ∘κ_ρ with v followed
+by this image lift. Consequently θ∘κ_ρ=0 follows from π_α∘v=0.
+All compatibilities are derived whole paths; callers supply no additional
+naturality square, factor record or output-exactness evidence.
+
+The [connecting owner](../emdash2/emdash3_2_one_cat_native_snake_connecting.lp)
+now applies the existing `one_cat_coimage_cover_descent` to the original θ,
+its derived annihilation, and the already derived cover of ρ. This produces
+the actual whole ∂:K(γ)⇒Q(α). Existing descent reconstruction proves
+∂∘ρ=θ, and the same native cover cancellation proves uniqueness.
+The sign is fixed by this positive formula. This does not yet prove the
+comparison with the independently retained reference/LES constructions.
+
+Four owners add 22 definitions and no primitive, rewrite or unifier.
+Eleven reviewer assertions exercise image cancellation/factorization, the
+actual image/kernel compatibilities, θ∘κ_ρ=0, whole ∂, reconstruction,
+uniqueness, and a composed consumer which first builds h from arbitrary
+a,b,c and a whole triple-zero path. No monic-a or epic-c assumption enters.
+Final validation remains at 90s/2GiB per target; no TypeScript change,
+repository aggregate, checker patch or memory-limit change was made.
+Evidence is in `emdash2/tmp/probes/nuh6b_final_conformance.json`,
+`nuh6b_final_controls.json`, `nuh6b_final_warnings.json` and
+`nuh6b_final_qualification.json`, with the scoped LHS/catalog/TOC/health and
+document checks recorded there.
+
+Final owner checks take 6.44s, 11.09s, 11.01s and 10.96s; the three
+reviewers take 6.75s, 10.99s and 13.68s. All seven diagnostic inventories
+match their import controls, including locations, term heads, rule families
+and parser results: the image-family owner/reviewer retain 1,208 critical-
+pair/159 pattern reports; snake owners/reviewers retain 1,484/169. The
+source-health snapshot covers 1,247 files with checking limited to the
+affected owners and consumers.
+
+**Next — NUH-6C:** use the derived α/γ reconstruction to form the two
+whole maps of arrow diagrams α→b→γ. Apply the original K and Q to
+obtain the four surrounding transformations, keeping ∂ as the middle map.
+Construct the four adjacent-zero proofs and prove exactness at the actual
+four interior comparisons. Preserve K(α) and Q(γ); do not replace the
+general six-term theorem by its short-exact-row restriction. NUH-6D/6E,
+the separate NUH-5N2G3B2 displayed integration, and NUH-7 remain required.

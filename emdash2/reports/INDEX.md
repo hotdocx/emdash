@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+General native snake connecting transformation (2026-09-15):
+[whole ∂](../emdash3_2_one_cat_native_snake_connecting.lp) now follows from
+[derived θ∘κ_ρ=0](../emdash3_2_one_cat_native_snake_kernel_annihilation.lp)
+through the original coimage-cover descent. Reconstruction ∂∘ρ=θ and
+uniqueness are proved; all original P/Q and general-triple inputs remain.
+Twenty-two definitions and eleven assertions add no primitive or rule.
+The [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+keeps the surrounding six-term maps/exactness, LES/sign comparison and
+separate concrete displayed integration open.
+
 General native snake construction (2026-09-15): the
 [whole input](../emdash3_2_native_snake_inputs.lp),
 [α/γ factors](../emdash3_2_one_cat_native_snake_factors.lp),
@@ -10,8 +20,8 @@ General native snake construction (2026-09-15): the
 without assuming a monic or c epic. Twenty-three definitions and 20 scoped
 assertions add no primitive or rule. The
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
-keeps θ∘κ_ρ=0, whole ∂, six-term exactness and LES/sign comparison open,
-alongside the separate required NUH-5 integration.
+records the subsequent annihilation/∂ qualification above. Six-term
+exactness and LES/sign comparison remain open, alongside NUH-5 integration.
 
 Native exactness input pairs (2026-09-15): the
 [whole-input observer](../emdash3_2_zero_arrow_pair_observations.lp) and
