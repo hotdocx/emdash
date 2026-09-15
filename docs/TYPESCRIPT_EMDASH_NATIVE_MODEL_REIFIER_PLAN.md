@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — native H/map and middle-window δ realization qualified; endpoint-window, native exactness and whole-diagram qualification remain; legacy comparisons and auxiliary normalization deferred
+Status: active — native H/map and all connecting-window realizations qualified at their recorded consumers; native exactness, full H/map assembly and whole-diagram qualification remain; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -410,6 +410,76 @@ consumer, assemble/realize the complete bounded diagram, and establish its
 required coherence. The later snake/LES sign comparison remains required.
 Do not treat the explicit middle-window δ agreement as a proof of that
 comparison or of whole-diagram coherence.
+
+## NUH-5N2D: All Native Connecting Windows — Qualified
+
+Add a bounded-window driver over the original issued model-independent
+inventory and whole CAS adoption. It must verify that the adoption, selected
+result, equation inventory and prepared windows still agree, then run the
+existing native δ workflow in degree order while threading one immutable
+source and the same M/N through every window. Include both zero endpoint
+windows and the nonzero middle window. Repeated use must reuse the existing
+claims; foreign/stale preparations or a source missing the original adoption
+must fail before further decisions.
+
+This is qualification of the actual endpoint consumers, not resumption of
+the deferred auxiliary endpoint/projection proofs. The driver creates no
+new formal δ or exactness owner and does not establish whole-diagram
+coherence by itself. Full H/map assembly, native exactness and later sign/
+coherence requirements remain explicit.
+
+Reviewed resource selection: run the complete three-window/reuse test group
+with a 240s deadline, retaining the 2GiB OS guard and inherited 512MiB V8
+heap/4MiB semispace. The measured single-window group took 81.69s, including
+60.72s for setup/first realization and 13.48s for reuse. This group adds two
+more first realizations and two more reuses plus bounded-inventory checks;
+the old 90s limit is not proportional to that workload. Record the actual
+combined measurement. Compiler and individual emitted LP checks retain 90s;
+no repository aggregate is authorized by this extension.
+
+The [bounded native window driver](../src/v3_2/algebra_formal_freyd_native_connecting_windows.ts)
+now validates the original issued preparation, current whole CAS adoption,
+source membership and equation/result inventories before executing any
+window. It reads the actual replay result and interprets every original
+window in degree order with the same M/N and a single growing immutable
+source. No new mathematical owner or interpretation type is introduced.
+
+The original two-term nonsplit consumer covers degrees 0/1/2 at displayed
+positions 6/3/0. Its CAS arrows are zero/nonzero/zero respectively. Each
+formal δ and its original H endpoints are retained in the corresponding
+complete-arrow realization. The first pass reuses 91 claims and adds fifteen
+computed equations plus five interpretations: two distinct native row
+contracts and three complete δ agreements. The resulting source has 70
+computed equations and five model interpretations. A second pass reuses all
+111 requests without any new decision or source change. Foreign preparations,
+an unrelated replay, a source missing the original adoption, and wrong
+normality are rejected before further decisions.
+
+Four focused tests pass in 157.71s under the reviewed 240s limit. The first
+pass, including setup, takes 91.26s, and reuse takes 54.63s, validating the
+decision to give this combined target its own limit. No H/δ/universal
+algorithm is rerun during realization. Focused TypeScript compilation and
+lint pass. Three emitted window files each pass three Lambdapi assertions
+with warnings enabled and the ordinary 90s guard. These are actual endpoint
+consumers; the deferred auxiliary endpoint/projection studies were neither
+resumed nor resolved by this result.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2d_types.txt`, `nuh5n2d_lint.txt`,
+`nuh5n2d_tests.txt`, `nuh5n2d_conformance.txt`, and
+`nuh5n2d_windows/manifest.json`. The three LP artifacts are
+`nuh5n2d_windows/connecting_0.lp` (315,278 bytes), `connecting_1.lp`
+(374,958 bytes) and `connecting_2.lp` (402,133 bytes). Their full logs are
+`logs/probes/connecting_0-20260915-020620.log`,
+`logs/probes/connecting_1-20260915-020636.log` and
+`logs/probes/connecting_2-20260915-020653.log`. No active Lambdapi source or
+registry changed; existing catalog/health and unchanged-boundary evidence
+are carried forward. No repository aggregate ran.
+
+**Next:** expose and realize the native categorical exactness evidence,
+complete native H/map assembly alongside these windows, and qualify the
+whole bounded diagram and its coherence. The same-model/source check is a
+necessary integration invariant, not a proof of whole-diagram coherence.
+Keep the later snake/LES sign comparison and NUH-6/7 requirements intact.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

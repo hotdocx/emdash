@@ -118,9 +118,12 @@ prerequisites are automatic and it needs no independent point-realization
 claims. NUH-5N2C now qualifies the direct native δ realization for the middle
 nonzero window, with explicit native whole-row contracts and automatic matrix
 inputs. Its two observation definitions add no primitive or rule. The zero
-endpoint windows, native exactness and complete bounded diagram remain
-NUH-5N2; neither a point nor a single-arrow agreement establishes whole
-coherence or the later snake/LES sign comparison.
+endpoint windows are now qualified by NUH-5N2D in one native model/source
+alongside the middle window. Native exactness, full H/map assembly and
+whole bounded diagram/coherence remain NUH-5N2; sharing that source or
+adopting individual arrows does not establish whole coherence or the later
+snake/LES sign comparison. The combined three-window/reuse group has a
+reviewed 240s guard (measured 157.71s); individual LP checks remain at 90s.
 
 Use this order:
 

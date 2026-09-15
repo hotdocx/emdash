@@ -25,6 +25,13 @@ comparisons. Native exactness and whole-diagram coherence remain in the
 living plan; no old-model comparison
 is a prerequisite and no output exactness is assumed.
 
+All native connecting windows (2026-09-15): the bounded driver now qualifies
+both zero endpoints and the nonzero middle in the same M/N and source,
+retaining the original CAS result and all three window proofs. Four tests
+and nine emitted LP assertions pass. Native exactness, full H/map assembly,
+whole-diagram coherence and the later sign comparison remain in the living
+plan. The auxiliary endpoint/projection studies remain deferred.
+
 NUH-5B2d2b (2026-09-14, checkpoint `0caa19d0`): complete retained bounded
 model adoption and reuse are qualified for all 18 H points, eight maps and
 three native δ windows. Five focused workflow tests and all 18 emitted LP

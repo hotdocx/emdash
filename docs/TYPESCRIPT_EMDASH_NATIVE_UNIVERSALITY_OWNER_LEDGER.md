@@ -319,9 +319,9 @@ matrices, witnesses, results and provenance; do not conflate that retention
 with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
-NUH-5N1 native context/signature preparation and the first NUH-5N2 native H/
-complete-arrow/middle-window δ realizations are qualified. Next are the zero
-endpoint windows, native exactness and complete bounded diagram with coherent
+NUH-5N1 native context/signature preparation, the first native H/map and all
+connecting-window realizations are qualified. Next are native exactness,
+full H/map assembly and the complete bounded diagram with coherent
 realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
@@ -330,6 +330,29 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2D: All native connecting windows — qualified 2026-09-15
+
+The bounded driver checks the current original CAS adoption, source membership
+and prepared equation/result inventory, then interprets every window with
+one M/N and one source. Degrees 0/1/2 retain displayed positions 6/3/0 and
+zero/nonzero/zero CAS arrows. The first pass reuses 91 claims and adds fifteen
+matrix equations plus five model interpretations (two row contracts, three
+δ agreements). Reuse covers all 111 requests without further decisions.
+Foreign/stale preparations, unrelated replay, missing original adoption and
+wrong normality are rejected before any additional interpretation.
+
+Four tests pass in 157.71s with a reviewed 240s limit. The measured first
+pass takes 91.26s and reuse 54.63s; compiler and all three LP checks retain
+90s limits. Nine emitted assertions, focused types and lint pass. No active
+LP source/registry changed, no aggregate ran, and the deferred auxiliary
+endpoint/projection experiments were not resumed. Full evidence and artifact
+paths are in the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
+This turn is **progress**. Native categorical exactness, complete H/map
+assembly, whole-diagram coherence, and the later snake/LES sign comparison
+remain. Sharing M/N and the source across windows is not itself that proof
+of coherence.
 
 ### NUH-5N2C: Direct native middle-window δ realization — qualified 2026-09-15
 
