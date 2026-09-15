@@ -201,7 +201,13 @@ scoped GC profile. The larger comparison/witness view remains 6C3b in
 independent LES specialization/sign work next, while retaining that gap
 as required before final qualification. Do not resume unbounded normalization
 or assume output exactness to close it.
-LES/sign comparison and NUH-5 integration remain required.
+NUH-6D1 now qualifies the original whole four-row window as a native
+general-snake input: a=[bₘ,i₀], b=b₀, c=⟨b₁,p₁⟩, with cba=0 derived
+from the original whole row maps and column-zero laws. Input formation
+requires no P/Q, short-exactness or normality; its first native α/γ
+consumers qualify. Next construct the original native endpoint comparisons
+and compare the positive ∂/δ formulas. LES/sign comparison and NUH-5
+integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

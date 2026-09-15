@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native six-term construction/maps/inputs qualified; large comparison/witness observations retained; LES specialization next; displayed CAS alignment/transport still required
+Status: active — whole LES-to-snake input qualified; endpoint/sign comparisons next; six-term observation gap and displayed CAS alignment/transport still required
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,18 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+NUH-6D1 now constructs the whole general-snake input of the original
+four-row LES window: a=[bₘ,i₀], b=b₀, c=⟨b₁,p₁⟩. Original whole row
+reconstruction and the two middle-column zeros derive c∘b∘a=0. Nine
+transparent definitions add no primitive or rule; 18 assertions exercise
+the whole input, its retained action, original projections, recovery and
+first native α/γ consumers. Input formation requires no P/Q, row
+short-exactness or normality. Next construct the native universal endpoint
+comparisons and compare the positive ∂/δ formulas under the
+[snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+The retained 6C3b observation gap and displayed CAS exactness transport
+remain required before final qualification.
 
 Latest priority correction (2026-09-14): use the new native whole K/Q model
 directly as the proof–CAS interface. The existing `FreydAdjunctionModel`
@@ -1042,7 +1054,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | active: individual exactness, whole result construction/maps/inputs qualified; 6C3b observation gap retained; LES specialization next | Complete LES/reference/sign work and the retained comparison/witness qualification before NUH-7 |
+| NUH-6 | active: whole LES-to-snake input qualified; endpoint/sign comparisons next; 6C3b observation gap retained | Complete LES/reference/sign work and the retained comparison/witness qualification before NUH-7 |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 

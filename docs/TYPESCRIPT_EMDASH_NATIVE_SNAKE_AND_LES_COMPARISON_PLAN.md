@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: individual proofs and six-term construction/maps/native inputs qualified; comparison/witness observation gap retained; LES specialization next
+Status: whole LES-to-snake input qualified; endpoint/sign comparisons next; six-term comparison/witness observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | next, independent of the 6C3b observation check | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: whole window-to-triple input qualified; endpoint/sign comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -722,12 +722,98 @@ progressing independent skeleton/mathematics and returning later to these
 gaps. Advance NUH-6D using the qualified whole maps, individual exactness
 proofs and ∂ρ=θ; this observation check is not its prerequisite.
 
-The initial LES-specialization candidate takes the four-row window
-Bm→B0→B1→B2 and forms a=[bm,i0]:Bm⊕A0⇒B0, b=b0, and
+The initial LES-specialization candidate took the four-row window
+Bm→B0→B1→B2 and formed a=[bm,i0]:Bm⊕A0⇒B0, b=b0, and
 c=⟨b1,p1⟩:B1⇒B2⊕D1. Existing whole product/coproduct operations,
 the two middle-column zero pairs and row-map reconstruction should derive
 cba=0. Native universal comparisons should then identify K(γ) with upper
 right H and Q(α) with lower left H, retaining the original selections.
 Compare ∂ρ=θ with the native δ reconstruction to fix the sign. This candidate
-still requires owner-level review and typed consumers; it is not implemented
-or a completed sign comparison.
+now has its input implementation and typed consumers in 6D1 below. The
+endpoint and sign comparisons remain required.
+
+### NUH-6D1: Whole Window-To-Triple Input
+
+The reviewed hypothesis constructs a and c through the existing whole
+copairing/pairing mates, deriving c∘b∘a=0 from the original middle-column
+zeros, native row-map reconstruction and row annihilation. Input formation
+must require neither P/Q nor normality or short-exactness evidence. New
+caller naturality squares or replacement row maps reject that interface.
+
+Two supporting whole laws, ⟨0,0⟩=0 and [0,0]=0, follow from the existing
+mate distribution and zero-absorption laws. Qualification checks the whole
+triple/input, recovery of a, original components and retained action.
+Endpoint universal comparisons and the ∂/δ sign comparison remain later
+obligations of 6D.
+
+Continuation baseline: `6b675237`, all 62 worktrees clean, baseline
+`cbef77e7` an ancestor. The native window connecting owner passes with
+`OCAMLRUNPARAM=o=20` under 90s/2GiB, warnings enabled, in
+`emdash2/logs/probes/emdash3_2_one_cat_native_homology_window_connecting-20260915-114906.log`.
+
+The [whole zero-law owner](../emdash2/emdash3_2_one_cat_biproduct_family_zeros.lp)
+now derives both mate-zero laws and preservation of a common annihilator.
+The [window input owner](../emdash2/emdash3_2_one_cat_native_window_snake_inputs.lp)
+constructs a=[bₘ,i₀] and c=⟨b₁,p₁⟩ and proves c∘b₀∘a=0. Its two
+projections follow these whole calculations:
+
+```text
+b₁∘(b₀∘a) = (b₁∘b₀)∘a = 0;
+p₁∘(b₀∘a) = [p₁∘b₀∘bₘ, p₁∘b₀∘i₀] = [0,0] = 0,
+where p₁∘b₀∘i₀ = p₁∘i₁∘a₀ = 0.
+```
+
+Here a₀ is the original left-column action of m₀. Its square is derived by
+the existing whole row-map owner; no new square is an input. The native
+snake input and its incoming recovery use that actual whole zero proof.
+The five window definitions select no K/Q and require neither row
+short-exactness nor normality. The supporting four definitions use the
+existing whole mate distribution and zero absorption. All nine definitions
+are transparent; no primitive, rewrite, unifier or opacity is added.
+
+Three focused reviewers cover 18 assertions: the four whole zero laws,
+rejection of an unsupported annihilation, the whole maps/input/recovery,
+both outgoing projections, retained arbitrary-base Hom action, and the
+actual native α/γ and their component observations at this input. This
+qualifies input formation and its first P/Q consumer, not the homology
+endpoint comparisons or agreement of ∂ and δ.
+
+Both owners and all three reviewers pass under 90s/2GiB with
+`OCAMLRUNPARAM=o=20,v=1024`; measured times are 13.516s, 13.692s,
+12.864s, 14.054s and 16.023s. The actual α/γ reviewer also passes in
+10.267s with both GC environment variables unset, so these new files need
+no special runner profile. All five warning inventories match their exact
+import controls: 1,451 critical-pair and 169 replaceable-pattern reports,
+with matching locations, heads and rule families, and no inventory parser
+issues after stripping ANSI formatting. The first raw-ANSI inventory
+attempt was invalid; no formal source changed to repair that diagnostic.
+
+Evidence: `emdash2/tmp/probes/nuh6d1_conformance.json`,
+`nuh6d1_default_gc.json`, `nuh6d1_warnings.json` and
+`nuh6d1_source_audit.json`; `nuh6d1_qualification.json` binds the source,
+logs and staged checkpoint by hash. Both owners are registered for normal source
+checks; reviewers are discovered normally. Strict LHS scans, catalog/TOC
+and the source-only health refresh pass. The health snapshot covers 1,290
+files at `sha256:c4f60a3b1eef0f5f954618b2385de8c9f3ccf12a2ab9f8bcafdf1951ef6b4160`.
+No repository aggregate or TypeScript check ran.
+
+### NUH-6D2: Next Native Universal Comparisons
+
+Start with K(c) and the original lower-left cycles Z(A₁). The row inclusion
+i₁ sends left cycles into K(c), using b₁∘i₁=i₂∘a₁ and p₁∘i₁=0.
+Conversely, p₁ annihilates κ_c; the original short-exact row lift gives a
+map into A₁. The next row's incoming cancellation proves it lands in
+Z(A₁). Original kernel inclusions and row cancellation should prove the
+two composites are identities. Use the existing fixed-forward equivalence
+interface, and retain both original kernel choices.
+
+Then compare α with the original left boundary and descend to
+Q(α)→H(A₁). On the right, the original quotient of the recovered incoming
+map should compare with the cokernel of the upper-right differential;
+its induced γ then identifies K(γ) with H(D₀). These are required
+constructions, not declared endpoint isomorphisms. The recovered incoming
+map is linked to a by the checked whole path; do not replace its original
+diagram or Q selection by an object-equality cast. Finally compare the
+positive covered reconstructions ∂∘ρ=θ and the existing native δ formula.
+General reference-snake comparison and six-term concrete qualification also
+remain required; 6D1 does not narrow the arbitrary-a/arbitrary-c snake scope.

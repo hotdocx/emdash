@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Whole LES-to-snake input (2026-09-15): the
+[window owner](../emdash3_2_one_cat_native_window_snake_inputs.lp) forms
+a=[bₘ,i₀], b=b₀ and c=⟨b₁,p₁⟩. The original whole row maps and column
+zeros derive c∘b∘a=0, without P/Q or short-exactness inputs. Nine
+transparent definitions and 18 passing assertions qualify whole input,
+recovery, projections, retained action and the first native α/γ consumers.
+Native endpoint and sign comparisons are next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+The six-term observation gap and displayed CAS integration remain required.
+
 Native six-term result construction (2026-09-15): the
 [result owner](../emdash3_2_one_cat_native_snake_six_term_result.lp) stores
 the original whole maps and native exact-pair annotations. Thirteen

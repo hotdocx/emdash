@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native finite-diagram coherence qualified; displayed categorical exactness transport next; legacy/projection comparisons and Op/duality deferred
+Status: active — whole LES-to-snake input qualified; native endpoint/sign comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,26 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D1: Whole LES-to-snake input — qualified 2026-09-15
+
+The [window input owner](../emdash2/emdash3_2_one_cat_native_window_snake_inputs.lp)
+forms a=[bₘ,i₀], b=b₀, c=⟨b₁,p₁⟩ from the original four-row window.
+The two original column zeros and derived native row-map reconstruction
+prove c∘b∘a=0. The native input recovers the same a; it requires no P/Q,
+short-exact row evidence or normality. Four supporting whole mate-zero laws
+and five window definitions introduce no primitive, rule or opacity.
+Eighteen assertions check whole formation, recovery, projections, retained
+Hom action and the first actual α/γ consumers. The negative retains the
+need for an annihilation premise.
+
+Next: K(c) versus the original left cycles, then Q(α) versus left H and
+K(γ) versus right H, preserving original P/Q choices. Compare the positive
+covered formulas only after those maps are qualified. The
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md) records
+this 6D2 design; the endpoint/sign comparisons are not implemented by 6D1.
+Six-term comparison/witness observations, the general reference comparison,
+concrete qualification, displayed CAS integration and NUH-7 remain required.
 
 ### NUH-6C3a: Whole result construction and input observations — qualified 2026-09-15
 

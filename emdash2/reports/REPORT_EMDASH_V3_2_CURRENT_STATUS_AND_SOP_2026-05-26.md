@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Whole LES-to-snake input (2026-09-15): the
+[window owner](../emdash3_2_one_cat_native_window_snake_inputs.lp) forms
+a=[bₘ,i₀], b=b₀ and c=⟨b₁,p₁⟩ from the original whole rows. Existing
+mate distribution, native row reconstruction and column zeros derive
+c∘b∘a=0. Nine transparent definitions and 18 assertions qualify input,
+recovery, projections, retained Hom action and the first native α/γ
+consumers. Input formation selects no K/Q and requires no short-exactness
+or normality. Native endpoint and sign comparisons remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+This does not close the six-term observation gap or displayed CAS transport.
+
 Native six-term result construction (2026-09-15): the
 [result owner](../emdash3_2_one_cat_native_snake_six_term_result.lp) uses
 the existing finite tail in `Functor_cat K C`. Native annotations retain

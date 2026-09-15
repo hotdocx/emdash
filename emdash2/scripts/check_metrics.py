@@ -287,6 +287,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_native_snake_fourth_exactness.lp"),
     Path("emdash3_2_one_cat_native_exact_arrow_pairs.lp"),
     Path("emdash3_2_one_cat_native_snake_six_term_result.lp"),
+    Path("emdash3_2_one_cat_biproduct_family_zeros.lp"),
+    Path("emdash3_2_one_cat_native_window_snake_inputs.lp"),
     Path("emdash3_2_functor_category_unit_views.lp"),
     Path("emdash3_2_one_cat_arrow_family_maps.lp"),
     Path("emdash3_2_one_cat_kernel_cokernel_family_maps.lp"),
