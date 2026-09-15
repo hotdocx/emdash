@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: NUH-6A/6B native connecting construction qualified; six-term maps/exactness next
+Status: native connecting and six-term maps/zeros qualified; four comparison cokernel-zero proofs next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -60,7 +60,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | --- | --- | --- |
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
-| NUH-6C | next | All six terms/five arrows, four adjacent zeros and exactness of the actual four interior comparisons |
+| NUH-6C | maps, four zeros, native exact inputs/comparisons and their zero kernel inclusions qualified; four cokernel-zero proofs remain | Prove invertibility of all four actual interior comparisons and retain the full six-term sequence |
 | NUH-6D | pending 6B/6C | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
@@ -215,10 +215,69 @@ pair/159 pattern reports; snake owners/reviewers retain 1,484/169. The
 source-health snapshot covers 1,247 files with checking limited to the
 affected owners and consumers.
 
-**Next — NUH-6C:** use the derived α/γ reconstruction to form the two
-whole maps of arrow diagrams α→b→γ. Apply the original K and Q to
-obtain the four surrounding transformations, keeping ∂ as the middle map.
-Construct the four adjacent-zero proofs and prove exactness at the actual
-four interior comparisons. Preserve K(α) and Q(γ); do not replace the
-general six-term theorem by its short-exact-row restriction. NUH-6D/6E,
-the separate NUH-5N2G3B2 displayed integration, and NUH-7 remain required.
+The NUH-6C experiment after `ee072b47` formed the whole diagram maps
+α→b from κ_c∘α=b∘a and b→γ from c∘b=γ∘π_a through the existing
+`one_cat_square_family_transf`. Their square data are derived from the
+previous reconstruction theorems, not caller fields. Original whole K/Q
+action retains inclusion/projection reconstruction. The two outer zero
+composites follow by native cancellation. The inner composites use a lift
+from K(b) into the existing E and the original ∂∘ρ=θ equation, followed
+dually by cancellation through ρ. These zero equations alone do not prove
+exactness.
+
+### NUH-6C1: Whole Six-Term Chain And Canonical Comparison Inputs
+
+The [map owner](../emdash2/emdash3_2_one_cat_native_snake_six_term_maps.lp)
+now defines the two whole diagram maps α→b→γ from the already derived
+reconstruction paths. Original K and Q action gives four transformations:
+
+```text
+K(α) ─k₁→ K(b) ─k₂→ K(γ) ─∂→ Q(α) ─q₁→ Q(b) ─q₂→ Q(γ).
+```
+
+Four native reconstruction theorems retain a, π_a, κ_c and c as the
+original source/target maps of those squares. No caller supplies square
+proofs, new universal choices or an assumption that a/c are monic/epic.
+
+The [outer-zero owner](../emdash2/emdash3_2_one_cat_native_snake_outer_zeros.lp)
+derives k₂∘k₁=0 by original quotient annihilation and kernel cancellation,
+and q₂∘q₁=0 by original kernel annihilation and quotient cancellation.
+The [middle lift](../emdash2/emdash3_2_one_cat_native_snake_middle_lifts.lp)
+maps K(b) into the existing E, with j∘lift=κ_b and ρ∘lift=k₂.
+Kernel cancellation gives ℓ∘lift=0, hence θ∘lift=0.
+The [inner-zero owner](../emdash2/emdash3_2_one_cat_native_snake_inner_zeros.lp)
+then derives ∂∘k₂=0 from ∂∘ρ=θ. Dually, q₁∘∂ vanishes after ρ
+by the original q₁ and ℓ reconstructions; native cover cancellation
+derives q₁∘∂=0. All four zero equations concern the actual whole maps.
+
+The [exact-input owner](../emdash2/emdash3_2_one_cat_native_snake_exact_inputs.lp)
+uses those derived zero equations to form the four existing native kernel
+inputs, then defines each actual canonical Im→Ker comparison. Its
+`OneCatNativeSnake*Exactness` predicates are the existing fixed-forward
+`OneCatAdjunctionExactFamily`; they are not supplied or inhabited by a new
+axiom. The [comparison-kernel owner](../emdash2/emdash3_2_one_cat_native_snake_comparison_kernels.lp)
+applies the existing general theorem to derive zero kernel inclusion for
+each of the four comparisons. Their cokernel-zero proofs remain required;
+none of the four exactness predicates is claimed proved at this milestone.
+
+This tranche has 36 definitions and no primitive, rule or unifier.
+Eight map/reconstruction, six zero/lift and eight comparison-predicate/kernel
+assertions pass: 22 assertions in total. The six owner checks take 10.34s,
+11.28s, 10.95s, 11.65s, 12.21s and 13.35s; the reviewers take 11.02s,
+11.65s and 12.02s. No time/memory extension or semantic bypass was used.
+Qualification is recorded in `emdash2/tmp/probes/nuh6c_conformance.json`,
+`nuh6c_controls.json`, `nuh6c_warnings.json` and `nuh6c_qualification.json`.
+Checks remain local, serial, at 90s/2GiB, with no TypeScript or repository
+aggregate. The four named comparison kernels reduce the remaining
+exactness obligations to their four actual cokernel projections, using the
+existing inverse-from-universal-zeros criterion once these are proved.
+All nine owner/reviewer diagnostic inventories match their import controls,
+including locations, term heads, rule families and parser results. Strict
+LHS and source-dependency scans pass; the catalog/TOC and generated health
+snapshot are current. No older kernel, model or TypeScript owner changed.
+
+**Next — NUH-6C2:** prove zero cokernel projection for each of the four
+actual comparisons and derive its ΩAlong evidence. Retain the native
+zero-pair inputs and original maps; no output-exactness premise is allowed.
+General six-term exactness, the LES/reference sign comparison, concrete
+NUH-6E checks, NUH-5N2G3B2 displayed integration and NUH-7 remain required.

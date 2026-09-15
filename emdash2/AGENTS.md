@@ -185,8 +185,11 @@ The original image factorization and native kernel lifts derive θ∘κ_ρ=0;
 whole descent constructs ∂:K(γ)⇒Q(α) with ∂∘ρ=θ and uniqueness.
 No monic-a, epic-c or new annihilation hypothesis is added. Follow
 `../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md`:
-next construct the surrounding whole maps, four zeros and four interior
-exactness proofs. LES/sign comparison and NUH-5 integration remain required.
+the four surrounding whole maps and four zero composites now qualify in
+NUH-6C1. Its four native Im→Ker comparisons have derived zero kernel
+inclusions. Next prove their four cokernel projections zero and derive
+exactness; do not infer it from the zero pairs or predicate declarations.
+LES/sign comparison and NUH-5 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

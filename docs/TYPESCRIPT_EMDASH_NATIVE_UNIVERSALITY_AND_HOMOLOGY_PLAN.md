@@ -65,10 +65,13 @@ the original E/ρ and derived coimage-cover cancellation, and θ:E⇒Q(α).
 The first 23 definitions and 20 assertions add no primitive or rule.
 NUH-6B now also derives θ∘κ_ρ=0 and the actual whole connecting ∂,
 with ∂∘ρ=θ and uniqueness. Its additional 22 definitions and 11
-assertions introduce no primitive/rule or annihilation premise. The next
-stage is the four surrounding whole maps and full six-term exactness;
-LES/sign comparison and the separate NUH-5 certificate join remain
-required before final qualification.
+assertions introduce no primitive/rule or annihilation premise. NUH-6C1
+also qualifies the four surrounding whole maps, all four adjacent
+zeros, and the four canonical comparison inputs and their zero kernel
+inclusions. NUH-6C1 adds 36 definitions and 22 assertions, with no primitive
+or rule. The four comparison cokernel-zero proofs and full six-term
+exactness remain NUH-6C2; LES/sign comparison and the separate NUH-5
+certificate join remain required before final qualification.
 
 Current NUH-5N2G3A milestone (2026-09-15): all three original whole exactness
 proofs now have typed point observations, including both zero windows. A
@@ -1022,7 +1025,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: original exactness and input-pair observations qualified separately; combined certificate memory boundary remains | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | active: general whole ∂, derived annihilation, reconstruction and uniqueness qualified; six-term completion next | Construct surrounding whole maps and full six-term exactness, then qualify the LES/reference comparison and fixed sign |
+| NUH-6 | active: full whole six-term maps/zeros and comparison kernel-zero proofs qualified; four comparison cokernel-zero proofs next | Complete the four actual exactness proofs, then qualify the LES/reference comparison and fixed sign |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 

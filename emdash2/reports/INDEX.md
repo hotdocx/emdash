@@ -2,6 +2,18 @@
 
 Date: 2026-09-02
 
+Whole native six-term snake chain (2026-09-15): the
+[four surrounding maps](../emdash3_2_one_cat_native_snake_six_term_maps.lp),
+[outer zeros](../emdash3_2_one_cat_native_snake_outer_zeros.lp) and
+[inner zeros](../emdash3_2_one_cat_native_snake_inner_zeros.lp) retain the
+original ∂, P/Q and general triple. Four
+[canonical comparison inputs](../emdash3_2_one_cat_native_snake_exact_inputs.lp)
+and [zero comparison-kernel inclusions](../emdash3_2_one_cat_native_snake_comparison_kernels.lp)
+now qualify. Thirty-six definitions and 22 assertions add no primitive or
+rule. The four cokernel-zero/exactness proofs, LES/sign comparison and
+concrete displayed integration remain open in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 General native snake connecting transformation (2026-09-15):
 [whole ∂](../emdash3_2_one_cat_native_snake_connecting.lp) now follows from
 [derived θ∘κ_ρ=0](../emdash3_2_one_cat_native_snake_kernel_annihilation.lp)
@@ -9,8 +21,8 @@ through the original coimage-cover descent. Reconstruction ∂∘ρ=θ and
 uniqueness are proved; all original P/Q and general-triple inputs remain.
 Twenty-two definitions and eleven assertions add no primitive or rule.
 The [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
-keeps the surrounding six-term maps/exactness, LES/sign comparison and
-separate concrete displayed integration open.
+records subsequent map/zero qualification above; four exactness proofs,
+LES/sign comparison and concrete displayed integration remain open.
 
 General native snake construction (2026-09-15): the
 [whole input](../emdash3_2_native_snake_inputs.lp),

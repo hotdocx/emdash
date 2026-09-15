@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native whole six-term snake chain (2026-09-15): the
+[map owner](../emdash3_2_one_cat_native_snake_six_term_maps.lp) applies
+original K/Q action to the two whole reconstruction squares α→b→γ.
+The four surrounding maps and all four adjacent-zero proofs now qualify
+around the same ∂. The four actual comparison inputs/predicates and zero
+comparison-kernel inclusions are defined/derived. Thirty-six definitions
+and 22 assertions add no primitive or rule. Their four cokernel-zero
+proofs and full exactness, LES/sign comparison and concrete displayed
+integration remain required in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Native general connecting ∂ (2026-09-15): the
 [new owner](../emdash3_2_one_cat_native_snake_connecting.lp) descends the
 original whole θ through the original cover ρ. Its needed θ∘κ_ρ=0
@@ -11,7 +22,7 @@ proof is derived using the original image factorization, native kernel
 lifts and cancellation. Whole reconstruction ∂∘ρ=θ and uniqueness
 qualify without new assumptions or ordinary factor records. Twenty-two
 definitions and eleven assertions add no primitive/rule. Full six-term
-maps/exactness, LES/reference sign comparison, concrete displayed
+exactness, LES/reference sign comparison, concrete displayed
 integration and final qualification remain open in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 

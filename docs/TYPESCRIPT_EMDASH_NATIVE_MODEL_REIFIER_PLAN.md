@@ -1066,7 +1066,9 @@ out of the goal. Existing Op/profile and optional projection deferrals remain.
 NUH-6 now has its own [active subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 The general native input, α/γ factors, E/ρ coimage-cover cancellation and
 covered map θ are qualified. NUH-6B now also derives θ∘κ_ρ=0 and the
-whole connecting ∂ with reconstruction and uniqueness. Full six-term
+whole connecting ∂ with reconstruction and uniqueness. NUH-6C1 qualifies
+the surrounding whole maps, four zero composites and zero kernel inclusion
+for each actual comparison. Their four cokernel-zero proofs, full six-term
 exactness/sign comparison and this plan's G3B2 integration remain open.
 
 ## NUH-5A: Supported Retained-Model Preparation

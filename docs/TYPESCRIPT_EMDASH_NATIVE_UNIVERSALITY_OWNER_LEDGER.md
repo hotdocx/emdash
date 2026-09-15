@@ -331,6 +331,31 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C1: Whole six-term maps, zeros and comparison kernels — qualified 2026-09-15
+
+The original α/γ reconstructions form two whole diagram maps α→b→γ;
+native K/Q action supplies the four surrounding transformations and their
+original source/target reconstructions. Alongside the same whole ∂ this
+retains all six terms K(α), K(b), K(γ), Q(α), Q(b), Q(γ).
+
+Native quotient/kernel cancellation proves both outer zeros. The original
+K(b) lift into E reconstructs k₂ under ρ and vanishes under θ; ∂∘ρ=θ
+then proves the first inner zero. The dual inner zero follows by the same
+cover cancellation. No caller naturality/square or zero-composite field is
+added. All four native exact inputs and actual Im→Ker comparisons are now
+defined, and the existing generic theorem gives zero kernel inclusion for
+each. This does not supply their still-required cokernel-zero proofs.
+
+Thirty-six definitions and 22 assertions qualify under 90s/2GiB, without
+new primitives/rules/unifiers, TypeScript changes or repository aggregates.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records exact validation and the original-input scope.
+
+This is **progress**. NUH-6C2 must prove all four comparison cokernel
+projections zero and derive their fixed-forward ΩAlong evidence. The
+LES/reference sign comparison, concrete qualification, NUH-5 displayed
+integration and NUH-7 remain required.
+
 ### NUH-6B: Derived annihilation and whole connecting ∂ — qualified 2026-09-15
 
 Original coimage quotient cancellation and fixed-comparison normality make
