@@ -8,16 +8,19 @@ import { constructAlgebraFormalFreydNativeExactness } from './algebra_formal_fre
 import { assertAlgebraFormalComputationResultCurrent } from './algebra_formal_adoption';
 import { kernelExpressionEquals } from './kernel';
 import { createCoreProofChecker } from './proof_checker';
+import { constructAlgebraFormalFreydDiagramCoherence } from './algebra_formal_freyd_diagram_coherence';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_DIAGRAM_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-freyd-diagram-v1' as const,
+    revision: 'emdash-formal-native-freyd-diagram-v2' as const,
     input: 'original-whole-CAS-adoption' as const,
     observations: 'all-degree-maps-and-connecting-windows' as const,
     endpointConsistency: 'same-native-term-and-original-CAS-selection' as const,
     exactness: 'derived-whole-window-evidence' as const,
     requiresLegacyModel: false as const,
     assumesOutputExactness: false as const,
-    provesDisplayedDiagramCoherence: false as const
+    diagramRepresentation: 'derived-finite-arrow-observation' as const,
+    provesDisplayedDiagramCoherence: true as const,
+    provesDisplayedExactness: false as const
 });
 
 export async function trustAlgebraFormalFreydNativeDiagram<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
@@ -86,11 +89,18 @@ export async function trustAlgebraFormalFreydNativeDiagram<P extends AlgebraPare
     });
     const exactness = windows.windows.map(window => Object.freeze({ degree: window.entry.degree,
         evidence: constructAlgebraFormalFreydNativeExactness(window.result) }));
+    const coherence = constructAlgebraFormalFreydDiagramCoherence({ source, formalRing: input.prepared.bundle.reifier.formalRing,
+        arrows: displayed.map(({ result }) => {
+            const r = result.observation.realization;
+            return { formalArrow: r.formalArrow, nativeArrow: r.nativeArrow, proof: result.proof,
+                formalSource: r.source.formalPoint, formalTarget: r.target.formalPoint,
+                nativeSource: r.source.nativePoint, nativeTarget: r.target.nativePoint };
+        }) });
     assertAlgebraFormalComputationResultCurrent(upstream, upstream.request);
     return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_NATIVE_DIAGRAM_PROFILE,
         source, native: windows.native, upstreamAdoption: windows.upstreamAdoption, inventoryData: inventory.data,
         windows: windows.windows, maps: Object.freeze(maps), points: Object.freeze([...points.values()]),
-        displayedPoints: Object.freeze(displayedPoints), displayed: Object.freeze(displayed), exactness: Object.freeze(exactness),
+        displayedPoints: Object.freeze(displayedPoints), displayed: Object.freeze(displayed), exactness: Object.freeze(exactness), coherence,
         counts: Object.freeze({ points: points.size, maps: maps.length, windows: windows.windows.length,
             displayedPoints: displayedPoints.length, displayedArrows: displayed.length, exactness: exactness.length * 3,
             reused, computedEquations, interpretationClaims,

@@ -151,6 +151,17 @@ displayed exactness transport. The latter and automated frontend proof
 construction remain NUH-5N2G2. Diagnostic inventories match their original
 controls; the NUH-5N2F literal-word warning counter was corrected in the plan.
 
+NUH-5N2G2 qualifies a whole native→CAS path of the finite observation diagram,
+including its endpoint matching. Its defined view retains the existing
+`FiniteArrowTail` observer and assumes no tail eta. Nineteen definitions add
+no primitive or rule; native context v6 and the frontend construct the path
+automatically from the existing arrow agreements and endpoint β theorems.
+Coherence is now qualified for that result representation. NUH-5N2G3 must
+still index and transport the actual categorical exactness evidence; do not
+equate diagram equality with completed displayed exactness or add an output
+assumption. The model/reifier plan records the corrected negative fixture,
+all qualified integration cases and diagnostic comparisons.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

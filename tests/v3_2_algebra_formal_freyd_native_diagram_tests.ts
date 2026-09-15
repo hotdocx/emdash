@@ -12,6 +12,7 @@ import { trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_fre
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
 import { trustAlgebraFormalFreydNativeDiagram } from '../src/v3_2/algebra_formal_freyd_native_diagram';
+import { constructAlgebraFormalFreydDiagramCoherence } from '../src/v3_2/algebra_formal_freyd_diagram_coherence';
 import { polynomialFreydHomologyFixture, isPolynomialFreydMorphismZero } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
 import { freydNativeModelProbe } from './v3_2_algebra_formal_freyd_native_model_fixtures';
 import { freydNativeExactnessProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
@@ -88,7 +89,18 @@ describe('v3.2 complete native bounded diagram', () => {
                 assert.ok(kernelExpressionEquals(r.target.formalPoint, result.displayedPoints[i + 1].realization.formalPoint));
                 assert.equal(r.prepared.selected.homologyMap, result.native.arrows[i]);
             }
-            assert.equal(result.profile.provesDisplayedDiagramCoherence, false);
+            assert.equal(result.profile.provesDisplayedDiagramCoherence, true);
+            assert.equal(result.profile.provesDisplayedExactness, false);
+            assert.equal(result.coherence.source, result.source);
+            assert.equal(result.coherence.assumptionsAdded, 0);
+            assert.equal(result.coherence.endpointPaths.length, 6);
+            const changed = [...result.coherence.arrows];
+            const different = result.points.map(point => point.realization.formalPoint).find(
+                point => !kernelExpressionEquals(point, changed[1].formalSource));
+            assert.ok(different, 'The fixture must supply a distinct H endpoint');
+            changed[1] = { ...changed[1], formalSource: different };
+            assert.throws(() => constructAlgebraFormalFreydDiagramCoherence({ source: result.source,
+                formalRing: v.formalRing, arrows: changed }), /shared endpoint|type|mismatch/i);
             assert.ok(result.exactness.every(e => e.evidence.assumptionsAdded === 0));
             assert.equal(result.counts.homologyReplays, 0);
             assert.equal(result.counts.universalReselections, 0);
@@ -108,6 +120,7 @@ describe('v3.2 complete native bounded diagram', () => {
         assert.equal(again.source, result.source);
         assert.equal(again.counts.newAssumptions, 0);
         assert.equal(again.counts.reused, 215);
+        assert.ok(kernelExpressionEquals(again.coherence.path, result.coherence.path));
         again.displayed.forEach((a, i) => assert.ok(kernelExpressionEquals(a.result.proof, result.displayed[i].result.proof)));
     });
 
@@ -131,9 +144,14 @@ describe('v3.2 complete native bounded diagram', () => {
                 { label: 'displayed interpretation ' + i, term: a.result.proof, type: r.claimType, span: p.span! }];
         });
         // Emit a single observation artifact for the entire shared diagram.
-        const observation = freydNativeModelProbe(result.source.environment, [...terms, ...assertions]);
+        const coherent = [
+            { label: 'whole native observation diagram', term: result.coherence.formalDiagram, type: result.coherence.diagramType, span: p.span! },
+            { label: 'whole CAS observation diagram', term: result.coherence.nativeDiagram, type: result.coherence.diagramType, span: p.span! },
+            { label: 'derived whole diagram path', term: result.coherence.path, type: result.coherence.pathType, span: p.span! }
+        ];
+        const observation = freydNativeModelProbe(result.source.environment, [...terms, ...assertions, ...coherent]);
         if (directory) writeFileSync(join(directory, 'diagram.lp'), observation);
-        manifest.push({ file: 'diagram.lp', assertions: terms.length + assertions.length });
+        manifest.push({ file: 'diagram.lp', assertions: terms.length + assertions.length + coherent.length });
         for (const exact of result.exactness) {
             const probe = freydNativeExactnessProbe(exact.evidence.source.environment, exact.evidence.evidence.map(e => ({
                 label: 'window ' + exact.degree + ' ' + e.position + ' exactness', term: e.term, type: e.type, span: p.span!

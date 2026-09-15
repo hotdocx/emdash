@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Whole finite native diagram coherence (2026-09-15): the
+[derived observation view](../emdash3_2_commutative_algebra_freyd_diagram_observations.lp)
+retains the original finite tail's arrows and proves a path of the complete
+native/CAS diagram, including matching evidence. The
+[frontend constructor](../../src/v3_2/algebra_formal_freyd_diagram_coherence.ts)
+builds this path automatically without new assumptions. All integration
+cases and 89 formal assertions are qualified. Categorical exactness transport
+is next in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md);
+the diagram path does not itself establish displayed exactness.
+
 Native realization endpoint coherence (2026-09-15): the
 [derived observation theorem](../emdash3_2_commutative_algebra_freyd_observation_coherence.lp)
 uses proved presentation setness to identify the endpoint paths from adjacent

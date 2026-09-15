@@ -4,6 +4,21 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Whole finite native diagram coherence (2026-09-15): the
+[observation view](../emdash3_2_commutative_algebra_freyd_diagram_observations.lp)
+contains the original complete arrows and proposition-valued matching
+evidence. Existing arrow agreements now produce a path of the whole value;
+the original `FiniteArrowTail` observation is retained without an eta law.
+Nineteen definitions, including six
+[endpoint β views](../emdash3_2_commutative_algebra_freyd_observation_endpoints.lp),
+add no primitive or rule. Native context v6 and the
+[frontend constructor](../../src/v3_2/algebra_formal_freyd_diagram_coherence.ts)
+produce the path automatically under the original model/realization contracts.
+All integration cases and 89 formal assertions are qualified with matching
+diagnostic inventories. The categorical exactness predicate/evidence must
+still be indexed at this diagram and transported to the CAS output; this is
+the next required step in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Native realization endpoint coherence (2026-09-15): the
 [observation module](../emdash3_2_commutative_algebra_freyd_observation_coherence.lp)
 proves that finite presentation objects form a set, then derives compatible

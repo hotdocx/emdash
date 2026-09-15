@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native observation assembly qualified; displayed exactness/coherence next; legacy/projection comparisons and Op/duality deferred
+Status: active — native finite-diagram coherence qualified; displayed categorical exactness transport next; legacy/projection comparisons and Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -320,9 +320,9 @@ with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
 NUH-5N1 native context/signature preparation, complete native H/map/δ
-observation assembly and the native whole exactness interface are qualified.
-Next are displayed-diagram exactness transport and coherent realization of
-the complete bounded diagram. Native snake/LES work and
+observation assembly, finite-diagram coherence and the native whole exactness
+interface are qualified. Next is categorical exactness transport to the
+displayed diagram. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -330,6 +330,35 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2G2: Whole finite diagram path — qualified 2026-09-15
+
+A nonempty finite family of complete LaxArrow observations with adjacent
+matching is a derived result-data view of the existing finite arrow tails.
+Matching is proved proposition-valued. The ordinary Sigma path constructor
+therefore lifts the existing arrow agreements to a path of the whole diagram,
+including that evidence. The existing tail observer is retained literally;
+no tail eta, category of complexes, primitive, rule or output assumption is
+added. Nineteen definitions include six existing-observer endpoint β views.
+
+Native context v6 contains the exact opaque mirrors. A pure frontend
+constructor validates their signatures and the original arrows/endpoints,
+constructs matching and the whole path, and adds no assumption or decision.
+The native driver invokes it automatically. Its coherence flag is specific
+to this finite observation representation; displayed exactness stays false.
+
+Two focused constructor tests, nine native-context regressions and all three
+integration cases are qualified. The combined run's reuse/emission passed;
+its negative fixture accidentally chose identical H terms. The corrected
+assembly case passes separately in 268.60s, with production code and emitted
+terms unchanged. Full reuse takes 216.24s and reuses all 215 requests and the
+identical path. All 89 final LP assertions and diagnostic comparisons pass.
+The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records
+the exact runs, artifact hashes, source-health checks and temporary failures.
+
+This is **progress**. NUH-5N2G3 must connect and transport the actual whole
+Im→Ker exactness evidence to this diagram; the whole diagram equality alone
+does not do that. NUH-6/7 and the existing deferrals remain required.
 
 ### NUH-5N2G1: Shared endpoint coherence — qualified 2026-09-15
 

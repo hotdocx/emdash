@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native observation assembly qualified; displayed exactness/coherence next; legacy comparison and auxiliary normalization work deferred
+Status: active — native finite-diagram coherence qualified; displayed categorical exactness transport next; legacy comparison and auxiliary normalization work deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -33,8 +33,8 @@ move comparisons with that older presentation and the recent auxiliary
 point/projection-normalization experiments out of the primary prerequisites.
 
 NUH-5N1 direct native context/signatures, full native H/map/δ observation
-assembly and whole exactness evidence are qualified. Continue NUH-5N2
-displayed-diagram exactness transport and coherence under declared native
+assembly, finite-diagram coherence and whole exactness evidence are qualified. Continue NUH-5N2
+displayed-diagram categorical exactness transport under declared native
 model/realization contracts, then the native snake/LES work and final
 qualification. Coherent CAS realization and actual native theorem/consumer checks remain required;
 do not assume output exactness or silently convert old contracts into new
@@ -45,6 +45,20 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 [resumption note](../emdash2/audits/deferred-native-exactness-observations/README.md)
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
+
+Current NUH-5N2G2 milestone (2026-09-15): the complete finite observation
+diagram, including endpoint-matching evidence, now has an internal native→CAS
+path built automatically by the frontend. The observation of any existing
+`FiniteArrowTail` retains its original arrows; no tail eta or new category
+of complexes is assumed. Nineteen LP definitions add no primitive or rule.
+Native context v6 supplies exact mirrors and endpoint β views; diagram
+profile v2 reports coherence for this representation while keeping displayed
+exactness false. All three integration cases are qualified, including the
+corrected assembly rejection test and unchanged full reuse. Two constructor
+tests, nine context regressions and 89 formal assertions pass. See the subplan
+for split-run timings and the corrected test fixture. The next required
+step is indexing and transporting the original categorical exactness proofs
+to the actual displayed diagram; no output assumption is introduced.
 
 Current NUH-5N2G1 milestone (2026-09-15): presentation setness now derives
 compatibility of the endpoint paths extracted from adjacent complete-arrow
@@ -971,7 +985,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: complete native H/map/δ observation assembly and whole exactness evidence qualified | Displayed-diagram exactness transport and whole coherence under model/row contracts |
+| NUH-5 | active: native finite-diagram coherence and whole exactness evidence qualified | Index and transport categorical exactness to the displayed CAS diagram under the existing model/row contracts |
 | NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
@@ -1517,9 +1531,9 @@ Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
 The retained workflow is qualified through 0caa19d0. Follow the later user
 priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
-native context/signatures, complete H/map/δ observation assembly and whole
-exactness evidence are qualified; continue NUH-5N2 displayed-diagram
-exactness transport and coherent realization of the actual selected CAS result.
+native context/signatures, complete H/map/δ observation assembly, finite
+diagram coherence and whole exactness evidence are qualified; continue
+NUH-5N2 categorical exactness transport to the actual selected CAS diagram.
 Retain coherent model/realization, normality and row contracts explicitly;
 derive output exactness from the native theorem. Older formal presentations
 are compatibility evidence, not mandatory intermediate targets. Continue

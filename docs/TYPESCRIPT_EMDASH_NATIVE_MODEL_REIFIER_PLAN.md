@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — complete native H/map/δ observation assembly and whole exactness evidence qualified; displayed-diagram transport/coherence remains; legacy comparisons and auxiliary normalization deferred
+Status: active — native finite-diagram coherence and whole exactness evidence qualified; displayed categorical exactness transport remains; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -732,6 +732,135 @@ proofs alone must not flip that flag or discharge output exactness. Retain
 the existing native whole comparison/evidence and declared model contracts;
 do not require callers to build naturality squares. NUH-6/7 and all existing
 deferrals remain as above.
+
+### NUH-5N2G2: Whole Finite Diagram Path — Qualified
+
+Hypothesis: represent the observation of an existing finite arrow
+tail as its nonempty `FiniteFamily` of complete LaxArrow objects together
+with the adjacent-endpoint matching predicate. Define this observation view
+and predicate with the existing Nat/Sigma owners, without another category
+of complexes, primitive tail, or package eta. Presentation setness makes the
+matching predicate proposition-valued. Consequently the existing individual
+arrow agreements induce a path of the whole observation value by the
+ordinary dependent-Sigma path constructor. Also derive the observation of
+the existing `FiniteArrowTail`; preserve its constructor/index architecture.
+Qualify generic computation and the actual seven-arrow native/CAS path, then
+expose exact frontend mirrors and automatic proof construction. This proves
+coherence of the finite result diagram, not yet its categorical exactness;
+the native whole exactness predicate/evidence must subsequently be connected
+and transported along this actual path. No stronger realization or output
+assumption is authorized by this presentation choice.
+
+G2 integration uses the same reviewed 600s feature limit for the complete
+native diagram assembly/reuse test, with the unchanged 2GiB/64MiB/serial
+guard and inherited 512MiB/4MiB V8 settings. The previous version took
+429.00s; this version also constructs and checks the whole diagram path on
+both passes. The small symbolic proof-construction/rejection tests pass in
+9.16s, and the exact signature/whole-path emission checks pass separately.
+Record the actual combined measurement. Individual LP and compiler targets
+retain 90s; no repository-wide checks are scheduled.
+
+The [finite tuple path](../emdash2/emdash3_2_finite_family_paths.lp) uses the
+existing Sigma path constructor. The
+[diagram observation owner](../emdash2/emdash3_2_commutative_algebra_freyd_diagram_observations.lp)
+defines adjacent matching, proves that predicate proposition-valued, and
+constructs a path of the whole observation value from the arrow paths. Its
+derived observation of an arbitrary existing `FiniteArrowTail` projects to
+the exact original `finite_arrow_tail_arrows` value. No tail eta, replacement
+indexing, category of complexes or new universal structure is introduced.
+The [reviewer](../emdash2/examples/freyd_diagram_observations.lp) checks ten
+generic assertions, including arbitrary-tail retention and visible
+nonidentity-arrow computation. The original seven-arrow fixture independently
+passes a whole path and both diagram projections (48 assertions including
+its 45 original observations).
+
+Six [endpoint β definitions](../emdash2/emdash3_2_commutative_algebra_freyd_observation_endpoints.lp)
+expose the existing native H-map, native δ and raw-CAS observers' literal
+endpoints. The frontend needs these defined computation views because its
+private mathematical signature mirrors are opaque. They are reflexivity
+proofs over the existing decoded observations, not additional interpretations
+or caller-supplied squares. Together these three LP modules contain nineteen
+definitions and no new primitive, rewrite or unification rule.
+
+The [exact mirrors](../src/v3_2/algebra_formal_freyd_diagram_signatures.ts)
+retain each original observer telescope, replacing only its result by the
+corresponding β statement. Parameter selection uses the positional owner ABI,
+not diagnostic binder names. Native rational context v6 includes these
+interfaces. The [pure constructor](../src/v3_2/algebra_formal_freyd_diagram_coherence.ts)
+checks all arrow proofs and computation views, derives both diagrams'
+matching evidence, and constructs their whole path. It adds no assumption or
+trust decision. The native diagram driver calls it automatically; profile v2
+records coherence of this finite observation representation and separately
+records that displayed exactness has not yet been proved.
+
+Two focused constructor tests pass in 9.16s, including wrong-endpoint,
+missing-signature and empty-diagram rejections. The final signature/emission
+case passes in 3.15s. All nineteen exact mirror signatures and the three
+symbolic diagram/path terms pass in the emitted LP probe. The first bare-head
+signature assertions inserted implicit arguments in Lambdapi; fully applied
+eta expansions correct that probe. A missing source span in the new context
+builder was also corrected before final emission. Neither issue changed a
+mathematical owner or required a runtime rule.
+
+The complete run reached construction, full reuse and emission in 503.43s,
+but its new negative test had selected two identical H terms: degree-1 A
+and B are literally the same formal H input in this fixture. The expected
+rejection therefore did not occur. The emitted artifact confirms their
+identity and contains eight distinct H terms overall. The corrected test
+selects a provably different retained H endpoint and its assembly case was
+rerun. The already successful 216.24s reuse pass and 0.49s emission are retained;
+production code and emitted terms are unchanged by the fixture correction.
+The emitted diagram already passes 48 LP assertions, including the whole
+path, and the three exactness artifacts pass three assertions each.
+
+All new owner/reviewer diagnostic inventories match their import controls.
+Counts (critical pairs/pattern reports): finite tuple paths 1,146/157;
+diagram observations 1,166/157; endpoint β views 1,490/169. Symbolic and
+concrete emitted diagrams preserve the earlier import order and match the
+original diagram at 1,488/169. Counts, locations, term heads and rule families
+all match, with no parser issue. Each LP target remains under 90s.
+
+The corrected assembly case passes in 268.60s, including the distinct-endpoint
+rejection and all remaining selection/purity checks. Together with the
+unchanged successful reuse/emission cases, this qualifies all three
+integration cases; it is not reported as an all-green 503s combined run.
+All 215 requests are reused on the second pass, including the identical whole
+diagram path. Counts remain twelve degree H observations, eight maps, three
+windows, eight displayed points/seven arrows, nine whole exactness terms,
+twenty additional computed equations and thirteen explicit interpretations.
+The coherence constructor adds zero assumptions and performs no CAS work.
+Nine affected native-context regression tests pass in 61.92s under 90s.
+Focused TypeScript compilation/lint, strict owner LHS scans, catalogue/TOC,
+static source-health freshness and added-link checks pass. No aggregate ran.
+
+The final formal qualification covers ten generic reviewer assertions,
+twenty-two symbolic signature/diagram assertions and fifty-seven concrete
+diagram/exactness assertions. The complete diagram artifact is 7,701,984
+bytes and checks in 18.88s; exactness artifacts check in 19.31–21.00s.
+This closes coherence of the finite observation diagram under the existing
+model/realization contracts. It does not construct the model or assert
+exactness of the displayed CAS diagram.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2g2_types.txt`,
+`nuh5n2g2_lint.txt`, `nuh5n2g2_symbolic_tests.txt`,
+`nuh5n2g2_emission_tests.txt`, `nuh5n2g2_diagram_tests.txt`,
+`nuh5n2g2_corrected_assembly.txt`, `nuh5n2g2_context_regression.txt`,
+`nuh5n2g2_conformance.json`, `nuh5n2g2_diagram_conformance.json`,
+`nuh5n2g2_controls.json`, `nuh5n2g2_warnings.json`,
+`nuh5n2g2_artifacts.json` and `nuh5n2g2_qualification.json`. The initial
+conformance JSON retains the bare-head signature failure; the final symbolic
+success is logged at `logs/probes/nuh5n2g2_symbolic-20260915-042354.log`.
+Final concrete diagram log: `logs/probes/diagram-20260915-043706.log`.
+
+**Next — NUH-5N2G3:** derive the actual native categorical exactness predicate
+and evidence at this observation diagram, then transport it along the stored
+native→CAS diagram path. Preserve the existing whole Im→Ker comparisons,
+their derived proofs and selected inverses. The current path does not by
+itself supply that indexing or transport, and the displayed-exactness flag
+remains false. Do not add an output-exactness or stronger realization
+assumption. Native snake/LES work with general six-term scope and signs,
+then NUH-7 qualification, remain required. Existing Op/profile and optional
+legacy/projection deferrals remain unchanged.
 
 ## NUH-5A: Supported Retained-Model Preparation
 
