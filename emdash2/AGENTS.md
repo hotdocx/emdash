@@ -112,8 +112,11 @@ realize native H/maps/δ on the computed outputs. The subsequent NUH-5N2A
 slice now qualifies native H/map application views and a first direct CAS H
 realization, with automatic matrix prerequisites and an explicit interpretation
 claim. Three semantic definitions add no primitive or rewrite/unification
-rule. Complete-arrow, δ and exactness realization with coherent contracts
-remain NUH-5N2; a point agreement does not itself establish whole coherence.
+rule. NUH-5N2B now qualifies one complete native H-arrow realization using
+the existing LaxArrow carrier, shared with the old workflow. Its matrix
+prerequisites are automatic and it needs no independent point-realization
+claims. Native δ/exactness and the complete bounded diagram remain NUH-5N2;
+neither a point nor a single-arrow agreement establishes whole coherence.
 
 Use this order:
 

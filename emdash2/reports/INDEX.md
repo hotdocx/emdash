@@ -15,8 +15,11 @@ Direct native observations (2026-09-15):
 [H and raw-map observations](../emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp)
 are applications of the existing whole H/map functors, retaining Hom action.
 The direct TypeScript native-model workflow now automates matrix prerequisites
-for an explicitly classified CAS H-realization claim. Whole native arrow,
-δ and exactness realization remain in the living plan; no old-model comparison
+for an explicitly classified CAS H-realization claim. The
+[complete-arrow observer](../emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp)
+and its automated realization now cover a nonzero/nonidentity x map with one
+agreement including both endpoints. Native δ/exactness and whole-diagram
+coherence remain in the living plan; no old-model comparison
 is a prerequisite and no output exactness is assumed.
 
 NUH-5B2d2b (2026-09-14, checkpoint `0caa19d0`): complete retained bounded

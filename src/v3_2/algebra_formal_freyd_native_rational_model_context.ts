@@ -6,7 +6,7 @@ import { createFormalFreydNativeModelObservationProofEnvironment } from './algeb
 import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption_source';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-rational-freyd-context-v2' as const,
+    revision: 'emdash-formal-native-rational-freyd-context-v3' as const,
     backend: 'rational-polynomial-freyd' as const,
     modelInterface: 'supplied-whole-adjunction-model-and-native-normality' as const,
     coefficientNames: 'canonical-rational-codepoints' as const,
@@ -17,6 +17,7 @@ export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freez
     reselectsUniversals: false as const,
     requiresLegacyModel: false as const,
     nativeHomologyObservations: true as const,
+    nativeCompleteArrowObservations: true as const,
     suppliesOutputExactness: false as const,
     addsCoreOwner: false as const,
     performsIo: false as const

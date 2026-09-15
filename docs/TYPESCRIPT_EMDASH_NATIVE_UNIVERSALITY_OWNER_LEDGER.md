@@ -319,9 +319,9 @@ matrices, witnesses, results and provenance; do not conflate that retention
 with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
-NUH-5N1 native context/signature preparation and the first NUH-5N2 native H
-realization are qualified. Next are complete-arrow CAS realization and native
-δ/exactness consumers with coherent realization. Native snake/LES work and
+NUH-5N1 native context/signature preparation and the first NUH-5N2 native H/
+complete-arrow realizations are qualified. Next are native δ/exactness and
+the complete bounded diagram with coherent realization. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -329,6 +329,34 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2B: Complete native H-arrow realization — qualified 2026-09-15
+
+The existing FreydArrowObservation/raw introduction now have a shared
+model-independent owner; names and bodies remain available to the legacy
+workflow. One new native definition constructs the existing lax edge from
+the original H endpoints and H map. No primitive or rule was added. Native
+context v3 mirrors that observer and shared carrier. Native and legacy map
+adapters share transport with distinct profile/model/owner/operation choices.
+
+The native realization session separates raw-point preparation from point
+interpretation. The complete-arrow workflow derives its matrix inputs and
+adopts one agreement including both endpoints, requiring no independent
+point claims or formal selected-provider proof. The nonzero/nonidentity x
+map in the degree-0 nonsplit sequence reuses nine claims and adds three
+computed matrix equations plus one model interpretation. Repeat use reuses
+all thirteen requests. The earlier two-term fixture remains unchanged.
+
+Four arrow tests pass (33.62s), nine native context/H regressions pass
+(53.47s), and four legacy H/map regressions pass (6.63s). Focused types/lint
+and 27 affected Lambdapi assertions pass in separately bounded processes.
+This includes the legacy native-connecting reviewer after the carrier move.
+No aggregate or deferred normalization probe ran. Full evidence is in the
+[model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
+This turn is **progress**. Native δ/exactness realization and coherence of
+the complete bounded diagram remain; one complete-arrow agreement does not
+prove that whole-diagram coherence or supply output exactness.
 
 ### NUH-5N2A: Native H observations and first CAS realization — qualified 2026-09-15
 

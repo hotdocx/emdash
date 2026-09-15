@@ -99,7 +99,15 @@ action and add no primitive, rewrite or unification rule. They require no
 ordinary H record, legacy model or normality enhancement. The TypeScript
 native context mirrors the object/map observations; its realization workflow
 automates matrix prerequisites and records the separate supplied-model/CAS
-agreement explicitly. Native complete-arrow/δ/exactness realization remains
+agreement explicitly. The
+[complete-arrow observer](../emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp)
+now wraps that same native H map and both endpoints in the existing LaxArrow
+carrier. Its [shared carrier owner](../emdash3_2_commutative_algebra_freyd_arrow_observations.lp)
+also serves the unchanged legacy observer. Native matrix preparation can
+form point queries without adopting point agreements; the complete-arrow
+workflow records one combined interpretation. The nonsplit x map is its
+qualified nonzero/nonidentity consumer. Native δ/exactness and realization
+coherence for the complete bounded diagram remain
 in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Reconstruction review (2026-09-13): retain the ordinary reconstruction law as

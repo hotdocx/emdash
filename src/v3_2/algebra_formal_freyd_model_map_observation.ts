@@ -3,7 +3,8 @@ import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeSchema } from './algebra_engine';
 import { createAlgebraTypeScriptReferenceEngine, defineAlgebraReferenceImplementation } from './algebra_reference_engine';
 import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } from './algebra_formal_delegation';
-import { algebraFormalFreydModelHomologyObservationBundle } from './algebra_formal_freyd_model_observation';
+import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydNativeModelHomologyObservationBundle,
+    ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { AlgebraFormalFreydModelMapPreparation, algebraFormalFreydModelChainMapTerm, assertAlgebraFormalFreydModelMapPreparationCurrent } from './algebra_formal_freyd_model_map_preparation';
 import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS, createFormalFreydModelMapProofEnvironment } from './algebra_formal_freyd_model_map_signatures';
 import { FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, algebraFormalFreydModelType } from './algebra_formal_freyd_model_signatures';
@@ -16,8 +17,12 @@ import { algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pai
 import { serializeCoreExpression } from './core_serialization';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
 
+import { algebraFormalFreydNativeModelType, FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_signatures';
+import { createFormalFreydNativeModelObservationProofEnvironment, FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_model_observation_signatures';
+
 type Point<P extends AlgebraParent, C extends AlgebraElement<P>, I> =
-    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>>;
+    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>> |
+    ReturnType<typeof algebraFormalFreydNativeModelHomologyObservationBundle<P, C, I>>;
 
 export const ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE = Object.freeze({
     revision: 'emdash-formal-freyd-model-map-observation-v1' as const,
@@ -28,7 +33,13 @@ export const ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE = Object.freeze(
     addsCoreOwner: false as const, performsIo: false as const
 });
 
-export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(input: {
+export const ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_MAP_OBSERVATION_PROFILE = Object.freeze({
+    ...ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE,
+    revision: 'emdash-formal-freyd-native-model-map-observation-v1' as const,
+    requiresLegacyModel: false as const
+});
+
+export interface AlgebraFormalFreydModelMapObservationInput<P extends AlgebraParent, C extends AlgebraElement<P>, I> {
     readonly observationId: string;
     readonly source: Point<P, C, I>;
     readonly target: Point<P, C, I>;
@@ -38,10 +49,50 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
     readonly upperLaw: KernelExpression;
     readonly lowerLaw: KernelExpression;
     readonly resultLaw: KernelExpression;
+}
+
+export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydModelMapObservationInput<P, C, I>
+) {
+    return modelMapObservation(input, {
+        profile: ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE,
+        pointProfile: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE.revision,
+        createEnvironment: () => createFormalFreydModelMapProofEnvironment([]),
+        bindings: { ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS },
+        modelType: algebraFormalFreydModelType, arrowOwner: 'bridge_freyd_homology_model_arrow_observation',
+        operationPrefix: 'proof-cas.freyd-model/'
+    });
+}
+
+export function algebraFormalFreydNativeModelMapObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
+    input: AlgebraFormalFreydModelMapObservationInput<P, C, I>
+) {
+    return modelMapObservation(input, {
+        profile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_MAP_OBSERVATION_PROFILE,
+        pointProfile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE.revision,
+        createEnvironment: () => createFormalFreydNativeModelObservationProofEnvironment([]),
+        bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS },
+        modelType: algebraFormalFreydNativeModelType, arrowOwner: 'bridge_freyd_adjunction_model_arrow_observation',
+        operationPrefix: 'proof-cas.freyd-native-model/'
+    });
+}
+
+function modelMapObservation<P extends AlgebraParent, C extends AlgebraElement<P>, I,
+    Profile extends { readonly revision: string }>(input: AlgebraFormalFreydModelMapObservationInput<P, C, I>, owner: {
+    readonly profile: Profile;
+    readonly pointProfile: string;
+    readonly createEnvironment: () => CoreLfDeclarationEnvironment;
+    readonly bindings: Readonly<Record<string, string>>;
+    readonly modelType: (R: KernelExpression) => KernelExpression;
+    readonly arrowOwner: string;
+    readonly operationPrefix: string;
 }) {
     if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(input.observationId)) throw new Error('A stable map observation ID is required');
     const s = input.source.realization, t = input.target.realization, prepared = input.prepared;
     const currentInputs = () => {
+        if (input.source.profile.revision !== owner.pointProfile || input.target.profile.revision !== owner.pointProfile) {
+            throw new Error('Model map requires matching native or legacy point observation profiles');
+        }
         assertAlgebraFormalFreydModelMapPreparationCurrent(prepared);
         input.source.adapter.normalizeRealization(s, 'modelMap.source');
         input.target.adapter.normalizeRealization(t, 'modelMap.target');
@@ -53,8 +104,8 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
     };
     currentInputs();
     const expected = (() => {
-        const environment = createFormalFreydModelMapProofEnvironment([]);
-        return Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS })
+        const environment = owner.createEnvironment();
+        return Object.keys(owner.bindings)
             .map(name => environment.lookup(name)!);
     })();
     const assertContext = (environment: CoreLfDeclarationEnvironment) => {
@@ -63,7 +114,7 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
             if (!value || value.body !== undefined || !kernelExpressionEquals(value.type, signature.type)) throw new Error('Changed model map signature ' + signature.name);
         }
         const declaration = environment.lookup(s.formalModel.name);
-        if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, algebraFormalFreydModelType(prepared.reifier.formalRing))) {
+        if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, owner.modelType(prepared.reifier.formalRing))) {
             throw new Error('Changed supplied coherent model declaration');
         }
     };
@@ -76,7 +127,7 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
     const R = b.embed(prepared.reifier.formalRing);
     const values = [R, b.embed(s.formalModel), ...chain.presentations.map(x => b.embed(x)), ...chain.morphisms.map(x => b.embed(x)),
         b.embed(s.pair.term), b.embed(t.pair.term), b.embed(chain.term)];
-    const formalArrow = b.lower(b.call(b.free('bridge_freyd_homology_model_arrow_observation'), values.map((value, i) => ({
+    const formalArrow = b.lower(b.call(b.free(owner.arrowOwner), values.map((value, i) => ({
         value, plicity: (i === 0 || (i >= 2 && i <= 14) ? 'implicit' : 'explicit') as 'implicit' | 'explicit'
     }))));
     const resultMap = algebraFormalFreydMorphismTerm(prepared.result, input.resultLaw);
@@ -96,7 +147,7 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
     };
     const realization = Object.freeze({ prepared, source: s, target: t, chain, resultMap, formalArrow, nativeArrow,
         observationType, claimType, formalData, observationId: input.observationId });
-    const id = 'proof-cas.freyd-model/' + s.modelId + '/homology-map/' + input.observationId;
+    const id = owner.operationPrefix + s.modelId + '/homology-map/' + input.observationId;
     const schema = defineAlgebraRuntimeSchema<typeof prepared.selected>({ id: id + '/retained', revision: 'v1', normalize(value) {
         current();
         if (value !== prepared.selected) throw new Error('Foreign retained homology map');
@@ -106,7 +157,7 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
     const implementation = defineAlgebraReferenceImplementation({ operation, algorithm: algebraAlgorithmIdentity(id + '/observe-retained', 'v1'),
         execute(value) { current(); return value; } });
     const engine = createAlgebraTypeScriptReferenceEngine({ id: id + '/engine', revision: 'v1', implementations: [implementation] });
-    const adapter = defineAlgebraFormalComputationAdapter({ id, revision: ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE.revision, operation,
+    const adapter = defineAlgebraFormalComputationAdapter({ id, revision: owner.profile.revision, operation,
         normalizeRealization(value: unknown) {
             if (value !== realization) throw new Error('Foreign model arrow realization');
             current(); return realization;
@@ -125,5 +176,5 @@ export function algebraFormalFreydModelMapObservationBundle<P extends AlgebraPar
                 : { kind: 'observation' as const, summary: 'retained model arrow changed' };
         }
     });
-    return Object.freeze({ profile: ALGEBRA_FORMAL_FREYD_MODEL_MAP_OBSERVATION_PROFILE, realization, adapter, engine });
+    return Object.freeze({ profile: owner.profile, realization, adapter, engine });
 }

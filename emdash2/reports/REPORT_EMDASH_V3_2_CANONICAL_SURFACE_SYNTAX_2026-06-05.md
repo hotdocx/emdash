@@ -2435,6 +2435,15 @@ three definitions, with no new runtime or proof-time rule; the functor keeps
 Hom action. Their private TypeScript object/map mirrors support direct
 native-model realization without going through `FreydHomologyModel`.
 
+`freyd_adjunction_model_arrow_observation(M,chainS,chainT,m)` now forms the
+existing `lax_edge` of those two H objects and that H map. Its carrier is the
+original `FreydArrowObservation(R)`, whose definition and raw introduction
+have moved to a model-independent module. Unqualified names and bodies are
+preserved for the old observer. The native CAS workflow records one complete
+arrow agreement, including both endpoints; it does not need separate point
+agreements or caller-written naturality proofs. This is explicit selected
+model interpretation and does not yet establish whole-diagram coherence.
+
 `FreydHomologyModel(R)` packages the older supplied coherent inputs;
 `freyd_homology_model_func(M)` is their original whole H. The readable
 `freyd_homology_model_object(M,e,d,chain)` is ordinary application of that H

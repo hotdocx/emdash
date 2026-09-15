@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — native context and first direct H realization qualified; native complete-arrow/δ/exactness realization next; legacy comparisons and auxiliary normalization deferred
+Status: active — native context, H and complete-arrow realization qualified at their recorded consumers; native δ/exactness and whole-diagram coherence next; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -245,6 +245,93 @@ with coherent realization and row contracts. A point agreement alone does
 not supply that coherence. Preserve the original whole operations and use
 the derived native exactness theorem; no return to the old formal diagram
 or deferred projection-normalization studies is needed for this checkpoint.
+
+## NUH-5N2B: Complete Native Arrow Realization — Qualified
+
+Use the existing `FreydArrowObservation(R) = Obj(LaxArrow_cat(Freyd(R)))`
+carrier for one complete native H-map observation. Move that carrier and
+its raw-arrow introduction to a model-independent owner, preserving names
+and bodies for the old workflow. The new native observation is `lax_edge`
+at the two original H_M inputs and the already-qualified H_M map. No new
+arrow record, naturality primitive or output exactness premise is needed.
+
+The CAS workflow should automatically prepare the original source/target
+raw inputs, three component maps, two chain-map agreements and computed
+result map. Reuse the native matrix-prerequisite machinery, but do not
+adopt independent H-point realization claims as prerequisites: the one
+complete-arrow realization already includes both endpoints. Such an
+agreement remains an explicit selected-model interpretation, not a theorem
+for arbitrary M or proof of coherence over all diagrams.
+
+Qualification must retain the whole H map owner and visible arrow
+projections, a nonzero/nonidentity selected map from a nonsplit sequence,
+rejection of legacy/mixed models and changed selections, source/proof reuse,
+and exact emitted Lambdapi conformance. No universal/homology reselection
+may occur while preparing or realizing that already-computed map. Native
+whole δ, exactness and the remaining whole-realization coherence are still
+required after this tranche.
+
+The [shared carrier owner](../emdash2/emdash3_2_commutative_algebra_freyd_arrow_observations.lp)
+now owns the two existing definitions, preserving their unqualified names
+and bodies. There are no repository references to their old fully qualified
+names. The old model-map module imports that owner. The
+[native arrow observation](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp)
+adds one definition using the original `lax_edge` and native H map; no
+primitive or rewrite/unification rule is added. Native and legacy reviewer
+projections both pass, with zero warnings before and after the extraction.
+
+The native rational context advances to profile v3. Its private mirrors
+include the shared arrow carrier/introduction and the native complete-arrow
+observation. The map adapter shares the existing transport/checking code,
+with separate native model, point-profile, observer and operation-ID choices;
+mixed native/legacy profiles are rejected. The shared native
+[realization session](../src/v3_2/algebra_formal_freyd_native_realization_session.ts)
+can prepare point inputs without adopting their realization claims. The
+existing standalone H workflow still adopts its one point claim explicitly.
+
+The new [native map workflow](../src/v3_2/algebra_formal_freyd_native_map_workflow.ts)
+takes the issued map preparation and native context, automatically wraps the
+original source/target CAS H selections, computes/reuses matrix prerequisites,
+and records one complete-arrow interpretation. It adopts no independent
+endpoint-realization or selected-provider proof. Its concrete consumer is
+the degree-0 inclusion x in the nonsplit sequence concentrated in degree 0:
+`0 → R ─x→ R → R/(x) → 0`. The original CAS computation confirms that the
+induced map is nonzero and differs from identity. This additional consumer
+does not replace the earlier two-term nonsplit fixture or its three windows.
+
+The first call reuses nine claims, computes three missing matrix equations
+and adopts one `trusted-presentation-semantics` arrow agreement. Repeating
+it reuses all thirteen requests without another decision or source change.
+No H/map/universal algorithm is rerun during realization. The agreement
+contains the original native source, target and H map, and their selected CAS
+counterparts; it remains explicit model interpretation, not a theorem for
+arbitrary M or a proof of coherence over every diagram.
+
+Four native arrow tests pass in 33.62s. Nine native context/H regressions pass
+in 53.47s, and four legacy H/map regressions pass in 6.63s. Focused types and
+lint pass. The native and legacy arrow reviewers each pass four assertions;
+four emitted native files pass thirteen assertions; the existing legacy
+native-connecting reviewer passes six more after the shared-carrier move.
+These 27 affected formal assertions run serially with warnings enabled under
+the 90s guard. Each TypeScript group also has its own 90s guarded process.
+The source registry, catalog, static health snapshot and source TOC are
+current; health was refreshed with `--no-check`. No aggregate or deferred
+normalization experiment ran.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2b_types.txt`, `nuh5n2b_lint.txt`,
+`nuh5n2b_arrow_tests.txt`, `nuh5n2b_context_regression.txt`,
+`nuh5n2b_legacy_regression.txt`, `nuh5n2b_arrow_owners.txt` and
+`nuh5n2b_conformance.txt`. The emitted complete-arrow probe is
+`nuh5n2b_native_arrow.lp` (111,127 bytes, three assertions). Full conformance
+logs are `logs/probes/nuh5n2b_native_arrow-20260915-010627.log`, the native
+context/H/map logs ending `010635`/`010644`/`010652`, and
+`logs/probes/freyd_homology_model_native_connecting-20260915-010702.log`.
+
+**Next:** native whole δ realization and categorical exactness under native
+model/row contracts, followed by the complete bounded native diagram and
+its coherence/qualification. Continue to retain the original CAS choices
+and derived native output theorem. The one-arrow agreement does not close
+the remaining whole-diagram coherence requirement.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

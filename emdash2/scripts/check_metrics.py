@@ -383,6 +383,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_raw_window_exactness.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_models.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_arrow_observations.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp"),

@@ -5048,8 +5048,13 @@ At the CAS boundary, the direct native workflow prepares matrix proofs
 automatically and records agreement with the computed H presentation as
 explicit model interpretation. This agreement is supplied semantics, not a
 theorem about an arbitrary native model. It needs no old formal H object or
-ordinary selected-provider proof. Complete native arrow/δ/exactness
-realization is the next integration boundary.
+ordinary selected-provider proof. The complete-arrow workflow now includes
+the two native H endpoints and the actual H map in the existing LaxArrow
+carrier, and records one agreement with the selected CAS arrow. It prepares
+matrix inputs automatically and requires no independent point-realization
+claims. Multiplication by x in the nonsplit sequence is a nonzero/nonidentity
+consumer. Native δ/exactness realization and coherence across the complete
+bounded diagram remain the next integration boundary.
 
 The older model boundary has its concrete point consumer. A transparent
 context packages the coherent operations already supplied to H; it does not

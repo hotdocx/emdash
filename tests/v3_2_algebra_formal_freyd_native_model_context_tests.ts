@@ -12,24 +12,14 @@ import { createCoreProofChecker } from '../src/v3_2/proof_checker';
 import { isCoreKind } from '../src/v3_2/checker';
 import { runAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 import { trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_freyd_long_exact';
-import { constructAlgebraFormalFreydRawWitnesses, FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_raw_witnesses';
+import { constructAlgebraFormalFreydRawWitnesses } from '../src/v3_2/algebra_formal_freyd_raw_witnesses';
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
-import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType,
-    FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_model_signatures';
+import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from '../src/v3_2/algebra_formal_freyd_native_model_signatures';
 import { defineAlgebraFormalFreydRationalBackend, prepareAlgebraFormalFreydRationalModelContext } from '../src/v3_2/algebra_formal_freyd_rational_model_context';
 import { algebraFormalFreydModelType } from '../src/v3_2/algebra_formal_freyd_model_signatures';
 import { algebraFormalFreydModelNormalityType } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
-import { serializeCoreLfKernelProbe } from '../src/v3_2/lf_probe';
-import { AFFINE_FORMAL_FINITE_MODULE_BINDINGS } from '../src/v3_2/algebra_formal_finite_module';
-import { AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS } from '../src/v3_2/algebra_formal_localization_signatures';
-import { AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS } from '../src/v3_2/algebra_formal_presentation_morphism';
-import { AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_zariski_signatures';
-import { FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_spine_signatures';
-import { FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_epimorphism_signatures';
-import { FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_kernel_choice_provider_signatures';
-import { FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_actual_homology_signatures';
-import { FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_model_observation_signatures';
+import { freydNativeModelProbe as nativeProbe } from './v3_2_algebra_formal_freyd_native_model_fixtures';
 import { algebraFormalFreydNativeModelHomologyObservationBundle, algebraFormalFreydModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
 import { trustAlgebraFormalFreydNativeHomologyPoint } from '../src/v3_2/algebra_formal_freyd_native_homology_workflow';
 import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
@@ -89,20 +79,6 @@ const observeNative = async () => {
 };
 let nativeObservation: ReturnType<typeof observeNative>;
 const nativeConsumer = () => nativeObservation ??= observeNative();
-
-const nativeProbe = (environment: Parameters<typeof serializeCoreLfKernelProbe>[0]['environment'],
-    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) =>
-    serializeCoreLfKernelProbe({ environment, externalFreeReferences: { ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
-                ...AFFINE_FORMAL_FINITE_MODULE_BINDINGS, ...AFFINE_FORMAL_PRESENTATION_MORPHISM_BINDINGS,
-                ...FORMAL_FREYD_SPINE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_EPIMORPHISM_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS }, assertions }).source.replace(
-        'require open emdash.emdash3_2;',
-        'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
-        'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
-        'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_normality;\n' +
-        'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_observations;');
 
 describe('v3.2 direct native Freyd model context', () => {
     it('prepares native inputs without model adaptation, CAS recomputation or adoption', () => {
