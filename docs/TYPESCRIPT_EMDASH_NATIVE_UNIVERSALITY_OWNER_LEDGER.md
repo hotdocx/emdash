@@ -331,6 +331,32 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C2b1: Second interior exactness at K(γ) — qualified 2026-09-15
+
+The previous turn made progress at `42c72f49`; its first exactness remains
+qualified. This tranche uses the existing whole cospan-kernel cover theorem
+twice: first over K(∂) along ρ, then along the source-image cover of α.
+Both cover hypotheses are derived from the original P/Q and normality.
+Whole reconstruction identifies the corrected difference jes−ax as a
+b-cycle, giving w:V⇒K(b) and k₂w=μrs.
+
+The source-image factor on the original second exact input makes the
+canonical ε₂:Im(k₂)⇒K(∂) factor rs. Its Q unit and both cover
+cancellations prove its actual cokernel projection zero. Combining this
+with its original kernel-zero proof gives ΩAlong on that same comparison.
+No arbitrary endpoint equivalence, new selection, output assumption or
+caller naturality/factor record is introduced.
+
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records 28 transparent definitions and 11 passing assertions, including
+both whole cover cancellations and the composed arbitrary-triple consumer.
+The six owner/reviewer checks pass in 14–18 seconds each at 90s/2GiB.
+Their diagnostic inventories match exact import controls, and the scoped
+LHS/catalog/TOC/health/dependency/document checks pass. No primitive,
+rewrite or unifier is added. The third and fourth exactness proofs remain
+next; LES/reference sign comparison, concrete qualification, NUH-5 displayed
+integration and NUH-7 are still required.
+
 ### NUH-6C2a: First interior exactness at K(b) — qualified 2026-09-15
 
 Original kernel lifts compare K(k₂) with K(v), where v:Im(a)⇒K(c).

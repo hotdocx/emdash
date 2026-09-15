@@ -189,7 +189,9 @@ the four surrounding whole maps and four zero composites now qualify in
 NUH-6C1. Its four native Im→Ker comparisons have derived zero kernel
 inclusions. NUH-6C2a derives the first comparison's cokernel-zero proof and
 fixed-forward exactness at K(b), using original image-cover representatives.
-Next prove the remaining three cokernel projections zero and derive their
+NUH-6C2b1 derives the second comparison's cokernel-zero proof and exactness
+at K(γ), using two original whole covers and a corrected K(b) representative.
+Next prove the remaining two cokernel projections zero and derive their
 exactness; do not infer it from the zero pairs or predicate declarations.
 LES/sign comparison and NUH-5 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped

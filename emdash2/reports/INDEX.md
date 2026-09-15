@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Second native snake interior exactness (2026-09-15): the
+[new proof](../emdash3_2_one_cat_native_snake_second_exactness.lp) derives
+ΩAlong for the actual Im(k₂)⇒K(∂) comparison. Two original whole
+cospan covers and the corrected K(b) representative derive its cokernel
+projection zero, then combine with its existing kernel-zero proof.
+Twenty-eight transparent definitions and 11 passing assertions add no
+primitive, rule or output assumption. The third/fourth proofs, sign/reference
+comparison and displayed CAS integration remain required in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 First native snake interior exactness (2026-09-15): the
 [new proof](../emdash3_2_one_cat_native_snake_first_exactness.lp) derives
 zero cokernel projection and ΩAlong for the actual Im(k₁)⇒K(k₂)
@@ -10,7 +20,7 @@ all representatives and the needed section; no extra lifting, splitness or
 exactness premise is supplied. Twenty-eight definitions and 11 passing
 assertions add no primitive or rule. The
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
-retains the remaining three exactness proofs, sign/reference comparison and
+retains the remaining two exactness proofs, sign/reference comparison and
 concrete displayed integration as required work.
 
 Whole native six-term snake chain (2026-09-15): the
@@ -21,7 +31,7 @@ original ∂, P/Q and general triple. Four
 [canonical comparison inputs](../emdash3_2_one_cat_native_snake_exact_inputs.lp)
 and [zero comparison-kernel inclusions](../emdash3_2_one_cat_native_snake_comparison_kernels.lp)
 now qualify. Thirty-six definitions and 22 assertions add no primitive or
-rule. The first cokernel-zero/exactness proof is recorded above; three
+rule. The first two cokernel-zero/exactness proofs are recorded above; two
 exactness proofs, LES/sign comparison and concrete displayed integration
 remain open in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
