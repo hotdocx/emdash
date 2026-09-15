@@ -1068,8 +1068,9 @@ The general native input, α/γ factors, E/ρ coimage-cover cancellation and
 covered map θ are qualified. NUH-6B now also derives θ∘κ_ρ=0 and the
 whole connecting ∂ with reconstruction and uniqueness. NUH-6C1 qualifies
 the surrounding whole maps, four zero composites and zero kernel inclusion
-for each actual comparison. Their four cokernel-zero proofs, full six-term
-exactness/sign comparison and this plan's G3B2 integration remain open.
+for each actual comparison. NUH-6C2a derives the first comparison's
+cokernel-zero proof and exactness at K(b). The remaining three exactness
+proofs, sign comparison and this plan's G3B2 integration remain open.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

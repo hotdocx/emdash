@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native finite-diagram coherence qualified; displayed categorical exactness transport next; legacy comparison and auxiliary normalization work deferred
+Status: active — native finite-diagram coherence and first snake interior exactness qualified; three snake exactness proofs next; displayed CAS exactness integration still required
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -69,8 +69,10 @@ assertions introduce no primitive/rule or annihilation premise. NUH-6C1
 also qualifies the four surrounding whole maps, all four adjacent
 zeros, and the four canonical comparison inputs and their zero kernel
 inclusions. NUH-6C1 adds 36 definitions and 22 assertions, with no primitive
-or rule. The four comparison cokernel-zero proofs and full six-term
-exactness remain NUH-6C2; LES/sign comparison and the separate NUH-5
+or rule. NUH-6C2a now qualifies the first comparison's cokernel-zero proof
+and fixed-forward exactness at K(b), using the original image cover and
+derived kernel representatives. The remaining three cokernel-zero/exactness
+proofs remain NUH-6C2b; LES/sign comparison and the separate NUH-5
 certificate join remain required before final qualification.
 
 Current NUH-5N2G3A milestone (2026-09-15): all three original whole exactness
@@ -1025,7 +1027,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: original exactness and input-pair observations qualified separately; combined certificate memory boundary remains | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | active: full whole six-term maps/zeros and comparison kernel-zero proofs qualified; four comparison cokernel-zero proofs next | Complete the four actual exactness proofs, then qualify the LES/reference comparison and fixed sign |
+| NUH-6 | active: full whole six-term maps/zeros and first interior exactness qualified; remaining three comparison cokernel-zero proofs next | Complete the remaining three actual exactness proofs, then qualify the LES/reference comparison and fixed sign |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 

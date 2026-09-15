@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native connecting and six-term maps/zeros qualified; four comparison cokernel-zero proofs next
+Status: first interior exactness qualified; remaining three comparison cokernel-zero proofs next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -60,7 +60,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | --- | --- | --- |
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
-| NUH-6C | maps, four zeros, native exact inputs/comparisons and their zero kernel inclusions qualified; four cokernel-zero proofs remain | Prove invertibility of all four actual interior comparisons and retain the full six-term sequence |
+| NUH-6C | maps/zeros, all comparison kernel-zero proofs and first interior exactness qualified; three cokernel-zero proofs remain | Prove invertibility of all four actual interior comparisons and retain the full six-term sequence |
 | NUH-6D | pending 6B/6C | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
@@ -276,8 +276,66 @@ including locations, term heads, rule families and parser results. Strict
 LHS and source-dependency scans pass; the catalog/TOC and generated health
 snapshot are current. No older kernel, model or TypeScript owner changed.
 
-**Next — NUH-6C2:** prove zero cokernel projection for each of the four
-actual comparisons and derive its ΩAlong evidence. Retain the native
-zero-pair inputs and original maps; no output-exactness premise is allowed.
-General six-term exactness, the LES/reference sign comparison, concrete
-NUH-6E checks, NUH-5N2G3B2 displayed integration and NUH-7 remain required.
+At `76babd56`, NUH-6C2 still required zero cokernel projection and ΩAlong
+evidence for each of the four actual comparisons. The first is now
+qualified below. The native zero-pair inputs and original maps remain;
+no output-exactness premise is allowed. General six-term exactness, the
+LES/reference sign comparison, concrete NUH-6E checks, NUH-5N2G3B2
+displayed integration and NUH-7 remain required.
+
+### NUH-6C2a: First Interior Exactness At K(b)
+
+The [kernel-comparison owner](../emdash2/emdash3_2_one_cat_native_snake_first_kernel_comparison.lp)
+uses the original κ_b∘κ_k₂ and π_a to lift K(k₂) into Im(a), then
+into K(v), where v:Im(a)⇒K(c) is the already derived lift. Reverse
+native lifts give η:K(v)⇒K(k₂). Original inclusion reconstruction and
+kernel cancellation derive η∘χ=id_K(k₂). This section is constructed;
+it is not a supplied splitness premise or a new equivalence choice.
+
+The [cover owner](../emdash2/emdash3_2_one_cat_native_snake_first_cover.lp)
+uses the previously derived s_a:A⇒Im(a). Image-source cancellation
+proves its actual cokernel projection zero. Existing kernel-precomposition
+stability gives the cover r_L:K(v∘s_a)⇒K(v) and whole cancellation.
+Since v∘s_a=α, the original first projection lifts into K(α). All
+reconstruction uses the same P/Q and the same original diagrams.
+
+The [exactness owner](../emdash2/emdash3_2_one_cat_native_snake_first_exactness.lp)
+uses the actual ε₁:Im(k₁)⇒K(k₂) and its native inclusion law.
+Its source-image factorization and the original input recovery identify
+the representatives η∘r_L with maps through ε₁. The original Q unit
+therefore makes π_ε₁∘η∘r_L=0. Cover cancellation gives π_ε₁∘η=0,
+and the derived η∘χ=id gives π_ε₁=0. Together with the already derived
+zero kernel inclusion, the existing inverse-from-universal-zeros theorem
+constructs `one_cat_native_snake_first_exact` in the original
+`OneCatNativeSnakeFirstExactness` predicate. This is fixed-forward ΩAlong
+evidence on ε₁, not an arbitrary isomorphism of its endpoints.
+
+This qualified tranche has 28 definitions and no primitive, rewrite or unifier.
+Its 11 reviewer assertions cover original kernel reconstructions/the derived retraction,
+image-source cokernel zero, representative lifting/cover cancellation,
+the actual comparison cover factorization, its cokernel-zero proof and
+full first exactness. A composed consumer first forms the native h from
+arbitrary a,b,c and a whole triple-zero path; no monic-a or epic-c
+restriction is added. No ordinary universal record or output-exactness
+assumption drives the construction.
+
+Final scoped evidence is recorded in
+`emdash2/tmp/probes/nuh6c2_first_conformance.json`,
+`nuh6c2_first_controls.json`, `nuh6c2_first_warnings.json` and
+`nuh6c2_first_qualification.json`. All targets use 90s/2GiB; TypeScript,
+repository aggregates, checker patches and resource-limit changes are out
+of this tranche.
+
+The three owners pass in 13.49s, 13.58s and 16.28s; the three reviewers
+pass in 13.70s, 13.76s and 14.26s. All six diagnostic inventories match
+their exact import controls: 1,484 inherited critical-pair and 169 pattern
+reports, with matching locations, term heads, rule families and no parser
+issues. Strict LHS and dependency scans pass. The catalog/TOC and generated
+health snapshot are current; the snapshot covers 1,262 files without
+running their typechecks. No earlier kernel, model or TypeScript owner changed.
+
+**Next — NUH-6C2b:** prove the actual second, third and fourth comparison
+cokernel projections zero and derive their fixed-forward exactness
+evidence. Only the first interior position is complete here. General
+six-term exactness, LES/reference sign comparison, concrete NUH-6E checks,
+NUH-5N2G3B2 displayed integration and NUH-7 remain required.

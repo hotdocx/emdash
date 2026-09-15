@@ -2,6 +2,17 @@
 
 Date: 2026-09-02
 
+First native snake interior exactness (2026-09-15): the
+[new proof](../emdash3_2_one_cat_native_snake_first_exactness.lp) derives
+zero cokernel projection and ΩAlong for the actual Im(k₁)⇒K(k₂)
+comparison. The original image cover and kernel reconstructions construct
+all representatives and the needed section; no extra lifting, splitness or
+exactness premise is supplied. Twenty-eight definitions and 11 passing
+assertions add no primitive or rule. The
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+retains the remaining three exactness proofs, sign/reference comparison and
+concrete displayed integration as required work.
+
 Whole native six-term snake chain (2026-09-15): the
 [four surrounding maps](../emdash3_2_one_cat_native_snake_six_term_maps.lp),
 [outer zeros](../emdash3_2_one_cat_native_snake_outer_zeros.lp) and
@@ -10,8 +21,9 @@ original ∂, P/Q and general triple. Four
 [canonical comparison inputs](../emdash3_2_one_cat_native_snake_exact_inputs.lp)
 and [zero comparison-kernel inclusions](../emdash3_2_one_cat_native_snake_comparison_kernels.lp)
 now qualify. Thirty-six definitions and 22 assertions add no primitive or
-rule. The four cokernel-zero/exactness proofs, LES/sign comparison and
-concrete displayed integration remain open in the
+rule. The first cokernel-zero/exactness proof is recorded above; three
+exactness proofs, LES/sign comparison and concrete displayed integration
+remain open in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 General native snake connecting transformation (2026-09-15):

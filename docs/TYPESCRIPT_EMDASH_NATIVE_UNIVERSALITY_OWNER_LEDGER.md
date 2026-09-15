@@ -331,6 +331,32 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C2a: First interior exactness at K(b) — qualified 2026-09-15
+
+Original kernel lifts compare K(k₂) with K(v), where v:Im(a)⇒K(c).
+Their reconstruction derives a section χ of η:K(v)⇒K(k₂), rather
+than requiring one as an input. The existing image-source cover s_a
+gives a derived kernel-precomposition cover with source K(v∘s_a),
+which maps into K(α). Native inclusion reconstruction identifies the
+resulting representatives with maps through the actual first comparison.
+
+The comparison's original Q-unit annihilation, cover cancellation and
+η∘χ=id derive its cokernel projection zero. Its previously derived
+kernel-zero proof then gives ΩAlong on that same canonical comparison.
+This completes the first interior position without a monic-a/epic-c
+restriction, ordinary universal records or added exactness/cover premise.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records the 28 definitions, 11 passing assertions and validation evidence.
+The six owner/reviewer checks take 13–17 seconds each under the existing
+90s/2GiB guard. Their diagnostic inventories match exact import controls;
+the scoped LHS/catalog/TOC/health and document checks pass. No primitive,
+rule, unifier or TypeScript change is introduced.
+
+This is **progress**. The second, third and fourth exactness proofs remain
+required, followed by LES/reference sign comparison, concrete qualification,
+NUH-5 displayed integration and NUH-7. First exactness is not the complete
+six-term theorem.
+
 ### NUH-6C1: Whole six-term maps, zeros and comparison kernels — qualified 2026-09-15
 
 The original α/γ reconstructions form two whole diagram maps α→b→γ;

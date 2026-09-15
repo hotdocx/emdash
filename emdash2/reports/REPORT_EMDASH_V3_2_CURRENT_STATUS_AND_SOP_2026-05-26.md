@@ -4,15 +4,26 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+First native snake exactness (2026-09-15): the
+[first-position owner](../emdash3_2_one_cat_native_snake_first_exactness.lp)
+derives the actual comparison cokernel projection zero through original
+image-cover representatives. Kernel reconstruction constructs the required
+section; no splitness, lifting or exactness assumption is added. Together
+with the original zero kernel inclusion this proves fixed-forward ΩAlong
+at K(b). Twenty-eight definitions and 11 passing assertions add no primitive
+or rule. The remaining three exactness proofs, LES/reference sign
+comparison and concrete displayed integration remain required in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Native whole six-term snake chain (2026-09-15): the
 [map owner](../emdash3_2_one_cat_native_snake_six_term_maps.lp) applies
 original K/Q action to the two whole reconstruction squares α→b→γ.
 The four surrounding maps and all four adjacent-zero proofs now qualify
 around the same ∂. The four actual comparison inputs/predicates and zero
 comparison-kernel inclusions are defined/derived. Thirty-six definitions
-and 22 assertions add no primitive or rule. Their four cokernel-zero
-proofs and full exactness, LES/sign comparison and concrete displayed
-integration remain required in the
+and 22 assertions add no primitive or rule. The first cokernel-zero proof
+is now derived above; three exactness proofs, LES/sign comparison and
+concrete displayed integration remain required in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Native general connecting ∂ (2026-09-15): the
