@@ -1,0 +1,34 @@
+from pathlib import Path
+import difflib,hashlib,json,os,subprocess,sys,time
+
+guard=Path('scripts/lambdapi_resource_guard.sh')
+original=guard.read_bytes()
+tracked=subprocess.check_output(['git','show','HEAD:emdash2/scripts/lambdapi_resource_guard.sh'])
+assert original==tracked, 'preserve any unrelated guard edit'
+memory_mib=int(sys.argv[2]) if len(sys.argv)>2 else 4096
+assert memory_mib in {4096,6144}
+text=original.decode()
+assert text.count('memory_mib <= 2048')==1
+expanded=text.replace('memory_mib <= 2048',f'memory_mib <= {memory_mib}').replace('memory 32..2048 MiB',f'memory 32..{memory_mib} MiB').encode()
+sha=lambda value:hashlib.sha256(value).hexdigest()
+selection=sys.argv[1] if len(sys.argv)>1 else 'constructor'
+assert selection in {'constructor','exactness'}
+target='tmp/probes/nuh6c3_result.lp' if selection=='constructor' else 'examples/one_cat_native_snake_six_term_exactness.lp'
+gc='o=120,v=1024' if selection=='constructor' else 'o=20,v=1024'
+limit_label=f'{memory_mib//1024}g'
+record_path=f'tmp/probes/nuh6c3_memory_{limit_label}.json' if selection=='constructor' else f'tmp/probes/nuh6c3_memory_exactness_{limit_label}.json'
+record={'target':target,'memory_mib':memory_mib,'timeout':'90s','file_mib':64,'gc':gc,'source_sha256':sha(Path(target).read_bytes()),'guard_before_sha256':sha(original),'guard_experiment_sha256':sha(expanded),'authorization':'2026-09-15 user explicitly permits temporary 4/6 GiB memory comparisons'}
+Path(f'tmp/probes/nuh6c3_guard_{limit_label}.patch').write_text(''.join(difflib.unified_diff(text.splitlines(keepends=True),expanded.decode().splitlines(keepends=True),fromfile='original-guard',tofile=f'temporary-{limit_label}-guard')))
+env=dict(os.environ,EMDASH_LP_MEMORY_MIB=str(memory_mib),EMDASH_LAMBDAPI_WARNINGS='1',OCAMLRUNPARAM=gc)
+guard.write_bytes(expanded)
+try:
+ preflight=subprocess.run(['bash',str(guard),'python3','-c',f'import resource; assert resource.getrlimit(resource.RLIMIT_AS)==({memory_mib}*1024**2,)*2; assert resource.getrlimit(resource.RLIMIT_FSIZE)==(64*1024**2,)*2; assert resource.getrlimit(resource.RLIMIT_CORE)==(0,0); print("{limit_label} inherited limits verified")'],env=env,capture_output=True,text=True)
+ record['preflight']={'exit':preflight.returncode,'output':preflight.stdout+preflight.stderr};assert preflight.returncode==0,record['preflight']
+ started=time.monotonic();result=subprocess.run(['scripts/probe.sh',record['target']],env=env,capture_output=True,text=True)
+ record['result']={'exit':result.returncode,'seconds':round(time.monotonic()-started,3),'output':result.stdout+result.stderr}
+finally:
+ assert guard.read_bytes()==expanded, 'guard changed externally; preserve that edit'
+ guard.write_bytes(original);record['guard_restored_sha256']=sha(guard.read_bytes())
+ Path(record_path).write_text(json.dumps(record,indent=2)+'\n')
+ print(json.dumps(record,indent=2),flush=True)
+if record.get('result',{}).get('exit')!=0:raise SystemExit(record.get('result',{}).get('exit',1))

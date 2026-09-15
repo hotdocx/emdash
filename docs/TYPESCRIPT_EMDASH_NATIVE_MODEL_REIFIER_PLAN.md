@@ -1075,8 +1075,11 @@ original whole covers and the corrected K(b) representative. NUH-6C2b2a
 now derives third exactness at Q(α), again through original whole covers
 and the same E/∂. NUH-6C2b2b now qualifies fourth exactness at Q(b), through
 three original whole covers and a native K(c) difference representative.
-All four individual comparisons are proved; whole six-term assembly, sign
-comparison and this plan's G3B2 integration remain open.
+All four individual comparisons are proved. Six-term construction/maps and
+native-input observations now qualify; the larger comparison/witness view
+remains 6C3b. Independent LES/sign work proceeds next. This plan's public
+pair alignment and displayed transport remain open despite the successful
+GC replay of its modular pair/certificate artifact.
 
 User clarification (2026-09-15): after the other goal work, the G3B2
 investigation may test a reviewed, measured increase of the 2GiB limit and
@@ -1101,6 +1104,40 @@ claim or permission to replace an unproved law by an assumption.
 These are brainstorming options to reassess carefully when G3B2 resumes,
 not an adopted implementation change. Continue the remaining mathematics
 under the preceding plan meanwhile.
+
+Latest user direction (2026-09-15): perform a quick, scoped GC-policy replay
+of the earlier combined certificate failure as well. The selected artifact
+is the unchanged `nuh5n2g3b_modular_pair_certificates.lp` (recorded SHA-256
+`afa8a64017349aa8f90d44a8635ac23a415e10bb88b0f7393cd159626793fe24`),
+with `OCAMLRUNPARAM=o=20,v=1024` under the existing 90s/2GiB guard. This
+checks that failed consumer; success alone would not prove the still-required
+pair alignment and full displayed-diagram transport.
+
+The replay passes all six assertions at the existing 2GiB limit:
+`nuh5n2g3b_modular_pair_certificates-20260915-101923.log`. The exact failing
+source hash is unchanged. Its helper retains the original whole exactness
+proof together with equality to the observed original pair; no output
+assumption or model-contract change was introduced. This clears that specific
+resource failure and makes its continuation available. The prototype is
+still unpromoted pending pair alignment, public diagram transport and focused
+integration qualification. The displayed-exactness flag remains false.
+
+The later MathComp/SSReflect-inspired review must distinguish intervention
+layers: emdash declarations and record interfaces; TypeScript elaboration
+and term sharing; Lambdapi conversion; and OCaml runtime/GC behaviour. No
+transfer layer is selected merely by analogy. The current runtime control
+does not alter reduction or unification rules. The user specifically raises
+records instead of deeply nested Sigma and controlled simplification/unfolding
+as candidates to measure, while preserving whole action and computational
+inverse data. Broad source/backend migrations remain later work.
+
+The [SSReflect implementation notes](https://rocq-prover.org/doc/v9.2/corelib/Corelib.ssr.ssreflect.html)
+document `nosimpl`, keyed locking and explicit unlocking as distinct controls,
+including a warning about recursive comparison costs for unkeyed locks.
+This is a relevant design precedent, not evidence that the same mechanism
+or a new opaque symbol is correct for emdash. A scoped record comparison
+must likewise measure the actual representation and projection costs; naming
+a nested Sigma is not by itself a demonstrated optimization.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

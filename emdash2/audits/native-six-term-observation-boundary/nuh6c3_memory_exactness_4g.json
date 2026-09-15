@@ -1,0 +1,21 @@
+{
+  "target": "examples/one_cat_native_snake_six_term_exactness.lp",
+  "memory_mib": 4096,
+  "timeout": "90s",
+  "file_mib": 64,
+  "gc": "o=20,v=1024",
+  "source_sha256": "2e13f82ccc1af662b670fbbd86c072ea4cf31819f628a3ba14c84f344c06c506",
+  "guard_before_sha256": "f568195e50aa78498df7b456c84bcde4c944dd27bfc119a45c996867a955ba06",
+  "guard_experiment_sha256": "b2beb8362b73d598baf3f91fa7677485c97c7dc54018c2f1c8388d8da1d4aea0",
+  "authorization": "2026-09-15 user explicitly permits a temporary memory increase above 2 GiB",
+  "preflight": {
+    "exit": 0,
+    "output": "4GiB inherited limits verified\nresource guard: backend=systemd memory=4096MiB file=64MiB time=90s serial=yes\n"
+  },
+  "result": {
+    "exit": 134,
+    "seconds": 65.542,
+    "output": "checking examples/one_cat_native_snake_six_term_exactness.lp with timeout 90s (warnings=1)\n## First Lambdapi error\nFatal error: allocation failure during minor GC\ntimeout: the monitored command dumped core\nscripts/lambdapi_resource_guard.sh: line 67: 24861 Aborted                 systemd-run --user --scope --quiet --collect --property=\"MemoryMax=$memory_bytes\" --property=MemorySwapMax=0 --property=\"RuntimeMaxSec=${seconds}s\" --property=KillSignal=SIGKILL \"${limited[@]}\"\nprobe failed with exit 134; log: logs/probes/one_cat_native_snake_six_term_exactness-20260915-104949.log\n"
+  },
+  "guard_restored_sha256": "f568195e50aa78498df7b456c84bcde4c944dd27bfc119a45c996867a955ba06"
+}

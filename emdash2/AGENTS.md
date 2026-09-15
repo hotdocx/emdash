@@ -194,8 +194,13 @@ at K(γ), using two original whole covers and a corrected K(b) representative.
 NUH-6C2b2a derives third exactness at Q(α), through two original whole
 covers and the same E/∂. NUH-6C2b2b derives fourth exactness at Q(b),
 through three original whole covers and a native K(c) difference representative.
-All four individual comparison witnesses now qualify. Next assemble and
-check the whole six-term result, retaining the same maps and comparisons.
+All four individual comparison witnesses now qualify. The whole six-term
+constructor, maps and native-input observations also qualify under the
+scoped GC profile. The larger comparison/witness view remains 6C3b in
+`audits/native-six-term-observation-boundary/README.md`. The user permits
+independent LES specialization/sign work next, while retaining that gap
+as required before final qualification. Do not resume unbounded normalization
+or assume output exactness to close it.
 LES/sign comparison and NUH-5 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
@@ -980,6 +985,43 @@ the iterated-hom architecture to the omega setting.
 - Manually prune old logs: `make prune-logs`
 
 ## Avoid Hung Typechecks
+
+For any repository Lambdapi task, distinguish import cost, type formation,
+construction and the first real consumer before changing formal interfaces.
+Preserve exact source/dependency versions, flags, resource limits, runtime
+parameters and logs. A constructor passing does not qualify its projections
+or an end-to-end consumer; separate historical failures need separate checks.
+
+For an allocation failure, one useful control is:
+
+```bash
+OCAMLRUNPARAM=o=20,v=1024 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh path/to/affected.lp
+```
+
+The installed OCaml 5.4 `gc.mli` documents default `space_overhead=120`:
+a smaller value collects unreachable major-heap blocks more eagerly, at a
+possible CPU cost. `ocamlrun.1` maps this field to `o`; `v=1024` reports exit
+GC statistics and can be omitted for routine checks. Verify the installed
+runtime documentation when versions change. `allocated_words` is allocation
+traffic, while `top_heap_words` is heap size in runtime words, not process
+RSS or total address space. Measure time as well as memory.
+
+This command changes collection frequency, not checker logic, proof terms,
+rewrite/unification rules, chosen inverses, opacity or the memory ceiling.
+Keep it scoped and log the effective `OCAMLRUNPARAM`/`CAMLRUNPARAM`, including
+wrapper defaults; do not reuse performance evidence across different runtime
+settings. GC tuning cannot guarantee success for excessive live data,
+nontermination or invalid types. After a success, check the actual required
+consumer. A larger-limit experiment needs authorization, a measured bounded
+target and the same serialization/file/deadline/no-swap restrictions; preserve
+and restore the normal guard. No unbounded fallback is permitted.
+
+The 2026-09-15 native snake and earlier combined pair/certificate constructor
+replays demonstrate this technique at 2GiB without changing their source.
+Their exact scope and measurements live in the native snake/model plans;
+they do not establish that all old endpoint or inverse-projection failures
+are fixed. This procedure is repository-wide, not specific to those goals.
 
 Interactive probes now run through `scripts/lambdapi_resource_guard.sh`:
 one checker at a time, at most 2 GiB address space per process, 64 MiB per

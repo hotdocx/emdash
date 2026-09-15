@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: all four interior exactness proofs qualified; whole six-term assembly next
+Status: individual proofs and six-term construction/maps/native inputs qualified; comparison/witness observation gap retained; LES specialization next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -60,8 +60,8 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | --- | --- | --- |
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
-| NUH-6C | maps/zeros and all four interior exactness proofs qualified; whole six-term assembly next | Retain the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | pending 6B/6C | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
+| NUH-6D | next, independent of the 6C3b observation check | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -560,3 +560,174 @@ parameter category and the arbitrary a,b,c scope; compare the assembled
 observations with the original maps and actual comparisons. LES/reference
 sign comparison, concrete NUH-6E checks, NUH-5N2G3B2 displayed integration
 and NUH-7 remain required.
+
+### NUH-6C3 Experiment: Native Exact Six-Term Result
+
+The preceding turn made progress at `c7d190c2`: all four original interior
+comparisons now have qualified exactness proofs. All 62 worktrees were clean
+and the comparison baseline remains an ancestor. The fourth-exactness
+baseline owner passes in
+`emdash2/logs/probes/emdash3_2_one_cat_native_snake_fourth_exactness-20260915-094531.log`.
+
+Use the existing `FiniteArrowTail` in `Functor_cat K C`, beginning at k₁
+and retaining k₂, ∂, q₁ and q₂ as its four further arrows. Its adjacent-pair
+annotation will retain the original whole native input h, the existing
+whole path identifying h's incoming observation with the stored incoming
+map, and `OneCatAdjunctionExactFamily` on that same h. This is transparent
+result data using the existing Sigma/Product and fixed-forward Ω evidence,
+not a new universality or equivalence notion. The link to the incoming map
+is derived by native input reconstruction; callers supply no naturality
+proof or ordinary universal record.
+
+Construct all four annotations from the original native inputs, their
+already derived reconstruction paths and their exactness theorems. The
+finite tail must retain the original maps literally, with no reselected
+endpoints. Check the assembled input/comparison/evidence projections and
+derive the stored adjacent-zero views from native input, rather than
+substituting a separate list of exactness facts unrelated to the tail.
+Reject a representation whose exactness does not apply to its actual stored
+pair, or which requires an output-exactness assumption. Keep qualification
+local and bounded at 90s/2GiB; no new primitive/rule or category of complexes
+is planned.
+
+Initial NUH-6C3 evidence: the seven-definition generic native exact-pair
+annotation passes (`nuh6c3_pairs-20260915-094910.log`). The first inline
+four-annotation/five-arrow result fails with allocation failure under the
+2GiB guard (`nuh6c3_result-20260915-095119.log`). An import-only control
+containing all four exactness owners passes
+(`nuh6c3_all_imports-20260915-095304.log`). The import union is therefore
+not itself the demonstrated failure. Isolate the annotations from the
+tail constructor, then test named transparent suffixes if construction is
+the expensive boundary. Preserve the failed inline source and keep all
+original maps, inputs and witnesses; no new primitive, opacity or output
+assumption is authorized by this failure.
+
+The annotation/result-type prefix also fails under the memory guard
+(`nuh6c3_steps-20260915-095417.log`); its process handle expired, and the
+terminal log confirms allocation failure after the imports completed.
+The first and second annotations each pass separately
+(`nuh6c3_first_step-20260915-095722.log`,
+`nuh6c3_second_step-20260915-095950.log`). The prefix still included the
+`FiniteArrowTail` result type, so it does not by itself identify an
+annotation failure. Separate all four annotations from that higher-order
+result-type application before choosing a representation change.
+
+Further isolation: the result type alone passes
+(`nuh6c3_tail_type_only-20260915-100053.log`). A symbol-printing progress
+probe passes the first two annotations and fails constructing the third
+(`nuh6c3_steps_printed-20260915-100318.log`), while that third annotation
+passes alone (`nuh6c3_third_step-20260915-100452.log`). Separate modules
+reach the same third-annotation boundary
+(`nuh6c3_modular_result-20260915-100700.log`); direct existing Σ/Product
+construction also fails (`nuh6c3_annotations_direct-20260915-100852.log`).
+The earlier type-query marker variant failed only because a bare implicitly
+parameterized symbol required more arguments; it supplies no semantic result.
+
+The next single runtime control uses the unchanged original source with
+`OCAMLRUNPARAM=o=20,v=1024`, retaining the 90s/2GiB/64MiB/serial guard.
+The installed OCaml `gc.mli` documents default `space_overhead=120` and
+more eager collection at smaller values; the installed `ocamlrun.1` maps
+this field to `o` and exit statistics to `v=1024`. This tests collection
+overhead before changing representation. It changes no proof term, checker
+logic, primitive, opacity or resource ceiling, and does not reopen the
+separate displayed-CAS certificate investigation.
+
+The unchanged inline constructor passes at 2GiB with that GC profile
+(`nuh6c3_result-20260915-101024.log`). This establishes that construction
+does not require changing the Sigma representation or hiding proof data.
+At the user's explicit request, the same source also passes a temporary
+4GiB/default-collection comparison (`nuh6c3_result-20260915-101437.log`,
+22.735s). `nuh6c3_memory_4g.json` records the exact source/guard hashes and
+verified restoration of the original guard bytes. The default remains 2GiB.
+
+The general procedure is documented in the root guidance and the Lambdapi
+SOP's resource section. The new scoped six-term runner uses `o=20` by default,
+logs the effective setting and retains all ordinary guard limits. Explicit
+caller settings are retained. The checker-metrics identity now records both
+OCaml runtime environment variables and the scoped runner's hash, so changed
+profiles are not silently reused as the same performance evidence.
+
+Promotion keeps the original seven annotation definitions and six snake
+result definitions. The two owners, five generic projection/zero assertions
+and six complete-result/map assertions pass under `o=20` at 2GiB. The initial
+eight-input reviewer fails at both `o=20` and `o=10`. Threading the tail's
+actual projected endpoints/arrows into the dependent observation calls
+instead of forcing repeated comparisons with separately written endpoint
+copies passes all eight input/zero observations
+(`nuh6c3_inputs_shared-20260915-103325.log`). This is a consumer-presentation
+change only; the recovered native inputs are still compared with the
+original ones. The remaining comparison/evidence reviewer is retained as 6C3b;
+its first combined shared-endpoint attempt still exceeds 2GiB. Do not yet
+qualify all result observations or claim NUH-6 complete.
+
+### NUH-6C3a: Qualified Construction And Input Observations
+
+The [native annotation owner](../emdash2/emdash3_2_one_cat_native_exact_arrow_pairs.lp)
+has seven transparent definitions. Each annotation stores the original h,
+its incoming-map reconstruction and `OneCatAdjunctionExactFamily` on that
+same h. Generic constructor/projection β checks retain h, its path, the
+canonical comparison formula and the original witness. The zero view is
+derived from native input annihilation. No primitive, rule or ordinary
+universal-record prerequisite is added.
+
+The [six-term owner](../emdash2/emdash3_2_one_cat_native_snake_six_term_result.lp)
+has six definitions: four original annotations, the finite-tail result type,
+and its constructor. The first edge is fixed by the tail index; the remaining
+edges and endpoints are stored by its constructors. All entries are whole
+functors/transformations in `Functor_cat K C`. The constructor applies the
+four original exactness theorems, not supplied output evidence. Its composed
+consumer retains arbitrary a,b,c and cba=0, without monic-a or epic-c inputs.
+
+Thirteen definitions, five generic projection/zero assertions, six complete
+result/map assertions and eight native-input/zero assertions are qualified:
+19 assertions total. Input consumers thread the actual projected endpoints
+and arrows through the dependent accessors and recover the original h at
+every position. Five scoped runner/profile tests also pass. The runner,
+examples dispatcher and metrics use the measured GC profile for these
+targets only. No global GC default, memory ceiling, checker patch or opacity
+change is installed.
+
+The owner checks take 8.99s and 36.34s; the generic, map and input reviewers
+take 8.74s, 36.06s and 29.65s. All five diagnostic inventories match their
+import controls, including locations, term heads, rule families and parser
+results: annotation owner/reviewer retain 1,208 critical-pair and 159 pattern
+reports; result/map/input checks retain 1,484/169. No new rule is introduced.
+Strict LHS, source/snapshot audits, catalog/TOC and source-health checks pass.
+The health snapshot covers 1,285 files without a repository typecheck.
+Evidence is recorded in `emdash2/tmp/probes/nuh6c3_conformance.json`,
+`nuh6c3_controls.json`, `nuh6c3_warnings.json` and `nuh6c3_qualification.json`.
+
+### NUH-6C3b: Required Observation Gap And Changed Work Order
+
+The first bare comparison of a concretely extracted Im→Ker map with its
+standalone presentation exceeds 2GiB. Typed reflexivity, Σ elimination
+before reconstruction and direct Σ/Product construction do not resolve it.
+The unchanged reviewer also fails at 4GiB; at 6GiB it reaches the 90-second
+limit and logs allocation failure. The normal guard is restored after each
+temporary experiment. `o=1` spends the deadline in imports.
+
+Fresh exact-source compilation checks the parent and produces 174 `.lpo`
+files, but the dependent review exhausts 2GiB while importing them. An
+isolated post-proof opacity test on the four adjacent-zero laws checks the
+parent, then fails the same reviewer. No opacity is promoted. The existing
+`OmegaArrowData` carrier admits a generic observer, but its combined concrete
+comparison/inverse review is not qualified either. These are resource
+results, not mathematical counterexamples.
+
+The [resumption bundle](../emdash2/audits/native-six-term-observation-boundary/README.md)
+preserves the failed reviewer, relevant variants and measurement manifests.
+They are not positive library examples. The original comparison/witness
+observation obligation remains required before NUH-7. The user permits
+progressing independent skeleton/mathematics and returning later to these
+gaps. Advance NUH-6D using the qualified whole maps, individual exactness
+proofs and ∂ρ=θ; this observation check is not its prerequisite.
+
+The initial LES-specialization candidate takes the four-row window
+Bm→B0→B1→B2 and forms a=[bm,i0]:Bm⊕A0⇒B0, b=b0, and
+c=⟨b1,p1⟩:B1⇒B2⊕D1. Existing whole product/coproduct operations,
+the two middle-column zero pairs and row-map reconstruction should derive
+cba=0. Native universal comparisons should then identify K(γ) with upper
+right H and Q(α) with lower left H, retaining the original selections.
+Compare ∂ρ=θ with the native δ reconstruction to fix the sign. This candidate
+still requires owner-level review and typed consumers; it is not implemented
+or a completed sign comparison.

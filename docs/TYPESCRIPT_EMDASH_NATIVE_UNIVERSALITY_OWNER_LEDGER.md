@@ -331,6 +331,38 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C3a: Whole result construction and input observations — qualified 2026-09-15
+
+The previous turn made progress at `c7d190c2`, completing all four individual
+exactness proofs. The native result now uses `FiniteArrowTail` in
+`Functor_cat K C`, with the five original whole maps and four annotations
+containing the original native input, its incoming-map reconstruction and
+its original exactness witness. Thirteen definitions add no primitive or
+rule. Nineteen assertions qualify construction, maps, generic annotation
+computation and all four native input/zero observations.
+
+The original constructor allocation failure is resolved at 2GiB by
+`OCAMLRUNPARAM=o=20`. The same source passes a temporary 4GiB/default-GC
+comparison. Threading actual projected endpoints fixes the input reviewer.
+The broader comparison/witness reviewer remains unqualified after bounded
+GC, 4/6GiB, fresh checked-object and post-proof-opacity experiments. The
+[resumption bundle](../emdash2/audits/native-six-term-observation-boundary/README.md)
+preserves that required 6C3b gap; it is excluded from positive examples.
+No map/inverse data, proof law or checker logic is made opaque or changed
+to force qualification. The user permits advancing independent LES work
+before returning to this gap.
+
+The earlier NUH-5 modular pair/certificate artifact passes unchanged at
+2GiB with the same GC setting. This clears that specific resource failure,
+not its still-required public pair alignment/displayed transport. The GC
+procedure is documented in root guidance and the existing Lambdapi SOP.
+The scoped runner and five profile/routing/provenance tests keep this
+technique reproducible without changing global GC or memory defaults.
+
+Next: review and construct the whole LES specialization triple in NUH-6D.
+NUH-6C3b, LES/reference/sign comparison, concrete checks, NUH-5 displayed
+integration and NUH-7 all remain required. The full goal stays active.
+
 ### NUH-6C2b2b: Fourth interior exactness at Q(b) — qualified 2026-09-15
 
 The preceding turn made progress at `a44393cb`; third exactness remains

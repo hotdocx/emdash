@@ -1,0 +1,62 @@
+{
+  "base": "c7d190c20d5af2e62bab5383b94e00c2bb04d1ea",
+  "files": [
+    {
+      "file": "six_term_exactness.lp.txt",
+      "sha256": "2e13f82ccc1af662b670fbbd86c072ea4cf31819f628a3ba14c84f344c06c506"
+    },
+    {
+      "file": "nuh6c3_exact_first_typed.lp.txt",
+      "sha256": "99c4125fa774f0c0fd219c9b8f9613689f1b5d5580422d0f979605942967fc45"
+    },
+    {
+      "file": "nuh6c3_staged_views.lp.txt",
+      "sha256": "ab2e489f96227c088aa9cbfc742d45ab117fdf3708b99e642007f16980254711"
+    },
+    {
+      "file": "nuh6c3_exact_first_staged.lp.txt",
+      "sha256": "64d2b294140588d8e88326dd8d1bf30d15493f87f1163b3009f34318d16992e3"
+    },
+    {
+      "file": "nuh6c3_compact_data.lp.txt",
+      "sha256": "4286e2958c5eb4f8d67cb7220c3d9a4f8e09e2b27e8fcca739de5f17f6967ec2"
+    },
+    {
+      "file": "nuh6c3_compact_review.lp.txt",
+      "sha256": "faa2b6776af5b61a403f49f50668a97962bcf1635d663ecfa2d57a2d7ebfff26"
+    },
+    {
+      "file": "nuh6c3_compact_generic.lp.txt",
+      "sha256": "bf59f4de38d8598cb054e48c8096f298e03115aaa4beda50b6d596f13b816e40"
+    },
+    {
+      "file": "nuh6c3_fresh_objects.json",
+      "sha256": "a34a4b24776db489a13f4d3840cd3dd69be7efa189743bb4d2f74896a3172d90"
+    },
+    {
+      "file": "nuh6c3_opaque_laws.json",
+      "sha256": "bdbe613d40da6331a0528780218cd4963b11c5a988f7b66b32e417caf0246b86"
+    },
+    {
+      "file": "nuh6c3_memory_exactness_4g.json",
+      "sha256": "cccb99647681b0334175ffbe73eb2ef7628902ad5666a103788c1626d2890dd6"
+    },
+    {
+      "file": "nuh6c3_memory_exactness_6g.json",
+      "sha256": "a6dcc6e8b36115aaf9a5fa44f4dae3e8f94e4b1e73fa85aabe528b4e9859faea"
+    },
+    {
+      "file": "nuh6c3_fresh_object_probe.py.txt",
+      "sha256": "07edfa18d35515cf4451e06033970e9f493402916192368bc3fba5be30b7b588"
+    },
+    {
+      "file": "nuh6c3_opaque_law_probe.py.txt",
+      "sha256": "aa52a3115d503c9e3ac9e31e2591156c56efefa1f1a75728b5833014b13eb053"
+    },
+    {
+      "file": "nuh6c3_memory_comparison.py.txt",
+      "sha256": "506b8b79a5d1bbb0a61ef512347fcb4f5260041035058a40d242bbbdb505719d"
+    }
+  ],
+  "status": "unqualified observation/refolding experiments; not positive library checks"
+}

@@ -2,6 +2,19 @@
 
 Date: 2026-09-02
 
+Native six-term result construction (2026-09-15): the
+[result owner](../emdash3_2_one_cat_native_snake_six_term_result.lp) stores
+the original whole maps and native exact-pair annotations. Thirteen
+definitions and 19 passing assertions qualify construction, map observations,
+generic annotation computation and native input/zero recovery. The scoped
+GC profile resolves the constructor allocation failure; it also clears the
+earlier NUH-5 modular pair/certificate replay. The larger six-term
+comparison/witness review remains a required
+[observation gap](../audits/native-six-term-observation-boundary/README.md).
+Independent LES/sign work proceeds next; displayed CAS alignment/transport
+and final qualification remain open in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Fourth native snake interior exactness (2026-09-15): the
 [new proof](../emdash3_2_one_cat_native_snake_fourth_exactness.lp) derives
 ΩAlong for the actual Im(q₁)⇒K(q₂) comparison. Three original whole

@@ -219,6 +219,11 @@ per-target extensions; the current guard permits an explicit limit up to
 Memory/file limits and serial execution remain in force. The separate proportional-
 validation policy still forbids unnecessary aggregates.
 
+For Lambdapi allocation failures or timeouts, follow the repository-wide
+[resource/GC procedure in the Lambdapi SOP](emdash2/AGENTS.md#avoid-hung-typechecks).
+Keep runtime profiles explicit and distinguish them from changes to formal
+computation. This does not change the default memory limit or authorize broad checks.
+
 ## Change And Validation Rules
 
 - Behavioral changes under `src/` require focused tests under `tests/`, wired

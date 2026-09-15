@@ -4,6 +4,19 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native six-term result construction (2026-09-15): the
+[result owner](../emdash3_2_one_cat_native_snake_six_term_result.lp) uses
+the existing finite tail in `Functor_cat K C`. Native annotations retain
+their original input, incoming-map reconstruction and exactness witness.
+Thirteen definitions and 19 assertions qualify construction, whole maps,
+generic projection computation and native input/zero observations. The
+actual large comparison/witness review remains 6C3b, with snapshots in the
+[resumption bundle](../audits/native-six-term-observation-boundary/README.md).
+GC tuning resolves the constructor and the earlier NUH-5 modular certificate
+replay; it does not finish displayed exactness transport. Independent
+LES/sign work proceeds under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Fourth native snake exactness (2026-09-15): the
 [fourth-position owner](../emdash3_2_one_cat_native_snake_fourth_exactness.lp)
 derives fixed-forward ΩAlong at Q(b). Three original whole covers produce

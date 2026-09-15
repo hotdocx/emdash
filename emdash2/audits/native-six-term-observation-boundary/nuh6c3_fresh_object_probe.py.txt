@@ -1,0 +1,26 @@
+from pathlib import Path
+import hashlib,json,os,shutil,subprocess,tempfile,time
+
+root=Path.cwd();record={'gc':'o=20,v=1024','memory_mib':2048,'seconds_per_target':90,'checks':[]}
+guard=root/'scripts/lambdapi_resource_guard.sh'
+env=dict(os.environ,OCAMLRUNPARAM=record['gc'],EMDASH_LP_MEMORY_MIB='2048',EMDASH_LP_TIMEOUT='90s')
+with tempfile.TemporaryDirectory(prefix='emdash-native-snake-objects-') as folder:
+ stage=Path(folder);record['stage']=folder
+ shutil.copy2(root/'lambdapi.pkg',stage/'lambdapi.pkg')
+ for source in root.glob('*.lp'):shutil.copy2(source,stage/source.name)
+ (stage/'examples').mkdir()
+ target='examples/one_cat_native_snake_six_term_exactness.lp'
+ shutil.copy2(root/target,stage/target)
+ record['source_sha256']={str(p.relative_to(stage)):hashlib.sha256(p.read_bytes()).hexdigest() for p in stage.rglob('*.lp')}
+ for label,file,extra in [('owner','emdash3_2_one_cat_native_snake_six_term_result.lp',['-c']),('reviewer',target,[])]:
+  log=root/'logs/probes'/('nuh6c3_fresh_objects_'+label+'-'+time.strftime('%Y%m%d-%H%M%S')+'.log')
+  started=time.monotonic()
+  with log.open('w') as out:
+   result=subprocess.run(['bash',str(guard),'lambdapi','check','--no-colors',*extra,file],cwd=stage,env=env,stdout=out,stderr=subprocess.STDOUT)
+  row={'file':file,'exit':result.returncode,'seconds':round(time.monotonic()-started,3),'log':str(log.relative_to(root)),'generated_objects':len(list(stage.rglob('*.lpo')))}
+  record['checks'].append(row);print(json.dumps(row),flush=True)
+  (root/'tmp/probes/nuh6c3_fresh_objects.json').write_text(json.dumps(record,indent=2)+'\n')
+  if result.returncode:break
+record['temporary_stage_removed']=not Path(record['stage']).exists()
+(root/'tmp/probes/nuh6c3_fresh_objects.json').write_text(json.dumps(record,indent=2)+'\n')
+if any(r['exit'] for r in record['checks']):raise SystemExit(1)

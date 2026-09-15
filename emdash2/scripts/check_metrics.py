@@ -285,6 +285,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_native_snake_fourth_covers.lp"),
     Path("emdash3_2_one_cat_native_snake_fourth_representatives.lp"),
     Path("emdash3_2_one_cat_native_snake_fourth_exactness.lp"),
+    Path("emdash3_2_one_cat_native_exact_arrow_pairs.lp"),
+    Path("emdash3_2_one_cat_native_snake_six_term_result.lp"),
     Path("emdash3_2_functor_category_unit_views.lp"),
     Path("emdash3_2_one_cat_arrow_family_maps.lp"),
     Path("emdash3_2_one_cat_kernel_cokernel_family_maps.lp"),
@@ -1001,6 +1003,14 @@ ISOLATED_CHECK_GROUPS = (
     (SPECIAL_NORMALIZATION_CHECK_FILES, "./scripts/check_short_exact_normalization.sh"),
     (SPECIAL_SNAKE_ROW_CHECK_FILES, "./scripts/check_snake_row_comparisons.sh"),
 )
+NATIVE_SIX_TERM_GC_CHECK_FILES = {
+    Path("emdash3_2_one_cat_native_exact_arrow_pairs.lp"),
+    Path("emdash3_2_one_cat_native_snake_six_term_result.lp"),
+    Path("examples/one_cat_native_exact_arrow_pairs.lp"),
+    Path("examples/one_cat_native_snake_six_term_result.lp"),
+    Path("examples/one_cat_native_snake_six_term_inputs.lp"),
+}
+NATIVE_SIX_TERM_GC_SCRIPT = "scripts/check_native_snake_six_term.sh"
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
 HEALTH_STATE = ROOT / "logs" / "check-health-state.json"
@@ -1059,6 +1069,8 @@ def check_files() -> list[Path]:
 
 
 def lambdapi_check_command(path: Path) -> list[str]:
+    if path in NATIVE_SIX_TERM_GC_CHECK_FILES:
+        return [f"./{NATIVE_SIX_TERM_GC_SCRIPT}", str(path)]
     warnings = os.environ.get("EMDASH_LAMBDAPI_WARNINGS", "0").lower()
     if warnings in {"1", "true", "yes", "on"}:
         warning_flags: list[str] = []
@@ -1195,6 +1207,11 @@ def check_state_identity(
         "warnings_enabled": os.environ.get("EMDASH_LAMBDAPI_WARNINGS", "0").lower()
         in {"1", "true", "yes", "on"},
         "extra_lambdapi_flags": os.environ.get("EMDASH_LAMBDAPI_FLAGS", ""),
+        "ocamlrunparam": os.environ.get("OCAMLRUNPARAM", ""),
+        "camlrunparam": os.environ.get("CAMLRUNPARAM", ""),
+        "native_six_term_gc_script": hashlib.sha256(
+            (ROOT / NATIVE_SIX_TERM_GC_SCRIPT).read_bytes()
+        ).hexdigest(),
     }
 
 
@@ -1213,6 +1230,9 @@ def resume_identity_is_compatible(
         "timeout",
         "warnings_enabled",
         "extra_lambdapi_flags",
+        "ocamlrunparam",
+        "camlrunparam",
+        "native_six_term_gc_script",
     )
     if any(previous.get(key) != current.get(key) for key in stable_keys):
         return False

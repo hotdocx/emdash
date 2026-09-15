@@ -26,6 +26,13 @@ fi
 
 check_file() {
   local file="$1"
+  case "$file" in
+    examples/one_cat_native_exact_arrow_pairs.lp|\
+    examples/one_cat_native_snake_six_term_result.lp|\
+    examples/one_cat_native_snake_six_term_inputs.lp)
+      ./scripts/check_native_snake_six_term.sh "$file"
+      return ;;
+  esac
   if command -v timeout >/dev/null 2>&1; then
     timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
       lambdapi check "${warning_flags[@]}" "${extra_flags[@]}" "$file"
