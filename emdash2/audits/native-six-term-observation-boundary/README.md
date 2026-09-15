@@ -22,6 +22,19 @@ fixes the native-input reviewer, but does not fix this comparison reviewer.
 The snapshots and measurement records preserve the following rejected or
 unfinished approaches:
 
+- At `6fcc43e8`, the unchanged reviewer also fails at 6GiB/180s. The
+  user-authorized 8GiB/180s replay fails with allocation failure in 122.564s,
+  at peak RSS 8,107,460KiB. Both use `o=20,v=1024`; this is a memory failure
+  before the extended deadline. The active resource guard stays unchanged.
+  See `nuh6c3b_resource_replays.json` for exact source/runtime identities.
+- Transparent step names fail during specialized type conversion, both at
+  reconstructed and actual projected indices. A record annotation with the
+  same fields and three constructor/projection β rules passes the original
+  five generic assertions and the six-term parent, but the full reviewer
+  still fails at 2GiB/180s. The isolated eight original witness assertions
+  also fail there. These variants are unpromoted diagnostics, not repaired
+  active owners. The next split is type formation versus projection typing
+  versus comparison at the first position.
 - 2GiB with `o=20`, and the more eager `o=10`, do not suffice for the relevant
   large observation variants. `o=1` reaches the deadline during imports.
 - The unchanged comparison reviewer fails at 4GiB; the 6GiB run reaches its
@@ -42,6 +55,13 @@ unfinished approaches:
 
 `snapshots.json` hashes the preserved files. `.lp.txt` files are historical
 source snapshots, not registered examples or importable active theory.
+`nuh6c3b_restore_probes.py.txt` reconstructs the newer diagnostic files under
+ignored `tmp/probes/` from these snapshots and pinned Git sources, verifying
+their recorded source hashes. Invoke it with Python; it does not run a
+checker or modify active owners. The large import-only and assertion-subset
+variants are reconstructed instead of duplicated in this bundle. The named
+projected snapshot omits one final blank line for diff hygiene; restoration
+puts that byte back before checking the original source hash.
 Reproduce them against the checkpoint containing this bundle, retaining its
 active native owners and source/dependency versions. The recorded earlier
 commit is an ancestry/comparison anchor, not a reset instruction.

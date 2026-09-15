@@ -56,6 +56,34 @@
     {
       "file": "nuh6c3_memory_comparison.py.txt",
       "sha256": "506b8b79a5d1bbb0a61ef512347fcb4f5260041035058a40d242bbbdb505719d"
+    },
+    {
+      "file": "nuh6c3b_named_first.lp.txt",
+      "sha256": "e81536cfbd08c9e986b5cc446de38ff6b3be93579cb8eb61ac138863737d5a70"
+    },
+    {
+      "file": "nuh6c3b_named_trace.lp.txt",
+      "sha256": "348cd46dfcc670f80b0821b048fe3c42163afdc79e7e0e94fb9d90dfccfbca70"
+    },
+    {
+      "file": "nuh6c3b_named_projected.lp.txt",
+      "sha256": "3f3a621e37511844e795ac213dd27b973517bdf520e0320dcf94c7cb3453f4af"
+    },
+    {
+      "file": "nuh6c3b_guard_8g.sh.txt",
+      "sha256": "401e2b87ed855a7081e57ef4c960cb459c0ca3264a4953d7fa28d86af0beeca7"
+    },
+    {
+      "file": "nuh6c3b_resource_replays.json",
+      "sha256": "f40394f2429d856f27c7fd8c572a516b189136cc66ad1452e8a64fc8f53d955d"
+    },
+    {
+      "file": "nuh6c3b_record_pairs.lp.txt",
+      "sha256": "c5c2c7280a54c5b4fb0c898ea21bae862bd549a7817892e5019a4cc3c40646b9"
+    },
+    {
+      "file": "nuh6c3b_restore_probes.py.txt",
+      "sha256": "e45ebd02dee9aa21f6670f44a48eeabf19cf2356198d071c57b15c93ea7cc819"
     }
   ],
   "status": "unqualified observation/refolding experiments; not positive library checks"

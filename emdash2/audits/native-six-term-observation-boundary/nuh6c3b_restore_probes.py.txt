@@ -1,0 +1,82 @@
+"""Reconstruct diagnostics without running a checker or changing active owners.
+
+Large reviewers are reconstructed from the existing snapshot and pinned Git
+sources instead of duplicating thousands of generated lines in this bundle.
+"""
+
+from pathlib import Path
+import argparse
+import hashlib
+import json
+import re
+import subprocess
+
+audit = Path(__file__).resolve().parent
+repo = audit.parents[2]
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--out", type=Path, default=repo / "emdash2/tmp/probes")
+args = parser.parse_args()
+manifest = json.loads((audit / "nuh6c3b_resource_replays.json").read_text())
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def original(path):
+    return subprocess.check_output(
+        ["git", "show", manifest["checkpoint"] + ":emdash2/" + path],
+        cwd=repo,
+    ).decode()
+
+
+base = (audit / "six_term_exactness.lp.txt").read_text()
+sources = {"nuh6c3b_replay.lp": base}
+for name in ("named_first", "named_trace", "named_projected", "record_pairs"):
+    name = "nuh6c3b_" + name + ".lp"
+    sources[name] = (audit / (name + ".txt")).read_text()
+
+# Preserve the exact checked bytes despite Markdown diff hygiene at EOF.
+sources["nuh6c3b_named_projected.lp"] += "\n"
+sources["nuh6c3b_record_result.lp"] = original(
+    "emdash3_2_one_cat_native_snake_six_term_result.lp"
+).replace(
+    "emdash.emdash3_2_one_cat_native_exact_arrow_pairs",
+    "emdash.tmp.probes.nuh6c3b_record_pairs",
+)
+sources["nuh6c3b_record_generic.lp"] = original(
+    "examples/one_cat_native_exact_arrow_pairs.lp"
+).replace(
+    "emdash.emdash3_2_one_cat_native_exact_arrow_pairs",
+    "emdash.tmp.probes.nuh6c3b_record_pairs",
+)
+sources["nuh6c3b_record_review.lp"] = base.replace(
+    "emdash.emdash3_2_one_cat_native_snake_six_term_result",
+    "emdash.tmp.probes.nuh6c3b_record_result",
+)
+parts = re.split(r"(?m)(?=^assert\b)", base)
+sources["nuh6c3b_original_witnesses.lp"] = "".join(
+    part for part in parts
+    if "⊢ (@one_cat_native_exact_arrow_pair_comparison " not in part
+)
+assert len(re.findall(
+    r"(?m)^assert\b", sources["nuh6c3b_original_witnesses.lp"]
+)) == 8
+sources["nuh6c3b_guard_8g.sh"] = (audit / "nuh6c3b_guard_8g.sh.txt").read_text()
+
+expected = {
+    Path(probe["source"]).name: probe["source_sha256"]
+    for probe in manifest["other_probes"] + [manifest["replay_8g"]]
+}
+expected["nuh6c3b_guard_8g.sh"] = manifest["replay_8g"]["guard_trial_sha256"]
+for name, content in sources.items():
+    if name in expected:
+        assert digest(content.encode()) == expected[name], name
+    destination = args.out / name
+    if destination.exists():
+        assert destination.read_bytes() == content.encode(), destination
+
+args.out.mkdir(parents=True, exist_ok=True)
+for name, content in sources.items():
+    (args.out / name).write_text(content)
+print(f"Restored {len(sources)} diagnostic files under {args.out}; all recorded source hashes match")

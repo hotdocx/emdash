@@ -707,6 +707,75 @@ Evidence is recorded in `emdash2/tmp/probes/nuh6c3_conformance.json`,
 
 ### NUH-6C3b: Required Observation Gap And Changed Work Order
 
+Resumption at `6fcc43e8`: displayed nonsplit snake exactness is qualified.
+All 62 worktrees were clean at resumption and the existing six-term input
+reviewer passes. The retained twelve-assertion reviewer has the exact
+snapshot hash `2e13f82ccc1af662b670fbbd86c072ea4cf31819f628a3ba14c84f344c06c506`.
+Its 174 active dependencies are unchanged from their original checkpoints.
+The unchanged replay still fails with allocation failure at 6GiB/180s,
+with `OCAMLRUNPARAM=o=20,v=1024` and warnings enabled.
+
+The user then authorized an 8GiB control. The same complete source fails
+with allocation failure after 122.564s, before its 180s deadline, at peak
+resident memory 8,107,460KiB (about 7.73GiB). The experiment uses a copied
+resource guard changing only its accepted maximum and comment; the active
+guard remains byte-identical. Serialization, file/core limits, no swap and
+the deadline remain enforced. No proof or inverse data is made opaque.
+Increasing memory alone therefore has not qualified this reviewer.
+
+Reuse the earlier successful techniques according to the boundary they
+actually address:
+
+| Technique | Evidence and next use |
+| --- | --- |
+| More frequent GC | Already applied here; it previously qualified six-term construction and the separate combined LES pair/certificate artifact at 2GiB. |
+| Preserve original dependent endpoint expressions | Fixed the input reviewer and concrete native snake annotations. Keep actual projected indices while diagnosing this observation. |
+| Checked transparent names and compact point data | Qualified native LES point observations. Here, named steps fail during type conversion before the comparison assertion, both with reconstructed and actual projected endpoints. |
+| Checked parent objects and scoped imports | The earlier exact-source parent compilation succeeded, but its dependent consumer still failed at 2GiB. Reuse for import cost where applicable; it has not solved this conversion boundary. |
+| Rigid result records | `FiniteArrowTail` already uses rigid indices. The isolated record-annotation variant passes generic projections and the parent, but still fails the full reviewer at 2GiB. It is unpromoted. |
+| Controlled unfolding / proof-only opacity | Earlier opacity on four checked zero laws did not qualify this reviewer. No opacity is promoted; retain selected inverse data and inspect transport dependencies before any further law-only experiment. |
+
+For NUH-5N2G3B2, carry forward the already successful GC replay and named
+point-data interface. Its remaining public pair alignment is also a
+mathematical construction through the original column comparisons; runtime
+tuning cannot supply that theorem. Adapt the qualified displayed-snake
+certificate construction only where those original comparisons justify it.
+
+The tested representation hypothesis presents the existing
+`OneCatNativeExactArrowPair` annotation as an indexed
+record with its same h/reconstruction/exactness fields and only constructor
+projection β rules. The intended model is its current Σ/Product definition;
+this is result storage, not a new universal interface. Keep comparison and
+zero-composite construction defined from the existing whole operations.
+First check the original generic field consumers and the complete retained
+reviewer against isolated owner copies. Failure at the same consumer rejects
+this as the immediate performance fix. Promotion would additionally require
+the Σ interpretation, original inverse-data consumers, owner-position rule
+and warning audits, and the affected result consumers. No such change is
+installed by this experiment.
+
+The isolated record variant passes the original five generic assertions,
+including input, reconstruction and exactness-witness projection β. Its
+complete six-term parent also checks. The unchanged twelve assertions
+(apart from their import path) still fail with allocation failure at
+2GiB/180s after that parent. It therefore is not a qualified performance
+repair and remains unpromoted. The actual-projected-index naming control
+first reached 90s during imports; its 180s replay reaches the named step
+and fails during type conversion.
+
+The original eight witness-typing/recovery assertions were also isolated
+from the four bare comparisons. This unchanged subset still fails with
+allocation failure at 2GiB/180s after importing the parent. The observation
+gap therefore is not resolved merely by skipping the first bare comparison.
+The exact original predicates and witness terms remain in the snapshots.
+
+Next separate formation of the first specialized witness type, application
+typing of its stored projection and conversion against the standalone
+witness. Use the existing qualified generic projections as controls. This
+should identify the narrower expansion before proposing another carrier,
+opacity boundary, checker change or larger resource limit. The original
+comparison/witness/inverse observation obligation remains unchanged.
+
 The first bare comparison of a concretely extracted Im→Ker map with its
 standalone presentation exceeds 2GiB. Typed reflexivity, Σ elimination
 before reconstruction and direct Σ/Product construction do not resolve it.

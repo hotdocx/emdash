@@ -310,6 +310,29 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-6C3b: Resource Controls And Reuse Of Prior Techniques — In Progress
+
+The unchanged retained reviewer still fails at 6GiB/180s with `o=20`.
+The user-authorized 8GiB control also fails with allocation failure after
+122.564s, before its 180s deadline, at about 7.73GiB peak RSS. The active
+guard and all mathematical sources remain unchanged. The six-term input
+reviewer passes; these failures concern the larger comparison/evidence
+consumer and do not revoke the completed displayed nonsplit snake result.
+
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+maps the earlier GC, exact-endpoint, transparent-name, compiled-parent,
+record and law-opacity experiments to the remaining boundaries. A traced
+named-step variant fails during conversion to reconstructed endpoint
+indices, before its comparison assertion; actual projected indices also
+reach that failure. An isolated record annotation passes its five generic
+field checks and six-term parent, but its full reviewer still fails at
+2GiB. The isolated eight original witness-typing/recovery assertions also
+fail there. Next distinguish specialized type formation, projection
+application typing and conversion at the first position before another
+interface change. Keep the original canonical comparisons and inverse
+choices; no output-exactness premise or opacity is introduced. The separate
+displayed LES alignment/transport remains required after this observation.
+
 ### NUH-6E2b2: Exactness Indexed By The Displayed CAS Snake — Qualified
 
 The [pair links](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp)
