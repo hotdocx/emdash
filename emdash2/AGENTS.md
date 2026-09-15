@@ -192,9 +192,10 @@ fixed-forward exactness at K(b), using original image-cover representatives.
 NUH-6C2b1 derives the second comparison's cokernel-zero proof and exactness
 at K(γ), using two original whole covers and a corrected K(b) representative.
 NUH-6C2b2a derives third exactness at Q(α), through two original whole
-covers and the same E/∂. Next prove the fourth comparison's cokernel
-projection zero and derive its exactness at Q(b); do not infer it from
-the zero pairs or predicate declarations.
+covers and the same E/∂. NUH-6C2b2b derives fourth exactness at Q(b),
+through three original whole covers and a native K(c) difference representative.
+All four individual comparison witnesses now qualify. Next assemble and
+check the whole six-term result, retaining the same maps and comparisons.
 LES/sign comparison and NUH-5 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

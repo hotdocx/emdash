@@ -1073,8 +1073,10 @@ cokernel-zero proof and exactness at K(b). NUH-6C2b1 now derives the
 second comparison's cokernel-zero proof and exactness at K(γ), using two
 original whole covers and the corrected K(b) representative. NUH-6C2b2a
 now derives third exactness at Q(α), again through original whole covers
-and the same E/∂. Fourth exactness, whole six-term assembly, sign comparison
-and this plan's G3B2 integration remain open.
+and the same E/∂. NUH-6C2b2b now qualifies fourth exactness at Q(b), through
+three original whole covers and a native K(c) difference representative.
+All four individual comparisons are proved; whole six-term assembly, sign
+comparison and this plan's G3B2 integration remain open.
 
 User clarification (2026-09-15): after the other goal work, the G3B2
 investigation may test a reviewed, measured increase of the 2GiB limit and

@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Fourth native snake exactness (2026-09-15): the
+[fourth-position owner](../emdash3_2_one_cat_native_snake_fourth_exactness.lp)
+derives fixed-forward ΩAlong at Q(b). Three original whole covers produce
+a difference lifted into K(c), whose π_α image reconstructs under the
+original q₁. The actual comparison's Q-unit and all three cover
+cancellations derive its cokernel projection zero. Thirty-three definitions
+and 12 passing assertions add no primitive, rule or output assumption.
+All four individual interior comparisons now qualify. Whole six-term
+assembly, LES/reference sign comparison and displayed CAS integration remain
+required in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Third native snake exactness (2026-09-15): the
 [third-position owner](../emdash3_2_one_cat_native_snake_third_exactness.lp)
 derives fixed-forward ΩAlong at Q(α). Original whole covers along π_α
@@ -11,7 +22,7 @@ and the source-image map of b produce an E representative; the same ∂
 reconstructs the original cover projections. The actual comparison's Q-unit
 and both cover cancellations derive its cokernel projection zero.
 Twenty-six definitions and 11 passing assertions add no primitive, rule or
-output assumption. Fourth exactness, whole six-term assembly, LES/reference
+output assumption. Whole six-term assembly, LES/reference
 sign comparison and displayed CAS integration remain required in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
@@ -22,7 +33,7 @@ produce a corrected representative in K(b); its reconstruction makes the
 actual Im(k₂)⇒K(∂) comparison cover those representatives. Original
 Q-unit annihilation and both cover cancellations give its cokernel
 projection zero. Twenty-eight definitions and 11 passing assertions add no
-primitive, rule or output assumption. The last exactness proof,
+primitive, rule or output assumption. Whole six-term assembly,
 LES/reference sign comparison and displayed CAS integration remain required
 in the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
@@ -33,7 +44,7 @@ image-cover representatives. Kernel reconstruction constructs the required
 section; no splitness, lifting or exactness assumption is added. Together
 with the original zero kernel inclusion this proves fixed-forward ΩAlong
 at K(b). Twenty-eight definitions and 11 passing assertions add no primitive
-or rule. The remaining fourth exactness proof, LES/reference sign
+or rule. Whole six-term assembly, LES/reference sign
 comparison and concrete displayed integration remain required in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
@@ -43,8 +54,8 @@ original K/Q action to the two whole reconstruction squares α→b→γ.
 The four surrounding maps and all four adjacent-zero proofs now qualify
 around the same ∂. The four actual comparison inputs/predicates and zero
 comparison-kernel inclusions are defined/derived. Thirty-six definitions
-and 22 assertions add no primitive or rule. The first three cokernel-zero proofs
-are now derived above; fourth exactness, LES/sign comparison and
+and 22 assertions add no primitive or rule. All four cokernel-zero proofs
+are now derived above; whole six-term assembly, LES/sign comparison and
 concrete displayed integration remain required in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 

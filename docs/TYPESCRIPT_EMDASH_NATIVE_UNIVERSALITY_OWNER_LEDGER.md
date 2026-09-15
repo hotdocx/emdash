@@ -331,6 +331,32 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C2b2b: Fourth interior exactness at Q(b) — qualified 2026-09-15
+
+The preceding turn made progress at `a44393cb`; third exactness remains
+qualified. This tranche covers the original K(q₂) along π_b, then covers
+the resulting image lift successively along the source-image map of γ and
+π_a. All three cover conditions are derived from the same P/Q/normality.
+The original γπ_a=cb reconstruction makes psu−by a c-cycle. Its native
+K(c) lift followed by π_α gives z with q₁z=μrsu wholly.
+
+The actual ε₄:Im(q₁)⇒K(q₂) and its original source-image map then
+factor rsu. The Q-unit and all three derived cover cancellations give its
+cokernel projection zero. Combined with the existing kernel-zero proof,
+this gives fixed-forward ΩAlong on the actual fourth comparison. No Op
+transport, new universal choice or caller naturality/factor record enters.
+
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records 33 transparent definitions and 12 passing assertions. All six
+owner/reviewer checks pass in 14–17 seconds each at 90s/2GiB; their diagnostic
+inventories match exact import controls. Scoped LHS, dependency, catalog,
+TOC, health and document checks pass, with no primitive or rule added.
+
+All four individual interior exactness proofs now qualify. NUH-6C3 must
+assemble and check the whole six-term result on the same maps/comparisons;
+LES/reference sign comparison, concrete qualification, NUH-5 displayed
+integration and NUH-7 remain required. This is progress, not goal completion.
+
 ### NUH-6C2b2a: Third interior exactness at Q(α) — qualified 2026-09-15
 
 The preceding turn made progress at `ff71ab1a`; its second exactness
