@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: whole LES-to-snake input and original cycle comparison qualified; homology endpoint/sign comparisons next; six-term observation gap retained
+Status: original left homology endpoint comparison qualified; right endpoint/sign comparisons next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -61,7 +61,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | active: input and original left-cycle comparison qualified; homology endpoint/sign comparisons next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
+| NUH-6D | active: input, cycles and original left H comparison qualified; right endpoint/sign next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
@@ -863,7 +863,17 @@ Evidence: `emdash2/tmp/probes/nuh6d2_conformance.json`,
 snapshot covers 1,292 files at
 `sha256:adf63d5d6a331db5c24f1c5ae33d3fa0fe8609c85e8d19849551b974444cdf3f`.
 
-### NUH-6D2b: Homology Endpoints And Sign — Next
+### NUH-6D2b: Original Left Homology Endpoint
+
+Current left-H experiment starts at `bc11fdc8`; the preceding goal turn
+qualified the original cycle equivalence and actual whole-map consumers.
+All 62 worktrees are clean and the cycle-owner baseline passes under the
+normal 90s/2GiB guard. First derive second-coordinate annihilation through
+the existing whole uncopairing inverse mate, then v∘α=[0,β_A]. Form
+both quotient descents, prove inverse laws by original quotient
+cancellation, and qualify their actual reconstruction and inverse data.
+No new output-equivalence premise, β choice, object cast or caller square
+is permitted. The right-H and sign comparisons remain separate obligations.
 
 Then compare α with the original left boundary and descend to
 Q(α)→H(A₁). On the right, the original quotient of the recovered incoming
@@ -884,5 +894,71 @@ For the reverse descent, apply the existing whole uncopairing inverse
 mate to recover the second coordinate of a vanishing copair. This should
 prove that π_α∘u kills β_A; it does not require new pointwise cone fields
 or an independent second-injection choice. Derive inverse laws by the
-original quotient cancellation and the checked u/v inverse laws. This is
-the next construction plan, not a claimed homology equivalence.
+original quotient cancellation and the checked u/v inverse laws. The
+implementation and consumer qualification now follow that construction.
+
+The [uncopairing owner](../emdash2/emdash3_2_one_cat_copair_annihilation_views.lp)
+derives the complete pair of zero composites before selecting its second
+coordinate. The first direct σ_Snd-after-uncopairing attempt hid the native
+inverse cut and failed conversion. Staging the whole pair equality resolves
+that failure through the existing inverse mate; no rewrite or unifier is added.
+
+The [boundary owner](../emdash2/emdash3_2_one_cat_native_window_snake_left_boundary.lp)
+derives κ_Z∘β_A=a₀ and v∘α=[0,β_A] at the original left-column input.
+The [homology comparison owner](../emdash2/emdash3_2_one_cat_native_window_snake_left_homology.lp)
+then uses the original Q-unit and whole descents to construct f and g:
+
+```text
+f : Q(α)⇒H(A₁),       f∘π_α = q_A∘v;
+g : H(A₁)⇒Q(α),       g∘q_A = π_α∘u;
+g∘f = id_Q(α),        f∘g = id_H(A₁).
+```
+
+Original quotient cancellation proves both inverse laws, and fixed-forward
+ΩAlong(f) retains that same g. Fourteen transparent definitions (two whole
+uncopairing observations, three boundary comparisons and nine quotient
+constructions/laws) introduce no primitive, rule, unifier, opacity or new
+normality premise. They retain the original P/Q, E₁/E₂ and chain-zero data.
+There is no replacement boundary or H selection.
+
+Nine whole-consumer assertions check both selected inverse projections,
+inverse Hom action, cancellation and quotient reconstruction after arbitrary
+whole maps, and rejection of an arbitrary replacement inverse. The final
+consumer checks the actual equivalence at the existing
+`one_cat_native_window_target_homology_func` endpoint, supplying its original
+Em/E₀ arguments. Thus this is a comparison to the actual native LES H,
+not only to a separately named quotient. Source formation and consumers
+remain within the current ordinary-category/whole-adjunction assumptions.
+
+The three owners pass in 13.407s, 14.305s and 18.063s; the actual
+nine-consumer reviewer passes in 21.390s with `OCAMLRUNPARAM=o=20,v=1024`
+and 18.739s with both GC variables unset. All use the normal 90s/2GiB
+guard. Exact import-control inventories match for every owner and reviewer;
+source registration needs no special GC profile. Strict LHS, catalog/TOC,
+source-only health and document checks are localized. No repository
+aggregate, checker patch, opacity or resource-limit change is used.
+
+Evidence: `emdash2/tmp/probes/nuh6d2b_conformance.json`,
+`nuh6d2b_warnings.json`, `nuh6d2b_source_audit.json` and the final
+`nuh6d2b_qualification.json` source/log/staged-diff manifest. The health
+snapshot covers 1,296 files at
+`sha256:c6d61684e68553541c9356b6169b3ef1ad87c90266ff297bb5e0f7d6f0f1f9ab`.
+
+### NUH-6D2c: Original Right Homology Endpoint — Next
+
+First compare the original Q(a), with a recovered from the native snake
+input, to Q(dₘᴰ), where dₘᴰ:Dₘ⇒D₀ is the original upper-right map.
+The original p₀ and pₘ should give the two quotient descents using E₀/Em.
+If a whole row colift helper is needed, derive it from Q and the existing
+short-exact row cokernel inverse; do not supply a new colift primitive.
+Retain the reconstructed a and its original diagram throughout.
+
+Next compare γ with ⟨0,d̄₀ᴰ⟩ under that quotient comparison, where d̄₀ᴰ
+is the original induced map Q(dₘᴰ)⇒D₁. Whole pairing and kernel universality
+should compare their kernels. Relating that kernel to the existing
+H(D₀)=Q(β_D) is a further native homology construction: retain the original
+Abelian normality/cover assumptions where needed, and prove its inverse
+rather than infer it from endpoint resemblance or kernel/cokernel existence
+alone. Then compare the positive covered ∂/δ formulas under both original
+H comparisons. General reference-snake and concrete qualification remain
+required, alongside 6C3b and displayed CAS transport.

@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Original left homology comparison (2026-09-15): the
+[comparison owner](../emdash3_2_one_cat_native_window_snake_left_homology.lp)
+uses the original Q-units and whole descents to derive Q(α)≃H(A₁).
+Whole uncopairing and the original cycle comparison give the two
+annihilations; quotient cancellation proves the inverse laws. Fourteen
+transparent definitions and nine actual whole consumers add no primitive,
+rule, unifier, opacity or new normality premise. The existing native LES
+target H is a checked endpoint. The right H and positive ∂/δ comparison
+remain next under the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original cycle comparison (2026-09-15): the
 [cycle owner](../emdash3_2_one_cat_native_window_snake_cycles.lp) uses whole
 row and kernel mates to construct u:Z(A₁)⇒K(c) and its inverse v. Native

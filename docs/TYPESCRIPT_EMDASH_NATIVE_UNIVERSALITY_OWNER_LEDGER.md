@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — whole LES-to-snake input and cycle comparison qualified; homology endpoint/sign comparisons next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — original left H comparison qualified; right endpoint/sign next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -330,6 +330,25 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-6D2b: Original left H comparison — qualified 2026-09-15
+
+The [homology comparison owner](../emdash2/emdash3_2_one_cat_native_window_snake_left_homology.lp)
+constructs f:Q(α)⇒H(A₁) and its inverse by original whole Q descents.
+Its [boundary comparison](../emdash2/emdash3_2_one_cat_native_window_snake_left_boundary.lp)
+proves v∘α=[0,β_A]. Whole uncopairing and Q-unit annihilation give the
+two descent inputs; quotient cancellation and the original u/v laws prove
+both inverse identities. Fixed-forward ΩAlong(f) retains the same derived
+inverse. Fourteen definitions and nine whole consumers add no primitive,
+rule, unifier, opacity or new normality premise. The actual native LES
+target H is a checked consumer, not a replacement homology choice.
+
+Next: Q(a) versus the original upper-right differential quotient, then
+K(γ) versus original right H and positive ∂/δ agreement. Preserve the
+normality/cover boundary of the latter homology construction. The general
+reference comparison, six-term observation gap, concrete qualification,
+displayed CAS integration and final audit remain required under the
+[subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D2a: Original cycle comparison — qualified 2026-09-15
 

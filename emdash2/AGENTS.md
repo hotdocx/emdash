@@ -208,8 +208,11 @@ requires no P/Q, short-exactness or normality; its first native α/γ
 consumers qualify. NUH-6D2a now constructs the whole cycle comparison
 u:Z(A₁)⇒K(c), its inverse v and fixed-forward ΩAlong(u) through original
 row/kernel mates and inclusion cancellation. Both inverse slots and their
-whole Hom action qualify. Next derive the original homology endpoint
-comparisons and compare the positive ∂/δ formulas. LES/sign comparison and NUH-5
+whole Hom action qualify. NUH-6D2b now derives the original left H
+comparison Q(α)≃H(A₁) through whole quotient descents and cancellation.
+Its inverse data, arbitrary whole-map consumers and existing native LES H
+endpoint qualify. Next derive the right H comparison and compare the
+positive ∂/δ formulas. LES/sign comparison and NUH-5
 integration remain required.
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

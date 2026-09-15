@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Original left homology comparison (2026-09-15): the
+[comparison owner](../emdash3_2_one_cat_native_window_snake_left_homology.lp)
+derives Q(α)≃H(A₁) by whole quotient descent, retaining original P/Q.
+Whole uncopairing and v∘α=[0,β_A] supply both annihilations; original
+quotient cancellation proves both inverse laws. Fourteen transparent
+definitions and nine whole consumers qualify inverse data, action and
+the existing native LES target H. Right H and positive ∂/δ agreement
+remain next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Original cycle comparison (2026-09-15): the
 [cycle owner](../emdash3_2_one_cat_native_window_snake_cycles.lp) constructs
 u:Z(A₁)⇒K(c), its whole inverse v, and fixed-forward ΩAlong(u).
