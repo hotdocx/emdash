@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native snake exactness observations (2026-09-15): the
+[exactness owner](../emdash3_2_commutative_algebra_freyd_native_snake_exactness.lp)
+specializes the four original proofs at their fixed comparisons. Its
+[point owner](../emdash3_2_commutative_algebra_freyd_native_snake_point_exactness.lp)
+uses the existing evaluation action, retaining inverse data. Sixteen
+definitions introduce no primitive or rule; the concrete frontend constructs
+the proofs without assumptions or trust decisions. The old Freyd Ω carrier
+definitions moved unchanged to a shared module. Twelve inverse/projection,
+sixteen signature and sixteen concrete proof checks pass. The next required
+step is certified-input/public-pair alignment and displayed CAS transport.
+
 Nonsplit native snake realization (2026-09-15): the standalone native
 TypeScript context and workflow retain all six terms and five arrows of
 (x,id_R,0), with ∂ represented by [1] on R/(x). A transparent

@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparison and nonsplit native snake arrow realization qualified; concrete derived exactness next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — native LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; pair alignment/transport next; six-term observation gap retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,29 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-6E2b1: Original Whole Exactness And Point Evidence — Qualified
+
+The [four proof families](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_exactness.lp)
+and [point observations](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_point_exactness.lp)
+retain the original comparisons, model and raw input. Direct ΩAlong
+predicate heads avoid the expanded general-family inference cost. Sixteen
+transparent definitions add no primitive, rule or assumption. Four existing
+carrier definitions moved unchanged; the old LES owner still checks, and
+fourteen existing frontend declaration types remain identical.
+
+The frontend constructs all four proofs and their point data without
+changing the fourteen-claim realization source. Seven workflow tests pass
+in 42.484s. Twelve generic comparison/evidence/inverse checks, sixteen
+signature checks and sixteen actual nonsplit proof/point checks pass under
+90s/2GiB. Focused imports resolve the conformance header's earlier timeout;
+no proof or inverse is opaque. Evidence and the local resource diagnoses
+are in the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
+Next is 6E2b2: the certified native input's pair must be related to the
+public arrow pair, then to the CAS pair with shared endpoint/diagram
+coherence. These are required native links, not old-formulation comparisons.
+The displayed-exactness flag and the separate 6C3b obligation are unchanged.
 
 ### NUH-6E2a: Standalone Nonsplit Native Snake Realization — Qualified
 

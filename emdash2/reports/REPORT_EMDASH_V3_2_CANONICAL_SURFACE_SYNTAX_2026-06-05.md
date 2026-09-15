@@ -2441,6 +2441,16 @@ introductions. Its private frontend mirror and the five observation mirrors
 add no computation rule. The standalone rational workflow retains explicit
 model interpretation and does not yet certify displayed exactness.
 
+`FreydNativeSnakeFirstExactness` through `FourthExactness` name the original
+four fixed-comparison Ω predicates over the concrete Terminal base.
+The corresponding `freyd_native_snake_*_exact_evidence` definitions call
+the existing theorems. `*_point_exact_data` takes that original proof as
+an explicit argument and applies the existing evaluation operation.
+`FreydOmegaArrowObservation` and its evidence/projection names are shared
+unchanged with the LES interface. The frontend constructs all four proof
+and point-observation terms; public-pair alignment and displayed transport
+remain separate required consumers.
+
 The direct native H observation spelling is
 `freyd_adjunction_model_object(M,e,d,chain)`, defined by applying that whole
 H to `freyd_raw_chain_native_cone(e,d,chain)`. For raw chain maps,

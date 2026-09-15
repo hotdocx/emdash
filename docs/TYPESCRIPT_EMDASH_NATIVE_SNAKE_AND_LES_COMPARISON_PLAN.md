@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native LES comparison and nonsplit native snake arrow realization qualified; concrete derived exactness next; six-term observation gap retained; old-snake comparison withdrawn
+Status: native LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; public-pair alignment and displayed transport next; six-term observation gap retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -70,7 +70,7 @@ comparison with the former raw connecting algorithm is required.
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
 | NUH-6D | qualified native LES endpoint, connecting/sign and surrounding-map comparisons; 6D4 withdrawn by user direction | Whole native LES specialization/comparison on the common short-exact inputs and fixed sign; no old/new snake comparison |
-| NUH-6E | 6E1 formal observations and 6E2a nonsplit arrow realization qualified; four derived exactness consumers next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
+| NUH-6E | nonsplit arrows and 6E2b1 whole/point exactness witnesses qualified; public-pair alignment and transport next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
 derive their whole reconstruction equations. A failure requiring ordinary
@@ -1534,3 +1534,92 @@ No repository-wide typecheck ran. Evidence under `emdash2/tmp/probes/`:
 `nuh6e2_signatures_final.lp`, `nuh6e2_nonsplit_promoted.lp` and
 `nuh6e2_qualification.json`. The exact original seven-signature/15-assertion
 artifacts and earlier failed emission diagnostics remain available there.
+
+6E2b begins at `d280a94b`, with all 62 worktrees clean and the original
+first-exactness owner passing its bounded baseline. Specialize the four
+existing fixed-comparison predicates/proofs at the original raw native
+snake input, retaining M/N and literal generic additive projections. Expose
+their actual comparison arrows and evaluate the resulting Ω data through
+the existing evaluation functor. Reuse the existing Freyd Ω-arrow carrier;
+if its current LES-heavy owner obstructs reuse, relocate only the unchanged
+carrier definitions to a neutral owner. The frontend must construct the
+four proofs without a trust decision or added assumption. Point evidence
+and shared endpoint/diagram transport must remain distinct from displayed
+CAS exactness until their alignment is checked.
+
+#### NUH-6E2b1: Four Derived Proofs And Their Point Witnesses — Qualified
+
+The [native Freyd exactness owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_exactness.lp)
+retains all four original comparisons. Each predicate is directly the
+existing ΩAlong on that named comparison in Functor(Terminal,C); each
+proof specializes the original native theorem at the same raw input and
+supplied M/N. The [point owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_point_exactness.lp)
+uses the existing evaluation functor to map the given whole witness.
+Sixteen definitions add no primitive, rewrite, unifier or new assumption.
+
+The four existing Freyd Ω-arrow carrier definitions moved unchanged to a
+[shared owner](../emdash2/emdash3_2_commutative_algebra_freyd_arrow_equivalence_observations.lp).
+The previous LES point owner imports it and passes its regression. The
+frontend similarly shares the four exact carrier signatures and the original
+raw-snake argument telescope. All fourteen affected existing declaration
+types are byte-identical after canonical serialization.
+
+The [constructor](../src/v3_2/algebra_formal_freyd_native_snake_exactness.ts)
+checks the retained five-arrow realization, constructs the four native proof
+terms and their point data, and returns the original assumption source.
+It adds zero assumptions and makes zero trust decisions. Native snake
+context v2 includes these exact theorem signatures; its coefficient/model
+contracts and fourteen arrow-realization claims are unchanged. The seven
+workflow tests pass in 42.484s, including rejection of incomplete or changed
+model/input data. The emitted source contains applications of the existing
+derived theorems, not private proof postulates.
+
+The [generic consumer](../emdash2/examples/freyd_native_snake_exactness.lp)
+checks twelve actual comparison/evidence/inverse observations from the four
+derived proofs. Sixteen exact signature checks and sixteen nonsplit
+whole-proof/point-data/comparison/evidence checks pass. The original
+fifteen arrow-realization assertions still pass. All Lambdapi checks use
+the serial 90s/2GiB guard with `o=20,v=1024`.
+
+Two rejected point-definition presentations expanded through the general
+exactness-family predicate and exceeded 2GiB. Giving each predicate its
+direct ΩAlong head at the original named comparison resolves that local
+inference cost; no comparison, inverse data or proof obligation changed.
+An emitted-check header also reached 90s while importing unused homology
+owners. Restricting imports to its actual snake owners preserves every
+assertion and gives 27.521s for the sixteen signatures and 28.628s for the
+sixteen concrete proof observations. These changes do not resolve or waive
+the separately retained 6C3b full-result observation gap.
+
+Final warning inventories match the original-dependency control exactly:
+1,490 unjoinable pairs and 169 pattern warnings, with matching locations,
+term heads and rule families and no parser issue. The moved LES owner has
+the same inventory before and after. Strict LHS, focused type/lint,
+catalog/TOC and documentation checks pass. The source-only health snapshot
+covers 1,328 files at
+`sha256:bb0826df01a3dd0b253683a6275cf6d2d2719af2c84e03303bb5f53beab1295e`.
+Evidence under `emdash2/tmp/probes/`: `nuh6e3_conformance.json`,
+`nuh6e3_focused_conformance.json`, `nuh6e3_warnings.json`,
+`nuh6e3_source_audit.json`, `nuh6e3_emission_equivalence.json` and
+`nuh6e3_qualification.json`. The final emitted artifacts are byte-identical
+to the checked focused artifacts. No repository-wide typecheck ran.
+
+#### NUH-6E2b2: Index Certificates At Public And CAS Pairs — Next
+
+Retain the original native zero input behind each canonical comparison.
+Use [zero-arrow pair observation](../emdash2/emdash3_2_zero_arrow_pair_observations.lp)
+and the existing whole incoming-map reconstruction to relate that input's
+two arrows to the corresponding public snake observations. An arbitrary
+invertible arrow is not an exactness certificate for the displayed pair.
+Then index the original whole exactness witness at that observed pair and
+transport through the existing complete-arrow interpretations. Shared
+middle endpoints and finite-diagram coherence must be derived using the
+existing presentation-setness/diagram interfaces, without caller naturality
+squares or new interpretation assumptions.
+
+The earlier G3B pair-certificate prototype is design evidence for this
+indexing shape, not a qualified replacement or a request to resume its
+deferred checker experiments. Snake pair alignment has no LES column-H
+conjugation, but still requires its own checked source-recovery link.
+`provesDisplayedCasExactness` remains false until this alignment/transport
+is qualified. NUH-5 displayed LES transport, 6C3b and NUH-7 remain required.

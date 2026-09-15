@@ -5059,6 +5059,17 @@ reselection is used. Full reuse and concrete typing/emission check. This
 does not construct the supplied P/Q model or establish displayed exactness;
 the four native exactness witnesses still need their concrete consumers.
 
+Those four whole proofs now have direct Freyd specializations and concrete
+point consumers. Each predicate keeps ΩAlong at its original named
+comparison. The existing evaluation functor maps the given whole witness
+to its point arrow and evidence, including inverse data. The frontend
+constructs these terms without adding assumptions or trust decisions.
+The Ω-arrow carrier is shared unchanged with the LES observations. To
+certify the displayed CAS sequence, the original certified input pairs
+must still be related to the public arrows and their interpretations with
+shared endpoint coherence; four invertible comparisons alone do not make
+that link.
+
 The direct native model now has readable H and map observations. The H value
 is application of its existing whole functor to the original raw input;
 the map is application of the existing internal raw-map functor specialized

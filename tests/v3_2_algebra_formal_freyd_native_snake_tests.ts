@@ -18,6 +18,8 @@ import { prepareAlgebraFormalFreydNativeSnake } from '../src/v3_2/algebra_formal
 import { algebraFormalFreydNativeSnakeObservationBundle } from '../src/v3_2/algebra_formal_freyd_native_snake_observation';
 import { createFormalFreydNativeSnakeProofEnvironment, FORMAL_FREYD_NATIVE_SNAKE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_snake_signatures';
 import { trustAlgebraFormalFreydNativeSnake } from '../src/v3_2/algebra_formal_freyd_native_snake_workflow';
+import { constructAlgebraFormalFreydNativeSnakeExactness } from '../src/v3_2/algebra_formal_freyd_native_snake_exactness';
+import { createFormalFreydNativeSnakeExactnessProofEnvironment, FORMAL_FREYD_NATIVE_SNAKE_EXACTNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_snake_exactness_signatures';
 import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
 import { createCoreProofChecker } from '../src/v3_2/proof_checker';
 import { kernelFree, kernelExpressionEquals, provenance, sourceSpan } from '../src/v3_2/kernel';
@@ -50,16 +52,15 @@ const input = () => { const v = context(); return { artifactId: 'native-snake-ad
 let pending: ReturnType<typeof trustAlgebraFormalFreydNativeSnake>;
 const result = () => pending ??= trustAlgebraFormalFreydNativeSnake(input());
 const probe = (environment: Parameters<typeof serializeCoreLfKernelProbe>[0]['environment'],
-    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) => serializeCoreLfKernelProbe({ environment,
+    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions'], exactness = false) => serializeCoreLfKernelProbe({ environment,
     externalFreeReferences: Object.fromEntries(Object.entries({ ...FREYD_NATIVE_MODEL_PROBE_BINDINGS,
-        ...FORMAL_FREYD_NATIVE_SNAKE_SIGNATURE_BINDINGS }).filter(([name]) => environment.lookup(name) !== undefined)), assertions
+        ...FORMAL_FREYD_NATIVE_SNAKE_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_SNAKE_EXACTNESS_SIGNATURE_BINDINGS })
+        .filter(([name]) => environment.lookup(name) !== undefined)), assertions
 }).source.replace('require open emdash.emdash3_2;', [
+    ...(exactness ? ['require open emdash.emdash3_2_commutative_algebra_freyd_native_snake_point_exactness;'] : []),
     'require open emdash.emdash3_2_commutative_algebra_freyd_native_snake_observations;',
-    'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_observations;',
-    'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;',
-    'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;',
     'require open emdash.emdash3_2_commutative_algebra_freyd_native_snake_matrices;'
-].join('\n')).replace(/^assert ⊢ (comm_ring_presentation_morphism_comp|comm_ring_freyd_snake_zero_from_matrices|freyd_raw_native_snake_[a-z_]+_observation) :/gmu, 'assert ⊢ @$1 :');
+].join('\n')).replace(/^assert ⊢ ([A-Za-z_][A-Za-z0-9_]*) :/gmu, 'assert ⊢ @$1 :');
 
 describe('v3.2 direct native nonsplit snake proof–CAS realization', () => {
     it('prepares the original six terms and nonzero connecting matrix without a LES input', () => {
@@ -152,5 +153,46 @@ describe('v3.2 direct native nonsplit snake proof–CAS realization', () => {
         assert.doesNotMatch(source, /FreydHomologyModel|freyd_homology_model|abelian_snake/u);
         if (process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_OUTPUT) writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_OUTPUT, source);
         assert.equal(assertions.length, 15);
+    });
+
+    it('constructs all four original whole exactness proofs and point witnesses without new assumptions', async () => {
+        const r = await result(), before = r.source.entries.length;
+        const exact = constructAlgebraFormalFreydNativeSnakeExactness(r);
+        assert.equal(exact.source, r.source);
+        assert.equal(exact.prepared, r.prepared);
+        assert.equal(exact.source.entries.length, before);
+        assert.equal(exact.assumptionsAdded, 0);
+        assert.equal(exact.trustDecisions, 0);
+        assert.equal(exact.wholeCategoricalEvidence, true);
+        assert.equal(exact.provesDisplayedCasExactness, false);
+        assert.deepEqual(exact.evidence.map(e => e.position), ['first', 'second', 'third', 'fourth']);
+        for (const item of exact.evidence) {
+            assert.match(serializeCoreExpression(item.term), new RegExp('bridge_freyd_native_snake_' + item.position + '_exact_evidence', 'u'));
+            assert.match(serializeCoreExpression(item.data), new RegExp('bridge_freyd_native_snake_' + item.position + '_point_exact_data', 'u'));
+        }
+        assert.throws(() => constructAlgebraFormalFreydNativeSnakeExactness({ ...r, observations: r.observations.slice(0, 4) }), /complete/iu);
+        const observations = r.observations.map((o, i) => i === 0 ? { ...o,
+            observationInput: { ...o.observationInput, normality: context().formalModel } } : o);
+        assert.throws(() => constructAlgebraFormalFreydNativeSnakeExactness({ ...r, observations }), /one original/iu);
+    });
+
+    it('emits the actual native exactness constructors, point comparisons and evidence for Lambdapi', async () => {
+        const exact = constructAlgebraFormalFreydNativeSnakeExactness(await result());
+        const environment = createFormalFreydNativeSnakeExactnessProofEnvironment([]);
+        const signatures = Object.keys(FORMAL_FREYD_NATIVE_SNAKE_EXACTNESS_SIGNATURE_BINDINGS).map(name => ({
+            label: name, term: kernelFree(name, p), type: environment.lookup(name)!.type, span: p.span!
+        }));
+        const assertions = exact.evidence.flatMap(e => [
+            { label: e.position + ' whole proof', term: e.term, type: e.type, span: p.span! },
+            { label: e.position + ' point data', term: e.data, type: e.dataType, span: p.span! },
+            { label: e.position + ' comparison', term: e.arrow, type: e.arrowType, span: p.span! },
+            { label: e.position + ' fixed-arrow evidence', term: e.evidence, type: e.evidenceType, span: p.span! }
+        ]);
+        const source = probe(exact.source.environment, assertions, true);
+        assert.doesNotMatch(source, /symbol bridge_freyd_native_snake|symbol bridge_FreydNativeSnake/u);
+        if (process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_EXACT_SIGNATURE_OUTPUT) writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_EXACT_SIGNATURE_OUTPUT, probe(environment, signatures, true));
+        if (process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_EXACT_OUTPUT) writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_SNAKE_EXACT_OUTPUT, source);
+        assert.equal(signatures.length, 16);
+        assert.equal(assertions.length, 16);
     });
 });

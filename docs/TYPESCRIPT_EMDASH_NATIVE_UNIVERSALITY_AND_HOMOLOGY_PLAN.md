@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native snake/LES comparison and nonsplit native snake arrow realization qualified; concrete derived exactness next; six-term observation gap and displayed CAS transport still required
+Status: active — native snake/LES comparison, nonsplit arrows and four native exactness/point witnesses qualified; public-pair alignment and displayed transport next; six-term observation gap retained
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,17 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+NUH-6E2b1 now constructs all four original whole snake exactness proofs
+and their evaluated fixed-comparison witnesses on the nonsplit input.
+The frontend adds no assumptions or trust decisions. Sixteen transparent
+definitions, twelve inverse/projection consumers, sixteen exact signatures
+and sixteen concrete proof observations qualify the boundary. Four existing
+carrier definitions moved unchanged to a shared owner; fourteen existing
+frontend signatures remain identical. Next relate each certified original
+input pair to its public snake arrows and transport its certificate to the
+CAS pair/diagram under the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+The displayed-exactness flag remains false until that work is qualified.
 
 NUH-6E2a now realizes all five native snake arrows on the original nonsplit
 (x,id_R,0) CAS result. A standalone rational context prepares coefficients
@@ -1166,7 +1177,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | native LES comparison and nonsplit arrow realization qualified; concrete derived exactness next; 6C3b gap retained | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
+| NUH-6 | native LES comparison, nonsplit arrows and whole/point exactness witnesses qualified; pair alignment/transport next; 6C3b gap retained | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
@@ -1721,7 +1732,8 @@ qualified. The formerly failing combined pair/certificate artifact now
 passes unchanged at 2GiB with GC tuning; public alignment/transport remains
 required. Native snake/LES endpoint, connecting/sign and surrounding-map
 comparisons and NUH-6E1 input/map observations are qualified. Advance
-NUH-6E2b concrete derived exactness after the qualified five-arrow adoption,
+NUH-6E2b2 public-pair alignment and displayed transport after the qualified
+four whole/point exactness witnesses,
 then return to NUH-6C3b native evidence observations and NUH-5N2G3B2
 categorical exactness transport to the actual selected CAS diagram before
 NUH-7. NUH-6D4 old-snake comparison is removed from the completion criteria

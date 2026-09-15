@@ -258,6 +258,16 @@ six terms and maps, with complete reuse and no universal reselection.
 Concrete native exactness/coherence remains 6E2b. Do not classify the five
 interpretations as constructed whole-model semantics or output exactness.
 
+NUH-6E2b1 now constructs the four original whole snake exactness proofs and
+their point Ω data in the concrete frontend, without new assumptions.
+Their predicates retain a direct ΩAlong head at the original comparison;
+expansion through the general family predicate caused avoidable inference
+allocation. The four Freyd Ω carrier definitions are now shared in
+`emdash3_2_commutative_algebra_freyd_arrow_equivalence_observations.lp`.
+The old LES owner imports them unchanged. Public-pair alignment and
+displayed CAS transport remain required; merely having four invertible
+arrows does not certify a displayed diagram.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

@@ -6,15 +6,16 @@ import { createFormalFreydDiagramProofEnvironment } from './algebra_formal_freyd
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
 import { formalFreydWindowFields, FormalFreydWindowScope } from './algebra_formal_freyd_model_connecting_signatures';
 import { FREYD_NATIVE_EXACTNESS_ARGUMENTS, algebraFormalFreydNativeExactnessExpressions } from './algebra_formal_freyd_native_exactness_signatures';
+import { extendFormalFreydOmegaArrowSignatures, FORMAL_FREYD_OMEGA_ARROW_SIGNATURE_BINDINGS } from './algebra_formal_freyd_omega_arrow_signatures';
 
 const positions = ['middle', 'source', 'target'] as const;
 export const FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS: Readonly<Record<string, string>> = Object.freeze(Object.fromEntries([
-    ...['FreydOmegaArrowObservation', 'FreydArrowOmegaEvidence', 'freyd_omega_arrow_observation', 'freyd_omega_arrow_evidence'].map(name => ['bridge_' + name, name]),
+    ...Object.entries(FORMAL_FREYD_OMEGA_ARROW_SIGNATURE_BINDINGS),
     ...positions.map(pos => ['bridge_freyd_adjunction_model_' + pos + '_point_observation', 'freyd_adjunction_model_' + pos + '_point_observation'])
 ]));
 
 export function createFormalFreydExactnessPointProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
-    let environment = createFormalFreydDiagramProofEnvironment([]);
+    let environment = extendFormalFreydOmegaArrowSignatures(createFormalFreydDiagramProofEnvironment([]));
     const p = provenance('derived', 'native exactness point observation signatures');
     const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
     type Field = readonly [string, (s: FormalFreydWindowScope) => Term, ('explicit' | 'implicit')?];
@@ -24,14 +25,7 @@ export function createFormalFreydExactnessPointProofEnvironment(inputs: readonly
                 binderMode(fields[i][2] ?? 'explicit', 'functorial'));
         environment = environment.extend({ name, type: b.lower(visit(0, {})), mode: binderMode('explicit', 'functorial'), provenance: p });
     };
-    const grpd = () => b.application('groupoid-universe', []), ring = () => L.tau(b.free('bridge_CommRing'));
     const observation = (s: FormalFreydWindowScope) => L.call('bridge_FreydOmegaArrowObservation', [s.R]);
-    add('bridge_FreydOmegaArrowObservation', [['R', ring]], grpd);
-    add('bridge_FreydArrowOmegaEvidence', [['R', ring], ['a', s => L.tau(L.call('bridge_FreydArrowObservation', [s.R]))]], grpd);
-    for (const name of ['observation', 'evidence']) add('bridge_freyd_omega_arrow_' + name,
-        [['R', ring, 'implicit'], ['d', s => L.tau(observation(s))]], s => name === 'observation' ?
-            L.tau(L.call('bridge_FreydArrowObservation', [s.R])) :
-            L.tau(L.call('bridge_FreydArrowOmegaEvidence', [s.R, L.call('bridge_freyd_omega_arrow_observation', [s.R, s.d], 1)])));
     const fields = formalFreydWindowFields(b, { model: 'bridge_FreydAdjunctionModel', normality: 'bridge_FreydAdjunctionModelNormality',
         shortExact: 'bridge_FreydAdjunctionModelRowShortExact' }, false);
     for (const position of positions) {

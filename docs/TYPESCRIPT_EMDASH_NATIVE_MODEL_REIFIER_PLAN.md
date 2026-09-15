@@ -10,6 +10,14 @@ Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALI
 
 ## Scope And Existing Boundary
 
+NUH-6E2b1 now constructs the four native whole snake exactness proofs and
+their point comparison/evidence observations on the same nonsplit input.
+No assumption or trust decision is added. Existing Ω-arrow carriers and
+signature metadata are shared with the LES consumers without changing their
+types. The next 6E2b2 step must identify each certified original input pair
+with the public snake arrows, then transport to the CAS pairs/diagram with
+derived endpoint coherence. The displayed-exactness flag remains false.
+
 NUH-6E2a now qualifies standalone nonsplit native snake arrow realization.
 The same issued native backend supplies R/M/N contracts, while a shared
 coefficient preparer gathers the original snake's complete inventory.

@@ -10,6 +10,25 @@ export const FREYD_NATIVE_SNAKE_MAP_ROLES = Object.freeze([
 ] as const);
 export type FreydNativeSnakeMapRole = typeof FREYD_NATIVE_SNAKE_MAP_ROLES[number];
 
+export type FormalFreydNativeSnakeScope = Readonly<Record<string, Term>>;
+export type FormalFreydNativeSnakeField = readonly [string, (s: FormalFreydNativeSnakeScope) => Term, ('explicit' | 'implicit')?];
+
+/** One original raw-input telescope shared by arrow and exactness observations. */
+export function formalFreydNativeSnakeFields(b: CoreLfScopedBuilder, normality: boolean): readonly FormalFreydNativeSnakeField[] {
+    const L = formalFreydSpineLanguage(b);
+    const fields: FormalFreydNativeSnakeField[] = [
+        ['R', () => L.tau(b.free('bridge_CommRing')), 'implicit'],
+        ['M', s => L.tau(L.call('bridge_FreydAdjunctionModel', [s.R]))]
+    ];
+    if (normality) fields.push(['N', s => L.tau(L.call('bridge_FreydAdjunctionModelNormality', [s.R, s.M], 1))]);
+    fields.push(...['A', 'B', 'X', 'D'].map(name => [name, (s: FormalFreydNativeSnakeScope) => L.presentationType(s.R), 'implicit'] as FormalFreydNativeSnakeField),
+        ['a', s => L.morphismType(s.R, s.A, s.B)], ['b', s => L.morphismType(s.R, s.B, s.X)],
+        ['c', s => L.morphismType(s.R, s.X, s.D)],
+        ['z', s => L.chainType(s.R, s.A, s.X, s.D,
+            L.call('bridge_comm_ring_presentation_morphism_comp', [s.R, s.A, s.B, s.X, s.b, s.a], 4), s.c)]);
+    return Object.freeze(fields);
+}
+
 export const FORMAL_FREYD_NATIVE_SNAKE_SIGNATURE_BINDINGS = Object.freeze({
     bridge_comm_ring_presentation_morphism_comp: 'comm_ring_presentation_morphism_comp',
     bridge_comm_ring_freyd_snake_zero_from_matrices: 'comm_ring_freyd_snake_zero_from_matrices',
@@ -80,11 +99,7 @@ export function createFormalFreydNativeSnakeProofEnvironment(inputs: readonly Af
         composite(s.R, pres(s, 'a'), pres(s, 'b'), pres(s, 'x'), morph(s, 'G', 'b', 'x'), morph(s, 'F', 'a', 'b')),
         morph(s, 'H', 'x', 'd')));
     for (const role of FREYD_NATIVE_SNAKE_MAP_ROLES) {
-        const fields: Field[] = [['R', ring, 'implicit'], ['M', s => L.tau(L.call('bridge_FreydAdjunctionModel', [s.R]))]];
-        if (role === 'connecting') fields.push(['N', s => L.tau(L.call('bridge_FreydAdjunctionModelNormality', [s.R, s.M], 1))]);
-        fields.push(...objects(['A', 'B', 'X', 'D']), ['a', s => L.morphismType(s.R, s.A, s.B)],
-            ['b', s => L.morphismType(s.R, s.B, s.X)], ['c', s => L.morphismType(s.R, s.X, s.D)],
-            ['z', s => L.chainType(s.R, s.A, s.X, s.D, composite(s.R, s.A, s.B, s.X, s.b, s.a), s.c)]);
+        const fields = formalFreydNativeSnakeFields(b, role === 'connecting');
         add('bridge_freyd_raw_native_snake_' + role + '_observation', fields,
             s => L.tau(L.call('bridge_FreydArrowObservation', [s.R])));
     }

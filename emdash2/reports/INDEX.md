@@ -2,6 +2,13 @@
 
 Date: 2026-09-02
 
+Native snake exactness observations (2026-09-15): all four original whole
+proofs and their evaluated Ω data now have concrete frontend consumers,
+with no new assumptions. Twelve generic inverse/projection checks and
+sixteen concrete proof observations pass. Public-pair alignment and
+displayed transport remain next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Nonsplit native snake realization (2026-09-15): all five arrows of the
 original (x,id_R,0) calculation now enter through a standalone native
 context. Nine matrix equations, five explicit model interpretations and
