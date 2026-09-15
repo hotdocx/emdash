@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: first two interior exactness proofs qualified; last two comparison cokernel-zero proofs next
+Status: first three interior exactness proofs qualified; fourth comparison cokernel-zero proof next
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -60,7 +60,7 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | --- | --- | --- |
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
-| NUH-6C | maps/zeros, all comparison kernel-zero proofs and first two interior exactness proofs qualified; last two proofs remain | Prove invertibility of all four actual interior comparisons and retain the full six-term sequence |
+| NUH-6C | maps/zeros, all comparison kernel-zero proofs and first three interior exactness proofs qualified; fourth remains | Prove invertibility of all four actual interior comparisons and retain the full six-term sequence |
 | NUH-6D | pending 6B/6C | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
 | NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
@@ -411,8 +411,83 @@ snapshot covers 1,268 files without running a repository typecheck.
 NUH-6C2b1 is **qualified**. It adds no primitive, rule or output assumption
 and preserves the full arbitrary-triple scope of the native six-term input.
 
-**Next — NUH-6C2b2:** derive the actual third and fourth comparison
-cokernel-zero proofs and their fixed-forward exactness, retaining whole ∂
-and the original native diagram selections. LES/reference sign comparison,
-concrete NUH-6E checks, NUH-5N2G3B2 displayed integration and NUH-7 remain
-required after full six-term exactness.
+At `ff71ab1a`, NUH-6C2b2 still required the actual third and fourth comparison
+cokernel-zero proofs and their fixed-forward exactness. The third is
+constructed below, retaining whole ∂ and the original diagram selections.
+
+### NUH-6C2b2a: Third Interior Exactness At Q(α)
+
+The preceding turn made progress at `ff71ab1a`: second interior exactness
+is qualified. All 62 worktrees were clean; the comparison baseline remains
+an ancestor. The second-exactness baseline owner passes with warnings in
+`emdash2/logs/probes/emdash3_2_one_cat_native_snake_second_exactness-20260915-091755.log`.
+
+For M=K(q₁) with inclusion μ, form the original whole cospan kernel L of
+μ:M⇒Q(α) and π_α:K(c)⇒Q(α). Its projection r:L⇒M is a derived cover;
+write p:L⇒K(c) for the other projection. From q₁μ=0 and the original
+q₁π_α=π_bκ_c reconstruction, π_bκ_cp=0. Lift κ_cp through the original
+Im(b), then form a second cospan kernel V along s_b:B⇒Im(b). Its first
+projection s:V⇒L is a derived cover; its second x:V⇒B satisfies
+bx=κ_cps. Thus cbx=0, and the original γπ_a=cb reconstruction lifts
+x into the same E used by ∂. Kernel cancellation gives ℓw=ps,
+then ∂ρw=μrs. The actual third comparison factors rs through
+its original source-image map; two cover cancellations prove its
+cokernel projection zero and hence its fixed-forward ΩAlong evidence.
+
+This direct whole construction uses the original P/Q, additive structure
+and normality, with no Op migration, pointwise naturality records or output
+assumptions. The experiment's rejection criteria were a change of original
+diagram selection or failure of a whole consumer requiring such an
+assumption. Its scoped 90s/2GiB checks pass. The later tentative memory
+review of the separate displayed CAS certificate does not change these limits.
+
+The [cover owner](../emdash2/emdash3_2_one_cat_native_snake_third_covers.lp)
+constructs the two original cospan kernels and their whole cancellation.
+The first cover uses the existing theorem that π_α has zero cokernel;
+the second derives that property for the source-image map of b. Their
+compatibility and the original q₁ reconstruction lift κ_cp into the
+original image kernel on the Q-arrow of b.
+
+The [representative owner](../emdash2/emdash3_2_one_cat_native_snake_third_representatives.lp)
+derives bx=κ_cps and uses γπ_a=cb to lift x into the original E.
+Its inclusion reconstructs x. Kernel cancellation gives ℓw=ps, and
+the original connecting reconstruction then gives ∂ρw=μrs. No duality
+transport, new cover choice or pointwise naturality field enters this proof.
+
+The [exactness owner](../emdash2/emdash3_2_one_cat_native_snake_third_exactness.lp)
+retains the third native input and its actual ε₃:Im(∂)⇒K(q₁).
+Its original source-image factorization and the representative equation
+derive a factor of rs through ε₃. The Q-unit and both derived cover
+cancellations prove π_ε₃=0; the existing kernel-zero proof then constructs
+`one_cat_native_snake_third_exact` in `OneCatNativeSnakeThirdExactness`.
+
+The three prototypes pass: `nuh6c2_third_covers-20260915-092034.log`,
+`nuh6c2_third_representatives-20260915-092139.log` and
+`nuh6c2_third_exact-20260915-092256.log` under `emdash2/logs/probes/`.
+The promoted tranche has 26 transparent definitions and no new primitive,
+rewrite or unifier. Eleven reviewer assertions exercise both original
+covers, native reconstruction, ∂, the actual canonical comparison and a
+consumer built from arbitrary a,b,c and c∘b∘a=0. Final qualification is in
+`emdash2/tmp/probes/nuh6c2_third_conformance.json`,
+`nuh6c2_third_controls.json`, `nuh6c2_third_warnings.json` and
+`nuh6c2_third_qualification.json`. All checks remain local at 90s/2GiB;
+no TypeScript or repository aggregate is part of this tranche.
+
+The owners pass in 13.63s, 15.88s and 15.71s; the reviewers pass in
+13.39s, 13.75s and 18.56s. All six diagnostic inventories match their exact
+import controls: 1,484 inherited critical-pair and 169 pattern reports,
+with matching locations, term heads, rule families and no parser issues.
+Strict LHS, dependency and prototype-body preservation checks pass, and
+the catalog/TOC and source-health snapshot are current. The snapshot covers
+1,274 files without a repository typecheck. NUH-6C2b2a is **qualified**;
+the third predicate is proved on its actual comparison at the original
+arbitrary-triple scope.
+
+**Next — NUH-6C2b2b:** derive the actual fourth comparison's cokernel-zero
+proof and fixed-forward exactness at Q(b). A direct candidate covers K(q₂)
+along π_b, lifts the resulting c-image into Im(γ), then covers successively
+along the source-image map of γ and π_a. Their representative difference
+should lift into K(c) and reconstruct the original q₁ image. Retain all
+original diagrams and derive every cover condition. Full six-term assembly,
+LES/reference sign comparison, concrete NUH-6E checks, NUH-5N2G3B2
+displayed integration and NUH-7 remain required.

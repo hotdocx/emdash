@@ -331,6 +331,36 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-6C2b2a: Third interior exactness at Q(α) — qualified 2026-09-15
+
+The preceding turn made progress at `ff71ab1a`; its second exactness
+remains qualified. This tranche covers the original K(q₁) along π_α,
+then uses q₁π_α=π_bκ_c to lift into the original Im(b). A second
+derived cover along the source-image map of b supplies x with bx=κ_cps.
+The original γπ_a=cb reconstruction lifts x into the same E used by ∂.
+Kernel cancellation gives ℓw=ps, so ∂ρw=μrs wholly.
+
+The actual ε₃:Im(∂)⇒K(q₁), with its original input/source-image
+factor, then factors rs. Its Q-unit and the two original cover cancellations
+give π_ε₃=0; the already derived kernel-zero proof gives fixed-forward
+ΩAlong. All universal constructions use the original P/Q. No Op migration,
+output assumption, new selection or caller naturality/factor record enters.
+
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records 26 transparent definitions and 11 passing assertions, including both
+whole cover cancellations and a consumer built from the arbitrary triple.
+The six owner/reviewer checks pass in 13–19 seconds each at 90s/2GiB;
+diagnostic inventories match exact import controls. Scoped LHS, dependency,
+catalog/TOC/health and document checks pass, with no primitive or rule added.
+The fourth exactness proof at Q(b), whole six-term assembly, LES/reference
+sign comparison, concrete qualification, NUH-5 displayed integration and
+NUH-7 remain required.
+
+The user's later resource/opacity suggestions are recorded as tentative
+options in the model/reifier plan. They do not change this tranche's
+90s/2GiB guard or authorize opaque output assumptions; continue the remaining
+mathematics before reconsidering that separate issue.
+
 ### NUH-6C2b1: Second interior exactness at K(γ) — qualified 2026-09-15
 
 The previous turn made progress at `42c72f49`; its first exactness remains

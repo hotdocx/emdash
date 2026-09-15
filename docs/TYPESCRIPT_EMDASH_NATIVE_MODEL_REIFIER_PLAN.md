@@ -1071,9 +1071,34 @@ the surrounding whole maps, four zero composites and zero kernel inclusion
 for each actual comparison. NUH-6C2a derives the first comparison's
 cokernel-zero proof and exactness at K(b). NUH-6C2b1 now derives the
 second comparison's cokernel-zero proof and exactness at K(γ), using two
-original whole covers and the corrected K(b) representative. The remaining
-two exactness proofs, sign comparison and this plan's G3B2 integration
-remain open.
+original whole covers and the corrected K(b) representative. NUH-6C2b2a
+now derives third exactness at Q(α), again through original whole covers
+and the same E/∂. Fourth exactness, whole six-term assembly, sign comparison
+and this plan's G3B2 integration remain open.
+
+User clarification (2026-09-15): after the other goal work, the G3B2
+investigation may test a reviewed, measured increase of the 2GiB limit and
+alternative causes such as duplicated terms, unfolding or endpoint
+comparison. Keep the current guard during the intervening snake work.
+The failure concerns certification of categorical exactness on the assembled
+displayed diagram; the checked native whole constructions and H/maps/δ CAS
+computations remain available. Opacity must distinguish a checked theorem
+whose body is hidden from a new bodyless assumption. It may preserve
+computations that do not inspect evidence, but ΩAlong carries inverse data;
+audit any consumer that extracts those data before claiming opacity has no
+computational effect. No output-exactness assumption or resource bypass is
+introduced by this clarification.
+
+The user's tentative suggestion for a conditional opacity boundary is the
+certification-law part only: keep selected inverse maps and their projections/computation
+transparent. Before hiding a law witness, verify that the actual consumer
+does not compute by transport or extract a higher cell from that path.
+At the recorded ordinary-category scope this may permit opaque checked
+laws with unchanged computational data; it is not a global proof-irrelevance
+claim or permission to replace an unproved law by an assumption.
+These are brainstorming options to reassess carefully when G3B2 resumes,
+not an adopted implementation change. Continue the remaining mathematics
+under the preceding plan meanwhile.
 
 ## NUH-5A: Supported Retained-Model Preparation
 
