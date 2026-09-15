@@ -46,6 +46,18 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
 
+Current NUH-5N2G3A milestone (2026-09-15): all three original whole exactness
+proofs now have typed point observations, including both zero windows. A
+Sigma of the existing arrow and Ω witness, checked native constructors and
+typed projections keep the comparison and its proof together. The frontend
+uses three checked transparent definitions with retained bodies; the source
+assumptions and trust decisions are unchanged. Native context v7 adds the
+exact mirrors. Twelve focused cases and 39 formal assertions pass. Direct
+expanded/inline variants still exceed 2GiB; no opacity, new primitive or
+rewrite bypass was added. Next relate these actual comparisons to the
+displayed adjacent arrows, index exactness there and transport it. The
+displayed-exactness flag remains false; NUH-6/7 remain required.
+
 Current NUH-5N2G2 milestone (2026-09-15): the complete finite observation
 diagram, including endpoint-matching evidence, now has an internal native→CAS
 path built automatically by the frontend. The observation of any existing
@@ -985,7 +997,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: native finite-diagram coherence and whole exactness evidence qualified | Index and transport categorical exactness to the displayed CAS diagram under the existing model/row contracts |
+| NUH-5 | active: native finite-diagram coherence and typed observations of original whole exactness qualified | Relate the observed comparisons to adjacent displayed arrows, then index and transport categorical exactness under the existing model/row contracts |
 | NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |

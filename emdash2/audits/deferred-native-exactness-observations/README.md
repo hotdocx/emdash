@@ -12,6 +12,17 @@ a selected snapshot as an ignored `tmp/probes/*.lp` only for an explicitly
 selected later investigation or a demonstrated required native consumer.
 Do not automatically resume the projection/checker detour.
 
+Required native consumer update (2026-09-15, NUH-5N2G3A): typed point
+observations now work through a Sigma of the original arrow and Ω evidence,
+checked native evaluation constructors and typed projections. The frontend
+emits checked transparent named results with their full bodies/dependency
+closure. This qualifies the current native consumer without another
+assumption, opacity rule or checker patch. Direct expanded point types and
+inline concrete emission still exceed 2GiB. The inverse/projection studies
+below and the combined δ-point/exactness import remain unqualified; do not
+interpret this consumer result as their resolution. Displayed-diagram
+exactness transport is still required in the living plan.
+
 The original native whole exactness theorems remain qualified. The generic
 evaluation lemma checks, as do the twelve whole-API prototype definitions.
 The middle point-proof definition is accepted with its inferred type. Its

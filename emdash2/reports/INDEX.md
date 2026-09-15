@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Native exactness point observations (2026-09-15): the
+[generic data view](../emdash3_2_arrow_equivalence_observations.lp) and
+[native interface](../emdash3_2_commutative_algebra_freyd_adjunction_model_point_exactness.lp)
+observe the original comparison and Ω witness together. The frontend retains
+checked transparent result definitions and adds no assumptions. Twelve focused
+cases and 39 formal assertions pass. Relating these comparisons to the
+displayed arrow pairs and transporting exactness remains in the
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Whole finite native diagram coherence (2026-09-15): the
 [derived observation view](../emdash3_2_commutative_algebra_freyd_diagram_observations.lp)
 retains the original finite tail's arrows and proves a path of the complete

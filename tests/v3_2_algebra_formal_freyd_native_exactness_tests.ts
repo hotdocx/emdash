@@ -15,10 +15,12 @@ import { serializeCoreExpression } from '../src/v3_2/core_serialization';
 import * as nativeLongExact from '../src/v3_2/algebra_polynomial_freyd_long_exact';
 
 import { polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
-import { freydNativeExactnessProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
+import { freydNativeExactnessProbe, freydNativeExactnessPointProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
 import { constructAlgebraFormalFreydNativeExactness } from '../src/v3_2/algebra_formal_freyd_native_exactness';
-import { createFormalFreydNativeExactnessProofEnvironment, algebraFormalFreydNativeExactnessExpressions,
+import { algebraFormalFreydNativeExactnessExpressions,
     FREYD_NATIVE_EXACTNESS_ARGUMENTS } from '../src/v3_2/algebra_formal_freyd_native_exactness_signatures';
+import { createFormalFreydExactnessPointProofEnvironment, algebraFormalFreydExactnessPointExpressions } from '../src/v3_2/algebra_formal_freyd_exactness_point_signatures';
+import { observeAlgebraFormalFreydNativeExactness } from '../src/v3_2/algebra_formal_freyd_exactness_points';
 
 const p = provenance('surface', 'native categorical exactness', sourceSpan('tests/native-exactness.ts', 1, 1));
 const fingerprint = (id: string) => createCoreProofArtifactFingerprint({
@@ -58,7 +60,7 @@ let realizationPromise: ReturnType<typeof realize>;
 const consumer = () => realizationPromise ??= realize();
 
 const symbolic = () => {
-    let environment = createFormalFreydNativeExactnessProofEnvironment([]);
+    let environment = createFormalFreydExactnessPointProofEnvironment([]);
     let type = environment.lookup('bridge_freyd_adjunction_model_middle_exact_evidence')!.type;
     const values: Record<string, KernelExpression> = {};
     for (const field of FREYD_NATIVE_EXACTNESS_ARGUMENTS) {
@@ -81,6 +83,15 @@ describe('v3.2 native whole categorical exactness', () => {
         const evidence = algebraFormalFreydNativeExactnessExpressions(values);
         assert.deepEqual(evidence.map(e => e.position), ['middle', 'source', 'target']);
         evidence.forEach(e => checker.check(checker.rootContext, e.term, e.type));
+        const points = algebraFormalFreydExactnessPointExpressions(evidence);
+        const pointAssertions = points.flatMap(e => [
+            { label: e.position + ' point data', term: e.data, type: e.dataType, span: p.span! },
+            { label: e.position + ' original comparison', term: e.arrow, type: e.arrowType, span: p.span! },
+            { label: e.position + ' observed evidence', term: e.evidence, type: e.type, span: p.span! }
+        ]);
+        pointAssertions.forEach(e => checker.check(checker.rootContext, e.term, e.type));
+        if (process.env.EMDASH_NATIVE_EXACTNESS_POINT_SYMBOLIC_OUTPUT) writeFileSync(process.env.EMDASH_NATIVE_EXACTNESS_POINT_SYMBOLIC_OUTPUT,
+            freydNativeExactnessPointProbe(environment, pointAssertions).source);
         const probe = freydNativeExactnessProbe(environment, evidence.map(e => ({ label: e.position + ' whole exactness',
             term: e.term, type: e.type, span: p.span! })));
         if (process.env.EMDASH_PROOF_CAS_NATIVE_EXACTNESS_SYMBOLIC_OUTPUT) {
@@ -97,6 +108,9 @@ describe('v3.2 native whole categorical exactness', () => {
             const e = algebraFormalFreydNativeExactnessExpressions(bad)[0];
             assert.throws(() => checker.check(checker.rootContext, e.term, e.type));
         }
+        const original = algebraFormalFreydNativeExactnessExpressions(values);
+        assert.throws(() => algebraFormalFreydExactnessPointExpressions(original.map((e, i) => i ? e :
+            { ...e, term: kernelFree('unrelated_proof', p) })), /original whole exactness constructor/);
     });
 
     it('constructs exactness on the actual CAS window without adding an assumption or using the delta agreement', async t => {
@@ -105,6 +119,14 @@ describe('v3.2 native whole categorical exactness', () => {
         assert.throws(() => constructAlgebraFormalFreydNativeExactness({ ...result, prepared: { ...result.prepared } }),
             /original window preparation/iu);
         const exactness = constructAlgebraFormalFreydNativeExactness(result);
+        const points = observeAlgebraFormalFreydNativeExactness(result);
+        assert.equal(points.source, source);
+        assert.equal(points.assumptionsAdded, 0);
+        assert.equal(points.trustDecisions, 0);
+        assert.equal(points.provesDisplayedCasExactness, false);
+        assert.equal(points.definitions.length, 3);
+        assert.ok(points.definitions.every(d => d.body !== undefined && d.transparency === 'transparent'));
+        points.observations.forEach((e, i) => assert.equal(e.whole, points.whole.evidence[i]));
         assert.equal(exactness.source, source);
         assert.equal(exactness.assumptionsAdded, 0);
         assert.equal(exactness.trustDecisions, 0);
@@ -121,6 +143,15 @@ describe('v3.2 native whole categorical exactness', () => {
         const checked = createCoreProofChecker(probe.environment);
         exactness.evidence.forEach(e => checked.check(checked.rootContext, e.term, e.type));
         assert.doesNotMatch(probe.source, /freyd_adjunction_model_connecting_observation|FreydHomologyModel/u);
+        const pointProbe = freydNativeExactnessPointProbe(points.environment, points.observations.flatMap(e => [
+            { label: e.position + ' native point data', term: e.data, type: e.dataType, span: p.span! },
+            { label: e.position + ' native point comparison', term: e.arrow, type: e.arrowType, span: p.span! },
+            { label: e.position + ' native point evidence', term: e.evidence, type: e.type, span: p.span! }
+        ]));
+        assert.equal(pointProbe.environment.lookup(result.proof.name), undefined);
+        points.definitions.forEach(d => assert.ok(pointProbe.environment.lookup(d.name)?.body));
+        assert.doesNotMatch(pointProbe.source, /freyd_adjunction_model_connecting_observation|FreydHomologyModel/u);
+        if (process.env.EMDASH_NATIVE_EXACTNESS_POINT_OUTPUT) writeFileSync(process.env.EMDASH_NATIVE_EXACTNESS_POINT_OUTPUT, pointProbe.source);
         if (process.env.EMDASH_PROOF_CAS_NATIVE_EXACTNESS_OUTPUT) {
             writeFileSync(process.env.EMDASH_PROOF_CAS_NATIVE_EXACTNESS_OUTPUT, probe.source);
         }

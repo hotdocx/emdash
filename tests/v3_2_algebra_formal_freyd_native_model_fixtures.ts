@@ -13,6 +13,7 @@ import { FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS } from '../src/v3_2/algebr
 import { FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_connecting_signatures';
 import { FORMAL_FREYD_NATIVE_EXACTNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_exactness_signatures';
 import { FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_diagram_signatures';
+import { FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_exactness_point_signatures';
 import { serializeCoreLfKernelProbe } from '../src/v3_2/lf_probe';
 
 export const FREYD_NATIVE_MODEL_PROBE_BINDINGS = Object.freeze({ ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
@@ -21,7 +22,8 @@ export const FREYD_NATIVE_MODEL_PROBE_BINDINGS = Object.freeze({ ...AFFINE_FORMA
                 ...FORMAL_FREYD_KERNEL_CHOICE_PROVIDER_SIGNATURE_BINDINGS, ...FORMAL_FREYD_ACTUAL_HOMOLOGY_SIGNATURE_BINDINGS,
                 ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS,
                 ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_NATIVE_EXACTNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS });
+                ...FORMAL_FREYD_NATIVE_EXACTNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS,
+                ...FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS });
 
 export const freydNativeModelProbe = (environment: Parameters<typeof serializeCoreLfKernelProbe>[0]['environment'],
     assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) =>

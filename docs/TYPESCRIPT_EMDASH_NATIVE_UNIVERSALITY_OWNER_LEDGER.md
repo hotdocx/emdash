@@ -331,6 +331,35 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-5N2G3A: Original exactness point observations — qualified 2026-09-15
+
+The required point consumer exposed the existing 2GiB boundary again. A
+compact Sigma containing the original LaxArrow and its `OmegaEquivAlong`
+witness, checked generic/native evaluation constructors, and typed projections
+qualify all three comparisons/evidence at each concrete window. This is a
+data wrapper around the existing equivalence, not another notion or choice.
+Twenty-one definitions add no primitive, rule or unifier.
+
+Native context v7 adds seven exact mirrors. The frontend passes the original
+whole theorem term explicitly and names each evaluated result with a checked
+transparent definition. Inline emission failed; named definitions retain
+their bodies and complete dependency closure. The returned proof environment
+extends the unchanged assumption source, with no additional assumption or
+decision. Whole-only conformance still rejects body-bearing source entries;
+point conformance rechecks the needed transparent bodies in source order.
+
+Three exactness tests and nine native-context regressions are qualified;
+the concrete test takes 97.90s under 120s and retains 69 assumptions plus
+three derived definitions. Thirty-nine formal assertions pass under 90s,
+including a 301,489-byte concrete artifact. Owner diagnostic inventories
+match their controls. The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records exact evidence and the failed expanded/inline alternatives.
+
+This is **progress**. NUH-5N2G3B must relate the observed comparisons to the
+displayed arrow pairs and finish categorical exactness transport. The
+displayed-exactness flag remains false. No broader projection/inverse
+normalization repair or combined-import memory repair is claimed.
+
 ### NUH-5N2G2: Whole finite diagram path — qualified 2026-09-15
 
 A nonempty finite family of complete LaxArrow observations with adjacent

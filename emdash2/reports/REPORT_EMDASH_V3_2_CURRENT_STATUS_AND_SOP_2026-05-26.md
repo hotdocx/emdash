@@ -4,6 +4,18 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native exactness point observations (2026-09-15): a
+[Sigma observation of the existing arrow/Ω witness](../emdash3_2_arrow_equivalence_observations.lp)
+and [native point interface](../emdash3_2_commutative_algebra_freyd_adjunction_model_point_exactness.lp)
+retain the original whole theorem, forward comparison and inverse choices.
+The frontend uses checked transparent named results with full bodies and
+dependency closure; no assumption, primitive or rewrite is added. All three
+positions and both zero windows have typed consumers, with twelve focused
+cases and 39 formal assertions qualified. Expanded point types and inline
+emission still hit the 2GiB boundary. The actual comparisons must next be
+related to the displayed H/map/δ pairs before categorical exactness transport
+is complete; the current observer does not claim displayed exactness.
+
 Whole finite native diagram coherence (2026-09-15): the
 [observation view](../emdash3_2_commutative_algebra_freyd_diagram_observations.lp)
 contains the original complete arrows and proposition-valued matching

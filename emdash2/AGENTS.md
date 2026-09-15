@@ -162,6 +162,15 @@ equate diagram equality with completed displayed exactness or add an output
 assumption. The model/reifier plan records the corrected negative fixture,
 all qualified integration cases and diagnostic comparisons.
 
+NUH-5N2G3A qualifies typed point observations of the original whole exactness
+comparisons/evidence using a Sigma data view and checked transparent named
+results. Their bodies and dependency closures are retained; the assumption
+source is unchanged. Native context v7 exposes seven exact mirrors. Expanded
+point predicates and inline concrete emission still exhaust 2GiB; no opacity
+or new rule was added. G3B must relate the actual comparisons to the displayed
+arrow pairs and finish exactness transport. Existing inverse/projection
+deferrals and the combined-import boundary are not thereby resolved.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

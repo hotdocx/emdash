@@ -862,6 +862,121 @@ assumption. Native snake/LES work with general six-term scope and signs,
 then NUH-7 qualification, remain required. Existing Op/profile and optional
 legacy/projection deferrals remain unchanged.
 
+### NUH-5N2G3A: Typed Point Observations Of Original Exactness — Qualified
+
+The stored Ω-exactness evidence lives in
+`Functor_cat(K,Freyd(R))`, whereas the diagram contains observed arrows in
+`Freyd(R)`. This demonstrates a need for the already-checked generic
+evaluation operation, which maps the original comparison and its evidence.
+Reuse that generic operation; do not reopen selected-inverse reduction
+checks. Test an explicit forward point predicate and a constructor taking
+the original whole evidence as an argument, then supply the actual derived
+whole theorem. This tests whether the required consumer can retain its type
+without unfolding proof bodies. It is a focused native consumer under the
+resumption note's demonstrated-dependency condition, not permission to resume
+the old combined inverse/projection diagnostics. Each target stays under the
+90s/2GiB guard. If the explicit type still exceeds that bound, retain the
+measurement and review type factoring or a whole categorical transport route;
+do not replace the output theorem by an assumption.
+
+G3 type-factoring result: the direct explicit point predicate/constructor
+exceeds 2GiB. Carrying only the comparison as a LaxArrow object allows the
+whole arrow, point arrow and point predicate to typecheck, but their evidence
+reconciliation still exceeds the guard. A Sigma observation containing the
+original LaxArrow object together with its existing `OmegaEquivAlong`
+evidence succeeds when built from the whole proof through a checked generic
+constructor, then evaluated through a checked native constructor. This is a
+data wrapper, not another equivalence notion, new inverse choice, opacity
+rule or stronger assumption. Typed projection functions keep this compact
+interface at the consumer boundary. All three actual comparisons/evidence
+observations for the concrete middle window now check, as do both zero
+windows. The frontend interface is qualified below. Old explicit inverse/projection
+reviews and the combined heavy-module import remain separate boundaries.
+
+The frontend point-observation qualification retains the previously reviewed
+120s limit for the concrete native exactness feature (earlier concrete
+whole-evidence checks took 72–78s). It now additionally builds the three
+typed comparison/evidence observations from the same original proof terms.
+Keep the default 90s for LP, compiler and context regressions, the unchanged
+memory/file/V8 caps, and
+separate modular proof closures. No full diagram replay is needed merely
+to add these optional observation views to the context.
+
+The [generic observation owner](../emdash2/emdash3_2_arrow_equivalence_observations.lp)
+defines a Sigma of the existing LaxArrow object and its existing
+`OmegaEquivAlong` evidence. Evaluation uses the original evaluation functor's
+action on that evidence. Six generic assertions check the original forward
+arrow, original witness, evaluated arrow and mapped witness. This is no new
+equivalence notion or inverse choice. The
+[raw window owner](../emdash2/emdash3_2_commutative_algebra_freyd_exactness_point_data.lp)
+observes the original middle/source/target theorems; the
+[Terminal interface](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_point_exactness.lp)
+gives compact concrete types and typed projections. These three owners add
+twenty-one definitions, zero primitives, zero rules and zero unifiers.
+
+Native context v7 supplies seven
+[exact private mirrors](../src/v3_2/algebra_formal_freyd_exactness_point_signatures.ts).
+The [frontend observer](../src/v3_2/algebra_formal_freyd_exactness_points.ts)
+calls the original whole constructor and passes each original theorem term
+explicitly to its point observer. It rejects a substituted constructor or
+changed argument list. Its comparison and witness come from the same result;
+it does not reselect an inverse or run a CAS operation.
+
+Inline frontend emission still exceeded 2GiB. The qualified implementation
+therefore creates three **checked transparent definitions**, one for each
+point-data result, and projects their named values. These definitions retain
+their original bodies. The observer returns their extended proof environment
+separately from the unchanged assumption source. It adds no assumption or
+trust decision. The point conformance fixture retains the complete type/body
+dependency closure, batches unchanged opaque input declarations, and
+rechecks each transparent definition in order. It rejects opaque definitions
+with hidden bodies; the old whole-only fixture still requires body-free
+source declarations. No body is erased into an assumed theorem.
+
+The concrete frontend case passes in 97.90s under its reviewed 120s limit;
+the two symbolic/rejection cases pass in 9.29s at 90s. Nine affected native
+context regressions pass in 79.79s. The concrete case retains all 69 original
+source assumptions and returns three checked definitions. Its dependency
+closure omits the unused δ realization agreement and includes the three
+definition bodies. The 301,489-byte emitted artifact passes nine assertions
+in 20.70s. Both zero windows pass six assertions each, the original whole
+proof artifact passes three, and the symbolic point artifact passes nine.
+Together with the six generic assertions, 39 final formal assertions pass.
+Typecheck/lint, strict LHS scans, catalogue/TOC, source-health and link checks
+are localized; no full diagram replay or repository aggregate ran.
+
+Owner diagnostic inventories match their import controls: generic 1,146
+critical-pair/157 pattern reports; raw and Terminal owners 1,490/169. The
+generic reviewer, symbolic and concrete frontend artifacts, and both zero
+windows also match their respective controls. Counts, locations, term heads,
+rule families and parser results are compared, not a literal-word warning
+scan. Direct point predicates, separately reconciled
+point evidence, direct concrete generic calls and inline concrete frontend
+emission remain recorded failed alternatives. The successful typed/named
+observation is not a claim that those normal forms or the combined
+δ-point/exactness import memory boundary have been repaired.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2g3_types.txt`,
+`nuh5n2g3_lint.txt`, `nuh5n2g3_symbolic_regression.txt`,
+`nuh5n2g3_named_concrete_tests.txt`, `nuh5n2g3_context_regression.txt`,
+`nuh5n2g3_conformance.json`, `nuh5n2g3_named_conformance.json`,
+`nuh5n2g3_warnings.json` and `nuh5n2g3_qualification.json`. The final frontend
+artifact is `nuh5n2g3_named_concrete_frontend.lp`, checked in
+`logs/probes/nuh5n2g3_named_concrete_frontend-20260915-054908.log`.
+Failed candidates/logs retain the `nuh5n2g3_point`, `packed_point`,
+`concrete_point_data` and `concrete_frontend` stems.
+
+**Next — NUH-5N2G3B:** relate the observed original Im→Ker comparisons to the
+appropriate adjacent H/map/δ arrows of the native finite diagram. Retain
+their actual sources, targets, forward comparison and selected inverse;
+an arbitrary invertible arrow is not an exactness certificate for a diagram.
+Then index the categorical exactness predicate/evidence at that diagram and
+transport it through the stored native→CAS path. The current observer
+explicitly keeps `provesDisplayedCasExactness:false`. No stronger model or
+realization contract, output-exactness assumption, or caller-written
+naturality square is permitted as a substitute. NUH-6/7 and existing
+deferrals remain as previously recorded.
+
 ## NUH-5A: Supported Retained-Model Preparation
 
 Start with rational polynomial rings, the supported coefficient backend of
