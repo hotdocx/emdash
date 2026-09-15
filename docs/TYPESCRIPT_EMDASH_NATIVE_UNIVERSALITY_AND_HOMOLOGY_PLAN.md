@@ -46,6 +46,19 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
 
+Current NUH-5N2G1 milestone (2026-09-15): presentation setness now derives
+compatibility of the endpoint paths extracted from adjacent complete-arrow
+realizations. Six semantic definitions and the actual six-junction consumer
+introduce no new assumption or rule. The generic reviewer passes eight
+positive assertions and a wrong-endpoint rejection; the complete diagram
+with all six compatibility proofs passes 51 assertions. The final diagnostic
+inventories match their import-only/original-diagram controls. These are
+CAS-facing data observations of the existing LaxArrow object. Whole-diagram
+exactness transport and automated frontend proof construction remain next;
+the TypeScript full-coherence flag remains false. The subplan also corrects
+the previous literal-word warning counter: the older artifacts passed with
+inherited critical-pair/pattern reports, rather than with zero diagnostics.
+
 Current NUH-5N2F milestone (2026-09-15): one native diagram driver assembles
 the twelve original degree H observations, eight maps and three δ windows,
 checking repeated formal endpoints and actual CAS selections. Its displayed

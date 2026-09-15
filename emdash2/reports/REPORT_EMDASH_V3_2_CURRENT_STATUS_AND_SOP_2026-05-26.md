@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native realization endpoint coherence (2026-09-15): the
+[observation module](../emdash3_2_commutative_algebra_freyd_observation_coherence.lp)
+proves that finite presentation objects form a set, then derives compatible
+endpoint paths from the existing complete-arrow agreements. Its two endpoint
+views use the existing decoded nested-Sigma object representation; native
+directed action and categorical universality retain their original owners.
+Six definitions add no primitive or rule. Nine generic checks and the concrete
+diagram's six junctions pass; complete diagnostic inventories match the
+baseline. Full displayed exactness transport and frontend integration remain
+in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Complete native observation assembly (2026-09-15): the
 [diagram driver](../../src/v3_2/algebra_formal_freyd_native_diagram.ts)
 assembles all twelve degree H observations, eight maps and three δ windows

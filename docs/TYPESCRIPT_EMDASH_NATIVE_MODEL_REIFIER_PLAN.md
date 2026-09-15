@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: active — native whole exactness evidence and H/map/δ consumers qualified at their recorded boundaries; full H/map assembly and whole-diagram transport/coherence remain; legacy comparisons and auxiliary normalization deferred
+Status: active — complete native H/map/δ observation assembly and whole exactness evidence qualified; displayed-diagram transport/coherence remains; legacy comparisons and auxiliary normalization deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -650,8 +650,12 @@ Evidence: `emdash2/tmp/probes/nuh5n2f_tests600.txt`,
 `nuh5n2f_phases.jsonl`, `nuh5n2f_conformance.json`, `nuh5n2f_types.txt`,
 `nuh5n2f_lint.txt`, `nuh5n2f_guard_tests.txt` and the four emitted LP files in
 `nuh5n2f_diagram/`. `nuh5n2f_qualification.json` records the source/artifact
-hashes and results. The four LP targets take 19.06–22.27s and report no
-warnings. Static source-health freshness and added Markdown links also pass.
+hashes and results. The four LP targets take 19.06–22.27s. The original
+"no warnings" entry was a counter error: the literal `WARNING` scan missed
+Lambdapi's critical-pair/pattern diagnostics. The repository warning parser
+finds 1,488 critical-pair and 169 pattern reports in each artifact. The
+qualification JSON is corrected; all successful exits and assertion counts
+are unchanged. Static source-health freshness and added Markdown links also pass.
 The failed 300s run remains separate evidence.
 
 **Next — NUH-5N2G:** formulate the native displayed-diagram exactness consumer
@@ -663,6 +667,71 @@ required work, distinct from optional old-presentation comparisons and the
 deferred point/inverse-projection normalization experiments. The combined
 heavy-module import still has its recorded 2GiB boundary. Preserve the
 general six-term snake/sign comparison and final NUH-6/7 qualification.
+
+### NUH-5N2G1: Shared Endpoint Coherence — Qualified
+
+Hypothesis: the original CAS-facing presentation classifier is a
+set, by the existing Nat, finite-family and dependent-Sigma truncation
+theorems. Therefore the endpoint paths extracted from two adjacent complete
+arrow agreements coincide at their shared H object. Qualify this using the
+existing LaxArrow endpoint observations and the actual seven-arrow artifact;
+do not ask the caller for a separate endpoint-coherence claim. This is
+coherence of realization data in the concrete presentation category, not a
+replacement for native universality by path-valued cone records. No new
+primitive or rewrite is expected. Reject a proof that assumes either
+setness/coherence or output exactness instead of deriving it. This first
+consumer does not alone establish all displayed exactness transport.
+Use a new one-way observation module, an owning-position candidate and
+generic/actual-data reviewers under the default 90s guard. Retain the last
+green assembly/reuse evidence; no CAS replay is needed for these unchanged
+emitted inputs.
+
+The [observation coherence owner](../emdash2/emdash3_2_commutative_algebra_freyd_observation_coherence.lp)
+now derives presentation setness, exposes two decoded endpoint observations
+and their path actions, and proves agreement of the paths induced at a shared
+endpoint. Six definitions add no primitive, rewrite, unifier or assumption.
+The data observations use the existing nested-Sigma projections of the
+original LaxArrow object; they do not define replacement directed actions.
+The whole target-functor candidate did not reduce at this concrete
+specialization, even with explicit category arguments. Its failure is
+preserved, without a kernel repair or resumption of the deferred Op work.
+The stronger arrow-object setness attempt also exposed the distinction
+between the existing decoded τ-Sigma presentation and a Grpd-level classifier
+equation. Neither failed comparison was installed as a rule or assumption.
+
+The [generic reviewer](../emdash2/examples/freyd_observation_coherence.lp)
+passes eight positive assertions and rejects an unrelated arrow in the next
+shared-endpoint position. It checks arbitrary arrows and agreements, both
+endpoint computations and both reflexive path computations. The unchanged
+NUH-5N2F artifact, extended by the six theorem applications, passes all 51
+assertions: its 45 original observations plus every displayed junction. No
+extra interpretation claim is supplied. This establishes compatibility of
+the existing endpoint paths, not a new assumed coherence contract.
+
+The promoted owner/reviewer pass in 4.79s/5.22s; the first promoted concrete
+check takes 21.00s. The final concrete check preserves the original import
+order and also passes under 90s. Its complete diagnostic inventory (counts,
+locations, term heads and rule families) equals the original diagram's
+1,488 critical-pair/169 pattern reports. The small owner/reviewer match the
+import-only baseline's 1,166/157 reports. The new module declares no rules.
+Prepending the observation module had changed two inherited critical-pair
+reports; preserving the original import order avoids that unrelated delta.
+
+Evidence under `emdash2/tmp/probes/`: `nuh5n2g1_owner.lp`, the preserved
+`*.lp.txt` candidates, `nuh5n2g1_generic.lp`,
+`nuh5n2g1_promoted_concrete.lp`, `nuh5n2g1_conformance.json`,
+`nuh5n2g1_warnings.json` and `nuh5n2g1_qualification.json`. Final concrete
+log: `logs/probes/nuh5n2g1_promoted_concrete-20260915-034118.log`.
+No TypeScript behavior or original CAS calculation changed.
+
+**Next — NUH-5N2G2:** integrate the derived endpoint compatibility with the
+internal whole-diagram/exactness transport consumer and automate its frontend
+proof construction. The TypeScript assembly currently still reports full
+displayed-diagram coherence as unproved. A collection of these endpoint
+proofs alone must not flip that flag or discharge output exactness. Retain
+the existing native whole comparison/evidence and declared model contracts;
+do not require callers to build naturality squares. NUH-6/7 and all existing
+deferrals remain as above.
 
 ## NUH-5A: Supported Retained-Model Preparation
 

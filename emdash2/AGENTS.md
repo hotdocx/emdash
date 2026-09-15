@@ -142,6 +142,15 @@ Displayed-diagram exactness transport/coherence remains NUH-5N2G. Do not
 conflate the successful time extension with the separate combined-import
 memory boundary, or resume the deferred projection experiments automatically.
 
+NUH-5N2G1 qualifies the CAS-facing shared-endpoint compatibility theorem:
+presentation setness and the existing decoded LaxArrow endpoint observations
+derive compatible paths at all six displayed junctions, without another
+interpretation assumption. Six definitions add no rule or primitive. This
+does not replace the whole categorical operations or establish complete
+displayed exactness transport. The latter and automated frontend proof
+construction remain NUH-5N2G2. Diagnostic inventories match their original
+controls; the NUH-5N2F literal-word warning counter was corrected in the plan.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer

@@ -2,6 +2,15 @@
 
 Date: 2026-09-02
 
+Native realization endpoint coherence (2026-09-15): the
+[derived observation theorem](../emdash3_2_commutative_algebra_freyd_observation_coherence.lp)
+uses proved presentation setness to identify the endpoint paths from adjacent
+arrow agreements. The [reviewer](../examples/freyd_observation_coherence.lp)
+and all six junctions of the concrete native/CAS diagram pass. No additional
+interpretation, rule or primitive is introduced. Whole-diagram exactness
+transport and automated frontend proof construction remain in the
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Complete native observation assembly (2026-09-15): the
 [diagram driver](../../src/v3_2/algebra_formal_freyd_native_diagram.ts)
 retains all twelve degree H objects, eight maps and three δ windows in one

@@ -331,6 +331,30 @@ claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
 
+### NUH-5N2G1: Shared endpoint coherence — qualified 2026-09-15
+
+Finite presentation objects are now proved set-valued by the existing
+truncation owners. The original LaxArrow object's decoded endpoint views map
+the supplied complete-arrow paths to presentation paths; setness proves that
+two adjacent arrows induce the same path at their shared H object. Six
+definitions add no primitive, rewrite, unifier, naturality square or new
+semantic assumption. Both generic endpoint/path computations and a rejection
+of unrelated endpoints check. All six junctions of the actual native/CAS
+diagram check from their original interpretation references.
+
+Nine generic assertions and 51 concrete assertions pass under 90s. The
+small module/reviewer match the baseline's 1,166 critical-pair/157 pattern
+reports; the concrete consumer preserves the original import order and
+matches all inventory fields at 1,488/169. The older NUH-5N2F "no warnings"
+report was a literal-word counter error and is corrected. Its successful
+checks are unaffected. Failed whole-target and Grpd-level arrow-Sigma
+comparisons remain candidate evidence; no foundation repair was added.
+
+This is **progress** on realization coherence. The whole-diagram exactness
+consumer and automated frontend proof construction remain NUH-5N2G2; no
+full-coherence flag or output-exactness assumption is added. Details and
+evidence are in the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 ### NUH-5N2F: Complete native observation assembly — qualified 2026-09-15
 
 The native diagram driver retains the original whole CAS adoption, M/N and
