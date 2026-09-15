@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native LES endpoint, connecting/sign and surrounding-map comparisons qualified; general reference/concrete qualification next; six-term observation gap and displayed CAS transport still required
+Status: active — native snake/LES comparisons qualified; direct concrete qualification next; six-term observation gap and displayed CAS transport still required; old-snake comparison removed from scope
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,12 +24,38 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Latest scope correction (2026-09-15, D-NUH-078): the native reformulation
+replaces the former raw snake interface. Agreement with that old formal
+construction is not a goal requirement, just as agreement with the former
+formal LES is not required. NUH-6D4 is withdrawn from the execution queue;
+do not develop ordinary record adapters or preserve obsolete APIs solely
+to compare the implementations. Existing sources/checkpoints retain their
+historical evidence, without imposing a compatibility promise. Migrate any
+affected consumers directly to the native interface before retiring their
+obsolete dependencies; this does not require an old/new equivalence theorem.
+
+The completed native snake–native LES comparison remains qualified and
+useful: it relates the two new whole constructions and fixes their sign.
+Next is NUH-6E direct concrete qualification, followed by the retained
+NUH-6C3b native evidence observations, NUH-5N2G3B2 displayed CAS exactness
+transport and NUH-7 final audit. These are native computation/consumer
+obligations, not old-formulation compatibility checks. Earlier milestone
+paragraphs record their then-current queues; this direction and the current
+implementation ledger supersede those queues.
+
+The nonsplit `0 → R ─x→ R → S → 0` over R=ℚ[x], S=R/(x) is an
+explicit acceptance case for both new interfaces (D-NUH-079). Retain the
+existing native LES computation/realization evidence, including the
+nonzero two-term δ, and qualify the direct native snake and displayed
+exactness under the same supported proof–CAS boundary. The subplan records
+the concrete inputs and expected quotient actions.
+
 NUH-6D3b now proves the original whole surrounding-map factorizations
 R∘k₂=H(p₀)∘q_B and q₁∘L⁻¹=j_B∘H(i₁), retaining the original
 cycle quotient and homology inclusion. Their native whole diagram maps
 and Hom actions check. Eight definitions and ten consumers add no primitive
 or rule. Native LES endpoint, connecting/sign and incident-map comparisons
-are qualified; the general reference-snake comparison, with arbitrary a/c
+are qualified; direct concrete qualification, retaining arbitrary a/c
 and all six terms, is next in the
 [snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
@@ -133,7 +159,7 @@ the required pair alignment and displayed exactness integration before NUH-7;
 the full goal and displayed-exactness flag are unchanged.
 
 NUH-6 now follows the [native snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
-The general reference input is a triple with c∘b∘a=0; a need not be monic
+The general native input is a triple with c∘b∘a=0; a need not be monic
 and c need not be epic. The first native slice derives α and γ as whole
 kernel/cokernel mates on that scope. Short-exact-row specialization alone
 does not satisfy the general six-term requirement. NUH-6A and the first
@@ -1060,7 +1086,7 @@ are recovery and design evidence, not queues to resume indiscriminately.
 ## Scope And Deferrals
 
 In scope: whole universality dependency refactor; native whole H and connecting/window
-consumers; a scoped whole-H snake/direct/native comparison; reusable
+consumers; the general native snake and its native LES comparison; reusable
 model/reifier setup for the already supported polynomial/Freyd backend;
 necessary public/private TypeScript transfer and conformance; owning
 documentation, provenance and checks.
@@ -1119,7 +1145,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
 | NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | native LES comparisons qualified; general reference/concrete qualification next; 6C3b gap retained | Complete reference/concrete work and retained comparison/witness qualification before NUH-7 |
+| NUH-6 | native LES comparisons qualified; direct concrete qualification next; 6C3b gap retained; old-snake comparison withdrawn | Qualify native concrete six-term consumers and retained comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
@@ -1503,6 +1529,8 @@ must not label those alternatives validated implementations.
 | D-NUH-075 | NUH-5B2d2a adds a body-free opaque batch at the LF declaration owner and uses it only in assumption-source replay. Fresh ordered scopes, complete type validation with the original checker factory, all adoption-current checks and final source comparison remain mandatory. No validity cache or conversion change is introduced. Eighteen LF/source tests, three bounded-H/raw-witness tests and the four-test native δ gate pass; its emitted LP artifact is byte-identical to cc8a4dc0. Measured replay cost drops, but the full model run still fails near the guard boundary. Audit the test's independent model prerequisites next; preserve combined-source integration, all three windows, reuse and explicit contracts. Native exactness observations and NUH-6/7 remain open |
 | D-NUH-076 | NUH-5B2d2b qualifies the original combined bounded model source, all 18 H points, eight maps, three native δ windows and full reuse/rejection checks. Respect the user's reviewed time extensions: the complete five-test stage passes in 267 seconds under 300 seconds; routine LP targets stay at 90 seconds. Verify inherited Node worker heap limits, use lossless table transport for row/δ payloads and retain only required private signature declarations. All original checks, selections, formal terms and supplied/trusted contract classifications remain. Five full-workflow tests and all 18 emitted LP assertions pass; the wrapper's four-versus-six count typo is corrected and exact artifacts resumed without repeating adoption. Nine single-window LP assertions and exact payload round trips also pass. Native exactness observations, NUH-6 and NUH-7 remain required |
 | D-NUH-077 | User reprioritizes direct native whole K/Q/H/maps/δ/exactness interaction with native model/realization contracts. Retain CAS-selected data and the qualified compatibility workflow, but defer agreement with older formal presentations and auxiliary projection-normalization studies. The existing FreydAdjunctionModel is the primary mathematical input; direct TypeScript context/consumer work is next. Actual native theorem and coherent CAS-realization checks remain required, with no assumed output exactness. The older zero-endpoint/additive-law failure and newer exactness-projection failures share a broad conversion layer; a common cause is not established. Preserve snapshots and resume only for selected later work or a demonstrated required native consumer |
+| D-NUH-078 | User clarifies that replacing the former raw snake formulation carries no old/new comparison or API-compatibility requirement, as already decided for the former LES. Withdraw NUH-6D4 and stop its unpromoted record-comparison probe. Retain the qualified new-native-snake/new-native-LES comparison. Qualify the general native six-term result and direct CAS realization on their own terms; migrate affected consumers before retiring obsolete dependencies. NUH-6E, native 6C3b observations, displayed CAS transport and final audit remain required |
+| D-NUH-079 | Retain the nonsplit 0 → R ─x→ R → S → 0, R=ℚ[x] and S=R/(x), as a concrete acceptance case for new native LES and snake proof–CAS interfaces. Reuse the qualified native H/map/δ evidence and the existing CAS fixture, including the nonzero two-term δ. Qualify the native snake triple (x,id_R,0) and its six terms directly, with explicit realization contracts and derived exactness; neither a splitting nor an old-formal-snake comparison is required |
 
 Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
@@ -1510,8 +1538,8 @@ renaming it as a prerequisite.
 
 ## Historical Launch Evidence And Current Continuation Prompt
 
-The following launch record is historical. The current queue advances NUH-6
-from the completed general NUH-4 construction, then returns to required
+The following launch record is historical. The current queue advances NUH-6E
+direct native qualification, then the retained NUH-6C3b observations and
 NUH-5N2G3B2 displayed exactness integration before NUH-7. NUH-1/2 remain
 explicitly deferred by later user direction.
 
@@ -1668,10 +1696,14 @@ The retained workflow is qualified through 0caa19d0. Follow the later user
 priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
 native context/signatures, complete H/map/δ observation assembly, finite
 diagram coherence, whole exactness evidence and input-pair observations are
-qualified. The combined pair/certificate consumer exceeds 2GiB. Advance the
-general NUH-6 snake/LES comparison now, then return to required NUH-5N2G3B2
+qualified. The formerly failing combined pair/certificate artifact now
+passes unchanged at 2GiB with GC tuning; public alignment/transport remains
+required. Native snake/LES endpoint, connecting/sign and surrounding-map
+comparisons are qualified. Advance NUH-6E direct concrete qualification,
+then return to NUH-6C3b native evidence observations and NUH-5N2G3B2
 categorical exactness transport to the actual selected CAS diagram before
-NUH-7. This changes work order, not completion criteria.
+NUH-7. NUH-6D4 old-snake comparison is removed from the completion criteria
+by D-NUH-078; do not resume its record-comparison experiment.
 Retain coherent model/realization, normality and row contracts explicitly;
 derive output exactness from the native theorem. Older formal presentations
 are compatibility evidence, not mandatory intermediate targets. Continue

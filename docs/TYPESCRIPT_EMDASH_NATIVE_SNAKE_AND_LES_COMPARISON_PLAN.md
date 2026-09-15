@@ -1,18 +1,26 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native LES endpoint, connecting/sign and surrounding-map comparisons qualified; general reference/concrete qualification next; six-term observation gap retained
+Status: native LES endpoint, connecting/sign and surrounding-map comparisons qualified; direct concrete qualification next; six-term observation gap retained; old-snake comparison withdrawn
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
 ## Scope And Mathematical Boundary
 
-The existing general snake interface is `AbelianSnakeTriple`: an arbitrary
-triple A ─a→ B ─b→ X ─c→ D with c∘b∘a=0. The original
-[owner](../emdash2/emdash3_2_abelian_snake_lemma.lp) derives
-α:A→K(c) and γ:Q(a)→D with κ_c∘α=b∘a and γ∘π_a=c∘b.
-Its six terms are K(α), K(b), K(γ), Q(α), Q(b), Q(γ).
-Neither a monic nor c epic is an input. Preserve this generality.
+The general native snake takes an arbitrary whole triple
+A ─a⇒ B ─b⇒ X ─c⇒ D with c∘b∘a=0. It derives α:A⇒K(c)
+and γ:Q(a)⇒D with κ_c∘α=b∘a and γ∘π_a=c∘b. Its six terms
+are K(α), K(b), K(γ), Q(α), Q(b), Q(γ). Neither a monic nor c
+epic is an input. Preserve this generality.
+
+User scope correction (2026-09-15, D-NUH-078): the former
+[`AbelianSnakeTriple` construction](../emdash2/emdash3_2_abelian_snake_lemma.lp)
+is being replaced as the primary interface. An equivalence or compatibility
+theorem with it is not required. NUH-6D4 is withdrawn, not an unfinished
+completion gate. The native snake–native LES comparison is a separate,
+qualified result between the two new whole constructions. This correction
+supersedes references to required old-snake comparisons in the historical
+milestone entries below.
 
 Two short exact rows alone do not immediately recover that full scope.
 Replacing A by Im(a) and D by Im(c) changes α and γ. Such a route would need
@@ -20,7 +28,7 @@ the comparisons at all six terms, including the outer kernel-cover and
 cokernel-inclusion comparisons. Do not silently strengthen the hypothesis
 or qualify only the middle connecting arrow as the general snake theorem.
 
-The native implementation will use the same general triple as whole
+The native implementation uses the general triple as whole
 transformations over an arbitrary parameter category K. Its primary zero
 datum is the existing coherent input h:J∘A⇒Arr(c∘b), with a recovered by
 the existing whole source observation. A whole triple-zero path may enter
@@ -48,11 +56,11 @@ All three stages are implemented below. This route retains the general
 triple without requiring a new whole category of complexes or a conversion
 to old ordinary universal records.
 
-Fix the positive sign by that reconstruction. The existing CAP-style snake
-owner uses q₂∘∂∘p₁=q₁∘b∘p₂. Comparison maps must retain their original
-kernel embeddings and quotient projections, so an independent sign choice
-cannot be hidden in an endpoint isomorphism. The native LES comparison must
-check its own ∂/δ reconstruction under these same oriented maps.
+Fix the positive sign by that native reconstruction. The native LES
+comparison retains the original kernel embeddings and quotient projections,
+so an independent sign choice cannot be hidden in an endpoint isomorphism.
+Its ∂/δ reconstruction is now qualified under these oriented maps; no
+comparison with the former raw connecting algorithm is required.
 
 ## Execution Ledger
 
@@ -61,8 +69,8 @@ check its own ∂/δ reconstruction under these same oriented maps.
 | NUH-6A | qualified in the current tranche | General whole input, α and γ through original P/Q, with whole reconstruction and no monic/epic assumption on a/c |
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
-| NUH-6D | native LES endpoint, connecting/sign and surrounding-map comparisons qualified; general reference comparison next; independent of 6C3b | Whole LES specialization/comparison on the common short-exact inputs, fixed sign, and comparison with the general reference snake preserving its full scope |
-| NUH-6E | pending 6C/6D | Focused formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
+| NUH-6D | qualified native LES endpoint, connecting/sign and surrounding-map comparisons; 6D4 withdrawn by user direction | Whole native LES specialization/comparison on the common short-exact inputs and fixed sign; no old/new snake comparison |
+| NUH-6E | next; advance direct consumers independently of the retained 6C3b gap | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
 derive their whole reconstruction equations. A failure requiring ordinary
@@ -1312,22 +1320,61 @@ Evidence: `emdash2/tmp/probes/nuh6d5_conformance.json`,
 snapshot covers 1,317 files at
 `sha256:9e6c90412ded491ed10a63f3ba959c2529e3c82838b8aaa9aa9d98ac0cd43629`.
 
-### NUH-6D4: General Reference-Snake Comparison — Next
+### NUH-6D4: Former Raw Snake Comparison — Withdrawn 2026-09-15
 
-The active general reference owner remains `emdash3_2_abelian_snake_lemma.lp`
-with `ComputationalAbelianCategory` and an arbitrary `AbelianSnakeTriple`.
-Its connecting owner and covered-reconstruction owner retain the positive
-CAP characterization; its six-term result remains the comparison scope.
-Do not replace this by the already qualified short-exact-window case or
-assume a monic or c epic.
+The reference audit began at `0ddb6386`, after native LES surrounding maps
+qualified. It identified the old pre-Abelian selections and mono-lift/
+epi-colift providers, then proposed canonical maps to derived native records.
+The user clarified that this comparison is outside the replacement goal,
+consistent with the earlier decision for the old formal LES. Stop this row;
+do not add comparison adapters or retain old APIs solely for compatibility.
 
-First inventory the reference capability projections and the existing
-native ordinary record views in `emdash3_2_one_cat_adjunction_records.lp`.
-Choose a reviewed comparison boundary that retains the original native
-P/Q choices and all six reference terms/maps. Do not infer that native
-normality already supplies a closed `ComputationalAbelianCategory`
-constructor. Ordinary record views may serve this reference comparison;
-they must not become prerequisites of the native primary programs.
-Construct needed universal comparison maps and check the original covered
-connecting formula and sign. Reference, concrete six-term, 6C3b, displayed
-CAS and final qualification remain required.
+Recovery evidence remains in the ignored
+`emdash2/tmp/probes/nuh6r_universals.py` and generated `.lp`. The last probe
+failed syntactically because comment wrapping emitted an uncommented line;
+its log is `emdash2/logs/probes/nuh6r_universals-20260915-144618.log`.
+No semantic comparison definition was promoted. The failed probe is not a
+mathematical obstruction and has no role in native qualification. Existing
+old sources and checkpoints remain recoverable; their presence does not
+create a compatibility obligation. Any affected consumer should migrate
+directly before its obsolete dependencies are retired.
+
+### NUH-6E: Direct Native Concrete Qualification — Next
+
+Use the existing native whole six-term constructor, original P/Q and stated
+normality/model contracts directly. Qualify all six terms, five maps, four
+adjacent zeros and the actual derived exactness witnesses, retaining the
+general arbitrary-a/c scope and positive ∂ reconstruction. Include concrete
+computational consumers that exercise a nonzero connecting map and do not
+reduce all coverage to short-exact-row inputs. Reuse the supported CAS data
+and native realization machinery; no old formal snake result, comparison
+isomorphism or assumed output exactness is a prerequisite.
+
+Required nonsplit acceptance case (user reminder, D-NUH-079):
+`0 → R ─x→ R → S → 0`, with the supported fixture R=ℚ[x] and
+S=R/(x). Reuse the existing
+[one- and two-term inputs](../tests/v3_2_algebra_polynomial_freyd_homology_fixtures.ts).
+The degree-zero input exercises multiplication by x itself. The two-term
+input has differential x on A and B, zero on S modulo its relation, and
+nonzero δ₁:S→S represented by [1]. The subsequent H₀ inclusion is
+represented by [x] and vanishes modulo (x); retain that distinction between
+a matrix and its induced quotient morphism. Existing native H/map/δ
+realizations cover these inputs under explicit interpretation contracts;
+displayed exactness transport still belongs to NUH-5N2G3B2.
+
+For the direct native snake, use the same basic quotient with the triple
+(a,b,c)=(x,id_R,0:R→R). Its native α is multiplication by x into
+K(c), γ is zero from Q(a), and positive reconstruction should give
+∂:S→S acting as id_S. Under the concrete native realization, its six
+terms are 0, 0, S, S, 0, R. This checks a nonzero connecting map with c
+not epic, without a splitting. The old CAS test is
+[computational input evidence](../tests/v3_2_algebra_polynomial_freyd_snake_tests.ts);
+no theorem comparing its old formal snake implementation is needed.
+Qualify the new native six-term proof–CAS consumer, actual maps, zeros and
+derived exactness directly, with model/realization contracts explicit.
+
+Advance independent concrete consumers first. Return to the retained
+NUH-6C3b native comparison/witness observations and NUH-5N2G3B2 displayed
+CAS exactness alignment/transport before NUH-7. The 6C3b comparisons concern
+the actual native Im⇒K maps and evidence, not old/new implementations.
+The qualified native snake–native LES comparison remains intact.

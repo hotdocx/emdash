@@ -4,14 +4,22 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Native replacement scope correction (2026-09-15): user direction removes
+NUH-6D4, the former raw-snake comparison, from the goal. The qualified
+native snake–native LES comparison is retained. Direct native concrete
+qualification, native six-term evidence observations and displayed CAS
+exactness transport remain required under the
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
+This supersedes older milestone queues requiring reference-snake agreement.
+
 Whole surrounding-map comparisons (2026-09-15): the
 [owner](../emdash3_2_one_cat_native_window_snake_surrounding_maps.lp)
 derives R∘k₂=H(p₀)∘q_B and q₁∘L⁻¹=j_B∘H(i₁) by original
 row homology and K/Q reconstruction. The native whole diagram maps retain
 their cycle-quotient/homology-inclusion endpoints and Hom action. Eight
 definitions and ten consumers add no primitive, rule, unifier or opacity.
-The native LES comparison is qualified at its actual factors; general
-reference-snake and concrete qualification remain next under the
+The native LES comparison is qualified at its actual factors; direct
+native concrete qualification remains next under the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Whole connecting/sign comparison (2026-09-15): the
@@ -20,8 +28,8 @@ derives L∘∂∘R⁻¹=δ and L∘∂=δ∘R through original LES/snake cover
 and left-cycle reconstruction, then the existing whole δ uniqueness
 theorem. Its native whole connecting-diagram map retains R/L endpoint
 actions. Ten transparent definitions and eight whole consumers add no
-primitive, rule, unifier, opacity or caller square. Surrounding-map and
-general reference comparisons remain next under the
+primitive, rule, unifier, opacity or caller square. Surrounding-map comparison
+is now qualified; the former raw-snake comparison is withdrawn under the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Original right H identification (2026-09-15): the

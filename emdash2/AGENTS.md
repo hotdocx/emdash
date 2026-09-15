@@ -227,9 +227,19 @@ actions and whole Hom action. NUH-6D3b now proves the whole surrounding-map
 factorizations through original cycle quotients and homology inclusions;
 their native diagram endpoint and Hom actions qualify. The native LES
 comparison is qualified at those actual factors, without identifying all
-snake objects with LES H objects. General reference-snake/concrete
-qualification and NUH-5
-integration remain required.
+snake objects with LES H objects. Direct native concrete qualification,
+the retained native six-term evidence observations and NUH-5 integration
+remain required.
+
+Latest user scope correction (2026-09-15, D-NUH-078): replacing the former
+raw snake interface does not require an old/new comparison theorem or API
+compatibility. NUH-6D4 is withdrawn; stop its unpromoted ordinary-record
+comparison probe. The qualified new-native-snake/new-native-LES comparison
+is retained. Qualify native consumers directly, and migrate affected
+consumers before retiring obsolete dependencies. Earlier milestone queues
+requiring a general reference-snake comparison are superseded by this
+direction and the current living plan.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

@@ -2,13 +2,21 @@
 
 Date: 2026-09-02
 
+Native replacement scope correction (2026-09-15): user direction removes
+NUH-6D4, the former raw-snake comparison, from the goal. The qualified
+native snake–native LES comparison is retained. Direct native concrete
+qualification, native six-term evidence observations and displayed CAS
+exactness transport remain required under the
+[living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
+This supersedes older milestone queues requiring reference-snake agreement.
+
 Whole surrounding-map comparisons (2026-09-15): the
 [owner](../emdash3_2_one_cat_native_window_snake_surrounding_maps.lp)
 proves R∘k₂=H(p₀)∘q_B and q₁∘L⁻¹=j_B∘H(i₁), retaining the
 original cycle quotient and homology inclusion. Eight definitions and ten
 whole consumers qualify both factorizations, native diagram endpoints and
 Hom action without new primitives or rules. The native LES comparison is
-qualified; general reference-snake and concrete qualification remain next
+qualified; direct native concrete qualification remains next
 under the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Whole connecting/sign comparison (2026-09-15): the
@@ -17,8 +25,8 @@ proves L∘∂∘R⁻¹=δ and L∘∂=δ∘R for the original whole connecting
 programs. Original covers, left-cycle reconstruction and existing LES
 uniqueness fix the positive sign. A native whole arrow-diagram map retains
 R/L endpoint actions. Ten definitions and eight whole consumers add no
-primitive, rule or opacity. Surrounding-map and general reference comparisons
-remain next under the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+primitive, rule or opacity. Surrounding-map comparison is now qualified;
+the former raw-snake comparison is withdrawn under the [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 Original right H identification (2026-09-15): the
 [generic proof](../emdash3_2_one_cat_native_homology_quotient_equivalence.lp)

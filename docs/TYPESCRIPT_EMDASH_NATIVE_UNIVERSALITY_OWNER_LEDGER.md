@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparisons qualified; general reference/concrete qualification next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — native LES comparisons qualified; direct concrete qualification next; old-snake comparison withdrawn; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -310,6 +310,37 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### Scope Correction: Replace The Former Snake Without A Compatibility Gate
+
+User direction on 2026-09-15, D-NUH-078, removes NUH-6D4 from the goal.
+The former raw snake is a superseded formal interface, not a required
+comparison target. Stop the unpromoted `nuh6r_universals` probe; its syntax
+failure and source are recorded in the
+[snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md#nuh-6d4-former-raw-snake-comparison--withdrawn-2026-09-15).
+No semantic comparison owner was promoted. There is no new requirement to
+keep old APIs or prove old/new equivalence. Retire obsolete dependencies
+after migrating any affected consumers to the native interface.
+
+The new-native-snake/new-native-LES comparison remains qualified at
+`0ddb6386`. Next is direct native concrete qualification (6E), followed by
+the retained native 6C3b evidence observations, displayed CAS transport and
+final audit. Historical milestone queues below are superseded by this
+direction; their recorded results remain evidence.
+
+The user's nonsplit acceptance case is retained explicitly by D-NUH-079:
+R=ℚ[x], S=R/(x), `0 → R ─x→ R → S → 0`. Existing native LES
+H/map/δ realization evidence remains valid at its declared contract
+boundary. Direct native snake input (x,id_R,0) and displayed exactness
+remain concrete qualification work, detailed in the same subplan.
+
+This scope-only tranche changes seven guidance/plan files and no formal or
+TypeScript source. All 62 worktrees were inspected; only this goal's prior
+plan edit was present, and `cbef77e7` remains an ancestor of `0ddb6386`.
+Validation uses exact diff/whitespace review, changed Markdown links and
+anchors, fence balance, active-reference lint and report-lifecycle lint.
+The existing semantic check evidence is carried forward; no typecheck or
+repository aggregate is needed for this documentation correction.
+
 ### Priority Correction: Native Contracts Before Legacy Comparison
 
 The user requests direct interaction between the new whole K/Q/H/δ/exactness
@@ -342,11 +373,10 @@ unifier, opacity or caller naturality field. Actual cycles and cokernels
 remain distinct from middle H objects.
 
 The native LES endpoint, connecting/sign and incident-map comparisons
-are now qualified. Next inventory and compare the general reference
-`AbelianSnakeTriple` construction at all six terms/maps, preserving
-arbitrary a/c. Existing native ordinary record views may serve that
-reference boundary without changing native program prerequisites.
-Concrete, six-term observations, displayed CAS and final qualification
+are now qualified. Next qualify direct native concrete consumers at all
+six terms/maps, preserving arbitrary a/c. The former raw-snake comparison
+has been withdrawn by D-NUH-078. Native six-term evidence observations,
+displayed CAS and final qualification
 remain required under the [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
 ### NUH-6D3a: Original whole connecting/sign comparison — qualified 2026-09-15

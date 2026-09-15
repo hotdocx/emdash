@@ -10,6 +10,24 @@ Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALI
 
 ## Scope And Existing Boundary
 
+User clarification (2026-09-15, D-NUH-078): the same replacement policy
+applies to the former raw snake interface. Native concrete snake consumers
+must use whole P/Q and native model/realization contracts directly; agreement
+with an old formal snake result is not required. The completed native
+snake–native LES comparison remains qualified. NUH-6D4 is withdrawn;
+direct concrete qualification, native evidence observations and displayed
+CAS exactness transport remain in scope.
+
+The user also retains the nonsplit `0 → R ─x→ R → S → 0` as an
+explicit proof–CAS acceptance case (D-NUH-079). The supported fixture is
+R=ℚ[x], S=R/(x). Native LES H/map/δ realizations already cover its
+degree-zero and two-term forms under the recorded interpretation contracts;
+displayed exactness transport remains open. The
+[snake/LES subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md#nuh-6e-direct-native-concrete-qualification--next)
+records the direct native snake input (x,id_R,0), expected ∂=id_S,
+and six-term concrete qualification. Keep computed matrix equations,
+supplied model interpretation and derived output exactness distinct.
+
 Latest user-directed priority (2026-09-14): make the native whole development
 interact directly with native model contracts. Preserve CAS-selected matrices,
 witnesses, results and their provenance; preserving the older formal
