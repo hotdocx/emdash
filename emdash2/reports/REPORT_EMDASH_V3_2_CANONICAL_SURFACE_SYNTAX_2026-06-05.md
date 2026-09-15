@@ -2433,8 +2433,13 @@ operations specialize the original whole native maps, with N additionally
 supplied for ∂. Their `*_observation` operations evaluate those maps at
 Terminal in the existing `FreydArrowObservation` carrier, retaining the
 original endpoints. They add no ordinary universal record or old-snake
-comparison. The formal projection/reconstruction/Hom-action boundary is
-qualified; concrete CAS realization and exactness remain subsequent work.
+comparison. The formal projection/reconstruction/Hom-action boundary and
+the nonsplit five-arrow CAS realization are qualified.
+`comm_ring_freyd_snake_zero_from_matrices` supplies the original raw
+agreement from P_D Z=H(GF)−0 and the three existing matrix-morphism
+introductions. Its private frontend mirror and the five observation mirrors
+add no computation rule. The standalone rational workflow retains explicit
+model interpretation and does not yet certify displayed exactness.
 
 The direct native H observation spelling is
 `freyd_adjunction_model_object(M,e,d,chain)`, defined by applying that whole

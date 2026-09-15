@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native LES comparison and direct Freyd snake input/maps/observations qualified; concrete CAS adoption next; six-term observation gap retained; old-snake comparison withdrawn
+Status: native LES comparison and nonsplit native snake arrow realization qualified; concrete derived exactness next; six-term observation gap retained; old-snake comparison withdrawn
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -70,7 +70,7 @@ comparison with the former raw connecting algorithm is required.
 | NUH-6B | qualified: θ∘κ_ρ=0 and whole ∂ with reconstruction/uniqueness derived | Original whole descent, with no additional annihilation or connecting assumption |
 | NUH-6C | constructor/maps/native inputs and individual exactness proofs qualified; large comparison/witness observations remain 6C3b | Retain and qualify the full six-term sequence with all four actual canonical comparison witnesses |
 | NUH-6D | qualified native LES endpoint, connecting/sign and surrounding-map comparisons; 6D4 withdrawn by user direction | Whole native LES specialization/comparison on the common short-exact inputs and fixed sign; no old/new snake comparison |
-| NUH-6E | 6E1 native Freyd input/maps/observations qualified; concrete adoption and derived exactness next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
+| NUH-6E | 6E1 formal observations and 6E2a nonsplit arrow realization qualified; four derived exactness consumers next | Focused native formal/concrete qualification and documentation; no statement of a general homology normalization theorem |
 
 First experiment: instantiate the existing native lift/descent on h and
 derive their whole reconstruction equations. A failure requiring ordinary
@@ -1443,7 +1443,7 @@ covers 1,322 files at
 `sha256:91c6fb960507ba18e0ba005e818aa9dd3f279c86d6367895da3976a2c93ae6a7`;
 no repository-wide typecheck or TypeScript check ran.
 
-#### NUH-6E2: Concrete Nonsplit Adoption And Exactness — Next
+#### NUH-6E2: Concrete Nonsplit Adoption And Exactness — Arrow Stage Qualified
 
 Use the new native observations in the existing TypeScript proof–CAS
 preparation/realization workflow. Reuse the computed triple (x,id_R,0)
@@ -1454,3 +1454,83 @@ formal/CAS endpoints and reuse must remain explicit. Then specialize the
 four original derived native exactness witnesses and qualify their concrete
 consumers; do not supply output exactness as a model assumption. Full 6E,
 6C3b, displayed LES exactness transport and NUH-7 remain required.
+
+6E2 begins at `f4f239a2`, with all worktrees clean. Workspace setup and the
+bounded native five-arrow reviewer pass. The concrete bridge needs a
+transparent matrix-to-triple-zero constructor, analogous to the existing
+chain-pair constructor, so the signature-only frontend can pass its checked
+matrix equation without needing presentation-projection runtime rules.
+Mirror that constructor, existing raw composition and the five native
+observations exactly. Reuse the native claim-adoption session, and extract
+only the common rational coefficient preparation needed for a standalone
+snake context; do not require an unrelated LES fixture. Concrete tests must
+retain all original CAS selections, distinguish matrix facts from model
+interpretations, exercise full reuse and reject changed models/data. Four
+derived exactness consumers remain a subsequent part of this same 6E2 row.
+
+6E2a now qualifies the standalone nonsplit arrow realization. The
+[matrix constructor](../emdash2/emdash3_2_commutative_algebra_freyd_native_snake_matrices.lp)
+turns the original matrix equation P_D Z=H(GF)−0 into the existing
+triple-zero agreement at the three original constructed morphisms. It is
+one transparent definition using the original agreement introduction; no
+primitive, rule, unifier or additional mathematical premise is introduced.
+The frontend's seven exact private mirrors cover that constructor, raw
+composition and the five native observations. Ordinary `CommRingFreydChainPair`
+is used only as the existing raw matrix-agreement spelling at (b∘a,c).
+It supplies no ordinary universal record or old formal-snake computation.
+
+The [standalone context](../src/v3_2/algebra_formal_freyd_native_snake_context.ts)
+uses the issued native backend and collects all input/output coefficients
+before sealing their names. Common rational coefficient preparation is
+shared with the existing LES context; its original inventories and model
+types remain unchanged. No dummy LES result or manually assembled model
+environment is needed. Coefficient, whole P/Q and native-normality semantics
+remain the same three explicit supplied contracts.
+
+The [preparation](../src/v3_2/algebra_formal_freyd_native_snake_preparation.ts)
+retains the six original CAS objects, five maps and their owners. It checks
+that the given coefficient witness concerns the original c∘(b∘a), not
+a replacement product. The [workflow](../src/v3_2/algebra_formal_freyd_native_snake_workflow.ts)
+reuses the existing native adoption session. It computes nine matrix
+equations and records five complete-arrow model interpretations. The
+original connecting and universal algorithms are never rerun. A second
+call reuses all fourteen requests and leaves the source unchanged.
+
+For R=ℚ[x], S=R/(x) and (a,b,c)=(x,id_R,0), the retained presentations
+are 0, 0, S, S, R/(1), R/(0), with raw map matrices [], [], [1], [1], [0].
+Thus ∂ acts as id_S; q₁'s raw [1] is zero in its target R/(1). Keep
+these actual presentations and matrices instead of replacing their zero
+objects by fresh selections. This is direct interpretation of the native
+arrows, not agreement with an old formal snake result.
+
+The [five-test consumer](../tests/v3_2_algebra_formal_freyd_native_snake_tests.ts)
+passes in 47.387s, including automatic preparation/adoption, no-reselection
+spies, complete reuse, wrong-model/zero/owner rejection and emission. Four
+affected LES preparation regressions and final signature emission pass in
+12.179s; the earlier 16-test baseline remains recorded. Focused TypeScript
+compilation and lint pass. Seven signature and fifteen concrete emitted
+Lambdapi assertions qualify the current bridge under explicit model
+interpretations. The signature exporter must keep `@` on a bare owner with
+leading implicit parameters; correcting that diagnostic spelling changed
+no signature. It includes only bindings present in the standalone context.
+
+The returned `provesDisplayedCasExactness` remains false. CAS exactness was
+computed in the original selected result, but the four derived native
+exactness witnesses have not yet been connected to this concrete output.
+That is 6E2b next; it must use the existing native theorems rather than an
+output-exactness assumption. Shared endpoint coherence and the remaining
+6C3b, displayed LES exactness transport and NUH-7 obligations remain open.
+
+The promoted matrix witness/proof projections pass two more assertions in
+14.026s. The final signature and concrete artifacts pass in 37.304s and
+21.772s, respectively, under `o=20,v=1024` and the serial 90s/2GiB guard.
+Both complete warning inventories match the dependency-only control:
+1,490 unjoinable pairs and 169 pattern warnings, with no parser issue.
+Strict LHS, catalog/TOC and document checks pass. The source-only health
+snapshot covers 1,324 files at
+`sha256:e683d7fd53ec4befbceb54a2070a9b75e411774ff339212cac78c72f34cc0003`.
+No repository-wide typecheck ran. Evidence under `emdash2/tmp/probes/`:
+`nuh6e2_final_conformance.json`, `nuh6e2_warnings.json`,
+`nuh6e2_signatures_final.lp`, `nuh6e2_nonsplit_promoted.lp` and
+`nuh6e2_qualification.json`. The exact original seven-signature/15-assertion
+artifacts and earlier failed emission diagnostics remain available there.

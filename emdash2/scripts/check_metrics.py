@@ -440,6 +440,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_observation_endpoints.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_arrows.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_inputs.lp"),
+    Path("emdash3_2_commutative_algebra_freyd_native_snake_matrices.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_maps.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_snake_observations.lp"),
     Path("emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp"),

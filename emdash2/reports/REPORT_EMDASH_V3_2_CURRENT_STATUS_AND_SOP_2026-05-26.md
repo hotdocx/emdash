@@ -4,6 +4,17 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Nonsplit native snake realization (2026-09-15): the standalone native
+TypeScript context and workflow retain all six terms and five arrows of
+(x,id_R,0), with ∂ represented by [1] on R/(x). A transparent
+[matrix-zero introduction](../emdash3_2_commutative_algebra_freyd_native_snake_matrices.lp)
+and exact private mirrors connect the computed matrix witnesses to the
+original native arrow observations. Nine computed equations and five
+explicit model interpretations are adopted with full reuse and no
+universal reselection. Concrete derived exactness/coherence remains next;
+the output-exactness flag stays false. See the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Direct native Freyd snake observations (2026-09-15): the
 [raw input](../emdash3_2_commutative_algebra_freyd_native_snake_inputs.lp)
 uses matrix agreement and constant-family action before universal selection.

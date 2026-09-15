@@ -10,6 +10,15 @@ Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALI
 
 ## Scope And Existing Boundary
 
+NUH-6E2a now qualifies standalone nonsplit native snake arrow realization.
+The same issued native backend supplies R/M/N contracts, while a shared
+coefficient preparer gathers the original snake's complete inventory.
+Nine matrix equations and five native complete-arrow interpretations are
+adopted; all fourteen requests reuse without recomputing a snake or universal
+construction. The native ∂ is realized by the original [1] on R/(x).
+The four native exactness witnesses and shared concrete endpoint coherence
+remain the next 6E2b boundary; `provesDisplayedCasExactness` is still false.
+
 NUH-6E1 now supplies the direct Freyd snake input and five whole-map/
 complete-arrow observations. Its 24 formal consumers pass at the original
 model and P/Q endpoints, without new assumptions or rules. The next 6E2

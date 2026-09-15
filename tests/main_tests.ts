@@ -317,6 +317,7 @@ import './v3_2_algebra_formal_freyd_long_exact_homology_tests';
 import './v3_2_algebra_formal_freyd_native_model_context_tests';
 import './v3_2_algebra_formal_freyd_native_map_tests';
 import './v3_2_algebra_formal_freyd_native_connecting_tests';
+import './v3_2_algebra_formal_freyd_native_snake_tests';
 import './v3_2_algebra_formal_freyd_native_windows_tests';
 import './v3_2_algebra_formal_freyd_native_exactness_tests';
 import './v3_2_algebra_formal_freyd_native_diagram_tests';

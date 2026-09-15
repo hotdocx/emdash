@@ -2,6 +2,13 @@
 
 Date: 2026-09-02
 
+Nonsplit native snake realization (2026-09-15): all five arrows of the
+original (x,id_R,0) calculation now enter through a standalone native
+context. Nine matrix equations, five explicit model interpretations and
+complete reuse qualify this arrow boundary. Concrete derived exactness
+and coherence remain next in the
+[subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
+
 Direct native Freyd snake observations (2026-09-15): raw matrix agreements
 now enter the whole snake before P/Q selection. The five native maps retain
 their original model endpoints in the existing complete-arrow carrier.

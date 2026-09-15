@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparison and Freyd snake input/maps/observations qualified; concrete CAS adoption next; displayed exactness and six-term observation gaps retained; Op/duality deferred
+Status: active — native LES comparison and nonsplit native snake arrow realization qualified; concrete derived exactness next; displayed exactness and six-term observation gaps retained; Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,27 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-6E2a: Standalone Nonsplit Native Snake Realization — Qualified
+
+The [context](../src/v3_2/algebra_formal_freyd_native_snake_context.ts),
+[preparation](../src/v3_2/algebra_formal_freyd_native_snake_preparation.ts) and
+[workflow](../src/v3_2/algebra_formal_freyd_native_snake_workflow.ts) reuse
+the original native backend, coefficient preparation and adoption session.
+They retain all six CAS terms and five maps of (x,id_R,0), with ∂=[1]
+on R/(x). Nine computed equations and five model interpretations qualify
+the five native arrows; all fourteen requests reuse without source change.
+One transparent matrix-zero constructor and seven exact private mirrors
+provide the signature-only frontend's input without new rules or axioms.
+
+Five workflow tests pass in 47.387s. Four affected original preparation
+regressions plus the final signature exporter pass in 12.179s. Focused
+types/lint and seven-signature/fifteen-concrete-assertion Lambdapi checks
+qualify this boundary. The source contracts remain supplied and the exactness
+flag remains false. The next row is 6E2b: connect the four derived native
+exactness witnesses to this same concrete output, retaining shared endpoints.
+The [subplan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records raw matrices, qualifications and remaining obligations.
 
 ### NUH-6E1: Native Freyd Snake Input And Five-Arrow Observations — Qualified
 

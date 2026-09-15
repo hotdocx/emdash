@@ -5050,7 +5050,14 @@ observations evaluate those same transformations, retaining all six
 original universal endpoints. Point reconstruction, input recovery and
 off-diagonal Hom action check without old formal-snake comparisons,
 ordinary universal dictionaries or new axioms. Concrete CAS interpretation
-and derived exactness qualification remain separate obligations.
+and derived exactness qualification are separate obligations. The nonsplit
+(x,id_R,0) arrow interpretation is now qualified: a standalone rational
+context retains all six CAS presentations and five maps, computes the nine
+matrix prerequisites and records five explicit complete-arrow model
+interpretations. Its ∂ acts by [1] on R/(x); no splitting or universal
+reselection is used. Full reuse and concrete typing/emission check. This
+does not construct the supplied P/Q model or establish displayed exactness;
+the four native exactness witnesses still need their concrete consumers.
 
 The direct native model now has readable H and map observations. The H value
 is application of its existing whole functor to the original raw input;

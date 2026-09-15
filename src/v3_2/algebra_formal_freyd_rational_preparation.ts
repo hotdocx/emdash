@@ -3,7 +3,8 @@ import { AlgebraRational, AlgebraRationalField, AlgebraRationalInput, RATIONAL_D
 import { algebraPolynomialIdeal } from './algebra_ideal';
 import { algebraPolynomialQuotientRing } from './algebra_quotient';
 import { algebraPresentedAlgebra } from './algebra_presented_algebra';
-import { defineAffineFormalPolynomialReifier } from './algebra_formal_reifier';
+import { AffineFormalPolynomialReifier, defineAffineFormalPolynomialReifier } from './algebra_formal_reifier';
+import { AlgebraPolynomialRing } from './algebra_polynomial';
 import { AlgebraPolynomialFreydLongExactSnakeReferences } from './algebra_polynomial_freyd_long_exact_reference_operations';
 import { algebraFormalFreydLongExactDelegationBundle } from './algebra_formal_freyd_long_exact';
 import { prepareAlgebraFormalFreydLongExactHomology } from './algebra_formal_freyd_long_exact_homology';
@@ -14,21 +15,17 @@ import { kernelFree, provenance, sourceSpan } from './kernel';
 export type AlgebraFormalFreydRationalSelectedResult = AlgebraPolynomialFreydLongExactSnakeReferences<
     AlgebraRationalField, AlgebraRational, AlgebraRationalInput>;
 
-/**
- * Collect the original equation/witness/selection inventories before sealing
- * coefficient names. This chooses no formal model type and adopts no claims.
- * preparedModel is an inventory of CAS selections, not a formal model value.
- */
-export function prepareAlgebraFormalFreydRationalInputs(input: {
+/** Shared coefficient preparation; each consumer collects its inventory before sealing. */
+export function prepareAlgebraFormalFreydRationalInventory<T>(input: {
     readonly backend: { readonly id: string; readonly revision: string };
-    readonly selected: AlgebraFormalFreydRationalSelectedResult;
+    readonly ring: AlgebraPolynomialRing<AlgebraRationalField, AlgebraRational, AlgebraRationalInput>;
     readonly namePrefix: string;
-    readonly anchorId?: string;
+    readonly prepare: (reifier: AffineFormalPolynomialReifier<AlgebraRationalField, AlgebraRational, AlgebraRationalInput>) => T;
 }) {
     if (typeof input.namePrefix !== 'string' || !/^[A-Za-z][A-Za-z0-9_]{0,127}$/u.test(input.namePrefix)) {
         throw new Error('A simple identifier of at most 128 characters is required for the model name prefix');
     }
-    const ring = input.selected.result.sequence.ring;
+    const ring = input.ring;
     if (ring.coefficientDomain !== RATIONAL_DOMAIN) {
         throw new Error('This model context supports the registered rational polynomial coefficient domain only');
     }
@@ -56,13 +53,28 @@ export function prepareAlgebraFormalFreydRationalInputs(input: {
         },
         status: 'trusted-computation'
     });
-    const bundle = algebraFormalFreydLongExactDelegationBundle({ reifier, selected: input.selected, anchorId: input.anchorId });
-    const preparedHomology = prepareAlgebraFormalFreydLongExactHomology(bundle);
-    const preparedRaw = prepareAlgebraFormalFreydRawWitnesses(bundle);
-    const preparedModel = prepareAlgebraFormalFreydLongExactModel(bundle);
+    const inventory = input.prepare(reifier);
     sealed = true;
     const coefficients = Object.freeze([...coefficientTerms].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
         .map(([value, term]) => Object.freeze({ value, term })));
     return Object.freeze({ formalRing, generatorTerms, formalModel, normality, coefficients,
-        reifier, bundle, preparedHomology, preparedRaw, preparedModel });
+        reifier, inventory });
+}
+
+/** Preserve the existing LES preparation and its original selection inventories. */
+export function prepareAlgebraFormalFreydRationalInputs(input: {
+    readonly backend: { readonly id: string; readonly revision: string };
+    readonly selected: AlgebraFormalFreydRationalSelectedResult;
+    readonly namePrefix: string;
+    readonly anchorId?: string;
+}) {
+    const { inventory, ...context } = prepareAlgebraFormalFreydRationalInventory({
+        ...input, ring: input.selected.result.sequence.ring,
+        prepare: reifier => {
+            const bundle = algebraFormalFreydLongExactDelegationBundle({ reifier, selected: input.selected, anchorId: input.anchorId });
+            return { bundle, preparedHomology: prepareAlgebraFormalFreydLongExactHomology(bundle),
+                preparedRaw: prepareAlgebraFormalFreydRawWitnesses(bundle), preparedModel: prepareAlgebraFormalFreydLongExactModel(bundle) };
+        }
+    });
+    return Object.freeze({ ...context, ...inventory });
 }

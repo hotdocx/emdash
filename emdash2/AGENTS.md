@@ -250,6 +250,14 @@ No primitive, rule, ordinary universal record or old-snake comparison is
 added. Concrete nonsplit CAS adoption and derived exactness remain 6E2;
 the separate 6C3b and displayed LES exactness obligations remain open.
 
+NUH-6E2a now qualifies all five nonsplit native snake arrow realizations
+through a standalone rational context. One transparent matrix-zero
+introduction, seven private signature mirrors, nine computed matrix
+equations and five explicit model interpretations retain the original
+six terms and maps, with complete reuse and no universal reselection.
+Concrete native exactness/coherence remains 6E2b. Do not classify the five
+interpretations as constructed whole-model semantics or output exactness.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

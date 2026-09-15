@@ -65,6 +65,11 @@ export function defineAlgebraFormalFreydNativeRationalBackend(input: AlgebraForm
 
 export type AlgebraFormalFreydNativeRationalBackend = ReturnType<typeof defineAlgebraFormalFreydNativeRationalBackend>;
 
+/** Both native LES and snake contexts require the original issued model contract. */
+export function assertAlgebraFormalFreydNativeRationalBackend(backend: AlgebraFormalFreydNativeRationalBackend): void {
+    if (!backends.has(backend)) throw new Error('Use an issued native rational Freyd backend registration');
+}
+
 /**
  * Prepare native M:FreydAdjunctionModel(R) and N:FreydAdjunctionModelNormality(M).
  * M/N are supplied inputs, while matrices and selected results remain the original
@@ -79,7 +84,7 @@ export function prepareAlgebraFormalFreydNativeRationalModelContext(input: {
     readonly sourceId?: string;
     readonly anchorId?: string;
 }) {
-    if (!backends.has(input.backend)) throw new Error('Use an issued native rational Freyd backend registration');
+    assertAlgebraFormalFreydNativeRationalBackend(input.backend);
     const prepared = prepareAlgebraFormalFreydRationalInputs(input);
     const { formalRing, generatorTerms, formalModel, normality, coefficients } = prepared;
     const element = affineFormalRingElementType(formalRing);
