@@ -2,6 +2,16 @@
 
 Date: 2026-09-02
 
+Complete native observation assembly (2026-09-15): the
+[diagram driver](../../src/v3_2/algebra_formal_freyd_native_diagram.ts)
+retains all twelve degree H objects, eight maps and three δ windows in one
+native model/source, with shared endpoints and nine derived whole exactness
+terms. Full reuse adds no decisions. Three focused tests and 54 modular LP
+assertions pass. Displayed-diagram exactness transport/coherence is next in
+the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md);
+the later general snake/sign comparison and separate import-memory boundary
+remain explicit.
+
 Native whole exactness (2026-09-15):
 [comparison/predicate/evidence definitions](../emdash3_2_commutative_algebra_freyd_native_exactness_observations.lp)
 and [Terminal views](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness_observations.lp)

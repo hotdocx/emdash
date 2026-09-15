@@ -133,6 +133,15 @@ excluding unrelated δ interpretation declarations. This does not fix the
 loader boundary or establish displayed-diagram transport/coherence, which
 remain required. Do not resume the deferred point/inverse projection checks.
 
+NUH-5N2F now qualifies complete native H/map/δ observation assembly with
+shared formal endpoints and original CAS selections: twelve degree H points,
+eight maps, three δ windows and nine derived whole exactness terms. The full
+assembly/reuse test passes in 429.00s under its reviewed 600s guard; all 54
+modular LP assertions pass at 90s each. This adds no LP primitive or rule.
+Displayed-diagram exactness transport/coherence remains NUH-5N2G. Do not
+conflate the successful time extension with the separate combined-import
+memory boundary, or resume the deferred projection experiments automatically.
+
 Use this order:
 
 1. active Lambdapi declarations, rules, diagnostics, and focused reviewer
@@ -927,7 +936,7 @@ events and requires serial, memory-bounded compiler experiments too.
 
 User direction for the native-universality goal (2026-09-14) permits reviewed
 time-limit increases. The guard now accepts an explicit `EMDASH_LP_TIMEOUT`
-up to 300 seconds, while retaining the 90-second default and the existing
+up to 600 seconds, while retaining the 90-second default and the existing
 memory/file/serial restrictions. Use an increased limit only for a measured
 target, recording the reason, exact limit and result in its living plan.
 The first selected experiment is the complete bounded model adoption with

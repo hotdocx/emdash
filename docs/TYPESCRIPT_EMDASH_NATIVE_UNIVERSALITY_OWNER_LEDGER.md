@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — direct native model/contracts route next; retained workflow qualified; legacy/projection comparisons and Op/duality deferred
+Status: active — native observation assembly qualified; displayed exactness/coherence next; legacy/projection comparisons and Op/duality deferred
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -319,11 +319,10 @@ matrices, witnesses, results and provenance; do not conflate that retention
 with a requirement to reproduce the older formal H/map/δ objects and syntax.
 The qualified retained workflow stays available as compatibility evidence.
 
-NUH-5N1 native context/signature preparation, the first native H/map and all
-connecting-window realizations and the native whole exactness interface are
-qualified. Next are full H/map assembly, displayed-diagram exactness transport
-and the complete bounded diagram with coherent
-realization. Native snake/LES work and
+NUH-5N1 native context/signature preparation, complete native H/map/δ
+observation assembly and the native whole exactness interface are qualified.
+Next are displayed-diagram exactness transport and coherent realization of
+the complete bounded diagram. Native snake/LES work and
 final qualification follow. The older formal-diagram comparisons and recent
 auxiliary projection-normalization experiments are deferred, with snapshots
 in the [resumption bundle](../emdash2/audits/deferred-native-exactness-observations/README.md).
@@ -331,6 +330,30 @@ The latter also affect native expressions, so the direct route is not a
 claim that all projection normalization is fixed. Required native consumer
 checks remain mandatory; report a demonstrated dependency if one arises.
 Do not replace a missing output theorem by a stronger model assumption.
+
+### NUH-5N2F: Complete native observation assembly — qualified 2026-09-15
+
+The native diagram driver retains the original whole CAS adoption, M/N and
+source. Twelve degree H observations, eight maps and three δ windows cover
+the eight displayed points/seven arrows. Repeated native/formal endpoints
+and actual CAS selections agree; both endpoint δ maps remain zero and the
+middle remains nonzero. Nine whole exactness theorem applications add no
+output assumption. First construction reuses 182 requests and adds twenty
+computed equations plus thirteen explicit row/arrow interpretations. Full
+reuse reuses all 215 requests with the identical source and no new decision.
+
+Three focused tests pass in 429.00s. The first 300s guard expired without
+allocation failure; its reviewed extension to 600s retains the 90s default,
+2GiB memory cap and all file/serial restrictions. Ten guard tests and focused
+types/lint pass. Four modular proof artifacts pass all 54 LP assertions at
+90s each with warnings enabled. No active LP mathematical source changed.
+
+This is **progress**. Literal endpoint consistency and attached whole proofs
+do not yet establish displayed-diagram exactness transport/coherence. That is
+NUH-5N2G, followed by the general snake/LES sign comparison and NUH-7.
+The separate combined-import memory boundary and auxiliary normalization
+deferrals remain. See the [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+for exact evidence and the next consumer requirements.
 
 ### NUH-5N2E: Native whole exactness evidence — qualified 2026-09-15
 

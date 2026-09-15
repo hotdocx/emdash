@@ -586,6 +586,84 @@ qualify its coherence. The later snake/LES sign comparison remains required.
 Do not describe this whole-interface proof as an already completed displayed-
 diagram exactness transport or as resolution of the import memory boundary.
 
+## NUH-5N2F: Complete Native Observation Assembly — Qualified
+
+Assemble every retained degreewise H map alongside the qualified native δ
+windows, using the original whole CAS replay, one M/N and one source. Merge
+the H observations by their original degree/role keys and require literal
+agreement of each repeated formal H expression, CAS presentation and selected
+H value. Then arrange the original displayed arrows in position order and
+check their endpoint references against the original displayed terms. No
+standalone point interpretation is needed merely to assemble these arrows.
+
+Attach the three derived whole exactness terms to each window without an
+additional assumption. This collection is a necessary checked assembly;
+it must not be advertised as a proof of whole-diagram coherence or transport
+of those family-level exactness terms to a displayed chain object. Those and
+the later snake/LES sign comparison remain required.
+
+The full assembly/reuse test group may use a reviewed 300s deadline with the
+unchanged 2GiB guard and inherited 512MiB/4MiB V8 settings. The already measured
+three-window/reuse group took 157.71s; this adds eight map realizations and
+their reuse, endpoint checks and nine derived exactness terms. Record the
+actual combined measurement. Compiler and each modular LP check remain 90s;
+no aggregate or loader/projection detour is authorized by this limit.
+
+The first combined group reached the 300s deadline (exit 137) with the worker
+near 560MiB RSS and no allocation failure. Its log is
+`tmp/probes/nuh5n2f_timeout300.txt`. Preserve the full construction/reuse
+requirement. Extend this one feature group to 600s, keeping all memory/file/
+serial controls unchanged; the resource guard now allows reviewed deadlines
+up to 600s and retains the 90s default. Add test-only phase/claim timestamps
+to distinguish construction, reuse and emission. Qualify the adjusted guard
+with its focused safety tests and record the complete measured run before
+claiming this tranche green.
+
+The [native diagram driver](../src/v3_2/algebra_formal_freyd_native_diagram.ts)
+now assembles all twelve degree H observations, eight induced maps and three
+δ windows in the original native M/N and source. The displayed result has
+eight points and seven arrows, in δ/map/map/δ/map/map/δ order. Repeated
+endpoints have the same formal expressions and original CAS selections.
+The endpoint δ maps remain zero and the middle δ remains nonzero. All three
+derived exactness proofs are attached to each of the three windows. No old
+`FreydHomologyModel`, standalone H interpretation, new LP owner or rule is
+required by this assembly.
+
+The first construction reuses 182 requests and adds twenty computed matrix
+equations plus thirteen explicit interpretations: two distinct row contracts
+and eleven complete arrows. The nine whole exactness proof terms add no
+assumptions. Full reuse retains the identical source and reuses all 215
+requests without another decision, homology computation or universal choice.
+The driver explicitly reports that displayed-diagram coherence has not yet
+been proved; literal endpoint agreement alone is not that theorem.
+
+Three focused tests pass in 429.00s under the reviewed 600s guard. The phase
+trace records 33.10s for the original CAS equation preparation, assembly
+completion at 236.65s, and 191.91s for complete reuse. Emission takes 0.25s.
+The 45-assertion diagram artifact and three separate three-assertion whole
+exactness artifacts pass with warnings enabled at the default 90s each.
+Focused TypeScript compilation/lint and all ten resource-guard safety tests
+pass. The guard's memory/file/serial limits and 90s default are unchanged.
+No repository-wide check ran and no deferred normalization probe resumed.
+
+Evidence: `emdash2/tmp/probes/nuh5n2f_tests600.txt`,
+`nuh5n2f_phases.jsonl`, `nuh5n2f_conformance.json`, `nuh5n2f_types.txt`,
+`nuh5n2f_lint.txt`, `nuh5n2f_guard_tests.txt` and the four emitted LP files in
+`nuh5n2f_diagram/`. `nuh5n2f_qualification.json` records the source/artifact
+hashes and results. The four LP targets take 19.06–22.27s and report no
+warnings. Static source-health freshness and added Markdown links also pass.
+The failed 300s run remains separate evidence.
+
+**Next — NUH-5N2G:** formulate the native displayed-diagram exactness consumer
+using these original H endpoints, whole comparison/evidence owners and
+existing categorical transport. Establish coherent realization of the whole
+displayed diagram, without caller-supplied naturality squares or an assumed
+output-exactness predicate. Keep the direct native model primary. This is
+required work, distinct from optional old-presentation comparisons and the
+deferred point/inverse-projection normalization experiments. The combined
+heavy-module import still has its recorded 2GiB boundary. Preserve the
+general six-term snake/sign comparison and final NUH-6/7 qualification.
+
 ## NUH-5A: Supported Retained-Model Preparation
 
 Start with rational polynomial rings, the supported coefficient backend of

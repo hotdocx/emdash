@@ -4,6 +4,19 @@ Date: 2026-05-26
 Last consolidated: 2026-08-31
 Status: living current-state and kernel-development authority
 
+Complete native observation assembly (2026-09-15): the
+[diagram driver](../../src/v3_2/algebra_formal_freyd_native_diagram.ts)
+assembles all twelve degree H observations, eight maps and three δ windows
+over the original CAS result in one M/N/source. Repeated formal endpoints
+and CAS selections agree. The eight displayed points/seven arrows and nine
+derived whole exactness terms pass the focused assembly/reuse checks; all
+54 emitted LP assertions pass. Full reuse introduces no further decisions.
+No active LP mathematical source changes. Displayed-diagram exactness
+transport/coherence and the later general snake/sign comparison remain
+required in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+The measured 429s combined test uses a reviewed 600s deadline; individual LP
+checks retain 90s. The separate combined-import 2GiB failure remains open.
+
 Native whole exactness interface (2026-09-15): the
 [whole comparison/type/evidence owner](../emdash3_2_commutative_algebra_freyd_native_exactness_observations.lp)
 and [Terminal views](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness_observations.lp)

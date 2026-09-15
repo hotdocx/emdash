@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — direct native model/contracts integration next; retained workflow qualified; legacy comparison and auxiliary normalization work deferred
+Status: active — native observation assembly qualified; displayed exactness/coherence next; legacy comparison and auxiliary normalization work deferred
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -32,11 +32,11 @@ presentation. Preserve the qualified 0caa19d0 compatibility workflow, but
 move comparisons with that older presentation and the recent auxiliary
 point/projection-normalization experiments out of the primary prerequisites.
 
-NUH-5N1 direct native context/signatures, first native H/map realizations and
-all original connecting windows are qualified. Continue NUH-5N2 whole
-H/maps/δ/exactness interaction with declared native model/realization
-contracts, then the native snake/LES work and final qualification. Coherent
-CAS realization and actual native theorem/consumer checks remain required;
+NUH-5N1 direct native context/signatures, full native H/map/δ observation
+assembly and whole exactness evidence are qualified. Continue NUH-5N2
+displayed-diagram exactness transport and coherence under declared native
+model/realization contracts, then the native snake/LES work and final
+qualification. Coherent CAS realization and actual native theorem/consumer checks remain required;
 do not assume output exactness or silently convert old contracts into new
 ones. Preserve the general six-term snake scope and sign requirements.
 Later compatibility/normalization investigations are separately selected
@@ -45,6 +45,19 @@ The [model/reifier plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) and
 [resumption note](../emdash2/audits/deferred-native-exactness-observations/README.md)
 record the distinction and snapshots. This supersedes earlier instructions
 making the old retained-formal-diagram bridge a completion prerequisite.
+
+Current NUH-5N2F milestone (2026-09-15): one native diagram driver assembles
+the twelve original degree H observations, eight maps and three δ windows,
+checking repeated formal endpoints and actual CAS selections. Its displayed
+eight points/seven arrows retain the zero/nonzero/zero δ behavior. Nine
+whole exactness terms are derived without another assumption. First use adds
+twenty computed equations and thirteen explicit row/arrow interpretations;
+full reuse reuses all 215 requests in the identical source. Three focused
+tests pass in 429.00s under a reviewed 600s guard, and all 54 emitted LP
+assertions pass with 90s per-file limits. No LP semantic source changes.
+Displayed-diagram exactness transport/coherence and the later snake/sign
+comparison remain required. The larger time limit resolves this combined
+test's measured timeout, not the separate 2GiB combined-import boundary.
 
 Current NUH-5N2E milestone (2026-09-15): the native whole exactness interface
 now names the original comparison functors, Ω predicates and derived proofs,
@@ -945,7 +958,7 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: native whole exactness interface, first H/map and all connecting-window realizations qualified | Full H/map assembly, displayed-diagram exactness transport and whole coherence under model/row contracts |
+| NUH-5 | active: complete native H/map/δ observation assembly and whole exactness evidence qualified | Displayed-diagram exactness transport and whole coherence under model/row contracts |
 | NUH-6 | queued after direct native integration; generic NUH-4 construction available | Native whole-H snake/LES work and required mathematical comparison with fixed sign; preserve general six-term scope without making old point-normalization studies a prerequisite |
 | NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
@@ -1210,9 +1223,10 @@ All Lambdapi experiments use `emdash2/scripts/lambdapi_resource_guard.sh`:
 one checker at a time, 90 seconds by default, 2 GiB per-process address space,
 64 MiB per file, no core dumps; use the existing aggregate memory scope
 when available. User direction on 2026-09-14 permits reviewed time increases.
-The current guard allows an explicit limit up to 300 seconds; record the
-target, evidence and chosen limit in its subplan. The complete model adoption
-and connecting/reuse tests now use a reviewed 300-second limit. Keep
+The current guard allows an explicit limit up to 600 seconds; record the
+target, evidence and chosen limit in its subplan. The retained model adoption
+and connecting/reuse tests use a reviewed 300-second limit; full native
+diagram assembly/reuse uses 600 seconds (measured 429.00s). Keep
 memory/file limits and ordinary subject reduction; this permission does not
 authorize broader test scope or a new mathematical assumption.
 
@@ -1490,9 +1504,9 @@ Current continuation boundary: whole K/Q, H, δ and all three native-window
 exactness comparisons are qualified at their stated ordinary boundary.
 The retained workflow is qualified through 0caa19d0. Follow the later user
 priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
-native context/signatures, first direct H/complete-arrow, all connecting-window realizations and whole exactness evidence are qualified;
-continue NUH-5N2 native whole
-H/maps/δ/exactness interaction with the actual selected CAS result.
+native context/signatures, complete H/map/δ observation assembly and whole
+exactness evidence are qualified; continue NUH-5N2 displayed-diagram
+exactness transport and coherent realization of the actual selected CAS result.
 Retain coherent model/realization, normality and row contracts explicitly;
 derive output exactness from the native theorem. Older formal presentations
 are compatibility evidence, not mandatory intermediate targets. Continue

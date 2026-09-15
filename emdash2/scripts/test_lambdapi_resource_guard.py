@@ -75,7 +75,7 @@ else:
 
     def test_ceiling_cannot_be_raised_by_environment(self):
         for env in ({"EMDASH_LP_MEMORY_MIB": "4096"},
-                    {"EMDASH_LP_TIMEOUT": "301s"},
+                    {"EMDASH_LP_TIMEOUT": "601s"},
                     {"EMDASH_LP_TIMEOUT": "180.5s"},
                     {"EMDASH_LP_TIMEOUT": "0"},
                     {"EMDASH_LP_FILE_MIB": "65"},
@@ -84,7 +84,7 @@ else:
                 self.assertEqual(self.run_guard("/bin/true", **env).returncode, 2)
 
     def test_reviewed_time_extension_keeps_other_limits(self):
-        for duration in ("120", "180s", "240s", "300s"):
+        for duration in ("120", "180s", "240s", "300s", "450s", "600s"):
             with self.subTest(duration=duration):
                 result = self.run_guard("python3", "-c", """
 import resource

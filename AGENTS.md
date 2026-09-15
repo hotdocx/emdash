@@ -215,7 +215,7 @@ The repository-wide gate is `./scripts/pnpmw run check:all`. Keep every
 Lambdapi invocation bounded as required by the nested SOP: 90 seconds by
 default. For the native-universality goal, the user now authorizes reviewed
 per-target extensions; the current guard permits an explicit limit up to
-300 seconds with the reason and measurement recorded in its living plan.
+600 seconds with the reason and measurement recorded in its living plan.
 Memory/file limits and serial execution remain in force. The separate proportional-
 validation policy still forbids unnecessary aggregates.
 
