@@ -7886,6 +7886,34 @@ f   = !_A
 Neither path changes the runtime normal form of an arbitrary arrow or of
 `!_t`.
 
+The categorical consolidation adds two distinct interfaces above this
+existing presentation. `CatContraction(D)` is the existing whole
+Ω-equivalence along D→1; `CatdContraction(E)` uses the whole canonical
+family map E→const₁ and retains its inverse as a Functord. Evaluation keeps
+that same inverse, and IsContr(Obj D) is a derived observation. This is
+stronger data than contractibility of the object/core groupoid alone. The
+current Ω interface retains equality-valued laws for whole functors; no
+univalence theorem or replacement of hom_int/homd_int is asserted.
+
+For OneCat(C), the new terminal/initial adjunction presentations explicitly
+supply !:C→1 ⊣ t:1→C and t:1→C ⊣ !:C→1. They add two structural primitives;
+the older β rules do not construct those Adjunction values. Whole units,
+counits and represented-Hom comparisons then come from the existing generic
+adjunction calculus. Their Hom DefIso and Ω views keep the actual mate and
+inverse; deriving ordinary uniqueness does not transport a functor along
+an equality. Existing whole diagram normalizers compare the unit/counit
+families to the original !/initial-arrow families with identity endpoints.
+The unit is not globally rewritten to !, so !ₜ keeps its existing normal
+form. No caller supplies a naturality-square proof.
+
+This is the independently qualified ordinary extension. Replacing the primary
+TerminalObject interface for general directed higher categories still requires
+a reviewed Hom comparison and its profile/variance interpretation. Current
+Adjunction supplies computational DefIso cancellation; that contract must not
+be silently conflated with a general weak higher equivalence. See the
+[categorical consolidation plan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+for owners, checks and the remaining boundary.
+
 The thin capability
 
 ```text

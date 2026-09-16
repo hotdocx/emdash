@@ -64,11 +64,15 @@ is the accepted living plan for auxiliary categorical owners, remaining path
 uses, shared-input dependency cleanup and retirement in the new consolidation
 goal. The user authorizes its initial main fast-forward/push/Pages deployment
 and local implementation checkpoints in the dedicated continuation worktree.
-Preserve ordinary/discrete guards
-on the declared structural interfaces. The proposed general categorical
-terminality refinement is not implemented, and point comparisons do not
-establish whole parameter action. Operational presentation comparisons should
-use actual internal maps with retained inverse/coherence data and whole K/Q/H
+Preserve ordinary/discrete guards on the declared structural interfaces.
+The generic whole contraction definitions and ordinary terminal/initial
+adjunction extension now live in `emdash3_2_categorical_contractions.lp` and
+`emdash3_2_one_cat_terminal_adjunctions.lp`. They preserve selected inverse
+data and terminal normal forms. The latter adds two explicit structural
+primitives guarded by OneCat(C); it is not a derivation from the old β rules.
+General higher terminality replacement remains unimplemented, and point
+comparisons do not establish whole parameter action. Operational presentation
+comparisons should use actual internal maps with retained inverse/coherence data and whole K/Q/H
 action; ordinary equations and proposition-valued observation evidence remain
 valid downstream views.
 

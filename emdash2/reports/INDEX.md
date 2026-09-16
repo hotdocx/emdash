@@ -21,6 +21,16 @@ The legacy model facades/adapters are now retired as well. The direct native
 proof–CAS workflows remain qualified by full nonsplit LES/snake replays and
 94 emitted formal assertions; the consolidation plan records their evidence.
 
+CC-3a categorical interfaces (2026-09-16):
+[whole contractions](../emdash3_2_categorical_contractions.lp) are transparent
+uses of existing Ω data, with ordinary contractibility derived afterward.
+[Ordinary terminal/initial adjunctions](../emdash3_2_one_cat_terminal_adjunctions.lp)
+add two explicit structural presentations with derived whole mates and
+categorical comparisons to the original arrow families. They retain OneCat
+guards, inverse data and existing terminal normal forms. General higher
+terminality replacement remains qualified future work; the living plan
+records its concrete profile/comparison prerequisite.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

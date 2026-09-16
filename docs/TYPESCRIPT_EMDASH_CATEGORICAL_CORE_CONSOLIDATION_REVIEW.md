@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: active — CC-1b checkpoint d35cc98e; CC-2 retirement in progress
+Status: active — CC-2 qualified at 8a73f84c; CC-3a qualified; CC-4 consumer review next
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -100,12 +100,15 @@ whole represented-Hom comparison. The selected ! and its action should remain
 computational projections, with ordinary uniqueness derived when applicable.
 
 For an individual Hom category D, equivalence D≃1 is the relevant categorical
-contraction. `OmegaEquivAlong Cat_cat D Terminal_cat (Terminal_func D)` is a
-candidate expression using an existing interface, not a new implemented
-definition. A family of separately chosen witnesses is insufficient as the
-primary varying-endpoint owner: its whole action must be specified. Also,
-today's OmegaEquivAlong has equality-valued inverse laws; its adequacy for the
-intended higher comparison and functor-category profile must be reviewed.
+contraction. [CatContraction](../emdash2/emdash3_2_categorical_contractions.lp)
+now transparently specializes `OmegaEquivAlong Cat_cat D Terminal_cat
+(Terminal_func D)`. The companion CatdContraction specializes the same
+interface at the whole canonical family map `Terminal_funcd`; its selected
+inverse is one whole Functord. Object/core contractibility is derived from
+that data, not conversely. These definitions retain today's equality-valued
+whole inverse laws; they are not a proof that an arbitrary higher terminality
+notion has this presentation. A product of separately chosen fibre witnesses
+does not supply the whole family contract.
 
 Object/core contractibility alone does not control noninvertible arrows.
 Even a category with a single object can have nontrivial endomorphisms.
@@ -114,9 +117,22 @@ directed cell into an invertible one. Consequently neither deleting OneCat(C)
 from the current DefIso declarations nor wrapping the old pointwise field in
 a new name is the proposed redesign.
 
-First specify the native owner, its whole Hom comparison, inverse/coherence
-data and observable cuts. Then derive the ordinary family normalizers and
-record views from it where justified. Do not require users to supply separate
+The independently implemented ordinary portion is
+[terminal/initial adjunction presentations](../emdash2/emdash3_2_one_cat_terminal_adjunctions.lp):
+!:C→1 ⊣ t:1→C and t:1→C ⊣ !:C→1, guarded by OneCat(C). These are two
+explicit structural primitives, not derivations from the old β rules. Their
+whole units/counits and represented-Hom comparisons belong to the existing
+Adjunction interface. Derived Hom DefIso/Ω observations keep the actual mate
+and inverse; they do not cast its forward map to Terminal_func. Existing
+ordinary family normalizers compare the unit/counit diagram families with
+the original selected terminal/initial families. Those normalizers remain
+structural declarations, not retroactively derived theorems.
+
+A primary general terminality upgrade must still specify its native owner,
+whole Hom comparison, inverse/coherence data and observable cuts, then derive
+ordinary normalizers where justified. In particular current Adjunction owns
+a computational DefIso comparison, which is stronger than merely supplying
+higher equivalence data. Do not require users to supply separate
 naturality squares. Do not treat this review as a completed general
 ω-categorical semantics or as authorization to reopen Op/profile migration.
 
@@ -291,8 +307,8 @@ typecheck or renewed normalization probe was run.
 | CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Qualified |
 | CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Qualified |
 | CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Qualified with explicit retained references |
-| CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Next |
-| CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Pending CC-1 and relevant CC-3 decisions |
+| CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Qualified independent portion; general higher replacement has recorded prerequisites |
+| CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Next |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Pending implementation decisions |
 | CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | Pending |
 
@@ -911,3 +927,105 @@ not a claim that every historically named helper has been deleted. Current
 native constructions and their direct proof–CAS route are independent of the
 retired model/algorithm interfaces. Proceed to CC-3's mathematical/interface
 review; later source or book review may identify further genuinely unused leaves.
+
+
+CC-2d checkpoint: `8a73f84c`; CC-3 starts clean. The previous turn made checked
+implementation progress. First implement generic whole categorical contraction
+along the existing canonical terminal functor, and its coherent family version
+along `Terminal_funcd`. Both are transparent uses of OmegaEquivAlong, with its
+retained inverse functors and whole inverse laws; no second equivalence type
+or pointwise-only contraction dictionary is introduced. Derive object/core
+contractibility as an observation of that data, not conversely. This is the
+native interface needed to assess a primary terminality upgrade.
+
+Keep computational DefIso presentation separate: the current adjunction Hom
+comparison is explicitly DefIso-valued. The ordinary terminal/initial family
+normalizers cannot simply lose their guards because objects of a Hom are
+contractible. The generic contraction layer has no Op dependency of its own;
+applying it to the represented Hom family must preserve that family's native
+owner and the existing higher-variance/profile qualification. No general
+univalence bridge, higher duality repair or weak-adjunction theorem is assumed.
+
+
+### CC-3a — Categorical Contraction And Ordinary Terminal Adjunctions
+
+Hypothesis: expose whole contraction using the existing Ω interface, and
+make terminal/initial adjunction mates available in the independently valid
+ordinary profile, without altering existing terminal normal forms or
+reconstructing naturality by hand.
+
+Implemented owners:
+
+- `emdash3_2_categorical_contractions.lp`: nine transparent definitions,
+  including whole category/family contraction, selected inverse and centre,
+  evaluation, and derived object-contractibility observations. No primitive
+  or rewrite/unification rule is added. The observation along an arbitrary
+  supplied forward map keeps the actual adjunction mate instead of casting it
+  to the canonical terminal functor.
+- `emdash3_2_one_cat_terminal_adjunctions.lp`: two declared structural
+  adjunctions plus ten derived whole unit/counit, diagram-comparison, Hom
+  DefIso/Ω and ordinary contraction views. OneCat(C) is required. The whole
+  profunctor comparison supplies varying-endpoint action before evaluation;
+  selected inverses and both whole inverse cuts remain at generic owners.
+
+The ordinary semantics justifies the extension: a terminal t gives the unique
+map x→t, and an initial t gives t→x, naturally in x. This is the ordinary
+adjunction with the singleton category. The implementation explicitly declares
+its computational presentation rather than claiming it follows from today's
+pointwise terminal β rules. It introduces no output-exactness or model axiom.
+
+Normal-form decision: do not rewrite the terminal unit directly to the old
+canonical-arrow transfor. The old terminal cut plus adjunction triangle would
+then identify the intentionally separate !ₜ and idₜ normal forms. Instead,
+compare the whole arrow diagram families using the existing ordinary DefIso
+normalizers with identity endpoint components. Both directions keep the
+original choices; users supply no extra naturality squares. No old symbol is
+redefined and no old rule is changed.
+
+Qualification: this implements the independent contraction/ordinary-adjunction
+portion of CC-3. General higher TerminalObject replacement is not implemented.
+Its prerequisite is a reviewed whole Hom comparison compatible with the
+intended higher profiles/variance and a decision between the current
+computational DefIso adjunction contract and weaker Ω equivalence. Those are
+concrete interface distinctions, not a reason to weaken current checks or
+resume the deferred Op/profile migration. Ordinary contractions remain valid
+downstream observations; no proof irrelevance is imposed on inverse data.
+
+Reviewer checks cover family inverse evaluation in both slots, retained base
+and iterated-Hom action, whole mate cancellation, point round trips, selected
+centres, categorical diagram endpoints, whole profunctor cancellation, and
+preservation of !ₜ≢idₜ and the distinct unit normal form. Final focused receipts
+and warning comparisons are recorded below before checkpointing.
+
+
+CC-3a validation (2026-09-16): the two new reviewers pass 22 positive and two
+negative assertions. Three unchanged reviewers also pass after importing the
+new ordinary extension: terminal objects, whole terminal/initial family
+normalizers, and the concrete Freyd terminal zero. They exercise the stable
+terminal cut, old contraction projection and all original diagram endpoints.
+Every check uses the serial resource guard, 90s/2GiB, subject reduction enabled,
+`OCAMLRUNPARAM=o=20` and warnings enabled; no limit increase or opacity is used.
+
+Exact import controls preserve every warning-inventory field after ANSI colour
+normalization, with zero parser issues: contraction has 157 replaceable-slot
+warnings and 1146 inherited critical pairs; the combined ordinary extension
+has 159 and 1178 respectively. No new rule is installed. Receipts are
+`tmp/probes/cc3a_validation_receipt.json`; logs are under `logs/probes/`, with
+reviewers at `categorical_contractions-20260916-165745.log` and
+`one_cat_terminal_adjunctions-20260916-165657.log`, controls at
+`cc3_categorical_contractions_imports-20260916-165731.log` and
+`cc3_one_cat_terminal_adjunctions_imports-20260916-165737.log`, and existing
+consumer logs at `cc3_terminal_objects_consumer-20260916-165751.log`,
+`cc3_commutative_ring_freyd_terminal_zero_consumer-20260916-165759.log`, and
+`cc3_terminal_family_consumer-20260916-170110.log`.
+
+Check/health registrations include both source owners and both reviewers.
+Shell/Python syntax, strict catalogue, source TOC, all 178 existing book
+evidence entries and diff hygiene pass. Source-only health refresh covers
+1258 files, snapshot
+`e5e08efb46ed91536af1ffa68502ea506fac2985dd6663251324bd0363ba0a42`;
+it is not a fresh repository-wide typecheck. The native model/LES/snake owners
+and contracts are byte unchanged; their recent 94-assertion end-to-end receipt
+is retained. The source audit confirms exactly two new structural declarations,
+19 definitions and no new rewrite/unification rule. Documentation states that
+boundary explicitly. Proceed to CC-4's actual comparison-consumer inventory.

@@ -166,6 +166,8 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_one_cat_diagram_transpose.lp)
   files+=(emdash3_2_zero_arrow_diagrams.lp)
   files+=(emdash3_2_one_cat_terminal_family_universality.lp)
+  files+=(emdash3_2_categorical_contractions.lp)
+  files+=(emdash3_2_one_cat_terminal_adjunctions.lp)
   files+=(emdash3_2_strict_transfor_component_paths.lp)
   files+=(emdash3_2_kernel_cokernel_adjunctions.lp)
   files+=(emdash3_2_image_coimage_adjunction_families.lp)

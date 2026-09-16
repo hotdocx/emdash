@@ -638,6 +638,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_diagram_transpose.lp"),
     Path("emdash3_2_zero_arrow_diagrams.lp"),
     Path("emdash3_2_one_cat_terminal_family_universality.lp"),
+    Path("emdash3_2_categorical_contractions.lp"),
+    Path("emdash3_2_one_cat_terminal_adjunctions.lp"),
     Path("emdash3_2_gray_right_closure.lp"),
     Path("emdash3_2_gray_walking_square.lp"),
     Path("emdash3_2_gray_interchanger.lp"),
