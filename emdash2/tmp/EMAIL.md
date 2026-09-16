@@ -3,6 +3,9 @@ LONGER TECHNICAL APPENDIX
 
 Functorial Type Theory in emdash v3.2
 
+Local development snapshot reviewed 2026-09-16, alongside book 0.9.0-dev.
+This draft and the local book update have not been externally published.
+
 Abstract. Functorial Type Theory asks what happens when the substitutional
 discipline of dependent type theory is extended to genuinely categorical
 variables: objects may vary along arrows, families carry directed transport,
@@ -49,12 +52,13 @@ A further algebraic thread connects these internal structures to a focused
 native TypeScript computer-algebra engine. Categorical programs lower whole
 universal operations to polynomial and matrix computations while retaining
 their selected objects, maps, relations, and factor data. Coherent kernel and
-cokernel adjunctions make homology a whole functor; a whole connecting
-transformation, three exact homology-window interiors, and finite assembly
-are exercised by a nonsplit polynomial-module computation. Explicit proof–CAS
-bindings then let the formal layer use the same results without running the
-universal algorithms again or pretending that finite equations establish
-every universal-property contract.
+cokernel adjunctions make homology a whole functor. A direct whole connecting
+transformation, native window exactness, and a general native snake with its
+LES comparison are exercised by a nonsplit polynomial-module computation.
+Both displayed proof–CAS diagrams now carry derived native exactness
+certificates. Explicit model and interpretation contracts let the formal
+layer use the same selected results without running the universal algorithms
+again or pretending that finite equations establish those contracts.
 
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
@@ -854,6 +858,15 @@ therefore has an internal path `f = !_A`. A thin cartesian package merely
 pairs the already-selected binary and empty products; it introduces no second
 set of operations or rules.
 
+The homological development also supplies ordinary whole-family comparisons
+`Arr(h) ≅ J∘F` for `h:F⇒const_t` when t is terminal, and `Arr(h) ≅ I∘F`
+for `h:const_t⇒F` when t is initial. Their existing DefIso inverses retain
+identity endpoint components. These are declared structural extensions with
+an explicit ordinary-target guard, not consequences of the earlier β rules
+alone. A primary higher terminality interface controlling the whole varying
+Hom category is proposed but not implemented. Contractibility of its object
+groupoid alone does not control noninvertible higher arrows.
+
 The same introduction/elimination discipline becomes indexed in slices. For
 `u : X → Y`, postcomposition always gives
 
@@ -1009,11 +1022,11 @@ quotient path.
 
 Generic preadditive and additive structure provides abelian Hom groups,
 bilinear composition, biproducts and a zero object. Kernel and cokernel
-interfaces retain universal factors and their reconstruction laws. Normal
-mono/epi operations then construct image/coimage comparisons, their
-isomorphism, and the fibre-product/pushout stability used in homological
-arguments. These are not declarations that selected image and kernel objects
-are literally identical.
+interfaces now take whole adjunctions as primary; ordinary factor and
+reconstruction records are derived views at the same selected objects.
+Whole image/coimage comparisons and supplied normality support native
+exactness and the kernel pullback arguments. These are not declarations that
+selected image and kernel objects are literally identical.
 
 The whole-functor interface organizes the same universal choices. In an
 ordinary-category working profile, write `2` for the walking arrow and let
@@ -1024,7 +1037,7 @@ J(A) = (A → 0)
 I(A) = (0 → A).
 ```
 
-Coherent presentations provide
+Whole universal structures provide
 
 ```
 K : D_C ⊢ C             J ⊣ K
@@ -1033,10 +1046,13 @@ Q : D_C ⊢ C             Q ⊣ I.
 
 The counit of the first adjunction supplies kernel embeddings; the unit of
 the second supplies cokernel projections. Their mates supply lifts and
-colifts. Proof-time usability relates these observations to the original
-selected operations while leaving the whole functor heads available for
-generic adjunction computation. A coherent presentation is supplied
-structure, not an automatic consequence of finitely many matrix equations.
+colifts. The native route takes K, Q and their adjunctions directly, without
+requiring the former selected-kernel/cokernel presentation dictionaries.
+For a parameter category B, an explicit ordinary structural lift gives
+`(F∘−) ⊣ (G∘−)` from `F ⊣ G`; whole mates and their inverse cuts then apply
+to transformations. Products and biproducts have corresponding ordinary
+adjunction presentations at their original chosen functors. These structural
+lifts are declared model obligations, not results inferred from matrix tests.
 
 For a coherent family of zero-composition diagrams,
 
@@ -1087,9 +1103,11 @@ ordinary-target specialization gives a whole one-degree functor
 `H : Z_C ⊢ C`. Operational universal records are views at that same H object,
 not a second homology reached by an object-equality cast.
 
-Exactness still expresses a universal property: the actual boundary into
-the selected cycle kernel is epic. The generic six-term snake sequence has
-all four interior exactness results. At whole-H endpoints, a direct
+Native exactness retains the canonical comparison Im(incoming)→Ker(outgoing)
+and fixed-forward equivalence evidence, including its inverse data. The
+general native snake has all four interior exactness results and retains
+arbitrary outer input maps, without monic/epic restrictions. At whole-H
+endpoints, a direct
 connecting construction uses an epic cover of source cycles, lifting into
 target cycles, and descent through the original boundary cokernel. The
 five-term window
@@ -1110,13 +1128,16 @@ Its component computes to the direct lifting/descent construction. Generic
 transfor action supplies naturality and further action; the caller does not
 prove an extra naturality square and then package a transformation.
 
-A finite iterator assembles coherent windows while retaining their original
-arrows and interior evidence. The native bounded result also retains its
-actual outside-support zero homologies. The final symbolic zero-endpoint
-attachment is separately deferred. Reconstruction and exactness proofs still
-use explicit paths; this is a constructive reference implementation with
-whole operations, not a claimed Došen-style decision procedure for all
-homological arrow expressions or a category of unbounded complexes.
+Native finite certificates retain the original inputs, arrows and canonical
+exactness data. The new snake–LES comparison checks their connecting-map
+agreement and positive sign. Changes of H presentation use actual internal
+diagram maps and their inverses followed by Q, so endpoint action is visible.
+Ordinary equations and finite observation paths remain useful derived views.
+The earlier ordinary finite-window iterator is a separate reference interface;
+its final symbolic zero-endpoint experiment and the large six-term package
+comparison remain deferred. These constructions are not a general Došen-style
+decision procedure for homological arrow expressions or a category of
+unbounded complexes.
 
 
 A nonsplit calculation at the proof–CAS boundary
@@ -1172,11 +1193,13 @@ Even the selected `H₀(C)` retains one generator with relation columns
 The whole bounded result shares its selected homologies and maps across
 neighboring windows rather than recomputing them at each occurrence.
 
-The formal connection has three distinct kinds of information. Computed
-equations justify individual raw maps and agreements. Selected-provider
-semantics bind the all-test factor operations at the retained kernel choices.
-Whole-model interpretation binds the actual formal H and connecting
-observations to those same native results. For an introduced chain map `m`,
+The direct native formal connection separates computed equations from
+supplied semantics. Equations justify individual raw maps and agreements.
+Coefficient interpretation, the whole adjunction model and normality are
+supplied contracts; row and complete-arrow interpretations bind the actual
+formal H and connecting observations to the same computed results. The
+frontend assembles the mechanical prerequisites and certificates. For an
+introduced chain map `m`,
 write `F_native` for its reified induced arrow. With `P_z` the reified
 selected presentation and `Obs` the existing complete arrow-object
 observation,
@@ -1193,15 +1216,15 @@ H expression invoke the CAS. The coherent model `M` is supplied, and its
 normality enhancement is required for the connecting interpretation; a
 finite list of matrix equations does not construct that model automatically.
 
-The end-to-end consumer constructs a formal raw sequence and selected
-homology/exactness at every displayed interior, then interprets the retained
-whole-H points, induced maps, and all three connecting windows. Only the
-middle connecting is nonzero. The interpretation preserves the original
-objects, arrows and shared row evidence, and makes no new kernel, homology or
-connecting selection. Thus formal mathematics can use an actual H term and
-its action while native algebra supplies its effective presentation. Neither
-an unrestricted quotient-witness decoder nor a proof of every native
-algorithm is inserted as an implicit prerequisite.
+The end-to-end native LES consumer certifies all six adjacent pairs and the
+whole displayed diagram. The native snake has its own complete displayed
+certificate. These constructors derive output exactness from the original
+native theorems and existing interpretations, with no new output-exactness
+assumption. Only the middle LES connecting window is nonzero. Both routes
+preserve the selected objects, arrows and shared row evidence, without a new
+kernel, homology or connecting selection or a legacy-model prerequisite.
+The concrete whole model is still supplied; automation of the assembly is
+not a closed derivation of every universal provider or every native algorithm.
 
 
 From invertibility sieves to sheafification
@@ -1462,6 +1485,9 @@ SHORTER TECHNICAL APPENDIX
 
 Book: https://doi.org/10.5281/zenodo.21544186
 Code: https://github.com/hotdocx/emdash
+
+Local development snapshot: 2026-09-16, book 0.9.0-dev. The DOI identifies
+the archived publication, not a publication of this updated draft.
 
 This is a development snapshot, not a global consistency claim. Known
 variance/soundness defects in the whole-opposite and Sigma-Hom encodings
@@ -1896,7 +1922,7 @@ truncated paths into chosen matrices.
 
 For an ordinary-target additive category `C` with selected zero object `0`,
 write `2` for the walking arrow and put `D_C = Functor_cat(2,C)`.
-Coherent presentations supply kernel and cokernel functors
+Whole universal structures supply kernel and cokernel functors
 `K,Q : D_C ⊢ C` and zero-arrow embeddings `J,I : C ⊢ D_C` with adjunctions
 
 ```
@@ -1925,8 +1951,10 @@ This native comma category has objects `(A,d,h : J(A) ⇒ d)` and reuses
 internal Hom/Sigma structure for its maps. H retains generic computation,
 higher Hom action and the same selected objects in its record views.
 
-Assume now that C also has a computational Abelian structure. The generic
-six-term snake has four interior exactness results. A degreewise
+Assume the native normality structure for these same adjunctions. Exactness
+is fixed-forward equivalence of the canonical Im→Ker comparison. The general
+native snake has four interior exactness results, without monic/epic
+restrictions on its outer input maps. A degreewise
 short exact sequence `0 → A_• ─i→ B_• ─p→ C_• → 0` gives the whole-H window
 
 ```
@@ -1936,12 +1964,14 @@ H_n(A) → H_n(B) → H_n(C) ─δ_n→ H_(n−1)(A) → H_(n−1)(B),
 exact at its three interior objects. In a window family over `B`, let
 `V_C,V_A : B ⊢ Z_C` select the right and shifted left vertical complexes.
 Connecting is a whole transformation `δ : H ∘ V_C ⇒ H ∘ V_A`; its
-component computes to the direct lifting/descent construction. Finite
-iteration
-retains the original arrows and interior evidence; the final symbolic
-zero-endpoint attachment is deferred, although native bounded computations
-already retain their outside-support zero data. These interfaces do not yet
-constitute a general homological normalization calculus.
+component computes to the direct lifting/descent construction. The native
+snake–LES comparison retains the endpoints and positive connecting-map sign.
+Actual categorical presentation maps act through whole K/Q/H; ordinary
+equations remain derived observations. Finite displayed certificates retain
+the original inputs and inverse-bearing exactness evidence. The earlier
+ordinary iterator's symbolic zero-endpoint experiment and the large six-term
+package comparison remain deferred. These interfaces do not constitute a
+general homological normalization calculus.
 
 For the concrete nonsplit example, set `R=ℚ[x]`, take `S=R/(x)` as an
 R-module, and use the complexes in degrees one and zero
@@ -1971,14 +2001,16 @@ Obs(δ_M) = Obs(δ_native).
 ```
 
 Here `Obs` is an object of the existing lax-arrow category retaining source,
-target and arrow together. Computed equations, all-test provider semantics
-and model interpretation remain distinct. These bindings are not runtime CAS
-rewrites. The model and its normal mono/epi factor operations are supplied,
-not inferred from finite matrix tests. All retained
-degree maps and connecting windows are interpreted without another kernel,
-homology or connecting selection. This is a usable formal/CAS interface,
-not a claim of closed quotient effectiveness or verification of every native
-algorithm.
+target and arrow together. Computed equations and supplied coefficient/model,
+normality and row/arrow interpretations remain distinct. These bindings are
+not runtime CAS rewrites. Both native LES and snake displayed diagrams now
+have derived exactness certificates, with no new output-exactness assumption
+or legacy-model prerequisite. The frontend automates their assembly while
+retaining every selected presentation. A closed construction of all supplied
+model contracts and verification of every native algorithm remain separate
+work. The ordinary postcomposition-adjunction and terminal-family DefIso
+extensions are explicit structural declarations; a general categorical
+terminality refinement is still proposed.
 
 ---
 

@@ -17,338 +17,66 @@ equation is not by itself authority for a new rule. Preserve semantic owners,
 variance, retained higher action, subject reduction, and explicit noncollapse
 boundaries.
 
-Critical variance notice (2026-09-08): the current categorical encoding admits
-a closed inhabitant of its decoded empty type through the whole internal
-`op`. The non-library fixture is `audits/internal_op_empty_reproducer.lp`;
-analysis and baseline controls are in
-`../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md`. This is an
-inherited soundness defect, not a warning-count issue. Treat higher-opposite-
-dependent formal claims as unqualified pending the documented variance
-repair; do not register the reproducer as a positive library example or
-interpret ordinary green checks as a consistency certificate.
+Research qualification: the current whole-opposite, Sigma-Hom and connected
+family/section encodings have known variance/strictness defects. The
+[opposite](../docs/TYPESCRIPT_EMDASH_INTERNAL_OP_VARIANCE_DIAGNOSTIC.md),
+[Sigma-Hom](../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md),
+[Homd target](../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md)
+and [family/section profile](../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+diagnostics record the evidence and qualifications. Their reproducer fixtures
+are non-library audits, not positive examples or a consistency certificate.
+Do not use invalid higher action to justify a result. Legitimate local Op
+computations with an independently qualified ordinary interpretation are
+not blanket-prohibited.
 
-The general repair was deferred during the previous whole-complex/homology
-goal. The user has now authorized its design-led continuation under
-`../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md` in the
-dedicated native-universality worktree. The active encoding remains
-unrepaired until that plan's full qualification gates pass. Preserve
-hom_int/homd_int as foundations; spectral/stabilization research is deferred.
-Distinguish essential use of the invalid action
-from a legitimate local `Op_*` computation with an independent mathematical
-interpretation. The former is not allowed; the latter may be qualified by
-the normal owner-position/variance/SOP checks. This is not a blanket ban on
-Op syntax and does not authorize an unrelated repair detour outside the
-current scoped plan.
-
-The same audit also confirms an independent Sigma-Hom/constant-product
-empty-type derivation, without calling the whole op or pointwise opposite
-families. See `audits/sigma_hom_empty_reproducer.lp` and
-`../docs/TYPESCRIPT_EMDASH_SIGMA_HOM_VARIANCE_DIAGNOSTIC.md`. Correcting the op
-signature alone is insufficient; Sigma Hom and its projections also require
-the documented variance repair before formal qualification.
-
-The native-universality audit also reproduces Empty through the old
-`homd_src_sec` positive-section target over the opposite y-base. See
-`../docs/TYPESCRIPT_EMDASH_HOMD_TARGET_POLARITY_DIAGNOSTIC.md` and the
-non-library `audits/homd_target_empty_reproducer.lp`. This route's independence
-from the op/Sigma defects is not established. The coupled repair must reject
-it for the correct target polarity/type reason while preserving native Hom
-owners and legitimate forward action; a base-annotation fix alone is not
-qualification.
-
-The family/section profile audit also derives Empty from unrestricted
-strict naturality combined with constant-family sections viewed as ordinary
-functors. Earlier ordinary-cut routes persist before Sigma/native Homd and
-without the late displayed transport theorems. See
-`../docs/TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md` and its
-three non-library fixtures. Do not use the strict-Functord source comment
-as blanket semantic authority for all family/section interfaces. The
-connected naturality profiles must be qualified while retaining generic
-directed section action; the recorded subtraction variants are not a repair.
-Subsequent user direction for the native-universality goal defers further
-Empty audits and prototype strictness migration. Its current priority is
-the native syntactic duality design in
-`../docs/TYPESCRIPT_EMDASH_DUALITY_SEMANTIC_THEORY.md` and useful native
-operations. The separate `goal/opaque-action-profile-classifiers-v3.2`
-branch will be integrated after this goal. Do not treat that integration
-or further consistency probes as a prerequisite for this goal's work.
-The user also clarified that the general D_S/set-of-dimensions exposition
-is not an implementation API. Use selected native category constructors,
-internal functors and their fapp/tapp/Hom rules. External semantic transport
-does not stand in for a required native whole owner or its computation.
+The user has deferred Op/duality repair, further Empty audits and integration
+of `goal/opaque-action-profile-classifiers-v3.2` to later work. Preserve
+hom_int/homd_int as foundations and the checkpoint/resumption bundle in
+`audits/deferred_native_homd_y/README.md`. The selected native duality design
+is a proposal; external set-of-dimensions semantics is not an implementation
+API. No current homology maintenance task authorizes resuming that migration.
+Spectral/stabilization research is also deferred.
 
 ## Authority And Document Roles
 
-Latest native-universality goal direction (2026-09-13): the user has deferred
-the Op/duality migration until after that goal because it may interact with
-strict/lax structure. Preserve its checkpoints and partial experiments; do
-not continue those probes as prerequisites for the remaining work. The
-whole kernel/cokernel universality is implemented at its ordinary-view
-boundary. NUH-4 implements whole H/δ and the three categorical exactness
-comparisons through whole universality under its recorded ordinary/Abelian
-assumptions. NUH-5 has qualified retained model observations and direct native
-model context preparation; native realization and exactness consumers are next.
-Ordinary record bridges remain optional.
-The living plan and `audits/deferred_native_homd_y/README.md` record
-the new queue and later resumption boundary. Existing semantic qualifications
-remain explicit; this deferral is not a claim that the nucleus is repaired.
+Current homology status (2026-09-16): the native universality/homology goal is
+complete under its revised scope. The
+[final audit](../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+records primary whole K/Q adjunctions, whole H and direct δ, canonical
+exactness, the general native snake and its LES/sign comparison, and both
+nonsplit displayed proof–CAS certificates. Model, normality and interpretation
+contracts remain explicit; output exactness is derived. Ordinary record views
+are optional observations, not inputs required by the primary whole API.
+The native frontend flag for displayed LES exactness is true.
 
-Latest native-model priority (2026-09-14): the user requests direct use of
-`FreydAdjunctionModel` and native whole K/Q/H/maps/δ/exactness with declared
-model/realization contracts. Preserve the CAS-selected data and the qualified
-retained workflow, but treat the older formal-diagram comparisons as later
-compatibility work. Recent auxiliary point/inverse-projection normalization
-experiments are deferred; their resumption bundle is
-`audits/deferred-native-exactness-observations/README.md`. They are not
-prerequisites for the new primary route. Actual native consumer typing,
-computation and coherent CAS realization remain required. Do not assume
-output exactness to bypass a missing construction.
+The large six-term package comparison is explicitly deferred after the bounded
+review in `audits/native-six-term-observation-boundary/README.md`. The original
+construction, maps, witnesses and typed inverse observations remain qualified;
+the failed comparison is not claimed proved. Do not resume that experiment
+or older endpoint/projection experiments without a new user scope.
+Book 0.9.0-dev and its local artifacts are qualified; no external publication
+or integration of another branch is implied.
 
-NUH-5N1 qualification (2026-09-15): TypeScript now has exact private mirrors
-and a direct `FreydAdjunctionModel`/native-normality context, sharing the
-original CAS inventories with the legacy context. Native equation adoption
-and raw witnesses pass without a legacy model declaration. This does not yet
-realize native H/maps/δ on the computed outputs. The subsequent NUH-5N2A
-slice now qualifies native H/map application views and a first direct CAS H
-realization, with automatic matrix prerequisites and an explicit interpretation
-claim. Three semantic definitions add no primitive or rewrite/unification
-rule. NUH-5N2B now qualifies one complete native H-arrow realization using
-the existing LaxArrow carrier, shared with the old workflow. Its matrix
-prerequisites are automatic and it needs no independent point-realization
-claims. NUH-5N2C now qualifies the direct native δ realization for the middle
-nonzero window, with explicit native whole-row contracts and automatic matrix
-inputs. Its two observation definitions add no primitive or rule. The zero
-endpoint windows are now qualified by NUH-5N2D in one native model/source
-alongside the middle window. Native exactness, full H/map assembly and
-whole bounded diagram/coherence remain NUH-5N2; sharing that source or
-adopting individual arrows does not establish whole coherence or the later
-snake/LES sign comparison. The combined three-window/reuse group has a
-reviewed 240s guard (measured 157.71s); individual LP checks remain at 90s.
-NUH-5N2E now qualifies the original whole Ω-exactness predicates/proofs and
-a pure frontend constructor on a concrete native window, without adding an
-output assumption. Terminal row contracts have a small shared owner. The
-combined δ-point-observer/exactness import exceeds 2GiB; exactness artifacts
-instead retain and recheck their complete declaration dependency closure,
-excluding unrelated δ interpretation declarations. This does not fix the
-loader boundary or establish displayed-diagram transport/coherence, which
-remain required. Do not resume the deferred point/inverse projection checks.
+The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+is the accepted living plan for auxiliary categorical owners, remaining path
+uses, shared-input dependency cleanup and retirement in the new consolidation
+goal. The user authorizes its initial main fast-forward/push/Pages deployment
+and local implementation checkpoints in the dedicated continuation worktree.
+Preserve ordinary/discrete guards
+on the declared structural interfaces. The proposed general categorical
+terminality refinement is not implemented, and point comparisons do not
+establish whole parameter action. Operational presentation comparisons should
+use actual internal maps with retained inverse/coherence data and whole K/Q/H
+action; ordinary equations and proposition-valued observation evidence remain
+valid downstream views.
 
-NUH-5N2F now qualifies complete native H/map/δ observation assembly with
-shared formal endpoints and original CAS selections: twelve degree H points,
-eight maps, three δ windows and nine derived whole exactness terms. The full
-assembly/reuse test passes in 429.00s under its reviewed 600s guard; all 54
-modular LP assertions pass at 90s each. This adds no LP primitive or rule.
-Displayed-diagram exactness transport/coherence remains NUH-5N2G. Do not
-conflate the successful time extension with the separate combined-import
-memory boundary, or resume the deferred projection experiments automatically.
-
-NUH-5N2G1 qualifies the CAS-facing shared-endpoint compatibility theorem:
-presentation setness and the existing decoded LaxArrow endpoint observations
-derive compatible paths at all six displayed junctions, without another
-interpretation assumption. Six definitions add no rule or primitive. This
-does not replace the whole categorical operations or establish complete
-displayed exactness transport. The latter and automated frontend proof
-construction remain NUH-5N2G2. Diagnostic inventories match their original
-controls; the NUH-5N2F literal-word warning counter was corrected in the plan.
-
-NUH-5N2G2 qualifies a whole native→CAS path of the finite observation diagram,
-including its endpoint matching. Its defined view retains the existing
-`FiniteArrowTail` observer and assumes no tail eta. Nineteen definitions add
-no primitive or rule; native context v6 and the frontend construct the path
-automatically from the existing arrow agreements and endpoint β theorems.
-Coherence is now qualified for that result representation. NUH-5N2G3 must
-still index and transport the actual categorical exactness evidence; do not
-equate diagram equality with completed displayed exactness or add an output
-assumption. The model/reifier plan records the corrected negative fixture,
-all qualified integration cases and diagnostic comparisons.
-
-NUH-5N2G3A qualifies typed point observations of the original whole exactness
-comparisons/evidence using a Sigma data view and checked transparent named
-results. Their bodies and dependency closures are retained; the assumption
-source is unchanged. Native context v7 exposes seven exact mirrors. Expanded
-point predicates and inline concrete emission still exhaust 2GiB; no opacity
-or new rule was added. G3B must relate the actual comparisons to the displayed
-arrow pairs and finish exactness transport. Existing inverse/projection
-deferrals and the combined-import boundary are not thereby resolved.
-
-Current work order after NUH-5N2G3B1 (2026-09-15): the original input-pair
-observations qualify in all three concrete windows, with 42 assertions and
-no new primitive/rule. Their combined exactness certificate still exceeds
-2GiB and is not promoted. Advance the independent general NUH-6 snake/LES
-comparison from NUH-4, then finish required G3B2 pair alignment and displayed
-exactness integration before NUH-7. The living plan retains both obligations;
-this does not change the displayed-exactness flag or the Op/profile deferrals.
-
-NUH-6A/6B now qualify the general whole snake input, α/γ reconstruction,
-E=K(γ∘π_a), the actual coimage cover/cancellation of ρ, and θ:E⇒Q(α).
-The original image factorization and native kernel lifts derive θ∘κ_ρ=0;
-whole descent constructs ∂:K(γ)⇒Q(α) with ∂∘ρ=θ and uniqueness.
-No monic-a, epic-c or new annihilation hypothesis is added. Follow
-`../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md`:
-the four surrounding whole maps and four zero composites now qualify in
-NUH-6C1. Its four native Im→Ker comparisons have derived zero kernel
-inclusions. NUH-6C2a derives the first comparison's cokernel-zero proof and
-fixed-forward exactness at K(b), using original image-cover representatives.
-NUH-6C2b1 derives the second comparison's cokernel-zero proof and exactness
-at K(γ), using two original whole covers and a corrected K(b) representative.
-NUH-6C2b2a derives third exactness at Q(α), through two original whole
-covers and the same E/∂. NUH-6C2b2b derives fourth exactness at Q(b),
-through three original whole covers and a native K(c) difference representative.
-All four individual comparison witnesses now qualify. The whole six-term
-constructor, maps and native-input observations also qualify under the
-scoped GC profile. The larger comparison/witness view remains 6C3b in
-`audits/native-six-term-observation-boundary/README.md`. The user permits
-independent LES specialization/sign work next, while retaining that gap
-as required before final qualification. Do not resume unbounded normalization
-or assume output exactness to close it.
-NUH-6D1 now qualifies the original whole four-row window as a native
-general-snake input: a=[bₘ,i₀], b=b₀, c=⟨b₁,p₁⟩, with cba=0 derived
-from the original whole row maps and column-zero laws. Input formation
-requires no P/Q, short-exactness or normality; its first native α/γ
-consumers qualify. NUH-6D2a now constructs the whole cycle comparison
-u:Z(A₁)⇒K(c), its inverse v and fixed-forward ΩAlong(u) through original
-row/kernel mates and inclusion cancellation. Both inverse slots and their
-whole Hom action qualify. NUH-6D2b now derives the original left H
-comparison Q(α)≃H(A₁) through whole quotient descents and cancellation.
-Its inverse data, arbitrary whole-map consumers and existing native LES H
-endpoint qualify. NUH-6D2c1 now derives Q(a)≃Q(dₘᴰ), the original γ
-relation χ∘φ=γ with χ=⟨0,d̄₀ᴰ⟩, and its native whole diagram map.
-The inverse data, whole reconstruction and diagram endpoint actions check.
-NUH-6D2c2 now derives K(γ)≃K(d̄₀ᴰ) through the original whole K action
-and kernel inclusion cancellation. Both selected inverse projections,
-Hom action and ambient reconstruction qualify. NUH-6D2c3 now proves
-the generic H=Q(β)≃K(ḡ) comparison from original P/Q and native
-normality/cover descent, then identifies the original K(γ) with the
-existing right-window H. Both endpoint comparisons and inverse data
-qualify. NUH-6D3a now proves the positive whole equations L∘∂∘R⁻¹=δ
-and L∘∂=δ∘R by original cover and cycle reconstruction and existing
-LES uniqueness. Its native connecting-diagram map retains R/L endpoint
-actions and whole Hom action. NUH-6D3b now proves the whole surrounding-map
-factorizations through original cycle quotients and homology inclusions;
-their native diagram endpoint and Hom actions qualify. The native LES
-comparison is qualified at those actual factors, without identifying all
-snake objects with LES H objects. Direct native concrete qualification,
-the retained native six-term evidence observations and NUH-5 integration
-remain required.
-
-Latest user scope correction (2026-09-15, D-NUH-078): replacing the former
-raw snake interface does not require an old/new comparison theorem or API
-compatibility. NUH-6D4 is withdrawn; stop its unpromoted ordinary-record
-comparison probe. The qualified new-native-snake/new-native-LES comparison
-is retained. Qualify native consumers directly, and migrate affected
-consumers before retiring obsolete dependencies. Earlier milestone queues
-requiring a general reference-snake comparison are superseded by this
-direction and the current living plan.
-
-NUH-6E1 now qualifies direct raw Freyd triple input, all five native whole
-snake maps and their complete-arrow observations. Input formation uses the
-existing matrix agreement and constant-family action before P/Q selection.
-The 24 combined consumers pass with default GC at 90s/2GiB. Retain the
-literal generic additive/terminal projections in dependent ∂ annotations;
-reducing those aliases prematurely caused an avoidable allocation failure.
-No primitive, rule, ordinary universal record or old-snake comparison is
-added. Concrete nonsplit CAS adoption and derived exactness remain 6E2;
-the separate 6C3b and displayed LES exactness obligations remain open.
-
-NUH-6E2a now qualifies all five nonsplit native snake arrow realizations
-through a standalone rational context. One transparent matrix-zero
-introduction, seven private signature mirrors, nine computed matrix
-equations and five explicit model interpretations retain the original
-six terms and maps, with complete reuse and no universal reselection.
-Concrete native exactness/coherence remains 6E2b. Do not classify the five
-interpretations as constructed whole-model semantics or output exactness.
-
-NUH-6E2b1 now constructs the four original whole snake exactness proofs and
-their point Ω data in the concrete frontend, without new assumptions.
-Their predicates retain a direct ΩAlong head at the original comparison;
-expansion through the general family predicate caused avoidable inference
-allocation. The four Freyd Ω carrier definitions are now shared in
-`emdash3_2_commutative_algebra_freyd_arrow_equivalence_observations.lp`.
-The old LES owner imports them unchanged. Public-pair alignment and
-displayed CAS transport remain required; merely having four invertible
-arrows does not certify a displayed diagram.
-
-NUH-6E2b2 now qualifies the nonsplit CAS snake's displayed exactness.
-Its indexed certificates retain each original whole Ω witness and the
-checked path from that input's pair to the public/CAS arrows. The diagram
-certificate additionally retains derived matching and the whole observation
-path. This uses the existing model interpretations without new assumptions.
-The heavy pair/certificate owners and reviewer use the measured profile in
-`scripts/check_native_snake_pairs.sh`; other checks retain default limits.
-NUH-6C3b and displayed LES exactness transport remain required.
-
-NUH-6C3b1 now qualifies a generic finite-tail observer that packages the
-original comparison and Ω witness before specializing its annotation.
-Five generic field/inverse equations and twenty typed consumers of the
-actual four interiors, including eight inverse maps, pass at 90s/2GiB
-with `o=20`. The two definitions add no primitive or rule. Direct comparison
-with the original canonical maps/witnesses remains NUH-6C3b2; do not describe
-the new access as completing that comparison or displayed LES transport.
-
-NUH-5N2G3B2a qualifies the family/global incoming-diagram comparison and
-its image equivalence, evaluation of both whole adjunction mates, and the
-original native cokernel-descent point equation. Eight derived definitions
-and six focused assertions add no primitive, rule, opacity or assumption.
-The canonical Im→Ker compatibility statement now has its correct endpoints;
-its commutativity and displayed LES exactness transport still require proof.
-Retain the original column H equivalences in that continuation.
-
-NUH-5N2G3B2b now proves canonical point Im→Ker compatibility through the
-derived identity-endpoint diagram equivalence, original quotient
-reconstruction and whole Coim⇒Im naturality. `OneCatNativeExactAt` and its
-family-evaluation/native-input-equivalence transport are derived; all three
-original native LES proof constructors consume them. Twenty-six new
-definitions and two revised image-comparison bodies add no primitive,
-rule, opacity or assumption. Public H/maps/δ pair identification, displayed
-CAS LES transport, NUH-6C3b2 and NUH-7 remain required.
-
-NUH-5N2G3B2c1 derives whole native input equivalences from the original
-source/diagram component equivalences under OneCat(C). Native Hom
-reconstruction and whole projection functoriality supply the inverse laws;
-no caller supplies a naturality square. Eleven new definitions and one
-unchanged shared proof add no primitive or rule. Both inverse slots retain
-the computed component inverses. Specific public H/maps/δ alignment and
-displayed CAS transport remain required in the model plan.
-
-NUH-5N2G3B2c2a uses a categorical boundary map and existing Q action for
-the H point comparison, retaining its two public signatures and original
-H selections. Whole quotient compatibility and the original named Freyd
-column consumers retain actual targets and K(diagram(n)); do not erase that
-action by assuming equivalent presentations are identical. Thirteen new
-definitions and two revised bodies add no primitive or rule. The comparison
-is a point view; it does not establish whole parameter naturality. Public
-H-map/zero-pair alignment and displayed LES transport remain in the model plan.
-
-NUH-5N2G3B2c2b2 derives the actual incoming/outgoing H-map equations
-between the new whole LES construction and the CAS-facing native H action.
-Here raw input means matrix/presentation data, not the former homology design.
-The introduced-input comparison now keeps an actual D[x]→Arr(u[x]) map;
-its signatures and original inputs remain. No identification rule, primitive
-or output-exactness contract is added. Adjacent-input equivalences and
-displayed LES exactness transport remain the next qualification boundary.
-
-NUH-5N2G3B2c3 transports the original middle/source/target exactness proofs
-to the actual CAS-facing native adjacent inputs. Target zero composition is
-derived; the actual input equivalences retain all inverse components. The
-concrete canonical-result reviewers pass under the measured 6GiB/180s/o20
-profile, while generic owners use default 90s/2GiB. No output exactness premise,
-new primitive or rule is added. Displayed-diagram observation indexing,
-frontend certificate assembly and nonsplit replay remain the next boundary.
-
-NUH-5N2G3B2c4b qualifies the complete displayed native CAS LES certificate,
-retaining actual native inputs and canonical Ω data. The nonsplit workflow
-passes assembly, coverage rejection, reuse and emission; all 64 emitted,
-six assembly and 13 signature assertions check under the documented localized
-profiles. The public flag is true. No output-exactness assumption, primitive,
-rule or opacity is added. The D-NUH-080 bounded review has now finished:
-the individual first comparison passes, but compiled-parent whole-package
-comparison still allocates out at 6GiB. That observation gap is explicitly
-deferred with a resumption bundle. The final audit and book 0.9.0-dev update
-are now qualified; the revised goal scope is complete. Do not resume C3b2 or
-Op/duality without a new user scope or a separate later goal.
-
-The older expanded/global cover reviewer hit 2GiB; its qualified scoped
-consumers and the new connecting consumers are recorded separately.
+Historical tranche details, warning inventories and resource receipts live in
+the [completed plan](../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md),
+its [owner ledger](../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md),
+and the linked model/snake plans. Their dated “next” statements describe the
+state at that checkpoint; they do not override the current scope above. The
+former goal chronology has been removed from this instruction file to keep
+current instructions distinct from historical evidence.
 
 Use this order:
 
@@ -389,8 +117,9 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   point and extracted-cell owners for leading Eval, pairing, identity and
   explicitly constant sections. The opposite instances evaluate supplied
   arrows with the existing endpoints; they are not a general inverse-laxity
-  or Op_funcd-composition bridge. The homology pilot records the scoped
-  qualification and the still-open strict zero-complex/whole-H interface.
+  or Op_funcd-composition bridge. The completed native homology work uses
+  its explicitly qualified ordinary profile; broader displayed/profile
+  migration remains separate.
 - One-way standard-library extensions own equality-valued action and
   truncation, presheaves/sieves/sites/sheafification, commutative algebra and
   geometry, directed/groupoidal HITs, groupoidification, Gray/cubical and
@@ -398,659 +127,85 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   the current-status report.
 - `emdash3_2_monads.lp` owns monad-primary triangular extension and its narrow
   opposite-derived computational mirror.
-- `emdash3_2_diagram_evaluation.lp` derives whole varying-shape evaluation
-  from existing argument exchange. Fixed-shape evaluation also computes
-  through precomposition before or after its Hom projection; whole
-  evaluation/postwhiskering comparisons remain proof-time views.
-  Its walking-arrow reviewer supplies a
-  universal differential transformation, not yet a kernel/cokernel
-  adjunction or whole complex/homology functor. The walking-arrow introduction
-  module constructs a diagram from an ordinary arrow via a constant
-  represented cross section and the original join recursor. Core whole/point
-  cross beta computes its generator; a whole varying-arrow inverse remains
-  a further interface, not an implicit consequence of those point formulas.
-  `emdash3_2_arrow_diagram_families.lp` supplies whole naturally varying
-  arrows from an actual transformation via introduction in Functor_cat and
-  exchange. Whole observations recover the original source/target functors
-  and transformation. `emdash3_2_zero_arrow_diagrams.lp` specializes this to
-  the terminal transfor and an explicitly supplied opposite-terminal
-  structure. These are not yet kernel/cokernel adjunction capabilities.
-- `emdash3_2_kernel_adjunction_presentations.lp` and its cokernel counterpart
-  declare whole adjunction presentations over original selected operation
-  families. Their object, inclusion/projection and induced-map observations
-  agree proof-time with those original choices, with defined reflexivity
-  paths; formal action remains available for generic functoriality and
-  Došen cuts. A presentation is additional coherent structure, not an
-  automatic inhabitant for every old capability or a closed Freyd provider.
-  The strict component-naturality helper uses the current strict usability
-  rules; it does not erase arbitrary laxity.
-  `emdash3_2_adjunction_mates.lp` evaluates the existing Hom-prof comparison
-  to whole forward/backward mates with projected cancellation and semantic
-  usability. The kernel/cokernel-mate modules compare with original selected
-  lifts/colifts; zero-arrow universal tests derive their inputs from actual
-  transformations. The independent
-  `emdash3_2_image_coimage_adjunction_families.lp` defines whole Coim/Im and
-  their projection/inclusion directly from K/Q and κ/q, retaining whole
-  action without ordinary factor inputs. Its canonical Coim⇒Im comparison
-  is constructed by the ordinary whole comparison owner described below.
-  The ordinary-target diagram-transpose and kernel/cokernel-transpose
-  modules now transpose the original whole unit/counit at actual κ/q
-  arrow-family endpoints. Columns and shape-arrow action stay observations
-  of one internal functor. The ordinary terminal-family-universality module
-  now adds two explicit native DefIso presentation primitives with identity
-  endpoints; this is an extension beyond the old pointwise β interface.
-  Actual zero-column instances and the defined whole cokernel-family mate
-  yield Coim⇒ev₁ and ev₀⇒Im. Native mate reconstruction is verified as a
-  reviewer observation, without ordinary record inputs to the programs.
-  The subsequent C2c4 construction supplies canonical Coim⇒Im and its native
-  whole factorization without a comparison or exactness axiom.
-  The ordinary family-adjunction module now exposes (F∘−)⊣(G∘−) through
-  explicit structural adjunction/profile primitives. Whole unit/counit
-  rules retain the existing tele-postcomposition owner and native mate
-  inverse cuts. The optional family-view extension now proves whole
-  agreement with the older K/Q formulas and whole inverse-mate recovery
-  through three guarded proof-time comparisons. Original H/factor bodies
-  and native runtime cuts remain the owners. Whole evaluation of both
-  original normalized inputs now derives the universal differential through
-  generic evaluator functoriality, two double-exchange projection rules and
-  eight whole normalizer endpoint rules. The old point route is retained
-  and checked against the whole route. The new zero-arrow, terminal-family,
-  diagram-family and kernel/cokernel-family path modules derive whole
-  inverse-mate faithfulness, annihilation and compatibility. The ordinary
-  image/coimage-comparison owner now constructs a:Coim⇒Im through existing
-  native square realization in Functor_cat(D,C), exchange and cokernel
-  mating. Its whole factorization and uniqueness are proved; no caller
-  per-object square, factor record or new primitive is supplied. Four
-  introduced-arrow evaluation clauses and two sufficient proof-time
-  comparisons complete the required computation. The ordinary adjunction-
-  normality owner now uses fixed-a OmegaEquivAlong, selects the existing
-  whole inverse and derives an IsoEvidence view through generic inverse
-  laws. Generic functor action restricts it to families. The native Abelian
-  package stores original P/Q and that normality over the original additive
-  capability, including binary products. These are nine definitions with
-  no new primitive or rule; normality remains supplied structure. Canonical
-  exactness, whole δ and concrete model construction remain next work.
-  Whole cokernel input/descent modules now accept an arbitrary original
-  diagram family and one whole annihilation cell. Reconstruction in the
-  existing functor category forms the coherent input while Q keeps D as
-  its argument. Native cancellation, whole target recovery and uniqueness
-  are derived; canonical Coim⇒Im shares the introduced constructor with
-  unchanged computation. Nine definitions add no primitive or rule. The
-  actual kernel-mate annihilation is now derived by whole restriction,
-  inverse-mate reconstruction and faithfulness. Incoming observations remain
-  independent of K/Q selection. The image/kernel owner constructs e:Im(f)⇒K(g)
-  by original coimage descent and the same selected inverse; whole native
-  reconstruction and uniqueness are derived. Categorical exactness is
-  existing OmegaEquivAlong on this actual e, with a whole native zero-cone
-  specialization and no exactness inhabitant. Nineteen definitions and four
-  proof-time comparisons add no primitive, runtime rule or object cast.
-  The short-exact-family owner now derives g∘f=0 from the original whole h,
-  constructs γ by descent and retains fixed-map invertibility of β and γ.
-  Both inverses are whole; the cokernel inverse lands in Q(f), not the
-  middle term. Nine definitions add no primitive, rule or extra caller
-  square. Whole fibre-product/cover/δ and output exactness proofs remain.
-  General lax/oplax interchange is not qualified by these ordinary consumers.
-  `emdash3_2_homology_families.lp` defines whole H for an
-  already coherent family h:J∘A⇒D by β=K(h)∘η_A and H=Q∘Arr(β).
-  Its selected-view module compares objects and maps with the existing
-  operations, without runtime reselection or new primitive H.
-  `emdash3_2_zero_arrow_cones.lp` reuses the native homdc/Sigma comma category.
-  Its one-category extension supplies one canonical whole universal
-  transformation under the existing `IsNCat` profile; no new category or
-  manually supplied square/prism record is introduced. The chain-pair view
-  derives the two old factor agreements from whole naturality, while the
-  homology extension applies the existing H-family construction globally on
-  this native category. The Freyd model derives the local profile from its
-  existing Path-category Hom sets and fills it inside the model-facing alias.
-  No general truncation reflector, closed Freyd kernel provider or concrete
-  new whole-H CAS replay is supplied by that profile. Retained-selection
-  realization and full old/new homology-map agreement remain further work.
-  The kernel-unmate and chain-pair zero-cone input modules now introduce an
-  original pair through the inverse mate of its original selected boundary.
-  Runtime definitions and reusable compatibility proofs live in separate
-  modules. The Freyd raw-input adapter keeps the quotient classes/agreement;
-  its whole-H alias fills canonical structural data but still requires the
-  coherent P/Q presentations. It does not construct those from a raw
-  agreement or run the native CAS. No new rule or primitive is added.
-  The OneCat arrow-diagram module now supplies the native arrow category's
-  tautological whole transformation and derives its actual diagram functor.
-  A generic point-introduction unifier preserves whole runtime heads while
-  aligning introduced diagrams. Old chain-map lower squares then realize as
-  actual transformations, with a whole fixed-pair map functor. Generic
-  inverse-mate naturality constructs a native cone map from compatible lifts;
-  the complete chain-pair map now derives that compatibility from the old
-  upper factor, actual inclusion naturality and original kernel monicity.
-  All three original components compute, and the Freyd wrapper fills its
-  existing OneCat evidence while retaining the raw agreements. Concrete
-  coherent-model binding and full old/new H-map agreement remain required.
-  `emdash3_2_commutative_algebra_freyd_homology_models.lp` now transparently
-  packages the supplied coherent inputs and exposes whole H/object views.
-  It does not construct a native/global model. The first TypeScript point
-  consumer interprets a named supplied model at its retained native result,
-  with explicit trusted-presentation-semantics adoption and no reselection.
-  The model-map extension now defines actual H action and complete-arrow
-  observations in the existing LaxArrow object carrier. A transparent matrix
-  introduction constructs the original raw chain-map agreement from the
-  seven original morphisms and two semantic-product equations. The first
-  nonidentity TypeScript map consumer retains both original H selections,
-  with explicit model-interpretation adoption and no endpoint transport.
-  The bounded model consumer now covers all retained degree/interior H
-  points and both degreewise induced maps in the actual adopted replay,
-  preserving earlier equations and selected formal exactness. The separate
-  connecting/window interface remains further work. Whole H is primary;
-  comparisons serve actual consumers, not exhaustive historical-wrapper
-  preservation. This does not construct a closed model from old providers.
-  The homology-model-normality extension now builds the pre-Abelian package
-  from that model's original W/V and adds explicitly supplied monic-lift
-  and epic-colift families. The resulting Abelian capability projects to
-  those same W/V, normality operations and whole H by computation. No
-  object cast, replacement model or closed-provider synthesis is added.
-  The model-record extension specializes the existing whole-owned record
-  at the same raw chain input. Its object projects literally to the original
-  model H point; distinct model selections do not collapse. This rule-free
-  adapter prepares the retained connecting consumer, not a new H or provider.
-  The model-connecting extension now instantiates the direct component at
-  those records and exposes an existing complete Freyd arrow observation.
-  Both H endpoints and the arrow project by computation. Normality and
-  model-side short-exact evidence are explicit; a raw chain-zero witness
-  cannot replace that evidence. Four transparent definitions add no rule,
-  unifier or primitive. Private TypeScript signature mirrors and their
-  conditional-call conformance are checked. The first retained nonzero
-  connecting consumer now adopts the complete arrow at its original H
-  selections. Native row/model interpretations are explicitly trusted
-  presentation semantics, distinct from computed matrix equations; supplied
-  normality is checked before adoption. No homology, connecting or universal
-  selection is rerun. The bounded model consumer also covers every retained
-  connecting window when supplied normality is requested, with shared row
-  proofs and an indexed view of the original displayed arrows. Without
-  normality its prior point/map prefix reports narrower coverage explicitly.
-  Generic bounded formal assembly and the final audit remain required.
-  The kernel/cokernel-adjunction record modules now derive universal records
-  at the actual whole K/Q objects and structural transformations. Their
-  operational centres are explicit mate operations; comparison paths occur
-  only in universal-law evidence. `HomologyRecord` retains an actual boundary
-  factor and its cokernel. The family and original-chain-pair record modules
-  project literally to whole H and beta, without a final endpoint conversion
-  or a second homology functor. Canonical older wrappers remain unchanged
-  while consumers migrate. A whole connecting transformation and generic
-  window exactness are still downstream.
-  The Hom-factor universality and short-exact universal-record modules now
-  construct row kernels/cokernels at their original objects. Mono/epi
-  cancellation and the existing Hom-set property supply uniqueness around
-  the constructed factor centres. Genuine comparison arrows are used for
-  lifting, not object-equality casts. The generic source-isomorphism proof
-  is shared with the older kernel-domain comparison wrapper.
-  The direct `homology_record_connecting` construction now uses those
-  original rows and the retained source/target H records. Both normal-epi
-  and source-boundary descent tests are derived. Its final Hom factor
-  reconstructs the cycle-level and covered arrows, and its whole-H consumer
-  checks literal H endpoints without transport. Keep one consistent
-  step-pair presentation inside the selected cover: mixed equivalent
-  presentations caused a measured conversion timeout. The focused gate is
-  `scripts/check_homology_record_connecting.sh`. Whole connecting naturality,
-  generic window exactness and the native connecting interpretation remain
-  downstream; no new primitive or rule is introduced by this reference layer.
-  The cover-quotient and connecting-characterization modules now share
-  the epicity of qC∘e with second-interior exactness and characterize
-  delta and its arbitrary postcomposites by their original covered formula.
-  Their reviewer rejects cancellation without the covered-equality premise.
-  Full connecting naturality and native interpretation remain separate;
-  these proofs introduce no new primitive, rewrite or unification rule.
-  The whole homology structural transformations now supply map reconstruction
-  factors by naturality; their chain-pair action views use the original
-  native map and actual whole H. `emdash3_2_homology_window.lp` retains the
-  three overlapping pairs of one five-term window and all three adjacent-zero
-  laws. Public zero theorems derive their factors rather than require new
-  commuting-square inputs. `scripts/check_homology_window.sh` is the focused
-  gate. Interior exactness, connecting naturality and the native connecting
-  interpretation remain distinct required work; no new runtime rule is added.
-  `emdash3_2_homology_first_exactness.lp` now proves the first interior,
-  at H(B), by all-test epic covers and boundary correction. Whole beta
-  naturality supplies boundary preservation; retained cokernel and cycle
-  interfaces supply the operations. The actual H objects/maps stay fixed.
-  Its point cover interface keeps the homology preadditive observation and
-  actual quotient owner explicit to avoid measured reconstruction timeouts.
-  `scripts/check_homology_first_exactness.sh` is the individually bounded
-  source/reviewer gate. The following owners supply the other two interiors.
-  `emdash3_2_homology_second_exactness.lp` now proves exactness at H(C)
-  using an epic presentation of delta, a retained target-boundary cover
-  and a corrected middle cycle. Its public instance uses the actual H
-  projection and no extra square/factor hypotheses.
-  `scripts/check_homology_second_exactness.sh` checks the exact source
-  dependency graph under the 90-second per-target bound; no kernel rule
-  is added by this tranche.
-  `emdash3_2_homology_third_exactness.lp` proves the final interior at
-  H(A'). The existing H(i')-kernel cover supplies a middle-boundary
-  preimage; its row projection enters the retained C cycles and the
-  original connecting pullback. Row/cycle monicity and delta's covered
-  reconstruction produce all-test preimages. The public theorem retains
-  the same H objects/maps and takes no extra squares or factor choices.
-  `scripts/check_homology_third_exactness.sh` checks the source graph and
-  reviewer, including the negative distinction between boundary epicity
-  and epicity of delta. All three window interiors are proved.
-  `emdash3_2_homology_exact_window.lp` packages their predicates over the
-  existing window; its result module supplies the three original proofs.
-  The generic and canonical projections compute without a duplicated
-  object/arrow list. `scripts/check_homology_exact_window.sh` checks this
-  source join and its reviewer; the registered source/example/health
-  dispatchers use the same staged gate for these owners. A wrong-interior
-  negative timed out and is archived as unqualified; the rigid
-  unrelated-witness negative passes.
-  Connecting naturality, retained native interpretation and bounded/book
-  obligations remain. No new primitive or rule is introduced.
-- The short-exact-row-family and homology-window-family modules now retain
-  whole row functors/maps behind typed specialized window projections.
-  The column module supplies the two vertical native-complex functors and
-  computing point/whole observations. The connecting-transformation module
-  applies the original whole H and declares delta, with its component
-  computing to the existing direct construction at literal H endpoints.
-  No make_transf, square input, object cast or new H selection is required.
-  Four column-usability unifiers cover the expanded Hom-action projection
-  order; typed equality witnesses retain the whole functors and their
-  arbitrary-arrow evaluations. They do not install new runtime Hom cuts
-  or change either generic composition orientation. The exact-source gate
-  is `scripts/check_homology_window_families.sh`; the bounded native connecting
-  interpretation is qualified, while generic bounded formal assembly and
-  final book work remain required.
-- The finite-arrow-tail and computational-exact-arrow-tail modules package
-  bounded result data over the existing arrows and exactness witnesses.
-  Rigid indexed record classifiers retain length and f/g for reconstruction;
-  six local constructor/projection beta rules add no generic cut or unifier.
-  Nat append shares an actual boundary arrow. The two-window reviewer keeps
-  the same H objects/maps and all six original proofs, with no casts or new
-  universals. `scripts/check_homology_arrow_tails.sh` is the bounded gate.
-  These are result carriers, not new complex categories or a completed
-  generic bounded homology theorem; degree iteration and endpoint zeros
-  remain separate requirements.
-- The homology-row-triple/span modules retain coherent whole row functors,
-  transformations and chain-zero data, with typed shared-state extension.
-  Their ten local constructor beta rules do not add naturality squares or
-  generic cuts. The window-extension module prepends the three original
-  exact pairs to a supplied continuation. The preadditive-zero-identity and
-  homology-record/whole-zero modules prove zero identity at the SAME H
-  object when the original middle term is zero or terminal. No object cast,
-  new selection or global identity collapse is installed. The focused gate
-  is `scripts/check_homology_bounded_prerequisites.sh`; the complete bounded
-  generator and its endpoint application remain downstream.
-- The field-span/case/extension and bounded-generator modules now implement
-  Nat iteration over directly indexed original whole row/map/zero data.
-  Four input projections and one constructor-case beta expose those data
-  before expanding the existing window continuation. They add no new H,
-  delta, exactness law or proof-field unifier. The finite-tail arrow view
-  retains complete arrows; init retains the original prefix annotations.
-  The short-exact-row-zero lemmas transfer zero identity from the middle
-  to both original outer objects. The scoped final-source gate is
-  `scripts/check_homology_bounded_generator.sh`.
-  The packed-state result comparison still has an expanded H(inclusion)
-  index timeout and is not promoted. This is the iterator implementation
-  layer, not the final zero-padded bounded theorem or its public interface.
-  Current closure (2026-09-11): the user explicitly deferred that final
-  symbolic endpoint attachment and further LF/checker debugging. The
-  field-indexed iterator, complete native result and retained whole-model
-  point/map/connecting interpretation are the qualified baseline. The
-  book/audit remainder is complete; see
-  `../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md` for the
-  current owner, validation and trust boundaries. Earlier pending-step
-  descriptions above record construction order, not unfinished requirements.
-  Preserve the archived representation/checker experiments and the later
-  primitive-projection record option; do not restart them without a new
-  request or claim that this closure repairs the inherited variance defects.
+- `emdash3_2_diagram_evaluation.lp`, walking-arrow introduction and
+  `emdash3_2_arrow_diagram_families.lp` own evaluation, introduction and
+  whole naturally varying arrows. Generic exchange retains the original
+  whole source/target functors and transformation. The ordinary
+  `emdash3_2_one_cat_diagram_reconstruction.lp` adds the declared DefIso
+  D∘E≅id; its endpoint identities do not assert unrestricted higher diagram
+  eta or an equivalence with arbitrary lax-arrow structure.
+- `emdash3_2_one_cat_adjunction_families.lp` owns the ordinary structural
+  postcomposition lift and functor-category profile. Its mate, view and
+  reindex modules preserve generic postcomposition and inverse-cut owners.
+  `emdash3_2_one_cat_terminal_family_universality.lp` owns the two declared
+  ordinary terminal/initial-family DefIso presentations. Product/biproduct
+  adjunction and family modules retain the same chosen product functor.
+  The consolidation inventory distinguishes these structural declarations
+  from their derived whole operations and proof-time comparisons.
+- `emdash3_2_kernel_cokernel_adjunctions.lp` owns primary whole K/Q and
+  J⊣K/Q⊣I. The mate, transpose and zero-column modules supply whole universal
+  operations without selected W/V dictionaries. Image/coimage families and
+  `emdash3_2_one_cat_image_coimage_comparison.lp` construct canonical Coim⇒Im;
+  `emdash3_2_one_cat_adjunction_normality.lp` retains supplied fixed-forward
+  OmegaEquivAlong on that actual comparison. No output exactness is assumed.
+- `emdash3_2_homology_adjunction_families.lp` and
+  `emdash3_2_zero_arrow_cone_adjunction_homology.lp` own H=Q∘Arr(β), with
+  β=K(h)∘η on the existing native comma/Sigma input. Preserve hom_int/homd_int
+  and the whole action. Ordinary records are derived at the same H objects.
+  The H point/column comparison owners use actual boundary-diagram maps and
+  Q action; retained equality observations do not define an operational cast.
+- `emdash3_2_one_cat_kernel_pullback_universality.lp` derives the inverse of
+  the actual native slice-Hom comparison under ordinary/discrete guards.
+  Cover and normality operations support
+  `emdash3_2_one_cat_native_homology_window_connecting.lp` and the three
+  native LES exactness constructions. Direct δ is a whole transformation
+  constructed by universal descent, not a separately axiomatized component.
+- `emdash3_2_one_cat_native_snake_connecting.lp` and
+  `emdash3_2_one_cat_native_snake_six_term_result.lp` own the general native
+  snake, all six terms and four canonical exactness witnesses. Arbitrary
+  outer a,c are retained; do not insert monic-a or epic-c restrictions.
+  The native snake plan owns the new snake–LES endpoint/map/sign comparison.
+  Comparisons with the former snake or LES are not acceptance requirements.
+- `emdash3_2_commutative_algebra_freyd_adjunction_models.lp` owns the direct
+  native model interface. Native raw-input/map, row and observation modules
+  retain the CAS-selected presentations under explicit model, normality and
+  interpretation contracts. The native route requires no old
+  FreydHomologyModel declaration; some shared vocabulary still imports old
+  source owners, as recorded in the consolidation review.
+- Native observed-pair and exact-diagram owners retain the actual input,
+  canonical Ω evidence and complete-arrow observation path together.
+  `emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp` and its
+  native-snake counterpart supply displayed certificates. Observation-path
+  extension preserves the original Ω witness and computational inverse data.
+  Model-side contracts remain supplied; mechanical frontend assembly and
+  derived output exactness do not constitute closed model/provider synthesis.
+- Earlier selected-presentation, record-connecting, legacy model and
+  `abelian_snake_*` modules are retained reference/adapter owners pending
+  explicit consumer-led retirement. The older homology field-span iterator
+  uses the ordinary record interface and its symbolic endpoint experiment
+  remains deferred. Do not conflate shared CAS input records with the former
+  algorithms, add an old/new compatibility obligation, or delete shared
+  data before extracting its native consumers. Detailed history and focused
+  check commands remain in the linked owner ledgers and dated audits.
 - `emdash3_2_set_path_pointwise_transformation.lp` and
   `emdash3_2_groupoidification_set_extensionality.lp` own the narrow
   set-target whole-transformation and map-extensionality boundary. They do not
   provide arbitrary pointwise naturality, dependent groupoidification, source
   action, or a `Groupoidify` adjunction.
-- `emdash3_2_preadditive_categories.lp` owns generic set-valued abelian Hom
-  structures and bilinear generic composition.
-  `emdash3_2_commutative_algebra_freyd_preadditive_laws.lp` and
-  `emdash3_2_commutative_algebra_freyd_preadditive.lp` own full arbitrary-
-  quotient Freyd laws and the checked preadditive instance.
-  `emdash3_2_commutative_algebra_finite_free_preadditive.lp` packages the
-  existing set-valued column-matrix addition and transparent distributivity
-  comparisons as the finite-free `PreadditiveCategory` instance. The
-  finite-free binary-product, terminal-zero, Cartesian, and additive modules
-  select the existing direct-sum functor and rank zero, with stable matrix
-  projection/pairing/zero observations and generic triangular computation.
-  `emdash3_2_additive_categories.lp` and the finite-direct-sum/Freyd additive
-  extensions derive biproducts, terminal/initial zero, and the checked
-  `AdditiveCategory` instance. `emdash3_2_weak_kernels.lp` owns the generic
-  Hom-fibre computational weak-kernel package and retained per-arrow test
-  reindexing. `emdash3_2_kernels_cokernels.lp` adds genuine kernel/cokernel
-  universal properties as contractible internal factor fibres, with selected
-  lift/colift, reconstruction, uniqueness, whole capability, and thin
-  pre-Abelian packaging. Closed quotient-level concrete capability and
-  Abelian structure remain separate layers.
-  `emdash3_2_computational_homology.lp` derives one-degree cycles as the
-  selected kernel, lifts the incoming differential into cycles, and selects
-  homology as that boundary lift's cokernel. Its whole snapshot and readable
-  projections reuse one `PreAbelianCategory`; it adds no image equality,
-  exactness claim, manual diagram, rewrite, or unification rule.
-  The cokernel-composite comparison modules construct the induced map
-  `Coker(b) → Coker(k b)` from the original whole cokernels and prove it
-  monic when `k` is monic in an Abelian category. A selected pushout supplies
-  its monic factor. The homology-inclusion modules specialize this to the
-  actual cycles/boundary and prove `H → Coker(dNext)` monic, preserving the
-  original homology. The internal proof keeps PA/normality explicit and has
-  a transparent one-Abelian-capability wrapper; no new rule or axiom is used.
-  The Hom-factor and kernel/cokernel-map modules use existing internal
-  pre/postcomposition fibres to construct maps on actual universal objects,
-  with identity/composition/extensionality paths and choice isomorphisms.
-  Chain-pair maps retain a middle component and two such factor points.
-  Generic homology maps derive cycle and boundary compatibility, then reuse
-  the cokernel map on the original homologies. These are rule-free map
-  operations/laws, not a new square grammar or a packaged complex-category
-  functor, and do not close the formal Freyd effectiveness boundary.
-  The Hom-factor cubical and chain-pair cubical-map modules give rule-free
-  compatibility views in the existing derived `LaxArrow_cat`. Both squares
-  retain the same original middle component; whole fixed-pair comparisons
-  retain higher action through `path_lift_func`. The native-triangle adapter
-  uses the original chain-zero path in the flagged dependent simplex.
-  These are not a global category of complexes, a prism-coherence filler,
-  or an equivalence with arbitrary directed squares/zero-triangles.
-  The chain-pair-map snake and row-comparison modules derive the existing
-  snake triple from a row map, identify alpha/gamma through the short-exact
-  comparisons, and construct the source-cycle and target-cokernel
-  isomorphisms at supplied whole universal objects. Their one-Abelian-package
-  usability layer uses ordinary dependent Sigma elimination, with beta on
-  constructor packages and no new neutral-package eta law. Whole rows project
-  their original pair/evidence rather than storing another diagram.
-  `scripts/check_snake_row_comparisons.sh` checks this measured join using
-  fresh temporary dependency objects and individually bounded reviewers.
-  These comparisons are a reference implementation strategy, not the public
-  identity of a homology-connecting or long-exact-sequence operation.
-  `emdash3_2_short_exact_sequences.lp` defines generic exactness as epicity of
-  that actual selected boundary lift. A short exact triple additionally
-  retains monicity of the incoming arrow and epicity of the outgoing arrow;
-  it adds no selected image/kernel equality, manual diagram, rule, or unifier.
-  The `emdash3_2_exactness_covers*` modules give the equivalent constructive
-  local-cover interface: every annihilated test factors after an epimorphic
-  cover. One direction pulls the test back along the epic boundary; the other
-  applies the cover to the selected kernel and proves that the actual boundary
-  is epic. Canonical kernel/cokernel rows instantiate this interface, with the
-  cokernel proof transporting epicity inside the existing contractible image
-  factor fibre using explicit pre-Abelian/normality capabilities.
-  The `emdash3_2_exactness_extensions*` modules provide the dual sufficient
-  local-extension criterion and its canonical kernel-row instance. A test
-  killed by the incoming arrow extends through the outgoing arrow after a
-  monomorphism; pushing out the actual boundary cokernel along the cycle
-  embedding proves that this family implies the existing exactness owner.
-  `emdash3_2_abelian_categories.lp` adds direct monic/epic cancellation,
-  proves selected kernel embeddings monic and cokernel projections epic, and
-  packages normal lift/colift `HFiber`s plus the thin generic computational
-  Abelian structure. Concrete Freyd normality remains a witnessed downstream
-  construction.
-  `emdash3_2_abelian_images.lp` derives coimage as cokernel-of-kernel, image
-  as kernel-of-cokernel, their canonical comparison, and the factorization
-  through projection/comparison/embedding. Its cone/cocone consequences state
-  that the coimage projection kills every kernel cone of the original arrow
-  and every cokernel cocone kills the image embedding.
-  `emdash3_2_abelian_image_bimorphisms.lp` constructively proves the canonical
-  comparison monic and epic from the existing Abelian stability and
-  cancellation owners. The implementation keeps the pre-Abelian package and
-  its two normality capabilities visible internally, then exposes ordinary
-  one-`ComputationalAbelianCategory` observations; it postulates no comparison
-  property or inverse.
-  `emdash3_2_abelian_bimorphisms.lp` constructs `IsoEvidence` for every
-  explicitly monic and epic arrow using the normal-monomorphism lift of the
-  codomain identity; it specializes to the canonical comparison when that
-  bimorphism evidence is supplied.
-  The isomorphism-constructor and mono/epi-comparison modules provide
-  transparent packaging and cancellation lemmas. The short-exact comparison
-  modules construct `A -> Ker(p)` and `Coker(i) -> D` isomorphisms from an
-  arbitrary existing short exact pair. Their forward and inverse arrows are
-  the selected kernel/normal-epi factors; the latter inverse lands in
-  `Coker(i)`, never a chosen section into `B`. No object equality is assumed.
-  The whole-row and normalization modules retain one chain pair and its
-  dependent short-exact evidence. Kernel rows consume an existing whole
-  kernel and prove exactness by identity covers using the unchanged selected
-  homology. The selected image row is constructed already over a pre-Abelian
-  capability. An Abelian short exact row normalizes to that image row with
-  two isomorphism-comparison `HFiber` points over its actual maps; all
-  compatibility is constructed from universal reconstructions. Its focused
-  check is `scripts/check_short_exact_normalization.sh`, separate from the
-  larger snake gate.
-  `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` and
-  `emdash3_2_commutative_algebra_freyd_normal_epimorphisms.lp` are the
-  rule-free witnessed formal Construction 3.14/3.15 owners. The former
-  supplies the relation-preserving lift and quotient reconstruction; the
-  latter supplies the relation-preserving raw/quotient colift and quotient
-  reconstruction. Both construct raw-competitor uniqueness from explicit
-  agreements rather than decoding truncated quotient equality.
-  `emdash3_2_commutative_algebra_freyd_witnessed_abelian.lp` combines those
-  completed normality families with the witnessed pre-Abelian package. Its
-  `CommRingFreydWitnessedAbelian` value is capability-indexed by finite-free
-  weak kernels and explicit raw agreements; it is not the stronger closed
-  `ComputationalAbelianCategory` value.
-  `emdash3_2_commutative_algebra_freyd_snake_connecting.lp` consumes the
-  effective fiber/pushout boundary as explicit `p1`/`q2` epic/monic and
-  normal-test agreements. Existing witnessed normality then selects the raw
-  and quotient `u` and connecting arrows, proves both reconstruction
-  agreements/paths, and packages the two raw factors. It adds no formal
-  matrix algorithm, quotient decoder, rule, or opaque connecting map.
-  `emdash3_2_commutative_algebra_freyd_homology.lp` consumes one explicit raw
-  adjacent-zero agreement, stores the existing kernel-lifted boundary and its
-  reconstruction, and packages the boundary's witnessed cokernel as homology.
-  Exactness is the explicit Freyd epimorphism witness for that boundary; no
-  quotient-path decoder or image/kernel object equality is assumed.
-  `emdash3_2_commutative_algebra_freyd_functorial_homology.lp` packages the two
-  chain-square agreements and the computed cycles-zero,
-  boundary-compatibility, and quotient-zero agreements. Target kernel lifting
-  and source cokernel colifting then construct the induced homology map and
-  reconstruction; the auxiliary agreements are explicit proof-CAS data, not
-  opaque map postulates.
-  `emdash3_2_commutative_algebra_freyd_bounded_complexes.lp` iterates
-  presentations, raw differentials, and adjacent-zero agreements in one
-  recursive bounded spine. Its first interior-degree projection delegates to
-  witnessed one-degree homology; it is not a second homology theory and adds
-  no rule or unifier.
-  `emdash3_2_commutative_algebra_freyd_explicit_spines.lp` exposes transparent
-  explicit-matrix introductions returning the original presentation-morphism
-  and chain-pair owners. Its literal agreement alias/introduction similarly
-  retains the original raw coefficient witness; the whole replay consumer
-  constructs all labelled raw values without new adoption. These are
-  proof-CAS usability definitions, not new primitive structures, equality
-  axioms, or computation rules.
-  The explicit-epimorphism extension constructs the existing Freyd witness
-  from Q U + F V = id, retaining the vertical coefficient block. It proves
-  boundary epicity, not cycle universality or a closed weak-kernel provider.
-  `emdash3_2_commutative_algebra_freyd_bounded_chain_maps.lp` follows both
-  actual bounded complex tails, retaining raw components and the existing
-  presentation-morphism agreements. Its first two laws form the existing
-  one-degree homology chain-map data directly; no new square primitive or
-  quotient decoder is introduced.
-  The formal Freyd short-exact-row and bounded-short-exact modules retain
-  the existing chain agreement, actual whole homology, and mono/epi/exactness
-  witnesses, then iterate those rows over the actual two bounded chain maps.
-  All constructors/projections are transparent; effective witnesses remain
-  explicit rather than implying a closed quotient-level decision procedure.
-  `emdash3_2_commutative_algebra_freyd_images.lp` derives the witnessed formal
-  cokernel-of-kernel coimage, kernel-of-cokernel image, comparison, and
-  factorization. Given explicit comparison monic/epic agreements, it computes
-  both normality inverse candidates and packages their derived inverse laws as
-  `IsoEvidence`; it does not take an isomorphism as data.
-  `emdash3_2_computational_weak_pullbacks.lp` derives weak pullbacks from the
-  weak kernel of `[alpha,-gamma]`; its cone is the existing annihilator fibre
-  of an arrow into the selected biproduct, not a manual square record. Its
-  compatibility/cone theorem modules derive `alpha o p = gamma o q` by
-  additive cancellation and turn an explicit equalizing pair back into that
-  internal cone.
-  `emdash3_2_computational_fiber_products.lp` replaces that weak kernel by the
-  selected genuine kernel. The same internal cone now has a contractible
-  factor space; ordinary compatibility, both projection reconstructions, and
-  the forgetful weak-pullback view are derived without a new rule.
-  `emdash3_2_computational_pushouts.lp` is the direct rule-free dual. It uses
-  the selected cokernel of `iota_1 o alpha + iota_2 o (-gamma)`; internal
-  cocones, contractible cofactors, both injection reconstructions, ordinary
-  compatibility, and conventional copair introduction are derived from the
-  existing additive/cokernel owners.
-  `emdash3_2_abelian_fiber_pushout_stability.lp` proves that the selected
-  fiber-product projection opposite an epic arrow is epic and the selected
-  pushout injection opposite a monic arrow is monic. The proof derives the
-  defining difference arrow's cancellation, then uses the existing normal
-  epi/mono factor spaces; it adds no property postulate, rule, or unifier.
-  `emdash3_2_preabelian_bimorphism_lemmas.lp` proves the converse
-  kernel/cokernel cancellation criteria by factoring differences through the
-  contractible universal spaces, and proves monic/epic composition. These
-  rule-free lemmas are the active prerequisite for the canonical
-  coimage–image bimorphism theorem.
-  `emdash3_2_abelian_snake_lemma.lp` owns the rule-free generic snake spine:
-  one triple-zero path constructs the selected `gamma` cokernel colift and
-  `alpha` kernel lift together with their kernels/cokernels, fiber product,
-  pushout, epic `p1`, and monic `q2`.
-  `emdash3_2_abelian_snake_six_term_kernels.lp` selects `Ker(alpha)` and
-  `Ker(beta)` and constructs the first two arrows of the six-term snake
-  sequence by the existing kernel universal property. Both reconstruction
-  paths retain their literal kernel-lift endpoints; adjacent-zero and exactness
-  positions remain downstream.
-  `emdash3_2_abelian_snake_six_term_cokernels.lp` is the direct rule-free
-  mirror: it selects `Coker(beta)` and `Coker(gamma)` and constructs
-  `Coker(alpha) -> Coker(beta) -> Coker(gamma)` by existing cokernel
-  universality. Its reconstruction paths remain literal colift endpoints.
-  The paired kernel/cokernel zero-foundation modules calculate the two outer
-  composites after the selected structural embedding/projection. Their small
-  cancellation modules then use generic selected-kernel/cokernel zero
-  cancellation to obtain the first and fourth adjacent-zero points. The split
-  preserves exact owner shapes under the 90-second target bound.
-  The one-map kernel/cokernel foundation modules expose the two maps adjacent
-  to the connecting arrow without loading the unrelated half of either
-  six-term side. The inner-zero modules select the corresponding fiber factor
-  and pushout cofactor, retain both projection/injection reconstructions, and
-  derive the second and third adjacent-zero points by cancelling monic `q2`
-  and epic `p1`. The cross-branch checks use a fresh isolated object chain so
-  every source dependency and final equation remains checked by a separate
-  bounded invocation; no object cache is retained and no proof is opaque.
-  `emdash3_2_abelian_snake_six_term_result.lp` retains the existing whole
-  connecting-factor result, the other four canonical arrows, and all four
-  adjacent-zero points in one dependent snapshot. Its projection module
-  exposes the five arrows and four paths; the canonical reviewer confirms
-  that every projection reduces back to its existing named owner.
-  The first six-term exactness tranche proves exactness at `Ker(beta)` by the
-  local-cover criterion. Canonical exactness of
-  `A -> B -> Coker(A -> B)` supplies an epic cover; monicity of `mu` forces its
-  preimage through `Ker(alpha)`, and monicity of `k_beta` proves the required
-  covered factorization. No image/kernel object equality or manual diagram is
-  introduced.
-  The second tranche proves exactness at `Ker(gamma)`. It pulls an arbitrary
-  connecting-kernel test back along epic `p1`, uses the existing
-  `beta o p2` lift into `Ker(lambda)`, covers that lift through `alpha`, and
-  factors the corrected difference through `Ker(beta)`. The `epsilon` and
-  `iota` reconstructions identify the resulting second snake map with the
-  doubly covered test. Each retained cover is an existing fiber-product or
-  exactness-cover point; the implementation adds no element or diagram syntax.
-  The third tranche proves exactness at `Coker(alpha)`. A pushout of monic
-  `q2` extends an arbitrary test killed by the connecting arrow. Canonical
-  kernel-row extension then gives a second monomorphism; the corrected
-  coextension difference descends through `Coker(beta)`. Cancelling epic
-  `pi` identifies that colift with the doubly extended test. The resulting
-  extension family proves epicity of the actual boundary, with no new rule.
-  The fourth tranche proves exactness at `Coker(beta)`. A test killed by
-  `Coker(alpha) -> Coker(beta)` gives a kernel-annihilated test after
-  `c_beta`. Canonical extension through `lambda` descends through
-  `Coker(gamma)` by epic `epsilon` cancellation; epic `c_beta` supplies the
-  final reconstruction. The same extension criterion proves exactness.
-  The six-term exact-result modules now combine the snapshot with all four
-  witnesses in a dependent Sigma. Their pair functions use the actual stored
-  arrows and zero points; exactness is selected homology exactness on those
-  pairs. Canonical pair identities are checked reflexivity paths, and the
-  generic `computational_exactness_reindex` lemma applies the existing proofs
-  before expanding their large predicates. No object identity, new rule, or
-  unifier is assumed. The generic constructor rejects evidence for a different
-  snapshot; canonical projections return their declared exactness instances.
-  `emdash3_2_abelian_snake_normal_epi_foundation.lp` and
-  `emdash3_2_abelian_snake_normal_epi.lp` derive the first normal test from
-  the image cocone consequence and select `u` by normal-epi colifting.
-  `emdash3_2_abelian_snake_normal_mono_foundation.lp` and
-  `emdash3_2_abelian_snake_normal_mono_test_foundation.lp` derive the dual
-  lambda-kernel and `Coker(q2)` test. `emdash3_2_abelian_snake_connecting.lp`
-  cancels along epic `p1` and selects the connecting arrow by normal-mono
-  lifting; `emdash3_2_abelian_snake_connecting_result.lp` packages both final
-  universal-factor points and their reconstruction paths. The split follows
-  mathematical owner boundaries and keeps each target below 90 seconds; no
-  test, square, or connecting arrow is postulated.
-  `emdash3_2_abelian_snake_covered_reconstruction.lp` derives the connecting
-  arrow after the original epic cover by cancelling the existing monic
-  pushout injection. Its original lambda-kernel lift becomes a genuine
-  factor point; no factor or equation is postulated.
-  The chain-pair cycle-lift and snake-row target-cycle modules factor this
-  covered arrow into the cycles of a supplied whole homology. Three
-  existing short-exact rows and their row maps derive the column chain
-  pair; monicity of the lower inclusion proves the required annihilation.
-  The result remains an existing Hom-factor point, not an assumed normal
-  test or a completed homology connecting map.
-  `scripts/check_snake_row_target_cycles.sh` checks these five owners and
-  four reviewers against fresh exact dependency objects, with 90 seconds
-  per target. This removes repeated import checking without hiding proof
-  bodies; direct source/reviewer joins were measured near the ceiling.
-  The normal-mono epic/cycle-factor and Hom-factor-pasting modules derive
-  the target normal test from that existing cycle point. The row/homology
-  normal-test and factor owners preserve the supplied H and construct the
-  whole factor of the compared snake arrow through H's monic cokernel
-  inclusion. The comparison's projection law uses consistent existing
-  endpoint observations; no new primitive, rule, opacity or equality
-  assumption is introduced. `scripts/check_snake_row_target_homology.sh`
-  stages this dependency join with 90 seconds per source/reviewer. Source
-  boundary descent and full homology-window exactness remain downstream.
-  The Hom-factor chain-zero and short-exact-row projection modules derive
-  the right-column chain law and whole projection through the top row's
-  epic arrow, retaining the original components and compatibility paths.
-  They add no rule or unifier and do not yet supply source-boundary descent.
-  The kernel-domain comparison factor and source-row cycle/boundary modules
-  retain the original inverse cycle comparison and its composite with the
-  supplied source homology boundary as whole Hom factors. Their reconstruction
-  is established. Generic second-map postcomposition and the row comparison
-  now identify the compared boundary after the top epic cover with a factor
-  through the second snake map. The original inner zero law then proves its
-  annihilation by the connecting arrow. The measured join is checked by
-  `scripts/check_snake_row_source_boundary.sh`.
-  The cokernel-monic-factor descent and homology-connecting modules now
-  descend through that original source homology cokernel. Their public arrow
-  goes between the two supplied homologies and retains reconstruction as a
-  whole Hom-precomposition factor. `scripts/check_homology_connecting.sh`
-  checks the exact source/target dependency join with individual bounds.
-  Generic window exactness and whole-complex/homology-functor packaging are
-  not supplied by this arrow-level construction.
-  `emdash3_2_commutative_algebra_freyd_cokernels.lp` owns formal Freyd
-  cokernel presentations, projections, and colifts parameterized by explicit
-  zero-composite agreements. It does not decode arbitrary truncated equality
-  back into a raw agreement witness.
-  `emdash3_2_commutative_algebra_freyd_kernels.lp` consumes an explicit
-  finite-free weak-kernel capability, performs the two weak-pullback
-  construction, and retains zero/reconstruction agreements through lift and
-  quotient uniqueness.
-  The finite-free weak-pullback and Freyd kernel-choice modules also expose
-  its per-arrow selected data: two dependent whole weak pullbacks, retaining
-  their all-test factor operations and the actual ranks and projections.
-  Their constructors reuse generic weak-kernel and Sigma owners; finite
-  matrix equations alone do not provide these universal operations.
-  Literal matrix-provider introductions retain those all-test operations
-  and laws at explicit ranks. The proof-CAS adapter binds native selected
-  algorithms through explicit trusted provider semantics for the represented
-  polynomial coefficient ring; it rejects nonzero coefficient-ring quotient
-  reification, without forbidding presented modules over the original ring.
-  The selected-kernel embedding/lifting/uniqueness modules own the shared
-  proof bodies at those two choices. The legacy W-indexed API selects its
-  original packages and delegates, retaining its signatures and qualified
-  helper names. Its first-stage observations remain independent of stage
-  two; raw zero and reconstruction agreements are still explicit inputs.
-  The selected-homology core similarly retains per-arrow choices and either
-  the canonical lift or a supplied raw boundary with reconstruction. Its
-  cokernel and exactness refer to that same stored boundary. The original
-  W-indexed homology names remain selector wrappers with unchanged signatures.
-  The actual-homology matrix helper retains a supplied native boundary and
-  its semantic reconstruction equation, then reuses the original epicity
-  witness as exactness at that boundary. Its all-position proof-CAS consumer
-  constructs homology/exactness terms for each actual interior of a retained
-  replay and checks them with the formal spine. This selected-result evidence
-  remains distinct from the generic homology-window theorem.
-  `emdash3_2_commutative_algebra_freyd_witnessed_preabelian.lp` combines the
-  existing Freyd additive structure with both canonical constructions as one
-  capability-parameterized witnessed surface. Its universal tests retain raw
-  zero/reconstruction agreements; it is not a closed quotient-level
-  `PreAbelianCategory` and does not decode arbitrary truncated paths.
-  `emdash3_2_commutative_algebra_freyd_normal_monomorphisms.lp` implements the
-  witness-enriched Construction 3.14 through raw lift and quotient
-  reconstruction using block splitting and the first weak pullback. Its
-  raw-competitor uniqueness layer remains downstream.
+- `emdash3_2_preadditive_categories.lp` and
+  `emdash3_2_additive_categories.lp` own set-valued abelian Homs, bilinear
+  composition and selected biproducts/zero. Finite-free and Freyd instances
+  retain their original matrix and quotient computation. The generic
+  weak-kernel and ordinary kernel/cokernel factor-fibre interfaces remain
+  useful observation/provider vocabulary, not the primary whole K/Q API.
+- Formal Freyd cokernel/kernel and selected-provider modules retain raw
+  agreements, actual ranks/projections and all-test factor operations.
+  Witnessed pre-Abelian/Abelian packages keep finite-free weak-kernel
+  capabilities explicit. They are not closed quotient-effective models;
+  arbitrary truncated equality cannot be decoded into a chosen matrix
+  witness. Raw relation preservation, quotient equality and universal
+  provider/model semantics are distinct contracts. The CAS boundary cannot
+  infer the latter from a finite list of matrix equations.
 - `emdash3_2_triangular_binary_products.lp`,
   `emdash3_2_terminal_objects.lp`, and
   `emdash3_2_cartesian_categories.lp` own selected whole binary/empty-product

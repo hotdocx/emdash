@@ -2,6 +2,22 @@
 
 Date: 2026-09-02
 
+Current native homology route (2026-09-16): the goal and book 0.9.0-dev
+update are complete under the revised scope; both native displayed CAS
+certificates are qualified under their explicit contracts. Start with the
+[final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+and the [categorical consolidation review](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+for current owners, remaining path uses and proposed dependency/retirement
+work. Op/duality and the large six-term comparison remain deferred.
+The user accepted that review as the new consolidation living plan and
+authorized local checkpoints after an initial main/Pages publication.
+
+The dated milestone paragraphs below are historical snapshots. Their “next”
+or “remains required” wording is local to the stated checkpoint, not a current
+work queue. In particular, displayed LES transport, the final audit and the
+book update are complete. Current scope is the preceding audit/review and
+AGENTS.md; preserve the snapshots as decision evidence.
+
 Displayed native snake exactness (2026-09-15): the original four Ω witnesses
 now yield one checked certificate for the nonsplit CAS diagram, through
 derived input/public-pair links and existing arrow interpretations. No

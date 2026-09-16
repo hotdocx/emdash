@@ -67,14 +67,18 @@ particular, constructed Cat-valued sheafification is distinct from the
 supplied commutative-ring-valued structure-sheaf and locality capabilities
 used by the current scheme presentations.
 
-The additive/homological layer now supplies coherent kernel/cokernel
-adjunction presentations, derived whole homology on native zero diagrams,
-direct and whole connecting interfaces, generic snake/window exactness and
-finite assembly. The native polynomial Freyd implementation computes
-nonsplit bounded examples, and typed proof–CAS bindings reuse their exact
-presentations and witnesses. The [final audit](../docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
-distinguishes supplied model semantics, native effectiveness and the deferred
-final symbolic endpoint theorem.
+The additive/homological layer takes whole kernel/cokernel adjunctions
+J⊣K and Q⊣I as primary. They construct whole H, the direct whole connecting
+transformation δ, and canonical categorical exactness. The general native
+snake retains all six terms without assuming its outer input maps monic or
+epic; its comparison with the native LES includes the connecting-map sign.
+Both constructions have checked displayed proof–CAS certificates on the
+nonsplit polynomial-module example, reusing the selected presentations.
+The [native final audit](../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+records the supplied model/normality/interpretation contracts and the deferred
+large six-term comparison. The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+maps the reusable adjunction, diagram, terminal-family, product and pullback
+owners, distinguishing declarations from derived operations and proposals.
 
 ## Where to start
 
@@ -529,8 +533,9 @@ make health
 
 Follow `AGENTS.md` before changing Lambdapi. In particular, probe owner
 positions before adding a rule, compare warnings against the recorded
-baseline, keep every Lambdapi invocation within 90 seconds per target, and
-refresh generated catalog/health artifacts only through their owners.
+baseline, and use the bounded checker wrapper. The default is 90 seconds
+per target; selected heavy native consumers have documented measured resource
+profiles. Refresh generated catalog/health artifacts only through their owners.
 
 The current groupoidal vertical slice includes a successor-localized Integer,
 an opaque Circle HIT with checked `Hom(Circle,Circle) ≃ Integer`
@@ -561,11 +566,14 @@ join-built ordinals, and iterated outgoing paths construct canonical dependent
 simplexes in variable dimension while preserving the exact
 mapping-category and degeneracy boundaries.
 
-Chapter 30 adds selected Cartesian and indexed structures. Chapter 31 adds
-whole K/Q/H and connecting, generic exactness, and a worked nonsplit example
-showing how the native matrices and relation witnesses enter the formal
-interface. The opening material and bibliography give the book DOI and code
-repository; publication versions remain distinct from the current source.
+Chapter 30 adds selected Cartesian and indexed structures. In local edition
+0.9.0-dev, Chapters 12 and 31 explain whole adjunction universality,
+categorical presentation comparisons, native K/Q/H/δ, the general snake and
+its LES comparison, and both nonsplit displayed certificates. General
+categorical terminality remains a proposed refinement of the current
+ordinary-family interface. The opening material and bibliography give the
+book DOI and code repository; the archived publication is distinct from this
+local development edition.
 
 From the repository root:
 

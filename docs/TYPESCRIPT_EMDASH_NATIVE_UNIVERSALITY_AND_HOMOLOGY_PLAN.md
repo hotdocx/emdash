@@ -34,9 +34,12 @@ The six-term direct comparison remains explicitly deferred after the bounded
 review, and Op/duality remains reserved for a separate later goal. No further
 work or experiment is scheduled by this completed plan.
 
-The [final audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md) tracks
+The [final audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md) records
 requirement-by-requirement evidence, structural assumptions, validation and
-the remaining book/artifact gate.
+the completed book/artifact gate. The subsequent
+[categorical consolidation review](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+inventories reusable support, remaining path uses and proposed source
+retirement. It does not reopen this goal or its deferred experiments.
 
 The bounded C3b2 review is now complete (2026-09-16). Its first-step
 categorical comparison passes, while the current whole-result package

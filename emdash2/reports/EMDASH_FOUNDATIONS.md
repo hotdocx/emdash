@@ -2,6 +2,20 @@
 
 Last reviewed: 2026-08-30
 
+Homological reading update (2026-09-16): the primary native interface now
+uses whole J⊣K and Q⊣I, with whole H/δ, categorical Im→Ker exactness and
+direct native LES/snake proof–CAS certificates. Ordinary record formulations
+below include retained reference material and historical milestones. Their
+old “next” statements do not describe the completed native goal. Read
+[book Chapter 31](../book/chapters/31-additive-abelian-and-homological-computation.md),
+the [final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+and the [consolidation review](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+for the current mathematical route and auxiliary adjunction/product/terminal
+owners. The primary general categorical terminality refinement remains a
+proposal; the implemented family DefIso extensions retain ordinary guards.
+Op/duality and the large six-term comparison remain deferred. A full extraction
+of the historical homology prose is proposed separately from source refactoring.
+
 Critical variance notice added 2026-09-08: the current encoding of whole
 internal opposite admits a closed inhabitant of the decoded empty type.
 The issue is inherited and independently reproduced, not introduced by the

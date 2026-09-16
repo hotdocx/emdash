@@ -22,11 +22,12 @@ representability, locality, and construction hypotheses explicit.
 A native TypeScript algebra engine now complements that formal layer with
 exact polynomial/module algorithms and categorical whole-operation lowering.
 Typed proof–CAS bindings retain the actual presentations, relation witnesses
-and universal choices. Coherent kernel/cokernel adjunctions give whole H;
-snake and homology-window exactness, a whole connecting transformation and
-finite assembly meet nonsplit polynomial-module computations. The
+and universal choices. Whole kernel/cokernel adjunctions are the primary
+interface for H, the connecting transformation δ and categorical exactness.
+The native LES and general snake both have checked displayed proof–CAS
+certificates for nonsplit polynomial-module computations. The
 [worked book example](./emdash2/book/chapters/31-additive-abelian-and-homological-computation.md#homology-nonsplit-worked-example)
-and [boundary audit](./docs/TYPESCRIPT_EMDASH_HOMOLOGY_FINAL_BOUNDARY_AUDIT.md)
+and [native final audit](./docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
 explain both the connection and its supplied-model assumptions. Native affine
 localization and varying-ring Čech cochains are also available; Čech
 cohomology is not yet supplied by that cochain layer.
@@ -313,12 +314,15 @@ external naturality evidence when no internal construction owns it.
   and locality capabilities. The projective-line package retains its global
   object and actual overlap; representation-independent schemes, graded
   `Proj`, and general projective space remain open.
-- Whole H and connecting use supplied coherent universal presentations and
-  normality. The native bounded result and checked formal finite-window
-  iterator are available; the final symbolic zero-endpoint attachment is
-  explicitly deferred. Closed quotient-effective models, unrestricted CAS
-  reduction and Čech cohomology are separate work, not consequences of the
-  displayed examples.
+- Whole K/Q/H and δ use supplied adjunction-model, normality and
+  interpretation contracts. The native displayed LES/snake certificates
+  derive output exactness without a new output assumption. The large
+  six-term package comparison and earlier symbolic zero-endpoint experiment
+  remain deferred; the retained ordinary finite-window iterator is a
+  separate reference interface. The [consolidation review](./docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+  records reusable categorical owners, remaining observation paths and
+  proposed retirement of superseded wrappers. Closed concrete models,
+  unrestricted CAS reduction and Čech cohomology remain separate work.
 - Systematic groupoidal specialization for every former, a generic
   category-to-groupoid reflector, and general normalization, confluence,
   canonicity, consistency, and semantic soundness for the combined calculus
