@@ -4779,6 +4779,102 @@
           "symbol": "freyd_native_snake_first_exact_at"
         }
       ]
+    },
+    "ORDINARY-ADJUNCTION-FAMILIES": {
+      "status": "checked",
+      "statement": "The explicitly declared ordinary postcomposition adjunction lift retains the original functors, projects the original whiskered unit/counit, and supplies derived whole-family mate operations.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_adjunction_families.lp",
+          "symbol": "one_cat_postcomp_adjunction"
+        },
+        {
+          "file": "emdash3_2_one_cat_adjunction_families.lp",
+          "symbol": "one_cat_functor_category"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_adjunction_families.lp",
+          "symbol": "one_cat_adjunction_family_transpose_func"
+        }
+      ]
+    },
+    "ORDINARY-PRODUCT-ADJUNCTION": {
+      "status": "checked",
+      "statement": "The declared ordinary diagonal/product adjunction uses the original BinaryProducts choice; whole family pairing and unpairing are derived from its mate comparison.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_product_adjunction.lp",
+          "symbol": "one_cat_binary_product_adjunction"
+        },
+        {
+          "file": "emdash3_2_one_cat_product_adjunction.lp",
+          "symbol": "one_cat_product_category"
+        },
+        {
+          "file": "emdash3_2_one_cat_product_families.lp",
+          "symbol": "one_cat_product_family_pair_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_product_families.lp",
+          "symbol": "one_cat_binary_product_adjunction"
+        }
+      ]
+    },
+    "WHOLE-CATEGORICAL-CONTRACTION": {
+      "status": "checked",
+      "statement": "Category and coherent-family contractions are transparent instances of existing OmegaEquivAlong; evaluation retains both inverse slots, and ordinary object contractibility is a derived observation.",
+      "owners": [
+        {
+          "file": "emdash3_2_categorical_contractions.lp",
+          "symbol": "CatContraction"
+        },
+        {
+          "file": "emdash3_2_categorical_contractions.lp",
+          "symbol": "CatdContraction"
+        },
+        {
+          "file": "emdash3_2_categorical_contractions.lp",
+          "symbol": "cat_contraction_objects_along"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/categorical_contractions.lp",
+          "symbol": "catd_contraction_at"
+        },
+        {
+          "file": "examples/categorical_contractions.lp",
+          "symbol": "cat_contraction_objects"
+        }
+      ]
+    },
+    "ORDINARY-TERMINAL-ADJUNCTIONS": {
+      "status": "checked",
+      "statement": "Two explicit ordinary terminal/initial adjunction presentations give derived whole unit/counit and Hom equivalence views, retaining selected inverses and the original terminal runtime forms.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunctions.lp",
+          "symbol": "one_cat_terminal_adjunction"
+        },
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunctions.lp",
+          "symbol": "one_cat_initial_adjunction"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_terminal_adjunctions.lp",
+          "symbol": "one_cat_terminal_adjunction_diagram_iso"
+        },
+        {
+          "file": "examples/one_cat_terminal_adjunctions.lp",
+          "symbol": "one_cat_initial_hom_equivalence"
+        }
+      ]
     }
   }
 }

@@ -3,7 +3,7 @@ LONGER TECHNICAL APPENDIX
 
 Functorial Type Theory in emdash v3.2
 
-Local development snapshot reviewed 2026-09-16, alongside book 0.9.0-dev.
+Local development snapshot reviewed 2026-09-16, alongside book 0.9.1-dev.
 This draft and the local book update have not been externally published.
 
 Abstract. Functorial Type Theory asks what happens when the substitutional
@@ -863,9 +863,14 @@ The homological development also supplies ordinary whole-family comparisons
 for `h:const_t⇒F` when t is initial. Their existing DefIso inverses retain
 identity endpoint components. These are declared structural extensions with
 an explicit ordinary-target guard, not consequences of the earlier β rules
-alone. A primary higher terminality interface controlling the whole varying
-Hom category is proposed but not implemented. Contractibility of its object
-groupoid alone does not control noninvertible higher arrows.
+alone. Whole categorical contraction now specializes Ω-equivalence along
+D→1, with a coherent family version along E→const₁ and retained whole inverse
+data. Ordinary terminal/initial capabilities also have explicit guarded
+adjunction presentations p⊣t and t⊣p. These are declared structural extensions;
+their mate operations and ordinary uniqueness observations are derived.
+A primary higher terminality replacement controlling the whole varying Hom
+category is still proposed. Contractibility of its object groupoid alone does
+not control noninvertible higher arrows.
 
 The same introduction/elimination discipline becomes indexed in slices. For
 `u : X → Y`, postcomposition always gives
@@ -1226,6 +1231,14 @@ kernel, homology or connecting selection or a legacy-model prerequisite.
 The concrete whole model is still supplied; automation of the assembly is
 not a closed derivation of every universal provider or every native algorithm.
 
+Shared chain inputs and ordinary H records now have independent owners.
+Superseded model/connecting wrappers are retired; useful matrix/provider
+algorithms and the ordinary iterator remain separate references. Γ, the
+proposed whole classification of coherent family inputs and corresponding
+whole H comparison, is a meaningful unqualified follow-up. The current point
+comparisons already use categorical maps with retained inverses; existing
+native computations do not require the proposed upgrade.
+
 
 From invertibility sieves to sheafification
 -------------------------------------------
@@ -1486,7 +1499,7 @@ SHORTER TECHNICAL APPENDIX
 Book: https://doi.org/10.5281/zenodo.21544186
 Code: https://github.com/hotdocx/emdash
 
-Local development snapshot: 2026-09-16, book 0.9.0-dev. The DOI identifies
+Local development snapshot: 2026-09-16, book 0.9.1-dev. The DOI identifies
 the archived publication, not a publication of this updated draft.
 
 This is a development snapshot, not a global consistency claim. Known
@@ -2009,8 +2022,17 @@ or legacy-model prerequisite. The frontend automates their assembly while
 retaining every selected presentation. A closed construction of all supplied
 model contracts and verification of every native algorithm remain separate
 work. The ordinary postcomposition-adjunction and terminal-family DefIso
-extensions are explicit structural declarations; a general categorical
-terminality refinement is still proposed.
+extensions remain explicit structural declarations. Whole categorical
+contraction now uses the existing Ω-equivalence interface with retained inverse
+data. Ordinary terminal/initial adjunction presentations are explicit guarded
+extensions; a general higher terminality replacement remains future work.
+
+Shared raw inputs and optional ordinary H records now have independent owners.
+Superseded homology model/connecting wrappers have been retired from the active
+library, while the native LES/snake and useful CAS/provider algorithms remain.
+The actual categorical point comparisons retain their inverse data. A stronger
+whole input/H comparison, Γ, is preserved as an unqualified follow-up; it is
+not a prerequisite for the current checked nonsplit computations.
 
 ---
 

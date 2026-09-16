@@ -159,6 +159,28 @@ from those pointwise paths.
 > triangular map. No free-cartesian syntax or global commuting decision
 > procedure is claimed.
 
+### Whole Pairing Through The Product Adjunction
+
+In an ordinary category, the same chosen product functor P is right adjoint
+to the diagonal Δ:C→C×C. The computational presentation explicitly supplies
+Δ⊣P for the original binary-product choice. Its counit is the pair of original
+projections, and its unit component is the original pairing of two identities.
+It selects no second product object.
+
+The family lift from [Chapter 12](#chapter-12) now transposes whole
+transformations. Given U,V,W:B→C, a pair of transformations U⇒V and U⇒W
+has one whole pairing U⇒P(V,W). Unpairing uses the original projections;
+the adjunction owns their cancellation. This reusable Cartesian interface
+is upstream of the additive and homological applications in Chapter 31.
+
+<!-- evidence:ORDINARY-PRODUCT-ADJUNCTION -->
+
+> **Formal status — checked interface.** Evidence
+> `ORDINARY-PRODUCT-ADJUNCTION`. `one_cat_binary_product_adjunction` and
+> the ordinary product-category profile are declared structural operations
+> over the existing `BinaryProducts` data. Whole family pairing/unpairing
+> and their formulas are derived operations.
+
 ## 30.3 The Empty Product
 
 A chosen terminal object $t$ is the empty product. Its computational structure
@@ -192,7 +214,7 @@ f=!_A
 \tag{30.15}
 $$
 
-is not oriented as a variable-headed rewrite. Instead the entire Hom
+is not oriented as a variable-headed rewrite. Instead the object/groupoid Hom
 classifier $\operatorname{Hom}_C(A,t)$ is contractible, recentered at the
 component $!_A$. Equation (30.15) is then a derived equality path. In
 particular $!_t=\operatorname{id}_t$ is derived without forcing every visible
@@ -209,6 +231,63 @@ endomorphism of a terminal object to rewrite before its context is known.
 The thin selected cartesian package merely pairs the existing binary-product
 and terminal-object capabilities. It adds no product, projection, terminal
 arrow, rewrite rule, or unification rule of its own.
+
+### Whole Categorical Contraction
+
+Contractibility of the object groupoid of D does not account for its
+noninvertible arrows. A categorical contraction instead supplies a whole
+equivalence D≃1, where 1 is the terminal category. The current native
+interface fixes the canonical forward functor D→1 and retains the inverse
+functors and the existing whole inverse laws. Object-groupoid
+contractibility is derived afterward as an observation of this data.
+
+For a family E:K→Cat, the coherent version contracts the whole family map
+E→const₁. Its selected inverse is one whole dependent functor. Evaluation
+at k retains that inverse in the fibre E(k); it does not independently
+choose a contraction for every fibre. The current Ω interface has
+equality-valued laws between whole functors. This use of that interface does
+not assert a general univalence theorem or reconstruct directed action from
+objectwise paths.
+
+<!-- evidence:WHOLE-CATEGORICAL-CONTRACTION -->
+
+> **Formal status — checked.** Evidence `WHOLE-CATEGORICAL-CONTRACTION`.
+> `CatContraction` and `CatdContraction` transparently specialize the existing
+> `OmegaEquivAlong` interface. Inverse evaluation and the derived ordinary
+> contraction are checked; no additional equivalence primitive is introduced.
+
+### Terminal And Initial Adjunction Presentations
+
+Write p:C→1 for the canonical functor and t:1→C for the chosen object.
+Terminality has the categorical presentation p⊣t; initiality has the dual
+presentation t⊣p. Their units and counits are whole transformations.
+
+For ordinary C, the current extension supplies these two adjunctions from
+the original selected terminal/initial capabilities. The generic adjunction
+comparison then gives whole Hom mate functors, retained inverses and ordinary
+uniqueness observations. The maps into 1 are the actual selected mates; they
+are not cast to a preferred functor by equality transport.
+
+Existing whole diagram normalizers compare the unit/counit arrow families
+with the original terminal/initial arrow families. Both directions have
+identity components at the walking-arrow endpoints. This keeps the original
+terminal normal forms: the terminal component at t is propositionally equal
+to idₜ and remains computationally distinct from it. Callers supply no
+naturality-square data.
+
+<!-- evidence:ORDINARY-TERMINAL-ADJUNCTIONS -->
+
+> **Formal status — checked interface.** Evidence
+> `ORDINARY-TERMINAL-ADJUNCTIONS`. The two ordinary adjunction presentations
+> are explicit structural declarations. Their unit/counit, Hom comparison,
+> inverse and ordinary contraction views are derived. They are not claimed
+> as derivations from the original terminal β rules alone.
+
+The general higher replacement of the primary terminality interface remains
+a separate qualification problem. It must specify a whole Hom comparison
+and its profiles, and distinguish the current computational DefIso adjunction
+contract from a weaker higher equivalence. Removing the ordinary guard from
+these declarations would not establish that extension.
 
 ## 30.4 Direct And Weighted Products
 

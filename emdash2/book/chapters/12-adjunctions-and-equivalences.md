@@ -160,6 +160,35 @@ The component formulas above are the mathematical reading of this package.
 The stable runtime owner is the profunctor comparison, not a global rewrite
 that expands every mate into a unit/counit composite.
 
+### Adjunctions On Whole Functor Families
+
+Let F:R→L and G:L→R be a chosen adjoint pair, F⊣G. For a parameter category
+B, postcomposition gives functors between the categories of B-indexed families.
+In the ordinary-target presentation they again form an adjunction:
+
+(F∘−) ⊣ (G∘−).
+
+For A:B→R and D:B→L, a whole transformation F∘A⇒D therefore has a mate
+A⇒G∘D. The unit at A is the original unit whiskered by A; the counit at D
+is the original counit whiskered by D. The same Hom comparison supplies both
+mate directions and their inverse computation. Naturality in the B-variable
+belongs to these whole transformations, so a caller supplies no separate
+family of naturality-square proofs.
+
+The current interface retains the original F and G and explicitly requires
+R and L to be ordinary categories. It declares the postcomposition adjunction
+lift and the ordinary functor-category profile as structural operations. It
+does not claim to construct those operations from the older pointwise β rules.
+This distinction applies even when a mathematical adjunction is familiar:
+the checked computational presentation includes selected action and cuts.
+
+<!-- evidence:ORDINARY-ADJUNCTION-FAMILIES -->
+
+> **Formal status — checked interface.** Evidence
+> `ORDINARY-ADJUNCTION-FAMILIES`. The structural owners are
+> `one_cat_postcomp_adjunction` and `one_cat_functor_category`.
+> Whole mate functors and their observations are derived from that data.
+
 ### Whole Universal Operations
 
 A computational universal construction can take the adjunction itself as its

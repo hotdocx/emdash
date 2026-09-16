@@ -59,12 +59,16 @@ central proof; Chapters 9--17 form the ratified category-theory, universal-
 construction, and directed-duality spiral. Chapters 18--24 develop local
 geometry, 25--28 groupoidal and Gray structure, 29 dependent simplexes,
 30 Cartesian/indexed constructions, and 31 homology and proof-CAS integration.
-Local edition `0.9.0-dev` includes the native whole-universality reformulation,
-both displayed LES/snake certificates and their nonsplit example. Chapters 12
-and 31 distinguish the declared ordinary structural interfaces from derived
-homological results. General categorical terminality is still proposed; the
+Local edition `0.9.1-dev` retains the native whole-universality reformulation,
+both displayed LES/snake certificates and their nonsplit example. Chapter 12
+now exposes the ordinary whole-family adjunction lift; Chapter 30 explains
+whole product pairing, categorical contraction, and the explicit ordinary
+terminal/initial adjunction presentations. Chapter 31 distinguishes current
+whole constructions, retained ordinary observations and retired algorithms.
+General higher terminality and the new whole input/H comparison remain
+explicitly unqualified follow-up interfaces. The
 [consolidation review](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
-records where reusable adjunction/Cartesian material should be developed next.
+records the source/trust boundaries and validation.
 Appendix G owns the formal
 presentation. Contents and the evidence appendix are generated from
 their structured authorities.

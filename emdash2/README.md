@@ -78,7 +78,10 @@ The [native final audit](../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUD
 records the supplied model/normality/interpretation contracts and the deferred
 large six-term comparison. The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
 maps the reusable adjunction, diagram, terminal-family, product and pullback
-owners, distinguishing declarations from derived operations and proposals.
+owners. Superseded model/connecting wrappers are retired, shared CAS inputs
+and ordinary observations have independent owners, and whole contraction plus
+ordinary terminal/initial adjunction interfaces are qualified. The further
+whole input/H comparison remains an explicitly unqualified follow-up.
 
 ## Where to start
 
@@ -567,7 +570,7 @@ simplexes in variable dimension while preserving the exact
 mapping-category and degeneracy boundaries.
 
 Chapter 30 adds selected Cartesian and indexed structures. In local edition
-0.9.0-dev, Chapters 12 and 31 explain whole adjunction universality,
+0.9.1-dev, Chapters 12, 30 and 31 explain whole adjunction universality,
 categorical presentation comparisons, native K/Q/H/δ, the general snake and
 its LES comparison, and both nonsplit displayed certificates. General
 categorical terminality remains a proposed refinement of the current

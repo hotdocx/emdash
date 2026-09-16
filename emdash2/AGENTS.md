@@ -54,10 +54,10 @@ review in `audits/native-six-term-observation-boundary/README.md`. The original
 construction, maps, witnesses and typed inverse observations remain qualified;
 the failed comparison is not claimed proved. Do not resume that experiment
 or older endpoint/projection experiments without a new user scope.
-Book 0.9.0-dev and its artifacts are qualified. The user-authorized initial
-consolidation checkpoint df9b4778 was pushed and deployed to GitHub Pages;
-later consolidation checkpoints remain local. No action-profile integration
-is implied.
+Book 0.9.1-dev and its local artifacts are qualified. The user-authorized
+initial consolidation checkpoint df9b4778, with book 0.9.0-dev, was pushed and
+deployed to GitHub Pages; later consolidation checkpoints remain local.
+No action-profile integration is implied.
 
 The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
 is the accepted living plan for auxiliary categorical owners, remaining path
@@ -70,8 +70,10 @@ adjunction extension now live in `emdash3_2_categorical_contractions.lp` and
 `emdash3_2_one_cat_terminal_adjunctions.lp`. They preserve selected inverse
 data and terminal normal forms. The latter adds two explicit structural
 primitives guarded by OneCat(C); it is not a derivation from the old β rules.
-General higher terminality replacement remains unimplemented, and point
-comparisons do not establish whole parameter action. Operational presentation
+General higher terminality replacement remains unimplemented. The meaningful
+whole Γ/input-H comparison is an explicitly user-deferred follow-up; its
+unqualified prototype is not a regression in the current native consumers.
+Point comparisons do not establish whole parameter action. Operational presentation
 comparisons should use actual internal maps with retained inverse/coherence data and whole K/Q/H
 action; ordinary equations and proposition-valued observation evidence remain
 valid downstream views.

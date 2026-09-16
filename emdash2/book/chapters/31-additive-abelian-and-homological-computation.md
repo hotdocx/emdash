@@ -185,9 +185,10 @@ prerequisites from which the primary whole K and Q are reconstructed.
 The distinction becomes important in higher categories. Contractibility of
 the object space of a Hom category does not control its noninvertible higher
 arrows. A general categorical terminality interface should contract the whole
-Hom category coherently. That foundational refinement remains separate from
-the ordinary-target construction used here. Univalence does not remove the
-need to specify the level at which the contraction is asserted.
+Hom category coherently. [Chapter 30](#chapter-30) now distinguishes the whole contraction interface
+and the checked ordinary terminal/initial adjunction presentations. A general
+higher replacement of terminality remains separate. Univalence does not
+remove the need to specify the level at which contraction is asserted.
 
 ## 31.3 Coimage, Image, And Normality
 
@@ -762,6 +763,27 @@ separate in the proof source. Reuse requires no additional decisions.
 > retained presentations and emitted formal terms. This is not a closed
 > construction of the supplied model or a general correctness theorem for
 > every CAS operation.
+
+### Retained Observations And Retired Implementations
+
+The native proof–CAS path now imports its raw chain inputs independently of
+the former selected-homology algorithms. Ordinary H records likewise have an
+independent observation owner. An ordinary record describes the same selected
+native data; using it does not reinstate the former algorithm as a prerequisite.
+
+Superseded model facades, the old snake-derived connecting route, and unused
+comparison wrappers have been retired from active source and check registries.
+Git history preserves them. Shared matrix/provider algorithms and the explicitly
+identified ordinary finite-window iterator remain useful separate references.
+There is no obligation to compare new homology with every retired formulation.
+
+A further distinction concerns observations at a chosen parameter. The primary
+H and its induced maps are whole; the finite CAS interface also needs ordinary
+equations relating particular selected presentations and maps. Those equations
+remain appropriate observations. A proposed whole classification of coherent
+family inputs, followed by a whole family-to-global H comparison, is a natural
+further interface refinement. Its prototype is not evidence that the existing
+native computation has regressed, and it is not claimed implemented here.
 
 ## 31.12 Computation, Qualifications, And Further Work
 

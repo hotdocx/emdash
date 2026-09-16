@@ -161,7 +161,7 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.9.0-dev`;
+(`0.9.1-dev`;
 [earlier archived book record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
@@ -320,8 +320,10 @@ external naturality evidence when no internal construction owns it.
   six-term package comparison and earlier symbolic zero-endpoint experiment
   remain deferred; the retained ordinary finite-window iterator is a
   separate reference interface. The [consolidation review](./docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
-  records reusable categorical owners, remaining observation paths and
-  proposed retirement of superseded wrappers. Closed concrete models,
+  records reusable categorical owners, qualified retirement of superseded
+  wrappers, and retained ordinary observations. Whole contraction and guarded
+  terminal/initial adjunction interfaces are now explicit; the further whole
+  input/H comparison is retained as an unqualified follow-up. Closed concrete models,
   unrestricted CAS reduction and Čech cohomology remain separate work.
 - Systematic groupoidal specialization for every former, a generic
   category-to-groupoid reflector, and general normalization, confluence,
