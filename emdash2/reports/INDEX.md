@@ -10,7 +10,9 @@ They are recovery evidence, not a current implementation queue.
 
 For homology, read the
 [native final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
-and [current consolidation plan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md).
+and [consolidation final audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md).
+The [completed plan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
+links its detailed execution ledger and retained follow-ups.
 The native LES/snake proof–CAS route is qualified under its explicit contracts.
 The consolidation separates shared inputs and ordinary observations, retires
 unused wrappers, and documents generic categorical owners at Chapters 12/30.

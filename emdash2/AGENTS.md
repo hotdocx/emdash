@@ -60,10 +60,12 @@ deployed to GitHub Pages; later consolidation checkpoints remain local.
 No action-profile integration is implied.
 
 The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
-is the accepted living plan for auxiliary categorical owners, remaining path
-uses, shared-input dependency cleanup and retirement in the new consolidation
-goal. The user authorizes its initial main fast-forward/push/Pages deployment
-and local implementation checkpoints in the dedicated continuation worktree.
+is the completed plan for auxiliary categorical owners, remaining path uses,
+shared-input dependency cleanup and retirement. Its
+[final audit](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md)
+records the preserved native computations and explicit follow-ups. The initial
+main/Pages publication and local implementation checkpoints were authorized;
+later integration/publication still needs separate authorization.
 Preserve ordinary/discrete guards on the declared structural interfaces.
 The generic whole contraction definitions and ordinary terminal/initial
 adjunction extension now live in `emdash3_2_categorical_contractions.lp` and

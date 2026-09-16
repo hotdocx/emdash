@@ -1020,3 +1020,50 @@ Detailed local receipts: `cc5_book_release.log`, `cc5_book_export_repeat.log`,
 `cc5_email_receipt.json`, under `emdash2/tmp/probes/`.
 
 Next: CC-6 final source/API/trust audit and final-kernel replay receipt.
+
+
+### CC-6 — Final Audit And Native Replay
+
+CC-5 checkpoint: `1cca1d876702f5f9b72c4faf20d5852e82aff04f`.
+The [final audit](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md)
+records all scoped outcomes and the precise follow-up list. No semantic
+source changed after `5a9abf91`.
+
+The baseline-to-final source inventory covers 143 changed root LP owners:
+21 new symbols (19 definitions, two explicitly guarded structural adjunction
+presentations), 365 retired symbols, 118 retired root LP files and 46 removed
+reviewers. All surviving common declarations in that inventory are unchanged
+modulo comments/whitespace. The only nucleus changes are the two qualified
+identity projection clauses. No new output-exactness contract or opacity was
+introduced. `src/` and `tests/` are unchanged since `38e2e7c0`, so the prior
+complete compiled LES/snake runtime evidence is retained without rerunning it.
+
+The final import-graph audit has no missing root-library imports. Native LES
+certificate views, native snake exactness and the native six-term result have
+closures 329/220/175, union 360 modules. That union excludes the former
+computational H, ordinary H-family and record-connecting algorithms. The
+ordinary iterator/reference interface remains intentionally separate.
+
+All eight previously emitted LP artifacts pass under the final kernel:
+94 assertions total. Serial 6GiB/180s guard, warnings and subject reduction
+enabled, `OCAMLRUNPARAM=o=20,v=1024`, no source/contract/limit change. Times
+are 20.906s (LES diagram), 70.495s (displayed LES exactness),
+20.892/20.974/20.868s (three windows), 15.952s (snake observations),
+66.505s (snake signature conformance) and 63.322s (snake certificate).
+All five warning-inventory dimensions show only the expected two nucleus
+critical-pair removals, with no additions or parser issues. The final audit
+retains the exact artifact source hashes; local receipts/log hashes are in
+`cc6_native_formal_replay.json`, `cc6_source_audit.json` and
+`cc6_dependency_audit.json` under `emdash2/tmp/probes/`.
+
+The source-only health snapshot, strict catalogue, source TOC and 182-claim
+book evidence checks pass. Documentation local links, inbound fragments,
+owner existence and exact diff hygiene pass. No repo-wide aggregate, Γ
+experiment, Op migration or deferred six-term experiment was run.
+
+Completion: CC-0 through CC-6 are qualified under the user-selected scope.
+No required scoped item remains blocked. Γ, general higher terminality,
+six-term/older endpoint comparisons, Op/profile integration, closed model
+construction and broader homological/spectral research remain explicit
+follow-ups. Later main integration/publication is not included in this
+completion. The final audit checkpoint is documentation-only.

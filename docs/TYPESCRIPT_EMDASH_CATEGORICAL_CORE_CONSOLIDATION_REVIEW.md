@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: active — CC-5 qualified; final audit in progress; Γ retained as user-selected follow-up
+Status: complete under the user-selected scope — CC-0 through CC-6 qualified; Γ retained as follow-up
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -16,6 +16,9 @@ Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
 Checkpoint/decision ledger:
 [TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md).
 The plan keeps current scope and gates; the ledger owns chronological receipts.
+
+Completion evidence:
+[categorical consolidation final audit](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md).
 
 Reviewed checkpoint: `2b1066c6e7b7489e954581f6473bb0ba75da8975`
 
@@ -38,8 +41,8 @@ justified whole formulation abandoned merely because it is new. The completed ca
 boundary from the meaningful whole-interface enhancement. The user then
 explicitly selected finishing consolidation/book/audit first and retaining Γ
 as a concrete follow-up. That refinement is preserved, not abandoned.
-Book/document consolidation is qualified. The final source/API/trust audit
-and native proof–CAS replay are the current queue. The checked retirement and
+Book/document consolidation, the final source/API/trust audit and the
+94-assertion native proof–CAS replay are qualified. The checked retirement and
 identity-projection improvements remain qualified. The initial documentation
 checkpoint had no semantic changes; later implementation is recorded below.
 
@@ -318,7 +321,7 @@ typecheck or renewed normalization probe was run.
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Qualified independent portion; general higher replacement has recorded prerequisites |
 | CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Qualified consolidation; Γ follow-up explicitly selected by user |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Qualified; book 0.9.1-dev remains local |
-| CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | In progress |
+| CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | Qualified; final audit and all 94 emitted native assertions pass |
 
 For each implementation slice, record the hypothesis, actual affected owners,
 baseline, validation command/resource profile, warning comparison and outcome
@@ -349,8 +352,10 @@ Detailed checkpoints, source identities, warning comparisons, resource
 receipts and the latest scope decision are preserved in the
 [execution ledger](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md).
 
-Current queue: finish the source/API/trust audit and replay the affected
-native proof–CAS evidence under the final source. Book, reading-route and
-email-draft updates are qualified in CC-5.
-The user-selected Γ follow-up is retained with a concrete audit fragment and
-qualification requirements; it does not block this goal's completion.
+No scoped implementation queue remains. The final audit records the exact
+source/trust boundary and follow-up list. Book, reading-route and email-draft
+updates are qualified in CC-5; the final-kernel replay passes in CC-6.
+The user-selected Γ follow-up retains its concrete audit fragment and
+qualification requirements. It is not a claimed completed interface and does
+not block this goal's completion. Later main integration/publication remains
+separately authorized work.

@@ -23,6 +23,9 @@ records the current source separation and retirement: shared raw inputs and
 ordinary H records have independent owners; obsolete model/connecting wrappers
 are removed; useful CAS/provider algorithms and the ordinary iterator remain
 explicit references. Native operations do not depend on those old wrappers.
+The [consolidation final audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md)
+records completion, the two new structural declarations and the final-kernel
+94-assertion native proof–CAS replay.
 
 Reusable categorical additions remain at their own owners: ordinary adjunction
 family lifting, diagram reconstruction, terminal-family comparisons, and
