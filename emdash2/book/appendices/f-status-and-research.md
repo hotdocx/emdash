@@ -27,8 +27,8 @@ the implementation authority.
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Monads and cartesian/indexed structure | Whole monad extension with ambient beta/accumulation; selected triangular products and terminality; chosen pullback base change with point/whole mates; selected dependent products and $\Sigma_u\dashv u^*\dashv\Pi_u$ | No free-monad syntax, explicit Kleisli category, automatic weighted-product witness, pushout duality, Beck–Chevalley, Frobenius, derived slice exponentials, or final convention-sensitive LCCC package |
-| Additive and Abelian structure | Abelian Hom groups, selected biproducts and zero objects; contractible kernel/cokernel factors; normality, coimage-image isomorphism, fibre products, pushouts and stability | The concrete witnessed Freyd interface does not decode arbitrary quotient paths or supply a closed ring-wide Abelian capability |
-| Snake and homological computation | Generic six-term snake; coherent K/Q presentations and derived whole H on native zero diagrams; direct and whole connecting interfaces; three exact window interiors and finite iteration; retained native/model computation | Final symbolic zero-endpoint attachment is deferred; coherent presentations/normality stay explicit; no closed model, universal-diagram prover, derived category or spectral-sequence theory is claimed |
+| Additive and Abelian structure | Whole K/Q adjunction structures; derived ordinary record views; canonical Coim⇒Im and native normality; retained additive constructions | Ordinary/discrete structural presentation instances are declared; general categorical terminality and a closed ring-wide Freyd model remain separate |
+| Snake and homological computation | Native whole H/maps/δ, three canonical window exactness proofs, the general six-term snake and its positive-sign LES comparison; complete nonsplit displayed CAS LES/snake certificates | Model and interpretation contracts remain explicit; the large six-term package comparison and older symbolic endpoint attachment are deferred; no general homology normalization theorem |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
 | Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
 | Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
@@ -193,6 +193,15 @@ and systematic transfer of the remaining library are still engineering
 boundaries. The older TypeScript prototype remains historical feasibility
 evidence; its stale category-specific layer is neither an authority nor the
 architecture of the renewed product.
+
+The native proof–CAS workflow now constructs complete displayed LES and snake
+exactness certificates from the original whole categorical proofs. It retains
+the selected matrices, presentations and canonical inverse data. Its model,
+normality, row and complete-arrow interpretations remain explicit contracts;
+the certificate constructor adds no output assumption or adoption decision.
+The remaining large six-term package comparison is a documented resource
+boundary, not a claim of completed normalization. Op/duality remains reserved
+for a separate development.
 
 The focused CAS and categorical-program layer offers an additional product
 path. It computes polynomial/Freyd constructions, retains complete selected

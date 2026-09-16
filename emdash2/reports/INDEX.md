@@ -16,6 +16,14 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Native universality/homology goal closure (2026-09-16): the
+[final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+qualifies the revised scope, including both native displayed CAS certificates
+and the local 0.9.0-dev book update. The 405-page book passes source, evidence,
+render/PDF and visual checks. The large six-term package comparison remains
+explicitly deferred after its bounded review; Op/duality remains a separate
+later goal. Neither deferred result is claimed proved.
+
 Displayed native LES exactness (2026-09-16): the
 [finite certificate](../emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp)
 retains each original public native input and canonical Ω data. The native
@@ -2160,13 +2168,6 @@ record.
 
 These ledgers contain genuinely active or incrementally open work. A completed plan must not remain in this section merely because its result is current architecture.
 
-- `../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md`:
-  active dedicated goal for native-owner/variance design, the scoped coupled
-  op/Sigma/Homd repair, whole categorical universality as the formal
-  computational owner, and retained homology/proof-CAS consumers. It
-  preserves hom_int/homd_int, the selected native computations and explicit
-  trust boundaries; no spectral or endpoint-checker investigation is included.
-
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
   active living Lambdapi-first standard-library architecture for Cat-valued
   presheaves, ordinary versus higher sieves, coverage/topology/modality
@@ -2379,6 +2380,15 @@ These ledgers contain genuinely active or incrementally open work. A completed p
 ## Completed Current-Architecture Ledgers
 
 These plans are complete but remain the recovery and decision authority for currently integrated interfaces. Their dated measurements are historical evidence, not standing SOP.
+
+- `../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md`:
+  completed native whole K/Q/H/maps/δ/exactness redesign, general native
+  snake/LES comparison, direct nonsplit displayed CAS certificates and the
+  checked local 0.9.0-dev book update. The final audit records declared
+  structural/model contracts and exact validation. The bounded six-term
+  package-comparison gap is explicitly deferred; Op/duality was not repaired
+  here and remains a separate later goal. Foundational hom_int/homd_int
+  ownership is preserved.
 
 - `REPORT_EMDASH_V3_2_FOUNDATIONAL_DOCUMENTATION_SOP_AND_REGISTRY_MAINTENANCE_PLAN_2026-08-30.md`:
   completed corrective maintenance ledger for the integrated `0e61a79`

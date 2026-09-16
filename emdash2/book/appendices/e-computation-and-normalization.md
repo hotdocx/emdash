@@ -162,41 +162,53 @@ The current development SOP remains the operational authority for rule design
 and validation. This appendix explains the mathematical reading needed by a
 book reader; it is not a replacement for that SOP.
 
-## E.8 Universal Factors And Computer Algebra
+## E.8 Whole Universality And Computer Algebra
 
-The Abelian and homological constructions in [Chapter 31](#chapter-31)
-separate whole operations, data observations and theorem-level laws.
-Coherent kernel/cokernel presentations expose actual adjunctions over the
-original selected operations. Their proof-time usability leaves the whole
-K/Q heads available for the generic cut calculus. Whole H is then derived
-from the boundary transformation and Q; it inherits the existing functor
-identity/composition computations and further Hom action.
+The homological constructions in [Chapter 31](#chapter-31) make whole K/Q
+adjunction structures primary. Units, counits and mates construct the boundary
+and quotient transformations; applying Q to the whole boundary arrow family
+defines H. Direct universal descents construct the whole δ and the general
+snake ∂. Their action belongs to the existing functor/transfor calculus.
 
-The whole connecting transformation has a component rule returning the
-direct construction. Row/window observations and finite-result records have
-local projection beta rules; the bounded iterator uses ordinary Nat
-recursion. Thus this entire interface is no longer accurately described as
-rule-free. The new rules concern retained data and whole observations, not
-a second set of generic category laws.
+When two presentations must be compared, actual internal diagram maps with
+retained inverse data can be acted on by K/Q/H. This exposes the relevant
+endpoint computation. Transporting a functor through an equality of objects
+may hide that action. Ordinary equations remain useful for laws and final
+observations; they are not a substitute for the categorical comparison.
 
-Reconstruction, uniqueness, normality and exactness remain theorem-level
-paths or supplied universal operations. They are not all runtime reductions,
-and the checked window theorem does not establish a general normalization
-calculus for complexes. The final symbolic zero-endpoint attachment is a
-separate deferred interface; computational consumers retain their arrows
-without requiring normalization of that theorem's evidence.
+The structural presentation includes declared ordinary reconstruction,
+zero-family, adjunction-lifting and category-profile instances. Its new
+homological exactness proofs are derived under those premises. No general
+cut-elimination or normalization theorem for homology follows merely from
+these local computations.
 
-Polynomial algorithms provide a different computation layer. Their selected
-matrices, factors and witnesses can be reified into the formal language.
-Explicit adoption then makes the corresponding equations available to
-ordinary constructors. An all-test factor law is separately recorded as
-trusted provider semantics; it is not inferred from finitely many sample
-equations. The formal constructors retain the original selected objects and
-raw witnesses. Equality of serialized data is an implementation consistency
-check, not the definition of equality in the Freyd quotient category.
+Polynomial algorithms supply a complementary layer: selected matrices,
+presentations and coefficient witnesses. The proof–CAS workflow distinguishes
+computed equations from whole-model, normality, row and arrow-interpretation
+contracts. Native categorical proofs then certify the actual displayed LES
+and snake under that context, with no additional output-exactness assumption.
+The complete-arrow observations retain the original selected endpoints.
 
-The supplied-model layer also interprets actual whole-H points, induced
-maps and, with explicit normality, every retained connecting window. These
-interpretations are recorded separately from computed equations. The same
-native results are reused; a model-observation request neither reselects
-universal objects nor reruns the whole homology computation.
+The six-term result illustrates the importance of scoped computational claims.
+Its whole maps and exactness witnesses, typed data access and inverse
+observations are checked. A larger direct comparison of complete observed
+packages with their standalone presentations still exceeds resources, even
+with fresh compiled parents and a larger measured memory allowance. That
+normalization check is explicitly deferred. It is not evidence that the
+original categorical constructions are false, and it is not recorded as a
+successful comparison.
+
+Likewise, the older symbolic endpoint-proof attachment remains separate from
+the retained finite iterator and the concrete displayed CAS certificate.
+Controlled unfolding, structured data access and scoped garbage collection
+can help a checker complete; each resulting claim still needs its actual
+consumer evidence. No map, provider or chosen inverse is made opaque merely
+to obtain the displayed certificates.
+
+<!-- evidence:NATIVE-WHOLE-HOMOLOGY -->
+<!-- evidence:NATIVE-CAS-DISPLAYED-EXACTNESS -->
+
+> **Formal status — checked local interfaces.** The cited owners provide the
+> whole operations and conditional displayed certificates. General
+> homological normalization, closed model construction and the explicitly
+> deferred observation comparisons remain outside these claims.

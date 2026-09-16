@@ -165,3 +165,13 @@ of $H_x$ are arrows of $W$, whereas arrows of $H_x$ are directed
 > selected structural forms are implemented only for the reviewed profiles.
 > The rest of the appendix remains mathematical notation, not an assertion
 > that the complete book grammar is parsed.
+
+## Homological Notation
+
+In [Chapter 31](#chapter-31), D(C) denotes the native walking-arrow diagram
+category. J(A)=(A→0) and I(A)=(0→A), while K and Q are the whole adjoints
+J ⊣ K and Q ⊣ I. H is the resulting whole homology; Hᴹ names its instance
+in a supplied model M. The symbol δ denotes the direct LES connecting
+transformation and ∂ the general snake connecting transformation. ΩAlong
+always refers to equivalence evidence with its forward map fixed. These are
+mathematical abbreviations for the cited owners, not additional parser syntax.

@@ -513,21 +513,33 @@
       "number": 31,
       "path": "book/chapters/31-additive-abelian-and-homological-computation.md",
       "title": "Additive, Abelian, And Homological Computation",
-      "conceptualOwner": "internal universal factors, selected six-term snake exactness, and explicit proof-CAS homological computation",
-      "spiralFrom": ["chapter-5", "chapter-9", "chapter-21", "chapter-30"],
+      "conceptualOwner": "native whole universal K/Q/H/connecting operations, canonical exactness, general snake/LES comparison and explicit proof-CAS certificates",
+      "spiralFrom": [
+        "chapter-5",
+        "chapter-9",
+        "chapter-21",
+        "chapter-30"
+      ],
       "centralTheorem": {
         "status": "checked",
-        "evidence": "ABELIAN-SNAKE-SIX-TERM-EXACT"
+        "evidence": "NATIVE-HOMOLOGY-WINDOW-EXACTNESS"
       },
       "secondaryEvidence": [
-        "ADDITIVE-HOM-BIPRODUCTS", "INTERNAL-KERNEL-COKERNEL-FACTORS",
-        "ABELIAN-NORMALITY-IMAGES", "SELECTED-HOMOLOGY-MAPS",
-        "SELECTED-EXACTNESS-COVERS", "ABELIAN-FIBER-PUSHOUT-STABILITY",
-        "ABELIAN-SNAKE-CONNECTING", "HOMOLOGY-COKERNEL-INCLUSION",
-        "FREYD-FORMAL-RAW-SPINE", "FREYD-FORMAL-BOUNDARY-EPICITY",
-        "FREYD-SELECTED-HOMOLOGY-EXACTNESS", "FREYD-RAW-WITNESS-INTRO"
+        "ADDITIVE-HOM-BIPRODUCTS",
+        "NATIVE-KERNEL-COKERNEL-UNIVERSALITY",
+        "ORDINARY-DIAGRAM-UNIVERSALITY",
+        "NATIVE-COIMAGE-IMAGE-NORMALITY",
+        "NATIVE-WHOLE-HOMOLOGY",
+        "NATIVE-CANONICAL-EXACTNESS",
+        "NATIVE-HOMOLOGY-CONNECTING",
+        "NATIVE-SNAKE-CONNECTING",
+        "NATIVE-SNAKE-SIX-TERM",
+        "NATIVE-SNAKE-LES-COMPARISON",
+        "HOMOLOGY-BOUNDED-ITERATOR",
+        "NATIVE-FREYD-MODEL",
+        "NATIVE-CAS-DISPLAYED-EXACTNESS"
       ],
-      "boundary": "the generic six-term snake is checked; native bounded long exact computations and formal selected interior homology/exactness terms are active with explicit provider trust; generic homology-window and bounded long-exact proofs, closed quotient effectiveness, and universal-diagram solving remain distinct unfinished layers"
+      "boundary": "native whole window and general snake proofs, their comparison and complete displayed CAS certificates are checked under explicit ordinary/model profiles; large six-term package normalization and the older symbolic endpoint attachment are deferred; closed model synthesis and general homology normalization are not claimed"
     }
   ],
   "appendix": {

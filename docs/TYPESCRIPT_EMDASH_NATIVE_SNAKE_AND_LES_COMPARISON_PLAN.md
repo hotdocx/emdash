@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native snake/LES comparison and both displayed CAS certificates qualified; large six-term observation comparison explicitly deferred after bounded review
+Status: complete within the revised goal scope — native snake/LES comparison and both displayed CAS certificates qualified; large observation comparison explicitly deferred
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 

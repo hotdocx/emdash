@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — displayed native LES/snake exactness qualified; bounded six-term review completed with explicit deferral; final audit and book update remain
+Status: complete — native universality/homology and displayed CAS certificates qualified; audit and book 0.9.0-dev complete; explicit deferrals retained
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -24,6 +24,20 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Completion (2026-09-16): all required work under the revised scope is
+implemented and qualified. The [final audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+records the requirements, declared structural boundary, direct native
+proof–CAS evidence and exact deferrals. Book edition 0.9.0-dev is updated,
+source/evidence/browser/PDF checked, visually inspected and locally promoted
+through its owning tools. It contains 405 pages and 178 cited evidence claims.
+The six-term direct comparison remains explicitly deferred after the bounded
+review, and Op/duality remains reserved for a separate later goal. No further
+work or experiment is scheduled by this completed plan.
+
+The [final audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md) tracks
+requirement-by-requirement evidence, structural assumptions, validation and
+the remaining book/artifact gate.
+
 The bounded C3b2 review is now complete (2026-09-16). Its first-step
 categorical comparison passes, while the current whole-result package
 comparison still allocates out at 6GiB after fresh parent compilation. Under
@@ -31,8 +45,8 @@ D-NUH-080, explicitly defer this unqualified observation-normalization gap and
 do not continue resource/representation experiments in this goal. The retained
 maps, original proofs and inverse data remain unchanged; the failed comparison
 is not claimed proved. The [snake plan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
-and its resumption bundle preserve the precise findings. Proceed to NUH-7 and
-NUH-7B. Op/duality remains reserved for its own later goal.
+and its resumption bundle preserve the precise findings. NUH-7 and NUH-7B are now complete. Op/duality remains reserved for its own
+later goal.
 
 Latest user direction (2026-09-16, D-NUH-080): apply the categorical
 comparison principle when reviewing the remaining six-term resource issue.
@@ -62,8 +76,8 @@ passes without new certificate assumptions or decisions. All 64 emitted
 assertions, six assembly assertions and 13 signature assertions check, with
 matching import-warning inventories. The public qualification flag is true.
 The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records the
-unchanged proof-body import repair and exact evidence. Next conduct the bounded
-six-term review above, then finish the final audit and book update.
+unchanged proof-body import repair and exact evidence. The bounded six-term review, final audit and book update are now complete
+under the explicit deferral policy above.
 
 Terminology clarification (2026-09-15): "CAS-facing native H map" means
 the new whole H applied to a native chain map formed from matrix/presentation
@@ -1306,8 +1320,11 @@ theorem-proving, a new frontend/parser, unrelated strictness/profile branch
 integration, and exhaustive preservation of obsolete wrappers. These are not
 reasons to broaden the first homology implementation slice.
 
-No push, merge to main, PR, publication, book/PDF promotion, release, history
+No push, merge to main, PR, external publication, package release, history
 rewrite, branch deletion or worktree removal is authorized by this goal.
+The later NUH-7B request authorizes local book/PDF generation, validation and
+updates of the repository-owned distribution artifacts through their tools.
+The local `book:release` validation command is not remote publication.
 Use ordinary correcting commits on this dedicated branch. No parallel
 agents are scheduled; task delegation requires separate applicable authority.
 
@@ -1336,11 +1353,11 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-1 | user-deferred after this goal | Preserve the reviewed native duality design and checkpoints; resume only under the later strict/lax review |
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
-| NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | qualified through the complete displayed native CAS LES certificate | Preserve the checked model/interpretation contracts, original selections and canonical exactness data; final trust/computation audit remains in NUH-7 |
+| NUH-4 | complete at the stated ordinary boundary: whole H/maps/δ and all three actual window comparison inverses | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
+| NUH-5 | complete: qualified through the complete displayed native CAS LES certificate | Preserve the checked model/interpretation contracts, original selections and canonical exactness data; final trust/computation audit remains in NUH-7 |
 | NUH-6 | native LES comparison and displayed nonsplit snake exactness qualified; C3b2 explicitly deferred after bounded review | Preserve the qualified whole construction and typed data access plus the exact unqualified comparison boundary; no further experiment or old/new compatibility gate in this goal |
-| NUH-7 | active | Final scope/trust/computation audit, standing documentation and green local integration checkpoint; account explicitly for every deferred boundary |
-| NUH-7B | required by the 2026-09-16 direction | Update the book since 0.8.3-dev, using source-owned chapters/metadata and bounded book checks/rendering; qualify local generated artifacts |
+| NUH-7 | complete | Final scope/trust/computation audit and owning documentation qualified; exact deferrals retained in the closing checkpoint |
+| NUH-7B | complete | Book 0.9.0-dev: 178 cited claims/46 sources, 405-page render/PDF qualification, page inspection and checked local PDF/Markdown promotion |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
 Preserved duality progress (2026-09-13): NUH-1D4 corrected the defined
@@ -1892,7 +1909,12 @@ The user has explicitly requested localized checks for subsequent work.
 The validation section and launch prompt now carry that preference; this
 tranche used only its affected owner prefixes, reviewers and document checks.
 
-## Persistent Goal Launch Prompt
+## Historical Persistent Goal Launch Prompt
+
+Completion notice: the following launch context is retained for provenance,
+not an instruction to restart completed work. The final audit and book update
+are now qualified. Resume any deferred boundary only under a new user request
+or its own later goal.
 
 Current continuation boundary: whole K/Q, H/maps/δ, native LES and general
 snake exactness, the new snake–LES comparison, and both nonsplit displayed CAS

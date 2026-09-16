@@ -740,9 +740,11 @@ The homological continuation also uses the following linked terms.
 
 <a id="glossary-homological-exactness"></a>
 
-**Exactness, selected.** Epicity of the actual boundary arrow into the
-selected cycle kernel. In an Abelian category, local epic-cover factors
-characterize this property. See [Chapter 31](#chapter-31).
+**Exactness, ordinary view.** Epicity of the actual boundary into the
+selected cycle kernel is the familiar ordinary formulation. The primary
+native interface fixes the canonical Im→Ker comparison and retains its
+equivalence evidence. Local epic-cover factors explain the ordinary view
+in an Abelian category. See [Chapter 31](#chapter-31).
 
 <a id="glossary-freyd-presentation"></a>
 
@@ -761,11 +763,12 @@ and the [worked nonsplit example](#homology-nonsplit-worked-example).
 
 <a id="glossary-coherent-kernel-presentation"></a>
 
-**Coherent kernel/cokernel presentation.** Supplied whole functors and
-adjunctions over the original selected universal operations, with
-proof-time usability for their observations. Such a presentation is
-additional coherent structure, not a consequence of finitely many computed
-matrix equations. See [Chapter 31](#chapter-31).
+**Whole kernel/cokernel adjunction structure.** The primary native data are
+actual functors K,Q on the walking-arrow diagram category with J ⊣ K and
+Q ⊣ I. Units, counits and mates supply the universal operations and their
+whole action. Ordinary records are derived views; older coherent presentation
+wrappers are optional adapters. No such whole structure is inferred merely
+from finitely many matrix tests. See [Chapter 31](#chapter-31).
 
 <a id="glossary-whole-homology"></a>
 
@@ -788,6 +791,19 @@ elementwise choice of preimages in the constructive snake proof. See
 or a selected algorithm's semantic contract to a proof source. Computation
 alone adds no assumption; subsequent formal checking is relative to the
 adopted statements. See [Chapter 31](#chapter-31).
+
+<a id="glossary-canonical-exactness"></a>
+
+**Canonical exactness.** Fixed-forward ΩAlong evidence for the actual
+comparison Im(f)→K(g) at a retained native zero input. Its inverse data are
+part of the witness. An arbitrary isomorphism of endpoint objects is not
+this assertion. See [Chapter 31](#chapter-31).
+
+<a id="glossary-categorical-presentation-comparison"></a>
+
+**Categorical presentation comparison.** An actual internal map between
+retained presentations, with its inverse and coherence where needed. Whole
+K/Q/H act on this map, exposing endpoint computation. See [Chapter 31](#chapter-31).
 
 ## D.3 Index Strategy
 

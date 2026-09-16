@@ -160,8 +160,8 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.8.3-dev`;
-[archived book record and DOI](https://doi.org/10.5281/zenodo.21544186),
+(`0.9.0-dev`;
+[earlier archived book record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
 [`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with its one-way

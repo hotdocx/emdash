@@ -2,7 +2,7 @@
 
 Date: 2026-09-12
 
-Status: active — native LES comparison and nonsplit displayed snake exactness qualified; retained 6C3b and displayed LES transport next; Op/duality deferred
+Status: complete — revised native universality/homology scope, displayed CAS certificates, final audit and local book 0.9.0-dev qualified; explicit deferrals retained
 
 Parent: [living implementation plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
@@ -309,6 +309,30 @@ aggregate was rerun, and no mathematical source was edited for this initial
 design tranche.
 
 ## Subrow State And Next Experiment
+
+### NUH-7 / NUH-7B: Final Audit And Book Qualified
+
+The [final audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md) records
+every required outcome, the ten new declared structural instances, two nucleus
+exchange rules, direct native proof–CAS evidence and the explicit deferrals.
+No hom_int/homd_int owner was replaced. The public displayed LES flag is true;
+the large six-term comparison remains deferred under D-NUH-080.
+
+Book edition 0.9.0-dev updates Chapter 31, Chapter 12 and related appendices
+around whole K/Q/H/δ/exactness, the general native snake and its LES comparison.
+The original iterator remains identified in its own interface, without a
+required old/new comparison. All 178 evidence claims/46 sources, typography,
+links and source gates pass. The browser and tagged-PDF gates pass at 405
+pages with 18 embedded fonts; 23 selected pages were visually inspected.
+The owning promotion tool updates the repository PDF/Markdown with identical
+checked hashes. The artifact receipt is `emdash2/tmp/probes/nuh7b_qualification.json`.
+No external publication occurred. The PDF skill operation marker was run
+successfully once before book authoring; do not repeat it on continuation.
+
+The revised goal scope is complete. Op/duality, the deferred comparison and
+other recorded research boundaries require their own later scope. The closing
+checkpoint retains this ledger and the exact final audit rather than treating
+any deferred computation as proved.
 
 ### NUH-6C3b2: Bounded Review Completed; Observation Comparison Deferred
 

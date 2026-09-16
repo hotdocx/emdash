@@ -28,16 +28,21 @@ artifact, not the mathematics printed inside it.
 
 Chapter 31 uses two complementary evidence routes. The register records
 Lambdapi declarations and focused formal reviewers, including the generic
-snake and homology-window theorems, whole H/connecting interfaces, finite
-iteration and transparent matrix introductions. Native computations,
+native snake and homology-window theorems, whole universal H/connecting
+interfaces, categorical presentation comparisons and finite displayed
+certificates. Native computations,
 categorical-program comparisons and field differentials have their own
 TypeScript reviewers, named in the prose. A test of a polynomial example is
 not entered as a generic categorical theorem. Likewise, a formal term built
 after explicit provider adoption is checked relative to those assumptions;
 the register does not turn that trust decision into a proof of the native
 algorithm's universal correctness.
-The deferred symbolic endpoint-proof attachment is not entered as a
-checked consequence of the finite iterator or native zero-endpoint tests.
+The deferred symbolic endpoint-proof attachment is not entered as a checked
+consequence of the finite iterator or native zero-endpoint tests. The large
+six-term package comparison is also explicitly deferred; checked typed data
+access and a passing first-step comparison do not qualify that larger
+normalization. The nonsplit displayed certificates have their own conditional
+formal and executable evidence.
 
 > **Formal status — checked.** This appendix describes traceability; the
 > [accompanying emdash artifact](#ref-emdash-artifact) remains the proof

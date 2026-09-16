@@ -343,8 +343,9 @@ profiles. The public flag is true. No output-exactness assumption, primitive,
 rule or opacity is added. The D-NUH-080 bounded review has now finished:
 the individual first comparison passes, but compiled-parent whole-package
 comparison still allocates out at 6GiB. That observation gap is explicitly
-deferred with a resumption bundle. Finish the final audit and book update;
-do not resume C3b2 or Op/duality in this goal.
+deferred with a resumption bundle. The final audit and book 0.9.0-dev update
+are now qualified; the revised goal scope is complete. Do not resume C3b2 or
+Op/duality without a new user scope or a separate later goal.
 
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

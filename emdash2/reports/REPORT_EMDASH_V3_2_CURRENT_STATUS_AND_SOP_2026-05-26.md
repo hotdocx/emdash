@@ -25,6 +25,14 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
+Native universality/homology goal closure (2026-09-16): the
+[final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+qualifies the revised scope, including both native displayed CAS certificates
+and the local 0.9.0-dev book update. The 405-page book passes source, evidence,
+render/PDF and visual checks. The large six-term package comparison remains
+explicitly deferred after its bounded review; Op/duality remains a separate
+later goal. Neither deferred result is claimed proved.
+
 Displayed native LES exactness (2026-09-16): the
 [finite certificate](../emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp)
 retains each original public native input and canonical Ω data. The native

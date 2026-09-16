@@ -2,7 +2,7 @@
 
 Date: 2026-09-15
 
-Status: displayed native snake and LES exactness qualified; bounded six-term review, final audit and book update remain
+Status: complete within the revised goal scope — displayed native snake/LES certificates, audit and local book update qualified; explicit model contracts and research deferrals retained
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
 
