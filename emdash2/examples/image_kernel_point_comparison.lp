@@ -1,7 +1,7 @@
-/* The two original Im→Ker routes now have the same original endpoint types.
-   This checks statement formation; commutativity is a separate open theorem. */
-require open emdash.emdash3_2_image_family_point_comparisons;
 require open emdash.emdash3_2_one_cat_categorical_exactness;
+/* The original canonical Im→Ker routes commute through the native point comparison. */
+require open emdash.emdash3_2_image_family_point_comparisons;
+require open emdash.emdash3_2_one_cat_image_kernel_point_paths;
 
 assert [K C : Cat] [S : τ (@PreadditiveCategory C)]
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
@@ -12,7 +12,7 @@ assert [K C : Cat] [S : τ (@PreadditiveCategory C)]
   (h : τ (@Transf K (Functor_cat WalkingArrow_cat C)
     (@comp_cat_fapp0 K C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
   (x : τ (Obj K))
- ⊢ (@= (Hom C (@fapp0 K C (@comp_cat_fapp0 K (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t
+ ⊢ (@one_cat_image_kernel_point_path K C S C1 t T T0 P Q A D h N x) : τ (@= (Hom C (@fapp0 K C (@comp_cat_fapp0 K (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t
   T T0 P Q) (@zero_arrow_family_incoming_func K C t T A D h)) x) (@fapp0 K C (@kernel_adjunction_family_func K C
   S t T P D) x))
     (@comp_fapp0 C (@fapp0 K C (@comp_cat_fapp0 K (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S
@@ -30,4 +30,4 @@ assert [K C : Cat] [S : τ (@PreadditiveCategory C)]
   Q A D h x))
     (@tapp0_fapp0 K C (@comp_cat_fapp0 K (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P
   Q) (@zero_arrow_family_incoming_func K C t T A D h)) (@kernel_adjunction_family_func K C S t T P D) x
-  (@one_cat_image_to_kernel_transf K C S C1 t T T0 P Q A D h N))) : Grpd;
+  (@one_cat_image_to_kernel_transf K C S C1 t T T0 P Q A D h N)));

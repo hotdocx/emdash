@@ -293,6 +293,15 @@ The canonical Im→Ker compatibility statement now has its correct endpoints;
 its commutativity and displayed LES exactness transport still require proof.
 Retain the original column H equivalences in that continuation.
 
+NUH-5N2G3B2b now proves canonical point Im→Ker compatibility through the
+derived identity-endpoint diagram equivalence, original quotient
+reconstruction and whole Coim⇒Im naturality. `OneCatNativeExactAt` and its
+family-evaluation/native-input-equivalence transport are derived; all three
+original native LES proof constructors consume them. Twenty-six new
+definitions and two revised image-comparison bodies add no primitive,
+rule, opacity or assumption. Public H/maps/δ pair identification, displayed
+CAS LES transport, NUH-6C3b2 and NUH-7 remain required.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

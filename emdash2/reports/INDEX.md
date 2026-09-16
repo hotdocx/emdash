@@ -16,6 +16,17 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Canonical native point exactness (2026-09-15): the
+[comparison proof](../emdash3_2_one_cat_image_kernel_point_paths.lp) retains
+the original Im/Coim/K and uses the existing whole reconstruction,
+naturality and normality evidence. The
+[point predicate and transport](../emdash3_2_one_cat_categorical_exactness_points.lp)
+now consume all three original native LES exactness theorems. The native
+diagram comparison has checked identity endpoint action and inverse laws.
+Ten assertions and three actual window consumers pass at default 90s/2GiB,
+without new rules, assumptions or opacity. Public-pair and displayed CAS
+transport remain in the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Native LES point-comparison preparation (2026-09-15): the
 [incoming paths](../emdash3_2_zero_arrow_family_point_comparisons.lp),
 [image equivalence](../emdash3_2_image_family_point_comparisons.lp),

@@ -310,6 +310,31 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2b: Canonical Point Exactness And Categorical Transport — Qualified
+
+The native comparison of the same incoming diagrams has identity endpoint
+components and a derived fixed-forward Ω equivalence. The original Coim
+projection's naturality and native cokernel cancellation prove Coim→Ker
+compatibility; whole Coim⇒Im naturality and its original normality evidence
+then prove the canonical Im→Ker equation. The existing image-comparison
+signatures are unchanged; their bodies now use this categorical diagram
+comparison, whose endpoint action is checked directly.
+
+`OneCatNativeExactAt` is ΩAlong on the original canonical Im→Ker at an
+object of the existing native zero-cone category. Whole-family evaluation
+and transport along an actual native-input equivalence are derived.
+All three original LES proof constructors produce this predicate, without
+an output-exactness premise. Ten assertions, three actual window consumers
+and all eight changed owners pass with the default 90s/2GiB settings.
+Both inverse slots of the transport compute to the retained composite.
+
+The tranche adds 26 transparent definitions and revises two existing
+image-comparison bodies; it adds no primitive, rule, unifier or opacity.
+Next carry these certificates through the retained column H comparisons
+to the public pairs and actual CAS diagram, then qualify the frontend.
+Displayed LES exactness, NUH-6C3b2 and NUH-7 remain open. The
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) owns that queue.
+
 ### NUH-5N2G3B2a: Native Point Comparisons And Mate Evaluation — Qualified
 
 Eight transparent definitions identify the original family/global incoming

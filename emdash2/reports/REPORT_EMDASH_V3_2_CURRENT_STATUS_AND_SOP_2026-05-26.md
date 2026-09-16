@@ -25,6 +25,21 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
+Canonical native point exactness (2026-09-15): the
+[native diagram equivalence](../emdash3_2_zero_arrow_family_point_diagrams.lp)
+retains both original diagrams with identity endpoint components. Coim
+projection naturality and native cokernel cancellation establish the
+[canonical Im→Ker compatibility](../emdash3_2_one_cat_image_kernel_point_paths.lp).
+The [point exactness owner](../emdash3_2_one_cat_categorical_exactness_points.lp)
+derives canonical point witnesses from all three original LES proofs and
+transports them along equivalences of actual native inputs. The original
+image-comparison signatures are unchanged; their computation now uses this
+categorical comparison. Twenty-six new definitions and two revised bodies
+add no primitive, rule, opacity or model premise. Both inverse slots of
+fixed-forward two-of-three retain their computed composite. Actual public
+H/maps/δ pair identification and displayed CAS exactness transport remain
+under the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Native LES point-comparison preparation (2026-09-15): the
 [incoming-point paths](../emdash3_2_zero_arrow_family_point_comparisons.lp)
 reconcile the whole parent presentations before observation. The

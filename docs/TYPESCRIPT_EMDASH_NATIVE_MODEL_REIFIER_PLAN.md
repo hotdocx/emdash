@@ -1042,6 +1042,85 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2b: Canonical Point Exactness And Native-Input Transport — Qualified
+
+The [native diagram comparison](../emdash2/emdash3_2_zero_arrow_family_point_diagrams.lp)
+uses the existing ordinary-target reconstruction DefIso on the two original
+incoming diagrams. Their generator comparison is derived from the existing
+whole input. Both endpoint components are identities; the inverse and its
+two laws are derived through ordinary diagram faithfulness. This is a
+categorical computation using the existing shape-universality interface,
+not a new primitive or an assumption that equality-path transport reduces.
+
+The image comparison's two public signatures are unchanged. Its bodies now
+apply the same original Im functor to this native diagram equivalence.
+The [Coim companion](../emdash2/emdash3_2_coimage_family_point_comparisons.lp)
+uses the same map and inverse evidence. Earlier incoming equality paths
+remain available as derived facts. No H, image, kernel or cokernel object
+is reselected.
+
+This updates the comparison's computational presentation; it does not
+claim a checked definitional equality with the former path-induced arrow
+or its proof fields. The new map is specified on the same input diagrams
+by its identity endpoint action, and its actual canonical compatibility
+and inverse laws are proved below. Its functor images use that explicitly
+derived inverse, rather than an additional model-selected choice.
+
+[Native point cancellation](../emdash2/emdash3_2_one_cat_cokernel_point_cancellation.lp)
+comes from the original adjunction mates and diagram reconstruction. The
+[canonical compatibility proof](../emdash2/emdash3_2_one_cat_image_kernel_point_paths.lp)
+first uses the original quotient projection and whole reconstruction to
+prove the Coim→Ker equation. Naturality of the original whole Coim⇒Im,
+followed by cancellation with its supplied fixed-forward normality witness,
+then proves
+
+```text
+e_global(point(x)) ∘ Im(native_comparison_x) = e_family(x).
+```
+
+The [point exactness owner](../emdash2/emdash3_2_one_cat_categorical_exactness_points.lp)
+defines `OneCatNativeExactAt` by ΩAlong at that actual global canonical
+comparison and original native input. The original whole-family witness
+produces this predicate at its point input. Transport along an equivalence
+in the existing native zero-cone category uses the whole comparison's
+naturality and functorial action. It requires an equivalence of the actual
+inputs, not an unrelated invertible comparison arrow.
+
+[Fixed-forward two-of-three](../emdash2/emdash3_2_omega_equiv_right_factor.lp)
+retains explicit inverse computation, and its
+[ordinary naturality consumer](../emdash2/emdash3_2_one_cat_natural_equivalence_transport.lp)
+requires no caller-written naturality square. All three original native
+LES exactness constructors now produce canonical point exactness in the
+[actual window reviewer](../emdash2/examples/one_cat_native_window_point_exactness.lp).
+No output exactness or stronger model contract is assumed.
+
+The tranche adds 26 transparent definitions and changes two existing
+image-comparison bodies, with no primitive, rewrite/unification rule or
+opacity. Ten assertions cover endpoint computation, the actual canonical
+compatibility, both image inverse laws, both computed inverse slots of
+two-of-three, and native-input transport. Three further typed consumers
+apply the actual original window proof constructors. All changed owners
+and consumers pass at the default 90s/2GiB settings with GC overrides
+removed. The older statement-only reviewer is replaced by the proof
+consumer, rather than being counted as evidence of commutativity.
+
+The final 14 owner/consumer checks take 5.905–26.955s each. All 14 warning
+inventories match their exact import controls, including locations, term
+heads, rule families and parser results. The new owners contain definitions
+only; strict LHS audits pass. Catalog/TOC, document links and the source-only
+health snapshot are synchronized for 1356 files. Exact sources, runtime
+settings and logs are bound in `emdash2/tmp/probes/nuh5g3b2b_qualification.json`;
+the final check, control and warning manifests are stored beside it.
+Validation remains localized; no repository aggregate or TypeScript
+typecheck is needed for this formal-only tranche.
+
+Next construct the native-input equivalences linking these certified point
+inputs to the public H/maps/δ pairs, retaining the original column H
+equivalences and the already checked positive connecting sign. Then use the
+stored native→CAS diagram path and qualify the frontend certificate on the
+actual selected nonsplit computation. Displayed LES exactness remains
+false until that integration; NUH-6C3b2 and NUH-7 remain required.
+
 ### NUH-5N2G3B2a: Incoming/Image And Mate Evaluation — Qualified
 
 The [incoming-point owner](../emdash2/emdash3_2_zero_arrow_family_point_comparisons.lp)
@@ -1076,6 +1155,7 @@ naturality. Then transport the existing exactness witness through the
 original column H equivalences and native→CAS diagram path. Displayed LES
 exactness remains false until those constructions and consumers qualify.
 The separate NUH-6C3b2 resource/comparison boundary remains required.
+
 
 The review at `dfcc8ea1` also confirmed the public δ formula
 L∘δ_native(x)∘R⁻¹. The existing column H equivalences remain part of the
