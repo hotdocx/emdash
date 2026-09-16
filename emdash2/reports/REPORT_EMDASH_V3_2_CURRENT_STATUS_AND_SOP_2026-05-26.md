@@ -25,6 +25,20 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
+Native LES point-comparison preparation (2026-09-15): the
+[incoming-point paths](../emdash3_2_zero_arrow_family_point_comparisons.lp)
+reconcile the whole parent presentations before observation. The
+[image comparison](../emdash3_2_image_family_point_comparisons.lp) applies the
+original Im functor and retains its fixed-forward Ω evidence. The
+[mate equations](../emdash3_2_one_cat_adjunction_evaluation_paths.lp) use the
+original unit/counit formulas, with an
+[actual cokernel-descent specialization](../emdash3_2_one_cat_cokernel_family_point_paths.lp).
+Eight transparent definitions and six focused assertions add no primitive,
+rule, opacity or model premise. Canonical Im→Ker compatibility is a
+well-formed remaining theorem; statement formation does not prove it.
+Follow the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+for the retained column comparisons and displayed exactness transport.
+
 Whole native six-term data access (2026-09-15): the
 [observer](../emdash3_2_one_cat_native_exact_tail_observations.lp) packages
 the canonical comparison and its existing Ω witness while the finite

@@ -16,6 +16,17 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Native LES point-comparison preparation (2026-09-15): the
+[incoming paths](../emdash3_2_zero_arrow_family_point_comparisons.lp),
+[image equivalence](../emdash3_2_image_family_point_comparisons.lp),
+[mate evaluation](../emdash3_2_one_cat_adjunction_evaluation_paths.lp) and
+[cokernel-descent consumer](../emdash3_2_one_cat_cokernel_family_point_paths.lp)
+derive the next point interfaces from the same whole universal operations.
+Eight definitions and six consumer assertions add no primitive, rule or
+assumption. The original Im→Ker compatibility statement is well-formed;
+commutativity and displayed LES transport remain open in the
+[model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Whole native six-term data access (2026-09-15): the
 [observer](../emdash3_2_one_cat_native_exact_tail_observations.lp) packages
 comparison/evidence data before specializing a finite tail. Five generic

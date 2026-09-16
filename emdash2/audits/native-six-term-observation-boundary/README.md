@@ -15,6 +15,15 @@ theorem packages still fails at 2GiB and 6GiB. The remaining gap is
 NUH-6C3b2; this bundle's older failures describe their respective interfaces,
 not an inability to form any well-typed observation of the data.
 
+Further controls from `dfcc8ea1` are recorded in the living subplan. At
+6GiB with `o=1`, the compact comparison reaches its comparison but times out
+at 300s. A constructor-projection presentation passes the generic β check
+and one literal first-package comparison, but the complete four-position
+consumers still fail, including a 6GiB control. A homogeneous collector does
+not close the gap either. These candidates remain under ignored
+`tmp/probes/nuh6c3b_*`; no projection/collector rewrite is promoted. The
+active observer retains its checked transparent definition.
+
 The native six-term constructor retains all five original whole maps and
 all four original exactness witnesses. Its type, map observations, native
 input recovery and zero-pair observations check with `OCAMLRUNPARAM=o=20`

@@ -285,6 +285,14 @@ with `o=20`. The two definitions add no primitive or rule. Direct comparison
 with the original canonical maps/witnesses remains NUH-6C3b2; do not describe
 the new access as completing that comparison or displayed LES transport.
 
+NUH-5N2G3B2a qualifies the family/global incoming-diagram comparison and
+its image equivalence, evaluation of both whole adjunction mates, and the
+original native cokernel-descent point equation. Eight derived definitions
+and six focused assertions add no primitive, rule, opacity or assumption.
+The canonical Im→Ker compatibility statement now has its correct endpoints;
+its commutativity and displayed LES exactness transport still require proof.
+Retain the original column H equivalences in that continuation.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

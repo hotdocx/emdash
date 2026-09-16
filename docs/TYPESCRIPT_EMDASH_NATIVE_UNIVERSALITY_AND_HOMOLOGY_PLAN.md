@@ -24,6 +24,15 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+NUH-5N2G3B2a advances the remaining LES transport: the original incoming
+diagram comparison, its image equivalence, both whole-mate evaluation
+equations and the native cokernel-descent point equation now qualify.
+Eight transparent definitions and six focused assertions introduce no
+primitive, rule or assumption. The canonical Im→Ker compatibility theorem
+and transport to the displayed CAS diagram remain open in the
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md). NUH-6C3b2
+direct comparison and NUH-7 remain required as well.
+
 NUH-6C3b1 now qualifies typed access to all four comparison/evidence packages
 and all eight selected inverses from the original whole six-term result.
 The generic observer packages the data before specializing the dependent

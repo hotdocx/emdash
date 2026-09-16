@@ -833,6 +833,36 @@ imports at 90s, so it did not test this consumer. Retain the serial/no-swap
 guard and exact source identities; the longer deadline pays for the more
 frequent collection and is not a new default.
 
+The `o=1` control reaches the actual complete-package comparison, rather
+than stopping in imports, but reaches its 300s deadline (exit 137) without
+an allocation-error marker. Source and all dependency hashes remain
+unchanged. This changes the observed failure from allocation to time; it
+does not qualify the comparison. The exact runtime record is
+`emdash2/tmp/probes/nuh6c3b_o1_control.json`.
+
+The tested isolated runtime hypothesis gives `one_cat_native_exact_tail_data`
+the same constructor/projection β presentation as `FiniteArrowTail`'s
+existing projections. Interpret the candidate head by its currently checked
+transparent definition; for a cons cell it returns the same original
+annotation's data. This avoids separately expanding next/arrow/step while
+forming the comparison. It changes no mathematical input, inverse choice
+or universal operation. Probe the complete owner copy, generic constructor
+checks, all actual inverse consumers and the unchanged compact comparison;
+require subject reduction, LHS and warning audits before promotion. Keep the
+active definition if this does not qualify the intended consumer.
+
+The constructor-projection candidate checks with subject reduction and
+qualifies the formerly failing generic tail β conversion and one literal
+first-package comparison at 2GiB. It does not yet qualify the whole task:
+the aliased multi-position reviewer and the later literal package
+comparisons still exhaust memory, including the four-package 6GiB control.
+Taking A/B/f from the constructor, rather than caller aliases, does not
+close that boundary. A Nat-derived homogeneous annotation collector and
+its constructor-equation variant also fail the combined consumer. All
+these runtime candidates remain unpromoted; the active observer stays
+unchanged. Preserve the positive first-package evidence separately from
+the failed all-position checks.
+
 The first bare comparison of a concretely extracted Im→Ker map with its
 standalone presentation exceeds 2GiB. Typed reflexivity, Σ elimination
 before reconstruction and direct Σ/Product construction do not resolve it.

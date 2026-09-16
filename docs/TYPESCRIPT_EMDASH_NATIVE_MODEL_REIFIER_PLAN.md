@@ -1042,6 +1042,58 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2a: Incoming/Image And Mate Evaluation — Qualified
+
+The [incoming-point owner](../emdash2/emdash3_2_zero_arrow_family_point_comparisons.lp)
+reuses the qualified whole parent-presentation path before evaluating h.
+Three derived paths identify the incoming arrow, its introduced diagram,
+and the existing global zero-cone observation of that same point input.
+The [image owner](../emdash2/emdash3_2_image_family_point_comparisons.lp)
+applies the original Im functor to this diagram path. Its map and
+fixed-forward Ω evidence retain both actual image objects and use no new
+universal choice.
+
+The [mate-evaluation owner](../emdash2/emdash3_2_one_cat_adjunction_evaluation_paths.lp)
+derives point evaluation of both whole adjunction mates through their
+existing unit/counit formulas. Its
+[native cokernel consumer](../emdash2/emdash3_2_one_cat_cokernel_family_point_paths.lp)
+evaluates the original descent using its original whole input and
+annihilation witness. These eight definitions add no primitive, rewrite,
+unifier, opacity, ordinary universal dictionary or model assumption.
+
+Four focused reviewers have six assertions: the two actual image-bridge
+inverse laws; use of both mate equations after arbitrary postcomposition;
+use of the original descent equation after arbitrary precomposition; and
+formation of the required canonical Im→Ker compatibility statement. The
+last check deliberately proves only that both original routes have the
+correct endpoints. Its reflexivity attempt fails; no commutativity premise
+or theorem is introduced to hide that gap.
+
+Next prove the actual compatibility
+`e_global(point(x)) ∘ Im(comparison_x) = e_family(x)` through the native
+cokernel descent/reconstruction and the original Coim⇒Im inverse's
+naturality. Then transport the existing exactness witness through the
+original column H equivalences and native→CAS diagram path. Displayed LES
+exactness remains false until those constructions and consumers qualify.
+The separate NUH-6C3b2 resource/comparison boundary remains required.
+
+The review at `dfcc8ea1` also confirmed the public δ formula
+L∘δ_native(x)∘R⁻¹. The existing column H equivalences remain part of the
+required transport; these new incoming-diagram paths do not replace them
+with literal equality of the public and original pairs.
+
+All four owners and four reviewers pass at 90s/2GiB with `o=20`; measured
+times range from 6.460s to 12.551s. The largest statement reviewer also
+passes with both GC environment overrides removed, so no new runtime
+profile is installed. Every warning inventory matches its import-only
+control in categories, locations, heads and rule families: incoming/image
+1280/169, mate evaluation 1151/157, and cokernel descent 1208/159
+(critical-pair/pattern reports), without parser issues. Strict LHS,
+catalog/TOC, local links and source-health checks pass. The source snapshot
+covers 1345 files. Exact checked-source and log identities are in
+`emdash2/tmp/probes/nuh5g3b2_point_qualification.json`, with separate check,
+control and warning manifests beside it. No repository-wide typecheck ran.
+
 ### NUH-5N2G3B1: Original Window Arrow-Pair Observations — Qualified
 
 The [generic observation owner](../emdash2/emdash3_2_zero_arrow_pair_observations.lp)

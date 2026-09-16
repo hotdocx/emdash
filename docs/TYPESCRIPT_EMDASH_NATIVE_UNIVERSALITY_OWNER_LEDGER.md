@@ -310,6 +310,23 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2a: Native Point Comparisons And Mate Evaluation — Qualified
+
+Eight transparent definitions identify the original family/global incoming
+diagrams, apply the existing image functor to obtain the fixed-forward
+image equivalence, evaluate both whole adjunction mates, and specialize
+that evaluation to the original native cokernel descent. Six focused
+assertions cover the image inverse laws, use after arbitrary composition,
+and formation of the original Im→Ker compatibility statement.
+
+No primitive, rule, opacity, model contract or output-exactness premise is
+added. The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records the remaining theorem: prove the canonical comparison compatibility,
+then transport through the retained column H equivalences and the actual
+CAS diagram. Statement formation is not a proof of commutativity or
+displayed exactness. NUH-6C3b2 also remains open; the temporary constructor
+projection/collector experiments are not promoted.
+
 ### NUH-6C3b1: Whole-Result Data And Inverse Access — Qualified
 
 The [observer](../emdash2/emdash3_2_one_cat_native_exact_tail_observations.lp)
