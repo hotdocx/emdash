@@ -45,6 +45,14 @@ hom_int/homd_int and groupoidal equality itself. The broader terminal/initial
 review follows the same criterion, under its separately qualified coherence
 profile; it is not justified merely by the present comparison's resource issue.
 
+NUH-5N2G3B2c4a adds complete-arrow certificates at the same public native
+inputs. The generic operation retains the canonical Ω witness judgmentally
+and extends only the observation path. All eight owner/reviewer checks and
+eight exact warning controls pass, with ten assertions. No primitive,
+rule, opacity or output-exactness assumption is added. The next c4b tranche
+assembles the finite displayed LES certificate and its frontend nonsplit
+replay. Displayed LES exactness remains false; NUH-6C3b2 and NUH-7 remain.
+
 NUH-5N2G3B2c3 now constructs the middle/source/target public native inputs,
 their actual input equivalences and canonical exactness witnesses by applying
 the original LES proofs. Target zero composition is derived, not assumed.

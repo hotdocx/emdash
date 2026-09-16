@@ -16,6 +16,15 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Complete-arrow LES certificates (2026-09-16): the
+[generic certificate](../emdash3_2_one_cat_native_observed_exactness.lp)
+retains the fixed native input and its canonical Ω data. Observation
+interpretation changes only the complete-arrow path. All eight owner/reviewer
+checks and warning inventories pass. Ten assertions retain the original Ω
+data and reject native-input substitution, as recorded in
+the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+The finite displayed LES certificate and frontend replay remain next.
+
 Canonical public LES pairs (2026-09-16): the
 [public-pair transport](../emdash3_2_one_cat_native_public_pair_exactness.lp)
 derives target zero composition, constructs an actual native input equivalence

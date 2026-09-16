@@ -335,6 +335,14 @@ profile, while generic owners use default 90s/2GiB. No output exactness premise,
 new primitive or rule is added. Displayed-diagram observation indexing,
 frontend certificate assembly and nonsplit replay remain the next boundary.
 
+NUH-5N2G3B2c4a adds observation-indexed certificates that retain the actual
+public native input and original canonical Ω witness. Only the complete-arrow
+interpretation path changes; a negative reviewer rejects input substitution.
+All eight owner/reviewer checks and exact warning controls pass; the concrete
+reviewers retain the canonical Ω data. No primitive, rule, opacity or
+output-exactness premise is added.
+The displayed LES flag stays false pending finite-diagram/frontend replay.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

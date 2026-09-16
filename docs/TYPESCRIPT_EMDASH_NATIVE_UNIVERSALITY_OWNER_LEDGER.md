@@ -310,6 +310,26 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c4a: Complete-Arrow Certificates — Qualified
+
+The generic certificate retains the already-transported native input X,
+its canonical Ω evidence and the complete-arrow pair observation. Its
+observation transport keeps the whole witness judgmentally unchanged and
+rejects substituting a different native input Y. The three model constructors
+apply the original public-pair proofs, with only the original complete-arrow
+interpretation paths as additional arguments. All eight final owner/reviewer
+checks and eight exact import-warning inventories pass; actual-result reviewers
+retain the canonical witnesses unchanged.
+
+Nine definitions and ten assertions add no primitive, rule, opacity or
+output-exactness premise. The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records the unchanged generic and model-facing resource profiles. The body/LHS
+audit, catalog/TOC, documentation hygiene and 1406-file source-health snapshot
+pass. Exact evidence is bound in
+`emdash2/tmp/probes/nuh5g3b2c4a_qualification.json`. Next assemble
+the finite displayed diagram and frontend replay; the displayed LES exactness
+flag remains false. NUH-6C3b2 and NUH-7 remain required.
+
 ### NUH-5N2G3B2c3: Canonical Public-Pair Exactness — Qualified
 
 The generic comparison forms a genuine map/equivalence of actual native

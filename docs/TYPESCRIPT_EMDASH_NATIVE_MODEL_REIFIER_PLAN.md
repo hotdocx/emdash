@@ -1042,6 +1042,68 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c4a: Complete-Arrow Certificates — Qualified
+
+The [generic observation certificate](../emdash2/emdash3_2_one_cat_native_observed_exactness.lp)
+keeps the already-transported native input X as an explicit parameter. It pairs
+`OneCatNativeExactAt(X)` with a path from that input's complete arrow pair to
+the specified observations. Changing observations extends only that path;
+the original canonical Ω witness, including both inverse slots, is retained
+judgmentally. A negative reviewer rejects using this operation to certify a
+different native input Y. The preceding categorical input transport remains
+necessary; observation indexing does not replace it.
+
+The [middle](../emdash2/emdash3_2_commutative_algebra_freyd_native_middle_pair_exactness.lp),
+[source](../emdash2/emdash3_2_commutative_algebra_freyd_native_source_pair_exactness.lp)
+and [target](../emdash2/emdash3_2_commutative_algebra_freyd_native_target_pair_exactness.lp)
+constructors apply their original public-pair exactness proofs and the same
+generic observation operation. Typed reflexivity checks that each constructed
+public native input observes its intended two complete arrows. The supplied
+paths are the existing arrow interpretation contracts, with their endpoints;
+there is no output-exactness premise or additional naturality-square input.
+The general K/x interface remains; the frontend will specialize it at Terminal.
+
+This is nine transparent definitions and ten assertions, including the
+negative input-substitution check and explicit canonical-result/witness
+preservation checks for all three original proof applications. No primitive,
+rewrite/unification rule, opacity or legacy H comparison is added. All eight
+final owner/reviewer checks and eight exact import-warning inventories pass:
+the generic owner/reviewer use 90s/2GiB/default GC; the six model-facing checks
+use the previously reviewed 180s/6GiB/o20 profile. Target checks take
+9.442–101.412s. Warning categories, locations, term heads, rule families and
+parser results match their controls. The body/LHS audit, catalog/TOC,
+documentation hygiene and the 1406-file source-health snapshot pass. Exact
+source/log hashes are bound in `emdash2/tmp/probes/nuh5g3b2c4a_qualification.json`.
+No repository aggregate or TypeScript check was run for this formal tranche.
+
+Next NUH-5N2G3B2c4b assembles these certificates at every adjacent pair of the
+actual finite displayed LES diagram, adds the private frontend mirrors and
+constructor, and replays the nonsplit R=ℚ[x], S=R/(x) example. Reuse the original
+bounded-complex chain/map evidence and existing arrow interpretations. Keep
+all fixed native inputs explicit and prove coverage of the displayed pairs;
+do not choose fresh universal data or assume output exactness. Displayed LES
+exactness remains false until that concrete result is qualified. NUH-6C3b2
+and NUH-7 remain required.
+
+Implementation preparation for c4b: the existing native diagram inventory
+retains all windows and all degree inclusion/projection maps, including the
+maps beyond the displayed ends. For each adjacent displayed pair, select:
+H(i)/H(p) → middle at that degree; H(p)/δ → source at that window; δ/H(i) →
+target at that window. Derive coverage from the actual adjacent arrows and
+positions. Reuse each map observer's original chain/map terms and each window's
+row/normality terms; do not synthesize new interpretation claims or replace
+an adopted chain-map witness by a definitionally different choice.
+
+The ignored `emdash2/tmp/probes/nuh5g3b2c4b_exact_diagram_candidate.lp`
+proposes a finite certificate with explicit input family of length n for n+1
+complete arrows. The corresponding `_freyd_diagram_candidate.lp` specializes
+it to the existing coherent finite observation diagram, and the
+`_middle_frontend_candidate.lp`, `_source_frontend_candidate.lp` and
+`_target_frontend_candidate.lp` retain the general proof applications through
+Terminal-indexed frontend views. These candidates are unvalidated preparation,
+not promoted theory. Their native input family is observation data, not a new
+category of complexes or a replacement for the whole LES.
+
 ### NUH-5N2G3B2c3: Canonical Exactness At Actual Public Pairs — Qualified
 
 The three original LES exactness proofs now transport to their actual
@@ -1113,14 +1175,9 @@ qualified concrete certificate may set displayed LES exactness to true.
 The nonsplit R=ℚ[x], S=R/(x) replay, unchanged trust/model contracts, retained
 inverse data, NUH-6C3b2 and NUH-7 remain completion requirements.
 
-A next-step observation-indexing prototype is retained at
-`emdash2/tmp/probes/nuh5g3b2c4_observed_certificate.lp` and is not yet checked
-or promoted. It keeps the already-transported native input X as a parameter
-and pairs its canonical exactness with equality of its complete observed
-arrow pair to the displayed pair. Extending that observation path must leave
-the Ω witness unchanged. This is a certificate-data layer after categorical
-input transport, not an alternative transport principle or an existential
-reselection of the universal input. Qualify its actual public-input consumers,+then the existing CAS interpretation paths, before exposing the frontend flag.
+The initial ignored observation-indexing prototype and zero-composite pair
+recovery probe both pass at 90s/2GiB/default GC. The qualified continuation
+and its actual model consumers are recorded in NUH-5N2G3B2c4a above.
 
 ### NUH-5N2G3B2c2b2: CAS-Facing Native H Map Agreement — Qualified
 
