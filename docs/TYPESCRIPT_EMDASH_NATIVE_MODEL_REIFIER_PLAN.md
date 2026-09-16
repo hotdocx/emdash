@@ -1042,6 +1042,86 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c3: Canonical Exactness At Actual Public Pairs — Qualified
+
+The three original LES exactness proofs now transport to their actual
+CAS-facing native adjacent pairs. The [generic native pair map](../emdash2/emdash3_2_one_cat_native_pair_comparisons.lp)
+retains both input objects, using an actual outgoing-diagram map and the
+three original object comparisons. The existing diagram/native-map criteria
+supply fixed-forward equivalence and its computed inverse data.
+
+[Zero-composite transport](../emdash2/emdash3_2_one_cat_pair_comparison_zero.lp)
+derives the target zero law from the source input and cancellation with the
+source equivalence. The [public-pair owner](../emdash2/emdash3_2_one_cat_native_public_pair_exactness.lp)
+therefore constructs the existing native input of the requested f,g without
+a new zero or exactness premise. It applies the original canonical
+`one_cat_native_exactness_transport` to this actual input equivalence.
+[Whole-family staging](../emdash2/emdash3_2_one_cat_family_public_pair_exactness.lp)
+derives incoming point recovery before model specialization, retaining the
+original whole zero input and original exactness proof.
+
+The concrete [middle](../emdash2/emdash3_2_commutative_algebra_freyd_native_middle_public_exactness.lp),
+[source](../emdash2/emdash3_2_commutative_algebra_freyd_native_source_public_exactness.lp)
+and [target](../emdash2/emdash3_2_commutative_algebra_freyd_native_target_public_exactness.lp)
+applications retain all original rows, chain-map witnesses, P/Q and normality.
+Middle exactness applies the original row-triple theorem used by the window
+middle theorem. The source/target applications use the original full native
+window theorems. Their explicit reviewers check `OneCatNativeExactAt` at the
+actual named public inputs; they do not merely accept inferred generic types.
+
+The [connecting comparison](../emdash2/emdash3_2_commutative_algebra_freyd_native_delta_comparison.lp)
+derives δ_public∘c_R=c_L∘δ by cancellation of the original selected inverse,
+retaining the positive sign. Together with the qualified H(i)/H(p) equations,
+it supplies the two δ-adjacent input maps. The current source/target helper
+telescopes retain one opposite-column chain witness because the existing
+H-comparison theorem has that argument; it is original bounded-complex data,
+not a new model contract. It may be trimmed in a later interface cleanup.
+
+Twenty-four transparent definitions add no primitive, rewrite/unification
+rule, opacity, universal reselection or output-exactness assumption. Ten
+generic assertions recover the actual public f/g, target objects and all six
+inverse components. Five concrete assertions check the canonical middle/source/
+target exactness result types and middle public observations.
+
+Resource evidence: the direct combined middle application, its input prefix
+and isolated comparison equations allocate out at 2GiB/o20. The unchanged
+isolated equations pass at 6GiB/180s/o20. Generic whole-family staging also
+checks under the default guard; its concrete middle/source/target applications
+and explicit reviewers pass at 6GiB/180s/o20. All three are actual constructed
+proof applications. The same bounded profile is used for final model-facing
+qualification; generic owners/observations stay at 90s/2GiB/default GC. No
+unbounded retry or global-default change is authorized by these measurements.
+
+The three unused whole-input observation helpers and earlier expanded
+application variants remain in `emdash2/tmp/probes/nuh5g3b2c3_*`; they are not
+promoted dependencies of this staged route. All thirteen final owner/reviewer
+checks and thirteen exact import-warning inventories pass. Generic checks
+use default 90s/2GiB; the seven model-facing owner/reviewer checks use the
+reviewed 180s/6GiB/o20 profile. Measured check times range from 4.518s to
+98.459s. Categories, locations, term heads, rule families and parser results
+match controls. The source/body audit verifies 24 defined symbols, no output
+exactness premise in concrete applications, application of all three original
+proof constructors and fifteen assertions. LHS, catalog/TOC, links/lifecycle
+and the 1398-file source-health snapshot pass. Final source/log hashes are
+bound in `emdash2/tmp/probes/nuh5g3b2c3_qualification.json`. No repository
+aggregate or TypeScript typecheck was run for this formal tranche.
+
+Next NUH-5N2G3B2c4 indexes the transported witnesses by the actual public
+arrow observations, applies the existing native→CAS diagram interpretation,
+and constructs the displayed LES certificate in the frontend. Only that
+qualified concrete certificate may set displayed LES exactness to true.
+The nonsplit R=ℚ[x], S=R/(x) replay, unchanged trust/model contracts, retained
+inverse data, NUH-6C3b2 and NUH-7 remain completion requirements.
+
+A next-step observation-indexing prototype is retained at
+`emdash2/tmp/probes/nuh5g3b2c4_observed_certificate.lp` and is not yet checked
+or promoted. It keeps the already-transported native input X as a parameter
+and pairs its canonical exactness with equality of its complete observed
+arrow pair to the displayed pair. Extending that observation path must leave
+the Ω witness unchanged. This is a certificate-data layer after categorical
+input transport, not an alternative transport principle or an existential
+reselection of the universal input. Qualify its actual public-input consumers,+then the existing CAS interpretation paths, before exposing the frontend flag.
+
 ### NUH-5N2G3B2c2b2: CAS-Facing Native H Map Agreement — Qualified
 
 Terminology and user scope are explicit: this is not an old/new homology

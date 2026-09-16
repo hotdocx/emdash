@@ -45,6 +45,18 @@ hom_int/homd_int and groupoidal equality itself. The broader terminal/initial
 review follows the same criterion, under its separately qualified coherence
 profile; it is not justified merely by the present comparison's resource issue.
 
+NUH-5N2G3B2c3 now constructs the middle/source/target public native inputs,
+their actual input equivalences and canonical exactness witnesses by applying
+the original LES proofs. Target zero composition is derived, not assumed.
+Explicit reviewers check the canonical comparison at each actual public input;
+generic observations retain the public arrows and all inverse components.
+Twenty-four definitions add no primitive, rule, opacity or model contract.
+All thirteen focused checks and warning inventories pass. Next assemble the
+displayed CAS LES certificate and concrete nonsplit replay (NUH-5N2G3B2c4). The
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records the reviewed
+6GiB/180s model-facing profile and unchanged default generic checks.
+Displayed LES exactness is still false; NUH-6C3b2 and NUH-7 remain required.
+
 NUH-5N2G3B2c2b2 proves agreement of both new whole LES family H maps with
 the CAS-facing native H maps through c_L,c_M,c_R. The original public model
 map and whole row-triple maps occur in the actual theorem statements; all

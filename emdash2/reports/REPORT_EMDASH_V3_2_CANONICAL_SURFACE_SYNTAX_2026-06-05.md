@@ -2221,6 +2221,15 @@ supply the two zero pairs involving δ. The source, middle and target
 `..._exact_comparison` operations are the existing actual Im⇒K maps;
 no invertibility evidence is implied by those names or declarations.
 
+`native_public_pair_input` forms the actual native zero-cone of the public
+f,g after deriving their zero composition. `native_public_pair_exact` transports
+the original `OneCatNativeExactAt` witness through its actual input equivalence.
+`native_family_public_pair_exact` stages the original whole input recovery
+before point specialization. The Freyd middle/source/target `..._public_exact`
+operations apply the original LES proof constructors at those actual inputs;
+none takes target exactness as an argument. These are derived operations,
+not new grammar or primitive exactness rules.
+
 `freyd_native_column_incoming_homology_path` and its outgoing counterpart
 state H_CAS(i)∘c_L=c_M∘H_family(i)[x] and
 H_CAS(p)∘c_M=c_R∘H_family(p)[x]. H_CAS denotes the existing new native

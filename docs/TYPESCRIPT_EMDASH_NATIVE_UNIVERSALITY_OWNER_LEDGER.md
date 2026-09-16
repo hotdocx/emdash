@@ -310,6 +310,33 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c3: Canonical Public-Pair Exactness — Qualified
+
+The generic comparison forms a genuine map/equivalence of actual native
+inputs. It derives target zero composition and transports the original
+canonical Im→Ker evidence. Whole-family staging supplies original incoming
+recovery before concrete model expansion. All three concrete LES applications
+and their explicit canonical-result reviewers pass at 6GiB/180s/o20; their
+original row/normality proofs are applied, not replaced by assumptions.
+Generic target/inverse observations pass at default 90s/2GiB.
+
+Twenty-four definitions and fifteen assertions add no primitive, rule,
+opacity or model contract. The positive δ comparison supplies both adjacent
+input compatibilities with the existing H-map equations. The source/target
+helper telescopes retain an unused opposite-column witness from the original
+bounded-complex inventory through the existing H-comparison interface.
+All thirteen final owner/reviewer checks and exact warning controls pass;
+source/body, LHS, catalog/TOC, documentation and the 1398-file source-health
+snapshot pass. The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records the seven 180s/6GiB/o20 model-facing checks and unchanged generic
+90s/2GiB defaults. Exact evidence is bound in
+`emdash2/tmp/probes/nuh5g3b2c3_qualification.json`.
+
+Next construct the observed-pair/displayed-diagram certificate and frontend
+nonsplit replay under the unchanged model/interpretation contracts. The
+canonical pair proofs alone do not set the displayed CAS exactness flag.
+NUH-6C3b2 and NUH-7 remain required; old/new homology comparisons remain removed.
+
 ### NUH-5N2G3B2c2b2: CAS-Facing Native H Map Agreement — Qualified
 
 Both original whole row-triple H maps now commute with c_L,c_M,c_R and the

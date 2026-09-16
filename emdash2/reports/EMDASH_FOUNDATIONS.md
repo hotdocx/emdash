@@ -5070,6 +5070,17 @@ must still be related to the public arrows and their interpretations with
 shared endpoint coherence; four invertible comparisons alone do not make
 that link.
 
+Canonical exactness now transports to each actual public LES pair through
+an equivalence of its native input. The target zero law is derived from the
+source input and cancellation by its source comparison. A genuine diagram
+map retains the other two comparisons; the existing native-map equivalence
+criterion supplies the inverse. The original middle/source/target LES proofs
+then certify the canonical Im→Ker at the respective public input. This is
+stronger than retaining an invertible unrelated arrow, and it introduces no
+output-exactness assumption. The public f/g observations and inverse-component
+computations are checked. A displayed CAS certificate still requires the
+existing model interpretation paths and the concrete assembled consumer.
+
 The new LES family H maps now agree, under their original column comparisons,
 with the CAS-facing native H action. That public action applies the same
 model's whole H to a native map built from the matrix/presentation data; it

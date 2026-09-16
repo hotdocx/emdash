@@ -327,6 +327,14 @@ its signatures and original inputs remain. No identification rule, primitive
 or output-exactness contract is added. Adjacent-input equivalences and
 displayed LES exactness transport remain the next qualification boundary.
 
+NUH-5N2G3B2c3 transports the original middle/source/target exactness proofs
+to the actual CAS-facing native adjacent inputs. Target zero composition is
+derived; the actual input equivalences retain all inverse components. The
+concrete canonical-result reviewers pass under the measured 6GiB/180s/o20
+profile, while generic owners use default 90s/2GiB. No output exactness premise,
+new primitive or rule is added. Displayed-diagram observation indexing,
+frontend certificate assembly and nonsplit replay remain the next boundary.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

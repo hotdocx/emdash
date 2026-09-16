@@ -25,6 +25,16 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
+Canonical public LES pairs (2026-09-16): the
+[public-pair transport](../emdash3_2_one_cat_native_public_pair_exactness.lp)
+derives target zero composition, constructs an actual native input equivalence
+and transports the original canonical exactness witness. Concrete middle,
+source and target applications use the original LES theorems; explicit
+reviewers check their actual public-input result types. Inverse data remains
+computational. Twenty-four definitions add no primitive or rule. Displayed
+CAS certificate assembly remains in the
+[model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 CAS-facing native H agreement (2026-09-15): the
 [actual column equations](../emdash3_2_commutative_algebra_freyd_native_column_homology_paths.lp)
 relate the new whole LES H maps to the public native model action through
