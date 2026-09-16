@@ -19,6 +19,9 @@ The plan keeps current scope and gates; the ledger owns chronological receipts.
 
 Completion evidence:
 [categorical consolidation final audit](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md).
+The user subsequently authorized main fast-forward/push/Pages publication;
+completed checkpoint c3792b67 and book 0.9.1-dev are now published. See the
+[publication receipt](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication).
 
 Reviewed checkpoint: `2b1066c6e7b7489e954581f6473bb0ba75da8975`
 
@@ -266,7 +269,8 @@ independent input/observation owners and retirement, while retaining its
 qualified native LES/snake computation. Four new evidence entries bring the
 register to 182 claims. General higher terminality and Γ remain qualified
 future work. Source checks, rendering, PDF inspection and two identical
-exports qualify the generated local artifacts; no external publication follows.
+exports qualify the generated artifacts. Post-completion main/Pages publication
+was separately authorized and is recorded in the ledger.
 
 The current-status report, Foundations and report index now lead with current
 interfaces. Their dated milestone prose and obsolete homological source
@@ -320,7 +324,7 @@ typecheck or renewed normalization probe was run.
 | CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Qualified with explicit retained references |
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Qualified independent portion; general higher replacement has recorded prerequisites |
 | CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Qualified consolidation; Γ follow-up explicitly selected by user |
-| CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Qualified; book 0.9.1-dev remains local |
+| CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Qualified; book 0.9.1-dev subsequently published with explicit authorization |
 | CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | Qualified; final audit and all 94 emitted native assertions pass |
 
 For each implementation slice, record the hypothesis, actual affected owners,
@@ -357,5 +361,6 @@ source/trust boundary and follow-up list. Book, reading-route and email-draft
 updates are qualified in CC-5; the final-kernel replay passes in CC-6.
 The user-selected Γ follow-up retains its concrete audit fragment and
 qualification requirements. It is not a claimed completed interface and does
-not block this goal's completion. Later main integration/publication remains
-separately authorized work.
+not block this goal's completion. The subsequent user-authorized main/Pages
+publication is recorded in the ledger; other future integrations remain
+separately scoped work.

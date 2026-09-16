@@ -4,7 +4,9 @@ LONGER TECHNICAL APPENDIX
 Functorial Type Theory in emdash v3.2
 
 Local development snapshot reviewed 2026-09-16, alongside book 0.9.1-dev.
-This draft and the local book update have not been externally published.
+This is an unsent correspondence draft. The matching book snapshot is
+published through the repository/Pages route; the DOI still identifies the
+earlier archived edition.
 
 Abstract. Functorial Type Theory asks what happens when the substitutional
 discipline of dependent type theory is extended to genuinely categorical

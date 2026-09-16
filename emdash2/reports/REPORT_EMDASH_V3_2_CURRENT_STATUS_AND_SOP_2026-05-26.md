@@ -44,8 +44,10 @@ is meaningful but unqualified; the user selected retaining it as follow-up
 while finishing consolidation. Op/duality, action-profile integration and the
 large six-term comparison remain deferred.
 
-The initial main/Pages publication is df9b4778. Subsequent consolidation and
-book checkpoints are local until separately authorized for integration.
+The initial main/Pages publication was df9b4778. The user subsequently
+authorized completed consolidation c3792b67 and book 0.9.1-dev for main/Pages;
+both are published, with the live PDF matching the checked artifact. See the
+[publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication).
 
 ## Sources Of Truth
 

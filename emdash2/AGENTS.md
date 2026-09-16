@@ -54,18 +54,19 @@ review in `audits/native-six-term-observation-boundary/README.md`. The original
 construction, maps, witnesses and typed inverse observations remain qualified;
 the failed comparison is not claimed proved. Do not resume that experiment
 or older endpoint/projection experiments without a new user scope.
-Book 0.9.1-dev and its local artifacts are qualified. The user-authorized
-initial consolidation checkpoint df9b4778, with book 0.9.0-dev, was pushed and
-deployed to GitHub Pages; later consolidation checkpoints remain local.
+Book 0.9.1-dev is qualified and published through the repository/Pages route.
+The user-authorized completed consolidation checkpoint c3792b67 was
+fast-forwarded into main, pushed and deployed on 2026-09-16; its live PDF
+matches the checked artifact. The consolidation ledger records the deployment.
 No action-profile integration is implied.
 
 The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
 is the completed plan for auxiliary categorical owners, remaining path uses,
 shared-input dependency cleanup and retirement. Its
 [final audit](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md)
-records the preserved native computations and explicit follow-ups. The initial
-main/Pages publication and local implementation checkpoints were authorized;
-later integration/publication still needs separate authorization.
+records the preserved native computations and explicit follow-ups. The user
+subsequently authorized and completed main/Pages publication of this checkpoint.
+That authorization does not extend to unrelated later integrations or releases.
 Preserve ordinary/discrete guards on the declared structural interfaces.
 The generic whole contraction definitions and ordinary terminal/initial
 adjunction extension now live in `emdash3_2_categorical_contractions.lp` and

@@ -1067,3 +1067,43 @@ six-term/older endpoint comparisons, Op/profile integration, closed model
 construction and broader homological/spectral research remain explicit
 follow-ups. Later main integration/publication is not included in this
 completion. The final audit checkpoint is documentation-only.
+
+
+### Post-Completion Main Integration And Pages Publication
+
+User authorization: after completion, the user explicitly requested main
+fast-forward, GitHub push and deployment, and investigation of the uncommitted
+email draft. This publication is additional authorization after the goal's
+local completion; it does not reopen Γ, Op/profile or six-term work.
+
+The actual dirty file was `emdash2/tmp/EMAIL.md`; no `EMAIL.tmp` existed. It
+was the assistant's CC-5 mirror of the updated draft into the main worktree.
+Its bytes exactly matched the version already committed on the consolidation
+branch (SHA-256 `fb6bddde748185e586e86cfb53fe1fe82203938573788abc63430fecc02c5b81`).
+A local ignored backup was retained. After clearing only that duplicate
+working change, main fast-forwarded from df9b4778 to
+`c3792b670082cd4c2ff4afc034c4c535118f7130`; the same updated draft was thereby
+present as committed content. No separate user edit was discarded. The email
+remains unsent; this receipt also corrects its book-publication notice.
+
+`git fetch origin main` confirmed no upstream divergence. The ordinary push
+succeeded and triggered the existing Pages workflow. Both build and deploy
+jobs succeeded in [run 35164455142](https://github.com/hotdocx/emdash/actions/runs/35164455142),
+completed 2026-09-16 23:57:09 UTC, for exact source c3792b67.
+The [live reviewer](https://hotdocx.github.io/emdash/) and its book asset return
+HTTP 200. The emitted entry script references
+`assets/emdash-book-B5Qu2A9s.pdf`; downloading that asset gives 3,575,206 bytes
+and SHA-256:
+
+```text
+50db5ad839915eb04e48b8ac6aaea535410ffcfd3bad53ff3060fda66642cbfa
+```
+
+That is byte-identical to the qualified book 0.9.1-dev PDF. No new package,
+Zenodo release, email transmission or action-profile integration occurred.
+The native/formal/book qualification is unchanged and reused. The follow-up
+receipt changes standing publication notices and documentation only; it does
+not alter the Pages build inputs, emitted book, proof code or CAS code.
+Local recovery receipts are `main-integration-email-20260916.json` and
+`consolidation-pages-live-verification.json` under the main worktree's
+`emdash2/tmp/probes/`.

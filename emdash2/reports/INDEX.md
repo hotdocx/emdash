@@ -22,7 +22,9 @@ are implemented; general higher terminality is still a refinement boundary.
 The [whole input/H comparison](../audits/categorical-family-introduction-boundary/README.md)
 is retained as a meaningful unqualified follow-up by user choice. Op/profile
 integration and the large six-term comparison remain deferred. The initial
-main/Pages checkpoint was published; later consolidation checkpoints are local.
+main/Pages checkpoint and completed consolidation c3792b67 are published.
+The [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication)
+records the successful deployment and live PDF checksum.
 
 ## Current Orientation
 

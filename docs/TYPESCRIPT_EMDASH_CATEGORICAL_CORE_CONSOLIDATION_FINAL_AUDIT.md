@@ -249,14 +249,20 @@ Historical milestone narratives and the obsolete source catalogue have one
 clearly marked recovery report; their six pre-extraction hashes verify
 preservation. The plan owns current scope and its linked ledger owns history.
 Local links, inbound moved-document fragments, owner existence and diff
-hygiene pass. Email was not sent. The main worktree has the mirrored draft
-update only; no later main commit or publication has been performed.
+hygiene pass. Email was not sent. At goal completion, the main worktree had
+only the mirrored draft update; the post-completion integration below resolves
+that working change without losing any content.
 
 The initial authorized main/Pages publication remains `df9b4778`, with book
 0.9.0-dev. Its successful deployment is
 [run 35131972244](https://github.com/hotdocx/emdash/actions/runs/35131972244).
-All subsequent consolidation checkpoints and book 0.9.1-dev remain local.
-Integration, push or publication requires separate authorization.
+The user then explicitly authorized publication of the completed consolidation.
+Main fast-forwarded to c3792b67 and was pushed; Pages
+[run 35164455142](https://github.com/hotdocx/emdash/actions/runs/35164455142)
+succeeded. The live book 0.9.1-dev PDF matches the checked SHA-256 above.
+The [publication receipt](TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication)
+records the email reconciliation and exact deployment boundary. The following
+receipt commit changes documentation only, not deployed source or artifacts.
 
 ## Exact Follow-Up Scope
 
