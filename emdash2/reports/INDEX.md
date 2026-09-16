@@ -17,6 +17,10 @@ and the obsolete snake/snake-derived connecting route. Current native owners
 and the ordinary iterator remain intact. See the living consolidation plan
 for the checked consumer inventory and renamed ordinary-support gates.
 
+The legacy model facades/adapters are now retired as well. The direct native
+proof–CAS workflows remain qualified by full nonsplit LES/snake replays and
+94 emitted formal assertions; the consolidation plan records their evidence.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the
@@ -420,20 +424,20 @@ plan. The auxiliary endpoint/projection studies remain deferred.
 NUH-5B2d2b (2026-09-14, checkpoint `0caa19d0`): complete retained bounded
 model adoption and reuse are qualified for all 18 H points, eight maps and
 three native δ windows. Five focused workflow tests and all 18 emitted LP
-assertions pass through the [staged gate](../scripts/check_freyd_native_model_connecting.sh).
+assertions pass through the [staged gate](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/scripts/check_freyd_native_model_connecting.sh).
 Worker heap settings, lossless payload transport and retained signature
 metadata account for the runtime qualification; formal terms and explicit
 model/interpretation contracts are preserved. Native categorical exactness
 observations are next in the [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 NUH-5B2d1 (2026-09-14): the
-[native model observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+[native model observer](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
 uses whole δ at original retained H endpoints, under explicitly named native
 normality and row contracts. TypeScript's new private mirror names reject
 legacy contracts. Five definitions and one narrower proof dependency add no
 primitive or rule. Eight focused tests and the concrete emitted nonsplit
 observer pass through the
-[bounded gate](../scripts/check_freyd_native_model_connecting.sh).
+[bounded gate](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/scripts/check_freyd_native_model_connecting.sh).
 Native exactness observations remain open in the
 [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md);
 the later d2b checkpoint above qualifies complete bounded adoption.
@@ -474,7 +478,7 @@ continues through derived-column comparisons and retained observations.
 NUH-5B2a (2026-09-14): [retained/direct native inputs](../emdash3_2_one_cat_chain_pair_input_comparisons.lp)
 now have a derived categorical equivalence through the
 [ordinary fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp).
-The [Freyd comparison](../emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+The [Freyd comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
 maps it through original whole H, preserving endpoints and the selected
 inverse. [Raw row families/maps](../emdash3_2_commutative_algebra_freyd_native_row_families.lp)
 retain all original components through existing whole action. Nineteen
@@ -487,7 +491,7 @@ NUH-5B1 (2026-09-14): the supplied
 [native Freyd model](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
 now retains whole P/Q, with a separate
 [whole normality enhancement](../emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp).
-The [legacy adapter](../emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+The [legacy adapter](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
 preserves identical whole H and its original native-input observations.
 [Whole δ](../emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp)
 and [all three exactness witnesses](../emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp)

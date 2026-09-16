@@ -274,9 +274,9 @@ presheaf argument's variance while preserving the native homd owners.
 | [direct connecting](../emdash2/emdash3_2_homology_record_connecting.lp) | Retained homology records and universal factors | Reuse mathematics and nonzero consumers while moving primary construction to whole universality |
 | [whole connecting](../emdash2/emdash3_2_homology_window_connecting_transformation.lp) | Declared whole transfor whose component is the direct construction | Preserve actual endpoints and generic action; audit the declaration/interpretation contract |
 | [finite iterator](../emdash2/emdash3_2_homology_bounded_generator.lp) | Retained row/map fields and whole H/δ with interior evidence | Reference consumer; symbolic endpoint debugging remains deferred |
-| [formal model](../emdash2/emdash3_2_commutative_algebra_freyd_homology_models.lp) | Explicit W/V plus coherent K/Q presentations | Reusable model construction/registration and accurately classified realization contracts |
+| [formal model](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_models.lp) | Explicit W/V plus coherent K/Q presentations | Reusable model construction/registration and accurately classified realization contracts |
 | [native connecting](../src/v3_2/algebra_polynomial_freyd_homology_connecting.ts) | Snake method with retained endpoint comparisons/descent | Preserve as computational method; compare against the whole formal characterization |
-| [bounded model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts) | Supplied model and optional normality, prepared observations and explicit adoption | Automate repetitive model/reifier plumbing for the supported backend without upgrading trust claims silently |
+| [bounded model workflow](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/src/v3_2/algebra_formal_freyd_long_exact_model.ts) | Supplied model and optional normality, prepared observations and explicit adoption | Automate repetitive model/reifier plumbing for the supported backend without upgrading trust claims silently |
 
 NUH-3A/B supply whole K/Q, mates and H without W/V inputs. The full vertical
 consumer now has a direct raw-input constructor; packaged input migration,
@@ -1677,7 +1677,7 @@ snake/native comparison and final goal qualification remain required.
 
 **Qualified after 69bf3577 (2026-09-14), at preparation/replay only.**
 Follow the [model/reifier subplan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
-The new [rational context preparation](../src/v3_2/algebra_formal_freyd_rational_model_context.ts)
+The new [rational context preparation](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/src/v3_2/algebra_formal_freyd_rational_model_context.ts)
 automates coefficient names, generator/model/normality references, all
 existing inventories and the immutable environment for one retained result.
 An issued immutable registration records explicitly supplied coefficient,

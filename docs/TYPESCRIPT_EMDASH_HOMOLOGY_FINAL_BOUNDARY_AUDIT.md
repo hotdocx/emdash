@@ -63,7 +63,7 @@ then reuses the selected weak-pullback providers, raw boundary and
 reconstruction to construct formal homology and exactness for every displayed
 interior pair. It does not turn boundary epicity alone into kernel universality.
 
-The [whole-model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts)
+The [whole-model workflow](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/src/v3_2/algebra_formal_freyd_long_exact_model.ts)
 adds an interpretation of actual whole-H observations. It checks the issued
 preparation, original adoption, exact equation inventory, model signature and
 named supplied model before recording further claims. Its three evidence

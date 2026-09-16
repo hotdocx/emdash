@@ -718,3 +718,144 @@ and dedicated tests. Replace negative tests' dependence on production legacy
 factories with local wrong-model fixtures or retained active rejection cases;
 do not weaken native contract/mixed-model/reselection checks. Retain generic
 CAS computation and ordinary provider data that current consumers still use.
+
+
+CC-2c1 checkpoint: `739c045d`; this continuation begins clean and classifies
+the previous turn as implementation progress. CC-2c2 retires the coupled
+legacy-model facades, while preserving current native function bodies/profile
+values and shared preparation. The LP former-model downstream closure has
+nine owners after CC-2a; it is disjoint from protected native/reference roots.
+Full symbol and reviewer inventories are in `cc2c2_retirement_inventory.json`.
+
+Remove the six legacy-only TS model signature/workflow/rational-context files
+and the old point/map/row/connecting wrappers in mixed observation files.
+Flatten native profiles without changing their values; narrow internal point
+unions to the surviving native type. Retire tests specifically exercising the
+removed API. Keep ordinary provider/raw-spine tests by giving their fixtures a
+model-independent raw environment, and preserve native wrong-model, foreign-
+profile, mixed-model, normality/row, forgery and no-reselection rejection tests.
+Only local test fixtures may reproduce an old nominal classifier if useful;
+they must not retain a production compatibility API. Qualify native signature
+identity, profile identity, scoped compilation/lint and the affected workflows.
+
+
+CC-2c2 validation update: scoped compilation/lint, import audit and book
+evidence pass after correcting the raw fixture's `baseEnvironment` argument.
+The nine old-model LP owners and eight reviewers, six legacy-only TS files,
+legacy observation wrappers and their unused old workflow gate are removed.
+All 460 protected mathematical sources are unchanged. Native profile values
+are identical, and all twelve surviving observation functions retain their
+original computation (two obsolete diagnostic mentions of legacy support are
+being corrected). Production source has no old-model symbol use; the remaining
+strings in native tests assert its absence.
+
+Native context/map/connecting and retained ordinary provider/spine suites pass
+at their scoped limits. Two native wrong-profile tests are now strengthened
+in the surviving direction (foreign source-point profile passed to the native
+map/δ factory), replacing tests that called the removed legacy factory. Rerun
+those cases after the diagnostic correction. Then replay the complete native
+nonsplit LES and snake consumers to qualify the retirement end to end. Use the
+existing 600s/2GiB/512MiB+4MiB-semispace profile for the three-test LES assembly,
+and a 300s/2GiB/512MiB bounded snake suite; all LP consumers retain their owning
+resource profiles. These are localized workflow checks, not repo-wide checks
+or the deferred six-term direct-comparison experiment.
+
+
+CC-2d inventory prepared while CC-2c2 integration runs: ordinary HomologyRecord
+and its projections share `computational_homology` with the former selected
+recipe. Extract the record/classifier/intro/projections without the
+`homology_record_selected` selection helper; keep that helper downstream with
+the explicit ordinary iterator. Move the unchanged raw-pair annihilator view
+to its own shared test-data owner. Then redirect the native-derived ordinary
+record consumers to those owners. This removes their accidental dependence
+on the selected algorithm without inventing a new record or comparison.
+Do not modify those LP owners until the current retirement checkpoint is
+qualified. The retained iterator still explains the separate selected-
+presentation and old ordinary exactness route; its migration remains outside
+the deferred endpoint/normalization experiments.
+
+
+CC-2c2 integration boundary: the strengthened map/connecting rejection cases
+pass (23.36s and 55.78s). The full LES with ts-node reaches assembly (190.26s)
+and begins reuse, then its worker exhausts the 512MiB V8 heap at 251.40s.
+The established NUH qualification used compiled JS, not a resident TS loader.
+Repeat using a scoped emitted dependency tree and the original Node 512MiB /
+4MiB semispace / 2GiB OS / 600s envelope before considering any limit increase.
+Do not change declarations, proof data or contracts to work around this loader
+resource failure. The terminated process is confirmed complete; no live job
+is restarted speculatively. The native snake integration has not yet run.
+
+
+CC-3 source-review note (no implementation yet): `ProfComparison` is explicitly
+`DefIso(Prof_cat,−,−)`, and the nucleus documents DefIso as judgmental inverse
+cancellation, stronger than ordinary inverse evidence. The existing
+`Adjunction_hom_prof_comparison` uses that computational interface. Therefore
+a primary terminality redesign must distinguish the chosen computational
+adjunction presentation from mere higher categorical contraction D≃1. Do not
+silently identify those contracts or delete OneCat guards on the strength of
+object-univalence. Read the actual whole comparison and its data/actions before
+choosing the independently justified implementation boundary.
+
+
+The compiled integration runner (session `46957`) completed successfully.
+Its exact receipt is `cc2c2_compiled_integration_receipt.json`; the prior live
+handoff is superseded by the results below.
+
+
+CC-2c2 compiled integration succeeds: all three full LES tests pass in 392.22s
+at the unchanged 600s/2GiB/512MiB+4MiB-semispace profile. Assembly, reuse and
+emission complete. The result retains 12 degree points, 8 maps, 3 windows,
+8 displayed points/7 arrows, 9 original whole exactness terms, 20 computed
+equations and 13 interpretation claims; homology/connecting replays and
+universal reselections are all zero. The manifest contains the expected 64
+assertions. The compiled native snake passes all 9 tests in 47.77s, including
+four pair certificates and the displayed diagram, without new interpretations.
+Thus the loader-free replay resolves the observed V8 heap failure without
+changing source, proof data, model contracts or memory limits.
+
+The serial LP qualification runner (session `11204`) completed successfully;
+its full result is recorded below and in `cc2c2_formal_checks.json`.
+
+
+CC-2c2 qualified: the remaining legacy model layer is retired: nine LP owners,
+thirty formal symbols, eight reviewers, six legacy-only TS files, five legacy
+observation/context wrappers and the old workflow gate. The three native
+profiles retain exactly the same values. Twelve surviving observation function
+bodies retain their computation; only two diagnostics now correctly say native
+profiles. Native signature inventories retain all 365 entries byte-for-byte
+in canonical type/body/mode form. All 460 protected mathematical source files
+remain byte-identical to d35cc98e, and live imports/registrations are valid.
+
+The native context/map/connecting suites pass (9+4+4 tests). Foreign nominal
+model/normality fixtures replace production legacy factories in rejection tests;
+wrong model parameters, foreign source profiles, mixed models, raw-zero/row
+misuse, forged data and reselection rejection remain covered. The two newly
+strengthened source-profile cases also pass independently. Ordinary provider
+and raw-spine suites remain (5+6 cases, with their two existing optional LP
+cases skipped in the Node run); their fixtures no longer declare any model.
+The full nonsplit LES (3 tests, 392.22s) and snake (9 tests, 47.77s) pass from
+compiled JS at the documented original memory limits. The prior ts-node heap
+failure is retained as runner evidence, not hidden as a mathematical failure.
+
+All eight emitted LP artifacts pass: 64 LES assertions, 15 snake observations,
+10 snake certificate signature assertions and 5 snake certificate assertions
+(94 total). Their category/location/head/rule-family/parser warning inventories
+match exact import-only controls, with controls reused only for identical
+ordered imports. The existing 6GiB/180s/o20 profile is retained; the slowest
+artifact takes 115.79s. No opacity, computation, model contract or output
+assumption was changed for these checks. Compiler/loader guidance is now in
+the repository-wide Lambdapi SOP's resource section.
+
+Final scoped typecheck/lint, catalog, source metadata and book evidence pass.
+The source-health report explicitly skips an aggregate run: 1252 files,
+snapshot `161dc84ad6131b4699b694a69150e08afa8a4b0dc1eb5915271739a7b7f537b2`.
+Twenty-one historical links in six documents point to the published df9b4778
+sources. No release, push or further main integration occurred. Exact receipts
+and emitted proof sources are in `emdash2/tmp/probes/cc2c2_*`, especially
+`cc2c2_retirement_inventory.json`, `cc2c2_compiled_integration_receipt.json`
+and `cc2c2_formal_checks.json`; source/log hashes bind the actual LP checks.
+
+Next: complete CC-2d's useful-record separation, then undertake CC-3's
+categorical terminal/initial and structural-interface review. Do not resume
+Op/profile integration, spectral work, endpoint experiments or the deferred
+six-term package comparison as an implicit prerequisite.

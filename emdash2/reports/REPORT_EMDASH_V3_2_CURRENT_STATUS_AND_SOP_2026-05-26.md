@@ -45,6 +45,13 @@ longer construct/import legacy model signature environments; their canonical
 declarations are unchanged. Scoped compilation, 17 native consumer tests and
 emitted-map LP conformance pass. Actual legacy facade retirement remains next.
 
+CC-2c2 retirement (2026-09-16): the legacy formal model and TypeScript facades
+are removed. Shared raw preparation and the native implementations remain;
+profile/signature identity, scoped tests, the complete nonsplit LES/snake
+replays and all 94 emitted LP assertions pass. There are no new interpretation
+contracts or output-exactness assumptions. The living plan records the compiled-
+JS runner correction and exact import-warning controls.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the
@@ -471,8 +478,8 @@ assembly, displayed-diagram transport/coherence and the later sign comparison
 remain in the [living plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
 
 Native model observer update (2026-09-14): the
-[native context aliases](../emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
-and [complete-arrow observer](../emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+[native context aliases](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
+and [complete-arrow observer](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
 use the original whole δ, its raw column comparisons and the existing
 retained/native H equivalences. General K/x stages precede the final
 Terminal observation; both old H objects remain literal endpoints. Five
@@ -481,7 +488,7 @@ the same incoming-source law directly, avoiding unused old H-recipe proofs.
 TypeScript uses distinct native normality/row/observer mirror names and
 requires `nativeNormalityContract`. Eight focused tests and the concrete
 nonsplit emitted observer pass through the
-[separately bounded gate](../scripts/check_freyd_native_model_connecting.sh).
+[separately bounded gate](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/scripts/check_freyd_native_model_connecting.sh).
 Model/row/arrow interpretations remain supplied or trusted. Complete retained
 bounded-model adoption is now qualified, and the direct native workflow covers
 all three connecting windows. Native whole exactness evidence is available as
@@ -533,7 +540,7 @@ Native input comparison (2026-09-14): the
 maps a fibre cell to an arrow with both base components identities. Existing
 source reconstruction and diagram reflection derive the
 [retained/direct input equivalence](../emdash3_2_one_cat_chain_pair_input_comparisons.lp).
-The [Freyd comparison](../emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+The [Freyd comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
 applies original whole H and preserves the selected inverse. No H endpoint
 is cast or reselected. [Raw row families](../emdash3_2_commutative_algebra_freyd_native_row_families.lp)
 and their maps retain the original native inputs and all three raw map
@@ -544,7 +551,7 @@ derived column-input comparison and retained TypeScript observations remain.
 Native model update (2026-09-14):
 [FreydAdjunctionModel](../emdash3_2_commutative_algebra_freyd_adjunction_models.lp)
 packages supplied whole P/Q independently of ordinary W/V dictionaries.
-Its [legacy adapter](../emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+Its [legacy adapter](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
 retains the identical whole H, including original native inputs and Hom
 action. [Native normality](../emdash3_2_commutative_algebra_freyd_adjunction_model_normality.lp)
 is a separate supplied capability over the actual whole Coim⇒Im. The

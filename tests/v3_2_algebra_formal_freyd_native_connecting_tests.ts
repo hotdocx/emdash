@@ -12,7 +12,7 @@ import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/alge
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
 import { trustAlgebraFormalFreydNativeConnecting } from '../src/v3_2/algebra_formal_freyd_native_connecting_workflow';
 import { algebraFormalFreydNativeModelType } from '../src/v3_2/algebra_formal_freyd_native_model_signatures';
-import { algebraFormalFreydNativeConnectingObservationBundle, algebraFormalFreydModelConnectingObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_connecting_observation';
+import { algebraFormalFreydNativeConnectingObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_connecting_observation';
 import { algebraFormalFreydNativeModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
 import { serializeCoreExpression } from '../src/v3_2/core_serialization';
 import { polynomialFreydHomologyFixture, isPolynomialFreydMorphismZero } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
@@ -110,9 +110,13 @@ describe('v3.2 direct native connecting realization', () => {
         assert.equal(again.observation.realization.formalData, result.observation.realization.formalData);
     });
 
-    it('rejects legacy or mixed models, forged preparations and a wrongly typed native model', async () => {
+    it('rejects foreign profiles, mixed models, forged preparations and a wrongly typed native model', async () => {
         const { v, input, result } = await consumer();
-        assert.throws(() => algebraFormalFreydModelConnectingObservationBundle(result.observationInput), /profiles/iu);
+        const foreignSource = { ...result.observationInput.source, profile: {
+            ...result.observationInput.source.profile, revision: 'foreign-point-profile'
+        } } as unknown as typeof result.observationInput.source;
+        assert.throws(() => algebraFormalFreydNativeConnectingObservationBundle({ ...result.observationInput, source: foreignSource }),
+            /point observation profiles/iu);
         assert.throws(() => result.observation.adapter.normalizeRealization({ ...result.observation.realization }, 'test'), /Foreign/iu);
         assert.throws(() => algebraFormalFreydNativeConnectingObservationBundle({ ...result.observationInput,
             rows: result.rows.map((row, i) => i === 0 ? { ...row, exact: row.chain } : row) }));

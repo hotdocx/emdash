@@ -12,7 +12,7 @@ import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/alge
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
 import { trustAlgebraFormalFreydNativeHomologyMap } from '../src/v3_2/algebra_formal_freyd_native_map_workflow';
 import { algebraFormalFreydNativeModelType } from '../src/v3_2/algebra_formal_freyd_native_model_signatures';
-import { algebraFormalFreydNativeModelMapObservationBundle, algebraFormalFreydModelMapObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_map_observation';
+import { algebraFormalFreydNativeModelMapObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_map_observation';
 import { algebraFormalFreydNativeModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
 import { serializeCoreExpression } from '../src/v3_2/core_serialization';
 import { algebraPolynomialPresentationMorphismCongruence, algebraPolynomialPresentationMorphismIdentity } from '../src/v3_2/algebra_polynomial_freyd_category';
@@ -109,9 +109,13 @@ describe('v3.2 complete native H arrows', () => {
         assert.equal(again.observation.realization.formalData, result.observation.realization.formalData);
     });
 
-    it('rejects legacy or mixed models, forged preparations and a wrongly typed native model', async () => {
+    it('rejects foreign profiles, mixed models, forged preparations and a wrongly typed native model', async () => {
         const { v, input, result } = await consumer();
-        assert.throws(() => algebraFormalFreydModelMapObservationBundle(result.observationInput), /profiles/iu);
+        const foreignSource = { ...result.observationInput.source, profile: {
+            ...result.observationInput.source.profile, revision: 'foreign-point-profile'
+        } } as unknown as typeof result.observationInput.source;
+        assert.throws(() => algebraFormalFreydNativeModelMapObservationBundle({ ...result.observationInput, source: foreignSource }),
+            /point observation profiles/iu);
         assert.throws(() => result.observation.adapter.normalizeRealization({ ...result.observation.realization }, 'test'), /Foreign/iu);
         await assert.rejects(trustAlgebraFormalFreydNativeHomologyMap({ ...input, prepared: { ...input.prepared } }), /issued/iu);
         await assert.rejects(trustAlgebraFormalFreydNativeHomologyMap({ ...input, formalModel: v.normality,

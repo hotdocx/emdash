@@ -54,8 +54,10 @@ review in `audits/native-six-term-observation-boundary/README.md`. The original
 construction, maps, witnesses and typed inverse observations remain qualified;
 the failed comparison is not claimed proved. Do not resume that experiment
 or older endpoint/projection experiments without a new user scope.
-Book 0.9.0-dev and its local artifacts are qualified; no external publication
-or integration of another branch is implied.
+Book 0.9.0-dev and its artifacts are qualified. The user-authorized initial
+consolidation checkpoint df9b4778 was pushed and deployed to GitHub Pages;
+later consolidation checkpoints remain local. No action-profile integration
+is implied.
 
 The [consolidation review](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md)
 is the accepted living plan for auxiliary categorical owners, remaining path
@@ -170,8 +172,8 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   native model interface. Native raw-input/map, row and observation modules
   retain the CAS-selected presentations under explicit model, normality and
   interpretation contracts. The native route requires no old
-  FreydHomologyModel declaration; some shared vocabulary still imports old
-  source owners, as recorded in the consolidation review.
+  FreydHomologyModel declaration. The old-model facades and adapters are
+  retired; shared raw input/signature builders have independent owners.
 - Native observed-pair and exact-diagram owners retain the actual input,
   canonical Ω evidence and complete-arrow observation path together.
   `emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp` and its
@@ -179,8 +181,9 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   extension preserves the original Ω witness and computational inverse data.
   Model-side contracts remain supplied; mechanical frontend assembly and
   derived output exactness do not constitute closed model/provider synthesis.
-- Earlier selected-presentation, record-connecting and legacy model modules
-  remain explicit reference/adapter owners pending consumer-led retirement.
+- Earlier selected-presentation and record-connecting modules remain for the
+  explicitly retained ordinary iterator. The obsolete model facades/adapters
+  are retired; useful ordinary HomologyRecord views remain downstream.
   The obsolete `abelian_snake_*` route and its old snake–homology comparisons
   are retired; Git history preserves them. The current native snake and its
   LES comparison remain the active owners. The older homology field-span iterator
@@ -369,8 +372,14 @@ large heaps.
 For Node 24.11.1 here, isolated `node --test` workers do not inherit V8 heap
 flags supplied only on the command line. Pass those limits through
 `NODE_OPTIONS` and verify the worker's `v8.getHeapStatistics().heap_size_limit`.
-The native connecting gate includes this preflight. Do not infer worker heap
-limits from launcher arguments; the OS guard remains independently enforced.
+Check this inside an actual test worker; do not infer its heap limit from
+launcher arguments. The OS guard remains independently enforced.
+For large proof–CAS fixtures, compile only the affected TypeScript dependency
+tree and run its JavaScript output before comparing heap measurements. A
+resident ts-node/compiler changes that footprint: the consolidation LES run
+exhausted 512MiB under ts-node, while unchanged compiled JS passed at the
+same V8/OS limits. This is a runner change, not a proof or unfolding change;
+record both the compiler inputs and the actual worker flags.
 
 Early-development hangs can signal rewrite/unification trouble. Keep
 every Lambdapi invocation bounded by its recorded per-target deadline.

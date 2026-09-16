@@ -2,12 +2,8 @@
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnectingRowMapTerm,
     assertAlgebraFormalFreydModelConnectingPreparationCurrent } from './algebra_formal_freyd_model_connecting_preparation';
-import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydNativeModelHomologyObservationBundle,
-    ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
+import { algebraFormalFreydNativeModelHomologyObservationBundle, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { algebraFormalFreydChainPairTerm, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
-import { algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType, createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_connecting_signatures';
-import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
-import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_map_signatures';
 import { CoreLfDeclarationEnvironment } from './lf_declarations';
 import { CoreLfScopedBuilder } from './lf_builder';
 import { createCoreProofChecker } from './proof_checker';
@@ -24,7 +20,6 @@ import { FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS } from './alge
 import { createFormalFreydNativeConnectingProofEnvironment, algebraFormalFreydNativeConnectingObservationTerm, FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS } from './algebra_formal_freyd_native_connecting_signatures';
 
 type Point<P extends AlgebraParent, C extends AlgebraElement<P>, I> =
-    ReturnType<typeof algebraFormalFreydModelHomologyObservationBundle<P, C, I>> |
     ReturnType<typeof algebraFormalFreydNativeModelHomologyObservationBundle<P, C, I>>;
 export interface AlgebraFormalFreydConnectingRowLaws {
     readonly above: KernelExpression;
@@ -33,23 +28,20 @@ export interface AlgebraFormalFreydConnectingRowLaws {
     readonly exact: KernelExpression;
 }
 
-export const ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
-    revision: 'emdash-formal-freyd-model-connecting-observations-v3' as const,
+export const ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
+    revision: 'emdash-formal-freyd-native-connecting-observations-v1' as const,
     classification: 'trusted-presentation-semantics' as const,
     requiresSuppliedNormality: true as const,
-    constructsModel: false as const, claimsClosedQuotientEffectiveness: false as const,
-    reselectsHomology: false as const, endpointCasts: false as const,
-    endpointComparisons: 'original-selected-categorical-equivalences' as const,
+    constructsModel: false as const,
+    claimsClosedQuotientEffectiveness: false as const,
+    reselectsHomology: false as const,
+    endpointCasts: false as const,
+    endpointComparisons: 'native-column-input-comparisons' as const,
     nativeWholeConnectingObservation: true as const,
     rowUniversality: 'native-whole-PQ' as const,
     payloadTransport: 'lossless-shared-json-table-v1' as const,
-    replaysConnecting: false as const, addsCoreOwner: false as const
-});
-
-export const ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE = Object.freeze({
-    ...ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE,
-    revision: 'emdash-formal-freyd-native-connecting-observations-v1' as const,
-    endpointComparisons: 'native-column-input-comparisons' as const,
+    replaysConnecting: false as const,
+    addsCoreOwner: false as const,
     requiresLegacyModel: false as const
 });
 
@@ -64,16 +56,6 @@ interface ConnectingOwner<Profile extends { readonly revision: string }> {
     readonly connectingTerm: (values: Readonly<Record<string, KernelExpression>>) => KernelExpression;
     readonly operationPrefix: string;
 }
-const legacyOwner = Object.freeze({
-    profile: ALGEBRA_FORMAL_FREYD_MODEL_CONNECTING_OBSERVATION_PROFILE,
-    pointProfile: ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE.revision,
-    createEnvironment: () => createFormalFreydModelConnectingProofEnvironment([]),
-    bindings: { ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
-        ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS },
-    modelType: algebraFormalFreydModelType, normalityType: algebraFormalFreydModelNormalityType,
-    rowOwner: 'bridge_FreydHomologyModelNativeShortExact', connectingTerm: algebraFormalFreydModelConnectingObservationTerm,
-    operationPrefix: 'proof-cas.freyd-model/'
-});
 const nativeOwner = Object.freeze({
     profile: ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE,
     pointProfile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE.revision,
@@ -108,12 +90,6 @@ function modelContext(environment: CoreLfDeclarationEnvironment, R: KernelExpres
     };
     check(environment);
     return { model, check };
-}
-
-export function assertAlgebraFormalFreydModelConnectingContext(
-    environment: CoreLfDeclarationEnvironment, R: KernelExpression, M: KernelExpression
-): void {
-    modelContext(environment, R, M, legacyOwner);
 }
 
 export function assertAlgebraFormalFreydNativeConnectingContext(
@@ -173,9 +149,6 @@ export interface AlgebraFormalFreydShortExactObservationInput<P extends AlgebraP
     readonly index: 0 | 1 | 2 | 3; readonly environment: CoreLfDeclarationEnvironment;
     readonly laws: Omit<AlgebraFormalFreydConnectingRowLaws, 'exact'>;
 }
-export function algebraFormalFreydModelShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
-    input: AlgebraFormalFreydShortExactObservationInput<P, C, I>
-) { return shortExactObservation(input, legacyOwner); }
 
 export function algebraFormalFreydNativeShortExactObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
     input: AlgebraFormalFreydShortExactObservationInput<P, C, I>
@@ -217,9 +190,6 @@ export interface AlgebraFormalFreydConnectingObservationInput<P extends AlgebraP
     readonly squares: readonly { readonly upper: KernelExpression; readonly lower: KernelExpression }[];
     readonly upperZero: KernelExpression; readonly lowerZero: KernelExpression; readonly resultLaw: KernelExpression;
 }
-export function algebraFormalFreydModelConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
-    input: AlgebraFormalFreydConnectingObservationInput<P, C, I>
-) { return connectingObservation(input, legacyOwner); }
 
 export function algebraFormalFreydNativeConnectingObservationBundle<P extends AlgebraParent, C extends AlgebraElement<P>, I>(
     input: AlgebraFormalFreydConnectingObservationInput<P, C, I>
@@ -231,7 +201,7 @@ function connectingObservation<P extends AlgebraParent, C extends AlgebraElement
     if (input.rows.length !== 4 || input.squares.length !== 3) throw new Error('Four rows and three row maps are required');
     const currentInputs = () => {
         if (input.source.profile.revision !== owner.pointProfile || input.target.profile.revision !== owner.pointProfile) {
-            throw new Error('Connecting requires matching native or legacy point observation profiles');
+            throw new Error('Connecting requires matching native point observation profiles');
         }
         assertAlgebraFormalFreydModelConnectingPreparationCurrent(prepared);
         input.source.adapter.normalizeRealization(s, 'modelConnecting.source');

@@ -485,7 +485,7 @@ would understate what is implemented.
 ## 6. Other Deferred Matters And Proposed Order
 
 The most consequential additional boundary is **closed model construction**.
-The [retained-model workflow](../src/v3_2/algebra_formal_freyd_long_exact_model.ts)
+The [retained-model workflow](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/src/v3_2/algebra_formal_freyd_long_exact_model.ts)
 distinguishes computed matrix equations, all-test selected-provider semantics
 and whole-model presentation semantics. Whole K/Q presentations and normality
 are supplied; a finite raw equation inventory does not prove those universal

@@ -1906,7 +1906,7 @@ Given one already selected whole result, prepare a context that:
    prepared coefficients and invalid name scopes without partial adoption.
 
 The helper is implemented in
-[algebra_formal_freyd_rational_model_context.ts](../src/v3_2/algebra_formal_freyd_rational_model_context.ts).
+[algebra_formal_freyd_rational_model_context.ts](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/src/v3_2/algebra_formal_freyd_rational_model_context.ts).
 `defineAlgebraFormalFreydRationalBackend` issues an immutable registration
 with explicit coefficient, model and normality contracts.
 `prepareAlgebraFormalFreydRationalModelContext` takes that registration,
@@ -1944,7 +1944,7 @@ is the existing `OneCatAdjunctionNormality` at these same projections. H
 does not require normality. The existing combined Abelian classifier remains
 available; no additional combined-package wrapper is needed here.
 
-The [legacy adapter](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
+The [legacy adapter](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_adapter.lp)
 retains the old model's P/Q and identical whole H functor. Its original
 native inputs, H points and whole Hom action are preserved by conversion.
 No object cast or reselection is introduced. Native whole normality remains
@@ -1977,7 +1977,7 @@ restricted to ordinary C; no general higher-duality extension is asserted.
 The [input comparison](../emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp)
 carries that derived fibre path through the whole inclusion functor. It uses
 the existing `OmegaEquivAlong`, with the actual comparison fixed. The
-[Freyd specialization](../emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
+[Freyd specialization](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
 then applies the original whole H to the same comparison. Its inverse is
 the image of the original selected input inverse. Neither H endpoint is
 cast, replaced or reselected; there is no `Obj(C)` equality transport in this
@@ -2192,11 +2192,11 @@ or raised limits. The failure was computational, not a mathematical rejection
 of the native construction.
 
 NUH-5B2d1 qualification (2026-09-14): the
-[native model context](../emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
+[native model context](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp)
 aliases native whole normality and shortness at the same original P/Q.
 The [raw point observer](../emdash2/emdash3_2_commutative_algebra_freyd_raw_window_connecting_observation.lp)
 uses the original whole δ and selected column comparisons. The
-[retained-model observer](../emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
+[retained-model observer](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp)
 then applies the existing retained/native input comparisons at general K
 and x; only its final complete-arrow wrapper fixes Terminal_obj. Both
 original H objects remain literal observations. These are five definitions,
@@ -2221,7 +2221,7 @@ checks in Lambdapi. Its model, native normality, whole row shortness and
 complete-arrow interpretation are still explicit supplied/trusted contracts;
 the test does not construct a closed model or prove a general CAS realization.
 
-[The focused gate](../emdash2/scripts/check_freyd_native_model_connecting.sh)
+[The focused gate](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/scripts/check_freyd_native_model_connecting.sh)
 compiles only the affected test dependency tree, runs adoption/emission,
 and checks the exact emitted LP artifact as separate guarded stages. A test
 emission reports that oracle checking is pending; only the gate's final

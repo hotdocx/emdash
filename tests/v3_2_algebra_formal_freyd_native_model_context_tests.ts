@@ -16,11 +16,8 @@ import { constructAlgebraFormalFreydRawWitnesses } from '../src/v3_2/algebra_for
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
 import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from '../src/v3_2/algebra_formal_freyd_native_model_signatures';
-import { defineAlgebraFormalFreydRationalBackend, prepareAlgebraFormalFreydRationalModelContext } from '../src/v3_2/algebra_formal_freyd_rational_model_context';
-import { algebraFormalFreydModelType } from '../src/v3_2/algebra_formal_freyd_model_signatures';
-import { algebraFormalFreydModelNormalityType } from '../src/v3_2/algebra_formal_freyd_model_connecting_signatures';
 import { freydNativeModelProbe as nativeProbe } from './v3_2_algebra_formal_freyd_native_model_fixtures';
-import { algebraFormalFreydNativeModelHomologyObservationBundle, algebraFormalFreydModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
+import { algebraFormalFreydNativeModelHomologyObservationBundle } from '../src/v3_2/algebra_formal_freyd_model_observation';
 import { trustAlgebraFormalFreydNativeHomologyPoint } from '../src/v3_2/algebra_formal_freyd_native_homology_workflow';
 import { defineAlgebraFormalComputationGoal } from '../src/v3_2/algebra_formal_delegation';
 import { serializeCoreExpression } from '../src/v3_2/core_serialization';
@@ -44,8 +41,8 @@ const backend = defineAlgebraFormalFreydNativeRationalBackend({
     adjunctionModelContract: 'Supply coherent native whole P/Q over that Freyd category; no closed model is derived here.',
     nativeNormalityContract: 'Supply whole Coim⇒Im normality for that same native model.'
 });
-const legacyBackend = defineAlgebraFormalFreydRationalBackend({ ...backend,
-    modelContract: 'Supply the separate legacy selected-dictionary model.' });
+const legacyBackend = { id: backend.id, revision: backend.revision, coefficientContract: backend.coefficientContract,
+    modelContract: 'Retired registration shape', nativeNormalityContract: backend.nativeNormalityContract };
 const select = () => algebraPolynomialFreydLongExactSnakeReferences(
     nativeLongExact.algebraPolynomialFreydBoundedLongExactHomology(polynomialFreydHomologyFixture('two')));
 let selected: ReturnType<typeof select>;
@@ -119,29 +116,23 @@ describe('v3.2 direct native Freyd model context', () => {
         } finally { spies.forEach(spy => spy.mock.restore()); }
     });
 
-    it('preserves CAS inventories while separating native and legacy model types', () => {
+    it('rejects foreign nominal model and normality types and mismatched model parameters', () => {
         const v = context();
-        const old = prepareAlgebraFormalFreydRationalModelContext({ backend: legacyBackend,
-            selected: v.selected, namePrefix: 'native_context' });
-        assert.equal(v.bundle.equationsData, old.bundle.equationsData);
-        assert.equal(v.preparedHomology.entriesData, old.preparedHomology.entriesData);
-        assert.equal(v.preparedModel.inventory.data, old.preparedModel.inventory.data);
-        assert.deepEqual(v.coefficients.map(c => [c.value, c.term.name]), old.coefficients.map(c => [c.value, c.term.name]));
-        let environment = v.environment;
-        for (const name of ['bridge_FreydHomologyModel', 'bridge_FreydHomologyModelNativeNormality']) {
-            environment = environment.extend(old.environment.lookup(name)!);
-        }
-        const oldM = kernelFree('legacy_model', p), oldN = kernelFree('legacy_normality', p);
+        const foreignModelKind = 'test_foreign_model_kind', foreignNormalityKind = 'test_foreign_normality_kind';
+        let environment = v.environment.extend({ ...v.environment.lookup('bridge_FreydAdjunctionModel')!, name: foreignModelKind });
+        environment = environment.extend({ ...v.environment.lookup('bridge_FreydAdjunctionModelNormality')!, name: foreignNormalityKind });
+        const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
+        const foreignM = kernelFree('foreign_model', p), foreignN = kernelFree('foreign_normality', p);
         const otherM = kernelFree('other_native_model', p), otherR = kernelFree('other_ring', p);
         for (const [term, type] of [
-            [oldM, algebraFormalFreydModelType(v.formalRing)],
-            [oldN, algebraFormalFreydModelNormalityType(v.formalRing, oldM)],
+            [foreignM, b.lower(L.tau(L.call(foreignModelKind, [b.embed(v.formalRing)])))],
+            [foreignN, b.lower(L.tau(L.call(foreignNormalityKind, [b.embed(v.formalRing), b.embed(v.formalModel)], 1)))],
             [otherM, algebraFormalFreydNativeModelType(v.formalRing)], [otherR, affineFormalCommRingType()]
         ] as const) environment = environment.extend({ name: term.name, type, mode: binderMode('explicit', 'functorial'), provenance: p });
         const checker = createCoreProofChecker(environment);
         checker.validateEnvironment();
-        assert.throws(() => checker.check(checker.rootContext, oldM, algebraFormalFreydNativeModelType(v.formalRing)));
-        assert.throws(() => checker.check(checker.rootContext, oldN, algebraFormalFreydNativeModelNormalityType(v.formalRing, v.formalModel)));
+        assert.throws(() => checker.check(checker.rootContext, foreignM, algebraFormalFreydNativeModelType(v.formalRing)));
+        assert.throws(() => checker.check(checker.rootContext, foreignN, algebraFormalFreydNativeModelNormalityType(v.formalRing, v.formalModel)));
         assert.throws(() => checker.check(checker.rootContext, v.normality, algebraFormalFreydNativeModelNormalityType(v.formalRing, otherM)));
         assert.throws(() => checker.check(checker.rootContext, v.formalModel, algebraFormalFreydNativeModelType(otherR)));
     });
@@ -151,8 +142,6 @@ describe('v3.2 direct native Freyd model context', () => {
         assert.throws(() => prepareAlgebraFormalFreydNativeRationalModelContext({ ...input, backend: { ...backend } }), /issued/iu);
         assert.throws(() => prepareAlgebraFormalFreydNativeRationalModelContext({ ...input,
             backend: legacyBackend as unknown as typeof backend }), /issued/iu);
-        assert.throws(() => prepareAlgebraFormalFreydRationalModelContext({ ...input,
-            backend: backend as unknown as typeof legacyBackend }), /issued/iu);
         assert.throws(() => defineAlgebraFormalFreydNativeRationalBackend(legacyBackend as unknown as typeof backend), /adjunction model contract/iu);
         for (const key of ['coefficientContract', 'adjunctionModelContract', 'nativeNormalityContract'] as const) {
             assert.throws(() => defineAlgebraFormalFreydNativeRationalBackend({ ...backend, [key]: '' }), /contract/iu);
@@ -236,9 +225,8 @@ describe('v3.2 direct native Freyd model context', () => {
         } finally { spies.forEach(spy => spy.mock.restore()); }
     });
 
-    it('rejects legacy observations, foreign native queries and forged realization data', async () => {
+    it('rejects foreign native queries and forged realization data', async () => {
         const { input, bundle } = await nativeConsumer();
-        assert.throws(() => algebraFormalFreydModelHomologyObservationBundle(input), /Missing or changed model signature/iu);
         assert.throws(() => bundle.adapter.normalizeRealization({ ...bundle.realization }, 'test'), /Foreign/iu);
         assert.throws(() => algebraFormalFreydNativeModelHomologyObservationBundle({ ...input,
             actual: { ...input.actual, formalData: 'changed' } }), /Stale/iu);
