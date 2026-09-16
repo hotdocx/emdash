@@ -179,9 +179,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   extension preserves the original Ω witness and computational inverse data.
   Model-side contracts remain supplied; mechanical frontend assembly and
   derived output exactness do not constitute closed model/provider synthesis.
-- Earlier selected-presentation, record-connecting, legacy model and
-  `abelian_snake_*` modules are retained reference/adapter owners pending
-  explicit consumer-led retirement. The older homology field-span iterator
+- Earlier selected-presentation, record-connecting and legacy model modules
+  remain explicit reference/adapter owners pending consumer-led retirement.
+  The obsolete `abelian_snake_*` route and its old snake–homology comparisons
+  are retired; Git history preserves them. The current native snake and its
+  LES comparison remain the active owners. The older homology field-span iterator
   uses the ordinary record interface and its symbolic endpoint experiment
   remains deferred. Do not conflate shared CAS input records with the former
   algorithms, add an old/new compatibility obligation, or delete shared
@@ -281,7 +283,9 @@ the iterated-hom architecture to the omega setting.
 - Refresh health report: `make health`
 - Watch and recheck: `make watch` (log: `logs/typecheck.log`)
 - Focused temporary probe: `scripts/probe.sh tmp/probes/name.lp`
-- Measured whole six-term snake join: `scripts/check_abelian_snake_six_term.sh`
+- Qualified native six-term input check:
+  `scripts/check_native_snake_six_term.sh examples/one_cat_native_snake_six_term_inputs.lp`
+- Retained ordinary exactness support: `scripts/check_ordinary_exactness_support.sh`
 - Decision tree: `scripts/decision_tree.sh SYMBOL`
 - Type-aware search: `scripts/lambdapi_search.sh QUERY`
 - Print preview/check from the Git root: `./scripts/pnpmw run print:dev` /

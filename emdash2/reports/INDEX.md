@@ -12,6 +12,11 @@ work. Op/duality and the large six-term comparison remain deferred.
 The user accepted that review as the new consolidation living plan and
 authorized local checkpoints after an initial main/Pages publication.
 
+The consolidation goal has now retired the unused old-model column comparison
+and the obsolete snake/snake-derived connecting route. Current native owners
+and the ordinary iterator remain intact. See the living consolidation plan
+for the checked consumer inventory and renamed ordinary-support gates.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

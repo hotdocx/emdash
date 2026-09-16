@@ -32,6 +32,13 @@ comparison and its reviewer are removed. The current native column and
 snake–LES comparisons remain. Dated links to the retired code use its exact
 published snapshot; the living consolidation plan records the consumer audit.
 
+CC-2b retirement (2026-09-16): the obsolete 106-owner snake and snake-derived
+connecting route, its 37 reviewers and obsolete gates are removed. Current
+native snake/LES owners and the retained ordinary iterator are unchanged.
+Shared ordinary support keeps three renamed bounded gates; source/reviewer
+dispatch coverage, current native consumers and book evidence pass. Git history
+preserves the old implementation; the consolidation plan records the audit.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

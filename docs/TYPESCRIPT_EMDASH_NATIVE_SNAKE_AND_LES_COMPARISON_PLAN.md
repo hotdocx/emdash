@@ -74,7 +74,7 @@ are K(α), K(b), K(γ), Q(α), Q(b), Q(γ). Neither a monic nor c
 epic is an input. Preserve this generality.
 
 User scope correction (2026-09-15, D-NUH-078): the former
-[`AbelianSnakeTriple` construction](../emdash2/emdash3_2_abelian_snake_lemma.lp)
+[`AbelianSnakeTriple` construction](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_abelian_snake_lemma.lp)
 is being replaced as the primary interface. An equivalence or compatibility
 theorem with it is not required. NUH-6D4 is withdrawn, not an unfinished
 completion gate. The native snake–native LES comparison is a separate,

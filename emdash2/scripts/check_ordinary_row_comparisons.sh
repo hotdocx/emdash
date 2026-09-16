@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+formal_root="$(pwd)"
 
 : "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
@@ -16,31 +17,18 @@ if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
 fi
 
 owners=(
-  emdash3_2_chain_pair_map_snake.lp
-  emdash3_2_snake_row_comparisons.lp
   emdash3_2_kernel_domain_comparison.lp
   emdash3_2_cokernel_codomain_comparison.lp
-  emdash3_2_snake_row_source_cycle_iso.lp
-  emdash3_2_snake_row_target_cokernel_iso.lp
   emdash3_2_abelian_structure_elimination.lp
-  emdash3_2_abelian_snake_row_comparisons.lp
-  emdash3_2_short_exact_row_snake.lp
 )
 reviewers=(
-  examples/chain_pair_map_snake.lp
   examples/abelian_structure_elimination.lp
-  examples/snake_row_comparisons.lp
-  examples/snake_row_source_cycle_iso.lp
-  examples/snake_row_target_cokernel_iso.lp
-  examples/abelian_snake_row_comparisons.lp
-  examples/short_exact_row_snake.lp
-  examples/short_exact_row_snake_target.lp
 )
-stage_root="$(mktemp -d /tmp/emdash-snake-rows.XXXXXX)"
+stage_root="$(mktemp -d /tmp/emdash-ordinary-rows.XXXXXX)"
 mkdir -p "$stage_root/examples"
 cleanup() {
   case "$stage_root" in
-    /tmp/emdash-snake-rows.??????) ;;
+    /tmp/emdash-ordinary-rows.??????) ;;
     *) printf 'unexpected temporary path: %s\n' "$stage_root" >&2; return 1 ;;
   esac
   # Only generated/copied file kinds are removed; unexpected content survives.
@@ -59,8 +47,8 @@ for file in "${reviewers[@]}"; do cp "$file" "$stage_root/examples/"; done
 
 check_object() {
   printf 'checking %s with fresh exact dependency objects\n' "$1"
-  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
-    lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$1"
+  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
+    bash "$formal_root/scripts/lambdapi_resource_guard.sh" lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$1"
 }
 cd "$stage_root"
 # Recheck exact source dependencies, then retain only these temporary objects

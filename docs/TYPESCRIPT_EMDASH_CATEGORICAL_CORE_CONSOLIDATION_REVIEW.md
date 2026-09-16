@@ -564,3 +564,79 @@ retirement, verify the shared-gate dispatch blocks, all remaining formal symbol
 users and book/report links; delete the closed obsolete route and its own
 reviewers/gates without touching the new native snake or snake–LES comparison.
 The exact local inventory is `emdash2/tmp/probes/cc2_inventory.json`.
+
+
+CC-2a checkpoint: `5829e76c` (local). CC-2b retirement is now authorized by
+the accepted plan's consumer gate: all 324 symbols in the 106-owner old-snake
+closure have no remaining root-library or TS source/test consumer outside
+that closure; its 37 reviewers are specific to that route. Current native and
+retained-reference closures and all 178 book evidence entries are disjoint.
+
+The check-script audit adds one thin alias (`check_abelian_snake_inner_zero.sh`)
+to the six directly referenced old gates. Three gates have useful dispatch
+coverage independent of the old snake: ordinary exactness support, row
+comparisons and cycle factors. Preserve their surviving owners/reviewers in
+renamed gates, with the same fresh-parent compilation strategy and the current
+per-process resource guard. Remove retired targets and dispatch flags from
+check.sh/check_examples.sh/check_metrics.py; leave the other generic helper
+owners registered. The remaining old-only gates/alias can be deleted. This is
+check-coverage maintenance, not deletion of shared mathematical lemmas.
+
+Validation for this tranche: protected closure source hashes unchanged; zero
+dangling LP imports or live uses of retired symbols; surviving registration
+coverage and shell/Python syntax; focused real checks of retained ordinary
+support plus existing native snake/LES consumers, using the documented
+resource profiles where applicable; catalog, source-health and book evidence.
+Redirect dated Markdown source/gate links to published df9b4778. Do not copy
+the entire retired theory to another active or untracked source directory.
+No rewrite rule or native mathematical construction is to change.
+
+
+CC-2b qualified (2026-09-16): retired the entire obsolete snake/snake-derived
+connecting closure: 106 root owners, 324 declarations, and 37 dedicated
+reviewers. No current native snake, native snake–LES comparison or ordinary
+iterator owner was removed. All 460 modules in the protected union remain
+byte-identical to d35cc98e. Root and nested-example imports have no dangling
+references; no surviving formal or TS source/test uses a retired symbol.
+
+Preserved generic coverage in three renamed/trimmed gates:
+`check_ordinary_exactness_support.sh`, `check_ordinary_row_comparisons.sh`,
+and `check_ordinary_cycle_factors.sh`. They retain fresh compiled parents and
+now use the serial resource guard for every LP invocation. The four old-only
+gates/alias are removed. Shared source/example/health dispatch tables and
+explicit default-list appends no longer reference the retired route. A logic-
+only before/after dispatcher audit preserves 692 explicit-source events,
+515 reviewer events and the 530-event default-source multiset after excluding
+retired targets and normalizing the three gate names. No mathematical checker
+is invoked by that dispatch audit.
+
+Real validation: the ordinary exactness, row and cycle gates pass in 80.10s,
+11.43s and 24.37s total, with every individual LP check guarded at 90s/2048MiB
+and `OCAMLRUNPARAM=o=20`. Current native six-term map and displayed LES
+certificate reviewers pass in 11.15s and 12.54s under the same profile.
+Shell/Python syntax, live registration targets, catalog and all 178 book
+claims pass. The source-health refresh explicitly skips an aggregate check;
+1269 files remain, snapshot
+`284be39df40abc241a31863d803d645e4bc0b40bc373d48527bcda7fdf7d38af`.
+
+The first registration audit caught default-list `files+=` entries in addition
+to the initial array; all 106 retired appended entries were then removed and
+the default dispatch was checked separately. An import scanner was also
+corrected to recognize `emdash.examples.*` namespaces rather than treating
+“examples” as a root module. Both stronger audits pass. These corrections are
+validation-tool findings, not changes to mathematical declarations.
+
+Git preserves the removed source at the published df9b4778 snapshot. The
+single dated Markdown source link in the native snake plan now points to that
+snapshot. Generated book artifacts and TS sources are unchanged. Exact local
+receipts: `cc2b_gate_checks.json`, `cc2b_native_checks.json`,
+`cc2b_dispatch_audit.json`, `cc2b_default_dispatch_audit.json` and the updated
+`cc2_inventory.json` under `emdash2/tmp/probes/`.
+
+Next CC-2 work: retire the remaining legacy model workflow together with its
+TS consumers, extracting shared helpers where needed; separate useful ordinary
+HomologyRecord observations from the former selected-homology implementation.
+The retained ordinary iterator still explains the remaining selected-
+presentation/record-connecting dependency and remains explicitly scoped.
+CC-3–CC-6 are not complete. Op/profile integration and all deferred comparison
+experiments remain untouched.

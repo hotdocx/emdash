@@ -27,28 +27,18 @@ if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
   read -r -a extra_flags <<< "$EMDASH_LAMBDAPI_FLAGS"
 fi
 
-six_term_join_checked=0
+ordinary_exactness_join_checked=0
 normalization_join_checked=0
-snake_rows_join_checked=0
-snake_target_cycles_join_checked=0
-snake_target_homology_join_checked=0
-snake_source_boundary_join_checked=0
-homology_connecting_join_checked=0
+ordinary_rows_join_checked=0
+ordinary_cycles_join_checked=0
 homology_exact_window_join_checked=0
 homology_window_families_join_checked=0
 homology_arrow_tails_join_checked=0
 homology_bounded_prerequisites_checked=0
 homology_bounded_generator_checked=0
 
-is_abelian_snake_six_term_join() {
+is_ordinary_exactness_support_join() {
   case "$1" in
-    emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp|\
-    emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp|\
-    emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp|\
-    emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp|\
-    emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp|\
-    emdash3_2_abelian_snake_six_term_result.lp|\
-    emdash3_2_abelian_snake_six_term_result_projections.lp|\
     emdash3_2_exactness_covers_foundation.lp|\
     emdash3_2_exactness_covers.lp|\
     emdash3_2_exactness_covers_from_exact.lp|\
@@ -58,19 +48,9 @@ is_abelian_snake_six_term_join() {
     emdash3_2_abelian_canonical_cokernel_epic.lp|\
     emdash3_2_abelian_canonical_cokernel_exactness.lp|\
     emdash3_2_abelian_canonical_cokernel_covers.lp|\
-    emdash3_2_abelian_snake_exact_first_foundation.lp|\
-    emdash3_2_abelian_snake_exact_first_row_cover_projections.lp|\
-    emdash3_2_abelian_snake_exact_first_alpha_zero.lp|\
-    emdash3_2_abelian_snake_exact_first_factor.lp|\
-    emdash3_2_abelian_snake_exact_first_comparison.lp|\
-    emdash3_2_abelian_snake_exact_first_result.lp|\
     emdash3_2_preadditive_difference_paths.lp|\
-    emdash3_2_abelian_snake_exact_second_*.lp|\
     emdash3_2_exactness_extensions*.lp|\
-    emdash3_2_abelian_canonical_kernel_extensions*.lp|\
-    emdash3_2_abelian_snake_exact_third_*.lp|\
-    emdash3_2_abelian_snake_six_term_exact_*.lp|\
-    emdash3_2_abelian_snake_six_term_canonical_exactness.lp)
+    emdash3_2_abelian_canonical_kernel_extensions*.lp)
       return 0
       ;;
     *)
@@ -130,51 +110,20 @@ check_file() {
         homology_exact_window_join_checked=1
       fi
       return ;;
-    emdash3_2_homology_connecting_factor.lp|\
-    emdash3_2_homology_connecting.lp)
-      if [[ "$homology_connecting_join_checked" -eq 0 ]]; then
-        ./scripts/check_homology_connecting.sh
-        homology_connecting_join_checked=1
-      fi
-      return ;;
-    emdash3_2_snake_row_source_second_comparison.lp|\
-    emdash3_2_snake_row_source_boundary_covered.lp|\
-    emdash3_2_snake_row_source_boundary_zero.lp)
-      if [[ "$snake_source_boundary_join_checked" -eq 0 ]]; then
-        ./scripts/check_snake_row_source_boundary.sh
-        snake_source_boundary_join_checked=1
-      fi
-      return ;;
-    emdash3_2_snake_row_target_cokernel_projection.lp|\
-    emdash3_2_snake_row_target_homology_normal.lp|\
-    emdash3_2_snake_row_target_homology_factor.lp)
-      if [[ "$snake_target_homology_join_checked" -eq 0 ]]; then
-        ./scripts/check_snake_row_target_homology.sh
-        snake_target_homology_join_checked=1
-      fi
-      return ;;
     emdash3_2_chain_pair_map_cycle_lifts.lp|\
     emdash3_2_hom_factor_source_isos.lp|\
-    emdash3_2_short_exact_row_chain_columns.lp|\
-    emdash3_2_snake_row_target_factors.lp|\
-    emdash3_2_snake_row_target_cycles.lp)
-      if [[ "$snake_target_cycles_join_checked" -eq 0 ]]; then
-        ./scripts/check_snake_row_target_cycles.sh
-        snake_target_cycles_join_checked=1
+    emdash3_2_short_exact_row_chain_columns.lp)
+      if [[ "$ordinary_cycles_join_checked" -eq 0 ]]; then
+        ./scripts/check_ordinary_cycle_factors.sh
+        ordinary_cycles_join_checked=1
       fi
       return ;;
-    emdash3_2_chain_pair_map_snake.lp|\
-    emdash3_2_snake_row_comparisons.lp|\
     emdash3_2_kernel_domain_comparison.lp|\
     emdash3_2_cokernel_codomain_comparison.lp|\
-    emdash3_2_snake_row_source_cycle_iso.lp|\
-    emdash3_2_snake_row_target_cokernel_iso.lp|\
-    emdash3_2_abelian_structure_elimination.lp|\
-    emdash3_2_abelian_snake_row_comparisons.lp|\
-    emdash3_2_short_exact_row_snake.lp)
-      if [[ "$snake_rows_join_checked" -eq 0 ]]; then
-        ./scripts/check_snake_row_comparisons.sh
-        snake_rows_join_checked=1
+    emdash3_2_abelian_structure_elimination.lp)
+      if [[ "$ordinary_rows_join_checked" -eq 0 ]]; then
+        ./scripts/check_ordinary_row_comparisons.sh
+        ordinary_rows_join_checked=1
       fi
       return ;;
     emdash3_2_short_exact_rows.lp|\
@@ -193,10 +142,10 @@ check_file() {
       fi
       return ;;
   esac
-  if is_abelian_snake_six_term_join "$file"; then
-    if [[ "$six_term_join_checked" -eq 0 ]]; then
-      ./scripts/check_abelian_snake_six_term.sh
-      six_term_join_checked=1
+  if is_ordinary_exactness_support_join "$file"; then
+    if [[ "$ordinary_exactness_join_checked" -eq 0 ]]; then
+      ./scripts/check_ordinary_exactness_support.sh
+      ordinary_exactness_join_checked=1
     fi
     return
   fi
@@ -456,32 +405,6 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_preabelian_bimorphism_lemmas.lp)
   files+=(emdash3_2_abelian_images.lp)
   files+=(emdash3_2_abelian_image_bimorphisms.lp)
-  files+=(emdash3_2_abelian_snake_lemma.lp)
-  files+=(emdash3_2_abelian_snake_six_term_kernel_beta_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_kernels.lp)
-  files+=(emdash3_2_abelian_snake_six_term_cokernel_beta_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_cokernels.lp)
-  files+=(emdash3_2_abelian_snake_six_term_kernel_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_kernel_zero.lp)
-  files+=(emdash3_2_abelian_snake_six_term_cokernel_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_cokernel_zero.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_factor.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_cofactor.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_middle_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_normal_epi_foundation.lp)
-  files+=(emdash3_2_abelian_snake_normal_epi.lp)
-  files+=(emdash3_2_abelian_snake_normal_mono_foundation.lp)
-  files+=(emdash3_2_abelian_snake_normal_mono_test_foundation.lp)
-  files+=(emdash3_2_abelian_snake_connecting.lp)
-  files+=(emdash3_2_abelian_snake_covered_reconstruction.lp)
-  files+=(emdash3_2_abelian_snake_connecting_result.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_p1_zero_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_inner_cokernel_zero.lp)
-  files+=(emdash3_2_abelian_snake_six_term_result.lp)
-  files+=(emdash3_2_abelian_snake_six_term_result_projections.lp)
   files+=(emdash3_2_exactness_covers_foundation.lp)
   files+=(emdash3_2_exactness_covers.lp)
   files+=(emdash3_2_exactness_covers_from_exact.lp)
@@ -491,31 +414,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_abelian_canonical_cokernel_epic.lp)
   files+=(emdash3_2_abelian_canonical_cokernel_exactness.lp)
   files+=(emdash3_2_abelian_canonical_cokernel_covers.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_foundation.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_row_cover_projections.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_alpha_zero.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_first_result.lp)
   files+=(emdash3_2_preadditive_difference_paths.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_pullback.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_xi.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_q2_pi.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_pi_zero.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_foundation.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_object.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_epi.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_epic.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_alpha_cover_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_beta_difference.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_kernel_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_epsilon_paths.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_epsilon_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_iota_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_cover_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_total_cover.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_cover_witness.lp)
-  files+=(emdash3_2_abelian_snake_exact_second_result.lp)
   files+=(emdash3_2_exactness_extensions_foundation.lp)
   files+=(emdash3_2_exactness_extensions_to_exact_foundation.lp)
   files+=(emdash3_2_exactness_extensions_to_exact_extension.lp)
@@ -523,41 +422,6 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_exactness_extensions_to_exact.lp)
   files+=(emdash3_2_abelian_canonical_kernel_extensions_foundation.lp)
   files+=(emdash3_2_abelian_canonical_kernel_extensions.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_pushout.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_zeta.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_zeta_epsilon.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_zeta_iota_to_su.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_su_path.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_zeta_zero.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_foundation.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_object.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_monomorphism.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_is_monic.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_gamma_extension_path.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_beta_difference.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_cokernel_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_mu_reconstruction.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_difference_mu.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_pi_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_pi_epic.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_extension_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_extension_witness.lp)
-  files+=(emdash3_2_abelian_snake_exact_third_result.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_foundation.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_extension.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_extension_projections.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_gamma_zero.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_cokernel_factor.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_comparison.lp)
-  files+=(emdash3_2_abelian_snake_exact_fourth_result.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_pairs.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_data_intro.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_result_foundation.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_result_projections.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_pair_paths.lp)
-  files+=(emdash3_2_abelian_snake_six_term_canonical_exactness.lp)
-  files+=(emdash3_2_abelian_snake_six_term_exact_result.lp)
   files+=(emdash3_2_abelian_bimorphisms.lp)
   files+=(emdash3_2_iso_evidence_constructors.lp)
   files+=(emdash3_2_mono_epi_comparisons.lp)
@@ -592,8 +456,6 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_homology_cycle_map_laws.lp)
   files+=(emdash3_2_homology_map_laws.lp)
   files+=(emdash3_2_homology_map_isos.lp)
-  files+=(emdash3_2_chain_pair_map_snake.lp)
-  files+=(emdash3_2_snake_row_comparisons.lp)
   files+=(emdash3_2_kernel_domain_comparison.lp)
   files+=(emdash3_2_iso_comparison_reconstruction.lp)
   files+=(emdash3_2_hfiber_cancellation.lp)
@@ -655,12 +517,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_homology_window_connecting_transformation.lp)
   files+=(emdash3_2_kernel_domain_comparison_factors.lp)
   files+=(emdash3_2_cokernel_codomain_comparison.lp)
-  files+=(emdash3_2_snake_row_source_cycle_iso.lp)
-  files+=(emdash3_2_snake_row_source_cycle_factor.lp)
-  files+=(emdash3_2_snake_row_target_cokernel_iso.lp)
   files+=(emdash3_2_abelian_structure_elimination.lp)
-  files+=(emdash3_2_abelian_snake_row_comparisons.lp)
-  files+=(emdash3_2_short_exact_row_snake.lp)
   files+=(emdash3_2_short_exact_kernel_comparison.lp)
   files+=(emdash3_2_short_exact_cokernel_foundation.lp)
   files+=(emdash3_2_short_exact_cokernel_inverse_test.lp)
@@ -669,24 +526,10 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_short_exact_row_chain_columns.lp)
   files+=(emdash3_2_hom_factor_chain_zero.lp)
   files+=(emdash3_2_short_exact_row_chain_projection.lp)
-  files+=(emdash3_2_snake_row_source_compared_boundary.lp)
-  files+=(emdash3_2_abelian_snake_second_postcomposition.lp)
-  files+=(emdash3_2_snake_row_source_embedding_monic.lp)
-  files+=(emdash3_2_snake_row_source_second_comparison.lp)
-  files+=(emdash3_2_snake_row_source_upper_factor.lp)
-  files+=(emdash3_2_snake_row_source_boundary_covered.lp)
-  files+=(emdash3_2_snake_row_source_boundary_zero.lp)
-  files+=(emdash3_2_snake_row_target_factors.lp)
-  files+=(emdash3_2_snake_row_target_cycles.lp)
   files+=(emdash3_2_normal_mono_epic_factors.lp)
   files+=(emdash3_2_hom_factor_comparison_pasting.lp)
   files+=(emdash3_2_normal_mono_cycle_factors.lp)
   files+=(emdash3_2_cokernel_codomain_comparison_projection.lp)
-  files+=(emdash3_2_snake_row_target_cokernel_projection.lp)
-  files+=(emdash3_2_snake_row_target_homology_normal.lp)
-  files+=(emdash3_2_snake_row_target_homology_factor.lp)
-  files+=(emdash3_2_homology_connecting_factor.lp)
-  files+=(emdash3_2_homology_connecting.lp)
   files+=(emdash3_2_kernel_short_exact_rows.lp)
   files+=(emdash3_2_selected_short_exact_rows.lp)
   files+=(emdash3_2_monic_image_comparison.lp)

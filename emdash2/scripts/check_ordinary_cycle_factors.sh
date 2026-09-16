@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+formal_root="$(pwd)"
 
-# Keep each source and reviewer independently bounded while sharing only this
-# fresh exact-source dependency tree. No persistent object cache or opaque proof.
+# Fresh-source measurements on 2026-09-07: the parametric cycles owner took
+# 72.8 s and its reviewer 78.1 s; subsequent source/warning joins hit 90 s.
+# Recheck exact sources below, retaining their objects only in this disposable
+# tree. This avoids repeated dependency checking without making proofs opaque.
 : "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
 warning_flags=(-w)
@@ -17,40 +20,25 @@ if [[ -n "${EMDASH_LAMBDAPI_FLAGS:-}" ]]; then
   read -r -a extra_flags <<< "$EMDASH_LAMBDAPI_FLAGS"
 fi
 
-prerequisites=(
-  emdash3_2_short_exact_row_chain_projection.lp
-  emdash3_2_snake_row_source_cycle_factor.lp
-  emdash3_2_abelian_snake_six_term_kernel_beta_foundation.lp
-  emdash3_2_iso_evidence_monic.lp
-  emdash3_2_hom_factor_epic_descent.lp
-  emdash3_2_snake_row_source_embedding_monic.lp
-  emdash3_2_abelian_snake_second_postcomposition.lp
-  emdash3_2_snake_row_source_upper_factor.lp
-  emdash3_2_snake_row_source_compared_boundary.lp
-  emdash3_2_abelian_snake_six_term_inner_kernel_factor.lp
-  emdash3_2_abelian_snake_connecting.lp
-  emdash3_2_abelian_snake_six_term_inner_kernel_u_zero_foundation.lp
-  emdash3_2_abelian_snake_six_term_inner_kernel_q2_zero_foundation.lp
-  emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp
-)
 owners=(
-  emdash3_2_snake_row_source_second_comparison.lp
-  emdash3_2_snake_row_source_boundary_covered.lp
-  emdash3_2_snake_row_source_boundary_zero.lp
+  emdash3_2_chain_pair_map_cycle_lifts.lp
+  emdash3_2_hom_factor_source_isos.lp
+  emdash3_2_short_exact_row_chain_columns.lp
 )
 reviewers=(
-  examples/snake_row_source_second_comparison.lp
-  examples/snake_row_source_boundary_covered.lp
-  examples/snake_row_source_boundary_zero.lp
+  examples/chain_pair_map_cycle_lifts.lp
+  examples/hom_factor_source_isos.lp
 )
 mkdir -p logs/probes
-log_file="$(pwd)/logs/probes/snake-row-source-boundary-${mode}-$(date +%Y%m%d-%H%M%S).log"
-stage_root="$(mktemp -d /tmp/emdash-snake-source-boundary.XXXXXX)"
+log_file="$(pwd)/logs/probes/ordinary-cycle-factors-${mode}-$(date +%Y%m%d-%H%M%S).log"
+stage_root="$(mktemp -d /tmp/emdash-ordinary-cycles.XXXXXX)"
 cleanup() {
   case "$stage_root" in
-    /tmp/emdash-snake-source-boundary.??????) ;;
+    /tmp/emdash-ordinary-cycles.??????) ;;
     *) printf 'unexpected temporary path: %s\n' "$stage_root" >&2; return 1 ;;
   esac
+  # Remove only copied sources and generated object kinds from this exact tree.
+  # An unexpected file survives and causes rmdir to report the incomplete cleanup.
   local file
   for file in "$stage_root"/*.lp "$stage_root"/*.lpo \
       "$stage_root"/*.lpi "$stage_root"/*.lpj "$stage_root"/lambdapi.pkg \
@@ -72,8 +60,8 @@ check_object() {
   printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
     "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode" >>"$log_file"
   set +e
-  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
-    lambdapi check -c --no-colors "${warning_flags[@]}" "${extra_flags[@]}" \
+  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
+    bash "$formal_root/scripts/lambdapi_resource_guard.sh" lambdapi check -c --no-colors "${warning_flags[@]}" "${extra_flags[@]}" \
     "$file" >>"$log_file" 2>&1
   rc=$?
   set -e
@@ -81,15 +69,14 @@ check_object() {
   printf 'finished %s: exit %s, elapsed %ss\n' "$file" "$rc" "$elapsed"
   printf 'finished %s: exit %s, elapsed %ss\n' "$file" "$rc" "$elapsed" >>"$log_file"
   if [[ "$rc" -ne 0 ]]; then
-    tail -30 "$log_file" >&2
+    tail -40 "$log_file" >&2
     printf 'check failed; log: %s\n' "$log_file" >&2
     return "$rc"
   fi
 }
 
-printf 'source-boundary check log: %s\n' "$log_file"
+printf 'ordinary-cycle check log: %s\n' "$log_file"
 cd "$stage_root"
 check_object emdash3_2.lp
-for file in "${prerequisites[@]}" "${owners[@]}"; do check_object "$file"; done
-for file in "${reviewers[@]}"; do check_object "$file"; done
-printf 'source-boundary checks succeeded; log: %s\n' "$log_file"
+for file in "${owners[@]}" "${reviewers[@]}"; do check_object "$file"; done
+printf 'ordinary-cycle checks succeeded; log: %s\n' "$log_file"
