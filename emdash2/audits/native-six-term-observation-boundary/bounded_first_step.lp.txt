@@ -1,0 +1,21 @@
+/* H1: compare the actual stored first step before finite-tail assembly. */
+require open emdash.emdash3_2_one_cat_native_snake_six_term_result;
+assert [K C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  [Prod : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
+  (Add : τ (@AdditiveCategory C Prod t)) (T0 : τ (@TerminalObject (Op_cat C) t))
+  (P : τ (@KernelAdjunctionStructure C (@additive_preadditive C Prod t Add) t (@additive_terminal_object C Prod
+    t Add)))
+  (Q : τ (@CokernelAdjunctionStructure C (@additive_preadditive C Prod t Add) t T0))
+  (N : τ (@OneCatAdjunctionNormality C (@additive_preadditive C Prod t Add) C1 t (@additive_terminal_object C
+    Prod t Add) T0 P Q))
+  [A B X D : τ (Functor K C)] (b : τ (@Transf K C B X)) (c : τ (@Transf K C X D))
+  (h : τ (@NativeSnakeInput K C t (@additive_terminal_object C Prod t Add) A B X D b c)) ⊢ (@one_cat_native_exact_arrow_pair_comparison K C (@additive_preadditive C Prod t Add) C1 t (@additive_terminal_object C Prod t Add) T0 P Q N (@kernel_adjunction_family_func K C (@additive_preadditive C
+  Prod t Add) t (@additive_terminal_object C Prod t Add) P (@one_cat_native_snake_alpha_diagram K C
+  (@additive_preadditive C Prod t Add) C1 t (@additive_terminal_object C Prod t Add) T0 P A B X D b c h)) (@kernel_adjunction_family_func K C (@additive_preadditive C Prod t Add) t (@additive_terminal_object C Prod t
+  Add) P (@transf_arrow_diagram_func K C B X b)) (@kernel_adjunction_family_func K C (@additive_preadditive C
+  Prod t Add) t (@additive_terminal_object C Prod t Add) P (@one_cat_native_snake_gamma_diagram K C
+  (@additive_preadditive C Prod t Add) C1 t (@additive_terminal_object C Prod t Add) T0 Q A B X D b c h)) (@one_cat_native_snake_kernel_first K C (@additive_preadditive C Prod t Add) C1 t (@additive_terminal_object C
+  Prod t Add) T0 P Q A B X D b c h) (@one_cat_native_snake_kernel_second K C (@additive_preadditive C Prod t
+  Add) C1 t (@additive_terminal_object C Prod t Add) T0 P Q A B X D b c h)
+ (@one_cat_native_snake_six_term_first_step K C C1 Prod t Add T0 P Q N A B X D b c h)) ≡ (@one_cat_native_snake_first_exact_comparison K C C1 Prod t Add T0 P Q N A B X D b c h);

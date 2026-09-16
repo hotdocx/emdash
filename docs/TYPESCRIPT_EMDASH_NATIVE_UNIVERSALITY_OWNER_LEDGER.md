@@ -310,6 +310,23 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-6C3b2: Bounded Review Completed; Observation Comparison Deferred
+
+H1 isolates the stored first step and proves its original canonical whole-map
+comparison in 22.685s at 6GiB/180s/o20. H2 compiles exact current parents in an
+isolated package (37.353s, 179 objects), then observes the first package and
+both inverses before allocation failure at complete-package comparison
+(48.739s, exit 134). The active mathematical owners, guard, proof data and
+inverse choices remain unchanged. The [snake plan](TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md)
+records the source finding: no functor equality-cast in the reviewed observer.
+
+Under the user's D-NUH-080 authorization, defer the still-unqualified large
+comparison and proceed to final audit and book update. Preserve the bounded
+snapshot/measurement/replay bundle alongside earlier attempts. This is not a
+claim that the comparison is proved, and does not invalidate the separately
+qualified six-term construction, typed data consumers or displayed CAS results.
+No further C3b2, Op, or endpoint-debugging experiment is scheduled in this goal.
+
 ### NUH-5N2G3B2c4b: Displayed Native CAS LES — Qualified
 
 The finite certificate retains one actual native input for each displayed
@@ -327,7 +344,7 @@ emitter import repair preserves every proof-body byte and avoids repeating
 CAS/adoption work. Sixteen transparent definitions add no primitive, rule or
 opacity. The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
 records source/log hashes, focused TypeScript checks and the 1411-file source
-snapshot. Final cross-layer checkpoint qualification is being synchronized.
+snapshot. The cross-layer checkpoint is `5df9292c`.
 
 Latest user direction D-NUH-080: conduct one bounded categorical review of
 C3b2 with at most two focused implementation hypotheses. If no clear route

@@ -1,0 +1,37 @@
+"""Replay one preserved bounded diagnostic in a fresh isolated package.
+
+Run explicitly from emdash2 with --kind first-step or --kind compiled-package.
+Refuse changed source dependencies: review such changes before adapting a replay.
+No active source, rule, guard, or existing compiled object is changed.
+"""
+from pathlib import Path
+import argparse,hashlib,json,os,shutil,subprocess,tempfile,time
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--kind',choices=['first-step','compiled-package'],required=True)
+args=parser.parse_args()
+audit=Path(__file__).resolve().parent;root=audit.parents[1]
+m=json.loads((audit/'bounded_review_2026-09-16.json').read_text())
+sha=lambda b:hashlib.sha256(b).hexdigest()
+assert sha((root/'scripts/lambdapi_resource_guard.sh').read_bytes())==m['guard_sha256'],'Changed resource guard'
+for name,h in m['snapshots'].items():
+ assert sha((audit/name).read_bytes())==h,name
+stage=Path(tempfile.mkdtemp(prefix='bounded-six-term-',dir=root/'tmp/probes'))
+for name,h in m['H2']['dependency_hashes'].items():
+ source=audit/'bounded_original_data.lp.txt' if name=='tmp/probes/nuh6c3b_original_data.lp' else root/name
+ data=source.read_bytes();assert sha(data)==h,('Changed dependency',name)
+ target=stage/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+shutil.copy2(root/'lambdapi.pkg',stage/'lambdapi.pkg');(stage/'examples').mkdir(exist_ok=True)
+source=(audit/('bounded_first_step.lp.txt' if args.kind=='first-step' else 'bounded_data_agreement.lp.txt')).read_text()
+review=stage/'examples/review.lp';review.write_text(source)
+parent=stage/'examples/parent.lp';parent.write_text('\n'.join(l for l in source.splitlines() if l.startswith('require '))+'\n')
+env=dict(os.environ,OCAMLRUNPARAM='o=20,v=1024',EMDASH_LP_MEMORY_MIB='6144',EMDASH_LP_TIMEOUT='180s')
+checks=[('parent',parent,['-c']),('reviewer',review,[])] if args.kind=='compiled-package' else [('reviewer',review,[])]
+record={'kind':args.kind,'stage':str(stage),'checks':[]}
+for label,file,flags in checks:
+ log=stage/(label+'.log');started=time.monotonic()
+ with log.open('w') as stream:
+  r=subprocess.run(['bash',str(root/'scripts/lambdapi_resource_guard.sh'),'lambdapi','check','--no-colors',*flags,str(file.relative_to(stage))],cwd=stage,env=env,stdout=stream,stderr=subprocess.STDOUT)
+ row={'label':label,'rc':r.returncode,'seconds':round(time.monotonic()-started,3),'log':str(log),'log_sha256':sha(log.read_bytes()),'compiled_objects':len(list(stage.rglob('*.lpo')))}
+ record['checks'].append(row);(stage/'result.json').write_text(json.dumps(record,indent=2)+'\n');print(json.dumps(row),flush=True)
+ if r.returncode:break
+print('Isolated snapshot retained:',stage)

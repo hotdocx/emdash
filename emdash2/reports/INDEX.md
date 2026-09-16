@@ -25,9 +25,10 @@ emission passes in 524.23s; all 64 emitted assertions, six assembly assertions
 and 13 signature assertions check. The profile exposes displayed exactness.
 The [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
 records the exact import repair, resource profiles and warning comparisons.
-The latest user direction gives the remaining six-term observation gap a
-bounded categorical review with explicit deferral fallback, then requires
-the final audit and book update. Op/duality remains a separate later goal.
+The bounded six-term review now explicitly defers the large observation
+comparison after its compiled-parent replay still exhausts 6GiB. The original
+construction and typed data access remain qualified. Final audit and book
+update are next; Op/duality remains a separate later goal.
 
 Canonical public LES pairs (2026-09-16): the
 [public-pair transport](../emdash3_2_one_cat_native_public_pair_exactness.lp)

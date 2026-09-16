@@ -1,6 +1,6 @@
 # Native Six-Term Observation Boundary
 
-Status: retained qualification gap; bounded review with user-authorized deferral fallback on 2026-09-16; not positive library checks
+Status: explicitly deferred after the 2026-09-16 bounded review; not positive library checks
 
 Authority: [native snake/LES plan](../../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md),
 NUH-6C3b. Latest direction D-NUH-080 (2026-09-16) schedules one bounded
@@ -10,6 +10,27 @@ and proceed with the final audit and book update. This supersedes the earlier
 unconditional completion gate. Preserve the failed evidence and do not call
 the direct comparisons proved merely because the goal can close with that
 deferral. Op/duality remains a separate later goal.
+
+## Bounded Review Outcome — 2026-09-16
+
+The first retained step's canonical comparison passes before finite-tail
+assembly (22.685s, 6GiB/180s/o20). The current whole-result data comparison
+still allocation-fails (48.739s) after exact current parents compile in
+37.353s to 179 objects at the same limit. Its trace gets through the observed
+package, evidence and both inverse declarations before the comparison.
+No active rule, representation, opacity, proof data, inverse choice or guard
+was changed. The local observer already uses the canonical whole categorical
+map; the reviewed bodies contain no functor equality-cast to replace.
+
+D-NUH-080's deferral fallback is now selected. The large direct comparison
+remains unqualified; stop this investigation for the current goal and finish
+the audit/book work. `bounded_review_2026-09-16.json` binds exact source and
+log identities. `bounded_first_step.lp.txt`, `bounded_data_agreement.lp.txt`
+and `bounded_original_data.lp.txt` preserve the probes. The syntax-checked
+`bounded_review_replay.py.txt` can reconstruct either diagnostic explicitly
+in a fresh isolated package and refuses changed dependency/guard hashes.
+These files are resumption evidence, not registered positive examples.
+
 
 NUH-6C3b1 now qualifies [typed whole-result data access](../../emdash3_2_one_cat_native_exact_tail_observations.lp).
 It packages data inside the generic tail before specializing the annotation.

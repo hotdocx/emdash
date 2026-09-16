@@ -340,10 +340,11 @@ retaining actual native inputs and canonical Ω data. The nonsplit workflow
 passes assembly, coverage rejection, reuse and emission; all 64 emitted,
 six assembly and 13 signature assertions check under the documented localized
 profiles. The public flag is true. No output-exactness assumption, primitive,
-rule or opacity is added. D-NUH-080 now schedules a bounded categorical review
-of the six-term observation gap with at most two focused hypotheses and an
-explicit deferral fallback if no clear route emerges, then the final audit and
-book update. Op/duality remains outside this goal for its own later launch.
+rule or opacity is added. The D-NUH-080 bounded review has now finished:
+the individual first comparison passes, but compiled-parent whole-package
+comparison still allocates out at 6GiB. That observation gap is explicitly
+deferred with a resumption bundle. Finish the final audit and book update;
+do not resume C3b2 or Op/duality in this goal.
 
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

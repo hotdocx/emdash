@@ -1,7 +1,7 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native snake/LES comparison and both displayed CAS certificates qualified; bounded six-term observation review remains
+Status: native snake/LES comparison and both displayed CAS certificates qualified; large six-term observation comparison explicitly deferred after bounded review
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
@@ -18,6 +18,54 @@ Earlier statements requiring C3b2 unconditionally before goal completion are
 superseded by this authorization. The mathematical six-term construction and
 its qualified typed data access remain distinct from this open comparison.
 Op/duality remains outside this goal, for a dedicated later launch.
+
+Initial bounded-review findings (2026-09-16, after `5df9292c`):
+`one_cat_native_exact_arrow_pair_comparison` applies the existing whole
+`one_cat_image_to_kernel_transf` to the input projected from the stored pair;
+`one_cat_native_exact_arrow_pair_evidence` projects its original Ω witness.
+The first six-term step explicitly stores `one_cat_native_snake_first_exact_input`
+and `one_cat_native_snake_first_exact`, and the standalone first comparison
+uses that same input. The data observer's Σ elimination unpacks this retained
+structure. No `path_to_hom` or `ind_eq` occurs in these comparison/evidence/data
+observer bodies. The incoming reconstruction path is retained separately.
+
+Thus the particular equality-cast repair used for the LES H comparison has no
+obvious corresponding site in the reviewed observation layer. This is a local
+source finding, not a complete root-cause diagnosis. Prefer the existing whole
+categorical owners and inspect data exposure/type conversion before proposing
+another mathematical comparison. The current-source typed data baseline passes unchanged. Hypothesis H1
+isolates the original first step before finite-tail assembly and compares its
+whole canonical transformation directly with the standalone first comparison.
+It passes in 22.685s at 6GiB/180s/o20, without changing any owner or selected
+input/proof. This narrows the observed boundary to extraction/comparison
+through the assembled result; it does not close the full four-position gate.
+Evidence: `emdash2/tmp/probes/nuh6c3b2_bounded_h1.json`.
+
+Hypothesis H2 used the current whole-result data observer with freshly
+compiled exact-source parents at 6GiB/180s/o20. The isolated parent checks in
+37.353s and produces 179 compiled objects. The reviewer passes import and the
+first observed data, evidence, left inverse, right inverse and standalone
+package declarations, then fails at their complete-package comparison with
+allocation failure during minor GC (exit 134, 48.739s). No active source or
+guard changes; no rule, opacity, assumption or inverse choice changes.
+
+**Decision — explicitly deferred under D-NUH-080.** The two focused approaches
+have narrowed the observed boundary but have not qualified the large direct
+comparison or yielded a clear implementation repair. Stop this investigation
+for the present goal and proceed to the final audit/book update. Preserve the
+mathematical six-term result, all four original exactness proofs, the checked
+whole-result data access, and both displayed CAS certificates. Do not describe
+the deferred direct comparison as proved or treat it as a counterexample to
+those qualified constructions.
+
+The [resumption bundle](../emdash2/audits/native-six-term-observation-boundary/README.md)
+now includes the first-step probe, current-observer package comparison,
+standalone data helper, exact dependency/source/log hashes and a syntax-checked
+replay script that refuses changed source dependencies or guards. Evidence is
+`bounded_review_2026-09-16.json`; the old failed approaches remain historical.
+This is a localized conversion/resource boundary, with no confirmed functor
+path-cast cause at the reviewed observer. A broader root-cause investigation
+belongs to the later continuation, not this goal.
 
 The general native snake takes an arbitrary whole triple
 A ─a⇒ B ─b⇒ X ─c⇒ D with c∘b∘a=0. It derives α:A⇒K(c)
