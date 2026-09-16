@@ -2221,6 +2221,15 @@ supply the two zero pairs involving δ. The source, middle and target
 `..._exact_comparison` operations are the existing actual Im⇒K maps;
 no invertibility evidence is implied by those names or declarations.
 
+`freyd_native_column_incoming_homology_path` and its outgoing counterpart
+state H_CAS(i)∘c_L=c_M∘H_family(i)[x] and
+H_CAS(p)∘c_M=c_R∘H_family(p)[x]. H_CAS denotes the existing new native
+`freyd_adjunction_model_map`, applied to presentation-based chain-map data.
+The equations do not name the former homology implementation.
+`introduced_input_diagram_map` retains D[x] and Arr(u[x]) as its actual
+endpoints; the native input comparison uses that map and its selected inverse.
+This changes no surface grammar or primary whole H owner.
+
 `homology_family_global_boundary_point_map` is an actual transformation
 between the two original boundary diagrams, with identity endpoint action.
 `homology_family_global_point_map` applies the same original Q to it.

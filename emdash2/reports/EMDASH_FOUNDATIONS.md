@@ -5070,6 +5070,18 @@ must still be related to the public arrows and their interpretations with
 shared endpoint coherence; four invertible comparisons alone do not make
 that link.
 
+The new LES family H maps now agree, under their original column comparisons,
+with the CAS-facing native H action. That public action applies the same
+model's whole H to a native map built from the matrix/presentation data; it
+is not the former homology algorithm. The proof derives actual diagram
+agreement from original row observations, applies K, and uses the original
+whole quotient reconstruction and cancellation. No new caller naturality
+square or output-exactness assumption is supplied. The introduced-input
+comparison itself now retains an actual D[x]→Arr(u[x]) diagram map rather
+than relying on a proof-time identification of those objects. Its two
+public signatures and original inputs remain. Displayed exactness requires
+transport through the resulting adjacent-input equivalences as a further step.
+
 Categorical presentation comparisons should retain both constructions and
 use actual maps, with whole action when parameters vary. The H point
 comparison now applies the original Q to an actual boundary-diagram map

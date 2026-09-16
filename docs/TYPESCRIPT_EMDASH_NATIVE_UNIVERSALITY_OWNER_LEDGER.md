@@ -310,6 +310,34 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c2b2: CAS-Facing Native H Map Agreement — Qualified
+
+Both original whole row-triple H maps now commute with c_L,c_M,c_R and the
+original public `freyd_adjunction_model_map`. The raw prefix identifies
+matrix/presentation input; this is integration of two new native entry points,
+not compatibility with the former homology design. All actual diagram/cycle
+comparison premises are derived from original row data and native actions.
+A raw column-map builder also reuses the original two row agreements.
+
+The existing introduced-input comparison required a scoped body repair:
+keep an actual D[x]→Arr(u[x]) map with identity endpoint action, then construct
+the native input map and inverse through existing owners. Both public
+signatures and endpoints remain. Eighteen new definitions and two revised
+bodies add no primitive, rule, unifier or opacity. Sixteen added assertions,
+two updated diagram-component expectations and six
+actual supplied/derived-map consumers are qualified. All seventeen focused
+checks and warning inventories pass; source/signature, LHS, catalog/TOC,
+documentation and the 1385-file source-health snapshot pass. Exact evidence
+is bound in `emdash2/tmp/probes/nuh5g3b2c2b2_qualification.json`.
+The new H theorem/consumer uses the previously documented o=20 GC setting
+at unchanged 90s/2GiB limits; other targets use default GC.
+
+The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records exact
+qualification and the corrected architectural boundary. Next use these
+agreements and existing δ conjugation to form actual adjacent input
+equivalences and transport canonical exactness to the CAS LES. NUH-6C3b2
+and NUH-7 remain open; no old/new snake or LES compatibility gate is restored.
+
 ### NUH-5N2G3B2c2b1: Middle Column Comparison — Qualified
 
 The original middle chain now constructs its whole input, incoming recovery,

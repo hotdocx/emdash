@@ -16,6 +16,17 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+CAS-facing native H agreement (2026-09-15): the
+[actual column equations](../emdash3_2_commutative_algebra_freyd_native_column_homology_paths.lp)
+relate the new whole LES H maps to the public native model action through
+c_L,c_M,c_R. Original row observations prove diagram agreement; whole K/Q
+and native quotient cancellation prove H agreement. The introduced-input
+comparison now uses an actual map between its two diagram presentations,
+with unchanged public signatures and no new primitive/rule. The raw prefix
+means presentation input, not former homology. Actual exact-pair transport
+and displayed CAS LES certification remain in the
+[model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Middle-column comparison (2026-09-15): the
 [native middle comparison](../emdash3_2_commutative_algebra_freyd_native_middle_column_comparisons.lp)
 and its [quotient equation](../emdash3_2_commutative_algebra_freyd_native_middle_column_quotient_paths.lp)

@@ -319,6 +319,14 @@ definitions and two revised bodies add no primitive or rule. The comparison
 is a point view; it does not establish whole parameter naturality. Public
 H-map/zero-pair alignment and displayed LES transport remain in the model plan.
 
+NUH-5N2G3B2c2b2 derives the actual incoming/outgoing H-map equations
+between the new whole LES construction and the CAS-facing native H action.
+Here raw input means matrix/presentation data, not the former homology design.
+The introduced-input comparison now keeps an actual D[x]→Arr(u[x]) map;
+its signatures and original inputs remain. No identification rule, primitive
+or output-exactness contract is added. Adjacent-input equivalences and
+displayed LES exactness transport remain the next qualification boundary.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

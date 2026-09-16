@@ -1042,6 +1042,96 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c2b2: CAS-Facing Native H Map Agreement — Qualified
+
+Terminology and user scope are explicit: this is not an old/new homology
+comparison. `raw` in input-adapter symbols names matrix/presentation data.
+The frontend mirror binds `freyd_adjunction_model_map` in
+`src/v3_2/algebra_formal_freyd_native_model_observation_signatures.ts`.
+The [formal application owner](../emdash2/emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp)
+applies the new whole H to an actual native chain map under the same supplied
+P/Q model. Its existing reviewer checks that exact action view. Former LES
+and snake implementation comparisons remain withdrawn.
+
+The new [column H equations](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_homology_paths.lp)
+now prove
+
+```text
+H_CAS(i) ∘ c_L = c_M ∘ H_family(i)[x],
+H_CAS(p) ∘ c_M = c_R ∘ H_family(p)[x].
+```
+
+Here H_CAS is that same CAS-facing native H action, not a former algorithm.
+The statements name the original public model map and original whole row-triple
+H maps. They accept the original supplied column chain-map evidence; their
+proofs derive all needed comparison equations. An additional
+[column-map builder](../emdash2/emdash3_2_commutative_algebra_freyd_raw_column_chain_maps.lp)
+constructs these agreements from the two original row agreements by existing
+agreement symmetry. No extra matrix equation or model contract is assumed.
+
+The required [diagram comparison](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_diagram_paths.lp)
+keeps the actual three column targets. Whole row restriction and
+[evaluation observations](../emdash2/emdash3_2_commutative_algebra_freyd_native_row_point_paths.lp)
+provide the two endpoint components; ordinary diagram faithfulness proves
+both diagram equations. Original K action then gives cycle compatibility.
+The H comparison follows from original whole quotient reconstruction,
+naturality and the derived ordinary point quotient reflection. The generic
+cycle-compatibility premise is discharged in both Freyd H theorems; it is
+not a new caller-facing coherence record or trusted assumption.
+
+The consumer exposed a genuine presentation issue in the old
+`one_cat_introduced_terminal_input_comparison_map`: its body used a
+same-diagram fibre comparison at D[x], while its public target was Arr(u[x]).
+Generic fixed-diagram projections checked, but their specialized action
+could not be exposed at those actual distinct presentations. The repaired
+[owner](../emdash2/emdash3_2_one_cat_introduced_terminal_input_comparisons.lp)
+uses an actual D[x]→Arr(u[x]) diagram map with identity endpoint components,
+then a native input map with source id and that actual diagram component.
+The existing fixed-forward equivalence criteria supply its inverse. Both
+public signatures and actual source/target inputs are retained. Three
+helpers and two revised bodies introduce no primitive, rewrite, unifier or
+opacity. No equality with the former operational map/proof fields is claimed.
+No equality cast of the two diagram presentations is installed.
+
+The slice adds eighteen definitions overall and revises those two bodies.
+Ten assertions check the repaired native input's endpoint/inverse data and
+laws. Two further assertions check mechanically derived column maps. The
+existing column reviewer replaces its two whole-diagram identity expectations
+with the actual diagram maps and adds four endpoint-identity checks; its
+inverse and quotient consumers remain. Six
+actual consumers apply the diagram/H theorems to supplied and derived map
+evidence. The new concrete reviewer passes at 90s/2GiB with the existing
+`OCAMLRUNPARAM=o=20,v=1024` profile. The unchanged public H-theorem artifact
+first exhausted 2GiB under default GC and then passed with that GC profile.
+This is a runtime setting only. All seventeen owner/consumer checks and their
+seventeen exact import-control warning inventories pass. The H theorem owner
+and its new consumer use that GC profile; the other targets use default GC.
+All targets retain the unchanged 90s/2GiB guards. Measured checks range from
+4.422s to 80.739s; the new H consumer and revised column reviewer retain their
+already-successful exact-source checks. The owner/signature audit confirms
+that the two public introduced-input signatures are byte-identical, all added
+symbols have checked bodies, and both public H theorems discharge their cycle
+conditions. LHS, catalog/TOC, links/lifecycle and the 1385-file source-health
+snapshot pass. Final source/log hashes are bound in
+`emdash2/tmp/probes/nuh5g3b2c2b2_qualification.json`. No repository aggregate
+or TypeScript typecheck was run.
+
+Next NUH-5N2G3B2c3 constructs the actual adjacent input equivalences using
+these H equations and the existing positive δ conjugation, then transports
+canonical native exactness and qualifies the displayed CAS LES certificate.
+Do not replace that transport by output-exactness assumptions. The separate
+NUH-6C3b2 six-term observation boundary and NUH-7 final audit remain required.
+
+For c3, retain the three original point exactness witnesses from the new LES.
+Build a genuine native input map for each public adjacent pair using its three
+column H equivalences, the proved incoming/outgoing H equations and the
+existing δ conjugation. The diagram/native-map equivalence criteria and
+`one_cat_native_exactness_transport` then give canonical exactness at those
+actual public inputs. Only after this categorical transport should the
+already-checked native→CAS observation path certify the selected displayed
+diagram. The snake certificate's simpler equality of observed pairs is not
+permission to identify the distinct LES H presentations or omit this step.
+
 ### NUH-5N2G3B2c2b1: Middle Column Comparison — Qualified
 
 All three original column inputs now have their required H comparison maps.

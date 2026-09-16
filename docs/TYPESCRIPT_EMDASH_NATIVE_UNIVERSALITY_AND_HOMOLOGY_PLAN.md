@@ -24,6 +24,15 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Terminology clarification (2026-09-15): "CAS-facing native H map" means
+the new whole H applied to a native chain map formed from matrix/presentation
+data. The `raw` prefix in those input adapters does not denote the former
+homology algorithm. The remaining comparison is between the new whole LES
+family arrows and these new native H observations, under the same supplied
+P/Q model. It is required to certify the displayed CAS diagram; it is not an
+old/new compatibility gate. The withdrawal of former LES/snake comparisons
+remains in force. Use this terminology in current status reports.
+
 Architectural clarification (2026-09-15): operational comparisons of
 categorical presentations should be actual internal functors/transformations,
 with categorical inverse evidence where needed. Keep original endpoints and
@@ -36,10 +45,23 @@ hom_int/homd_int and groupoidal equality itself. The broader terminal/initial
 review follows the same criterion, under its separately qualified coherence
 profile; it is not justified merely by the present comparison's resource issue.
 
+NUH-5N2G3B2c2b2 proves agreement of both new whole LES family H maps with
+the CAS-facing native H maps through c_L,c_M,c_R. The original public model
+map and whole row-triple maps occur in the actual theorem statements; all
+diagram/cycle compatibility is derived from original data. The introduced-input
+comparison now uses a genuine diagram map at its actual two presentations,
+with both public signatures retained and no new primitive/rule. Concrete
+supplied/derived-map consumers and all seventeen focused checks pass, using
+the documented GC profile for the new H theorem/consumer. Next form adjacent
+input equivalences and transport
+exactness to the displayed CAS LES (NUH-5N2G3B2c3). The
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records the scope;
+former-formulation compatibility stays withdrawn. NUH-6C3b2 and NUH-7 remain.
+
 NUH-5N2G3B2c2b1 adds the missing middle-column input/H comparisons and
 actual-target quotient equation from the original middle chain witness.
 Both inverse slots compute. The original incoming/outgoing whole H maps
-compose at the retained middle endpoints; equality with the raw public H maps
+compose at the retained middle endpoints; equality with the CAS-facing native H maps
 is the next proof obligation. Seven definitions add no primitive or rule.
 The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records
 four passing focused checks at default 90s/2GiB and the direct native-map
