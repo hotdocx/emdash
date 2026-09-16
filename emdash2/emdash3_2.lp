@@ -9530,8 +9530,8 @@ rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
 rule @tapp0_fapp0 $A $B $F $F $Y (@id (Functor_cat $A $B) $F)
   ↪ @id $B (@fapp0 $A $B $F $Y);
 
-// Displayed identity components are identity functors on fibres.
-rule @tapp0_fapp0 $K Cat_cat $E $E $Y (@id (@Catd_cat $K) $E)
+// Displayed identity components: infer both family presentations from the identity.
+rule @tapp0_fapp0 $K Cat_cat _ _ $Y (@id (@Catd_cat $K) $E)
   ↪ @id Cat_cat (@fapp0 $K Cat_cat $E $Y);
 
 // Vertical composite components compose pointwise.
@@ -17895,7 +17895,7 @@ rule @fdapp1_int_hom_func $K $E $E (@id (Catd_cat $K) $E)
         (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v) $p);
 
 // lhs-audit: keep 1 -- same nested id-category SR guard.
-rule @fdapp1_int_hom_fapp0 $K $E $E (@id (Catd_cat $K) $E)
+rule @fdapp1_int_hom_fapp0 $K _ _ (@id (Catd_cat $K) _)
       _ _ _ _ _ $alpha
   ↪ $alpha;
 

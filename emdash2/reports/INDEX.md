@@ -37,6 +37,15 @@ introduced-input and native column reviewers pass; existing dependencies and
 all surviving comparison bodies are preserved. Dated links use their exact
 published source snapshot. Whole comparison refinement remains in progress.
 
+CC-4b identity observations (2026-09-16): two existing displayed-identity
+rules now infer equivalent source/target family presentations from their
+identity head. The [focused reviewer](../examples/displayed_identity_presentations.lp),
+nucleus diagnostics and affected native consumers pass. No primitive or
+unification rule is added. The [whole comma-family experiment](../audits/categorical-family-introduction-boundary/README.md)
+retains a checked constructor, point and source-arrow action; its target action
+and whole H comparison remain unqualified. The consolidation plan records the
+scoped 6GiB diagnostic run and exact warning changes.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

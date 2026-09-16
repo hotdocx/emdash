@@ -1117,3 +1117,101 @@ CC-4's whole comparison question remains in progress; do not count the ignored
 failed prototype as a promoted interface. CC-5 book/entry-point consolidation
 and CC-6 final audit remain required. Op/duality, action-profile integration
 and the six-term experiment are still outside scope.
+
+
+CC-4b continuation from 07e3f5d6: the preceding turn was progress (two checked
+source checkpoints). No checker remained live. The existing diagram
+reconstruction reviewer passes again. Replacing DefIso with IsoEvidence in
+the reindexing prototype does not fix the endpoint-presentation mismatch;
+no replacement interface has been promoted.
+
+The consumer-driven prerequisite now has a concrete derivation: retain A
+while reusing the protected internal transformation-graph section for
+h:J∘A⇒D, apply Σ base change along Op(A), then take the outer opposite.
+Because the graph helpers are protected, the experiment is a full-file copy
+at that owner, not an external call to its protected symbols. Staging the
+base-family comparison as an identity Functord makes all six helper
+constructions typecheck without a new primitive or any manual naturality
+square. This preserves the existing represented comma and hom_int/homd_int.
+The final object assertion still fails; therefore the constructor is not yet
+qualified for promotion.
+
+The computed point is exactly (A(x), id_component(D(x),hₓ)). The residual
+id_component has two proof-time-equal family presentations in the inferred
+source/target slots. The current displayed identity-component rule repeats
+`$E $E` in those slots, so it does not fire. Next bounded hypothesis: omit
+only these two redundant inferred family guards in the existing
+`tapp0_fapp0 … (id (Catd_cat K) E)` rule. This is an identity projection
+cleanup, not an Op signature change, a strict-functor axiom, a new inverse
+choice or a broad composition fold. Qualify it with a full-core owner-position
+probe, the actual comma point and arrow consumers, inherited identity checks
+and exact warning comparison before any source promotion.
+
+
+CC-4b identity-projection qualification (2026-09-16): two existing nucleus
+clauses now infer the source/target family presentations from the actual
+identity head: `tapp0_fapp0` at a displayed identity, and the capped
+`fdapp1_int_hom_fapp0` identity action. The measured nested Catd identity-category
+guard remains. The unused family pattern in the latter is `_`. No primitive,
+unification rule, general composition fold or Op/profile declaration changes.
+
+The new `examples/displayed_identity_presentations.lp` uses ordinary pullback
+versus raw-composition presentations, without Op. Its three positive checks
+cover the component functor, its object action and the next displayed-Hom
+cell; its negative check preserves an arbitrary displayed functor. The exact
+pre-edit nucleus fails the first new assertion at line 22960 of
+`cc4_identity_old_control.lp`. Both owner-position full-core candidates pass
+subject reduction. The final source's regression passes. This is a runtime
+projection correction for existing proof-time presentation equality, not
+transport of a functor along a groupoidal path.
+
+Actual comma experiment: the whole constructor, its object action
+x↦(A(x),D(x),hₓ), and the source-arrow action A[g] pass. The target-arrow
+assertion does not yet pass. After both identity corrections its computed
+normal form contains three remaining nonidentity displayed-Hom actions:
+fibrewise Σ of the internal action, total base change, and varying Σ projection.
+Those actions cannot simply be erased. Preserve the precise fragment and
+replay recipe in
+[the active audit bundle](../emdash2/audits/categorical-family-introduction-boundary/README.md).
+It is not a positive library module or a qualification of higher variance.
+Do not add a primitive merely to conceal this observation boundary.
+
+Validation of the identity correction:
+
+- Whole nucleus source, final regression, ordinary terminal/initial adjunction
+  reviewer and native column comparison reviewer pass. The source TOC,
+  strict inferred-slot audit (zero unreviewed clauses), strict catalog and all
+  178 current book evidence entries pass.
+- The combined nucleus diagnostic file first exhausts the guarded 2GiB
+  address-space limit with `o=20`; this is not a type error or an attribution
+  of a performance regression. Its complete final-source run passes at the
+  explicitly scoped, user-authorized 6GiB limit, with the same 90s deadline,
+  `OCAMLRUNPARAM=o=20,v=1024`, subject reduction and warnings enabled. Measured
+  wall time is 89.38s and maximum RSS is 3,568,160KiB (about 3.40GiB), with no
+  swaps. This is one affected nucleus target, not a repository-wide aggregate
+  or a changed global limit. Its near-deadline measurement should be retained
+  rather than routinely repeated for reassurance.
+- Exact warning inventories on the old and final whole nucleus, after ANSI
+  and temporary-source-path normalization, have zero parser issues and no
+  additions. Replaceable-variable warnings remain 157; critical pairs change
+  from 1146 to 1144. The removed diagnostics are the displayed-identity /
+  constant-section component overlap at line 14888 and the capped displayed
+  identity/input-identity overlap at line 17898. This diagnostic change is not a general
+  confluence claim and does not resolve the deferred section/profile issues.
+
+Key logs: `cc4_core_identity_final-20260916-174829.log` checks a byte-identical
+full copy of the final nucleus; `displayed_identity_presentations-20260916-174921.log`,
+`one_cat_terminal_adjunctions-20260916-174448.log`,
+`freyd_native_column_comparisons-20260916-174456.log`, and the measured final
+`cc4b_final_diagnostics-20260916.log`. Source/warning/resource receipts are
+`tmp/probes/cc4b_identity_validation.json`; the active mathematical boundary
+is tracked in the audit bundle rather than existing only in ignored logs.
+The source-only health report covers 1257 files with metrics snapshot
+`0aaa980207f23307ea2f65558b68ae1744bbbdecfe256cfe4489d35ed1383e03`.
+It does not claim that all registered files were rechecked.
+
+Next: finish the actual comma target/whole-input observations and their H
+comparison consumer; retain supplied finite CAS point data at its explicit
+boundary. CC-4 is still in progress. CC-5 book/current-document consolidation
+can proceed independently; CC-6 final audit remains required. The previously
+qualified native model contracts and selected CAS data remain unchanged.
