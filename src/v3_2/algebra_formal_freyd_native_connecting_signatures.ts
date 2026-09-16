@@ -2,7 +2,7 @@
 import { KernelExpression } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { createFormalFreydNativeModelObservationProofEnvironment } from './algebra_formal_freyd_native_model_observation_signatures';
-import { extendFormalFreydConnectingSignatures, formalFreydConnectingObservationTerm } from './algebra_formal_freyd_model_connecting_signatures';
+import { extendFormalFreydConnectingSignatures, formalFreydConnectingObservationTerm } from './algebra_formal_freyd_window_signatures';
 
 export const FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS = Object.freeze({
     bridge_FreydAdjunctionModelRowShortExact: 'FreydAdjunctionModelRowShortExact',

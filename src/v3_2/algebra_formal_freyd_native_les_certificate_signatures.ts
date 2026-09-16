@@ -4,8 +4,7 @@ import { binderMode, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
 import { createFormalFreydExactnessPointProofEnvironment } from './algebra_formal_freyd_exactness_point_signatures';
-import { formalFreydWindowFields, FormalFreydWindowField, FormalFreydWindowScope,
-    FREYD_MODEL_CONNECTING_ARGUMENTS } from './algebra_formal_freyd_model_connecting_signatures';
+import { formalFreydWindowFields, FormalFreydWindowField, FormalFreydWindowScope, FREYD_MODEL_CONNECTING_ARGUMENTS } from './algebra_formal_freyd_window_signatures';
 
 export const FREYD_NATIVE_LES_PAIR_POSITIONS = Object.freeze(['middle', 'source', 'target'] as const);
 export type FreydNativeLesPairPosition = (typeof FREYD_NATIVE_LES_PAIR_POSITIONS)[number];

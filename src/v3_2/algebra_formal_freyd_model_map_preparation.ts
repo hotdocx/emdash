@@ -9,7 +9,7 @@ import { algebraFormalMatrixTerm } from './algebra_formal_finite_module';
 import { CoreLfScopedBuilder } from './lf_builder';
 import { KernelExpression, kernelExpressionEquals, provenance } from './kernel';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
-import { FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_model_map_signatures';
+import { FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_raw_map_signatures';
 import { serializeCoreExpression } from './core_serialization';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
 import { algebraPolynomialModuleMapCompose } from './algebra_polynomial_presentation';

@@ -8,31 +8,9 @@ import { createAlgebraPolynomialFreydKernelChoiceProviders } from './algebra_pol
 import { defineAlgebraFormalFreydActualHomologyRealization } from './algebra_formal_freyd_actual_homology';
 import { algebraFormalFreydRetainedHomologyPresentation } from './algebra_formal_freyd_model_observation';
 import { prepareAlgebraFormalFreydModelMap } from './algebra_formal_freyd_model_map_preparation';
-import { createFormalFreydRawWitnessProofEnvironment } from './algebra_formal_freyd_raw_witnesses';
-import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_map_signatures';
-import { FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
-import { createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_connecting_signatures';
 import { prepareAlgebraFormalFreydModelConnecting } from './algebra_formal_freyd_model_connecting_preparation';
-import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
-import { binderMode, provenance, sourceSpan } from './kernel';
 import { serializeCoreExpression } from './core_serialization';
 import { serializeCoreLfWorkspaceCanonicalJson } from './lf_workspace';
-
-/** Compose the existing private mirrors; introduce no new mathematical signature. */
-export function createFormalFreydLongExactModelProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
-    let environment = createFormalFreydRawWitnessProofEnvironment([]);
-    const models = createFormalFreydModelConnectingProofEnvironment([]);
-    for (const name of Object.keys({ ...FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS,
-        ...FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS })) {
-        environment = environment.extend(models.lookup(name)!);
-    }
-    inputs.forEach((input, index) => {
-        environment = environment.extend({ ...input, mode: input.mode ?? binderMode('explicit', 'functorial'),
-            provenance: provenance('surface', 'bounded model input ' + input.name,
-                sourceSpan('generated/bounded-model-inputs.ts', index + 1, 1)) });
-    });
-    return environment;
-}
 
 /** Read the stored degrees/maps/interiors, never call a homology or universal algorithm. */
 export function algebraFormalFreydLongExactModelInventory<P extends AlgebraParent, C extends AlgebraElement<P>, I>(

@@ -1,8 +1,8 @@
 /** Interpret the retained bounded H inventory in one supplied coherent model. */
 import { AlgebraElement, AlgebraParent } from './algebra_parent';
 import { AlgebraFormalFreydLongExactAdoption, ALGEBRA_FORMAL_FREYD_LONG_EXACT_PROFILE } from './algebra_formal_freyd_long_exact';
-import { AlgebraFormalFreydLongExactModelPreparation, algebraFormalFreydLongExactModelInventory,
-    assertAlgebraFormalFreydLongExactModelPreparationCurrent, createFormalFreydLongExactModelProofEnvironment } from './algebra_formal_freyd_long_exact_model_preparation';
+import { AlgebraFormalFreydLongExactModelPreparation, algebraFormalFreydLongExactModelInventory, assertAlgebraFormalFreydLongExactModelPreparationCurrent } from './algebra_formal_freyd_long_exact_model_preparation';
+import { createFormalFreydLongExactModelProofEnvironment } from './algebra_formal_freyd_model_connecting_signatures';
 import { algebraFormalFreydLongExactEquations, serializeAlgebraFormalFreydLongExactEquations } from './algebra_formal_freyd_long_exact_equations';
 import { algebraFormalFreydModelHomologyObservationBundle } from './algebra_formal_freyd_model_observation';
 import { algebraFormalFreydModelMapObservationBundle } from './algebra_formal_freyd_model_map_observation';

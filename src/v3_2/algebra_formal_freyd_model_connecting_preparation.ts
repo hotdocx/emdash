@@ -9,7 +9,7 @@ import { AlgebraPolynomialFreydHomologyChainMap, algebraPolynomialFreydHomologyC
 import { algebraPolynomialFreydChainPair } from './algebra_polynomial_freyd_homology';
 import { defineAlgebraFormalFreydChainPairRealization, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
 import { defineAlgebraFormalPresentationAgreementRealization, defineAlgebraFormalPresentationMorphismRealization } from './algebra_formal_presentation_morphism';
-import { FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_model_map_signatures';
+import { FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_raw_map_signatures';
 import { algebraPolynomialModuleMapCompose } from './algebra_polynomial_presentation';
 import { algebraPolynomialModuleMapEquals } from './algebra_polynomial_presentation_morphism';
 import { algebraPresentedPolynomialModuleEquals } from './algebra_polynomial_freyd_category';

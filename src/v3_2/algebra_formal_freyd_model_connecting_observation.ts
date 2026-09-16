@@ -5,9 +5,7 @@ import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnect
 import { algebraFormalFreydModelHomologyObservationBundle, algebraFormalFreydNativeModelHomologyObservationBundle,
     ALGEBRA_FORMAL_FREYD_MODEL_OBSERVATION_PROFILE, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { algebraFormalFreydChainPairTerm, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
-import { algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType,
-    createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS }
-    from './algebra_formal_freyd_model_connecting_signatures';
+import { algebraFormalFreydModelConnectingObservationTerm, algebraFormalFreydModelNormalityType, createFormalFreydModelConnectingProofEnvironment, FORMAL_FREYD_MODEL_CONNECTING_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_connecting_signatures';
 import { algebraFormalFreydModelType, FORMAL_FREYD_MODEL_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_signatures';
 import { FORMAL_FREYD_MODEL_MAP_SIGNATURE_BINDINGS } from './algebra_formal_freyd_model_map_signatures';
 import { CoreLfDeclarationEnvironment } from './lf_declarations';

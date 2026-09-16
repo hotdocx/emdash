@@ -39,6 +39,12 @@ Shared ordinary support keeps three renamed bounded gates; source/reviewer
 dispatch coverage, current native consumers and book evidence pass. Git history
 preserves the old implementation; the consolidation plan records the audit.
 
+CC-2c1 frontend consolidation (2026-09-16): raw map and window signature
+builders have independent TypeScript owners. Native signature factories no
+longer construct/import legacy model signature environments; their canonical
+declarations are unchanged. Scoped compilation, 17 native consumer tests and
+emitted-map LP conformance pass. Actual legacy facade retirement remains next.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

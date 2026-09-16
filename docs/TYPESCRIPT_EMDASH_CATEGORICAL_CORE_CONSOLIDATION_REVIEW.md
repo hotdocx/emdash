@@ -640,3 +640,81 @@ The retained ordinary iterator still explains the remaining selected-
 presentation/record-connecting dependency and remains explicitly scoped.
 CC-3–CC-6 are not complete. Op/profile integration and all deferred comparison
 experiments remain untouched.
+
+
+CC-2b checkpoint: `af24ef60`; current continuation starts clean. The previous
+turn made checked retirement progress. CC-2c now addresses the coupled legacy
+model/TS workflow, not the retained native CAS algorithms.
+
+CC-2c1 prerequisite: separate raw matrix/chain-map signature builders and
+raw window-telescope helpers from legacy model signature modules. The native
+signature factory currently constructs a legacy environment and copies four
+raw declarations from it. Replace that dependency with shared raw builders;
+move the generic window template without changing its declarations or emitted
+calls. Also isolate the legacy bounded-model environment factory from the
+shared selected-result inventory. Native point/map/δ/LES signature telescopes,
+input plicity, contracts and selected-result inventory must remain identical.
+These are TypeScript ownership changes, not new mathematical owners or an
+old/new comparison requirement. The production legacy facades are still
+scheduled for actual removal after these shared dependencies are separated.
+
+Validation: workspace check; scoped dependency compilation/lint; canonical
+before/after signature inventories for native observation/δ/exactness/LES
+factories; focused signature and existing native consumer tests; emitted LP
+conformance where affected. Preserve the user prohibition on long repository-
+wide typechecks; no generic checker, runtime or workspace setup is redesigned.
+
+
+CC-2c1 validation update: scoped dependency compilation and affected-file lint
+pass. Six complete signature inventories (512 entries across native and
+remaining legacy environments) match canonical type/body/mode hashes exactly.
+Native context (9 tests, 85.40s) and native map (4 tests, 46.90s) suites pass.
+The full native connecting suite reaches the 90s runtime limit (exit 137 at
+90.06s, before a completed test report). Review authorizes a 180s retry of this
+specific existing suite, preserving the 2GiB OS bound and 512MiB worker heap.
+This is a workflow-time qualification attempt, not a renewed deferred proof
+normalization experiment or a declaration that the timeout proves a defect.
+
+
+CC-2c1 qualified (2026-09-16): raw chain-map/arrow signatures now have the
+shared `algebra_formal_freyd_raw_map_signatures.ts` owner; window telescopes
+and generic observation construction live in
+`algebra_formal_freyd_window_signatures.ts`. Native observation, connecting,
+exactness, diagram and LES factories use these directly. Their transitive
+signature-module closures no longer contain the three legacy model-signature
+modules. Previously those old declarations were already excluded from the
+resulting native environment; this change removes their implementation-level
+construction/import dependency. It does not change the model contracts.
+
+The legacy bounded-model environment factory moved out of the shared selected-
+result inventory into the remaining legacy signatures. Its two production
+consumers were redirected. Shared inventory, CAS selections and native public
+function signatures remain. Legacy observation facades still have users and
+are not claimed retired by this prerequisite tranche.
+
+Validation: workspace contract; scoped dependency compilation with 18 roots
+(16 affected TS source roots and two nearest test roots); affected-file lint;
+canonical declaration inventory equality across six factories (512 entries,
+including type, body and binder mode), SHA-256
+`ac71054c7a22d59247da2cb216975ee9d059133a08d919744546d05d0884b73d`.
+All 17 existing native context/map/connecting tests pass. The connecting
+retry completes in 102.63s at the reviewed 180s deadline, still 2GiB/512MiB;
+its prior 90s termination is recorded above. Native-map LF emission passes
+Lambdapi with its original one typed assertion at 90s/2GiB/o20. No LP source,
+checker/runtime, public barrel, book artifact or model assumption changes.
+No repository-wide typecheck/aggregate was run.
+
+Local receipts: `cc2c1_typecheck_final.log`, `cc2c1_lint_final.log`,
+`cc2c1_signatures_before.json`, `cc2c1_signatures_after.json`,
+`cc2c1_consumer_checks.json`, `cc2c1_connecting_180s.log` and
+`cc2c1_native_h_map.lp` under `emdash2/tmp/probes/`; the LP warning-enabled
+log is under `emdash2/logs/probes/`. The source factory inventory and issued
+rational-context tests cover the relocated legacy assembly during the transition.
+
+Next CC-2c2: remove the legacy model observation/connecting/long-exact/rational
+facades and their model signatures, preserve their native implementations and
+shared raw preparation, and retire the corresponding obsolete LP model owners
+and dedicated tests. Replace negative tests' dependence on production legacy
+factories with local wrong-model fixtures or retained active rejection cases;
+do not weaken native contract/mixed-model/reselection checks. Retain generic
+CAS computation and ordinary provider data that current consumers still use.

@@ -4,7 +4,7 @@ import { binderMode, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
 import { createFormalFreydNativeModelProofEnvironment } from './algebra_formal_freyd_native_model_signatures';
-import { createFormalFreydModelMapProofEnvironment, FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_model_map_signatures';
+import { extendFormalFreydRawMapSignatures, FREYD_CHAIN_MAP_MATRIX_ROLES } from './algebra_formal_freyd_raw_map_signatures';
 
 export const FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS = Object.freeze({
     bridge_CommRingFreydHomologyChainMap: 'CommRingFreydHomologyChainMap',
@@ -18,14 +18,7 @@ export const FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS = Object.f
 });
 
 export function createFormalFreydNativeModelObservationProofEnvironment(inputs: readonly AffineFormalZariskiInputDeclaration[]) {
-    let environment = createFormalFreydNativeModelProofEnvironment([]);
-    // These raw-data constructors are independent of any model. Reuse
-    // their exact existing mirrors; do not import the legacy model signatures.
-    const rawMaps = createFormalFreydModelMapProofEnvironment([]);
-    for (const name of ['bridge_CommRingFreydHomologyChainMap', 'bridge_comm_ring_freyd_chain_map_from_matrices',
-        'bridge_FreydArrowObservation', 'bridge_freyd_raw_arrow_observation']) {
-        environment = environment.extend(rawMaps.lookup(name)!);
-    }
+    let environment = extendFormalFreydRawMapSignatures(createFormalFreydNativeModelProofEnvironment([]));
     const p = provenance('derived', 'native whole H observation signatures');
     const b = new CoreLfScopedBuilder(p), L = formalFreydSpineLanguage(b);
     type Scope = Readonly<Record<string, Term>>;

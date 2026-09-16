@@ -1,6 +1,6 @@
 /** Mechanical preparation of one retained result under a supplied model contract. */
 import { affineFormalCommRingType, affineFormalRingElementType } from './algebra_formal_conformance';
-import { createFormalFreydLongExactModelProofEnvironment } from './algebra_formal_freyd_long_exact_model_preparation';
+import { createFormalFreydLongExactModelProofEnvironment } from './algebra_formal_freyd_model_connecting_signatures';
 import { AlgebraFormalFreydRationalSelectedResult, prepareAlgebraFormalFreydRationalInputs } from './algebra_formal_freyd_rational_preparation';
 import { algebraFormalFreydModelType } from './algebra_formal_freyd_model_signatures';
 import { algebraFormalFreydModelNormalityType } from './algebra_formal_freyd_model_connecting_signatures';

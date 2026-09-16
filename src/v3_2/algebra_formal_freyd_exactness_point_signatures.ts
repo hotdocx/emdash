@@ -4,7 +4,8 @@ import { binderMode, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { createFormalFreydDiagramProofEnvironment } from './algebra_formal_freyd_diagram_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
-import { formalFreydWindowFields, FormalFreydWindowScope } from './algebra_formal_freyd_model_connecting_signatures';
+import { formalFreydWindowFields, FormalFreydWindowScope } from './algebra_formal_freyd_window_signatures';
+
 import { FREYD_NATIVE_EXACTNESS_ARGUMENTS, algebraFormalFreydNativeExactnessExpressions } from './algebra_formal_freyd_native_exactness_signatures';
 import { extendFormalFreydOmegaArrowSignatures, FORMAL_FREYD_OMEGA_ARROW_SIGNATURE_BINDINGS } from './algebra_formal_freyd_omega_arrow_signatures';
 

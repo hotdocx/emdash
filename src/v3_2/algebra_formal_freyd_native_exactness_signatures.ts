@@ -3,7 +3,8 @@ import { CoreLfScopedBuilder } from './lf_builder';
 import { binderMode, KernelExpression, provenance, sourceSpan } from './kernel';
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
-import { FREYD_MODEL_CONNECTING_ARGUMENTS, FormalFreydWindowScope, formalFreydWindowFields } from './algebra_formal_freyd_model_connecting_signatures';
+import { FREYD_MODEL_CONNECTING_ARGUMENTS, FormalFreydWindowScope, formalFreydWindowFields } from './algebra_formal_freyd_window_signatures';
+
 import { createFormalFreydNativeConnectingProofEnvironment } from './algebra_formal_freyd_native_connecting_signatures';
 
 const positions = Object.freeze([

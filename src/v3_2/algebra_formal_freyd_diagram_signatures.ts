@@ -5,7 +5,7 @@ import { KernelBinder, KernelExpression, binderMode, kernelBound, kernelCall, ke
 import { AffineFormalZariskiInputDeclaration } from './algebra_formal_zariski_signatures';
 import { formalFreydSpineLanguage } from './algebra_formal_freyd_spine_signatures';
 import { createFormalFreydNativeExactnessProofEnvironment } from './algebra_formal_freyd_native_exactness_signatures';
-import { FREYD_MODEL_CONNECTING_ARGUMENTS } from './algebra_formal_freyd_model_connecting_signatures';
+import { FREYD_MODEL_CONNECTING_ARGUMENTS } from './algebra_formal_freyd_window_signatures';
 
 const arrowOwners = ['bridge_freyd_raw_arrow_observation', 'bridge_freyd_adjunction_model_arrow_observation',
     'bridge_freyd_adjunction_model_connecting_observation'] as const;
