@@ -29,6 +29,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_computational_fiber_products.lp"),
     Path("emdash3_2_computational_pushouts.lp"),
     Path("emdash3_2_chain_pair_data.lp"),
+    Path("emdash3_2_chain_pair_kernel_tests.lp"),
+    Path("emdash3_2_homology_records.lp"),
     Path("emdash3_2_computational_homology.lp"),
     Path("emdash3_2_short_exact_sequences.lp"),
     Path("emdash3_2_exactness_reindex.lp"),

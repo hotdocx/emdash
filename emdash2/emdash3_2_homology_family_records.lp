@@ -1,7 +1,7 @@
 /* Universal records observing the existing whole H = Q ∘ Arr(K(h) ∘ η).
    These point records retain the actual boundary factor. They do not redefine
    H, cap its higher action, or impose a new diagram grammar. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_homology_records;
 require open emdash.emdash3_2_homology_adjunction_record_data;
 require open emdash.emdash3_2_kernel_adjunction_records;
 require open emdash.emdash3_2_cokernel_adjunction_records;

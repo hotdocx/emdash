@@ -290,8 +290,8 @@ typecheck or renewed normalization probe was run.
 | CC-0 | Checkpoint the accepted review and documentation; fast-forward main, push and verify the existing Pages deployment. Record the exact commit/run. Bootstrap an isolated continuation worktree. | Complete |
 | CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Qualified |
 | CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Qualified |
-| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | In progress |
-| CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Pending ownership cleanup |
+| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Qualified with explicit retained references |
+| CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Next |
 | CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Pending CC-1 and relevant CC-3 decisions |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Pending implementation decisions |
 | CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | Pending |
@@ -859,3 +859,55 @@ Next: complete CC-2d's useful-record separation, then undertake CC-3's
 categorical terminal/initial and structural-interface review. Do not resume
 Op/profile integration, spectral work, endpoint experiments or the deferred
 six-term package comparison as an implicit prerequisite.
+
+
+CC-2c2 checkpoint: `38e2e7c0` (local; worktree clean). CC-2d now extracts the
+unchanged HomologyRecord classifier/intro/projections into
+`emdash3_2_homology_records.lp`, excluding `homology_record_selected`, which
+continues to belong to the retained selected algorithm. The raw pair's existing
+annihilator view moves to `emdash3_2_chain_pair_kernel_tests.lp`. Redirect the
+five record/cone-only consumers; keep genuine selected-homology consumers and
+the ordinary iterator in their explicit reference layer. No symbol rename,
+new proof body, primitive, rewrite or equivalence claim is introduced. The
+remaining generic preadditive observation alias in the selected file can be
+reviewed independently; it is not required by these native-derived record views.
+
+Baseline and qualification: actual whole-adjunction and original-pair record
+reviewers, retained selected-homology consumer, unchanged-declaration/unique-
+owner audit, dependency graph and warning comparison under 90s/2GiB/o20. Update
+source registration/health and book evidence; do not repeat the completed
+full CAS replay for an unrelated optional-view owner move.
+
+
+CC-2d qualified (2026-09-16): twelve unchanged HomologyRecord declarations
+now have an independent observation owner; the unchanged annihilator view has
+its own raw-test owner. `homology_record_selected` remains with the actual
+selected algorithm. All moved/retained declarations are unique and their
+bodies are unchanged. Original block hashes: record data
+`89f96a6ad912899953fb4bd7b9d1525221035a5ee3302b76958b08eed5953152`,
+raw test `f5913714527962d6b32a57cd05e16526df26f53828d997ebd08a411237fba20b`,
+selection helper `1eceb528d1e32ef52b3da09602802c81179ab96b0a7afa67fca4faab8afd64ff`.
+The two native-derived ordinary record consumers, boundary-factor helpers and
+raw cone input no longer import `computational_homology`. The reference
+iterator still does, intentionally. This adds no primitive, rule, opacity,
+new universal selection or compatibility theorem.
+
+Eight focused checks pass, including the actual adjunction/pair record views,
+the retained selected computation and affected factor/cone consumers. The
+whole-adjunction record warning inventory matches exactly in all five fields
+(1459 warnings, no parser issue). The seven serial measured checks take
+4.91–14.93s at 90s/2GiB/o20. Catalog and all 178 book evidence claims pass;
+the source-only health refresh records 1254 files, snapshot `a16b8021473b6d887a00698bdcd5b0267c91fbe39e3f3c31765467832331f077`.
+Local receipts are `cc2d_baseline.json`, `cc2d_checks.json` and the warning logs.
+
+Retirement disposition at the end of CC-2: removed the superseded snake route,
+old-model wrappers and compatibility consumers; kept the model-independent
+CAS algorithms/provider proofs and useful ordinary observations. The earlier
+selected-presentation/H-family/record-connecting/window route remains only as
+the explicitly retained ordinary iterator/reference interface, whose dependency
+was inventoried before deletion decisions. Its endpoint experiments remain
+deferred, and no native→legacy comparison requirement is reinstated. This is
+not a claim that every historically named helper has been deleted. Current
+native constructions and their direct proof–CAS route are independent of the
+retired model/algorithm interfaces. Proceed to CC-3's mathematical/interface
+review; later source or book review may identify further genuinely unused leaves.

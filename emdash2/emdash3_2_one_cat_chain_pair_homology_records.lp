@@ -1,7 +1,7 @@
 /* Whole-H record over the original raw pair.
    Input formation is independent of universality. Whole P/Q are applied
    afterwards, retaining the actual boundary and quotient diagram. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_homology_records;
 require open emdash.emdash3_2_homology_adjunction_record_data;
 require open emdash.emdash3_2_one_cat_adjunction_records;
 require open emdash.emdash3_2_one_cat_chain_pair_inputs;

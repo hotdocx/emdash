@@ -52,6 +52,12 @@ replays and all 94 emitted LP assertions pass. There are no new interpretation
 contracts or output-exactness assumptions. The living plan records the compiled-
 JS runner correction and exact import-warning controls.
 
+CC-2d observation separation (2026-09-16): [ordinary H records](../emdash3_2_homology_records.lp)
+and [raw annihilator tests](../emdash3_2_chain_pair_kernel_tests.lp) have
+independent owners with unchanged declarations. Native-derived record views
+no longer import the selected homology implementation. The earlier ordinary
+iterator/reference route remains explicit; no compatibility obligation is added.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

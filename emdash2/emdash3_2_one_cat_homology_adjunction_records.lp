@@ -2,7 +2,7 @@
    Whole adjunctions supply universality. The boundary field retains the
    actual h, and the quotient observes its whole introduced diagram family.
    These are record views; no H, coherence field or computation rule is added. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_homology_records;
 require open emdash.emdash3_2_homology_adjunction_record_data;
 require open emdash.emdash3_2_one_cat_adjunction_records;
 require open emdash.emdash3_2_homology_adjunction_families;

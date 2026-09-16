@@ -1,5 +1,5 @@
 /* A cycle factor of an incoming boundary is killed by the retained quotient. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_homology_records;
 require open emdash.emdash3_2_hom_factor_composition;
 require open emdash.emdash3_2_preabelian_bimorphism_lemmas;
 

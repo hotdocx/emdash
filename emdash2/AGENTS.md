@@ -211,7 +211,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   `emdash3_2_homology_adjunction_input_data.lp` owns native boundary/input
   observations. The optional factor-space view is downstream; native LES
   and snake no longer import the former computational-homology or mixed
-  record-data owners. The consolidation plan records import-order diagnostics.
+  record-data owners. `emdash3_2_homology_records.lp` and
+  `emdash3_2_chain_pair_kernel_tests.lp` keep useful ordinary views independent
+  of the selected recipe. The consolidation plan records retained-reference
+  boundaries and import-order diagnostics.
 - Formal Freyd cokernel/kernel and selected-provider modules retain raw
   agreements, actual ranks/projections and all-test factor operations.
   Witnessed pre-Abelian/Abelian packages keep finite-free weak-kernel

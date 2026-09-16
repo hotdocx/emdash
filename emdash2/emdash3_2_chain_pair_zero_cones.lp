@@ -1,6 +1,6 @@
 require open emdash.emdash3_2_kernel_adjunction_unmates;
 require open emdash.emdash3_2_zero_arrow_cones;
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_chain_pair_kernel_tests;
 require open emdash.emdash3_2_chain_pair_diagrams;
 
 /* Existing chain data enters the native category through an inverse mate.
