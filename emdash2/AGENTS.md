@@ -302,6 +302,14 @@ definitions and two revised image-comparison bodies add no primitive,
 rule, opacity or assumption. Public H/maps/δ pair identification, displayed
 CAS LES transport, NUH-6C3b2 and NUH-7 remain required.
 
+NUH-5N2G3B2c1 derives whole native input equivalences from the original
+source/diagram component equivalences under OneCat(C). Native Hom
+reconstruction and whole projection functoriality supply the inverse laws;
+no caller supplies a naturality square. Eleven new definitions and one
+unchanged shared proof add no primitive or rule. Both inverse slots retain
+the computed component inverses. Specific public H/maps/δ alignment and
+displayed CAS transport remain required in the model plan.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

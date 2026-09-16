@@ -2221,6 +2221,14 @@ supply the two zero pairs involving δ. The source, middle and target
 `..._exact_comparison` operations are the existing actual Im⇒K maps;
 no invertibility evidence is implied by those names or declarations.
 
+`one_cat_zero_cone_map_equiv` derives ΩAlong(m) for an existing native
+input map m from ΩAlong on its source and diagram projection actions,
+under OneCat(C). Its inverse selects the original component left inverses;
+both Ω inverse slots retain those components. The compatibility cell and
+inverse laws are derived from whole naturality and projection functoriality,
+not extra caller premises. This is a derived ordinary comparison operation,
+not a new native-input classifier or surface syntax.
+
 `one_cat_zero_cokernel_retraction` is the original Q descent of id for an
 actual zero differential. `one_cat_zero_cokernel_omega` retains that inverse.
 `one_cat_zero_kernel_cokernel_omega` combines the original two universal

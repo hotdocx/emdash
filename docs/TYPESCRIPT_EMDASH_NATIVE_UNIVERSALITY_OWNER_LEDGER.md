@@ -310,6 +310,28 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c1: Native Input Equivalence Criterion — Qualified
+
+The existing source and diagram projections jointly reflect equality of
+native zero-cone maps under OneCat(C). Native Hom reconstruction uses the
+existing whole universal transfor, with ordinary filler uniqueness; no
+caller supplies a naturality square. The selected component inverses then
+form an actual inverse native map, and generic projection functoriality
+proves both inverse laws. Both inverse slots keep that computed map.
+
+Eleven new definitions and one shared moved proof add no primitive, rule,
+unifier, opacity or model contract. Eight new assertions test component
+computation and inverse laws; a typed consumer transfers canonical native
+exactness without a full-input-equivalence or target-exactness premise.
+The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records
+qualification and the rejected naive native-identity filler experiment.
+Ten focused checks and all ten warning-control comparisons pass at the
+default 90s/2GiB profile. The shared proof body is unchanged; strict LHS,
+catalog/TOC, documentation and 1364-file source-health checks pass. Evidence
+is bound in `emdash2/tmp/probes/nuh5g3b2c_qualification.json`.
+Public H/maps/δ specialization is NUH-5N2G3B2c2; displayed LES exactness,
+NUH-6C3b2 and NUH-7 remain required.
+
 ### NUH-5N2G3B2b: Canonical Point Exactness And Categorical Transport — Qualified
 
 The native comparison of the same incoming diagrams has identity endpoint

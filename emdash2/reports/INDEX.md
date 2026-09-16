@@ -16,6 +16,16 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Native input component equivalences (2026-09-15): the
+[derived constructor](../emdash3_2_one_cat_zero_cone_map_equivalences.lp)
+keeps the original native map and uses its supplied source/diagram inverse
+data. Native Hom reconstruction, the existing whole universal transfor
+and generic projection functoriality prove its laws under OneCat(C).
+No new primitive, rule or caller square is added. The
+[canonical exactness consumer](../examples/one_cat_native_component_exactness.lp)
+uses this actual equivalence; specific H/maps/δ alignment and displayed
+CAS transport remain in the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Canonical native point exactness (2026-09-15): the
 [comparison proof](../emdash3_2_one_cat_image_kernel_point_paths.lp) retains
 the original Im/Coim/K and uses the existing whole reconstruction,

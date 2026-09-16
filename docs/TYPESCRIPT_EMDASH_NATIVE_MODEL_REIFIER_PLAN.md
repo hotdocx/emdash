@@ -1042,6 +1042,65 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c1: Native Input Component Equivalences — Qualified
+
+For an existing native map m:(a₀,d₀,h₀)→(a₁,d₁,h₁), let u and v be
+its source and diagram projections. Under OneCat(C), ΩAlong(u) and
+ΩAlong(v) now construct ΩAlong(m). This criterion concerns the existing
+native zero-cone category; it introduces no replacement input category.
+
+[Native map introduction](../emdash2/emdash3_2_zero_arrow_cone_maps.lp)
+retains u, v and their native cell. The
+[ordinary reflection proof](../emdash2/emdash3_2_one_cat_zero_cone_map_paths.lp)
+rebuilds any original map from its projections and the existing whole
+universal transformation's naturality. Ordinary filler uniqueness proves
+reconstruction inside the actual native Hom. The original generic
+constructor-congruence proof is extracted unchanged into a shared module,
+with public visibility so that both native square and input proofs use it.
+No external tuple-classifier equality or hom_int/homd_int change is used.
+
+The [equivalence constructor](../emdash2/emdash3_2_one_cat_zero_cone_map_equivalences.lp)
+selects the existing left inverse of each component. Generic inverse-square
+cancellation derives their compatibility. Whole projection functoriality
+and equality reflection prove both inverse laws. Both Ω inverse slots
+retain that same constructed inverse. The runtime data is transparent;
+there is no new primitive, rewrite/unification rule, opacity or model premise.
+The derived equality arguments are scoped ordinary observations; callers
+supply an actual native map and component equivalences, not new squares.
+
+The first direct identity-normalization experiment failed because the actual
+transported native filler differs from its naive identity presentation.
+It was not promoted. The accepted proof instead uses actual-Hom reconstruction
+and the existing generic functoriality path. No identity, projection or
+composition rewrite was added to force that comparison.
+
+The [inverse reviewer](../emdash2/examples/one_cat_zero_cone_map_equivalences.lp)
+checks all four inverse-component observations and both laws at arbitrary
+original maps. Two constructor projections and the original native-square
+reviewer cover the shared proof's consumers. The
+[canonical exactness consumer](../emdash2/examples/one_cat_native_component_exactness.lp)
+uses this constructed input equivalence in existing exactness transport;
+it assumes source exactness only and does not assume the target certificate.
+There are eleven new semantic definitions and one moved proof, with eight
+new assertions and one typed exactness consumer. All ten focused owner and
+reviewer checks pass at the default 90s/2GiB limits, with no GC override.
+All ten exact import-control warning inventories match, including locations,
+term heads, rule families and parser results. The measured owner/consumer
+runs take 5.563–14.025s. Final whitespace-only cleanup is recorded separately;
+the three touched source files were rechecked at their final bytes, with
+unchanged warning inventories.
+Strict LHS, catalog/TOC, source-only health and documentation checks pass.
+The source snapshot covers 1364 files. Exact sources, logs and the unchanged
+shared proof body are bound in
+`emdash2/tmp/probes/nuh5g3b2c_qualification.json`. No repository-wide typecheck
+or aggregate was run.
+
+Next, NUH-5N2G3B2c2 must construct the specific maps for the public H/maps/δ
+pairs through the original column H equivalences, then use the stored
+native→CAS diagram path and qualify the concrete frontend certificate.
+The generic input criterion alone does not close that integration.
+Displayed LES exactness, NUH-6C3b2 and NUH-7 remain required.
+
 ### NUH-5N2G3B2b: Canonical Point Exactness And Native-Input Transport — Qualified
 
 The [native diagram comparison](../emdash2/emdash3_2_zero_arrow_family_point_diagrams.lp)

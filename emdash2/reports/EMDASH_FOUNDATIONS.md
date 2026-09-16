@@ -5070,6 +5070,16 @@ must still be related to the public arrows and their interpretations with
 shared endpoint coherence; four invertible comparisons alone do not make
 that link.
 
+For ordinary C, equivalence of the two projected components of an existing
+native input map implies equivalence of that map. Its inverse is formed
+from the original selected component inverses, with compatibility derived
+from the whole universal transformation. Equality reflection uses ordinary
+uniqueness of the remaining native cell, inside the actual native Hom.
+This derived comparison interface does not change hom_int/homd_int or ask
+callers to carry new naturality squares. Canonical native point exactness
+transports through the resulting equivalence. Specializing the criterion
+to the public LES H/maps/δ pairs remains further integration work.
+
 For the nonsplit snake, that link is now checked. Each indexed pair
 certificate contains the original whole exactness witness and a path from
 its own native input's observed pair to the requested two arrows. The

@@ -24,6 +24,16 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+NUH-5N2G3B2c1 derives an equivalence of an existing native input map from
+its source and diagram component equivalences, under OneCat(C). Its inverse
+uses the original component inverses; whole naturality supplies compatibility.
+No full-input equivalence or commuting square is an extra caller premise.
+The focused qualification is recorded in the
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md). Next specialize
+this criterion to the retained column H comparisons and public H/maps/δ
+pairs (NUH-5N2G3B2c2). Displayed LES exactness remains false until that
+alignment and CAS transport are qualified; NUH-6C3b2 and NUH-7 stay open.
+
 NUH-5N2G3B2b proves canonical Im→Ker compatibility at the same native point
 input and derives its exactness from the original whole-family witness.
 Canonical exactness also transports along equivalences in the existing
