@@ -310,6 +310,15 @@ unchanged shared proof add no primitive or rule. Both inverse slots retain
 the computed component inverses. Specific public H/maps/δ alignment and
 displayed CAS transport remain required in the model plan.
 
+NUH-5N2G3B2c2a uses a categorical boundary map and existing Q action for
+the H point comparison, retaining its two public signatures and original
+H selections. Whole quotient compatibility and the original named Freyd
+column consumers retain actual targets and K(diagram(n)); do not erase that
+action by assuming equivalent presentations are identical. Thirteen new
+definitions and two revised bodies add no primitive or rule. The comparison
+is a point view; it does not establish whole parameter naturality. Public
+H-map/zero-pair alignment and displayed LES transport remain in the model plan.
+
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.
 

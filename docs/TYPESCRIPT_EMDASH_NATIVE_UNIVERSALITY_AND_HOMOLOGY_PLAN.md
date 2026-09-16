@@ -24,6 +24,29 @@ Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to 
 
 ## Objective And Current User Direction
 
+Architectural clarification (2026-09-15): operational comparisons of
+categorical presentations should be actual internal functors/transformations,
+with categorical inverse evidence where needed. Keep original endpoints and
+selected universal constructions; apply whole universal functors to comparison
+maps instead of using equality casts as the primary conversion mechanism.
+When directed parameters vary, their comparison needs whole action/coherence;
+a point observation does not establish that whole interface. Derived equations
+in the ordinary/truncated observation layer remain legitimate. Preserve
+hom_int/homd_int and groupoidal equality itself. The broader terminal/initial
+review follows the same criterion, under its separately qualified coherence
+profile; it is not justified merely by the present comparison's resource issue.
+
+NUH-5N2G3B2c2a now uses an actual categorical boundary comparison in the
+H point map. The original whole Q acts on that map and its selected inverse;
+both H objects and public signatures stay fixed. Original whole quotient
+naturality gives compatibility for the named left/right column comparisons,
+retaining each actual target and K of its diagram action. Thirteen definitions
+and two revised bodies add no primitive or rule. Eleven focused checks,
+including public δ and the model observation, pass at default 90s/2GiB.
+Next complete the surrounding H-map/zero-pair integration under the
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md). Displayed LES
+exactness remains false; NUH-6C3b2 and NUH-7 remain required.
+
 NUH-5N2G3B2c1 derives an equivalence of an existing native input map from
 its source and diagram component equivalences, under OneCat(C). Its inverse
 uses the original component inverses; whole naturality supplies compatibility.

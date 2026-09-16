@@ -16,43 +16,147 @@ symbol P : τ (@KernelAdjunctionStructure C S t T);
 symbol Q : τ (@CokernelAdjunctionStructure C S t T0);
 assert ⊢ (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) : τ (Hom C (@fapp0 K C
   (@homology_adjunction_family_func K C S t T T0 P Q A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) C
-  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A D h
+  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A
+  D h
   x)));
-assert ⊢ (@homology_family_global_point_equiv K C S C1 t T T0 P Q A D h x) : τ (@OmegaEquivAlong C (@fapp0 K C
+assert ⊢ (@homology_family_global_point_equiv K C S C1 t T T0 P Q A D h x) : τ (@OmegaEquivAlong C (@fapp0
+  K C
   (@homology_adjunction_family_func K C S t T T0 P Q A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) C
-  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A D h
+  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A
+  D h
   x)) (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x));
-assert ⊢ @omega_equiv_along_left_inv C (@fapp0 K C (@homology_adjunction_family_func K C S t T T0 P Q A D h) x)
-  (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q)
-  (@zero_arrow_family_point_input K C t T A D h x)) (@homology_family_global_point_map K C S C1 t T T0 P Q A D h
-  x) (@homology_family_global_point_equiv K C S C1 t T T0 P Q A D h x) ≡ @fapp1_fapp0 (Functor_cat
-  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
-  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
-  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
-  C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@fapp0 K (Functor_cat WalkingArrow_cat C)
-  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x) (@path_to_hom (Functor_cat
-  WalkingArrow_cat C) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+assert ⊢ (@omega_equiv_along_left_inv C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0 (Functor_cat
+  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T)
+  (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C
+  t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x)) ≡ (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func
+  C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
-  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
-  C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@fapp0 K (Functor_cat WalkingArrow_cat C)
-  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x) (@path_sym (Functor WalkingArrow_cat C)
-  (@fapp0 K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h)
-  x) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@fapp0
+  K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h)
+  x) (@omega_equiv_along_left_inv (Functor_cat WalkingArrow_cat C) (@fapp0 K (Functor_cat WalkingArrow_cat
+  C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x) (@fapp0 (@ZeroArrowCone_cat C
+  t T) (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func
+  (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
+  C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))
+  (@homology_family_global_boundary_point_map K C S C1 t T P A D h x)
+  (@homology_family_global_boundary_point_equiv K C S C1 t T P A D h x)));
+assert ⊢ (@omega_equiv_along_right_inv C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0 (Functor_cat
+  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T)
+  (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C
+  t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x)) ≡ (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func
+  C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
-  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
-  C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@homology_family_global_boundary_point_path K C S
-  C1 t T P A D h x)));
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@fapp0
+  K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h)
+  x) (@omega_equiv_along_right_inv (Functor_cat WalkingArrow_cat C) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x) (@fapp0
+  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))
+  (@homology_family_global_boundary_point_map K C S C1 t T P A D h x)
+  (@homology_family_global_boundary_point_equiv K C S C1 t T P A D h x)));
+assert ⊢ (@omega_equiv_along_left_law C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0 (Functor_cat
+  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T)
+  (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C
+  t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x)) : τ (@= (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0 (Functor_cat
+  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x))) (@comp_fapp0 C (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C
+  t T) (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func
+  (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
+  C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x))
+  (@omega_equiv_along_left_inv C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S
+  t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C
+  S t T P A D h) x)) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q)
+  (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x)) (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x)) (@id C
+  (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x))));
+assert ⊢ (@omega_equiv_along_right_law C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0 (Functor_cat
+  WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T)
+  (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C
+  t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x)) : τ (@= (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C
+  (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat
+  C) (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))) (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C
+  t T) (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func
+  (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
+  C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))))
+  (@comp_fapp0 C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0
+  (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))) (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C
+  t T) (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func
+  (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
+  C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@omega_equiv_along_right_inv C (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K (Functor_cat
+  WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)) (@fapp0
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C
+  t T) (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func
+  (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
+  C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))
+  (@homology_family_global_point_map K C S C1 t T T0 P Q A D h x) (@homology_family_global_point_equiv K C
+  S C1 t T T0 P Q A D h x))) (@id C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func
+  C S t T0 Q) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+  (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)))));
 assert ⊢ @fapp1_func (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@fapp0 K
   (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x)
   (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
-  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
-  C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) : τ (Functor (Hom_cat (Functor_cat WalkingArrow_cat
-  C) (@fapp0 K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C
+  C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) : τ (Functor (Hom_cat (Functor_cat
+  WalkingArrow_cat
+  C) (@fapp0 K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T
+  P A D
   h) x) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P
-  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C
   C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))) (Hom_cat C (@fapp0 K C
   (@homology_adjunction_family_func K C S t T T0 P Q A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) C
-  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A D h
+  (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q) (@zero_arrow_family_point_input K C t T A
+  D h
   x))));

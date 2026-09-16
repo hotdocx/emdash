@@ -5070,6 +5070,20 @@ must still be related to the public arrows and their interpretations with
 shared endpoint coherence; four invertible comparisons alone do not make
 that link.
 
+Categorical presentation comparisons should retain both constructions and
+use actual maps, with whole action when parameters vary. The H point
+comparison now applies the original Q to an actual boundary-diagram map
+with identity endpoint components and a selected inverse. The old expression
+was Q(path_to_hom(p)); Q itself was never transported, but the path-generated
+comparison did not expose the required computation. No equality with that
+old operational arrow is asserted. Naturality of the original whole quotient
+proves (H(n)∘cₓ)∘q_family(x)=q_native(Y)∘K(diagram(n)) for an actual
+native map n:point(x)→Y. This retains its target and directed action rather
+than identifying equivalent diagram presentations. The original named Freyd
+column maps instantiate the equation. These are ordinary point observations;
+a whole varying comparison and displayed LES transport require their own
+consumer qualification.
+
 For ordinary C, equivalence of the two projected components of an existing
 native input map implies equivalence of that map. Its inverse is formed
 from the original selected component inverses, with compatibility derived

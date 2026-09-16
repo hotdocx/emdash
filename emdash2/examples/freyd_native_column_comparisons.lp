@@ -1,5 +1,5 @@
 /* Both column observations retain the original whole input, H objects and selected inverses. */
-require open emdash.emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons;
+require open emdash.emdash3_2_commutative_algebra_freyd_column_homology_projection_paths;
 symbol K : Cat;
 symbol R : τ CommRing;
 symbol M : τ (FreydAdjunctionModel R);
@@ -247,3 +247,11 @@ assert ⊢ omega_equiv_along_left_inv left_Hequiv ≡ comp_fapp0 (omega_equiv_al
   (@freyd_raw_native_left_column_input K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0 d0 a1
   b1 d1 f0 f1 middle E2) x)) (fapp1_fapp0 (@freyd_adjunction_model_func R M) (omega_equiv_along_left_inv
   left_equiv));
+
+// Consume the quotient equation at the original row data and actual raw column target.
+symbol right_quotient_reconstruction ≔ @freyd_raw_native_right_column_quotient_path K R M
+ A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0 d0 a1 b1 d1 f0 f1 middle E0 x right_chain;
+
+// Consume the quotient equation at the original row data and actual raw column target.
+symbol left_quotient_reconstruction ≔ @freyd_raw_native_left_column_quotient_path K R M
+ A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0 d0 a1 b1 d1 f0 f1 middle E2 x left_chain;

@@ -667,6 +667,22 @@ acceptable for now, but the original terminal/initial interface should
 eventually be reviewed for a primary general categorical formulation.
 This is a deferred foundational refinement, not a prerequisite for C2c.
 
+Renewed review during NUH-5N2G3B2c2 (2026-09-15): the H point-comparison
+experiment strengthens the same architectural preference for primary
+categorical maps with explicit action and selected inverses. Its failed
+endpoint observation is a computational issue with an equality-transport
+presentation; it does not establish a failure of the terminality capability.
+At the current OneCat boundary the Hom categories are discrete, so the
+groupoidal contraction field has the expected ordinary meaning. Use the
+existing whole diagram reconstruction and Q action for the operational H
+comparison now, retaining paths as derived ordinary equations. Keep the
+general terminal/initial redesign as an explicit foundational review of
+the whole Hom-family/adjunction and its coherence profile. Substituting
+OmegaEquivAlong into objectwise quantifiers or removing C1 alone is not
+that redesign; its current inverse-law classifier also needs a qualified
+higher interpretation. No new terminality or strict/lax migration is
+implied by this local comparison change.
+
 OneCat(C) is a current qualification guard, not a mathematical restriction
 on terminality. The existing contractibility field reads
 IsContr(Hom C x t) = IsContr(Obj(Hom_cat C x t)). That field by itself

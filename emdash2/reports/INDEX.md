@@ -16,6 +16,17 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Categorical H point comparison (2026-09-15): the
+[boundary comparison](../emdash3_2_homology_family_point_diagrams.lp)
+retains actual diagrams and identity endpoint action. The original Q now
+maps that categorical comparison and its inverse, retaining public signatures
+and H selections. [Whole quotient compatibility](../emdash3_2_homology_family_point_paths.lp)
+keeps the actual native target and K of the diagram action; the
+[named column specializations](../emdash3_2_commutative_algebra_freyd_column_homology_projection_paths.lp)
+use the unchanged Freyd column-map bodies. There is no new primitive or rule.
+Surrounding-map/zero-pair alignment and displayed CAS transport remain in the
+[model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Native input component equivalences (2026-09-15): the
 [derived constructor](../emdash3_2_one_cat_zero_cone_map_equivalences.lp)
 keeps the original native map and uses its supplied source/diagram inverse

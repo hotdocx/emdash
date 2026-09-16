@@ -1042,6 +1042,117 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c2a: Categorical H Comparison And Actual Column Quotients — Qualified
+
+The accepted construction now checks on both original named column H maps
+under the default 90s/2GiB profile. It keeps the actual comparison target and
+its K-action as described below. All promoted owners, the public δ endpoint
+consumer and the model-facing observation are qualified. Surrounding H-map
+compatibility, actual zero-pair equivalences and displayed CAS LES transport
+remain NUH-5N2G3B2c2b.
+
+The user's architectural clarification is primary: avoid operational casts
+of categories, functors or universal selections through equality. More
+precisely, the old point map is Q(path_to_hom(p)), with Q fixed; it does not
+literally transport Q itself. Its replacement should use an actual boundary
+transformation and the existing Q action, with inverse data and observable
+components. Derived ordinary equations remain observations, not a second
+manual coherence interface. A point comparison is not evidence of a whole
+comparison in varying directed parameters; qualify that separately wherever
+a consumer needs it. The primary K/Q/H/δ functors remain whole.
+
+The retained public δ is conjugated by the left/right column H comparisons.
+The surrounding H maps therefore need compatible comparison equations.
+A focused check found that the current equality-path boundary comparison
+does not expose the required identity endpoint action. Do not resume an
+open-ended normalization investigation or install a special projection rule.
+
+The accepted design uses the existing ordinary diagram reconstruction DefIso
+to construct a map between the same H-boundary diagrams with identity endpoint
+components. Its equivalence comes from the endpoint component criterion in
+the existing functor category. This reuses the successful categorical image
+comparison design. It retains the original H objects and public comparison
+signatures, records the two comparison body changes, and rechecks the column
+H and public δ consumers. Do not claim checked equality
+with the old equality-transport arrow merely because the signatures agree.
+The acceptance test is quotient-projection compatibility from whole naturality,
+followed by compatibility with the surrounding public H maps and actual input
+transport. No output exactness or stronger model contract may be introduced.
+
+The generic construction, original whole-quotient equation, and both
+column specializations at their literal constructed maps check. A statement
+using the existing expanded public column-map name allocates beyond 2GiB,
+both with default GC and with `OCAMLRUNPARAM=o=20,v=1024`. The unchanged
+named-map artifact was also checked under the user-authorized 6GiB/180s
+profile. This is a scoped check of the actual public consumer; the routine
+limits remain 90s/2GiB. Do not describe the literal specialization as already
+qualifying the named consumer, or infer a terminality defect from this
+allocation failure.
+
+The 6GiB replay also allocates out, and factoring only its proof does not
+resolve the 2GiB case. A subsequent shared-composite-owner probe exposes an
+actual endpoint mismatch: the attempted normalization reconstructs a target
+diagram presentation in place of the original raw target. Do not classify
+all these failures as a pure resource problem, promote that normalization,
+or change the public column-map bodies to fit it.
+
+The corrected statement retains an arbitrary actual native comparison
+n:point(x)→Y and proves
+
+```text
+(H(n) ∘ cₓ) ∘ q_family(x) = q_native(Y) ∘ K(diagram(n)).
+```
+
+It uses the original whole quotient's naturality and the categorical point
+comparison. In the column specialization, n is the existing native column
+input comparison and Y is its original raw target. Keep its diagram action
+explicit instead of assuming its two presentations can be identified under
+K/H. This is the accepted construction. It also follows the user's
+architectural criterion of comparing categorical objects by genuine maps.
+
+The promoted [diagram comparison owner](../emdash2/emdash3_2_one_cat_diagram_map_equivalences.lp)
+uses the existing whole reconstruction DefIso to realize a map at its original
+diagrams. An arbitrary original diagram map is an equivalence when its two
+endpoint components are; its inverse compatibility comes from the original
+whole transformation's naturality. Both inverse components compute.
+
+The [H-boundary comparison](../emdash2/emdash3_2_homology_family_point_diagrams.lp)
+retains the two original boundary diagrams with identity endpoint components.
+The two public H point-comparison signatures remain unchanged, while their
+bodies now apply the original Q to this actual diagram map/equivalence.
+The old boundary equality paths remain derived observations. No equality
+with the previous equality-generated map or its proof fields is claimed.
+The original H objects, selected P/Q and normality remain unchanged.
+
+[Whole quotient observations](../emdash2/emdash3_2_homology_family_point_paths.lp)
+first evaluate the existing whole projection/whiskering equation, then prove
+compatibility through the categorical H point comparison. Composing with
+an arbitrary original native map retains its actual target and full kernel
+map. The [Freyd specialization](../emdash2/emdash3_2_commutative_algebra_freyd_column_homology_projection_paths.lp)
+uses the original named left/right column maps and original raw target inputs.
+Their four map/equivalence definitions are untouched. The reviewer consumes
+both derived quotient equations on the original row data.
+
+This slice has thirteen new semantic definitions, two revised bodies,
+thirteen added assertions and two actual column-quotient consumers. It adds
+no primitive, rewrite/unification rule, opacity, model contract or assumption
+of output exactness. The comparison is currently a point-observation interface;
+it does not claim a new whole transformation in the parameter x. Primary
+K/Q/H/δ and their action remain the existing whole owners.
+
+All eleven focused owner/consumer checks pass, as do their eleven exact
+import-control warning inventories (categories, locations, term heads, rule
+families and parser results). Measured owner/consumer checks take
+6.717–23.515s at default 90s/2GiB with no GC override; the already successful
+unchanged column reviewer is carried forward at its exact source hash.
+Strict LHS, catalog/TOC, Markdown links/fences, report lifecycle and source-only
+health checks pass. The 1370-file source snapshot and final source/log hashes
+are bound in `emdash2/tmp/probes/nuh5g3b2c2_qualification.json`, with the check
+and owner-audit manifests beside it. The signature/body audit confirms exactly
+two changed existing bodies, unchanged public signatures and unchanged four
+Freyd column-map/equivalence bodies. No repository-wide typecheck or aggregate
+was run. Earlier diagnostic resource profiles did not change routine limits.
+
 ### NUH-5N2G3B2c1: Native Input Component Equivalences — Qualified
 
 For an existing native map m:(a₀,d₀,h₀)→(a₁,d₁,h₁), let u and v be

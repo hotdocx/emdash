@@ -310,6 +310,37 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c2a: Categorical H Comparison And Actual Column Quotients — Qualified
+
+The H point comparison now applies the original Q to an actual categorical
+map of the original boundary diagrams, with identity endpoint components.
+Both original public signatures and all H objects remain. Its inverse data
+comes from existing whole reconstruction and endpoint equivalence; no new
+primitive, rule or equality cast is introduced. The old path-generated arrow
+is not asserted definitionally equal to this computational presentation.
+
+The actual whole quotient is compatible with this comparison. For a further
+native map n to an actual target Y, the equation retains K(diagram(n)).
+Both named Freyd column maps consume it under the ordinary model scope.
+Their four map/equivalence bodies remain unchanged. An attempted target
+normalization and its shared-owner variant are rejected: the latter exposed
+an endpoint mismatch after earlier expanded checks allocated out at 2/6GiB.
+The corrected actual-target theorem passes at default 90s/2GiB.
+
+Thirteen new definitions, two revised bodies, thirteen added assertions and
+two actual column consumers are qualified. All eleven focused checks and
+warning-control comparisons pass at default 90s/2GiB, including public δ and
+model-facing observation. Signature/body, LHS, catalog/TOC, documentation and
+1370-file source-health checks pass. Exact evidence is bound in
+`emdash2/tmp/probes/nuh5g3b2c2_qualification.json`.
+The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records
+source-bound evidence and the remaining surrounding-map/zero-pair integration.
+The user clarified that categorical maps and whole universality should be
+primary; equality belongs in justified derived observations, not operational
+casts of categorical presentations. General terminality/profile refinement
+remains a separate foundational review. Displayed LES exactness, NUH-6C3b2
+and NUH-7 remain open.
+
 ### NUH-5N2G3B2c1: Native Input Equivalence Criterion — Qualified
 
 The existing source and diagram projections jointly reflect equality of

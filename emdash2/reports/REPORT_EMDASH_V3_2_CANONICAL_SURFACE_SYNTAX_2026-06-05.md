@@ -2221,6 +2221,16 @@ supply the two zero pairs involving δ. The source, middle and target
 `..._exact_comparison` operations are the existing actual Im⇒K maps;
 no invertibility evidence is implied by those names or declarations.
 
+`homology_family_global_boundary_point_map` is an actual transformation
+between the two original boundary diagrams, with identity endpoint action.
+`homology_family_global_point_map` applies the same original Q to it.
+`homology_family_native_comparison_quotient_path` records
+(H(n)∘cₓ)∘q_family(x)=q_native(Y)∘K(diagram(n)) for an actual target Y.
+Keep that diagram action in the formula; it is not a cast of one presentation
+into another. The original named Freyd column maps are its concrete model
+specializations. This point interface does not introduce whole parameter
+naturality or new surface syntax.
+
 `one_cat_zero_cone_map_equiv` derives ΩAlong(m) for an existing native
 input map m from ΩAlong on its source and diagram projection actions,
 under OneCat(C). Its inverse selects the original component left inverses;
