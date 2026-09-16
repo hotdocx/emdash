@@ -1974,7 +1974,7 @@ uses existing Sigma/base-change/Op_func computation and retains both base
 identities and the actual fibre cell. Its zero-cone interface is explicitly
 restricted to ordinary C; no general higher-duality extension is asserted.
 
-The [input comparison](../emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp)
+The [input comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp)
 carries that derived fibre path through the whole inclusion functor. It uses
 the existing `OmegaEquivAlong`, with the actual comparison fixed. The
 [Freyd specialization](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
@@ -2122,7 +2122,7 @@ now have [raw-row specializations](../emdash2/emdash3_2_commutative_algebra_frey
 Their incoming point laws observe the existing whole source-recovery law;
 the first attempt through the alternate postcomposition parent did not
 join, while the original source-evaluation parent does. The
-[ordinary input comparison](../emdash2/emdash3_2_one_cat_terminal_input_comparisons.lp)
+[ordinary input comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_one_cat_terminal_input_comparisons.lp)
 retains both transformations at their actual outgoing diagram. Ordinary
 diagram reflection derives their equality from the incoming observation
 and terminal-tip uniqueness, then the existing whole fibre inclusion maps

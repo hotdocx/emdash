@@ -1,5 +1,7 @@
 /* Retain both original diagram presentations in the native input comparison. */
-require open emdash.emdash3_2_one_cat_terminal_input_comparisons;
+require open emdash.emdash3_2_one_cat_zero_cone_fibre_inclusion;
+require open emdash.emdash3_2_one_cat_diagram_map_paths;
+require open emdash.emdash3_2_zero_arrow_diagram_observations;
 require open emdash.emdash3_2_one_cat_zero_arrow_inputs;
 require open emdash.emdash3_2_one_cat_diagram_map_equivalences;
 require open emdash.emdash3_2_one_cat_zero_cone_map_equivalences;

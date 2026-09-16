@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: active — CC-2 qualified at 8a73f84c; CC-3a qualified; CC-4 consumer review next
+Status: active — CC-3a checkpoint 5c575800; CC-4 comparison-consumer review in progress
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -308,7 +308,7 @@ typecheck or renewed normalization probe was run.
 | CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Qualified |
 | CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Qualified with explicit retained references |
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Qualified independent portion; general higher replacement has recorded prerequisites |
-| CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Next |
+| CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | In progress |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Pending implementation decisions |
 | CC-6 | Final source/API/trust audit, focused regression and documentation gates; reassess whether a concrete six-term hypothesis emerged, without resuming that deferred experiment. Preserve an exact later-work list. | Pending |
 
@@ -1029,3 +1029,91 @@ and contracts are byte unchanged; their recent 94-assertion end-to-end receipt
 is retained. The source audit confirms exactly two new structural declarations,
 19 definitions and no new rewrite/unification rule. Documentation states that
 boundary explicitly. Proceed to CC-4's actual comparison-consumer inventory.
+
+
+### CC-4 — Comparison Consumer Review In Progress
+
+CC-3a checkpoint: `5c575800`. Native H/maps/δ and the qualified proof–CAS
+consumers are unchanged. The following inventory separates actual supplied
+point data from a coherent varying-parameter input; a free x binder by itself
+does not construct the latter.
+
+| Comparison | Actual consumers and present reason for point scope |
+| --- | --- |
+| `homology_family_global_point_map/equiv` | Native left/right/middle column comparisons, projection/quotient observations, and native-map comparison paths. The family H is whole; the target is H of `zero_arrow_family_point_input(A,D,h,x)`. That helper currently constructs an object, not a whole K→ZeroArrowCone functor. A whole upgrade must first supply that native whole introduction and its observations. It must not manufacture coherence from an arbitrary object function. |
+| `image_family_global_point_map/equiv` and the Coim counterparts | Evaluation of canonical exactness and Im→K comparison observations at the same input. Both apply the existing whole Im/Coim functor to actual diagram equivalences. Their target-family introduction has the same prerequisite. Selected Ω inverses are retained, not transported by equality induction. |
+| `introduced_input_diagram_map/equiv` and `one_cat_introduced_terminal_input_comparison_map/equiv` | Native column input comparisons. The complete comparison also receives A, b, a zero equation and an incoming observation at a chosen x. Those are genuine ordinary/CAS point inputs; no whole family for them is supplied. The diagram-reconstruction subcomparison, independently, has a whole owner. |
+| `one_cat_terminal_input_comparison_path/map/equiv` | The symbol audit finds no external consumer of these three definitions. The introduced-input owner imports their module only for its dependencies. CC-4a retires the unused definitions and imports those dependencies directly. |
+| `chain_pair_retained_*` | This former KernelPresentation/direct-input comparison has no remaining symbol or import consumer. CC-4a retires all four definitions. The independently useful ordinary iterator/reference constructions stay; they do not need this comparison. |
+
+The existing diagram reconstruction r:R⇒id is already whole, with R=D∘E.
+A bounded prototype tests reindexing it by an actual family V:K→Diag(C), then
+applying an actual whole output functor F:Diag(C)→L. The proposed terms use
+only existing `defiso_fmap`, native precomposition and postcomposition. No
+manual square data or new primitive is proposed.
+
+Prototype observations at checkpoint 5c575800:
+
+- With the readable raw-composite endpoints, both reindexed forward/inverse
+  component comparisons typecheck and compute to the corresponding components
+  of the original r. The combined prototype then fails its whole automatic
+  cancellation assertion; it is not a qualified new whole normalization API.
+- For postcomposition, the constructor requires the native F∘− endpoint
+  presentation rather than an unrestricted raw associative-composite reading.
+- Repeating the first construction with literal native precomposition endpoints
+  exposes a separate point-type comparison failure. Current source has the
+  Cat-valued point projection for stable postcomposition; the corresponding
+  precomposition point presentation does not compute through the same route.
+  This is an identified projection/presentation boundary, not a demonstrated
+  mathematical obstruction or evidence about the deferred six-term experiment.
+
+No production source or rewrite/unification rule was changed for this
+experiment. The candidate is `tmp/probes/cc4_diagram_family_reconstruction.lp`;
+logs `cc4_diagram_family_reconstruction-20260916-170726.log`,
+`...-170829.log`, `...-170948.log` and `...-171038.log` record the bounded
+90s/2GiB checks with `OCAMLRUNPARAM=o=20` and subject reduction enabled.
+The first candidate is mathematically `defiso_fmap((−)∘V,r)`; the second is
+`defiso_fmap(F∘−,defiso_fmap((−)∘V,r))`. These formulas, source checkpoint and
+failure distinctions are the durable recovery record; ignored files are only
+local probe material. Do not describe either failed assertion as a proved cut.
+
+Next decision: distinguish an ordinary whole isomorphism with retained checked
+inverse laws from an additional judgmental-cancellation promise. If the former
+is enough for the actual comparison consumer, use existing IsoEvidence/Ω data;
+if a runtime projection/cut is needed, isolate that actual consumer at its
+proper owner before proposing any narrowly scoped rule. Do not install broad
+composition folds or restart the deferred duality/profile migration. Complete
+the comparison inventory and independently useful whole interface before
+marking CC-4 qualified; book/entry-point consolidation remains available as
+independent work.
+
+
+CC-4a retirement qualification (2026-09-16): the complete tracked symbol/import
+scan, including TypeScript, check registrations and book evidence, finds no
+consumer for the seven definitions in `one_cat_terminal_input_comparisons`
+and `one_cat_chain_pair_input_comparisons`. The former's sole importer uses
+none of its symbols. Replace that import with the same three dependencies in
+the same order; preserve every declaration/body in the introduced-input owner.
+Delete the two leaves and their health registrations. No positive reviewer or
+public signature needs removal. Deferred audit JSON source inventories remain
+unchanged historical evidence. Four dated documentation links now point to
+the exact published df9b4778 sources, verified byte-identical before deletion.
+
+Validation: the introduced-input reviewer passes both before and after;
+all warning fields match exactly (169 replaceable-slot warnings, 1292 inherited
+critical pairs, zero parser issues after ANSI normalization). The native column
+comparison reviewer also passes. Both use the unchanged guarded 90s/2GiB,
+`OCAMLRUNPARAM=o=20` profile. Logs are
+`introduced_terminal_input_comparisons-20260916-171417.log`,
+`introduced_terminal_input_comparisons-20260916-171509.log`, and
+`freyd_native_column_comparisons-20260916-171529.log`; the local source/warning
+receipt is `tmp/probes/cc4a_retirement_receipt.json`. Catalog, source TOC, all
+178 book evidence links and diff hygiene pass. The source-only health snapshot
+for 1256 files is
+`5181b7e7fc3b9c8f599f2bb796b268b4553a1c9447f108ab4db458c13331e5d4`.
+
+This retirement is a qualified implementation result of the consumer audit.
+CC-4's whole comparison question remains in progress; do not count the ignored
+failed prototype as a promoted interface. CC-5 book/entry-point consolidation
+and CC-6 final audit remain required. Op/duality, action-profile integration
+and the six-term experiment are still outside scope.

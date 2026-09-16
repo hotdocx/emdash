@@ -31,6 +31,12 @@ guards, inverse data and existing terminal normal forms. General higher
 terminality replacement remains qualified future work; the living plan
 records its concrete profile/comparison prerequisite.
 
+CC-4a consumer cleanup (2026-09-16): two unused input-comparison leaves
+(seven definitions) are retired after a complete symbol/import audit. The
+introduced-input and native column reviewers pass; existing dependencies and
+all surviving comparison bodies are preserved. Dated links use their exact
+published source snapshot. Whole comparison refinement remains in progress.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the
@@ -485,7 +491,7 @@ folds and one guarded proof-time postcomposition view support the assembly.
 The [model/reifier subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
 continues through derived-column comparisons and retained observations.
 
-NUH-5B2a (2026-09-14): [retained/direct native inputs](../emdash3_2_one_cat_chain_pair_input_comparisons.lp)
+NUH-5B2a (2026-09-14): [retained/direct native inputs](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp)
 now have a derived categorical equivalence through the
 [ordinary fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp).
 The [Freyd comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)

@@ -68,6 +68,12 @@ guards, inverse data and existing terminal normal forms. General higher
 terminality replacement remains qualified future work; the living plan
 records its concrete profile/comparison prerequisite.
 
+CC-4a consumer cleanup (2026-09-16): two unused input-comparison leaves
+(seven definitions) are retired after a complete symbol/import audit. The
+introduced-input and native column reviewers pass; existing dependencies and
+all surviving comparison bodies are preserved. Dated links use their exact
+published source snapshot. Whole comparison refinement remains in progress.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the
@@ -555,7 +561,7 @@ Native input comparison (2026-09-14): the
 [ordinary zero-cone fibre inclusion](../emdash3_2_one_cat_zero_cone_fibre_inclusion.lp)
 maps a fibre cell to an arrow with both base components identities. Existing
 source reconstruction and diagram reflection derive the
-[retained/direct input equivalence](../emdash3_2_one_cat_chain_pair_input_comparisons.lp).
+[retained/direct input equivalence](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_one_cat_chain_pair_input_comparisons.lp).
 The [Freyd comparison](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_native_input_comparisons.lp)
 applies original whole H and preserves the selected inverse. No H endpoint
 is cast or reselected. [Raw row families](../emdash3_2_commutative_algebra_freyd_native_row_families.lp)

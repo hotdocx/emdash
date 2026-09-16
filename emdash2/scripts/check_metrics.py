@@ -380,8 +380,6 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_zero_cone_maps.lp"),
     Path("emdash3_2_sigma_fibre_inclusion.lp"),
     Path("emdash3_2_one_cat_zero_cone_fibre_inclusion.lp"),
-    Path("emdash3_2_one_cat_chain_pair_input_comparisons.lp"),
-    Path("emdash3_2_one_cat_terminal_input_comparisons.lp"),
     Path("emdash3_2_one_cat_introduced_terminal_input_comparisons.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_row_families.lp"),
     Path("emdash3_2_one_cat_constant_transformation_views.lp"),
