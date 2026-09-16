@@ -1,6 +1,6 @@
 /* Raw agreement observations shared by both input presentations.
    This module uses record vocabulary but performs no universal selection. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_chain_pair_data;
 require open emdash.emdash3_2_commutative_algebra_presentation_chain_inputs;
 require open emdash.emdash3_2_commutative_algebra_freyd_preadditive;
 

@@ -20,6 +20,13 @@ Native pair/map adapters no longer import those former algorithms. Nine
 focused checks and exact warning comparisons qualify the move; body hashes,
 import-closure reductions and validation live in the consolidation plan.
 
+CC-1b consolidation (2026-09-16): generic [raw pair data](../emdash3_2_chain_pair_data.lp)
+and [native boundary observations](../emdash3_2_homology_adjunction_input_data.lp)
+now have independent owners. Native LES/snake closures exclude the former
+computational-homology and mixed record-data modules. All declarations remain
+unchanged. Focused consumers pass; exact import-order controls account for
+the product/terminal/truncation warning differences in the living plan.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

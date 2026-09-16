@@ -4,7 +4,7 @@
   The familiar two compatibilities are projections of those existing fibres.
   No square primitive, six-object diagram AST, or new computation rule.
 */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_chain_pair_data;
 require open emdash.emdash3_2_hom_factor_composition;
 
 // A middle map with its two triangular internal Hom factor points.

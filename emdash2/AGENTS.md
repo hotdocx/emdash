@@ -201,8 +201,12 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
 - `emdash3_2_commutative_algebra_presentation_chain_inputs.lp` owns the
   unchanged raw pair/map agreement classifiers and projections shared by
   native inputs and retained ordinary consumers. Raw adapters import it
-  directly, without the former Freyd homology algorithms. Generic pair and
-  record-boundary separation remains in the consolidation plan.
+  directly, without the former Freyd homology algorithms.
+  `emdash3_2_chain_pair_data.lp` owns generic raw pair observations, and
+  `emdash3_2_homology_adjunction_input_data.lp` owns native boundary/input
+  observations. The optional factor-space view is downstream; native LES
+  and snake no longer import the former computational-homology or mixed
+  record-data owners. The consolidation plan records import-order diagnostics.
 - Formal Freyd cokernel/kernel and selected-provider modules retain raw
   agreements, actual ranks/projections and all-test factor operations.
   Witnessed pre-Abelian/Abelian packages keep finite-free weak-kernel

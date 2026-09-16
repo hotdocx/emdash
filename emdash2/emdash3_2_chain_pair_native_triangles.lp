@@ -1,7 +1,7 @@
 /* The existing equality-valued chain pair in the native dependent triangle.
    This is a compatibility map into a fixed-flag simplex, not a declaration
    of a global category of complexes or a converse from arbitrary 2-cells. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_chain_pair_data;
 require open emdash.emdash3_2_dependent_simplex_native_dimensions;
 
 // The long edge is the original zero; its filler uses the original chain path.

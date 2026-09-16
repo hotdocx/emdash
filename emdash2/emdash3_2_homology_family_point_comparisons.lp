@@ -4,7 +4,7 @@
    No H object is cast and no intermediate quotient is selected. */
 require open emdash.emdash3_2_zero_arrow_family_point_inputs;
 require open emdash.emdash3_2_zero_arrow_cone_adjunction_homology;
-require open emdash.emdash3_2_homology_adjunction_record_data;
+require open emdash.emdash3_2_homology_adjunction_input_data;
 require open emdash.emdash3_2_homology_family_point_diagrams;
 
 // Canonical introduced diagram of the actual boundary at this point.

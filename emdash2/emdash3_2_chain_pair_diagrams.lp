@@ -1,6 +1,6 @@
 /* The outgoing diagram of an original raw chain pair.
    This observation performs no universal selection. */
-require open emdash.emdash3_2_computational_homology;
+require open emdash.emdash3_2_chain_pair_data;
 require open emdash.emdash3_2_walking_arrow_introduction;
 
 // The original outgoing differential, introduced through the existing shape.

@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: active — CC-0 published and CC-1a qualified; CC-1b next
+Status: active — CC-1a checkpoint 3778c1c9; CC-1b qualified; CC-2 next
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -187,8 +187,8 @@ independence is not yet complete source-import independence. In particular:
 | `one_cat_slice_paths` contains both ordinary slice closure and a generic proposition-fibre lemma | These were introduced for one pullback consumer. | Consider a small split along existing generic congruence/truncation owners; do not create a new omnibus module. |
 
 Names in this table abbreviate the corresponding `emdash3_2_*.lp` files.
-These edges describe the reviewed baseline. CC-1a below now removes the
-first two; the boundary/record separation remains CC-1b. Their former presence
+These edges describe the reviewed baseline. CC-1a below removes the first
+two; CC-1b separates the third. Their former presence
 did not imply that the old operations were executed or that the native model
 contracts required the old model.
 
@@ -289,8 +289,8 @@ typecheck or renewed normalization probe was run.
 | --- | --- | --- |
 | CC-0 | Checkpoint the accepted review and documentation; fast-forward main, push and verify the existing Pages deployment. Record the exact commit/run. Bootstrap an isolated continuation worktree. | Complete |
 | CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Qualified |
-| CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Pending CC-1a |
-| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Pending dependency separation |
+| CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Qualified |
+| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Next |
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Pending ownership cleanup |
 | CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Pending CC-1 and relevant CC-3 decisions |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Pending implementation decisions |
@@ -412,3 +412,103 @@ Next: CC-1b should separate the five raw generic chain-pair declarations from
 out of the mixed record owner, preserving their declaration bodies and
 checking the actual native consumers. Do not combine that move with a
 terminality rewrite or legacy API deletion.
+
+
+CC-1a checkpoint: `3778c1c9` (local consolidation branch; main remains the
+published `df9b4778`). Worktree clean at that checkpoint.
+
+CC-1b hypothesis: move five unchanged generic raw pair declarations to
+`emdash3_2_chain_pair_data.lp` (preadditive dependency only). Move the two
+native semantic-boundary observations and raw pair observation to
+`emdash3_2_homology_adjunction_input_data.lp`, using the already independent
+zero-arrow diagram observations and original adjunction observations.
+The old mixed owner will retain only its optional factor-space view and
+import the native data one-way. Switch direct raw/diagram/map consumers and
+native H point comparisons to the appropriate shared owners. Retain the
+ordinary annihilator view and record algorithms in their existing downstream
+owners for now. All eight moved declarations keep their bodies and names.
+No rule or semantic redesign is included.
+
+Baseline controls will be the actual H point-comparison and ordinary H-record
+reviewers at 90s/2048MiB/o20. Existing CC-1a native maps are an additional
+control. Rejection conditions: changed declaration bodies, missing original
+input/inverse/record observations, new unexplained diagnostics, or importing
+optional record algorithms back into a supposedly independent shared owner.
+
+
+CC-1b diagnostic review: all twelve initial focused checks pass. Removing
+unused modules changes import order: H point comparison loses 28 inherited
+truncation-reflector overlaps; native raw maps expose two additional existing
+Kᵢᵃ/id overlaps at NType_cat, with other overlap locations redistributed.
+The ordinary H-record inventory is identical. No implicated rule owner changed.
+Before qualification, run the existing product and terminal assertions in two
+otherwise identical native-map contexts, loading the unchanged product and
+Freyd-preadditive modules in opposite orders. This tests the load-order
+explanation and relevant computation without changing any rule or resuming
+deferred variance/profile work. Do not report these warning inventories as
+identical merely because all consumers typecheck.
+
+
+CC-1b qualified (2026-09-16): the five raw pair declarations now live in
+[chain-pair data](../emdash2/emdash3_2_chain_pair_data.lp); three native boundary
+and input observations live in
+[adjunction input data](../emdash2/emdash3_2_homology_adjunction_input_data.lp).
+The former mixed owner retains only its unchanged factor-space observation.
+Two optional ordinary record consumers now state their record dependency
+explicitly. No new primitive, rule, opaque term or assumption is introduced.
+The eight moved declarations and the retained factor declaration are each
+unique and byte-identical through their declaration-ending semicolon.
+Original block hashes: raw pair
+`bbbbf16ac04fdd6f0e86eaa45edb7ccaf36db2975b04b63bc8d361c5addbd67a`,
+native data `991c9f94f5da8e0a770a8a23c464a5ebb293d3781ad19603e7df37632e8cafa9`,
+retained factor `b2fa7af327b6dfa65149be7029107078a7514e7561eea42fbbfac7d13bfb8e66`.
+
+Import closures no longer contain `computational_homology` or
+`homology_adjunction_record_data` for either native LES certificate views or
+native snake exactness. Their total sizes are unchanged at 330 and 220
+respectively because the smaller owners replace mixed owners. Generic
+chain-pair maps shrink 13→6 modules, native raw maps 94→92, and the H point
+comparison 55→51. Ordinary record consumers remain explicitly downstream;
+CC-2 must separate still-useful HomologyRecord views before retiring their
+former selected-homology owner. Moving that record vocabulary is not a new
+compatibility-proof requirement.
+
+Validation: twelve initial focused LP checks pass, including both new owners
+and ten existing reviewers (50 assertions). The eleven measured checks take
+4.06–8.97s, with the unchanged 90s/2048MiB/o20 profile. Book evidence (178
+claims), catalog, TOC, declaration identity and source metadata checks pass.
+The 1414-file no-check source snapshot is
+`f892b19893b5a341379737df3c90711b8efd7afae4db3703a934492ff951878e`.
+
+Warning disposition is explicit rather than an equality claim:
+
+- H point comparison drops exactly 28 `comp_fapp0` overlaps at
+  `truncation_reflector.lp:41`; that module is no longer in its closure.
+- Ordinary H-record warnings match all five inventory fields exactly
+  (1459 warnings, 1290 critical-pair heads/families, no parser issues).
+- Native raw maps change 1460→1462 warnings and 1291→1293 critical pairs.
+  The two added families are K₁ᵃ/id and K₂ᵃ/id at NType_cat; unchanged
+  product/terminal/truncation rules also report some overlaps at different
+  owning positions. No source rule changes.
+- Initial opposite-order controls reproduce the categories/heads/families;
+  explicitly placing the terminal import as in each actual dependency graph
+  reproduces **all five inventory fields, including locations, exactly**.
+  Baseline order: products, terminal, Freyd preadditive, native maps. New
+  order: Freyd preadditive, terminal, products, native maps. Append the
+  existing `triangular_binary_products.lp` and `terminal_objects.lp` reviewer
+  bodies in both contexts. Both exact controls pass all 18 assertions at
+  6.88s and 7.00s. The implicated rule owners are byte-identical to 3778c1c9.
+
+These controls explain the diagnostic delta and qualify the affected typed
+computations. They do not establish global confluence or repair the inherited
+profile/duality system. No unnecessary import was restored merely to suppress
+warnings, and none of the deferred experiments was resumed. Local receipts
+are `cc1b_checks.json`, `cc1b_baseline_checks.json`, `cc1b_warning_comparison.json`,
+`cc1b_order_controls.json`, `cc1b_exact_order_controls.json` and
+`cc1b_exact_order_warning_comparison.json` under `emdash2/tmp/probes/`.
+
+Next dependency-ready work is CC-2: construct the actual legacy-consumer and
+registration inventory, extract useful ordinary record vocabulary as needed,
+and remove superseded wrapper groups only when their retained consumers have
+been handled. The secondary generic proposition-fibre helper split has no
+additional consumer benefit established here and is not required for CC-1b.

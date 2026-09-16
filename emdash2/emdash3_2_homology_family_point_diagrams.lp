@@ -1,7 +1,7 @@
 /* Categorical comparison of the same original H-boundary diagrams. */
 require open emdash.emdash3_2_zero_arrow_family_point_inputs;
 require open emdash.emdash3_2_zero_arrow_cone_adjunction_homology;
-require open emdash.emdash3_2_homology_adjunction_record_data;
+require open emdash.emdash3_2_homology_adjunction_input_data;
 require open emdash.emdash3_2_one_cat_diagram_map_equivalences;
 
 // The original semantic boundary supplies the generator equality; endpoints are identities.
