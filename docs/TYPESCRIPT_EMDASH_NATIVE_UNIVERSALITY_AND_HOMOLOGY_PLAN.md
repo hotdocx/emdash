@@ -14,7 +14,7 @@ Infinity-Codex-Origin: session 2026-09-12_01a096616c4a in /home/user1/emdash1/em
 
 Infinity-Codex-Decision-Responses: 0003_2026-09-12T18-46-28Z_01a096e4-2f5d-7a13-a05a-165935a012d5.md and the 2026-09-12 user acceptance/goal launch
 
-Status: active — native snake/LES comparison and nonsplit displayed CAS snake exactness qualified; retained six-term observations and displayed LES transport next
+Status: active — displayed native LES/snake exactness qualified; bounded six-term review, final audit and book update remain
 
 Branch: `goal/native-universality-homology-v3.2`
 
@@ -23,6 +23,37 @@ Worktree: `/home/user1/emdash1-native-universality-v1`
 Comparison-baseline: `cbef77e76fc292453c8814b5ecc6d62e84132f01` (never reset to it)
 
 ## Objective And Current User Direction
+
+Latest user direction (2026-09-16, D-NUH-080): apply the categorical
+comparison principle when reviewing the remaining six-term resource issue.
+First distinguish genuinely different presentations from two expressions for
+the same retained construction. Prefer actual internal maps/transformations
+with inverse/coherence data where appropriate; do not replace a meaningful
+computation requirement by an unrelated equivalence. Give NUH-6C3b2 one bounded
+review with at most two focused implementation hypotheses and their localized
+checks. If it yields no clear route, preserve the exact evidence and explicitly
+defer that observation-normalization gap. A documented deferral then permits
+NUH-7 to finish; it is not a claim that the failed comparisons are proved.
+
+NUH-7 now also requires updating the emdash book to cover the corrections,
+reformulations and additions since its last update (0.8.3-dev, 2026-09-11).
+Follow the book/print owners and bounded render SOP, updating source chapters,
+source-owned metadata and generated artifacts through their tools. No remote
+publication is authorized. Op/duality is outside this goal and will have a
+separate dedicated goal later; the other strictness branch is not integrated
+here. Spectral/stabilization research and the separately deferred endpoint
+experiments remain out of scope. This direction supersedes older unconditional
+NUH-6C3b2 completion gates below.
+
+NUH-5N2G3B2c4b now qualifies the whole displayed native CAS LES certificate.
+All six adjacent pairs and the actual finite diagram retain their canonical
+native inputs and Ω evidence. The nonsplit assembly/reuse/emission replay
+passes without new certificate assumptions or decisions. All 64 emitted
+assertions, six assembly assertions and 13 signature assertions check, with
+matching import-warning inventories. The public qualification flag is true.
+The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records the
+unchanged proof-body import repair and exact evidence. Next conduct the bounded
+six-term review above, then finish the final audit and book update.
 
 Terminology clarification (2026-09-15): "CAS-facing native H map" means
 the new whole H applied to a native chain map formed from matrix/presentation
@@ -1296,9 +1327,10 @@ The same root hook configuration is retained; no new hook is installed.
 | NUH-2 | user-deferred after this goal | Preserve the coupled migration prototypes and their open qualification boundaries; no active-kernel promotion now |
 | NUH-3 | complete at the stated ordinary-view boundary; checkpoint 1ea98f63 | Whole K/Q universality independent of old W/V prerequisites, with computing whole/point mates and derived ordinary records; retain the explicit shape-law and profile qualifications |
 | NUH-4 | native construction qualified: whole H/maps/δ and all three actual window comparison inverses; retained realization proceeds in NUH-5 | Native complex input independent of kernel selection; whole H, induced maps, connecting and exactness consumers at their actual endpoints |
-| NUH-5 | active: the unchanged combined pair/certificate replay passes with GC tuning; public alignment/transport remain | G3B2 must align original pairs with public native arrows and qualify displayed exactness transport before NUH-7 |
-| NUH-6 | native LES comparison and displayed nonsplit CAS exactness qualified; only retained 6C3b observations remain | Qualify retained full-result comparison/witness observations before NUH-7; no old/new snake equivalence requirement |
-| NUH-7 | pending NUH-3–6 | Cross-layer qualification, standing-source documentation, trust/computation audit and green local integration checkpoint; retain the separate Op resumption record |
+| NUH-5 | qualified through the complete displayed native CAS LES certificate | Preserve the checked model/interpretation contracts, original selections and canonical exactness data; final trust/computation audit remains in NUH-7 |
+| NUH-6 | native LES comparison and displayed nonsplit snake exactness qualified; bounded C3b2 review next | Apply D-NUH-080: solve the retained comparison boundary or record its explicit user-authorized deferral after bounded review; no old/new snake comparison |
+| NUH-7 | next after bounded C3b2 review | Final scope/trust/computation audit, standing documentation and green local integration checkpoint; account explicitly for every deferred boundary |
+| NUH-7B | required by the 2026-09-16 direction | Update the book since 0.8.3-dev, using source-owned chapters/metadata and bounded book checks/rendering; qualify local generated artifacts |
 | NUH-L1 | user-deferred compatibility/normalization work | Older formal H/map/δ comparisons and auxiliary native point/inverse-projection checks; snapshots preserved, not primary completion gates |
 
 Preserved duality progress (2026-09-13): NUH-1D4 corrected the defined
@@ -1693,6 +1725,11 @@ Side tasks must name a concrete consumer and dependency. No speculative
 spectral, normalization, parser or global profile project is admitted by
 renaming it as a prerequisite.
 
+Decision D-NUH-080 (2026-09-16): the latest user direction above adds the bounded
+categorical C3b2 review with explicit deferral fallback, requires the final book
+update, and reserves Op/duality for a separate later goal. Historical milestone
+statements do not override this completion policy.
+
 ## Historical Launch Evidence And Current Continuation Prompt
 
 The following launch record is historical. The current queue advances NUH-6E
@@ -1847,28 +1884,15 @@ tranche used only its affected owner prefixes, reviewers and document checks.
 
 ## Persistent Goal Launch Prompt
 
-Current continuation boundary: whole K/Q, H, δ and all three native-window
-exactness comparisons are qualified at their stated ordinary boundary.
-The retained workflow is qualified through 0caa19d0. Follow the later user
-priority in `TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md`: NUH-5N1 direct
-native context/signatures, complete H/map/δ observation assembly, finite
-diagram coherence, whole exactness evidence and input-pair observations are
-qualified. The formerly failing combined pair/certificate artifact now
-passes unchanged at 2GiB with GC tuning; public alignment/transport remains
-required. Native snake/LES endpoint, connecting/sign and surrounding-map
-comparisons and NUH-6E1 input/map observations are qualified. Advance
-NUH-6C3b full-result observations after the qualified displayed snake
-exactness certificate, followed by NUH-5N2G3B2
-categorical exactness transport to the actual selected CAS diagram before
-NUH-7. NUH-6D4 old-snake comparison is removed from the completion criteria
-by D-NUH-078; do not resume its record-comparison experiment.
-Retain coherent model/realization, normality and row contracts explicitly;
-derive output exactness from the native theorem. Older formal presentations
-are compatibility evidence, not mandatory intermediate targets. Continue
-native snake/LES work and NUH-7 qualification, preserving the general
-six-term scope and sign requirements. Do not resume the deferred auxiliary
-point/projection-normalization or legacy-comparison experiments automatically.
-The earlier Op/profile experiments remain resumption history only.
+Current continuation boundary: whole K/Q, H/maps/δ, native LES and general
+snake exactness, the new snake–LES comparison, and both nonsplit displayed CAS
+certificates are qualified under their recorded ordinary/model contracts.
+Conduct the bounded NUH-6C3b2 review specified by D-NUH-080. If no clear route
+emerges, preserve and explicitly defer the comparison-normalization gap, then
+complete NUH-7 and NUH-7B. Do not claim the gap solved or reinstate old/new
+formulation comparisons. Keep Op/duality outside this goal for a separate later
+launch. Update the book from its 2026-09-11 boundary and verify the generated
+artifacts through the owning tools.
 
 Continue the native whole-universality and homology implementation in
 `/home/user1/emdash1-native-universality-v1` on

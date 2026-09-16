@@ -2,9 +2,15 @@
 
 Date: 2026-09-15
 
-Status: active — displayed native snake exactness qualified; displayed LES exactness transport remains; legacy comparisons and auxiliary normalization deferred
+Status: displayed native snake and LES exactness qualified; bounded six-term review, final audit and book update remain
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md)
+
+Current boundary (2026-09-16): both displayed native CAS certificates are
+qualified, including the complete nonsplit LES. The later C4b entry records
+the final evidence. Earlier milestone paragraphs retain their historical flags
+and are not the current completion policy. D-NUH-080 in the parent plan governs
+the bounded remaining comparison review and final audit/book work.
 
 Ledger: [native owner and dependency ledger](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_OWNER_LEDGER.md)
 
@@ -15,8 +21,9 @@ native snake. Four certificates retain their original whole Ω data and
 the checked input/public/CAS pair links; one formal predicate indexes them
 at the actual coherent five-arrow diagram. Construction adds no assumptions
 or trust decisions to the existing nine-equation/five-interpretation source.
-This result's displayed-exactness flag is true. The separate native LES
-displayed-exactness flag remains false pending NUH-5N2G3B2. Finish the
+This result's displayed-exactness flag is true. NUH-5N2G3B2c4b below now also
+qualifies the native displayed LES certificate. Historical continuation notes
+below retain their original milestone context. Finish the
 retained NUH-6C3b observations next, then return to that LES transport.
 
 NUH-6E2b1 now constructs the four native whole snake exactness proofs and
@@ -1094,15 +1101,120 @@ positions. Reuse each map observer's original chain/map terms and each window's
 row/normality terms; do not synthesize new interpretation claims or replace
 an adopted chain-map witness by a definitionally different choice.
 
-The ignored `emdash2/tmp/probes/nuh5g3b2c4b_exact_diagram_candidate.lp`
-proposes a finite certificate with explicit input family of length n for n+1
-complete arrows. The corresponding `_freyd_diagram_candidate.lp` specializes
-it to the existing coherent finite observation diagram, and the
-`_middle_frontend_candidate.lp`, `_source_frontend_candidate.lp` and
-`_target_frontend_candidate.lp` retain the general proof applications through
-Terminal-indexed frontend views. These candidates are unvalidated preparation,
-not promoted theory. Their native input family is observation data, not a new
-category of complexes or a replacement for the whole LES.
+### NUH-5N2G3B2c4b: Complete Displayed Native CAS LES — Qualified
+
+Following checkpoint `715b6424`, the generic finite
+certificate and model specialization typecheck. The four generic assertions
+retain the head certificate and tail, enforce one native input per adjacent
+pair and reject substitution of a different input. All three Terminal-indexed
+frontend candidates and their exact warning controls pass under the existing
+180s/6GiB/o20 profile. Candidate evidence is in
+`emdash2/tmp/probes/nuh5g3b2c4b_candidate_checks.json`.
+
+The final active-source owners are: `emdash3_2_one_cat_native_exact_diagrams.lp`,
+`emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp`, and the single
+`emdash3_2_commutative_algebra_freyd_native_les_certificate_views.lp`. The latter
+collects the six related Terminal-indexed input/proof views. Their input family
+is observation data, not a new category of complexes or a replacement for the
+whole LES. No primitive or rule is added. The generic and actual-diagram
+reviewers are `examples/native_exact_diagrams.lp` and
+`examples/freyd_native_diagram_exactness.lp`.
+
+The new private TypeScript signature factory is
+`src/v3_2/algebra_formal_freyd_native_les_certificate_signatures.ts`. It mirrors
+13 existing defined owners and retains every original model/chain/map argument.
+The existing exactness fixture now supports those bindings while preserving
+its declaration-dependency closure. The focused compiler and three selected
+exactness tests pass (37.10s), including every new signature telescope and the
+two unchanged baseline tests. Workspace setup also passes. The compiler was
+initially refused by the serial guard while an LP check was live; it was rerun
+successfully after that gate finished, without bypassing the guard.
+
+The emitted 13-signature artifact is
+`emdash2/tmp/probes/nuh5g3b2c4b_signature_mirrors.lp`; its final-name Lambdapi
+conformance check passes at 180s/6GiB/o20. Two preceding failures exposed
+missing imports of the named H-arrow and δ observers in the test emitter.
+Both imports are now explicit; a transitive-import/application-head audit
+finds no missing name. The formal constructors were unchanged. The final log
+is `emdash2/logs/probes/nuh5g3b2c4b_signature_mirrors-20260916-015625.log`.
+
+The frontend constructor is now written in
+`src/v3_2/algebra_formal_freyd_native_displayed_exactness.ts` and called by the
+existing native diagram driver. It selects middle/source/target certificates
+from the actual adjacent arrow roles and degrees, reuses original window and
+map terms, and checks one final proof indexed by the same coherent displayed
+diagram and its retained native input family. The existing coherence result
+now exposes its already-constructed matching evidence. The rational native
+context is v8 and includes the 13 private signatures. The native diagram profile is now v3 and its displayed LES qualification flag
+is true, following the concrete replay and actual emitted proof checks.
+
+The existing exact declaration-closure selector moved to the shared test helper
+`tests/v3_2_algebra_formal_freyd_probe_dependencies.ts`. Native model probes use
+that same selector so unrelated observation artifacts do not acquire unused
+certificate imports or unbound theorem stubs. Source definitions and required
+input/model/interpretation declarations remain in the emitted closure. This is
+test artifact selection, not proof opacity or a runtime conversion change.
+
+The affected TypeScript dependency compilation and focused lint pass. Five
+selected tests pass in 32.86s: all 13 new signature telescopes, both original
+whole-exactness tests, and native context preparation/contract rejection. The
+complete nonsplit assembly/reuse/emission replay passes all three tests in
+524.23s under the existing 600s/2GiB guard with the inherited 512MiB V8 worker
+limit. Evidence and unchanged source hashes are recorded in
+`emdash2/tmp/probes/nuh5g3b2c4b_concrete_v1.json`. The first assembly completes
+in 281.58s; with its rejection checks the first test takes 309.87s. Full reuse
+takes 205.62s and emission 8.43s. Both runs retain the same proof and input
+family; reuse adds no source entries or adoption decisions.
+
+The new assertions cover all six displayed pairs, unchanged model/assumption
+counts, no CAS reselection, complete-diagram linkage and omitted-map/coverage
+rejections. The unchanged original workflow counts are 12 degree H points,
+eight H maps, three δ windows, eight displayed points/seven arrows and nine
+original whole exactness terms. Its 20 computed equations and 13 interpretation
+claims remain the same 33 original adoption entries; the new certificate
+constructor adds zero assumptions and zero trust decisions. The exact pair
+coverage is target(2), middle(1), source(1), target(1), middle(0), source(0).
+
+The emitted manifest contains 64 assertions: 48 existing diagram observations,
+seven new displayed exactness results (six pairs and the whole diagram), and
+three original whole proofs in each of three windows. The serial final gate
+checks those artifacts and the generic/model assembly reviewers, comparing
+exact import-warning inventories. Identical import blocks share a control;
+the already-passing exact 13-signature conformance is carried forward.
+Evidence is accumulated in `emdash2/tmp/probes/nuh5g3b2c4b_final_checks.json`.
+The first concrete LP check found two missing endpoint-observation β names in
+the emitter imports. `freydNativeLesCertificateImportHeader` now owns the
+import block for both fresh emission and exact-body replay. The saved artifact
+was regenerated through that function; all seven assertion bodies are
+byte-identical, with body hash
+`ebe4b4d89c63cdacbcd17264e46a1664ea43caee37bbebf13236a642d048a123`.
+The original file and failed log are retained. The corrected import closure
+contains every emitted application head. Evidence is in
+`emdash2/tmp/probes/nuh5g3b2c4b_import_replay.json`. The final gate resumes at
+the corrected artifact, retaining both already-passing unchanged assembly
+reviewers; no CAS computation or adoption was repeated for the import fix.
+
+All seven final consumer checks pass, including every one of the 64 emitted
+assertions and six assembly assertions. Their warnings match exact import
+controls; identical import blocks reuse verified controls. The 13-signature
+artifact also passes; its assertion bodies are retained when applying the
+final shared import header. The final source/body audit finds 16 transparent
+definitions and no primitive, rewrite/unification rule, opacity or new output
+assumption. The 1411-file source-health snapshot, catalog/TOC and documentation
+checks pass. Final source/log hashes are recorded in
+`emdash2/tmp/probes/nuh5g3b2c4b_qualification.json` at checkpoint preparation.
+
+After proof qualification, only the native diagram profile metadata changed
+to v3/true and its metadata assertion was updated. A focused compilation and
+isolated metadata check cover that edit; the 524s replay is not repeated for
+these literal changes. The implementation and proof terms tested by that
+replay remain unchanged. The test import-owner correction also preserves
+all emitted proof-body bytes, as recorded above.
+
+Latest user direction D-NUH-080 permits explicit deferral of C3b2 if one
+bounded categorical review with at most two focused hypotheses yields no
+clear solution. Then finish NUH-7 and update the book under NUH-7B. Op/duality
+remains outside this goal for a separate later launch.
 
 ### NUH-5N2G3B2c3: Canonical Exactness At Actual Public Pairs — Qualified
 

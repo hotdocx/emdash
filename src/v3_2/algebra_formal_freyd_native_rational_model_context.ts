@@ -2,11 +2,11 @@
 import { affineFormalCommRingType, affineFormalRingElementType } from './algebra_formal_conformance';
 import { AlgebraFormalFreydRationalSelectedResult, prepareAlgebraFormalFreydRationalInputs } from './algebra_formal_freyd_rational_preparation';
 import { algebraFormalFreydNativeModelType, algebraFormalFreydNativeModelNormalityType } from './algebra_formal_freyd_native_model_signatures';
-import { createFormalFreydExactnessPointProofEnvironment } from './algebra_formal_freyd_exactness_point_signatures';
+import { createFormalFreydNativeLesCertificateProofEnvironment } from './algebra_formal_freyd_native_les_certificate_signatures';
 import { createAlgebraFormalAssumptionSource } from './algebra_formal_assumption_source';
 
 export const ALGEBRA_FORMAL_FREYD_NATIVE_RATIONAL_CONTEXT_PROFILE = Object.freeze({
-    revision: 'emdash-formal-native-rational-freyd-context-v7' as const,
+    revision: 'emdash-formal-native-rational-freyd-context-v8' as const,
     backend: 'rational-polynomial-freyd' as const,
     modelInterface: 'supplied-whole-adjunction-model-and-native-normality' as const,
     coefficientNames: 'canonical-rational-codepoints' as const,
@@ -90,7 +90,7 @@ export function prepareAlgebraFormalFreydNativeRationalModelContext(input: {
     const element = affineFormalRingElementType(formalRing);
     const modelType = algebraFormalFreydNativeModelType(formalRing);
     const normalityType = algebraFormalFreydNativeModelNormalityType(formalRing, formalModel);
-    const environment = createFormalFreydExactnessPointProofEnvironment([
+    const environment = createFormalFreydNativeLesCertificateProofEnvironment([
         { name: formalRing.name, type: affineFormalCommRingType() },
         ...generatorTerms.map(term => ({ name: term.name, type: element })),
         ...coefficients.map(({ term }) => ({ name: term.name, type: element })),

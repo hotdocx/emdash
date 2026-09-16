@@ -1,11 +1,23 @@
 # Native Snake And LES Comparison
 
 Date: 2026-09-15
-Status: native snake/LES comparison and nonsplit displayed CAS exactness qualified; retained six-term observation gap and displayed LES integration remain
+Status: native snake/LES comparison and both displayed CAS certificates qualified; bounded six-term observation review remains
 
 Parent: [native universality and homology plan](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 
 ## Scope And Mathematical Boundary
+
+User direction (2026-09-16, D-NUH-080): review C3b2 once in a bounded tranche,
+using at most two concrete implementation hypotheses. Check whether an actual
+categorical comparison is appropriate before attempting more path transport
+or whole-package normalization. Preserve the original forward maps and inverse
+data; an unrelated equivalence is not a replacement for the intended consumer.
+If the review does not yield a clear solution, explicitly defer this retained
+observation-normalization gap and proceed to the final audit and book update.
+Earlier statements requiring C3b2 unconditionally before goal completion are
+superseded by this authorization. The mathematical six-term construction and
+its qualified typed data access remain distinct from this open comparison.
+Op/duality remains outside this goal, for a dedicated later launch.
 
 The general native snake takes an arbitrary whole triple
 A ─a⇒ B ─b⇒ X ─c⇒ D with c∘b∘a=0. It derives α:A⇒K(c)

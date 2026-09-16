@@ -13,9 +13,10 @@ import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/alge
 import { defineAlgebraFormalFreydNativeRationalBackend, prepareAlgebraFormalFreydNativeRationalModelContext } from '../src/v3_2/algebra_formal_freyd_native_rational_model_context';
 import { trustAlgebraFormalFreydNativeDiagram } from '../src/v3_2/algebra_formal_freyd_native_diagram';
 import { constructAlgebraFormalFreydDiagramCoherence } from '../src/v3_2/algebra_formal_freyd_diagram_coherence';
+import { constructAlgebraFormalFreydNativeDisplayedExactness } from '../src/v3_2/algebra_formal_freyd_native_displayed_exactness';
 import { polynomialFreydHomologyFixture, isPolynomialFreydMorphismZero } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
 import { freydNativeModelProbe } from './v3_2_algebra_formal_freyd_native_model_fixtures';
-import { freydNativeExactnessProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
+import { freydNativeExactnessProbe, freydNativeLesCertificateProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
 import * as nativeHomology from '../src/v3_2/algebra_polynomial_freyd_homology';
 import * as nativeLongExact from '../src/v3_2/algebra_polynomial_freyd_long_exact';
 import * as nativeConnecting from '../src/v3_2/algebra_polynomial_freyd_homology_connecting';
@@ -90,10 +91,24 @@ describe('v3.2 complete native bounded diagram', () => {
                 assert.equal(r.prepared.selected.homologyMap, result.native.arrows[i]);
             }
             assert.equal(result.profile.provesDisplayedDiagramCoherence, true);
-            assert.equal(result.profile.provesDisplayedExactness, false);
+            assert.equal(result.profile.provesDisplayedExactness, true);
             assert.equal(result.coherence.source, result.source);
             assert.equal(result.coherence.assumptionsAdded, 0);
             assert.equal(result.coherence.endpointPaths.length, 6);
+            assert.equal(result.displayedExactness.source, result.source);
+            assert.equal(result.displayedExactness.assumptionsAdded, 0);
+            assert.equal(result.displayedExactness.trustDecisions, 0);
+            assert.equal(result.displayedExactness.provesDisplayedCasExactness, true);
+            assert.ok(kernelExpressionEquals(result.displayedExactness.diagram, result.coherence.nativeDiagram));
+            assert.deepEqual(result.displayedExactness.pairs.map(pair => [pair.position, pair.kind, pair.degree]),
+                [[1, 'target', 2], [2, 'middle', 1], [3, 'source', 1], [4, 'target', 1], [5, 'middle', 0], [6, 'source', 0]]);
+            const certificateInput = { source: result.source, formalRing: v.formalRing, formalModel: v.formalModel,
+                normality: v.normality, maps: result.maps, windows: result.windows, displayed: result.displayed,
+                coherence: result.coherence };
+            assert.throws(() => constructAlgebraFormalFreydNativeDisplayedExactness({ ...certificateInput,
+                displayed: result.displayed.slice(1) }), /original nonempty coherent LES diagram/i);
+            assert.throws(() => constructAlgebraFormalFreydNativeDisplayedExactness({ ...certificateInput,
+                maps: result.maps.filter(map => map.entry.degree !== 1 || map.entry.role !== 'inclusion') }), /retained LES map/i);
             const changed = [...result.coherence.arrows];
             const different = result.points.map(point => point.realization.formalPoint).find(
                 point => !kernelExpressionEquals(point, changed[1].formalSource));
@@ -121,6 +136,8 @@ describe('v3.2 complete native bounded diagram', () => {
         assert.equal(again.counts.newAssumptions, 0);
         assert.equal(again.counts.reused, 215);
         assert.ok(kernelExpressionEquals(again.coherence.path, result.coherence.path));
+        assert.ok(kernelExpressionEquals(again.displayedExactness.proof, result.displayedExactness.proof));
+        assert.ok(kernelExpressionEquals(again.displayedExactness.inputs, result.displayedExactness.inputs));
         again.displayed.forEach((a, i) => assert.ok(kernelExpressionEquals(a.result.proof, result.displayed[i].result.proof)));
     });
 
@@ -152,6 +169,14 @@ describe('v3.2 complete native bounded diagram', () => {
         const observation = freydNativeModelProbe(result.source.environment, [...terms, ...assertions, ...coherent]);
         if (directory) writeFileSync(join(directory, 'diagram.lp'), observation);
         manifest.push({ file: 'diagram.lp', assertions: terms.length + assertions.length + coherent.length });
+        const displayedExactness = [...result.displayedExactness.pairs.map(pair => ({
+            label: 'displayed pair ' + pair.position + ' canonical exactness', term: pair.term, type: pair.type, span: p.span!
+        })), { label: 'whole displayed CAS LES exactness', term: result.displayedExactness.proof,
+            type: result.displayedExactness.type, span: p.span! }];
+        displayedExactness.forEach(assertion => checker.check(checker.rootContext, assertion.term, assertion.type));
+        const certificate = freydNativeLesCertificateProbe(result.source.environment, displayedExactness);
+        if (directory) writeFileSync(join(directory, 'displayed_exactness.lp'), certificate.source);
+        manifest.push({ file: 'displayed_exactness.lp', assertions: displayedExactness.length });
         for (const exact of result.exactness) {
             const probe = freydNativeExactnessProbe(exact.evidence.source.environment, exact.evidence.evidence.map(e => ({
                 label: 'window ' + exact.degree + ' ' + e.position + ' exactness', term: e.term, type: e.type, span: p.span!

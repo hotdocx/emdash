@@ -335,13 +335,15 @@ profile, while generic owners use default 90s/2GiB. No output exactness premise,
 new primitive or rule is added. Displayed-diagram observation indexing,
 frontend certificate assembly and nonsplit replay remain the next boundary.
 
-NUH-5N2G3B2c4a adds observation-indexed certificates that retain the actual
-public native input and original canonical Ω witness. Only the complete-arrow
-interpretation path changes; a negative reviewer rejects input substitution.
-All eight owner/reviewer checks and exact warning controls pass; the concrete
-reviewers retain the canonical Ω data. No primitive, rule, opacity or
-output-exactness premise is added.
-The displayed LES flag stays false pending finite-diagram/frontend replay.
+NUH-5N2G3B2c4b qualifies the complete displayed native CAS LES certificate,
+retaining actual native inputs and canonical Ω data. The nonsplit workflow
+passes assembly, coverage rejection, reuse and emission; all 64 emitted,
+six assembly and 13 signature assertions check under the documented localized
+profiles. The public flag is true. No output-exactness assumption, primitive,
+rule or opacity is added. D-NUH-080 now schedules a bounded categorical review
+of the six-term observation gap with at most two focused hypotheses and an
+explicit deferral fallback if no clear route emerges, then the final audit and
+book update. Op/duality remains outside this goal for its own later launch.
 
 The older expanded/global cover reviewer hit 2GiB; its qualified scoped
 consumers and the new connecting consumers are recorded separately.

@@ -14,6 +14,8 @@ import { FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS } from '../src/v3_2/a
 import { FORMAL_FREYD_NATIVE_EXACTNESS_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_exactness_signatures';
 import { FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_diagram_signatures';
 import { FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_exactness_point_signatures';
+import { freydProbeDependencies } from './v3_2_algebra_formal_freyd_probe_dependencies';
+import { FORMAL_FREYD_NATIVE_LES_CERTIFICATE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_les_certificate_signatures';
 import { serializeCoreLfKernelProbe } from '../src/v3_2/lf_probe';
 
 export const FREYD_NATIVE_MODEL_PROBE_BINDINGS = Object.freeze({ ...AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS, ...AFFINE_FORMAL_LOCALIZATION_GOAL_BINDINGS,
@@ -23,11 +25,14 @@ export const FREYD_NATIVE_MODEL_PROBE_BINDINGS = Object.freeze({ ...AFFINE_FORMA
                 ...FORMAL_FREYD_RAW_WITNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS,
                 ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS,
                 ...FORMAL_FREYD_NATIVE_EXACTNESS_SIGNATURE_BINDINGS, ...FORMAL_FREYD_DIAGRAM_SIGNATURE_BINDINGS,
-                ...FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS });
+                ...FORMAL_FREYD_EXACTNESS_POINT_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_LES_CERTIFICATE_SIGNATURE_BINDINGS });
 
 export const freydNativeModelProbe = (environment: Parameters<typeof serializeCoreLfKernelProbe>[0]['environment'],
-    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) =>
-    serializeCoreLfKernelProbe({ environment, externalFreeReferences: FREYD_NATIVE_MODEL_PROBE_BINDINGS, assertions }).source.replace(
+    assertions: Parameters<typeof serializeCoreLfKernelProbe>[0]['assertions']) => {
+    const { selected } = freydProbeDependencies(environment, assertions, true);
+    const bindings = Object.fromEntries(Object.entries(FREYD_NATIVE_MODEL_PROBE_BINDINGS).filter(([name]) => selected.lookup(name)));
+    const certificates = Object.keys(FORMAL_FREYD_NATIVE_LES_CERTIFICATE_SIGNATURE_BINDINGS).some(name => selected.lookup(name));
+    return serializeCoreLfKernelProbe({ environment: selected, externalFreeReferences: bindings, assertions }).source.replace(
         'require open emdash.emdash3_2;',
         'require open emdash.emdash3_2_commutative_algebra_freyd_actual_homology;\n' +
         'require open emdash.emdash3_2_commutative_algebra_freyd_chain_map_introduction;\n' +
@@ -35,4 +40,6 @@ export const freydNativeModelProbe = (environment: Parameters<typeof serializeCo
         'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_arrows;\n' +
         'require open emdash.emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation;\n' +
         'require open emdash.emdash3_2_commutative_algebra_freyd_diagram_observations;\n' +
-        'require open emdash.emdash3_2_commutative_algebra_freyd_observation_endpoints;');
+        'require open emdash.emdash3_2_commutative_algebra_freyd_observation_endpoints;' +
+        (certificates ? '\nrequire open emdash.emdash3_2_commutative_algebra_freyd_native_les_certificate_views;' : ''));
+};

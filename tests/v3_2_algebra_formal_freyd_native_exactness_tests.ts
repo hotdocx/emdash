@@ -5,7 +5,7 @@ import { describe, it } from 'node:test';
 import { coreProofPlanHole } from '../src/v3_2/proof_plan';
 import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
 import { createCoreProofChecker } from '../src/v3_2/proof_checker';
-import { binderMode, kernelFree, kernelInstantiate, kernelExpressionEquals, KernelExpression, provenance, sourceSpan } from '../src/v3_2/kernel';
+import { binderMode, kernelCall, kernelFree, kernelInstantiate, kernelExpressionEquals, KernelExpression, provenance, sourceSpan } from '../src/v3_2/kernel';
 import { runAlgebraFormalWorkflow } from '../src/v3_2/algebra_formal_workflow';
 import { trustAlgebraFormalFreydLongExact } from '../src/v3_2/algebra_formal_freyd_long_exact';
 import { algebraPolynomialFreydLongExactSnakeReferences } from '../src/v3_2/algebra_polynomial_freyd_long_exact_reference_operations';
@@ -15,12 +15,14 @@ import { serializeCoreExpression } from '../src/v3_2/core_serialization';
 import * as nativeLongExact from '../src/v3_2/algebra_polynomial_freyd_long_exact';
 
 import { polynomialFreydHomologyFixture } from './v3_2_algebra_polynomial_freyd_homology_fixtures';
-import { freydNativeExactnessProbe, freydNativeExactnessPointProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
+import { freydNativeExactnessProbe, freydNativeExactnessPointProbe, freydNativeLesCertificateProbe } from './v3_2_algebra_formal_freyd_native_exactness_fixtures';
 import { constructAlgebraFormalFreydNativeExactness } from '../src/v3_2/algebra_formal_freyd_native_exactness';
 import { algebraFormalFreydNativeExactnessExpressions,
     FREYD_NATIVE_EXACTNESS_ARGUMENTS } from '../src/v3_2/algebra_formal_freyd_native_exactness_signatures';
 import { createFormalFreydExactnessPointProofEnvironment, algebraFormalFreydExactnessPointExpressions } from '../src/v3_2/algebra_formal_freyd_exactness_point_signatures';
 import { observeAlgebraFormalFreydNativeExactness } from '../src/v3_2/algebra_formal_freyd_exactness_points';
+import { createFormalFreydNativeLesCertificateProofEnvironment,
+    FORMAL_FREYD_NATIVE_LES_CERTIFICATE_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_freyd_native_les_certificate_signatures';
 
 const p = provenance('surface', 'native categorical exactness', sourceSpan('tests/native-exactness.ts', 1, 1));
 const fingerprint = (id: string) => createCoreProofArtifactFingerprint({
@@ -76,6 +78,33 @@ const symbolic = () => {
 };
 
 describe('v3.2 native whole categorical exactness', () => {
+    it('checks all native LES certificate signature mirrors at their actual telescopes', () => {
+        let environment = createFormalFreydNativeLesCertificateProofEnvironment([]);
+        const assertions: { label: string; term: KernelExpression; type: KernelExpression; span: NonNullable<typeof p.span> }[] = [];
+        for (const name of Object.keys(FORMAL_FREYD_NATIVE_LES_CERTIFICATE_SIGNATURE_BINDINGS)) {
+            let type = environment.lookup(name)!.type;
+            const args: Parameters<typeof kernelCall>[1][number][] = [];
+            let index = 0;
+            while (type.tag === 'pi') {
+                const value = kernelFree(name + '_parameter_' + index++, p);
+                environment = environment.extend({ name: value.name, type: type.binder.type,
+                    mode: binderMode('explicit', 'functorial'), provenance: p });
+                args.push({ value, plicity: type.binder.mode.plicity });
+                type = kernelInstantiate(type.body, value);
+            }
+            const term = kernelCall(kernelFree(name, p), args, p);
+            const checker = createCoreProofChecker(environment);
+            checker.check(checker.rootContext, term, type);
+            assertions.push({ label: name, term, type, span: p.span! });
+        }
+        assert.equal(assertions.length, 13);
+        const probe = freydNativeLesCertificateProbe(environment, assertions);
+        if (process.env.EMDASH_NATIVE_LES_CERTIFICATE_SIGNATURE_OUTPUT) {
+            writeFileSync(process.env.EMDASH_NATIVE_LES_CERTIFICATE_SIGNATURE_OUTPUT, probe.source);
+        }
+        assert.match(probe.source, /require open emdash\.emdash3_2_commutative_algebra_freyd_native_les_certificate_views/);
+    });
+
     it('checks the three derived constructors at the exact whole window telescope', () => {
         const { environment, values } = symbolic();
         assert.equal(FREYD_NATIVE_EXACTNESS_ARGUMENTS.length, 45);

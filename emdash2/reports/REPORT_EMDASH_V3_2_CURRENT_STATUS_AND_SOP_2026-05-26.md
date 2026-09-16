@@ -25,14 +25,18 @@ definitions moved unchanged to a shared module. Twelve inverse/projection,
 sixteen signature and sixteen concrete proof checks pass. The next required
 step is certified-input/public-pair alignment and displayed CAS transport.
 
-Complete-arrow LES certificates (2026-09-16): the
-[generic certificate](../emdash3_2_one_cat_native_observed_exactness.lp)
-retains the fixed native input and its canonical Ω data. Observation
-interpretation changes only the complete-arrow path. All eight owner/reviewer
-checks and warning inventories pass. Ten assertions retain the original Ω
-data and reject native-input substitution, as recorded in
-the [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
-The finite displayed LES certificate and frontend replay remain next.
+Displayed native LES exactness (2026-09-16): the
+[finite certificate](../emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp)
+retains each original public native input and canonical Ω data. The native
+frontend now certifies all six adjacent pairs and the complete nonsplit CAS
+diagram, without new certificate assumptions or decisions. Assembly/reuse/
+emission passes in 524.23s; all 64 emitted assertions, six assembly assertions
+and 13 signature assertions check. The profile exposes displayed exactness.
+The [model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records the exact import repair, resource profiles and warning comparisons.
+The latest user direction gives the remaining six-term observation gap a
+bounded categorical review with explicit deferral fallback, then requires
+the final audit and book update. Op/duality remains a separate later goal.
 
 Canonical public LES pairs (2026-09-16): the
 [public-pair transport](../emdash3_2_one_cat_native_public_pair_exactness.lp)

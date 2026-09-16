@@ -100,6 +100,7 @@ export function constructAlgebraFormalFreydDiagramCoherence(input: {
         formalMatching, nativeMatching, arrows[0].proof, tailPath], 6);
     check(formalDiagram, L.tau(diagram)); check(nativeDiagram, L.tau(diagram)); check(path, pathType);
     return Object.freeze({ source, formalDiagram: b.lower(formalDiagram), nativeDiagram: b.lower(nativeDiagram),
+        nativeMatching: b.lower(nativeMatching),
         diagramType: b.lower(L.tau(diagram)), path: b.lower(path), pathType: b.lower(pathType),
         endpointPaths: Object.freeze(endpointPaths), arrows: Object.freeze([...input.arrows]),
         assumptionsAdded: 0 as const, trustDecisions: 0 as const,

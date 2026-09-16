@@ -1,10 +1,15 @@
 # Native Six-Term Observation Boundary
 
-Status: required qualification gap retained on 2026-09-15; not positive library checks
+Status: retained qualification gap; bounded review with user-authorized deferral fallback on 2026-09-16; not positive library checks
 
 Authority: [native snake/LES plan](../../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md),
-NUH-6C3b. The user permits advancing independent LES work and returning to
-this gap before final goal qualification.
+NUH-6C3b. Latest direction D-NUH-080 (2026-09-16) schedules one bounded
+categorical review with at most two concrete implementation hypotheses. If
+there is no clear route, explicitly defer this comparison-normalization gap
+and proceed with the final audit and book update. This supersedes the earlier
+unconditional completion gate. Preserve the failed evidence and do not call
+the direct comparisons proved merely because the goal can close with that
+deferral. Op/duality remains a separate later goal.
 
 NUH-6C3b1 now qualifies [typed whole-result data access](../../emdash3_2_one_cat_native_exact_tail_observations.lp).
 It packages data inside the generic tail before specializing the annotation.
@@ -97,7 +102,7 @@ failure; its public pair alignment and displayed-diagram exactness transport
 remain required in the model/reifier plan. Do not conflate it with this new
 whole-comparison normalization boundary or with older endpoint probes.
 
-Completion still requires a real consumer of the assembled exactness data,
+Resolving this gap still requires a real consumer of the assembled exactness data,
 retaining the original canonical forward comparisons and inverse choices.
 Do not replace that obligation by an output assumption, an arbitrary
 isomorphism between endpoints, or an unrelated invertible arrow.

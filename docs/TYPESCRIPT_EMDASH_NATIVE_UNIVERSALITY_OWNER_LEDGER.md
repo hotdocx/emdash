@@ -310,6 +310,32 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c4b: Displayed Native CAS LES — Qualified
+
+The finite certificate retains one actual native input for each displayed
+adjacent pair and the original canonical Ω data. The frontend constructs all
+six pairs and one proof over the same coherent diagram. The nonsplit complete
+workflow passes assembly, negative coverage checks, reuse and emission in
+524.23s, with zero new certificate assumptions or decisions and no CAS
+reselection. The native model context is v8; diagram profile v3 exposes checked
+displayed exactness. Metadata was enabled only after the actual proof checks.
+
+All 64 emitted assertions, six assembly assertions and 13 exact signature
+assertions pass. Seven final consumer checks and their import-warning
+comparisons pass; identical import blocks reuse verified controls. The last
+emitter import repair preserves every proof-body byte and avoids repeating
+CAS/adoption work. Sixteen transparent definitions add no primitive, rule or
+opacity. The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md)
+records source/log hashes, focused TypeScript checks and the 1411-file source
+snapshot. Final cross-layer checkpoint qualification is being synchronized.
+
+Latest user direction D-NUH-080: conduct one bounded categorical review of
+C3b2 with at most two focused implementation hypotheses. If no clear route
+emerges, preserve the evidence and defer that comparison gap, then finish
+NUH-7 and the newly required book update NUH-7B. Op/duality remains outside
+this goal and will have its own later goal. Do not reinterpret a deferred
+comparison as solved or drop the original data-retention/trust qualifications.
+
 ### NUH-5N2G3B2c4a: Complete-Arrow Certificates — Qualified
 
 The generic certificate retains the already-transported native input X,
