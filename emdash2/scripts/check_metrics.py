@@ -478,7 +478,6 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_freyd_native_column_inputs.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_column_input_comparisons.lp"),
     Path("emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp"),
-    Path("emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology_model_native_context.lp"),
     Path("emdash3_2_commutative_algebra_freyd_raw_window_connecting_observation.lp"),
     Path("emdash3_2_commutative_algebra_freyd_homology_model_native_connecting.lp"),

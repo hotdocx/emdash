@@ -2136,7 +2136,7 @@ retain each original raw column chain witness as their target data. They
 derive the incoming comparison internally. Original whole H then gives
 [both H comparisons](../emdash2/emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp),
 including fixed-map equivalence and the same selected inverse. The
-[retained-model comparisons](../emdash2/emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
+[retained-model comparisons](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
 compose with the inverse of the existing retained-to-native comparison.
 Existing IsoEvidence symmetry and OmegaEquivAlong composition preserve
 the older model's exact H objects; W/V remain in this optional adapter,

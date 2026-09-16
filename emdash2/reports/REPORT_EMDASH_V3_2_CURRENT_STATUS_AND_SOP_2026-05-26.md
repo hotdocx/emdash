@@ -27,6 +27,11 @@ computational-homology and mixed record-data modules. All declarations remain
 unchanged. Focused consumers pass; exact import-order controls account for
 the product/terminal/truncation warning differences in the living plan.
 
+CC-2a retirement (2026-09-16): the unused old-model retained-column
+comparison and its reviewer are removed. The current native column and
+snake–LES comparisons remain. Dated links to the retired code use its exact
+published snapshot; the living consolidation plan records the consumer audit.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the
@@ -477,7 +482,7 @@ use ordinary diagram reflection, terminal-tip uniqueness and whole fibre
 inclusion, retaining the actual diagram and original raw chain witness.
 [Original H](../emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp)
 maps both comparisons and their selected inverses; the
-[retained-model adapter](../emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
+[retained-model adapter](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
 lands in the older model's exact H objects. The actual whole δ's endpoints
 and its component between raw H objects check. Twenty-three definitions
 add no primitive or rule; 25 assertions cover these interfaces. The

@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: active — CC-1a checkpoint 3778c1c9; CC-1b qualified; CC-2 next
+Status: active — CC-1b checkpoint d35cc98e; CC-2 retirement in progress
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -290,7 +290,7 @@ typecheck or renewed normalization probe was run.
 | CC-0 | Checkpoint the accepted review and documentation; fast-forward main, push and verify the existing Pages deployment. Record the exact commit/run. Bootstrap an isolated continuation worktree. | Complete |
 | CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Qualified |
 | CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Qualified |
-| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Next |
+| CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | In progress |
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Pending ownership cleanup |
 | CC-4 | Inventory actual consumers of point presentation comparisons; construct needed whole transformations with their endpoint/Hom observations. Record a reason for each retained point-only view. Ordinary equations remain downstream. | Pending CC-1 and relevant CC-3 decisions |
 | CC-5 | Consolidate current status/Foundations routing and expose reusable mathematics at the proper book chapters. Update book source/evidence and regenerate artifacts only when substantive book content changes. | Pending implementation decisions |
@@ -512,3 +512,55 @@ registration inventory, extract useful ordinary record vocabulary as needed,
 and remove superseded wrapper groups only when their retained consumers have
 been handled. The secondary generic proposition-fibre helper split has no
 additional consumer benefit established here and is not required for CC-1b.
+
+
+CC-1b checkpoint: `d35cc98e`; CC-2 begins from a clean descendant of the
+published baseline. The previous goal turn made implementation progress.
+
+CC-2 inventory (2026-09-16): protected native roots have a 361-module union;
+the separately retained ordinary iterator has 147 modules, 99 outside that
+native union. KernelPresentation/CokernelPresentation, legacy H-family,
+record-connecting and computational-homology owners still serve that explicit
+reference. The former Freyd model has ten downstream root owners, none in
+either protected closure. The old `abelian_snake_lemma` has 106 downstream
+owners, likewise outside both. Registration and non-LP consumer checks are
+still required before removing those larger groups.
+
+CC-2a decision: retire only the closed leaf
+`emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp`
+and `examples/freyd_retained_column_comparisons.lp`. All four comparison
+symbols have no other root-library, reviewer, src or tests users. They belong
+to the withdrawn old-model/new-native compatibility route, not the current
+native LES/CAS comparison or the new snake–LES comparison.
+
+The initial wider two-owner proposal failed the symbol-consumer gate before
+any edit: `freyd_homology_model_native_connecting` still uses the old-model
+input comparison, and the legacy TS emission tests import that owner. Keep
+that required dependency until the whole legacy model workflow is retired.
+This is sequencing, not a decision to retain it as a permanent compatibility
+API. Remove the closed leaf's health registration; redirect dated source links
+to the exact published df9b4778 snapshot rather than leaving dead links or
+copying obsolete source into an untracked archive. Validate import/symbol
+closure, the surviving native column consumer and current book evidence.
+
+
+CC-2a qualified (2026-09-16): removed the obsolete retained-column comparison
+owner (four definitions) and its dedicated reviewer. The old-model input
+comparison remains for the still-active legacy connecting workflow. All 460
+modules in the protected native/reference union are byte-identical to
+`d35cc98e`, no remaining library/reviewer import dangles, and the surviving
+`freyd_native_column_comparisons.lp` reviewer passes at 90s/2048MiB/o20.
+The three dated source links now point to the exact published df9b4778 source.
+Catalog and all 178 book evidence claims pass; source-health registration is
+updated (1412 files; no aggregate LP rerun), snapshot `ca5d9fbe24ea8a4bda43552c48eefd1019f45586db0a280d3cae3a608b1f6996`.
+No TS source or current native comparison was removed.
+
+CC-2b inventory result: the old snake's 106-owner downstream closure contains
+324 declared symbols and has 37 reviewer consumers. A lexical symbol audit
+finds no TS source/test consumer. None of its owners intersects the protected
+native or ordinary-iterator closures. Six dedicated shell gates and the
+shared check/examples/metrics registries refer to this old route. Before
+retirement, verify the shared-gate dispatch blocks, all remaining formal symbol
+users and book/report links; delete the closed obsolete route and its own
+reviewers/gates without touching the new native snake or snake–LES comparison.
+The exact local inventory is `emdash2/tmp/probes/cc2_inventory.json`.

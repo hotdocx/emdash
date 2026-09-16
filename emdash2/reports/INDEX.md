@@ -437,7 +437,7 @@ NUH-5B2c2 (2026-09-14): the
 [raw whole column inputs](../emdash3_2_commutative_algebra_freyd_native_column_inputs.lp),
 [input comparisons](../emdash3_2_commutative_algebra_freyd_native_column_input_comparisons.lp),
 [native H comparisons](../emdash3_2_commutative_algebra_freyd_native_column_homology_comparisons.lp)
-and [retained H comparisons](../emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
+and [retained H comparisons](https://github.com/hotdocx/emdash/blob/df9b4778584121c3ad6ef7575093bd6d84be89e8/emdash2/emdash3_2_commutative_algebra_freyd_retained_column_homology_comparisons.lp)
 preserve the original inputs, H objects and selected inverses. Whole source
 recovery and existing diagram/fibre owners derive the comparisons. The
 actual whole δ's endpoints and its component between raw H objects check.
