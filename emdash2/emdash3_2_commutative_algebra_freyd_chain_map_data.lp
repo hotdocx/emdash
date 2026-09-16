@@ -2,7 +2,7 @@
    The two agreement observations are unchanged; no universal selection is used. */
 require open emdash.emdash3_2_chain_pair_maps;
 require open emdash.emdash3_2_commutative_algebra_freyd_chain_pair_data;
-require open emdash.emdash3_2_commutative_algebra_freyd_functorial_homology;
+require open emdash.emdash3_2_commutative_algebra_presentation_chain_inputs;
 
 // Generic composition owners on both sides of one existing raw agreement.
 symbol freyd_raw_composite_agreement_path [R : τ CommRing]

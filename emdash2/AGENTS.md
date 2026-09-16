@@ -198,6 +198,11 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   retain their original matrix and quotient computation. The generic
   weak-kernel and ordinary kernel/cokernel factor-fibre interfaces remain
   useful observation/provider vocabulary, not the primary whole K/Q API.
+- `emdash3_2_commutative_algebra_presentation_chain_inputs.lp` owns the
+  unchanged raw pair/map agreement classifiers and projections shared by
+  native inputs and retained ordinary consumers. Raw adapters import it
+  directly, without the former Freyd homology algorithms. Generic pair and
+  record-boundary separation remains in the consolidation plan.
 - Formal Freyd cokernel/kernel and selected-provider modules retain raw
   agreements, actual ranks/projections and all-test factor operations.
   Witnessed pre-Abelian/Abelian packages keep finite-free weak-kernel

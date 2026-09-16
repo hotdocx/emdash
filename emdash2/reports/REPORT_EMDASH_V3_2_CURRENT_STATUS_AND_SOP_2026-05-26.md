@@ -14,6 +14,12 @@ work. Op/duality and the large six-term comparison remain deferred.
 The user accepted that review as the new consolidation living plan and
 authorized local checkpoints after an initial main/Pages publication.
 
+CC-1a consolidation (2026-09-16): the [raw presentation chain-input owner](../emdash3_2_commutative_algebra_presentation_chain_inputs.lp)
+now holds four unchanged declarations formerly mixed with Freyd homology.
+Native pair/map adapters no longer import those former algorithms. Nine
+focused checks and exact warning comparisons qualify the move; body hashes,
+import-closure reductions and validation live in the consolidation plan.
+
 The dated milestone paragraphs below are historical snapshots. Their “next”
 or “remains required” wording is local to the stated checkpoint, not a current
 work queue. In particular, displayed LES transport, the final audit and the

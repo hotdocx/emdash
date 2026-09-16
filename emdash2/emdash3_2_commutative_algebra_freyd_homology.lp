@@ -10,19 +10,8 @@
   image equality, rewrite rule, or unification rule is introduced.
 */
 
+require open emdash.emdash3_2_commutative_algebra_presentation_chain_inputs;
 require open emdash.emdash3_2_commutative_algebra_freyd_selected_homology;
-
-symbol CommRingFreydChainPair
-  [R : τ CommRing]
-  [P2 P1 P0 : τ (@CommRingPresentation R)]
-  (dNext : τ (@CommRingPresentationMorphism R P2 P1))
-  (d : τ (@CommRingPresentationMorphism R P1 P0))
-  : Grpd
-≔ @CommRingPresentationMorphismAgreement R P2 P0
-    (@comm_ring_presentation_morphism_map R P2 P0
-      (@comm_ring_presentation_morphism_comp R P2 P1 P0 d dNext))
-    (@comm_ring_presentation_morphism_map R P2 P0
-      (@comm_ring_presentation_morphism_zero R P2 P0));
 
 symbol comm_ring_freyd_homology_cycle_presentation
   [R : τ CommRing]

@@ -422,6 +422,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_one_cat_image_kernel_point_paths.lp"),
     Path("emdash3_2_homology_family_records.lp"),
     Path("emdash3_2_chain_pair_homology_records.lp"),
+    Path("emdash3_2_commutative_algebra_presentation_chain_inputs.lp"),
     Path("emdash3_2_commutative_algebra_freyd_chain_pair_data.lp"),
     Path("emdash3_2_commutative_algebra_freyd_zero_cone_inputs.lp"),
     Path("emdash3_2_one_cat_arrow_diagrams.lp"),

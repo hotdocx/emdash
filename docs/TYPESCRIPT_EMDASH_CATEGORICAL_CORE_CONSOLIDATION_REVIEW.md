@@ -2,7 +2,7 @@
 
 Date: 2026-09-16
 
-Status: accepted living plan — publication checkpoint and goal startup
+Status: active — CC-0 published and CC-1a qualified; CC-1b next
 
 Plan-ID: TS-EMDASH-CATEGORICAL-CORE-CONSOLIDATION
 
@@ -187,9 +187,10 @@ independence is not yet complete source-import independence. In particular:
 | `one_cat_slice_paths` contains both ordinary slice closure and a generic proposition-fibre lemma | These were introduced for one pullback consumer. | Consider a small split along existing generic congruence/truncation owners; do not create a new omnibus module. |
 
 Names in this table abbreviate the corresponding `emdash3_2_*.lp` files.
-The first three edges are confirmed in current source. Their removal is an
-ownership proposal, not a claim that the old operations are currently
-executed or that the native model contracts secretly require the old model.
+These edges describe the reviewed baseline. CC-1a below now removes the
+first two; the boundary/record separation remains CC-1b. Their former presence
+did not imply that the old operations were executed or that the native model
+contracts required the old model.
 
 The older `kernel_adjunction_presentations`, `cokernel_adjunction_presentations`,
 `homology_families`, `zero_arrow_cone_homology`, `homology_record_connecting`,
@@ -286,8 +287,8 @@ typecheck or renewed normalization probe was run.
 
 | Tranche | Required result | State |
 | --- | --- | --- |
-| CC-0 | Checkpoint the accepted review and documentation; fast-forward main, push and verify the existing Pages deployment. Record the exact commit/run. Bootstrap an isolated continuation worktree. | In progress |
-| CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Next |
+| CC-0 | Checkpoint the accepted review and documentation; fast-forward main, push and verify the existing Pages deployment. Record the exact commit/run. Bootstrap an isolated continuation worktree. | Complete |
+| CC-1a | Extract unchanged raw chain-pair/map vocabulary into shared input owners. Native raw adapters cease importing former homology algorithms merely for those classifiers/projections. Record declaration identity, import closures, focused checks and warnings. | Qualified |
 | CC-1b | Separate native boundary observations from optional ordinary record views; factor remaining generic support only where an actual ownership/dependency benefit is established. Preserve original whole operations and data. | Pending CC-1a |
 | CC-2 | Inventory remaining legacy consumers and retire superseded wrapper families in bounded groups. Delete unused source/exports/check registrations; preserve shared CAS algorithms and explicitly retained ordinary references. No old/new compatibility proof requirement. | Pending dependency separation |
 | CC-3 | Review the primary whole terminal/initial and structural-adjunction interfaces, specify native owners/action/inverses/cuts, and implement the independently justified portion. Retain explicit qualifications for anything needing deferred profiles/duality; do not merely delete guards. | Pending ownership cleanup |
@@ -327,3 +328,87 @@ workflow builds the existing reviewer and deploys on relevant main changes;
 no package release is triggered. The existing semantic/book audit is reused
 for unchanged code. Infinity Codex recovery verifies 1210 responses at the
 session's main-worktree archive; isolated worktrees have no separate archive.
+
+
+CC-0 completed (2026-09-16): documentation checkpoint `df9b4778` includes
+this accepted living plan. Main fast-forwarded cleanly and origin/main now
+contains that exact commit. [Pages run 35131972244](https://github.com/hotdocx/emdash/actions/runs/35131972244)
+completed successfully for it (build and deployment). The separate
+`goal/categorical-core-consolidation-v3.2` worktree was created from that
+checkpoint and bootstrapped with the pinned pnpm wrapper; workspace contract
+passes. The persistent goal is active and delegates its details to this plan.
+
+CC-1a hypothesis: the existing raw `CommRingFreydChainPair`,
+`CommRingFreydHomologyChainMap`, and its upper/lower projections can move
+unchanged into `emdash3_2_commutative_algebra_presentation_chain_inputs.lp`,
+importing only raw presentation composition/zero operations. Requiring that
+owner directly from the shared pair/map adapters should remove their imports
+of the former Freyd homology algorithms. Preserve all four declaration texts
+and unqualified API names; module ownership changes explicitly, and qualified
+old-owner references were searched for (none found). No rule, classifier
+meaning, CAS choice or inverse data changes in this slice.
+
+Baseline: warning-enabled `freyd_native_maps.lp` and
+`commutative_ring_freyd_functorial_homology.lp` reviewers pass at
+90s/2048MiB with `OCAMLRUNPARAM=o=20`, under the serial resource guard.
+Post-change checks will include the new owner, both raw adapters, native
+input/map consumers and retained former-owner reviewers. Compare full warning
+inventories, declaration bodies/signatures, imports and signature mirrors;
+refresh source health/catalog metadata proportionally. This is an owner move,
+not new mathematical behavior requiring another handcrafted theorem test.
+
+
+CC-0 deployment verification: the public homepage responds successfully.
+The actual Vite-emitted [book asset](https://hotdocx.github.io/emdash/assets/emdash-book-DRPtWe8T.pdf)
+has SHA-256 `3064cdf8bffc6ba5eb2b63815e96903d4bc0b2c10f52efa76eb71c2278f48c7e`,
+byte-identical to the qualified local 0.9.0-dev PDF. The asset is fingerprinted;
+there is no unversioned `/emdash/emdash-book.pdf` route.
+
+CC-1a qualified (2026-09-16): the new
+[raw presentation input owner](../emdash2/emdash3_2_commutative_algebra_presentation_chain_inputs.lp)
+contains the four unchanged declarations. Both shared adapters import it
+directly; the former owners import it for their retained consumers. There
+are no new primitives, rewrites, unifiers, opaque bodies or changed signature
+mirrors. The preserved declaration-block SHA-256 values are
+`7deb31680afe0d0dfb988769ec51addbdb0859a4c160986eeaaf601ae01113c0`
+(pair) and `90a947c6ee8fea41cf06b2e7a6ecdd46ed31531d1b100800d26e1ed7ed18f14e`
+(map/projections). Each declaration occurs exactly once in the root library.
+
+Textual root-module import closures, including each root:
+
+| Consumer | Before | After |
+| --- | ---: | ---: |
+| Shared raw pair adapter | 74 | 40 |
+| Shared raw map adapter | 79 | 44 |
+| Native raw input | 91 | 67 |
+| Native raw map | 119 | 94 |
+| Native LES certificate views | 351 | 330 |
+
+The former Freyd homology/induced-homology algorithms are absent from these
+new closures. This does not claim removal of every ordinary record owner;
+that remaining direction is CC-1b.
+
+Validation: nine focused warning-enabled LP checks pass (new owner, both
+adapters, native input/map, whole H map, native model-arrow observer and the
+two retained former-owner reviewers). The six reviewers contain 25 existing
+assertions. The seven serial measured checks take 8.53–15.95s each, within
+90s/2048MiB with `OCAMLRUNPARAM=o=20`; no subject-reduction bypass or broader
+typecheck was used. Native-map before/after inventories match exactly at
+1460 warnings/1291 critical-pair heads and families; the retained induced-map
+reviewer matches at 1421/1252. Locations and parser inventories also match,
+with zero parser issues. Counts alone are not the comparison criterion.
+
+Source-health registration now includes the new owner; its 1412-file source
+snapshot is `772fdb432793456cd74ab4f40fc7350db015f5a36b022ed17c1bf51ad92c5b0e`.
+The no-check metadata refresh is explicit, not a claim of 1412 fresh checks.
+Catalog and TOC checks pass; all 178 book evidence claims still resolve.
+The TS mirrors retain the same names/telescopes; there is no TS source change.
+Exact local receipts are `emdash2/tmp/probes/cc1a_checks.json`,
+`cc1a_baseline.json` and `cc1a_warning_comparison.json`; the published baseline,
+unchanged blocks and target names above suffice to reconstruct the check.
+
+Next: CC-1b should separate the five raw generic chain-pair declarations from
+`computational_homology` and move the native semantic-boundary observations
+out of the mixed record owner, preserving their declaration bodies and
+checking the actual native consumers. Do not combine that move with a
+terminality rewrite or legacy API deletion.
