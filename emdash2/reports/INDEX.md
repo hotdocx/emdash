@@ -16,6 +16,15 @@ sixteen concrete proof observations pass. Public-pair alignment and
 displayed transport remain next in the
 [subplan](../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md).
 
+Middle-column comparison (2026-09-15): the
+[native middle comparison](../emdash3_2_commutative_algebra_freyd_native_middle_column_comparisons.lp)
+and its [quotient equation](../emdash3_2_commutative_algebra_freyd_native_middle_column_quotient_paths.lp)
+retain the original middle chain, raw target and inverse factors. Seven
+definitions add no primitive or rule. Ten assertions and three consumers check
+quotient reconstruction and composition with the original surrounding whole H
+maps. Their commuting equations with the raw public H maps remain next in the
+[model plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md).
+
 Categorical H point comparison (2026-09-15): the
 [boundary comparison](../emdash3_2_homology_family_point_diagrams.lp)
 retains actual diagrams and identity endpoint action. The original Q now

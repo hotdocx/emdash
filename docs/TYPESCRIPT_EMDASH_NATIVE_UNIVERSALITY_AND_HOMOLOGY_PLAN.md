@@ -36,6 +36,17 @@ hom_int/homd_int and groupoidal equality itself. The broader terminal/initial
 review follows the same criterion, under its separately qualified coherence
 profile; it is not justified merely by the present comparison's resource issue.
 
+NUH-5N2G3B2c2b1 adds the missing middle-column input/H comparisons and
+actual-target quotient equation from the original middle chain witness.
+Both inverse slots compute. The original incoming/outgoing whole H maps
+compose at the retained middle endpoints; equality with the raw public H maps
+is the next proof obligation. Seven definitions add no primitive or rule.
+The [model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records
+four passing focused checks at default 90s/2GiB and the direct native-map
+continuation; the extra family-map constructor experiment remains unpromoted.
+Displayed LES transport,
+NUH-6C3b2 and NUH-7 remain required.
+
 NUH-5N2G3B2c2a now uses an actual categorical boundary comparison in the
 H point map. The original whole Q acts on that map and its selected inverse;
 both H objects and public signatures stay fixed. Original whole quotient

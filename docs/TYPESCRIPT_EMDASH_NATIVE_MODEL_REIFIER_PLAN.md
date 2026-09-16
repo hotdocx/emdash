@@ -1042,6 +1042,59 @@ be retained when identifying the two displayed arrows; raw components alone
 are insufficient. This is the next required consumer, under the unchanged
 90s/2GiB probe guard, not a resumption of optional inverse-normal-form studies.
 
+### NUH-5N2G3B2c2b1: Middle Column Comparison — Qualified
+
+All three original column inputs now have their required H comparison maps.
+The new [middle input owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_middle_column_inputs.lp)
+uses the original middle chain witness and whole row maps. Incoming recovery
+is an observation of the existing whole kernel-input recovery. It requires
+no additional short-exact-row premise and performs no kernel/cokernel selection.
+
+The [native comparison owner](../emdash2/emdash3_2_commutative_algebra_freyd_native_middle_column_comparisons.lp)
+retains the actual raw target B₀→B₁→B₂ and its original chain witness.
+Input comparison and Ω evidence use the existing introduced-terminal owner;
+H comparison is H(n_M)∘c_M, with the original H and categorical point comparison.
+The fixed-forward equivalence selects the original two inverse factors.
+The [quotient equation](../emdash2/emdash3_2_commutative_algebra_freyd_native_middle_column_quotient_paths.lp)
+retains that actual target and K(diagram(n_M)), just as for the left/right
+columns. These are seven transparent definitions; no primitive, rule, opacity,
+model contract, new universal choice or output-exactness premise is added.
+
+The [actual middle reviewer](../emdash2/examples/freyd_native_middle_column_comparisons.lp)
+checks ten assertions, including both computed H inverse slots and both laws.
+Its comparison prefix does not declare extra row exactness. Subsequent consumers
+use the original LES row hypotheses to compose the original whole incoming H
+map with the middle comparison and the original whole outgoing H map with its
+selected inverse. They verify the retained endpoints; they do not yet prove
+agreement with the raw public H(i)/H(p). A third consumer uses the actual
+middle quotient equation.
+
+The three final owners and the actual reviewer pass at default 90s/2GiB,
+without a GC override. Measured owner checks take 11.837–20.480s; the final
+reviewer reuses its exact successful source/log. All four import-control
+warning inventories match, including locations, term heads, rule families
+and parser results. LHS, catalog/TOC, documentation and the 1374-file
+source-health snapshot pass. Source/log hashes and the owner audit are bound
+in `emdash2/tmp/probes/nuh5g3b2c2b1_qualification.json`. No repository aggregate
+or TypeScript typecheck was run for this additive formal slice.
+
+NUH-5N2G3B2c2b2 must prove that commuting comparison, then form the actual
+zero-pair equivalences and displayed CAS LES certificate. Use the original
+native comparison targets and diagram actions throughout. No caller-supplied
+naturality square or output exactness contract may replace those derivations.
+Displayed LES exactness remains false; NUH-6C3b2 and NUH-7 remain required.
+
+Exploration retained under `emdash2/tmp/probes/nuh5g3b2c2b_*`: observing an
+additional family-map constructor in native inputs leaves two comparisons
+between native source-family parents unresolved, even though the separate
+component observations check. That constructor is not promoted or required
+for the next step; compare the already existing native maps and their actual
+diagram actions directly. The independent point quotient-reflection and
+whole H-map quotient observation probes also check and remain available for
+that continuation. None establishes a new whole comparison in the parameter
+category. Do not resume a foundation rewrite or endpoint-normalization detour
+on the strength of these experiments.
+
 ### NUH-5N2G3B2c2a: Categorical H Comparison And Actual Column Quotients — Qualified
 
 The accepted construction now checks on both original named column H maps

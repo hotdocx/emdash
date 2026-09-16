@@ -310,6 +310,30 @@ design tranche.
 
 ## Subrow State And Next Experiment
 
+### NUH-5N2G3B2c2b1: Middle Column Comparison — Qualified
+
+The original middle chain now constructs its whole input, incoming recovery,
+native input comparison/equivalence, H comparison/equivalence and actual-target
+quotient equation. The comparison itself needs no new short-exact-row premise.
+Both H inverse slots retain the original selected factors. Ten assertions and
+three original-data consumers cover quotient reconstruction and composition
+with the existing incoming/outgoing whole H maps. These typed compositions
+are not yet commuting equations with the raw public H maps.
+
+Seven definitions add no primitive, rule, opacity or model contract. The
+[model plan](TYPESCRIPT_EMDASH_NATIVE_MODEL_REIFIER_PLAN.md) records the focused
+qualification and next direct comparison through actual native diagram actions.
+The extra family-map constructor is unpromoted; its two residual native-parent
+comparisons are not a prerequisite. Separate point quotient-reflection and
+H-map reconstruction observations have checked in ignored probes. Keep whole
+parameter comparison and general terminality claims outside this point slice.
+Three owner checks, the final original-data reviewer and all four warning
+controls pass at default 90s/2GiB. LHS, catalog/TOC, links/lifecycle and the
+1374-file source-health snapshot pass; exact evidence is bound in
+`emdash2/tmp/probes/nuh5g3b2c2b1_qualification.json`.
+Next prove the surrounding H-map comparison, transport the original exact
+pairs and qualify displayed LES exactness; NUH-6C3b2 and NUH-7 remain open.
+
 ### NUH-5N2G3B2c2a: Categorical H Comparison And Actual Column Quotients — Qualified
 
 The H point comparison now applies the original Q to an actual categorical
