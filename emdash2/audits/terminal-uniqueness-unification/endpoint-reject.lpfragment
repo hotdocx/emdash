@@ -1,0 +1,3 @@
+assertnot [C : Cat] [t : τ (Obj C)] (T : τ (@TerminalObject C t))
+  (A B : τ (Obj C)) (f : τ (Hom C A t)) ⊢
+  @eq_refl (Hom C A t) f : τ (@= (Hom C A t) f (@terminal_arrow_fapp0 C t T B));

@@ -775,3 +775,46 @@ the generic terminal-uniqueness unifier's inference audit, followed by Γ.
 UA-1/UA-2 promotion still requires an independently justified consumer; the
 higher interpretation and product bridge/final audit remain open. Op/profile
 migration and the six-term/older endpoint experiments remain deferred.
+
+Checkpoint `04c58855` contains the qualified UA-3e retirement and synchronized
+book/inventory. Its staged diff passed whitespace and local-link checks; the
+worktree was clean after commit. Main and the published baseline are unchanged.
+
+## UA-3f — Bounded Terminal-Uniqueness Inference Audit
+
+The exact user-discussed variable-sided unifier was tested at the terminal
+component owner position in an isolated full-source copy, without changing
+the library. Seven well-formed assertions pass: arbitrary f, composite,
+identity, two supplied terminal witnesses, omitted source inference, negative
+runtime conversion, and negative comparison of unrelated arbitrary arrows.
+The no-unifier control fails at the first f=!ₐ comparison. A separate omitted-
+provider definition is rejected with the TerminalObject(t) metavariable still
+unsolved. An incompatible-endpoint expected type is also rejected.
+
+The last control cannot be combined as an ordinary assertnot type assertion:
+Lambdapi validates its expected type first. The initial combined probe stopped
+there after the preceding seven checks. Splitting that expected failure into
+its own file gives a passing positive suite and three precise failing
+controls. It is not a resource failure or evidence against terminal uniqueness.
+
+All four programs, including the documented fragment-assembly replay, run in
+under one second with the serial 2GiB/90s/o20 profile and warnings/SR enabled.
+The rule and no-rule owners have the same seven inherited critical pairs,
+term heads and rule families, with no parser issue. The candidate adds exactly
+five replaceable-pattern-variable warnings for f,C,t,T,A at its own line;
+the two existing such warnings remain. No diagnostic is suppressed and no
+broader confluence guarantee is claimed.
+
+Durable fragments, exact commands, log names and qualification are in
+`emdash2/audits/terminal-uniqueness-unification/README.md`. The ordinary typed
+and inference behavior extends the original feasibility evidence. The actual
+native family consumers already work without this rule; it remains outside
+the library pending demonstrated consumer benefit and that consumer's import-
+context audit. This is a scoped no-promotion conclusion, not a return to the
+old infeasibility assumption. It changes no runtime normal form, model
+contract, compiled source or whole higher-terminality interpretation.
+
+The next dependency-ready application is UA-4, the retained Γ/whole-H
+comparison. UA-1/UA-2 consumer justification, broader higher qualification,
+UA-5 and the final audit remain open. This goal is active, with no current
+external blocker. The usual Op/profile, six-term and spectral deferrals remain.

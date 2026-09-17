@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; direct ordinary family API and all family-normalizer consumers qualified; uniqueness inference audit and later tranches open
+Status: active living implementation plan — accepted 2026-09-17; ordinary family migration and bounded uniqueness inference audit qualified; Γ and later tranches open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -317,7 +317,7 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | All family-normalizer consumers migrated and both primitives retired; all 94 nonsplit assertions pass. Generic uniqueness-unifier audit and higher interpretation remain open |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Separate bounded application |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
@@ -344,9 +344,9 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: audit the working terminal-uniqueness unifier's inference
-interactions after the qualified family-normalizer retirement, then resume
-the independently bounded Γ application. Keep UA-1/UA-2 promotion conditional
+Current queue: resume the independently bounded Γ application after the
+qualified family-normalizer retirement and isolated uniqueness inference
+audit. Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
 [adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
@@ -428,8 +428,18 @@ point endpoint computation, next-Hom action, whole endpoint laws and both
 inverse-law types. The former DefIso-specific wrapper API and raw inverse-cut
 tests are explicitly retired with the axioms, not relabelled as computations
 of IsoEvidence. Required native computations and original diagrams are
-preserved. The broader higher-terminality interpretation and the generic
-working terminal-uniqueness unifier audit remain open.
+preserved. The broader higher-terminality interpretation remains open.
+
+UA-3f's [bounded unifier audit](../emdash2/audits/terminal-uniqueness-unification/README.md#bounded-inference-audit-ua-3f)
+passes typed arbitrary-arrow, composite, identity, two-provider and omitted-
+source uses. Runtime nonconversion and unrelated-arrow controls remain
+negative; incompatible endpoints and an omitted terminal witness are rejected.
+The seven inherited critical pairs are unchanged; the exact candidate adds
+five replaceable-variable diagnostics at its own line. This extends the
+positive feasibility evidence without installing a rule. The current native
+consumers need no such rule, so promotion remains conditional on a concrete
+consumer and its import-context audit. No general higher terminality or
+all-inference guarantee is inferred.
 
 ## Review Evidence
 

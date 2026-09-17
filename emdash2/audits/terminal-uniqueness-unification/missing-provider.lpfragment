@@ -1,0 +1,3 @@
+symbol missing_terminal_provider [C : Cat] (A t : τ (Obj C)) (f : τ (Hom C A t))
+  : τ (@= (Hom C A t) f (@terminal_arrow_fapp0 C t _ A))
+≔ @eq_refl (Hom C A t) f;
