@@ -1,7 +1,7 @@
 # Primary Terminality: Categorical Comparison And Whole-Family Boundary
 
 Date: 2026-09-17
-Status: checked non-library constructions; whole-family replacement unfinished
+Status: whole-family comparison and inverse laws checked; public replacement unfinished
 Base: `10bff3059d999b7f0f59caa9977ad13ea034a0d3`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -82,10 +82,10 @@ to expose t∘V as const_t through the retained represented-action head. Its
 absence fails exactly at that endpoint comparison. It changes no runtime
 normal form and has not undergone a promotion audit.
 
-The right-hand category `[B,1](p∘F,V)` does not currently compare to Terminal_cat
-in the tested program. The retained control fails specifically at that type
-comparison. This does not prove that a whole categorical contraction cannot
-be derived. It identifies the next construction to investigate: coherent
+On the recorded baseline, the right-hand category `[B,1](p∘F,V)` does not
+compare to Terminal_cat in the tested program. The retained control fails
+specifically at that type comparison. This does not prove that a whole
+categorical contraction cannot be derived. It identified the next construction: coherent
 terminal-valued family action/contraction, retaining its inverse, or a direct
 whole comparison built from the native unit action. Merely constructing a new
 Adjunction from the same Hom data would not supply this step.
@@ -95,6 +95,59 @@ primitive solely to make this failed assertion pass. The acceptance target
 remains the actual terminal-family comparison, its original inputs/endpoints,
 inverse and whole action, followed by its dual. Existing native consumers
 continue to use their qualified implementation.
+
+## Follow-Up: Terminal-Target Computation And A Whole Comparison
+
+The narrower native computation
+
+```text
+Transf_cat(B,Terminal_cat,F,G) ↪ Terminal_cat
+```
+
+now closes that family-Hom comparison. It is a rule at the existing
+Transf_cat owner, guarded by the literal terminal target. It does not identify
+the objects F,G of Functor_cat(B,1) with a canonical functor, and adds no
+universal-structure primitive. A full-source no-rule control fails; direct,
+functor-Hom and next-Hom observations pass with the rule. All five owner
+warning inventories match, including 157 replaceable variables and 1144
+critical pairs. The focused `examples/terminal_target_transformations.lp`
+also exercises both terminal and initial lifted Hom comparisons and their
+whole inverse cuts, with native endpoints and no extra unifier.
+
+`whole-family-comparison.lpfragment` is the later standalone construction.
+The now-terminal Hom comparison gives an invertible whole modification
+h⇄k for arbitrary h,k:F⇒const_t. Existing ordinary square realization and
+exchange turn it into Arr(h)⇄Arr(k); all four whole endpoint maps compute to
+identities. Both whole diagram inverse laws are proved with the existing
+diagram-family reflection and generic evaluation composition/identity laws.
+The final IsoEvidence retains precisely those constructed maps and inverse.
+No functor is transported through equality and no caller supplies square
+proofs. The generic evaluation identity law is used explicitly because the
+corresponding identity projection did not close by immediate conversion.
+
+This is a whole-family result, beyond the earlier one-input construction.
+It still does not replace the original terminal-family DefIso. The remaining
+work includes choosing the primary public input and Terminal_cat profile,
+qualifying its direct initial dual, and connecting to the actual retained
+zero-column diagram rather than only its introduced Arr(k) presentation.
+The prototype's narrow constant-postcomposition view remains unpromoted.
+Its equality-valued inverse laws are not relabelled as judgmental DefIso
+cuts. The older family-contraction control now succeeds with the new core
+rule; reproduce its historical failure only against the recorded baseline.
+
+Additional logs:
+
+- full-source rule and no-rule control: `ua3tt_owner_checks-20260917-140212.log`
+  and `ua3ttbase_owner_checks-20260917-140310.log`;
+- lifted family contraction: `ua3tt_family_consumer-20260917-140243.log`;
+- whole maps and four endpoint identities:
+  `ua3_whole_terminal_diagram_comparison-20260917-140525.log`;
+- first whole inverse attempt: `ua3_whole_terminal_diagram_iso-20260917-141020.log`
+  (only the two identity-evaluation comparisons remain);
+- final whole inverse data and both laws:
+  `ua3_whole_terminal_diagram_iso_identity_law-20260917-141325.log`;
+- final eight-assertion terminal/initial reviewer:
+  `terminal_target_transformations-20260917-141758.log`.
 
 ## Reproduction And Evidence
 
@@ -107,7 +160,7 @@ cp audits/terminal-primary-family-boundary/family-mates.lpfragment tmp/probes/ua
 env OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 scripts/probe.sh tmp/probes/ua3_primary_terminal_family_constant_view.lp
 ```
 
-To reproduce the expected failures, append `runtime-identity-control.lpfragment`
+On the historical baseline, reproduce the expected failures by appending `runtime-identity-control.lpfragment`
 to the categorical comparison, or `family-contraction-control.lpfragment` to
 the family-mates fragment, in a distinct ignored `.lp` file. The first failure
 stops at the runtime identity comparison; its later inverse-composition check
@@ -132,6 +185,8 @@ identity and family controls fail at the same intended comparisons in
 `ua3_retained_family_control-20260917-135424.log`. The positive fragments match
 the checked programs (only the family fragment's explanatory header changed).
 
-No active library source, model contract or CAS code changes in this tranche.
-The earlier adjunction-introduction candidate is separately preserved in
+The initial audit changed no active source. The follow-up changes only the
+core terminal-target computation and its reviewer, with source documentation
+and generated inventories synchronized; model contracts and CAS code remain
+unchanged. The earlier adjunction-introduction candidate is separately preserved in
 `../adjunction-from-hom-comparison/` and is absent from these imports.

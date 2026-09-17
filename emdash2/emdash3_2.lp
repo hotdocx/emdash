@@ -9258,6 +9258,10 @@ symbol Product_pair_tele_func [A B : Cat]
 */
 injective symbol Transf_cat : Π [A B : Cat], Π (F G : τ (Functor A B)), Cat;
 
+// All transformations and higher cells into the terminal category are terminal.
+// The literal target is the discriminator; source and functor indices are inferred.
+rule @Transf_cat _ Terminal_cat _ _ ↪ Terminal_cat;
+
 // Object/type classifier of the ordinary transformation category.
 injective symbol Transf [A B : Cat] (F G : τ (Functor A B)) : Grpd
 ≔ Obj (@Transf_cat A B F G);

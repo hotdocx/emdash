@@ -1681,6 +1681,13 @@ propositional view.
 
 ### Sections 5–7: products, transfors, curry, and adjunctions
 
+The literal terminal-target transformation category computes to Terminal_cat:
+`Transf_cat(A,Terminal_cat,F,G) ↪ Terminal_cat`. The ordinary functor-category
+Hom rule and iterated terminal Hom rule expose the same result. Original
+functor objects and arbitrary nonterminal targets retain their existing
+owners. The focused `terminal_target_transformations` reviewer includes the
+whole Hom comparison of a lifted terminal adjunction and both inverse cuts.
+
 The product architecture includes:
 
 - `Product_cat`, componentwise homs, projections, pairing, and symmetry;

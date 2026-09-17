@@ -27933,3 +27933,9 @@ assertnot [C : Cat]
   (u : τ (Hom C X Y)) ⊢
   @slice_dependent_product_func C PB DP X Y u
   ≡ @slice_sigma_func C X Y u;
+
+// catalog-area: Categorical contraction and ordinary terminal adjunctions
+// The entire Hom between terminal-valued functors computes to the terminal category.
+assert [B : Cat] (F G : τ (Functor B Terminal_cat)) ⊢
+  Hom_cat (Functor_cat B Terminal_cat) F G ≡ Terminal_cat;
+// catalog-area: auto

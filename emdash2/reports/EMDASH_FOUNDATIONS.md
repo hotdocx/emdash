@@ -1180,6 +1180,13 @@ whose objects are transformations from `F` to `G`. A transformation
 ϵ[x] : Hom_B(F[x],G[x])
 ```
 
+For functors F,G:A→1, the entire transformation category computes to 1:
+`Transf_cat(A,Terminal_cat,F,G) ↪ Terminal_cat`. This includes its higher
+cells through the existing Hom₁ computation. The rule is guarded by the
+literal terminal target; it keeps the original functors as objects of
+Functor_cat(A,1). In particular it supplies the terminal Hom category needed
+when a terminal adjunction is lifted to whole functor families.
+
 Implementation note: Cat-valued horizontal action is now expressed through the
 generic product-composition owners `comp_prod_fapp1_func` and
 `comp_prod_fapp1_fapp0`, including their Cat instance projection ladder. The

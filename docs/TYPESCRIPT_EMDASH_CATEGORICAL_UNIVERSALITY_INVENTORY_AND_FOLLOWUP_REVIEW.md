@@ -311,7 +311,7 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | In progress: direct categorical comparisons checked; whole-family assembly open |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | In progress: whole terminal-family maps/inverse laws checked; primary interface and original-diagram integration open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Separate bounded application |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
@@ -379,18 +379,26 @@ realization gives the comparison at the original !ₓ with four computing
 identity endpoints. No new structural primitive, path-transported functor,
 or caller-supplied naturality square is needed for those constructions.
 
-The whole-family target remains open. Existing postcomposition gives
-`[B,C](F,t∘V)≅[B,1](p∘F,V)`, with whole mate reconstruction. The experiment
-needs a narrow constant-postcomposition view for the selected endpoint; it
-does not yet produce a coherent contraction of the right-hand family-Hom
-category. The failed Terminal_cat type comparison only rules out immediate
-conversion in that program. Next investigate this whole terminal-valued
-family action or a direct native-unit construction, then obtain the actual
-family diagram comparison with retained inverse and endpoint computation.
-The component IsoEvidence laws do not by themselves replace the existing
-whole DefIso cuts. No broad terminal-category normalization or new primary
-library interface is promoted by these experiments. The dual initiality and
-terminal-unifier interaction checks remain part of UA-3.
+The source now computes Transf_cat(B,Terminal_cat,F,G) to Terminal_cat.
+This narrower terminal-target rule closes the right-hand category in the
+existing lifted comparison `[B,C](F,t∘V)≅[B,1](p∘F,V)` without a new structure
+primitive. Both terminal and initial lifted Hom inverse cuts check. The
+follow-up prototype constructs the whole Arr(h)⇄Arr(k), four computing whole
+identity endpoints, and both whole IsoEvidence inverse laws. It retains the
+actual maps; equality is used in law evidence rather than to transport a
+functor. The earlier component-only boundary is therefore resolved for this
+whole introduced-family comparison.
+
+Next choose the primary public terminal/initial input and its Terminal_cat
+profile, and integrate the whole construction at the original zero-column
+diagram using the existing categorical reconstruction. The experimental
+constant-postcomposition view is still unpromoted. Do not silently replace
+the current whole DefIso cuts with merely asserted inverses or treat the
+introduced Arr(k) presentation as the original arbitrary diagram. The direct
+initial diagram construction, existing-consumer qualification and working
+terminal-unifier interaction checks remain part of UA-3. No new primary
+terminal library interface or general weak higher-terminal equivalence has
+yet been promoted.
 
 ## Review Evidence
 

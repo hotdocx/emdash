@@ -1,0 +1,230 @@
+/* UA-3 experiment: terminality supplied directly as p⊣t.
+   One experimental proof-time constant-postcomposition view is included.
+   No new primitive, runtime rewrite, or old TerminalObject input. */
+require open emdash.emdash3_2_one_cat_adjunction_family_views;
+
+// Candidate proof-time view of existing represented postcomposition by a constant.
+// Cat/id discriminate the represented action; the source B and selected t remain.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B _ $C
+    (@Const_func _ _ $t) _
+  ≡ @Const_func $B $C $t
+  ↪ [ tt ≡ tt ];
+
+
+symbol ua3_TerminalAdjunction [C : Cat] (t : τ (Obj C)) : Grpd
+≔ @Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t);
+
+symbol ua3_terminal_unit [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t))
+  : τ (@Transf C C (@id_func C) (@Const_func C C t))
+≔ @unit_adj_transf C Terminal_cat (Terminal_func C) (@Obj_func C t) J;
+
+symbol ua3_terminal_hom_iso [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  : τ (@DefIso Cat_cat (Hom_cat C x t) Terminal_cat)
+≔ @defiso_sym Cat_cat Terminal_cat (Hom_cat C x t)
+    (@adjunction_hom_component_iso C Terminal_cat (Terminal_func C) (@Obj_func C t)
+      J x Terminal_obj);
+
+// The lifted comparison retains the actual whole terminal-valued Hom.
+symbol ua3_terminal_family_iso [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  : τ (@DefIso Cat_cat
+      (Hom_cat (Functor_cat B C) F (@fapp0 _ _ (@comp_cat_cov_func B Terminal_cat C (@Obj_func C t)) V))
+      (Hom_cat (Functor_cat B Terminal_cat) (@fapp0 _ _ (@comp_cat_cov_func B C Terminal_cat (Terminal_func C)) F) V))
+≔ @defiso_sym Cat_cat _ _
+    (@adjunction_hom_component_iso (Functor_cat B C) (Functor_cat B Terminal_cat)
+      (@comp_cat_cov_func B C Terminal_cat (Terminal_func C))
+      (@comp_cat_cov_func B Terminal_cat C (@Obj_func C t))
+      (@one_cat_postcomp_adjunction B C Terminal_cat C1 T1 (Terminal_func C) (@Obj_func C t) J)
+      F V);
+
+// The terminal endpoint is the actual chosen constant family.
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat)) ⊢
+  @ua3_terminal_family_iso B C C1 T1 t J F V
+  : τ (@DefIso Cat_cat
+      (Hom_cat (Functor_cat B C) F (@Const_func B C t))
+      (Hom_cat (Functor_cat B Terminal_cat) (@fapp0 _ _ (@comp_cat_cov_func B C Terminal_cat (Terminal_func C)) F) V));
+
+// The retained mate and inverse reconstruct an arbitrary whole h.
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @fapp0 _ _ (@defiso_from _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V))
+    (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) h)
+  ≡ h;
+
+require open emdash.emdash3_2_one_cat_arrow_diagrams;
+
+symbol ua3_family_terminal_base_iso (a b : τ (Obj Terminal_cat))
+  : τ (IsoEvidence Terminal_cat a b)
+≔ Struct_sigma Terminal_obj (Struct_sigma Terminal_obj
+    (Struct_sigma (@eq_refl Unit_grpd Terminal_obj) (@eq_refl Unit_grpd Terminal_obj)));
+
+symbol ua3_family_parallel_iso [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (IsoEvidence (Hom_cat (Functor_cat B C) F (@Const_func B C t)) h k)
+≔ @iso_evidence_fmap Terminal_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t))
+    (@defiso_from _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V))
+    (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) h)
+    (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) k)
+    (@ua3_family_terminal_base_iso
+      (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) h)
+      (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) k));
+
+symbol ua3_family_diagram_to [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) h)
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) k))
+≔ @sym_func_func_transf WalkingArrow_cat B C
+    (@walking_arrow_func (Functor_cat B C) F (@Const_func B C t) h)
+    (@walking_arrow_func (Functor_cat B C) F (@Const_func B C t) k)
+    (@one_cat_square_diagram_transf (Functor_cat B C) (@one_cat_functor_category B C C1)
+      F F (@Const_func B C t) (@Const_func B C t) h k
+      (@id (Functor_cat B C) F) (@id (Functor_cat B C) (@Const_func B C t))
+      (@iso_evidence_to (Hom_cat (Functor_cat B C) F (@Const_func B C t)) h k
+        (@ua3_family_parallel_iso B C C1 T1 t J F V h k)));
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @sym_transf_tapp0_transf B WalkingArrow_cat C _ _
+    (@ua3_family_diagram_to B C C1 T1 t J F V h k) walking_arrow_src
+  ≡ @id (Functor_cat B C) F;
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @sym_transf_tapp0_transf B WalkingArrow_cat C _ _
+    (@ua3_family_diagram_to B C C1 T1 t J F V h k) walking_arrow_tgt
+  ≡ @id (Functor_cat B C) (@Const_func B C t);
+
+symbol ua3_family_diagram_from [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) k)
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) h))
+≔ @sym_func_func_transf WalkingArrow_cat B C
+    (@walking_arrow_func (Functor_cat B C) F (@Const_func B C t) k)
+    (@walking_arrow_func (Functor_cat B C) F (@Const_func B C t) h)
+    (@one_cat_square_diagram_transf (Functor_cat B C) (@one_cat_functor_category B C C1)
+      F F (@Const_func B C t) (@Const_func B C t) k h
+      (@id (Functor_cat B C) F) (@id (Functor_cat B C) (@Const_func B C t))
+      (@iso_evidence_from (Hom_cat (Functor_cat B C) F (@Const_func B C t)) h k
+        (@ua3_family_parallel_iso B C C1 T1 t J F V h k)));
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @sym_transf_tapp0_transf B WalkingArrow_cat C _ _
+    (@ua3_family_diagram_from B C C1 T1 t J F V h k) walking_arrow_src
+  ≡ @id (Functor_cat B C) F;
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @sym_transf_tapp0_transf B WalkingArrow_cat C _ _
+    (@ua3_family_diagram_from B C C1 T1 t J F V h k) walking_arrow_tgt
+  ≡ @id (Functor_cat B C) (@Const_func B C t);
+
+require open emdash.emdash3_2_one_cat_diagram_family_paths;
+
+symbol ua3_family_diagram_left_law [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (@= (@Transf B (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h))
+      (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h)))
+≔ @one_cat_diagram_family_map_path B C C1 (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h))
+    (@eq_trans (@Transf B C F F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k)) walking_arrow_src) (@id (Functor_cat B C) F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h)) walking_arrow_src)
+      (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_src
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k))
+      (@eq_sym (@Transf B C F F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h)) walking_arrow_src) (@id (Functor_cat B C) F) (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src) (@transf_arrow_diagram_func B C F (@Const_func B C t) h))))
+    (@eq_trans (@Transf B C (@Const_func B C t) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k)) walking_arrow_tgt) (@id (Functor_cat B C) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h)) walking_arrow_tgt)
+      (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_tgt
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@ua3_family_diagram_from B C C1 T1 t J F V h k) (@ua3_family_diagram_to B C C1 T1 t J F V h k))
+      (@eq_sym (@Transf B C (@Const_func B C t) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h)) walking_arrow_tgt) (@id (Functor_cat B C) (@Const_func B C t)) (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt) (@transf_arrow_diagram_func B C F (@Const_func B C t) h))));
+
+symbol ua3_family_diagram_right_law [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (@= (@Transf B (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k))
+      (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)))
+≔ @one_cat_diagram_family_map_path B C C1 (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k))
+    (@eq_trans (@Transf B C F F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k)) walking_arrow_src) (@id (Functor_cat B C) F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)) walking_arrow_src)
+      (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_src
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k))
+      (@eq_sym (@Transf B C F F) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)) walking_arrow_src) (@id (Functor_cat B C) F) (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src) (@transf_arrow_diagram_func B C F (@Const_func B C t) k))))
+    (@eq_trans (@Transf B C (@Const_func B C t) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k)) walking_arrow_tgt) (@id (Functor_cat B C) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)) walking_arrow_tgt)
+      (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_tgt
+      (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@ua3_family_diagram_to B C C1 T1 t J F V h k) (@ua3_family_diagram_from B C C1 T1 t J F V h k))
+      (@eq_sym (@Transf B C (@Const_func B C t) (@Const_func B C t)) (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@transf_arrow_diagram_func B C F (@Const_func B C t) k) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)) walking_arrow_tgt) (@id (Functor_cat B C) (@Const_func B C t)) (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt) (@transf_arrow_diagram_func B C F (@Const_func B C t) k))));
+
+symbol ua3_family_diagram_iso [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t)))
+  : τ (IsoEvidence (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k))
+≔ Struct_sigma (@ua3_family_diagram_to B C C1 T1 t J F V h k) (Struct_sigma (@ua3_family_diagram_from B C C1 T1 t J F V h k)
+    (Struct_sigma (@ua3_family_diagram_left_law B C C1 T1 t J F V h k)
+      (@ua3_family_diagram_right_law B C C1 T1 t J F V h k)));
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @iso_evidence_to (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)
+    (@ua3_family_diagram_iso B C C1 T1 t J F V h k) ≡ (@ua3_family_diagram_to B C C1 T1 t J F V h k);
+
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h k : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @iso_evidence_from (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C F (@Const_func B C t) h) (@transf_arrow_diagram_func B C F (@Const_func B C t) k)
+    (@ua3_family_diagram_iso B C C1 T1 t J F V h k) ≡ (@ua3_family_diagram_from B C C1 T1 t J F V h k);

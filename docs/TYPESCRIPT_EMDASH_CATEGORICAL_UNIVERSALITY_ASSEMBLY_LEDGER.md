@@ -317,3 +317,120 @@ audit. Active library computation, model contracts, CAS source and native
 LES/snake remain unchanged. UA-3 remains in progress; initiality, full family
 action and uniqueness-unifier interactions remain required. UA-1/UA-2,
 Γ and the other accepted tranches remain open under the same goal.
+
+### UA-3b Hypothesis: Terminal-Target Transformation Categories
+
+Previous turn classification: progress, checkpoint `6bc2a12b` preserved the
+exact constructor experiment and established the categorical comparison
+construction with its typed inverse laws and endpoint computations.
+
+Current source inspection identifies a smaller computational hypothesis for
+the whole-family step: Transf_cat(B,Terminal_cat,F,G) should compute to
+Terminal_cat. All transformations and higher cells into the terminal category
+are terminal-valued, independently of the source B. This is the Hom-category
+of Functor_cat(B,1), not a proposed normalization of every functor B→1 to one
+term. No generic Hom→Adjunction introduction is needed for this hypothesis.
+
+Test one literal-terminal-target clause at the Transf_cat owner in a full
+source copy. Check both the direct and Functor-category Hom routes, the next
+Hom, and the original lifted terminal-family comparison, with an unchanged
+source control and warning/SR comparison. Arbitrary targets must retain their
+old behavior. Reject or refine the clause if these routes lose typing, if
+unrelated warning families change, or if the actual whole-family inverse and
+diagram endpoint consumer does not follow. A successful type-level fold alone
+does not complete UA-3; retain the original family h and its higher action,
+then audit initiality and the existing computational cuts before promotion.
+
+The full-source candidate and direct/next-Hom tests pass; the identical
+no-clause control fails at the first required conversion. All five warning
+inventories match after accounting for four inserted source lines: 157
+replaceable variables, 1144 critical pairs, no parser issue. The actual
+lifted-family program now checks its terminal comparison target and whole
+mate reconstruction (`ua3tt_family_consumer-20260917-140243.log`). The clause
+is provisionally in the working source for downstream qualification; it is
+not yet checkpointed as qualified.
+
+The resulting whole comparison constructs Arr(h)⇄Arr(k) for whole
+h,k:F⇒const_t, with all four whole endpoint projections computing to
+identities (`ua3_whole_terminal_diagram_comparison-20260917-140525.log`).
+The original h,k and selected Hom inverse remain in these terms. This is
+not the former component-only result, and no new structure primitive is
+used. The prototype still carries the ordinary Terminal_cat profile
+explicitly and uses the recorded experimental constant-postcomposition view.
+
+The existing full nucleus diagnostics were killed with exit 137 at
+o=20,v=1024 (`emdash3_2_checks-20260917-140755.log`). The initial memory-limit
+interpretation was not established: log timestamps show about 90 seconds
+after accounting for local time, and the user-systemd journal reports a
+runtime time limit. The o=5,v=1024 retry likewise reaches the same deadline
+(`emdash3_2_checks-20260917-141048.log`). Its slower import progress is not
+evidence of a new positive assertion failure or an OOM result.
+
+Core and adjunction-mate `.lpo` parents are absent in this worktree. Next use
+the installed documented --gen-obj mode so successfully checked parent
+modules can be linked on continuation. Each invocation retains the same
+6GiB/90s guard, warnings and subject reduction. A partial compile may only
+be reused after verifying actual generated objects; no running process is
+restarted based on an observation timeout. No deadline or global resource
+limit is increased, and source-level warning comparisons remain the already
+recorded uncached owner runs.
+
+### UA-3b Qualified Core Computation And Retained Whole Inverse
+
+The core clause is now qualified for a local checkpoint. The final reviewer
+has eight assertions (seven positive, one negative): literal target, functor
+Hom and next-Hom computation, the arbitrary-target control, and both whole
+inverse cuts for terminal and initial lifted adjunctions. Its two helpers
+are definitions from the existing adjunction lift, not new structure. The
+central diagnostics also contain the terminal-valued functor Hom assertion.
+
+The whole comparison's first inverse-law attempt stopped at the two
+identity-evaluation comparisons. Using the existing generic fapp1_id_path
+alongside evaluation composition and diagram-family reflection closes both
+laws. The actual forward/inverse maps are unchanged. The resulting whole
+IsoEvidence and its two arrow projections check in
+`ua3_whole_terminal_diagram_iso_identity_law-20260917-141325.log`. Its exact
+standalone source is retained in the linked audit as
+`whole-family-comparison.lpfragment`. The only local comparison rule in that
+fragment is the already recorded experimental constant-postcomposition view.
+
+Validation and scope:
+
+- uncached full-source owner/control warning inventories all match; the
+  receipt is `tmp/probes/ua3_terminal_target_warning_delta.json`;
+- final focused terminal/initial reviewer passes:
+  `terminal_target_transformations-20260917-141758.log`;
+- existing terminal-adjunction, cokernel family-input and direct native
+  connecting reviewers pass at 2GiB/90s/o20 with warnings and SR enabled:
+  `one_cat_terminal_adjunctions-20260917-142200.log`,
+  `one_cat_cokernel_family_inputs-20260917-142227.log`, and
+  `one_cat_native_connecting-20260917-142026.log`;
+- the first --gen-obj integration attempt reached its 90-second limit while
+  generating 55 actual compiled parent modules; it did not establish an OOM.
+  Verbose expanded warning printing remained costly. The ordinary quiet
+  diagnostic gate with the checked parents then passes in about 26 seconds
+  (`emdash3_2_checks-20260917-141812.log`). After adding the central assertion,
+  the final complete diagnostics pass in about 8.8 seconds
+  (`emdash3_2_checks-20260917-142309.log`). Both use 6GiB/90s/o20,v1024,
+  --gen-obj and the usual quiet warning setting; SR is enabled. The separate
+  changed-owner warning comparison remains the uncached evidence above;
+- strict LHS audit has zero unreviewed slots (64 annotated slots across 41
+  existing clauses); source TOC and strict catalogue pass; the catalogue now
+  contains 2369 checks and zero unclassified checks;
+- source-only health covers 1259 files with snapshot
+  `317f3876eee6ba55e726afcce668f253cdc6a7a399dd586c43f98c798228fd43`.
+  It does not claim fresh execution of all registered targets;
+- book evidence remains green at 182 claims. This narrow computation changes
+  source exposition in Foundations/current status; book synthesis remains in
+  the goal's final documentation tranche. No repo-wide TypeScript aggregate
+  was run.
+
+Final core SHA-256:
+`24a4aab2c1691ca6baadf2a0a5900b2f6dbaf3f6bdc242ac8a368e75f2ba4ff9`.
+The only promoted mathematical-source change in this tranche is the one
+terminal-target Transf_cat rule. Models, K/Q/H/δ and CAS contracts are not
+changed. The whole comparison remains an audited construction awaiting its
+public primary interface, Terminal_cat profile, direct initial-diagram dual
+and original zero-column integration. Its existing law proofs are not
+silently promoted to new DefIso runtime cuts. UA-3 and the overall goal
+remain in progress; the deferred Op/profile and six-term work stays deferred.
