@@ -156,6 +156,17 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   adjunction and family modules retain the same chosen product functor.
   The consolidation inventory distinguishes these structural declarations
   from their derived whole operations and proof-time comparisons.
+  `emdash3_2_one_cat_terminal_adjunction_families.lp` now defines a direct
+  ordinary family interface from the existing Adjunction witness, with no old
+  TerminalObject or caller square proof as a primary input. The literal
+  terminal profile has explicit inverse data and one scoped ground proof-time
+  eta instance in `emdash3_2_terminal_category_profile.lp`. The earlier
+  DefIso normalizers remain in production pending the active plan's migration;
+  do not describe the new IsoEvidence laws as new runtime inverse cuts.
+  Generic reflection, original-D reconstruction and invertible-modification
+  action live in the independent `one_cat_diagram_family_reflection`,
+  `one_cat_diagram_family_reconstruction` and `one_cat_arrow_family_isomorphisms`
+  owners. They preserve the existing moved maps and require no kernel choices.
 - `emdash3_2_kernel_cokernel_adjunctions.lp` owns primary whole K/Q and
   J⊣K/Q⊣I. The mate, transpose and zero-column modules supply whole universal
   operations without selected W/V dictionaries. Image/coimage families and

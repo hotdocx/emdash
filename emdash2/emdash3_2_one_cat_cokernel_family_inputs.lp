@@ -4,6 +4,7 @@
    reconstruction there. No pointwise naturality data or new diagram is
    substituted for the original universal-operation input. */
 require open emdash.emdash3_2_one_cat_diagram_family_paths;
+require open emdash.emdash3_2_one_cat_diagram_family_reconstruction;
 require open emdash.emdash3_2_one_cat_arrow_diagrams;
 
 // Canonical whole zero through the original initial/terminal family arrows.
@@ -54,23 +55,6 @@ symbol one_cat_cokernel_family_introduced_input [B C : Cat]
           walking_arrow_src walking_arrow_tgt walking_arrow_generator) u
         (@path_to_hom (Hom_cat (Functor_cat B C) X Y)
           (@comp_fapp0 (Functor_cat B C) X A Y u k) (@zero_arrow_family_zero_transf B C t T T0 X Y) z)));
-
-// Reconstruct Sym(D) in Functor_cat(B,C), then exchange back, retaining D.
-symbol one_cat_diagram_family_reconstruction_from [B C : Cat]
-  (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
-  : τ (@Transf B (Functor_cat WalkingArrow_cat C) D
-      (@transf_arrow_diagram_func B C
-        (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)
-        (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)
-        (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
-≔ @sym_func_func_transf WalkingArrow_cat B C
-    (@sym_func B WalkingArrow_cat C D)
-    (@walking_arrow_func (Functor_cat B C)
-      (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_src)
-      (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)
-      (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-    (@one_cat_diagram_reconstruction_from (Functor_cat B C) (@one_cat_functor_category B C C1)
-      (@sym_func B WalkingArrow_cat C D));
 
 // General original diagram family: construct the same map while retaining D.
 symbol one_cat_cokernel_family_input [B C : Cat]

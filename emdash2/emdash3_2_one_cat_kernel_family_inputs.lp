@@ -43,19 +43,6 @@ symbol one_cat_kernel_family_introduced_input [B C : Cat] (C1 : τ (IsNCat (cat_
   C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) walking_arrow_src walking_arrow_tgt
   walking_arrow_generator)));
 
-// Apply the existing forward reconstruction to Sym(D), then exchange back.
-symbol one_cat_diagram_family_reconstruction_to [B C : Cat]
-  (C1 : τ (IsNCat (cat_succ cat_zero) C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
-  : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func B C (@diagram_family_at_func B
-    WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)
-    (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src walking_arrow_tgt walking_arrow_generator)) D)
-≔ @sym_func_func_transf WalkingArrow_cat B C (@walking_arrow_func (Functor_cat B C) (@diagram_family_at_func B
-  WalkingArrow_cat C D walking_arrow_src) (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt)
-  (@diagram_family_transf B WalkingArrow_cat C D walking_arrow_src walking_arrow_tgt walking_arrow_generator))
-  (@sym_func B WalkingArrow_cat C D)
-    (@one_cat_diagram_reconstruction_to (Functor_cat B C) (@one_cat_functor_category B C C1) (@sym_func B
-      WalkingArrow_cat C D));
-
 // Retain D itself as the target of the native kernel-mate input.
 symbol one_cat_kernel_family_input [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t)) (X : τ (Functor B C)) (D : τ (Functor B

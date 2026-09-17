@@ -12,7 +12,7 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 2369
+- Total checks: 2372
 - Mapped areas: 117
 - Legacy source-line tags: 0
 - Unclassified checks: 0
@@ -135,7 +135,7 @@ stable mathematical-area scopes rather than source locations.
 | Triangular/weighted binary-product compatibility | 5 |
 | Pullbacks and slice base change | 27 |
 | Slice dependent products and LCCC foundation | 9 |
-| Categorical contraction and ordinary terminal adjunctions | 1 |
+| Categorical contraction and ordinary terminal adjunctions | 4 |
 
 ## Section Details
 
@@ -3092,3 +3092,6 @@ stable mathematical-area scopes rather than source locations.
 | # | Check line | Statement |
 | ---: | ---: | --- |
 | 2369 | 27939 | `assert [B : Cat] (F G : τ (Functor B Terminal_cat)) ⊢ Hom_cat (Functor_cat B Terminal_cat) F G ≡ Terminal_cat;` |
+| 2370 | 27942 | `assert ⊢ terminal_category_one_cat : τ (IsNCat (cat_succ cat_zero) Terminal_cat);` |
+| 2371 | 27944 | `assert (x : τ Unit_grpd) ⊢ @fapp0 Terminal_cat (Core_cat Terminal_cat) (@omega_equiv_along_left_inv Cat_cat (Core_ca ...` |
+| 2372 | 27950 | `assert [B A C : Cat] (F : τ (Functor B A)) (t : τ (Obj C)) ⊢ @eq_refl (Functor B C) (@hom_postcomp_fapp0 Cat_cat Cat ...` |

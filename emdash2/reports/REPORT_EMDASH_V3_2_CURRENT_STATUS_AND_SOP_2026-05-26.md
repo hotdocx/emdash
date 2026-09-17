@@ -1681,6 +1681,23 @@ propositional view.
 
 ### Sections 5–7: products, transfors, curry, and adjunctions
 
+`emdash3_2_terminal_category_profile.lp` constructs the literal terminal
+category's discrete/ordinary profiles, retaining an explicit inverse to its
+core inclusion. Its ground proof-time id₁/constant-point view is an explicit
+terminal eta extension, not a global functor or terminal-arrow eta rewrite.
+`emdash3_2_one_cat_terminal_adjunction_families.lp` defines ordinary whole
+terminal/initial comparisons directly from an Adjunction witness, with the
+closed terminal profile used internally. Its optional whole arrow presentation
+retains an existing selected embedding. Results use actual maps/inverses and
+proved IsoEvidence laws; the former DefIso normalizers remain in production
+pending their scoped migration.
+
+Generic whole diagram reflection, reconstruction and invertible-modification
+action have independent owners in `one_cat_diagram_family_reflection`,
+`one_cat_diagram_family_reconstruction` and `one_cat_arrow_family_isomorphisms`.
+The three relocated observations retain their exact signatures and bodies.
+These derived modules introduce no new universal structure primitive.
+
 The literal terminal-target transformation category computes to Terminal_cat:
 `Transf_cat(A,Terminal_cat,F,G) ↪ Terminal_cat`. The ordinary functor-category
 Hom rule and iterated terminal Hom rule expose the same result. Original

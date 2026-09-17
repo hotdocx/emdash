@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; UA-3 categorical comparison experiments in progress; general introduction held for consumer justification
+Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; direct ordinary terminal/initial family API qualified; production normalizer migration pending
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -198,6 +198,8 @@ of a classifier does not construct an inhabitant for every category.
 | Initial object usage | The existing selected capability is `TerminalObject(Op_cat C,t)`; [additive categories](../emdash2/emdash3_2_additive_categories.lp) also derive initial-Hom contraction from preadditivity and a terminal object. | There is no second generic `InitialObject` classifier here. Derived point contraction is not automatically an inhabitant of the whole selected opposite-terminal capability; several native consumers retain it explicitly. |
 | `CatContraction(D)`, `CatdContraction(E)` | [Categorical contractions](../emdash2/emdash3_2_categorical_contractions.lp): definitions using Ω along the canonical whole terminal map. | They retain whole inverse functors. Family evaluation derives a fibre contraction; object/core IsContr is downstream. Terminality concerns contraction of the represented Hom family, not contraction of C itself. |
 | `one_cat_terminal_adjunction`, `one_cat_initial_adjunction` | [Ordinary terminal adjunctions](../emdash2/emdash3_2_one_cat_terminal_adjunctions.lp): two declared assemblies from the original selected capability and OneCat(C). | Supply p⊣t and t⊣p; evaluated Hom DefIso/Ω and uniqueness observations are derived. The selected mate into 1 is retained rather than cast to another functor. |
+| `terminal_category_groupoidal`, `terminal_category_discrete`, `terminal_category_one_cat` | [Literal terminal category profile](../emdash2/emdash3_2_terminal_category_profile.lp): closed definitions with an explicit constant inverse to the core inclusion. | One new ground proof-time eta instance identifies the canonical constant endofunctor of 1 with id₁. Runtime functor heads remain distinct; no arbitrary endofunctor or general terminal-object uniqueness unifier is installed. |
+| `one_cat_terminal_adjunction_family_*`, `one_cat_initial_adjunction_family_*` | [Direct family universality](../emdash2/emdash3_2_one_cat_terminal_adjunction_families.lp): definitions from the supplied p⊣t or t⊣p and OneCat(C), using the closed terminal profile. | Whole Hom DefIso, invertible modification and diagram IsoEvidence are derived. Default presentations use the original unit/counit; an optional whole arrow presentation preserves an existing selected embedding. No old TerminalObject or caller square proof is required by this primary API. |
 | `one_cat_terminal_arrow_family_iso`, `one_cat_initial_arrow_family_iso` | [Whole family universality](../emdash2/emdash3_2_one_cat_terminal_family_universality.lp): two declared ordinary DefIso instances. | Arr(h)≅J∘F for h:F⇒const_t; dually Arr(h)≅I∘F. Both directions have identity endpoint components. These bridge the new adjunction-unit/counit families to the original families; they are not yet derived from a primary general terminality package. |
 | `BinaryProducts(C,P)` | [Triangular products](../emdash2/emdash3_2_triangular_binary_products.lp): whole P:C×C→C, whole projections/pairing, Došen-style cuts and an action comparison. | Both pairing/unpairing functors and point inverse paths exist. The original file alone does not assemble the corresponding whole inverse certificate. |
 | `IsBinaryProduct_comp`, `BinaryProductPresentation(C,x,y)` | [Finite limits](../emdash2/emdash3_2_finite_limits.lp): definitions specializing computational weighted limits to the discrete two-object diagram. | This selects one product with a whole universal cone comparison. Unrelated choices at each pair do not automatically supply one coherent P. |
@@ -221,6 +223,7 @@ of a classifier does not construct an inhabitant for every category.
 | `ComputationalFiberProduct`, `ComputationalPushout` | [Additive fibre products](../emdash2/emdash3_2_computational_fiber_products.lp) and [pushouts](../emdash2/emdash3_2_computational_pushouts.lp): definitions using kernel of [f,−g] or cokernel of the dual biproduct difference. | Retained ordinary algebra/provider constructions. A generic whole pushout-family/adjunction interface and automatic assembly of all these objects into the chosen slice family are not asserted here. |
 | Whole H, Coim⇒Im, `OneCatAdjunctionNormality`, `OneCatAbelianAdjunctionStructure` | [H families](../emdash2/emdash3_2_homology_adjunction_families.lp), [normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp), [Abelian package](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp). | H is derived through the same K/Q. Normality is Ω evidence along the actual whole Coim⇒Im map, retaining its inverse. Native δ/exactness and their finite ordinary/CAS observations use this primary route. |
 | `one_cat_diagram_reconstruction_iso` | [Diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp): declared ordinary D∘E≅id on the walking-arrow diagram category. | Derived faithfulness and actual inverse diagram maps support the universal-operation consumers. This is a shape-comparison assembly, not a new kernel universality or an unrestricted equivalence with higher LaxArrow(C). |
+| `one_cat_arrow_family_comparison_evidence`, `one_cat_diagram_family_reconstruction_evidence` | [Arrow-family isomorphisms](../emdash2/emdash3_2_one_cat_arrow_family_isomorphisms.lp) and [family reconstruction](../emdash2/emdash3_2_one_cat_diagram_family_reconstruction.lp): fully defined whole maps and inverse-law evidence. | [Generic reflection](../emdash2/emdash3_2_one_cat_diagram_family_reflection.lp) and the two original reconstruction maps have independent owners; their moved signatures/bodies are unchanged. IsoEvidence laws are not advertised as additional DefIso runtime cuts. |
 | Γ and the whole H comparison | [Retained audit fragment](../emdash2/audits/categorical-family-introduction-boundary/README.md), not an active library declaration. | Γ should classify A,D,h:J∘A⇒D into RepresentedComma(J), then compare the whole H families. Constructor/object/source tests passed; target and further action remain unqualified. It is unrelated to the already existing slice-base-change γ cut despite the similar letter. |
 
 ## The Actual Relation Map
@@ -311,7 +314,7 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | In progress: whole terminal-family maps/inverse laws checked; primary interface and original-diagram integration open |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Direct ordinary API and original-column constructors check; production adoption and generic uniqueness-unifier audit remain |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Separate bounded application |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
@@ -338,9 +341,9 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: construct the actual terminal-family comparison from primary
-categorical universality; keep UA-1/UA-2 promotion conditional on demonstrated
-consumer benefit. The user's clarification prompted a
+Current queue: qualify and adopt the direct terminal/initial family operations
+in the production zero-column consumers; keep UA-1/UA-2 promotion conditional
+on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
 [adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
 assume an Adjunction and register agreement with named unit/counit or
@@ -389,16 +392,28 @@ actual maps; equality is used in law evidence rather than to transport a
 functor. The earlier component-only boundary is therefore resolved for this
 whole introduced-family comparison.
 
-Next choose the primary public terminal/initial input and its Terminal_cat
-profile, and integrate the whole construction at the original zero-column
-diagram using the existing categorical reconstruction. The experimental
-constant-postcomposition view is still unpromoted. Do not silently replace
-the current whole DefIso cuts with merely asserted inverses or treat the
-introduced Arr(k) presentation as the original arbitrary diagram. The direct
-initial diagram construction, existing-consumer qualification and working
-terminal-unifier interaction checks remain part of UA-3. No new primary
-terminal library interface or general weak higher-terminal equivalence has
-yet been promoted.
+The direct ordinary API now takes J:p⊣t or J:t⊣p itself and uses a closed
+Terminal_cat profile. Its chosen-presentation operation constructs a whole
+IsoEvidence from Arr(h) to the actual composed arrow family, preserving the
+original diagram through categorical reconstruction. Both native zero-column
+constructors check in its reviewer without caller-supplied terminal-profile
+or square evidence. The constant-postcomposition view is now at its existing
+family-view owner, with a failing no-view control and negative scope tests.
+
+The closed terminal profile uses one deliberately added ground proof-time
+eta law, id₁≡const₍*₎. Its inverse functor is an explicit constant functor;
+the core-target inverse law uses the genuinely discrete Path(Unit) assembly.
+This is not a claim that the profile follows from the former beta rules or
+that objectwise contractibility suffices for arbitrary directed categories.
+
+Production zero-column and other native consumers still use the existing
+DefIso normalizers. Next migrate their actual maps and observation proofs in
+a bounded tranche, preserving the required computation and using the new
+proved inverse laws. Do not silently downgrade DefIso cuts, substitute an
+introduced diagram for the original D, or require a retired-algorithm
+comparison. The broader higher-terminality interpretation and the generic
+working terminal-uniqueness unifier audit remain open. The two new scoped
+views do not install that variable-sided uniqueness rule.
 
 ## Review Evidence
 

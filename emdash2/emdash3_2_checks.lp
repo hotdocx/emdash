@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square emdash.emdash3_2_gray_interchanger emdash.emdash3_2_walking_circle_restriction;
+require open emdash.emdash3_2 emdash.emdash3_2_one_cat_terminal_adjunction_families emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas emdash.emdash3_2_gray_profiles emdash.emdash3_2_walking_arrow emdash.emdash3_2_gray_right_closure emdash.emdash3_2_gray_walking_square emdash.emdash3_2_gray_interchanger emdash.emdash3_2_walking_circle_restriction;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -27938,4 +27938,19 @@ assertnot [C : Cat]
 // The entire Hom between terminal-valued functors computes to the terminal category.
 assert [B : Cat] (F G : τ (Functor B Terminal_cat)) ⊢
   Hom_cat (Functor_cat B Terminal_cat) F G ≡ Terminal_cat;
+
+assert ⊢ terminal_category_one_cat : τ (IsNCat (cat_succ cat_zero) Terminal_cat);
+
+assert (x : τ Unit_grpd) ⊢
+  @fapp0 Terminal_cat (Core_cat Terminal_cat)
+    (@omega_equiv_along_left_inv Cat_cat (Core_cat Terminal_cat) Terminal_cat
+      (Core_incl_func Terminal_cat) terminal_category_groupoidal) x
+  ≡ Terminal_obj;
+
+assert [B A C : Cat] (F : τ (Functor B A)) (t : τ (Obj C)) ⊢
+  @eq_refl (Functor B C)
+    (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C (@Const_func A C t) F)
+  : τ (@= (Functor B C)
+      (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) B A C (@Const_func A C t) F)
+      (@Const_func B C t));
 // catalog-area: auto

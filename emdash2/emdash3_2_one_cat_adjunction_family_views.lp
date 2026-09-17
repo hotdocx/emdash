@@ -1,5 +1,5 @@
 /* Proof-time views of native whole-family adjunction mates.
-   The seven comparison helpers preserve the existing runtime owners.
+   The eight comparison helpers preserve the existing runtime owners.
    Congruence is sufficient: corresponding operands and endpoints must
    compare. This does not assert mathematical injectivity of composition.
    Whole formula agreement and reconstruction are derived through the
@@ -44,6 +44,13 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C
 unif_rule @hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $C $A _ _
     (@Const_func _ _ $t)
   ≡ @Const_func $A $C $t
+  ↪ [ tt ≡ tt ];
+
+// Proof-time constant postcomposition through its represented-action owner.
+// Cat/id is the actual represented-action discriminator; retain B, C and t.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B _ $C
+    (@Const_func _ _ $t) _
+  ≡ @Const_func $B $C $t
   ↪ [ tt ≡ tt ];
 
 // Sufficient congruence for a composite of two whole shape-arrow observations.

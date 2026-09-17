@@ -5826,6 +5826,24 @@ families to the original !/initial-arrow families with identity endpoints.
 The unit is not globally rewritten to !, so !ₜ keeps its existing normal
 form. No caller supplies a naturality-square proof.
 
+The direct ordinary family interface can instead start with the existing
+adjunction J:p⊣t itself. For F:B→C and h:F⇒const_t it constructs a whole
+isomorphism Arr(h)≅Arr(η_J)∘F, with actual forward/inverse maps and proved
+inverse laws. The dual uses the counit of t⊣p. A supplied whole presentation
+e:id_C⇒const_t (or its initial dual) can replace the default unit/counit
+presentation while preserving its actual composed diagram. These are
+definitions using the lifted Hom comparison and categorical reconstruction;
+their IsoEvidence law fields do not claim extra judgmental DefIso cuts.
+
+Terminal_cat's profile is now constructed with an explicit constant inverse
+to Core_cat(1)→1. Its core-target law uses the genuinely discrete Path(Unit)
+interface; the other law uses one ground proof-time eta instance
+id₁≡Const₁,₁(*). This is an explicit conversion extension for the literal
+terminal former. It keeps runtime functor heads and arbitrary named
+endofunctors distinct. No computational inverse is hidden in a supplied
+profile, and this construction does not generalize object-only IsContr to
+arbitrary directed categories.
+
 This is the independently qualified ordinary extension. Replacing the primary
 TerminalObject interface for general directed higher categories still requires
 a reviewed Hom comparison and its profile/variance interpretation. Current

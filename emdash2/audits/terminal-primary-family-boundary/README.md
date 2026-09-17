@@ -1,7 +1,7 @@
 # Primary Terminality: Categorical Comparison And Whole-Family Boundary
 
 Date: 2026-09-17
-Status: whole-family comparison and inverse laws checked; public replacement unfinished
+Status: direct ordinary public API implemented and checked; production DefIso migration pending
 Base: `10bff3059d999b7f0f59caa9977ad13ea034a0d3`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -125,15 +125,34 @@ No functor is transported through equality and no caller supplies square
 proofs. The generic evaluation identity law is used explicitly because the
 corresponding identity projection did not close by immediate conversion.
 
-This is a whole-family result, beyond the earlier one-input construction.
-It still does not replace the original terminal-family DefIso. The remaining
-work includes choosing the primary public input and Terminal_cat profile,
-qualifying its direct initial dual, and connecting to the actual retained
-zero-column diagram rather than only its introduced Arr(k) presentation.
-The prototype's narrow constant-postcomposition view remains unpromoted.
+This was the whole-family result beyond the earlier one-input construction.
+The subsequent public implementation is now
+`emdash3_2_one_cat_terminal_adjunction_families.lp`, using the existing
+adjunction witness directly. Its terminal and initial operations reach the
+actual selected diagram, and its reviewer instantiates both native K/Q zero
+columns. It uses a closed Terminal_cat profile internally. The constant-
+postcomposition view is now qualified at the existing family-view owner.
+The original terminal-family DefIso remains in production pending migration.
 Its equality-valued inverse laws are not relabelled as judgmental DefIso
 cuts. The older family-contraction control now succeeds with the new core
 rule; reproduce its historical failure only against the recorded baseline.
+
+The closed profile in `emdash3_2_terminal_category_profile.lp` retains an
+explicit inverse Terminal_cat→Core_cat(Terminal_cat). Its one new ground
+proof-time eta view compares Const_func(1,1,*) with id₁, while runtime forms
+and unrelated endofunctors remain distinct. Removing exactly that unifier
+from a temporary copy of the owner reproduces the failed right-roundtrip
+proof; the left law into Path(Unit) still derives through the existing
+discrete-target interface. This is an explicitly added conversion, not a
+claim of derivation from the earlier beta rules. The public profile reviewer
+checks the retained inverse and the narrow comparison boundaries.
+
+Generic fixed-endpoint arrow-family isomorphisms, original-D reconstruction
+and reflection now have independent categorical owners. Three existing
+definitions were relocated without changing their signatures or bodies.
+Neither the new generic owners nor the primary family API postulate a
+universal structure. The living ledger records final scoped tests, overlays
+of existing native consumers, and the remaining production migration.
 
 Additional logs:
 

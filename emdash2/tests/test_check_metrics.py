@@ -10,11 +10,12 @@ from pathlib import Path
 
 from scripts.check_metrics import (
     CheckResult,
-    SPECIAL_SNAKE_ROW_CHECK_FILES,
-    SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES,
-    SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES,
-    SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES,
-    SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES,
+    ISOLATED_CHECK_GROUPS,
+    NATIVE_SIX_TERM_GC_CHECK_FILES,
+    NATIVE_SIX_TERM_GC_SCRIPT,
+    NATIVE_SNAKE_PAIR_CHECK_FILES,
+    NATIVE_SNAKE_PAIR_SCRIPT,
+    lambdapi_check_command,
     SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES,
     SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES,
     SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES,
@@ -35,215 +36,46 @@ from scripts.check_metrics import (
 
 class CheckMetricsTests(unittest.TestCase):
     @patch("scripts.check_metrics.run_command")
-    def test_six_term_join_uses_one_isolated_chain(self, run_command) -> None:
-        run_command.side_effect = [(0, "", 1.0), (0, "", 6.0)]
-        files = [
-            Path("plain.lp"),
-            Path(
-                "emdash3_2_abelian_snake_six_term_"
-                "inner_kernel_u_zero_foundation.lp"
-            ),
-            Path("examples/abelian_snake_six_term_inner_zero.lp"),
-            Path("emdash3_2_abelian_snake_exact_third_result.lp"),
-            Path("emdash3_2_abelian_snake_six_term_exact_result.lp"),
-        ]
-
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-
-        self.assertEqual(status, 0)
-        self.assertEqual(run_command.call_count, 2)
-        self.assertEqual(
-            run_command.call_args_list[1],
-            call(["./scripts/check_abelian_snake_six_term.sh"]),
-        )
-        self.assertEqual(
-            [result.evidence for result in results],
-            [
-                "current",
-                "current-isolated-object-chain",
-                "current-isolated-object-chain",
-                "current-isolated-object-chain",
-                "current-isolated-object-chain",
-            ],
-        )
-
-    @patch("scripts.check_metrics.run_command")
-    def test_normalization_and_snake_groups_run_independently_once(self, run_command) -> None:
+    def test_current_groups_run_independently_without_reordering_results(self, run_command) -> None:
+        first_targets, first_script = ISOLATED_CHECK_GROUPS[-2]
+        second_targets, second_script = ISOLATED_CHECK_GROUPS[-1]
+        self.assertFalse(first_targets & second_targets)
+        first, second = sorted(first_targets), sorted(second_targets)
+        files = [first[0], second[0], first[-1], second[-1]]
         run_command.side_effect = [(0, "", 2.0), (0, "", 4.0)]
-        files = [
-            Path("emdash3_2_short_exact_normalization.lp"),
-            Path("emdash3_2_abelian_snake_six_term_exact_result.lp"),
-            Path("examples/short_exact_normalization.lp"),
-            Path("examples/abelian_snake_six_term_exact_result.lp"),
-        ]
         with redirect_stdout(StringIO()):
             results, status = run_checks(files, "90s")
         self.assertEqual(status, 0)
-        self.assertEqual(run_command.call_args_list, [
-            call(["./scripts/check_short_exact_normalization.sh"]),
-            call(["./scripts/check_abelian_snake_six_term.sh"]),
-        ])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
+        self.assertEqual(run_command.call_args_list, [call([first_script]), call([second_script])])
+        self.assertEqual([r.file for r in results], [str(p) for p in files])
 
     @patch("scripts.check_metrics.run_command")
-    def test_snake_row_owners_and_reviewers_share_one_fresh_chain(self, run_command) -> None:
-        run_command.return_value = (0, "", 8.0)
-        files = [
-            Path("emdash3_2_chain_pair_map_snake.lp"),
-            Path("emdash3_2_short_exact_row_snake.lp"),
-            Path("examples/snake_row_source_cycle_iso.lp"),
-            Path("examples/short_exact_row_snake_target.lp"),
-        ]
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_comparisons.sh"])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
+    def test_current_isolated_groups_run_once_and_keep_failures(self, run_command) -> None:
+        for targets, script in ISOLATED_CHECK_GROUPS:
+            for code in (0, 124):
+                with self.subTest(script=script, exit_code=code):
+                    run_command.reset_mock()
+                    run_command.return_value = (code, "group result", 3.0)
+                    files = sorted(targets)
+                    with redirect_stdout(StringIO()):
+                        results, status = run_checks(files, "90s")
+                    run_command.assert_called_once_with([script])
+                    self.assertEqual([r.file for r in results], [str(p) for p in files])
+                    self.assertTrue(all(r.returncode == code for r in results))
+                    self.assertEqual(status == 0, code == 0)
+                    if code == 0:
+                        self.assertTrue(all(r.evidence == "current-isolated-object-chain" for r in results))
 
-    def test_snake_row_dispatch_matches_the_actual_script_targets(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "scripts/check_snake_row_comparisons.sh"
-        targets = {
-            Path(name) for name in re.findall(
-                r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$",
-                script.read_text(encoding="utf-8"), re.MULTILINE,
-            )
-        }
-        self.assertEqual(len(targets), 17)
-        self.assertEqual(targets, SPECIAL_SNAKE_ROW_CHECK_FILES)
+    def test_current_native_targets_use_their_guarded_per_file_commands(self) -> None:
+        for targets, script in (
+            (NATIVE_SIX_TERM_GC_CHECK_FILES, NATIVE_SIX_TERM_GC_SCRIPT),
+            (NATIVE_SNAKE_PAIR_CHECK_FILES, NATIVE_SNAKE_PAIR_SCRIPT),
+        ):
+            for target in sorted(targets):
+                with self.subTest(target=target):
+                    self.assertEqual(lambdapi_check_command(target), [f"./{script}", str(target)])
+                    self.assertTrue((Path(__file__).resolve().parents[1] / target).is_file())
 
-    @patch("scripts.check_metrics.run_command")
-    def test_target_cycle_owners_and_reviewers_share_one_fresh_chain(self, run_command) -> None:
-        run_command.return_value = (0, "", 12.0)
-        files = sorted(SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_target_cycles.sh"])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
-
-    def test_target_cycle_dispatch_matches_the_actual_script_targets(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "scripts/check_snake_row_target_cycles.sh"
-        targets = {
-            Path(name) for name in re.findall(
-                r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$",
-                script.read_text(encoding="utf-8"), re.MULTILINE,
-            )
-        }
-        self.assertEqual(len(targets), 9)
-        self.assertEqual(targets, SPECIAL_SNAKE_TARGET_CYCLE_CHECK_FILES)
-
-    @patch("scripts.check_metrics.run_command")
-    def test_target_cycle_failure_is_not_reported_as_checked(self, run_command) -> None:
-        run_command.return_value = (124, "target cycle timeout", 90.0)
-        files = [Path("emdash3_2_snake_row_target_cycles.lp"), Path("examples/snake_row_target_cycles.lp")]
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertNotEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_target_cycles.sh"])
-        self.assertTrue(all(result.returncode == 124 for result in results))
-
-    @patch("scripts.check_metrics.run_command")
-    def test_target_homology_owners_and_reviewers_share_one_fresh_chain(self, run_command) -> None:
-        run_command.return_value = (0, "", 18.0)
-        files = sorted(SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_target_homology.sh"])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
-
-    def test_target_homology_dispatch_matches_owned_script_targets(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "scripts/check_snake_row_target_homology.sh"
-        source = script.read_text(encoding="utf-8")
-        sections = [re.search(rf"{name}=\((.*?)\n\)", source, re.DOTALL).group(1)
-                    for name in ("owners", "reviewers")]
-        targets = {Path(name) for section in sections for name in re.findall(
-            r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$", section, re.MULTILINE)}
-        self.assertEqual(len(targets), 6)
-        self.assertEqual(targets, SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES)
-        self.assertIn("prerequisites=(", source)
-        self.assertIn("check_object examples/snake_row_target_cycles.lp", source)
-
-    @patch("scripts.check_metrics.run_command")
-    def test_target_homology_failure_is_not_reported_as_checked(self, run_command) -> None:
-        run_command.return_value = (124, "target homology timeout", 90.0)
-        files = sorted(SPECIAL_SNAKE_TARGET_HOMOLOGY_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertNotEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_target_homology.sh"])
-        self.assertTrue(all(result.returncode == 124 for result in results))
-
-    @patch("scripts.check_metrics.run_command")
-    def test_source_boundary_owners_and_reviewers_share_one_fresh_chain(self, run_command) -> None:
-        run_command.return_value = (0, "", 18.0)
-        files = sorted(SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_source_boundary.sh"])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
-
-    def test_source_boundary_dispatch_matches_owned_script_targets(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "scripts/check_snake_row_source_boundary.sh"
-        source = script.read_text(encoding="utf-8")
-        sections = [re.search(rf"{name}=\((.*?)\n\)", source, re.DOTALL).group(1)
-                    for name in ("owners", "reviewers")]
-        targets = {Path(name) for section in sections for name in re.findall(
-            r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$", section, re.MULTILINE)}
-        self.assertEqual(len(targets), 6)
-        self.assertEqual(targets, SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES)
-        self.assertIn("prerequisites=(", source)
-        self.assertIn("emdash3_2_abelian_snake_six_term_inner_kernel_zero.lp", source)
-
-    @patch("scripts.check_metrics.run_command")
-    def test_source_boundary_failure_is_not_reported_as_checked(self, run_command) -> None:
-        run_command.return_value = (124, "source boundary timeout", 90.0)
-        files = sorted(SPECIAL_SNAKE_SOURCE_BOUNDARY_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertNotEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_source_boundary.sh"])
-        self.assertTrue(all(result.returncode == 124 for result in results))
-
-    @patch("scripts.check_metrics.run_command")
-    def test_homology_connecting_owners_and_reviewers_share_one_fresh_chain(self, run_command) -> None:
-        run_command.return_value = (0, "", 18.0)
-        files = sorted(SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_homology_connecting.sh"])
-        self.assertEqual([result.file for result in results], [str(path) for path in files])
-        self.assertTrue(all(result.evidence == "current-isolated-object-chain" for result in results))
-
-    def test_homology_connecting_dispatch_matches_owned_script_targets(self) -> None:
-        script = Path(__file__).resolve().parents[1] / "scripts/check_homology_connecting.sh"
-        source = script.read_text(encoding="utf-8")
-        sections = [re.search(rf"{name}=\((.*?)\n\)", source, re.DOTALL).group(1)
-                    for name in ("owners", "reviewers")]
-        targets = {Path(name) for section in sections for name in re.findall(
-            r"^\s+((?:examples/)?[a-z][a-z0-9_]*\.lp)$", section, re.MULTILINE)}
-        self.assertEqual(len(targets), 4)
-        self.assertEqual(targets, SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES)
-        self.assertIn("emdash3_2_snake_row_source_boundary_zero.lp", source)
-        self.assertIn("emdash3_2_snake_row_target_homology_factor.lp", source)
-
-    @patch("scripts.check_metrics.run_command")
-    def test_homology_connecting_failure_is_not_reported_as_checked(self, run_command) -> None:
-        run_command.return_value = (124, "homology connecting timeout", 90.0)
-        files = sorted(SPECIAL_HOMOLOGY_CONNECTING_CHECK_FILES)
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertNotEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_homology_connecting.sh"])
-        self.assertTrue(all(result.returncode == 124 for result in results))
 
     @patch("scripts.check_metrics.run_command")
     def test_exact_window_owners_and_reviewer_share_one_fresh_chain(self, run_command) -> None:
@@ -281,18 +113,6 @@ class CheckMetricsTests(unittest.TestCase):
         run_command.assert_called_once_with(["./scripts/check_homology_exact_window.sh"])
         self.assertTrue(all(result.returncode == 124 for result in results))
 
-    @patch("scripts.check_metrics.run_command")
-    def test_snake_row_failure_is_not_reported_as_checked(self, run_command) -> None:
-        run_command.return_value = (124, "bounded consumer timeout", 90.0)
-        files = [
-            Path("emdash3_2_abelian_snake_row_comparisons.lp"),
-            Path("examples/short_exact_row_snake.lp"),
-        ]
-        with redirect_stdout(StringIO()):
-            results, status = run_checks(files, "90s")
-        self.assertNotEqual(status, 0)
-        run_command.assert_called_once_with(["./scripts/check_snake_row_comparisons.sh"])
-        self.assertTrue(all(result.returncode == 124 for result in results))
 
     @patch("scripts.check_metrics.run_command")
     def test_window_family_targets_share_one_fresh_chain(self, run_command) -> None:

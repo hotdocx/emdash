@@ -434,3 +434,146 @@ public primary interface, Terminal_cat profile, direct initial-diagram dual
 and original zero-column integration. Its existing law proofs are not
 silently promoted to new DefIso runtime cuts. UA-3 and the overall goal
 remain in progress; the deferred Op/profile and six-term work stays deferred.
+
+## UA-3c — Reusable Whole Diagram Comparison And Original Inputs
+
+Previous turn classification: progress, checkpoint `669d19c7` qualifies the
+terminal-target computation and the whole-family comparison experiment.
+The current tranche factors derived whole diagram comparison/reflection and
+reconstruction at their categorical owners, then uses the original zero-column
+diagram as the target. It must not add a structure primitive merely to package
+the already constructed maps or require comparisons with retired algorithms.
+
+The initial reconstruction experiment evaluates the existing whole DefIso
+reconstruction law and maps it through exchange. Its proposed DefIso at an
+arbitrary whole diagram D typechecks. A direct runtime equality to the older
+named reconstruction map fails (`ua3_family_reconstruction_iso-20260917-142843.log`).
+This alone does not reject the construction; the required next checks are
+its own whole endpoints and inverse cuts. Existing names should be moved
+unchanged if the factorization is selected, avoiding an accidental change
+of their computation during dependency cleanup.
+
+The categorical requirements of the reconstruction candidate separate cleanly:
+all four whole endpoint computations pass, but the first raw inverse cut
+fails after generic evaluation/exchange projections have erased the inverse
+pattern (`ua3_family_reconstruction_iso_endpoints-20260917-143105.log`).
+No new global strictness or exchange-composition rewrite is being added to
+force that cut. The selected construction instead retains the two original
+maps unchanged and derives their IsoEvidence laws by existing whole
+diagram-family reflection and evaluation laws. The distinction from a new
+judgmental DefIso presentation remains explicit.
+
+Two reusable constructions now check: a whole arrow-family isomorphism from
+an invertible whole modification, and reconstruction evidence at the actual
+arbitrary D. Their generic reflection and reconstruction owners are being
+factored away from terminal and kernel/cokernel specializations. The three
+existing definitions moved so far retain their exact bodies and public names.
+These changes introduce no structural primitive or rule.
+
+The terminal comparison has also been composed through reconstruction to
+the original selected family, with the terminal arrow transfor supplied as
+presentation data and the adjunction supplied as universality. It checks at
+the actual native cokernel-unit zero column, including four computing point
+endpoints (`ua3_original_terminal_zero_column_consumer-20260917-144833.log`).
+This is direct construction of its new maps, not a comparison with a retired
+algorithm. The lifted construction still needs Terminal_cat's profile.
+
+A closed profile candidate now constructs an actual inverse
+Terminal_cat→Core_cat(Terminal_cat), constant at the canonical point, and
+both whole inverse laws. The Core target is Path(Unit), so the existing
+discrete-target pointwise assembly legitimately proves that roundtrip law.
+The other law uses one proposed ground proof-time eta view:
+Const_func(1,1,*)≡id₁. This is a new conversion principle for the literal
+terminal former, not a theorem claimed from its old beta rules. It does not
+fold either runtime functor or identify an arbitrary named endofunctor.
+The complete profile and seven tests pass
+(`ua3_terminal_category_profile-20260917-145225.log`); a no-view control is
+being checked before promotion. Both retained inverse projections compute to
+the explicit constant functor, so no computational inverse data is hidden in
+an opaque profile certificate.
+
+### UA-3c Qualification And Direct Public Interface
+
+The interrupted continuation made concrete source progress; all of its
+processes were terminal when work resumed. The no-eta control fails precisely
+at the closed core roundtrip law
+(`ua3_terminal_category_profile_control-20260917-145514.log`). The final
+literal-terminal profile is fully defined relative to that explicitly added
+ground conversion, with both inverse projections computing to the original
+constant functor. It supplies Terminal_cat's ordinary profile internally.
+
+`one_cat_terminal_adjunction_families` is now the direct ordinary API from
+J:p⊣t or J:t⊣p. Its whole Hom comparisons, modifications, presented-family
+comparisons and default unit/counit normalizations are definitions. Callers
+do not supply the terminal profile, a TerminalObject witness, or naturality
+squares. The reviewer applies the chosen-presentation operations to the
+original terminal/initial embeddings and both native K/Q zero columns:
+eight point endpoint computations and four actual zero-column map types pass
+(`one_cat_terminal_adjunction_families-20260917-151038.log`). This validates
+real native input shapes; production still calls the old DefIso normalizers,
+so adoption is explicitly the next tranche rather than a completed migration.
+
+The constant-postcomposition comparison is now at the existing family-view
+owner. Its owner-position candidate passes and the identical no-view control
+fails at the intended comparison (`ua3_const_postcomp_owner-20260917-145720.log`,
+`ua3_const_postcomp_owner_control-20260917-145910.log`). Positive and negative
+typed comparisons distinguish the selected value from an unrelated one and
+retain the runtime head. Both new owners have unchanged empty warning
+inventories against their controls; these are scoped unification views, not
+new runtime rules. Raw comparisons are preserved in
+`tmp/probes/ua3c_warning_comparisons.json`.
+
+The new reflection and reconstruction owners preserve all three relocated
+signatures and bodies byte-for-byte. No TypeScript/package/print source uses
+the former qualified owner paths. Two ignored compiled objects in the
+affected dependency closure were removed and regenerated after relocation;
+core and unrelated compiled parents were retained. The exact list is in
+`tmp/probes/ua3_relocated_owner_cache_invalidation.json`.
+
+Validation at this checkpoint:
+
+- generic arrow-family isomorphism: six assertions pass
+  (`one_cat_arrow_family_isomorphisms-20260917-143701.log`);
+- original-D reconstruction: six assertions and both defined whole inverse
+  laws pass (`one_cat_diagram_family_reconstruction-20260917-143823.log`);
+- closed terminal profile: seven scoped assertions pass
+  (`terminal_category_profile-20260917-150325.log`);
+- full nucleus diagnostics pass with the direct API loaded before the old
+  assertions (`emdash3_2_checks-20260917-151146.log`, normal quiet gate,
+  SR enabled, checked compiled parents, 6GiB/90s/o20,v1024);
+- the old terminal, cokernel-input and direct native connecting reviewers
+  also pass with the new interface loaded first, under warning/SR-enabled
+  2GiB/90s checks. Logs are `ua3c_overlay_terminal_objects-20260917-152150.log`,
+  `ua3c_overlay_one_cat_cokernel_family_inputs-20260917-152153.log`, and
+  `ua3c_overlay_one_cat_native_connecting-20260917-152158.log`;
+- affected rule-LHS audits and source TOC pass; catalogue is regenerated;
+  book evidence remains green at 182 claims;
+- source-only health covers 1269 files, snapshot
+  `8efcf56a22154b8fcbc00b997ffb1018bb1f111d55e004c08c2de7a49e861401`.
+  No all-target execution is claimed by this source snapshot.
+
+The nearest Python tooling test initially could not import five constants
+removed during the completed snake/reference retirement. The same missing
+imports and retired script tests exist at the committed baseline. Seventeen
+tests specific to those deleted routes were removed; current isolated-group
+success/failure dispatch and native guarded per-file commands now have
+replacement coverage. All 26 metrics tests pass, including independent-group report ordering. No retired runtime route was
+restored and no snake mathematics or deferred comparison was resumed.
+
+There are no new universal-structure primitives in these modules. The one
+new mathematical conversion is the ground terminal eta instance; the other
+view exposes existing constant-composition computation to unification. The
+direct results retain explicit maps/inverses with proved IsoEvidence laws;
+they do not add judgmental DefIso cancellation. Production adoption must
+preserve its required observations and computations rather than silently
+treating these packages as interchangeable. General higher terminality,
+generic terminal-uniqueness unifier qualification, Γ, UA-1/UA-2 and the other
+accepted tranches remain open.
+
+The final diagnostics preserve existing check line numbers by adding the
+new early import to the existing import command. The exact final suite
+passes in `emdash3_2_checks-20260917-152749.log` under the same quiet,
+SR-enabled compiled-parent profile. The standalone constant-view reviewer
+passes in `adjunction_family_constant_views-20260917-152659.log`. Diff, local
+links, script syntax, strict catalogue and source-snapshot checks are the
+remaining checkpoint hygiene; no publication or main mutation is authorized.
