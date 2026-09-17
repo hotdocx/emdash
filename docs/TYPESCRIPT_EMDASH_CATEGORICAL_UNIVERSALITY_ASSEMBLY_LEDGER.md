@@ -1014,3 +1014,97 @@ The eight focused reviewers, full nucleus, warning comparison, strict LHS,
 catalogue, TOC, current health snapshot and unchanged book evidence are green.
 No long repository-wide TypeScript check, Op/profile migration, deferred
 six-term comparison, main integration or publication was performed.
+
+### UA-4c — Whole Projection Comparisons For The Input Classifier
+
+Previous turn: progress at `7746a337`; the worktree is clean and no prior
+checker remains live. The consumer-first continuation starts with the whole
+comparison π∘total(s)⇒id, rather than requiring literal normalization of all
+Γ target cells. The baseline rejects the identity transformation at that
+whole type. An isolated proof-time projection beta makes the comparison
+form while retaining the two runtime functor heads.
+
+This beta is a newly selected structural identification for the intended
+section-total/projection operations, not a theorem derived from the former
+beta rules. Its input contains the original section; it assumes no output
+homology, inverse or naturality-square witness. The forward and inverse maps
+are identities at their respective original source functors. Their inverse
+laws then use the existing category unit cuts.
+
+The actual lifted-section base comparison is obtained by applying the existing
+postcomposition functor to that IsoEvidence. Existing family-composition
+views align its raw and represented endpoints. A narrow sufficient-congruence
+probe for composition with the same two arrows resolves the dependent-record
+comparison while comparing every endpoint. The whole comparison, inverse and
+inverse laws form; its component exposed repeated inferred source/target
+guards on ordinary identity transformations.
+
+The owner-position candidate omits those guards in the three existing ordinary
+identity-transformation projections, preserving their heads and right-hand
+sides. With that candidate, the lifted comparison's component computes to
+the original identity at F(x). No canonical functor or inverse is obtained by
+path transport. These changes remain experimental pending owner/consumer,
+inference and warning qualification and the actual Γ comparison.
+
+### UA-4c Source Comparison Result And Retained Boundary
+
+The actual source comparison now forms as
+IsoEvidence(Functor_cat(K,X), p∘Γ, A), by three existing whiskering/composition
+steps. It removes the totalized family reframe, projects the total base
+change, and projects the totalized section. Both selected maps are retained;
+their point components compute to id at A(x), and both whole inverse-law
+projections check. No naturality square or inverse is caller-supplied, and
+no operational functor is obtained by transporting data along a path.
+
+The durable replay is in the
+[Γ audit](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4c-whole-source-comparison).
+It isolates three explicit opposite-presentation projection views, the
+same-operands sufficient composition congruence, and the three ordinary
+identity-projection guard refinements. The two older target-projection
+rules are unnecessary for this source comparison. These candidates remain
+outside the library. The total-section projection view is a new structural
+identification; the other two are intended opposite presentations of the
+existing Sigma projection cuts. Direct eq_ap attempts for the latter two
+did not check after eager normalization of the inner composite and are not
+claimed as independent derivations. No Op signature or action on
+transformations is changed, and the separate duality repair remains deferred.
+
+The owner-position guard candidate passes with SR/warnings. Comparing only
+the core owner against the unchanged current source retains 157 replaceable
+variables and removes four inherited critical pairs (1144→1140), with no
+added category, head, rule-family or location count and no parser issue.
+The differences are at the three identity rules against product-valued
+functor categories and the constant-terminal component overlap. This is
+diagnostic evidence, not confluence or full downstream qualification;
+the append-only audit's warning stream is not the owner comparison.
+
+The final source replay passes eleven assertions at 2GiB/90s/o20, serial,
+with warnings and subject reduction enabled. Controls retain the runtime
+projection/composite heads and reject identifying unrelated endofunctors,
+arbitrary total-valued maps or composites with different operands. The
+off-diagonal comparison arrow also forms with its original endpoints.
+However, its separate direct conversion assertion to A[g] fails. The
+retained fragment records that distinction; it is not a resource failure
+and does not invalidate the earlier source projection through third-level
+cells. Whether this stronger normal form is needed must be established by
+the actual H consumer.
+
+Receipts: `ua4c_gamma_whole_source-20260917-191430.log`,
+`ua4c_gamma_whole_source_inverse-20260917-191906.log`,
+`ua4c_source_replay-20260917-192506.log`, and the expected failed stronger
+comparison `ua4c_source_arrow_comparison-20260917-192636.log`.
+The identity-owner receipt is `ua4c_identity_owner-20260917-184007.log`;
+its warning comparison is `tmp/probes/ua4c_identity_warning_comparison.json`.
+The no-view baseline rejects the same whole projection reflexivity consumer
+as expected (`ua4c_projection_baseline-20260917-192745.log`); its assertion
+is explicitly negative. Catalogue and unchanged source-health checks pass
+(1272 files, snapshot `9261b1c0721e0919625d85243596c13d6e52288f84ceb4a436a0e2c17c96ff31`).
+Changed-document local links and exact diff whitespace checks also pass.
+
+The active core remains byte-identical to `7746a337`; no library API, CAS
+input or model contract changes in this slice. Its existing nucleus,
+focused reviewers and 94 nonsplit assertions are carried forward without
+unnecessary reruns. Next: target comparison q∘Γ ≅ D and compatibility with
+the original h, using the existing varying Sigma projection and graph
+section owners, then the actual whole H comparison. The goal remains active;
+no main integration, push or publication is performed.

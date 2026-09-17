@@ -1,0 +1,35 @@
+/* UA-4c isolated source-comparison candidates, outside the library.
+   Three identity-projection guard refinements, one sufficient congruence,
+   and three proof-time presentations of opposite Sigma projection laws.
+   See README.md for semantic status, controls and promotion requirements. */
+require open emdash.emdash3_2;
+require open emdash.emdash3_2_iso_evidence_constructors;
+require open emdash.emdash3_2_one_cat_adjunction_family_views;
+
+rule @tapp0_fapp0 $A $B _ _ $Y (@id (Functor_cat $A $B) $F)
+  ↪ @id $B (@fapp0 $A $B $F $Y);
+rule @tapp1_func $A $B _ _ $X $Y (@id (Functor_cat $A $B) $F)
+  ↪ @fapp1_func $A $B $F $X $Y;
+rule @tapp1_fapp0 $A $B _ _ $X $Y (@id (Functor_cat $A $B) $F) $p
+  ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
+
+// Sufficient congruence when the two actual arrows are identical.
+// Compare every endpoint; this is not injectivity of composition.
+unif_rule @comp_fapp0 (Functor_cat $B $C) $X $Y $Z $g $f
+  ≡ @comp_fapp0 (Functor_cat $B0 $C0) $X0 $Y0 $Z0 $g $f
+  ↪ [ $B ≡ $B0; $C ≡ $C0; $X ≡ $X0; $Y ≡ $Y0; $Z ≡ $Z0 ];
+
+// Explicit proof-time presentation views; maps below are actual identities.
+// Each law is an explicit proposed structural view; none computes a path cast.
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $E)) (@Op_func _ _ (@section_total_func $K $E _))
+ ≡ @id Cat_cat (Op_cat $K) ↪ [ tt ≡ tt ];
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $D)) (@Op_func _ _ (@sigma_map_func $K $E $D _))
+ ≡ @Op_func (@Sigma_cat $K $E) $K (@Sigma_proj1_func $K $E) ↪ [ tt ≡ tt ];
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $E)) (@Op_func _ _ (@sigma_pullback_total_func $A $K $F $E))
+ ≡ @comp_fapp0 Cat_cat (Op_cat (@Sigma_cat $A (@Pullback_catd $A $K $E $F))) (Op_cat $A) (Op_cat $K)
+ (@Op_func $A $K $F)
+ (@Op_func (@Sigma_cat $A (@Pullback_catd $A $K $E $F)) $A
+   (@Sigma_proj1_func $A (@Pullback_catd $A $K $E $F))) ↪ [ tt ≡ tt ];

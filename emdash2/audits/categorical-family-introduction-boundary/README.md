@@ -1,10 +1,14 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4b): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4c): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
-projection rules and Γ itself remain outside the library.
+projection rules and Γ itself remain outside the library. The new isolated
+whole source comparison p∘Γ ≅ A retains both maps and inverse laws, with
+computing identity components. Its additional structural views are also
+unpromoted; the source comparison does not establish the target or triangle
+classification laws.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -185,3 +189,97 @@ owner refinement; current core hashes and checks are in the living ledger):
 | `emdash3_2_cubical_square_total.lp` | `bfc4acd2767fd2d794728912722121a9da24cbc81af17ec1e6d646e02c7a1101` |
 | `emdash3_2_gray_transformation_graph.lp` | `d27e975c7652a5eaa6d4fbe51b4c9547f5125317521507c3cb938f9487623a75` |
 | `constructor_fragment.lp` | `336faa2ae11a1093cb4e0552c3c46017e1dad1d99de3900cf9a5f8ccd54d5db7` |
+
+## UA-4c: Whole Source Comparison
+
+`whole_source_rules.lpfragment` and `whole_source.lpfragment` preserve a
+checked construction of IsoEvidence(Functor_cat(K,X), p∘Γ, A). Its three
+steps remove the family reframe from the projection, project total base
+change, and project the totalized section. Precomposition, postcomposition
+and composition of the existing IsoEvidence provide the forward map,
+inverse and laws. Components in both directions compute to id at A(x).
+The actual off-diagonal arrow action also forms at its original endpoints.
+Callers supply only J,A,D,h; no additional square or inverse is an input.
+
+The experiment makes its structural extensions explicit:
+
+- a whole projection view for total(s), in the opposite presentation used by
+  the existing comma encoding;
+- corresponding opposite presentations of the existing Sigma-map and
+  base-change projection equations;
+- sufficient composition congruence with the same two operands and every
+  endpoint compared;
+- omission of repeated inferred source/target guards in the three existing
+  ordinary identity-transformation projection rules, with their old RHSs.
+
+The first projection view is a newly selected structural identification,
+not a derivation from the old component beta rules. The other two present
+the intended images of existing projection cuts under Op_func. Earlier
+direct eq_ap attempts for those two did not check because the inner
+composite normalized first; they are not counted as independent proofs.
+These rules retain runtime functor heads. The actual maps are identities
+at their original sources, whiskered and composed; no operational functor
+data is obtained by equality transport.
+
+This is a local comparison in the current comma presentation. It introduces
+no Op signature, Op action on transformations, or new duality design, and
+does not qualify unrestricted higher semantics. General Op/profile work
+remains deferred. Full inference and owner/consumer qualification of these
+candidate views remains necessary before promotion.
+
+The ordinary identity-guard candidate also passes in a full owner-position
+core copy. Its warning inventory retains 157 replaceable variables and
+reduces inherited critical pairs from 1144 to 1140, with no added category,
+term-head, rule-family or location count and no parser issue. The removed
+diagnostics concern the three identity rules against product-valued functor
+categories and the constant-terminal component overlap. This is scoped
+diagnostic evidence, not a confluence theorem. Appending the rules in this
+audit deliberately differs from replacing them at their owner; its warning
+stream must not be used as that owner comparison.
+
+Reproduce the actual source comparison independently of the two candidate
+target-projection rules:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+audit = Path('audits/categorical-family-introduction-boundary')
+constructor = (audit / 'constructor_fragment.lp').read_text()
+marker = '// The target side is the actual action'
+assert constructor.count(marker) == 1
+source = (Path('emdash3_2_gray_transformation_graph.lp').read_text() + '\n' +
+          (audit / 'whole_source_rules.lpfragment').read_text() + '\n' +
+          constructor.split(marker, 1)[0] + '\n' +
+          (audit / 'whole_source.lpfragment').read_text())
+Path('tmp/probes/ua4c_source_replay.lp').write_text(source)
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4c_source_replay.lp
+```
+
+The replay passes eleven assertions at the serial 2GiB/90s profile with
+warnings/SR enabled, including whole inverse-law projections and negative
+controls. A projection of an arbitrary total-valued functor is not assumed
+to be a section, unrelated endofunctors are not identified with id, and
+composites with different supplied operands are not collapsed.
+
+`whole_source_action_boundary.lpfragment` retains an additional, stronger
+conversion assertion for the already-typed off-diagonal comparison arrow.
+Appending it to the replay fails: that arrow does not yet convert to A[g].
+This is separate from the existing source-projection computation A[g] and
+from formation of the whole comparison and its inverse. Determine whether
+the eventual H consumer needs this exact normal form; do not silently claim
+it follows from identity point components. Its failure is not a timeout.
+
+Relevant receipts are `ua4c_source_replay-20260917-192506.log` (eleven
+assertions and typed arrow pass),
+`ua4c_source_arrow_comparison-20260917-192636.log` (stronger conversion
+fails), and `ua4c_identity_owner-20260917-184007.log` (owner-position guard
+candidate passes). `tmp/probes/ua4c_identity_warning_comparison.json`
+records the five-dimensional warning comparison with the current core.
+
+The main remaining consumer is q∘Γ ≅ D together with recovery of h, followed
+by the whole native H comparison. Its target uses the varying inner Sigma
+projection and the transformation-graph section, rather than the outer
+base projection settled here. Review those existing owners; do not install
+a Γ-specific action axiom to hide that obligation.

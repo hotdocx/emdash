@@ -340,7 +340,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. Higher target projection and whole H comparison open; Γ remains outside library |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. An isolated whole source isomorphism now checks with retained inverse/laws and identity components, using unpromoted structural views. Higher target projection and whole H comparison open; Γ remains outside library |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -368,8 +368,12 @@ views. hom_int/homd_int are foundations, not targets for replacement.
 
 Current queue: continue Γ's whole input/H comparison, addressing the displayed
 whole Hom/projection boundary where its consumer requires it. The source projection
-computes through third-level cells; D[θ] and the whole H comparison remain
-unqualified. Keep UA-1/UA-2 promotion conditional
+computes through third-level cells. UA-4c additionally constructs a whole
+source isomorphism p∘Γ ≅ A in the isolated audit, with retained inverse data,
+law projections and computing identity components. Its structural
+comparison rules remain unpromoted. The whole target comparison q∘Γ ≅ D,
+recovery of h, D[θ] and the whole H comparison remain unqualified.
+Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
 [adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
