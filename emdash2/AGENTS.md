@@ -73,9 +73,12 @@ adjunction extension now live in `emdash3_2_categorical_contractions.lp` and
 `emdash3_2_one_cat_terminal_adjunctions.lp`. They preserve selected inverse
 data and terminal normal forms. The latter adds two explicit structural
 primitives guarded by OneCat(C); it is not a derivation from the old β rules.
-General higher terminality replacement remains unimplemented. The meaningful
-whole Γ/input-H comparison is an explicitly user-deferred follow-up; its
-unqualified prototype is not a regression in the current native consumers.
+General higher terminality replacement remains unimplemented. The new
+[universality assembly plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
+is now active under user acceptance (2026-09-17): generic whole adjunction
+assembly, primary terminality, and the separately bounded Γ/input-H comparison.
+The Γ prototype remains unqualified; it is not a regression in native consumers.
+Op/profile and six-term deferrals remain in force.
 Point comparisons do not establish whole parameter action. Operational presentation
 comparisons should use actual internal maps with retained inverse/coherence data and whole K/Q/H
 action; ordinary equations and proposition-valued observation evidence remain
@@ -471,7 +474,12 @@ with warnings enabled before rejecting the proposed rule.
 - Validate a `unif_rule` with typed `eq_refl`; `assert t ≡ u` tests conversion
   and does not exercise proof-time unification.
 - Unification rules are experimental and not reliably transitive. Prefer two
-  rigid heads or a stable intermediary over bare-variable eta patterns.
+  rigid heads or a stable intermediary by default. This is not a blanket
+  impossibility claim for variable-sided rules: the exact terminal-uniqueness
+  candidate in `audits/terminal-uniqueness-unification/README.md` passes a typed
+  reflexivity consumer, with a failing no-unifier control and negative runtime
+  conversion observation. The user requires this fact to inform further design.
+  Promotion still needs actual-consumer and inference/interaction qualification.
 - A `constant` cannot head a rewrite LHS. Changing it to `injective` is a
   kernel normal-form migration requiring downstream, subject-reduction, and
   warning audits.

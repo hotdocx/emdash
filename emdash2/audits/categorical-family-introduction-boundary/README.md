@@ -1,7 +1,10 @@
 # Whole native comma-family introduction: retained unqualified follow-up
 
-The living authority is
-[the consolidation plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#cc-4--comparison-consumer-review-in-progress).
+The active continuation is now the user-accepted
+[universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
+(2026-09-17). This authorizes resuming the separate bounded Γ task; the
+prototype remains unqualified. Its historical decision record is
+[the consolidation ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#cc-4--comparison-consumer-review-in-progress).
 This fragment is outside the positive library/check graph. The user selected completing consolidation first and retaining this meaningful
 whole-interface refinement as follow-up work (2026-09-16). It is an experiment,
 not a new primitive, a qualified higher-variance interface or a completed

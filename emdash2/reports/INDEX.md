@@ -26,6 +26,12 @@ main/Pages checkpoint and completed consolidation c3792b67 are published.
 The [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication)
 records the successful deployment and live PDF checksum.
 
+The accepted [universality assembly plan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
+is the new active continuation. Its ledger distinguishes generic adjunction
+assembly, primary terminality and Γ; the exact terminal uniqueness unifier is
+known feasible at its recorded proof-time consumer. Earlier claims of blanket
+infeasibility are superseded; runtime eta and global qualification are separate.
+
 ## Current Orientation
 
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
