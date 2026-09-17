@@ -3339,14 +3339,16 @@ They are not the data from which whole coherence is reconstructed.
 
 Postcomposition lifts an adjunction to whole functor families in the stated
 ordinary profile. Product/biproduct adjunctions supply whole pairing and
-copairing using the original choices. Diagram reconstruction and
-terminal/initial family normalizers are explicitly declared DefIso instances;
-their inverse and endpoint computations are checked. Those structural
+copairing using the original choices. Diagram reconstruction remains an
+explicitly declared DefIso presentation. Terminal/initial family comparisons
+are derived from the adjunctions and reconstruction, with explicit maps,
+computing point endpoints and proved whole endpoint/inverse laws. Their two
+former primitive DefIso normalizers are retired. The retained structural
 presentations are not claimed to follow from the older β rules alone.
 [Chapter 12](../book/chapters/12-adjunctions-and-equivalences.md) and
 [Chapter 30](../book/chapters/30-cartesian-structure-and-dependent-products.md)
 explain their reusable mathematics; the
-[owner inventory](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_REVIEW.md#reusable-interface-inventory)
+[current owner inventory](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 records declaration versus derivation status.
 
 For coherent A,D,h:J∘A⇒D over a parameter category, the whole boundary is

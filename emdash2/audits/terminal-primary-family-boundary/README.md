@@ -1,7 +1,7 @@
 # Primary Terminality: Categorical Comparison And Whole-Family Boundary
 
 Date: 2026-09-17
-Status: direct ordinary public API implemented and checked; production DefIso migration pending
+Status: direct ordinary public API and production migration qualified; both primitive family normalizers retired
 Base: `10bff3059d999b7f0f59caa9977ad13ea034a0d3`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -132,8 +132,9 @@ adjunction witness directly. Its terminal and initial operations reach the
 actual selected diagram, and its reviewer instantiates both native K/Q zero
 columns. It uses a closed Terminal_cat profile internally. The constant-
 postcomposition view is now qualified at the existing family-view owner.
-The original terminal-family DefIso remains in production pending migration.
-Its equality-valued inverse laws are not relabelled as judgmental DefIso
+At that checkpoint, the original terminal-family DefIso still served production.
+The subsequent retirement is recorded below. The derived API's equality-valued
+inverse laws are not relabelled as judgmental DefIso
 cuts. The older family-contraction control now succeeds with the new core
 rule; reproduce its historical failure only against the recorded baseline.
 
@@ -152,7 +153,7 @@ and reflection now have independent categorical owners. Three existing
 definitions were relocated without changing their signatures or bodies.
 Neither the new generic owners nor the primary family API postulate a
 universal structure. The living ledger records final scoped tests, overlays
-of existing native consumers, and the remaining production migration.
+of existing native consumers, and the completed production migration.
 
 `zero-column-adoption.lpfragment` records the first production-adoption
 candidate. Its two IsoEvidence definitions typecheck using explicit
@@ -166,6 +167,17 @@ zero-column, factor/reconstruction and connecting assertions pass. The raw
 conversion is not claimed; no actual consumer assertion has been weakened
 and no new normalizer axiom was added. The living ledger owns the nonsplit
 integration replay and retirement status.
+
+UA-3e retires both general primitive family normalizers and their sixteen
+rules. Selected-choice comparisons are derived IsoEvidence adapters; canonical
+kernel/cokernel family inputs use original-D reconstruction directly. Ordinary
+whole uniqueness follows from the actual modification in the discrete Hom
+category, without an operational path cast or manually supplied square.
+The former DefIso-specific wrapper API and raw inverse-cut tests are retired
+explicitly. The new reviewer preserves point endpoints and next-Hom action,
+and checks whole endpoint and inverse laws. All eight unchanged nonsplit
+proof–CAS artifacts pass again, including both displayed certificates (94
+assertions). No model contract, CAS input or native computation is weakened.
 
 Additional logs:
 

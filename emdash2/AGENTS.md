@@ -151,8 +151,8 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
 - `emdash3_2_one_cat_adjunction_families.lp` owns the ordinary structural
   postcomposition lift and functor-category profile. Its mate, view and
   reindex modules preserve generic postcomposition and inverse-cut owners.
-  `emdash3_2_one_cat_terminal_family_universality.lp` owns the two declared
-  ordinary terminal/initial-family DefIso presentations. Product/biproduct
+  `emdash3_2_one_cat_terminal_family_universality.lp` owns derived ordinary
+  terminal/initial-family IsoEvidence adapters. Product/biproduct
   adjunction and family modules retain the same chosen product functor.
   The consolidation inventory distinguishes these structural declarations
   from their derived whole operations and proof-time comparisons.
@@ -161,9 +161,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   TerminalObject or caller square proof as a primary input. The literal
   terminal profile has explicit inverse data and one scoped ground proof-time
   eta instance in `emdash3_2_terminal_category_profile.lp`. The earlier
-  general DefIso normalizers remain for other consumers; the production
-  kernel/cokernel zero-column mate inputs now use the derived maps and proved
-  endpoint observations. Do not describe IsoEvidence laws as new runtime
+  general DefIso normalizers and their sixteen rules are retired; all native
+  consumers use derived maps or original-D reconstruction and proved endpoint
+  observations. The two ordinary selected-terminal adjunction providers remain
+  declared structural instances. Do not describe IsoEvidence laws as new runtime
   inverse cuts. The active plan records their integration qualification.
   Generic reflection, original-D reconstruction and invertible-modification
   action live in the independent `one_cat_diagram_family_reflection`,

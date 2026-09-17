@@ -156,18 +156,23 @@ alone. Nor is it an unrestricted identification of strict functor diagrams
 with higher lax-arrow categories. The ordinary-target guard and the stated
 structural presentation are retained.
 
-There are analogous whole comparisons for transformations to a terminal
-constant family and from an initial constant family. They permit the
-universal constructions to operate on the original family rather than on a
-sequence of independently rebuilt pointwise cones.
+The whole comparisons for transformations to a terminal constant family and
+from an initial constant family are derived from the corresponding
+adjunctions and categorical reconstruction. They retain the actual family,
+forward and inverse maps. Their point endpoints compute to identities, and
+their whole endpoint and inverse equations are proved by the existing
+categorical evaluation laws. Canonical input diagrams can use reconstruction
+directly.
 
 <!-- evidence:ORDINARY-DIAGRAM-UNIVERSALITY -->
 
 > **Formal status — checked.** Evidence `ORDINARY-DIAGRAM-UNIVERSALITY`.
-> The reconstruction and zero-family DefIso instances have declared
-> structural owners with checked computational consumers. They use the
-> existing DefIso inverse and inverse cuts; no new equivalence notion is
-> introduced. They are part of the explicitly stated ordinary presentation.
+> Whole diagram reconstruction remains a declared DefIso presentation.
+> Terminal/initial family comparisons are now definitions using the existing
+> IsoEvidence interface, with retained maps and proved inverse laws. Their
+> former primitive DefIso normalizers are retired; the derived evidence does
+> not assert their raw inverse-cut contract.
+> These statements retain the ordinary-target qualification.
 
 ### Ordinary Factor Records As Derived Views
 

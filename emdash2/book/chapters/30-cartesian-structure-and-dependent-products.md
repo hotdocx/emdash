@@ -268,9 +268,11 @@ comparison then gives whole Hom mate functors, retained inverses and ordinary
 uniqueness observations. The maps into 1 are the actual selected mates; they
 are not cast to a preferred functor by equality transport.
 
-Existing whole diagram normalizers compare the unit/counit arrow families
-with the original terminal/initial arrow families. Both directions have
-identity components at the walking-arrow endpoints. This keeps the original
+Derived whole diagram comparisons relate the unit/counit arrow families
+to the original terminal/initial arrow families. Both directions retain their
+inverse maps, with computing point endpoints and proved whole endpoint and
+inverse equations. The two former primitive family normalizers are no
+longer needed. This keeps the original
 terminal normal forms: the terminal component at t is propositionally equal
 to idₜ and remains computationally distinct from it. Callers supply no
 naturality-square data.

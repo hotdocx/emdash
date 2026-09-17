@@ -35,13 +35,7 @@ symbol one_cat_kernel_family_introduced_input [B C : Cat] (C1 : τ (IsNCat (cat_
   (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y) walking_arrow_src walking_arrow_tgt
   walking_arrow_generator) (@path_to_hom (Hom_cat (Functor_cat B C) X Y) (@zero_arrow_family_zero_transf B C t T T0 X
   Y) (@comp_fapp0 (Functor_cat B C) X A Y u k) (@eq_sym (@Transf B C X Y) (@comp_fapp0 (Functor_cat B C) X A Y u k)
-  (@zero_arrow_family_zero_transf B C t T T0 X Y) z)))) (@defiso_from (Functor_cat B (Functor_cat WalkingArrow_cat C))
-  (@transf_arrow_diagram_func B C X (@Const_func B C t) (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0
-  B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) walking_arrow_src walking_arrow_tgt
-  walking_arrow_generator)) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
-  X) (@one_cat_terminal_arrow_family_iso B C C1 t T X (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B
-  C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) walking_arrow_src walking_arrow_tgt
-  walking_arrow_generator)));
+  (@zero_arrow_family_zero_transf B C t T T0 X Y) z)))) (@one_cat_diagram_family_reconstruction_from B C C1 (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X));
 
 // Retain D itself as the target of the native kernel-mate input.
 symbol one_cat_kernel_family_input [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
@@ -88,13 +82,7 @@ symbol one_cat_kernel_family_introduced_source_path [B C : Cat] (C1 : τ (IsNCat
       (@initial_arrow_diagram_func C t T0) Y) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
       (@path_to_hom (Hom_cat (Functor_cat B C) X Y) (@zero_arrow_family_zero_transf B C t T T0 X Y) (@comp_fapp0
       (Functor_cat B C) X A Y u k) (@eq_sym (@Transf B C X Y) (@comp_fapp0 (Functor_cat B C) X A Y u k)
-      (@zero_arrow_family_zero_transf B C t T T0 X Y) z)))) (@defiso_from (Functor_cat B (Functor_cat WalkingArrow_cat
-      C)) (@transf_arrow_diagram_func B C X (@Const_func B C t) (@diagram_family_transf B WalkingArrow_cat C
-      (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) walking_arrow_src
-      walking_arrow_tgt walking_arrow_generator)) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
-      (@terminal_arrow_diagram_func C t T) X) (@one_cat_terminal_arrow_family_iso B C C1 t T X (@diagram_family_transf
-      B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
-      X) walking_arrow_src walking_arrow_tgt walking_arrow_generator)));
+      (@zero_arrow_family_zero_transf B C t T T0 X Y) z)))) (@one_cat_diagram_family_reconstruction_from B C C1 (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X));
 
 // Reconstruction has identity endpoints, so source recovery retains k.
 symbol one_cat_kernel_family_input_source_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]

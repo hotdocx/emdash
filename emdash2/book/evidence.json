@@ -4486,7 +4486,7 @@
     },
     "ORDINARY-DIAGRAM-UNIVERSALITY": {
       "status": "checked",
-      "statement": "The ordinary-target structural presentation declares whole diagram reconstruction and terminal/initial family DefIso instances; their inverse and endpoint consumers are checked, without a general higher-lax diagram equivalence claim.",
+      "statement": "The ordinary-target presentation declares whole diagram reconstruction and derives terminal/initial family isomorphisms with computing point endpoints, retained inverse maps and proved inverse laws; no general higher-lax diagram equivalence is claimed.",
       "owners": [
         {
           "file": "emdash3_2_one_cat_diagram_reconstruction.lp",
@@ -4494,11 +4494,11 @@
         },
         {
           "file": "emdash3_2_one_cat_terminal_family_universality.lp",
-          "symbol": "one_cat_terminal_arrow_family_iso"
+          "symbol": "one_cat_terminal_arrow_family_evidence"
         },
         {
           "file": "emdash3_2_one_cat_terminal_family_universality.lp",
-          "symbol": "one_cat_initial_arrow_family_iso"
+          "symbol": "one_cat_initial_arrow_family_evidence"
         }
       ],
       "reviewers": [
@@ -4508,7 +4508,7 @@
         },
         {
           "file": "examples/one_cat_terminal_family_universality.lp",
-          "symbol": "one_cat_terminal_arrow_family_iso"
+          "symbol": "one_cat_terminal_arrow_family_evidence"
         }
       ]
     },
@@ -4868,7 +4868,7 @@
       "reviewers": [
         {
           "file": "examples/one_cat_terminal_adjunctions.lp",
-          "symbol": "one_cat_terminal_adjunction_diagram_iso"
+          "symbol": "one_cat_terminal_arrow_family_to_src_path"
         },
         {
           "file": "examples/one_cat_terminal_adjunctions.lp",

@@ -1690,8 +1690,13 @@ terminal/initial comparisons directly from an Adjunction witness, with the
 closed terminal profile used internally. Its optional whole arrow presentation
 retains an existing selected embedding. Results use actual maps/inverses and
 proved IsoEvidence laws. Production kernel/cokernel zero-column mate inputs
-now use these derived maps and categorical endpoint observations; the general
-DefIso normalizers remain for other consumers pending their scoped migration.
+use these derived maps and categorical endpoint observations. All remaining
+family-normalizer users are migrated: selected-choice adapters use the primary
+interface, canonical family inputs use original-D reconstruction directly,
+and ordinary uniqueness is a downstream observation of the actual modification.
+The two former primitive DefIso normalizers and their sixteen rules are
+retired. The ordinary adjunction providers and diagram reconstruction remain
+explicit structural declarations; IsoEvidence laws add no runtime inverse cuts.
 
 Generic whole diagram reflection, reconstruction and invertible-modification
 action have independent owners in `one_cat_diagram_family_reflection`,

@@ -1,18 +1,27 @@
 /* Reviewer: whole one cat terminal adjunctions data and qualified computation. */
-require open emdash.emdash3_2_one_cat_terminal_adjunctions;
+require open emdash.emdash3_2_one_cat_terminal_family_universality;
 // catalog-area: Categorical contraction and ordinary terminal adjunctions
 
+// Whole endpoint laws at the original unit/counit presentations.
 assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
- (T : τ (@TerminalObject C t)) (x : τ (Obj C)) ⊢
- @sym_transf_tapp0_transf C WalkingArrow_cat C _ _
-   (@defiso_to _ _ _ (@one_cat_terminal_adjunction_diagram_iso C C1 t T)) walking_arrow_src
- ≡ @id (Functor_cat C C) (@id_func C);
+ (T : τ (@TerminalObject C t)) ⊢
+ @one_cat_terminal_arrow_family_to_src_path C C C1 t T (@id_func C)
+   (@one_cat_terminal_adjunction_unit C C1 t T)
+ : τ (@= (@Transf C C (@id_func C) (@id_func C))
+     (@sym_transf_tapp0_transf C WalkingArrow_cat C _ _
+       (@iso_evidence_to _ _ _ (@one_cat_terminal_arrow_family_evidence C C C1 t T (@id_func C)
+         (@one_cat_terminal_adjunction_unit C C1 t T))) walking_arrow_src)
+     (@id (Functor_cat C C) (@id_func C)));
 
 assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
  (T : τ (@TerminalObject (Op_cat C) t)) ⊢
- @sym_transf_tapp0_transf C WalkingArrow_cat C _ _
-   (@defiso_from _ _ _ (@one_cat_initial_adjunction_diagram_iso C C1 t T)) walking_arrow_tgt
- ≡ @id (Functor_cat C C) (@id_func C);
+ @one_cat_initial_arrow_family_from_tgt_path C C C1 t T (@id_func C)
+   (@one_cat_initial_adjunction_counit C C1 t T)
+ : τ (@= (@Transf C C (@id_func C) (@id_func C))
+     (@sym_transf_tapp0_transf C WalkingArrow_cat C _ _
+       (@iso_evidence_from _ _ _ (@one_cat_initial_arrow_family_evidence C C C1 t T (@id_func C)
+         (@one_cat_initial_adjunction_counit C C1 t T))) walking_arrow_tgt)
+     (@id (Functor_cat C C) (@id_func C)));
 
 // Both whole functor cuts compute, retaining this adjunction's mate data.
 assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))

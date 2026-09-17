@@ -678,3 +678,100 @@ open. No Op/profile migration or deferred six-term comparison was resumed.
 Final UA-3d source-only metrics snapshot: `c478ff720f6c5b252a05ff2369fd5fa7fa2b3634ac1c0a49d06177fd0b2418b7`.
 After the successful replay, one explanatory comment was clarified; all
 formal declarations, bodies and assertions retain the checked tokens.
+
+## UA-3e — Retire The Two Declared Family Normalizers
+
+Previous turn classification: progress, production zero-column adoption at
+`ab4b31d2` with the full unchanged nonsplit replay. Remaining users of the
+two declared family normalizers are the selected-terminal diagram adapters,
+ordinary whole-family uniqueness observations, and native kernel/cokernel
+family-input constructors. Their adjunction provider must first be separated
+from the normalizer import to avoid a circular dependency.
+
+The selected replacements use the already qualified primary operations and
+existing chosen arrow presentations. The former DefIso-specific wrapper API
+and its advertised raw inverse cuts will be retired explicitly, not relabelled
+as computations of IsoEvidence. Required point computations, actual inverse
+data, whole equations and native consumers remain acceptance requirements.
+Ordinary whole-arrow uniqueness can be derived more directly from the actual
+invertible modification using hom_to_path in the genuinely discrete Hom of
+Functor_cat(B,C), under the existing OneCat(C) guard. That observation does
+not define or transport any operational functor through an equality.
+
+### UA-3e Qualified Retirement
+
+Both primitive family-normalizer declarations and their sixteen endpoint
+rewrite rules are removed. The selected-family owner now has ten definitions
+with bodies and no rewrite or unification rules: two IsoEvidence adapters and
+eight whole endpoint laws. Its adjunction provider imports the independent
+zero-arrow-diagram owner, avoiding a cycle through the derived adapters. The
+two ordinary terminal/initial adjunction providers remain declared; their
+derivation from the old beta interface is not claimed.
+
+Four canonical kernel/cokernel input uses do not need terminal normalization:
+they reconstruct the already chosen diagram. They now use the existing
+original-D reconstruction maps directly. Ordinary whole-family uniqueness
+uses the actual invertible modification followed by hom_to_path in the
+discrete Hom of Functor_cat(B,C), with OneCat(C) retained. No caller square,
+opaque computational data or operational equality cast is introduced.
+
+The former DefIso wrapper names and their raw inverse-cut contract are
+explicitly retired. The generic DefIso inverse rules themselves remain
+unchanged for retained DefIso instances. The replacement selected-family
+reviewer checks eight point endpoint computations, eight whole endpoint law
+types, four inverse-law types and two retained next-Hom action types (22
+assertions). It does not claim the old raw whole endpoint or inverse
+conversions. Native input, factor/reconstruction, differential-view and
+connecting computations required by production remain qualified.
+
+Focused warning/SR-enabled checks pass at the default serial 2GiB/90s/o20
+profile:
+
+- selected family reviewer: `one_cat_terminal_family_universality-20260917-161405.log`;
+- existing terminal adjunction reviewer: `one_cat_terminal_adjunctions-20260917-161530.log`;
+- cokernel inputs, whole adjunction zero inputs, factor reconstruction,
+  zero-column views and native connecting: all five receipts in
+  `tmp/probes/ua3e_native_consumers.json`;
+- native connecting warnings match the preceding qualified run in all five
+  inventory dimensions, retaining 28 inherited critical pairs and no parser
+  issue (`tmp/probes/ua3e_native_warning_comparison.json`). The selected-family
+  reviewer has no warnings.
+
+All eight unchanged nonsplit proof–CAS artifacts pass under the reviewed
+serial 6GiB/180s/o20,v1024 profile, warnings and SR enabled. Artifact hashes
+match the preceding qualified inputs; all 94 assertions are retained:
+
+| Artifact | Seconds |
+| --- | ---: |
+| LES diagram | 32.480 |
+| Snake computation | 18.599 |
+| LES pair certificates 0 / 1 / 2 | 30.698 / 32.197 / 54.956 |
+| Displayed LES exactness | 138.991 |
+| Snake certificate signatures | 88.129 |
+| Displayed snake exactness | 72.880 |
+
+Full receipts are in `tmp/probes/ua3e_cas_replay_results.json`. No TypeScript,
+CAS input, model, normality or interpretation contract changed. These are
+affected integration checks, not a repo-wide TypeScript aggregate or a new
+performance guarantee.
+
+The bounded nucleus diagnostics also pass with current compiled parents
+(`emdash3_2_checks-20260917-163043.log`, 6GiB/90s/o20,v1024, quiet mode, SR
+enabled). The five changed library owners pass the strict LHS audit. Strict
+catalogue and source TOC checks pass. Source-only health covers 1271 files,
+snapshot `9078542f99deedb825fbe2e8581ad1c633c1101ecedd99add8d72a77a80d5df0`;
+it makes no all-target execution claim.
+
+The living inventory and standing owner guidance now distinguish the ten
+remaining recent structural declarations from the two retired normalizers.
+Book chapters 30/31 and their evidence entries describe the derived maps and
+law boundary. Final book source/evidence checks pass (46 source files, 182
+claims). The 407-page render also passes without console, page, request or
+render errors (`tmp/probes/ua3e_book_render_final.log`); its preview process
+has exited and port 4173 is released. No publication or release was performed.
+
+UA-3e completes this migration, not the larger goal. The next bounded work is
+the generic terminal-uniqueness unifier's inference audit, followed by Γ.
+UA-1/UA-2 promotion still requires an independently justified consumer; the
+higher interpretation and product bridge/final audit remain open. Op/profile
+migration and the six-term/older endpoint experiments remain deferred.

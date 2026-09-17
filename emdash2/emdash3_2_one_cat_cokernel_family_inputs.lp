@@ -35,10 +35,7 @@ symbol one_cat_cokernel_family_introduced_input [B C : Cat]
         (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)
         walking_arrow_src walking_arrow_tgt walking_arrow_generator))
     (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)
-    (@defiso_to _ _ _ (@one_cat_initial_arrow_family_iso B C C1 t T0 Y
-      (@diagram_family_transf B WalkingArrow_cat C
-        (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)
-        walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
+    (@one_cat_diagram_family_reconstruction_to B C C1 (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y))
     (@sym_func_func_transf WalkingArrow_cat B C
       (@walking_arrow_func (Functor_cat B C) X A k)
       (@walking_arrow_func (Functor_cat B C) (@Const_func B C t) Y
@@ -99,11 +96,7 @@ symbol one_cat_cokernel_family_introduced_target_path [B C : Cat]
       (@diagram_family_transf B WalkingArrow_cat C
         (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)
         walking_arrow_src walking_arrow_tgt walking_arrow_generator)) (@comp_cat_fapp0 B C (Functor_cat
-          WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y) (@defiso_to _ _ _
-          (@one_cat_initial_arrow_family_iso B C C1 t T0 Y
-      (@diagram_family_transf B WalkingArrow_cat C
-        (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)
-        walking_arrow_src walking_arrow_tgt walking_arrow_generator))) (@sym_func_func_transf WalkingArrow_cat B C
+          WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y) (@one_cat_diagram_family_reconstruction_to B C C1 (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) Y)) (@sym_func_func_transf WalkingArrow_cat B C
       (@walking_arrow_func (Functor_cat B C) X A k)
       (@walking_arrow_func (Functor_cat B C) (@Const_func B C t) Y
         (@diagram_family_transf B WalkingArrow_cat C
