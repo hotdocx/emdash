@@ -35,4 +35,3 @@ symbol one_cat_diagram_family_map_path [B C : Cat]
       (@sym_func B WalkingArrow_cat C F) (@sym_func B WalkingArrow_cat C G)
       (@sym_func_func_transf B WalkingArrow_cat C F G h)
       (@sym_func_func_transf B WalkingArrow_cat C F G k) p q);
-

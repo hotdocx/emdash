@@ -577,3 +577,7 @@ SR-enabled compiled-parent profile. The standalone constant-view reviewer
 passes in `adjunction_family_constant_views-20260917-152659.log`. Diff, local
 links, script syntax, strict catalogue and source-snapshot checks are the
 remaining checkpoint hygiene; no publication or main mutation is authorized.
+
+Checkpoint `69699c50` contains UA-3c. A follow-up removes one trailing blank
+line in the relocated reflection owner; no declaration changes. The final
+source-only metrics snapshot is `d620bd510e472088c269ca81aa7fb08849f06578e81ac95177b3e21daedb9ba0`.
