@@ -1,0 +1,10 @@
+// Stronger target needed to contract all terminal-valued family maps.
+// This intentionally asks whether that whole terminality is already conversion.
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat)) ⊢
+  @ua3_terminal_family_iso B C C1 T1 t J F V
+  : τ (@DefIso Cat_cat
+      (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat);

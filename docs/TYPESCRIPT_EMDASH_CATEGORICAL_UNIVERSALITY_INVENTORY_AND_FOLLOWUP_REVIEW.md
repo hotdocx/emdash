@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; whole unit/counit extraction in progress
+Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; UA-3 categorical comparison experiments in progress; general introduction held for consumer justification
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -42,10 +42,11 @@ identified or all retained as equally primary interfaces.
 The next useful design review is the assembly of whole universal data at the
 existing owners. In particular, the current Adjunction classifier exposes
 unit/counit and a whole Hom comparison, but has no general introduction from
-supplied whole Hom-comparison data. Several ordinary instances therefore
-explicitly declare that assembly. A reusable introduction principle, if its
-computation can be qualified, could reduce repeated structural extensions.
-This is a proposed investigation, not a newly derived theorem.
+supplied whole Hom-comparison data. Several ordinary instances explicitly
+declare their assembly. A reusable introduction principle could reduce those
+extensions only if their whole comparison inputs can themselves be built
+independently. That prerequisite has not been demonstrated for the current
+candidate. This is a proposed investigation, not a newly derived theorem.
 
 Γ is a separate meaningful application: classify coherent family inputs as
 one native comma functor, then obtain a whole H comparison. It should keep its
@@ -309,8 +310,8 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
-| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Pending UA-1 |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Pending assembly review |
+| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | In progress: direct categorical comparisons checked; whole-family assembly open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Separate bounded application |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
@@ -337,11 +338,59 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: UA-1 whole unit/counit extraction from the checked identity
-images. UA-1a qualifies the reindexed-component projection and both
-nonidentity image computations; the ledger records the canonical join-map
-normalization change and unchanged warning inventories. The unit/counit
-Transf interface and Adjunction introduction are not yet promoted.
+Current queue: construct the actual terminal-family comparison from primary
+categorical universality; keep UA-1/UA-2 promotion conditional on demonstrated
+consumer benefit. The user's clarification prompted a
+review of the already implemented
+[adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
+assume an Adjunction and register agreement with named unit/counit or
+counit/transpose operations. The new candidate is related usability work:
+it introduces Adjunction from a whole ProfComparison, retaining that actual
+comparison and supplying identity-image component computations. It is a new
+structural introduction, not a theorem derived from the old β interface.
+
+The passing whole-family reviewer uses the existing declared
+one_cat_postcomp_adjunction after constructing J. It does not derive that
+lift or remove any of the twelve structural declarations above. No existing
+production caller holding an independently built whole comparison and blocked
+on Adjunction introduction has yet been identified. Do not call this reviewer
+an established architectural need or make the constructor a prerequisite for
+UA-3/UA-4. Primary terminality can be formulated directly using p⊣t at the
+existing Adjunction owner; deriving an adapter from the old selected terminal
+package is a separate question. Γ has no demonstrated dependence on this
+constructor either.
+
+The candidate and its evidence are preserved in the
+[non-library adjunction-introduction audit](../emdash2/audits/adjunction-from-hom-comparison/README.md);
+its draft import/registration edits have been removed from active source.
+Any later promotion must identify the
+caller, its independently available data, and the computation or structural
+declaration that the constructor improves. The accepted UA-1/UA-2 scope and
+completion gates remain open; this is a promotion hold, not a completed or
+silently dropped tranche. UA-1a's reindexed-component computation remains
+independently qualified.
+
+The [primary terminality consumer audit](../emdash2/audits/terminal-primary-family-boundary/README.md)
+now identifies the concrete zero-column and kernel/cokernel family-input
+users. Starting directly with J:Adjunction(p,t), a checked definition maps
+the unique terminal arrow through J's retained inverse Hom functor to obtain
+c(f,g):f⇒g, its inverse and both IsoEvidence laws. Ordinary walking-arrow
+realization gives the comparison at the original !ₓ with four computing
+identity endpoints. No new structural primitive, path-transported functor,
+or caller-supplied naturality square is needed for those constructions.
+
+The whole-family target remains open. Existing postcomposition gives
+`[B,C](F,t∘V)≅[B,1](p∘F,V)`, with whole mate reconstruction. The experiment
+needs a narrow constant-postcomposition view for the selected endpoint; it
+does not yet produce a coherent contraction of the right-hand family-Hom
+category. The failed Terminal_cat type comparison only rules out immediate
+conversion in that program. Next investigate this whole terminal-valued
+family action or a direct native-unit construction, then obtain the actual
+family diagram comparison with retained inverse and endpoint computation.
+The component IsoEvidence laws do not by themselves replace the existing
+whole DefIso cuts. No broad terminal-category normalization or new primary
+library interface is promoted by these experiments. The dual initiality and
+terminal-unifier interaction checks remain part of UA-3.
 
 ## Review Evidence
 

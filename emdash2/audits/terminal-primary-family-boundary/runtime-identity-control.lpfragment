@@ -1,0 +1,12 @@
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f : τ (Hom C x t)) ⊢
+  @ua3_terminal_parallel_arrow C t J x f f ≡ @id (Hom_cat C x t) f;
+
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) ⊢
+  @comp_fapp0 (Hom_cat C x t) f g f
+    (@ua3_terminal_parallel_arrow C t J x g f)
+    (@ua3_terminal_parallel_arrow C t J x f g)
+  ≡ @id (Hom_cat C x t) f;

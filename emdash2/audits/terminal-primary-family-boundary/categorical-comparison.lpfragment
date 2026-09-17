@@ -1,0 +1,144 @@
+/* UA-3 experiment: terminality supplied directly as p⊣t.
+   No new primitive, rewrite, unifier, or old TerminalObject input. */
+require open emdash.emdash3_2_one_cat_adjunction_family_views;
+
+symbol ua3_TerminalAdjunction [C : Cat] (t : τ (Obj C)) : Grpd
+≔ @Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t);
+
+symbol ua3_terminal_unit [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t))
+  : τ (@Transf C C (@id_func C) (@Const_func C C t))
+≔ @unit_adj_transf C Terminal_cat (Terminal_func C) (@Obj_func C t) J;
+
+symbol ua3_terminal_hom_iso [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  : τ (@DefIso Cat_cat (Hom_cat C x t) Terminal_cat)
+≔ @defiso_sym Cat_cat Terminal_cat (Hom_cat C x t)
+    (@adjunction_hom_component_iso C Terminal_cat (Terminal_func C) (@Obj_func C t)
+      J x Terminal_obj);
+
+// Lift the unique terminal arrow through the retained inverse Hom functor.
+// This is an actual higher arrow; no path-induction or transported functor.
+symbol ua3_terminal_parallel_func [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t))
+  : τ (Functor Terminal_cat (Hom_cat (Hom_cat C x t) f g))
+≔ @fapp1_func Terminal_cat (Hom_cat C x t)
+    (@defiso_from Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x))
+    (@fapp0 (Hom_cat C x t) Terminal_cat
+      (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) f)
+    (@fapp0 (Hom_cat C x t) Terminal_cat
+      (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) g);
+
+symbol ua3_terminal_parallel_arrow [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) : τ (Hom (Hom_cat C x t) f g)
+≔ @fapp0 Terminal_cat (Hom_cat (Hom_cat C x t) f g)
+    (@ua3_terminal_parallel_func C t J x f g) Terminal_obj;
+
+// Terminal_cat's actual arrow and its inverse, with both inverse laws.
+symbol ua3_terminal_base_iso (a b : τ (Obj Terminal_cat))
+  : τ (IsoEvidence Terminal_cat a b)
+≔ Struct_sigma Terminal_obj (Struct_sigma Terminal_obj
+    (Struct_sigma (@eq_refl Unit_grpd Terminal_obj) (@eq_refl Unit_grpd Terminal_obj)));
+
+// Existing categorical image of those data; no manual naturality squares.
+symbol ua3_terminal_parallel_iso [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) : τ (IsoEvidence (Hom_cat C x t) f g)
+≔ @iso_evidence_fmap Terminal_cat (Hom_cat C x t)
+    (@defiso_from Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x))
+    (@fapp0 (Hom_cat C x t) Terminal_cat
+      (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) f)
+    (@fapp0 (Hom_cat C x t) Terminal_cat
+      (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) g)
+    (@ua3_terminal_base_iso
+      (@fapp0 (Hom_cat C x t) Terminal_cat
+        (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) f)
+      (@fapp0 (Hom_cat C x t) Terminal_cat
+        (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3_terminal_hom_iso C t J x)) g));
+
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) ⊢
+  @iso_evidence_to (Hom_cat C x t) f g (@ua3_terminal_parallel_iso C t J x f g)
+  ≡ @ua3_terminal_parallel_arrow C t J x f g;
+
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) ⊢
+  @iso_evidence_from (Hom_cat C x t) f g (@ua3_terminal_parallel_iso C t J x f g)
+  ≡ @ua3_terminal_parallel_arrow C t J x g f;
+
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) ⊢
+  @iso_evidence_left (Hom_cat C x t) f g (@ua3_terminal_parallel_iso C t J x f g)
+  : τ (@= (Hom (Hom_cat C x t) f f)
+      (@comp_fapp0 (Hom_cat C x t) f g f
+        (@ua3_terminal_parallel_arrow C t J x g f)
+        (@ua3_terminal_parallel_arrow C t J x f g))
+      (@id (Hom_cat C x t) f));
+
+assert [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  (f g : τ (Hom C x t)) ⊢
+  @iso_evidence_right (Hom_cat C x t) f g (@ua3_terminal_parallel_iso C t J x f g)
+  : τ (@= (Hom (Hom_cat C x t) g g)
+      (@comp_fapp0 (Hom_cat C x t) g f g
+        (@ua3_terminal_parallel_arrow C t J x f g)
+        (@ua3_terminal_parallel_arrow C t J x g f))
+      (@id (Hom_cat C x t) g));
+
+require open emdash.emdash3_2_one_cat_terminal_adjunctions;
+require open emdash.emdash3_2_one_cat_arrow_diagrams;
+
+// Component of the existing terminal-family comparison at the original !x.
+// The filler comes from the categorical Hom inverse, never from path transport.
+symbol ua3_terminal_diagram_to [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t))
+  : τ (@Transf WalkingArrow_cat C
+      (@walking_arrow_func C x t f)
+      (@walking_arrow_func C x t (@terminal_arrow_fapp0 C t T x)))
+≔ @one_cat_square_diagram_transf C C1 x x t t
+    f (@terminal_arrow_fapp0 C t T x) (@id C x) (@id C t)
+    (@iso_evidence_to (Hom_cat C x t) f (@terminal_arrow_fapp0 C t T x)
+      (@ua3_terminal_parallel_iso C t (@one_cat_terminal_adjunction C C1 t T)
+        x f (@terminal_arrow_fapp0 C t T x)));
+
+symbol ua3_terminal_diagram_from [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t))
+  : τ (@Transf WalkingArrow_cat C
+      (@walking_arrow_func C x t (@terminal_arrow_fapp0 C t T x))
+      (@walking_arrow_func C x t f))
+≔ @one_cat_square_diagram_transf C C1 x x t t
+    (@terminal_arrow_fapp0 C t T x) f (@id C x) (@id C t)
+    (@iso_evidence_from (Hom_cat C x t) f (@terminal_arrow_fapp0 C t T x)
+      (@ua3_terminal_parallel_iso C t (@one_cat_terminal_adjunction C C1 t T)
+        x f (@terminal_arrow_fapp0 C t T x)));
+
+assert [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t)) ⊢
+  @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_src
+    (@ua3_terminal_diagram_to C C1 t T x f) ≡ @id C x;
+
+assert [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t)) ⊢
+  @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_tgt
+    (@ua3_terminal_diagram_to C C1 t T x f) ≡ @id C t;
+
+assert [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t)) ⊢
+  @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_src
+    (@ua3_terminal_diagram_from C C1 t T x f) ≡ @id C x;
+
+assert [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (x : τ (Obj C)) (f : τ (Hom C x t)) ⊢
+  @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_tgt
+    (@ua3_terminal_diagram_from C C1 t T x f) ≡ @id C t;

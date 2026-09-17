@@ -1,0 +1,65 @@
+/* UA-3 experiment: terminality supplied directly as p⊣t.
+   One experimental proof-time constant-postcomposition view is included.
+   No new primitive, runtime rewrite, or old TerminalObject input. */
+require open emdash.emdash3_2_one_cat_adjunction_family_views;
+
+// Candidate proof-time view of existing represented postcomposition by a constant.
+// Cat/id discriminate the represented action; the source B and selected t remain.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B _ $C
+    (@Const_func _ _ $t) _
+  ≡ @Const_func $B $C $t
+  ↪ [ tt ≡ tt ];
+
+
+symbol ua3_TerminalAdjunction [C : Cat] (t : τ (Obj C)) : Grpd
+≔ @Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t);
+
+symbol ua3_terminal_unit [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t))
+  : τ (@Transf C C (@id_func C) (@Const_func C C t))
+≔ @unit_adj_transf C Terminal_cat (Terminal_func C) (@Obj_func C t) J;
+
+symbol ua3_terminal_hom_iso [C : Cat] [t : τ (Obj C)]
+  (J : τ (@ua3_TerminalAdjunction C t)) (x : τ (Obj C))
+  : τ (@DefIso Cat_cat (Hom_cat C x t) Terminal_cat)
+≔ @defiso_sym Cat_cat Terminal_cat (Hom_cat C x t)
+    (@adjunction_hom_component_iso C Terminal_cat (Terminal_func C) (@Obj_func C t)
+      J x Terminal_obj);
+
+// The lifted comparison retains the actual whole terminal-valued Hom.
+symbol ua3_terminal_family_iso [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  : τ (@DefIso Cat_cat
+      (Hom_cat (Functor_cat B C) F (@fapp0 _ _ (@comp_cat_cov_func B Terminal_cat C (@Obj_func C t)) V))
+      (Hom_cat (Functor_cat B Terminal_cat) (@fapp0 _ _ (@comp_cat_cov_func B C Terminal_cat (Terminal_func C)) F) V))
+≔ @defiso_sym Cat_cat _ _
+    (@adjunction_hom_component_iso (Functor_cat B C) (Functor_cat B Terminal_cat)
+      (@comp_cat_cov_func B C Terminal_cat (Terminal_func C))
+      (@comp_cat_cov_func B Terminal_cat C (@Obj_func C t))
+      (@one_cat_postcomp_adjunction B C Terminal_cat C1 T1 (Terminal_func C) (@Obj_func C t) J)
+      F V);
+
+// The terminal endpoint is the actual chosen constant family.
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat)) ⊢
+  @ua3_terminal_family_iso B C C1 T1 t J F V
+  : τ (@DefIso Cat_cat
+      (Hom_cat (Functor_cat B C) F (@Const_func B C t))
+      (Hom_cat (Functor_cat B Terminal_cat) (@fapp0 _ _ (@comp_cat_cov_func B C Terminal_cat (Terminal_func C)) F) V));
+
+// The retained mate and inverse reconstruct an arbitrary whole h.
+assert [B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (T1 : τ (IsNCat (cat_succ cat_zero) Terminal_cat))
+  [t : τ (Obj C)] (J : τ (@ua3_TerminalAdjunction C t))
+  (F : τ (Functor B C)) (V : τ (Functor B Terminal_cat))
+  (h : τ (@Transf B C F (@Const_func B C t))) ⊢
+  @fapp0 _ _ (@defiso_from _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V))
+    (@fapp0 _ _ (@defiso_to _ _ _ (@ua3_terminal_family_iso B C C1 T1 t J F V)) h)
+  ≡ h;
