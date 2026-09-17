@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; direct ordinary terminal/initial family API qualified; production normalizer migration pending
+Status: active living implementation plan — accepted 2026-09-17; direct ordinary family API and production zero-column adoption qualified; remaining normalizer migration open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -314,7 +314,7 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Direct ordinary API and original-column constructors check; production adoption and generic uniqueness-unifier audit remain |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Zero-column adoption qualified by all 94 nonsplit assertions; remaining family-normalizer and generic uniqueness-unifier audit open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Separate bounded application |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
@@ -341,8 +341,8 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: qualify and adopt the direct terminal/initial family operations
-in the production zero-column consumers; keep UA-1/UA-2 promotion conditional
+Current queue: migrate the remaining declaration-based family normalizer
+users after the qualified production zero-column adoption; keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
 [adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
@@ -406,14 +406,18 @@ the core-target inverse law uses the genuinely discrete Path(Unit) assembly.
 This is not a claim that the profile follows from the former beta rules or
 that objectwise contractibility suffices for arbitrary directed categories.
 
-Production zero-column and other native consumers still use the existing
-DefIso normalizers. Next migrate their actual maps and observation proofs in
-a bounded tranche, preserving the required computation and using the new
-proved inverse laws. Do not silently downgrade DefIso cuts, substitute an
-introduced diagram for the original D, or require a retired-algorithm
-comparison. The broader higher-terminality interpretation and the generic
-working terminal-uniqueness unifier audit remain open. The two new scoped
-views do not install that variable-sided uniqueness rule.
+Production kernel-counit and cokernel-unit zero-column mate inputs now use
+the derived comparison maps. Their existing whole differential observations
+use proved endpoint equations from the categorical evaluation laws. The
+runtime factor/reconstruction and native connecting tests pass without
+weakening their assertions. The two old zero-column DefIso wrappers are
+removed; the general declaration-based family normalizers still serve other
+consumers. All eight unchanged nonsplit proof–CAS artifacts pass (94 assertions),
+including both displayed certificates. Migrate the remaining normalizer users where
+their required computation is preserved. Do not silently downgrade DefIso
+cuts, substitute an introduced diagram for the original D, or require a
+retired-algorithm comparison. The broader higher-terminality interpretation
+and the generic working terminal-uniqueness unifier audit remain open.
 
 ## Review Evidence
 

@@ -609,3 +609,72 @@ The retained standalone adoption fragment was replayed after restoration.
 Both definitions form, then the intended whole-endpoint assertion fails in
 `ua3d_retained_adoption-20260917-153913.log`; it is not an import or resource
 failure. The production owner remains byte-identical to the checkpoint.
+
+### UA-3d Production Adoption Through Derived Endpoint Observations
+
+Previous turn classification: progress; the direct API and retained adoption
+boundary were checkpointed. This continuation proves all eight presented-
+family endpoint laws with the existing evaluator composition lemma, then
+all eight actual zero-column endpoint laws by composition with original-D
+reconstruction. No rewrite, unifier, inverse axiom or caller square is added.
+The raw conversion probe remains a stronger observation than the consumers
+need: their existing whole differential equations are proved with these
+derived endpoint laws instead of relying on immediate normalization.
+
+Both production mate-input definitions now use the derived IsoEvidence maps.
+The two former zero-column DefIso wrapper definitions are removed, and the
+four existing image/coimage factor tests use the corresponding new map
+projections. Their runtime assertions are unchanged. Existing zero-column
+view signatures are unchanged; their proof bodies compose the generic
+evaluation law with the new endpoint theorem. The underlying comparison maps
+and inverse data are actual categorical constructions, not transported
+functors or opaque output assumptions.
+
+Scoped checks pass: zero-column views, image/coimage factors and factor
+reconstruction, whole adjunction zero inputs, and direct native connecting.
+Receipts are in `tmp/probes/ua3d_native_consumers.json`. The two general
+declaration-based terminal/initial family normalizers still serve other
+consumers; their retirement is a separate remaining adoption step.
+
+The actual production map change warrants replaying the eight retained
+nonsplit proof–CAS artifacts (94 assertions). Their bytes were verified
+against the qualified consolidation hashes. The replay uses the existing
+per-artifact serial 6GiB/180s/o20,v1024 profile, warnings/SR enabled, without
+changing source, model contracts, interpretation data or runtime TypeScript.
+This is an affected integration check, not a repository-wide typecheck.
+Inputs/results are recorded in `tmp/probes/ua3d_cas_replay_inputs.json` and
+`tmp/probes/ua3d_cas_replay_results.json` as each target completes.
+
+### UA-3d Qualified Production Result
+
+All eight unchanged emitted artifacts pass, preserving all 94 assertions:
+LES diagram 56.191s, snake computation 21.473s, the three LES pair certificates
+159.264s/66.499s/36.347s, displayed LES exactness 122.046s, snake certificate
+signatures 99.542s, and displayed snake exactness 129.119s. These measured
+runs retain the reviewed 6GiB/180s per-target profile. No source, observation,
+model, normality, interpretation or CAS contract was weakened or made opaque.
+Some checks are slower with the derived maps; no broader performance or
+normalization theorem is inferred from their success.
+
+The native connecting warning inventory matches its exact pre-migration
+review in all five dimensions: the same 28 inherited critical pairs and no
+parser issue. The receipt is `tmp/probes/ua3d_native_warning_comparison.json`.
+Both new observation modules contain eight definitions with bodies and zero
+new rewrite/unification rules. Their strict LHS audit is clear. Source TOC,
+strict catalogue, the 182-claim book evidence and all 26 metrics tests pass.
+Source-only health is synchronized for 1271 files; it is not an all-target
+execution claim.
+
+The migrated production data uses the actual whole comparisons and their
+selected inverse maps. Existing differential observation types and runtime
+factor/reconstruction tests are preserved; only their proof bodies now apply
+the derived endpoint equations. The earlier raw endpoint-conversion probe
+remains unproved and is not presented as the mechanism used by production.
+This qualifies the zero-column adoption, not all of UA-3: the two general
+family-normalizer declarations still have other users, and the generic
+terminal-uniqueness unifier, higher interpretation and later tranches remain
+open. No Op/profile migration or deferred six-term comparison was resumed.
+
+Final UA-3d source-only metrics snapshot: `c478ff720f6c5b252a05ff2369fd5fa7fa2b3634ac1c0a49d06177fd0b2418b7`.
+After the successful replay, one explanatory comment was clarified; all
+formal declarations, bodies and assertions retain the checked tokens.

@@ -1689,8 +1689,9 @@ terminal eta extension, not a global functor or terminal-arrow eta rewrite.
 terminal/initial comparisons directly from an Adjunction witness, with the
 closed terminal profile used internally. Its optional whole arrow presentation
 retains an existing selected embedding. Results use actual maps/inverses and
-proved IsoEvidence laws; the former DefIso normalizers remain in production
-pending their scoped migration.
+proved IsoEvidence laws. Production kernel/cokernel zero-column mate inputs
+now use these derived maps and categorical endpoint observations; the general
+DefIso normalizers remain for other consumers pending their scoped migration.
 
 Generic whole diagram reflection, reconstruction and invertible-modification
 action have independent owners in `one_cat_diagram_family_reflection`,

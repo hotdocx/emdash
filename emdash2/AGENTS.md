@@ -161,8 +161,10 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   TerminalObject or caller square proof as a primary input. The literal
   terminal profile has explicit inverse data and one scoped ground proof-time
   eta instance in `emdash3_2_terminal_category_profile.lp`. The earlier
-  DefIso normalizers remain in production pending the active plan's migration;
-  do not describe the new IsoEvidence laws as new runtime inverse cuts.
+  general DefIso normalizers remain for other consumers; the production
+  kernel/cokernel zero-column mate inputs now use the derived maps and proved
+  endpoint observations. Do not describe IsoEvidence laws as new runtime
+  inverse cuts. The active plan records their integration qualification.
   Generic reflection, original-D reconstruction and invertible-modification
   action live in the independent `one_cat_diagram_family_reflection`,
   `one_cat_diagram_family_reconstruction` and `one_cat_arrow_family_isomorphisms`

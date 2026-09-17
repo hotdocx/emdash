@@ -158,10 +158,14 @@ of existing native consumers, and the remaining production migration.
 candidate. Its two IsoEvidence definitions typecheck using explicit
 reconstruction of the original column, but the appended whole-endpoint
 runtime assertion fails. Removing the assertions checks formation; leaving
-them in reproduces the unqualified observation. Production mate inputs are
-unchanged. The next step is to supply the needed whole endpoint observations
-from the existing evaluation/composition laws and qualify actual consumers;
-do not silently substitute a weaker check or add a new normalizer axiom.
+them in reproduces that historical stronger observation. The subsequent
+production adoption derives the required endpoint equations from existing
+evaluation/composition laws and uses them in the existing whole differential
+proofs. The production mate-input maps are switched, and all pre-existing
+zero-column, factor/reconstruction and connecting assertions pass. The raw
+conversion is not claimed; no actual consumer assertion has been weakened
+and no new normalizer axiom was added. The living ledger owns the nonsplit
+integration replay and retirement status.
 
 Additional logs:
 

@@ -8,7 +8,7 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   (P : τ (@KernelAdjunctionStructure C S t T))
   (Q : τ (@CokernelAdjunctionStructure C S t T0)) (d : τ (Functor WalkingArrow_cat C))
   ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_tgt
-      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@defiso_to _ _ _ (@one_cat_kernel_counit_zero_column_iso C S C1 t T T0 P)))
+      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@iso_evidence_to _ _ _ (@one_cat_kernel_counit_zero_column_evidence C S C1 t T T0 P)))
     ≡ @id C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt);
 
 // The actual kernel zero-column comparison fixes the nonzero endpoint.
@@ -18,7 +18,7 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   (P : τ (@KernelAdjunctionStructure C S t T))
   (Q : τ (@CokernelAdjunctionStructure C S t T0)) (d : τ (Functor WalkingArrow_cat C))
   ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_tgt
-      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@defiso_from _ _ _ (@one_cat_kernel_counit_zero_column_iso C S C1 t T T0 P)))
+      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@iso_evidence_from _ _ _ (@one_cat_kernel_counit_zero_column_evidence C S C1 t T T0 P)))
     ≡ @id C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt);
 
 // The normalized counit retains its src horizontal component.
@@ -49,7 +49,7 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   (P : τ (@KernelAdjunctionStructure C S t T))
   (Q : τ (@CokernelAdjunctionStructure C S t T0)) (d : τ (Functor WalkingArrow_cat C))
   ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_src
-      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@defiso_to _ _ _ (@one_cat_cokernel_unit_zero_column_iso C S C1 t T T0 Q)))
+      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@iso_evidence_to _ _ _ (@one_cat_cokernel_unit_zero_column_evidence C S C1 t T T0 Q)))
     ≡ @id C (@fapp0 WalkingArrow_cat C d walking_arrow_src);
 
 // The actual cokernel zero-column comparison fixes the nonzero endpoint.
@@ -59,7 +59,7 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   (P : τ (@KernelAdjunctionStructure C S t T))
   (Q : τ (@CokernelAdjunctionStructure C S t T0)) (d : τ (Functor WalkingArrow_cat C))
   ⊢ @tapp0_fapp0 WalkingArrow_cat C _ _ walking_arrow_src
-      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@defiso_from _ _ _ (@one_cat_cokernel_unit_zero_column_iso C S C1 t T T0 Q)))
+      (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) _ _ d (@iso_evidence_from _ _ _ (@one_cat_cokernel_unit_zero_column_evidence C S C1 t T T0 Q)))
     ≡ @id C (@fapp0 WalkingArrow_cat C d walking_arrow_src);
 
 // The normalized unit retains its src horizontal component.
