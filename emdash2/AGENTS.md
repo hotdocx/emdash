@@ -534,6 +534,11 @@ with warnings enabled before rejecting the proposed rule.
 - Prefer functor-level folds when the result must remain iterable at higher
   cells. A capped point rule can erase the functor object needed for the next
   hom action.
+- Keep an earlier Hom head stable when eagerly expanding it would bypass its
+  established generic cuts. Recursive next-Hom refinement can expose further
+  action through the existing owners. Check whole-versus-capped application
+  orders and identity/composition observations; the recursive Sigma reviewer
+  records a concrete instance of this distinction.
 - Treat identities as a family of normal forms (`id`, `id_func`, `id_funcd`,
   specialized projections). Prefer narrow typed consumer rules to broad global
   identity rewrites.

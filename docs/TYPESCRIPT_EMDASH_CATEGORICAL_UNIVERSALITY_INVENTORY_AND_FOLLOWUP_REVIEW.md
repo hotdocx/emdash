@@ -224,7 +224,7 @@ of a classifier does not construct an inhabitant for every category.
 | Whole H, Coim⇒Im, `OneCatAdjunctionNormality`, `OneCatAbelianAdjunctionStructure` | [H families](../emdash2/emdash3_2_homology_adjunction_families.lp), [normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp), [Abelian package](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp). | H is derived through the same K/Q. Normality is Ω evidence along the actual whole Coim⇒Im map, retaining its inverse. Native δ/exactness and their finite ordinary/CAS observations use this primary route. |
 | `one_cat_diagram_reconstruction_iso` | [Diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp): declared ordinary D∘E≅id on the walking-arrow diagram category. | Derived faithfulness and actual inverse diagram maps support the universal-operation consumers. This is a shape-comparison assembly, not a new kernel universality or an unrestricted equivalence with higher LaxArrow(C). |
 | `one_cat_arrow_family_comparison_evidence`, `one_cat_diagram_family_reconstruction_evidence` | [Arrow-family isomorphisms](../emdash2/emdash3_2_one_cat_arrow_family_isomorphisms.lp) and [family reconstruction](../emdash2/emdash3_2_one_cat_diagram_family_reconstruction.lp): fully defined whole maps and inverse-law evidence. | [Generic reflection](../emdash2/emdash3_2_one_cat_diagram_family_reflection.lp) and the two original reconstruction maps have independent owners; their moved signatures/bodies are unchanged. IsoEvidence laws are not advertised as additional DefIso runtime cuts. |
-| Γ and the whole H comparison | [Retained audit candidate](../emdash2/audits/categorical-family-introduction-boundary/README.md), not an active library declaration. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J) in the isolated candidate. Constructor, object, both arrow projections, triangle and next-action types pass with two structural Sigma projection rules. Next-Hom projection conversions and the whole H comparison remain open. It is unrelated to the already existing slice-base-change γ cut despite the similar letter. |
+| Γ and the whole H comparison | [Retained audit candidate](../emdash2/audits/categorical-family-introduction-boundary/README.md), not an active library declaration. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J) in the isolated candidate. Both arrow projections and retained triangle pass with two unpromoted Sigma projection rules. The core's recursive Sigma action now supports the source projection through third-level cells. The higher target projection and whole H comparison remain open. |
 
 ## The Actual Relation Map
 
@@ -312,13 +312,35 @@ normal forms. Retain the no-unifier control and runtime-negative observation.
 
 ## Execution Tranches And Completion Gates
 
+The mathematical Γ consumer is a coherent family of the current native
+homology inputs. For an ordinary additive C with the supplied whole K/Q,
+write J(X)=(X→0), and take A:B→C, D:B→Diag(C), h:J∘A⇒D. The existing native
+input category Z(C) has objects (X,d,u:J(X)→d), with projections p,q and
+universal transformation τ:J∘p⇒q. The classifier should be one internal
+functor Γ:B→Z(C), Γ(b)=(A(b),D(b),h_b), retaining all action already supplied
+by A,D,h; callers provide no additional naturality squares.
+
+Its mathematical projection laws are p∘Γ=A and q∘Γ=D, with τ along Γ
+recovering h. These equations describe the classification property; the
+formal interface may use canonical whole comparisons compatible with τ.
+Do not demand a stronger global functor eta/normalization theorem unless an
+actual consumer requires it. Point formulas alone still do not establish
+the needed whole comparisons.
+
+The family construction forms β=K(h)∘η_A and H_family=Q∘Arr(β). The same
+construction at p,q,τ gives the current H_native:Z(C)→C. The desired output
+is an actual whole natural isomorphism H_family≅H_native∘Γ with retained
+inverse data. Both sides use the same current native K/Q. This classification
+and reuse result is additional to the already whole H/maps/δ interface; it
+does not eliminate the separately supplied finite CAS interpretation contracts.
+
 | Tranche | Required result | State |
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Isolated target/triangle and next-action types pass; next-Hom projection computation and whole H comparison open. Candidate remains outside library |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. Higher target projection and whole H comparison open; Γ remains outside library |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -344,9 +366,9 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: continue Γ at the whole Hom/projection owners after its
-isolated target-arrow success. Its retained higher cells typecheck; conversion
-of the next projections to A[θ] and D[θ] and the whole H comparison remain
+Current queue: continue Γ's whole input/H comparison, addressing the displayed
+whole Hom/projection boundary where its consumer requires it. The source projection
+computes through third-level cells; D[θ] and the whole H comparison remain
 unqualified. Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented

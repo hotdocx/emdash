@@ -3845,6 +3845,19 @@ global functoriality cuts: the explicit Sigma arrow is the runtime projection
 owner, while generic identity/composition paths retain the propositional
 comparison with those strict views.
 
+Its whole Hom action now totalizes the existing native Hom section:
+
+```text
+(total s)₁(x,y) ↪ Op_func(total(piapp1_func(s,x,y))).
+```
+
+The dependent Hom family and both section values remain the original ones.
+The next Hom actions of the first projection and total base change recurse
+through their corresponding Sigma operations. Their first Hom heads stay
+stable, preserving the existing identity/composition cuts. Capped next-action
+rules apply to constructor-visible cells and agree with the whole route; no
+arbitrary Sigma-arrow eta or path cast is introduced.
+
 For the Sigma first projection, this stable head makes section uncurrying a
 direct proof-time comparison:
 
@@ -3886,25 +3899,15 @@ transformation facade (`Const_transfd_func` / `Const_transfd`). Ordinary
 weakening has a separate stable owner `Const_func_func`; it no longer unfolds
 through the displayed section constructor.
 
-Conceptually, a section should also determine a functor into the total
-category:
+The active section-total owner expresses the contextual pair as a whole
+internal functor:
 
 ```text
-section_total(s) : K → Σ_K E
-section_total(s)(k) = (k, s[k])
-π₁ ∘ section_total(s) = id_K
+section_total_func(E,s) : K → Σ_K E
+section_total_func(E,s)(k) = (k, s[k])
 ```
 
-The named `section_total` facade is not currently exposed as a primitive in
-v3.2, but its construction is no longer semantically missing. A transparent
-terminal-total functor
-
-```text
-K → Σ_K Const_K(1)
-```
-
-followed by `sigma_map_func(s)` gives the section totalization. More
-generally, for `F : A → K` and `D : Catd(K)`, the active owner
+For `F : A → K` and `D : Catd(K)`, the active base-change owner
 
 ```text
 sigma_pullback_total_func(F,D) : Σ_A(F^*D) → Σ_K D
@@ -3917,9 +3920,13 @@ computes on both levels:
 (p,alpha)   ↦ (F[p],alpha).
 ```
 
-Thus a contextual pair over `F` is expressed transparently as terminal
-totalization, then `sigma_map_func(s)` into `Σ_A(F^*D)`, then
-`sigma_pullback_total_func(F,D)`. This is the Grothendieck totalization of the
+Thus a section s over F*D gives the whole composite
+`sigma_pullback_total_func(F,D) ∘ section_total_func(F*D,s)`.
+The [recursive Sigma reviewer](../examples/sigma_recursive_hom_action.lp)
+checks that its base projection has F's object, arrow, second-cell and
+third-cell actions, and preserves the first-Hom identity observations. This
+does not claim runtime equality of the complete composite functor with F.
+The base-change operation is the Grothendieck totalization of the
 existing asymmetric family reindexing `Pullback_catd D F`; it is not a
 pullback constructor for arbitrary functors between total categories. The
 direct section action `s[f]` remains available, with the dependent hom

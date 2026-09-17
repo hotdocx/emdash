@@ -1,9 +1,10 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4): the isolated candidate now checks constructor,
-point, both arrow projections, retained triangle and next-action types.
-The stronger next-Hom projection conversions and whole H comparison remain
-open. No candidate rule or Γ definition is installed in the library.
+Status (2026-09-17, UA-4b): the isolated candidate checks constructor, point,
+both arrow projections, retained triangle and the source projection through
+third-level cells. The higher target projection and whole H comparison remain
+open. The generic recursive Sigma actions are in the core; the two displayed
+projection rules and Γ itself remain outside the library.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -93,16 +94,24 @@ Hom carrier, with A[g] and the actual retained second coordinate. It does not
 claim that the raw nested-Sigma second coordinate itself converts to D[g].
 Both next-action definitions in `next_source.lpfragment` and
 `next_target.lpfragment` also typecheck with their intended endpoints.
-Their final assertions, asking for conversion to A[θ] and D[θ], still fail.
-Typed whole action is therefore retained; the stronger projection computation
-has not been established. Nor do the whole source/target composite functors
+At UA-4a their final assertions, asking for conversion to A[θ] and D[θ], both
+failed. UA-4b's generic recursive Sigma owners now establish A[θ] and the next
+source projection A[ξ]; D[θ] still fails. Typed whole action is retained, while
+the target projection computation remains open. Nor do the whole source/target composite functors
 already normalize to A and D merely because their point/arrow views do.
 
-The next task is to expose the needed whole Hom/projection action at the
-existing Sigma, base-change and section-total owners, then construct the whole
-H comparison. Prefer whole owners and required projection-order joins over
-a growing list of Γ-specific point rules. Keep the current candidate outside
-the library while these qualification requirements remain open.
+The core refinement keeps the first Hom owners for projection and base change,
+computes their recursive next action, and totalizes the existing piapp1_func
+section for section-total Hom action. It adds no primitive or unifier. The
+first-Hom identity computations remain unchanged. The remaining target normal
+form involves the displayed presheaf action of the varying Sigma projection;
+a separate displayed-identity action probe alone did not close it.
+
+The next task is the whole input/H comparison, addressing that displayed
+Hom/projection boundary where the actual consumer needs it. Prefer canonical
+whole comparisons with retained data over imposing a stronger global functor
+eta/normalization requirement. Keep Γ outside the library while its required
+qualification remains incomplete.
 
 ## Reproduce The UA-4 Candidate
 
@@ -129,6 +138,9 @@ for side in ['source', 'target']:
         comma + '\n' + fragment.split('\nassert ', 1)[0])
     Path('tmp/probes/ua4_next_' + side + '_replay.lp').write_text(
         comma + '\n' + fragment)
+Path('tmp/probes/ua4_source_third_replay.lp').write_text(
+    comma + '\n' + (audit / 'next_source.lpfragment').read_text() + '\n' +
+    (audit / 'third_source.lpfragment').read_text())
 PY
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_projection_replay.lp
@@ -138,9 +150,11 @@ OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_next_source_types.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_next_target_types.lp
-# Each of these two stronger conversion controls is expected to fail.
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_next_source_replay.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4_source_third_replay.lp
+# The stronger target conversion control is still expected to fail.
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_next_target_replay.lp
 ```
@@ -162,7 +176,8 @@ pairs as the baseline, with identical term heads and rule families and no
 parser issue. This is a scoped warning comparison, not a confluence theorem.
 The living ledger records the final recipe replays and next-action boundary.
 
-Source identity at this audit:
+Source identity at the historical UA-4a audit (before the recursive Sigma
+owner refinement; current core hashes and checks are in the living ledger):
 
 | Source | SHA-256 |
 | --- | --- |

@@ -13556,6 +13556,23 @@ rule @sigma_arrow_fibre
       (Struct_sigma _ $alpha)
   ↪ $alpha;
 
+// Keep the first Hom owner; refine its recursive next action.
+rule @fapp1_func _ _ (@fapp1_func _ _ (@Sigma_proj1_func $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v))
+      (Struct_sigma $p $a) (Struct_sigma $q $b)
+  ↪ @fapp1_func (Hom_cat (@Sigma_cat $K $E) (Struct_sigma $x $u) (Struct_sigma $y $v)) (Hom_cat $K $x $y)
+      (@Op_func
+      (@Sigma_cat (Op_cat (Hom_cat $K $x $y))
+        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v))
+      (Op_cat (Hom_cat $K $x $y))
+      (@Sigma_proj1_func (Op_cat (Hom_cat $K $x $y))
+        (@homd_ $K $E $E (@id_funcd $K $E) $x $u $y $v))) (Struct_sigma $p $a) (Struct_sigma $q $b);
+
+// Capped next projection joins the whole route on a visible Sigma cell.
+rule @fapp1_fapp0 _ _
+      (@fapp1_func _ _ (@Sigma_proj1_func _ _) (Struct_sigma _ _) (Struct_sigma _ _))
+      (Struct_sigma _ _) (Struct_sigma _ _) (Struct_sigma $kappa _)
+  ↪ $kappa;
+
 /*
   Explicit first-hom projection facade for Sigma totals.
 
@@ -16133,6 +16150,18 @@ rule @fapp1_fapp0 _ _
       $p
       (@piapp1_fapp0 $K $E $s $x $y $p);
 
+// Totalizing the native Hom section retains the entire next action.
+rule @fapp1_func _ _ (@section_total_func $K $E $s) $x $y
+  ↪ @Op_func
+      (Op_cat (Hom_cat $K $x $y))
+      (@Sigma_cat (Op_cat (Hom_cat $K $x $y))
+        (@homd_ $K $E $E (@id_funcd $K $E)
+          $x (@piapp0 $K $E $s $x) $y (@piapp0 $K $E $s $y)))
+      (@section_total_func (Op_cat (Hom_cat $K $x $y))
+        (@homd_ $K $E $E (@id_funcd $K $E)
+          $x (@piapp0 $K $E $s $x) $y (@piapp0 $K $E $s $y))
+        (@piapp1_func $K $E $s $x $y));
+
 // Raw canonical-triangle cell extracted from the internal displayed hom-action.
 // This is the stable component-level displayed laxity normal form.
 // The concrete transported-object identity is consumed directly by the
@@ -17491,6 +17520,39 @@ rule @fapp1_fapp0
       $v
       (@fapp1_fapp0 $A $K $F $a $b $p)
       $alpha;
+
+// Retain base change at its first Hom owner; refine recursive next action.
+rule @fapp1_func _ _ (@fapp1_func _ _ (@sigma_pullback_total_func $A $K $F $E) (Struct_sigma $x $u) (Struct_sigma $y $v))
+      (Struct_sigma $p $a) (Struct_sigma $q $b)
+  ↪ @fapp1_func (Hom_cat (@Sigma_cat $A (@Pullback_catd $A $K $E $F)) (Struct_sigma $x $u) (Struct_sigma $y $v)) (Hom_cat (@Sigma_cat $K $E) (Struct_sigma (@fapp0 $A $K $F $x) $u) (Struct_sigma (@fapp0 $A $K $F $y) $v))
+      (@Op_func
+        (@Sigma_cat (Op_cat (Hom_cat $A $x $y))
+          (@Pullback_catd (Op_cat (Hom_cat $A $x $y))
+            (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+            (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v)
+            (@Op_func (Hom_cat $A $x $y) (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)) (@fapp1_func $A $K $F $x $y))))
+        (@Sigma_cat (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+          (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v))
+        (@sigma_pullback_total_func (Op_cat (Hom_cat $A $x $y))
+          (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+          (@Op_func (Hom_cat $A $x $y) (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)) (@fapp1_func $A $K $F $x $y))
+          (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v))) (Struct_sigma $p $a) (Struct_sigma $q $b);
+
+rule @fapp1_fapp0 _ _ (@fapp1_func _ _ (@sigma_pullback_total_func $A $K $F $E) (Struct_sigma $x $u) (Struct_sigma $y $v))
+      (Struct_sigma $p $a) (Struct_sigma $q $b) (Struct_sigma $theta $beta)
+  ↪ @fapp1_fapp0 (Hom_cat (@Sigma_cat $A (@Pullback_catd $A $K $E $F)) (Struct_sigma $x $u) (Struct_sigma $y $v)) (Hom_cat (@Sigma_cat $K $E) (Struct_sigma (@fapp0 $A $K $F $x) $u) (Struct_sigma (@fapp0 $A $K $F $y) $v))
+      (@Op_func
+        (@Sigma_cat (Op_cat (Hom_cat $A $x $y))
+          (@Pullback_catd (Op_cat (Hom_cat $A $x $y))
+            (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+            (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v)
+            (@Op_func (Hom_cat $A $x $y) (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)) (@fapp1_func $A $K $F $x $y))))
+        (@Sigma_cat (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+          (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v))
+        (@sigma_pullback_total_func (Op_cat (Hom_cat $A $x $y))
+          (Op_cat (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)))
+          (@Op_func (Hom_cat $A $x $y) (Hom_cat $K (@fapp0 $A $K $F $x) (@fapp0 $A $K $F $y)) (@fapp1_func $A $K $F $x $y))
+          (@homd_ $K $E $E (@id_funcd $K $E) (@fapp0 $A $K $F $x) $u (@fapp0 $A $K $F $y) $v))) (Struct_sigma $p $a) (Struct_sigma $q $b) (Struct_sigma $theta $beta);
 
 // Semantic curry sanity checks. These live after `Product_pair_tele_func`
 // computation rules, because the primary curry package is a definition through

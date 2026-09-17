@@ -907,3 +907,110 @@ the strict catalogue remains current. Carry forward the previous qualified
 native proof–CAS and book results for those unchanged boundaries. The next
 step is whole Hom/projection computation at existing Sigma, base-change and
 section-total owners, followed by the whole H comparison; UA-4 remains open.
+
+### UA-4b — Whole Sigma Projection Hom Action
+
+Previous turn: progress, checkpointed at `76964afa`. The current worktree is
+clean and its baseline ancestry is unchanged. The next owner review finds
+that Sigma_proj1_func has capped constructor-arrow computation and explicit
+first/next-hom projection facades, but no fapp1_func fold. The intended whole
+Hom functor is the opposite of the first projection of the already existing
+Hom(Sigma) total, with its original homd_ family. A definition of that functor
+forms and projects arbitrary total arrows; its next-action comparison with
+the existing facade fails on the unchanged core
+(`ua4b_sigma_projection_hom-20260917-171219.log`).
+
+The owner-position experiment adds only that recursive whole Hom fold first.
+It uses the existing core, no new carrier or universal witness, and retains
+the Sigma pair endpoints. Check whether the generic capped projection route
+also needs a corresponding base-projection observation, then retest Γ before
+promotion. The full-source probe retains warnings/SR and the default serial
+2GiB/90s guard with o20,v1024; no repository-wide TypeScript check is involved.
+
+### UA-4b Selected Recursive Owner Refinement
+
+Directly unfolding the first Hom projections of Sigma projection/base change
+was too eager for the established normal forms. The expanded projection
+reference failed the whole-application identity observation; broadening the
+capped projection to arbitrary arrows also lost the old identity computation.
+The attempted proof-time view did not close its typed consumer. These
+experiments are not promoted, and no general Sigma-identity, composition-
+commuting or arrow-eta rule is added to repair their consequences.
+
+The selected implementation keeps both first Hom owners stable. Two rules
+per owner refine their recursive next Hom action and its constructor-visible
+capped observation through the same Sigma operations. Section totalization
+gets one whole Hom rule: totalize the existing piapp1_func section, then take
+the opposite prescribed by the existing Hom(Sigma) carrier. This is five rules
+at existing owners, with no new symbol, unifier, universal witness, caller
+square or path cast. The original hom_int/homd_int remain the foundations.
+
+The full owner-position source passes with SR and warnings enabled. Exact
+old/new warning inventories agree in all five dimensions after source-line
+mapping: 157 replaceable variables, 1144 inherited critical pairs, and no
+parser issue (`tmp/probes/ua4b_core_warning_comparison.json`). The strict LHS
+audit adds no unreviewed slot. The installed core differs from that checked
+candidate only by whitespace alignment; its source hash is
+`87fca778e9f07cd5098e843ef277f3bee5c110b5ba2e3624af2698c98de57ded`.
+The compiled canonical owner also checks with --gen-obj.
+
+The new `examples/sigma_recursive_hom_action.lp` uses the genuine lifted-
+section composite Sigma(F)∘total(s). Its base projection retains F's object,
+arrow, second-cell and third-cell action, preserves the first-Hom identity
+observations, and joins section-total evaluation orders. A negative guard
+retains the first projection's first Hom head. All eight assertions pass;
+the unchanged-core control fails at the first second-cell assertion.
+
+The current Γ audit consequently computes its source projection through
+third-level cells, using the promoted generic core behavior and the two
+still-unpromoted displayed projection rules. Its target next-Hom comparison
+remains open. A separate whole displayed-identity presheaf-action candidate
+passed SR but did not close that target assertion; it is not installed.
+The remaining normal form involves the displayed presheaf action of the
+varying Sigma projection. The actual whole input/H comparison remains the
+consumer target, rather than a blanket global normalization requirement.
+
+Focused validation: all eight affected reviewers pass, including Sigma,
+fibrewise Sigma, displayed identity, both cubical owners, native connecting
+and zero-column views (`tmp/probes/ua4b_focused_results.json`). The complete
+nucleus diagnostics pass with current compiled parents at the previously
+qualified 6GiB/90s/o20,v1024 quiet profile, SR enabled
+(`emdash3_2_checks-20260917-175609.log`).
+
+The unchanged eight-artifact nonsplit proof–CAS corpus is being replayed
+serially under the existing per-target 6GiB/180s/o20,v1024 profile. Each input
+hash is checked before its run. Results are written to
+`tmp/probes/ua4b_cas_replay_results.json`; this affected core-integration check
+changes no CAS input, model/normality/interpretation contract or TypeScript.
+
+Standing Sigma documentation now describes the active section-total owner
+and recursive computation, removing the stale suggestion that its named
+owner is only prospective. The living plan records the mathematical Γ/H
+objective and distinguishes its whole canonical comparisons from stronger
+runtime equality demands. Book source is unchanged; its 182 evidence entries
+still validate. Further book exposition is part of UA-6.
+
+Catalogue and source TOC pass. Source-only health covers 1272 files, snapshot
+`9261b1c0721e0919625d85243596c13d6e52288f84ceb4a436a0e2c17c96ff31`;
+this is not an all-target execution claim. The goal and UA-4 remain active.
+
+### UA-4b Integration Qualification
+
+All eight byte-verified nonsplit artifacts pass, retaining all 94 assertions:
+diagram 35.013s; snake computation 26.583s; LES pair certificates
+29.500s/30.912s/28.411s; displayed LES exactness 89.067s; snake certificate
+signatures 103.382s; displayed snake exactness 104.142s. The existing serial
+6GiB/180s/o20,v1024 profile is sufficient; no resource ceiling, observation,
+contract or proof data was changed to obtain these results.
+
+The Γ source check through third-level cells also passes against the installed
+core without overlaying the five core rules. The current triangle replay
+passes, and the higher target replay retains its expected final assertion
+failure. The audit recipe and source/target status are updated accordingly;
+`third_source.lpfragment` preserves the nonidentity third-cell observation.
+Only the two displayed projection rules and Γ remain unpromoted.
+
+The eight focused reviewers, full nucleus, warning comparison, strict LHS,
+catalogue, TOC, current health snapshot and unchanged book evidence are green.
+No long repository-wide TypeScript check, Op/profile migration, deferred
+six-term comparison, main integration or publication was performed.

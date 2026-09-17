@@ -1885,11 +1885,16 @@ This owner was added only after auditing `Sigma_func`, `sigma_map_func`,
 surfaces and finding no existing owner of this base-changing map. It is the
 Grothendieck totalization of the existing asymmetric family pullback, not a
 generic pullback constructor for arbitrary total functors. Contextual pairing
-therefore remains an explicit composite: terminal totalization,
-`sigma_map_func` for a section of the pulled-back family, then
-`sigma_pullback_total_func`. The direct arrow action of
-`sigma_intro_tapp0_func`, a named `section_total` presentation facade, and a
-whole-functor first-projection beta remain separate.
+uses `sigma_pullback_total_func(F,D) ∘ section_total_func(F*D,s)` for a whole
+section s of the pulled-back family. The section-total Hom functor totalizes
+the existing `piapp1_func` section. First projection and total base change
+retain their first Hom heads and compute their next Hom actions recursively
+through the same Sigma owners, with constructor-visible capped joins. The
+`sigma_recursive_hom_action` reviewer checks the base projection through
+third-level cells, both first-Hom identity observations and section evaluation.
+No new carrier, universal-structure primitive or arbitrary arrow eta is added.
+The direct arrow action of `sigma_intro_tapp0_func` and a whole-functor
+first-projection beta remain separate.
 
 Independent Cat-valued displayed siblings reuse the ordinary product
 semantics rather than a new `Product_catd` head. For `B,C : Catd K`, the
