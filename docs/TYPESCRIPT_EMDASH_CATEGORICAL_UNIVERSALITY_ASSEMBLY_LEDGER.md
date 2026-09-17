@@ -818,3 +818,92 @@ The next dependency-ready application is UA-4, the retained Γ/whole-H
 comparison. UA-1/UA-2 consumer justification, broader higher qualification,
 UA-5 and the final audit remain open. This goal is active, with no current
 external blocker. The usual Op/profile, six-term and spectral deferrals remain.
+
+## UA-4 — Resume Whole Represented-Comma Family Introduction
+
+Previous goal turn: progress, with UA-3e and UA-3f checkpointed at `04c58855`
+and `2d5eb8a6`. The worktree is clean and remains a descendant of the published
+baseline. No checker from that turn remains live.
+
+The retained Γ fragment is replayed against the current transformation-graph
+owner. Its constructor, point action and source-arrow assertions pass; the
+target-arrow assertion fails in under one second
+(`ua4_comma_baseline-20260917-164118.log`). This revalidates the recorded
+computational boundary, rather than treating a historical failure as current
+without execution.
+
+The bounded hypothesis is structural: fibrewise Sigma of a whole family map
+preserves the inner base projection, and total base change maps it through
+the supplied base functor. First isolate these operations at their existing
+owners with nonidentity inputs and both projection orders. Preserve the
+actual displayed actions; do not erase them, install a bespoke Γ action
+axiom, or resume Op/profile migration. The acceptance consumer is Γ's target
+action, followed by its retained next Hom/triangle data and the actual whole
+H-family comparison. Construction alone is insufficient.
+
+### UA-4a — Target Action Advances; Whole Projection Computation Remains
+
+The target term separately typechecks as D(x)→D(y); this distinguishes its
+formation from the failed conversion assertion. Two structural observations
+then close the exact retained target assertion:
+
+- projecting after fibrewise Sigma preserves the original inner base arrow;
+- projecting after family-natural total base change along G maps that base
+  arrow through G, even when the outer displayed base was reindexed.
+
+Both are tested at the existing varying-Sigma projection owner. The identity
+head in the whiskering pattern retains its actual functor-category guard;
+the less constrained direct-action candidate failed subject reduction and
+was not retained. The qualified opposite-Sigma test uses arbitrary native
+dependent-Hom input and constructor-visible endpoints. An arbitrary displayed
+map is a negative base-preservation control. These are observations of the
+existing operations, not a Γ action axiom, a discarded filler or an Op
+signature migration.
+
+With the two rules overlaid, the unchanged six-definition Γ fragment passes
+its object, source-arrow and target-arrow checks. Computing the complete
+target observation yields exactly `λ K X Y J A D h x y g, D[g]` (h is unused
+by that projection). Removing either rule reproduces a failed target
+conversion. The retained internal triangle also typechecks with the original
+A[g] and actual nested-Sigma target coordinate. Its raw target coordinate is
+not claimed separately to normalize to D[g].
+
+Both next-action observations typecheck at the intended A[p]→A[q] and
+D[p]→D[q] endpoints. Their stronger conversion assertions to A[θ] and D[θ]
+still fail. Likewise, inspecting the whole source/target composites shows
+the retained opposite Sigma-map, total-base-change and section-total heads;
+point/arrow success does not identify those whole functors with A and D.
+This is the remaining computation/whole-comparison boundary, not loss of
+the higher cells or a proof that Γ is fully qualified.
+
+The candidate and exact reproducible positive/negative sources are now in
+`emdash2/audits/categorical-family-introduction-boundary/`. No library rule,
+symbol, import, model contract or TypeScript/CAS code has changed. The rules
+remain unpromoted while the whole Hom/projection work and actual H comparison
+are open. The implementation goal is not narrowed to the passing arrow test.
+
+The final documented recipe is replayed serially with warnings/SR enabled at
+2GiB/90s/o20; all six outcomes match their intended status:
+
+| Program | Outcome | Seconds |
+| --- | --- | ---: |
+| Generic projection consumer and arbitrary-map negative | pass | 0.784 |
+| Γ object/both arrow projections and retained triangle | pass | 1.421 |
+| Source next-action type | pass | 1.382 |
+| Target next-action type | pass | 1.994 |
+| Source next-Hom conversion | expected assertion failure | 2.726 |
+| Target next-Hom conversion | expected assertion failure | 3.150 |
+
+Receipts are in `tmp/probes/ua4_recipe_results.json`. Both isolated rule-owner
+probes have no warnings. The graph consumer retains the same three inherited
+graph/strict-identity critical pairs in all five normalized inventory
+dimensions (`tmp/probes/ua4_graph_warning_comparison.json`). The strict LHS
+scan has zero unreviewed inferred slots. These scoped checks do not establish
+unrestricted higher duality or confluence.
+
+Library/core hashes and the 1271-file health snapshot remain unchanged at
+`9078542f99deedb825fbe2e8581ad1c633c1101ecedd99add8d72a77a80d5df0`;
+the strict catalogue remains current. Carry forward the previous qualified
+native proof–CAS and book results for those unchanged boundaries. The next
+step is whole Hom/projection computation at existing Sigma, base-change and
+section-total owners, followed by the whole H comparison; UA-4 remains open.

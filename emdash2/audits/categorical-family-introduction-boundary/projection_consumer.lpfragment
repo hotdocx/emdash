@@ -1,0 +1,52 @@
+symbol ua4_total [K A : Cat] (E : τ (Functor K (Catd_cat A))) : τ (Catd K)
+≔ @comp_cat_fapp0 K (Catd_cat A) Cat_cat (@Sigma_func A) E;
+symbol ua4_total_map [K A : Cat] (E D : τ (Functor K (Catd_cat A)))
+ (eta : τ (@Transf K (Catd_cat A) E D))
+ : τ (@Functord K (@ua4_total K A E) (@ua4_total K A D))
+≔ @fapp0 _ _ (@comp_cat_cov_fapp1_func K (Catd_cat A) Cat_cat (@Sigma_func A) E D) eta;
+
+symbol ua4_op_total [K A : Cat] (E : τ (Functor K (Catd_cat A))) : τ (Catd K)
+≔ @Op_catd K (@ua4_total K A E);
+symbol ua4_op_total_map [K A : Cat] (E D : τ (Functor K (Catd_cat A)))
+ (eta : τ (@Transf K (Catd_cat A) E D))
+ : τ (@Functord K (@ua4_op_total K A E) (@ua4_op_total K A D))
+≔ @Op_funcd K (@ua4_total K A E) (@ua4_total K A D) (@ua4_total_map K A E D eta);
+symbol ua4_op_proj [K A : Cat] (E : τ (Functor K (Catd_cat A)))
+ : τ (@Functord K (@ua4_op_total K A E) (@Const_catd K (Op_cat A)))
+≔ @Op_funcd K (@ua4_total K A E) (@Const_catd K A) (@sigma_proj1_family_funcd K A E);
+// The input is the native dependent-Hom arrow, with no reconstructed square.
+symbol ua4_op_project_after_total_map [K A : Cat]
+ (E D : τ (Functor K (Catd_cat A))) (eta : τ (@Transf K (Catd_cat A) E D))
+ (x y : τ (Obj K)) (p : τ (Hom K x y))
+ (a b : τ (Obj A))
+ (ux : τ (Obj (@Fibre_cat A (@fapp0 K (Catd_cat A) E x) a)))
+ (vy : τ (Obj (@Fibre_cat A (@fapp0 K (Catd_cat A) E y) b)))
+ (alpha : τ (Hom (@Fibre_cat K (@ua4_op_total K A E) y)
+   (@fapp0 _ _ (@catd_transport_func K (@ua4_op_total K A E) x y p) (Struct_sigma a ux)) (Struct_sigma b vy)))
+ : τ (Hom (Op_cat A)
+   a
+   b)
+≔ @fdapp1_int_hom_fapp0 K (@ua4_op_total K A D) (@Const_catd K (Op_cat A))
+ (@ua4_op_proj K A D) x y p
+ (@fapp0 _ _ (@Fibre_func K (@ua4_op_total K A E) (@ua4_op_total K A D) (@ua4_op_total_map K A E D eta) x) (Struct_sigma a ux))
+ (@fapp0 _ _ (@Fibre_func K (@ua4_op_total K A E) (@ua4_op_total K A D) (@ua4_op_total_map K A E D eta) y) (Struct_sigma b vy))
+ (@fdapp1_int_hom_fapp0 K (@ua4_op_total K A E) (@ua4_op_total K A D)
+   (@ua4_op_total_map K A E D eta) x y p (Struct_sigma a ux) (Struct_sigma b vy) alpha);
+assert  [K A : Cat]
+ (E D : τ (Functor K (Catd_cat A))) (eta : τ (@Transf K (Catd_cat A) E D))
+ (x y : τ (Obj K)) (p : τ (Hom K x y))
+ (a b : τ (Obj A))
+ (ux : τ (Obj (@Fibre_cat A (@fapp0 K (Catd_cat A) E x) a)))
+ (vy : τ (Obj (@Fibre_cat A (@fapp0 K (Catd_cat A) E y) b)))
+ (alpha : τ (Hom (@Fibre_cat K (@ua4_op_total K A E) y)
+   (@fapp0 _ _ (@catd_transport_func K (@ua4_op_total K A E) x y p) (Struct_sigma a ux)) (Struct_sigma b vy)))
+ ⊢
+ @ua4_op_project_after_total_map K A E D eta x y p a b ux vy alpha
+ ≡ @fdapp1_int_hom_fapp0 K (@ua4_op_total K A E) (@Const_catd K (Op_cat A)) (@ua4_op_proj K A E) x y p (Struct_sigma a ux) (Struct_sigma b vy) alpha;
+
+// An arbitrary displayed map between totals need not preserve the inner base.
+assertnot [K A : Cat] (E D : τ (Functor K (Catd_cat A)))
+ (FF : τ (@Functord K (@ua4_total K A E) (@ua4_total K A D))) ⊢
+ @comp_catd_fapp0 K (@ua4_total K A E) (@ua4_total K A D) (@Const_catd K A)
+   (@sigma_proj1_family_funcd K A D) FF
+ ≡ @sigma_proj1_family_funcd K A E;

@@ -1,0 +1,4 @@
+
+symbol ua4_comma_triangle [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x y : τ (Obj K)) (g : τ (Hom K x y))
+ : τ (Obj (@homdc_fibre X Y (@represented_comma_prof X Y J) (@fapp0 K X A x) (@fapp0 K X A y) (@fapp0 K Y D x) (@fapp0 K Y D y) (@tapp0_fapp0 K Y (@comp_cat_fapp0 K X Y J A) D x h) (@tapp0_fapp0 K Y (@comp_cat_fapp0 K X Y J A) D y h) (@fapp1_fapp0 K X A x y g) (sigma_Fst (sigma_Snd (@fapp1_fapp0 K (@RepresentedComma_cat X Y J) (@represented_comma_family_func K X Y J A D h) x y g)))))
+≔ sigma_Snd (sigma_Snd (@fapp1_fapp0 K (@RepresentedComma_cat X Y J) (@represented_comma_family_func K X Y J A D h) x y g));
