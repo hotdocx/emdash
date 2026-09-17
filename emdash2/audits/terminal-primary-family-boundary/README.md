@@ -154,6 +154,15 @@ Neither the new generic owners nor the primary family API postulate a
 universal structure. The living ledger records final scoped tests, overlays
 of existing native consumers, and the remaining production migration.
 
+`zero-column-adoption.lpfragment` records the first production-adoption
+candidate. Its two IsoEvidence definitions typecheck using explicit
+reconstruction of the original column, but the appended whole-endpoint
+runtime assertion fails. Removing the assertions checks formation; leaving
+them in reproduces the unqualified observation. Production mate inputs are
+unchanged. The next step is to supply the needed whole endpoint observations
+from the existing evaluation/composition laws and qualify actual consumers;
+do not silently substitute a weaker check or add a new normalizer axiom.
+
 Additional logs:
 
 - full-source rule and no-rule control: `ua3tt_owner_checks-20260917-140212.log`

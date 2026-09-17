@@ -581,3 +581,31 @@ remaining checkpoint hygiene; no publication or main mutation is authorized.
 Checkpoint `69699c50` contains UA-3c. A follow-up removes one trailing blank
 line in the relocated reflection owner; no declaration changes. The final
 source-only metrics snapshot is `d620bd510e472088c269ca81aa7fb08849f06578e81ac95177b3e21daedb9ba0`.
+
+## UA-3d — First Production Zero-Column Adoption Probe
+
+The direct API checkpoint is `69699c50`, with hygiene follow-up `3219b804`.
+Two new zero-column evidence definitions were tested at the actual production
+owner. Directly presenting Arr(gen D) at the expected D leaves unsolved
+dependent record comparisons. Explicitly composing through the already
+derived original-D reconstruction solves formation
+(`emdash3_2_one_cat_adjunction_zero_columns-20260917-153354.log`).
+
+The existing consumer additionally needs the whole endpoint projection to
+be the corresponding identity transformation. Its direct runtime assertion
+fails (`ua3d_zero_column_whole_endpoints-20260917-153425.log`). No assertion
+has been weakened and no production mate input has been redirected. The
+candidate and exact assertion are retained in the terminality audit as
+`zero-column-adoption.lpfragment`; the temporary additions to the production
+owner were restored to the checkpoint after verifying they were the sole
+uncommitted changes to that file.
+
+Next derive the needed whole endpoint observation using the existing
+evaluation/composition laws, then test the actual mate-input and zero-column
+view consumers. Keep the raw-computation distinction explicit; this is an
+open adoption step, not a completed migration or a mathematical blocker.
+
+The retained standalone adoption fragment was replayed after restoration.
+Both definitions form, then the intended whole-endpoint assertion fails in
+`ua3d_retained_adoption-20260917-153913.log`; it is not an import or resource
+failure. The production owner remains byte-identical to the checkpoint.
