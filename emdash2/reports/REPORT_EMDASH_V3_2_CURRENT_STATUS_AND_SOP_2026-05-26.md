@@ -2180,7 +2180,9 @@ is its fixed-endpoint vertical hom.
 Active infrastructure includes:
 
 - primitive `Unit_prof(A)` with direct rigid `Hom_*` base action;
-- `Prof_reindex` through `Product_map_func(Op_func(F),G)`;
+- `Prof_reindex` through `Product_map_func(Op_func(F),G)`, with the component
+  of `Prof_reindex_transf` computing to the original whole fibre functor at
+  that mapped base point; this preserves its next Hom action;
 - readable representables `Hom_prof_along`, `Hom_prof`, `Companion_prof`, and
   `Conjoint_prof`;
 - shaped cells/elements and internalized reindexing;

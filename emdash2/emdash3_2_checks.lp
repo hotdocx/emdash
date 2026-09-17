@@ -19064,6 +19064,18 @@ assert [A B : Cat]
     (@id_func B)
   ≡ r;
 
+// Reindexing a whole profunctor map computes its whole fibre component.
+
+assert [A A' B B' : Cat] [R S : τ (Prof A B)]
+  (r : τ (@ProfMap A B R S)) (F : τ (Functor A' A)) (G : τ (Functor B' B))
+  (ab : τ (Obj (Product_cat (Op_cat A') B'))) ⊢
+  @tapp0_fapp0 (Product_cat (Op_cat A') B') Cat_cat
+    (@Prof_reindex A A' B B' R F G) (@Prof_reindex A A' B B' S F G) ab
+    (@Prof_reindex_transf A A' B B' R S r F G)
+  ≡ @tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat R S
+      (@fapp0 (Product_cat (Op_cat A') B') (Product_cat (Op_cat A) B)
+        (@Prof_reindex_base_func A A' B B' F G) ab) r;
+
 assert [A B : Cat]
   (R : τ (Prof A B)) ⊢
   @Op_prof_map

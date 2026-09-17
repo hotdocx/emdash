@@ -1,12 +1,12 @@
 /*
   Whole walking-generator compatibility for directed join maps.
 
-  Two propositional computation boundaries connect the active generic owners:
-  the component of a reindexed profunctor map agrees with the original whole
-  component at the mapped endpoint pair, and the whole cross observed through
-  a WalkingArrow map agrees with that map's ordinary hom action.  Composing
-  those boundaries with the existing join-extension cross beta derives the
-  whole generator beta of join_map_func.
+  The component of a reindexed profunctor map now computes in the core to
+  the original whole component at the mapped endpoint pair. The earlier
+  selected equality witness below is retained. The whole cross observed
+  through an arbitrary WalkingArrow map still has its separate comparison
+  with ordinary hom action. The canonical join-map generator endpoints now
+  compute, while the existing whole equality witnesses remain available.
 
   All comparisons remain whole Terminal-indexed functors. Equality-induced
   transformations retain their hom action; point equations are projections.

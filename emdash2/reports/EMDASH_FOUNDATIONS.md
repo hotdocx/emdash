@@ -4866,14 +4866,15 @@ components, and `tdapp1_int_cell` retains base-arrow action. This is the
 higher-constructor beta for join elimination, not a runtime fold of the
 transparent observed-cross alias.
 
-Two further whole paths make that specialization computational without a
-Cat-valued coherent-square total. First, the component of
-`Prof_reindex_transf(r,F,G)` agrees propositionally with the component of `r`
-at the mapped endpoint pair. Second, observing a cross through a
-WalkingArrow map agrees with applying that map's ordinary hom action to
-`walking_arrow_generator_func`. Together with the join-extension beta these
-derive the whole walking-generator beta of `join_map_func`; the point equation
-is only its Terminal-object projection.
+The component of `Prof_reindex_transf(r,F,G)` now computes to the original
+whole component of `r` at the mapped endpoint pair; its next Hom action is
+retained. The earlier selected equality witness remains available. The
+canonical `join_map_func` generator presentations consequently compute to
+the same whole functor. Observing a cross through an arbitrary WalkingArrow
+map still has its separate whole comparison with ordinary hom action on
+`walking_arrow_generator_func`; no general join eta is asserted. The existing
+whole generator equality witnesses remain available, with their point
+equations obtained by Terminal-object projection.
 
 The source construction reindexes the join cross by the same strict terminal
 profile used by the selected 02 and 12 faces. Its action along the opposite

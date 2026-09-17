@@ -18969,6 +18969,13 @@ symbol Prof_reindex_transf [A A' B B' : Cat]
       (@Prof_reindex A A' B B' R F G)
       (@Prof_reindex A A' B B' S F G));
 
+// Component of the existing whole reindexed map: retain the entire fibre functor.
+rule @tapp0_fapp0 _ Cat_cat _ _ $ab
+    (@Prof_reindex_transf $A $A' $B $B' $R $S $r $F $G)
+  ↪ @tapp0_fapp0 (Product_cat (Op_cat $A) $B) Cat_cat $R $S
+      (@fapp0 (Product_cat (Op_cat $A') $B') (Product_cat (Op_cat $A) $B)
+        (@Prof_reindex_base_func $A $A' $B $B' $F $G) $ab) $r;
+
 // Capped hom-action: Prof_reindex_func(F,G)[r] ↪ Prof_reindex_transf(r,F,G).
 rule @fapp1_fapp0
       _

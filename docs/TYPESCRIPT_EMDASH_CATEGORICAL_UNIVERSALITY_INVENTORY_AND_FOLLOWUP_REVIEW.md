@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; UA-0 qualified; first assembly tranche in progress
+Status: active living implementation plan — accepted 2026-09-17; UA-0 and UA-1a qualified; whole unit/counit extraction in progress
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -337,9 +337,11 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: UA-1 whole Hom-comparison assembly. UA-0 evidence preservation
-is qualified; the ledger owns the initial typed whole-map experiment and the
-separate component/extraction boundaries. No incomplete prototype is promoted.
+Current queue: UA-1 whole unit/counit extraction from the checked identity
+images. UA-1a qualifies the reindexed-component projection and both
+nonidentity image computations; the ledger records the canonical join-map
+normalization change and unchanged warning inventories. The unit/counit
+Transf interface and Adjunction introduction are not yet promoted.
 
 ## Review Evidence
 

@@ -51,9 +51,9 @@ type λ A : Cat, λ A' : Cat, λ B : Cat, λ B' : Cat,
       (@prof_reindex_transf_component_cell
         A A' B B' R S r F G a b);
 
-// The join-map generator beta is derived at the whole owner and does not make
-// its endpoints runtime-convertible.
-assertnot [A B : Cat]
+// Canonical join-map generator endpoints now compute through the core
+// reindexed-component projection. The arbitrary-H negative check above remains.
+assert [A B : Cat]
   (F : τ (Functor Terminal_cat A))
   (G : τ (Functor Terminal_cat B)) ⊢
   @join_map_source_generator_func A B F G
