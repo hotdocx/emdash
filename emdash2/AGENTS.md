@@ -89,6 +89,12 @@ comparisons, with the internal graph derivation protected in that same owner.
 Its shared graph accepts a whole native Hom action Θ; the original Γ API
 specializes it with the native action of h. The represented_comma_hom_action
 operations support identity-image extraction without a duplicate graph owner.
+`emdash3_2_one_cat_hom_comparison_data.lp` derives whole η/ε from an ordinary
+whole Hom comparison, their component/action laws and both whole triangle
+modifications/equations. It adds definitions only. Its two curry/Hom views
+belong to the core Hom_prof_along owner; its scoped universal-arrow identity
+observation belongs to one_cat_arrow_diagrams. The separate Adjunction
+introduction with scoped input agreement remains an experiment.
 `emdash3_2_transfor_whiskering.lp` owns the derived transformation and
 isomorphism whiskering helpers. The ordinary zero-arrow-family classification,
 whole homology-family comparison and separate point-comparison owners expose

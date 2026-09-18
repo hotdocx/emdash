@@ -70,3 +70,10 @@ type λ C : Cat, λ C1 : τ (IsNCat (cat_succ cat_zero) C),
   λ z0 : τ (Obj (@LaxArrow_cat C)), λ z1 : τ (Obj (@LaxArrow_cat C)),
   λ a : τ (Hom (@LaxArrow_cat C) z0 z1), λ b : τ (Hom (@LaxArrow_cat C) z0 z1),
   @fapp1_func _ _ (@fapp1_func _ _ (@one_cat_arrow_diagram_func C C1) z0 z1) a b;
+
+// Constructor-visible identity retains the universal edge after opposite normalization.
+assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (x y : τ (Obj C)) (u : τ (Hom C x y)) ⊢
+  @tapp1_fapp0 (@LaxArrow_cat C) C (@cubical_src_func C) (@cubical_tgt_func C)
+    (@lax_edge C x y u) (@lax_edge C x y u) (@one_cat_arrow_universal_transf C C1)
+    (@id (@LaxArrow_cat C) (@lax_edge C x y u)) ≡ u;

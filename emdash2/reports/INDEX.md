@@ -36,6 +36,11 @@ is the new active continuation. Its ledger distinguishes generic adjunction
 assembly, primary terminality and Γ; the exact terminal uniqueness unifier is
 known feasible at its recorded proof-time consumer. Earlier claims of blanket
 infeasibility are superseded; runtime eta and global qualification are separate.
+The [ordinary identity-image extraction](../audits/adjunction-identity-image-extraction/README.md)
+now has a public definition owner for whole η/ε, component/action observations
+and whole triangle laws. Its shared graph remains at the original comma
+owner. Constructor-scoped proof-time agreement with the existing Adjunction
+mate heads is the separate experiment recorded in the living assembly ledger.
 
 ## Current Orientation
 

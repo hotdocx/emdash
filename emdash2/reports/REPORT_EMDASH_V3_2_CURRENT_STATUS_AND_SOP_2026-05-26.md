@@ -893,6 +893,15 @@ both are published, with the live PDF matching the checked artifact. See the
   signatures as specializations with tapp1_int_fapp0_transf(h). The public
   reviewer checks both inputs; the retained unit/counit extraction imports
   this owner instead of copying the graph.
+- `emdash3_2_one_cat_hom_comparison_data.lp`: definition-only ordinary
+  extraction of whole η:id_A⇒GF and ε:FG⇒id_B from the supplied whole
+  ProfComparison. Its fifteen public operations retain the two reindexed
+  profunctor maps, native Hom action, component and nonidentity action laws,
+  and both whole triangle modifications/equations. Twenty-seven proof helpers
+  stay protected. No caller supplies naturality squares or a separate inverse.
+  Two core curry/Hom proof-time views and the scoped ordinary-arrow identity
+  observation support the construction; the rejected product identity rules
+  remain absent. The separate Adjunction constructor is still experimental.
 - `emdash3_2_one_cat_zero_arrow_family_classification.lp`: specializes Γ to
   the existing native zero-cone input, retaining the original universal τ,
   source/target maps and the whole triangle isomorphism T∘τΓ≅h∘J(S).

@@ -1,12 +1,12 @@
 # Whole Identity Images Of A Hom Comparison
 
 Date: 2026-09-18
-Status: checked extraction candidate importing the shared library graph; remaining owner clauses and extraction promotion pending
-Baseline before shared-owner factoring: `06ddff1c`
+Status: public definition owner and supporting clauses implemented; joint qualification recorded in the living ledger
+Baseline before extraction promotion: `17ba33e0`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
-and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1e--share-the-hom-action-graph-at-its-existing-owner)
-own scope and qualification. This candidate reuses the qualified Γ machinery
+and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1f--public-unitcounit-extraction-and-its-owner-clauses)
+own scope and qualification. The public extraction reuses the qualified Γ machinery
 to close the former whole-transformation formation gap. It is independent of
 the retained [Adjunction introduction candidate](../adjunction-from-hom-comparison/README.md),
 which remains a separate structural interface and consumer decision.
@@ -19,7 +19,7 @@ For ordinary A,B, F:A→B, G:B→A and a supplied whole ProfComparison
 Φ : Hom_B(F−,−) ≅ Hom_A(−,G−),
 ```
 
-the candidate constructs actual whole transformations
+the public owner constructs actual whole transformations
 
 ```text
 η : id_A ⇒ G∘F,          ε : F∘G ⇒ id_B,
@@ -49,7 +49,7 @@ ordinary modification interface. They are derived laws, not new runtime
 triangle reductions. Controls reject collapsing arbitrary endomorphisms to
 identities or discarding the supplied comparison. A direct normal-form
 comparison for every expanded action presentation is still unqualified.
-The candidate does not introduce an Adjunction witness.
+The owner does not introduce an Adjunction witness.
 
 ## Construction And New Interface Boundary
 
@@ -68,13 +68,13 @@ comp_catd_fapp0 presentation. Currying these whole profunctor maps supplies
 endpoint functors to G∘F or F∘G; this retains the intended type through
 composition normalization without another associativity rule.
 
-Three proposed owner clauses remain outside the library:
+Three supporting clauses now live at their semantic owners:
 
-- `curry_hom_views.lpfragment`: two proof-time comparisons between semantic
+- Core `Hom_prof_along` owner: two proof-time comparisons between semantic
   currying of a represented profunctor and its native hom_int presentation.
   Residuals check the entire actual profunctor; unrelated data are not
   identified, and runtime heads remain distinct.
-- `arrow_identity_rule.lpfragment`: one scoped identity observation at the
+- `emdash3_2_one_cat_arrow_diagrams.lp`: one scoped identity observation at the
   existing OneCat universal-arrow transformation, after the opposite-source
   identity has normalized. It retains constructor-visible identical
   endpoints, like the existing zero-cone observation.
@@ -99,45 +99,49 @@ evidence, not an additional square obligation on users.
 A rejected direct-normalization experiment added product identity/component
 clauses. Its scoped version produced the expected unit normal form but 18
 normalization overlaps, including identity erasure at existing category
-facades. None of those three product clauses occurs in this candidate. The
+facades. None of those three product clauses occurs in the library. The
 component equations are instead derived from existing identity laws.
 
 ## Reproduction And Evidence
 
-The compressed source imports the generalized graph from its existing
-represented-comma owner. That shared derivation now serves both the original
-Γ API and extraction; the former copied graph is preserved only in Git.
-The candidate contains the extraction and law definitions, its sixteen
-controls, and the three proposed owner clauses. `manifest.json` records the
-exact source identity and required owner hashes.
+The public definition owner is
+[emdash3_2_one_cat_hom_comparison_data.lp](../../emdash3_2_one_cat_hom_comparison_data.lp).
+Its 42 definitions expose fifteen operations and keep 27 law helpers protected.
+It imports the shared graph from the original represented-comma owner. The
+former compressed candidate and duplicate clause fragments are retired to
+Git history; normal recovery uses the active owners and public reviewers.
+`manifest.json` records their exact source identities.
 
 From emdash2:
 
 ```bash
-gzip -dc audits/adjunction-identity-image-extraction/candidate.lp.gz \
-  > tmp/probes/ua1e_identity_image_replay.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua1e_identity_image_replay.lp
+  scripts/probe.sh examples/one_cat_hom_comparison_data.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/prof_curry_hom_views.lp
 ```
 
 The source checks both whole transformations, their whole action functors,
 component laws, nonidentity action equations, whole triangle modifications
 and equations, and noncollapse controls: sixteen assertions, with all
 construction/proof bodies also checked. It uses 2GiB/90s/o20, serial execution,
-and warnings/subject reduction. The original proof candidate and compressed
-replay pass with empty warning inventories. The living ledger records logs.
+and warnings/subject reduction. The imported public reviewer passes; the
+owning-position and downstream warning comparisons are recorded in the ledger.
 
-The two curry views also pass in a full core copy at their intended owner,
+The two curry views pass in a fresh full core copy at their intended owner,
 with five positive/negative controls. All five normalized warning inventories
-match the current core: 157 replaceable-variable warnings and 1140 inherited
+match the prior core: 157 replaceable-variable warnings and 1140 inherited
 critical pairs, no additions or parser issue. The scoped ordinary-arrow owner
-also checks. These are candidate qualifications, not a positive-library or
-full-repository promotion gate. The shared graph factoring passes the original
-Γ/H/model consumers and integrated diagnostics; core rules and nonsplit
-artifact bodies remain unchanged. The 94-assertion CAS receipt is the recorded
-UA-4m run, not a newly executed aggregate in this factoring slice.
+also passes with the full extraction consumer and an empty warning inventory.
+The thirteen affected reviewers cover mates, reindexing, family adjunctions,
+Γ/H, the actual Freyd model and products. Their five warning inventories match
+their predecessors after accounting for the recompiled core. The living
+ledger records joint nonsplit and integrated diagnostic qualification.
 
-Next qualify the remaining owner clauses and public extraction interface,
-retaining these component, action and triangle laws. The separate
-Adjunction-constructor scope and remaining terminality/product reviews are
-still open in the living plan.
+The separate constructor experiment now connects these actual whole η/ε data
+to its native projections by a derived whole comparison. Its scoped input
+unifiers remain at the Hom comparison and mate projections; existing mate
+formulas and ordinary modifications give η/ε agreement without another unit
+unifier. Public introduction and owner/import qualification remain separate.
+Higher terminality, product/weighted review and final book/audit work remain
+other plan rows.

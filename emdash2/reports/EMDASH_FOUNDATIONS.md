@@ -3901,6 +3901,18 @@ This allows identity-image extraction from an independently supplied whole
 Hom comparison while retaining hom_int as owner. The ordinary target guard
 on inverse data and the separate higher Op/profile qualification remain.
 
+For ordinary A,B and F:A→B, G:B→A, a whole comparison
+Φ:Hom_B(F−,−)≅Hom_A(−,G−) now yields actual whole transformations
+η:id_A⇒GF and ε:FG⇒id_B through
+[ordinary Hom-comparison data](../emdash3_2_one_cat_hom_comparison_data.lp).
+Their components satisfy η_a=Φ_a,Fa(id_Fa) and
+ε_b=Φ⁻¹_Gb,b(id_Gb). Native naturality and the same selected inverse prove
+the nonidentity action formulas and both triangle laws, including whole
+modifications and equations between the constructed transformations. These
+are derived ordinary laws, not new runtime triangle reductions. The module
+does not itself introduce an Adjunction witness. No operational functor is
+defined by equality transport and no caller supplies naturality squares.
+
 The graph and comparison stages remain protected in that owner. The original
 public stable graph keeps its selected computation in its separate module.
 [Whole whiskering](../emdash3_2_transfor_whiskering.lp) factors the derived

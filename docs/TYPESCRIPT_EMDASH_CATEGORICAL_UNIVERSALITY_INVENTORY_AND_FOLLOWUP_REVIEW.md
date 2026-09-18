@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit and public Γ/H comparison qualified; unit/counit extraction candidate has checked action and triangle laws; promotion and remaining reviews open
+Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit, public Γ/H comparison and public unit/counit extraction qualified; Adjunction introduction and remaining reviews open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -338,8 +338,8 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | Tranche | Required result | State |
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
-| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | The checked candidate derives both whole transformations, their ordinary identity-image component formulas and nonidentity action equations, and both whole triangle modifications/equations. It now imports the shared generalized graph at the original comma owner, retaining the public Γ/H API. The three remaining proposed owner clauses and public extraction promotion are pending |
-| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | The newer scoped input-agreement candidate passes seventeen controls and preserves the native mate heads/cuts. Whole agreement with the extracted unit/counit, the required family consumer and public qualification remain pending; no additional Freyd-model entry point is selected |
+| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | Qualified ordinary public owner: 42 definitions, fifteen public operations, original comparison/inverse, whole η/ε, component/action observations and both whole triangle laws. The supporting clauses are at their core/arrow owners. Sixteen extraction checks, five curry controls, affected reviewers, integrated diagnostics and all 94 nonsplit assertions pass |
+| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | The scoped input-agreement candidate passes 25 controls, preserves both native Došen rectangle cuts and mate cuts, derives whole agreement with the extracted unit/counit, and checks both whole-family mate inverse cuts. Public factoring and owner/import qualification remain pending. The postcomposition lift remains the existing structural instance; no additional Freyd-model entry point is selected |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
@@ -408,21 +408,22 @@ Pi reviewer boundary remains separately recorded, without a broad eta fix
 or a claimed full-repository green aggregate. Complete the remaining
 UA-1/2/3/5 reviews and UA-6 audit/book work after Γ/H integration.
 
-The [identity-image extraction candidate](../emdash2/audits/adjunction-identity-image-extraction/README.md)
+The [identity-image extraction](../emdash2/audits/adjunction-identity-image-extraction/README.md)
 now reuses Γ's projection comparisons with a supplied whole internal Hom
 action. It constructs both η and ε without a new introduction primitive and
 proves the component formulas using existing identity laws. Two canonical
 curry/Hom proof-time views and one scoped universal-arrow identity observation
-remain proposed owner extensions. Broader product runtime clauses were
+now belong to their original core/arrow owners. Broader product runtime clauses were
 rejected; ordinary component equations do not define a transported functor.
-The compressed sixteen-check candidate and owner-warning evidence are retained
-outside the library. Original native naturality cells and selected inverse
+The public definition owner and sixteen-check reviewer replace the former
+compressed candidate; Git retains that history. Original native naturality cells and selected inverse
 laws now give nonidentity action equations and both whole triangle
 modifications/equations through the existing ordinary modification interface.
 No additional runtime rule is used for those laws. UA-1e factors the graph
 at the existing comma owner, with original Γ signatures as specializations.
-The extraction now imports it; its own public promotion and three proposed
-owner clauses remain pending. This does not yet supply an Adjunction witness.
+UA-1f promotes extraction and the three qualified owner clauses. All 94
+nonsplit artifacts' assertions pass with the new module loaded. This does not
+yet supply a public Adjunction introduction.
 
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
@@ -482,6 +483,18 @@ and both triangle laws, with naturality retained in the transformation types.
 It is a related introduction into the same Adjunction classifier, not another
 notion of adjunction. Keep it as an option rather than an additional current
 deliverable without a concrete need. The Hom-comparison route has priority.
+
+UA-2g now derives the native unit/counit identity-image laws from the existing
+mate/semantic functor comparisons. After the seven scoped input-agreement
+views specialize those laws to the supplied comparison, the public extraction's
+component formulas and existing ordinary modification interface yield whole
+η/ε agreement. This requires no new unit/counit agreement primitive or unifier.
+The earlier direct whole-unit unifier experiment left expanded curry/Hom
+constraints unresolved and is not selected. The retained candidate passes
+25 assertions and all eight derived proof bodies, including both native
+Došen rectangles, and both point and
+whole inverse cuts on arbitrary functor families through the existing
+postcomposition lift. That lift is consumed, not derived or replaced.
 
 The [primary terminality consumer audit](../emdash2/audits/terminal-primary-family-boundary/README.md)
 now identifies the concrete zero-column and kernel/cokernel family-input

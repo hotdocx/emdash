@@ -14,6 +14,15 @@ rule @tapp0_fapp0 _ _ _ _
       (@one_cat_arrow_universal_transf _ _)
   ↪ $u;
 
+// Observe the original universal arrow after its opposite identity normalizes.
+// lhs-audit: keep 1,5,6 -- qualified opposite-source and constructor-visible identity endpoints.
+rule @tapp1_fapp0 (Op_cat $K) _ _ _
+    (Struct_sigma $a (Struct_sigma $b $u))
+    (Struct_sigma $a (Struct_sigma $b $u))
+    (@one_cat_arrow_universal_transf _ _)
+    (@id $K (Struct_sigma $a (Struct_sigma $b $u)))
+  ↪ $u;
+
 symbol one_cat_arrow_diagram_func
   [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
   : τ (Functor (@LaxArrow_cat C) (Functor_cat WalkingArrow_cat C))

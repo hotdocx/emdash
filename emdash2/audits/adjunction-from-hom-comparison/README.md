@@ -1,7 +1,7 @@
 # Adjunction From A Whole Hom Comparison: Retained Candidate
 
 Date: 2026-09-17
-Status: retained non-library alternatives; newer scoped input agreement checked, whole extraction/family integration and promotion pending
+Status: retained non-library alternatives; scoped input agreement, derived whole η/ε agreement and family consumption checked; public promotion pending
 Base: `10bff3059d999b7f0f59caa9977ad13ea034a0d3`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -116,13 +116,30 @@ From emdash2, replay with:
 
 ```bash
 gzip -dc audits/adjunction-from-hom-comparison/input-agreement.lp.gz \
-  > tmp/probes/ua2e_input_agreement_replay.lp
+  > tmp/probes/ua2g_input_agreement_replay.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua2e_input_agreement_replay.lp
+  scripts/probe.sh tmp/probes/ua2g_input_agreement_replay.lp
 ```
 
-The adjacent manifest records the bytes and scope. This is not yet a promoted
-Adjunction introduction: connect its whole unit/counit to the derived
-identity-image construction, qualify native triangle and family consumers,
-and audit owning-position interactions first. A unit/counit-based constructor
-is a related option, not a second required implementation in this tranche.
+The adjacent manifest records the current bytes and scope. The current
+25-check replay imports the public extraction owner and extends the seventeen
+controls above with derived whole η/ε agreement, four family mate inverse
+checks and both native Došen rectangles on arbitrary off-diagonal arrows.
+All eight new proof bodies check. The native identity-image laws come
+from adjunction_transpose_semantic_path and its inverse counterpart. The
+scoped comparison input views identify their middle terms with the original
+input, and one_cat_modification assembles the whole agreement. No additional
+unit/counit unifier or agreement primitive is introduced.
+
+The direct whole-unit unifier prototype left expanded curry/Hom constraints
+unresolved; the selected derivation avoids that comparison. The family test
+uses the existing postcomposition lift on the newly constructed adjunction,
+with arbitrary whole family arrows and both inverse cuts. It does not derive
+or replace that lift. Current logs are
+`ua2g_derived_whole_agreement-20260918-043040.log` and
+`ua2g_whole_family_consumer-20260918-043327.log`; the native rectangle
+extension passes in `ua2g_native_rectangles-20260918-043652.log`.
+
+Public factoring and owner/import qualification remain. A unit/counit-based
+constructor is a related option, not a second required implementation in this
+tranche.

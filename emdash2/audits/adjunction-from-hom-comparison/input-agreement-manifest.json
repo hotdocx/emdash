@@ -1,7 +1,7 @@
 {
-  "baseline": "06ddff1c",
-  "source_sha256": "c11b8d3004841874f034802e17eb1a88a11addc20c315739ad5e167d26a173d7",
-  "assertions": 17,
+  "baseline": "17ba33e0",
+  "source_sha256": "74d19892769e1025ec1e73e0f201bc3a8eeb8f583fe06cdf6cc13bc557043688",
+  "assertions": 25,
   "primitive_constructors": 1,
   "proof_time_rules": 7,
   "runtime_rules": 0,
@@ -12,5 +12,7 @@
     "warnings": true,
     "subject_reduction": true
   },
-  "status": "Isolated input-agreement and retained-cut experiment; not a promoted Adjunction introduction."
+  "status": "Checked input agreement, derived whole \u03b7/\u03b5 comparison, whole-family mate cuts and both native Do\u0161en rectangles; public owner/import qualification pending.",
+  "derived_definitions": 8,
+  "public_extraction_owner_sha256": "40f5b01d003e17649b01e0a73b413c07bc94568dd62b9be060778cd8f8016768"
 }

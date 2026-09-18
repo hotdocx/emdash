@@ -1,25 +1,27 @@
 {
-  "baseline": "06ddff1c",
-  "candidate_sha256": "92b8a655141f12223d59d2cdbb8f45fe31d70dea303a6826c09142ee3ec4ec5e",
-  "assertions": 16,
+  "baseline_before_promotion": "17ba33e0",
+  "status": "Public ordinary extraction and owner clauses; Adjunction introduction remains separate.",
   "source_hashes": {
-    "emdash3_2.lp": "840319daa37fed0c1ef75f6c66719dec1680b0b1843d6707770c8c10764521bb",
+    "emdash3_2.lp": "f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61",
+    "emdash3_2_one_cat_arrow_diagrams.lp": "9d27db22beb4ce086cae822d1715a15ffea3a11e5a346ac7660522e9ff7f3e7e",
     "emdash3_2_represented_comma_families.lp": "ccb390e4c323fdae5da048de82c5e50f97dc0e10df864c548a87879c9339f774",
-    "emdash3_2_one_cat_arrow_diagrams.lp": "58b3892382b0a194e691165f3c8c220a6aa72a1777d77aba30d0b3c43870ddc9"
+    "emdash3_2_one_cat_hom_comparison_data.lp": "40f5b01d003e17649b01e0a73b413c07bc94568dd62b9be060778cd8f8016768"
   },
-  "qualification": [
-    "whole unit and counit",
-    "ordinary identity-image component equations",
-    "nonidentity reconstruction action equations",
-    "whole triangle modifications and equations",
-    "input-comparison and endomorphism noncollapse controls"
-  ],
+  "reviewer_hashes": {
+    "examples/one_cat_hom_comparison_data.lp": "a720f820265dc785d66548725a725e386b1dc2d2651b4e53d3a1ac0bfb7b7181",
+    "examples/prof_curry_hom_views.lp": "9d2b9c4fefa5b72bc4219a659d8cab22d93b14c0dc84b991118438e1f3d3af4f",
+    "examples/one_cat_arrow_diagrams.lp": "341c3a02cce60369b6bb7ac033eb9e09b04d4d444b36ac7ba726fec1d05eb148"
+  },
+  "definitions": 42,
+  "public_definitions": 15,
+  "protected_definitions": 27,
+  "extraction_assertions": 16,
+  "curry_controls": 5,
   "profile": {
     "memory_mib": 2048,
     "timeout_seconds": 90,
     "OCAMLRUNPARAM": "o=20",
     "warnings": true,
     "subject_reduction": true
-  },
-  "graph_ownership": "Imports the generalized represented-comma owner; no copied graph declarations."
+  }
 }

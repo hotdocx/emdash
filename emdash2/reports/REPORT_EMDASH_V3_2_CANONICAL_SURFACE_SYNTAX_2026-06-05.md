@@ -420,6 +420,16 @@ operations share the original graph owner. The h-based Γ above specializes
 this construction using h's native internal Hom action; it retains its
 existing public signature and computation.
 
+For a whole Φ:Hom_B(F−,−)≅Hom_A(−,G−) with ordinary A,B, write
+`one_cat_hom_comparison_unit(Φ)` and `one_cat_hom_comparison_counit(Φ)`
+for the constructed whole η and ε. Their component laws are the identity-image
+formulas; the public triangle operations retain both whole composites,
+modifications and ordinary equations. `one_cat_transf_from_hom_action`
+uses Γ_Θ and the original universal arrow, while
+`profmap_internal_hom_action` curries the actual supplied profunctor map.
+These names denote definitions; the separate Adjunction introduction remains
+an experiment whose input agreement preserves the existing native heads.
+
 For a native zero-arrow family use `one_cat_zero_arrow_family_func` and its
 retained whole triangle IsoEvidence. The corresponding
 `one_cat_homology_family_comparison_evidence` has the literal endpoints

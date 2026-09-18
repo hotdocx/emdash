@@ -2481,3 +2481,134 @@ This remains introduction into the existing Adjunction classifier, not a new
 theory. A unit/counit-based constructor with whole η, ε and triangle laws is
 a related option; it is not an additional deliverable now. Other plan rows
 and explicit deferrals remain unchanged, and the goal remains active.
+
+### UA-1f — Public Unit/Counit Extraction And Its Owner Clauses
+
+Previous turn: progress at `17ba33e0`, with the shared graph promoted and the
+constructor input-agreement experiment retained. The worktree is clean and
+the published baseline remains an ancestor. Exact candidate and owner hashes
+match; the sixteen-check extraction baseline passes
+(`ua1f_extraction_baseline-20260918-041427.log`).
+
+Promote the two already reviewed curry/Hom proof-time views at Hom_prof_along
+and the scoped ordinary universal-arrow identity observation at its original
+owner only after fresh owner-position checks and warning comparison. Factor
+the extraction and its proved component/action/triangle laws into a public
+definition owner importing the shared graph. Keep helper proofs protected,
+preserve original F/G/comparison/inverse data, and retain OneCat guards. The
+constructor remains separate until its whole agreement and family consumers
+qualify. This is not a new primitive extracting transformations from arbitrary
+pointwise arrows, nor a promotion of the rejected product identity rules.
+
+The fresh core copy and five controls pass
+(`ua1f_curry_owner_core-20260918-041536.log`). After mapping unchanged source
+lines, all five warning inventories exactly match the pre-change core:
+157 replaceable-variable warnings and 1140 inherited critical pairs, with no
+new parser issue (`ua1f_curry_owner_warning_comparison.json`). The fresh
+ordinary-arrow owner passes with the entire sixteen-check extraction consumer
+(`ua1f_arrow_consumer-20260918-041727.log`), with empty warning inventories.
+
+The two core views and scoped arrow clause are promoted. The public
+emdash3_2_one_cat_hom_comparison_data.lp adds 42 definitions, fifteen public
+and 27 protected, with no primitive or rule of its own. Its sixteen-assertion
+reviewer passes (`one_cat_hom_comparison_data-20260918-041846.log`). The five
+curry controls are a separate registered reviewer; the original arrow
+reviewer gains its constructor-visible universal identity observation.
+The final arrow reviewer passes
+(`one_cat_arrow_diagrams-20260918-043202.log`).
+
+Thirteen affected reviewers pass under serial 2GiB/90s/o20 with SR/warnings:
+curry, arrow diagrams, adjunction mates, profunctor reindexing, postcomposition
+and terminal family adjunctions, Γ, the native triangle/H/point comparisons,
+the actual Freyd model, products and the weighted bridge. The recorded
+ua1f_focused_results.json includes each command/log and measurement. Because
+the source changed, these runs rechecked the core and included its inherited
+warnings; subtracting that separately verified unchanged inventory gives
+exact matches in all five dimensions, including the same 27 Freyd import-order
+pairs (`ua1f_focused_warning_comparison.json`). No warning is dismissed by
+count alone.
+
+Refresh compiled parents with --gen-obj on the public extraction owner
+(`emdash3_2_one_cat_hom_comparison_data-20260918-042237.log`). The installed
+Lambdapi help confirms that fresh .lpo files avoid repeated source checking;
+the old core object had predated the new source. This guarded 2GiB/90s/o20
+run retains SR/warnings and changes cache state only. All eight original
+nonsplit wrappers then receive exactly one additional extraction import.
+Their original bodies and model contracts remain unchanged. Every artifact
+passes, all 94 assertions, under the existing serial 6GiB/180s/o20,v1024
+profile with SR/warnings, no swap and 64MiB file cap:
+
+- LES diagram: 32.325s;
+- displayed LES certificate: 77.862s;
+- three LES pair certificates: 37.800s, 30.956s and 23.115s;
+- snake diagram: 21.200s;
+- snake certificate signatures: 92.562s;
+- snake certificate: 66.464s.
+
+The manifest/results and ua1f_cas_warning_comparison.json retain byte hashes,
+logs, time and GC receipts. All five inventories match UA-4m exactly after the
+one-line wrapper map: the same 34 inherited critical pairs in each artifact.
+Integrated diagnostics also pass at the existing 6GiB/90s/o20,v1024/SR profile
+(`emdash3_2_checks-20260918-043203.log`). These are affected integration
+checks, not a claim of a fresh all-repository aggregate.
+
+AGENTS, owner map, Foundations, canonical syntax, report index and extraction
+audit are synchronized. The old compressed extraction copy and duplicate
+clause fragments are removed from the current audit; Git preserves them.
+Normal replay now uses the public owners/reviewers. Registry script syntax,
+strict catalog, rule-LHS, source-TOC and 182 book-evidence claims pass.
+Source-health freshness records 1290 files at
+`21579b9e9dac0700855c15fc5f77a5ff3e5b0c816a983f4da3ec9c452b33bf1a`.
+The final diagnostics import is placed on the existing import line, preserving
+the prior source locations and avoiding catalogue-wide line-number churn.
+The same import order passes again
+(`emdash3_2_checks-20260918-044044.log`).
+
+Final core SHA-256:
+`f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61`.
+Public extraction owner SHA-256:
+`40f5b01d003e17649b01e0a73b413c07bc94568dd62b9be060778cd8f8016768`.
+The ordinary-arrow owner SHA-256 is
+`9d27db22beb4ce086cae822d1715a15ffea3a11e5a346ac7660522e9ff7f3e7e`;
+the shared comma owner remains unchanged. UA-1 is qualified under its ordinary
+interpretation. The complete goal still requires UA-2 public introduction,
+the remaining higher-terminality/product reviews and UA-6 audit/book work.
+
+### UA-2g — Derive Whole Constructor Agreement Through Native Mates
+
+An initial two-rule experiment compared the native unit/counit of make(i)
+directly with the expanded derived data. Both reflexivity orientations leave
+curry/Hom constraints unresolved
+(`ua2f_whole_unit_counit_agreement-20260918-042137.log`,
+`ua2f_whole_unit_counit_reverse-20260918-042301.log`). Those two proposed
+whole-unit/counit unifiers are not selected or retained in the final candidate.
+
+Instead apply the existing whole mate/semantic comparison to identities.
+The semantic side reduces to the original native unit/counit component.
+The seven scoped input-agreement views identify the other side with the
+original comparison input. Compose this law with the public extraction's
+proved component formula. Existing one_cat_modification then assembles the
+whole unit/counit agreement; hom_to_path observes it in the genuinely discrete
+ordinary transformation category. The actual operational terms and native
+cut heads are unchanged. This uses eight derived definitions and no new
+agreement primitive or unifier. The full construction checks
+(`ua2g_derived_whole_agreement-20260918-043040.log`).
+
+The actual family consumer passes arbitrary whole family transformations
+through the existing postcomposition lift of make(i), and checks both point
+and whole mate inverse cuts (`ua2g_whole_family_consumer-20260918-043327.log`).
+Both native Došen rectangles with arbitrary off-diagonal arrows also compute
+(`ua2g_native_rectangles-20260918-043652.log`). This consumes the existing lift;
+it neither derives it nor claims removal of that structural primitive.
+
+The retained input-agreement.lp.gz now imports the public extraction and
+contains 25 assertions, eight derived proof definitions, one ordinary
+constructor and the original seven scoped unif_rules. It contains no runtime
+rule. Uncompressed SHA-256:
+`74d19892769e1025ec1e73e0f201bc3a8eeb8f583fe06cdf6cc13bc557043688`.
+The exact compressed bytes replay with all 25 assertions and eight proof
+bodies (`ua2g_final_replay-20260918-043756.log`), at serial 2GiB/90s/o20 with
+SR/warnings and empty warning inventories. Expected negative assertions may
+print unsolved constraints; the completed check returns success.
+Public factoring and owner/import qualification are the next UA-2 gate.
+No extra Freyd-model entry point or unit/counit constructor is added to scope.

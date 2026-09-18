@@ -573,6 +573,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_gray_transformation_graph.lp)
   files+=(emdash3_2_transfor_whiskering.lp)
   files+=(emdash3_2_represented_comma_families.lp)
+  files+=(emdash3_2_one_cat_hom_comparison_data.lp)
   files+=(emdash3_2_one_cat_zero_arrow_family_classification.lp)
   files+=(emdash3_2_one_cat_homology_family_comparison.lp)
   files+=(emdash3_2_one_cat_homology_family_comparison_points.lp)
