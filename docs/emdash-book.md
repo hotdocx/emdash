@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.9.1-dev"
-publicationDate: "2026-09-16"
+editionVersion: "0.9.2-dev"
+publicationDate: "2026-09-18"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -217,6 +217,13 @@ nonsplit polynomial example through categorical execution and explicit
 proof-CAS interpretation. The final symbolic zero-endpoint attachment stays
 deferred, separate from the native endpoint computation and the checked
 window/iterator interfaces.
+
+The ordinary universal interfaces also assemble from whole Hom-comparison
+inputs, preserving the canonical adjunction cuts. A native classifier Γ
+packages a coherent family of homology inputs and relates its whole H to the
+global construction at those inputs. Terminal-family universality uses the
+supplied adjunction directly; its higher generalization retains a separate
+profile-sensitive boundary.
 
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
@@ -5561,6 +5568,65 @@ generic comparison owner.
 The component formulas above are the mathematical reading of this package.
 The stable runtime owner is the profunctor comparison, not a global rewrite
 that expands every mate into a unit/counit composite.
+
+### Constructing An Ordinary Adjunction From Whole Hom Data
+
+Suppose A and B are ordinary categories and the original F and G are supplied
+with a whole natural comparison
+
+```text
+i : Hom_B(F−,−) ≅ Hom_A(−,G−).
+```
+
+The comparison includes both selected maps and their inverse laws. Its
+naturality already varies both endpoints. The internal construction takes
+identity images and obtains whole transformations
+
+```text
+η : id_A ⇒ G∘F,             ε : F∘G ⇒ id_B,
+η_a = i_(a,Fa)(id_Fa),      ε_b = i⁻¹_(Gb,b)(id_Gb).
+```
+
+The native Hom action and its graph carry these components together as
+transformations. Their nonidentity action is inherited from the original
+comparison. Native naturality and the same selected inverse give both triangle
+laws, including whole modifications and ordinary equality observations.
+Callers supply the whole comparison; the construction supplies its unit,
+counit and laws without additional naturality-square inputs.
+
+<!-- evidence:ORDINARY-HOM-COMPARISON-DATA -->
+
+> **Formal status — checked.** Evidence `ORDINARY-HOM-COMPARISON-DATA`.
+> The whole η/ε constructions, component and action laws, and both whole
+> triangle laws are definitions. They retain the ordinary guards and the
+> original comparison and inverse.
+
+Write make_adjunction(i) for the separate ordinary introduction rule:
+
+```text
+make_adjunction(i) : Adjunction(F,G)
+```
+
+This is one explicit structural constructor into the existing indexed classifier.
+Its Hom comparison agrees with i at proof time. Scoped views expose the same
+agreement for the selected maps, components and applications, while the
+canonical computation heads retain the triangle cuts from Section 12.2.
+Whole agreement between the native unit/counit and the constructed η/ε is
+derived through the existing mate formulas and ordinary modifications.
+
+<!-- evidence:ORDINARY-ADJUNCTION-INTRODUCTION -->
+
+> **Formal status — checked interface.** Evidence
+> `ORDINARY-ADJUNCTION-INTRODUCTION`. The constructor
+> `one_cat_adjunction_from_hom_comparison` is declared; its input
+> and whole unit/counit agreement laws are derived. Seven scoped unification
+> views preserve the existing runtime heads. The reviewer checks both Došen
+> rectangles, both mate directions, and use on whole functor families.
+
+This introduction supplies a witness from already available whole data. An
+existing structural adjunction can be replaced by it only when that input
+comparison can itself be constructed independently. The postcomposition lift
+below remains an explicit structural operation.
 
 ### Adjunctions On Whole Functor Families
 
@@ -15553,7 +15619,13 @@ endomorphism of a terminal object to rewrite before its context is known.
 > selected terminal object has a whole canonical-arrow transformation,
 > computing component and off-diagonal action, the cut (30.14), and
 > contractible Hom classifiers. Arbitrary uniqueness is equality evidence;
-> there is no bare-variable unifier or variable-headed runtime rule.
+> no bare-variable unifier or variable-headed runtime rule is installed.
+
+A bounded implementation audit accepts the exact proof-time comparison
+between an arbitrary f:A→t and the selected !ₐ, while retaining their distinct
+runtime forms. Variable-sided unification is therefore a feasible convenience
+at the tested interface. It does not itself assemble a whole categorical
+contraction or resolve the interaction between !ₜ and the identity cut.
 
 The thin selected cartesian package merely pairs the existing binary-product
 and terminal-object capabilities. It adds no product, projection, terminal
@@ -15589,15 +15661,33 @@ Write p:C→1 for the canonical functor and t:1→C for the chosen object.
 Terminality has the categorical presentation p⊣t; initiality has the dual
 presentation t⊣p. Their units and counits are whole transformations.
 
+The primary ordinary family API takes this adjunction directly. For a family
+F:B→C and h:F⇒const_t, its whole Hom comparison contracts the category of
+such transformations. It supplies the actual comparison from Arr(h) to the
+chosen terminal-arrow family, with its inverse. The default family is the
+original unit whiskered by F. The initial case uses the counit dually.
+The closed profile of the literal terminal category is used internally;
+callers provide no old terminal record or separate square proof.
+
+<!-- evidence:PRIMARY-TERMINAL-FAMILY-UNIVERSALITY -->
+
+> **Formal status — checked.** Evidence
+> `PRIMARY-TERMINAL-FAMILY-UNIVERSALITY`. Whole Hom isomorphisms,
+> invertible modifications and diagram comparisons are derived from the
+> supplied p⊣t or t⊣p and the ordinary structural profiles. Native
+> kernel/cokernel family inputs use this primary interface.
+
 For ordinary C, the current extension supplies these two adjunctions from
 the original selected terminal/initial capabilities. The generic adjunction
 comparison then gives whole Hom mate functors, retained inverses and ordinary
 uniqueness observations. The maps into 1 are the actual selected mates; they
 are not cast to a preferred functor by equality transport.
 
-Existing whole diagram normalizers compare the unit/counit arrow families
-with the original terminal/initial arrow families. Both directions have
-identity components at the walking-arrow endpoints. This keeps the original
+Derived whole diagram comparisons relate the unit/counit arrow families
+to the original terminal/initial arrow families. Both directions retain their
+inverse maps, with computing point endpoints and proved whole endpoint and
+inverse equations. The two former primitive family normalizers are no
+longer needed. This keeps the original
 terminal normal forms: the terminal component at t is propositionally equal
 to idₜ and remains computationally distinct from it. Callers supply no
 naturality-square data.
@@ -15610,11 +15700,19 @@ naturality-square data.
 > inverse and ordinary contraction views are derived. They are not claimed
 > as derivations from the original terminal β rules alone.
 
-The general higher replacement of the primary terminality interface remains
-a separate qualification problem. It must specify a whole Hom comparison
-and its profiles, and distinguish the current computational DefIso adjunction
-contract from a weaker higher equivalence. Removing the ordinary guard from
-these declarations would not establish that extension.
+The full selected-terminal package includes the whole ! and its cuts as well
+as object/core contractibility. Its higher strength depends on the naturality
+profile. In a 2-categorical strict or pseudo interpretation, invertible
+naturality and !ₜ≅idₜ give a whole comparison const_(!ₓ)≅id on Hom_C(x,t),
+hence a categorical contraction. Lax comparison cells need not be invertible,
+so the point/core data alone do not establish that conclusion.
+
+The general higher replacement must retain the whole native represented Hom
+family and specify the appropriate profiles and inverse laws. A supplied
+adjunction already yields whole Hom comparisons without an ordinary-category
+assumption; constructing that adjunction from the old selected package and
+generalizing diagram realization are separate steps. The ordinary guards
+remain while that profile-sensitive upgrade is deferred.
 
 ## 30.4 Direct And Weighted Products
 
@@ -15632,6 +15730,12 @@ and records paths identifying its two projections with the triangular ones.
 It does not fabricate a weighted witness from pointwise beta and eta alone.
 This preserves both useful presentations without making either an alias for
 the other.
+
+The current native homology consumers use whole pairing through Δ⊣P. They
+do not require a newly derived weighted witness. A later adapter would also
+need a whole comparison between the binary weighted-cone family and the
+product-category Hom family, with agreement of the selected projections.
+That additional assembly is left to a consumer that needs it.
 
 ## 30.5 Slices And The Always-Existing $\Sigma_u$
 
@@ -16106,18 +16210,23 @@ alone. Nor is it an unrestricted identification of strict functor diagrams
 with higher lax-arrow categories. The ordinary-target guard and the stated
 structural presentation are retained.
 
-There are analogous whole comparisons for transformations to a terminal
-constant family and from an initial constant family. They permit the
-universal constructions to operate on the original family rather than on a
-sequence of independently rebuilt pointwise cones.
+The whole comparisons for transformations to a terminal constant family and
+from an initial constant family are derived from the corresponding
+adjunctions and categorical reconstruction. They retain the actual family,
+forward and inverse maps. Their point endpoints compute to identities, and
+their whole endpoint and inverse equations are proved by the existing
+categorical evaluation laws. Canonical input diagrams can use reconstruction
+directly.
 
 <!-- evidence:ORDINARY-DIAGRAM-UNIVERSALITY -->
 
 > **Formal status — checked.** Evidence `ORDINARY-DIAGRAM-UNIVERSALITY`.
-> The reconstruction and zero-family DefIso instances have declared
-> structural owners with checked computational consumers. They use the
-> existing DefIso inverse and inverse cuts; no new equivalence notion is
-> introduced. They are part of the explicitly stated ordinary presentation.
+> Whole diagram reconstruction remains a declared DefIso presentation.
+> Terminal/initial family comparisons are now definitions using the existing
+> IsoEvidence interface, with retained maps and proved inverse laws. Their
+> former primitive DefIso normalizers are retired; the derived evidence does
+> not assert their raw inverse-cut contract.
+> These statements retain the ordinary-target qualification.
 
 ### Ordinary Factor Records As Derived Views
 
@@ -16242,6 +16351,62 @@ observation alone is not evidence for that stronger interface.
 > structures. The point comparison uses an actual boundary-diagram map
 > under Q, with its inverse retained. Column comparisons and their quotient
 > reconstruction laws refer to the same selected objects.
+
+### Classifying A Whole Family Of Native Inputs
+
+Let J:C→D(C) be the existing embedding A↦(A→0). A coherent family of inputs
+consists of A:B→C, D:B→D(C), and one whole transformation h:J∘A⇒D. The
+native classifier is a functor
+
+```text
+Γ : B → Z(C),       Γ(b) = (A(b),D(b),h_b),
+```
+
+where Z(C) is the original native input category with projections p,q and
+universal transformation τ:J∘p⇒q. Its construction uses the existing native
+Hom, section and Sigma action. It retains the action already supplied by
+A,D,h, with no extra naturality-square input from the caller.
+
+The original projection comparisons and triangle data are whole:
+
+```text
+S : p∘Γ ≅ A,       T : q∘Γ ≃ D,
+T∘τΓ ≅ h∘J(S).
+```
+
+They retain their selected inverse maps. The shared graph can also accept a
+whole internal Hom action directly; the h-based classifier specializes it to
+the native action of h. This is the same construction used for the
+identity-image extraction in Chapter 12.
+
+<!-- evidence:NATIVE-COMMA-FAMILY-CLASSIFICATION -->
+
+> **Formal status — checked ordinary consumer.** Evidence
+> `NATIVE-COMMA-FAMILY-CLASSIFICATION`. Γ, its whole projections and their
+> inverse data are public operations. The native zero-arrow specialization
+> retains the whole triangle comparison. The higher Op/profile qualification
+> remains separate.
+
+Transposing h through K gives β:A⇒K∘D and then H_family=Q∘Arr(β). The global
+native construction applies the same operations to p,q,τ. The actual
+boundary-diagram isomorphism, followed by the original whole Q, now gives
+
+```text
+H_family ≅ H_native∘Γ.
+```
+
+Both sides use the current K,Q and their original selected objects. The
+comparison is a whole natural isomorphism with inverse data; evaluation at a
+parameter recovers its downstream point view. The Freyd-model specialization
+retains the original model functor H_native. It adds no model contract.
+
+<!-- evidence:WHOLE-HOMOLOGY-FAMILY-COMPARISON -->
+
+> **Formal status — checked.** Evidence
+> `WHOLE-HOMOLOGY-FAMILY-COMPARISON`. The boundary-diagram comparison,
+> whole H comparison, inverse laws and point observation are derived.
+> The actual Freyd-model consumer and nonsplit proof–CAS diagrams retain
+> the same current native operations and supplied contracts.
 
 ## 31.5 Exactness At The Canonical Comparison
 
@@ -16727,13 +16892,11 @@ Git history preserves them. Shared matrix/provider algorithms and the explicitly
 identified ordinary finite-window iterator remain useful separate references.
 There is no obligation to compare new homology with every retired formulation.
 
-A further distinction concerns observations at a chosen parameter. The primary
-H and its induced maps are whole; the finite CAS interface also needs ordinary
-equations relating particular selected presentations and maps. Those equations
-remain appropriate observations. A proposed whole classification of coherent
-family inputs, followed by a whole family-to-global H comparison, is a natural
-further interface refinement. Its prototype is not evidence that the existing
-native computation has regressed, and it is not claimed implemented here.
+Observations at a chosen parameter remain useful. The primary H and its
+induced maps are whole; the finite CAS interface also needs ordinary equations
+relating particular selected presentations and maps. The qualified Γ and
+whole H_family≅H_native∘Γ comparison now retain the parameter action behind
+those observations. Both routes use the current native construction.
 
 ## 31.12 Computation, Qualifications, And Further Work
 
@@ -16751,12 +16914,13 @@ That does not establish a general homological cut-elimination, coherence or
 normalization theorem. No such theorem is inferred from successful examples
 or from the existence of a matrix algorithm.
 
-The ordinary structural presentation includes declared instances for diagram
-reconstruction, zero-family comparisons, postcomposition adjunction lifting,
-and the needed functor/product/slice profiles. Their computational consumers
-are checked. These assumptions must not be confused with axioms asserting
-output homology exactness; the latter is derived from the original whole
-operations and normality.
+The ordinary structural presentation retains declared diagram reconstruction,
+postcomposition adjunction lifting, modification introduction, and the needed
+functor/product/slice profiles. Terminal/initial family comparisons are
+derived, and their former primitive normalizers are retired. The optional
+Hom-comparison-to-adjunction interface adds one explicit ordinary constructor.
+None of these interfaces asserts output homology exactness; that result is
+derived from the original whole operations and normality.
 
 Several boundaries remain explicit:
 
@@ -17196,7 +17360,7 @@ formal and executable evidence.
 | `ADDITIVE-HOM-BIPRODUCTS` | checked | Set-valued abelian Hom structures and bilinear composition combine with selected cartesian structure to give biproducts and a terminal/initial zero object. | `PreadditiveCategory`<br><small>`emdash3_2_preadditive_categories.lp`</small><br>`AdditiveCategory`<br><small>`emdash3_2_additive_categories.lp`</small> | `AdditiveCategory`<br><small>`examples/additive_categories.lp`</small><br>`comm_ring_finite_free_additive`<br><small>`examples/commutative_ring_finite_free_additive.lp`</small> |
 | `HOMOLOGY-BOUNDED-ITERATOR` | checked | A field-indexed Nat iterator assembles finitely many coherent whole-H windows, retaining original arrows and zero/exactness annotations. Separate same-H zero-middle lemmas are checked; the final symbolic endpoint attachment is not claimed. | `HomologyRowFieldSpan`<br><small>`emdash3_2_homology_row_field_spans.lp`</small><br>`ComputationalExactArrowTail`<br><small>`emdash3_2_computational_exact_arrow_tails.lp`</small><br>`homology_row_field_span_exact_tail`<br><small>`emdash3_2_homology_bounded_generator.lp`</small><br>`homology_whole_middle_zero`<br><small>`emdash3_2_homology_whole_zero.lp`</small> | `homology_row_field_span_exact_tail`<br><small>`examples/homology_bounded_generator.lp`</small><br>`generated2`<br><small>`examples/homology_bounded_generator_arrows.lp`</small><br>`homology_whole_terminal_middle_zero`<br><small>`examples/homology_whole_zero.lp`</small> |
 | `NATIVE-KERNEL-COKERNEL-UNIVERSALITY` | checked | Whole kernel/cokernel adjunction structures are primary, without older selected-operation dictionaries; their units, counits and whole-family mates retain the selected data under the declared structural profiles. | `KernelAdjunctionStructure`<br><small>`emdash3_2_kernel_cokernel_adjunctions.lp`</small><br>`CokernelAdjunctionStructure`<br><small>`emdash3_2_kernel_cokernel_adjunctions.lp`</small><br>`kernel_adjunction_lift_func`<br><small>`emdash3_2_kernel_cokernel_adjunction_mates.lp`</small><br>`one_cat_postcomp_adjunction`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small> | `kernel_adjunction_lift_func`<br><small>`examples/kernel_cokernel_adjunctions.lp`</small><br>`one_cat_postcomp_adjunction`<br><small>`examples/one_cat_adjunction_families.lp`</small> |
-| `ORDINARY-DIAGRAM-UNIVERSALITY` | checked | The ordinary-target structural presentation declares whole diagram reconstruction and terminal/initial family DefIso instances; their inverse and endpoint consumers are checked, without a general higher-lax diagram equivalence claim. | `one_cat_diagram_reconstruction_iso`<br><small>`emdash3_2_one_cat_diagram_reconstruction.lp`</small><br>`one_cat_terminal_arrow_family_iso`<br><small>`emdash3_2_one_cat_terminal_family_universality.lp`</small><br>`one_cat_initial_arrow_family_iso`<br><small>`emdash3_2_one_cat_terminal_family_universality.lp`</small> | `one_cat_diagram_reconstruction_iso`<br><small>`examples/one_cat_diagram_reconstruction.lp`</small><br>`one_cat_terminal_arrow_family_iso`<br><small>`examples/one_cat_terminal_family_universality.lp`</small> |
+| `ORDINARY-DIAGRAM-UNIVERSALITY` | checked | The ordinary-target presentation declares whole diagram reconstruction and derives terminal/initial family isomorphisms with computing point endpoints, retained inverse maps and proved inverse laws; no general higher-lax diagram equivalence is claimed. | `one_cat_diagram_reconstruction_iso`<br><small>`emdash3_2_one_cat_diagram_reconstruction.lp`</small><br>`one_cat_terminal_arrow_family_evidence`<br><small>`emdash3_2_one_cat_terminal_family_universality.lp`</small><br>`one_cat_initial_arrow_family_evidence`<br><small>`emdash3_2_one_cat_terminal_family_universality.lp`</small> | `one_cat_diagram_reconstruction_iso`<br><small>`examples/one_cat_diagram_reconstruction.lp`</small><br>`one_cat_terminal_arrow_family_evidence`<br><small>`examples/one_cat_terminal_family_universality.lp`</small> |
 | `NATIVE-COIMAGE-IMAGE-NORMALITY` | checked | The actual whole Coim-to-Im comparison is derived from K/Q adjunctions and has whole reconstruction; native normality is fixed-forward equivalence evidence on that comparison. | `one_cat_coimage_image_comparison`<br><small>`emdash3_2_one_cat_image_coimage_comparison.lp`</small><br>`OneCatAdjunctionNormality`<br><small>`emdash3_2_one_cat_adjunction_normality.lp`</small> | `one_cat_coimage_image_comparison`<br><small>`examples/one_cat_image_coimage_comparison.lp`</small><br>`one_cat_coimage_image_inverse_transf`<br><small>`examples/one_cat_adjunction_normality.lp`</small> |
 | `NATIVE-WHOLE-HOMOLOGY` | checked | Whole native H is Q applied to the original boundary arrow family formed through K. Its point comparison applies Q to an actual diagram map with retained inverse data, at the original selected objects. | `homology_adjunction_family_func`<br><small>`emdash3_2_homology_adjunction_families.lp`</small><br>`zero_arrow_cone_adjunction_homology_func`<br><small>`emdash3_2_zero_arrow_cone_adjunction_homology.lp`</small><br>`homology_family_global_point_map`<br><small>`emdash3_2_homology_family_point_comparisons.lp`</small> | `homology_adjunction_family_func`<br><small>`examples/homology_adjunction_families.lp`</small><br>`zero_arrow_cone_adjunction_homology_func`<br><small>`examples/zero_arrow_cone_adjunction_homology.lp`</small> |
 | `NATIVE-CANONICAL-EXACTNESS` | checked | Native exactness retains the canonical Im-to-Ker comparison, supports whole-family evaluation and categorical actual-input transport, and retains its witness under complete-arrow observation interpretation. | `one_cat_image_to_kernel_transf`<br><small>`emdash3_2_one_cat_image_kernel_comparison.lp`</small><br>`one_cat_native_exactness_transport`<br><small>`emdash3_2_one_cat_categorical_exactness_points.lp`</small><br>`native_observed_pair_exact_transport`<br><small>`emdash3_2_one_cat_native_observed_exactness.lp`</small> | `one_cat_native_exactness_transport`<br><small>`examples/one_cat_native_component_exactness.lp`</small><br>`native_observed_pair_exact_transport`<br><small>`examples/native_observed_exactness.lp`</small> |
@@ -17210,7 +17374,12 @@ formal and executable evidence.
 | `ORDINARY-ADJUNCTION-FAMILIES` | checked | The explicitly declared ordinary postcomposition adjunction lift retains the original functors, projects the original whiskered unit/counit, and supplies derived whole-family mate operations. | `one_cat_postcomp_adjunction`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small><br>`one_cat_functor_category`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small> | `one_cat_adjunction_family_transpose_func`<br><small>`examples/one_cat_adjunction_families.lp`</small> |
 | `ORDINARY-PRODUCT-ADJUNCTION` | checked | The declared ordinary diagonal/product adjunction uses the original BinaryProducts choice; whole family pairing and unpairing are derived from its mate comparison. | `one_cat_binary_product_adjunction`<br><small>`emdash3_2_one_cat_product_adjunction.lp`</small><br>`one_cat_product_category`<br><small>`emdash3_2_one_cat_product_adjunction.lp`</small><br>`one_cat_product_family_pair_func`<br><small>`emdash3_2_one_cat_product_families.lp`</small> | `one_cat_binary_product_adjunction`<br><small>`examples/one_cat_product_families.lp`</small> |
 | `WHOLE-CATEGORICAL-CONTRACTION` | checked | Category and coherent-family contractions are transparent instances of existing OmegaEquivAlong; evaluation retains both inverse slots, and ordinary object contractibility is a derived observation. | `CatContraction`<br><small>`emdash3_2_categorical_contractions.lp`</small><br>`CatdContraction`<br><small>`emdash3_2_categorical_contractions.lp`</small><br>`cat_contraction_objects_along`<br><small>`emdash3_2_categorical_contractions.lp`</small> | `catd_contraction_at`<br><small>`examples/categorical_contractions.lp`</small><br>`cat_contraction_objects`<br><small>`examples/categorical_contractions.lp`</small> |
-| `ORDINARY-TERMINAL-ADJUNCTIONS` | checked | Two explicit ordinary terminal/initial adjunction presentations give derived whole unit/counit and Hom equivalence views, retaining selected inverses and the original terminal runtime forms. | `one_cat_terminal_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small> | `one_cat_terminal_adjunction_diagram_iso`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_hom_equivalence`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small> |
+| `ORDINARY-TERMINAL-ADJUNCTIONS` | checked | Two explicit ordinary terminal/initial adjunction presentations give derived whole unit/counit and Hom equivalence views, retaining selected inverses and the original terminal runtime forms. | `one_cat_terminal_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small> | `one_cat_terminal_arrow_family_to_src_path`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_hom_equivalence`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small> |
+| `ORDINARY-HOM-COMPARISON-DATA` | checked | A supplied whole Hom ProfComparison between ordinary categories yields whole unit and counit transformations with retained component/action formulas and both whole triangle laws; all constructions are definitions. | `one_cat_hom_comparison_unit`<br><small>`emdash3_2_one_cat_hom_comparison_data.lp`</small><br>`one_cat_hom_comparison_counit`<br><small>`emdash3_2_one_cat_hom_comparison_data.lp`</small><br>`one_cat_hom_comparison_triangle_left_modification`<br><small>`emdash3_2_one_cat_hom_comparison_data.lp`</small><br>`one_cat_hom_comparison_triangle_right_path`<br><small>`emdash3_2_one_cat_hom_comparison_data.lp`</small> | `one_cat_hom_comparison_unit`<br><small>`examples/one_cat_hom_comparison_data.lp`</small><br>`one_cat_profmap_reconstruction_action_path`<br><small>`examples/one_cat_hom_comparison_data.lp`</small><br>`one_cat_hom_comparison_triangle_right_path`<br><small>`examples/one_cat_hom_comparison_data.lp`</small> |
+| `ORDINARY-ADJUNCTION-INTRODUCTION` | checked | One explicit ordinary constructor introduces the existing Adjunction from a whole Hom comparison. Scoped proof-time views retain native computation heads; input and whole unit/counit agreement are derived and family mate/Došen cuts are checked. | `one_cat_adjunction_from_hom_comparison`<br><small>`emdash3_2_one_cat_adjunction_introduction.lp`</small><br>`one_cat_adjunction_from_hom_comparison_input_path`<br><small>`emdash3_2_one_cat_adjunction_introduction.lp`</small><br>`one_cat_adjunction_from_hom_comparison_unit_modification`<br><small>`emdash3_2_one_cat_adjunction_introduction.lp`</small> | `one_cat_adjunction_from_hom_comparison`<br><small>`examples/one_cat_adjunction_introduction.lp`</small><br>`one_cat_adjunction_from_hom_comparison_counit_path`<br><small>`examples/one_cat_adjunction_introduction.lp`</small><br>`one_cat_adjunction_family_transpose_func`<br><small>`examples/one_cat_adjunction_introduction.lp`</small> |
+| `PRIMARY-TERMINAL-FAMILY-UNIVERSALITY` | checked | The direct ordinary terminal/initial family interface takes the supplied adjunction itself and derives whole Hom contraction, invertible modification and diagram presentation comparisons without a caller-supplied terminal profile or square proof. | `one_cat_terminal_adjunction_family_hom_iso`<br><small>`emdash3_2_one_cat_terminal_adjunction_families.lp`</small><br>`one_cat_initial_adjunction_family_hom_iso`<br><small>`emdash3_2_one_cat_terminal_adjunction_families.lp`</small><br>`one_cat_terminal_adjunction_family_normalization`<br><small>`emdash3_2_one_cat_terminal_adjunction_families.lp`</small><br>`one_cat_terminal_adjunction_family_presentation_evidence`<br><small>`emdash3_2_one_cat_terminal_adjunction_families.lp`</small> | `one_cat_terminal_adjunction_family_presentation_evidence`<br><small>`examples/one_cat_terminal_adjunction_families.lp`</small><br>`one_cat_initial_adjunction_family_presentation_evidence`<br><small>`examples/one_cat_terminal_adjunction_families.lp`</small> |
+| `NATIVE-COMMA-FAMILY-CLASSIFICATION` | checked | The native whole classifier retains original family inputs and whole source/target comparison data; its ordinary zero-arrow specialization retains the triangle comparison and inverse maps. | `represented_comma_family_func`<br><small>`emdash3_2_represented_comma_families.lp`</small><br>`represented_comma_family_source_evidence`<br><small>`emdash3_2_represented_comma_families.lp`</small><br>`one_cat_represented_comma_family_target_equiv`<br><small>`emdash3_2_represented_comma_families.lp`</small><br>`one_cat_zero_arrow_family_func`<br><small>`emdash3_2_one_cat_zero_arrow_family_classification.lp`</small><br>`one_cat_zero_arrow_family_triangle_evidence`<br><small>`emdash3_2_one_cat_zero_arrow_family_classification.lp`</small> | `represented_comma_family_source_evidence`<br><small>`examples/represented_comma_families.lp`</small><br>`one_cat_zero_arrow_family_triangle_evidence`<br><small>`examples/one_cat_zero_arrow_family_classification.lp`</small> |
+| `WHOLE-HOMOLOGY-FAMILY-COMPARISON` | checked | An actual whole boundary-diagram isomorphism under the original Q gives the whole family/native homology comparison with original endpoint functors, selected inverses and downstream point observation; the Freyd specialization retains the original model. | `one_cat_homology_family_comparison_evidence`<br><small>`emdash3_2_one_cat_homology_family_comparison.lp`</small><br>`one_cat_homology_family_point_comparison_evidence`<br><small>`emdash3_2_one_cat_homology_family_comparison_points.lp`</small> | `one_cat_homology_family_comparison_evidence`<br><small>`examples/one_cat_homology_family_comparison.lp`</small><br>`one_cat_homology_family_point_comparison_evidence`<br><small>`examples/one_cat_homology_family_comparison_points.lp`</small><br>`one_cat_homology_family_comparison_evidence`<br><small>`examples/freyd_whole_homology_family_comparison.lp`</small> |
 <!-- /book-source:appendix-evidence -->
 <div class="book-source-end" aria-hidden="true"></div>
 
@@ -18457,9 +18626,9 @@ the implementation authority.
 | Profiled Gray direction | `IsStrictFunctor` properties, exact functor/evidence packages, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global/profile-local strict-cut migration |
 | Semisimplicial and dependent simplexes | Computing injective face codes and augmented index; join-built ordinal shapes; Yoneda standard semisimplices; homd/Sigma triangle and tetrahedron action; intrinsic flagged codes; generic nonempty faces; one canonical ordinal source in variable dimension with selected checks through dimension four and retained next action | No degeneracies, whole `DependentSimplex_cat(C,n)` classifier, mapping-category equivalence with `Functor_cat(Delta[n],C)`, judgmental agreement of all finite presentations, or general Kan, Segal, Rezk, complicial, or oriental theory |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
-| Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
+| Adjunctions and equivalences | Triangle cuts, whole Hom-comparison identity-image extraction and ordinary introduction with retained heads; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
 | Monads and cartesian/indexed structure | Whole monad extension with ambient beta/accumulation; selected triangular products and terminality; chosen pullback base change with point/whole mates; selected dependent products and $\Sigma_u\dashv u^*\dashv\Pi_u$ | No free-monad syntax, explicit Kleisli category, automatic weighted-product witness, pushout duality, Beck–Chevalley, Frobenius, derived slice exponentials, or final convention-sensitive LCCC package |
-| Additive and Abelian structure | Whole K/Q adjunction structures; derived ordinary record views; canonical Coim⇒Im and native normality; retained additive constructions | Ordinary/discrete structural presentation instances are declared; general categorical terminality and a closed ring-wide Freyd model remain separate |
+| Additive and Abelian structure | Whole K/Q adjunction structures; direct primary terminal-family universality; native Γ and whole family/global H comparison; derived ordinary record views; canonical Coim⇒Im and normality | Ordinary/discrete structural presentation instances are declared; general categorical terminality and a closed ring-wide Freyd model remain separate |
 | Snake and homological computation | Native whole H/maps/δ, three canonical window exactness proofs, the general six-term snake and its positive-sign LES comparison; complete nonsplit displayed CAS LES/snake certificates | Model and interpretation contracts remain explicit; the large six-term package comparison and older symbolic endpoint attachment are deferred; no general homology normalization theorem |
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
 | Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |

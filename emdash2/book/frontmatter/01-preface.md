@@ -165,6 +165,13 @@ proof-CAS interpretation. The final symbolic zero-endpoint attachment stays
 deferred, separate from the native endpoint computation and the checked
 window/iterator interfaces.
 
+The ordinary universal interfaces also assemble from whole Hom-comparison
+inputs, preserving the canonical adjunction cuts. A native classifier Γ
+packages a coherent family of homology inputs and relates its whole H to the
+global construction at those inputs. Terminal-family universality uses the
+supplied adjunction directly; its higher generalization retains a separate
+profile-sensitive boundary.
+
 [Appendix G](#appendix-formal-presentation) then states how the mathematical
 surface, checked categorical kernel, bounded TypeScript elaborator through
 explicit Core, and external models fit together, with the Lambdapi kernel

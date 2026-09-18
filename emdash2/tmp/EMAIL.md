@@ -3,10 +3,10 @@ LONGER TECHNICAL APPENDIX
 
 Functorial Type Theory in emdash v3.2
 
-Local development snapshot reviewed 2026-09-16, alongside book 0.9.1-dev.
-This is an unsent correspondence draft. The matching book snapshot is
-published through the repository/Pages route; the DOI still identifies the
-earlier archived edition.
+Local development snapshot reviewed 2026-09-18, alongside book 0.9.2-dev.
+This is an unsent correspondence draft. The local updated book and source
+await separate main/Pages integration; the DOI identifies the earlier
+archived edition.
 
 Abstract. Functorial Type Theory asks what happens when the substitutional
 discipline of dependent type theory is extended to genuinely categorical
@@ -61,6 +61,12 @@ Both displayed proof–CAS diagrams now carry derived native exactness
 certificates. Explicit model and interpretation contracts let the formal
 layer use the same selected results without running the universal algorithms
 again or pretending that finite equations establish those contracts.
+
+A whole native classifier Γ now packages coherent family inputs and gives
+H_family≅H_native∘Γ with the original inverse data. Ordinary Hom-comparison
+inputs also construct whole unit/counit data and introduce the existing
+Adjunction interface through scoped proof-time agreement, preserving its
+native mate and triangle computation heads.
 
 The same distinction between readable syntax and explicit structure appears
 in the implementation. A TypeScript elaborator accepts usual binder-and-
@@ -731,7 +737,14 @@ W-colimit in A
 
 The adjunction is retained as one indexed structured witness; unit, counit,
 transpose, and mate operations are projections from that witness rather than
-unrelated component data. The calculus also includes a primitive
+unrelated component data. For ordinary source and target, a supplied whole
+Hom comparison now constructs whole η and ε with component/action and triangle
+laws. One explicit constructor introduces Adjunction from that comparison;
+seven scoped unif_rules preserve its canonical runtime heads. Its whole η/ε
+agreement is derived, and a generic input law handles a comparison already
+projected from another adjunction. The existing postcomposition lift remains
+a separately declared operation used by the whole-family consumer.
+The calculus also includes a primitive
 directed-inductive join category with two inclusions and one internally
 natural cross cell. General coend semantics, a complete profunctor
 bicategory, and unrestricted weighted (co)limit existence are not claimed.
@@ -860,19 +873,29 @@ therefore has an internal path `f = !_A`. A thin cartesian package merely
 pairs the already-selected binary and empty products; it introduces no second
 set of operations or rules.
 
-The homological development also supplies ordinary whole-family comparisons
+An isolated bounded audit does accept the exact variable-sided proof-time
+terminal-uniqueness rule. That positive feasibility result is retained; no
+global uniqueness unifier or terminal-identity runtime fold is installed.
+
+The primary ordinary interface takes p:C→1 ⊣ t:1→C, or t⊣p, directly and
+derives whole Hom contraction and diagram comparisons. The homological
+development uses these whole-family comparisons
 `Arr(h) ≅ J∘F` for `h:F⇒const_t` when t is terminal, and `Arr(h) ≅ I∘F`
-for `h:const_t⇒F` when t is initial. Their existing DefIso inverses retain
-identity endpoint components. These are declared structural extensions with
-an explicit ordinary-target guard, not consequences of the earlier β rules
-alone. Whole categorical contraction now specializes Ω-equivalence along
+for `h:const_t⇒F` when t is initial. Their derived IsoEvidence retains both
+maps, identity endpoint observations and inverse laws. The former primitive
+family normalizers are retired; ordinary diagram reconstruction and the
+postcomposition/profile declarations remain explicit. Whole categorical
+contraction specializes Ω-equivalence along
 D→1, with a coherent family version along E→const₁ and retained whole inverse
 data. Ordinary terminal/initial capabilities also have explicit guarded
 adjunction presentations p⊣t and t⊣p. These are declared structural extensions;
 their mate operations and ordinary uniqueness observations are derived.
-A primary higher terminality replacement controlling the whole varying Hom
-category is still proposed. Contractibility of its object groupoid alone does
-not control noninvertible higher arrows.
+A general higher replacement must specify the whole represented-Hom
+contraction and its naturality profile. The full old ! package includes action
+and cuts as well as object/core contractibility: invertible strict/pseudo
+comparison data can supply the stronger contraction, while a lax reading can
+retain noninvertible higher cells. The recorded review keeps that upgrade with
+the deferred profile/duality qualification.
 
 The same introduction/elimination discipline becomes indexed in slices. For
 `u : X → Y`, postcomposition always gives

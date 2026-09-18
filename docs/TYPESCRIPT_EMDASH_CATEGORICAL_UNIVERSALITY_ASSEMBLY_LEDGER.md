@@ -2813,3 +2813,87 @@ slice. Source-health remains the 1292-file snapshot
 `df37e488544f129e5f5ea37019047e62b76d1531c85a64f480be2223cddb9a96`;
 the recent integration and nonsplit receipts remain applicable. UA-6's final
 audit/book/overview work is now the remaining execution tranche.
+
+### UA-6 — Final Source Audit And Book/Overview Synchronization
+
+Previous turn: progress at `61bea43b`, completing the higher-terminality
+review. The worktree is clean, all worktrees are inspected, and the published
+baseline remains an ancestor. Book-only baseline book:check passes: assembly,
+182 evidence claims, 3122 math spans, source checks and registered document
+validation. The final work follows print/AGENTS and the PDF inspection skill;
+the book pipeline remains the source/output owner.
+
+Prepare local book 0.9.2-dev dated 2026-09-18. Update Chapters 12/30/31 and
+status/evidence notes for whole Hom-data extraction and ordinary introduction,
+direct primary terminal-family universality, the qualified Γ/H comparison,
+the bounded uniqueness audit and the higher-profile review. Update both
+READMEs and the tracked unsent EMAIL.md; retain publication as a separate
+future action. Local generated publication artifacts will be produced only
+through the repository's existing release/promotion commands.
+
+The preliminary baseline-to-current source inventory covers 32 root LP files.
+It finds two new body-free declarations (one_cat_modification and the ordinary
+Adjunction constructor), two retired primitive family normalizers, and the
+deliberate removal of injectivity from section_postcomp_sec. Rule and import
+changes require their own classification; this declaration scan alone is not
+the final trust audit. The final report will map every plan row to its actual
+owners, consumers and recorded validation.
+
+The source audit confirms 31 changed implementation LP files plus the central
+diagnostics file. A bracket-aware rule-block inventory covers the nine files
+with actual rule changes, preserving full unification constraint lists. The
+new/retired structural declarations and the section-postcomposition
+injectivity change are classified in the final audit. The declarations of
+hom_int, hom_con, homd_int, Hom_cat, Sigma_cat, Op_cat, Op_func and Op_catd are
+unchanged modulo comments/whitespace. No deferred Op/profile work is resumed.
+
+Ten audited model, K/Q/H, connecting, snake and certificate owners are
+byte-identical to the published baseline. All imports resolve across 747
+root modules. The LES certificate, native snake exactness and six-term result
+closures contain 338, 231 and 187 modules, with union 369, and exclude the
+three retired homology implementation roots. The exact inventories are
+ua6_structural_changes.json, ua6_rule_changes.json, ua6_import_audit.json and
+ua6_preserved_native_owners.json in tmp/probes. The final report distinguishes
+these source/dependency facts from the recorded execution and semantic scope.
+
+Book 0.9.2-dev updates Chapters 12/30/31, preface, status matrix and evidence.
+Five new claims link directly to the qualified owner/reviewer symbols; all
+187 claims resolve. The book explains the ordinary constructor's structural
+boundary, direct terminal-family input, native Γ/H comparison and higher
+profile qualifications. Both READMEs and the tracked unsent EMAIL.md are
+synchronized. No email or other message is sent.
+
+The owning book:release gate passes source/evidence/typography checks, the
+localized print build, bounded browser render and PDF validation. The output
+has 415 pages and 18 embedded fonts; no console, page, request or rendered
+layout errors occur. Existing Vite bundle-size notices are unrelated to the
+book changes and were not suppressed. Visual review found one small prose
+error, corrected before the final release. The latest cover, preface and
+affected pages 93/94, 250/251, 261/262 and 377 were inspected as PNGs with
+no clipping, overlap or missing glyphs.
+
+An independent export of the same final sources is byte-identical. The
+repository book:promote command rechecks and copies only the local generated
+artifacts into docs; it performs no push or deployment. Final identities:
+
+- PDF: `a472625aaa2de8324c5efc778c23235685d38fd8b9aa6c5b391febec4d42ae3f`,
+  3,634,767 bytes;
+- assembled Markdown:
+  `372e5ab1637fc11662931a7a9e11d9f672ae8884bcc293e71ea9c8821594edb7`,
+  981,519 bytes.
+
+Receipts are ua6_book_release_final.log, ua6_book_reexport.log,
+ua6_book_promote.log and ua6_book_receipt.json. Both local docs artifacts
+match their owned outputs exactly; no preview process remains. No renderer,
+shared TypeScript implementation, formal owner or model contract changes in
+this artifact tranche. Current public audit manifests still match their
+qualified source hashes, and source-health remains the 1292-file snapshot
+`df37e488544f129e5f5ea37019047e62b76d1531c85a64f480be2223cddb9a96`.
+
+The final requirement audit records every UA row, its owners/consumers,
+structural assumptions, qualified computation and explicitly deferred scope.
+All required work is complete under the accepted goal. Main/origin/main
+remain at `79237a008eff872832b20105b088f432fc24d8a1`; no main fast-forward,
+push, deployment or external publication is performed. The final local
+checkpoint contains this closure, the completed plan, final audit, book
+source/artifacts and synchronized overviews.

@@ -54,7 +54,7 @@ review in `audits/native-six-term-observation-boundary/README.md`. The original
 construction, maps, witnesses and typed inverse observations remain qualified;
 the failed comparison is not claimed proved. Do not resume that experiment
 or older endpoint/projection experiments without a new user scope.
-Book 0.9.1-dev is qualified and published through the repository/Pages route.
+Book 0.9.1-dev was qualified and published through the repository/Pages route.
 The user-authorized completed consolidation checkpoint c3792b67 was
 fast-forwarded into main, pushed and deployed on 2026-09-16; its live PDF
 matches the checked artifact. The consolidation ledger records the deployment.
@@ -75,8 +75,11 @@ data and terminal normal forms. The latter adds two explicit structural
 primitives guarded by OneCat(C); it is not a derivation from the old β rules.
 General higher terminality replacement remains unimplemented. The new
 [universality assembly plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
-is now active under user acceptance (2026-09-17): generic whole adjunction
+is complete under user acceptance (2026-09-17): ordinary whole adjunction
 assembly, primary terminality, and the separately bounded Γ/input-H comparison.
+Its [final audit](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
+records the structural boundary, source/import checks and qualified local book
+0.9.2-dev. The new local artifacts have not been pushed or deployed.
 The [higher terminality review](../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
 audits the full ! package and records its strict/pseudo versus lax boundary.
 Conditional consequences of an already supplied p⊣t or t⊣p form without C1;

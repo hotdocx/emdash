@@ -32,6 +32,13 @@ explain both the connection and its supplied-model assumptions. Native affine
 localization and varying-ring Čech cochains are also available; Čech
 cohomology is not yet supplied by that cochain layer.
 
+The ordinary universality layer now constructs whole unit/counit data from a
+Hom comparison and introduces the existing `Adjunction` interface while
+retaining its native computation heads. A whole classifier Γ and the
+comparison H_family≅H_native∘Γ preserve coherent homology inputs and their
+selected inverses. The [universality final audit](./docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
+record the ordinary qualification and the separate higher-profile boundary.
+
 Its universal-construction layer now also combines whole monad extension with
 selected finite Cartesian and indexed computation. A chosen product functor,
 whole projections, pairing, and a terminal-arrow transfor support Došen-style
@@ -161,7 +168,7 @@ Start with the concise
 [*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
 overview, then continue to the current development edition of
 [*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
-(`0.9.1-dev`;
+(`0.9.2-dev`;
 [earlier archived book record and DOI](https://doi.org/10.5281/zenodo.21544186),
 [assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is

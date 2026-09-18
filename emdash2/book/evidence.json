@@ -4875,6 +4875,170 @@
           "symbol": "one_cat_initial_hom_equivalence"
         }
       ]
+    },
+    "ORDINARY-HOM-COMPARISON-DATA": {
+      "status": "checked",
+      "statement": "A supplied whole Hom ProfComparison between ordinary categories yields whole unit and counit transformations with retained component/action formulas and both whole triangle laws; all constructions are definitions.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_unit"
+        },
+        {
+          "file": "emdash3_2_one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_counit"
+        },
+        {
+          "file": "emdash3_2_one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_triangle_left_modification"
+        },
+        {
+          "file": "emdash3_2_one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_triangle_right_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_unit"
+        },
+        {
+          "file": "examples/one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_profmap_reconstruction_action_path"
+        },
+        {
+          "file": "examples/one_cat_hom_comparison_data.lp",
+          "symbol": "one_cat_hom_comparison_triangle_right_path"
+        }
+      ]
+    },
+    "ORDINARY-ADJUNCTION-INTRODUCTION": {
+      "status": "checked",
+      "statement": "One explicit ordinary constructor introduces the existing Adjunction from a whole Hom comparison. Scoped proof-time views retain native computation heads; input and whole unit/counit agreement are derived and family mate/Došen cuts are checked.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_from_hom_comparison"
+        },
+        {
+          "file": "emdash3_2_one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_from_hom_comparison_input_path"
+        },
+        {
+          "file": "emdash3_2_one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_from_hom_comparison_unit_modification"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_from_hom_comparison"
+        },
+        {
+          "file": "examples/one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_from_hom_comparison_counit_path"
+        },
+        {
+          "file": "examples/one_cat_adjunction_introduction.lp",
+          "symbol": "one_cat_adjunction_family_transpose_func"
+        }
+      ]
+    },
+    "PRIMARY-TERMINAL-FAMILY-UNIVERSALITY": {
+      "status": "checked",
+      "statement": "The direct ordinary terminal/initial family interface takes the supplied adjunction itself and derives whole Hom contraction, invertible modification and diagram presentation comparisons without a caller-supplied terminal profile or square proof.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_terminal_adjunction_family_hom_iso"
+        },
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_initial_adjunction_family_hom_iso"
+        },
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_terminal_adjunction_family_normalization"
+        },
+        {
+          "file": "emdash3_2_one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_terminal_adjunction_family_presentation_evidence"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_terminal_adjunction_family_presentation_evidence"
+        },
+        {
+          "file": "examples/one_cat_terminal_adjunction_families.lp",
+          "symbol": "one_cat_initial_adjunction_family_presentation_evidence"
+        }
+      ]
+    },
+    "NATIVE-COMMA-FAMILY-CLASSIFICATION": {
+      "status": "checked",
+      "statement": "The native whole classifier retains original family inputs and whole source/target comparison data; its ordinary zero-arrow specialization retains the triangle comparison and inverse maps.",
+      "owners": [
+        {
+          "file": "emdash3_2_represented_comma_families.lp",
+          "symbol": "represented_comma_family_func"
+        },
+        {
+          "file": "emdash3_2_represented_comma_families.lp",
+          "symbol": "represented_comma_family_source_evidence"
+        },
+        {
+          "file": "emdash3_2_represented_comma_families.lp",
+          "symbol": "one_cat_represented_comma_family_target_equiv"
+        },
+        {
+          "file": "emdash3_2_one_cat_zero_arrow_family_classification.lp",
+          "symbol": "one_cat_zero_arrow_family_func"
+        },
+        {
+          "file": "emdash3_2_one_cat_zero_arrow_family_classification.lp",
+          "symbol": "one_cat_zero_arrow_family_triangle_evidence"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/represented_comma_families.lp",
+          "symbol": "represented_comma_family_source_evidence"
+        },
+        {
+          "file": "examples/one_cat_zero_arrow_family_classification.lp",
+          "symbol": "one_cat_zero_arrow_family_triangle_evidence"
+        }
+      ]
+    },
+    "WHOLE-HOMOLOGY-FAMILY-COMPARISON": {
+      "status": "checked",
+      "statement": "An actual whole boundary-diagram isomorphism under the original Q gives the whole family/native homology comparison with original endpoint functors, selected inverses and downstream point observation; the Freyd specialization retains the original model.",
+      "owners": [
+        {
+          "file": "emdash3_2_one_cat_homology_family_comparison.lp",
+          "symbol": "one_cat_homology_family_comparison_evidence"
+        },
+        {
+          "file": "emdash3_2_one_cat_homology_family_comparison_points.lp",
+          "symbol": "one_cat_homology_family_point_comparison_evidence"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/one_cat_homology_family_comparison.lp",
+          "symbol": "one_cat_homology_family_comparison_evidence"
+        },
+        {
+          "file": "examples/one_cat_homology_family_comparison_points.lp",
+          "symbol": "one_cat_homology_family_point_comparison_evidence"
+        },
+        {
+          "file": "examples/freyd_whole_homology_family_comparison.lp",
+          "symbol": "one_cat_homology_family_comparison_evidence"
+        }
+      ]
     }
   }
 }

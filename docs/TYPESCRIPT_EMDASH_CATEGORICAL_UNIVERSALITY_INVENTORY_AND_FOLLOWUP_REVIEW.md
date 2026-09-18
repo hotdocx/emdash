@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, uniqueness audit, Γ/H, extraction and Adjunction introduction qualified; higher-terminality/product reviews complete; final audit/book work open
+Status: complete under the accepted scope — ordinary interfaces and consumers qualified; higher-terminality/product reviews, final audit and local book 0.9.2-dev verified
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -15,6 +15,10 @@ Main integration, push and publication are not part of this new launch.
 
 Execution evidence belongs in the
 [universality assembly ledger](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md).
+The [final audit](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
+maps every tranche to current source and validation, including the retained
+qualifications and locally generated book artifacts. Main integration and
+publication remain separate future actions.
 User acceptance follows archived response 0120 in Infinity Codex session
 `2026-09-12_01a096616c4a`; the accepted content and subsequent user clarification
 are incorporated here, so the archive is only recovery evidence.
@@ -378,7 +382,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Qualified ordinary family migration and bounded uniqueness audit; full higher review completed with conditional native observations and explicit profile-dependent prerequisites. No generic uniqueness unifier or unrestricted higher replacement is installed. The later upgrade remains with the user-deferred profile/duality work |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Reviewed: no current consumer requires a new bridge. The supplied-weighted-witness adapter remains accurately labelled; native homology uses whole pairing from Δ⊣P. No extra comparison/compatibility requirement is introduced |
-| UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
+| UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Complete: source/trust/import audit, synchronized overviews and unsent email, book 0.9.2-dev with 187 evidence claims, 415-page validated PDF, visual inspection, byte-identical independent export and local artifact promotion |
 
 UA-1 through UA-4 require implemented qualified outcomes or a concrete
 mathematical/profile/owner prerequisite recorded with evidence and an explicit
@@ -402,7 +406,7 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: resume the remaining UA-1/2/3/5 reviews after the qualified public Γ/H tranche, then complete UA-6. Its
+The execution queue is complete under the accepted scope. The qualified Γ/H tranche's
 whole source comparison p∘Γ≅A, target comparison q∘Γ≃D and triangle
 modification T∘τΓ≅h∘J(S) retain the original A,D,h and their action. The
 actual boundary-diagram isomorphism and original Q then give
@@ -440,8 +444,8 @@ the Freyd reviewer uses the existing P/Q and literal original model H.
 The original nonsplit artifact bodies are also replayed with the new comparison
 modules loaded. This adds no model contract or closed-model construction. The inherited compiled-import
 Pi reviewer boundary remains separately recorded, without a broad eta fix
-or a claimed full-repository green aggregate. Complete the remaining
-UA-1/2/3/5 reviews and UA-6 audit/book work after Γ/H integration.
+or a claimed full-repository green aggregate. The subsequent UA-1/2/3/5
+results and UA-6 closure are recorded below and in the final audit.
 
 The [identity-image extraction](../emdash2/audits/adjunction-identity-image-extraction/README.md)
 now reuses Γ's projection comparisons with a supplied whole internal Hom

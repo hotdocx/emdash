@@ -39,12 +39,12 @@ Two displayed-identity projection clauses now infer equivalent family
 presentations from the identity head. Their focused reviewer, the nucleus
 diagnostics and affected native consumers pass; the plan contains the exact
 resource and warning receipts. This does not repair the separate Op/profile
-qualifications. The [whole input/H-comparison candidate](../audits/categorical-family-introduction-boundary/README.md)
+qualifications. The [whole input/H comparison](../audits/categorical-family-introduction-boundary/README.md)
 now checks both whole input projections, the original input transformation,
 and H_family≅H_native∘Γ with retained inverse data and point observations.
 Its structural support is at the existing library owners. Γ, its whole
 projections, ordinary triangle and H comparison now have public definition
-owners; the point comparison remains downstream. The active assembly ledger records joint
+owners; the point comparison remains downstream. The completed assembly ledger records joint
 native-consumer qualification. Op/duality, action-profile integration and the
 large six-term comparison remain deferred.
 
@@ -52,6 +52,11 @@ The initial main/Pages publication was df9b4778. The user subsequently
 authorized completed consolidation c3792b67 and book 0.9.1-dev for main/Pages;
 both are published, with the live PDF matching the checked artifact. See the
 [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication).
+The subsequent universality assembly is qualified locally, including ordinary
+Hom-data introduction and book 0.9.2-dev. Its
+[final audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
+records the current boundary and artifact receipts; this later snapshot has
+not been pushed or deployed.
 
 ## Sources Of Truth
 

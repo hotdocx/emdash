@@ -298,6 +298,62 @@ observation alone is not evidence for that stronger interface.
 > under Q, with its inverse retained. Column comparisons and their quotient
 > reconstruction laws refer to the same selected objects.
 
+### Classifying A Whole Family Of Native Inputs
+
+Let J:C→D(C) be the existing embedding A↦(A→0). A coherent family of inputs
+consists of A:B→C, D:B→D(C), and one whole transformation h:J∘A⇒D. The
+native classifier is a functor
+
+```text
+Γ : B → Z(C),       Γ(b) = (A(b),D(b),h_b),
+```
+
+where Z(C) is the original native input category with projections p,q and
+universal transformation τ:J∘p⇒q. Its construction uses the existing native
+Hom, section and Sigma action. It retains the action already supplied by
+A,D,h, with no extra naturality-square input from the caller.
+
+The original projection comparisons and triangle data are whole:
+
+```text
+S : p∘Γ ≅ A,       T : q∘Γ ≃ D,
+T∘τΓ ≅ h∘J(S).
+```
+
+They retain their selected inverse maps. The shared graph can also accept a
+whole internal Hom action directly; the h-based classifier specializes it to
+the native action of h. This is the same construction used for the
+identity-image extraction in Chapter 12.
+
+<!-- evidence:NATIVE-COMMA-FAMILY-CLASSIFICATION -->
+
+> **Formal status — checked ordinary consumer.** Evidence
+> `NATIVE-COMMA-FAMILY-CLASSIFICATION`. Γ, its whole projections and their
+> inverse data are public operations. The native zero-arrow specialization
+> retains the whole triangle comparison. The higher Op/profile qualification
+> remains separate.
+
+Transposing h through K gives β:A⇒K∘D and then H_family=Q∘Arr(β). The global
+native construction applies the same operations to p,q,τ. The actual
+boundary-diagram isomorphism, followed by the original whole Q, now gives
+
+```text
+H_family ≅ H_native∘Γ.
+```
+
+Both sides use the current K,Q and their original selected objects. The
+comparison is a whole natural isomorphism with inverse data; evaluation at a
+parameter recovers its downstream point view. The Freyd-model specialization
+retains the original model functor H_native. It adds no model contract.
+
+<!-- evidence:WHOLE-HOMOLOGY-FAMILY-COMPARISON -->
+
+> **Formal status — checked.** Evidence
+> `WHOLE-HOMOLOGY-FAMILY-COMPARISON`. The boundary-diagram comparison,
+> whole H comparison, inverse laws and point observation are derived.
+> The actual Freyd-model consumer and nonsplit proof–CAS diagrams retain
+> the same current native operations and supplied contracts.
+
 ## 31.5 Exactness At The Canonical Comparison
 
 Consider a whole composable pair f:A⇒B and g:B⇒D, together with its native
@@ -782,13 +838,11 @@ Git history preserves them. Shared matrix/provider algorithms and the explicitly
 identified ordinary finite-window iterator remain useful separate references.
 There is no obligation to compare new homology with every retired formulation.
 
-A further distinction concerns observations at a chosen parameter. The primary
-H and its induced maps are whole; the finite CAS interface also needs ordinary
-equations relating particular selected presentations and maps. Those equations
-remain appropriate observations. A proposed whole classification of coherent
-family inputs, followed by a whole family-to-global H comparison, is a natural
-further interface refinement. Its prototype is not evidence that the existing
-native computation has regressed, and it is not claimed implemented here.
+Observations at a chosen parameter remain useful. The primary H and its
+induced maps are whole; the finite CAS interface also needs ordinary equations
+relating particular selected presentations and maps. The qualified Γ and
+whole H_family≅H_native∘Γ comparison now retain the parameter action behind
+those observations. Both routes use the current native construction.
 
 ## 31.12 Computation, Qualifications, And Further Work
 
@@ -806,12 +860,13 @@ That does not establish a general homological cut-elimination, coherence or
 normalization theorem. No such theorem is inferred from successful examples
 or from the existence of a matrix algorithm.
 
-The ordinary structural presentation includes declared instances for diagram
-reconstruction, zero-family comparisons, postcomposition adjunction lifting,
-and the needed functor/product/slice profiles. Their computational consumers
-are checked. These assumptions must not be confused with axioms asserting
-output homology exactness; the latter is derived from the original whole
-operations and normality.
+The ordinary structural presentation retains declared diagram reconstruction,
+postcomposition adjunction lifting, modification introduction, and the needed
+functor/product/slice profiles. Terminal/initial family comparisons are
+derived, and their former primitive normalizers are retired. The optional
+Hom-comparison-to-adjunction interface adds one explicit ordinary constructor.
+None of these interfaces asserts output homology exactness; that result is
+derived from the original whole operations and normality.
 
 Several boundaries remain explicit:
 

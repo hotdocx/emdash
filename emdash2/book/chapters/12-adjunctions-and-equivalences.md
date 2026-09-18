@@ -160,6 +160,65 @@ The component formulas above are the mathematical reading of this package.
 The stable runtime owner is the profunctor comparison, not a global rewrite
 that expands every mate into a unit/counit composite.
 
+### Constructing An Ordinary Adjunction From Whole Hom Data
+
+Suppose A and B are ordinary categories and the original F and G are supplied
+with a whole natural comparison
+
+```text
+i : Hom_B(F−,−) ≅ Hom_A(−,G−).
+```
+
+The comparison includes both selected maps and their inverse laws. Its
+naturality already varies both endpoints. The internal construction takes
+identity images and obtains whole transformations
+
+```text
+η : id_A ⇒ G∘F,             ε : F∘G ⇒ id_B,
+η_a = i_(a,Fa)(id_Fa),      ε_b = i⁻¹_(Gb,b)(id_Gb).
+```
+
+The native Hom action and its graph carry these components together as
+transformations. Their nonidentity action is inherited from the original
+comparison. Native naturality and the same selected inverse give both triangle
+laws, including whole modifications and ordinary equality observations.
+Callers supply the whole comparison; the construction supplies its unit,
+counit and laws without additional naturality-square inputs.
+
+<!-- evidence:ORDINARY-HOM-COMPARISON-DATA -->
+
+> **Formal status — checked.** Evidence `ORDINARY-HOM-COMPARISON-DATA`.
+> The whole η/ε constructions, component and action laws, and both whole
+> triangle laws are definitions. They retain the ordinary guards and the
+> original comparison and inverse.
+
+Write make_adjunction(i) for the separate ordinary introduction rule:
+
+```text
+make_adjunction(i) : Adjunction(F,G)
+```
+
+This is one explicit structural constructor into the existing indexed classifier.
+Its Hom comparison agrees with i at proof time. Scoped views expose the same
+agreement for the selected maps, components and applications, while the
+canonical computation heads retain the triangle cuts from Section 12.2.
+Whole agreement between the native unit/counit and the constructed η/ε is
+derived through the existing mate formulas and ordinary modifications.
+
+<!-- evidence:ORDINARY-ADJUNCTION-INTRODUCTION -->
+
+> **Formal status — checked interface.** Evidence
+> `ORDINARY-ADJUNCTION-INTRODUCTION`. The constructor
+> `one_cat_adjunction_from_hom_comparison` is declared; its input
+> and whole unit/counit agreement laws are derived. Seven scoped unification
+> views preserve the existing runtime heads. The reviewer checks both Došen
+> rectangles, both mate directions, and use on whole functor families.
+
+This introduction supplies a witness from already available whole data. An
+existing structural adjunction can be replaced by it only when that input
+comparison can itself be constructed independently. The postcomposition lift
+below remains an explicit structural operation.
+
 ### Adjunctions On Whole Functor Families
 
 Let F:R→L and G:L→R be a chosen adjoint pair, F⊣G. For a parameter category

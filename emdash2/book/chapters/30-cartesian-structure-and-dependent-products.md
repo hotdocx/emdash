@@ -226,7 +226,13 @@ endomorphism of a terminal object to rewrite before its context is known.
 > selected terminal object has a whole canonical-arrow transformation,
 > computing component and off-diagonal action, the cut (30.14), and
 > contractible Hom classifiers. Arbitrary uniqueness is equality evidence;
-> there is no bare-variable unifier or variable-headed runtime rule.
+> no bare-variable unifier or variable-headed runtime rule is installed.
+
+A bounded implementation audit accepts the exact proof-time comparison
+between an arbitrary f:A→t and the selected !ₐ, while retaining their distinct
+runtime forms. Variable-sided unification is therefore a feasible convenience
+at the tested interface. It does not itself assemble a whole categorical
+contraction or resolve the interaction between !ₜ and the identity cut.
 
 The thin selected cartesian package merely pairs the existing binary-product
 and terminal-object capabilities. It adds no product, projection, terminal
@@ -262,6 +268,22 @@ Write p:C→1 for the canonical functor and t:1→C for the chosen object.
 Terminality has the categorical presentation p⊣t; initiality has the dual
 presentation t⊣p. Their units and counits are whole transformations.
 
+The primary ordinary family API takes this adjunction directly. For a family
+F:B→C and h:F⇒const_t, its whole Hom comparison contracts the category of
+such transformations. It supplies the actual comparison from Arr(h) to the
+chosen terminal-arrow family, with its inverse. The default family is the
+original unit whiskered by F. The initial case uses the counit dually.
+The closed profile of the literal terminal category is used internally;
+callers provide no old terminal record or separate square proof.
+
+<!-- evidence:PRIMARY-TERMINAL-FAMILY-UNIVERSALITY -->
+
+> **Formal status — checked.** Evidence
+> `PRIMARY-TERMINAL-FAMILY-UNIVERSALITY`. Whole Hom isomorphisms,
+> invertible modifications and diagram comparisons are derived from the
+> supplied p⊣t or t⊣p and the ordinary structural profiles. Native
+> kernel/cokernel family inputs use this primary interface.
+
 For ordinary C, the current extension supplies these two adjunctions from
 the original selected terminal/initial capabilities. The generic adjunction
 comparison then gives whole Hom mate functors, retained inverses and ordinary
@@ -285,11 +307,19 @@ naturality-square data.
 > inverse and ordinary contraction views are derived. They are not claimed
 > as derivations from the original terminal β rules alone.
 
-The general higher replacement of the primary terminality interface remains
-a separate qualification problem. It must specify a whole Hom comparison
-and its profiles, and distinguish the current computational DefIso adjunction
-contract from a weaker higher equivalence. Removing the ordinary guard from
-these declarations would not establish that extension.
+The full selected-terminal package includes the whole ! and its cuts as well
+as object/core contractibility. Its higher strength depends on the naturality
+profile. In a 2-categorical strict or pseudo interpretation, invertible
+naturality and !ₜ≅idₜ give a whole comparison const_(!ₓ)≅id on Hom_C(x,t),
+hence a categorical contraction. Lax comparison cells need not be invertible,
+so the point/core data alone do not establish that conclusion.
+
+The general higher replacement must retain the whole native represented Hom
+family and specify the appropriate profiles and inverse laws. A supplied
+adjunction already yields whole Hom comparisons without an ordinary-category
+assumption; constructing that adjunction from the old selected package and
+generalizing diagram realization are separate steps. The ordinary guards
+remain while that profile-sensitive upgrade is deferred.
 
 ## 30.4 Direct And Weighted Products
 
@@ -307,6 +337,12 @@ and records paths identifying its two projections with the triangular ones.
 It does not fabricate a weighted witness from pointwise beta and eta alone.
 This preserves both useful presentations without making either an alias for
 the other.
+
+The current native homology consumers use whole pairing through Δ⊣P. They
+do not require a newly derived weighted witness. A later adapter would also
+need a whole comparison between the binary weighted-cone family and the
+product-category Hom family, with agreement of the selected projections.
+That additional assembly is left to a consumer that needs it.
 
 ## 30.5 Slices And The Always-Existing $\Sigma_u$
 

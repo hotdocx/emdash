@@ -80,8 +80,15 @@ large six-term comparison. The [consolidation review](../docs/TYPESCRIPT_EMDASH_
 maps the reusable adjunction, diagram, terminal-family, product and pullback
 owners. Superseded model/connecting wrappers are retired, shared CAS inputs
 and ordinary observations have independent owners, and whole contraction plus
-ordinary terminal/initial adjunction interfaces are qualified. The further
-whole input/H comparison remains an explicitly unqualified follow-up.
+ordinary terminal/initial adjunction interfaces are qualified. The whole Γ
+classifier, its projection/triangle comparisons and H_family≅H_native∘Γ are
+now qualified for the ordinary consumer, with the original model and inverse
+data. Whole Hom-comparison data also yield η/ε and an ordinary Adjunction
+introduction that preserves the native computation heads. The
+[universality plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
+records their owners and checks; the
+[higher terminality review](../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
+keeps a general profile-sensitive upgrade separate.
 
 ## Where to start
 
@@ -570,11 +577,12 @@ simplexes in variable dimension while preserving the exact
 mapping-category and degeneracy boundaries.
 
 Chapter 30 adds selected Cartesian and indexed structures. In local edition
-0.9.1-dev, Chapters 12, 30 and 31 explain whole adjunction universality,
-categorical presentation comparisons, native K/Q/H/δ, the general snake and
-its LES comparison, and both nonsplit displayed certificates. General
-categorical terminality remains a proposed refinement of the current
-ordinary-family interface. The opening material and bibliography give the
+0.9.2-dev, Chapters 12, 30 and 31 explain whole Hom-data extraction and ordinary
+Adjunction introduction, primary terminal-family universality, Γ and the
+whole family/global H comparison, native K/Q/H/δ, the general snake and
+its LES comparison, and both nonsplit displayed certificates. The higher
+terminality review records the profile-dependent refinement boundary.
+The opening material and bibliography give the
 book DOI and code repository; the archived publication is distinct from this
 local development edition.
 
