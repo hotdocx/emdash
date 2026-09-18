@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4g): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4h): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
@@ -14,13 +14,18 @@ equivalence, with retained inverses/laws and identity components, using one
 new unpromoted constant-section projection view. UA-4e now links it to q∘Γ
 and composes the equivalences, retaining inverse data and identity components.
 UA-4g identifies the extracted whole section with D and obtains q∘Γ≃D,
-retaining inverse data and computing identity components. Recovery of the
-whole h and the whole H comparison remain open.
+retaining inverse data and computing identity components. UA-4h checks whole
+triangle compatibility with h in the actual ordinary zero-cone specialization,
+including its retained inverse and first kernel-mate consumer. The whole H
+comparison remains open.
 The core now also supports proof-time association of section maps, with
 runtime computation unchanged. UA-4f uses it to group this actual extracted
 section; UA-4f's audit passes 30 assertions. The later classification extends
 that replay to 54 assertions. Both whole projection comparisons coexist in
 the 63-assertion source/target replay.
+The latest 82-assertion replay includes that source/target evidence, the whole
+triangle and its mapped kernel-mate evidence. Its new ordinary modification
+introduction is explicitly structural and remains outside the library.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -608,3 +613,100 @@ owner placements are in the
 The active library is unchanged. Remaining work is whole compatibility with
 the supplied h, then the native H comparison; direct higher target conversion
 remains unqualified and is required only if the actual consumer needs it.
+
+## UA-4h: Whole Triangle And Kernel-Mate Image
+
+Specialize Γ to the existing ordinary `ZeroArrowCone_cat`. Its original
+universal transformation is `zero_arrow_cone_universal_transf`. With the
+retained source and target comparisons S:p∘Γ⇒A and T:q∘Γ⇒D, the two actual
+whole transformations under comparison are
+
+```text
+L = T∘τΓ,       R = h∘J(S),       L,R : J∘p∘Γ⇒D.
+```
+
+`triangle_comparison.lpfragment` forms both from existing whole operations.
+Their components compute to the original hₓ. It then retains an invertible
+modification L≅R, with both whole arrows, computing identity components and
+derived inverse-law evidence. This is compatibility with the original whole
+h, not only another endpoint comparison. The generic represented-comma
+prototype is used unchanged; the universal-transformation specialization is
+the actual one used by native homology.
+
+`one_cat_modification_introduction.lpfragment` explicitly proposes one
+structural primitive beyond today's Transf beta interface. Its inputs are
+two already whole transformations α,β:F⇒G into OneCat(C), together with
+native component cells αₓ→βₓ. The component Hom categories are discrete, so
+these cells and their remaining coherence are proposition-valued. The output
+is a whole arrow α→β in the existing native Transf_cat. No separate naturality
+or coherence proof is caller data. This ordinary restriction is essential;
+the declaration does not supply unrestricted higher pointwise assembly.
+It preserves hom_int/homd_int and adds no new equivalence classifier.
+
+Both directions of the actual triangle modification use identity component
+cells. Their inverse laws follow from the existing discrete-Hom proposition
+property of the ordinary functor category. The maps remain computational
+data; the inverse-law proofs are downstream proposition-valued evidence.
+Generic component evaluation and its existing Cat-valued `tdapp0` specialization
+both return the supplied component. The target index is coupled to the
+constructor so the two projection routes join at the owner.
+
+`triangle_rules.lpfragment` has two further bounded observations:
+
+- At the original zero-cone universal transformation, the constructor-visible
+  identity action returns the stored h. This repairs the projection order
+  where the opposite identity has already reduced and the generic transfor
+  identity pattern is no longer literal. The exact opposite/identity carrier
+  relation is retained. No general Op identity rule is installed.
+- Represented postcomposition compares with an already associated raw
+  composite by checking the endpoints and the entire reconstructed composite.
+  Runtime heads remain distinct; unrelated composites still fail comparison.
+
+The first kernel consumer applies the existing whole adjunction transpose
+functor Φ to this same L≅R. Its forward and inverse are exactly Φ applied to
+the retained modification arrows. This is a checked intermediate for the H
+comparison, not the finished H_family≅H_native∘Γ result. The next step is to
+relate these mate images to the actual boundary diagrams, then apply Q.
+
+Rebuild and check all 82 assertions from `emdash2`:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+import re
+a = Path('audits/categorical-family-introduction-boundary')
+constructor = (a / 'constructor_fragment.lp').read_text()
+marker = '// The target side is the actual action'
+assert constructor.count(marker) == 1
+rules = (a / 'target_classification_rules.lpfragment').read_text()
+# The source-comparison fragment already supplies this shared component guard.
+rules, count = re.subn(r'(?m)^rule @tapp0_fapp0[^;]+;\n', '', rules)
+assert count == 1
+parts = [Path('emdash3_2_gray_transformation_graph.lp').read_text(),
+         (a / 'whole_source_rules.lpfragment').read_text(),
+         (a / 'target_basechange_rules.lpfragment').read_text(), rules,
+         (a / 'triangle_rules.lpfragment').read_text(),
+         (a / 'one_cat_modification_introduction.lpfragment').read_text(),
+         constructor.split(marker, 1)[0]]
+parts += [(a / f).read_text() for f in [
+    'whole_source.lpfragment', 'target_section_extraction.lpfragment',
+    'target_basechange_link.lpfragment', 'target_section_grouping.lpfragment',
+    'target_classification.lpfragment', 'target_classification_controls.lpfragment',
+    'triangle_comparison.lpfragment', 'triangle_controls.lpfragment']]
+Path('tmp/probes').mkdir(parents=True, exist_ok=True)
+Path('tmp/probes/ua4h_triangle_replay.lp').write_text('\n'.join(parts))
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4h_triangle_replay.lp
+```
+
+The controls include both identity presentations, a nonidentity cone arrow,
+the supplied modification component through both public evaluation routes,
+noncollapse of arbitrary transformations, and positive/negative postcomposition
+comparisons. The three selected owner comparisons have unchanged empty warning
+inventories in all five dimensions. The earlier unrestricted opposite-identity
+probe added ten critical pairs at unrelated projection/normalization owners
+and was not selected. The active library is unchanged; the full goal and its
+remaining qualification gates are still open. Receipts and qualifications
+are recorded in the
+[execution ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-4h--recovering-the-original-whole-input-transformation).

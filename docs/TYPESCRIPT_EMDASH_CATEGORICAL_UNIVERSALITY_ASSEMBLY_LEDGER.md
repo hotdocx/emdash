@@ -1517,3 +1517,121 @@ The core remains SHA-256
 `dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`.
 Only the living plan, ledger and non-library audit bundle change in this
 checkpoint; standing library/book claims and their validation remain unchanged.
+
+### UA-4h — Recovering The Original Whole Input Transformation
+
+Previous turn: progress at `cf4267d8`; the worktree is clean and the published
+baseline remains an ancestor. The combined 63-assertion source/target replay
+passes again (`ua4g_both_projections_replay-20260917-223511.log`). Continue with
+the actual zero-arrow-cone specialization, whose universal transformation is
+the existing `zero_arrow_cone_universal_transf`, guarded by OneCat(C).
+
+Write S:p∘Γ⇒A and T:q∘Γ⇒D for the retained whole comparisons and τΓ for
+the original universal transformation whiskered by Γ. First form and inspect
+the two whole composites T∘τΓ and h∘J(S), both J∘p∘Γ⇒D. Their agreement
+is the missing triangle compatibility; checking both projection comparisons
+alone does not prove it. Use the supplied whole h and existing naturality
+owners; callers provide no additional square. Ordinary law evidence may be
+observed downstream, while operational comparison maps retain categorical
+construction and inverse data.
+
+Both whole triangle composites form directly. Their first component assertion
+fails with a KIND/Cat diagnostic, while separately declared component terms
+form (`ua4h_triangle_point_formation-20260917-223855.log`). Inspecting their
+normal forms isolates the left term as τ evaluated at an identity whose
+opposite carrier has already normalized; the right term is the original hₓ.
+A generic identity-carrier wildcard closes the observation but was rejected
+as unnecessarily broad. Retaining the exact Op(A)/A relationship also closes
+it, but its full-core owner probe adds ten critical pairs at represented-Hom,
+Path/Terminal/Product and global strict action owners
+(`ua4h_op_identity_owner-20260917-224609.log`). That generic rule was not selected.
+
+The selected clause belongs to the existing zero-cone universal transformation
+owner. It observes the stored h at a constructor-visible identity, preserving
+the exact opposite/source identity relation. It closes the actual component
+consumer and has no owner warning additions. This is a bounded projection-order
+bridge at an existing ordinary universal transformation, not a new Op
+signature, general duality rule or caller naturality square.
+
+The unchanged whole-reflexivity comparison still fails after point computation
+is restored (`ua4h_triangle_whole_reflexivity-20260917-224143.log`). The candidate
+therefore records its additional introduction explicitly: given two already
+whole α,β:F⇒G into OneCat(C), native component cells αₓ→βₓ assemble into
+one whole modification in Transf_cat(F,G). Component Hom categories are
+discrete, so these cells and their remaining coherence are proposition-valued.
+The proposed primitive is `ua4h_one_cat_modification`; it is not presented as
+a theorem derived from the existing Transf beta rules or as arbitrary higher
+pointwise assembly. It requires no caller coherence proof and preserves the
+original native classifiers and generic higher-action owners.
+
+The actual triangle uses this introduction in both directions with identity
+component cells. Its inverse laws are derived from `discrete_hom_is_prop`
+for the ordinary functor category. The resulting IsoEvidence retains both
+whole modifications and their proofs; its to/from and inverse-law projections
+check. The primary comparison is this categorical data, not a transported
+functor. The primitive's generic component beta and existing Cat-valued
+displayed specialization return the original supplied component. Coupling the
+target index in the generic rule is necessary to make the two projection
+routes join in the owner critical-pair analysis; the first less guarded
+version reported that one overlap.
+
+The first real homology continuation maps this very triangle isomorphism
+through the existing whole kernel-adjunction transpose functor Φ. The original
+P and its chosen Hom comparison are retained. The mapped forward/inverse
+projections are exactly Φ applied to the same modification arrows. Its first
+typing attempt encountered the existing raw/represented postcomposition
+normal forms after deep left association, not a missing inverse or model
+contract. A sufficient two-head comparison checks both endpoints and the
+entire reconstructed composite; it changes no runtime head and does not infer
+injectivity. With this view the actual kernel-mate consumer passes
+(`ua4h_triangle_kernel_mate_view-20260917-224939.log`). The final native-scoped
+identity version also passes (`ua4h_triangle_native_identity-20260917-225031.log`).
+
+The [tracked triangle replay](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4h-whole-triangle-and-kernel-mate-image)
+contains 82 assertions, with every candidate active before all inherited
+source/target assertions. It passes
+(`ua4h_triangle_replay-20260917-230027.log`). The nine new controls exercise
+the supplied modification through its stable component and public evaluation
+Hom-action owners, reject reflexive equality of arbitrary transformations,
+check positive/negative postcomposition views and runtime separation, and
+exercise both native identity presentations while rejecting an arbitrary
+cone endomorphism. The inverse maps and laws remain explicit computational
+data and derived proposition-valued evidence respectively.
+
+Selected owner-position checks all pass with unchanged empty warning
+inventories in categories, term heads, rule families, locations and parser
+issues. The native identity clause follows the universal transformation's
+existing component beta; the postcomposition view precedes the ordinary
+whole-mate formula consumers; the modification introduction owns its own
+primitive and two component projections. Receipts are:
+
+- native owner: `ua4h_native_identity_owner_baseline-20260917-225056.log` and
+  `ua4h_native_identity_owner-20260917-225146.log`;
+- postcomposition owner: `ua4h_postcomp_owner_baseline-20260917-225453.log` and
+  `ua4h_postcomp_owner-20260917-225536.log`;
+- modification owner: `ua4h_modification_owner_baseline-20260917-225614.log`
+  and `ua4h_modification_owner-20260917-225919.log`.
+
+The complete selected inventories are in
+`tmp/probes/ua4h_owner_warning_comparisons.json`; the broader unselected
+opposite-identity inventory is separate. All checks retain the serial
+2GiB/90s/o20 profile, warnings and subject reduction. No resource increase,
+repository-wide typecheck, main integration or publication is performed.
+
+The whole triangle is now qualified in this explicit proposed ordinary
+interface. H_family≅H_native∘Γ remains open: next relate the retained mate
+images to the actual boundary diagram families and apply the original whole
+Q. Candidate promotion and actual native/CAS integration still require that
+complete consumer. The positive library remains unchanged from `e4b665e8`,
+so its nucleus and 94 nonsplit assertions are carried forward. The other
+universality reviews and the established deferrals remain in scope exactly
+as recorded in the living plan; the goal is active.
+
+Catalog and unchanged source-health freshness pass before checkpoint (1273
+files, snapshot `3d11f8cc87b8816d2b6b7514ca46a9f023a0b0b8c037feac024c0ad615a9a06f`),
+along with added local links, the recorded 82-assertion count and exact diff
+whitespace checks. The core remains
+`dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`.
+This is a plan/audit checkpoint; no positive library or assembled book source
+changes, and no additional native/CAS aggregate rerun is needed for those
+byte-identical owners.

@@ -1,0 +1,23 @@
+/* UA-4h isolated consumer views. Neither clause changes an Op signature.
+   The identity observation belongs at the existing one-cat zero-cone owner;
+   the comparison belongs at ordinary postcomposition usability. */
+require open emdash.emdash3_2_one_cat_zero_cones;
+
+// The generic transfor identity cut has lost its literal opposite identity.
+// Observe the original cone arrow at this constructor-visible universal cell.
+// lhs-audit: keep 1 -- matches exactly the opposite-source identity presentation.
+rule @tapp1_fapp0 (Op_cat $K) _ _ _
+    (Struct_sigma $a (Struct_sigma $d $h))
+    (Struct_sigma $a (Struct_sigma $d $h))
+    (@zero_arrow_cone_universal_transf _ _ _ _)
+    (@id $K (Struct_sigma $a (Struct_sigma $d $h)))
+  ↪ $h;
+
+// Compare represented postcomposition with an already-associated raw composite.
+// Endpoints and the entire original composite are checked in the residual.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+    $A $B $C $G $X
+  ≡ @comp_fapp0 Cat_cat $A0 $B0 $C0 $H $Y
+  ↪ [ $A ≡ $A0; $C ≡ $C0;
+      (@comp_cat_fapp0 $A $B $C $G $X)
+        ≡ (@comp_cat_fapp0 $A0 $B0 $C0 $H $Y) ];

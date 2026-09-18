@@ -188,6 +188,7 @@ of a classifier does not construct an inhabitant for every category.
 | `IsRepresentedBy_iso`, `Representation_iso`, `WeightedCone_prof`, `IsWeightedLimit_cov_iso`, `IsWeightedLimit_cov_comp` | [Nucleus](../emdash2/emdash3_2.lp): representability and weighted limits as whole profunctor comparisons. The chosen representing functor is supplied/retained. | The iso form uses IsoEvidence; the comp form uses ProfComparison. They differ in computational strength, not in the intended ordinary universal property. Whole push/pull operations reindex the one comparison. |
 | `WeightedColimit_con`, preservation of limits/colimits by adjoints | [Nucleus](../emdash2/emdash3_2.lp). Colimits are defined through the existing opposite weighted-limit interface; preservation constructions are derived from the mate/comparison calculus. | Direct colimit projection vocabulary is limited. This inherited duality-based route keeps its existing higher-variance qualification; it is not a completed new Op design. |
 | `one_cat_postcomp_adjunction`, `one_cat_functor_category` | [Whole family adjunctions](../emdash2/emdash3_2_one_cat_adjunction_families.lp): explicit ordinary structural declarations; unit/counit are the original cells whiskered by a family. | F⊣G gives (F∘−)⊣(G∘−). Whole family mates are definitions from that declared lift. No caller supplies pointwise naturality squares. |
+| Ordinary modification introduction, candidate `ua4h_one_cat_modification` | [Non-library introduction fragment](../emdash2/audits/categorical-family-introduction-boundary/one_cat_modification_introduction.lpfragment): one proposed structural primitive assembles a native modification between two existing whole transformations into OneCat(C), with computing component projections. | The component cells are proposition-valued, so their remaining coherence is unique. This is an explicit introduction beyond the old beta interface; it does not assemble arbitrary pointwise families into functors or transformations. It supports the actual Γ triangle and its image through the original kernel mate; promotion waits for the complete H consumer. |
 | `Product_cat`, `Terminal_cat`, `Sigma_cat`, `Pi_cat`, `Pullback_catd` | [Nucleus](../emdash2/emdash3_2.lp): category/type formers, native dependent sum/product and family substitution. | These are not chosen internal products/terminal objects/pullbacks in an arbitrary C. In particular Pullback_catd(E,F) is substitution E∘F, not a categorical pullback supplied by PullbackStructure. |
 
 ## Inventory: Products, Terminality And Coproducts
@@ -340,7 +341,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action and section-postcomposition inference qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. UA-4g checks q∘Γ≃D with retained inverse/law data and identity components. Its 54-assertion replay and combined source/target 63-assertion replay pass. Recovery of h and whole H remain open; higher target conversion is not claimed. Γ and its remaining structural candidates stay outside the library |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action and section-postcomposition inference qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. Both whole projection comparisons and the ordinary zero-cone triangle compatibility now check in the isolated audit, with retained inverse/law data. UA-4h's 82 assertions include its first kernel-mate consumer. Whole H remains open; higher target conversion is not claimed. Γ and its remaining structural candidates stay outside the library |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -378,8 +379,10 @@ Sigma base-change link to the actual q∘Γ is now checked in UA-4e, including
 composition with the earlier equivalence, both inverse components and both
 whole inverse-law projections. UA-4g now classifies Vᵒ≃D and composes it with
 the retained inverse of that link to obtain q∘Γ≃D. Both selected inverse
-components and whole inverse-law projections check. Recovery of h, direct
-D[θ] conversion and the whole H comparison remain unqualified. The Sigma
+components and whole inverse-law projections check. UA-4h recovers the original
+whole h in the actual ordinary zero-cone specialization by an invertible
+modification T∘τΓ ≅ h∘J(S). Direct D[θ] conversion and the whole H comparison
+remain unqualified. The Sigma
 computation/comparison candidates remain unpromoted.
 UA-4f additionally qualifies proof-time associativity at the existing
 section_postcomp_sec owner. Removing its injectivity annotation allows the
@@ -397,11 +400,18 @@ eight-artifact nonsplit corpus pass. An additional groupoidal Pi reviewer
 fails in compiled-import context on both the unchanged baseline and current
 core; the ledger records that inherited boundary separately. No repository
 aggregate is claimed green.
-The next comparison should relate the original whole h to the universal
-comma transformation along Γ, using the checked source and target maps,
-then pass that whole comparison through the original K/Q construction.
-The combined source/target replay verifies that both projection comparisons
-coexist, but does not by itself establish this triangle compatibility.
+The ordinary triangle now has a whole modification and its retained inverse;
+the inverse laws use the existing discrete-Hom proposition property. The
+candidate modification introduction explicitly requires OneCat and takes two
+already whole transformations. It adds no caller naturality square or general
+omega-level pointwise assembly. A constructor-specific identity observation
+at the existing zero-cone universal transformation and a postcomposition
+typing view close its actual component/mate consumers. The broader opposite
+identity experiment was not selected.
+The first kernel-mate consumer maps this same isomorphism through the existing
+whole adjunction transpose functor and retains both mapped arrows. Next relate
+those mate images to the actual boundary diagram families, then apply the
+original whole Q. The final comparison H_family≅H_native∘Γ is still open.
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
