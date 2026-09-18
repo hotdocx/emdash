@@ -1,0 +1,910 @@
+/* UA-4i: actual whole boundary map and its retained inverse.
+   Derived from the original P/unit, whole source/target comparisons and the
+   proposed ordinary modification introduction. No new primitive or rule. */
+
+symbol ua4i_native_boundary [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P
+  (@ua4h_target B C C1 t T A D h)))
+≔ @ua4e_pre B (@ZeroArrowCone_cat C t T) C (@ua4h_gamma B C C1 t T A D h)
+  (@zero_arrow_cone_first_func C t T) (@kernel_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_diagram_func C t T))
+  (@kernel_adjunction_family_boundary_transf (@ZeroArrowCone_cat C t T) C S t T P
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T));
+
+symbol ua4i_family_boundary [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B C A (@kernel_adjunction_family_func B C S t T P D))
+≔ @kernel_adjunction_family_boundary_transf B C S t T P A D h;
+
+symbol ua4i_kernel_target_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D))
+≔ @ua4e_post B (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) (@ua4h_target B C C1
+  t T A D h) D (@ua4h_target_to B C C1 t T A D h);
+
+symbol ua4i_boundary_left [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+≔ @comp_fapp0 (Functor_cat B C) (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T
+  P (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_kernel_target_to B C C1 t T A D h S P) (@ua4i_native_boundary B C C1 t T A D h S P);
+
+symbol ua4i_boundary_right [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+≔ @comp_fapp0 (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@kernel_adjunction_family_func B C S t
+  T P D)
+  (@ua4i_family_boundary B C C1 t T A D h S P) (@ua4h_source_to B C C1 t T A D h);
+
+
+// Stage the existing transfor unit computation before specializing its source.
+symbol ua4i_tapp1_identity_path [I C : Cat] (F G : τ (Functor I C))
+ (eta : τ (@Transf I C F G)) (x : τ (Obj I))
+ : τ (@= (Hom C (@fapp0 I C F x) (@fapp0 I C G x))
+     (@tapp1_fapp0 I C F G x x eta (@id I x))
+     (@tapp0_fapp0 I C F G x eta))
+≔ @eq_refl (Hom C (@fapp0 I C F x) (@fapp0 I C G x))
+    (@tapp0_fapp0 I C F G x eta);
+
+symbol ua4i_boundary_left_point_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) (x : τ (Obj B))
+ : τ (@= (Hom C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P D) x))
+     (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D) x
+  (@ua4i_boundary_left B C C1 t T A D h S P))
+     (@tapp0_fapp0 B C A (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_family_boundary B C C1 t
+  T A D h S P)))
+≔ @ua4i_tapp1_identity_path (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
+  (@kernel_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_diagram_func C t
+  T)) (@kernel_adjunction_family_boundary_transf (@ZeroArrowCone_cat C t T) C S t T P
+  (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+  (@zero_arrow_cone_universal_transf C C1 t T))
+   (@fapp0 B (@ZeroArrowCone_cat C t T) (@ua4h_gamma B C C1 t T A D h) x);
+
+symbol ua4i_boundary_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P))
+≔ @ua4h_one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+  t T P D) (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+   (λ x : τ (Obj B), @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func
+  B C S t T P D) x)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C
+  S t T P D) x (@ua4i_boundary_left B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_right B C C1 t T A D h S P))
+  (@ua4i_boundary_left_point_path B C C1 t T A D h S P x));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) (x : τ (Obj B)) ⊢
+ @tapp0_hom_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P) x
+  (@ua4i_boundary_to B C C1 t T A D h S P)
+ ≡ @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P D) x))
+  (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D) x
+  (@ua4i_boundary_left B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_right B C C1 t T A D h S P))
+  (@ua4i_boundary_left_point_path B C C1 t T A D h S P x);
+
+symbol ua4i_boundary_from [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+  (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P))
+≔ @ua4h_one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+  t T P D) (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)
+   (λ x : τ (Obj B), @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func
+  B C S t T P D) x)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C
+  S t T P D) x (@ua4i_boundary_right B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_left B C C1 t T A D h S P)) (@eq_sym
+  (Obj (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P D) x)))
+  (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D) x
+  (@ua4i_boundary_left B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_right B C C1 t T A D h S P))
+  (@ua4i_boundary_left_point_path B C C1 t T A D h S P x)));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) (x : τ (Obj B)) ⊢
+ @tapp0_hom_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P) x
+  (@ua4i_boundary_from B C C1 t T A D h S P)
+ ≡ @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P D) x))
+  (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D) x
+  (@ua4i_boundary_right B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_left B C C1 t T A D h S P)) (@eq_sym
+  (Obj (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P D) x)))
+  (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D) x
+  (@ua4i_boundary_left B C C1 t T A D h S P)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_boundary_right B C C1 t T A D h S P))
+  (@ua4i_boundary_left_point_path B C C1 t T A D h S P x));
+
+symbol ua4i_boundary_left_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P
+  D)) (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)) (@comp_fapp0
+  (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_from B C C1 t T A D h S P) (@ua4i_boundary_to
+  B C C1 t T A D h S P)) (@id (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P)))
+≔ @is_contr_center (@= (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_left B C C1 t T A D h S P)) (@comp_fapp0 (@Transf_cat B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_from B C C1 t T A D h S P) (@ua4i_boundary_to B C C1 t T A D h S P)) (@id (@Transf_cat B
+  C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B
+  C C1 t T A D h S P))) ((@discrete_hom_is_prop (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) ((@one_cat_functor_category B C C1) (@ua4h_source B C C1
+  t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_left B C C1 t T A D h S P)) (@comp_fapp0 (@Transf_cat B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_from B C C1 t T A D h S P) (@ua4i_boundary_to B C C1 t T A D h S P)) (@id (@Transf_cat B
+  C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_left B
+  C C1 t T A D h S P)));
+
+symbol ua4i_boundary_right_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P
+  D)) (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P))
+  (@comp_fapp0 (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T
+  P D)) (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)
+  (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_to B C C1 t T A D h S P)
+  (@ua4i_boundary_from B C C1 t T A D h S P)) (@id (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right B C C1 t T A D h S P)))
+≔ @is_contr_center (@= (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_right B C C1 t T A D h S P)) (@comp_fapp0 (@Transf_cat B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_to B C C1 t T A D h S P) (@ua4i_boundary_from B C C1 t T A D h S P)) (@id (@Transf_cat B
+  C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right
+  B C C1 t T A D h S P))) ((@discrete_hom_is_prop (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) ((@one_cat_functor_category B C C1) (@ua4h_source B C C1
+  t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_right B C C1 t T A D h S P)) (@comp_fapp0 (@Transf_cat B C (@ua4h_source B C C1 t T A D
+  h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_to B C C1 t T A D h S P) (@ua4i_boundary_from B C C1 t T A D h S P)) (@id (@Transf_cat B
+  C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)) (@ua4i_boundary_right
+  B C C1 t T A D h S P)));
+
+symbol ua4i_boundary_evidence [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (IsoEvidence (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P D)) (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P))
+≔ @iso_evidence_intro (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C
+  S t T P D)) (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_to B C C1 t T A D h S P) (@ua4i_boundary_from B C C1 t T A D h S P)
+   (@ua4i_boundary_left_law B C C1 t T A D h S P) (@ua4i_boundary_right_law B C C1 t T A D h S P);
+
+require open emdash.emdash3_2_one_cat_arrow_diagrams;
+
+symbol ua4i_boundary_diagram_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T
+  A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T
+  P A D h))
+≔ @sym_func_func_transf WalkingArrow_cat B C
+   (@walking_arrow_func (Functor_cat B C) (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func
+  B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+   (@walking_arrow_func (Functor_cat B C) A (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_family_boundary B C C1 t T A D h S P))
+   (@one_cat_square_diagram_transf (Functor_cat B C) (@one_cat_functor_category B C C1)
+     (@ua4h_source B C C1 t T A D h) A (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t
+  T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_native_boundary B C C1 t T A D h S P)
+  (@ua4i_family_boundary B C C1 t T A D h S P)
+     (@ua4h_source_to B C C1 t T A D h) (@ua4i_kernel_target_to B C C1 t T A D h S P) (@ua4i_boundary_to B
+  C C1 t T A D h S P));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @eq_refl (@Transf B C (@ua4h_source B C C1 t T A D h) A)
+   (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T
+  A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T
+  P A D h)
+     (@ua4i_boundary_diagram_to B C C1 t T A D h S P) walking_arrow_src)
+ : τ (@= (@Transf B C (@ua4h_source B C C1 t T A D h) A)
+     (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t
+  T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T
+  P A D h)
+       (@ua4i_boundary_diagram_to B C C1 t T A D h S P) walking_arrow_src) (@ua4h_source_to B C C1 t T A D
+  h));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @eq_refl (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D))
+   (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T
+  A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T
+  P A D h)
+     (@ua4i_boundary_diagram_to B C C1 t T A D h S P) walking_arrow_tgt)
+ : τ (@= (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D))
+     (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t
+  T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T
+  P A D h)
+       (@ua4i_boundary_diagram_to B C C1 t T A D h S P) walking_arrow_tgt) (@ua4i_kernel_target_to B C C1
+  t T A D h S P));
+
+require open emdash.emdash3_2_omega_equiv_inverse_square;
+
+symbol ua4i_source_equiv [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@OmegaEquivAlong (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1 t T A D
+  h))
+≔ @iso_evidence_omega_along (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A
+  (@ua4c_gamma_source_evidence B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A
+  D h);
+
+symbol ua4i_kernel_target_equiv [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@OmegaEquivAlong (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1
+  t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D h S
+  P))
+≔ @iso_evidence_omega_along (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B
+  C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
+  (@iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+  (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
+    (@ua4h_target B C C1 t T A D h) D (@omega_equiv_along_iso_evidence (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@ua4h_target B C C1 t T A D h) D (@ua4g_native_target_to_supplied B C (Functor_cat
+  WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h (@one_cat_functor_category
+  WalkingArrow_cat C C1)) (@ua4g_native_target_equiv B C (Functor_cat WalkingArrow_cat C)
+  (@terminal_arrow_diagram_func C t T) A D h (@one_cat_functor_category WalkingArrow_cat C C1))));
+
+symbol ua4i_boundary_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P))
+≔ @groupoidal_arrow_to_path (@Transf_cat B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P D)) (@discrete_cat_is_groupoidal (@Transf_cat B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
+  ((@one_cat_functor_category B C C1) (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C
+  S t T P D)))
+  (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
+  (@ua4i_boundary_to B C C1 t T A D h S P);
+
+symbol ua4i_inverse_boundary_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C A (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)))
+  (@comp_fapp0 (Functor_cat B C) A (@kernel_adjunction_family_func B C S t T P D)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target
+  B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D
+  h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P)) (@ua4i_family_boundary B C C1 t T A D h S P))
+  (@comp_fapp0 (Functor_cat B C) A (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1
+  t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P))))
+≔ @omega_equiv_inverse_square_path (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_native_boundary B C C1 t T A D h S P) (@ua4i_family_boundary B C C1 t T A D h S P)
+  (@ua4h_source_to B C C1 t T A D h) (@ua4i_kernel_target_to B C C1 t T A D h S P) (@ua4i_source_equiv B C
+  C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P) (@ua4i_boundary_path B C C1 t T A D h
+  S P);
+
+symbol ua4i_boundary_diagram_from [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)))
+≔ @sym_func_func_transf WalkingArrow_cat B C
+  (@walking_arrow_func (Functor_cat B C) A (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_family_boundary B C C1 t T A D h S P)) (@walking_arrow_func (Functor_cat B C) (@ua4h_source B C
+  C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@one_cat_square_diagram_transf (Functor_cat B C) (@one_cat_functor_category B C C1)
+    A (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_family_boundary B C
+  C1 t T A D h S P) (@ua4i_native_boundary B C C1 t T A D h S P) (@omega_equiv_along_left_inv (Functor_cat
+  B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1 t T A D h) (@ua4i_source_equiv B C C1 t T
+  A D h S P)) (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P
+  (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to
+  B C C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P))
+    (@path_to_hom (Hom_cat (Functor_cat B C) A (@kernel_adjunction_family_func B C S t T P (@ua4h_target B
+  C C1 t T A D h))) (@comp_fapp0 (Functor_cat B C) A (@kernel_adjunction_family_func B C S t T P D)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target
+  B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D
+  h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P)) (@ua4i_family_boundary B C C1 t T A D h S P))
+  (@comp_fapp0 (Functor_cat B C) A (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1
+  t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P))) (@ua4i_inverse_boundary_path B C C1 t T A D h S
+  P)));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @eq_refl (@Transf B C A (@ua4h_source B C C1 t T A D h))
+   (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))
+     (@ua4i_boundary_diagram_from B C C1 t T A D h S P) walking_arrow_src)
+ : τ (@= (@Transf B C A (@ua4h_source B C C1 t T A D h))
+     (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))
+       (@ua4i_boundary_diagram_from B C C1 t T A D h S P) walking_arrow_src) (@omega_equiv_along_left_inv
+  (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1 t T A D h)
+  (@ua4i_source_equiv B C C1 t T A D h S P)));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @eq_refl (@Transf B C (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C
+  S t T P (@ua4h_target B C C1 t T A D h)))
+   (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))
+     (@ua4i_boundary_diagram_from B C C1 t T A D h S P) walking_arrow_tgt)
+ : τ (@= (@Transf B C (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S
+  t T P (@ua4h_target B C C1 t T A D h)))
+     (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))
+       (@ua4i_boundary_diagram_from B C C1 t T A D h S P) walking_arrow_tgt) (@omega_equiv_along_left_inv
+  (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D h S P)
+  (@ua4i_kernel_target_equiv B C C1 t T A D h S P)));
+
+require open emdash.emdash3_2_one_cat_diagram_family_reflection;
+
+symbol ua4i_diagram_left_source_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C (@ua4h_source B C C1 t T A D h) (@ua4h_source B C C1 t T A D h))
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T
+  A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A
+  D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary
+  B C C1 t T A D h S P)) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) walking_arrow_src) (@sym_transf_tapp0_transf B
+  WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P))) walking_arrow_src))
+≔ @eq_trans (@Transf B C (@ua4h_source B C C1 t T A D h) (@ua4h_source B C C1 t T A D h))
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T
+  A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A
+  D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary
+  B C C1 t T A D h S P)) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) walking_arrow_src) (@comp_fapp0 (Functor_cat B C)
+  (@ua4h_source B C C1 t T A D h) A (@ua4h_source B C C1 t T A D h) (@omega_equiv_along_left_inv
+  (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1 t T A D h)
+  (@ua4i_source_equiv B C C1 t T A D h S P)) (@ua4h_source_to B C C1 t T A D h)) (@sym_transf_tapp0_transf
+  B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P))) walking_arrow_src)
+  (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_src
+    (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+  t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P))
+  (@eq_trans (@Transf B C (@ua4h_source B C C1 t T A D h) (@ua4h_source B C C1 t T A D h)) (@comp_fapp0
+  (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source B C C1 t T A D h)
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1
+  t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P)) (@ua4h_source_to B C C1 t T A D h)) (@id
+  (Functor_cat B C) (@ua4h_source B C C1 t T A D h)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))) walking_arrow_src)
+    (@omega_equiv_along_left_law (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C
+  C1 t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P)) (@eq_sym (@Transf B C (@ua4h_source B C C1 t T
+  A D h) (@ua4h_source B C C1 t T A D h)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))) walking_arrow_src) (@id (Functor_cat B C) (@ua4h_source B C C1 t T A D h))
+  (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+  (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_src) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)))));
+
+symbol ua4i_diagram_left_target_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))) (@sym_transf_tapp0_transf
+  B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) walking_arrow_tgt) (@sym_transf_tapp0_transf B
+  WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P))) walking_arrow_tgt))
+≔ @eq_trans (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))) (@sym_transf_tapp0_transf
+  B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) walking_arrow_tgt) (@comp_fapp0 (Functor_cat B C)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S t T P (@ua4h_target
+  B C C1 t T A D h)) (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S
+  t T P (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_kernel_target_to B C C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P))
+  (@ua4i_kernel_target_to B C C1 t T A D h S P)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))) walking_arrow_tgt)
+  (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_tgt
+    (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+  t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P))
+  (@eq_trans (@Transf B C (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))) (@comp_fapp0 (Functor_cat
+  B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S t T P (@ua4h_target
+  B C C1 t T A D h)) (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S
+  t T P (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_kernel_target_to B C C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P))
+  (@ua4i_kernel_target_to B C C1 t T A D h S P)) (@id (Functor_cat B C) (@kernel_adjunction_family_func B
+  C S t T P (@ua4h_target B C C1 t T A D h))) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P))) walking_arrow_tgt)
+    (@omega_equiv_along_left_law (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P
+  (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to
+  B C C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P)) (@eq_sym (@Transf B C
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))) (@sym_transf_tapp0_transf
+  B WalkingArrow_cat C (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P))) walking_arrow_tgt) (@id (Functor_cat B C)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))) (@fapp1_id_path
+  (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B
+  WalkingArrow_cat C walking_arrow_tgt) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)))));
+
+symbol ua4i_diagram_left_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B (Functor_cat WalkingArrow_cat C) (@transf_arrow_diagram_func B C (@ua4h_source B C C1
+  t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@ua4i_native_boundary B C C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A
+  D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary
+  B C C1 t T A D h S P))) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))))
+≔ @one_cat_diagram_family_map_path B C C1 (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat WalkingArrow_cat C))
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P)))
+  (@ua4i_diagram_left_source_law B C C1 t T A D h S P) (@ua4i_diagram_left_target_law B C C1 t T A D h S
+  P);
+
+symbol ua4i_diagram_right_source_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C A A) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@comp_fapp0 (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_boundary_diagram_to B C C1 t
+  T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)) walking_arrow_src)
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_src))
+≔ @eq_trans (@Transf B C A A) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@comp_fapp0 (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_boundary_diagram_to B C C1 t
+  T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)) walking_arrow_src) (@comp_fapp0
+  (Functor_cat B C) A (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1 t T A D h)
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B C C1
+  t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P))) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_src)
+  (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_src
+    (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_to B C C1 t T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A
+  D h S P))
+  (@eq_trans (@Transf B C A A) (@comp_fapp0 (Functor_cat B C) A (@ua4h_source B C C1 t T A D h) A
+  (@ua4h_source_to B C C1 t T A D h) (@omega_equiv_along_left_inv (Functor_cat B C) (@ua4h_source B C C1 t
+  T A D h) A (@ua4h_source_to B C C1 t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P))) (@id
+  (Functor_cat B C) A) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_src)
+    (@omega_equiv_left_as_right_law (Functor_cat B C) (@ua4h_source B C C1 t T A D h) A (@ua4h_source_to B
+  C C1 t T A D h) (@ua4i_source_equiv B C C1 t T A D h S P)) (@eq_sym (@Transf B C A A)
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_src) (@id (Functor_cat B C) A) (@fapp1_id_path (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (Functor_cat B C) (@diagram_family_evaluation_func B WalkingArrow_cat C
+  walking_arrow_src) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))));
+
+symbol ua4i_diagram_right_target_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B C (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S
+  t T P D)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@comp_fapp0 (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_boundary_diagram_to B C C1 t
+  T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)) walking_arrow_tgt)
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_tgt))
+≔ @eq_trans (@Transf B C (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B
+  C S t T P D)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@comp_fapp0 (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_boundary_diagram_to B C C1 t
+  T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)) walking_arrow_tgt) (@comp_fapp0
+  (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
+  (@ua4i_kernel_target_to B C C1 t T A D h S P) (@omega_equiv_along_left_inv (Functor_cat B C)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D h S P)
+  (@ua4i_kernel_target_equiv B C C1 t T A D h S P))) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_tgt)
+  (@one_cat_diagram_family_evaluation_comp_path B WalkingArrow_cat C C1 walking_arrow_tgt
+    (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_to B C C1 t T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A
+  D h S P))
+  (@eq_trans (@Transf B C (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B
+  C S t T P D)) (@comp_fapp0 (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P D)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h))
+  (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D h S P)
+  (@omega_equiv_along_left_inv (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@ua4h_target
+  B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to B C C1 t T A D
+  h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P))) (@id (Functor_cat B C)
+  (@kernel_adjunction_family_func B C S t T P D)) (@sym_transf_tapp0_transf B WalkingArrow_cat C
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_tgt)
+    (@omega_equiv_left_as_right_law (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P
+  (@ua4h_target B C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D) (@ua4i_kernel_target_to
+  B C C1 t T A D h S P) (@ua4i_kernel_target_equiv B C C1 t T A D h S P)) (@eq_sym (@Transf B C
+  (@kernel_adjunction_family_func B C S t T P D) (@kernel_adjunction_family_func B C S t T P D))
+  (@sym_transf_tapp0_transf B WalkingArrow_cat C (@kernel_adjunction_family_boundary_diagram_func B C S t
+  T P A D h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@id (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  walking_arrow_tgt) (@id (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P D))
+  (@fapp1_id_path (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+  (@diagram_family_evaluation_func B WalkingArrow_cat C walking_arrow_tgt)
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))));
+
+symbol ua4i_diagram_right_law [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (@= (@Transf B (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func B C
+  S t T P A D h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)) (@comp_fapp0
+  (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h)
+  (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C
+  C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@ua4i_boundary_diagram_to B C C1 t T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P))
+  (@id (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B
+  C S t T P A D h)))
+≔ @one_cat_diagram_family_map_path B C C1 (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D
+  h) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@comp_fapp0 (Functor_cat B
+  (Functor_cat WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@transf_arrow_diagram_func B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t
+  T P (@ua4h_target B C C1 t T A D h)) (@ua4i_native_boundary B C C1 t T A D h S P))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_boundary_diagram_to B C C1 t
+  T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A D h S P)) (@id (Functor_cat B (Functor_cat
+  WalkingArrow_cat C)) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h))
+  (@ua4i_diagram_right_source_law B C C1 t T A D h S P) (@ua4i_diagram_right_target_law B C C1 t T A D h S
+  P);
+
+symbol ua4i_boundary_diagram_evidence [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ : τ (IsoEvidence (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h))
+≔ @iso_evidence_intro (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_to B C C1 t T A D h S P) (@ua4i_boundary_diagram_from B C C1 t T A
+  D h S P)
+  (@ua4i_diagram_left_law B C C1 t T A D h S P) (@ua4i_diagram_right_law B C C1 t T A D h S P);
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @iso_evidence_to (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_evidence B C C1 t T A D h S P) ≡ (@ua4i_boundary_diagram_to B C C1
+  t T A D h S P);
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @iso_evidence_from (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_evidence B C C1 t T A D h S P) ≡ (@ua4i_boundary_diagram_from B C
+  C1 t T A D h S P);
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @iso_evidence_left (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_evidence B C C1 t T A D h S P) ≡ (@ua4i_diagram_left_law B C C1 t T
+  A D h S P);
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T)) ⊢
+ @iso_evidence_right (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@transf_arrow_diagram_func B C
+  (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P (@ua4h_target B C C1 t T A D
+  h)) (@ua4i_native_boundary B C C1 t T A D h S P)) (@kernel_adjunction_family_boundary_diagram_func B C S
+  t T P A D h) (@ua4i_boundary_diagram_evidence B C C1 t T A D h S P) ≡ (@ua4i_diagram_right_law B C C1 t
+  T A D h S P);

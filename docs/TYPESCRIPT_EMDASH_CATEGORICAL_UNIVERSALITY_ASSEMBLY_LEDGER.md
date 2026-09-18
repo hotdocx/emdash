@@ -1635,3 +1635,104 @@ whitespace checks. The core remains
 This is a plan/audit checkpoint; no positive library or assembled book source
 changes, and no additional native/CAS aggregate rerun is needed for those
 byte-identical owners.
+
+### UA-4i — Actual Boundary Diagram Comparison
+
+Previous turn: progress at `aa7e78f7`; the worktree is clean and the published
+baseline remains an ancestor. The retained 82-assertion replay passes again
+(`ua4h_triangle_replay-20260917-230736.log`). No previous checker is live.
+Continue toward the actual H comparison through the original P/Q structures.
+
+First form βₙΓ by restricting the existing universal native boundary along
+Γ, together with the original family boundary βₕ. The comparison's endpoint
+maps are the retained source map s:pΓ⇒A and K applied to the retained target
+map t:qΓ⇒D. Inspect the actual whole composites K(t)∘βₙΓ and βₕ∘s before
+relating their boundary diagrams. Keep the mate-image evidence from UA-4h
+available; use the existing ordinary modification introduction only for
+proof-valued coherence between already whole transformations. No objectwise
+kernel/cokernel construction or operational functor path cast is in scope.
+
+Both actual boundary composites form. Their direct component conversion fails
+(`ua4i_boundary_components-20260917-231131.log`); separate typed point terms
+show that the left retains tapp1 of the original whole native boundary at
+an identity whose opposite carrier has normalized, while the right is the
+original K(hₓ)∘η_Aₓ formula
+(`ua4i_boundary_point_forms-20260917-231223.log`). The selected solution adds
+no rewrite: prove the existing transfor identity law once at a generic source,
+then specialize that named lemma. Its actual boundary-point equality checks
+(`ua4i_boundary_identity_path-20260917-231517.log`). This is a derived staged
+law, not a new Op/identity axiom or a different boundary construction.
+
+The existing proposed ordinary modification introduction assembles the actual
+boundary compatibility from that unit-law cell. Both directions are retained;
+the inverse proofs use the existing discrete-Hom proposition property. A
+stronger literal identity observation had nonmatching computational endpoint
+types. The selected observation instead retains the correctly typed native
+cell of the derived unit path. This does not cast or reconstruct a functor,
+and no stronger normalization claim is needed by the real diagram consumer.
+
+The boundary-diagram forward map is the existing native whole-square action
+in Functor_cat(B,C), followed by shape/parameter exchange. Its whole endpoint
+observations return precisely s and K(t). Their original selected inverses
+and `omega_equiv_inverse_square_path` supply the inverse map. Ordinary
+diagram-family reflection then derives both whole inverse laws from the
+original endpoint inverse laws. Receipts:
+`ua4i_boundary_diagram_map-20260917-231932.log`,
+`ua4i_boundary_diagram_inverse-20260917-232141.log`, and
+`ua4i_boundary_diagram_iso-20260917-232405.log`. No new square, homology or
+inverse witness is caller data.
+
+Reaching the literal reindexed native diagram requires its original
+reconstruction interface. Directly identifying the reconstructed source with
+Arr(βₙΓ) fails. Both whole endpoint observations check separately; the direct
+generator comparison does not (`ua4i_native_diagram_observations-20260917-232804.log`).
+Applying the already existing `one_cat_diagram_family_transf_reindex_path`
+explicitly closes that generator comparison
+(`ua4i_native_generator_path-20260917-233016.log`). Its native modification
+isomorphism is passed through the existing whole arrow-family comparison,
+then composed with the existing categorical diagram reconstruction. The
+actual reindexed native diagram is retained throughout
+(`ua4i_actual_diagram_iso-20260917-233210.log`). Path conversion occurs only
+inside the discrete modification category, not in operational functor data.
+
+Finally the same whole Q acts on this diagram isomorphism, giving exactly
+H_family≅H_native∘Γ at the original literal public expressions. Its forward
+and inverse projections compute to Q applied to the retained diagram maps;
+both whole inverse-law projections check
+(`ua4i_whole_homology_iso-20260917-233417.log`). Evaluation of this same
+isomorphism gives the downstream point view at the unchanged
+zero_arrow_family_point_input, with both original point maps retained
+(`ua4i_whole_homology_point_view-20260917-233708.log`). This adds no selected
+kernel/cokernel record or model contract. The UA-4h mate image remains checked;
+the final diagram maps use the actual boundaries directly and need no new
+mate normalization rule.
+
+The [tracked whole-H replay](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4i-actual-boundary-diagrams-and-whole-h)
+passes all 101 assertions
+(`ua4i_whole_homology_replay-20260917-234135.log`). It includes the inherited
+input/triangle checks, typed boundary-cell observations, both whole diagram
+maps and laws, literal whole H endpoints and inverse data, the original
+point-input view, and positive/negative controls on the staged identity law.
+Every check uses the serial 2GiB/90s/o20 profile with SR/warnings enabled.
+There is no new primitive, rewrite or unification rule in UA-4i, and no
+resource-limit increase or opacity change.
+
+The five new non-library fragments separate boundary comparison, actual
+diagram reconstruction, whole H, downstream point view and controls. The
+scoped ordinary Γ/H candidate is now ready for owner factoring and promotion
+qualification. Retain all previously qualified first-arrow computations and
+inverse data. The actual H consumer did not require direct D[θ] runtime
+normalization; that stronger observation remains recorded, not silently
+claimed or made a new prerequisite. The complete goal still requires
+promotion/joint native-CAS checks and the remaining UA-1/2/3/5/6 work.
+The positive library is byte-identical to the `e4b665e8` qualification, so its
+nucleus and 94 nonsplit assertions are carried forward. No main integration
+or publication occurs, and the goal remains active.
+
+Catalog and unchanged source-health freshness pass before checkpoint (1273
+files, snapshot `3d11f8cc87b8816d2b6b7514ca46a9f023a0b0b8c037feac024c0ad615a9a06f`),
+along with the 101-assertion count, added local links and exact diff whitespace
+checks. The core remains SHA-256
+`dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`.
+The audit's opening status has been consolidated so its historical “next”
+statements do not obscure the current whole-H result and promotion boundary.

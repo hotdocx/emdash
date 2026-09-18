@@ -1,0 +1,152 @@
+/* The desired H_family ≅ H_native∘Γ, through the same whole Q.
+   The literal original endpoint functors, chosen maps and inverse laws
+   remain present. No selected-kernel/cokernel record interface is input. */
+
+// Apply the original whole Q to the actual boundary-diagram comparison.
+symbol ua4i_whole_homology_evidence [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0))
+ : τ (IsoEvidence (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h)))
+≔ @iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+  (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_native_diagram B C C1 t T A D
+  h S P)
+   (@iso_evidence_sym (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@ua4i_native_diagram B C C1 t T A
+  D h S P) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@ua4i_native_to_family_diagram_evidence B C C1 t T A D h S P));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0)) ⊢
+ @iso_evidence_to (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)
+ ≡ @fapp1_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@comp_cat_cov_func B
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q))
+  (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@ua4i_native_diagram B C C1 t T A D
+  h S P)
+     (@iso_evidence_from (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@ua4i_native_diagram B C C1 t T
+  A D h S P) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@ua4i_native_to_family_diagram_evidence B C C1 t T A D h S P));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0)) ⊢
+ @iso_evidence_from (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)
+ ≡ @fapp1_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@comp_cat_cov_func B
+  (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q)) (@ua4i_native_diagram B C C1
+  t T A D h S P) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+     (@iso_evidence_to (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@ua4i_native_diagram B C C1 t T A
+  D h S P) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h)
+  (@ua4i_native_to_family_diagram_evidence B C C1 t T A D h S P));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0)) ⊢
+ @iso_evidence_left (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)
+ : τ (@= (Hom (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@homology_adjunction_family_func B C S t T T0 P Q A D h))
+     (@comp_fapp0 (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+       (@iso_evidence_from (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)) (@iso_evidence_to (Functor_cat B C)
+  (@homology_adjunction_family_func B C S t T T0 P Q A D h) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T)
+  C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)))
+     (@id (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D))
+ (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
+ (T0 : τ (@TerminalObject (Op_cat C) t)) (Q : τ (@CokernelAdjunctionStructure C S t T0)) ⊢
+ @iso_evidence_right (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)
+ : τ (@= (Hom (Functor_cat B C) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h)) (@comp_cat_fapp0 B
+  (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h)))
+     (@comp_fapp0 (Functor_cat B C) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@homology_adjunction_family_func B C S t T T0 P Q A D h) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T)
+  C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+       (@iso_evidence_to (Functor_cat B C) (@homology_adjunction_family_func B C S t T T0 P Q A D h)
+  (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)) (@iso_evidence_from (Functor_cat B C)
+  (@homology_adjunction_family_func B C S t T T0 P Q A D h) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T)
+  C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))
+  (@ua4i_whole_homology_evidence B C C1 t T A D h S P T0 Q)))
+     (@id (Functor_cat B C) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C
+  (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
+    (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
+    (@zero_arrow_cone_universal_transf C C1 t T)) (@ua4h_gamma B C C1 t T A D h))));

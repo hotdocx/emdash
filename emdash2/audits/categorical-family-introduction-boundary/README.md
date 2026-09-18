@@ -1,41 +1,26 @@
-# Whole Native Comma-Family Introduction: Partial Qualification
+# Whole Native Comma-Family Introduction: Ordinary Γ/H Qualification
 
-Status (2026-09-17, UA-4h): the isolated candidate checks constructor, point,
-both arrow projections, retained triangle and the source projection through
-third-level cells. The higher target projection and whole H comparison remain
-open. The generic recursive Sigma actions are in the core; the two displayed
-projection rules and Γ itself remain outside the library. The new isolated
-whole source comparison p∘Γ ≅ A retains both maps and inverse laws, with
-computing identity components. Its additional structural views are also
-unpromoted; the source comparison does not establish the target or triangle
-classification laws.
-An intermediate target-section extraction now also has a checked whole
-equivalence, with retained inverses/laws and identity components, using one
-new unpromoted constant-section projection view. UA-4e now links it to q∘Γ
-and composes the equivalences, retaining inverse data and identity components.
-UA-4g identifies the extracted whole section with D and obtains q∘Γ≃D,
-retaining inverse data and computing identity components. UA-4h checks whole
-triangle compatibility with h in the actual ordinary zero-cone specialization,
-including its retained inverse and first kernel-mate consumer. The whole H
-comparison remains open.
-The core now also supports proof-time association of section maps, with
-runtime computation unchanged. UA-4f uses it to group this actual extracted
-section; UA-4f's audit passes 30 assertions. The later classification extends
-that replay to 54 assertions. Both whole projection comparisons coexist in
-the 63-assertion source/target replay.
-The latest 82-assertion replay includes that source/target evidence, the whole
-triangle and its mapped kernel-mate evidence. Its new ordinary modification
-introduction is explicitly structural and remains outside the library.
+Status (2026-09-17, UA-4i): the isolated ordinary candidate now checks both
+whole input projections p∘Γ≅A and q∘Γ≃D, compatibility with the original h,
+and H_family≅H_native∘Γ. The original endpoint functors, selected maps,
+inverses and whole inverse laws are retained. Its 101-assertion replay also
+checks the original point-input observation and relevant negative controls.
 
-The active continuation is now the user-accepted
-[universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
-(2026-09-17). This authorizes resuming the separate bounded Γ task; the
-prototype remains unqualified. Its historical decision record is
-[the consolidation ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#cc-4--comparison-consumer-review-in-progress).
-This fragment is outside the positive library/check graph. The user selected completing consolidation first and retaining this meaningful
-whole-interface refinement as follow-up work (2026-09-16). It is an experiment,
-not a new primitive, a qualified higher-variance interface or a completed
-whole H comparison. It does not resume the separate Op migration.
+The first target-arrow observation and source projection through third-level
+cells are qualified in their recorded probes. Stronger direct D[θ] runtime
+normalization remains unqualified and was unnecessary for the actual ordinary
+H consumer. The generic recursive Sigma action and section associativity are
+already in the core. Γ, its additional structural views and the proposed
+ordinary modification introduction remain outside the positive library;
+factoring, promotion and joint native/CAS qualification are still required.
+
+The active continuation is the user-accepted
+[universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md).
+The [consolidation ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#cc-4--comparison-consumer-review-in-progress)
+records the original decision to retain this work as a follow-up. Dated
+sections below retain the intermediate boundaries; they do not override the
+current status above. This candidate does not resume the separate Op migration
+or claim a general higher-variance qualification.
 
 Given J:X→Y, A:K→X, D:K→Y and h:J∘A⇒D, the intended functor sends
 x to (A(x),D(x),hₓ) in the existing RepresentedComma(J). It reuses the native
@@ -710,3 +695,84 @@ and was not selected. The active library is unchanged; the full goal and its
 remaining qualification gates are still open. Receipts and qualifications
 are recorded in the
 [execution ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-4h--recovering-the-original-whole-input-transformation).
+
+## UA-4i: Actual Boundary Diagrams And Whole H
+
+The five new fragments contain definitions and observations only. They add
+no primitive, rewrite or unification rule beyond the prior candidate:
+
+- `boundary_comparison.lpfragment` restricts the original universal native
+  boundary βₙ along Γ, retains βₕ, and constructs the whole boundary-diagram
+  comparison with endpoint maps s:pΓ⇒A and K(t):K(qΓ)⇒K(D). Its inverse
+  uses the same selected endpoint inverses. Existing inverse-square
+  cancellation and ordinary diagram reflection prove the whole inverse laws.
+- `boundary_reconstruction.lpfragment` reaches the actual reindexed native
+  diagram, keeping that original diagram. The existing generator-reindexing
+  theorem supplies the comparison of its observed arrow with βₙΓ; the
+  existing categorical reconstruction supplies the actual diagram maps.
+- `whole_homology_comparison.lpfragment` applies the original whole Q and
+  retains the literal H_family and H_native∘Γ endpoints, both maps and their
+  inverse laws.
+- `whole_homology_point_view.lpfragment` evaluates this same isomorphism at
+  b and the existing zero_arrow_family_point_input. It is a downstream view.
+- `whole_homology_controls.lpfragment` checks the staged unit law at an
+  opposite source, rejects replacing an arbitrary endomorphism by identity,
+  and checks Γ(b) against that original point-input interface.
+
+The actual comparison is
+
+```text
+K(t)∘βₙΓ ≅ βₕ∘s,
+Arr(βₙΓ) ≅ Arr(βₕ),
+Arr(βₙΓ) ≅ Arr(βₙ)∘Γ,
+H_family ≅ H_native∘Γ.
+```
+
+The first modification reuses the ordinary introduction from UA-4h. Its
+component proof stages the existing transfor identity law before specializing
+the source to the opposite Sigma presentation. No new identity rewrite is
+needed. Its components retain the actual typed unit-law cell; a stronger
+literal identity assertion had nonmatching computational endpoint forms and
+is not an acceptance requirement. The previous kernel-mate image remains
+checked; the final diagram maps use the actual original boundaries directly.
+
+Paths occur only as laws or in the discrete categories of modifications
+between already whole transformations. Their conversion to native cells
+does not cast a functor or replace its action. The operational boundary maps
+retain s, K(t), their original inverses, native square/diagram construction
+and the existing reconstruction maps. Q then acts on these whole maps. No
+output H object, inverse or naturality square is supplied by the caller.
+
+The full result is qualified relative to the explicit structural interfaces
+already listed above, including the proposed ordinary modification
+introduction and the existing ordinary reconstruction. It is not a claim that
+all those interfaces were derivable from their former point beta rules, nor
+a general higher homology normalization theorem. OneCat(C), the supplied P/Q
+and the existing model boundary remain in force.
+
+After building the UA-4h replay above, append the five fragments and check:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+a = Path('audits/categorical-family-introduction-boundary')
+source = Path('tmp/probes/ua4h_triangle_replay.lp').read_text()
+source += '\n' + '\n'.join((a / f).read_text() for f in [
+    'boundary_comparison.lpfragment', 'boundary_reconstruction.lpfragment',
+    'whole_homology_comparison.lpfragment', 'whole_homology_point_view.lpfragment',
+    'whole_homology_controls.lpfragment'])
+Path('tmp/probes/ua4i_whole_homology_replay.lp').write_text(source)
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4i_whole_homology_replay.lp
+```
+
+All 101 assertions pass, including the actual H map/inverse projections,
+their whole laws and the two point-map observations. Receipt:
+`ua4i_whole_homology_replay-20260917-234135.log`, under the serial
+2GiB/90s/o20 guard with SR/warnings enabled. The positive library is unchanged;
+this checkpoint establishes the isolated ordinary candidate. Promotion must
+factor it into its proper owners, retain the first-arrow computations and
+rerun the affected native/CAS consumers. The actual whole H consumer did not
+need the stronger D[θ] runtime normalization, so that observation remains
+recorded without being made a new prerequisite.

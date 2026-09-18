@@ -1,0 +1,23 @@
+/* Checks for the newly derived, staged unit lemma and original point input. */
+assert [A B : Cat] (F G : τ (Functor (Op_cat A) B))
+ (eta : τ (@Transf (Op_cat A) B F G)) (x : τ (Obj A)) ⊢
+ @ua4i_tapp1_identity_path (Op_cat A) B F G eta x
+ : τ (@= (Hom B (@fapp0 (Op_cat A) B F x) (@fapp0 (Op_cat A) B G x))
+     (@tapp1_fapp0 (Op_cat A) B F G x x eta (@id A x))
+     (@tapp0_fapp0 (Op_cat A) B F G x eta));
+
+assertnot [A B : Cat] (F G : τ (Functor (Op_cat A) B))
+ (eta : τ (@Transf (Op_cat A) B F G)) (x : τ (Obj A)) (p : τ (Hom A x x)) ⊢
+ @ua4i_tapp1_identity_path (Op_cat A) B F G eta x
+ : τ (@= (Hom B (@fapp0 (Op_cat A) B F x) (@fapp0 (Op_cat A) B G x))
+     (@tapp1_fapp0 (Op_cat A) B F G x x eta p)
+     (@tapp0_fapp0 (Op_cat A) B F G x eta));
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D)) (b : τ (Obj B)) ⊢
+ @fapp0 B (@ZeroArrowCone_cat C t T) (@ua4h_gamma B C C1 t T A D h) b
+ ≡ @zero_arrow_family_point_input B C t T A D h b;
