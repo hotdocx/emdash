@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4c): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4d): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
@@ -9,6 +9,10 @@ whole source comparison p∘Γ ≅ A retains both maps and inverse laws, with
 computing identity components. Its additional structural views are also
 unpromoted; the source comparison does not establish the target or triangle
 classification laws.
+An intermediate target-section extraction now also has a checked whole
+equivalence, with retained inverses/laws and identity components, using one
+new unpromoted constant-section projection view. Its links to q∘Γ and D are
+still open.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -283,3 +287,79 @@ by the whole native H comparison. Its target uses the varying inner Sigma
 projection and the transformation-graph section, rather than the outer
 base projection settled here. Review those existing owners; do not install
 a Γ-specific action axiom to hide that obligation.
+
+## UA-4d: Native Target-Section Extraction
+
+`target_section_extraction.lpfragment` uses the actual native graph section
+s and the actual second projection, including Γ's family reframe. Reindex
+that displayed projection along Op(A), calling the resulting map P. It has
+constant target Op(Y). The two whole functors under comparison are
+
+```text
+U = π₂ ∘ Σ(P) ∘ total(s) : Op(K) → Op(Y),
+V = P⋅s                  : Op(K) → Op(Y).
+```
+
+Here V is the existing postcomposed Pi section, read through the existing
+constant-family section/functor interface. Postcomposing the existing whole
+`section_total_postcomp_transf` by π₂ constructs U⇒V. The experiment adds
+the explicit proof-time structural view π₂∘total(v) ≡ v for a section v of
+a constant family. It is not a theorem derived from the old component beta
+rules, and it does not change runtime functor normal forms. Its matched
+section appears on the variable side; typed reflexivity exercises that
+comparison successfully. Arbitrary product-valued functors do not receive it.
+
+The existing `Op_transf` has the required reversed ordinary signature. It
+therefore sends this one whole transformation to Vᵒ⇒Uᵒ, now between functors
+K→Y. Both sides compute to D(x) on objects, and this transformation's
+component is id at D(x). The existing strict pointwise inverse-assembly
+interface then supplies fixed-forward OmegaEquivAlong evidence, retaining
+both selected inverses and their whole laws. The native wrapper is guarded
+by OneCat(Y); no separate OneCat(Op(Y)) input is introduced. This reuses a
+declared structural inverse interface and its laws, not only beta reduction.
+No pointwise naturality square is caller data, and no functor is constructed
+by transporting it along an equality path. No Op declaration or rule changes.
+
+This is an intermediate comparison, not the full target classification.
+Two further whole identifications remain: Uᵒ with q∘Γ, using the Sigma
+map/base-change operations, and Vᵒ with D, using the graph's retained whole
+action. Recovery of h and the H comparison remain separate obligations.
+
+From `emdash2`, reproduce the fourteen-assertion native replay:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+audit = Path('audits/categorical-family-introduction-boundary')
+constructor = (audit / 'constructor_fragment.lp').read_text()
+marker = '// The target side is the actual action'
+assert constructor.count(marker) == 1
+source = (Path('emdash3_2_gray_transformation_graph.lp').read_text() + '\n' +
+          constructor.split(marker, 1)[0] + '\n' +
+          (audit / 'target_section_extraction.lpfragment').read_text())
+Path('tmp/probes/ua4d_target_section_replay.lp').write_text(source)
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4d_target_section_replay.lp
+```
+
+The fourteen assertions cover the inherited native object/source observations,
+generic section-extraction components, actual D(x), the returned forward
+and both inverse components, both whole inverse-law projections, and the
+constant-section view with runtime/arbitrary-map negative controls. The
+unchanged core already proves the section's ordinary arrow-action observation
+through `piapp1_const_fapp0_eq`; that observation is not a runtime conversion.
+
+The constant-section view also passes in a full core copy at its owning
+position after `piapp1_const_fapp0_eq`. Its normalized warning inventories
+agree with the baseline in all five dimensions: 157 replaceable variables,
+1144 inherited critical pairs, no parser issue. This is the scope of the
+owner audit, not a confluence or unrestricted higher-variance claim. The
+view and the extraction definitions remain outside the positive library.
+
+Receipts: `ua4d_target_section_replay-20260917-200815.log` (retained native
+replay), `ua4d_target_section_without_view-20260917-200650.log` (expected
+failure of the actual extraction declaration without the view), and
+`ua4d_constant_section_owner-20260917-200428.log` (owner-position check).
+The five-dimensional warning comparison is recorded in
+`tmp/probes/ua4d_constant_section_warning_comparison.json`.

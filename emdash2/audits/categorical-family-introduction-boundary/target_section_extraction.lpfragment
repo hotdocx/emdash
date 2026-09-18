@@ -1,0 +1,238 @@
+/* UA-4d isolated native target-section extraction, outside the library.
+   Append after the protected graph owner and the object/source portion of
+   constructor_fragment.lp. See README.md for the still-open q∘Γ and D links.
+   The only new structural rule is the constant-section projection view.
+   Inverses reuse the existing strict pointwise assembly interface. */
+require open emdash.emdash3_2_strict_pointwise_equivalences;
+require open emdash.emdash3_2_omega_equiv_composition;
+require open emdash.emdash3_2_one_cat_adjunction_family_views;
+
+// Whole constant-section projection; proof-time only, preserving runtime heads.
+unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _)
+    (@section_total_func _ (@Const_catd _ _) $s)
+  ≡ $s ↪ [ tt ≡ tt ];
+
+// Observe the constant-family coordinate of an actually mapped section total.
+symbol ua4d_section_observed [K A : Cat] (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E)))
+ : τ (Functor K A)
+≔ @comp_cat_fapp0 K (Product_cat K A) A (@Product_projR_func K A)
+   (@section_total_mapped_func K E (@Const_catd K A) FF s);
+
+symbol ua4d_section_observation_target [K A : Cat] (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E)))
+ : τ (Functor K A)
+≔ @section_postcomp_sec K E (@Const_catd K A) FF s;
+
+// Postcompose the existing whole section-total comparison by the projection.
+symbol ua4d_section_observation_transf [K A : Cat] (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E)))
+ : τ (@Transf K A (@ua4d_section_observed K A E FF s)
+     (@ua4d_section_observation_target K A E FF s))
+≔ @fapp0 _ _
+   (@comp_cat_cov_fapp1_func K (Product_cat K A) A (@Product_projR_func K A)
+     (@section_total_mapped_func K E (@Const_catd K A) FF s)
+     (@section_total_postcomp_func K E (@Const_catd K A) FF s))
+   (@section_total_postcomp_transf K E (@Const_catd K A) FF s);
+
+assert [K A : Cat] (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E))) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K A (@ua4d_section_observed K A E FF s)
+   (@ua4d_section_observation_target K A E FF s) x
+   (@ua4d_section_observation_transf K A E FF s)
+ ≡ @id A (@fapp0 K A (@ua4d_section_observation_target K A E FF s) x);
+
+// Qualification guard: the intended consumer has an ordinary target A.
+// Strict pointwise assembly reuses this one whole arrow and its identity components.
+symbol ua4d_section_observation_equiv [K A : Cat]
+ (A1 : τ (IsNCat (cat_succ cat_zero) A)) (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E)))
+ : τ (@OmegaEquivAlong (Functor_cat K A)
+     (@ua4d_section_observed K A E FF s) (@ua4d_section_observation_target K A E FF s)
+     (@ua4d_section_observation_transf K A E FF s))
+≔ @strict_transf_pointwise_omega_along K A
+   (@ua4d_section_observed K A E FF s) (@ua4d_section_observation_target K A E FF s)
+   (@ua4d_section_observation_transf K A E FF s)
+   (λ x : τ (Obj K), @omega_equiv_along_refl A
+     (@fapp0 K A (@ua4d_section_observation_target K A E FF s) x));
+
+symbol ua4d_section_observation_iso [K A : Cat]
+ (A1 : τ (IsNCat (cat_succ cat_zero) A)) (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E)))
+ : τ (IsoEvidence (Functor_cat K A) (@ua4d_section_observed K A E FF s)
+     (@ua4d_section_observation_target K A E FF s))
+≔ @omega_equiv_along_iso_evidence (Functor_cat K A)
+   (@ua4d_section_observed K A E FF s) (@ua4d_section_observation_target K A E FF s)
+   (@ua4d_section_observation_transf K A E FF s)
+   (@ua4d_section_observation_equiv K A A1 E FF s);
+
+assert [K A : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A)) (E : τ (Catd K))
+ (FF : τ (@Functord K E (@Const_catd K A))) (s : τ (Obj (@Pi_cat K E))) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K A (@ua4d_section_observation_target K A E FF s)
+   (@ua4d_section_observed K A E FF s) x
+   (@iso_evidence_from _ _ _ (@ua4d_section_observation_iso K A A1 E FF s))
+ ≡ @id A (@fapp0 K A (@ua4d_section_observation_target K A E FF s) x);
+
+// Retain the original family reframe before taking the second projection.
+symbol ua4d_gamma_target_family_map [X Y : Cat] (J : τ (Functor X Y))
+ : τ (@Functord (Op_cat X) (@represented_comma_family_catd X Y J)
+     (@Const_catd (Op_cat X) (Op_cat Y)))
+≔ @comp_catd_fapp0 (Op_cat X)
+    (@represented_comma_family_catd X Y J)
+    (@homdc_op_edge_catd X Y (@represented_comma_prof X Y J))
+    (@Const_catd (Op_cat X) (Op_cat Y))
+    (@homdc_total_target_funcd X Y (@represented_comma_prof X Y J))
+    (@represented_comma_family_reframe X Y J);
+
+// Reindex the actual native second projection along the supplied A.
+symbol ua4d_gamma_target_section_map [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X))
+ : τ (@Functord (Op_cat K) (@represented_comma_family_target K X Y J A)
+     (@Const_catd (Op_cat K) (Op_cat Y)))
+≔ @fapp1_fapp0 (@Catd_cat (Op_cat X)) (@Catd_cat (Op_cat K))
+   (@Pullback_catd_func (Op_cat K) (Op_cat X) (@Op_func K X A))
+   (@represented_comma_family_catd X Y J)
+   (@Const_catd (Op_cat X) (Op_cat Y))
+   (@ua4d_gamma_target_family_map X Y J);
+
+// This is the target-coordinate section of the original transformation graph.
+symbol ua4d_gamma_target_section [K X Y : Cat] (J : τ (Functor X Y))
+ (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (Functor (Op_cat K) (Op_cat Y))
+≔ @ua4d_section_observation_target (Op_cat K) (Op_cat Y)
+   (@represented_comma_family_target K X Y J A)
+   (@ua4d_gamma_target_section_map K X Y J A)
+   (@represented_comma_family_section K X Y J A D h);
+
+// A whole comparison for the actual native section, before the outer Op.
+symbol ua4d_gamma_target_extraction [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat Y)
+   (@ua4d_section_observed (Op_cat K) (Op_cat Y)
+     (@represented_comma_family_target K X Y J A)
+     (@ua4d_gamma_target_section_map K X Y J A)
+     (@represented_comma_family_section K X Y J A D h))
+   (@ua4d_gamma_target_section K X Y J A D h))
+≔ @ua4d_section_observation_transf (Op_cat K) (Op_cat Y)
+   (@represented_comma_family_target K X Y J A)
+   (@ua4d_gamma_target_section_map K X Y J A)
+   (@represented_comma_family_section K X Y J A D h);
+
+assert [K X Y : Cat] (J : τ (Functor X Y))
+ (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
+ @fapp0 (Op_cat K) (Op_cat Y) (@ua4d_gamma_target_section K X Y J A D h) x
+ ≡ @fapp0 K Y D x;
+
+// Op_transf reverses the comparison; use its established ordinary variance.
+symbol ua4d_gamma_target_section_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
+  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+≔ @Op_func (Op_cat K) (Op_cat Y) (@ua4d_gamma_target_section K X Y J A D h);
+symbol ua4d_gamma_target_observed_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
+  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+≔ @Op_func (Op_cat K) (Op_cat Y) (@ua4d_section_observed (Op_cat K) (Op_cat Y)
+  (@represented_comma_family_target K X Y J A) (@ua4d_gamma_target_section_map K X Y J A)
+  (@represented_comma_family_section K X Y J A D h));
+
+symbol ua4d_gamma_target_extraction_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
+  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf K Y (@ua4d_gamma_target_section_op K X Y J A D h)
+     (@ua4d_gamma_target_observed_op K X Y J A D h))
+≔ @Op_transf (Op_cat K) (Op_cat Y) (@ua4d_section_observed (Op_cat K) (Op_cat Y)
+  (@represented_comma_family_target K X Y J A) (@ua4d_gamma_target_section_map K X Y J A)
+  (@represented_comma_family_section K X Y J A D h)) (@ua4d_gamma_target_section K X Y J A D h)
+   (@ua4d_gamma_target_extraction K X Y J A D h);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
+  (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) x
+   (@ua4d_gamma_target_extraction_op K X Y J A D h)
+ ≡ @id Y (@fapp0 K Y D x);
+
+// Assemble inverse data only after returning to the original ordinary Y.
+symbol ua4d_gamma_target_extraction_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
+  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (Y1 : τ (IsNCat (cat_succ cat_zero) Y))
+ : τ (@OmegaEquivAlong (Functor_cat K Y)
+     (@ua4d_gamma_target_section_op K X Y J A D h)
+     (@ua4d_gamma_target_observed_op K X Y J A D h)
+     (@ua4d_gamma_target_extraction_op K X Y J A D h))
+≔ @strict_transf_pointwise_omega_along K Y
+   (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h)
+   (@ua4d_gamma_target_extraction_op K X Y J A D h)
+   (λ x : τ (Obj K), @omega_equiv_along_refl Y (@fapp0 K Y D x));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
+  (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4d_gamma_target_observed_op K X Y J A D h)
+   (@ua4d_gamma_target_section_op K X Y J A D h) x
+   (@omega_equiv_along_left_inv _ _ _ _ (@ua4d_gamma_target_extraction_equiv K X Y J A D h Y1))
+ ≡ @id Y (@fapp0 K Y D x);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
+  (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_section_op K X Y J A D
+   h) x (@omega_equiv_along_right_inv (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_extraction_op K X Y J A D h)
+   (@ua4d_gamma_target_extraction_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
+  (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_left_law
+  (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) (@ua4d_gamma_target_observed_op K X Y J A
+  D h) (@ua4d_gamma_target_extraction_op K X Y J A D h) (@ua4d_gamma_target_extraction_equiv K X Y J A D h
+  Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) (@ua4d_gamma_target_section_op
+   K X Y J A D h)) (@comp_fapp0 (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@omega_equiv_along_left_inv (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_extraction_op K X Y J A D h)
+   (@ua4d_gamma_target_extraction_equiv K X Y J A D h Y1)) (@ua4d_gamma_target_extraction_op K X Y J A D h))
+   (@id (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)));
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
+  (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_right_law
+  (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) (@ua4d_gamma_target_observed_op K X Y J A
+  D h) (@ua4d_gamma_target_extraction_op K X Y J A D h) (@ua4d_gamma_target_extraction_equiv K X Y J A D h
+  Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@ua4d_gamma_target_observed_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h)) (@comp_fapp0 (Functor_cat K Y)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_extraction_op K X Y J A D h)
+   (@omega_equiv_along_right_inv (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+   (@ua4d_gamma_target_observed_op K X Y J A D h) (@ua4d_gamma_target_extraction_op K X Y J A D h)
+   (@ua4d_gamma_target_extraction_equiv K X Y J A D h Y1))) (@id (Functor_cat K Y)
+   (@ua4d_gamma_target_observed_op K X Y J A D h)));
+
+// A section of a constant family is the existing whole K→A functor.
+symbol ua4d_constant_section_projection [K A : Cat]
+ (s : τ (Obj (@Pi_cat K (@Const_catd K A))))
+ : τ (Functor K A)
+≔ @comp_cat_fapp0 K (Product_cat K A) A
+   (@Product_projR_func K A) (@section_total_func K (@Const_catd K A) s);
+
+assert [K A : Cat] (s : τ (Obj (@Pi_cat K (@Const_catd K A)))) (k : τ (Obj K)) ⊢
+ @fapp0 K A (@ua4d_constant_section_projection K A s) k ≡ @fapp0 K A s k;
+
+symbol ua4d_constant_section_arrow_agrees [K A : Cat]
+ (s : τ (Obj (@Pi_cat K (@Const_catd K A))))
+ (x y : τ (Obj K)) (p : τ (Hom K x y))
+ : τ (@= (Hom A (@fapp0 K A s x) (@fapp0 K A s y))
+   (@fapp1_fapp0 K A (@ua4d_constant_section_projection K A s) x y p)
+   (@fapp1_fapp0 K A s x y p))
+≔ @piapp1_const_fapp0_eq K A s x y p;
+
+
+
+// Typed use of the proposed whole comparison.
+assert [K A : Cat] (s : τ (Obj (@Pi_cat K (@Const_catd K A)))) ⊢
+ @eq_refl (Functor K A) (@ua4d_constant_section_projection K A s)
+ : τ (@= (Functor K A) (@ua4d_constant_section_projection K A s) s);
+
+assertnot [K A : Cat] (s : τ (Obj (@Pi_cat K (@Const_catd K A)))) ⊢
+ @ua4d_constant_section_projection K A s ≡ s;
+
+assertnot [K A : Cat] (F : τ (Functor K (Product_cat K A))) (G : τ (Functor K A)) ⊢
+ @eq_refl (Functor K A) (@comp_cat_fapp0 K (Product_cat K A) A (@Product_projR_func K A) F)
+ : τ (@= (Functor K A) (@comp_cat_fapp0 K (Product_cat K A) A (@Product_projR_func K A) F) G);

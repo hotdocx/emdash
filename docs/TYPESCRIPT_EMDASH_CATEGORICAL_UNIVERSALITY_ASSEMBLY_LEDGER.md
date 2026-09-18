@@ -1108,3 +1108,114 @@ unnecessary reruns. Next: target comparison q∘Γ ≅ D and compatibility with
 the original h, using the existing varying Sigma projection and graph
 section owners, then the actual whole H comparison. The goal remains active;
 no main integration, push or publication is performed.
+
+### UA-4d — Inner Projection Through Whole Family Operations
+
+Previous turn: progress at `02c3c8ee`; the worktree is clean, the published
+baseline remains an ancestor, and no previous checker is live. The retained
+source replay passes again (`ua4d_baseline-20260917-193219.log`).
+
+The target has a different owner from the outer source projection: it uses
+`sigma_proj1_family_funcd` after the graph section's fibrewise Sigma action
+and family-natural base change. The current hypothesis is to express that
+projection through one whole transformation on Catd(A), then use existing
+whole postcomposition and naturality to control family maps. Test the
+canonical projection, its family component and whole law before changing
+the native target. No Γ-specific action axiom or caller square is proposed.
+
+The canonical transformation is already definable by specializing the
+existing projection family at id on Catd(A); its whiskering by G has the
+original first-projection components. The whole family lift also forms.
+Two isolated constant-family presentation views (represented
+postcomposition and its action at the Cat horizontal owner), together with
+UA-4c's same-operands congruence, let the existing generic strict naturality
+theorem prove preservation of the whole canonical projection under a family
+map. These are ordinary law observations, not casts defining functor data.
+The strict theorem retains its current prototype-profile qualification.
+No rule is installed in the library, and no equivalence with the original
+independently indexed projection family is claimed merely from components.
+
+Next isolate the constant-section extraction step and then use these owners
+in the actual q∘Γ comparison. All probes remain serial 2GiB/90s/o20 with
+warnings and subject reduction. Promotion requires the actual native
+consumer and the ordinary mathematical interpretation, not just the helper
+law passing.
+
+### UA-4d Actual Native Extraction And Selected Scope
+
+The selected continuation reaches the original native target section with
+only one additional structural view: π₂∘total(v) ≡ v when v is a section of
+a constant family. The LHS retains the actual projection/section-total
+constructors, and the RHS is that same matched v. The typed consumer succeeds;
+the whole runtime terms remain distinct. This is another concrete useful
+variable-sided unifier, not a generic functor-extensionality rule. The old
+core already supplies the ordinary arrow observation through
+`piapp1_const_fapp0_eq`, while rejecting the new whole projection comparison.
+
+Let s be the actual graph section and P the actual target-family projection
+(including its original family reframe), pulled back along Op(A). The
+retained target-extraction fragment constructs
+
+```text
+U = π₂∘Σ(P)∘total(s),       V = P⋅s,       U⇒V,
+U,V : Op(K)→Op(Y).
+```
+
+The transformation is the existing section-total comparison postcomposed by
+π₂; it requires no caller square. The original correctly reversed ordinary
+Op_transf then gives Vᵒ⇒Uᵒ over K→Y. Its components compute to id at D(x).
+The existing strict pointwise inverse-assembly interface supplies both
+selected inverses and their laws; the native wrapper retains OneCat(Y).
+There is no additional OneCat(Op(Y)) input, new Op declaration, or functor
+constructed by path transport. Inverse assembly remains an existing declared
+structural interface, not a derivation from component beta rules alone.
+
+The fourteen-assertion actual native replay passes: native object/source
+observations, generic extraction components, actual D(x), forward and both
+inverse components, both whole inverse-law projections, and constant-section
+positive/negative controls. Removing the sole new view makes the actual
+whole extraction declaration fail precisely at the expected comparison
+between `section_postcomp_sec` and π₂∘total of that section. This distinguishes
+the structural extension from a theorem already available on the old core.
+The tracked recipe is in the
+[target-section audit](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4d-native-target-section-extraction).
+
+The new view also passes in a full owner-position core copy, just after
+`piapp1_const_fapp0_eq`. Normalized old/new warnings agree in all five
+dimensions: 157 replaceable variables, 1144 inherited critical pairs, no
+parser issue. Receipt: `ua4d_constant_section_owner-20260917-200428.log`;
+inventory: `tmp/probes/ua4d_constant_section_warning_comparison.json`.
+Native receipts include `ua4d_gamma_target_extraction_reframed-20260917-195749.log`,
+`ua4d_gamma_target_extraction_op-20260917-200132.log`,
+`ua4d_gamma_target_extraction_complete-20260917-200340.log`, and the expected
+no-view failure `ua4d_target_section_without_view-20260917-200650.log`.
+
+Two further whole links remain: Uᵒ to q∘Γ through Sigma map/base-change
+operations, and Vᵒ to D through the graph's retained action. The earlier
+canonical projection-family naturality experiment is potential support for
+the latter link; its two constant-family views are not installed or needed
+by this extraction replay. Recovery of h and the whole H comparison remain
+open. Neither point D(x) nor invertibility of this intermediate comparison
+is claimed to establish those results.
+
+A separate no-reframe Γ variant typechecks and retains the positive point,
+both arrow, triangle and third-level source observations when its outer
+Op_func uses the public native Sigma codomain. Using the auxiliary Sigma
+codomain instead caused the point assertion to fail. The higher target
+assertion still fails for the variant, so the retained Γ and UA-4c source
+comparison are unchanged. The actual target-section reindexing still uses
+the original family reframe to match its domain; do not conclude it is
+globally unnecessary from the outer functor experiment.
+
+No library definition/rule, CAS contract or model input changes in this
+slice. The core and positive check graph remain at their previously
+qualified snapshot; the goal stays active. UA-6 should also reconcile the
+remaining stale “future section_total facade” passages in Foundations with
+the already implemented owner, alongside its scheduled book review.
+
+The final tracked-fragment replay is green
+(`ua4d_target_section_replay-20260917-200815.log`, fourteen assertions).
+Catalogue, unchanged source-health snapshot, changed-document local links
+and exact diff whitespace checks pass. This is an audit-only checkpoint;
+the original 94 nonsplit assertions and nucleus evidence are carried forward
+for the byte-identical library. No main integration or publication occurs.
