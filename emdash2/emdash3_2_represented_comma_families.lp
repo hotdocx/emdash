@@ -1,5 +1,7 @@
-/* Native represented-comma classification of a supplied whole family.
-   Γ(b)=(A(b),D(b),h[b]); no extra square is caller data.
+/* Native represented-comma classification of a whole internal Hom action.
+   The shared graph accepts Θ:Hom_K(−,−)⇒Hom_Y(JA−,D−). The original Γ
+   interface supplies the native Hom action of h:J∘A⇒D. No objectwise square
+   is caller data. Both interfaces retain the same projection inverse data.
    Protected helpers retain the original internal graph derivation. The whole
    target comparison is qualified for OneCat(Y); higher Op/profile repair
    remains outside this module. All declarations here are definitions. */
@@ -80,7 +82,10 @@ protected symbol comma_graph_target_catd
 protected symbol comma_graph_sigma_transf
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Transf
       (@comma_graph_source_raw_catd B)
       (@comma_graph_middle_raw_catd B C F G))
@@ -102,14 +107,17 @@ protected symbol comma_graph_sigma_transf
       (@Sigma_func B)
       (@hom_int B B (@id_func B))
       (@comma_graph_middle_inner_catd B C F G))
-    (@tapp1_int_fapp0_transf B C F G epsilon);
+    epsilon;
 
 // Pointwise opposite turns that whole transformation into the displayed map
 // used by the variance-correct lax-arrow total.
 protected symbol comma_graph_sigma_op_funcd
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Functord
       (@comma_graph_source_catd B)
       (@comma_graph_middle_catd B C F G))
@@ -127,7 +135,10 @@ protected symbol comma_graph_identity_sec
 protected symbol comma_graph_middle_sec
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Obj (@Pi_cat
       (Op_cat B)
       (@comma_graph_middle_catd B C F G)))
@@ -284,7 +295,10 @@ protected symbol comma_graph_basechange_op_funcd
 protected symbol comma_graph_target_sec
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Obj (@Pi_cat
       (Op_cat B)
       (@comma_graph_target_catd B C F)))
@@ -299,7 +313,10 @@ protected symbol comma_graph_target_sec
 protected symbol comma_graph_underlying_func
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Functor
       (Op_cat B)
       (@Sigma_cat
@@ -327,7 +344,10 @@ protected symbol comma_graph_underlying_func
 protected symbol comma_graph_internal_func
   [B C : Cat]
   [F G : τ (Functor B C)]
-  (epsilon : τ (Transf F G))
+  (epsilon : τ (@Transf (Op_cat B) (@Catd_cat B)
+    (@hom_int B B (@id_func B))
+    (@comp_cat_fapp0 (Op_cat B) (Op_cat C) (@Catd_cat B)
+      (@hom_int C B G) (@Op_func B C F))))
   : τ (Functor B (@LaxArrow_cat C))
 ≔ @Op_func
     (Op_cat B)
@@ -358,13 +378,19 @@ protected symbol represented_comma_family_target [K X Y : Cat]
 
 protected symbol represented_comma_family_section [K X Y : Cat]
   (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
-  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
   : τ (Obj (@Pi_cat (Op_cat K) (@represented_comma_family_target K X Y J A)))
 ≔ @comma_graph_target_sec K Y (@comp_cat_fapp0 K X Y J A) D h;
 
 protected symbol represented_comma_family_underlying_func [K X Y : Cat]
   (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
-  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
   : τ (Functor (Op_cat K) (@Sigma_cat (Op_cat X) (@represented_comma_family_catd X Y J)))
 ≔ @comp_cat_fapp0 (Op_cat K)
     (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))
@@ -374,10 +400,13 @@ protected symbol represented_comma_family_underlying_func [K X Y : Cat]
     (@section_total_func (Op_cat K) (@represented_comma_family_target K X Y J A)
       (@represented_comma_family_section K X Y J A D h));
 
-// The whole classifier Γ:B→RepresentedComma(J), retaining A,D,h.
-symbol represented_comma_family_func [K X Y : Cat]
+// Classify Θ:Hom_K(−,−)⇒Hom_Y(JA−,D−), retaining the whole action.
+symbol represented_comma_hom_action_func [K X Y : Cat]
   (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
-  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
   : τ (Functor K (@RepresentedComma_cat X Y J))
 ≔ @Op_func (Op_cat K)
     (@Sigma_cat (Op_cat X) (@homdc_op_edge_catd X Y (@represented_comma_prof X Y J)))
@@ -449,13 +478,17 @@ protected symbol comma_source_op_basechange_evidence [A K : Cat] (F : τ (Functo
    (@Pullback_catd A K E F))) (Op_cat K)) (@comma_source_op_basechange_projected A K F E)));
 
 // The actual source projection p∘Γ.
-symbol represented_comma_family_source_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h
-  : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K X)
+symbol represented_comma_hom_action_source_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K X)
 ≔ (@comp_cat_fapp0 K (@RepresentedComma_cat X Y J) X (@represented_comma_source_func X Y J)
-  (@represented_comma_family_func K X Y J A D h));
+  (@represented_comma_hom_action_func K X Y J A D h));
 
-protected symbol comma_source_gamma_source1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h
-  : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K X)
+protected symbol comma_source_gamma_source1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K X)
 ≔ (@comp_cat_fapp0 K (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) X
   (@comp_cat_fapp0 (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) (Op_cat
   (@Sigma_cat (Op_cat X) (@represented_comma_family_catd X Y J))) X (@Op_func (@Sigma_cat (Op_cat X)
@@ -467,8 +500,10 @@ protected symbol comma_source_gamma_source1 [K X Y : Cat] (J : τ (Functor X Y))
   (@section_total_func (Op_cat K) (@represented_comma_family_target K X Y J A)
   (@represented_comma_family_section K X Y J A D h))));
 
-protected symbol comma_source_gamma_source2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h
-  : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K X)
+protected symbol comma_source_gamma_source2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K X)
 ≔ (@comp_cat_fapp0 K (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) X
   (@comp_cat_fapp0 (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) K X A
   (@Op_func (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A)) (Op_cat K)
@@ -476,9 +511,11 @@ protected symbol comma_source_gamma_source2 [K X Y : Cat] (J : τ (Functor X Y))
   (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A)) (@section_total_func (Op_cat K)
   (@represented_comma_family_target K X Y J A) (@represented_comma_family_section K X Y J A D h))));
 
-protected symbol comma_source_gamma_step1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h :
-  τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
- : τ (IsoEvidence (Functor_cat K X) (@represented_comma_family_source_func K X Y J A D h) (@comma_source_gamma_source1 K X Y J A D h))
+protected symbol comma_source_gamma_step1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
+ : τ (IsoEvidence (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D h) (@comma_source_gamma_source1 K X Y J A D h))
 ≔ @iso_evidence_prewhisker K (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) X
   (@Op_func (Op_cat K) (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))
   (@section_total_func (Op_cat K) (@represented_comma_family_target K X Y J A)
@@ -506,8 +543,10 @@ protected symbol comma_source_gamma_step1 [K X Y : Cat] (J : τ (Functor X Y)) (
   X Y J) (@homdc_op_edge_catd X Y (@represented_comma_prof X Y J)) (@represented_comma_family_reframe X Y
   J)));
 
-protected symbol comma_source_gamma_step2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h :
-  τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+protected symbol comma_source_gamma_step2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (IsoEvidence (Functor_cat K X) (@comma_source_gamma_source1 K X Y J A D h) (@comma_source_gamma_source2 K X Y J A D h))
 ≔ @iso_evidence_prewhisker K (Op_cat (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))) X
   (@Op_func (Op_cat K) (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A))
@@ -517,36 +556,47 @@ protected symbol comma_source_gamma_step2 [K X Y : Cat] (J : τ (Functor X Y)) (
   X) (@Op_func K X A) (@represented_comma_family_catd X Y J)) (@comma_source_op_basechange_evidence (Op_cat K)
   (Op_cat X) (@Op_func K X A) (@represented_comma_family_catd X Y J));
 
-protected symbol comma_source_gamma_step3 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h :
-  τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+protected symbol comma_source_gamma_step3 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (IsoEvidence (Functor_cat K X) (@comma_source_gamma_source2 K X Y J A D h) A)
 ≔ @iso_evidence_postwhisker K K X A (@comma_source_op_total_projection (Op_cat K) (@represented_comma_family_target K X Y J
   A) (@represented_comma_family_section K X Y J A D h)) (@id_func K) (@comma_source_op_total_evidence (Op_cat K)
   (@represented_comma_family_target K X Y J A) (@represented_comma_family_section K X Y J A D h));
 
 // Retained whole source comparison p∘Γ≅A, with both selected maps and laws.
-symbol represented_comma_family_source_evidence [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
-  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
- : τ (IsoEvidence (Functor_cat K X) (@represented_comma_family_source_func K X Y J A D h) A)
-≔ @iso_evidence_comp (Functor_cat K X) (@represented_comma_family_source_func K X Y J A D h) (@comma_source_gamma_source1 K X Y J A D
+symbol represented_comma_hom_action_source_evidence [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
+  K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
+ : τ (IsoEvidence (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D h) A)
+≔ @iso_evidence_comp (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D h) (@comma_source_gamma_source1 K X Y J A D
   h) A
  (@iso_evidence_comp (Functor_cat K X) (@comma_source_gamma_source1 K X Y J A D h) (@comma_source_gamma_source2 K X Y J A D
    h) A (@comma_source_gamma_step3 K X Y J A D h) (@comma_source_gamma_step2 K X Y J A D h))
  (@comma_source_gamma_step1 K X Y J A D h);
 
 // Forward transformation of that same source comparison.
-symbol represented_comma_family_source_to [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
-  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
- : τ (@Transf K X (@represented_comma_family_source_func K X Y J A D h) A)
-≔ @iso_evidence_to (Functor_cat K X) (@represented_comma_family_source_func K X Y J A D h) A (@represented_comma_family_source_evidence K X
+symbol represented_comma_hom_action_source_to [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+  (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
+ : τ (@Transf K X (@represented_comma_hom_action_source_func K X Y J A D h) A)
+≔ @iso_evidence_to (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D h) A (@represented_comma_hom_action_source_evidence K X
   Y J A D h);
 
 protected symbol comma_source_gamma_source_to_arrow [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
-  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  (x y : τ (Obj K)) (g : τ (Hom K x y))
- : τ (Hom X (@fapp0 K X (@represented_comma_family_source_func K X Y J A D h) x) (@fapp0 K X A y))
-≔ @tapp1_fapp0 K X (@represented_comma_family_source_func K X Y J A D h) A x y
-    (@represented_comma_family_source_to K X Y J A D h) g;
+ : τ (Hom X (@fapp0 K X (@represented_comma_hom_action_source_func K X Y J A D h) x) (@fapp0 K X A y))
+≔ @tapp1_fapp0 K X (@represented_comma_hom_action_source_func K X Y J A D h) A x y
+    (@represented_comma_hom_action_source_to K X Y J A D h) g;
 
 // Extract the actual target section before taking the outer opposite.
 
@@ -615,7 +665,10 @@ protected symbol comma_section_gamma_target_section_map [K X Y : Cat]
 
 protected symbol comma_section_gamma_target_section [K X Y : Cat] (J : τ (Functor X Y))
  (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @comma_section_section_observation_target (Op_cat K) (Op_cat Y)
    (@represented_comma_family_target K X Y J A)
@@ -624,7 +677,10 @@ protected symbol comma_section_gamma_target_section [K X Y : Cat] (J : τ (Funct
 
 protected symbol comma_section_gamma_target_extraction [K X Y : Cat]
  (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat Y)
    (@comma_section_section_observed (Op_cat K) (Op_cat Y)
      (@represented_comma_family_target K X Y J A)
@@ -637,17 +693,26 @@ protected symbol comma_section_gamma_target_extraction [K X Y : Cat]
    (@represented_comma_family_section K X Y J A D h);
 
 protected symbol comma_section_gamma_target_section_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K Y)
 ≔ @Op_func (Op_cat K) (Op_cat Y) (@comma_section_gamma_target_section K X Y J A D h);
 
 protected symbol comma_section_gamma_target_observed_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K Y)
 ≔ @Op_func (Op_cat K) (Op_cat Y) (@comma_section_section_observed (Op_cat K) (Op_cat Y)
   (@represented_comma_family_target K X Y J A) (@comma_section_gamma_target_section_map K X Y J A)
   (@represented_comma_family_section K X Y J A D h));
 
 protected symbol comma_section_gamma_target_extraction_op [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf K Y (@comma_section_gamma_target_section_op K X Y J A D h)
      (@comma_section_gamma_target_observed_op K X Y J A D h))
 ≔ @Op_transf (Op_cat K) (Op_cat Y) (@comma_section_section_observed (Op_cat K) (Op_cat Y)
@@ -656,7 +721,10 @@ protected symbol comma_section_gamma_target_extraction_op [K X Y : Cat] (J : τ 
    (@comma_section_gamma_target_extraction K X Y J A D h);
 
 protected symbol comma_section_gamma_target_extraction_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  (Y1 : τ (IsNCat (cat_succ cat_zero) Y))
  : τ (@OmegaEquivAlong (Functor_cat K Y)
      (@comma_section_gamma_target_section_op K X Y J A D h)
@@ -761,7 +829,10 @@ protected symbol comma_basechange_observation_basechange_component [A K C : Cat]
    (Struct_sigma a u) (@comma_basechange_observation_basechange A K C F E P);
 
 protected symbol comma_basechange_gamma_target_raw0 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor (Op_cat K) (Op_cat Y))
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @comp_cat_fapp0 (Op_cat K) (@Sigma_cat (Op_cat X) (@homdc_op_edge_catd X Y (@represented_comma_prof X Y
   J))) (Op_cat Y)
    (@homdc_total_target_underlying_func X Y (@represented_comma_prof X Y J))
@@ -771,7 +842,10 @@ protected symbol comma_basechange_gamma_target_raw0 [K X Y : Cat] (J : τ (Funct
      (@represented_comma_family_reframe X Y J)) (@represented_comma_family_underlying_func K X Y J A D h));
 
 protected symbol comma_basechange_gamma_target_raw1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor (Op_cat K) (Op_cat Y))
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @comp_cat_fapp0 (Op_cat K) (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A)) (Op_cat Y)
    (@comma_basechange_observation_outer (Op_cat K) (Op_cat X) (Op_cat Y) (@Op_func K X A)
      (@represented_comma_family_catd X Y J) (@comma_section_gamma_target_family_map X Y J)) (@section_total_func
@@ -779,13 +853,19 @@ protected symbol comma_basechange_gamma_target_raw1 [K X Y : Cat] (J : τ (Funct
      h));
 
 protected symbol comma_basechange_gamma_target_raw2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor (Op_cat K) (Op_cat Y))
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @comma_section_section_observed (Op_cat K) (Op_cat Y) (@represented_comma_family_target K X Y J A)
    (@comma_section_gamma_target_section_map K X Y J A)
    (@represented_comma_family_section K X Y J A D h);
 
 protected symbol comma_basechange_gamma_target_step1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (@Transf (Op_cat K) (Op_cat Y)
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (@Transf (Op_cat K) (Op_cat Y)
   (@comma_basechange_gamma_target_raw0 K X Y J A D h) (@comma_basechange_gamma_target_raw1 K X Y J A D h))
 ≔ @transf_postwhisker (Op_cat K) (Product_cat (Op_cat X) (Op_cat Y)) (Op_cat Y) (@Product_projR_func (Op_cat X)
   (Op_cat Y)) (@comp_cat_fapp0 (Op_cat K) (@Sigma_cat (Op_cat X) (@represented_comma_family_catd X Y J))
@@ -814,7 +894,10 @@ protected symbol comma_basechange_gamma_target_step1 [K X Y : Cat] (J : τ (Func
      X Y J) (@homdc_total_target_funcd X Y (@represented_comma_prof X Y J))));
 
 protected symbol comma_basechange_gamma_target_step2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (@Transf (Op_cat K) (Op_cat Y)
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (@Transf (Op_cat K) (Op_cat Y)
   (@comma_basechange_gamma_target_raw1 K X Y J A D h) (@comma_basechange_gamma_target_raw2 K X Y J A D h))
 ≔ @transf_prewhisker (Op_cat K) (@Sigma_cat (Op_cat K) (@represented_comma_family_target K X Y J A)) (Op_cat Y)
   (@section_total_func (Op_cat K) (@represented_comma_family_target K X Y J A)
@@ -827,55 +910,76 @@ protected symbol comma_basechange_gamma_target_step2 [K X Y : Cat] (J : τ (Func
      (@represented_comma_family_catd X Y J) (@comma_section_gamma_target_family_map X Y J));
 
 protected symbol comma_basechange_gamma_target_raw_link [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
-  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (@Transf (Op_cat K) (Op_cat Y)
+  K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (@Transf (Op_cat K) (Op_cat Y)
   (@comma_basechange_gamma_target_raw0 K X Y J A D h) (@comma_basechange_gamma_target_raw2 K X Y J A D h))
 ≔ @comp_fapp0 (Functor_cat (Op_cat K) (Op_cat Y)) (@comma_basechange_gamma_target_raw0 K X Y J A D h)
   (@comma_basechange_gamma_target_raw1 K X Y J A D h) (@comma_basechange_gamma_target_raw2 K X Y J A D h)
    (@comma_basechange_gamma_target_step2 K X Y J A D h) (@comma_basechange_gamma_target_step1 K X Y J A D h);
 
 // The actual target projection q∘Γ.
-symbol represented_comma_family_target_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+symbol represented_comma_hom_action_target_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor K Y)
 ≔ @comp_cat_fapp0 K (@RepresentedComma_cat X Y J) Y
-   (@represented_comma_target_func X Y J) (@represented_comma_family_func K X Y J A D h);
+   (@represented_comma_target_func X Y J) (@represented_comma_hom_action_func K X Y J A D h);
 
 protected symbol comma_basechange_gamma_target_link [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
-  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf K Y (@comma_section_gamma_target_observed_op K X Y J A D h)
-     (@represented_comma_family_target_func K X Y J A D h))
+     (@represented_comma_hom_action_target_func K X Y J A D h))
 ≔ @Op_transf (Op_cat K) (Op_cat Y) (@comma_basechange_gamma_target_raw0 K X Y J A D h) (@comma_basechange_gamma_target_raw2 K X Y J
   A D h) (@comma_basechange_gamma_target_raw_link K X Y J A D h);
 
 protected symbol comma_basechange_gamma_target_link_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y))
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ cat_zero) Y))
  : τ (@OmegaEquivAlong (Functor_cat K Y) (@comma_section_gamma_target_observed_op K X Y J A D h)
-   (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_link K X Y J A D h))
+   (@represented_comma_hom_action_target_func K X Y J A D h) (@comma_basechange_gamma_target_link K X Y J A D h))
 ≔ @strict_transf_pointwise_omega_along K Y (@comma_section_gamma_target_observed_op K X Y J A D h)
-  (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_link K X Y J A D h)
+  (@represented_comma_hom_action_target_func K X Y J A D h) (@comma_basechange_gamma_target_link K X Y J A D h)
    (λ x : τ (Obj K), @omega_equiv_along_refl Y (@fapp0 K Y D x));
 
 protected symbol comma_basechange_gamma_target_section_to_native [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ
-  (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (@Transf K Y
-  (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h))
+  (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (@Transf K Y
+  (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_hom_action_target_func K X Y J A D h))
 ≔ @comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@comma_section_gamma_target_observed_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h)
+  (@comma_section_gamma_target_observed_op K X Y J A D h) (@represented_comma_hom_action_target_func K X Y J A D h)
   (@comma_basechange_gamma_target_link K X Y J A D h) (@comma_section_gamma_target_extraction_op K X Y J A D h);
 
 protected symbol comma_basechange_gamma_target_section_to_native_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
-  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y))
  : τ (@OmegaEquivAlong (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@represented_comma_family_target_func K X Y J A D h)
+   (@represented_comma_hom_action_target_func K X Y J A D h)
      (@comma_basechange_gamma_target_section_to_native K X Y J A D h))
 ≔ @omega_equiv_along_comp (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@comma_section_gamma_target_observed_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h)
+  (@comma_section_gamma_target_observed_op K X Y J A D h) (@represented_comma_hom_action_target_func K X Y J A D h)
   (@comma_section_gamma_target_extraction_op K X Y J A D h) (@comma_basechange_gamma_target_link K X Y J A D h)
   (@comma_section_gamma_target_extraction_equiv K X Y J A D h Y1) (@comma_basechange_gamma_target_link_equiv K X Y J A D h Y1);
 
 // Group the original mapped graph section.
 
 protected symbol comma_grouped_graph_section_stage1 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
-  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor (Op_cat K) (Op_cat Y))
+  K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @section_postcomp_sec (Op_cat K) (@comma_graph_middle_catd K Y (@comp_cat_fapp0 K X Y J A) D)
   (@Const_catd (Op_cat K) (Op_cat Y)) (@comp_catd_fapp0 (Op_cat K) (@comma_graph_middle_catd K Y
   (@comp_cat_fapp0 K X Y J A) D) (@represented_comma_family_target K X Y J A) (@Const_catd (Op_cat K)
@@ -883,7 +987,10 @@ protected symbol comma_grouped_graph_section_stage1 [K X Y : Cat] (J : τ (Funct
   (@comp_cat_fapp0 K X Y J A) D)) (@comma_graph_middle_sec K Y (@comp_cat_fapp0 K X Y J A) D h);
 
 protected symbol comma_grouped_graph_section_stage2 [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
-  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor (Op_cat K) (Op_cat Y))
+  K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @section_postcomp_sec (Op_cat K) (@comma_graph_source_catd K) (@Const_catd (Op_cat K) (Op_cat Y))
   (@comp_catd_fapp0 (Op_cat K) (@comma_graph_source_catd K) (@comma_graph_middle_catd K Y
   (@comp_cat_fapp0 K X Y J A) D) (@Const_catd (Op_cat K) (Op_cat Y)) (@comp_catd_fapp0 (Op_cat K)
@@ -907,7 +1014,10 @@ protected symbol comma_classification_target_projection [K X Y : Cat]
 
 protected symbol comma_classification_target_section_canonical [K X Y : Cat]
  (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @section_postcomp_sec (Op_cat K)
    (@represented_comma_family_target K X Y J A)
@@ -924,7 +1034,10 @@ protected symbol comma_classification_middle_projection [K Y : Cat] (F D : τ (F
 
 protected symbol comma_classification_middle_section_projected [K X Y : Cat]
  (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (Functor (Op_cat K) (Op_cat K))
 ≔ @section_postcomp_sec (Op_cat K)
    (@comma_graph_middle_catd K Y (@comp_cat_fapp0 K X Y J A) D)
@@ -934,7 +1047,10 @@ protected symbol comma_classification_middle_section_projected [K X Y : Cat]
 
 protected symbol comma_classification_target_section_after_basechange [K X Y : Cat]
  (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (Functor (Op_cat K) (Op_cat Y))
 ≔ @comp_cat_fapp0 (Op_cat K) (Op_cat K) (Op_cat Y)
    (@Op_func K Y D) (@comma_classification_middle_section_projected K X Y J A D h);
@@ -949,37 +1065,55 @@ protected symbol comma_classification_identity_section_projected (K : Cat)
    (@hom_identity_graph_sec K);
 
 protected symbol comma_classification_raw_reindex [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat Y) (@comma_classification_target_section_canonical K X Y J A D h)
   (@comma_section_gamma_target_section K X Y J A D h))
 ≔ @id (Functor_cat (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D h);
 
 protected symbol comma_classification_raw_basechange [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat Y) (@comma_classification_target_section_after_basechange K X Y J A D h)
   (@comma_classification_target_section_canonical K X Y J A D h))
 ≔ @id (Functor_cat (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_after_basechange K X Y J A D h);
 
 protected symbol comma_classification_raw_sigma [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat K) (@comma_classification_identity_section_projected K) (@comma_classification_middle_section_projected K
   X Y J A D h))
 ≔ @id (Functor_cat (Op_cat K) (Op_cat K)) (@comma_classification_identity_section_projected K);
 
 protected symbol comma_classification_raw_identity [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat K) (@id_func (Op_cat K)) (@comma_classification_identity_section_projected K))
 ≔ @id (Functor_cat (Op_cat K) (Op_cat K)) (@id_func (Op_cat K));
 
 protected symbol comma_classification_raw_middle [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat K) (@id_func (Op_cat K)) (@comma_classification_middle_section_projected K X Y J A D h))
 ≔ @comp_fapp0 (Functor_cat (Op_cat K) (Op_cat K)) (@id_func (Op_cat K)) (@comma_classification_identity_section_projected
   K) (@comma_classification_middle_section_projected K X Y J A D h)
    (@comma_classification_raw_sigma K X Y J A D h) (@comma_classification_raw_identity K X Y J A D h);
 
 protected symbol comma_classification_raw_post [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@comma_classification_target_section_after_basechange K X Y J A D
   h))
 ≔ @transf_postwhisker (Op_cat K) (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@id_func (Op_cat K))
@@ -987,7 +1121,10 @@ protected symbol comma_classification_raw_post [K X Y : Cat] (J : τ (Functor X 
    (@comma_classification_raw_middle K X Y J A D h);
 
 protected symbol comma_classification_raw_classification [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@comma_section_gamma_target_section K X Y J A D h))
 ≔ @comp_fapp0 (Functor_cat (Op_cat K) (Op_cat Y)) (@Op_func K Y D) (@comma_classification_target_section_canonical K X Y J
   A D h) (@comma_section_gamma_target_section K X Y J A D h)
@@ -997,13 +1134,19 @@ protected symbol comma_classification_raw_classification [K X Y : Cat] (J : τ (
      (@comma_classification_raw_basechange K X Y J A D h) (@comma_classification_raw_post K X Y J A D h));
 
 protected symbol comma_classification_target_section_to_supplied [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A)))))
  : τ (@Transf K Y (@comma_section_gamma_target_section_op K X Y J A D h) D)
 ≔ @Op_transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@comma_section_gamma_target_section K X Y J A D h)
    (@comma_classification_raw_classification K X Y J A D h);
 
 protected symbol comma_classification_target_section_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
- (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y))
  : τ (@OmegaEquivAlong (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
   (@comma_classification_target_section_to_supplied K X Y J A D h))
@@ -1012,29 +1155,75 @@ protected symbol comma_classification_target_section_equiv [K X Y : Cat] (J : τ
    (λ x : τ (Obj K), @omega_equiv_along_refl Y (@fapp0 K Y D x));
 
 // The original whole target comparison q∘Γ⇒D for OneCat(Y).
+symbol one_cat_represented_comma_hom_action_target_to [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y))
+ : τ (@Transf K Y (@represented_comma_hom_action_target_func K X Y J A D h) D)
+≔ @comp_fapp0 (Functor_cat K Y) (@represented_comma_hom_action_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X
+  Y J A D h) D (@comma_classification_target_section_to_supplied K X Y J A D h)
+   (@omega_equiv_along_left_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
+  (@represented_comma_hom_action_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
+  (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1));
+
+// Its fixed-forward equivalence retains the selected inverse and whole laws.
+symbol one_cat_represented_comma_hom_action_target_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf (Op_cat K) (@Catd_cat K)
+    (@hom_int K K (@id_func K))
+    (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+      (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y))
+ : τ (@OmegaEquivAlong (Functor_cat K Y) (@represented_comma_hom_action_target_func K X Y J A D h) D
+  (@one_cat_represented_comma_hom_action_target_to K X Y J A D h Y1))
+≔ @iso_evidence_omega_along (Functor_cat K Y) (@represented_comma_hom_action_target_func K X Y J A D h) D
+   (@iso_evidence_comp (Functor_cat K Y) (@represented_comma_hom_action_target_func K X Y J A D h)
+  (@comma_section_gamma_target_section_op K X Y J A D h) D
+     (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
+  (@comma_classification_target_section_to_supplied K X Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1))
+     (@iso_evidence_sym (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
+  (@represented_comma_hom_action_target_func K X Y J A D h)
+       (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
+  (@represented_comma_hom_action_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
+  (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1))));
+
+
+// Original Γ interface, specialized to the native Hom action of h.
+
+symbol represented_comma_family_func [K X Y : Cat]
+  (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+  : τ (Functor K (@RepresentedComma_cat X Y J))
+≔ @represented_comma_hom_action_func K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h);
+
+symbol represented_comma_family_source_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h
+  : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K X)
+≔ @represented_comma_hom_action_source_func K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h);
+
+symbol represented_comma_family_source_evidence [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor
+  K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (IsoEvidence (Functor_cat K X) (@represented_comma_family_source_func K X Y J A D h) A)
+≔ @represented_comma_hom_action_source_evidence K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h);
+
+symbol represented_comma_family_source_to [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf K X (@represented_comma_family_source_func K X Y J A D h) A)
+≔ @represented_comma_hom_action_source_to K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h);
+
+symbol represented_comma_family_target_func [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K
+  Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K Y)
+≔ @represented_comma_hom_action_target_func K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h);
+
 symbol one_cat_represented_comma_family_target_to [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y))
  : τ (@Transf K Y (@represented_comma_family_target_func K X Y J A D h) D)
-≔ @comp_fapp0 (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X
-  Y J A D h) D (@comma_classification_target_section_to_supplied K X Y J A D h)
-   (@omega_equiv_along_left_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
-  (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1));
+≔ @one_cat_represented_comma_hom_action_target_to K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h) Y1;
 
-// Its fixed-forward equivalence retains the selected inverse and whole laws.
 symbol one_cat_represented_comma_family_target_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y))
  : τ (@OmegaEquivAlong (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) D
   (@one_cat_represented_comma_family_target_to K X Y J A D h Y1))
-≔ @iso_evidence_omega_along (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) D
-   (@iso_evidence_comp (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h)
-  (@comma_section_gamma_target_section_op K X Y J A D h) D
-     (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
-  (@comma_classification_target_section_to_supplied K X Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1))
-     (@iso_evidence_sym (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@represented_comma_family_target_func K X Y J A D h)
-       (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
-  (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1))));
+≔ @one_cat_represented_comma_hom_action_target_equiv K X Y J A D (@tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h) Y1;

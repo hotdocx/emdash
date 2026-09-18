@@ -86,6 +86,9 @@ The remaining Sigma/section projection views and component rules now live at
 their original core, varying-projection, zero-cone and mate-view owners.
 `emdash3_2_represented_comma_families.lp` now owns Γ and its whole source/target
 comparisons, with the internal graph derivation protected in that same owner.
+Its shared graph accepts a whole native Hom action Θ; the original Γ API
+specializes it with the native action of h. The represented_comma_hom_action
+operations support identity-image extraction without a duplicate graph owner.
 `emdash3_2_transfor_whiskering.lp` owns the derived transformation and
 isomorphism whiskering helpers. The ordinary zero-arrow-family classification,
 whole homology-family comparison and separate point-comparison owners expose

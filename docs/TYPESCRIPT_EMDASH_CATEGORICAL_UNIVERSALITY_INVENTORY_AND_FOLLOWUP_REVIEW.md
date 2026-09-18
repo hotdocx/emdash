@@ -338,8 +338,8 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | Tranche | Required result | State |
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
-| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | The checked non-library candidate derives both whole transformations, their ordinary identity-image component formulas and nonidentity action equations, and both whole triangle modifications/equations. Shared-owner factoring and public promotion remain pending |
-| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
+| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | The checked candidate derives both whole transformations, their ordinary identity-image component formulas and nonidentity action equations, and both whole triangle modifications/equations. It now imports the shared generalized graph at the original comma owner, retaining the public Γ/H API. The three remaining proposed owner clauses and public extraction promotion are pending |
+| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | The newer scoped input-agreement candidate passes seventeen controls and preserves the native mate heads/cuts. Whole agreement with the extracted unit/counit, the required family consumer and public qualification remain pending; no additional Freyd-model entry point is selected |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
@@ -419,8 +419,10 @@ The compressed sixteen-check candidate and owner-warning evidence are retained
 outside the library. Original native naturality cells and selected inverse
 laws now give nonidentity action equations and both whole triangle
 modifications/equations through the existing ordinary modification interface.
-No additional runtime rule is used for those laws. Public factoring and
-promotion remain required; this does not yet supply an Adjunction witness.
+No additional runtime rule is used for those laws. UA-1e factors the graph
+at the existing comma owner, with original Γ signatures as specializations.
+The extraction now imports it; its own public promotion and three proposed
+owner clauses remain pending. This does not yet supply an Adjunction witness.
 
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
@@ -452,6 +454,34 @@ declaration that the constructor improves. The accepted UA-1/UA-2 scope and
 completion gates remain open; this is a promotion hold, not a completed or
 silently dropped tranche. UA-1a's reindexed-component computation remains
 independently qualified.
+
+User steering (2026-09-18) proposes retaining the generic adjunction mate
+operations and connecting a constructor's projections to supplied whole maps
+by unif_rule, preserving computation heads. This fits UA-2's existing scope;
+it does not select an additional Freyd-model entry point. The existing
+Adjunction_hom_prof_comparison and adjunction_transpose_func/untranspose_func
+already provide the requested whole comparison and its two mate functors.
+Their actual stable heads are the selected DefIso projections, not those
+transparent function names. Reuse them rather than declare a second Φ/Γ API.
+
+The new isolated input-agreement candidate introduces one ordinary constructor
+and seven constructor-scoped proof-time views. Seventeen checks cover the
+whole comparison, both maps, components and point applications, retained
+generic inverse cuts, rejection of unrelated inputs, and concrete-input
+agreement without runtime erasure. A comparison-only view does not propagate
+automatically through projections. The views currently carry their actual
+evaluation endpoints into residuals; an implicit-RHS experiment hits an
+installed-checker assertion and is not selected. No rule is promoted by this
+result. Whole unit/counit agreement with the checked extraction, native
+triangle cuts, family consumption and owning-position qualification remain
+required. This is now the preferred constructor experiment within UA-2, not
+a claim that the former constructor was already justified or completed.
+
+A possible make_adjunction_from_unit_counit would instead accept whole η, ε
+and both triangle laws, with naturality retained in the transformation types.
+It is a related introduction into the same Adjunction classifier, not another
+notion of adjunction. Keep it as an option rather than an additional current
+deliverable without a concrete need. The Hom-comparison route has priority.
 
 The [primary terminality consumer audit](../emdash2/audits/terminal-primary-family-boundary/README.md)
 now identifies the concrete zero-column and kernel/cokernel family-input

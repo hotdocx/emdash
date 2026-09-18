@@ -1,10 +1,10 @@
 {
-  "baseline": "fef16d2f",
-  "candidate_sha256": "a266ee100bd5befc325821b03e3fb2013e4fe37e521b73f227ca36d0a92a904f",
+  "baseline": "06ddff1c",
+  "candidate_sha256": "92b8a655141f12223d59d2cdbb8f45fe31d70dea303a6826c09142ee3ec4ec5e",
   "assertions": 16,
   "source_hashes": {
     "emdash3_2.lp": "840319daa37fed0c1ef75f6c66719dec1680b0b1843d6707770c8c10764521bb",
-    "emdash3_2_represented_comma_families.lp": "17544bc239412c1306f0b241586bdf379e1be801c93b03e1d349d240a5b69ac7",
+    "emdash3_2_represented_comma_families.lp": "ccb390e4c323fdae5da048de82c5e50f97dc0e10df864c548a87879c9339f774",
     "emdash3_2_one_cat_arrow_diagrams.lp": "58b3892382b0a194e691165f3c8c220a6aa72a1777d77aba30d0b3c43870ddc9"
   },
   "qualification": [
@@ -20,5 +20,6 @@
     "OCAMLRUNPARAM": "o=20",
     "warnings": true,
     "subject_reduction": true
-  }
+  },
+  "graph_ownership": "Imports the generalized represented-comma owner; no copied graph declarations."
 }

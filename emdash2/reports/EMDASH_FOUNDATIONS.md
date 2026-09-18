@@ -3892,6 +3892,15 @@ OmegaEquivAlong(q∘Γ,D,T) for the public T and OneCat(Y). Existing inverse
 projections recover the same whole inverse maps and laws. Neither projection
 comparison requires a caller to construct extra naturality squares.
 
+The same owner also accepts a whole internal Hom action
+Θ:Hom_B(−,−)⇒Hom_Y(JA−,D−). Its classifier has object
+(A(b),D(b),Θ_b,b(id_b)) and retains the same whole source/target comparisons.
+The `represented_comma_hom_action` operations expose this shared construction;
+the original Γ operations specialize it to the native Hom action of h.
+This allows identity-image extraction from an independently supplied whole
+Hom comparison while retaining hom_int as owner. The ordinary target guard
+on inverse data and the separate higher Op/profile qualification remain.
+
 The graph and comparison stages remain protected in that owner. The original
 public stable graph keeps its selected computation in its separate module.
 [Whole whiskering](../emdash3_2_transfor_whiskering.lp) factors the derived

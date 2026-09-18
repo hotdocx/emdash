@@ -887,6 +887,12 @@ both are published, with the live PDF matching the checked artifact. See the
   copied graph source. This module adds definitions only. Its whole target
   inverse retains OneCat(Y), and stronger D[θ] runtime normalization is not
   claimed. It does not replace hom_int/homd_int or repair higher Op variance.
+  The shared derivation now accepts Θ:Hom_K(−,−)⇒Hom_Y(JA−,D−) directly.
+  Seven represented_comma_hom_action operations expose that input and the
+  same projection comparisons. The seven original Γ operations retain their
+  signatures as specializations with tapp1_int_fapp0_transf(h). The public
+  reviewer checks both inputs; the retained unit/counit extraction imports
+  this owner instead of copying the graph.
 - `emdash3_2_one_cat_zero_arrow_family_classification.lp`: specializes Γ to
   the existing native zero-cone input, retaining the original universal τ,
   source/target maps and the whole triangle isomorphism T∘τΓ≅h∘J(S).

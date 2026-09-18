@@ -193,3 +193,64 @@ assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Func
  (xi : τ (Hom (Hom_cat (Hom_cat K x y) p q) theta eta)) ⊢
 @fapp1_fapp0 (Hom_cat (Hom_cat K x y) p q) (Hom_cat (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_fapp0 K X A x y p) (@fapp1_fapp0 K X A x y q)) (@fapp1_func (Hom_cat K x y) (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_func K X (@comp_cat_fapp0 K (@RepresentedComma_cat X Y J) X (@represented_comma_source_func X Y J) (@ua4_gamma K X Y J A D h)) x y) p q) theta eta xi
  ≡ @fapp1_fapp0 (Hom_cat (Hom_cat K x y) p q) (Hom_cat (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_fapp0 K X A x y p) (@fapp1_fapp0 K X A x y q)) (@fapp1_func (Hom_cat K x y) (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_func K X A x y) p q) theta eta xi;
+
+// Whole internal-Hom input: it need not be presented as the action of h.
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (x : τ (Obj K)) ⊢
+ @fapp0 K (@RepresentedComma_cat X Y J) (@represented_comma_hom_action_func K X Y J A D theta) x
+ ≡ @represented_comma_obj X Y J (@fapp0 K X A x) (@fapp0 K Y D x) (@fapp0 (Hom_cat K x x) (Hom_cat Y (@fapp0 X Y J (@fapp0 K X A x)) (@fapp0 K Y D x))
+ (@tapp0_fapp0 K Cat_cat (@hom_ K K (@id_func K) x)
+   (@hom_ Y K D (@fapp0 X Y J (@fapp0 K X A x))) x
+   (@tapp0_fapp0 (Op_cat K) (@Catd_cat K) (@hom_int K K (@id_func K))
+     (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+       (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))) x theta)) (@id K x));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K X (@represented_comma_hom_action_source_func K X Y J A D theta) A x (@iso_evidence_to (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta))
+ ≡ @id X (@fapp0 K X A x);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K X A (@represented_comma_hom_action_source_func K X Y J A D theta) x (@iso_evidence_from (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta))
+ ≡ @id X (@fapp0 K X A x);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) ⊢ @iso_evidence_left (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta)
+ : τ (@= (@Transf K X (@represented_comma_hom_action_source_func K X Y J A D theta) (@represented_comma_hom_action_source_func K X Y J A D theta))
+ (@comp_fapp0 (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_func K X Y J A D theta) (@iso_evidence_from (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta)) (@iso_evidence_to (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta))) (@id (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta)));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) ⊢ @iso_evidence_right (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta)
+ : τ (@= (@Transf K X A A)
+ (@comp_fapp0 (Functor_cat K X) A (@represented_comma_hom_action_source_func K X Y J A D theta) A (@iso_evidence_to (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta)) (@iso_evidence_from (Functor_cat K X) (@represented_comma_hom_action_source_func K X Y J A D theta) A (@represented_comma_hom_action_source_evidence K X Y J A D theta))) (@id (Functor_cat K X) A));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ (@one_cat_represented_comma_hom_action_target_equiv K X Y J A D theta Y1)
+ : τ (@OmegaEquivAlong (Functor_cat K Y) (@represented_comma_hom_action_target_func K X Y J A D theta) D (@one_cat_represented_comma_hom_action_target_to K X Y J A D theta Y1));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (theta : τ (@Transf (Op_cat K) (@Catd_cat K)
+   (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@represented_comma_hom_action_target_func K X Y J A D theta) D x (@one_cat_represented_comma_hom_action_target_to K X Y J A D theta Y1) ≡ @id Y (@fapp0 K Y D x);

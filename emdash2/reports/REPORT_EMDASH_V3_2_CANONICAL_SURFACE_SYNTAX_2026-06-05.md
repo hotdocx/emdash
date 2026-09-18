@@ -413,6 +413,13 @@ Whole `transf_prewhisker`/`transf_postwhisker` and their IsoEvidence counterpart
 are derived applications of the original composition functors; they add no
 new naturality data or rewrite policy.
 
+For Θ:Hom_K(−,−)⇒Hom_Y(JA−,D−), write Γ_Θ for
+`represented_comma_hom_action_func(J,A,D,Θ)`. Its object is
+(A(x),D(x),Θ_x,x(id_x)). The corresponding source/target and comparison
+operations share the original graph owner. The h-based Γ above specializes
+this construction using h's native internal Hom action; it retains its
+existing public signature and computation.
+
 For a native zero-arrow family use `one_cat_zero_arrow_family_func` and its
 retained whole triangle IsoEvidence. The corresponding
 `one_cat_homology_family_comparison_evidence` has the literal endpoints

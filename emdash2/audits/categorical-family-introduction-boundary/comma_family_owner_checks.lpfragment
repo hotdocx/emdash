@@ -1,4 +1,13 @@
 /* Private structural controls; append to a full copy of the represented-comma owner. */
+// Preserve the original h inputs when observing the generalized private graph.
+protected symbol comma_review_hom_action [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (@Catd_cat K) (@hom_int K K (@id_func K))
+   (@comp_cat_fapp0 (Op_cat K) (Op_cat Y) (@Catd_cat K)
+     (@hom_int Y K D) (@Op_func K Y (@comp_cat_fapp0 K X Y J A))))
+≔ @tapp1_int_fapp0_transf K Y (@comp_cat_fapp0 K X Y J A) D h;
+
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
   (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
@@ -95,56 +104,52 @@ assert [K A : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A)) (E : τ (Catd K))
 assert [K X Y : Cat] (J : τ (Functor X Y))
  (A : τ (Functor K X)) (D : τ (Functor K Y))
  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
- @fapp0 (Op_cat K) (Op_cat Y) (@comma_section_gamma_target_section K X Y J A D h) x
+ @fapp0 (Op_cat K) (Op_cat Y) (@comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h)) x
  ≡ @fapp0 K Y D x;
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) x
-   (@comma_section_gamma_target_extraction_op K X Y J A D h)
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x
+   (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D h)
-   (@comma_section_gamma_target_section_op K X Y J A D h) x
-   (@omega_equiv_along_left_inv _ _ _ _ (@comma_section_gamma_target_extraction_equiv K X Y J A D h Y1))
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x
+   (@omega_equiv_along_left_inv _ _ _ _ (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D
-   h) x (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_extraction_op K X Y J A D h)
-   (@comma_section_gamma_target_extraction_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_left_law
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@comma_section_gamma_target_observed_op K X Y J A
-  D h) (@comma_section_gamma_target_extraction_op K X Y J A D h) (@comma_section_gamma_target_extraction_equiv K X Y J A D h
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h)
   Y1)
- : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@comma_section_gamma_target_section_op
-   K X Y J A D h)) (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@omega_equiv_along_left_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_extraction_op K X Y J A D h)
-   (@comma_section_gamma_target_extraction_equiv K X Y J A D h Y1)) (@comma_section_gamma_target_extraction_op K X Y J A D h))
-   (@id (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)));
+ : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))) (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@omega_equiv_along_left_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h)))
+   (@id (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_right_law
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@comma_section_gamma_target_observed_op K X Y J A
-  D h) (@comma_section_gamma_target_extraction_op K X Y J A D h) (@comma_section_gamma_target_extraction_equiv K X Y J A D h
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h)
   Y1)
- : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_observed_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h)) (@comp_fapp0 (Functor_cat K Y)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_extraction_op K X Y J A D h)
-   (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-   (@comma_section_gamma_target_observed_op K X Y J A D h) (@comma_section_gamma_target_extraction_op K X Y J A D h)
-   (@comma_section_gamma_target_extraction_equiv K X Y J A D h Y1))) (@id (Functor_cat K Y)
-   (@comma_section_gamma_target_observed_op K X Y J A D h)));
+ : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h))) (@comp_fapp0 (Functor_cat K Y)
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_extraction_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@comma_section_gamma_target_extraction_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1))) (@id (Functor_cat K Y)
+   (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h))));
 
 assert [K A : Cat] (s : τ (Obj (@Pi_cat K (@Const_catd K A)))) (k : τ (Obj K)) ⊢
  @fapp0 K A (@comma_section_constant_section_projection K A s) k ≡ @fapp0 K A s k;
@@ -169,56 +174,51 @@ assert [A K C : Cat] (F : τ (Functor A K)) (E : τ (Catd K))
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D h)
-   (@represented_comma_family_target_func K X Y J A D h) x (@comma_basechange_gamma_target_link K X Y J A D h)
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_observed_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+   (@represented_comma_family_target_func K X Y J A D h) x (@comma_basechange_gamma_target_link K X Y J A D (@comma_review_hom_action K X Y J A D h))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h) x
-   (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X Y J A D h) x
+   (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D h) x
+ @tapp0_fapp0 K Y (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x
    (@omega_equiv_along_left_inv _ _ _ _
-     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1))
+     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D h) x
+ @tapp0_fapp0 K Y (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x
    (@omega_equiv_along_right_inv _ _ _ _
-     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1))
+     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_left_law
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h)
-  (@comma_basechange_gamma_target_section_to_native K X Y J A D h) (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A
-  D h Y1)
- : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@comma_section_gamma_target_section_op
-   K X Y J A D h))
-   (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X
-     Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D h) (@omega_equiv_along_left_inv (Functor_cat K Y)
-     (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h)
-     (@comma_basechange_gamma_target_section_to_native K X Y J A D h) (@comma_basechange_gamma_target_section_to_native_equiv K X Y
-     J A D h Y1)) (@comma_basechange_gamma_target_section_to_native K X Y J A D h))
-   (@id (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)));
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X Y J A D h)
+  (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)))
+   (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X
+     Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@omega_equiv_along_left_inv (Functor_cat K Y)
+     (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X Y J A D h)
+     (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h)))
+   (@id (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ cat_zero) Y)) ⊢ @omega_equiv_along_right_law
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) (@represented_comma_family_target_func K X Y J A D h)
-  (@comma_basechange_gamma_target_section_to_native K X Y J A D h) (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A
-  D h Y1)
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X Y J A D h)
+  (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)
  : τ (@= (Hom (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) (@represented_comma_family_target_func K X Y J A D
    h))
-   (@comp_fapp0 (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X
-     Y J A D h) (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
-     (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-     (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D h)
-     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D h Y1)))
+   (@comp_fapp0 (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@omega_equiv_along_right_inv (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@represented_comma_family_target_func K X Y J A D h) (@comma_basechange_gamma_target_section_to_native K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@comma_basechange_gamma_target_section_to_native_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)))
    (@id (Functor_cat K Y) (@represented_comma_family_target_func K X Y J A D h)));
 
 assert [A K : Cat] (F : τ (Functor A K)) (E D : τ (Catd K))
@@ -272,15 +272,15 @@ assertnot [A K C : Cat] (H : τ (Functor (Product_cat A C) (Product_cat K C))) �
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D h)
-     (@comma_grouped_graph_section_stage1 K X Y J A D h));
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@comma_grouped_graph_section_stage1 K X Y J A D (@comma_review_hom_action K X Y J A D h)));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y)) (h : τ (@Transf K Y
   (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_grouped_graph_section_stage1 K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_grouped_graph_section_stage1 K X Y J A D h)
-     (@comma_grouped_graph_section_stage2 K X Y J A D h));
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_grouped_graph_section_stage1 K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_grouped_graph_section_stage1 K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@comma_grouped_graph_section_stage2 K X Y J A D (@comma_review_hom_action K X Y J A D h)));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) ⊢
  @eq_refl (@Functord (Op_cat K)
@@ -295,20 +295,20 @@ assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) ⊢
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D h)
-     (@comma_classification_target_section_canonical K X Y J A D h));
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@comma_classification_target_section_canonical K X Y J A D (@comma_review_hom_action K X Y J A D h)));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D h)
-     (@comma_classification_target_section_after_basechange K X Y J A D h));
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D (@comma_review_hom_action K X Y J A D h))
+     (@comma_classification_target_section_after_basechange K X Y J A D (@comma_review_hom_action K X Y J A D h)));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat K)) (@comma_classification_middle_section_projected K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat K)) (@comma_classification_middle_section_projected K X Y J A D h)
+ @eq_refl (Functor (Op_cat K) (Op_cat K)) (@comma_classification_middle_section_projected K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat K)) (@comma_classification_middle_section_projected K X Y J A D (@comma_review_hom_action K X Y J A D h))
      (@comma_classification_identity_section_projected K));
 
 assert [K : Cat] ⊢
@@ -318,53 +318,50 @@ assert [K : Cat] ⊢
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D h) D x
-   (@comma_classification_target_section_to_supplied K X Y J A D h)
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D x
+   (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h))
  ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D h) D x (@comma_classification_target_section_to_supplied K X
-  Y J A D h) ≡ @id Y (@fapp0 K Y D x);
+ @tapp0_fapp0 K Y (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D x (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y D (@comma_section_gamma_target_section_op K X Y J A D h) x (@omega_equiv_along_left_inv
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D (@comma_classification_target_section_to_supplied K X
-  Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+ @tapp0_fapp0 K Y D (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x (@omega_equiv_along_left_inv
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y)) ⊢
- @omega_equiv_along_left_law (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
-  (@comma_classification_target_section_to_supplied K X Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1)
- : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)
-  (@comma_section_gamma_target_section_op K X Y J A D h))
-     (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
-  (@comma_section_gamma_target_section_op K X Y J A D h) (@omega_equiv_along_left_inv (Functor_cat K Y)
-  (@comma_section_gamma_target_section_op K X Y J A D h) D (@comma_classification_target_section_to_supplied K X Y J A D h)
-  (@comma_classification_target_section_equiv K X Y J A D h Y1)) (@comma_classification_target_section_to_supplied K X Y J A D h)) (@id
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h)));
+ @omega_equiv_along_left_law (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D
+  (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))
+  (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)))
+     (@comp_fapp0 (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D
+  (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@omega_equiv_along_left_inv (Functor_cat K Y)
+  (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h))
+  (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h))) (@id
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h))));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y)) (x : τ (Obj K)) ⊢
- @tapp0_fapp0 K Y D (@comma_section_gamma_target_section_op K X Y J A D h) x (@omega_equiv_along_right_inv
-  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D (@comma_classification_target_section_to_supplied K X
-  Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+ @tapp0_fapp0 K Y D (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) x (@omega_equiv_along_right_inv
+  (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)) ≡ @id Y (@fapp0 K Y D x);
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
   cat_zero) Y)) ⊢
- @omega_equiv_along_right_law (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D h) D
-  (@comma_classification_target_section_to_supplied K X Y J A D h) (@comma_classification_target_section_equiv K X Y J A D h Y1)
+ @omega_equiv_along_right_law (Functor_cat K Y) (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D
+  (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1)
  : τ (@= (Hom (Functor_cat K Y) D D)
-     (@comp_fapp0 (Functor_cat K Y) D (@comma_section_gamma_target_section_op K X Y J A D h) D
-  (@comma_classification_target_section_to_supplied K X Y J A D h) (@omega_equiv_along_right_inv (Functor_cat K Y)
-  (@comma_section_gamma_target_section_op K X Y J A D h) D (@comma_classification_target_section_to_supplied K X Y J A D h)
-  (@comma_classification_target_section_equiv K X Y J A D h Y1))) (@id (Functor_cat K Y) D));
+     (@comp_fapp0 (Functor_cat K Y) D (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D
+  (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h)) (@omega_equiv_along_right_inv (Functor_cat K Y)
+  (@comma_section_gamma_target_section_op K X Y J A D (@comma_review_hom_action K X Y J A D h)) D (@comma_classification_target_section_to_supplied K X Y J A D (@comma_review_hom_action K X Y J A D h))
+  (@comma_classification_target_section_equiv K X Y J A D (@comma_review_hom_action K X Y J A D h) Y1))) (@id (Functor_cat K Y) D));
 
 assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
@@ -454,10 +451,10 @@ assertnot [K : Cat] (s : τ (Obj (@Pi_cat (Op_cat K) (@hom_identity_graph_catd K
 // Total base change must use the original supplied D.
 assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D D0 : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D h)
- : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D h)
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D (@comma_review_hom_action K X Y J A D h))
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@comma_classification_target_section_canonical K X Y J A D (@comma_review_hom_action K X Y J A D h))
      (@comp_cat_fapp0 (Op_cat K) (Op_cat K) (Op_cat Y) (@Op_func K Y D0)
-       (@comma_classification_middle_section_projected K X Y J A D h)));
+       (@comma_classification_middle_section_projected K X Y J A D (@comma_review_hom_action K X Y J A D h))));
 
 // An arbitrary map between these totals need not preserve the inner base.
 assertnot [K Y : Cat] (F D : τ (Functor K Y))
@@ -478,7 +475,7 @@ assertnot [K Y : Cat] (F D : τ (Functor K Y))
 // Whole comparisons retain their original runtime functor presentations.
 assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
- @comma_section_gamma_target_section K X Y J A D h ≡ @Op_func K Y D;
+ @comma_section_gamma_target_section K X Y J A D (@comma_review_hom_action K X Y J A D h) ≡ @Op_func K Y D;
 assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
  (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
  @represented_comma_family_target_func K X Y J A D h ≡ D;

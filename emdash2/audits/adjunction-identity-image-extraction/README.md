@@ -1,11 +1,11 @@
 # Whole Identity Images Of A Hom Comparison
 
 Date: 2026-09-18
-Status: checked non-library candidate; shared-owner factoring and promotion pending
-Baseline: `fef16d2f`
+Status: checked extraction candidate importing the shared library graph; remaining owner clauses and extraction promotion pending
+Baseline before shared-owner factoring: `06ddff1c`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
-and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1d--native-naturality-and-triangle-observations)
+and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1e--share-the-hom-action-graph-at-its-existing-owner)
 own scope and qualification. This candidate reuses the qualified Γ machinery
 to close the former whole-transformation formation gap. It is independent of
 the retained [Adjunction introduction candidate](../adjunction-from-hom-comparison/README.md),
@@ -104,20 +104,20 @@ component equations are instead derived from existing identity laws.
 
 ## Reproduction And Evidence
 
-The compressed source contains an isolated copy of the generalized graph
-and its construction stages. It is retained outside normal source discovery
-so it is not a duplicate active implementation. Public promotion must factor
-that generalization with the existing Γ owner, retaining its public API and
-original H consumers. `manifest.json` records the exact source identity and
-baseline owner hashes.
+The compressed source imports the generalized graph from its existing
+represented-comma owner. That shared derivation now serves both the original
+Γ API and extraction; the former copied graph is preserved only in Git.
+The candidate contains the extraction and law definitions, its sixteen
+controls, and the three proposed owner clauses. `manifest.json` records the
+exact source identity and required owner hashes.
 
 From emdash2:
 
 ```bash
 gzip -dc audits/adjunction-identity-image-extraction/candidate.lp.gz \
-  > tmp/probes/ua1d_identity_image_replay.lp
+  > tmp/probes/ua1e_identity_image_replay.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua1d_identity_image_replay.lp
+  scripts/probe.sh tmp/probes/ua1e_identity_image_replay.lp
 ```
 
 The source checks both whole transformations, their whole action functors,
@@ -132,10 +132,12 @@ with five positive/negative controls. All five normalized warning inventories
 match the current core: 157 replaceable-variable warnings and 1140 inherited
 critical pairs, no additions or parser issue. The scoped ordinary-arrow owner
 also checks. These are candidate qualifications, not a positive-library or
-full-repository promotion gate. The active library and its 94 nonsplit
-Γ/H-integrated assertions remain unchanged.
+full-repository promotion gate. The shared graph factoring passes the original
+Γ/H/model consumers and integrated diagnostics; core rules and nonsplit
+artifact bodies remain unchanged. The 94-assertion CAS receipt is the recorded
+UA-4m run, not a newly executed aggregate in this factoring slice.
 
-Next factor the generalized graph and qualify the actual public extraction
-interface, retaining these component, action and triangle laws. The separate
+Next qualify the remaining owner clauses and public extraction interface,
+retaining these component, action and triangle laws. The separate
 Adjunction-constructor scope and remaining terminality/product reviews are
 still open in the living plan.

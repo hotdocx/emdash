@@ -2356,3 +2356,128 @@ a second active owner. UA-2's constructor/consumer decision, higher-terminality
 review, the product/weighted consumer assessment and final audit/book updates
 remain open. The goal is active, main/publication remain unchanged, and all
 existing Op/profile, six-term and spectral deferrals remain in force.
+
+### UA-1e — Share The Hom-Action Graph At Its Existing Owner
+
+Previous turn: progress at `06ddff1c`, with the checked action/triangle
+candidate and synchronized audit. The worktree is clean, all worktrees have
+been inspected, and the published baseline remains an ancestor. The original
+public Γ reviewer passes unchanged
+(`represented_comma_families-20260918-035431.log`).
+
+The proposed factoring keeps one generalized graph and projection derivation
+in emdash3_2_represented_comma_families.lp. Its whole input is
+Θ:Hom_K(−,−)⇒Hom_Y(JA−,D−), using the original hom_int owners. The seven
+existing public Γ operations retain their signatures and specialize this
+shared construction with tapp1_int_fapp0_transf(h). The extraction consumes
+the generalized operations directly. This adds no graph primitive or rule;
+it replaces the experimental duplicate by one shared definition family.
+
+Qualify a full owner copy first, its unchanged public Γ reviewer, then the
+extraction through imports. Reject the factoring if it changes the original
+Γ component/action or inverse observations. Subsequent promotion must test
+the actual triangle/H imports and account separately for the already-audited
+curry views and universal-arrow identity clause. The separate UA-2 scope
+question remains pending; this slice does not presume a constructor decision.
+
+The temporary shared owner passes the unchanged 24-assertion Γ reviewer
+(`ua1e_original_gamma_reviewer-20260918-035526.log`) and the sixteen-check
+extraction through imports (`ua1e_extraction_import-20260918-035555.log`).
+Seven controls with an arbitrary whole Θ check its object, computing source
+maps, source inverse laws and target comparison; the resulting 31-check Γ
+reviewer passes (`ua1e_shared_gamma_reviewer-20260918-035731.log`).
+
+The shared owner is now in the library, with 107 definitions: the generalized
+100-definition derivation plus seven original-signature wrappers. Its fourteen
+public operations share the protected construction. A mechanical comparison
+confirms that all seven original public signatures are byte-identical. There
+is no added primitive, runtime rule or unif_rule in this owner. SHA-256:
+`ccb390e4c323fdae5da048de82c5e50f97dc0e10df864c548a87879c9339f774`.
+
+The original public consumers pass on the new owner:
+
+- Γ: `represented_comma_families-20260918-035809.log`, 31 assertions;
+- extraction: `ua1e_public_owner_extraction-20260918-035827.log`, 16;
+- native triangle: `one_cat_zero_arrow_family_classification-20260918-035830.log`;
+- whole H: `one_cat_homology_family_comparison-20260918-035832.log`;
+- original point view: `one_cat_homology_family_comparison_points-20260918-035834.log`;
+- actual Freyd model: `freyd_whole_homology_family_comparison-20260918-035837.log`.
+
+All five warning inventories match their predecessors exactly. The Freyd
+reviewer retains its 27 previously classified import-order critical pairs;
+the other inventories are empty (`ua1e_shared_owner_warning_comparison.json`).
+The private comma audit now supplies tapp1_int_fapp0_transf(h) explicitly to
+the generalized helpers, keeping its original h inputs and assertions. All
+64 controls pass (`ua4_comma_owner_checks-20260918-040135.log`). The retained
+triangle/H private controls also pass, 17 and 16 assertions
+(`ua4_triangle_owner_checks-20260918-041031.log`,
+`ua4_homology_owner_checks-20260918-041035.log`). These focused checks use
+serial 2GiB/90s/o20 with SR/warnings enabled. Integrated diagnostics pass with
+the existing 6GiB/90s/o20,v1024 profile and SR enabled
+(`emdash3_2_checks-20260918-035953.log`).
+
+The extraction archive now imports the real owner instead of retaining a
+copied graph. Its sixteen assertions replay from the compressed bytes
+(`ua1e_identity_image_replay-20260918-040902.log`); source SHA-256:
+`92b8a655141f12223d59d2cdbb8f45fe31d70dea303a6826c09142ee3ec4ec5e`.
+Only the remaining extraction definitions and three proposed owner clauses
+stay outside the library. Core and other rule owners, model contracts and
+nonsplit artifact bodies are unchanged. Carry forward the dated UA-4m
+94-assertion CAS receipt; do not describe it as a newly executed check on
+this factoring. The affected categorical consumers are checked fresh above.
+
+AGENTS, standing owner map, Foundations, canonical syntax and both audits now
+describe the shared derivation. Strict catalog, rule-LHS, source-TOC and all
+182 book-evidence claims pass. Source-health freshness records 1287 files at
+`2fb310b5fa4725f8320c91b5e015c55379610fdb7f6014d6884465703a098217`;
+it is source freshness, not an all-target execution claim. Public extraction
+and its remaining clauses are the next UA-1 work. Book exposition remains
+part of UA-6; no unrelated repository aggregate or publication is performed.
+
+### UA-2e — User-Proposed Constructor Input Agreement
+
+The user's 2026-09-18 steering proposes Φ/Γ mate operations with scoped
+proof-time agreement to a constructor's supplied input, then clarifies that
+the primary agreement should be at Adjunction_hom_prof_comparison(J).
+The current owners already supply that comparison, its selected whole maps,
+adjunction_transpose_func/untranspose_func and their mate cuts. The public
+function names are transparent views; their selected comparison projections
+are the actual runtime heads. No parallel Φ/Γ primitives are proposed.
+
+For J=make_adjunction(i), test a primary comparison rule whose residual is
+i≡the_other_comparison. The input i is the entire ProfComparison, retaining
+both maps and inverse laws. This does not infer an adjunction from two
+arbitrary unrelated functions. A primary rule alone passes direct comparison
+agreement but not defiso_to/from agreement. Adding the two map views passes
+that layer but not tapp0. The selected seven-clause variant therefore includes
+both component and point views, all scoped to this constructor. Actual
+evaluation endpoints are carried into residuals: omitting them caused an
+installed eval.ml assertion in an isolated rejected probe. No computation
+rule or constructor has been promoted.
+
+The final isolated experiment passes seventeen assertions
+(`ua2e_input_agreement_final-20260918-040641.log`): comparison, maps, components
+and point agreement; both whole and point inverse cuts; unrelated-input
+rejection; and a concrete reflexive input retaining its actual projection.
+The projected reflexive ProfComparison does not itself normalize to the
+plain identity functor in the unchanged library
+(`ua2e_reflexive_component_control-20260918-040609.log`). That separate
+inherited presentation boundary is not claimed repaired. Proof-time
+agreement and runtime erasure are explicitly distinguished by the controls.
+
+The seventeen checks replay from input-agreement.lp.gz
+(`ua2e_input_agreement_replay-20260918-041030.log`), with one experimental
+ordinary constructor, seven unif_rules and no runtime rule. Uncompressed
+SHA-256: `c11b8d3004841874f034802e17eb1a88a11addc20c315739ad5e167d26a173d7`.
+The profile is serial 2GiB/90s/o20 with SR/warnings; expected negative
+assertions print unsolved constraints but the completed checks pass.
+
+The user's preference makes this the next constructor experiment under
+UA-2. It does not select the previously offered extra Freyd-model entry point;
+no such scope change is assumed. Connect the whole unit/counit to the checked
+identity-image construction while retaining native cut heads, then qualify
+the required whole-family/postcomposition consumer and owner interactions.
+This remains introduction into the existing Adjunction classifier, not a new
+theory. A unit/counit-based constructor with whole η, ε and triangle laws is
+a related option; it is not an additional deliverable now. Other plan rows
+and explicit deferrals remain unchanged, and the goal remains active.

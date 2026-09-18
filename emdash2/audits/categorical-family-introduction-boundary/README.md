@@ -7,6 +7,12 @@ are retained. A separate downstream owner evaluates the same H comparison at
 the original point input. This audit retains private construction controls
 and historical stronger normalization boundaries, not a duplicate theory.
 
+UA-1e generalizes that same graph owner to a supplied whole internal Hom
+action Θ. The original Γ API is its specialization at the native action of
+h. Private controls apply that action explicitly to the generalized helpers;
+their original h inputs and observations remain. Public triangle/H consumers
+continue using their original signatures and selected inverse data.
+
 The active scope and chronological evidence belong to the
 [universality plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md).
