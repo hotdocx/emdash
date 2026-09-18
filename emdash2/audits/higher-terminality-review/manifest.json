@@ -1,0 +1,15 @@
+{
+  "baseline": "6d027dc5",
+  "source_sha256": "e2418ededdfb7d2164527c612add3ce5f694f510b4fed8bf0036f10207f69a41",
+  "assertions": 6,
+  "definitions": 4,
+  "new_primitives": 0,
+  "new_rules": 0,
+  "owner_hashes": {
+    "emdash3_2_terminal_objects.lp": "84f0b9427bc125f08d99e9229c1a2e2745098d427e8d33ae2891b1d553e2f50f",
+    "emdash3_2_adjunction_mates.lp": "14777423afc96a11fea09a7b2a85e9817710ba5cda5db6422dffafc250232479",
+    "emdash3_2_categorical_contractions.lp": "56611a72f4e86aff22a8992789acc7f8bdd6d2d3ac4c0f3ffb907a0aabd74854",
+    "emdash3_2_one_cat_terminal_adjunctions.lp": "d9e6f4927c9a93240e614e44c957a5330de3532e9593926620bf64cb40cd75d8"
+  },
+  "scope": "Consequence of supplied Adjunction data; no OneCat hypothesis and no derivation from the old selected TerminalObject."
+}

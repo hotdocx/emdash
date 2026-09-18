@@ -43,6 +43,10 @@ owner. The separate ordinary Adjunction introduction retains those native
 mate heads through constructor-scoped proof-time agreement and derives whole
 η/ε comparisons. Its qualification and explicit structural boundary are
 recorded in the living assembly ledger.
+The [higher terminality review](../../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
+completes the full-package analysis and records conditional native observations
+and the profile-dependent requirements for a later general upgrade. Ordinary
+family universality remains the qualified current implementation.
 
 ## Current Orientation
 

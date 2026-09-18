@@ -13,6 +13,11 @@ and the [consolidation review](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CON
 for the current mathematical route and auxiliary adjunction/product/terminal
 owners. Whole contraction and ordinary terminal/initial adjunction interfaces
 are implemented; replacing general higher terminality remains a proposal.
+The [higher terminality review](../../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
+examines the full canonical-arrow package and the strict/pseudo versus lax
+distinction. A supplied adjunction already yields whole Hom comparisons;
+deriving a general higher instance from the selected old package and removing
+ordinary realization guards require the recorded profile qualifications.
 Op/duality and the large six-term comparison remain deferred. The detailed
 historical homology narrative now lives in the
 [history report](REPORT_EMDASH_V3_2_CONSOLIDATED_HISTORY_2026-09-16.md); the current

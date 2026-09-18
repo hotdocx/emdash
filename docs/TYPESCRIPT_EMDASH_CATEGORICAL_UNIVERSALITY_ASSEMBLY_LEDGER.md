@@ -2741,3 +2741,75 @@ with the new constructor loaded in the UA-2h gate.
 Remaining goal work: the complete higher-terminality review and UA-6's final
 audit/book/overview updates. Op/profile integration, six-term experiments and
 spectral research remain deferred. No main integration or publication occurs.
+
+### UA-3g — Complete Terminality Review And Conditional Native Observations
+
+Previous turn: progress at `6d027dc5`; worktree and staging are clean, all
+worktrees are inspected, and the published baseline remains an ancestor.
+The ordinary terminal-adjunction reviewer passes
+(`one_cat_terminal_adjunctions-20260918-052547.log`). Review the full original
+TerminalObject package, including its whole !, component/off-diagonal action,
+terminal cut and IsContr field. Do not infer its strength solely from the
+IsContr field or from a point rule, and do not resume profile/Op migration.
+
+A conditional probe observes a supplied J:p⊣t or J:t⊣p through the existing
+adjunction_hom_component_iso. Both whole Hom DefIso results and the retained
+terminal-side OmegaEquivAlong form without OneCat(C)
+(`ua3g_supplied_terminal_adjunction-20260918-052617.log`). This uses J's
+existing whole comparison contract; it does not construct J from the old T,
+remove guards from ordinary diagram realization, or establish an unrestricted
+higher interpretation of the current prototype calculus.
+
+The mathematical review distinguishes strict/pseudonatural comparison data
+from lax data. The checked primary references are Lack's A 2-categories
+companion and clingman–Moser's 2-Limits and 2-Terminal Objects are too Different,
+especially Definitions 2.1, 2.7 and 3.1 of the latter. These are semantic
+references only; the active hom_int/hom_con/homd_int owners remain primary.
+
+The completed review is
+TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md. It records all original fields
+and cuts, then separates their strict/pseudo and lax interpretations. In the
+2-categorical strict/pseudo case, naturality gives a whole invertible
+comparison const_(!ₓ)≅(!ₜ∘−); the retained !ₜ≅idₜ comparison then yields
+Hom(C,x,t)≃1. The corresponding family coherence retains its strict/pseudo
+profile rather than being silently reinterpreted as strict.
+
+The review's explicit lax separation example uses two objects x,t, terminal
+endomorphism categories at x and t, an empty reverse Hom, and a one-object
+C(x,t) with endomorphism monoid {1,z}, z²=z absorbing. Its normal lax terminal
+family has identity components at identity arrows and comparison z at the
+single x→t arrow. Naturality for z is z=z². Both Hom-cores into t are
+contractible, while C(x,t) is not equivalent to 1. This examines the stated
+lax semantics of the visible package, not the full unprofiled prototype
+kernel. No Empty/inconsistency audit or profile/Op code change is made.
+
+The final conditional native artifact has four definitions and six assertions:
+the original whole terminal-direction comparison, both evaluated Hom DefIso
+observations, terminal-side OmegaEquivAlong, formation of the two native
+family-contraction types, and both inverse cuts in each direction. It passes
+(`ua3g_terminal_initial_observations-20260918-053805.log`) and replays from
+the retained fragment (`ua3g_conditional_replay-20260918-055640.log`), with
+empty warning inventories under serial 2GiB/90s/o20/SR/warnings. Source SHA-256:
+`e2418ededdfb7d2164527c612add3ce5f694f510b4fed8bf0036f10207f69a41`.
+The audit manifest pins the unchanged owners. The generic mate API already
+offers these conditional observations, so no duplicate public aliases are
+introduced. In particular the family-contraction type assertions are formation
+checks, not a construction from the old TerminalObject witness.
+
+Decision: retain the qualified primary ordinary family API based on p⊣t/t⊣p,
+the selected ordinary adapters and their existing terminal cuts. The working
+bare-variable unifier remains a positive audited feasibility fact, not a
+globally installed uniqueness rule. A general higher replacement requires
+the specified whole Hom-family contraction, invertible naturality/coherence
+data and matching functor-category interpretation; its assembly and diagram
+realization must be qualified separately at the deferred profile/duality
+gate. Merely dropping C1 or replacing the spelling of IsContr is insufficient.
+
+This completes UA-3's full-package review alongside its already qualified
+ordinary migration and bounded unifier audit. The living plan, AGENTS,
+Foundations and report index link the decision and its conditional evidence.
+There are no active library, computation-rule or model-contract edits in this
+slice. Source-health remains the 1292-file snapshot
+`df37e488544f129e5f5ea37019047e62b76d1531c85a64f480be2223cddb9a96`;
+the recent integration and nonsplit receipts remain applicable. UA-6's final
+audit/book/overview work is now the remaining execution tranche.

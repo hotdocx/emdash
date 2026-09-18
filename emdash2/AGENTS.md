@@ -77,6 +77,11 @@ General higher terminality replacement remains unimplemented. The new
 [universality assembly plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 is now active under user acceptance (2026-09-17): generic whole adjunction
 assembly, primary terminality, and the separately bounded Γ/input-H comparison.
+The [higher terminality review](../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
+audits the full ! package and records its strict/pseudo versus lax boundary.
+Conditional consequences of an already supplied p⊣t or t⊣p form without C1;
+this does not remove the current assembly/diagram-realization guards. A
+general upgrade waits for the recorded profile/duality qualification.
 The ordinary Γ/H comparison now has public owners, retaining whole inverse
 data and downstream point observations. Its qualification is recorded in the
 active assembly ledger.

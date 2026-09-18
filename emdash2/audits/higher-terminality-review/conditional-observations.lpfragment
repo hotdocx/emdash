@@ -1,0 +1,67 @@
+/* Conditional observations of already supplied strong adjunction data.
+   This is an audit, not a derivation from TerminalObject or a qualification
+   of unrestricted higher profiles. No primitive or rule is introduced. */
+require open emdash.emdash3_2_one_cat_terminal_adjunctions;
+
+// Conditional observation of the supplied whole adjunction: no OneCat assumption.
+symbol ua3g_terminal_hom_iso [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t)))
+ (x : τ (Obj C)) : τ (@DefIso Cat_cat (Hom_cat C x t) Terminal_cat)
+≔ @defiso_sym Cat_cat Terminal_cat (Hom_cat C x t)
+    (@adjunction_hom_component_iso C Terminal_cat (Terminal_func C) (@Obj_func C t) J x Terminal_obj);
+
+symbol ua3g_initial_hom_iso [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction Terminal_cat C (@Obj_func C t) (Terminal_func C)))
+ (x : τ (Obj C)) : τ (@DefIso Cat_cat (Hom_cat C t x) Terminal_cat)
+≔ @adjunction_hom_component_iso Terminal_cat C (@Obj_func C t) (Terminal_func C) J Terminal_obj x;
+
+symbol ua3g_terminal_hom_equivalence [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t))) (x : τ (Obj C))
+ : τ (@OmegaEquivAlong Cat_cat (Hom_cat C x t) Terminal_cat
+   (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x)))
+≔ @iso_evidence_omega_along Cat_cat (Hom_cat C x t) Terminal_cat
+   (@defiso_iso_evidence Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x));
+
+// The desired higher family uses the existing contravariant represented owner.
+assert [C : Cat] (t : τ (Obj C)) ⊢
+ @CatdContraction (Op_cat C) (@hom_con C t C (@id_func C)) : Grpd;
+
+// Retain the original entire represented comparison, in the terminal direction.
+symbol ua3g_terminal_whole_comparison [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t)))
+ : τ (@ProfComparison C Terminal_cat
+   (@Hom_prof_along C Terminal_cat C (@id_func C) (@Obj_func C t))
+   (@Hom_prof_along C Terminal_cat Terminal_cat (Terminal_func C) (@id_func Terminal_cat)))
+≔ @defiso_sym (Prof_cat C Terminal_cat)
+   (@Hom_prof_along C Terminal_cat Terminal_cat (Terminal_func C) (@id_func Terminal_cat))
+   (@Hom_prof_along C Terminal_cat C (@id_func C) (@Obj_func C t))
+   (@Adjunction_hom_prof_comparison C Terminal_cat (Terminal_func C) (@Obj_func C t) J);
+
+assert [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t))) (x : τ (Obj C)) ⊢
+ @comp_cat_fapp0 (Hom_cat C x t) Terminal_cat (Hom_cat C x t)
+   (@defiso_from Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x))
+   (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x))
+ ≡ @id_func (Hom_cat C x t);
+assert [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t))) (x : τ (Obj C)) ⊢
+ @comp_cat_fapp0 Terminal_cat (Hom_cat C x t) Terminal_cat
+   (@defiso_to Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x))
+   (@defiso_from Cat_cat (Hom_cat C x t) Terminal_cat (@ua3g_terminal_hom_iso C t J x))
+ ≡ @id_func Terminal_cat;
+
+assert [C : Cat] (t : τ (Obj C)) ⊢
+ @CatdContraction C (@hom_ C C (@id_func C) t) : Grpd;
+
+assert [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction Terminal_cat C (@Obj_func C t) (Terminal_func C))) (x : τ (Obj C)) ⊢
+ @comp_cat_fapp0 (Hom_cat C t x) Terminal_cat (Hom_cat C t x)
+   (@defiso_from Cat_cat (Hom_cat C t x) Terminal_cat (@ua3g_initial_hom_iso C t J x))
+   (@defiso_to Cat_cat (Hom_cat C t x) Terminal_cat (@ua3g_initial_hom_iso C t J x))
+ ≡ @id_func (Hom_cat C t x);
+assert [C : Cat] (t : τ (Obj C))
+ (J : τ (@Adjunction Terminal_cat C (@Obj_func C t) (Terminal_func C))) (x : τ (Obj C)) ⊢
+ @comp_cat_fapp0 Terminal_cat (Hom_cat C t x) Terminal_cat
+   (@defiso_to Cat_cat (Hom_cat C t x) Terminal_cat (@ua3g_initial_hom_iso C t J x))
+   (@defiso_from Cat_cat (Hom_cat C t x) Terminal_cat (@ua3g_initial_hom_iso C t J x))
+ ≡ @id_func Terminal_cat;

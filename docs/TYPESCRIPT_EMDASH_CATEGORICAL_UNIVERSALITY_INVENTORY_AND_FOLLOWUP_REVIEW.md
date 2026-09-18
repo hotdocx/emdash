@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit, public Γ/H comparison, unit/counit extraction and ordinary Adjunction introduction qualified; higher-terminality and final audit/book work open
+Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, uniqueness audit, Γ/H, extraction and Adjunction introduction qualified; higher-terminality/product reviews complete; final audit/book work open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -170,6 +170,18 @@ primary. It should not simply replace IsContr everywhere, drop OneCat guards,
 or claim that a normal-form distinction caused the higher semantic question.
 The existing Ω interface has equality-valued inverse laws between whole maps;
 its intended higher interpretation must itself be specified at that level.
+
+The completed [higher terminality review](TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
+now supplies the detailed decision. It audits the full ! package, proves the
+2-categorical strict/pseudo implication, and gives an explicit lax separation
+example satisfying the visible point/core data. Six conditional native checks
+observe supplied terminal/initial adjunctions and their whole inverse data
+without OneCat(C); they do not construct those adjunctions from the old T.
+Keep the qualified ordinary primary family API and existing selected cuts.
+The general upgrade requires the specified whole naturality/invertibility
+and family-comparison data at the deferred profile/duality qualification.
+This completes the present review without promoting an unqualified higher
+replacement or resuming that separate migration.
 
 ## Inventory: Shared Foundations And Comparison Strength
 
@@ -363,7 +375,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | Qualified ordinary public owner: 42 definitions, fifteen public operations, original comparison/inverse, whole η/ε, component/action observations and both whole triangle laws. The supporting clauses are at their core/arrow owners. Sixteen extraction checks, five curry controls, affected reviewers, integrated diagnostics and all 94 nonsplit assertions pass |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Qualified public ordinary introduction: one structural constructor, seven scoped proof-time views, derived whole η/ε comparisons, 33 public assertions, native Došen/mate cuts and whole-family consumption. Existing consumer imports, integrated diagnostics and all 94 nonsplit assertions pass. The postcomposition lift remains the existing structural instance; no additional Freyd-model entry point is selected |
-| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
+| UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Qualified ordinary family migration and bounded uniqueness audit; full higher review completed with conditional native observations and explicit profile-dependent prerequisites. No generic uniqueness unifier or unrestricted higher replacement is installed. The later upgrade remains with the user-deferred profile/duality work |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Reviewed: no current consumer requires a new bridge. The supplied-weighted-witness adapter remains accurately labelled; native homology uses whole pairing from Δ⊣P. No extra comparison/compatibility requirement is introduced |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
