@@ -1,0 +1,28 @@
+{
+  "baseline_before_promotion": "90d54841",
+  "primitive_constructors": 1,
+  "proof_time_rules": 7,
+  "runtime_rules_added": 0,
+  "derived_definitions": {
+    "mate_owner": 2,
+    "introduction_owner": 7,
+    "protected_point_helpers": 2
+  },
+  "constructor_assertions": 33,
+  "source_hashes": {
+    "emdash3_2_adjunction_mates.lp": "14777423afc96a11fea09a7b2a85e9817710ba5cda5db6422dffafc250232479",
+    "emdash3_2_one_cat_adjunction_introduction.lp": "10a4af5b40d930c0a169fc576e0fea4d3ff773b00ac3c6b0923e574f0a275ef9",
+    "emdash3_2_one_cat_hom_comparison_data.lp": "40f5b01d003e17649b01e0a73b413c07bc94568dd62b9be060778cd8f8016768"
+  },
+  "reviewer_hashes": {
+    "examples/one_cat_adjunction_introduction.lp": "7598531a5b8b4ab4379aba84abc47236151882bc6f92d267b934f8a3adde4fd7",
+    "examples/adjunction_mates.lp": "563d9fa62bd524f89ea69861e51ee466d53bf095db2b16a1ee725024c61aa16e"
+  },
+  "profile": {
+    "memory_mib": 2048,
+    "timeout_seconds": 90,
+    "OCAMLRUNPARAM": "o=20",
+    "warnings": true,
+    "subject_reduction": true
+  }
+}

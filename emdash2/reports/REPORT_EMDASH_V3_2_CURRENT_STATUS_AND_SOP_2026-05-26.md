@@ -901,7 +901,16 @@ both are published, with the live PDF matching the checked artifact. See the
   stay protected. No caller supplies naturality squares or a separate inverse.
   Two core curry/Hom proof-time views and the scoped ordinary-arrow identity
   observation support the construction; the rejected product identity rules
-  remain absent. The separate Adjunction constructor is still experimental.
+  remain absent.
+- `emdash3_2_one_cat_adjunction_introduction.lp`: one explicit ordinary
+  Adjunction constructor from the supplied whole ProfComparison, seven scoped
+  proof-time views, and seven derived input/unit/counit comparison definitions. The
+  original comparison/mate and unit/counit runtime heads remain; no runtime
+  rule is added. The two generic native identity-image laws belong to the
+  existing adjunction-mates owner. The public reviewer checks input agreement,
+  scope, whole η/ε agreement, both Došen rectangles and family mate inverse
+  cuts. Its family consumer uses the existing postcomposition lift, which is
+  still a separate structural operation.
 - `emdash3_2_one_cat_zero_arrow_family_classification.lp`: specializes Γ to
   the existing native zero-cone input, retaining the original universal τ,
   source/target maps and the whole triangle isomorphism T∘τΓ≅h∘J(S).

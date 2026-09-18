@@ -93,8 +93,13 @@ operations support identity-image extraction without a duplicate graph owner.
 whole Hom comparison, their component/action laws and both whole triangle
 modifications/equations. It adds definitions only. Its two curry/Hom views
 belong to the core Hom_prof_along owner; its scoped universal-arrow identity
-observation belongs to one_cat_arrow_diagrams. The separate Adjunction
-introduction with scoped input agreement remains an experiment.
+observation belongs to one_cat_arrow_diagrams.
+`emdash3_2_one_cat_adjunction_introduction.lp` introduces an ordinary Adjunction
+from that whole comparison with seven constructor-scoped proof-time views.
+Its native unit/counit comparisons are derived, and its mate/triangle runtime
+heads remain intact. The two generic identity-image laws live at the existing
+adjunction-mates owner. The introduction is an explicit structural constructor;
+the postcomposition lift remains its existing separately declared operation.
 `emdash3_2_transfor_whiskering.lp` owns the derived transformation and
 isomorphism whiskering helpers. The ordinary zero-arrow-family classification,
 whole homology-family comparison and separate point-comparison owners expose

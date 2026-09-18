@@ -127,3 +127,13 @@ assert (R L : Cat) (F : τ (Functor R L)) (G : τ (Functor L R))
   : τ (@= (Hom R X (@fapp0 L R G Y))
       (@fapp0 _ _ (@adjunction_transpose_func R L F G J X Y) h)
       (@fapp0 _ _ (@adjunction_transpose_semantic_func R L F G J X Y) h));
+
+// Observe the native unit identity image through the existing mate comparison.
+assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
+ (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
+ (J : τ (@Adjunction A B F G)) (x : τ (Obj A)) ⊢ @one_cat_adjunction_unit_identity_image_path A B A1 B1 F G J x : τ (@= (Obj (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x)))) (@fapp0 (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F x)) (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x))) (@adjunction_transpose_func A B F G J x (@fapp0 A B F x)) (@id B (@fapp0 A B F x))) (@tapp0_fapp0 A A (@id_func A) (@comp_cat_fapp0 A B A G F) x (@unit_adj_transf A B F G J)));
+
+// Observe the native counit identity image through the existing mate comparison.
+assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
+ (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
+ (J : τ (@Adjunction A B F G)) (x : τ (Obj B)) ⊢ @one_cat_adjunction_counit_identity_image_path A B A1 B1 F G J x : τ (@= (Obj (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x)) (@fapp0 (Hom_cat A (@fapp0 B A G x) (@fapp0 B A G x)) (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x) (@adjunction_untranspose_func A B F G J (@fapp0 B A G x) x) (@id A (@fapp0 B A G x))) (@tapp0_fapp0 B B (@comp_cat_fapp0 B A B F G) (@id_func B) x (@counit_adj_transf A B F G J)));

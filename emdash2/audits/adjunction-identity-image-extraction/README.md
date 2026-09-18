@@ -8,8 +8,8 @@ The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVEN
 and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1f--public-unitcounit-extraction-and-its-owner-clauses)
 own scope and qualification. The public extraction reuses the qualified Γ machinery
 to close the former whole-transformation formation gap. It is independent of
-the retained [Adjunction introduction candidate](../adjunction-from-hom-comparison/README.md),
-which remains a separate structural interface and consumer decision.
+the [ordinary Adjunction introduction](../adjunction-from-hom-comparison/README.md),
+which is a separate explicit structural interface over this derived data.
 
 ## Mathematical Result
 
@@ -138,10 +138,10 @@ The thirteen affected reviewers cover mates, reindexing, family adjunctions,
 their predecessors after accounting for the recompiled core. The living
 ledger records joint nonsplit and integrated diagnostic qualification.
 
-The separate constructor experiment now connects these actual whole η/ε data
+The separate public constructor now connects these actual whole η/ε data
 to its native projections by a derived whole comparison. Its scoped input
 unifiers remain at the Hom comparison and mate projections; existing mate
 formulas and ordinary modifications give η/ε agreement without another unit
-unifier. Public introduction and owner/import qualification remain separate.
-Higher terminality, product/weighted review and final book/audit work remain
-other plan rows.
+unifier. Its source and import qualification is recorded in its own audit.
+The product/weighted review selected no new bridge; higher terminality and
+final book/audit work remain other plan rows.

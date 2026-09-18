@@ -154,3 +154,21 @@ symbol adjunction_untranspose_semantic_path
   : τ (@= (Functor (Hom_cat R X (@fapp0 L R G Y)) (Hom_cat L (@fapp0 R L F X) Y))
       (@adjunction_untranspose_func R L F G J X Y) (@adjunction_untranspose_semantic_func R L F G J X Y))
 ≔ eq_refl (@adjunction_untranspose_func R L F G J X Y);
+
+// Native unit component is the identity image under the existing mate comparison.
+symbol one_cat_adjunction_unit_identity_image_path [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
+ (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
+ (J : τ (@Adjunction A B F G)) (x : τ (Obj A))
+ : τ (@= (Obj (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x)))) (@fapp0 (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F x)) (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x))) (@adjunction_transpose_func A B F G J x (@fapp0 A B F x)) (@id B (@fapp0 A B F x))) (@tapp0_fapp0 A A (@id_func A) (@comp_cat_fapp0 A B A G F) x (@unit_adj_transf A B F G J)))
+≔ @eq_ap (Functor (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F x)) (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x)))) (Obj (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x))))
+   (λ M : τ (Functor (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F x)) (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x)))), @fapp0 (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F x)) (Hom_cat A x (@fapp0 B A G (@fapp0 A B F x))) M (@id B (@fapp0 A B F x)))
+   (@adjunction_transpose_func A B F G J x (@fapp0 A B F x)) (@adjunction_transpose_semantic_func A B F G J x (@fapp0 A B F x)) (@adjunction_transpose_semantic_path A B F G J x (@fapp0 A B F x));
+
+// Native counit component is the identity image under the existing mate comparison.
+symbol one_cat_adjunction_counit_identity_image_path [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
+ (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
+ (J : τ (@Adjunction A B F G)) (x : τ (Obj B))
+ : τ (@= (Obj (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x)) (@fapp0 (Hom_cat A (@fapp0 B A G x) (@fapp0 B A G x)) (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x) (@adjunction_untranspose_func A B F G J (@fapp0 B A G x) x) (@id A (@fapp0 B A G x))) (@tapp0_fapp0 B B (@comp_cat_fapp0 B A B F G) (@id_func B) x (@counit_adj_transf A B F G J)))
+≔ @eq_ap (Functor (Hom_cat A (@fapp0 B A G x) (@fapp0 B A G x)) (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x)) (Obj (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x))
+   (λ M : τ (Functor (Hom_cat A (@fapp0 B A G x) (@fapp0 B A G x)) (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x)), @fapp0 (Hom_cat A (@fapp0 B A G x) (@fapp0 B A G x)) (Hom_cat B (@fapp0 A B F (@fapp0 B A G x)) x) M (@id A (@fapp0 B A G x)))
+   (@adjunction_untranspose_func A B F G J (@fapp0 B A G x) x) (@adjunction_untranspose_semantic_func A B F G J (@fapp0 B A G x) x) (@adjunction_untranspose_semantic_path A B F G J (@fapp0 B A G x) x);

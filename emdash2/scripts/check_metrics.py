@@ -654,6 +654,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_transfor_whiskering.lp"),
     Path("emdash3_2_represented_comma_families.lp"),
     Path("emdash3_2_one_cat_hom_comparison_data.lp"),
+    Path("emdash3_2_one_cat_adjunction_introduction.lp"),
     Path("emdash3_2_one_cat_zero_arrow_family_classification.lp"),
     Path("emdash3_2_one_cat_homology_family_comparison.lp"),
     Path("emdash3_2_one_cat_homology_family_comparison_points.lp"),

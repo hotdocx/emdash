@@ -427,8 +427,12 @@ formulas; the public triangle operations retain both whole composites,
 modifications and ordinary equations. `one_cat_transf_from_hom_action`
 uses Γ_Θ and the original universal arrow, while
 `profmap_internal_hom_action` curries the actual supplied profunctor map.
-These names denote definitions; the separate Adjunction introduction remains
-an experiment whose input agreement preserves the existing native heads.
+These names denote definitions. For ordinary A,B, the separate
+`one_cat_adjunction_from_hom_comparison(Φ)` introduces the existing Adjunction
+interface. Its comparison projection agrees with Φ through scoped unif_rules,
+including selected-map/component/application views. These are proof-time
+agreements, not runtime erasure of the canonical heads. Public unit/counit
+modifications and paths are derived comparisons of the same whole terms.
 
 For a native zero-arrow family use `one_cat_zero_arrow_family_func` and its
 retained whole triangle IsoEvidence. The corresponding

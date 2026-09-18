@@ -3913,6 +3913,17 @@ are derived ordinary laws, not new runtime triangle reductions. The module
 does not itself introduce an Adjunction witness. No operational functor is
 defined by equality transport and no caller supplies naturality squares.
 
+The separate [ordinary introduction](../emdash3_2_one_cat_adjunction_introduction.lp)
+now supplies J=make_adjunction(Φ) in the existing Adjunction classifier. This
+is one explicit structural constructor. Its comparison projection agrees
+with Φ at proof time, with scoped views for the original selected maps,
+components and applications. The canonical runtime heads remain available
+for the existing mate cancellation and Došen triangle cuts. Two generic
+identity-image laws at the mate owner, followed by ordinary modifications,
+derive whole agreement of J's native η/ε with the constructions above. The
+interface consumes the whole comparison and its selected inverse; callers
+provide no separate naturality square or independently chosen inverse.
+
 The graph and comparison stages remain protected in that owner. The original
 public stable graph keeps its selected computation in its separate module.
 [Whole whiskering](../emdash3_2_transfor_whiskering.lp) factors the derived

@@ -2612,3 +2612,132 @@ SR/warnings and empty warning inventories. Expected negative assertions may
 print unsolved constraints; the completed check returns success.
 Public factoring and owner/import qualification are the next UA-2 gate.
 No extra Freyd-model entry point or unit/counit constructor is added to scope.
+
+### UA-2h — Public Adjunction Introduction With Retained Native Heads
+
+Previous turn: progress at `90d54841`, qualifying the public extraction and
+all 94 nonsplit assertions. Worktree and staging are clean, all worktrees are
+inspected, and the published baseline remains an ancestor. The retained
+25-check constructor baseline and exact extraction hash agree and replay
+(`ua2h_constructor_baseline-20260918-044313.log`).
+
+Factor the two generic native identity-image laws at the existing mate owner.
+The separate ordinary introduction owner takes the whole ProfComparison and
+contains one explicit constructor, seven constructor-scoped proof-time views
+and six derived comparison definitions, with its point helpers protected.
+The public unit/counit modifications and paths retain the original native and
+computed whole endpoints. The first publication gate is the full mate owner,
+then a temporary introduction owner and its normal-import reviewer, before
+active edits. No runtime rule, direct whole-unit unifier, new mate primitive
+or new model contract is proposed.
+
+The fresh complete mate owner checks its two appended generic laws
+(`ua2h_mate_owner-20260918-044525.log`). Its five critical pairs are inherited:
+the fresh unchanged owner reproduces them
+(`ua2h_mate_baseline-20260918-044758.log`), with all five normalized inventories
+identical. The isolated normal-import constructor reviewer passes thirty
+assertions (`ua2h_introduction_import-20260918-044709.log`) with no warnings.
+It includes the original 25 controls plus the four imported whole comparison
+proofs and a negative arbitrary-J scope control.
+
+The public owners and reviewer are promoted. The two generic laws are at
+emdash3_2_adjunction_mates.lp; the separate introduction owner has exactly
+one primitive constructor, seven unif_rules and six derived definitions
+(two point helpers protected). The active thirty-check reviewer passes
+(`one_cat_adjunction_introduction-20260918-044837.log`). Its source check
+recompiles the mate owner, so the same five inherited warnings appear;
+the normalized owner comparison finds no addition
+(`ua2h_owner_warning_comparison.json`). No runtime rule is added or changed.
+
+Eleven existing reviewers also pass with the new introduction module
+prepended: mates (including the new generic laws), extracted data,
+postcomposition/terminal families, Γ, triangle/H/point comparison, the actual
+Freyd model, and both product interfaces. All five warning inventories match
+the inherited mate/Freyd baselines, including the import-order pair already
+recorded before this tranche (`ua2h_loaded_results.json` and
+`ua2h_loaded_warning_comparison.json`). These are normal imports, not copied
+private proofs or new caller assumptions.
+
+Refresh compiled parents on the introduction owner with --gen-obj at guarded
+2GiB/90s/o20/SR/warnings
+(`emdash3_2_one_cat_adjunction_introduction-20260918-045400.log`). Add only that
+module import to the eight exact previous nonsplit wrappers. All 94 assertions
+pass again under serial 6GiB/180s/o20,v1024 with SR/warnings, no swap and the
+64MiB file limit: diagram 22.681s, displayed LES 74.925s, pair certificates
+36.619s/28.534s/24.391s, snake diagram 17.930s, signatures 62.991s and final
+snake certificate 62.779s. The original bodies, model contracts and proof
+data are unchanged. ua2h_cas_manifest/results and the warning comparison
+retain exact hashes, logs, measurements and GC receipts. Every artifact
+retains the same 34 inherited critical pairs in all five normalized
+inventories. Integrated diagnostics pass at 6GiB/90s/o20,v1024/SR
+(`emdash3_2_checks-20260918-050351.log`).
+
+The public source/reviewer manifest replaces the obsolete compressed
+constructor variants and the old input-agreement manifest. Git retains those
+experiments, including the unselected eager Hom-comparison rewrite. The audit,
+AGENTS, current owner map, Foundations, canonical syntax, report index and
+living plan now point to the qualified public interface. Strict catalogue,
+source TOC, rule-LHS and all 182 book-evidence claims pass. Source-health
+freshness records 1292 files at
+`df37e488544f129e5f5ea37019047e62b76d1531c85a64f480be2223cddb9a96`.
+This is an affected integration gate, not a fresh repository-wide aggregate.
+
+Final introduction owner SHA-256:
+`10a4af5b40d930c0a169fc576e0fea4d3ff773b00ac3c6b0923e574f0a275ef9`.
+Mate owner SHA-256:
+`14777423afc96a11fea09a7b2a85e9817710ba5cda5db6422dffafc250232479`.
+Core and extraction owner hashes are unchanged from UA-1f. UA-2 is qualified
+as an ordinary introduction/usability interface with its explicit structural
+boundary and actual family consumer. It does not derive the postcomposition
+lift, product/terminal provider instances or a closed CAS model.
+
+An additional concrete-input check supplies i=Adjunction_hom_prof_comparison(J).
+At the whole comparison, direct typed reflexivity decomposes the injective
+comparison heads before using the constructor view, leaving make(i)≡J
+(`ua2h_existing_comparison_input-20260918-051038.log`). Do not add an adjunction
+η unifier or a runtime erasure to hide that inference boundary. A generic
+input-agreement law, checked before specializing i, proves the original
+whole comparison equality for this input; both selected-map views also pass
+(`ua2h_staged_existing_comparison-20260918-051344.log`).
+
+Promote that derived law and three controls. The final public reviewer has
+33 assertions (`one_cat_adjunction_introduction-20260918-051541.log`), and the
+introduction owner has seven derived definitions, including the two protected
+point proofs. The constructor and seven unif_rules are unchanged. The final
+integrated diagnostics pass (`emdash3_2_checks-20260918-051650.log`). The
+fresh proof–CAS receipts above precede only this extra unused law definition
+and its reviewer controls; their computational and inference rules are
+unchanged, so those receipts are carried forward without another artifact
+replay. The final source manifest and health snapshot include the new law.
+
+### UA-5a — Product/Weighted Consumer Review: No New Bridge
+
+Current-source searches across the Lambdapi library/reviewers/diagnostics and
+root TypeScript workbench/package/tests find BinaryProductsWeightedComp and
+its four adapter operations only in the bridge owner, its own focused
+reviewer and the integrated diagnostics. All those consumers supply K
+explicitly. No native homology or TypeScript production caller requires a
+derived weighted witness from the ordinary product adjunction.
+
+The actual family product consumer is one_cat_product_family_pair_func and
+its whole inverse, using the selected P through the existing Δ⊣P and
+postcomposition lift. Biproduct distribution and reindexing consume that
+whole pairing directly. This review follows those definitions and the current
+IsBinaryProduct_comp, which is the weighted-limit comparison for the binary
+Path_cat(Bool) diagram. The original selected object and projection choices
+are retained in both interfaces.
+
+Decision: keep the supplied-weighted-witness adapter unchanged. A future
+derived bridge needs a whole WeightedCone_prof-to-product-Hom comparison,
+composition with the selected Δ⊣P comparison, and projection compatibility.
+The new Adjunction introduction consumes whole comparisons; it does not
+manufacture that missing implemented weighted comparison from point pairing
+laws. There is no current consumer benefit justifying that additional
+assembly. This completes UA-5's explicitly permitted no-change review;
+it neither claims mathematical impossibility nor imposes an old/new
+compatibility obligation on native homology. The two product reviewers pass
+with the new constructor loaded in the UA-2h gate.
+
+Remaining goal work: the complete higher-terminality review and UA-6's final
+audit/book/overview updates. Op/profile integration, six-term experiments and
+spectral research remain deferred. No main integration or publication occurs.

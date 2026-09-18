@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit, public Γ/H comparison and public unit/counit extraction qualified; Adjunction introduction and remaining reviews open
+Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit, public Γ/H comparison, unit/counit extraction and ordinary Adjunction introduction qualified; higher-terminality and final audit/book work open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -39,14 +39,12 @@ They differ in whole versus single-input scope, equality versus computational
 inverse laws, and supplied versus derived structure. They should not all be
 identified or all retained as equally primary interfaces.
 
-The next useful design review is the assembly of whole universal data at the
-existing owners. In particular, the current Adjunction classifier exposes
-unit/counit and a whole Hom comparison, but has no general introduction from
-supplied whole Hom-comparison data. Several ordinary instances explicitly
-declare their assembly. A reusable introduction principle could reduce those
-extensions only if their whole comparison inputs can themselves be built
-independently. That prerequisite has not been demonstrated for the current
-candidate. This is a proposed investigation, not a newly derived theorem.
+Whole universal data now assemble at their existing owners: the ordinary
+Hom-comparison extension constructs η/ε and introduces Adjunction with scoped
+input agreement and retained native cuts. Several ordinary instances still
+explicitly declare their assembly. Replacing one of those instances requires
+its whole comparison input to be built independently; repackaging its own
+existing adjunction comparison does not reduce that structural assumption.
 
 Γ is a separate meaningful application: classify coherent family inputs as
 one native comma functor, then obtain a whole H comparison. It should keep its
@@ -182,7 +180,9 @@ of a classifier does not construct an inhabitant for every category.
 | Interface and principal symbols | Current owner and meaning | Relation to other versions |
 | --- | --- | --- |
 | `IsoEvidence`, `OmegaEquivAlong`, `OmegaEquiv`, `DefIso` | [Nucleus](../emdash2/emdash3_2.lp). Ordinary inverse evidence, fixed-forward Ω evidence, and computational isomorphism respectively. | DefIso has selected maps and judgmental inverse cuts; it forgets to IsoEvidence. Ω retains actual inverse maps and equality-valued laws. Ordinary inverse evidence is not automatically a new DefIso computation. |
-| `Adjunction(F,G)`, `unit_adj_transf`, `counit_adj_transf` | [Nucleus](../emdash2/emdash3_2.lp), declared relation on the already selected F,G, whole unit/counit and triangle cuts. | This is the shared adjunction owner, not separate product/kernel adjunction theories. There is currently no general unit/counit or whole-Hom-comparison introduction into Adjunction. |
+| `Adjunction(F,G)`, `unit_adj_transf`, `counit_adj_transf` | [Nucleus](../emdash2/emdash3_2.lp), declared relation on the already selected F,G, whole unit/counit and triangle cuts. | This remains the shared adjunction owner. The ordinary Hom-comparison introduction below reuses it. A separate general unit/counit constructor is not implemented. |
+| `one_cat_hom_comparison_unit`, `one_cat_hom_comparison_counit`, whole triangle laws | [Hom-comparison data](../emdash2/emdash3_2_one_cat_hom_comparison_data.lp): definitions extracting the whole data from the original comparison and inverse. | Component and action formulas are ordinary law observations. No operational functor is constructed by path transport and no caller supplies naturality squares. |
+| `one_cat_adjunction_from_hom_comparison`, input/unit/counit agreement | [Ordinary introduction](../emdash2/emdash3_2_one_cat_adjunction_introduction.lp): one structural constructor with seven scoped proof-time views and derived agreement laws. | Preserves the native mate and triangle runtime heads. The generic input law supports a supplied comparison already projected from another adjunction; direct reflexivity at that special input hits injectivity decomposition. |
 | `Adjunction_hom_prof_comparison`; `adjunction_transpose_func`, `adjunction_untranspose_func` | The nucleus declares the whole represented-Hom comparison; [mates](../emdash2/emdash3_2_adjunction_mates.lp) define its evaluated forward/inverse functors and formula observations. | The comparison is ProfComparison, hence DefIso-based. The unit/counit formula views are related to these existing selected maps; no independent inverse is chosen. |
 | `ProfComparison` | [Nucleus](../emdash2/emdash3_2.lp): definition as DefIso in the profunctor category. | It is a named view of the same comparison calculus. `prof_comparison_evidence` forgets its computational structure to ordinary isomorphism evidence. |
 | `IsRepresentedBy_iso`, `Representation_iso`, `WeightedCone_prof`, `IsWeightedLimit_cov_iso`, `IsWeightedLimit_cov_comp` | [Nucleus](../emdash2/emdash3_2.lp): representability and weighted limits as whole profunctor comparisons. The chosen representing functor is supplied/retained. | The iso form uses IsoEvidence; the comp form uses ProfComparison. They differ in computational strength, not in the intended ordinary universal property. Whole push/pull operations reindex the one comparison. |
@@ -228,6 +228,29 @@ of a classifier does not construct an inhabitant for every category.
 | Γ and the whole H comparison | [Public Γ/projection owner](../emdash2/emdash3_2_represented_comma_families.lp), [ordinary triangle](../emdash2/emdash3_2_one_cat_zero_arrow_family_classification.lp), and [whole H comparison](../emdash2/emdash3_2_one_cat_homology_family_comparison.lp); [private controls](../emdash2/audits/categorical-family-introduction-boundary/README.md) remain an audit. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J), retaining whole source IsoEvidence and ordinary target OmegaEquivAlong. Public inputs and the actual whole H import consumer check with original inverses and point observations. Stronger direct D[θ] runtime normalization remains unqualified and was unnecessary for this consumer. |
 
 ## The Actual Relation Map
+
+### Product/Weighted Consumer Review
+
+UA-5's current-source inventory finds BinaryProductsWeightedComp and its four
+adapter operations only in their owning bridge module, its focused reviewer
+and the integrated diagnostics. There are no callers in the active native
+homology modules or the TypeScript workbench/package sources. Their tests
+explicitly supply K; they do not derive its weighted comparison.
+
+The meaningful native consumers instead use one_cat_product_family_pair_func
+and its inverse, through the existing ordinary Δ⊣P and postcomposition lift.
+This route is used by the biproduct family distribution and reindexing owners
+and preserves the same selected P and projections.
+
+Decision: keep the assumption-explicit weighted adapter unchanged in this
+goal. A future derived adapter would need a whole comparison from the actual
+WeightedCone_prof for the binary diagram to the product-category represented
+Hom family, followed by the existing Δ⊣P comparison, with the two selected
+projection agreements. Point pairing identities or repackaging the already
+declared product adjunction do not supply that missing implemented bridge.
+There is no current consumer requiring this extra assembly. This is the
+plan's explicit no-change outcome, not a mathematical impossibility claim or
+an added compatibility obligation on native homology.
 
 In the qualified ordinary portions, the main equations describe one reuse
 pattern:
@@ -339,10 +362,10 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | Qualified ordinary public owner: 42 definitions, fifteen public operations, original comparison/inverse, whole η/ε, component/action observations and both whole triangle laws. The supporting clauses are at their core/arrow owners. Sixteen extraction checks, five curry controls, affected reviewers, integrated diagnostics and all 94 nonsplit assertions pass |
-| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | The scoped input-agreement candidate passes 25 controls, preserves both native Došen rectangle cuts and mate cuts, derives whole agreement with the extracted unit/counit, and checks both whole-family mate inverse cuts. Public factoring and owner/import qualification remain pending. The postcomposition lift remains the existing structural instance; no additional Freyd-model entry point is selected |
+| UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Qualified public ordinary introduction: one structural constructor, seven scoped proof-time views, derived whole η/ε comparisons, 33 public assertions, native Došen/mate cuts and whole-family consumption. Existing consumer imports, integrated diagnostics and all 94 nonsplit assertions pass. The postcomposition lift remains the existing structural instance; no additional Freyd-model entry point is selected |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
-| UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
+| UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Reviewed: no current consumer requires a new bridge. The supplied-weighted-witness adapter remains accurately labelled; native homology uses whole pairing from Δ⊣P. No extra comparison/compatibility requirement is introduced |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
 UA-1 through UA-4 require implemented qualified outcomes or a concrete
@@ -422,61 +445,43 @@ modifications/equations through the existing ordinary modification interface.
 No additional runtime rule is used for those laws. UA-1e factors the graph
 at the existing comma owner, with original Γ signatures as specializations.
 UA-1f promotes extraction and the three qualified owner clauses. All 94
-nonsplit artifacts' assertions pass with the new module loaded. This does not
-yet supply a public Adjunction introduction.
+nonsplit artifacts' assertions pass with the new module loaded. The separate UA-2h owner now supplies the qualified ordinary introduction.
 
-Keep UA-1/UA-2 promotion conditional
-on demonstrated consumer benefit. The user's clarification prompted a
-review of the already implemented
-[adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md). Its host APIs
-assume an Adjunction and register agreement with named unit/counit or
-counit/transpose operations. The new candidate is related usability work:
-it introduces Adjunction from a whole ProfComparison, retaining that actual
-comparison and supplying identity-image component computations. It is a new
-structural introduction, not a theorem derived from the old β interface.
+The earlier constructor experiment was held because it had no identified
+production caller with independently built whole comparison data and did not
+remove an existing structural assumption. The user's subsequent Φ/Γ input
+agreement proposal clarified the interface to qualify: introduction from
+supplied whole data, with proof-time agreement that preserves canonical
+computation heads. This is related to the prior
+[adjunction-usability plan](ADJUNCTION_USABILITY_V3_2_PLAN.md), whose host APIs
+assume a witness and register named-operation agreement. The new public owner
+instead introduces the witness from the supplied whole ProfComparison.
 
-The passing whole-family reviewer uses the existing declared
-one_cat_postcomp_adjunction after constructing J. It does not derive that
-lift or remove any structural declaration. No existing
-production caller holding an independently built whole comparison and blocked
-on Adjunction introduction has yet been identified. Do not call this reviewer
-an established architectural need or make the constructor a prerequisite for
-UA-3/UA-4. Primary terminality can be formulated directly using p⊣t at the
-existing Adjunction owner; deriving an adapter from the old selected terminal
-package is a separate question. Γ has no demonstrated dependence on this
-constructor either.
-
-The candidate and its evidence are preserved in the
-[non-library adjunction-introduction audit](../emdash2/audits/adjunction-from-hom-comparison/README.md);
-its draft import/registration edits have been removed from active source.
-Any later promotion must identify the
-caller, its independently available data, and the computation or structural
-declaration that the constructor improves. The accepted UA-1/UA-2 scope and
-completion gates remain open; this is a promotion hold, not a completed or
-silently dropped tranche. UA-1a's reindexed-component computation remains
-independently qualified.
-
-User steering (2026-09-18) proposes retaining the generic adjunction mate
-operations and connecting a constructor's projections to supplied whole maps
-by unif_rule, preserving computation heads. This fits UA-2's existing scope;
-it does not select an additional Freyd-model entry point. The existing
 Adjunction_hom_prof_comparison and adjunction_transpose_func/untranspose_func
-already provide the requested whole comparison and its two mate functors.
-Their actual stable heads are the selected DefIso projections, not those
-transparent function names. Reuse them rather than declare a second Φ/Γ API.
+already supply the comparison and both mate functors. Their actual stable
+heads are the selected DefIso projections. The new ordinary constructor uses
+those owners and seven scoped unif_rules; no parallel Φ/Γ API or runtime
+comparison-erasure rule is introduced. Actual evaluation endpoints are kept
+in projection residuals because the omitted-RHS experiment was unqualified.
 
-The new isolated input-agreement candidate introduces one ordinary constructor
-and seven constructor-scoped proof-time views. Seventeen checks cover the
-whole comparison, both maps, components and point applications, retained
-generic inverse cuts, rejection of unrelated inputs, and concrete-input
-agreement without runtime erasure. A comparison-only view does not propagate
-automatically through projections. The views currently carry their actual
-evaluation endpoints into residuals; an implicit-RHS experiment hits an
-installed-checker assertion and is not selected. No rule is promoted by this
-result. Whole unit/counit agreement with the checked extraction, native
-triangle cuts, family consumption and owning-position qualification remain
-required. This is now the preferred constructor experiment within UA-2, not
-a claim that the former constructor was already justified or completed.
+UA-2h now promotes this interface with thirty-three public assertions, including
+input/mate agreement, scope controls, whole unit/counit comparison proofs,
+both Došen rectangles and whole-family inverse cuts. Existing native consumers
+and all 94 nonsplit assertions pass with the constructor module loaded.
+The two generic identity-image laws are factored at the original mate owner;
+the seven constructor comparison definitions reuse them. The
+[introduction audit](../emdash2/audits/adjunction-from-hom-comparison/README.md)
+now routes to active owners and reviewers; older compressed variants remain
+only in Git history.
+
+The constructor is one new structural introduction, not a body derived from
+the old opaque Adjunction classifier. Its mathematical input includes the
+whole inverse/coherence data. It does not construct a closed Freyd model,
+remove the existing postcomposition lift, or derive product/terminal providers
+without independently available whole comparisons. Primary terminality and Γ
+remain independently implemented; neither was made to depend on this
+constructor. The public family consumer uses the existing lift after
+constructing J and qualifies that interoperability explicitly.
 
 A possible make_adjunction_from_unit_counit would instead accept whole η, ε
 and both triangle laws, with naturality retained in the transformation types.
@@ -490,11 +495,10 @@ views specialize those laws to the supplied comparison, the public extraction's
 component formulas and existing ordinary modification interface yield whole
 η/ε agreement. This requires no new unit/counit agreement primitive or unifier.
 The earlier direct whole-unit unifier experiment left expanded curry/Hom
-constraints unresolved and is not selected. The retained candidate passes
-25 assertions and all eight derived proof bodies, including both native
-Došen rectangles, and both point and
-whole inverse cuts on arbitrary functor families through the existing
-postcomposition lift. That lift is consumed, not derived or replaced.
+constraints unresolved and is not selected. The public owners retain all eight derived proof bodies; the thirty-three-check
+reviewer covers both native Došen rectangles and both point and whole inverse
+cuts on arbitrary functor families through the existing postcomposition lift.
+That lift is consumed, not derived or replaced.
 
 The [primary terminality consumer audit](../emdash2/audits/terminal-primary-family-boundary/README.md)
 now identifies the concrete zero-column and kernel/cokernel family-input
