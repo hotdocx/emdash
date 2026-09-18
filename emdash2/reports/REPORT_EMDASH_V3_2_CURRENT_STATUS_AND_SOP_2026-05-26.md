@@ -93,6 +93,15 @@ both are published, with the live PDF matching the checked artifact. See the
   `OmegaEquivAlong` in the corresponding functor category. The module does
   not assemble incoherent arrow families, invert arbitrary lax
   transformations, or add generic functor extensionality.
+- `emdash3_2_one_cat_modifications.lp`: ordinary-target modification
+  introduction between two already whole transformations. OneCat makes its
+  native component cells and remaining coherence proposition-valued; the
+  structural primitive exposes the supplied cells through the existing
+  component/evaluation Hom action and its Cat-valued specialization. The
+  staged transfor identity path is a definition using the original unit cut.
+  This extends the ordinary introduction interface without replacing
+  hom_int/homd_int or changing any Op signature. The complete Γ/H audit is
+  its concrete consumer; the remaining Γ/H promotion is tracked separately.
 - `emdash3_2_monads.lp`: monad-primary, opposite-dual computational layer.
   `Monad(T)` is indexed by a whole endofunctor with stable full unit and
   multiplication observations. Whole extension retains higher action, while

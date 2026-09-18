@@ -3778,6 +3778,26 @@ displayed notation is one selected runtime normal form of the generic
 component calculus, not a parallel theory. The whole `fapp1_func` route still
 lands in `tdapp0_func`, retaining its next action.
 
+For an ordinary target C, the one-way
+[ordinary modification module](../emdash3_2_one_cat_modifications.lp)
+adds a structural introduction between two already whole transformations
+α,β:F⇒G. Given native cells mₓ:αₓ→βₓ, it returns one whole modification
+M:α→β. OneCat(C) makes the component Hom categories discrete, so the supplied
+cells and their remaining coherence are proposition-valued. Callers provide
+no additional naturality square. This is an explicit introduction beyond the
+former opaque Transf interface, not a construction of arbitrary transformations
+from objectwise arrows or a general higher pointwise-assembly theorem.
+
+The original component functor computes Mₓ=mₓ through its ordinary and
+Cat-valued displayed projections. The same module defines
+`one_cat_transf_identity_path`, a staged proof of the existing transfor unit
+law for an ordinary target. Specializing that named law remains useful when
+an opposite source identity has normalized before its surrounding observation;
+it changes no runtime rule. The Γ/H consumer retains native whole maps and
+uses such paths only as laws or cells in discrete modification categories.
+The [focused reviewer](../examples/one_cat_modifications.lp) checks the
+component action and the unit law, including their noncollapse boundaries.
+
 The capped projection remains coherent with higher ordinary naturality. If a
 generic action component has already projected from `fapp1_fapp0(tapp0_func)`
 to `tdapp0_fapp0`, the pre/right and post/left naturality cuts still accumulate

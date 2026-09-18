@@ -124,7 +124,7 @@ symbol ua4h_triangle_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  : τ (Hom (@Transf_cat B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat
   WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@ua4h_source B C C1 t T A D h)) D)
   (@ua4h_triangle_left B C C1 t T A D h) (@ua4h_triangle_right B C C1 t T A D h))
-≔ @ua4h_one_cat_modification B (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category
+≔ @one_cat_modification B (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category
   WalkingArrow_cat C C1)
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
   (@ua4h_source B C C1 t T A D h)) D (@ua4h_triangle_left B C C1 t T A D h) (@ua4h_triangle_right B C C1 t
@@ -159,7 +159,7 @@ symbol ua4h_triangle_from [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  : τ (Hom (@Transf_cat B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat
   WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@ua4h_source B C C1 t T A D h)) D)
   (@ua4h_triangle_right B C C1 t T A D h) (@ua4h_triangle_left B C C1 t T A D h))
-≔ @ua4h_one_cat_modification B (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category
+≔ @one_cat_modification B (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category
   WalkingArrow_cat C C1)
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
   (@ua4h_source B C C1 t T A D h)) D (@ua4h_triangle_right B C C1 t T A D h) (@ua4h_triangle_left B C C1 t

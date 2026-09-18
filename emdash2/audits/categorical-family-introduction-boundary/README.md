@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Ordinary Γ/H Qualification
 
-Status (2026-09-17, UA-4i): the isolated ordinary candidate now checks both
+Status (2026-09-18, UA-4j): the ordinary candidate now checks both
 whole input projections p∘Γ≅A and q∘Γ≃D, compatibility with the original h,
 and H_family≅H_native∘Γ. The original endpoint functors, selected maps,
 inverses and whole inverse laws are retained. Its 101-assertion replay also
@@ -10,9 +10,10 @@ The first target-arrow observation and source projection through third-level
 cells are qualified in their recorded probes. Stronger direct D[θ] runtime
 normalization remains unqualified and was unnecessary for the actual ordinary
 H consumer. The generic recursive Sigma action and section associativity are
-already in the core. Γ, its additional structural views and the proposed
-ordinary modification introduction remain outside the positive library;
-factoring, promotion and joint native/CAS qualification are still required.
+already in the core. The ordinary modification/unit-law support now has a
+positive owner, `emdash3_2_one_cat_modifications.lp`, and this audit imports it.
+Γ and its remaining structural views are outside the positive library;
+their factoring, promotion and joint native/CAS qualification remain required.
 
 The active continuation is the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md).
@@ -618,8 +619,10 @@ h, not only another endpoint comparison. The generic represented-comma
 prototype is used unchanged; the universal-transformation specialization is
 the actual one used by native homology.
 
-`one_cat_modification_introduction.lpfragment` explicitly proposes one
-structural primitive beyond today's Transf beta interface. Its inputs are
+The original introduction fragment is now promoted as
+`one_cat_modification` in `emdash3_2_one_cat_modifications.lp`; Git retains its
+earlier audit form. It is an explicit structural primitive beyond the former
+Transf beta interface. Its inputs are
 two already whole transformations α,β:F⇒G into OneCat(C), together with
 native component cells αₓ→βₓ. The component Hom categories are discrete, so
 these cells and their remaining coherence are proposition-valued. The output
@@ -668,10 +671,10 @@ rules = (a / 'target_classification_rules.lpfragment').read_text()
 rules, count = re.subn(r'(?m)^rule @tapp0_fapp0[^;]+;\n', '', rules)
 assert count == 1
 parts = [Path('emdash3_2_gray_transformation_graph.lp').read_text(),
+         'require open emdash.emdash3_2_one_cat_modifications;',
          (a / 'whole_source_rules.lpfragment').read_text(),
          (a / 'target_basechange_rules.lpfragment').read_text(), rules,
          (a / 'triangle_rules.lpfragment').read_text(),
-         (a / 'one_cat_modification_introduction.lpfragment').read_text(),
          constructor.split(marker, 1)[0]]
 parts += [(a / f).read_text() for f in [
     'whole_source.lpfragment', 'target_section_extraction.lpfragment',
@@ -744,7 +747,7 @@ and the existing reconstruction maps. Q then acts on these whole maps. No
 output H object, inverse or naturality square is supplied by the caller.
 
 The full result is qualified relative to the explicit structural interfaces
-already listed above, including the proposed ordinary modification
+already listed above, including the explicit ordinary modification
 introduction and the existing ordinary reconstruction. It is not a claim that
 all those interfaces were derivable from their former point beta rules, nor
 a general higher homology normalization theorem. OneCat(C), the supplied P/Q
@@ -776,3 +779,19 @@ factor it into its proper owners, retain the first-arrow computations and
 rerun the affected native/CAS consumers. The actual whole H consumer did not
 need the stronger D[θ] runtime normalization, so that observation remains
 recorded without being made a new prerequisite.
+
+## UA-4j: Ordinary Support Owner
+
+`one_cat_modification` and its two component projections now live in the
+positive ordinary-modification module. The duplicate audit declaration has
+been removed. The derived staged identity lemma is exposed there as
+`one_cat_transf_identity_path`, with an explicit ordinary-target guard matching
+the actual homology consumer. The audit no longer owns a duplicate unit lemma.
+
+The complete 101-assertion Γ/H replay passes when importing this module. Its
+focused reviewer covers the component and public evaluation Hom action,
+ordinary unit-law specialization and noncollapse cases. The integrated nucleus
+also passes under its recorded profile. These results qualify this support
+owner; they do not promote the remaining Γ projection views or public H
+comparison automatically. The living ledger records the current import,
+warning and native-consumer boundaries.

@@ -5,7 +5,7 @@ assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
      (@tapp0_fapp0 B C F G x alpha) (@tapp0_fapp0 B C F G x beta)))
  (x : τ (Obj B)) ⊢
  @tapp0_hom_fapp0 B C F G alpha beta x
-   (@ua4h_one_cat_modification B C C1 F G alpha beta m) ≡ m x;
+   (@one_cat_modification B C C1 F G alpha beta m) ≡ m x;
 
 // The same component computes through the public Hom action of evaluation.
 assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
@@ -15,7 +15,7 @@ assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (x : τ (Obj B)) ⊢
  @fapp1_fapp0 (@Transf_cat B C F G)
    (Hom_cat C (@fapp0 B C F x) (@fapp0 B C G x)) (@tapp0_func B C F G x) alpha beta
-   (@ua4h_one_cat_modification B C C1 F G alpha beta m) ≡ m x;
+   (@one_cat_modification B C C1 F G alpha beta m) ≡ m x;
 
 // No equality/reflexivity rule is installed on arbitrary whole transformations.
 assertnot [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))

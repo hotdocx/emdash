@@ -20,7 +20,9 @@ unused wrappers, and documents generic categorical owners at Chapters 12/30.
 Whole contraction and guarded ordinary terminal/initial adjunction interfaces
 are implemented; general higher terminality is still a refinement boundary.
 The [whole input/H comparison](../audits/categorical-family-introduction-boundary/README.md)
-is retained as a meaningful unqualified follow-up by user choice. Op/profile
+now has a checked ordinary candidate, including whole inverse data and its
+point-input observation; factoring and promotion remain in progress. The
+ordinary modification introduction has its own positive owner. Op/profile
 integration and the large six-term comparison remain deferred. The initial
 main/Pages checkpoint and completed consolidation c3792b67 are published.
 The [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication)

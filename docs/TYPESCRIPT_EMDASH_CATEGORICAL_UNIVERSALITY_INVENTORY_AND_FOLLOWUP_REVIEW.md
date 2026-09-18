@@ -188,7 +188,7 @@ of a classifier does not construct an inhabitant for every category.
 | `IsRepresentedBy_iso`, `Representation_iso`, `WeightedCone_prof`, `IsWeightedLimit_cov_iso`, `IsWeightedLimit_cov_comp` | [Nucleus](../emdash2/emdash3_2.lp): representability and weighted limits as whole profunctor comparisons. The chosen representing functor is supplied/retained. | The iso form uses IsoEvidence; the comp form uses ProfComparison. They differ in computational strength, not in the intended ordinary universal property. Whole push/pull operations reindex the one comparison. |
 | `WeightedColimit_con`, preservation of limits/colimits by adjoints | [Nucleus](../emdash2/emdash3_2.lp). Colimits are defined through the existing opposite weighted-limit interface; preservation constructions are derived from the mate/comparison calculus. | Direct colimit projection vocabulary is limited. This inherited duality-based route keeps its existing higher-variance qualification; it is not a completed new Op design. |
 | `one_cat_postcomp_adjunction`, `one_cat_functor_category` | [Whole family adjunctions](../emdash2/emdash3_2_one_cat_adjunction_families.lp): explicit ordinary structural declarations; unit/counit are the original cells whiskered by a family. | F⊣G gives (F∘−)⊣(G∘−). Whole family mates are definitions from that declared lift. No caller supplies pointwise naturality squares. |
-| Ordinary modification introduction, candidate `ua4h_one_cat_modification` | [Non-library introduction fragment](../emdash2/audits/categorical-family-introduction-boundary/one_cat_modification_introduction.lpfragment): one proposed structural primitive assembles a native modification between two existing whole transformations into OneCat(C), with computing component projections. | The component cells are proposition-valued, so their remaining coherence is unique. This is an explicit introduction beyond the old beta interface; it does not assemble arbitrary pointwise families into functors or transformations. It supports the actual Γ triangle and its image through the original kernel mate; promotion waits for the complete H consumer. |
+| `one_cat_modification`, `one_cat_transf_identity_path` | [Ordinary modifications](../emdash2/emdash3_2_one_cat_modifications.lp): one structural primitive assembles a native modification between two existing whole transformations into OneCat(C), with computing component projections. The staged unit-law path is a definition. | The component cells are proposition-valued, so their remaining coherence is unique. The introduction extends the old beta interface; it does not assemble arbitrary pointwise families into functors or transformations. This first Γ/H support owner is promoted in UA-4j; the complete Γ/H candidate now imports it and retains all 101 assertions. |
 | `Product_cat`, `Terminal_cat`, `Sigma_cat`, `Pi_cat`, `Pullback_catd` | [Nucleus](../emdash2/emdash3_2.lp): category/type formers, native dependent sum/product and family substitution. | These are not chosen internal products/terminal objects/pullbacks in an arbitrary C. In particular Pullback_catd(E,F) is substitution E∘F, not a categorical pullback supplied by PullbackStructure. |
 
 ## Inventory: Products, Terminality And Coproducts
@@ -403,7 +403,7 @@ core; the ledger records that inherited boundary separately. No repository
 aggregate is claimed green.
 The ordinary triangle now has a whole modification and its retained inverse;
 the inverse laws use the existing discrete-Hom proposition property. The
-candidate modification introduction explicitly requires OneCat and takes two
+promoted modification introduction explicitly requires OneCat and takes two
 already whole transformations. It adds no caller naturality square or general
 omega-level pointwise assembly. A constructor-specific identity observation
 at the existing zero-cone universal transformation and a postcomposition
@@ -424,6 +424,9 @@ categorical; path conversion is confined to proof-valued modification Homs.
 Next queue: factor the qualified Γ/H candidate at its existing semantic
 owners, distinguish proposed structural introductions from derived helpers,
 and complete promotion/consumer qualification before exposing a library API.
+UA-4j first promotes the ordinary modification/unit-law support; the actual
+Γ/H replay imports that positive owner. The other structural candidates and
+Γ/H definitions still require their own placement and integration checks.
 Retain the already qualified first-arrow projection candidates and all
 computational inverse data. The 101-assertion audit is not a substitute for
 joint native/CAS checks after promotion. The stronger D[θ] runtime comparison

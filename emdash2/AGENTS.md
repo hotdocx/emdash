@@ -77,7 +77,12 @@ General higher terminality replacement remains unimplemented. The new
 [universality assembly plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 is now active under user acceptance (2026-09-17): generic whole adjunction
 assembly, primary terminality, and the separately bounded Γ/input-H comparison.
-The Γ prototype remains unqualified; it is not a regression in native consumers.
+The ordinary Γ/H candidate now checks as a whole isomorphism with retained
+inverse data and point observations; its public integration is in progress.
+`emdash3_2_one_cat_modifications.lp` owns its first promoted support interface:
+ordinary modification introduction and a derived staged unit-law observation.
+Γ's remaining structural views and definitions stay in the linked audit until
+their owner/integration gates pass. Existing native consumers remain qualified.
 Op/profile and six-term deferrals remain in force.
 Point comparisons do not establish whole parameter action. Operational presentation
 comparisons should use actual internal maps with retained inverse/coherence data and whole K/Q/H

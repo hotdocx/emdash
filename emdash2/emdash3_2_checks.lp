@@ -19,7 +19,7 @@ require open emdash.emdash3_2 emdash.emdash3_2_one_cat_terminal_adjunction_famil
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
-require open emdash.emdash3_2_strict_pointwise_equivalences;
+require open emdash.emdash3_2_strict_pointwise_equivalences emdash.emdash3_2_one_cat_modifications;
 require open emdash.emdash3_2_direct_cover_completion_locality;
 require open emdash.emdash3_2_direct_cover_completion_universality;
 require open emdash.emdash3_2_direct_cover_sheafification;

@@ -614,6 +614,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_eq1_hom_action.lp"),
     Path("emdash3_2_eq1_evidence_property.lp"),
     Path("emdash3_2_strict_pointwise_equivalences.lp"),
+    Path("emdash3_2_one_cat_modifications.lp"),
     Path("emdash3_2_telescope_localization_hit.lp"),
     Path("emdash3_2_integer_localization.lp"),
     Path("emdash3_2_circle_hit.lp"),

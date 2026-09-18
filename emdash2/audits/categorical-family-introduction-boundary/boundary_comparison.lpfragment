@@ -65,15 +65,6 @@ symbol ua4i_boundary_right [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
   (@ua4i_family_boundary B C C1 t T A D h S P) (@ua4h_source_to B C C1 t T A D h);
 
 
-// Stage the existing transfor unit computation before specializing its source.
-symbol ua4i_tapp1_identity_path [I C : Cat] (F G : τ (Functor I C))
- (eta : τ (@Transf I C F G)) (x : τ (Obj I))
- : τ (@= (Hom C (@fapp0 I C F x) (@fapp0 I C G x))
-     (@tapp1_fapp0 I C F G x x eta (@id I x))
-     (@tapp0_fapp0 I C F G x eta))
-≔ @eq_refl (Hom C (@fapp0 I C F x) (@fapp0 I C G x))
-    (@tapp0_fapp0 I C F G x eta);
-
 symbol ua4i_boundary_left_point_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
  (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
@@ -86,7 +77,7 @@ symbol ua4i_boundary_left_point_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_
   (@ua4i_boundary_left B C C1 t T A D h S P))
      (@tapp0_fapp0 B C A (@kernel_adjunction_family_func B C S t T P D) x (@ua4i_family_boundary B C C1 t
   T A D h S P)))
-≔ @ua4i_tapp1_identity_path (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
+≔ @one_cat_transf_identity_path (@ZeroArrowCone_cat C t T) C C1 (@zero_arrow_cone_first_func C t T)
   (@kernel_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_diagram_func C t
   T)) (@kernel_adjunction_family_boundary_transf (@ZeroArrowCone_cat C t T) C S t T P
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
@@ -102,7 +93,7 @@ symbol ua4i_boundary_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
  : τ (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
   (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P))
-≔ @ua4h_one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+≔ @one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
   t T P D) (@ua4i_boundary_left B C C1 t T A D h S P) (@ua4i_boundary_right B C C1 t T A D h S P)
    (λ x : τ (Obj B), @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func
   B C S t T P D) x)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C
@@ -135,7 +126,7 @@ symbol ua4i_boundary_from [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (S : τ (@PreadditiveCategory C)) (P : τ (@KernelAdjunctionStructure C S t T))
  : τ (Hom (@Transf_cat B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T P D))
   (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P))
-≔ @ua4h_one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
+≔ @one_cat_modification B C C1 (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C S
   t T P D) (@ua4i_boundary_right B C C1 t T A D h S P) (@ua4i_boundary_left B C C1 t T A D h S P)
    (λ x : τ (Obj B), @path_to_hom (Hom_cat C (@fapp0 B C A x) (@fapp0 B C (@kernel_adjunction_family_func
   B C S t T P D) x)) (@tapp0_fapp0 B C (@ua4h_source B C C1 t T A D h) (@kernel_adjunction_family_func B C

@@ -417,6 +417,15 @@ Cat-specific spelling. When the target is `Cat_cat`, that owner computes to
 the established displayed form `tdapp0_fapp0(Y,Theta)` while the whole hom
 action remains `tdapp0_func(Y)`.
 
+For OneCat(C), the existing whole α,β:F⇒G and native component cells
+`m[x] : α[x]→β[x]` admit `one_cat_modification(C1,m) : α→β`.
+Its component is observed through these same generic `tapp0_hom_fapp0` /
+`tapp0_func` owners. The constructor is an explicit ordinary structural
+introduction; it asks for no extra naturality-square field and supplies no
+unrestricted higher pointwise assembly. `one_cat_transf_identity_path` is the
+related derived unit-law observation with the same ordinary-target guard;
+it is a named proof, not a new runtime reduction.
+
 Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
 category.

@@ -180,6 +180,7 @@ if [[ ${#files[@]} -eq 0 ]]; then
   files+=(emdash3_2_cokernel_adjunction_presentations.lp)
   files+=(emdash3_2_adjunction_mates.lp)
   files+=(emdash3_2_one_cat_adjunction_families.lp)
+  files+=(emdash3_2_one_cat_modifications.lp)
   files+=(emdash3_2_product_family_views.lp)
   files+=(emdash3_2_one_cat_product_adjunction.lp)
   files+=(emdash3_2_one_cat_product_families.lp)

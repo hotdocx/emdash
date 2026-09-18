@@ -1736,3 +1736,73 @@ checks. The core remains SHA-256
 `dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`.
 The audit's opening status has been consolidated so its historical “next”
 statements do not obscure the current whole-H result and promotion boundary.
+
+### UA-4j — First Ordinary Support Promotion
+
+Previous turn: progress at `842899de`; the worktree is clean and the published
+baseline remains an ancestor. The full 101-assertion candidate passes again
+(`ua4i_whole_homology_replay-20260917-235223.log`). No previous checker is live.
+
+First promote the independently owned ordinary modification introduction to
+`emdash3_2_one_cat_modifications.lp`, retaining its native Transf_cat and
+component projections. Include the staged transfor identity lemma there with
+an explicit OneCat target guard, matching its actual homology consumers and
+avoiding an unrestricted higher-profile claim. The introduction remains an
+explicit structural primitive; the unit lemma is derived from the existing
+cut. Replace the audit declarations with imports/usages of this one owner.
+Keep Γ, its other proposed views and the H comparison in the audit until
+their owner factoring is complete. Validate the new module, focused reviewer,
+full Γ/H consumer and integrated nucleus, with warning/catalog/health and
+standing-owner documentation synchronized before checkpoint.
+
+The first support owner is now `emdash3_2_one_cat_modifications.lp`.
+`one_cat_modification` retains the checked structural introduction and both
+component projections. The derived `one_cat_transf_identity_path` requires
+OneCat(C), the profile already present in its actual homology consumers.
+This guard qualifies the public helper for the ordinary target; it adds no
+runtime identity rule or caller obligation beyond those existing consumers.
+The five-check focused reviewer covers native/evaluation components, staged
+opposite-identity observation and noncollapse cases.
+
+The original audit introduction file and duplicate unit definition have been
+removed, with their history retained in Git. The audit imports the public
+owner and uses its actual names. The complete Γ/H consumer still passes all
+101 assertions (`ua4j_whole_homology_import-20260918-000310.log`). No Γ-specific
+alias or second primitive implementation is retained. The rest of the Γ/H
+candidate and its other projection views remain non-library until their
+own placement and integration gates pass.
+
+Validation receipts: full candidate owner
+`ua4j_modification_owner-20260917-235802.log`, public owner with compiled object
+`emdash3_2_one_cat_modifications-20260918-000209.log`, and imported reviewer
+`one_cat_modifications-20260918-000245.log`. Old audit, candidate and public
+owner warning inventories are empty and agree in all five dimensions
+(`tmp/probes/ua4j_owner_warning_comparison.json`). These focused checks use
+2GiB/90s/o20 with SR/warnings enabled.
+
+The final integrated nucleus also passes
+(`emdash3_2_checks-20260918-001708.log`), using compiled parents and its existing
+6GiB/90s/o20,v1024 profile with SR enabled. The new import shares the adjacent
+require line, preserving diagnostic line locations and avoiding thousands of
+irrelevant generated-catalog line-number changes. The final source was checked
+after that import formatting adjustment; the earlier nucleus receipt is not
+substituted for it.
+
+All eight nonsplit artifact hashes remain unchanged, and their recursively
+inspected import graphs do not include the new owner
+(`tmp/probes/ua4j_unchanged_cas_imports.json`). No existing semantic library
+owner changed in this tranche. Their 94 assertions therefore retain the
+previous exact-source qualification; no unnecessary CAS aggregate replay is
+claimed or run. Later promotion of the existing-owner projection views will
+still require fresh affected native/CAS checks.
+
+The module is registered in the checker/metrics lists and imported by the
+nucleus. Foundations, canonical syntax, the standing owner map, report index,
+AGENTS, living inventory and audit recipes now distinguish this positive
+owner from the remaining candidate. The module SHA-256 is
+`d6e0fe8399a259ef566ffa22e4223b72a9b5840b179df2ec36df585b1f346537`.
+The strict catalog is current; source-health collects 1275 files at snapshot
+`81406e74d78c0ed6159159f33c071d7dae94447a382aff57dc0db189409e2bf5`.
+The inferred-slot audit, source TOC and 182 book evidence claims pass.
+Book exposition remains scheduled for UA-6; no assembled book was hand-edited.
+The goal remains active, and no main integration or publication occurs.
