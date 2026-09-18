@@ -2038,3 +2038,124 @@ Final `emdash3_2_gray_transformation_graph.lp` SHA-256: `42853f5764dfded28209f77
 Final `emdash3_2_represented_comma_families.lp` SHA-256: `17544bc239412c1306f0b241586bdf379e1be801c93b03e1d349d240a5b69ac7`.
 
 Final `emdash3_2_transfor_whiskering.lp` SHA-256: `3d9eb23fdd89a0cb547bde1814c9786f7a969a9ead27d79c8db2b6c2ccaf42be`.
+
+### UA-4m — Public Whole Triangle And Homology Comparison
+
+Previous turn: progress at `727ec7ce`; the worktree is clean and the published
+baseline remains an ancestor. The actual 38-assertion H import consumer passes
+again (`ua4_library_whole_homology-20260918-011717.log`). No prior checker is live.
+
+Factor the remaining checked definitions into an ordinary zero-arrow-family
+classification owner, a whole homology-family comparison owner, and a separate
+downstream evaluation/point view. Keep intermediate cancellation and diagram
+proof stages protected; expose the actual family, retained whole triangle,
+original boundary-diagram comparison and H isomorphism with existing inverse
+projections. The body of every construction is the qualified audit body with
+reviewed names/imports, not a new primitive or normalization rule. The final
+point view must continue to use zero_arrow_family_point_input. Probe complete
+candidate owners and actual public consumers before promoting and retiring
+the duplicate definition fragments. Preserve all ordinary guards, original
+K/Q parameters and existing model contracts.
+
+The public factoring now passes. The zero-arrow-family classification owner
+has thirteen derived definitions (nine public, four protected), the whole
+homology-family comparison owner has thirty-two (four public, twenty-eight
+protected), and the downstream point owner has one public definition.
+The exposed results retain the actual Γ, τΓ and its whole triangle,
+the image under the original whole kernel mate, the original reindexed
+boundary diagram and its isomorphism, H_family≅H_native∘Γ, and evaluation at
+the existing point input. Every original K/Q parameter and ordinary guard
+is retained. No primitive, rewrite, unifier, opacity or inverse choice changes.
+
+Candidate owner/consumer checks pass in `ua4m_candidate_results.json` and
+`ua4m_final_candidate_results.json` under `tmp/probes`. One migrated kernel-mate
+assertion initially named the newly protected triangle implementation map.
+It now observes exactly that selected map through the public IsoEvidence
+projection; both whole maps and their computation are retained. This repairs
+the reviewer boundary, not the construction. Two further public assertions
+evaluate the actual triangle's forward and inverse maps at an input and
+recover their original identity components.
+
+Public compilation receipts are
+emdash3_2_one_cat_zero_arrow_family_classification-20260918-012613.log,
+emdash3_2_one_cat_homology_family_comparison-20260918-012614.log, and
+emdash3_2_one_cat_homology_family_comparison_points-20260918-012619.log.
+The final public triangle/H/point reviewers contain 13/6/5 assertions;
+private owner controls retain 17/16 assertions. All pass with empty warning
+inventories. Original comma and projection controls remain independently
+qualified. The seven promoted definition/control fragments are deleted;
+source owners, registered reviewers and the assertion-only private controls
+replace them, with Git preserving the earlier versions.
+
+A concrete model-interface reviewer specializes the new whole comparison to
+CommRingFreydPresentation_cat(R), using the existing FreydAdjunctionModel's
+P/Q. Its target is literally freyd_adjunction_model_func(M)∘Γ. Both retained
+whole map projections have the original model H endpoints. It passes
+(`freyd_whole_homology_family_comparison-20260918-013030.log`, 5.661s), with
+no old kernel/cokernel dictionary, substituted H or new model contract.
+This is a specialization under the existing supplied model, not closed model
+construction or a claim that frontend model synthesis is now automatic.
+
+The Freyd reviewer has 27 inherited warnings. A model-only import control has
+26; the additional block is the existing NType composition-delegation rule
+against the existing terminal-arrow cut. Importing the unchanged terminal
+owner before the unchanged model owner reproduces all 27 warnings without
+any new comparison module
+(`ua4m_freyd_terminal_import_baseline-20260918-014139.log`). All five normalized
+inventory dimensions match that control. The full native CAS inventories
+below are unchanged. This is an import-order diagnostic, not a new rule or a
+reason to alter terminal normal forms. Exact owner/reviewer comparisons are
+in `tmp/probes/ua4m_warning_comparison.json`.
+
+The final integrated nucleus passes
+(`emdash3_2_checks-20260918-013041.log`, 9.928s) with all new owners imported,
+compiled parents and the recorded 6GiB/90s/o20,v1024 quiet profile, SR on.
+Focused owners/reviewers use 2GiB/90s/o20 with SR/warnings enabled. The final
+nonsplit gate goes beyond carrying old imports forward: each of the eight
+unchanged artifact bodies is prefixed only with an import of the new public
+H point owner, which loads the complete Γ/triangle/H interface. Original and
+wrapper hashes are recorded in `ua4m_cas_manifest.json`, and all 94 assertions
+pass under the existing serial 6GiB/180s/o20,v1024 profile, warnings/SR on,
+no swap and the 64MiB file limit. No source proof data or model contract is
+changed. Results:
+
+| Artifact | Assertions | Seconds | Log |
+| --- | ---: | ---: | --- |
+| LES diagram | 48 | 36.155 | `cc2c2_les_compiled_diagram-20260918-013051.log` |
+| Snake diagram | 15 | 24.633 | `cc2c2_snake-20260918-013127.log` |
+| LES exactness 0 | 3 | 34.993 | `cc2c2_les_compiled_exactness_0-20260918-013152.log` |
+| LES exactness 1 | 3 | 23.520 | `cc2c2_les_compiled_exactness_1-20260918-013227.log` |
+| LES exactness 2 | 3 | 29.324 | `cc2c2_les_compiled_exactness_2-20260918-013250.log` |
+| Displayed LES exactness | 7 | 95.979 | `cc2c2_les_compiled_displayed_exactness-20260918-013320.log` |
+| Snake certificate signatures | 10 | 60.034 | `cc2c2_snake_certificate_signatures-20260918-013456.log` |
+| Displayed snake certificate | 5 | 59.676 | `cc2c2_snake_certificate-20260918-013556.log` |
+
+All eight retain the same 34 inherited warnings, matching categories, heads,
+rule families, normalized locations and parser status against UA-4k. Location
+normalization accounts only for the new import line and the earlier graph
+helper move. `ua4m_cas_warning_comparison.json` records this; the largest
+reported top_heap_words is 724774540 (runtime words, not RSS). Resource limits
+and GC remain explicit runtime settings, not formal computation changes.
+
+Registrations, the standing owner map, AGENTS, Foundations, canonical syntax,
+living inventory and audit README/replay are synchronized. Strict catalogue,
+source TOC, owner LHS audits, script syntax and all 182 book evidence claims
+pass. Source-health collects 1287 files at snapshot
+`572f0000657f984a30619a6bae7951a5b42bda981ccdeb067971e9da792698be`.
+The new owner bodies match the checked candidates after import/name factoring
+and comment/duplicate-import cleanup. No repository-wide aggregate was run;
+source-health is freshness evidence rather than an all-target execution claim.
+
+UA-4 is now qualified under its ordinary interpretation and recorded
+structural contracts. Its stronger direct D[θ] normalization remains
+unqualified and was not required by the actual H consumer. The complete goal
+still requires UA-1/2/3/5 reviews and UA-6's audit/book updates; continue those
+without redefining their scope. No current blocker remains. Main/origin/main
+stay at the published baseline, and the Op/profile, six-term and spectral
+research deferrals remain in force.
+
+Final `emdash3_2_one_cat_zero_arrow_family_classification.lp` SHA-256: `7ecdce037f578d171f0570056e5b89c34d10920eede8a9c13f78a42cd1f0d0df`.
+
+Final `emdash3_2_one_cat_homology_family_comparison.lp` SHA-256: `94f3fd7dbd579f524781f8a88cf22cf9cd1ecd05fa6d21d0cd24a7283edad26b`.
+
+Final `emdash3_2_one_cat_homology_family_comparison_points.lp` SHA-256: `39ef857c5cdca8c7044130467af8ebd7db35edc4dc420f549fd0efeacde44021`.

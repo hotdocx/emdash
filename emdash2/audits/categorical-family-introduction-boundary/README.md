@@ -1,12 +1,11 @@
 # Whole Native Comma-Family Introduction: Ordinary Γ/H Qualification
 
-Status (2026-09-18, UA-4l): Γ and its whole source/target comparisons now
-have a public library owner. The original functors, maps, inverses and whole
-inverse laws are retained. The actual triangle/H comparison consumes this
-public interface through imports and passes all 38 assertions. Its remaining
-triangle/boundary/H definitions stay in this audit pending their own factoring.
-The full input-construction controls are retained separately; the earlier
-101-assertion monolith is no longer the replay layout.
+Status (2026-09-18, UA-4m): Γ, both whole projections, the ordinary triangle,
+actual boundary-diagram comparison and H_family≅H_native∘Γ now have public
+library owners. The original functors, selected maps, inverses and whole laws
+are retained. A separate downstream owner evaluates the same H comparison at
+the original point input. This audit retains private construction controls
+and historical stronger normalization boundaries, not a duplicate theory.
 
 The active scope and chronological evidence belong to the
 [universality plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -55,6 +54,9 @@ separate action-profile migration remain deferred.
 | `emdash3_2_one_cat_modifications.lp` | Ordinary modification introduction and derived staged unit-law observation |
 | `emdash3_2_transfor_whiskering.lp` | Derived whole transformation and IsoEvidence whiskering |
 | `emdash3_2_represented_comma_families.lp` | Public Γ, actual projections, source IsoEvidence and ordinary target OmegaEquivAlong; protected internal graph derivation |
+| `emdash3_2_one_cat_zero_arrow_family_classification.lp` | The original whole zero-cone family and triangle IsoEvidence |
+| `emdash3_2_one_cat_homology_family_comparison.lp` | Original boundary-diagram and whole H comparison with retained inverse data |
+| `emdash3_2_one_cat_homology_family_comparison_points.lp` | Evaluation at the original point-input interface |
 
 Whole projection views are explicitly selected structural comparisons beyond
 the old component β interface. They preserve runtime heads. Sufficient
@@ -79,40 +81,47 @@ theorem or unrestricted higher semantic qualification.
 
 ## Reproduce The Current Candidate
 
-The actual H consumer imports the public represented-comma owner. Only the
-private structural controls need a full copy of that owner; its declarations
-are read directly from the maintained source, not copied into this audit.
-`replay.py` generates three consumers:
+Public reviewers import the maintained library owners. Only the private
+construction controls need full source-owner copies. `replay.py` generates
+those copies without keeping a duplicate implementation in this audit:
 
 ```bash
 python3 audits/categorical-family-introduction-boundary/replay.py
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_comma_owner_checks.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua4_library_projection.lp
+  scripts/probe.sh tmp/probes/ua4_triangle_owner_checks.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua4_library_whole_homology.lp
+  scripts/probe.sh tmp/probes/ua4_homology_owner_checks.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4_library_projection.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh examples/represented_comma_families.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh examples/transfor_whiskering.lp
+  scripts/probe.sh examples/one_cat_zero_arrow_family_classification.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/one_cat_homology_family_comparison.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/one_cat_homology_family_comparison_points.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/freyd_whole_homology_family_comparison.lp
 ```
 
-Run them serially with the standard 2GiB/90s guard and subject reduction.
-They contain respectively 64 private input controls, 2 projection controls,
-38 imported whole-H assertions, 24 public Γ assertions and 6 whole-whiskering
-assertions. The 64 controls include the formerly separate first target-arrow
-assertion; the public reviewer also retains the higher source observations.
-The registered
-[`sigma_section_projection_views` reviewer](../../examples/sigma_section_projection_views.lp)
-adds eight focused positive/negative inference and runtime controls. The
-existing section-postcomposition and ordinary-modification reviewers remain
-independent. No full-repository aggregate is implied by these scoped checks.
+Run checks serially with the standard 2GiB/90s guard and subject reduction.
+Private input/triangle/H controls contain respectively 64, 17 and 16 assertions.
+Public Γ/triangle/H/point reviewers contain 24, 13, 6 and 5 assertions. The
+Freyd-model reviewer constructs the comparison from the existing model's P/Q
+and checks both maps at the original model H endpoint. The two projection
+controls, eight Sigma/section-view controls and six whiskering observations
+remain independent. The original 101-assertion monolith is covered by this
+split, with the first target-arrow and new public component checks retained.
 
-The ten former constructor/projection-definition and duplicated action/check
-fragments are retired. Their definitions now have named library owners and
-their assertions are in the public reviewer or
-`comma_family_owner_checks.lpfragment`. Git retains the earlier versions.
+Promoted definition fragments are deleted; their bodies have library owners
+and their assertions live in the current reviewers or private controls.
+Git retains the earlier versions. The Freyd-model reviewer is an actual
+specialization to the existing formal model interface; it does not synthesize
+a closed model or replace the supplied interpretation contracts. The ledger
+separately records the nonsplit CAS replays with these modules loaded.
 
 ## UA-4c: Whole Source Comparison
 
@@ -172,7 +181,7 @@ canonical identity graph, and preserves distinct runtime presentations.
 
 ## UA-4h: Whole Triangle And Kernel-Mate Image
 
-`triangle_comparison.lpfragment` forms the actual whole transformations
+The ordinary zero-arrow-family owner forms the actual whole transformations
 L=T∘τΓ and R=h∘J(S). Their components recover h_b. The public
 one_cat_modification introduction constructs L≅R from native component cells
 between these already whole transformations. OneCat(Diag(C)) makes the
@@ -180,7 +189,7 @@ remaining coherence proposition-valued; inverse laws use its discrete Homs.
 This is not an introduction of arbitrary transformations from objectwise
 arrows or an unrestricted higher pointwise-assembly theorem.
 
-`triangle_controls.lpfragment` checks both identity presentations, a
+The triangle reviewer and private controls check both identity presentations, a
 nonidentity cone arrow, public modification evaluation, and positive/negative
 postcomposition comparisons. The τ observation is scoped to its original
 constructor-visible universal cell. The rejected broad opposite-identity
@@ -189,18 +198,14 @@ the existing whole kernel-mate functor, retaining both mapped arrows.
 
 ## UA-4i: Actual Boundary Diagrams And Whole H
 
-The five final fragments contain only definitions and observations:
-
-- `boundary_comparison.lpfragment` constructs the actual boundary-diagram map
-  with endpoints S and K(T); the inverse retains those endpoint inverses.
-- `boundary_reconstruction.lpfragment` reaches the actual reindexed native
-  diagram using the existing generator reindexing and ordinary reconstruction.
-- `whole_homology_comparison.lpfragment` applies the original whole Q and
-  retains the literal H_family and H_native∘Γ endpoints and inverse laws.
-- `whole_homology_point_view.lpfragment` evaluates this isomorphism at b and
-  the existing zero_arrow_family_point_input, as a downstream observation.
-- `whole_homology_controls.lpfragment` checks the staged unit law and original
-  point input, and rejects replacing an arbitrary endomorphism by identity.
+The whole comparison owner contains definitions only. It constructs the
+boundary-diagram map with endpoints S and K(T), retains those endpoint
+inverses, and reaches the actual reindexed native diagram through the
+existing generator/reconstruction operations. Applying the original whole Q
+retains the literal H_family and H_native∘Γ endpoints and inverse laws.
+The point owner evaluates that same isomorphism at the original
+zero_arrow_family_point_input. Public and private reviewers retain the staged
+unit-law, original input, inverse-data and noncollapse observations.
 
 The comparison uses the actual boundaries βₙΓ and βₕ, with
 K(T)∘βₙΓ≅βₕ∘S. The component proof stages the existing transfor unit law
@@ -216,13 +221,14 @@ one_cat_transf_identity_path is derived from the existing unit law. Both
 have an ordinary-target guard. Their original audit declarations were
 removed after promotion. The current replay imports this public owner.
 
-## Remaining Promotion Boundary
+## Current Qualification Boundary
 
 UA-4k integrates the supporting rules; UA-4l promotes Γ and its whole
-projection comparisons, with the actual H consumer now using public imports.
-The triangle and boundary/H definitions still need their public factoring,
-naming and import/API qualification. Preserve the first-arrow computations,
-original endpoint expressions and all inverse data. Joint native/CAS and
-integrated diagnostic evidence must be current after each affected owner
-change. The larger goal additionally retains UA-1/2/3/5 reviews and UA-6's
-final audit/book work; this audit alone does not complete that goal.
+projections; UA-4m promotes the ordinary triangle and actual diagram/H
+comparisons. The original native K/Q, H objects and inverse data remain.
+There is no new primitive or rule in these definition-factoring steps.
+Joint native/CAS and integrated diagnostic receipts are recorded in the
+assembly ledger. The stronger direct D[θ] runtime observation remains
+unqualified and was unnecessary for the actual whole H consumer.
+The larger goal still includes UA-1/2/3/5 reviews and UA-6 audit/book work;
+this comparison result alone does not complete that goal.

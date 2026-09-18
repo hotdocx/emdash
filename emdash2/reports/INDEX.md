@@ -20,9 +20,9 @@ unused wrappers, and documents generic categorical owners at Chapters 12/30.
 Whole contraction and guarded ordinary terminal/initial adjunction interfaces
 are implemented; general higher terminality is still a refinement boundary.
 The [whole input/H comparison](../audits/categorical-family-introduction-boundary/README.md)
-now has a checked ordinary candidate, including whole inverse data and its
-point-input observation. Γ and its whole projection comparisons have a public
-owner; the triangle/H definitions remain under factoring. Its structural
+now has public ordinary owners, including Γ, its whole projections, triangle,
+boundary-diagram and H comparisons, with original inverse data and downstream
+point observations. The Freyd model consumer uses the original model H. Its structural
 support now belongs to the core and existing projection/mate owners, alongside
 the ordinary modification introduction. The audit replay imports that support
 without duplicate rule declarations. Op/profile

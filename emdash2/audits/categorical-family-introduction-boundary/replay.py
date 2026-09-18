@@ -31,20 +31,15 @@ def main() -> None:
         fragment("projection_consumer.lpfragment"),
     ])
 
-    parts = [
-        "require open emdash.emdash3_2_represented_comma_families;",
-        "require open emdash.emdash3_2_one_cat_modifications;",
-        "require open emdash.emdash3_2_one_cat_zero_cones;",
-    ]
-    parts += [fragment(name) for name in (
-        "triangle_comparison.lpfragment", "triangle_controls.lpfragment",
-        "boundary_comparison.lpfragment", "boundary_reconstruction.lpfragment",
-        "whole_homology_comparison.lpfragment", "whole_homology_point_view.lpfragment",
-        "whole_homology_controls.lpfragment",
-    )]
-    # All computation/comparison rules now come from the positive owners.
-    assert not any(re.search(r"(?m)^(?:unif_rule|rule)\b", p) for p in parts[1:])
-    write("ua4_library_whole_homology.lp", parts)
+    for stage, owner in (
+        ("triangle", "emdash3_2_one_cat_zero_arrow_family_classification.lp"),
+        ("homology", "emdash3_2_one_cat_homology_family_comparison.lp"),
+    ):
+        controls = fragment(stage + "_owner_checks.lpfragment")
+        assert not re.search(r"(?m)^(?:unif_rule|rule)\b", controls)
+        write("ua4_" + stage + "_owner_checks.lp", [
+            (root / owner).read_text(), controls,
+        ])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,130 @@
+require open emdash.emdash3_2_one_cat_zero_arrow_family_classification;
+// catalog-area: Whole native homology family comparison
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D)) (x : τ (Obj B)) ⊢
+ @tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+  (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D x (@one_cat_zero_arrow_family_triangle_left B C C1 t
+  T A D h)
+ ≡ @tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+  (@terminal_arrow_diagram_func C t T) A) D x h;
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D)) (x : τ (Obj B)) ⊢
+ @tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+  (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D x (@one_cat_zero_arrow_family_triangle_right B C C1 t
+  T A D h)
+ ≡ @tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+  (@terminal_arrow_diagram_func C t T) A) D x h;
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (F G : τ (Functor B C)) (alpha beta : τ (@Transf B C F G))
+ (m : Π x : τ (Obj B), τ (Hom (Hom_cat C (@fapp0 B C F x) (@fapp0 B C G x))
+     (@tapp0_fapp0 B C F G x alpha) (@tapp0_fapp0 B C F G x beta)))
+ (x : τ (Obj B)) ⊢
+ @tapp0_hom_fapp0 B C F G alpha beta x
+   (@one_cat_modification B C C1 F G alpha beta m) ≡ m x;
+
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (F G : τ (Functor B C)) (alpha beta : τ (@Transf B C F G))
+ (m : Π x : τ (Obj B), τ (Hom (Hom_cat C (@fapp0 B C F x) (@fapp0 B C G x))
+     (@tapp0_fapp0 B C F G x alpha) (@tapp0_fapp0 B C F G x beta)))
+ (x : τ (Obj B)) ⊢
+ @fapp1_fapp0 (@Transf_cat B C F G)
+   (Hom_cat C (@fapp0 B C F x) (@fapp0 B C G x)) (@tapp0_func B C F G x) alpha beta
+   (@one_cat_modification B C C1 F G alpha beta m) ≡ m x;
+
+assertnot [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (F G : τ (Functor B C)) (alpha beta : τ (@Transf B C F G)) ⊢
+ @eq_refl (@Transf B C F G) alpha : τ (@= (@Transf B C F G) alpha beta);
+
+assert [A B C D : Cat] (F : τ (Functor A B)) (G : τ (Functor B C))
+ (H : τ (Functor C D)) ⊢
+ @eq_refl (Functor A D)
+   (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) A C D H
+     (@comp_cat_fapp0 A B C G F))
+ : τ (@= (Functor A D)
+     (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) A C D H
+       (@comp_cat_fapp0 A B C G F))
+     (@comp_cat_fapp0 A B D (@comp_cat_fapp0 B C D H G) F));
+
+assertnot [A B C D : Cat] (F : τ (Functor A B)) (G : τ (Functor B C))
+ (H H0 : τ (Functor C D)) ⊢
+ @eq_refl (Functor A D)
+   (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) A C D H
+     (@comp_cat_fapp0 A B C G F))
+ : τ (@= (Functor A D)
+     (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) A C D H
+       (@comp_cat_fapp0 A B C G F))
+     (@comp_cat_fapp0 A B D (@comp_cat_fapp0 B C D H0 G) F));
+
+assertnot [A B C D : Cat] (F : τ (Functor A B)) (G : τ (Functor B C))
+ (H : τ (Functor C D)) ⊢
+ @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) A C D H
+   (@comp_cat_fapp0 A B C G F)
+ ≡ @comp_cat_fapp0 A B D (@comp_cat_fapp0 B C D H G) F;
+
+assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (a : τ (Obj C))
+ (d : τ (Functor WalkingArrow_cat C))
+ (h0 : τ (@Transf WalkingArrow_cat C
+   (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) a) d)) ⊢
+ @tapp1_fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0
+  (@ZeroArrowCone_cat C t T) C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
+  (@zero_arrow_cone_first_func C t T)) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_obj C t T a
+  d h0) (@zero_arrow_cone_obj C t T a d h0) (@zero_arrow_cone_universal_transf C C1 t T) (@id
+  (@ZeroArrowCone_cat C t T) (@zero_arrow_cone_obj C t T a d h0)) ≡ h0;
+
+assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (a : τ (Obj C))
+ (d : τ (Functor WalkingArrow_cat C))
+ (h0 : τ (@Transf WalkingArrow_cat C
+   (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) a) d)) ⊢
+ @tapp1_fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0
+  (@ZeroArrowCone_cat C t T) C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
+  (@zero_arrow_cone_first_func C t T)) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_obj C t T a
+  d h0) (@zero_arrow_cone_obj C t T a d h0) (@zero_arrow_cone_universal_transf C C1 t T) (@id (Op_cat
+  (@ZeroArrowCone_cat C t T)) (@zero_arrow_cone_obj C t T a d h0)) ≡ h0;
+
+assertnot [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (a : τ (Obj C))
+ (d : τ (Functor WalkingArrow_cat C))
+ (h0 : τ (@Transf WalkingArrow_cat C
+   (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) a) d)) (u : τ (Hom
+  (@ZeroArrowCone_cat C t T) (@zero_arrow_cone_obj C t T a d h0) (@zero_arrow_cone_obj C t T a d h0))) ⊢
+ @tapp1_fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0
+  (@ZeroArrowCone_cat C t T) C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T)
+  (@zero_arrow_cone_first_func C t T)) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_obj C t T a
+  d h0) (@zero_arrow_cone_obj C t T a d h0) (@zero_arrow_cone_universal_transf C C1 t T) u ≡ h0;
+
+// The retained to map evaluates to its original identity component.
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D)) (b : τ (Obj B)) ⊢
+ @tapp0_hom_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D (@one_cat_zero_arrow_family_triangle_left B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h) b
+   (@iso_evidence_to (@Transf_cat B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D) (@one_cat_zero_arrow_family_triangle_left B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_evidence B C C1 t T A D h))
+ ≡ @id (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
+   (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D b (@one_cat_zero_arrow_family_triangle_left B C C1 t T A D h));
+
+// The retained from map evaluates to its original identity component.
+assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
+ (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
+ (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+ (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+     (@terminal_arrow_diagram_func C t T) A) D)) (b : τ (Obj B)) ⊢
+ @tapp0_hom_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_left B C C1 t T A D h) b
+   (@iso_evidence_from (@Transf_cat B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D) (@one_cat_zero_arrow_family_triangle_left B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h) (@one_cat_zero_arrow_family_triangle_evidence B C C1 t T A D h))
+ ≡ @id (Hom_cat (Functor_cat WalkingArrow_cat C) (@fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
+   (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h)) D b (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h));

@@ -413,6 +413,16 @@ Whole `transf_prewhisker`/`transf_postwhisker` and their IsoEvidence counterpart
 are derived applications of the original composition functors; they add no
 new naturality data or rewrite policy.
 
+For a native zero-arrow family use `one_cat_zero_arrow_family_func` and its
+retained whole triangle IsoEvidence. The corresponding
+`one_cat_homology_family_comparison_evidence` has the literal endpoints
+H_family and H_native∘Γ. Its maps arise by applying the original Q to the
+actual boundary-diagram comparison. The separate
+`one_cat_homology_family_point_comparison_evidence` is evaluation of this same
+whole result at the existing point input. All three keep the ordinary target
+guard and original K/Q; their inverse data use the existing IsoEvidence
+projections.
+
 Likewise, write displayed identity using the generic identity notation. The
 compatibility name `id_transfd(FF)` is a transparent view of
 `id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel

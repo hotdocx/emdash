@@ -77,8 +77,9 @@ General higher terminality replacement remains unimplemented. The new
 [universality assembly plan](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 is now active under user acceptance (2026-09-17): generic whole adjunction
 assembly, primary terminality, and the separately bounded Γ/input-H comparison.
-The ordinary Γ/H candidate now checks as a whole isomorphism with retained
-inverse data and point observations; its public integration is in progress.
+The ordinary Γ/H comparison now has public owners, retaining whole inverse
+data and downstream point observations. Its qualification is recorded in the
+active assembly ledger.
 `emdash3_2_one_cat_modifications.lp` owns its first promoted support interface:
 ordinary modification introduction and a derived staged unit-law observation.
 The remaining Sigma/section projection views and component rules now live at
@@ -86,8 +87,12 @@ their original core, varying-projection, zero-cone and mate-view owners.
 `emdash3_2_represented_comma_families.lp` now owns Γ and its whole source/target
 comparisons, with the internal graph derivation protected in that same owner.
 `emdash3_2_transfor_whiskering.lp` owns the derived transformation and
-isomorphism whiskering helpers. The remaining triangle/H definitions stay in
-the linked audit and consume these public imports. Preserve
+isomorphism whiskering helpers. The ordinary zero-arrow-family classification,
+whole homology-family comparison and separate point-comparison owners expose
+the retained triangle, actual boundary-diagram isomorphism and
+H_family≅H_native∘Γ. They add definitions only and retain the original K/Q.
+Private construction controls remain in the linked audit; public reviewers
+and the Freyd model consumer use normal imports. Preserve
 the composite-argument guard on the new postcomposition view so existing
 paired-family reindexing keeps its specialized comparison.
 Op/profile and six-term deferrals remain in force.

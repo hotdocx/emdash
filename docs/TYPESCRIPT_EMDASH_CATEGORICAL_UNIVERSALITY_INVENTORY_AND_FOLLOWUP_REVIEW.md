@@ -225,7 +225,7 @@ of a classifier does not construct an inhabitant for every category.
 | Whole H, Coim⇒Im, `OneCatAdjunctionNormality`, `OneCatAbelianAdjunctionStructure` | [H families](../emdash2/emdash3_2_homology_adjunction_families.lp), [normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp), [Abelian package](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp). | H is derived through the same K/Q. Normality is Ω evidence along the actual whole Coim⇒Im map, retaining its inverse. Native δ/exactness and their finite ordinary/CAS observations use this primary route. |
 | `one_cat_diagram_reconstruction_iso` | [Diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp): declared ordinary D∘E≅id on the walking-arrow diagram category. | Derived faithfulness and actual inverse diagram maps support the universal-operation consumers. This is a shape-comparison assembly, not a new kernel universality or an unrestricted equivalence with higher LaxArrow(C). |
 | `one_cat_arrow_family_comparison_evidence`, `one_cat_diagram_family_reconstruction_evidence` | [Arrow-family isomorphisms](../emdash2/emdash3_2_one_cat_arrow_family_isomorphisms.lp) and [family reconstruction](../emdash2/emdash3_2_one_cat_diagram_family_reconstruction.lp): fully defined whole maps and inverse-law evidence. | [Generic reflection](../emdash2/emdash3_2_one_cat_diagram_family_reflection.lp) and the two original reconstruction maps have independent owners; their moved signatures/bodies are unchanged. IsoEvidence laws are not advertised as additional DefIso runtime cuts. |
-| Γ and the whole H comparison | [Public Γ/projection owner](../emdash2/emdash3_2_represented_comma_families.lp); the [triangle/H definitions](../emdash2/audits/categorical-family-introduction-boundary/README.md) remain audit candidates. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J), retaining whole source IsoEvidence and ordinary target OmegaEquivAlong. Public inputs and the actual whole H import consumer check with original inverses and point observations. Stronger direct D[θ] runtime normalization remains unqualified and was unnecessary for this consumer. |
+| Γ and the whole H comparison | [Public Γ/projection owner](../emdash2/emdash3_2_represented_comma_families.lp), [ordinary triangle](../emdash2/emdash3_2_one_cat_zero_arrow_family_classification.lp), and [whole H comparison](../emdash2/emdash3_2_one_cat_homology_family_comparison.lp); [private controls](../emdash2/audits/categorical-family-introduction-boundary/README.md) remain an audit. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J), retaining whole source IsoEvidence and ordinary target OmegaEquivAlong. Public inputs and the actual whole H import consumer check with original inverses and point observations. Stronger direct D[θ] runtime normalization remains unqualified and was unnecessary for this consumer. |
 
 ## The Actual Relation Map
 
@@ -341,7 +341,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ and its whole projection comparisons now have a public owner; triangle/H definition factoring and final API qualification remain. Direct higher target normalization is unqualified and was unnecessary for this consumer |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -367,7 +367,7 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: complete public triangle/H factoring after Γ promotion. Its
+Current queue: resume the remaining UA-1/2/3/5 reviews after the qualified public Γ/H tranche, then complete UA-6. Its
 whole source comparison p∘Γ≅A, target comparison q∘Γ≃D and triangle
 modification T∘τΓ≅h∘J(S) retain the original A,D,h and their action. The
 actual boundary-diagram isomorphism and original Q then give
@@ -398,9 +398,12 @@ consumer pass without protected names or a graph source copy. The 64 private
 controls remain an owner-position audit. No primitive or rule changes.
 
 The ledger records owner-position/SR and five-part warning comparisons,
-focused consumer checks and native/CAS qualification. The remaining triangle/H
-definitions are still audit candidates; Γ promotion alone does not establish
-the final H library API. The inherited compiled-import
+focused consumer checks and native/CAS qualification. UA-4m gives the retained triangle, actual boundary-diagram/H comparison and
+downstream point view public definition owners. Their private proof stages
+remain protected. Public imports retain whole inverse laws and components;
+the Freyd reviewer uses the existing P/Q and literal original model H.
+The original nonsplit artifact bodies are also replayed with the new comparison
+modules loaded. This adds no model contract or closed-model construction. The inherited compiled-import
 Pi reviewer boundary remains separately recorded, without a broad eta fix
 or a claimed full-repository green aggregate. Complete the remaining
 UA-1/2/3/5 reviews and UA-6 audit/book work after Γ/H integration.

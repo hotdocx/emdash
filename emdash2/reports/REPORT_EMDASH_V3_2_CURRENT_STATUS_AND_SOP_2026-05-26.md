@@ -42,9 +42,9 @@ resource and warning receipts. This does not repair the separate Op/profile
 qualifications. The [whole input/H-comparison candidate](../audits/categorical-family-introduction-boundary/README.md)
 now checks both whole input projections, the original input transformation,
 and H_family≅H_native∘Γ with retained inverse data and point observations.
-Its structural support is at the existing library owners. Γ and its whole
-projection comparisons now have a public definition owner; triangle/H
-factoring remains in progress. The active assembly ledger records joint
+Its structural support is at the existing library owners. Γ, its whole
+projections, ordinary triangle and H comparison now have public definition
+owners; the point comparison remains downstream. The active assembly ledger records joint
 native-consumer qualification. Op/duality, action-profile integration and the
 large six-term comparison remain deferred.
 
@@ -887,6 +887,20 @@ both are published, with the live PDF matching the checked artifact. See the
   copied graph source. This module adds definitions only. Its whole target
   inverse retains OneCat(Y), and stronger D[θ] runtime normalization is not
   claimed. It does not replace hom_int/homd_int or repair higher Op variance.
+- `emdash3_2_one_cat_zero_arrow_family_classification.lp`: specializes Γ to
+  the existing native zero-cone input, retaining the original universal τ,
+  source/target maps and the whole triangle isomorphism T∘τΓ≅h∘J(S).
+  Callers supply the original whole A,D,h, with no extra square proof.
+- `emdash3_2_one_cat_homology_family_comparison.lp`: derives the actual native
+  boundary-diagram comparison and applies the original whole Q to obtain
+  H_family≅H_native∘Γ at its original literal endpoints. The maps, selected
+  inverses and laws are retained; no operational functor is cast along a path.
+  Its kernel-mate image is also retained as a whole comparison. The separate
+  `emdash3_2_one_cat_homology_family_comparison_points.lp` evaluates this same
+  isomorphism at the original zero_arrow_family_point_input. The Freyd-model
+  reviewer instantiates the whole comparison using its existing P/Q and
+  original freyd_adjunction_model_func; no old record route or new model
+  contract is involved. These owners add definitions only and retain OneCat(C).
 - `emdash3_2_gray_cubes.lp`,
   `emdash3_2_gray_transformation_graph_profile.lp`,
   `emdash3_2_gray_cube_decoder.lp`, and

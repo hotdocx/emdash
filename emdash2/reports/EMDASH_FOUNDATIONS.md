@@ -3898,8 +3898,25 @@ public stable graph keeps its selected computation in its separate module.
 transformation and isomorphism actions through the original composition
 functors. The [public reviewer](../examples/represented_comma_families.lp)
 checks the retained input computations and whole inverse observations. The
-triangle/H audit consumes these public operations through ordinary imports;
-its own final definition factoring remains in progress.
+ordinary zero-arrow-family owner consumes these public operations and retains
+T∘τΓ≅h∘J(S) as a whole isomorphism of transformations.
+
+The [whole homology-family comparison](../emdash3_2_one_cat_homology_family_comparison.lp)
+uses these same input maps and the original K/Q. It constructs the actual
+boundary-diagram isomorphism with endpoint maps S and K(T), retaining its
+inverse, then applies Q to obtain H_family≅H_native∘Γ. Its endpoints are the
+original functor terms; no replacement H object or path-transported functor is
+introduced. Existing ordinary modification, inverse-square cancellation and
+diagram reflection supply the law evidence. Those are proof-valued cells in
+the ordinary profile, while the diagram maps and H inverse remain data.
+
+[Point evaluation](../emdash3_2_one_cat_homology_family_comparison_points.lp)
+is downstream of this whole comparison and uses the original point-input
+interface. The [Freyd-model consumer](../examples/freyd_whole_homology_family_comparison.lp)
+instantiates it with the existing model's P/Q; the target is literally that
+model's original H composed with Γ. This is a derived comparison under the
+supplied model contract, not construction of a closed model or a general
+higher homology normalization theorem.
 
 A Pi section also has a stable Grothendieck totalization
 
