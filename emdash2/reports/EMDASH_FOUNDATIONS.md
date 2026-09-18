@@ -3827,6 +3827,20 @@ not reconstruct a naturality square by hand.  The stable head also prevents
 this section-specific computation from rewriting unrelated displayed
 composites.
 
+A proof-time associativity view compares
+
+```text
+section_postcomp_sec(GG,section_postcomp_sec(FF,s))
+  ≡ section_postcomp_sec(GG∘FF,s).
+```
+
+It retains both runtime section heads and their original action. The primitive
+is not marked injective for unification: the two presentations use different
+intermediate families, which this comparison must not identify. The
+[section-postcomposition reviewer](../examples/section_postcomposition_views.lp)
+checks the whole comparison, inference from the supplied maps, the ordinary
+constant-target reading, and the retained unit and runtime boundaries.
+
 A Pi section also has a stable Grothendieck totalization
 
 ```text

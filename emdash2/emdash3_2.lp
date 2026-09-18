@@ -13063,7 +13063,9 @@ rule @fapp0 _ Cat_cat (@Pi_func $K) $E
 // Stable object action of Pi on a displayed functor.  A section s : 1 -> E
 // is postcomposed with FF : E -> D, while the named head retains the whole
 // section action rather than expanding to a generic displayed composite.
-injective symbol section_postcomp_sec
+// Keep this primitive noninjective: associativity compares section maps with
+// different intermediate families, which must not be identified by inference.
+symbol section_postcomp_sec
   [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
   (s : τ (Obj (Pi_cat E)))
@@ -13098,6 +13100,14 @@ rule @fapp0
 rule @section_postcomp_sec
       $K $E $E (@id (@Catd_cat $K) $E) $s
   ↪ $s;
+
+// Proof-time associativity of the documented postcomposition operation.
+// The two stable section-map presentations retain their runtime owners.
+unif_rule @section_postcomp_sec $K $M $D $GG
+    (@section_postcomp_sec $K $E $M $FF $s)
+  ≡ @section_postcomp_sec $K $E $D
+      (@comp_fapp0 (@Catd_cat $K) $E $M $D $GG $FF) $s
+  ↪ [ tt ≡ tt ];
 
 // Internalized-x layer: global natural package for Pi over varying bases.
 //

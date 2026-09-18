@@ -1299,3 +1299,102 @@ followed by h and H. The goal remains active and no publication is performed.
 
 Catalogue, unchanged source-health snapshot (1272 files), changed-document
 local links and exact diff whitespace checks pass for this audit checkpoint.
+
+### UA-4f — Classifying The Extracted Graph Section
+
+Previous turn: progress at `2d9d0528`; the worktree is clean and the published
+baseline remains an ancestor. The 28-assertion replay passes again
+(`ua4f_target_section_compute-20260917-211135.log`). The inspected V expression
+is the original graph section mapped successively through its Sigma action,
+total base change and reindexed target projection. The next task is its
+whole comparison with the supplied D, preserving that same A,D,h.
+
+First isolate composition of section maps, whose active source explicitly
+describes them as postcomposition. The direct Pi-compositor attempt needs
+an image-level comparison between represented and raw displayed composition.
+A direct stable-head section-associativity view still fails with E and M
+forced equal (`ua4f_section_associativity-20260917-211636.log`). The current
+section_postcomp_sec is injective, so its same-head comparison appears to
+decompose intermediate indices before using that algebraic view.
+
+An isolated full-owner experiment removes only that injectivity annotation,
+retaining the primitive declaration and every runtime rule, and retests the
+same section-associativity consumer. This is a specific inference experiment,
+not authority to weaken other constructors or to change runtime normal forms.
+Any selection requires owner/inference and actual Γ-consumer qualification.
+All checks retain the serial 2GiB/90s/o20 guard and subject reduction.
+
+The owner experiment confirms the cause: keeping the primitive noninjective
+allows the associativity comparison to check. The selected implementation
+removes only that annotation and adds the section-associativity unifier after
+the existing identity cut. No runtime rule changes and no raw-composition
+bridge is promoted. Lambdapi's local `docs/lambdapi_docs_commands.rst`
+documents injectivity as permission to infer argument equality from equality
+of applications; that inference is unsuitable for these differently grouped
+section maps. This does not assert a general defect in every previous use of
+the annotation.
+
+The full owner copy passes (`ua4f_section_assoc_owner-20260917-212329.log`).
+Normalized old/new warning inventories agree in categories, term heads, rule
+families, locations and parser issues: 157 replaceable variables and 1144
+inherited critical pairs, no parser issue. The comparison is retained in
+`tmp/probes/ua4f_section_owner_warning_comparison.json`. The active core is
+compiled with subject reduction and warnings enabled
+(`emdash3_2-20260917-212835.log`).
+
+The new positive reviewer `examples/section_postcomposition_views.lp` has
+four positive and two negative checks: explicit and inferred associativity,
+the constant-target whole-functor reading, retained unit computation,
+unchanged runtime normal forms and rejection of an arbitrary different
+section. All pass (`section_postcomposition_views-20260917-214747.log`).
+The [retained actual graph consumer](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4f-grouping-the-actual-graph-section)
+groups its original three section maps in two steps, without changing A,D,h,
+their family reframe or runtime construction. Its 30 assertions pass
+(`ua4f_graph_section_grouping-20260917-213254.log`). These are whole law
+observations, not operational equality transports. Vᵒ≃D, recovery of h and
+the whole H comparison remain open.
+
+Eight affected reviewer files pass under the serial 2GiB/90s/o20 profile:
+the new section reviewer, sigma_total, sigma_recursive_hom_action,
+fibrewise_sigma, gray_transformation_graph, gray_transformation_graph_profile,
+one_cat_native_connecting and one_cat_adjunction_zero_column_views. Results
+and exact logs are in `tmp/probes/ua4f_focused_results.json`. The full nucleus
+passes with compiled parents at the previously measured 6GiB/90s/o20,v1024
+profile, with subject reduction enabled
+(`emdash3_2_checks-20260917-215506.log`).
+
+An additional `examples/pi_funext.lp` check fails at lines 50–55 on
+`B ≡ λ x, B x`. This concerns the groupoidal Pi family, not directed Pi
+section postcomposition. Crucially, the exact core from baseline `2d9d0528`,
+compiled as a separate module and imported by the same reviewer, reproduces
+the same failure (`ua4f_pi_funext_import_baseline-20260917-215255.log`).
+Inlining that old core passes (`ua4f_pi_funext_baseline-20260917-214919.log`).
+Thus this is an inherited compiled-import inference boundary, not a regression
+from the selected section change. It is not fixed here; no eta flag or global
+rule is added, and no repository-wide green aggregate is claimed.
+
+All eight unchanged nonsplit proof–CAS artifacts pass afresh, covering all
+94 assertions, including displayed LES and snake certificates. Their hashes
+are checked against the previous corpus before execution. The serial profile
+is 6GiB/180s/o20,v1024, with SR/warnings, the 64MiB per-file limit and no swap.
+Times range from 18.256s to 81.643s; the displayed LES certificate takes
+81.643s and the snake certificate 55.340s. Exact file hashes, receipts and
+times are in `tmp/probes/ua4f_cas_replay_results.json`; the last receipt is
+`cc2c2_snake_certificate-20260917-220046.log`. No model contract, supplied
+proof, chosen inverse or generated CAS source is changed.
+
+The strict catalog, source-only health report (1273 files), inferred-slot
+audit, source TOC and 182 book evidence claims pass. Standing Foundations,
+canonical-syntax and current-status reports explain the inference/runtime
+distinction; book exposition remains scheduled for UA-6. The current tranche
+promotes only the generic section inference change. The Γ construction and
+its other structural candidates remain outside the positive library. The
+goal remains active, and no main integration or publication is performed.
+
+The final replay assembled from the tracked fragments also passes all 30
+assertions (`ua4f_graph_section_replay-20260917-220535.log`). The active core
+SHA-256 is `dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`;
+the source-only health snapshot is
+`3d11f8cc87b8816d2b6b7514ca46a9f023a0b0b8c037feac024c0ad615a9a06f`.
+Catalog/health freshness, strict inferred-slot audit, source TOC, book evidence,
+added local links and exact diff whitespace checks pass before checkpoint.

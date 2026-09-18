@@ -388,6 +388,11 @@ component is `FF[k](s[k])`; its base-arrow component is the existing
 `fdapp1_int_hom_fapp0` action applied to `s[p]`, so a lax `FF` retains its
 laxity cell rather than being silently treated as strict.
 
+For composable FF and GG, the nested section map compares at proof time with
+`section_postcomp_sec(GG∘FF,s)`. This is a whole-section comparison, not a
+runtime reassociation rule. The primitive head is noninjective so inference
+does not force the two different intermediate families to coincide.
+
 Likewise, write displayed identity using the generic identity notation. The
 compatibility name `id_transfd(FF)` is a transparent view of
 `id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel

@@ -1896,6 +1896,14 @@ No new carrier, universal-structure primitive or arbitrary arrow eta is added.
 The direct arrow action of `sigma_intro_tapp0_func` and a whole-functor
 first-projection beta remain separate.
 
+The primitive `section_postcomp_sec` now has a proof-time associativity view:
+mapping by FF and then GG compares with mapping by GG∘FF. Its runtime
+component, arrow and identity rules are unchanged. Its head is noninjective
+for unification, allowing this comparison without equating the intermediate
+families. The six-assertion `section_postcomposition_views` reviewer covers
+explicit/inferred maps, constant-target functors and negative runtime/section
+controls. This does not identify arbitrary sections or add functor eta.
+
 Independent Cat-valued displayed siblings reuse the ordinary product
 semantics rather than a new `Product_catd` head. For `B,C : Catd K`, the
 transparent family

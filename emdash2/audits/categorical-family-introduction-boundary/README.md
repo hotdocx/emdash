@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4e): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4f): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
@@ -14,6 +14,10 @@ equivalence, with retained inverses/laws and identity components, using one
 new unpromoted constant-section projection view. UA-4e now links it to q∘Γ
 and composes the equivalences, retaining inverse data and identity components.
 Identifying the extracted whole section with D remains open.
+The core now also supports proof-time association of section maps, with
+runtime computation unchanged. UA-4f uses it to group this actual extracted
+section; the combined audit passes 30 assertions. The grouping does not yet
+establish its classification as D.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -453,3 +457,51 @@ All five normalized warning inventories match the unchanged core: 157
 replaceable variables, 1144 inherited critical pairs, no parser issue
 (`tmp/probes/ua4e_owner_warning_comparison.json`). This remains an audit
 candidate, not a confluence or unrestricted higher-variance qualification.
+
+## UA-4f: Grouping The Actual Graph Section
+
+`target_section_grouping.lpfragment` observes the actual section V from
+UA-4d. Write S for the graph's fibrewise Sigma map, B for its total-base-change
+map and P for its original reframed target projection. With the original
+identity graph section s, the two checks group
+
+```text
+P⋅(B⋅(S⋅s)) ≡ (P∘B)⋅(S⋅s) ≡ ((P∘B)∘S)⋅s.
+```
+
+These are typed whole-section law observations. They construct no functor by
+path transport and do not identify this section with Op(D). The original
+A,D,h, family reframe and all retained maps remain unchanged. The next
+classification step must use the graph/inner-projection action, then recover
+h and compare the whole H construction.
+
+The generic core change is limited to `section_postcomp_sec`: it remains a
+primitive with the same runtime rules, but is no longer marked injective
+and now has the proof-time associativity view above. With the old annotation,
+the same comparison tried to equate its two different intermediate families.
+The new [positive reviewer](../../examples/section_postcomposition_views.lp)
+checks explicit and inferred arguments, constant-target functors, the old
+unit computation and negative runtime/distinct-section controls. The extra
+raw-composition view tried during investigation was not promoted.
+
+After producing `tmp/probes/ua4e_target_link_replay.lp` with the recipe above:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+audit = Path('audits/categorical-family-introduction-boundary')
+source = Path('tmp/probes/ua4e_target_link_replay.lp').read_text()
+source += '\n' + (audit / 'target_section_grouping.lpfragment').read_text()
+Path('tmp/probes/ua4f_graph_section_replay.lp').write_text(source)
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4f_graph_section_replay.lp
+```
+
+All 30 assertions pass. The actual-owner core experiment also passes with
+unchanged normalized warnings in all five dimensions (157 replaceable
+variables, 1144 inherited critical pairs, no parser issue). The changed core
+passes the nucleus and all 94 unchanged nonsplit assertions in eight artifacts.
+The [execution ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-4f--classifying-the-extracted-graph-section)
+records the profiles and the separate inherited groupoidal Pi import failure;
+these scoped checks are not a full-repository qualification.
