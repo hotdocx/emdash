@@ -1219,3 +1219,83 @@ Catalogue, unchanged source-health snapshot, changed-document local links
 and exact diff whitespace checks pass. This is an audit-only checkpoint;
 the original 94 nonsplit assertions and nucleus evidence are carried forward
 for the byte-identical library. No main integration or publication occurs.
+
+### UA-4e — Whole Sigma Base-Change Link
+
+Previous turn: progress at `aa6359cf`; worktree clean and published baseline
+still an ancestor. The retained fourteen-assertion native extraction replay
+passes again (`ua4e_baseline-20260917-201302.log`). No previous checker is live.
+
+The next link uses the already existing `sigma_pullback_total_transf` as
+one whole transformation. Applying the generic internal graph/naturality
+cell to a family map FF:E→D constructs an actual transformation
+
+```text
+Σ(FF) ∘ Σ_F(E) ⇒ Σ_F(D) ∘ Σ(F*FF).
+```
+
+Its declared type checks directly at the two original total-functor
+composites, with no additional view, axiom or caller square
+(`ua4e_sigma_basechange_naturality-20260917-201325.log`). Next inspect its
+component computation, then project the constant target coordinate and
+precompose the retained graph section to connect the actual Γ target to
+UA-4d's U. Preserve the directed cell and its variance throughout; invert it
+only with actual evidence. Probes retain the serial 2GiB/90s/o20 guard and SR.
+
+### UA-4e Native Target Link Checked
+
+The selected seven-rule candidate supplies four component computations and
+three proof-time views at existing Sigma/composition owners. The two whole
+cells themselves are built by `fapp1_compositor` and the generic internal
+transformation-graph cell for `sigma_pullback_total_transf`. Their canonical
+identity component computations are explicit extensions; no arbitrary cell
+or whole transformation is rewritten to identity. The other component rules
+expose the consumed off-diagonal base-change object and represented
+displayed-composition fibre. The views handle Sigma composition,
+constant-total second projection and sufficient same-precomposition
+congruence, with all other endpoints/operands compared.
+
+The actual Γ comparison groups its original Sigma reframe/target maps, moves
+them through total base change, projects the constant target coordinate and
+precomposes the original graph section. Op_transf gives Uᵒ⇒q∘Γ with component
+id at D(x). The ordinary OneCat(Y) wrapper supplies actual fixed-forward
+equivalence evidence. Composition with UA-4d's Vᵒ⇒Uᵒ retains the original
+inverse data and establishes Vᵒ≃q∘Γ; both inverse components and whole
+inverse-law projections check. Vᵒ≃D, recovery of h and the whole H comparison
+remain open. The retained source/target data and caller inputs are unchanged;
+no square is caller data and no functor is obtained by path transport.
+
+The [native target-link replay](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4e-link-to-the-actual-native-target)
+passes all 28 assertions with the candidate rules active before the inherited
+UA-4d checks (`ua4e_target_link_replay-20260917-210256.log`). It includes
+ordinary inverse-law projections and relevant negative controls, under the
+serial 2GiB/90s/o20 profile with warnings/SR enabled. UA-4c's three proposed
+identity-transformation guard refinements are unnecessary here and have been
+removed from this replay. Unused identity-comparison helpers were also removed.
+
+The full owner-position copy passes, including five focused controls
+(`ua4e_sigma_owner_ordered_typed-20260917-205444.log`). Its normalized warning
+inventory matches the original in all five dimensions: 157 replaceable
+variables, 1144 inherited critical pairs, no parser issue
+(`tmp/probes/ua4e_owner_warning_comparison.json`). This includes the earlier
+constant-section view in addition to the seven new candidates. The owner
+placement follows Fibre_func/fdapp1_int_cell availability; an earlier copy
+put a Fibre_func use too early. The test's raw dependent pairs also needed
+explicit family annotations. Neither correction was a mathematical change.
+
+Rejected intermediate: eagerly folding the base-change whole Hom action
+exposed represented-precomposition endpoints that did not join. The selected
+consumed-point computation preserves the old whole heads and identity cuts.
+The base-change cell needs its explicit source-identity guard for SR.
+Prewhiskering a separate identity comparison left a product-valued identity
+component unresolved; using the typed constant-projection view directly
+closed that consumer with no broad product-identity rewrite.
+
+No candidate rule or helper is installed in the positive library yet.
+The core and the existing native/CAS source graph remain unchanged, so their
+qualified nucleus and 94 nonsplit assertions are carried forward. The next
+semantic step is Vᵒ≃D through the existing graph/inner-projection action,
+followed by h and H. The goal remains active and no publication is performed.
+
+Catalogue, unchanged source-health snapshot (1272 files), changed-document
+local links and exact diff whitespace checks pass for this audit checkpoint.

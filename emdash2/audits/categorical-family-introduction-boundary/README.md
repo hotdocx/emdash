@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4d): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4e): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
@@ -11,8 +11,9 @@ unpromoted; the source comparison does not establish the target or triangle
 classification laws.
 An intermediate target-section extraction now also has a checked whole
 equivalence, with retained inverses/laws and identity components, using one
-new unpromoted constant-section projection view. Its links to q∘Γ and D are
-still open.
+new unpromoted constant-section projection view. UA-4e now links it to q∘Γ
+and composes the equivalences, retaining inverse data and identity components.
+Identifying the extracted whole section with D remains open.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -320,10 +321,10 @@ declared structural inverse interface and its laws, not only beta reduction.
 No pointwise naturality square is caller data, and no functor is constructed
 by transporting it along an equality path. No Op declaration or rule changes.
 
-This is an intermediate comparison, not the full target classification.
-Two further whole identifications remain: Uᵒ with q∘Γ, using the Sigma
-map/base-change operations, and Vᵒ with D, using the graph's retained whole
-action. Recovery of h and the H comparison remain separate obligations.
+This is an intermediate comparison. At UA-4d, two further whole
+identifications remained: Uᵒ with q∘Γ and Vᵒ with D. UA-4e below closes the
+first through the Sigma map/base-change operations. The graph classification,
+recovery of h and the H comparison remain open.
 
 From `emdash2`, reproduce the fourteen-assertion native replay:
 
@@ -363,3 +364,92 @@ failure of the actual extraction declaration without the view), and
 `ua4d_constant_section_owner-20260917-200428.log` (owner-position check).
 The five-dimensional warning comparison is recorded in
 `tmp/probes/ua4d_constant_section_warning_comparison.json`.
+
+## UA-4e: Link To The Actual Native Target
+
+`target_basechange_rules.lpfragment` and `target_basechange_link.lpfragment`
+construct the remaining link from UA-4d's Uᵒ to the actual q∘Γ. The two
+whole cells come from existing generic internal operations:
+
+```text
+Σ(Q)∘Σ(R) ⇒ Σ(Q∘R),
+Σ(P)∘Σ_F(E) ⇒ Σ_F(D)∘Σ(F*P).
+```
+
+Here R is Γ's original family reframe and Q its original target-family
+projection. The first cell groups those actual Sigma maps. The second moves
+that grouped map through total base change. Projecting the constant target
+coordinate and precomposing the retained graph section gives a whole cell
+from the actual target before Op to U. Existing Op_transf reverses it to
+Uᵒ⇒q∘Γ. Its component computes to id at D(x).
+
+The ordinary OneCat(Y) wrapper assembles fixed-forward OmegaEquivAlong
+evidence using the existing strict pointwise interface. Composing it with
+UA-4d's Vᵒ⇒Uᵒ equivalence retains the selected inverse data and proves
+Vᵒ≃q∘Γ. Both inverse components and both whole inverse-law projections check.
+This does not yet identify Vᵒ with D or recover h.
+
+The isolated extension consists of four runtime component computations and
+three proof-time views. The runtime rules consume the off-diagonal
+base-change functor on a Sigma constructor, compute the canonical
+base-change cell's component, expose a represented displayed composite's
+fibre component, and compute the Sigma-composition cell's component. The
+two cell rules select the canonical identity components of these specific
+Sigma operations. They are explicit computation extensions, not derivations
+from the previous beta rules. The whole cells and their higher action stay
+retained; arbitrary supplied transformations are not made identities.
+
+The views join Sigma's stable map with its represented composition reading,
+compare composition under the same actual precomposing functor while checking
+every other argument, and express preservation of the second coordinate by
+constant-family total base change. The congruence is sufficient, not a claim
+that composition is injective. Runtime functor heads remain unchanged by
+these views. UA-4c's proposed identity-transformation guard refinements are
+not needed by this link.
+
+An attempted earlier fold of the whole off-diagonal base-change action led
+to unresolved represented-precomposition endpoints. The selected consumed-
+point rule keeps the established whole Hom and identity owners stable.
+The source identity guard on the base-change cell is necessary for subject
+reduction. Also, prewhiskering an extra identity comparison exposed a
+product-valued identity-component boundary; the selected construction uses
+the direct typed constant-projection view instead. No broad product identity
+or global strictness rule was added.
+
+Reproduce all 28 assertions, including the earlier native extraction checks
+with the new rules already active:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+audit = Path('audits/categorical-family-introduction-boundary')
+constructor = (audit / 'constructor_fragment.lp').read_text()
+marker = '// The target side is the actual action'
+assert constructor.count(marker) == 1
+source = (Path('emdash3_2_gray_transformation_graph.lp').read_text() + '\n' +
+          (audit / 'target_basechange_rules.lpfragment').read_text() + '\n' +
+          constructor.split(marker, 1)[0] + '\n' +
+          (audit / 'target_section_extraction.lpfragment').read_text() + '\n' +
+          (audit / 'target_basechange_link.lpfragment').read_text())
+Path('tmp/probes/ua4e_target_link_replay.lp').write_text(source)
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4e_target_link_replay.lp
+```
+
+The replay passes at the serial 2GiB/90s profile with SR/warnings enabled
+(`ua4e_target_link_replay-20260917-210256.log`). Controls cover the existing
+identity evaluation order, the second-projection typing view and its
+runtime boundary, and reject collapsing arbitrary transformations,
+product-valued maps or distinct postcomposing functors.
+
+The full owner-position copy passes too
+(`ua4e_sigma_owner_ordered_typed-20260917-205444.log`). The stable Sigma-map
+view is placed after its declaration; the constant-total/congruence views
+follow total base change; component rules follow both Fibre_func and
+fdapp1_int_cell, before the latter's canonical transported-identity rules.
+The previous constant-section view is included at its qualified position.
+All five normalized warning inventories match the unchanged core: 157
+replaceable variables, 1144 inherited critical pairs, no parser issue
+(`tmp/probes/ua4e_owner_warning_comparison.json`). This remains an audit
+candidate, not a confluence or unrestricted higher-variance qualification.

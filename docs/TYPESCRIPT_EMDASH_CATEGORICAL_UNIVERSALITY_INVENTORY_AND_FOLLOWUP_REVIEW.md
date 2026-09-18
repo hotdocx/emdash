@@ -340,7 +340,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. Isolated whole source and intermediate target-section comparisons retain inverse/law data and computing identity components, using unpromoted structural views. Full target classification and whole H comparison remain open; Γ remains outside library |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | Core recursive Sigma action qualified, including all 94 nonsplit assertions; source projection checks through third-level cells pass. Isolated whole source and target reindexing comparisons retain inverse/law data and identity components. UA-4e checks Vᵒ≃q∘Γ in 28 assertions; Vᵒ≃D, recovery of h and whole H remain open. Γ and candidate structural rules remain outside the library |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -374,9 +374,12 @@ law projections and computing identity components. Its structural
 comparison rules remain unpromoted. UA-4d's intermediate target-section
 extraction also has checked whole inverse data and identity components,
 using the existing section-total comparison and reversed Op_transf. The
-full target comparison q∘Γ ≅ D still needs the Sigma base-change and graph
-classification links. Recovery of h, D[θ] and the whole H comparison remain
-unqualified.
+Sigma base-change link to the actual q∘Γ is now checked in UA-4e, including
+composition with the earlier equivalence, both inverse components and both
+whole inverse-law projections. The resulting Vᵒ≃q∘Γ still needs the graph
+classification Vᵒ≃D. Recovery of h, D[θ] and the whole H comparison remain
+unqualified; the seven new Sigma computation/comparison candidates are
+unpromoted.
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented
