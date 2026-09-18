@@ -1398,3 +1398,122 @@ the source-only health snapshot is
 `3d11f8cc87b8816d2b6b7514ca46a9f023a0b0b8c037feac024c0ad615a9a06f`.
 Catalog/health freshness, strict inferred-slot audit, source TOC, book evidence,
 added local links and exact diff whitespace checks pass before checkpoint.
+
+### UA-4g — Target Projection Through The Original Graph
+
+Previous turn: progress at `e4b665e8`; the worktree is clean and the published
+baseline remains an ancestor. The retained 30-assertion replay passes again
+(`ua4f_graph_section_replay-20260917-220820.log`). No checker from the previous
+turn is live. Continue the whole classification of the existing extracted V,
+using its original section maps and supplied A,D,h.
+
+First separate the original reindexed target projection from the graph's
+Sigma/base-change maps. Test its whole reading as the pointwise opposite of
+the canonical varying Sigma projection at the actual represented family.
+Then investigate the projection through those two maps and the identity
+graph section. Any additional structural view must retain the full maps and
+be justified at its existing owner; no new Op calculus or pointwise
+naturality-square input is in scope. Probes use the serial 2GiB/90s/o20
+guard with warnings and subject reduction enabled.
+
+The first target-projection declaration fails at its source-family comparison,
+before the map assertion. The raw-family version forms. Actual normal forms
+show `Pullback(Op(E),F∘G)` against `Op((E∘F)∘G)`; the old single-step view
+does not match the composite after canonical left association. A two-step
+instance of that same reindexing comparison resolves formation. The subsequent
+whole projection comparison needs a separate view for reindexing the canonical
+opposite Sigma projection, retaining and checking the original identity
+reframe. This is not evidence of a mathematical obstruction in Γ.
+
+Receipts for this isolation are `ua4g_projection_reindex-20260917-220945.log`
+(formation failure), `ua4g_projection_raw-20260917-221023.log` (raw formation),
+`ua4g_family_forms-20260917-221330.log` (normal forms),
+`ua4g_projection_reindex_assoc-20260917-221405.log` (formation succeeds, map
+comparison still fails) and
+`ua4g_projection_reindex_owner_view-20260917-221605.log` (map comparison passes).
+The earlier attempted Sigma-specific reassociation pattern was rejected:
+its pattern did not match the actual left-associated normal form.
+
+The selected isolated candidate adds six proof-time views: composite
+reindexing of an opposite family; reindexing its canonical Sigma projection;
+sufficient section-map congruence; projection after canonical total base
+change; projection after fibrewise Sigma; and projection of the canonical
+identity graph section. The latter structural views explicitly extend the
+whole projection interface beyond its previous point/arrow beta rules. Their
+intended ordinary categorical interpretation is preservation of the inner
+base coordinate, with base change applying the original supplied D. They
+do not supply a new general Op calculus, an unrestricted higher equivalence
+theorem or caller-written naturality squares.
+
+The actual graph section is classified in these stages:
+
+```text
+V ≃ canonical_target_section
+  ≃ Op(D)∘projected_middle_section,
+projected_middle_section ≃ projected_identity_graph_section ≃ id_Op(K).
+```
+
+Actual whole identity transformations realize each presentation comparison;
+existing whiskering and composition assemble Op(D)⇒V. The existing reversed
+Op_transf gives Vᵒ⇒D. Its identity component computation needs only the
+tapp0 identity guard refinement already explored in UA-4c, with the old RHS
+unchanged. With OneCat(Y), existing strict pointwise inverse assembly yields
+Vᵒ≃D. Composing with the retained inverse of UA-4e's Vᵒ≃q∘Γ now gives
+q∘Γ≃D. Both forward components, both selected inverse components and both
+whole inverse-law projections pass. No operational functor is path-transported,
+and previous chosen inverse data are retained through the existing IsoEvidence
+composition/symmetry operations.
+
+The [tracked target-classification replay](../emdash2/audits/categorical-family-introduction-boundary/README.md#ua-4g-whole-target-classification)
+passes 54 assertions with all candidates active before inherited assertions
+(`ua4g_target_classification_replay-20260917-222646.log`). Its eight new
+controls include the generic composite-reindexing positive case, rejection
+of unrelated families/maps/sections and a changed supplied D, rejection of
+arbitrary maps between totals, and negative runtime comparisons. Removing
+only the whole base-change view makes the actual comparison fail
+(`ua4g_target_without_basechange_view-20260917-222914.log`); the extension is
+not claimed to be a theorem already derived from the old beta interface.
+
+The full-core owner experiment installs the composite-family view after the
+old reindexing view, section congruence after section associativity, and
+refines the existing identity component rule in place. It passes, including
+the existing section-associativity controls
+(`ua4g_core_owner-20260917-222743.log`). The normalized five-dimensional warning
+comparison retains 157 replaceable variables and removes two inherited
+critical pairs (1144→1142): the product-valued functor-category identity
+component and the constant-terminal component overlap. No category, head,
+rule family, location or parser issue is added. Inventory:
+`tmp/probes/ua4g_core_owner_warning_comparison.json`.
+
+The four remaining views also pass immediately after the existing opposite
+Sigma projection action in a full `emdash3_2_cubical_square_total.lp` copy.
+Baseline and candidate use identical imported core candidates; both warning
+inventories are empty in all five dimensions. Receipts:
+`ua4g_projection_owner_baseline-20260917-222806.log` and
+`ua4g_projection_owner-20260917-222836.log`; inventory:
+`tmp/probes/ua4g_projection_owner_warning_comparison.json`. These are scoped
+owner checks, not a global confluence or higher-variance certificate.
+
+Finally, the combined replay includes the existing whole source comparison
+and all target fragments, retaining only one copy of the shared identity
+component refinement. All 63 assertions pass
+(`ua4g_both_projections_replay-20260917-222939.log`). Thus the two whole
+projection comparisons coexist. Their compatibility with the original h
+is the next required result, followed by the whole H comparison. The stronger
+direct D[θ] conversion is still unqualified; require it only if an actual
+consumer needs that normal form.
+
+All probes used the serial 2GiB/90s/o20 guard with SR/warnings enabled. The
+positive library and source-health snapshot are unchanged from `e4b665e8`;
+the freshly qualified nucleus and all 94 nonsplit proof–CAS assertions are
+carried forward. Γ and the additional structural views remain non-library
+audit candidates pending h/H qualification. The goal remains active, with
+UA-1/2/3/5/6 and the established deferrals unchanged; no publication occurs.
+
+Before checkpoint, catalog and unchanged source-health freshness pass
+(`3d11f8cc87b8816d2b6b7514ca46a9f023a0b0b8c037feac024c0ad615a9a06f`,
+1273 files), as do added local links and exact diff whitespace checks.
+The core remains SHA-256
+`dfd505d9072c0196b2694ee041c26d5d3974acbc1d667b2f9782102cdc8c4fb8`.
+Only the living plan, ledger and non-library audit bundle change in this
+checkpoint; standing library/book claims and their validation remain unchanged.

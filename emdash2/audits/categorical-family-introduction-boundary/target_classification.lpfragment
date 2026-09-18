@@ -1,0 +1,276 @@
+/* Classify the actual extracted section, then compare q∘Γ with the supplied D.
+   No caller square, new inverse choice or operational equality transport.
+   Requires target_classification_rules.lpfragment and the UA-4f replay. */
+
+// Actual target projection compared to the canonical reindexed family projection.
+symbol ua4g_target_projection [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X))
+ : τ (@Functord (Op_cat K)
+     (@represented_comma_family_target K X Y J A)
+     (@Const_catd (Op_cat K) (Op_cat Y)))
+≔ @Op_funcd (Op_cat K)
+    (@gray_transf_graph_target_raw_catd K Y (@comp_cat_fapp0 K X Y J A))
+    (@Const_catd (Op_cat K) Y)
+    (@sigma_proj1_family_funcd (Op_cat K) Y
+      (@gray_transf_graph_rep_catd K Y (@comp_cat_fapp0 K X Y J A)));
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) ⊢
+ @eq_refl (@Functord (Op_cat K)
+     (@represented_comma_family_target K X Y J A)
+     (@Const_catd (Op_cat K) (Op_cat Y)))
+   (@ua4d_gamma_target_section_map K X Y J A)
+ : τ (@= (@Functord (Op_cat K)
+     (@represented_comma_family_target K X Y J A)
+     (@Const_catd (Op_cat K) (Op_cat Y)))
+   (@ua4d_gamma_target_section_map K X Y J A)
+   (@ua4g_target_projection K X Y J A));
+
+
+symbol ua4g_target_section_canonical [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (Functor (Op_cat K) (Op_cat Y))
+≔ @section_postcomp_sec (Op_cat K)
+   (@represented_comma_family_target K X Y J A)
+   (@Const_catd (Op_cat K) (Op_cat Y))
+   (@ua4g_target_projection K X Y J A)
+   (@represented_comma_family_section K X Y J A D h);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@ua4d_gamma_target_section K X Y J A D h)
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@ua4d_gamma_target_section K X Y J A D h)
+     (@ua4g_target_section_canonical K X Y J A D h));
+
+symbol ua4g_middle_projection [K Y : Cat] (F D : τ (Functor K Y))
+ : τ (@Functord (Op_cat K) (@gray_transf_graph_middle_catd K Y F D)
+     (@Const_catd (Op_cat K) (Op_cat K)))
+≔ @Op_funcd (Op_cat K) (@gray_transf_graph_middle_raw_catd K Y F D)
+   (@Const_catd (Op_cat K) K)
+   (@sigma_proj1_family_funcd (Op_cat K) K (@gray_transf_graph_middle_inner_catd K Y F D));
+
+symbol ua4g_middle_section_projected [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (Functor (Op_cat K) (Op_cat K))
+≔ @section_postcomp_sec (Op_cat K)
+   (@gray_transf_graph_middle_catd K Y (@comp_cat_fapp0 K X Y J A) D)
+   (@Const_catd (Op_cat K) (Op_cat K))
+   (@ua4g_middle_projection K Y (@comp_cat_fapp0 K X Y J A) D)
+   (@gray_transf_graph_middle_sec K Y (@comp_cat_fapp0 K X Y J A) D h);
+
+symbol ua4g_target_section_after_basechange [K X Y : Cat]
+ (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
+ (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (Functor (Op_cat K) (Op_cat Y))
+≔ @comp_cat_fapp0 (Op_cat K) (Op_cat K) (Op_cat Y)
+   (@Op_func K Y D) (@ua4g_middle_section_projected K X Y J A D h);
+
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@ua4g_target_section_canonical K X Y J A D h)
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@ua4g_target_section_canonical K X Y J A D h)
+     (@ua4g_target_section_after_basechange K X Y J A D h));
+
+symbol ua4g_identity_section_projected (K : Cat)
+ : τ (Functor (Op_cat K) (Op_cat K))
+≔ @section_postcomp_sec (Op_cat K) (@gray_transf_graph_source_catd K)
+   (@Const_catd (Op_cat K) (Op_cat K))
+   (@Op_funcd (Op_cat K) (@gray_transf_graph_source_raw_catd K)
+     (@Const_catd (Op_cat K) K)
+     (@sigma_proj1_family_funcd (Op_cat K) K (@hom_int K K (@id_func K))))
+   (@hom_identity_graph_sec K);
+
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat K)) (@ua4g_middle_section_projected K X Y J A D h)
+ : τ (@= (Functor (Op_cat K) (Op_cat K)) (@ua4g_middle_section_projected K X Y J A D h)
+     (@ua4g_identity_section_projected K));
+
+
+assert [K : Cat] ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat K)) (@ua4g_identity_section_projected K)
+ : τ (@= (Functor (Op_cat K) (Op_cat K)) (@ua4g_identity_section_projected K)
+     (@id_func (Op_cat K)));
+
+
+symbol ua4g_raw_reindex [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat Y) (@ua4g_target_section_canonical K X Y J A D h)
+  (@ua4d_gamma_target_section K X Y J A D h))
+≔ @id (Functor_cat (Op_cat K) (Op_cat Y)) (@ua4g_target_section_canonical K X Y J A D h);
+
+symbol ua4g_raw_basechange [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat Y) (@ua4g_target_section_after_basechange K X Y J A D h)
+  (@ua4g_target_section_canonical K X Y J A D h))
+≔ @id (Functor_cat (Op_cat K) (Op_cat Y)) (@ua4g_target_section_after_basechange K X Y J A D h);
+
+symbol ua4g_raw_sigma [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat K) (@ua4g_identity_section_projected K) (@ua4g_middle_section_projected K
+  X Y J A D h))
+≔ @id (Functor_cat (Op_cat K) (Op_cat K)) (@ua4g_identity_section_projected K);
+
+symbol ua4g_raw_identity [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat K) (@id_func (Op_cat K)) (@ua4g_identity_section_projected K))
+≔ @id (Functor_cat (Op_cat K) (Op_cat K)) (@id_func (Op_cat K));
+
+symbol ua4g_raw_middle [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat K) (@id_func (Op_cat K)) (@ua4g_middle_section_projected K X Y J A D h))
+≔ @comp_fapp0 (Functor_cat (Op_cat K) (Op_cat K)) (@id_func (Op_cat K)) (@ua4g_identity_section_projected
+  K) (@ua4g_middle_section_projected K X Y J A D h)
+   (@ua4g_raw_sigma K X Y J A D h) (@ua4g_raw_identity K X Y J A D h);
+
+symbol ua4g_raw_post [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@ua4g_target_section_after_basechange K X Y J A D
+  h))
+≔ @ua4e_post (Op_cat K) (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@id_func (Op_cat K))
+  (@ua4g_middle_section_projected K X Y J A D h)
+   (@ua4g_raw_middle K X Y J A D h);
+
+symbol ua4g_raw_classification [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@ua4d_gamma_target_section K X Y J A D h))
+≔ @comp_fapp0 (Functor_cat (Op_cat K) (Op_cat Y)) (@Op_func K Y D) (@ua4g_target_section_canonical K X Y J
+  A D h) (@ua4d_gamma_target_section K X Y J A D h)
+   (@ua4g_raw_reindex K X Y J A D h)
+   (@comp_fapp0 (Functor_cat (Op_cat K) (Op_cat Y)) (@Op_func K Y D)
+  (@ua4g_target_section_after_basechange K X Y J A D h) (@ua4g_target_section_canonical K X Y J A D h)
+     (@ua4g_raw_basechange K X Y J A D h) (@ua4g_raw_post K X Y J A D h));
+
+symbol ua4g_target_section_to_supplied [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
+ : τ (@Transf K Y (@ua4d_gamma_target_section_op K X Y J A D h) D)
+≔ @Op_transf (Op_cat K) (Op_cat Y) (@Op_func K Y D) (@ua4d_gamma_target_section K X Y J A D h)
+   (@ua4g_raw_classification K X Y J A D h);
+
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4d_gamma_target_section_op K X Y J A D h) D x
+   (@ua4g_target_section_to_supplied K X Y J A D h)
+ ≡ @id Y (@fapp0 K Y D x);
+
+// Ordinary target guard; inverse data use the existing whole assembly interface.
+symbol ua4g_target_section_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y))
+ : τ (@OmegaEquivAlong (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h))
+≔ @strict_transf_pointwise_omega_along K Y (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h)
+   (λ x : τ (Obj K), @omega_equiv_along_refl Y (@fapp0 K Y D x));
+
+// Compose with the retained inverse of the actual native target link.
+symbol ua4g_native_target_to_supplied [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y))
+ : τ (@Transf K Y (@ua4e_gamma_target_func K X Y J A D h) D)
+≔ @comp_fapp0 (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) (@ua4d_gamma_target_section_op K X
+  Y J A D h) D (@ua4g_target_section_to_supplied K X Y J A D h)
+   (@omega_equiv_along_left_inv (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+  (@ua4e_gamma_target_func K X Y J A D h) (@ua4e_gamma_target_section_to_native K X Y J A D h)
+  (@ua4e_gamma_target_section_to_native_equiv K X Y J A D h Y1));
+
+symbol ua4g_native_target_equiv [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y))
+ : τ (@OmegaEquivAlong (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1))
+≔ @iso_evidence_omega_along (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D
+   (@iso_evidence_comp (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h)
+  (@ua4d_gamma_target_section_op K X Y J A D h) D
+     (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h) (@ua4g_target_section_equiv K X Y J A D h Y1))
+     (@iso_evidence_sym (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+  (@ua4e_gamma_target_func K X Y J A D h)
+       (@omega_equiv_along_iso_evidence (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+  (@ua4e_gamma_target_func K X Y J A D h) (@ua4e_gamma_target_section_to_native K X Y J A D h)
+  (@ua4e_gamma_target_section_to_native_equiv K X Y J A D h Y1))));
+
+// Components and whole inverse laws of the extracted target comparison.
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4d_gamma_target_section_op K X Y J A D h) D x (@ua4g_target_section_to_supplied K X
+  Y J A D h) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y D (@ua4d_gamma_target_section_op K X Y J A D h) x (@omega_equiv_along_left_inv
+  (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D (@ua4g_target_section_to_supplied K X
+  Y J A D h) (@ua4g_target_section_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) ⊢
+ @omega_equiv_along_left_law (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h) (@ua4g_target_section_equiv K X Y J A D h Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)
+  (@ua4d_gamma_target_section_op K X Y J A D h))
+     (@comp_fapp0 (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4d_gamma_target_section_op K X Y J A D h) (@omega_equiv_along_left_inv (Functor_cat K Y)
+  (@ua4d_gamma_target_section_op K X Y J A D h) D (@ua4g_target_section_to_supplied K X Y J A D h)
+  (@ua4g_target_section_equiv K X Y J A D h Y1)) (@ua4g_target_section_to_supplied K X Y J A D h)) (@id
+  (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h)));
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y D (@ua4d_gamma_target_section_op K X Y J A D h) x (@omega_equiv_along_right_inv
+  (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D (@ua4g_target_section_to_supplied K X
+  Y J A D h) (@ua4g_target_section_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) ⊢
+ @omega_equiv_along_right_law (Functor_cat K Y) (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h) (@ua4g_target_section_equiv K X Y J A D h Y1)
+ : τ (@= (Hom (Functor_cat K Y) D D)
+     (@comp_fapp0 (Functor_cat K Y) D (@ua4d_gamma_target_section_op K X Y J A D h) D
+  (@ua4g_target_section_to_supplied K X Y J A D h) (@omega_equiv_along_right_inv (Functor_cat K Y)
+  (@ua4d_gamma_target_section_op K X Y J A D h) D (@ua4g_target_section_to_supplied K X Y J A D h)
+  (@ua4g_target_section_equiv K X Y J A D h Y1))) (@id (Functor_cat K Y) D));
+
+// Components and whole inverse laws of the native target comparison.
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y (@ua4e_gamma_target_func K X Y J A D h) D x (@ua4g_native_target_to_supplied K X Y J A D
+  h Y1) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y D (@ua4e_gamma_target_func K X Y J A D h) x (@omega_equiv_along_left_inv (Functor_cat K
+  Y) (@ua4e_gamma_target_func K X Y J A D h) D (@ua4g_native_target_to_supplied K X Y J A D h Y1)
+  (@ua4g_native_target_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) ⊢
+ @omega_equiv_along_left_law (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1) (@ua4g_native_target_equiv K X Y J A D h Y1)
+ : τ (@= (Hom (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) (@ua4e_gamma_target_func K X Y J A
+  D h))
+     (@comp_fapp0 (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D (@ua4e_gamma_target_func K X
+  Y J A D h) (@omega_equiv_along_left_inv (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1) (@ua4g_native_target_equiv K X Y J A D h Y1))
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1)) (@id (Functor_cat K Y) (@ua4e_gamma_target_func K X
+  Y J A D h)));
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) (x : τ (Obj K)) ⊢
+ @tapp0_fapp0 K Y D (@ua4e_gamma_target_func K X Y J A D h) x (@omega_equiv_along_right_inv (Functor_cat K
+  Y) (@ua4e_gamma_target_func K X Y J A D h) D (@ua4g_native_target_to_supplied K X Y J A D h Y1)
+  (@ua4g_native_target_equiv K X Y J A D h Y1)) ≡ @id Y (@fapp0 K Y D x);
+assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) (Y1 : τ (IsNCat (cat_succ
+  cat_zero) Y)) ⊢
+ @omega_equiv_along_right_law (Functor_cat K Y) (@ua4e_gamma_target_func K X Y J A D h) D
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1) (@ua4g_native_target_equiv K X Y J A D h Y1)
+ : τ (@= (Hom (Functor_cat K Y) D D)
+     (@comp_fapp0 (Functor_cat K Y) D (@ua4e_gamma_target_func K X Y J A D h) D
+  (@ua4g_native_target_to_supplied K X Y J A D h Y1) (@omega_equiv_along_right_inv (Functor_cat K Y)
+  (@ua4e_gamma_target_func K X Y J A D h) D (@ua4g_native_target_to_supplied K X Y J A D h Y1)
+  (@ua4g_native_target_equiv K X Y J A D h Y1))) (@id (Functor_cat K Y) D));

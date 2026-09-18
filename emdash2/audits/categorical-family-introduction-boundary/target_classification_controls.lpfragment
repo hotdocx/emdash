@@ -1,0 +1,72 @@
+/* Focused controls for the proposed whole projection views. */
+
+// Reindexing compares the original family, not an arbitrary alternative.
+assert [A B C : Cat] (E : τ (Catd C))
+ (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢
+ @eq_refl (Catd A) (@Op_catd A
+   (@comp_cat_fapp0 A B Cat_cat (@comp_cat_fapp0 B C Cat_cat E F) G))
+ : τ (@= (Catd A)
+     (@Op_catd A (@comp_cat_fapp0 A B Cat_cat (@comp_cat_fapp0 B C Cat_cat E F) G))
+     (@Pullback_catd A C (@Op_catd C E) (@comp_cat_fapp0 A B C F G)));
+assertnot [A B C : Cat] (E D : τ (Catd C))
+ (F : τ (Functor B C)) (G : τ (Functor A B)) ⊢
+ @eq_refl (Catd A) (@Op_catd A
+   (@comp_cat_fapp0 A B Cat_cat (@comp_cat_fapp0 B C Cat_cat E F) G))
+ : τ (@= (Catd A)
+     (@Op_catd A (@comp_cat_fapp0 A B Cat_cat (@comp_cat_fapp0 B C Cat_cat E F) G))
+     (@Pullback_catd A C (@Op_catd C D) (@comp_cat_fapp0 A B C F G)));
+
+// Sufficient section congruence does not identify arbitrary maps.
+assertnot [K : Cat] (E D : τ (Catd K))
+ (FF GG : τ (@Functord K E D)) (s : τ (Obj (@Pi_cat K E))) ⊢
+ @eq_refl (Obj (@Pi_cat K D)) (@section_postcomp_sec K E D FF s)
+ : τ (@= (Obj (@Pi_cat K D)) (@section_postcomp_sec K E D FF s)
+     (@section_postcomp_sec K E D GG s));
+
+// Only the canonical identity graph section has the selected identity view.
+assertnot [K : Cat] (s : τ (Obj (@Pi_cat (Op_cat K) (@hom_identity_graph_catd K)))) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat K))
+   (@section_postcomp_sec (Op_cat K) (@hom_identity_graph_catd K)
+     (@Const_catd (Op_cat K) (Op_cat K))
+     (@Op_funcd (Op_cat K) (@gray_transf_graph_source_raw_catd K)
+       (@Const_catd (Op_cat K) K)
+       (@sigma_proj1_family_funcd (Op_cat K) K (@hom_int K K (@id_func K)))) s)
+ : τ (@= (Functor (Op_cat K) (Op_cat K))
+     (@section_postcomp_sec (Op_cat K) (@hom_identity_graph_catd K)
+       (@Const_catd (Op_cat K) (Op_cat K))
+       (@Op_funcd (Op_cat K) (@gray_transf_graph_source_raw_catd K)
+         (@Const_catd (Op_cat K) K)
+         (@sigma_proj1_family_funcd (Op_cat K) K (@hom_int K K (@id_func K)))) s)
+     (@id_func (Op_cat K)));
+
+// Total base change must use the original supplied D.
+assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D D0 : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat Y)) (@ua4g_target_section_canonical K X Y J A D h)
+ : τ (@= (Functor (Op_cat K) (Op_cat Y)) (@ua4g_target_section_canonical K X Y J A D h)
+     (@comp_cat_fapp0 (Op_cat K) (Op_cat K) (Op_cat Y) (@Op_func K Y D0)
+       (@ua4g_middle_section_projected K X Y J A D h)));
+
+// An arbitrary map between these totals need not preserve the inner base.
+assertnot [K Y : Cat] (F D : τ (Functor K Y))
+ (R : τ (@Functord (Op_cat K) (@gray_transf_graph_source_catd K)
+     (@gray_transf_graph_middle_catd K Y F D))) ⊢
+ @eq_refl (Functor (Op_cat K) (Op_cat K))
+   (@section_postcomp_sec (Op_cat K) (@gray_transf_graph_middle_catd K Y F D)
+     (@Const_catd (Op_cat K) (Op_cat K)) (@ua4g_middle_projection K Y F D)
+     (@section_postcomp_sec (Op_cat K) (@gray_transf_graph_source_catd K)
+       (@gray_transf_graph_middle_catd K Y F D) R (@hom_identity_graph_sec K)))
+ : τ (@= (Functor (Op_cat K) (Op_cat K))
+     (@section_postcomp_sec (Op_cat K) (@gray_transf_graph_middle_catd K Y F D)
+       (@Const_catd (Op_cat K) (Op_cat K)) (@ua4g_middle_projection K Y F D)
+       (@section_postcomp_sec (Op_cat K) (@gray_transf_graph_source_catd K)
+         (@gray_transf_graph_middle_catd K Y F D) R (@hom_identity_graph_sec K)))
+     (@ua4g_identity_section_projected K));
+
+// Whole comparisons retain their original runtime functor presentations.
+assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @ua4d_gamma_target_section K X Y J A D h ≡ @Op_func K Y D;
+assertnot [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X))
+ (D : τ (Functor K Y)) (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) ⊢
+ @ua4e_gamma_target_func K X Y J A D h ≡ D;

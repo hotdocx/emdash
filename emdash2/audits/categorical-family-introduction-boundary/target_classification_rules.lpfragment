@@ -1,0 +1,69 @@
+/* UA-4g isolated whole projection views, outside the positive library.
+   Six proof-time views and the existing UA-4c identity-component guard
+   refinement. See README.md for mathematical scope and owner qualification. */
+
+// Two-step instance of the existing opposite-family reindexing comparison.
+// Functor composition already normalizes left; preserve both runtime histories.
+unif_rule @Op_catd $A
+    (@comp_fapp0 Cat_cat $A $B Cat_cat
+      (@comp_fapp0 Cat_cat $B $C Cat_cat $E $F) $G)
+  ≡ @Pullback_catd $A $C $Eop
+      (@comp_fapp0 Cat_cat $A $B $C $F $G)
+  ↪ [ $Eop ≡ @Op_catd $C $E ];
+
+// Reindex the canonical opposite Sigma projection, retaining the original
+// identity reframe. The side condition checks that reframe's source family.
+unif_rule @fapp1_fapp0 _ _ (@Pullback_catd_func $A $B $F) $E0 _
+    (@comp_fapp0 (@Catd_cat $B) $E0 _ _
+      (@Op_funcd $B _ _ (@sigma_proj1_family_funcd $B $I $G))
+      (@id (@Catd_cat $B) $E0))
+  ≡ @Op_funcd $A _ _
+      (@sigma_proj1_family_funcd $A $I
+        (@comp_fapp0 Cat_cat $A $B (@Catd_cat $I) $G $F))
+  ↪ [ $E0 ≡ @Op_catd $B
+        (@comp_cat_fapp0 $B (@Catd_cat $I) Cat_cat (@Sigma_func $I) $G) ];
+
+// Sufficient congruence for mapping the same original section.
+// This does not infer equality of the maps from equality of their images.
+unif_rule @section_postcomp_sec $K $E $D $FF $s
+  ≡ @section_postcomp_sec $K $E0 $D0 $GG $s
+  ↪ [ $E ≡ $E0; $D ≡ $D0; $FF ≡ $GG ];
+
+// Proposed whole projection law for canonical total base change on a section.
+unif_rule @section_postcomp_sec $K _ _
+    (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $B $H))
+    (@section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _
+        (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+          (Struct_sigma $H _) (Struct_sigma $H _)
+          (Struct_sigma (@id (Functor_cat $K (@Catd_cat $B)) $H)
+            (@sigma_pullback_total_transf $A $B $F)))) $s)
+  ≡ @comp_fapp0 Cat_cat $K (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F)
+      (@section_postcomp_sec $K _ _
+        (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $H0)) $s)
+  ↪ [ $H0 ≡ @comp_cat_fapp0 $K (@Catd_cat $B) (@Catd_cat $A)
+        (@Pullback_catd_func $A $B $F) $H ];
+
+// Canonical projection is preserved by the original fibrewise Sigma action.
+unif_rule @section_postcomp_sec $K _ _
+    (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $D))
+    (@section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _
+        (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+          (Struct_sigma $E (@Sigma_func $A)) (Struct_sigma $D (@Sigma_func $A))
+          (Struct_sigma _ (@id (Functor_cat (@Catd_cat $A) Cat_cat) (@Sigma_func $A))))) $s)
+  ≡ @section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $E)) $s
+  ↪ [ tt ≡ tt ];
+
+// The canonical identity graph section has the identity inner base projection.
+unif_rule @section_postcomp_sec (Op_cat $K) _ _
+    (@Op_funcd (Op_cat $K) _ _
+      (@sigma_proj1_family_funcd (Op_cat $K) $K (@hom_int $K $K (@id Cat_cat $K))))
+    (@hom_identity_graph_sec $K)
+  ≡ @id Cat_cat (Op_cat $K)
+  ↪ [ tt ≡ tt ];
+
+// Retain the established UA-4c identity-component guard refinement.
+rule @tapp0_fapp0 $A $B _ _ $x (@id (Functor_cat $A $B) $F)
+  ↪ @id $B (@fapp0 $A $B $F $x);

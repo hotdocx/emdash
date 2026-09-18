@@ -1,6 +1,6 @@
 # Whole Native Comma-Family Introduction: Partial Qualification
 
-Status (2026-09-17, UA-4f): the isolated candidate checks constructor, point,
+Status (2026-09-17, UA-4g): the isolated candidate checks constructor, point,
 both arrow projections, retained triangle and the source projection through
 third-level cells. The higher target projection and whole H comparison remain
 open. The generic recursive Sigma actions are in the core; the two displayed
@@ -13,11 +13,14 @@ An intermediate target-section extraction now also has a checked whole
 equivalence, with retained inverses/laws and identity components, using one
 new unpromoted constant-section projection view. UA-4e now links it to q∘Γ
 and composes the equivalences, retaining inverse data and identity components.
-Identifying the extracted whole section with D remains open.
+UA-4g identifies the extracted whole section with D and obtains q∘Γ≃D,
+retaining inverse data and computing identity components. Recovery of the
+whole h and the whole H comparison remain open.
 The core now also supports proof-time association of section maps, with
 runtime computation unchanged. UA-4f uses it to group this actual extracted
-section; the combined audit passes 30 assertions. The grouping does not yet
-establish its classification as D.
+section; UA-4f's audit passes 30 assertions. The later classification extends
+that replay to 54 assertions. Both whole projection comparisons coexist in
+the 63-assertion source/target replay.
 
 The active continuation is now the user-accepted
 [universality assembly plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -505,3 +508,103 @@ passes the nucleus and all 94 unchanged nonsplit assertions in eight artifacts.
 The [execution ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-4f--classifying-the-extracted-graph-section)
 records the profiles and the separate inherited groupoidal Pi import failure;
 these scoped checks are not a full-repository qualification.
+
+## UA-4g: Whole Target Classification
+
+`target_classification_rules.lpfragment`, `target_classification.lpfragment`
+and `target_classification_controls.lpfragment` complete the isolated whole
+target comparison. They retain the supplied A,D,h and Γ's original family
+reframe. In the opposite presentation, let s be the identity graph section,
+S the graph's fibrewise Sigma map and B its total base-change map. Let π
+denote each corresponding canonical inner-base projection. The new views
+support the steps
+
+```text
+V ≃ π⋅(B⋅(S⋅s)) ≃ Op(D)∘(π⋅(S⋅s)),
+π⋅(S⋅s) ≃ π⋅s ≃ id_Op(K).
+```
+
+The implementation realizes these comparisons by actual whole identity
+transformations between the specified presentations, whiskered and composed
+through the existing owners. Applying the existing reversed Op_transf gives
+Vᵒ⇒D. Its components compute to id at D(x). With the ordinary OneCat(Y)
+guard, the existing declared strict pointwise assembly supplies both selected
+inverses and whole laws. Composition with the retained inverse of UA-4e's
+Vᵒ≃q∘Γ yields q∘Γ≃D, retaining the previous inverse data. The final forward
+map, both inverse components and both whole inverse-law projections check.
+No functor or inverse is built by transporting along an equality path, and
+callers supply no naturality square.
+
+The six proposed proof-time views have distinct roles:
+
+- the existing opposite-family reindexing comparison, specialized to a
+  composite whose ordinary composition has already associated left;
+- reindexing the canonical opposite Sigma projection, with the actual
+  identity reframe's source family checked in a side condition;
+- sufficient congruence for mapping the same section, comparing the two
+  family endpoints and supplied maps;
+- inner-base projection after canonical total base change;
+- preservation of that projection by fibrewise Sigma of a family map;
+- the canonical identity graph section's identity base projection.
+
+The first and third are inference comparisons. The projection views explicitly
+extend the earlier component interface with its intended whole structural
+laws. They are not claimed to follow from point beta rules alone. The
+base-change view retains and checks the original reindexed family rather
+than matching an unreduced expression for it. These are canonical projection
+laws, not a general rule making arbitrary displayed maps preserve the base.
+The only runtime clause in this candidate is the already explored UA-4c
+identity-component guard refinement; its body is unchanged. No Op signature,
+generic opposite-composition rule or general higher equivalence theorem is
+added. The inherited prototype qualifications still apply.
+
+The initial declaration failed because its two family presentations put
+composition on different sides of the existing reindexing view. Printing
+their actual normal forms isolated this issue. The composite-reindexing
+view resolves that typing boundary; the separate projection view resolves
+the actual map comparison. Removing the whole base-change view makes the
+retained native comparison fail again. That control distinguishes the
+extension from a derivation already available in the old library.
+
+From `emdash2`, replay all 54 assertions with every candidate active before
+the inherited checks:
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+a = Path('audits/categorical-family-introduction-boundary')
+constructor = (a / 'constructor_fragment.lp').read_text()
+marker = '// The target side is the actual action'
+assert constructor.count(marker) == 1
+parts = [Path('emdash3_2_gray_transformation_graph.lp').read_text()]
+parts += [(a / f).read_text() for f in [
+    'target_basechange_rules.lpfragment',
+    'target_classification_rules.lpfragment']]
+parts += [constructor.split(marker, 1)[0]]
+parts += [(a / f).read_text() for f in [
+    'target_section_extraction.lpfragment', 'target_basechange_link.lpfragment',
+    'target_section_grouping.lpfragment', 'target_classification.lpfragment',
+    'target_classification_controls.lpfragment']]
+Path('tmp/probes/ua4g_target_classification_replay.lp').write_text('\n'.join(parts))
+PY
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4g_target_classification_replay.lp
+```
+
+The controls reject an unrelated reindexed family, arbitrary section maps,
+arbitrary identity-graph sections, a different supplied D and arbitrary maps
+between totals. They also retain the distinct runtime V/Op(D) and q∘Γ/D
+presentations. The actual-owner core experiment preserves all 157 replaceable
+variable diagnostics and removes two inherited identity-component critical
+pairs (1144→1142), with no additions in any normalized warning dimension.
+The projection-owner old/new pair has no warnings in either version. These
+are scoped owner checks, not a confluence or general higher-semantics claim.
+
+The combined source/target replay additionally inserts `whole_source_rules`
+and `whole_source` from UA-4c, omitting the duplicated component guard from
+`target_classification_rules`. Its 63 assertions pass. Receipts and exact
+owner placements are in the
+[execution ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-4g--target-projection-through-the-original-graph).
+The active library is unchanged. Remaining work is whole compatibility with
+the supplied h, then the native H comparison; direct higher target conversion
+remains unqualified and is required only if the actual consumer needs it.
