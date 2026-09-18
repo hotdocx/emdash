@@ -1,0 +1,10 @@
+{
+  "baseline": "fef16d2f",
+  "candidate_sha256": "24042234cb0ef6277449ab4645e78906df3ac66b9061d4ed00786274136bde1c",
+  "assertions": 8,
+  "source_hashes": {
+    "emdash3_2.lp": "840319daa37fed0c1ef75f6c66719dec1680b0b1843d6707770c8c10764521bb",
+    "emdash3_2_represented_comma_families.lp": "17544bc239412c1306f0b241586bdf379e1be801c93b03e1d349d240a5b69ac7",
+    "emdash3_2_one_cat_arrow_diagrams.lp": "58b3892382b0a194e691165f3c8c220a6aa72a1777d77aba30d0b3c43870ddc9"
+  }
+}

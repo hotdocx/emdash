@@ -2159,3 +2159,119 @@ Final `emdash3_2_one_cat_zero_arrow_family_classification.lp` SHA-256: `7ecdce03
 Final `emdash3_2_one_cat_homology_family_comparison.lp` SHA-256: `94f3fd7dbd579f524781f8a88cf22cf9cd1ecd05fa6d21d0cd24a7283edad26b`.
 
 Final `emdash3_2_one_cat_homology_family_comparison_points.lp` SHA-256: `39ef857c5cdca8c7044130467af8ebd7db35edc4dc420f549fd0efeacde44021`.
+
+### UA-1c — Revisit Hom-Action Extraction After Γ Qualification
+
+Previous turn: progress at `fef16d2f`; the worktree is clean and the published
+baseline remains an ancestor. Current product and weighted-bridge reviewers
+pass at 2GiB/90s/o20 with SR/warnings on
+(`triangular_binary_products-20260918-015052.log` and
+`triangular_binary_products_finite_limits-20260918-015053.log`).
+
+The ordinary product interface retains whole projections and a pairing
+transformation natural in its source variable; its two target objects remain
+external parameters. It therefore does not already supply the independent
+whole ProfComparison required by the retained adjunction introduction. This
+is an assembly boundary, not a mathematical failure of products. UA-5's
+consumer/weighted review remains open.
+
+The earlier UA-1 extraction failed specifically at whole graph projections.
+The new Γ construction qualifies exactly those structural comparisons.
+Test a fresh full copy whose graph accepts the whole internal-Hom action
+Theta directly, replacing only the call that previously extracted that action
+from a supplied transfor h. Keep the source/target comparisons and selected
+inverses. Specialize the represented comma to J=id and whisker the existing
+ordinary universal arrow along this graph; compose with the original source
+inverse and target map to obtain F⇒G. This is an actual candidate derivation
+of whole identity-image extraction, without a new Yoneda constructor or
+caller naturality square. Keep it outside the library until formation and
+identity-image/action consumers qualify. Subsequent Prof currying and the
+Adjunction introduction boundary remain separate requirements.
+
+The new ordinary reconstruction forms without another introduction primitive
+(`ua1n_action_transf-20260918-015344.log`). Its input is a whole native internal
+Hom action, not objectwise arrows. The original graph source/target maps and
+inverse data are retained. A scoped observation of one_cat_arrow_universal_transf
+at its constructor-visible opposite-source identity makes the generic recovered
+component compute to Theta(x,x)(id_x)
+(`ua1n_action_transf_point_identity-20260918-015822.log`). The full ordinary
+arrow-owner candidate passes SR with an empty warning inventory. A fresh
+unchanged source-owner copy is also empty
+(`ua1c_arrow_owner_baseline-20260918-031200.log`).
+
+Currying the whole profunctor identity images still required comparison with
+native hom_int families. Two proof-time views now compare the semantic
+Product_pair_tele_func curry program with those native Hom presentations,
+checking the entire represented profunctor in the residual. Both the earlier
+curried-unit consumer and five positive/negative controls pass
+(`ua1n_curried_unit_view-20260918-020306.log`,
+`ua1n_curry_hom_controls-20260918-020307.log`). A full core copy at the intended
+Hom_prof_along owner passes (`ua1n_curry_owner_core-20260918-025508.log`);
+all five normalized warning inventories exactly match the current core:
+157 replaceable-variable warnings and 1140 inherited critical pairs, no
+additions or parser issue (`ua1n_curry_owner_warning_comparison.json`).
+No core source edit has been promoted.
+
+The first combined experiment accidentally reused the old raw Prof_cat
+composition spelling from a historical probe. That control still fails by
+itself on the current core. The active prof_reindex_components reviewer owns
+the corrected comp_catd_fapp0 presentation and explicit diagnostic endpoints;
+using that current owner resolves the stale observation failure. This is not
+a new regression and adds no composition law. Likewise, the actual curry
+functor's Functor_cat codomain must be retained when forming its action;
+substituting the proof-time Catd facade into that explicit application hides
+runtime composition. Staging the native Hom-action conversion at general F,G
+before substituting G∘F or F∘G closes the remaining associated-endpoint issue
+without an extra associativity clause. Both whole unit and counit then form
+(`ua1n_unit_counit_staged-20260918-021759.log`).
+
+The next normal-form boundary is two evaluations of an identity on the
+product-pair telescope, followed by the profunctor map's identity action.
+Direct product identity/component rewrites produce the expected unit normal
+form, but the scoped three-clause experiment reports eighteen normalization
+overlaps (`ua1n_product_scoped_point-20260918-023240.log`). It is not selected.
+These clauses are absent from both the library and the retained candidate.
+
+Instead, two applications of the existing fapp1_id_path prove the telescope
+identity observation. The existing transfor identity beta is staged before
+product specialization. These proofs yield the actual represented-Hom action
+component comparison (`ua1n_prof_component_path-20260918-024514.log`), then
+ordinary arrow equations for both unit and counit components
+(`ua1n_unit_counit_component_paths-20260918-025016.log`). Operational functors
+and transformations are still the categorical graph constructions; equality
+is used only for law observations, never to construct a functor by transport.
+This choice preserves the identity-image formulas without the broad product
+runtime extension. It does not claim direct conversion for every expanded
+component presentation or a general normalization theorem.
+
+The selected full candidate passes eight assertions
+(`ua1n_final_identity_image_candidate-20260918-025506.log`): both whole
+transformations, their whole tapp1_func actions, two noncollapse controls and
+both component laws. All construction and proof bodies also check. A direct
+normal-form formula for nonidentity action, formal triangle qualification and
+an actual Adjunction witness are not claimed by this result. These remain
+separate from the checked component formulas and retained native action.
+
+The [retained extraction audit](../emdash2/audits/adjunction-identity-image-extraction/README.md)
+contains a reproducible compressed candidate, readable proposed owner clauses
+and a source-hash manifest. The compressed bytes replay under a new module
+identity (`ua1c_identity_image_replay-20260918-030546.log`) with all eight
+assertions and an empty warning inventory. Uncompressed candidate SHA-256:
+`24042234cb0ef6277449ab4645e78906df3ac66b9061d4ed00786274136bde1c`.
+Every check here uses the default serial 2GiB/90s/o20 profile with SR/warnings.
+The two proposed curry views and scoped ordinary-arrow rule remain outside
+the library pending shared-owner factoring and promotion qualification.
+
+The separate constructor remains conditional on a meaningful consumer. An
+optional scope question is pending: retain the generic Adjunction constructor
+as a deferred follow-up, or add a formal Freyd-model entry point taking supplied
+whole Hom comparisons. The latter would assemble existing contracts, not
+construct a closed model. No answer or scope change is presumed; UA-2 remains
+open while independent extraction/review work continues.
+
+The active library is byte-identical to `fef16d2f`; its Γ/H and 94 nonsplit
+qualification remain current. Catalog and source-health freshness pass
+(1287 files, snapshot
+`572f0000657f984a30619a6bae7951a5b42bda981ccdeb067971e9da792698be`).
+Only the plan/ledger and non-library extraction audit change in this checkpoint.
+No main integration/publication occurs, and the goal remains active.

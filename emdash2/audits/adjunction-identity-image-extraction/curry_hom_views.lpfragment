@@ -1,0 +1,15 @@
+// Proof-time comparison of curry's semantic telescope with the native Hom family.
+// Retain the whole supplied profunctor and check that it is the represented one.
+unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat)
+    _ _ _ (@Product_pair_tele_func (Op_cat $A) $B)
+    (@hom_postcomp_func _ _ (@id Cat_cat Cat_cat) $B _ Cat_cat $R)
+  ≡ @hom_int $X $B $G
+  ↪ [ $A ≡ $X;
+      $R ≡ @Prof_reindex $X $X $X $B (@Unit_prof $X) (@id Cat_cat $X) $G ];
+
+// The same represented family with its actual left endpoint functor retained.
+unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat)
+    _ _ _ (@Product_pair_tele_func (Op_cat $A) $B)
+    (@hom_postcomp_func _ _ (@id Cat_cat Cat_cat) $B _ Cat_cat $R)
+  ≡ @comp_fapp0 Cat_cat _ _ _ (@hom_int $X $B $G) (@Op_func $A $X $F)
+  ↪ [ $R ≡ @Prof_reindex $X $A $X $B (@Unit_prof $X) $F $G ];
