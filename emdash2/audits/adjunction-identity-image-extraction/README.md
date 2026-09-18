@@ -5,7 +5,7 @@ Status: checked non-library candidate; shared-owner factoring and promotion pend
 Baseline: `fef16d2f`
 
 The [living plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
-and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1c--revisit-hom-action-extraction-after-γ-qualification)
+and [assembly ledger](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#ua-1d--native-naturality-and-triangle-observations)
 own scope and qualification. This candidate reuses the qualified Γ machinery
 to close the former whole-transformation formation gap. It is independent of
 the retained [Adjunction introduction candidate](../adjunction-from-hom-comparison/README.md),
@@ -32,11 +32,24 @@ by transporting along an equality. The two component formulas are proved
 ordinary arrow equations. They are not a claim that every expanded runtime
 presentation normalizes directly to the right-hand side.
 
-The native tapp1_func action remains available, and the controls reject
-collapsing arbitrary input endomorphisms to the identity case. A direct
-normal-form comparison of the recovered nonidentity action with Φ's action
-is not yet qualified. The candidate does not introduce an Adjunction witness
-or claim that formal triangle laws have already been derived.
+The native tapp1_func action remains available. For a whole profunctor map
+r:Hom_A(−,−)⇒Hom_C(P−,Q−), its reconstructed transformation α satisfies
+α[f]=r_x,y(f), for arbitrary f:x→y. This equation is checked for the unit and
+counit specializations too. The original comparison's native naturality and
+selected inverse laws give both mate formulas and triangle laws:
+
+```text
+G[f] ∘ η_a = Φ_a,b(f),        ε_b ∘ F[g] = Φ⁻¹_a,b(g),
+(ε ⋅ F) ∘ (F ⋅ η) = id_F,    (G ⋅ ε) ∘ (η ⋅ G) = id_G.
+```
+
+Here ⋅ denotes whiskering. The triangle results include whole modifications
+and equations between the actual whole transformations, through the existing
+ordinary modification interface. They are derived laws, not new runtime
+triangle reductions. Controls reject collapsing arbitrary endomorphisms to
+identities or discarding the supplied comparison. A direct normal-form
+comparison for every expanded action presentation is still unqualified.
+The candidate does not introduce an Adjunction witness.
 
 ## Construction And New Interface Boundary
 
@@ -73,6 +86,16 @@ no functor's action is defined by path transport. Ordinary guards qualify the
 actual Hom-comparison consumers. General higher Op/profile semantics remain
 outside this result.
 
+Action and triangle proofs project the original displayed naturality cells
+with `fdapp1_int_cell`. `hom_to_path` observes their equations only in the
+discrete Homs supplied by the ordinary-category guards. Generic evaluation
+and identity laws are staged before specializing to identity arrows or inverse
+functors, so normalization does not erase the intermediate comparison. The
+triangle proof uses the original DefIso through `defiso_fmap`; it requires no
+new component-inverse rewrite. Existing `one_cat_modification` assembles the
+whole law from those ordinary component proofs. This is internal derived
+evidence, not an additional square obligation on users.
+
 A rejected direct-normalization experiment added product identity/component
 clauses. Its scoped version produced the expected unit normal form but 18
 normalization overlaps, including identity erasure at existing category
@@ -92,13 +115,14 @@ From emdash2:
 
 ```bash
 gzip -dc audits/adjunction-identity-image-extraction/candidate.lp.gz \
-  > tmp/probes/ua1c_identity_image_replay.lp
+  > tmp/probes/ua1d_identity_image_replay.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua1c_identity_image_replay.lp
+  scripts/probe.sh tmp/probes/ua1d_identity_image_replay.lp
 ```
 
 The source checks both whole transformations, their whole action functors,
-noncollapse controls and both component laws: eight assertions, with all
+component laws, nonidentity action equations, whole triangle modifications
+and equations, and noncollapse controls: sixteen assertions, with all
 construction/proof bodies also checked. It uses 2GiB/90s/o20, serial execution,
 and warnings/subject reduction. The original proof candidate and compressed
 replay pass with empty warning inventories. The living ledger records logs.
@@ -112,6 +136,6 @@ full-repository promotion gate. The active library and its 94 nonsplit
 Γ/H-integrated assertions remain unchanged.
 
 Next factor the generalized graph and qualify the actual public extraction
-interface, retain these component laws, and account for the required action
-and triangle observations. The separate Adjunction-constructor scope and
-remaining terminality/product reviews are still open in the living plan.
+interface, retaining these component, action and triangle laws. The separate
+Adjunction-constructor scope and remaining terminality/product reviews are
+still open in the living plan.

@@ -2275,3 +2275,84 @@ qualification remain current. Catalog and source-health freshness pass
 `572f0000657f984a30619a6bae7951a5b42bda981ccdeb067971e9da792698be`).
 Only the plan/ledger and non-library extraction audit change in this checkpoint.
 No main integration/publication occurs, and the goal remains active.
+
+### UA-1d — Native Naturality And Triangle Observations
+
+Previous turn: progress at `d07d0e2f`; the worktree is clean and the published
+baseline remains an ancestor. The retained eight-check candidate replays
+(`ua1d_identity_image_baseline-20260918-031701.log`). No prior checker is live.
+
+Continue from the original whole ProfComparison and selected inverse. Inspect
+its native displayed naturality cells and the existing DefIso evaluation laws
+before adding any normalization. The intended nonidentity formulas and
+triangles are ordinary law observations of the already constructed whole
+transformations. Use the native cells and existing ordinary truncation to
+observe equations; do not ask callers for square proofs or transport an
+operational functor along a path. The separate constructor scope question
+remains pending, without an assumed answer or change to UA-2.
+
+The original whole map r supplies a native displayed naturality cell through
+fdapp1_int_cell over (id_x,f). In an ordinary target its discrete Hom converts
+that cell to the equation G[f]∘r_x,x(id_x)=r_x,y(f). Keep the literal native
+Hom_fapp0 endpoint first, then apply the existing Hom-action and identity
+laws under the original component functor. Assuming the simplified endpoint
+directly fails because the proof-time comparison is not propagated through
+arbitrary evaluation. No additional rule is needed
+(`ua1d_native_prof_cov_path-20260918-032403.log`).
+
+Staging the existing ordinary transfor cut before identity specialization
+gives G[f]∘α_x=α[f]. Combining this with the checked component formula
+derives α[f]=r_x,y(f) for the actual reconstructed whole α
+(`ua1d_transf_action_cut-20260918-032647.log`,
+`ua1d_reconstruction_actions-20260918-032759.log`). This is an ordinary
+action equation, not a new runtime normalization claim.
+
+Likewise, staging generic evaluation of a composite before specializing its
+functors to the selected DefIso maps proves both point inverse equations.
+Existing defiso_fmap gives the original ProfComparison's component DefIso;
+the current adjunction-mates import supplies its established Prof_cat view
+(`ua1d_defiso_point_staged-20260918-033011.log`,
+`ua1d_prof_inverse_paths-20260918-033209.log`). This avoids the four proposed
+component-inverse runtime clauses in the separate constructor experiment.
+
+Native naturality of Φ and Φ⁻¹ then proves the ordinary mate formulas
+G[f]∘η_a=Φ_a,b(f) and ε_b∘F[g]=Φ⁻¹_a,b(g)
+(`ua1d_mate_formulas-20260918-033438.log`). The same original inverse laws,
+together with the proved component equations for the actual η and ε,
+give both triangle equations at components
+(`ua1d_triangle_points-20260918-033739.log`). Existing whole whiskering and
+one_cat_modification lift these to modifications and equations
+(ε⋅F)∘(F⋅η)=id_F and (G⋅ε)∘(η⋅G)=id_G
+(`ua1d_whole_triangles-20260918-034018.log`). These are derived ordinary
+law observations. They add no structural primitive, runtime rule or
+caller-supplied square obligation beyond the retained candidate's three
+previously audited proposed owner clauses and the existing library contracts.
+
+The complete candidate adds eight focused assertions to the previous eight:
+both whole triangle modifications and equations, unit/counit nonidentity
+action specializations, and two controls retaining an arbitrary supplied
+comparison rather than identifying different inputs. All sixteen assertions
+and all definition bodies pass
+(`ua1d_final_identity_image_candidate-20260918-034547.log`). The retained
+compressed candidate now has uncompressed SHA-256
+`a266ee100bd5befc325821b03e3fb2013e4fe37e521b73f227ca36d0a92a904f`.
+The active core, comma and ordinary-arrow owners match their manifest hashes;
+none of the library source or existing Γ/H/model contracts changes.
+
+The compressed bytes replay under a fresh module identity
+(`ua1d_identity_image_replay-20260918-035156.log`), again passing all sixteen
+assertions with an empty warning inventory. Both final runs retain the serial
+2GiB/90s/o20 profile with subject reduction and warnings enabled. The proposed
+owner clauses are unchanged from UA-1c; this extension contains definitions
+and assertions only. Strict catalog and source-health freshness checks pass
+at the unchanged 1287-file snapshot
+`572f0000657f984a30619a6bae7951a5b42bda981ccdeb067971e9da792698be`.
+No repository-wide aggregate or unchanged CAS replay is repeated.
+
+Public extraction factoring/promotion remains the next UA-1 gate. Share the
+generalized graph at the current comma owner while preserving its public Γ
+wrappers and actual H consumer; do not copy the experimental derivation into
+a second active owner. UA-2's constructor/consumer decision, higher-terminality
+review, the product/weighted consumer assessment and final audit/book updates
+remain open. The goal is active, main/publication remain unchanged, and all
+existing Op/profile, six-term and spectral deferrals remain in force.

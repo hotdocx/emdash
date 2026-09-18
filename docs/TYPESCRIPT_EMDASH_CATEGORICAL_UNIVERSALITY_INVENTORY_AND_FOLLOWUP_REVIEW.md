@@ -1,7 +1,7 @@
 # Categorical Universality: Current Inventory And Follow-Up Review
 
 Date: 2026-09-17
-Status: active living implementation plan — accepted 2026-09-17; ordinary family migration and bounded uniqueness inference audit qualified; Γ and later tranches open
+Status: active living implementation plan — accepted 2026-09-17; ordinary family migration, bounded uniqueness inference audit and public Γ/H comparison qualified; unit/counit extraction candidate has checked action and triangle laws; promotion and remaining reviews open
 Baseline: `79237a008eff872832b20105b088f432fc24d8a1`
 Plan-ID: TS-EMDASH-CATEGORICAL-UNIVERSALITY-ASSEMBLY
 Implementation worktree: `/home/user1/emdash1-categorical-core-v1`
@@ -338,7 +338,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | Tranche | Required result | State |
 | --- | --- | --- |
 | UA-0 | Integrate accepted review, persist the terminal-unifier evidence and controls, establish current source/validation baseline and start the new goal. | Qualified |
-| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | A new checked non-library candidate derives both whole transformations and proves their ordinary identity-image component formulas through existing laws. Shared-owner factoring, promotion and the remaining action/triangle observations are pending |
+| UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | The checked non-library candidate derives both whole transformations, their ordinary identity-image component formulas and nonidentity action equations, and both whole triangle modifications/equations. Shared-owner factoring and public promotion remain pending |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
 | UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ, its whole projections, triangle and H comparisons now have public owners. Qualified: public inverse/point observations, the existing Freyd-model specialization, integrated diagnostics and all 94 nonsplit assertions pass with the new comparison modules loaded. Direct higher target normalization is unqualified and was unnecessary for this consumer |
@@ -415,9 +415,12 @@ proves the component formulas using existing identity laws. Two canonical
 curry/Hom proof-time views and one scoped universal-arrow identity observation
 remain proposed owner extensions. Broader product runtime clauses were
 rejected; ordinary component equations do not define a transported functor.
-The compressed eight-check candidate and owner-warning evidence are retained
-outside the library. Public factoring and the remaining action/triangle
-qualification remain required; this does not yet supply an Adjunction witness.
+The compressed sixteen-check candidate and owner-warning evidence are retained
+outside the library. Original native naturality cells and selected inverse
+laws now give nonidentity action equations and both whole triangle
+modifications/equations through the existing ordinary modification interface.
+No additional runtime rule is used for those laws. Public factoring and
+promotion remain required; this does not yet supply an Adjunction witness.
 
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
