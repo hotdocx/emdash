@@ -1936,3 +1936,105 @@ Final owner SHA-256 values:
 - `emdash3_2_cubical_square_total.lp`: `449333a73f64ee023b3bfc7599eefa6525813ec038d0a1886f8931df2059d254`.
 - `emdash3_2_one_cat_zero_cones.lp`: `99e91ecda4c2fbc2ef723d60c55237839efeb2074f8ad7fda69950e668aee495`.
 - `emdash3_2_one_cat_adjunction_family_views.lp`: `e7d806c630b93dd02ce3497993aec43e1e79b4c1c48f8bc20bd8a08fd3851bec`.
+
+### UA-4l — Public Comma-Family Definition Factoring
+
+Previous turn: progress at `0144303c`; the worktree is clean and the published
+baseline remains an ancestor. The unchanged 101-assertion replay passes again
+(`ua4_library_whole_homology-20260918-005619.log`). No earlier checker is live.
+
+The import audit finds no external positive users of the protected internal
+graph helpers. Move that unchanged derivation, renamed internally, together
+with Γ and its whole source/target comparisons into a represented-comma-family
+owner. Keep its helper declarations protected and expose the classifier,
+actual source/target functors and retained source/target comparison data.
+The existing public stable graph keeps its implementation and no longer owns
+unused private derivation machinery. Whole transformation/isomorphism
+whiskering helpers have a separate derived utility owner, reusing the original
+composition functors and IsoEvidence action. No primitive, rule, universal
+contract or inverse choice is added in this factoring tranche.
+
+First check full candidate owners with the retained private controls. Then
+exercise the public imports in the existing triangle/H consumers, removing
+promoted definition duplicates. Preserve the ordinary target qualification
+and the stronger D[θ] nonclaim. The broader goal and its other scoped reviews
+remain active.
+
+The factoring is now qualified at its public imports. The new
+emdash3_2_represented_comma_families owner contains 100 transparent definitions:
+93 protected internal stages and seven public operations. The latter are
+represented_comma_family_func, its source/target functor views, the source
+IsoEvidence and forward map, and the ordinary target forward map with its
+fixed-forward OmegaEquivAlong. The target witness still takes OneCat(Y).
+The four generic whole transformation/IsoEvidence whiskering definitions live
+in emdash3_2_transfor_whiskering. Every body retains the original composition
+functor or inverse-data operation; no new primitive, rule or contract is added.
+
+The former protected graph derivation moves, with internal names, into the
+same comma owner as its actual consumers. An exact stripped-comment comparison
+confirms that every remaining public graph declaration and rule is unchanged.
+No external positive source referenced the removed protected names. The public
+stable graph and its selected prototype identity overlap remain separate from
+the internal derivation; no graph beta, profile or variance claim is changed.
+
+Candidate receipts: ua4l_comma_owner-20260918-010124.log (64 assertions),
+ua4l_comma_source-20260918-010212.log, and the genuine import consumer
+ua4l_imported_homology-20260918-010238.log (38 assertions). The graph warning
+comparison uses fresh full source copies, since an up-to-date compiled source
+check can emit no warnings: ua4l_graph_baseline-20260918-010443.log against
+ua4l_graph_source-20260918-010306.log. All five normalized inventories match,
+retaining the three inherited graph/strict-identity overlaps. New owner and
+actual imported-H warning inventories are empty
+(`tmp/probes/ua4l_warning_comparison.json`).
+
+Public owner compilation passes, with generated objects, in
+emdash3_2_transfor_whiskering-20260918-010627.log and
+emdash3_2_represented_comma_families-20260918-010628.log. The current replay
+separates 64 private structural controls, the unchanged two projection controls,
+and 38 actual triangle/H assertions. The public represented-comma reviewer adds
+24 assertions at the supported interface, including first-arrow and higher
+source observations, computing comparison components and retained whole inverse
+laws. The six whiskering assertions check components and both selected inverse
+maps. The original graph and graph-profile reviewers also pass. Exact commands
+and times are in `tmp/probes/ua4l_focused_results.json`; every focused check
+uses 2GiB/90s/o20 with SR/warnings on.
+
+The final native H consumer imports the comma library; it contains neither
+protected graph names nor a full graph source copy. Only the private input
+controls require a source-owner copy. The former ten constructor/projection
+and duplicated action/check fragments are deleted; current source and the
+reviewers own them, with Git preserving their history. Historical stronger
+conversion controls stay explicitly outside the current queue. The preserved
+64+38 split includes the original 101 assertions and additionally keeps the
+first target-arrow assertion in the input controls.
+
+The integrated nucleus passes with both new owners imported on the existing
+require line (`emdash3_2_checks-20260918-010945.log`), using compiled parents,
+SR enabled and its recorded quiet 6GiB/90s/o20,v1024 profile. All eight nonsplit
+artifact hashes remain unchanged. Their recursive import graphs exclude the
+new definition owners, and the only changed old owner retains every public
+statement and rule byte-for-byte apart from comments. The core and all other
+old semantic owners are unchanged. Thus the fresh UA-4k 94-assertion evidence
+is carried forward rather than replayed for this definition-only separation
+(`tmp/probes/ua4l_native_carry_forward.json`). The actual newly affected H
+consumer is checked separately above; this does not claim a new CAS model.
+
+Checker/metrics registrations, AGENTS, Foundations, canonical syntax, standing
+status/index, inventory and audit replay/README are synchronized. Catalog,
+source TOC and 182 book evidence claims pass. Source-health collects 1280 files
+at snapshot `89c1e2a01c41c0198f8fbc8dd62bf331401bd3915c93ba853adba17b636af28e`;
+this is source freshness, not a repository-wide execution claim. The replay
+script compiles and the modified shell registration passes syntax checking.
+Book exposition remains scheduled for UA-6.
+
+This checkpoint completes public Γ/projection factoring. Next promote the
+retained ordinary triangle and actual boundary/H comparison, preserving its
+literal original H endpoints and inverse observations. UA-1/2/3/5 and final
+UA-6 work still remain. The goal stays active; no main integration or
+publication occurs, and the existing deferrals remain unchanged.
+
+Final `emdash3_2_gray_transformation_graph.lp` SHA-256: `42853f5764dfded28209f771f9f239e441c22fb1422f8ca72d6c372f24d0571f`.
+
+Final `emdash3_2_represented_comma_families.lp` SHA-256: `17544bc239412c1306f0b241586bdf379e1be801c93b03e1d349d240a5b69ac7`.
+
+Final `emdash3_2_transfor_whiskering.lp` SHA-256: `3d9eb23fdd89a0cb547bde1814c9786f7a969a9ead27d79c8db2b6c2ccaf42be`.

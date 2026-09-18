@@ -21,14 +21,10 @@ def main() -> None:
         count = len(re.findall(r"(?m)^\s*assert(?:not)?\b", source))
         print(f"{path.relative_to(root)}: {count} assertions")
 
-    # The graph helpers are protected, so retain the complete source owner.
-    graph = (root / "emdash3_2_gray_transformation_graph.lp").read_text()
-    constructor = fragment("constructor_fragment.lp")
-    write("ua4_library_actions.lp", [graph, constructor] + [
-        fragment(name) for name in (
-            "triangle.lpfragment", "next_source.lpfragment",
-            "third_source.lpfragment",
-        )
+    # Only the private structural controls need a complete source owner.
+    write("ua4_comma_owner_checks.lp", [
+        (root / "emdash3_2_represented_comma_families.lp").read_text(),
+        fragment("comma_family_owner_checks.lpfragment"),
     ])
     write("ua4_library_projection.lp", [
         "require open emdash.emdash3_2_cubical_square_total;",
@@ -36,17 +32,11 @@ def main() -> None:
     ])
 
     parts = [
-        graph,
-        "require open emdash.emdash3_2_iso_evidence_constructors;",
+        "require open emdash.emdash3_2_represented_comma_families;",
         "require open emdash.emdash3_2_one_cat_modifications;",
         "require open emdash.emdash3_2_one_cat_zero_cones;",
-        "require open emdash.emdash3_2_one_cat_adjunction_family_views;",
-        constructor.split("// The target side is the actual action", 1)[0],
     ]
     parts += [fragment(name) for name in (
-        "whole_source.lpfragment", "target_section_extraction.lpfragment",
-        "target_basechange_link.lpfragment", "target_section_grouping.lpfragment",
-        "target_classification.lpfragment", "target_classification_controls.lpfragment",
         "triangle_comparison.lpfragment", "triangle_controls.lpfragment",
         "boundary_comparison.lpfragment", "boundary_reconstruction.lpfragment",
         "whole_homology_comparison.lpfragment", "whole_homology_point_view.lpfragment",

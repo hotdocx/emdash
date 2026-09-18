@@ -1,9 +1,9 @@
-/* Append after the successful UA-4c source replay. Expected to fail at
-   the final conversion assertion on the recorded core/candidate rules.
-   The named arrow itself typechecks; this is a stronger computation test. */
+/* Historical stronger conversion control, outside the current queue.
+   If explicitly resumed, append to the represented-comma source owner.
+   Its named arrow forms; this final conversion was not qualified. */
 assert [K X Y : Cat] (J : τ (Functor X Y))
   (A : τ (Functor K X)) (D : τ (Functor K Y))
   (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
   (x y : τ (Obj K)) (g : τ (Hom K x y)) ⊢
-  @ua4c_gamma_source_to_arrow K X Y J A D h x y g
+  @comma_source_gamma_source_to_arrow K X Y J A D h x y g
   ≡ @fapp1_fapp0 K X A x y g;

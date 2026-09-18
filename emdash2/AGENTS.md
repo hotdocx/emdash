@@ -82,9 +82,12 @@ inverse data and point observations; its public integration is in progress.
 `emdash3_2_one_cat_modifications.lp` owns its first promoted support interface:
 ordinary modification introduction and a derived staged unit-law observation.
 The remaining Sigma/section projection views and component rules now live at
-their original core, varying-projection, zero-cone and mate-view owners. The
-Γ/H definitions remain in the linked audit pending public factoring; its
-current replay imports those rules instead of declaring duplicates. Preserve
+their original core, varying-projection, zero-cone and mate-view owners.
+`emdash3_2_represented_comma_families.lp` now owns Γ and its whole source/target
+comparisons, with the internal graph derivation protected in that same owner.
+`emdash3_2_transfor_whiskering.lp` owns the derived transformation and
+isomorphism whiskering helpers. The remaining triangle/H definitions stay in
+the linked audit and consume these public imports. Preserve
 the composite-argument guard on the new postcomposition view so existing
 paired-family reindexing keeps its specialized comparison.
 Op/profile and six-term deferrals remain in force.

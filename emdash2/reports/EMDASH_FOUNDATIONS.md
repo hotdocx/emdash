@@ -3881,6 +3881,26 @@ remove the separate higher Op/profile qualification. The
 [whole Γ/H audit](../audits/categorical-family-introduction-boundary/README.md)
 record the inference, runtime and ordinary-consumer boundaries.
 
+The [represented-comma family owner](../emdash3_2_represented_comma_families.lp)
+defines Γ from J:X→Y, A:B→X, D:B→Y and h:J∘A⇒D. Its object is
+Γ(b)=(A(b),D(b),h_b); its whole action is the original internal graph,
+section and Sigma construction. The public projections are the actual
+p∘Γ and q∘Γ. `represented_comma_family_source_evidence` retains
+IsoEvidence(p∘Γ,A), while
+`one_cat_represented_comma_family_target_equiv` retains fixed-forward
+OmegaEquivAlong(q∘Γ,D,T) for the public T and OneCat(Y). Existing inverse
+projections recover the same whole inverse maps and laws. Neither projection
+comparison requires a caller to construct extra naturality squares.
+
+The graph and comparison stages remain protected in that owner. The original
+public stable graph keeps its selected computation in its separate module.
+[Whole whiskering](../emdash3_2_transfor_whiskering.lp) factors the derived
+transformation and isomorphism actions through the original composition
+functors. The [public reviewer](../examples/represented_comma_families.lp)
+checks the retained input computations and whole inverse observations. The
+triangle/H audit consumes these public operations through ordinary imports;
+its own final definition factoring remains in progress.
+
 A Pi section also has a stable Grothendieck totalization
 
 ```text

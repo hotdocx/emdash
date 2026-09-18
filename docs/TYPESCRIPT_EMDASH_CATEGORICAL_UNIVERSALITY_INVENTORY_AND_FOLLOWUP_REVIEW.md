@@ -188,7 +188,7 @@ of a classifier does not construct an inhabitant for every category.
 | `IsRepresentedBy_iso`, `Representation_iso`, `WeightedCone_prof`, `IsWeightedLimit_cov_iso`, `IsWeightedLimit_cov_comp` | [Nucleus](../emdash2/emdash3_2.lp): representability and weighted limits as whole profunctor comparisons. The chosen representing functor is supplied/retained. | The iso form uses IsoEvidence; the comp form uses ProfComparison. They differ in computational strength, not in the intended ordinary universal property. Whole push/pull operations reindex the one comparison. |
 | `WeightedColimit_con`, preservation of limits/colimits by adjoints | [Nucleus](../emdash2/emdash3_2.lp). Colimits are defined through the existing opposite weighted-limit interface; preservation constructions are derived from the mate/comparison calculus. | Direct colimit projection vocabulary is limited. This inherited duality-based route keeps its existing higher-variance qualification; it is not a completed new Op design. |
 | `one_cat_postcomp_adjunction`, `one_cat_functor_category` | [Whole family adjunctions](../emdash2/emdash3_2_one_cat_adjunction_families.lp): explicit ordinary structural declarations; unit/counit are the original cells whiskered by a family. | F⊣G gives (F∘−)⊣(G∘−). Whole family mates are definitions from that declared lift. No caller supplies pointwise naturality squares. |
-| `one_cat_modification`, `one_cat_transf_identity_path` | [Ordinary modifications](../emdash2/emdash3_2_one_cat_modifications.lp): one structural primitive assembles a native modification between two existing whole transformations into OneCat(C), with computing component projections. The staged unit-law path is a definition. | The component cells are proposition-valued, so their remaining coherence is unique. The introduction extends the old beta interface; it does not assemble arbitrary pointwise families into functors or transformations. This first Γ/H support owner is promoted in UA-4j; the complete Γ/H candidate now imports it and retains all 101 assertions. |
+| `one_cat_modification`, `one_cat_transf_identity_path` | [Ordinary modifications](../emdash2/emdash3_2_one_cat_modifications.lp): one structural primitive assembles a native modification between two existing whole transformations into OneCat(C), with computing component projections. The staged unit-law path is a definition. | The component cells are proposition-valued, so their remaining coherence is unique. The introduction extends the old beta interface; it does not assemble arbitrary pointwise families into functors or transformations. This Γ/H support owner is promoted in UA-4j. The original whole-comparison assertions are retained across the current private-input and imported-H replays. |
 | `Product_cat`, `Terminal_cat`, `Sigma_cat`, `Pi_cat`, `Pullback_catd` | [Nucleus](../emdash2/emdash3_2.lp): category/type formers, native dependent sum/product and family substitution. | These are not chosen internal products/terminal objects/pullbacks in an arbitrary C. In particular Pullback_catd(E,F) is substitution E∘F, not a categorical pullback supplied by PullbackStructure. |
 
 ## Inventory: Products, Terminality And Coproducts
@@ -225,7 +225,7 @@ of a classifier does not construct an inhabitant for every category.
 | Whole H, Coim⇒Im, `OneCatAdjunctionNormality`, `OneCatAbelianAdjunctionStructure` | [H families](../emdash2/emdash3_2_homology_adjunction_families.lp), [normality](../emdash2/emdash3_2_one_cat_adjunction_normality.lp), [Abelian package](../emdash2/emdash3_2_one_cat_abelian_adjunctions.lp). | H is derived through the same K/Q. Normality is Ω evidence along the actual whole Coim⇒Im map, retaining its inverse. Native δ/exactness and their finite ordinary/CAS observations use this primary route. |
 | `one_cat_diagram_reconstruction_iso` | [Diagram reconstruction](../emdash2/emdash3_2_one_cat_diagram_reconstruction.lp): declared ordinary D∘E≅id on the walking-arrow diagram category. | Derived faithfulness and actual inverse diagram maps support the universal-operation consumers. This is a shape-comparison assembly, not a new kernel universality or an unrestricted equivalence with higher LaxArrow(C). |
 | `one_cat_arrow_family_comparison_evidence`, `one_cat_diagram_family_reconstruction_evidence` | [Arrow-family isomorphisms](../emdash2/emdash3_2_one_cat_arrow_family_isomorphisms.lp) and [family reconstruction](../emdash2/emdash3_2_one_cat_diagram_family_reconstruction.lp): fully defined whole maps and inverse-law evidence. | [Generic reflection](../emdash2/emdash3_2_one_cat_diagram_family_reflection.lp) and the two original reconstruction maps have independent owners; their moved signatures/bodies are unchanged. IsoEvidence laws are not advertised as additional DefIso runtime cuts. |
-| Γ and the whole H comparison | [Retained audit candidate](../emdash2/audits/categorical-family-introduction-boundary/README.md), not an active library declaration. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J) in the isolated candidate. Both arrow projections and retained triangle pass with two unpromoted Sigma projection rules. The core's recursive Sigma action now supports the source projection through third-level cells. The higher target projection and whole H comparison remain open. |
+| Γ and the whole H comparison | [Public Γ/projection owner](../emdash2/emdash3_2_represented_comma_families.lp); the [triangle/H definitions](../emdash2/audits/categorical-family-introduction-boundary/README.md) remain audit candidates. | Γ classifies A,D,h:J∘A⇒D into RepresentedComma(J), retaining whole source IsoEvidence and ordinary target OmegaEquivAlong. Public inputs and the actual whole H import consumer check with original inverses and point observations. Stronger direct D[θ] runtime normalization remains unqualified and was unnecessary for this consumer. |
 
 ## The Actual Relation Map
 
@@ -341,7 +341,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The isolated ordinary candidate now checks H_family≅H_native∘Γ with its original endpoint functors, selected maps/inverses and whole laws. Its 101 assertions include both input projections, triangle compatibility and the existing point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Public definition factoring and final API qualification remain. Direct higher target normalization is unqualified and was unnecessary for this consumer |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The ordinary candidate checks H_family≅H_native∘Γ with original endpoint functors, selected maps/inverses and whole laws. The private-input and imported-H replays preserve both projections, triangle compatibility and the original point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Γ and its whole projection comparisons now have a public owner; triangle/H definition factoring and final API qualification remain. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -367,7 +367,7 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: complete public factoring of the checked Γ/H candidate. Its
+Current queue: complete public triangle/H factoring after Γ promotion. Its
 whole source comparison p∘Γ≅A, target comparison q∘Γ≃D and triangle
 modification T∘τΓ≅h∘J(S) retain the original A,D,h and their action. The
 actual boundary-diagram isomorphism and original Q then give
@@ -380,7 +380,7 @@ for this actual consumer.
 UA-4j promotes the ordinary modification introduction and staged unit lemma.
 UA-4k places the remaining structural rules at their original core,
 varying-Sigma projection, zero-cone and adjunction-family-view owners. The
-current 101-assertion replay imports all of them without duplicate rules;
+Γ/H replays import all of them without duplicate rules;
 the separate first-arrow and higher-source computations also pass. These
 selected whole projection views extend the former component interface;
 they are not all derivations from its old β rules. The native
@@ -389,10 +389,18 @@ The postcomposition view is guarded by its actual composite argument:
 integration exposed that its broader form intercepts the existing paired
 product-family comparison. The guarded version passes both actual consumers.
 
+UA-4l moves the internal graph derivation and whole projection comparisons
+into emdash3_2_represented_comma_families.lp, retaining its helpers as protected
+and exposing seven public classifier/projection/comparison operations.
+emdash3_2_transfor_whiskering.lp owns four derived whole-whiskering operations.
+The 24-assertion public reviewer and the actual 38-assertion triangle/H import
+consumer pass without protected names or a graph source copy. The 64 private
+controls remain an owner-position audit. No primitive or rule changes.
+
 The ledger records owner-position/SR and five-part warning comparisons,
-focused consumer checks and fresh joint native/CAS qualification. Public
-Γ/H definitions are still audit candidates; supporting-rule promotion alone
-does not establish a complete library API. The inherited compiled-import
+focused consumer checks and native/CAS qualification. The remaining triangle/H
+definitions are still audit candidates; Γ promotion alone does not establish
+the final H library API. The inherited compiled-import
 Pi reviewer boundary remains separately recorded, without a broad eta fix
 or a claimed full-repository green aggregate. Complete the remaining
 UA-1/2/3/5 reviews and UA-6 audit/book work after Γ/H integration.

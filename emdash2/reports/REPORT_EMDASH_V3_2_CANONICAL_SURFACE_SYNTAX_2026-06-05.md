@@ -403,6 +403,16 @@ retain canonical fibrewise Sigma, base-change and identity-graph data.
 Their current Γ/H consumer is qualified for ordinary targets; the separate
 higher Op/profile review remains deferred.
 
+For h:J∘A⇒D, write Γ for `represented_comma_family_func(J,A,D,h)`.
+Its public source and target views denote the actual p∘Γ and q∘Γ.
+`represented_comma_family_source_evidence` retains p∘Γ≅A, and
+`one_cat_represented_comma_family_target_equiv` retains the existing
+OmegaEquivAlong data on the named q∘Γ⇒D map, with OneCat(Y). Use the existing
+IsoEvidence/Ω inverse projections rather than selecting another inverse.
+Whole `transf_prewhisker`/`transf_postwhisker` and their IsoEvidence counterparts
+are derived applications of the original composition functors; they add no
+new naturality data or rewrite policy.
+
 Likewise, write displayed identity using the generic identity notation. The
 compatibility name `id_transfd(FF)` is a transparent view of
 `id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel

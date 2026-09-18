@@ -42,7 +42,8 @@ resource and warning receipts. This does not repair the separate Op/profile
 qualifications. The [whole input/H-comparison candidate](../audits/categorical-family-introduction-boundary/README.md)
 now checks both whole input projections, the original input transformation,
 and H_family≅H_native∘Γ with retained inverse data and point observations.
-Its structural support is at the existing library owners; public Γ/H
+Its structural support is at the existing library owners. Γ and its whole
+projection comparisons now have a public definition owner; triangle/H
 factoring remains in progress. The active assembly ledger records joint
 native-consumer qualification. Op/duality, action-profile integration and the
 large six-term comparison remain deferred.
@@ -872,7 +873,20 @@ both are published, with the live PDF matching the checked artifact. See the
   action. Generic `fapp1_func` retains the next action. Its identity overlap
   with the historical global strict-functor cut is deliberately accepted
   pending the planned profile-local cut migration; the transparent
-  represented-Sigma/opposite construction remains protected evidence.
+  represented-Sigma/opposite construction remains protected evidence in the
+  represented-comma-family owner below.
+- `emdash3_2_transfor_whiskering.lp`: derived pre/post-whiskering of whole
+  transformations and IsoEvidence, through the original composition
+  functors. Both selected arrows and their laws remain available.
+- `emdash3_2_represented_comma_families.lp`: the internal classifier Γ of
+  supplied J,A,D,h, its actual source/target projections, whole source
+  IsoEvidence and an ordinary-target fixed-forward OmegaEquivAlong to D.
+  The renamed internal graph derivation and comparison stages are protected
+  in this owner. Public imports retain first-arrow and higher source
+  observations; the actual triangle/H consumer uses no protected names or
+  copied graph source. This module adds definitions only. Its whole target
+  inverse retains OneCat(Y), and stronger D[θ] runtime normalization is not
+  claimed. It does not replace hom_int/homd_int or repair higher Op variance.
 - `emdash3_2_gray_cubes.lp`,
   `emdash3_2_gray_transformation_graph_profile.lp`,
   `emdash3_2_gray_cube_decoder.lp`, and

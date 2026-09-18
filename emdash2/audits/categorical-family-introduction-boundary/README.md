@@ -1,11 +1,12 @@
 # Whole Native Comma-Family Introduction: Ordinary Γ/H Qualification
 
-Status (2026-09-18, UA-4k): the ordinary Γ/H candidate checks both whole
-input projections, compatibility with the original h, and
-H_family≅H_native∘Γ. The original functors, maps, inverses and whole inverse
-laws are retained. The 101-assertion replay now imports all structural rules
-from their positive library owners. Γ/H definitions remain in this audit
-pending public factoring and qualification.
+Status (2026-09-18, UA-4l): Γ and its whole source/target comparisons now
+have a public library owner. The original functors, maps, inverses and whole
+inverse laws are retained. The actual triangle/H comparison consumes this
+public interface through imports and passes all 38 assertions. Its remaining
+triangle/boundary/H definitions stay in this audit pending their own factoring.
+The full input-construction controls are retained separately; the earlier
+101-assertion monolith is no longer the replay layout.
 
 The active scope and chronological evidence belong to the
 [universality plan](../../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
@@ -43,7 +44,7 @@ revive that stronger experiment without a concrete consumer. This result does
 not repair or qualify general higher Op/duality semantics; that work and the
 separate action-profile migration remain deferred.
 
-## Current Rule Owners
+## Current Owners
 
 | Owner | Added support |
 | --- | --- |
@@ -52,6 +53,8 @@ separate action-profile migration remain deferred.
 | `emdash3_2_one_cat_zero_cones.lp` | Original universal τ's constructor-visible identity observation |
 | `emdash3_2_one_cat_adjunction_family_views.lp` | Represented postcomposition comparison with an already associated composite |
 | `emdash3_2_one_cat_modifications.lp` | Ordinary modification introduction and derived staged unit-law observation |
+| `emdash3_2_transfor_whiskering.lp` | Derived whole transformation and IsoEvidence whiskering |
+| `emdash3_2_represented_comma_families.lp` | Public Γ, actual projections, source IsoEvidence and ordinary target OmegaEquivAlong; protected internal graph derivation |
 
 Whole projection views are explicitly selected structural comparisons beyond
 the old component β interface. They preserve runtime heads. Sufficient
@@ -76,32 +79,44 @@ theorem or unrestricted higher semantic qualification.
 
 ## Reproduce The Current Candidate
 
-The graph helpers are protected. `replay.py` therefore appends definitions to
-a complete copy of `emdash3_2_gray_transformation_graph.lp`, importing all
-other owners normally. It generates three consumers without redeclaring any
-promoted rule:
+The actual H consumer imports the public represented-comma owner. Only the
+private structural controls need a full copy of that owner; its declarations
+are read directly from the maintained source, not copied into this audit.
+`replay.py` generates three consumers:
 
 ```bash
 python3 audits/categorical-family-introduction-boundary/replay.py
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh tmp/probes/ua4_comma_owner_checks.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_library_projection.lp
 OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
-  scripts/probe.sh tmp/probes/ua4_library_actions.lp
-OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
   scripts/probe.sh tmp/probes/ua4_library_whole_homology.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/represented_comma_families.lp
+OCAMLRUNPARAM=o=20 EMDASH_LAMBDAPI_WARNINGS=1 \
+  scripts/probe.sh examples/transfor_whiskering.lp
 ```
 
 Run them serially with the standard 2GiB/90s guard and subject reduction.
-They contain respectively 2 projection controls, 5 input-action assertions,
-and 101 whole-H assertions. The registered
+They contain respectively 64 private input controls, 2 projection controls,
+38 imported whole-H assertions, 24 public Γ assertions and 6 whole-whiskering
+assertions. The 64 controls include the formerly separate first target-arrow
+assertion; the public reviewer also retains the higher source observations.
+The registered
 [`sigma_section_projection_views` reviewer](../../examples/sigma_section_projection_views.lp)
 adds eight focused positive/negative inference and runtime controls. The
 existing section-postcomposition and ordinary-modification reviewers remain
 independent. No full-repository aggregate is implied by these scoped checks.
 
+The ten former constructor/projection-definition and duplicated action/check
+fragments are retired. Their definitions now have named library owners and
+their assertions are in the public reviewer or
+`comma_family_owner_checks.lpfragment`. Git retains the earlier versions.
+
 ## UA-4c: Whole Source Comparison
 
-`whole_source.lpfragment` constructs IsoEvidence(p∘Γ,A). Its three steps
+The public `represented_comma_family_source_evidence` retains IsoEvidence(p∘Γ,A). Its three steps
 remove the family reframe from the projection, project total base change,
 and project the totalized section. Existing precomposition, postcomposition
 and composition of IsoEvidence retain both maps and laws. Both components
@@ -111,7 +126,7 @@ They do not introduce an Op signature or a general functor eta rule.
 
 ## UA-4d: Native Target-Section Extraction
 
-`target_section_extraction.lpfragment` compares the observed section total
+The protected section-extraction definitions compare the observed section total
 U=π₂∘Σ(P)∘total(s) with V=P⋅s, where P is the actual reframed target
 projection and s the original graph section. The existing whole section-total
 comparison gives U⇒V. Its selected inverse data use the existing strict
@@ -120,7 +135,7 @@ projection view is now owned by the core, not duplicated here.
 
 ## UA-4e: Link To The Actual Native Target
 
-`target_basechange_link.lpfragment` uses the existing Sigma compositor and
+The protected base-change link uses the existing Sigma compositor and
 family-natural base-change cell to link Uᵒ with q∘Γ. Their canonical components
 compute to identities at the original endpoint pairs. The actual reversed
 variance of the existing Op_transf turns U⇒V into Vᵒ⇒Uᵒ. Composition yields
@@ -130,7 +145,7 @@ reduction; its weaker variant is not installed.
 
 ## UA-4f: Grouping The Actual Graph Section
 
-`target_section_grouping.lpfragment` uses the existing noninjective
+The protected graph-section grouping uses the existing noninjective
 section_postcomp_sec owner and its proof-time associativity view. Distinct
 intermediate families are retained. Runtime section action is unchanged and
 still uses the native dependent-Hom action. The separate groupoidal Pi
@@ -139,7 +154,7 @@ in the ledger; it is not hidden by a generic eta rule.
 
 ## UA-4g: Whole Target Classification
 
-`target_classification.lpfragment` retains the original identity reframe and
+The protected target classification retains the original identity reframe and
 uses the canonical projection laws
 
 ```text
@@ -151,7 +166,7 @@ Here B_F denotes the base-change map and B the parameter category. Whole
 identity comparisons at these presentations, the existing reversed Op_transf and ordinary pointwise
 inverse assembly give Vᵒ≃D. Composing with the retained inverse of the
 previous link gives q∘Γ≃D. The component maps, selected inverses and laws
-are checked. `target_classification_controls.lpfragment` rejects unrelated
+are checked. The retained private controls reject unrelated
 families, arbitrary section maps and arbitrary sections in place of the
 canonical identity graph, and preserves distinct runtime presentations.
 
@@ -203,8 +218,9 @@ removed after promotion. The current replay imports this public owner.
 
 ## Remaining Promotion Boundary
 
-UA-4k integrates the remaining supporting rules and rechecks the actual
-Γ/H consumers against them. The public Γ/H definitions still need factoring,
+UA-4k integrates the supporting rules; UA-4l promotes Γ and its whole
+projection comparisons, with the actual H consumer now using public imports.
+The triangle and boundary/H definitions still need their public factoring,
 naming and import/API qualification. Preserve the first-arrow computations,
 original endpoint expressions and all inverse data. Joint native/CAS and
 integrated diagnostic evidence must be current after each affected owner

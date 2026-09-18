@@ -1,8 +1,0 @@
-/* Append after next_source.lpfragment; arbitrary third cells retain A action. */
-assert [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
- (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D))
- (x y : τ (Obj K)) (p q : τ (Hom K x y))
- (theta eta : τ (Hom (Hom_cat K x y) p q))
- (xi : τ (Hom (Hom_cat (Hom_cat K x y) p q) theta eta)) ⊢
-@fapp1_fapp0 (Hom_cat (Hom_cat K x y) p q) (Hom_cat (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_fapp0 K X A x y p) (@fapp1_fapp0 K X A x y q)) (@fapp1_func (Hom_cat K x y) (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_func K X (@comp_cat_fapp0 K (@RepresentedComma_cat X Y J) X (@represented_comma_source_func X Y J) (@ua4_gamma K X Y J A D h)) x y) p q) theta eta xi
- ≡ @fapp1_fapp0 (Hom_cat (Hom_cat K x y) p q) (Hom_cat (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_fapp0 K X A x y p) (@fapp1_fapp0 K X A x y q)) (@fapp1_func (Hom_cat K x y) (Hom_cat X (@fapp0 K X A x) (@fapp0 K X A y)) (@fapp1_func K X A x y) p q) theta eta xi;

@@ -651,6 +651,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_gray_interchanger.lp"),
     Path("emdash3_2_gray_interchanger_orientation.lp"),
     Path("emdash3_2_gray_transformation_graph.lp"),
+    Path("emdash3_2_transfor_whiskering.lp"),
+    Path("emdash3_2_represented_comma_families.lp"),
     Path("emdash3_2_gray_cubes.lp"),
     Path("emdash3_2_gray_transformation_graph_profile.lp"),
     Path("emdash3_2_gray_cube_decoder.lp"),

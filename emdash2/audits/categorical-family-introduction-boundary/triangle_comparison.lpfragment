@@ -1,6 +1,6 @@
-/* The actual ordinary zero-cone family, its whole triangle modification,
-   retained inverse and first kernel-mate consumer. Append after the combined
-   UA-4g replay and the two UA-4h structural fragments. */
+/* Ordinary zero-cone family, its whole triangle and retained inverse.
+   This candidate consumes the public comma/whiskering owners via replay.py;
+   the last section retains its first whole kernel-mate image. */
 
 symbol ua4h_gamma [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
@@ -19,7 +19,7 @@ symbol ua4h_source [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
      (@terminal_arrow_diagram_func C t T) A) D))
  : τ (Functor B C)
-≔ @ua4c_gamma_source0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
+≔ @represented_comma_family_source_func B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
 
 symbol ua4h_target [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
@@ -28,7 +28,7 @@ symbol ua4h_target [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
      (@terminal_arrow_diagram_func C t T) A) D))
  : τ (Functor B (Functor_cat WalkingArrow_cat C))
-≔ @ua4e_gamma_target_func B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
+≔ @represented_comma_family_target_func B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
 
 symbol ua4h_universal [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
@@ -38,7 +38,7 @@ symbol ua4h_universal [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
      (@terminal_arrow_diagram_func C t T) A) D))
  : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
   (@terminal_arrow_diagram_func C t T) (@ua4h_source B C C1 t T A D h)) (@ua4h_target B C C1 t T A D h))
-≔ @ua4e_pre B (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@ua4h_gamma B C C1 t T A D h)
+≔ @transf_prewhisker B (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@ua4h_gamma B C C1 t T A D h)
   (@comp_cat_fapp0 (@ZeroArrowCone_cat C t T) C (Functor_cat WalkingArrow_cat C)
   (@terminal_arrow_diagram_func C t T) (@zero_arrow_cone_first_func C t T))
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T);
@@ -50,7 +50,7 @@ symbol ua4h_source_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
      (@terminal_arrow_diagram_func C t T) A) D))
  : τ (@Transf B C (@ua4h_source B C C1 t T A D h) A)
-≔ @ua4c_gamma_source_to B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
+≔ @represented_comma_family_source_to B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A D h;
 
 symbol ua4h_target_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (t : τ (Obj C)) (T : τ (@TerminalObject C t)) (A : τ (Functor B C))
@@ -59,7 +59,7 @@ symbol ua4h_target_to [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
      (@terminal_arrow_diagram_func C t T) A) D))
  : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@ua4h_target B C C1 t T A D h) D)
-≔ @ua4g_native_target_to_supplied B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t
+≔ @one_cat_represented_comma_family_target_to B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t
   T) A D h (@one_cat_functor_category WalkingArrow_cat C C1);
 
 symbol ua4h_triangle_left [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
@@ -86,7 +86,7 @@ symbol ua4h_triangle_right [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
 ≔ @comp_fapp0 (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@comp_cat_fapp0 B C (Functor_cat
   WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@ua4h_source B C C1 t T A D h))
   (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D h
-  (@ua4e_post B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@ua4h_source B C
+  (@transf_postwhisker B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@ua4h_source B C
   C1 t T A D h) A (@ua4h_source_to B C C1 t T A D h));
 
 assert [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))

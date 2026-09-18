@@ -1,4 +1,5 @@
-/* The retained next action types; the final conversion assertion is an expected failure. */
+/* Historical stronger target conversion control, outside the current queue.
+   It uses the public comma-family import; the final conversion is unqualified. */
 symbol ua4_gamma [K X Y : Cat] (J : τ (Functor X Y)) (A : τ (Functor K X)) (D : τ (Functor K Y))
  (h : τ (@Transf K Y (@comp_cat_fapp0 K X Y J A) D)) : τ (Functor K (@RepresentedComma_cat X Y J))
 ≔ @represented_comma_family_func K X Y J A D h;
