@@ -3861,6 +3861,26 @@ intermediate families, which this comparison must not identify. The
 checks the whole comparison, inference from the supplied maps, the ordinary
 constant-target reading, and the retained unit and runtime boundaries.
 
+The whole projection interface also retains canonical comparisons for Sigma
+maps, total base change and totalized sections. Writing π for the original
+first projection and B_F for total base change, its opposite presentations
+include πᵒ∘total(s)ᵒ≡id, πᵒ∘Σ(FF)ᵒ≡πᵒ, and
+πᵒ∘B_Fᵒ≡Fᵒ∘πᵒ. For a constant-family section, π₂∘total(s)≡s.
+These are selected proof-time structural views, retaining runtime heads and
+the original action; they are not consequences claimed from point β rules
+alone. Sufficient congruences compare remaining endpoints and operands,
+without making composition or section mapping injective.
+
+The varying-Sigma projection owner extends the same interface to canonical
+fibrewise Sigma maps, base change, reindexing and the identity graph section.
+Its native dependent-Hom observations retain the original base arrow and fibre
+data. Canonical Sigma compositor/base-change components compute at those
+owners. These views support the checked ordinary Γ/H comparison; they do not
+remove the separate higher Op/profile qualification. The
+[projection reviewer](../examples/sigma_section_projection_views.lp) and
+[whole Γ/H audit](../audits/categorical-family-introduction-boundary/README.md)
+record the inference, runtime and ordinary-consumer boundaries.
+
 A Pi section also has a stable Grothendieck totalization
 
 ```text

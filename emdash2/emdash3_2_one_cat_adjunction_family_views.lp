@@ -74,6 +74,16 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $D $C $Q
   ≡ @comp_fapp0 Cat_cat $B $A $C (@comp_fapp0 Cat_cat $A $D $C $Q $G) $F
   ↪ [ tt ≡ tt ];
 
+// Compare represented postcomposition of a composite with its associated raw form.
+// Guard the composite argument so paired-family reindexing keeps its own views.
+// Endpoints and the entire original composite are checked in the residual.
+unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+    $A $B $C $G (@comp_fapp0 Cat_cat $A $M $B $X $U)
+  ≡ @comp_fapp0 Cat_cat $A0 $B0 $C0 $H $Y
+  ↪ [ $A ≡ $A0; $C ≡ $C0;
+      (@comp_cat_fapp0 $A $B $C $G (@comp_fapp0 Cat_cat $A $M $B $X $U))
+        ≡ (@comp_cat_fapp0 $A0 $B0 $C0 $H $Y) ];
+
 // Observation of a whole family mate in the original whiskering formula.
 symbol one_cat_adjunction_family_transpose_agrees [B R L : Cat]
   (R1 : τ (IsNCat (cat_succ cat_zero) R))

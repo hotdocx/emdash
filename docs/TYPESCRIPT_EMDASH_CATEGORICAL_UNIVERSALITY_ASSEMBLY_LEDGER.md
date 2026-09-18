@@ -1806,3 +1806,133 @@ The strict catalog is current; source-health collects 1275 files at snapshot
 The inferred-slot audit, source TOC and 182 book evidence claims pass.
 Book exposition remains scheduled for UA-6; no assembled book was hand-edited.
 The goal remains active, and no main integration or publication occurs.
+
+### UA-4k — Coupled Projection-Owner Promotion
+
+Previous turn: progress at `1945e768`; the worktree is clean and the published
+baseline remains an ancestor. The current 101-assertion imported-owner replay
+passes (`ua4j_whole_homology_import-20260918-002150.log`). No previous checker
+is live. Next qualify the remaining rule set together at its existing owners,
+including the two first-arrow projection computations; retain the existing
+rewrite/unification distinction and the recorded ordinary interpretation.
+
+The nucleus owns the three identity-component guard refinements, composition
+congruences, Sigma/section/base-change views and canonical Sigma cell components.
+The varying Sigma-projection owner owns its two action observations and four
+whole projection views. Ordinary zero-cone and adjunction-family-view owners
+own their already checked local identity observation and postcomposition view.
+Begin with a full nucleus copy at the intended declaration positions, then
+compare warnings and actual consumers before editing positive owners. This
+does not resume Op signature/variance repair or remove its qualification.
+
+The first owner integration passes the actual 101-assertion Γ/H replay and
+its seven separate projection/action assertions. The integrated nucleus also
+passes (`emdash3_2_checks-20260918-004222.log`). The fresh CAS replay then
+exposes a genuine inference interaction in the unchanged
+one_cat_biproduct_family_reindex owner: the proposed broad represented/raw
+postcomposition view intercepts the more specific paired-family comparison
+and leaves three product-family endpoint comparisons unsolved. The same
+failure reproduces in the small owner alone; it is not a resource failure.
+
+Refine the new view to a constructor-visible composite argument, the shape
+needed by the whole kernel-mate consumer. Preserve paired-input dispatch and
+check both consumers together. The full adjunction-family-view candidate with
+this guard passes SR/warnings (`ua4k_postcomp_guarded-20260918-004424.log`),
+with no warnings. The broad version is not the selected final interface.
+
+The guarded postcomposition view passes both the unchanged biproduct-reindex
+owner and the complete 101-assertion whole-H consumer
+(`ua4k_guarded_results.json` records the commands/timings). Its final owner
+and candidate warning inventories remain empty. A permanent new rule was
+not added to product reindexing to compensate for the overly broad view.
+The existing biproduct reviewer already exercises this actual paired-family
+boundary; it passes again in the final gate.
+
+Positive support now resides at four original owners. The core retains all
+834 symbols, refines the three existing identity guards, and has 761 runtime
+rules and 92 unification rules. Four new component rules and ten proof-time
+views are explicit extensions. The varying-Sigma projection adds its two
+native Hom observations and four whole views; zero-cone adds its original
+universal-cell observation; the mate-view owner adds the guarded comparison.
+The zero-cone LHS audit explicitly retains the tested opposite-source and
+constructor-visible identity endpoints; broader endpoint patterns are not
+part of this promotion. Its final edit is an annotation only, with a fresh
+owner check (`emdash3_2_one_cat_zero_cones-20260918-005210.log`).
+
+The core owner-position probe with 14 controls passes
+(`ua4k_core_owner-20260918-002913.log`). Compared with the preceding core,
+157 replaceable-variable warnings remain and inherited critical pairs drop
+1144→1140, with no added category, head, family, normalized location or parser
+issue. The installed core (`emdash3_2-20260918-003733.log`) matches that
+candidate in all five dimensions. Three extension-owner comparisons are
+empty. The imported Γ/H replay has only the three inherited graph warnings;
+the seven warnings from appended duplicate identity clauses are gone.
+The comparison JSON files are `ua4k_core_warning_comparison.json`,
+`ua4k_extension_warning_comparison.json` and
+`ua4k_import_warning_comparison.json` under `tmp/probes`.
+
+The maintained audit now uses `replay.py` to generate consumers with public
+imports and a full source copy only for the protected graph helpers. It
+contains no duplicated support rule. The projection consumer's two controls
+and the input-action consumer's five assertions pass, preserving first-arrow,
+retained triangle and third-level source observations. The whole-H replay
+passes all 101 assertions in its final form
+(`ua4_library_whole_homology-20260918-005234.log`). The eight-check
+sigma_section_projection_views reviewer and existing section-postcomposition,
+ordinary-modification, mate-view, cubical-total and biproduct-reindex reviewers
+pass. These focused checks use 2GiB/90s/o20 with SR/warnings enabled.
+The final integrated nucleus passes
+(`emdash3_2_checks-20260918-005235.log`, 3.728s), using compiled parents and its
+recorded 6GiB/90s/o20,v1024 profile, SR on and warnings quiet.
+
+All eight original nonsplit artifact hashes are unchanged, and all 94
+assertions pass freshly on the integrated semantic owners. Serial checks use
+the recorded 6GiB/180s/o20,v1024 profile, warnings/SR enabled, no swap and the
+64MiB file limit. The final annotation-only zero-cone edit changes no parsed
+statement or rule; it is independently rechecked above. Artifact results:
+
+| Artifact | Assertions | Seconds | Log |
+| --- | ---: | ---: | --- |
+| LES diagram | 48 | 33.605 | `diagram-20260918-004609.log` |
+| Snake diagram | 15 | 28.860 | `cc2c2_snake-20260918-004643.log` |
+| LES exactness 0 | 3 | 22.102 | `exactness_0-20260918-004711.log` |
+| LES exactness 1 | 3 | 21.767 | `exactness_1-20260918-004733.log` |
+| LES exactness 2 | 3 | 21.780 | `exactness_2-20260918-004755.log` |
+| Displayed LES exactness | 7 | 64.935 | `displayed_exactness-20260918-004817.log` |
+| Snake certificate signatures | 10 | 60.798 | `cc2c2_snake_certificate_signatures-20260918-004922.log` |
+| Displayed snake certificate | 5 | 63.913 | `cc2c2_snake_certificate-20260918-005023.log` |
+
+Every artifact retains its previous warning inventory in all five dimensions,
+including locations and no parser issue (`ua4k_cas_warning_comparison.json`).
+The largest reported `top_heap_words` is 731216971; this is runtime heap words,
+not process RSS or allocation traffic. The profile stays explicit and is not
+a new global memory default. No opacity, contract or inverse-data change was
+needed. The product inference failure and its correction are independent of
+these resource limits.
+
+Five promoted rule fragments are deleted, and target_section_extraction no
+longer redeclares its core view. Git preserves the old experiments. The audit
+README is consolidated around the current result, owner map, one replay recipe
+and retained mathematical boundaries, preserving its linked section anchors.
+Foundations, canonical syntax, standing status/index, AGENTS and the living
+queue are synchronized. The strict catalog remains current; source-health
+collects 1276 files at snapshot
+`40dc2180708fb4cbeede70ef75db345b8f73a1d316317960fb34b833b2c8b7e0`.
+All four owner LHS audits, source TOC, 182 book evidence claims, added local
+links and exact diff checks pass. Source-health is a source snapshot, not a
+claim to have executed every registered file; no repository-wide aggregate
+was run. Book exposition remains UA-6 work.
+
+The checkpoint qualifies the coupled supporting rules, not the public Γ/H
+API. Next factor its retained definitions at their semantic owners and expose
+reviewed names/imports, retaining the actual original endpoints and inverse
+data. Then finish UA-1/2/3/5 and UA-6. No current resource or inference blocker
+remains in this tranche. The goal stays active; Op/profile and six-term
+work remain deferred, and main/origin/main stay at the published baseline.
+
+Final owner SHA-256 values:
+
+- `emdash3_2.lp`: `840319daa37fed0c1ef75f6c66719dec1680b0b1843d6707770c8c10764521bb`.
+- `emdash3_2_cubical_square_total.lp`: `449333a73f64ee023b3bfc7599eefa6525813ec038d0a1886f8931df2059d254`.
+- `emdash3_2_one_cat_zero_cones.lp`: `99e91ecda4c2fbc2ef723d60c55237839efeb2074f8ad7fda69950e668aee495`.
+- `emdash3_2_one_cat_adjunction_family_views.lp`: `e7d806c630b93dd02ce3497993aec43e1e79b4c1c48f8bc20bd8a08fd3851bec`.

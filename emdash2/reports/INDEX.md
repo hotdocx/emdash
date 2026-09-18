@@ -21,8 +21,10 @@ Whole contraction and guarded ordinary terminal/initial adjunction interfaces
 are implemented; general higher terminality is still a refinement boundary.
 The [whole input/H comparison](../audits/categorical-family-introduction-boundary/README.md)
 now has a checked ordinary candidate, including whole inverse data and its
-point-input observation; factoring and promotion remain in progress. The
-ordinary modification introduction has its own positive owner. Op/profile
+point-input observation; public factoring remains in progress. Its structural
+support now belongs to the core and existing projection/mate owners, alongside
+the ordinary modification introduction. The audit replay imports that support
+without duplicate rule declarations. Op/profile
 integration and the large six-term comparison remain deferred. The initial
 main/Pages checkpoint and completed consolidation c3792b67 are published.
 The [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication)

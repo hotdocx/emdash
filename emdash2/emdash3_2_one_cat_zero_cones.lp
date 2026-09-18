@@ -19,3 +19,13 @@ rule @tapp0_fapp0 _ _ _ _
       (Struct_sigma _ (Struct_sigma _ $h))
       (@zero_arrow_cone_universal_transf _ _ _ _)
   ↪ $h;
+
+// The generic transfor identity cut has lost its literal opposite identity.
+// Observe the original cone arrow at this constructor-visible universal cell.
+// lhs-audit: keep 1,5,6 -- retain the qualified opposite-source, constructor-visible identity endpoints.
+rule @tapp1_fapp0 (Op_cat $K) _ _ _
+    (Struct_sigma $a (Struct_sigma $d $h))
+    (Struct_sigma $a (Struct_sigma $d $h))
+    (@zero_arrow_cone_universal_transf _ _ _ _)
+    (@id $K (Struct_sigma $a (Struct_sigma $d $h)))
+  ↪ $h;

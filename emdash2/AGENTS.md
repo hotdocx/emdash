@@ -81,8 +81,12 @@ The ordinary Γ/H candidate now checks as a whole isomorphism with retained
 inverse data and point observations; its public integration is in progress.
 `emdash3_2_one_cat_modifications.lp` owns its first promoted support interface:
 ordinary modification introduction and a derived staged unit-law observation.
-Γ's remaining structural views and definitions stay in the linked audit until
-their owner/integration gates pass. Existing native consumers remain qualified.
+The remaining Sigma/section projection views and component rules now live at
+their original core, varying-projection, zero-cone and mate-view owners. The
+Γ/H definitions remain in the linked audit pending public factoring; its
+current replay imports those rules instead of declaring duplicates. Preserve
+the composite-argument guard on the new postcomposition view so existing
+paired-family reindexing keeps its specialized comparison.
 Op/profile and six-term deferrals remain in force.
 Point comparisons do not establish whole parameter action. Operational presentation
 comparisons should use actual internal maps with retained inverse/coherence data and whole K/Q/H

@@ -1,16 +1,10 @@
-/* UA-4d isolated native target-section extraction, outside the library.
-   Append after the protected graph owner and the object/source portion of
-   constructor_fragment.lp. See README.md for the still-open q∘Γ and D links.
-   The only new structural rule is the constant-section projection view.
-   Inverses reuse the existing strict pointwise assembly interface. */
+/* Native target-section extraction candidate, outside the library.
+   replay.py supplies the protected graph owner and original constructor.
+   Structural projection views come from the library; inverses reuse the
+   existing strict pointwise assembly interface. */
 require open emdash.emdash3_2_strict_pointwise_equivalences;
 require open emdash.emdash3_2_omega_equiv_composition;
 require open emdash.emdash3_2_one_cat_adjunction_family_views;
-
-// Whole constant-section projection; proof-time only, preserving runtime heads.
-unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _)
-    (@section_total_func _ (@Const_catd _ _) $s)
-  ≡ $s ↪ [ tt ≡ tt ];
 
 // Observe the constant-family coordinate of an actually mapped section total.
 symbol ua4d_section_observed [K A : Cat] (E : τ (Catd K))

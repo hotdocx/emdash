@@ -71,6 +71,100 @@ rule @fdapp1_int_hom_fapp0
       (Struct_sigma $q _)
   ↪ $q;
 
+// The same base-preservation observation in pointwise opposite fibres.
+rule @fdapp1_int_hom_fapp0 _ _ _
+      (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $D))
+      $x $y $p (Struct_sigma $a _) (Struct_sigma $b _)
+      (@fdapp1_int_hom_fapp0 _ _ _
+        (@Op_funcd $K _ _
+          (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+            (Struct_sigma $E (@Sigma_func $A))
+            (Struct_sigma $D (@Sigma_func $A))
+            (Struct_sigma _ (@id (Functor_cat (@Catd_cat $A) Cat_cat) (@Sigma_func $A)))))
+        $x $y $p (Struct_sigma $a $u) (Struct_sigma $b $v) $alpha)
+  ↪ @fdapp1_int_hom_fapp0
+      $K (@Op_catd $K (@comp_cat_fapp0 $K (@Catd_cat $A) Cat_cat (@Sigma_func $A) $E))
+      (@Const_catd $K (Op_cat $A))
+      (@Op_funcd $K (@comp_cat_fapp0 $K (@Catd_cat $A) Cat_cat (@Sigma_func $A) $E)
+        (@Const_catd $K $A) (@sigma_proj1_family_funcd $K $A $E))
+      $x $y $p (Struct_sigma $a $u) (Struct_sigma $b $v) $alpha;
+
+// Base observation after family-natural total base change.
+// The outer displayed base may differ: only the inner B-coordinate is observed.
+rule @fdapp1_int_hom_fapp0 _ _ _
+      (@Op_funcd _ _ _ (@sigma_proj1_family_funcd _ $B _))
+      _ _ _
+      (Struct_sigma (@fapp0 $A $B $G $a) _)
+      (Struct_sigma (@fapp0 $A $B $G $b) _)
+      (@fdapp1_int_hom_fapp0 _ _ _
+        (@Op_funcd $K _ _
+          (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+            (Struct_sigma $H _)
+            (Struct_sigma $H _)
+            (Struct_sigma (@id (Functor_cat $K (@Catd_cat $B)) $H)
+              (@sigma_pullback_total_transf $A $B $G))))
+        $x $y $p (Struct_sigma $a $u) (Struct_sigma $b $v) $alpha)
+  ↪ @fapp1_fapp0 (Op_cat $A) (Op_cat $B) (@Op_func $A $B $G) $a $b
+      (@fdapp1_int_hom_fapp0
+        $K
+        (@Op_catd $K (@comp_cat_fapp0 $K (@Catd_cat $A) Cat_cat (@Sigma_func $A)
+          (@comp_cat_fapp0 $K (@Catd_cat $B) (@Catd_cat $A) (@Pullback_catd_func $A $B $G) $H)))
+        (@Const_catd $K (Op_cat $A))
+        (@Op_funcd $K
+          (@comp_cat_fapp0 $K (@Catd_cat $A) Cat_cat (@Sigma_func $A)
+            (@comp_cat_fapp0 $K (@Catd_cat $B) (@Catd_cat $A) (@Pullback_catd_func $A $B $G) $H))
+          (@Const_catd $K $A)
+          (@sigma_proj1_family_funcd $K $A
+            (@comp_cat_fapp0 $K (@Catd_cat $B) (@Catd_cat $A) (@Pullback_catd_func $A $B $G) $H)))
+        $x $y $p (Struct_sigma $a $u) (Struct_sigma $b $v) $alpha);
+
+// Reindex the canonical opposite Sigma projection, retaining the original
+// identity reframe. The side condition checks that reframe's source family.
+unif_rule @fapp1_fapp0 _ _ (@Pullback_catd_func $A $B $F) $E0 _
+    (@comp_fapp0 (@Catd_cat $B) $E0 _ _
+      (@Op_funcd $B _ _ (@sigma_proj1_family_funcd $B $I $G))
+      (@id (@Catd_cat $B) $E0))
+  ≡ @Op_funcd $A _ _
+      (@sigma_proj1_family_funcd $A $I
+        (@comp_fapp0 Cat_cat $A $B (@Catd_cat $I) $G $F))
+  ↪ [ $E0 ≡ @Op_catd $B
+        (@comp_cat_fapp0 $B (@Catd_cat $I) Cat_cat (@Sigma_func $I) $G) ];
+
+// Whole projection view for canonical total base change on a section.
+unif_rule @section_postcomp_sec $K _ _
+    (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $B $H))
+    (@section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _
+        (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+          (Struct_sigma $H _) (Struct_sigma $H _)
+          (Struct_sigma (@id (Functor_cat $K (@Catd_cat $B)) $H)
+            (@sigma_pullback_total_transf $A $B $F)))) $s)
+  ≡ @comp_fapp0 Cat_cat $K (Op_cat $A) (Op_cat $B) (@Op_func $A $B $F)
+      (@section_postcomp_sec $K _ _
+        (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $H0)) $s)
+  ↪ [ $H0 ≡ @comp_cat_fapp0 $K (@Catd_cat $B) (@Catd_cat $A)
+        (@Pullback_catd_func $A $B $F) $H ];
+
+// Canonical projection is preserved by the original fibrewise Sigma action.
+unif_rule @section_postcomp_sec $K _ _
+    (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $D))
+    (@section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _
+        (@comp_prod_fapp1_fapp0 Cat_cat _ _ _
+          (Struct_sigma $E (@Sigma_func $A)) (Struct_sigma $D (@Sigma_func $A))
+          (Struct_sigma _ (@id (Functor_cat (@Catd_cat $A) Cat_cat) (@Sigma_func $A))))) $s)
+  ≡ @section_postcomp_sec $K _ _
+      (@Op_funcd $K _ _ (@sigma_proj1_family_funcd $K $A $E)) $s
+  ↪ [ tt ≡ tt ];
+
+// The canonical identity graph section has the identity inner base projection.
+unif_rule @section_postcomp_sec (Op_cat $K) _ _
+    (@Op_funcd (Op_cat $K) _ _
+      (@sigma_proj1_family_funcd (Op_cat $K) $K (@hom_int $K $K (@id Cat_cat $K))))
+    (@hom_identity_graph_sec $K)
+  ≡ @id Cat_cat (Op_cat $K)
+  ↪ [ tt ≡ tt ];
+
 // At a, totalize the b-indexed filler family.
 symbol homdc_inner_total_func
   [K1 K2 : Cat]

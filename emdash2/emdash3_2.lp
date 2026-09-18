@@ -5625,6 +5625,16 @@ symbol comp_cat_fapp0 [A B : Cat] [C : Cat]
   (F : τ (Functor B C)) (G : τ (Functor A B)) : τ (Functor A C)
 ≔ @comp_fapp0 Cat_cat A B C F G;
 
+// Sufficient congruence when the two actual arrows are identical.
+// Compare every endpoint; this is not injectivity of composition.
+unif_rule @comp_fapp0 (Functor_cat $B $C) $X $Y $Z $g $f
+  ≡ @comp_fapp0 (Functor_cat $B0 $C0) $X0 $Y0 $Z0 $g $f
+  ↪ [ $B ≡ $B0; $C ≡ $C0; $X ≡ $X0; $Y ≡ $Y0; $Z ≡ $Z0 ];
+// Sufficient congruence under the same actual precomposing functor; compare all other fields.
+unif_rule @comp_fapp0 Cat_cat $X $Y $Z $F $H
+  ≡ @comp_fapp0 Cat_cat $X0 $Y0 $Z0 $G $H
+  ↪ [ $X ≡ $X0; $Y ≡ $Y0; $Z ≡ $Z0; $F ≡ $G ];
+
 // Cat_cat composition point/arrow actions of composed functors. Identity
 // units are inherited from generic `comp_fapp0` at `Cat_cat`.
 // Canonical left-associated normal form for iterated functor composition.
@@ -9531,7 +9541,7 @@ rule @fapp1_fapp0 _ $B (@fapp0_func $A $B $x) $F $G $η
   ↪ @tapp0_fapp0 $A $B $F $G $x $η;
 
 // Identity transfor components are identity arrows.
-rule @tapp0_fapp0 $A $B $F $F $Y (@id (Functor_cat $A $B) $F)
+rule @tapp0_fapp0 $A $B _ _ $Y (@id (Functor_cat $A $B) $F)
   ↪ @id $B (@fapp0 $A $B $F $Y);
 
 // Displayed identity components: infer both family presentations from the identity.
@@ -10106,7 +10116,7 @@ rule sigma_Snd (@tapp1_func $X (Product_cat $A $B) $F $G $i $j $eta)
   ↪ @tapp1_func $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta);
 
 // Identity transfor off-diagonal action is ordinary functor hom-action.
-rule @tapp1_func $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F)
+rule @tapp1_func $A $B _ _ $X $Y (@id (Functor_cat $A $B) $F)
   ↪ @fapp1_func $A $B $F $X $Y;
 
 // Opposite transfor off-diagonal action swaps the base endpoints.
@@ -11002,7 +11012,7 @@ rule sigma_Snd (@tapp1_fapp0 $X (Product_cat $A $B) $F $G $i $j $eta $p)
   ↪ @tapp1_fapp0 $X $B (sigma_Snd $F) (sigma_Snd $G) $i $j (sigma_Snd $eta) $p;
 
 // Identity transfor capped off-diagonal action is ordinary functor action.
-rule @tapp1_fapp0 $A $B $F $F $X $Y (@id (Functor_cat $A $B) $F) $p
+rule @tapp1_fapp0 $A $B _ _ $X $Y (@id (Functor_cat $A $B) $F) $p
   ↪ @fapp1_fapp0 $A $B $F $X $Y $p;
 
 // Off-diagonal action at an identity base arrow is the ordinary component.
@@ -12683,6 +12693,15 @@ unif_rule
   ≡ @Pullback_catd $A $B $Eop $F
   ↪ [ $Eop ≡ (@Op_catd $B $E) ];
 
+// Two-step instance of the existing opposite-family reindexing comparison.
+// Functor composition already normalizes left; preserve both runtime histories.
+unif_rule @Op_catd $A
+    (@comp_fapp0 Cat_cat $A $B Cat_cat
+      (@comp_fapp0 Cat_cat $B $C Cat_cat $E $F) $G)
+  ≡ @Pullback_catd $A $C $Eop
+      (@comp_fapp0 Cat_cat $A $B $C $F $G)
+  ↪ [ $Eop ≡ @Op_catd $C $E ];
+
 // Fibre projection: E^op[k] ↪ E[k]^op.
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
   ↪ Op_cat (@fapp0 $K Cat_cat $E $k);
@@ -13108,6 +13127,12 @@ unif_rule @section_postcomp_sec $K $M $D $GG
   ≡ @section_postcomp_sec $K $E $D
       (@comp_fapp0 (@Catd_cat $K) $E $M $D $GG $FF) $s
   ↪ [ tt ≡ tt ];
+
+// Sufficient congruence for mapping the same original section.
+// This does not infer equality of the maps from equality of their images.
+unif_rule @section_postcomp_sec $K $E $D $FF $s
+  ≡ @section_postcomp_sec $K $E0 $D0 $GG $s
+  ↪ [ $E ≡ $E0; $D ≡ $D0; $FF ≡ $GG ];
 
 // Internalized-x layer: global natural package for Pi over varying bases.
 //
@@ -13858,6 +13883,15 @@ injective symbol sigma_map_func [K : Cat] [E D : τ (Catd K)]
   (η : τ (Functord E D))
   : τ (Functor (Sigma_cat E) (Sigma_cat D));
 
+// Stable Sigma-map / represented-composition proof-time join.
+unif_rule @sigma_map_func $K _ _
+    (@hom_postcomp_fapp0 (@Catd_cat $K) (@Catd_cat $K)
+      (@id Cat_cat (@Catd_cat $K)) $E $M $D $GG $FF)
+  ≡ @comp_fapp0 Cat_cat (@Sigma_cat $K $E) (@Sigma_cat $K $M) (@Sigma_cat $K $D)
+      (@sigma_map_func $K $M $D $GG) (@sigma_map_func $K $E $M $FF)
+  ↪ [ tt ≡ tt ];
+
+
 // Stable arbitrary-object action of a Sigma map. Whole semantic action
 // agrees at proof time; literal inputs and both object projections compute.
 injective symbol sigma_map_obj
@@ -14041,6 +14075,12 @@ injective symbol sigma_pullback_total_func [A K : Cat]
   : τ (Functor
       (@Sigma_cat A (@Pullback_catd A K D F))
       (@Sigma_cat K D));
+
+// Constant-family total base change retains the second projection; proof-time only.
+unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _)
+    (@sigma_pullback_total_func $A $K _ (@Const_catd $K $C))
+  ≡ @Product_projR_func $A $C ↪ [ tt ≡ tt ];
+
 
 // Object projection of pullback totalization: (a,u) ↦ (F[a],u).
 rule @fapp0
@@ -16143,6 +16183,24 @@ injective symbol section_total_func
   (s : τ (Obj (Pi_cat E)))
   : τ (Functor K (@Sigma_cat K E));
 
+// Explicit proof-time presentation views; maps below are actual identities.
+// These selected structural views preserve runtime heads; none computes a path cast.
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $E)) (@Op_func _ _ (@section_total_func $K $E _))
+ ≡ @id Cat_cat (Op_cat $K) ↪ [ tt ≡ tt ];
+
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $D)) (@Op_func _ _ (@sigma_map_func $K $E $D _))
+ ≡ @Op_func (@Sigma_cat $K $E) $K (@Sigma_proj1_func $K $E) ↪ [ tt ≡ tt ];
+
+unif_rule @comp_fapp0 Cat_cat _ _ _
+ (@Op_func _ _ (@Sigma_proj1_func $K $E)) (@Op_func _ _ (@sigma_pullback_total_func $A $K $F $E))
+ ≡ @comp_fapp0 Cat_cat (Op_cat (@Sigma_cat $A (@Pullback_catd $A $K $E $F))) (Op_cat $A) (Op_cat $K)
+ (@Op_func $A $K $F)
+ (@Op_func (@Sigma_cat $A (@Pullback_catd $A $K $E $F)) $A
+   (@Sigma_proj1_func $A (@Pullback_catd $A $K $E $F))) ↪ [ tt ≡ tt ];
+
+
 rule @fapp0 _ _ (@section_total_func $K $E $s) $k
   ↪ @Struct_sigma
       (Obj $K)
@@ -16192,6 +16250,44 @@ symbol fdapp1_int_cell [K : Cat] [E D : τ (Catd K)]
       (Fibre_cat D y)
       (fapp0 (functord_transport_lhs_func FF p) u)
       (fapp0 (functord_transport_rhs_func FF p) u));
+
+// Consumed object action of canonical total base change, preserving the whole tapp1 heads.
+rule @fapp0 _ _
+    (@tapp1_fapp0 _ _ _ _ $E $D (@sigma_pullback_total_transf $A $K $F) $FF)
+    (Struct_sigma $a $u)
+  ↪ Struct_sigma (@fapp0 $A $K $F $a)
+      (@fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a))
+        (@Fibre_cat $K $D (@fapp0 $A $K $F $a))
+        (@Fibre_func $K $E $D $FF (@fapp0 $A $K $F $a)) $u);
+
+// Canonical base-change-cell component. The source identity guard is required by SR.
+rule @tapp0_fapp0 _ _ _ _ (Struct_sigma $a $u)
+    (@fdapp1_int_cell _ _ _
+      (@tapp1_at_transf _ _ _ _ $E (@sigma_pullback_total_transf $A $K $F))
+       $E $D $FF (@id (@Catd_cat $K) $E))
+  ↪ @id (@Sigma_cat $K $D)
+      (Struct_sigma (@fapp0 $A $K $F $a)
+        (@fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a))
+          (@Fibre_cat $K $D (@fapp0 $A $K $F $a))
+          (@Fibre_func $K $E $D $FF (@fapp0 $A $K $F $a)) $u));
+
+// Fibre projection of represented displayed composition; the whole owner stays stable.
+rule @tapp0_fapp0 _ Cat_cat _ _ $k
+    (@hom_postcomp_fapp0 (@Catd_cat $K) (@Catd_cat $K)
+      (@id Cat_cat (@Catd_cat $K)) $E $M $D $GG $FF)
+  ↪ @comp_cat_fapp0 (@Fibre_cat $K $E $k) (@Fibre_cat $K $M $k) (@Fibre_cat $K $D $k)
+      (@Fibre_func $K $M $D $GG $k) (@Fibre_func $K $E $M $FF $k);
+
+// Canonical component of the Sigma composition cell.
+rule @tapp0_fapp0 _ _ _ _ (Struct_sigma $k $u)
+    (@fdapp1_int_cell _ _ _
+      (@fapp1_at_transf _ _ (@Sigma_func $K) $E)
+      $M $D $GG $FF)
+  ↪ @id (@Sigma_cat $K $D)
+      (Struct_sigma $k
+        (@fapp0 (@Fibre_cat $K $M $k) (@Fibre_cat $K $D $k) (@Fibre_func $K $M $D $GG $k)
+          (@fapp0 (@Fibre_cat $K $E $k) (@Fibre_cat $K $M $k) (@Fibre_func $K $E $M $FF $k) $u)));
+
 
 // Canonical transported-identity fibre arrow exposes the displayed laxity cell.
 //
@@ -16739,6 +16835,12 @@ symbol piapp1_const_fapp0_eq
       (@piapp1_fapp0 K (@Const_catd K A) s x y p)
       (@fapp1_fapp0 K A s x y p))
 ≔ @terminal_fdapp1_int_cell_eq K A s x y p;
+
+// Whole constant-section projection; proof-time only, preserving runtime heads.
+unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _)
+    (@section_total_func _ (@Const_catd _ _) $s)
+  ≡ $s ↪ [ tt ≡ tt ];
+
 
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the

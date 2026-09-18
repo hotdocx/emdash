@@ -40,8 +40,11 @@ presentations from the identity head. Their focused reviewer, the nucleus
 diagnostics and affected native consumers pass; the plan contains the exact
 resource and warning receipts. This does not repair the separate Op/profile
 qualifications. The [whole input/H-comparison candidate](../audits/categorical-family-introduction-boundary/README.md)
-is meaningful but unqualified; the user selected retaining it as follow-up
-while finishing consolidation. Op/duality, action-profile integration and the
+now checks both whole input projections, the original input transformation,
+and H_family≅H_native∘Γ with retained inverse data and point observations.
+Its structural support is at the existing library owners; public Γ/H
+factoring remains in progress. The active assembly ledger records joint
+native-consumer qualification. Op/duality, action-profile integration and the
 large six-term comparison remain deferred.
 
 The initial main/Pages publication was df9b4778. The user subsequently

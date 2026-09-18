@@ -341,7 +341,7 @@ does not eliminate the separately supplied finite CAS interpretation contracts.
 | UA-1 | Derive whole unit/counit and retained component/action observations from a supplied whole represented-Hom comparison. Preserve native Hom owners and the original F/G and inverse maps. Distinguish ordinary mathematical semantics from unrestricted higher interpretation. | In progress |
 | UA-2 | Qualify an introduction at the existing Adjunction owner and use an actual whole-family/postcomposition consumer. Derive suitable existing structural instances where the data allow it; record any necessary new structural constructor honestly. | Candidate retained outside library; promotion held for consumer justification |
 | UA-3 | Review the complete terminal ! package, formulate primary whole terminal/initial universality and qualify a genuine family consumer. Reconsider the exact working uniqueness unifier with bounded inference/overlap checks; separate proof-time convenience from runtime terminal eta. | Ordinary family migration and isolated uniqueness inference audit qualified. No generic uniqueness unifier is installed; higher interpretation remains open |
-| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The isolated ordinary candidate now checks H_family≅H_native∘Γ with its original endpoint functors, selected maps/inverses and whole laws. Its 101 assertions include both input projections, triangle compatibility and the existing point-input observation. No new primitive/rule was needed after UA-4h. Owner factoring, candidate promotion and joint native/CAS qualification remain. Direct higher target normalization is unqualified and was unnecessary for this consumer |
+| UA-4 | Resume the existing Γ candidate: qualify target and next Hom/triangle action, then the actual whole native H comparison with its existing observations downstream. Terminality redesign is not an assumed prerequisite. | The isolated ordinary candidate now checks H_family≅H_native∘Γ with its original endpoint functors, selected maps/inverses and whole laws. Its 101 assertions include both input projections, triangle compatibility and the existing point-input observation. No new primitive/rule was needed after UA-4h. The supporting rules now have positive owners and fresh joint qualification, including all 94 nonsplit assertions. Public definition factoring and final API qualification remain. Direct higher target normalization is unqualified and was unnecessary for this consumer |
 | UA-5 | Assess the ordinary product-adjunction→weighted-product bridge against a concrete consumer; implement if useful, or record a precise no-change conclusion. Preserve selected products and avoid new retired-formulation compatibility obligations. | Pending review |
 | UA-6 | Audit changed structural assumptions, rules, imports, actual native consumers and documentation/book impact; carry forward unchanged checks and update affected exposition. | Pending |
 
@@ -367,72 +367,36 @@ must not reconstruct naturality/functoriality by carrying manual square
 proofs. Ordinary equations and truncated observation evidence remain valid
 views. hom_int/homd_int are foundations, not targets for replacement.
 
-Current queue: continue Γ's whole input/H comparison, addressing the displayed
-whole Hom/projection boundary where its consumer requires it. The source projection
-computes through third-level cells. UA-4c additionally constructs a whole
-source isomorphism p∘Γ ≅ A in the isolated audit, with retained inverse data,
-law projections and computing identity components. Its structural
-comparison rules remain unpromoted. UA-4d's intermediate target-section
-extraction also has checked whole inverse data and identity components,
-using the existing section-total comparison and reversed Op_transf. The
-Sigma base-change link to the actual q∘Γ is now checked in UA-4e, including
-composition with the earlier equivalence, both inverse components and both
-whole inverse-law projections. UA-4g now classifies Vᵒ≃D and composes it with
-the retained inverse of that link to obtain q∘Γ≃D. Both selected inverse
-components and whole inverse-law projections check. UA-4h recovers the original
-whole h in the actual ordinary zero-cone specialization by an invertible
-modification T∘τΓ ≅ h∘J(S). UA-4i now checks the whole H comparison and its
-downstream point observation. Direct D[θ] conversion remains unqualified and
-was unnecessary for the completed ordinary H consumer. The Sigma
-computation/comparison candidates remain unpromoted.
-UA-4f additionally qualifies proof-time associativity at the existing
-section_postcomp_sec owner. Removing its injectivity annotation allows the
-two whole section presentations to compare without forcing distinct
-intermediate families equal; the primitive and every runtime rule remain.
-The actual extracted graph section compares with its grouped-map form.
-UA-4g builds on that observation with explicit whole projection views for
-reindexing, fibrewise Sigma, total base change and the canonical identity
-section. These views extend the earlier component interface; they are not
-theorems inferred solely from its beta rules. They preserve runtime functor
-presentations and use existing whole transformations and inverse assembly.
-The ordinary target guard remains; no general omega-duality repair is claimed.
-The six-check reviewer, eight affected reviewer files, nucleus and unchanged
-eight-artifact nonsplit corpus pass. An additional groupoidal Pi reviewer
-fails in compiled-import context on both the unchanged baseline and current
-core; the ledger records that inherited boundary separately. No repository
-aggregate is claimed green.
-The ordinary triangle now has a whole modification and its retained inverse;
-the inverse laws use the existing discrete-Hom proposition property. The
-promoted modification introduction explicitly requires OneCat and takes two
-already whole transformations. It adds no caller naturality square or general
-omega-level pointwise assembly. A constructor-specific identity observation
-at the existing zero-cone universal transformation and a postcomposition
-typing view close its actual component/mate consumers. The broader opposite
-identity experiment was not selected.
-The first kernel-mate consumer maps the triangle isomorphism through the
-existing whole adjunction transpose functor and retains both mapped arrows.
-UA-4i then constructs the comparison at the actual original boundary families.
-A staged proof of the existing transfor unit law closes its component
-observation without a new rewrite. Existing inverse-square cancellation,
-diagram-map reflection, the generator reindexing law and categorical diagram
-reconstruction give the actual boundary-diagram isomorphism. Applying the
-same Q gives H_family≅H_native∘Γ. Evaluation derives its point view at the
-original zero_arrow_family_point_input; no new model contract or selected
-kernel/cokernel record is input. All operational functors and maps remain
-categorical; path conversion is confined to proof-valued modification Homs.
+Current queue: complete public factoring of the checked Γ/H candidate. Its
+whole source comparison p∘Γ≅A, target comparison q∘Γ≃D and triangle
+modification T∘τΓ≅h∘J(S) retain the original A,D,h and their action. The
+actual boundary-diagram isomorphism and original Q then give
+H_family≅H_native∘Γ, with its point view at the unchanged
+zero_arrow_family_point_input. Every operational map and inverse is
+categorical; paths remain laws or cells in discrete modification categories.
+Direct D[θ] runtime normalization remains unqualified and was unnecessary
+for this actual consumer.
 
-Next queue: factor the qualified Γ/H candidate at its existing semantic
-owners, distinguish proposed structural introductions from derived helpers,
-and complete promotion/consumer qualification before exposing a library API.
-UA-4j first promotes the ordinary modification/unit-law support; the actual
-Γ/H replay imports that positive owner. The other structural candidates and
-Γ/H definitions still require their own placement and integration checks.
-Retain the already qualified first-arrow projection candidates and all
-computational inverse data. The 101-assertion audit is not a substitute for
-joint native/CAS checks after promotion. The stronger D[θ] runtime comparison
-is not a prerequisite established by this consumer; do not revive that
-normalization experiment without a concrete need. Then complete the remaining
-UA-1/2/3/5 reviews and UA-6 audit/book work without shrinking their scope.
+UA-4j promotes the ordinary modification introduction and staged unit lemma.
+UA-4k places the remaining structural rules at their original core,
+varying-Sigma projection, zero-cone and adjunction-family-view owners. The
+current 101-assertion replay imports all of them without duplicate rules;
+the separate first-arrow and higher-source computations also pass. These
+selected whole projection views extend the former component interface;
+they are not all derivations from its old β rules. The native
+hom_int/homd_int, runtime heads and original inverse choices remain.
+The postcomposition view is guarded by its actual composite argument:
+integration exposed that its broader form intercepts the existing paired
+product-family comparison. The guarded version passes both actual consumers.
+
+The ledger records owner-position/SR and five-part warning comparisons,
+focused consumer checks and fresh joint native/CAS qualification. Public
+Γ/H definitions are still audit candidates; supporting-rule promotion alone
+does not establish a complete library API. The inherited compiled-import
+Pi reviewer boundary remains separately recorded, without a broad eta fix
+or a claimed full-repository green aggregate. Complete the remaining
+UA-1/2/3/5 reviews and UA-6 audit/book work after Γ/H integration.
+
 Keep UA-1/UA-2 promotion conditional
 on demonstrated consumer benefit. The user's clarification prompted a
 review of the already implemented

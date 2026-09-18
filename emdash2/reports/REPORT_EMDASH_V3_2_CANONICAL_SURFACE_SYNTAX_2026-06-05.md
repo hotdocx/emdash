@@ -393,6 +393,16 @@ For composable FF and GG, the nested section map compares at proof time with
 runtime reassociation rule. The primitive head is noninjective so inference
 does not force the two different intermediate families to coincide.
 
+Canonical whole projection views retain the original Sigma/section owners.
+For a constant family write π₂∘total(s)≡s; the opposite first-projection
+views write πᵒ∘total(s)ᵒ≡id, πᵒ∘Σ(FF)ᵒ≡πᵒ and
+πᵒ∘B_Fᵒ≡Fᵒ∘πᵒ. Here B_F is the existing total base-change functor.
+These comparisons are proof-time views, not new runtime abbreviations or
+functors constructed by equality transport. Varying projection views also
+retain canonical fibrewise Sigma, base-change and identity-graph data.
+Their current Γ/H consumer is qualified for ordinary targets; the separate
+higher Op/profile review remains deferred.
+
 Likewise, write displayed identity using the generic identity notation. The
 compatibility name `id_transfd(FF)` is a transparent view of
 `id_(Functord_cat(E,D))(FF)`, not a distinct constructor; no parallel
