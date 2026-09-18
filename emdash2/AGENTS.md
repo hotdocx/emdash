@@ -79,7 +79,9 @@ is complete under user acceptance (2026-09-17): ordinary whole adjunction
 assembly, primary terminality, and the separately bounded Γ/input-H comparison.
 Its [final audit](../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
 records the structural boundary, source/import checks and qualified local book
-0.9.2-dev. The new local artifacts have not been pushed or deployed.
+0.9.2-dev. Under the separate 2026-09-18 user authorization, checkpoint
+1ead0f3c was fast-forwarded to main, pushed and deployed. The live PDF is
+byte-identical to the validated artifact; see the assembly ledger publication receipt.
 The [higher terminality review](../docs/TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md)
 audits the full ! package and records its strict/pseudo versus lax boundary.
 Conditional consequences of an already supplied p⊣t or t⊣p form without C1;

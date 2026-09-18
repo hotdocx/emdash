@@ -34,7 +34,9 @@ records the successful deployment and live PDF checksum.
 The accepted [universality assembly plan](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_INVENTORY_AND_FOLLOWUP_REVIEW.md)
 is complete under its scoped ordinary interpretation. Its
 [final audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
-records source, trust, import and local book 0.9.2-dev qualification. Its ledger distinguishes generic adjunction
+records source, trust, import and book 0.9.2-dev qualification. Checkpoint
+1ead0f3c is now on main and GitHub Pages under the separate 2026-09-18 user
+authorization; the assembly ledger records the live PDF checksum. Its ledger distinguishes generic adjunction
 assembly, primary terminality and Γ; the exact terminal uniqueness unifier is
 known feasible at its recorded proof-time consumer. Earlier claims of blanket
 infeasibility are superseded; runtime eta and global qualification are separate.

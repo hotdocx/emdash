@@ -192,3 +192,13 @@ of the separate action-profile branch stay outside this goal. The large
 six-term/older endpoint experiments and spectral/stabilization research are
 also deferred. Main fast-forward, GitHub push and deployment require a later
 user instruction; this goal performs local validated checkpoints only.
+
+
+## Subsequent Publication Receipt
+
+After this goal completed, the user authorized publication on 2026-09-18.
+Checkpoint 1ead0f3c was fast-forwarded to main, pushed and successfully
+deployed by Pages run 35383020793. The live PDF matches the hash above.
+The [assembly ledger](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#post-completion-main-and-pages-publication)
+records the final review and deployment evidence. Earlier scope statements
+describe the completed goal's original authorization.

@@ -17,8 +17,10 @@ Execution evidence belongs in the
 [universality assembly ledger](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md).
 The [final audit](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
 maps every tranche to current source and validation, including the retained
-qualifications and locally generated book artifacts. Main integration and
-publication remain separate future actions.
+qualifications and generated book artifacts. A separate user instruction
+authorized main integration and publication on 2026-09-18; the
+[publication receipt](TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_ASSEMBLY_LEDGER.md#post-completion-main-and-pages-publication)
+records the completed push/deployment and live artifact identity.
 User acceptance follows archived response 0120 in Infinity Codex session
 `2026-09-12_01a096616c4a`; the accepted content and subsequent user clarification
 are incorporated here, so the archive is only recovery evidence.

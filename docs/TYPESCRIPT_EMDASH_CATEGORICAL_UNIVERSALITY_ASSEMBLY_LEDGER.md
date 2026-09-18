@@ -2897,3 +2897,31 @@ remain at `79237a008eff872832b20105b088f432fc24d8a1`; no main fast-forward,
 push, deployment or external publication is performed. The final local
 checkpoint contains this closure, the completed plan, final audit, book
 source/artifacts and synchronized overviews.
+
+
+## Post-Completion Main And Pages Publication
+
+The user separately authorized final review, main fast-forward, GitHub push
+and deployment on 2026-09-18. Both worktrees were clean; fetched origin/main
+was 79237a00 and an ancestor of the completed 1ead0f3c checkpoint. The final
+review verified the twelve extraction/introduction source/reviewer hashes,
+four higher-terminality owner hashes, unchanged formal source since 6d027dc5,
+strict catalog, source-health snapshot, source TOC, rule-LHS audit, report
+headers and all 187 book evidence claims. The existing PDF/render evidence
+was carried forward under identical PDF/Markdown hashes. No broad TypeScript
+or unrelated Lambdapi suite was rerun. No release-blocking correction was found.
+
+Main was fast-forwarded to `1ead0f3cfdc4b5ee45b76a9eef360ea290f2fca7` and pushed.
+[Pages workflow 35383020793](https://github.com/hotdocx/emdash/actions/runs/35383020793)
+completed successfully at 2026-09-18T18:56:24Z. The
+[live reviewer](https://hotdocx.github.io/emdash/) and its entry script return
+HTTP 200. The [live book](https://hotdocx.github.io/emdash/assets/emdash-book-C0Ts5_Fo.pdf)
+is 3,634,767 bytes with SHA-256
+`a472625aaa2de8324c5efc778c23235685d38fd8b9aa6c5b391febec4d42ae3f`,
+exactly matching the checked 415-page 0.9.2-dev artifact. The initial asset
+discovery expression missed a bare relative filename; resolving that filename
+relative to the entry script verified the actual emitted asset.
+
+The subsequent documentation receipt updates current publication status.
+The unsent EMAIL.md remains unsent. No npm release, DOI update, action-profile
+integration or unrelated deployment was performed.

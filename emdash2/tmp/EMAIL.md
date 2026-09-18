@@ -4,8 +4,9 @@ LONGER TECHNICAL APPENDIX
 Functorial Type Theory in emdash v3.2
 
 Local development snapshot reviewed 2026-09-18, alongside book 0.9.2-dev.
-This is an unsent correspondence draft. The local updated book and source
-await separate main/Pages integration; the DOI identifies the earlier
+This is an unsent correspondence draft. The updated source and book were
+published to main/GitHub Pages on 2026-09-18; the live PDF matches the checked
+0.9.2-dev artifact. The DOI identifies the earlier
 archived edition.
 
 Abstract. Functorial Type Theory asks what happens when the substitutional
