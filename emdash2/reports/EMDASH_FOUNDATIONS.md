@@ -1,6 +1,12 @@
 # emdash Foundations
 
-Last reviewed: 2026-09-16
+Last reviewed: 2026-09-18
+
+The [current reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+records the completed whole Hom/Adjunction and Γ/H assembly, remaining
+profile/duality qualifications, and the preference for whole categorical
+operations with projections. This is not a blanket removal of groupoidal
+paths or a consistency claim for the current globally strict prototype.
 
 Homological reading update (2026-09-16): the primary native interface now
 uses whole J⊣K and Q⊣I, with whole H/δ, categorical Im→Ker exactness and

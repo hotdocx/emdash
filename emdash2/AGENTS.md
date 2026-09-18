@@ -319,10 +319,15 @@ For renderer or book work under `print/`, also follow `print/AGENTS.md`.
   contains independent reviewer-facing consumers. Neither replaces the
   owning implementation declaration.
 
-The in-progress `goal/global-strictness-profile-migration-v3.2` branch is not
-part of the integrated baseline. Do not copy its in-flight rules, counts, or
-conclusions into current authorities before integration and a dedicated
-follow-up audit.
+The completed successor branch `goal/opaque-action-profile-classifiers-v3.2`
+(checkpoint 114dc19f, worktree `/home/user1/emdash1-action-profiles-v1`) contains
+the earlier global-strictness migration, opaque strict/lax profile admissions,
+contravariant action refinements and further Gray/cubical work. It is not
+integrated into main. Its own plans and source are recovery evidence for a
+future integration, not current-main authority. The
+[continuation review](../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md#completed-action-profile-branch)
+records exact branch-local report paths and the intended selective migration.
+Do not copy its counts or claim main has its lax/profile behavior yet.
 
 ## Starting A v3.2 Task
 
@@ -482,6 +487,13 @@ EMDASH_LAMBDAPI_FLAGS='--debug=u' scripts/probe.sh tmp/probes/name.lp
 If a quiet run times out or hides the interaction, rerun the smallest target
 with warnings enabled before rejecting the proposed rule.
 
+Source-generating Python helpers are authoring/replay tools, not proof
+checkers. Preserve their small inputs, unique insertion/replacement guards,
+source/dependency hashes and explicit emitted LP. Qualify the emitted source
+at its owning position. Retire scratch builders after promotion; retained
+non-library audits need status, expected outcomes and a replay trigger. Use
+Git for retired implementations, rather than an ignored alternative library.
+
 ## Rewrite And Unification Hygiene
 
 - Probe every nontrivial rewrite/unification change in a temporary full-file
@@ -535,6 +547,11 @@ with warnings enabled before rejecting the proposed rule.
   reflexivity consumer, with a failing no-unifier control and negative runtime
   conversion observation. The user requires this fact to inform further design.
   Promotion still needs actual-consumer and inference/interaction qualification.
+  The [terminal-object/product review](audits/terminal-product-unification-review/README.md)
+  adds a rigidity qualification: the installed checker rejects variable–constant
+  clashes before custom unifiers. Forward product-path reflexivity already
+  passes without pair η; use no-rule and contextual controls before claiming
+  a new rule provides stronger behavior. No candidate is installed.
 - A `constant` cannot head a rewrite LHS. Changing it to `injective` is a
   kernel normal-form migration requiring downstream, subject-reduction, and
   warning audits.
@@ -551,6 +568,27 @@ with warnings enabled before rejecting the proposed rule.
 - If a functor-level fold gives the object-level result through `fapp0`, keep
   the functor as owner; do not add a duplicate object rule without a concrete
   consumer that cannot use the projection route.
+
+## Synthetic Computational Interfaces
+
+- For coherently varying mathematical data, expose the existing whole functor,
+  transformation or dependent-Hom owner first. Obtain objects, components and
+  higher action by its projection ladder. Do not invent a universal family for
+  an arbitrary isolated arrow without a mathematical parameterization.
+- Prefer whole adjunctions, represented Hom comparisons and retained universal
+  maps for categorical constructions. End users should not rebuild ordinary
+  functoriality/naturality from per-instance square equations. A need to do so
+  triggers review of a missing owner, projection or profile.
+- “Whole” retains the selected strict/lax/pseudo action; it does not imply
+  strict naturality. Additional structure still needs its actual capability.
+  Preserve hom_int/homd_int, existing primitives and generic cut owners.
+- Use actual maps with retained inverses for operational changes of categorical
+  presentation. Paths remain appropriate for groupoidal/HoTT structure,
+  ordinary truncated laws, CAS equations and downstream observations. Audit
+  operational casts and transported inverse data, not occurrences of `=`.
+- Distinguish derived definitions, declared structural constructors,
+  proof-time agreements and runtime reductions. Do not describe a newly
+  supplied whole contract as a theorem derived from earlier beta rules.
 
 ## Generic Owners And Higher Structure
 

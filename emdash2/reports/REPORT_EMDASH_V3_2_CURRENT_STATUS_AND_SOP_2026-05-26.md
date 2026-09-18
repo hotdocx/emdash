@@ -52,11 +52,14 @@ The initial main/Pages publication was df9b4778. The user subsequently
 authorized completed consolidation c3792b67 and book 0.9.1-dev for main/Pages;
 both are published, with the live PDF matching the checked artifact. See the
 [publication receipt](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_LEDGER.md#post-completion-main-integration-and-pages-publication).
-The subsequent universality assembly is qualified locally, including ordinary
-Hom-data introduction and book 0.9.2-dev. Its
+The subsequent universality assembly and book 0.9.2-dev are published at
+checkpoint 1ead0f3c; the live PDF matches the qualified artifact. Its
 [final audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md)
-records the current boundary and artifact receipts; this later snapshot has
-not been pushed or deployed.
+and assembly ledger record the structural boundary and publication receipt.
+The [2026-09-18 reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+owns the follow-up review of synthetic interfaces, DevOps, unification,
+module boundaries, TypeScript binders and sibling templates. No semantic
+migration is implied by that review.
 
 ## Sources Of Truth
 

@@ -83,8 +83,9 @@ without requiring a production Lambdapi process in the browser.
 
 Book: https://doi.org/10.5281/zenodo.21544186
 
-Research status. This appendix includes development-branch work; publishing
-updated book artifacts is a separate step. The current whole-opposite and
+Research status. This appendix describes the qualified 2026-09-18 main/Pages
+development snapshot; the DOI still names the earlier archived edition.
+The current whole-opposite and
 Sigma-Hom encodings have known variance/soundness defects awaiting a separate
 repair. “Checked” below records particular typechecks and computational
 interfaces in this research calculus, not a global consistency certificate.

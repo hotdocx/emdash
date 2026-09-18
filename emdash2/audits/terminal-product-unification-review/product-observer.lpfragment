@@ -1,0 +1,2 @@
+constant symbol review_observe [A B : Cat] (x : τ (Obj (Product_cat A B))) : τ Bool_grpd;
+assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl Bool_grpd (@review_observe A B x) : τ (@= Bool_grpd (@review_observe A B x) (@review_observe A B (@Product_pair A B (sigma_Fst x) (sigma_Snd x))));

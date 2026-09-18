@@ -119,9 +119,12 @@ temporary helper module names.
 
 The independent earlier combined proof–CAS pair/certificate artifact now
 passes at 2GiB with `o=20`. That success clears its specific allocation
-failure; its public pair alignment and displayed-diagram exactness transport
-remain required in the model/reifier plan. Do not conflate it with this new
-whole-comparison normalization boundary or with older endpoint probes.
+failure. Public pair alignment and displayed-diagram exactness transport were
+subsequently qualified before the native goal closed; both displayed LES and
+snake certificates now pass. See the
+[native final audit](../../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md).
+Do not conflate that resolved integration with this deferred whole-comparison
+normalization boundary or with older endpoint probes.
 
 Resolving this gap still requires a real consumer of the assembled exactness data,
 retaining the original canonical forward comparisons and inverse choices.

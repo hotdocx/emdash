@@ -1,0 +1,4 @@
+assert (x : τ (Obj Terminal_cat)) ⊢ @eq_refl (Obj Terminal_cat) x : τ (@= (Obj Terminal_cat) x Terminal_obj);
+assert (x : τ (Obj Terminal_cat)) ⊢ @eq_refl (Obj Terminal_cat) Terminal_obj : τ (@= (Obj Terminal_cat) Terminal_obj x);
+assertnot (x : τ (Obj Terminal_cat)) ⊢ x ≡ Terminal_obj;
+assertnot (x y : τ Bool_grpd) ⊢ @eq_refl Bool_grpd x : τ (@= Bool_grpd x y);

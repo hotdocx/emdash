@@ -1,6 +1,14 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current mathematical and book boundary (2026-08-18):** The active
+> **Current orientation (2026-09-18):** Book 0.9.2-dev and the completed native
+> homology/universality assembly are on main and GitHub Pages. Start with the
+> [repository reassessment](TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+> for the current source/profile, binder and hosted-template boundaries.
+> The dated qualification entries below retain their historical measurements;
+> they do not transfer every newer Lambdapi owner into TypeScript. The
+> completed action-profile branch still awaits dedicated integration.
+>
+> **Historical mathematical and book boundary (2026-08-18):** The active
 > Lambdapi development now includes the successor-localized Integer and
 > Circle loop-space theorem, WalkingEnd/Circle and WalkingArrow/Interval
 > universal comparisons, category-indexed `Groupoidify(C)` with its whole

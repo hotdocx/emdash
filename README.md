@@ -196,6 +196,10 @@ For a compact terminal walkthrough of the same architecture:
 ./scripts/pnpmw run demo:external-review
 ```
 
+The [foundations and DevOps review](./docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+records current qualification boundaries and the completed action-profile
+branch awaiting integration.
+
 The browser workbench is published from `main` by GitHub Pages. It is wholly
 client-side and does not require a Lambdapi process or other production
 backend.

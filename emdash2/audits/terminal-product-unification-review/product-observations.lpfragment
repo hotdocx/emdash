@@ -1,0 +1,8 @@
+assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) x : τ (@= (Obj (Product_cat A B)) x (@Product_pair A B (sigma_Fst x) (sigma_Snd x)));
+assert [K A B : Cat] (F : τ (Functor K (Product_cat A B))) ⊢ @eq_refl (Functor K (Product_cat A B)) F : τ (@= (Functor K (Product_cat A B)) F (Struct_sigma (sigma_Fst F) (sigma_Snd F)));
+assert [A B : Cat] [x y : τ (Obj (Product_cat A B))] (f : τ (Hom (Product_cat A B) x y)) ⊢ @eq_refl (Hom (Product_cat A B) x y) f : τ (@= (Hom (Product_cat A B) x y) f (Struct_sigma (sigma_Fst f) (sigma_Snd f)));
+assert [A : Grpd] [P : τ A → Grpd] (x : τ (@Σ_ A P)) ⊢ @eq_refl (@Σ_ A P) x : τ (@= (@Σ_ A P) x (@Struct_sigma A P (sigma_Fst x) (sigma_Snd x)));
+assertnot [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ x ≡ @Product_pair A B (sigma_Fst x) (sigma_Snd x);
+assertnot [A B : Cat] (x y : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) x : τ (@= (Obj (Product_cat A B)) x y);
+assertnot ⊢ @eq_refl (Product_grpd Bool_grpd Bool_grpd) (Struct_sigma true false) : τ (@= (Product_grpd Bool_grpd Bool_grpd) (Struct_sigma true false) (Struct_sigma false true));
+assert [A B : Cat] (a : τ (Obj A)) (b : τ (Obj B)) ⊢ sigma_Fst (@Product_pair A B a b) ≡ a;

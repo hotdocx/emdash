@@ -22,6 +22,10 @@ have known variance/soundness defects. Their diagnostics and deferred repair
 are tracked in `AGENTS.md` and the current status report; passing local
 checks is not a consistency certificate.
 
+The [2026-09-18 reassessment](../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+collects the current foundational, DevOps and deferred-work boundaries,
+including the completed action-profile branch awaiting integration.
+
 ## Headline results
 
 The directed-inductive benchmark is an opaque walking-endomorphism category

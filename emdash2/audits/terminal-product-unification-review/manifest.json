@@ -1,0 +1,531 @@
+{
+  "baseline": "1ead0f3cfdc4b5ee45b76a9eef360ea290f2fca7",
+  "owner": "emdash3_2.lp",
+  "owner_sha256": "f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61",
+  "profile": {
+    "memory_mib": 2048,
+    "deadline_seconds": 90,
+    "OCAMLRUNPARAM": "o=20",
+    "warnings": true,
+    "subject_reduction": true,
+    "serial": true
+  },
+  "checker": {
+    "binary": "/home/user1/.opam/default/bin/lambdapi",
+    "binary_sha256": "ab493adeb0d79e58fa16c0965e1cb0e5194e212093119dc58f8e401f326c2c0a",
+    "version": "3.0.0-90-gdb4f780"
+  },
+  "source_explanation": {
+    "src/core/unif.ml": {
+      "path": "/home/user1/.opam/default/.opam-switch/sources/lambdapi/src/core/unif.ml",
+      "sha256": "61868480435de922c6dc0534ff0cefde4d7ffe0d2f73c22164f703130ae60d55"
+    },
+    "src/handle/command.ml": {
+      "path": "/home/user1/.opam/default/.opam-switch/sources/lambdapi/src/handle/command.ml",
+      "sha256": "1949addb1357ba7bb11b684c6883ec145ad3f6eefbf6a9d50a985414b4937be0"
+    }
+  },
+  "runs": [
+    {
+      "name": "terminal_candidate",
+      "source_sha256": "4750e26bd22d459c57d8aec84c7bb5113be3791e0e00cd00cc938be4ede4aa28",
+      "log": "logs/probes/review_terminal_candidate-20260918-145805.log",
+      "log_sha256": "96107f08b6c23299caa11809b718c224e036ad6ecbc0d7f05a1592f1aee92f24",
+      "exit": 1,
+      "failure_line": 23154,
+      "failure_statement": "assert (x : τ (Obj Terminal_cat)) ⊢ @eq_refl (Obj Terminal_cat) x : τ (@= (Obj Terminal_cat) x Terminal_obj);",
+      "warning_delta": {
+        "categories": {
+          "replaceable pattern variable": 1
+        }
+      }
+    },
+    {
+      "name": "terminal_control",
+      "source_sha256": "648f1dca1edec22b2b2a8c03eedcd5933df5366bca7cb85e8140dc2ed00ae25e",
+      "log": "logs/probes/review_terminal_control-20260918-145919.log",
+      "log_sha256": "4152094d7d4f2157bd5303299739f68ff3844a2512b94becb9db7a75314a4ee8",
+      "exit": 1,
+      "failure_line": 23152,
+      "failure_statement": "assert (x : τ (Obj Terminal_cat)) ⊢ @eq_refl (Obj Terminal_cat) x : τ (@= (Obj Terminal_cat) x Terminal_obj);",
+      "warning_delta": {}
+    },
+    {
+      "name": "terminal_injective",
+      "source_sha256": "be642ce5ae1c4b74b392513cf6866d58aa391c9e2dd367fcc4f684d4d51136c4",
+      "log": "logs/probes/review_terminal_injective-20260918-150139.log",
+      "log_sha256": "71ecace3e9026a9363b81f576f2d007ef164e770c1a4270de59f3c3a5b4a052d",
+      "exit": 0,
+      "failure_line": null,
+      "failure_statement": null,
+      "warning_delta": {
+        "categories": {
+          "replaceable pattern variable": 1
+        }
+      }
+    },
+    {
+      "name": "terminal_injective_control",
+      "source_sha256": "03313fa2955ea083e44c3cff713b886e77e9d792a0eb3c013bf71674244695e5",
+      "log": "logs/probes/review_terminal_injective_control-20260918-150504.log",
+      "log_sha256": "ceb1f8aefc2ae51d97ab94dd8cb1af9a1e1635a47ad14b22f635cb47bef9446f",
+      "exit": 1,
+      "failure_line": 23152,
+      "failure_statement": "assert (x : τ (Obj Terminal_cat)) ⊢ @eq_refl (Obj Terminal_cat) x : τ (@= (Obj Terminal_cat) x Terminal_obj);",
+      "warning_delta": {}
+    },
+    {
+      "name": "product_candidate",
+      "source_sha256": "b83c0a4ad6ffe488cd87a0ddeb41be39bb6fe219727332730c1086704335e0b5",
+      "log": "logs/probes/review_product_candidate-20260918-150024.log",
+      "log_sha256": "c7da09ce0c5cbce1dea1cd807a02c83aa134366521efdfde330181ed512e4102",
+      "exit": 0,
+      "failure_line": null,
+      "failure_statement": null,
+      "warning_delta": {
+        "categories": {
+          "unjoinable critical pair": -28
+        },
+        "term_heads": {
+          "comp_fapp0": -26,
+          "fdapp1_int_hom_fapp0": -2
+        },
+        "rule_families": {
+          "comp_fapp0 | fapp1_fapp0": -26,
+          "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": -1,
+          "fdapp1_int_hom_fapp0 | id": -1
+        }
+      }
+    },
+    {
+      "name": "product_control",
+      "source_sha256": "3d8934c2c14df776c0e35c3adc37dc884ce62e350527b61995e6b2d3cf07ed16",
+      "log": "logs/probes/review_product_control-20260918-150224.log",
+      "log_sha256": "85785cae145c967c52b95d2b8cfe2a40b5947e359690a8bf6e596906b0a3a4e7",
+      "exit": 0,
+      "failure_line": null,
+      "failure_statement": null,
+      "warning_delta": {}
+    },
+    {
+      "name": "product_extended",
+      "source_sha256": "c6e9e91584acf2e591b412de14ee8a1e0ba4bc216d5e27c486f10529bc63c05f",
+      "log": "logs/probes/review_product_extended-20260918-150334.log",
+      "log_sha256": "21839fe20f4f9d42bffc4a1bc77dc4545dbf29e4be74922ee34785f495d3c6b3",
+      "exit": 1,
+      "failure_line": 23156,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) : τ (@= (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) x);",
+      "warning_delta": {
+        "categories": {
+          "unjoinable critical pair": -28
+        },
+        "term_heads": {
+          "comp_fapp0": -26,
+          "fdapp1_int_hom_fapp0": -2
+        },
+        "rule_families": {
+          "comp_fapp0 | fapp1_fapp0": -26,
+          "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": -1,
+          "fdapp1_int_hom_fapp0 | id": -1
+        }
+      }
+    },
+    {
+      "name": "product_forms_candidate",
+      "source_sha256": "b6652cf9870c611262b86aeba0f211c1d4a6e28b55e1c68b96da031c49e4b5ba",
+      "log": "logs/probes/review_product_forms_candidate-20260918-150617.log",
+      "log_sha256": "e3f2497b81e8b1a2d576b7a9cd6ca35e6bf7b2eb326d7dd38f56cf012ed50ff3",
+      "exit": 1,
+      "failure_line": 23157,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) x : τ (@= (Obj (Product_cat A B)) x (@Product_pair A B _ _));",
+      "warning_delta": {
+        "categories": {
+          "unjoinable critical pair": -28
+        },
+        "term_heads": {
+          "comp_fapp0": -26,
+          "fdapp1_int_hom_fapp0": -2
+        },
+        "rule_families": {
+          "comp_fapp0 | fapp1_fapp0": -26,
+          "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": -1,
+          "fdapp1_int_hom_fapp0 | id": -1
+        }
+      }
+    },
+    {
+      "name": "product_forms_control",
+      "source_sha256": "45b01b8cbc186325de3273eccd1d5e5894cc0f2b9d2954e0d03426bf73e567c0",
+      "log": "logs/probes/review_product_forms_control-20260918-150739.log",
+      "log_sha256": "300eeedb6be4dbd247f667c78bc78b6a2ab76bf7170427426c6126c841da430b",
+      "exit": 1,
+      "failure_line": 23155,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) x : τ (@= (Obj (Product_cat A B)) x (@Product_pair A B _ _));",
+      "warning_delta": {}
+    },
+    {
+      "name": "product_observer_candidate",
+      "source_sha256": "61ccadf35f832cf6cfb306582f46ce910288d7c551410e381ee20e4a1eb623dd",
+      "log": "logs/probes/review_product_observer_candidate-20260918-150428.log",
+      "log_sha256": "82fa857f6ca65fae9d7ecead5a2e0e715a31f35093d69f35e4318431003e8fd0",
+      "exit": 1,
+      "failure_line": 23155,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl Bool_grpd (@review_observe A B x) : τ (@= Bool_grpd (@review_observe A B x) (@review_observe A B (@Product_pair A B (sigma_Fst x) (sigma_Snd x))));",
+      "warning_delta": {
+        "categories": {
+          "unjoinable critical pair": -28
+        },
+        "term_heads": {
+          "comp_fapp0": -26,
+          "fdapp1_int_hom_fapp0": -2
+        },
+        "rule_families": {
+          "comp_fapp0 | fapp1_fapp0": -26,
+          "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": -1,
+          "fdapp1_int_hom_fapp0 | id": -1
+        }
+      }
+    },
+    {
+      "name": "product_observer_control",
+      "source_sha256": "7b5f029f6c3455a2fa27875329efdd1d797c403456dff3a5f6422a691d5e9efa",
+      "log": "logs/probes/review_product_observer_control-20260918-150539.log",
+      "log_sha256": "5bf1b55e2c87f6f173ccaa5ee7931faa356868e562ee17332c4189662454e204",
+      "exit": 1,
+      "failure_line": 23153,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl Bool_grpd (@review_observe A B x) : τ (@= Bool_grpd (@review_observe A B x) (@review_observe A B (@Product_pair A B (sigma_Fst x) (sigma_Snd x))));",
+      "warning_delta": {}
+    },
+    {
+      "name": "product_qualified_candidate",
+      "source_sha256": "cdb8ca9347e3bfeb0ac6afc59a61575f5b9ba47215e891875d9213be70b323d7",
+      "log": "logs/probes/review_product_qualified_candidate-20260918-150800.log",
+      "log_sha256": "abc41aaa462165cff279ed58d13378d0e63f5daffb896f7b43f72d6795886357",
+      "exit": 0,
+      "failure_line": null,
+      "failure_statement": null,
+      "warning_delta": {
+        "categories": {
+          "unjoinable critical pair": -28
+        },
+        "term_heads": {
+          "comp_fapp0": -26,
+          "fdapp1_int_hom_fapp0": -2
+        },
+        "rule_families": {
+          "comp_fapp0 | fapp1_fapp0": -26,
+          "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": -1,
+          "fdapp1_int_hom_fapp0 | id": -1
+        }
+      }
+    },
+    {
+      "name": "product_qualified_control",
+      "source_sha256": "5e5e672a0139f7a5b4e826e53c6a6b8a2fad5664da62fa8f2233e29e3aabb4f6",
+      "log": "logs/probes/review_product_qualified_control-20260918-151152.log",
+      "log_sha256": "41b59ecba283190df75e0564d0dfb801cdb152462d6363dc2335ab4701d1dc7d",
+      "exit": 0,
+      "failure_line": null,
+      "failure_statement": null,
+      "warning_delta": {}
+    },
+    {
+      "name": "replay_product_reverse_control",
+      "source_sha256": "d5bd6f4ced8ccc0cff607be2b632288990e4d9d04948cb2cac26adea93204ecb",
+      "log": "logs/probes/replay_product_reverse_control-20260918-151712.log",
+      "log_sha256": "5a1b848661adcd4316a827e9cfe1a1ec4c91dec791d98bfb844f617f62b4559a",
+      "exit": 1,
+      "failure_line": 23152,
+      "failure_statement": "assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) : τ (@= (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) x);",
+      "warning_delta": {}
+    }
+  ],
+  "baseline_warning_inventory": {
+    "categories": {
+      "replaceable pattern variable": 157,
+      "unjoinable critical pair": 1140
+    },
+    "term_heads": {
+      "fapp1_fapp0": 133,
+      "comp_fapp0": 473,
+      "fapp0": 45,
+      "idtoiso_cat": 1,
+      "Op_func": 8,
+      "fapp1_func": 31,
+      "Hom_cat": 3,
+      "hom_postcomp_func": 3,
+      "hom_postcomp_fapp0": 150,
+      "hom_postcomp_tele_fapp1_fapp0": 4,
+      "hom_postcomp_fapp1_fapp0": 4,
+      "sigma_Fst": 32,
+      "hom_precomp_along_func": 3,
+      "hom_precomp_along_fapp0": 14,
+      "hom_precomp_along_tele_fapp1_fapp0": 4,
+      "hom_precomp_along_fapp1_fapp0": 10,
+      "sigma_Snd": 31,
+      "Hom_func": 8,
+      "Hom_fapp0": 9,
+      "tapp0_hom_fapp0": 30,
+      "tapp0_fapp0": 35,
+      "Op_transf": 15,
+      "comp_prod_fapp1_fapp0": 2,
+      "tapp1_fapp0": 5,
+      "Op_adjunction": 7,
+      "unit_adj_transf": 7,
+      "counit_adj_transf": 7,
+      "tapp1_int_fapp0_transf": 1,
+      "tapp1_at_transf": 1,
+      "tapp1_con_int_fapp0_transf": 3,
+      "tapp1_con_at_transf": 3,
+      "Pullback_catd": 7,
+      "Op_funcd": 4,
+      "Obj": 2,
+      "Transfd_cat": 2,
+      "fdapp1_int_hom_fapp0": 12,
+      "fdapp1_int_cell": 5,
+      "sym_tapp1_fapp0_transf": 10,
+      "sym_func": 1,
+      "sym_fapp0_func": 1,
+      "sym_fapp0_fapp1_func": 1,
+      "sym_fapp1_func": 1,
+      "sym_func_func_transf": 1,
+      "sym_transf_tapp0_transf": 1,
+      "fdapp1_int_hom_func": 2,
+      "Hom_catd_fapp1_fapp0": 4,
+      "Hom_catd_fapp1_fapp0_point": 1,
+      "Prof_cell_apply": 2,
+      "eq_skeleton_map_func": 1
+    },
+    "rule_families": {
+      "fapp1_fapp0 | id": 3,
+      "comp_fapp0 | comp_fapp0": 74,
+      "comp_fapp0 | fapp1_fapp0": 287,
+      "eq_refl | fapp1_fapp0": 2,
+      "comp_fapp0 | fapp0": 6,
+      "comp_fapp0 | id": 3,
+      "comp_fapp0 | eq_refl": 2,
+      "eq_refl | idtoiso_cat": 1,
+      "Op_func | Op_func": 5,
+      "Op_func | fapp0": 5,
+      "Op_func | fapp1_func": 4,
+      "fapp1_fapp0 | fapp1_fapp0": 108,
+      "Op_func | fapp1_fapp0": 4,
+      "Op_func | comp_fapp0": 3,
+      "Op_cat | comp_fapp0": 1,
+      "Hom_cat | Op_cat": 1,
+      "fapp0 | fapp1_func": 18,
+      "hom_postcomp_func | id": 3,
+      "fapp0 | hom_postcomp_func": 2,
+      "hom_postcomp_fapp0 | id": 9,
+      "hom_postcomp_fapp0 | hom_postcomp_fapp0": 29,
+      "comp_fapp0 | hom_postcomp_fapp0": 22,
+      "hom_postcomp_tele_fapp1_fapp0 | id": 3,
+      "comp_fapp0 | hom_postcomp_tele_fapp1_fapp0": 4,
+      "fapp1_func | hom_postcomp_func": 2,
+      "fapp1_fapp0 | hom_postcomp_func": 2,
+      "hom_postcomp_fapp1_fapp0 | id": 3,
+      "defiso_to | hom_postcomp_fapp0": 20,
+      "defiso_from | hom_postcomp_fapp0": 20,
+      "comp_fapp0 | defiso_to": 1,
+      "comp_fapp0 | defiso_from": 1,
+      "fapp1_fapp0 | hom_postcomp_fapp0": 72,
+      "defiso_iso_evidence | sigma_Fst": 1,
+      "hom_precomp_along_func | id": 3,
+      "fapp0 | hom_precomp_along_func": 1,
+      "hom_precomp_along_fapp0 | id": 6,
+      "hom_precomp_along_fapp0 | hom_precomp_along_fapp0": 8,
+      "comp_fapp0 | hom_precomp_along_fapp0": 6,
+      "hom_precomp_along_tele_fapp1_fapp0 | id": 3,
+      "comp_fapp0 | hom_precomp_along_tele_fapp1_fapp0": 4,
+      "fapp1_func | hom_precomp_along_func": 1,
+      "fapp1_fapp0 | hom_precomp_along_func": 1,
+      "hom_precomp_along_fapp1_fapp0 | id": 6,
+      "hom_precomp_along_fapp1_fapp0 | hom_precomp_along_fapp1_fapp0": 4,
+      "fapp0 | sigma_Fst": 26,
+      "fapp0 | sigma_Snd": 26,
+      "Hom_func | id": 8,
+      "Hom_func | fapp0": 1,
+      "Hom_fapp0 | id": 8,
+      "Hom_fapp0 | Hom_fapp0": 1,
+      "Functor_cat | Hom_cat": 1,
+      "id | tapp0_hom_fapp0": 3,
+      "comp_fapp0 | tapp0_hom_fapp0": 25,
+      "sigma_Fst | tapp0_fapp0": 1,
+      "sigma_Snd | tapp0_fapp0": 1,
+      "comp_fapp0 | tapp0_fapp0": 50,
+      "Functor_cat | tapp0_fapp0": 1,
+      "Op_transf | Op_transf": 3,
+      "Functor_cat | Op_transf": 2,
+      "Op_transf | comp_fapp0": 10,
+      "fapp0 | tapp1_func": 2,
+      "Functor_cat | comp_prod_fapp1_fapp0": 2,
+      "hom_postcomp_fapp1_fapp0 | hom_postcomp_fapp1_fapp0": 1,
+      "hom_postcomp_tele_fapp1_fapp0 | hom_postcomp_tele_fapp1_fapp0": 1,
+      "hom_precomp_along_tele_fapp1_fapp0 | hom_precomp_along_tele_fapp1_fapp0": 1,
+      "sigma_Fst | tapp1_fapp0": 4,
+      "sigma_Snd | tapp1_fapp0": 4,
+      "tapp1_fapp0 | tapp1_fapp0": 1,
+      "id | tapp1_fapp0": 4,
+      "comp_fapp0 | tapp1_fapp0": 20,
+      "comp_fapp0 | fapp1_func": 22,
+      "Op_adjunction | Op_adjunction": 1,
+      "Op_adjunction | Op_cat": 6,
+      "Op_adjunction | unit_adj_transf": 1,
+      "Op_cat | unit_adj_transf": 6,
+      "Op_adjunction | counit_adj_transf": 1,
+      "Op_cat | counit_adj_transf": 6,
+      "Functor_cat | tapp1_int_fapp0_transf": 1,
+      "Functor_cat | tapp1_at_transf": 1,
+      "id | tapp1_con_int_fapp0_transf": 3,
+      "id | tapp1_con_at_transf": 3,
+      "Pullback_catd | Pullback_catd": 7,
+      "fapp1_fapp0 | hom_con": 2,
+      "fapp1_func | hom_con": 2,
+      "fapp0 | hom_con": 2,
+      "Pullback_catd | fapp0": 1,
+      "Op_catd | Op_funcd": 4,
+      "fapp1_fapp0 | id_funcd": 1,
+      "fapp0 | fapp1_fapp0": 3,
+      "Hom_cat | Sigma_cat": 1,
+      "Sigma_cat | comp_fapp0": 1,
+      "Sigma_cat | fapp1_fapp0": 4,
+      "Sigma_cat | tapp0_fapp0": 2,
+      "Obj | Sigma_cat": 2,
+      "Sigma_cat | Transfd_cat": 2,
+      "Hom_catd | fapp0": 1,
+      "fapp0 | homd_src_func": 1,
+      "tapp0_fapp0 | tapp0_fapp0": 5,
+      "fapp0 | homd_tgt_func": 1,
+      "tapp0_hom_fapp0 | tapp0_hom_fapp0": 2,
+      "comp_fapp0 | tdapp0_fapp0": 16,
+      "fdapp1_int_hom_fapp0 | id": 3,
+      "section_postcomp_sec | tapp0_fapp0": 1,
+      "fdapp1_int_cell | section_postcomp_sec": 1,
+      "Sigma_cat | fdapp1_int_cell": 2,
+      "fapp1_fapp0 | tdapp1_int_presheaf_arrow": 2,
+      "Functor_cat | fapp0": 1,
+      "Functor_cat | fapp1_func": 1,
+      "Functor_cat | fapp1_fapp0": 1,
+      "id | sym_tapp1_fapp0_transf": 7,
+      "Op_cat | sym_tapp1_fapp0_transf": 2,
+      "sym_func | sym_func": 1,
+      "sym_fapp0_func | sym_func": 1,
+      "sym_fapp0_fapp1_func | sym_func": 1,
+      "sym_fapp1_func | sym_func": 1,
+      "sym_func | sym_tapp1_fapp0_transf": 1,
+      "sym_func_func_transf | sym_func_func_transf": 1,
+      "sym_func_func_transf | sym_transf_tapp0_transf": 1,
+      "Pullback_catd | fapp1_func": 1,
+      "Pullback_catd | fapp1_fapp0": 1,
+      "fdapp1_int_cell | section_weaken_funcd": 2,
+      "fdapp1_int_hom_fapp0 | fdapp1_int_hom_fapp0": 7,
+      "fdapp1_int_hom_func | section_weaken_funcd": 2,
+      "fdapp1_int_hom_fapp0 | section_weaken_funcd": 2,
+      "Hom_catd_fapp1_fapp0 | id": 4,
+      "Hom_catd_fapp1_fapp0_point | Hom_catd_fapp1_fapp0_point": 1,
+      "Hom_catd_fapp1_func | fapp0": 1,
+      "Hom_catd_fapp1_fapp0 | fapp0": 2,
+      "Prof_cell_apply | Prof_func_hom": 2,
+      "Pullback_catd | comp_fapp0": 3,
+      "eq_skeleton_map_func | fapp0": 1,
+      "eq_skeleton_map_func | eq_skeleton_map_func": 1
+    },
+    "parser_issues": {}
+  },
+  "location_comparisons": [
+    {
+      "candidate": "terminal_candidate",
+      "control": "terminal_control",
+      "normalized_location_delta": {
+        "candidate-unifier": 1
+      }
+    },
+    {
+      "candidate": "terminal_injective",
+      "control": "terminal_injective_control",
+      "normalized_location_delta": {
+        "candidate-unifier": 1
+      }
+    },
+    {
+      "candidate": "product_qualified_candidate",
+      "control": "product_qualified_control",
+      "normalized_location_delta": {
+        "owner:11221": -1,
+        "owner:11227": -1,
+        "owner:11733": -8,
+        "owner:16211": -8,
+        "owner:16296": -1,
+        "owner:17050": -8,
+        "owner:18012": -1
+      }
+    }
+  ],
+  "fragment_hashes": {
+    "product-inference.lpfragment": "d6189894c7514e66f324989dc2e2cef297884ef7e0df2b5c1aab9d2478e475b6",
+    "product-observations.lpfragment": "9f5dbafbe74834374d7f878d192f527860cb922fbab9346ff16116c036083e27",
+    "product-observer.lpfragment": "78a863dd7f9cb81733ce2e5cb8cddb3df6baa4fd894526b56552442067c54cf4",
+    "product-reverse.lpfragment": "258eb1fa2fcada9759b7fa6449e4e59e639fe42033a7f0ea688700ed6914abc6",
+    "terminal.lpfragment": "8b79643b2ba696b8564cdec17bf5282cbc72ad5bf9566dbc960fe2140a5b9ca9"
+  },
+  "replay_comparisons": [
+    {
+      "replay": "replay_terminal_constant_candidate.lp",
+      "measured": "review_terminal_candidate.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "4750e26bd22d459c57d8aec84c7bb5113be3791e0e00cd00cc938be4ede4aa28"
+    },
+    {
+      "replay": "replay_terminal_constant_control.lp",
+      "measured": "review_terminal_control.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "648f1dca1edec22b2b2a8c03eedcd5933df5366bca7cb85e8140dc2ed00ae25e"
+    },
+    {
+      "replay": "replay_terminal_injective_candidate.lp",
+      "measured": "review_terminal_injective.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "be642ce5ae1c4b74b392513cf6866d58aa391c9e2dd367fcc4f684d4d51136c4"
+    },
+    {
+      "replay": "replay_terminal_injective_control.lp",
+      "measured": "review_terminal_injective_control.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "03313fa2955ea083e44c3cff713b886e77e9d792a0eb3c013bf71674244695e5"
+    },
+    {
+      "replay": "replay_product_observations_candidate.lp",
+      "measured": "review_product_qualified_candidate.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "cdb8ca9347e3bfeb0ac6afc59a61575f5b9ba47215e891875d9213be70b323d7"
+    },
+    {
+      "replay": "replay_product_observations_control.lp",
+      "measured": "review_product_qualified_control.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "5e5e672a0139f7a5b4e826e53c6a6b8a2fad5664da62fa8f2233e29e3aabb4f6"
+    },
+    {
+      "replay": "replay_product_observer_candidate.lp",
+      "measured": "review_product_observer_candidate.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "61ccadf35f832cf6cfb306582f46ce910288d7c551410e381ee20e4a1eb623dd"
+    },
+    {
+      "replay": "replay_product_observer_control.lp",
+      "measured": "review_product_observer_control.lp",
+      "byte_identical": true,
+      "whitespace_normalized_identical": true,
+      "replay_sha256": "7b5f029f6c3455a2fa27875329efdd1d797c403456dff3a5f6422a691d5e9efa"
+    }
+  ],
+  "source_checkout_commit": "db4f7809961b8c107247613067fb567491fb0b84",
+  "source_revision_matches_reported_binary_version": true
+}

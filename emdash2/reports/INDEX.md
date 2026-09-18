@@ -52,6 +52,12 @@ completes the full-package analysis and records conditional native observations
 and the profile-dependent requirements for a later general upgrade. Ordinary
 family universality remains the qualified current implementation.
 
+The [foundations and DevOps reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
+records the 2026-09-18 source review, exact terminal/product-unifier controls,
+completed-but-unintegrated action-profile branch, remaining homological
+boundaries and proposed module/binder/template priorities. It introduces no
+production rule or new persistent goal.
+
 ## Current Orientation
 
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:

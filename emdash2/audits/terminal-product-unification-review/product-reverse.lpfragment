@@ -1,0 +1,1 @@
+assert [A B : Cat] (x : τ (Obj (Product_cat A B))) ⊢ @eq_refl (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) : τ (@= (Obj (Product_cat A B)) (@Product_pair A B (sigma_Fst x) (sigma_Snd x)) x);
