@@ -1062,9 +1062,10 @@ migration is implied by that review.
   restrictions retain generic transfor action, and the cross observation is
   derived internally from `Prof_func_hom`, reindexing, and
   `join_cross_transf`. The explicit `JoinMapObjectData` classifier records
-  only objects; a Cat-valued total of mixed-variance coherent squares,
-  action-derived-cross compatibility, and scoped join eta remain named
-  prerequisites rather than hidden equations.
+  only objects; a Cat-valued total of mixed-variance coherent squares and
+  scoped join eta remain open. Whole action-derived-cross compatibility is
+  supplied downstream by `emdash3_2_join_cross_compatibility.lp` as a
+  propositional beta, not a runtime fold or mapping-category equivalence.
 - `emdash3_2_face_realization.lp`: variable-dimension realization of every
   nonempty raw/public face code into a whole functor between join-built
   directed simplex shapes. `skip` computes by the left join inclusion and

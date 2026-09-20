@@ -2,7 +2,9 @@
 
 Date: 2026-09-18
 
-Status: mathematical design review; proposed higher construction, no implementation or stabilization theorem
+Last reviewed: 2026-09-19
+
+Status: categorical Π-section and join source review; suspension-algebra design, no implementation or stabilization theorem
 
 Scope: the user's present request reopens spectral design analysis, including
 the correction that the section g is indexed by C₀′. It does not launch a
@@ -11,13 +13,24 @@ homology work. Earlier spectral deferrals describe those earlier goals.
 
 ## Assessment And Recovered Context
 
+The latest user clarification takes ordinary Hom and categorical Π as the
+constructor interface: join has a varying inclusion endpoint; suspension
+has constant endpoints. This is the current starting point. The section
+below records its relation to the active binary join, the required section
+profile, reduced pointing, prespectrum algebras and fibrewise suspension.
+The earlier family/collage and varying-boundary proposals remain reference
+alternatives; they are not prerequisites for this simpler formulation.
+
 The proposal has a sound local interpretation: a coherent family of displayed
 arrows above specified base arrows, with one fixed source and varying targets.
-It suggests a dependent suspension defined by a universal property and a
-subsequent stabilization of dependent contexts. The local interpretation is
-substantially more definite than the spectrum construction: the latter still
-needs a category of levels, a whole transition, compatible boundary shifts,
-and a stabilization theorem.
+The original review incorrectly made that fixed-base interpretation the
+starting formulation for constructing the suspension of the input C₀. The
+user's two-point objection identifies the missing distinction: input points
+can label newly generated arrows without already being their endpoints in
+the base. The follow-up below supplies explicit ordinary constructions,
+their dependent elimination data, and a family-to-pointed-category adjunction.
+The higher spectrum construction still needs a category of levels, a whole
+transition, compatible boundary shifts, and a stabilization theorem.
 
 The most relevant earlier records are:
 
@@ -25,24 +38,464 @@ The most relevant earlier records are:
 - [Semantic architecture review, section 6](TYPESCRIPT_EMDASH_HOMOLOGY_SEMANTIC_ARCHITECTURE_REVIEW.md#6-deferred-brainstorming-ext-stable-homology-and-directed-spectra).
 - [Dependent-simplex foundations plan](../emdash2/reports/REPORT_EMDASH_V3_2_DEPENDENT_HOM_SIMPLEX_FOUNDATIONS_PLAN_2026-08-19.md).
 
-The earlier review already retained one fixed endpoint, a varying endpoint,
-the base projection, the marked identity fibre, and a possible tower of
-dependent contexts. It explicitly withdrew a fixed two-pole construction as
-the organizing model for this proposal. The present review preserves that
-decision. Fixed-pole constructions below are comparison tests, not replacements
-for the user's varying-endpoint proposal.
+The earlier review retained one fixed endpoint, a varying endpoint, the base
+projection, the marked identity fibre, and a possible tower of dependent
+contexts. Its withdrawal of a fixed two-pole construction described that
+earlier proposal. The user's latest clarification explicitly distinguishes
+join from fixed-endpoint suspension; that clarification now governs this
+review instead of requiring the older varying-boundary architecture.
 
 The additional datum in the present formulation is a target section together
 with a section of the dependent-Hom family after substitution of the chosen
 base arrows. This makes a dependent cell-introduction interface visible.
 
-## A Well-Typed Local Formulation
+## Categorical Π, Join And Suspension Algebras — Latest Clarification
+
+Ordinary Hom is the appropriate first interface in the revised signatures.
+The family a↦Hom(north,inclusion(a)) has dependent values because its endpoint
+varies. Explicit homd is needed when lifting arrows into a displayed motive
+and remains part of the section-action implementation. It need not appear
+in the primary meridian constructor.
+
+Here Π E denotes a category of directed sections; a meridian is an object
+of that category. For the intended generic section profile,
+
+    Π(a:A), K ≃ Functor(A,K)
+
+when K is a constant family. A section can vary as a functor even though
+family transport is identity. This is different from an ordinary strict
+limit of the constant Cat-valued diagram, or choices on Obj(A) that ignore
+the arrows of A.
+
+The active core explicitly gives this comparison as a proof-time unification
+rule at Pi_cat(Const_catd(A,K)); the Pi runtime head stays stable. The
+represented Hom family along a constant diagram has a separate runtime
+fold to Const_catd(A,Hom(north,south)). Thus the suspension constructor has
+the intended reading
+
+    meridian : Obj(Π(a:A), Hom(north,south))
+             ≃ an object of Functor(A,Hom(north,south)).
+
+These are existing declaration/comparison facts, not a consistency claim.
+The [family/section diagnostic](TYPESCRIPT_EMDASH_FAMILY_SECTION_PROFILE_DIAGNOSTIC.md)
+records the conflict with the old unrestricted strict-naturality cuts.
+The intended construction must retain the section's own directed action.
+
+### Unary Join And The Active Binary Join
+
+The user's unary Join(A) is the left cone, mathematically 1⋆A, with data
+
+    inclusion : A ⊢ J
+    north     : Obj(J)
+    meridian  : Obj(Π(a:A), Hom_J(north,inclusion(a))).
+
+For u:a→b, the positive directed section profile supplies a cell
+
+    inclusion(u) ∘ meridian(a) ⇒ meridian(b).
+
+For A the walking arrow, this is the triangle cell. Higher action includes
+the corresponding coherence. Requiring strict equality selects a strict
+cone; requiring an invertible comparison selects a pseudo cone. These are
+distinct higher constructions. The earlier ordinary category/Set examples
+do not decide between them.
+
+The [active core](../emdash2/emdash3_2.lp) implements the binary version:
+
+| Requested unary datum | Current owner or specialization |
+| --- | --- |
+| J | Join_cat(Terminal_cat,A) |
+| inclusion | join_snd_func(Terminal_cat,A) |
+| north | Image of Terminal_obj under join_fst_func(Terminal_cat,A) |
+| Whole meridian | join_cross_transf(Terminal_cat,A) |
+| Shaped observation | join_cross_hom, through Prof_cell_eval |
+| Nondependent recursion | join_elim_func, with its left branch selecting the supplied north |
+
+For binary Join_cat(A,B), the cross object is a Prof_transf_cat from
+Terminal_prof(A,B) to Unit_prof(J) reindexed along the two inclusions.
+Prof_transf_cat unfolds to Functord_cat over Aᵒᵖ×B. Its source here is
+the constant terminal family, exactly the terminal-source presentation
+used by Pi_cat. Its mathematical reading is therefore
+
+    Obj(Π(a:Aᵒᵖ,b:B), Hom_J(inl(a),inr(b))).
+
+Specializing the left side to 1 and identifying 1ᵒᵖ×A with A gives the
+user's unary section. The binary-base presentation is already native;
+no unary wrapper or terminal-product runtime collapse is introduced here.
+
+The recursor has runtime beta rules for whole branch restrictions, their
+point observations, the primitive cross observation and the extracted
+whole/component Hom action on the cross. The
+[mapping-recursion module](../emdash2/emdash3_2_join_mapping_recursion.lp)
+adds whole observations and JoinMapObjectData, an object classifier rather
+than an established category of all mapping data. The downstream
+[cross-compatibility module](../emdash2/emdash3_2_join_cross_compatibility.lp)
+declares a whole propositional beta comparing the action-derived cross
+observation with the recursor-owned cross. This is not a runtime fold.
+
+The current interface supplies constructor data and selected nondependent
+computation. It does not supply a general dependent join eliminator, a
+generic directed-HIT declaration schema, or a whole observation/extension
+equivalence with join eta. A complete universal specification still needs
+the algebra category and its higher maps, initiality/uniqueness, and the
+selected computation principles. Listing the Π constructor data alone
+does not prove those properties.
+
+### Unreduced And Reduced Suspension
+
+Correct Join(A) to Susp(A) in the user's suspension north field. The
+unreduced signature is
+
+    north,south : Obj(ΣᵘA)
+    meridian    : A ⊢ Hom_{ΣᵘA}(north,south).
+
+This is equivalently the Π-section of the constant Hom family. A need not
+be pointed. The output is bipointed and can be pointed by choosing south.
+For A=[1], meridian gives two parallel 1-cells and a 2-cell between them;
+for discrete two-point A, it gives two unrelated parallel arrows.
+
+A remains the meridian's domain. Replacing the right factor of Join(1,A)
+by 1 would instead give Join(1,1), retaining only one generating arrow.
+The constant endpoint in the suspension signature must not erase the
+parameter category of the constructor.
+
+In the appropriate strict enriched reference model the suspension has
+Hom(north,south)=A, terminal self-homs and an empty reverse hom. Its
+fixed-endpoint mapping property is
+
+    Functor_bipointed(ΣᵘA,(C,n,s)) ≃ Functor(A,Hom_C(n,s)).
+
+The higher interpretation must use compatible chosen functor/transformation
+profiles; it is not supplied automatically by the present core's syntax.
+
+For the usual spectrum interface use reduced suspension of pointed (A,a★).
+Collapse the marked meridian, identifying its endpoints. The strict
+presentation has north=south=★ and meridian(a★)=id_★. Thus an economical
+reduced algebra in pointed (C,c★) is
+
+    meridian : Functor₊((A,a★),(End_C(c★),id_c★)).
+
+Weak pointing uses specified comparison/coherence data; these observations
+authorize no global identity rewrite. Omitting south because it is the
+basepoint does not itself impose the reduction. For pointed A=1, unreduced
+suspension is the walking arrow, while reduced suspension is terminal.
+In spaces the marked meridian is invertible and the standard comparison
+between pointed unreduced and reduced models is available. An arbitrary
+noninvertible directed meridian cannot supply that comparison.
+
+These suspension/endomorphism targets are described in
+[Kern, sections 2.1 and 3.1](https://arxiv.org/html/2410.02578v2).
+No general Susp/Suspd owner was found in the active emdash3_2 source
+inventory; the specialized walking-endomorphism and circle developments
+do not themselves provide it.
+
+### Algebra Data For Prespectra And Ω-Spectra
+
+The user is right that a map from a free suspension can be given by its
+algebra data. For unreduced suspension of fixed Cₙ this means
+
+    n,s : Obj(Cₙ₊₁),       m : Cₙ ⊢ Hom_{Cₙ₊₁}(n,s).
+
+This is an algebra for the constructor signature with parameter Cₙ. Its
+equivalence with maps out needs the whole recursion/uniqueness principle
+with the matching profiles.
+
+For pointed levels (Cₙ,cₙ), reduced suspension instead gives
+
+    σₙ : ΣCₙ →₊ Cₙ₊₁
+       corresponding to
+    λₙ : Cₙ →₊ End_{Cₙ₊₁}(cₙ₊₁).
+
+Point preservation sends cₙ to id(cₙ₊₁), retaining the appropriate weak
+comparison when needed. Arbitrary such maps define categorical prespectrum
+data. The Ω-spectrum condition requires each λₙ to be an equivalence.
+Stable localization/spectrification provides another presentation of
+spectra when its hypotheses are established.
+
+The pointed endomorphism-algebra interface can therefore be specified
+without first implementing a suspension HIT. The free suspension remains
+useful as the left-adjoint/computation interface. The endomorphism-tower
+definition is [Kern, Definition 3.1.4](https://arxiv.org/html/2410.02578v2#S3.SS1).
+At the enriched level, [Heine, Definition 5.2.1](https://arxiv.org/html/2605.05195v2#S5.SS2)
+includes alternating higher variance, which these object formulas do not
+remove. The use of dependent Π notation alone does not establish a theory
+different from existing categorical spectra.
+
+### Dependent Elimination And Fibrewise Suspension
+
+For a motive D:ΣᵘA→Cat, dependent elimination uses u:D(north), v:D(south)
+and a coherent family of displayed lifts
+
+    g(a) : Homd_D(meridian(a);u,v).
+
+It produces a section over ΣᵘA. This is where explicit homd belongs; it
+introduces no external parameter base and is not already parametrized
+spectrum structure.
+
+For parametrization, fix B and coherent pointed families Cₙ over B. When
+the chosen suspension functor acts on their family profile, its fibrewise
+lifting is
+
+    (Σ_B Cₙ)(b) = Σ(Cₙ(b)).
+
+At the ordinary functor level, base-arrow action applies Σ to the supplied
+pointed transport. Structure maps are whole pointed displayed maps over B,
+
+    σₙ : Σ_B Cₙ →_B Cₙ₊₁,
+
+whose components are σₙ(b):Σ(Cₙ(b))→₊Cₙ₊₁(b). Their object action uses
+two distinct binders:
+
+    b:B, z:Σ(Cₙ(b)) ⊢ σₙ(b,z):Cₙ₊₁(b).
+
+The target is indexed by b, not by the suspended element z. A target that
+depends on z is instead a motive for dependent elimination. For varying
+source and target families, retain the whole displayed-map owner rather
+than assuming their pointwise functor categories form a covariant family.
+
+If Suspd means this fibrewise lifting, it need not be a new primitive HIT:
+functoriality of Σ and compatibility with reindexing can define it. The
+objectwise formula does not yet supply the pointing, higher action and
+lax/Gray variance for arbitrary directed bases. Over a groupoidal base
+with space-valued levels, the classical comparison is the model Bᵒᵖ→Sp;
+see [Ando–Blumberg–Gepner, introduction](https://arxiv.org/html/1112.2203v2).
+For that classical comparison use space suspension, or the appropriate
+groupoidal reflection of categorical suspension. Categorical suspension
+need not itself preserve groupoidal carriers: the reduced categorical
+suspension of the pointed discrete two-point set is Bℕ, not Bℤ.
+
+## Two-Point Construction And Correction — 2026-09-19
+
+Let X={a,b} be discrete. First separate three roles: X labels the new arrows,
+Y indexes their target objects, and the category T being generated contains
+those arrows. X need not already have any nonidentity arrows.
+
+For sets X,Y and a map t:X→Y, define T(t) by the following free presentation:
+
+    objects:       N and S(y), for y:Y
+    generators:    μ(x):N→S(t(x)), for x:X
+
+There are no other nonidentity arrows: no two generators compose. In
+particular, N is fresh and distinct from the objects S(y). The choice of t
+records which generators share an endpoint. This is an explicit ordinary
+category, so its existence and mapping property can be proved directly.
+
+For the two-point input there are two useful cases:
+
+| Endpoint assignment | Objects and arrows | Interpretation |
+| --- | --- | --- |
+| Y=1, t(a)=t(b)=★ | N,S with two independent arrows μ(a),μ(b):N→S | Unreduced directed suspension of the discrete two-point set |
+| Y={a,b}, t=id | N,S(a),S(b), with μ(a):N→S(a) and μ(b):N→S(b) | Freely varying targets; the directed cone 1⋆X |
+
+The first has classifying-space homotopy type S¹, while the second is
+contractible. Each nerve has no nondegenerate simplices above dimension
+one, so these statements are the elementary circle-versus-tree comparison.
+Neither construction needs an arrow a→b in X.
+
+For this discrete example, the first presentation can also be obtained from
+the second by identifying S(a) and S(b), keeping the two generating arrows
+distinct. Equivalently it is the categorical pushout of 1⋆X along X→1.
+This is an optional presentation of the free object, not a requirement to
+run a join construction before specifying its generators. An ordinary
+categorical quotient for a nondiscrete X must not be assumed to model higher
+categorical suspension: it can identify data that should become higher cells.
+
+Thus the user's expectation that a join appears when every input point keeps
+its own endpoint is correct in this free ordinary model. The dependent
+generalization should retain the endpoint assignment rather than promise
+that its most freely separated endpoint case has a different underlying
+category from the join.
+
+The same input can be written as a family P over Y:
+
+    P(y) = {x:X | t(x)=y},       X ≅ Σ(y:Y) P(y).
+
+Then the crucial equation for the generated category is
+
+    Hom_T(N,S(y)) ≅ P(y).
+
+Putting both labels into one fibre yields two parallel arrows. Putting one
+label in each of two fibres yields the cone. The bare total set X does not
+determine which of these dependent inputs is intended. This motivates a
+constructor on families, with a chosen constant-base specialization for
+ordinary suspension.
+
+The ordinary mapping property is completely explicit. A functor T(t)→D
+is precisely data
+
+    n:Obj(D),       s:Y→Obj(D),
+    γ(x):Hom_D(n,s(t(x))),       x:X.
+
+The extension sends the objects and generating arrows to these specified
+values. The only composition laws to check are identities. A transformation
+between two such functors consists of components at n and the s(y), with
+the commuting square for each γ(x). This also identifies the whole functor
+category with the corresponding category of data, not just its object set.
+
+For X={a,b}, Y=1, this says exactly that a map out of the directed suspension
+chooses two objects and two parallel arrows between them.
+
+### Where The Original Dependent Hom Appears
+
+Now let E:T(t)→Cat be a strict covariant family. A section of its total
+projection is specified by
+
+    u:E(N),       v(y):E(S(y)),
+    g(x):Homd_E(μ(x);u,v(t(x))).
+
+In the reference interpretation the last line means
+
+    g(x):Hom_{E(S(t(x)))}(E(μ(x))(u),v(t(x))).
+
+This is the earlier displayed-arrow formula with its base arrows generated
+in T(t). It is the dependent elimination/section principle for this free
+category. Freeness supplies the section extending these data; for this
+discrete input there are no additional nonidentity compositional relations.
+
+For the ordinary suspension there are u:E(N), v:E(S), and two independent
+displayed arrows over μ(a) and μ(b). For the varying-target case the two
+target objects lie in the distinct fibres E(S(a)) and E(S(b)).
+
+The index of the generating data g is X. The resulting section is over
+T(t). These roles differ from the earlier assignment A=C₀′, B=C₀. The
+user's earlier domain correction was right for that fixed boundary setup;
+it did not specify the generator/base distinction needed to construct the
+new object. If an enlarged C₀′ is intended to carry newly generated p,
+it belongs on the generated-base side of this distinction.
+
+The generated arrows live in T(t), not between the labels in X. Adding an
+arrow a→b to the generator-index category and requiring g to be coherent
+along it is extra input: it can impose an equation between the chosen
+arrows in an ordinary model, or a comparison 2-cell in a higher model.
+For example, sections of a constant two-element set over the discrete
+two-point category can choose the two values independently; sections over
+the walking arrow must choose equal values. Such a change must not silently
+identify the two meridians of the suspension of a discrete set.
+
+This gives a precise role to the user's p idea: p is introduced by the
+constructor, and g specifies its dependent lift. A join-like source of p
+is compatible with dependent elimination. The existence of a dependent
+eliminator alone does not, however, establish a new suspension functor:
+the generalized input family and its retained endpoints supply that further
+content.
+
+### A Small Adjunction That Can Already Be Established
+
+Extend the ordinary model to a category Y and a covariant set-valued family
+P:Y→Set. Form a category L(Y,P) containing Y as a full subcategory and
+one new distinguished object N, with
+
+    Hom(N,y)=P(y),       Hom(y,N)=∅,       Hom(N,N)={id_N}.
+
+The homs within Y are unchanged, and composing p:N→y with h:y→z is the
+element P(h)(p). The functor laws for P give the remaining category laws.
+This is the ordinary collage of the family, or weighted cone. The general
+collage definition and mapping property are recorded in
+[Shulman, Definition 4.1 and Theorem 4.3](https://arxiv.org/html/1507.01065#S4).
+
+Let FamCov have objects (Y,P) and morphisms (F,α), where F:Y→Z and
+α:P⇒Q∘F. Let Cat₊ here mean categories with a chosen object and functors
+preserving that object strictly. Define
+
+    R(D,d) = (D, Hom_D(d,−)).
+
+A pointed functor L(Y,P)→(D,d) is exactly a functor F:Y→D together with
+a natural family α:P⇒Hom_D(d,F(−)): its values on arrows from N are α,
+and its other values are F. Conversely these data uniquely define the
+pointed functor. The correspondence is natural in both variables, giving
+
+    Hom_Cat₊(L(Y,P),(D,d)) ≅ Hom_FamCov((Y,P),R(D,d)),
+    L ⊣ R.
+
+This adjunction is an ordinary mathematical construction, not merely a
+proposed mapping formula. The constant-base case Y=1 gives the directed
+suspension of a set. The constant-singleton family P gives the ordinary
+join 1⋆Y. The right adjoint retains the whole varying-target Hom family,
+including postcomposition, rather than just the diagonal endomorphism set.
+
+This supplies a concrete semantic comparison for native hom_int. Its
+displayed section principle supplies the homd comparison above. It does
+not replace native hom_int/homd_int with a second implementation calculus.
+The generic higher collage and its relevant action profiles are not
+currently qualified by the emdash kernel.
+
+For a strict ordinary Y and a strict family P:Y→Cat, a corresponding strict
+2-category model has Hom(N,y)=P(y) and the old homs of Y as discrete
+categories. Objects of P(y) become 1-cells; arrows of P(y) become 2-cells;
+postcomposition is P's functor action. This explains the dimension increase
+without interpreting arrows in the input as equations between generators.
+Arbitrary weak omega-categorical bases, dependent families and Gray/lax
+profiles require their own extension of this model and its mapping property.
+
+### Pointing And Reduction
+
+The user's original C₀ was pointed, so an additional distinction is needed.
+Mark a∈X and reduce the free presentation by making μ(a) an identity. This
+identifies N with S(t(a)) as well as imposing that arrow relation.
+
+For the same X={a,b}, the results are:
+
+| Endpoint assignment | Reduced presentation |
+| --- | --- |
+| Y=1 | One object, one freely generated endomorphism from b: the walking endomorphism category Bℕ |
+| Y=X, t=id | Two objects a,b and one nonidentity arrow a→b: the walking arrow |
+
+The basepoint label becomes an identity only in this reduced construction.
+Identifying endpoints without specifying what happens to the marked arrow
+is a different construction. These are ordinary free presentations for this
+discrete input; no general higher quotient rule is asserted. The distinction
+agrees with the role of the marked meridian in reduced categorical
+suspension; see [Kern, Construction 3.1.1](https://arxiv.org/html/2410.02578v2#S3.SS1).
+
+The reduced varying-target presentation closely matches adjoining a path
+from the original selected point to the other input point. Its groupoidal
+realization is an interval, whereas Bℕ has the circle homotopy type. These
+different outcomes record different endpoint data, not failure of the free
+construction. Requiring the generated arrow itself to be invertible is a
+further choice.
+
+### Displayed Categories And Transport Families Must Be Distinguished
+
+There is a useful check on the original covariant-family formula. The
+minimal parallel-arrow suspension projects to I=(0→1), sending N to 0, S
+to 1 and both generators to the same base arrow. Both fibres are terminal.
+This projection is a displayed category, but it is not a cocartesian
+fibration: neither of its two lifts factors the other through a vertical
+arrow, since the only vertical endomorphism of S is id_S.
+
+Consequently that minimal projection cannot be the Grothendieck total of a
+strict covariant E:I→Cat with terminal fibres. Such a family has exactly one
+displayed arrow over the generator, by Hom_1(★,★)=1. General displayed
+structure and a family with chosen covariant transport are different notions.
+
+A transport-family presentation is nevertheless available with extra data:
+take E(0)=1 with object u and E(1) the free category with objects w,v and
+two arrows w→v. Let E(0→1)(u)=w. Its homd at u,v is the two-element set.
+The total has the extra object (1,w) and the canonical transport arrow
+(0,u)→(1,w); its full subcategory on (0,u),(1,v) is the minimal suspension.
+This is exactly the ordinary free-diagram example retained later in the
+review, now with its extra-object boundary made explicit.
+
+In the dependent eliminator above, E is instead a motive over the already
+generated T(t). There is no requirement that T(t) itself be a transport
+family over I. Keeping these two uses of displayed categories separate
+prevents the previous typing discussion from excluding the basic example.
+
+The revised immediate recommendation is to use this explicit family/collage
+model and its two-point controls as the starting comparison. The remaining
+research is the native higher construction, its profile-correct displayed
+eliminator, the choice of retained boundary data between levels, and eventual
+stabilization. Existence of the small ordinary adjunction is no longer an
+unspecified prerequisite.
+
+## Fixed-Base Dependent-Hom Formulation
 
 Use different letters for the base, the parameter category, and the displayed
-family. In one consistent reading of the user's notation, set:
+family. This describes data over an already specified boundary; it is not
+by itself a constructor that suspends its base B. In particular B need not
+be the original input X=C₀. Set:
 
-    B = C₀                         base category
-    A = C₀′, i : A → B              category of allowed parameters
+    B                              existing or newly generated base
+    A, i : A → B                   category of allowed parameters
     E : B → Cat                    displayed family underlying C₁
     c : B, u : E(c)                fixed source and source fibre object
     p_a : c → i(a)                 coherently varying base arrows
@@ -61,8 +514,9 @@ The corrected substituted family is
     R_{i,p,s}(E,u)(a) = D_E(c,u; i(a),s_a; p_a),
     g : Γ_A R_{i,p,s}(E,u).
 
-Thus g is indeed indexed by A=C₀′, as the user's correction requires. There
-is no reason for it to extend to every object of B. Substitution by (i,s,p)
+Thus g is indexed by A; in the earlier notation where A=C₀′, the user's
+domain correction applies. There is no reason for it to extend to every
+object of B. Substitution by (i,s,p)
 is the whole construction; it must include action on arrows and higher cells,
 not only the displayed object formula.
 
@@ -115,9 +569,11 @@ two values. Freely adjoining that directed arrow gives the walking-arrow
 category; adjoining an invertible arrow gives a different, groupoidal base.
 Neither retains the discrete two-point category as the base of that arrow.
 
-The first reading is the clean default for a general dependent-Hom operation.
-It avoids manufacturing arrows or choosing one arrow to each endpoint. The
-second reading belongs naturally in a free-construction/suspension discussion.
+The first reading parametrizes an existing dependent-Hom operation. The
+second reading is appropriate when the requested construction introduces
+new arrows, as the user's two-point suspension example requires. A free
+cone may intentionally have a contraction; the observations below do not
+rule out using it as a generated base.
 The higher analogue of the coslice must have the variance described below;
 the ordinary formula does not select a lax/oplax convention automatically.
 
@@ -401,11 +857,18 @@ reviewed in full. No claim of literature exhaustiveness is made.
 
 ## Feasibility And The First Useful Milestone
 
-The local displayed-arrow construction is mathematically feasible in the
-strict reference model. Its whole higher realization, free adjoint, and
-stabilization are distinct research milestones. The first useful theorem is
-the dependent-Hom/suspension adjunction with explicit reindexing and the
-ordinary diagonal comparison, before a representability theorem is attempted.
+The latest clarification selects a smaller immediate boundary: qualify the
+whole Π-section interpretation, its existing join presentation, the
+walking-arrow suspension example, and the reduced pointed algebra interface.
+Categorical prespectrum data can then use the pointed End formulation
+without waiting for a new dependent suspension primitive. A generic
+suspension recursor/uniqueness theorem and the higher family action remain
+separate implementation milestones.
+
+The earlier displayed-arrow and family/collage constructions have explicit
+ordinary reference models. The following controls remain relevant to those
+more general alternatives; they are not additional prerequisites imposed
+on the newly clarified prespectrum interface.
 
 The following tests would make that milestone concrete:
 

@@ -4668,9 +4668,11 @@ The currently exposed `JoinMapObjectData` is exactly that object classifier,
 not yet the category of all such data. A morphism between two triples must
 include the mixed-variance coherent square relating both endpoint
 transformations to their cross cells. Ordinary Sigma transport does not
-supply that square. Thus no broad join eta or mapping-category equivalence is
-claimed until a whole coherent-square total and the comparison between the
-action-derived and recursor-owned cross observations are available.
+supply that square. The downstream join-cross compatibility module now
+supplies a whole propositional beta between the action-derived and
+recursor-owned cross observations. A category of coherent mapping squares
+and the requisite uniqueness/eta still remain to be supplied; no broad join
+eta or mapping-category equivalence is claimed.
 
 For nonempty ordinals, the same join recursion realizes an arbitrary raw face
 code in every dimension:
