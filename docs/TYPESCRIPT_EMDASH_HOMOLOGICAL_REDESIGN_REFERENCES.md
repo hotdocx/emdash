@@ -336,6 +336,12 @@ to implement its entire theory before completing the homology/CAS goal.
 
 ## User's Independent Directed-Spectrum Hypothesis
 
+The user's 2026-09-18 request reopens design analysis in the
+[dependent-spectra research review](EMDASH_DEPENDENT_SPECTRA_RESEARCH_REVIEW.md).
+That review incorporates the corrected section domain C₀′, gives a local
+displayed-arrow formulation and variance checks, and separates the free
+suspension question from stabilization. It does not launch implementation.
+
 Preserve this separately from the literature: the user proposes a notion of
 categorical spectrum/suspension in which directed arrows need not be loops
 or endomorphisms, based on emdash's simplicial interpretation of internalized

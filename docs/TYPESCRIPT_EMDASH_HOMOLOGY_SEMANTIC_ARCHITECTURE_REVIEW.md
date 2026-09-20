@@ -635,6 +635,12 @@ supply them through reusable code and proofs.
 
 ## 6. Deferred Brainstorming: Ext, Stable Homology And Directed Spectra
 
+2026-09-18 follow-up: the user has now requested a separate mathematical
+[dependent-spectra design review](EMDASH_DEPENDENT_SPECTRA_RESEARCH_REVIEW.md),
+including a section over C₀′. The deferral below describes the earlier
+homology implementation goal; the new review reopens analysis only and
+does not authorize a kernel migration or alter that completed goal.
+
 This section is retained for future recovery only. Do not investigate,
 implement or turn these suggestions into prerequisites of the active goal.
 
