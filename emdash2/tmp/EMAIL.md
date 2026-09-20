@@ -1165,11 +1165,15 @@ exactness data. The new snake–LES comparison checks their connecting-map
 agreement and positive sign. Changes of H presentation use actual internal
 diagram maps and their inverses followed by Q, so endpoint action is visible.
 Ordinary equations and finite observation paths remain useful derived views.
-The earlier ordinary finite-window iterator is a separate reference interface;
-its final symbolic zero-endpoint experiment and the large six-term package
-comparison remain deferred. These constructions are not a general Došen-style
-decision procedure for homological arrow expressions or a category of
-unbounded complexes.
+The earlier ordinary finite-window iterator is a separate reference interface.
+Its unproved symbolic zero-endpoint attachment is not a requirement of the
+current native interface. Separately, a comparison between exactness data
+extracted from the new native six-term package and their standalone native
+presentations remains unqualified. The native construction, typed data access
+and displayed certificates are qualified; this additional comparison is a
+consumer-triggered follow-up, not a current completion requirement. These
+constructions are not a general Došen-style decision procedure for homological
+arrow expressions or a category of unbounded complexes.
 
 
 A nonsplit calculation at the proof–CAS boundary
@@ -2009,8 +2013,11 @@ snake–LES comparison retains the endpoints and positive connecting-map sign.
 Actual categorical presentation maps act through whole K/Q/H; ordinary
 equations remain derived observations. Finite displayed certificates retain
 the original inputs and inverse-bearing exactness evidence. The earlier
-ordinary iterator's symbolic zero-endpoint experiment and the large six-term
-package comparison remain deferred. These interfaces do not constitute a
+ordinary reference iterator's symbolic zero-endpoint attachment is outside
+current native requirements. A separate unqualified comparison concerns data
+extracted from the new native six-term package versus their standalone native
+presentations; it does not compare old and new homology formulations. Neither
+is a current completion requirement. These interfaces do not constitute a
 general homological normalization calculus.
 
 For the concrete nonsplit example, set `R=ℚ[x]`, take `S=R/(x)` as an

@@ -265,7 +265,7 @@ profile architecture rather than assume the old global strict rules.
 | Op/duality, Sigma-Hom and native Homd | Coupled higher variance/action design remains unqualified | Separate goal after the profile owner choices; preserve native hom_int/homd_int |
 | General higher terminality | Whole contraction definitions exist; deriving general p⊣t from the old capability remains profile-sensitive | Follow the [higher review](TYPESCRIPT_EMDASH_HIGHER_TERMINALITY_REVIEW.md), not a blanket removal of OneCat |
 | Six-term package comparison | Original result, data access, inverse maps and displayed certificates qualified; large equality with standalone witness presentations still fails | Defer until an actual consumer needs that comparison or a measured representation improvement offers a bounded route |
-| Older symbolic endpoint/attachment comparison | Distinct from the finite iterator and displayed native certificates | Revisit for a genuine symbolic-index consumer; not required for current CAS computation |
+| Older symbolic endpoint/attachment comparison | Unfinished final attachment on the retained ordinary reference iterator, separate from the new native six-term package | Historical/reference limitation; not a requirement inherited by the redesigned native interface |
 | Closed model/provider construction | Mechanical CAS reification is available; universal and whole-model semantics remain supplied | A dedicated constructive-model tranche, preserving data versus certificate boundaries |
 | General Došen homology normalization | Native categorical cuts/computations exist; no general normalization theorem | Separate mathematical theorem, not a prerequisite for using the checked reference computation |
 | Product/weighted bridge | Existing adapter still accepts its weighted witness and agreements | Derive a stronger bridge when a consumer needs it |
@@ -281,6 +281,18 @@ record-shaped data, 6GiB and 8GiB attempts. It is not an untried “raise memory
 fix and is not the earlier displayed LES certificate problem, which is solved.
 Its missing comparison is a real unproved observation, but does not prevent
 current native computation or the qualified proof–CAS examples.
+
+Clarification (2026-09-20): the old symbolic endpoint attachment and the native
+six-term package comparison have different owners. The latter compares
+extracted data from the new native snake result with standalone presentations
+of the same native exactness constructions; it is not an old/new formulation
+compatibility theorem. Neither is a standing completion requirement for the
+qualified native workflow. Retaining an older reference iterator does not
+carry its unfinished experiment into the new interface's requirements. The
+six-term comparison remains a documented native observation limitation, to
+revisit only for an actual consumer or a separately accepted follow-up scope.
+Retiring the reference iterator itself would require its remaining consumers
+to be inventoried; it would not remove this separate native limitation.
 
 ## Groupoidification
 

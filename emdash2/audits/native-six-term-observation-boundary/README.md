@@ -2,6 +2,13 @@
 
 Status: explicitly deferred after the 2026-09-16 bounded review; not positive library checks
 
+Scope clarification (2026-09-20): this is an observation of the new native
+snake six-term package, not the earlier ordinary finite-window iterator or an
+old/new homology compatibility theorem. D-NUH-080 superseded its unconditional
+completion gate. Preserve the unqualified comparison as a known limitation; resume
+only for an actual consumer or a separately accepted follow-up scope. The
+native result and qualified data/inverse access do not depend on proving it.
+
 Authority: [native snake/LES plan](../../../docs/TYPESCRIPT_EMDASH_NATIVE_SNAKE_AND_LES_COMPARISON_PLAN.md),
 NUH-6C3b. Latest direction D-NUH-080 (2026-09-16) schedules one bounded
 categorical review with at most two concrete implementation hypotheses. If
