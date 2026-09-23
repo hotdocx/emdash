@@ -58,6 +58,13 @@ completed-but-unintegrated action-profile branch, remaining homological
 boundaries and proposed module/binder/template priorities. It introduces no
 production rule or new persistent goal.
 
+The [native nerves and homology notation review](../../docs/TYPESCRIPT_EMDASH_NATIVE_NERVES_AND_HOMOLOGY_NOTATION_REVIEW.md)
+(2026-09-23) separates flagged simplexes, whole native cubes, geometric
+mapping profiles and the unfinished comparisons of nerves. It also records
+the existing Arr definition and the universal family/component distinction,
+with four focused current-main reviewers. Its completion stages are proposed;
+no new nerve equivalence or profile/Op integration is claimed.
+
 ## Current Orientation
 
 - `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:

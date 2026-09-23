@@ -374,6 +374,18 @@ No sibling code, packages, database or deployment was changed. Existing local
 and hosted smoke receipts were inspected as history; their tests were not
 rerun and current cloud behavior is not newly certified here.
 
+## Native-Nerve Follow-Up Review
+
+The [2026-09-23 focused review](TYPESCRIPT_EMDASH_NATIVE_NERVES_AND_HOMOLOGY_NOTATION_REVIEW.md)
+records a distinct continuation: total native simplex categories and whole
+native/geometric nerve comparisons. Native semicubical nerve assembly already
+exists; the Gray decoder remains object-level. Simplex flag observations do
+not yet form a whole native nerve. The review names their profile/index and
+mapping-universality prerequisites and separates necessary comparison work
+from additional Kan/Segal/Rezk or monoidal theorems. Its homological notation
+corrections reuse the existing Arr and universal χ_Z owners without changes
+to the qualified native implementation.
+
 ## Proposed Continuation Order
 
 1. Finish the current documentation/replay checkpoint. This review records

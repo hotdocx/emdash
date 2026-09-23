@@ -593,9 +593,17 @@ StrictFunctor(GrayCube_R(n+1),C)
 This decoder is one internal Nat recursion. Dimensions one through three are
 checked, and at dimension two its transformation graph recovers the same
 coordinate-swapped interchanger as the walking-square calculation. The result
-does not yet include an inverse decoder, a mapping-category equivalence,
-alternate bracketings, tensor associativity, degeneracies, connections, or
-Kan filling.
+does not yet include an inverse decoder or a mapping-category equivalence.
+In particular, the current geometric candidate uses `GrayHom_lax` (strict
+maps with the selected lax transformation profile), not an unspecified
+ambient Functor_cat. A whole nerve comparison additionally needs coherent
+face maps on the chosen Gray shapes and compatibility of the decoder with
+restriction. The positive Gray tower currently starts in dimension one;
+its zero-dimensional unit and face assembly still need qualification. This
+can be pursued at fixed bracketing without first claiming arbitrary Gray
+monoidal coherence. Degeneracies, connections and Kan filling are separate.
+The native opposite/Sigma encoding and strict/lax profiles retain their
+recorded higher-interpretation qualifications.
 
 
 Simplexes from dependent homs
@@ -682,14 +690,29 @@ constructs a canonical source for variable `n`. Mapping it under arbitrary
 five tetrahedral faces of the four-simplex, noncollapse, and a retained next
 action are checked.
 
-The current `DependentSimplexObservation(C,n)` packages objects, not a whole
-category of all dependent simplexes. Degeneracies and the whole equivalence
+The S_k categories depend on the previously chosen flag. They are not yet
+one category whose arrows vary all those earlier vertices and faces. The
+current `DependentSimplexObservation(C,n)` collects an intrinsic code and an
+object of its decoded category in a Grpd-valued package; this does not supply
+that missing directed category of all n-simplexes.
 
-```
-Functor_cat(Delta[n],C) ~= DependentSimplex_cat(C,n)
-```
+The geometric levels already exist as
+`CoherentNerveLevel_cat(C,n) = Functor_cat(Delta[n],C)`. Generic nonempty
+face realizations also exist, but their whole identity/composition comparison
+and join reconstruction remain assembly boundaries. Consequently neither the
+whole native simplicial nerve nor a whole equivalence with these geometric
+levels has been completed. The intended comparison must preserve face and
+higher action, with actual maps and a retained inverse.
 
-remain explicit next steps, as do general Kan, Segal, and Rezk structure.
+The current index is `SemiDeltaPlus_cat`, with vertex counts and injective
+maps only: dimension n uses n+1 vertices and a p-face uses
+`FaceCode(p+1,n+1)`. A full simplex category also needs degeneracies. Moreover,
+a native triangle retains an arbitrary directed α, so its geometric mapping
+profile must be specified; ordinary strictly commuting ordinal diagrams
+alone do not classify arbitrary higher lax triangles. The Cat-valued
+comparison is stronger than a comparison of object collections. Degeneracies,
+full nerve equivalence, and any further Kan/Segal/Rezk properties are distinct
+completion tasks, not consequences of the current object decoder.
 
 
 Profunctors, weighted universals, and duality
@@ -1086,25 +1109,39 @@ to transformations. Products and biproducts have corresponding ordinary
 adjunction presentations at their original chosen functors. These structural
 lifts are declared model obligations, not results inferred from matrix tests.
 
-For a coherent family of zero-composition diagrams,
+Use ℬ for the parameter category of a coherent family of zero-composition
+diagrams, and distinguish its whole transformation χ from a single component:
 
 ```
-U : B ⊢ C
-D : B ⊢ D_C
-h : J ∘ U ⇒ D,
+U : ℬ ⊢ C
+D : ℬ ⊢ D_C
+χ : J ∘ U ⇒ D.
 ```
 
-the kernel adjunction constructs the whole boundary transformation, and the
-cokernel functor constructs homology:
+For b in ℬ, the component χ_b is itself a map of walking-arrow diagrams
+`J(U(b)) ⇒ D(b)`. Let `η : id_C ⇒ K∘J` be the unit and write η_U for
+its whiskering by U. The whole boundary and family homology are
 
 ```
-β = K[h] ∘ η_U : U ⇒ K ∘ D
-
-H = Q ∘ Arr(β) : B ⊢ C.
+K[χ] : K∘J∘U ⇒ K∘D
+β_χ = K[χ] ∘ η_U : U ⇒ K∘D
+H_χ = Q ∘ Arr(β_χ) : ℬ ⊢ C.
 ```
 
-Here `Arr(β)` is the whole walking-arrow diagram family introduced by the
-actual transformation `β`. At a point this is the familiar construction
+Here Arr is notation for the defined operation `transf_arrow_diagram_func`,
+with implicit endpoint functors F,G:
+
+```
+Arr_{ℬ,C;F,G} : Transf(F,G) → Functor(ℬ,D_C)
+Arr(θ)(b) = (F(b) ─θ_b→ G(b)).
+```
+
+It first introduces θ as a walking-arrow diagram in Functor_cat(ℬ,C),
+then uses the existing whole axis-exchange operation `sym_func`. It returns
+one whole functor ℬ→D_C; it is not a new primitive or a list of independently
+assembled arrows and naturality squares. The displayed type is the operation
+on supplied transformations, not a claimed equivalence of all higher arrow
+categories. At a point this is the familiar construction
 
 ```
 Z = Ker(d)
@@ -1127,13 +1164,31 @@ The native source category is the existing internal comma construction
 Z_C = (J ↓ id_D_C).
 ```
 
-Its objects are `h : J(A) ⇒ d`; the source component is the incoming arrow,
-and naturality gives its zero composite with the differential of `d`.
-The category and its maps reuse internal Hom/Sigma structure, rather than a
-new grammar of complexes with manually stored commuting squares. Its
-ordinary-target specialization gives a whole one-degree functor
-`H : Z_C ⊢ C`. Operational universal records are views at that same H object,
-not a second homology reached by an object-equality cast.
+An object is `z=(A,d,ξ)` with `ξ : J(A) ⇒ d`. The two projections and
+the tautological whole transformation are
+
+```
+U_Z : Z_C ⊢ C,       D_Z : Z_C ⊢ D_C
+χ_Z : J∘U_Z ⇒ D_Z
+U_Z(z)=A,           D_Z(z)=d,           (χ_Z)_z=ξ.
+```
+
+Thus the universal case is exactly the earlier family construction with
+`ℬ=Z_C`, `U=U_Z`, `D=D_Z`, and `χ=χ_Z`. The last component law is a
+native rewrite of `zero_arrow_cone_universal_transf`; ξ is not another
+independent family-level input. In particular,
+
+```
+β_Z(z) = K[ξ] ∘ η_A : A → K(d)
+H_C := H_{χ_Z} : Z_C ⊢ C.
+```
+
+The source component of ξ is the incoming arrow; its diagram naturality
+expresses the zero composite with the differential of d. The category and
+its maps reuse internal Hom/Sigma structure. The whole χ_Z assembly is
+qualified for the ordinary target C. Operational universal records are
+views at that same H_C object, not a second homology reached by an
+object-equality cast.
 
 Native exactness retains the canonical comparison Im(incoming)→Ker(outgoing)
 and fixed-forward equivalence evidence, including its inverse data. The
@@ -1149,12 +1204,17 @@ H_n(A) → H_n(B) → H_n(C) ─δ_n→ H_(n−1)(A) → H_(n−1)(B)
 ```
 
 has all three adjacent-zero laws and all three interior exactness results.
-For a coherent window family, its vertical columns are whole functors
-`V_C,V_A : B ⊢ Z_C`, and connecting is an actual transformation
+Use a separate parameter category 𝒲 for a coherent window family. Its right
+and shifted-left vertical columns are whole functors
+`V_R,V_L⁻ : 𝒲 ⊢ Z_C`; the superscript minus labels the degree shift, not
+an inverse. Connecting is an actual transformation
 
 ```
-δ : H ∘ V_C ⇒ H ∘ V_A.
+δ : H_C ∘ V_R ⇒ H_C ∘ V_L⁻.
 ```
+
+Both sides now use the same global H_C. The window base 𝒲 need not be Z_C
+or the earlier arbitrary family base ℬ.
 
 Its component computes to the direct lifting/descent construction. Generic
 transfor action supplies naturality and further action; the caller does not
@@ -1789,8 +1849,13 @@ and all `2n` immediate faces remain available. A decoder maps strict diagrams
 on right-bracketed Gray tensor powers of the walking arrow to native cubes;
 dimensions one through three are checked, and
 dimension two recovers the walking-square interchanger. No inverse decoder,
-whole mapping equivalence, degeneracies, connections, Kan fillers, alternate
-bracketings, or Gray monoidal coherence is claimed.
+whole mapping equivalence, or face-compatible comparison of nerves is
+claimed. The geometric mapping profile is GrayHom_lax (strict maps and the
+selected lax transformations); the positive Gray tower does not yet supply
+the zero-dimensional unit or a whole shape functor on SemiCubePlus. These
+are focused completion tasks. Degeneracies, connections, Kan fillers,
+alternate bracketings and general Gray monoidal coherence are separate;
+the recorded Op/Sigma and action-profile qualifications remain in force.
 
 ---
 
@@ -1828,10 +1893,19 @@ and the next internal action remains available.
 One Nat recursion constructs the canonical ordinal dependent simplex at
 variable `n`; arbitrary `H : Functor(Delta[n],C)` maps it into `C`, and the
 existing nonempty `FaceCode` action exposes its faces while retaining higher
-action. Dimensions zero through four are checked. A whole category
-`DependentSimplex_cat(C,n)` of native dependent simplexes, and its equivalence
-with `Functor_cat(Delta[n],C)`, remain future work, as do degeneracies and
-general Kan/Segal/Rezk structure.
+action. Dimensions zero through four are checked. The recursion is flagged:
+`DependentSimplexObservation(C,n)` collects objects, but not the directed
+maps varying all earlier flags. A whole `DependentSimplex_cat(C,n)`, its
+native nerve and a face-compatible equivalence with the geometric levels
+remain unfinished. The geometric levels Functor_cat(Delta[n],C) already exist;
+their whole shape/face assembly still needs the join identity/composition and
+reconstruction comparisons. The higher mapping profile must retain the
+native noninvertible triangle cells.
+
+The actual `SemiDeltaPlus_cat` index has injective maps and counts vertices,
+so dimension n corresponds to n+1 there. Adding degeneracies gives a further
+full-simplicial task; Kan/Segal/Rezk properties require their own hypotheses.
+A Cat-valued nerve retains diagram transformations as well as simplex objects.
 
 ---
 
@@ -1974,26 +2048,36 @@ J(A) = (A → 0),       J ⊣ K
 I(A) = (0 → A),       Q ⊣ I.
 ```
 
-Let `B` parameterize the diagrams. The functor `U : B ⊢ C` gives their
-incoming objects, `D : B ⊢ D_C` gives their outgoing differentials, and
-`h : J ∘ U ⇒ D` is an actual transformation. Its source component is the
-incoming differential; naturality expresses the zero composite. If
-`η : id_C ⇒ K ∘ J` is the kernel-adjunction unit, write `η_U` for its
-whiskering by `U`. Then the whole boundary and homology are
+Let ℬ parameterize the diagrams, with `U : ℬ ⊢ C`, `D : ℬ ⊢ D_C`,
+and the whole transformation `χ : J∘U ⇒ D`. Each component
+`χ_b : J(U(b)) ⇒ D(b)` is a map of walking-arrow diagrams: its source
+component is the incoming differential, and its diagram naturality gives
+the zero composite. For the unit `η : id_C ⇒ K∘J`, whiskered by U,
 
 ```
-β = K[h] ∘ η_U : U ⇒ K ∘ D
-H = Q ∘ Arr(β) : B ⊢ C.
+β_χ = K[χ] ∘ η_U : U ⇒ K∘D
+H_χ = Q ∘ Arr(β_χ) : ℬ ⊢ C.
 ```
 
-Here `K[h]` is the action of K on the whole transformation. The functor
-`Arr(β) : B ⊢ D_C` introduces its components as walking-arrow diagrams.
-Pointwise, `K ∘ D` gives cycles, β lifts the incoming differential into
-cycles, and Q takes its cokernel. Applying this construction to the
-tautological family on `Z_C=(J ↓ id_D_C)` gives `H : Z_C ⊢ C`.
-This native comma category has objects `(A,d,h : J(A) ⇒ d)` and reuses
-internal Hom/Sigma structure for its maps. H retains generic computation,
-higher Hom action and the same selected objects in its record views.
+Arr abbreviates the defined `transf_arrow_diagram_func`:
+`Arr_{ℬ,C;F,G} : Transf(F,G) → Functor(ℬ,D_C)`. It forms a walking-arrow
+diagram of the whole transformation in Functor_cat(ℬ,C), then exchanges
+the two axes; `Arr(β_χ)(b)` is the arrow U(b)→K(D(b)).
+
+For the universal case, let `Z_C=(J ↓ id_D_C)` and write its objects as
+`z=(A,d,ξ : J(A) ⇒ d)`. Its whole projections U_Z,D_Z and canonical
+transformation χ_Z satisfy
+
+```
+U_Z(z)=A,       D_Z(z)=d,       (χ_Z)_z=ξ.
+```
+
+Substitute `ℬ=Z_C` and `χ=χ_Z` in the family formula. Then
+`β_Z(z)=K[ξ]∘η_A`, and `H_C:=H_{χ_Z} : Z_C ⊢ C` is the global native
+homology functor. The component ξ is the evaluation of χ_Z at z, not
+another whole transformation over Z_C. Internal Hom/Sigma owns the comma
+maps; its canonical whole χ_Z uses the qualified ordinary target profile.
+H_C retains its generic computation, higher action and selected objects.
 
 Assume the native normality structure for these same adjunctions. Exactness
 is fixed-forward equivalence of the canonical Im→Ker comparison. The general
@@ -2005,10 +2089,11 @@ short exact sequence `0 → A_• ─i→ B_• ─p→ C_• → 0` gives the w
 H_n(A) → H_n(B) → H_n(C) ─δ_n→ H_(n−1)(A) → H_(n−1)(B),
 ```
 
-exact at its three interior objects. In a window family over `B`, let
-`V_C,V_A : B ⊢ Z_C` select the right and shifted left vertical complexes.
-Connecting is a whole transformation `δ : H ∘ V_C ⇒ H ∘ V_A`; its
-component computes to the direct lifting/descent construction. The native
+exact at its three interior objects. For a window family over a separate
+base 𝒲, let `V_R,V_L⁻ : 𝒲 ⊢ Z_C` select the right and degree-shifted left
+vertical complexes (the minus marks a shift, not an inverse). Connecting is
+`δ : H_C∘V_R ⇒ H_C∘V_L⁻`; its component computes to the direct
+lifting/descent construction. The native
 snake–LES comparison retains the endpoints and positive connecting-map sign.
 Actual categorical presentation maps act through whole K/Q/H; ordinary
 equations remain derived observations. Finite displayed certificates retain
