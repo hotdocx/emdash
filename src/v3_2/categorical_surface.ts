@@ -4584,8 +4584,8 @@ export class CoreCategoricalScopedBuilder {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
-                'A displayed functor has no active whole laxity transfor; ' +
-                'only component-level cells are active'
+                'Whole displayed laxity is outside this TypeScript profile; ' +
+                'only its qualified component-level actions are available'
             );
         }
         const argument = this.requireTerm(
@@ -4598,8 +4598,8 @@ export class CoreCategoricalScopedBuilder {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
-                'functord_laxity_transf is deliberately inactive in the ' +
-                'active kernel; TypeScript cannot synthesize it'
+                'functord_laxity_transf is outside the qualified ' +
+                'TypeScript profile; it cannot be synthesized here'
             );
         }
         const base = subject.type.baseCategory;

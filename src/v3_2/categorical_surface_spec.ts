@@ -108,6 +108,7 @@ export type CoreCategoricalSurfaceDisposition =
     | 'requires-owner-transfer'
     | 'requires-usability-2a'
     | 'requires-naturality-gate'
+    | 'unsupported-profile-gap'
     | 'unsupported-authority-gap';
 
 export interface CoreCategoricalAxisSpecification {
@@ -283,7 +284,7 @@ export interface CoreCategoricalApplicationQuery {
  * A transfer slice may qualify an application row that the frozen
  * USABILITY-1A snapshot correctly recorded as untransferred.
  *
- * The overlay cannot promote a deliberately inactive authority gap or a
+ * The overlay cannot promote an authority/profile gap or a
  * reserved naturality surface. It only records that an active owner has since
  * passed through a reviewed transfer boundary.
  */
@@ -609,11 +610,12 @@ readonly CoreCategoricalApplicationJudgment[] = [
         dependency: 'displayed',
         target: 'displayed-functor-laxity',
         consumesSubjectTerm: true,
-        implementationStatus: 'not-active',
-        surfaceDisposition: 'unsupported-authority-gap',
+        implementationStatus: 'active-kernel-untransferred',
+        surfaceDisposition: 'unsupported-profile-gap',
         rule:
-            'The active kernel deliberately defers the whole displayed ' +
-            'laxity transfor and exposes only component-level cells.'
+            'The source now derives whole displayed laxity from its ' +
+            'internal action. This TypeScript profile has not transferred ' +
+            'that owner; broader variance qualification remains separate.'
     },
     {
         id: 'displayed-transfor.component.full',
@@ -860,7 +862,7 @@ export interface CoreCategoricalBackendBinding {
         readonly authorityPath: 'emdash2/emdash3_2.lp';
         readonly section: string;
         readonly sourceFragment: string;
-        readonly auditedOn: '2026-07-26';
+        readonly auditedOn: '2026-07-26' | '2026-09-23';
     };
 }
 
@@ -924,13 +926,13 @@ readonly CoreCategoricalBackendBinding[] = [
     {
         target: 'displayed-functor-laxity',
         serializedName: 'functord_laxity_transf',
-        authority: 'explicitly-deferred-symbol',
+        authority: 'active-symbol',
         provenance: {
             authorityPath: 'emdash2/emdash3_2.lp',
-            section: '16b. Identity-specialized displayed hom action',
+            section: 'Whole displayed laxity from internal action',
             sourceFragment:
-                'symbol functord_laxity_transf [K : Cat]',
-            auditedOn: '2026-07-26'
+                'symbol functord_laxity_transf\n  [K : Cat]',
+            auditedOn: '2026-09-23'
         }
     },
     {
@@ -1166,6 +1168,7 @@ export function selectCoreCategoricalApplication(
                 `'${selected.target}'`
             );
         case 'requires-usability-2a':
+        case 'unsupported-profile-gap':
         case 'unsupported-authority-gap':
             fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
@@ -1403,15 +1406,14 @@ export function validateCoreCategoricalSurfaceSpecification(
             'Reserved ordinary naturality action was promoted implicitly'
         );
     }
-    if (
-        specification.applications.find(
-            application => application.target ===
-                'displayed-functor-laxity'
-        )?.implementationStatus !== 'not-active'
-    ) {
+    const laxity = specification.applications.find(
+        application => application.target === 'displayed-functor-laxity'
+    );
+    if (laxity?.implementationStatus !== 'active-kernel-untransferred' ||
+        laxity.surfaceDisposition !== 'unsupported-profile-gap') {
         fail(
             'INVALID_SPECIFICATION',
-            'Deferred whole displayed laxity was treated as active'
+            'Source-backed whole displayed laxity was promoted into the profile'
         );
     }
 
@@ -1441,7 +1443,10 @@ export function validateCoreCategoricalSurfaceSpecification(
         if (
             binding.provenance.authorityPath !==
                 'emdash2/emdash3_2.lp' ||
-            binding.provenance.auditedOn !== '2026-07-26' ||
+            binding.provenance.auditedOn !== (
+                binding.target === 'displayed-functor-laxity'
+                    ? '2026-09-23' : '2026-07-26'
+            ) ||
             binding.serializedName.length === 0 ||
             binding.provenance.sourceFragment.length === 0
         ) {

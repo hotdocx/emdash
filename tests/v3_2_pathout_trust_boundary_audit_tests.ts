@@ -4,6 +4,7 @@
 
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
@@ -11,11 +12,28 @@ import {
     CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT,
     validateCorePathoutTrustBoundary0aAudit
 } from '../src/v3_2/pathout_trust_boundary_audit';
+import { CORE_PATHOUT_FOUNDATION_SOURCE_SHA256 } from '../src/v3_2/pathout_foundation_transfer';
 
 const repositoryRoot = resolve(__dirname, '..');
 
 const read = (path: string): string =>
     readFileSync(resolve(repositoryRoot, path), 'utf8');
+
+// This completed audit is the parent of frozen graduation records. Its byte
+// hashes and line positions belong to that exact checkpoint, not today's files.
+const auditCheckpoint = 'a05493b49a1ef49c18ffe921725dd1ce56f21647';
+const historicalSources = new Map<string, string>();
+const readHistorical = (path: string): string => {
+    let source = historicalSources.get(path);
+    if (source === undefined) {
+        source = execFileSync('git', ['show', `${auditCheckpoint}:${path}`], {
+            cwd: repositoryRoot, encoding: 'utf8', timeout: 5_000,
+            maxBuffer: 8 * 1024 * 1024
+        });
+        historicalSources.set(path, source);
+    }
+    return source;
+};
 
 const sha256 = (value: string): string =>
     'sha256:' + createHash('sha256').update(value).digest('hex');
@@ -46,14 +64,42 @@ const declarationBlock = (
 };
 
 describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
-    it('pins both active authority inputs by byte digest', () => {
+    it('retains the historical selected declarations and rules in the current source', () => {
+        const audit = CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT;
+        const current = read(audit.authority.source.path);
+        assert.equal(sha256(current), CORE_PATHOUT_FOUNDATION_SOURCE_SHA256);
+        const historical = readHistorical(audit.authority.source.path).split(/\r?\n/u);
+        const normalize = (text: string): string => text
+            .replace(/\/\*[\s\S]*?\*\//gu, ' ')
+            .replace(/\/\/[^\n]*/gu, ' ')
+            .replace(/\s+/gu, ' ').trim();
+        const currentText = normalize(current);
+        const entries = [
+            ...audit.selectedOwners,
+            ...audit.observedRules,
+            ...audit.prerequisiteClosures.flatMap(closure => [
+                ...closure.opaqueOwners,
+                ...closure.transparentDefinitions,
+                ...closure.runtimeRules,
+                ...closure.proofRules
+            ])
+        ];
+        for (const entry of entries) {
+            const block = normalize(declarationBlock(historical, entry.line));
+            assert.ok(block.length > 0);
+            assert.ok(currentText.includes(block),
+                `Historical source command at line ${entry.line} changed`);
+        }
+    });
+
+    it('pins both historical authority inputs by byte digest', () => {
         const { authority } = CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT;
-        assert.equal(sha256(read(authority.source.path)), authority.source.sha256);
-        assert.equal(sha256(read(authority.checks.path)), authority.checks.sha256);
+        assert.equal(sha256(readHistorical(authority.source.path)), authority.source.sha256);
+        assert.equal(sha256(readHistorical(authority.checks.path)), authority.checks.sha256);
     });
 
     it('matches all selected owner positions, kinds, and body status', () => {
-        const source = read(
+        const source = readHistorical(
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.path
         );
         const lines = source.split(/\r?\n/u);
@@ -83,7 +129,7 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
     });
 
     it('pins selected and explicitly deferred rule positions', () => {
-        const lines = read(
+        const lines = readHistorical(
             CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.path
         ).split(/\r?\n/u);
 
@@ -144,7 +190,7 @@ describe('PATHOUT-TRUST-BOUNDARY-0A read-only audit', () => {
 
     it('matches prerequisite owner and rule positions in the authority',
         () => {
-            const lines = read(
+            const lines = readHistorical(
                 CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.path
             ).split(/\r?\n/u);
             for (

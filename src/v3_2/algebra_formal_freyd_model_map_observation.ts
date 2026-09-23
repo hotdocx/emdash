@@ -6,6 +6,7 @@ import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } f
 import { algebraFormalFreydNativeModelHomologyObservationBundle, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { AlgebraFormalFreydModelMapPreparation, algebraFormalFreydModelChainMapTerm, assertAlgebraFormalFreydModelMapPreparationCurrent } from './algebra_formal_freyd_model_map_preparation';
 import { CoreLfDeclarationEnvironment } from './lf_declarations';
+import { checkedFormalSignatureReference } from './algebra_formal_signature_reference';
 import { CoreLfScopedBuilder } from './lf_builder';
 import { createCoreProofChecker } from './proof_checker';
 import { KernelExpression, kernelExpressionEquals, provenance } from './kernel';
@@ -51,7 +52,7 @@ export function algebraFormalFreydNativeModelMapObservationBundle<P extends Alge
     return modelMapObservation(input, {
         profile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_MAP_OBSERVATION_PROFILE,
         pointProfile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE.revision,
-        createEnvironment: () => createFormalFreydNativeModelObservationProofEnvironment([]),
+        createEnvironment: () => checkedFormalSignatureReference(createFormalFreydNativeModelObservationProofEnvironment),
         bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS },
         modelType: algebraFormalFreydNativeModelType, arrowOwner: 'bridge_freyd_adjunction_model_arrow_observation',
         operationPrefix: 'proof-cas.freyd-native-model/'

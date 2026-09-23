@@ -215,7 +215,7 @@ describe(
                 CORE_LF_SCALE_STRESS_3_PROFUNCTOR_TENSOR_ACTION_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [59, 61, 184, 185, 668, 670, 687, 1354, 1355, 1356, 1357]
+                [61, 63, 186, 187, 672, 674, 691, 1488, 1489, 1490, 1491]
             );
             assert.deepEqual(
                 CORE_LF_SCALE_STRESS_3A2B_MODULE.declarations.map(

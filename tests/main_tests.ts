@@ -5,6 +5,7 @@
 // Import test files. The `node:test` runner will discover `describe` and `it` blocks in these files.
 import './v3_2_elab0_tests';
 import './v3_2_probe_runner_tests';
+import './v3_2_algebra_formal_signature_reference_tests';
 import './v3_2_elab1c_tests';
 import './v3_2_core_binder_tests';
 import './v3_2_core_context_tests';

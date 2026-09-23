@@ -560,7 +560,15 @@ const currentApplicationPartition = () => {
             partition.reservedNaturality.push(application.target);
         } else if (
             application.surfaceDisposition ===
-                'unsupported-authority-gap'
+                'unsupported-authority-gap' ||
+            // The frozen July graduation classified this source owner as
+            // absent. September source requalification found its derived
+            // implementation, still outside the same TypeScript envelope.
+            // Normalize only that recorded source-status transition when
+            // comparing the historical partition, and check it below.
+            (application.target === 'displayed-functor-laxity' &&
+                application.implementationStatus === 'active-kernel-untransferred' &&
+                application.surfaceDisposition === 'unsupported-profile-gap')
         ) {
             partition.inactiveAuthority.push(application.target);
         } else {
@@ -628,13 +636,15 @@ export function validateCoreCategoricalUsabilityGraduationProposal(
     const laxityApplication = applicationFor(laxity.target);
     const laxityBinding = bindingFor(laxity.target);
     if (
-        laxityApplication?.implementationStatus !== 'not-active' ||
+        laxityApplication?.implementationStatus !== 'active-kernel-untransferred' ||
+        laxityApplication.surfaceDisposition !== 'unsupported-profile-gap' ||
         laxityBinding?.serializedName !== laxity.authorityName ||
-        laxityBinding.authority !== 'explicitly-deferred-symbol'
+        laxityBinding.authority !== 'active-symbol' ||
+        laxityBinding.provenance.auditedOn !== '2026-09-23'
     ) {
         throw new CoreCategoricalUsabilityGraduationProposalError(
             'GRADUATION_OWNER_BOUNDARY_DRIFT',
-            'Deliberately inactive displayed laxity boundary drifted'
+            'Requalified source-only displayed laxity boundary drifted'
         );
     }
 

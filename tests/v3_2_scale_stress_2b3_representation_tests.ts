@@ -94,7 +94,7 @@ describe(
                 CORE_LF_SCALE_STRESS_2_SIGMA_TRANSFOR_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [403, 404, 1043, 1044, 1046, 1108, 1110, 1122]
+                [405, 406, 1104, 1105, 1107, 1169, 1171, 1183]
             );
             assert.deepEqual(
                 CORE_LF_SCALE_STRESS_2B3_MODULE.declarations.map(

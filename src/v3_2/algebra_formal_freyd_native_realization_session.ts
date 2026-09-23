@@ -13,6 +13,7 @@ import { createFormalFreydNativeModelObservationProofEnvironment, FORMAL_FREYD_N
 import { CoreProofArtifactFingerprint } from './proof_document';
 import { coreProofPlanHole } from './proof_plan';
 import { createCoreProofChecker } from './proof_checker';
+import { checkedFormalSignatureReference } from './algebra_formal_signature_reference';
 import { KernelExpression, kernelExpressionEquals, provenance } from './kernel';
 import { serializeCoreExpression } from './core_serialization';
 
@@ -35,7 +36,7 @@ export function createAlgebraFormalFreydNativeRealizationSession<P extends Algeb
         if (!/^[A-Za-z][A-Za-z0-9._/-]*$/u.test(id)) throw new Error('A stable native homology interpretation ID is required');
     }
     let source = validateAlgebraFormalAssumptionSource(input.source);
-    const expected = createFormalFreydNativeModelObservationProofEnvironment([]);
+    const expected = checkedFormalSignatureReference(createFormalFreydNativeModelObservationProofEnvironment);
     for (const name of Object.keys({ ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS })) {
         const declaration = source.environment.lookup(name);
         if (!declaration || declaration.body !== undefined || !kernelExpressionEquals(declaration.type, expected.lookup(name)!.type)) {

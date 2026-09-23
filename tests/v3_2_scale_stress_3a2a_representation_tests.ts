@@ -82,7 +82,7 @@ describe(
                 CORE_LF_SCALE_STRESS_3_PROFUNCTOR_COMPARISON_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [230, 232, 408, 409, 549, 581, 582, 1279, 1323, 1324]
+                [232, 234, 410, 411, 553, 585, 586, 1409, 1455, 1456]
             );
             assert.deepEqual(
                 CORE_LF_SCALE_STRESS_3A2A_MODULE.declarations.map(

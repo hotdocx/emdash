@@ -1187,7 +1187,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     authorityPath: 'emdash2/emdash3_2.lp',
     sourceSha256:
         'sha256:' +
-        '0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860',
+        'f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
     dependencies: [],
     externalSymbols: [category, oppositeCategory].map(symbol_ => ({
         symbol: symbol_,
@@ -1236,7 +1236,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
             .measuredClosure.acquisitionRevision ===
                 'DISPLAYED-ND-HIGHER-1B-ACQUISITION-1'
             ? 'sha256:' +
-                '0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860'
+                'f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61'
             : 'invalid-audit-revision',
     dependencies: [],
     externalSymbols: foundationExternalSymbols.map(symbol_ => ({

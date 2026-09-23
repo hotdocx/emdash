@@ -619,7 +619,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'foundation.nat-inductive',
-                ordinal: 38,
+                ordinal: 40,
                 kind: 'inductive',
                 textSha256:
                     'sha256:d9103633acf968d3f50b70f6ce37c3f844f2186a77e0e479644529159b3897e0',
@@ -628,7 +628,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'foundation.nat-classifier',
-                ordinal: 39,
+                ordinal: 41,
                 kind: 'symbol',
                 textSha256:
                     'sha256:aca097ad43e44237fdbcc5a7cbdc2f9b4cd5eb48ec182cf7758e772da8456756',
@@ -638,7 +638,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'foundation.nat-decode',
-                ordinal: 40,
+                ordinal: 42,
                 kind: 'rule',
                 textSha256:
                     'sha256:f044f387bef29806e4b6636140d68ae1c777f9d52ce7bea6d73e5ea1cf9b57f1',
@@ -646,7 +646,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.decoded-inductive',
-                ordinal: 54,
+                ordinal: 56,
                 kind: 'inductive',
                 textSha256:
                     'sha256:db4b03158723bda9d432dc5750a68bf36d30a40c7914034fbef5550cabd83f69',
@@ -655,7 +655,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.eliminator',
-                ordinal: 63,
+                ordinal: 65,
                 kind: 'symbol',
                 textSha256:
                     'sha256:e8a96705d438ed6d60682a30b0bea9b8124ac544453cb0bafa00c213dabc5e31',
@@ -665,7 +665,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.eliminator-beta',
-                ordinal: 64,
+                ordinal: 66,
                 kind: 'rule',
                 textSha256:
                     'sha256:cdc48cbc3a997be41f8825b0f933015ed6151e25dfaf6eafd485cf4f8ac01526',
@@ -673,7 +673,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi.decoded-classifier',
-                ordinal: 74,
+                ordinal: 76,
                 kind: 'symbol',
                 textSha256:
                     'sha256:fe57925af572af813e027eca081bdebe09ce46f847e46b2803b1fb56e9d15b34',
@@ -683,7 +683,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi.decoding-beta',
-                ordinal: 75,
+                ordinal: 77,
                 kind: 'rule',
                 textSha256:
                     'sha256:65f25ecd277a108aac576af30659ab8ddc08b4197f8e57d5e41ccd91c2119dad',

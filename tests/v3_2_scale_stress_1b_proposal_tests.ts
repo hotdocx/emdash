@@ -77,7 +77,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1B semantic proposal', () => {
             CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION.commands.map(
                 command => command.ordinal
             ),
-            [10, 12, 13, 14, 38, 39, 40, 54, 63, 64, 74, 75]
+            [10, 12, 13, 14, 40, 41, 42, 56, 65, 66, 76, 77]
         );
         assert.deepEqual(
             CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION.commands.map(
@@ -111,7 +111,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1B semantic proposal', () => {
             items.map(item =>
                 item.provenance.canonicalCommandOrdinal
             ),
-            [10, 12, 13, 14, 38, 39, 40, 54, 63, 64, 74, 75]
+            [10, 12, 13, 14, 40, 41, 42, 56, 65, 66, 76, 77]
         );
         assert.deepEqual(
             proposal.core.policy.entries.map(entry => entry.policy),

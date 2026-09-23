@@ -5,7 +5,7 @@
  * compiled as opaque candidate declarations through the generic LF engine.
  * Their transparent Lambdapi bodies and all displayed coherence remain with
  * the active authority. In particular, this module does not invent or expose
- * the deliberately inactive whole `functord_laxity_transf`.
+ * whole `functord_laxity_transf`, which remains outside this transfer.
  */
 
 import {
@@ -53,7 +53,7 @@ export const CORE_CATEGORICAL_DEPENDENT_TRANSFER_REVISION =
     'USABILITY-2A0-CLOSED-DISPLAYED-APPLICATION-1' as const;
 
 export const CORE_CATEGORICAL_DEPENDENT_SOURCE_SHA256 =
-    'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860';
+    'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

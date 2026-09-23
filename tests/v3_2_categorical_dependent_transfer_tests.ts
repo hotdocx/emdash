@@ -184,7 +184,7 @@ describe(
             }
             assert.match(
                 source.toString('utf8'),
-                /Intended declaration, deliberately not active yet:[\s\S]*symbol functord_laxity_transf/u
+                /symbol functord_laxity_transf\s+\[K : Cat\][\s\S]*≔ @fdapp1_comma_projection_transf/u
             );
             assert.equal(
                 CORE_CATEGORICAL_DEPENDENT_TRANSFER_MODULE.declarations.some(

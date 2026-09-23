@@ -84,7 +84,7 @@ export const CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_REVISION =
 
 /* Updated mechanically after the active kernel tranche is frozen. */
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_SOURCE_SHA256 =
-    'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860';
+    'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

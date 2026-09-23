@@ -552,6 +552,31 @@ const reviewedTransfer = () => {
 };
 
 describe('SCALE-0D generic LF runtime compiler', () => {
+    it('rejects a foreign head without traversing its argument scope', () => {
+        const fixture = genericRuntimeFixture();
+        const runtime = compileCoreLfRuntimeProgram(
+            fixture.module, fixture.policy, fixture.declarations
+        );
+        const source = provenance('derived', 'irrelevant runtime argument');
+        let argumentReads = 0;
+        const foreign = {
+            tag: 'call' as const,
+            callee: kernelFree('foreign_runtime_head', source),
+            arguments: [{
+                plicity: 'explicit' as const,
+                provenance: source,
+                get value() {
+                    argumentReads++;
+                    return kernelBound(7, source);
+                }
+            }],
+            provenance: source
+        };
+        assert.equal(runtime.rewriteHead(foreign).status, 'irreducible');
+        assert.equal(runtime.matchRule(foreign, runtime.rules[0]), undefined);
+        assert.equal(argumentReads, 0);
+    });
+
     it('strictly checks and executes an unrelated two-rule fixture', () => {
         const fixture = genericRuntimeFixture();
         const runtime = compileCoreLfRuntimeProgram(
@@ -1160,12 +1185,12 @@ describe('SCALE-0D reviewed ten-rule runtime migration', () => {
         assert.equal(
             CORE_DIRECTED_CONTINUATION_RUNTIME_TRANSFER_MODULE
                 .sourceSha256,
-            'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860'
+            'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61'
         );
         assert.equal(
             CORE_DIRECTED_CONTINUATION_RUNTIME_TRANSFER_MODULE
                 .canonicalExport?.sha256,
-            'sha256:b16839b44dfec845fdc007884f82fea63156a273759fba4e9a8842c0c0312ccb'
+            'sha256:594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6'
         );
         assertDeepFrozen(
             CORE_DIRECTED_CONTINUATION_RUNTIME_TRANSFER_MODULE

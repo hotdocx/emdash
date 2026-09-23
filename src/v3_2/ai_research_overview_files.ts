@@ -49,8 +49,8 @@ export const CORE_AI_RESEARCH_OVERVIEW_FILES_PROFILE = Object.freeze({
     maximumDocumentSourceBytes: 4 * MIB,
     maximumProofSourceBytes: 2 * MIB,
     managementSourceSha256:
-        'sha256:c115215083f35f2e1b75cd80d05276ed' +
-        '2fd351a1273a977cc5106d7c13ecb93d',
+        'sha256:69b1bf0a24629076d7fa9985ca03c3ab' +
+        '7886e1c368642d0479220b785a8fcc00',
     proofSourceSha256:
         CORE_AI_RESEARCH_OVERVIEW_PROFILE.proofSourceSha256,
     readsFixedFiles: true as const,

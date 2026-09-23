@@ -444,7 +444,7 @@ describe(
                 CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION.commands.map(
                     command => command.ordinal
                 ),
-                [10, 12, 13, 14, 38, 39, 40, 54, 63, 64, 74, 75]
+                [10, 12, 13, 14, 40, 41, 42, 56, 65, 66, 76, 77]
             );
             assertDeepFrozen(
                 CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION
@@ -564,8 +564,8 @@ describe(
                         entry => entry.command.ordinal
                     ),
                     [
-                        10, 12, 13, 14, 38, 39,
-                        40, 54, 63, 64, 74, 75
+                        10, 12, 13, 14, 40, 41,
+                        42, 56, 65, 66, 76, 77
                     ]
                 );
                 const outerJ = coreSelection.commands.find(

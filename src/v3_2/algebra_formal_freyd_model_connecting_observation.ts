@@ -5,6 +5,7 @@ import { AlgebraFormalFreydModelConnectingPreparation, algebraFormalFreydConnect
 import { algebraFormalFreydNativeModelHomologyObservationBundle, ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE } from './algebra_formal_freyd_model_observation';
 import { algebraFormalFreydChainPairTerm, algebraFormalFreydMorphismTerm } from './algebra_formal_freyd_chain_pair';
 import { CoreLfDeclarationEnvironment } from './lf_declarations';
+import { checkedFormalSignatureReference } from './algebra_formal_signature_reference';
 import { CoreLfScopedBuilder } from './lf_builder';
 import { createCoreProofChecker } from './proof_checker';
 import { KernelExpression, KernelReference, kernelExpressionEquals, kernelFree, provenance } from './kernel';
@@ -59,7 +60,7 @@ interface ConnectingOwner<Profile extends { readonly revision: string }> {
 const nativeOwner = Object.freeze({
     profile: ALGEBRA_FORMAL_FREYD_NATIVE_CONNECTING_OBSERVATION_PROFILE,
     pointProfile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE.revision,
-    createEnvironment: () => createFormalFreydNativeConnectingProofEnvironment([]),
+    createEnvironment: () => checkedFormalSignatureReference(createFormalFreydNativeConnectingProofEnvironment),
     bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS,
         ...FORMAL_FREYD_NATIVE_CONNECTING_SIGNATURE_BINDINGS },
     modelType: algebraFormalFreydNativeModelType, normalityType: algebraFormalFreydNativeModelNormalityType,

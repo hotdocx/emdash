@@ -305,6 +305,10 @@ describe('TypeScript v3.2 USABILITY-1A categorical surface spec', () => {
             semantic,
             /piapp|fapp[01]|tapp[01]|tdapp|Fibre_func|emdash2\//
         );
+        const laxity = CORE_CATEGORICAL_SURFACE_SPECIFICATION.applications
+            .find(application => application.target === 'displayed-functor-laxity');
+        assert.equal(laxity?.implementationStatus, 'active-kernel-untransferred');
+        assert.equal(laxity?.surfaceDisposition, 'unsupported-profile-gap');
     });
 
     it('keeps notation, frozen MVP, and browser scope unchanged', () => {

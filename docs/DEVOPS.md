@@ -29,6 +29,12 @@ the Git root. `doctor` reads prerequisites; it does not install packages.
 the verification manifest. Exploratory environments can still run explicit
 checks, but their evidence keeps its actual tool identity.
 
+Root contributor tests verify the completed PathOut audit against its local Git
+snapshot `a05493b49a1ef49c18ffe921725dd1ce56f21647`, then compare the selected
+owners with current source. Keep that commit available in shallow checkouts;
+CI uses `fetch-depth: 0`. These historical tests are outside the distributed
+package's runtime and its external-install smoke test.
+
 `plan`/`check --explain` show selection without executing gates. Without `--base`,
 selection covers staged, unstaged and untracked nonignored work. With `--base`,
 it also covers the commit comparison. Rename detection is disabled for this

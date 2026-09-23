@@ -7,6 +7,7 @@ import { algebraAlgorithmIdentity, defineAlgebraOperation, defineAlgebraRuntimeS
 import { createAlgebraTypeScriptReferenceEngine, defineAlgebraReferenceImplementation } from './algebra_reference_engine';
 import { AlgebraFormalDelegationError, defineAlgebraFormalComputationAdapter } from './algebra_formal_delegation';
 import { CoreLfDeclarationEnvironment } from './lf_declarations';
+import { checkedFormalSignatureReference } from './algebra_formal_signature_reference';
 import { createCoreProofChecker } from './proof_checker';
 import { KernelExpression, kernelExpressionEquals, kernelFree, provenance } from './kernel';
 import { CoreLfScopedBuilder } from './lf_builder';
@@ -64,7 +65,7 @@ export function algebraFormalFreydNativeModelHomologyObservationBundle<P extends
 ) {
     return modelHomologyObservation(input, {
         profile: ALGEBRA_FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_PROFILE,
-        createEnvironment: () => createFormalFreydNativeModelObservationProofEnvironment([]),
+        createEnvironment: () => checkedFormalSignatureReference(createFormalFreydNativeModelObservationProofEnvironment),
         bindings: { ...FORMAL_FREYD_NATIVE_MODEL_SIGNATURE_BINDINGS, ...FORMAL_FREYD_NATIVE_MODEL_OBSERVATION_SIGNATURE_BINDINGS },
         modelType: algebraFormalFreydNativeModelType, pointOwner: 'bridge_freyd_adjunction_model_object',
         operationPrefix: 'proof-cas.freyd-native-model/'

@@ -2,7 +2,8 @@
 
 Date: 2026-09-23
 Status: selected DevOps implementation complete; focused qualification green;
-full TypeScript/scale qualification blocked by the baseline issues below.
+original TypeScript/source blockers and scale qualification are addressed by
+the separate repair below; complete TypeScript/hosted qualification remains open.
 Baseline: `f2902a6930aafcfc1dee267aa0ce622f6e72afa5` on `main`.
 Comparison milestone: `f76e8ac9066dc7cf8f3ed90cba42a5eea92b742e`.
 Authority: [root instructions](../AGENTS.md), [formal SOP](../emdash2/AGENTS.md),
@@ -256,3 +257,8 @@ tests and remaining inventory/catalog gates): receipt
 link/lifecycle checks and `git diff --check` also pass.
 The local checkpoint records the above blockers explicitly rather than claiming
 a green repository integration. The next tranche starts from that checkpoint.
+
+Checkpoint: `f9ae8d6aaebb34cdc9276497adfc8320933d60ce`. The separately authorized
+[profile/performance repair](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
+owns the continuation. This operational ledger retains the original non-green
+aggregate receipt rather than retrospectively changing its outcome.

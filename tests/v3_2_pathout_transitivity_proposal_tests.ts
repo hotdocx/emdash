@@ -193,14 +193,22 @@ describe('PATHOUT-LIBRARY-TRANSITIVITY-1E proposal', () => {
             const prefix = entry.sourceKind === 'injective-symbol'
                 ? 'injective symbol'
                 : 'symbol';
+            // Proposal line numbers describe its reviewed checkpoint. Locate
+            // the unique current owner without rewriting that historical record.
+            const declarationPattern = new RegExp(`^${prefix} ${entry.name}\\b`, 'u');
+            const positions = lines.flatMap((line, index) =>
+                declarationPattern.test(line) ? [index] : []
+            );
+            assert.equal(positions.length, 1, entry.name);
+            const start = positions[0];
             assert.match(
-                lines[entry.authorityLine - 1],
-                new RegExp(`^${prefix} ${entry.name}\\b`, 'u'),
+                lines[start],
+                declarationPattern,
                 entry.name
             );
             const nextDeclaration = lines.findIndex(
                 (line, index) =>
-                    index >= entry.authorityLine &&
+                    index > start &&
                     /^(?:injective |constant )?symbol\s/u.test(line)
             );
             const end = nextDeclaration < 0
@@ -208,7 +216,7 @@ describe('PATHOUT-LIBRARY-TRANSITIVITY-1E proposal', () => {
                 : nextDeclaration;
             assert.equal(
                 lines
-                    .slice(entry.authorityLine - 1, end)
+                    .slice(start, end)
                     .some(line => line.includes('≔')),
                 true,
                 entry.name

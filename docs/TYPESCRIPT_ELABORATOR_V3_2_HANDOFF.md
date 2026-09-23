@@ -6,6 +6,9 @@
 > execution receipts and local/CI gate routing. They preserve the current
 > mathematical/profile boundaries and existing book architecture. The dated
 > elaborator and research receipts below remain historical evidence.
+> The separately authorized [profile/performance repair](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
+> records source requalification, preserved historical audits, matcher costs and
+> the current aggregate validation status.
 
 > **Current orientation (2026-09-18):** Book 0.9.2-dev and the completed native
 > homology/universality assembly are on main and GitHub Pages. Start with the

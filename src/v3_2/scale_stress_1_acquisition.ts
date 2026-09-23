@@ -16,11 +16,11 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:0a117742d326bad82fe72cc73c624a0c174e3b48dd4047ebd8f6ed6ff7837860',
+            'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:b16839b44dfec845fdc007884f82fea63156a273759fba4e9a8842c0c0312ccb',
+                'sha256:594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6',
             imports: []
         },
         commands: [
@@ -44,7 +44,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.decoded-inductive',
-                ordinal: 54,
+                ordinal: 56,
                 kind: 'inductive',
                 textSha256:
                     'sha256:db4b03158723bda9d432dc5750a68bf36d30a40c7914034fbef5550cabd83f69',
@@ -53,7 +53,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.eliminator',
-                ordinal: 63,
+                ordinal: 65,
                 kind: 'symbol',
                 textSha256:
                     'sha256:e8a96705d438ed6d60682a30b0bea9b8124ac544453cb0bafa00c213dabc5e31',
@@ -63,7 +63,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma.eliminator-beta',
-                ordinal: 64,
+                ordinal: 66,
                 kind: 'rule',
                 textSha256:
                     'sha256:cdc48cbc3a997be41f8825b0f933015ed6151e25dfaf6eafd485cf4f8ac01526',
@@ -71,7 +71,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi.decoded-classifier',
-                ordinal: 74,
+                ordinal: 76,
                 kind: 'symbol',
                 textSha256:
                     'sha256:fe57925af572af813e027eca081bdebe09ce46f847e46b2803b1fb56e9d15b34',
@@ -81,7 +81,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi.decoding-beta',
-                ordinal: 75,
+                ordinal: 77,
                 kind: 'rule',
                 textSha256:
                     'sha256:65f25ecd277a108aac576af30659ab8ddc08b4197f8e57d5e41ccd91c2119dad',

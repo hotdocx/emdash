@@ -127,7 +127,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
             sourceItems('core').map(
                 item => item.provenance.canonicalCommandOrdinal
             ),
-            [13, 14, 54, 63, 64, 74, 75]
+            [13, 14, 56, 65, 66, 76, 77]
         );
         assert.deepEqual(
             sourceItems('nat').map(item => item.order),

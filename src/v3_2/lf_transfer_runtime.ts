@@ -957,9 +957,13 @@ const patternMatches = (
 
 const internalMatch = (
     expression: KernelExpression,
-    rule: CoreLfCompiledRuntimeRule
+    rule: CoreLfCompiledRuntimeRule,
+    getAmbientDepth: () => number = () => requiredAmbientDepth(expression)
 ): InternalRuntimeMatch | undefined => {
-    const ambientDepth = requiredAmbientDepth(expression);
+    // Reject incompatible rigid heads before walking the entire candidate's
+    // scope. No captures or reduction are involved in this necessary test.
+    if (!compatibleRuntimeHead(rule.left, expression)) return undefined;
+    const ambientDepth = getAmbientDepth();
     const bindings: (CapturedRuntimeValue | undefined)[] =
         rule.variables.map(() => undefined);
     if (!patternMatches(
@@ -991,6 +995,35 @@ const internalMatch = (
             )
         })
     };
+};
+
+const compatibleRuntimeHead = (
+    pattern: CoreLfCompiledRuntimeExpression,
+    expression: KernelExpression
+): boolean => {
+    switch (pattern.tag) {
+        case 'capture':
+        case 'wildcard':
+            return true;
+        case 'reference':
+            return expression.tag === 'reference' &&
+                expression.name === pattern.name;
+        case 'application':
+            return expression.tag === 'application' &&
+                expression.owner === pattern.owner &&
+                expression.arguments.length === pattern.arguments.length;
+        case 'call':
+            return expression.tag === 'call' &&
+                expression.arguments.length === pattern.arguments.length &&
+                compatibleRuntimeHead(pattern.callee, expression.callee);
+        default:
+            return expression.tag === pattern.tag;
+    }
+};
+
+const lazyAmbientDepth = (expression: KernelExpression): (() => number) => {
+    let depth: number | undefined;
+    return () => depth ??= requiredAmbientDepth(expression);
 };
 
 const frozenTrace = (
@@ -1079,31 +1112,7 @@ implements CoreLfCatalogRuntime {
     rewriteHead(
         expression: KernelExpression
     ): CoreRuntimeHeadRewriteResult {
-        for (let ruleIndex = 0; ruleIndex < this.rules.length; ruleIndex++) {
-            const rule = this.rules[ruleIndex];
-            const match = internalMatch(expression, rule);
-            if (match === undefined) continue;
-            const sourceRule =
-                this.module.runtimeRules[ruleIndex];
-            return Object.freeze({
-                status: 'rewritten',
-                ruleId: rule.id,
-                ruleIndex,
-                before: expression,
-                after: instantiateCompiledExpression(
-                    rule.right,
-                    match.captures,
-                    sourceRule,
-                    expression,
-                    match.ambientDepth
-                ),
-                match: match.publicMatch
-            });
-        }
-        return Object.freeze({
-            status: 'irreducible',
-            expression
-        });
+        return rewriteProgramHead(this, expression, lazyAmbientDepth(expression));
     }
 
     weakHead(
@@ -1149,6 +1158,39 @@ implements CoreLfCatalogRuntime {
         }
     }
 }
+
+/** Keep original rule order/index; share one scope scan across the search. */
+const rewriteProgramHead = (
+    program: CoreLfCompiledRuntimeProgram,
+    expression: KernelExpression,
+    getAmbientDepth: () => number
+): CoreRuntimeHeadRewriteResult => {
+    for (let ruleIndex = 0; ruleIndex < program.rules.length; ruleIndex++) {
+        const rule = program.rules[ruleIndex];
+        const match = internalMatch(expression, rule, getAmbientDepth);
+        if (match === undefined) continue;
+        const sourceRule =
+            program.module.runtimeRules[ruleIndex];
+        return Object.freeze({
+            status: 'rewritten',
+            ruleId: rule.id,
+            ruleIndex,
+            before: expression,
+            after: instantiateCompiledExpression(
+                rule.right,
+                match.captures,
+                sourceRule,
+                expression,
+                match.ambientDepth
+            ),
+            match: match.publicMatch
+        });
+    }
+    return Object.freeze({
+        status: 'irreducible',
+        expression
+    });
+};
 
 const runtimeFragmentKey = (
     program: CoreLfCompiledRuntimeProgram
@@ -1210,8 +1252,9 @@ implements CoreLfCatalogRuntime {
         expression: KernelExpression
     ): CoreRuntimeHeadRewriteResult {
         let ruleOffset = 0;
+        const getAmbientDepth = lazyAmbientDepth(expression);
         for (const fragment of this.fragments) {
-            const result = fragment.rewriteHead(expression);
+            const result = rewriteProgramHead(fragment, expression, getAmbientDepth);
             if (result.status === 'rewritten') {
                 return Object.freeze({
                     ...result,

@@ -180,7 +180,7 @@ describe(
             );
         });
 
-        it('fails closed at the inactive whole-laxity boundary', () => {
+        it('fails closed at the untransferred whole-laxity boundary', () => {
             const emdash = program('inactive-laxity.ts');
             const K = emdash.category('K', { line: 1 });
             const E = emdash.displayedFamily('E', K, { line: 2 });
@@ -217,7 +217,7 @@ describe(
             assert.equal(normalized?.location, 'inactive-laxity.ts:31:7');
             assert.match(
                 normalized?.message ?? '',
-                /functord_laxity_transf is deliberately inactive/u
+                /functord_laxity_transf is outside the qualified/u
             );
         });
 

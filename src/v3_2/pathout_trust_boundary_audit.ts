@@ -2,7 +2,10 @@
  * PATHOUT-TRUST-BOUNDARY-0A authority and dependency audit.
  *
  * This immutable record describes the smallest reviewed PathOut/PathInd
- * product profile over the active Emdash v3.2 authority. It installs no Core
+ * product profile at checkpoint a05493b49a1ef49c18ffe921725dd1ce56f21647.
+ * Hashes, positions and then-current transfer status are historical evidence;
+ * the source-requalification tests separately compare today's owners.
+ * It installs no Core
  * declaration, rewrite rule, proof rule, syntax, browser API, or package
  * export. Source-byte and source-position checks live in the focused test so
  * this contributor artifact remains browser-safe and free of filesystem I/O.

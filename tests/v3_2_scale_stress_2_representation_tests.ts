@@ -160,7 +160,7 @@ describe(
                 CORE_LF_SCALE_STRESS_2_UNCURRYING_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [391, 395, 988, 1008, 1019, 1026]
+                [393, 397, 1020, 1045, 1069, 1076]
             );
             assert.deepEqual(
                 contract.commands.map(command => command.id),
@@ -353,7 +353,7 @@ describe(
                     selection.commands.map(entry =>
                         entry.command.ordinal
                     ),
-                    [391, 395, 988, 1008, 1019, 1026]
+                    [393, 397, 1020, 1045, 1069, 1076]
                 );
 
                 const header = [

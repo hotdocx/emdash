@@ -182,7 +182,7 @@ export interface CoreDirected1bLambdapiRuleBinding {
         readonly authorityPath: 'emdash2/emdash3_2.lp';
         readonly section: string;
         readonly sourceFragment: string;
-        readonly auditedOn: '2026-07-24';
+        readonly auditedOn: '2026-07-24' | '2026-09-23';
     };
 }
 
@@ -960,9 +960,11 @@ const rawRuleBindings: readonly CoreDirected1bLambdapiRuleBinding[] = [
             authorityPath: 'emdash2/emdash3_2.lp',
             section: '9a. Sigma totals, Sigma homs, and projection',
             sourceFragment:
-                'rule fapp0 (Sigma_proj1_func $E) ' +
-                '(Struct_sigma $k $u) ↪ $k;',
-            auditedOn: '2026-07-24'
+                'rule @fapp0 _ _ (@Sigma_proj1_func $K $E) $q\n' +
+                '  ↪ @sigma_obj_base $K $E $q;',
+            // The reviewed pair case now follows this generic projection,
+            // the transparent sigma_obj_base body and sigma_Fst beta.
+            auditedOn: '2026-09-23'
         }
     },
     {
@@ -1381,7 +1383,10 @@ export function validateCoreDirected1bProposal(
             binding_.authority !== 'runtime-rule' ||
             binding_.provenance.authorityPath !==
                 'emdash2/emdash3_2.lp' ||
-            binding_.provenance.auditedOn !== '2026-07-24'
+            binding_.provenance.auditedOn !== (
+                binding_.id === 'directed.sigma-first-projection.evaluate'
+                    ? '2026-09-23' : '2026-07-24'
+            )
         )
     ) {
         fail(
