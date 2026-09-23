@@ -58,7 +58,7 @@ if [[ -n "$png_file" ]]; then
   dot_file="$(mktemp)"
   trap 'rm -f "$dot_file"' EXIT
   mkdir -p "$(dirname "$png_file")"
-  lambdapi decision-tree --no-warnings "${ghost_args[@]}" "$symbol" >"$dot_file"
+  bash scripts/lambdapi_resource_guard.sh lambdapi decision-tree --no-warnings "${ghost_args[@]}" "$symbol" >"$dot_file"
   if [[ ! -s "$dot_file" ]]; then
     printf '%s: no decision tree was emitted for %s\n' "$0" "$symbol" >&2
     exit 1
@@ -66,5 +66,5 @@ if [[ -n "$png_file" ]]; then
   dot -Tpng "$dot_file" >"$png_file"
   printf 'wrote %s\n' "$png_file"
 else
-  lambdapi decision-tree --no-warnings "${ghost_args[@]}" "$symbol"
+  bash scripts/lambdapi_resource_guard.sh lambdapi decision-tree --no-warnings "${ghost_args[@]}" "$symbol"
 fi

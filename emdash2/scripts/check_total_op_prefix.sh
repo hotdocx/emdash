@@ -38,7 +38,7 @@ check_target() {
   shift
   local log="$stage_root/logs/${file//\//_}.log"
   printf 'checking %s (90 seconds maximum)\n' "$file"
-  if ! timeout --signal=INT 90s lambdapi check -c --no-colors "$@" "$file" > "$log" 2>&1; then
+  if ! EMDASH_LP_TIMEOUT=90s bash "$source_root/scripts/lambdapi_resource_guard.sh" lambdapi check -c --no-colors "$@" "$file" > "$log" 2>&1; then
     printf 'unexpected failure; inspect %s\n' "$log" >&2
     return 1
   fi
@@ -47,7 +47,7 @@ expect_rejected() {
   local file="$1" pattern="$2"
   local log="$stage_root/logs/${file//\//_}.log"
   local rc=0
-  timeout --signal=INT 90s lambdapi check -w --no-colors "$file" > "$log" 2>&1 || rc=$?
+  EMDASH_LP_TIMEOUT=90s bash "$source_root/scripts/lambdapi_resource_guard.sh" lambdapi check -w --no-colors "$file" > "$log" 2>&1 || rc=$?
   if [[ "$rc" -ne 1 ]] || ! rg -q 'The proof is not finished:' "$log" || ! rg -q "$pattern" "$log"; then
     printf 'unexpected negative result (%s); inspect %s\n' "$rc" "$log" >&2
     return 1

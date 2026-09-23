@@ -9,11 +9,13 @@ directory is a standalone distributable fixture, not a contributor workspace
 package.
 
 The active mathematical authority is the Lambdapi v3.2 development under
-`emdash2/`, in the order specified by `emdash2/AGENTS.md`. The root `src/` and
-`tests/` tree is an older executable feasibility prototype. Its generic AST,
-bidirectional elaboration, holes, unification, rewriting, and proof-state code
-may be useful implementation evidence, but its built-in category theory is not
-an authority for v3.2 and should not be extended as though it were current.
+`emdash2/`, in the order specified by `emdash2/AGENTS.md`. The current root
+`src/v3_2/` and `tests/` trees contain the TypeScript workbench, generic LF/Core
+checker, authoring layers and bounded transferred profiles. The earlier
+feasibility prototype has been retired; do not restore its category-specific
+API. TypeScript qualification is profile-specific and does not establish that
+every newer Lambdapi owner has been transferred. Preserve source-pin failures
+as review signals rather than updating mathematical evidence merely to pass CI.
 
 For renewed TypeScript elaborator work, read
 `docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`, then the active kernel, current
@@ -168,6 +170,14 @@ inspect the root project hook, and trust its new hash. A thread that started
 before the change cannot acquire the new hook set retroactively.
 
 ## Commands
+
+Repository DevOps entry points and the exact gate matrix are documented in
+[`docs/DEVOPS.md`](docs/DEVOPS.md). Use `./scripts/emdash dev doctor` for local
+prerequisites and `./scripts/emdash dev check --explain` to inspect selected
+checks before running them. `devops/gates.json` owns local/CI gate selection;
+`emdash2/checks.json` owns formal target membership and named resource profiles.
+Existing Make/pnpm commands remain supported. Receipt files record execution
+at an exact input/profile snapshot; they do not upgrade mathematical status.
 
 Root TypeScript workbench:
 

@@ -35,6 +35,14 @@ from scripts.check_metrics import (
 
 
 class CheckMetricsTests(unittest.TestCase):
+    @patch("scripts.check_metrics.run_command", return_value=(0, "", 1.0))
+    def test_explicit_suite_order_is_preserved_when_requested(self, run_command) -> None:
+        files = [Path("emdash3_2.lp"), Path("emdash3_2_checks.lp")]
+        with redirect_stdout(StringIO()):
+            _, status = run_checks(files, "90s", prioritize=False)
+        self.assertEqual(status, 0)
+        self.assertEqual([args.args[0][-1] for args in run_command.call_args_list], list(map(str, files)))
+
     @patch("scripts.check_metrics.run_command")
     def test_current_groups_run_independently_without_reordering_results(self, run_command) -> None:
         first_targets, first_script = ISOLATED_CHECK_GROUPS[-2]
@@ -99,9 +107,6 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertEqual(targets, SPECIAL_HOMOLOGY_EXACT_WINDOW_CHECK_FILES)
         for name in ("first", "second", "third"):
             self.assertIn(f"emdash3_2_homology_{name}_exactness.lp", source)
-        for name in ("check.sh", "check_examples.sh"):
-            self.assertIn("./scripts/check_homology_exact_window.sh",
-                          (script_dir / name).read_text(encoding="utf-8"))
 
     @patch("scripts.check_metrics.run_command")
     def test_exact_window_failure_is_not_reported_as_checked(self, run_command) -> None:
@@ -135,9 +140,6 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertEqual(len(targets), 9)
         self.assertEqual(targets - {Path("examples/homology_record_connecting_whole.lp")},
                          SPECIAL_HOMOLOGY_WINDOW_FAMILY_CHECK_FILES)
-        for name in ("check.sh", "check_examples.sh"):
-            self.assertIn("./scripts/check_homology_window_families.sh",
-                          (script_dir / name).read_text(encoding="utf-8"))
 
     @patch("scripts.check_metrics.run_command")
     def test_window_family_failure_is_not_reported_as_checked(self, run_command) -> None:
@@ -170,9 +172,6 @@ class CheckMetricsTests(unittest.TestCase):
             Path("emdash3_2_homology_exact_window.lp"),
             Path("emdash3_2_homology_exact_window_result.lp"),
         }, SPECIAL_HOMOLOGY_ARROW_TAIL_CHECK_FILES)
-        for name in ("check.sh", "check_examples.sh"):
-            self.assertIn("./scripts/check_homology_arrow_tails.sh",
-                          (script_dir / name).read_text(encoding="utf-8"))
 
     @patch("scripts.check_metrics.run_command")
     def test_arrow_tail_failure_is_not_reported_as_checked(self, run_command) -> None:
@@ -207,9 +206,6 @@ class CheckMetricsTests(unittest.TestCase):
             Path("emdash3_2_computational_exact_arrow_tails.lp"), Path("examples/homology_adjacent_window_tails.lp"),
         }
         self.assertEqual(targets - reused, SPECIAL_HOMOLOGY_BOUNDED_PREREQUISITES)
-        for name in ("check.sh", "check_examples.sh"):
-            self.assertIn("./scripts/check_homology_bounded_prerequisites.sh",
-                          (script_dir / name).read_text(encoding="utf-8"))
 
     @patch("scripts.check_metrics.run_command")
     def test_bounded_prerequisite_failure_is_not_reported_as_checked(self, run_command) -> None:
@@ -242,9 +238,6 @@ class CheckMetricsTests(unittest.TestCase):
             Path("emdash3_2_homology_exact_window.lp"), Path("emdash3_2_homology_exact_window_result.lp"),
         }
         self.assertEqual(targets - reused, SPECIAL_HOMOLOGY_BOUNDED_GENERATOR)
-        for name in ("check.sh", "check_examples.sh"):
-            self.assertIn("./scripts/check_homology_bounded_generator.sh",
-                          (script_dir / name).read_text(encoding="utf-8"))
 
     @patch("scripts.check_metrics.run_command")
     def test_bounded_generator_failure_is_not_reported_as_checked(self, run_command) -> None:
@@ -292,7 +285,8 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertNotEqual(before, after)
 
     def test_resume_state_requires_exact_identity_and_keeps_only_successes(self) -> None:
-        identity = {"state_version": 1, "content_snapshot": "a" * 64}
+        identity = {"state_version": 2, "content_snapshot": "a" * 64,
+                    "execution_snapshot": "c" * 64}
         checks = {
             "ok.lp": CheckResult("ok.lp", 0, 1.25),
             "failed.lp": CheckResult("failed.lp", 124, 60.0),
@@ -303,7 +297,7 @@ class CheckMetricsTests(unittest.TestCase):
             resumed = load_resume_checks(state, identity)
             stale = load_resume_checks(
                 state,
-                {"state_version": 1, "content_snapshot": "b" * 64},
+                {**identity, "content_snapshot": "b" * 64},
             )
         self.assertEqual(list(resumed), ["ok.lp"])
         self.assertEqual(resumed["ok.lp"].evidence, "resumed")
@@ -317,7 +311,8 @@ class CheckMetricsTests(unittest.TestCase):
             old_source.write_text("symbol old : TYPE;\n", encoding="utf-8")
             new_source.write_text("symbol new : TYPE;\n", encoding="utf-8")
             shared = {
-                "state_version": 1,
+                "state_version": 2,
+                "execution_snapshot": "c" * 64,
                 "lambdapi_version": "test",
                 "timeout": "90s",
                 "warnings_enabled": False,
@@ -354,6 +349,18 @@ class CheckMetricsTests(unittest.TestCase):
         self.assertEqual(list(resumed), ["old.lp"])
         self.assertEqual(resumed["old.lp"].evidence, "resumed")
         self.assertEqual(stale, {})
+
+    def test_previous_identity_schema_and_changed_execution_are_not_reused(self) -> None:
+        identity = {"state_version": 2, "content_snapshot": "a" * 64,
+                    "execution_snapshot": "c" * 64}
+        with TemporaryDirectory() as directory:
+            state = Path(directory) / "state.json"
+            checks = {"ok.lp": CheckResult("ok.lp", 0, 1.0)}
+            write_resume_checks(state, {**identity, "state_version": 1}, checks)
+            self.assertEqual(load_resume_checks(state, identity), {})
+            write_resume_checks(state, identity, checks)
+            self.assertEqual(load_resume_checks(state, {**identity, "execution_snapshot": "d" * 64}), {})
+            self.assertEqual(load_resume_checks(state, {**identity, "execution_snapshot": None}), {})
 
     def test_snapshot_is_independent_of_timings_and_generation_date(self) -> None:
         files = {

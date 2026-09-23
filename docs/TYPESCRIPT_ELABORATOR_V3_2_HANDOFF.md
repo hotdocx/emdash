@@ -1,5 +1,12 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **DevOps continuation (2026-09-23):** The
+> [implementation ledger](EMDASH_DEVOPS_CONSOLIDATION_IMPLEMENTATION_PLAN.md)
+> and [contributor guide](DEVOPS.md) own the shared target registry, bounded
+> execution receipts and local/CI gate routing. They preserve the current
+> mathematical/profile boundaries and existing book architecture. The dated
+> elaborator and research receipts below remain historical evidence.
+
 > **Current orientation (2026-09-18):** Book 0.9.2-dev and the completed native
 > homology/universality assembly are on main and GitHub Pages. Start with the
 > [repository reassessment](TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)

@@ -3,6 +3,11 @@
 set -euo pipefail
 
 [[ $# -gt 0 ]] || { printf 'usage: %s command [args...]\n' "$0" >&2; exit 2; }
+for argument in "$@"; do
+  [[ "${argument%%=*}" != --no-sr-check ]] || {
+    printf 'subject reduction cannot be disabled by guarded commands\n' >&2; exit 2;
+  }
+done
 memory_mib="${EMDASH_LP_MEMORY_MIB:-2048}"
 file_mib="${EMDASH_LP_FILE_MIB:-64}"
 duration="${EMDASH_LP_TIMEOUT:-90s}"

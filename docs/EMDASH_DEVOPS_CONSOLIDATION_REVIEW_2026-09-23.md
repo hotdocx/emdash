@@ -2,6 +2,11 @@
 
 Date: 2026-09-23
 Status: review complete; implementation stages below are proposals, not selected work.
+
+Continuation: the user subsequently authorized implementation. The
+[active ledger](EMDASH_DEVOPS_CONSOLIDATION_IMPLEMENTATION_PLAN.md) records
+the selected bounded scope and qualification; [DEVOPS.md](DEVOPS.md) is the
+current command guide. Findings below describe the reviewed baseline.
 Reviewed baseline: local `main` at `44f50587`, initially clean and four commits
 ahead of the local `origin/main` tracking ref. No remote refresh was performed.
 

@@ -2,6 +2,7 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
+formal_root="$(pwd)"
 
 : "${EMDASH_TYPECHECK_TIMEOUT:=90s}"
 : "${EMDASH_LAMBDAPI_WARNINGS:=0}"
@@ -46,7 +47,8 @@ cp examples/short_exact_comparisons.lp "$scratch_root/examples/"
 check_object() {
   local file="$1"
   printf 'checking %s with fresh exact dependency objects\n' "$file"
-  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
+  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
+    bash "$formal_root/scripts/lambdapi_resource_guard.sh" \
     lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$file"
 }
 cd "$scratch_root"

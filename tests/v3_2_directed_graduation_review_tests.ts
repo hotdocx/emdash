@@ -2,6 +2,7 @@
  * Focused reviewed-profile tests for H-DTTLF-03/D-DTTLF-001.
  */
 
+import { repositoryConformanceCommand } from './v3_2_lambdapi_test_command';
 import assert from 'node:assert/strict';
 import {
     readFileSync
@@ -171,7 +172,7 @@ describe('TypeScript v3.2 reviewed directed continuation profile', () => {
             CORE_DIRECTED_CONTINUATION_PROFILE.conformance;
         assert.equal(
             packageJson.scripts['check:directed-conformance'],
-            conformance.scriptBody
+            repositoryConformanceCommand(conformance.scriptBody)
         );
         assert.equal(
             packageJson.scripts['check:continuation'],
@@ -185,7 +186,7 @@ describe('TypeScript v3.2 reviewed directed continuation profile', () => {
         );
         assert.equal(
             packageJson.scripts['check:conformance'],
-            CORE_MVP_RELEASE_POLICY.conformance.scriptBody
+            repositoryConformanceCommand(CORE_MVP_RELEASE_POLICY.conformance.scriptBody)
         );
         assert.equal(
             packageJson.scripts['check:all'],

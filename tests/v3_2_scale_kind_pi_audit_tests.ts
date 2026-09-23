@@ -13,9 +13,7 @@ import {
     join,
     resolve
 } from 'node:path';
-import {
-    spawnSync
-} from 'node:child_process';
+import { runBoundedLambdapi } from './v3_2_lambdapi_test_command';
 import {
     describe,
     it
@@ -110,8 +108,7 @@ const runLambdapiSource = (source: string) => {
     const path = join(directory, 'probe.lp');
     try {
         writeFileSync(path, source, 'utf8');
-        return spawnSync(
-            'lambdapi',
+        return runBoundedLambdapi(
             ['check', '-w', path],
             {
                 cwd: lambdapiPackageRoot,

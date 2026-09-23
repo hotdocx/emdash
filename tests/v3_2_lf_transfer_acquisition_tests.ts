@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { runBoundedLambdapi } from './v3_2_lambdapi_test_command';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_SCALE_ENGINE_REVIEW,
@@ -161,7 +161,7 @@ const expectAcquisitionError = (
 };
 
 const runLambdapi = (args: readonly string[]): string => {
-    const result = spawnSync('lambdapi', [...args], {
+    const result = runBoundedLambdapi([...args], {
         cwd: lambdapiRoot,
         encoding: 'utf8',
         timeout: 60_000,

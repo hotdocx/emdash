@@ -2,6 +2,7 @@
  * Focused RELEASE-1B conformance and public-policy synchronization tests.
  */
 
+import { repositoryConformanceCommand } from './v3_2_lambdapi_test_command';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -91,7 +92,7 @@ describe('TypeScript v3.2 RELEASE-1B release policy', () => {
 
         assert.equal(
             packageJson.scripts['check:conformance'],
-            policy.conformance.scriptBody
+            repositoryConformanceCommand(policy.conformance.scriptBody)
         );
         assert.equal(
             packageJson.scripts['check:all'],

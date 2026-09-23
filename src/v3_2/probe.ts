@@ -7,10 +7,11 @@ import {
     existsSync,
     mkdirSync,
     mkdtempSync,
+    readFileSync,
     rmSync,
     writeFileSync
 } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import {
     KernelExpression,
     SourceSpan,
@@ -363,7 +364,7 @@ export interface LambdapiProbeOptions {
      */
     packageRoot: string;
     /**
-     * Hard upper bound. Repository policy forbids exploratory checks over 60s.
+     * Checker deadline for this bounded adapter (at most 60s).
      */
     timeoutMs?: number;
     /**
@@ -371,6 +372,8 @@ export interface LambdapiProbeOptions {
      * Existing conformance probes default to warning suppression.
      */
     warningsEnabled?: boolean;
+    /** Repository runner override for probes in a separate package root. */
+    runnerPath?: string;
 }
 
 export interface LambdapiProbeResult {
@@ -393,6 +396,8 @@ export interface LambdapiProbeResult {
      * generated location maps, this is exactly `rawDiagnostics`.
      */
     diagnostics: string;
+    /** Exact source, execution and raw-log receipt retained by the runner. */
+    validationReceiptPath?: string;
 }
 
 const normalizeDiagnosticPath = (path: string): string =>
@@ -511,18 +516,32 @@ export function checkLambdapiProbe(
 
     try {
         writeFileSync(probePath, serialized.source, 'utf8');
+        const runnerPath = options.runnerPath ?? join(
+            packageRoot, 'scripts', 'run_lambdapi.py'
+        );
+        if (!existsSync(runnerPath)) {
+            throw new Error(`Repository Lambdapi runner unavailable: ${runnerPath}`);
+        }
         const result = spawnSync(
-            'lambdapi',
+            'python3',
             [
-                'check',
-                ...(options.warningsEnabled ? [] : ['-w']),
+                runnerPath,
+                '--package-root', packageRoot,
+                '--timeout-ms', String(timeoutMs),
+                '--json',
                 relative(packageRoot, probePath)
             ],
             {
                 cwd: packageRoot,
                 encoding: 'utf8',
-                timeout: timeoutMs,
-                killSignal: 'SIGINT',
+                // The guarded child owns the checker deadline. Leave time to
+                // fingerprint inputs and persist the receipt after it exits.
+                timeout: timeoutMs + 10_000,
+                killSignal: 'SIGKILL',
+                env: {
+                    ...process.env,
+                    EMDASH_LAMBDAPI_WARNINGS: options.warningsEnabled ? '1' : '0'
+                },
                 // Warning-enabled imports of the active kernel intentionally
                 // produce a large known diagnostic stream.
                 maxBuffer: options.warningsEnabled
@@ -530,11 +549,24 @@ export function checkLambdapiProbe(
                     : 4 * 1024 * 1024
             }
         );
-        const stdout = result.stdout ?? '';
+        let receipt: {
+            outcome: string;
+            reusable: boolean;
+            receiptPath: string;
+            log: string;
+        } | undefined;
+        try {
+            receipt = JSON.parse(result.stdout ?? '');
+        } catch {
+            // Setup/launcher failures have no successful checker receipt.
+        }
+        const stdout = receipt?.receiptPath && receipt.log
+            ? readFileSync(resolve(dirname(receipt.receiptPath), '../..', receipt.log), 'utf8')
+            : result.stdout ?? '';
         const stderr = result.stderr ?? '';
         const errorCode = (result.error as NodeJS.ErrnoException | undefined)
             ?.code;
-        const timedOut = errorCode === 'ETIMEDOUT';
+        const timedOut = errorCode === 'ETIMEDOUT' || receipt?.outcome === 'timeout';
         const errorText = result.error
             ? `${result.error.name}: ${result.error.message}`
             : '';
@@ -555,7 +587,8 @@ export function checkLambdapiProbe(
         );
 
         return {
-            accepted: result.status === 0 && !result.error,
+            accepted: result.status === 0 && !result.error &&
+                receipt?.outcome === 'passed-fresh' && receipt.reusable === true,
             timedOut,
             status: result.status,
             signal: result.signal,
@@ -563,7 +596,8 @@ export function checkLambdapiProbe(
             stderr,
             rawDiagnostics,
             sourceMappedDiagnostics,
-            diagnostics
+            diagnostics,
+            validationReceiptPath: receipt?.receiptPath
         };
     } finally {
         rmSync(temporaryDirectory, { recursive: true, force: true });

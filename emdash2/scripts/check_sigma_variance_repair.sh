@@ -57,7 +57,7 @@ check_target() {
   shift
   local log="$stage_root/logs/${file//\//_}.log"
   printf 'checking %s (90 seconds maximum)\n' "$file"
-  if ! timeout --signal=INT 90s lambdapi check -c --no-colors "$@" "$file" > "$log" 2>&1; then
+  if ! EMDASH_LP_TIMEOUT=90s bash "$source_root/scripts/lambdapi_resource_guard.sh" lambdapi check -c --no-colors "$@" "$file" > "$log" 2>&1; then
     printf 'unexpected failure; inspect %s\n' "$log" >&2
     return 1
   fi
@@ -76,7 +76,7 @@ for file in "${reviewers[@]}"; do check_target "$file" -w; done
 # not because a symbol/import is missing, the process times out, or it crashes.
 negative_log="$stage_root/logs/sigma-original-expected-rejection.log"
 set +e
-timeout --signal=INT 90s lambdapi check -w --no-colors \
+EMDASH_LP_TIMEOUT=90s bash "$source_root/scripts/lambdapi_resource_guard.sh" lambdapi check -w --no-colors \
   audits/sigma_hom_empty_reproducer.lp > "$negative_log" 2>&1
 negative_rc=$?
 set -e

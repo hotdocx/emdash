@@ -3,9 +3,7 @@
  */
 
 import assert from 'node:assert/strict';
-import {
-    spawnSync
-} from 'node:child_process';
+import { runBoundedLambdapi } from './v3_2_lambdapi_test_command';
 import {
     readFileSync
 } from 'node:fs';
@@ -58,7 +56,7 @@ const assertAuditError = (
 };
 
 const runLambdapi = (args: readonly string[]): string => {
-    const result = spawnSync('lambdapi', [...args], {
+    const result = runBoundedLambdapi([...args], {
         cwd: lambdapiRoot,
         encoding: 'utf8',
         timeout: 60_000,

@@ -13,12 +13,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parent.parent
 BOOK_MANIFEST = REPO_ROOT / "book" / "book.json"
 EVIDENCE_PATH = REPO_ROOT / "book" / "evidence.json"
-ACTIVE_SOURCE_REGISTRY = REPO_ROOT / "scripts" / "check_metrics.py"
+ACTIVE_SOURCE_REGISTRY = REPO_ROOT / "checks.json"
 CLAIM_ID_RE = re.compile(r"^[A-Z][A-Z0-9-]*$")
 EVIDENCE_MARKER_RE = re.compile(r"<!--\s*evidence:([A-Z][A-Z0-9-]*)\s*-->")
-REGISTERED_OWNER_RE = re.compile(
-    r'Path\("(emdash3_2(?:_[A-Za-z0-9_]+)?\.lp)"\)'
-)
 ALLOWED_STATUSES = {
     "checked",
     "formal-consequence",
@@ -29,8 +26,10 @@ ALLOWED_STATUSES = {
 
 def load_active_owner_files() -> frozenset[str]:
     """Read the active Lambdapi module registry used by kernel health checks."""
-    registry = ACTIVE_SOURCE_REGISTRY.read_text(encoding="utf-8")
-    owners = set(REGISTERED_OWNER_RE.findall(registry))
+    registry = json.loads(ACTIVE_SOURCE_REGISTRY.read_text(encoding="utf-8"))
+    if registry.get("version") != 1:
+        raise RuntimeError("unsupported active source registry version")
+    owners = set(registry["core"])
     owners.discard("emdash3_2_checks.lp")
     if "emdash3_2.lp" not in owners:
         raise RuntimeError("active source registry does not contain emdash3_2.lp")

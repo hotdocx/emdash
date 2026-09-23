@@ -88,12 +88,14 @@ describe('PATHOUT-LIBRARY-PRESENTATION-1F proposal', () => {
             CORE_PATHOUT_TRANSITIVITY_1E_BOUNDARY.reviewCheckpoint,
             proposal.parent.pathoutTransitivityReviewCheckpoint
         );
+        // The reviewed parent remains the historical 0.2.0 release above.
+        // Later package releases retain its identity, not its version number.
         assert.equal(
             JSON.parse(readFileSync(
                 resolve(repositoryRoot, 'packages/emdash/package.json'),
                 'utf8'
-            )).version,
-            proposal.parent.publicPackage.version
+            )).name,
+            proposal.parent.publicPackage.name
         );
     });
 

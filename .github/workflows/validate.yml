@@ -1,0 +1,162 @@
+name: Validate repository
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      base: ${{ steps.plan.outputs.base }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: plan
+        name: Select the same gates used locally
+        env:
+          EVENT_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          EVENT: ${{ github.event_name }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          base=""
+          if gh api "repos/$GITHUB_REPOSITORY/actions/workflows/validate.yml/runs?branch=main&status=success&per_page=100" > "$RUNNER_TEMP/previous-validation.json"; then
+            base="$(python3 .github/scripts/validation_artifacts.py base --runs "$RUNNER_TEMP/previous-validation.json" --repository "$GITHUB_REPOSITORY" --current "$(git rev-parse HEAD)")"
+          fi
+          full=false
+          if [ -z "$base" ] || ! git cat-file -e "${base}^{commit}"; then
+            base="$EVENT_BASE"
+            full=true
+          fi
+          if [ "$EVENT" = workflow_dispatch ]; then full=true; fi
+          echo "base=$base" >> "$GITHUB_OUTPUT"
+          args=(plan --base "$base" --head HEAD --github-output)
+          if [ "$full" = true ]; then args+=(--full); fi
+          python3 scripts/devops.py "${args[@]}"
+
+  validate:
+    needs: plan
+    name: Validate / ${{ matrix.gate }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: ${{ matrix.minutes }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up contributor Node
+        if: matrix.node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install frozen contributor workspace
+        if: matrix.node
+        run: ./scripts/bootstrap-worktree.sh
+      - name: Read the verification pins
+        if: matrix.formal
+        id: toolchain
+        run: python3 scripts/verification-toolchain.py ci-outputs
+      - name: Set up the pinned OCaml compiler
+        if: matrix.formal
+        uses: ocaml/setup-ocaml@93303b622b2522e4411e295f9e77411a24912ac7 # v3
+        with:
+          ocaml-compiler: ${{ steps.toolchain.outputs.ocaml }}
+          opam-repositories: |
+            default: ${{ steps.toolchain.outputs.repository }}
+          opam-pin: false
+      - name: Install formal system dependencies
+        if: matrix.formal
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libgmp-dev libev-dev libssl-dev pkg-config
+      - name: Install and verify exact formal dependencies
+        if: matrix.formal
+        run: opam exec -- python3 scripts/verification-toolchain.py install
+      - name: Install owned rendering tools
+        if: matrix.print
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes qpdf poppler-utils
+          ./scripts/pnpmw --dir emdash2/print exec playwright install --with-deps chromium
+      - name: Run selected gate with a receipt
+        env:
+          GATE: ${{ matrix.gate }}
+          FORMAL: ${{ matrix.formal }}
+          BASE: ${{ needs.plan.outputs.base }}
+        run: |
+          set -euo pipefail
+          if [ "$FORMAL" = true ]; then
+            opam exec -- python3 scripts/devops.py check --gate "$GATE" --base "$BASE" --head HEAD
+          else
+            python3 scripts/devops.py check --gate "$GATE" --base "$BASE" --head HEAD
+          fi
+      - name: Bind the checked reviewer bundle to this workflow attempt
+        if: matrix.gate == 'reviewer'
+        run: python3 .github/scripts/validation_artifacts.py create --directory emdash-template/dist --sha "$GITHUB_SHA" --run "$GITHUB_RUN_ID" --attempt "$GITHUB_RUN_ATTEMPT"
+      - name: Retain the exact checked reviewer bundle
+        if: matrix.gate == 'reviewer'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: reviewer-dist-${{ github.run_attempt }}
+          path: emdash-template/dist
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+      - name: Preserve results and exact formal inputs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: validation-${{ matrix.gate }}
+          path: |
+            emdash2/logs/devops/
+            emdash2/logs/check-runs/
+            emdash2/logs/check-inputs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  summary:
+    name: Repository validation
+    needs: [plan, validate]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require successful planning and every selected gate
+        env:
+          PLAN_RESULT: ${{ needs.plan.result }}
+          VALIDATION_RESULT: ${{ needs.validate.result }}
+          MATRIX: ${{ needs.plan.outputs.matrix }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          plan = os.environ['PLAN_RESULT']
+          validation = os.environ['VALIDATION_RESULT']
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write('Planning: ' + plan + '\n\nSelected validation: ' + validation + '\n\n')
+              if os.environ['MATRIX']:
+                  for row in json.loads(os.environ['MATRIX'])['include']:
+                      summary.write('- ' + row['gate'] + ': ' + '; '.join(row['reasons']) + '\n')
+          if plan != 'success' or validation != 'success':
+              raise SystemExit('Required validation was unsuccessful, cancelled, or missing.')
+          PY

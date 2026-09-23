@@ -1,0 +1,642 @@
+{
+  "version": 1,
+  "gates": {
+    "docs": {
+      "commands": [
+        [
+          "python3",
+          "scripts/devops.py",
+          "docs"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "*.md",
+        "docs/**",
+        "emdash2/reports/**",
+        "emdash2/AGENTS.md"
+      ],
+      "timeoutSeconds": 120,
+      "requirements": {
+        "node": false,
+        "formal": false,
+        "print": false
+      }
+    },
+    "tooling": {
+      "commands": [
+        [
+          "make",
+          "-C",
+          "emdash2",
+          "ci-tooling"
+        ],
+        [
+          "python3",
+          "emdash2/scripts/check_registry.py"
+        ],
+        [
+          "python3",
+          "emdash2/scripts/check_metrics.py",
+          "--no-check",
+          "--check-report",
+          "--brief"
+        ],
+        [
+          "python3",
+          "emdash2/scripts/generate_check_catalog.py",
+          "--check",
+          "--strict"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        ".github/scripts/**",
+        ".github/workflows/**",
+        "emdash2/scripts/**",
+        "emdash2/tests/**",
+        "emdash2/checks.json",
+        "emdash2/Makefile",
+        "emdash2/*.lp",
+        "emdash2/examples/*.lp"
+      ],
+      "timeoutSeconds": 600,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": false
+      }
+    },
+    "typescript": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:ts"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "src/**",
+        "tests/**",
+        "tsconfig.json",
+        "eslint.config.mjs",
+        "packages/**",
+        "emdash2/scripts/**",
+        "emdash2/checks.json",
+        "emdash2/*.lp",
+        "emdash2/examples/*.lp",
+        "emdash2/book/**",
+        "emdash2/print/**",
+        "README.md"
+      ],
+      "timeoutSeconds": 3600,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": false
+      }
+    },
+    "package": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "package:check"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "package:release:check"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "packages/**",
+        "src/v3_2/**"
+      ],
+      "timeoutSeconds": 900,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": false
+      }
+    },
+    "reviewer": {
+      "commands": [
+        [
+          "npm",
+          "ci",
+          "--prefix",
+          "emdash-template"
+        ],
+        [
+          "npm",
+          "run",
+          "check",
+          "--prefix",
+          "emdash-template"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash-template/**",
+        "src/v3_2/**",
+        "docs/emdash-book.pdf",
+        "docs/emdash3_2.pdf"
+      ],
+      "timeoutSeconds": 600,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": false
+      }
+    },
+    "formal-smoke": {
+      "commands": [
+        [
+          "python3",
+          "emdash2/scripts/run_lambdapi.py",
+          "--quiet",
+          "examples/arrow_diagram_families.lp"
+        ],
+        [
+          "python3",
+          "emdash2/scripts/run_lambdapi.py",
+          "--quiet",
+          "examples/prof_reindex_terminal_normalization.lp"
+        ],
+        [
+          "python3",
+          "emdash2/scripts/run_lambdapi.py",
+          "--quiet",
+          "examples/freyd_native_snake_pair_exactness.lp"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash2/**",
+        "src/v3_2/probe.ts",
+        "tests/v3_2_lambdapi_test_command.ts"
+      ],
+      "timeoutSeconds": 900,
+      "requirements": {
+        "node": false,
+        "formal": true,
+        "print": false
+      }
+    },
+    "formal": {
+      "commands": [
+        [
+          "make",
+          "-C",
+          "emdash2",
+          "ci"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash2/**"
+      ],
+      "timeoutSeconds": 21600,
+      "requirements": {
+        "node": true,
+        "formal": true,
+        "print": false
+      }
+    },
+    "conformance": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:conformance"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:directed-conformance"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:categorical-displayed-evaluation-conformance"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "src/v3_2/**",
+        "tests/**",
+        "emdash2/**"
+      ],
+      "timeoutSeconds": 1800,
+      "requirements": {
+        "node": true,
+        "formal": true,
+        "print": false
+      }
+    },
+    "scale-conformance": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-inventory"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-phase-conformance"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-proof-stress"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-telescope-stress"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-profunctor-stress"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "check:scale-module-stress"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "src/v3_2/**",
+        "tests/**",
+        "emdash2/**"
+      ],
+      "timeoutSeconds": 7200,
+      "requirements": {
+        "node": true,
+        "formal": true,
+        "print": false
+      }
+    },
+    "print": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "print:check"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash2/print/**",
+        "emdash2/book/**",
+        "emdash2/scripts/check_book*"
+      ],
+      "timeoutSeconds": 1200,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": true
+      }
+    },
+    "book": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "book:render"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash2/book/**",
+        "emdash2/print/**",
+        "emdash2/scripts/check_book*"
+      ],
+      "timeoutSeconds": 900,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": true
+      }
+    },
+    "publication": {
+      "commands": [
+        [
+          "./scripts/pnpmw",
+          "run",
+          "book:release"
+        ],
+        [
+          "./scripts/pnpmw",
+          "run",
+          "article:release"
+        ]
+      ],
+      "inputs": [
+        "AGENTS.md",
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc",
+        "scripts/**",
+        "devops/**",
+        "toolchains/**",
+        "emdash2/book/**",
+        "emdash2/print/**"
+      ],
+      "timeoutSeconds": 1800,
+      "requirements": {
+        "node": true,
+        "formal": false,
+        "print": true
+      }
+    }
+  },
+  "rules": [
+    {
+      "paths": [
+        "*.md",
+        "docs/**",
+        "emdash2/reports/**",
+        "emdash2/AGENTS.md",
+        "emdash2/tmp/EMAIL.md"
+      ],
+      "gates": [
+        "docs"
+      ]
+    },
+    {
+      "paths": [
+        "scripts/**",
+        "devops/**",
+        ".github/workflows/**",
+        "emdash2/scripts/**",
+        "emdash2/tests/**",
+        "emdash2/Makefile",
+        "emdash2/checks.json"
+      ],
+      "gates": [
+        "tooling"
+      ]
+    },
+    {
+      "paths": [
+        "src/**",
+        "tests/**",
+        "tsconfig.json",
+        "eslint.config.mjs"
+      ],
+      "gates": [
+        "typescript"
+      ]
+    },
+    {
+      "paths": [
+        "src/v3_2/**",
+        "packages/**"
+      ],
+      "gates": [
+        "package",
+        "reviewer"
+      ]
+    },
+    {
+      "paths": [
+        "src/v3_2/probe.ts",
+        "tests/v3_2_lambdapi_test_command.ts",
+        "emdash2/scripts/**",
+        "emdash2/checks.json"
+      ],
+      "gates": [
+        "formal-smoke"
+      ]
+    },
+    {
+      "paths": [
+        "emdash2/*.lp",
+        "emdash2/examples/*.lp",
+        "emdash2/lambdapi.pkg",
+        "toolchains/**"
+      ],
+      "gates": [
+        "formal",
+        "conformance",
+        "scale-conformance"
+      ]
+    },
+    {
+      "paths": [
+        "emdash-template/**",
+        "docs/emdash-book.pdf",
+        "docs/emdash3_2.pdf"
+      ],
+      "gates": [
+        "reviewer"
+      ]
+    },
+    {
+      "paths": [
+        "emdash2/print/**"
+      ],
+      "gates": [
+        "print"
+      ]
+    },
+    {
+      "paths": [
+        "emdash2/book/**",
+        "emdash2/scripts/check_book*"
+      ],
+      "gates": [
+        "book"
+      ]
+    },
+    {
+      "paths": [
+        "emdash2/book/book.json",
+        "emdash2/print/articles.json",
+        "emdash2/print/scripts/*_pdf.mjs",
+        "scripts/promote-*-artifacts.mjs"
+      ],
+      "gates": [
+        "publication"
+      ]
+    },
+    {
+      "paths": [
+        "package.json",
+        "pnpm-lock.yaml",
+        "pnpm-workspace.yaml",
+        ".npmrc"
+      ],
+      "gates": [
+        "tooling",
+        "typescript",
+        "package",
+        "reviewer",
+        "print"
+      ]
+    },
+    {
+      "paths": [
+        ".github/assets/**"
+      ],
+      "gates": [
+        "docs"
+      ]
+    },
+    {
+      "paths": [
+        ".codex/**"
+      ],
+      "gates": [
+        "tooling",
+        "docs"
+      ]
+    },
+    {
+      "paths": [
+        "examples/**"
+      ],
+      "gates": [
+        "typescript",
+        "package",
+        "reviewer"
+      ]
+    },
+    {
+      "paths": [
+        "src/v3_2/probe.ts"
+      ],
+      "gates": [
+        "conformance"
+      ]
+    },
+    {
+      "paths": [
+        "tests/v3_2_lambdapi_test_command.ts"
+      ],
+      "gates": [
+        "scale-conformance"
+      ]
+    },
+    {
+      "paths": [
+        ".github/scripts/**",
+        ".gitignore"
+      ],
+      "gates": [
+        "tooling"
+      ]
+    }
+  ],
+  "semanticTypeScriptPrefixes": [
+    "src/v3_2/"
+  ],
+  "semanticTypeScriptExclusions": [
+    "src/v3_2/probe.ts"
+  ],
+  "unknownPolicy": "all-gates",
+  "dominates": {
+    "formal": [
+      "formal-smoke"
+    ],
+    "print": [
+      "book"
+    ],
+    "publication": [
+      "book",
+      "print"
+    ]
+  },
+  "fullValidationPaths": [
+    ".github/workflows/validate.yml",
+    ".github/scripts/validation_artifacts.py",
+    "devops/gates.json",
+    "scripts/devops.py",
+    "toolchains/**"
+  ]
+}

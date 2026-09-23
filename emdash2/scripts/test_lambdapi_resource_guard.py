@@ -67,6 +67,11 @@ else:
         result = self.run_guard("/bin/sh", "-c", "exit 7")
         self.assertEqual(result.returncode, 7)
 
+    def test_subject_reduction_bypass_is_rejected_before_launch(self):
+        result = self.run_guard("/bin/true", "--no-sr-check")
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("subject reduction", result.stderr)
+
     def test_wall_limit_is_hard(self):
         started = time.monotonic()
         result = self.run_guard("/bin/sleep", "20", EMDASH_LP_TIMEOUT="1s")

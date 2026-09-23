@@ -12,12 +12,8 @@ printf 'checking emdash3_2.lp with warnings enabled (timeout %s)\n' \
   "$EMDASH_WARNING_TIMEOUT"
 
 set +e
-if command -v timeout >/dev/null 2>&1; then
-  timeout --signal=INT "$EMDASH_WARNING_TIMEOUT" \
-    lambdapi check --no-colors emdash3_2.lp >"$EMDASH_WARNING_LOG" 2>&1
-else
-  lambdapi check --no-colors emdash3_2.lp >"$EMDASH_WARNING_LOG" 2>&1
-fi
+EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_LP_TIMEOUT="$EMDASH_WARNING_TIMEOUT" \
+  python3 scripts/run_lambdapi.py --no-colors emdash3_2.lp >"$EMDASH_WARNING_LOG" 2>&1
 rc=$?
 set -e
 

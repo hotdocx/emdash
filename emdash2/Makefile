@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render book-evidence book-typography book-check book-pdf book-release health watch infinity-codex-test prune-logs clean
+.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-tooling ci-render book-evidence book-typography book-check book-pdf book-release health watch infinity-codex-test prune-logs clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -17,13 +17,12 @@ audit-rules:
 > python3 scripts/audit_rule_lhs.py --strict
 
 ci:
+> python3 scripts/check_registry.py
 > python3 scripts/check_metrics.py --no-check --check-report --brief
 > python3 scripts/check_metrics.py --update-log --brief
-> python3 -m py_compile scripts/*.py ../scripts/infinity_codex.py
 > python3 -m json.tool ../.codex/hooks.json >/dev/null
-> python3 -m unittest tests.test_infinity_codex tests.test_book_typography tests.test_book_evidence tests.test_source_toc tests.test_report_registry tests.test_check_metrics tests.test_warning_summary
+> $(MAKE) ci-tooling
 > node --test print/scripts/document_registry.test.mjs
-> bash -n scripts/*.sh
 > git diff --check
 > python3 scripts/check_source_toc.py
 > ./scripts/lint_active_refs.sh
@@ -36,6 +35,14 @@ ci:
 > node print/scripts/check_book.mjs
 > python3 scripts/audit_rule_lhs.py --strict
 > python3 scripts/generate_check_catalog.py --check --strict
+
+ci-tooling:
+> python3 -m py_compile scripts/*.py ../scripts/*.py ../.github/scripts/*.py
+> for script in scripts/*.sh ../scripts/*.sh ../scripts/pnpmw ../scripts/emdash; do bash -n "$$script" || exit; done
+> python3 ../scripts/test_devops.py
+> python3 -m unittest tests.test_infinity_codex tests.test_book_typography tests.test_book_evidence tests.test_source_toc tests.test_report_registry tests.test_check_metrics tests.test_check_registry tests.test_check_runner tests.test_validation_artifacts tests.test_warning_summary scripts.test_lambdapi_resource_guard scripts.test_native_snake_pair_profile scripts.test_native_snake_gc_profile
+> node --test ../scripts/check-test-registration.test.mjs
+> node ../scripts/check-test-registration.mjs
 
 examples:
 > ./scripts/check_examples.sh

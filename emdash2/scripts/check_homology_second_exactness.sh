@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
+formal_root="$(pwd)"
 
 # Keep each source and reviewer independently bounded while sharing only this
 # fresh exact-source dependency tree. No persistent object cache or opaque proof.
@@ -55,7 +56,8 @@ check_object() {
   printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
     "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode" >>"$log_file"
   set +e
-  timeout --signal=INT "$EMDASH_TYPECHECK_TIMEOUT" \
+  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
+    bash "$formal_root/scripts/lambdapi_resource_guard.sh" \
     lambdapi check -c --no-colors "${warning_flags[@]}" "${extra_flags[@]}" \
     "$file" >>"$log_file" 2>&1
   rc=$?

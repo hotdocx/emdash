@@ -347,6 +347,11 @@ that already run.
 
 ## Contributor Setup And Focused Commands
 
+The [DevOps guide](./docs/DEVOPS.md) documents check selection, verification
+profiles and retained execution receipts. Use `./scripts/emdash dev doctor`
+to inspect local prerequisites and `./scripts/emdash dev check --explain` to
+see the applicable gates before running them.
+
 Node 22.13 or newer is required. The repository uses the pinned pnpm wrapper
 and one workspace lockfile; Lambdapi is additionally required for formal
 kernel and conformance checks.

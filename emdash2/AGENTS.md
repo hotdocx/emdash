@@ -350,6 +350,12 @@ the iterated-hom architecture to the omega setting.
 
 ## Fast Commands
 
+`checks.json` owns the operational core/reviewer suites, staged groups and
+named profiles. Register new active sources there; `scripts/check_registry.py`
+rejects unregistered files and unresolved imports. The root
+[`DevOps guide`](../docs/DEVOPS.md) documents shared local/CI selection and
+receipts. Book architecture and claim identity remain at their existing owners.
+
 - Active kernel and diagnostics: `make check`
 - Reviewer examples: `make examples`
 - Local CI gate: `make ci`
@@ -647,7 +653,10 @@ Git for retired implementations, rather than an ignored alternative library.
   ignoring volatile timing differences.
 - Run `make ci` before handing off substantial semantic edits. Documentation
   and tooling-only work follows the proportional gate in its active plan.
-- `scripts/probe.sh` writes logs under `logs/probes/` and summarizes failures.
+- `scripts/probe.sh` uses the shared runner. New raw logs and immutable receipts
+  live under `logs/check-runs/`; exact input blobs live under `logs/check-inputs/`.
+  Earlier `logs/probes/` records remain historical evidence. Staged recipes
+  retain per-child guards and receive explicitly scoped group receipts.
 - `make warning-summary` preserves the raw warning stream under
   `logs/warnings/latest.log`.
 - `scripts/audit_rule_lhs.py` is advisory; strict mode rejects only unreviewed

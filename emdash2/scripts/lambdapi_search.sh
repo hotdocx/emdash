@@ -17,10 +17,10 @@ mkdir -p "$(dirname "$EMDASH_SEARCH_DB")"
 
 if [[ ! -f "$EMDASH_SEARCH_DB" || emdash3_2.lp -nt "$EMDASH_SEARCH_DB" ]]; then
   printf 'refreshing Lambdapi search index: %s\n' "$EMDASH_SEARCH_DB" >&2
-  lambdapi index -w --no-colors --db="$EMDASH_SEARCH_DB" emdash3_2.lp
+  bash scripts/lambdapi_resource_guard.sh lambdapi index -w --no-colors --db="$EMDASH_SEARCH_DB" emdash3_2.lp
 fi
 
-lambdapi search -w --no-colors \
+bash scripts/lambdapi_resource_guard.sh lambdapi search -w --no-colors \
   --db="$EMDASH_SEARCH_DB" \
   --require=emdash.emdash3_2 \
   "$query"

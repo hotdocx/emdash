@@ -4,6 +4,7 @@
  */
 // Import test files. The `node:test` runner will discover `describe` and `it` blocks in these files.
 import './v3_2_elab0_tests';
+import './v3_2_probe_runner_tests';
 import './v3_2_elab1c_tests';
 import './v3_2_core_binder_tests';
 import './v3_2_core_context_tests';
@@ -68,6 +69,8 @@ import './v3_2_pathout_transitivity_review_v3_tests';
 import './v3_2_pathout_transitivity_proposal_v4_tests';
 import './v3_2_pathout_transitivity_review_v4_tests';
 import './v3_2_pathout_transitivity_transfer_tests';
+import './v3_2_pathout_presentation_proposal_tests';
+import './v3_2_pathout_presentation_review_tests';
 import './v3_2_pathout_presentation_tests';
 import './v3_2_pathout_presentation_check_tests';
 import './v3_2_pathout_presentation_cli_tests';

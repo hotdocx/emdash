@@ -1,5 +1,4 @@
 """Scoped runner/profile checks; no checker or large allocation is needed."""
-import importlib.util
 import json
 import os
 from pathlib import Path
@@ -11,10 +10,10 @@ import unittest
 from unittest.mock import patch
 
 SCRIPTS = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location("native_gc_metrics", SCRIPTS / "check_metrics.py")
-metrics = importlib.util.module_from_spec(spec)
-sys.modules[spec.name] = metrics
-spec.loader.exec_module(metrics)
+if __package__:
+    from . import check_metrics as metrics
+else:
+    import check_metrics as metrics
 
 
 class NativeGcProfileTests(unittest.TestCase):
@@ -32,6 +31,20 @@ class NativeGcProfileTests(unittest.TestCase):
         stub.write_text("#!/usr/bin/env python3\nimport json,os,sys\nprint(json.dumps({'args':sys.argv[1:],'gc':os.environ.get('OCAMLRUNPARAM')}))\n")
         stub.chmod(0o755)
         self.env = {k: v for k, v in os.environ.items() if k not in {"OCAMLRUNPARAM", "CAMLRUNPARAM"}}
+
+        # A minimal source fixture exercises the real registry-backed wrapper.
+        for name in ["check_profile.py", "check_registry.py"]:
+            shutil.copyfile(SCRIPTS / name, scripts / name)
+        registry = json.loads((SCRIPTS.parent / "checks.json").read_text())
+        names = sorted({path for targets in registry["profileTargets"].values() for path in targets})
+        registry.update(core=[name for name in names if not name.startswith("examples/")],
+                        reviewers=[name for name in names if name.startswith("examples/")],
+                        check=[], priority=[], isolatedGroups=[])
+        (scripts.parent / "checks.json").write_text(json.dumps(registry))
+        for name in names:
+            source = scripts.parent / name
+            source.parent.mkdir(parents=True, exist_ok=True)
+            source.write_text("symbol fixture : TYPE;\n")
 
     def run_profile(self, *args, gc=None):
         env = dict(self.env)
@@ -66,11 +79,12 @@ class NativeGcProfileTests(unittest.TestCase):
                 self.assertEqual(metrics.lambdapi_check_command(target),
                                  ["./scripts/check_native_snake_six_term.sh", str(target)])
             self.assertEqual(metrics.lambdapi_check_command(Path("unrelated.lp")),
-                             ["lambdapi", "check", "-w", "unrelated.lp"])
+                             [sys.executable, "./scripts/run_lambdapi.py", "--quiet", "unrelated.lp"])
 
     def test_resume_rejects_runtime_or_profile_script_changes(self):
-        with patch.object(metrics, "ROOT", self.root), patch.dict(os.environ, {}, clear=True):
+        with patch.object(metrics, "ROOT", self.root), patch.dict(os.environ, {}, clear=True), patch.object(metrics.shutil, "which", return_value=sys.executable):
             before = metrics.check_state_identity([], "source", "version", "90s")
+            self.assertTrue(metrics.resume_identity_is_compatible(before, before, self.root))
             self.assertEqual(before["ocamlrunparam"], "")
             with patch.dict(os.environ, {"OCAMLRUNPARAM": "o=10"}):
                 changed = metrics.check_state_identity([], "source", "version", "90s")
