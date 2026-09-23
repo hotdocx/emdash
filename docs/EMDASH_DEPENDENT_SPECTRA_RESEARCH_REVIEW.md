@@ -2,9 +2,9 @@
 
 Date: 2026-09-18
 
-Last reviewed: 2026-09-19
+Last reviewed: 2026-09-20
 
-Status: categorical Π-section and join source review; suspension-algebra design, no implementation or stabilization theorem
+Status: research history and native Π/join audit; latest cone-based direction in the linked marked-fibre review
 
 Scope: the user's present request reopens spectral design analysis, including
 the correction that the section g is indexed by C₀′. It does not launch a
@@ -13,10 +13,19 @@ homology work. Earlier spectral deferrals describe those earlier goals.
 
 ## Assessment And Recovered Context
 
-The latest user clarification takes ordinary Hom and categorical Π as the
-constructor interface: join has a varying inclusion endpoint; suspension
-has constant endpoints. This is the current starting point. The section
-below records its relation to the active binary join, the required section
+The 2026-09-20 clarification selects the left cone itself as the intended
+suspension, pointed at north, with the old point retained as a marked
+meridian. The [cone and marked-fibre review](EMDASH_CONE_SPECTRA_AND_MARKED_FIBRES_REVIEW.md)
+is the current analysis. It identifies the cone–coslice adjunction, gives
+its marked-arrow lift, proves a limit on classical cohomology for bare
+cones, and proposes retaining the boundary for a relative theory. The
+earlier reduced-suspension recommendation below is not a requirement on
+this newly clarified research direction.
+
+The preceding 2026-09-19 clarification took ordinary Hom and categorical Π as
+the constructor interface, distinguishing a varying inclusion endpoint
+from constant endpoints. The dated section below records that interim
+analysis and its relation to the active binary join, the required section
 profile, reduced pointing, prespectrum algebras and fibrewise suspension.
 The earlier family/collage and varying-boundary proposals remain reference
 alternatives; they are not prerequisites for this simpler formulation.
@@ -41,15 +50,15 @@ The most relevant earlier records are:
 The earlier review retained one fixed endpoint, a varying endpoint, the base
 projection, the marked identity fibre, and a possible tower of dependent
 contexts. Its withdrawal of a fixed two-pole construction described that
-earlier proposal. The user's latest clarification explicitly distinguishes
-join from fixed-endpoint suspension; that clarification now governs this
-review instead of requiring the older varying-boundary architecture.
+earlier proposal. The 2026-09-19 distinction between join and fixed-endpoint
+suspension governed the next analysis stage. The 2026-09-20 choice of the
+cone as the intended shift is now primary, as recorded in the linked review.
 
 The additional datum in the present formulation is a target section together
 with a section of the dependent-Hom family after substitution of the chosen
 base arrows. This makes a dependent cell-introduction interface visible.
 
-## Categorical Π, Join And Suspension Algebras — Latest Clarification
+## Categorical Π, Join And Suspension Algebras — 2026-09-19 Clarification
 
 Ordinary Hom is the appropriate first interface in the revised signatures.
 The family a↦Hom(north,inclusion(a)) has dependent values because its endpoint
@@ -857,7 +866,11 @@ reviewed in full. No claim of literature exhaustiveness is made.
 
 ## Feasibility And The First Useful Milestone
 
-The latest clarification selects a smaller immediate boundary: qualify the
+The current cone-based continuation is in the
+[marked-fibre review](EMDASH_CONE_SPECTRA_AND_MARKED_FIBRES_REVIEW.md).
+The following recommendation records the earlier 2026-09-19 boundary.
+
+That clarification selected a smaller immediate boundary: qualify the
 whole Π-section interpretation, its existing join presentation, the
 walking-arrow suspension example, and the reduced pointed algebra interface.
 Categorical prespectrum data can then use the pointed End formulation
