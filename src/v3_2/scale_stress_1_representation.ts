@@ -470,7 +470,7 @@ const sigmaRuntimeRule = () => {
         provenance: source(
             'rule sigma_ind _ $c ' +
                 '(Struct_sigma $x $u) ↪ $c $x $u;',
-            64
+            66
         )
     };
 };
@@ -518,7 +518,7 @@ const piRuntimeRule = () => {
         provenance: source(
             'rule τ (@Pi_grpd $A $B) ' +
                 '↪ Π x : τ $A, τ ($B x);',
-            75
+            77
         )
     };
 };
@@ -687,7 +687,7 @@ const sigmaInductive = () => ({
             '| Struct_sigma [a P] : Π ' +
                 '(sigma_Fst : τ a) (sigma_Snd : τ (P sigma_Fst)), ' +
                 '@τΣ_ a P;',
-            54
+            56
         )
     }],
     generatedSymbols: [generatedIndTauSigma],
@@ -695,7 +695,7 @@ const sigmaInductive = () => ({
     provenance: source(
         'inductive τΣ_ [a : Grpd] ' +
             '(P : τ a → Grpd) : TYPE ≔',
-        54
+        56
     )
 });
 
@@ -746,7 +746,7 @@ const createCoreRepresentation = (): CoreLfModuleSpec =>
                 modifiers: publicModifiers('ordinary'),
                 provenance: source(
                     'symbol sigma_ind\n  [A : Grpd]',
-                    63
+                    65
                 )
             },
             {
@@ -757,7 +757,7 @@ const createCoreRepresentation = (): CoreLfModuleSpec =>
                 modifiers: publicModifiers('constant'),
                 provenance: source(
                     'constant symbol Pi_grpd\n  [A : Grpd]',
-                    74
+                    76
                 )
             }
         ],

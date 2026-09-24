@@ -178,7 +178,7 @@ const natInductive = () => ({
                 tag: 'global' as const,
                 symbol: nat
             },
-            provenance: source('| zero : nat', 38)
+            provenance: source('| zero : nat', 40)
         },
         {
             order: 1,
@@ -195,12 +195,12 @@ const natInductive = () => ({
                 tag: 'global' as const,
                 symbol: nat
             },
-            provenance: source('| succ : nat → nat;', 38)
+            provenance: source('| succ : nat → nat;', 40)
         }
     ],
     generatedSymbols: [generatedIndNat],
     modifiers: publicModifiers('injective'),
-    provenance: source('inductive nat : TYPE ≔', 38)
+    provenance: source('inductive nat : TYPE ≔', 40)
 });
 
 const natDecodeRule = () => {
@@ -217,7 +217,7 @@ const natDecodeRule = () => {
             value: builder.global(natGrpd)
         }])),
         right: builder.template(builder.global(nat)),
-        provenance: source('rule τ Nat_grpd ↪ nat;', 40)
+        provenance: source('rule τ Nat_grpd ↪ nat;', 42)
     };
 };
 
@@ -320,7 +320,7 @@ const createCoreQualificationModule = (): CoreLfModuleSpec =>
                 modifiers: publicModifiers('constant'),
                 provenance: source(
                     'constant symbol Nat_grpd : Grpd;',
-                    39
+                    41
                 )
             },
             {

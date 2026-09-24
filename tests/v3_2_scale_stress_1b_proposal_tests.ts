@@ -147,6 +147,15 @@ describe('TypeScript v3.2 SCALE-STRESS-1B semantic proposal', () => {
         );
         assert.deepEqual(proposal.core.module.proofRules, []);
         assert.deepEqual(proposal.nat.module.proofRules, []);
+        for (const block of proposal.core.module.inductives) {
+            for (const constructor of block.constructors) {
+                assert.equal(
+                    constructor.provenance.canonicalCommandOrdinal,
+                    block.provenance.canonicalCommandOrdinal,
+                    'Constructor evidence belongs to its acquired inductive command'
+                );
+            }
+        }
     });
 
     it('compiles the proposed profile only as isolated evidence', () => {

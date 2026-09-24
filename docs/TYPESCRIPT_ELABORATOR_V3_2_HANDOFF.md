@@ -9,10 +9,10 @@ is preserved in [handoff history](history/TYPESCRIPT_ELABORATOR_HANDOFF_THROUGH_
 The [repository consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
 records the completed bounded maintenance. The [DevOps guide](DEVOPS.md) owns commands
 and gate selection. The [repair ledger](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
-owns the latest source requalification and matcher/reference-cache results:
-focused checks passed; the complete TypeScript aggregate remains incomplete.
-The user has deferred full runs. Earlier aggregate counts are dated receipts,
-not today's whole-repository qualification.
+owns the latest source requalification and matcher/reference-cache results.
+The user's full TypeScript run completed with five failures; their correction
+and integration checks are recorded in the consolidation ledger. Earlier
+aggregate counts are dated receipts, not today's whole-repository qualification.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)
@@ -49,7 +49,16 @@ per-term production dependency of the graduated TypeScript profiles.
 Qualification is profile-specific. The [MVP manifest](../src/v3_2/manifest.ts),
 [release policy](../src/v3_2/release.ts) and
 [directed graduation](../src/v3_2/directed_graduation.ts) record exact trust
-boundaries. Newer transferred/authoring profiles carry their own contracts and
+boundaries. RELEASE-READY is complete for the exact deployed
+`emdash-v3.2-mvp-1` profile: 16 owners and three runtime rules. That historical
+release does not certify today's complete contributor suite. Lambdapi retains
+acceptance authority for five selected semantic-boundary changes: selected
+owner signatures, runtime-rule shape/authority, profile promotion of an owner
+or rule, termination/confluence/subject-reduction claims, and shared-corpus
+backend bindings. General confluence remains withheld, as does standalone
+TypeScript subject reduction.
+
+Newer transferred/authoring profiles carry their own contracts and
 consumers; no historical graduation qualifies every later Lambdapi owner.
 General metatheory and closed CAS/provider semantics are not inferred from
 passing concrete examples. Preserve source-pin failures as review signals.
@@ -112,8 +121,11 @@ or a Markdown type filter when the history should stay excluded.
 
 Documentation changes receive document checks. Behavior changes receive the
 nearest focused tests plus applicable typecheck/lint and their owning gates.
-Shared-behavior integration normally needs the recorded aggregate; the current
-user waiver defers it and must remain visible. Do not equate focused success
+This handoff also has executable consumers in `v3_2_release_policy_tests.ts`
+and `v3_2_release_completion_tests.ts` under `tests/`; run those focused suites
+when changing its trust/release statements.
+Shared-behavior integration needs its recorded aggregate qualification;
+explicit user waivers must remain visible. Do not equate focused success
 with a full run. Formal changes require owner-position/negative consumers,
 warning review and the nested bounded-check SOP. The gate matrix in DEVOPS is
 the operational reference, and receipts do not promote mathematical status.

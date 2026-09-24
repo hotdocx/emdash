@@ -3,6 +3,8 @@
  */
 
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
@@ -238,12 +240,23 @@ describe('PATHOUT-LIBRARY-INTERNALIZED-1D proposal', () => {
             );
         });
 
-    it('pins active authority positions and the staged dependency order',
+    it('pins historical authority positions and the staged dependency order',
         () => {
-            const source = readFileSync(
-                resolve(repositoryRoot, 'emdash2/emdash3_2.lp'),
-                'utf8'
-            ).split('\n');
+            // These positions belong to the proposal's immutable audit parent.
+            // The trust-boundary audit separately checks current-source retention.
+            const sourceText = execFileSync('git', [
+                'show',
+                'a05493b49a1ef49c18ffe921725dd1ce56f21647:' +
+                    CORE_PATHOUT_TRUST_BOUNDARY_0A_AUDIT.authority.source.path
+            ], {
+                cwd: repositoryRoot, encoding: 'utf8', timeout: 5_000,
+                maxBuffer: 8 * 1024 * 1024
+            });
+            assert.equal(
+                'sha256:' + createHash('sha256').update(sourceText).digest('hex'),
+                CORE_PATHIND_INTERNALIZED_1D_PROPOSAL.parent.authoritySourceSha256
+            );
+            const source = sourceText.split('\n');
             const implementation =
                 CORE_PATHIND_INTERNALIZED_1D_PROPOSAL.exactImplementation;
             for (const declaration of implementation.trustedDeclarations) {

@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: complete within selected maintenance scope; aggregate qualification deferred
+Status: post-completion validation repair and main integration in progress
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -23,19 +23,22 @@ review documents from main without absorbing unrelated work. Preserve the
 originals until their contents are verified in a checkpoint, then remove only
 those verified duplicate working changes from main.
 
-The earlier instruction **not to run a full aggregate remains in force**.
-Do not run `check:ts`, `check:all`, full formal CI, or a full-duration timing
-calibration. Focused validation is permitted. If runner behavior changes,
-record the waived aggregate as incomplete rather than green. The later
-profile/laxness integration and Op/variance repairs are explicitly separate
-future work, as the user reiterated on 2026-09-24.
+The initial maintenance pass ran no full aggregate, at the user's direction.
+The user subsequently ran `npm run check:all`, supplied its five TypeScript
+failures and authorized corrections, local checkpoints and fast-forwarding
+main. This integration follow-up first reproduces/fixes the affected suites,
+then runs one complete TypeScript gate after focused checks are green. Reuse
+evidence for unchanged boundaries; do not launch unrelated formal/print
+aggregates. The later profile/laxness integration and Op/variance repairs remain
+explicitly separate future work.
 
 This goal does not select mathematical changes, diagnostic/nucleus splitting,
 book regeneration, toolchain/package upgrades, hosted operations, benchmark
 canary retries or a general orchestration/search system. Local checkpoints
-do not authorize pushing, merging to main, publishing, PR creation, history
+do not authorize pushing, publishing, PR creation, history
 rewriting, branch deletion or worktree removal. Inspect siblings read-only;
-their integrations remain separately scoped.
+their integrations remain separately scoped. The latest user request separately
+authorizes only a fast-forward of main after the correction/integration checks.
 
 ## Bounded work and acceptance
 
@@ -46,6 +49,8 @@ their integrations remain separately scoped.
 | 2. References and template lifecycle | Complete | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
 | 3. Minimal test observability | Complete within focused qualification | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
 | 4. Final review and handoff | Complete | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded; final documentation checkpoint leaves the worktree clean |
+| 5. User-run failure repair | Focused qualification complete | Reproduce five failures, restore required concise release guidance, align SCALE provenance with reviewed canonical commands and test frozen PathInd positions at their exact historical source; focused checks and checkpoint |
+| 6. TypeScript integration and main | In progress | One complete corrected TypeScript gate, relevant bounded conformance/tooling checks, synchronized evidence, clean exact staged diff and authorized fast-forward main; no push |
 
 Keep one bounded row in progress. Split a row only if a concrete dependency
 requires it; do not grow this table into an additional project-status database.
@@ -187,7 +192,42 @@ own scope and acceptance criteria. The accepted future-design reference and
 template reopening conditions remain in the linked review; they are not an
 automatic continuation queue for this completed goal.
 
-## Persistent goal prompt
+## User-run validation follow-up
+
+The user's run at `58451168` completed the TypeScript test phase in
+2,407.575 seconds (about 40 minutes): 2,923 tests, 474 suites, 2,833 passes,
+five failures, 85 skips and no cancellations. The five failures are two
+handoff/release contract assertions, two SCALE representation/proposal ordinal
+assertions and one historical PathInd proposal position assertion. Since
+`check:all` chains its stages with `&&`, this was not a completed conformance or
+formal CI run. It is one full-duration observation, not a general timing SLA.
+
+A bounded serial reproduction of the five owning test files reports the same
+five failures (34 tests: 28 pass, five fail, one skip; 63.03 seconds). Source
+and all worktrees were clean before this follow-up; main remains an ancestor.
+The two handoff omissions were introduced by the navigation cleanup. SCALE's
+acquisition contracts already contain the reviewed new ordinals, but the
+corresponding IR provenance still used the old ones. PathInd's immutable
+proposal must retain its historical source identity instead of relabeling it
+as a current-source proposal.
+
+Corrections restore the exact MVP profile, completion status and retained
+Lambdapi/metatheory boundaries in a concise handoff. All five owning suites
+then pass (34 tests: 33 passes, one opt-in skip; 51.14 seconds). A further
+focused acquisition/SCALE/audit run enables the live oracle controls and passes
+all 31 tests with no skips in 40.67 seconds, including the new constructor
+provenance checks. Its bounded positive and negative Lambdapi consumers pass.
+A fresh serial 2 GiB/60s canonical export exactly matches the previously
+reviewed source/export hashes `f7206b8e…` / `594bbfa4…`; none is changed to
+silence a failure. Historical PathInd source is explicitly SHA-256 checked.
+Root typecheck, changed-owner lint, workspace and document hygiene pass.
+The correction logs are under ignored `emdash2/tmp/probes/consolidation-repair-*`.
+
+## Original persistent goal prompt
+
+This prompt records the completed maintenance scope. The later user-run
+validation/integration authorization above supersedes its no-aggregate and
+no-main-integration boundary for rows 5–6 only.
 
 Complete the bounded repository/context consolidation governed by
 `docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md` in

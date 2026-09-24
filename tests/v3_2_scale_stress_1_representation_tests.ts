@@ -154,15 +154,20 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
                 )
             );
             module.inductives.forEach(block =>
-                block.constructors.forEach(constructor =>
+                block.constructors.forEach(constructor => {
+                    assert.equal(
+                        constructor.provenance.canonicalCommandOrdinal,
+                        block.provenance.canonicalCommandOrdinal,
+                        'Constructor evidence belongs to its acquired inductive command'
+                    );
                     assert.equal(
                         authority.includes(
                             constructor.provenance.sourceFragment
                         ),
                         true,
                         constructor.provenance.sourceFragment
-                    )
-                )
+                    );
+                })
             );
         });
 

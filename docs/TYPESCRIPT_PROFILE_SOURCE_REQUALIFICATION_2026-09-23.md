@@ -218,3 +218,14 @@ book, diagram or generated publication file is edited.
 
 Validation results belong to the active repair ledger. Historical milestone
 reports and immutable release decisions retain their original measurements.
+
+Follow-up on 2026-09-24: the user's completed TypeScript run exposed that the
+SCALE-1A representation and SCALE-1B proposal still carried old ordinal metadata
+despite their acquisition contracts already using the relocations above. Their
+declaration/rule/inductive/constructor provenance now uses those same reviewed
+positions. Source/export/command hashes and semantic terms/rules are unchanged;
+constructor evidence is checked against its parent command. The frozen
+internalized PathInd proposal test now uses the same hash-checked historical
+source as its audit parent, preserving original positions and decisions.
+The [consolidation follow-up](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md#user-run-validation-follow-up)
+records reproduction, corrected qualification and main integration.
