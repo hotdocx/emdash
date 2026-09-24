@@ -171,6 +171,11 @@ before the change cannot acquire the new hook set retroactively.
 
 ## Commands
 
+For literature or checker-source research, start with the
+[literature workflow](emdash2/research/literature.md) and its
+[local resource index](emdash2/research/LOCAL_RESOURCES.md). These route to
+existing reading notes and optional host-local copies; read only relevant sources.
+
 Repository DevOps entry points and the exact gate matrix are documented in
 [`docs/DEVOPS.md`](docs/DEVOPS.md). Use `./scripts/emdash dev doctor` for local
 prerequisites and `./scripts/emdash dev check --explain` to inspect selected

@@ -1,6 +1,7 @@
 # EMDASH Literature Workflow
 
 Date: 2026-06-16
+Navigation reviewed: 2026-09-23
 
 Purpose: keep literature discovery useful without letting external papers
 replace the current v3.2 design authority.
@@ -8,14 +9,22 @@ replace the current v3.2 design authority.
 ## Source Priority
 
 Use papers and books to clarify mathematics, terminology, examples, and
-reviewer-facing milestones. Use the active implementation and current reports
-for project-local architecture:
+reviewer-facing milestones. Follow the authority order in
+[the formal SOP](../AGENTS.md#authority-and-document-roles) for project-local
+architecture; external references do not override active owners, profile
+qualifications or retained counterexamples.
 
-1. `emdash3_2.lp`
-2. `emdash3_2_checks.lp`
-3. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
-4. `reports/EMDASH_FOUNDATIONS.md`
-5. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+Start with the [local resource index](LOCAL_RESOURCES.md) before downloading
+another copy. It routes to the existing homological/spectral reading inventory
+and book provenance records. Availability, substantive reading, successful
+external builds and transferred emdash results are distinct claims.
+
+The existing [arXiv helper](../scripts/arxiv_search.py) searches metadata and
+caches API responses under `.cache/arxiv/`. It does not download a PDF library
+or manage citations. The commands below run from `emdash2/`. For a retained
+local PDF, record its source/version and reading coverage in the relevant
+existing review; use extracted text for search and the PDF/source for exact
+formulas. Keep the book's bibliography and adaptation ledger with the book.
 
 ## arXiv / ar5iv SOP
 

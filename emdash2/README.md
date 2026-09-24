@@ -108,6 +108,9 @@ keeps a general profile-sensitive upgrade separate.
 - `reports/INDEX.md` routes to living plans and dated decision records.
 - `book/` is the reader-facing exposition; its evidence register points back
   to active declarations and checks.
+- [Literature workflow](research/literature.md) and the
+  [local resource index](research/LOCAL_RESOURCES.md) locate existing papers,
+  source checkouts and reading notes without making them build dependencies.
 
 Use `rg` from the import root or the current reports to locate a declaration.
 The generated check catalog is useful for mechanical coverage, but it is not
