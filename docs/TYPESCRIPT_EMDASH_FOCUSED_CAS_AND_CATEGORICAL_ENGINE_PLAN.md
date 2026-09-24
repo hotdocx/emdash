@@ -4,6 +4,12 @@ Date: 2026-08-30
 
 Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
+Selected usability continuation (2026-09-24): the
+[shared-polynomial workbench plan](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md)
+reuses these completed computation contracts for one external backend, derived
+view and explicit formal goal. It owns that consumer's current scope and gates;
+the implementation history below retains its original qualification.
+
 Status: living architecture and implementation ledger; computation-first and
 CAP-aware design reviewed; dedicated implementation branch/worktree created;
 `CAS-CONTRACT-1A` through `CAS-MATRIX-4A` implemented and

@@ -4,6 +4,12 @@ Date: 2026-08-31
 
 Plan-ID: `TS-EMDASH-PROOF-CAS-DELEGATION`
 
+Selected usability continuation (2026-09-24): the
+[shared-polynomial workbench plan](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md)
+reuses this goal/realization/adoption boundary. It must preserve the distinction
+between checked arithmetic, checked proof reconstruction and explicit trusted
+assumptions, retaining an open goal when the chosen reconstruction is unavailable.
+
 Status: implementation complete on the dedicated branch/worktree; every
 active ledger row is proportional-green, with the one required shared
 TypeScript aggregate executed and its unrelated baseline pin failures

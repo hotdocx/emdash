@@ -688,6 +688,10 @@ shared home-directory scan belongs in the first consolidation tranche.
 
 ### Ideal design and the cost of changing today's implementation
 
+The [OSCAR/algebra-workbench review](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md)
+develops the subsequent computation/proof/visualization framing and the bounded
+mathematical role of the goal assistant, using the existing CAS/delegation owners.
+
 Record this counterfactual once, then revisit it only when a named limitation
 blocks a real consumer. It is a design reference, not a replacement roadmap.
 
