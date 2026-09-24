@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: active; current-guidance tranche next
+Status: active; reference and template-lifecycle tranche next
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -42,7 +42,7 @@ their integrations remain separately scoped.
 | Row | State | Deliverable and acceptance |
 | --- | --- | --- |
 | 0. Preserve the accepted review | Complete | Isolated worktree, bootstrapped dependencies, resource locator and reconciled original-stage status; exact staged docs/links pass; source worktree preserved |
-| 1. Current guidance | Ready | Short elaborator handoff and report index, preserved historical receipts and lifecycle registration, concise AGENTS routing with mandatory mathematical/resource rules intact; exact links, anchors and report checks pass |
+| 1. Current guidance | Complete | Short elaborator handoff and report index, preserved historical receipts and lifecycle registration, concise AGENTS routing with mandatory mathematical/resource rules intact; exact links, anchors and report checks pass |
 | 2. References and template lifecycle | Ready after 1 | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
 | 3. Minimal test observability | Ready after 1 | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
 | 4. Final review and handoff | Pending | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded, worktree is clean |
@@ -118,8 +118,19 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   Node 24.11.1; all 373 packages came from the shared store. The optional pnpm
   update-notice request failed, but install and workspace verification succeeded.
   Document hygiene and exact staged review qualify this documentation checkpoint.
-  Main's duplicate working changes will be cleared only after comparing them
-  with the committed copies; unrelated changes would be preserved.
+  Checkpoint `8ec1a8e9` preserves the accepted review and this plan. Main's
+  six duplicate changes were compared with that commit before clearing them;
+  main is clean at the unchanged baseline.
+- Row 1: the handoff is 116 lines (was 3,015); the report index is 127 (was
+  1,351); nested AGENTS is 547 (was 749). History snapshots retain the original
+  handoff/index content exactly after reversible relative-link rebasing.
+  Mandatory editing/rule/resource/validation/recovery sections from
+  `Starting A v3.2 Task` onward are byte-identical. Removed owner/status
+  narration is retained separately; consumer safeguards remain in the SOP.
+  Lifecycle membership is unchanged (8 active, 19 completed, 1 deferred,
+  1 superseded). Document checks pass 257 local links and 8 heading links.
+  A narrow `.rgignore` excludes only extracted history and assembled book
+  Markdown; default source discovery and explicit history retrieval both pass.
 
 ## Persistent goal prompt
 

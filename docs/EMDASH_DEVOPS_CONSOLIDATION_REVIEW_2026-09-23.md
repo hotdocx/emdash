@@ -7,6 +7,9 @@ The [broader reassessment](#broader-repository-and-ecosystem-reassessment)
 below reviews the post-implementation state at `2248ae2e`, sibling projects,
 local research resources, context noise and the longer-term design. The
 original stages are only partly complete. No full aggregate is selected now.
+The user accepted that reassessment on 2026-09-24; the
+[repository consolidation plan](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
+now owns its bounded implementation and checkpoints.
 
 Continuation: the user subsequently authorized implementation. The
 [active ledger](EMDASH_DEVOPS_CONSOLIDATION_IMPLEMENTATION_PLAN.md) records

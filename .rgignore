@@ -1,0 +1,5 @@
+# Dated snapshots and assembled prose duplicate current source-owned guidance.
+# Retrieve deliberately: rg --no-ignore PATTERN docs/history emdash2/reports/history
+/docs/history/
+/emdash2/reports/history/
+/docs/emdash-book.md

@@ -100,23 +100,21 @@ The complete root aggregate is not a routine pre-edit baseline:
 - carry forward recent green aggregate evidence for unchanged boundaries
   rather than rerunning a multi-minute command for reassurance.
 
-Do not begin the redesign by deleting all old category nodes. First inventory
-which generic mechanisms and tests are reusable, define a v3.2 target IR and
-trusted boundary, and select one vertical compilation slice. Deletions or
-renames should follow that recorded design and keep the baseline reviewable.
-This is a sequencing rule, not a compatibility requirement: the intended end
-state deletes and replaces the stale category-specific TypeScript layer while
-porting or cleanly reimplementing only independently useful generic
-mechanisms. Do not recreate the retired D0/D1 compatibility API in TypeScript.
+The category-specific feasibility layer has been retired. For a new structural
+change, inventory current generic mechanisms and consumers, state the explicit
+Core/trusted boundary and select one vertical slice before deleting or renaming
+owners. Preserve useful generic invariants; do not restore the retired D0/D1
+compatibility API.
 
 ## Persistent Goals And Git Experimentation
 
 Long-running or mostly unsupervised `/goal` work must use an active living plan
 and the workflow in
-`docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. The TypeScript elaborator's
-current ledger and ready-to-use launch prompt are in
-`docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`; the handoff
-routes to the reviewed continuation and completed master-plan history.
+`docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. The current repository maintenance
+goal is governed by [the consolidation plan](docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md).
+For TypeScript work, the [handoff](docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
+routes to qualified profiles and current/deferred task plans; the scale ledger
+is retained architecture history, not authorization to resume bulk transfer.
 
 A persistent goal does not itself authorize commits, branches, worktrees,
 pushes, merges, history rewriting, publication, or cleanup. Those mutations
