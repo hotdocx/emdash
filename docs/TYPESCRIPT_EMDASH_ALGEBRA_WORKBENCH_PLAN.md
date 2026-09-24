@@ -2,7 +2,7 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: complete at focused qualification; full TypeScript gate waived and cancelled
+Status: complete at focused qualification; main integration authorized and recorded; aggregate waiver retained
 Baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
@@ -30,15 +30,18 @@ The user's 2026-09-24 continuation accepts the consolidated recommendations,
 authorizes a dedicated local branch/worktree, implementation, validated local
 checkpoint commits and a persistent goal delegated to this living plan.
 The two accepted review changes were copied exactly from main; their original
-working copies remain untouched. No push, main integration, publication,
-history rewriting, branch deletion or worktree removal is authorized here.
+working copies were preserved through the implementation goal. The original
+authorization excluded main integration; the separate follow-up below authorizes
+a fast-forward and removal of verified duplicate review changes. No push,
+publication, history rewriting, branch deletion or worktree removal is authorized.
 
 Validation update (2026-09-24): the user explicitly directs that the full
 TypeScript gate and other repository-wide aggregates be skipped for now.
 This supersedes this goal's original pre-checkpoint aggregate requirement.
 The selected implementation is checkpointed on its completed focused checks;
 the cancelled aggregate remains incomplete evidence, not a pass. This waiver
-does not promote any mathematical profile or authorize integration into main.
+does not promote any mathematical profile. Main integration has its separate
+subsequent authorization below.
 
 Recovery evidence:
 
@@ -316,9 +319,11 @@ Source changes invalidate prior results; altered parents/witnesses and
 unsupported coefficient interpretations are rejected. Saved source/profile
 bytes have been independently checked against their recorded hashes.
 
-Formal proof reconstruction remains the concrete deferred obligation permitted
-by this plan's stopping rule: transfer/use the relevant existing ring-law proof
-interface and construct a proof plan, then replay it against the exact goal.
+Checked proof reconstruction is optional and was not selected for this
+consumer. This is consistent with the computation-first CAS/delegation design;
+it is not a prerequisite for typed internal data or explicit opaque declaration
+adoption. If reconstruction of this exact equality is later selected, it needs
+the relevant existing ring-law proof interface and a replayable proof plan.
 No completed theorem, general rational-field interpretation, unrestricted
 higher profile, certified plot topology or complete negative certificate is
 claimed. A native module/homology consumer remains later work.
@@ -326,11 +331,51 @@ claimed. A native module/homology consumer remains later work.
 The local implementation checkpoint uses the user's explicit aggregate waiver.
 The incomplete TypeScript aggregate and the unrelated gluing-owner allocation
 failure stay visible above. Full formal CI, package/release, hosted and broad
-integration qualification are not claimed. The original main worktree and
-its two accepted review changes are preserved; no push, merge, publication,
-history rewrite or worktree removal is part of completion.
+integration qualification are not claimed. The original goal completed at
+`75b3ecdb` without changing main. The subsequent fast-forward is recorded below;
+no push, publication, history rewrite or worktree removal was performed.
+
+## Main integration and clarification follow-up
+
+On 2026-09-24 the user requested fast-forwarding main and clearing its temporary
+uncommitted review changes. Main was verified at baseline `df061c52`, with no
+staged work and exactly those two pending paths. The DevOps review matched the
+branch byte-for-byte; the original OSCAR review was recovered exactly from the
+committed version by removing its added continuation paragraph and restoring
+the earlier status line. No review body or unique evidence was discarded.
+
+Exact original files and SHA-256 hashes are retained under main's ignored
+`emdash2/tmp/probes/workbench-main-integration-20260924T231925Z/`. The verified
+duplicate working changes were cleared and main fast-forwarded to `75b3ecdb`,
+leaving it clean. This same follow-up authorizes the further fast-forward of
+the clarification/regression checkpoint; the goal branch/worktree remain.
+The aggregate waiver persists and no aggregate is rerun for this integration.
+
+The user also clarified that computational/internal integration is primary and
+CAS certification is optional. The
+[OSCAR review follow-up](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md#follow-up-integration-mechanisms-and-optional-certification)
+now records the exact current boundary. The existing
+`adoptAlgebraFormalTrustedComputation` already accepts this example's native
+delegation result and produces a typed, body-free opaque declaration with a
+trusted-assumption artifact and ordinary goal patch. A new focused regression
+verifies that route and leaves the original environment/document unchanged.
+The workbench suite passes seven tests with one unchanged opt-in conformance
+case skipped; its prior positive/negative Lambdapi evidence remains applicable.
+Changed-test lint passes. No runtime or mathematical source changed.
+
+The default demo still displays an open goal; it does not automatically assume
+the claim. Its formal delegation currently uses native CAS output. Directly
+feeding the returned Singular coefficient vector through the formal data path,
+and exposing an explicit adoption control in the example, remain consumer
+wiring that does not require proof reconstruction first. The broader OSCAR
+mechanism-parity assessment is plausible architecture with bounded evidence,
+not an established full-parity result. The review lists the untested mechanisms;
+this follow-up does not launch a new implementation goal.
 
 ## Persistent goal prompt
+
+This is the completed original goal prompt. The later main-integration
+authorization above supersedes its no-main-merge restriction for this follow-up.
 
 Complete the bounded shared-polynomial algebra-workbench consumer governed by
 `docs/TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md` in

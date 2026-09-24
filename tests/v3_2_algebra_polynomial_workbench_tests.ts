@@ -20,7 +20,9 @@ import { AlgebraOracleTransport } from '../src/v3_2/algebra_oracle';
 import { createCoreProofArtifactFingerprint } from '../src/v3_2/proof_document';
 import { coreProofPlanExact } from '../src/v3_2/proof_plan';
 import { kernelFree, provenance } from '../src/v3_2/kernel';
-import { adoptAlgebraFormalCheckedPlan } from '../src/v3_2/algebra_formal_adoption';
+import {
+    adoptAlgebraFormalCheckedPlan, adoptAlgebraFormalTrustedComputation
+} from '../src/v3_2/algebra_formal_adoption';
 import { checkLambdapiProbe } from '../src/v3_2/probe';
 import { serializeKernelExpression } from '../src/v3_2/lambdapi';
 import { AFFINE_FORMAL_ZARISKI_SIGNATURE_BINDINGS } from '../src/v3_2/algebra_formal_zariski_signatures';
@@ -67,6 +69,30 @@ describe('shared polynomial workbench', () => {
         assert.match(html, /No computation assumption has been adopted/u);
         assert.match(html, /Singular witness checked/u);
         assert.doesNotMatch(html, /<script/iu);
+    });
+
+    it('supports explicit opaque declaration adoption without proof reconstruction', async () => {
+        const workspace = createAlgebraPolynomialWorkbenchExample();
+        const formal = await prepareAlgebraPolynomialWorkbenchGoal(workspace, fingerprint);
+        const assumptionName = 'assumed_workbench_x_cubed_equals_one';
+        const adopted = adoptAlgebraFormalTrustedComputation({
+            result: formal.delegated,
+            assumptionName,
+            decision: {
+                kind: 'trust-exact-algebra-computation',
+                evidence: 'Test-only explicit adoption of the selected native computation and ideal interpretation'
+            }
+        });
+        assert.equal(adopted.assumption.body, undefined);
+        assert.equal(adopted.assumption.transparency, 'opaque');
+        assert.equal(adopted.artifact.assumptionTypeCore, formal.goal.targetCore);
+        assert.equal(adopted.artifact.kind, 'trusted-assumption');
+        assert.equal(adopted.authority, 'checked-relative-to-explicit-assumption');
+        assert.equal(adopted.execution.state.status, 'complete');
+        assert.ok(adopted.environment.lookup(assumptionName));
+        assert.equal(formal.document.environment.lookup(assumptionName), undefined);
+        assert.equal(formal.document.plan.tag, 'hole');
+        assert.equal(formal.goal.sourceArtifact.state.status, 'incomplete');
     });
 
     it('invalidates changed targets even when their membership difference stays the same', async () => {

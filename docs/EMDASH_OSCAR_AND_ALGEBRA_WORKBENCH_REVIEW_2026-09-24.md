@@ -196,3 +196,85 @@ Review evidence: current source/contracts and selected existing ledgers were
 read, alongside the primary documentation and curve paper linked above.
 No OSCAR installation, external backend run, benchmark, code change or aggregate
 check was performed. This is a design reference, not implementation evidence.
+
+## Follow-up: integration mechanisms and optional certification
+
+Date: 2026-09-24. Implementation reference: `75b3ecdb`; the
+[workbench plan](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md) records qualification
+and the user's aggregate waiver. The original review evidence above remains
+dated; the subsequent consumer executes Singular and renders a shared-object view.
+
+The computation-first design remains the authority. Producing useful internal
+objects, operations and constructions does not require proving every CAS
+algorithm. Checked proof reconstruction is an optional adoption mode in the
+[existing delegation plan](TYPESCRIPT_EMDASH_PROOF_CAS_DELEGATION_PLAN.md#adoption-modes),
+alongside observing results, reifying typed data, and explicitly adopting an
+opaque claim. The previous completion wording about deferred reconstruction
+must not imply that basic CAS-to-declaration integration is missing or that
+certification is the next mandatory product step.
+
+| Capability | Existing mechanism and this consumer's status |
+| --- | --- |
+| Computation and reusable mathematical data | Native ideal operations and the Singular adapter consume the same parent-aware polynomial objects; returned coefficients are actual polynomial values |
+| Typed internal expressions and formal statements | The existing realization/delegation route reifies coefficients and the exact equality into Core and checks their types |
+| Opaque declaration without a proof body | `adoptAlgebraFormalTrustedComputation` already adds a typed opaque declaration after an explicit caller decision, records its trusted origin, and returns an ordinary goal patch/reference |
+| Checked proof reconstruction | Separate optional route; no reconstruction plan is supplied by this ideal adapter |
+| Complete external-output-to-formal-declaration example | Still narrower than the existing general mechanisms: this demo's formal helper executes the native CAS request; Singular's returned coefficient vector is independently checked and displayed, but is not itself fed into that formal delegation request |
+
+A focused regression now applies the existing opaque-adoption function to this
+exact `x³ = 1` goal. It verifies the exact declaration type, absent body, opaque
+status, retained trusted-assumption artifact and completion relative to the new
+assumption. The original environment and open proof document remain unchanged.
+This tests an explicit in-memory caller action; it does not silently add an
+assumption to the default demo or to the mathematical library.
+
+Thus the demo's missing explicit adoption control, and routing the external
+coefficient data through the selected reifier/delegation contract, are consumer
+integration work. They are not waiting for a new proof-checking foundation or
+a verified Gröbner algorithm. For new object families, their mathematical
+realization and interpretation contracts still need to be supplied. Whole
+internal operations remain the preferred interface; the
+[native homology audit](TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md)
+already demonstrates richer whole constructions under explicit model contracts.
+
+### What the OSCAR analogy now supports
+
+The engineering assessment is that comparable integration functionality is
+architecturally plausible, with a concrete route through TypeScript authoring,
+runtime parents, operation contracts, explicit mathematical maps, backend
+adapters and selected internal realizations. The successful polynomial consumer
+is evidence for that route. It is not an established result that all OSCAR
+integration mechanisms already have qualified counterparts, or that full
+parity across them is assured.
+
+OSCAR's own integration uses explicit conversion maps for supported rings and
+fields, with recorded caching and representation differences; Singular.jl also
+documents interpreter limitations. These are useful standards for defining
+specific interoperability contracts, rather than expecting automatic conversion
+of every mathematical object.
+[GAP integration](https://docs.oscar-system.org/v1/DeveloperDocumentation/gap_integration/),
+[Singular interpreter boundary](https://oscar-system.github.io/Singular.jl/latest/caller/).
+Julia's native multiple dispatch is another concrete host-language facility;
+an analogous TypeScript API would need runtime operation/capability selection
+and appropriate backend execution instead of obtaining those semantics from
+static annotations.
+[Julia methods](https://docs.julialang.org/en/v1/manual/methods/).
+
+The following mechanism-level questions remain beyond this experiment:
+
+- bidirectional exchange of richer rings, fields, modules, maps and whole
+  constructions, including explicit changes of presentation;
+- composition across two genuinely different external engines using retained
+  mathematical identity and maps;
+- persistent foreign-object lifetime, caching and serialization with shared
+  parents, session/revision changes and failures;
+- callback/asynchronous execution and extension contracts where needed; and
+- measured transport, batching and native/WASM/service costs on real workloads.
+
+These are feasibility questions to test with selected consumers, not a newly
+selected infrastructure programme. A useful next experiment would consume an
+external result as typed internal data or an explicitly assumed declaration,
+then reuse it in a second mathematical operation, preferably through an existing
+module/homology interface. Optional proof reconstruction can be added for a
+specific mathematical need. Algorithm breadth, language ergonomics, performance
+and formal assurance remain separate from integration-mechanism parity.
