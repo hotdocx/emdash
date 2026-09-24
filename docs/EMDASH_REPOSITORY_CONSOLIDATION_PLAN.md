@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: active; final review and handoff next
+Status: complete within selected maintenance scope; aggregate qualification deferred
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -45,7 +45,7 @@ their integrations remain separately scoped.
 | 1. Current guidance | Complete | Short elaborator handoff and report index, preserved historical receipts and lifecycle registration, concise AGENTS routing with mandatory mathematical/resource rules intact; exact links, anchors and report checks pass |
 | 2. References and template lifecycle | Complete | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
 | 3. Minimal test observability | Complete within focused qualification | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
-| 4. Final review and handoff | Pending | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded, worktree is clean |
+| 4. Final review and handoff | Complete | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded; final documentation checkpoint leaves the worktree clean |
 
 Keep one bounded row in progress. Split a row only if a concrete dependency
 requires it; do not grow this table into an additional project-status database.
@@ -148,7 +148,7 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   responsive while a test worker is CPU-bound. Preserve the existing Python
   gate deadline/process-group cancellation, test entry point and concurrency.
   No monitoring service, sidecar database or custom runner is needed.
-- Row 3 results: the 54-line reporter emits a 30-second parent heartbeat,
+- Row 3 results: checkpoint `ef8d374d`; the 54-line reporter emits a 30-second parent heartbeat,
   last execution event/age, and slow or unsuccessful completion durations.
   Test membership, concurrency, gate deadlines and exit authority are unchanged.
   `node --test scripts/test-progress.test.mjs` passes three controlled cases
@@ -162,6 +162,30 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   Root typecheck, changed-script ESLint, workspace and document checks pass.
   Reporter regression tests are wired into existing `ci-tooling`. No aggregate
   or mathematical source check is claimed; full-runtime calibration remains open.
+- Row 4: final baseline-to-branch document audit passes 299 local links across
+  14 changed Markdown files, 18 heading links, fence/whitespace checks and
+  active-reference lint. Lifecycle membership and mandatory formal SOP sections
+  remain intact; scoped current search and explicit history recovery work.
+  Mathematical/TypeScript source, root TypeScript tests, book/renderer source,
+  lockfile and toolchain are unchanged. All 64 registered worktrees were
+  inspected; only this final goal-owned documentation slice was dirty. Main is
+  clean at baseline; the sibling CloserFans change remains untouched.
+
+## Completion boundary
+
+The selected maintenance rows are complete and locally checkpointed. The final
+documentation checkpoint synchronizes their status; preceding implementation
+checkpoints are `8ec1a8e9`, `7bb3277f`, `4fc302a4` and `ef8d374d`.
+The dedicated branch/worktree remain for review. No push, main integration,
+publication or worktree removal was performed.
+
+The full TypeScript aggregate, runtime calibration and hosted CI qualification
+remain incomplete/deferred under the user's instruction. This is focused
+maintenance qualification, not a full integration or release claim. Future
+mathematical profile/variance work and any sibling integration require their
+own scope and acceptance criteria. The accepted future-design reference and
+template reopening conditions remain in the linked review; they are not an
+automatic continuation queue for this completed goal.
 
 ## Persistent goal prompt
 

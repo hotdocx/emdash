@@ -12,7 +12,7 @@ Dated “next” statements are not current work authorization.
 - [Current architecture and source owners](REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md).
 - [Foundations](EMDASH_FOUNDATIONS.md) and [canonical syntax](REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md).
 - [TypeScript entry point](../../docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md) and [DevOps commands](../../docs/DEVOPS.md).
-- [Current repository consolidation](../../docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md) owns this maintenance goal; [profile/performance repair](../../docs/TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md) owns the incomplete aggregate status.
+- [Repository consolidation](../../docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md) records completed bounded maintenance; [profile/performance repair](../../docs/TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md) owns the incomplete aggregate status.
 - [Native homology final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md), [categorical consolidation audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md) and [universality assembly audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md) record qualified results and supplied contracts.
 - [Foundational reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md) records profile/variance repairs and the unintegrated action-profile branch. Those remain future work; current check success is not a consistency claim.
 - [Native nerves review](../../docs/TYPESCRIPT_EMDASH_NATIVE_NERVES_AND_HOMOLOGY_NOTATION_REVIEW.md) and [dependent-spectra review](../../docs/EMDASH_DEPENDENT_SPECTRA_RESEARCH_REVIEW.md) distinguish implemented owners from proposals.

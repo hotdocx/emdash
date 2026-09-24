@@ -2,6 +2,8 @@
 
 The implementation and validation ledger is the
 [consolidation plan](EMDASH_DEVOPS_CONSOLIDATION_IMPLEMENTATION_PLAN.md).
+The subsequent [repository consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
+records context/reference cleanup and focused test-progress qualification.
 The [review](EMDASH_DEVOPS_CONSOLIDATION_REVIEW_2026-09-23.md) records the design
 and outside comparisons. Root and nested AGENTS instructions continue to govern
 mathematical scope and proportional validation.

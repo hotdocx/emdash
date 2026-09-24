@@ -58,7 +58,10 @@ research outside this tooling implementation.
 The first implementation delivers the operational foundation recommended in the
 review. DEVOPS-3 completes the selected contributor routing, not all of the
 original review's Stage 3: shortening the handoff, consolidating current status
-and separating historical ledgers remain open. The
+and separating historical ledgers were left to the successor
+[repository consolidation](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md), which now
+completes those bounded navigation tasks. Hosted/full-aggregate qualification
+is unchanged. The
 [broader reassessment](EMDASH_DEVOPS_CONSOLIDATION_REVIEW_2026-09-23.md#broader-repository-and-ecosystem-reassessment)
 reconciles every original stage and proposes the next documentation tranche.
 Performance changes, diagnostic/nucleus splitting, a new visual surface

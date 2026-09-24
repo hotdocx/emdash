@@ -110,8 +110,8 @@ compatibility API.
 
 Long-running or mostly unsupervised `/goal` work must use an active living plan
 and the workflow in
-`docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. The current repository maintenance
-goal is governed by [the consolidation plan](docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md).
+`docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Repository consolidation decisions
+and qualification are recorded in [its ledger](docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md).
 For TypeScript work, the [handoff](docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
 routes to qualified profiles and current/deferred task plans; the scale ledger
 is retained architecture history, not authorization to resume bulk transfer.

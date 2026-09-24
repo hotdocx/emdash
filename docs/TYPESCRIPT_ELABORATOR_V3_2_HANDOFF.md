@@ -6,8 +6,8 @@ is preserved in [handoff history](history/TYPESCRIPT_ELABORATOR_HANDOFF_THROUGH_
 
 ## Current Work And Qualification
 
-The [repository consolidation plan](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
-owns the current maintenance goal. The [DevOps guide](DEVOPS.md) owns commands
+The [repository consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
+records the completed bounded maintenance. The [DevOps guide](DEVOPS.md) owns commands
 and gate selection. The [repair ledger](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
 owns the latest source requalification and matcher/reference-cache results:
 focused checks passed; the complete TypeScript aggregate remains incomplete.
