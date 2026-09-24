@@ -2,7 +2,7 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: active; focused implementation qualified, full TypeScript gate running
+Status: complete at focused qualification; full TypeScript gate waived and cancelled
 Baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
@@ -32,6 +32,13 @@ checkpoint commits and a persistent goal delegated to this living plan.
 The two accepted review changes were copied exactly from main; their original
 working copies remain untouched. No push, main integration, publication,
 history rewriting, branch deletion or worktree removal is authorized here.
+
+Validation update (2026-09-24): the user explicitly directs that the full
+TypeScript gate and other repository-wide aggregates be skipped for now.
+This supersedes this goal's original pre-checkpoint aggregate requirement.
+The selected implementation is checkpointed on its completed focused checks;
+the cancelled aggregate remains incomplete evidence, not a pass. This waiver
+does not promote any mathematical profile or authorize integration into main.
 
 Recovery evidence:
 
@@ -92,13 +99,14 @@ spectral work, benchmark canary and sibling integrations remain deferred.
 | --- | --- | --- |
 | 0. Preserve scope and baseline | Complete | Dedicated worktree, bootstrapped links, accepted reviews and routed living plan; document checks and exact staged review; local checkpoint |
 | 1. Audit and select existing seams | Complete; broader baseline limit recorded below | Current source/consumers, formal owners and baseline gates; selected backend exchange, facade/view owner and exact formal target/reconstruction boundary |
-| 2. External positive membership | Implemented; focused-green, awaiting shared checkpoint | Bounded Singular adapter retains original-generator coefficients; native comparison and independent exact identity checking; round-trip, wrong-parent, malformed/altered-result and cancellation/error controls |
-| 3. Shared-object workbench | Implemented; focused-green, awaiting shared checkpoint | Small reusable TypeScript facade and runnable example with a derived curve view and explicit named formal goal; source changes invalidate previous results; no second handwritten plotting formula |
-| 4. Qualification and handoff | In progress | Focused tests, typecheck/lint, actual backend/example run and visual inspection pass; required full TypeScript gate running before synchronized final checkpoint |
+| 2. External positive membership | Complete at focused qualification | Bounded Singular adapter retains original-generator coefficients; native comparison and independent exact identity checking; round-trip, wrong-parent, malformed/altered-result and cancellation/error controls |
+| 3. Shared-object workbench | Complete at focused qualification | Small reusable TypeScript facade and runnable example with a derived curve view and explicit named formal goal; source changes invalidate previous results; no second handwritten plotting formula |
+| 4. Qualification and handoff | Complete under explicit aggregate waiver | Focused tests, typecheck/lint, actual backend/example run, visual inspection and document checks pass; cancelled full-gate receipt retained; synchronized local implementation checkpoint |
 
 Keep one row in progress. Rows 2–3 form one bounded shared-behavior tranche;
-checkpoint their implementation after row 4's full TypeScript gate. Independent
-document/decision checkpoints may precede it. Stop when this consumer answers
+checkpoint their implementation on row 4's focused qualification under the
+user's explicit aggregate waiver. Independent document/decision checkpoints
+may precede it. Stop when this consumer answers
 whether the existing contracts support useful shared-object work. Record a
 concrete deferred formal obligation if reconstruction is unsupported; this
 does not justify broadening the mathematical theory or hiding the open goal.
@@ -120,10 +128,11 @@ Run meaningful positive and negative controls for each new behavior, wire new
 test suites into `tests/main_tests.ts`, and run typecheck/lint. Exercise the
 installed external backend under an explicit short timeout and output bound.
 Inspect the generated view; numerical sampling is explicitly approximate.
-After the tranche is focused-green, run one complete
-`./scripts/pnpmw run check:ts` (the equivalent receipt-producing TypeScript
-gate may wrap it). Do not substitute focused tests for this shared-behavior gate.
-No unrelated full formal, print, package-release or hosted aggregate is selected.
+The original plan required one complete `./scripts/pnpmw run check:ts` after
+focused qualification. The user's later instruction explicitly waives that
+gate and other repository-wide aggregates for now. Keep the complete gate
+incomplete in the handoff; do not report focused checks as its equivalent.
+No further aggregate is selected while this instruction applies.
 
 Carry forward the baseline's recorded complete TypeScript and bounded
 conformance successes as historical evidence only. This new implementation
@@ -228,9 +237,16 @@ signals, and record exact timeouts/failures without promoting mathematical statu
 - Full TypeScript gate started at 2026-09-24 22:22 UTC, with implementation
   staged and source/test inputs fixed. Its log is
   `emdash2/logs/devops/typescript-20260924T222204Z-e42853789d7a4e94b5fb01368849e54f.log`.
-  Workspace, registration, typecheck and lint have passed; the complete test
-  phase is still running at this documentation checkpoint. Do not treat that
-  partial run as a pass or start a duplicate aggregate on continuation.
+  Workspace, registration, typecheck and lint passed. The test phase was still
+  running at documentation checkpoint `167d1da2`. The user subsequently
+  instructed that this gate and other repository-wide aggregates be skipped
+  for now. Sending SIGTERM to its owning DevOps runner invoked the existing
+  process-group cancellation path; no group members remained afterward.
+  Receipt `typescript-20260924T222204Z-e42853789d7a4e94b5fb01368849e54f`
+  records `cancelled`, command exit 130, and 1,536.60 seconds. All recorded gate
+  input hashes still match. Cancellation diagnostics are not a completed
+  regression verdict; no full TypeScript pass is claimed and no replacement
+  aggregate is selected under the user's instruction.
 - Artifact review repaired an extra newline in the example's source-file
   writer. A fresh real-backend example run verifies that the saved canonical
   source and formal-profile bytes match every recorded SHA-256 fingerprint.
@@ -288,6 +304,31 @@ Desktop (1440×1100) and mobile (390×844) views were inspected with Playwright,
 including disclosure controls and absence of horizontal overflow. Screenshots
 are under the generated directory's `output/playwright/`. The browser's initial
 favicon request was resolved with a data favicon; no new runtime library is used.
+
+## Completion boundary
+
+The selected consumer is implemented: one source constructs the polynomials,
+both engines compute with them, exact arithmetic checks positive witnesses,
+the derived plot reuses their terms, and fresh Core checking retains the named
+formal goal with its explicit premises. The focused suite covers all 15 new
+tests, including real Singular and guarded positive/negative Lambdapi probes.
+Source changes invalidate prior results; altered parents/witnesses and
+unsupported coefficient interpretations are rejected. Saved source/profile
+bytes have been independently checked against their recorded hashes.
+
+Formal proof reconstruction remains the concrete deferred obligation permitted
+by this plan's stopping rule: transfer/use the relevant existing ring-law proof
+interface and construct a proof plan, then replay it against the exact goal.
+No completed theorem, general rational-field interpretation, unrestricted
+higher profile, certified plot topology or complete negative certificate is
+claimed. A native module/homology consumer remains later work.
+
+The local implementation checkpoint uses the user's explicit aggregate waiver.
+The incomplete TypeScript aggregate and the unrelated gluing-owner allocation
+failure stay visible above. Full formal CI, package/release, hosted and broad
+integration qualification are not claimed. The original main worktree and
+its two accepted review changes are preserved; no push, merge, publication,
+history rewrite or worktree removal is part of completion.
 
 ## Persistent goal prompt
 

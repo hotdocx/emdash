@@ -268,6 +268,8 @@ import './v3_2_algebra_exact_tests';
 import './v3_2_algebra_polynomial_tests';
 import './v3_2_algebra_reference_engine_tests';
 import './v3_2_algebra_ideal_tests';
+import './v3_2_algebra_ideal_witness_tests';
+import './v3_2_algebra_polynomial_workbench_tests';
 import './v3_2_algebra_zariski_tests';
 import './v3_2_algebra_matrix_tests';
 import './v3_2_algebra_module_tests';
