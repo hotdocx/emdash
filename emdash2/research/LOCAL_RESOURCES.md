@@ -1,6 +1,7 @@
 # Local Research Resources
 
-Inventory observed: 2026-09-23, on the `/home/user1` development host.
+Inventory observed: 2026-09-23; HoTT reference layout repaired 2026-09-24,
+on the `/home/user1` development host.
 Purpose: find existing material before searching or downloading again.
 
 These paths are optional research aids, not portable build dependencies or
@@ -70,7 +71,7 @@ have the same revision; neither needs another download for source reading.
 | `/home/user1/algebraic-geometry/cmu-phil-spectral` | Same revision | Duplicate reference checkout already recorded by HRI-03; leave removal to a separate cleanup decision |
 | `/home/user1/lean4-source-code` | `f29e9e488ea8242c875806e4b0564820c2d553b2` | `leanprover/lean4`; implementation reference, not an emdash runtime dependency |
 | `/home/user1/lambdapi-source-code` | `40b12b4e2615c60340608ab9656ed9eb1dc0c070` | `Deducteam/lambdapi`; this checkout does **not** contain the pinned verification commit below |
-| `/home/user1/emdash1/.hott-book-review-20260720` | `578b85cc8d586b1677ec4335148adeb443057d24` | `HoTT/book`; same pin as the book adaptation ledger; TeX source reference |
+| `/home/user1/hott-book` | `578b85cc8d586b1677ec4335148adeb443057d24` | `HoTT/book`; standalone TeX reference, same pin as the book adaptation ledger |
 
 The [verification toolchain](../../toolchains/verification.json) pins Lambdapi
 `db4f7809961b8c107247613067fb567491fb0b84`. Do not diagnose that checker's
@@ -80,12 +81,22 @@ checkout; this inventory neither fetches nor switches the existing checkout.
 Repository copies of selected Lambdapi docs/examples are already listed in
 the [local-reference SOP](../AGENTS.md#local-lambdapi-references).
 
-The HoTT checkout is currently a tracked Git link without a root `.gitmodules`
-entry. Ordinary clones cannot initialize it from repository metadata. Prefer
-an external reference checkout plus this locator if builds do not require it;
-use a properly declared submodule only if a concrete build needs one. Either
-repair must preserve the book's existing attribution and revision ledger.
-No relocation or Git-link removal has occurred in this review.
+The HoTT book is research input, not a build dependency: book source,
+bibliography and adaptation attribution are already maintained in this repo.
+On 2026-09-24 a clean standalone checkout was copied locally with independent
+Git objects and the upstream origin, at the exact pin above. The undeclared
+`.hott-book-review-20260720` Git link was removed on the consolidation branch;
+its original local checkout in main remains intact until separately cleaned
+up. No book attribution, adaptation record or source bytes changed.
+
+On another host, optional acquisition at the recorded book revision is:
+
+```bash
+git clone https://github.com/HoTT/book.git /path/to/references/hott-book
+git -C /path/to/references/hott-book checkout --detach 578b85cc8d586b1677ec4335148adeb443057d24
+```
+
+Choose a fresh destination; this reference checkout does not need a build.
 
 A bounded directory-name search through three visible directory levels under
 `/home/user1` did not locate standalone Agda/Coq/HoTT formalization checkouts

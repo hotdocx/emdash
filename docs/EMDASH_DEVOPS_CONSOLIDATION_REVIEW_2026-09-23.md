@@ -613,6 +613,15 @@ versions of one template:
 | `templates_artifacts/emdash_goal_graph/` | Optional read-only goal/diagram publication, Emdash `0.2.0` | Retain as an optional projection if used; theorem, task and approval evidence stay distinct |
 | `templates/emdash_benchmark/` | Developer evaluation fixture, Emdash `0.3.0` | Keep out of the default mathematics workflow; resolve its integration state before deciding whether to maintain or retire it |
 
+Disposition accepted for the consolidation goal on 2026-09-24: retain the proof
+starter as the primary small example, the goal graph as an optional view, and
+the benchmark as a parked developer fixture. The canary remains parked under
+its terminal decision. This resolves lifecycle classification without deleting
+unique evidence or making sibling edits. Reopen benchmark integration only for
+a concrete proof-agent measurement need; inspect the small verifier/ordering
+delta below before considering any larger branch integration. An older package
+pin alone does not select an upgrade.
+
 The benchmark has a concrete reconciliation issue: main contains the template
 from `4550382b`, but not `scripts/verify-emdash-benchmark-template-runtime.ts`.
 The completed recovery worktree at `cbf23566` is not an ancestor of main; its
@@ -664,6 +673,11 @@ Two concrete repairs merit separate small tasks:
    is absent there. Obtain matching source when a checker investigation needs
    it; do not silently switch the existing reference checkout or change the
    verification toolchain merely to make those two locations match.
+
+The [consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md) records the
+subsequent HoTT Git-link repair. The source mismatch is now explicit in the
+resource index; exact-checker source acquisition remains conditional on a
+checker investigation, rather than an automatic checkout/toolchain upgrade.
 
 No new crawler, PDF hash database, vector index, automatic repository sync or
 shared home-directory scan belongs in the first consolidation tranche.

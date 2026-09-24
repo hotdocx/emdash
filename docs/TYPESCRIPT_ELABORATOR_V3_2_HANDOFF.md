@@ -107,6 +107,9 @@ assembled book copy from ordinary searches; retrieve them deliberately with:
 rg --no-ignore -n 'DECISION_OR_SYMBOL' docs/history emdash2/reports/history
 ```
 
+Explicit positive `-g` globs can override ignore rules; use scoped directories
+or a Markdown type filter when the history should stay excluded.
+
 Documentation changes receive document checks. Behavior changes receive the
 nearest focused tests plus applicable typecheck/lint and their owning gates.
 Shared-behavior integration normally needs the recorded aggregate; the current

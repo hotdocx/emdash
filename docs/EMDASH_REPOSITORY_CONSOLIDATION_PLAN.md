@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: active; reference and template-lifecycle tranche next
+Status: active; minimal test-observability tranche next
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -43,7 +43,7 @@ their integrations remain separately scoped.
 | --- | --- | --- |
 | 0. Preserve the accepted review | Complete | Isolated worktree, bootstrapped dependencies, resource locator and reconciled original-stage status; exact staged docs/links pass; source worktree preserved |
 | 1. Current guidance | Complete | Short elaborator handoff and report index, preserved historical receipts and lifecycle registration, concise AGENTS routing with mandatory mathematical/resource rules intact; exact links, anchors and report checks pass |
-| 2. References and template lifecycle | Ready after 1 | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
+| 2. References and template lifecycle | Complete | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
 | 3. Minimal test observability | Ready after 1 | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
 | 4. Final review and handoff | Pending | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded, worktree is clean |
 
@@ -121,7 +121,7 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   Checkpoint `8ec1a8e9` preserves the accepted review and this plan. Main's
   six duplicate changes were compared with that commit before clearing them;
   main is clean at the unchanged baseline.
-- Row 1: the handoff is 116 lines (was 3,015); the report index is 127 (was
+- Row 1: checkpoint `7bb3277f`; the handoff is 116 lines (was 3,015); the report index is 127 (was
   1,351); nested AGENTS is 547 (was 749). History snapshots retain the original
   handoff/index content exactly after reversible relative-link rebasing.
   Mandatory editing/rule/resource/validation/recovery sections from
@@ -131,6 +131,16 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   1 superseded). Document checks pass 257 local links and 8 heading links.
   A narrow `.rgignore` excludes only extracted history and assembled book
   Markdown; default source discovery and explicit history retrieval both pass.
+- Row 2: no executable consumer needs the hidden HoTT checkout. A clean,
+  independently stored `/home/user1/hott-book` now preserves the exact book
+  pin and upstream origin. The original main checkout is untouched. Removing
+  the malformed Git link changes `git submodule status` from a missing-mapping
+  error to success; the book tree and attribution are unchanged. The resource
+  locator includes optional acquisition and the checker-source mismatch.
+  Template dispositions are accepted in the existing review: primary starter,
+  optional graph view, parked developer benchmark/canary with a concrete reopen
+  condition. Sibling trees remain unchanged, including unrelated CloserFans
+  work. All 98 local document links pass. No runtime, render or aggregate was run.
 
 ## Persistent goal prompt
 
