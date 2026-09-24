@@ -10,9 +10,10 @@ The [repository consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
 records the completed bounded maintenance. The [DevOps guide](DEVOPS.md) owns commands
 and gate selection. The [repair ledger](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
 owns the latest source requalification and matcher/reference-cache results.
-The user's full TypeScript run completed with five failures; their correction
-and integration checks are recorded in the consolidation ledger. Earlier
-aggregate counts are dated receipts, not today's whole-repository qualification.
+The corrected complete TypeScript gate and bounded conformance gate now pass;
+their exact receipts and main integration are recorded in the consolidation
+ledger. Earlier aggregate counts remain dated receipts; full formal CI and
+hosted qualification are separate boundaries.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)

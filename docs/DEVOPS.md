@@ -59,9 +59,11 @@ node --require ts-node/register --test \
   tests/v3_2_algebra_formal_signature_reference_tests.ts
 ```
 
-The existing one-hour TypeScript gate limit is provisional. Full-suite runtime
-calibration and the incomplete aggregate remain deferred at the user's request;
-focused reporter/fixture results do not close that qualification boundary.
+The one-hour TypeScript gate limit remains a resource ceiling. The user's
+completed test phase took about 40 minutes; the corrected full TypeScript gate
+passed in about 27½ minutes. The [integration ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md#user-run-validation-follow-up)
+records exact results. These local observations do not establish a performance
+SLA or an attributed speedup, and do not change the deadline.
 
 `plan`/`check --explain` show selection without executing gates. Without `--base`,
 selection covers staged, unstaged and untracked nonignored work. With `--base`,

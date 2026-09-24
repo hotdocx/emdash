@@ -1,8 +1,10 @@
 # TypeScript Profile And Performance Repair
 
 Date: 2026-09-23
-Status: selected repairs implemented and qualified by bounded checks;
-the complete TypeScript aggregate remains incomplete at its recorded deadline.
+Status: selected repairs implemented; the corrected complete TypeScript gate
+and bounded conformance subsequently passed in the
+[consolidation follow-up](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md#user-run-validation-follow-up).
+Earlier timeout/failure receipts below retain their original outcomes.
 Baseline: DevOps checkpoint `f9ae8d6aaebb34cdc9276497adfc8320933d60ce` on `main`.
 Authorization: the user selected finishing/checkpointing DevOps with recorded
 blockers, followed by this separate profile/performance repair. Local checkpoints
@@ -22,7 +24,7 @@ action-profile branch or perform bulk transfer.
 | REPAIR-0 | complete | Inventory each stale assertion; distinguish historical snapshots from current source bindings; record a bounded telescope benchmark |
 | REPAIR-1 | focused qualification complete | Review actual declaration/rule/body changes before adjusting profile/source evidence; keep rejection of unreviewed drift |
 | REPAIR-2 | complete within the measured matcher/reference boundary | Remove measured redundant computation without changing conversion results, capture avoidance, proof/runtime separation, traces or fuel policy |
-| REPAIR-3 | bounded qualification complete; full aggregate incomplete | Focused regression tests, typecheck/lint, relevant conformance and aggregate attempts; preserve the remaining limit explicitly at the local checkpoint |
+| REPAIR-3 | bounded qualification complete; full TypeScript qualification closed by the linked follow-up | Focused regression tests, typecheck/lint, relevant conformance and aggregate attempts; historical failures/timeouts remain recorded |
 
 Source pins must not become unchecked current hashes. Historical qualification
 records retain their original identities. A current-source binding needs an

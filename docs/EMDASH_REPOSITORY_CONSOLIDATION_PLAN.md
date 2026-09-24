@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: post-completion validation repair and main integration in progress
+Status: complete; corrected TypeScript/conformance qualification and main integration
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -49,8 +49,8 @@ authorizes only a fast-forward of main after the correction/integration checks.
 | 2. References and template lifecycle | Complete | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
 | 3. Minimal test observability | Complete within focused qualification | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
 | 4. Final review and handoff | Complete | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded; final documentation checkpoint leaves the worktree clean |
-| 5. User-run failure repair | Focused qualification complete | Reproduce five failures, restore required concise release guidance, align SCALE provenance with reviewed canonical commands and test frozen PathInd positions at their exact historical source; focused checks and checkpoint |
-| 6. TypeScript integration and main | In progress | One complete corrected TypeScript gate, relevant bounded conformance/tooling checks, synchronized evidence, clean exact staged diff and authorized fast-forward main; no push |
+| 5. User-run failure repair | Complete at `83db3c68` | Reproduce five failures, restore required concise release guidance, align SCALE provenance with reviewed canonical commands and test frozen PathInd positions at their exact historical source; focused checks and checkpoint |
+| 6. TypeScript integration and main | Complete; final receipt documentation follows the validated code fast-forward | One complete corrected TypeScript gate, relevant bounded conformance/tooling checks, synchronized evidence, clean exact staged diff and authorized fast-forward main; no push |
 
 Keep one bounded row in progress. Split a row only if a concrete dependency
 requires it; do not grow this table into an additional project-status database.
@@ -178,19 +178,19 @@ commits over rewriting history. Carry forward validation for unchanged rows.
 
 ## Completion boundary
 
-The selected maintenance rows are complete and locally checkpointed. The final
-documentation checkpoint synchronizes their status; preceding implementation
-checkpoints are `8ec1a8e9`, `7bb3277f`, `4fc302a4` and `ef8d374d`.
-The dedicated branch/worktree remain for review. No push, main integration,
-publication or worktree removal was performed.
+The maintenance and user-reported failure repairs are complete. Checkpoints
+`8ec1a8e9`, `7bb3277f`, `4fc302a4`, `ef8d374d`, `58451168` and `83db3c68`
+preserve their scope and results. Main was fast-forwarded from `2248ae2e` to
+the fully TypeScript-qualified repair `83db3c68`; this final receipt-only
+documentation checkpoint is to be fast-forwarded under the same authorization.
+The branch/worktree remain available. No push, publication or worktree removal
+was performed.
 
-The full TypeScript aggregate, runtime calibration and hosted CI qualification
-remain incomplete/deferred under the user's instruction. This is focused
-maintenance qualification, not a full integration or release claim. Future
-mathematical profile/variance work and any sibling integration require their
+Full formal CI, hosted qualification and release qualification are not claimed
+by this follow-up; formal, book/renderer and toolchain sources are unchanged.
+Future mathematical profile/variance work and sibling integrations retain their
 own scope and acceptance criteria. The accepted future-design reference and
-template reopening conditions remain in the linked review; they are not an
-automatic continuation queue for this completed goal.
+template reopening conditions are not an automatic continuation queue.
 
 ## User-run validation follow-up
 
@@ -222,6 +222,30 @@ reviewed source/export hashes `f7206b8e…` / `594bbfa4…`; none is changed to
 silence a failure. Historical PathInd source is explicitly SHA-256 checked.
 Root typecheck, changed-owner lint, workspace and document hygiene pass.
 The correction logs are under ignored `emdash2/tmp/probes/consolidation-repair-*`.
+
+The complete `./scripts/emdash dev check --gate typescript` passes fresh at
+`83db3c68835a4132f4bfde31529ae5aa117247c2`: 2,923 tests in 474 suites,
+2,838 passes, zero failures, 85 intentional skips and zero cancellations.
+All five formerly failing assertions pass. Test time is 1,625.973 seconds;
+the whole workspace/registration/typecheck/lint/test gate takes 1,652.488
+seconds. Receipt: `typescript-20260924T083939Z-401d76fc9a4c4931a340bf9e3436339e`.
+
+The bounded conformance gate also passes fresh at that same repair commit:
+31 tests across MVP, directed and displayed-evaluation commands pass without
+skips; all commands exit zero in 43.770 seconds.
+Receipt: `conformance-20260924T090936Z-d432351a9c0843b58587b588b66b7d73`.
+Both receipts and raw logs are under `emdash2/logs/devops/` in the goal worktree.
+Recorded input digests are unchanged across each run. The earlier user-run
+40-minute test phase and this 27-minute phase are local observations; no speedup
+is attributed to the metadata/document fixes and the one-hour limit is unchanged.
+
+Integration preserved the old clean embedded HoTT checkout by moving it to
+`/home/user1/hott-book-review-20260720`; the canonical `/home/user1/hott-book`
+copy and book attribution remain intact. Main is clean after the validated
+code fast-forward. Final documentation synchronization passes all 11 tests in
+the two executable release-document suites (14.28 seconds), 199 local links,
+15 heading links and the unchanged lifecycle registry before its final
+checkpoint and fast-forward. Main's workspace check also passes.
 
 ## Original persistent goal prompt
 

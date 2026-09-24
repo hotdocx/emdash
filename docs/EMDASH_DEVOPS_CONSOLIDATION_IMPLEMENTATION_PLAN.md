@@ -3,7 +3,10 @@
 Date: 2026-09-23
 Status: selected DevOps implementation complete; focused qualification green;
 original TypeScript/source blockers and scale qualification are addressed by
-the separate repair below; complete TypeScript/hosted qualification remains open.
+the separate repair below. The corrected complete TypeScript gate subsequently
+passed in the [repository consolidation follow-up](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md#user-run-validation-follow-up);
+hosted qualification remains open. Initial validation receipts below retain
+their original outcomes.
 Baseline: `f2902a6930aafcfc1dee267aa0ce622f6e72afa5` on `main`.
 Comparison milestone: `f76e8ac9066dc7cf8f3ed90cba42a5eea92b742e`.
 Authority: [root instructions](../AGENTS.md), [formal SOP](../emdash2/AGENTS.md),
@@ -60,8 +63,8 @@ review. DEVOPS-3 completes the selected contributor routing, not all of the
 original review's Stage 3: shortening the handoff, consolidating current status
 and separating historical ledgers were left to the successor
 [repository consolidation](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md), which now
-completes those bounded navigation tasks. Hosted/full-aggregate qualification
-is unchanged. The
+completes those bounded navigation tasks and the later full TypeScript
+qualification. Hosted qualification remains open. The
 [broader reassessment](EMDASH_DEVOPS_CONSOLIDATION_REVIEW_2026-09-23.md#broader-repository-and-ecosystem-reassessment)
 reconciles every original stage and proposes the next documentation tranche.
 Performance changes, diagnostic/nucleus splitting, a new visual surface

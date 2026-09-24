@@ -86,8 +86,10 @@ bibliography and adaptation attribution are already maintained in this repo.
 On 2026-09-24 a clean standalone checkout was copied locally with independent
 Git objects and the upstream origin, at the exact pin above. The undeclared
 `.hott-book-review-20260720` Git link was removed on the consolidation branch;
-its original local checkout in main remains intact until separately cleaned
-up. No book attribution, adaptation record or source bytes changed.
+its original local checkout was preserved intact at
+`/home/user1/hott-book-review-20260720` during main integration. Use
+`/home/user1/hott-book` as the canonical local reading copy. No book attribution,
+adaptation record or source bytes changed.
 
 On another host, optional acquisition at the recorded book revision is:
 
