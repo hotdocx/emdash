@@ -5,6 +5,7 @@ import importlib.util
 from io import StringIO
 import json
 from pathlib import Path
+import shutil
 import sys
 from tempfile import TemporaryDirectory
 import unittest
@@ -92,6 +93,36 @@ class DevOpsTests(unittest.TestCase):
                  patch.object(devops, "gate_inputs", side_effect=[{"input": "before"}, {"input": "after"}]), \
                  patch.object(devops, "revision", return_value="baseline"), redirect_stdout(StringIO()), redirect_stderr(StringIO()):
                 self.assertEqual(devops.run_gate("fixture", [])["outcome"], "inputs-changed")
+
+    @unittest.skipUnless(sys.platform == "linux" and shutil.which("node"), "Linux/Node process-group check")
+    def test_deadline_stops_reporter_and_busy_test_worker_without_claiming_success(self):
+        reporter = Path(__file__).with_name("test-progress.mjs").resolve()
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            worker_pid = root / "worker.pid"
+            fixture = root / "busy.mjs"
+            fixture.write_text(
+                "import test from 'node:test'; import { writeFileSync } from 'node:fs';\n"
+                "test('busy worker', () => {\n"
+                f"writeFileSync({json.dumps(str(worker_pid))}, String(process.pid));\n"
+                "while (true) {}\n});\n"
+            )
+            gate = {"commands": [[shutil.which("node"), "--test", "--test-reporter=" + str(reporter), str(fixture)]],
+                    "timeoutSeconds": 1}
+            with patch.object(devops, "ROOT", root), patch.object(devops, "contract", return_value={"gates": {"fixture": gate}}), \
+                 patch.object(devops, "gate_inputs", return_value={}), patch.object(devops, "revision", return_value="baseline"), \
+                 patch.dict(devops.os.environ, {"EMDASH_TEST_PROGRESS_INTERVAL_MS": "50"}), \
+                 redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+                receipt = devops.run_gate("fixture", [])
+            self.assertEqual(receipt["outcome"], "timeout")
+            self.assertEqual(receipt["commands"][0]["exit"], 124)
+            self.assertIn("[progress] parent alive", (root / receipt["log"]).read_text())
+            pid = int(worker_pid.read_text())
+            state = Path(f"/proc/{pid}/stat")
+            try:
+                self.assertEqual(state.read_text().split()[2], "Z", "worker still running")
+            except FileNotFoundError:
+                pass  # The exited worker has already been reaped.
 
 
 if __name__ == "__main__":

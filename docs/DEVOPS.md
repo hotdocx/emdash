@@ -35,6 +35,32 @@ owners with current source. Keep that commit available in shallow checkouts;
 CI uses `fetch-depth: 0`. These historical tests are outside the distributed
 package's runtime and its external-install smoke test.
 
+`pnpmw test` keeps Node's normal result report and adds compact progress on
+stderr through [test-progress.mjs](../scripts/test-progress.mjs). Every 30 seconds
+the separate test-runner parent reports elapsed time, the last execution event
+and its age. Slow completions (at least five seconds) and unsuccessful
+completions report their duration immediately. The reporter uses Node's
+[execution-order events](https://nodejs.org/download/release/v24.11.1/docs/api/test.html#class-testsstream);
+the ordinary result report can wait for an earlier-declared test to finish.
+The event counter includes suites and is not the final test total. A heartbeat
+establishes parent liveness, not worker progress or a detected hang.
+
+Gate execution retains both streams in the printed `emdash2/logs/devops/` log;
+inspect that file during a long run. `EMDASH_TEST_PROGRESS_INTERVAL_MS` optionally
+sets the reporting interval (50–3,600,000 ms); it does not change a test or gate
+deadline. To use the same reporter on one focused file, run:
+
+```bash
+node --require ts-node/register --test \
+  --test-reporter=spec --test-reporter-destination=stdout \
+  --test-reporter=./scripts/test-progress.mjs --test-reporter-destination=stderr \
+  tests/v3_2_algebra_formal_signature_reference_tests.ts
+```
+
+The existing one-hour TypeScript gate limit is provisional. Full-suite runtime
+calibration and the incomplete aggregate remain deferred at the user's request;
+focused reporter/fixture results do not close that qualification boundary.
+
 `plan`/`check --explain` show selection without executing gates. Without `--base`,
 selection covers staged, unstaged and untracked nonignored work. With `--base`,
 it also covers the commit comparison. Rename detection is disabled for this

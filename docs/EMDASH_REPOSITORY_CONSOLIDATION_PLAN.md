@@ -1,7 +1,7 @@
 # Repository and Context Consolidation
 
 Date: 2026-09-24
-Status: active; minimal test-observability tranche next
+Status: active; final review and handoff next
 Baseline: `2248ae2ebc3a3ac33920f8607497db26198c331c`
 Branch: `goal/repository-context-consolidation`
 Worktree: `/home/user1/emdash1-repository-consolidation-v1`
@@ -44,7 +44,7 @@ their integrations remain separately scoped.
 | 0. Preserve the accepted review | Complete | Isolated worktree, bootstrapped dependencies, resource locator and reconciled original-stage status; exact staged docs/links pass; source worktree preserved |
 | 1. Current guidance | Complete | Short elaborator handoff and report index, preserved historical receipts and lifecycle registration, concise AGENTS routing with mandatory mathematical/resource rules intact; exact links, anchors and report checks pass |
 | 2. References and template lifecycle | Complete | Repair the undeclared HoTT Git link without losing source/provenance; clarify local checker-source mismatch and classify the three templates/canary with exact integration boundaries; no sibling merge or unique-evidence deletion |
-| 3. Minimal test observability | Ready after 1 | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
+| 3. Minimal test observability | Complete within focused qualification | Execution-order progress, durations and a parent heartbeat using existing runner/log infrastructure; controlled pass/fail/slow/cancellation cases pass; unchanged test selection and exit semantics; no full run |
 | 4. Final review and handoff | Pending | Current task routes resolve, retained history is recoverable, focused gates pass, final qualification limits and checkpoints are recorded, worktree is clean |
 
 Keep one bounded row in progress. Split a row only if a concrete dependency
@@ -131,7 +131,7 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   1 superseded). Document checks pass 257 local links and 8 heading links.
   A narrow `.rgignore` excludes only extracted history and assembled book
   Markdown; default source discovery and explicit history retrieval both pass.
-- Row 2: no executable consumer needs the hidden HoTT checkout. A clean,
+- Row 2: checkpoint `4fc302a4`; no executable consumer needs the hidden HoTT checkout. A clean,
   independently stored `/home/user1/hott-book` now preserves the exact book
   pin and upstream origin. The original main checkout is untouched. Removing
   the malformed Git link changes `git submodule status` from a missing-mapping
@@ -141,6 +141,27 @@ commits over rewriting history. Carry forward validation for unchanged rows.
   optional graph view, parked developer benchmark/canary with a concrete reopen
   condition. Sibling trees remain unchanged, including unrelated CloserFans
   work. All 98 local document links pass. No runtime, render or aggregate was run.
+
+- Row 3 design: use Node's existing multiple-reporter support. Keep the normal
+  spec result report and add a compact reporter in the separate test-runner parent: periodic current
+  activity plus durations for slow completions. Its heartbeat must remain
+  responsive while a test worker is CPU-bound. Preserve the existing Python
+  gate deadline/process-group cancellation, test entry point and concurrency.
+  No monitoring service, sidecar database or custom runner is needed.
+- Row 3 results: the 54-line reporter emits a 30-second parent heartbeat,
+  last execution event/age, and slow or unsuccessful completion durations.
+  Test membership, concurrency, gate deadlines and exit authority are unchanged.
+  `node --test scripts/test-progress.test.mjs` passes three controlled cases
+  covering pass/skip/todo, execution-order failure and heartbeat during a
+  synchronous 5.1-second worker computation. The 12 Python DevOps tests pass,
+  including actual process-group deadline cancellation of a busy Node worker
+  with a timeout receipt and no running worker afterward. The existing Node
+  registration regression passes; all 453 TypeScript suites remain reachable.
+  The three signature-reference TypeScript tests pass through the real loader
+  and both reporters under a 45-second outer bound (4.08 seconds observed).
+  Root typecheck, changed-script ESLint, workspace and document checks pass.
+  Reporter regression tests are wired into existing `ci-tooling`. No aggregate
+  or mathematical source check is claimed; full-runtime calibration remains open.
 
 ## Persistent goal prompt
 
