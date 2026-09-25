@@ -11,6 +11,11 @@ current status and validation on a dedicated local branch/worktree. The review
 below retains its design-time scope and evidence; implementation is not implied
 by these proposals.
 
+The [host/ecosystem follow-up](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
+reviews the broader Julia/OSCAR and Lean comparisons, verifies the published
+`@hotdocx/emdash` boundary, and proposes a package consumer using an ordinary
+visualization library. It complements the completed CAS/internal-reuse probes.
+
 ## Assessment
 
 The OSCAR analogy is useful. TypeScript can serve as Emdash's common programming,

@@ -8,6 +8,13 @@ Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
 
+Main integration: the user subsequently selected the completed continuation's
+fast-forward; `main` is integrated through `9de1a48f`. The
+[host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
+now assesses TypeScript programmability, the published package and a proposed
+ordinary-library consumer. That proposal is not yet an active implementation
+row or persistent goal. The aggregate waiver remains in force.
+
 ## Current continuation: external result and internal reuse
 
 Selected by the user on 2026-09-24 after the
@@ -21,10 +28,11 @@ status remain part of the integration contract.
 Reuse this existing dedicated branch/worktree from `dde9f23d`; main and this
 branch were clean and equal at selection, and all 65 registered worktrees were
 inspected. The earlier local-checkpoint authorization continues to apply.
-The completed first-consumer fast-forward is recorded below; this new
-continuation uses local checkpoints and does not select another main integration,
-push, publication, branch/worktree removal or history rewrite. The user's waiver
-of full TypeScript and repository-wide aggregates remains in force.
+The completed first-consumer fast-forward is recorded below. At selection,
+this continuation authorized local checkpoints; its later user-selected main
+integration is recorded above. No push, publication, branch/worktree removal
+or history rewrite is selected. The user's waiver of full TypeScript and
+repository-wide aggregates remains in force.
 
 ### Selected mathematical consumer
 
@@ -235,12 +243,20 @@ interpretations, multiple external engines, foreign-object lifecycle and
 broader OSCAR mechanism parity retain the review's untested boundaries.
 
 The continuation is complete under the standing aggregate waiver. No complete
-TypeScript or repository-wide aggregate is claimed. The implementation is a
-local descendant checkpoint on the existing goal branch; main remains at the
-previously integrated `dde9f23d` until separately selected integration. No LP
-source, formal rule, book/renderer source, package setup or lockfile changed.
+TypeScript or repository-wide aggregate is claimed. Implementation checkpoint
+`9de1a48f` followed planning checkpoint `f08398bf` on the existing goal branch.
+The user subsequently selected main integration, and main was fast-forwarded
+cleanly from `dde9f23d` to `9de1a48f`. All 65 worktrees were clean at the follow-up
+review; there were no temporary uncommitted changes to discard. No LP source,
+formal rule, book/renderer source, package setup or lockfile changed.
 
-### Active persistent goal prompt
+The broader host/ecosystem follow-up is a documentation review. Its recommended
+next consumer joins curated public package APIs to a real plotting library,
+with computation useful independently of proof adoption. If selected, activate
+its bounded acceptance rows here; retain one execution plan and the existing
+source owners. The completed external-reuse goal remains complete.
+
+### Completed persistent goal prompt
 
 Complete the external-result-to-internal-reuse continuation governed by the
 current continuation section of `docs/TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md`

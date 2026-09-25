@@ -10,10 +10,18 @@ The [repository consolidation ledger](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md)
 records the completed bounded maintenance. The [DevOps guide](DEVOPS.md) owns commands
 and gate selection. The [repair ledger](TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md)
 owns the latest source requalification and matcher/reference-cache results.
-The corrected complete TypeScript gate and bounded conformance gate now pass;
-their exact receipts and main integration are recorded in the consolidation
-ledger. Earlier aggregate counts remain dated receipts; full formal CI and
-hosted qualification are separate boundaries.
+The consolidation's corrected complete TypeScript gate and bounded conformance
+gate passed at their recorded inputs; their exact receipts and main integration
+are recorded in the consolidation ledger. Earlier aggregate counts remain
+dated receipts; full formal CI and hosted qualification are separate boundaries.
+
+The later [algebra workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md)
+is integrated through `9de1a48f` at focused qualification under the user's
+aggregate waiver. Its actual external coefficients survive typed internal
+construction and reuse with explicit equation adoption. The
+[host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
+assesses the broader TypeScript/Julia/Lean analogy and published npm boundary;
+its next package consumer remains a proposal.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)
