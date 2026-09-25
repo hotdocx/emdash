@@ -20,8 +20,9 @@ is integrated through `9de1a48f` at focused qualification under the user's
 aggregate waiver. Its actual external coefficients survive typed internal
 construction and reuse with explicit equation adoption. The
 [host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
-assesses the broader TypeScript/Julia/Lean analogy and published npm boundary;
-its next package consumer remains a proposal.
+assesses the broader TypeScript/Julia/Lean analogy and published npm boundary.
+The user has now selected its public-package/Vega-Lite consumer; the current
+continuation in the same workbench plan owns that implementation and validation.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)

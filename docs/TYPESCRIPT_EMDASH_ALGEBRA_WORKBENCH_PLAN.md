@@ -2,20 +2,110 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: external-result reuse complete at focused qualification; aggregate waiver retained
-Current continuation baseline: `dde9f23d140ed6958f44a105c96a19c4a383772e`
+Status: public package and Vega-Lite consumer active; aggregate waiver retained
+Current continuation baseline: `40cfad997c2f6c4664c9f8e5de9f2f0084bb8712`
 Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
 
-Main integration: the user subsequently selected the completed continuation's
-fast-forward; `main` is integrated through `9de1a48f`. The
-[host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
-now assesses TypeScript programmability, the published package and a proposed
-ordinary-library consumer. That proposal is not yet an active implementation
-row or persistent goal. The aggregate waiver remains in force.
+Main integration: the previous implementation and host/ecosystem review are
+integrated through `40cfad99`. The user now selects the review's package consumer
+and a new persistent goal. The existing dedicated branch/worktree and local
+checkpoint authorization continue; no new main integration, push, publication,
+release, history rewrite or worktree removal is selected. The aggregate waiver
+remains in force.
 
-## Current continuation: external result and internal reuse
+## Current continuation: public package and Vega-Lite consumer
+
+Selected on 2026-09-24 after the accepted
+[host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md#recommended-next-consumer).
+Demonstrate **public package import → exact polynomial computation → a derived
+interactive Vega-Lite view of the same mathematical source**. Use a clean
+consumer of an actual locally packed artifact. No repository source aliases,
+handwritten duplicate plotting formula, proof goal or formal assumption is
+required for ordinary computation and rendering.
+
+### Owners and selected slice
+
+- Extend the existing `@hotdocx/emdash` package with one curated browser-safe
+  `/algebra` entry for rational-polynomial construction, arithmetic, ideal
+  membership, exact witness checking and the existing bounded curve sampler.
+  Reuse the current parent/exact/polynomial/ideal/witness/plot owners; inspect
+  the complete runtime and declaration closures. Keep Core, formal signatures,
+  external-process transport and visualization-library dependencies outside
+  this entry. Do not export the whole contributor barrel.
+- The package manifest, build script, declaration configuration, workspace
+  contract and packed-install verifier remain the package authorities. The
+  registry's `0.3.0` and a newly packed checkout artifact are distinct evidence.
+  This continuation changes local package contents without publishing a release.
+- Add a small tracked external-consumer fixture with ordinary TypeScript
+  application code and Vega/Vega-Lite. Prepare its own dependency graph in a
+  temporary directory using pinned pnpm and the shared content store. Never
+  copy/symlink the worktree's `node_modules` into the consumer.
+- Reuse R=Q[x,y] and the polynomial family `(y-x², xy-c)` with exact rational
+  parameter `c`. Derive the query `x³-c` from that same parameter and compute
+  ideal membership with retained coefficients. Parameter and viewport changes
+  update the source-derived curve samples and normal Vega-Lite segment view.
+- Keep exact computation separate from numeric interpretation failure. Retain
+  source/revision binding for asynchronous rendering and stale results, clear
+  obsolete views on invalid input, and preserve the sampler's approximation
+  limits. Avoid a new scheduler, worker framework, book renderer or language.
+
+### Package continuation acceptance
+
+| Row | State | Acceptance evidence |
+| --- | --- | --- |
+| PK-0. Scope and baseline | Complete at planning checkpoint | All 65 worktrees clean; main/goal branch equal to `40cfad99`; current authorities and package owners audited; workspace/typecheck and nearest 32-test baseline pass with one unchanged opt-in skip |
+| PK-1. Curated package API | In progress | A bounded `/algebra` surface reuses exact owners; focused public-entry controls and ESM/CJS/declaration/browser packed checks; no Core/process/visualization runtime dependency |
+| PK-2. External ecosystem consumer | Planned | Clean artifact install with own dependency graph; TypeScript app and actual Vega-Lite rendering of source-derived segments; exact parameter/viewport interaction and current-source binding |
+| PK-3. Qualification and handoff | Planned | Relevant negative controls, artifact identity, desktop/mobile browser inspection, synchronized docs/plan and validated local checkpoint |
+
+Keep one row in progress. Package qualification must exercise the actual
+tarball; importing a sibling source entry or only drawing custom SVG cannot
+complete this continuation. If an existing helper couples native computation
+to formal environments or Node transport, use its narrower existing owners
+or make the smallest justified separation. The optional formal workflow remains
+at its existing owners and does not gate the new consumer.
+
+Validation: workspace contract, root typecheck, changed-file lint, focused
+algebra/public-entry tests and registration; package build/packed-install and
+release-preflight contract checks; consumer typecheck/build and browser
+interaction. User-waived full TypeScript/root-test and repository aggregates
+remain skipped. No formal signature, kernel name or computation changes are
+selected, so no Lambdapi aggregate or rerun of the unrelated allocation failure
+is needed. Print sources/dependencies are unchanged; carry their qualification
+forward unless this consumer actually changes that boundary.
+
+### Package continuation decisions and evidence
+
+- PK-0: workspace verification and root typecheck pass. The polynomial, ideal
+  and predecessor workbench suites pass 31 tests with one unchanged live-LP
+  opt-in skip (32 total, 2.58 seconds). No aggregate ran.
+- Package audit: build and declaration inputs enumerate four existing entries;
+  workspace and release-preflight contracts intentionally pin their export map.
+  Update those owners together for the new entry and retain their existing
+  compatibility checks. Public npm metadata/declaration inspection from the
+  accepted review remains dated release evidence.
+- The browser inspection uses the Playwright CLI skill. It is a consumer
+  interaction check, not a new end-to-end test platform or renderer migration.
+
+### Active package persistent goal prompt
+
+Complete the public-package-and-Vega-Lite continuation governed by the current
+continuation section of `docs/TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md` in
+`/home/user1/emdash1-algebra-workbench-v1`, on
+`goal/algebra-workbench-polynomial-v3.2`, from its current descendant state.
+Let the evolving plan own concrete implementation, ordering, decisions,
+validation and recovery. Deliver a curated computational package surface and
+an actual clean packed-artifact consumer that uses an ordinary ecosystem
+visualization library on the same exact mathematical source. Follow current
+repository authorities and the user's aggregate waiver; preserve unrelated
+work and make validated local checkpoints. Complete the selected rows and
+synchronized handoff. Automatic certification/proof reconstruction, publication,
+new main integration, history rewriting and deferred foundational migrations
+are outside this continuation.
+
+## Completed continuation: external result and internal reuse
 
 Selected by the user on 2026-09-24 after the
 [integration-mechanism clarification](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md#follow-up-integration-mechanisms-and-optional-certification).

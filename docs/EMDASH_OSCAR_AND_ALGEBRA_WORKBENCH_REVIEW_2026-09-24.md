@@ -286,7 +286,7 @@ and formal assurance remain separate from integration-mechanism parity.
 
 Continuation selected (2026-09-24): the user accepted this external-result-to-
 internal-reuse probe. Its scope and execution now live in the
-[current workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md#current-continuation-external-result-and-internal-reuse).
+[completed workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md#completed-continuation-external-result-and-internal-reuse).
 The completed first consumer and its qualification remain dated evidence.
 
 The continuation now implements that path in a separate module example:

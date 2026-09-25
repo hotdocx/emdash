@@ -1,7 +1,7 @@
 # Emdash's TypeScript Host, Package And Ecosystem
 
 Date: 2026-09-24 (America/Toronto)
-Status: architectural review and proposed next consumer; no new implementation goal selected
+Status: architectural review; package consumer accepted into the living workbench plan
 Reviewed checkout: `9de1a48faee8bd217c7c3614dc097bfa536e362d`
 
 This extends the [OSCAR review](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md)
@@ -10,6 +10,12 @@ It answers the user's broader question about host-language programmability,
 ecosystem access and the existing npm distribution. It preserves the
 [computation-first CAS architecture](TYPESCRIPT_EMDASH_FOCUSED_CAS_AND_CATEGORICAL_ENGINE_PLAN.md)
 and the [current qualification boundaries](TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md).
+
+Continuation selected (2026-09-24): the user accepted this review and authorized
+implementation with a new persistent goal. The
+[current workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md#current-continuation-public-package-and-vega-lite-consumer)
+owns execution and current validation. The review below retains its dated
+pre-implementation evidence and proposed scope.
 
 ## Assessment
 
