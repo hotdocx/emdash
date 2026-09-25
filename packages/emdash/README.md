@@ -114,6 +114,13 @@ not included in the previously published npm `0.3.0` artifact.
   rational text such as `'1/2'`. Samples use floating-point arithmetic and do
   not certify curve topology. Formal checking/adoption is a separate workflow.
 
+For a complete computational consumer, see the
+[polynomial/Vega-Lite fixture](fixtures/polynomial-vega/README.md). From a
+contributor checkout, `node packages/emdash/scripts/prepare-polynomial-vega.mjs`
+prepares a clean external application from a local tarball and checks it.
+The browser application uses the same polynomial objects for exact arithmetic
+and the approximate plot; it requires no proof goal or formal assumption.
+
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';
 import {

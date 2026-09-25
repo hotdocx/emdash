@@ -21,8 +21,12 @@ aggregate waiver. Its actual external coefficients survive typed internal
 construction and reuse with explicit equation adoption. The
 [host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
 assesses the broader TypeScript/Julia/Lean analogy and published npm boundary.
-The user has now selected its public-package/Vega-Lite consumer; the current
-continuation in the same workbench plan owns that implementation and validation.
+Its public-package/Vega-Lite consumer is now complete on the goal branch at
+focused qualification. The additive `/algebra` entry and a clean tarball
+consumer share exact source between computation and an interactive Vega-Lite
+plot. The current continuation in the same workbench plan owns exact
+validation and artifact identity; npm publication and main integration are
+separate from that local checkpoint.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polynomial explorer · Emdash</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.6 system-ui, sans-serif; color: #263e36; background: #f3f5f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1220px; margin: auto; padding: 40px 28px; }
+    header { margin-bottom: 28px; max-width: 780px; }
+    .eyebrow { color: #21645e; font-size: 12px; letter-spacing: .13em; font-weight: 700; }
+    h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.2; font-weight: 650; letter-spacing: -.035em; margin: 10px 0 14px; }
+    h2 { font-size: 17px; line-height: 1.4; margin: 0 0 18px; }
+    p { margin: 0 0 16px; }
+    .layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 24px; align-items: start; }
+    .card { padding: 24px; background: #fff; border: 1px solid #dce4dc; border-radius: 14px; min-width: 0; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    input, select, button { font: inherit; border-radius: 7px; }
+    input, select { width: 100%; padding: 9px 11px; border: 1px solid #aabbb0; background: #fff; color: inherit; }
+    input:focus, select:focus, button:focus-visible { outline: 3px solid #accfc0; outline-offset: 2px; }
+    input[aria-invalid=true] { border-color: #a03d28; }
+    button { padding: 9px 18px; cursor: pointer; background: #21645e; color: white; border: 1px solid #21645e; }
+    button:hover { background: #194b47; }
+    .hint { color: #68776f; font-size: 13px; margin: 6px 0 14px; }
+    .presets { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 24px; }
+    .presets button { background: #eef5f0; color: #21645e; border-color: #d0e1d7; padding: 4px 11px; font-size: 13px; }
+    .error { color: #973d27; font-size: 14px; margin-top: 12px; overflow-wrap: anywhere; }
+    .plot-heading { display: flex; gap: 12px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+    .badge { color: #68776f; font-size: 12px; background: #f1f4ef; border-radius: 20px; padding: 3px 10px; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+    #chart { width: 100%; min-height: 285px; }
+    #chart svg { display: block; max-width: 100%; }
+    #plot-status { color: #68776f; font-size: 13px; margin: 8px 0; overflow-wrap: anywhere; }
+    .limitation { color: #68776f; font-size: 13px; border-top: 1px solid #e5ebe7; padding-top: 14px; margin: 14px 0 0; }
+    #exact { margin-top: 24px; }
+    .verified { color: #21645e; font-size: 14px; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 14px/1.7 ui-monospace, monospace; margin: 10px 0 18px; }
+    #identity { padding: 14px; background: #f3f6f1; border-radius: 7px; }
+    .math { font-family: ui-monospace, monospace; overflow-wrap: anywhere; }
+    [hidden] { display: none !important; }
+    @media(max-width: 760px) {
+      main { padding: 26px 16px; }
+      .layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+      .card { padding: 18px; }
+      #exact { margin-top: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">EMDASH · POLYNOMIAL EXPLORER</div>
+      <h1>Explore a polynomial family</h1>
+      <p>Change <span class="math">c</span> to explore <span class="math">y = x²</span> and
+        <span class="math">xy = c</span>. The same exact polynomials drive the calculation and the sampled curves.</p>
+    </header>
+    <div class="layout">
+      <section class="card" aria-labelledby="controls-title">
+        <h2 id="controls-title">Choose a parameter</h2>
+        <form id="controls">
+          <label for="parameter">Rational parameter c</label>
+          <input id="parameter" name="parameter" value="1" maxlength="512" spellcheck="false" aria-describedby="parameter-hint input-error">
+          <p class="hint" id="parameter-hint">Use an integer or fraction, such as 1/2.</p>
+          <button type="submit">Apply parameter</button>
+          <div class="error" id="input-error" role="alert"></div>
+        </form>
+        <div class="presets" aria-label="Example parameters">
+          <button type="button" data-parameter="1">c = 1</button>
+          <button type="button" data-parameter="1/2">c = 1/2</button>
+          <button type="button" data-parameter="-1">c = −1</button>
+        </div>
+        <label for="viewport">Viewing window</label>
+        <select id="viewport">
+          <option value="standard">Standard</option>
+          <option value="wide">Wide</option>
+          <option value="close">First quadrant</option>
+        </select>
+      </section>
+      <section class="card" aria-labelledby="plot-title">
+        <div class="plot-heading"><h2 id="plot-title">Real curves</h2><span class="badge">Approximate view</span></div>
+        <div id="chart" aria-label="Sampled polynomial curves" aria-busy="true"></div>
+        <p id="plot-status" role="status">Preparing the curves…</p>
+        <p class="limitation">Uniform grid sampling can miss components, tangencies and singularities.
+          Ambiguous cells are omitted; curve topology is not certified.</p>
+      </section>
+    </div>
+    <section class="card" id="exact" aria-labelledby="exact-title" hidden>
+      <div class="plot-heading"><h2 id="exact-title">Exact calculation</h2><span class="badge" id="current-parameter"></span></div>
+      <pre id="generators"></pre>
+      <p><span class="math" id="query"></span> belongs to the ideal generated by f1 and f2.</p>
+      <pre id="identity"></pre>
+      <p class="verified">Coefficient identity checked by exact polynomial arithmetic.</p>
+    </section>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

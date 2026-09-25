@@ -2,7 +2,7 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: public package and Vega-Lite consumer active; aggregate waiver retained
+Status: public package and Vega-Lite consumer complete at focused qualification; aggregate waiver retained
 Current continuation baseline: `40cfad997c2f6c4664c9f8e5de9f2f0084bb8712`
 Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
@@ -57,8 +57,8 @@ required for ordinary computation and rendering.
 | --- | --- | --- |
 | PK-0. Scope and baseline | Complete at planning checkpoint | All 65 worktrees clean; main/goal branch equal to `40cfad99`; current authorities and package owners audited; workspace/typecheck and nearest 32-test baseline pass with one unchanged opt-in skip |
 | PK-1. Curated package API | Complete at focused qualification | `/algebra` reuses exact owners; public-entry controls and ESM/CJS/declaration/browser packed checks pass; no Core/process/visualization runtime dependency |
-| PK-2. External ecosystem consumer | In progress | Clean artifact install with own dependency graph; TypeScript app and actual Vega-Lite rendering of source-derived segments; exact parameter/viewport interaction and current-source binding |
-| PK-3. Qualification and handoff | Planned | Relevant negative controls, artifact identity, desktop/mobile browser inspection, synchronized docs/plan and validated local checkpoint |
+| PK-2. External ecosystem consumer | Complete at focused qualification | Clean artifact install with its own dependency graph; TypeScript app and actual Vega-Lite rendering of source-derived segments; exact parameter/viewport interaction and current-source binding |
+| PK-3. Qualification and handoff | Complete at focused qualification | Five consumer tests, artifact/source hashes, desktop/mobile interaction and negative controls pass; synchronized docs/plan and reviewed local checkpoint |
 
 Keep one row in progress. Package qualification must exercise the actual
 tarball; importing a sibling source entry or only drawing custom SVG cannot
@@ -103,8 +103,69 @@ forward unless this consumer actually changes that boundary.
   its declaration closure contains eight computational modules including the
   entry, and its unminified browser bundle is 61,091 bytes with no Core/formal,
   Node or visualization dependency. No aggregate or LP invocation ran.
+- PK-1 checkpoint: `159c27ab`. The core algebra owners and their algorithms
+  are unchanged; the new package surface re-exports a selected subset.
+- PK-2: the [consumer fixture](../packages/emdash/fixtures/polynomial-vega/README.md)
+  imports only `@hotdocx/emdash/algebra`, Vega and Vega-Lite. Its one parameter
+  builds both generators and the membership query. Plot rows come directly
+  from the existing sampler, and Vega-Lite rule marks own rendering. No second
+  formula, custom SVG plotter, formal goal or adopted assumption is involved.
+- The preparation script builds/packs locally or accepts `--tarball`, installs
+  the fixture offline into a fresh external directory with its own pnpm graph,
+  and runs consumer typecheck/build/tests. Both preparation modes pass. Pinned
+  dependencies reuse the existing versions: Vega 5.33.1, Vega-Lite 5.23.0,
+  TypeScript 5.9.3 and esbuild 0.21.5. No contributor dependency or lock changes
+  were required. Artifact and fixture files are hashed in `artifact.json`.
+- PK-2/3 focused consumer tests: all five pass. They exercise actual headless
+  Vega-Lite/SVG rendering, direct sample-to-row correspondence, parameter and
+  viewport distinctions, numeric interpretation rejection with retained exact
+  computation, controlled out-of-order render completion/invalidation, failed
+  mount disposal, and the browser bundle's installed-package closure.
+- Browser review: 1280×1000 desktop and 375×812 mobile pass. The UI changes
+  rational parameters and windows, immediately clears old data on input edits,
+  rejects `1/0`, and preserves exact results for `10^400` while withholding its
+  numeric view. A discovered long-value overflow was fixed with text wrapping;
+  the large-value mobile case and normal desktop/mobile layouts have no
+  horizontal overflow. Mounted chart/calculation source identities agree.
+  Final browser console inspection reports zero errors and warnings.
+- Final prepared consumer: `/tmp/emdash-polynomial-vega-mxzXtq`. The tarball
+  SHA-256 is `3dde9b5cf39e7bb8274f6b8c4cdc94686f46b6c24fb37221499f57eac0a40344`;
+  browser bundle SHA-256 is
+  `4cd2c30204a789f8217985dbfdd68dd405338cec9d88b4135538d87c8af20e02`.
+  All ten fixture-source hashes, the tarball, generated dependency lock and
+  browser bundle were independently compared with the receipt. Screenshots
+  are under that consumer's `output/playwright/`. These temporary artifacts
+  are reproducible evidence; tracked fixture/package sources own the result.
+- The unminified consumer bundle is 1,796,534 bytes including Vega/Vega-Lite;
+  the separate computation-only package boundary remains 61,091 bytes. This is
+  integration evidence, not a performance or production bundle-size claim.
+  Root workspace/typecheck, focused public-entry tests, package/contract checks,
+  consumer checks, changed-file lint, document hygiene and exact staged review
+  cover this tranche. No root-test, full TypeScript, formal or repository-wide
+  aggregate was run. Print, book, formal owners and existing profiles are unchanged.
 
-### Active package persistent goal prompt
+### Run the package consumer
+
+From the dedicated worktree:
+
+```bash
+node packages/emdash/scripts/prepare-polynomial-vega.mjs
+```
+
+The script prints the fresh consumer path and its local-server command. See
+the fixture guide for explicit tarball/output options and ownership. The
+published npm `0.3.0` remains the earlier artifact without `/algebra`; this
+goal qualifies local package contents and a clean consumer, not a release.
+Main remains at `40cfad99`; completed changes are local goal-branch checkpoints.
+
+This continuation establishes the selected host/ecosystem mechanism: an
+ordinary package consumer uses exact Emdash computational values through
+public exports and derives a Vega-Lite visualization from the same
+source. It does not establish every OSCAR mechanism, numerical topology,
+automatic proof reconstruction, or the separately proposed worker/multi-engine
+extensions. Those remain future consumers selected through their own scope.
+
+### Completed package persistent goal prompt
 
 Complete the public-package-and-Vega-Lite continuation governed by the current
 continuation section of `docs/TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md` in

@@ -1,0 +1,20 @@
+{
+  "name": "emdash-polynomial-vega-consumer",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.16.0",
+  "scripts": {
+    "build": "tsc --noEmit && node build.mjs",
+    "test": "node --test consumer.test.mjs",
+    "start": "node serve.mjs"
+  },
+  "dependencies": {
+    "@hotdocx/emdash": "file:./emdash.tgz",
+    "vega": "5.33.1",
+    "vega-lite": "5.23.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.21.5",
+    "typescript": "5.9.3"
+  }
+}
