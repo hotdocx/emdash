@@ -2,7 +2,7 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: active external-result reuse continuation; first consumer complete and integrated
+Status: external-result reuse complete at focused qualification; aggregate waiver retained
 Current continuation baseline: `dde9f23d140ed6958f44a105c96a19c4a383772e`
 Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
@@ -92,10 +92,10 @@ data and explicitly supplied equations.
 
 | Row | State | Acceptance evidence |
 | --- | --- | --- |
-| ER-0. Scope and owner audit | In progress | Current authorities, exact owners/consumers, focused baseline and this scoped plan; retain the aggregate waiver; local planning checkpoint |
-| ER-1. Actual external output in Core | Pending | Returned Singular coefficients are reified directly into typed module data with exact source/result identity; native output cannot be substituted invisibly; parent, rank, coefficient and stale-input controls |
-| ER-2. Internal construction and reuse | Pending | Use those terms in the selected existing module/complex construction and a further typed internal consumer; all adopted equations are explicit and tracked; source/field observations prove that the actual external data survives |
-| ER-3. Runnable workflow and qualification | Pending | A concise TypeScript example/artifact exposes external result, internal object, second use and assumption status; real Singular, focused positive/negative Core/LP checks, typecheck/lint, document hygiene and reviewed local checkpoint |
+| ER-0. Scope and owner audit | Complete; planning checkpoint `f08398bf` | Current authorities, exact owners/consumers, focused baseline and this scoped plan; aggregate waiver retained |
+| ER-1. Actual external output in Core | Complete at focused qualification | Returned Singular coefficients are reified directly into typed module data; different valid coefficient choices remain distinct; no native membership solver is called by the new path |
+| ER-2. Internal construction and reuse | Complete at focused qualification | Existing constructors assemble a transparent Core complex from retained matrices and one explicitly adopted equation; its projected upper differential is used in a typed internal matrix action |
+| ER-3. Runnable workflow and qualification | Complete at focused qualification | Both example modes, artifact hashes, actual Singular and focused Core/LP controls pass; synchronized document/staged review and local implementation checkpoint |
 
 Keep one continuation row in progress. Finish the actual external-data-to-
 internal-reuse path; do not resolve this goal merely by noting that an adoption
@@ -137,6 +137,108 @@ must be diagnosed before promotion under the formal SOP.
 - This planning checkpoint links the accepted review and existing complex
   ledger. A new persistent goal is active with the prompt below and no token
   budget; scope and mathematical qualifications stay in this plan.
+- Planning checkpoint: `f08398bf`. The existing bounded-complex emitted-Core
+  conformance baseline also passes with its live opt-in (one test, 16.54 seconds).
+- ER-1: `createAlgebraPolynomialWorkbenchReifier` extracts the existing pure
+  reification step so the new path does not run native ideal membership.
+  `algebra_external_module_reuse.ts` checks the actual external witness,
+  retains its coefficients in the column `(a1,a2,-1)`, and creates the existing
+  native module maps/complex plus typed Core matrices and composition.
+  Source identity includes both the input workspace and chosen external result,
+  including backend/version/request and coefficient encodings. Equivalent
+  membership answers with different coefficient vectors cannot be silently
+  interchanged during internal reuse.
+- ER-2: `algebra_formal_bounded_complex_assembly.ts` adds 11 source-aligned
+  opaque signature mirrors and assembles existing nil/cons/successor terms.
+  Its source pin is the active complex owner SHA-256 `7d4b1373…`; no LP source,
+  Core kernel owner, rewrite or unification rule changes. Existing law
+  delegation checks composites of the retained external-derived matrices and
+  records one `computed-equation` assumption after an explicit caller decision.
+  The whole `external_reuse_complex` is a transparent definition with a
+  constructor body. It is not a body-free assumed whole object.
+- Internal reuse: the source's projections extract the upper differential
+  from that complex reference, and `comm_ring_matrix_apply` consumes it with
+  a supplied formal argument. `external_reuse_image` is a further transparent
+  typed definition. Core checks construction and use; the focused LP oracle
+  verifies that projection recovers the exact external column and that the
+  action agrees with direct application of that column. The TypeScript
+  mirrors remain opaque; this does not newly qualify standalone TypeScript
+  evaluation of the complex's projection reductions.
+- Controls: two distinct valid external coefficient vectors produce distinct
+  Core columns and source identities. Wrong parents, altered coefficients,
+  changed input/result identity, wrong ranks and absent adoption decisions
+  are rejected. A valid rational alternative witness is accepted by exact
+  arithmetic but rejected by the bounded integer-only formal interpretation;
+  the code does not fall back to a native integral witness. Nonmembership
+  observations cannot produce the internal construction.
+- Focused qualification: the new six-case suite and the predecessor workbench
+  suite pass 13 tests with one unchanged predecessor conformance opt-in skip
+  (14 tests total, 12.51 seconds). The new live case runs actual Singular 4330,
+  a positive constructor/projection/action LP probe, and a negative assertion
+  against a different valid column. The negative is an assertion failure,
+  not a syntax/unknown-name error. Both LP invocations use the normal serial
+  2 GiB guard and a 60-second deadline. Root typecheck, changed-owner/test lint
+  and registration pass; 456 suites are reachable. No aggregate was run.
+- Probe envelope: only the exact consumer inputs, adopted equation and new
+  definitions are emitted through the existing Core-to-LP expression serializer.
+  An initial envelope included the checker environment's intrinsic defaults
+  and used the wrong assertion prefix; correcting that test envelope required
+  no mathematical source or rule changes. Raw attempts remain under
+  `emdash2/logs/check-runs/`.
+- ER-3: the runnable example passes in data-only and explicit-adoption modes.
+  Their separate ignored output directories contain exact external coefficients,
+  Core terms/types, the derived complex/action and assumption status. The
+  source bytes and each adopted goal's source/profile bytes independently match
+  their recorded SHA-256 identities. The example's rank display derives from
+  the constructed modules. No book, browser renderer or hosted app is changed.
+
+### Run the external-result continuation
+
+From this worktree, the default mode returns typed matrices and their internal
+composition without adopting any equation:
+
+```bash
+node --require ts-node/register examples/v3_2_external_module_reuse.ts
+```
+
+To explicitly select the existing assumption route, build the whole internal
+complex and use its projected differential:
+
+```bash
+node --require ts-node/register examples/v3_2_external_module_reuse.ts \
+  --adopt-computed-equation
+```
+
+The example writes `overview.md`, `source.json` and `result.json` under
+`emdash2/tmp/probes/external-module-reuse/data/` or `adopted/`. The adopted mode
+also writes the exact `law-1.source.json` and `law-1.profile.json` bytes used
+by the proof-document fingerprint. `--output DIRECTORY` selects another path.
+These are generated artifacts; the example and source owners remain authoritative.
+
+The formal argument is an explicit input to the module action, not an inferred
+numeric vector or another computed-equation assumption. No exactness, complete
+kernel, resolution, homology result or automatically reconstructed proof is
+claimed. The new source-freshness helper checks input/result identity; it does
+not certify deserialized Core artifacts without fresh checking.
+
+Focused live validation:
+
+```bash
+EMDASH_RUN_EXTERNAL_MODULE_REUSE=1 node --require ts-node/register --test \
+  tests/v3_2_algebra_external_module_reuse_tests.ts
+```
+
+The completed path answers this continuation's mechanism question: actual
+external output can survive typed internal realization, explicit law adoption,
+whole-object construction and a further internal operation. Richer coefficient
+interpretations, multiple external engines, foreign-object lifecycle and
+broader OSCAR mechanism parity retain the review's untested boundaries.
+
+The continuation is complete under the standing aggregate waiver. No complete
+TypeScript or repository-wide aggregate is claimed. The implementation is a
+local descendant checkpoint on the existing goal branch; main remains at the
+previously integrated `dde9f23d` until separately selected integration. No LP
+source, formal rule, book/renderer source, package setup or lockfile changed.
 
 ### Active persistent goal prompt
 

@@ -120,12 +120,9 @@ export type AlgebraWorkbenchFingerprint = (
     sourceText: string, profileText: string
 ) => CoreProofArtifactFingerprint;
 
-export async function prepareAlgebraPolynomialWorkbenchGoal(
-    workspace: AlgebraPolynomialWorkspace,
-    fingerprint: AlgebraWorkbenchFingerprint
-) {
+/** Reify source polynomials without running either ideal-membership algorithm. */
+export function createAlgebraPolynomialWorkbenchReifier(workspace: AlgebraPolynomialWorkspace) {
     const input = algebraPolynomialWorkspaceInput(workspace);
-    const source = algebraPolynomialWorkspaceSource(workspace);
     const because = provenance('derived', 'shared polynomial workbench goal');
     const formalRing = kernelFree('workbench_R', because);
     const formalVariables = input.ideal.ring.variables.map((_, index) =>
@@ -155,6 +152,19 @@ export async function prepareAlgebraPolynomialWorkbenchGoal(
             return coefficient.numerator < 0n ? ringCall('bridge_comm_ring_neg', term) : term;
         }
     });
+    return Object.freeze({
+        input, reifier, formalRing, formalVariables: Object.freeze(formalVariables), zero
+    });
+}
+
+export async function prepareAlgebraPolynomialWorkbenchGoal(
+    workspace: AlgebraPolynomialWorkspace,
+    fingerprint: AlgebraWorkbenchFingerprint
+) {
+    const { input, reifier, formalRing, formalVariables, zero } =
+        createAlgebraPolynomialWorkbenchReifier(workspace);
+    const source = algebraPolynomialWorkspaceSource(workspace);
+    const because = provenance('derived', 'shared polynomial workbench goal');
     const realization = defineAlgebraFormalIdealEqualityRealization({
         basis: algebraGroebnerBasis(input.ideal), left: workspace.left,
         right: workspace.right, reifier

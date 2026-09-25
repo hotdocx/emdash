@@ -25,6 +25,8 @@ export * from './algebra_ideal_singular';
 export * from './algebra_polynomial_plot';
 export * from './algebra_polynomial_workbench';
 export * from './algebra_polynomial_workbench_view';
+export * from './algebra_external_module_reuse';
+export * from './algebra_formal_bounded_complex_assembly';
 export * from './algebra_ideal_reference_operations';
 export * from './algebra_zariski';
 export * from './algebra_zariski_reference_operations';
