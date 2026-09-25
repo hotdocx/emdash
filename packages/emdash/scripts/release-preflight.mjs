@@ -44,6 +44,12 @@ const EXPECTED_EXPORTS = Object.freeze({
     require: './dist/benchmark.cjs',
     default: './dist/benchmark.js',
   },
+  './algebra': {
+    types: './dist/types/package_algebra.d.ts',
+    import: './dist/algebra.js',
+    require: './dist/algebra.cjs',
+    default: './dist/algebra.js',
+  },
   './package.json': './package.json',
 });
 const EXPECTED_FILES = Object.freeze(['dist', 'README.md', 'LICENSE']);

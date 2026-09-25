@@ -110,7 +110,7 @@ assert.deepEqual(
 );
 assert.deepEqual(
   Object.keys(emdashPackage.exports),
-  ['.', './authoring', './workspace', './benchmark', './package.json'],
+  ['.', './authoring', './workspace', './benchmark', './algebra', './package.json'],
   'the emdash package must expose only its reviewed entry points',
 );
 

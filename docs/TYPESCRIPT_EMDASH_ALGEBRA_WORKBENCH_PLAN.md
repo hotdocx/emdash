@@ -56,8 +56,8 @@ required for ordinary computation and rendering.
 | Row | State | Acceptance evidence |
 | --- | --- | --- |
 | PK-0. Scope and baseline | Complete at planning checkpoint | All 65 worktrees clean; main/goal branch equal to `40cfad99`; current authorities and package owners audited; workspace/typecheck and nearest 32-test baseline pass with one unchanged opt-in skip |
-| PK-1. Curated package API | In progress | A bounded `/algebra` surface reuses exact owners; focused public-entry controls and ESM/CJS/declaration/browser packed checks; no Core/process/visualization runtime dependency |
-| PK-2. External ecosystem consumer | Planned | Clean artifact install with own dependency graph; TypeScript app and actual Vega-Lite rendering of source-derived segments; exact parameter/viewport interaction and current-source binding |
+| PK-1. Curated package API | Complete at focused qualification | `/algebra` reuses exact owners; public-entry controls and ESM/CJS/declaration/browser packed checks pass; no Core/process/visualization runtime dependency |
+| PK-2. External ecosystem consumer | In progress | Clean artifact install with own dependency graph; TypeScript app and actual Vega-Lite rendering of source-derived segments; exact parameter/viewport interaction and current-source binding |
 | PK-3. Qualification and handoff | Planned | Relevant negative controls, artifact identity, desktop/mobile browser inspection, synchronized docs/plan and validated local checkpoint |
 
 Keep one row in progress. Package qualification must exercise the actual
@@ -88,6 +88,21 @@ forward unless this consumer actually changes that boundary.
   accepted review remains dated release evidence.
 - The browser inspection uses the Playwright CLI skill. It is a consumer
   interaction check, not a new end-to-end test platform or renderer migration.
+- Planning checkpoint: `884c4ab3`; persistent goal active with the prompt below.
+- PK-1: `package_algebra.ts` curates existing exact rational, polynomial, ideal,
+  witness and sampling exports. The manifest/build/declaration inputs and exact
+  workspace/release contracts now include `/algebra`; the registry version is
+  unchanged. The entry exposes no formal adoption, process transport or custom
+  SVG renderer. The package retains no runtime dependency.
+- PK-1 qualification: workspace, root typecheck, changed TypeScript lint and
+  registration pass (457 reachable suites). All three public-entry tests pass,
+  including parameter/source changes and exact computation surviving a rejected
+  floating-point interpretation. Package build, all three release-preflight
+  contract tests and the existing full packed-install verifier pass. The new
+  packed consumer checks ESM/CJS arithmetic, declarations and a browser bundle;
+  its declaration closure contains eight computational modules including the
+  entry, and its unminified browser bundle is 61,091 bytes with no Core/formal,
+  Node or visualization dependency. No aggregate or LP invocation ran.
 
 ### Active package persistent goal prompt
 

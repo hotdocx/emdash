@@ -42,7 +42,7 @@ test('accepts the exact immutable emdash release identity', () => {
   assert.equal(Object.isFrozen(report), true);
   assert.deepEqual(
     Object.keys(manifest.exports),
-    ['.', './authoring', './workspace', './benchmark', './package.json'],
+    ['.', './authoring', './workspace', './benchmark', './algebra', './package.json'],
   );
   assert.deepEqual(manifest.exports['./benchmark'], {
     types: './dist/types/package_benchmark.d.ts',
@@ -51,6 +51,12 @@ test('accepts the exact immutable emdash release identity', () => {
     default: './dist/benchmark.js',
   });
   assert.equal(manifest.bin, undefined);
+  assert.deepEqual(manifest.exports['./algebra'], {
+    types: './dist/types/package_algebra.d.ts',
+    import: './dist/algebra.js',
+    require: './dist/algebra.cjs',
+    default: './dist/algebra.js',
+  });
   assert.equal(manifest.scripts, undefined);
   assert.equal(manifest.dependencies, undefined);
 });

@@ -15,6 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 import { validateEmdashNpmReleasePreflight } from './release-preflight.mjs';
+import { verifyPackedAlgebra } from './verify-packed-algebra.mjs';
 
 const packageRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -152,6 +153,8 @@ try {
     'dist/workspace.cjs',
     'dist/benchmark.js',
     'dist/benchmark.cjs',
+    'dist/algebra.js',
+    'dist/algebra.cjs',
     'dist/types/package_core.d.ts',
     'dist/types/package_core.d.ts.map',
     'dist/types/package_authoring.d.ts',
@@ -160,6 +163,8 @@ try {
     'dist/types/package_workspace.d.ts.map',
     'dist/types/package_benchmark.d.ts',
     'dist/types/package_benchmark.d.ts.map',
+    'dist/types/package_algebra.d.ts',
+    'dist/types/package_algebra.d.ts.map',
     'dist/types/package.json',
     'LICENSE',
     'README.md',
@@ -197,7 +202,7 @@ try {
   );
   assert.deepEqual(
     Object.keys(installedManifest.exports),
-    ['.', './authoring', './workspace', './benchmark', './package.json'],
+    ['.', './authoring', './workspace', './benchmark', './algebra', './package.json'],
   );
   assert.equal(installedManifest.dependencies, undefined);
   assert.equal(
@@ -1626,6 +1631,7 @@ globalThis.emdashPackedCoreOnlySmoke = {
     'packed benchmark browser closure exceeds the 175000-byte gzip cap',
   );
 
+  await verifyPackedAlgebra({ consumerDirectory, repositoryRoot, packageRoot });
   console.log('Packed @hotdocx/emdash install verified.');
 } finally {
   await rm(temporaryRoot, { recursive: true, force: true });

@@ -9,7 +9,9 @@ produce ordinary terms which are checked at the same explicit Core boundary.
 pnpm add @hotdocx/emdash
 ```
 
-The package has four deliberately bounded entries:
+The checkout has five deliberately bounded entries. The additive `/algebra`
+entry described below is qualified through local packed-artifact checks; it is
+not included in the previously published npm `0.3.0` artifact.
 
 - `@hotdocx/emdash` — Core syntax, contexts, sessions, checking, evaluation,
   conversion, and the reviewed v3.2 manifest;
@@ -101,7 +103,16 @@ The package has four deliberately bounded entries:
   pass fresh TypeScript/emdash replay and one genuine ambiguity case abstains.
   These are reproducible baselines, not proof authority, committed source,
   agent-performance measurements, or a leaderboard. The evaluator invokes no
-  provider, model, network, filesystem adapter, or proof server.
+  provider, model, network, filesystem adapter, or proof server; and
+- `@hotdocx/emdash/algebra` — exact rational-polynomial construction and
+  arithmetic, bounded reference Gröbner/ideal-membership computation, retained
+  coefficient witnesses and independent exact arithmetic checks, plus bounded
+  approximate plane-curve samples. This entry imports no Core checker, formal
+  environment, external process adapter or plotting library. Parent identity,
+  exact inputs and computation limits remain those of the existing owners.
+  JavaScript numbers are rejected as exact rational inputs; use `bigint` or
+  rational text such as `'1/2'`. Samples use floating-point arithmetic and do
+  not certify curve topology. Formal checking/adoption is a separate workflow.
 
 ```ts
 import { CoreChecker } from '@hotdocx/emdash';

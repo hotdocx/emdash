@@ -20,6 +20,7 @@ const entryPoints = {
   authoring: path.join(repositoryRoot, 'src/v3_2/package_authoring.ts'),
   workspace: path.join(repositoryRoot, 'src/v3_2/package_workspace.ts'),
   benchmark: path.join(repositoryRoot, 'src/v3_2/package_benchmark.ts'),
+  algebra: path.join(repositoryRoot, 'src/v3_2/package_algebra.ts'),
 };
 
 await rm(distDirectory, { recursive: true, force: true });
