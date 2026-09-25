@@ -2,12 +2,160 @@
 
 Date: 2026-09-24
 Plan-ID: `TS-EMDASH-ALGEBRA-WORKBENCH`
-Status: complete at focused qualification; main integration authorized and recorded; aggregate waiver retained
-Baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
+Status: active external-result reuse continuation; first consumer complete and integrated
+Current continuation baseline: `dde9f23d140ed6958f44a105c96a19c4a383772e`
+Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
 
-## Objective and authority
+## Current continuation: external result and internal reuse
+
+Selected by the user on 2026-09-24 after the
+[integration-mechanism clarification](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md#follow-up-integration-mechanisms-and-optional-certification).
+Implement **external result → typed internal object or explicit adopted
+declaration → reuse in another mathematical construction**. Certification of
+the CAS algorithm or automatic proof reconstruction is not an acceptance
+criterion. Mathematical interpretation, source identity and explicit assumption
+status remain part of the integration contract.
+
+Reuse this existing dedicated branch/worktree from `dde9f23d`; main and this
+branch were clean and equal at selection, and all 65 registered worktrees were
+inspected. The earlier local-checkpoint authorization continues to apply.
+The completed first-consumer fast-forward is recorded below; this new
+continuation uses local checkpoints and does not select another main integration,
+push, publication, branch/worktree removal or history rewrite. The user's waiver
+of full TypeScript and repository-wide aggregates remains in force.
+
+### Selected mathematical consumer
+
+Retain the polynomial input R=Q[x,y], f1=y−x², f2=xy−1 and g=x³−1. Request
+the actual Singular coefficients a=(a1,a2) with g=a1*f1+a2*f2. Preserve those
+returned polynomials, even when Singular selects a different valid coefficient
+vector from the native reference algorithm. Native recomputation may check or
+compare the result; it must not silently replace the external output used by
+the internal consumer.
+
+Form the row D=(f1,f2,g): R³→R and the column
+s=(a1,a2,−1): R→R³. Their composite is zero. This gives a concrete two-step
+finite free complex `R ← R³ ← R`. It supplies a module-level reuse consumer
+without claiming that this one relation generates the whole kernel, or that
+the complex is a resolution, exact sequence or computed homology object.
+
+The selected path is:
+
+```text
+Singular coefficient vector, with exact input/result binding
+  -> existing polynomial/module values and arithmetic checks
+  -> typed Core vector/matrix using the actual returned coefficients
+  -> explicit adoption of any required computed equation
+  -> an internal construction using existing module/complex owners
+  -> a further typed use of the resulting object
+```
+
+Audit the existing finite-module, bounded-complex and chain-map interfaces
+before finalizing the last consumer. Prefer a whole constructed complex and
+an actual projection/module action or chain-map use. The existing native
+complex/chain-map operations and formal recursive constructors are the starting
+point. The current TypeScript complex bridge retains reified matrices and a
+constructor recipe; audit whether a small Core-term assembly/mirror is needed
+to consume the whole object. A metadata-only recipe or a second display of the
+same coefficients does not satisfy internal reuse.
+
+Adoption is an explicit caller action with a recorded decision, not a change
+to Core conversion or a new mathematical axiom in the library. If a law is
+adopted without a proof body, retain its exact type, source/result provenance,
+classification and downstream dependency. Typed data without adoption remains
+usable where its consumers require no law. Never assume an entire complex or
+universal construction when existing constructors can assemble it from retained
+data and explicitly supplied equations.
+
+### Existing owners and fixed boundaries
+
+- The external exchange and independent arithmetic check remain in
+  `algebra_ideal_singular.ts` and `algebra_ideal_witness.ts`.
+- `algebra_polynomial_module.ts`, `algebra_polynomial_presentation.ts` and
+  `algebra_polynomial_bounded_complex.ts` own native vectors, maps, complexes
+  and chain-map operations. Retain their ordered bases, ranks and maps.
+- `algebra_formal_finite_module.ts`, `algebra_formal_bounded_complex.ts`,
+  their signature environments, existing delegation/adoption and assumption
+  source owners supply typed internal data, claims and explicit declarations.
+- The [bounded free-complex plan](TYPESCRIPT_EMDASH_FORMAL_BOUNDED_FREE_COMPLEXES_PLAN.md)
+  and active LP owners `emdash3_2_commutative_algebra_bounded_free_complexes.lp`
+  and `emdash3_2_commutative_algebra_bounded_free_chain_maps.lp` own the recursive
+  formal representation. New frontend assembly must follow those owners.
+- Root guidance, the elaborator handoff and nested formal SOP continue to
+  govern all work. No global Op/profile/variance repair, six-term comparison,
+  spectral work, general proof reconstruction, new CAS framework or second
+  external backend is selected by this continuation.
+
+### Continuation acceptance and checkpoints
+
+| Row | State | Acceptance evidence |
+| --- | --- | --- |
+| ER-0. Scope and owner audit | In progress | Current authorities, exact owners/consumers, focused baseline and this scoped plan; retain the aggregate waiver; local planning checkpoint |
+| ER-1. Actual external output in Core | Pending | Returned Singular coefficients are reified directly into typed module data with exact source/result identity; native output cannot be substituted invisibly; parent, rank, coefficient and stale-input controls |
+| ER-2. Internal construction and reuse | Pending | Use those terms in the selected existing module/complex construction and a further typed internal consumer; all adopted equations are explicit and tracked; source/field observations prove that the actual external data survives |
+| ER-3. Runnable workflow and qualification | Pending | A concise TypeScript example/artifact exposes external result, internal object, second use and assumption status; real Singular, focused positive/negative Core/LP checks, typecheck/lint, document hygiene and reviewed local checkpoint |
+
+Keep one continuation row in progress. Finish the actual external-data-to-
+internal-reuse path; do not resolve this goal merely by noting that an adoption
+API exists. If the owner audit identifies missing frontend assembly, implement
+the bounded missing piece. A genuinely unsupported semantic prerequisite must
+be identified at its owner and cannot be hidden by substituting native output,
+postulating an opaque whole object, or merely showing a claim. Any material
+change of the selected mathematical consumer must preserve the accepted end
+state and be recorded here with evidence.
+
+Use focused tests and bounded serial Lambdapi probes under the existing
+2 GiB/default-deadline policy. No repository-wide aggregate or repeat of the
+unrelated gluing-owner allocation failure is selected. Carry forward unchanged
+qualification and add tests for actual external-data provenance, altered and
+foreign-parent results, dimension errors, stale sources/results, and explicit
+adoption/reuse. Source-pin failures remain review signals. A source change
+requiring new mathematical rules is outside the intended frontend slice and
+must be diagnosed before promotion under the formal SOP.
+
+### Continuation decisions and evidence
+
+- ER-0 baseline: all 65 worktrees were clean, and main/goal branch matched
+  `dde9f23d`. The existing worktree's dependency graph is reused; workspace
+  verification and root typecheck pass. The three nearest witness/complex/law-
+  delegation suites pass 11 tests with one unchanged live-Singular opt-in skip
+  (15.77 seconds). No aggregate was run.
+- Owner audit: the formal complex library supplies nil/cons, whole-complex
+  constructors and projections. The TypeScript bridge currently returns typed
+  matrices and a recursive recipe. Complete that frontend assembly, then use
+  the constructed complex's upper differential through the existing matrix-
+  application owner. Native chain-map identity/composition exists; the formal
+  source does not expose matching general identity/composition function names.
+  Do not invent such an owner or count a native-only operation as internal reuse.
+- The selected internal consumer will retain the actual external column in the
+  whole complex and apply its projected differential to a typed formal input.
+  Focused LP observations must confirm that the projection retains the returned
+  column, alongside typechecked Core construction/application. This is a
+  module action, not a claim about a complete kernel or homology calculation.
+- This planning checkpoint links the accepted review and existing complex
+  ledger. A new persistent goal is active with the prompt below and no token
+  budget; scope and mathematical qualifications stay in this plan.
+
+### Active persistent goal prompt
+
+Complete the external-result-to-internal-reuse continuation governed by the
+current continuation section of `docs/TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md`
+in `/home/user1/emdash1-algebra-workbench-v1`, on
+`goal/algebra-workbench-polynomial-v3.2`, from its current descendant state.
+Let the living plan own the concrete consumer, ordering, decisions, validation
+and recovery. Preserve actual external output through typed internal realization
+and reuse in another mathematical construction. Keep any adopted equations
+explicit; automatic certification/proof reconstruction is not required.
+Follow current repository/formal authorities and the user's aggregate waiver,
+preserve unrelated work and make validated local checkpoints. Complete the
+selected continuation rows and synchronized handoff without substituting a
+native result or metadata-only demonstration. No push, new main integration,
+publication, history rewriting, worktree cleanup or deferred foundational
+migration is included.
+
+## First consumer: objective and authority
 
 Implement the first bounded consumer accepted from the
 [OSCAR/workbench review](EMDASH_OSCAR_AND_ALGEBRA_WORKBENCH_REVIEW_2026-09-24.md):

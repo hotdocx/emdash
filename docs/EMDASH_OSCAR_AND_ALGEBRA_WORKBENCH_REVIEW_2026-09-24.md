@@ -278,3 +278,8 @@ then reuse it in a second mathematical operation, preferably through an existing
 module/homology interface. Optional proof reconstruction can be added for a
 specific mathematical need. Algorithm breadth, language ergonomics, performance
 and formal assurance remain separate from integration-mechanism parity.
+
+Continuation selected (2026-09-24): the user accepted this external-result-to-
+internal-reuse probe. Its scope and execution now live in the
+[current workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md#current-continuation-external-result-and-internal-reuse).
+The completed first consumer and its qualification remain dated evidence.

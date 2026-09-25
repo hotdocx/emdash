@@ -4,6 +4,12 @@ Date: 2026-09-01
 
 Plan-ID: `TS-EMDASH-FORMAL-BOUNDED-FREE-COMPLEXES`
 
+Consumer continuation (2026-09-24): the
+[external-result workbench continuation](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md#current-continuation-external-result-and-internal-reuse)
+reuses these completed owners for an externally supplied relation vector,
+typed complex assembly and internal reuse. Its living plan owns that bounded
+frontend work; the formal history and qualification below remain unchanged.
+
 Status: completed on a dedicated branch/worktree; implementation and
 conformance checkpoint `2311e93`.
 
