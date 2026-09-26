@@ -341,9 +341,11 @@ retry (86537) reached `short_exact_normalization_projections` before exhausting
 allocation. Recipe-only retry 96993 also failed at that projection owner with
 6 GiB/600s and GC `o=5,v=1024`. The supported memory ceiling is now 8 GiB,
 with defaults unchanged and 51 guard/runner/registry/DevOps/native-profile
-tests green. Session 86306 retries only normalization at 8 GiB/600s with
-`o=20,v=1024`. Earlier runner hashes cannot be silently treated as the new
-tooling identity. The TypeScript probe-bridge regression
+tests green. Session 86306 passed the full normalization recipe at 8 GiB/600s
+with `o=20,v=1024`; its receipt is in the resource report. Full-suite
+continuation 33024 uses `logs/api-ordinary-check-eight-gib-resume.log`.
+Earlier runner hashes cannot be silently treated as the new tooling identity.
+The TypeScript probe-bridge regression
 also passes and is checkpointed separately at `2653f6fd`.
 The previous session handles 46872, 33123, 8836, 59878 and 22260 are terminal. Inspect the actual
 current process/handle on continuation; this text is not liveness evidence.
@@ -682,10 +684,25 @@ three generic cuts removed and guarded counterparts present:
 `20260926T072736Z-1030f130fcc2460983b492cbc1a7cb06` (8.590s).
 No correction is promoted yet and no source-branch closeout claim is copied
 over the contrary unqualified-preservation evidence.
-Prepared next controls are `api_precomp_identity_baseline.lp` and the
-`api_precomp_canonical_controls.lp` / `api_full_profiles_precomp_canonical_review.lp`
-pair, whose identity patterns use the actual `id Cat_cat A` runtime head.
-Those new controls have not yet executed.
+The old-baseline non-conversion control confirms that the additional raw
+identity observation was already stuck before this correction:
+`20260926T074438Z-033b26ef8f864f4f8284f8ace983db60` (6.150s).
+The next variant uses the actual `id Cat_cat A` runtime head, exposing the
+already-normalized identity action q and retaining its source argument V.
+Its unqualified staged negative, classified positive and identity conversion
+control all pass: `20260926T074444Z-aef125611bc54883a54c9cf08c5c4258`
+(8.292s). The complete source profile reviewer also passes:
+`20260926T074453Z-aaa21cea1ec5420da835a088d256930a` (10.743s).
+
+Preferred correction candidates are now `api_main_lax_precomp_canonical.lp`
+and `api_full_profiles_precomp_canonical.lp`. The identity projection join
+supplies the intended named-identity computation; it is not evidence of a
+new regression in the old baseline. Before selection, add full/nested
+accumulation controls for all three migrated rules, compare warnings, and
+recheck strict actions, ordinary derivations and actual main consumers over
+this corrected nucleus. They previously checked over the nucleus retaining
+the three residual rules, so their earlier receipts alone do not qualify
+the corrected environment.
 
 ## Source Path Accounting
 

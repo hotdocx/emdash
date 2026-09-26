@@ -337,9 +337,14 @@ executable evidence.
   6 GiB/600s with `o=5,v=1024`. The explicit supported memory ceiling is now
   extended to 8 GiB under the standing authorization; defaults remain 2 GiB.
   Guard/runner/registry and unchanged native-profile checks pass (51 tests).
-  Current normalization-only replay: session 86306, 8 GiB/600s per child,
-  `o=20,v=1024`. The runner-code change means earlier receipts remain
-  historical execution evidence, not exact-current-tooling resumable results.
+  Normalization-only replay 86306 passed the full recipe at 8 GiB/600s per
+  child with `o=20,v=1024`, receipt
+  `20260926T073103Z-666ff1d96c2146519a3b393114d25ac4` (388.071s total).
+  Guard extension and feasibility ledger are checkpointed at `f4a3aac1`.
+  Current full-suite continuation is session 33024, log
+  `emdash2/logs/api-ordinary-check-eight-gib-resume.log`. The runner-code
+  change means earlier receipts remain historical execution evidence, not
+  exact-current-tooling resumable results.
   Re-poll the handle or inspect actual process state before taking a wait or
   restart decision. The ordinary mathematical changes are intentionally
   still unstaged pending qualification; validation and baseline-import repairs

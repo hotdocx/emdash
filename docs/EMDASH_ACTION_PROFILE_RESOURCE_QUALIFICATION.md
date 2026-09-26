@@ -142,6 +142,9 @@ the new ceiling, serialization, deadline behavior and subject-reduction
 bypass rejection. The runner-code change invalidates exact tooling-identity
 reuse of older receipts; retain them as historical evidence.
 
-The next experiment runs only the registered normalization recipe at
-8 GiB/600s per child with `o=20,v=1024`. It is not a full-suite success or a
-waiver of that group. The living plan owns its current process and receipt.
+The registered normalization recipe passes at 8 GiB/600s per child with
+`o=20,v=1024`, including the previously failing projection owner and all its
+reviewers. Receipt `20260926T073103Z-666ff1d96c2146519a3b393114d25ac4`
+records 388.071s total recipe time. This is not a full-suite success: remaining
+targets and current-tooling qualification continue under the living plan.
+Checkpoint `f4a3aac1` records the bounded guard extension and its tests.
