@@ -234,6 +234,12 @@ explicit 6 GiB/180s profile under the user's memory-extension authorization.
 File limits and serial execution remain in force. The separate proportional-
 validation policy still forbids unnecessary aggregates.
 
+For the action-profile integration goal, the user explicitly authorized any
+needed measured memory/timeout increases on 2026-09-26, without further
+approval requests. Keep normal defaults unchanged, use explicit per-target
+profiles, and record the reason and measurements in its living plan. Preserve
+subject reduction, serial execution, file limits and the no-swap policy.
+
 For Lambdapi allocation failures or timeouts, follow the repository-wide
 [resource/GC procedure in the Lambdapi SOP](emdash2/AGENTS.md#avoid-hung-typechecks).
 Keep runtime profiles explicit and distinguish them from changes to formal

@@ -14,7 +14,7 @@ Supersedes: action-profile integration deferral for this dedicated goal
 only. Source-branch plans/receipts remain historical evidence. Op/duality,
 six-term comparison and the other excluded goals remain deferred.
 
-Side-Task-Ledger: `API-00` through `API-10` below; owner/consumer decisions
+Side-Task-Ledger: `API-00` through `API-10`, plus `API-02R`, `API-02I` and `API-02M` below; owner/consumer decisions
 are maintained in `EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md`.
 
 Infinity-Codex-Origin: session `01a0db41-9157-7592-afe5-5daa073f925f`;
@@ -177,7 +177,10 @@ compatibility requirements.
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
 | `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
 | `API-02` | first controls complete; no semantic promotion | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
-| `API-03` | pending | Whole properties, stable/raw opaque profiles and named admissions against main's contravariant ladder; positive/noncollapse consumers. |
+| `API-03` | ordinary classifier implemented; validation in progress | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory are in the working tree. Direct callers are migrated. A measured inclusion projection beta preserves both action orders and higher action. Global cuts and Gray arrows remain transitional until API-04/05/06. |
+| `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
+| `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
+| `API-02M` | target and first consumer qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): the unchanged 38-file `homology_map_kernel_covers` closure passes compilation at 6 GiB/180s after allocation failure at 3 GiB. Object load and the direct consumer pass at default limits. Standing user authorization covers needed measured resource increases; full-suite reintegration remains required. |
 | `API-04` | pending | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
 | `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
@@ -294,11 +297,104 @@ executable evidence.
   references, 139 local Markdown file targets and exact staged diff passed.
 - The inventory's first feasibility receipt records nine bounded runs:
   seven successful baselines/profile controls and two expected rejections.
-  These establish the measured initial boundary only; main's global cuts
-  remain active and no library LP or TypeScript implementation has changed.
-- Next: implement the smallest ordinary whole-property/classifier tranche
-  at `emdash3_2_gray_profiles.lp`, starting from the final source's whole
-  property and derived component evidence. Preserve existing computation
-  until its consumer migration is ready. Rehome strict inverse/equivalence
-  action before removing the capped ambient cut; use named evaluation and
-  the newer Hom-comparison consumer to qualify the mapping boundary.
+  These describe the initial discovery boundary. The subsequent ordinary
+  classifier implementation is now in the working tree; the nucleus and
+  TypeScript implementation remain unchanged.
+- Direct classifier/closure/graph/simplex consumers pass, as does the central
+  suite after serial compiled-parent preparation at unchanged 2 GiB limits.
+  A selected face negative was reproduced as stale on exact baseline main;
+  its positive observation passes in both environments. The inventory records
+  the new inclusion projection, warning families and exact receipts.
+- The bounded check suite passed 86 targets before an unchanged algebra
+  closure exhausted memory. Compiled-parent recovery exposed a false success
+  in the old runner; `31689948` fixes that validation defect. The rebuilt
+  object loads and its original affine-cover consumer passes. Old receipts
+  cannot be silently relabelled as corrected-runner evidence.
+- Next: finish the bounded suite under the corrected runner, complete the
+  ordinary tranche's documentation/health qualification and checkpoint it.
+  Then rehome strict inverse/equivalence action before removing the capped
+  ambient cut; use named evaluation and the newer Hom-comparison consumer
+  to qualify the mapping boundary. The final strict-action source owner
+  already checks as an isolated feasibility probe against the ordinary port.
+- Current check continuation: session handle 60278, log
+  `emdash2/logs/api-ordinary-check-independent.log`. This is the independent
+  partition of 567 registered check targets; 22 dependent/atomic-recipe
+  targets remain required while resource qualification continues below.
+  It reuses only exact matching receipts and does not claim full-suite success.
+  Re-poll the handle or inspect actual process state before taking a wait or
+  restart decision. The ordinary mathematical changes are intentionally
+  still unstaged pending qualification; validation and baseline-import repairs
+  were checkpointed separately.
+
+### Authorized Bounded Resource Experiment
+
+Session 22260 is now terminal at `emdash3_2_homology_map_kernel_covers.lp`.
+Its 38-file LP closure is byte-identical to main `37ce19d5` and excludes the
+profile changes. The guarded 2 GiB runs exhausted allocation at 63.494s;
+after compiling and verifying its three direct parents, at 43.599s with
+`o=20,v=1024`; and at 82.220s with `o=5,v=1024`. Max child RSS was about
+1,820,000 KiB in each failure. The second and third runs enter the target
+body directly, so repeated import checking is no longer the limiting stage.
+
+Receipts: `20260926T043136Z-9e6d00b78f1c430a89ec02952d57397a`,
+`20260926T043515Z-1949fd0676d94b1cb4e44a5d835bd760`, and
+`20260926T043830Z-7370d47dfb344c298b54297030dea64b`.
+
+The user has now supplied standing authorization for needed memory/deadline
+increases. Do not ask again for these resource experiments. The first check
+used 3 GiB/90s, including compilation, and exhausted allocation at 66.388s
+without producing an object (receipt
+`20260926T051024Z-225df07de9044af18a7fdcdcc54ab880`). The next measured
+target-only experiment at 6 GiB/180s passed in 96.259s, with maximum child
+RSS 3,668,804 KiB. The nonempty 2,890,429-byte object loads, and the direct
+`homology_map_corrections` consumer passes at the normal 2 GiB/90s limits.
+Exact hashes and all four receipts are in the
+[resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md).
+Replay:
+
+```bash
+EMDASH_LP_MEMORY_MIB=6144 OCAMLRUNPARAM=o=20,v=1024 \
+  python3 scripts/run_lambdapi.py --quiet --no-colors --timeout-ms 180000 --compile \
+  emdash3_2_homology_map_kernel_covers.lp
+```
+
+This is one target-specific resource experiment. The normal 2 GiB/90-second
+defaults, serial/file guards, no-swap policy and subject reduction remain
+intact. The nested SOP and root guidance now record the user's
+standing authorization. The independent partition continues; its exclusion list is
+`emdash2/tmp/probes/api_resource_pending_targets.json`, and its eventual
+result explicitly records `fullSuiteComplete: false` while that list remains.
+No excluded target is waived or counted as passing. Once the bounded target
+and its consumer are qualified, reintegrate this partition into the full gate.
+
+For the interleaved resource experiments, only the owned batch launcher is
+temporarily suspended. Its current checker and hard deadline run to
+completion before the next guarded command starts; a `finally` handler
+resumes the launcher. Per-target immutable receipt times remain authoritative;
+the outer batch's displayed duration for that interrupted wait includes the
+pause and is not a performance measurement. No target is killed or restarted.
+
+The separate raw fixed-object-evaluation reflexivity attempt does not prove
+whole strictness: it leaves the intrinsic cell and a whole endpoint comparison
+unsolved. Identity, whole Hom projection and component-composition controls
+pass. The inventory records both outcomes; do not infer the missing whole
+profile from those component betas or add an unreviewed admission axiom.
+
+- The former session 8836 ended on a duplicated `--no-colors` argument in
+  a staged recipe, not a deadline or mathematical failure. The temporary
+  continuation recipe removes that redundant environment flag only for the
+  six exact scripts that already supply it. It now matches successful group
+  receipts as well as individual receipts, checking source/object, checker,
+  runner, recipe and effective settings identity. The cycle group passes.
+- `make ci-tooling` passes: 12 DevOps tests, 115 Python tests, 4 Node tests
+  and test-registration checks. The initial `/proc` observation race in the
+  detached-descendant test reported that the process had disappeared; the
+  isolated test and full tooling rerun passed without a production change.
+- Independent follow-up while the serial suite runs: source provenance is
+  checked against the pinned ordinary prefix and retained main tail. A
+  definition-only ordinary-target strictness candidate is prepared at
+  `emdash2/tmp/probes/api_ordinary_target_strictness.lp`; it uses existing
+  discrete-Hom readback and the structural discrete-functor-category contract.
+  It now passes as an isolated probe (0.767s, receipt recorded in the
+  inventory), without a new rule, unifier or axiom. Promote it only with its
+  actual consumer and recheck its closure after the global cuts move.

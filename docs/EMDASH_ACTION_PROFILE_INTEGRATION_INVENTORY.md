@@ -2,7 +2,8 @@
 
 Date: 2026-09-25 (America/Toronto)
 
-Status: active inventory and first feasibility tranche; no semantic port promoted
+Status: active; ordinary classifier implemented in the working tree,
+with focused qualification and the bounded check suite in progress
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-01` and `API-02`. Reference main is `37ce19d5`, source is
@@ -25,6 +26,14 @@ to those pinned snapshots. Pending rows do not assert successful integration.
 | `OWN-10` | Strict CommRing presheaves/locality and groupoidal fibre transport | Migrate only composition-sensitive interfaces to classified carriers. Preserve raw operations where strictness is unnecessary and recheck main's long downstream algebra/geometry tail. |
 | `OWN-11` | Inherited path-cubical structured operations, filling sections, native observations and bounded decoders | Twenty-two new source owners plus reviewers; bring through current registry. Preserve source's explicit level-two readback prerequisite and limits on native groupoidality/Cartesian substitutions. |
 | `OWN-12` | Diagnostics, evidence, book and TypeScript qualification | Adapt assertions and owner linkage to current main; maintain negative controls, current documentation and fresh exact source evidence. No bulk pin or old report replacement. |
+
+Current implementation: `OWN-02` and `OWN-03` are now present in the working
+tree, with migrated direct admission/certificate consumers. They are pending
+the tranche's validation/checkpoint, not the completion of the full goal.
+The other action classifiers, global cuts and Gray arrow migration remain
+open. The nucleus is unchanged. The following first-feasibility sections
+record the preceding discovery state; the ordinary tranche below records
+the subsequent implementation.
 
 The twelve moved core names are the inverse/equivalence mappings and weighted
 comparison tail in the declaration table below. The four deletions are
@@ -167,6 +176,204 @@ copy; this does not replace subject reduction or overlap analysis.
 
 ## Main Dependencies Beyond The Source Diff
 
+### Ordinary Classifier Tranche In Progress
+
+The working implementation now has the final ordinary source design:
+whole `IsStrictFunctor`, derived capped evidence, opaque non-injective
+admission, separate stable/raw views, canonical evidence from the exact deep
+compositor, and `StrictFunctor_cat` with a whole full-subcategory inclusion.
+The nucleus is unchanged; global-cut retirement remains `API-04/05`.
+GrayHom's existing ambient arrow boundary remains until `API-06`.
+
+A fresh provenance comparison verifies that the ordinary owner body is the
+exact `114dc19f` prefix through `StrictFunctor_cat` and its whole inclusion,
+plus only the audited capped inclusion beta below. The Gray tail and nucleus
+remain byte-identical to main's selected baseline. The three direct
+implementation consumers differ only by the admission-constructor rename;
+their supplied contracts and mathematical bodies are otherwise preserved.
+
+Direct Gray curry/uncurry, transformation-graph and selected-simplex admissions
+use `make_strict_functor`. Reviewers now test canonical evidence rather than
+projection of the admitted witness. Deliberate raw arrow observations use
+`strict_functor_underlying`; stable action does not erase the classifier.
+The current source/reviewer scan has no `strict_functor_intro` or
+`strict_functor_evidence` occurrence. No TypeScript source or test refers
+directly to this profile module or these classifier names; the broader
+source-pin/rule transfer review remains open for the later nucleus changes.
+
+#### Inclusion Projection Adaptation
+
+The final source supplies whole inclusion Hom action but no capped beta.
+A new consumer exposed that applying through `fapp1_func` could return the
+input transfor while the `fapp1_fapp0` route remained stuck after the generic
+projection cut erased that pattern. The qualified adaptation is one beta
+at the full-subcategory inclusion owner:
+
+```text
+fapp1_fapp0(strict_functor_include_func(A,B),S,T,epsilon) --> epsilon.
+```
+
+This is an inclusion projection, not a new preservation-of-composition
+rule or parallel action hierarchy. Full-file owner-position probes check
+subject reduction, arbitrary nonidentity arrows, next Hom action, and both
+identity/composition observation orders through the whole inclusion.
+The no-beta control fails the identity observation; the beta control passes.
+Direct bare-Hom comparisons were unsuitable homogeneous assertions in both
+fresh-source and compiled-import controls; the operational inclusion
+observations use the common ambient classifier and canonical Transf inputs.
+No global Hom inference rule was changed.
+
+With the same compiled core, the unchanged ordinary owner reports 47
+critical-pair diagnostics and the beta owner 58, with zero parser issues.
+The eleven added diagnostics are three identity-action overlaps (generic,
+opposite-source and Catd-source forms) and eight composition overlaps:
+ordinary post/pre naturality, represented pre/post action and the four
+reported mapped-composition placements. Their heads are `fapp1_fapp0` +3
+and `comp_fapp0` +8; the family deltas are `fapp1_fapp0`/`fapp1_fapp0` +3
+and `comp_fapp0`/`fapp1_fapp0` +8. These are classified interactions with
+existing action cuts, not a confluence claim. The typed projection-order,
+nonidentity and next-action controls pass. Revisit the families when the
+temporary global cuts are removed.
+
+Relevant immutable receipts:
+
+| Experiment | Result | Receipt ID |
+| --- | --- | --- |
+| Ordinary owner against current main, before compilation caches | pass, 12.684s; 1187 critical / 157 pattern diagnostics | `20260926T015957Z-37598ed6d6d6445cae0f74564736cfd8` |
+| Initial ordinary reviewer | pass, 28 positives / 6 negatives | `20260926T020136Z-08a1375259c34886835bbd4e571f12cd` |
+| Inclusion observation without capped beta | expected rejection | `20260926T022718Z-167872b5bfa442a288fd14ebbae42a82` |
+| Inclusion beta with category/projection orders | pass | `20260926T022900Z-b3ff94a7efec458482bc9c9f21afcfee` |
+| Same compiled-core ordinary owner warning control | pass; 47 critical diagnostics | `20260926T023045Z-a6d6e92b200a401ea717f6d2abc65bb7` |
+| Inclusion beta with arbitrary arrow and next Hom action | pass | `20260926T023411Z-387d435e76ac47c9aad24169f571ca1c` |
+| Promoted ordinary reviewer | pass | `20260926T023444Z-3c71a85c4aa24400b92268f894883780` |
+| Dimension-two Gray interchanger consumer | pass | `20260926T023445Z-75e3902a7d0841a6b5e81be1c20a4cf8` |
+| Final strict-action source owner, isolated against new ordinary profile | pass; not promoted | `20260926T024203Z-de58a785ad4440bba07c75e6745974a8` |
+
+The initial uncompiled ordinary owner differs from the old main profile
+control by 29 critical diagnostics: 17 composition/category-cut overlaps,
+6 composition/action overlaps, one whole-inclusion projection overlap, and
+five category-identity/higher-action overlaps. These are the selected full
+subcategory and stable strict-action families already present in the pinned
+source. The subsequent capped beta is the separately measured adaptation.
+Counts from a compiled-core run exclude that core's earlier warning stream
+and must not be compared as if they were full-source totals.
+
+#### Central Diagnostics Resource Procedure
+
+The central suite initially hit allocation failure during the affine-glue
+import at 2 GiB, both without a GC override and with `o=20,v=1024`.
+An isolated affine-glue run reproduced it. All fifteen LP files in that
+owner's closure are byte-identical to baseline main and exclude the changed
+profile. Compiling its checked parent and using the explicit GC setting
+made the unchanged affine-glue target pass in 32.519s at 1,550,764 KiB max
+child RSS. This did not change any mathematical source or memory ceiling.
+
+The central run then reached later direct-cover imports before exhausting
+memory. Compiling the remaining direct parents serially resolved the import
+overhead. All 59 direct parents had compiled objects; the 121 source inputs
+in successful compilation receipts still matched current source bytes.
+Forty-one explicit compilation invocations totalled 121.117 measured seconds,
+each separately guarded. The central suite then passed in 10.631s at
+1,028,836 KiB max child RSS, receipt
+`20260926T022300Z-1d774da7f4c649e9bbfc24d8283d1d4b`, input snapshot
+`4afdfc834c82a759f9fb7258f69455ef15a35806bac0873dedb7ca9d2e60378d`.
+That success precedes the final inclusion beta; the current full check suite
+revalidates the final source. Source/object/GC identities remain in receipts.
+
+The resource runs are reproducible with the existing guarded runner:
+`python3 scripts/run_lambdapi.py --quiet --no-colors --compile OWNER`,
+then the consumer without `--compile`, under `OCAMLRUNPARAM=o=20,v=1024`.
+The direct-parent order is obtained from current `source_dependencies` for
+`emdash3_2_checks.lp`; the exact list used is retained in
+`tmp/probes/api_diagnostic_parents.json`. No guard default or production
+runner was changed. Old allocation failures remain evidence, not green
+checks or a reason to alter formal computation.
+
+#### Inherited Face-Reviewer Correction
+
+The old `assertnot` at the selected edge-zero-two/vertex-one whole face
+comparison fails on both the integration and a fresh isolated copy of all
+nineteen LP dependencies from baseline `37ce19d5`. Prefix controls locate
+that assertion as the first failure. The exact terms with positive
+`assert` pass in both environments, matching the final source branch's
+observation. This is a stale baseline reviewer, not a new classifier
+regression or permission to collapse arbitrary face presentations.
+
+Baseline negative receipt:
+`20260926T024019Z-3d6f5a0970f04bf7aa657c12355a0a37`.
+Baseline positive receipt:
+`20260926T024250Z-c8c90e9328d341c1812711a60c876215`.
+Integration positive receipt:
+`20260926T024200Z-afbb4a4b876f4d7b8323112efdf10387`.
+The corrected reviewer and notation/book qualification state only this
+selected computation, not a general higher face-action composition theorem.
+
+#### Current Validation Boundary
+
+Focused classifier, closure, graph-profile, simplex-profile and dimension-two
+consumers pass. The book's 187 evidence claims, source assembly, typography
+and KaTeX checks passed before the final explanatory face sentence; final
+document checks will include it. Catalog, registry and source TOC pass.
+The new ordinary rule/consumer tranche is not yet checkpointed. The first
+bounded `make check` run passed 86 targets and stopped on an unchanged
+affine-cover allocation failure. An exact-receipt continuation reused 76
+matching successes, then exposed a zero-byte compiled parent. The
+[runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md), checkpoint
+`31689948`, records and fixes the false-success classification. Rebuilding
+with already-checked parents gives a valid object; its load and original
+affine-cover consumer pass at unchanged limits.
+
+The suite is now being continued under the corrected runner, explicit
+`o=20,v=1024`, 90-second and 2 GiB defaults plus existing named profiles.
+Only exact matching source/object, checker, runner and effective settings
+receipts are reused; the runner change invalidates the earlier matches.
+The active log is `emdash2/logs/api-ordinary-check-independent.log`;
+the temporary orchestration recipe is `tmp/probes/api_continue_check.py`.
+The current live session handle is 60278 at this record. It checks the 567
+targets independent of the resource target and its atomic recipes;
+22 excluded targets remain required. The TypeScript probe-bridge regression
+also passes and is checkpointed separately at `2653f6fd`.
+The previous session handles 46872, 33123, 8836, 59878 and 22260 are terminal. Inspect the actual
+current process/handle on continuation; this text is not liveness evidence.
+Full health/formal CI and the remaining goal tranches are outstanding.
+
+Update: session 22260 is terminal with 426 successful targets recorded before
+`homology_map_kernel_covers` exhausted allocation. The target's 38-file
+closure is unchanged from main. Compiled direct parents did not remove the
+body's allocation failure at 2 GiB; both `o=20` and `o=5` controls fail.
+The user then authorized any needed measured memory/timeout increases,
+without further approval requests. The 3 GiB/90s compiled-parent retry also
+exhausted allocation at 66.388s (receipt
+`20260926T051024Z-225df07de9044af18a7fdcdcc54ab880`); no object was produced.
+The next target-only experiment passed at 6 GiB/180s in 96.259s, maximum child
+RSS 3,668,804 KiB. The resulting nonempty object loads and the direct
+`homology_map_corrections` consumer passes at normal limits. The
+[resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md)
+records the object hash and all receipts. These runtime settings do not change
+formal computation; the 22-target partition still needs full qualification.
+
+The staged cycle recipe initially rejected duplicate `--no-colors`: the
+environment and the script both supplied it. This was a command-line failure
+reported as exit 124 in less than two seconds, not a timeout. The temporary
+suite continuation now leaves this flag to the six exact recipes that
+already own it; ordinary checks retain their previous flags. The cycle group
+passes with that invocation correction. No production script or guard was
+changed. Exact group receipts are now reused only after matching all targets,
+recipe command/hash, source/object inputs, checker/runner and effective
+settings. Counts refer to unique targets, not duplicate "already checked"
+lines emitted for a group.
+
+The next failure was an inherited missing dependency in homology cycle maps.
+Its original sixteen-file closure is unchanged from main. The checked,
+import-only [repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) is
+checkpointed at `1a51b6ce`; mathematical bodies remain unchanged. The owner,
+its laws and direct homology-map reviewer pass.
+
+The non-Lambdapi `ci-tooling` gate passes (12 DevOps tests, 115 Python tests,
+4 Node tests, and registration). Its first run encountered a `/proc` read race
+after the guarded detached descendant had disappeared; both the isolated
+test and the complete rerun pass without a production change.
+
 The lexical seed scan covers root LP extension owners, excluding the nucleus
 and central diagnostics. It must be extended with actual import closures and
 rule-off failures. In particular a caller can depend on a rewrite without
@@ -182,6 +389,53 @@ The Hom-comparison component currently maps a whole `ProfComparison` through
 the named evaluation functor using `defiso_fmap`; this gives a concrete
 first new-main consumer for the post-profile mapping design. Preserve its
 original forward and inverse functors.
+
+The next consumer read identifies these concrete cases for `API-04`:
+
+| Current operation | Actual carrier | Required next investigation |
+| --- | --- | --- |
+| `adjunction_mates`, `functor_reconstruction_paths`, and `one_cat_hom_comparison_data` uses of `defiso_fmap` | All three evaluate at a fixed object through `fapp0_func` | Qualify fixed-object evaluation's whole strict admission and retained computational inverse action. Do not infer strictness of joint two-variable evaluation. |
+| `iso_evidence_prewhisker` | `comp_cat_con_func` with the precomposed functor fixed | Review its whole action and strict admission at the existing precomposition owner. |
+| `iso_evidence_postwhisker` | `comp_cat_cov_func` with a generic postcomposing H | An arbitrary lax H must not receive strictness by analogy with precomposition; classify the actual downstream ordinary/profile hypotheses. |
+| Whole homology comparison | Postcomposition by the original K/Q functors, with C1 guards already available | Investigate strictness derived from the qualified ordinary target and preserve the original maps; do not supply ad hoc naturality fields. |
+| Terminal/initial adjunction family isomorphisms | The retained inverse of the original Hom comparison from Terminal_cat | Audit the ordinary target and actual chosen inverse before changing the mapping interface. |
+| `transf_arrow_omega_at` and `catd_contraction_at` | Fixed-object `fapp0_func` evaluation, including its Catd presentation | Share the evaluation owner with the three DefIso consumers; preserve the supplied whole inverse data. |
+| Freyd native column and middle-column comparison mapping | `freyd_adjunction_model_func` or its original whole homology owner, targeting `CommRingFreydPresentation_cat` | The existing `comm_ring_freyd_cat_is_one_cat` supplies the ordinary target contract even where the consumer does not spell `IsNCat` directly. Preserve actual model maps and witnesses. |
+| Circle Hom comparison | `Path_cat_func` | Reuse the source branch's reviewed named strict Path admission. |
+| `groupoidal_fibre_transport_equiv` | Generic D:C→Cat_cat | Follow the source migration to a classified strict family; ordinary-target reasoning does not apply to unrestricted Cat_cat. |
+
+These are source-backed dependency classifications, not implemented
+strictness theorems. In particular fixed-object evaluation and generic
+postcomposition need distinct owner probes before the ambient cut is removed.
+
+The checked `tmp/probes/api_ordinary_target_strictness.lp` candidate derives
+`IsStrictCell` for an arrow in a discrete category from `hom_to_path` and
+`path_to_hom_hom_to_path_path`. It then applies the existing structural
+`discrete_functor_category` contract to the whole compositor's target Hom,
+using the given `IsNCat(1,B)` witness. The proposed result is whole
+`IsStrictFunctor(F)` for F with ordinary target, followed by opaque admission
+with raw/object observations. The candidate adds no rewrite, unifier or
+axiom, but depends on the explicitly supplied discrete-functor-category model
+contract. It passes in 0.767 seconds under the default 2 GiB/90-second guard,
+receipt `20260926T040318Z-a5b7a38c2576471ab31f4d8f58b2f9c3`. It is still an
+isolated candidate, not a promoted owner. Recheck its import closure after
+global-cut retirement. It neither supplies arbitrary-target evaluation
+strictness nor qualifies raw runtime composition without a profile.
+
+A separate fixed-object evaluation attempt is deliberately weaker evidence.
+`api_fixed_evaluation_strictness.lp` tries the classified object's reflexive
+whole-property construction at raw `fapp0_func`. It fails with the deep
+`fdapp1_comma_projection_transf` cell versus identity and the whole
+postcomposition/evaluation endpoint comparison unresolved, receipt
+`20260926T043820Z-14224fa58bda47ec869bbf1ab633c2d1` (0.611s).
+This is not an impossibility result. The separate identity, whole Hom
+projection and component-composition controls in
+`api_fixed_evaluation_actions.lp` pass, receipt
+`20260926T045230Z-1b8ed3a6335848d79b605cb3584bca3e` (0.603s).
+Thus point/action betas alone have not supplied the required whole admission.
+Keep arbitrary-target evaluation distinct from the checked ordinary-target
+derivation; preserve actual component/inverse data in its eventual consumer
+design and do not postulate an admission merely to discharge this probe.
 
 ## Source Path Accounting
 

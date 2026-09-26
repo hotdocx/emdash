@@ -250,6 +250,16 @@ scope; record resource measurements and do not turn this into a global
 default increase. Guard/profile tests exercise the bounds without allocating
 large heaps.
 
+User direction for the action-profile integration goal (2026-09-26) provides
+standing authorization for any needed measured memory/timeout increases,
+without further approval questions. This authorization already satisfies the
+larger-limit permission requirement above. Keep the 2 GiB/90-second normal
+defaults and use explicit target-specific profiles, recording reasons,
+measurements and remaining limitations in the integration plan. Preserve
+subject reduction, the serial lock, file/core limits and no-swap scopes.
+Use the existing guard's supported limits where sufficient; a necessary guard
+extension must remain bounded and receive its own validation.
+
 For Node 24.11.1 here, isolated `node --test` workers do not inherit V8 heap
 flags supplied only on the command line. Pass those limits through
 `NODE_OPTIONS` and verify the worker's `v8.getHeapStatistics().heap_size_limit`.
