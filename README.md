@@ -20,7 +20,8 @@ the host programming environment; explicit Core retains the mathematical
 checking boundary. See the
 [product orientation](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and
 [Codex plugin plan](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). The
-plugin is currently a reviewed proposal, not an installed or published product.
+local plugin implementation is now selected; public distribution remains a
+separate milestone.
 
 The active development now carries that calculus into local geometry:
 Cat-valued presheaves, ordinary sieves and sites, a direct fixed-site

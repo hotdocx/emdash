@@ -30,9 +30,10 @@ validation and artifact identity; npm publication remains separate.
 The user-selected product emphasis is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
 computation, internal/synthetic construction and reuse, and reduced bookkeeping.
-The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) proposes a
-portable local runtime and shared CLI/MCP/WebMCP service boundary. Its review
-does not implement a plugin or expand mathematical qualification. Existing
+The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) now governs
+the user-selected GAP-1 through GAP-3 implementation of a portable local runtime,
+Codex plugin and internal-reuse workflow. It also records a future cloud-container
+transport comparison; no cloud deployment is selected. Existing
 proof protocols retain their precise meaning within the broader workflow.
 
 For mathematical status use the

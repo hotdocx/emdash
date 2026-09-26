@@ -2,8 +2,9 @@
 
 Date: 2026-09-25
 Plan-ID: `EMDASH-ALGEBRA-GOAL-ASSISTANT-PLUGIN`
-Status: review complete; GAP-1 through GAP-3 recommended for first implementation
+Status: GAP-1 through GAP-3 selected and active; cloud transport comparison recorded
 Baseline: `37ce19d5` (completed package consumer, now integrated into main)
+Implementation continuation baseline: `06769acc`
 Branch: `goal/algebra-goal-assistant-plugin-v3.2`
 Worktree: `/home/user1/emdash1-goal-assistant-plugin`
 
@@ -14,16 +15,20 @@ Emdash, and documentation of its computational-and-internal goal-assistant
 orientation. The [orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md)
 owns that product emphasis. This living plan owns the plugin design, proposed
 implementation slices, qualification and recovery. The current persistent goal
-covers the review and concrete plan; it does not claim that a plugin is already
-built, installed or published.
+now covers implementation through GAP-3 following the user's acceptance of
+review checkpoint `06769acc`. The earlier review is complete. The user also
+selected a feasibility comparison for cloud-container tools reachable from
+desktop Codex; that comparison does not select a cloud deployment.
 
 Main was fast-forwarded cleanly from `40cfad99` to `37ce19d5`. All 65 then-existing
 worktrees were clean. This new dedicated worktree is a descendant, bootstrapped
 with pinned pnpm and its own dependency links; workspace verification passes.
 The standing authorization covers local branches/worktrees and checkpoints.
-There is no selected npm/plugin publication, cloud deployment, cross-repository
-edit, user plugin installation, history rewrite or worktree removal in this
-review. Full TypeScript and repository-wide aggregates remain waived.
+The accepted implementation includes the proposed repository plugin/marketplace
+and local installed-copy acceptance. There is no selected npm/public-directory
+publication, cloud deployment, cross-repository edit, new main integration,
+history rewrite or worktree removal. Full TypeScript and repository-wide
+aggregates remain waived.
 
 The [handoff](TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md), active mathematical owners
 and nested SOP still govern semantics. This work does not reopen Op/variance,
@@ -160,6 +165,57 @@ by this review. Prefer the available plugin-creator compatibility scaffold for
 the first local test; portable-manifest migration can follow a demonstrated
 distribution need.
 
+## Cloud container tools for desktop Codex
+
+The user's proposed future mode is architecturally feasible: Emdash's runtime,
+dependencies and mathematical workspace can live in a GetPaidX container while
+desktop Codex remains the user's agent interface. Starting a STDIO server in
+that container alone does not create a remotely reachable endpoint. STDIO is
+a process pipe; a network transport or an execution/relay integration must
+connect the desktop client to it. Streamable HTTP supplies a distinct network
+transport. [MCP transports](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports).
+
+| Design | What is on the end-user host? | Connection and tradeoff |
+| --- | --- | --- |
+| Local Emdash runtime, selected first | Codex plus the plugin runtime and its host prerequisites | Direct local STDIO; least platform coupling and useful without an active cloud workspace |
+| Cloud Codex uses container-local Emdash STDIO | Codex/GetPaidX client; no local Emdash mathematics installation | The user delegates work to the workspace agent through existing workspace workflows; Emdash tools belong to the cloud agent, so this is agent delegation rather than direct desktop Emdash tools |
+| Desktop Codex calls workspace HTTP MCP | Codex plus a remote plugin configuration; no local Emdash runtime | A stable authenticated gateway routes to a workspace-bound Emdash service; best direct-tool product path for ordinary hosted containers, but needs lifecycle, routing and actor/workspace authorization |
+| Desktop STDIO command relays to the container | A small authenticated relay/remote-execution client; no local Emdash mathematics installation | Preserve STDIO JSON-RPC end to end over a supported channel; useful on developer hosts, but requires robust process/session teardown and does not arise from merely starting a container process |
+| Existing GetPaidX MCP brokers mathematical operations | GetPaidX connection and workflow skill; no local Emdash runtime | Reuse existing access/workspace selection and call the Emdash service behind it; avoids another client connection but needs a maintained schema/version/discovery adapter |
+
+For a generic remote development host, an SSH-launched remote STDIO process is
+a possible relay arrangement. It is not evidence that GetPaidX exposes SSH or
+raw controller access to end users. A GetPaidX implementation should use an
+authorized platform gateway/relay, preserving its workspace policy. The MCP
+server's stdout must remain protocol-only; logs use stderr, and disconnects
+must retire the correct child process/session.
+
+Codex documents `experimental_environment = "remote"` for STDIO when a remote
+executor environment is already available. That setting does not by itself
+enroll arbitrary GetPaidX containers as Codex remote executors.
+[Codex MCP configuration](https://learn.chatgpt.com/docs/extend/mcp).
+
+Recommended future sequence: first use the same portable local runtime inside
+a cloud workspace for its in-container Codex. If users need direct desktop
+tool calls, add a workspace-bound HTTP MCP adapter or a broker behind the
+existing GetPaidX endpoint. An internal HTTP-to-STDIO proxy may bridge the
+same factory without duplicating mathematical handlers. Bind requests to the
+authenticated actor, selected workspace/session, supported runtime version and
+source revision; gateway-owned paths must not come from arbitrary client file
+paths. Persist mathematics in the workspace files, not the transport session.
+
+An open workspace session is a natural initial lifetime for that service.
+Closing/suspending the workspace should produce an unavailable/disconnected
+result; reopening should reconstruct from files and reject obsolete handles.
+Cold-start readiness, cancellation, concurrency, access revocation and artifact
+handoff need explicit acceptance before claiming this mode works. WebMCP can
+project the resulting MCP inventory inside an authenticated browser workspace;
+it does not supply desktop-to-container connectivity by itself.
+
+This is a documented feasibility/design assessment, not an implemented GetPaidX
+feature or a tested cloud route. GAP-5 remains deferred, and no cloud API,
+controller, credential, public endpoint or workspace session was modified.
+
 ## Existing Emdash assets and gaps
 
 | Owner | Reuse | Remaining plugin work |
@@ -229,9 +285,9 @@ of the browser-safe `@hotdocx/emdash` entries.
 | Row | State | Concrete acceptance |
 | --- | --- | --- |
 | GAP-0. Review and orientation | Complete | Main integrated at `37ce19d5`; reference/plugin/MCP/WebMCP sources and official guidance inspected; orientation, implementation proposal and linked plans synchronized; document checks and exact diff review pass |
-| GAP-1. Portable runtime and workspace slice | Proposed | A clean unrelated directory uses the built runtime to inspect/compute/render one source-owned algebra workflow; no developer path, global install assumption or cloud account |
-| GAP-2. Local Codex plugin | Proposed | Validated manifest/skill and thin local MCP adapter over the same service; actual fresh Codex session discovers and uses the installed/cached copy on a user workspace |
-| GAP-3. Internal construction and reuse | Proposed | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
+| GAP-1. Portable runtime and workspace slice | In progress | A clean unrelated directory uses the built runtime to inspect/compute/render one source-owned algebra workflow; no developer path, global install assumption or cloud account |
+| GAP-2. Local Codex plugin | Selected; pending GAP-1 | Validated manifest/skill and thin local MCP adapter over the same service; actual fresh Codex session discovers and uses the installed/cached copy on a user workspace |
+| GAP-3. Internal construction and reuse | Selected; pending GAP-1 | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
 | GAP-4. Browser projection | Proposed follow-up | A real supported browser registers the MCP-discovered tools and forwards calls through the shared service; ordinary UI remains usable without WebMCP; stale/cancelled results cannot overwrite newer source |
 | GAP-5. Hosted distribution and richer mathematics | Deferred | Separate GetPaidX/remote host adapter, public releases, further coefficient interpretations/backends and richer mathematical consumers only when selected |
 
@@ -286,6 +342,32 @@ Do not add another model API merely to test the plugin; Codex is the agent
 host. No new OpenAI key, publishing credential, GetPaidX login or server is
 required to produce this local design and first local runtime.
 
+## Implementation decisions and recovery
+
+- Continue on the existing dedicated branch from `06769acc`. The inventory has
+  67 worktrees; an unrelated action-profile integration worktree has a plan edit.
+  Preserve it. This plugin worktree's staged/unstaged state was clean.
+- Baseline: workspace verification and root typecheck pass. The public algebra
+  and external-module-reuse suites pass eight tests with one unchanged live
+  Singular/Lambdapi opt-in skip (nine total, 4.95 seconds). No aggregate ran.
+- Keep one mathematical source and explicit derived artifacts in an ordinary
+  workspace. The first inert source contract names rational polynomial inputs,
+  ordered variables/generators and a query. Existing arithmetic/parent/schema
+  owners validate them. TypeScript authoring can produce that data explicitly;
+  the inspection/MCP path does not load arbitrary user modules.
+- Separate pure request/source/computation helpers, Node file commands and the
+  MCP adapter. Bundle a relocatable Node runtime for the plugin, with no imports
+  resolved back into the contributor checkout. Keep any MCP SDK dependency out
+  of the public browser-safe package entries.
+- Reuse the whole-complex assembly. Extract a neutral retained-relation seam
+  where needed so native results retain their real origin and the existing
+  external consumer still retains actual external coefficients. Preserve all
+  existing source/result binding and explicit-adoption controls.
+- Current acceptance includes the generated plugin/marketplace source paths
+  proposed above, local cache installation and a bounded fresh-client smoke.
+  Neither these checks nor runtime discovery authorize unrelated application
+  actions, cloud deployment, publication or Git changes in user math workspaces.
+
 ## Persistent-goal prompts
 
 Completed review goal: complete GAP-0 under this evolving plan and the product
@@ -294,7 +376,7 @@ platform qualifications, update relevant documentation and checkpoint the
 review. Keep implementation rows proposed; do not claim plugin installation
 or usability from the review alone.
 
-Proposed implementation objective after scope selection: implement GAP-1 through
+Active implementation objective: implement GAP-1 through
 GAP-3 in this living plan from the current descendant state of
 `goal/algebra-goal-assistant-plugin-v3.2` in
 `/home/user1/emdash1-goal-assistant-plugin`. Let the plan own concrete contracts,
