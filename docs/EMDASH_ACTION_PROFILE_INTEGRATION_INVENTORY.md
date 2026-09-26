@@ -2,8 +2,8 @@
 
 Date: 2026-09-25 (America/Toronto)
 
-Status: active; ordinary classifier implemented in the working tree,
-with focused qualification and the bounded check suite in progress
+Status: active; ordinary classifier checkpointed at `f0f327d6` with all 589
+registered check targets passing; wider cut migration remains a prototype
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-01` and `API-02`. Reference main is `37ce19d5`, source is
@@ -27,9 +27,9 @@ to those pinned snapshots. Pending rows do not assert successful integration.
 | `OWN-11` | Inherited path-cubical structured operations, filling sections, native observations and bounded decoders | Twenty-two new source owners plus reviewers; bring through current registry. Preserve source's explicit level-two readback prerequisite and limits on native groupoidality/Cartesian substitutions. |
 | `OWN-12` | Diagnostics, evidence, book and TypeScript qualification | Adapt assertions and owner linkage to current main; maintain negative controls, current documentation and fresh exact source evidence. No bulk pin or old report replacement. |
 
-Current implementation: `OWN-02` and `OWN-03` are now present in the working
-tree, with migrated direct admission/certificate consumers. They are pending
-the tranche's validation/checkpoint, not the completion of the full goal.
+Current implementation: `OWN-02` and `OWN-03` are checkpointed at `f0f327d6`,
+with migrated direct admission/certificate consumers. Their local tranche
+is qualified; this does not complete the full goal.
 The other action classifiers, global cuts and Gray arrow migration remain
 open. The nucleus is unchanged. The following first-feasibility sections
 record the preceding discovery state; the ordinary tranche below records
@@ -921,9 +921,33 @@ candidate/control files and hashes, including retained failed experiments;
 it is not a claim that all those files pass or are selected for promotion.
 The active owner closure is the one in each successful receipt. Production
 remains at the ordinary-classifier checkpoint `f0f327d6`, with global cuts
-unchanged. Next qualify the actual whole Gamma/H owners and retained inverse
-maps, preserving main's guarded projection comparisons and exact supplied
-model boundary.
+unchanged. This 105-file snapshot precedes the subsequent Gamma/H work below.
+
+### Whole Gamma/H And Paired-Family Reindexing
+
+The [dedicated feasibility review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md)
+records the next candidate, its exact replay manifest and the remaining
+promotion conditions. Original Gamma, whole-H and point-H reviewers pass;
+all fourteen public Gamma signatures match main modulo whitespace. The
+actual paired-family reindexing owner also passes with the original guarded
+postcomposition comparison retained.
+
+The Gamma source comparison maps identity-presented arrow pairs using normal
+units and transports only their law proofs. The target comparison uses the
+existing post/pre cospan, canonical component computation, and an explicit
+inverse of the ordinary observed pre-cell. No whole Sigma strictness or
+lax-transfor admission axiom is inferred from those component observations.
+Whole K/Q/H owners retain their original source bytes.
+
+The ordinary pointwise inverse constructor now requires `StrictTransfor`;
+ordinary callers derive it internally from C1. The displayed half is still
+commented out in the temporary package and must be requalified and restored.
+The new whole product-projection folds also have a measured identity
+interaction: object observations agree, but the whole functor normal forms
+do not. Both are explicit prerequisites, not completed production work.
+The current manifest covers 173 candidate/control files, of which 126 occur
+in the thirteen exact successful replay closures. It does not qualify every
+file in the temporary directory.
 
 ## Source Path Accounting
 

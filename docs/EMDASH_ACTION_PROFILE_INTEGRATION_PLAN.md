@@ -207,8 +207,25 @@ dependency uses the source's classified public graph while retaining main's
 separate represented-comma derivation. A scoped proof-time evaluation
 comparison preserves original native component interfaces; its no-rule,
 noncollapse, full-profile and warning controls pass. The primary whole H/K/Q
-owners remain unchanged in that probe. Next qualify whole Gamma/H and the
-remaining native consumers before production cut retirement.
+owners remain unchanged in that probe. The subsequent Gamma/H slice is
+recorded next; remaining native consumers still precede production cut retirement.
+
+The subsequent [Gamma/H feasibility review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md)
+now passes the original whole Gamma, whole H and point-H reviewers, plus the
+actual paired-family reindexing owner. All fourteen public Gamma signatures
+are preserved. The source comparison retains the original mapped arrows;
+the target comparison explicitly composes the post-cell with the retained
+inverse of the ordinary observed pre-cell. This is a changed internal
+construction, not a claim that its whole term is unchanged.
+
+There are two concrete prerequisites before this candidate can be promoted.
+Product-projection controls expose distinct whole normal forms at the
+codomain-identity overlap, although their object observations agree. Resolve
+that projection interaction first. The temporary pointwise-equivalence owner
+also has its old unqualified displayed half commented out; qualify and
+restore it under its actual displayed profile before production migration.
+The successful ordinary checks do not discharge either prerequisite. Then
+continue Hom-comparison/introduction and the remaining native consumers.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -233,9 +250,9 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | native input/all-test/H-record feasibility; no production cut removed | Stable inverse/mate, ordinary K/Q map and H-family consumers pass in the corrected temporary environment. Actual native input, complete all-test K/Q records and the ordinary whole-H record reviewer now pass with original operations and inverse data. Whole Gamma/H and remaining native qualification are next. |
+| `API-04` | whole Gamma/H and paired-reindex feasibility; no production cut removed | Stable inverse/mate, ordinary K/Q map, native input, all-test records, whole Gamma/H and point-H reviewers pass in the temporary environment. The actual paired-family reindexing owner also passes. [Current review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) records the changed internal target comparison, retained maps, exact receipts and the unresolved whole product identity interaction. Hom-comparison/introduction and remaining native qualification follow. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
-| `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
+| `API-05` | ordinary pointwise assembly prototyped; displayed assembly prerequisite open | Ordinary inverse assembly now takes `StrictTransfor`; C1 callers derive admission internally and retain their supplied pointwise inverses. Restore and qualify the temporarily commented displayed half before promotion. Wider naturality/Catd cuts, direct-cover and retained pseudo consumers remain. |
 | `API-06` | native dependency prototype; wider qualification pending | Source walking-square/orientation and public classified graph are adapted in the temporary native closure; main's represented-comma implementation stays separate. Distinct Gray classifiers, whole inclusions, full graph/interchanger/closure reviewers, directed cubical/simplex consumers and judgmental dimension-two recovery remain to qualify. |
 | `API-07` | pending | Inherited path-cubical owners/reviewers through the structured feasibility boundary; retain exact readback/groupoidality limits. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
