@@ -201,9 +201,14 @@ adapter. An arbitrary-target observation remains explicitly classified.
 The selected view of H and its zero-arrow/mate dependencies now pass their
 complete adapted reviewer. Ordinary zero laws use C1, the raw-pair observer
 retains both original arrows, and the selected-lift comparison stages the
-existing whole mate-to-semantic equality. The primary whole H/K/Q owners
-remain unchanged in that probe. Continue to the actual native input,
-all-test and Gamma/H consumers before production cut retirement.
+existing whole mate-to-semantic equality. The actual native input, all-test
+K/Q records and ordinary whole-H record reviewers now also pass. Their Gray
+dependency uses the source's classified public graph while retaining main's
+separate represented-comma derivation. A scoped proof-time evaluation
+comparison preserves original native component interfaces; its no-rule,
+noncollapse, full-profile and warning controls pass. The primary whole H/K/Q
+owners remain unchanged in that probe. Next qualify whole Gamma/H and the
+remaining native consumers before production cut retirement.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -224,14 +229,14 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
 | `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
 | `API-02` | first controls complete; no semantic promotion | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
-| `API-03` | local ordinary tranche qualified | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory; direct callers migrated. The inclusion projection beta preserves both action orders and higher action. All 589 registered check targets, six affected reviewers and proportional documentation/MathOps gates pass. Global cuts and Gray arrows remain transitional until API-04/05/06; full integration CI remains API-10. |
+| `API-03` | local checkpoint `f0f327d6` | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory; direct callers migrated. The inclusion projection beta preserves both action orders and higher action. All 589 registered check targets, six affected reviewers and proportional documentation/MathOps gates pass. Global cuts and Gray arrows remain transitional until API-04/05/06; full integration CI remains API-10. |
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | inverse and ordinary H feasibility; no production cut removed | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. Stable evaluated inverse/mate consumers, original K/Q ordinary map observations, zero-arrow/raw-pair observations and the full adapted H-family reviewer pass in the corrected temporary environment. Remaining native/all-test and Gamma/H qualification is open. |
+| `API-04` | native input/all-test/H-record feasibility; no production cut removed | Stable inverse/mate, ordinary K/Q map and H-family consumers pass in the corrected temporary environment. Actual native input, complete all-test K/Q records and the ordinary whole-H record reviewer now pass with original operations and inverse data. Whole Gamma/H and remaining native qualification are next. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
-| `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
+| `API-06` | native dependency prototype; wider qualification pending | Source walking-square/orientation and public classified graph are adapted in the temporary native closure; main's represented-comma implementation stays separate. Distinct Gray classifiers, whole inclusions, full graph/interchanger/closure reviewers, directed cubical/simplex consumers and judgmental dimension-two recovery remain to qualify. |
 | `API-07` | pending | Inherited path-cubical owners/reviewers through the structured feasibility boundary; retain exact readback/groupoidality limits. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
 | `API-09` | incremental | Current authorities, notation, source registry, catalog, health and affected book evidence/prose. |

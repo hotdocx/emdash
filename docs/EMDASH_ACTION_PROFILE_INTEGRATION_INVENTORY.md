@@ -838,8 +838,92 @@ that same H. Only the selected observations need C1. The independent
 `homology_adjunction_families`, `homology_families` and
 `kernel_cokernel_adjunctions` owners are verified byte-identical to main.
 The candidate files remain in the isolated package; the failed predecessor
-sources and receipts are retained. Whole native snake, all-test contracts,
-Gamma/H assembly and remaining ordinary consumers still need qualification.
+sources and receipts are retained. The subsequent native all-test slice is
+recorded below. Whole native snake, Gamma/H assembly and remaining ordinary
+consumers still need qualification.
+
+### Native All-Test Records And Their Gray Dependency
+
+The current isolated package now also checks the actual native input owner,
+K/Q all-test records, and whole-H record observations. Original whole K/Q,
+semantic boundary, input arrows, structural maps and native mate centres
+remain. The existing C1 is threaded through the zero-law and optional
+factor-space observations; no selected W/V input, factor dictionary or
+caller-supplied square is introduced.
+
+| Actual owner or reviewer | Receipt | Seconds |
+| --- | --- | --- |
+| Unchanged production native-input baseline | `20260926T090722Z-5fdee20e1d43481a93174c9b493cdbf1` | 0.788 |
+| Adapted complete native-input owner | `20260926T090543Z-22961582d2f646c394c4b7359ede5812` | 7.085 |
+| Complete native adjunction observations, four positive/two negative | `20260926T090830Z-254d78887d0c44f192089d44fa1aba32` | 7.427 |
+| Ordinary map-reflection owner with retained evaluated inverses | `20260926T091250Z-ac43506181f64601ac99f26f7f0a290e` | 5.396 |
+| Complete native all-test record owner | `20260926T093519Z-143bb275593c49e3853e7281a72e8bed` | 8.773 |
+| Complete diagram-reconstruction reviewer, seven positive/one negative/next Hom | `20260926T093918Z-2a937576a54a46cabe7dda89beb150e1` | 7.054 |
+| Original all-test record reviewer, ten positive checks | `20260926T093925Z-6b1fbdfd05784d5aa9a17808f3adef7a` | 9.150 |
+| Complete ordinary H-record reviewer, six positive checks | `20260926T094839Z-a4931584cc3743c4b69bd847cdc72a1f` | 8.918 |
+
+The all-test closure brings `functor_reconstruction_paths` and the Gray graph
+into this slice. Map reflection now uses its ordinary target hypothesis and
+stable evaluation of the original whole DefIso. Its first raw-naturality
+replacement leaves component presentations mismatched
+(`20260926T091123Z-e33a215aa7694efc85c874c22a66070d`). Explicit congruence
+of the existing component agreements resolves that mismatch; no new inverse
+choice or strictness axiom is added.
+
+The walking-square and interchanger-orientation files are unchanged on main
+since the common ancestor. Their exact source-tip versions are now used in
+the candidate. The graph is a genuine overlap: only the source's public
+classified interface is reimplemented there, retaining all thirteen public
+main owners. Main's represented-comma derivation stays at its existing owner;
+the older branch's protected duplicate is not restored. This begins `API-06`
+as a dependency of the native consumer, not as a claim that Gray migration is
+finished.
+
+`diagram_native_arrow_func` now derives a `LaxTransfor` admission from C1.
+All nine implementation uses are in its owner or already ordinary consumers.
+An unqualified whole-evidence reflexivity attempt fails
+(`20260926T091801Z-9aa6e499ea1243d3b1ecaa2ae453995b`); that failure does not
+prove a general higher impossibility. The qualified native route uses the
+already-established ordinary evidence. Explicit raw-arrow and roundtrip
+observation paths retain the original data.
+
+The stable admitted component does not runtime-decode to the raw evaluation.
+A generic tapp0-to-tapp0 proof-time comparison passes a synthetic control but
+does not solve the actual consumer after the raw side has reduced to fapp1
+(`20260926T093334Z-bbb56243be1d46988918c415849b8acf`). That generic candidate
+is removed. The selected comparison lives at
+`walking_arrow_native_observation`: it recognizes visible admission of the
+identity-exchange evaluation and compares the same diagram, shape, arrow and
+codomain after projection. Both sides have rigid heads and all data are
+checked. It supplies no runtime rule, arbitrary naturality or proof
+irrelevance. Original reconstruction component result types and operational
+inverse terms are retained; no operational path cast is installed.
+
+The focused positive, runtime-negative and different-arrow controls pass:
+`20260926T093911Z-c7987c1647654c928b1c530a9bd9fa82` (6.407s).
+Removing only that comparison makes the typed-reflexivity positive fail as
+expected; the inverted control passes:
+`20260926T094303Z-b0a12b1195ac44c2aadfcd33b073f367` (6.293s).
+The full 58-positive/14-negative profile reviewer also passes with the native
+comparison imported: `20260926T094309Z-316c22d48087440bade187bf6abd64fa`
+(6.369s). The native owner LHS audit has no unreviewed slots.
+
+Warning-enabled owner-position runs without/with the comparison are
+`20260926T094316Z-1e14d2797b054c4eb27955a98709c1ac` and
+`20260926T094323Z-2fe68c190cca4aebb220ef157f240743`. Both have 1,064 critical
+and 149 pattern diagnostics, with zero parser failures; categories, term
+heads and participating rule-family multisets agree exactly. This is
+interaction evidence, not a confluence theorem. The parsed comparison is
+`tmp/probes/api_native_comparison_warning_delta.json`.
+
+`tmp/probes/api_native_profile_current_manifest.json` records the 105 current
+candidate/control files and hashes, including retained failed experiments;
+it is not a claim that all those files pass or are selected for promotion.
+The active owner closure is the one in each successful receipt. Production
+remains at the ordinary-classifier checkpoint `f0f327d6`, with global cuts
+unchanged. Next qualify the actual whole Gamma/H owners and retained inverse
+maps, preserving main's guarded projection comparisons and exact supplied
+model boundary.
 
 ## Source Path Accounting
 
