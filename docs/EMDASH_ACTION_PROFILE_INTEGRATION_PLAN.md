@@ -170,6 +170,41 @@ consumer. Do not repair regressions by restricting arbitrary snake a,c to
 monic/epic maps, restoring retired model/snake facades, or adding old/new
 compatibility requirements.
 
+## Current Progress And Next Action
+
+Overall status: early production integration, with substantially broader
+feasibility evidence. The ordinary opaque classifier is implemented in the
+working tree and awaits its validation checkpoint. The active nucleus still
+matches baseline main; no production global composition/naturality cut has
+been retired. Gray/lax-arrow, inherited path-cubical and TypeScript migration,
+plus complete integration qualification, remain ahead.
+
+The preferred temporary environment is
+`emdash2/tmp/probes/api_ordinary_profile_minimal/`. It combines the main-based
+lax nucleus, final source profiles/actions and the smaller correction of
+three residual precomposition accumulation rules. The complete profile
+reviewer and adapted adjunction-mate, ordinary equivalence-transport,
+diagram-evaluation and kernel-presentation consumers pass there. Exact
+boundaries and receipts are in the
+[inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md#new-main-consumers-over-the-corrected-candidate).
+These probes do not qualify all newer native consumers or production cut
+retirement.
+
+The ordinary selected-map observation for original K on raw eta now checks
+through internally C1-derived opaque admission, explicit carrier comparison
+and existing selected-kernel uniqueness. The adapter adds no rule, unifier,
+axiom or caller-supplied square/strictness certificate. Its positive and
+noncollapse reviewer is next. An arbitrary-target observation remains
+explicitly classified. The same distinction must inform the subsequent Q
+and native selected-view consumers.
+
+In parallel with that independent proof work, finish the already-running
+589-target production `check` continuation, then refresh the affected
+reviewers and synchronize the ordinary tranche's catalog/health/documents
+before its local checkpoint. Inspect actual job state before resuming; the
+resource and runner history below is retained evidence, not liveness. No
+full formal CI or integration completion is claimed by a partial suite.
+
 ## Work Sequence And Living Ledger
 
 | Row | State | Deliverable / acceptance |
@@ -182,7 +217,7 @@ compatibility requirements.
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured cover replays and consumers qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): both unchanged cover owners compile at 6 GiB/180s; first exactness and the downstream consumer pass at defaults after parent compilation. Standing user authorization covers needed measured resource increases; full-suite reintegration remains in progress. |
 | `API-04` | inverse-action feasibility; no production cut removed | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. The current experiment keeps evaluated DefIso projections stable through composite cancellation, following the source's mapped-inverse owner design. |
-| `API-04R` | verified residual source overclaim; correction under test | A retained precomposition rule still derives an equality expressing composition preservation for arbitrary F, despite the source branch's cut retirements. Audit its three accumulation rules and move generic behavior behind `StrictFunctor`, retaining named identity computation. Require rejection of the unqualified staged theorem, profile positives, both projection orders and affected consumers. This is action-profile work; no Op/duality or Empty audit is added. |
+| `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
 | `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
 | `API-07` | pending | Inherited path-cubical owners/reviewers through the structured feasibility boundary; retain exact readback/groupoidality limits. |
@@ -457,6 +492,15 @@ strict LHS audits of the nucleus and profile owner pass. The generated health
 report now has current static source/check-content snapshots; its checks
 remain explicitly `not-run`. This refresh does not replace the ongoing full
 suite or the later formal CI gate.
+
+The subsequent book render also passes: 415 pages, with no console, page,
+request or rendering errors (`emdash2/logs/api-ordinary-book-render.log`).
+Two existing mathematical applications in the touched simplex chapter are
+braced so the Markdown link checker does not misread them as links to `u`;
+the rendered notation is unchanged. Final book source/evidence/typography/
+KaTeX checks pass after that formatting fix, and document hygiene reports
+102 local links checked. The current-status opening now routes action-profile
+work to this active goal rather than repeating its earlier deferral.
 
 - The former session 8836 ended on a duplicated `--no-colors` argument in
   a staged recipe, not a deadline or mathematical failure. The temporary

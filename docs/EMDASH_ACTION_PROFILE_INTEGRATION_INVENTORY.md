@@ -694,15 +694,88 @@ control all pass: `20260926T074444Z-aef125611bc54883a54c9cf08c5c4258`
 (8.292s). The complete source profile reviewer also passes:
 `20260926T074453Z-aaa21cea1ec5420da835a088d256930a` (10.743s).
 
-Preferred correction candidates are now `api_main_lax_precomp_canonical.lp`
-and `api_full_profiles_precomp_canonical.lp`. The identity projection join
-supplies the intended named-identity computation; it is not evidence of a
-new regression in the old baseline. Before selection, add full/nested
-accumulation controls for all three migrated rules, compare warnings, and
-recheck strict actions, ordinary derivations and actual main consumers over
-this corrected nucleus. They previously checked over the nucleus retaining
-the three residual rules, so their earlier receipts alone do not qualify
-the corrected environment.
+The canonical variant additionally supplies a mixed raw identity projection
+join. Baseline comparison shows this is new computation, not a regression
+repair. Its complete projection-order reviewer passes
+(`20260926T075131Z-4932c7c4483e4921b97edd5abd3d4d86`), but the extra join is
+unnecessary for the selected consumers and adds warning occurrences.
+
+The preferred, smaller candidates are now `api_main_lax_precomp_minimal.lp`
+and `api_full_profiles_precomp_minimal.lp`. The nucleus retains the original
+whole/nested accumulation specialized to the actual identity runtime head;
+all three general F accumulation rules require the classified strict view.
+The additional mixed raw identity conversion stays negative, as on baseline.
+Both projection orders, staged typed negatives for arbitrary F, classified
+positives and the original identity computations pass:
+
+| Control | Receipt | Seconds |
+| --- | --- | --- |
+| Whole/nested accumulation and both application orders | `20260926T075739Z-7b2fe6228cd04b97a94f9bd5b84ed0f2` | 6.322 |
+| Mixed accumulation, staged unqualified rejection and baseline identity negative | `20260926T075745Z-d6d817fc6734435d9ccafc9ec68b1cd5` | 6.333 |
+| Complete profile reviewer, 58 positive and 14 negative checks | `20260926T075752Z-77adef4dfe1543798ef8c71862c19ebf` | 6.347 |
+| Warning-enabled corrected nucleus | `20260926T075759Z-72c7abd6e71245778ae8f2770f89cccd` | 6.233 |
+
+The corrected nucleus has 762 critical and 149 pattern diagnostics, compared
+with 777/149 for the extra-join variant and 816/149 before correction. The
+warning parser has no failures. These totals locate the removed overlaps;
+they do not establish confluence. No production cut is removed yet.
+
+### New Main Consumers Over The Corrected Candidate
+
+`tmp/probes/api_ordinary_profile_minimal/` is the current isolated package.
+Its complete main-based nucleus and profile owners include the smaller
+precomposition correction above. Pass the directory as the runner's
+`--package-root`, so receipts record its actual closure rather than the
+active production package. Older cluster/canonical receipts remain separate.
+
+| Consumer | Result and receipt |
+| --- | --- |
+| Complete main adjunction-mate reviewer, through stable evaluated inverses | Pass, `20260926T075930Z-39cf900d5cd14e7ab025dd2a8ceaebb9`, 5.113s |
+| Ordinary equivalence transport, both original inverse projections and raw-action noncollapse | Pass, `20260926T075935Z-d868eaeda3ab442c89007190a1dea8b2`, 7.045s |
+| Whole ordinary transfor strictness and raw admission | Pass, `20260926T075943Z-df19af21b4c4466b8e1d4afab589fa57`, 6.838s |
+| Selected kernel-map semantic bodies, with ordinary or classified-strict input | Pass, `20260926T075950Z-083138797f1c491f9cf26b36b807af6a`, 8.005s |
+| Complete adapted diagram-evaluation owner and original reviewer | Pass, `20260926T080307Z-fc4025c2087140059de984b2a204a829`, 6.875s |
+| Complete adapted kernel-presentation owner | Pass, `20260926T080744Z-8e87af7ef1444273a0cef275cf08aad1`, 8.558s |
+| Kernel-presentation reviewer with explicit action qualifications | Pass, `20260926T081558Z-a75360b80dcf4034ab237b97b3057730`, 13.146s |
+| Raw ordinary kernel-map observation through derived admission and selected uniqueness | Pass, `20260926T082842Z-bf728470fa284671b65e88c86ceb60e7`, 6.930s |
+
+Diagram evaluation retains every public signature. Its composition path now
+uses the supplied C1 and the existing ordinary functor-category closure
+contract. The temporary package relocates the declaration from
+`one_cat_adjunction_families` for dependency layering; production must relocate
+that existing declaration, not create a second independent model constant.
+
+The kernel-presentation prototype preserves `KernelPresentation`, original K,
+the whole adjunction, structure adapter and selected object/inclusion
+contracts. Only the arbitrary-target selected-map observation is qualified by
+`StrictTransfor`; its existing usability comparison is guarded by the stable
+view. A reducible `WalkingArrow_cat` LHS slot initially blocked matching;
+using the inferred slot passes at the intended owner. The reviewer retains
+object comparison/noncollapse, identity, unrelated-map rejection, next Hom
+action and both Došen rectangles. The old unqualified runtime composition
+assertion becomes a noncollapse check; a positive ordinary-target path uses
+the original K with C1.
+
+The first raw ordinary selected-map proof attempted to combine naturality of
+the existing inclusion directly with selected-kernel uniqueness. It fails to
+reconcile native and selected presentations inside non-injective composition
+(`20260926T081710Z-d8e50fc11d8049588605898d809beacf`). Staging the inclusion
+paths resolves the arrow comparisons but still leaves the original/selected
+source indices different (`20260926T082107Z-ad4e71398af2424c972c5efe540d0da1`).
+This is an elaboration boundary, not a proof of mathematical impossibility.
+
+`api_kernel_presentation_ordinary_admission.lp` supplies the successful route.
+C1 internally derives whole strict transfor evidence; `eq_ap` of the admitted
+carrier path compares K on raw eta with K on its stable classified view. The
+qualified map theorem applies there, and existing
+`computational_kernel_map_equal_path` compares the two selected maps through
+universal uniqueness. Thus different proof-bearing factors are compared by
+their actual maps, without proof irrelevance. The public observation retains
+the original K, raw eta and ordinary hypothesis; it asks callers for no new
+square or strictness certificate. No new rule, unifier or axiom is introduced
+by this adapter. Its positive/noncollapse/unrelated-arrow reviewer is the next
+check. Do not infer C1 from preadditive hom sethood or narrow whole K/Q data.
+Warning and downstream qualification still precede promotion.
 
 ## Source Path Accounting
 
