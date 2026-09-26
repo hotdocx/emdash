@@ -175,3 +175,38 @@ governs reuse. This qualifies the registered check suite for the ordinary
 classifier checkpoint. It does not certify the whole migration or replace
 complete final formal CI (currently 1,293 registered targets, plus any new
 owners/reviewers) and clean-checkout resource routing.
+
+## Combined Native And Inherited Cubical Prototype
+
+The [Gray/path-cubical candidate](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md)
+checks the two separate closures at the normal profile: the Gray/native
+review takes 20.895s and the inherited path/address review takes 84.745s.
+Their combined test preloads all 159 selected semantic owners before running
+both reviewer closures. It uses a scoped 180-second deadline because the
+path closure alone nearly fills the default 90 seconds.
+
+| Combined check | Limit | Outcome | Seconds | Maximum child RSS (KiB) |
+| --- | --- | --- | ---: | ---: |
+| First combined import/reviewer check | 2 GiB/180s | Allocation failure during face naturality | 72.424 | 1,818,092 |
+| Identical mathematical inputs | 3 GiB/180s | Passed; 470 positive/80 negative assertions | 113.562 | 1,896,180 |
+
+Receipts are `20260926T135258Z-0ca2ca715e144c3fb4759608d8eca7fa` and
+`20260926T135535Z-1b8f72b9a7f94b078ec29b7255fb4b53`. Their mathematical
+input maps agree exactly. Both use `o=20,v=1024`, subject reduction, serial
+execution, the 64 MiB file limit, disabled core dumps and the systemd no-swap
+scope. The runner correctly records the first result as `allocation-failed`.
+The address-space limit is distinct from the reported maximum child RSS.
+
+The successful command from `emdash2` is:
+
+```bash
+EMDASH_LP_MEMORY_MIB=3072 OCAMLRUNPARAM=o=20,v=1024 \
+  python3 scripts/run_lambdapi.py --timeout-ms 180000 --quiet --no-colors \
+  --package-root tmp/probes/api_ordinary_profile_minimal \
+  api_profiles_cubical_native_joint_review.lp
+```
+
+This is a measured profile for one temporary combined target, not a change
+to the default guard or evidence that every inherited owner needs 3 GiB.
+It does not discharge the displayed assembly prerequisite, production
+promotion or final integration gates.

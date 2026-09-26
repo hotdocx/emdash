@@ -243,6 +243,29 @@ This is the next semantic investigation. Remaining native/CAS consumers and
 the wider Gray/cubical migration stay in scope. These results are still an
 isolated candidate, not production cut retirement.
 
+The user confirmed on 2026-09-26 that the displayed operation should require
+an explicit action-based profile, following the current recommendation.
+Do not restore the unqualified source assembler as the accepted integration
+result. The actual direct-cover consumer is Cat-valued and has no automatic
+ordinary/groupoidal premise. The constant-section specialization probe stops
+at an existing arrow-presentation mismatch; it does not establish a bypass.
+The source's named glue `IsStrictFunctord` contract and reviewer now pass,
+but that contract does not supply the locality/rho profile. Review the
+retained-component theorem and complete rho action before selecting the
+displayed premise. Keep pointwise component facts distinct from whole
+coherence, and introduce no admission axiom merely to make checking pass.
+
+The [Gray/path-cubical qualification](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md)
+now covers the classified graph/recursive decoder, judgmental dimension-two
+interchanger recovery, and all 22 inherited path-cubical/address owners with
+their 17 reviewers. The inherited limits on native readback and groupoidality
+are unchanged. A combined test preloads all 159 selected semantic owners
+before running the reviewer closures: 470 positive and 80 negative assertions
+pass at 3 GiB/180s in 113.562s. The identical source exhausted 2 GiB at
+72.424s; the explicit increase is recorded in the resource ledger. Default
+checks remain 2 GiB/90s. These are prototype results, not production or
+displayed-assembly qualification.
+
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
 `emdash2/logs/api-ordinary-check-results.json`, SHA-256
@@ -268,9 +291,9 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
 | `API-04` | joint Gamma/H, Hom-comparison/introduction and paired-reindex feasibility; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The joint 178-positive/48-negative replay includes native records and full profiles. [Current review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) records retained maps, inverse/category metadata, exact receipts and remaining qualification. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
-| `API-05` | ordinary pointwise assembly prototyped; displayed assembly prerequisite open | Ordinary inverse assembly now takes `StrictTransfor`; C1 callers derive admission internally and retain their supplied pointwise inverses. Restore and qualify the temporarily commented displayed half before promotion. Wider naturality/Catd cuts, direct-cover and retained pseudo consumers remain. |
-| `API-06` | native dependency prototype; wider qualification pending | Source walking-square/orientation and public classified graph are adapted in the temporary native closure; main's represented-comma implementation stays separate. Distinct Gray classifiers, whole inclusions, full graph/interchanger/closure reviewers, directed cubical/simplex consumers and judgmental dimension-two recovery remain to qualify. |
-| `API-07` | pending | Inherited path-cubical owners/reviewers through the structured feasibility boundary; retain exact readback/groupoidality limits. |
+| `API-05` | named glue and readable pseudo prototype qualified; displayed assembly prerequisite open | Ordinary inverse assembly takes `StrictTransfor`; C1 callers derive admission internally. Source glue strictness and its reviewer pass; readable pseudo controls retain both inverses and distinct endpoints. User confirmed an explicit action-based profile is required for displayed assembly. The unqualified raw assembler remains an unselected control, and locality/rho qualification stays open. |
+| `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
+| `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
 | `API-09` | incremental | Current authorities, notation, source registry, catalog, health and affected book evidence/prose. |
 | `API-10` | pending | Required formal/cross-layer gates once otherwise green; exact semantic delta/diff audit; clean local checkpoint and integration handoff. |

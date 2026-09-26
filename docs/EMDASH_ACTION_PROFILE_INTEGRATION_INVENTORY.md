@@ -968,6 +968,27 @@ prerequisite and remaining native/Gray/cubical/TypeScript work are still open.
 The dedicated review records the current exact manifest; it does not qualify
 every file in the temporary package or promote any production cut.
 
+### Classified Gray And Inherited Path-Cubical Qualification
+
+The [dedicated qualification](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md)
+records the selected Gray graph/decoder, judgmental dimension-two interchanger,
+source glue profile, readable pseudo inverse controls, and all 22 inherited
+path/address owners with 17 reviewers. The broader import test preloads 159
+semantic owners and passes 470 positive/80 negative assertions, including
+the current Gamma/H, Hom-introduction and native-record consumers.
+
+The source's low-dimensional readback/groupoidality limits remain explicit;
+no rejected generic Sigma identity rule or stronger native inverse is added.
+The combined target needs a measured 3 GiB/180s profile; separate closures
+pass at the default 2 GiB/90s settings. All exact source comparisons, receipts
+and scope limits are in the linked review. Production promotion remains open.
+
+The user confirmed that displayed pointwise assembly must require an explicit
+action-based profile. The unchanged raw assembler is an unselected control;
+the source's named glue profile does not qualify the separate locality/rho
+assembly. Remaining native/CAS, directed/simplex, TypeScript and final
+integration work is unchanged.
+
 ## Source Path Accounting
 
 The initial source diff has 81 LP paths (41 modified, 40 added), comprising
@@ -1029,80 +1050,80 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/emdash3_2_circle_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_commutative_algebra_locality.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_commutative_algebra_presheaves.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_cubical_face_addresses.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_cubical_open_box_sieves_recursive.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_direct_cover_completion_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_cubical_face_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_cubical_open_box_sieves_recursive.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and 17-positive/two-negative reviewer pass in the prototype; displayed locality/rho assembly remains unqualified. |
 | `emdash2/emdash3_2_eq1_hom_action.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_finite_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_gray_cube_decoder.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_cube_dimension2.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_interchanger_orientation.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_profiles.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_right_closure.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_transformation_graph.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_transformation_graph_profile.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_gray_walking_square.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/emdash3_2_path_cubical_cube3_open_box.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_face_naturality.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_hcomp2.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_levels.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_nerve.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_box_addresses.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_actions.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_fillers.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_frames.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_restrictions.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_sections.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_sieve_realization.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_open_square_sieves.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_square_comparison.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_square_elim.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_square_readback.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_structured_native_low_dimensions.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_structured_operators.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_structured_recursion.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/emdash3_2_path_cubical_successor_elim.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
+| `emdash2/emdash3_2_gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_cube_dimension2.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_interchanger_orientation.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_profiles.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_right_closure.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_transformation_graph.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_transformation_graph_profile.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_gray_walking_square.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/emdash3_2_path_cubical_cube3_open_box.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_face_naturality.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_hcomp2.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_levels.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_nerve.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_box_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_actions.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_fillers.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_frames.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_restrictions.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_sections.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_sieve_realization.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_open_square_sieves.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_square_comparison.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_square_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_square_readback.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_structured_native_low_dimensions.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_structured_operators.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_structured_recursion.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/emdash3_2_path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_pathout_transformation_lift.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_readable_pseudofunctors.lp` | M | Pending: API-05: preserve inverse data and distinct endpoints. |
+| `emdash2/emdash3_2_readable_pseudofunctors.lp` | M | API-05: exact source candidate and four-positive/three-negative controls preserve both inverses and distinct endpoints; production promotion pending. |
 | `emdash2/emdash3_2_ringed_sites.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_semicubical_nerve.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_simplex_shapes.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_semicubical_nerve.lp` | M | API-06: exact source candidate and semicubical/Gray/path joint consumers pass; production promotion pending. |
+| `emdash2/emdash3_2_simplex_shapes.lp` | M | API-06/07: source candidate checks as an inherited path/address dependency; complete focused simplex review and production promotion remain pending. |
 | `emdash2/emdash3_2_strict_functor_actions.lp` | A | Pending: API-04: post-profile actions with new-main consumers. |
 | `emdash2/emdash3_2_walking_end_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/adjunction_triangles.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/commutative_ring_presheaf_invertibility.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/commutative_ring_presheaf_locality.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/cubical_face_addresses.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/cubical_open_box_sieves_recursive.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
+| `emdash2/examples/cubical_face_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/cubical_open_box_sieves_recursive.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/dependent_simplex_faces.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/dependent_simplex_ordinal_dimension3.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/dependent_simplex_profiles.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/direct_cover_completion_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and 17-positive/two-negative reviewer pass in the prototype; displayed locality/rho assembly remains unqualified. |
 | `emdash2/examples/generic_groupoidification.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/gray_cube_decoder.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_cube_dimension2.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_interchanger.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_profiles.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_right_closure.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_transformation_graph.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_transformation_graph_profile.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
-| `emdash2/examples/gray_walking_square.lp` | M | Pending: API-03/05/06: profile and Gray migration. |
+| `emdash2/examples/gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_cube_dimension2.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_interchanger.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_profiles.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_right_closure.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_transformation_graph.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_transformation_graph_profile.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
+| `emdash2/examples/gray_walking_square.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/groupoidal_structured_j_eq1.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/path_cubical_cube3_open_box.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_face_naturality.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_hcomp2.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_levels.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_nerve.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_open_box_addresses.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_open_square_fillers.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_open_square_sections.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_open_square_sieves.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_square_comparison.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_square_readback.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_structured_native_low_dimensions.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_structured_operators.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_structured_recursion.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
-| `emdash2/examples/path_cubical_successor_elim.lp` | A | Pending: API-07: adapt bounded inherited implementation/reviewer. |
+| `emdash2/examples/path_cubical_cube3_open_box.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_face_naturality.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_hcomp2.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_levels.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_nerve.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_open_box_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_open_square_fillers.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_open_square_sections.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_open_square_sieves.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_square_comparison.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_square_readback.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_structured_native_low_dimensions.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_structured_operators.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_structured_recursion.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
+| `emdash2/examples/path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/profunctor_weighted_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/simplex_shapes.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 
