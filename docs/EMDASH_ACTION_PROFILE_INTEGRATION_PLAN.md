@@ -180,7 +180,7 @@ compatibility requirements.
 | `API-03` | ordinary classifier implemented; validation in progress | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory are in the working tree. Direct callers are migrated. A measured inclusion projection beta preserves both action orders and higher action. Global cuts and Gray arrows remain transitional until API-04/05/06. |
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
-| `API-02M` | target and first consumer qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): the unchanged 38-file `homology_map_kernel_covers` closure passes compilation at 6 GiB/180s after allocation failure at 3 GiB. Object load and the direct consumer pass at default limits. Standing user authorization covers needed measured resource increases; full-suite reintegration remains required. |
+| `API-02M` | measured cover replays and consumers qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): both unchanged cover owners compile at 6 GiB/180s; first exactness and the downstream consumer pass at defaults after parent compilation. Standing user authorization covers needed measured resource increases; full-suite reintegration remains in progress. |
 | `API-04` | pending | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
 | `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
@@ -316,11 +316,21 @@ executable evidence.
   ambient cut; use named evaluation and the newer Hom-comparison consumer
   to qualify the mapping boundary. The final strict-action source owner
   already checks as an isolated feasibility probe against the ordinary port.
-- Current check continuation: session handle 60278, log
-  `emdash2/logs/api-ordinary-check-independent.log`. This is the independent
-  partition of 567 registered check targets; 22 dependent/atomic-recipe
-  targets remain required while resource qualification continues below.
-  It reuses only exact matching receipts and does not claim full-suite success.
+- Check continuation 60278 is terminal: 428 successful targets in its
+  567-target partition, then allocation failure in unchanged
+  `homology_epic_covers`. The queued 22-target resource partition (52791)
+  is also terminal after two successes and an import-stage allocation failure
+  in `homology_first_exactness`. The logs are
+  `emdash2/logs/api-ordinary-check-independent.log` and
+  `emdash2/logs/api-ordinary-check-resource.log`; neither is full-suite success.
+  Resource follow-up 94473 is complete: epic covers compiled at 6 GiB/180s;
+  first exactness's four direct parents and the target compiled at defaults;
+  the actual second-exactness consumer passed at defaults. Immutable receipt
+  IDs are collected in `emdash2/logs/api-resource-followup-receipts.json`.
+  Current full-suite continuation: session 33193, log
+  `emdash2/logs/api-ordinary-check-full-resume.log`, with exact input/settings
+  matching and explicit settings only for the measured cover owners and
+  atomic recipes that compile them.
   Re-poll the handle or inspect actual process state before taking a wait or
   restart decision. The ordinary mathematical changes are intentionally
   still unstaged pending qualification; validation and baseline-import repairs
@@ -361,11 +371,24 @@ EMDASH_LP_MEMORY_MIB=6144 OCAMLRUNPARAM=o=20,v=1024 \
 This is one target-specific resource experiment. The normal 2 GiB/90-second
 defaults, serial/file guards, no-swap policy and subject reduction remain
 intact. The nested SOP and root guidance now record the user's
-standing authorization. The independent partition continues; its exclusion list is
+standing authorization. The first independent partition's exclusion list is
 `emdash2/tmp/probes/api_resource_pending_targets.json`, and its eventual
 result explicitly records `fullSuiteComplete: false` while that list remains.
-No excluded target is waived or counted as passing. Once the bounded target
-and its consumer are qualified, reintegrate this partition into the full gate.
+No excluded target is waived or counted as passing. Reintegrate all measured
+resource targets into the full gate after the additional failures below are
+resolved.
+
+The resource authorization and first qualified replay are checkpointed at
+`0c47d2b0`. Later default-limit failures are `homology_epic_covers` (36-file
+unchanged main closure, with both direct parents already compiled) and
+`homology_first_exactness` (131-file unchanged main closure, with four direct
+parents still uncompiled). Neither closure imports the modified profile.
+The first epic-cover compilation at 6 GiB/180s passes in 93.302s. First
+exactness's import preparation resolves its failure at defaults: the target
+compiles in 18.333s and the actual second-exactness consumer passes in 26.495s.
+The resource report records object hashes, receipts and a qualification of
+the in-process batch's cumulative child-RSS field. The complete 589-target
+suite is now being reconciled and continued.
 
 For the interleaved resource experiments, only the owned batch launcher is
 temporarily suspended. Its current checker and hard deadline run to
@@ -379,6 +402,21 @@ whole strictness: it leaves the intrinsic cell and a whole endpoint comparison
 unsolved. Identity, whole Hom projection and component-composition controls
 pass. The inventory records both outcomes; do not infer the missing whole
 profile from those component betas or add an unreviewed admission axiom.
+
+Definition-only point observation of retained Omega inverse data now passes
+over the final source nucleus, including the actual Catd-contraction interface
+when its original category index is retained. The computational DefIso
+candidate passes initial ordinary and Prof/adjunction component observations,
+but fails the composed-comparison cancellation control. It is not selected
+for promotion. The inventory records warning families and exact receipts;
+follow the source's stable inverse-owner discipline in the next design.
+
+Book checks pass for the final working text: 46 sources, 187 evidence claims
+and 3,124 math spans. Catalog, registry, source TOC, header/reference lint and
+strict LHS audits of the nucleus and profile owner pass. The generated health
+report now has current static source/check-content snapshots; its checks
+remain explicitly `not-run`. This refresh does not replace the ongoing full
+suite or the later formal CI gate.
 
 - The former session 8836 ended on a duplicated `--no-colors` argument in
   a staged recipe, not a deadline or mathematical failure. The temporary

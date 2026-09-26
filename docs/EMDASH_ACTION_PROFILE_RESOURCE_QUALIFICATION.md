@@ -67,7 +67,44 @@ lock; the launcher resumed in a `finally` handler. Individual receipt timing
 is authoritative. Outer batch timings spanning those waits include the pause
 and must not be used as performance measurements.
 
-The independent 567-target validation partition continues. Its 22 excluded
-targets remain required and will be reconciled with the full 589-target gate.
-This report qualifies one unchanged target and its first consumer; it does
-not certify the ordinary classifier tranche or the completed migration.
+At that checkpoint the independent 567-target validation partition was still
+running. Its 22 excluded targets remained required. The subsequent replay
+below rejoins the full 589-target gate. This resource evidence does not certify
+the ordinary classifier tranche or the completed migration.
+
+## Subsequent Homology Replay
+
+The independent partition then reached allocation failure in
+`homology_epic_covers` at 2 GiB/90s, despite both direct parents already
+having compiled objects. Its 36-file LP closure is unchanged from main and
+excludes the new profile. A target-only compilation at 6 GiB/180s passed in
+93.302s, with maximum child RSS 3,614,700 KiB:
+`20260926T053322Z-aa96479d010149798a7ad4c28a64a80e`.
+The object has 1,825,830 bytes and SHA-256
+`57f1004da4f5d572162743d72ecf9225c9eab6ecccfcca8ef9724ad6d9673139`.
+
+The resource partition separately failed while replaying imports of
+`homology_first_exactness`; its 131-file LP closure is also unchanged from
+main. Compiling its four direct parents at 2 GiB/90s resolved that import
+overhead. The target then compiled in 18.333s at those same default limits,
+receipt `20260926T053556Z-6402ed9a23954421bce3bc3a063c81be`. Its object has
+4,643,427 bytes, SHA-256
+`a95f3a502052e59c736d509fbadb52bb054754df22bda676b3df872b375d0eb9`.
+The actual `homology_second_exactness` consumer, importing both recovered
+bodies, passed at defaults in 26.495s:
+`20260926T053615Z-5bbccbe8e0084841b885a7e0bf47ff5a`.
+
+The exact receipt sequence is retained at
+`emdash2/logs/api-resource-followup-receipts.json`. This follow-up used
+sequential `run_check` calls in one Python process. Its child-RSS field is
+the process-lifetime maximum and therefore includes earlier children; only
+the first call's RSS above is a target-specific measurement. Later calls'
+time, enforced limits, return classification, exact inputs and object checks
+remain applicable. Do not report their repeated RSS value as individual
+memory consumption. Subsequent measurements use separate CLI processes.
+
+Full-suite continuation now selects explicit 6 GiB/180s settings for the two
+measured cover owners and atomic staged recipes that compile those owners.
+Other targets retain their default or existing registered settings. Successful
+receipts are reusable only when exact source/object, checker, runner, recipe
+and effective settings still match. The full suite remains in progress.

@@ -327,11 +327,17 @@ The suite is now being continued under the corrected runner, explicit
 `o=20,v=1024`, 90-second and 2 GiB defaults plus existing named profiles.
 Only exact matching source/object, checker, runner and effective settings
 receipts are reused; the runner change invalidates the earlier matches.
-The active log is `emdash2/logs/api-ordinary-check-independent.log`;
+The earlier partition log is `emdash2/logs/api-ordinary-check-independent.log`;
 the temporary orchestration recipe is `tmp/probes/api_continue_check.py`.
-The current live session handle is 60278 at this record. It checks the 567
-targets independent of the resource target and its atomic recipes;
-22 excluded targets remain required. The TypeScript probe-bridge regression
+Session 60278 checked the partition of 567 targets independent of the first
+resource target and its atomic recipes. It is now terminal with 428 passes
+and an allocation failure in `homology_epic_covers`. The queued 22-target
+partition (52791) is terminal after two passes and an allocation failure in
+`homology_first_exactness`. Session 94473 completed the measured resource
+follow-up, including a default-limit downstream consumer. The complete
+589-target suite resumes in session 33193, log
+`emdash2/logs/api-ordinary-check-full-resume.log`; exact receipt identity
+is rechecked after the newly compiled parents. The TypeScript probe-bridge regression
 also passes and is checkpointed separately at `2653f6fd`.
 The previous session handles 46872, 33123, 8836, 59878 and 22260 are terminal. Inspect the actual
 current process/handle on continuation; this text is not liveness evidence.
@@ -436,6 +442,97 @@ Thus point/action betas alone have not supplied the required whole admission.
 Keep arbitrary-target evaluation distinct from the checked ordinary-target
 derivation; preserve actual component/inverse data in its eventual consumer
 design and do not postulate an admission merely to discharge this probe.
+
+A subsequent definition-only experiment establishes a narrower observation
+needed by the Omega consumers. `api_omega_evaluation_source_core.lp` appends
+point evaluation of `OmegaEquivAlong` to the exact final source nucleus
+`114dc19f`. It evaluates the retained left/right inverse transformations and
+applies point evaluation to their original equality laws. Existing vertical
+composition and identity betas discharge the endpoints. Both selected inverse
+projections and an arbitrary ambient composition noncollapse control pass,
+without a new rule, unifier, axiom or strictness admission: receipt
+`20260926T052242Z-0ad10758459741fe8c82b41a327de5b1`, 4.567s at 2 GiB/90s.
+
+The actual `CatdContraction` interface exposed a presentation issue. Routing
+its evidence through `Functor_cat(K,Cat_cat)` typechecks, but the runtime
+inverse assertion fails because the original evidence index is `Catd_cat(K)`
+(receipt `20260926T052445Z-263e556bd93b4c2fb08e64043a9d0b93`). A derived
+Catd observation that keeps that exact source-category index passes the same
+existing contraction interface and literal retained-left-inverse assertion:
+`api_catd_contraction_evaluation_exact.lp`, receipt
+`20260926T052633Z-c66ed4e361364b9b91ab43e29a6ff7cd`, 4.574s. Both are
+non-library candidates over the source nucleus, not qualification of a
+migrated main closure. Preserve the original index rather than adding a
+global category conversion or discarding the failed control. This supplies
+a concrete route for the Omega observations; computational DefIso evaluation
+and whole evaluation strictness remain separate obligations.
+
+For computational DefIso observation, a no-beta control fails pointwise
+cancellation of the original whole inverse, receipt
+`20260926T052953Z-0c925ab4d49045c5b35d7a97e23dd8a2` (4.643s). The candidate
+`api_defiso_evaluation_candidate.lp` supplies an explicitly declared point
+observation with raw original component projections, plus the two narrow
+joins between whole inverse cancellation and vertical component projection.
+Its projection, both cancellation directions, whole/point reduction order,
+and different-comparison noncollapse controls pass over the source nucleus:
+`20260926T053228Z-0239cc6976944c8d8a0c901f592adb76` (4.658s).
+This is a proposed computational constructor, not a theorem constructing
+DefIso from IsoEvidence and not a whole evaluation strictness proof.
+
+The Prof-specific candidate preserves the original `Prof_cat(A,B)` index,
+copies the current adjunction-mate component/forward/inverse interfaces, and
+retains main's two existing named point-inverse cuts. The original reviewer's
+first four point/whole inverse observations pass over the source nucleus,
+receipt `20260926T054236Z-7ca88b4b4c2f4e239e5958b4c91d5308` (5.024s).
+This checks those interfaces, not the complete main adjunction-mates module.
+
+Warning comparison for the ordinary DefIso candidate is 796 -> 820 critical
+diagnostics, with 151 pattern diagnostics unchanged and no parser issues.
+All 24 additions have `comp_fapp0` as term head: composition/category folds
+(4), `defiso_to` (8), `defiso_from` (8), and `tapp0_fapp0` (4). The concrete
+families are opposite/skeleton composition, constant-section projections,
+and reflexive/symmetric/composite/nested point observations of DefIso. Raw
+streams: `20260926T054242Z-99d553dac3a6449d918b6fa7006cb442` and
+`20260926T054247Z-f8cb38bd19fb48d1bb66b86256d8c0b7`.
+
+The follow-up `api_defiso_evaluation_composites.lp` passes reflexive and
+symmetric inputs but fails cancellation for `defiso_comp(J,I)`, receipt
+`20260926T054603Z-7377bc0ed3b943e4b5d80771525caf63` (5.188s). Consequently
+the raw-projecting DefIso candidate is **not selected for promotion**. The
+source branch's stable mapped forward/inverse heads address precisely this
+kind of premature unfolding; the next design must retain composite inverse
+computation and exact main indices as well as the initial point observations.
+Do not repair this by restoring the retired generic strictness cuts or by
+calling the initial four observations complete qualification.
+
+The next naturality scan finds twenty direct extension consumers of
+`strict_component_naturality_path`, separate from the thirteen explicit
+composition-path consumers counted earlier. Their hypotheses need migration
+at `API-05`, not a spelling-only replacement:
+
+- `one_cat_family_naturality_path` already receives C1. The existing structural
+  `one_cat_functor_category` contract can retain its ordinary target after
+  family formation. The selected diagram-reconstruction consumer likewise
+  has C1 and needs the ordinary profile of its functor category.
+- `functor_reconstruction_paths` itself is currently unguarded, despite
+  using equality-valued strict component naturality. Its actual current
+  caller is the guarded walking-arrow reconstruction owner. Rework the helper
+  with the actual ordinary/profile evidence; a whole inverse transformation
+  alone must not silently become full strict naturality.
+- `kernel_adjunction_presentations`, its cokernel counterpart, and the first
+  `homology_family_boundary_naturality` helper currently use arbitrary raw
+  transformations without C1. Their preadditive S supplies sethood of
+  `Hom(C,x,y)`; that does not establish discreteness of `Hom_cat(C,x,y)`.
+  Audit and thread existing ordinary hypotheses at their real callers, or
+  retain qualified transformation profiles. Do not manufacture C1 from S.
+- `adjunction_untranspose_naturality` has unrestricted R/L signatures and
+  uses both composition and counit naturality. Review the actual adjunction
+  contract and its ordinary consumers together before removing either cut;
+  isolated component identities are not sufficient qualification.
+
+These are source-level dependency findings, not new mathematical assumptions
+or completed migrations. They supplement the owner ledger's requirement to
+preserve current ordinary/native consumers with their actual guards.
 
 ## Source Path Accounting
 
