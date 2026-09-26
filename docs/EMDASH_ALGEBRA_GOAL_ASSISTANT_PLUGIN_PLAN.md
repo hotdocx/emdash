@@ -286,8 +286,8 @@ of the browser-safe `@hotdocx/emdash` entries.
 | --- | --- | --- |
 | GAP-0. Review and orientation | Complete | Main integrated at `37ce19d5`; reference/plugin/MCP/WebMCP sources and official guidance inspected; orientation, implementation proposal and linked plans synchronized; document checks and exact diff review pass |
 | GAP-1. Portable runtime and workspace slice | Complete at focused qualification | Copied standalone runtime passes CLI/fresh-process/typed-authoring acceptance outside the checkout; exact source, retained computation, update and derived view controls pass |
-| GAP-2. Local Codex plugin | In progress | Validated manifest/skill and thin local MCP adapter over the same service; actual fresh Codex session discovers and uses the installed/cached copy on a user workspace |
-| GAP-3. Internal construction and reuse | Selected; pending GAP-1 | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
+| GAP-2. Local Codex plugin | Complete at focused qualification | Validated source/cache, real SDK STDIO and CLI parity, and actual fresh Codex CLI calls from an unrelated workspace pass |
+| GAP-3. Internal construction and reuse | In progress | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
 | GAP-4. Browser projection | Proposed follow-up | A real supported browser registers the MCP-discovered tools and forwards calls through the shared service; ordinary UI remains usable without WebMCP; stale/cancelled results cannot overwrite newer source |
 | GAP-5. Hosted distribution and richer mathematics | Deferred | Separate GetPaidX/remote host adapter, public releases, further coefficient interpretations/backends and richer mathematical consumers only when selected |
 
@@ -384,6 +384,39 @@ required to produce this local design and first local runtime.
   build owns generated `plugins/emdash/dist/` and hashes its source/bundle inputs.
   [Runtime guide](../plugins/emdash/README.md). No aggregate, formal-owner change
   or Lambdapi invocation was needed for this source/file slice.
+- GAP-1 checkpoint: `65bad0b4`.
+- GAP-2: the plugin-creator scaffold supplies the repository marketplace,
+  compatibility manifest and companion MCP configuration. Its default marketplace
+  name is `personal` (no existing home/personal marketplace was present). It is
+  registered from this worktree, distinct from `hotdocx`; no home marketplace
+  file was created. The skill gives mathematical workflows and carries revisions
+  on the user's behalf. SDK `1.30.0` is pinned as a root development dependency;
+  the lock delta only adds its dependency closure, leaving existing versions and
+  public package entries unchanged.
+- `algebra_goal_mcp.ts` derives tool names, JSON schemas and annotations from the
+  shared command catalog. Fixed bundled child workers enforce a 30-second
+  deadline, 512 MiB V8 heap, input/output limits and two concurrent operations.
+  Cancellation/closure retires workers; source/module/shell execution is not a
+  tool capability. Local tools take explicit absolute workspace roots and reject
+  the installed runtime directory. A future hosted adapter must instead supply
+  authorized roots from its actor/workspace context.
+- GAP-2 qualification: workspace/typecheck and changed-file lint pass; all five
+  MCP catalog/protocol/cancellation/worker-bound tests pass, and 459 suites are
+  registered. Skill and plugin validators pass for source and installed cache.
+  The copied-plugin STDIO acceptance passes actual SDK discovery/calls, CLI
+  result parity, computation/rendering, process restart, revision updates and
+  stale/root rejection. Generated runtime and selected source files match the
+  installed `/home/user1/.codex/plugins/cache/personal/emdash/0.1.0` byte-for-byte.
+- Actual Codex CLI 0.156.1 smoke: `/tmp/emdash-codex-smoke-l3grogws`, with other
+  user MCP servers/plugins disabled for that invocation. The successful fresh
+  session used only `emdash_inspect`, `emdash_initialize`, `emdash_compute` and
+  `emdash_render`; it ran no shell commands and returned the actual `(-x,1)`
+  relation and view path. Source/result/view identities and HTML hash were checked
+  independently. The first launch failed before starting because CLI override
+  keys were TOML-quoted; plain dotted CLI keys corrected that configuration-only
+  issue. The transcript is `events-v2.jsonl`, exit zero, and stderr is empty.
+  No hosted GetPaidX action or production data was involved. The app's GUI was
+  not separately exercised, and no new client version was installed.
 
 ## Persistent-goal prompts
 

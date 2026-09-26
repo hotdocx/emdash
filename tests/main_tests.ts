@@ -273,6 +273,7 @@ import './v3_2_algebra_polynomial_workbench_tests';
 import './v3_2_algebra_external_module_reuse_tests';
 import './v3_2_package_algebra_tests';
 import './v3_2_algebra_goal_workspace_tests';
+import './v3_2_algebra_goal_mcp_tests';
 import './v3_2_algebra_zariski_tests';
 import './v3_2_algebra_matrix_tests';
 import './v3_2_algebra_module_tests';

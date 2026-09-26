@@ -5,6 +5,40 @@ ordinary files. This directory is the source of the Codex plugin being built
 under `docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md`. Public distribution
 and cloud delivery are separate milestones.
 
+## Local Codex installation
+
+Build the runtime first, then register this repository marketplace and install:
+
+```bash
+codex plugin marketplace add /absolute/path/to/emdash-checkout
+codex plugin add emdash@personal
+```
+
+The repository marketplace uses the scaffold's `personal` name and remains
+separate from Arrowgram/GetPaidX's `hotdocx` marketplace. Its source lives in
+this repository's `.agents/plugins/marketplace.json`; no home marketplace is
+created. Use the actual registered checkout path. Start a fresh Codex session
+after installation or a plugin update so it picks up the installed skill/tools.
+
+The local `emdash-local` server starts the bundled runtime through
+`scripts/start-mcp.mjs`. It requires Node on the host PATH, not a GetPaidX
+account or a new model API key. Each MCP tool takes an explicit absolute
+mathematics workspace root; the server's cwd can be the installed cache and
+must not be mistaken for the user's workspace. The installed plugin directory
+is rejected as a data root. These are local user-process file capabilities;
+they are not a hosted authorization boundary.
+
+The SDK adapter projects the same command catalog and runs fixed bundled
+workers with a 30-second deadline, a 512 MiB V8 heap limit, bounded input/output
+and at most two concurrent operations. Cancellation or transport closure
+terminates the corresponding worker. After an interrupted write, inspect the
+workspace before retrying. No caller-provided shell command or module is executed.
+
+The current local CLI acceptance used Codex 0.156.1 and Node 24.11.1. It verified
+real installed-plugin MCP calls from a clean unrelated directory. The Codex app
+uses the shared local plugin/MCP configuration; GUI invocation is not a separate
+qualification claim from that CLI smoke.
+
 ## Build and use the portable runtime
 
 From the contributor repository root:
