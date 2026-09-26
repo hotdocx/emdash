@@ -989,6 +989,28 @@ the source's named glue profile does not qualify the separate locality/rho
 assembly. Remaining native/CAS, directed/simplex, TypeScript and final
 integration work is unchanged.
 
+### Displayed Assembly And Retained-Member Prerequisite
+
+The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md)
+identifies three profile-dependent assembly stages in the direct-cover
+locality consumer and an earlier use of represented-section strictness.
+The guarded section theorem is derived from existing whole-cell evidence.
+Its actual glue-output specialization uses the retained contravariant
+Yoneda owner; no global representation fold is introduced. The required
+section profile is still a premise, distinct from glue's qualified profile
+in question substitution.
+
+An arbitrary displayed-action projection now passes whole, component,
+diagonal and next-Hom controls. Its two new whole heads retain structural
+status; one added warning is accounted for by the adjacent diagonal fold
+and complete-order controls. The candidate profile is defined from fibre
+strictness and whole base-action comparisons. A guarded primitive assembler
+preserves both inverse slots and rejects omitted/mismatched profiles, but
+its sufficiency and producer remain unqualified. Both assembler variants
+stay outside the selected joint candidate. The linked report binds eight
+successful warning-enabled checks to 32 current inputs and records the
+failed representation control, warning comparison and exact next work.
+
 ### Native Snake Connecting And Six-Term Candidate
 
 The [native snake feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
