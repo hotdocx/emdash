@@ -210,3 +210,40 @@ This is a measured profile for one temporary combined target, not a change
 to the default guard or evidence that every inherited owner needs 3 GiB.
 It does not discharge the displayed assembly prerequisite, production
 promotion or final integration gates.
+
+## Native Snake Six-Term Candidate
+
+The original six-term reviewer now checks the main-based lax/profile
+candidate. After adapting its actual ordinary support proofs, the default
+run passes the affected biproduct/coproduct injection owners but exhausts
+allocation while checking the second exactness closure. Identical source
+passes with a target-specific memory increase:
+
+| Check | Limit | Outcome | Seconds | Maximum child RSS (KiB) |
+| --- | --- | --- | ---: | ---: |
+| Original six-term reviewer | 2 GiB/90s | Allocation failure | 39.301 | 1,818,040 |
+| Identical mathematical inputs | 3 GiB/90s | Passed, six original assertions | 64.754 | 2,735,912 |
+
+Receipts are `20260926T151510Z-36afbd72f3064e27a3f8b0c1958cacfa` and
+`20260926T151626Z-b04ca809f99c4e24978100df4faaad90`. Their input maps
+are identical. Both retain `o=20,v=1024`, subject reduction, the serial lock,
+file/core limits and systemd no-swap scopes.
+
+The expanded joint review additionally preloads the selected Gray/path,
+native and retained-data owners. It selects 4 GiB/240s because the separate
+six-term replay approaches 3 GiB and the earlier cubical/native union
+required 3 GiB/180s. Its first run at 118.250s exposed a remaining use of the
+retired unrestricted mapper in arrow-evidence evaluation, rather than a
+resource failure (`20260926T152027Z-9d50257c548a47c78a8dfb0fe3cfed4c`).
+That owner now uses direct evaluation of retained inverse data. The final
+joint replay passes in 143.610s with maximum child RSS 3,518,656 KiB, receipt
+`20260926T152718Z-905556c99d9c4b3f94e8eb666f59d462`: 513 positive/89 negative
+assertions and twenty retained-data consumers. The separate retained-data
+reviewer passes at 3 GiB/90s in 66.811s, RSS 2,748,612 KiB, receipt
+`20260926T152535Z-e6fbecfec9d64a6ba04c3a6e322b5f62`. The
+[native feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
+records exact current source and control manifests.
+
+These are explicit temporary-target profiles under the user's standing
+authorization. Defaults remain 2 GiB/90s; no new production resource profile
+or permission question is introduced.

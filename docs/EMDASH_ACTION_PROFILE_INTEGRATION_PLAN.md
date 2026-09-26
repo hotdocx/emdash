@@ -178,8 +178,9 @@ local tranche is qualified by the complete 589-target registered `check`
 suite, all six affected reviewers, owner-position/warning evidence, current
 catalog/health snapshots and book checks/render. The active nucleus still
 matches baseline main; no production global composition/naturality cut has
-been retired. Gray/lax-arrow, inherited path-cubical and TypeScript migration,
-plus complete integration qualification, remain ahead.
+been retired. The wider Gray/lax-arrow and inherited path-cubical changes
+are qualified in the prototype; their production promotion, TypeScript migration and
+complete integration qualification remain ahead.
 
 The preferred temporary environment is
 `emdash2/tmp/probes/api_ordinary_profile_minimal/`. It combines the main-based
@@ -239,8 +240,8 @@ displayed half commented out. Qualify and restore that operation before
 production cut migration. Its actual direct-cover consumer and the existing
 `tdapp*` owners must determine the required premise; do not assume that a new
 displayed-transfor classifier or a blanket admission axiom is necessary.
-This is the next semantic investigation. Remaining native/CAS consumers and
-the wider Gray/cubical migration stay in scope. These results are still an
+This remains a required semantic investigation. Remaining native/CAS consumers
+and production Gray/cubical promotion stay in scope. These results are still an
 isolated candidate, not production cut retirement.
 
 The user confirmed on 2026-09-26 that the displayed operation should require
@@ -266,6 +267,40 @@ pass at 3 GiB/180s in 113.562s. The identical source exhausted 2 GiB at
 checks remain 2 GiB/90s. These are prototype results, not production or
 displayed-assembly qualification.
 
+The [native snake feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
+now records successful original connecting and general six-term reviewers.
+They retain arbitrary outer a,c, all five stored maps, original whole K/Q/H,
+selected inverses and supplied normality/model contracts. Ordinary support
+proofs use existing C1 data; 80 original ordinary/product signatures remain.
+Generic composition/naturality and inverse-mate laws instead expose their
+actual profile premises. Product-composition projections derive by Sigma
+induction without a new rule or strictness axiom.
+
+The native evaluation comparison now permits the original raw observation
+to reduce before matching; its residual retains the same diagram and arrow.
+The selected whole diagonal/pair comparison is scoped sufficient congruence
+at the product-family reindex owner. Typed positives, runtime negatives and
+different-arrow/coordinate rejections pass. Neither change adds a runtime
+cut or restores the rejected generic product/precomposition folds.
+
+The six-term target exhausted 2 GiB at 39.301s, then passed with identical
+inputs at 3 GiB/90s in 64.754s (RSS 2,735,912 KiB, receipt
+`20260926T151626Z-b04ca809f99c4e24978100df4faaad90`). The current combined
+replay passes 513 positive/89 negative assertions and twenty retained-data
+consumers after preloading 274 selected semantic owners. Its explicit
+4 GiB/240s run takes 143.610s, RSS 3,518,656 KiB (receipt
+`20260926T152718Z-905556c99d9c4b3f94e8eb666f59d462`). Both proof-time
+comparison warning controls preserve their critical-participant inventories.
+The native review records the current 401-file candidate/control manifest,
+339 selected inputs and seven exact-current successful receipts. Normal
+defaults and all guards remain unchanged.
+
+Next: qualify the actual Freyd/native proof–CAS consumers. Eight exact
+archived emitted artifacts are recovered and hash-verified through the
+native review; their 94 assertions are not yet qualified in this candidate.
+The separately deferred large six-term package-observation comparison stays
+excluded. The explicit displayed pointwise profile remains required.
+
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
 `emdash2/logs/api-ordinary-check-results.json`, SHA-256
@@ -289,7 +324,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | joint Gamma/H, Hom-comparison/introduction and paired-reindex feasibility; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The joint 178-positive/48-negative replay includes native records and full profiles. [Current review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) records retained maps, inverse/category metadata, exact receipts and remaining qualification. |
+| `API-04` | joint Gamma/H/Hom feasibility and original native snake connecting/six-term reviewers pass; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The latest combined candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. Freyd/CAS qualification remains pending. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | named glue and readable pseudo prototype qualified; displayed assembly prerequisite open | Ordinary inverse assembly takes `StrictTransfor`; C1 callers derive admission internally. Source glue strictness and its reviewer pass; readable pseudo controls retain both inverses and distinct endpoints. User confirmed an explicit action-based profile is required for displayed assembly. The unqualified raw assembler remains an unselected control, and locality/rho qualification stays open. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |

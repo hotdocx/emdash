@@ -11,6 +11,11 @@ Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), rows
 Production remains at `f0f327d6`; its nucleus still matches main `37ce19d5`.
 The pinned implementation source is `114dc19f`.
 
+This records the candidate at checkpoint `652816fe`. The subsequent
+[native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
+changes native observation and ordinary support proofs and records its own
+combined replay. Earlier receipts retain their exact source identities.
+
 ## Qualified Candidate Scope
 
 The candidate retains the main-based lax nucleus, opaque profiles, API-04R
@@ -131,7 +136,7 @@ limit at 72.424s; identical source passed at 3 GiB/180s. The
 [resource ledger](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md) records
 both runs. All other rows use the normal 2 GiB/90s profile.
 
-Current recovery manifest:
+Recovery manifest at this checkpoint:
 `emdash2/tmp/probes/api_gray_path_cubical_current_manifest.json`, SHA-256
 `f4b1c6ed90d4afc3f91b300fc611afe30042a193d4d0b617ba2eebacad6f9e31`.
 It records 282 candidate/control files and nine exact successful receipts

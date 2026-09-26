@@ -989,6 +989,34 @@ the source's named glue profile does not qualify the separate locality/rho
 assembly. Remaining native/CAS, directed/simplex, TypeScript and final
 integration work is unchanged.
 
+### Native Snake Connecting And Six-Term Candidate
+
+The [native snake feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
+records the successful original connecting and general six-term reviewers.
+Both construction owners retain their production source bytes, as do whole
+K/Q and H. The six-term reviewer preserves arbitrary outer a,c and all five
+stored maps. Eighty public signatures across fourteen ordinary/product
+support owners remain unchanged; generic naturality/composition and
+inverse-mate paths now expose their actual profile premises.
+
+Ordinary callers derive those capabilities internally from their existing
+C1 evidence. Product-composition projection paths use Sigma induction,
+without a new strictness premise. Native evaluation and a literal paired
+projection under diagonal postcomposition receive scoped proof-time
+comparisons, with typed positives and runtime/different-data negatives.
+The original guarded mixed postcomposition view is retained.
+
+The larger retained-data review additionally finds a retired generic mapper
+in arrow-evidence evaluation. Its replacement evaluates the original whole
+inverse data directly, with unchanged public signatures and no new profile
+premise. Its focused reviewer observes both original inverse projections.
+The original assembled retained-data reviewer also passes with its twenty
+typed consumers. The combined replay preloads 274 semantic owners and passes
+513 positive/89 negative assertions plus those twenty consumers. Its exact
+339-input snapshot and warning controls are recorded in the linked review.
+Remaining Freyd/proof–CAS, displayed profile, directed/simplex,
+production promotion, TypeScript and final gates stay required.
+
 ## Source Path Accounting
 
 The initial source diff has 81 LP paths (41 modified, 40 added), comprising
