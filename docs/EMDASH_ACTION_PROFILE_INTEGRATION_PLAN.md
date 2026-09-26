@@ -15,7 +15,7 @@ only. Source-branch plans/receipts remain historical evidence. Op/duality,
 six-term comparison and the other excluded goals remain deferred.
 
 Side-Task-Ledger: `API-00` through `API-10` below; owner/consumer decisions
-will be maintained in `EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md`.
+are maintained in `EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md`.
 
 Infinity-Codex-Origin: session `01a0db41-9157-7592-afe5-5daa073f925f`;
 user accepted the review and authorized a dedicated worktree, living plan,
@@ -174,9 +174,9 @@ compatibility requirements.
 
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
-| `API-00` | complete; initial checkpoint being recorded | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. |
-| `API-01` | active | Source delta and owner/consumer ledger; already-integrated changes, new main dependencies, primitive/supplied/derived boundaries and first vertical slice. |
-| `API-02` | pending API-01 | Bounded baselines and unchanged full-owner controls; source-informed probes at actual owner positions; classify failures and warnings. |
+| `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
+| `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
+| `API-02` | first controls complete; no semantic promotion | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
 | `API-03` | pending | Whole properties, stable/raw opaque profiles and named admissions against main's contravariant ladder; positive/noncollapse consumers. |
 | `API-04` | pending | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
@@ -288,7 +288,17 @@ executable evidence.
   Hook configuration is unchanged.
 - Reference-checkout `./scripts/emdash dev doctor --formal` passed with
   Lambdapi `3.0.0-90-gdb4f780`, OCaml `5.4.0`, matching source pin and no
-  package mismatches. No fresh mathematical qualification yet.
+  package mismatches.
 - The persistent objective is active and delegates its scope to this plan.
-- Next: checkpoint plan/routing after document checks, construct the
-  owner/consumer inventory and run first bounded feasibility controls.
+- Initial plan/routing checkpoint: `5f932af0`. Header/lifecycle, active
+  references, 139 local Markdown file targets and exact staged diff passed.
+- The inventory's first feasibility receipt records nine bounded runs:
+  seven successful baselines/profile controls and two expected rejections.
+  These establish the measured initial boundary only; main's global cuts
+  remain active and no library LP or TypeScript implementation has changed.
+- Next: implement the smallest ordinary whole-property/classifier tranche
+  at `emdash3_2_gray_profiles.lp`, starting from the final source's whole
+  property and derived component evidence. Preserve existing computation
+  until its consumer migration is ready. Rehome strict inverse/equivalence
+  action before removing the capped ambient cut; use named evaluation and
+  the newer Hom-comparison consumer to qualify the mapping boundary.
