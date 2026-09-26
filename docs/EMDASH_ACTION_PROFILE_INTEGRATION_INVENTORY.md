@@ -1032,6 +1032,18 @@ no delta. Retained-member/base action, complete rho profiles, whole assembly
 and wider new-core qualification remain required; the preferred earlier
 candidate and its native/CAS receipts retain their original core pin.
 
+The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
+proves the absolute profile's identity consequence and checks a separate
+relative predicate on both complete internal actions. Raw identities and
+path-induced comparisons have derived producers without strict endpoint
+premises. The actual matching comparison and both selected inverse slots
+carry that profile; complete source/target action consumers pass with the
+native opposite-Hom source retained. The generic and actual closures pass
+two-positive/six-negative and ten-positive/six-negative controls respectively,
+with unchanged warning inventories and core pins. The seven support modules
+are definition-only. Generic inverse-assembly sufficiency and full rho action
+remain open; the older strict profiles and assembler guards are unchanged.
+
 ### Native Snake Connecting And Six-Term Candidate
 
 The [native snake feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)

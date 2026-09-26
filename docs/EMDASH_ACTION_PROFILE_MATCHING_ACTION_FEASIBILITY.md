@@ -146,3 +146,10 @@ Next account for the retained-member and base directions, connect the complete
 construction to the actual rho owners, and qualify the required profiles and
 inverse assembly. Preserve actual maps, both inverse choices and the separate
 Op/duality boundary.
+
+The [relative-profile continuation](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
+now gives the path-induced matching comparison, and both inverses selected by
+its existing whole equivalence, an explicit relative action profile. Its
+identity/path producers need no strict endpoint premise. This checks another
+producer obligation; it does not qualify general pointwise assembly or the
+remaining retained-member/base directions of rho.

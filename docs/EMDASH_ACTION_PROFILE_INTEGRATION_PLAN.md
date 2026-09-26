@@ -381,6 +381,29 @@ endpoints. The three whole-assembly stages remain commented; the new matching
 direction alone does not establish their coherence. No blanket rho admission
 or global represented-family fold is authorized by these results.
 
+The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
+proves that post-strictness of `id_F` is equivalent to `IsStrictFunctor(F)`;
+full identity strictness implies it. The earlier displayed candidate's fibre
+factor therefore forces strict fibre functors at identity. This valid stronger
+property must not be assumed automatically for retained lax endpoints.
+
+A definition-only relative candidate instead compares the complete
+fixed-source/fixed-target actions with the actual component composed with the
+endpoint functor's existing action. Identity and path-induced producers pass
+without an endpoint strictness premise, independently on the earlier core.
+The actual whole matching comparison and both selected inverse projections
+carry this profile. Whole Hom and next-action observations pass; the concrete
+pre-action retains its native opposite-Hom source, and accepts the original
+forward arrow without a new opposite rule or operational cast.
+
+The generic closure passes two positive/six negative controls; the actual
+consumer union passes ten positive/six negative controls at default limits.
+Warning inventories and both core pins are unchanged. The new profile remains
+unselected for generic inverse assembly: qualify composition/unit coherence,
+complete displayed/base action and arbitrary inverse-choice retention before
+weakening an assembler guard. The actual rho retained-member/base directions
+and three whole-assembly stages remain required.
+
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
 `emdash2/logs/api-ordinary-check-results.json`, SHA-256
@@ -406,7 +429,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
 | `API-04` | joint Gamma/H/Hom feasibility and original native snake connecting/six-term reviewers pass; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The latest combined candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. All 94 original Freyd/CAS assertions and the expanded 492-owner interaction review pass; compiled-parent resource qualification is recorded in the [CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md). |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
-| `API-05` | derived retained member and isolated whole matching action qualified; displayed profile/assembly unselected | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures and pointwise consumers without extra premises. The [matching-action candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) adds a guarded whole precomposition agreement and passes the 269-positive/77-negative Γ/H/Hom/profile interaction review. Retained-member/base directions, complete rho profiles and whole assembly remain open; neither displayed primitive assembly variant is selected. |
+| `API-05` | retained-member/matching prototypes and relative identity/path producers qualified; assembler premise unselected | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. Composition/unit and inverse-assembly sufficiency, retained-member/base directions and full rho assembly remain open. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |

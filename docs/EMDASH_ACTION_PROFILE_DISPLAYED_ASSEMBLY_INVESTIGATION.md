@@ -165,6 +165,15 @@ identity. Sufficiency of these conditions for inverse assembly, including
 the remaining higher base action, still needs mathematical review against
 the complete internal action and the actual producer.
 
+The subsequent [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
+checks an important identity boundary: this fibre strictness factor, at the
+displayed identity, implies strictness of every fibre functor. A separate
+relative predicate over the complete ordinary internal actions admits raw
+identities and path-induced comparisons without that endpoint premise. Its
+actual matching producer and selected inverse profiles pass, but sufficiency
+for generic/displayed inverse assembly remains unselected. The original
+stronger profiles are unchanged.
+
 The separate `api_profiled_transfd_pointwise_assembly.lp` restricts the
 old primitive assembly interface by adding this explicit profile. Its two
 inverse constructors and whole cancellation constants remain structural
