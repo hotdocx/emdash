@@ -41,6 +41,15 @@ it('repository probe bridge retains guarded evidence and classifies hard timeout
         assert.equal(receipt.settings.memoryMiB, 64);
         assert.equal(receipt.observedResourceBackend, 'prlimit');
 
+        install('print("Uncaught [Out of memory].")\n');
+        const fatal = checkLambdapiProbe(source, options);
+        assert.equal(fatal.accepted, false);
+        assert.equal(fatal.status, 1);
+        const fatalReceipt = JSON.parse(readFileSync(fatal.validationReceiptPath, 'utf8'));
+        assert.equal(fatalReceipt.checkerExit, 0);
+        assert.equal(fatalReceipt.outcome, 'allocation-failed');
+        assert.equal(fatalReceipt.reusable, false);
+
         install('import signal,time\nsignal.signal(signal.SIGINT,signal.SIG_IGN)\ntime.sleep(20)\n');
         const timed = checkLambdapiProbe(source, { ...options, timeoutMs: 100 });
         assert.equal(timed.accepted, false);

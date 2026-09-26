@@ -85,3 +85,10 @@ All 43 tests pass from `emdash2`. Root `workspace:check` passes with
 `pnpm@11.16.0` and Node `24.11.1`; exact diff hygiene passes. This tooling
 checkpoint does not claim completion of the mathematical integration or its
 remaining formal/health gates.
+
+The [TypeScript probe-bridge regression](../tests/v3_2_probe_runner_tests.ts)
+also passes under `node --require ts-node/register --test`. It verifies that
+the existing bridge rejects a zero-exit fatal checker result, reports wrapper
+status 1, and retains the actual checker exit zero with non-reusable
+`allocation-failed` evidence. Its ordinary-success and hard-timeout controls
+remain green. No TypeScript implementation or source pin changed.
