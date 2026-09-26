@@ -158,6 +158,24 @@ comparison. Earlier exact-pin receipts above remain historical evidence;
 neither core was silently overwritten. This replay does not qualify generic
 relative composition or inverse assembly.
 
+## Necessary Inverse-Action Obligation
+
+The subsequent [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md)
+derives the component and whole-Hom naturality equations for both inverse
+choices supplied by arbitrary pointwise `OmegaEquivAlong` data. Next-Hom
+observations retain the original endpoints. The actual path-induced matching
+comparison supplies its own pointwise data and passes all four whole/next-Hom
+consumers; both selected component inverse slots agree with the corresponding
+components of its existing whole equivalence.
+
+These definitions add no primitive inverse or admission. They pass in a
+further corrected core, where three generic postcomposition accumulators
+are restricted after another staged raw-composition route was found. The
+final combined review passes 452 positive/119 negative assertions over 219
+inputs. This is a necessary inverse-action result at fixed Hom endpoints;
+it does not establish complete varying-endpoint/displayed coherence or the
+sufficiency of the relative predicate for whole assembly.
+
 ## Remaining Acceptance
 
 The relative predicate is not yet selected as the sufficient premise for

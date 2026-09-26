@@ -769,6 +769,26 @@ Older native-snake, CAS and all-path results below retain their original core
 scope and need requalification against the changed core before promotion.
 No production owner has changed in this audit.
 
+### Postcomposition And Inverse Action: API-04P / API-05
+
+The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md)
+identifies another staged raw-composition proof through three inherited
+generic postcomposition accumulators. A separate full-file candidate retains
+the ordinary identity-family computations and moves the generic computations
+behind actual strict views. The unchanged staged proof is then rejected.
+The remaining telescope 2-cell and higher projection clauses require their
+own staged audit; the new correction is not a global noncollapse certificate.
+
+On that corrected core, 27 definition-only helpers and consumers derive
+inverse component/whole-Hom/next-Hom comparisons for both supplied inverse
+choices and qualify the actual path-induced matching producer. Both stored
+slots are retained. The final combined review passes 452 positive/119 negative
+assertions across 219 inputs, including the broader Gray/Gamma/H/Hom and
+matching review. The package is `tmp/probes/api_postcomp_profile_candidate/`;
+its exact core/profile pins, warning delta and immutable receipts are in the
+linked review. Complete relative/displayed assembly, production promotion
+and wider native/CAS/all-path requalification remain required.
+
 ### New Main Consumers Over The Corrected Candidate
 
 `tmp/probes/api_ordinary_profile_minimal/` is the earlier isolated package
