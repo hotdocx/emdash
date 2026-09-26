@@ -98,17 +98,32 @@ def retain_inputs(inputs: dict[str, str], package_root: Path) -> str:
 
 
 def classify_exit(code: int, elapsed: float, settings: dict, output: str) -> str:
-    if code == 0:
+    # Lambdapi can return zero after an uncaught object-serialization failure.
+    # Preserve the process status, but never qualify that diagnostic as success.
+    plain_output = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", output)
+    fatal = re.search(r"^(?:Uncaught \[|Fatal error:)", plain_output, re.MULTILINE)
+    if code == 0 and not fatal:
         return "passed-fresh"
     if code == 75:
         return "busy"
     if code in (-9, 137, 124) and elapsed >= settings["timeoutMs"] / 1000:
         return "timeout"
-    if "out of memory" in output.lower() or "cannot allocate memory" in output.lower():
+    if any(message in plain_output.lower() for message in
+           ("out of memory", "cannot allocate memory", "allocation failure")):
         return "allocation-failed"
     if code in (-9, 137):
         return "killed-unknown-cause"
     return "failed"
+
+
+def outcome_exit_code(outcome: str, process_code: int) -> int:
+    if outcome == "timeout":
+        return 124
+    if outcome == "inputs-changed":
+        return 74
+    if process_code == 0 and outcome != "passed-fresh":
+        return 1
+    return process_code if process_code >= 0 else 128 - process_code
 
 
 def run_check(target: Path, package_root: Path, *, timeout_ms: int | None = None,
@@ -167,7 +182,7 @@ def run_check(target: Path, package_root: Path, *, timeout_ms: int | None = None
     # -c intentionally creates objects; source changes always invalidate.
     comparable_after = {name: after.get(name) for name in before}
     stable = before == comparable_after and file_digest(binary) == checker["sha256"] and runners == tooling_inputs()
-    if not stable and process.returncode == 0:
+    if not stable and outcome == "passed-fresh":
         outcome = "inputs-changed"
     actual_backend = re.search(r"resource guard: backend=(\w+)", output)
     receipt = {
@@ -217,7 +232,12 @@ def run_staged_group(script: str, targets: list[Path], env: dict[str, str]) -> t
     except (OSError, ValueError):
         stable = False
     stable = stable and runners == tooling_inputs() and checker["sha256"] == file_digest(binary)
-    outcome = "passed-fresh" if result.returncode == 0 and stable else "inputs-changed" if result.returncode == 0 else "failed"
+    output = log.read_text(errors="replace")
+    # A recipe's total duration is not a per-child deadline. Retain its
+    # failure scope while rejecting fatal child output even after exit zero.
+    outcome = classify_exit(0, elapsed, settings, output) if result.returncode == 0 else "failed"
+    if not stable and outcome == "passed-fresh":
+        outcome = "inputs-changed"
     receipt = {
         "schema": "emdash-check-receipt-v1", "id": run_id, "kind": "staged-check",
         "targets": list(map(str, targets)), "packageRoot": str(ROOT), "command": [script],
@@ -233,8 +253,8 @@ def run_staged_group(script: str, targets: list[Path], env: dict[str, str]) -> t
     with receipt_path.open("x") as stream:
         json.dump(receipt, stream, indent=2, sort_keys=True)
         stream.write("\n")
-    code = 74 if outcome == "inputs-changed" else result.returncode
-    return code, log.read_text(errors="replace") + f"\nreceipt: {receipt_path}\n", elapsed
+    code = outcome_exit_code(outcome, result.returncode)
+    return code, output + f"\nreceipt: {receipt_path}\n", elapsed
 
 
 def main() -> int:
@@ -256,17 +276,12 @@ def main() -> int:
             print(f'{receipt["target"]}: {receipt["outcome"]}; {receipt["wallSeconds"]:.3f}s')
             print(f'log: {ROOT / receipt["log"]}')
             print(f'receipt: {receipt["receiptPath"]}')
-            if receipt["checkerExit"]:
+            if receipt["outcome"] != "passed-fresh":
                 print("\n".join((ROOT / receipt["log"]).read_text(errors="replace").splitlines()[-40:]), file=sys.stderr)
         else:
             print((ROOT / receipt["log"]).read_text(errors="replace"), end="")
             print(f'receipt: {receipt["receiptPath"]}', file=sys.stderr)
-        if receipt["outcome"] == "timeout":
-            return 124
-        if receipt["outcome"] == "inputs-changed":
-            return 74
-        code = receipt["checkerExit"]
-        return code if code >= 0 else 128 - code
+        return outcome_exit_code(receipt["outcome"], receipt["checkerExit"])
     except (OSError, ValueError, subprocess.TimeoutExpired) as error:
         print(f"checker setup failed: {error}", file=sys.stderr)
         return 2

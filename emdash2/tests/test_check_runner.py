@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import json
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
 import os
 from pathlib import Path
 import shutil
+import sys
 from tempfile import TemporaryDirectory
 import unittest
 from unittest.mock import patch
 
-from scripts.run_lambdapi import ROOT, execution_settings, run_check, run_staged_group
+from scripts.run_lambdapi import ROOT, execution_settings, main, run_check, run_staged_group
 
 
 class CheckRunnerTests(unittest.TestCase):
@@ -73,6 +76,38 @@ class CheckRunnerTests(unittest.TestCase):
         self.assertEqual(result["outcome"], "inputs-changed")
         self.assertFalse(result["reusable"])
 
+    def test_zero_exit_serialization_failure_is_rejected_by_receipt_and_cli(self):
+        self.checker('from pathlib import Path\n'
+                     'Path("target.lpo").touch()\n'
+                     'print("Uncaught [Out of memory].")\n')
+        result = run_check(Path("target.lp"), self.root, timeout_ms=5000, compile_object=True)
+        self.assertEqual(result["checkerExit"], 0)
+        self.assertEqual(result["outcome"], "allocation-failed")
+        self.assertFalse(result["reusable"])
+        self.assertEqual((self.root / "target.lpo").stat().st_size, 0)
+        stdout, stderr = StringIO(), StringIO()
+        argv = ["run_lambdapi.py", "--quiet", "--compile", "--package-root", str(self.root), "target.lp"]
+        with patch.object(sys, "argv", argv), redirect_stdout(stdout), redirect_stderr(stderr):
+            code = main()
+        self.assertEqual(code, 1)
+        self.assertIn("allocation-failed", stdout.getvalue())
+        self.assertIn("Uncaught [Out of memory].", stderr.getvalue())
+
+    def test_fatal_diagnostics_override_zero_exit_and_input_change_status(self):
+        for diagnostic, expected in (
+            ("Uncaught [End_of_file].", "failed"),
+            ("\x1b[31mFatal error: allocation failure during minor GC\x1b[0m", "allocation-failed"),
+        ):
+            with self.subTest(diagnostic=diagnostic):
+                (self.root / "target.lp").write_text('symbol original : TYPE;\n')
+                self.checker('from pathlib import Path\n'
+                             'Path("target.lp").write_text("symbol changed : TYPE;\\n")\n'
+                             f'print({diagnostic!r})\n')
+                result = run_check(Path("target.lp"), self.root, timeout_ms=5000)
+                self.assertEqual(result["checkerExit"], 0)
+                self.assertEqual(result["outcome"], expected)
+                self.assertFalse(result["reusable"])
+
     def test_profiles_and_explicit_limits_are_resolved_without_running(self):
         target = Path("examples/freyd_native_snake_pair_exactness.lp")
         profile = execution_settings(target, {})
@@ -96,6 +131,19 @@ class CheckRunnerTests(unittest.TestCase):
         saved = json.loads(next((self.root / "logs/check-runs").glob("*.json")).read_text())
         self.assertEqual(saved["kind"], "staged-check")
         self.assertEqual(saved["targets"], ["target.lp"])
+        self.assertFalse(saved["reusable"])
+
+    def test_staged_recipe_rejects_zero_exit_fatal_output(self):
+        script = self.root / "scripts/group.sh"
+        script.write_text('#!/bin/sh\nexec bash scripts/lambdapi_resource_guard.sh lambdapi check target.lp\n')
+        script.chmod(0o755)
+        self.checker('print("Uncaught [Out of memory].")\n')
+        code, output, _ = run_staged_group("./scripts/group.sh", [Path("target.lp")], dict(os.environ))
+        self.assertEqual(code, 1)
+        self.assertIn("Uncaught [Out of memory].", output)
+        saved = json.loads(next((self.root / "logs/check-runs").glob("*.json")).read_text())
+        self.assertEqual(saved["recipeExit"], 0)
+        self.assertEqual(saved["outcome"], "allocation-failed")
         self.assertFalse(saved["reusable"])
 
 
