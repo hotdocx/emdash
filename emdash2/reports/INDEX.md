@@ -14,7 +14,7 @@ Dated “next” statements are not current work authorization.
 - [TypeScript entry point](../../docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md) and [DevOps commands](../../docs/DEVOPS.md).
 - [Repository consolidation](../../docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md) records maintenance, corrected full TypeScript qualification and main integration; [profile/performance repair](../../docs/TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md) retains the source/performance evidence.
 - [Native homology final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md), [categorical consolidation audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md) and [universality assembly audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md) record qualified results and supplied contracts.
-- [Foundational reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md) records profile/variance repairs and the unintegrated action-profile branch. Those remain future work; current check success is not a consistency claim.
+- [Foundational reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md) records the source action-profile branch. The [active integration plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md) now owns its main-based reimplementation; Op/duality remains subsequent work. Current check success is not a consistency claim.
 - [Native nerves review](../../docs/TYPESCRIPT_EMDASH_NATIVE_NERVES_AND_HOMOLOGY_NOTATION_REVIEW.md) and [dependent-spectra review](../../docs/EMDASH_DEPENDENT_SPECTRA_RESEARCH_REVIEW.md) distinguish implemented owners from proposals.
 - [Local research resources](../research/LOCAL_RESOURCES.md) locate existing reading notes, PDFs/text and source checkouts.
 
@@ -34,6 +34,7 @@ deferred. Exact status, evidence and resumption boundaries live in each owner.
 
 ## Active Plans
 
+- `../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md`: [Emdash v3.2 Action-Profile Integration Plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`: [Emdash v3.2 Presheaves, Sites, And Schemes Living Preliminary Plan](REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md).
 - `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`: [TypeScript Elaborator v3.2 — Systematic Transfer Scale Qualification](../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`: [EMDASH v3.2 Profunctor Representability Redesign Preliminary Plan](REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md).

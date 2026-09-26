@@ -33,9 +33,11 @@ For mathematical status use the
 and [Foundations](../emdash2/reports/EMDASH_FOUNDATIONS.md). The native whole
 homology/universality interfaces and proof–CAS examples have explicit ordinary,
 model, normality and interpretation contracts. The current unrestricted
-Op/Sigma/Homd package has recorded defects. The completed action-profile branch
-awaits separate integration and does not silently change main or the TypeScript
-transfer. Preserve the six-term, profile/variance and spectral deferrals.
+Op/Sigma/Homd package has recorded defects. The
+[action-profile integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md)
+now owns the dedicated main-based reimplementation and affected transfer
+review. No profile migration is qualified merely by starting that goal.
+Preserve the six-term, Op/variance and spectral deferrals.
 
 The [September reassessment](TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
 records those boundaries, the qualified binder direction and sibling-template

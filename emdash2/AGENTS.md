@@ -29,8 +29,10 @@ Do not use invalid higher action to justify a result. Legitimate local Op
 computations with an independently qualified ordinary interpretation are
 not blanket-prohibited.
 
-The user has deferred Op/duality repair, further Empty audits and integration
-of `goal/opaque-action-profile-classifiers-v3.2` to later work. Preserve
+The user has authorized action-profile integration in the dedicated
+`goal/action-profile-integration-v3.2` worktree under the
+[living integration plan](../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
+Op/duality repair and further Empty audits remain deferred. Preserve
 hom_int/homd_int as foundations and the checkpoint/resumption bundle in
 `audits/deferred_native_homd_y/README.md`. The selected native duality design
 is a proposal; external set-of-dimensions semantics is not an implementation
@@ -122,7 +124,7 @@ instances and ordinary reconstruction do not establish unrestricted inverse
 laxity, higher diagram eta or a `Groupoidify` adjunction.
 
 The completed successor branch `goal/opaque-action-profile-classifiers-v3.2`
-at `114dc19f` remains unintegrated. The
+at `114dc19f` is the pinned source for this integration. The
 [continuation review](../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md#completed-action-profile-branch)
 owns its exact worktree/plan recovery and selective migration proposal. Do not
 copy its counts or claim main already has its lax/profile behavior.
