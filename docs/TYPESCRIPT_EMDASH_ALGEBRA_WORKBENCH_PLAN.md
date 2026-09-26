@@ -13,8 +13,9 @@ fast-forward through package-consumer checkpoint `37ce19d5`. The consumer's
 local qualification remains recorded below; no npm publication occurred.
 The subsequent [algebra goal assistant orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md)
 and [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) own the new
-product review. This completed workbench plan remains mathematical/package
-consumer evidence. The aggregate waiver remains in force.
+product review and locally qualified plugin implementation. This completed
+workbench plan remains mathematical/package consumer evidence. The aggregate
+waiver remains in force.
 
 ## Current continuation: public package and Vega-Lite consumer
 

@@ -1,8 +1,8 @@
 # Emdash Algebra Goal Assistant: Codex Plugin Plan
 
-Date: 2026-09-25
+Date: 2026-09-26
 Plan-ID: `EMDASH-ALGEBRA-GOAL-ASSISTANT-PLUGIN`
-Status: GAP-1 through GAP-3 selected and active; cloud transport comparison recorded
+Status: GAP-1 through GAP-3 complete at focused qualification; cloud transport comparison recorded
 Baseline: `37ce19d5` (completed package consumer, now integrated into main)
 Implementation continuation baseline: `06769acc`
 Branch: `goal/algebra-goal-assistant-plugin-v3.2`
@@ -14,9 +14,9 @@ The user selected main integration, a careful review of a Codex plugin for
 Emdash, and documentation of its computational-and-internal goal-assistant
 orientation. The [orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md)
 owns that product emphasis. This living plan owns the plugin design, proposed
-implementation slices, qualification and recovery. The current persistent goal
-now covers implementation through GAP-3 following the user's acceptance of
-review checkpoint `06769acc`. The earlier review is complete. The user also
+implementation slices, qualification and recovery. The implementation through
+GAP-3 is complete following the user's acceptance of review checkpoint
+`06769acc`. The earlier review is complete. The user also
 selected a feasibility comparison for cloud-container tools reachable from
 desktop Codex; that comparison does not select a cloud deployment.
 
@@ -156,14 +156,13 @@ capability set explicitly. A long-lived MCP process is compatible with file-
 based, freshly reconstructed mathematical state; it need not become a resident
 proof session or the canonical source of a development.
 
-Proposed plugin identifier: `emdash`; presentation: **Emdash — Algebra Goal
-Assistant**. Proposed source is `plugins/emdash/` in this repository, with a
+Implemented plugin identifier: `emdash`; presentation: **Emdash — Algebra Goal
+Assistant**. Source is `plugins/emdash/` in this repository, with a
 repository marketplace at `.agents/plugins/marketplace.json`, distinct from the
-Arrowgram/GetPaidX `hotdocx` marketplace. These paths are a concrete proposal
-for the next scope selection, not files created or user configuration changed
-by this review. Prefer the available plugin-creator compatibility scaffold for
-the first local test; portable-manifest migration can follow a demonstrated
-distribution need.
+Arrowgram/GetPaidX `hotdocx` marketplace. The accepted implementation created
+and registered these paths and installed the local plugin. It uses the available
+plugin-creator compatibility scaffold; portable-manifest migration can follow
+a demonstrated distribution need.
 
 ## Cloud container tools for desktop Codex
 
@@ -287,7 +286,7 @@ of the browser-safe `@hotdocx/emdash` entries.
 | GAP-0. Review and orientation | Complete | Main integrated at `37ce19d5`; reference/plugin/MCP/WebMCP sources and official guidance inspected; orientation, implementation proposal and linked plans synchronized; document checks and exact diff review pass |
 | GAP-1. Portable runtime and workspace slice | Complete at focused qualification | Copied standalone runtime passes CLI/fresh-process/typed-authoring acceptance outside the checkout; exact source, retained computation, update and derived view controls pass |
 | GAP-2. Local Codex plugin | Complete at focused qualification | Validated source/cache, real SDK STDIO and CLI parity, and actual fresh Codex CLI calls from an unrelated workspace pass |
-| GAP-3. Internal construction and reuse | In progress | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
+| GAP-3. Internal construction and reuse | Complete at focused qualification | Retained native coefficients produce a whole native complex, an optional typed internal complex and a further internal action; one computed-equation adoption stays explicit; alternate coefficients, restart/edit invalidation and installed Codex use pass |
 | GAP-4. Browser projection | Proposed follow-up | A real supported browser registers the MCP-discovered tools and forwards calls through the shared service; ordinary UI remains usable without WebMCP; stale/cancelled results cannot overwrite newer source |
 | GAP-5. Hosted distribution and richer mathematics | Deferred | Separate GetPaidX/remote host adapter, public releases, further coefficient interpretations/backends and richer mathematical consumers only when selected |
 
@@ -310,7 +309,8 @@ plugin-creator validation/update helpers and test a fresh session after changes.
 
 ## Proportional validation
 
-Review changes: exact diff, Markdown/local-link hygiene and source attribution.
+GAP-0 review evidence (historical): exact diff, Markdown/local-link hygiene
+and source attribution.
 The bootstrap's workspace check is setup evidence, not new mathematical or
 plugin qualification. No installed plugin, live hosted API, cloud workspace or
 browser WebMCP invocation is claimed by this review.
@@ -320,7 +320,8 @@ changed Markdown. The checkpoint contains only eight Markdown documents:
 this plan, the orientation, README, handoff, workbench ledger, and the existing
 CAS, AI-native workspace and proof/goal plans. No source, package manifest,
 lockfile, formal owner, plugin bundle or user configuration changed. Existing
-Arrowgram/GetPaidX work was preserved. Implementation rows remain proposed.
+Arrowgram/GetPaidX work was preserved. Implementation rows were proposed at
+that checkpoint; the selected implementation evidence is recorded below.
 
 Implementation gates should include:
 
@@ -367,7 +368,7 @@ required to produce this local design and first local runtime.
   proposed above, local cache installation and a bounded fresh-client smoke.
   Neither these checks nor runtime discovery authorize unrelated application
   actions, cloud deployment, publication or Git changes in user math workspaces.
-- Scope/cloud comparison checkpoint: `a1d43737`; implementation goal active.
+- Scope/cloud comparison checkpoint: `a1d43737`.
 - GAP-1: `algebra_goal_source.ts` defines the bounded inert rational-polynomial
   source using existing exact/parent/polynomial owners. TypeScript builders can
   emit it through the separate authoring entry. Node-owned file commands retain
@@ -417,6 +418,57 @@ required to produce this local design and first local runtime.
   issue. The transcript is `events-v2.jsonl`, exit zero, and stderr is empty.
   No hosted GetPaidX action or production data was involved. The app's GUI was
   not separately exercised, and no new client version was installed.
+- GAP-2 checkpoint: `34192e1d`.
+- GAP-3: [retained-relation assembly](../src/v3_2/algebra_relation_module_reuse.ts)
+  extracts the existing external consumer's common construction path. The
+  existing external entry retains its real source, coefficients, names and
+  explicit decision contract. The [workspace consumer](../src/v3_2/algebra_goal_construction.ts)
+  accepts the retained native relation under its actual origin, independently
+  checks it, constructs `R ← R^(n+1) ← R`, and applies the upper native map to one.
+  Default native mode adopts no assumptions and supports rational coefficients.
+  It does not rerun membership to replace the chosen witness.
+- Explicit internal mode reuses the existing integer-polynomial interpretation,
+  one computed-equation assumption and whole-complex constructors. It writes
+  transparent `goal_reuse_complex` and `goal_reuse_image` definitions, with
+  source/result/profile fingerprint material. The image applies the projected
+  internal differential to a supplied symbolic rank-one argument. The separate
+  native image of one is not its value on arbitrary arguments. Core checks the
+  construction/action types relative to the assumption; no new standalone
+  TypeScript projection reduction, reconstructed proof, complete kernel,
+  exactness or homology result is claimed.
+- GAP-3 qualification: root typecheck and changed-source lint pass. All 22
+  goal-workspace/MCP/construction tests pass (34.33 seconds, including startup),
+  and all six external-module reuse tests pass (40.20 seconds). The latter uses
+  actual Singular output and bounded serial Lambdapi positive construction,
+  projection/action and negative different-coefficient controls. Its first live
+  attempt encountered the shared serial-check guard held by unrelated work;
+  retry succeeded after that work released it. No formal owner/pin was changed.
+  There are 460 registered suites. No full TypeScript/root-test/repository
+  aggregate ran under the standing waiver. Completion document hygiene passes:
+  nine changed Markdown files, 115 resolved local links and a clean exact diff.
+- Extended copied-runtime and copied-plugin STDIO acceptance pass native and
+  internal construction, typed TypeScript authoring, CLI/MCP parity, fresh
+  processes, source/result invalidation and unsupported rational interpretation
+  rejection without replacing the useful native result. Source/installed plugin
+  and skill validators pass. The plugin-creator cachebuster/reinstall flow now
+  selects `0.1.0+codex.20260926040346` under
+  `/home/user1/.codex/plugins/cache/personal/emdash/`. All 20 installed files
+  match source; the build receipt verifies 83 current source inputs. Command
+  bundle SHA-256: `2d6eb3795c6758af46e2e6d0bd4f9f7c02965aca27d9dd1ca7b47af41ba9c8d3`.
+- The actual installed internal-construction Codex smoke is
+  `/tmp/emdash-codex-internal-final-ot_21sdy/events.jsonl` (exit zero, empty stderr).
+  A fresh ephemeral CLI session in that unrelated directory uses only installed
+  Emdash MCP inspect/initialize/compute/construct calls and no shell commands.
+  Missing source on initial inspect is the expected initialization case. The
+  independent artifact review verifies ranks `[1,3,1]`, exact retained identity,
+  one adopted equation, transparent definitions and fingerprint hashes. An
+  earlier successful tool flow conflated the symbolic action with its value at
+  one in the final prose; explicit tool-result/skill guidance corrected that
+  explanation in the final fresh session.
+- GAP-1 through GAP-3 are complete. The worktree remains on the dedicated goal
+  branch; main remains `37ce19d5`. Browser WebMCP, direct desktop/cloud transport,
+  public distribution and richer mathematical consumers are separate later
+  scope selections. No GetPaidX service or user cloud workspace was modified.
 
 ## Persistent-goal prompts
 
@@ -426,7 +478,7 @@ platform qualifications, update relevant documentation and checkpoint the
 review. Keep implementation rows proposed; do not claim plugin installation
 or usability from the review alone.
 
-Active implementation objective: implement GAP-1 through
+Completed implementation objective: implement GAP-1 through
 GAP-3 in this living plan from the current descendant state of
 `goal/algebra-goal-assistant-plugin-v3.2` in
 `/home/user1/emdash1-goal-assistant-plugin`. Let the plan own concrete contracts,

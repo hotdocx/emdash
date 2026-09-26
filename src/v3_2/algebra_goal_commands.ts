@@ -8,6 +8,7 @@ import {
     initializeAlgebraGoalWorkspace, inspectAlgebraGoalWorkspace,
     renderAlgebraGoalWorkspace, updateAlgebraGoalWorkspace
 } from './algebra_goal_workspace';
+import { constructAlgebraGoalWorkspace } from './algebra_goal_construction';
 
 const string = { type: 'string' } as const;
 const termSchema = {
@@ -63,7 +64,14 @@ export const ALGEBRA_GOAL_COMMANDS: readonly AlgebraGoalCommandDescription[] = O
         properties: {}, required: [] },
     { command: 'render', tool: 'emdash_render', writes: true,
         description: 'Derive a bounded approximate plane-curve SVG/HTML view from the current two-variable polynomial source. Exact data remains separate.',
-        properties: {}, required: [] }
+        properties: {}, required: [] },
+    { command: 'construct', tool: 'emdash_construct', writes: true,
+        description: 'Reuse retained membership coefficients in a whole free complex and apply its upper map to one. Native mode needs no assumption. Internal mode additionally constructs and uses a typed Core complex, requiring an explicit computed-equation adoption reason and the supported integer-polynomial interpretation.',
+        properties: {
+            mode: { type: 'string', enum: ['native', 'internal'], default: 'native' },
+            adoptionReason: { type: 'string', minLength: 1, maxLength: 2048,
+                description: 'Explicit caller decision to use the checked computed equation as an assumption for internal construction; not a proof or human-approval claim.' }
+        }, required: [] }
 ]);
 
 export function algebraGoalCapabilities() {
@@ -72,7 +80,7 @@ export function algebraGoalCapabilities() {
         sourceProfile: ALGEBRA_GOAL_SOURCE_PROFILE, workspaceProfile: ALGEBRA_GOAL_WORKSPACE_PROFILE,
         commands: ALGEBRA_GOAL_COMMANDS, example: createAlgebraGoalExampleSource(),
         cloudTransport: 'not-implemented', executesUserModules: false,
-        mathematicalScope: 'bounded rational-polynomial computation; plane-curve samples are approximate'
+        mathematicalScope: 'bounded rational-polynomial computation and free complexes; plane-curve samples are approximate; internal construction uses an explicit computed equation and a bounded integer-polynomial interpretation'
     };
 }
 
@@ -93,7 +101,7 @@ export function algebraGoalFailure(error: unknown): AlgebraGoalCommandResponse {
 export async function executeAlgebraGoalCommand(input: unknown): Promise<AlgebraGoalCommandResponse> {
     try {
         const request = algebraGoalRecord(input,
-            ['command', 'root', 'source', 'expectedRevision'], 'request');
+            ['command', 'root', 'source', 'expectedRevision', 'mode', 'adoptionReason'], 'request');
         if (request.command === 'capabilities') {
             if (Object.keys(request).length !== 1) throw new AlgebraGoalError('INVALID_REQUEST', 'capabilities accepts no workspace input');
             return { ok: true, command: 'capabilities', result: algebraGoalCapabilities() };
@@ -111,6 +119,8 @@ export async function executeAlgebraGoalCommand(input: unknown): Promise<Algebra
             case 'update': result = await updateAlgebraGoalWorkspace(request.root, request.expectedRevision as string, request.source); break;
             case 'compute': result = await computeAlgebraGoalWorkspace(request.root); break;
             case 'render': result = await renderAlgebraGoalWorkspace(request.root); break;
+            case 'construct': result = await constructAlgebraGoalWorkspace(request.root,
+                { mode: request.mode, adoptionReason: request.adoptionReason }); break;
             default: throw new AlgebraGoalError('UNKNOWN_COMMAND', 'Unknown command');
         }
         return { ok: true, command: description.command, result };

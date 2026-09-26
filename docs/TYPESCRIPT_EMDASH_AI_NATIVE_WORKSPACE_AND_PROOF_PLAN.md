@@ -72,9 +72,9 @@ with the assistant carrying routine bookkeeping. This plan owns the existing
 source-first workspace and proof-document foundation within that broader
 workflow. Proof development is an available activity, not a prerequisite for
 ordinary mathematical computation. The
-[Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) proposes a
-portable delivery layer over these contracts; it does not introduce a new
-canonical stateful server or require a textual parser.
+[Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) records the
+locally qualified portable CLI/MCP delivery layer over these contracts; it does
+not introduce a new canonical stateful server or require a textual parser.
 
 The current TypeScript implementation is already substantially aligned with
 this direction:

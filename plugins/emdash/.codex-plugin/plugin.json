@@ -1,6 +1,6 @@
 {
   "name": "emdash",
-  "version": "0.1.0",
+  "version": "0.1.0+codex.20260926040346",
   "description": "An algebra goal assistant for exact computation, mathematical workspaces and reusable constructions.",
   "author": {
     "name": "Emdash",
@@ -13,11 +13,15 @@
     "longDescription": "Work on algebra goals through exact computations, readable mathematical source, reusable results and derived views. Codex carries routine bookkeeping while proof work remains optional.",
     "developerName": "Emdash",
     "category": "Education & Research",
-    "capabilities": ["Interactive", "Write"],
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
     "websiteURL": "https://github.com/hotdocx/emdash",
     "defaultPrompt": [
       "Compute a polynomial relation and show its curves.",
-      "Continue the mathematics in this workspace."
+      "Continue the mathematics in this workspace.",
+      "Reuse a retained relation in an internal module construction."
     ]
   },
   "mcpServers": "./.mcp.json"

@@ -1,6 +1,6 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Reviewed: 2026-09-25. This is current orientation; detailed qualification lives
+Reviewed: 2026-09-26. This is current orientation; detailed qualification lives
 with the source contracts and plans linked below. The former running narrative
 is preserved in [handoff history](history/TYPESCRIPT_ELABORATOR_HANDOFF_THROUGH_2026-09-23.md).
 
@@ -30,10 +30,14 @@ validation and artifact identity; npm publication remains separate.
 The user-selected product emphasis is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
 computation, internal/synthetic construction and reuse, and reduced bookkeeping.
-The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) now governs
-the user-selected GAP-1 through GAP-3 implementation of a portable local runtime,
-Codex plugin and internal-reuse workflow. It also records a future cloud-container
-transport comparison; no cloud deployment is selected. Existing
+The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) records
+completed GAP-1 through GAP-3: a portable local runtime, installed Codex plugin
+and native/internal reuse through shared CLI/MCP operations. Focused tests,
+bounded Singular/Lambdapi controls and fresh installed-plugin Codex CLI sessions
+pass under the aggregate waiver. The optional internal construction retains one
+explicit computed-equation assumption and its existing interpretation boundary.
+The plan also records a future cloud-container transport comparison; no cloud
+deployment is selected. Existing
 proof protocols retain their precise meaning within the broader workflow.
 
 For mathematical status use the

@@ -47,6 +47,12 @@ try {
   const computed = await call('emdash_compute', {});
   assert.equal(computed.member, true);
   assert.deepEqual(computed, cli('compute').result);
+  const native = await call('emdash_construct', { mode: 'native' });
+  assert.equal(native.adoptedEquationCount, 0);
+  const decision = { mode: 'internal', adoptionReason: 'Explicit copied-plugin acceptance of the computed equation' };
+  const internal = await call('emdash_construct', decision);
+  assert.equal(internal.adoptedEquationCount, 1);
+  assert.deepEqual(internal, cli('request', JSON.stringify({ command: 'construct', root: workspace, ...decision })).result);
   const view = await call('emdash_render', {});
   assert.match(await readFile(view.htmlPath, 'utf8'), /<svg/u);
   const snapshot = await call('emdash_inspect', {});
@@ -55,9 +61,11 @@ try {
   const resumed = await call('emdash_inspect', {});
   assert.equal(resumed.sourceRevision, initial.sourceRevision);
   assert.equal(resumed.artifacts.computation.status, 'current');
+  assert.equal(resumed.artifacts.construction.status, 'current');
   const nextSource = { ...resumed.source, title: 'Continue after restarting the tool server' };
   const updated = await call('emdash_update', { expectedRevision: resumed.sourceRevision, source: nextSource });
   assert.equal(updated.artifacts.computation.status, 'stale');
+  assert.equal(updated.artifacts.construction.status, 'stale');
   const stale = await client.callTool({ name: 'emdash_update', arguments: {
     root: workspace, expectedRevision: initial.sourceRevision, source: nextSource,
   } });
@@ -66,7 +74,7 @@ try {
   const wrong = await client.callTool({ name: 'emdash_initialize', arguments: { root: plugin } });
   assert.equal(wrong.isError, true);
   assert.equal(wrong.structuredContent.error.code, 'PLUGIN_DIRECTORY');
-  console.log('Copied plugin STDIO: real SDK discovery/calls, CLI parity, compute/view, restart, update and stale/root controls passed.');
+  console.log('Copied plugin STDIO: real SDK discovery/calls, CLI parity, compute/view/internal reuse, restart, update and stale/root controls passed.');
 } finally {
   await client?.close();
   await rm(root, { recursive: true, force: true });

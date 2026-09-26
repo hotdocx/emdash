@@ -20,8 +20,9 @@ the host programming environment; explicit Core retains the mathematical
 checking boundary. See the
 [product orientation](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and
 [Codex plugin plan](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). The
-local plugin implementation is now selected; public distribution remains a
-separate milestone.
+[local plugin](./plugins/emdash/README.md) supports exact polynomial computation,
+source-derived views and native/internal complex reuse through shared CLI/MCP
+operations. Public distribution remains a separate milestone.
 
 The active development now carries that calculus into local geometry:
 Cat-valued presheaves, ordinary sieves and sites, a direct fixed-site

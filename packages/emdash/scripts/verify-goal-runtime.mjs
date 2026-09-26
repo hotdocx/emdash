@@ -35,11 +35,19 @@ try {
   assert.equal(computed.member, true);
   assert.equal(computed.sourceRevision, initialized.sourceRevision);
   assert.equal(computed.coefficients.length, 2);
+  const nativeComplex = good(['construct', '--root', workspace]);
+  assert.deepEqual(nativeComplex.ranks, [1, 3, 1]);
+  assert.equal(nativeComplex.adoptedEquationCount, 0);
+  const internalComplex = good(['construct', '--root', workspace, '--mode', 'internal',
+    '--reason', 'Explicit acceptance-test use of the computed equation']);
+  assert.equal(internalComplex.adoptedEquationCount, 1);
+  assert.equal(internalComplex.internalAction, 'goal_reuse_image');
   const rendered = good(['render', '--root', workspace]);
   assert.match(await readFile(rendered.svgPath, 'utf8'), /<svg/u);
   const resumed = good(['inspect', '--root', workspace]);
   assert.equal(resumed.artifacts.computation.status, 'current');
   assert.equal(resumed.artifacts.view.status, 'current');
+  assert.equal(resumed.artifacts.construction.status, 'current');
 
   // A normal TypeScript host program creates the inert input. The server never imports it.
   await writeFile(path.join(temporary, 'author.mts'), `
@@ -72,13 +80,18 @@ console.log(serializeAlgebraGoalSource(source));
     expectedRevision: resumed.sourceRevision, source }));
   assert.equal(updated.artifacts.computation.status, 'stale');
   assert.equal(good(['compute', '--root', workspace]).member, true);
+  assert.equal(good(['construct', '--root', workspace]).adoptedEquationCount, 0);
+  const unsupportedInternal = run(['construct', '--root', workspace, '--mode', 'internal',
+    '--reason', 'Explicit test of the unsupported rational interpretation']);
+  assert.equal(unsupportedInternal.status, 1);
+  assert.equal(unsupportedInternal.response.ok, false);
   const stale = run(['request'], JSON.stringify({ command: 'update', root: workspace,
     expectedRevision: initialized.sourceRevision, source }));
   assert.equal(stale.status, 1);
   assert.equal(stale.response.error.code, 'STALE_SOURCE');
   const denied = run(['request'], JSON.stringify({ command: 'inspect', root: workspace, module: 'untrusted.ts' }));
   assert.equal(denied.status, 1);
-  console.log('Portable goal runtime: CLI, fresh-process resume, TypeScript authoring/declarations, updates, stale controls and derived view passed.');
+  console.log('Portable goal runtime: CLI, fresh-process resume, TypeScript authoring/declarations, native/internal reuse, updates, stale controls and derived view passed.');
 } finally {
   await rm(temporary, { recursive: true, force: true });
 }

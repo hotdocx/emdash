@@ -1,6 +1,6 @@
 # Emdash Algebra Goal Assistant
 
-Date: 2026-09-25
+Date: 2026-09-26
 Status: user-selected product orientation; implementation remains profile-specific
 
 **Emdash helps people do mathematics: express a goal, construct mathematical
@@ -10,7 +10,10 @@ expression are the primary experience. Proof development and certification
 remain useful capabilities when the mathematical work calls for them.
 
 The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) turns this
-orientation into a proposed local delivery path. Existing mathematical and
+orientation into a local delivery path. The installed plugin now supports a
+bounded polynomial workspace, exact computation, derived views and whole
+native/internal complex reuse. Its [runtime guide](../plugins/emdash/README.md)
+describes the supported workflow. Existing mathematical and
 qualification authority remains with the
 [elaborator handoff](TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md), active Lambdapi
 owners and their scoped plans.

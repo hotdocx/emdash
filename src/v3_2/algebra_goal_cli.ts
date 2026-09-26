@@ -6,9 +6,10 @@ import { ALGEBRA_GOAL_COMMANDS, algebraGoalFailure, executeAlgebraGoalCommand } 
 import { ALGEBRA_GOAL_WORKSPACE_PROFILE } from './algebra_goal_workspace';
 
 export const ALGEBRA_GOAL_CLI_USAGE =
-    'emdash-agent <capabilities|init|inspect|update|compute|render> --root DIRECTORY ' +
-    '[--source JSON_FILE --expected-revision SHA256]\n' +
-    'emdash-agent request  # one inert JSON command on stdin';
+    'emdash-agent <capabilities|init|inspect|update|compute|render|construct> --root DIRECTORY ' +
+    '[--source JSON_FILE --expected-revision SHA256] [--mode native|internal --reason TEXT]\n' +
+    'emdash-agent request  # one inert JSON command on stdin\n' +
+    'emdash-agent mcp      # built runtime only; STDIO transport';
 
 export async function readAlgebraGoalStdin(stream: AsyncIterable<Uint8Array | string> = process.stdin): Promise<string> {
     const chunks: Uint8Array[] = [];
@@ -40,7 +41,8 @@ export async function runAlgebraGoalCli(argv: readonly string[]): Promise<number
                 const option = argv[index], value = argv[index + 1];
                 if (value === undefined) throw new AlgebraGoalError('INVALID_ARGUMENT', `Missing value for ${option}`);
                 const key = option === '--root' ? 'root' : option === '--source' ? 'source' :
-                    option === '--expected-revision' ? 'expectedRevision' : undefined;
+                    option === '--expected-revision' ? 'expectedRevision' :
+                        option === '--mode' ? 'mode' : option === '--reason' ? 'adoptionReason' : undefined;
                 if (!key || key in parsed) throw new AlgebraGoalError('INVALID_ARGUMENT', `Unknown or repeated option: ${option}`);
                 if (key !== 'root' && !(key in description!.properties)) {
                     throw new AlgebraGoalError('INVALID_ARGUMENT', `This command does not accept ${option}`);

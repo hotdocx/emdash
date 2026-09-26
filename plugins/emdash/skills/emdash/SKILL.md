@@ -1,6 +1,6 @@
 ---
 name: emdash
-description: Work on algebra goals with exact polynomial computations, reusable mathematical workspace files and source-derived views using Emdash.
+description: Work on algebra goals with exact polynomial computations, reusable native/internal module constructions and source-derived views using Emdash.
 ---
 
 # Emdash algebra goal assistant
@@ -33,6 +33,35 @@ Reinspect after a stale-source or busy result. The ordinary source file can
 also be edited with the host's normal file tools; old artifacts then become
 stale. Notes and other user files remain independently editable.
 
+## Reuse a retained relation
+
+After a positive computation, `emdash_construct` builds a whole two-step free
+complex from the retained coefficient vector and applies its upper map to one.
+Its default `mode: "native"` works over the supported rational polynomial ring
+and adopts no equation. It does not assert that the relation generates the whole
+kernel or that the complex is exact or a resolution.
+
+For a task that calls for internal construction through the computed-equation
+route, select `mode: "internal"` and supply an explicit `adoptionReason`. The
+runtime assembles a transparent typed Core complex from the actual matrices and
+one recorded computed-equation assumption, then consumes its projected
+differential in another typed action. State that assumption status in the
+mathematical result. This does not satisfy a separately requested checked-proof
+requirement, and standalone TypeScript reduction of the complex projections is
+not newly qualified by it.
+
+Keep the two actions distinct: `nativeImageOfOne` is the native image of the
+unit vector, whereas `goal_reuse_image` applies the internal differential to a
+supplied symbolic rank-one vector `a`. For the default column `(-x, 1, -1)`,
+the mathematical action is `a ↦ (-x*a, a, -a)`; its value at `1` is the column.
+Do not report the column as the value on an arbitrary formal argument, or claim
+the internal Core expression was reduced to those coordinates.
+
+The current internal interpretation supports integer polynomials in a supplied
+commutative ring. Native rational computation/construction remains useful when
+that interpretation rejects a coefficient. Do not silently clear denominators,
+replace the input, or recompute a different witness to make internalization pass.
+
 ## Portable command and TypeScript authoring
 
 The MCP tools and CLI use the same operation catalog. If the MCP connection is
@@ -45,6 +74,7 @@ node <plugin-root>/dist/emdash-agent.cjs capabilities
 node <plugin-root>/dist/emdash-agent.cjs inspect --root <absolute-workspace>
 node <plugin-root>/dist/emdash-agent.cjs compute --root <absolute-workspace>
 node <plugin-root>/dist/emdash-agent.cjs render --root <absolute-workspace>
+node <plugin-root>/dist/emdash-agent.cjs construct --root <absolute-workspace>
 ```
 
 `capabilities` returns the exact source schema, example, operation names and

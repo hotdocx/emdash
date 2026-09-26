@@ -1,8 +1,8 @@
 # Emdash algebra goal assistant
 
 The local runtime helps an agent compute, view and reuse mathematical data in
-ordinary files. This directory is the source of the Codex plugin being built
-under `docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md`. Public distribution
+ordinary files. This directory is the source of the locally installed Codex
+plugin governed by the [living plan](../../docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). Public distribution
 and cloud delivery are separate milestones.
 
 ## Local Codex installation
@@ -60,6 +60,7 @@ node /path/to/plugin/dist/emdash-agent.cjs init --root /absolute/math-workspace
 node /path/to/plugin/dist/emdash-agent.cjs inspect --root /absolute/math-workspace
 node /path/to/plugin/dist/emdash-agent.cjs compute --root /absolute/math-workspace
 node /path/to/plugin/dist/emdash-agent.cjs render --root /absolute/math-workspace
+node /path/to/plugin/dist/emdash-agent.cjs construct --root /absolute/math-workspace
 ```
 
 Use the actual built or installed plugin path. `init` supplies a small polynomial
@@ -68,6 +69,43 @@ returns exact membership, retained coefficients and a remainder. `render` derive
 an approximate SVG/HTML plane-curve view from the same source. Computation needs
 no proof goal or adopted assumption. Numeric rendering can be unavailable while
 the exact computation remains usable.
+
+## Internal construction and further use
+
+For a retained relation `g = a1*f1 + ... + an*fn`, native construction forms
+`D = (f1,...,fn,g)` and `s = (a1,...,an,-1)`, constructs the whole complex
+`R ← R^(n+1) ← R`, and applies its upper map to one. It checks `D*s = 0` by
+exact arithmetic. It retains the actual coefficient choice and does not run
+membership again. A valid alternate retained vector produces a distinct
+construction. This does not claim a complete kernel, exactness or homology.
+
+To additionally construct a typed internal complex and use its projected
+differential, choose the explicit computed-equation route:
+
+```bash
+node /path/to/plugin/dist/emdash-agent.cjs construct \
+  --root /absolute/math-workspace --mode internal \
+  --reason 'Use this exact computed zero-composition equation as an explicit assumption'
+```
+
+The equivalent `emdash_construct` MCP input has `mode: "internal"` and
+`adoptionReason`. Existing constructors build a transparent Core definition;
+the whole object is not postulated. A second transparent definition applies
+its projected differential to a supplied formal vector of rank one. This
+formal argument is distinct from the native one used in `nativeImageOfOne`:
+for the default example, the mathematical action is `a ↦ (-x*a,a,-a)` and
+the native image at `1` is `(-x,1,-1)`.
+One body-free computed-equation declaration is recorded, and Core checks the
+construction/action types relative to it. Proof reconstruction and new
+standalone TypeScript projection-reduction rules are not claimed.
+
+The internal interpretation remains bounded to integer polynomials in a supplied
+commutative ring. The native rational complex remains available for inputs
+outside that interpretation. `.emdash/construction.json` contains the native
+matrices, internal definitions and assumption/fingerprint material when selected.
+Its freshness depends on both source and retained computation bytes. Serialized
+Core is not trusted as proof authority; rerunning construction performs fresh
+checking through the current owners.
 
 ## Source and artifacts
 
@@ -110,6 +148,9 @@ Focused source/workspace tests cover exact data, malformed inputs, stale updates
 retained result dependencies, bounded input, Unicode, symlinked owned paths,
 mutation locks and view interpretation. The portable check copies `dist/` into
 a fresh unrelated directory and exercises independent CLI processes, typed
-authoring, source updates, computation and rendering with no borrowed
-`node_modules`. The living plan records current completion and later MCP/plugin
-and internal-construction acceptance.
+authoring, source updates, computation, rendering and native/internal reuse
+with no borrowed `node_modules`. The copied-plugin check uses real SDK STDIO
+discovery and calls, CLI parity and process restart. Fresh Codex CLI sessions
+exercise the installed plugin from unrelated mathematical workspaces. The
+living plan records these results and the separately deferred browser/cloud
+and public-distribution work.
