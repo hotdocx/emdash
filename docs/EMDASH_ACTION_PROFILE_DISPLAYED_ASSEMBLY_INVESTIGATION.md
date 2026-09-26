@@ -2,8 +2,9 @@
 
 Date: 2026-09-26
 
-Status: conditional represented-section proofs and projection controls pass;
-displayed profile and inverse-assembly candidates remain unselected
+Status: the original retained-member statement and pointwise consumers pass
+with a derived proof on the unchanged candidate core; displayed profile and
+inverse-assembly candidates remain unselected
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05`.
 Production mathematics remains at checkpoint `f0f327d6`. This investigation
@@ -21,7 +22,7 @@ between matching endofunctors. Each needs its actual profile. `Psh_cat` is
 Cat-valued; none of these profiles follows from a blanket ordinary-category
 assumption.
 
-An earlier prerequisite also needs migration. The retained-member theorem
+An earlier proof dependency also needed migration. The retained-member theorem
 is an opaque constant in the active source, with a historical derivation
 using strict naturality of a represented section. Its archival derivation is
 recorded in the
@@ -50,9 +51,68 @@ Three actual-consumer negative controls pass: omitting that section profile,
 substituting the existing question-substitution profile of the whole glue
 constructor, and treating the resulting path as runtime conversion. The
 source's `direct_cover_completion_glue_is_strict` concerns a different
-displayed map. A producer of the required output-section profile has **not**
-been established. Nor has the rest of the retained-member derivation or the
-complete locality/rho construction been requalified.
+displayed map. These controls qualify the conditional historical route.
+The alternative below now removes this extra premise from the retained-member
+proof. Producing strictness for arbitrary glue-output sections is therefore
+no longer a prerequisite for that statement. Complete locality/rho action
+and inverse assembly remain unqualified.
+
+## Derived Retained-Member Route
+
+The new proof keeps a whole section through the silent-law calculation.
+For a retained member `(p,member)` over `V`, let `e` be its existing
+`fib_cov_transf` section into the sieve extension and retain `m o e` as the
+section into the completion. The proof does not replace this composite with
+the represented section of `m[V](p,member)`, which was the historical
+matching-naturality detour.
+
+The derivation is:
+
+1. Apply the qualified whole glue-substitution path at the original `m`.
+2. Use the existing whole extension factorization to express the pulled
+   matching map as `(m o e) o inclusion`; associativity supplies the path.
+3. Apply the whole silent law to obtain `m o e` itself.
+4. Evaluate that equality of whole sections at the identity of `V`.
+   Yoneda precomposition computes directly, and public presheaf composition
+   crosses its existing named representation path.
+5. Compare with the original restriction-after-glue component using the
+   existing identity-family precomposition comparison.
+
+This proves the exact original
+`restriction(glue(m))[V](p,member) = m[V](p,member)` statement. No additional
+section or matching-map strictness premise, axiom, rewrite or unifier is
+introduced. The fifteen support definitions retain the existing supplied
+boundaries: the HIT glue profile and silent path, the whole extension-action
+comparison and retained factorization, and the presheaf composition
+representation path. They do not upgrade those supplied boundaries to
+independently derived theorems.
+
+One initially attempted projection change inferred the source annotation of
+displayed composition from its constructor. It allowed the endpoint proof
+to check but did not qualify the identity-order comparison control. It is
+unselected and unnecessary: the final proof compares both public composition
+presentations through the **same existing stable precomposition head** before
+evaluating. This preserves the original maps and the distinct runtime family
+representations. The preferred candidate core is byte-identical to the
+preceding native/CAS/cubical qualification.
+
+`api_direct_cover_retained_owner_position.lp` is a complete locality-source
+copy with the old opaque retained-member constant replaced by this derived
+definition. All eight public signatures through the pointwise-evidence
+boundary are unchanged, apart from trailing whitespace. The original rho
+projection tower, member equivalence and fibre pointwise evidence check
+against that body. The three whole-assembly stages remain commented with
+their profile restoration condition. The existing rho heads remain structural
+declarations; this result does not establish their strictness or whole inverse
+coherence.
+
+The public theorem and two nonreflection controls pass. A joint review with
+the complete profile reviewer and original glue reviewer passes 79 positive
+and 18 negative assertions. The old opaque-assumption control is excluded
+from that review. Its warning inventory and the derived owner have identical
+1,058 critical-pair warnings and 150 pattern-variable diagnostics, with no
+changes to heads, families, normalized owner locations or complete participant
+templates. The strict LHS audit has zero unreviewed candidates.
 
 ## Whole Displayed Action Projection
 
@@ -155,6 +215,28 @@ The core remains
 `ab48a85136935c5183b87bc0341fbb524a58be61083f1bbd9ad2563475df9965`.
 There are no compiled objects in this package.
 
+The subsequent retained-member qualification uses the same default guards
+and warning settings:
+
+| Check | Successful receipt | Seconds |
+| --- | --- | ---: |
+| Direct Yoneda precomposition evaluation | `20260926T182350Z-d763e2ad13144b7b8d515c82c06a7aa4` | 6.155 |
+| Complete derived retained-member proof, unchanged core | `20260926T184306Z-0f3a712d5dee410390eb7f124acfd1f0` | 13.954 |
+| Original owner and nonreflection controls | `20260926T184616Z-c34ca93a05ec46e884e0793d4b8d0e3b` | 14.363 |
+| Full profile/glue interaction review | `20260926T184849Z-9e451b11eca8490ea8f992d1ab7d5403` | 17.486 |
+
+The joint review's maximum child RSS is 837,724 KiB.
+`emdash2/tmp/probes/api_cover_retained_current_qualification_manifest.json`
+binds these four receipts to 47 exact-current inputs, the eight-signature
+audit, supplied boundaries and rejected/unselected controls. Its SHA-256 is
+`159dab73c637b4848d8b006199e9c7e5474bbd2fe85f28f2a7579e2b536cba58`.
+The warning comparison is
+`emdash2/tmp/probes/api_cover_retained_owner_warning_comparison.json`, SHA-256
+`e28e8837efa46eaa9df1bea4cf8b63a5930affb014ca8a518595d41da1966837`.
+Neither the old locality module containing the opaque theorem nor a modified
+core is in this successful closure. The earlier conditional-section and
+unselected displayed-profile investigations remain separate evidence.
+
 Use the immutable receipt input blobs for exact recovery. The manifest also
 records the authoring scripts, whose successive archive/control steps are
 not an idempotent build. These are investigation artifacts, not a second
@@ -162,15 +244,17 @@ accepted library or a clean-checkout integration route.
 
 ## Next Required Work
 
-Trace the actual glue-output and matching-map action prerequisites through
-the retained-member derivation. Establish the required profiles from the
-qualified producer, or revise the affected interface with an explicit,
-reviewed contract. Do not introduce a blanket strictness or rho-admission
-axiom merely to make the consumer check.
+Carry the retained-section argument through the whole functor action in the
+matching-map parameter, before selecting the rho producer's profiles. The
+new component theorem removes the old section-strictness detour; it does not
+assemble directed higher coherence from object-indexed paths. Keep the actual
+whole functors and both inverse choices. Do not introduce a blanket strictness
+or rho-admission axiom merely to make the consumer check.
 
 Review the displayed candidate against the complete internal action before
-selecting its primitive inverse interface. Then qualify fibre, displayed
-and outer rho assembly in order, preserving both inverse choices. These
+selecting its primitive inverse interface. Check its sufficiency and whether
+the actual producer can satisfy it with its retained lax endpoints. Then
+qualify fibre, displayed and outer rho assembly in order. These
 remain required `API-05` work. Other directed/simplex consumers, TypeScript,
 production cut retirement and final integration gates remain required by
 the parent plan; Op/duality repair and new Empty audits remain excluded.

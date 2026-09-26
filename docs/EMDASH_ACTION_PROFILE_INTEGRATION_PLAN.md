@@ -328,20 +328,8 @@ and retained-component owners. Remaining directed/simplex, TypeScript,
 production promotion and full integration gates remain required. The separate
 large six-term package-observation comparison and Op/duality stay excluded.
 
-Displayed-profile investigation: the current locality owner passes its
-production baseline (`20260926T173038Z-a7f493cef6af4c879f1b174408fa08f2`,
-0.749s). The archived retained-member derivation also uses unrestricted
-whole strict naturality of a represented section before the three inverse
-assembly stages. Recover that dependency with an explicit existing
-`IsStrictFunctord` premise and a raw rejection control. Do not infer a
-producer profile from point components or retain the opaque retained-member
-claim as evidence that those missing whole-action premises have been proved.
-The whole displayed profile and actual locality/rho producer remain required.
-The guarded represented-section theorem passes, as do two positive and two
-raw rejection controls (`20260926T174734Z-c20fb42989df45d58036165e85cf639c`).
-This identifies a real producer prerequisite; it does not discharge it.
 The [displayed assembly investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md)
-now records a whole projection of arbitrary `tdapp1` action, full/capped,
+records a whole projection of arbitrary `tdapp1` action, full/capped,
 identity and next-Hom controls, and a candidate profile constraining that
 action. A guarded version of the old primitive assembler preserves both
 selected inverses and rejects a missing or differently indexed profile.
@@ -349,16 +337,32 @@ These are unselected interface experiments: profile sufficiency and the
 actual producer are not established. The new projection adds one overlap
 warning; complete application-order controls join after the adjacent fold.
 
-The represented-section step also checks at the actual glue output with an
-explicit profile of that section. It uses main's retained contravariant
-Yoneda owner directly, after a failed covariant-presentation attempt; no
-whole-owner fold is added. Three controls reject omission of the section
-profile, substitution of glue's different question-substitution profile,
-and runtime reflection. The current manifest binds eight warning-enabled
-successful checks to 32 exact input files. Next trace the required producer
-profiles through the retained-member argument, and review the displayed
-candidate against the complete internal action. Do not promote the guarded
-primitive or infer rho admission merely from its component checks.
+The historical retained-member proof used strict naturality of a represented
+section and matching map. Its conditional section lemmas and negative
+controls remain useful evidence, but that dependency is now avoided by a
+different proof. Keep the whole retained section `m o e`, apply glue
+substitution, extension factorization, associativity and silent, and only
+then evaluate at the literal identity. Existing precomposition and presheaf
+composition paths recover the exact original component statement.
+
+This derived retained-member theorem adds no premise, axiom, rule or unifier.
+The actual owner-position copy preserves all eight public signatures through
+the pointwise-evidence boundary; its member equivalence and fibre pointwise
+consumers pass. A joint full-profile/glue review passes 79 positive and
+18 negative assertions in 17.486s at the default 2 GiB/90s limits. Its
+47-input manifest is recorded in the linked investigation. The opaque-control
+warning comparison has identical heads, families, normalized locations and
+participant templates. An experimental composition-projection change is
+unselected and unnecessary: the accepted proof keeps the candidate core
+unchanged. The source glue/extension/silent and representation contracts
+retain their supplied status.
+
+Next lift the retained-section argument through whole functor action in the
+matching-map parameter and qualify the actual rho profiles. Review both
+sufficiency of the proposed displayed profile and its admissibility for the
+producer's retained lax endpoints. The three whole-assembly stages remain
+commented; pointwise success does not establish their coherence. No blanket
+rho admission or global represented-family fold is authorized by these results.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -385,7 +389,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
 | `API-04` | joint Gamma/H/Hom feasibility and original native snake connecting/six-term reviewers pass; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The latest combined candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. All 94 original Freyd/CAS assertions and the expanded 492-owner interaction review pass; compiled-parent resource qualification is recorded in the [CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md). |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
-| `API-05` | named glue/readable pseudo qualified; conditional section paths checked; displayed profile/assembly unselected | Ordinary inverse assembly takes `StrictTransfor`; C1 callers derive admission internally. Source glue strictness and its reviewer pass. The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) checks the whole action observer, explicit candidate profile, inverse-retention controls and actual glue-section path under its required profile. Profile sufficiency, producer admission and complete locality/rho qualification remain open; neither raw nor guarded primitive assembly is selected. |
+| `API-05` | named glue/readable pseudo and derived retained-member prototype qualified; displayed profile/assembly unselected | Ordinary inverse assembly takes `StrictTransfor`; C1 callers derive admission internally. The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) now derives the original retained-member statement without extra premises on the unchanged candidate core. All eight prefix signatures and actual pointwise consumers remain; the full-profile/glue review passes 79 positive/18 negative assertions. Complete rho action, profile sufficiency/admissibility and whole assembly remain open; neither raw nor guarded displayed primitive assembly is selected. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
