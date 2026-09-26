@@ -776,8 +776,9 @@ identifies another staged raw-composition proof through three inherited
 generic postcomposition accumulators. A separate full-file candidate retains
 the ordinary identity-family computations and moves the generic computations
 behind actual strict views. The unchanged staged proof is then rejected.
-The remaining telescope 2-cell and higher projection clauses require their
-own staged audit; the new correction is not a global noncollapse certificate.
+The subsequent API-04T audit below qualifies the selected telescope 2-cell
+accumulators and modern projections; neither correction is a global
+noncollapse certificate.
 
 On that corrected core, 27 definition-only helpers and consumers derive
 inverse component/whole-Hom/next-Hom comparisons for both supplied inverse
@@ -788,6 +789,29 @@ matching review. The package is `tmp/probes/api_postcomp_profile_candidate/`;
 its exact core/profile pins, warning delta and immutable receipts are in the
 linked review. Complete relative/displayed assembly, production promotion
 and wider native/CAS/all-path requalification remain required.
+
+### Legacy Telescope Accumulation: API-04T
+
+The [telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t)
+separates the legacy capped telescope action from the modern transfor head.
+Staged legacy composition theorems specialize to modern Cat-valued paths;
+direct reflexivity negatives do not detect that route. The corrected copy
+retains only the identity-family legacy accumulators. General composition
+paths take actual telescope profiles through the existing profile adapter,
+without inferring them from a profile of F or its endpoints.
+
+Both unchanged staged proofs are rejected. The two new definitions and
+sixteen-positive/six-negative projection/profile controls pass, as do four
+unit-overlap controls. The combined review passes 468 positive/125 negative
+assertions over 225 inputs at the new core pin. Warning counts are unchanged;
+participant-template substitutions and source locations are reviewed. The
+stronger raw hom-action claim was not established by its failed probes and
+is not part of the acceptance evidence.
+
+The next assembly package is `tmp/probes/api_telescope_profile_candidate/`.
+Its core/profile pins and 226-input successful union are recorded in the
+linked continuation. Production source, older exact-pin evidence and the
+remaining full assembly/integration obligations retain their prior scope.
 
 ### New Main Consumers Over The Corrected Candidate
 

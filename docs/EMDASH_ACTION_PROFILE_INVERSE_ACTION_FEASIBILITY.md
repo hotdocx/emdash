@@ -3,11 +3,11 @@
 Date: 2026-09-26
 
 Status: derived component, whole-Hom and next-Hom inverse comparisons pass;
-postcomposition accumulator correction remains a prototype; whole assembly
-and the higher projection audit remain open
+postcomposition and selected telescope corrections remain prototypes;
+complete displayed assembly and production integration remain open
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05` and
-`API-04P`. This continues the
+`API-04P` / `API-04T`. This continues the
 [relative-profile investigation](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
 after the [vertical-fold correction](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md).
 No production LP file is changed by this investigation.
@@ -104,8 +104,9 @@ controls check the profiled clauses, their typed results, raw rejection and
 both identity-family evaluation orders. All inverse proofs described above
 also pass with this correction in place.
 
-The telescope 2-cell accumulation and other higher projection clauses still
-need a staged owner audit. This correction does not establish that all
+At this checkpoint, the telescope 2-cell accumulation and higher projection
+clauses still needed a staged owner audit. The continuation below qualifies
+the two selected legacy accumulators. Neither correction establishes that all
 remaining strictness routes have been removed. No new primitive admission,
 Op/duality repair or Empty audit is included.
 
@@ -141,10 +142,10 @@ Strict inferred-slot audits find zero unreviewed candidates in both changed
 owners. The nucleus retains its 64 annotated slots across 41 clauses.
 Subject reduction is enabled throughout.
 
-## Exact Qualification And Recovery
+## Postcomposition Qualification And Recovery
 
-The separate package is `emdash2/tmp/probes/api_postcomp_profile_candidate/`.
-The earlier packages remain intact. Current SHA-256 pins are:
+The package at the postcomposition checkpoint is
+`emdash2/tmp/probes/api_postcomp_profile_candidate/`. Its SHA-256 pins are:
 
 - Core: `d0de0eda354c178393b7494c21208cd8907f2b3f7f0119153bc8b31b5a34a9fe`.
 - Profile owner: `f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
@@ -186,7 +187,102 @@ identity. Authoring scripts record the experiment sequence; they are not yet
 a clean-checkout production integration recipe. No earlier native/CAS/all-path
 receipt is relabelled for this changed core.
 
-Next audit the remaining higher postcomposition owner, then continue the
-complete relative/displayed action and rho construction. Production cut
-retirement, downstream requalification, TypeScript and final integration
-gates remain required by the parent plan.
+The subsequent telescope audit below addresses the selected higher-owner
+obligation. Complete relative/displayed action and rho construction,
+production cut retirement, downstream requalification, TypeScript and final
+integration gates remain required by the parent plan.
+
+
+## Telescope Continuation: API-04T
+
+The legacy `hom_postcomp_tele_fapp1_fapp0` and
+`hom_precomp_along_tele_fapp1_fapp0` owners are distinct from the modern
+`*_tele_transf` values returned by actual telescope action. Each legacy owner
+had an unconditional 2-cell composition accumulator. Proving its generic
+composition equation first, then specializing the target category to
+`Cat_cat`, gives a composition path for the modern telescope. The direct
+modern reflexivity assertion remains rejected in the same control.
+
+The combined positive control is
+`20260926T223146Z-6166f033728e478d86a9ea06cc789139`.
+The two unchanged source files fail at their first generic legacy proof on
+the correction, separately:
+`20260926T223539Z-a2cc5627d93d4e02a0c54807bd47795b` and
+`20260926T223547Z-64b00b9de4e44bdc8e7feadb6b0d5c52`.
+These are expected proof failures, not resource failures.
+
+Two earlier attempts to derive the stronger raw hom-action composition
+statement failed on endpoint/projection-order elaboration. They do not
+establish or refute that stronger statement. The verified finding here is
+the staged Cat-valued modern-telescope composition path; the report does not
+promote a failed stronger probe to mathematical evidence.
+
+The full-file candidate comments the two generic legacy clauses and retains
+their named identity-family instances. For a general telescope, the two new
+`api_*_tele_profile_composition_path` definitions instead use an explicit
+`IsStrictFunctor` premise for the **actual telescope functor**, through the
+existing profile-action proof adapter. No implication from `IsStrictFunctor(F)`
+to a profile of its hom action or telescope is assumed. No new classifier,
+primitive admission, rewrite or unifier is added by these two definitions.
+
+The focused review has sixteen positive/six negative assertions. It checks
+both profile paths, rejection of raw legacy accumulation and judgmental
+reflection, rejection of substituting `F`'s profile for the telescope profile,
+the retained identity cases, complete Hom-action projection, both application
+orders, the Cat-valued legacy-to-modern projection and normal-unit paths.
+Four additional assertions check the two identity-overlap orders in each
+legacy accumulator. No extra unit normalization rule is introduced.
+
+The selected represented-Hom source inventory contains 48 rewrite statements.
+Its eight composition-related statements are six named identity-family
+accumulators and two fixed-arrow whiskering/reassociation clauses. The latter
+keep the same mapped arrow and do not combine two arbitrary mapped base
+arrows. The other statements are projection, unit or constructor-specific
+computations, including the existing DefIso boundary. This is an inventory
+of that source block, not a consistency certificate or an audit of every
+other kernel owner.
+
+### Telescope Warnings And Replay
+
+The same-corpus warning comparison remains 947 critical-pair warnings and
+150 pattern-variable diagnostics, with no category/head/rule-family count
+delta. Twenty-two participant instances are replaced by their identity-family
+specializations. They cover composition presentations, legacy identity,
+ordinary/higher/displayed component beta, the Cat-valued head projection,
+opposite-transfor composition and composite-functor Hom beta. Source-location
+mapping finds no increase at unchanged locations. The new telescope reviewer
+also imports the existing profile proof adapter and has 962/150 warnings.
+
+The broad comparison remains 1,127/162, with 24 restricted participant
+instances replacing 24 old instances; its two additional cases use the
+existing `NType_cat` presentation. Warning parsing has zero issues. The strict
+LHS audit has zero unreviewed candidates, retaining 64 annotated slots across
+41 clauses. These classifications and controls do not claim runtime joins
+for every critical pair or global confluence.
+
+| Current telescope check | Receipt | Positive / negative assertions | Seconds / maximum child RSS KiB |
+| --- | --- | ---: | ---: |
+| Complete profile/projection review | `20260926T223633Z-cc1976ed1f514da0a1c85ce2963cd6dd` | 16 / 6 | 8.596 / 485,664 |
+| Combined matching/inverse/Gray/Gamma/H/Hom review | `20260926T223819Z-7d2d087a78d04cdebd03b49ffab0a642` | 468 / 125 | 47.755 / 2,514,328 |
+| Legacy identity overlaps | `20260926T224045Z-45f91c1009974da89ee5a05ec63e1ee4` | 4 / 0 | 8.388 / 451,224 |
+
+The combined review has 225 inputs; the current successful union has 226.
+All checks retain warnings, subject reduction, serial execution,
+`OCAMLRUNPARAM=o=20,v=1024` and existing file/core/no-swap guards. Focused runs
+use 2 GiB/90s; the broad run uses the already qualified 3 GiB/180s profile.
+There are no compiled parents.
+
+The package is `emdash2/tmp/probes/api_telescope_profile_candidate/`, core
+SHA-256 `6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a`.
+The profile owner remains byte-identical to the preceding correction:
+`f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+The manifest
+`emdash2/tmp/probes/api_telescope_current_qualification_manifest.json`
+binds five current successful receipts, the unchanged staged controls,
+stronger failed attempts, exact source and warning/inventory records.
+SHA-256: `89364362beb172a853a0fc231d7e3d48c5f6ea744080113c4572ae1f866a88b8`.
+
+This closes the two selected legacy-telescope audit obligations in the
+prototype. Next resume complete relative/displayed action and rho assembly
+on this corrected package. The remaining production and integration gates
+are unchanged; no production cut was retired in this continuation.
