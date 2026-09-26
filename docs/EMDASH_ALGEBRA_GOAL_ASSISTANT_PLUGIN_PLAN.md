@@ -285,8 +285,8 @@ of the browser-safe `@hotdocx/emdash` entries.
 | Row | State | Concrete acceptance |
 | --- | --- | --- |
 | GAP-0. Review and orientation | Complete | Main integrated at `37ce19d5`; reference/plugin/MCP/WebMCP sources and official guidance inspected; orientation, implementation proposal and linked plans synchronized; document checks and exact diff review pass |
-| GAP-1. Portable runtime and workspace slice | In progress | A clean unrelated directory uses the built runtime to inspect/compute/render one source-owned algebra workflow; no developer path, global install assumption or cloud account |
-| GAP-2. Local Codex plugin | Selected; pending GAP-1 | Validated manifest/skill and thin local MCP adapter over the same service; actual fresh Codex session discovers and uses the installed/cached copy on a user workspace |
+| GAP-1. Portable runtime and workspace slice | Complete at focused qualification | Copied standalone runtime passes CLI/fresh-process/typed-authoring acceptance outside the checkout; exact source, retained computation, update and derived view controls pass |
+| GAP-2. Local Codex plugin | In progress | Validated manifest/skill and thin local MCP adapter over the same service; actual fresh Codex session discovers and uses the installed/cached copy on a user workspace |
 | GAP-3. Internal construction and reuse | Selected; pending GAP-1 | A relation becomes typed internal module data, a whole constructed complex and a further action through existing owners; any computed-equation adoption stays explicit; restart/edit invalidation works |
 | GAP-4. Browser projection | Proposed follow-up | A real supported browser registers the MCP-discovered tools and forwards calls through the shared service; ordinary UI remains usable without WebMCP; stale/cancelled results cannot overwrite newer source |
 | GAP-5. Hosted distribution and richer mathematics | Deferred | Separate GetPaidX/remote host adapter, public releases, further coefficient interpretations/backends and richer mathematical consumers only when selected |
@@ -367,6 +367,23 @@ required to produce this local design and first local runtime.
   proposed above, local cache installation and a bounded fresh-client smoke.
   Neither these checks nor runtime discovery authorize unrelated application
   actions, cloud deployment, publication or Git changes in user math workspaces.
+- Scope/cloud comparison checkpoint: `a1d43737`; implementation goal active.
+- GAP-1: `algebra_goal_source.ts` defines the bounded inert rational-polynomial
+  source using existing exact/parent/polynomial owners. TypeScript builders can
+  emit it through the separate authoring entry. Node-owned file commands retain
+  exact source revisions, preceding source bytes, computational coefficient
+  data and derived view artifacts. The command catalog/dispatcher is shared
+  with the forthcoming MCP adapter. No arbitrary source loader is introduced.
+- GAP-1 qualification: root typecheck, changed-source lint and all 12 focused
+  tests pass (2.25 seconds); 458 suites are registered. UTF-8 chunk boundaries
+  and normalized-source expansion beyond the file limit have dedicated controls.
+  The copied-runtime acceptance passes CLI initialize/inspect/compute/render,
+  fresh-process resume, TypeScript declarations and actual native TypeScript
+  authoring, revision-checked updates and stale-source rejection. It uses its
+  own temporary directory and no copied/symlinked dependency graph. The runtime
+  build owns generated `plugins/emdash/dist/` and hashes its source/bundle inputs.
+  [Runtime guide](../plugins/emdash/README.md). No aggregate, formal-owner change
+  or Lambdapi invocation was needed for this source/file slice.
 
 ## Persistent-goal prompts
 
