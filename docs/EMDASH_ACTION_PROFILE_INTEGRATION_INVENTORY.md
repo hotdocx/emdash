@@ -1020,25 +1020,28 @@ production promotion, TypeScript and final gates stay required.
 ### Freyd And Proof–CAS Consumer Qualification
 
 The [Freyd/proof–CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md)
-records 79 passing original assertions across six unchanged emitted
-artifacts. The eighteen adapted ordinary support owners preserve all 58
-public signatures and introduce no new rewrite, unifier, primitive,
-strictness premise or inverse choice. Every adapted owner occurs in those
-successful closures. Model, normality and interpretation contracts remain
-supplied, and output exactness remains derived.
+records all 94 original assertions passing across eight unchanged emitted
+artifacts. Eighteen ordinary support owners preserve all 58 public
+signatures. The four pair-comparison proofs retain their twelve public
+signatures and eight data definitions, using component paths and existing
+pair congruence; three shared adjacent-arrow proofs are reused. No new
+rewrite, unifier, primitive, strictness premise, opacity or inverse choice
+is introduced. Model, normality and interpretation contracts remain supplied,
+and output exactness remains derived.
 
-The final two snake certificate artifacts remain unqualified. Their pair
-comparison reaches a resource boundary after both original pair objects
-form. The investigation distinguishes generic proof, concrete specialization,
-statement formation and proof inference. It has not changed proof opacity
-or the actual pair data. The exact partial manifest binds 410 current inputs;
-failed and formation-only controls do not qualify a library theorem.
+The actual adapted pair owner is compiled with subject reduction and
+warnings enabled, then its two original certificate consumers pass against
+that exact source/object snapshot. A separate package confines compiled
+parents; the preferred candidate retains source-only files. Profile-first
+preparation resolves an earlier LES import-order boundary. Normal resource
+defaults are unchanged, and clean-checkout routing remains a final gate.
 
-Profile-first preparation resolves a separate LES import-order resource
-boundary; the emitted artifacts themselves are unchanged. The current
-kernel source and prior native/Gray/path qualification inputs are retained.
-Expanded interaction checking and eventual clean-checkout routing remain
-required before production promotion.
+The expanded review preloads 492 semantic owners and passes 513 positive/
+89 negative assertions plus twenty retained-data consumers. Its final
+manifest binds 557 identical LP sources and 231 compiled objects. Earlier
+failed and formation-only controls remain excluded. The displayed profile,
+remaining directed/simplex consumers, TypeScript, production cut retirement
+and full integration gates remain required.
 
 ## Source Path Accounting
 

@@ -2,8 +2,8 @@
 
 Date: 2026-09-26
 
-Status: 79 of 94 original corpus assertions pass in the candidate;
-snake certificate qualification remains in progress
+Status: all 94 original corpus assertions and the expanded interaction
+review pass in the candidate; production promotion remains pending
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-04`.
 This follows the [native snake qualification](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md).
@@ -34,8 +34,15 @@ native proofs still derive output exactness from that context.
 | `api_cas_les_exactness_0.lp` | 3 | Pass with recorded preparation |
 | `api_cas_les_exactness_1.lp` | 3 | Pass with recorded preparation |
 | `api_cas_les_exactness_2.lp` | 3 | Pass with recorded preparation |
-| `api_cas_snake_certificate_signatures.lp` | 10 | Unqualified; first public-pair comparison under investigation |
-| `api_cas_snake_certificate.lp` | 5 | Pending |
+| `api_cas_snake_certificate_signatures.lp` | 10 | Pass with compiled parents |
+| `api_cas_snake_certificate.lp` | 5 | Pass with compiled parents |
+
+The six source-only replays and two compiled-parent replays now pass all
+94 assertions. The latter use byte-identical source copies, with the adapted
+pair owner independently compiled and the actual emitted artifacts checked
+against those source/object snapshots. This qualification preserves the
+original statements and data; it does not replace the parent goal's full
+integration gates.
 
 ## Ordinary Proof Adaptation
 
@@ -56,7 +63,8 @@ is introduced.
 The successful emitted snake, LES diagram and displayed LES certificate
 closures together check all eighteen adapted owners. Every original public
 signature is preserved, and the actual emitted consumers qualify their
-bodies. The remaining certificate resource boundary is recorded separately.
+bodies. The pair-owner proof adaptation and compiled-parent resource
+qualification are recorded below.
 
 ## Resource And Import Controls
 
@@ -147,7 +155,8 @@ controls pass at the normal 2 GiB/90s profile in 7.712s
 first-pair proof still allocation-fails in 93.964s
 (`20260926T162331Z-7750b623e4d443e6acf975f6670dc6d9`), so this alone
 does not resolve the comparison. No new rule, axiom, opacity or chosen data
-is introduced, and the full pair owner remains unchanged.
+is introduced by that rejected experiment. The subsequent component-proof
+adaptation below changes only the comparison proofs.
 
 ## Recovery And Next Action
 
@@ -171,21 +180,119 @@ Pair-boundary probe inputs are recorded in
 `api_native_first_pair_staging_inputs.json`,
 `api_cas_first_pair_specialization_inputs.json`, and
 `api_cas_first_pair_formation_controls.json`. All are under the same probe
-parent directory. The full Freyd pair owner is still unchanged from main.
+parent directory. Those records precede the comparison-proof adaptation
+below; the original eight pair-data definitions remain unchanged.
 
-The next controls, prepared but unrun, compare the two complete arrows in
-the public pair separately:
-`api_cas_first_public_incoming_comparison.lp` and
-`api_cas_first_public_outgoing_comparison.lp`. Their exact source inputs are
-in `api_cas_first_public_component_controls.json`. Run them serially with
-the existing 6 GiB/180s profile; refine the failing component before adding
-any computational or proof-time comparison. No checker is left running at
-this checkpoint.
+### Component-Proof Adaptation
 
-Finish the pair-comparison investigation, then check the remaining original
-artifacts with the recorded preparation order and exercise the full action-profile rejection controls in the expanded
-consumer environment. Preserve exact source and resource identities and keep
-partial results distinct from full 94-assertion qualification.
+The two complete-arrow controls both pass at 6 GiB/180s: incoming in
+59.136s (RSS 3,488,596 KiB,
+`20260926T163036Z-d1db26b6fe884fd5a5b644ef3bb81d66`) and outgoing in
+59.611s (RSS 3,567,596 KiB,
+`20260926T163136Z-db19d1a892ea4becbf99a301e41f63f0`). Composing those
+paths with the existing pair-congruence constructor, checked input endpoint
+and inferred generic proof proves the original first statement in 77.544s,
+RSS 4,884,476 KiB
+(`20260926T163511Z-1c9d3ace02a842aebfd0e10bf1e4b1d0`).
+
+The other three generic comparison paths are likewise definition-only
+applications of the existing kernel-input pair comparison. They pass at
+3 GiB/90s in 27.937s
+(`20260926T164225Z-f77f865ff6fc46d2a224082fc1609a50`). The full candidate
+pair owner now uses transparent component proofs at all four statements.
+All twelve original public signatures and all eight data definitions remain
+unchanged. No rule, unifier, primitive or opacity is introduced.
+
+The first full adaptation still exceeds 6 GiB. A full-file diagnostic
+confirms that the first public theorem checks and locates the next failure
+at the second pair's incoming-arrow helper
+(`20260926T164803Z-f2edda3ab1fa4d968d001cbe6212a55b`). Using its original
+literal public component observation, as in the qualified first case,
+passes alone in 60.878s
+(`20260926T165212Z-77921f9144a54cee9446271afa52d127`). The full diagnostic
+still exhausts allocation there after the first comparison. Direct
+named-whole-map and endpoint-inference alternatives do not qualify the
+original whole statement, so the component-proof construction is retained.
+
+The three arrows shared by adjacent pairs have identical generic whole-map
+terms and endpoints. Reusing each preceding outgoing proof as the next
+incoming proof avoids checking the same comparison twice. The 6 GiB/300s
+run still allocation-fails at 132.281s
+(`20260926T170517Z-4694496390714007844a78fea77af25f`). The complete
+four-comparison diagnostic copy passes at 8 GiB/300s in 103.359s, maximum
+child RSS 7,608,184 KiB
+(`20260926T170754Z-dd8b17768c9341b6b5449db59e150c49`).
+
+This checks all original statements together, with no new opacity, rule,
+unifier or data choice. The actual signature driver still allocation-fails
+at 8 GiB/300s while rechecking the owner in its larger environment
+(106.338s, `20260926T171006Z-e69eb1f682a04af283134b79b1e7e7c7`).
+A separate package `emdash2/tmp/probes/api_cas_compiled_candidate/` retains
+293 byte-identical selected sources and prepares compiled parents.
+
+The actual pair owner compiles with warnings and subject reduction enabled
+at 8 GiB/300s in 124.441s, maximum child RSS 7,676,472 KiB
+(`20260926T171234Z-a1232561282d4ce4b34cbeb4331ebf69`). All 231 generated
+objects are nonempty. The pair object is 4,614,969 bytes, SHA-256
+`9b8f102acd702caf8c4bcaddaaa97aa8a3e93d160686846aa8fe8e355b10723a`.
+Both actual required consumers then pass at the same explicit profile:
+
+| Actual artifact | Assertions | Receipt | Seconds | Maximum child RSS (KiB) |
+| --- | ---: | --- | ---: | ---: |
+| Snake certificate signatures | 10 | `20260926T171511Z-81bba6a6223c41b5af3db379db3e90f1` | 37.284 | 4,236,956 |
+| Concrete snake certificate | 5 | `20260926T171550Z-2d92755250494c15be49fe5e38c70a75` | 46.762 | 4,253,456 |
+
+Those consumer receipts bind the actual compiled objects as well as their
+source closures. Their source files match the preferred source-only
+candidate; compiled objects are confined to the separate resource package.
+The original 94 assertions are unchanged. Normal resource defaults and proof
+transparency remain unchanged.
+
+Current complete-corpus manifest:
+`emdash2/tmp/probes/api_cas_94_assertion_manifest.json`, SHA-256
+`0cb47df3416a35203d198c2b7c9242a2c2de5b0072cbd7745e69be1c3f362616`.
+It records all eight exact successful replays, original artifact hashes and
+231 current compiled-object hashes. The 79-assertion manifest remains the
+prior partial milestone; it is not silently relabelled as a full result.
+
+The expanded interaction driver now includes the actual CAS library parents
+before the prior profile/native/Gray/path reviewers. Its source manifest is
+`api_cas_compiled_joint_source_manifest.json`: 557 LP files copied or
+verified byte-identical. The combined review passes all 513 positive/89
+negative assertions and
+twenty retained-data consumers at 8 GiB/300s in 193.833s, maximum child
+RSS 7,533,472 KiB
+(`20260926T171726Z-8d163441774942c6a94ea4c29c465b81`). Its selected
+closure contains 492 semantic owners and excludes unproved formation
+controls, old comparison controls and the raw displayed assembler. The
+warning parser reports no issues. The four critical-pair diagnostics emitted
+in this compiled-parent run are not presented as a whole-source warning
+inventory; no rewrite/unification clause changes in this tranche.
+
+Final qualification manifest:
+`emdash2/tmp/probes/api_cas_current_qualification_manifest.json`, SHA-256
+`6ce1e0b333475d0ebcd955a3d79d2f49e9278abd56ef6893e58cd0b0f98bd44d`.
+It binds the 94-assertion manifest, expanded receipt and all 789 exact
+inputs: 557 LP files, the package configuration and 231 compiled objects.
+Every LP file matches the preferred candidate. The source/object identity
+and resource settings belong to the recorded replay; no source-only result
+is inferred from a compiled-parent check.
+
+Recovery files under `emdash2/tmp/probes/` include
+`api_cas_first_pair_component_assembly_inputs.json`,
+`api_native_other_pair_staging_inputs.json`,
+`api_cas_all_pair_component_assembly_inputs.json`,
+`api_cas_direct_public_component_inputs.json`,
+`api_cas_pair_current_audit.json`,
+`api_cas_adjacent_component_identity.json`, and
+`api_cas_shared_component_reuse.json`. The final exact source-edit recipe is
+`api_cas_pair_final_edit_script.json`. Earlier raw and failed controls remain
+historical evidence and are absent from accepted consumer closures.
+
+Continue to the explicit displayed action-profile and its direct-cover
+locality/rho consumer, then the remaining directed consumers under the
+parent plan. Preserve exact source and resource identities and
+keep prototype qualification distinct from production promotion.
 
 The separate large six-term package-observation comparison stays excluded.
 Displayed pointwise action-profile qualification, remaining directed/simplex

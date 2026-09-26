@@ -251,27 +251,44 @@ or permission question is introduced.
 ## Freyd And Proof–CAS Import Qualification
 
 The [Freyd/proof–CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md)
-records six successful emitted artifacts, totaling 79 original assertions,
-at the archived 6 GiB/180s profile. The remaining two snake certificate
-artifacts are not yet qualified. Every run retains subject reduction, serial
-execution, file/core limits and no swap.
+records all 94 original assertions passing across eight unchanged emitted
+artifacts. Six source-only replays use 6 GiB/180s. The final two certificate
+artifacts use byte-identical sources and verified compiled parents at
+8 GiB/300s. Every run retains subject reduction, serial execution, file/core
+limits and no swap.
 
 The raw LES import order exhausts 6 GiB with `o=20` in 81.156s, and with
-`o=5` in 169.747s, without any generated assertion body. Checking the
-existing action/profile parents first resolves that import boundary. After
-two existing-C1 caller repairs, the same seven-parent closure passes in
-27.468s, RSS 2,074,824 KiB, and the unchanged 48-assertion diagram in
-29.816s, RSS 2,310,088 KiB. This is an explicit preparation-order
-qualification, not a claim that arbitrary orders have equal resource cost.
-Exact receipts are recorded in the linked review.
+`o=5` in 169.747s, without a generated assertion body. Checking the existing
+action/profile parents first resolves that boundary. After two existing-C1
+caller repairs, the same seven-parent closure passes in 27.468s, RSS
+2,074,824 KiB, and the unchanged 48-assertion diagram in 29.816s, RSS
+2,310,088 KiB. This is an explicit preparation-order qualification, not a
+claim that arbitrary orders have equal resource cost.
 
-The snake signature driver reaches a different boundary at the first
-public-pair comparison: 6 GiB fails in 72.559s, and 8 GiB fails in 99.535s.
-The direct pair owner and its first-three-definition prefix fail too; both
-pair objects form before the comparison proof exhausts allocation.
-Increasing memory again is not the selected next step. The current controls
-separate formation, inference and comparison of the stated proof, retaining
-the actual data and existing proof transparency.
+The original snake pair comparison fails at both 6 and 8 GiB. The adapted
+component-proof construction preserves its statement and data. It proves
+each complete-arrow comparison, assembles the pair path, and reuses shared
+adjacent-arrow proofs. The full adapted diagnostic passes at 8 GiB/300s;
+its actual owner also compiles independently. These are changed proof bodies,
+not a relabelling of the original failed source as a larger-limit success.
 
-Normal defaults remain unchanged. These temporary driver profiles do not
-replace the goal's final clean-checkout resource routing or full gates.
+| Qualified check | Profile | Seconds | Maximum child RSS (KiB) | Receipt |
+| --- | --- | ---: | ---: | --- |
+| Actual adapted pair owner, compile with subject reduction and warnings | 8 GiB/300s | 124.441 | 7,676,472 | `20260926T171234Z-a1232561282d4ce4b34cbeb4331ebf69` |
+| Original snake certificate signatures, checked compiled parents | 8 GiB/300s | 37.284 | 4,236,956 | `20260926T171511Z-81bba6a6223c41b5af3db379db3e90f1` |
+| Original concrete snake certificate, same parents | 8 GiB/300s | 46.762 | 4,253,456 | `20260926T171550Z-2d92755250494c15be49fe5e38c70a75` |
+| Expanded profile/native/Gray/path review after actual CAS parents | 8 GiB/300s | 193.833 | 7,533,472 | `20260926T171726Z-8d163441774942c6a94ea4c29c465b81` |
+
+The larger source-only certificate environment still exceeds 8 GiB while
+rechecking the pair owner. The separate resource package prepares that owner
+first; all 231 produced objects are nonempty and their hashes are bound by
+the successful consumer receipts. Every copied LP source matches the
+preferred candidate. The final qualification manifest in the CAS review
+binds the 94 original assertions and expanded 513-positive/89-negative
+review, plus twenty retained-data consumers.
+
+Normal defaults remain 2 GiB/90s. These exact temporary resource profiles and
+source/object snapshots do not replace final clean-checkout routing or full
+integration gates. The prepared group must be made reproducible through the
+owning registry/tools at that boundary; no mathematical source pin is changed
+merely to pass a resource check.
