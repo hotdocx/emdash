@@ -744,9 +744,35 @@ The full corrected profile closure also passes with warnings enabled:
 1,038 critical/149 pattern diagnostics and no parser failures. This is the
 complete temporary profile closure, not the transitional production owner.
 
+### Residual Vertical-Fold Audit: API-04V
+
+The [vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md)
+supersedes the earlier candidate’s lax-boundary claim for three additional
+ordinary off-diagonal clauses. Staging a generic vertical-fold theorem before
+identity specialization recovers unprofiled composition/naturality. The
+corrected candidate rejects that unchanged proof route and requires the
+later pre/right and earlier post/left profiles at their actual opaque views.
+The composition codomain remains an explicit semantic guard.
+
+Three raw core clauses are commented; five profile-layer clauses replace
+them. Four dependent interchange/EH proof bodies are re-homed with actual
+profile premises, while EH objects, operations and units stay in the core.
+All fifteen new warning instances have typed controls or existing-evidence
+paths; these paths do not establish runtime confluence.
+
+The corrected broad review passes 344 positive/84 negative assertions. The
+separate combined candidate, including the whole matching comparison and
+actual relative/inverse actions, passes 423 positive/111 negative assertions
+across 207 source/package inputs. Its warning inventory is unchanged from
+the corrected broad environment. The original packages remain intact.
+Older native-snake, CAS and all-path results below retain their original core
+scope and need requalification against the changed core before promotion.
+No production owner has changed in this audit.
+
 ### New Main Consumers Over The Corrected Candidate
 
-`tmp/probes/api_ordinary_profile_minimal/` is the current isolated package.
+`tmp/probes/api_ordinary_profile_minimal/` is the earlier isolated package
+qualified in this section; `API-04V` above owns the subsequent correction.
 Its complete main-based nucleus and profile owners include the smaller
 precomposition correction above. Pass the directory as the runner's
 `--package-root`, so receipts record its actual closure rather than the

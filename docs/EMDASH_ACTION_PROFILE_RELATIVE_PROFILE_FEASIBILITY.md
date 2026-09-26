@@ -141,6 +141,23 @@ the isolated matching core remains
 `ee583a558c68354263c86aa76841c3e1403106149a95b55f42ca37aa6514a838`.
 Neither core changed in this slice, and no production LP file was promoted.
 
+## Corrected Vertical-Owner Replay
+
+The subsequent [vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md)
+found a staged unprofiled-strictness route in the earlier cores. It does not
+invalidate the generic relative producer bodies: those unchanged bodies and
+their controls also pass with the three raw vertical folds removed and their
+profile-guarded replacements installed. The focused receipt is
+`20260926T214215Z-d924054a85474547b0d5ac3e10b83f14`.
+
+The actual matching comparison, both selected inverse profiles and complete
+action consumers also pass in the separate combined corrected package,
+receipt `20260926T214504Z-e17ae0ad45c8459f8b8656ae0d51ec46`. The audit owns its
+new core pin, complete 423-positive/111-negative interaction scope and warning
+comparison. Earlier exact-pin receipts above remain historical evidence;
+neither core was silently overwritten. This replay does not qualify generic
+relative composition or inverse assembly.
+
 ## Remaining Acceptance
 
 The relative predicate is not yet selected as the sufficient premise for
