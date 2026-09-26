@@ -2,14 +2,15 @@
 
 Date: 2026-09-26
 
-Status: the original retained-member statement and pointwise consumers pass
-with a derived proof on the unchanged candidate core; displayed profile and
-inverse-assembly candidates remain unselected
+Status: retained-member point and matching-action prerequisites pass; a whole
+FibCov member-projection comparison is qualified in a further candidate;
+complete displayed/rho profiles and inverse assembly remain open
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05`.
 Production mathematics remains at checkpoint `f0f327d6`. This investigation
-uses `emdash2/tmp/probes/api_ordinary_profile_minimal/`; it does not restore
-the commented displayed half of the candidate pointwise-equivalence owner.
+began in `emdash2/tmp/probes/api_ordinary_profile_minimal/`; the later
+member-projection continuation below uses a separate corrected core. Neither
+restores the commented displayed half of the pointwise-equivalence owner.
 
 ## Decision And Actual Consumer
 
@@ -269,3 +270,118 @@ qualify fibre, displayed and outer rho assembly in order. These
 remain required `API-05` work. Other directed/simplex consumers, TypeScript,
 production cut retirement and final integration gates remain required by
 the parent plan; Op/duality repair and new Empty audits remain excluded.
+
+
+## Whole FibCov Member Projection
+
+The next member-direction prerequisite concerns the existing canonical
+fibre-Yoneda construction. For a family `E` over `K`, form the whole functor
+
+```text
+P(E,x,y) = component_at(y) o fib_cov_src_func(E,x)
+        : E[x] -> Functor_cat(Hom_cat K x y, E[y]).
+```
+
+Its point computation is already `P(E,x,y)[u][p] = E[p][u]`.
+The exchanged family action `sym_func(fapp1_func(E,x,y))` has the same point
+computation. Both point proofs check on the preceding telescope-corrected
+core, while a typed-reflexivity comparison of the whole functors is rejected,
+receipt `20260926T225335Z-1f9c461baf1b49aaa0643f4737d5edf0`.
+Point equality alone is therefore not the supplied whole-action interface.
+
+A separate full-file candidate adds one guarded proof-time comparison of
+those whole functors, after the exchange owner is declared. It recognizes
+`tapp0_func` composed with the actual `fib_cov_src_func`, retains the actual
+family hom action on the other side, and checks the represented source,
+`Hom_cat K x y`, and both endpoint fibres in side conditions. Runtime keeps
+the two presentations distinct.
+
+This is a **new whole constructor-projection agreement in the candidate**.
+It specifies the canonical higher member action intended by the FibCov
+projection cascade; it is not a rule-free theorem obtained by extensionality
+from the point proofs. It introduces no profile admission for an arbitrary
+family, section, matching map or rho transfor. Production adoption remains
+part of the complete owner migration and its gates.
+
+### Derived Member Transport And Actual Readouts
+
+Using the existing exchange projection, the canonical readout at `p` is a
+whole functor `E[x] -> E[y]`. Congruence of the new whole comparison and the
+existing double-exchange computation give a path from that readout to the
+original `E[p]`. At `p = id_x`, this is a path to `id_(E[x])`. A `PathOver`
+observation retains its complete next Hom action and original endpoints.
+
+The actual sieve-extension instance keeps the native `Op_cat K` source.
+For `h : W -> V`, its readout is compared with the original whole transport
+from the extension fibre at `V` to its fibre at `W`. No Sigma-Hom arrow
+formula, alternative transport, or new opposite rule is introduced.
+
+For a raw matching map `m`, a component-first readout postcomposes its
+original fibre functor `m[V]` with the canonical identity member readout.
+It is equal to `m[V]` as a whole functor, with a next-Hom observation. Its
+object action at the original `(p,member)` computes to `m[V](p,member)`.
+No section or matching-map strictness is a premise.
+
+This is the specified canonical readout order. It does not assert an
+unproved whole comparison with every raw evaluation/postcomposition
+presentation. A later consumer that uses a different whole presentation
+must compare it explicitly. Nor does this result give the missing whole
+retained-factorization path as the member varies, or the base-direction
+coherence needed for rho.
+
+Controls reject runtime identification of the two whole member projections,
+substitution of an unrelated action functor, the wrong base-arrow result,
+raw functor composition (including the Cat-valued specialization), and raw
+matching-map component naturality. The constructor comparison is not used
+to make these ambient laws hold.
+
+### Member-Projection Qualification
+
+Four support modules contain thirteen definitions, with no new primitive,
+rewrite or unification declaration in those modules. Their whole comparison
+uses the single new core unifier described above. The actual readout and
+next-Hom consumers pass in the combined review.
+
+| Current check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Whole constructor agreement and runtime distinction | `20260926T225600Z-df177946b2ce4ac2b20a2195637d9bb0` | 9.994 / 453,880 |
+| Whole member transport, identity and next Hom | `20260926T225912Z-275cc25eead94ea59a8517100e3a47bb` | 7.858 / 454,000 |
+| Combined actual member/matching/inverse/Gray/Gamma/H/Hom review | `20260926T230654Z-67acccdaeefa4ecb8ae869cf1c2e3e77` | 48.298 / 2,508,832 |
+
+The final review passes **476 positive/131 negative assertions** over 233
+inputs. Definition bodies check in addition to assertions. Focused checks
+use 2 GiB/90s; the broad review uses the established 3 GiB/180s profile.
+All use warnings, subject reduction, serial execution,
+`OCAMLRUNPARAM=o=20,v=1024` and the existing file/core/no-swap guards. The
+package is source-only with no compiled parents.
+
+Focused warning counts remain 947 critical pairs/150 pattern diagnostics;
+the broad scope remains 1,127/162. Heads, families, full participant templates
+and source locations mapped across the insertion all have zero deltas.
+Warning parsing reports no issues. The strict LHS audit has zero unreviewed
+candidates, retaining 64 annotated slots across 41 clauses. This evidence
+qualifies the scoped comparison, not global confluence or consistency.
+
+The package is `emdash2/tmp/probes/api_fibcov_member_candidate/`.
+Core SHA-256:
+`5325e159fbb90db0564366acb0fcfe6b4cdd3ce75e346c7f7336cfb256b720e0`.
+The profile owner remains
+`f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+The earlier telescope package is unchanged.
+
+The manifest
+`emdash2/tmp/probes/api_fibcov_member_current_qualification_manifest.json`
+binds three current successful receipts, the 233-input union, thirteen
+support definitions, the earlier no-whole-agreement control, source pins and
+warning/authoring records. SHA-256:
+`d3732ef476469fbb39d1cbd6095515e4ec91f2e1821bc25fc879259cdf4bf250`.
+Exact emitted source is preserved in the immutable receipt input store;
+authoring scripts still record an experiment sequence rather than a finished
+production integration recipe.
+
+Next lift the retained-factorization and glue/silent argument through the
+varying member and base directions, preserving the whole matching parameter.
+That complete construction must supply the actual rho action before the
+explicit assembly profile can be selected and the three assembly stages
+restored. The current result is a member-projection prerequisite, not a
+rho admission or completed locality migration.

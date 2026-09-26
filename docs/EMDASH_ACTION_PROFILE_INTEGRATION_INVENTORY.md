@@ -813,6 +813,29 @@ Its core/profile pins and 226-input successful union are recorded in the
 linked continuation. Production source, older exact-pin evidence and the
 remaining full assembly/integration obligations retain their prior scope.
 
+### Whole Member Projection Prerequisite: API-05
+
+The [FibCov member continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-member-projection)
+compares the existing whole member projection with the exchanged family
+hom action. Their point computations already agree; their whole comparison
+is a new guarded constructor agreement in the isolated candidate. It is
+not inferred by pointwise extensionality and admits no arbitrary matching
+map or rho profile.
+
+Whole member transport, identity readout and next-Hom paths then pass.
+Actual sieve-extension transport and a component-first raw matching readout
+retain the original functor and its higher action. Controls retain ambient
+laxness, including the Cat-valued composition case. The final combined review
+passes 476 positive/131 negative assertions over 233 inputs, with unchanged
+warning inventories. Its new core and exact receipts are recorded in the
+linked investigation; older native/CAS/all-path pins are not upgraded.
+
+The next package is `tmp/probes/api_fibcov_member_candidate/`. Whole
+retained-factorization and glue/silent coherence in the varying member/base
+directions, comparisons to any distinct raw evaluation presentations, the
+actual rho profile and all three inverse-assembly stages remain required.
+No production source changes in this prerequisite tranche.
+
 ### New Main Consumers Over The Corrected Candidate
 
 `tmp/probes/api_ordinary_profile_minimal/` is the earlier isolated package

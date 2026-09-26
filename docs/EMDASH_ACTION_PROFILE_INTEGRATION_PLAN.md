@@ -471,16 +471,36 @@ controls and the combined matching/inverse/Gray/Gamma/H/Hom review pass.
 The combined review has 468 positive/125 negative assertions over 225 inputs,
 with unchanged warning totals and classified identity-specialization deltas.
 
-The current package for the next assembly investigation is
+The telescope checkpoint is retained in
 `emdash2/tmp/probes/api_telescope_profile_candidate/`, core SHA-256
 `6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a`.
-Earlier package pins remain historical evidence at their exact scope.
-Next resume complete relative composition/unit coherence and displayed action,
-then the actual rho retained-member/base directions and inverse assembly.
-The relative profile remains unselected as a sufficient generic assembler
-premise; the user’s explicit-profile decision stays in force. The selected
-telescope audit does not certify every other kernel owner or change the
-recorded Op/duality, Empty and other exclusions.
+The [member-projection continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-member-projection)
+then finds that the existing fibre-Yoneda projection and exchanged family
+action agree at points without a whole functor comparison. A separate
+candidate adds one guarded whole constructor-projection agreement. This is
+an explicit new theory comparison, not a theorem inferred from pointwise
+equality or an admission for arbitrary matching maps.
+
+The comparison yields whole member transport, identity readout and next-Hom
+paths. At the actual sieve extension and a raw matching map, a component-first
+canonical readout is compared with the map's original fibre functor, keeping
+its higher action. Raw matching naturality and generic/Cat-valued composition
+remain rejected by the controls. The full member/matching/inverse/Gray/Gamma/H/Hom
+review passes 476 positive/131 negative assertions over 233 inputs, with
+unchanged warning inventories and no production source change.
+
+The current investigation package is
+`emdash2/tmp/probes/api_fibcov_member_candidate/`, core SHA-256
+`5325e159fbb90db0564366acb0fcfe6b4cdd3ce75e346c7f7336cfb256b720e0`.
+Earlier package pins retain their exact scope. Next lift the retained-factorization
+and glue/silent calculation through the varying member and base directions,
+while preserving the whole matching parameter. Any distinct raw evaluation
+presentation used by that construction needs its own whole comparison.
+Then qualify complete rho action and the explicit assembly profile before
+restoring the three assembly stages. The relative predicate remains
+unselected as a sufficient generic assembler premise; no blanket rho
+admission, Op/duality repair, new Empty audit or other scope expansion is
+introduced.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -510,7 +530,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-04V` | staged strictness leak corrected in prototype; combined review qualified | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. Earlier native/CAS/all-path evidence does not qualify the changed core; affected-closure requalification and production promotion remain required. |
 | `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
-| `API-05` | retained-member/matching producers and inverse Hom-action comparisons qualified; assembler premise unselected | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons and checks the actual matching producer. Composition/unit and inverse-assembly sufficiency, retained-member/base directions and full rho assembly remain open. |
+| `API-05` | member/matching prerequisites and inverse Hom-action comparisons qualified; complete rho/assembler premise open | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons and checks the actual matching producer. The [whole member projection](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-member-projection) qualifies one constructor comparison and actual canonical readouts on a further core, with 476 positive/131 negative combined assertions. Complete member/base coherence, composition/unit and inverse-assembly sufficiency, and full rho assembly remain open. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
