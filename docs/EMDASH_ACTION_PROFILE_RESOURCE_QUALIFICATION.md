@@ -247,3 +247,31 @@ records exact current source and control manifests.
 These are explicit temporary-target profiles under the user's standing
 authorization. Defaults remain 2 GiB/90s; no new production resource profile
 or permission question is introduced.
+
+## Freyd And Proof–CAS Import Qualification
+
+The [Freyd/proof–CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md)
+records six successful emitted artifacts, totaling 79 original assertions,
+at the archived 6 GiB/180s profile. The remaining two snake certificate
+artifacts are not yet qualified. Every run retains subject reduction, serial
+execution, file/core limits and no swap.
+
+The raw LES import order exhausts 6 GiB with `o=20` in 81.156s, and with
+`o=5` in 169.747s, without any generated assertion body. Checking the
+existing action/profile parents first resolves that import boundary. After
+two existing-C1 caller repairs, the same seven-parent closure passes in
+27.468s, RSS 2,074,824 KiB, and the unchanged 48-assertion diagram in
+29.816s, RSS 2,310,088 KiB. This is an explicit preparation-order
+qualification, not a claim that arbitrary orders have equal resource cost.
+Exact receipts are recorded in the linked review.
+
+The snake signature driver reaches a different boundary at the first
+public-pair comparison: 6 GiB fails in 72.559s, and 8 GiB fails in 99.535s.
+The direct pair owner and its first-three-definition prefix fail too; both
+pair objects form before the comparison proof exhausts allocation.
+Increasing memory again is not the selected next step. The current controls
+separate formation, inference and comparison of the stated proof, retaining
+the actual data and existing proof transparency.
+
+Normal defaults remain unchanged. These temporary driver profiles do not
+replace the goal's final clean-checkout resource routing or full gates.

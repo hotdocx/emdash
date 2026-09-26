@@ -295,11 +295,39 @@ The native review records the current 401-file candidate/control manifest,
 339 selected inputs and seven exact-current successful receipts. Normal
 defaults and all guards remain unchanged.
 
-Next: qualify the actual Freyd/native proof–CAS consumers. Eight exact
-archived emitted artifacts are recovered and hash-verified through the
-native review; their 94 assertions are not yet qualified in this candidate.
+The [Freyd/proof–CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md)
+now qualifies 79 of the 94 original emitted assertions: the snake, whole
+LES diagram, three exactness fragments and displayed LES certificate. All
+eight emitted artifacts retain their original bytes and supplied model,
+normality and interpretation contracts. Eighteen adapted support owners
+retain all 58 public signatures; all occur in the successful closures.
+Only ordinary law-proof calls change, with no new rule, unifier, primitive,
+strictness premise, inverse choice or operational cast in those owners.
+
+The LES import closure needs the existing action/profile parents loaded
+first: raw-order checks exhaust 6 GiB with both `o=20` and `o=5`, while
+profile-first preparation passes the unchanged 48-assertion artifact in
+29.816s. The final two snake certificate artifacts remain unqualified.
+Their pair-comparison owner exhausts 6 and 8 GiB; direct and prefix controls
+locate the cost at the first public-pair comparison proof, after both pair
+objects form. A generic native comparison theorem passes, but its Freyd
+specialization still exhausts 6 GiB. No opacity or pair-data change is made.
+
+Statement formation and inference of the staged proof both pass separately,
+but a transparent named proof still fails the stated-result comparison.
+The input-pair endpoint agrees; the public-pair endpoint exhausts allocation.
+The existing additive-record projection reductions pass runtime controls,
+but normalizing those parameters does not resolve the comparison. Current
+next action: compare the public pair's two complete arrows separately,
+using the prepared incoming/outgoing controls named in the linked review.
+Refine the failing component before choosing any new comparison. The full
+pair owner and proof opacity remain unchanged. Formation-only probes are
+expressly unproved and excluded from accepted closures. The stated
+comparison, remaining fifteen corpus assertions and expanded interaction
+review remain required. The linked review records exact receipts, 410
+qualified inputs and all current control paths.
 The separately deferred large six-term package-observation comparison stays
-excluded. The explicit displayed pointwise profile remains required.
+excluded. The explicit displayed pointwise action profile remains required.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -324,7 +352,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | joint Gamma/H/Hom feasibility and original native snake connecting/six-term reviewers pass; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The latest combined candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. Freyd/CAS qualification remains pending. |
+| `API-04` | joint Gamma/H/Hom feasibility and original native snake connecting/six-term reviewers pass; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The latest combined candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. Freyd/CAS now has 79/94 original assertions qualified; its first public-pair comparison remains under investigation. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | named glue and readable pseudo prototype qualified; displayed assembly prerequisite open | Ordinary inverse assembly takes `StrictTransfor`; C1 callers derive admission internally. Source glue strictness and its reviewer pass; readable pseudo controls retain both inverses and distinct endpoints. User confirmed an explicit action-based profile is required for displayed assembly. The unqualified raw assembler remains an unselected control, and locality/rho qualification stays open. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |

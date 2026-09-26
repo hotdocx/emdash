@@ -1017,6 +1017,29 @@ typed consumers. The combined replay preloads 274 semantic owners and passes
 Remaining Freyd/proof–CAS, displayed profile, directed/simplex,
 production promotion, TypeScript and final gates stay required.
 
+### Freyd And Proof–CAS Consumer Qualification
+
+The [Freyd/proof–CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md)
+records 79 passing original assertions across six unchanged emitted
+artifacts. The eighteen adapted ordinary support owners preserve all 58
+public signatures and introduce no new rewrite, unifier, primitive,
+strictness premise or inverse choice. Every adapted owner occurs in those
+successful closures. Model, normality and interpretation contracts remain
+supplied, and output exactness remains derived.
+
+The final two snake certificate artifacts remain unqualified. Their pair
+comparison reaches a resource boundary after both original pair objects
+form. The investigation distinguishes generic proof, concrete specialization,
+statement formation and proof inference. It has not changed proof opacity
+or the actual pair data. The exact partial manifest binds 410 current inputs;
+failed and formation-only controls do not qualify a library theorem.
+
+Profile-first preparation resolves a separate LES import-order resource
+boundary; the emitted artifacts themselves are unchanged. The current
+kernel source and prior native/Gray/path qualification inputs are retained.
+Expanded interaction checking and eventual clean-checkout routing remain
+required before production promotion.
+
 ## Source Path Accounting
 
 The initial source diff has 81 LP paths (41 modified, 40 added), comprising
