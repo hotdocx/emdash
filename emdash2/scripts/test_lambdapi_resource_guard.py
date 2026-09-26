@@ -79,7 +79,7 @@ else:
         self.assertLess(time.monotonic() - started, 5)
 
     def test_ceiling_cannot_be_raised_by_environment(self):
-        for env in ({"EMDASH_LP_MEMORY_MIB": "6145"},
+        for env in ({"EMDASH_LP_MEMORY_MIB": "8193"},
                     {"EMDASH_LP_TIMEOUT": "601s"},
                     {"EMDASH_LP_TIMEOUT": "180.5s"},
                     {"EMDASH_LP_TIMEOUT": "0"},
@@ -89,7 +89,7 @@ else:
                 self.assertEqual(self.run_guard("/bin/true", **env).returncode, 2)
 
     def test_reviewed_memory_extension_keeps_other_limits(self):
-        for memory in ("4096", "6144"):
+        for memory in ("4096", "6144", "8192"):
             with self.subTest(memory=memory):
                 result = self.run_guard("python3", "-c", """
 import resource, sys

@@ -239,6 +239,8 @@ needed measured memory/timeout increases on 2026-09-26, without further
 approval requests. Keep normal defaults unchanged, use explicit per-target
 profiles, and record the reason and measurements in its living plan. Preserve
 subject reduction, serial execution, file limits and the no-swap policy.
+Its measured normalization replay required extending the supported explicit
+memory ceiling to 8 GiB; defaults and existing named profiles remain unchanged.
 
 For Lambdapi allocation failures or timeouts, follow the repository-wide
 [resource/GC procedure in the Lambdapi SOP](emdash2/AGENTS.md#avoid-hung-typechecks).

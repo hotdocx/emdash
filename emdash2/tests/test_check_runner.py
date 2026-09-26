@@ -115,7 +115,10 @@ class CheckRunnerTests(unittest.TestCase):
                          (6144, 180000, "o=20"))
         overridden = execution_settings(target, {"EMDASH_LP_MEMORY_MIB": "4096", "EMDASH_PROBE_TIMEOUT": "120s"})
         self.assertEqual((overridden["memoryMiB"], overridden["timeoutMs"]), (4096, 120000))
-        for env in ({"EMDASH_LP_MEMORY_MIB": "6145"}, {"EMDASH_LP_TIMEOUT": "601s"},
+        expanded = execution_settings(target, {"EMDASH_LP_MEMORY_MIB": "8192", "EMDASH_LP_TIMEOUT": "600s"})
+        self.assertEqual((expanded["memoryMiB"], expanded["timeoutMs"]), (8192, 600000))
+        self.assertEqual(execution_settings(Path("ordinary.lp"), {})["memoryMiB"], 2048)
+        for env in ({"EMDASH_LP_MEMORY_MIB": "8193"}, {"EMDASH_LP_TIMEOUT": "601s"},
                     {"EMDASH_LAMBDAPI_FLAGS": "--no-sr-check"}):
             with self.subTest(env=env), self.assertRaises(ValueError):
                 execution_settings(target, env)

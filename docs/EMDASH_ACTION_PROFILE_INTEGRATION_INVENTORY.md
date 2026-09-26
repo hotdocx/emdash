@@ -335,9 +335,15 @@ and an allocation failure in `homology_epic_covers`. The queued 22-target
 partition (52791) is terminal after two passes and an allocation failure in
 `homology_first_exactness`. Session 94473 completed the measured resource
 follow-up, including a default-limit downstream consumer. The complete
-589-target suite resumes in session 33193, log
-`emdash2/logs/api-ordinary-check-full-resume.log`; exact receipt identity
-is rechecked after the newly compiled parents. The TypeScript probe-bridge regression
+589-target continuation 33193 reached 462 successful targets, then failed
+the normalization recipe at `monic_image_comparison` (2 GiB). Its 6 GiB/180s
+retry (86537) reached `short_exact_normalization_projections` before exhausting
+allocation. Recipe-only retry 96993 also failed at that projection owner with
+6 GiB/600s and GC `o=5,v=1024`. The supported memory ceiling is now 8 GiB,
+with defaults unchanged and 51 guard/runner/registry/DevOps/native-profile
+tests green. Session 86306 retries only normalization at 8 GiB/600s with
+`o=20,v=1024`. Earlier runner hashes cannot be silently treated as the new
+tooling identity. The TypeScript probe-bridge regression
 also passes and is checkpointed separately at `2653f6fd`.
 The previous session handles 46872, 33123, 8836, 59878 and 22260 are terminal. Inspect the actual
 current process/handle on continuation; this text is not liveness evidence.
@@ -533,6 +539,153 @@ at `API-05`, not a spelling-only replacement:
 These are source-level dependency findings, not new mathematical assumptions
 or completed migrations. They supplement the owner ledger's requirement to
 preserve current ordinary/native consumers with their actual guards.
+
+### Main-Based Lax Nucleus And Ordinary Derivations
+
+The next temporary nucleus starts from current main's full source. Twenty-eight
+source-tip hunks match unchanged owner contexts. Five require no replacement:
+main already has the capped opposite-transfor projection and the four stable
+contravariant owners. Their current identity-category guards and the complete
+contravariant ladder are retained byte-for-byte. The exact hunk dispositions
+and hashes are in `tmp/probes/api_main_lax_core_seed.json`. This is an
+isolated candidate, not an automatic merge or a promoted source change.
+
+Over that main-based nucleus, the final complete profile owner includes the
+integration's previously probed capped full-subcategory inclusion beta. The
+final strict-action owner then imports those profiles. All three check with
+subject reduction and default resource limits:
+
+| Candidate | Seconds | Receipt |
+| --- | ---: | --- |
+| Main nucleus with source cut retirements and main additions retained | 6.040 | `20260926T060243Z-87ed5d7959e44040a2e066383a5a9677` |
+| Complete opaque action profiles over that nucleus | 8.203 | `20260926T060250Z-27c081dd587c40e180eb8b46026d0e02` |
+| Complete source strict inverse/profunctor actions | 10.569 | `20260926T060258Z-de17f42c80164402a2a1d236555e1c1c` |
+| Complete source profile reviewer, 58 positive and 14 negative assertions | 8.067 | `20260926T060447Z-aca767fb4b3141b39fd70a21a014c445` |
+
+The active nucleus is still unchanged. Main's extension consumers and central
+diagnostics must migrate before this temporary cut retirement is promoted.
+The complete source reviewer checks its registered ambient/profile
+observations in the candidate; the residual audit below shows why those
+observations alone are insufficient. The earlier ordinary-only working tree
+still has its explicitly transitional global cuts.
+
+The next evaluated-DefIso prototype follows the source's stable mapped
+forward/inverse heads. Raw component agreements are proof-time; canonical
+identity observations remain computational. Reflexive, symmetric and composed
+input controls pass, including the previously failing composed inverse:
+`20260926T055352Z-9d817f4b97d44b7ca3439b590c3ad4ef` (4.825s).
+The complete copied main adjunction-mate owner initially failed its semantic
+comparison because the generic raw agreement did not chain with the existing
+mate unifier (`20260926T055644Z-52e95d5c8e6e4afd8577c212384fd286`). Four
+direct scoped comparisons, referring to the original semantic constructors,
+resolve that exact proof-time gap. The complete original reviewer then passes:
+`20260926T055745Z-0a38728e7aed4dfb950f8196a06b4cee` (5.173s).
+
+The same stable point owner and complete adapted main mate owner/reviewer
+also pass over the **main-based** lax nucleus above:
+`20260926T060456Z-9b1a5a9113264952a6d2ea3f5f12b089` (9.717s).
+Cat-valued point-inverse cuts remain scoped to those stable evaluated inverse
+heads. This is still feasibility evidence: complete warning comparison,
+remaining Hom-comparison consumers and owner-position qualification are
+required before production promotion.
+
+An isolated ordinary-profile package retains main's discrete readback owners
+and uses the final source Eq1 owner. Main's Eq1 owner is byte-identical to the
+common ancestor; the source change supplies reusable path observations and
+restricts generic fibre transport to a classified strict family. The package
+manifest is `tmp/probes/api_ordinary_profile_cluster_manifest.json`.
+
+Two **definition-only** raw-action theorems now check over the main-based lax
+environment: composition and component naturality for a supplied ordinary
+target C1. They read the existing compositor and the post/pre naturality
+cells through `hom_to_path`, retaining the original functor/transformation.
+The first composition proof exposed an input presentation mismatch between
+composition and represented postcomposition under arbitrary F
+(`20260926T060954Z-668cf3cd1b3d4241bdc8864ba35acab6`). Staging the existing
+comparison before `eq_ap` resolves it without a new rule or unifier:
+`20260926T061311Z-4dc5c2b6b0db4751b11ed5d68a5566f9` (8.588s).
+The earlier whole ordinary-target strictness/admission candidate also passes
+with the global cuts removed:
+`20260926T061320Z-7861243c4ba84132a590feac6a67ee03` (8.706s).
+
+The next consumer adapts the source's inverse mapping proof to raw F with C1.
+It preserves both actual mapped inverse arrows and the existing public
+signature of `one_cat_natural_equivalence_transport` (checked byte-for-byte
+from `symbol` through its result type). The complete consumer and both inverse
+projection controls pass over this main-based lax package, as does an ambient
+composition noncollapse control even with C1 in context:
+`20260926T062813Z-c137f85776904c0292a82c8719167c52` (8.549s).
+No new caller square, detached composition-law record, runtime cut or model
+axiom is supplied. This is the first checked newer ordinary consumer using
+the retained raw F/G actions after generic strictness retirement.
+
+Whole `IsPostStrictTransfor` and `IsPreStrictTransfor` evidence also derive
+from the same ordinary-target/discrete-functor contract, yielding opaque
+`StrictTransfor` admission with its original raw carrier:
+`20260926T065510Z-bf9dffff98c3491bad4243f761d7d3ad` (8.741s).
+The existing component-naturality proof checks with an explicitly classified
+strict input after global-cut retirement:
+`20260926T065519Z-7e5dd83ec50642019cfbed302ae9328d` (8.213s).
+These offer distinct ordinary and arbitrary-target strict-profile routes;
+they do not infer C1 from preadditive hom sethood or narrow the primary whole
+K/Q structures merely to repair an ordinary observation.
+
+Strict inferred-slot audits pass for the temporary main-based nucleus,
+complete profiles, strict actions and stable evaluation owner. These audits
+are advisory about shape; warning-family and remaining-consumer qualification
+still precede promotion.
+
+### Residual Precomposition Audit: API-04R
+
+Fresh main/candidate warning runs give 1,140 -> 816 critical diagnostics and
+157 -> 149 pattern diagnostics, with no parse failures. Comparing normalized
+participant-rule templates locates 61 added and 385 removed critical-pair
+occurrences. Sixty additions concern the source's named strict constructors:
+Path symmetry (7), core inclusion (21), path-category action (8), opposite
+profunctor action (8), and fixed-weight implication (16). The remaining
+addition pairs the retained raw precomposition fold with its identity-argument
+projection. The normalization is a diagnostic locator, not a confluence proof.
+
+Warning receipts: `20260926T064733Z-5415e73d6b21458b8b571d3fdfb40ac3`
+and `20260926T064741Z-8a846771e7d146fcbffb20afa34a1b71`. The parsed delta is
+`tmp/probes/api_main_lax_warning_delta.json`.
+
+That last family exposes an actual residual overclaim in the final source:
+
+```text
+hom_precomp_along(F,p,g) o F[q] --> hom_precomp_along(F,p o q,g).
+```
+
+The rule admits a reflexive equality for opaque g. Instantiating g with the
+identity then derives `F[g] o F[f] = F[g o f]` for arbitrary F, with no strict
+profile or ordinary-target hypothesis. The definition-only probe
+`api_residual_precomposition_law.lp` checks in 6.275s, receipt
+`20260926T070131Z-2047d59d892b4f3991e024dd1a7e495f`. It introduces no rule,
+unifier, axiom or Empty construction. Direct non-conversion negatives alone
+therefore did not establish the required absence of unqualified preservation.
+
+The neighboring whole-functor and nested-point precomposition accumulation
+rules have the same unqualified F dependency and are included in `API-04R`.
+The next full-owner candidates retain these computations for the named
+identity functor in the nucleus and guard their general forms by the stable
+`strict_functor(S)` view in the profile owner. They are prepared at
+`api_main_lax_precomp_guarded.lp` and `api_full_profiles_precomp_guarded.lp`;
+their strict LHS audits pass, but typechecking and consumer qualification
+remain in progress. The first typecheck rejects the unqualified staged theorem
+as required and passes the strict-profile observation, but an additional raw
+identity-form conversion observation fails. An attempted projection-order
+refinement has not resolved it; compare that exact observation with the old
+baseline before deciding whether it is inherited or a regression. Receipt:
+`20260926T072728Z-b0c743514bb845ea9f93f1682c4fe36b`.
+The complete 58-positive/14-negative profile reviewer still passes with the
+three generic cuts removed and guarded counterparts present:
+`20260926T072736Z-1030f130fcc2460983b492cbc1a7cb06` (8.590s).
+No correction is promoted yet and no source-branch closeout claim is copied
+over the contrary unqualified-preservation evidence.
+Prepared next controls are `api_precomp_identity_baseline.lp` and the
+`api_precomp_canonical_controls.lp` / `api_full_profiles_precomp_canonical_review.lp`
+pair, whose identity patterns use the actual `id Cat_cat A` runtime head.
+Those new controls have not yet executed.
 
 ## Source Path Accounting
 

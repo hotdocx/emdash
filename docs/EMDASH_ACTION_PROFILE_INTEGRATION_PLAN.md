@@ -14,7 +14,7 @@ Supersedes: action-profile integration deferral for this dedicated goal
 only. Source-branch plans/receipts remain historical evidence. Op/duality,
 six-term comparison and the other excluded goals remain deferred.
 
-Side-Task-Ledger: `API-00` through `API-10`, plus `API-02R`, `API-02I` and `API-02M` below; owner/consumer decisions
+Side-Task-Ledger: `API-00` through `API-10`, plus `API-02R`, `API-02I`, `API-02M` and `API-04R` below; owner/consumer decisions
 are maintained in `EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md`.
 
 Infinity-Codex-Origin: session `01a0db41-9157-7592-afe5-5daa073f925f`;
@@ -181,7 +181,8 @@ compatibility requirements.
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured cover replays and consumers qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): both unchanged cover owners compile at 6 GiB/180s; first exactness and the downstream consumer pass at defaults after parent compilation. Standing user authorization covers needed measured resource increases; full-suite reintegration remains in progress. |
-| `API-04` | pending | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. |
+| `API-04` | inverse-action feasibility; no production cut removed | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. The current experiment keeps evaluated DefIso projections stable through composite cancellation, following the source's mapped-inverse owner design. |
+| `API-04R` | verified residual source overclaim; correction under test | A retained precomposition rule still derives an equality expressing composition preservation for arbitrary F, despite the source branch's cut retirements. Audit its three accumulation rules and move generic behavior behind `StrictFunctor`, retaining named identity computation. Require rejection of the unqualified staged theorem, profile positives, both projection orders and affected consumers. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
 | `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
 | `API-07` | pending | Inherited path-cubical owners/reviewers through the structured feasibility boundary; retain exact readback/groupoidality limits. |
@@ -327,10 +328,18 @@ executable evidence.
   first exactness's four direct parents and the target compiled at defaults;
   the actual second-exactness consumer passed at defaults. Immutable receipt
   IDs are collected in `emdash2/logs/api-resource-followup-receipts.json`.
-  Current full-suite continuation: session 33193, log
-  `emdash2/logs/api-ordinary-check-full-resume.log`, with exact input/settings
-  matching and explicit settings only for the measured cover owners and
-  atomic recipes that compile them.
+  Full-suite continuation 33193 is terminal with 462 successful targets and
+  a failed atomic normalization group at `monic_image_comparison` (2 GiB).
+  All preceding staged homology recipes passed. Continuation 86537 retried
+  normalization at 6 GiB/180s; it passed monic-image comparison but exhausted
+  allocation later in `short_exact_normalization_projections`. Current
+  retry 96993 also exhausted allocation at that projection owner, at
+  6 GiB/600s with `o=5,v=1024`. The explicit supported memory ceiling is now
+  extended to 8 GiB under the standing authorization; defaults remain 2 GiB.
+  Guard/runner/registry and unchanged native-profile checks pass (51 tests).
+  Current normalization-only replay: session 86306, 8 GiB/600s per child,
+  `o=20,v=1024`. The runner-code change means earlier receipts remain
+  historical execution evidence, not exact-current-tooling resumable results.
   Re-poll the handle or inspect actual process state before taking a wait or
   restart decision. The ordinary mathematical changes are intentionally
   still unstaged pending qualification; validation and baseline-import repairs
@@ -410,6 +419,32 @@ candidate passes initial ordinary and Prof/adjunction component observations,
 but fails the composed-comparison cancellation control. It is not selected
 for promotion. The inventory records warning families and exact receipts;
 follow the source's stable inverse-owner discipline in the next design.
+
+Next hypothesis: stable evaluated forward/inverse heads preserve the original
+whole DefIso through composite cancellation, while typed agreements expose
+the original components. The first stable-head prototype passes the failed
+composite control over the source nucleus. Qualify its Cat-valued point
+projections at the copied main adjunction-mate owner and complete reviewer,
+including proof-time semantic views and noncollapse, before selecting it.
+Reject a design that loses actual inverse computation or weakens those
+consumer observations. Production owners remain unchanged during this probe.
+
+The stable design now passes the complete adapted main adjunction-mate owner
+and original reviewer. Separately, a main-based temporary nucleus with the
+source rule retirements, complete opaque profiles and strict actions checks;
+the complete source profile reviewer passes its 58 positives and 14 negatives.
+Main's already-ported contravariant ladder and other newer declarations are
+retained. The stable mate reviewer also passes in this main-based lax
+environment. The inventory records exact candidates, dispositions and receipts.
+
+Ordinary-target composition and component naturality now derive directly from
+the existing laxity cells using C1, with no new rule or axiom. The whole
+ordinary strictness candidate also rechecks after cut retirement. Raw-F inverse
+mapping and the existing ordinary equivalence-transport consumer pass in
+`tmp/probes/api_ordinary_profile_cluster/`, preserving the public signature
+and both selected inverse arrows. Next use those qualified ordinary paths
+to migrate the newer native consumers. The active library still awaits its
+ordinary-tranche validation checkpoint before any production cut retirement.
 
 Book checks pass for the final working text: 46 sources, 187 evidence claims
 and 3,124 math spans. Catalog, registry, source TOC, header/reference lint and

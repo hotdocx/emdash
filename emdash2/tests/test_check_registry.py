@@ -85,6 +85,17 @@ require open test.a test.b;
             with self.assertRaisesRegex(ValueError, "overlapping profile"):
                 load_registry(ROOT)
 
+    def test_reviewed_memory_ceiling_is_bounded(self):
+        from unittest.mock import patch
+        data = load_registry()
+        data["profiles"]["default"]["memoryMiB"] = 8192
+        with patch("scripts.check_registry.json.loads", return_value=data):
+            self.assertEqual(load_registry(ROOT)["profiles"]["default"]["memoryMiB"], 8192)
+        data["profiles"]["default"]["memoryMiB"] = 8193
+        with patch("scripts.check_registry.json.loads", return_value=data):
+            with self.assertRaisesRegex(ValueError, "out-of-bounds profile"):
+                load_registry(ROOT)
+
 
 if __name__ == "__main__":
     unittest.main()

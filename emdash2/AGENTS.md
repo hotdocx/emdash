@@ -241,9 +241,8 @@ its second connecting/reuse pass. A time increase does not resolve a memory
 failure or qualify an incomplete computation. Longer probes use the existing
 `EMDASH_PROBE_TIMEOUT` override; do not bypass the guard or subject reduction.
 
-The same user authorization permits reviewed memory increases. The guard
-accepts an explicit `EMDASH_LP_MEMORY_MIB` up to 6144 while retaining its
-2048 default. `scripts/check_native_snake_pairs.sh` selects the measured
+The same user authorization permits reviewed memory increases.
+`scripts/check_native_snake_pairs.sh` selects the measured
 6 GiB/180s profile only for its registered pair/certificate owners and
 reviewer. Keep the normal guard, serial lock, file/core limits and no-swap
 scope; record resource measurements and do not turn this into a global
@@ -259,6 +258,11 @@ measurements and remaining limitations in the integration plan. Preserve
 subject reduction, the serial lock, file/core limits and no-swap scopes.
 Use the existing guard's supported limits where sufficient; a necessary guard
 extension must remain bounded and receive its own validation.
+After measured allocation failures at 6 GiB with both `o=20` and `o=5`, this
+goal extended the supported explicit `EMDASH_LP_MEMORY_MIB` ceiling to 8192.
+The 2048 default and existing native 6144 profiles remain unchanged. This
+ceiling is supported by the guard, runner and registry; it does not select
+8 GiB for other targets automatically.
 
 For Node 24.11.1 here, isolated `node --test` workers do not inherit V8 heap
 flags supplied only on the command line. Pass those limits through

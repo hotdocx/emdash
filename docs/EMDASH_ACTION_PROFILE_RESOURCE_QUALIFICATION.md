@@ -108,3 +108,40 @@ measured cover owners and atomic staged recipes that compile those owners.
 Other targets retain their default or existing registered settings. Successful
 receipts are reusable only when exact source/object, checker, runner, recipe
 and effective settings still match. The full suite remains in progress.
+
+## Normalization Recipe Follow-Up
+
+The full continuation reached 462 successful targets before the atomic
+`check_short_exact_normalization.sh` recipe failed in
+`monic_image_comparison` at 2 GiB/90s. Its 21-file LP closure is unchanged
+from main and excludes the action-profile owner. The failed group receipt is
+`20260926T065106Z-62898140375e4ec38f418e47f4311450`.
+
+A 6 GiB/180s retry with `o=20,v=1024` passed that target and subsequent owners,
+then exhausted allocation in `short_exact_normalization_projections`:
+`20260926T065724Z-720076f7b87543e793eabf2abdb2917d` (253.433s total recipe
+time, not a per-child timeout). No source or guard was changed.
+
+The retry at 6 GiB/600s per child with more aggressive GC (`o=5,v=1024`) also
+exhausted allocation in `short_exact_normalization_projections`, receipt
+`20260926T070928Z-2171939ce5724a1a8ffe7c244519d54e` (484.368s total recipe
+time). That target therefore has separate measured failures under two GC
+settings with its preceding dependency objects compiled in the fresh recipe.
+
+Under the standing authorization, the guard, runner and registry now support
+an explicit ceiling of 8192 MiB. The default remains 2048 MiB; existing native
+profiles remain 6144 MiB. The deadline ceiling remains 600s, and serial,
+subject-reduction, file/core and no-swap protections are unchanged. The host
+reported about 12.6 GiB available before selecting the single-checker 8 GiB
+experiment. No 8 GiB default or unrelated target profile is introduced.
+
+Validation passed: 29 guard/runner/registry tests, 12 DevOps tests and 10
+native-profile tests. These include inherited hard limits, unchanged defaults,
+explicit 8 GiB acceptance without allocating a large heap, rejection above
+the new ceiling, serialization, deadline behavior and subject-reduction
+bypass rejection. The runner-code change invalidates exact tooling-identity
+reuse of older receipts; retain them as historical evidence.
+
+The next experiment runs only the registered normalization recipe at
+8 GiB/600s per child with `o=20,v=1024`. It is not a full-suite success or a
+waiver of that group. The living plan owns its current process and receipt.

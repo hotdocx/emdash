@@ -47,7 +47,7 @@ def execution_settings(target: Path, env: dict[str, str], timeout_ms: int | None
         raise ValueError("timeout must be 1..600000 milliseconds")
     memory = int(env.get("EMDASH_LP_MEMORY_MIB", str(profile["memoryMiB"])))
     file_limit = int(env.get("EMDASH_LP_FILE_MIB", "64"))
-    if not 32 <= memory <= 6144 or not 1 <= file_limit <= 64:
+    if not 32 <= memory <= 8192 or not 1 <= file_limit <= 64:
         raise ValueError("resource limits exceed the reviewed bounds")
     warnings = env.get("EMDASH_LAMBDAPI_WARNINGS", "0").lower()
     if warnings not in {"1", "true", "yes", "on", "0", "false", "no", "off"}:

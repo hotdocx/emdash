@@ -65,7 +65,7 @@ def load_registry(root: Path = ROOT) -> dict:
         profiled.update(targets)
     for name, profile in data["profiles"].items():
         if (type(profile["memoryMiB"]) is not int or type(profile["timeoutSeconds"]) is not int
-                or not 32 <= profile["memoryMiB"] <= 6144 or not 1 <= profile["timeoutSeconds"] <= 600):
+                or not 32 <= profile["memoryMiB"] <= 8192 or not 1 <= profile["timeoutSeconds"] <= 600):
             raise ValueError(f"out-of-bounds profile: {name}")
     if "default" not in data["profiles"]:
         raise ValueError("missing default profile")
