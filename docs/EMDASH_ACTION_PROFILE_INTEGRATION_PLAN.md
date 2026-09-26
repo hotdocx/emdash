@@ -218,14 +218,30 @@ the target comparison explicitly composes the post-cell with the retained
 inverse of the ordinary observed pre-cell. This is a changed internal
 construction, not a claim that its whole term is unchanged.
 
-There are two concrete prerequisites before this candidate can be promoted.
-Product-projection controls expose distinct whole normal forms at the
-codomain-identity overlap, although their object observations agree. Resolve
-that projection interaction first. The temporary pointwise-equivalence owner
-also has its old unqualified displayed half commented out; qualify and
-restore it under its actual displayed profile before production migration.
-The successful ordinary checks do not discharge either prerequisite. Then
-continue Hom-comparison/introduction and the remaining native consumers.
+The generic product/precomposition folds from that first candidate are now
+rejected. The selected revision computes only the canonical Sigma base-change
+object route and its scoped product observations. Both application orders,
+identity-base and constant-source controls pass; the nucleus has the same
+762 critical-pair participant templates as the earlier corrected nucleus.
+The whole pre/post routes remain distinct. The
+[updated feasibility review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md#selected-canonical-projection-revision)
+records the rule boundary and the additional pattern diagnostic.
+
+Whole Hom-comparison extraction and adjunction introduction now also pass.
+Their original public signatures, supplied comparison/inverse, constructor
+and seven introduction views remain. Two derived public mate-comparison paths
+support five reviewer observations whose statements are unchanged. A joint
+replay passes 178 positive and 48 negative checks across these consumers,
+Gamma/H, native records, paired reindexing and the full profile reviewer.
+
+The temporary pointwise-equivalence owner still has its old unqualified
+displayed half commented out. Qualify and restore that operation before
+production cut migration. Its actual direct-cover consumer and the existing
+`tdapp*` owners must determine the required premise; do not assume that a new
+displayed-transfor classifier or a blanket admission axiom is necessary.
+This is the next semantic investigation. Remaining native/CAS consumers and
+the wider Gray/cubical migration stay in scope. These results are still an
+isolated candidate, not production cut retirement.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -250,7 +266,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | whole Gamma/H and paired-reindex feasibility; no production cut removed | Stable inverse/mate, ordinary K/Q map, native input, all-test records, whole Gamma/H and point-H reviewers pass in the temporary environment. The actual paired-family reindexing owner also passes. [Current review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) records the changed internal target comparison, retained maps, exact receipts and the unresolved whole product identity interaction. Hom-comparison/introduction and remaining native qualification follow. |
+| `API-04` | joint Gamma/H, Hom-comparison/introduction and paired-reindex feasibility; no production cut removed | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The joint 178-positive/48-negative replay includes native records and full profiles. [Current review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) records retained maps, inverse/category metadata, exact receipts and remaining qualification. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | ordinary pointwise assembly prototyped; displayed assembly prerequisite open | Ordinary inverse assembly now takes `StrictTransfor`; C1 callers derive admission internally and retain their supplied pointwise inverses. Restore and qualify the temporarily commented displayed half before promotion. Wider naturality/Catd cuts, direct-cover and retained pseudo consumers remain. |
 | `API-06` | native dependency prototype; wider qualification pending | Source walking-square/orientation and public classified graph are adapted in the temporary native closure; main's represented-comma implementation stays separate. Distinct Gray classifiers, whole inclusions, full graph/interchanger/closure reviewers, directed cubical/simplex consumers and judgmental dimension-two recovery remain to qualify. |

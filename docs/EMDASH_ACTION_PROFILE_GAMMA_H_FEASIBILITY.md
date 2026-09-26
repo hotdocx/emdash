@@ -1,9 +1,9 @@
-# Action-Profile Integration: Gamma/H Feasibility
+# Action-Profile Integration: Gamma/H And Hom-Comparison Feasibility
 
 Date: 2026-09-26
 
-Status: successful ordinary consumer prototype; kernel projection and
-displayed-assembly prerequisites remain before promotion
+Status: joint ordinary/native consumer prototype passes; displayed assembly
+and remaining integration prerequisites still precede production promotion
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-04`, `API-05` and the early Gray dependency in `API-06`.
@@ -15,8 +15,9 @@ preceding ordinary/native tranches. Production remains at `f0f327d6`;
 
 The temporary main-based lax environment now passes the original Gamma,
 whole-homology and point-homology reviewers and the actual paired-family
-reindexing owner. All fourteen public Gamma signatures match main modulo
-whitespace. The primary `kernel_cokernel_adjunctions`,
+reindexing owner. Hom-comparison extraction and adjunction introduction also
+pass in the subsequent revision recorded below. All fourteen public Gamma
+signatures match main modulo whitespace. The primary `kernel_cokernel_adjunctions`,
 `homology_adjunction_families` and `homology_families` files remain
 byte-identical to production. These results qualify selected consumers;
 they do not establish complete native, Gray, displayed or cubical migration.
@@ -80,13 +81,13 @@ The old displayed half relied on ambient strictness too: it is commented out
 only in this ordinary prototype, with its restoration condition in source.
 It must be qualified and restored before production promotion.
 
-## Projection And Comparison Changes
+## First Candidate's Projection And Comparison Changes
 
-The candidate adds a Cat-valued object projection for the stable
+The first candidate added a Cat-valued object projection for the stable
 `hom_precomp_along_fapp0` owner, plus whole first/second product projections
-of that functor. The latter retain a whole owner for subsequent Hom action.
-It also adds the canonical pre-base-change-cell component beta, with the
-explicit identity guard, alongside the inherited post-cell beta. This is
+of that functor. Those three generic rules are rejected in the selected
+revision below. That candidate also added the canonical pre-base-change-cell
+component beta, with the explicit identity guard, alongside the inherited post-cell beta. This is
 new supplied canonical component normality, not a theorem asserting whole
 Sigma strictness or a general lax-transfor classifier.
 
@@ -105,7 +106,7 @@ They add no runtime rule or injectivity claim. Four well-typed endpoint checks
 and four negative typed-reflexivity controls reject different inverse data
 and different applied arguments.
 
-## Warning Classification And Open Projection Interaction
+## Rejected Generic Projection Interaction
 
 The preceding corrected nucleus has 762 critical-pair and 149 pattern
 diagnostics. Adding the Cat-valued object projection gives 764/149; the
@@ -126,14 +127,15 @@ separate their outcomes:
   observations do agree. Both the generic and Cat-specialized identity rules
   report this same typed boundary.
 
-This is a real outstanding projection interaction. The successful Gamma/H
-checks do not resolve it. Review the semantic projection owner and both
-reduction orders before selecting a correction; do not add general strict
-composition or an unrestricted commuting rule merely to lower warning counts.
+This was a real projection interaction despite the successful Gamma/H checks.
+The subsequent revision rejects the three generic rules that introduced it
+and returns the computation to its canonical constructor, as recorded below.
+No general strict composition or unrestricted commuting rule is installed
+merely to lower warning counts.
 The core, stable DefIso and shared family-view LHS audits have zero unreviewed
 inferred slots; that audit does not prove confluence.
 
-## Exact Checks And Recovery
+## First Gamma/H Replay
 
 All checks below used subject reduction, serial 2 GiB/90s guards,
 `OCAMLRUNPARAM=o=20,v=1024`, and the explicit package root
@@ -157,12 +159,12 @@ needed for this slice. Logs/receipts and immutable source blobs are under
 | Applied inverse controls, four positive/four negative | `20260926T122347Z-ec71a14bd694459bb5ea645b8f299a28` | 3.828 |
 | Product identity interactions, four positive/two expected nonconversions | `20260926T122227Z-125b882f5b6948c68ee6941b22672efa` | 3.609 |
 
-The current recovery manifest is
+The recovery manifest for that first snapshot is
 `emdash2/tmp/probes/api_gamma_h_current_manifest.json`, SHA-256
 `d434d595c7ae45a6502a4991b0e5d5489b2746f7f923af07d715282a43e882b6`.
 It records 173 candidate/control files, the unchanged public signatures and
 whole owners, and thirteen exact successful replay closures covering 126
-files. All closure hashes match the current candidate. Other files include
+files. All closure hashes matched that snapshot. Other files include
 failed and superseded experiments and are explicitly not qualified by this
 replay. The nucleus hash is
 `0d56702bf5b20390f9336592c4fcbbe09f152dc0c5cc5a0f7a369dd8dfb3e56b`.
@@ -174,9 +176,130 @@ the expected focused negative observations, respectively receipts
 The earlier pre-cell absence attempt without the object projection was
 ill-typed and is not counted as a semantic negative control.
 
-Next resolve the whole product identity interaction, then restore qualified
-displayed pointwise assembly. Recheck affected actual consumers after either
-change. Hom-comparison/introduction, the remaining native/CAS consumers,
-full Gray/cubical migration, TypeScript alignment and final integration gates
-remain in the living plan. The 589-target production result is carried
-forward unchanged; this prototype has not replaced that production boundary.
+## Selected Canonical Projection Revision
+
+The generic product-projection constructor beta fails subject reduction
+(`20260926T122958Z-e492930e39444e2780ab49438614bd5f`): the product-valued
+endpoint is not recoverable by the checker. Replacing the three generic
+rules with proof-time views also fails subject reduction of the canonical
+pre-cell beta (`20260926T123138Z-bb126ac6d0f9416296edb25bb284bc05`). These
+failures select a different owner boundary; they do not justify removing
+subject reduction or assuming additional strictness.
+
+The selected revision removes the generic Cat-valued precomposition object
+rule and both whole product/precomposition folds. It adds the actual
+canonical Sigma base-change pre-route object observation next to the
+existing post-route observation. That suffices for the pre-cell identity
+beta and preserves the whole precomposition head and its higher action.
+
+When the target family is constant, product projection can occur before
+object application. Four capped companion clauses handle the first
+projection and the typed second projection's general, identity-base and
+constant-source forms. The LHS uses canonical `fapp0` type expressions;
+readability aliases there did not match the already-normalized input.
+Keeping the outer input category as a compound Sigma guard fails the
+identity-base control, so the selected clauses infer that category and
+retain only the necessary typed pair information. These are component
+observations, not whole pre/post equality or whole Sigma strictness.
+
+Both product-observation orders pass, including eight identity-base and
+constant-source specializations. Removing only the companion clauses leaves
+the two after-application positives intact and rejects the two
+before-application conversions, as expected:
+`20260926T125643Z-be0222697a824251859460d51f8fe945` (4.825s).
+That control has its own package root
+`tmp/probes/api_canonical_pre_projection_control/`.
+
+The selected nucleus has 762 critical-pair and 150 pattern diagnostics,
+receipt `20260926T131126Z-44d40bb060444816bb91f564a1ff952b` (3.800s).
+Critical heads, rule families and the complete participant-template multiset
+are identical to the preceding corrected 762/149 nucleus. The one added
+pattern diagnostic is the unused source-family variable in the first capped
+projection. There are no parser issues or unreviewed inferred slots.
+`tmp/probes/api_canonical_sigma_final_warning_delta.json` records the exact
+comparison. This is bounded interaction evidence, not a confluence theorem.
+
+## Hom Comparison And Adjunction Introduction
+
+The complete Hom-comparison data owner now passes its original reviewer:
+twelve positive and four negative assertions. All fifteen public signatures
+are unchanged. Its old reflexive post-naturality proof is replaced by
+`hom_to_path` of the existing laxity cell using C1, followed by the staged
+represented-composition comparison. No new caller square or certificate is
+introduced.
+
+Evaluating the supplied comparison uses the stable DefIso owner. Its inverse
+laws must still mention the original raw maps indexed by `Prof_cat`; silently
+substituting `Functor_cat` inside their nested applications fails. Even the
+isolated metadata reflexivity attempt fails
+(`20260926T125843Z-00dad4e1c4cd4e339f50017633f0cce9`).
+`api_prof_defiso_evaluation_paths.lp` therefore has two scoped proof-time
+component agreements, one per direction, which explicitly compare the base
+with the original opposite/product base and retain P, Q, I and the point.
+Congruence of these paths transports only the inverse-law proofs. Both raw
+operational maps and the supplied whole comparison remain.
+
+The adapter's four positive/four negative checks pass, including rejection
+of a different inverse I and negative runtime conversion. Without importing
+the views, the two reflexivity positives become expected negatives. Both
+warning-enabled closures have 796 critical/150 pattern diagnostics and
+identical categories, heads and rule-family multisets, with no parser issues.
+These comparisons add no runtime inverse cut.
+
+Adjunction introduction retains its structural constructor, all seven
+original proof-time views and all six original public signatures. It stages
+the existing whole input-agreement path before evaluating the stable
+comparison, then uses the Prof-indexed component agreement. Whole unit and
+counit modification proofs therefore keep their native heads and original
+input comparison. Two derived public paths expose the transpose/untranspose
+agreement for callers.
+
+All 33 introduction assertions pass: 25 positive and eight negative. Five
+positive observations now use those paths or their congruence instead of
+typed reflexivity. Their statements and contexts are unchanged; every
+negative and runtime-conversion assertion is unchanged. No new axiom, rule
+or unifier is added to the introduction owner.
+
+## Current Replay And Next Action
+
+The joint reviewer loads adjunction introduction first, then the affected
+canonical projections, Prof views, mates, pointwise profile, Gamma/H,
+native records, paired-family reindexing, Hom extraction and introduction,
+with the complete profile reviewer last. All 178 positive and 48 negative
+assertions pass in 18.357s at the normal serial 2 GiB/90s profile with subject
+reduction and `o=20,v=1024`. Measured maximum child RSS is 1,304,144 KiB.
+
+| Current check | Receipt | Seconds |
+| --- | --- | --- |
+| Joint affected consumer replay | `20260926T130715Z-7732c04cc9ef4f878e2709de5b431a29` | 18.357 |
+| Original Hom-comparison data reviewer | `20260926T130011Z-7aed9a0a96f84460ada20a2498130fde` | 13.279 |
+| Complete adapted introduction reviewer | `20260926T130606Z-720e21acb0c44bf493cf983cc582a064` | 16.171 |
+| Prof component positive/negative controls, warnings enabled | `20260926T130827Z-4b680f53d4394f0c9493106dc7023db5` | 4.187 |
+| Prof component no-view controls, warnings enabled | `20260926T130831Z-fb822707d908409f9b3ca9c9f2fc559a` | 4.183 |
+| API-04R whole/nested accumulation and application orders, six positive/four negative | `20260926T131527Z-d7a2824dc1434ae1b84cd720e794cb82` | 9.133 |
+| API-04R staged mixed-cut rejection and strict positive, one positive/two negative | `20260926T131536Z-2fa034a1d962471ba13d9a77d035735b` | 12.163 |
+
+The two residual-precomposition reviewers also load the introduction owner.
+The staged unqualified preservation theorem remains rejected; the classified
+strict computation and inherited identity boundary remain as recorded in
+`API-04R`.
+
+The current source/replay manifest is
+`emdash2/tmp/probes/api_hom_introduction_current_manifest.json`, SHA-256
+`288008dd45001fac61c791d5a1e44165823036d1147741dd7b55cc81a92bdd5f`.
+It records 190 candidate/control files, eight exact current successful
+receipts covering 135 files, unchanged original public signatures,
+the two added derived paths, and the five proof-term substitutions with
+unchanged statements. Failed and superseded files in the package are
+explicitly not qualified by that manifest.
+The selected nucleus hash is
+`ab48a85136935c5183b87bc0341fbb524a58be61083f1bbd9ad2563475df9965`.
+
+Next qualify and restore displayed pointwise assembly against its actual
+direct-cover consumer and existing internal action owners. The ordinary
+restriction is now explicit, but neither that restriction nor the source
+branch's green checks establish the missing displayed premise. Do not add
+a blanket admission axiom to recover the old unqualified primitive.
+Remaining native/CAS, full Gray/cubical migration, TypeScript alignment and
+final integration gates stay in scope. The 589-target production result is
+carried forward unchanged; this candidate has not retired production cuts.

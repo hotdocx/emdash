@@ -942,12 +942,31 @@ Whole K/Q/H owners retain their original source bytes.
 The ordinary pointwise inverse constructor now requires `StrictTransfor`;
 ordinary callers derive it internally from C1. The displayed half is still
 commented out in the temporary package and must be requalified and restored.
-The new whole product-projection folds also have a measured identity
-interaction: object observations agree, but the whole functor normal forms
-do not. Both are explicit prerequisites, not completed production work.
-The current manifest covers 173 candidate/control files, of which 126 occur
-in the thirteen exact successful replay closures. It does not qualify every
-file in the temporary directory.
+The first candidate's generic whole product folds had a measured identity
+interaction. They are now rejected in favor of the canonical Sigma
+base-change object projection and scoped product observations, retaining the
+whole pre/post owners. General, identity-base and constant-source controls
+pass. The 762 critical-pair participant templates agree with the preceding
+corrected nucleus; one extra unused-pattern diagnostic is recorded. The
+173-file/thirteen-receipt manifest belongs to the preceding Gamma/H snapshot.
+
+The Hom-comparison data owner now derives its post-naturality law from the
+existing cell and C1. Raw component inverse laws retain the original
+`Prof_cat` index, using two scoped proof-time agreements with stable DefIso
+evaluation. Its original twelve positive/four negative reviewer is unchanged
+and passes. Adjunction introduction stages the original input comparison
+before evaluating it; its constructor, seven views and six original public
+signatures remain. Two new derived public mate-comparison paths preserve the
+same observation statements. Five of its 33 reviewer proofs change from
+reflexivity to these paths/congruence; no assertion or runtime observation
+is removed.
+
+The combined replay loads the introduction owner first and passes 178
+positive/48 negative checks, including Gamma/H, native all-test records,
+paired-family reindexing and the full profiles. The displayed assembly
+prerequisite and remaining native/Gray/cubical/TypeScript work are still open.
+The dedicated review records the current exact manifest; it does not qualify
+every file in the temporary package or promote any production cut.
 
 ## Source Path Accounting
 
