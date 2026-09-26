@@ -4814,9 +4814,11 @@ coherence fields.
 This common owner has three checked profile readings. An arbitrary ambient
 functor retains a potentially nonidentity directed compositor. An
 `IsStrictFunctor` proof constrains that same selected binary cell by an
-endpoint path and equality with its `path_to_hom`; it neither postulates a
-separate strict tetrahedron nor currently forces a literal identity normal
-form. If the target fibres are path categories, both the compositor triangle
+endpoint path and equality with its `path_to_hom`, derived by evaluating the
+whole compositor property. The opaque classified view has identity
+compositor computation; arbitrary raw evidence does not install that runtime
+fold on its carrier. No separate strict tetrahedron is postulated.
+If the target fibres are path categories, both the compositor triangle
 and the dependent component emitted by `dependent_tetrahedron_map` are
 equalities, and path symmetry gives their inverses. The pseudo reading
 therefore follows from the codomain shape rather than an added inverse record.
@@ -5475,27 +5477,30 @@ IsStrictCell_C(c : Hom_C(x,y))
   := Sigma p : x = y, c = path_to_hom(p)
 
 IsStrictFunctor(F)
-  := Pi X Y Z g f, IsStrictCell(fapp1_compositor(F,g,f))
+  := Pi X Y Z g, IsStrictCell(strict_functor_compositor_transf(F,X,g))
 
-StrictFunctor(A,B)
-  := Sigma F : Functor(A,B), IsStrictFunctor(F).
+make_strict_functor(F,p) : StrictFunctor(A,B).
 ```
 
-`StrictFunctor` is a rigid record-like facade whose carrier reduces to that
-exact Sigma, so category indices remain recoverable on rule left-hand sides.
-`strict_functor_intro`, `strict_functor_underlying`, and
-`strict_functor_evidence` are its constructor and projections. The stable
-`strict_functor(S)` view embeds a package in the ambient functor classifier;
-constructor-visible point and hom action computes to the packaged carrier,
-while opaque higher-produced packages retain the evidence discriminator.
+`StrictFunctor` is now opaque. Admission internalizes a raw carrier and its
+whole strictness certificate; the resulting object does not expose that
+certificate. Visible admissions compare proof-time by carrier, without a
+global proof-irrelevance principle for `IsStrictFunctor`.
 
-The old code-specific rule reducing `fapp1_compositor` to a literal identity
-is retired. For arbitrary semantic evidence such a blanket rule is not
-subject-reduction sound: strictness is instead the stored equality relating
-the one existing compositor to an equality-induced arrow. The prototype still
-carries historical global endpoint-identification cuts. Reflecting strictness
-evidence into profile-local judgmental computation, and migrating those global
-cuts, is a later consolidation task and is not silently claimed here.
+The stable `strict_functor(S)` view retains classified action. Point action
+computes for a visible admission, while whole and capped hom action retain
+the profile. The explicit `strict_functor_underlying(S)` raw observation
+computes to the admitted carrier; the two views compare proof-time.
+Profile-local composition and the exact existing internal-action compositor
+compute under the stable head. Canonical `strict_functor_is_strict(S)` is
+derived by reflexivity from those computations, independently of admission
+evidence. Capped evidence is evaluation of the whole property.
+
+`StrictFunctor_cat` is the full category on classified strict objects, with
+ambient `Transf_cat` homs and a whole inclusion. The historical global
+composition/naturality cuts remain during the integration's consumer
+migration; these new classified computations alone do not establish ambient
+lax noncollapse.
 
 The selected internal Hom is the category
 
@@ -5503,8 +5508,9 @@ The selected internal Hom is the category
 GrayHom_lax(A,B),
 ```
 
-whose objects are `StrictFunctor(A,B)` packages and whose homs are the
-existing `Transf_cat` homs between their stable ambient views. Identity,
+whose objects are `StrictFunctor(A,B)` objects. Its current homs still use
+`Transf_cat` between their stable views; the integration's subsequent lax
+transfor tranche will supply the conventional lax-arrow classifier. Identity,
 composition, modifications, and every subsequent iterated hom therefore
 reuse the ambient calculus. The whole `grayhom_lax_include_func` exposes this
 profile inside `Functor_cat(A,B)` without identifying the two category heads.

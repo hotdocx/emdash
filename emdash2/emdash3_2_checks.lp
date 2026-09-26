@@ -26214,9 +26214,9 @@ assert [A B : Cat] (F : τ (Functor A B))
       A B F F (@id (Functor_cat A B) F) X Y Z g f;
 
 // catalog-area: Computational strict functors and profiled Gray hom
-// Strictness is selected by a code/decoder boundary. The profile changes the
-// object sort while reusing the complete ambient transfor and higher-cell
-// tower.
+// Strictness is selected by an opaque classifier and stable action view.
+// The full category reuses the ambient transfor and higher-cell tower;
+// the existing Gray arrow boundary remains transitional in this tranche.
 assert [A B : Cat]
   (S : τ (@StrictFunctor A B)) ⊢
   S : τ (Obj (@GrayHom_lax A B));
@@ -26260,13 +26260,50 @@ assert [A B : Cat]
         (@strict_functor A B X)
         (@strict_functor A B Y));
 
-// A strict package retains semantic evidence about the already extracted
-// ambient compositor; it introduces no parallel or literal-id cell.
+// A classified strict object has canonical evidence about the existing
+// whole compositor, independently of the admission certificate.
 assert [A B : Cat]
   (S : τ (@StrictFunctor A B)) ⊢
-  @strict_functor_evidence A B S
+  @strict_functor_is_strict A B S
   : τ (@IsStrictFunctor
-      A B (@strict_functor_underlying A B S));
+      A B (@strict_functor A B S));
+
+// The property is whole in the final source Hom, with capped evidence
+// derived by evaluating the existing compositor transformation.
+assert [A B : Cat] (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F))
+  [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) ⊢
+  p X Y Z g
+  : τ (@IsStrictCell
+      (@Functor_cat (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z)))
+      (@strict_functor_compositor_lhs_func A B F X Y Z g)
+      (@strict_functor_compositor_rhs_func A B F X Y Z g)
+      (@strict_functor_compositor_transf A B F X Y Z g));
+
+assert [A B : Cat] (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F))
+  [X Y Z : τ (Obj A)] (g : τ (Hom A Y Z)) (f : τ (Hom A X Y)) ⊢
+  @strict_functor_compositor_evidence A B F p X Y Z g f
+  : τ (@IsStrictCell
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@strict_functor_compositor_lhs A B F X Y Z g f)
+      (@strict_functor_compositor_rhs A B F X Y Z g f)
+      (@fapp1_compositor A B F X Y Z g f));
+
+// Admission witnesses are not observable from the opaque classifier.
+assert [A B : Cat] (F : τ (Functor A B))
+  (p q : τ (@IsStrictFunctor A B F)) ⊢
+  @eq_refl (@StrictFunctor A B) (@make_strict_functor A B F p)
+  : τ (@= (@StrictFunctor A B)
+      (@make_strict_functor A B F p) (@make_strict_functor A B F q));
+
+assert [A B : Cat] (S : τ (@StrictFunctor A B)) ⊢
+  S : τ (Obj (@StrictFunctor_cat A B));
+
+assertnot [A B : Cat] (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F)) ⊢
+  @strict_functor A B (@make_strict_functor A B F p) ≡ F;
 
 // Ambient functors are not silently promoted into the strict object sort.
 assertnot [A B : Cat]

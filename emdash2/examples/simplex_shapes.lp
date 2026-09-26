@@ -120,19 +120,19 @@ assert ⊢
       simplex_vertex_one_func
       (@id_func Terminal_cat);
 
-// Every selected realization retains semantic strictness evidence over the
-// intrinsic compositor of its packaged carrier.
+// Every selected realization reconstructs canonical strictness over its one
+// intrinsic compositor; no admission certificate is projected.
 assert
   (p n : τ Nat_grpd)
   (R : τ (@SelectedFaceRealization p n)) ⊢
-  @strict_functor_evidence
+  @strict_functor_is_strict
     (@DirectedSimplex_cat p)
     (@DirectedSimplex_cat n)
     (@selected_face_data p n R)
   : τ (@IsStrictFunctor
       (@DirectedSimplex_cat p)
       (@DirectedSimplex_cat n)
-      (@strict_functor_underlying
+      (@strict_functor
         (@DirectedSimplex_cat p)
         (@DirectedSimplex_cat n)
         (@selected_face_data p n R)));

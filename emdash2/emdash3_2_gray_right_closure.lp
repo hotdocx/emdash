@@ -55,7 +55,7 @@ symbol gray_curry_R_strict
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C)
     )
-≔ @strict_functor_intro
+≔ @make_strict_functor
     (@GrayRightSource A B C)
     (@GrayRightTarget A B C)
     (@gray_curry_R_func A B C)
@@ -82,7 +82,7 @@ symbol gray_uncurry_R_strict
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C)
     )
-≔ @strict_functor_intro
+≔ @make_strict_functor
     (@GrayRightTarget A B C)
     (@GrayRightSource A B C)
     (@gray_uncurry_R_func A B C)

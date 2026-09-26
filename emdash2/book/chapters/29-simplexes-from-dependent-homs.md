@@ -217,7 +217,7 @@ $$
 \operatorname{Hom}_{\sum E}((x,u),(y,v))
   \simeq
   \sum_{p:x\to y}
-    \operatorname{Hom}_{E(y)}(E[p](u),v).
+    \operatorname{Hom}_{E(y)}(E[p]{(u)},v).
 \tag{29.12}
 $$
 
@@ -229,7 +229,7 @@ every stage is built from the existing `Hom`, dependent `Sigma`, and
 dependent-hom owners.
 
 With both total endpoints fixed, (29.12) projects $(p,\alpha)$ to $p$ and,
-through covariant fibre action, to $E[p](u)$ in the already fixed fibre
+through covariant fibre action, to $E[p]{(u)}$ in the already fixed fibre
 $E(y)$. The latter is internal transport, not the independently varying
 simplex target supplied by the outer `PathOut` Sigma in (29.8).
 
@@ -350,7 +350,9 @@ The third case is where higher action matters: a face is not only a function
 on stored points, but a functor on the outgoing-path category. The result
 retains its own hom action. Direct and sequential face presentations are not
 globally collapsed to one judgmental normal form; the structural recursion
-provides the selected whole observation.
+provides the selected whole observation. The focused edge-zero-two followed
+by vertex-one comparison does compute to the direct whole face; this
+particular observation is not a general composition theorem for face codes.
 
 ## 29.6 The Ordinal Source Grows By A Transformation
 

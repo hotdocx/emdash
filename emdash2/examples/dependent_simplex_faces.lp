@@ -308,9 +308,10 @@ assert [C : Cat]
         simplex_edge_zero_two_code)
       simplex_vertex_one_code;
 
-// The direct and sequential opaque whole functors deliberately do not become
-// judgmentally equal merely because their FaceCode indices compose.
-assertnot [C : Cat]
+// This selected direct/sequential face comparison computes in the current
+// ordinary profile environment, matching the source branch's final observer.
+// It does not assert a general higher face-action composition theorem.
+assert [C : Cat]
   (x0 : τ (Obj C))
   (e01 : τ (Obj (@DependentSimplex1_cat C x0))) ⊢
   @dependent_simplex_face_func

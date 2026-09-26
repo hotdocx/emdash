@@ -314,7 +314,8 @@ Focused classifier, closure, graph-profile, simplex-profile and dimension-two
 consumers pass. The book's 187 evidence claims, source assembly, typography
 and KaTeX checks passed before the final explanatory face sentence; final
 document checks will include it. Catalog, registry and source TOC pass.
-The new ordinary rule/consumer tranche is not yet checkpointed. The first
+The ordinary rule/consumer tranche now has its local qualification boundary
+below; full integration CI remains outstanding. The first
 bounded `make check` run passed 86 targets and stopped on an unchanged
 affine-cover allocation failure. An exact-receipt continuation reused 76
 matching successes, then exposed a zero-byte compiled parent. The
@@ -343,12 +344,31 @@ allocation. Recipe-only retry 96993 also failed at that projection owner with
 with defaults unchanged and 51 guard/runner/registry/DevOps/native-profile
 tests green. Session 86306 passed the full normalization recipe at 8 GiB/600s
 with `o=20,v=1024`; its receipt is in the resource report. Full-suite
-continuation 33024 uses `logs/api-ordinary-check-eight-gib-resume.log`.
+continuation 33024 completed with all 589 distinct registered check targets
+passed, no exclusions and exit 0. Its log is
+`logs/api-ordinary-check-eight-gib-resume.log`; its result manifest is
+`logs/api-ordinary-check-results.json`, SHA-256
+`2c893c3a7d1bc3ecf30f6503c3627b03e9e2c95bc9f2b1e25399c43f48613756`.
+The additional current-input audit matches all 589 targets to successful
+source/group receipts with exact checker, tooling and effective settings;
+their IDs are in `logs/api-ordinary-check-final-evidence.json`.
 Earlier runner hashes cannot be silently treated as the new tooling identity.
+All six affected production reviewers now have fresh successful receipts
+under the current runner (2026-09-26 UTC):
+
+| Reviewer | Receipt |
+| --- | --- |
+| `examples/gray_profiles.lp` | `20260926T083451Z-d61f9bbd22f7483881c3ee3559284299` |
+| `examples/gray_right_closure.lp` | `20260926T083452Z-de5ed4fc13194a019e7c9cd846d43ad1` |
+| `examples/gray_transformation_graph_profile.lp` | `20260926T083453Z-1ac949589102475e9f7945a197acbb39` |
+| `examples/simplex_shapes.lp` | `20260926T083455Z-e19f7b6759ac43468b494bff5b8ca964` |
+| `examples/dependent_simplex_profiles.lp` | `20260926T083456Z-14f23457981147f7ae367eb8a51694d3` |
+| `examples/dependent_simplex_faces.lp` | `20260926T083457Z-aef51080863d4814bed4bf1dc5fa2a0b` |
+
 The TypeScript probe-bridge regression
 also passes and is checkpointed separately at `2653f6fd`.
-The previous session handles 46872, 33123, 8836, 59878 and 22260 are terminal. Inspect the actual
-current process/handle on continuation; this text is not liveness evidence.
+The previous session handles 46872, 33123, 8836, 59878, 22260 and 33024 are terminal.
+Inspect actual process state on continuation; this history is not liveness evidence.
 Full health/formal CI and the remaining goal tranches are outstanding.
 
 Update: session 22260 is terminal with 426 successful targets recorded before
@@ -719,6 +739,10 @@ The corrected nucleus has 762 critical and 149 pattern diagnostics, compared
 with 777/149 for the extra-join variant and 816/149 before correction. The
 warning parser has no failures. These totals locate the removed overlaps;
 they do not establish confluence. No production cut is removed yet.
+The full corrected profile closure also passes with warnings enabled:
+`20260926T083459Z-ef905a4882064ad0a0f1d498a57a3303`, 5.799s,
+1,038 critical/149 pattern diagnostics and no parser failures. This is the
+complete temporary profile closure, not the transitional production owner.
 
 ### New Main Consumers Over The Corrected Candidate
 
@@ -738,6 +762,12 @@ active production package. Older cluster/canonical receipts remain separate.
 | Complete adapted kernel-presentation owner | Pass, `20260926T080744Z-8e87af7ef1444273a0cef275cf08aad1`, 8.558s |
 | Kernel-presentation reviewer with explicit action qualifications | Pass, `20260926T081558Z-a75360b80dcf4034ab237b97b3057730`, 13.146s |
 | Raw ordinary kernel-map observation through derived admission and selected uniqueness | Pass, `20260926T082842Z-bf728470fa284671b65e88c86ceb60e7`, 6.930s |
+| Raw ordinary kernel-map positive, runtime noncollapse and unrelated-map controls | Pass, `20260926T083444Z-bcd97153a477436ca792f175fd29b3b0`, 6.938s |
+| Complete adapted cokernel-presentation owner and reviewer | Pass, `20260926T084121Z-71709a5f09c44d73a0a59d863d60d16b`, 6.727s |
+| Raw ordinary cokernel-map adapter with positive/noncollapse controls | Pass, `20260926T084128Z-b7debb9d178d49d085d8756b1fa75f7f`, 6.904s |
+| Unchanged whole native homology-adjunction family owner | Pass, `20260926T084834Z-b32a4b7f7dd445debf50cf639a00ad30`, 10.855s |
+| Actual raw-pair observation with original-arrow projections and derived ordinary chain law | Pass, `20260926T085103Z-188020366f364ccca197770c87b6aa97`, 6.950s |
+| Complete adapted homology-family reviewer | Pass, `20260926T085318Z-b8579b7680f742bd9bdadb97f25e4875`, 15.647s |
 
 Diagram evaluation retains every public signature. Its composition path now
 uses the supplied C1 and the existing ordinary functor-category closure
@@ -773,9 +803,43 @@ universal uniqueness. Thus different proof-bearing factors are compared by
 their actual maps, without proof irrelevance. The public observation retains
 the original K, raw eta and ordinary hypothesis; it asks callers for no new
 square or strictness certificate. No new rule, unifier or axiom is introduced
-by this adapter. Its positive/noncollapse/unrelated-arrow reviewer is the next
-check. Do not infer C1 from preadditive hom sethood or narrow whole K/Q data.
-Warning and downstream qualification still precede promotion.
+by this adapter. Its positive/noncollapse/unrelated-arrow reviewer passes.
+The corresponding Q owner and ordinary adapter also pass, preserving the
+original whole Q and actual selected colift. Both changed owner LHS audits
+report no unreviewed slots. Do not infer C1 from preadditive hom sethood or
+narrow whole K/Q data. Warning and downstream qualification still precede
+promotion.
+
+The next actual consumer, `homology_family_selected_views`, required more
+than replacing its unqualified Q map helper. Its selected-object observations
+also import kernel mates and the legacy zero-arrow annihilator package. The
+first complete review fails in the imported unqualified component-naturality
+theorem (`20260926T084846Z-59069c212c874343ae9b75f3ce2989fb`). Ordinary
+zero-arrow naturality and chain laws now use the C1-derived path; raw incoming,
+tip and outgoing arrow observations keep their original general signatures.
+The extracted actual `homology_family_pair` observation checks with C1, both
+original-arrow projection betas and a runtime noncollapse control. This
+changes its derived chain proof, not its two arrows or the raw-pair data type.
+
+The selected kernel-lift and H-object observations propagate that ordinary
+hypothesis; the primary whole lift functor, K/Q structures, H and its input
+transformation remain unchanged. The next failure is the old selected-lift
+reflexivity proof behind the stable inverse view
+(`20260926T085145Z-7a24739358a64b4ea38593c6e133dddb`). Applying the existing
+whole `adjunction_transpose_semantic_path` at h before the already-existing
+selected-lift comparison resolves it. No additional rewrite, unifier or axiom
+is needed for that fix.
+
+The complete adapted homology-family reviewer now passes nine positive
+checks, two negative checks and its further-Hom query. Original normal
+identity and boundary-arrow observations remain, raw H composition is a
+negative runtime control, and its positive ordinary composition path uses
+that same H. Only the selected observations need C1. The independent
+`homology_adjunction_families`, `homology_families` and
+`kernel_cokernel_adjunctions` owners are verified byte-identical to main.
+The candidate files remain in the isolated package; the failed predecessor
+sources and receipts are retained. Whole native snake, all-test contracts,
+Gamma/H assembly and remaining ordinary consumers still need qualification.
 
 ## Source Path Accounting
 

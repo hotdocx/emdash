@@ -144,42 +144,44 @@ $$
 The endpoint path is explicit. This matters because the prototype still has
 historical cuts that identify several strict endpoints judgmentally; the
 property continues to say something meaningful after those cuts are moved to
-their proper profiles. Applying it to every binary compositor gives
+their proper profiles. Apply it to the whole compositor transformation
+$\Phi^F_{X,g}$, whose component at $f$ is $\phi^F_{g,f}$. For an ambient
+carrier $F$ and evidence $p$ this gives
 
 $$
 \begin{aligned}
 \mathsf{IsStrictFunctor}(F)
   &\equiv
-    \prod_{f,g}\mathsf{IsStrictCell}(\phi^F_{g,f}),\\
-\mathsf{StrictFunctor}(A,B)
-  &\equiv
-    \sum_{F:\operatorname{Functor}(A,B)}
-      \mathsf{IsStrictFunctor}(F).
+    \prod_{X,Y,Z,g}\mathsf{IsStrictCell}(\Phi^F_{X,g}),\\
+\mathsf{makeStrict}(F,p)
+  &:\mathsf{StrictFunctor}(A,B).
 \end{aligned}
 \tag{28.6}
 $$
 
-Thus the evidence itself is the proof-carrying code; there is no second
-grammar of strict functors. In the logical framework the outer
-$\mathsf{StrictFunctor}(A,B)$ name is nevertheless kept as a rigid
-record-like head whose carrier is exactly the second line of (28.6). This
-retains the indices $A$ and $B$ when a rule must invert a package. Its
-constructor and projections recover the ambient functor and its proof.
+The property remains witness-rich, but the classifier is opaque. Admission
+internalizes the certificate; the classified object does not reveal which
+certificate was chosen. Visible admissions compare at proof time by their
+ambient carriers. This does not assert proof irrelevance for the property
+itself, and it introduces no second grammar of strict functors.
 
 A stable view, written $\operatorname{strict}(S)$, places such a package back
-in the ambient functor classifier. When the package constructor is visible,
-point and hom action compute to the packaged carrier. When a strict package is
-itself returned by higher action, the stable head remains visible instead of
-prematurely erasing the evidence discriminator.
+in the ambient functor classifier. For a visible admission its point action
+computes, while its hom action retains the classified head. The explicit raw
+observation $\operatorname{underlying}(S)$ recovers the admitted carrier and
+its action. The stable and raw presentations compare at proof time.
 
-There is a deliberate limit to the present computation. The former rule that
-reduced every selected compositor to a literal identity has been retired: an
-arbitrary proof of $\mathsf{IsStrictCell}(c)$ identifies $c$ with an
-equality-induced arrow, and does not justify that blanket rewrite by subject
-reduction. A later consolidation will move the historical global strict cuts
-to evidence-bearing functor and transformation profiles. The current package
-records the correct semantic information without anticipating that normal-form
-migration.
+The stable view owns strict composition and identity computation of the
+existing whole internal-action compositor. Canonical strictness evidence is
+derived from these computations, independently of the admission certificate.
+Capped evidence is obtained by evaluating the whole property. Arbitrary raw
+evidence does not install a blanket identity rule on its carrier.
+
+The full category $\mathsf{StrictFunctor}_{\mathrm{cat}}(A,B)$ now packages
+these objects with all ambient transformations and their higher homs. The
+historical global composition/naturality cuts remain during the active
+integration's consumer migration. Classified computation alone does not
+establish ambient lax noncollapse.
 
 This still requires no second functor theory. Define the profiled internal hom
 
@@ -208,17 +210,18 @@ between transformations are the existing modification categories, and every
 subsequent hom is reused. A whole inclusion acts as the identity on this shared
 transformation tower.
 
-The word *lax* in (28.7) describes the arrow profile. Objects are functors
-equipped with strictness evidence; arrows are the ambient transformations whose
-off-diagonal action retains laxity. The category is not definitionally the
+At this intermediate integration boundary, (28.8) still describes the ambient
+transformation homs of the existing Gray interface. The subsequent
+transformation-profile tranche will select classified conventional lax arrows.
+Objects already use the opaque strict classifier. The category is not definitionally the
 ambient functor category, and an arbitrary ambient functor is not silently
 accepted as one of its objects.
 
 The selected identity illustrates the separation. It is the ordinary identity
-functor paired with supplied strictness evidence. Gray curry, uncurry, join
+functor admitted with supplied strictness evidence. Gray curry, uncurry, join
 maps, and transformation graphs follow the same pattern: first construct the
-ordinary whole functor, then retain an $\mathsf{IsStrictFunctor}$ proof about
-its existing compositor. The proof may initially be supplied where its full
+ordinary whole functor, then supply an $\mathsf{IsStrictFunctor}$ proof about
+its existing whole compositor for admission. The proof may be supplied where its full
 internal derivation is not yet needed, but it can never conceal an independent
 forward cell because the property fixes that cell in its own type.
 
@@ -230,13 +233,13 @@ duplication is reserved for a genuinely different classifier or computation.
 <!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
 
 > **Formal status — checked.** Evidence `GRAY-COMPUTATIONAL-PROFILE`.
-> `IsStrictFunctor` constrains the existing extracted compositor, and
-> `StrictFunctor` is its exact carrier/evidence package behind a rigid indexed
-> facade. Constructor-visible stable-view action computes to the carrier.
-> GrayHom_lax reuses the complete ambient transformation and higher-hom tower;
-> no duplicate strict-functor grammar, compositor, modification hierarchy, or
-> broad category-head conversion is introduced. Reflection of strict evidence
-> into judgmental computation remains part of the later global-cut migration.
+> `IsStrictFunctor` constrains the existing whole compositor. `StrictFunctor`
+> admits carriers opaquely, with stable classified action, an explicit raw
+> observation and canonical evidence independent of the admission certificate.
+> `StrictFunctor_cat` reuses the complete ambient transformation tower.
+> GrayHom_lax retains its existing ambient homs at this integration stage;
+> global-cut retirement and classified lax Gray arrows remain in progress.
+> No duplicate functor grammar or compositor is introduced.
 
 ## 28.3 One Selected Right Closure
 

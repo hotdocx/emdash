@@ -173,8 +173,10 @@ compatibility requirements.
 ## Current Progress And Next Action
 
 Overall status: early production integration, with substantially broader
-feasibility evidence. The ordinary opaque classifier is implemented in the
-working tree and awaits its validation checkpoint. The active nucleus still
+feasibility evidence. The ordinary opaque classifier is implemented and its
+local tranche is qualified by the complete 589-target registered `check`
+suite, all six affected reviewers, owner-position/warning evidence, current
+catalog/health snapshots and book checks/render. The active nucleus still
 matches baseline main; no production global composition/naturality cut has
 been retired. Gray/lax-arrow, inherited path-cubical and TypeScript migration,
 plus complete integration qualification, remain ahead.
@@ -194,16 +196,26 @@ The ordinary selected-map observation for original K on raw eta now checks
 through internally C1-derived opaque admission, explicit carrier comparison
 and existing selected-kernel uniqueness. The adapter adds no rule, unifier,
 axiom or caller-supplied square/strictness certificate. Its positive and
-noncollapse reviewer is next. An arbitrary-target observation remains
-explicitly classified. The same distinction must inform the subsequent Q
-and native selected-view consumers.
+noncollapse reviewer passes, as do the corresponding Q owner and ordinary
+adapter. An arbitrary-target observation remains explicitly classified.
+The selected view of H and its zero-arrow/mate dependencies now pass their
+complete adapted reviewer. Ordinary zero laws use C1, the raw-pair observer
+retains both original arrows, and the selected-lift comparison stages the
+existing whole mate-to-semantic equality. The primary whole H/K/Q owners
+remain unchanged in that probe. Continue to the actual native input,
+all-test and Gamma/H consumers before production cut retirement.
 
-In parallel with that independent proof work, finish the already-running
-589-target production `check` continuation, then refresh the affected
-reviewers and synchronize the ordinary tranche's catalog/health/documents
-before its local checkpoint. Inspect actual job state before resuming; the
-resource and runner history below is retained evidence, not liveness. No
-full formal CI or integration completion is claimed by a partial suite.
+The 589-target production `check` continuation is terminal with success and
+no exclusions. Its result manifest is
+`emdash2/logs/api-ordinary-check-results.json`, SHA-256
+`2c893c3a7d1bc3ecf30f6503c3627b03e9e2c95bc9f2b1e25399c43f48613756`.
+An additional audit matches all 589 targets to successful receipts with exact
+current source/object, checker, runner and effective settings identity;
+`emdash2/logs/api-ordinary-check-final-evidence.json` records their IDs. This
+is the local ordinary-classifier checkpoint boundary. Complete formal CI
+(currently 1,293 registered targets), durable clean-checkout resource routing, cross-layer conformance
+and final integration qualification remain required by `API-10`. The resource
+and runner history below is retained evidence, not a live-job instruction.
 
 ## Work Sequence And Living Ledger
 
@@ -212,11 +224,11 @@ full formal CI or integration completion is claimed by a partial suite.
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
 | `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
 | `API-02` | first controls complete; no semantic promotion | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
-| `API-03` | ordinary classifier implemented; validation in progress | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory are in the working tree. Direct callers are migrated. A measured inclusion projection beta preserves both action orders and higher action. Global cuts and Gray arrows remain transitional until API-04/05/06. |
+| `API-03` | local ordinary tranche qualified | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory; direct callers migrated. The inclusion projection beta preserves both action orders and higher action. All 589 registered check targets, six affected reviewers and proportional documentation/MathOps gates pass. Global cuts and Gray arrows remain transitional until API-04/05/06; full integration CI remains API-10. |
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
-| `API-02M` | measured cover replays and consumers qualified | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): both unchanged cover owners compile at 6 GiB/180s; first exactness and the downstream consumer pass at defaults after parent compilation. Standing user authorization covers needed measured resource increases; full-suite reintegration remains in progress. |
-| `API-04` | inverse-action feasibility; no production cut removed | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. The current experiment keeps evaluated DefIso projections stable through composite cancellation, following the source's mapped-inverse owner design. |
+| `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
+| `API-04` | inverse and ordinary H feasibility; no production cut removed | Retire ambient composition cuts and rehome inverse/equivalence/profunctor operations; adapt ordinary adjunction/Gamma/H and native consumers. Stable evaluated inverse/mate consumers, original K/Q ordinary map observations, zero-arrow/raw-pair observations and the full adapted H-family reviewer pass in the corrected temporary environment. Remaining native/all-test and Gamma/H qualification is open. |
 | `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
 | `API-05` | pending | Ordinary/displayed naturality, residual Catd/displayed cuts, canonical ordinary evidence, direct-cover and retained pseudo consumers. |
 | `API-06` | pending | Distinct Gray classifiers, whole inclusions, graph/interchanger/closure and directed cubical/simplex consumers; judgmental dimension-two recovery. |
@@ -346,9 +358,9 @@ executable evidence.
   in the old runner; `31689948` fixes that validation defect. The rebuilt
   object loads and its original affine-cover consumer passes. Old receipts
   cannot be silently relabelled as corrected-runner evidence.
-- Next: finish the bounded suite under the corrected runner, complete the
-  ordinary tranche's documentation/health qualification and checkpoint it.
-  Then rehome strict inverse/equivalence action before removing the capped
+- The ordinary tranche's bounded suite and documentation/health qualification
+  are now green. Subsequent work rehomes strict inverse/equivalence action
+  before removing the capped
   ambient cut; use named evaluation and the newer Hom-comparison consumer
   to qualify the mapping boundary. The final strict-action source owner
   already checks as an isolated feasibility probe against the ordinary port.
@@ -376,14 +388,14 @@ executable evidence.
   child with `o=20,v=1024`, receipt
   `20260926T073103Z-666ff1d96c2146519a3b393114d25ac4` (388.071s total).
   Guard extension and feasibility ledger are checkpointed at `f4a3aac1`.
-  Current full-suite continuation is session 33024, log
+  Full-suite continuation 33024 is now terminal with all 589 targets passed,
+  no exclusions and exit 0. Its log is
   `emdash2/logs/api-ordinary-check-eight-gib-resume.log`. The runner-code
   change means earlier receipts remain historical execution evidence, not
   exact-current-tooling resumable results.
-  Re-poll the handle or inspect actual process state before taking a wait or
-  restart decision. The ordinary mathematical changes are intentionally
-  still unstaged pending qualification; validation and baseline-import repairs
-  were checkpointed separately.
+  The result set was checked against all 589 distinct registry members.
+  Validation and baseline-import repairs were checkpointed separately from
+  this now-qualified ordinary mathematical tranche.
 
 ### Authorized Bounded Resource Experiment
 
@@ -483,8 +495,8 @@ ordinary strictness candidate also rechecks after cut retirement. Raw-F inverse
 mapping and the existing ordinary equivalence-transport consumer pass in
 `tmp/probes/api_ordinary_profile_cluster/`, preserving the public signature
 and both selected inverse arrows. Next use those qualified ordinary paths
-to migrate the newer native consumers. The active library still awaits its
-ordinary-tranche validation checkpoint before any production cut retirement.
+to migrate the newer native consumers. The ordinary tranche is now qualified;
+production cut retirement still requires the coherent consumer migration.
 
 Book checks pass for the final working text: 46 sources, 187 evidence claims
 and 3,124 math spans. Catalog, registry, source TOC, header/reference lint and

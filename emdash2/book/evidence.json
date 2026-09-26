@@ -4106,7 +4106,7 @@
     },
     "GRAY-COMPUTATIONAL-PROFILE": {
       "status": "checked",
-      "statement": "IsStrictFunctor constrains the existing extracted compositor, StrictFunctor is its exact carrier/evidence Sigma package behind a rigid indexed facade, and constructor-visible strict_functor action computes to the carrier; GrayHom_lax uses those packages as objects and reuses the ambient Transf_cat tower without a duplicate code grammar or compositor.",
+      "statement": "IsStrictFunctor constrains the existing whole compositor. StrictFunctor is an opaque classifier with stable classified action, explicit raw-carrier observation and canonical evidence independent of admission certificates. StrictFunctor_cat reuses the ambient transfor tower; GrayHom_lax still has ambient homs during the ongoing global-cut and lax-arrow migration.",
       "owners": [
         {
           "file": "emdash3_2_gray_profiles.lp",
@@ -4136,7 +4136,7 @@
         },
         {
           "file": "examples/gray_profiles.lp",
-          "symbol": "strict_functor_evidence"
+          "symbol": "strict_functor_is_strict"
         },
         {
           "file": "examples/gray_profiles.lp",
@@ -4184,7 +4184,7 @@
         },
         {
           "file": "examples/gray_right_closure.lp",
-          "symbol": "gray_curry_R_is_strict"
+          "symbol": "strict_functor_is_strict"
         },
         {
           "file": "examples/gray_right_closure.lp",

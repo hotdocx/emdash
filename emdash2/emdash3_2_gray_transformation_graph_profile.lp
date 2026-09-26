@@ -39,7 +39,7 @@ symbol strict_gray_transf_graph
     (@strict_functor B C SF)
     (@strict_functor B C SG)))
   : τ (@StrictFunctor B (@LaxArrow_cat C))
-≔ @strict_functor_intro
+≔ @make_strict_functor
     B
     (@LaxArrow_cat C)
     (@gray_transf_graph_func

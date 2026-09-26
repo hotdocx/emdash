@@ -91,7 +91,7 @@ constant symbol join_fst_is_strict
 symbol strict_join_fst
   (A B : Cat)
   : τ (@StrictFunctor A (@Join_cat A B))
-≔ @strict_functor_intro
+≔ @make_strict_functor
     A (@Join_cat A B)
     (@join_fst_func A B)
     (@join_fst_is_strict A B);
@@ -104,7 +104,7 @@ constant symbol join_snd_is_strict
 symbol strict_join_snd
   (A B : Cat)
   : τ (@StrictFunctor B (@Join_cat A B))
-≔ @strict_functor_intro
+≔ @make_strict_functor
     B (@Join_cat A B)
     (@join_snd_func A B)
     (@join_snd_is_strict A B);
@@ -127,7 +127,7 @@ symbol strict_join_map
   (F : τ (@StrictFunctor A A2))
   (G : τ (@StrictFunctor B B2))
   : τ (@StrictFunctor (@Join_cat A B) (@Join_cat A2 B2))
-≔ @strict_functor_intro
+≔ @make_strict_functor
     (@Join_cat A B)
     (@Join_cat A2 B2)
     (@join_map_func

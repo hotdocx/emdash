@@ -25,11 +25,17 @@ assert [A B C : Cat] ⊢
   ≡ @gray_curry_R_func A B C;
 
 assert [A B C : Cat] ⊢
-  @strict_functor_evidence
+  @strict_functor_is_strict
     (@GrayRightSource A B C)
     (@GrayRightTarget A B C)
     (@gray_curry_R_strict A B C)
-  ≡ @gray_curry_R_is_strict A B C;
+  : τ (@IsStrictFunctor
+      (@GrayRightSource A B C)
+      (@GrayRightTarget A B C)
+      (@strict_functor
+        (@GrayRightSource A B C)
+        (@GrayRightTarget A B C)
+        (@gray_curry_R_strict A B C)));
 
 assert [A B C : Cat] ⊢
   @strict_functor_underlying
@@ -39,11 +45,17 @@ assert [A B C : Cat] ⊢
   ≡ @gray_uncurry_R_func A B C;
 
 assert [A B C : Cat] ⊢
-  @strict_functor_evidence
+  @strict_functor_is_strict
     (@GrayRightTarget A B C)
     (@GrayRightSource A B C)
     (@gray_uncurry_R_strict A B C)
-  ≡ @gray_uncurry_R_is_strict A B C;
+  : τ (@IsStrictFunctor
+      (@GrayRightTarget A B C)
+      (@GrayRightSource A B C)
+      (@strict_functor
+        (@GrayRightTarget A B C)
+        (@GrayRightSource A B C)
+        (@gray_uncurry_R_strict A B C)));
 
 // The transpose retains the whole Hom action between transformation towers.
 assert [A B C : Cat]

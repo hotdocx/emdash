@@ -107,7 +107,8 @@ Full-suite continuation now selects explicit 6 GiB/180s settings for the two
 measured cover owners and atomic staged recipes that compile those owners.
 Other targets retain their default or existing registered settings. Successful
 receipts are reusable only when exact source/object, checker, runner, recipe
-and effective settings still match. The full suite remains in progress.
+and effective settings still match. The complete check-suite result is
+recorded below.
 
 ## Normalization Recipe Follow-Up
 
@@ -145,6 +146,32 @@ reuse of older receipts; retain them as historical evidence.
 The registered normalization recipe passes at 8 GiB/600s per child with
 `o=20,v=1024`, including the previously failing projection owner and all its
 reviewers. Receipt `20260926T073103Z-666ff1d96c2146519a3b393114d25ac4`
-records 388.071s total recipe time. This is not a full-suite success: remaining
-targets and current-tooling qualification continue under the living plan.
+records 388.071s total recipe time. That single recipe did not establish
+full-suite success; the subsequent complete check continuation does so below.
 Checkpoint `f4a3aac1` records the bounded guard extension and its tests.
+
+## Complete Registered Check-Suite Result
+
+Continuation 33024 completed with exit 0 and all 589 distinct targets in
+`checks.json`'s `check` list passed. There are no excluded resource targets.
+The registry and result sets were compared exactly, not inferred from log
+line counts (staged groups repeat some member status lines).
+
+The log is `emdash2/logs/api-ordinary-check-eight-gib-resume.log` and the result
+is `emdash2/logs/api-ordinary-check-results.json`, SHA-256
+`2c893c3a7d1bc3ecf30f6503c3627b03e9e2c95bc9f2b1e25399c43f48613756`.
+The final source receipt is
+`20260926T085607Z-947024def2eb4dc7a63011022b2c1684` for projective line.
+An additional read-only audit matched all 589 targets to successful current
+source/group receipts, preserving exact source/object, checker, runner and
+effective settings identity. The ID map is
+`emdash2/logs/api-ordinary-check-final-evidence.json`; no typecheck was rerun
+by that audit.
+
+The recipe retains explicit per-target/group settings: normal 2 GiB/90s,
+the reviewed cover settings, the normalization setting above, existing native
+profiles, and GC `o=20,v=1024`. Source/object/checker/runner/settings identity
+governs reuse. This qualifies the registered check suite for the ordinary
+classifier checkpoint. It does not certify the whole migration or replace
+complete final formal CI (currently 1,293 registered targets, plus any new
+owners/reviewers) and clean-checkout resource routing.

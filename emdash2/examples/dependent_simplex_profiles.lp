@@ -25,13 +25,13 @@ assertnot [A B : Cat]
       (@strict_functor_compositor_lhs
         A B (@dependent_simplex_unprofiled_functor A B) X Y Z g f);
 
-// A strict package retains semantic evidence about that same intrinsic
-// compositor; it does not introduce or force a parallel literal-id cell.
+// A classified strict object reconstructs canonical evidence about the
+// same whole intrinsic compositor without projecting an admission witness.
 assert [A B : Cat]
   (S : τ (@StrictFunctor A B)) ⊢
-  @strict_functor_evidence A B S
+  @strict_functor_is_strict A B S
   : τ (@IsStrictFunctor
-      A B (@strict_functor_underlying A B S));
+      A B (@strict_functor A B S));
 
 // Path realization reads the same compositor as an equality with a symmetric
 // inverse and keeps the existing higher action.

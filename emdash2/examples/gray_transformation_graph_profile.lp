@@ -48,7 +48,7 @@ assert [B C : Cat]
   (g : τ (Hom B x y)) ⊢
   @fapp1_fapp0
     B (@LaxArrow_cat C)
-    (@strict_functor
+    (@strict_functor_underlying
       B (@LaxArrow_cat C)
       (@strict_gray_transf_graph B C SF SG epsilon))
     x y g
@@ -58,15 +58,19 @@ assert [B C : Cat]
       (@strict_functor B C SG)
       epsilon x y g;
 
-// The package retains the supplied property over the existing graph
-// compositor; no graph-specific unit or compositor cell is introduced.
+// The opaque object reconstructs canonical strictness over the existing
+// whole graph compositor; its admission certificate is not projected.
 assert [B C : Cat]
   (SF SG : τ (@StrictFunctor B C))
   (epsilon : τ (Transf
     (@strict_functor B C SF)
     (@strict_functor B C SG)))
   ⊢
-  @strict_functor_evidence
+  @strict_functor_is_strict
     B (@LaxArrow_cat C)
     (@strict_gray_transf_graph B C SF SG epsilon)
-  ≡ @gray_transf_graph_is_strict B C SF SG epsilon;
+  : τ (@IsStrictFunctor
+      B (@LaxArrow_cat C)
+      (@strict_functor
+        B (@LaxArrow_cat C)
+        (@strict_gray_transf_graph B C SF SG epsilon)));

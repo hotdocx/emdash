@@ -1742,8 +1742,11 @@ The literal owners are `dependent_simplex_face`,
 has the already-existing type `DependentSimplexFaceRef(p,n)`, definitionally
 `FaceCode(succ p,succ n)`. Skip means a constant face of the fixed flag,
 `keep(skip ...)` means recursive target projection, and `keep(keep ...)` means
-`pathout_map_func`. Do not write a separate list of coface equations or imply
-that direct and sequential opaque whole functors are judgmentally equal.
+`pathout_map_func`. The selected edge-zero-two followed by vertex-one
+comparison computes to the direct whole face in the focused reviewer. This
+already holds at the integration's main baseline; its former negative check
+was stale. Do not infer a general judgmental composition law for arbitrary
+face codes or introduce a separate coface equation family.
 
 For the low-dimensional ordinal comparison write
 
@@ -2802,22 +2805,24 @@ simplicial or all-coherence interface.
 
 ## Profiled Gray Right-Closure Notation
 
-Write semantic strictness and its package as
+Write semantic whole strictness and its opaque classifier as
 
 ```text
 IsStrictFunctor(F)
-StrictFunctor(A,B) := Sigma F : Functor(A,B), IsStrictFunctor(F)
-underlying(S) : Functor(A,B),
+make_strict_functor(F,p) : StrictFunctor(A,B)
+strict_functor(S) : Functor(A,B)
+strict_functor_underlying(S) : Functor(A,B),
 ```
 
-with kernel owners `IsStrictFunctor`, `StrictFunctor`,
-`strict_functor_intro`, `strict_functor_underlying`, and
-`strict_functor_evidence`. The stable ambient view is `strict_functor(S)`.
-At a constructor-visible package its point and hom action computes to the
-underlying carrier; an opaque package retains the stable head. Strictness
-constrains the existing `fapp1_compositor` through `IsStrictCell`; it neither
-supplies another compositor nor currently forces a literal identity normal
-form. The global/profile-local strict-cut migration is separate.
+where `p : IsStrictFunctor(F)` admits the raw carrier. The property constrains
+the whole `strict_functor_compositor_transf`; capped evidence is derived by
+evaluation. The opaque object does not project p. `strict_functor_is_strict(S)`
+is canonical evidence derived from the classified whole compositor's identity
+computation. Point action computes on visible admissions; hom action retains
+the stable view. Use `strict_functor_underlying` for a deliberate raw action
+observation. Carrier/certificate comparisons are proof-time; they are not a
+generic runtime decoder. Historical global cuts remain during the active
+consumer migration.
 
 The selected strict-object/lax-arrow internal Hom is written
 
@@ -2826,7 +2831,10 @@ GrayHom_lax(A,B).
 ```
 
 Its kernel head is the identically named `GrayHom_lax`; its whole inclusion
-is `grayhom_lax_include_func`. There is no active `GrayHom_oplax`
+is `grayhom_lax_include_func`. At the ordinary-classifier integration checkpoint
+its homs still use ambient transfors. `StrictFunctor_cat` now owns the full
+strict-object category; classified lax Gray arrows are the subsequent tranche.
+There is no active `GrayHom_oplax`
 compatibility spelling. The authoritative orientation is the displayed cell
 
 ```text

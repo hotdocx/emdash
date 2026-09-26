@@ -45,8 +45,10 @@ and H_family≅H_native∘Γ with retained inverse data and point observations.
 Its structural support is at the existing library owners. Γ, its whole
 projections, ordinary triangle and H comparison now have public definition
 owners; the point comparison remains downstream. The completed assembly ledger records joint
-native-consumer qualification. Op/duality, action-profile integration and the
-large six-term comparison remain deferred.
+native-consumer qualification. Action-profile integration is now active in
+its [dedicated main-based goal](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md);
+the ordinary classifier is its first tranche and global cuts remain during
+consumer migration. Op/duality and the large six-term comparison remain deferred.
 
 The initial main/Pages publication was df9b4778. The user subsequently
 authorized completed consolidation c3792b67 and book 0.9.1-dev for main/Pages;
@@ -846,15 +848,15 @@ migration is implied by that review.
   retains a next-hom functor between paths-between-paths. The module adds no
   Path-specific runtime fold, proof-time rule, pseudofunctor classifier,
   inverse record, or complete coherence claim.
-- `emdash3_2_gray_profiles.lp`: semantic `IsStrictFunctor` evidence, the exact
-  `StrictFunctor(A,B) = Sigma(F,IsStrictFunctor(F))` package, its stable
-  evidence-bearing ambient view, and the selected `GrayHom_lax`
-  strict-object/lax-arrow profile. The property constrains the already
-  extracted compositor by an endpoint path and equality-induced arrow; it
-  adds no second functor grammar or compositor and does not reflect arbitrary
-  evidence to literal identity. Homs and every higher action reuse the
-  ambient `Transf_cat` tower. Historical global endpoint cuts remain pending
-  a separate profile-local migration.
+- `emdash3_2_gray_profiles.lp`: whole `IsStrictFunctor` evidence and the opaque
+  `StrictFunctor` classifier, non-injective `make_strict_functor` admission,
+  stable classified action, explicit raw `strict_functor_underlying`, and
+  canonical `strict_functor_is_strict`. The existing deep compositor computes
+  to identity under the classified head; no admission certificate is projected
+  and no second action calculus is added. `StrictFunctor_cat` is the full
+  subcategory with whole inclusion. At this integration stage, `GrayHom_lax`
+  still uses ambient `Transf_cat` homs and the nucleus still has global cuts;
+  subsequent consumer/action-profile tranches own their migration.
 - `emdash3_2_walking_arrow.lp`: transparent walking-arrow interface derived
   from `Join_cat(Terminal_cat,Terminal_cat)`. Both endpoints, the generator,
   and its next hom action are projections of existing join owners.
@@ -1462,10 +1464,11 @@ Active equality/equivalence staging includes:
   `path_map_compositor_higher_func` retains one off-diagonal next-hom action as
   a whole functor and therefore leaves generic higher iteration available;
 - a semantic strict-object/lax-arrow Gray profile and one right-closed
-  consumer: `IsStrictFunctor` constrains the existing compositor,
-  `StrictFunctor` is its exact carrier/evidence Sigma package, and the stable
-  `strict_functor` view selects the strict object boundary without duplicating
-  the ambient action hierarchy; `GrayHom_lax` reuses `Transf_cat` homs;
+  consumer: `IsStrictFunctor` constrains the existing whole compositor,
+  `StrictFunctor` admits carriers opaquely, and its stable `strict_functor`
+  view owns classified computation and canonical evidence. An explicit raw
+  observation recovers visible carriers. `StrictFunctor_cat` owns the full
+  category; `GrayHom_lax` still reuses `Transf_cat` homs at this stage;
   `GrayTensor_R` has whole curry/uncurry maps paired with supplied strictness
   evidence and equality-valued beta/eta; `WalkingArrow_cat` is
   transparently `Join_cat(1,1)`; and the four-object walking square and its
