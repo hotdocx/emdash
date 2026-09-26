@@ -244,12 +244,14 @@ accepted library or a clean-checkout integration route.
 
 ## Next Required Work
 
-Carry the retained-section argument through the whole functor action in the
-matching-map parameter, before selecting the rho producer's profiles. The
-new component theorem removes the old section-strictness detour; it does not
-assemble directed higher coherence from object-indexed paths. Keep the actual
-whole functors and both inverse choices. Do not introduce a blanket strictness
-or rho-admission axiom merely to make the consumer check.
+The [whole matching-action continuation](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md)
+now lifts the retained-section argument in that parameter, using an isolated
+guarded whole precomposition comparison. Its 269-positive/77-negative joint
+review has a different core pin; the unchanged-core evidence above retains
+its original scope. Next account for the retained-member and base directions
+and connect the complete construction to the actual rho owners. The component
+theorem alone does not assemble directed higher coherence. Keep the actual
+whole functors and both inverse choices; introduce no blanket rho admission.
 
 Review the displayed candidate against the complete internal action before
 selecting its primitive inverse interface. Check its sufficiency and whether

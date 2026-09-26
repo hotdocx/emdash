@@ -1020,6 +1020,18 @@ stay outside the selected joint candidate. The linked report separates that
 earlier 32-input investigation from the new derived retained-member evidence,
 and records exact receipts, supplied boundaries and unselected controls.
 
+The [whole matching-action continuation](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md)
+now proves an equality of whole functors in the matching-map parameter, with
+actual next-Hom, arrow and staged identity consumers. Its isolated core
+generalizes the existing Cat-specialized precomposition comparison with
+explicit mapped-endpoint/arrow guards. It retains runtime distinctions and
+the generic-F composition rejections. The joint Γ/H/Hom/profile review passes
+269 positive/77 negative assertions at a measured 3 GiB/180s profile after an
+identical-input 2 GiB allocation failure. The focused warning comparison has
+no delta. Retained-member/base action, complete rho profiles, whole assembly
+and wider new-core qualification remain required; the preferred earlier
+candidate and its native/CAS receipts retain their original core pin.
+
 ### Native Snake Connecting And Six-Term Candidate
 
 The [native snake feasibility review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)

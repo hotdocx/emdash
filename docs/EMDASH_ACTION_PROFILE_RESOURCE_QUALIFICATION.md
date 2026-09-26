@@ -292,3 +292,24 @@ source/object snapshots do not replace final clean-checkout routing or full
 integration gates. The prepared group must be made reproducible through the
 owning registry/tools at that boundary; no mathematical source pin is changed
 merely to pass a resource check.
+
+## Whole Matching-Action Candidate
+
+The [matching-action feasibility review](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md)
+combines the new whole matching-parameter proof with the existing profile,
+residual-precomposition, Γ/H and Hom-introduction reviewers. Its separate
+source-only candidate contains one generalized proof-time precomposition
+comparison; it is not the earlier compiled-parent CAS environment.
+
+| Same 157-input snapshot | Profile | Outcome | Seconds | Maximum child RSS (KiB) | Receipt |
+| --- | --- | --- | ---: | ---: | --- |
+| Complete interaction review | 2 GiB/90s | Allocation failure during a dependent-owner import | 33.385 | 1,819,548 | `20260926T191725Z-96e00f43e1254fb9812934bf31c2f75f` |
+| Identical source retry | 3 GiB/180s | 269 positive/77 negative assertions pass | 33.849 | 1,884,016 | `20260926T191910Z-dc94abf95bc6464db84edd5d64dfe7e5` |
+
+Both receipts bind input snapshot
+`ebd5ac484e3291245ef65fb122097113681da7f0854f93db9ab6a67f90d67f10`.
+Subject reduction, warnings, `o=20,v=1024`, serial/file/core/no-swap guards
+are unchanged. The larger profile is explicitly scoped under the standing
+authorization; defaults remain 2 GiB/90s. This measures a successful profile,
+not the minimum memory or time requirement. Maximum child RSS is distinct
+from address-space and aggregate memory limits.
