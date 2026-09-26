@@ -4,6 +4,13 @@ Date: 2026-08-30
 
 Plan-ID: `TS-EMDASH-FOCUSED-CAS`
 
+Product orientation (2026-09-25): the
+[algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) makes
+computation, internal/synthetic construction and reduced bookkeeping the
+primary user experience. The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md)
+proposes delivery over these existing owners. Certification remains optional;
+this does not change the algebra contracts or promote deferred mathematics.
+
 Selected usability continuation (2026-09-24): the
 [shared-polynomial workbench plan](TYPESCRIPT_EMDASH_ALGEBRA_WORKBENCH_PLAN.md)
 reuses these completed computation contracts for one external backend, derived

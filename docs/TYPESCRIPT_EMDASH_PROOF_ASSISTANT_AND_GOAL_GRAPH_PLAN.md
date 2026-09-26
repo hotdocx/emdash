@@ -4,6 +4,15 @@ Date: 2026-08-12
 
 Plan-ID: `TS-EMDASH-PROOF-ASSISTANT`
 
+Product orientation (2026-09-25): this plan's proof-development and goal-graph
+contracts are precise components of the broader
+[algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md).
+Computing, constructing and reusing mathematics need not begin with a proof
+obligation. The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md)
+proposes an agent-facing workflow over the existing owners. Keep serialized
+proof names and evidence policies stable; the product terminology does not
+silently add computed-result evidence or restart completed/deferred rows.
+
 Status: living architecture and implementation ledger; reviewed strategy
 recorded; qualified predecessor baseline integrated into public `main`;
 `DEV-CATALOG-1`, `DEV-CLI-2A`, and `DEV-CLI-2B` implemented and

@@ -8,12 +8,13 @@ Original consumer baseline: `df061c52338f4c28565133b2f9dae70de4d5ce39`
 Branch: `goal/algebra-workbench-polynomial-v3.2`
 Worktree: `/home/user1/emdash1-algebra-workbench-v1`
 
-Main integration: the previous implementation and host/ecosystem review are
-integrated through `40cfad99`. The user now selects the review's package consumer
-and a new persistent goal. The existing dedicated branch/worktree and local
-checkpoint authorization continue; no new main integration, push, publication,
-release, history rewrite or worktree removal is selected. The aggregate waiver
-remains in force.
+Main integration: on 2026-09-25, the user selected and completed the clean
+fast-forward through package-consumer checkpoint `37ce19d5`. The consumer's
+local qualification remains recorded below; no npm publication occurred.
+The subsequent [algebra goal assistant orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md)
+and [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) own the new
+product review. This completed workbench plan remains mathematical/package
+consumer evidence. The aggregate waiver remains in force.
 
 ## Current continuation: public package and Vega-Lite consumer
 
@@ -156,7 +157,9 @@ The script prints the fresh consumer path and its local-server command. See
 the fixture guide for explicit tarball/output options and ownership. The
 published npm `0.3.0` remains the earlier artifact without `/algebra`; this
 goal qualifies local package contents and a clean consumer, not a release.
-Main remains at `40cfad99`; completed changes are local goal-branch checkpoints.
+At goal completion, main remained at `40cfad99`. The later user-selected
+integration fast-forwarded main to `37ce19d5` on 2026-09-25, retaining the goal
+branch and worktree as recovery evidence.
 
 This continuation establishes the selected host/ecosystem mechanism: an
 ordinary package consumer uses exact Emdash computational values through
