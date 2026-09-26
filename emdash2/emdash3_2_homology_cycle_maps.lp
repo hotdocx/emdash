@@ -6,6 +6,7 @@
   the actual target kernel embedding.
 */
 require open emdash.emdash3_2_chain_pair_maps;
+require open emdash.emdash3_2_computational_homology;
 require open emdash.emdash3_2_kernel_maps;
 require open emdash.emdash3_2_abelian_categories;
 
