@@ -338,3 +338,23 @@ the seventeen original explicit targets. The twelve-file adapter patch is
 installed, with exact receipts in `api_staged_profile_installation.json`.
 The remaining recipes still require full CI qualification. No formal
 source change or generic strictness restoration was needed for these retries.
+
+## Adjacent-Window Reviewer Follow-Up
+
+The full formal gate stopped at the adjacent-window reviewer after 475
+successful registered targets. Merely raising limits did not qualify it:
+3 GiB/90s, 3 GiB/180s and 4 GiB/300s timed out; the 6 GiB/600s control with
+default GC overhead exhausted memory after 532.842s. A source-only control
+and typed-view experiments locate expensive pair/type reconstruction in the
+manual tail assembly, rather than an object-generation-only cost.
+
+The qualified reviewer uses main's existing transparent whole-window tail
+constructor for the same two windows and supplies literal endpoint arguments
+to its original first-step comparison. All five mathematical observations
+remain, with no library, rule, opacity or assumption change. The complete
+candidate passes in 25.397s and the installed reviewer in 22.784s, both at
+3 GiB/90s and GC `o=20,v=1024`. Its exact target profile is registered, bringing
+the override count to 65 while retaining 2 GiB/90s defaults. The
+[production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md#adjacent-window-diagnosis-and-qualified-adaptation)
+records the failed controls, receipts, installation and the subsequent full
+reviewer sweep. Complete cold-recipe/full-CI qualification remains required.

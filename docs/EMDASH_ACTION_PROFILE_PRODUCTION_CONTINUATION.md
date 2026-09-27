@@ -870,3 +870,140 @@ and driver log `logs/api-final-formal-after-reviewer-audit.log`. Both earlier
 gate attempts remain explicitly cancelled. Keep the current formal inputs
 frozen and wait for this run before any new formal checker. The goal remains
 active; complete CI and the final semantic checkpoint are still required.
+
+The continuation revalidated live formal session `6214`, both unchanged
+reference tips, baseline ancestry and all 67 worktrees. Only the integration
+worktree is dirty; the latest plan/audit checkpoint is `87b9faac`. A fresh
+strict inferred-slot audit covers all 235 changed/new registered LP files
+relative to main `37ce19d5`: zero unreviewed candidates and 64 documented
+slots. Exact source hashes and classifications are in
+`api_final_changed_lhs_audit.json`. This advisory shape check does not replace
+the running typechecks, warning review or a confluence proof.
+
+The completion audit also checks the scope of the eight original proof–CAS
+artifacts. All original hashes and 94 assertions remain intact. Their earlier
+successful receipts bind prototype closures; 26–44 same-name library inputs
+per artifact differ from current production (the combined interaction has
+54). That does not invalidate those results, but it prevents presenting them
+as an exact current-production replay. Comparison:
+`api_final_cas_scope_review.json`.
+
+After the active complete formal gate passes, run
+`api_replay_final_production_cas.py` from `emdash2`. It refuses to run before
+that gate's successful terminal receipt, copies exact current sources and
+their compiled objects into an isolated package, verifies the eight original
+artifact hashes, and uses their already measured guarded profiles serially.
+Its planned result file is `api_final_production_cas_results.json`. This is a
+required final replay of the retained corpus, not a new transfer, model
+construction or the deferred six-term package comparison. The script is
+prepared only; no second formal checker has been launched.
+
+The read-only trust-boundary review finds six constant declarations in new
+root library files. `one_cat_functor_category` has exactly the normalized
+declaration already present in main's adjunction-family owner; it was
+relocated, not newly postulated. The five named-constructor strictness
+declarations in `strict_functor_actions` match the donor exactly. The ordinary
+profile definitions retain the existing `discrete_functor_category` model
+obligation. Artifact: `api_new_library_constant_audit.json`. This scoped
+constant audit is not an exhaustive primitive or consistency proof.
+
+Six selected primary source owners remain byte-for-byte identical to main:
+kernel/cokernel adjunctions, homology adjunction families, native snake input
+data, the native connecting map, the native six-term result, and the supplied
+Freyd adjunction model. Their exact hashes are in
+`api_primary_native_source_preservation.json`. This verifies preservation of
+those declarations and bodies, while the running checks qualify their
+changed import environment. CI has passed native first/second exactness and
+continues without a reported failure at this observation.
+
+## Final CI Resource Failure And Reviewer Qualification
+
+The complete gate `formal-20260927T123535Z-bddc72466b82428bbb58d3852f09dad5`
+is terminal `failed`. Its metrics record 475 successful targets and six
+group-failed rows. The actual failing child is only
+`examples/homology_adjacent_window_tails.lp`: its 2 GiB/90s compilation
+allocation-fails in 21.979s
+(`20260927T140437Z-6e8c2699024042169217c703b60efcfe`). The preceding arrow-tail
+owners and two other reviewers pass; the six rows reflect the owning recipe's
+failure, not six independent semantic errors. The isolated exact-window group
+had already passed. Preserve the failed aggregate and staged-group receipt
+`20260927T134728Z-9132de5d6f44477cad0106498597e909` without relabelling them.
+
+All 306 failed-child source/object inputs were reconstructed from their exact
+retained blobs. The 3 GiB/90s retry times out at 90.036s
+(`20260927T140819Z-bf56ce5e32db4b00a5c800c98279aeb4`), with no reported type
+error. The same package is currently retrying at 3 GiB/180s, with all other
+guards and source bytes unchanged. Log:
+`logs/api-adjacent-window-tails-resource-retry-180s.log`.
+
+Before restarting the full aggregate, qualify the complete current reviewer
+corpus using `api_qualify_all_production_reviewers.py`. It is prepared only
+and must wait for the current checker to finish. It copies exact current
+sources and compiled library parents, checks staged-recipe reviewers first
+in compilation mode, then the other registered reviewers in ordinary check
+mode. Resource-only retries remain explicitly bounded; semantic failures stop
+the sweep. Planned state: `api_all_production_reviewer_results.json`. This
+finds remaining reviewer/profile obligations before another full CI attempt;
+it does not replace the required complete cold recipes or CI. No source
+statement or assertion is weakened, and no default limit is raised.
+
+The 3 GiB/180s retry also times out at 180.035s
+(`20260927T141039Z-8f27a7b028dd42e09de9dcb67446a29b`). A 4 GiB/300s retry
+times out at 300.038s
+(`20260927T141631Z-9e887b28b92c4ed8a994744700e58fb1`). The 306 input hashes
+remain exactly equal to the failed cold-recipe snapshot; no partial target
+object was reused. These runs report no type error, but do not qualify the
+reviewer.
+
+A separate runtime control is now active at 6 GiB/600s with the installed
+OCaml default `o=120,v=1024` and `--too-long=1` command timing warnings.
+Its log is `logs/api-adjacent-window-tails-resource-retry-6g600s-gc120.log`
+and live tool session is `46740`. This deliberately changes GC as well as
+the ceiling; it must not be described as the same runtime profile. All source,
+subject-reduction, serial/file/core/no-swap restrictions remain unchanged.
+The all-reviewer sweep is still prepared only. The final CAS driver's gate
+receipt pin must be updated to the eventual successful complete CI receipt;
+the present pinned aggregate is correctly recorded as failed.
+
+## Adjacent-Window Diagnosis And Qualified Adaptation
+
+The 6 GiB/default-GC control allocation-fails after 532.842s
+(`20260927T142453Z-5542b45cd7a345d89cc2aa441b700ff2`). A source-check-only
+control also times out at 3 GiB/90s
+(`20260927T143547Z-d973de842af34fdcab09526e9646712c`), so this is not only
+object serialization. Per-command timing shows the shared-boundary assertion
+and all three exactness proof views complete; constructing `upper_tail` is the
+first expensive command. Full-file explicit-argument, split-spine and typed
+pair-view controls also allocation-fail. Their receipts and sources remain
+under the `api_adjacent_window_*` preparation/log paths; none is promoted.
+
+Current main already has the transparent `homology_whole_window_tail` owner,
+whose body assembles the same original pairs and exactness proofs with literal
+H(inclusion) boundaries. The selected reviewer uses it for both windows. Its
+first-step assertion still compares against the original
+`computational_exact_arrow_step_of_pair` applied to `upper_first` and
+`upper_first_exact`; its model/endpoints are now explicit literal arguments
+from the first-pair owner's signature. Four assertions remain byte-identical;
+the fifth states the same comparison with explicit arguments. All five
+observations, all supplied hypotheses, original H/K/Q and inverse data remain.
+No library owner, rule, opacity, assumption or theorem statement is changed.
+
+The complete candidate passes at 3 GiB/90s in 25.397s
+(`20260927T150320Z-dd802f7898084fd799f427dac6cf564f`). After adding only an
+explanatory comment, the installed reviewer passes without diagnostic timing
+flags in 22.784s
+(`20260927T150722Z-eb827903f84d48d19ed04b250ed61e3d`). The added whole-window
+owner's import exhausted 2 GiB in the candidate, so its measured 3 GiB/90s
+reviewer profile is registered; the override count is now 65. Ordinary
+2 GiB/90s defaults remain unchanged. Installation and exact source hashes:
+`api_adjacent_window_owner_installation.json`.
+
+The complete 596-reviewer qualification sweep is now active in tool session
+`99298`, through `api_qualify_all_production_reviewers.py`, with state
+`api_all_production_reviewer_results.json` and log
+`logs/api-all-production-reviewers.log`. It checks staged-recipe reviewers in
+compilation mode first and the remaining reviewers in ordinary check mode,
+using exact production sources and qualified compiled library parents.
+Semantic failures stop the sweep; measured resource-only retries remain
+bounded. This is not the final cold-recipe/full-CI result. Keep its source and
+registry snapshot fixed while it runs.
