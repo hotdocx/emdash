@@ -22,6 +22,18 @@ keeping the derived retained-member proof. Eight positive/two negative
 contract and noncollapse controls pass. Broader/downstream qualification and
 production promotion remain required; this is not a semantic consistency proof.
 
+The current baseline is now `api_assembly_baseline_minimal_core`, core
+`6a980df3`, omitting the two later deferred-member research additions while
+retaining the generic strictness corrections. Its combined
+[sheaf/geometry review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#downstream-sheafification-and-geometry-qualification)
+passes 245 positive/12 negative assertions over 88 inputs. The main eliminator,
+universality and sheafification owners are exact copies. The twenty raw-ring
+presheaf signatures and 25 ringed-site signatures are preserved; the former
+uses actual `comm_ring_cat_is_one_cat` evidence for composition. Three optional
+source strict-presheaf refinement views remain available. Earlier independent
+reviewer receipts retain their `b9cc2726` pin; they are not standalone checks
+on the selected smaller core.
+
 ## Semantic Owner Ledger
 
 | ID | Source boundary | Main disposition and required consumer |
@@ -1280,7 +1292,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 
 | Current core name | Extension consumers | Disposition |
 | --- | --- | --- |
-| `Adjunction_hom_prof_comparison_along` | `emdash3_2_ringed_sites.lp` | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
+| `Adjunction_hom_prof_comparison_along` | `emdash3_2_ringed_sites.lp` | Prototype qualified: import the existing strict post-profile owner; all 25 public signatures and actual sheaf/geometry consumers retained. |
 | `defiso_fmap` | `emdash3_2_adjunction_mates.lp`<br>`emdash3_2_functor_reconstruction_paths.lp`<br>`emdash3_2_one_cat_hom_comparison_data.lp` | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
 | `fapp1_comp_path` | `emdash3_2_commutative_algebra_presheaves.lp`<br>`emdash3_2_diagram_evaluation.lp`<br>`emdash3_2_homology_native_comparison_cycle_paths.lp`<br>`emdash3_2_one_cat_constant_chain_zeros.lp`<br>`emdash3_2_one_cat_constant_snake_inputs.lp`<br>`emdash3_2_one_cat_functor_postcomposition_paths.lp`<br>`emdash3_2_one_cat_zero_cone_map_equivalences.lp`<br>`emdash3_2_one_cat_zero_family_paths.lp`<br>`emdash3_2_product_composition_paths.lp`<br>`emdash3_2_readable_pseudofunctors.lp`<br>`emdash3_2_reindex_composition_paths.lp`<br>`emdash3_2_semicubical_nerve.lp`<br>`emdash3_2_walking_end_hit.lp` | Pending: Retire generic theorem; adapt consumers. |
 | `functord_transport_rhs_agrees` | `emdash3_2_gray_interchanger_orientation.lp` | Pending: Retire generic theorem; adapt consumers. |
@@ -1301,7 +1313,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 
 | Extension owner | New since ancestor | Uses | Review route |
 | --- | --- | --- | --- |
-| `emdash3_2_commutative_algebra_presheaves.lp` | no | 1 | Pending named owner/profile derivation. |
+| `emdash3_2_commutative_algebra_presheaves.lp` | no | 1 | Qualified prototype: derive the path using the existing actual CommRing OneCat witness; preserve all twenty raw-presheaf signatures and optional source refinement views. |
 | `emdash3_2_diagram_evaluation.lp` | yes | 1 | Pending named owner/profile derivation. |
 | `emdash3_2_homology_native_comparison_cycle_paths.lp` | yes | 2 | Pending named owner/profile derivation. |
 | `emdash3_2_one_cat_constant_chain_zeros.lp` | yes | 2 | Pending named owner/profile derivation. |
@@ -1322,11 +1334,11 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/emdash3_2.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
 | `emdash2/emdash3_2_checks.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
 | `emdash2/emdash3_2_circle_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_commutative_algebra_locality.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_commutative_algebra_presheaves.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_commutative_algebra_locality.lp` | M | API-05: current main consumer passes in the smaller-core sheaf/geometry closure with the raw-presheaf interface retained. Production promotion pending. |
+| `emdash2/emdash3_2_commutative_algebra_presheaves.lp` | M | API-05: actual CommRing OneCat evidence replaces the generic composition call; all twenty main signatures plus three optional source refinement views qualified. Production promotion pending. |
 | `emdash2/emdash3_2_cubical_face_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_cubical_open_box_sieves_recursive.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
-| `emdash2/emdash3_2_direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and 17-positive/two-negative reviewer pass in the prototype; displayed locality/rho assembly remains unqualified. |
+| `emdash2/emdash3_2_direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and reviewer pass; the inherited-assembly locality, universality and sheafification continuation now passes in the smaller-core prototype. Production promotion pending. |
 | `emdash2/emdash3_2_eq1_hom_action.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_finite_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
@@ -1359,7 +1371,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/emdash3_2_path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_pathout_transformation_lift.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_readable_pseudofunctors.lp` | M | API-05: exact source candidate and four-positive/three-negative controls preserve both inverses and distinct endpoints; production promotion pending. |
-| `emdash2/emdash3_2_ringed_sites.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_ringed_sites.lp` | M | API-05: existing post-profile mate owner linked, preserving all 25 signatures; selected ringed-site/affine/sheafification consumers qualified. Production promotion pending. |
 | `emdash2/emdash3_2_semicubical_nerve.lp` | M | API-06: exact source candidate and semicubical/Gray/path joint consumers pass; production promotion pending. |
 | `emdash2/emdash3_2_simplex_shapes.lp` | M | API-06/07: source adaptation and corrected-core directed/simplex review pass, including the 28-reviewer combined closure. Production promotion remains pending. |
 | `emdash2/emdash3_2_strict_functor_actions.lp` | A | Pending: API-04: post-profile actions with new-main consumers. |
@@ -1372,7 +1384,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/dependent_simplex_faces.lp` | M | API-06: passes individually and in the corrected-core 28-reviewer closure, retaining the selected direct/sequential whole face observation. Production promotion pending. |
 | `emdash2/examples/dependent_simplex_ordinal_dimension3.lp` | M | API-06: source endpoint-noncollapse observation adapted; individual and combined corrected-core reviews pass. Production promotion pending. |
 | `emdash2/examples/dependent_simplex_profiles.lp` | M | API-06: source endpoint-noncollapse observation adapted with current canonical evidence retained; individual and combined corrected-core reviews pass. Production promotion pending. |
-| `emdash2/examples/direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and 17-positive/two-negative reviewer pass in the prototype; displayed locality/rho assembly remains unqualified. |
+| `emdash2/examples/direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and reviewer pass; inherited locality/universality/sheafification now qualifies in the smaller-core combined review. Production promotion pending. |
 | `emdash2/examples/generic_groupoidification.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/gray_cube_dimension2.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |

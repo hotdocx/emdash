@@ -86,6 +86,14 @@ consumer checks, noncollapse controls, TypeScript alignment and final gates
 remain required. No consistency proof or unrestricted model adequacy is
 claimed by retaining the inherited assumption.
 
+Current baseline qualification package:
+`emdash2/tmp/probes/api_assembly_baseline_minimal_core/`, core `6a980df3`
+and profile `f670814a`. The checked sheaf/geometry closure does not need the
+later FibCov member-projection agreement or opposite-source tapp1 identity
+join, so those two research additions are omitted. All generic strictness
+corrections remain. Other earlier receipts retain their exact core pins and
+still require affected-core qualification before promotion.
+
 Both reference worktrees were clean. Relative to the common ancestor the
 source has 91 commits and 114 changed paths, with 21,277 insertions and 5,277
 deletions. Main has 622 exclusive commits and 1,813 changed paths. Twenty
@@ -643,9 +651,35 @@ Assembly baseline trial: the exact pinned ordinary/displayed primitive plus
 the derived retained-member body checks the complete locality owner in
 16.610s at 2 GiB/90s, preserving all sixteen public signatures and restoring
 the ordinary-fibre, displayed and ordinary-outer assembly stages. Eight
-positive/two negative interface and noncollapse controls pass. Next qualify
-downstream consumers and existing helper calls; the trial is not production
+positive/two negative interface and noncollapse controls pass. Those initial
+checks precede the downstream qualification below; neither is production
 promotion or a semantic consistency proof.
+
+The [downstream sheaf/geometry qualification](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#downstream-sheafification-and-geometry-qualification)
+now passes. The eliminator, Hom-universality and sheafification owners remain
+exact production copies. CommRing restriction composition uses the existing
+`comm_ring_cat_is_one_cat` witness and ordinary-target path theorem, retaining
+all twenty raw-presheaf signatures. Three optional source refinement views
+remain available. Linking the ringed-site mate to the existing post-profile
+owner preserves its 25 signatures. The ordinary pointwise helper retains the
+original forward map and both inverse choices through the inherited API.
+
+All seventeen selected registered reviewers and the helper control pass
+individually on `b9cc2726`. The selected smaller-core combined environment
+passes 245 positive/12 negative assertions over 88 inputs, including all
+those reviewers and the unchanged main locality/universality/sheafification
+diagnostics (`20260927T024711Z-bf433d59b22f4eb488c03bbdda96334e`).
+The latter diagnostic slice also passes independently on `6a980df3` at
+2 GiB/90s. The joint run uses the measured broader 6 GiB/180s profile and
+takes 67.436s. Exact earlier 3/4-GiB individual retries and the 4-GiB joint
+failure are recorded in the linked review; defaults and all guards remain.
+
+The same diagnostic target loses exactly nine critical-pair instances when
+the two research additions are omitted, with no additions or pattern delta.
+Both current scopes have 975 critical-pair/150 pattern diagnostics. Earlier
+individual receipts are not relabeled as standalone smaller-core evidence.
+Next consolidate the remaining HIT/finite-limit adaptations, qualify other
+affected consumers at this selected baseline, and prepare promotion.
 
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
@@ -661,7 +695,7 @@ promotion or a semantic consistency proof.
 | `API-04V` | staged strictness leak corrected in prototype; combined review qualified | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. Earlier native/CAS/all-path evidence does not qualify the changed core; affected-closure requalification and production promotion remain required. |
 | `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
-| `API-05` | inherited assembly baseline selected; complete locality owner and contract controls pass in a separate candidate | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): preserve the original ordinary/displayed inverse constructors, component betas and cancellation assumptions, plus the derived retained-member proof. All sixteen locality signatures and all three assembly stages check; eight positive/two negative controls retain both inverse choices and reject generic reflexivity cuts. Downstream/broad qualification, assumption documentation and production promotion remain required. |
+| `API-05` | inherited assembly and downstream sheaf/geometry baseline qualified in prototype; promotion pending | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): original ordinary/displayed inverse constructors, component betas and cancellation assumptions coexist with the derived retained-member proof. All sixteen locality signatures and three assembly stages check. Exact main eliminator/universality/sheafification owners and seventeen selected reviewers pass in the smaller-core combined environment: 245 positive/12 negative assertions. Main raw-presheaf and ringed-site signatures are retained through actual OneCat evidence and the post-profile action owner. Broader final-core qualification, assumption documentation and production promotion remain required. |
 | `API-05R` | deferred follow-up research; no baseline gate | Preserve the [displayed](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md), [relative](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md), [matching](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) and [inverse](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) investigations, including exact receipts and unfinished profile-sufficiency, member/base and FibCov/cone questions. Useful derived results remain available; genuine `API-04R/V/P/T` corrections stay selected. No completed semantic proof is claimed. |
 | `API-06` | Gray closure/D2 and 28 directed/simplex reviewers qualified in prototypes; other main consumers and promotion pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. D2 retains judgmental recovery through the classified graph and main's separate represented-comma derivation. The corrected-core directed/simplex continuation preserves the PathOut lift's raw interface with a target-only identity proof; all 28 reviewers and their 42-owner combined environment pass 199 positive/36 negative assertions and 87 type queries. WalkingEnd/Circle and other remaining main consumers, affected-core requalification and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |

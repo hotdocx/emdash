@@ -151,3 +151,107 @@ After the baseline checkpoint, a focused semantic review can identify the
 intended `Transf`/`Transfd` model, establish the exact pointwise criterion,
 and decide whether profiles, a different equivalence notion, or no API change
 are appropriate. No new Empty audit or Op/duality repair is introduced here.
+
+## Downstream Sheafification And Geometry Qualification
+
+The restored locality interface now feeds the existing whole Hom-universality
+and constructed Cat-valued sheafification owners. The eliminator,
+universality and sheafification implementation files are byte-for-byte copies
+of current production. Their existing constructor/model contracts remain
+supplied; this slice introduces no replacement reflector or inverse data.
+
+One dependency needs a different adaptation from the old source branch.
+`CommRing_cat` already has the actual `comm_ring_cat_is_one_cat` witness:
+its Hom categories are `Path_cat(CommRingHom R S)`, with the retained sethood
+and groupoidality used to construct discreteness. The existing checked
+ordinary-target composition theorem can therefore replace the retired
+`fapp1_comp_path` call without changing any of the twenty raw-presheaf
+signatures. This uses the category's complete OneCat evidence, not an
+inference from Hom sethood alone for an arbitrary category.
+
+The source's three optional refinement views, `StrictCommRingPsh_cat`,
+`StrictCommRingPsh` and `strict_comm_ring_psh`, are retained. Existing callers
+still pass raw presheaves. The ringed-site module imports the existing
+post-profile mate-comparison owner, preserving all 25 public signatures.
+The ordinary pointwise helper calls the inherited assembler with its original
+raw transformation and supplied pointwise data; its public OneCat interface
+and both selected inverse-component projections remain unchanged.
+
+The exact production CS-12q/r/s diagnostic blocks pass: seventeen positive
+assertions and one negative control concerning locality, whole Hom
+universality, the reflector, counit and fixed-counit capability. Their checked
+closure contains one further imported positive assertion. All seventeen
+selected registered direct-cover, presheaf, ringed-site and affine-geometry
+reviewers, plus the helper control, also pass individually on core `b9cc2726`.
+
+### Smaller Baseline Core
+
+A separate control removes exactly two later research additions:
+
+- the whole FibCov member-projection unifier; and
+- the opposite-source `tapp1` identity projection join.
+
+The control uses the previously qualified telescope core `6a980df3`, retaining
+all `API-04R/V/P/T` generic-leak corrections. It restores no global strict
+rule and overwrites no earlier package. The original main diagnostic slice
+passes independently, and the full combined sheaf/geometry review passes
+on this smaller core. These two additions are therefore omitted from the
+selected assembly baseline; their research evidence remains preserved.
+This does not declare either addition mathematically wrong, or establish
+that every other consumer is unaffected.
+
+The current baseline package is now
+`emdash2/tmp/probes/api_assembly_baseline_minimal_core/`, with core SHA-256
+`6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a`
+and unchanged profile SHA-256
+`f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+The larger-core candidate and all its receipts remain intact.
+
+| Current smaller-core check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Original locality/universality/sheafification diagnostic slice | `20260927T024610Z-587f83a1b89d4f1f96d8d3a32e658e2e` | 21.511 / 1,102,464 |
+| Combined seventeen reviewers, original diagnostics and new contract/helper controls | `20260927T024711Z-bf433d59b22f4eb488c03bbdda96334e` | 67.436 / 4,434,336 |
+
+The current joint review passes **245 positive/12 negative assertions over
+88 inputs**. Counts include imported checks; they are not added to the
+individual reviewer totals. The individual seventeen-reviewer evidence is
+at the earlier `b9cc2726` pin; it must not be relabeled as seventeen standalone
+runs on `6a980df3`. The current joint review imports all of them on that
+smaller core, while the original diagnostic slice also has a standalone run.
+
+The standalone current slice uses 2 GiB/90s. The joint review uses an explicit
+6 GiB/180s profile after the earlier larger-core joint exhausted 4 GiB in
+58.100s. Because the core also changed, that pair is not an identical-source
+resource retry. Two earlier individual retries *are* source-identical:
+
+| Earlier `b9cc2726` reviewer | Failed limit / seconds | Successful limit / seconds / maximum child RSS KiB |
+| --- | --- | --- |
+| Affine ringed sites | 2 GiB / 27.569 | 3 GiB / 29.282 / 2,288,296 |
+| Locally ringed-space presentations | 3 GiB / 35.409 | 4 GiB / 38.440 / 3,042,100 |
+
+The affine-scheme reviewer shares the measured affine-site parent and passes
+at 3 GiB/90s in 34.363s. Other individual targets keep 2 GiB/90s. All checks
+retain warnings, subject reduction, `OCAMLRUNPARAM=o=20,v=1024`, serial
+execution and the existing file/core/no-swap guards. No package has compiled
+parents, and default limits remain unchanged.
+
+Comparing the same main diagnostic target before/after the two core omissions
+removes exactly nine critical-pair participant instances and adds none.
+Pattern diagnostics are unchanged; mapped surviving source locations gain no
+warnings. These are precisely the previously classified identity-join
+overlaps. The current standalone and combined scopes each report 975 critical
+pairs and 150 pattern diagnostics, with no parser issues. The changed ring
+presheaf/site owners pass strict LHS audits with zero candidates; they add no
+runtime or unification rule.
+
+The current manifest is
+`emdash2/tmp/probes/api_sheaf_baseline_current_manifest.json`, SHA-256
+`6fb42c5268b700faf0ee37a444a601ff2c1e00b5c86c87127d129aac8202b931`.
+It binds the current 88-input closure, earlier eighteen independent successes,
+source-preserving retry evidence, removed-core comparison, unchanged-owner
+and signature audits, and exact immutable input blobs.
+
+Next consolidate the remaining HIT and finite-limit adaptations with this
+baseline, qualify other affected consumers at the selected core, and prepare
+production promotion. The remaining native/CAS/path/Gray, TypeScript and
+final integration gates retain their full scope.
