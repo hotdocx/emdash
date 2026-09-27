@@ -2,8 +2,8 @@
 
 Date: 2026-09-26
 
-Status: selected source owners and combined prototype reviews pass;
-production promotion and displayed pointwise qualification remain open
+Status: selected source owners and corrected-core directed/simplex prototype
+reviews pass; production promotion and displayed assembly remain open
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), rows
 `API-05`, `API-06` and `API-07`. This continues the
@@ -11,10 +11,13 @@ Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), rows
 Production remains at `f0f327d6`; its nucleus still matches main `37ce19d5`.
 The pinned implementation source is `114dc19f`.
 
-This records the candidate at checkpoint `652816fe`. The subsequent
+The initial sections record the candidate at checkpoint `652816fe`. The
+subsequent
 [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md)
 changes native observation and ordinary support proofs and records its own
 combined replay. Earlier receipts retain their exact source identities.
+The directed/simplex continuation below has the later corrected core pin;
+it does not requalify every earlier Gray/path/native/CAS closure.
 
 ## Qualified Candidate Scope
 
@@ -155,3 +158,134 @@ remaining native/CAS and directed/simplex consumers, TypeScript alignment,
 registry/authority/book synchronization and final integration gates remain
 required by the living plan. This checkpoint records prototype qualification,
 not completion of the full goal.
+
+## Directed And Simplex Continuation On The Corrected Core
+
+This independent `API-06` slice checks the remaining selected directed/simplex
+closure against core `b9cc2726`, after the vertical, postcomposition and
+telescope corrections. It preserves newer main bodies rather than replacing
+them with an older source tree. The package contains 42 semantic owners and
+28 registered reviewers, covering:
+
+- directed dimension and join, shaped cross/generator comparisons and the
+  generic PathOut transformation lift;
+- dependent triangles, represented source, native dimensions three/four,
+  intrinsic codes, maps and faces;
+- ordinal adequacy, the constructed dimension-two filler, dimensions three
+  and four, and the variable-dimension ordinal construction;
+- semisimplicial codes, index, diagrams and decalage, coherent nerve levels,
+  simplex shapes, and the two-simplex boundary/horns.
+
+The starting closure has 70 LP files: 49 copied from current production,
+16 from the corrected member candidate and five from the earlier main-based
+candidate. The source manifest records all three origins and hashes against
+both production and the pinned source tip. Beyond the already qualified
+core/profile/ordinary-action changes, only two reviewer blocks initially
+change: the profile and ordinal-dimension-three negatives compare the two
+lax endpoints, as in the source branch, rather than comparing a cell with
+an identity at a potentially different endpoint. Newer production tails
+and the canonical-evidence comment are retained.
+
+### PathOut Lift Proof Repair
+
+The profile, face and dimension-three reviewers pass first. The initial
+dimension-four run then stops at an obsolete call to
+`functord_transport_strict_naturality` inside
+`pathout_transf_formal_target_path`:
+`20260927T011458Z-7796b71ac613457b86b0afceae975c8c`, 11.937s.
+This is a missing retired symbol, not a resource failure.
+
+The theorem compares the target/right route evaluated at `id_y` with the
+direct off-diagonal action. It needs the identity evaluation
+`epsilon[id_y o p] = epsilon[p]`, not equality with the different source/left
+route. Its new body is typed reflexivity of that target-only computation.
+It does not invoke strict naturality of the arbitrary raw transformation.
+
+All eleven public signatures and the owner's one rewrite block are
+byte-identical to production. The whole `pathout_transf_lift` still accepts
+raw `epsilon`, and its component still contains the same extracted
+pre/right laxity cell and source reframe. A new runtime control checks that
+only the target identity reframe disappears. Both runtime comparison and
+typed reflexivity between the distinct source and target routes are rejected.
+No profile premise, axiom, primitive, rewrite or unifier is added.
+
+The original PathOut reviewer passes after this proof repair. The ordinal
+dimension-four and variable-dimension reviewers then pass, preserving the
+native source constructions, arbitrary target `H`, named faces, top
+components, strict/Path readings and retained next action. This is a proof
+adaptation to the lax environment, not a restriction of those public inputs.
+
+### Current Qualification
+
+All **28 individual registered reviewers pass** with exact current source
+inputs. Their combined review first preloads all 42 semantic owners, then
+imports every reviewer and the new lax-boundary control. It passes
+**199 positive/36 negative assertions and 87 type queries** over 73 inputs.
+Definition bodies also check. Imported closures overlap; the individual
+counts are not added to the combined result.
+
+| Check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Repaired PathOut lift reviewer | `20260927T011716Z-1885bf374633420da4f56e233f3b9721` | 8.868 / 488,948 |
+| Source/target noncollapse and retained fibre cell | `20260927T011815Z-c2fa783303c740e4925afceab5767f89` | 8.832 / 489,124 |
+| Ordinal dimension three | `20260927T011448Z-ddf7872f467b4baba00f7a5b3f947261` | 9.575 / 543,948 |
+| Ordinal dimension four | `20260927T011854Z-d6f607dfb58b4b7c99c3d9beebc4394d` | 18.634 / 1,004,680 |
+| Variable-dimension ordinal construction | `20260927T011913Z-1470b30558bf402ea515024449d86545` | 15.779 / 960,432 |
+| Preloaded-owner combined review | `20260927T012307Z-4391a0b2ed2c48eab015f08c6702fd38` | 19.660 / 1,131,088 |
+
+Every current check uses **2 GiB/90s**, warnings, subject reduction,
+`OCAMLRUNPARAM=o=20,v=1024`, serial execution and the existing file/core/
+no-swap guards. No memory or timeout increase is needed for this slice.
+The package has no compiled parents. The driver stopped on the original
+dimension-four failure; after the proof repair, continuation carried forward
+only successful receipts whose complete inputs still rehashed exactly.
+
+The repaired PathOut reviewer and its new controls both have 974 critical-pair
+warnings and 150 pattern diagnostics. Heads, rule families, full participant
+instances and source locations agree. The larger combined scope has 991/150;
+it is a different import closure, not a before/after warning delta. Parsing
+reports no issues. The edited owner's strict LHS audit has zero candidates;
+core/profile bytes and their prior audit qualification are unchanged.
+
+The current package is `emdash2/tmp/probes/api_directed_simplex_candidate/`.
+Core SHA-256:
+`b9cc2726d8614762f85d33a8f64adaaa78668518aa4ada4866abf82e861d7c10`.
+Profile SHA-256:
+`f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+The manifest
+`emdash2/tmp/probes/api_directed_simplex_current_qualification_manifest.json`
+binds 30 successful receipts, all 73 current inputs, source provenance,
+the failed predecessor, warning/LHS/signature audits and the serial driver
+history. SHA-256:
+`46a4d84cbc1fbe90081924a822b8f1788cf4660efa3d89649980f7245a8ef9db`.
+Immutable receipt inputs retain the exact emitted source. The initial
+copier emits the pre-repair owner; recovery must include the recorded proof
+patch or use those exact input blobs.
+
+### Remaining Main Consumer Inventory
+
+A static scan compares the production core's declarations with the corrected
+core/profile declarations and locates references to twenty retired names
+across the 747 registered semantic/diagnostic targets. It selects current
+candidate sources where they exist. Five semantic owners still reference
+names absent from those two candidate owners:
+
+| Main owner | Referenced retired name |
+| --- | --- |
+| `emdash3_2_finite_limits.lp` | `weighted_limit_cov_pull` |
+| `emdash3_2_commutative_algebra_presheaves.lp` | `fapp1_comp_path` |
+| `emdash3_2_walking_end_hit.lp` | `fapp1_comp_path` |
+| `emdash3_2_circle_hit.lp` | `omega_equiv_along_fapp1_fapp0` |
+| `emdash3_2_ringed_sites.lp` | `Adjunction_hom_prof_comparison_along` |
+
+Central `emdash3_2_checks.lp` also refers to retired operations and needs its
+planned migration. `api_remaining_removed_core_references.json` records
+the exact selected paths and matches. This is a lexical locator: some names
+may have a qualified extension replacement, and the absence of other matches
+does not certify that every consumer works without global cuts. Inspect the
+actual hypotheses and interfaces before adapting these next owners.
+
+Production source remains unchanged. Displayed assembly, promotion,
+affected-core native/CAS/all-path requalification, TypeScript, and final
+integration gates remain required. Existing whole-Op/Sigma-Hom qualifications
+and all recorded scope exclusions remain in force.

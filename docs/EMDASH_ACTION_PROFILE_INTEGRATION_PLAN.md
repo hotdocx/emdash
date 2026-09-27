@@ -586,6 +586,30 @@ and runner history below is retained evidence, not a live-job instruction.
 
 ## Work Sequence And Living Ledger
 
+The [directed/simplex continuation](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md#directed-and-simplex-continuation-on-the-corrected-core)
+qualifies all 28 selected registered reviewers on the corrected `b9cc2726`
+core. One newer main proof called the retired generic strict-naturality
+theorem unnecessarily: `pathout_transf_formal_target_path` now evaluates only
+its target route at the represented identity. The owner's eleven public signatures,
+computation rule, raw-transformation interface and original laxity cell are
+preserved. Two source endpoint-noncollapse observations replace the old
+cell-versus-identity negatives. No new profile, primitive, rewrite or unifier
+is introduced.
+
+All individual reviewers pass, as does their combined environment after
+preloading 42 semantic owners: 199 positive/36 negative assertions and 87
+type queries, 19.660s at the default 2 GiB/90s. Exact source/receipt and warning
+evidence is in the linked report. These are prototype results; production
+promotion and the earlier native/CAS/all-path requalification remain open.
+
+Next inspect the static remaining-name inventory for newer main WalkingEnd,
+Circle, finite-limit and geometry/site consumers. The scan identifies five
+semantic owners and central diagnostics referring to names retired from the
+candidate core; it does not establish that all are unresolved or exhaust
+the remaining migration. This work is independent of the assembly-option
+review. `API-05` retains its explicit-profile requirement and the documented
+FibCov/cone prerequisites; neither is waived or declared complete.
+
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
@@ -601,7 +625,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
 | `API-05` | member-indexed families, retained inclusion and inverse Hom-action comparisons qualified; complete rho/assembler premise open | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons. The [member-family continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#member-indexed-question-and-extension-families) retains the original inclusion's higher action and passes 493 positive/134 negative combined assertions. Complete pullback/factorization coherence in the member/base directions, a sufficient explicit assembly profile, and full rho assembly remain open. |
-| `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
+| `API-06` | Gray closure/D2 and 28 directed/simplex reviewers qualified in prototypes; other main consumers and promotion pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. D2 retains judgmental recovery through the classified graph and main's separate represented-comma derivation. The corrected-core directed/simplex continuation preserves the PathOut lift's raw interface with a target-only identity proof; all 28 reviewers and their 42-owner combined environment pass 199 positive/36 negative assertions and 87 type queries. WalkingEnd/Circle and other remaining main consumers, affected-core requalification and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
 | `API-09` | incremental | Current authorities, notation, source registry, catalog, health and affected book evidence/prose. |

@@ -871,6 +871,31 @@ comparisons; point-fibre equality alone does not provide them. These are
 the next semantic prerequisites, while the previous broad 493/134 evidence
 remains unchanged and does not cover the new cone modules.
 
+### Directed And Simplex Consumers On The Corrected Core
+
+The [directed/simplex continuation](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md#directed-and-simplex-continuation-on-the-corrected-core)
+checks 28 registered reviewers and their 42 semantic owners on core
+`b9cc2726`. All individual reviewers and the combined environment pass;
+the latter has 199 positive/36 negative assertions and 87 type queries.
+The slice retains newer main bodies and uses the source's endpoint-noncollapse
+observations for the profile and ordinal-dimension-three reviewers.
+
+The sole new implementation adaptation replaces the retired generic
+strict-naturality call in `pathout_transf_formal_target_path` with typed
+reflexivity of its target-only identity evaluation. All eleven public
+signatures and the owner rule are unchanged. Raw transformations, the
+original pre/right laxity cell and source reframe remain; two negative
+controls reject source/target collapse. Dimension four and variable ordinal
+dimension remain unconditional in the original target functor.
+
+All current runs use default 2 GiB/90s limits. The 73-input manifest and
+warning/owner audits are pinned in the linked review. A static follow-up
+inventory identifies WalkingEnd/Circle, finite-limit, geometry/site owners
+and central diagnostics with references to retired core names. These are
+next inspection targets, not a proof that every listed reference is unresolved
+or that the remaining migration is exhausted. Production promotion and
+displayed assembly remain open.
+
 ### New Main Consumers Over The Corrected Candidate
 
 `tmp/probes/api_ordinary_profile_minimal/` is the earlier isolated package
@@ -1324,7 +1349,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/emdash3_2_readable_pseudofunctors.lp` | M | API-05: exact source candidate and four-positive/three-negative controls preserve both inverses and distinct endpoints; production promotion pending. |
 | `emdash2/emdash3_2_ringed_sites.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/emdash3_2_semicubical_nerve.lp` | M | API-06: exact source candidate and semicubical/Gray/path joint consumers pass; production promotion pending. |
-| `emdash2/emdash3_2_simplex_shapes.lp` | M | API-06/07: source candidate checks as an inherited path/address dependency; complete focused simplex review and production promotion remain pending. |
+| `emdash2/emdash3_2_simplex_shapes.lp` | M | API-06/07: source adaptation and corrected-core directed/simplex review pass, including the 28-reviewer combined closure. Production promotion remains pending. |
 | `emdash2/emdash3_2_strict_functor_actions.lp` | A | Pending: API-04: post-profile actions with new-main consumers. |
 | `emdash2/emdash3_2_walking_end_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/adjunction_triangles.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
@@ -1332,9 +1357,9 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/commutative_ring_presheaf_locality.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/cubical_face_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/cubical_open_box_sieves_recursive.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
-| `emdash2/examples/dependent_simplex_faces.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/dependent_simplex_ordinal_dimension3.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/dependent_simplex_profiles.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/dependent_simplex_faces.lp` | M | API-06: passes individually and in the corrected-core 28-reviewer closure, retaining the selected direct/sequential whole face observation. Production promotion pending. |
+| `emdash2/examples/dependent_simplex_ordinal_dimension3.lp` | M | API-06: source endpoint-noncollapse observation adapted; individual and combined corrected-core reviews pass. Production promotion pending. |
+| `emdash2/examples/dependent_simplex_profiles.lp` | M | API-06: source endpoint-noncollapse observation adapted with current canonical evidence retained; individual and combined corrected-core reviews pass. Production promotion pending. |
 | `emdash2/examples/direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and 17-positive/two-negative reviewer pass in the prototype; displayed locality/rho assembly remains unqualified. |
 | `emdash2/examples/generic_groupoidification.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
@@ -1362,7 +1387,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/path_cubical_structured_recursion.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/profunctor_weighted_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/examples/simplex_shapes.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/simplex_shapes.lp` | M | API-06: passes individually and in the corrected-core 28-reviewer closure. Production promotion pending. |
 
 ## Source Documentation And Tooling Dispositions
 
