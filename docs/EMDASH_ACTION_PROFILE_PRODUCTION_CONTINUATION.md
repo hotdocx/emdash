@@ -1007,3 +1007,64 @@ using exact production sources and qualified compiled library parents.
 Semantic failures stop the sweep; measured resource-only retries remain
 bounded. This is not the final cold-recipe/full-CI result. Keep its source and
 registry snapshot fixed while it runs.
+
+## Displayed-Evaluation Control And Exact Reviewer Continuation
+
+The first reviewer sweep stopped after 223 successes at
+`examples/displayed_evaluation.lp`, receipt
+`20260927T152341Z-f252b580d1294bd688d8044c53ff8eda`. Its assertion at the
+former line 134 demanded composition preservation for an arbitrary raw
+functor, exactly the generic strictness this goal retires. The complete
+full-file candidate replaces that expectation with a positive typing check
+and raw noncollapse test, and adds the same computation for an actual opaque
+`StrictFunctor` view. Other constructor-specific displayed-evaluation,
+transported-identity, Op and higher-action assertions remain unchanged.
+This does not reopen Op/duality repair.
+
+The candidate passes at ordinary bounds in 0.620s
+(`20260927T152922Z-92fe0b6e626c45d5a0a5834befc89479`), and the installed
+reviewer passes in 0.613s
+(`20260927T153103Z-85040f93ca814102b62eddc5a3795543`). Exact before/after
+sources and the selected scope are in
+`api_displayed_evaluation_profile_installation.json`.
+
+All 223 successful predecessor receipts were revalidated before continuation:
+every recorded source/object input retains its exact bytes, each current
+source closure matches the recorded source closure, and runner/configuration
+inputs are identical. Newly generated successful compilation outputs are
+outputs, not retroactive inputs, matching the owning runner's stability rule.
+The failed predecessor state remains unchanged. The active continuation is
+`api_resume_production_reviewers1.py`, state
+`api_all_production_reviewer_resume1_results.json`, log
+`logs/api-all-production-reviewers-resume1.log`, live tool session `28336`.
+It rechecks the repaired file and continues the same complete 596-target
+corpus. The observed continuation has passed 248 reviewers; full cold recipes,
+CI, production CAS and final handoff remain required.
+
+## Groupoid Reviewer Local Eta Setting
+
+The first continuation stopped after 301 successful reviewers at
+`examples/grpd_eq1_type_equiv_bridge.lp`, receipt
+`20260927T155314Z-4bc045eb565442469dda3fccf76b3790`. The first whole-function
+identity assertion needs the local Lambdapi `eta_equality` flag. The imported
+compiled core does not enable that flag for this reviewer. The relevant
+`grpd_id_function`, `grpd_comp_function` and capped composition rules are
+unchanged from main; this failure is not a new strictness or assembly issue.
+
+The complete candidate adds only the explicit local flag and its explanation.
+Every original assertion is unchanged, including the proof-time identity and
+composition comparisons, selected inverse observations, identity noncollapse,
+and absence of definitional package eta. It passes at 2 GiB/90s in 0.439s
+(`20260927T160040Z-9cab09f0a68f44efa05d2213c1550542`); the installed source
+passes in 0.426s (`20260927T160102Z-c836aae08ea04e99b05bde51e78330a7`).
+Exact source hashes are in `api_grpd_bridge_eta_installation.json`.
+
+The predecessor's 301 successful receipts were revalidated against their exact
+source/object and runner inputs before continuation; its failed state is
+preserved. The current driver is `api_resume_production_reviewers2.py`, state
+`api_all_production_reviewer_resume2_results.json`, log
+`logs/api-all-production-reviewers-resume2.log`, tool session `5137`. The
+repaired reviewer also passes there (`20260927T160125Z-03da9b14023742bcbc47bfebe6924cf8`).
+No library input or profile registry changed. Complete reviewer qualification,
+measured profile updates, full cold-recipe/formal CI, production CAS replay,
+checked health and the final semantic checkpoint remain open.
