@@ -2,8 +2,8 @@
 
 Date: 2026-09-26
 
-Status: retained-member point, matching action, whole member projection and
-member-indexed question/extension families pass in isolated candidates;
+Status: retained-member point, matching action, whole member projection,
+member-indexed families and a whole lift/cone pass in isolated candidates;
 complete displayed/rho profiles and inverse assembly remain open
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05`.
@@ -57,6 +57,58 @@ The alternative below now removes this extra premise from the retained-member
 proof. Producing strictness for arbitrary glue-output sections is therefore
 no longer a prerequisite for that statement. Complete locality/rho action
 and inverse assembly remain unqualified.
+
+## Decision Review: Three Distinct Boundaries
+
+The user requested a review of the earlier choice on 2026-09-27 UTC. That
+request does not itself reverse the selected explicit-profile requirement.
+The choice concerned the unqualified displayed assembly assumption, not a
+blanket prohibition on computations for a particular strict constructor.
+
+At source tip `114dc19f`, `StrictTransfdPointwiseOmegaAlong` quantifies
+pointwise `OmegaEquivAlong` evidence for the fibre transformations. Despite
+its name, its definition contains no strictness or other action-profile
+field. The two `strict_transfd_pointwise_*_inverse` constructors accept an
+arbitrary displayed transformation with that evidence, and the two whole
+cancellation laws are declared constants. Their component beta rules select
+the supplied inverse arrows. This is a generic primitive assembly interface;
+it is not itself a rewrite equating arbitrary `F[g] o F[f]` with `F[g o f]`,
+nor is it a strictness rule confined to one particular functor.
+
+Separately, the [vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md)
+found genuinely generic leakage in rules retained from the source branch.
+Staging a generic transfor-composition proof and specializing both transfors
+to `id_F` yielded a composition-preservation equality for arbitrary raw `F`.
+The [postcomposition audit](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#further-staged-strictness-route-api-04p)
+found another such route. Those corrections belong to the requested lax
+boundary regardless of which displayed-assembly option is selected. They
+must not be described as rejecting only a legitimate fixed-constructor
+strictness instance.
+
+Justified constructor-specific computation and supplied structural contracts
+remain possible under the owner/subject-reduction/overlap SOP. There is no
+new requirement to mechanically wrap every structural constructor. For
+example, the source's named `direct_cover_completion_glue_is_strict` contract
+is retained in the candidate. It constrains the whole glue constructor's
+question-substitution action; it does not automatically give the different
+rho/locality action profile. A constructor name parameterized by arbitrary
+functors must still be checked for indirect generic consequences.
+
+| Earlier option | What it commits to | Consequence for integration |
+| --- | --- | --- |
+| Explicit action profile | Select a sufficient condition on the existing action, preserve the selected inverse data, and qualify the actual consumer against that condition. | Makes the coherence obligation explicit, but its sufficient formulation and concrete producer still require work. The first full-strict fibre candidate was stronger than intended for identities of lax endpoints; the relative alternative remains under review. |
+| Preserve the existing assumption | Retain the generic whole inverse constructors, component beta rules and cancellation axioms, documenting their assumed status. | Could avoid much of the present profile/producer investigation. It carries an unqualified assembly principle whose adequacy for the retained lax semantics has not been established here. It does not require restoring unrelated global strictness leaks. |
+
+Most recent member/cone/FibCov work supports the first option's actual rho
+producer. Requiring an explicit profile was not merely a wrapper insertion:
+the investigation also seeks to justify the producer rather than add an
+unproved admission. Keeping the old primitive could have substantially
+shortened this portion of the work, but no alternate complete integration
+run establishes that the goal would already be finished. Remaining directed
+consumers, promotion of prototype corrections, affected native/CAS/path
+requalification, TypeScript conformance and final integration gates are
+independent outstanding work. The current decision remains in force pending
+an explicit revision; this review records its real cost and trust tradeoff.
 
 ## Derived Retained-Member Route
 
@@ -520,3 +572,129 @@ Then derive the actual rho profiles and select a sufficient explicit
 assembly premise. All three assembly stages remain unrestored. Production
 source is unchanged, and earlier native/CAS/all-path receipts retain their
 earlier core pins until their affected closures are requalified.
+
+## Whole FibCov Lift And Member Cone
+
+The next experiment constructs the relevant whole section before trying to
+identify its components with canonical transport. For a family `E` over `K`
+and `u : E[x]`, define
+
+```text
+L(E,x,u) = sigma_map_func(fib_cov_transf(E,x,u))
+        : PathOut_K(x) -> Sigma_K(E).
+
+cone(E,x,u) : Pi_z Hom_(Sigma E)((x,u), L(E,x,u)[z]).
+```
+
+The cone is the existing `pathout_refl_arrow_sec(x)` mapped through
+`fapp1_at_transf(L(E,x,u), pathout_refl_obj(x))`. Thus it is one whole
+section produced by existing owners, with no new coherence declaration.
+The lift's object action at `(y,p)` is `(y,E[p](u))`. The cone's generic component is
+`sigma_map_transport_arrow(fib_cov_transf(E,x,u),p,id_x)`.
+
+The original sieve inclusion's fibre functor, followed by a constant-base
+totalization of the represented fibre, gives the whole map from actual
+members at `V` into `PathOut_(Op K)(U)`. Reindexing the generic lift and cone
+along that map yields `api_member_pulled_question_lift_func` and
+`api_member_pulled_question_cone`. The object value is the original pulled
+question. A staged generic proof supplies a path from the actual cone
+component to the mapped PathOut transport arrow. The direct runtime
+comparison at the concrete opposite-source presentation remains negative;
+the path is the qualified interface.
+
+### Whole Base Projection And Exact Comparison Gap
+
+The whole target of the cone has constant base `V`. This is proved using
+the existing whole projection laws for `sigma_map_func` and
+`sigma_pullback_total_func`, associativity and congruence. An actual-member
+`PathOver` observation retains the whole next Hom action of that base
+comparison. A wrong-base comparison is rejected. No unrestricted Sigma-Hom
+or Homd higher-action formula is used to justify a new computation.
+
+The cone component has a specific remaining fibre cell:
+
+```text
+fdapp1_int_cell(fib_cov_transf(E,x,u), p, id_x)
+  : E[p](u) -> E[p](u).
+```
+
+`api_sigma_fibcov_transport_unit_path` derives equality with the original
+`sigma_transport_arrow(E,p,u)` **given a path identifying this cell with
+identity**. Its body applies congruence to the existing Sigma-arrow
+constructor. The premise is not supplied. Runtime conversion and direct
+typed reflexivity for that cell are both rejected by controls; neither
+negative proves that another equality path cannot be derived.
+
+The actual cone also has a different whole question-target presentation
+from the preceding constant-basechange construction. Their literal object
+values agree, but typed reflexivity between the whole functors is rejected.
+The new cone is therefore a coherent candidate section with checked
+observations, not an established comparison with the original canonical
+pullback cone. Its existence does not justify transferring the original
+extension-pullback or retained-factorization contracts to it silently.
+
+A separate control tests a possible semantic reconstruction of FibCov via
+the ordinary internal action and displayed evaluation. The families
+`Functor_catd(Const(A),E)` and `hom_(Cat,E,A)` have the same fibre categories.
+The current environment rejects typed-reflexivity comparisons both of their
+whole families and of their base-arrow action functors. In the latter case
+the residual owners are `Hom_func` and `hom_postcomp_func`. This records a
+prerequisite for that reconstruction, not an impossibility result or a new
+family agreement. The reconstruction has not been installed.
+
+### Cone Qualification And Resources
+
+Seven new construction/proof modules contain nineteen definitions. They
+add no primitive, rewrite, unifier, strictness assumption or rho admission.
+The generic cone, its component path, the generic reindexing theorem and
+the conditional canonical-arrow comparison check before specializing to
+the actual question classifier. Early implicit-Sigma endpoint inference
+failures are retained separately from the later runtime and resource results.
+
+| Current check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Actual member cone and mapped-arrow component path | `20260927T005539Z-eea9a3beed524efd96cdc4d5bb99fc9e` | 38.413 / 2,438,288 |
+| Whole constant-base path and actual next Hom | `20260927T005835Z-ad8a39ae33004d40a6e591e03d634198` | 38.481 / 2,439,644 |
+| Member/inclusion/cone interaction and evaluation-family controls | `20260927T005948Z-d8edb51646c64a249f851b0a53fd8dd6` | 43.737 / 2,441,696 |
+
+The final focused interaction review passes **22 positive/12 negative
+assertions over 36 inputs**. Definition bodies check in addition to these
+assertions. This includes the preceding member-family/inclusion controls;
+the three listed closures overlap and their counts must not be added.
+
+The last staged actual-member proof exhausted 2 GiB in 28.930s, receipt
+`20260927T005430Z-cb496b2775ce402e86852717d14bfd5f`. The first current
+success above uses **identical source inputs** at 3 GiB/90s. All three
+current checks use that measured profile, `OCAMLRUNPARAM=o=20,v=1024`,
+warnings, subject reduction, serial execution and the existing file/core/
+no-swap guards. The 2 GiB/90s defaults remain unchanged. The earlier expanded
+and partly staged attempts also exhausted 2 GiB; they are historical
+failures, not alternative successful recipes.
+
+The previous focused review and the new joint review both have 971
+critical-pair warnings and 150 pattern diagnostics. Heads, rule families,
+complete participant instances and source locations all have zero deltas;
+warning parsing reports no issues. The core and profile hashes remain
+`b9cc2726d8614762f85d33a8f64adaaa78668518aa4ada4866abf82e861d7c10`
+and `f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+All 247 inputs of the preceding qualification manifest were rehashed and
+remain unchanged. Its broader 493-positive/134-negative review retains
+that exact scope; it does not include the new cone modules.
+
+The package remains `emdash2/tmp/probes/api_member_identity_candidate/`,
+with no compiled parents. The new manifest is
+`emdash2/tmp/probes/api_member_cone_current_qualification_manifest.json`,
+SHA-256:
+`855b16003a22533d1832963facfef9f34b7a0f51fb649d0ea7bc4711a7bea388`.
+It binds the current 36-input union, nineteen definitions, warning comparison,
+source-preserving resource retry, failed approaches and immutable input blobs.
+No production LP or TypeScript source changed.
+
+Next qualify the complete FibCov base action and its normal-unit comparison
+from its generic semantic owner. Any evaluation-based implementation first
+needs the actual whole and base-action family comparisons identified above.
+Then compare the candidate cone with the original canonical arrow family,
+preserving the original inclusion and both inverse choices. Only after
+those comparisons can this route discharge the retained-factorization,
+glue/silent and rho-profile obligations. The three assembly stages and the
+remaining parent-plan integration gates remain open.

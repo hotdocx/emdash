@@ -853,6 +853,24 @@ The separate base/unit observation establishes runtime nonconversion only,
 not the absence of an equality path. Production source remains unchanged;
 older native/CAS/all-path evidence still requires affected-core requalification.
 
+The [whole-cone continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-lift-and-member-cone)
+adds nineteen definitions with no core/profile change. The existing PathOut
+eliminator and Sigma map produce a whole lift and member-indexed section;
+the actual component path, whole constant-base comparison and its next-Hom
+observation pass. The focused member/inclusion/cone review has 22 positive/
+12 negative assertions over 36 inputs and unchanged warning inventories.
+The concrete proof uses a measured 3 GiB/90s profile; the report retains the
+identical-source 2 GiB failure and successful retry.
+
+This cone has not yet been compared with the original canonical pullback cone.
+Its comparison needs the FibCov base/unit path and a qualified relation
+between the lift-based and selected question-family presentations. The
+conditional component theorem supplies neither premise. A potential
+evaluation-based reconstruction also needs whole/base-action family
+comparisons; point-fibre equality alone does not provide them. These are
+the next semantic prerequisites, while the previous broad 493/134 evidence
+remains unchanged and does not cover the new cone modules.
+
 ### New Main Consumers Over The Corrected Candidate
 
 `tmp/probes/api_ordinary_profile_minimal/` is the earlier isolated package

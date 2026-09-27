@@ -246,6 +246,14 @@ isolated candidate, not production cut retirement.
 
 The user confirmed on 2026-09-26 that the displayed operation should require
 an explicit action-based profile, following the current recommendation.
+The later [decision review](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#decision-review-three-distinct-boundaries)
+separates this generic assembly assumption from actual global strictness
+leaks and from justified constructor-specific computation. The user's
+request to review the options does not change the selected requirement.
+Its implementation is a substantive profile/producer qualification task,
+not a mechanical wrapper insertion; the alternative would retain a clearly
+documented generic assembly assumption and leave independent migration and
+final-gate work outstanding.
 Do not restore the unqualified source assembler as the accepted integration
 result. The actual direct-cover consumer is Cat-valued and has no automatic
 ordinary/groupoidal premise. The constant-section specialization probe stops
@@ -528,6 +536,35 @@ the whole matching parameter and compare any distinct raw evaluation
 presentation explicitly. A separate FibCov base/unit diagnostic establishes
 runtime nonconversion only; it neither excludes a derived equality path nor
 supplies a unit-coherence assumption.
+
+The [cone continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-lift-and-member-cone)
+constructs a whole FibCov lift and cone from the existing PathOut eliminator
+and Sigma map, adding nineteen definitions and no rule or axiom. Its actual
+member component is compared with the mapped PathOut transport arrow.
+The whole constant-base comparison and its next-Hom observation pass as well.
+The focused interaction review, including the preceding member/inclusion
+controls, passes 22 positive/12 negative assertions over 36 inputs. Warning
+inventories, full participant instances and source locations are unchanged.
+The earlier 493/134 broad evidence retains its own unchanged scope and does
+not include these new cone definitions.
+
+The final staged component proof exhausted 2 GiB in 28.930s. Identical source
+passed at 3 GiB/90s in 38.413s; the joint review passed in 43.737s with that
+same profile. No default limit changed. The linked report records the
+receipts, exact source manifest and preserved failure history.
+
+The cone's comparison with the original canonical arrow still needs a path
+identifying its FibCov base/unit cell with identity. A derived conditional
+theorem isolates that premise without supplying it. The lift-based question
+presentation is also not identified with the selected constant-basechange
+presentation merely because their objects agree. Next qualify the complete
+FibCov base action and its normal-unit comparison through the generic
+semantic owner. A possible reconstruction through `fapp1_at_transf` and
+displayed evaluation first needs an actual comparison between fixed-domain
+displayed functor families and represented families: the no-new-rule control
+checks point agreement but rejects typed reflexivity for their whole and
+base-action presentations. Do not infer nonexistence of another derived
+comparison from these controls or insert a blanket unit/profile admission.
 
 Then qualify complete rho action and the explicit assembly profile before
 restoring the three assembly stages. The relative predicate remains
