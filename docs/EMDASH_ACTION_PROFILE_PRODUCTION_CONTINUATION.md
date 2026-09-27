@@ -1285,3 +1285,17 @@ registered source/package hashes against the completed reviewer snapshot, all
 596 success receipts, the TypeScript aggregate log/core hashes, and continued
 byte identity of the six selected primary native owners with pinned main.
 It does not replace the pending full CI/CAS results.
+
+
+The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) now
+maps each goal requirement to its inspected evidence and marks the remaining
+CI/CAS/health/checkpoint obligations explicitly incomplete. It records no
+new mathematical scope. Its artifact check finds the book/article receipt
+still exact; the template receipt alone predates the Eq1 metadata follow-up.
+The bounded template gate is refreshed successfully as
+`reviewer-20260927T170021Z-6acac73f3d1a46718100c25e0946ca7e`, with all current
+input hashes verified. A source-map audit confirms the 80-source packaged
+runtime closure is unchanged and excludes that acquisition module. The
+[source-alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md#final-package-and-template-evidence-identity)
+records this scope; the full TypeScript aggregate is carried at its actual
+previous snapshot. Formal CI and its serial follow-up remain live.

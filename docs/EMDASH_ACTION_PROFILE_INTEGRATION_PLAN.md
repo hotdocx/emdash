@@ -46,6 +46,9 @@ inherited bounded Gray/path-cubical work on current main while preserving
 main's newer qualified consumers. Produce a clean, validated local integration
 branch with an exact migration ledger and reviewable checkpoints.
 
+The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+records the inspected requirement evidence and remaining completion gates.
+
 Use active source and the [formal SOP](../emdash2/AGENTS.md), followed by the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md),
 [Foundations](../emdash2/reports/EMDASH_FOUNDATIONS.md),

@@ -231,3 +231,19 @@ its exact command audit, live eight-test module suite, typecheck and lint.
 No shared engine, public barrel or package setup changed, so the proportional
 validation policy carries the full aggregate forward without another complete
 run. Do not claim that the preceding aggregate itself ran on this later edit.
+
+## Final Package And Template Evidence Identity
+
+The final acceptance audit confirms that the later acquisition-metadata edit
+is the sole changed input of the earlier template receipt. The bounded owning
+template gate is rerun and passes on current inputs:
+`reviewer-20260927T170021Z-6acac73f3d1a46718100c25e0946ca7e`. Its log and all
+recorded input hashes are reverified. This refresh does not rerun the complete
+TypeScript aggregate or alter its recorded snapshot.
+
+The existing package runtime's 95 source maps embed 80 unique source files;
+every embedded source still matches current bytes, with no missing files.
+The later `scale_stress_3b_acquisition.ts` module is outside that runtime
+closure. `api_packaged_source_closure_audit.json` records the source hashes
+and the retained packed-package verification log hash. No package runtime or
+public barrel changed during this follow-up.
