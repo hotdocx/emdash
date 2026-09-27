@@ -1344,3 +1344,22 @@ previously repaired adjacent-window reviewer. The outer metrics log records
 475 unique successful targets after the exact-window group; no aggregate
 success is claimed yet. The formal handle remains `47799`, and the waiting
 CAS/health controller remains `15309`. Source and tooling inputs stay fixed.
+
+
+## Cold Arrow-Tail Recipe Clears The Earlier Failure
+
+The same complete CI invocation passes all six members of the cold arrow-tail
+recipe, receipt `20260927T174430Z-b7d0e901c5614cdfb45a9bce3fc12744`, in
+794.005s. The owning metrics records a 132.334s share per group member;
+this is not each child's elapsed time. The repaired adjacent-window reviewer
+itself passes at the registered 3 GiB/90s profile in 24.020s,
+receipt `20260927T175718Z-0b8a221131d24f72a4183aa4e80eaed9`. Its same five
+observations, original H/K/Q and inverse data remain unchanged from the
+qualified adaptation.
+
+This clears the precise cold-recipe boundary that stopped the previous full
+CI attempt. The current aggregate now records 481 unique successful targets
+and proceeds to the cold bounded-prerequisite recipe. No additional formal
+source, profile or tooling change was needed. Complete CI, production CAS,
+checked health and the final semantic checkpoint remain outstanding. Current
+live handles remain formal `47799` and follow-up controller `15309`.
