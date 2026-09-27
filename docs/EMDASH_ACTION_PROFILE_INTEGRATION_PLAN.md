@@ -710,12 +710,16 @@ assertions and 64 type queries in its recorded source closure. After a
 8 GiB/600s profile in 173.778s. The enabled-warning reference comparison
 classifies the already selected profile/identity-family restrictions, with
 104 fewer critical-pair diagnostics and no rule-family count increase.
-The central diagnostic draft reaches its assertions at 6 GiB after import
-allocation failures at 2/4 GiB. Two old generic postcomposition assertions
-are now paired raw-negative/profile-positive controls; all four focused
-statements pass. The full draft remains unqualified and is being checked
-with 71 exact-source compiled parents. The selected-core consumer manifest
-and exact remaining promotion boundary are recorded in the linked review. No production
+The full central diagnostics now pass both from source and with checked
+parents: 2,137 positive/299 negative assertions at 6 GiB/180s. Six generic
+accumulation tests and the representable interchange test retain raw-negative
+observations with explicit-profile positives; five raw CommRing-presheaf
+statements are restored exactly from main. The two definition-only guarded
+interchange/vertical-path owners are retained. Source warning participants
+are unchanged by these diagnostic edits. The linked review records both
+current manifests, resource history and the 21-owner/94-symbol naming map.
+Next promote the qualified owners/reviewers, complete remaining consumer and
+TypeScript adaptation, synchronize the registry/authorities and run final gates. No production
 LP has changed in this tranche.
 
 | Row | State | Deliverable / acceptance |

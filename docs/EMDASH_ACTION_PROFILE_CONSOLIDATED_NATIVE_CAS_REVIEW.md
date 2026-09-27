@@ -2,8 +2,8 @@
 
 Date: 2026-09-27 UTC
 
-Status: selected-core native/CAS/cubical consumers qualified; central diagnostics,
-production promotion and complete integration gates remain pending
+Status: selected-core native/CAS/cubical consumers and central diagnostics
+qualified; production promotion and complete integration gates remain pending
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-04`, `API-04R/V/P/T`, `API-05`, `API-06` and `API-07`.
@@ -166,7 +166,7 @@ the changed warning stream and does not establish confluence.
 Exact participant clauses, source differences and settings are retained in
 `emdash2/tmp/probes/api_expanded_warning_reference_comparison.json`.
 
-The central diagnostics migration is a separate unqualified draft. Its first
+The central diagnostics migration began as a separate unqualified draft. Its first
 2 GiB/90s run allocation-fails during affine-glue imports after 52.815s,
 before reaching the diagnostic assertions (receipt
 `20260927T040804Z-f3d68dc6f956471a934cb99dae7026a1`). This is resource evidence,
@@ -183,7 +183,7 @@ The two affected raw statements are retained as negative tests, with two
 explicit `StrictFunctor` positives added. All four exact replacement
 statements pass in a focused 2 GiB/90s check, receipt
 `20260927T041955Z-0167f874a5d040da96a49be092d3572d` (5.407s). No rule or
-mathematical owner changes. The full draft is still unqualified.
+mathematical owner changes. At that stage the full draft was still unqualified.
 
 For subsequent diagnostic iterations, a separate resource package
 `api_central_baseline_compiled_candidate` reuses 71 freshly generated parents
@@ -195,8 +195,51 @@ identity controls absent from the source branch, and
 retains all newer main imports. Source changes to profile-dependent tests are
 reviewed individually; a clean textual transplant is not sufficient evidence.
 
-Nineteen prototype helper modules lie in the selected library-owner closures.
-They need permanent ownership/names, registry membership and corresponding
-focused consumers before production promotion. Remaining production owners,
-central diagnostics, TypeScript conformance, catalog/health/book and full
-formal/integration gates remain open. Main is unchanged.
+## Complete Central Diagnostics
+
+The remaining four raw pre/post accumulation statements now have paired
+raw-negative and explicit-profile-positive tests. The representable
+interchange conversion likewise remains as a negative, paired with the
+existing path theorem under its actual strict/pre-strict premises. All ten
+replacement statements pass in the focused review, receipt
+`20260927T042659Z-bc1a9f5ab7624031b99e44d020237895` (5.627s, 2 GiB/90s).
+The exact previously qualified `api_profiled_vertical_paths` and
+`api_profiled_interchange` owners are retained, including the four guarded
+interchange/Eckmann–Hilton derivations. No new rule is introduced.
+
+Five source-branch assertions had unnecessarily strengthened the raw
+CommRing-presheaf inputs, contrary to this integration's retained OneCat-based
+interface. They are restored byte-for-byte from main. The full central suite
+then passes both with compiled parents and directly from source:
+
+| Check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Compile exact central library imports | `20260927T042815Z-dbb7e4246f064100be0ccfac2d345e76` | 142.508 / 4,604,912 |
+| Complete central suite with checked parents | `20260927T043201Z-3a803f6ded8b4cf39b4a8e9c6dae6104` | 14.687 / 1,525,832 |
+| Complete central suite from source | `20260927T043242Z-26ffbc9945934646b8292fefcbd846fc` | 133.019 / 4,923,712 |
+
+All three use 6 GiB/180s with the same warning, subject-reduction and GC
+settings. The two complete reviews cover 2,137 positive and 299 negative
+assertions in the 139-LP source closure. The source-only run's 1,372 critical
+pair and 162 pattern diagnostics have no parser issues. Its exact full
+participant inventory equals the earlier import-complete 6 GiB trial's
+inventory, before the diagnostic edits and definition-only helper imports.
+
+The central manifest is
+`emdash2/tmp/probes/api_central_diagnostics_current_manifest.json`, SHA-256
+`66c60c92f5b92ed989246672612264b16ff0a3b3e8bd9d4890ce1ef00947d39f`.
+It binds five successful receipts, the 281-input union, five historical
+resource/assertion failures, exact statement edits and the source/object
+preparation. The combined compiled and source qualification does not upgrade
+the inherited assembly assumptions to derived theorems.
+
+There are now 21 selected prototype helper owners, including the two
+interchange/vertical-path modules. A reviewed naming map proposes permanent
+filenames and 94 symbol renames, including helpers embedded in existing
+owners; none collide with current production names. The map is
+`emdash2/tmp/probes/api_production_owner_naming_draft.json`. Naming changes
+must preserve the exact mathematical bodies and receive affected validation.
+Next promote the selected implementations and reviewers into tracked owners,
+register them, then qualify remaining production consumers and TypeScript
+conformance. Catalog/health/book synchronization and full formal/integration
+gates remain open. Main is unchanged.

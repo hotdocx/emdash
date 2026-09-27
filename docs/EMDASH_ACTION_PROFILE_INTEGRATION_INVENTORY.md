@@ -40,8 +40,13 @@ reviewers pass individually on `6a980df3`, and the full combination with
 sheaf/geometry passes 703 positive/84 negative assertions and 89 type queries.
 WalkingEnd/Circle/finite limits preserve 81/100/15 main signatures respectively.
 The five previously located semantic-owner references have qualified
-dispositions; full central diagnostics and wider final-core qualification
-remain pending.
+dispositions. The subsequent [native/CAS and diagnostics consolidation](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md)
+qualifies the native/Gray/path interaction, all 94 original CAS assertions,
+and full central diagnostics on this corrected core. The larger interaction
+retains inherited assembly and the independent strictness controls. The
+central suite passes from source with 2,137 positive/299 negative assertions.
+Production promotion and remaining consumer/final-gate qualification remain
+pending; the reviewed preparation map covers 21 helper owners and 94 symbols.
 
 ## Semantic Owner Ledger
 
@@ -1341,7 +1346,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | Pinned source path | Source change | Integration disposition |
 | --- | --- | --- |
 | `emdash2/emdash3_2.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
-| `emdash2/emdash3_2_checks.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
+| `emdash2/emdash3_2_checks.lp` | M | Full prototype passes from source and with compiled parents: 2,137 positive/299 negative assertions. Newer main contravariant tests and five raw-presheaf statements are retained; generic accumulation/interchange checks have explicit profile boundaries. Production promotion and catalog registration remain pending. |
 | `emdash2/emdash3_2_circle_hit.lp` | M | API-06: named strict Path action maps the original equivalence; all 100 signatures, original encoder and both inverse choices qualified on selected core. Promotion pending. |
 | `emdash2/emdash3_2_commutative_algebra_locality.lp` | M | API-05: current main consumer passes in the smaller-core sheaf/geometry closure with the raw-presheaf interface retained. Production promotion pending. |
 | `emdash2/emdash3_2_commutative_algebra_presheaves.lp` | M | API-05: actual CommRing OneCat evidence replaces the generic composition call; all twenty main signatures plus three optional source refinement views qualified. Production promotion pending. |
