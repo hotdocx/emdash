@@ -98,8 +98,9 @@ contained 791 core and 593 reviewer targets, with 633 in the check suite.
 
 This is uncheckpointed semantic work. All 791 library targets and the later
 307-object comment-exact rebuild pass; the complete TypeScript aggregate is
-green. Cold recipe qualification, live conformance, full formal reviewer/CI
-replay and checked health remain pending. Updated book evidence/source/typography and
+green. The cold normalization recipe, installed adapter/tooling and all nine
+selected live conformance suites pass. Full formal reviewer/CI replay and
+checked health remain pending. Updated book evidence/source/typography and
 the 416-page browser render pass. The 238 generated objects from the preceding production
 snapshot were preserved under
 `emdash2/tmp/probes/api_pre_promotion_objects_20260927T045154Z/`, with their
@@ -140,8 +141,9 @@ The TypeScript metadata alignment is applied after auditing unchanged selected
 command/declaration/rule evidence and correcting pre-existing provenance
 ordinals. All 134 loaded semantic module records are unchanged. Workspace,
 typecheck, lint, focused tests and the complete 2,948-test aggregate pass
-(2,860 passes, 88 opt-in skips, zero failures). Selected live conformance
-gates remain pending. See the
+(2,860 passes, 88 opt-in skips, zero failures). All nine selected live
+conformance suites now pass 102 tests without skips, including a separately
+reviewed Eq1 acquisition-metadata follow-up. See the
 [source-alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md).
 
 Current baseline qualification package:
@@ -783,7 +785,7 @@ LP has changed in this tranche.
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
-| `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
+| `API-01` | all source paths and migration routes recorded; final CI pending | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, sixteen declaration seeds, thirteen composition-theorem consumers and twelve semantic owner groups. All 81 LP paths are registered: 68 exact donor files, ten adaptations and three retained-main files. The audit identified and qualified the adjunction reviewer’s missing moved-owner import; every donor-added library symbol is present. Name presence does not replace semantic/consumer qualification. |
 | `API-02` | baseline controls complete; later promotion recorded under API-04/05 | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
 | `API-03` | local checkpoint `f0f327d6` | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory; direct callers migrated. The inclusion projection beta preserves both action orders and higher action. All 589 registered check targets, six affected reviewers and proportional documentation/MathOps gates pass. Global cuts and Gray arrows remain transitional until API-04/05/06; full integration CI remains API-10. |
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
@@ -798,9 +800,9 @@ LP has changed in this tranche.
 | `API-05R` | deferred follow-up research; no baseline gate | Preserve the [displayed](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md), [relative](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md), [matching](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) and [inverse](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) investigations, including exact receipts and unfinished profile-sufficiency, member/base and FibCov/cone questions. Useful derived results remain available; genuine `API-04R/V/P/T` corrections stay selected. No completed semantic proof is claimed. |
 | `API-06` | selected-core qualification and production promotion done; full production validation pending | [Consolidated baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation) qualifies all 45 selected HIT/limit/directed reviewers individually, preserving main's interfaces and source named-constructor computation. The full sheaf/geometry/HIT/limit/directed combination passes 703 positive/84 negative assertions and 89 type queries. The [native/CAS/cubical consolidation](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) now checks the Gray graph/D2 closure on the same selected core. Owner/diagnostic migration and the complete library sweep pass; final production gates stay open. |
 | `API-07` | 22 owners/17 reviewers requalified and promoted; full production gates pending | All seventeen reviewers pass afresh: 154 positive/six negative assertions and 61 type queries across their imported closure, and the wider native/CAS interaction also passes. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry and production documentation are synchronized; final integration gates remain pending. |
-| `API-08` | complete TypeScript aggregate, metadata alignment and live inventory qualified; remaining conformance pending | [TypeScript alignment](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md): selected canonical commands and declarations remain unchanged; stale provenance is corrected by actual owner identity. All 134 inspected semantic module records remain identical. No new transfer or rule is installed. Workspace, typecheck, lint, 37 transfer tests, fourteen live inventory tests and fourteen displayed-transfer follow-up tests pass. The active audit also checks every collected source pin. The complete aggregate passes at 4 GiB: 2,860 passes, zero failures and 88 opt-in skips. The corrected source pins and ordinal expectations retain unchanged semantic IR; live conformance remains pending. |
+| `API-08` | complete aggregate and all selected live conformance qualified, with recorded metadata follow-up | [TypeScript alignment](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md): selected canonical commands and declarations remain unchanged; stale provenance is corrected by actual owner identity. All 134 inspected semantic module records remain identical. No new transfer or rule is installed. Workspace, typecheck, lint, 37 transfer tests, fourteen live inventory tests and fourteen displayed-transfer follow-up tests pass. The active audit also checks every collected source pin. The complete aggregate passes at 4 GiB: 2,860 passes, zero failures and 88 opt-in skips. The corrected source pins and ordinal expectations retain unchanged semantic IR. All nine live suites pass 102 tests without skips. The subsequent Eq1 acquisition metadata correction retains all 83 selected command texts and passes its focused eight-test suite, typecheck and lint; the earlier aggregate snapshot remains explicit. |
 | `API-09` | authorities/catalog/book updated; checked health pending | Current authorities, notation, source registry and catalog are synchronized. Book evidence, rendering and local PDF artifact gates pass. The health inventory is current but explicitly not a checked health result. |
-| `API-10` | final qualification in progress | Complete library and TypeScript gates pass, as do package/template/local artifact gates. Cold recipes, live conformance, full formal CI, final exact diff audit and clean local semantic checkpoint remain required. |
+| `API-10` | final qualification in progress | Complete library and TypeScript gates pass, as do package/template/local artifact gates. Cold normalization, installed tooling and live conformance also pass. Full formal CI is running; the remaining recipes, checked health, final exact diff audit and clean local semantic checkpoint remain required. |
 
 Rows guide dependencies; they do not separate inseparable rule families.
 Remove a production cut only when its consumers migrate in the same coherent

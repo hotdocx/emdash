@@ -313,3 +313,28 @@ are unchanged. The larger profile is explicitly scoped under the standing
 authorization; defaults remain 2 GiB/90s. This measures a successful profile,
 not the minimum memory or time requirement. Maximum child RSS is distinct
 from address-space and aggregate memory limits.
+
+## Production Routing And Cold Normalization
+
+The complete 791-library sweep and subsequent 307-object comment-exact
+rebuild pass. Production now has 64 measured exact-target overrides; normal
+limits remain 2 GiB/90s. The [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md)
+owns the complete measurement manifests and final acceptance queue.
+
+The candidate cold normalization recipe prepares missing parents in local
+import order and selects each exact registered target's profile. Its source,
+package and dependency identities are checked before granting that profile.
+The first cold projection check exceeded 180 seconds at 8 GiB; the same
+source passed a second cold run at an 8 GiB/300s ceiling in 93.323s. This is
+observed timing variability, not a minimum-bound claim. That run subsequently
+exhausted 2 GiB in an original reviewer, so the whole recipe was not green.
+
+Both affected original reviewers now pass individually at 3 GiB/90s:
+monic selected-row comparison in 43.745s and normalization structure in
+26.466s. The remaining normalization/comparison reviewers pass at defaults.
+Those measured settings and the 300-second projection deadline are registered;
+the subsequent complete cold replay passes all 48 child checks, including
+the seventeen original explicit targets. The twelve-file adapter patch is
+installed, with exact receipts in `api_staged_profile_installation.json`.
+The remaining recipes still require full CI qualification. No formal
+source change or generic strictness restoration was needed for these retries.

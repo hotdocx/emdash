@@ -14,7 +14,7 @@ current source tree, not the earlier prototypes, is the active authority.
 ## Applied State
 
 - Production preparation base: `6bb2fc07`; branch `goal/action-profile-integration-v3.2`.
-- Latest tooling/progress checkpoint: `f78f48d8`; promoted mathematical source
+- Preceding plan/progress checkpoint: `decfaf18`; promoted mathematical source
   remains the separate pending semantic tranche.
 - The 190-file preparation is applied, with 21 named helper owners and 94
   symbol renames. Active code round-trips through the naming map.
@@ -584,8 +584,8 @@ objective and exclusions in the integration plan remain unchanged.
 | Adapted action-profile and bounded Gray/path-cubical owners | Complete 791-library sweep and 307-object comment-exact rebuild | Final source/reviewer checks |
 | Newer main consumers and retained data | Native/CAS/whole-H/Gray prototypes, original 94 CAS assertions, production owner checks | Final registered reviewer/CI replay at the final snapshot |
 | Assembly decision | Inherited ordinary/displayed primitive and both inverse choices retained; API-05R deferred | Keep this assumption and deferral explicit in final handoff |
-| TypeScript source alignment | 134 unchanged semantic module records; current pins; complete aggregate, focused tests and package gate | Complete all selected live conformance gates |
-| Resource reproducibility | Guard bounds, exact target profiles and tested staged adapter | Cold mathematical recipe replay, adapter installation, complete tooling gate |
+| TypeScript source alignment | 134 unchanged semantic module records; reviewed pins; complete aggregate plus metadata follow-up; all nine live conformance suites | Preserve the exact aggregate/follow-up distinction in final handoff |
+| Resource reproducibility | Guard bounds, 64 exact target profiles, complete cold normalization replay, installed adapter and full tooling gate | Remaining recipes through full CI |
 | Mathematical operations and documentation | Catalog, source/slot audits, refreshed health inventory, book and artifact checks | Checked health evidence, final warning review and full formal CI |
 | Repository/product checks | Package, standalone template and local PDF artifact gates pass | Carry exact unaffected evidence forward; final selected gate audit |
 | Git handoff | Dedicated authorized worktree, unchanged references, local progress checkpoints | Review exact final diff, commit coherent semantic tranche, confirm clean branch and handoff |
@@ -686,3 +686,187 @@ defaults, with bounded resource-only retries. State:
 `api_normalization_reviewer_measurements.json`; log:
 `logs/api-normalization-reviewer-measurements.log`. A complete cold replay
 and adapter installation remain required after those measurements.
+
+The four-reviewer survey passes. Monic selected-row comparison needs
+3 GiB/90s (43.745s, `20260927T114440Z-30650b4a06d54c47835158d9de126e54`).
+Normalization structure also exhausts 2 GiB, then passes at 3 GiB/90s
+(26.466s, `20260927T114603Z-a3edec20902c47b2942ab96408d7748b`). The original
+normalization and short-exact comparison reviewers pass at 2 GiB/90s.
+Production now registers these two reviewer overrides and the measured
+8 GiB/300s projection profile, for 64 exact target overrides total.
+`api_normalization_measured_profiles.json` records the receipts. Defaults,
+source terms and recipe membership are unchanged. The third complete cold
+replay is running in `logs/api-cold-normalization-recipe-final.log`; individual
+reviewer success does not substitute for its result.
+
+## Cold Recipe Qualified; Adapter Installed
+
+The final cold normalization recipe exits zero. All 48 guarded child checks
+pass, covering its 47-file closure and seventeen explicit recipe targets;
+all original reviewers are retained. Normalization projections pass in
+95.993s at 8 GiB/300s, and both measured 3 GiB reviewers pass. The last
+receipt is `20260927T115525Z-70b1dd3d5f5d4567bcdb179f3b4fcd91`, retained
+under `api_staged_profile_candidate/logs/check-runs/`. Exact child receipt
+hashes, source identities and the unchanged recipe target list are captured
+in `api_staged_profile_installation.json`.
+
+The twelve-file adapter patch is installed after checking every candidate
+and destination hash against the reviewed preparation manifest. Existing
+shell modes, explicit target order and cleanup are preserved. The full
+production `ci-tooling` gate is running in `logs/api-final-ci-tooling.log`.
+After it passes, the nine selected live conformance commands run serially
+through `api_run_final_conformance.py`, with state
+`api_final_conformance_results.json`. Full formal CI, checked health, final
+warning review and the semantic checkpoint remain open.
+
+## Tooling And Live Conformance Qualified
+
+The production tooling gate passes: thirteen DevOps tests, 128 Python tests,
+four Node tooling tests and registration of 457 reachable suites. Registry,
+catalog and health-inventory freshness checks pass. The health inventory is
+still not a checked health result. Log: `logs/api-final-ci-tooling.log`.
+
+All nine selected live conformance commands now pass: 102 tests, zero failures
+and zero skips across ordinary, directed, displayed evaluation, inventory,
+phase, proof, telescope, profunctor and module suites. The original module
+run correctly rejected an additional stale Eq1 hom-action source pin. The
+[alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md#module-acquisition-follow-up)
+records its exact unchanged-command audit and correction. Its focused retry
+passes eight tests; typecheck, lint and the 134-record unchanged-IR audit also
+pass. No shared compiler/runtime/barrel or selected command body changed.
+Carry the earlier full aggregate with this proportional metadata follow-up;
+do not relabel the earlier aggregate's source snapshot. The original failure
+is preserved in `api_final_conformance_results.json`; the combined evidence
+index is `api_final_conformance_qualification.json`.
+
+The fresh cold-run core warning stream has 648 critical-pair diagnostics and
+150 pattern diagnostics; all 648 critical pairs parse into term heads and
+two-rule families. Log: `logs/api-final-core-warning-summary.log`. These
+counts do not establish confluence or replace the recorded overlap review.
+
+The full formal gate is now running through the owning DevOps command:
+`python3 scripts/devops.py check --gate formal`, with serial per-target
+guards, warnings, subject reduction and GC `o=20,v=1024`. Driver log:
+`logs/api-final-formal-gate.log`. This runs the actual `make ci` boundary,
+including all registered owners/reviewers and isolated recipes. Keep its
+formal source/tooling inputs frozen until the terminal result. Final checked
+health, warning disposition, exact semantic diff and clean local checkpoint
+remain required; main and the source reference are unchanged.
+
+Current formal gate run ID:
+`20260927T120652Z-1446ce7b47de401bbc611e574c55687c`. Its live command output
+is `logs/devops/formal-20260927T120652Z-1446ce7b47de401bbc611e574c55687c.log`;
+the owning gate writes the matching JSON receipt only on completion. The
+initial registered targets pass. Poll this run before starting any other
+formal checker or changing its formal input snapshot. The goal remains active;
+the latest local progress checkpoint is `decfaf18`, and the semantic tranche
+remains unstaged pending final qualification.
+
+## Source Disposition Audit And Missing Reviewer Import
+
+The read-only source accounting checks all 114 donor paths. Of 81 LP paths,
+68 now match source bytes, ten are adapted and three retain main's source;
+all are registered. Every donor-added library symbol has a same-name current
+owner. The sole omitted example-local name is `strict_zero_comm_ring_psh`:
+the retained raw-presheaf reviewer uses its original fixture and derives the
+necessary law from actual CommRing OneCat evidence. Name presence is an
+inventory control, not semantic qualification. The current inventory records
+all 81 dispositions, sixteen declaration seeds and thirteen direct
+composition-theorem consumer routes. Exact hashes are in
+`api_source_disposition_audit.json`.
+
+This audit found the unported explicit import in `examples/adjunction_triangles.lp`.
+The former formal gate was deliberately cancelled through its verified owning
+controller; its immutable receipt records `cancelled`, not success:
+`formal-20260927T120652Z-1446ce7b47de401bbc611e574c55687c`. The final child
+checker was confirmed exited before another formal check began. Stop reason:
+`api_formal_gate_import_stop.json`.
+
+The original reviewer fails on the moved `Adjunction_hom_prof_comparison_along`
+name (`20260927T121458Z-a4e8ac659bf241cc91c38d9f975c03d3`). A full-file
+candidate adds only the `strict_functor_actions` import and passes every
+unchanged assertion (`20260927T121534Z-8f35a1db00164911a8f5a70089542833`).
+The installed reviewer also passes at 2 GiB/90s in 1.049s
+(`20260927T122117Z-ebc1813631b04aed9dfd8da7714a4429`). No mathematical owner,
+rewrite, assertion or inverse choice changed. Installation:
+`api_adjunction_triangles_import_installation.json`. Catalog and source-health
+inventory are refreshed by their owning tools; checked health remains open.
+
+## Remaining Source-Claim Corrections And Fresh Artifacts
+
+The same accounting exposed stale claims in both READMEs, book chapters 4, 6
+and 8, the formal appendix and the authored overview article. They now state
+the opaque classifiers, classified Gray arrows, retained normal identities,
+strict family requirement for fibre transport and named opaque-recursion
+computation. The next-Hom theorem remains correctly stated for an existing
+equality-valued equivalence; it does not require an extra strict profile.
+The newer main material and deferred higher/Op boundaries are preserved.
+
+The owning local artifact gate passes on these corrected sources:
+`publication-20260927T122134Z-459c3851610a4a649585b9300b82cf9f`.
+Book: 416 pages/eighteen embedded fonts, SHA-256
+`9ae00b0eece41f424e8418f62da57cab625fd75bfc6eb488956922eba0d30fd7`.
+Article: nineteen pages/fourteen embedded fonts, SHA-256
+`2e779d2da03740b62af707739cf07721090f9241ca05d57636e2f5fe566ad9b6`.
+Both browser checks have no console/page/request/render errors. These fresh
+artifacts supersede the earlier prose snapshot for this gate; no distribution
+promotion or publication occurred.
+
+Full formal CI restarted on the corrected frozen inputs at
+`formal-20260927T122549Z-8c6c727ae7e441ca84af026e8a87ab42`.
+Live log: `logs/devops/formal-20260927T122549Z-8c6c727ae7e441ca84af026e8a87ab42.log`;
+driver log: `logs/api-final-formal-after-source-audit.log`. Poll the existing
+run before launching a checker or editing its inputs. All earlier completed
+library/conformance evidence keeps its recorded scope; the new complete CI,
+checked health, final warning/diff review and semantic checkpoint remain open.
+
+## Full Migrated-Name Audit And Ordinary Reviewer Follow-Up
+
+The subsequent static audit covers references to all sixteen migrated core
+seeds in every registered source, excluding comments and checking actual
+import closure. It finds three further reviewer references to the retired
+generic `omega_equiv_along_fapp1_fapp0`: `one_cat_adjunction_normality`,
+`one_cat_categorical_exactness` and `one_cat_short_exact_families`.
+Artifact: `api_moved_seed_import_audit.json`. The second formal gate was
+therefore cancelled through its verified controller; its cancelled receipt
+and `api_formal_gate_seed_audit_stop.json` preserve the partial run and reason.
+No checker remained live before the focused continuation began.
+
+The full-file candidate forwards each already-present C1 witness to the
+existing `one_cat_omega_equiv_fmap` at five call sites. It changes no library
+owner, adds no premise, and preserves the asserted types, chosen inverse
+observations and original negative controls. Original unknown-symbol failures
+and repaired full reviewers are being checked serially under the guard.
+State: `api_ordinary_evaluation_reviewer_qualification.json`; log:
+`logs/api-ordinary-evaluation-reviewer-qualification.log`. Promote only after
+that candidate passes, rerun the complete migrated-name audit and refresh
+owning inventories, then restart full formal CI. The book/article artifact
+gate remains green on its recorded source snapshot.
+
+All three full reviewers now pass at 2 GiB/90s. Normality passes in 7.197s
+(`20260927T123130Z-ad442bc0c99741eca55a1f9b6b0a9d07`), categorical exactness
+in 7.804s (`20260927T123138Z-72644b171c374f22be0eb5787787959c`), and
+short-exact families in 3.148s
+(`20260927T123239Z-06b646b6409c4b65a321884cdad3623f`). The latter also needs
+the explicit ordinary-mapping import; its missing-import intermediate failure
+is preserved. All 34 positive and six negative assertions remain. The three
+files are installed with exact before/after hashes in
+`api_ordinary_evaluation_reviewer_installation.json`; assertion counts are in
+`api_ordinary_evaluation_reviewer_assertion_counts.json`.
+
+The original failed name audit is retained as
+`api_moved_seed_import_audit_failed.json`. Its current rerun has no unresolved
+reference. The expanded audit includes declared symbols from the new root
+owners: 1,086 target/name references across all 1,388 files resolve through
+their actual import closures, with no remaining reference to the eight retired
+names. Artifact: `api_new_owner_import_audit.json`. This is a targeted import
+inventory, not a replacement for typechecking. The catalog is current and the
+owning source-health inventory has been refreshed.
+
+The active full formal gate is now
+`formal-20260927T123535Z-bddc72466b82428bbb58d3852f09dad5`, with live output at
+`logs/devops/formal-20260927T123535Z-bddc72466b82428bbb58d3852f09dad5.log`
+and driver log `logs/api-final-formal-after-reviewer-audit.log`. Both earlier
+gate attempts remain explicitly cancelled. Keep the current formal inputs
+frozen and wait for this run before any new formal checker. The goal remains
+active; complete CI and the final semantic checkpoint are still required.
