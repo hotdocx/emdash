@@ -1232,3 +1232,56 @@ and membership are unchanged. All 58 focused runner/profile tests pass after
 updating the exact GC expectation for the three newly profiled six-term
 reviewers. Full cold recipes/formal CI, fresh production CAS replay, checked
 health and the clean semantic checkpoint remain the final acceptance work.
+
+## Complete Formal CI After Reviewer Qualification
+
+Checkpoint `2bdef42e` records the complete reviewer sweep and measured bounds.
+The complete owning formal gate is now running in tool session `47799`:
+
+```sh
+env PYTHONUNBUFFERED=1 NODE_OPTIONS=--max-old-space-size=4096 \
+  OCAMLRUNPARAM=o=20,v=1024 EMDASH_LAMBDAPI_WARNINGS=1 \
+  python3 scripts/devops.py check --gate formal
+```
+
+Driver log: `logs/api-final-formal-after-complete-reviewers.log`.
+Owning log/receipt stem:
+`logs/devops/formal-20260927T164506Z-d45cf3135aaa42c8a51b128f5e319355`.
+Registry validation, the current health-inventory snapshot, central diagnostics
+and initial library checks have passed; the complete gate has no result yet.
+It runs actual `make -C emdash2 ci`, including all cold recipes. Keep formal
+source, registry and tooling inputs fixed while it runs. Do not start another
+Lambdapi process concurrently.
+
+The prepared `api_replay_final_production_cas.py` now points to this pending
+formal receipt and still requires an actual `passed-fresh` outcome before any
+replay. It has not been executed. If CI fails, retain that failure and repair
+the identified issue before repinning; never relabel the failed receipt.
+Remaining acceptance is complete CI, the original 94 production CAS
+assertions, checked health, final evidence/diff review and the clean semantic
+checkpoint. The goal remains active; main and donor remain unchanged.
+
+The existing formal process is confirmed live as PID `2001934`, start ticks
+`200476035`, and tool session `47799`. An authorized follow-up controller now
+waits on that exact process, then requires its actual fresh-success receipt
+and unchanged recorded input hashes before starting any further checker.
+Controller: `api_formal_followup_controller.py`; tool session `19155`; state:
+`api_formal_followup_controller_results.json`; log:
+`logs/api-formal-followup-controller.log`. Its CAS and health script hashes are
+fixed in the controller state. A failed CI or changed input stops the sequence.
+Do not run another checker while either stage is live.
+
+After successful CI, the controller runs the original 94-assertion production
+CAS replay, then generates checked health with the owning
+`check_metrics.format_report` function from that complete CI's actual metrics
+payload. `api_health_from_complete_formal.py` verifies all checked targets,
+zero exits, current evidence, exact source/content snapshots, the CI receipt
+and log, and the metrics timestamp before writing the report. It neither
+fabricates receipts nor reruns the complete suite. This preparation is not yet
+success evidence; controller state and actual receipts decide the outcome.
+
+The independent `api_final_acceptance_identity_audit.json` verifies all 1,389
+registered source/package hashes against the completed reviewer snapshot, all
+596 success receipts, the TypeScript aggregate log/core hashes, and continued
+byte identity of the six selected primary native owners with pinned main.
+It does not replace the pending full CI/CAS results.
