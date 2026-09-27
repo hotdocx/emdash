@@ -2,8 +2,8 @@
 
 Date: 2026-09-25 (America/Toronto)
 
-Status: active; ordinary classifier checkpointed at `f0f327d6` with all 589
-registered check targets passing; wider cut migration remains a prototype
+Status: active; selected action-profile/Gray/path-cubical implementation applied
+in production; remaining consumers and final integration gates are being qualified
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-01` and `API-02`. Reference main is `37ce19d5`, source is
@@ -19,8 +19,9 @@ The independent `API-04R/V/P/T` generic strictness corrections remain required.
 The separate inherited-assembly candidate checks the complete locality
 owner, all sixteen public signatures and all three assembly stages while
 keeping the derived retained-member proof. Eight positive/two negative
-contract and noncollapse controls pass. Broader/downstream qualification and
-production promotion remain required; this is not a semantic consistency proof.
+contract and noncollapse controls pass. The selected implementation is now
+promoted in the dedicated worktree; broader final qualification remains
+required. This is not a semantic consistency proof.
 
 The preceding baseline is `api_assembly_baseline_minimal_core`, core
 `6a980df3`, omitting the two later deferred-member research additions while
@@ -45,8 +46,16 @@ qualifies the native/Gray/path interaction, all 94 original CAS assertions,
 and full central diagnostics on this corrected core. The larger interaction
 retains inherited assembly and the independent strictness controls. The
 central suite passes from source with 2,137 positive/299 negative assertions.
-Production promotion and remaining consumer/final-gate qualification remain
-pending; the reviewed preparation map covers 21 helper owners and 94 symbols.
+The reviewed preparation map (21 helper owners and 94 symbols) has been
+applied. Production repairs preserve main's whole K/Q/H and original inverse
+choices while supplying actual profiles to selected comparisons and ordinary
+observations. The [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md)
+owns exact installations, current validation state and remaining gates.
+All 791 production library targets and the 307-object comment-exact rebuild
+pass. TypeScript metadata is aligned after an unchanged-semantic-IR audit;
+focused tests, live inventories and the complete aggregate pass. Book evidence,
+browser rendering and local PDF artifact gates pass. Cold recipes, remaining
+live conformance and final formal reviewer/CI qualification remain open.
 
 ## Semantic Owner Ledger
 
@@ -65,13 +74,14 @@ pending; the reviewed preparation map covers 21 helper owners and 94 symbols.
 | `OWN-11` | Inherited path-cubical structured operations, filling sections, native observations and bounded decoders | Twenty-two new source owners plus reviewers; bring through current registry. Preserve source's explicit level-two readback prerequisite and limits on native groupoidality/Cartesian substitutions. |
 | `OWN-12` | Diagnostics, evidence, book and TypeScript qualification | Adapt assertions and owner linkage to current main; maintain negative controls, current documentation and fresh exact source evidence. No bulk pin or old report replacement. |
 
-Current implementation: `OWN-02` and `OWN-03` are checkpointed at `f0f327d6`,
-with migrated direct admission/certificate consumers. Their local tranche
-is qualified; this does not complete the full goal.
-The other action classifiers, global cuts and Gray arrow migration remain
-open. The nucleus is unchanged. The following first-feasibility sections
-record the preceding discovery state; the ordinary tranche below records
-the subsequent implementation.
+Current implementation: `OWN-02` and `OWN-03` retain their earlier checkpoint
+`f0f327d6`; the remaining selected classifiers, generic-cut retirement, Gray
+arrows and inherited path-cubical owners have now been applied as uncommitted
+production work. The nucleus is changed to the qualified core `6a980df3`.
+The table above describes the pinned main/source comparison and required
+consumer contracts, not a claim that the current worktree still has the old
+cuts. The feasibility and tranche sections below preserve the historical
+sequence. Full production validation and the semantic checkpoint remain open.
 
 The twelve moved core names are the inverse/equivalence mappings and weighted
 comparison tail in the declaration table below. The four deletions are

@@ -13,7 +13,9 @@ current source tree, not the earlier prototypes, is the active authority.
 
 ## Applied State
 
-- Base checkpoint: `6bb2fc07`; branch `goal/action-profile-integration-v3.2`.
+- Production preparation base: `6bb2fc07`; branch `goal/action-profile-integration-v3.2`.
+- Latest tooling/progress checkpoint: `f78f48d8`; promoted mathematical source
+  remains the separate pending semantic tranche.
 - The 190-file preparation is applied, with 21 named helper owners and 94
   symbol renames. Active code round-trips through the naming map.
 - Registry: 792 core and 596 reviewer targets, 634 in the check suite.
@@ -295,3 +297,392 @@ this observation, with target 518 retrying its unchanged inputs after measured
 allocation failures. Remaining reviewers, durable resource routing, source
 header cleanup, catalog/health, final TypeScript/conformance and formal CI
 still gate the semantic checkpoint.
+
+## Continued Production And TypeScript Aggregate
+
+The previous goal turn made concrete progress: fifteen record/observer/map
+files were adapted and qualified, the book claims and evidence were aligned,
+book checks/rendering passed, and the tested math-aware document-link fix and
+progress ledgers were checkpointed at `f78f48d8`. The live compiler handle was
+revalidated before continuing; only this worktree is dirty among 67 worktrees,
+and main/source references and baseline ancestry are unchanged.
+
+The production Freyd native snake-pair owner passes at its previously measured
+8 GiB/300s compilation profile in 76.958s, receipt
+`20260927T081845Z-e3b824acc35c49a0be363e33ea2e7753`. Native snake exactness
+passes an identical-input 4 GiB/90s retry in 35.357s, and pair exactness passes
+its registered 6 GiB/180s profile in 23.688s. The continuing state file above
+records every target and resource retry; no generic strictness rule has been
+restored to pass these consumers.
+
+The complete `check:ts` gate is now running with its existing 3,600-second
+process ceiling and `NODE_OPTIONS=--max-old-space-size=2048`. The standard opt-in Lambdapi
+conformance flags remain off, so this gate can run independently of the serial
+production checker. Log: `emdash2/logs/api-check-ts-3600.log`. The first
+wrapper used an insufficient 900-second deadline. After reviewing the existing
+DevOps observation of a roughly 27-minute full gate, that verified process
+group was deliberately stopped and restarted once at the documented ceiling;
+its partial log and reason are retained in `api_ts_deadline_correction.json`.
+This was a runner correction, not a test failure or semantic change. Conformance remains
+a separate required run after the formal checker is free.
+
+## Prepared Resource Routing And Final Source Hygiene
+
+The routing prepared in `api_resource_routing_candidate/` is now installed;
+`api_resource_routing_installation.json` records the exact eight-file patch.
+It adds exact `targetProfileOverrides` to the registry while preserving the
+normal profiles and historical native-wrapper membership. Each wrapper selects
+the target's effective profile within its unchanged named target set. The
+metrics dispatcher no longer replaces a registered deadline with its ordinary
+90-second fallback; explicit environment overrides remain available. Unknown
+override targets/profiles and invalid shapes are rejected, and a temporary
+file with the same basename still gets the default profile.
+
+The first candidate contained 52 overrides; the installed registry now has
+55, including the freshly qualified cover compilation. Refresh the measured
+list before final qualification as the remaining production sweep completes. Exact source,
+code and receipt identities are in `api_resource_routing_preparation.json`.
+Forty-nine focused registry/metrics/wrapper tests and eight runner tests pass.
+The first run exposed outdated wrapper fixtures that omitted override targets;
+those fixtures were corrected, without weakening validation. The unit-test logs
+are `logs/api-resource-routing-unit-tests-v2.log` and
+`logs/api-resource-routing-runner-tests.log`.
+
+Three comment-only source corrections were prepared under
+`api_source_comment_cleanup_candidate/`: inherited assembly's misleading
+strict-naturality explanation, the Gray graph's obsolete future migration
+wording, and cubical pasting's identity/associativity explanation. All active
+code is identical after masking comments, recorded in
+`api_source_comment_cleanup_preparation.json`. They are now installed after
+the library sweep completed, with identical compiler-canonical exports. Their exact-source reverse closure contains 507 registered
+targets, so old receipts retain their old source snapshots; final qualification
+must use the corrected headers and account for dependency-object provenance.
+The core and TypeScript source pin are unchanged by this prepared cleanup.
+
+The formal doctor matches the pinned Lambdapi `3.0.0-90-gdb4f780` and OCaml
+5.4.0, with no package mismatches (`logs/api-formal-doctor.log`). The generated
+central catalog is refreshed and strict checking passes: 2,432 direct
+assertions, comprising 2,133 positives and 299 negatives, with zero
+unclassified entries. The earlier 2,137-positive combined diagnostic count
+includes imported assertions. The nucleus LHS audit has zero unreviewed slots;
+the expanded audit of all 222 changed/new LP files also has zero unreviewed
+candidates (`api_production_changed_lhs_audit.json`). Source TOC validation
+passes at 87 headings. These source audits do not replace the pending full
+formal/reviewer gates.
+
+## Boundary-Naturality Continuation
+
+Production traversed 586/791 library targets, then stopped at
+`emdash3_2_homology_boundary_naturality.lp`, receipt
+`20260927T083853Z-b6bfc9d6a0e348f1976d7b357c7f39b5`. The old helper still
+called strict naturality without its profile. The candidate now forwards the
+existing caller's OneCat evidence and uses the existing ordinary naturality
+path. The whole boundary, chain-map arguments and first-exactness theorem
+source/reviewer remain unchanged. Candidate:
+`api_homology_boundary_guard_candidate/`; exact patch identity:
+`api_homology_boundary_guard_preparation.json`.
+
+The original first-exactness reviewer first exhausted 2 GiB while importing
+`homology_map_kernel_covers` (46.382s,
+`20260927T084040Z-fe1cd2d20dee43c6b656636a29d88ce3`), then the identical inputs
+reached the 90-second deadline at 3 GiB
+(`20260927T084214Z-ba1ee466333c49508148ba0155217e60`). The existing resource
+qualification report already records that cover owner needing compiled parents
+and 6 GiB/180s. The focused continuation therefore compiles only its eight
+missing dependency/reviewer entries in dependency order, selecting that
+measured profile for the cover owner and ordinary defaults elsewhere, with
+bounded adaptive retries. Source is unchanged by this staging. State:
+`api_homology_boundary_staged_results.json`; driver:
+`api_compile_homology_boundary_review.py`; log:
+`logs/api-homology-boundary-staged.log`. No semantic promotion is claimed yet.
+
+The resource-routing candidate was refreshed through the stopped production
+prefix to 54 measured overrides. All 57 focused tests pass together in
+19.090s (`logs/api-resource-routing-unit-tests-v3.log`). The candidate was installed after the active formal run ended, preserving
+its original runner snapshot in the prior receipts.
+The full TypeScript gate continues independently and is reporting completed
+execution events; the final test result is still pending.
+
+## Installed Boundary Repair And Registered Profiles
+
+The staged first-exactness check passes in full. Cover compilation succeeds
+at 6 GiB/180s in 136.988s
+(`20260927T084653Z-b8e234431b564a28b073f3e8b8976c2d`). The repaired boundary
+owner compiles at 2 GiB/90s in 13.914s
+(`20260927T084918Z-0fc5bfefb4c040fd93ce47debbc643d3`); unchanged
+first-exactness compiles in 21.459s
+(`20260927T084936Z-4fcb51df298345ddbd0a451aa697bd6f`) and its original reviewer
+passes in 15.078s (`20260927T085004Z-6817b83938bf4d3fbdc60b2b1a61b547`), both
+at ordinary defaults with the checked parents. The one-owner semantic edit is
+installed in `api_homology_boundary_guard_installation.json`.
+
+The 55 exact target profile overrides and effective-profile dispatch are
+installed. All 57 tests pass again in production (7.830s), and registry
+validation passes at 1,388 targets. Defaults, native wrapper membership,
+subject reduction and all guard ceilings are unchanged. The DevOps guide and
+SOP describe target overrides and the measured pair-owner setting. Recipe
+routing for fresh isolated groups still needs final qualification; per-target
+success with prepared dependencies is not a cold-recipe result.
+
+Production resumes through
+`api_compile_production_boundary_resume.py` with state
+`api_production_compile_boundary_resume_results.json` and log
+`logs/api-production-boundary-resume.log`. Its exact-source prefix audit passed,
+and the repaired boundary owner now passes in production (22.545s,
+`20260927T085432Z-7bb48d950bb144a7941215b298928b6b`). The cover owner passes with its registered 6 GiB/180s profile
+(114.653s, `20260927T085459Z-9eb0febb479c4184be87fbad6a801d44`). First-exactness also passes
+in production at defaults (28.237s, `20260927T085706Z-d1fbe6b32c4b4b0abe78f33ac296918d`).
+The sweep has traversed 593/791 library targets and is measuring the next
+epic-cover target after a 90-second timeout. The earlier run's successful receipts
+retain their old runner/profile snapshot; no final CI claim is inferred from
+them.
+
+## Row-Family Repair And Aggregate Findings
+
+The production sweep reached 604/791 successful library targets before
+`short_exact_row_families` failed at its old strict-naturality call, receipt
+`20260927T090757Z-63034fbab3c64d1d93665cfdc6cde01b`. That owner already has
+OneCat in every affected signature. The repair imports the existing ordinary
+path owner and forwards that witness; all signatures and operational fields
+remain unchanged. The original `homology_window_families` reviewer passes in
+14.806s at 2 GiB/90s, including its constructor projections and mismatched-data
+negative (`20260927T091019Z-8e2d10259f574bb4bc4c2ed1841ab6aa`). The one-owner
+installation is `api_short_exact_row_guard_installation.json`.
+
+Production now resumes from `api_production_compile_row_family_resume_results.json`
+through `api_compile_production_row_family_resume.py`, log
+`logs/api-production-row-family-resume.log`. Three additional measured profiles
+are registered: epic covers at 4 GiB/180s, second and third exactness at
+3 GiB/90s. The exact receipts are in `api_resource_profile_followup.json`;
+the override count is now 58. Defaults remain unchanged.
+
+The TypeScript aggregate ended with two stale evidence assertions and a 2 GiB
+V8 heap failure. The [alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md#aggregate-follow-up)
+records the correction, unchanged-IR/source-pin audit, fourteen green focused
+tests, and the running 4 GiB aggregate retry. Its final result remains required.
+
+For cold recipes, `api_staged_profile_candidate/` prepares a small exact-source
+adapter rather than granting exceptions by filename. It verifies the complete
+source/package closure against registered inputs before selecting the target's
+profile, uses the existing guarded runner and immutable child receipts, and
+rejects source changes during a run. Nine existing recipe call sites are
+adapted without changing their explicit target lists, order or cleanup.
+Missing parents are prepared in the existing local import order, each with its
+own registered profile. Nine focused adapter tests and 29 existing metrics
+tests pass (`logs/api-staged-profile-recipe-tests-v3.log`), including rejected
+source/configuration changes and missing/empty compiled artifacts. Actual cold mathematical recipe
+qualification and installation remain pending. The twelve-file preparation
+manifest is `api_staged_profile_preparation.json`; the new test is wired into
+that candidate's `ci-tooling` target.
+
+## Package Gate And Normalization Projection
+
+`package:check` passes with its 900-second outer bound and a 2 GiB Node heap:
+build, packed external installation, ESM/CJS consumers, browser bundles and
+algebra/source controls are green (`logs/api-package-check.log`). No package
+publication or repository dependency installation was performed by this gate.
+The owning verifier uses its isolated consumer directory and cleans that
+owned temporary output.
+
+The production normalization-projection owner passes at 8 GiB/180s in
+146.447s, receipt `20260927T093003Z-f5058f6a76174cc480b376e1aa77d639`. This
+follows allocation failures at 2, 3, 4 and 6 GiB and the retained 6 GiB/90s
+timeout; every retry preserved the same source/dependency objects. The
+successful compilation is nonempty. The current override registry must add
+this measured profile before the final cold recipe run. The full TypeScript
+aggregate remains active; package success is not a substitute for it.
+
+## Aggregate Transport Control
+
+Both full TypeScript runs showed a long quiet interval after dequeuing the
+real-process oracle-transport test. Its focused unchanged control passes:
+`api-ts-oracle-transport-focused.log` records one test, no skips, a 219 ms test
+body and 5.485s total process time at a 2 GiB heap. The timeout/output-bound
+implementation is unchanged. This distinguishes the standalone test from the
+aggregate interaction/load; it does not establish the cause of the latter.
+The 4 GiB full aggregate remains bounded by its original one-hour deadline.
+
+## Complete Library Sweep And Comment-Exact Rebuild
+
+The production library sweep completed all 791 targets, with no remaining
+semantic or resource failure. It combines fresh compilations and the previously
+verified exact-source objects; the final state is
+`api_production_compile_row_family_resume_results.json`. The last receipt is
+`20260927T094723Z-e7d5c3494b6b4c798e19d136aa845031` for profiled interchange.
+This is the library compilation boundary, not the final reviewer/CI boundary.
+
+Three comment-only corrections are installed. Guarded canonical export before
+and after each correction is byte-identical. The inherited assembler now has
+source hash `58c23c4a39a2b0a5ff872f0c9c7106830a5226d18d828e819cf15185ccdf04de`
+and unchanged canonical hash
+`fa715d15794f0a30c4dcefd8d59e94109848f06b524b81033ca35cf887f3cafb`.
+Its interface, chosen inverses, betas and cancellation assumptions are unchanged.
+The Gray graph and cubical-pasting comments likewise have identical canonical
+exports. The core `6a980df3` and TypeScript pin remain unchanged.
+
+Exact source identity still matters for artifact reuse. All 307 affected
+library objects were moved to the preserved archive recorded in
+`api_source_comment_cleanup_installation.json`; none were deleted. The 484
+unaffected objects were verified against their exact source/object input maps,
+hashing the shared union once rather than redundantly for every target. The
+307-object rebuild is running serially through
+`api_rebuild_comment_dependents.py`, with state `api_comment_rebuild_results.json`
+and log `logs/api-comment-rebuild.log`. The canonical identity check does not
+relabel old raw-source receipts as current. Final checks use the corrected
+source and rebuilt dependencies.
+
+The registry now carries 62 measured exact-target overrides, including the
+normalization projection at 8 GiB/180s. Additional settings and receipts are
+recorded in `api_final_library_resource_profiles.json`. The cold staged-recipe
+adapter remains a tested candidate pending its actual mathematical replay.
+
+## TypeScript Complete-Run Follow-Up
+
+The 4 GiB aggregate completed all 2,948 tests without heap failure and exposed
+seven stale selection-ordinal expectations. Those seven arrays are now aligned
+by exact reviewed command-text matches; no implementation or local phase order
+changed. All 27 non-opt-in focused tests pass. The full gate is rerunning at the
+same 4 GiB/one-hour limits in `logs/api-check-ts-final-ordinals.log`; its final
+result and live conformance remain required. The alignment report records
+exact counts, artifacts and the seven deliberate conformance skips.
+
+## Remaining Cross-Layer Gate Progress
+
+The standalone reviewer-template gate passes at
+`reviewer-20260927T100549Z-96cd1dde67754a018fe34c3cd2820805`. Its isolated
+fixture dependency install and check leave the tracked template and lockfiles
+unchanged. The local publication-artifact gate also passes at
+`publication-20260927T100905Z-de30b7e7ed2b4205aba5d0a9bfe87b0c`:
+
+- Book: 416 pages, eighteen embedded fonts, SHA-256
+  `25ffb583833eb484e45fda9750c66cacdf0824a03c73f7113ed2facf5dcb2b8b`.
+- Article: nineteen pages, fourteen embedded fonts, SHA-256
+  `bd42f3a9a8e519e24339bf5f8c253c6b00b4e8272d8b205763f501a23415c152`.
+
+These are local generated artifact checks, not publication or promotion of
+tracked public PDFs. The owning export/check commands and preview cleanup ran
+through the existing gate; main remains unchanged.
+
+The health report's source inventory is refreshed for all 1,388 registered
+files, explicitly marking checks as not-run. It does not fabricate timings or
+replace the still-required complete formal replay. Log:
+`logs/api-health-inventory-refresh.log`.
+
+A static production-name audit finds no library `api_*` declarations or
+`emdash.api_*` imports. Fourteen `api_*` declarations remain only in registered
+example-local controls, including the documented relative-profile research
+helpers; they are not library owners or premises of inherited assembly.
+Their listing is retained at `logs/api-production-probe-name-audit.log`.
+
+## Final Acceptance Queue
+
+This is a completion checklist, not a declaration of completion. The full
+objective and exclusions in the integration plan remain unchanged.
+
+| Obligation | Evidence available | Remaining gate |
+| --- | --- | --- |
+| Adapted action-profile and bounded Gray/path-cubical owners | Complete 791-library sweep and 307-object comment-exact rebuild | Final source/reviewer checks |
+| Newer main consumers and retained data | Native/CAS/whole-H/Gray prototypes, original 94 CAS assertions, production owner checks | Final registered reviewer/CI replay at the final snapshot |
+| Assembly decision | Inherited ordinary/displayed primitive and both inverse choices retained; API-05R deferred | Keep this assumption and deferral explicit in final handoff |
+| TypeScript source alignment | 134 unchanged semantic module records; current pins; complete aggregate, focused tests and package gate | Complete all selected live conformance gates |
+| Resource reproducibility | Guard bounds, exact target profiles and tested staged adapter | Cold mathematical recipe replay, adapter installation, complete tooling gate |
+| Mathematical operations and documentation | Catalog, source/slot audits, refreshed health inventory, book and artifact checks | Checked health evidence, final warning review and full formal CI |
+| Repository/product checks | Package, standalone template and local PDF artifact gates pass | Carry exact unaffected evidence forward; final selected gate audit |
+| Git handoff | Dedicated authorized worktree, unchanged references, local progress checkpoints | Review exact final diff, commit coherent semantic tranche, confirm clean branch and handoff |
+
+No remaining essential migration regression may be moved into the deferred
+Op/duality or assembly-research tracks merely to close the goal. Nothing in
+this queue authorizes pushing, main integration, publishing or cleanup.
+
+## Cold Candidate Refresh
+
+The staged-recipe candidate now matches the final source/registry snapshot:
+1,390 inputs, including 1,388 registered LP files, package configuration and
+registry. Five files changed during the refresh (the final comment corrections,
+row-family repair and registry); adapted scripts, tests and Makefile remain
+intact. It has no compiled objects. Exact identities are in
+`api_staged_profile_source_refresh.json`. All 38 adapter/metrics tests pass
+again (`logs/api-staged-profile-refreshed-tests.log`). This is preparation for
+the pending cold mathematical replay, not a replacement for that replay.
+
+## Rebuild Resource Follow-Up
+
+The comment-exact rebuild's Freyd native column-homology-path owner exceeded
+90 and 180 seconds at 3 GiB, then passed unchanged at 3 GiB/300s in 195.148s,
+receipt `20260927T104613Z-5bfc341e5e744f079888f04d385f8201`. The earlier
+successful production run used 3 GiB/90s and took 65.447s. Preserve both
+snapshots and measurements; the present observation does not establish a
+mathematical regression or a minimum resource bound. Fold the final measured
+settings from `api_comment_rebuild_results.json` into the registry before
+freezing the last gate snapshot. Main and source-reference tips were rechecked
+unchanged, with only the integration worktree dirty among 67 worktrees.
+
+## TypeScript Aggregate Qualified
+
+The final `check:ts` command passed in full: workspace, registration, typecheck,
+lint and 2,948 tests across 478 suites (2,860 passes, zero failures/cancellations,
+88 opt-in skips). The test-process duration is 3,323.092s at a 4 GiB heap, within
+the one-hour wrapper. Exact output is `logs/api-check-ts-final-ordinals.log`;
+`api_typescript_complete_gate_evidence.json` is its post-run evidence index.
+The opt-in skips remain explicit separate conformance obligations. Preserve
+this result for unchanged TypeScript inputs rather than rerunning it for
+unrelated formal/tooling changes.
+
+## Selected Cold Replay
+
+The first actual cold replay will use `check_short_exact_normalization.sh` in
+the staged-adapter candidate. Its 47-file closure is the smallest registered
+recipe closure containing nondefault target profiles: monic-image comparison,
+normalization foundation and normalization projections. This exercises both
+normal and measured limits, missing-parent preparation and original reviewers.
+The closure inventory is `api_staged_recipe_closure_inventory.json`. The
+candidate remains cold and its mathematical run waits for the live serial
+rebuild to finish. Full CI still covers the other registered recipes.
+
+## Rebuild Complete; Cold Recipe Running
+
+The comment-exact rebuild completed all 307 affected library objects with
+zero remaining failures. The 484 unaffected objects retain their verified
+exact input maps. State: `api_comment_rebuild_results.json`, status `passed`.
+The one changed measured setting is now registered: Freyd native column
+homology paths at 3 GiB/300s, as recorded in
+`api_comment_rebuild_resource_profiles.json`. The override count remains 62;
+default limits remain 2 GiB/90s.
+
+The cold candidate was refreshed to the final registry without changing its
+adapter or recipe sources; all 1,390 registered source/configuration inputs
+match production and there were no compiled objects. The actual normalization
+recipe is now running with warnings, subject reduction and GC `o=20,v=1024`.
+Its log is `logs/api-cold-normalization-recipe.log`. The next action is to
+inspect that terminal result, qualify/install the adapter if successful, then
+run the remaining live conformance and formal CI gates serially. This is not
+yet a cold-recipe success claim.
+
+The first cold run passed monic-image comparison at 4 GiB/180s (55.242s)
+and normalization foundation at 3 GiB/90s (58.917s), then timed out in
+normalization projections at 8 GiB/180s (180.061s), receipt
+`20260927T113339Z-e20a16a67316410ca05cba055f57a923`. The raw log reports the
+deadline kill and no type error. The owning recipe cleaned its temporary
+objects. A second fully cold run uses the same mathematical sources and
+adapter, with only that target's candidate profile raised to 8 GiB/300s.
+Manifest: `api_cold_normalization_retry.json`; log:
+`logs/api-cold-normalization-recipe-300s.log`. The production override remains
+8 GiB/180s until a successful measurement supports its replacement.
+
+`package:release:check` also passes all three preflight tests
+(`logs/api-package-release-check.log`). This is a local check; no release
+action occurred. The plan's active row states now distinguish installed
+changes from their historical prototype qualification and remaining final CI.
+
+The second cold run passed normalization projections in 93.323s under the
+8 GiB/300s ceiling, receipt
+`20260927T114108Z-1095c68e0d6844f4b55f81b78391d775`. This timing variation
+does not establish a minimum deadline. The unchanged reviewer
+`examples/monic_selected_row_comparison.lp` then exhausted 2 GiB in 16.487s,
+receipt `20260927T114327Z-959abe15e1bf43c09f64790f427f542d`. The recipe's
+whole result is therefore still a failure. A serial resource survey now
+checks that reviewer at 3 GiB and the remaining three original reviewers at
+defaults, with bounded resource-only retries. State:
+`api_normalization_reviewer_measurements.json`; log:
+`logs/api-normalization-reviewer-measurements.log`. A complete cold replay
+and adapter installation remain required after those measurements.

@@ -91,13 +91,15 @@ renamed-source central diagnostics passed (receipt
 `20260927T044822Z-78265a8d177e4b1494f56b0c5ed2830d`). The 190 source/reviewer
 changes comprise 83 modified and 44 new library files, plus sixteen modified
 and 47 new reviewer/support files. All 94 helper-symbol renames round-trip
-active code exactly; the core, profile and inherited assembler remain
-byte-identical to the selected prototype. The initial promoted registry
+active code exactly; the core and profile remain byte-identical to the
+selected prototype. The inherited assembler retains identical canonical
+declarations/rules; its source header is now clarified as an assumption. The initial promoted registry
 contained 791 core and 593 reviewer targets, with 633 in the check suite.
 
-This is uncheckpointed semantic work: registered validation, remaining
-consumer repairs, remaining source claims, catalog/health and final TypeScript
-qualification are still pending. Updated book evidence/source/typography and
+This is uncheckpointed semantic work. All 791 library targets and the later
+307-object comment-exact rebuild pass; the complete TypeScript aggregate is
+green. Cold recipe qualification, live conformance, full formal reviewer/CI
+replay and checked health remain pending. Updated book evidence/source/typography and
 the 416-page browser render pass. The 238 generated objects from the preceding production
 snapshot were preserved under
 `emdash2/tmp/probes/api_pre_promotion_objects_20260927T045154Z/`, with their
@@ -122,10 +124,10 @@ ambient noncollapse controls pass; both no-comparison controls fail at the
 expected proof. Selected mate/H observations now forward their existing guards and pass their
 actual reviewers. Generic kernel/cokernel records preserve their signatures by
 transporting the already-supplied annihilation law along the existing frame
-agreement; their original reviewers also pass. Production compilation has
-resumed after the record/observer repairs following its stops at targets
-466 and 468/791. The successful production prefix now exceeds 500 owners;
-the continuation state file owns the live count.
+agreement; their original reviewers also pass. Subsequent homology-boundary
+and short-exact-row repairs forward the OneCat witnesses already supplied by
+their callers. The complete production library sweep now passes; the
+continuation ledger records exact receipts and the remaining acceptance queue.
 
 A subsequent native-window failure is repaired by the one-way
 `emdash3_2_product_diagonal_reindex_views.lp` owner. Existing associativity and
@@ -133,12 +135,13 @@ identity-family paths prove the full functor agreement; a scoped comparison
 checks the literal diagonal, composite argument and every retained factor.
 The unchanged native theorem bodies, existing reviewer, unit/next-Hom and
 negative controls pass. The production registry is now 792 core/596 reviewers
-(634 check targets), and the live sweep is recorded in the continuation ledger.
+(634 check targets).
 The TypeScript metadata alignment is applied after auditing unchanged selected
 command/declaration/rule evidence and correcting pre-existing provenance
 ordinals. All 134 loaded semantic module records are unchanged. Workspace,
-typecheck, lint, 37 focused tests and fourteen live inventory tests pass;
-aggregate and conformance gates remain pending. See the
+typecheck, lint, focused tests and the complete 2,948-test aggregate pass
+(2,860 passes, 88 opt-in skips, zero failures). Selected live conformance
+gates remain pending. See the
 [source-alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md).
 
 Current baseline qualification package:
@@ -781,23 +784,23 @@ LP has changed in this tranche.
 | --- | --- | --- |
 | `API-00` | complete, checkpoint `5f932af0` | Dedicated worktree, bootstrap, archive/toolchain verification, registered plan and active persistent objective. Document/header/reference/link checks passed. |
 | `API-01` | initial inventory complete; consumer analysis continues | [Inventory](EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md) accounts for all 114 source paths, 16 core declaration seeds, the 13 explicit composition-theorem consumers and twelve semantic owner groups. Import closure and per-consumer admission analysis remain open. |
-| `API-02` | first controls complete; no semantic promotion | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
+| `API-02` | baseline controls complete; later promotion recorded under API-04/05 | Main kernel/profile/contravariant/diagram baselines pass. Final source profile checks against unchanged main, including classified positives. Ambient noncollapse is correctly rejected; capped-rule removal exposes the early equivalence-mapping dependency. Warning delta is enumerated and remains subject to owner review. |
 | `API-03` | local checkpoint `f0f327d6` | Whole ordinary property, opaque admission, stable/raw views, canonical evidence and full subcategory; direct callers migrated. The inclusion projection beta preserves both action orders and higher action. All 589 registered check targets, six affected reviewers and proportional documentation/MathOps gates pass. Global cuts and Gray arrows remain transitional until API-04/05/06; full integration CI remains API-10. |
 | `API-02R` | complete, checkpoints `31689948`, `2653f6fd` | [Runner repair](EMDASH_ACTION_PROFILE_RUNNER_REPAIR.md) rejects fatal zero-exit checker/recipe output; 43 focused Python tests, the TypeScript probe-bridge regression and workspace checks pass. It corrects an observed empty-object false success without changing mathematical rules or resource limits. |
 | `API-02I` | complete, checkpoint `1a51b6ce` | [Baseline import repair](EMDASH_ACTION_PROFILE_BASELINE_IMPORT_REPAIR.md) restores the explicit dependency used by homology cycle maps. No definitions or proofs changed; owner, laws and direct reviewer pass. |
 | `API-02M` | measured replays rejoined the successful check suite | [Resource qualification](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md): cover owners compile at 6 GiB/180s, normalization at 8 GiB/600s, and the complete 589-target check suite passes under explicit scoped settings. Defaults remain unchanged. Durable clean-checkout routing is required at the final gate boundary. |
-| `API-04` | selected-core native/CAS/Gray/path consolidation qualified; production cut retirement pending | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The earlier broad candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. All 94 original Freyd/CAS assertions and the expanded 492-owner interaction review pass; compiled-parent resource qualification is recorded in the [CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md). |
-| `API-04R` | smaller correction passes focused controls; unpromoted | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
-| `API-04V` | staged strictness leak corrected in prototype; combined review qualified | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. The [consolidated consumer review](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) now requalifies native/CAS/all-path consumers on the corrected core; production promotion remains required. |
-| `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
-| `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
-| `API-05` | inherited assembly and downstream sheaf/geometry baseline qualified in prototype; promotion pending | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): original ordinary/displayed inverse constructors, component betas and cancellation assumptions coexist with the derived retained-member proof. All sixteen locality signatures and three assembly stages check. Exact main eliminator/universality/sheafification owners and seventeen selected reviewers pass in the smaller-core combined environment: 245 positive/12 negative assertions. Main raw-presheaf and ringed-site signatures are retained through actual OneCat evidence and the post-profile action owner. Broader final-core qualification, assumption documentation and production promotion remain required. |
+| `API-04` | production cut retirement applied; complete library sweep passes; final CI pending | Selected canonical projection rules replace the rejected generic product folds. All original Hom extraction statements and all 33 introduction statements pass; five introduction proofs use derived paths. The [Gamma/H review](EMDASH_ACTION_PROFILE_GAMMA_H_FEASIBILITY.md) and [native snake review](EMDASH_ACTION_PROFILE_NATIVE_SNAKE_FEASIBILITY.md) record the retained maps and inverses. The earlier broad candidate passes 513 positive/89 negative assertions and twenty retained-data consumers. All 94 original Freyd/CAS assertions and the expanded 492-owner interaction review pass; compiled-parent resource qualification is recorded in the [CAS review](EMDASH_ACTION_PROFILE_FREYD_CAS_FEASIBILITY.md). |
+| `API-04R` | correction promoted; focused controls and production libraries pass | Three retained precomposition accumulation rules require `StrictFunctor` in the candidate; original whole/nested identity computation remains. Staged arbitrary-F rejection, profile positives, both projection orders, the full profile reviewer and several actual main consumers pass. The unnecessary extra mixed identity join is omitted. This is action-profile work; no Op/duality or Empty audit is added. |
+| `API-04V` | correction promoted; combined review and production libraries pass | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. The [consolidated consumer review](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) requalifies native/CAS/all-path consumers on the corrected core; the implementation is now promoted, with final CI pending. |
+| `API-04P` | three postcomposition restrictions promoted; higher-rung controls in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T. The restrictions are installed; full integration qualification remains open. |
+| `API-04T` | selected post/pre telescope changes promoted; final CI pending | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action is introduced. The qualified changes are installed in production. |
+| `API-05` | inherited baseline promoted and documented; library sweep passes; final CI pending | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): original ordinary/displayed inverse constructors, component betas and cancellation assumptions coexist with the derived retained-member proof. All sixteen locality signatures and three assembly stages check. Exact main eliminator/universality/sheafification owners and seventeen selected reviewers pass in the smaller-core combined environment: 245 positive/12 negative assertions. Main raw-presheaf and ringed-site signatures are retained through actual OneCat evidence and the post-profile action owner. The inherited assumption is explicit in source, authorities and book. Final registered reviewer/CI qualification remains required. |
 | `API-05R` | deferred follow-up research; no baseline gate | Preserve the [displayed](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md), [relative](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md), [matching](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) and [inverse](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) investigations, including exact receipts and unfinished profile-sufficiency, member/base and FibCov/cone questions. Useful derived results remain available; genuine `API-04R/V/P/T` corrections stay selected. No completed semantic proof is claimed. |
-| `API-06` | selected-core qualification and production promotion done; full production validation pending | [Consolidated baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation) qualifies all 45 selected HIT/limit/directed reviewers individually, preserving main's interfaces and source named-constructor computation. The full sheaf/geometry/HIT/limit/directed combination passes 703 positive/84 negative assertions and 89 type queries. The [native/CAS/cubical consolidation](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) now checks the Gray graph/D2 closure on the same selected core. Remaining owner/diagnostic migration and production gates stay open. |
-| `API-07` | 22 owners/17 reviewers requalified and promoted; full production gates pending | All seventeen reviewers pass afresh: 154 positive/six negative assertions and 61 type queries across their imported closure, and the wider native/CAS interaction also passes. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
-| `API-08` | metadata alignment, focused tests and live inventory qualified; aggregates pending | [TypeScript alignment](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md): selected canonical commands and declarations remain unchanged; stale provenance is corrected by actual owner identity. All 134 inspected semantic module records remain identical. No new transfer or rule is installed. Workspace, typecheck, lint, 37 focused tests and fourteen live inventory tests pass; aggregate and conformance gates remain. |
-| `API-09` | incremental | Current authorities, notation, source registry, catalog, health and affected book evidence/prose. |
-| `API-10` | pending | Required formal/cross-layer gates once otherwise green; exact semantic delta/diff audit; clean local checkpoint and integration handoff. |
+| `API-06` | selected-core qualification and production promotion done; full production validation pending | [Consolidated baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation) qualifies all 45 selected HIT/limit/directed reviewers individually, preserving main's interfaces and source named-constructor computation. The full sheaf/geometry/HIT/limit/directed combination passes 703 positive/84 negative assertions and 89 type queries. The [native/CAS/cubical consolidation](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) now checks the Gray graph/D2 closure on the same selected core. Owner/diagnostic migration and the complete library sweep pass; final production gates stay open. |
+| `API-07` | 22 owners/17 reviewers requalified and promoted; full production gates pending | All seventeen reviewers pass afresh: 154 positive/six negative assertions and 61 type queries across their imported closure, and the wider native/CAS interaction also passes. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry and production documentation are synchronized; final integration gates remain pending. |
+| `API-08` | complete TypeScript aggregate, metadata alignment and live inventory qualified; remaining conformance pending | [TypeScript alignment](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md): selected canonical commands and declarations remain unchanged; stale provenance is corrected by actual owner identity. All 134 inspected semantic module records remain identical. No new transfer or rule is installed. Workspace, typecheck, lint, 37 transfer tests, fourteen live inventory tests and fourteen displayed-transfer follow-up tests pass. The active audit also checks every collected source pin. The complete aggregate passes at 4 GiB: 2,860 passes, zero failures and 88 opt-in skips. The corrected source pins and ordinal expectations retain unchanged semantic IR; live conformance remains pending. |
+| `API-09` | authorities/catalog/book updated; checked health pending | Current authorities, notation, source registry and catalog are synchronized. Book evidence, rendering and local PDF artifact gates pass. The health inventory is current but explicitly not a checked health result. |
+| `API-10` | final qualification in progress | Complete library and TypeScript gates pass, as do package/template/local artifact gates. Cold recipes, live conformance, full formal CI, final exact diff audit and clean local semantic checkpoint remain required. |
 
 Rows guide dependencies; they do not separate inseparable rule families.
 Remove a production cut only when its consumers migrate in the same coherent
@@ -890,7 +893,15 @@ executable evidence.
 > clean qualified local integration branch and exact handoff; no push,
 > publication, history rewrite or cleanup is authorized.
 
-## Receipts And Current Next Action
+<a id="receipts-and-current-next-action"></a>
+
+## Historical Receipts And Continuation Notes
+
+This chronological section preserves earlier snapshots and their then-current
+next actions. Current status is in the accepted-state section above and the
+[production continuation ledger](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md).
+Statements below that the nucleus or TypeScript source is unchanged describe
+those earlier stages, not today's working tree.
 
 - Clean reference tips/common ancestor rechecked; worktree created from
   exact main baseline. Bootstrap and workspace contract passed with
