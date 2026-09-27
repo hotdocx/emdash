@@ -87,7 +87,7 @@ remain required. No consistency proof or unrestricted model adequacy is
 claimed by retaining the inherited assumption.
 
 Current baseline qualification package:
-`emdash2/tmp/probes/api_assembly_baseline_minimal_core/`, core `6a980df3`
+`emdash2/tmp/probes/api_consolidated_baseline_candidate/`, core `6a980df3`
 and profile `f670814a`. The checked sheaf/geometry closure does not need the
 later FibCov member-projection agreement or opposite-source tapp1 identity
 join, so those two research additions are omitted. All generic strictness
@@ -631,21 +631,11 @@ review. `API-05` now qualifies the inherited assembly baseline. The unfinished
 explicit-profile/FibCov/cone work is preserved under deferred `API-05R`, not
 reported as proved or completed.
 
-Current HIT slice: review WalkingEnd's source-recognized strict recursor
-computation at its actual owner, preserving the contextual derivation before
-the protected public head. For Circle, map the existing encoder equivalence
-through the already named strict `Path_cat_func` package while retaining the
-original encoder functor. Check their 15 selected registered HIT/completion/
-groupoidification reviewers with the corrected core. These are scoped
-constructor computations and supplied structural profiles, not admissions
-for arbitrary raw functors.
-The initial WalkingEnd reviewer passes at
-`20260927T013252Z-0a6d46d5eb214e9a94a37875758f5757` (10.847s), and the
-Circle loop-space reviewer passes at
-`20260927T013408Z-b3140f8f2a8e4559b81fb2c2b7ac2887` (9.256s), both at
-2 GiB/90s. The remaining HIT closure and named-rule warning/control review
-are pending. The candidate is preserved in
-`emdash2/tmp/probes/api_hit_profile_candidate/`; it is not promoted.
+The initial HIT preflight remains preserved in
+`emdash2/tmp/probes/api_hit_profile_candidate/`, with its own earlier core
+pin. The subsequent consolidation below supplies current-core evidence for
+all fifteen HIT/completion/groupoidification reviewers and the named-rule
+warning/control review.
 
 Assembly baseline trial: the exact pinned ordinary/displayed primitive plus
 the derived retained-member body checks the complete locality owner in
@@ -678,8 +668,31 @@ The same diagnostic target loses exactly nine critical-pair instances when
 the two research additions are omitted, with no additions or pattern delta.
 Both current scopes have 975 critical-pair/150 pattern diagnostics. Earlier
 individual receipts are not relabeled as standalone smaller-core evidence.
-Next consolidate the remaining HIT/finite-limit adaptations, qualify other
-affected consumers at this selected baseline, and prepare promotion.
+The HIT/finite-limit adaptations are consolidated below; broader affected
+consumer qualification and production promotion remain pending.
+
+The [HIT/limit/directed consolidation](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation)
+keeps the selected `6a980df3` core and inherited assembler. All 45 registered
+reviewers pass individually: fifteen HIT/groupoidification, two finite-limit
+and twenty-eight directed/simplex. WalkingEnd retains 81 main signatures and
+the source's protected named recursor computation; Circle retains all 100
+signatures and both original mapped inverse choices. Finite limits retain
+all fifteen signatures with only the post-profile import added. Two further
+source observer adaptations fix the groupoidification endpoint comparison
+and structured-J strict-family argument.
+
+The HIT/limit/directed combination passes 458 positive/72 negative assertions
+and 89 type queries at 2 GiB/90s. The full combination with the unchanged
+sheaf/geometry closure passes 703 positive/84 negative assertions and 89
+type queries over 192 inputs, in 49.035s at 6 GiB/180s. The named recursor's
+eight original overlap instances and two additional Sheaf/NType category
+instances have checked observations. Runtime distinctions are retained where
+only equality paths are qualified; no extra rewrite forces a join.
+
+The exact 193-input union and 51 current successful receipts are recorded
+in the linked review. Next consolidate and qualify native/CAS/Gray/path
+closures, migrate central diagnostics and remaining affected observers, and
+prepare production promotion. The full integration goal remains open.
 
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
@@ -697,7 +710,7 @@ affected consumers at this selected baseline, and prepare promotion.
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
 | `API-05` | inherited assembly and downstream sheaf/geometry baseline qualified in prototype; promotion pending | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): original ordinary/displayed inverse constructors, component betas and cancellation assumptions coexist with the derived retained-member proof. All sixteen locality signatures and three assembly stages check. Exact main eliminator/universality/sheafification owners and seventeen selected reviewers pass in the smaller-core combined environment: 245 positive/12 negative assertions. Main raw-presheaf and ringed-site signatures are retained through actual OneCat evidence and the post-profile action owner. Broader final-core qualification, assumption documentation and production promotion remain required. |
 | `API-05R` | deferred follow-up research; no baseline gate | Preserve the [displayed](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md), [relative](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md), [matching](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) and [inverse](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) investigations, including exact receipts and unfinished profile-sufficiency, member/base and FibCov/cone questions. Useful derived results remain available; genuine `API-04R/V/P/T` corrections stay selected. No completed semantic proof is claimed. |
-| `API-06` | Gray closure/D2 and 28 directed/simplex reviewers qualified in prototypes; other main consumers and promotion pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. D2 retains judgmental recovery through the classified graph and main's separate represented-comma derivation. The corrected-core directed/simplex continuation preserves the PathOut lift's raw interface with a target-only identity proof; all 28 reviewers and their 42-owner combined environment pass 199 positive/36 negative assertions and 87 type queries. WalkingEnd/Circle and other remaining main consumers, affected-core requalification and promotion gates remain required. |
+| `API-06` | HIT/limits and 28 directed/simplex reviewers qualified on selected core; earlier Gray closure/D2 evidence and promotion pending | [Consolidated baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation) qualifies all 45 selected HIT/limit/directed reviewers individually, preserving main's interfaces and source named-constructor computation. The full sheaf/geometry/HIT/limit/directed combination passes 703 positive/84 negative assertions and 89 type queries. Earlier Gray graph/D2 evidence retains its own exact pins; broader final-core requalification and production gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
 | `API-09` | incremental | Current authorities, notation, source registry, catalog, health and affected book evidence/prose. |

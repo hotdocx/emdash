@@ -22,7 +22,7 @@ keeping the derived retained-member proof. Eight positive/two negative
 contract and noncollapse controls pass. Broader/downstream qualification and
 production promotion remain required; this is not a semantic consistency proof.
 
-The current baseline is now `api_assembly_baseline_minimal_core`, core
+The preceding baseline is `api_assembly_baseline_minimal_core`, core
 `6a980df3`, omitting the two later deferred-member research additions while
 retaining the generic strictness corrections. Its combined
 [sheaf/geometry review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#downstream-sheafification-and-geometry-qualification)
@@ -33,6 +33,15 @@ uses actual `comm_ring_cat_is_one_cat` evidence for composition. Three optional
 source strict-presheaf refinement views remain available. Earlier independent
 reviewer receipts retain their `b9cc2726` pin; they are not standalone checks
 on the selected smaller core.
+
+The [consolidated HIT/limit/directed candidate](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation)
+is now the baseline continuation package. All 45 selected registered
+reviewers pass individually on `6a980df3`, and the full combination with
+sheaf/geometry passes 703 positive/84 negative assertions and 89 type queries.
+WalkingEnd/Circle/finite limits preserve 81/100/15 main signatures respectively.
+The five previously located semantic-owner references have qualified
+dispositions; full central diagnostics and wider final-core qualification
+remain pending.
 
 ## Semantic Owner Ledger
 
@@ -1306,7 +1315,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `right_adjoint_weighted_limit_comp_step1` | No direct extension hit; inspect core/diagnostics/reviewers | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
 | `right_adjoint_weighted_limit_comp_step2` | No direct extension hit; inspect core/diagnostics/reviewers | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
 | `right_adjoint_weighted_limit_comp_step3` | No direct extension hit; inspect core/diagnostics/reviewers | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
-| `weighted_limit_cov_pull` | `emdash3_2_finite_limits.lp` | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
+| `weighted_limit_cov_pull` | `emdash3_2_finite_limits.lp` | Qualified prototype: explicit post-profile owner import; all fifteen finite-limit signatures and original reviewer computations preserved. |
 | `weighted_limit_cov_push` | No direct extension hit; inspect core/diagnostics/reviewers | Pending: Move/adapt to strict post-profile owner; preserve consumer computation. |
 
 ## Direct Composition-Theorem Consumers
@@ -1333,14 +1342,14 @@ as owners are examined. Code-formatted source paths are recoverable with
 | --- | --- | --- |
 | `emdash2/emdash3_2.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
 | `emdash2/emdash3_2_checks.lp` | M | Pending: API-03/04/05: owner-by-owner reimplementation and assertions. |
-| `emdash2/emdash3_2_circle_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_circle_hit.lp` | M | API-06: named strict Path action maps the original equivalence; all 100 signatures, original encoder and both inverse choices qualified on selected core. Promotion pending. |
 | `emdash2/emdash3_2_commutative_algebra_locality.lp` | M | API-05: current main consumer passes in the smaller-core sheaf/geometry closure with the raw-presheaf interface retained. Production promotion pending. |
 | `emdash2/emdash3_2_commutative_algebra_presheaves.lp` | M | API-05: actual CommRing OneCat evidence replaces the generic composition call; all twenty main signatures plus three optional source refinement views qualified. Production promotion pending. |
 | `emdash2/emdash3_2_cubical_face_addresses.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_cubical_open_box_sieves_recursive.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and reviewer pass; the inherited-assembly locality, universality and sheafification continuation now passes in the smaller-core prototype. Production promotion pending. |
 | `emdash2/emdash3_2_eq1_hom_action.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
-| `emdash2/emdash3_2_finite_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_finite_limits.lp` | M | API-06: post-profile import added; all fifteen signatures and implementation bodies retained; original finite-limit reviewers pass. Promotion pending. |
 | `emdash2/emdash3_2_gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/emdash3_2_gray_cube_dimension2.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/emdash3_2_gray_interchanger_orientation.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
@@ -1369,13 +1378,13 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/emdash3_2_path_cubical_structured_operators.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_path_cubical_structured_recursion.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/emdash3_2_path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
-| `emdash2/emdash3_2_pathout_transformation_lift.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_pathout_transformation_lift.lp` | M | API-06: target identity proof replaces obsolete strict-naturality call; eleven signatures and owner rule retained; requalified in current directed/HIT combination. Promotion pending. |
 | `emdash2/emdash3_2_readable_pseudofunctors.lp` | M | API-05: exact source candidate and four-positive/three-negative controls preserve both inverses and distinct endpoints; production promotion pending. |
 | `emdash2/emdash3_2_ringed_sites.lp` | M | API-05: existing post-profile mate owner linked, preserving all 25 signatures; selected ringed-site/affine/sheafification consumers qualified. Production promotion pending. |
 | `emdash2/emdash3_2_semicubical_nerve.lp` | M | API-06: exact source candidate and semicubical/Gray/path joint consumers pass; production promotion pending. |
 | `emdash2/emdash3_2_simplex_shapes.lp` | M | API-06/07: source adaptation and corrected-core directed/simplex review pass, including the 28-reviewer combined closure. Production promotion remains pending. |
 | `emdash2/emdash3_2_strict_functor_actions.lp` | A | Pending: API-04: post-profile actions with new-main consumers. |
-| `emdash2/emdash3_2_walking_end_hit.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/emdash3_2_walking_end_hit.lp` | M | API-06: exact source protected recursor and named computations qualified; 81 main signatures retained, ambient/mixed-seed negatives and ten scoped overlap observations pass. Promotion pending. |
 | `emdash2/examples/adjunction_triangles.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/commutative_ring_presheaf_invertibility.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
 | `emdash2/examples/commutative_ring_presheaf_locality.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
@@ -1385,7 +1394,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/dependent_simplex_ordinal_dimension3.lp` | M | API-06: source endpoint-noncollapse observation adapted; individual and combined corrected-core reviews pass. Production promotion pending. |
 | `emdash2/examples/dependent_simplex_profiles.lp` | M | API-06: source endpoint-noncollapse observation adapted with current canonical evidence retained; individual and combined corrected-core reviews pass. Production promotion pending. |
 | `emdash2/examples/direct_cover_completion_hit.lp` | M | API-05: source named-glue profile and reviewer pass; inherited locality/universality/sheafification now qualifies in the smaller-core combined review. Production promotion pending. |
-| `emdash2/examples/generic_groupoidification.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/generic_groupoidification.lp` | M | API-06: exact source endpoint-noncollapse observation passes on selected core, independently and in the full combination. Promotion pending. |
 | `emdash2/examples/gray_cube_decoder.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/gray_cube_dimension2.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/gray_interchanger.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
@@ -1394,7 +1403,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/gray_transformation_graph.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/gray_transformation_graph_profile.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
 | `emdash2/examples/gray_walking_square.lp` | M | API-06: selected classified Gray/native joint prototype passes, including judgmental D2 recovery; main graph overlap adapted explicitly. Production profile/core migration remains pending. |
-| `emdash2/examples/groupoidal_structured_j_eq1.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/groupoidal_structured_j_eq1.lp` | M | API-06: source observer uses the already profiled transport owner's StrictFunctor family; independent/combined checks pass. Promotion pending. |
 | `emdash2/examples/path_cubical_cube3_open_box.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/path_cubical_face_naturality.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/path_cubical_hcomp2.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
@@ -1410,7 +1419,7 @@ as owners are examined. Code-formatted source paths are recoverable with
 | `emdash2/examples/path_cubical_structured_operators.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/path_cubical_structured_recursion.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
 | `emdash2/examples/path_cubical_successor_elim.lp` | A | API-07: exact source port and all 17 reviewer closures pass in the prototype; inherited readback/groupoidality boundary retained. Production/registry promotion remains pending. |
-| `emdash2/examples/profunctor_weighted_limits.lp` | M | Pending: API-04/05/06: classify and adapt affected consumer. |
+| `emdash2/examples/profunctor_weighted_limits.lp` | M | API-06: source post-profile import added; all original checks pass individually and in the selected-core combination. Promotion pending. |
 | `emdash2/examples/simplex_shapes.lp` | M | API-06: passes individually and in the corrected-core 28-reviewer closure. Production promotion pending. |
 
 ## Source Documentation And Tooling Dispositions

@@ -255,3 +255,119 @@ Next consolidate the remaining HIT and finite-limit adaptations with this
 baseline, qualify other affected consumers at the selected core, and prepare
 production promotion. The remaining native/CAS/path/Gray, TypeScript and
 final integration gates retain their full scope.
+
+## HIT, Finite-Limit And Directed Consolidation
+
+The next package, `emdash2/tmp/probes/api_consolidated_baseline_candidate/`,
+keeps the selected `6a980df3` core, `f670814a` profiles and exact inherited
+assembly interface. All 87 LP files of the preceding sheaf baseline are
+byte-identical. It adds the selected WalkingEnd/Circle adaptations, the
+already checked PathOut proof repair and directed reviewers, and the two
+finite-limit import changes from the source branch.
+
+### Named WalkingEnd Recursor
+
+The WalkingEnd owner is an exact copy of source tip `114dc19f`. Its contextual
+eliminator/section derivations occur before the public recursor becomes
+opaque. Three rules at that boundary expose its point, generator and named
+composition computation. The latter recognizes the same recursor, seed,
+target object and ambient codomain on both mapped arrows. It does not apply
+to an arbitrary raw functor out of WalkingEnd.
+
+All 81 main public signatures remain, with the source's one additional
+`walking_end_rec_composition_path` theorem. The underlying WalkingEnd category
+and Hom objects remain opaque; `BNat` remains a separate model. No generated
+word representation of WalkingEnd Hom is restored.
+
+Three positive checks and one next-Hom type query cover composition, both
+whole/capped application orders, the identity case and retained action. Two
+negative controls reject arbitrary raw-functor composition and mixed recursor
+seeds. Removing only the named composition clause makes its theorem fail
+by proof unification, receipt
+`20260927T030307Z-ca7846035b034ce4a90eab58ab6a9917`. The strict LHS audit
+has zero candidates.
+
+There are eight critical-pair participant instances involving the recursor
+in its own checked closure. A fresh, isolated check of the pinned source
+owner has ten; the candidate adds none and removes the two old generic
+pre/postcomposition-accumulator interactions. This compares only the
+recursor participants, not the different nuclei's complete warning totals.
+
+The eight remaining cases are four category presentations (`Op_cat`,
+`Terminal_cat`, `EqSkeleton_cat`, `StrictFunctor_cat`), two identity inputs
+and two generator inputs. All eight have checked observations. Identity
+cases join at runtime; the generator cases retain runtime distinction and
+have checked paths from the named composition theorem. The broader
+sheaf/geometry closure adds two further category-projection interactions,
+`Sheaf_cat` and `NType_cat`; separate typed paths and runtime-distinction
+controls pass for both. No generic opposite or projection rewrite is added
+to force these branches to join, and no confluence claim is made.
+
+### Circle And Finite Limits
+
+Circle maps its existing loop-space equivalence through the named strict
+`Path_cat_func` package. All 100 public signatures and the original
+`circle_hom_integer_func` encoder body remain unchanged. Two explicit
+consumers recover the Path images of the original selected left and right
+inverse choices; a next-Hom type query also passes.
+
+The finite-limit owner and weighted-limit reviewer only gain the source's
+explicit `emdash3_2_strict_functor_actions` import. All fifteen finite-limit
+signatures and every implementation body are unchanged. The rehomed
+weighted-limit and adjunction operations retain their existing names and
+actual retained comparison data.
+
+Two further main reviewers need the already reviewed source changes:
+`generic_groupoidification.lp` compares the distinct compositor endpoints,
+and `groupoidal_structured_j_eq1.lp` uses the `StrictFunctor` family already
+required by its migrated transport owner. Their first runs fail with the
+old observer types, and their exact source replacements pass. The latter
+profile requirement concerns functorial transport of equivalences; it is
+separate from the inherited pointwise assembly decision.
+
+### Exact Current Evidence
+
+All **45 registered reviewers** pass individually: fifteen HIT/completion/
+groupoidification, two weighted/finite-limit, and twenty-eight directed/simplex
+reviewers. A combined check including the recursor and Circle controls passes
+458 positive/72 negative assertions and 89 type queries. It runs in 13.274s
+at 2 GiB/90s, maximum child RSS 1,223,756 KiB.
+
+The full combined check additionally imports the unchanged qualified
+sheaf/geometry reviewer closure. It passes **703 positive/84 negative
+assertions and 89 type queries over 192 inputs**, in 49.035s at the measured
+6 GiB/180s broad profile, maximum child RSS 5,463,300 KiB. No earlier source
+receipt is relabeled to obtain these results.
+
+| Current check | Receipt |
+| --- | --- |
+| Named recursor and raw/mixed-seed rejection | `20260927T030138Z-9d7ac50ed3164ab7b2d4a0971dc732f2` |
+| Eight recursor overlap observations | `20260927T030915Z-dc37f08c0f0944b59aa46e45efbbe8be` |
+| Both Circle inverses and next Hom | `20260927T032051Z-512c08a19ed145709e28c275c7800dec` |
+| HIT/limit/directed combined review | `20260927T032158Z-ffd54994364c43b5b93345251cfa515e` |
+| Full sheaf/geometry/HIT/limit/directed combination | `20260927T032606Z-d169bbbec4be4eea8f37c70ad41206e4` |
+| Additional Sheaf/NType category overlap controls | `20260927T033000Z-9fe26a2c9f0d49dd8a149ba29f131618` |
+
+All individual and focused checks use 2 GiB/90s. All runs retain warnings,
+subject reduction, `OCAMLRUNPARAM=o=20,v=1024`, serial execution and the
+existing file/core/no-swap guards, with no compiled parents. The respective
+combined warning inventories are 1,081/160 and 1,102/160; these are distinct
+import scopes. The two additional recursor families from the full scope are
+classified above. Warning parsing reports no issues.
+
+The manifest
+`emdash2/tmp/probes/api_consolidated_baseline_current_manifest.json` binds
+51 current successful receipts, the 193-input union including the separate
+cross-category controls, exact source comparisons, three preserved failure
+controls, the fresh source-warning reference and signature/audit records.
+SHA-256:
+`939cd2d070b6a5b46b402301320b83917b4eefb697c840b349f009cc15a250d1`.
+
+The five semantic owners previously located by the retired-name scan now
+have concrete dispositions. WalkingEnd, Circle and ring presheaves no longer
+call the retired generic names; finite limits and ringed sites explicitly
+import their moved operations. This does not certify every remaining
+main consumer. Next consolidate and qualify the native/CAS/Gray/path closures,
+migrate the full central diagnostics and remaining affected observers, then
+perform production promotion, source/evidence synchronization, TypeScript
+conformance and the complete final gates.
