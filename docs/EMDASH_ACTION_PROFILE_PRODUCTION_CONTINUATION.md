@@ -1299,3 +1299,30 @@ runtime closure is unchanged and excludes that acquisition module. The
 [source-alignment review](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md#final-package-and-template-evidence-identity)
 records this scope; the full TypeScript aggregate is carried at its actual
 previous snapshot. Formal CI and its serial follow-up remain live.
+
+
+## Queued Health Evidence-Class Correction
+
+Review of the owning metrics code finds that completed staged groups use
+`current-isolated-object-chain`, while individual targets use `current`.
+Both are fresh evidence from the same complete CI invocation. The initial
+queued health validator accepted only the latter, so it would have rejected
+valid group results after CI. No result was relabeled and no health report
+had yet been written.
+
+Only the waiting follow-up controller was stopped: PID `2022649`, tool
+session `19155`, confirmed exit 143 before any CAS/health stage. Its state is
+preserved as `cancelled-before-followup`. Formal PID `2001934` and tool
+session `47799` continue unchanged. The replacement
+`api_health_from_complete_formal_v2.py` accepts exactly the two fresh evidence
+classes, still requires all zero exits, the exact target set, matching content
+and source snapshots, and the actual successful formal receipt. It records
+individual and grouped target counts separately. The owning formal source,
+registry and check execution are unchanged.
+
+Replacement controller: `api_formal_followup_controller_v2.py`, tool session
+`15309`, state `api_formal_followup_controller_v2_results.json`, log
+`logs/api-formal-followup-controller-v2.log`. It binds the same live formal
+PID/start identity and fresh script hashes. The original CAS driver is
+unchanged. Treat `15309` and `47799` as the current live handles; no concurrent
+formal checker is authorized by this bookkeeping correction.
