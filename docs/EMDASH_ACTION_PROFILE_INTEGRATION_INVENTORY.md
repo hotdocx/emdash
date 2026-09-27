@@ -2,7 +2,7 @@
 
 Date: 2026-09-25 (America/Toronto)
 
-Status: production qualification complete; final local checkpoint pending
+Status: complete; production qualification and local checkpoint `8ea6c86b` verified
 
 Owner: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md),
 rows `API-01` and `API-02`. Reference main is `37ce19d5`, source is
@@ -97,12 +97,13 @@ counts remain 68 exact donor, ten adapted and three retained-main LP paths.
 
 Current implementation: `OWN-02` and `OWN-03` retain their earlier checkpoint
 `f0f327d6`; the remaining selected classifiers, generic-cut retirement, Gray
-arrows and inherited path-cubical owners have now been applied as uncommitted
-production work. The nucleus is changed to the qualified core `6a980df3`.
+arrows and inherited path-cubical owners are recorded in qualified semantic
+checkpoint `8ea6c86b`. The nucleus is the qualified core `6a980df3`.
 The table above describes the pinned main/source comparison and required
 consumer contracts, not a claim that the current worktree still has the old
 cuts. The feasibility and tranche sections below preserve the historical
-sequence. Full production validation and the semantic checkpoint remain open.
+sequence. Complete production validation, final source-formatting
+requalification and the local semantic checkpoint are now complete.
 
 The twelve moved core names are the inverse/equivalence mappings and weighted
 comparison tail in the declaration table below. The four deletions are

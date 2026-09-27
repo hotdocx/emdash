@@ -1515,3 +1515,29 @@ unreviewed slots and 64 annotations. The source disposition audit still
 accounts for 114 donor paths and the same 68/10/3 LP split. Staged whitespace
 checks pass. All qualification is complete; the remaining steps are the
 reviewed implementation commit and clean local handoff verification.
+
+
+## Qualified Semantic Checkpoint And Local Handoff
+
+Commit `8ea6c86bda894b32a33db13b52ba51b92fd701f5` (`feat: integrate opaque action profiles
+and bounded cubical structure`) records all 332 reviewed implementation,
+metadata, tooling and documentation paths. Every committed blob matches
+`api_final_implementation_staging_manifest_v2.json`; clean status after the
+commit is verified in `api_semantic_checkpoint_evidence.json`.
+
+Complete formal CI, all nine cold recipes, exact-current checked health,
+all 94 final production CAS assertions, the complete TypeScript gate with
+its explicit metadata follow-up, 102 selected live conformance tests and the
+owning package/template/local artifact gates are qualified. The final
+formatting-only source follow-up preserves every token and the three library
+objects, checks all 370 affected closures afresh and reuses 1,018 actual
+successes only after exact input verification. No source or runner change
+is made after that qualification.
+
+The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+closes every scoped requirement and records the clean local handoff. Main
+`37ce19d5` and donor `114dc19f` remain unchanged. No merge, push, publication,
+history rewrite or cleanup was performed. The inherited assembly assumption,
+its deferred explicit-profile redesign, Op/duality and all other exclusions
+remain as agreed. Remaining changes after the semantic checkpoint only close
+these documentation records.

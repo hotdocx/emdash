@@ -2,8 +2,8 @@
 
 Date: 2026-09-27
 
-Status: all acceptance gates passed on the final source; semantic checkpoint
-and clean handoff verification remain.
+Status: complete; all acceptance gates and semantic checkpoint `8ea6c86b`
+verified, with a clean local handoff.
 
 Plan: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 Detailed execution evidence: [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md).
@@ -14,11 +14,13 @@ The goal reimplements donor `114dc19fdee4b952f1c75be4e2000d6ff7195741`
 against main `37ce19d5c727f8d1c5579445981a8f4f6d3f32d4` in
 `/home/user1/emdash1-action-profile-integration-v1`, branch
 `goal/action-profile-integration-v3.2`. Main remains an ancestor of the goal
-branch. Main and donor worktrees remain unchanged; only the goal worktree has
-pending changes. The most recent pre-handoff documentation checkpoint is
-`da14e6a7`. The mathematical, tooling and TypeScript metadata changes have
-passed their gates and now await the final reviewed semantic checkpoint. No push, main merge, PR, publication, history
-rewrite or cleanup belongs to this acceptance boundary.
+branch. Main and donor worktrees remain unchanged.
+
+Implementation checkpoint: `8ea6c86bda894b32a33db13b52ba51b92fd701f5`. All 332 committed
+file blobs match the reviewed qualification/staging manifest, and clean Git
+status is verified. The final documentation checkpoint only closes the plan
+and handoff records. No push, main merge, PR, publication, history rewrite or
+cleanup belongs to this acceptance boundary.
 
 Passing checks qualify the recorded interfaces and observations. They do not
 prove unrestricted consistency, confluence, normalization or model adequacy.
@@ -41,7 +43,7 @@ prove unrestricted consistency, confluence, normalization or model adequacy.
 | Complete formal CI | **Passed.** `formal-20260927T164506Z-d45cf3135aaa42c8a51b128f5e319355` records actual `make -C emdash2 ci` exit zero in 9,430.511s. All 1,388 targets pass: 1,308 individual checks and 80 targets across nine isolated groups. The remaining tooling, registry, book, source-reference, LHS and catalog gates also pass. |
 | Replay the retained production CAS corpus | **Passed.** Eight original, byte-identical artifacts pass all 94 assertions on the final production closure. All eight final fresh receipts, source/object inputs and log hashes are verified in `api_final_clean_source_acceptance.json`; individual results are listed below. Earlier prototype receipts are not substituted for this result. |
 | Generate checked health | **Passed on current source.** The owning formatter generated the refreshed report from 370 fresh affected checks and 1,018 verified exact-input reused successes. All 1,388 zero exits, current source/content hashes and report data were checked. `api_whitespace_health_evidence.json` records the current report and payload hashes. Original CI and group timings retain their original scope; group shares are not individual execution times. |
-| Finish a clean, reviewable local branch | **Pending checkpoint.** All required gates pass. Inspect and commit the exact final staged implementation diff, record the resulting revision, and verify clean status and branch identity before declaring completion. |
+| Finish a clean, reviewable local branch | **Passed.** Semantic checkpoint `8ea6c86b` contains the exact 332 reviewed files. Every committed blob matches `api_final_implementation_staging_manifest_v2.json`; `api_semantic_checkpoint_evidence.json` records clean status. The goal branch retains pinned main ancestry, and main/donor references are unchanged. |
 
 ## Final Gate Evidence And Identity
 
@@ -81,8 +83,8 @@ all checks passed: JSON sorts source-metric keys, while the owning report
 preserves source order. Restoring the original order reproduces the report
 exactly, without changing its data or rerunning the checks. That wrapper
 failure remains preserved; the subsequent CAS run is separately successful.
-No previous failed or successful receipt is rewritten. Final checkpoint and
-clean-worktree verification remain before completion.
+No previous failed or successful receipt is rewritten. The qualified semantic
+checkpoint and clean-worktree verification are complete.
 
 
 | Production CAS artifact (final cleaned source) | Assertions | Seconds | Fresh receipt |
@@ -113,3 +115,16 @@ spectral/stabilization work remain separate goals. This integration does not
 claim unconditional higher cubical readback, general Cartesian substitution
 or full Kan structure. Those exclusions do not waive a regression in the
 selected baseline's existing consumers.
+
+## Local Handoff
+
+The implementation is ready for review on `goal/action-profile-integration-v3.2`
+in `/home/user1/emdash1-action-profile-integration-v1`. Main remains pinned at
+`37ce19d5`; donor remains `114dc19f`. Their sources and histories are unchanged.
+All background validation processes are terminal. Main merge/publication is
+outside this completed local goal and needs separate user authorization.
+
+The living inventory accounts for every donor path, while the production
+continuation retains failed attempts, exact successful receipts, formatting
+follow-up and resource measurements. The accepted inherited assembly baseline
+and every explicitly deferred research boundary remain as recorded above.

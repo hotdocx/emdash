@@ -4,7 +4,7 @@ Date: 2026-09-25 (America/Toronto; launched 2026-09-26 UTC)
 
 Plan-ID: `ACTION-PROFILE-INTEGRATION-V3.2`
 
-Status: all qualification complete; final local checkpoint and handoff in progress
+Status: complete; qualified local integration checkpoint `8ea6c86b` with clean handoff
 
 Depends-On: current Lambdapi owners and SOP; completed source-branch
 migrations pinned below; native universality and categorical assembly
@@ -108,8 +108,10 @@ typography and the 416-page browser render pass. Staging then exposed whitespace
 are unchanged and the three rebuilt library objects are byte-identical. The
 final follow-up passes all 370 affected source closures and reuses only
 1,018 exact-input verified successes. Checked health and all 94 production
-CAS assertions also pass on the cleaned bytes. The semantic checkpoint and
-clean local handoff are the remaining steps. The 238 generated objects from the preceding production
+CAS assertions also pass on the cleaned bytes. The qualified semantic
+checkpoint is `8ea6c86bda894b32a33db13b52ba51b92fd701f5`; its 332 committed
+files match the exact reviewed staging manifest and clean status is verified.
+The 238 generated objects from the preceding production
 snapshot were preserved under
 `emdash2/tmp/probes/api_pre_promotion_objects_20260927T045154Z/`, with their
 hash manifest, to prevent mixed-source checks. No object was deleted.
@@ -809,8 +811,9 @@ LP has changed in this tranche.
 | `API-06` | complete; current production HIT/limit/directed/Gray gates qualified | [Consolidated baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md#hit-finite-limit-and-directed-consolidation) qualifies all 45 selected HIT/limit/directed reviewers individually, preserving main's interfaces and source named-constructor computation. The full sheaf/geometry/HIT/limit/directed combination passes 703 positive/84 negative assertions and 89 type queries. The [native/CAS/cubical consolidation](EMDASH_ACTION_PROFILE_CONSOLIDATED_NATIVE_CAS_REVIEW.md) now checks the Gray graph/D2 closure on the same selected core. Owner/diagnostic migration and the complete library sweep pass; final production gates now pass. |
 | `API-07` | complete; bounded path-cubical owners and reviewers qualified | All seventeen reviewers pass afresh: 154 positive/six negative assertions and 61 type queries across their imported closure, and the wider native/CAS interaction also passes. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry and production documentation are synchronized; final production gates now pass. |
 | `API-08` | complete aggregate and all selected live conformance qualified, with recorded metadata follow-up | [TypeScript alignment](EMDASH_ACTION_PROFILE_TYPESCRIPT_SOURCE_ALIGNMENT.md): selected canonical commands and declarations remain unchanged; stale provenance is corrected by actual owner identity. All 134 inspected semantic module records remain identical. No new transfer or rule is installed. Workspace, typecheck, lint, 37 transfer tests, fourteen live inventory tests and fourteen displayed-transfer follow-up tests pass. The active audit also checks every collected source pin. The complete aggregate passes at 4 GiB: 2,860 passes, zero failures and 88 opt-in skips. The corrected source pins and ordinal expectations retain unchanged semantic IR. All nine live suites pass 102 tests without skips. The subsequent Eq1 acquisition metadata correction retains all 83 selected command texts and passes its focused eight-test suite, typecheck and lint; the earlier aggregate snapshot remains explicit. |
-| `API-09` | complete; authorities, artifacts, catalog and exact-current checked health qualified | Current authorities, notation, source registry and catalog are synchronized. Book evidence, rendering and local PDF artifact gates pass. Checked health records all 1,388 successful targets from the complete formal invocation. |
-| `API-10` | all acceptance gates pass; final semantic checkpoint pending | Complete formal CI passes all 1,388 targets, including nine cold recipes; all 94 original production CAS assertions pass. The format-only follow-up passes 370 fresh checks, reuses 1,018 exact-input successes, and refreshes checked health and all 94 CAS assertions on the final bytes. Complete TypeScript, selected live conformance, package/template and local artifact evidence retain their documented snapshots and follow-up scope. The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) records verified receipts. Exact staged-diff review and the clean local implementation checkpoint remain. |
+| `API-09` | complete; authorities, artifacts, catalog and exact-current checked health qualified | Current authorities, notation, source registry and catalog are synchronized. Book evidence, rendering and local PDF artifact gates pass. Checked health records all 1,388 successful targets through the complete formal invocation and exact-input formatting follow-up. |
+| `API-10` | complete; semantic checkpoint `8ea6c86b` | Complete formal CI passes all 1,388 targets, including nine cold recipes; all 94 original production CAS assertions pass. The format-only follow-up passes 370 fresh checks, reuses 1,018 exact-input successes, and refreshes checked health and all 94 CAS assertions on the final bytes. Complete TypeScript, selected live conformance, package/template and local artifact evidence retain their documented snapshots and follow-up scope. The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) records verified receipts. The exact 332-file staged diff is reviewed and committed; committed hashes match the qualified manifest and clean status is verified. Main integration remains separately authorized. |
+
 Rows guide dependencies; they do not separate inseparable rule families.
 Remove a production cut only when its consumers migrate in the same coherent
 tranche. An audit may select a smaller independent slice; record its reason
