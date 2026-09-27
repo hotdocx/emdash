@@ -84,12 +84,12 @@ the existing ordinary/displayed arrow-presentation mismatch
 (`20260926T132724Z-98f9b7563c5c47e6af7c4e41c4de66aa`); that failure neither
 establishes a bypass nor supplies a valid action profile.
 
-The user confirmed the current recommendation: require an explicit
-action-based profile before accepting this operation. The old raw assembler
-is retained only as an unselected temporary control. The candidate's displayed
-half remains commented with its restoration condition. Its actual whole
-internal action and the direct-cover producer must justify the premise;
-pointwise inverse facts alone are not being promoted to whole coherence.
+At this checkpoint the user had selected an explicit-profile investigation,
+and the candidate's displayed half remained commented. The later confirmed
+[inherited assembly baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+supersedes that integration prerequisite. The profile redesign is preserved
+as deferred research; the baseline qualifies the exact inherited assumption
+and its consumers without presenting it as a derived theorem.
 
 ## Inherited Path-Cubical Boundary
 
@@ -153,7 +153,7 @@ under `emdash2/tmp/probes/`. Warning comparison is recorded in
 `api_gray_d2_warning_delta.json`. Exact input blobs and raw receipts remain
 under `emdash2/logs/`.
 
-Production cut retirement, the explicit displayed assembly profile,
+Production cut retirement, the selected inherited assembly contract,
 remaining native/CAS and directed/simplex consumers, TypeScript alignment,
 registry/authority/book synchronization and final integration gates remain
 required by the living plan. This checkpoint records prototype qualification,

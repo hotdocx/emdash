@@ -4,13 +4,16 @@ Date: 2026-09-26
 
 Status: derived component, whole-Hom and next-Hom inverse comparisons pass;
 postcomposition and selected telescope corrections remain prototypes;
-complete displayed assembly and production integration remain open
+profile-based displayed assembly is deferred; production integration remains open
 
-Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05` and
+Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05R` and
 `API-04P` / `API-04T`. This continues the
 [relative-profile investigation](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md)
 after the [vertical-fold correction](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md).
 No production LP file is changed by this investigation.
+The [inherited assembly baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+defers assembly-profile sufficiency and producer work. It does **not** defer
+the demonstrated `API-04P` / `API-04T` generic-leak corrections recorded here.
 
 ## Derived Action Of The Actual Inverse Choices
 

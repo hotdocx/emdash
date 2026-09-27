@@ -3,9 +3,13 @@
 Date: 2026-09-26
 
 Status: prototype identity/path/selected-inverse producers and actual matching
-consumers pass; inverse-assembly use remains unselected
+consumers pass; profile-based inverse-assembly use is deferred research
 
-Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05`.
+Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05R`.
+The [inherited assembly baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+supersedes the use of this investigation as an integration gate. Its checked
+results remain available; sufficiency and producer questions below belong to
+the deferred focused follow-up.
 This follows the
 [whole matching-action comparison](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md)
 and refines the profile question in the

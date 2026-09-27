@@ -2,11 +2,14 @@
 
 Date: 2026-09-26
 
-Status: retained-member point, matching action, whole member projection,
-member-indexed families and a whole lift/cone pass in isolated candidates;
-complete displayed/rho profiles and inverse assembly remain open
+Status: preserved research; explicit-profile sufficiency and rho-producer
+redesign deferred under `API-05R`; successful derived results retain their scope
 
-Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05`.
+Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05R`.
+The user-confirmed [inherited assembly baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+supersedes this report's earlier integration prerequisites. "Next" and
+"required" steps below describe the preserved research route; they are not
+gates for the first integration baseline. No findings or receipts are erased.
 Production mathematics remains at checkpoint `f0f327d6`. This investigation
 began in `emdash2/tmp/probes/api_ordinary_profile_minimal/`; the later
 member continuations below use separate corrected cores. None restores the
@@ -14,8 +17,9 @@ commented displayed half of the pointwise-equivalence owner.
 
 ## Decision And Actual Consumer
 
-The user selected an explicit action-based premise for displayed assembly.
-The old unqualified primitive is not an accepted integration result.
+The user initially selected an explicit action-based premise for displayed
+assembly. That choice has since been superseded for this integration milestone
+by the inherited-contract baseline linked above.
 The actual consumer, `emdash3_2_direct_cover_completion_locality.lp`, has
 three assembly stages: an ordinary fibre transformation, a displayed
 transformation between matching maps, and an ordinary outer transformation
@@ -60,8 +64,9 @@ and inverse assembly remain unqualified.
 
 ## Decision Review: Three Distinct Boundaries
 
-The user requested a review of the earlier choice on 2026-09-27 UTC. That
-request does not itself reverse the selected explicit-profile requirement.
+The user first requested a review of the earlier choice on 2026-09-27 UTC.
+That first review did not reverse the requirement; the subsequent accepted
+baseline reassessment linked above does supersede it for this milestone.
 The choice concerned the unqualified displayed assembly assumption, not a
 blanket prohibition on computations for a particular strict constructor.
 
@@ -107,8 +112,9 @@ shortened this portion of the work, but no alternate complete integration
 run establishes that the goal would already be finished. Remaining directed
 consumers, promotion of prototype corrections, affected native/CAS/path
 requalification, TypeScript conformance and final integration gates are
-independent outstanding work. The current decision remains in force pending
-an explicit revision; this review records its real cost and trust tradeoff.
+independent outstanding work. This records the first review's conclusion;
+the later baseline decision changes the sequencing without claiming that the
+unfinished profile research has been proved.
 
 ## Derived Retained-Member Route
 

@@ -10,6 +10,18 @@ rows `API-01` and `API-02`. Reference main is `37ce19d5`, source is
 `114dc19f`, common ancestor is `9fe06834`. All source-path tables below refer
 to those pinned snapshots. Pending rows do not assert successful integration.
 
+Current assembly policy is the user-confirmed
+[inherited-contract baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md).
+Earlier `API-05` profile/producer requirements below are preserved research
+under deferred `API-05R`, not completion gates for this integration milestone.
+The independent `API-04R/V/P/T` generic strictness corrections remain required.
+
+The separate inherited-assembly candidate checks the complete locality
+owner, all sixteen public signatures and all three assembly stages while
+keeping the derived retained-member proof. Eight positive/two negative
+contract and noncollapse controls pass. Broader/downstream qualification and
+production promotion remain required; this is not a semantic consistency proof.
+
 ## Semantic Owner Ledger
 
 | ID | Source boundary | Main disposition and required consumer |
@@ -1136,11 +1148,11 @@ The combined target needs a measured 3 GiB/180s profile; separate closures
 pass at the default 2 GiB/90s settings. All exact source comparisons, receipts
 and scope limits are in the linked review. Production promotion remains open.
 
-The user confirmed that displayed pointwise assembly must require an explicit
-action-based profile. The unchanged raw assembler is an unselected control;
-the source's named glue profile does not qualify the separate locality/rho
-assembly. Remaining native/CAS, directed/simplex, TypeScript and final
-integration work is unchanged.
+The earlier user decision required an explicit displayed action profile.
+It has since been superseded for this milestone by the inherited-contract
+baseline linked above. The source's named glue profile remains distinct
+from a hypothetical rho profile. Independent consumer migrations, TypeScript,
+promotion and final integration work remain required.
 
 ### Displayed Assembly And Retained-Member Prerequisite
 

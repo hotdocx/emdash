@@ -3,9 +3,13 @@
 Date: 2026-09-26
 
 Status: guarded comparison and whole matching-parameter proof pass in an
-isolated candidate; complete rho profiles and integration remain pending
+isolated candidate; profile-based rho continuation is deferred research
 
-Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05`.
+Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), `API-05R`.
+The [inherited assembly baseline](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+supersedes the unfinished profile/producer work as a prerequisite for the
+first integration milestone. Existing results and their exact qualifications
+remain preserved; research-only comparisons need separate promotion review.
 This extends the
 [retained-member investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md).
 The new package is

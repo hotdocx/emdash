@@ -4,7 +4,8 @@ Date: 2026-09-25 (America/Toronto; launched 2026-09-26 UTC)
 
 Plan-ID: `ACTION-PROFILE-INTEGRATION-V3.2`
 
-Status: active; authorized main-based reimplementation, inventory and feasibility
+Status: active; inherited assembly baseline selected, with consumer qualification
+and production integration in progress
 
 Depends-On: current Lambdapi owners and SOP; completed source-branch
 migrations pinned below; native universality and categorical assembly
@@ -14,7 +15,7 @@ Supersedes: action-profile integration deferral for this dedicated goal
 only. Source-branch plans/receipts remain historical evidence. Op/duality,
 six-term comparison and the other excluded goals remain deferred.
 
-Side-Task-Ledger: `API-00` through `API-10`, plus `API-02R`, `API-02I`, `API-02M`, `API-04R`, `API-04V`, `API-04P` and `API-04T` below; owner/consumer decisions
+Side-Task-Ledger: `API-00` through `API-10`, plus `API-02R`, `API-02I`, `API-02M`, `API-04R`, `API-04V`, `API-04P`, `API-04T` and deferred `API-05R` below; owner/consumer decisions
 are maintained in `EMDASH_ACTION_PROFILE_INTEGRATION_INVENTORY.md`.
 
 Infinity-Codex-Origin: session `01a0db41-9157-7592-afe5-5daa073f925f`;
@@ -61,6 +62,29 @@ state on every continuation. Source pins are comparison anchors, not reset
 instructions.
 
 ## Accepted Review And Starting State
+
+Current assembly policy, confirmed by the user on 2026-09-27 UTC:
+**preserve the inherited ordinary/displayed assembly primitive for this
+integration baseline; defer the explicit-profile redesign to follow-up.**
+The [assembly baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md)
+records the mathematical distinctions, exact contract and successful trial.
+This supersedes the earlier `API-05` profile-sufficiency/producer gates in
+the historical progress sections and linked research reports.
+
+The inherited primitive takes an existing whole transformation and pointwise
+equivalence evidence, retains both selected inverse slots, and assumes whole
+cancellation. It is not a declaration of strictness for arbitrary functors.
+Keep the demonstrated `API-04R/V/P/T` generic-leak corrections and reviewed
+constructor-specific computations. Preserve useful derived proofs, including
+the retained-member theorem; do not restore its old opaque proof merely to
+avoid using the derived one.
+
+Classify research-only constructor agreements/projection joins separately
+before promotion. They are not automatically part of the baseline because
+the deferred profile experiment used them. The assumption ledger, downstream
+consumer checks, noncollapse controls, TypeScript alignment and final gates
+remain required. No consistency proof or unrestricted model adequacy is
+claimed by retaining the inherited assumption.
 
 Both reference worktrees were clean. Relative to the common ancestor the
 source has 91 commits and 114 changed paths, with 21,277 insertions and 5,277
@@ -170,7 +194,11 @@ consumer. Do not repair regressions by restricting arbitrary snake a,c to
 monic/epic maps, restoring retired model/snake facades, or adding old/new
 compatibility requirements.
 
-## Current Progress And Next Action
+## Progress And Experiment History
+
+This section preserves the sequence of candidate results and earlier next
+steps. The assembly policy above and the living ledger below own current
+acceptance; earlier explicit-profile prerequisites are historical research.
 
 Overall status: early production integration, with substantially broader
 feasibility evidence. The ordinary opaque classifier is implemented and its
@@ -235,34 +263,19 @@ support five reviewer observations whose statements are unchanged. A joint
 replay passes 178 positive and 48 negative checks across these consumers,
 Gamma/H, native records, paired reindexing and the full profile reviewer.
 
-The temporary pointwise-equivalence owner still has its old unqualified
-displayed half commented out. Qualify and restore that operation before
-production cut migration. Its actual direct-cover consumer and the existing
-`tdapp*` owners must determine the required premise; do not assume that a new
-displayed-transfor classifier or a blanket admission axiom is necessary.
-This remains a required semantic investigation. Remaining native/CAS consumers
-and production Gray/cubical promotion stay in scope. These results are still an
-isolated candidate, not production cut retirement.
+At this earlier checkpoint the candidate's displayed assembler was commented
+out. On 2026-09-26 the user selected an explicit action-profile investigation.
+The [first decision review](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#decision-review-three-distinct-boundaries)
+distinguished the generic assembly assumption from strictness leaks and
+constructor-specific computation. The later accepted
+[baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md) supersedes
+that integration gate and retains the inherited primitive.
 
-The user confirmed on 2026-09-26 that the displayed operation should require
-an explicit action-based profile, following the current recommendation.
-The later [decision review](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#decision-review-three-distinct-boundaries)
-separates this generic assembly assumption from actual global strictness
-leaks and from justified constructor-specific computation. The user's
-request to review the options does not change the selected requirement.
-Its implementation is a substantive profile/producer qualification task,
-not a mechanical wrapper insertion; the alternative would retain a clearly
-documented generic assembly assumption and leave independent migration and
-final-gate work outstanding.
-Do not restore the unqualified source assembler as the accepted integration
-result. The actual direct-cover consumer is Cat-valued and has no automatic
-ordinary/groupoidal premise. The constant-section specialization probe stops
-at an existing arrow-presentation mismatch; it does not establish a bypass.
-The source's named glue `IsStrictFunctord` contract and reviewer now pass,
-but that contract does not supply the locality/rho profile. Review the
-retained-component theorem and complete rho action before selecting the
-displayed premise. Keep pointwise component facts distinct from whole
-coherence, and introduce no admission axiom merely to make checking pass.
+The earlier constant-section specialization stopped at an arrow-presentation
+mismatch; it established neither a bypass nor a contradiction in assembly.
+The named glue `IsStrictFunctord` contract passed, but did not automatically
+supply the different rho profile sought by the research approach. These
+observations remain evidence, without being baseline prerequisites.
 
 The [Gray/path-cubical qualification](EMDASH_ACTION_PROFILE_GRAY_AND_PATH_CUBICAL_FEASIBILITY.md)
 now covers the classified graph/recursive decoder, judgmental dimension-two
@@ -328,13 +341,12 @@ all LP hashes matching the preferred candidate. Failed, formation-only and
 raw displayed-assembly controls remain excluded. Normal defaults remain
 unchanged; final clean-checkout resource routing remains an integration gate.
 
-Next: qualify the explicit displayed pointwise action profile and its actual
-direct-cover locality/rho consumer. The user has already selected this
-requirement; do not restore unqualified assembly or infer a blanket ordinary
-profile for the Cat-valued presheaf category. Use the existing complete action
-and retained-component owners. Remaining directed/simplex, TypeScript,
-production promotion and full integration gates remain required. The separate
-large six-term package-observation comparison and Op/duality stay excluded.
+The next step at that checkpoint was the explicit displayed-profile/rho
+investigation. It is now retained as deferred research under `API-05R`.
+The baseline instead qualifies the inherited assembly contract and its actual
+consumers, without inferring an ordinary-category profile for the Cat-valued
+presheaf category. Remaining migration, TypeScript, promotion and final gates
+stay required; the large six-term observation and Op/duality stay excluded.
 
 The [displayed assembly investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md)
 records a whole projection of arbitrary `tdapp1` action, full/capped,
@@ -566,11 +578,11 @@ checks point agreement but rejects typed reflexivity for their whole and
 base-action presentations. Do not infer nonexistence of another derived
 comparison from these controls or insert a blanket unit/profile admission.
 
-Then qualify complete rho action and the explicit assembly profile before
-restoring the three assembly stages. The relative predicate remains
-unselected as a sufficient generic assembler premise; no blanket rho
-admission, Op/duality repair, new Empty audit or other scope expansion is
-introduced.
+That research route would then qualify the complete rho action and a
+sufficient explicit assembly profile. Those tasks are deferred under
+`API-05R`; the relative predicate is not asserted sufficient. The baseline
+restores the original three stages through the inherited primitive, with
+no newly invented rho-profile admission, Op/duality repair or Empty audit.
 
 The 589-target production `check` continuation is terminal with success and
 no exclusions. Its result manifest is
@@ -607,8 +619,33 @@ Circle, finite-limit and geometry/site consumers. The scan identifies five
 semantic owners and central diagnostics referring to names retired from the
 candidate core; it does not establish that all are unresolved or exhaust
 the remaining migration. This work is independent of the assembly-option
-review. `API-05` retains its explicit-profile requirement and the documented
-FibCov/cone prerequisites; neither is waived or declared complete.
+review. `API-05` now qualifies the inherited assembly baseline. The unfinished
+explicit-profile/FibCov/cone work is preserved under deferred `API-05R`, not
+reported as proved or completed.
+
+Current HIT slice: review WalkingEnd's source-recognized strict recursor
+computation at its actual owner, preserving the contextual derivation before
+the protected public head. For Circle, map the existing encoder equivalence
+through the already named strict `Path_cat_func` package while retaining the
+original encoder functor. Check their 15 selected registered HIT/completion/
+groupoidification reviewers with the corrected core. These are scoped
+constructor computations and supplied structural profiles, not admissions
+for arbitrary raw functors.
+The initial WalkingEnd reviewer passes at
+`20260927T013252Z-0a6d46d5eb214e9a94a37875758f5757` (10.847s), and the
+Circle loop-space reviewer passes at
+`20260927T013408Z-b3140f8f2a8e4559b81fb2c2b7ac2887` (9.256s), both at
+2 GiB/90s. The remaining HIT closure and named-rule warning/control review
+are pending. The candidate is preserved in
+`emdash2/tmp/probes/api_hit_profile_candidate/`; it is not promoted.
+
+Assembly baseline trial: the exact pinned ordinary/displayed primitive plus
+the derived retained-member body checks the complete locality owner in
+16.610s at 2 GiB/90s, preserving all sixteen public signatures and restoring
+the ordinary-fibre, displayed and ordinary-outer assembly stages. Eight
+positive/two negative interface and noncollapse controls pass. Next qualify
+downstream consumers and existing helper calls; the trial is not production
+promotion or a semantic consistency proof.
 
 | Row | State | Deliverable / acceptance |
 | --- | --- | --- |
@@ -624,7 +661,8 @@ FibCov/cone prerequisites; neither is waived or declared complete.
 | `API-04V` | staged strictness leak corrected in prototype; combined review qualified | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. Earlier native/CAS/all-path evidence does not qualify the changed core; affected-closure requalification and production promotion remain required. |
 | `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
-| `API-05` | member-indexed families, retained inclusion and inverse Hom-action comparisons qualified; complete rho/assembler premise open | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons. The [member-family continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#member-indexed-question-and-extension-families) retains the original inclusion's higher action and passes 493 positive/134 negative combined assertions. Complete pullback/factorization coherence in the member/base directions, a sufficient explicit assembly profile, and full rho assembly remain open. |
+| `API-05` | inherited assembly baseline selected; complete locality owner and contract controls pass in a separate candidate | [Baseline review](EMDASH_ACTION_PROFILE_ASSEMBLY_BASELINE_REVIEW.md): preserve the original ordinary/displayed inverse constructors, component betas and cancellation assumptions, plus the derived retained-member proof. All sixteen locality signatures and all three assembly stages check; eight positive/two negative controls retain both inverse choices and reject generic reflexivity cuts. Downstream/broad qualification, assumption documentation and production promotion remain required. |
+| `API-05R` | deferred follow-up research; no baseline gate | Preserve the [displayed](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md), [relative](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md), [matching](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) and [inverse](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) investigations, including exact receipts and unfinished profile-sufficiency, member/base and FibCov/cone questions. Useful derived results remain available; genuine `API-04R/V/P/T` corrections stay selected. No completed semantic proof is claimed. |
 | `API-06` | Gray closure/D2 and 28 directed/simplex reviewers qualified in prototypes; other main consumers and promotion pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. D2 retains judgmental recovery through the classified graph and main's separate represented-comma derivation. The corrected-core directed/simplex continuation preserves the PathOut lift's raw interface with a target-only identity proof; all 28 reviewers and their 42-owner combined environment pass 199 positive/36 negative assertions and 87 type queries. WalkingEnd/Circle and other remaining main consumers, affected-core requalification and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |
