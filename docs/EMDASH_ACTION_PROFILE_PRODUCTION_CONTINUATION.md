@@ -1363,3 +1363,22 @@ and proceeds to the cold bounded-prerequisite recipe. No additional formal
 source, profile or tooling change was needed. Complete CI, production CAS,
 checked health and the final semantic checkpoint remain outstanding. Current
 live handles remain formal `47799` and follow-up controller `15309`.
+
+
+## Cold Bounded Prerequisites Passed
+
+The complete formal invocation passes the ten-member bounded-prerequisite
+recipe, receipt `20260927T175746Z-c7239a35da594a9680c8774c1da37118`, in
+823.847s. The 82.385s reported for each member is the owning metrics' group
+time share. The recipe's kernel-cover rebuild passes at its existing
+6 GiB/180s profile in 74.723s
+(`20260927T180430Z-a8307bd1c1814a4a91983419cf45fedf`). No source/profile
+change was required.
+
+CI has 491 successful top-level targets and six completed isolated groups;
+it is now compiling the cold bounded-generator recipe. The remaining cold
+groups are bounded generator, window families and short-exact normalization.
+The complete aggregate still includes the remaining library/reviewer checks
+and tooling/document gates. CAS and checked health remain queued. The user
+was offered a terminal handoff; no instruction to stop either existing job
+has been received, so the authorized sequence continues on the same inputs.
