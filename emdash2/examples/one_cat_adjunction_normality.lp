@@ -83,7 +83,7 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   (P : τ (@KernelAdjunctionStructure C S t T)) (Q : τ (@CokernelAdjunctionStructure C S t T0))
   (N : τ (@OneCatAdjunctionNormality C S C1 t T T0 P Q)) (d : τ (Functor WalkingArrow_cat C))
-  ⊢ (@omega_equiv_along_fapp1_fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) C) C (@fapp0_func (Functor_cat
+  ⊢ (@one_cat_omega_equiv_fmap (Functor_cat (Functor_cat WalkingArrow_cat C) C) C C1 (@fapp0_func (Functor_cat
     WalkingArrow_cat C) C d) (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q)
     (@one_cat_coimage_image_comparison C S C1 t T T0 P Q) N) : τ (@OmegaEquivAlong C (@fapp0 (Functor_cat
     WalkingArrow_cat C) C (@adjunction_coimage_func C S t T T0 P Q) d) (@fapp0 (Functor_cat WalkingArrow_cat C) C
@@ -100,8 +100,8 @@ assert [C : Cat] [S : τ (@PreadditiveCategory C)]
   ⊢ @omega_equiv_along_left_inv C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@adjunction_coimage_func C S t T T0 P Q)
     d) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q) d) (@tapp0_fapp0
     (Functor_cat WalkingArrow_cat C) C (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P
-    Q) d (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)) (@omega_equiv_along_fapp1_fapp0 (Functor_cat
-    (Functor_cat WalkingArrow_cat C) C) C (@fapp0_func (Functor_cat WalkingArrow_cat C) C d) (@adjunction_coimage_func
+    Q) d (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)) (@one_cat_omega_equiv_fmap (Functor_cat
+    (Functor_cat WalkingArrow_cat C) C) C C1 (@fapp0_func (Functor_cat WalkingArrow_cat C) C d) (@adjunction_coimage_func
     C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q) (@one_cat_coimage_image_comparison C S C1 t T T0 P Q) N) ≡
     @tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q) (@adjunction_coimage_func
     C S t T T0 P Q) d (@one_cat_coimage_image_inverse_transf C S C1 t T T0 P Q N);

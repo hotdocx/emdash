@@ -933,7 +933,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol comp_catd_fapp0 [K : Cat] [E D : τ (Catd K)]',
-            398
+            403
         )
     }),
     Object.freeze({
@@ -942,7 +942,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         type: oppositeFunctorType(),
         body: coreLfTransferAbsentBody(),
         modifiers: modifiers('injective', 'opaque'),
-        provenance: source('injective symbol Op_func', 505)
+        provenance: source('injective symbol Op_func', 509)
     }),
     Object.freeze({
         order: 3,
@@ -952,7 +952,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Op_catd_func (Z : Cat)',
-            540
+            544
         )
     }),
     Object.freeze({
@@ -963,7 +963,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol hom_int [A B : Cat]',
-            648
+            646
         )
     }),
     Object.freeze({
@@ -974,7 +974,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Op_catd [K : Cat]',
-            951
+            967
         )
     }),
     Object.freeze({
@@ -985,7 +985,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Op_funcd [K : Cat]',
-            958
+            978
         )
     }),
     Object.freeze({
@@ -996,7 +996,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Functor_catd_func (K : Cat)',
-            1036
+            1091
         )
     }),
     Object.freeze({
@@ -1007,7 +1007,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol Edge_catd_func [Z : Cat]',
-            1049
+            1114
         )
     }),
     Object.freeze({
@@ -1020,7 +1020,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol Presheaf_catd_func (K : Cat)',
-            1050
+            1115
         )
     }),
     Object.freeze({
@@ -1033,7 +1033,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol HomPresheaf_catd_func [Z : Cat]',
-            1051
+            1116
         )
     }),
     Object.freeze({
@@ -1046,7 +1046,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol Homd_target_catd [Z : Cat]',
-            1053
+            1118
         )
     }),
     Object.freeze({
@@ -1057,7 +1057,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol homd_int',
-            1054
+            1119
         )
     })
 ]);
@@ -1167,7 +1167,7 @@ const oppositeInvolutionRule = (): CoreLfTransferRuntimeRule => {
         right: builder.template(A),
         provenance: source(
             'rule Op_cat (Op_cat $A) ↪ $A;',
-            237
+            239
         )
     };
 };
@@ -1187,7 +1187,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     authorityPath: 'emdash2/emdash3_2.lp',
     sourceSha256:
         'sha256:' +
-        'f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
+        '6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a',
     dependencies: [],
     externalSymbols: [category, oppositeCategory].map(symbol_ => ({
         symbol: symbol_,
@@ -1217,7 +1217,7 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
             },
             policy: 'runtime-rewrite' as const,
             evidence:
-                'Exact active ordinal-237 computation directly approved ' +
+                'Exact opposite-involution computation directly approved ' +
                 'by D-DTTLF-USABILITY-020'
         }))
     }
@@ -1236,7 +1236,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
             .measuredClosure.acquisitionRevision ===
                 'DISPLAYED-ND-HIGHER-1B-ACQUISITION-1'
             ? 'sha256:' +
-                'f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61'
+                '6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a'
             : 'invalid-audit-revision',
     dependencies: [],
     externalSymbols: foundationExternalSymbols.map(symbol_ => ({

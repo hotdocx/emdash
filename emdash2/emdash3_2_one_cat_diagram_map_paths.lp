@@ -14,7 +14,7 @@ symbol one_cat_diagram_map_path [C : Cat]
   : τ (@= (@Transf WalkingArrow_cat C d e) h k)
 ≔ @one_cat_diagram_observation_reflect_path C C1 d e h k
     (@one_cat_native_square_path C C1 (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C e walking_arrow_src)
-      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 WalkingArrow_cat C e walking_arrow_tgt) (@fapp1_fapp0 WalkingArrow_cat C d walking_arrow_src walking_arrow_tgt walking_arrow_generator) (@fapp1_fapp0 WalkingArrow_cat C e walking_arrow_src walking_arrow_tgt walking_arrow_generator)
+      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 WalkingArrow_cat C e walking_arrow_tgt) (@diagram_native_arrow_value C C1 d) (@diagram_native_arrow_value C C1 e)
       (@tapp0_fapp0 WalkingArrow_cat C d e walking_arrow_src h) (@tapp0_fapp0 WalkingArrow_cat C d e walking_arrow_src k) (@tapp0_fapp0 WalkingArrow_cat C d e walking_arrow_tgt h) (@tapp0_fapp0 WalkingArrow_cat C d e walking_arrow_tgt k)
-      (sigma_Snd (sigma_Snd (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e h)))
-      (sigma_Snd (sigma_Snd (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e k))) p q);
+      (sigma_Snd (sigma_Snd (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e h)))
+      (sigma_Snd (sigma_Snd (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e k))) p q);

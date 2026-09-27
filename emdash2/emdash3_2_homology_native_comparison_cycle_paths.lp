@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_action_paths;
 /* Original K action transports the actual diagram comparison to cycles. */
 require open emdash.emdash3_2_kernel_family_map_point_views;
 require open emdash.emdash3_2_zero_arrow_family_point_inputs;
@@ -93,7 +94,7 @@ symbol homology_native_comparison_cycle_path [B C : Cat] [S : τ (@PreadditiveCa
   WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) N1) (@fapp1_fapp0 (@ZeroArrowCone_cat C t T)
   (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) N0 N1 v)) cell)) _ _
   (@native_kernel_map_diagram_path C S C1 t T P (@zero_arrow_family_point_input B C t T X D h x) N0 n0))
-  (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@fapp1_comp_path (Functor_cat WalkingArrow_cat C) C
+  (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@one_cat_composition_path (Functor_cat WalkingArrow_cat C) C C1
   (@kernel_adjunction_func C S t T P) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_family_point_input B C t T X D h x)) (@fapp0
   (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) N0)
@@ -114,7 +115,7 @@ symbol homology_native_comparison_cycle_path [B C : Cat] [S : τ (@PreadditiveCa
   (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_family_point_input B
   C t T X D h x)) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@zero_arrow_cone_diagram_func C t T) N1) cell)) _ _ diagram_comparison) (@eq_trans _ _ _ _
-  (@fapp1_comp_path (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) (@fapp0
+  (@one_cat_composition_path (Functor_cat WalkingArrow_cat C) C C1 (@kernel_adjunction_func C S t T P) (@fapp0
   (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T)
   (@zero_arrow_family_point_input B C t T X D h x)) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
   WalkingArrow_cat C) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_family_point_input B C t T Y E k

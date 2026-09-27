@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_action_paths;
 require open emdash.emdash3_2_one_cat_diagram_map_paths;
 require open emdash.emdash3_2_omega_equiv_inverse_square;
 
@@ -47,7 +48,7 @@ symbol one_cat_diagram_map_inverse [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero
   walking_arrow_src walking_arrow_tgt walking_arrow_generator) (@fapp1_fapp0 WalkingArrow_cat C e
   walking_arrow_src walking_arrow_tgt walking_arrow_generator) (@tapp0_fapp0 WalkingArrow_cat C d e
   walking_arrow_src m) (@tapp0_fapp0 WalkingArrow_cat C d e walking_arrow_tgt m) U V (@eq_sym _ _ _
-  (@strict_component_naturality_path WalkingArrow_cat C d e m walking_arrow_src walking_arrow_tgt
+  (@one_cat_component_naturality_path WalkingArrow_cat C C1 d e m walking_arrow_src walking_arrow_tgt
   walking_arrow_generator)))));
 
 // Endpoint reflection supplies the law in the original functor category.

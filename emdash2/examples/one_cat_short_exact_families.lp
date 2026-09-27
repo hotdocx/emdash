@@ -1,5 +1,6 @@
 /* Whole kernel-cokernel pair, retained comparisons and inverse action. */
 require open emdash.emdash3_2_one_cat_short_exact_families;
+require open emdash.emdash3_2_one_cat_omega_maps;
 require open emdash.emdash3_2_eq1_evidence_property;
 
 // Constructor projections retain both original fixed-map witnesses.
@@ -82,7 +83,7 @@ assert [B C : Cat] [S : τ (@PreadditiveCategory C)]
   (h : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
     (@terminal_arrow_diagram_func C t T) A) D)) (R : τ (@OneCatShortExactFamily B C S C1 t T T0 P Q A D h)) (b : τ
     (Obj B))
-  ⊢ @omega_equiv_along_fapp1_fapp0 (Functor_cat B C) C (@fapp0_func B C b) A (@kernel_adjunction_family_func B C S t T
+  ⊢ @one_cat_omega_equiv_fmap (Functor_cat B C) C C1 (@fapp0_func B C b) A (@kernel_adjunction_family_func B C S t T
     P D) (@kernel_adjunction_family_boundary_transf B C S t T P A D h) (@one_cat_short_exact_family_kernel_equiv B C S C1 t T
     T0 P Q A D h R) : τ (@OmegaEquivAlong C (@fapp0 B C A b) (@fapp0 B C (@kernel_adjunction_family_func B C S t T P
     D) b) (@tapp0_fapp0 B C A (@kernel_adjunction_family_func B C S t T P D) b
@@ -182,7 +183,7 @@ assert [B C : Cat] [S : τ (@PreadditiveCategory C)]
   (h : τ (@Transf B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
     (@terminal_arrow_diagram_func C t T) A) D)) (R : τ (@OneCatShortExactFamily B C S C1 t T T0 P Q A D h)) (b : τ
     (Obj B))
-  ⊢ @omega_equiv_along_fapp1_fapp0 (Functor_cat B C) C (@fapp0_func B C b) (@comp_cat_fapp0 B (Functor_cat
+  ⊢ @one_cat_omega_equiv_fmap (Functor_cat B C) C C1 (@fapp0_func B C b) (@comp_cat_fapp0 B (Functor_cat
     WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q) (@zero_arrow_family_incoming_func B C t T A D h))
     (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt) (@one_cat_row_cokernel_comparison B C S C1 t T T0
     Q A D h) (@one_cat_short_exact_family_cokernel_equiv B C S C1 t T T0 P Q A D h R) : τ (@OmegaEquivAlong C (@fapp0 B C

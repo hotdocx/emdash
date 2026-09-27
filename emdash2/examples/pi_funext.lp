@@ -11,6 +11,9 @@
 
 require open emdash.emdash3_2;
 
+// Pi family comparisons use LF eta, enabled explicitly for this reviewer.
+flag "eta_equality" on;
+
 assert [A : Grpd]
   [B : τ A → Grpd]
   (f g : Π x : τ A, τ (B x)) ⊢

@@ -818,7 +818,7 @@ const sigmaObjectComponentRule = () => {
         )),
         provenance: source(
             '(@Sigma_transfd_funcd $K $R $S $T $eta)',
-            1068
+            1156
         )
     };
 };
@@ -832,7 +832,7 @@ const declarations = [
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Transfd_cat [K : Cat]',
-            401
+            405
         )
     },
     {
@@ -845,7 +845,7 @@ const declarations = [
         modifiers: modifiers('injective', 'transparent'),
         provenance: source(
             'injective symbol Transfd [K : Cat]',
-            402
+            406
         )
     },
     {
@@ -856,7 +856,7 @@ const declarations = [
         modifiers: modifiers('constant', 'opaque'),
         provenance: source(
             'constant symbol Sigma_transfd_funcd [K : Cat]',
-            1009
+            1084
         )
     },
     {
@@ -867,7 +867,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol Fibre_func [K : Cat]',
-            1056
+            1146
         )
     },
     {
@@ -878,7 +878,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol tdapp0_fapp0 [K : Cat]',
-            1058
+            1148
         )
     }
 ] as const;

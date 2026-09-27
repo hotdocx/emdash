@@ -1,6 +1,6 @@
 /* Point observations of the whole native coproduct program at the original data. */
 require open emdash.emdash3_2_one_cat_copair_families;
-require open emdash.emdash3_2_strict_transfor_component_paths;
+require open emdash.emdash3_2_one_cat_action_paths;
 require open emdash.emdash3_2_whiskering_component_paths;
 
 // The old scalar copair follows from the whole product projections' naturality.
@@ -45,7 +45,7 @@ symbol one_cat_codiagonal_product_map_path [C : Cat] (C1 : τ (IsNCat (cat_succ 
         Prod t A) X Y)) (@comp_fapp0 C (@fapp0 (Product_cat C C) C Prod (@Product_pair C C X Y)) (@fapp0 (Product_cat
         C C) C Prod (@Product_pair C C Z Z)) Z (@binary_products_proj1_fapp0 C Prod (@additive_binary_products C Prod
         t A) Z Z) (@fapp1_fapp0 (Product_cat C C) C Prod (@Product_pair C C X Y) (@Product_pair C C Z Z)
-        (@Product_pair (Hom_cat C X Z) (Hom_cat C Y Z) f g))) (@strict_component_naturality_path (Product_cat C C) C
+        (@Product_pair (Hom_cat C X Z) (Hom_cat C Y Z) f g))) (@one_cat_component_naturality_path (Product_cat C C) C C1
         Prod (@Product_projL_func C C) (@binary_products_proj1_transf C Prod (@additive_binary_products C Prod t A))
         (@Product_pair C C X Y) (@Product_pair C C Z Z) (@Product_pair (Hom_cat C X Z) (Hom_cat C Y Z) f g))) (@eq_sym
         (Hom C (@fapp0 (Product_cat C C) C Prod (@Product_pair C C X Y)) Z) (@comp_fapp0 C (@fapp0 (Product_cat C C) C
@@ -53,7 +53,7 @@ symbol one_cat_codiagonal_product_map_path [C : Cat] (C1 : τ (IsNCat (cat_succ 
         A) X Y)) (@comp_fapp0 C (@fapp0 (Product_cat C C) C Prod (@Product_pair C C X Y)) (@fapp0 (Product_cat C C) C
         Prod (@Product_pair C C Z Z)) Z (@binary_products_proj2_fapp0 C Prod (@additive_binary_products C Prod t A) Z
         Z) (@fapp1_fapp0 (Product_cat C C) C Prod (@Product_pair C C X Y) (@Product_pair C C Z Z) (@Product_pair
-        (Hom_cat C X Z) (Hom_cat C Y Z) f g))) (@strict_component_naturality_path (Product_cat C C) C Prod
+        (Hom_cat C X Z) (Hom_cat C Y Z) f g))) (@one_cat_component_naturality_path (Product_cat C C) C C1 Prod
         (@Product_projR_func C C) (@binary_products_proj2_transf C Prod (@additive_binary_products C Prod t A))
         (@Product_pair C C X Y) (@Product_pair C C Z Z) (@Product_pair (Hom_cat C X Z) (Hom_cat C Y Z) f g))));
 

@@ -24,7 +24,7 @@ symbol native_public_pair_zero_path [C : Cat] (S : τ (@PreadditiveCategory C))
 ≔ @pair_comparison_zero_path C S a (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0
   WalkingArrow_cat C d walking_arrow_tgt) A B D (@terminal_arrow_test_incoming C t T a d h)
   (@terminal_arrow_test_outgoing C d) f g c0 c1 c2 U0 p q
- (@terminal_arrow_test_chain_path C S t T a d h);
+ (@terminal_arrow_test_chain_path C S C1 t T a d h);
 
 // The public arrows determine their original native zero-cone input.
 symbol native_public_pair_input [C : Cat] (S : τ (@PreadditiveCategory C))

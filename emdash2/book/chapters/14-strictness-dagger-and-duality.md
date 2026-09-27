@@ -31,7 +31,7 @@ The following terms remain separate throughout the book.
 | gaunt category | a HoTT category that is also strict | runtime strictness |
 | native `IsNCat(n,C)` | recursive finite height of the hom-categories | object identity agrees with isomorphism |
 | strict naturality cut | a selected `tapp1` composite reduces to one off-diagonal action | all coherence is judgmental |
-| computational strict-functor property | `IsStrictFunctor(F)` compares the existing compositor with its equality-induced arrow; `StrictFunctor(A,B)` pairs $F$ with that evidence | every ambient functor is strict or every coherence is judgmental |
+| computational strict-functor property | `IsStrictFunctor(F)` compares the existing compositor with its equality-induced arrow; `StrictFunctor(A,B)` admits $F$ with that evidence opaquely | every ambient functor is strict or every coherence is judgmental |
 | runtime strictness | an oriented kernel reduction chooses a normal form | object truncation or invertibility |
 | dagger category | identity agrees with *unitary* isomorphism | identity agrees with every isomorphism |
 
@@ -42,11 +42,11 @@ automorphisms that cannot come from its proposition-valued object identity.
 
 The proof-carrying row is the profile used in Chapter 28. It does not decode a
 second functor grammar. `IsStrictFunctor` constrains the compositor already
-extracted from an ambient functor, and the exact `StrictFunctor` package pairs
-that functor with its evidence while leaving the ambient transformation and
+extracted from an ambient functor, and the opaque `StrictFunctor` classifier
+admits that functor with its evidence while leaving the ambient transformation and
 higher-hom calculus shared with lax maps. This is a local property/evidence
-specialization, not a blanket compositor-to-identity rewrite or evidence that
-every historical global strict endpoint cut has already migrated.
+specialization. The integration retires generic strict endpoint cuts while
+retaining normal identity computation and qualified constructor instances.
 
 <!-- evidence:GRAY-WALKING-INTERCHANGER -->
 
@@ -106,8 +106,8 @@ hom-category is discrete and entails that the object classifier is a
 1-type. HoTT strictness instead asks directly that the object classifier be a
 set. Neither condition supplies a native identity-to-isomorphism theorem.
 
-The second notion is strict naturality. For an ordinary transfor
-$\eta:F\Rightarrow G$, the generic off-diagonal action has the two reductions
+The second notion is strict naturality. For the stable view of a classified
+strict transfor $\eta:F\Rightarrow G$, the off-diagonal action has two reductions
 
 $$
 \begin{aligned}
@@ -117,9 +117,9 @@ G[g]\circ\eta[f]&\rightsquigarrow\eta[g\circ f],\\
 $$
 
 The phrase *strict transfor* in this book describes this selected two-sided
-cut behavior; it is not a new classifier of categories. A displayed lax
-comparison can instead retain a directed naturality cell without forcing it
-to equality.
+cut behavior; it is not a new classifier of categories. Ambient ordinary and
+displayed transfors retain directed comparison cells. The conventional lax
+profile selects pre/right computation while retaining the post/left cell.
 
 The third notion is runtime strictness itself. The arrow
 $t\rightsquigarrow u$ records a chosen normal form in the Lambdapi theory.
@@ -134,7 +134,7 @@ do compute.
 
 > **Formal status — checked.** Evidence `CAT-DIMENSION` and
 > `TRANSF-STRICT-NATURALITY`. The active theory separately checks recursive
-> dimension/object truncation and the two ordinary `tapp1` naturality
+> dimension/object truncation and the two profiled `tapp1` naturality
 > reductions. No checked theorem identifies these interfaces.
 
 ## 14.4 Opposite Duality Computes

@@ -18,11 +18,19 @@ assert [A B C : Cat] ⊢
   ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
 assert [A B C : Cat] ⊢
-  @strict_functor_underlying
+  @eq_refl
+    (Functor (@GrayRightSource A B C) (@GrayRightTarget A B C))
+    (@strict_functor
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C)
-      (@gray_curry_R_strict A B C)
-  ≡ @gray_curry_R_func A B C;
+      (@gray_curry_R_strict A B C))
+  : τ (@=
+      (Functor (@GrayRightSource A B C) (@GrayRightTarget A B C))
+      (@strict_functor
+        (@GrayRightSource A B C)
+        (@GrayRightTarget A B C)
+        (@gray_curry_R_strict A B C))
+      (@gray_curry_R_func A B C));
 
 assert [A B C : Cat] ⊢
   @strict_functor_is_strict
@@ -38,11 +46,19 @@ assert [A B C : Cat] ⊢
         (@gray_curry_R_strict A B C)));
 
 assert [A B C : Cat] ⊢
-  @strict_functor_underlying
+  @eq_refl
+    (Functor (@GrayRightTarget A B C) (@GrayRightSource A B C))
+    (@strict_functor
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C)
-      (@gray_uncurry_R_strict A B C)
-  ≡ @gray_uncurry_R_func A B C;
+      (@gray_uncurry_R_strict A B C))
+  : τ (@=
+      (Functor (@GrayRightTarget A B C) (@GrayRightSource A B C))
+      (@strict_functor
+        (@GrayRightTarget A B C)
+        (@GrayRightSource A B C)
+        (@gray_uncurry_R_strict A B C))
+      (@gray_uncurry_R_func A B C));
 
 assert [A B C : Cat] ⊢
   @strict_functor_is_strict

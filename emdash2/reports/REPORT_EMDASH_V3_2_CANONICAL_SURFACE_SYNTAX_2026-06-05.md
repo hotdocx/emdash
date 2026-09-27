@@ -2031,6 +2031,15 @@ Q[d] ≐ selected cokernel object    π[d] ≐ selected cokernel projection
 K[η] ≐ existing kernel map         Q[η] ≐ existing cokernel map.
 ```
 
+The map comparisons require profiles of the actual diagram transformation
+and kernel inclusion/cokernel projection. The `profiled_*_presentation_map_*`
+helpers accept those profiles; ordinary wrappers derive them from OneCat.
+The object and structural-arrow observations retain their generic interface.
+Selected mate and H observations forward the same ordinary guard where they
+form an annihilator test. Generic kernel/cokernel records instead reuse the
+selected annihilation witness along the existing complete frame agreement;
+their object, arrow and lift/colift choices do not change.
+
 For ordinary targets, `one_cat_postcomp_adjunction` expresses
 (F∘−)⊣(G∘−) at the existing postcomposition functors.
 `one_cat_adjunction_family_transpose_func` and its `untranspose` companion
@@ -2821,8 +2830,9 @@ is canonical evidence derived from the classified whole compositor's identity
 computation. Point action computes on visible admissions; hom action retains
 the stable view. Use `strict_functor_underlying` for a deliberate raw action
 observation. Carrier/certificate comparisons are proof-time; they are not a
-generic runtime decoder. Historical global cuts remain during the active
-consumer migration.
+generic runtime decoder. The active integration retires generic composition
+and strict-naturality cuts; the corresponding computation requires the actual
+profile or a separately qualified constructor instance.
 
 The selected strict-object/lax-arrow internal Hom is written
 
@@ -2831,9 +2841,9 @@ GrayHom_lax(A,B).
 ```
 
 Its kernel head is the identically named `GrayHom_lax`; its whole inclusion
-is `grayhom_lax_include_func`. At the ordinary-classifier integration checkpoint
-its homs still use ambient transfors. `StrictFunctor_cat` now owns the full
-strict-object category; classified lax Gray arrows are the subsequent tranche.
+is `grayhom_lax_include_func`. Its homs are classified `LaxTransfor_cat` arrows
+between the stable strict-functor views. `StrictFunctor_cat` remains the full
+strict-object category with ambient transfors; do not identify the categories.
 There is no active `GrayHom_oplax`
 compatibility spelling. The authoritative orientation is the displayed cell
 
@@ -2894,17 +2904,18 @@ compute to the displayed graph; `gray_transf_standard_cell` and
 `tapp1_post_laxity_cell(epsilon,g,id_x)`, not a separately postulated
 naturality square. Generic `fapp1_func` retains the next action.
 
-At an identity arrow, this intended graph beta overlaps the historical global
-strict-functor identity cut. Preserve the graph beta and record the warning;
-the global cut is the temporary approximation that must later migrate to its
-strict profile. `IsPseudoFunctor(F)` already names transparent coherent
-evidence over an existing carrier but does not install or suppress runtime
-carrier rules. Its fixed-forward fields are
-`OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`; the readable endpoint
-ladder compensates for the temporary global strict cut and must not be printed
-as a noncollapse theorem. The selected strict graph package pairs
-`gray_transf_graph_func` with supplied `IsStrictFunctor` evidence; its
-underlying-carrier and evidence projections compute. It adds no graph-head
+The graph input is a classified `LaxTransfor`; write its actual classified
+view when displaying component action. Normal-identity behavior remains at
+the existing generic owner, with graph/profile comparisons qualified at their
+own boundaries. Generic composition and strict naturality require their
+selected profiles. `IsPseudoFunctor(F)` names transparent coherent evidence
+over an existing carrier and does not replace it with a new functor grammar. Its fixed-forward fields are
+`OmegaEquivAlong(readable_pseudo_post_cell(F,g,f))`; direct endpoint paths
+retain the distinct generic source and target. The selected strict graph
+package admits the graph of a classified `LaxTransfor` with supplied
+`IsStrictFunctor` evidence. Its raw carrier projection computes; the opaque
+classifier exposes canonical evidence rather than projecting its admission
+certificate. It adds no graph-head
 compositor or identity-filler rule. Do not print this as a new graph unit: the
 readable `lax_square(id,id,id)` versus canonical nested-Sigma identity remains
 a generic presentation comparison. No carrier path or `eq_ap`/`eq_apd`
@@ -3801,8 +3812,8 @@ Do not omit that qualification when the distinction between an arbitrary lax
 carrier and a liftable coherent carrier matters. The profile supplies
 fixed-forward `OmegaEquivAlong` for the readable reframe of the existing
 `fapp1_compositor`; its selected inverse supplies the reverse square-boundary
-adjustment, and it does not own a second compositor. The reframe compensates
-for the documented temporary global strict cut.
+adjustment, and it does not own a second compositor. Direct source/target
+observations replace the former global-strictness presentation adapter.
 
 Category identity and composition remain at the generic nested-Sigma owners.
 The readable `cubical_square_id` and `cubical_square_comp` terms may illustrate

@@ -1,3 +1,6 @@
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
+require open emdash.emdash3_2_one_cat_omega_maps;
 require open emdash.emdash3_2_one_cat_zero_cone_map_paths;
 require open emdash.emdash3_2_omega_equiv_inverse_square;
 
@@ -34,7 +37,7 @@ symbol one_cat_zero_cone_map_inverse [C : Cat] (C1 : τ (IsNCat (cat_succ cat_ze
   WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) a0) (@fapp0 C (Functor_cat WalkingArrow_cat
   C) (@terminal_arrow_diagram_func C t T) a1) d0 d1 h0 h1
        (@fapp1_fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) a0 a1 u) v
-       (@omega_equiv_along_fapp1_fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func
+       (@one_cat_omega_equiv_fmap C (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category WalkingArrow_cat C C1) (@terminal_arrow_diagram_func
   C t T) a0 a1 u U) V
        (@zero_arrow_cone_map_naturality C C1 t T (@zero_arrow_cone_obj C t T a0 d0 h0)
   (@zero_arrow_cone_obj C t T a1 d1 h1) m)));
@@ -65,14 +68,14 @@ symbol one_cat_zero_cone_map_left_law [C : Cat] (C1 : τ (IsNCat (cat_succ cat_z
   T a1 d1 h1) (@zero_arrow_cone_obj C t T a0 d0 h0) (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0 d1
   h0 h1 m U V) m) (@id (@ZeroArrowCone_cat C t T) (@zero_arrow_cone_obj C t T a0 d0 h0))
  (@eq_trans _ _ _ _
-   (@fapp1_comp_path (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
+   (@one_cat_composition_path (@ZeroArrowCone_cat C t T) C C1 (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_obj C t T a0 d0 h0) (@zero_arrow_cone_obj C t T a1 d1 h1) (@zero_arrow_cone_obj C t
   T a0 d0 h0) (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0 d1 h0 h1 m U V) m)
    (@omega_equiv_along_left_law C a0 a1 (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_obj C t T a0 d0 h0) (@zero_arrow_cone_obj C t T
   a1 d1 h1) m) U))
  (@eq_trans _ _ _ _
-   (@fapp1_comp_path (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+   (@one_cat_composition_path (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category WalkingArrow_cat C C1)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_obj C t T a0 d0 h0) (@zero_arrow_cone_obj C t
   T a1 d1 h1) (@zero_arrow_cone_obj C t T a0 d0 h0) (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0 d1
   h0 h1 m U V) m)
@@ -106,14 +109,14 @@ symbol one_cat_zero_cone_map_right_law [C : Cat] (C1 : τ (IsNCat (cat_succ cat_
   T a0 d0 h0) (@zero_arrow_cone_obj C t T a1 d1 h1) m (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0
   d1 h0 h1 m U V)) (@id (@ZeroArrowCone_cat C t T) (@zero_arrow_cone_obj C t T a1 d1 h1))
  (@eq_trans _ _ _ _
-   (@fapp1_comp_path (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_first_func C t T)
+   (@one_cat_composition_path (@ZeroArrowCone_cat C t T) C C1 (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_obj C t T a1 d1 h1) (@zero_arrow_cone_obj C t T a0 d0 h0) (@zero_arrow_cone_obj C t
   T a1 d1 h1) m (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0 d1 h0 h1 m U V))
    (@omega_equiv_left_as_right_law C a0 a1 (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_obj C t T a0 d0 h0) (@zero_arrow_cone_obj C t T
   a1 d1 h1) m) U))
  (@eq_trans _ _ _ _
-   (@fapp1_comp_path (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
+   (@one_cat_composition_path (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category WalkingArrow_cat C C1)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_obj C t T a1 d1 h1) (@zero_arrow_cone_obj C t
   T a0 d0 h0) (@zero_arrow_cone_obj C t T a1 d1 h1) m (@one_cat_zero_cone_map_inverse C C1 t T a0 a1 d0
   d1 h0 h1 m U V))

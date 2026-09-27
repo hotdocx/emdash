@@ -12,7 +12,11 @@
   owners. Narrow terminal/constant projection-order joins expose those same
   base and loop betas at the ordinary recursor observers required by concrete
   Code. All other section and recursion observations are transparent theorems
-  over those owners and the generic projection calculus.
+  over those owners and the generic projection calculus. After those
+  derivations, the public recursor head is protected and owns its point,
+  generator, and named strict-composition computations. This preserves the
+  contextual construction while preventing premature unfolding from erasing
+  the public recursor discriminator.
 */
 
 require open emdash.emdash3_2_nat_arithmetic;
@@ -489,7 +493,73 @@ symbol walking_end_rec_beta_loop_ordinary
       f)
 ≔ @eq_refl (Hom C x x) f;
 
-// Typed equality specialization of generic strict functoriality and loop beta.
+/*
+  Stable public recursor boundary.
+
+  All contextual derivation theorems above were constructed through the
+  transparent Pi-section body. From this point onward the public recursor head
+  is protected and owns exactly its point, generator, and strict-composition
+  observations.
+*/
+opaque walking_end_rec_func;
+
+rule @fapp0
+      WalkingEnd_cat $C (@walking_end_rec_func $C $x _) walking_base
+  ↪ $x;
+
+rule @fapp1_fapp0
+      WalkingEnd_cat $C (@walking_end_rec_func $C _ $a)
+      walking_base walking_base walking_loop
+  ↪ $a;
+
+rule @comp_fapp0
+      $C _ _ _
+      (@fapp1_fapp0
+        WalkingEnd_cat $C (@walking_end_rec_func $C $x $a)
+        $Y $Z $g)
+      (@fapp1_fapp0
+        WalkingEnd_cat $C (@walking_end_rec_func $C $x $a)
+        $X $Y $f)
+  ↪ @fapp1_fapp0
+      WalkingEnd_cat $C (@walking_end_rec_func $C $x $a)
+      $X $Z
+      (@comp_fapp0 WalkingEnd_cat $X $Y $Z $g $f);
+
+// One named component of the recursor's guarded composition computation.
+// This is a theorem over explicit arrows, not an all-components capability.
+symbol walking_end_rec_composition_path
+  (C : Cat)
+  (x : τ (Obj C))
+  (a : τ (Hom C x x))
+  [X Y Z : τ (Obj WalkingEnd_cat)]
+  (g : τ (Hom WalkingEnd_cat Y Z))
+  (f : τ (Hom WalkingEnd_cat X Y))
+  : τ (@=
+      (Hom C
+        (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) X)
+        (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) Z))
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x a)
+        X Z (@comp_fapp0 WalkingEnd_cat X Y Z g f))
+      (@comp_fapp0
+        C
+        (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) X)
+        (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) Y)
+        (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) Z)
+        (@fapp1_fapp0
+          WalkingEnd_cat C (@walking_end_rec_func C x a) Y Z g)
+        (@fapp1_fapp0
+          WalkingEnd_cat C (@walking_end_rec_func C x a) X Y f)))
+≔ @eq_refl
+    (Hom C
+      (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) X)
+      (@fapp0 WalkingEnd_cat C (@walking_end_rec_func C x a) Z))
+    (@fapp1_fapp0
+      WalkingEnd_cat C (@walking_end_rec_func C x a)
+      X Z (@comp_fapp0 WalkingEnd_cat X Y Z g f));
+
+// Typed equality specialization of the recursor's guarded composition and
+// loop betas. No detached all-components law is constructed.
 symbol walking_end_rec_loop_prefix_eq
   (C : Cat)
   (x : τ (Obj C))
@@ -508,9 +578,8 @@ symbol walking_end_rec_loop_prefix_eq
         (@fapp1_fapp0
           WalkingEnd_cat C (@walking_end_rec_func C x f)
           walking_base walking_base p)))
-≔ @fapp1_comp_path
-    WalkingEnd_cat C
-    (@walking_end_rec_func C x f)
+≔ @walking_end_rec_composition_path
+    C x f
     walking_base walking_base walking_base
     walking_loop p;
 

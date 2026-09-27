@@ -3348,6 +3348,15 @@ projection. Their whole Hom mate operations construct lifts and descents.
 Ordinary factor/uniqueness records are downstream views of those same choices.
 They are not the data from which whole coherence is reconstructed.
 
+The selected-presentation map comparisons need naturality evidence for the
+actual diagram transformation and inclusion or projection. Explicit-profile
+helpers support this comparison, and ordinary wrappers derive the profiles
+from OneCat. This does not constrain the whole K/Q carriers or their generic
+object and structural-arrow observations. The selected kernel/cokernel
+records retain their generic interface: the already supplied annihilation
+law is transported along the existing object-and-arrow frame agreement,
+while their original operational data stays fixed.
+
 Postcomposition lifts an adjunction to whole functor families in the stated
 ordinary profile. Product/biproduct adjunctions supply whole pairing and
 copairing using the original choices. Diagram reconstruction remains an
@@ -4515,15 +4524,14 @@ Its filler is the existing post/left internal-action cell at `id_x`:
 G[g] o epsilon[x]  ==>  epsilon[y] o F[g].
 ```
 
-Generic `fapp1_func` retains the next whole action. At `g=id`, the selected
-graph beta is nonjoinable with the historical globally strict functor-identity
-cut. This is an accepted prototype overlap, not a reason to remove the graph
-beta: those global strict cuts are explicitly scheduled for later migration to
-strict profiles. Lambdapi accepts and typechecks the graph rule; warning and
-identity probes record the competing temporary normal form. The same policy
-applies to intended lax/profile-specific consumers generally: a known overlap
-with the temporary global strict approximation is diagnostic, whereas subject
-reduction failure or an unrelated unclassified overlap remains a blocker.
+Generic `fapp1_func` retains the next whole action. The selected graph now
+takes a classified lax transformation, and its normal-identity and higher
+observations are qualified in that context. The ambient normal-identity law
+is retained; arbitrary composition and strict naturality are no longer global
+computation. Named graph/profile comparisons do not authorize restoring those
+generic equations. Warning overlaps remain diagnostics to classify at their
+owners, not confluence certificates or reasons to discard a justified named
+constructor computation.
 
 The repository's pseudofunctor boundary is the transparent property
 `IsPseudoFunctor(F)` over an already formed ambient carrier. It is the
@@ -4536,35 +4544,35 @@ existing post/pre presentation reframe. Identity/composition and cubical
 structural closure remain explicitly supplied proofs pending extracted
 unit/composite coherence.
 
-The readable source ladder currently passes through the historical global
-strict-composition path in order to recover the surface spelling
-`F[g] o F[f]` after the prototype cut has selected `F[g o f]`. This is a
-documented presentation adapter, not the construction of the intrinsic cell
-and not a claim that generic lax endpoints remain noncollapsed. The eventual
-profile-local strict-cut migration must replace it by direct left/right
-internal-action observations. Until then the implementation validates the
-cell's provenance, selected omega-equivalence evidence, cubical use, and
-iterable higher action under the explicit prototype boundary.
+The readable source and target paths now observe the two internal-action
+endpoints directly. They expose `F[g] o F[f]` and `F[g o f]` without equating
+them for an arbitrary carrier. The former global strict-composition adapter
+has been retired. An explicit strict view supplies the selected strict
+computation; the pseudo property instead supplies retained inverse data for
+the actual compositor. Generic pre/post accumulation and vertical-fold
+shortcuts are restricted to their justified identity-family or explicit
+profile instances.
 
 The selected graph closure now follows the same semantic property-package
 pattern as strict join maps:
 
 ```text
-strict_gray_transf_graph(SF,SG,epsilon)
-  := (Graph(epsilon), gray_transf_graph_is_strict(SF,SG,epsilon)).
+L : LaxTransfor(strict_functor(SF),strict_functor(SG))
+strict_gray_transf_graph(SF,SG,L)
+  := make_strict_functor(Graph(L), gray_transf_graph_is_strict(SF,SG,L)).
 
-strict_functor_underlying(strict_gray_transf_graph(SF,SG,epsilon))
-  --> Graph(epsilon).
+strict_functor_underlying(strict_gray_transf_graph(SF,SG,L))
+  --> Graph(L).
 ```
 
-Here `gray_transf_graph_is_strict` constrains the graph's one existing
-internally extracted compositor; it supplies no second cell. Carrier and
-evidence projections compute. The old graph-specific compositor-to-identity
-and identity-filler rules are retired: reflecting semantic strictness into
-judgmental computation belongs to the later global/profile-local strict-cut
-migration. The resulting readable `lax_square(id,id,id)` and the canonical
-nested-Sigma identity remain distinct presentations; their eventual comparison
-is a generic derived-total path, not a graph-specific unit.
+Here `gray_transf_graph_is_strict` is a supplied property of the graph's one
+existing compositor; it supplies no second cell. The raw carrier projection
+computes, while admission evidence remains opaque. Canonical classified
+evidence comes from the existing profile computation. The graph constructor
+takes the classified lax arrow `L`; it is not an unguarded graph of arbitrary
+ambient transformations. No graph-specific compositor or identity-filler
+rule is added. Readable squares and canonical nested-Sigma identities retain
+their documented presentation boundary.
 
 The variable-dimensional decoder is then one internal Nat recursion uniform
 in the ambient category:
@@ -5497,10 +5505,9 @@ derived by reflexivity from those computations, independently of admission
 evidence. Capped evidence is evaluation of the whole property.
 
 `StrictFunctor_cat` is the full category on classified strict objects, with
-ambient `Transf_cat` homs and a whole inclusion. The historical global
-composition/naturality cuts remain during the integration's consumer
-migration; these new classified computations alone do not establish ambient
-lax noncollapse.
+ambient `Transf_cat` homs and a whole inclusion. Generic composition and
+strict naturality are retired as global computation; the active profile
+owners and ambient noncollapse controls record the selected boundary.
 
 The selected internal Hom is the category
 
@@ -5508,12 +5515,12 @@ The selected internal Hom is the category
 GrayHom_lax(A,B),
 ```
 
-whose objects are `StrictFunctor(A,B)` objects. Its current homs still use
-`Transf_cat` between their stable views; the integration's subsequent lax
-transfor tranche will supply the conventional lax-arrow classifier. Identity,
-composition, modifications, and every subsequent iterated hom therefore
-reuse the ambient calculus. The whole `grayhom_lax_include_func` exposes this
-profile inside `Functor_cat(A,B)` without identifying the two category heads.
+whose objects are `StrictFunctor(A,B)` objects. Its homs are the classified
+`LaxTransfor_cat` between their stable views. Identity, composition and higher
+cells use the selected action profiles over the existing ambient calculus.
+The whole `grayhom_lax_include_func` exposes the underlying functor data
+without identifying this category with the full strict-object category or
+with `Functor_cat(A,B)`.
 
 One right-closed slice is represented by
 
@@ -5567,8 +5574,9 @@ so the construction remains iterable rather than ending at one displayed
 
 This is a profiled one-sided Gray-closed slice, not yet the full Crans--Gray
 monoidal structure. The mirror closure, tensor action in parameters,
-biclosed/monoidal coherences, and the global strict-cut migration remain
-separate consumer-driven work.
+and biclosed/monoidal coherences remain separate work. The action-profile
+integration supplies the selected strict-cut migration without claiming that
+larger monoidal structure.
 
 A future named `section_total(s) : K → Σ_K E` facade would make this sharing
 more visible at the presentation level, but its transparent total-category

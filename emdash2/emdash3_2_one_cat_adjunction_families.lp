@@ -5,10 +5,7 @@
    Its component observations reuse the original unit/counit by whiskering. */
 require open emdash.emdash3_2_adjunction_mates;
 
-// Ordinary functor-category profile inherited from its ordinary target.
-constant symbol one_cat_functor_category [B C : Cat]
-  (C1 : τ (IsNCat (cat_succ cat_zero) C))
-  : τ (IsNCat (cat_succ cat_zero) (Functor_cat B C));
+require open emdash.emdash3_2_one_cat_functor_closure;
 
 // F⊣G induces (F∘−)⊣(G∘−), with no newly selected functors.
 injective symbol one_cat_postcomp_adjunction [B R L : Cat]

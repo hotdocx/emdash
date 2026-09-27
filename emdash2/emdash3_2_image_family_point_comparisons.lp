@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* The original whole image functor acts on the native point-diagram equivalence.
    Preserve the actual objects and the same selected inverse data. */
 require open emdash.emdash3_2_zero_arrow_family_point_diagrams;
@@ -43,7 +44,7 @@ symbol image_family_global_point_equiv [K C : Cat] [S : τ (@PreadditiveCategory
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
   C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))) (@image_family_global_point_map K C S C1 t T T0 P
   Q A D h x))
-≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q)
+≔ @one_cat_omega_equiv_fmap (Functor_cat WalkingArrow_cat C) C C1 (@adjunction_image_func C S t T T0 P Q)
   (@fapp0 K (Functor_cat WalkingArrow_cat C)
   (@zero_arrow_family_incoming_func K C t T A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
   WalkingArrow_cat C) (@zero_arrow_family_incoming_func (@ZeroArrowCone_cat C t T) C t T

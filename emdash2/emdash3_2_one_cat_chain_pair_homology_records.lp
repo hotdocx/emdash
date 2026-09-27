@@ -28,7 +28,7 @@ symbol chain_pair_adjunction_boundary_factor [C : Cat] [S : τ (@PreadditiveCate
   [A B D : τ (Obj C)] (pair : τ (@ComputationalChainPair C S A B D))
   : τ (@KernelFactorSpace C S B D (@computational_chain_pair_d C S A B D pair)
     (@fapp0 _ _ (@kernel_adjunction_func C S t T P) (@chain_pair_outgoing_diagram C S A B D pair)) (@tapp0_fapp0 _ _ _ _ (@chain_pair_outgoing_diagram C S A B D pair) (@kernel_adjunction_inclusion C S t T P)) A (@computational_chain_pair_cone C S A B D pair))
-≔ @kernel_adjunction_semantic_boundary_factor C S t T P A
+≔ @kernel_adjunction_semantic_boundary_factor C S C1 t T P A
     (@chain_pair_outgoing_diagram C S A B D pair)
     (@chain_pair_native_transf C S C1 t T A B D pair);
 

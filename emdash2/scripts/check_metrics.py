@@ -18,10 +18,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 if __package__:
-    from .check_registry import digest_inputs, input_hashes, load_registry
+    from .check_registry import digest_inputs, input_hashes, load_registry, profile_for
     from .run_lambdapi import run_staged_group
 else:
-    from check_registry import digest_inputs, input_hashes, load_registry
+    from check_registry import digest_inputs, input_hashes, load_registry, profile_for
     from run_lambdapi import run_staged_group
 
 REGISTRY = load_registry()
@@ -78,7 +78,10 @@ def run_command(cmd: list[str], timeout_value: str | None = None) -> tuple[int, 
     if group is not None:
         return run_staged_group(cmd[0], sorted(group), env)
     if timeout_value and "./scripts/run_lambdapi.py" in cmd:
-        env.setdefault("EMDASH_LP_TIMEOUT", timeout_value)
+        # The suite fallback must not replace a registered target deadline.
+        # Explicit environment overrides are still resolved by the runner.
+        if profile_for(Path(cmd[-1]), REGISTRY)[0] == "default":
+            env.setdefault("EMDASH_LP_TIMEOUT", timeout_value)
 
     start = time.perf_counter()
     proc = subprocess.run(

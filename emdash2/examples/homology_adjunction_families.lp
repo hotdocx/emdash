@@ -1,5 +1,6 @@
 /* Independent whole H: actual boundary, diagram action and higher views. */
 require open emdash.emdash3_2_homology_adjunction_families;
+require open emdash.emdash3_2_one_cat_action_paths;
 
 
 // The introduced diagram retains its whole endpoint functor.
@@ -112,8 +113,8 @@ assert [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
     (@fapp1_fapp0 B (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) b c p);
 
 
-// Generic composition remains the existing functor cut.
-assert [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+// Ambient H retains its compositor; arbitrary composition does not collapse.
+assertnot [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   (P : τ (@KernelAdjunctionStructure C S t T))
   (Q : τ (@CokernelAdjunctionStructure C S t T0))
@@ -124,6 +125,24 @@ assert [B C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   @comp_fapp0 C _ _ _
     (@fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) b c q) (@fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) a b p)
   ≡ @fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) a c (@comp_fapp0 B a b c q p);
+
+
+// In an ordinary target the existing lax compositor supplies an equality.
+assert [B C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
+  (P : τ (@KernelAdjunctionStructure C S t T))
+  (Q : τ (@CokernelAdjunctionStructure C S t T0))
+  (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
+  (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
+    (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
+      (@terminal_arrow_diagram_func C t T) A) D)) (a b c : τ (Obj B)) (p : τ (Hom B a b)) (q : τ (Hom B b c)) ⊢
+  @eq_sym _ _ _ (@one_cat_composition_path B C C1 (@homology_adjunction_family_func B C S t T T0 P Q A D h) a b c q p)
+  : τ (@= (Hom C (@fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) a)
+      (@fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) c))
+    (@comp_fapp0 C _ _ _
+    (@fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) b c q) (@fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) a b p))
+    (@fapp1_fapp0 B C (@homology_adjunction_family_func B C S t T T0 P Q A D h) a c (@comp_fapp0 B a b c q p)));
 
 
 // A further Hom level is retained and has the generic identity computation.

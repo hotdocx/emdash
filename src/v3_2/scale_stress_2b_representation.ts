@@ -540,7 +540,7 @@ const oppositeObjectRule = () => {
         )),
         provenance: source(
             'rule Obj (Op_cat $A) ↪ Obj $A;',
-            238
+            240
         )
     };
 };
@@ -599,7 +599,7 @@ const pullbackFibreRule = () => {
         provenance: source(
             'rule @fapp0 _ Cat_cat ' +
                 '(@Pullback_catd $A $B $E $F) $a',
-            927
+            944
         )
     };
 };
@@ -648,7 +648,7 @@ const pullbackFunctorObjectRule = () => {
         ),
         provenance: source(
             '(@Pullback_catd_func $A $B $F) $E',
-            931
+            948
         )
     };
 };
@@ -689,7 +689,7 @@ const constantFibreRule = () => {
         provenance: source(
             'rule @fapp0 $K Cat_cat ' +
                 '(@Const_catd $K $A) $_ ↪ $A;',
-            939
+            957
         )
     };
 };
@@ -735,7 +735,7 @@ const constantPullbackRule = () => {
         provenance: source(
             'rule @Pullback_catd $A $B ' +
                 '(@Const_catd $B $C) $F',
-            941
+            959
         )
     };
 };
@@ -782,7 +782,7 @@ const sectionFunctorObjectRule = () => {
         )),
         provenance: source(
             'rule @fapp0 _ Cat_cat (@Pi_func $K) $E',
-            970
+            1006
         )
     };
 };
@@ -829,7 +829,7 @@ const internalPiComponentRule = () => {
                 '      _\n' +
                 '      $K\n' +
                 '      Pi_int_funcd',
-            973
+            1014
         )
     };
 };
@@ -890,7 +890,7 @@ const pullbackPiFoldRule = () => {
         )),
         provenance: source(
             '(@Pullback_catd_func $K (Op_cat Cat_cat) $G)',
-            975
+            1016
         )
     };
 };
@@ -968,7 +968,7 @@ const pullbackPiComponentRule = () => {
             '(@Pi_pullback_funcd $K $G)\n' +
                 '  ↪ @Pi_func ' +
                 '(@fapp0 $K (Op_cat Cat_cat) $G $x);',
-            976
+            1017
         )
     };
 };
@@ -982,7 +982,7 @@ const declarations = [
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Op_cat : Cat → Cat;',
-            236
+            238
         )
     },
     {
@@ -996,7 +996,7 @@ const declarations = [
         provenance: source(
             'injective symbol Functord [K : Cat] ' +
                 '(E D : τ (Catd K)) : Grpd',
-            394
+            399
         )
     },
     {
@@ -1008,7 +1008,7 @@ const declarations = [
         provenance: source(
             'symbol Catd_cat_func : ' +
                 'τ (Functor (Op_cat Cat_cat) Cat_cat)',
-            538
+            542
         )
     },
     {
@@ -1019,7 +1019,7 @@ const declarations = [
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Pullback_catd [A B : Cat]',
-            926
+            941
         )
     },
     {
@@ -1030,7 +1030,7 @@ const declarations = [
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Pullback_catd_func [A B : Cat]',
-            930
+            947
         )
     },
     {
@@ -1042,7 +1042,7 @@ const declarations = [
         provenance: source(
             'injective symbol Pi_func (K : Cat) ' +
                 ': τ (Functor (Catd_cat K) Cat_cat);',
-            969
+            1005
         )
     },
     {
@@ -1053,7 +1053,7 @@ const declarations = [
         modifiers: modifiers('constant', 'opaque'),
         provenance: source(
             'constant symbol Pi_int_funcd',
-            972
+            1013
         )
     },
     {
@@ -1064,7 +1064,7 @@ const declarations = [
         modifiers: modifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Pi_pullback_funcd [K : Cat]',
-            974
+            1015
         )
     }
 ] as const;

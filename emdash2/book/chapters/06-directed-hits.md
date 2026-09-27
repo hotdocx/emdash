@@ -185,9 +185,9 @@ $$
 <!-- evidence:DHIT-DERIVED-ELIMINATORS -->
 
 > **Formal status — checked.** Evidence `DHIT-DERIVED-ELIMINATORS`.
-> `walking_end_ind_sec` and `walking_end_rec_func` are transparent
-> specializations of the contextual eliminator, with checked base and loop
-> observations.
+> `walking_end_ind_sec` is a transparent specialization of the contextual
+> eliminator. The ordinary recursor is derived from it and then made opaque;
+> its public head owns checked base, loop and strict-composition observations.
 
 This dependency is architecturally important. There is one semantic
 elimination principle, not three unrelated black boxes. The derived views

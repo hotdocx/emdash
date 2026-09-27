@@ -31,23 +31,23 @@ assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
       (@Struct_sigma (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (λ e : τ (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src)), @= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (@comp_fapp0 C X _ _ (@terminal_arrow_test_outgoing C d) e) (@preadditive_hom_zero C S X (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))) other z)));
 
 // This interface does not install a runtime fold to the raw lift.
-assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t))
   (W : τ (@HasComputationalKernels C S))
   (P : τ (@KernelPresentation C S t T W))
   (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X)
     d)) ⊢
-  (@fapp0 _ _ (@kernel_presentation_lift_func C S t T W P X d) h) ≡ @kernel_presentation_lift_semantic C S t T W X d h;
+  (@fapp0 _ _ (@kernel_presentation_lift_func C S t T W P X d) h) ≡ @kernel_presentation_lift_semantic C S C1 t T W X d h;
 
 // The original universal reconstruction remains an explicit defined proof.
-assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+assert [C : Cat] (S : τ (@PreadditiveCategory C)) (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t))
   (W : τ (@HasComputationalKernels C S))
   (P : τ (@KernelPresentation C S t T W))
   (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X)
-    d)) ⊢ @kernel_presentation_lift_reconstruction C S t T W P X d h
+    d)) ⊢ @kernel_presentation_lift_reconstruction C S C1 t T W P X d h
   : τ (@= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
       (@comp_fapp0 C X _ _
         (@computational_kernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)

@@ -139,7 +139,7 @@ symbol one_cat_coimage_target_family_factor_path [B C : Cat] [S : τ (@Preadditi
   (@comp_cat_con_fapp1_func B (Functor_cat WalkingArrow_cat C) C D (@adjunction_coimage_func C S t T T0 P Q)
   (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_tgt)) (@one_cat_adjunction_coimage_to_target C S
   C1 t T T0 P Q)))
-≔ (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C D
+≔ (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C C1 D
   (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q) (@diagram_evaluation_at_func
   WalkingArrow_cat C walking_arrow_tgt) (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)
   (@adjunction_image_inclusion C S t T T0 P Q))) (@eq_ap (@Transf (Functor_cat WalkingArrow_cat C) C

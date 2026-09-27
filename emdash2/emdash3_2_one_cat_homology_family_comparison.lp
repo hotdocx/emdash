@@ -7,6 +7,8 @@
 require open emdash.emdash3_2_one_cat_zero_arrow_family_classification;
 
 require open emdash.emdash3_2_homology_adjunction_families;
+require open emdash.emdash3_2_one_cat_iso_maps;
+require open emdash.emdash3_2_discrete_iso_maps;
 
 
 // Apply the original whole kernel mate to the retained triangle isomorphism.
@@ -32,9 +34,11 @@ symbol one_cat_kernel_family_triangle_evidence [B C : Cat] (C1 : τ (IsNCat (cat
   (@one_cat_functor_category WalkingArrow_cat C C1) (@terminal_arrow_diagram_func C t T)
   (@kernel_adjunction_func C S t T P) (@kernel_adjunction_evidence C S t T P) (@one_cat_zero_arrow_family_source_func B C C1 t T A D
   h) D) (@one_cat_zero_arrow_family_triangle_right B C C1 t T A D h)))
-≔ @iso_evidence_fmap (Hom_cat (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@comp_cat_fapp0 B C
+≔ @discrete_iso_evidence_fmap (Hom_cat (Functor_cat B (Functor_cat WalkingArrow_cat C)) (@comp_cat_fapp0 B C
   (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h))
   D) (Hom_cat (Functor_cat B C) (@one_cat_zero_arrow_family_source_func B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T
+  P D))
+    (@one_cat_functor_category B C C1 (@one_cat_zero_arrow_family_source_func B C C1 t T A D h) (@kernel_adjunction_family_func B C S t T
   P D)) (@one_cat_adjunction_family_transpose_func B C (Functor_cat WalkingArrow_cat C) C1
   (@one_cat_functor_category WalkingArrow_cat C C1) (@terminal_arrow_diagram_func C t T)
   (@kernel_adjunction_func C S t T P) (@kernel_adjunction_evidence C S t T P) (@one_cat_zero_arrow_family_source_func B C C1 t T A D
@@ -288,7 +292,8 @@ protected symbol homology_family_comparison_kernel_target_equiv [B C : Cat] (C1 
   P))
 ≔ @iso_evidence_omega_along (Functor_cat B C) (@kernel_adjunction_family_func B C S t T P (@one_cat_zero_arrow_family_target_func B
   C C1 t T A D h)) (@kernel_adjunction_family_func B C S t T P D)
-  (@iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+  (@one_cat_iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+    (@one_cat_functor_category B C C1)
   (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
     (@one_cat_zero_arrow_family_target_func B C C1 t T A D h) D (@omega_equiv_along_iso_evidence (Functor_cat B (Functor_cat
   WalkingArrow_cat C)) (@one_cat_zero_arrow_family_target_func B C C1 t T A D h) D (@one_cat_represented_comma_family_target_to B C (Functor_cat
@@ -887,7 +892,8 @@ symbol one_cat_homology_family_comparison_evidence [B C : Cat] (C1 : τ (IsNCat 
   (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
     (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
     (@zero_arrow_cone_universal_transf C C1 t T)) (@one_cat_zero_arrow_family_func B C C1 t T A D h)))
-≔ @iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+≔ @one_cat_iso_evidence_fmap (Functor_cat B (Functor_cat WalkingArrow_cat C)) (Functor_cat B C)
+    (@one_cat_functor_category B C C1)
   (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q))
   (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) (@one_cat_homology_family_native_diagram B C C1 t T A D
   h S P)

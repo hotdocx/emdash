@@ -27,24 +27,26 @@ assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
 
 assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
  (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
- (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @eq_refl (Functor (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b))) (@adjunction_transpose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b)
+ (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢
+ @one_cat_adjunction_from_hom_comparison_transpose_path A B A1 B1 F G i a b
  : τ (@= (Functor (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b))) (@adjunction_transpose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) (@Product_pair (Op_cat A) B a b) (@defiso_to (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) i)));
 
 assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
  (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
  (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) (f : τ (Obj (Hom_cat B (@fapp0 A B F a) b))) ⊢
- @eq_refl (Obj (Hom_cat A a (@fapp0 B A G b))) (@fapp0 (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b)) (@adjunction_transpose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) f)
+ @eq_ap (Functor (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b))) (Obj (Hom_cat A a (@fapp0 B A G b))) (λ m : τ (Functor (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b))), @fapp0 (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b)) m f) _ _ (@one_cat_adjunction_from_hom_comparison_transpose_path A B A1 B1 F G i a b)
  : τ (@= (Obj (Hom_cat A a (@fapp0 B A G b))) (@fapp0 (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b)) (@adjunction_transpose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) f) (@fapp0 (Hom_cat B (@fapp0 A B F a) b) (Hom_cat A a (@fapp0 B A G b)) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) (@Product_pair (Op_cat A) B a b) (@defiso_to (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) i)) f));
 
 assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
  (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
- (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢ @eq_refl (Functor (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b)) (@adjunction_untranspose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b)
+ (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) ⊢
+ @one_cat_adjunction_from_hom_comparison_untranspose_path A B A1 B1 F G i a b
  : τ (@= (Functor (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b)) (@adjunction_untranspose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Hom_prof_along A B A (@id_func A) G) (@Hom_prof_along A B B F (@id_func B)) (@Product_pair (Op_cat A) B a b) (@defiso_from (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) i)));
 
 assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
  (B1 : τ (IsNCat (cat_succ cat_zero) B)) (F : τ (Functor A B)) (G : τ (Functor B A))
  (i : τ (@ProfComparison A B (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G))) (a : τ (Obj A)) (b : τ (Obj B)) (f : τ (Obj (Hom_cat A a (@fapp0 B A G b)))) ⊢
- @eq_refl (Obj (Hom_cat B (@fapp0 A B F a) b)) (@fapp0 (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b) (@adjunction_untranspose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) f)
+ @eq_ap (Functor (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b)) (Obj (Hom_cat B (@fapp0 A B F a) b)) (λ m : τ (Functor (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b)), @fapp0 (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b) m f) _ _ (@one_cat_adjunction_from_hom_comparison_untranspose_path A B A1 B1 F G i a b)
  : τ (@= (Obj (Hom_cat B (@fapp0 A B F a) b)) (@fapp0 (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b) (@adjunction_untranspose_func A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i) a b) f) (@fapp0 (Hom_cat A a (@fapp0 B A G b)) (Hom_cat B (@fapp0 A B F a) b) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat (@Hom_prof_along A B A (@id_func A) G) (@Hom_prof_along A B B F (@id_func B)) (@Product_pair (Op_cat A) B a b) (@defiso_from (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) i)) f));
 
 assert [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
@@ -78,7 +80,7 @@ assertnot [A B : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A))
  : τ (@= (@ProfMap A B (@Hom_prof_along A B A (@id_func A) G) (@Hom_prof_along A B B F (@id_func B))) (@defiso_from (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) (@Adjunction_hom_prof_comparison A B F G (@one_cat_adjunction_from_hom_comparison A B A1 B1 F G i))) (@defiso_from (Prof_cat A B) (@Hom_prof_along A B B F (@id_func B)) (@Hom_prof_along A B A (@id_func A) G) j));
 
 assert [A : Cat] (A1 : τ (IsNCat (cat_succ cat_zero) A)) (x y : τ (Obj A)) ⊢
- @eq_refl (Functor (Hom_cat A x y) (Hom_cat A x y)) (@adjunction_transpose_func A A (@id_func A) (@id_func A) (@one_cat_adjunction_from_hom_comparison A A A1 A1 (@id_func A) (@id_func A) (@defiso_refl (Prof_cat A A) (@Unit_prof A))) x y)
+ @one_cat_adjunction_from_hom_comparison_transpose_path A A A1 A1 (@id_func A) (@id_func A) (@defiso_refl (Prof_cat A A) (@Unit_prof A)) x y
  : τ (@= (Functor (Hom_cat A x y) (Hom_cat A x y)) (@adjunction_transpose_func A A (@id_func A) (@id_func A) (@one_cat_adjunction_from_hom_comparison A A A1 A1 (@id_func A) (@id_func A) (@defiso_refl (Prof_cat A A) (@Unit_prof A))) x y) (@tapp0_fapp0 (Product_cat (Op_cat A) A) Cat_cat (@Unit_prof A) (@Unit_prof A)
  (@Product_pair (Op_cat A) A x y) (@defiso_to (Prof_cat A A) (@Unit_prof A) (@Unit_prof A)
    (@defiso_refl (Prof_cat A A) (@Unit_prof A)))));

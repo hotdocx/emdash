@@ -1,4 +1,5 @@
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_strict_functor_actions;
 
 /*
   Equality-valued omega-equivalence: native action on next homs.
@@ -992,6 +993,117 @@ protected symbol eq1_path_to_hom_fapp1_agrees
       (@id B (@fapp0 A B F y)))
     x
     p;
+
+// Public whole-action view: applying a functor to an equality-induced arrow
+// agrees with equality action by its object function.  The protected theorem
+// above remains the implementation owner; this wrapper is its reusable API.
+symbol path_to_hom_fapp1_agrees
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [x y : τ (Obj A)]
+  (p : τ (@= (Obj A) x y))
+  : τ (@=
+      (Hom B (@fapp0 A B F x) (@fapp0 A B F y))
+      (@fapp1_fapp0
+        A B F x y
+        (@path_to_hom A x y p))
+      (@path_to_hom
+        B
+        (@fapp0 A B F x)
+        (@fapp0 A B F y)
+        (@eq_ap
+          (Obj A) (Obj B)
+          (λ z : τ (Obj A), @fapp0 A B F z)
+          x y p)))
+≔ @eq1_path_to_hom_fapp1_agrees A B F x y p;
+
+// Core inclusion respects equality between two object paths.
+symbol path_to_hom_cong
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [p q : τ (@= (Obj C) x y)]
+  (r : τ (@= (@= (Obj C) x y) p q))
+  : τ (@=
+      (Hom C x y)
+      (@path_to_hom C x y p)
+      (@path_to_hom C x y q))
+≔ @eq_ap
+    (@= (Obj C) x y)
+    (Hom C x y)
+    (λ w : τ (@= (Obj C) x y), @path_to_hom C x y w)
+    p q r;
+
+// Whole composite action: F_1[path_to_hom(ap(f,p))] agrees with the
+// equality-induced arrow for the composite object function F_0 o f.
+symbol path_to_hom_fapp1_eq_ap_comp
+  [A : Grpd]
+  [C D : Cat]
+  (f : τ A → τ (Obj C))
+  (F : τ (Functor C D))
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (Hom D
+        (@fapp0 C D F (f x))
+        (@fapp0 C D F (f y)))
+      (@fapp1_fapp0
+        C D F (f x) (f y)
+        (@path_to_hom C (f x) (f y)
+          (@eq_ap A (Obj C) f x y p)))
+      (@path_to_hom
+        D
+        (@fapp0 C D F (f x))
+        (@fapp0 C D F (f y))
+        (@eq_ap
+          A (Obj D)
+          (λ z : τ A, @fapp0 C D F (f z))
+          x y p)))
+≔ @eq_trans
+    (Hom D
+      (@fapp0 C D F (f x))
+      (@fapp0 C D F (f y)))
+    (@fapp1_fapp0
+      C D F (f x) (f y)
+      (@path_to_hom C (f x) (f y)
+        (@eq_ap A (Obj C) f x y p)))
+    (@path_to_hom
+      D
+      (@fapp0 C D F (f x))
+      (@fapp0 C D F (f y))
+      (@eq_ap
+        (Obj C) (Obj D)
+        (λ z : τ (Obj C), @fapp0 C D F z)
+        (f x) (f y)
+        (@eq_ap A (Obj C) f x y p)))
+    (@path_to_hom
+      D
+      (@fapp0 C D F (f x))
+      (@fapp0 C D F (f y))
+      (@eq_ap
+        A (Obj D)
+        (λ z : τ A, @fapp0 C D F (f z))
+        x y p))
+    (@path_to_hom_fapp1_agrees
+      C D F (f x) (f y)
+      (@eq_ap A (Obj C) f x y p))
+    (@path_to_hom_cong
+      D
+      (@fapp0 C D F (f x))
+      (@fapp0 C D F (f y))
+      (@eq_ap
+        (Obj C) (Obj D)
+        (λ z : τ (Obj C), @fapp0 C D F z)
+        (f x) (f y)
+        (@eq_ap A (Obj C) f x y p))
+      (@eq_ap
+        A (Obj D)
+        (λ z : τ A, @fapp0 C D F (f z))
+        x y p)
+      (@eq_ap_comp
+        A (Obj C) (Obj D)
+        f
+        (λ z : τ (Obj C), @fapp0 C D F z)
+        x y p));
 
 // The forward hom triangle agrees with the generic triangle path.
 protected symbol eq1_triangle_forward_hom_agrees
@@ -2930,21 +3042,23 @@ symbol groupoidal_all_arrows_equiv
 /*
   Structured transport along a groupoidal arrow is an equivalence of fibres.
 
-  This is the existing displayed functor action equipped with the image of the
-  arrow's explicit equality-valued evidence; it adds no decoder and no transport rule.
+  The displayed family is supplied as one classified `StrictFunctor`, so its
+  action maps the arrow's equality-valued inverse evidence without a detached
+  composition-law argument. This adds no decoder and no transport rule.
 */
 symbol groupoidal_fibre_transport_equiv
   [C : Cat]
   (g : τ (@IsGroupoidalCat C))
-  (D : τ (Catd C))
+  (D : τ (@StrictFunctor C Cat_cat))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@OmegaEquivAlong
       Cat_cat
-      (Fibre_cat D x)
-      (Fibre_cat D y)
-      (@fapp1_fapp0 C Cat_cat D x y f))
-≔ @omega_equiv_along_fapp1_fapp0
+      (Fibre_cat (@strict_functor C Cat_cat D) x)
+      (Fibre_cat (@strict_functor C Cat_cat D) y)
+      (@fapp1_fapp0 C Cat_cat
+        (@strict_functor C Cat_cat D) x y f))
+≔ @strict_omega_equiv_along_fapp1
     C
     Cat_cat
     D

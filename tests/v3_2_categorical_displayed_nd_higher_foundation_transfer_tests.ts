@@ -120,11 +120,14 @@ describe('DISPLAYED-ND-HIGHER-FOUNDATION-1A generic transfer', () => {
 
     it('pins the active source and exact relocated declaration policy', () => {
         const source = readFileSync(activeKernelPath, 'utf8');
-        assert.equal(
-            CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE
-                .sourceSha256,
-            'sha256:' + createHash('sha256').update(source).digest('hex')
-        );
+        const sourceSha256 = 'sha256:' +
+            createHash('sha256').update(source).digest('hex');
+        for (const module of [
+            CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE,
+            CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_RUNTIME_MODULE
+        ]) {
+            assert.equal(module.sourceSha256, sourceSha256);
+        }
         assert.match(
             source,
             /rule Op_cat \(Op_cat \$A\) ↪ \$A;/u

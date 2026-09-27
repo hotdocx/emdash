@@ -76,22 +76,8 @@ assert ⊢
       gray_interchanger_base_identity)
   ≡ gray_interchanger;
 
-// The extracted cell is not collapsed by the prototype's endpoint cuts.
+// The extracted cell has genuinely distinct endpoints after post/left
+// naturality migration, so a comparison with identity is not even homogeneous.
 assertnot ⊢
-  gray_interchanger
-  ≡ @id GrayInterchangerCodomain_cat gray_interchanger_source;
-
-// Its post/left provenance remains distinct from the pre/right mirror.
-assertnot ⊢
-  gray_interchanger
-  ≡ @tapp1_pre_laxity_cell
-      WalkingArrow_cat
-      GrayWalkingSquare_cat
-      gray_square_inner_src_func
-      gray_square_inner_tgt_func
-      gray_square_outer_transf
-      walking_arrow_src
-      walking_arrow_tgt
-      walking_arrow_tgt
-      walking_arrow_generator
-      (@id WalkingArrow_cat walking_arrow_tgt);
+  gray_interchanger_source
+  ≡ gray_interchanger_target;

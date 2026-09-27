@@ -40,6 +40,37 @@ unif_rule @hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $C
     (@hom_postcomp_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $B $A $D $F $X)
   ↪ [ tt ≡ tt ];
 
+// Companion for represented precomposition of a visible composite.
+// This is associativity in Cat, with the identity ambient action. The
+// composite argument is a discriminator, mirroring the guarded post-view.
+unif_rule @hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+    $D $A $C (@comp_fapp0 Cat_cat $A $B $C $G $H) $F
+  ≡ @comp_fapp0 Cat_cat $A1 $B1 $D1
+    (@comp_fapp0 Cat_cat $B2 $C2 $D2 $F1 $G1) $H1
+  ↪ [ $A1 ≡ $A; $B1 ≡ $B; $D1 ≡ $D;
+      $B2 ≡ $B; $C2 ≡ $C; $D2 ≡ $D;
+      $F1 ≡ $F; $G1 ≡ $G; $H1 ≡ $H ];
+
+// Sigma's capped action may project before its represented postcomposition
+// view is compared. This exposes the same sigma_map, not a naturality law.
+unif_rule @hom_postcomp_fapp0 Cat_cat (@Catd_cat $K) (@Sigma_func $K)
+    $W $E $D $FF $G
+  ≡ @comp_fapp0 Cat_cat $W1 $X1 $Y1 (@sigma_map_func $K1 $E1 $D1 $FF1) $G1
+  ↪ [ $K1 ≡ $K; $E1 ≡ $E; $D1 ≡ $D; $FF1 ≡ $FF; $G1 ≡ $G;
+      $W1 ≡ $W; $X1 ≡ (@Sigma_cat $K $E); $Y1 ≡ (@Sigma_cat $K $D) ];
+
+// The corresponding view after totalization of family reindexing. Both
+// factors and every endpoint are checked; no composition of FF is expanded.
+unif_rule @hom_precomp_along_fapp0 (@Catd_cat $K) Cat_cat
+    (@comp_fapp0 Cat_cat _ _ _ (@Sigma_func $A) (@Pullback_catd_func $A $K $F))
+    $Z $E $D $FF $G
+  ≡ @comp_fapp0 Cat_cat $W1 $X1 $Z1 $G1 (@sigma_map_func $A1 $E1 $D1 $PFF)
+  ↪ [ $A1 ≡ $A; $G1 ≡ $G; $Z1 ≡ $Z;
+      $E1 ≡ (@Pullback_catd $A $K $E $F); $D1 ≡ (@Pullback_catd $A $K $D $F);
+      $W1 ≡ (@Sigma_cat $A (@Pullback_catd $A $K $E $F));
+      $X1 ≡ (@Sigma_cat $A (@Pullback_catd $A $K $D $F));
+      $PFF ≡ (@fapp1_fapp0 (@Catd_cat $K) (@Catd_cat $A) (@Pullback_catd_func $A $K $F) $E $D $FF) ];
+
 // Proof-time constant precomposition; the source and selected value are retained.
 unif_rule @hom_precomp_along_fapp0 Cat_cat Cat_cat (@id Cat_cat Cat_cat) $C $A _ _
     (@Const_func _ _ $t)

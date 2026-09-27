@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* Whole H acts on the existing column comparisons, with its original selected inverses. */
 require open emdash.emdash3_2_commutative_algebra_freyd_native_column_input_comparisons;
 require open emdash.emdash3_2_homology_family_point_comparisons;
@@ -207,7 +208,7 @@ symbol freyd_raw_native_right_column_homology_equiv [K : Cat] [R : τ CommRing] 
   (@freyd_raw_native_row_family K R A1 B1 D1 i1 p1 c1) (@freyd_raw_native_row_family K R A2 B2 D2 i2 p2 c2)
   (@freyd_raw_native_row_map K R A1 B1 D1 A2 B2 D2 i1 p1 i2 p2 a1 b1 d1 c1 c2 f1))
   (@freyd_raw_native_right_column_input K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0 d0 a1
-  b1 d1 f0 f1 middle E) x) (omega_equiv_along_fapp1_fapp0 (@freyd_adjunction_model_func R M)
+  b1 d1 f0 f1 middle E) x) (one_cat_omega_equiv_fmap (@comm_ring_freyd_cat_is_one_cat R) (@freyd_adjunction_model_func R M)
   (@freyd_raw_native_right_column_input_equiv K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0
   d0 a1 b1 d1 f0 f1 middle E x chain));
 
@@ -415,6 +416,6 @@ symbol freyd_raw_native_left_column_homology_equiv [K : Cat] [R : τ CommRing] (
   (@freyd_raw_native_row_family K R A1 B1 D1 i1 p1 c1) (@freyd_raw_native_row_family K R A2 B2 D2 i2 p2 c2)
   (@freyd_raw_native_row_map K R A1 B1 D1 A2 B2 D2 i1 p1 i2 p2 a1 b1 d1 c1 c2 f1))
   (@freyd_raw_native_left_column_input K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0 d0 a1
-  b1 d1 f0 f1 middle E) x) (omega_equiv_along_fapp1_fapp0 (@freyd_adjunction_model_func R M)
+  b1 d1 f0 f1 middle E) x) (one_cat_omega_equiv_fmap (@comm_ring_freyd_cat_is_one_cat R) (@freyd_adjunction_model_func R M)
   (@freyd_raw_native_left_column_input_equiv K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0
   d0 a1 b1 d1 f0 f1 middle E x chain));

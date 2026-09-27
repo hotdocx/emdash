@@ -11,19 +11,16 @@ injective symbol dependent_simplex_unprofiled_functor
   (A B : Cat)
   : τ (Functor A B);
 
-// General ambient functors retain a noncollapsed compositor.
+// General ambient functors retain distinct compositor endpoints, so the cell
+// is not even homogeneously comparable with an identity.
 assertnot [A B : Cat]
   [X Y Z : τ (Obj A)]
   (g : τ (Hom A Y Z))
   (f : τ (Hom A X Y)) ⊢
-  @fapp1_compositor
+  @strict_functor_compositor_lhs
     A B (@dependent_simplex_unprofiled_functor A B) X Y Z g f
-  ≡ @id
-      (Hom_cat B
-        (@fapp0 A B (@dependent_simplex_unprofiled_functor A B) X)
-        (@fapp0 A B (@dependent_simplex_unprofiled_functor A B) Z))
-      (@strict_functor_compositor_lhs
-        A B (@dependent_simplex_unprofiled_functor A B) X Y Z g f);
+  ≡ @strict_functor_compositor_rhs
+      A B (@dependent_simplex_unprofiled_functor A B) X Y Z g f;
 
 // A classified strict object reconstructs canonical evidence about the
 // same whole intrinsic compositor without projecting an admission witness.

@@ -3,6 +3,15 @@ require open emdash.emdash3_2_product_family_reindex;
 require open emdash.emdash3_2_one_cat_copair_families;
 require open emdash.emdash3_2_one_cat_additive_family_paths;
 
+// Stage the complete mate comparison before its object application.
+// The existing paired-input views compare the two actual endpoint families.
+protected symbol product_reindex_mate_path [A B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
+  (Prod : τ (Functor (Product_cat C C) C)) (BP : τ (@BinaryProducts C Prod))
+  (U : τ (Functor A B)) (X F G : τ (Functor B C))
+  : τ (@= (Functor (Product_cat (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U))))) (@one_cat_adjunction_family_transpose_func A C (Product_cat C C) C1 (@one_cat_product_category C C C1 C1) (@product_diagonal_func C) Prod (@one_cat_binary_product_adjunction C C1 Prod BP) (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B (Product_cat C C) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) F G) U)) (@one_cat_product_family_pair_func A C C1 Prod BP (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U)))
+≔ @eq_refl (Functor (Product_cat (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U))))) (@one_cat_adjunction_family_transpose_func A C (Product_cat C C) C1 (@one_cat_product_category C C C1 C1) (@product_diagonal_func C) Prod (@one_cat_binary_product_adjunction C C1 Prod BP) (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B (Product_cat C C) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) F G) U));
+
 /* Restriction of the original native product and coproduct mate programs. */
 
 // Both restricted coordinates feed the same original product mate.
@@ -95,14 +104,9 @@ symbol one_cat_product_pair_reindex_path [A B C : Cat] (C1 : τ (IsNCat (cat_suc
   U)), @Transf A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U)) (@fapp0 (@Transf_cat B C X F) (@Transf_cat
   A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@comp_cat_con_fapp1_func A B C U X F) f) (@fapp0
   (@Transf_cat B C X G) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))
-  (@comp_cat_con_fapp1_func A B C U X G) g)) (@mate_input_source_reindex_path A B C U X F G f g)) (@eq_refl
-  (@Transf A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C)
-  (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C)
-  (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U)))) (@one_cat_product_family_pair A C C1 Prod BP
-  (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U) (@fapp0 (@Transf_cat B C X F)
-  (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@comp_cat_con_fapp1_func A B C U X F) f)
-  (@fapp0 (@Transf_cat B C X G) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))
-  (@comp_cat_con_fapp1_func A B C U X G) g)))));
+  (@comp_cat_con_fapp1_func A B C U X G) g)) (@mate_input_source_reindex_path A B C U X F G f g)) (@eq_ap (Functor (Product_cat (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U))))) (Obj (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U)))))
+      (λ M : τ (Functor (Product_cat (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U))))), @fapp0 (Product_cat (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U))) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@fapp0 (Functor_cat A (Product_cat C C)) (Functor_cat A C) (@comp_cat_cov_func A (Product_cat C C) C Prod) (@Struct_sigma (Functor A C) (λ _ : τ (Functor A C), Functor A C) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U)))) M (@Struct_sigma (@Transf A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (λ _ : τ (@Transf A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)), @Transf A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U)) (@fapp0 (@Transf_cat B C X F) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U)) (@comp_cat_con_fapp1_func A B C U X F) f) (@fapp0 (@Transf_cat B C X G) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C G U)) (@comp_cat_con_fapp1_func A B C U X G) g)))
+      (@one_cat_adjunction_family_transpose_func A C (Product_cat C C) C1 (@one_cat_product_category C C C1 C1) (@product_diagonal_func C) Prod (@one_cat_binary_product_adjunction C C1 Prod BP) (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B (Product_cat C C) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) F G) U)) (@one_cat_product_family_pair_func A C C1 Prod BP (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C F U) (@comp_cat_fapp0 A B C G U)) (@product_reindex_mate_path A B C C1 Prod BP U X F G))));
 
 // Restriction preserves whole copairing at the original selected product endpoint.
 symbol one_cat_copair_reindex_path [A B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) [Prod : τ (Functor
@@ -299,7 +303,7 @@ symbol one_cat_additive_family_reindex_path [A B C : Cat] (C1 : τ (IsNCat (cat_
   (@one_cat_additive_family_add A C C1 Prod t V T0 (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C Y U) (@fapp0
   (@Transf_cat B C X Y) (@Transf_cat A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C Y U))
   (@comp_cat_con_fapp1_func A B C U X Y) f) (@fapp0 (@Transf_cat B C X Y) (@Transf_cat A C (@comp_cat_fapp0 A B C X U)
-  (@comp_cat_fapp0 A B C Y U)) (@comp_cat_con_fapp1_func A B C U X Y) g)) (@prewhisker_comp_path A B C U X
+  (@comp_cat_fapp0 A B C Y U)) (@comp_cat_con_fapp1_func A B C U X Y) g)) (@prewhisker_comp_path A B C C1 U X
   (@comp_cat_fapp0 B (Product_cat C C) C Prod (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) X X))
   Y (@one_cat_product_family_pair B C C1 Prod (@additive_binary_products C Prod t V) X X X (@id (Functor_cat B C) X)
   (@id (Functor_cat B C) X)) (@one_cat_copair_family B C C1 Prod t V T0 X X Y f g)) (@eq_trans (@Transf A C

@@ -11,8 +11,8 @@
   CubicalArrow_cat became a transparent alias of the Sigma-derived lax-arrow
   category. Category identity and composition now remain at their generic
   nested-Sigma owners; no competing constructor rules are installed here.
-  The current global strict identity/associativity endpoint cuts are used only
-  to type the readable cell terms below.
+  Generic category identity computation and proof-time associativity present
+  the endpoints of the readable cell terms below.
 */
 
 require open emdash.emdash3_2_cubical_arrow;

@@ -39,6 +39,7 @@ symbol kernel_adjunction_semantic_boundary_reconstruction [C : Cat] [S : τ (@Pr
 
 // Unchanged observation of the actual input transformation.
 symbol homology_family_pair [B C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
   (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
   (h : τ (@Transf B (Functor_cat WalkingArrow_cat C)
@@ -47,4 +48,4 @@ symbol homology_family_pair [B C : Cat] [S : τ (@PreadditiveCategory C)]
   : τ (@ComputationalChainPair C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt))
 ≔ @computational_chain_pair_intro C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt)
     (@terminal_arrow_test_incoming C t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h)) (@terminal_arrow_test_outgoing C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
-    (@terminal_arrow_test_chain_path C S t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h));
+    (@terminal_arrow_test_chain_path C S C1 t T (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h));

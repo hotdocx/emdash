@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_product_diagonal_reindex_views;
 /* Original K(γ) to K(χ) comparison through whole K action on native diagram maps. */
 require open emdash.emdash3_2_one_cat_native_window_snake_right_gamma;
 require open emdash.emdash3_2_one_cat_native_snake_cover;

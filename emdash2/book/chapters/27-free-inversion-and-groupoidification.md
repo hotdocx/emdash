@@ -391,9 +391,9 @@ only to its collection of arrows.
 In a strict specialization the two endpoints displayed in (27.17) may become
 convertible. That does not make the compositor term itself an identity, and
 the active negative check confirms it is not collapsed to one. This is useful
-for eventual migration away from historical global strict endpoint cuts: the
-coherence witness and its next action are already present rather than having
-to be reconstructed from an equation that erased them.
+after retirement of the historical generic strict endpoint cuts: the
+coherence witness and its next action remain present, with stronger
+computation confined to its qualified profiles and named instances.
 
 Nor is an infinite record of associators and higher laws added beside the
 unit. The compositor in (27.17) is projected from the same internal-action

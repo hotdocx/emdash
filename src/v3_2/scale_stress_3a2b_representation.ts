@@ -654,7 +654,7 @@ const productGroupoidDecodeRule = () => {
         )),
         provenance: source(
             'rule τ (Product_grpd $A $B)',
-            185
+            187
         )
     };
 };
@@ -690,7 +690,7 @@ const productObjectRule = () => {
         )),
         provenance: source(
             'rule Obj (Product_cat $A $B)',
-            663
+            665
         )
     };
 };
@@ -751,7 +751,7 @@ const productHomCategoryRule = () => {
         )),
         provenance: source(
             'rule Hom_cat (Product_cat $A $B) $p $q',
-            680
+            682
         )
     };
 };
@@ -820,7 +820,7 @@ const tensorObjectActionRule = () => {
         )),
         provenance: source(
             'rule @fapp0 _ _ (@Prof_tensor_func $A $B $X) $PQ',
-            1266
+            1465
         )
     };
 };
@@ -955,7 +955,7 @@ const tensorArrowActionRule = () => {
         provenance: source(
             'rule @fapp1_fapp0 _ _ ' +
                 '(@Prof_tensor_func $A $B $X) $PQ $PQ\' $rs',
-            1267
+            1466
         )
     };
 };
@@ -986,7 +986,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective'),
         provenance: source(
             'injective symbol sigma_Fst [a P]',
-            59
+            61
         )
     },
     {
@@ -997,7 +997,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective'),
         provenance: source(
             'injective symbol sigma_Snd [a P]',
-            61
+            63
         )
     },
     {
@@ -1008,7 +1008,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective'),
         provenance: source(
             'injective symbol Product_grpd',
-            184
+            186
         )
     },
     {
@@ -1019,7 +1019,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective'),
         provenance: source(
             'injective symbol Product_cat',
-            661
+            663
         )
     },
     {
@@ -1030,7 +1030,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary'),
         provenance: source(
             'symbol Prof_tensor_map',
-            1264
+            1463
         )
     },
     {
@@ -1041,7 +1041,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary'),
         provenance: source(
             'symbol Prof_tensor_func [A B X : Cat]',
-            1265
+            1464
         )
     }
 ];

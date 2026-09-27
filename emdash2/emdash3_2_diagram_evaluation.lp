@@ -6,7 +6,8 @@
   ordinary off-diagonal transfor evaluation. Definitions use existing owners;
   the later projection folds and proof-time comparisons retain whole action.
 */
-require open emdash.emdash3_2;
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 
 symbol diagram_evaluation_func
   [I C : Cat]
@@ -121,7 +122,8 @@ symbol one_cat_diagram_family_evaluation_comp_path [B I C : Cat]
       (@comp_fapp0 (Functor_cat B C)
         (@diagram_family_at_func B I C F i) (@diagram_family_at_func B I C G i) (@diagram_family_at_func B I C H i)
         (@sym_transf_tapp0_transf B I C G H g i) (@sym_transf_tapp0_transf B I C F G f i)))
-≔ @fapp1_comp_path (Functor_cat B (Functor_cat I C)) (Functor_cat B C)
+≔ @one_cat_composition_path (Functor_cat B (Functor_cat I C)) (Functor_cat B C)
+    (@one_cat_functor_category B C C1)
     (@diagram_family_evaluation_func B I C i) F G H g f;
 
 // Whole shape-arrow observation in the qualified ordinary target.

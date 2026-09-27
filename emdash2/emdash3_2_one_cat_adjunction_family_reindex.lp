@@ -63,8 +63,7 @@ symbol one_cat_transpose_reindex_path [A B R L : Cat] (R1 : τ (IsNCat (cat_succ
   A B R X U)) (@comp_cat_fapp0 A B L Y U)) (Hom_cat (Functor_cat A R) (@comp_cat_fapp0 A B R X U) (@fapp0 (Functor_cat
   A L) (Functor_cat A R) (@comp_cat_cov_func A L R G) (@comp_cat_fapp0 A B L Y U)))
   (@one_cat_adjunction_family_transpose_func A R L R1 L1 F G J (@comp_cat_fapp0 A B R X U) (@comp_cat_fapp0 A B L Y
-  U)) (@fapp0 _ _ (@comp_cat_con_fapp1_func A B L U (@comp_cat_fapp0 B R L F X) Y) h)) (@prewhisker_comp_path A
-  B R U X (@comp_cat_fapp0 B L R G (@comp_cat_fapp0 B R L F X)) (@comp_cat_fapp0 B L R G Y) (@fapp0 _ _
+  U)) (@fapp0 _ _ (@comp_cat_con_fapp1_func A B L U (@comp_cat_fapp0 B R L F X) Y) h)) (@prewhisker_comp_path A B R R1 U X (@comp_cat_fapp0 B L R G (@comp_cat_fapp0 B R L F X)) (@comp_cat_fapp0 B L R G Y) (@fapp0 _ _
   (@comp_cat_con_fapp1_func B R R X (@id_func R) (@comp_cat_fapp0 R L R G F)) (@unit_adj_transf R L F G J)) (@fapp0 _
   _ (@comp_cat_cov_fapp1_func B L R G (@comp_cat_fapp0 B R L F X) Y) h)) (@eq_trans (@Transf A R (@comp_cat_fapp0 A B
   R X U) (@comp_cat_fapp0 A L R G (@comp_cat_fapp0 A B L Y U))) (@comp_fapp0 (Functor_cat A R) (@comp_cat_fapp0 A B R

@@ -33,7 +33,8 @@ class PairProfileTests(unittest.TestCase):
         for name in ["check_profile.py", "check_registry.py"]:
             shutil.copyfile(SCRIPTS / name, scripts / name)
         registry = json.loads((SCRIPTS.parent / "checks.json").read_text())
-        names = sorted({path for targets in registry["profileTargets"].values() for path in targets})
+        names = sorted({path for targets in registry["profileTargets"].values() for path in targets}
+                       | set(registry.get("targetProfileOverrides", {})))
         registry.update(core=[name for name in names if not name.startswith("examples/")],
                         reviewers=[name for name in names if name.startswith("examples/")],
                         check=[], priority=[], isolatedGroups=[])
@@ -49,7 +50,10 @@ class PairProfileTests(unittest.TestCase):
         r=self.run_profile();self.assertEqual(r.returncode,0,r.stderr)
         rows=[json.loads(x) for x in r.stdout.splitlines()]
         self.assertEqual({Path(x['target']) for x in rows},metrics.NATIVE_SNAKE_PAIR_CHECK_FILES)
-        self.assertTrue(all(x['memory']=='6144' and x['timeout']=='180s' and x['gc']=='o=20' for x in rows))
+        for row in rows:
+            expected = ('8192', '300s', 'o=20,v=1024') if row['target'] == 'emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp' else ('6144', '180s', 'o=20')
+            self.assertEqual((row['memory'], row['timeout'], row['gc']), expected)
+
     def test_explicit_bounded_overrides_are_retained(self):
         target=sorted(map(str,metrics.NATIVE_SNAKE_PAIR_CHECK_FILES))[0]
         r=self.run_profile(target,EMDASH_LP_MEMORY_MIB='4096',EMDASH_PROBE_TIMEOUT='120s',OCAMLRUNPARAM='o=10')

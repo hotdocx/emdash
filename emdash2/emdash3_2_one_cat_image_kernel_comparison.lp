@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_iso_maps;
+require open emdash.emdash3_2_one_cat_functor_closure;
 /* Canonical whole Im(f)⇒K(g) in the ordinary Abelian setting.
    Descend the existing H boundary through Q at the original restricted
    kernel-arrow family, then use the same selected inverse of Coim⇒Im.
@@ -153,8 +155,9 @@ symbol one_cat_image_kernel_reconstruction_path [B C : Cat] [S : τ (@Preadditiv
   (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C
   (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_coimage_func C S t T T0 P Q)) (@fapp0 (Functor_cat
   (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C
-  (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_image_func C S t T T0 P Q)) (@iso_evidence_fmap
-  (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat
+  (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_image_func C S t T T0 P Q)) (@one_cat_iso_evidence_fmap
+  (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C)
+  (@one_cat_functor_category B C C1) (@comp_cat_con_func B (Functor_cat
   WalkingArrow_cat C) C (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_coimage_func C S t T T0 P Q)
   (@adjunction_image_func C S t T T0 P Q) (@one_cat_coimage_image_iso_evidence C S C1 t T T0 P Q N))));
 
@@ -363,8 +366,9 @@ symbol one_cat_image_kernel_unique [B C : Cat] [S : τ (@PreadditiveCategory C)]
   (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C
   (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_coimage_func C S t T T0 P Q)) (@fapp0 (Functor_cat
   (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C
-  (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_image_func C S t T T0 P Q)) (@iso_evidence_fmap
-  (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@comp_cat_con_func B (Functor_cat
+  (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_image_func C S t T T0 P Q)) (@one_cat_iso_evidence_fmap
+  (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C)
+  (@one_cat_functor_category B C C1) (@comp_cat_con_func B (Functor_cat
   WalkingArrow_cat C) C (@zero_arrow_family_incoming_func B C t T A D h)) (@adjunction_coimage_func C S t T T0 P Q)
   (@adjunction_image_func C S t T T0 P Q) (@one_cat_coimage_image_iso_evidence C S C1 t T T0 P Q N))))) (@eq_trans
   (@Transf B C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q)

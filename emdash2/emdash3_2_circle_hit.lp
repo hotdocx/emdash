@@ -13,6 +13,7 @@
 
 require open emdash.emdash3_2;
 require open emdash.emdash3_2_integer_localization;
+require open emdash.emdash3_2_strict_functor_actions;
 
 // Circle formation and generating point/path constructors.
 constant symbol Circle_grpd : Grpd;
@@ -2247,10 +2248,10 @@ symbol circle_hom_integer_cat_evidence
       (Hom_cat Circle_cat circle_base circle_base)
       (Path_cat Integer_grpd)
       circle_hom_integer_func)
-≔ @omega_equiv_along_fapp1_fapp0
+≔ @strict_omega_equiv_along_fapp1
     Grpd_cat
     Cat_cat
-    Path_cat_func
+    strict_path_cat_func
     (@= Circle_grpd circle_base circle_base)
     Integer_grpd
     circle_loop_encode_function

@@ -15,6 +15,7 @@
 */
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_nat_arithmetic;
+require open emdash.emdash3_2_omega_evaluation_points;
 
 // Whole-category contraction with canonical forward functor.
 symbol CatContraction (C : Cat) : Grpd
@@ -67,9 +68,8 @@ symbol catd_contraction_inverse [K : Cat] [E : τ (Catd K)]
 symbol catd_contraction_at [K : Cat] [E : τ (Catd K)]
   (H : τ (@CatdContraction K E)) (x : τ (Obj K))
   : τ (CatContraction (@Fibre_cat K E x))
-≔ @omega_equiv_along_fapp1_fapp0 (Catd_cat K) Cat_cat
-    (@fapp0_func K Cat_cat x) E (@Const_catd K Terminal_cat)
-    (@Terminal_funcd K E) H;
+≔ @omega_equiv_catd_at K E (@Const_catd K Terminal_cat)
+    (@Terminal_funcd K E) H x;
 
 // Ordinary fibre contractibility is a downstream observation.
 symbol catd_contraction_objects_at [K : Cat] [E : τ (Catd K)]

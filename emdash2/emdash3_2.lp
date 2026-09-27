@@ -3415,51 +3415,20 @@ symbol fapp1_id_path
      (Hom B (@fapp0 A B F X) (@fapp0 A B F X))
      (@id B (@fapp0 A B F X));
 
-// Strict composition cut: `F[g] o F[f] -> F[g o f]`.
-rule @comp_fapp0
-      $B
-      _
-      _
-      _
-      (@fapp1_fapp0 $A $B $F $Y $Z $g)
-      (@fapp1_fapp0 $A $B $F $X $Y $f)
-  ↪ @fapp1_fapp0
-      $A
-      $B
-      $F
-      $X
-      $Z
-      (@comp_fapp0 $A $X $Y $Z $g $f);
-
-// Typed equality view of the generic strict composition cut.
-symbol fapp1_comp_path
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y))
-  : τ (@=
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@fapp1_fapp0 A B F X Z
-        (@comp_fapp0 A X Y Z g f))
-      (@comp_fapp0
-        B
-        (@fapp0 A B F X)
-        (@fapp0 A B F Y)
-        (@fapp0 A B F Z)
-        (@fapp1_fapp0 A B F Y Z g)
-        (@fapp1_fapp0 A B F X Y f)))
-≔ @eq_refl
-    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@fapp1_fapp0 A B F X Z
-      (@comp_fapp0 A X Y Z g f));
+/*
+  The former capped composition cut and detached all-components law are
+  retired. Arbitrary ambient functors retain the intrinsic compositor;
+  classified strict packages and reviewed named constructors own the selected
+  runtime composition computations.
+*/
 
 /*
   Path-symmetry functor owner.
 
   The functor, rather than a second standalone composition calculus, owns
-  strict path reversal. Generic functoriality therefore supplies the
-  anti-composition computation after `path_sym` unfolds to arrow action.
+  strict path reversal. Its named direct composition owner supplies
+  anti-composition while the ambient Functor classifier migrates to normal-lax
+  composition.
 */
 injective symbol Path_sym_func
   (A : Grpd)
@@ -3490,6 +3459,24 @@ rule @fapp1_fapp0
       $x $x
       (@eq_refl $A $x)
   ↪ @eq_refl $A $x;
+
+// Named direct strict anti-composition owner. The opposite
+// source owns reversal of the input order; the target remains Path_cat(A).
+// lhs-audit: keep 1 -- the target Path_cat guard removes eleven otherwise
+// unjoinable overlap reports without changing the semantic discriminator.
+rule @comp_fapp0
+      (Path_cat $A) _ _ _
+      (@fapp1_fapp0
+        (Op_cat (Path_cat $A)) (Path_cat $A)
+        (Path_sym_func $A) $Y $Z $g)
+      (@fapp1_fapp0
+        (Op_cat (Path_cat $A)) (Path_cat $A)
+        (Path_sym_func $A) $X $Y $f)
+  ↪ @fapp1_fapp0
+      (Op_cat (Path_cat $A)) (Path_cat $A)
+      (Path_sym_func $A) $X $Z
+      (@comp_fapp0 (Op_cat (Path_cat $A)) $X $Y $Z $g $f);
+
 
 // Closed shaped-reflexivity registration for PathSym. Keep the rigid source
 // and target categories: as for the literal-reflexivity bridge above, they
@@ -3535,10 +3522,10 @@ symbol path_sym_invol
   Core inclusion and path-to-arrow.
 
   `Core_incl_func(C) : Core_cat(C) ⊢ C` owns the computational map from
-  non-directed object paths to directed arrows. Composition is deliberately
-  not restated here: the generic `fapp1_fapp0` functoriality rule folds
-  path_to_hom(q) ∘ path_to_hom(p) to path_to_hom(q ∘ p), retaining the
-  shared `comp_fapp0(Path_cat(...))` source-composition head.
+  non-directed object paths to directed arrows. Its named direct composition
+  owner folds path_to_hom(q) ∘ path_to_hom(p) to path_to_hom(q ∘ p), retaining
+  the shared `comp_fapp0(Path_cat(...))` source-composition head while the
+  ambient Functor classifier migrates to normal-lax composition.
 
   The reflexivity bridge is a measured projection-ladder join. `Path_cat`
   reduces identity arrows to `eq_refl` before the generic functor-identity
@@ -3555,6 +3542,17 @@ rule @fapp0 _ _ (Core_incl_func _) $x ↪ $x;
 // Reflexive path maps to the categorical identity arrow.
 rule @fapp1_fapp0 _ _ (Core_incl_func $C) $x $x (eq_refl $x)
   ↪ @id $C $x;
+
+// Named direct strict composition owner for the path-core
+// inclusion. The Core_incl_func head is the complete discriminator.
+rule @comp_fapp0
+      $C _ _ _
+      (@fapp1_fapp0 _ _ (@Core_incl_func $C) $Y $Z $g)
+      (@fapp1_fapp0 _ _ (@Core_incl_func $C) $X $Y $f)
+  ↪ @fapp1_fapp0
+      (@Core_cat $C) $C (@Core_incl_func $C) $X $Z
+      (@comp_fapp0 (@Core_cat $C) $X $Y $Z $g $f);
+
 
 // Closed shaped-reflexivity registration for the generic Core inclusion.
 rule @fapp1_fapp0
@@ -5398,6 +5396,20 @@ injective symbol Path_cat_func
 rule @fapp0 Grpd_cat Cat_cat Path_cat_func $A
   ↪ Path_cat $A;
 
+// Named direct strict composition owner for the intrinsic
+// path-category action. This is guarded by Path_cat_func rather than an
+// arbitrary ambient functor.
+rule @comp_fapp0
+      Cat_cat _ _ _
+      (@fapp1_fapp0
+        Grpd_cat Cat_cat Path_cat_func $B $C $g)
+      (@fapp1_fapp0
+        Grpd_cat Cat_cat Path_cat_func $A $B $f)
+  ↪ @fapp1_fapp0
+      Grpd_cat Cat_cat Path_cat_func $A $C
+      (@comp_fapp0 Grpd_cat $A $B $C $g $f);
+
+
 // Readable first action: a function acts by equality congruence.
 symbol path_map_func
   [A B : Grpd]
@@ -5544,24 +5556,9 @@ rule @fapp1_fapp0
       (@id (@Catd_cat $K) $E)
   ↪ @id $B (@fapp0 (@Catd_cat $K) $B $F $E);
 
-// Canonical Catd specialization of the global strict-functor composition
-// cut. The three family endpoints are inferred from the two arrow actions;
-// keeping them implicit lets this rule survive object-action normalization.
-// lhs-audit: keep 1 -- Catd_cat is the source-category discriminator for displayed-functor action.
-rule @comp_fapp0
-      (@Catd_cat $K)
-      _ _ _
-      (@fapp1_fapp0
-        $A (@Catd_cat $K) $F $Y $Z $g)
-      (@fapp1_fapp0
-        $A (@Catd_cat $K) $F $X $Y $f)
-  ↪ @fapp1_fapp0
-      $A
-      (@Catd_cat $K)
-      $F
-      $X
-      $Z
-      (@comp_fapp0 $A $X $Y $Z $g $f);
+// The former category-head-only composition cut for arbitrary
+// F : A -> Catd_cat(K) is retired. A Catd-valued codomain does not make an
+// ambient functor strict; profiled or named owners must supply that behavior.
 
 // Natural/displayed families of transformations, i.e. modifications between
 // directed-family functors.
@@ -5951,53 +5948,6 @@ symbol omega_equiv_along_refl
     (@id C x)
     (@eq_refl (Hom C x x) (@id C x))
     (@eq_refl (Hom C x x) (@id C x));
-
-/*
-  Ordinary functor action preserves equality-valued fixed-arrow equivalence.
-
-  The inverse arrows are the images of the selected inverses. Applying the
-  functor action to the two source cancellation laws supplies the target
-  laws; the global functoriality owners then compare the mapped composites
-  and identities with their canonical target forms.
-*/
-symbol omega_equiv_along_fapp1_fapp0
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [x y : τ (Obj A)]
-  [f : τ (Hom A x y)]
-  (u : τ (@OmegaEquivAlong A x y f))
-  : τ (@OmegaEquivAlong
-      B
-      (@fapp0 A B F x)
-      (@fapp0 A B F y)
-      (@fapp1_fapp0 A B F x y f))
-≔ @omega_equiv_along_intro
-    B
-    (@fapp0 A B F x)
-    (@fapp0 A B F y)
-    (@fapp1_fapp0 A B F x y f)
-    (@fapp1_fapp0 A B F y x
-      (@omega_equiv_along_left_inv A x y f u))
-    (@fapp1_fapp0 A B F y x
-      (@omega_equiv_along_right_inv A x y f u))
-    (@eq_ap
-      (Hom A x x)
-      (Hom B (@fapp0 A B F x) (@fapp0 A B F x))
-      (λ h : τ (Hom A x x), @fapp1_fapp0 A B F x x h)
-      (@comp_fapp0 A x y x
-        (@omega_equiv_along_left_inv A x y f u)
-        f)
-      (@id A x)
-      (@omega_equiv_along_left_law A x y f u))
-    (@eq_ap
-      (Hom A y y)
-      (Hom B (@fapp0 A B F y) (@fapp0 A B F y))
-      (λ h : τ (Hom A y y), @fapp1_fapp0 A B F y y h)
-      (@comp_fapp0 A y x y
-        f
-        (@omega_equiv_along_right_inv A x y f u))
-      (@id A y)
-      (@omega_equiv_along_right_law A x y f u));
 
 /*
   Stable first-class facade for a selected arrow and its equality-valued evidence.
@@ -7012,41 +6962,6 @@ symbol iso_evidence_comp
         (@iso_evidence_comp_left C x y z j i)
         (@iso_evidence_comp_right C x y z j i)));
 
-// Strict functors preserve ordinary isomorphism evidence.
-symbol iso_evidence_fmap
-  [C D : Cat]
-  (F : τ (Functor C D))
-  [x y : τ (Obj C)]
-  (i : τ (IsoEvidence C x y))
-  : τ (IsoEvidence D (fapp0 F x) (fapp0 F y))
-≔ Struct_sigma
-    (@fapp1_fapp0 C D F x y
-      (@iso_evidence_to C x y i))
-    (Struct_sigma
-      (@fapp1_fapp0 C D F y x
-        (@iso_evidence_from C x y i))
-      (Struct_sigma
-        (@eq_ap
-          (Hom C x x)
-          (Hom D (fapp0 F x) (fapp0 F x))
-          (λ p : τ (Hom C x x),
-            @fapp1_fapp0 C D F x x p)
-          (@comp_fapp0 C x y x
-            (@iso_evidence_from C x y i)
-            (@iso_evidence_to C x y i))
-          (@id C x)
-          (@iso_evidence_left C x y i))
-        (@eq_ap
-          (Hom C y y)
-          (Hom D (fapp0 F y) (fapp0 F y))
-          (λ p : τ (Hom C y y),
-            @fapp1_fapp0 C D F y y p)
-          (@comp_fapp0 C y x y
-            (@iso_evidence_to C x y i)
-            (@iso_evidence_from C x y i))
-          (@id C y)
-          (@iso_evidence_right C x y i))));
-
 // Ordinary opposite functor action.
 //
 // Surface/formula:
@@ -7402,6 +7317,8 @@ rule @hom_postcomp_func $A $B $F $W $X $X (@id $B $X)
 rule @hom_postcomp_fapp0 $A $B $F $W $X $X (@id $B $X) $g
   ↪ $g;
 
+/* API-04P: the following generic-F folds recover raw composition through
+   staged represented-to-raw paths. Restore only with an actual strict view.
 // Functor-level accumulation: consecutive postcomposition actions combine.
 rule @comp_fapp0
       Cat_cat
@@ -7438,6 +7355,26 @@ rule @comp_fapp0
       $X
       $Z
       (@comp_fapp0 $B $X $Y $Z $q $p)
+      $g;
+
+*/
+
+// Named identity-family composition retains its ordinary Hom computation.
+rule @comp_fapp0
+      Cat_cat
+      _ _ _
+      (@hom_postcomp_func $A $A (@id Cat_cat $A) $W $Y $Z $q)
+      (@hom_postcomp_func $A $A (@id Cat_cat $A) $W $X $Y $p)
+  ↪ @hom_postcomp_func
+      $A $A (@id Cat_cat $A) $W $X $Z
+      (@comp_fapp0 $A $X $Y $Z $q $p);
+
+rule @hom_postcomp_fapp0
+      $A $A (@id Cat_cat $A) $W $Y $Z $q
+      (@hom_postcomp_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $p $g)
+  ↪ @hom_postcomp_fapp0
+      $A $A (@id Cat_cat $A) $W $X $Z
+      (@comp_fapp0 $A $X $Y $Z $q $p)
       $g;
 
 // Identity-family nested postcomposition reassociates under the stable owner.
@@ -7540,6 +7477,9 @@ rule @hom_postcomp_tele_fapp1_fapp0
         (Hom_cat $A $W (@fapp0 $B $A $F $Y)))
       (@hom_postcomp_func $A $B $F $W $X $Y $f);
 
+/* API-04T: this legacy accumulator bypassed the modern telescope's
+   profile boundary after Cat specialization. Retain the source for review;
+   general composition uses an explicit profile of the actual telescope.
 // Telescope 2-cell composition accumulates inside the stable action head.
 rule @comp_fapp0
       _
@@ -7558,6 +7498,27 @@ rule @comp_fapp0
       $f
       $h
       (@comp_fapp0 (Hom_cat $B $X $Y) $f $g $h $e_gh $e_fg);
+
+*/
+
+// Named identity-family telescope composition remains intrinsic.
+rule @comp_fapp0
+      _
+      _
+      _
+      _
+      (@hom_postcomp_tele_fapp1_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $g $h $e_gh)
+      (@hom_postcomp_tele_fapp1_fapp0 $A $A (@id Cat_cat $A) $W $X $Y $f $g $e_fg)
+  ↪ @hom_postcomp_tele_fapp1_fapp0
+      $A
+      $A
+      (@id Cat_cat $A)
+      $W
+      $X
+      $Y
+      $f
+      $h
+      (@comp_fapp0 (Hom_cat $A $X $Y) $f $g $h $e_gh $e_fg);
 
 // Hom-action of capped postcomposition on alpha : g ->^(Hom_A(W,F[X])) h.
 symbol hom_postcomp_fapp1_func [A B : Cat]
@@ -7817,64 +7778,6 @@ with @hom_postcomp_fapp0
         (@defiso_from $C $y $z $j))
   ↪ @id $C $z;
 
-// Functorial image of a computational isomorphism.
-injective symbol defiso_fmap
-  [C D : Cat]
-  (F : τ (Functor C D))
-  [x y : τ (Obj C)]
-  (i : τ (@DefIso C x y))
-  : τ (@DefIso D (@fapp0 C D F x) (@fapp0 C D F y));
-
-// Functorial image projects by applying the functor to both selected arrows.
-rule @defiso_to
-      $D
-      _ _
-      (@defiso_fmap $C $D $F $x $y $i)
-  ↪ @fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i)
-with @defiso_from
-      $D
-      _ _
-      (@defiso_fmap $C $D $F $x $y $i)
-  ↪ @fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i);
-
-// Left cancellation of a mapped DefIso under the target hom-action owner.
-// The three hom endpoints are inferred from the mapped arrows. Keeping their
-// explicit fapp0 projections would make object beta erase the owner pattern.
-rule @hom_postcomp_fapp0
-      $D $D (@id Cat_cat $D)
-      _ _ _
-      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
-      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
-  ↪ @id $D (@fapp0 $C $D $F $x)
-with @hom_postcomp_fapp0
-      $D $D (@id Cat_cat $D)
-      _ _ _
-      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
-      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
-  ↪ @id $D (@fapp0 $C $D $F $y);
-
-// Right cancellation of a mapped DefIso under the target hom-action owner.
-rule @hom_postcomp_fapp0
-      $D $D (@id Cat_cat $D)
-      $W _ _
-      (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
-      (@hom_postcomp_fapp0
-        $D $D (@id Cat_cat $D)
-        $W _ _
-        (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
-        $f)
-  ↪ $f
-with @hom_postcomp_fapp0
-      $D $D (@id Cat_cat $D)
-      $W _ _
-      (@fapp1_fapp0 $C $D $F $x $y (@defiso_to $C $x $y $i))
-      (@hom_postcomp_fapp0
-        $D $D (@id Cat_cat $D)
-        $W _ _
-        (@fapp1_fapp0 $C $D $F $y $x (@defiso_from $C $x $y $i))
-        $g)
-  ↪ $g;
-
 // Forgetful view preserves reflexivity.
 rule @defiso_iso_evidence $C $x $x (@defiso_refl $C $x)
   ↪ @iso_evidence_refl $C $x;
@@ -7890,15 +7793,6 @@ rule @defiso_iso_evidence $C $x $z (@defiso_comp $C $x $y $z $j $i)
   ↪ @iso_evidence_comp
       $C $x $y $z
       (@defiso_iso_evidence $C $y $z $j)
-      (@defiso_iso_evidence $C $x $y $i);
-
-// Forgetful view preserves functorial image.
-rule @defiso_iso_evidence
-      $D
-      _ _
-      (@defiso_fmap $C $D $F $x $y $i)
-  ↪ @iso_evidence_fmap
-      $C $D $F $x $y
       (@defiso_iso_evidence $C $x $y $i);
 
 // 4c. Contravariant represented hom families and precomposition action
@@ -8029,6 +7923,8 @@ rule fapp0 (@hom_precomp_along_func $A $B $F $Z $W $X $h) $g
 
 // Hom-action functoriality for precomposition. The composition orientation is
 // contravariant in the acted-on base arrow: first precompose by q, then by p.
+
+
 rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
   ↪ @id_func (Hom_cat $B (@fapp0 $A $B $F $X) $Z);
 
@@ -8036,43 +7932,29 @@ rule @hom_precomp_along_func $A $B $F $Z $X $X (@id $A $X)
 rule @hom_precomp_along_fapp0 $A $B $F $Z $X $X (@id $A $X) $g
   ↪ $g;
 
+// Ordinary precomposition along the named identity functor stays strict.
+// Generic F accumulation belongs to the explicit strict profile.
 // Functor-level contravariant accumulation of consecutive precomposition actions.
 rule @comp_fapp0
       Cat_cat
       _ _ _
-      (@hom_precomp_along_func $A $B $F $Z $W $X $p)
-      (@hom_precomp_along_func $A $B $F $Z $X $Y $q)
+      (@hom_precomp_along_func $A $A (@id Cat_cat $A) $Z $W $X $p)
+      (@hom_precomp_along_func $A $A (@id Cat_cat $A) $Z $X $Y $q)
   ↪ @hom_precomp_along_func
-      $A $B $F $Z $W $Y
+      $A $A (@id Cat_cat $A) $Z $W $Y
       (@comp_fapp0 $A $W $X $Y $q $p);
 
 // Point-level contravariant accumulation of consecutive precomposition actions.
 rule @hom_precomp_along_fapp0
-      $A $B $F $Z $W $X $p
-      (@hom_precomp_along_fapp0 $A $B $F $Z $X $Y $q $g)
+      $A $A (@id Cat_cat $A) $Z $W $X $p
+      (@hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $X $Y $q $g)
   ↪ @hom_precomp_along_fapp0
-      $A $B $F $Z $W $Y
+      $A $A (@id Cat_cat $A) $Z $W $Y
       (@comp_fapp0 $A $W $X $Y $q $p)
       $g;
 
-// Raw adjacent-source precomposition fold:
-// ((F[p])^*(g)) o F[q] -> (F[p o q])^*(g).
-rule @comp_fapp0
-      $B
-      _
-      _
-      _
-      (@hom_precomp_along_fapp0 $A $B $F $Z $W $X $p $g)
-      (@fapp1_fapp0 $A $B $F $V $W $q)
-  ↪ @hom_precomp_along_fapp0
-      $A
-      $B
-      $F
-      $Z
-      $V
-      $X
-      (@comp_fapp0 $A $V $W $X $p $q)
-      $g;
+// Mixed mapped-arrow accumulation is owned by explicit strict profiles.
+// Ordinary identity-family associativity remains a proof-time comparison.
 
 // Precomposing the identity at F[X] by h returns the functorial action F[h].
 // The first rule covers unreduced generic identities; the `Cat_cat` and
@@ -8326,6 +8208,9 @@ rule @hom_precomp_along_tele_fapp1_fapp0
         (Hom_cat $B (@fapp0 $A $B $F $W) $Z))
       (@hom_precomp_along_func $A $B $F $Z $W $X $h);
 
+/* API-04T: this legacy accumulator bypassed the modern telescope's
+   profile boundary after Cat specialization. Retain the source for review;
+   general composition uses an explicit profile of the actual telescope.
 // Precomposition-telescope 2-cell composition accumulates inside the stable head.
 rule @comp_fapp0
       _
@@ -8338,6 +8223,27 @@ rule @comp_fapp0
       $A
       $B
       $F
+      $Z
+      $W
+      $X
+      $f
+      $h
+      (@comp_fapp0 (Hom_cat $A $W $X) $f $g $h $e_gh $e_fg);
+
+*/
+
+// Named identity-family telescope composition remains intrinsic.
+rule @comp_fapp0
+      _
+      _
+      _
+      _
+      (@hom_precomp_along_tele_fapp1_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $g $h $e_gh)
+      (@hom_precomp_along_tele_fapp1_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $f $g $e_fg)
+  ↪ @hom_precomp_along_tele_fapp1_fapp0
+      $A
+      $A
+      (@id Cat_cat $A)
       $Z
       $W
       $X
@@ -8712,6 +8618,9 @@ rule sigma_Fst (@fapp0 $X (Product_cat $A $B) $H $i)
 // Right projection of a product-valued functor application is pointwise.
 rule sigma_Snd (@fapp0 $X (Product_cat $A $B) $H $i)
   ↪ @fapp0 $X $B (sigma_Snd $H) $i;
+
+
+
 
 // Application and hom-action for an explicitly paired functor.
 // Explicit pair application: (F,G)[i] = (F[i],G[i]).
@@ -10923,19 +10832,17 @@ rule @tapp1_fapp0
           $alpha)
         $beta);
 
-// Cat-specialized generalized precomposition agrees proof-time with ordinary
-// precomposition. Runtime object action remains owned by
-// `hom_precomp_along_fapp0`.
-unif_rule @hom_precomp_along_func Cat_cat Cat_cat $F $Z $W $X $h
+/* Fixed-arrow precomposition comparison. Runtime keeps both owners.
+   Retain the actual mapped objects and arrow explicitly in side conditions;
+   this does not identify F[q o p] with F[q] o F[p] for arbitrary F. */
+unif_rule @hom_precomp_along_func $A $B $F $Z $W $X $h
   ≡ @hom_precomp_along_func
-      Cat_cat
-      Cat_cat
-      (@id Cat_cat Cat_cat)
-      $Z
-      _
-      _
-      (@fapp1_fapp0 Cat_cat Cat_cat $F $W $X $h)
-  ↪ [ tt ≡ tt ];
+      $B $B (@id Cat_cat $B) $Z $FW $FX $mapped
+  ↪ [
+      $FW ≡ @fapp0 $A $B $F $W;
+      $FX ≡ @fapp0 $A $B $F $X;
+      $mapped ≡ @fapp1_fapp0 $A $B $F $W $X $h
+    ];
 
 /*
   Deferred Cat-specialized higher-action folds.
@@ -11019,6 +10926,9 @@ rule @tapp1_fapp0 $A $B _ _ $X $Y (@id (Functor_cat $A $B) $F) $p
 rule @tapp1_fapp0 $A $B $F $G $X $X $ϵ (@id $A $X)
   ↪ @tapp0_fapp0 $A $B $F $G $X $ϵ;
 
+/* API-04V RULE-OFF CONTROL: these three raw folds can recover
+   unrestricted composition after identity specialization. Restore only
+   under qualified profiles or an intrinsic constructor computation.
 // Off-diagonal vertical-composite folds for ordinary transfors.
 rule @comp_fapp0
       $B
@@ -11073,6 +10983,10 @@ rule @comp_fapp0
       (@comp_fapp0 (Functor_cat $A $B) $F $G $H $η $ϵ)
       (@comp_fapp0 $A $X $Y $Z $q $p);
 
+*/
+
+/* API-04V: this proof used the unqualified vertical folds.
+   Restore it in the profile layer with the actual action premises.
 // Pre-configured four-cell interchange for the Cat-valued representable
 // `hom_` (postcomposition).
 symbol hom_postcomp_representable_interchange_eq
@@ -11147,146 +11061,33 @@ symbol hom_postcomp_representable_interchange_eq
         (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
       (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha));
 
+*/
+
 // 6d. Full ordinary naturality and projection-order joins
 
-// Full strict naturality for ordinary transfors, oriented as cut elimination.
-// The post/left rule accumulates a codomain arrow through the off-diagonal
-// hom-action:
-//   postcomp(G[g]) ∘ epsilon[X,Y] ↪ epsilon[X,Z] ∘ postcomp(g).
-//
-// The represented source endpoint of the postcomposition functor is kept as a
-// pattern variable. Typing forces it to be F[X], but this lets the rule still
-// match when F[X] has already reduced, as in representable postcomposition
-// regressions.
-rule @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@hom_postcomp_func $B $A $G $FX $Y $Z $g)
-      (@tapp1_func $A $B $F $G $X $Y $ϵ)
-  ↪ @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@tapp1_func $A $B $F $G $X $Z $ϵ)
-      (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
+// The former whole post/left strict-naturality cut for arbitrary ambient
+// transfors is retired. StrictTransfor profiles own the guarded computation;
+// ambient transfors retain their existing whole laxity cell.
 
-// Full pre/right strict naturality:
-//   precomp(F[h]) ∘ epsilon[X,Y] ↪ epsilon[W,Y] ∘ precomp(h).
-//
-// `hom_precomp_along_func` is the stable projection for the left functor. The
-// raw semantic owner over opposites folds to this head above, so the
-// accumulation rule does not need to expose `hom_`/`Op_func` internals.
-rule @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $G $Y) $W $X $h)
-      (@tapp1_func $A $B $F $G $X $Y $ϵ)
-  ↪ @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@tapp1_func $A $B $F $G $W $Y $ϵ)
-      (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
-
-// Full strict functoriality for ordinary functors. These are first-class
-// single-functor accumulation rules; they are distinct from the later rule for
-// the hom-action of a composite functor F ∘ G.
-rule @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@hom_postcomp_func $B $A $F $FX $Y $Z $g)
-      (@fapp1_func $A $B $F $X $Y)
-  ↪ @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@fapp1_func $A $B $F $X $Z)
-      (@hom_postcomp_func $A $A (@id_func $A) $X $Y $Z $g);
-
-// Contravariant form of full strict functoriality accumulation.
-rule @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@hom_precomp_along_func $A $B $F (@fapp0 $A $B $F $Y) $W $X $h)
-      (@fapp1_func $A $B $F $X $Y)
-  ↪ @comp_fapp0
-      Cat_cat
-      _ _ _
-      (@fapp1_func $A $B $F $W $Y)
-      (@hom_precomp_along_func $A $A (@id_func $A) $Y $W $X $h);
-
-// Strict naturality for off-diagonal ordinary transfor components, oriented as
-// cut elimination.
-//
-// Surface/formula:
-//   G[g] ∘ epsilon[f] ↪ epsilon[g ∘ f]
-//   epsilon[f] ∘ F[g] ↪ epsilon[f ∘ g].
-rule comp_fapp0
-      (@fapp1_fapp0 $A $B $G $Y $Z $g)
-      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
-  ↪ tapp1_fapp0 $ϵ (comp_fapp0 $g $f);
-
-// Precomposition-side strict naturality for off-diagonal components.
-rule comp_fapp0
-      (@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f)
-      (@fapp1_fapp0 $A $B $F $X0 $X $g)
-  ↪ tapp1_fapp0 $ϵ (comp_fapp0 $f $g);
+// The former whole pre/right strict-naturality cut for arbitrary ambient
+// transfors is also retired. Full StrictTransfor evidence contains a second
+// skew family over the existing pre/right cell and guards this computation.
 
 /*
-  Proof-time stable-head readings of the two component cuts above.
-
-  Runtime deliberately retains `hom_postcomp_fapp0` and
-  `hom_precomp_along_fapp0` as represented-action histories.  These direct
-  rigid-head comparisons avoid relying on non-transitive unification through
-  their separate raw-composition views.  They add no new naturality law.
-
-  These are part of the historical globally strict prototype.  A later
-  strict/lax migration must re-home them at the selected strict/skew transfor
-  profile rather than treating them as generic lax endpoint collapse.
+  The former whole post/left and pre/right strict-functoriality accumulation
+  rules for arbitrary ambient functors are retired. StrictFunctor profiles own
+  the guarded variants. Ambient internal action therefore retains the two
+  distinct compositor endpoint histories consumed by readable pseudo/lax maps.
 */
-unif_rule
-  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
-  ≡ @hom_postcomp_fapp0
-      $B $B $IdB $FX $GX $GY $Gg $epsilonX
-  ↪ [
-    $IdB ≡ (@id Cat_cat $B);
-    $FX ≡ (@fapp0 $A $B $F $X);
-    $GX ≡ (@fapp0 $A $B $G $X);
-    $GY ≡ (@fapp0 $A $B $G $Y);
-    $Gg ≡ (@fapp1_fapp0 $A $B $G $X $Y $g);
-    $epsilonX ≡ (@tapp0_fapp0 $A $B $F $G $X $epsilon)
-  ];
 
-unif_rule
-  @tapp1_fapp0 $A $B $F $G $X $Y $epsilon $g
-  ≡ @hom_precomp_along_fapp0
-      $B $B $IdB $GY $FX $FY $Fg $epsilonY
-  ↪ [
-    $IdB ≡ (@id Cat_cat $B);
-    $GY ≡ (@fapp0 $A $B $G $Y);
-    $FX ≡ (@fapp0 $A $B $F $X);
-    $FY ≡ (@fapp0 $A $B $F $Y);
-    $Fg ≡ (@fapp1_fapp0 $A $B $F $X $Y $g);
-    $epsilonY ≡ (@tapp0_fapp0 $A $B $F $G $Y $epsilon)
-  ];
+// Capped pre/right strict naturality has moved to the same full profile.
 
-// Cat-valued object-level projections of strict naturality. Both composites
-// fold to the off-diagonal component at the base arrow.
-//
-// Surface/formula:
-//   D[p](eta[x](u)) ↪ eta[p](u)
-//   eta[y](E[p](u)) ↪ eta[p](u).
-//
-// Keep the outer `fapp0` source/target categories implicit. The explicit
-// arguments below are the stable ordinary action/component heads themselves,
-// not reducible fibre-category expressions.
-rule fapp0
-      (@fapp1_fapp0 $K Cat_cat $D $x $y $p)
-      (fapp0 (@tapp0_fapp0 $K Cat_cat $E $D $x $eta) $u)
-  ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
-
-// Target-component route of Cat-valued naturality joins the same off-diagonal action.
-rule fapp0
-      (@tapp0_fapp0 $K Cat_cat $E $D $y $eta)
-      (fapp0 (@fapp1_fapp0 $K Cat_cat $E $x $y $p) $u)
-  ↪ fapp0 (@tapp1_fapp0 $K Cat_cat $E $D $x $y $eta $p) $u;
+/*
+  The former proof-time stable-head readings of post/left and pre/right are now
+  both profile-guarded in `emdash3_2_gray_profiles.lp`. Ambient off-diagonal
+  action retains both represented histories and the existing directed cells.
+*/
+// Both Cat-valued object projections are likewise profile-guarded.
 
 // -------------------------------------------------------------------------------------------------
 // 7. Product functor packages, evaluation, curry, and ordinary internal action
@@ -15304,89 +15105,10 @@ rule @tdapp0_fapp0
           $k
           (sigma_Snd $theta)));
 
-// Projection-order join for pre/right naturality when the source functor is
-// Cat-valued component evaluation. The generic `fapp1_fapp0` component has
-// already projected to `tdapp0_fapp0` on the right cut.
-// Keep the outer category inferred: a product-valued target fibre can reduce
-// `Functor_cat(X,A×B)` before this projection-order bridge is selected. Share
-// that inferred head with the ordinary component's codomain.
-rule @comp_fapp0
-      $B _ _ _
-      (@tapp1_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $B
-        (@tapp0_func $K Cat_cat $E $D $z)
-        $G
-        $GG $HH $epsilon $f)
-      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
-  ↪ @tapp1_fapp0
-      (@Transf_cat $K Cat_cat $E $D)
-      $B
-      (@tapp0_func $K Cat_cat $E $D $z)
-      $G
-      $FF $HH $epsilon
-      (@comp_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $FF $GG $HH $f $g);
-
-// Projection-order join for post/left naturality when the target functor is
-// Cat-valued component evaluation. The generic `fapp1_fapp0` component has
-// already projected to `tdapp0_fapp0` on the left cut.
-// Keep and share the outer category for the same product-target reason.
-rule @comp_fapp0
-      $B _ _ _
-      (@tdapp0_fapp0 $K $E $D $GG $HH $z $g)
-      (@tapp1_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $B
-        $F
-        (@tapp0_func $K Cat_cat $E $D $z)
-        $FF $GG $epsilon $f)
-  ↪ @tapp1_fapp0
-      (@Transf_cat $K Cat_cat $E $D)
-      $B
-      $F
-      (@tapp0_func $K Cat_cat $E $D $z)
-      $FF $HH $epsilon
-      (@comp_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $FF $GG $HH $g $f);
-
-// Identity-base degeneration of the pre/right bridge. If the off-diagonal
-// component reduces first, `tapp1(epsilon,id)` has become `tapp0(epsilon)`.
-rule @comp_fapp0
-      $B _ _ _
-      (@tapp0_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $B
-        (@tapp0_func $K Cat_cat $E $D $z)
-        $G
-        $GG $epsilon)
-      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
-  ↪ @tapp1_fapp0
-      (@Transf_cat $K Cat_cat $E $D)
-      $B
-      (@tapp0_func $K Cat_cat $E $D $z)
-      $G
-      $FF $GG $epsilon $g;
-
-// Identity-base degeneration of the post/left bridge.
-rule @comp_fapp0
-      $B _ _ _
-      (@tdapp0_fapp0 $K $E $D $FF $GG $z $g)
-      (@tapp0_fapp0
-        (@Transf_cat $K Cat_cat $E $D)
-        $B
-        $F
-        (@tapp0_func $K Cat_cat $E $D $z)
-        $FF $epsilon)
-  ↪ @tapp1_fapp0
-      (@Transf_cat $K Cat_cat $E $D)
-      $B
-      $F
-      (@tapp0_func $K Cat_cat $E $D $z)
-      $FF $GG $epsilon $g;
-
+// The former pre/right, post/left, and identity-base component-evaluation
+// naturality cuts are retired. Projecting a displayed component does not make
+// an arbitrary outer transfor strict; its existing laxity cells remain the
+// comparison owners.
 
 // Object-component projection for generic Sigma-total uncurrying.
 rule @tapp0_fapp0
@@ -15548,17 +15270,13 @@ symbol functord_transport_rhs_tele_func [K : Cat] [E D : τ (Catd K)]
     (@fapp1_func K Cat_cat E x y);
 
 /*
-  Proof-time whole strict naturality.  These two comparisons join the
-  identity-specialized projection-order peaks without orienting a second
-  runtime normal form:
+  Ambient lax source-action reading:
 
     (p |-> D[p] o FF[x]) = tapp1_func(FF,x,y)
-    (p |-> FF[y] o E[p]) = tapp1_func(FF,x,y).
 
-  The raw stable hom-action heads are intentional unification discriminators;
-  the readable `*_tele_func` symbols above are transparent presentations of
-  these exact terms.  Future genuinely lax displayed transformations must use
-  a distinct classifier rather than weakening this strict `Functord` facade.
+  The existing laxity cell starts at this route and points to
+  `(p |-> FF[y] o E[p])`. The target/right comparison is no longer generic;
+  `StrictFunctord` owns its guarded reading.
 */
 unif_rule
   @tapp1_func $K Cat_cat $E $D $x $y $FF
@@ -15570,18 +15288,7 @@ unif_rule
     (@fapp1_func $K Cat_cat $D $x $y)
   ↪ [ tt ≡ tt ];
 
-unif_rule
-  @tapp1_func $K Cat_cat $E $D $x $y $FF
-  ≡ @comp_fapp0 Cat_cat _ _ _
-    (@hom_postcomp_func
-      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-      _ _ _
-      (@tapp0_fapp0 $K Cat_cat $E $D $y $FF))
-    (@fapp1_func $K Cat_cat $E $x $y)
-  ↪ [ tt ≡ tt ];
-
-// First-class whole path for the left presentation, justified by the
-// proof-time comparison above.
+// First-class whole path for the ambient left/source presentation.
 symbol functord_transport_lhs_tele_agrees
   [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -15599,25 +15306,6 @@ symbol functord_transport_lhs_tele_agrees
       (@Hom_cat K x y)
       (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
     (@functord_transport_lhs_tele_func K E D FF x y);
-
-// First-class whole path for the right presentation.
-symbol functord_transport_rhs_tele_agrees
-  [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  (x y : τ (Obj K))
-  : τ (@=
-      (Hom
-        Cat_cat
-        (@Hom_cat K x y)
-        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
-      (@functord_transport_rhs_tele_func K E D FF x y)
-      (@tapp1_func K Cat_cat E D x y FF))
-≔ @eq_refl
-    (Hom
-      Cat_cat
-      (@Hom_cat K x y)
-      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
-    (@functord_transport_rhs_tele_func K E D FF x y);
 
 // Internalized-x coherence route: first apply FF at x, then transport in D.
 //
@@ -15651,8 +15339,7 @@ symbol functord_transport_rhs_func [K : Cat] [E D : τ (Catd K)]
     (@Fibre_func K E D FF y)
     (@catd_transport_func K E x y p);
 
-// Evaluate the whole left strict-naturality path at p.  This derives the
-// fixed-arrow equality; it is not a separate naturality-square axiom.
+// Evaluate the whole ambient left/source path at p.
 symbol functord_transport_lhs_agrees
   [K : Cat] [E D : τ (Catd K)]
   (FF : τ (Functord E D))
@@ -15680,55 +15367,9 @@ symbol functord_transport_lhs_agrees
     (@tapp1_func K Cat_cat E D x y FF)
     (@functord_transport_lhs_tele_agrees K E D FF x y);
 
-// Evaluate the whole right strict-naturality path at p.
-symbol functord_transport_rhs_agrees
-  [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  : τ (@=
-      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-      (@functord_transport_rhs_func K E D FF x y p)
-      (@functord_transport_func K E D FF x y p))
-≔ @eq_ap
-    (Hom
-      Cat_cat
-      (@Hom_cat K x y)
-      (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
-    (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-    (λ H : τ (Hom
-        Cat_cat
-        (@Hom_cat K x y)
-        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))),
-      @fapp0
-        (@Hom_cat K x y)
-        (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-        H p)
-    (@functord_transport_rhs_tele_func K E D FF x y)
-    (@tapp1_func K Cat_cat E D x y FF)
-    (@functord_transport_rhs_tele_agrees K E D FF x y);
-
-// Readable strict naturality path between the two fixed-arrow routes.
-symbol functord_transport_strict_naturality
-  [K : Cat] [E D : τ (Catd K)]
-  (FF : τ (Functord E D))
-  [x y : τ (Obj K)]
-  (p : τ (Hom K x y))
-  : τ (@=
-      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-      (@functord_transport_lhs_func K E D FF x y p)
-      (@functord_transport_rhs_func K E D FF x y p))
-≔ @eq_trans
-    (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-    (@functord_transport_lhs_func K E D FF x y p)
-    (@functord_transport_func K E D FF x y p)
-    (@functord_transport_rhs_func K E D FF x y p)
-    (@functord_transport_lhs_agrees K E D FF x y p)
-    (@eq_sym
-      (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-      (@functord_transport_rhs_func K E D FF x y p)
-      (@functord_transport_func K E D FF x y p)
-      (@functord_transport_rhs_agrees K E D FF x y p));
+// The former generic target/right equality and derived strict-naturality path
+// are retired. Ambient code consumes `functord_laxity_transf`; strict code uses
+// the evidence-bearing paths in `emdash3_2_gray_profiles.lp`.
 
 // 16b. Identity-specialized displayed hom action and Sigma-map action
 /*
@@ -16265,6 +15906,80 @@ rule @tapp0_fapp0 _ _ _ _ (Struct_sigma $a $u)
     (@fdapp1_int_cell _ _ _
       (@tapp1_at_transf _ _ _ _ $E (@sigma_pullback_total_transf $A $K $F))
        $E $D $FF (@id (@Catd_cat $K) $E))
+  ↪ @id (@Sigma_cat $K $D)
+      (Struct_sigma (@fapp0 $A $K $F $a)
+        (@fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a))
+          (@Fibre_cat $K $D (@fapp0 $A $K $F $a))
+          (@Fibre_func $K $E $D $FF (@fapp0 $A $K $F $a)) $u));
+
+// Object observation of the canonical Sigma base-change pre-route.
+// The whole represented precomposition and its higher action stay intact.
+rule @fapp0 _ _
+    (@hom_precomp_along_fapp0 _ Cat_cat
+      (@comp_fapp0 Cat_cat _ _ Cat_cat
+        (@Sigma_func $A) (@Pullback_catd_func $A $K $F))
+      _ $E $D $FF (@sigma_pullback_total_func $A $K $F $D))
+    (Struct_sigma $a $u)
+  ↪ Struct_sigma (@fapp0 $A $K $F $a)
+      (@fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a))
+        (@Fibre_cat $K $D (@fapp0 $A $K $F $a))
+        (@Fibre_func $K $E $D $FF (@fapp0 $A $K $F $a)) $u);
+
+// Constant-target product observations of the same canonical pre-route.
+// Product projection may occur before object application. These capped
+// companions retain the whole pre-route and do not equate its higher action
+// with the post-route or install a generic product/precomposition fold.
+rule @fapp0 _ $K
+    (@sigma_Fst _ _
+    (@hom_precomp_along_fapp0 _ Cat_cat
+      (@comp_fapp0 Cat_cat _ _ Cat_cat
+        (@Sigma_func $A) (@Pullback_catd_func $A $K $F))
+      _ $E (@Const_catd $K $C) _
+      (@sigma_pullback_total_func $A $K $F (@Const_catd $K $C))))
+    (@Struct_sigma (Obj $A) _ $a _)
+  ↪ @fapp0 $A $K $F $a;
+rule @fapp0 _ $C
+    (@sigma_Snd _ _
+    (@hom_precomp_along_fapp0 _ Cat_cat
+      (@comp_fapp0 Cat_cat _ _ Cat_cat
+        (@Sigma_func $A) (@Pullback_catd_func $A $K $F))
+      _ $E (@Const_catd $K $C) $FF
+      (@sigma_pullback_total_func $A $K $F (@Const_catd $K $C))))
+    (@Struct_sigma (Obj $A) (λ b : τ (Obj $A), Obj (@fapp0 $K.[] Cat_cat $E.[] (@fapp0 $A.[] $K.[] $F.[] b))) $a $u)
+  ↪ @fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a)) $C
+      (@Fibre_func $K $E (@Const_catd $K $C) $FF (@fapp0 $A $K $F $a)) $u;
+
+// Identity base map exposes the un-reindexed typed input family.
+rule @fapp0 _ $C
+    (@sigma_Snd _ _
+    (@hom_precomp_along_fapp0 _ Cat_cat
+      (@comp_fapp0 Cat_cat _ _ Cat_cat
+        (@Sigma_func $K) (@Pullback_catd_func $K $K (@id Cat_cat $K)))
+      _ $E (@Const_catd $K $C) $FF
+      (@sigma_pullback_total_func $K $K (@id Cat_cat $K) (@Const_catd $K $C))))
+    (@Struct_sigma (Obj $K) (λ b : τ (Obj $K), Obj (@fapp0 $K.[] Cat_cat $E.[] b)) $a $u)
+  ↪ @fapp0 (@Fibre_cat $K $E (@fapp0 $K $K (@id Cat_cat $K) $a)) $C
+      (@Fibre_func $K $E (@Const_catd $K $C) $FF (@fapp0 $K $K (@id Cat_cat $K) $a)) $u;
+
+// Constant source family exposes its literal fibre before this projection.
+rule @fapp0 _ $C
+    (@sigma_Snd _ _
+    (@hom_precomp_along_fapp0 _ Cat_cat
+      (@comp_fapp0 Cat_cat _ _ Cat_cat
+        (@Sigma_func $A) (@Pullback_catd_func $A $K $F))
+      _ (@Const_catd $K $B) (@Const_catd $K $C) $FF
+      (@sigma_pullback_total_func $A $K $F (@Const_catd $K $C))))
+    (@Struct_sigma (Obj $A) (λ _ : τ (Obj $A), Obj $B.[]) $a $u)
+  ↪ @fapp0 (@Fibre_cat $K (@Const_catd $K $B) (@fapp0 $A $K $F $a)) $C
+      (@Fibre_func $K (@Const_catd $K $B) (@Const_catd $K $C) $FF (@fapp0 $A $K $F $a)) $u;
+
+// Canonical pre/base-change-cell component, paired with the post component
+// above. This is a component normality rule, not a whole strictness claim.
+// The target identity is the diagonal argument of the contravariant owner.
+rule @tapp0_fapp0 _ _ _ _ (Struct_sigma $a $u)
+    (@fdapp1_int_cell _ _ _
+      (@tapp1_con_at_transf _ _ _ _ (@sigma_pullback_total_transf $A $K $F) $D)
+       $D $E $FF (@id (@Catd_cat $K) $D))
   ↪ @id (@Sigma_cat $K $D)
       (Struct_sigma (@fapp0 $A $K $F $a)
         (@fapp0 (@Fibre_cat $K $E (@fapp0 $A $K $F $a))
@@ -18356,7 +18071,8 @@ rule @Op_prof
   Fixed-endpoint opposite profunctor functor.
 
   This is the fixed vertical action of object-level profunctor duality.
-  Identity and composition are inherited from the generic functor calculus.
+  Ambient normal-lax identity is inherited from the generic functor calculus;
+  composition is retained by the guarded named owner below.
 */
 injective symbol Op_prof_func [A B : Cat]
   : τ (Functor
@@ -18366,6 +18082,20 @@ injective symbol Op_prof_func [A B : Cat]
 // Object action of the fixed-endpoint duality functor.
 rule @fapp0 _ _ (@Op_prof_func $A $B) $R
   ↪ @Op_prof $A $B $R;
+
+// Named direct strict composition owner for fixed-endpoint
+// profunctor duality. Op_prof_func is the complete semantic discriminator.
+rule @comp_fapp0
+      _ _ _ _
+      (@fapp1_fapp0 _ _ (@Op_prof_func $A $B) $Q $R $s)
+      (@fapp1_fapp0 _ _ (@Op_prof_func $A $B) $P $Q $r)
+  ↪ @fapp1_fapp0
+      (@Prof_cat $A $B)
+      (@Prof_cat (Op_cat $B) (Op_cat $A))
+      (@Op_prof_func $A $B)
+      $P $R
+      (@comp_fapp0 (@Prof_cat $A $B) $P $Q $R $s $r);
+
 
 // Proof-time semantic view: object duality is pullback along product swap.
 unif_rule
@@ -19009,18 +18739,6 @@ symbol prof_comparison_comp
   : τ (ProfComparison P R)
 ≔ @defiso_comp (@Prof_cat A B) P Q R j i;
 
-// Functorial image of a comparison, inherited from `defiso_fmap`.
-symbol prof_comparison_fmap
-  [A B A' B' : Cat]
-  (F : τ (Functor (Prof_cat A B) (Prof_cat A' B')))
-  [P Q : τ (Prof A B)]
-  (i : τ (ProfComparison P Q))
-  : τ (ProfComparison (fapp0 F P) (fapp0 F Q))
-≔ @defiso_fmap
-    (@Prof_cat A B)
-    (@Prof_cat A' B')
-    F P Q i;
-
 // Reindexing along identity endpoint functors is neutral. This rule is added
 // here because tensor reindexing below exposes identity reindexing at the
 // unchanged middle endpoint.
@@ -19214,6 +18932,7 @@ rule @comp_fapp0
         $R $S $T
         $s $r)
       $F $G;
+
 
 // Reindexed DefIso cancellation under represented postcomposition.
 rule @hom_postcomp_fapp0
@@ -19688,8 +19407,9 @@ rule @Prof_reindex
       Prof(A,X) x Prof(B,X)^op -> Prof(A,B).
 
   Product identity projections compute for arbitrary product objects, so the
-  direct product-domain presentation inherits the generic strict-functor
-  identity law without requiring a visible Struct_sigma constructor.
+  direct product-domain presentation inherits ambient normal-lax identity
+  without requiring a visible Struct_sigma constructor. Its named composition
+  owner below preserves the intended strict mixed action.
 */
 symbol Prof_imply_cov_func2 [A B X : Cat]
   : τ (Functor
@@ -19707,6 +19427,28 @@ rule @fapp0
       $A $B $X
       (sigma_Fst $oq)
       (sigma_Snd $oq);
+
+// Named direct strict composition owner for mixed-variance
+// profunctor implication.
+rule @comp_fapp0
+      _ _ _ _
+      (@fapp1_fapp0
+        _ _ (@Prof_imply_cov_func2 $A $B $X) $oq1 $oq2 $r12)
+      (@fapp1_fapp0
+        _ _ (@Prof_imply_cov_func2 $A $B $X) $oq0 $oq1 $r01)
+  ↪ @fapp1_fapp0
+      (Product_cat
+        (@Prof_cat $A $X)
+        (Op_cat (@Prof_cat $B $X)))
+      (@Prof_cat $A $B)
+      (@Prof_imply_cov_func2 $A $B $X)
+      $oq0 $oq2
+      (@comp_fapp0
+        (Product_cat
+          (@Prof_cat $A $X)
+          (Op_cat (@Prof_cat $B $X)))
+        $oq0 $oq1 $oq2 $r12 $r01);
+
 
 // Insert a varying O beside the fixed contravariant weight Q.
 symbol Prof_imply_cov_fixed_weight_func [A B X : Cat]
@@ -19726,8 +19468,8 @@ symbol Prof_imply_cov_fixed_weight_func [A B X : Cat]
 /*
   Fixed-weight implication is the semantic specialization of the mixed
   functor along O |-> (O,Q). The semantic definition is kept opaque so its
-  generic fapp1 identity/composition cuts remain visible before the product
-  pipeline unfolds.
+  normal-lax identity and guarded named composition owner remain visible before
+  the product pipeline unfolds.
 */
 symbol Prof_imply_cov_func [A B X : Cat]
   (Q : τ (Prof B X))
@@ -19750,6 +19492,21 @@ rule fapp0
       (@Prof_imply_cov_func $A $B $X $Q)
       $O
   ↪ @Prof_imply_cov $A $B $X $O $Q;
+
+// Named direct strict composition owner for the opaque
+// fixed-weight implication functor.
+rule @comp_fapp0
+      _ _ _ _
+      (@fapp1_fapp0
+        _ _ (@Prof_imply_cov_func $A $B $X $Q) $O1 $O2 $o12)
+      (@fapp1_fapp0
+        _ _ (@Prof_imply_cov_func $A $B $X $Q) $O0 $O1 $o01)
+  ↪ @fapp1_fapp0
+      (@Prof_cat $A $X) (@Prof_cat $A $B)
+      (@Prof_imply_cov_func $A $B $X $Q)
+      $O0 $O2
+      (@comp_fapp0 (@Prof_cat $A $X) $O0 $O1 $O2 $o12 $o01);
+
 
 /*
   Vertical covariant closed core.
@@ -19904,66 +19661,6 @@ symbol IsWeightedLimit_cov_comp
     (@WeightedCone_prof B J J' F W)
     (@Hom_prof J' B L);
 
-// Forward universal operation after reindexing the limit comparison along M.
-symbol weighted_limit_cov_push
-  [B J J' : Cat]
-  [F : τ (Functor J B)]
-  [W : τ (Prof J' J)]
-  [L : τ (Functor J' B)]
-  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
-  [I : Cat]
-  (M : τ (Functor I B))
-  [R : τ (Prof I J')]
-  (r : τ (ProfMap
-      R
-      (@Prof_imply_cov
-        I J' J
-        (@Hom_prof_along I J B M F)
-        W)))
-  : τ (ProfMap R (@Hom_prof_along I J' B M L))
-≔ @prof_comparison_push
-    I J'
-    _
-    _
-    (@prof_comparison_fmap
-      B J' I J'
-      (@Prof_reindex_func B I J' J' M (@id_func J'))
-      _
-      _
-      isl)
-    R
-    r;
-
-// Inverse universal operation after reindexing the limit comparison along M.
-symbol weighted_limit_cov_pull
-  [B J J' : Cat]
-  [F : τ (Functor J B)]
-  [W : τ (Prof J' J)]
-  [L : τ (Functor J' B)]
-  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
-  [I : Cat]
-  (M : τ (Functor I B))
-  [R : τ (Prof I J')]
-  (s : τ (ProfMap R (@Hom_prof_along I J' B M L)))
-  : τ (ProfMap
-      R
-      (@Prof_imply_cov
-        I J' J
-        (@Hom_prof_along I J B M F)
-        W))
-≔ @prof_comparison_pull
-    I J'
-    _
-    _
-    (@prof_comparison_fmap
-      B J' I J'
-      (@Prof_reindex_func B I J' J' M (@id_func J'))
-      _
-      _
-      isl)
-    R
-    s;
-
 /*
   Computational adjunction/profunctor mate.
 
@@ -19990,179 +19687,6 @@ injective symbol Adjunction_hom_prof_comparison
         A B A
         (@id_func A)
         Radj));
-
-// Reindexed adjunction mate: Hom_B(LM,F) ≃ Hom_A(M,RF).
-symbol Adjunction_hom_prof_comparison_along
-  [A B : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  (adj : τ (@Adjunction A B Ladj Radj))
-  [I K : Cat]
-  (M : τ (Functor I A))
-  (F : τ (Functor K B))
-  : τ (ProfComparison
-      (@Hom_prof_along
-        I K B
-        (@comp_cat_fapp0
-          I A B
-          Ladj
-          M)
-        F)
-      (@Hom_prof_along
-        I K A
-        M
-        (@comp_cat_fapp0
-          K B A
-          Radj
-          F)))
-≔ @prof_comparison_fmap
-    A B I K
-    (@Prof_reindex_func A I B K M F)
-    _
-    _
-    (@Adjunction_hom_prof_comparison A B Ladj Radj adj);
-
-/*
-  Computational right-adjoint preservation.
-
-  This parallel API composes three certified comparisons:
-
-    1. the inverse adjunction mate through fixed-weight implication;
-    2. the given weighted-limit comparison reindexed along the left adjoint;
-    3. the adjunction mate at the candidate limit.
-
-  Its beta/eta laws are inherited from `prof_comparison_push/pull`; no
-  theorem-specific fold or cancellation rule is added to ordinary equipment
-  composition.
-*/
-symbol right_adjoint_weighted_limit_comp_step1
-  [B J J' A : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  [W : τ (Prof J' J)]
-  [F : τ (Functor J B)]
-  (adj : τ (@Adjunction A B Ladj Radj))
-  : τ (ProfComparison
-      (@Prof_imply_cov
-        A J' J
-        (@Hom_prof
-          J A
-          (@comp_cat_fapp0
-            J B A
-            Radj
-            F))
-        W)
-      (@Prof_imply_cov
-        A J' J
-        (@Hom_prof_along
-          A J B
-          Ladj
-          F)
-        W))
-≔ @prof_comparison_fmap
-    A J A J'
-    (@Prof_imply_cov_func A J' J W)
-    _
-    _
-    (@prof_comparison_sym
-      A J
-      _
-      _
-      (@Adjunction_hom_prof_comparison_along
-        A B Ladj Radj adj
-        A J
-        (@id_func A)
-        F));
-
-// Preservation step 2: reindex the supplied weighted-limit comparison along L.
-symbol right_adjoint_weighted_limit_comp_step2
-  [B J J' A : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  [W : τ (Prof J' J)]
-  [F : τ (Functor J B)]
-  [L : τ (Functor J' B)]
-  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
-  (adj : τ (@Adjunction A B Ladj Radj))
-  : τ (ProfComparison
-      (@Prof_imply_cov
-        A J' J
-        (@Hom_prof_along
-          A J B
-          Ladj
-          F)
-        W)
-      (@Hom_prof_along
-        A J' B
-        Ladj
-        L))
-≔ @prof_comparison_fmap
-    B J' A J'
-    (@Prof_reindex_func
-      B A J' J'
-      Ladj
-      (@id_func J'))
-    _
-    _
-    isl;
-
-// Preservation step 3: apply the adjunction mate to the candidate limit L.
-symbol right_adjoint_weighted_limit_comp_step3
-  [B J J' A : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  [L : τ (Functor J' B)]
-  (adj : τ (@Adjunction A B Ladj Radj))
-  : τ (ProfComparison
-      (@Hom_prof_along
-        A J' B
-        Ladj
-        L)
-      (@Hom_prof
-        J' A
-        (@comp_cat_fapp0
-          J' B A
-          Radj
-          L)))
-≔ @Adjunction_hom_prof_comparison_along
-    A B Ladj Radj adj
-    A J'
-    (@id_func A)
-    L;
-
-// Composite certificate that a right adjoint preserves the weighted limit.
-symbol right_adjoint_preserves_weighted_limit_cov_comp
-  [B J J' A : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  [W : τ (Prof J' J)]
-  [F : τ (Functor J B)]
-  [L : τ (Functor J' B)]
-  (isl : τ (@IsWeightedLimit_cov_comp B J J' F W L))
-  (adj : τ (@Adjunction A B Ladj Radj))
-  : τ (@IsWeightedLimit_cov_comp
-      A J J'
-      (@comp_cat_fapp0
-        J B A
-        Radj
-        F)
-      W
-      (@comp_cat_fapp0
-        J' B A
-        Radj
-        L))
-≔ @prof_comparison_comp
-    A J'
-    _ _ _
-    (@right_adjoint_weighted_limit_comp_step3
-      B J J' A Ladj Radj L adj)
-    (@prof_comparison_comp
-      A J'
-      _ _ _
-      (@right_adjoint_weighted_limit_comp_step2
-        B J J' A Ladj Radj W F L isl adj)
-      (@right_adjoint_weighted_limit_comp_step1
-        B J J' A Ladj Radj W F adj));
 
 /*
   Contravariant weighted colimits by duality.
@@ -20220,40 +19744,6 @@ symbol Op_weighted_colimit_con
       (@Op_prof J J' W)
       (@Op_func J' B L))
 ≔ isc;
-
-/*
-  Left adjoints preserve weighted colimits.
-
-  Applying right-adjoint preservation to Op_adjunction(adj) makes its right
-  adjoint Op(left(adj)), so the result is definitionally the desired colimit
-  witness after Op_func distributes over composition.
-*/
-symbol left_adjoint_preserves_weighted_colimit_con
-  [A J J' B : Cat]
-  [Ladj : τ (Functor A B)]
-  [Radj : τ (Functor B A)]
-  [F : τ (Functor J A)]
-  [W : τ (Prof J J')]
-  [L : τ (Functor J' A)]
-  (isc : τ (@WeightedColimit_con A J J' F W L))
-  (adj : τ (@Adjunction A B Ladj Radj))
-  : τ (@WeightedColimit_con
-      B J J'
-      (@comp_cat_fapp0 J A B Ladj F)
-      W
-      (@comp_cat_fapp0 J' A B Ladj L))
-≔ @right_adjoint_preserves_weighted_limit_cov_comp
-    (Op_cat A)
-    (Op_cat J)
-    (Op_cat J')
-    (Op_cat B)
-    (@Op_func B A Radj)
-    (@Op_func A B Ladj)
-    (@Op_prof J J' W)
-    (@Op_func J A F)
-    (@Op_func J' A L)
-    isc
-    (@Op_adjunction A B Ladj Radj adj);
 
 // 18k. Directed-inductive join and internally natural cross arrows
 
@@ -22343,6 +21833,8 @@ symbol EH_hcomp_right_unit
       beta)
 ≔ eq_refl beta;
 
+/* API-04V: the three interchange-dependent EH proofs move to the
+   profile layer. EH objects, operations and unit observations stay above.
 // First shared-middle equality for the Eckmann-Hilton chain:
 //   beta · alpha = beta * alpha.
 symbol EH_vcomp_to_shared_middle
@@ -22411,6 +21903,8 @@ symbol EH_comm
     (@EH_vcomp B x alpha beta)
     (@EH_vcomp_to_shared_middle B x alpha beta)
     (eq_sym (@EH_swapped_vcomp_to_shared_middle B x alpha beta));
+
+*/
 
 // -------------------------------------------------------------------------------------------------
 // 20. Equality-local category skeleton and restricted Core inclusion

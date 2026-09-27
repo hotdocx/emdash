@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* Native middle-column comparisons retain original inputs, H objects and inverse choices. */
 require open emdash.emdash3_2_commutative_algebra_freyd_native_middle_column_inputs;
 require open emdash.emdash3_2_one_cat_introduced_terminal_input_comparisons;
@@ -472,10 +473,10 @@ symbol freyd_raw_native_middle_column_homology_equiv [K : Cat] [R : τ CommRing]
   B2 D2 i2 p2 c2) (@freyd_raw_native_row_map K R A1 B1 D1 A2 B2 D2 i1 p1 i2 p2 a1 b1 d1 c1 c2 f1))
   (@freyd_raw_native_middle_column_input K R M A0 B0 D0 A1 B1 D1 A2 B2 D2 i0 p0 i1 p1 i2 p2 c0 c1 c2 a0 b0
   d0 a1 b1 d1 f0 f1 middle) x)
- (@omega_equiv_along_fapp1_fapp0 (@ZeroArrowCone_cat (@CommRingFreydPresentation_cat R)
+ (@one_cat_omega_equiv_fmap (@ZeroArrowCone_cat (@CommRingFreydPresentation_cat R)
   (@comm_ring_zero_presentation R) (@additive_terminal_object (@CommRingFreydPresentation_cat R)
   (@comm_ring_freyd_direct_sum_func R)
-  (@comm_ring_zero_presentation R) (@comm_ring_freyd_additive R))) (@CommRingFreydPresentation_cat R)
+  (@comm_ring_zero_presentation R) (@comm_ring_freyd_additive R))) (@CommRingFreydPresentation_cat R) (@comm_ring_freyd_cat_is_one_cat R)
   (@zero_arrow_cone_adjunction_homology_func (@CommRingFreydPresentation_cat R) (@additive_preadditive
   (@CommRingFreydPresentation_cat R) (@comm_ring_freyd_direct_sum_func R) (@comm_ring_zero_presentation R)
   (@comm_ring_freyd_additive R)) (@comm_ring_freyd_cat_is_one_cat R) (@comm_ring_zero_presentation R)

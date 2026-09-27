@@ -3,6 +3,8 @@
  */
 
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
 import {
     readFileSync
 } from 'node:fs';
@@ -111,6 +113,17 @@ const fixture = () => {
 describe('DISPLAYED-ND-HIGHER-TARGET-1A', () => {
     it('transfers exactly three opaque interfaces and two projections',
         () => {
+            const source = readFileSync(resolve(
+                __dirname, '..', 'emdash2', 'emdash3_2.lp'
+            ));
+            const sourceSha256 = 'sha256:' +
+                createHash('sha256').update(source).digest('hex');
+            for (const module of [
+                CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_TARGET_TRANSFER_MODULE,
+                CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_TARGET_RUNTIME_MODULE
+            ]) {
+                assert.equal(module.sourceSha256, sourceSha256);
+            }
             assert.deepEqual(
                 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_TARGET_TRANSFER_MODULE
                     .declarations.map(declaration =>
@@ -143,13 +156,13 @@ describe('DISPLAYED-ND-HIGHER-TARGET-1A', () => {
                         id:
                             'categorical.displayed-nd-higher.' +
                             'object-projection',
-                        ordinal: 1075
+                        ordinal: 1141
                     },
                     {
                         id:
                             'categorical.displayed-nd-higher.' +
                             'next-hom-projection',
-                        ordinal: 1077
+                        ordinal: 1143
                     }
                 ]
             );

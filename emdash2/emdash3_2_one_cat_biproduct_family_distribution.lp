@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_product_adjunction;
+require open emdash.emdash3_2_one_cat_functor_closure;
 require open emdash.emdash3_2_one_cat_adjunction_transpose_paths;
 require open emdash.emdash3_2_product_family_tuple_paths;
 require open emdash.emdash3_2_product_family_maps;
@@ -313,7 +315,7 @@ symbol one_cat_copair_postcompose_path [B C : Cat] (C1 : τ (IsNCat (cat_succ ca
   (Functor B C), Functor B C) F G)) (sigma_Snd (@fapp0 (Functor_cat B C) (Functor_cat B (Product_cat C C))
   (@comp_cat_cov_func B C (Product_cat C C) (@product_diagonal_func C)) Z0)))) f g))) (@one_cat_copair_family B C C1
   Prod t A T0 F G Z1 (@comp_fapp0 (Functor_cat B C) F Z0 Z1 a f) (@comp_fapp0 (Functor_cat B C) G Z0 Z1 a g))
-  (@untranspose_postcomp_path (Functor_cat B (Product_cat C C)) (Functor_cat B C) (@comp_cat_cov_func B (Product_cat C
+  (@one_cat_untranspose_postcomp_path (Functor_cat B (Product_cat C C)) (Functor_cat B C) (@one_cat_functor_category B C C1) (@comp_cat_cov_func B (Product_cat C
   C) C Prod) (@comp_cat_cov_func B C (Product_cat C C) (@product_diagonal_func C)) (@one_cat_postcomp_adjunction B
   (Product_cat C C) C (@one_cat_product_category C C C1 C1) C1 Prod (@product_diagonal_func C)
   (@one_cat_biproduct_adjunction C C1 Prod t A T0)) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C)
@@ -599,8 +601,8 @@ symbol one_cat_copair_source_path [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zer
   (Functor B C) (λ _ : τ (Functor B C), Functor B C) F1 G1)))), Obj (Hom_cat (Functor_cat B C) (sigma_Snd
   (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) F0 G0)) (sigma_Snd (@Struct_sigma (Functor B C) (λ
   _ : τ (Functor B C), Functor B C) F1 G1)))) a b))) (@one_cat_copair_family B C C1 Prod t A T0 F0 G0 Z (@comp_fapp0
-  (Functor_cat B C) F0 F1 Z f a) (@comp_fapp0 (Functor_cat B C) G0 G1 Z g b)) (@untranspose_precomp_path (Functor_cat
-  B (Product_cat C C)) (Functor_cat B C) (@comp_cat_cov_func B (Product_cat C C) C Prod) (@comp_cat_cov_func B C
+  (Functor_cat B C) F0 F1 Z f a) (@comp_fapp0 (Functor_cat B C) G0 G1 Z g b)) (@one_cat_untranspose_precomp_path (Functor_cat
+  B (Product_cat C C)) (Functor_cat B C) (@one_cat_functor_category B C C1) (@comp_cat_cov_func B (Product_cat C C) C Prod) (@comp_cat_cov_func B C
   (Product_cat C C) (@product_diagonal_func C)) (@one_cat_postcomp_adjunction B (Product_cat C C) C
   (@one_cat_product_category C C C1 C1) C1 Prod (@product_diagonal_func C) (@one_cat_biproduct_adjunction C C1 Prod t
   A T0)) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) F0 G0) (@Struct_sigma (Functor B C) (λ _ :

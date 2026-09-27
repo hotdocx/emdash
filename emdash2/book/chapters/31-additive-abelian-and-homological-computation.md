@@ -880,8 +880,9 @@ Several boundaries remain explicit:
   successful matrix tests. The supplied semantic contracts remain visible.
 - General categorical terminality and higher coherence require their own
   refinement beyond the current ordinary-target presentation.
-- The higher Op/duality and strictness-profile migration belongs to a
-  separate development. No general higher-duality repair is claimed here.
+- Action-profile integration preserves the whole ordinary constructions and
+  their actual OneCat, model and interpretation contracts. Higher Op/duality
+  repair remains a separate development.
 - Categories of unbounded or derived complexes and further derived or stable
   constructions are outside the implemented boundary of this chapter.
 

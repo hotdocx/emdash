@@ -36,7 +36,8 @@ class NativeGcProfileTests(unittest.TestCase):
         for name in ["check_profile.py", "check_registry.py"]:
             shutil.copyfile(SCRIPTS / name, scripts / name)
         registry = json.loads((SCRIPTS.parent / "checks.json").read_text())
-        names = sorted({path for targets in registry["profileTargets"].values() for path in targets})
+        names = sorted({path for targets in registry["profileTargets"].values() for path in targets}
+                       | set(registry.get("targetProfileOverrides", {})))
         registry.update(core=[name for name in names if not name.startswith("examples/")],
                         reviewers=[name for name in names if name.startswith("examples/")],
                         check=[], priority=[], isolatedGroups=[])
@@ -59,7 +60,15 @@ class NativeGcProfileTests(unittest.TestCase):
         rows = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
         self.assertEqual({Path(row["args"][0]) for row in rows}, metrics.NATIVE_SIX_TERM_GC_CHECK_FILES)
         self.assertEqual(len(rows), 8)
-        self.assertTrue(all(row["gc"] == "o=20" for row in rows))
+        measured_overrides = {
+            "emdash3_2_one_cat_native_snake_six_term_result.lp",
+            "examples/one_cat_native_snake_six_term_data.lp",
+            "examples/one_cat_native_snake_six_term_inputs.lp",
+            "examples/one_cat_native_snake_six_term_result.lp",
+        }
+        for row in rows:
+            expected = "o=20,v=1024" if row["args"][0] in measured_overrides else "o=20"
+            self.assertEqual(row["gc"], expected)
 
     def test_selected_target_and_explicit_profile(self):
         target = "examples/one_cat_native_snake_six_term_inputs.lp"

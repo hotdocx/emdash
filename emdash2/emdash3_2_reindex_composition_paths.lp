@@ -1,12 +1,10 @@
 require open emdash.emdash3_2_one_cat_whiskering_paths;
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 
 /* Native reindexing composition and its retained whole Hom action. */
 
-// The existing Cat composition normal form associates left before comparison.
-unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat) $C $A $D
-    (@comp_fapp0 Cat_cat $A $B $D $U $V) $F
-  ≡ @comp_fapp0 Cat_cat $A $B $C (@comp_fapp0 Cat_cat $B $D $C $F $U) $V
-  ↪ [ tt ≡ tt ];
+// Represented precomposition associativity is owned by the shared family views.
 
 // Stage generic Hom action before concrete precomposition functors accumulate.
 symbol functor_hom_comp_path [A B C : Cat]
@@ -92,7 +90,8 @@ symbol prewhisker_identity_path [A B C : Cat]
 ≔ @fapp1_id_path (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C U) X;
 
 // Generic functoriality of whole restriction, with its ordinary raw parent view.
-symbol prewhisker_comp_path [A B C : Cat] (U : τ (Functor A B))
+symbol prewhisker_comp_path [A B C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) (U : τ (Functor A B))
   (X Y Z : τ (Functor B C)) (f : τ (@Transf B C X Y)) (g : τ (@Transf B C Y Z))
   : τ (@= (@Transf A C (@comp_cat_fapp0 A B C X U) (@comp_cat_fapp0 A B C Z U))
       (@fapp0 _ _ (@comp_cat_con_fapp1_func A B C U X Z) (@comp_fapp0 (Functor_cat B C) X Y Z g f))
@@ -100,4 +99,5 @@ symbol prewhisker_comp_path [A B C : Cat] (U : τ (Functor A B))
         (@comp_cat_fapp0 A B C Y U) (@comp_cat_fapp0 A B C Z U)
         (@fapp0 _ _ (@comp_cat_con_fapp1_func A B C U Y Z) g)
         (@fapp0 _ _ (@comp_cat_con_fapp1_func A B C U X Y) f)))
-≔ @fapp1_comp_path (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C U) X Y Z g f;
+≔ @one_cat_composition_path (Functor_cat B C) (Functor_cat A C)
+    (@one_cat_functor_category A C C1) (@comp_cat_con_func A B C U) X Y Z g f;

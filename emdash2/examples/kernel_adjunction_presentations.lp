@@ -15,7 +15,17 @@ assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   @fapp0 _ _ (@kernel_presentation_func C S t T W P) d ≡ @kernel_presentation_selected_object C S W d;
 
 // Nonidentity arrow comparison uses the actual chosen lift/colift.
-assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+assert [C : Cat] (S : τ (@PreadditiveCategory C)) (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
+  (P : τ (@KernelPresentation C S t T W))
+  (d0 d1 : τ (Functor WalkingArrow_cat C)) (eta : τ (@Transf WalkingArrow_cat C d0 d1)) ⊢
+  @kernel_presentation_map_path C S C1 t T W P d0 d1 eta
+  : τ (@= (Hom C (@kernel_presentation_selected_object C S W d0) (@kernel_presentation_selected_object C S W d1))
+      (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d1 eta)
+      (@kernel_presentation_map_semantic C S C1 W d0 d1 eta));
+
+// The comparison is a derived path, not the retired generic map-unifier.
+assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
   (P : τ (@KernelPresentation C S t T W))
   (d0 d1 : τ (Functor WalkingArrow_cat C)) (eta : τ (@Transf WalkingArrow_cat C d0 d1)) ⊢
@@ -23,16 +33,16 @@ assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
     (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d1 eta)
   : τ (@= (Hom C (@kernel_presentation_selected_object C S W d0) (@kernel_presentation_selected_object C S W d1))
       (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d1 eta)
-      (@kernel_presentation_map_semantic C S W d0 d1 eta));
+      (@kernel_presentation_map_semantic C S C1 W d0 d1 eta));
 
-// Runtime identity/composition remain the generic functor laws.
+// Normal identity is generic; composition requires the actual capability.
 assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
   (P : τ (@KernelPresentation C S t T W)) (d : τ (Functor WalkingArrow_cat C)) ⊢
   @fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d d (@id (Functor_cat WalkingArrow_cat C) d)
   ≡ @id C (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d);
 
-assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
+assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
   (P : τ (@KernelPresentation C S t T W)) (d0 d1 d2 : τ (Functor WalkingArrow_cat C))
   (eta : τ (@Transf WalkingArrow_cat C d0 d1)) (theta : τ (@Transf WalkingArrow_cat C d1 d2)) ⊢
@@ -40,6 +50,16 @@ assert [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
     (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d1 d2 theta) (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d1 eta)
   ≡ @fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d2
       (@comp_fapp0 (Functor_cat WalkingArrow_cat C) d0 d1 d2 theta eta);
+
+// The same raw whole functor has the qualified ordinary composition path.
+assert [C : Cat] (S : τ (@PreadditiveCategory C)) (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (W : τ (@HasComputationalKernels C S))
+  (P : τ (@KernelPresentation C S t T W)) (d0 d1 d2 : τ (Functor WalkingArrow_cat C))
+  (eta : τ (@Transf WalkingArrow_cat C d0 d1)) (theta : τ (@Transf WalkingArrow_cat C d1 d2)) ⊢
+  @eq_sym _ _ _ (@one_cat_composition_path (Functor_cat WalkingArrow_cat C) C C1 (@kernel_presentation_func C S t T W P) d0 d1 d2 theta eta)
+  : τ (@= (Hom C (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d0) (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d2)) (@comp_fapp0 C _ _ _
+    (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d1 d2 theta) (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d1 eta)) (@fapp1_fapp0 _ _ (@kernel_presentation_func C S t T W P) d0 d2
+      (@comp_fapp0 (Functor_cat WalkingArrow_cat C) d0 d1 d2 theta eta)));
 
 // An unrelated arrow of the same type is not accepted as the selected map.
 assertnot [C : Cat] (S : τ (@PreadditiveCategory C)) [t : τ (Obj C)]
@@ -123,3 +143,18 @@ assert (C : Cat) (t : τ (Obj C)) (T : τ (@TerminalObject C t))
       (@unit_adj_transf C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P) (@kernel_presentation_adjunction C S t T W P))
       f)
   ≡ comp_fapp0 (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) Y' Y g) f;
+
+// The higher statement uses actual profiles and does not assume OneCat.
+assert [C : Cat] [S : τ (@PreadditiveCategory C)]
+
+  [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
+  (P : τ (@KernelPresentation C S t T W))
+  [d0 d1 : τ (Functor WalkingArrow_cat C)] (eta : τ (@Transf WalkingArrow_cat C d0 d1))
+  (PE : τ (@IsStrictTransfor WalkingArrow_cat C d0 d1 eta))
+  (PI : τ (@IsStrictTransfor (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@kernel_presentation_inclusion C S t T W P))) ⊢
+  @profiled_kernel_presentation_map_path C S t T W P d0 d1 eta PE PI
+  : τ (@= (Hom C (@kernel_presentation_selected_object C S W d0)
+      (@kernel_presentation_selected_object C S W d1))
+      (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0 d1 eta)
+      (@profiled_kernel_presentation_map_semantic C S W d0 d1 eta PE))
+;

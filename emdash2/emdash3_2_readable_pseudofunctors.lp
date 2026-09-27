@@ -14,10 +14,10 @@
   internal action. No property wrapper, rule, or proof-time unifier is added.
 
   This capability is evidence over an already-existing ambient Functor; it is
-  not a separate lax-carrier classifier and does not disable the historical
-  global strict cuts. Conversely, those temporary cuts must not be used to
-  veto an intended lax consumer beta that otherwise passes its owner and
-  subject-reduction checks; their migration remains profile-local future work.
+  not a separate lax-carrier classifier. The former whole ambient
+  functoriality cuts are retired: two direct endpoint paths now expose
+  `F[g] o F[f]` and `F[g o f]` without identifying them. The remaining capped
+  and naturality migrations are separate owner families.
 */
 
 require open emdash.emdash3_2_gray_profiles;
@@ -58,45 +58,15 @@ symbol readable_pseudo_post_stable_action
     (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
 
 /*
-  Prototype endpoint adapter.
+  Direct endpoint observations after whole ambient functoriality migration.
 
-  The historical global strict-functoriality cut selects the stable action
-  `F[g o f]` before the formal left endpoint can expose `F[g] o F[f]`.
-  The path ladder below therefore returns through the typed equality view of
-  that temporary cut and then the stable postcomposition owner. It reframes an
-  already-extracted cell; it neither constructs the compositor nor claims that
-  generic lax endpoints remain noncollapsed. A later profile-local strict-cut
-  migration must replace this ladder by direct left/right internal-action
-  observations.
+  The intrinsic source is the general postcomposition owner
+  `postcomp_F(g)(F[f])`; the rigid proof-time bridge compares it directly with
+  the identity-family spelling of `F[g] o F[f]`. The intrinsic target is
+  `F[postcomp_id(g)(f)]`; equality action on the existing source-category
+  postcomposition path compares it with `F[g o f]`. Neither path identifies
+  those two endpoints with each other.
 */
-
-symbol readable_pseudo_post_formal_source_path
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y))
-  : τ (@=
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@strict_functor_compositor_lhs A B F X Y Z g f)
-      (@readable_pseudo_post_stable_action A B F X Y Z g f))
-≔ @eq_refl
-    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@strict_functor_compositor_lhs A B F X Y Z g f);
-
-symbol readable_pseudo_post_formal_target_path
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y))
-  : τ (@=
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@strict_functor_compositor_rhs A B F X Y Z g f)
-      (@readable_pseudo_post_stable_action A B F X Y Z g f))
-≔ @eq_refl
-    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@strict_functor_compositor_rhs A B F X Y Z g f);
 
 symbol readable_pseudo_post_stable_comp_path
   [A B : Cat]
@@ -117,58 +87,6 @@ symbol readable_pseudo_post_stable_comp_path
     (@path_pseudo_laxity_postcomp_comp_path
       A A (@id_func A) X Y Z g f);
 
-symbol readable_pseudo_post_comp_raw_path
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y))
-  : τ (@=
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@readable_pseudo_post_raw_target A B F X Y Z g f)
-      (@comp_fapp0
-        B
-        (@fapp0 A B F X)
-        (@fapp0 A B F Y)
-        (@fapp0 A B F Z)
-        (@fapp1_fapp0 A B F Y Z g)
-        (@fapp1_fapp0 A B F X Y f)))
-≔ @fapp1_comp_path A B F X Y Z g f;
-
-symbol readable_pseudo_post_raw_owner_path
-  [A B : Cat]
-  (F : τ (Functor A B))
-  [X Y Z : τ (Obj A)]
-  (g : τ (Hom A Y Z))
-  (f : τ (Hom A X Y))
-  : τ (@=
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@comp_fapp0
-        B
-        (@fapp0 A B F X)
-        (@fapp0 A B F Y)
-        (@fapp0 A B F Z)
-        (@fapp1_fapp0 A B F Y Z g)
-        (@fapp1_fapp0 A B F X Y f))
-      (@readable_pseudo_post_raw_source A B F X Y Z g f))
-≔ @eq_sym
-    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@readable_pseudo_post_raw_source A B F X Y Z g f)
-    (@comp_fapp0
-      B
-      (@fapp0 A B F X)
-      (@fapp0 A B F Y)
-      (@fapp0 A B F Z)
-      (@fapp1_fapp0 A B F Y Z g)
-      (@fapp1_fapp0 A B F X Y f))
-    (@path_pseudo_laxity_postcomp_comp_path
-      B B (@id_func B)
-      (@fapp0 A B F X)
-      (@fapp0 A B F Y)
-      (@fapp0 A B F Z)
-      (@fapp1_fapp0 A B F Y Z g)
-      (@fapp1_fapp0 A B F X Y f));
-
 symbol readable_pseudo_post_source_path
   [A B : Cat]
   (F : τ (Functor A B))
@@ -179,31 +97,9 @@ symbol readable_pseudo_post_source_path
       (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
       (@strict_functor_compositor_lhs A B F X Y Z g f)
       (@readable_pseudo_post_raw_source A B F X Y Z g f))
-≔ @eq_trans
+≔ @eq_refl
     (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@strict_functor_compositor_lhs A B F X Y Z g f)
-    (@readable_pseudo_post_stable_action A B F X Y Z g f)
-    (@readable_pseudo_post_raw_source A B F X Y Z g f)
-    (@readable_pseudo_post_formal_source_path A B F X Y Z g f)
-    (@eq_trans
-      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-      (@readable_pseudo_post_stable_action A B F X Y Z g f)
-      (@readable_pseudo_post_raw_target A B F X Y Z g f)
-      (@readable_pseudo_post_raw_source A B F X Y Z g f)
-      (@readable_pseudo_post_stable_comp_path A B F X Y Z g f)
-      (@eq_trans
-        (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-        (@readable_pseudo_post_raw_target A B F X Y Z g f)
-        (@comp_fapp0
-          B
-          (@fapp0 A B F X)
-          (@fapp0 A B F Y)
-          (@fapp0 A B F Z)
-          (@fapp1_fapp0 A B F Y Z g)
-          (@fapp1_fapp0 A B F X Y f))
-        (@readable_pseudo_post_raw_source A B F X Y Z g f)
-        (@readable_pseudo_post_comp_raw_path A B F X Y Z g f)
-        (@readable_pseudo_post_raw_owner_path A B F X Y Z g f)));
+    (@strict_functor_compositor_lhs A B F X Y Z g f);
 
 symbol readable_pseudo_post_target_path
   [A B : Cat]
@@ -215,13 +111,7 @@ symbol readable_pseudo_post_target_path
       (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
       (@strict_functor_compositor_rhs A B F X Y Z g f)
       (@readable_pseudo_post_raw_target A B F X Y Z g f))
-≔ @eq_trans
-    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
-    (@strict_functor_compositor_rhs A B F X Y Z g f)
-    (@readable_pseudo_post_stable_action A B F X Y Z g f)
-    (@readable_pseudo_post_raw_target A B F X Y Z g f)
-    (@readable_pseudo_post_formal_target_path A B F X Y Z g f)
-    (@readable_pseudo_post_stable_comp_path A B F X Y Z g f);
+≔ @readable_pseudo_post_stable_comp_path A B F X Y Z g f;
 
 protected symbol readable_pseudo_post_source_reframe
   [A B : Cat]

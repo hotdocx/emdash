@@ -14,6 +14,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_strict_functor_actions;
 
 // Path-discrete two-object diagram selecting x at false and y at true.
 symbol binary_product_diagram

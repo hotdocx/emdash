@@ -22,5 +22,5 @@ symbol zero_arrow_cone_homology_object_path [C : Cat] [S : τ (@PreadditiveCateg
   [W : τ (@HasComputationalKernels C S)] [V : τ (@HasComputationalCokernels C S)]
   (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V)) (z : τ (Obj (@ZeroArrowCone_cat C t T)))
   : τ (@= (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z)
-      (@homology_family_selected_object (@ZeroArrowCone_cat C t T) C S t T W V (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) z))
-≔ @homology_family_object_path (@ZeroArrowCone_cat C t T) C S t T T0 W V P Q (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) z;
+      (@homology_family_selected_object (@ZeroArrowCone_cat C t T) C S C1 t T W V (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) z))
+≔ @homology_family_object_path (@ZeroArrowCone_cat C t T) C S C1 t T T0 W V P Q (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) z;

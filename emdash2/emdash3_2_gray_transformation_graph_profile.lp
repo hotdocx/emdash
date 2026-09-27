@@ -1,8 +1,8 @@
 /*
   Emdash v3.2: selected strict-profile closure of transformation graphs.
 
-  If F and G carry IsStrictFunctor evidence, then a transformation
-  epsilon:F=>G has a selected strict graph package
+  If F and G carry IsStrictFunctor evidence, then one classified lax transfor
+  between them has a selected strict graph package
 
     B -> LaxArrow_cat(C).
 
@@ -20,7 +20,8 @@ require open emdash.emdash3_2_gray_cubes;
 constant symbol gray_transf_graph_is_strict
   [B C : Cat]
   (SF SG : τ (@StrictFunctor B C))
-  (epsilon : τ (Transf
+  (L : τ (@LaxTransfor
+    B C
     (@strict_functor B C SF)
     (@strict_functor B C SG)))
   : τ (@IsStrictFunctor
@@ -30,12 +31,13 @@ constant symbol gray_transf_graph_is_strict
         B C
         (@strict_functor B C SF)
         (@strict_functor B C SG)
-        epsilon));
+        L));
 
 symbol strict_gray_transf_graph
   [B C : Cat]
   (SF SG : τ (@StrictFunctor B C))
-  (epsilon : τ (Transf
+  (L : τ (@LaxTransfor
+    B C
     (@strict_functor B C SF)
     (@strict_functor B C SG)))
   : τ (@StrictFunctor B (@LaxArrow_cat C))
@@ -46,5 +48,5 @@ symbol strict_gray_transf_graph
       B C
       (@strict_functor B C SF)
       (@strict_functor B C SG)
-      epsilon)
-    (@gray_transf_graph_is_strict B C SF SG epsilon);
+      L)
+    (@gray_transf_graph_is_strict B C SF SG L);

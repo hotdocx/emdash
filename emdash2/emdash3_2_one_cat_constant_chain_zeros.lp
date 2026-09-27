@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 /* Whole constant-chain zeros through existing weakening and categorical uniqueness. */
 require open emdash.emdash3_2_one_cat_constant_transformation_views;
 require open emdash.emdash3_2_one_cat_cokernel_family_inputs;
@@ -56,7 +58,7 @@ symbol one_cat_constant_family_zero_path [K C : Cat] (S : τ (@PreadditiveCatego
   (@preadditive_hom_zero C S x y)) (@eq_ap (Hom C x y) (@Transf K C (@Const_func K C x) (@Const_func K C y)) (λ
   u : τ (Hom C x y), (@Const_transf K C x y u)) (@comp_fapp0 C x t y (@preadditive_hom_zero C S t y)
   (@terminal_arrow_fapp0 C t T x)) (@preadditive_hom_zero C S x y) (@preadditive_comp_zero_left_path C S x t y
-  (@terminal_arrow_fapp0 C t T x)))) (@fapp1_comp_path C (Functor_cat K C) (@Const_func_func K C) x t y
+  (@terminal_arrow_fapp0 C t T x)))) (@one_cat_composition_path C (Functor_cat K C) (@one_cat_functor_category K C C1) (@Const_func_func K C) x t y
   (@preadditive_hom_zero C S t y) (@terminal_arrow_fapp0 C t T x))) (@one_cat_constant_zero_factor_path K C S C1
   t T T0 x y));
 
@@ -74,7 +76,7 @@ symbol one_cat_constant_chain_zero_path [K C : Cat] (S : τ (@PreadditiveCategor
   (@Const_transf K C x z (@comp_fapp0 C x y z g f)) (@zero_arrow_family_zero_transf K C t T T0 (@Const_func K C
   x) (@Const_func K C z)) (@eq_sym (@Transf K C (@Const_func K C x) (@Const_func K C z)) (@Const_transf K C x z
   (@comp_fapp0 C x y z g f)) (@comp_fapp0 (Functor_cat K C) (@Const_func K C x) (@Const_func K C y) (@Const_func
-  K C z) (@Const_transf K C y z g) (@Const_transf K C x y f)) (@fapp1_comp_path C (Functor_cat K C)
+  K C z) (@Const_transf K C y z g) (@Const_transf K C x y f)) (@one_cat_composition_path C (Functor_cat K C) (@one_cat_functor_category K C C1)
   (@Const_func_func K C) x y z g f)) (@eq_trans (@Transf K C (@Const_func K C x) (@Const_func K C z))
   (@Const_transf K C x z (@comp_fapp0 C x y z g f)) (@Const_transf K C x z (@preadditive_hom_zero C S x z))
   (@zero_arrow_family_zero_transf K C t T T0 (@Const_func K C x) (@Const_func K C z)) (@eq_ap (Hom C x z)

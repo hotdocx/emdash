@@ -50,7 +50,7 @@ symbol one_cat_coimage_family_factor_path [B C : Cat] [S : τ (@PreadditiveCateg
   walking_arrow_src) (@adjunction_coimage_func C S t T T0 P Q)) (@cokernel_adjunction_family_projection_transf
   (Functor_cat WalkingArrow_cat C) C S t T0 Q (@kernel_adjunction_arrow_func C S t T P)))
   (@one_cat_coimage_family_quotient_path B C S C1 t T T0 P Q D)) (@eq_trans _ _ _ _ (@eq_sym _ _ _
-  (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C D (@diagram_evaluation_at_func WalkingArrow_cat C
+  (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C C1 D (@diagram_evaluation_at_func WalkingArrow_cat C
   walking_arrow_src) (@adjunction_coimage_func C S t T T0 P Q) (@diagram_evaluation_at_func WalkingArrow_cat C
   walking_arrow_tgt) (@cokernel_adjunction_family_projection_transf (Functor_cat WalkingArrow_cat C) C S t T0 Q
   (@kernel_adjunction_arrow_func C S t T P)) (@one_cat_adjunction_coimage_to_target C S C1 t T T0 P Q)))

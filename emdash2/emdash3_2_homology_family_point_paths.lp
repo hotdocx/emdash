@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_action_paths;
 /* Original H quotient compatibility through whole categorical comparisons. */
 require open emdash.emdash3_2_homology_family_point_comparisons;
 require open emdash.emdash3_2_strict_transfor_component_paths;
@@ -36,7 +37,7 @@ symbol homology_family_global_point_projection_path [K C : Cat] (S : τ (@Preadd
   (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func
   C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input K C t T A D h x))
   (@cokernel_adjunction_projection C S t T0 Q)))
-≔ @strict_component_naturality_path (Functor_cat WalkingArrow_cat C) C (@diagram_evaluation_at_func
+≔ @one_cat_component_naturality_path (Functor_cat WalkingArrow_cat C) C C1 (@diagram_evaluation_at_func
   WalkingArrow_cat C walking_arrow_tgt) (@cokernel_adjunction_func C S t T0 Q)
   (@cokernel_adjunction_projection C S t T0 Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func K C S t T P A D h) x) (@fapp0 (@ZeroArrowCone_cat C t
@@ -242,7 +243,7 @@ symbol homology_family_native_comparison_quotient_path [K C : Cat] (S : τ (@Pre
   (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q)
   (@zero_arrow_family_point_input K C t T A D h x) Y n) e)) _ _
    (@homology_family_global_point_quotient_path K C S C1 t T T0 P Q A D h x))
-  (@strict_component_naturality_path (@ZeroArrowCone_cat C t T) C (@kernel_adjunction_family_func
+  (@one_cat_component_naturality_path (@ZeroArrowCone_cat C t T) C C1 (@kernel_adjunction_family_func
   (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_diagram_func C t T))
   (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q)
   (@homology_adjunction_family_projection_transf (@ZeroArrowCone_cat C t T) C S t T T0 P Q

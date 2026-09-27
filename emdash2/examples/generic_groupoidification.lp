@@ -148,29 +148,32 @@ assert [C : Cat]
       f0 f1
       (@groupoidify_unit_compositor_transf C x y z g);
 
-// The explicit compositor cell is not collapsed to an identity term.
+// The explicit compositor has distinct endpoints, so comparison with an
+// identity is no longer a homogeneous judgment.
 assertnot [C : Cat]
   [x y z : τ (Obj C)]
   (g : τ (Hom C y z))
   (f : τ (Hom C x y)) ⊢
-  @groupoidify_unit_compositor C x y z g f
-  ≡ @id
+  @fapp0
+    (@Hom_cat C x y)
+    (@Hom_cat
+      (Path_cat (Groupoidify C))
+      (@fapp0 C (Path_cat (Groupoidify C))
+        (@groupoidify_unit_func C) x)
+      (@fapp0 C (Path_cat (Groupoidify C))
+        (@groupoidify_unit_func C) z))
+    (@groupoidify_unit_compositor_lhs_func C x y z g)
+    f
+  ≡ @fapp0
+      (@Hom_cat C x y)
       (@Hom_cat
         (Path_cat (Groupoidify C))
         (@fapp0 C (Path_cat (Groupoidify C))
           (@groupoidify_unit_func C) x)
         (@fapp0 C (Path_cat (Groupoidify C))
           (@groupoidify_unit_func C) z))
-      (@fapp0
-        (@Hom_cat C x y)
-        (@Hom_cat
-          (Path_cat (Groupoidify C))
-          (@fapp0 C (Path_cat (Groupoidify C))
-            (@groupoidify_unit_func C) x)
-          (@fapp0 C (Path_cat (Groupoidify C))
-            (@groupoidify_unit_func C) z))
-        (@groupoidify_unit_compositor_lhs_func C x y z g)
-        f);
+      (@groupoidify_unit_compositor_rhs_func C x y z g)
+      f;
 
 // Source and target parameters are not erased by the generic facade.
 assertnot [C D : Cat] ⊢ Groupoidify C ≡ Groupoidify D;

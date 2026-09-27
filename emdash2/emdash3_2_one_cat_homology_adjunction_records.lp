@@ -17,11 +17,11 @@ symbol homology_adjunction_family_record [B C : Cat] [S : τ (@PreadditiveCatego
     (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D))
   (b : τ (Obj B))
   : τ (@HomologyRecord C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt)
-      (@homology_family_pair B C S t T A D h b))
+      (@homology_family_pair B C S C1 t T A D h b))
 ≔ @homology_record_intro C S (@fapp0 B C A b) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_src) (@fapp0 WalkingArrow_cat C (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) walking_arrow_tgt)
-    (@homology_family_pair B C S t T A D h b)
+    (@homology_family_pair B C S C1 t T A D h b)
     (@kernel_adjunction_record C S C1 t T P (@fapp0 B (Functor_cat WalkingArrow_cat C) D b))
-    (@kernel_adjunction_semantic_boundary_factor C S t T P (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))
+    (@kernel_adjunction_semantic_boundary_factor C S C1 t T P (@fapp0 B C A b) (@fapp0 B (Functor_cat WalkingArrow_cat C) D b) (@tapp0_fapp0 B (Functor_cat WalkingArrow_cat C) (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) D b h))
     (@cokernel_adjunction_record C S C1 t T0 Q
       (@fapp0 B (Functor_cat WalkingArrow_cat C)
         (@kernel_adjunction_family_boundary_diagram_func B C S t T P A D h) b));

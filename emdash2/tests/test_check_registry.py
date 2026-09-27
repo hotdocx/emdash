@@ -76,6 +76,26 @@ require open test.a test.b;
         self.assertEqual((profile["memoryMiB"], profile["timeoutSeconds"]), (6144, 180))
         self.assertEqual(profile_for(Path("tmp/freyd_native_snake_pair_exactness.lp"), data)[0], "default")
 
+    def test_exact_target_override_keeps_default_and_wrapper_membership(self):
+        data = load_registry()
+        target = "emdash3_2_commutative_algebra_freyd_native_snake_pairs.lp"
+        self.assertIn(target, data["profileTargets"]["native-snake-pair"])
+        _, profile = profile_for(Path(target), data)
+        self.assertEqual((profile["memoryMiB"], profile["timeoutSeconds"]), (8192, 300))
+        self.assertEqual(profile_for(Path("tmp") / target, data)[0], "default")
+        self.assertEqual(data["profiles"]["default"], {"memoryMiB": 2048, "timeoutSeconds": 90})
+        self.assertEqual(data["profiles"]["native-snake-pair"]["memoryMiB"], 6144)
+
+    def test_target_override_rejects_unknown_target_profile_and_invalid_shape(self):
+        from unittest.mock import patch
+        for overrides in ({"missing.lp": "default"}, {"emdash3_2.lp": "missing"},
+                          {"emdash3_2.lp": []}, []):
+            data = load_registry()
+            data["targetProfileOverrides"] = overrides
+            with self.subTest(overrides=overrides), patch("scripts.check_registry.json.loads", return_value=data):
+                with self.assertRaisesRegex(ValueError, "target profile overrides"):
+                    load_registry(ROOT)
+
     def test_registry_rejects_duplicate_profile_membership(self):
         data = load_registry()
         data["profileTargets"]["native-six-term"].append(data["profileTargets"]["native-snake-pair"][0])

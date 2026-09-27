@@ -1,11 +1,12 @@
 require open emdash.emdash3_2_adjunction_untranspose_naturality;
 require open emdash.emdash3_2_chain_pair_zero_cones;
 
-/* Auxiliary native introduction; the comparison cell is derived, not supplied.
+/* Auxiliary ordinary native introduction; the comparison cell is derived, not supplied.
    The primary raw-map consumer must derive p from its existing data. */
 
 symbol zero_cone_map_from_lifts
-  [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+  [C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
   (P : τ (@KernelPresentation C S t T W))
   [A0 A1 : τ (Obj C)] [d0 d1 : τ (Functor WalkingArrow_cat C)]
@@ -30,6 +31,7 @@ symbol zero_cone_map_from_lifts
       (@comp_fapp0 (Functor_cat WalkingArrow_cat C) _ _ _
         (@fapp0 _ _ (@kernel_presentation_unlift_func C S t T W P A1 d1) h1)
         (@fapp1_fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A0 A1 a))
-      (@untranspose_square_path C (Functor_cat WalkingArrow_cat C)
+      (@one_cat_untranspose_square_path C (Functor_cat WalkingArrow_cat C)
+        (@one_cat_functor_category WalkingArrow_cat C C1)
         (@terminal_arrow_diagram_func C t T) (@kernel_presentation_func C S t T W P)
         (@kernel_presentation_adjunction C S t T W P) A0 A1 d0 d1 a b h0 h1 p)));

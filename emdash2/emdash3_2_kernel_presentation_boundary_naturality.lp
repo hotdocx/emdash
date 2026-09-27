@@ -1,7 +1,10 @@
-/* Derived compatibility after the ORIGINAL target inclusion. */
+/* Derived ordinary compatibility after the ORIGINAL target inclusion.
+   Naturality uses the supplied OneCat target; the selected lifts stay fixed. */
 require open emdash.emdash3_2_kernel_presentation_inclusion_properties;
+require open emdash.emdash3_2_one_cat_action_paths;
 
-symbol kernel_presentation_boundary_after_inclusion_path [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+symbol kernel_presentation_boundary_after_inclusion_path [C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
   (P : τ (@KernelPresentation C S t T W))
   [X0 X1 : τ (Obj C)] [d0 d1 : τ (Functor WalkingArrow_cat C)]
@@ -19,7 +22,7 @@ symbol kernel_presentation_boundary_after_inclusion_path [C : Cat] [S : τ (@Pre
     (@eq_trans (Hom C X0 (@fapp0 WalkingArrow_cat C d1 walking_arrow_src)) _ _ _
     (@eq_ap (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 WalkingArrow_cat C d1 walking_arrow_src)) (Hom C X0 (@fapp0 WalkingArrow_cat C d1 walking_arrow_src))
       (λ v : τ (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 WalkingArrow_cat C d1 walking_arrow_src)), (@comp_fapp0 C X0 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 WalkingArrow_cat C d1 walking_arrow_src) v (@kernel_presentation_test_lift C S W X0 d0 e0))) _ _
-      (@eq_sym _ _ _ (@strict_component_naturality_path (Functor_cat WalkingArrow_cat C) C
+      (@eq_sym _ _ _ (@one_cat_component_naturality_path (Functor_cat WalkingArrow_cat C) C C1
         (@kernel_presentation_func C S t T W P) (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@kernel_presentation_inclusion C S t T W P) d0 d1 b)))
     (@eq_trans (Hom C X0 (@fapp0 WalkingArrow_cat C d1 walking_arrow_src)) _ _ _
     (@eq_sym _ _ _ (@comp_assoc C X0 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 WalkingArrow_cat C d0 walking_arrow_src) (@fapp0 WalkingArrow_cat C d1 walking_arrow_src) (@tapp0_fapp0 WalkingArrow_cat C d0 d1 walking_arrow_src b) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d0 (@kernel_presentation_inclusion C S t T W P)) (@kernel_presentation_test_lift C S W X0 d0 e0)))
@@ -35,7 +38,8 @@ symbol kernel_presentation_boundary_after_inclusion_path [C : Cat] [S : τ (@Pre
       (@eq_sym _ _ _ (@kernel_presentation_test_lift_path C S t T W P X1 d1 e1)))
     (@eq_sym _ _ _ (@comp_assoc C X0 X1 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1) (@fapp0 WalkingArrow_cat C d1 walking_arrow_src) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ d1 (@kernel_presentation_inclusion C S t T W P)) (@kernel_presentation_test_lift C S W X1 d1 e1) a))))))));
 
-symbol kernel_presentation_boundary_path [C : Cat] [S : τ (@PreadditiveCategory C)] [t : τ (Obj C)]
+symbol kernel_presentation_boundary_path [C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
   (P : τ (@KernelPresentation C S t T W))
   [X0 X1 : τ (Obj C)] [d0 d1 : τ (Functor WalkingArrow_cat C)]
@@ -48,4 +52,4 @@ symbol kernel_presentation_boundary_path [C : Cat] [S : τ (@PreadditiveCategory
   : τ (@= (Hom C X0 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1)) (@comp_fapp0 C X0 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0 d1 b) (@kernel_presentation_test_lift C S W X0 d0 e0)) (@comp_fapp0 C X0 X1 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1) (@kernel_presentation_test_lift C S W X1 d1 e1) a))
 ≔ (@kernel_presentation_inclusion_monic C S t T W P d1)
     X0 (@comp_fapp0 C X0 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0) (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d0 d1 b) (@kernel_presentation_test_lift C S W X0 d0 e0)) (@comp_fapp0 C X0 X1 (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_presentation_func C S t T W P) d1) (@kernel_presentation_test_lift C S W X1 d1 e1) a)
-    (@kernel_presentation_boundary_after_inclusion_path C S t T W P X0 X1 d0 d1 e0 e1 a b p);
+    (@kernel_presentation_boundary_after_inclusion_path C S C1 t T W P X0 X1 d0 d1 e0 e1 a b p);

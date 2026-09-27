@@ -8,6 +8,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_strict_functor_actions;
 
 assert [A B : Cat] ⊢
   Prof_base A B

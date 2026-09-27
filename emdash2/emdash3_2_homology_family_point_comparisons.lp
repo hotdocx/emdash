@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* Compare actual boundary diagrams categorically, then apply the same Q.
    Earlier equality paths remain derived observations. The operational map
    uses whole diagram reconstruction with identity endpoint components.
@@ -91,7 +92,7 @@ symbol homology_family_global_point_equiv [K C : Cat] (S : τ (@PreadditiveCateg
   (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q)
   (@zero_arrow_family_point_input K C t T A D h x)) (@homology_family_global_point_map K C S C1 t T T0 P Q A D h
   x))
-≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 Q)
+≔ @one_cat_omega_equiv_fmap (Functor_cat WalkingArrow_cat C) C C1 (@cokernel_adjunction_func C S t T0 Q)
   (@fapp0 K (Functor_cat WalkingArrow_cat C) (@kernel_adjunction_family_boundary_diagram_func K C S t T P
   A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C)
   (@kernel_adjunction_family_boundary_diagram_func (@ZeroArrowCone_cat C t T) C S t T P

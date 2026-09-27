@@ -1,10 +1,10 @@
 /* Ordinary observations of actual terminal/initial arrow-diagram maps.
    These projections and zero equations do not require selected universals.
-   The naturality proof uses the existing strict component theorem; its
-   current global profile is not a claim about arbitrary lax transformations. */
+   Ordinary naturality is derived from the existing cells using C1.
+   Raw arrow observations keep their original unrestricted signatures. */
 require open emdash.emdash3_2_zero_arrow_diagrams;
 require open emdash.emdash3_2_additive_categories;
-require open emdash.emdash3_2_strict_transfor_component_paths;
+require open emdash.emdash3_2_one_cat_action_paths;
 
 symbol terminal_arrow_test_incoming [C : Cat] [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (A : τ (Obj C))
@@ -27,8 +27,9 @@ symbol terminal_arrow_test_outgoing [C : Cat] (d : τ (Functor WalkingArrow_cat 
       (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
 ≔ @fapp1_fapp0 WalkingArrow_cat C d walking_arrow_src walking_arrow_tgt walking_arrow_generator;
 
-// Existing global strict naturality compares the two cuts of h[generator].
-symbol terminal_arrow_test_naturality_path [C : Cat] [t : τ (Obj C)]
+// The existing two naturality cells give an ordinary comparison of the cuts.
+symbol terminal_arrow_test_naturality_path [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (A : τ (Obj C))
   (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C
@@ -36,13 +37,14 @@ symbol terminal_arrow_test_naturality_path [C : Cat] [t : τ (Obj C)]
   : τ (@= (Hom C A (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
       (@comp_fapp0 C _ _ _ (@terminal_arrow_test_outgoing C d) (@terminal_arrow_test_incoming C t T A d h))
       (@comp_fapp0 C A t _ (@terminal_arrow_test_tip C t T A d h) (@terminal_arrow_fapp0 C t T A)))
-≔ @strict_component_naturality_path WalkingArrow_cat C
+≔ @one_cat_component_naturality_path WalkingArrow_cat C C1
     (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) d
     h walking_arrow_src walking_arrow_tgt walking_arrow_generator;
 
 // Initiality of a terminal object in a preadditive category supplies the
 // zero comparison; no separately selected whole initial structure is assumed.
 symbol terminal_arrow_test_chain_path [C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [t : τ (Obj C)] (T : τ (@TerminalObject C t)) (A : τ (Obj C))
   (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C
@@ -51,7 +53,7 @@ symbol terminal_arrow_test_chain_path [C : Cat] (S : τ (@PreadditiveCategory C)
       (@comp_fapp0 C _ _ _ (@terminal_arrow_test_outgoing C d) (@terminal_arrow_test_incoming C t T A d h))
       (@preadditive_hom_zero C S A (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)))
 ≔ @eq_trans (Hom C A (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) _ _ _
-    (@terminal_arrow_test_naturality_path C t T A d h)
+    (@terminal_arrow_test_naturality_path C C1 t T A d h)
     (@eq_trans (Hom C A (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) _ _ _
       (@eq_ap (Hom C t (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
         (Hom C A (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))
@@ -105,6 +107,7 @@ symbol initial_arrow_test_tip [C : Cat] [t : τ (Obj C)]
 ≔ @tapp0_fapp0 WalkingArrow_cat C d _ walking_arrow_src h;
 
 symbol initial_arrow_test_chain_path [C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [t : τ (Obj C)] (T : τ (@TerminalObject (Op_cat C) t)) (A : τ (Obj C))
   (d : τ (Functor WalkingArrow_cat C))
   (h : τ (@Transf WalkingArrow_cat C d
@@ -113,7 +116,7 @@ symbol initial_arrow_test_chain_path [C : Cat] (S : τ (@PreadditiveCategory C))
       (@comp_fapp0 C _ _ _ (@initial_arrow_test_outgoing C t T A d h) (@terminal_arrow_test_outgoing C d))
       (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) A))
 ≔ @eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) A) _ _ _
-    (@eq_sym _ _ _ (@strict_component_naturality_path WalkingArrow_cat C d
+    (@eq_sym _ _ _ (@one_cat_component_naturality_path WalkingArrow_cat C C1 d
       (@fapp0 C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T) A)
       h walking_arrow_src walking_arrow_tgt walking_arrow_generator))
     (@eq_trans (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) A) _ _ _

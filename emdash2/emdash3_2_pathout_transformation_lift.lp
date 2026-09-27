@@ -80,8 +80,9 @@ symbol pathout_transf_formal_target
     (@pathout_transf_top_rhs_func A B F G epsilon x y p)
     (@id A y);
 
-// Whole pre/right strict naturality, evaluated only after the functor path is
-// formed, compares the formal target with the direct off-diagonal action.
+// Evaluate the target/right route at the represented identity. This is the
+// component formula eta[id_y o p] = eta[p], without identifying it with
+// the different source/left route or assuming strict naturality of eta.
 symbol pathout_transf_formal_target_path
   [A B : Cat]
   [F G : τ (Functor A B)]
@@ -95,27 +96,9 @@ symbol pathout_transf_formal_target_path
       (@pathout_transf_formal_target
         A B F G epsilon x y p)
       (@tapp1_fapp0 A B F G x y epsilon p))
-≔ @eq_ap
-    (Hom Cat_cat
-      (Hom_cat A y y)
-      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B G y)))
+≔ @eq_refl
     (Obj (Hom_cat B (@fapp0 A B F x) (@fapp0 A B G y)))
-    (λ H : τ (Functor
-        (Hom_cat A y y)
-        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B G y))),
-      @fapp0
-        (Hom_cat A y y)
-        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B G y))
-        H
-        (@id A y))
-    (@pathout_top_lhs_func A B F G epsilon x y p)
-    (@pathout_transf_top_rhs_func A B F G epsilon x y p)
-    (@functord_transport_strict_naturality
-      (Op_cat A)
-      (@hom_con A y A (@id_func A))
-      (@hom_con B (@fapp0 A B G y) A F)
-      (@tapp1_con_at_transf A B F G epsilon y)
-      y x p);
+    (@pathout_transf_formal_target A B F G epsilon x y p);
 
 // Reframe the source of the extracted cell along the generic represented
 // source path. The cell itself remains tapp1_pre_laxity_cell.

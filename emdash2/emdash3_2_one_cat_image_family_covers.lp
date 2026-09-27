@@ -120,7 +120,7 @@ symbol one_cat_image_family_comparison_factor_path [B C : Cat] [S : τ (@Preaddi
         (@comp_cat_con_fapp1_func B (Functor_cat WalkingArrow_cat C) C F (@adjunction_coimage_func C S t T T0 P
         Q) (@adjunction_image_func C S t T T0 P Q)) (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)))) _ _
       (@one_cat_image_family_inclusion_path B C S C1 t T T0 P Q F))
-    (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C F
+    (@eq_trans _ _ _ _ (@eq_sym _ _ _ (@prewhisker_comp_path B (Functor_cat WalkingArrow_cat C) C C1 F
       (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q)
       (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_tgt) (@one_cat_coimage_image_comparison C S
       C1 t T T0 P Q) (@kernel_adjunction_family_inclusion_transf (Functor_cat WalkingArrow_cat C) C S t T P

@@ -108,7 +108,22 @@ Subject reduction cannot be disabled through the guarded entry points.
 The OS-guard integration tests target Linux; the published/browser-safe checker
 keeps its existing runtime boundary and does not acquire Python or Lambdapi.
 
-Staged compiled-parent recipes retain their source-copy and invocation order.
+`checks.json` can select a measured named profile for one exact registered
+target through `targetProfileOverrides`. This takes precedence over the base
+profile in `profileTargets`, while preserving historical wrapper membership.
+Each wrapper resolves the effective profile separately for each target; the
+metrics suite's ordinary 90-second fallback does not replace a named deadline.
+Explicit environment overrides retain their existing precedence. Unknown
+targets/profiles are rejected, and temporary packages never inherit an
+exception merely by sharing a filename. The action-profile integration ledger
+records the measurements behind its registered overrides.
+
+Staged compiled-parent recipes retain their source-copy and explicit target order.
+`scripts/check_staged_target.py` verifies the complete source/package closure
+against the registered workspace before selecting a measured profile. It
+prepares missing parents in local import order, applies each parent's own
+profile, and rejects source changes or missing/empty compilation artifacts.
+Every actual checker still runs through the shared guard and receipt writer.
 The guard applies to each checker, without nesting a serial lock around a
 whole group. Group timings cover prerequisites and must not be read as individual
 target measurements. TypeScript export helpers also use the guard. Opt-in

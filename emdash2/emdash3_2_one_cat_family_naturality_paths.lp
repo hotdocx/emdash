@@ -1,7 +1,8 @@
 /* Whole naturality after the existing postcomposition-family lift.
    Scope is the ordinary target; no caller component square is supplied. */
 require open emdash.emdash3_2_one_cat_whiskering_paths;
-require open emdash.emdash3_2_strict_transfor_component_paths;
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 require open emdash.emdash3_2_diagram_reindex_views;
 
 symbol one_cat_family_naturality_path [B A C : Cat]
@@ -16,7 +17,7 @@ symbol one_cat_family_naturality_path [B A C : Cat]
         (@comp_cat_fapp0 B A C G E)
         (@fapp0 _ _ (@comp_cat_con_fapp1_func B A C E F G) eta)
         (@fapp1_fapp0 (Functor_cat B A) (Functor_cat B C) (@comp_cat_cov_func B A C F) D E alpha)))
-≔ @strict_component_naturality_path (Functor_cat B A) (Functor_cat B C)
+≔ @one_cat_component_naturality_path (Functor_cat B A) (Functor_cat B C) (@one_cat_functor_category B C C1)
     (@comp_cat_cov_func B A C F) (@comp_cat_cov_func B A C G)
     (@comp_cat_cov_func_func_transf B A C F G eta) D E alpha;
 

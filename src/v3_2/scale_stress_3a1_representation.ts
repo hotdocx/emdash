@@ -359,7 +359,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol DefIso',
-            577
+            581
         )
     },
     {
@@ -370,7 +370,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol Prof_cat (A B : Cat) : Cat;',
-            1198
+            1378
         )
     },
     {
@@ -383,7 +383,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol Prof (A B : Cat) : Grpd',
-            1202
+            1382
         )
     },
     {
@@ -396,7 +396,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol ProfComparison\n  [A B : Cat]',
-            1232
+            1430
         )
     },
     {
@@ -407,7 +407,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol Prof_tensor [A B X : Cat]',
-            1262
+            1461
         )
     }
 ];

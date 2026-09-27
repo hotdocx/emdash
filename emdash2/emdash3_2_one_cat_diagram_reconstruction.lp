@@ -6,6 +6,7 @@
    objects or installing a general functor-eta rewrite. Faithfulness below
    is a derived consequence, with no caller-supplied injectivity premise. */
 require open emdash.emdash3_2_functor_reconstruction_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 require open emdash.emdash3_2_walking_arrow_native_observation;
 require open emdash.emdash3_2_one_cat_arrow_diagrams;
 
@@ -15,7 +16,24 @@ symbol one_cat_diagram_roundtrip_func
   : τ (Functor (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C))
 ≔ @comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C)
     (Functor_cat WalkingArrow_cat C)
-    (@one_cat_arrow_diagram_func C C1) (@diagram_native_arrow_func C);
+    (@one_cat_arrow_diagram_func C C1) (@diagram_native_arrow_func C C1);
+
+// The retained whole roundtrip has the original raw arrow as an observation.
+symbol one_cat_diagram_roundtrip_object_path [C : Cat]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) (d : τ (Functor WalkingArrow_cat C))
+  : τ (@= (Functor WalkingArrow_cat C)
+      (@fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)
+        (@one_cat_diagram_roundtrip_func C C1) d)
+      (@walking_arrow_func C (@fapp0 WalkingArrow_cat C d walking_arrow_src)
+        (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
+        (@fapp1_fapp0 WalkingArrow_cat C d walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
+≔ @eq_ap (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src)
+      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (Functor WalkingArrow_cat C)
+    (λ u : τ (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src)
+      (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)),
+      @walking_arrow_func C (@fapp0 WalkingArrow_cat C d walking_arrow_src)
+        (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) u)
+    _ _ (@diagram_native_arrow_value_path C C1 d);
 
 /* Ordinary walking-arrow universality: reconstruction is naturally
    isomorphic to the original diagram. This is a new whole assembly law,
@@ -48,14 +66,14 @@ rule @tapp0_fapp0 _ _ _ _
         (@defiso_from _ _ _ (@one_cat_diagram_reconstruction_iso $C _)))
   ↪ @id $C (@fapp0 WalkingArrow_cat $C $d walking_arrow_tgt);
 
-// Defined component view at the existing canonical introduction endpoints.
+// Original raw endpoint presentation via the scoped component agreement.
 symbol one_cat_diagram_reconstruction_to [C : Cat]
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) (d : τ (Functor WalkingArrow_cat C))
   : τ (@Transf WalkingArrow_cat C (@walking_arrow_func C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp1_fapp0 WalkingArrow_cat C d walking_arrow_src walking_arrow_tgt walking_arrow_generator)) d)
 ≔ @tapp0_fapp0 (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C) (@one_cat_diagram_roundtrip_func C C1) (@id_func (Functor_cat WalkingArrow_cat C)) d
     (@defiso_to (Functor_cat (Functor_cat WalkingArrow_cat C) (Functor_cat WalkingArrow_cat C)) (@one_cat_diagram_roundtrip_func C C1) (@id_func (Functor_cat WalkingArrow_cat C)) (@one_cat_diagram_reconstruction_iso C C1));
 
-// Defined component view at the existing canonical introduction endpoints.
+// Original raw endpoint presentation via the scoped component agreement.
 symbol one_cat_diagram_reconstruction_from [C : Cat]
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) (d : τ (Functor WalkingArrow_cat C))
   : τ (@Transf WalkingArrow_cat C d (@walking_arrow_func C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp1_fapp0 WalkingArrow_cat C d walking_arrow_src walking_arrow_tgt walking_arrow_generator)))
@@ -66,11 +84,12 @@ symbol one_cat_diagram_observation_reflect_path [C : Cat]
   (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [d e : τ (Functor WalkingArrow_cat C)] (h k : τ (@Transf WalkingArrow_cat C d e))
   (p : τ (@= (Hom (@LaxArrow_cat C)
-      (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d)
-      (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) e))
-    (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e h)
-    (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e k)))
+      (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d)
+      (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) e))
+    (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e h)
+    (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e k)))
   : τ (@= (@Transf WalkingArrow_cat C d e) h k)
 ≔ @functor_reconstruction_along_reflect_path (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C)
-    (@diagram_native_arrow_func C) (@one_cat_arrow_diagram_func C C1)
+    (@one_cat_functor_category WalkingArrow_cat C C1)
+    (@diagram_native_arrow_func C C1) (@one_cat_arrow_diagram_func C C1)
     (@one_cat_diagram_reconstruction_iso C C1) d e h k p;

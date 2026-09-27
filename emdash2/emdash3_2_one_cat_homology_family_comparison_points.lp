@@ -18,7 +18,7 @@ symbol one_cat_homology_family_point_comparison_evidence [B C : Cat] (C1 : τ (I
   (@ZeroArrowCone_cat C t T) C (@homology_adjunction_family_func (@ZeroArrowCone_cat C t T) C S t T T0 P Q
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
   (@zero_arrow_cone_universal_transf C C1 t T)) (@zero_arrow_family_point_input B C t T A D h b)))
-≔ @iso_evidence_fmap (Functor_cat B C) C (@fapp0_func B C b) (@homology_adjunction_family_func B C S t T
+≔ @one_cat_iso_evidence_fmap (Functor_cat B C) C C1 (@fapp0_func B C b) (@homology_adjunction_family_func B C S t T
   T0 P Q A D h) (@comp_cat_fapp0 B (@ZeroArrowCone_cat C t T) C (@homology_adjunction_family_func
   (@ZeroArrowCone_cat C t T) C S t T T0 P Q (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T)) (@one_cat_zero_arrow_family_func B C C1

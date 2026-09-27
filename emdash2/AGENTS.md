@@ -242,9 +242,12 @@ failure or qualify an incomplete computation. Longer probes use the existing
 `EMDASH_PROBE_TIMEOUT` override; do not bypass the guard or subject reduction.
 
 The same user authorization permits reviewed memory increases.
-`scripts/check_native_snake_pairs.sh` selects the measured
-6 GiB/180s profile only for its registered pair/certificate owners and
-reviewer. Keep the normal guard, serial lock, file/core limits and no-swap
+`scripts/check_native_snake_pairs.sh` retains the measured
+6 GiB/180s base profile for its registered pair/certificate owners and
+reviewer. Exact `targetProfileOverrides` in `checks.json` can select a separately
+measured profile without changing that wrapper's target membership; the
+action-profile integration's pair owner now uses 8 GiB/300s. Keep the normal
+guard, serial lock, file/core limits and no-swap
 scope; record resource measurements and do not turn this into a global
 default increase. Guard/profile tests exercise the bounds without allocating
 large heaps.
@@ -338,22 +341,21 @@ Git for retired implementations, rather than an ignored alternative library.
   patterns. Test both reduction orders for every exceptional commuting bridge.
 - Treat warning counts as diagnostics for locating overlap families, not as an
   automatic veto on semantically intended computation.
-- In particular, the historical global strict `fapp1` identity/composition and
-  strict-naturality cuts are explicitly scheduled for later profile-local
-  migration. An intended lax/profile-specific consumer rule may overlap those
-  cuts and still be the accepted prototype computation when its owning source,
-  nonidentity consumer, subject reduction, and downstream focused checks are
-  green. Record the identity/composition critical pair and migration target;
-  do **not** suppress the intended lax rule merely to preserve the temporary
-  globally strict approximation. Conversely, this exception is not permission
-  to ignore unrelated subject-reduction failures or unclassified overlaps.
+- The selected action-profile integration retires generic composition and
+  strict-naturality cuts while retaining normal identity computation and
+  qualified named-constructor instances. Preserve the ambient/profile
+  distinction. Record constructor/identity/composition overlaps at their
+  actual owners and check both observation orders and the first real consumer.
+  A justified named strict computation may be direct; the user does not require
+  every such instance to be wrapped as a `StrictFunctor`. This is not permission
+  to restore a generic strictness leak, ignore subject reduction or leave an
+  unrelated overlap unclassified.
 - `IsPseudoFunctor(F)` is the transparent dependent product of fixed-forward
   `OmegaEquivAlong` evidence for the existing readable compositor. Do not
-  claim that no pseudofunctor property exists. Its current endpoint reframe is
-  a documented adapter for the historical global strict cuts, not a proof
-  that lax endpoints remain noncollapsed. It is evidence over an already-
-  formed carrier, not a separate carrier classifier and not a mechanism for
-  disabling those cuts. Identity/composition and cubical structural closure
+  claim that no pseudofunctor property exists. Its direct endpoint paths expose
+  the existing compositor without identifying generic lax endpoints. It is
+  evidence over an already-formed carrier, not a separate carrier classifier
+  or an automatic strict computation rule. Identity/composition and cubical structural closure
   remain explicitly supplied pending extracted unit/composite coherence.
 - Use rewrites only for intended runtime normal forms. Use narrowly typed
   `unif_rule`s for proof-time comparison when neither side should compute to
@@ -412,9 +414,12 @@ Git for retired implementations, rather than an ignored alternative library.
 
 ## Generic Owners And Higher Structure
 
-- The global `fapp*`/`tapp*` calculus solely owns ordinary functoriality and
-  naturality. Do not add constructor-specific rules whose only content is
-  preservation of identity, composition, or ordinary naturality.
+- The generic `fapp*`/`tapp*` calculus owns ambient action. Stricter computation
+  needs its actual profile or a justified named constructor. A direct
+  constructor-specific identity/composition/naturality clause is permitted
+  when that constructor's strictness is part of the selected interface and
+  its owning-position, subject-reduction, overlap and consumer checks pass.
+  Do not infer the same equation for an arbitrary functor or transformation.
 - A specialized projection-order bridge is justified only when a stable
   projection erases the literal generic-owner pattern and a measured competing
   path does not already join. Select one orientation and document it.

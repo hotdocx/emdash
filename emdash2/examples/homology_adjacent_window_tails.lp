@@ -127,6 +127,7 @@ assert ⊢ shared_upper ≡ shared_lower;
 require open emdash.emdash3_2_finite_arrow_tail_append;
 require open emdash.emdash3_2_computational_exact_arrow_tails;
 require open emdash.emdash3_2_homology_exact_window_result;
+require open emdash.emdash3_2_homology_window_extension;
 
 symbol upper_first ≔ @homology_whole_window_first_pair C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0 row1
   row2 F G J z0 z1 C1 T T0 KP QP;
@@ -138,10 +139,8 @@ symbol upper_second_exact ≔ @homology_whole_window_second_exact C P t Ab Am Bm
   row0 row1 row2 F G J z0 z1 C1 T T0 KP QP;
 symbol upper_third_exact ≔ @homology_whole_window_third_exact C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2 rowm row0
   row1 row2 F G J z0 z1 C1 T T0 KP QP;
-symbol upper_tail ≔ computational_exact_arrow_tail_cons_pair PA upper_first upper_first_exact
-  (computational_exact_arrow_tail_cons_pair PA upper_second upper_second_exact
-    (computational_exact_arrow_tail_cons_pair PA upper_third upper_third_exact
-      (computational_exact_arrow_tail_nil PA)));
+symbol upper_tail ≔ @homology_whole_window_tail C P t Ab Am Bm Dm A0 B0 D0 A1 B1 D1 A2 B2 D2
+  rowm row0 row1 row2 F G J z0 z1 C1 T T0 KP QP;
 
 symbol lower_first_exact ≔ @homology_whole_window_first_exact C P t Ab A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3 row0 row1
   row2 row3 G J L z1 z2 C1 T T0 KP QP;
@@ -153,10 +152,8 @@ symbol lower_third ≔ @homology_whole_window_third_pair C P t Ab A0 B0 D0 A1 B1
   row3 G J L z1 z2 C1 T T0 KP QP;
 symbol lower_third_exact ≔ @homology_whole_window_third_exact C P t Ab A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3 row0 row1
   row2 row3 G J L z1 z2 C1 T T0 KP QP;
-symbol lower_tail ≔ computational_exact_arrow_tail_cons_pair PA lower_first lower_first_exact
-  (computational_exact_arrow_tail_cons_pair PA lower_second lower_second_exact
-    (computational_exact_arrow_tail_cons_pair PA lower_third lower_third_exact
-      (computational_exact_arrow_tail_nil PA)));
+symbol lower_tail ≔ @homology_whole_window_tail C P t Ab A0 B0 D0 A1 B1 D1 A2 B2 D2 A3 B3 D3
+  row0 row1 row2 row3 G J L z1 z2 C1 T T0 KP QP;
 
 symbol Q ≔ @ComputationalExactArrowStep C P t PA;
 symbol three : τ Nat_grpd ≔ succ (succ (succ zero));
@@ -166,7 +163,34 @@ symbol tail_after_three ≔ finite_arrow_tail_rest Q
 
 assert ⊢ finite_arrow_tail_last_arrow Q three upper_tail ≡ shared_upper;
 assert ⊢ tail_after_three ≡ lower_tail;
+// Literal first-pair endpoints avoid the measured expansion through readability aliases.
 assert ⊢ finite_arrow_tail_step Q joined
-  ≡ computational_exact_arrow_step_of_pair PA upper_first upper_first_exact;
+  ≡ @computational_exact_arrow_step_of_pair C P t (@computational_abelian_preabelian C P t Ab)
+  (@fapp0
+    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
+    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))
+    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
+    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t
+    (@computational_abelian_preabelian C P t Ab)) KP Am A0 A1 (@short_exact_row_chain_source_pair C P t
+    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G z0)))
+  (@fapp0
+    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
+    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))
+    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
+    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t
+    (@computational_abelian_preabelian C P t Ab)) KP Bm B0 B1 (@short_exact_row_chain_middle_pair C P t
+    (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0 row1 F G z0)))
+  (@fapp0
+    (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C (@computational_homology_preadditive C P t
+    (@computational_abelian_preabelian C P t Ab)) C1 t T T0 (@preabelian_kernels C P t (@computational_abelian_preabelian C P t Ab))
+    (@preabelian_cokernels C P t (@computational_abelian_preabelian C P t Ab)) KP QP) (@chain_pair_zero_cone C
+    (@computational_homology_preadditive C P t (@computational_abelian_preabelian C P t Ab)) t T (@preabelian_kernels C P t
+    (@computational_abelian_preabelian C P t Ab)) KP Dm D0 D1 (@homology_connecting_step_right_pair C P t Ab A0 B0 D0 A1 B1 D1 Dm
+    row0 row1 G (@computational_chain_pair_map_prev C (@computational_homology_preadditive C P t (@computational_abelian_preabelian
+    C P t Ab)) Am Bm Dm A0 B0 D0 (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm
+    rowm) (@computational_short_exact_row_pair C P t (@computational_abelian_preabelian C P t Ab) A0 B0 D0 row0) F)
+    (@short_exact_row_chain_target_zero_path C P t (@computational_abelian_preabelian C P t Ab) Am Bm Dm A0 B0 D0 A1 B1 D1 rowm row0
+    row1 F G z0))))
+  upper_first upper_first_exact;
 assert ⊢ finite_arrow_tail_last_arrow Q (nat_add three three) joined
   ≡ computational_chain_pair_d lower_third;

@@ -1,6 +1,26 @@
+/* Product composition paths from the actual pair constructor beta.
+   Sigma induction generalizes the endpoints and both arrows; no ambient
+   functor-composition theorem, runtime rule, or strictness axiom is used. */
 require open emdash.emdash3_2;
 
-/* Projection laws inherited from the existing generic functor action. */
+protected symbol product_comp_pair_property [A B : Cat]
+ (x y z : τ (Obj (Product_cat A B))) (f : τ (Hom (Product_cat A B) x y)) (g : τ (Hom (Product_cat A B) y z)) : Grpd
+≔ @= (Hom (Product_cat A B) x z) (@comp_fapp0 (Product_cat A B) x y z g f) (@Struct_sigma (Hom A (sigma_Fst x) (sigma_Fst z)) (λ _ : τ (Hom A (sigma_Fst x) (sigma_Fst z)), (Hom B (sigma_Snd x) (sigma_Snd z))) (@comp_fapp0 A (sigma_Fst x) (sigma_Fst y) (sigma_Fst z) (sigma_Fst g) (sigma_Fst f)) (@comp_fapp0 B (sigma_Snd x) (sigma_Snd y) (sigma_Snd z) (sigma_Snd g) (sigma_Snd f)));
+
+protected symbol product_comp_pair_path [A B : Cat]
+ (x y z : τ (Obj (Product_cat A B))) (f : τ (Hom (Product_cat A B) x y)) (g : τ (Hom (Product_cat A B) y z))
+ : τ (@product_comp_pair_property A B x y z f g)
+≔ (λ x : τ (Obj (Product_cat A B)), @sigma_ind (Obj A) (λ _ : τ (Obj A), (Obj B))
+ (λ x0 : τ (Obj (Product_cat A B)), @Pi_grpd (Obj (Product_cat A B)) (λ y0 : τ (Obj (Product_cat A B)), @Pi_grpd (Obj (Product_cat A B)) (λ z0 : τ (Obj (Product_cat A B)), @Pi_grpd (Hom (Product_cat A B) x0 y0) (λ f0 : τ (Hom (Product_cat A B) x0 y0), @Pi_grpd (Hom (Product_cat A B) y0 z0) (λ g0 : τ (Hom (Product_cat A B) y0 z0), @product_comp_pair_property A B x0 y0 z0 f0 g0)))))
+ (λ x1 : τ (Obj A), λ x2 : τ (Obj B), λ y : τ (Obj (Product_cat A B)), @sigma_ind (Obj A) (λ _ : τ (Obj A), (Obj B))
+ (λ y0 : τ (Obj (Product_cat A B)), @Pi_grpd (Obj (Product_cat A B)) (λ z0 : τ (Obj (Product_cat A B)), @Pi_grpd (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) y0) (λ f0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) y0), @Pi_grpd (Hom (Product_cat A B) y0 z0) (λ g0 : τ (Hom (Product_cat A B) y0 z0), @product_comp_pair_property A B (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) y0 z0 f0 g0))))
+ (λ y1 : τ (Obj A), λ y2 : τ (Obj B), λ z : τ (Obj (Product_cat A B)), @sigma_ind (Obj A) (λ _ : τ (Obj A), (Obj B))
+ (λ z0 : τ (Obj (Product_cat A B)), @Pi_grpd (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (λ f0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)), @Pi_grpd (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) z0) (λ g0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) z0), @product_comp_pair_property A B (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) z0 f0 g0)))
+ (λ z1 : τ (Obj A), λ z2 : τ (Obj B), λ f : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)), @sigma_ind (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))) (λ _ : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))), (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))))
+ (λ f0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)), @Pi_grpd (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)) (λ g0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)), @product_comp_pair_property A B (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2) f0 g0))
+ (λ f1 : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))), λ f2 : τ (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))), λ g : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)), @sigma_ind (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))) (λ _ : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))), (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))))
+ (λ g0 : τ (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)), @product_comp_pair_property A B (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2) (@Struct_sigma (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))) (λ _ : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))), (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)))) f1 f2) g0)
+ (λ g1 : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))), λ g2 : τ (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))), @eq_refl (Hom (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)) (@comp_fapp0 (Product_cat A B) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2) (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2) (@Struct_sigma (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))) (λ _ : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2))), (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) z1 z2)))) g1 g2) (@Struct_sigma (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))) (λ _ : τ (Hom A (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Fst (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2))), (Hom B (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) x1 x2)) (sigma_Snd (@Struct_sigma (Obj A) (λ _ : τ (Obj A), (Obj B)) y1 y2)))) f1 f2))) g) f) z) y) x) x y z f g;
 
 symbol product_comp_first_path [A B : Cat]
   (x y z : τ (Obj (Product_cat A B)))
@@ -8,7 +28,10 @@ symbol product_comp_first_path [A B : Cat]
   : τ (@= (Hom A (sigma_Fst x) (sigma_Fst z))
       (sigma_Fst (@comp_fapp0 (Product_cat A B) x y z g f))
       (@comp_fapp0 A (sigma_Fst x) (sigma_Fst y) (sigma_Fst z) (sigma_Fst g) (sigma_Fst f)))
-≔ @fapp1_comp_path (Product_cat A B) A (@Product_projL_func A B) x y z g f;
+≔ @eq_ap (Hom (Product_cat A B) x z) (Hom A (sigma_Fst x) (sigma_Fst z))
+ (λ h : τ (Hom (Product_cat A B) x z), sigma_Fst h)
+ (@comp_fapp0 (Product_cat A B) x y z g f) (@Struct_sigma (Hom A (sigma_Fst x) (sigma_Fst z)) (λ _ : τ (Hom A (sigma_Fst x) (sigma_Fst z)), (Hom B (sigma_Snd x) (sigma_Snd z))) (@comp_fapp0 A (sigma_Fst x) (sigma_Fst y) (sigma_Fst z) (sigma_Fst g) (sigma_Fst f)) (@comp_fapp0 B (sigma_Snd x) (sigma_Snd y) (sigma_Snd z) (sigma_Snd g) (sigma_Snd f)))
+ (@product_comp_pair_path A B x y z f g);
 
 symbol product_comp_second_path [A B : Cat]
   (x y z : τ (Obj (Product_cat A B)))
@@ -16,4 +39,7 @@ symbol product_comp_second_path [A B : Cat]
   : τ (@= (Hom B (sigma_Snd x) (sigma_Snd z))
       (sigma_Snd (@comp_fapp0 (Product_cat A B) x y z g f))
       (@comp_fapp0 B (sigma_Snd x) (sigma_Snd y) (sigma_Snd z) (sigma_Snd g) (sigma_Snd f)))
-≔ @fapp1_comp_path (Product_cat A B) B (@Product_projR_func A B) x y z g f;
+≔ @eq_ap (Hom (Product_cat A B) x z) (Hom B (sigma_Snd x) (sigma_Snd z))
+ (λ h : τ (Hom (Product_cat A B) x z), sigma_Snd h)
+ (@comp_fapp0 (Product_cat A B) x y z g f) (@Struct_sigma (Hom A (sigma_Fst x) (sigma_Fst z)) (λ _ : τ (Hom A (sigma_Fst x) (sigma_Fst z)), (Hom B (sigma_Snd x) (sigma_Snd z))) (@comp_fapp0 A (sigma_Fst x) (sigma_Fst y) (sigma_Fst z) (sigma_Fst g) (sigma_Fst f)) (@comp_fapp0 B (sigma_Snd x) (sigma_Snd y) (sigma_Snd z) (sigma_Snd g) (sigma_Snd f)))
+ (@product_comp_pair_path A B x y z f g);

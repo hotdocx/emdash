@@ -252,28 +252,29 @@ of a map even though an explicit quasi-inverse package may contain choices.
 ## 4.7 Hom Action And Groupoidal Sources
 
 Equivalence evidence must itself act functorially if the foundation is to be
-usable at higher dimension. The one-way derived hom-action layer sends
-fixed-arrow omega-equivalence evidence through the next hom action of an
-ordinary functor. In particular, if a category is coherently groupoidal, its
+usable at higher dimension. The one-way derived hom-action layer takes an
+equality-valued omega-equivalence between categories and derives equivalences
+on its next homs. In particular, if a category is coherently groupoidal, its
 core inclusion is an omega-equivalence and each directed arrow can be related
 to an object path through the selected homwise inverse.
 
-For a directed family `D:C -> Cat`, coherent groupoidality of `C`
-then implies that transport along a base arrow is an equivalence:
+For a directed family classified as `D:StrictFunctor(C,Cat)`, coherent
+groupoidality of `C` supplies equivalence of transport along a base arrow:
 
 $$
 D[f]:D[x]\simeq D[y].
 $$
 
 This recovers the familiar groupoidal behavior of path-indexed families as a
-special case. It also states the boundary sharply: without groupoidality,
-`D[f]` remains only a functor.
+special case. The fibre-transport theorem uses both the source's groupoidality
+and the family's classified strict action. It does not supply the same
+conclusion for an arbitrary unclassified directed family.
 
 <!-- evidence:EQUIV-HOM-ACTION -->
 
 > **Formal status — checked.** Evidence `EQUIV-HOM-ACTION` covers the
 > one-way next-hom action and its specialization to equivalence of fibre
-> transport over a coherently groupoidal source.
+> transport over a coherently groupoidal source for a classified strict family.
 
 <a id="chapter-4-8"></a>
 

@@ -47,8 +47,7 @@ for file in "${reviewers[@]}"; do cp "$file" "$stage_root/examples/"; done
 
 check_object() {
   printf 'checking %s with fresh exact dependency objects\n' "$1"
-  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
-    bash "$formal_root/scripts/lambdapi_resource_guard.sh" lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$1"
+  python3 "$formal_root/scripts/check_staged_target.py" --compile "$1"
 }
 cd "$stage_root"
 # Recheck exact source dependencies, then retain only these temporary objects

@@ -1,6 +1,6 @@
 /* Whole adjunction mates; all functors are transparent views of
    existing unit/counit or Adjunction_hom_prof_comparison operations. */
-require open emdash.emdash3_2;
+require open emdash.emdash3_2_defiso_evaluation_points;
 
 // Direct shortcut for the existing Prof→Catd→Functor usability chain.
 // The base is reconstructed in a constraint, not a reducible Product LHS guard.
@@ -52,13 +52,11 @@ symbol adjunction_hom_component_iso
   (J : τ (@Adjunction R L F G)) (X : τ (Obj R)) (Y : τ (Obj L))
   : τ (@DefIso Cat_cat (Hom_cat L (@fapp0 R L F X) Y)
       (Hom_cat R X (@fapp0 L R G Y)))
-≔ @defiso_fmap
-    (Prof_cat R L) Cat_cat
-    (@fapp0_func (Product_cat (Op_cat R) L) Cat_cat
-      (@Product_pair (Op_cat R) L X Y))
+≔ @defiso_at (Product_cat (Op_cat R) L) Cat_cat
     (@Hom_prof_along R L L F (@id_func L))
     (@Hom_prof_along R L R (@id_func R) G)
-    (@Adjunction_hom_prof_comparison R L F G J);
+    (@Adjunction_hom_prof_comparison R L F G J)
+    (@Product_pair (Op_cat R) L X Y);
 
 symbol adjunction_transpose_func
   [R L : Cat] [F : τ (Functor R L)] [G : τ (Functor L R)]
@@ -137,6 +135,33 @@ unif_rule
 unif_rule
   @fapp0 _ _ (@tapp0_fapp0 _ _ _ _ (Struct_sigma $X $Y)
     (@defiso_from _ _ _ (@Adjunction_hom_prof_comparison $R $L $F $G $J))) $k
+  ≡ @comp_fapp0 $C $a $b $c $g $f
+  ↪ [ (@comp_fapp0 $C $a $b $c $g $f)
+        ≡ (@fapp0 _ _ (@adjunction_untranspose_semantic_func $R $L $F $G $J $X $Y) $k) ];
+
+// Direct scoped proof-time views for the stable observation. Chaining the
+// generic raw agreement with the existing mate view does not solve these goals.
+unif_rule
+  @defiso_at_to _ _ _ _
+    (@Adjunction_hom_prof_comparison $R $L $F $G $J) (Struct_sigma $X $Y)
+  ≡ @comp_fapp0 Cat_cat $Source $Mid $Target $first $second
+  ↪ [ (@comp_fapp0 Cat_cat $Source $Mid $Target $first $second)
+        ≡ (@adjunction_transpose_semantic_func $R $L $F $G $J $X $Y) ];
+unif_rule
+  @defiso_at_from _ _ _ _
+    (@Adjunction_hom_prof_comparison $R $L $F $G $J) (Struct_sigma $X $Y)
+  ≡ @comp_fapp0 Cat_cat $Source $Mid $Target $first $second
+  ↪ [ (@comp_fapp0 Cat_cat $Source $Mid $Target $first $second)
+        ≡ (@adjunction_untranspose_semantic_func $R $L $F $G $J $X $Y) ];
+unif_rule
+  @fapp0 _ _ (@defiso_at_to _ _ _ _
+    (@Adjunction_hom_prof_comparison $R $L $F $G $J) (Struct_sigma $X $Y)) $h
+  ≡ @comp_fapp0 $C $a $b $c $g $f
+  ↪ [ (@comp_fapp0 $C $a $b $c $g $f)
+        ≡ (@fapp0 _ _ (@adjunction_transpose_semantic_func $R $L $F $G $J $X $Y) $h) ];
+unif_rule
+  @fapp0 _ _ (@defiso_at_from _ _ _ _
+    (@Adjunction_hom_prof_comparison $R $L $F $G $J) (Struct_sigma $X $Y)) $k
   ≡ @comp_fapp0 $C $a $b $c $g $f
   ↪ [ (@comp_fapp0 $C $a $b $c $g $f)
         ≡ (@fapp0 _ _ (@adjunction_untranspose_semantic_func $R $L $F $G $J $X $Y) $k) ];

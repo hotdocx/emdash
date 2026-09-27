@@ -74,9 +74,9 @@ assert ⊢
       walking_arrow_tgt
       walking_arrow_generator;
 
-// The outer coordinate is one whole coevaluation-generated transformation.
+// The outer coordinate is one classified coevaluation-generated lax transfor.
 assert ⊢
-  gray_square_outer_transf
+  gray_square_outer_lax_transfor
   ≡ @fapp1_fapp0
       WalkingArrow_cat
       (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
@@ -84,6 +84,15 @@ assert ⊢
       walking_arrow_src
       walking_arrow_tgt
       walking_arrow_generator;
+
+assert ⊢
+  gray_square_outer_transf
+  ≡ @lax_transfor
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      gray_square_outer_lax_transfor;
 
 assert ⊢
   gray_square_outer_src_eval_func

@@ -1,19 +1,28 @@
 require open emdash.emdash3_2_zero_arrow_cone_homology;
 
-// Generic H identity/composition and further Hom action on the native source.
+// Normal identity, qualified composition and further Hom action on the native source.
 assert [C : Cat] (S : τ (@PreadditiveCategory C))
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
   (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V)) (z : τ (Obj (@ZeroArrowCone_cat C t T))) ⊢
   @fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z z (@id (@ZeroArrowCone_cat C t T) z) ≡ @id C (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z);
-assert [C : Cat] (S : τ (@PreadditiveCategory C))
+assertnot [C : Cat] (S : τ (@PreadditiveCategory C))
   (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
   (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
   (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V)) (x y z : τ (Obj (@ZeroArrowCone_cat C t T))) (f : τ (Hom (@ZeroArrowCone_cat C t T) x y)) (g : τ (Hom (@ZeroArrowCone_cat C t T) y z)) ⊢
   @comp_fapp0 C _ _ _ (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) y z g) (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x y f)
   ≡ @fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x z (@comp_fapp0 (@ZeroArrowCone_cat C t T) x y z g f);
+
+// Existing OneCat evidence gives the path on the same raw H.
+assert [C : Cat] (S : τ (@PreadditiveCategory C))
+  (C1 : τ (IsNCat (cat_succ cat_zero) C)) [t : τ (Obj C)]
+  (T : τ (@TerminalObject C t)) (T0 : τ (@TerminalObject (Op_cat C) t))
+  (W : τ (@HasComputationalKernels C S)) (V : τ (@HasComputationalCokernels C S))
+  (P : τ (@KernelPresentation C S t T W)) (Q : τ (@CokernelPresentation C S t T0 V)) (x y z : τ (Obj (@ZeroArrowCone_cat C t T))) (f : τ (Hom (@ZeroArrowCone_cat C t T) x y)) (g : τ (Hom (@ZeroArrowCone_cat C t T) y z)) ⊢
+  @eq_sym _ _ _ (@one_cat_composition_path (@ZeroArrowCone_cat C t T) C C1 (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x y z g f)
+  : τ (@= (Hom C (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) z)) (@comp_fapp0 C _ _ _ (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) y z g) (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x y f)) (@fapp1_fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) x z (@comp_fapp0 (@ZeroArrowCone_cat C t T) x y z g f)));
 
 // Check the selected constructor property compositionally: the retained
 // path, its three native input observations, and the generic selected recipe
@@ -28,7 +37,7 @@ assert [C : Cat] (S : τ (@PreadditiveCategory C))
     (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A0) d)) ⊢
   @zero_arrow_cone_homology_object_path C S C1 t T T0 W V P Q (@zero_arrow_cone_obj C t T A0 d h0)
   : τ (@= (Obj C) (@fapp0 (@ZeroArrowCone_cat C t T) C (@zero_arrow_cone_homology_func C S C1 t T T0 W V P Q) (@zero_arrow_cone_obj C t T A0 d h0))
-      (@homology_family_selected_object (@ZeroArrowCone_cat C t T) C S t T W V
+      (@homology_family_selected_object (@ZeroArrowCone_cat C t T) C S C1 t T W V
         (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T)
         (@zero_arrow_cone_universal_transf C C1 t T)
         (@zero_arrow_cone_obj C t T A0 d h0)));

@@ -44,24 +44,33 @@ assert [C : Cat]
   : τ (Obj
       (@CubicalLevel_cat C (succ (succ (succ zero)))));
 
-// The successor strict graph package has the whole graph as its carrier.
+// The successor graph's classified carrier compares proof-time with the whole
+// graph; the strict discriminator remains at runtime.
 assert [C : Cat]
   (n : τ Nat_grpd)
   (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C)) ⊢
-  @strict_functor_underlying
-    (@GrayCubePos_R n)
-    (@LaxArrow_cat C)
-    (@gray_cube_step_graph_data C n H)
-  ≡ @gray_transf_graph_func
+  @eq_refl
+    (Functor (@GrayCubePos_R n) (@LaxArrow_cat C))
+    (@strict_functor
       (@GrayCubePos_R n)
-      C
+      (@LaxArrow_cat C)
+      (@gray_cube_step_graph_data C n H))
+  : τ (@=
+      (Functor (@GrayCubePos_R n) (@LaxArrow_cat C))
       (@strict_functor
-        (@GrayCubePos_R n) C
-        (@gray_cube_step_source_data C n H))
-      (@strict_functor
-        (@GrayCubePos_R n) C
-        (@gray_cube_step_target_data C n H))
-      (@gray_cube_step_transf C n H);
+        (@GrayCubePos_R n)
+        (@LaxArrow_cat C)
+        (@gray_cube_step_graph_data C n H))
+      (@gray_transf_graph_func
+        (@GrayCubePos_R n)
+        C
+        (@strict_functor
+          (@GrayCubePos_R n) C
+          (@gray_cube_step_source_data C n H))
+        (@strict_functor
+          (@GrayCubePos_R n) C
+          (@gray_cube_step_target_data C n H))
+        (@gray_cube_step_lax_transfor C n H)));
 
 // For the identity realization of I tensor_R I, the successor inputs recover
 // the already-established walking-square coevaluation data.
@@ -82,6 +91,12 @@ assert ⊢
     GrayWalkingSquare_cat zero
     (@strict_identity GrayWalkingSquare_cat)
   ≡ gray_square_inner_tgt_data;
+
+assert ⊢
+  @gray_cube_step_lax_transfor
+    GrayWalkingSquare_cat zero
+    (@strict_identity GrayWalkingSquare_cat)
+  ≡ gray_square_outer_lax_transfor;
 
 assert ⊢
   @gray_cube_step_transf

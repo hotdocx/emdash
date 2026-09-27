@@ -19,17 +19,17 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
+            'sha256:6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6',
+                'sha256:7200f0614757bccf2e309703771003511ecd239a4e99433a2890d2049c40b89d',
             imports: []
         },
         commands: [
             {
                 id: 'profunctor-boundary.definitional-isomorphism',
-                ordinal: 584,
+                ordinal: 581,
                 kind: 'symbol',
                 textSha256:
                     'sha256:fbd0fb3b99e57a60508f5f9767cb844004d049fc45ef26935c4e737e31e19727',
@@ -39,7 +39,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-boundary.category',
-                ordinal: 1403,
+                ordinal: 1378,
                 kind: 'symbol',
                 textSha256:
                     'sha256:36453cfd6b350f61f819c8affdabb63f28938c1e58476320c5a66cf8c6ffa6a5',
@@ -49,7 +49,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-boundary.classifier',
-                ordinal: 1407,
+                ordinal: 1382,
                 kind: 'symbol',
                 textSha256:
                     'sha256:6521af0dd45b72eefc3f0698e4673d96cbd533c2cb331998768f345b2902bf2e',
@@ -59,7 +59,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-boundary.comparison',
-                ordinal: 1454,
+                ordinal: 1430,
                 kind: 'symbol',
                 textSha256:
                     'sha256:e404fb5c06d2b8e7eb528b040ac235e8c04c975d2ae4f6c560ee245d6cf07581',
@@ -69,7 +69,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-boundary.tensor',
-                ordinal: 1486,
+                ordinal: 1461,
                 kind: 'symbol',
                 textSha256:
                     'sha256:30f8e29e5ca28287fca368e0a7b84e07f32227e560bffafcbaa16b05121843fb',
@@ -97,11 +97,11 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
+            'sha256:6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6',
+                'sha256:7200f0614757bccf2e309703771003511ecd239a4e99433a2890d2049c40b89d',
             imports: []
         },
         commands: [
@@ -145,7 +145,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.postcomposition-action',
-                ordinal: 553,
+                ordinal: 551,
                 kind: 'symbol',
                 textSha256:
                     'sha256:335d0cd9720e84fda3bb58afb7d83239aac515a4802f159714b46c47ab898115',
@@ -155,7 +155,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.forward-arrow',
-                ordinal: 585,
+                ordinal: 582,
                 kind: 'symbol',
                 textSha256:
                     'sha256:25a5c11a10c41564747c450d9a9acaacabdb5bcfb26b79b46645b274eb53d4b2',
@@ -165,7 +165,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.inverse-arrow',
-                ordinal: 586,
+                ordinal: 583,
                 kind: 'symbol',
                 textSha256:
                     'sha256:972a1a78429d92c6943a0a031461e27d9d7aa726c60f7734d343dacb74f7612b',
@@ -175,7 +175,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.vertical-map',
-                ordinal: 1409,
+                ordinal: 1384,
                 kind: 'symbol',
                 textSha256:
                     'sha256:d02ad09b81faea692e0b745bef7e2e9ba7e9cbbea00e3c3f88b54061ecde74a3',
@@ -185,7 +185,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.push',
-                ordinal: 1455,
+                ordinal: 1431,
                 kind: 'symbol',
                 textSha256:
                     'sha256:a4925ac8df4ff702218175d3e81f9d5f486bdd796a6aa148e5d4decba0e31273',
@@ -195,7 +195,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-comparison.pull',
-                ordinal: 1456,
+                ordinal: 1432,
                 kind: 'symbol',
                 textSha256:
                     'sha256:56c6a4f2e64a60768a306446b26b2d5398b92a0b173e7d5be606b411ddbedb3b',
@@ -223,11 +223,11 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61',
+            'sha256:6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6',
+                'sha256:7200f0614757bccf2e309703771003511ecd239a4e99433a2890d2049c40b89d',
             imports: []
         },
         commands: [
@@ -271,7 +271,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.product-category',
-                ordinal: 672,
+                ordinal: 663,
                 kind: 'symbol',
                 textSha256:
                     'sha256:be0837def124ded5873293c79e6281bd8eaf8e0c4ffaa79b8f04f5c2d0861163',
@@ -281,7 +281,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.product-object',
-                ordinal: 674,
+                ordinal: 665,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -289,7 +289,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.product-hom-category',
-                ordinal: 691,
+                ordinal: 682,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -297,7 +297,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.map',
-                ordinal: 1488,
+                ordinal: 1463,
                 kind: 'symbol',
                 textSha256:
                     'sha256:354de0e1299652c4b0102e5560a8a039fd7d1c336f64aa3a03a842b7bd3ee575',
@@ -307,7 +307,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.functor',
-                ordinal: 1489,
+                ordinal: 1464,
                 kind: 'symbol',
                 textSha256:
                     'sha256:77a7bc1e7a3cded3595c3c90b0791e6a1f0c021cc5910699461b7d232aca95ea',
@@ -317,7 +317,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.object-action',
-                ordinal: 1490,
+                ordinal: 1465,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -325,7 +325,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'profunctor-tensor.arrow-action',
-                ordinal: 1491,
+                ordinal: 1466,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:

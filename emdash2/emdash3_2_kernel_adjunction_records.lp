@@ -3,7 +3,7 @@
    proof reuses the selected interpretation, with the computational centre
    explicitly fixed to the mate operation. No object/map transport, new
    primitive, rewrite or unification rule is introduced. Proof transport is
-   confined to universality; its computational centre is explicitly installed. */
+   confined to laws; its computational centre is explicitly installed. */
 /* Whole K object/inclusion with the original selected lift as a mate. */
 require open emdash.emdash3_2_kernel_adjunction_unmate_paths;
 
@@ -132,8 +132,13 @@ symbol kernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
       (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
     (@preadditive_hom_zero C S (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d)
       (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)))
-≔ @kernel_adjunction_annihilation C S t T
-    (@kernel_presentation_structure C S t T W P) d;
+≔ @ind_eq (@Σ_ (Obj C) (λ Y : τ (Obj C), Hom C Y (@fapp0 WalkingArrow_cat C d walking_arrow_src)))
+    (@Struct_sigma (Obj C) (λ Y : τ (Obj C), Hom C Y (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@fapp0 _ _ (@kernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@kernel_presentation_inclusion C S t T W P)))
+    (@Struct_sigma (Obj C) (λ Y : τ (Obj C), Hom C Y (@fapp0 WalkingArrow_cat C d walking_arrow_src)) (@kernel_presentation_selected_object C S W d) (@computational_kernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d)))
+    (@kernel_record_frame_path C S t T W P d)
+    (λ frame : τ (@Σ_ (Obj C) (λ Y : τ (Obj C), Hom C Y (@fapp0 WalkingArrow_cat C d walking_arrow_src))), (@= (Hom C (sigma_Fst frame) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)) (@comp_fapp0 C (sigma_Fst frame) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (sigma_Snd frame)) (@preadditive_hom_zero C S (sigma_Fst frame) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt))))
+    (@computational_kernel_annihilation C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
+      (@terminal_arrow_test_outgoing C d) (@kernel_presentation_selected C S W d));
 
 symbol kernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]

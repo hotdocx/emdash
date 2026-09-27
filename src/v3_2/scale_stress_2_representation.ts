@@ -309,7 +309,7 @@ const sigmaUncurryingProofRule = () => {
                 '(@Sigma_proj1_pullback_catd $K $R $D) ≡ ' +
                 "@Functord_cat $K' $R' $D' ↪ " +
                 "[ $K ≡ $K'; $R ≡ $R'; $D ≡ $D' ];",
-            995
+            1053
         )
     };
 };
@@ -355,7 +355,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
             provenance: source(
                 'injective symbol Catd (K : Cat) : Grpd ' +
                     '≔ Obj (Catd_cat K);',
-                389
+                394
             )
         },
         {
@@ -368,7 +368,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
                 'injective symbol Sigma_proj1_pullback_catd ' +
                     '[K : Cat] (R D : τ (Catd K)) : ' +
                     'τ (Catd (@Sigma_cat K R));',
-                991
+                1046
             )
         }
     ],

@@ -10,7 +10,8 @@
   Dimension one evaluates a strict walking map at the two endpoints and the
   generator. At a successor, right curry turns H into a strict walking map
   whose generator is a transformation between strict lower-dimensional
-  diagrams. The selected strict transformation-graph code gives a map into
+  diagrams. That Gray-hom arrow is already a classified `LaxTransfor`, whose
+  strict transformation-graph code gives a map into
   LaxArrow(C), the induction hypothesis decodes it there, and the canonical
   cubical-level shift returns the desired level over C.
 
@@ -148,11 +149,13 @@ symbol gray_cube_step_target_data
     (@gray_cube_step_curry_func C n H)
     walking_arrow_tgt;
 
-symbol gray_cube_step_transf
+symbol gray_cube_step_lax_transfor
   [C : Cat]
   (n : τ Nat_grpd)
   (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
-  : τ (Transf
+  : τ (@LaxTransfor
+      (@GrayCubePos_R n)
+      C
       (@strict_functor
         (@GrayCubePos_R n) C
         (@gray_cube_step_source_data C n H))
@@ -165,6 +168,28 @@ symbol gray_cube_step_transf
     (@gray_cube_step_curry_func C n H)
     walking_arrow_src walking_arrow_tgt
     walking_arrow_generator;
+
+symbol gray_cube_step_transf
+  [C : Cat]
+  (n : τ Nat_grpd)
+  (H : τ (@StrictFunctor (@GrayCubePos_R (succ n)) C))
+  : τ (Transf
+      (@strict_functor
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_source_data C n H))
+      (@strict_functor
+        (@GrayCubePos_R n) C
+        (@gray_cube_step_target_data C n H)))
+≔ @lax_transfor
+    (@GrayCubePos_R n)
+    C
+    (@strict_functor
+      (@GrayCubePos_R n) C
+      (@gray_cube_step_source_data C n H))
+    (@strict_functor
+      (@GrayCubePos_R n) C
+      (@gray_cube_step_target_data C n H))
+    (@gray_cube_step_lax_transfor C n H);
 
 // Strict code for the lower-dimensional transformation graph in LaxArrow(C).
 symbol gray_cube_step_graph_data
@@ -179,7 +204,7 @@ symbol gray_cube_step_graph_data
     C
     (@gray_cube_step_source_data C n H)
     (@gray_cube_step_target_data C n H)
-    (@gray_cube_step_transf C n H);
+    (@gray_cube_step_lax_transfor C n H);
 
 // Successor of the uniform decoder family.
 symbol gray_cube_decode_step

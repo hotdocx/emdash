@@ -1,6 +1,7 @@
 /* Existing fixed-arrow Ω evidence indexed by one existing arrow object.
    The object observations change no directed action or inverse choice. */
 require open emdash.emdash3_2_cubical_internalization;
+require open emdash.emdash3_2_omega_evaluation_points;
 
 symbol ArrowOmegaEvidence [C : Cat] (a : τ (Obj (@LaxArrow_cat C))) : Grpd
 ≔ @OmegaEquivAlong C (sigma_Fst a) (sigma_Fst (sigma_Snd a)) (sigma_Snd (sigma_Snd a));
@@ -17,8 +18,8 @@ symbol transf_arrow_omega_at [K C : Cat]
   (a : τ (Obj (@LaxArrow_cat (Functor_cat K C))))
   (u : τ (@ArrowOmegaEvidence (Functor_cat K C) a)) (x : τ (Obj K))
   : τ (@ArrowOmegaEvidence C (@transf_arrow_observation_at K C a x))
-≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat K C) C (@fapp0_func K C x)
-    (sigma_Fst a) (sigma_Fst (sigma_Snd a)) (sigma_Snd (sigma_Snd a)) u;
+≔ @omega_equiv_at K C (sigma_Fst a) (sigma_Fst (sigma_Snd a))
+    (sigma_Snd (sigma_Snd a)) u x;
 
 // Package the ORIGINAL indexed arrow and its existing Ω witness together.
 symbol OmegaArrowData (C : Cat) : Grpd

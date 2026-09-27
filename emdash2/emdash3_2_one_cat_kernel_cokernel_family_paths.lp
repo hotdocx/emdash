@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_functor_closure;
+require open emdash.emdash3_2_one_cat_action_paths;
 /* Native whole kernel/cokernel inverse-mate observations.
    Faithfulness, annihilation and compatibility are derived from the original
    whole adjunctions and the ordinary family presentations. Original K/Q
@@ -198,8 +200,9 @@ symbol one_cat_kernel_whole_annihilation [C : Cat] [S : τ (@PreadditiveCategory
       walking_arrow_generator) (@diagram_family_transf (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C
       (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C) C (Functor_cat WalkingArrow_cat C)
       (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P)) walking_arrow_src walking_arrow_tgt
-      walking_arrow_generator)) (@strict_component_naturality_path WalkingArrow_cat (Functor_cat (Functor_cat
-      WalkingArrow_cat C) C)
+      walking_arrow_generator)) (@one_cat_component_naturality_path WalkingArrow_cat (Functor_cat (Functor_cat
+      WalkingArrow_cat C) C) (@one_cat_functor_category (Functor_cat
+      WalkingArrow_cat C) C C1)
       (@sym_func (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat C)
         C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P)))
         (@sym_func (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@id_func (Functor_cat WalkingArrow_cat C)))
@@ -365,8 +368,7 @@ symbol one_cat_cokernel_whole_annihilation [C : Cat] [S : τ (@PreadditiveCatego
       (@initial_arrow_diagram_func C t T0) (@cokernel_adjunction_func C S t T0 P)) (@unit_adj_transf (Functor_cat
       WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T0 P) (@initial_arrow_diagram_func C t T0)
       (@cokernel_adjunction_evidence C S t T0 P)) walking_arrow_tgt) (@diagram_evaluation_transf WalkingArrow_cat C
-      walking_arrow_src walking_arrow_tgt walking_arrow_generator)) (@strict_component_naturality_path
-      WalkingArrow_cat (Functor_cat (Functor_cat WalkingArrow_cat C) C)
+      walking_arrow_src walking_arrow_tgt walking_arrow_generator)) (@one_cat_component_naturality_path WalkingArrow_cat (Functor_cat (Functor_cat WalkingArrow_cat C) C) (@one_cat_functor_category (Functor_cat WalkingArrow_cat C) C C1)
       (@sym_func (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@id_func (Functor_cat WalkingArrow_cat C)))
         (@sym_func (Functor_cat WalkingArrow_cat C) WalkingArrow_cat C (@comp_cat_fapp0 (Functor_cat WalkingArrow_cat
         C) C (Functor_cat WalkingArrow_cat C) (@initial_arrow_diagram_func C t T0) (@cokernel_adjunction_func C S t T0
@@ -506,8 +508,8 @@ symbol one_cat_kernel_family_projection_precomp_path [B C : Cat] [S : τ (@Pread
         WalkingArrow_cat C C1) (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P)
         (@kernel_adjunction_evidence C S t T P)) A0 D) (@comp_fapp0 (Functor_cat B C) A0 A1 (@fapp0 (Functor_cat B
         (Functor_cat WalkingArrow_cat C)) (Functor_cat B C) (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C
-        (@kernel_adjunction_func C S t T P)) D) h a)) (@untranspose_precomp_path (Functor_cat B C) (Functor_cat B
-        (Functor_cat WalkingArrow_cat C)) (@comp_cat_cov_func B C (Functor_cat WalkingArrow_cat C)
+        (@kernel_adjunction_func C S t T P)) D) h a)) (@one_cat_untranspose_precomp_path (Functor_cat B C) (Functor_cat B
+        (Functor_cat WalkingArrow_cat C)) (@one_cat_functor_category B (Functor_cat WalkingArrow_cat C) (@one_cat_functor_category WalkingArrow_cat C C1)) (@comp_cat_cov_func B C (Functor_cat WalkingArrow_cat C)
         (@terminal_arrow_diagram_func C t T)) (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C
         (@kernel_adjunction_func C S t T P)) (@one_cat_postcomp_adjunction B C (Functor_cat WalkingArrow_cat C) C1
         (@one_cat_functor_category WalkingArrow_cat C C1) (@terminal_arrow_diagram_func C t T)

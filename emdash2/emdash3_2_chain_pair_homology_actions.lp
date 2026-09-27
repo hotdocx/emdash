@@ -111,7 +111,7 @@ symbol chain_pair_homology_action_factor
         (@homology_record_object C S A1 B1 D1 p1 (@chain_pair_homology_record C S C1 t T T0 W V P Q A1 B1 D1 p1))
         (@homology_record_projection C S A1 B1 D1 p1 (@chain_pair_homology_record C S C1 t T T0 W V P Q A1 B1 D1 p1))
         (@chain_pair_homology_cycle_action C S C1 t T W P A0 B0 D0 A1 B1 D1 p0 p1 m)))
-≔ @homology_family_record_map_factor (@ZeroArrowCone_cat C t T) C S t T T0 W V P Q (@zero_arrow_cone_first_func C t T)
+≔ @homology_family_record_map_factor (@ZeroArrowCone_cat C t T) C S C1 t T T0 W V P Q (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T)
     (@chain_pair_zero_cone C S t T W P A0 B0 D0 p0) (@chain_pair_zero_cone C S t T W P A1 B1 D1 p1) (@chain_pair_zero_cone_map C S
       C1 t T W P A0 B0 D0 A1 B1 D1 p0 p1 m);
@@ -131,7 +131,7 @@ symbol chain_pair_homology_cycle_action_factor
         (@comp_fapp0 C (@homology_record_cycle_object C S A0 B0 D0 p0 (@chain_pair_homology_record C S C1 t T T0 W V P Q A0 B0 D0
         p0)) B0 B1 (@computational_chain_pair_map_middle C S A0 B0 D0 A1 B1 D1 p0 p1 m) (@homology_record_cycle_embedding C S A0 B0
         D0 p0 (@chain_pair_homology_record C S C1 t T T0 W V P Q A0 B0 D0 p0))))
-≔ @homology_family_record_cycle_factor (@ZeroArrowCone_cat C t T) C S t T T0 W V P Q (@zero_arrow_cone_first_func C t T)
+≔ @homology_family_record_cycle_factor (@ZeroArrowCone_cat C t T) C S C1 t T T0 W V P Q (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T)
     (@chain_pair_zero_cone C S t T W P A0 B0 D0 p0) (@chain_pair_zero_cone C S t T W P A1 B1 D1 p1) (@chain_pair_zero_cone_map C S
       C1 t T W P A0 B0 D0 A1 B1 D1 p0 p1 m);

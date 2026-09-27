@@ -21,7 +21,7 @@ assert [C : Cat] (S : τ (@PreadditiveCategory C))
   [X A B : τ (Obj C)] (b : τ (Hom C X A)) (d : τ (Hom C A B))
   (zero : τ (@= (Hom C X B) (@comp_fapp0 C X A B d b)
     (@preadditive_hom_zero C S X B))) ⊢
-  @kernel_adjunction_annihilation C S t T P (@walking_arrow_func C A B d)
+  @kernel_adjunction_annihilation C S C1 t T P (@walking_arrow_func C A B d)
   : τ (@= (Hom C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) (@walking_arrow_func C A B d)) B) (@comp_fapp0 C (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) (@walking_arrow_func C A B d)) A B d (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ (@walking_arrow_func C A B d) (@kernel_adjunction_inclusion C S t T P)))
     (@preadditive_hom_zero C S (@fapp0 (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) (@walking_arrow_func C A B d)) B));
 
@@ -44,7 +44,7 @@ assert [C : Cat] (S : τ (@PreadditiveCategory C))
   [A B X : τ (Obj C)] (d : τ (Hom C A B)) (b : τ (Hom C B X))
   (zero : τ (@= (Hom C A X) (@comp_fapp0 C A B X b d)
     (@preadditive_hom_zero C S A X))) ⊢
-  @cokernel_adjunction_annihilation C S t T P (@walking_arrow_func C A B d)
+  @cokernel_adjunction_annihilation C S C1 t T P (@walking_arrow_func C A B d)
   : τ (@= (Hom C A (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T P) (@walking_arrow_func C A B d))) (@comp_fapp0 C A B (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T P) (@walking_arrow_func C A B d)) (@tapp0_fapp0 (Functor_cat WalkingArrow_cat C) C _ _ (@walking_arrow_func C A B d) (@cokernel_adjunction_projection C S t T P)) d)
     (@preadditive_hom_zero C S A (@fapp0 (Functor_cat WalkingArrow_cat C) C (@cokernel_adjunction_func C S t T P) (@walking_arrow_func C A B d))));
 

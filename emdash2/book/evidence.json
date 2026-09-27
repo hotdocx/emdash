@@ -157,7 +157,7 @@
     },
     "CAT-FUNCTOR-CALCULUS": {
       "status": "checked",
-      "statement": "Ordinary functors expose object and iterated-hom action, with generic identity and composition computation rather than constructor-specific functor laws.",
+      "statement": "Ambient functors expose object and iterated-hom action with normal identity computation and retained compositor cells. Strict composition computation requires a classified stable view or a qualified named constructor.",
       "owners": [
         {
           "file": "emdash3_2.lp",
@@ -182,12 +182,20 @@
         {
           "file": "emdash3_2.lp",
           "symbol": "comp_cat_fapp0"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "strict_functor"
         }
       ],
       "reviewers": [
         {
           "file": "emdash3_2_checks.lp",
           "symbol": "fapp1_fapp0"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "strict_functor"
         }
       ]
     },
@@ -401,7 +409,7 @@
     },
     "CAT-HOM-CUTS": {
       "status": "checked",
-      "statement": "Represented-hom postcomposition and precomposition have distinct stable full and capped owners with identity, consecutive-action, adjacent-cut, and proof-time ordinary-composition comparisons.",
+      "statement": "Represented-hom postcomposition and precomposition retain distinct stable full and capped owners, normal identity computation, qualified identity/profile accumulation and adjacent cuts, and proof-time ordinary-composition comparisons. Arbitrary functor-indexed action retains its laxity.",
       "owners": [
         {
           "file": "emdash3_2.lp",
@@ -1580,17 +1588,25 @@
     },
     "TRANSF-STRICT-NATURALITY": {
       "status": "checked",
-      "statement": "Postcomposition and precomposition adjacent to an ordinary transfor's off-diagonal action reduce to the action on the corresponding composite source arrow.",
+      "statement": "The stable classified strict-transfor view owns both post/left and pre/right naturality cuts through the existing tapp1 calculus. Raw ambient transfors retain directed cells; property evidence alone supplies paths rather than blanket runtime rewriting.",
       "owners": [
         {
-          "file": "emdash3_2.lp",
-          "contains": "Full strict naturality for ordinary transfors"
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "strict_transfor"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "IsStrictTransfor"
         }
       ],
       "reviewers": [
         {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "strict_transfor"
+        },
+        {
           "file": "emdash3_2_checks.lp",
-          "contains": "Full strict naturality: post/left accumulation before capping"
+          "symbol": "tapp1_fapp0"
         }
       ]
     },
@@ -2091,7 +2107,7 @@
           "symbol": "Adjunction_hom_prof_comparison"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "Adjunction_hom_prof_comparison_along"
         }
       ],
@@ -2159,11 +2175,11 @@
           "symbol": "IsWeightedLimit_cov_comp"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "weighted_limit_cov_push"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "weighted_limit_cov_pull"
         }
       ],
@@ -2199,7 +2215,7 @@
           "symbol": "IsWeightedLimit_cov_comp"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
         }
       ],
@@ -2259,7 +2275,7 @@
           "symbol": "IsWeightedLimit_cov_comp"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
         }
       ],
@@ -2283,7 +2299,7 @@
           "symbol": "WeightedColimit_con"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "left_adjoint_preserves_weighted_colimit_con"
         }
       ],
@@ -2311,7 +2327,7 @@
           "symbol": "WeightedColimit_con"
         },
         {
-          "file": "emdash3_2.lp",
+          "file": "emdash3_2_strict_functor_actions.lp",
           "symbol": "left_adjoint_preserves_weighted_colimit_con"
         }
       ],
@@ -2674,7 +2690,7 @@
     },
     "DIRECT-COVER-COMPLETION-LOCALITY": {
       "status": "checked",
-      "statement": "Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology.",
+      "statement": "Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology. Whole equivalence assembly uses the inherited ordinary/displayed pointwise-to-whole primitive with both selected inverse slots and assumed cancellation; no strict-profile premise is required.",
       "owners": [
         {
           "file": "emdash3_2_direct_cover_completion_locality.lp",
@@ -2687,6 +2703,14 @@
         {
           "file": "emdash3_2_direct_cover_completion_locality.lp",
           "symbol": "direct_cover_completion_is_topology_local"
+        },
+        {
+          "file": "emdash3_2_strict_pointwise_equivalences.lp",
+          "symbol": "StrictTransfPointwiseOmegaAlong"
+        },
+        {
+          "file": "emdash3_2_strict_pointwise_equivalences.lp",
+          "symbol": "StrictTransfdPointwiseOmegaAlong"
         }
       ],
       "reviewers": [
@@ -4106,7 +4130,7 @@
     },
     "GRAY-COMPUTATIONAL-PROFILE": {
       "status": "checked",
-      "statement": "IsStrictFunctor constrains the existing whole compositor. StrictFunctor is an opaque classifier with stable classified action, explicit raw-carrier observation and canonical evidence independent of admission certificates. StrictFunctor_cat reuses the ambient transfor tower; GrayHom_lax still has ambient homs during the ongoing global-cut and lax-arrow migration.",
+      "statement": "IsStrictFunctor constrains the existing whole compositor. Opaque StrictFunctor admission provides stable classified action, a raw-carrier observation and canonical evidence. StrictFunctor_cat retains ambient transfors; GrayHom_lax selects opaque conventional LaxTransfor arrows, with pre/right computation and retained post/left laxity. Higher modifications are shared. Generic strict cuts are retired, with normal identities and qualified constructor instances retained.",
       "owners": [
         {
           "file": "emdash3_2_gray_profiles.lp",
@@ -4127,6 +4151,18 @@
         {
           "file": "emdash3_2_gray_profiles.lp",
           "symbol": "grayhom_lax_include_func"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "LaxTransfor"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "lax_transfor"
+        },
+        {
+          "file": "emdash3_2_gray_profiles.lp",
+          "symbol": "IsStrictTransfor"
         }
       ],
       "reviewers": [
@@ -4145,6 +4181,18 @@
         {
           "file": "examples/gray_profiles.lp",
           "symbol": "grayhom_lax_include_func"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "LaxTransfor"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "lax_transfor"
+        },
+        {
+          "file": "examples/gray_profiles.lp",
+          "symbol": "IsStrictTransfor"
         }
       ]
     },
@@ -4789,7 +4837,7 @@
           "symbol": "one_cat_postcomp_adjunction"
         },
         {
-          "file": "emdash3_2_one_cat_adjunction_families.lp",
+          "file": "emdash3_2_one_cat_functor_closure.lp",
           "symbol": "one_cat_functor_category"
         }
       ],

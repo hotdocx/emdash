@@ -444,5 +444,24 @@ class CheckMetricsTests(unittest.TestCase):
         )
 
 
+class TargetDeadlineTests(unittest.TestCase):
+    def test_suite_fallback_preserves_named_deadline_and_explicit_override(self):
+        import os
+        from scripts import check_metrics as metrics
+        from scripts.run_lambdapi import execution_settings
+        for target, override, expected in [
+            ("emdash3_2.lp", {}, 90_000),
+            ("emdash3_2_checks.lp", {}, 180_000),
+            ("emdash3_2_checks.lp", {"EMDASH_LP_TIMEOUT": "240s"}, 240_000),
+        ]:
+            with self.subTest(target=target, override=override), patch.dict(os.environ, override, clear=True), patch("scripts.check_metrics.subprocess.run") as run:
+                run.return_value.returncode = 0
+                run.return_value.stdout = ""
+                run.return_value.stderr = ""
+                metrics.run_command(["python3", "./scripts/run_lambdapi.py", "--quiet", target], "90s")
+                settings = execution_settings(Path(target), run.call_args.kwargs["env"])
+                self.assertEqual(settings["timeoutMs"], expected)
+
+
 if __name__ == "__main__":
     unittest.main()

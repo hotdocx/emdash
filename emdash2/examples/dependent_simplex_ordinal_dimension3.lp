@@ -78,14 +78,11 @@ assertnot [C : Cat]
         (@ordinal_dependent_simplex3_q013 C H))
       wrong));
 
-// Historical strict endpoint conversion does not collapse the extracted
-// laxity witness itself to identity.
+// Post/left migration exposes the two top-cell endpoints directly; the cell
+// is therefore not even homogeneously comparable with an identity.
 assertnot ⊢
-  ordinal_simplex3_top_cell
-  ≡ @id
-      (Hom_cat ordinal_simplex3_target_pathout_cat
-        ordinal_simplex3_e01 ordinal_simplex3_e03)
-      ordinal_simplex3_top_source;
+  ordinal_simplex3_top_source
+  ≡ ordinal_simplex3_top_target;
 
 // A selected strict profile uses the same observation without a second
 // simplex implementation.

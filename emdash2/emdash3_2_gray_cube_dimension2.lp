@@ -8,11 +8,10 @@
 
     target_side o outer_source  ==>  outer_target o inner_source.
 
-  The stable whole graph computes its target side to the literal inner-target
-  arrow and its filler to the existing `gray_interchanger`. Another generic
-  whole action remains available for recursion. The identity overlap with the
-  historical strict functor cut is accepted pending the later profile-local
-  migration of that global approximation.
+  The stable `lax_transfor` view makes the selected pre/right leg compute
+  without an endpoint adapter. The whole graph therefore computes its target
+  side to the literal inner-target arrow and its filler judgmentally to the
+  existing `gray_interchanger`; another generic whole action remains available.
 */
 
 require open emdash.emdash3_2_gray_cube_decoder;
@@ -27,7 +26,7 @@ symbol gray_cube2_graph_target_side
     GrayWalkingSquare_cat
     gray_square_inner_src_func
     gray_square_inner_tgt_func
-    gray_square_outer_transf
+    gray_square_outer_lax_transfor
     walking_arrow_src walking_arrow_tgt
     walking_arrow_generator;
 
@@ -63,7 +62,7 @@ symbol gray_cube2_interchanger_cell
     GrayWalkingSquare_cat
     gray_square_inner_src_func
     gray_square_inner_tgt_func
-    gray_square_outer_transf
+    gray_square_outer_lax_transfor
     walking_arrow_src walking_arrow_tgt
     walking_arrow_generator;
 
@@ -105,15 +104,15 @@ symbol gray_cube2_graph_next_func
         (@gray_transf_graph_obj
           WalkingArrow_cat GrayWalkingSquare_cat
           gray_square_inner_src_func gray_square_inner_tgt_func
-          gray_square_outer_transf walking_arrow_src)
+          gray_square_outer_lax_transfor walking_arrow_src)
         (@gray_transf_graph_obj
           WalkingArrow_cat GrayWalkingSquare_cat
           gray_square_inner_src_func gray_square_inner_tgt_func
-          gray_square_outer_transf walking_arrow_tgt)))
+          gray_square_outer_lax_transfor walking_arrow_tgt)))
 ≔ @gray_transf_graph_next_func
     WalkingArrow_cat
     GrayWalkingSquare_cat
     gray_square_inner_src_func
     gray_square_inner_tgt_func
-    gray_square_outer_transf
+    gray_square_outer_lax_transfor
     walking_arrow_src walking_arrow_tgt;

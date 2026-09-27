@@ -77,25 +77,25 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         moduleId: 'emdash.emdash3_2',
         file: 'emdash3_2.lp',
         sha256:
-            '594bbfa447bb383e979d3b082d3ed063d5023d9c0a300f729c34b376cfb229d6',
+            '7200f0614757bccf2e309703771003511ecd239a4e99433a2890d2049c40b89d',
         imports: [],
         counts: {
             require: 0,
             flag: 5,
-            symbol: 834,
+            symbol: 814,
             inductive: 11,
-            rule: 754,
-            unif_rule: 94,
+            rule: 743,
+            unif_rule: 91,
             builtin: 6,
             notation: 3,
             opaque: 1
         },
         shape: {
-            definitions: 523,
-            assumptions: 311,
+            definitions: 504,
+            assumptions: 310,
             protectedDefinitions: 0,
             tacticBodies: 0,
-            runtimeClauses: 791,
+            runtimeClauses: 777,
             constructors: 14
         }
     },
@@ -129,12 +129,15 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         moduleId: 'emdash.emdash3_2_eq1_hom_action',
         file: 'emdash3_2_eq1_hom_action.lp',
         sha256:
-            '000dd93e025ebb9e6efe2621fa74257a2ffe547107f353f590c31088aa9b0be0',
-        imports: ['emdash.emdash3_2'],
+            'ba709099dda7b5be16e78361c9a8e4f96f0f0519d907fb3f2772d556a3b3ceb1',
+        imports: [
+            'emdash.emdash3_2',
+            'emdash.emdash3_2_strict_functor_actions'
+        ],
         counts: {
-            require: 1,
+            require: 2,
             flag: 0,
-            symbol: 78,
+            symbol: 81,
             inductive: 0,
             rule: 0,
             unif_rule: 0,
@@ -143,7 +146,7 @@ const liveExpectations: readonly LiveExportExpectation[] = [
             opaque: 0
         },
         shape: {
-            definitions: 78,
+            definitions: 81,
             assumptions: 0,
             protectedDefinitions: 56,
             tacticBodies: 2,
@@ -184,7 +187,7 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         moduleId: 'emdash.emdash3_2_walking_end_hit',
         file: 'emdash3_2_walking_end_hit.lp',
         sha256:
-            '6b7f2d63fe9490a01d5c96726673bb1070400a154e2287fb36cc1486734dfbda',
+            '3fac83411514a966c6b49ee98eb76cfbd9d05f4c5e347e9a835081285c7de1b7',
         imports: [
             'emdash.emdash3_2_nat_arithmetic',
             'emdash.emdash3_2_eq1_hom_action'
@@ -192,20 +195,20 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         counts: {
             require: 2,
             flag: 0,
-            symbol: 81,
+            symbol: 82,
             inductive: 0,
-            rule: 8,
+            rule: 11,
             unif_rule: 1,
             builtin: 0,
             notation: 0,
-            opaque: 0
+            opaque: 1
         },
         shape: {
-            definitions: 75,
+            definitions: 76,
             assumptions: 6,
             protectedDefinitions: 0,
             tacticBodies: 0,
-            runtimeClauses: 10,
+            runtimeClauses: 13,
             constructors: 0
         }
     }

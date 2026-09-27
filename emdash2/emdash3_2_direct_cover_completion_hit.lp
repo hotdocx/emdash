@@ -19,9 +19,9 @@
   question category.  Its literal-cover and pointwise observations are
   derived and are not runtime glue rewrites.
 
-  At a canonical pullback question, generic whole strict naturality now
-  derives the internal substitution path comparing transport-after-glue with
-  glue-after-transport.  The whole glue and whole silent owners package the
+  At a canonical pullback question, supplied `IsStrictFunctord` evidence on
+  the existing whole glue constructor derives the substitution path comparing
+  transport-after-glue with glue-after-transport. The whole glue and whole silent owners package the
   completion as a syntactic `DirectCoverSheaf`; this is the internal
   Pédrot-style algebraic notion, not yet the conventional two-sided
   restriction equivalence.  This boundary deliberately does not yet derive
@@ -34,6 +34,7 @@
 */
 
 require open emdash.emdash3_2_direct_cover_internal_sheaves;
+require open emdash.emdash3_2_gray_profiles;
 
 // Primitive whole presheaf generated from P by recursive covering-sieve glue.
 injective symbol DirectCoverCompletionPsh
@@ -87,6 +88,21 @@ injective symbol direct_cover_completion_glue_funcd
       (@DirectCoverQuestionSection_catd
         K T (@DirectCoverCompletionPsh K T P)));
 
+// The categorical-HIT glue constructor is strict in question substitution.
+// This evidence constrains its existing whole laxity cell; it does not add a
+// second glue/naturality transformation.
+constant symbol direct_cover_completion_glue_is_strict
+  [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K))
+  : τ (@IsStrictFunctord
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@direct_cover_completion_glue_funcd K T P));
+
 // Literal-question component: recover the deployed one-cover glue functor.
 rule @tapp0_fapp0
       _ Cat_cat _ _
@@ -103,9 +119,9 @@ rule @tapp0_fapp0
 
     Section[p] o glue_q = glue_(p*q) o Matching[p].
 
-  This is a transparent specialization of generic strict `Functord`
-  naturality at the whole `tapp1_func` owner.  It is not an external family of
-  component squares and introduces no sheaf-specific rewrite or unifier.
+  This is the endpoint path carried by the constructor's `IsStrictFunctord`
+  evidence. It is not an external family of component squares and introduces
+  no sheaf-specific rewrite or unifier.
 */
 symbol direct_cover_completion_glue_pullback_agrees
   [K : Cat]
@@ -150,17 +166,57 @@ symbol direct_cover_completion_glue_pullback_agrees
         (Struct_sigma V
           (@direct_cover_question_internal_pullback K T V U p q))
         (@direct_cover_question_pullback_arrow K T V U p q)))
-≔ @functord_transport_strict_naturality
-    (@DirectCoverQuestion_cat K T)
-    (@DirectCoverQuestionMatching_catd
-      K T (@DirectCoverCompletionPsh K T P))
-    (@DirectCoverQuestionSection_catd
-      K T (@DirectCoverCompletionPsh K T P))
-    (@direct_cover_completion_glue_funcd K T P)
-    (Struct_sigma U q)
-    (Struct_sigma V
-      (@direct_cover_question_internal_pullback K T V U p q))
-    (@direct_cover_question_pullback_arrow K T V U p q);
+≔ @strict_cell_path
+    (@Functor_cat
+      (@Fibre_cat
+        (@DirectCoverQuestion_cat K T)
+        (@DirectCoverQuestionMatching_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (Struct_sigma U q))
+      (@Fibre_cat
+        (@DirectCoverQuestion_cat K T)
+        (@DirectCoverQuestionSection_catd
+          K T (@DirectCoverCompletionPsh K T P))
+        (Struct_sigma V
+          (@direct_cover_question_internal_pullback K T V U p q))))
+    (@functord_transport_lhs_func
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@direct_cover_completion_glue_funcd K T P)
+      (Struct_sigma U q)
+      (Struct_sigma V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@direct_cover_question_pullback_arrow K T V U p q))
+    (@functord_transport_rhs_func
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@direct_cover_completion_glue_funcd K T P)
+      (Struct_sigma U q)
+      (Struct_sigma V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@direct_cover_question_pullback_arrow K T V U p q))
+    (@functord_laxity_transf
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@direct_cover_completion_glue_funcd K T P)
+      (Struct_sigma U q)
+      (Struct_sigma V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@direct_cover_question_pullback_arrow K T V U p q))
+    ((@direct_cover_completion_glue_is_strict K T P)
+      (Struct_sigma U q)
+      (Struct_sigma V
+        (@direct_cover_question_internal_pullback K T V U p q))
+      (@direct_cover_question_pullback_arrow K T V U p q));
 
 // Pointwise glue observation, derived from the whole glue functor.
 symbol direct_cover_completion_glue

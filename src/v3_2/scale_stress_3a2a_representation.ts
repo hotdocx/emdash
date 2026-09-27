@@ -816,7 +816,7 @@ const identityObjectRule = () => {
         right: builder.template(x),
         provenance: source(
             'rule @fapp0 $A $A (@id Cat_cat $A) $xA ↪ $xA;',
-            407
+            411
         )
     };
 };
@@ -850,7 +850,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective', 'transparent'),
         provenance: source(
             'injective symbol Hom (A : Cat)',
-            230
+            232
         )
     },
     {
@@ -861,7 +861,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('injective', 'opaque'),
         provenance: source(
             'injective symbol id : Π (A : Cat)',
-            232
+            234
         )
     },
     {
@@ -872,7 +872,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol id_func [A: Cat]',
-            406
+            410
         )
     },
     {
@@ -883,7 +883,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol hom_postcomp_fapp0 [A B : Cat]',
-            547
+            551
         )
     },
     {
@@ -894,7 +894,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol defiso_to',
-            578
+            582
         )
     },
     {
@@ -905,7 +905,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol defiso_from',
-            579
+            583
         )
     },
     {
@@ -916,7 +916,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol ProfMap',
-            1204
+            1384
         )
     },
     {
@@ -929,7 +929,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol prof_comparison_push',
-            1233
+            1431
         )
     },
     {
@@ -942,7 +942,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol prof_comparison_pull',
-            1234
+            1432
         )
     }
 ];

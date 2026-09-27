@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 /* Constant raw triples enter the existing whole snake input before P/Q selection. */
 require open emdash.emdash3_2_native_snake_inputs;
 require open emdash.emdash3_2_one_cat_constant_chain_zeros;
@@ -20,7 +22,7 @@ symbol one_cat_constant_triple_zero_path [K C : Cat] (S : τ (@PreadditiveCatego
       (@Transf K C (@Const_func K C A) (@Const_func K C D))
       (λ u, @comp_fapp0 (Functor_cat K C) (@Const_func K C A) (@Const_func K C X)
         (@Const_func K C D) (@Const_transf K C X D c) u) _ _
-      (@eq_sym _ _ _ (@fapp1_comp_path C (Functor_cat K C) (@Const_func_func K C) A B X b a)))
+      (@eq_sym _ _ _ (@one_cat_composition_path C (Functor_cat K C) (@one_cat_functor_category K C C1) (@Const_func_func K C) A B X b a)))
     (@one_cat_constant_chain_zero_path K C S C1 t T T0 A X D (@comp_fapp0 C A B X b a) c z);
 
 symbol one_cat_constant_native_snake_input [K C : Cat] (S : τ (@PreadditiveCategory C))

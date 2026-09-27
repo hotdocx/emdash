@@ -11,6 +11,10 @@
 
 require open emdash.emdash3_2;
 
+// This reviewer observes pointwise function computation through LF eta.
+// The setting is local: importing a compiled dependency does not enable it.
+flag "eta_equality" on;
+
 assert [A B : Grpd] ⊢
   Hom_cat Grpd_cat A B
   ≡ Path_cat (@Function_grpd A B);

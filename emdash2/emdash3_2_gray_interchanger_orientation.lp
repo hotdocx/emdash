@@ -15,9 +15,10 @@
   invert a directed cell or identify its endpoints.
 
   The derivation uses the generic internal-action beta, whole displayed
-  strict-naturality paths, stable postcomposition reading, and the existing
-  pre/right PathOut reframe.  It adds no rule, unifier, endpoint collapse, or
-  independent interchanger.
+  paths, stable postcomposition reading, and the existing PathOut projection.
+  The `lax_transfor` head makes the selected pre/right target judgmental; no
+  evidence-derived endpoint adapter, inverse, or independent interchanger is
+  added.
 */
 
 require open emdash.emdash3_2_gray_interchanger;
@@ -134,35 +135,6 @@ protected symbol gray_interchanger_source_common_path
     gray_interchanger_lhs_func
     gray_interchanger_common_func
     (@functord_transport_lhs_agrees
-      WalkingArrow_cat
-      (@hom_
-        WalkingArrow_cat WalkingArrow_cat
-        (@id_func WalkingArrow_cat) walking_arrow_src)
-      (@hom_
-        GrayWalkingSquare_cat WalkingArrow_cat
-        gray_square_inner_tgt_func gray_square_obj00)
-      (@tapp1_at_transf
-        WalkingArrow_cat GrayWalkingSquare_cat
-        gray_square_inner_src_func gray_square_inner_tgt_func
-        walking_arrow_src gray_square_outer_transf)
-      walking_arrow_src walking_arrow_tgt walking_arrow_generator);
-
-protected symbol gray_interchanger_target_common_path
-  : τ (@=
-      (Obj GrayInterchangerCodomain_cat)
-      gray_interchanger_target
-      gray_interchanger_common_value)
-≔ @eq_ap
-    (Obj (Functor_cat GrayInterchangerDomain_cat GrayInterchangerCodomain_cat))
-    (Obj GrayInterchangerCodomain_cat)
-    (λ H : τ (Obj (Functor_cat
-        GrayInterchangerDomain_cat GrayInterchangerCodomain_cat)),
-      @fapp0
-        GrayInterchangerDomain_cat GrayInterchangerCodomain_cat
-        H gray_interchanger_base_identity)
-    gray_interchanger_rhs_func
-    gray_interchanger_common_func
-    (@functord_transport_rhs_agrees
       WalkingArrow_cat
       (@hom_
         WalkingArrow_cat WalkingArrow_cat
@@ -377,27 +349,27 @@ protected symbol gray_interchanger_pre_formal_path
     gray_square_outer_transf
     walking_arrow_src walking_arrow_tgt walking_arrow_generator;
 
-protected symbol gray_interchanger_pre_formal_common_path
+protected symbol gray_interchanger_pre_formal_target_path
   : τ (@=
       (Obj GrayInterchangerCodomain_cat)
       gray_interchanger_pre_formal_value
-      gray_interchanger_common_value)
+      gray_interchanger_target)
 ≔ @eq_refl
     (Obj GrayInterchangerCodomain_cat)
-    gray_interchanger_common_value;
+    gray_interchanger_pre_formal_value;
 
-protected symbol gray_interchanger_pre_common_path
+protected symbol gray_interchanger_pre_target_path
   : τ (@=
       (Obj GrayInterchangerCodomain_cat)
       gray_interchanger_pre_stable
-      gray_interchanger_common_value)
+      gray_interchanger_target)
 ≔ @eq_trans
     (Obj GrayInterchangerCodomain_cat)
     gray_interchanger_pre_stable
     gray_interchanger_pre_formal_value
-    gray_interchanger_common_value
+    gray_interchanger_target
     gray_interchanger_pre_formal_path
-    gray_interchanger_pre_formal_common_path;
+    gray_interchanger_pre_formal_target_path;
 
 // Public typed endpoint readings of the selected whole interchanger.
 symbol gray_interchanger_source_readable_path
@@ -431,20 +403,14 @@ symbol gray_interchanger_target_readable_path
 ≔ @eq_trans
     (Obj GrayInterchangerCodomain_cat)
     gray_interchanger_target
-    gray_interchanger_common_value
+    gray_interchanger_pre_stable
     gray_square_pre_composite
-    gray_interchanger_target_common_path
-    (@eq_trans
+    (@eq_sym
       (Obj GrayInterchangerCodomain_cat)
-      gray_interchanger_common_value
       gray_interchanger_pre_stable
-      gray_square_pre_composite
-      (@eq_sym
-        (Obj GrayInterchangerCodomain_cat)
-        gray_interchanger_pre_stable
-        gray_interchanger_common_value
-        gray_interchanger_pre_common_path)
-      gray_interchanger_pre_raw_path);
+      gray_interchanger_target
+      gray_interchanger_pre_target_path)
+    gray_interchanger_pre_raw_path;
 
 // Capped readable reframe of the same directed cell.  The source equality is
 // reversed only to precompose the formal cell; the cell itself is not inverted.

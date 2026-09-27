@@ -10,13 +10,14 @@
 
   Nested restricted truncation induction proves that the named public code
   substitution agrees with arbitrary category composition. The nerve's
-  generic `fapp1_id_path` and `fapp1_comp_path`, transported across the whole
-  arrow observation, then derive all-star identity and contravariant public
-  composition. The whole `fapp1_func` remains available for higher action.
+  ambient normal-lax identity path and named composition component,
+  transported across the whole arrow observation, then derive all-star identity
+  and contravariant public composition. The whole `fapp1_func` remains available
+  for higher action.
 
-  This module adds only the nerve object beta. It adds no runtime arrow beta,
-  face-specific equation, broad category fold, Gray comparison, degeneracy,
-  connection, or proof-time unifier.
+  This module adds the nerve object beta and one guarded named composition
+  owner. It adds no runtime face-action beta, face-specific equation, broad
+  category fold, Gray comparison, degeneracy, connection, or proof-time unifier.
 */
 
 require open emdash.emdash3_2_semicubical_index;
@@ -30,6 +31,69 @@ rule @fapp0
       (Op_cat SemiCubePlus_cat) Cat_cat
       (@semicubical_nerve_func $C) $n
   ↪ @CubicalLevel_cat $C $n;
+
+// Named direct strict composition for the whole native nerve. The public
+// arrow observation remains propositional and retains its recursive profile
+// history; only the nerve's own opaque action is normalized here.
+rule @comp_fapp0
+      Cat_cat _ _ _
+      (@fapp1_fapp0
+        (Op_cat SemiCubePlus_cat) Cat_cat
+        (@semicubical_nerve_func $C) $Y $Z $g)
+      (@fapp1_fapp0
+        (Op_cat SemiCubePlus_cat) Cat_cat
+        (@semicubical_nerve_func $C) $X $Y $f)
+  ↪ @fapp1_fapp0
+      (Op_cat SemiCubePlus_cat) Cat_cat
+      (@semicubical_nerve_func $C) $X $Z
+      (@comp_fapp0 (Op_cat SemiCubePlus_cat) $X $Y $Z $g $f);
+
+symbol semicubical_nerve_composition_path
+  (C : Cat)
+  [X Y Z : τ (Obj (Op_cat SemiCubePlus_cat))]
+  (g : τ (Hom (Op_cat SemiCubePlus_cat) Y Z))
+  (f : τ (Hom (Op_cat SemiCubePlus_cat) X Y))
+  : τ (@=
+      (Hom Cat_cat
+        (@fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) X)
+        (@fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) Z))
+      (@fapp1_fapp0
+        (Op_cat SemiCubePlus_cat) Cat_cat
+        (@semicubical_nerve_func C) X Z
+        (@comp_fapp0 (Op_cat SemiCubePlus_cat) X Y Z g f))
+      (@comp_fapp0
+        Cat_cat
+        (@fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) X)
+        (@fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) Y)
+        (@fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) Z)
+        (@fapp1_fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) Y Z g)
+        (@fapp1_fapp0
+          (Op_cat SemiCubePlus_cat) Cat_cat
+          (@semicubical_nerve_func C) X Y f)))
+≔ @eq_refl
+    (Hom Cat_cat
+      (@fapp0
+        (Op_cat SemiCubePlus_cat) Cat_cat
+        (@semicubical_nerve_func C) X)
+      (@fapp0
+        (Op_cat SemiCubePlus_cat) Cat_cat
+        (@semicubical_nerve_func C) Z))
+    (@fapp1_fapp0
+      (Op_cat SemiCubePlus_cat) Cat_cat
+      (@semicubical_nerve_func C) X Z
+      (@comp_fapp0 (Op_cat SemiCubePlus_cat) X Y Z g f));
 
 // The whole nerve retains its own generic arrow action.
 symbol semicubical_nerve_action_func
@@ -325,12 +389,7 @@ symbol cube_face_action_category_comp_path
         (@CubicalLevel_cat C p)
         (@cube_face_action_func C p q f)
         (@cube_face_action_func C q n g))
-      (@fapp1_comp_path
-        (Op_cat SemiCubePlus_cat)
-        Cat_cat
-        (@semicubical_nerve_func C)
-        n q p
-        f g)
+      (@semicubical_nerve_composition_path C n q p f g)
       (@eq_trans
         (Hom Cat_cat
           (@CubicalLevel_cat C n)

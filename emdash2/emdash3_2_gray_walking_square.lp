@@ -9,8 +9,10 @@
   evaluators.  No tensor vertex, edge, rule, or unifier is postulated here.
 
   This module supplies the boundary consumed by the subsequent interchanger
-  projection.  The selected profile has the project's lax orientation; this
-  module still claims no Cartesian, mirror-closed, or monoidal structure.
+  projection. The outer generator is already a LaxTransfor object of the
+  Gray-hom category; its carrier and pre/right evidence are projections of
+  that one package.
+  This module still claims no Cartesian, mirror-closed, or monoidal structure.
 */
 
 require open emdash.emdash3_2_gray_right_closure;
@@ -157,12 +159,12 @@ symbol gray_square_inner_tgt_arrow
     Terminal_obj;
 
 /*
-  The outer generator acts through coevaluation as one whole transformation
-  between the two inner functors.  Its endpoint evaluators remain whole
-  functors on the transformation category.
+  The outer generator is intrinsically one classified lax transfor in the
+  Gray-hom category. Its carrier and evidence below are projections of this
+  package rather than separately supplied declarations.
 */
-symbol gray_square_outer_transf
-  : τ (@Transf
+symbol gray_square_outer_lax_transfor
+  : τ (@LaxTransfor
       WalkingArrow_cat
       GrayWalkingSquare_cat
       gray_square_inner_src_func
@@ -174,6 +176,19 @@ symbol gray_square_outer_transf
     walking_arrow_src
     walking_arrow_tgt
     walking_arrow_generator;
+
+symbol gray_square_outer_transf
+  : τ (@Transf
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func)
+≔ @lax_transfor
+    WalkingArrow_cat
+    GrayWalkingSquare_cat
+    gray_square_inner_src_func
+    gray_square_inner_tgt_func
+    gray_square_outer_lax_transfor;
 
 // Whole endpoint-component evaluators for the outer coordinate direction.
 symbol gray_square_outer_src_eval_func

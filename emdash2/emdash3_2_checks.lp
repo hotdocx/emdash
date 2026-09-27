@@ -19,6 +19,8 @@ require open emdash.emdash3_2 emdash.emdash3_2_one_cat_terminal_adjunction_famil
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
+require open emdash.emdash3_2_strict_functor_actions;
+require open emdash.emdash3_2_profiled_interchange;
 require open emdash.emdash3_2_strict_pointwise_equivalences emdash.emdash3_2_one_cat_modifications emdash.emdash3_2_transfor_whiskering emdash.emdash3_2_represented_comma_families emdash.emdash3_2_one_cat_zero_arrow_family_classification emdash.emdash3_2_one_cat_homology_family_comparison emdash.emdash3_2_one_cat_homology_family_comparison_points emdash.emdash3_2_one_cat_hom_comparison_data emdash.emdash3_2_one_cat_adjunction_introduction;
 require open emdash.emdash3_2_direct_cover_completion_locality;
 require open emdash.emdash3_2_direct_cover_completion_universality;
@@ -2565,8 +2567,9 @@ assert [A : Grpd]
       z y x p q;
 
 // Mapped-DefIso cancellation is checked before and after all PathSym object
-// projections. Both spellings failed with explicit endpoint guards and now
-// join through the minimized generic owner, without a path-specific rule.
+// projections. The stable mapped-arrow heads retain the named composition law;
+// they compare proof-time with the raw PathSym actions without leaking the
+// cancellation rule to arbitrary functors.
 assert [A : Grpd]
   (x y : τ A)
   (i : τ (@DefIso (Op_cat (Path_cat A)) x y)) ⊢
@@ -2575,12 +2578,12 @@ assert [A : Grpd]
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+    (@strict_defiso_fmap_from
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
+    (@strict_defiso_fmap_to
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
   ≡ eq_refl x;
 
 assert [A : Grpd]
@@ -2589,12 +2592,12 @@ assert [A : Grpd]
   @hom_postcomp_fapp0
     (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
     x y x
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
+    (@strict_defiso_fmap_from
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
+    (@strict_defiso_fmap_to
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
   ≡ eq_refl x;
 
 assert [A : Grpd]
@@ -2605,12 +2608,12 @@ assert [A : Grpd]
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) x)
     (@fapp0 (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A) y)
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+    (@strict_defiso_fmap_to
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
+    (@strict_defiso_fmap_from
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
   ≡ eq_refl y;
 
 assert [A : Grpd]
@@ -2619,12 +2622,12 @@ assert [A : Grpd]
   @hom_postcomp_fapp0
     (Path_cat A) (Path_cat A) (@id Cat_cat (Path_cat A))
     y x y
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      x y (@defiso_to (Op_cat (Path_cat A)) x y i))
-    (@fapp1_fapp0
-      (Op_cat (Path_cat A)) (Path_cat A) (Path_sym_func A)
-      y x (@defiso_from (Op_cat (Path_cat A)) x y i))
+    (@strict_defiso_fmap_to
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
+    (@strict_defiso_fmap_from
+      (Op_cat (Path_cat A)) (Path_cat A)
+      (@strict_path_sym_func A) x y i)
   ≡ eq_refl y;
 
 // Product-projection overlaps are untyped: PathSym's rigid target is a path
@@ -3669,43 +3672,43 @@ assert [C : Cat]
 // Ordinary functor action preserves native fixed-arrow equality-valued evidence, with
 // computational inverse projections inherited from the explicit package.
 assert [A B : Cat]
-  (F : τ (Functor A B))
+  (F : τ (@StrictFunctor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
   (u : τ (@OmegaEquivAlong A x y f)) ⊢
-  @omega_equiv_along_fapp1_fapp0 A B F x y f u
+  @strict_omega_equiv_along_fapp1 A B F x y f u
   : τ (@OmegaEquivAlong
       B
-      (@fapp0 A B F x)
-      (@fapp0 A B F y)
-      (@fapp1_fapp0 A B F x y f));
+      (@fapp0 A B (@strict_functor A B F) x)
+      (@fapp0 A B (@strict_functor A B F) y)
+      (@fapp1_fapp0 A B (@strict_functor A B F) x y f));
 
 assert [A B : Cat]
-  (F : τ (Functor A B))
+  (F : τ (@StrictFunctor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
   (u : τ (@OmegaEquivAlong A x y f)) ⊢
   @omega_equiv_along_left_inv
     B
-    (@fapp0 A B F x)
-    (@fapp0 A B F y)
-    (@fapp1_fapp0 A B F x y f)
-    (@omega_equiv_along_fapp1_fapp0 A B F x y f u)
-  ≡ @fapp1_fapp0 A B F y x
+    (@fapp0 A B (@strict_functor A B F) x)
+    (@fapp0 A B (@strict_functor A B F) y)
+    (@fapp1_fapp0 A B (@strict_functor A B F) x y f)
+    (@strict_omega_equiv_along_fapp1 A B F x y f u)
+  ≡ @fapp1_fapp0 A B (@strict_functor A B F) y x
       (@omega_equiv_along_left_inv A x y f u);
 
 assert [A B : Cat]
-  (F : τ (Functor A B))
+  (F : τ (@StrictFunctor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
   (u : τ (@OmegaEquivAlong A x y f)) ⊢
   @omega_equiv_along_right_inv
     B
-    (@fapp0 A B F x)
-    (@fapp0 A B F y)
-    (@fapp1_fapp0 A B F x y f)
-    (@omega_equiv_along_fapp1_fapp0 A B F x y f u)
-  ≡ @fapp1_fapp0 A B F y x
+    (@fapp0 A B (@strict_functor A B F) x)
+    (@fapp0 A B (@strict_functor A B F) y)
+    (@fapp1_fapp0 A B (@strict_functor A B F) x y f)
+    (@strict_omega_equiv_along_fapp1 A B F x y f u)
+  ≡ @fapp1_fapp0 A B (@strict_functor A B F) y x
       (@omega_equiv_along_right_inv A x y f u);
 
 // Internal groupoidality reconstructs explicit native equivalence evidence
@@ -3765,28 +3768,30 @@ assert [C : Cat]
 // equivalence of fibres, with its inverse given by action on the chosen arrow.
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat C))
-  (D : τ (Catd C))
+  (D : τ (@StrictFunctor C Cat_cat))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
   @groupoidal_fibre_transport_equiv C g D x y f
   : τ (@OmegaEquivAlong
       Cat_cat
-      (Fibre_cat D x)
-      (Fibre_cat D y)
-      (@fapp1_fapp0 C Cat_cat D x y f));
+      (Fibre_cat (@strict_functor C Cat_cat D) x)
+      (Fibre_cat (@strict_functor C Cat_cat D) y)
+      (@fapp1_fapp0 C Cat_cat
+        (@strict_functor C Cat_cat D) x y f));
 
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat C))
-  (D : τ (Catd C))
+  (D : τ (@StrictFunctor C Cat_cat))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
   @omega_equiv_along_left_inv
     Cat_cat
-    (Fibre_cat D x)
-    (Fibre_cat D y)
-    (@fapp1_fapp0 C Cat_cat D x y f)
+    (Fibre_cat (@strict_functor C Cat_cat D) x)
+    (Fibre_cat (@strict_functor C Cat_cat D) y)
+    (@fapp1_fapp0 C Cat_cat
+      (@strict_functor C Cat_cat D) x y f)
     (@groupoidal_fibre_transport_equiv C g D x y f)
-  ≡ @fapp1_fapp0 C Cat_cat D y x
+  ≡ @fapp1_fapp0 C Cat_cat (@strict_functor C Cat_cat D) y x
       (@groupoidal_arrow_inverse C g x y f);
 
 // Existing discrete evidence, and therefore every packaged zero-category,
@@ -6566,26 +6571,26 @@ assert [C : Cat] [x y z : τ (Obj C)]
       (@iso_evidence_from C x y i)
       (@iso_evidence_from C y z j);
 
-assert [C D : Cat] (F : τ (Functor C D))
+assert [C D : Cat] (F : τ (@StrictFunctor C D))
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
   @iso_evidence_to
     D
-    (@fapp0 C D F x)
-    (@fapp0 C D F y)
-    (@iso_evidence_fmap C D F x y i)
-  ≡ @fapp1_fapp0 C D F x y
+    (@fapp0 C D (@strict_functor C D F) x)
+    (@fapp0 C D (@strict_functor C D F) y)
+    (@strict_iso_evidence_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D (@strict_functor C D F) x y
       (@iso_evidence_to C x y i);
 
-assert [C D : Cat] (F : τ (Functor C D))
+assert [C D : Cat] (F : τ (@StrictFunctor C D))
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
   @iso_evidence_from
     D
-    (@fapp0 C D F x)
-    (@fapp0 C D F y)
-    (@iso_evidence_fmap C D F x y i)
-  ≡ @fapp1_fapp0 C D F y x
+    (@fapp0 C D (@strict_functor C D F) x)
+    (@fapp0 C D (@strict_functor C D F) y)
+    (@strict_iso_evidence_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D (@strict_functor C D F) y x
       (@iso_evidence_from C x y i);
 
 assert ⊢ τ (Obj Grpd_cat) ≡ Grpd;
@@ -7014,7 +7019,8 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   @hom_postcomp_fapp0 A B F W X X (@id B X) g
     ≡ g;
 
-assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+// Generic accumulation stays distinct; the explicit strict view computes.
+assertnot [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y Z : τ (Obj B))
   (p : τ (Hom B X Y)) (q : τ (Hom B Y Z)) ⊢
   @hom_postcomp_func A B F W X Z (@comp_fapp0 B X Y Z q p)
@@ -7025,13 +7031,33 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
         (@hom_postcomp_func A B F W Y Z q)
         (@hom_postcomp_func A B F W X Y p);
 
-assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+assert [A B : Cat] (S : τ (@StrictFunctor B A)) (W : τ (Obj A))
+  (X Y Z : τ (Obj B))
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z)) ⊢
+  @hom_postcomp_func A B (@strict_functor B A S) W X Z (@comp_fapp0 B X Y Z q p)
+    ≡ @comp_cat_fapp0
+        (Hom_cat A W (@fapp0 B A (@strict_functor B A S) X))
+        (Hom_cat A W (@fapp0 B A (@strict_functor B A S) Y))
+        (Hom_cat A W (@fapp0 B A (@strict_functor B A S) Z))
+        (@hom_postcomp_func A B (@strict_functor B A S) W Y Z q)
+        (@hom_postcomp_func A B (@strict_functor B A S) W X Y p);
+
+// Generic accumulation stays distinct; the explicit strict view computes.
+assertnot [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   (X Y Z : τ (Obj B))
   (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
   (g : τ (Hom A W (@fapp0 B A F X))) ⊢
   @hom_postcomp_fapp0 A B F W X Z (@comp_fapp0 B X Y Z q p) g
     ≡ @hom_postcomp_fapp0 A B F W Y Z q
         (@hom_postcomp_fapp0 A B F W X Y p g);
+
+assert [A B : Cat] (S : τ (@StrictFunctor B A)) (W : τ (Obj A))
+  (X Y Z : τ (Obj B))
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A (@strict_functor B A S) X))) ⊢
+  @hom_postcomp_fapp0 A B (@strict_functor B A S) W X Z (@comp_fapp0 B X Y Z q p) g
+    ≡ @hom_postcomp_fapp0 A B (@strict_functor B A S) W Y Z q
+        (@hom_postcomp_fapp0 A B (@strict_functor B A S) W X Y p g);
 
 assert [A B : Cat] (F : τ (Functor B A))
   (V W : τ (Obj A)) (X Y : τ (Obj B))
@@ -7127,45 +7153,71 @@ assert [C : Cat] [x y z : τ (Obj C)]
     (@defiso_to C x z (@defiso_comp C x y z j i))
   ≡ @id C x;
 
-assert [C D : Cat] (F : τ (Functor C D))
+assert [C D : Cat] (F : τ (@StrictFunctor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y)) ⊢
+  @strict_defiso_fmap_to_path C D F x y i
+  : τ (@=
+      (Hom D
+        (@fapp0 C D (@strict_functor C D F) x)
+        (@fapp0 C D (@strict_functor C D F) y))
+      (@strict_defiso_fmap_to C D F x y i)
+      (@fapp1_fapp0 C D (@strict_functor C D F)
+        x y (@defiso_to C x y i)));
+
+assertnot [C D : Cat] (F : τ (@StrictFunctor C D))
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y)) ⊢
   @defiso_to
     D
-    (@fapp0 C D F x)
-    (@fapp0 C D F y)
-    (@defiso_fmap C D F x y i)
-  ≡ @fapp1_fapp0 C D F x y (@defiso_to C x y i);
+    (@fapp0 C D (@strict_functor C D F) x)
+    (@fapp0 C D (@strict_functor C D F) y)
+    (@strict_defiso_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D (@strict_functor C D F)
+      x y (@defiso_to C x y i);
 
-assert [C D : Cat] (F : τ (Functor C D))
+assert [C D : Cat] (F : τ (@StrictFunctor C D))
+  [x y : τ (Obj C)]
+  (i : τ (@DefIso C x y)) ⊢
+  @strict_defiso_fmap_from_path C D F x y i
+  : τ (@=
+      (Hom D
+        (@fapp0 C D (@strict_functor C D F) y)
+        (@fapp0 C D (@strict_functor C D F) x))
+      (@strict_defiso_fmap_from C D F x y i)
+      (@fapp1_fapp0 C D (@strict_functor C D F)
+        y x (@defiso_from C x y i)));
+
+assertnot [C D : Cat] (F : τ (@StrictFunctor C D))
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y)) ⊢
   @defiso_from
     D
-    (@fapp0 C D F x)
-    (@fapp0 C D F y)
-    (@defiso_fmap C D F x y i)
-  ≡ @fapp1_fapp0 C D F y x (@defiso_from C x y i);
+    (@fapp0 C D (@strict_functor C D F) x)
+    (@fapp0 C D (@strict_functor C D F) y)
+    (@strict_defiso_fmap C D F x y i)
+  ≡ @fapp1_fapp0 C D (@strict_functor C D F)
+      y x (@defiso_from C x y i);
 
-assert [C D : Cat] (F : τ (Functor C D))
+assert [C D : Cat] (F : τ (@StrictFunctor C D))
   [x y : τ (Obj C)]
   (i : τ (@DefIso C x y)) ⊢
   @hom_postcomp_fapp0
     D D (@id_func D)
-    (@fapp0 C D F x)
-    (@fapp0 C D F y)
-    (@fapp0 C D F x)
+    (@fapp0 C D (@strict_functor C D F) x)
+    (@fapp0 C D (@strict_functor C D F) y)
+    (@fapp0 C D (@strict_functor C D F) x)
     (@defiso_from
       D
-      (@fapp0 C D F x)
-      (@fapp0 C D F y)
-      (@defiso_fmap C D F x y i))
+      (@fapp0 C D (@strict_functor C D F) x)
+      (@fapp0 C D (@strict_functor C D F) y)
+      (@strict_defiso_fmap C D F x y i))
     (@defiso_to
       D
-      (@fapp0 C D F x)
-      (@fapp0 C D F y)
-      (@defiso_fmap C D F x y i))
-  ≡ @id D (@fapp0 C D F x);
+      (@fapp0 C D (@strict_functor C D F) x)
+      (@fapp0 C D (@strict_functor C D F) y)
+      (@strict_defiso_fmap C D F x y i))
+  ≡ @id D (@fapp0 C D (@strict_functor C D F) x);
 
 assert [A : Cat] (x y z : τ (Obj A))
   (p : τ (Hom A x y)) (q : τ (Hom A y z)) ⊢
@@ -7381,7 +7433,8 @@ symbol hom_postcomp_opfunc_general_double_op_eq_refl_check
       @hom_precomp_along_func (Op_cat A) (Op_cat B) F z w x h)
 ≔ eq_refl (@hom_precomp_along_func (Op_cat A) (Op_cat B) F z w x h);
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+// Generic accumulation stays distinct; the actual strict view computes.
+assertnot [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x y : τ (Obj A))
   (p : τ (Hom A w x)) (q : τ (Hom A x y)) ⊢
   @hom_precomp_along_func A B F z w y (@comp_fapp0 A w x y q p)
@@ -7392,13 +7445,33 @@ assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
         (@hom_precomp_along_func A B F z w x p)
         (@hom_precomp_along_func A B F z x y q);
 
-assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
+assert [A B : Cat] (S : τ (@StrictFunctor A B)) (z : τ (Obj B))
+  (w x y : τ (Obj A))
+  (p : τ (Hom A w x)) (q : τ (Hom A x y)) ⊢
+  @hom_precomp_along_func A B (@strict_functor A B S) z w y (@comp_fapp0 A w x y q p)
+    ≡ @comp_cat_fapp0
+        (Hom_cat B (@fapp0 A B (@strict_functor A B S) y) z)
+        (Hom_cat B (@fapp0 A B (@strict_functor A B S) x) z)
+        (Hom_cat B (@fapp0 A B (@strict_functor A B S) w) z)
+        (@hom_precomp_along_func A B (@strict_functor A B S) z w x p)
+        (@hom_precomp_along_func A B (@strict_functor A B S) z x y q);
+
+// Generic accumulation stays distinct; the actual strict view computes.
+assertnot [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
   (w x y : τ (Obj A))
   (p : τ (Hom A w x)) (q : τ (Hom A x y))
   (g : τ (Hom B (@fapp0 A B F y) z)) ⊢
   @hom_precomp_along_fapp0 A B F z w y (@comp_fapp0 A w x y q p) g
     ≡ @hom_precomp_along_fapp0 A B F z w x p
         (@hom_precomp_along_fapp0 A B F z x y q g);
+
+assert [A B : Cat] (S : τ (@StrictFunctor A B)) (z : τ (Obj B))
+  (w x y : τ (Obj A))
+  (p : τ (Hom A w x)) (q : τ (Hom A x y))
+  (g : τ (Hom B (@fapp0 A B (@strict_functor A B S) y) z)) ⊢
+  @hom_precomp_along_fapp0 A B (@strict_functor A B S) z w y (@comp_fapp0 A w x y q p) g
+    ≡ @hom_precomp_along_fapp0 A B (@strict_functor A B S) z w x p
+        (@hom_precomp_along_fapp0 A B (@strict_functor A B S) z x y q g);
 
 // Generalized precomposition projection ladder.
 assert [A B : Cat] (F : τ (Functor A B)) (z : τ (Obj B))
@@ -10786,6 +10859,26 @@ assert [A B : Cat]
     (@Op_transf A B F G eta)
   ≡ eta;
 
+// Stable capped action projects the already-existing whole Op-transfor beta.
+assert [A B : Cat]
+  [F G : τ (Functor A B)]
+  (eta : τ (Transf F G))
+  [x y : τ (Obj A)]
+  (p : τ (Hom A x y)) ⊢
+  @eq_refl
+    (Hom B (@fapp0 A B F x) (@fapp0 A B G y))
+    (@tapp1_fapp0
+      (Op_cat A) (Op_cat B)
+      (@Op_func A B G) (@Op_func A B F)
+      y x (@Op_transf A B F G eta) p)
+  : τ (@=
+      (Hom B (@fapp0 A B F x) (@fapp0 A B G y))
+      (@tapp1_fapp0
+        (Op_cat A) (Op_cat B)
+        (@Op_func A B G) (@Op_func A B F)
+        y x (@Op_transf A B F G eta) p)
+      (@tapp1_fapp0 A B F G x y eta p));
+
 // Involution still fires after the inner opposite-adjunction unit projection
 // has normalized the outer transformation indices away from literal Op_func
 // heads. This is the motivating consumer for the fully inferred LHS.
@@ -12138,7 +12231,7 @@ assert [A B : Cat] (F G : τ (Functor A B))
   @fapp1_func _ _ (@tapp1_int_func_transf A B F G) ϵ ϵ'
     ≡ @tapp1_int_fapp1_func_transf A B F G ϵ ϵ';
 
-assert [A B : Cat] (F G : τ (Functor A B))
+assertnot [A B : Cat] (F G : τ (Functor A B))
   (X Y Z : τ (Obj A))
   (f : τ (Hom A X Y))
   (g : τ (Hom A Y Z))
@@ -12153,7 +12246,24 @@ assert [A B : Cat] (F G : τ (Functor A B))
     ≡ @tapp1_fapp0 A B F G X Z ϵ
         (@comp_fapp0 A X Y Z g f);
 
-assert [A B : Cat] (F G : τ (Functor A B))
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A X Y))
+  (g : τ (Hom A Y Z)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@fapp0 A B G Z)
+    (@fapp1_fapp0 A B G Y Z g)
+    (@tapp1_fapp0
+      A B F G X Y (@strict_transfor A B F G U) f)
+  ≡ @tapp1_fapp0
+      A B F G X Z (@strict_transfor A B F G U)
+      (@comp_fapp0 A X Y Z g f);
+
+assertnot [A B : Cat] (F G : τ (Functor A B))
   (X0 X Y : τ (Obj A))
   (g : τ (Hom A X0 X))
   (f : τ (Hom A X Y))
@@ -12168,8 +12278,25 @@ assert [A B : Cat] (F G : τ (Functor A B))
     ≡ @tapp1_fapp0 A B F G X0 Y ϵ
         (@comp_fapp0 A X0 X Y f g);
 
-// Full strict naturality: post/left accumulation before capping.
-assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (W X Y : τ (Obj A))
+  (h : τ (Hom A W X))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F W)
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@tapp1_fapp0
+      A B F G X Y (@strict_transfor A B F G U) f)
+    (@fapp1_fapp0 A B F W X h)
+  ≡ @tapp1_fapp0
+      A B F G W Y (@strict_transfor A B F G U)
+      (@comp_fapp0 A W X Y f h);
+
+// Whole post/left naturality is no longer strict for an ambient transfor.
+assertnot [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
   (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢
   @comp_cat_fapp0
     (Hom_cat A X Y)
@@ -12184,7 +12311,25 @@ assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
     (@tapp1_func A B F G X Z ϵ)
     (@hom_postcomp_func A A (@id_func A) X Y Z g);
 
-assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
+// The same whole cut computes under the stable strict-transfor profile.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (X Y Z : τ (Obj A))
+  (g : τ (Hom A Y Z)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@hom_postcomp_func B A G (@fapp0 A B F X) Y Z g)
+    (@tapp1_func A B F G X Y (@strict_transfor A B F G U))
+  ≡ @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat A X Z)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@tapp1_func A B F G X Z (@strict_transfor A B F G U))
+    (@hom_postcomp_func A A (@id_func A) X Y Z g);
+
+assertnot [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
   (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) (ϵ : τ (Transf F G)) ⊢
   fapp0
     (@comp_cat_fapp0
@@ -12197,8 +12342,27 @@ assert [A B : Cat] (F G : τ (Functor A B)) (X Y Z : τ (Obj A))
   ≡ @tapp1_fapp0 A B F G X Z ϵ
       (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
 
-// Full strict naturality: pre/right accumulation before capping.
-assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (X Y Z : τ (Obj A))
+  (f : τ (Hom A X Y))
+  (g : τ (Hom A Y Z)) ⊢
+  @fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+      (@hom_postcomp_func B A G (@fapp0 A B F X) Y Z g)
+      (@tapp1_func A B F G X Y (@strict_transfor A B F G U)))
+    f
+  ≡ @tapp1_fapp0
+      A B F G X Z (@strict_transfor A B F G U)
+      (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
+
+// Whole pre/right naturality is no longer strict for an ambient transfor.
+assertnot [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) (ϵ : τ (Transf F G)) ⊢
   @comp_cat_fapp0
     (Hom_cat A X Y)
@@ -12213,7 +12377,24 @@ assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
     (@tapp1_func A B F G W Y ϵ)
     (@hom_precomp_along_func A A (@id_func A) Y W X h);
 
-assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (W X Y : τ (Obj A))
+  (h : τ (Hom A W X)) ⊢
+  @comp_cat_fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@hom_precomp_along_func A B F (@fapp0 A B G Y) W X h)
+    (@tapp1_func A B F G X Y (@strict_transfor A B F G U))
+  ≡ @comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat A W Y)
+      (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+      (@tapp1_func A B F G W Y (@strict_transfor A B F G U))
+      (@hom_precomp_along_func A A (@id_func A) Y W X h);
+
+assertnot [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) (f : τ (Hom A X Y)) (ϵ : τ (Transf F G)) ⊢
   fapp0
     (@comp_cat_fapp0
@@ -12226,8 +12407,27 @@ assert [A B : Cat] (F G : τ (Functor A B)) (W X Y : τ (Obj A))
   ≡ @tapp1_fapp0 A B F G W Y ϵ
       (@hom_precomp_along_fapp0 A A (@id_func A) Y W X h f);
 
-// Full strict functoriality: post/left accumulation for a single functor.
-assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  (W X Y : τ (Obj A))
+  (h : τ (Hom A W X))
+  (f : τ (Hom A X Y)) ⊢
+  @fapp0
+    (Hom_cat A X Y)
+    (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+    (@comp_cat_fapp0
+      (Hom_cat A X Y)
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Y))
+      (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y))
+      (@hom_precomp_along_func A B F (@fapp0 A B G Y) W X h)
+      (@tapp1_func A B F G X Y (@strict_transfor A B F G U)))
+    f
+  ≡ @tapp1_fapp0
+      A B F G W Y (@strict_transfor A B F G U)
+      (@hom_precomp_along_fapp0 A A (@id_func A) Y W X h f);
+
+// Whole post/left accumulation no longer collapses for an ambient functor.
+assertnot [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
   (g : τ (Hom A Y Z)) ⊢
   @comp_cat_fapp0
     (Hom_cat A X Y)
@@ -12242,7 +12442,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
     (@fapp1_func A B F X Z)
     (@hom_postcomp_func A A (@id_func A) X Y Z g);
 
-assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
+assertnot [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
   (f : τ (Hom A X Y)) (g : τ (Hom A Y Z)) ⊢
   fapp0
     (@comp_cat_fapp0
@@ -12255,8 +12455,8 @@ assert [A B : Cat] (F : τ (Functor A B)) (X Y Z : τ (Obj A))
   ≡ @fapp1_fapp0 A B F X Z
       (@hom_postcomp_fapp0 A A (@id_func A) X Y Z g f);
 
-// Full strict functoriality: pre/right accumulation for a single functor.
-assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
+// Whole pre/right accumulation likewise retains the ambient lax endpoint.
+assertnot [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) ⊢
   @comp_cat_fapp0
     (Hom_cat A X Y)
@@ -12271,7 +12471,7 @@ assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
     (@fapp1_func A B F W Y)
     (@hom_precomp_along_func A A (@id_func A) Y W X h);
 
-assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
+assertnot [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
   (h : τ (Hom A W X)) (f : τ (Hom A X Y)) ⊢
   fapp0
     (@comp_cat_fapp0
@@ -12284,10 +12484,26 @@ assert [A B : Cat] (F : τ (Functor A B)) (W X Y : τ (Obj A))
   ≡ @fapp1_fapp0 A B F W Y
       (@hom_precomp_along_fapp0 A A (@id_func A) Y W X h f);
 
-// Raw adjacent hom-action folds. These are diagnostic conversion checks for
-// runtime accumulation rules kept in `emdash3_2.lp`, not reviewer-facing
-// mathematical lemmas.
-assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
+// Capped composition is not silently strict for an ambient functor.
+assertnot [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F X)
+    (@fapp0 A B F Y)
+    (@fapp0 A B F Z)
+    (@fapp1_fapp0 A B F Y Z g)
+    (@fapp1_fapp0 A B F X Y f)
+  ≡ @fapp1_fapp0 A B F X Z
+      (@comp_fapp0 A X Y Z g f);
+
+// Adjacent hom-action accumulation is selected by an explicit profile.
+// Preserve both the raw noncollapse and the classified computation checks.
+// Generic accumulation stays distinct; the actual strict view computes.
+assertnot [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
   [X Y Z : τ (Obj B)]
   (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
   (g : τ (Hom A W (@fapp0 B A F X))) ⊢
@@ -12303,7 +12519,24 @@ assert [A B : Cat] (F : τ (Functor B A)) (W : τ (Obj A))
       (@comp_fapp0 B X Y Z q p)
       g;
 
-assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
+assert [A B : Cat] (S : τ (@StrictFunctor B A)) (W : τ (Obj A))
+  [X Y Z : τ (Obj B)]
+  (p : τ (Hom B X Y)) (q : τ (Hom B Y Z))
+  (g : τ (Hom A W (@fapp0 B A (@strict_functor B A S) X))) ⊢
+  @comp_fapp0
+    A
+    W
+    (@fapp0 B A (@strict_functor B A S) Y)
+    (@fapp0 B A (@strict_functor B A S) Z)
+    (@fapp1_fapp0 B A (@strict_functor B A S) Y Z q)
+    (@hom_postcomp_fapp0 A B (@strict_functor B A S) W X Y p g)
+  ≡ @hom_postcomp_fapp0
+      A B (@strict_functor B A S) W X Z
+      (@comp_fapp0 B X Y Z q p)
+      g;
+
+// Generic accumulation stays distinct; the actual strict view computes.
+assertnot [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
   [V W X : τ (Obj A)]
   (q : τ (Hom A V W)) (p : τ (Hom A W X))
   (g : τ (Hom B (@fapp0 A B F X) Z)) ⊢
@@ -12319,12 +12552,29 @@ assert [A B : Cat] (F : τ (Functor A B)) (Z : τ (Obj B))
       (@comp_fapp0 A V W X p q)
       g;
 
+assert [A B : Cat] (S : τ (@StrictFunctor A B)) (Z : τ (Obj B))
+  [V W X : τ (Obj A)]
+  (q : τ (Hom A V W)) (p : τ (Hom A W X))
+  (g : τ (Hom B (@fapp0 A B (@strict_functor A B S) X) Z)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B (@strict_functor A B S) V)
+    (@fapp0 A B (@strict_functor A B S) W)
+    Z
+    (@hom_precomp_along_fapp0 A B (@strict_functor A B S) Z W X p g)
+    (@fapp1_fapp0 A B (@strict_functor A B S) V W q)
+  ≡ @hom_precomp_along_fapp0
+      A B (@strict_functor A B S) Z V X
+      (@comp_fapp0 A V W X p q)
+      g;
+
 // Pre-configured four-cell interchange for the Cat-valued representable
 // `hom_` (postcomposition). This is the generalized form needed before the
 // Eckmann-Hilton specialization:
 //   ((e_gh)_*[beta]) · ((e_fg)_*[alpha])
 //     -> (e_gh · e_fg)_*[beta · alpha].
-assert [B : Cat] [M N L : τ (Obj B)]
+// The raw equation is not generic computation; actual profiles give its path.
+assertnot [B : Cat] [M N L : τ (Obj B)]
   [f g h : τ (Hom B N L)]
   (e_fg : τ (Hom (Hom_cat B N L) f g))
   (e_gh : τ (Hom (Hom_cat B N L) g h))
@@ -12365,6 +12615,62 @@ assert [B : Cat] [M N L : τ (Obj B)]
         B B (@id_func B) M N L f h
         (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
       (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha);
+
+assert
+  [B : Cat]
+  [M N L : τ (Obj B)]
+  [f g h : τ (Hom B N L)]
+  (e_fg : τ (Hom (Hom_cat B N L) f g))
+  (e_gh : τ (Hom (Hom_cat B N L) g h))
+  (PE : τ (@IsStrictTransfor (Hom_cat B M N) (Hom_cat B M L) (@hom_postcomp_func B B (@id_func B) M N L f) (@hom_postcomp_func B B (@id_func B) M N L g) (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L f g e_fg)))
+  (PN : τ (@IsPreStrictTransfor (Hom_cat B M N) (Hom_cat B M L) (@hom_postcomp_func B B (@id_func B) M N L g) (@hom_postcomp_func B B (@id_func B) M N L h) (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L g h e_gh)))
+  [X Y Z : τ (Hom B M N)]
+  (alpha : τ (Hom (Hom_cat B M N) X Y))
+  (beta : τ (Hom (Hom_cat B M N) Y Z)) ⊢
+  @hom_postcomp_representable_interchange_eq B M N L f g h e_fg e_gh PE PN X Y Z alpha beta
+  : τ (
+      @comp_fapp0
+        (Hom_cat B M L)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L f X)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L g Y)
+        (@hom_postcomp_fapp0 B B (@id_func B) M N L h Z)
+        (@tapp1_fapp0
+          (Hom_cat B M N)
+          (Hom_cat B M L)
+          (@hom_postcomp_func B B (@id_func B) M N L g)
+          (@hom_postcomp_func B B (@id_func B) M N L h)
+          Y
+          Z
+          (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L g h e_gh)
+          beta)
+        (@tapp1_fapp0
+          (Hom_cat B M N)
+          (Hom_cat B M L)
+          (@hom_postcomp_func B B (@id_func B) M N L f)
+          (@hom_postcomp_func B B (@id_func B) M N L g)
+          X
+          Y
+          (@hom_postcomp_tele_fapp1_fapp0 B B (@id_func B) M N L f g e_fg)
+          alpha)
+      =
+      @tapp1_fapp0
+        (Hom_cat B M N)
+        (Hom_cat B M L)
+        (@hom_postcomp_func B B (@id_func B) M N L f)
+        (@hom_postcomp_func B B (@id_func B) M N L h)
+        X
+        Z
+        (@hom_postcomp_tele_fapp1_fapp0
+          B
+          B
+          (@id_func B)
+          M
+          N
+          L
+          f
+          h
+          (@comp_fapp0 (Hom_cat B N L) f g h e_gh e_fg))
+        (@comp_fapp0 (Hom_cat B M N) X Y Z beta alpha));
 
 assert [A B : Cat] (F : τ (Functor A B)) ⊢
   @tapp1_int_fapp0_transf A B F F (id (Functor_cat A B) F)
@@ -16907,9 +17213,9 @@ assert [K : Cat] (E D : τ (Catd K))
     GG
   ≡ @tdapp0_func K E D FF GG z;
 
-// Projection-first and generic-first pre/right naturality have the same
-// off-diagonal component normal form.
-assert [K : Cat] (E D : τ (Catd K))
+// Component evaluation does not silently impose pre/right naturality on an
+// arbitrary outer transfor.
+assertnot [K : Cat] (E D : τ (Catd K))
   (FF GG HH : τ (Functord E D))
   (z : τ (Obj K))
   (G : τ (Functor
@@ -16938,9 +17244,8 @@ assert [K : Cat] (E D : τ (Catd K))
         (@Transf_cat K Cat_cat E D)
         FF GG HH f g);
 
-// The naturality bridge survives when the target fibre is product-valued and
-// the outer functor category has already reduced to a product category.
-assert [K A B C : Cat]
+// Product-valued target reduction does not restore that retired cut.
+assertnot [K A B C : Cat]
   (FF GG HH : τ (Functord
         (@Const_catd K C)
         (@Const_catd K (Product_cat A B))))
@@ -16993,8 +17298,8 @@ assert [K A B C : Cat]
           (@Const_catd K (Product_cat A B)))
         FF GG HH f g);
 
-// Post/left naturality has the mirror projection-order join.
-assert [K : Cat] (E D : τ (Catd K))
+// The mirror post/left route remains non-convertible as well.
+assertnot [K : Cat] (E D : τ (Catd K))
   (FF GG HH : τ (Functord E D))
   (z : τ (Obj K))
   (F : τ (Functor
@@ -17023,9 +17328,8 @@ assert [K : Cat] (E D : τ (Catd K))
         (@Transf_cat K Cat_cat E D)
         FF GG HH g f);
 
-// If tapp1(epsilon,id) reduces first, the ordinary tapp0 component still
-// joins the same pre/right naturality result.
-assert [K : Cat] (E D : τ (Catd K))
+// Normal-lax identity projection does not recreate pre/right strictness.
+assertnot [K : Cat] (E D : τ (Catd K))
   (FF GG : τ (Functord E D))
   (z : τ (Obj K))
   (G : τ (Functor
@@ -17050,8 +17354,8 @@ assert [K : Cat] (E D : τ (Catd K))
       (@tapp0_func K Cat_cat E D z)
       G FF GG epsilon g;
 
-// Identity-base post/left naturality joins symmetrically.
-assert [K : Cat] (E D : τ (Catd K))
+// Nor does it recreate the post/left mirror.
+assertnot [K : Cat] (E D : τ (Catd K))
   (FF GG : τ (Functord E D))
   (z : τ (Obj K))
   (F : τ (Functor
@@ -17226,7 +17530,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   @functord_transport_func K E D FF x y p
     ≡ @tapp1_fapp0 K Cat_cat E D x y FF p;
 
-// Whole strict naturality is proof-time comparison at full tapp1_func level.
+// The ambient left/source route remains the selected lax action.
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K)) ⊢
   @functord_transport_lhs_tele_agrees K E D FF x y
@@ -17238,18 +17542,21 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (@functord_transport_lhs_tele_func K E D FF x y)
       (@tapp1_func K Cat_cat E D x y FF));
 
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+// The right/target route is available only through a strict displayed profile.
+assert [K : Cat] [E D : τ (Catd K)]
+  (S : τ (@StrictFunctord K E D))
   (x y : τ (Obj K)) ⊢
-  @functord_transport_rhs_tele_agrees K E D FF x y
+  @strict_functord_transport_rhs_tele_path K E D S x y
   : τ (@=
       (Hom
         Cat_cat
         (@Hom_cat K x y)
         (@Functor_cat (@Fibre_cat K E x) (@Fibre_cat K D y)))
-      (@functord_transport_rhs_tele_func K E D FF x y)
-      (@tapp1_func K Cat_cat E D x y FF));
+      (@tapp1_func K Cat_cat E D x y (@strict_functord K E D S))
+      (@functord_transport_rhs_tele_func
+        K E D (@strict_functord K E D S) x y));
 
-// Evaluation at p derives both fixed-arrow comparisons.
+// Evaluation at p retains the ambient left/source comparison.
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y)) ⊢
@@ -17259,19 +17566,29 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (@functord_transport_lhs_func K E D FF x y p)
       (@functord_transport_func K E D FF x y p));
 
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+assert [K : Cat] [E D : τ (Catd K)]
+  (S : τ (@StrictFunctord K E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y)) ⊢
-  @functord_transport_rhs_agrees K E D FF x y p
+  @strict_functord_transport_rhs_path K E D S x y p
   : τ (@=
       (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
-      (@functord_transport_rhs_func K E D FF x y p)
-      (@functord_transport_func K E D FF x y p));
+      (@functord_transport_func
+        K E D (@strict_functord K E D S) x y p)
+      (@functord_transport_rhs_func
+        K E D (@strict_functord K E D S) x y p));
 
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (strict : τ (@IsStrictFunctord K E D FF))
   (x y : τ (Obj K))
   (p : τ (Hom K x y)) ⊢
-  @functord_transport_strict_naturality K E D FF x y p
+  @strict_cell_path
+    (@Functor_cat (Fibre_cat E x) (Fibre_cat D y))
+    (@functord_transport_lhs_func K E D FF x y p)
+    (@functord_transport_rhs_func K E D FF x y p)
+    (@functord_laxity_transf K E D FF x y p)
+    (strict x y p)
   : τ (@=
       (Hom Cat_cat (@Fibre_cat K E x) (@Fibre_cat K D y))
       (@functord_transport_lhs_func K E D FF x y p)
@@ -17326,7 +17643,7 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
           (@catd_transport_func K E x y p)
           u);
 
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
@@ -17341,7 +17658,43 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
         (@functord_transport_func K E D FF x y p)
         u;
 
-assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
+assert [K : Cat] [E D : τ (Catd K)]
+  (U : τ (@StrictTransfor K Cat_cat E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_rhs_func
+      K E D (@strict_transfor K Cat_cat E D U) x y p)
+    u
+  ≡ @fapp0
+      (Fibre_cat E x)
+      (Fibre_cat D y)
+      (@functord_transport_func
+        K E D (@strict_transfor K Cat_cat E D U) x y p)
+      u;
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (U : τ (@StrictTransfor K Cat_cat E D))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fapp0
+    (Fibre_cat E x)
+    (Fibre_cat D y)
+    (@functord_transport_lhs_func
+      K E D (@strict_transfor K Cat_cat E D U) x y p)
+    u
+  ≡ @fapp0
+      (Fibre_cat E x)
+      (Fibre_cat D y)
+      (@functord_transport_func
+        K E D (@strict_transfor K Cat_cat E D U) x y p)
+      u;
+
+assertnot [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (u : τ (Obj (Fibre_cat E x))) ⊢
@@ -17350,10 +17703,10 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
     (Fibre_cat D y)
     (@functord_transport_rhs_func K E D FF x y p)
     u
-    ≡ @fapp0
-        (Fibre_cat E x)
-        (Fibre_cat D y)
-        (@functord_transport_func K E D FF x y p)
+  ≡ @fapp0
+      (Fibre_cat E x)
+      (Fibre_cat D y)
+      (@functord_transport_func K E D FF x y p)
         u;
 
 assert [K : Cat] (R : τ (Catd K))
@@ -18159,23 +18512,31 @@ assert [K : Cat]
       (@Hom_catd K (@Functor_catd K A B) FF GG)
       x y p;
 
-// The inline Unit_prof construction composes with the rigid point only through
-// the proof-time semantic comparison; it is not a judgmental runtime fold.
+// The inline Unit_prof construction composes with the rigid point for an
+// explicitly strict section. It remains a proof-time semantic comparison,
+// not a judgmental runtime fold for every raw Pi section.
 assert [K : Cat] (E : τ (Catd K))
   (X : τ (Obj (Pi_cat (Op_catd E))))
-  (Y : τ (Obj (Pi_cat E)))
+  (Y : τ (@StrictTransfor
+      K Cat_cat (@Const_catd K Terminal_cat) E))
   (x y : τ (Obj K))
   (p : τ (Hom K x y))
   (h : τ (Hom
       (Fibre_cat E x)
       (@piapp0 K (@Op_catd K E) X x)
-      (@piapp0 K E Y x))) ⊢
+      (@piapp0 K E
+        (@strict_transfor
+          K Cat_cat (@Const_catd K Terminal_cat) E Y)
+        x))) ⊢
   comp_fapp0
     (@id
       (Hom_cat
         (Fibre_cat E y)
         (@piapp0 K (@Op_catd K E) X y)
-        (@piapp0 K E Y y))
+        (@piapp0 K E
+          (@strict_transfor
+            K Cat_cat (@Const_catd K Terminal_cat) E Y)
+          y))
       (@fapp0
         (Hom_cat
           (Fibre_cat E y)
@@ -18188,11 +18549,17 @@ assert [K : Cat] (E : τ (Catd K))
             (Fibre_cat E x)
             (Fibre_cat E y)
             (@fapp1_fapp0 K Cat_cat E x y p)
-            (@piapp0 K E Y x)))
+            (@piapp0 K E
+              (@strict_transfor
+                K Cat_cat (@Const_catd K Terminal_cat) E Y)
+              x)))
         (Hom_cat
           (Fibre_cat E y)
           (@piapp0 K (@Op_catd K E) X y)
-          (@piapp0 K E Y y))
+          (@piapp0 K E
+            (@strict_transfor
+              K Cat_cat (@Const_catd K Terminal_cat) E Y)
+            y))
         (@fapp1_fapp0
           (Product_cat (Op_cat (Fibre_cat E y)) (Fibre_cat E y))
           Cat_cat
@@ -18207,31 +18574,53 @@ assert [K : Cat] (E : τ (Catd K))
               (Fibre_cat E x)
               (Fibre_cat E y)
               (@fapp1_fapp0 K Cat_cat E x y p)
-              (@piapp0 K E Y x)))
+              (@piapp0 K E
+                (@strict_transfor
+                  K Cat_cat (@Const_catd K Terminal_cat) E Y)
+                x)))
           (Struct_sigma
             (@piapp0 K (@Op_catd K E) X y)
-            (@piapp0 K E Y y))
+            (@piapp0 K E
+              (@strict_transfor
+                K Cat_cat (@Const_catd K Terminal_cat) E Y)
+              y))
           (Struct_sigma
             (@piapp1_fapp0 K (@Op_catd K E) X x y p)
-            (@piapp1_fapp0 K E Y x y p)))
+            (@piapp1_fapp0 K E
+              (@strict_transfor
+                K Cat_cat (@Const_catd K Terminal_cat) E Y)
+              x y p)))
         (@fapp1_fapp0
           (Fibre_cat E x)
           (Fibre_cat E y)
           (@fapp1_fapp0 K Cat_cat E x y p)
           (@piapp0 K (@Op_catd K E) X x)
-          (@piapp0 K E Y x)
+          (@piapp0 K E
+            (@strict_transfor
+              K Cat_cat (@Const_catd K Terminal_cat) E Y)
+            x)
           h)))
     (@id
       (Hom_cat
         (Fibre_cat E y)
         (@piapp0 K (@Op_catd K E) X y)
-        (@piapp0 K E Y y))
-      (@Hom_catd_fapp1_fapp0_point K E X Y x y p h))
+        (@piapp0 K E
+          (@strict_transfor
+            K Cat_cat (@Const_catd K Terminal_cat) E Y)
+          y))
+      (@Hom_catd_fapp1_fapp0_point
+        K E X
+        (@strict_transfor
+          K Cat_cat (@Const_catd K Terminal_cat) E Y)
+        x y p h))
   : τ (Hom
       (Hom_cat
         (Fibre_cat E y)
         (@piapp0 K (@Op_catd K E) X y)
-        (@piapp0 K E Y y))
+        (@piapp0 K E
+          (@strict_transfor
+            K Cat_cat (@Const_catd K Terminal_cat) E Y)
+          y))
       _
       _);
 
@@ -21538,10 +21927,10 @@ assert [B J J' : Cat]
   (W : τ (Prof J' J))
   [O O' : τ (Prof B J)]
   (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢
-  @iso_evidence_fmap
+  @strict_iso_evidence_fmap
     (@Prof_cat B J)
     (@Prof_cat B J')
-    (@Prof_imply_cov_func B J' J W)
+    (@strict_prof_imply_cov_func B J' J W)
     O O' i
   : τ (@IsoEvidence
       (@Prof_cat B J')
@@ -26166,44 +26555,106 @@ assert [A B : Cat] [F G : τ (Functor A B)]
       (@tapp1_con_at_transf A B F G epsilon Y)
       X W h q;
 
-// The active strict-naturality cuts remain available when represented
-// post/precomposition has already selected its stable point head.  These
-// typed reflexivity checks exercise the two proof-time bridges directly.
+// The post/left stable-head reading is now guarded by StrictTransfor.
 assert [A B : Cat] [F G : τ (Functor A B)]
-  (epsilon : τ (Transf F G))
+  (U : τ (@StrictTransfor A B F G))
   [X Y : τ (Obj A)]
   (g : τ (Hom A X Y)) ⊢
   @eq_refl
     (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
-    (@tapp1_fapp0 A B F G X Y epsilon g)
+    (@tapp1_fapp0
+      A B F G X Y (@strict_transfor A B F G U) g)
   : τ (@=
       (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
-      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@tapp1_fapp0
+        A B F G X Y (@strict_transfor A B F G U) g)
       (@hom_postcomp_fapp0
         B B (@id Cat_cat B)
         (@fapp0 A B F X)
         (@fapp0 A B G X)
         (@fapp0 A B G Y)
         (@fapp1_fapp0 A B G X Y g)
-        (@tapp0_fapp0 A B F G X epsilon)));
+        (@tapp0_fapp0
+          A B F G X (@strict_transfor A B F G U))));
 
-assert [A B : Cat] [F G : τ (Functor A B)]
+assertnot [A B : Cat] [F G : τ (Functor A B)]
   (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @tapp1_fapp0 A B F G X Y epsilon g
+  ≡ @hom_postcomp_fapp0
+      B B (@id Cat_cat B)
+      (@fapp0 A B F X)
+      (@fapp0 A B G X)
+      (@fapp0 A B G Y)
+      (@fapp1_fapp0 A B G X Y g)
+      (@tapp0_fapp0 A B F G X epsilon);
+
+// The pre/right stable-head reading is guarded by the full strict profile.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
   [X Y : τ (Obj A)]
   (g : τ (Hom A X Y)) ⊢
   @eq_refl
     (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
-    (@tapp1_fapp0 A B F G X Y epsilon g)
+    (@tapp1_fapp0
+      A B F G X Y (@strict_transfor A B F G U) g)
   : τ (@=
       (Hom B (@fapp0 A B F X) (@fapp0 A B G Y))
-      (@tapp1_fapp0 A B F G X Y epsilon g)
+      (@tapp1_fapp0
+        A B F G X Y (@strict_transfor A B F G U) g)
       (@hom_precomp_along_fapp0
         B B (@id Cat_cat B)
         (@fapp0 A B G Y)
         (@fapp0 A B F X)
         (@fapp0 A B F Y)
         (@fapp1_fapp0 A B F X Y g)
-        (@tapp0_fapp0 A B F G Y epsilon)));
+        (@tapp0_fapp0
+          A B F G Y (@strict_transfor A B F G U))));
+
+assertnot [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [X Y : τ (Obj A)]
+  (g : τ (Hom A X Y)) ⊢
+  @tapp1_fapp0 A B F G X Y epsilon g
+  ≡ @hom_precomp_along_fapp0
+      B B (@id Cat_cat B)
+      (@fapp0 A B G Y)
+      (@fapp0 A B F X)
+      (@fapp0 A B F Y)
+      (@fapp1_fapp0 A B F X Y g)
+      (@tapp0_fapp0 A B F G Y epsilon);
+
+// Strict displayed-functor evidence is whole in the fibre object.
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (p : τ (@IsStrictFunctord K E D FF))
+  [x y : τ (Obj K)]
+  (f : τ (Hom K x y)) ⊢
+  p x y f
+  : τ (@IsStrictCell
+      (@Functor_cat (Fibre_cat E x) (Fibre_cat D y))
+      (@functord_transport_lhs_func K E D FF x y f)
+      (@functord_transport_rhs_func K E D FF x y f)
+      (@functord_laxity_transf K E D FF x y f));
+
+assert [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (p : τ (@IsStrictFunctord K E D FF))
+  (x : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat E D x
+    (@strict_functord_underlying K E D
+      (@make_strict_functord K E D FF p))
+  ≡ @tapp0_fapp0 K Cat_cat E D x FF;
+
+assertnot [K : Cat] [E D : τ (Catd K)]
+  (FF : τ (Functord E D))
+  (p : τ (@IsStrictFunctord K E D FF))
+  (x : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat E D x
+    (@strict_functord K E D
+      (@make_strict_functord K E D FF p))
+  ≡ @tapp0_fapp0 K Cat_cat E D x FF;
 
 // The normal-lax functor compositor is the identity-transfor specialization.
 assert [A B : Cat] (F : τ (Functor A B))
@@ -26213,10 +26664,49 @@ assert [A B : Cat] (F : τ (Functor A B))
   ≡ @tapp1_post_laxity_cell
       A B F F (@id (Functor_cat A B) F) X Y Z g f;
 
-// catalog-area: Computational strict functors and profiled Gray hom
-// Strictness is selected by an opaque classifier and stable action view.
-// The full category reuses the ambient transfor and higher-cell tower;
-// the existing Gray arrow boundary remains transitional in this tranche.
+// catalog-area: Strict functor/transfor profiles and profiled Gray hom
+// Opaque strict functor objects carry the stable action view. GrayHom_lax
+// selects classified lax arrows over those objects.
+injective symbol unprofiled_catd_valued_functor
+  (A K : Cat)
+  : τ (Functor A (@Catd_cat K));
+
+// A Catd-valued codomain is not evidence that an arbitrary ambient functor
+// preserves composition.
+assertnot [A K : Cat]
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    (@Catd_cat K)
+    (@fapp0 A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) X)
+    (@fapp0 A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) Y)
+    (@fapp0 A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) Z)
+    (@fapp1_fapp0
+      A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) Y Z g)
+    (@fapp1_fapp0
+      A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) X Y f)
+  ≡ @fapp1_fapp0
+      A (@Catd_cat K) (@unprofiled_catd_valued_functor A K) X Z
+      (@comp_fapp0 A X Y Z g f);
+
+assertnot [A B : Cat] ⊢
+  @GrayHom_lax A B
+  ≡ @StrictFunctor_cat A B;
+
+assert [A B : Cat]
+  (S : τ (@StrictFunctor A B)) ⊢
+  S : τ (Obj (@StrictFunctor_cat A B));
+
+assert [A B : Cat]
+  (X : τ (Obj (@StrictFunctor_cat A B))) ⊢
+  @fapp0
+    (@StrictFunctor_cat A B)
+    (@Functor_cat A B)
+    (@strict_functor_include_func A B)
+    X
+  ≡ @strict_functor A B X;
+
 assert [A B : Cat]
   (S : τ (@StrictFunctor A B)) ⊢
   S : τ (Obj (@GrayHom_lax A B));
@@ -26224,7 +26714,7 @@ assert [A B : Cat]
 assert [A B : Cat]
   (X Y : τ (Obj (@GrayHom_lax A B))) ⊢
   Hom_cat (@GrayHom_lax A B) X Y
-  ≡ @Transf_cat
+  ≡ @LaxTransfor_cat
       A B
       (@strict_functor A B X)
       (@strict_functor A B Y);
@@ -26232,8 +26722,8 @@ assert [A B : Cat]
 assert [A B : Cat]
   (X : τ (Obj (@GrayHom_lax A B))) ⊢
   @id (@GrayHom_lax A B) X
-  : τ (Hom
-      (@Functor_cat A B)
+  : τ (@LaxTransfor
+      A B
       (@strict_functor A B X)
       (@strict_functor A B X));
 
@@ -26242,8 +26732,8 @@ assert [A B : Cat]
   (g : τ (Hom (@GrayHom_lax A B) Y Z))
   (f : τ (Hom (@GrayHom_lax A B) X Y)) ⊢
   @comp_fapp0 (@GrayHom_lax A B) X Y Z g f
-  : τ (Hom
-      (@Functor_cat A B)
+  : τ (@LaxTransfor
+      A B
       (@strict_functor A B X)
       (@strict_functor A B Z));
 
@@ -26254,11 +26744,10 @@ assert [A B : Cat]
     (@Functor_cat A B)
     (@grayhom_lax_include_func A B)
     X Y
-  ≡ @id_func
-      (@Transf_cat
-        A B
-        (@strict_functor A B X)
-        (@strict_functor A B Y));
+  ≡ @lax_transfor_include_func
+      A B
+      (@strict_functor A B X)
+      (@strict_functor A B Y);
 
 // A classified strict object has canonical evidence about the existing
 // whole compositor, independently of the admission certificate.
@@ -26304,6 +26793,294 @@ assert [A B : Cat] (S : τ (@StrictFunctor A B)) ⊢
 assertnot [A B : Cat] (F : τ (Functor A B))
   (p : τ (@IsStrictFunctor A B F)) ⊢
   @strict_functor A B (@make_strict_functor A B F p) ≡ F;
+// The visible-package carrier path is literally reflexivity through the
+// proof-time unification rule and does not install a runtime whole fold.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F)) ⊢
+  @make_strict_functor_carrier_path A B F p
+  ≡ @eq_refl
+      (Functor A B)
+      (@strict_functor A B (@make_strict_functor A B F p));
+
+// The explicit raw observation computes on a visible admission constructor.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F)) ⊢
+  @strict_functor_underlying A B (@make_strict_functor A B F p)
+  ≡ F;
+
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F))
+  [X Y : τ (Obj A)]
+  (f : τ (Hom A X Y)) ⊢
+  @fapp1_fapp0 A B
+    (@strict_functor_underlying A B (@make_strict_functor A B F p))
+    X Y f
+  ≡ @fapp1_fapp0 A B F X Y f;
+
+assertnot [A B : Cat]
+  (F : τ (Functor A B))
+  (p : τ (@IsStrictFunctor A B F))
+  [X Y : τ (Obj A)]
+  (f : τ (Hom A X Y)) ⊢
+  @fapp1_fapp0 A B
+    (@strict_functor A B (@make_strict_functor A B F p)) X Y f
+  ≡ @fapp1_fapp0 A B F X Y f;
+
+// Composition computation is guarded by the strict-functor view.
+assert [A B : Cat]
+  (S : τ (@StrictFunctor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B (@strict_functor A B S) X)
+    (@fapp0 A B (@strict_functor A B S) Y)
+    (@fapp0 A B (@strict_functor A B S) Z)
+    (@fapp1_fapp0 A B (@strict_functor A B S) Y Z g)
+    (@fapp1_fapp0 A B (@strict_functor A B S) X Y f)
+  ≡ @fapp1_fapp0
+      A B (@strict_functor A B S) X Z
+      (@comp_fapp0 A X Y Z g f);
+
+// Named strict objects retain their selected public action while their raw
+// observation computes separately from the stable profile head.
+assert [A B : Cat]
+  (y : τ (Obj B)) ⊢
+  @strict_functor_underlying A B (@strict_constant_func A B y)
+  ≡ @Const_func A B y;
+
+assert [A B : Cat]
+  (y : τ (Obj B))
+  [X Y : τ (Obj A)]
+  (f : τ (Hom A X Y)) ⊢
+  @fapp1_fapp0 A B
+    (@strict_functor A B (@strict_constant_func A B y)) X Y f
+  ≡ @id B y;
+
+assert ⊢
+  @strict_functor_underlying Grpd_cat Cat_cat strict_path_cat_func
+  ≡ Path_cat_func;
+
+assert [A B : Grpd]
+  (f : τ (Hom Grpd_cat A B)) ⊢
+  @fapp1_fapp0 Grpd_cat Cat_cat
+    (@strict_functor Grpd_cat Cat_cat strict_path_cat_func) A B f
+  ≡ @path_map_func A B f;
+
+// Strict ordinary transfors constrain the existing whole laxity cell.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (p : τ (@IsStrictTransfor A B F G epsilon))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z)) ⊢
+  (@strict_transfor_post_evidence A B F G epsilon p) X Y Z g
+  : τ (@IsStrictCell
+      (@Functor_cat
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z)))
+      (@strict_transfor_naturality_lhs_func
+        A B F G epsilon X Y Z g)
+      (@strict_transfor_naturality_rhs_func
+        A B F G epsilon X Y Z g)
+      (@strict_transfor_naturality_transf
+        A B F G epsilon X Y Z g));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (p : τ (@IsStrictTransfor A B F G epsilon))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X)) ⊢
+  (@strict_transfor_pre_evidence A B F G epsilon p) Y W X h
+  : τ (@IsStrictCell
+      (@Functor_cat
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y)))
+      (@strict_transfor_pre_naturality_lhs_func
+        A B F G epsilon Y W X h)
+      (@strict_transfor_pre_naturality_rhs_func
+        A B F G epsilon Y W X h)
+      (@strict_transfor_pre_naturality_transf
+        A B F G epsilon Y W X h));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G)) ⊢
+  @IsLaxTransfor A B F G epsilon
+  ≡ @IsPreStrictTransfor A B F G epsilon;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G)) ⊢
+  @IsOplaxTransfor A B F G epsilon
+  ≡ @IsPostStrictTransfor A B F G epsilon;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (lax : τ (@IsLaxTransfor A B F G epsilon)) ⊢
+  @lax_transfor_underlying A B F G
+    (@make_lax_transfor A B F G epsilon lax)
+  ≡ epsilon;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (lax lax2 : τ (@IsLaxTransfor A B F G epsilon)) ⊢
+  @eq_refl
+    (@LaxTransfor A B F G)
+    (@make_lax_transfor A B F G epsilon lax)
+  : τ (@=
+      (@LaxTransfor A B F G)
+      (@make_lax_transfor A B F G epsilon lax)
+      (@make_lax_transfor A B F G epsilon lax2));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (lax : τ (@IsLaxTransfor A B F G epsilon)) ⊢
+  @make_lax_transfor_carrier_path A B F G epsilon lax
+  ≡ @eq_refl
+      (Transf F G)
+      (@lax_transfor A B F G
+        (@make_lax_transfor A B F G epsilon lax));
+
+// Classified lax objects recover canonical semantic evidence without exposing
+// their admission certificate.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (L : τ (@LaxTransfor A B F G)) ⊢
+  @lax_transfor_is_lax A B F G L
+  : τ (@IsLaxTransfor A B F G (@lax_transfor A B F G L));
+
+// The exact existing whole pre/right cell is identity only at the profile.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (L : τ (@LaxTransfor A B F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X)) ⊢
+  @strict_transfor_pre_naturality_transf
+    A B F G (@lax_transfor A B F G L) Y W X h
+  ≡ @id
+      (@Functor_cat
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y)))
+      (@strict_transfor_pre_naturality_lhs_func
+        A B F G (@lax_transfor A B F G L) Y W X h);
+
+assertnot [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X)) ⊢
+  @strict_transfor_pre_naturality_lhs_func
+    A B F G epsilon Y W X h
+  ≡ @strict_transfor_pre_naturality_rhs_func
+      A B F G epsilon Y W X h;
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (L : τ (@LaxTransfor A B F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F W)
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@tapp1_fapp0 A B F G X Y (@lax_transfor A B F G L) f)
+    (@fapp1_fapp0 A B F W X h)
+  ≡ @tapp1_fapp0
+      A B F G W Y (@lax_transfor A B F G L)
+      (@comp_fapp0 A W X Y f h);
+
+assertnot [A B : Cat] [F G : τ (Functor A B)]
+  (L : τ (@LaxTransfor A B F G))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @comp_fapp0
+    B
+    (@fapp0 A B F X)
+    (@fapp0 A B G Y)
+    (@fapp0 A B G Z)
+    (@fapp1_fapp0 A B G Y Z g)
+    (@tapp1_fapp0 A B F G X Y (@lax_transfor A B F G L) f)
+  ≡ @tapp1_fapp0
+      A B F G X Z (@lax_transfor A B F G L)
+      (@comp_fapp0 A X Y Z g f);
+
+// Full strict objects canonically recover both skew evidence families.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G)) ⊢
+  @strict_transfor_is_strict A B F G U
+  : τ (@IsStrictTransfor A B F G
+      (@strict_transfor A B F G U));
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z)) ⊢
+  @strict_transfor_naturality_transf
+    A B F G (@strict_transfor A B F G U) X Y Z g
+  ≡ @id
+      (@Functor_cat
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z)))
+      (@strict_transfor_naturality_lhs_func
+        A B F G (@strict_transfor A B F G U) X Y Z g);
+
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (U : τ (@StrictTransfor A B F G))
+  [W X Y : τ (Obj A)]
+  (h : τ (Hom A W X)) ⊢
+  @strict_transfor_pre_naturality_transf
+    A B F G (@strict_transfor A B F G U) Y W X h
+  ≡ @id
+      (@Functor_cat
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F W) (@fapp0 A B G Y)))
+      (@strict_transfor_pre_naturality_lhs_func
+        A B F G (@strict_transfor A B F G U) Y W X h);
+
+// Capped strictness is derived by evaluating that whole property.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  [epsilon : τ (Transf F G)]
+  (p : τ (@IsStrictTransfor A B F G epsilon))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y)) ⊢
+  @strict_transfor_naturality_evidence
+    A B F G epsilon p X Y Z g f
+  : τ (@IsStrictCell
+      (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+        (@strict_transfor_naturality_lhs_func
+          A B F G epsilon X Y Z g)
+        f)
+      (@fapp0
+        (Hom_cat A X Y)
+        (Hom_cat B (@fapp0 A B F X) (@fapp0 A B G Z))
+        (@strict_transfor_naturality_rhs_func
+          A B F G epsilon X Y Z g)
+        f)
+      (@tapp1_post_laxity_cell A B F G epsilon X Y Z g f));
+
+// Explicit raw observation computes through component action.
+assert [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (p : τ (@IsStrictTransfor A B F G epsilon))
+  (X : τ (Obj A)) ⊢
+  @tapp0_fapp0 A B F G X
+    (@strict_transfor_underlying A B F G
+      (@make_strict_transfor A B F G epsilon p))
+  ≡ @tapp0_fapp0 A B F G X epsilon;
+
+assertnot [A B : Cat] [F G : τ (Functor A B)]
+  (epsilon : τ (Transf F G))
+  (p : τ (@IsStrictTransfor A B F G epsilon))
+  (X : τ (Obj A)) ⊢
+  @tapp0_fapp0 A B F G X
+    (@strict_transfor A B F G
+      (@make_strict_transfor A B F G epsilon p))
+  ≡ @tapp0_fapp0 A B F G X epsilon;
 
 // Ambient functors are not silently promoted into the strict object sort.
 assertnot [A B : Cat]
@@ -26392,19 +27169,38 @@ assert [A B C : Cat] ⊢
   @GrayRightTarget A B C
   ≡ @GrayHom_lax A (@GrayHom_lax B C);
 
+// Crossing from a classified strict object to its admitted raw carrier is a
+// proof-time comparison, validated with typed reflexivity rather than a
+// runtime-conversion assertion.
 assert [A B C : Cat] ⊢
-  @strict_functor_underlying
+  @eq_refl
+    (Functor (@GrayRightSource A B C) (@GrayRightTarget A B C))
+    (@strict_functor
       (@GrayRightSource A B C)
       (@GrayRightTarget A B C)
-      (@gray_curry_R_strict A B C)
-  ≡ @gray_curry_R_func A B C;
+      (@gray_curry_R_strict A B C))
+  : τ (@=
+      (Functor (@GrayRightSource A B C) (@GrayRightTarget A B C))
+      (@strict_functor
+        (@GrayRightSource A B C)
+        (@GrayRightTarget A B C)
+        (@gray_curry_R_strict A B C))
+      (@gray_curry_R_func A B C));
 
 assert [A B C : Cat] ⊢
-  @strict_functor_underlying
+  @eq_refl
+    (Functor (@GrayRightTarget A B C) (@GrayRightSource A B C))
+    (@strict_functor
       (@GrayRightTarget A B C)
       (@GrayRightSource A B C)
-      (@gray_uncurry_R_strict A B C)
-  ≡ @gray_uncurry_R_func A B C;
+      (@gray_uncurry_R_strict A B C))
+  : τ (@=
+      (Functor (@GrayRightTarget A B C) (@GrayRightSource A B C))
+      (@strict_functor
+        (@GrayRightTarget A B C)
+        (@GrayRightSource A B C)
+        (@gray_uncurry_R_strict A B C))
+      (@gray_uncurry_R_func A B C));
 
 // Curry exposes the generic whole Hom action, so no capped transpose is added.
 assert [A B C : Cat]
@@ -26552,9 +27348,9 @@ assert ⊢
       walking_arrow_tgt
       walking_arrow_generator;
 
-// The outer coordinate is one whole coevaluation-generated transformation.
+// The outer coordinate is one classified coevaluation-generated lax transfor.
 assert ⊢
-  gray_square_outer_transf
+  gray_square_outer_lax_transfor
   ≡ @fapp1_fapp0
       WalkingArrow_cat
       (@GrayHom_lax WalkingArrow_cat GrayWalkingSquare_cat)
@@ -26562,6 +27358,15 @@ assert ⊢
       walking_arrow_src
       walking_arrow_tgt
       walking_arrow_generator;
+
+assert ⊢
+  gray_square_outer_transf
+  ≡ @lax_transfor
+      WalkingArrow_cat
+      GrayWalkingSquare_cat
+      gray_square_inner_src_func
+      gray_square_inner_tgt_func
+      gray_square_outer_lax_transfor;
 
 assert ⊢
   gray_square_outer_src_eval_func
@@ -26683,22 +27488,8 @@ assert ⊢
   ≡ gray_interchanger;
 
 assertnot ⊢
-  gray_interchanger
-  ≡ @id GrayInterchangerCodomain_cat gray_interchanger_source;
-
-assertnot ⊢
-  gray_interchanger
-  ≡ @tapp1_pre_laxity_cell
-      WalkingArrow_cat
-      GrayWalkingSquare_cat
-      gray_square_inner_src_func
-      gray_square_inner_tgt_func
-      gray_square_outer_transf
-      walking_arrow_src
-      walking_arrow_tgt
-      walking_arrow_tgt
-      walking_arrow_generator
-      (@id WalkingArrow_cat walking_arrow_tgt);
+  gray_interchanger_source
+  ≡ gray_interchanger_target;
 
 // catalog-area: WalkingEnd--Circle groupoidification restriction
 // Circle functions act through Path_cat_func and whole precomposition; the

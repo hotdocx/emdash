@@ -2,7 +2,7 @@
   Reviewer example: the selected decoder's I tensor_R I interchanger.
 
   The recursively iterable stable whole graph has the literal inner-target
-  side, and its filler is definitionally the selected Gray interchanger.
+  side, and its filler computes judgmentally to the selected Gray interchanger.
 */
 
 require open emdash.emdash3_2_gray_cube_dimension2;
@@ -41,8 +41,6 @@ assert ⊢
         gray_square_inner_src_arrow
         gray_cube2_graph_target_side));
 
-assert ⊢ gray_cube2_interchanger_cell ≡ gray_interchanger;
-
 assert ⊢
   gray_cube2_interchanger_path
   : τ (@=
@@ -61,6 +59,10 @@ assert ⊢
       gray_interchanger);
 
 assert ⊢
+  gray_cube2_interchanger_cell
+  ≡ gray_interchanger;
+
+assert ⊢
   gray_cube2_graph_next_func
   : τ (Functor
       (Hom_cat
@@ -70,8 +72,8 @@ assert ⊢
         (@gray_transf_graph_obj
           WalkingArrow_cat GrayWalkingSquare_cat
           gray_square_inner_src_func gray_square_inner_tgt_func
-          gray_square_outer_transf walking_arrow_src)
+          gray_square_outer_lax_transfor walking_arrow_src)
         (@gray_transf_graph_obj
           WalkingArrow_cat GrayWalkingSquare_cat
           gray_square_inner_src_func gray_square_inner_tgt_func
-          gray_square_outer_transf walking_arrow_tgt)));
+          gray_square_outer_lax_transfor walking_arrow_tgt)));

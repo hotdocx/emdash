@@ -2,6 +2,7 @@
    transported-identity projection orders, and noncollapse controls.
    The general op/Sigma variance repair is deliberately not claimed here. */
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_gray_profiles;
 
 // The actual source family of Eval_funcd, named only for these reviewers.
 symbol eval_order_domain [K : Cat] (I : Cat) (E : τ (Catd K)) : τ (Catd K)
@@ -130,11 +131,24 @@ assertnot [K I : Cat] (s : τ (Functor K I)) (x : τ (Obj K)) (p : τ (Hom K x x
     s x x p Terminal_obj
   ≡ @id I (@fapp0 K I s x);
 
-// Generic mapped-arrow composition retains its existing accumulation direction.
+// Ambient mapped-arrow composition is well typed and retains its lax comparison.
 assert [A B : Cat] (F : τ (Functor A B)) [x y z : τ (Obj A)]
   (f : τ (Hom A x y)) (g : τ (Hom A y z)) ⊢
   @comp_fapp0 B _ _ _ (@fapp1_fapp0 A B F y z g) (@fapp1_fapp0 A B F x y f)
+  : τ (Hom B (@fapp0 A B F x) (@fapp0 A B F z));
+
+assertnot [A B : Cat] (F : τ (Functor A B)) [x y z : τ (Obj A)]
+  (f : τ (Hom A x y)) (g : τ (Hom A y z)) ⊢
+  @comp_fapp0 B _ _ _ (@fapp1_fapp0 A B F y z g) (@fapp1_fapp0 A B F x y f)
   ≡ @fapp1_fapp0 A B F x z (@comp_fapp0 A x y z g f);
+
+// The same computation is selected by the actual opaque strict profile.
+assert [A B : Cat] (S : τ (@StrictFunctor A B)) [x y z : τ (Obj A)]
+  (f : τ (Hom A x y)) (g : τ (Hom A y z)) ⊢
+  @comp_fapp0 B _ _ _
+    (@fapp1_fapp0 A B (@strict_functor A B S) y z g)
+    (@fapp1_fapp0 A B (@strict_functor A B S) x y f)
+  ≡ @fapp1_fapp0 A B (@strict_functor A B S) x z (@comp_fapp0 A x y z g f);
 
 // The concrete leading-Eval composite agrees with the two-stage total action.
 assert [K I : Cat] (R E : τ (Catd K))

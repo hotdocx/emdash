@@ -46,18 +46,22 @@ on higher cells by iteration.
 
 > **Formal status — checked.** Evidence `CAT-FUNCTOR-CALCULUS`.
 > `fapp0` is object action, `fapp1_func` is the full next-hom action,
-> and `fapp1_fapp0` is its value at one arrow. Identity and composition
-> reductions belong to these generic owners.
+> and `fapp1_fapp0` is its value at one arrow. Normal identity computation
+> remains generic; composition retains an ambient laxity cell. Strict
+> composition computation uses a classified view or a qualified constructor.
 
-The preservation law is oriented as cut elimination:
+For the stable view of a classified strict functor, preservation is oriented
+as cut elimination:
 
 $$
 F[g]\circ F[f]\rightsquigarrow F[g\circ f].
 $$
 
-This is not a theorem copied onto each constructor. It is computation of the
-global functor-action interface. A specialized construction should expose its
-own semantic projections, while ordinary functoriality remains owned here.
+An arbitrary ambient functor instead retains the compositor between these
+endpoints and its higher action. Explicit strictness evidence constrains that
+existing cell. Admission to the opaque strict classifier supplies a stable
+view with the displayed computation; evidence alone does not rewrite the raw
+carrier. Named constructions may also have separately qualified strict rules.
 
 ## 11.2 From Natural Transformations To Transfors
 
@@ -112,7 +116,7 @@ In the native higher setting, however, retaining $\eta_{x,y}$ as a functor
 also retains its action on cells between possible $f$'s. Point components
 alone would hide that action and force it to be reconstructed later.
 
-## 11.3 Naturality Is A Pair Of Family Cuts
+## 11.3 Profiled Naturality And Family Cuts
 
 Take composable arrows
 
@@ -120,7 +124,8 @@ $$
 h:w\to x,\qquad f:x\to y,\qquad g:y\to z.
 $$
 
-The two strict naturality computations are
+For a stable classified strict transfor $\eta$, the two naturality
+computations are
 
 $$
 \begin{aligned}
@@ -129,22 +134,25 @@ G[g]\circ\eta[f]&\rightsquigarrow\eta[g\circ f],\\
 \end{aligned}
 $$
 
-Setting $f$ to an identity makes the usual naturality square reappear. Both
+Setting $f$ to an identity makes the usual strict naturality square reappear. Both
 boundary composites normalize through the same off-diagonal interior
 $\eta[f]$. Thus naturality is not merely a proposition verified after a
-family of components has been assembled; it is the way the family action
-absorbs neighboring cuts.
+family of components has been assembled; the classified family action
+absorbs neighboring cuts. An ambient transfor retains the two directed cells
+instead. The conventional lax profile selects only pre/right strictness,
+leaving the post/left cell observable.
 
 <!-- evidence:TRANSF-STRICT-NATURALITY -->
 
 > **Formal status — checked.** Evidence
 > `TRANSF-STRICT-NATURALITY`. Both capped equations and their uncapped
-> hom-functor forms are runtime reductions of the global `tapp1*`
-> calculus. The full forms retain action on the next cells.
+> hom-functor forms are runtime reductions at the stable `strict_transfor`
+> view, using the existing `tapp1*` calculus. The full forms retain action on
+> the next cells; raw ambient transfors have negative noncollapse controls.
 
 This is the chapter's central checked theorem. It explains why the calculus
 uses a transfor rather than a bare dependent function of point components:
-the transfor is the computational natural family.
+the transfor retains a whole family action, with its chosen strict/lax profile.
 
 ## 11.4 The Functor Category
 
@@ -245,10 +253,10 @@ $$
 
 In an ordinary functor precategory this is an equality of natural
 transformations, proved componentwise using associativity and naturality. In
-the native calculus, the corresponding computation is organized by the
-generic product-composition action and the off-diagonal vertical-composite
-folds. A representable four-cell instance is exposed as propositional
-interchange evidence.
+the native calculus, product-composition action retains the comparison.
+The representable four-cell equality requires the actual composition and
+transformation profiles recorded by the profiled interchange theorem. It is
+not an unrestricted equality for arbitrary ambient lax data.
 
 The equality mode matters. Functor composition has associativity and unit
 comparisons, and ordinary category theory packages their familiar pentagon

@@ -47,7 +47,7 @@ assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C)) ⊢
 // Reflection applies to arbitrary original diagram maps.
 assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [d e : τ (Functor WalkingArrow_cat C)] (h k : τ (@Transf WalkingArrow_cat C d e))
-  (p : τ (@= (Hom (@LaxArrow_cat C) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) e)) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e h) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e k))) ⊢
+  (p : τ (@= (Hom (@LaxArrow_cat C) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) e)) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e h) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e k))) ⊢
   @one_cat_diagram_observation_reflect_path C C1 d e h k p
   : τ (@= (@Transf WalkingArrow_cat C d e) h k);
 
@@ -55,7 +55,7 @@ assert [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
 assertnot [C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [d e : τ (Functor WalkingArrow_cat C)] (h k : τ (@Transf WalkingArrow_cat C d e)) ⊢
   @one_cat_diagram_observation_reflect_path C C1 d e h k
-    (@eq_refl (Hom (@LaxArrow_cat C) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) e)) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C) d e h))
+    (@eq_refl (Hom (@LaxArrow_cat C) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d) (@fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) e)) (@fapp1_fapp0 (Functor_cat WalkingArrow_cat C) (@LaxArrow_cat C) (@diagram_native_arrow_func C C1) d e h))
   : τ (@= (@Transf WalkingArrow_cat C d e) h k);
 
 // The same whole comparison retains mixed action and a further Hom.

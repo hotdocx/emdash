@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_action_paths;
 /* Internal proof bridge: compatibility at cycles is discharged by diagram action.
    Whole H maps and the original comparisons remain the program data. */
 require open emdash.emdash3_2_homology_family_map_point_observations;
@@ -135,7 +136,7 @@ symbol homology_family_native_map_comparison_path [B C : Cat] [S : τ (@Preaddit
   (@homology_family_native_comparison_quotient_path B C S C1 t T T0 P Q X D h x N0 n0)
   (@homology_family_native_comparison_quotient_path B C S C1 t T T0 P Q Y E k x N1 n1)
   (@homology_family_map_projection_at_path B C S C1 t T T0 P Q X Y D E h k a m e x)
-  (@strict_component_naturality_path (@ZeroArrowCone_cat C t T) C (@kernel_adjunction_family_func
+  (@one_cat_component_naturality_path (@ZeroArrowCone_cat C t T) C C1 (@kernel_adjunction_family_func
   (@ZeroArrowCone_cat C t T) C S t T P (@zero_arrow_cone_diagram_func C t T))
   (@zero_arrow_cone_adjunction_homology_func C S C1 t T T0 P Q)
   (@homology_adjunction_family_projection_transf (@ZeroArrowCone_cat C t T) C S t T T0 P Q

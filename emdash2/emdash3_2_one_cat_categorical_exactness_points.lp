@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* Exactness at the original canonical comparison of a native zero-cone.
    Whole-family evaluation and categorical transport are derived operations. */
 require open emdash.emdash3_2_one_cat_categorical_exactness;
@@ -65,8 +66,8 @@ symbol one_cat_exact_family_at [K C : Cat] [S : τ (@PreadditiveCategory C)]
   t T P (@zero_arrow_cone_diagram_func C t T)) (@zero_arrow_family_point_input K C t T A D h x)
   (@one_cat_image_to_kernel_transf (@ZeroArrowCone_cat C t T) C S C1 t T T0 P Q (@zero_arrow_cone_first_func C t
   T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) N))
-  (@image_family_global_point_equiv K C S C1 t T T0 P Q A D h x) (@omega_equiv_along_fapp1_fapp0 (Functor_cat K
-  C) C (@fapp0_func K C x) (@comp_cat_fapp0 K
+  (@image_family_global_point_equiv K C S C1 t T T0 P Q A D h x) (@one_cat_omega_equiv_fmap (Functor_cat K
+  C) C C1 (@fapp0_func K C x) (@comp_cat_fapp0 K
   (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q) (@zero_arrow_family_incoming_func K
   C t T A D h)) (@kernel_adjunction_family_func K C S t T P D) (@one_cat_image_to_kernel_transf K C S C1 t T
   T0 P Q A D h N) E) (@one_cat_image_kernel_point_path K C S C1 t T T0 P Q A D h N x));

@@ -1,3 +1,6 @@
+require open emdash.emdash3_2_one_cat_pointwise_equivalences;
+require open emdash.emdash3_2_one_cat_omega_maps;
+require open emdash.emdash3_2_one_cat_functor_closure;
 require open emdash.emdash3_2_one_cat_additive_family_inverse;
 require open emdash.emdash3_2_omega_equiv_cancellation_paths;
 require open emdash.emdash3_2_one_cat_difference_family_bilinearity;
@@ -247,7 +250,7 @@ symbol one_cat_negative_identity_omega [C : Cat] (C1 : τ (IsNCat (cat_succ cat_
   (Product_cat C C) C)] [t : τ (Obj C)] (A : τ (@AdditiveCategory C Prod t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   : τ (@OmegaEquivAlong (Functor_cat C C) (@id_func C) (@id_func C) (@one_cat_negative_identity_transf C C1 Prod t A
   T0))
-≔ @strict_transf_pointwise_omega_along C C (@id_func C) (@id_func C) (@one_cat_negative_identity_transf C C1 Prod t A
+≔ @one_cat_transf_pointwise_omega_along C C C1 (@id_func C) (@id_func C) (@one_cat_negative_identity_transf C C1 Prod t A
   T0)
     (λ x : τ (Obj C), @one_cat_negative_identity_component_omega C C1 Prod t A T0 x);
 
@@ -256,7 +259,7 @@ symbol one_cat_negative_family_omega [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_
   (Product_cat C C) C)] [t : τ (Obj C)] (A : τ (@AdditiveCategory C Prod t)) (T0 : τ (@TerminalObject (Op_cat C) t))
   (Y : τ (Functor B C))
   : τ (@OmegaEquivAlong (Functor_cat B C) Y Y (@one_cat_negative_family_transf B C C1 Prod t A T0 Y))
-≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat C C) (Functor_cat B C) (@comp_cat_con_func B C C Y)
+≔ @one_cat_omega_equiv_fmap (Functor_cat C C) (Functor_cat B C) (@one_cat_functor_category B C C1) (@comp_cat_con_func B C C Y)
     (@id_func C) (@id_func C) (@one_cat_negative_identity_transf C C1 Prod t A T0)
   (@one_cat_negative_identity_omega C C1 Prod t A T0);
 

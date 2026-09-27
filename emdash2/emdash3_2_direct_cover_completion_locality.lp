@@ -22,6 +22,7 @@
 */
 
 require open emdash.emdash3_2_direct_cover_completion_hit;
+require open emdash.emdash3_2_direct_cover_completion_retained_sections;
 require open emdash.emdash3_2_strict_pointwise_equivalences;
 
 // Conventional restriction-after-glue endofunctor at one eligible question.
@@ -93,7 +94,7 @@ symbol direct_cover_completion_restriction_glue_matching
   so the active library retains this exact theorem as one opaque proof owner;
   all computational observations below project from the whole `rho` owner.
 */
-constant symbol direct_cover_completion_restriction_glue_retained_agrees
+symbol direct_cover_completion_restriction_glue_retained_agrees
   [K : Cat]
   (T : τ (@GrothTopology K))
   (P : τ (@Psh K))
@@ -136,7 +137,8 @@ constant symbol direct_cover_completion_restriction_glue_retained_agrees
           (@direct_cover_question_extension_psh K T U q)
           (@DirectCoverCompletionPsh K T P)
           V m)
-        (Struct_sigma p member)));
+        (Struct_sigma p member)))
+≔ @cover_retained_member_path K T P V U p q member m;
 
 // Whole transformation carrying the conventional second inverse internally.
 injective symbol direct_cover_completion_restriction_glue_transf

@@ -7,6 +7,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_strict_functor_actions;
 
 // Left triangle: counit[f] ∘ F(unit[g]) ↪ f ∘ F(g).
 assert [R L : Cat]

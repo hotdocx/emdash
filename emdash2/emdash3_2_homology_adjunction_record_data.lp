@@ -6,6 +6,7 @@ require open emdash.emdash3_2_zero_arrow_universal_tests;
 
 // Existing factor-space view with the actual semantic boundary as centre.
 symbol kernel_adjunction_semantic_boundary_factor [C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)]
   (P : τ (@KernelAdjunctionStructure C S t T))
   (X : τ (Obj C)) (d : τ (Functor WalkingArrow_cat C))
@@ -13,7 +14,7 @@ symbol kernel_adjunction_semantic_boundary_factor [C : Cat] [S : τ (@Preadditiv
     (@fapp0 C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) d))
   : τ (@KernelFactorSpace C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
       (@terminal_arrow_test_outgoing C d) (@fapp0 _ _ (@kernel_adjunction_func C S t T P) d) (@tapp0_fapp0 _ _ _ _ d (@kernel_adjunction_inclusion C S t T P)) X
-      (@terminal_arrow_kernel_test C S t T X d h))
+      (@terminal_arrow_kernel_test C S C1 t T X d h))
 ≔ @Struct_sigma (Hom C X (@fapp0 _ _ (@kernel_adjunction_func C S t T P) d))
     (λ f : τ (Hom C X (@fapp0 _ _ (@kernel_adjunction_func C S t T P) d)), @= (Hom C X (@fapp0 WalkingArrow_cat C d walking_arrow_src))
       (@comp_fapp0 C X (@fapp0 _ _ (@kernel_adjunction_func C S t T P) d) (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@tapp0_fapp0 _ _ _ _ d (@kernel_adjunction_inclusion C S t T P)) f)

@@ -283,9 +283,14 @@ $$
 \operatorname{id}_{\operatorname{Match}_{aP}(R)},
 $$
 
-and the strict pointwise-to-whole principle closes it to (20.4). No new
-naturality square is assumed at this stage. The necessary compatibility came
-from the one displayed glue functor in the categorical-HIT signature.
+and the inherited pointwise-to-whole assembly principle supplies the whole
+equivalence and cancellation used in (20.4). This principle is an explicit
+primitive assumption over an existing whole ordinary or displayed
+transformation. It retains both selected component inverses and assumes whole
+cancellation; its historical `strict_*` name imposes no strict-profile
+premise. The construction uses ordinary fibre assembly, displayed assembly,
+and ordinary outer assembly. It does not add a caller-supplied naturality
+square or derive the assembly assumption from laxity.
 
 **Theorem 20.1 (locality of cover completion).** For every Cat-valued
 presheaf $P$ on the site $(\mathcal K,J)$, the direct cover completion $aP$ is
@@ -299,8 +304,9 @@ local at every $J$-covering sieve. Hence $aP$ is a Cat-valued sheaf.
 > whole glue naturality, and silent; combines it with the primitive
 > glue-after-restriction path; and produces the existing two-sided
 > fixed-forward locality interface at every eligible question and over the
-> whole topology. It assumes neither generic functor extensionality nor a
-> category-of-elements retraction.
+> whole topology, using the inherited ordinary/displayed assembly primitive.
+> It assumes neither generic functor extensionality nor a category-of-elements
+> retraction. An explicit-profile replacement of assembly is deferred.
 
 This proof explains why the chosen constructor set is not merely mnemonic.
 Return begins the free object. Glue supplies a candidate inverse to

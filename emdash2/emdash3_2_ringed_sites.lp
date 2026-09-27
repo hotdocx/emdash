@@ -29,6 +29,7 @@
 
 require open emdash.emdash3_2_sites;
 require open emdash.emdash3_2_commutative_algebra_presheaves;
+require open emdash.emdash3_2_strict_functor_actions;
 
 // Topology- and value-category-indexed category of supplied sheaves.
 injective symbol Sheaf_cat

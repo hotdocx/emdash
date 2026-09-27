@@ -63,6 +63,12 @@ def load_registry(root: Path = ROOT) -> dict:
         if len(targets) != len(set(targets)) or profiled & set(targets):
             raise ValueError("duplicate or overlapping profile targets")
         profiled.update(targets)
+    overrides = data.get("targetProfileOverrides", {})
+    if not isinstance(overrides, dict) or any(
+        target not in all_targets or not isinstance(profile, str) or profile not in data["profiles"]
+        for target, profile in overrides.items()
+    ):
+        raise ValueError("unknown target or profile in target profile overrides")
     for name, profile in data["profiles"].items():
         if (type(profile["memoryMiB"]) is not int or type(profile["timeoutSeconds"]) is not int
                 or not 32 <= profile["memoryMiB"] <= 8192 or not 1 <= profile["timeoutSeconds"] <= 600):
@@ -179,6 +185,7 @@ def digest_inputs(inputs: dict) -> str:
 def profile_for(target: Path, data: dict | None = None) -> tuple[str, dict]:
     data = data if data is not None else load_registry()
     name = next((name for name, paths in data["profileTargets"].items() if str(target) in paths), "default")
+    name = data.get("targetProfileOverrides", {}).get(str(target), name)
     return name, dict(data["profiles"][name])
 
 

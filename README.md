@@ -62,11 +62,14 @@ truncated carrier judgmentally by `Unit`. Category-indexed
 out of the realization and path-valued functors on `C`; specialization
 recovers the groupoidal Interval from the directed WalkingArrow. A selected
 strict-object/lax-arrow Gray profile then derives a nonidentity walking-square
-interchanger from whole internal laxity. Its checked coordinate swap gives an
-iterable whole transformation graph whose capped arrows compute to the literal
-square `G[g] o epsilon[x] ==> epsilon[y] o F[g]`. The graph beta deliberately
-survives its known overlap with the historical globally strict functor cuts,
-which remain scheduled for profile-local migration. Fixed-bracketing positive
+interchanger from whole internal laxity. Its checked coordinate swap is a
+classified `LaxTransfor` arrow and gives an iterable whole transformation
+graph whose capped arrows compute to the literal square
+`G[g] o epsilon[x] ==> epsilon[y] o F[g]`. The classified view makes the
+pre/right leg compute and retains the post/left cell as its filler. The graph
+beta retains its reviewed overlap with normal identity computation; generic
+composition and naturality cuts have been replaced by profiles or justified
+named computations. Fixed-bracketing positive
 Gray cubes and an internal Nat-recursive decoder then reach native cubical
 levels. Dimensions one
 through three, the selected `I tensor_R I` direction, four square edges, six
@@ -197,8 +200,10 @@ For a compact terminal walkthrough of the same architecture:
 ```
 
 The [foundations and DevOps review](./docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
-records current qualification boundaries and the completed action-profile
-branch awaiting integration.
+records the earlier qualification boundaries. The
+[action-profile acceptance audit](./docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+records the qualified reimplementation on the dedicated integration branch;
+main integration remains a separate review boundary.
 
 The browser workbench is published from `main` by GitHub Pages. It is wholly
 client-side and does not require a Lambdapi process or other production

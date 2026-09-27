@@ -44,9 +44,7 @@ cp examples/computational_exactness_reindex.lp "$scratch/examples/"
 check_object() {
   local file="$1"
   printf 'checking %s with fresh exact dependency objects\n' "$file"
-  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
-    bash "$formal_root/scripts/lambdapi_resource_guard.sh" \
-    lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$file"
+  python3 "$formal_root/scripts/check_staged_target.py" --compile "$file"
 }
 
 cd "$scratch"

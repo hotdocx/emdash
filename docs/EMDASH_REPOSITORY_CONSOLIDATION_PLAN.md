@@ -30,7 +30,10 @@ main. This integration follow-up first reproduces/fixes the affected suites,
 then runs one complete TypeScript gate after focused checks are green. Reuse
 evidence for unchanged boundaries; do not launch unrelated formal/print
 aggregates. The later profile/laxness integration and Op/variance repairs remain
-explicitly separate future work.
+explicitly separate future work. The subsequent dedicated
+[action-profile integration](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+is now qualified on its own main-based branch; its main merge remains a
+separate review boundary, and Op/variance repair remains deferred.
 
 This goal does not select mathematical changes, diagnostic/nucleus splitting,
 book regeneration, toolchain/package upgrades, hosted operations, benchmark

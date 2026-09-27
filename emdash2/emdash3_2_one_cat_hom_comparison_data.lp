@@ -4,6 +4,8 @@
    the existing ordinary modification interface. This does not introduce an
    Adjunction witness or claim an unrestricted higher normalization theorem. */
 require open emdash.emdash3_2_represented_comma_families;
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_prof_defiso_evaluation_paths;
 require open emdash.emdash3_2_one_cat_arrow_diagrams;
 require open emdash.emdash3_2_adjunction_mates;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -197,7 +199,8 @@ protected symbol hom_comparison_prof_cov_path [A C : Cat] (C1 : τ (IsNCat (cat_
     (λ q : τ (Hom A x y), (@fapp0 (Hom_cat A x y) (Hom_cat C (@fapp0 A C F x) (@fapp0 A C G y)) (@tapp0_fapp0 (Product_cat (Op_cat A) A) Cat_cat (@Unit_prof A)
        (@Hom_prof_along A A C F G) (@Product_pair (Op_cat A) A x y) r) q)) (@Hom_fapp0 A x x x y (@id A x) f (@id A x)) f (@hom_comparison_source_id_path A x y f));
 
-// Stage the existing naturality cut at generic composable arrows.
+// Project the existing post-laxity cell into the ordinary Hom path.
+// Stage the represented-composition comparison before applying eta.
 protected symbol hom_comparison_transf_post_comp_path [A C : Cat]
  (C1 : τ (IsNCat (cat_succ cat_zero) C))
  (F G : τ (Functor A C)) (eta : τ (@Transf A C F G))
@@ -206,8 +209,15 @@ protected symbol hom_comparison_transf_post_comp_path [A C : Cat]
    (@comp_fapp0 C (@fapp0 A C F x) (@fapp0 A C G y) (@fapp0 A C G z)
      (@fapp1_fapp0 A C G y z g) (@tapp1_fapp0 A C F G x y eta f))
    (@tapp1_fapp0 A C F G x z eta (@comp_fapp0 A x y z g f)))
-≔ @eq_refl (Hom C (@fapp0 A C F x) (@fapp0 A C G z))
-   (@tapp1_fapp0 A C F G x z eta (@comp_fapp0 A x y z g f));
+≔ @eq_trans _ _ _ _
+   (@hom_to_path (Hom_cat C (@fapp0 A C F x) (@fapp0 A C G z))
+     (C1 (@fapp0 A C F x) (@fapp0 A C G z)) _ _
+     (@tapp1_post_laxity_cell A C F G eta x y z g f))
+   (@eq_ap (Hom A x z) (Hom C (@fapp0 A C F x) (@fapp0 A C G z))
+     (λ h : τ (Hom A x z), @tapp1_fapp0 A C F G x z eta h)
+     (@hom_postcomp_fapp0 A A (@id_func A) x y z g f)
+     (@comp_fapp0 A x y z g f)
+     (@eq_sym _ _ _ (@comp_postcomp_path A x y z g f)));
 
 // The ordinary transfor cut gives G[f]∘α_x=α[f].
 protected symbol hom_comparison_transf_post_path [A C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
@@ -274,19 +284,19 @@ protected symbol hom_comparison_defiso_point_right [X Y : Cat] (i : τ (@DefIso 
 protected symbol hom_comparison_prof_component_defiso [A B : Cat] (P Q : τ (Prof A B))
  (i : τ (@ProfComparison A B P Q)) (a : τ (Obj A)) (b : τ (Obj B))
  : τ (@DefIso Cat_cat (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)))
-≔ (@defiso_fmap (Prof_cat A B) Cat_cat (@fapp0_func (Product_cat (Op_cat A) B) Cat_cat (@Product_pair (Op_cat A) B a b)) P Q i);
+≔ @defiso_at (Product_cat (Op_cat A) B) Cat_cat P Q i (@Product_pair (Op_cat A) B a b);
 
 // Retain the supplied comparison in its left component inverse law.
 protected symbol hom_comparison_prof_component_left [A B : Cat] (P Q : τ (Prof A B))
  (i : τ (@ProfComparison A B P Q)) (a : τ (Obj A)) (b : τ (Obj B)) (x : τ (Obj (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b))))
  : τ (@= (Obj (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b))) (@fapp0 (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat Q P (@Product_pair (Op_cat A) B a b) (@defiso_from (Prof_cat A B) P Q i)) (@fapp0 (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat P Q (@Product_pair (Op_cat A) B a b) (@defiso_to (Prof_cat A B) P Q i)) x)) x)
-≔ @hom_comparison_defiso_point_left (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@hom_comparison_prof_component_defiso A B P Q i a b) x;
+≔ @prof_defiso_raw_left_path A B P Q i (@Product_pair (Op_cat A) B a b) x;
 
 // Retain the supplied comparison in its right component inverse law.
 protected symbol hom_comparison_prof_component_right [A B : Cat] (P Q : τ (Prof A B))
  (i : τ (@ProfComparison A B P Q)) (a : τ (Obj A)) (b : τ (Obj B)) (x : τ (Obj (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b))))
  : τ (@= (Obj (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b))) (@fapp0 (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat P Q (@Product_pair (Op_cat A) B a b) (@defiso_to (Prof_cat A B) P Q i)) (@fapp0 (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@tapp0_fapp0 (Product_cat (Op_cat A) B) Cat_cat Q P (@Product_pair (Op_cat A) B a b) (@defiso_from (Prof_cat A B) P Q i)) x)) x)
-≔ @hom_comparison_defiso_point_right (@fapp0 (Product_cat (Op_cat A) B) Cat_cat P (@Product_pair (Op_cat A) B a b)) (@fapp0 (Product_cat (Op_cat A) B) Cat_cat Q (@Product_pair (Op_cat A) B a b)) (@hom_comparison_prof_component_defiso A B P Q i a b) x;
+≔ @prof_defiso_raw_right_path A B P Q i (@Product_pair (Op_cat A) B a b) x;
 
 // Stage the rigid Hom/precomposition comparison before identity specialization.
 protected symbol hom_comparison_hom_pre_view [A : Cat] (x x0 y : τ (Obj A))

@@ -420,3 +420,17 @@ profiled six-term reviewers; the expectation now names those exact measured
 overrides. No checker-runner behavior or formal source changed in this step.
 The preceding immutable receipts retain their original configuration snapshot;
 the next complete formal CI run qualifies the registered configuration.
+
+
+## Final Cold-Recipe Qualification
+
+The completed formal gate
+`formal-20260927T164506Z-d45cf3135aaa42c8a51b128f5e319355` passes all nine
+isolated recipes under the registered profiles, with 80 successful registered
+group members. All 1,388 formal targets pass in the same invocation. Exact
+recipe receipts, member counts and whole-group durations are indexed in
+`api_final_cold_group_evidence.json`; group shares are not individual checker
+measurements. No additional resource/profile changes were required after
+the complete reviewer sweep. Defaults remain 2 GiB/90s and the registry
+retains 98 exact-target overrides. The original production CAS artifacts
+also pass at the separately recorded explicit 6 GiB/180s and 8 GiB/300s bounds.

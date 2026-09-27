@@ -5,6 +5,7 @@
 */
 require open emdash.emdash3_2_zero_arrow_cone_chain_pairs;
 require open emdash.emdash3_2_short_exact_rows;
+require open emdash.emdash3_2_one_cat_action_paths;
 
 symbol ShortExactRowFamilyData [I C : Cat] (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [P : τ (Functor (Product_cat C C) C)] [t : τ (Obj C)]
@@ -199,6 +200,6 @@ symbol short_exact_row_family_observe_naturality [I C : Cat] (C1 : τ (IsNCat (c
       (@comp_fapp0 C _ _ _ (@tapp0_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
         (@short_exact_row_family_observe_func I C C1 P t PA T V G) y (@short_exact_row_family_observe_transf I C C1 P t PA T
         V F G eta)) (@fapp1_fapp0 I C (@short_exact_row_family_observe_func I C C1 P t PA T V F) x y u)))
-≔ @strict_component_naturality_path I C (@short_exact_row_family_observe_func I C C1 P t PA T V F)
+≔ @one_cat_component_naturality_path I C C1 (@short_exact_row_family_observe_func I C C1 P t PA T V F)
   (@short_exact_row_family_observe_func I C C1 P t PA T V G) (@short_exact_row_family_observe_transf I C C1 P t PA T V F G
   eta) x y u;

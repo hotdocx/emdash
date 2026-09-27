@@ -1,12 +1,13 @@
 /*
   Boundary preservation from the actual whole beta transformation.
-  This is the existing strict-profile naturality, not a new rule or an
+  This uses the existing OneCat naturality path, not a new rule or an
   extra square required from a chain-map caller.
 */
 require open emdash.emdash3_2_chain_pair_homology_actions;
 
 symbol homology_family_boundary_naturality
   [B C : Cat] [S : τ (@PreadditiveCategory C)]
+  (C1 : τ (IsNCat (cat_succ cat_zero) C))
   [t : τ (Obj C)] [T : τ (@TerminalObject C t)] [W : τ (@HasComputationalKernels C S)]
   (P : τ (@KernelPresentation C S t T W))
   (A : τ (Functor B C)) (D : τ (Functor B (Functor_cat WalkingArrow_cat C)))
@@ -18,7 +19,7 @@ symbol homology_family_boundary_naturality
         C S t T W P D) x (@kernel_family_boundary_transf B C S t T W P A D h)))
       (@comp_fapp0 C _ _ _ (@tapp0_fapp0 B C A (@kernel_family_func B C S t T W P D) y (@kernel_family_boundary_transf B C S t T W P
         A D h)) (@fapp1_fapp0 B C A x y p)))
-≔ @strict_component_naturality_path B C A (@kernel_family_func B C S t T W P D) (@kernel_family_boundary_transf B C S t T W P A D h)
+≔ @one_cat_component_naturality_path B C C1 A (@kernel_family_func B C S t T W P D) (@kernel_family_boundary_transf B C S t T W P A D h)
   x y p;
 
 symbol chain_pair_homology_boundary_action_path
@@ -38,7 +39,7 @@ symbol chain_pair_homology_boundary_action_path
       (@comp_fapp0 C A0 A1 (@homology_record_cycle_object C S A1 B1 D1 p1 (@chain_pair_homology_record C S C1 t T T0 W V P Q A1 B1
         D1 p1)) (@homology_record_boundary C S A1 B1 D1 p1 (@chain_pair_homology_record C S C1 t T T0 W V P Q A1 B1 D1 p1))
         (@computational_chain_pair_map_next C S A0 B0 D0 A1 B1 D1 p0 p1 m)))
-≔ @homology_family_boundary_naturality (@ZeroArrowCone_cat C t T) C S t T W P (@zero_arrow_cone_first_func C t T)
+≔ @homology_family_boundary_naturality (@ZeroArrowCone_cat C t T) C S C1 t T W P (@zero_arrow_cone_first_func C t T)
   (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T)
     (@chain_pair_zero_cone C S t T W P A0 B0 D0 p0) (@chain_pair_zero_cone C S t T W P A1 B1 D1 p1) (@chain_pair_zero_cone_map C S
       C1 t T W P A0 B0 D0 A1 B1 D1 p0 p1 m);

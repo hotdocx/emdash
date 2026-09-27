@@ -160,15 +160,16 @@ $$
 \mathsf{succ}(\mathsf{encode}_*(p)).
 $$
 
-The first is the identity action of a functor. The second will follow from the
-generator computation of `Code` together with generic functoriality
-on a composite. No WalkingEnd-specific composition rewrite is needed.
+The first is retained normal identity action. The second follows from the
+generator computation of `Code` and the named strict-composition computation
+of the opaque WalkingEnd recursor. This computation does not apply to an
+arbitrary ambient functor and adds no separate composite-prefix rule.
 
 <!-- evidence:WE-ENCODE-PREFIX -->
 
 > **Formal status — checked.** Evidence `WE-ENCODE-PREFIX`. The
-> prefix equation is propositional; its owner specializes ordinary functor
-> action on composition and the literal generator computation.
+> prefix equation is propositional; its owner specializes the recursor's
+> named composition computation and the literal generator computation.
 
 <a id="chapter-8-1-2"></a>
 

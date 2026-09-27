@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_omega_maps;
 /* Canonical Coim/Im→Ker compatibility at the same native point input.
    Whole reconstruction, projection naturality and existing equivalence
    cancellation supply every equation; no commutativity is an input. */
@@ -38,7 +40,7 @@ symbol one_cat_coimage_point_projection_path [K C : Cat] [S : τ (@PreadditiveCa
   WalkingArrow_cat C) (@zero_arrow_family_incoming_func (@ZeroArrowCone_cat C t T) C t T
   (@zero_arrow_cone_first_func C t T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C
   C1 t T)) (@zero_arrow_family_point_input K C t T A D h x)) (@adjunction_coimage_projection C S t T T0 P Q)))
-≔ @eq_trans _ _ _ _ (@strict_component_naturality_path (Functor_cat WalkingArrow_cat C) C
+≔ @eq_trans _ _ _ _ (@one_cat_component_naturality_path (Functor_cat WalkingArrow_cat C) C C1
   (@diagram_evaluation_at_func WalkingArrow_cat C walking_arrow_src) (@adjunction_coimage_func C S t T T0 P Q)
   (@adjunction_coimage_projection C S t T T0 P Q) (@fapp0 K (Functor_cat WalkingArrow_cat C)
   (@zero_arrow_family_incoming_func K C t T A D h) x) (@fapp0 (@ZeroArrowCone_cat C t T) (Functor_cat
@@ -281,8 +283,8 @@ symbol one_cat_image_kernel_point_path [K C : Cat] [S : τ (@PreadditiveCategory
   WalkingArrow_cat C) (@zero_arrow_family_incoming_func K C t T A D h) x)) (@tapp0_fapp0 (Functor_cat
   WalkingArrow_cat C) C (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q)
   (@fapp0 K (Functor_cat WalkingArrow_cat C) (@zero_arrow_family_incoming_func K C t T A D h) x)
-  (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)) (@omega_equiv_along_fapp1_fapp0 (Functor_cat
-  (Functor_cat WalkingArrow_cat C) C) C (@fapp0_func (Functor_cat WalkingArrow_cat C) C (@fapp0 K (Functor_cat
+  (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)) (@one_cat_omega_equiv_fmap (Functor_cat
+  (Functor_cat WalkingArrow_cat C) C) C C1 (@fapp0_func (Functor_cat WalkingArrow_cat C) C (@fapp0 K (Functor_cat
   WalkingArrow_cat C) (@zero_arrow_family_incoming_func K C t T A D h) x)) (@adjunction_coimage_func C S t T T0
   P Q) (@adjunction_image_func C S t T T0 P Q) (@one_cat_coimage_image_comparison C S C1 t T T0 P Q) N) (@fapp0
   K C (@kernel_adjunction_family_func K C S t T P D) x) (@comp_fapp0 C (@fapp0 (Functor_cat WalkingArrow_cat C)
@@ -349,7 +351,7 @@ symbol one_cat_image_kernel_point_path [K C : Cat] [S : τ (@PreadditiveCategory
   t T P (@zero_arrow_cone_diagram_func C t T)) (@zero_arrow_family_point_input K C t T A D h x)
   (@one_cat_image_to_kernel_transf (@ZeroArrowCone_cat C t T) C S C1 t T T0 P Q (@zero_arrow_cone_first_func C t
   T) (@zero_arrow_cone_diagram_func C t T) (@zero_arrow_cone_universal_transf C C1 t T) N)) v)) _ _
-  (@strict_component_naturality_path (Functor_cat WalkingArrow_cat C) C (@adjunction_coimage_func C S t T T0 P
+  (@one_cat_component_naturality_path (Functor_cat WalkingArrow_cat C) C C1 (@adjunction_coimage_func C S t T T0 P
   Q) (@adjunction_image_func C S t T T0 P Q) (@one_cat_coimage_image_comparison C S C1 t T T0 P Q) (@fapp0 K
   (Functor_cat WalkingArrow_cat C) (@zero_arrow_family_incoming_func K C t T A D h) x) (@fapp0
   (@ZeroArrowCone_cat C t T) (Functor_cat WalkingArrow_cat C) (@zero_arrow_family_incoming_func

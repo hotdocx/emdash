@@ -3,7 +3,7 @@
    proof reuses the selected interpretation, with the computational centre
    explicitly fixed to the mate operation. No object/map transport, new
    primitive, rewrite or unification rule is introduced. Proof transport is
-   confined to universality; its computational centre is explicitly installed. */
+   confined to laws; its computational centre is explicitly installed. */
 require open emdash.emdash3_2_cokernel_adjunction_mates;
 require open emdash.emdash3_2_kernel_cokernel_adjunction_observations;
 
@@ -94,8 +94,13 @@ symbol cokernel_record_annihilation [C : Cat] [S : τ (@PreadditiveCategory C)]
   : τ (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d))
       (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)) (@terminal_arrow_test_outgoing C d))
       (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d)))
-≔ @cokernel_adjunction_annihilation C S t T
-    (@cokernel_presentation_structure C S t T W P) d;
+≔ @ind_eq (@Σ_ (Obj C) (λ Y : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Y))
+    (@Struct_sigma (Obj C) (λ Y : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Y) (@fapp0 _ _ (@cokernel_presentation_func C S t T W P) d) (@tapp0_fapp0 _ _ _ _ d (@cokernel_presentation_projection C S t T W P)))
+    (@Struct_sigma (Obj C) (λ Y : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Y) (@cokernel_presentation_selected_object C S W d) (@computational_cokernel_morphism C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d)))
+    (@cokernel_record_frame_path C S t T W P d)
+    (λ frame : τ (@Σ_ (Obj C) (λ Y : τ (Obj C), Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) Y)), (@= (Hom C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (sigma_Fst frame)) (@comp_fapp0 C (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt) (sigma_Fst frame) (sigma_Snd frame) (@terminal_arrow_test_outgoing C d)) (@preadditive_hom_zero C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (sigma_Fst frame))))
+    (@computational_cokernel_annihilation C S (@fapp0 WalkingArrow_cat C d walking_arrow_src) (@fapp0 WalkingArrow_cat C d walking_arrow_tgt)
+      (@terminal_arrow_test_outgoing C d) (@cokernel_presentation_selected C S W d));
 
 symbol cokernel_presentation_record [C : Cat] [S : τ (@PreadditiveCategory C)]
   [t : τ (Obj C)] [T : τ (@TerminalObject (Op_cat C) t)] [W : τ (@HasComputationalCokernels C S)]

@@ -2,8 +2,8 @@
 
 Date: 2026-09-27
 
-Status: complete gates passed before whitespace-only cleanup; exact affected
-source requalification and final checkpoint remain.
+Status: all acceptance gates passed on the final source; semantic checkpoint
+and clean handoff verification remain.
 
 Plan: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 Detailed execution evidence: [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md).
@@ -16,7 +16,7 @@ against main `37ce19d5c727f8d1c5579445981a8f4f6d3f32d4` in
 `goal/action-profile-integration-v3.2`. Main remains an ancestor of the goal
 branch. Main and donor worktrees remain unchanged; only the goal worktree has
 pending changes. The most recent pre-handoff documentation checkpoint is
-`91ef5aa7`. The mathematical, tooling and TypeScript metadata changes have
+`da14e6a7`. The mathematical, tooling and TypeScript metadata changes have
 passed their gates and now await the final reviewed semantic checkpoint. No push, main merge, PR, publication, history
 rewrite or cleanup belongs to this acceptance boundary.
 
@@ -39,8 +39,8 @@ prove unrestricted consistency, confluence, normalization or model adequacy.
 | Complete source and rule hygiene | The current catalog has 2,432 central diagnostic assertions and zero unclassified entries. `api_complete_reviewer_lhs_audit.json` covers 244 changed/new registered LP files, with zero unreviewed slots and 64 annotated slots. This is an advisory slot audit; the owner reviews carry the warning/overlap qualifications. No library source changed during the final reviewer repairs. |
 | Keep authority and published-source descriptions aligned | The current SOP, Foundations, canonical syntax, README, book and authored overview describe opaque profiles, retained normal identities, lax composition and the explicit inherited assembly assumption. Owning package/template/local artifact gates passed. The latest local artifact receipt is `publication-20260927T122134Z-459c3851610a4a649585b9300b82cf9f`, covering the 416-page book and 19-page article. No distribution publication occurred. That artifact receipt still matches every current input. The refreshed template gate `reviewer-20260927T170021Z-6acac73f3d1a46718100c25e0946ca7e` passes on current inputs. |
 | Complete formal CI | **Passed.** `formal-20260927T164506Z-d45cf3135aaa42c8a51b128f5e319355` records actual `make -C emdash2 ci` exit zero in 9,430.511s. All 1,388 targets pass: 1,308 individual checks and 80 targets across nine isolated groups. The remaining tooling, registry, book, source-reference, LHS and catalog gates also pass. |
-| Replay the retained production CAS corpus | **Passed.** Eight original, byte-identical artifacts pass all 94 assertions on the final production closure. All eight fresh receipts, source/object inputs and log hashes are verified in `api_final_success_receipt_audit.json`; individual results are listed below. Earlier prototype receipts are not substituted for this result. |
-| Generate checked health | **Passed at the pre-format snapshot; refresh running.** The owning formatter generated the report from the same complete successful CI metrics. All 1,388 exits, both fresh evidence classes, source/content hashes and the payload timestamp were checked. `api_checked_health_evidence.json` preserves the payload and before/after report hashes. Group timings remain group shares. |
+| Replay the retained production CAS corpus | **Passed.** Eight original, byte-identical artifacts pass all 94 assertions on the final production closure. All eight final fresh receipts, source/object inputs and log hashes are verified in `api_final_clean_source_acceptance.json`; individual results are listed below. Earlier prototype receipts are not substituted for this result. |
+| Generate checked health | **Passed on current source.** The owning formatter generated the refreshed report from 370 fresh affected checks and 1,018 verified exact-input reused successes. All 1,388 zero exits, current source/content hashes and report data were checked. `api_whitespace_health_evidence.json` records the current report and payload hashes. Original CI and group timings retain their original scope; group shares are not individual execution times. |
 | Finish a clean, reviewable local branch | **Pending checkpoint.** All required gates pass. Inspect and commit the exact final staged implementation diff, record the resulting revision, and verify clean status and branch identity before declaring completion. |
 
 ## Final Gate Evidence And Identity
@@ -66,29 +66,35 @@ verified. Subsequent source edits only close status documentation. Staging subse
 in ten newly added LP files. The cleanup preserves every token, and compiling
 the three affected library files produces byte-identical objects. No
 TypeScript, runner, resource-registry, declaration or rule behavior changes.
-The raw LP hashes do change, so their 370 dependent targets are rechecked;
-only 1,018 successes with exact unchanged receipt inputs are reused. None of
-the nine cold groups is affected. The subsequent CAS replay and checked-health
-refresh must complete before the checkpoint.
+The raw LP hashes do change, so their 370 dependent targets have been checked afresh;
+1,018 successes with exact unchanged receipt inputs are reused. None of
+the nine cold groups is affected. The subsequent eight-artifact CAS replay
+passes all 94 assertions and checked health matches the final source.
 
 The formatting follow-up is recorded in `api_final_whitespace_cleanup_manifest.json`,
-`api_whitespace_resume_preparation.json` and `api_whitespace_followup_results.json`.
+`api_whitespace_resume_preparation.json`, `api_whitespace_health_evidence.json`
+and `api_final_clean_source_acceptance.json`.
 It uses the owning `check_metrics.py --resume` workflow after verifying every
 cached result against actual prior source/object, runner and checker inputs.
+The first follow-up wrapper stopped only on a report-order comparison after
+all checks passed: JSON sorts source-metric keys, while the owning report
+preserves source order. Restoring the original order reproduces the report
+exactly, without changing its data or rerunning the checks. That wrapper
+failure remains preserved; the subsequent CAS run is separately successful.
 No previous failed or successful receipt is rewritten. Final checkpoint and
 clean-worktree verification remain before completion.
 
 
-| Production CAS artifact | Assertions | Seconds | Fresh receipt |
+| Production CAS artifact (final cleaned source) | Assertions | Seconds | Fresh receipt |
 | --- | ---: | ---: | --- |
-| `api_cas_les_diagram.lp` | 48 | 17.743 | `20260927T192221Z-e8b6ce0ba04440248e6a6522f2a39dc1` |
-| `api_cas_les_displayed_exactness.lp` | 7 | 25.747 | `20260927T192241Z-0d3581785b654e5192b553a07c3730cf` |
-| `api_cas_les_exactness_0.lp` | 3 | 18.149 | `20260927T192309Z-b9f129b1e4e94c91ac75cba198534a69` |
-| `api_cas_les_exactness_1.lp` | 3 | 18.330 | `20260927T192329Z-a8e8042ed13b48d7aeb61d316485154f` |
-| `api_cas_les_exactness_2.lp` | 3 | 19.497 | `20260927T192350Z-b32645325eaf4ed1a993590f63f915f3` |
-| `api_cas_snake.lp` | 15 | 12.547 | `20260927T192411Z-07b292c57f664f8ca793487415528776` |
-| `api_cas_snake_certificate_signatures.lp` | 10 | 16.963 | `20260927T192425Z-0411a90e4f9646b3b2e73ec708060aa7` |
-| `api_cas_snake_certificate.lp` | 5 | 18.295 | `20260927T192444Z-1db535762c3e49ecb3100811c46aebcc` |
+| `api_cas_les_diagram.lp` | 48 | 18.369 | `20260927T212920Z-1f617a0c505147b8b9ea1eb07149439a` |
+| `api_cas_les_displayed_exactness.lp` | 7 | 30.672 | `20260927T212941Z-9025702e3b704559ac6626a95317d48f` |
+| `api_cas_les_exactness_0.lp` | 3 | 20.102 | `20260927T213015Z-e3bebfd9694b4b3283b40a8116b1c161` |
+| `api_cas_les_exactness_1.lp` | 3 | 20.527 | `20260927T213037Z-e48b6a1cecc44c668898f7f57271a34d` |
+| `api_cas_les_exactness_2.lp` | 3 | 21.109 | `20260927T213100Z-15a625626e1943739f1d2ed9286a9577` |
+| `api_cas_snake.lp` | 15 | 13.790 | `20260927T213123Z-257f1087291e4c2cb6955753980e69cc` |
+| `api_cas_snake_certificate_signatures.lp` | 10 | 19.415 | `20260927T213140Z-bab46395906a482b958407cc3c9b81b3` |
+| `api_cas_snake_certificate.lp` | 5 | 19.862 | `20260927T213202Z-8cc0e1f55bdc42c2b1d507ff0c97a16d` |
 
 All nine cold-recipe receipts and their exact member counts are recorded in
 `api_final_cold_group_evidence.json`. The original failed aggregate and

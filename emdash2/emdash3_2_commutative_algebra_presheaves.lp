@@ -21,6 +21,7 @@
 require open emdash.emdash3_2_presheaves;
 require open emdash.emdash3_2_sieves;
 require open emdash.emdash3_2_commutative_algebra_localization;
+require open emdash.emdash3_2_one_cat_action_paths;
 
 /*
   Proof-time represented-family comparison for the restriction total.
@@ -58,6 +59,24 @@ symbol CommRingPsh_cat (K : Cat) : Cat
 // Object classifier of CommRing-valued presheaves.
 symbol CommRingPsh (K : Cat) : Grpd
 ≔ Obj (@CommRingPsh_cat K);
+
+// Classified conventional presheaves. The carrier remains an ordinary
+// CommRing-valued presheaf; strictness is internal package data.
+symbol StrictCommRingPsh_cat
+  (K : Cat)
+  : Cat
+≔ @StrictFunctor_cat (Op_cat K) CommRing_cat;
+
+symbol StrictCommRingPsh
+  (K : Cat)
+  : Grpd
+≔ @StrictFunctor (Op_cat K) CommRing_cat;
+
+symbol strict_comm_ring_psh
+  [K : Cat]
+  (O : τ (@StrictCommRingPsh K))
+  : τ (@CommRingPsh K)
+≔ @strict_functor (Op_cat K) CommRing_cat O;
 
 // The affine CommRing-valued presheaf on CommRing_cat^op is identity.
 // This shared transparent owner is consumed by both support/glue and
@@ -211,9 +230,10 @@ symbol comm_ring_psh_restriction_comp_pointwise_path
       (@comm_ring_psh_value K O W)
       (@comm_ring_psh_restriction_hom K O W V g)
       (@comm_ring_psh_restriction_hom K O V U f))
-    (@fapp1_comp_path
+    (@one_cat_composition_path
       (Op_cat K)
       CommRing_cat
+      comm_ring_cat_is_one_cat
       O
       U V W
       g f)

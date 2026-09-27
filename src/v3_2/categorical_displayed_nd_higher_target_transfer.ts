@@ -55,7 +55,7 @@ import {
 const MODULE_ID = 'emdash.emdash3_2';
 const SOURCE_SHA256 =
     'sha256:' +
-    'f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61';
+    '6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a';
 
 export const
 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_TARGET_TRANSFER_REVISION =
@@ -635,7 +635,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: opaqueModifiers,
         provenance: source(
             'symbol tdapp1_int_func_transfd : Π [K : Cat]',
-            1073
+            1139
         )
     }),
     Object.freeze({
@@ -646,7 +646,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: opaqueModifiers,
         provenance: source(
             'symbol tdapp1_int_fapp0_transfd : Π [K : Cat]',
-            1074
+            1140
         )
     }),
     Object.freeze({
@@ -657,7 +657,7 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
         modifiers: opaqueModifiers,
         provenance: source(
             'symbol tdapp1_int_fapp1_func_transfd : Π [K : Cat]',
-            1076
+            1142
         )
     })
 ]);
@@ -922,7 +922,7 @@ const objectProjectionRule = (): CoreLfTransferRuntimeRule => {
         )),
         provenance: source(
             'rule fapp0 (@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ',
-            1075
+            1141
         )
     };
 };
@@ -964,7 +964,7 @@ const nextHomProjectionRule = (): CoreLfTransferRuntimeRule => {
         provenance: source(
             'rule @fapp1_func _ _ ' +
                 '(@tdapp1_int_func_transfd $K $E $D $FF $GG) $ϵ $ϵ\'',
-            1077
+            1143
         )
     };
 };

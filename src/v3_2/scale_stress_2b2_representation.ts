@@ -675,7 +675,7 @@ const internalPiBaseActionRule = () => {
         provenance: source(
             'rule @fdapp1_int_cell _ _ _ ' +
                 'Pi_int_funcd $B $A $F $E',
-            1195
+            1375
         )
     };
 };
@@ -785,7 +785,7 @@ const pullbackPiBaseActionRule = () => {
                 '      _\n' +
                 '      _\n' +
                 '      (@Pi_pullback_funcd $K $G)',
-            1196
+            1376
         )
     };
 };
@@ -799,7 +799,7 @@ const declarations = [
         modifiers: modifiers('constant', 'opaque'),
         provenance: source(
             'constant symbol Terminal_cat : Cat;',
-            512
+            516
         )
     },
     {
@@ -811,7 +811,7 @@ const declarations = [
         provenance: source(
             'symbol Fibre_cat [K : Cat] ' +
                 '(E : τ (Catd K)) (k : τ (Obj K)) : Cat',
-            925
+            940
         )
     },
     {
@@ -822,7 +822,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol functord_transport_lhs_func [K : Cat]',
-            1074
+            1166
         )
     },
     {
@@ -833,7 +833,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol functord_transport_rhs_func [K : Cat]',
-            1075
+            1167
         )
     },
     {
@@ -844,7 +844,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol fdapp1_int_cell [K : Cat]',
-            1095
+            1195
         )
     },
     {
@@ -855,7 +855,7 @@ const declarations = [
         modifiers: modifiers('ordinary', 'opaque'),
         provenance: source(
             'symbol section_pullback_func [A B : Cat]',
-            1189
+            1333
         )
     }
 ] as const;

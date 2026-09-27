@@ -1306,8 +1306,10 @@ projected from whole internal laxity. In a path target this cell is invertible;
 strictness identifies it with an equality-induced arrow; in an arbitrary
 directed target it may remain noninvertible. Emdash reuses that distinction in
 the profiled category $\\mathsf{GrayHom}_{\\mathrm{lax}}(A,B)$: objects are
-functors paired with their strictness property, while arrows and all higher Homs come
-from the ambient transfor tower.
+opaque `StrictFunctor` classifiers, arrows are classified `LaxTransfor`
+objects, and higher Homs come from the ambient tower. The classified lax view
+makes pre/right action strict while retaining the post/left comparison.
+The separate `StrictFunctor_cat` has strict objects and ambient transfors.
 
 One selected right closure is checked:
 
@@ -1404,10 +1406,10 @@ The principal open boundaries are:
   full combined calculus. Lambdapi's local rule checks and the project's
   diagnostics are implementation evidence, not replacements for those
   theorems.
-- **Higher categories.** Whole laxity, strict-functor property packages, one
+- **Higher categories.** Whole laxity, opaque action classifiers, one
   profiled right Gray closure, and its walking interchanger are checked. The
   mirror closure, tensor functoriality and coherence, full Crans--Gray
-  monoidality, global migration of historical strict endpoint cuts, and a
+  monoidality, fully lax units, and a
   general weak-$\\omega$-category metatheory remain open.
 - **Simplicial methods.** Injective face codes, the augmented semi-simplex
   index, native simplexes through dimension four, and the variable canonical

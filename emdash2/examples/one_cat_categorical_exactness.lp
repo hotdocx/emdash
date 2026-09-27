@@ -37,7 +37,7 @@ assert [B C : Cat] [S : τ (@PreadditiveCategory C)]
     (@terminal_arrow_diagram_func C t T) A) D))
   (N : τ (@OneCatAdjunctionNormality C S C1 t T T0 P Q)) (E : τ (@OneCatAdjunctionExactFamily B C S C1 t T T0 P Q A D
     h N)) (b : τ (Obj B))
-  ⊢ @omega_equiv_along_fapp1_fapp0 (Functor_cat B C) C (@fapp0_func B C b) (@comp_cat_fapp0 B (Functor_cat
+  ⊢ @one_cat_omega_equiv_fmap (Functor_cat B C) C C1 (@fapp0_func B C b) (@comp_cat_fapp0 B (Functor_cat
     WalkingArrow_cat C) C (@adjunction_image_func C S t T T0 P Q) (@zero_arrow_family_incoming_func B C t T A D h))
     (@kernel_adjunction_family_func B C S t T P D) (@one_cat_image_to_kernel_transf B C S C1 t T T0 P Q A D h N) E
     : τ (@OmegaEquivAlong C (@fapp0 B C (@comp_cat_fapp0 B (Functor_cat WalkingArrow_cat C) C (@adjunction_image_func

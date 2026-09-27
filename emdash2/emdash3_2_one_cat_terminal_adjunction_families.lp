@@ -11,6 +11,7 @@
    no general weak higher-terminality theorem is claimed. */
 require open emdash.emdash3_2_one_cat_adjunction_family_views;
 require open emdash.emdash3_2_terminal_category_profile;
+require open emdash.emdash3_2_discrete_iso_maps;
 require open emdash.emdash3_2_one_cat_arrow_family_isomorphisms;
 require open emdash.emdash3_2_one_cat_diagram_family_reconstruction;
 
@@ -30,7 +31,8 @@ symbol one_cat_terminal_adjunction_family_modification_evidence [B C : Cat] (C1 
   [t : τ (Obj C)] (J : τ (@Adjunction C Terminal_cat (Terminal_func C) (@Obj_func C t))) (F : τ (Functor B C))
   (h k : τ (@Transf B C F (@Const_func B C t)))
   : τ (IsoEvidence (Hom_cat (Functor_cat B C) F (@Const_func B C t)) h k)
-≔ @iso_evidence_fmap Terminal_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) (@defiso_from Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) k)
+≔ @discrete_iso_evidence_fmap Terminal_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t))
+    (@one_cat_functor_category B C C1 F (@Const_func B C t)) (@defiso_from Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) k)
     (@terminal_category_arrow_iso (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) F (@Const_func B C t)) Terminal_cat (@one_cat_terminal_adjunction_family_hom_iso B C C1 t J F)) k));
 
 // Transparent presentation: retain e and F in the actual composed diagram.
@@ -73,7 +75,8 @@ symbol one_cat_initial_adjunction_family_modification_evidence [B C : Cat] (C1 :
   [t : τ (Obj C)] (J : τ (@Adjunction Terminal_cat C (@Obj_func C t) (Terminal_func C))) (F : τ (Functor B C))
   (h k : τ (@Transf B C (@Const_func B C t) F))
   : τ (IsoEvidence (Hom_cat (Functor_cat B C) (@Const_func B C t) F) h k)
-≔ @iso_evidence_fmap Terminal_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) (@defiso_from Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) k)
+≔ @discrete_iso_evidence_fmap Terminal_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F)
+    (@one_cat_functor_category B C C1 (@Const_func B C t) F) (@defiso_from Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) k)
     (@terminal_category_arrow_iso (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) h) (@fapp0 (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@defiso_to Cat_cat (Hom_cat (Functor_cat B C) (@Const_func B C t) F) Terminal_cat (@one_cat_initial_adjunction_family_hom_iso B C C1 t J F)) k));
 
 // Transparent presentation: retain e and F in the actual composed diagram.

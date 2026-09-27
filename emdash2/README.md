@@ -23,8 +23,10 @@ are tracked in `AGENTS.md` and the current status report; passing local
 checks is not a consistency certificate.
 
 The [2026-09-18 reassessment](../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
-collects the current foundational, DevOps and deferred-work boundaries,
-including the completed action-profile branch awaiting integration.
+collects the foundational, DevOps and deferred-work boundaries at that date.
+The [action-profile acceptance audit](../docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+records the qualified main-based reimplementation on its dedicated branch;
+main integration remains a separate review boundary.
 
 ## Headline results
 
@@ -160,21 +162,27 @@ The current boundary does not yet construct source action,
 `Groupoidify_func`, or the packaged adjunction with `Path_cat_func`.
 
 Whole internal laxity also exposes the generic functor compositor and its next
-action. Semantic strict functors are exact packages
-`(F,IsStrictFunctor(F))`; these packages form the objects of the selected
-`GrayHom_lax` profile while reusing the ambient transfor tower. No second
-strict-functor code grammar or parallel compositor is introduced. One right
+action. Semantic strict functors are opaque classified carriers admitted from
+`(F,IsStrictFunctor(F))`. They are the objects of `StrictFunctor_cat`, whose
+arrows are ambient transfors. `GrayHom_lax` has the same strict objects and
+classified `LaxTransfor` arrows, with ambient higher homs. Stable classified
+views retain their computation; explicit raw views expose the admitted data.
+Generic composition and naturality remain lax, with stricter computation
+selected by an explicit profile or a justified named constructor. No second
+functor grammar or parallel compositor is introduced. The strict-action
+extension maps equivalence, isomorphism, `DefIso` and profunctor evidence
+through the existing classified action. One right
 closure yields a coevaluation-derived walking square and a checked nonidentity
 oriented interchanger. Its checked direction becomes the native lax-square
 direction after exchanging the two coordinate roles.
 
-Every transformation now has an iterable whole graph
-`B -> LaxArrow_cat(C)`. Objects compute to its components; capped arrows
+Every classified `L : LaxTransfor(F,G)` has an iterable whole graph
+`B -> LaxArrow_cat(C)`. Objects compute to its carrier components; capped arrows
 compute to the standard square with literal `F[g]` and `G[g]` sides and a
-filler extracted from the existing post/left internal action. Generic
+filler extracted from the existing post/left internal action. Its stable view
+makes the pre/right leg compute, without postulating a separate square. Generic
 `fapp1_func` retains the next whole action. The identity instance knowingly
-overlaps the historical global strict-functor cut; the intended graph beta is
-kept under the prototype policy pending profile-local migration. For strict
+overlaps retained normal identity computation. For strict
 endpoint packages, the public graph is paired with supplied
 `IsStrictFunctor` evidence about its already-extracted compositor; carrier and
 evidence projections compute, without a graph-specific identity rule.
@@ -190,8 +198,7 @@ The index `n` denotes geometric dimension `n+1`. Dimensions one through three,
 the selected `I tensor_R I` interchanger direction, four square edges, six cube
 faces, and arbitrary-variable-dimension recursion are checked. The mirror
 closure, tensor unit/associativity/symmetry, inverse decoder, mapping-category
-equivalence, full Crans--Gray monoidality, and global migration of historical
-strict endpoint cuts remain deferred.
+equivalence, full Crans--Gray monoidality, and fully lax units remain deferred.
 
 ### Two-sided dependent hom and the intrinsic semicubical nerve
 
@@ -230,9 +237,10 @@ compute their expected endpoint boundaries; the older readable paste terms no
 longer compete as runtime normal forms. A readable pseudofunctor profile
 supplies fixed-forward `OmegaEquivAlong` for the one readable cell derived
 from `fapp1_compositor`; `CubicalArrow_func` uses that cell forward and derives
-its pre/right reverse adjustment from a selected native inverse. The readable
-source ladder is a documented adapter for the temporary global strict cut and
-does not claim noncollapsed lax endpoints.
+its pre/right reverse adjustment from a selected native inverse. Direct
+endpoint paths expose the distinct source `F[g] o F[f]` and target `F[g o f]`;
+no equality adapter identifies the two generic endpoints. Strict profiles
+and reviewed named owners retain their selected strict computations.
 Genuine Nat recursion gives
 
 ```text
@@ -280,6 +288,15 @@ nerve identity path, not a full eta equivalence. The independent Gray decoder
 above supplies the geometric/computadic object reading. These are complementary
 adequacy statements, not an asserted equivalence of mapping categories.
 
+The inherited path-cubical specialization now supplies structured squares,
+fill sections, recursive face addresses and variable open-box data over
+`Path_cat(A)`. Structured faces, reflexive degeneracy and square transpose
+retain one-way native realization. Native dimensions zero through two are
+qualified; dimension three retains its explicit readback prerequisite. These
+operations do not establish arbitrary Cartesian substitution, native
+groupoidality at every level or unrestricted Kan filling. The registered
+path-cubical owners and reviewers record those boundaries.
+
 ### Internal semisimplicial substrate
 
 The augmented injective simplex category is now internal and computational.
@@ -311,7 +328,7 @@ than a second simplex record. A triangle is the `Hom(Sigma)` total of one
 with `fdapp1_int_hom_fapp0(...,λ)`. The ordinary dimension-two specialization
 is the active functor compositor, and another higher action remains iterable.
 The same owner stays noncollapsed for a generic map, is constrained by the
-selected semantic `IsStrictFunctor` property at the binary compositor, and
+selected semantic `IsStrictFunctor` property on the whole compositor, and
 becomes invertible at both triangle and tetrahedron components when the target
 fibres are path categories.
 

@@ -141,10 +141,9 @@ $$
   \sum_{p:x=y}\bigl(c=\operatorname{pathToHom}(p)\bigr).
 $$
 
-The endpoint path is explicit. This matters because the prototype still has
-historical cuts that identify several strict endpoints judgmentally; the
-property continues to say something meaningful after those cuts are moved to
-their proper profiles. Apply it to the whole compositor transformation
+The endpoint path is explicit. Ambient lax endpoints need not agree
+judgmentally; the property supplies the particular agreement and identifies
+the existing cell with its equality-induced arrow. Apply it to the whole compositor transformation
 $\Phi^F_{X,g}$, whose component at $f$ is $\phi^F_{g,f}$. For an ambient
 carrier $F$ and evidence $p$ this gives
 
@@ -178,10 +177,9 @@ Capped evidence is obtained by evaluating the whole property. Arbitrary raw
 evidence does not install a blanket identity rule on its carrier.
 
 The full category $\mathsf{StrictFunctor}_{\mathrm{cat}}(A,B)$ now packages
-these objects with all ambient transformations and their higher homs. The
-historical global composition/naturality cuts remain during the active
-integration's consumer migration. Classified computation alone does not
-establish ambient lax noncollapse.
+these objects with all ambient transformations and their higher homs. Generic
+composition/naturality cuts have been retired. Focused negative controls
+check the separation between ambient lax action and classified computation.
 
 This still requires no second functor theory. Define the profiled internal hom
 
@@ -190,8 +188,8 @@ $$
 \tag{28.7}
 $$
 
-to have strict packages as objects and the existing ambient transformation
-categories between their stable views as homs:
+to have strict packages as objects and classified conventional lax
+transformations between their stable views as homs:
 
 $$
 \begin{aligned}
@@ -199,21 +197,22 @@ $$
   &\equiv\mathsf{StrictFunctor}(A,B),\\
 \operatorname{Hom}(S,T)
   &\equiv
-  \operatorname{Transf}(\operatorname{strict}S,
+  \operatorname{LaxTransfor}(\operatorname{strict}S,
                          \operatorname{strict}T).
 \end{aligned}
 \tag{28.8}
 $$
 
-Identity and composition delegate to the ambient functor category. Homs
-between transformations are the existing modification categories, and every
-subsequent hom is reused. A whole inclusion acts as the identity on this shared
-transformation tower.
+`IsLaxTransfor` constrains the existing pre/right cell. Opaque admission gives
+a stable `lax_transfor` view with that one-sided computation, while its
+post/left cell remains directed. Profiled identity and composition project to
+the ambient operations. Homs between classified transformations reuse ambient
+modifications and all subsequent iterated cells. The whole inclusion exposes
+these selected carriers and their retained higher action.
 
-At this intermediate integration boundary, (28.8) still describes the ambient
-transformation homs of the existing Gray interface. The subsequent
-transformation-profile tranche will select classified conventional lax arrows.
-Objects already use the opaque strict classifier. The category is not definitionally the
+Thus (28.8) differs from the full `StrictFunctor_cat`: Gray arrows have an
+explicit lax profile, while the full subcategory retains all ambient
+transformations. The category is not definitionally the
 ambient functor category, and an arbitrary ambient functor is not silently
 accepted as one of its objects.
 
@@ -237,8 +236,9 @@ duplication is reserved for a genuinely different classifier or computation.
 > admits carriers opaquely, with stable classified action, an explicit raw
 > observation and canonical evidence independent of the admission certificate.
 > `StrictFunctor_cat` reuses the complete ambient transformation tower.
-> GrayHom_lax retains its existing ambient homs at this integration stage;
-> global-cut retirement and classified lax Gray arrows remain in progress.
+> `GrayHom_lax` instead uses opaque classified conventional lax arrows,
+> retaining ambient modifications above them. Generic strict cuts are retired;
+> normal identities and qualified named strict instances remain.
 > No duplicate functor grammar or compositor is introduced.
 
 ## 28.3 One Selected Right Closure
@@ -387,7 +387,7 @@ $$
 
 The formal source and target are owned by the stable transport functors of the
 internal action; (28.13) gives their readable composite presentations under
-the current strict endpoint conversions. The direction (28.15), rather than
+the selected graph/profile comparisons. The direction (28.15), rather than
 the choice of a terminology convention in isolation, is why the internal hom
 is named $\mathsf{GrayHom}_{\mathrm{lax}}$.
 
@@ -452,14 +452,12 @@ whole constructions. The tensor in this chapter is consequently written
 $\otimes_R$: it records the selected right closure rather than pretending
 that the mirror and monoidal boundaries have already been built.
 
-There is a second historical boundary. Some ambient functoriality and
-naturality endpoints are still identified by global prototype conversion
-rules. The strict property now records where the compositor cell itself is
-constrained by semantic evidence, and the unprofiled interchanger remains
-nonidentity, but the eventual migration must both re-home endpoint conversions
-at explicit strict profiles and decide where that evidence should be reflected
-into judgmental computation. This chapter does not perform that repository-wide
-normal-form change.
+The action-profile integration removes the historical generic strict
+composition and naturality conversions. Stable classified views select their
+own computation; explicit raw evidence provides paths, and qualified named
+constructors may compute directly. Ambient noncollapse controls and the
+nonidentity interchanger check these boundaries. This qualification does not
+establish general confluence or resolve the separate higher Op/duality defects.
 
 ## 28.7 The End Of The Fourth Spiral
 
@@ -482,18 +480,18 @@ $$
 \tag{28.16}
 $$
 
-This table also explains why the historical strict endpoint conversions do
-not invalidate the experiment. They may simplify the written source and
-target of a comparison, but they do not turn the unprofiled cell into the
-identity. The path target, strict property, and arbitrary directed target still
-select observably different behaviours of the retained witness.
+The path target, strict property, and arbitrary directed target select
+different behaviours of the retained witness. The unprofiled cell remains
+observable; neither ordinary equality evidence nor opaque admission of a
+particular carrier makes every ambient cell an identity.
 
 The three rows of (28.16) should be read as operations on one owner, not as
 three parallel theories. The arbitrary directed cell is primary. A
 path-valued target changes its hom into equality and thereby supplies an
 inverse. A strict package retains an endpoint path and identifies the same
-cell with the arrow induced by that path; judgmental reflection is deliberately
-deferred. Neither specialization requires the ambient compositor, its whole
+cell with the arrow induced by that path. A stable classified view supplies
+its specified judgmental computation, while raw evidence remains a path.
+Neither specialization requires the ambient compositor, its whole
 transformation, or its next action to be redeclared.
 
 This suggests a discipline for extending the higher theory. First locate the

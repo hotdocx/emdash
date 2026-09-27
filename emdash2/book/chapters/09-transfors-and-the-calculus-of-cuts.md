@@ -111,10 +111,11 @@ Before capping at $g$, `hom_postcomp_func` remains a functor between
 hom-categories, so its action on 2-cells between possible values of $g$ is
 still available.
 
-The functor-indexed version says the same thing. If $p:x\to y$ and
-$q:y\to z$ in $A$, then consecutive action by $K[p]$ and $K[q]$ accumulates
-under the single arrow $q\circ p$. Ordinary functoriality belongs to the
-generic `fapp*` calculus; no constructor receives a private composition law.
+For a general functor $K$, consecutive action by $K[p]$ and $K[q]$ instead
+retains the ambient compositor. Accumulation under $q\circ p$ needs the
+corresponding strict profile or a qualified named construction. The
+identity-indexed represented-hom computation displayed above remains
+available without making every functor strict.
 
 ### 9.2.2 Example 2: Precomposition Reverses The Action Order
 
@@ -149,7 +150,8 @@ That reversal is contravariance, not a special exception to associativity.
 
 > **Formal status — checked.** Evidence `CAT-HOM-CUTS`. The full and capped
 > lower-star and upper-star actions have identity, consecutive-action, and
-> adjacent raw-cut computations. Their ordinary-composition readings remain
+> adjacent raw-cut computations at their qualified identity/profile instances.
+> Arbitrary functor-indexed action retains its laxity. Ordinary-composition readings remain
 > proof-time comparisons where selecting a second runtime normal form would
 > be harmful.
 
@@ -194,7 +196,8 @@ $$
 h:w\to x,\qquad f:x\to y,\qquad g:y\to z.
 $$
 
-There are two neighboring cuts, one on each side of the varying arrow:
+For the stable view of a classified strict transfor $\eta$, there are two
+neighboring cuts, one on each side of the varying arrow:
 
 $$
 \begin{aligned}
@@ -205,8 +208,9 @@ $$
 
 The first source and target are $Fx\to Gz$; the second are $Fw\to Gy$.
 In each case the selected normal form is one off-diagonal action on the
-composite source arrow. The generic owner is `tapp1_fapp0`, and both
-displayed equalities are runtime reductions. At the uncapped level
+composite source arrow. The action still uses `tapp1_fapp0`; the stable
+strict-profile head authorizes these runtime reductions. An arbitrary
+ambient transfor retains directed comparison cells instead. At the uncapped level
 `tapp1_func` remains a functor between hom-categories, so a 2-cell between
 $f$ and $f'$ is carried to a 2-cell between $\eta[f]$ and $\eta[f']$ after
 the cut has normalized.
@@ -214,15 +218,16 @@ the cut has normalized.
 <!-- evidence:TRANSF-STRICT-NATURALITY -->
 
 > **Formal status — checked.** Evidence `TRANSF-STRICT-NATURALITY`. Both
-> full-functor and capped-arrow forms are owned by the generic `tapp*`
-> calculus. Constructor-specific copies of ordinary naturality are neither
-> needed nor desired.
+> full-functor and capped-arrow forms reuse the generic `tapp*` calculus at
+> the stable classified strict view. Raw evidence supplies paths; it does
+> not install runtime cuts on every ambient transformation.
 
-The familiar naturality square is the identity-boundary instance. For
+The familiar strict naturality square is the identity-boundary instance. For
 $f:x\to y$, the expressions $G[f]\circ\eta_x$ and
 $\eta_y\circ F[f]$ both normalize through the common interior $\eta[f]$.
-Naturality is therefore not an equality proof added after defining a family
-of point components. It is computation exposed by the family action itself.
+For a general ambient transfor these boundaries are connected through its
+retained laxity cells. OneCat targets turn the appropriate cells into ordinary
+equality paths; a classified strict view additionally selects computation.
 
 Identity and vertical composition follow the same architecture. The identity
 transfor and a vertical composite live in the transformation category, so
@@ -676,8 +681,8 @@ D[p](\Phi_xu)\longrightarrow\Phi_y(E[p]u)
 $$
 
 in $D[y]$. This is the displayed laxity cell. It has a direction and need not
-be invertible. The generic functor and transfor cuts around it compute
-strictly, but the comparison itself remains mathematical data.
+be invertible. Generic action retains this comparison and its higher action;
+stricter computation needs its own profile or qualified constructor instance.
 
 <!-- evidence:FUNCTORD-DISPLAYED-LAXITY -->
 
@@ -767,9 +772,9 @@ negative direction.
 > **Formal status — checked.** Evidence `FUNCTORD-WHOLE-LAXITY`. The whole
 > displayed owner, both ordinary variance surfaces, their capped cells, and
 > the functor-compositor specialization are active. Their next actions remain
-> in the generic hom calculus. This does not claim a complete weak
-> omega-category coherence theorem or remove the prototype's historical
-> strict endpoint cuts.
+> in the generic hom calculus. The action-profile integration has retired
+> the generic strict endpoint cuts. A complete weak omega-category coherence
+> theorem remains outside this checked boundary.
 
 Cut elimination is therefore not a feature catalogue. It is the organizing
 principle by which functorial type theory decides what should compute, what

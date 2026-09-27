@@ -545,7 +545,7 @@ register supplies the exact owner and reviewer for each cited claim.
 | `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
 | the groupoidal-closure, Integer, Circle, truncation, and connectedness modules | path-former comparisons, successor-localized integers, Circle encode–decode, classified truncation, and the selected connectedness consumer |
 | the groupoidal-interval, walking-comparison, and groupoidification modules | two finite free-inversion tests, category-indexed formation and whole unit, target extension/restriction, whole mapping equivalence, compositor, and Interval recovery |
-| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, `IsStrictFunctor` properties, exact functor/evidence packages, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
+| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity, opaque action classifiers, strict objects with ambient transfors in `StrictFunctor_cat`, classified lax arrows in `GrayHom_lax`, one selected right closure, and the derived walking interchanger |
 | `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
 
 Imports use `require`; `open` brings imported public names into scope. The
@@ -806,15 +806,16 @@ $$
 
 Because $f$ still ranges over a whole hom category, one further hom action can
 observe how $\phi$ varies. A path-valued target makes the comparison
-invertible. A strict-functor property instead stores an endpoint path and an
-equality identifying the selected compositor with its equality-induced arrow.
-This is evidence about one action, not a duplicate functor theory or a blanket
-compositor-to-identity rewrite.
+invertible. The strict-functor property constrains the whole existing
+compositor to its canonical strict action; component evidence is obtained by
+evaluation. Stable classified views compute using that profile while an
+arbitrary ambient functor retains its compositor.
 
-The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses proof-carrying
-strict-functor packages as objects: each package is an ambient functor paired
-with `IsStrictFunctor` evidence. It reuses the ambient transfor and higher-hom
-tower between their stable views. One selected right closure is checked:
+The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses opaque
+`StrictFunctor` objects and classified `LaxTransfor` arrows, with ambient
+higher homs. Its pre/right action is strict and its post/left comparison is
+retained. The separate full subcategory `StrictFunctor_cat` has strict objects
+and ambient transfors. One selected right closure is checked:
 
 $$
 \mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)

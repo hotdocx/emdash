@@ -1,21 +1,20 @@
 /*
-  Strict pointwise-to-whole fixed-forward equivalences.
+  Inherited pointwise-to-whole fixed-forward equivalence assembly.
 
-  An ordinary `Transf` or displayed `Transfd` already carries its naturality
-  internally.  When every component of that one whole arrow is an
-  `OmegaEquivAlong`, strict naturality determines the inverse arrow and its
-  coherence.  Since `Transf` and `Transfd` are primitive classifiers rather
-  than exposed record constructors, this module owns the generic assembly
-  boundary explicitly:
+  This module takes an existing whole ordinary Transf or displayed Transfd
+  and pointwise OmegaEquivAlong evidence. It declares whole left and right
+  inverse transformations, preserves both selected component inverse choices
+  through beta rules, and assumes whole cancellation paths.
 
-    - rigid whole inverse transformations;
-    - component beta rules selecting the pointwise inverse arrows; and
-    - whole cancellation paths.
+  The historical strict_* names do not impose an IsStrictTransfor premise.
+  Assembly is a primitive assumption of the selected integration baseline,
+  not a derivation from strict or lax naturality. Its interpretation is not
+  established merely by the downstream checks; explicit-profile replacement
+  research is deferred separately.
 
-  Consumers supply no component naturality square.  This module does not turn
-  an arbitrary family of arrows into a transformation, does not identify
-  arbitrary pointwise-equal functors, and does not add a broad runtime
-  extensionality or univalence rule.
+  Consumers supply no new component naturality square. This interface does
+  not turn an arbitrary family of arrows into a transformation, identify all
+  pointwise-equal functors, or add runtime extensionality or univalence.
 */
 
 require open emdash.emdash3_2;

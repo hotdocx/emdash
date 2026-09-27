@@ -78,6 +78,18 @@ assert [K : Cat]
       (@DirectCoverQuestionSection_catd
         K T (@DirectCoverCompletionPsh K T P)));
 
+assert [K : Cat]
+  (T : τ (@GrothTopology K))
+  (P : τ (@Psh K)) ⊢
+  @direct_cover_completion_glue_is_strict K T P
+  : τ (@IsStrictFunctord
+      (@DirectCoverQuestion_cat K T)
+      (@DirectCoverQuestionMatching_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@DirectCoverQuestionSection_catd
+        K T (@DirectCoverCompletionPsh K T P))
+      (@direct_cover_completion_glue_funcd K T P));
+
 // Its literal-question component is the deployed one-cover glue functor.
 assert [K : Cat]
   (T : τ (@GrothTopology K))

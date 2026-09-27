@@ -93,7 +93,7 @@ export const CORE_PATHOUT_FOUNDATION_1B_REVISION =
     'PATHOUT-LIBRARY-FOUNDATION-1B-TRANSFER-1' as const;
 
 export const CORE_PATHOUT_FOUNDATION_SOURCE_SHA256 =
-    'sha256:f7206b8eed56897ee8483934cd5f9b31348c22865cea20a1257c409eab025e61';
+    'sha256:6a980df34be718a23a6be121d170153650830a49f54b7e0eca415705ffb2068a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

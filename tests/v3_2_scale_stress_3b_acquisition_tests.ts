@@ -3,6 +3,7 @@
  */
 
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { basename, resolve } from 'node:path';
 import { runBoundedLambdapi } from './v3_2_lambdapi_test_command';
@@ -276,6 +277,16 @@ describe(
             const evidenceContract =
                 CORE_LF_SCALE_STRESS_3B_EVIDENCE_PROPERTY_ACQUISITION;
 
+            for (const contract of [protectedContract, evidenceContract]) {
+                const source = readFileSync(
+                    resolve(repositoryRoot, contract.authorityPath)
+                );
+                assert.equal(
+                    contract.sourceSha256,
+                    `sha256:${createHash('sha256').update(source).digest('hex')}`
+                );
+            }
+
             assert.equal(protectedContract.commands.length, 58);
             assert.deepEqual(
                 protectedContract.commands.map(command =>
@@ -283,11 +294,22 @@ describe(
                 ),
                 [
                     ...Array.from(
-                        { length: 56 },
-                        (_value, index) => index + 1
+                        { length: 32 },
+                        (_value, index) => index + 2
                     ),
-                    58,
-                    59
+                    ...Array.from(
+                        { length: 24 },
+                        (_value, index) => index + 37
+                    ),
+                    62,
+                    63
+                ]
+            );
+            assert.deepEqual(
+                protectedContract.canonicalExport.imports,
+                [
+                    'emdash.emdash3_2',
+                    'emdash.emdash3_2_strict_functor_actions'
                 ]
             );
             assert.equal(

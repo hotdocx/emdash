@@ -47,9 +47,7 @@ cp examples/short_exact_comparisons.lp "$scratch_root/examples/"
 check_object() {
   local file="$1"
   printf 'checking %s with fresh exact dependency objects\n' "$file"
-  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
-    bash "$formal_root/scripts/lambdapi_resource_guard.sh" \
-    lambdapi check -c "${warning_flags[@]}" "${extra_flags[@]}" "$file"
+  python3 "$formal_root/scripts/check_staged_target.py" --compile "$file"
 }
 cd "$scratch_root"
 check_object emdash3_2_short_exact_cokernel_comparison.lp

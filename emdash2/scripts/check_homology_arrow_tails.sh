@@ -62,15 +62,12 @@ for file in "${reviewers[@]}"; do cp "$file" "$stage_root/examples/"; done
 
 check_object() {
   local file="$1" started="$SECONDS" rc elapsed
-  printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
-    "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode"
-  printf 'checking %s with fresh exact objects (timeout %s, %s)\n' \
-    "$file" "$EMDASH_TYPECHECK_TIMEOUT" "$mode" >>"$log_file"
+  printf 'checking %s with fresh exact objects (registered profile, %s)\n' \
+    "$file" "$mode"
+  printf 'checking %s with fresh exact objects (registered profile, %s)\n' \
+    "$file" "$mode" >>"$log_file"
   set +e
-  EMDASH_LP_TIMEOUT="$EMDASH_TYPECHECK_TIMEOUT" \
-    bash "$formal_root/scripts/lambdapi_resource_guard.sh" \
-    lambdapi check -c --no-colors "${warning_flags[@]}" "${extra_flags[@]}" \
-    "$file" >>"$log_file" 2>&1
+  python3 "$formal_root/scripts/check_staged_target.py" --compile "$file" >>"$log_file" 2>&1
   rc=$?
   set -e
   elapsed=$((SECONDS - started))

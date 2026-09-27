@@ -45,10 +45,16 @@ and H_family≅H_native∘Γ with retained inverse data and point observations.
 Its structural support is at the existing library owners. Γ, its whole
 projections, ordinary triangle and H comparison now have public definition
 owners; the point comparison remains downstream. The completed assembly ledger records joint
-native-consumer qualification. Action-profile integration is now active in
-its [dedicated main-based goal](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md);
-the ordinary classifier is its first tranche and global cuts remain during
-consumer migration. Op/duality and the large six-term comparison remain deferred.
+native-consumer qualification. The [dedicated main-based action-profile
+integration](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md) is qualified:
+generic composition/strict-naturality cuts are retired while normal identity
+computation and qualified constructor instances remain. Opaque action profiles,
+classified Gray arrows, inherited assembly and bounded path-cubical owners
+pass complete production CI across 1,388 targets and the original 94-assertion
+proof–CAS corpus. Checked health and the affected TypeScript/renderer
+qualification are recorded in the [acceptance audit](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md).
+This is a local integration-branch result, not a main/Pages publication.
+Op/duality and the large six-term package comparison remain deferred.
 
 The initial main/Pages publication was df9b4778. The user subsequently
 authorized completed consolidation c3792b67 and book 0.9.1-dev for main/Pages;
@@ -99,14 +105,17 @@ migration is implied by that review.
   pointwise; generator inclusion and leastness compute by application. The
   module provides no inductive cover derivations, truncation/HIT, decision
   procedure, affine specialization, sheafification, or scheme.
-- `emdash3_2_strict_pointwise_equivalences.lp`: generic strict
+- `emdash3_2_strict_pointwise_equivalences.lp`: inherited primitive
   pointwise-to-whole fixed-forward equivalence assembly for ordinary and
-  displayed transformations. The forward transformation already owns
-  naturality internally. Rigid inverse transformations compute to the
-  selected pointwise inverse arrows, and whole cancellation paths complete
-  `OmegaEquivAlong` in the corresponding functor category. The module does
-  not assemble incoherent arrow families, invert arbitrary lax
-  transformations, or add generic functor extensionality.
+  displayed transformations. It takes an existing whole transformation and
+  pointwise `OmegaEquivAlong` data, with no strict-profile premise. Its rigid
+  whole inverses retain both selected component inverse choices; whole
+  cancellation is assumed. The historical `strict_*` names do not establish
+  strictness of every transformation or classify the inverses as lax/strict.
+  This is the user-selected integration assumption, not a derivation from
+  lax naturality or an interpretation/consistency theorem. It adds no generic
+  functor extensionality. Explicit-profile replacement research is deferred
+  in the integration plan.
 - `emdash3_2_one_cat_modifications.lp`: ordinary-target modification
   introduction between two already whole transformations. OneCat makes its
   native component cells and remaining coherence proposition-valued; the
@@ -468,10 +477,17 @@ migration is implied by that review.
 - **Ordinary observations.** [Homology records](../emdash3_2_homology_records.lp),
   [family records](../emdash3_2_homology_family_records.lp) and
   [native record data](../emdash3_2_homology_adjunction_record_data.lp)
-  expose optional views. The categorical H point comparison applies whole Q
+  expose optional views. Ordinary family records and factor-space adapters
+  forward the existing OneCat requirement of their annihilator input; whole
+  K/Q/H and the generic semantic boundary remain unchanged. Selected
+  kernel/cokernel records retain generic signatures by reusing supplied
+  annihilation along the existing object-and-arrow frame agreement. Selected
+  map comparisons accept actual transformation profiles, with OneCat wrappers.
+  The categorical H point comparison applies whole Q
   to an actual boundary-diagram map and retains inverse data. Ordinary
-  equations at fixed inputs are legitimate downstream observations; the
-  stronger whole Γ/H comparison remains an unqualified follow-up.
+  equations at fixed inputs are legitimate downstream observations. The
+  stronger whole Γ/H comparison is qualified at its original endpoints in
+  the assembly audit linked above; the large six-term comparison stays deferred.
 - **Native proof–CAS contracts and certificates.**
   [Native inputs](../emdash3_2_commutative_algebra_freyd_native_inputs.lp),
   [native maps](../emdash3_2_commutative_algebra_freyd_native_maps.lp),
@@ -854,9 +870,21 @@ migration is implied by that review.
   canonical `strict_functor_is_strict`. The existing deep compositor computes
   to identity under the classified head; no admission certificate is projected
   and no second action calculus is added. `StrictFunctor_cat` is the full
-  subcategory with whole inclusion. At this integration stage, `GrayHom_lax`
-  still uses ambient `Transf_cat` homs and the nucleus still has global cuts;
-  subsequent consumer/action-profile tranches own their migration.
+  subcategory with whole inclusion. Opaque ordinary lax/strict transfors and
+  strict displayed functors have separate classified views and canonical
+  evidence. `GrayHom_lax` has strict functor objects and classified
+  `LaxTransfor_cat` homs; it is distinct from `StrictFunctor_cat`. Ambient
+  composition/naturality no longer obtains these profile equations globally.
+- `emdash3_2_strict_functor_actions.lp`: post-profile inverse/equivalence
+  operations retaining their actual mapped inverses. Ordinary-target paths
+  and profiles live in `emdash3_2_one_cat_action_paths.lp`,
+  `emdash3_2_one_cat_functor_profiles.lp` and
+  `emdash3_2_one_cat_transfor_profiles.lp`; their actual OneCat evidence
+  supports the unchanged native/ordinary consumer interfaces.
+- `emdash3_2_profiled_vertical_paths.lp` and
+  `emdash3_2_profiled_interchange.lp`: vertical and interchange/Eckmann–Hilton
+  paths with the actual action-profile premises. They do not restore the
+  three generic vertical folds removed from the nucleus.
 - `emdash3_2_walking_arrow.lp`: transparent walking-arrow interface derived
   from `Join_cat(Terminal_cat,Terminal_cat)`. Both endpoints, the generator,
   and its next hom action are projections of existing join owners.
@@ -876,13 +904,12 @@ migration is implied by that review.
 - `emdash3_2_gray_interchanger_orientation.lp` and
   `emdash3_2_gray_transformation_graph.lp`: the selected interchanger has
   checked direction `v o a ==> b o u`; exchanging the coordinate roles gives
-  the native lax-square orientation. Every transformation yields an iterable
-  stable whole functor `B -> LaxArrow_cat(C)`. Objects compute to component
-  edges; capped arrows compute to the standard square with literal sides
-  `F[g]` and `G[g]`, with filler extracted from the existing post/left internal
-  action. Generic `fapp1_func` retains the next action. Its identity overlap
-  with the historical global strict-functor cut is deliberately accepted
-  pending the planned profile-local cut migration; the transparent
+  the native lax-square orientation. A classified lax transformation yields
+  an iterable stable whole functor `B -> LaxArrow_cat(C)`. Objects compute to
+  component edges; capped arrows compute to the selected square with literal
+  sides `F[g]` and `G[g]`, with filler extracted from the existing post/left
+  action. Generic `fapp1_func` retains the next action. Its normal-identity
+  and profile observations are checked in that classified context. The
   represented-Sigma/opposite construction remains protected evidence in the
   represented-comma-family owner below.
 - `emdash3_2_transfor_whiskering.lp`: derived pre/post-whiskering of whole
@@ -983,9 +1010,9 @@ migration is implied by that review.
   Transparent paths reframe the existing internal compositor to one readable
   post cell; the profile supplies fixed-forward `OmegaEquivAlong` for that
   cell, and the pre/right reverse adjustment is derived from a selected native
-  inverse plus the existing endpoint comparison. The source ladder is a
-  documented adapter for the temporary global strict-composition cut and does
-  not claim noncollapsed lax endpoints.
+  inverse plus the existing endpoint comparison. Direct source and target
+  paths expose the existing compositor without identifying its two generic
+  lax endpoints; the former global-cut adapter has been removed.
   `CubicalArrow_func` maps a filler by that cell, generic next-hom action, then
   the derived reverse adjustment. Source, target, and every recursive lift
   retain profiles. A general constructor accepts an explicit family of
@@ -2225,8 +2252,8 @@ parameterized-`homd_int` primitive. `LaxArrow_cat(C)` specializes this at
 name. A selected readable pseudofunctor profile constrains the existing
 compositor with fixed-forward `OmegaEquivAlong`; a selected native inverse
 supplies the reverse boundary adjustment, making the operation functorial and
-recursively iterable. Its endpoint reframe remains explicitly approximate
-under the temporary global strict cut. Nat recursion then constructs
+recursively iterable. Direct endpoint observations retain the generic lax
+source and target without the former strict-cut adapter. Nat recursion constructs
 `CubicalLevel_cat(C,n)`.
 
 The associated `{L,R,*}` code grammar is independent of Gray semantics and of

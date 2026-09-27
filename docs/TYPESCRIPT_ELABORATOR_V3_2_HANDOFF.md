@@ -35,8 +35,11 @@ homology/universality interfaces and proof–CAS examples have explicit ordinary
 model, normality and interpretation contracts. The current unrestricted
 Op/Sigma/Homd package has recorded defects. The
 [action-profile integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md)
-now owns the dedicated main-based reimplementation and affected transfer
-review. No profile migration is qualified merely by starting that goal.
+records the qualified main-based reimplementation and affected transfer
+review. Its [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
+records full formal CI, the retained production CAS corpus and unchanged
+TypeScript semantic IR, with the exact metadata follow-up scope. This does
+not transfer additional mathematical profiles to the TypeScript kernel.
 Preserve the six-term, Op/variance and spectral deferrals.
 
 The [September reassessment](TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)

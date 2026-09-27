@@ -84,28 +84,30 @@ assert [C : Cat]
 // Existing displayed transport carries the corresponding fibre equivalence.
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat C))
-  (D : τ (Catd C))
+  (D : τ (@StrictFunctor C Cat_cat))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
   @groupoidal_fibre_transport_equiv C g D x y f
   : τ (@OmegaEquivAlong
       Cat_cat
-      (Fibre_cat D x)
-      (Fibre_cat D y)
-      (@fapp1_fapp0 C Cat_cat D x y f));
+      (Fibre_cat (@strict_functor C Cat_cat D) x)
+      (Fibre_cat (@strict_functor C Cat_cat D) y)
+      (@fapp1_fapp0 C Cat_cat
+        (@strict_functor C Cat_cat D) x y f));
 
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat C))
-  (D : τ (Catd C))
+  (D : τ (@StrictFunctor C Cat_cat))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
   @omega_equiv_along_left_inv
     Cat_cat
-    (Fibre_cat D x)
-    (Fibre_cat D y)
-    (@fapp1_fapp0 C Cat_cat D x y f)
+    (Fibre_cat (@strict_functor C Cat_cat D) x)
+    (Fibre_cat (@strict_functor C Cat_cat D) y)
+    (@fapp1_fapp0 C Cat_cat
+      (@strict_functor C Cat_cat D) x y f)
     (@groupoidal_fibre_transport_equiv C g D x y f)
-  ≡ @fapp1_fapp0 C Cat_cat D y x
+  ≡ @fapp1_fapp0 C Cat_cat (@strict_functor C Cat_cat D) y x
       (@groupoidal_arrow_inverse C g x y f);
 
 // The earlier discrete-category contract supplies a general nonliteral case.

@@ -1,3 +1,4 @@
+require open emdash.emdash3_2_one_cat_pointwise_equivalences;
 /* Whole shearing is built before its scalar inverse evidence is supplied. */
 require open emdash.emdash3_2_one_cat_additive_family_paths;
 require open emdash.emdash3_2_additive_shears;
@@ -225,7 +226,7 @@ symbol one_cat_shear_family_omega [B C : Cat] (C1 : τ (IsNCat (cat_succ cat_zer
   X)) (@fapp0 (Functor_cat B (Product_cat C C)) (Functor_cat B C) (@comp_cat_cov_func B (Product_cat C C) C Prod)
   (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) X X)) (@one_cat_shear_family B C C1 Prod t A
   T0 X))
-≔ @strict_transf_pointwise_omega_along B C (@fapp0 (Functor_cat B (Product_cat C C)) (Functor_cat B C)
+≔ @one_cat_transf_pointwise_omega_along B C C1 (@fapp0 (Functor_cat B (Product_cat C C)) (Functor_cat B C)
   (@comp_cat_cov_func B (Product_cat C C) C Prod) (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) X
   X)) (@fapp0 (Functor_cat B (Product_cat C C)) (Functor_cat B C) (@comp_cat_cov_func B (Product_cat C C) C Prod)
   (@Struct_sigma (Functor B C) (λ _ : τ (Functor B C), Functor B C) X X)) (@one_cat_shear_family B C C1 Prod t A

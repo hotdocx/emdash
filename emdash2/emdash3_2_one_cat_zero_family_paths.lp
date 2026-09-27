@@ -3,6 +3,8 @@
    functor category or caller naturality squares are required. */
 require open emdash.emdash3_2_one_cat_cokernel_family_inputs;
 require open emdash.emdash3_2_one_cat_adjunction_family_views;
+require open emdash.emdash3_2_one_cat_action_paths;
+require open emdash.emdash3_2_one_cat_functor_closure;
 require open emdash.emdash3_2_zero_arrow_family_observations;
 require open emdash.emdash3_2_zero_arrow_family_action_paths;
 
@@ -26,7 +28,8 @@ symbol one_cat_zero_family_prewhisker_path [A B C : Cat]
   (@comp_cat_con_func A B C F) X (@Const_func B C t) (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C
   (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) X) walking_arrow_src walking_arrow_tgt
   walking_arrow_generator))) (@zero_arrow_family_zero_transf A C t T T0 (@comp_cat_fapp0 A B C X F) (@comp_cat_fapp0 A
-  B C Y F)) (@fapp1_comp_path (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) X (@Const_func B C t) Y
+  B C Y F)) (@one_cat_composition_path (Functor_cat B C) (Functor_cat A C)
+    (@one_cat_functor_category A C C1) (@comp_cat_con_func A B C F) X (@Const_func B C t) Y
   (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
   (@initial_arrow_diagram_func C t T0) Y) walking_arrow_src walking_arrow_tgt walking_arrow_generator)
   (@diagram_family_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
@@ -100,8 +103,8 @@ symbol one_cat_zero_composite_prewhisker_path [A B C : Cat]
   (@fapp1_fapp0 (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) X Z (@comp_fapp0 (Functor_cat B C) X
   Y Z u k)) (@comp_fapp0 (Functor_cat A C) (@comp_cat_fapp0 A B C X F) (@comp_cat_fapp0 A B C Y F) (@comp_cat_fapp0 A
   B C Z F) (@fapp1_fapp0 (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) Y Z u) (@fapp1_fapp0
-  (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) X Y k)) (@fapp1_comp_path (Functor_cat B C)
-  (Functor_cat A C) (@comp_cat_con_func A B C F) X Y Z u k)) (@eq_trans (@Transf A C (@comp_cat_fapp0 A B C X F)
+  (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) X Y k)) (@one_cat_composition_path (Functor_cat B C) (Functor_cat A C)
+    (@one_cat_functor_category A C C1) (@comp_cat_con_func A B C F) X Y Z u k)) (@eq_trans (@Transf A C (@comp_cat_fapp0 A B C X F)
   (@comp_cat_fapp0 A B C Z F)) (@fapp1_fapp0 (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B C F) X Z
   (@comp_fapp0 (Functor_cat B C) X Y Z u k)) (@fapp1_fapp0 (Functor_cat B C) (Functor_cat A C) (@comp_cat_con_func A B
   C F) X Z (@zero_arrow_family_zero_transf B C t T T0 X Z)) (@zero_arrow_family_zero_transf A C t T T0
@@ -151,7 +154,8 @@ symbol one_cat_zero_family_chain_path [B C : Cat]
       (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T) A) walking_arrow_src
       walking_arrow_tgt walking_arrow_generator)) (@zero_arrow_family_zero_transf B C t T T0 A
       (@diagram_family_at_func B WalkingArrow_cat C D walking_arrow_tgt))
-      (@strict_component_naturality_path WalkingArrow_cat (Functor_cat B C)
+      (@one_cat_component_naturality_path WalkingArrow_cat (Functor_cat B C)
+        (@one_cat_functor_category B C C1)
         (@sym_func B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)
           (@terminal_arrow_diagram_func C t T) A)) (@sym_func B WalkingArrow_cat C D)
         (@sym_func_func_transf B WalkingArrow_cat C (@comp_cat_fapp0 B C (Functor_cat WalkingArrow_cat C)

@@ -96,8 +96,9 @@ symbol one_cat_kernel_family_map_inclusion_path [B C : Cat] [S : τ (@Preadditiv
   (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P) D) (@fapp0 (Functor_cat B (Functor_cat
   WalkingArrow_cat C)) (Functor_cat B C) (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C
   (@kernel_adjunction_func C S t T P)) E)) (@kernel_adjunction_family_map_transf B C S C1 t T T0 P Q D E
-  m)))) (@eq_sym _ _ _ (@untranspose_postcomp_path (Functor_cat B C) (Functor_cat B (Functor_cat WalkingArrow_cat
-  C)) (@comp_cat_cov_func B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T))
+  m)))) (@eq_sym _ _ _ (@one_cat_untranspose_postcomp_path (Functor_cat B C) (Functor_cat B (Functor_cat WalkingArrow_cat
+  C)) (@one_cat_functor_category B (Functor_cat WalkingArrow_cat C)
+    (@one_cat_functor_category WalkingArrow_cat C C1)) (@comp_cat_cov_func B C (Functor_cat WalkingArrow_cat C) (@terminal_arrow_diagram_func C t T))
   (@comp_cat_cov_func B (Functor_cat WalkingArrow_cat C) C (@kernel_adjunction_func C S t T P))
   (@one_cat_postcomp_adjunction B C (Functor_cat WalkingArrow_cat C) C1 (@one_cat_functor_category
   WalkingArrow_cat C C1) (@terminal_arrow_diagram_func C t T) (@kernel_adjunction_func C S t T P)

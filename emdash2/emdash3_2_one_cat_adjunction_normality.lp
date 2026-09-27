@@ -1,3 +1,5 @@
+require open emdash.emdash3_2_one_cat_omega_maps;
+require open emdash.emdash3_2_one_cat_functor_closure;
 /* Fixed-forward normality of the actual whole Coim⇒Im. */
 require open emdash.emdash3_2_one_cat_image_coimage_comparison;
 require open emdash.emdash3_2_eq1_evidence_property;
@@ -58,7 +60,7 @@ symbol one_cat_adjunction_normality_family [B C : Cat] [S : τ (@PreadditiveCate
       (@fapp1_fapp0 _ _ (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C F)
         (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q)
         (@one_cat_coimage_image_comparison C S C1 t T T0 P Q)))
-≔ @omega_equiv_along_fapp1_fapp0 (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C)
+≔ @one_cat_omega_equiv_fmap (Functor_cat (Functor_cat WalkingArrow_cat C) C) (Functor_cat B C) (@one_cat_functor_category B C C1)
     (@comp_cat_con_func B (Functor_cat WalkingArrow_cat C) C F)
     (@adjunction_coimage_func C S t T T0 P Q) (@adjunction_image_func C S t T T0 P Q)
     (@one_cat_coimage_image_comparison C S C1 t T T0 P Q) N;

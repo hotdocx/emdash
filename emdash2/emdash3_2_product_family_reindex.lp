@@ -52,6 +52,16 @@ unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projL_func _ _) (Struct_sigma $F _
 unif_rule @comp_fapp0 Cat_cat _ _ _ (@Product_projR_func _ _) (Struct_sigma _ $G)
   ≡ $G0 ↪ [ $G ≡ $G0 ];
 
+// Sufficient congruence for the existing literal first-projection comparison
+// under the same whole diagonal postcomposition. Runtime owners remain distinct.
+unif_rule @hom_postcomp_fapp0 _ _ (@id Cat_cat Cat_cat) $B $C (Product_cat $C $C)
+    (Struct_sigma (@id Cat_cat $C) (@id Cat_cat $C)) $X
+  ≡ @hom_postcomp_fapp0 _ _ (@id Cat_cat Cat_cat) $B0 $C0 (Product_cat $C0 $C0)
+    (Struct_sigma (@id Cat_cat $C0) (@id Cat_cat $C0))
+    (@comp_fapp0 Cat_cat $B0 (Product_cat $C0 $D0) $C0
+      (@Product_projL_func $C0 $D0) (Struct_sigma $X0 _))
+  ↪ [ $B ≡ $B0; $C ≡ $C0; $X ≡ $X0 ];
+
 // Native projection views of the same literal paired restriction.
 unif_rule @hom_precomp_along_fapp0 _ _ (@id Cat_cat Cat_cat) _ _ _ (Struct_sigma $F _) (@Product_projL_func _ _)
   ≡ $F0 ↪ [ $F ≡ $F0 ];
