@@ -1326,3 +1326,21 @@ Replacement controller: `api_formal_followup_controller_v2.py`, tool session
 PID/start identity and fresh script hashes. The original CAS driver is
 unchanged. Treat `15309` and `47799` as the current live handles; no concurrent
 formal checker is authorized by this bookkeeping correction.
+
+
+## Cold Exact-Window Recipe Passed In Full CI
+
+The current complete formal invocation passes the entire cold exact-window
+recipe, receipt `20260927T173315Z-690660b198224d83adcd37acccd36e9c`, in
+674.191s. Its three registered group members each receive the owning metrics
+share of 224.730s; that share is not an individual checker duration. The
+recipe's actual kernel-cover dependency compilation passes at its registered
+6 GiB/180s bound in 75.403s
+(`20260927T173952Z-addc5809d99b4ad4ad6b0afd5d78dee8`). No source or resource
+profile changes were needed.
+
+Formal CI now proceeds through the cold arrow-tail recipe, including the
+previously repaired adjacent-window reviewer. The outer metrics log records
+475 unique successful targets after the exact-window group; no aggregate
+success is claimed yet. The formal handle remains `47799`, and the waiting
+CAS/health controller remains `15309`. Source and tooling inputs stay fixed.
