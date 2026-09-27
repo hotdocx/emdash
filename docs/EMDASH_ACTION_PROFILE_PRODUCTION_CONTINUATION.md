@@ -1068,3 +1068,101 @@ repaired reviewer also passes there (`20260927T160125Z-03da9b14023742bcbc47bfebe
 No library input or profile registry changed. Complete reviewer qualification,
 measured profile updates, full cold-recipe/formal CI, production CAS replay,
 checked health and the final semantic checkpoint remain open.
+
+## Whole-H Composition Reviewer Alignment
+
+The second continuation stopped after 311 successes at
+`examples/homology_adjunction_families.lp`, receipt
+`20260927T160137Z-2b8fd9ccdfa5465e89c20baea0ad004b`. Its old “generic
+composition cut” assertion demanded strict runtime composition for H into an
+arbitrary category. The adjacent `homology_families` reviewer had already
+been migrated to the selected ambient/ordinary distinction.
+
+The complete candidate follows that established migration: the original
+unqualified equation becomes an ambient noncollapse check, and an additional
+positive check supplies `C1` and uses the existing
+`one_cat_composition_path` to prove exactly the same equation. It does not
+add a new law or a stricter hypothesis to any library owner. All other
+endpoint, actual map, original H/K/Q, higher identity and unrelated-arrow
+assertions remain unchanged. The candidate passes at 2 GiB/90s in 0.963s
+(`20260927T160323Z-23d9d70f086140e6b4929666e3181289`); the installed source
+passes in 0.905s (`20260927T160358Z-90ef3c8682f844539f218b5ac45b0014`).
+Source hashes are in `api_homology_adjunction_reviewer_installation.json`.
+
+After exact verification of all 311 prior successes, the third continuation
+rechecks this reviewer successfully
+(`20260927T160420Z-89a61c25c59e4777a3b0edb4d92a71c9`) and proceeds. Driver:
+`api_resume_production_reviewers3.py`; state:
+`api_all_production_reviewer_resume3_results.json`; log:
+`logs/api-all-production-reviewers-resume3.log`; tool session `51202`.
+The previous failed state remains preserved. Catalog and inventory-only
+health are refreshed after the reviewer changes; checked health still needs
+the complete formal gate. No library source or profile registry changed.
+
+## Kernel/Cokernel Observation Reviewer Arguments
+
+The third continuation stopped after 346 successes at
+`examples/kernel_cokernel_adjunction_observations.lp`, receipt
+`20260927T160706Z-5d457ad2cc6c426bb83ff99469778d15`. Two calls to the already
+migrated kernel/cokernel annihilation observations omitted the `C1` argument
+present in each original assertion context. The full-file candidate forwards
+that existing witness to those two calls. All assertion contexts, result types,
+four positive conclusions, two negative controls and retained mate data stay
+unchanged; no library source changes.
+
+The candidate passes at 2 GiB/90s in 1.437s
+(`20260927T160738Z-bdee6138468a43ce9f0910f492c9382b`). Exact installation
+hashes are in `api_kernel_cokernel_reviewer_installation.json`; its separate
+installed-source check is retained in
+`logs/api-kernel-cokernel-reviewer-installed.log`. The fourth continuation
+uses `api_resume_production_reviewers4.py`, state
+`api_all_production_reviewer_resume4_results.json`, log
+`logs/api-all-production-reviewers-resume4.log`, tool session `84155`.
+It verifies all predecessor successes before resuming at the repaired target.
+The registry remains frozen at 65 overrides until the reviewer sweep ends.
+Catalog and inventory-only health are refreshed; full CI and checked health
+remain outstanding.
+
+The updated static LHS audit covers 240 changed/new registered LP files
+relative to pinned main, with zero unreviewed candidates and the same 64
+annotated slots. Only the five reviewer files named by
+`api_reviewer_followup_lhs_audit.json` changed since the prior audit; no
+library input did. This remains an advisory slot audit, not a confluence
+proof. The installed kernel/cokernel reviewer passes in 1.500s
+(`20260927T160807Z-d37a25d11f1c463aa31d88368e7f1b26`), and its resumed sweep
+check passes in 1.709s (`20260927T160833Z-a0c4ff450eb64a8ebd1c57fa81a47bc3`).
+
+## Diagram Native-Observation Reviewer Alignment
+
+The fourth continuation stopped after 401 successes at
+`examples/one_cat_diagram_reconstruction.lp`, receipt
+`20260927T161316Z-2fc2c6beff724128895abc790de95d0c`. Seven occurrences of
+`diagram_native_arrow_func` lacked the `C1` argument already present in their
+contexts. Forwarding it preserves all reconstruction endpoints, both whole
+inverse cancellations, reflection and its negative control, and further Hom
+action. The complete candidate passes at 2 GiB/90s in 1.735s
+(`20260927T161455Z-fd65eb7ced094bbc8322352287ddf36e`).
+
+A search of the remaining reviewers finds the same stale API in
+`examples/walking_arrow_native_observation.lp`. Its full-file adaptation
+supplies the existing owner's ordinary-target profile, observes the stable
+`diagram_native_arrow_value`, and uses the existing scoped proof-time
+comparison for the original raw generator and constructor round trip. Both
+nonidentity endpoint computations and further Hom action remain. Two
+negative runtime checks preserve the visible profile boundary. A control
+retaining the old constructor-roundtrip conversion fails exactly there
+(`20260927T161553Z-25fdf2ab306f471691514af1290dba25`); its proof-time
+counterpart passes. The complete selected reviewer passes in 1.590s
+(`20260927T161637Z-7c75e865f6014fb589a2b84fc52340ee`). No owner or rule changed.
+
+Both separately installed-source checks pass; their logs are
+`logs/api-diagram-reconstruction-reviewer-installed.log` and
+`logs/api-walking-arrow-observation-reviewer-installed.log`. Exact hashes
+and candidate receipts are in `api_diagram_native_reviewers_installation.json`.
+The fifth continuation verifies the 401 prior successes and both changed
+source paths before resuming the complete corpus. Driver:
+`api_resume_production_reviewers5.py`; state:
+`api_all_production_reviewer_resume5_results.json`; log:
+`logs/api-all-production-reviewers-resume5.log`; tool session `92653`.
+Catalog and inventory-only health are refreshed. All remaining final gates
+and the semantic checkpoint remain required.
