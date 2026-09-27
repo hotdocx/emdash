@@ -22,6 +22,14 @@ class DevOpsTests(unittest.TestCase):
             '[`owner.ts`](owner.ts) and `F[x](y)`\n```text\n[example](missing)\n```\n[guide](guide.md)'
         ), ['owner.ts', 'guide.md'])
 
+    def test_document_links_ignore_math_but_keep_real_links_and_prices(self):
+        self.assertEqual(devops.markdown_links(
+            r'$E[p](u)$ and [$F[x](y)$](math.md)' + '\n'
+            '$$\nD[p](u)\\longrightarrow E[q](v)\n$$\n'
+            r'Costs \$5 [guide](guide.md); $5 and $7 [missing](missing.md).' + '\n'
+            '$unclosed [still checked](unclosed.md)'
+        ), ['math.md', 'guide.md', 'missing.md', 'unclosed.md'])
+
     def gates(self, *paths):
         return {row["gate"] for row in devops.select_gates(list(paths))["include"]}
 

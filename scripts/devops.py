@@ -122,6 +122,11 @@ def markdown_links(content: str) -> list[str]:
     # Code is opaque, including inside link labels. A placeholder retains
     # labels such as [`owner.ts`](owner.ts) while hiding F[x](y) examples.
     content = re.sub(r"(`+).*?\1", "CODE", content, flags=re.S)
+    # The book's math is opaque too: D[p](u) is application, not a link.
+    # Keep placeholders so a mathematical link label still exposes its URL.
+    content = re.sub(r"(?<!\\)\$\$.*?(?<!\\)\$\$", "MATH", content, flags=re.S)
+    content = re.sub(r"(?<![\\$])\$(?![\s$])(?:\\.|[^\\$\n])*?(?<!\s)\$(?!\d)",
+                     "MATH", content)
     return re.findall(r"(?<!!)\[[^\]\n]+\]\(([^\s)]+)\)", content)
 
 
