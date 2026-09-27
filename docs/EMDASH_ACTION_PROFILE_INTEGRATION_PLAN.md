@@ -489,13 +489,46 @@ remain rejected by the controls. The full member/matching/inverse/Gray/Gamma/H/H
 review passes 476 positive/131 negative assertions over 233 inputs, with
 unchanged warning inventories and no production source change.
 
-The current investigation package is
+That investigation package is
 `emdash2/tmp/probes/api_fibcov_member_candidate/`, core SHA-256
 `5325e159fbb90db0564366acb0fcfe6b4cdd3ce75e346c7f7336cfb256b720e0`.
-Earlier package pins retain their exact scope. Next lift the retained-factorization
-and glue/silent calculation through the varying member and base directions,
-while preserving the whole matching parameter. Any distinct raw evaluation
-presentation used by that construction needs its own whole comparison.
+Earlier package pins retain their exact scope.
+
+The [varying-member continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#member-indexed-question-and-extension-families)
+now constructs whole question, extension and representable families using
+the existing inclusion, question-family action and constant Sigma base change.
+The selected presentation exports the whole constant-base law. Reindexing
+the original inclusion and using staged representation identity comparisons
+retains its literal components, whole Hom action and arbitrary-arrow action.
+No strictness of that inclusion or of a matching map is assumed. An earlier
+path-retargeted term formed but did not retain the original component by
+runtime conversion; it remains unselected.
+
+The component consumer required one normal identity projection join at
+`tapp1`: an opposite-source identity can already have projected to its base
+identity. The generic unit theorem already proves the equality after staging.
+This local join changes no Op variance/higher-action contract. Its nine new
+critical-pair instances are identical in the focused and broad warning
+comparisons; overlap controls check existing paths and retain the observed
+runtime distinctions. The source-position and strict LHS audits pass.
+
+The current package is `emdash2/tmp/probes/api_member_identity_candidate/`,
+core SHA-256
+`b9cc2726d8614762f85d33a8f64adaaa78668518aa4ada4866abf82e861d7c10`.
+The current combined review passes 493 positive/134 negative assertions over
+245 inputs. Its 49.362s run retains the measured 3 GiB/180s broad profile;
+focused checks pass at 2 GiB/90s. The linked investigation records exact
+receipts, the 247-input union and the remaining limitations. No production
+source changes in this tranche.
+
+Next construct and qualify the whole canonical pullback-arrow cone and its
+comparison with the original arrow, then lift retained factorization and the
+glue/silent calculation through varying members and base arrows. Preserve
+the whole matching parameter and compare any distinct raw evaluation
+presentation explicitly. A separate FibCov base/unit diagnostic establishes
+runtime nonconversion only; it neither excludes a derived equality path nor
+supplies a unit-coherence assumption.
+
 Then qualify complete rho action and the explicit assembly profile before
 restoring the three assembly stages. The relative predicate remains
 unselected as a sufficient generic assembler premise; no blanket rho
@@ -530,7 +563,7 @@ and runner history below is retained evidence, not a live-job instruction.
 | `API-04V` | staged strictness leak corrected in prototype; combined review qualified | [Vertical-fold audit](EMDASH_ACTION_PROFILE_VERTICAL_FOLD_AUDIT.md): three raw folds replaced by five guarded profile clauses; four interchange/EH proofs require actual profiles. Staged negatives, unit/terminal/ambient controls and 423 positive/111 negative combined matching/Gray/Gamma/H/Hom assertions pass. Earlier native/CAS/all-path evidence does not qualify the changed core; affected-closure requalification and production promotion remain required. |
 | `API-04P` | three postcomposition accumulators restricted in prototype; selected higher-rung audit continued in API-04T | [Inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) records the staged raw-F reproducer, its rejection after restriction, two retained identity-family clauses and three strict-view clauses. Final matching/Gray/Gamma/H/Hom/inverse review passes 452 positive/119 negative assertions. The two legacy telescope accumulation clauses and their modern projection orders are qualified by API-04T; this is not a completed global-cut migration. |
 | `API-04T` | selected post/pre telescope audit qualified in prototype | [Telescope continuation](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md#telescope-continuation-api-04t): two legacy accumulators retain identity-family instances; general modern paths require profiles of the actual telescopes. Unchanged staged controls fail as intended; projection/unit controls and the 468-positive/125-negative combined review pass. No unproved profile of F’s hom action or production promotion is claimed. |
-| `API-05` | member/matching prerequisites and inverse Hom-action comparisons qualified; complete rho/assembler premise open | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons and checks the actual matching producer. The [whole member projection](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#whole-fibcov-member-projection) qualifies one constructor comparison and actual canonical readouts on a further core, with 476 positive/131 negative combined assertions. Complete member/base coherence, composition/unit and inverse-assembly sufficiency, and full rho assembly remain open. |
+| `API-05` | member-indexed families, retained inclusion and inverse Hom-action comparisons qualified; complete rho/assembler premise open | The [displayed investigation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md) preserves eight prefix signatures. The [matching candidate](EMDASH_ACTION_PROFILE_MATCHING_ACTION_FEASIBILITY.md) passes 269 positive/77 negative interaction assertions. The [relative-profile review](EMDASH_ACTION_PROFILE_RELATIVE_PROFILE_FEASIBILITY.md) identifies the stronger identity boundary and checks complete-action identity/path/selected-inverse producers without strict endpoint premises. The [inverse-action review](EMDASH_ACTION_PROFILE_INVERSE_ACTION_FEASIBILITY.md) derives both supplied inverse choices’ component/whole-Hom/next-Hom comparisons. The [member-family continuation](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#member-indexed-question-and-extension-families) retains the original inclusion's higher action and passes 493 positive/134 negative combined assertions. Complete pullback/factorization coherence in the member/base directions, a sufficient explicit assembly profile, and full rho assembly remain open. |
 | `API-06` | selected Gray closure/D2 prototype qualified; production and remaining directed consumers pending | Full graph/profile, walking-square/interchanger, right-closure and recursive decoder reviewers pass. The D2 target side and interchanger recover judgmentally through the general classified graph, retaining next Hom action and main's separate represented-comma derivation. The combined native/cubical environment passes. Remaining directed/simplex consumers and promotion gates remain required. |
 | `API-07` | all 22 inherited owners/17 reviewers qualified in prototype; promotion pending | 147 positive/six negative assertions pass independently and in the wider combined environment. Native dimensions 0–2 and conditional dimension 3 retain the source's exact readback/groupoidality boundary. Registry, production documentation and final integration gates remain pending. |
 | `API-08` | pending; audit starts with API-01 | Affected TypeScript transfer signatures/rules/pins, explicit Core/trust boundary and focused conformance. |

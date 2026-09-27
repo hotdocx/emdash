@@ -830,11 +830,28 @@ passes 476 positive/131 negative assertions over 233 inputs, with unchanged
 warning inventories. Its new core and exact receipts are recorded in the
 linked investigation; older native/CAS/all-path pins are not upgraded.
 
-The next package is `tmp/probes/api_fibcov_member_candidate/`. Whole
-retained-factorization and glue/silent coherence in the varying member/base
-directions, comparisons to any distinct raw evaluation presentations, the
-actual rho profile and all three inverse-assembly stages remain required.
-No production source changes in this prerequisite tranche.
+That prerequisite package is `tmp/probes/api_fibcov_member_candidate/`.
+The [following member-family candidate](EMDASH_ACTION_PROFILE_DISPLAYED_ASSEMBLY_INVESTIGATION.md#member-indexed-question-and-extension-families)
+uses `tmp/probes/api_member_identity_candidate/`. Whole question and
+extension/representable families now form through existing action and
+constant Sigma base change. The selected target comparison preserves the
+original inclusion's literal components, whole Hom and arbitrary-arrow
+action. No profile of the inclusion or matching map is assumed.
+
+One normal identity projection join repairs the opposite-source component
+readout, with a pre-existing staged proof of its equality. It changes no
+Op variance/higher-action contract. Focused and broad warning comparisons
+have the same nine added overlap instances; checked normality/profile paths
+and runtime-distinction controls classify them. The combined review passes
+493 positive/134 negative assertions over 245 inputs. Its exact core,
+receipts and 247-input successful union are pinned in the linked report.
+
+The whole canonical pullback-arrow cone, retained factorization and
+glue/silent coherence in varying member/base directions remain required,
+followed by actual rho profiles and all three inverse-assembly stages.
+The separate base/unit observation establishes runtime nonconversion only,
+not the absence of an equality path. Production source remains unchanged;
+older native/CAS/all-path evidence still requires affected-core requalification.
 
 ### New Main Consumers Over The Corrected Candidate
 

@@ -2,15 +2,15 @@
 
 Date: 2026-09-26
 
-Status: retained-member point and matching-action prerequisites pass; a whole
-FibCov member-projection comparison is qualified in a further candidate;
+Status: retained-member point, matching action, whole member projection and
+member-indexed question/extension families pass in isolated candidates;
 complete displayed/rho profiles and inverse assembly remain open
 
 Owner: [living plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), row `API-05`.
 Production mathematics remains at checkpoint `f0f327d6`. This investigation
 began in `emdash2/tmp/probes/api_ordinary_profile_minimal/`; the later
-member-projection continuation below uses a separate corrected core. Neither
-restores the commented displayed half of the pointwise-equivalence owner.
+member continuations below use separate corrected cores. None restores the
+commented displayed half of the pointwise-equivalence owner.
 
 ## Decision And Actual Consumer
 
@@ -385,3 +385,138 @@ That complete construction must supply the actual rho action before the
 explicit assembly profile can be selected and the three assembly stages
 restored. The current result is a member-projection prerequisite, not a
 rho admission or completed locality migration.
+
+## Member-Indexed Question And Extension Families
+
+The next candidate constructs a whole functor from the actual sieve-extension
+member category at `V` to the total question category. It first applies the
+original inclusion's fibre functor, then the question classifier's existing
+whole action. This gives a functor to
+`Path_cat(DirectCoverQuestionData K T V)`, with the original pulled question
+as its object value. No set-truncation assumption on question data is used.
+
+Two existing total-category presentations give the required object pair
+`(V, pulled_question)`. The selected presentation uses
+`sigma_pullback_total_func` along the constant functor from the terminal
+category to `Op K`, after pairing the parameter with the terminal object.
+Its existing whole base-projection comparison proves that the resulting
+functor has constant base `V`. A path-core inclusion also recovers the same
+objects, but a control rejects typed reflexivity between these two whole
+presentations. Their object agreement is not treated as a whole equality.
+The deferred arrow action of `sigma_intro_tapp0_func` is not supplied here.
+
+Reindexing the existing extension and representable functors gives whole
+contravariant families over the member category. The base comparison,
+existing object-level Op/composition computation and Yoneda give a whole
+path from the representable family to the constant family at `y(V)`.
+The original inclusion transformation is reindexed through its existing
+precomposition owner, preserving the given data.
+
+### Retained Inclusion And The Normal Identity Join
+
+The actual inclusion component exposes a projection-order gap. In an
+opposite source, `id_(Op A)(x)` becomes `id_A(x)` before `tapp1` sees the
+generic identity pattern. A generic theorem staged before specialization
+already proves the normal-unit equality, while direct conversion remains
+unavailable on the preceding core. The no-join control passes at
+`20260927T000532Z-d41c22d1b1b3490c862057b37f97498b`.
+
+The new full-file candidate adds one rule immediately after the generic
+`tapp1` identity clause, recognizing the actual `Op A` source and its
+projected `id_A(x)`. This joins that retained normal identity; it supplies
+no composition or naturality profile and changes no Op variance or higher
+action. Its explicit source discriminator has a local LHS audit annotation.
+
+Retargeting the inclusion with `path_to_hom` of the representable-family
+path forms a term, but fails the literal component-retention assertion
+even after that identity join
+(`20260927T000806Z-e6f47f8ebae2494abda117d9e617e574`). It remains an
+unselected alternative. The selected construction instead composes staged
+identity comparisons between the existing associativity and object-level
+Op/composition presentations. These helpers are definitions using existing
+computation, with no new rule or primitive action on arbitrary transfors.
+
+The resulting `api_member_inclusion_fixed_target` has the original
+pulled-sieve inclusion as its literal component. Its whole `tapp1_func`
+and arbitrary-arrow `tapp1_fapp0` agree with the original reindexed
+inclusion. The target comparison's components are identities. Thus the
+new presentation retains the original inclusion's higher action; it does
+not replace the inclusion or infer a strictness profile for it. Wrong-arrow
+and unrelated-presentation controls remain negative.
+
+### Family And Identity Qualification
+
+Eight support modules contain 24 definitions, including the unselected
+path-retargeted construction and the staged generic unit theorem. None of
+those modules adds a primitive, rewrite or unifier. The only new core rule
+relative to the preceding member candidate is the normal identity join.
+
+| Current check | Receipt | Seconds / maximum child RSS KiB |
+| --- | --- | ---: |
+| Selected inclusion components, with question observations | `20260927T001131Z-cff053f0d6374b24915119e377574013` | 8.926 / 507,340 |
+| Focused families, components and higher action | `20260927T002108Z-eb102917282141d98a9eb31c2a98c9cd` | 9.344 / 511,128 |
+| Combined member/matching/inverse/Gray/Gamma/H/Hom review | `20260927T002324Z-12af2f7eab0a49b6ad5f7de79d3ee347` | 49.362 / 2,518,632 |
+| Identity-join overlap controls | `20260927T002955Z-ddeb96b3b68c49e6a22ee25282a38b2d` | 12.054 / 457,384 |
+| Separate next-construction base/unit observation | `20260927T003057Z-1fc1d3b878ab4aa5837d8b2f799926c2` | 10.102 / 457,052 |
+
+The focused review has 17 positive/3 negative assertions. The combined
+review has **493 positive/134 negative assertions over 245 inputs**; the
+overlap control has 13 positive/8 negative assertions, including the five
+positive/one negative unit controls it imports. The separate next-construction
+observation checks formation and runtime nonconversion only. These counts
+are overlapping closures and must not be added together.
+
+Focused checks use 2 GiB/90s. The combined review retains the measured
+3 GiB/180s profile of its preceding broad closure. All use warnings,
+subject reduction, serial execution, `OCAMLRUNPARAM=o=20,v=1024` and the
+existing file/core/no-swap guards. All packages are source-only.
+
+The focused warning comparison changes 962/150 to 971/150; the broad
+comparison changes 1,127/162 to 1,136/162. Both add exactly the same nine
+complete critical-pair participant instances, with no removals or pattern
+delta. Source locations mapped across the insertion agree as well: six
+new warnings at the identity join and three at the existing profile
+accumulators. Warning parsing reports no issues.
+
+The added overlaps cover one represented-source action, three identity
+presentations (Path, Terminal and Product), two opposite-source
+presentations (Terminal and Product), and three profile accumulators
+(lax precomposition, strict precomposition and strict postcomposition).
+The focused overlap reviewer checks the existing normality/profile paths
+and both rigid results of the represented-source branch. Several runtime
+branches remain distinct, with explicit negative controls. This is scoped
+overlap classification, not a confluence certificate. The strict LHS audit
+has zero unreviewed candidates and 65 annotated slots across 42 clauses.
+
+The current package is `emdash2/tmp/probes/api_member_identity_candidate/`.
+Core SHA-256:
+`b9cc2726d8614762f85d33a8f64adaaa78668518aa4ada4866abf82e861d7c10`.
+The profile owner remains
+`f670814a83a508bd8a77a4000c7ab04690bbfc25978d106bb1d761ce6723a69c`.
+The current manifest is
+`emdash2/tmp/probes/api_member_identity_current_qualification_manifest.json`,
+SHA-256:
+`3197623ca8d5f768f26327beb77660f7b2d0cdaa798850ef69b65a0de6809cb3`.
+It binds the five successful receipts, 247 distinct current inputs, support
+definitions, warning/audit records and the earlier failed approaches.
+Exact emitted sources remain in the immutable receipt input store; the
+authoring helpers are not a finished clean-checkout integration recipe.
+
+### Remaining Pullback And Assembly Boundary
+
+The whole question and extension families are prerequisites for a varying
+pullback construction. The complete canonical pullback-arrow cone, its
+comparison with the original `sigma_transport_arrow`, and the retained
+factorization across members and base arrows remain open. The existing
+supplied factorization path at each particular member is not, by itself,
+a whole comparison in that variable.
+
+The next-construction diagnostic forms the FibCov base-action cell at
+`(p, id_x)` and finds it runtime-distinct from identity. This does not show
+that an equality path is absent and does not authorize a new generic
+unit-coherence axiom. Qualify the actual cone and its comparison using the
+existing action owners before applying the glue/silent argument to it.
+Then derive the actual rho profiles and select a sufficient explicit
+assembly premise. All three assembly stages remain unrestored. Production
+source is unchanged, and earlier native/CAS/all-path receipts retain their
+earlier core pins until their affected closures are requalified.
