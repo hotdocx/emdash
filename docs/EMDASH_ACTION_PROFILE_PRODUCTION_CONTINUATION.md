@@ -1166,3 +1166,69 @@ source paths before resuming the complete corpus. Driver:
 `logs/api-all-production-reviewers-resume5.log`; tool session `92653`.
 Catalog and inventory-only health are refreshed. All remaining final gates
 and the semantic checkpoint remain required.
+
+## Pi Reviewer Local Eta Setting
+
+The fifth continuation stopped after 515 successes at `examples/pi_funext.lp`,
+receipt `20260927T163422Z-0f83f60a3fc349aa9b8ef9671e2af694`. Its family
+comparison requires `B` to agree with `λ x, B x`; as in the earlier groupoid
+reviewer, the imported compiled core does not enable local LF eta.
+
+The full-file candidate adds only the explicit `eta_equality` flag and its
+explanation. All ten positive assertions and the runtime noncollapse control
+remain unchanged. It passes at 2 GiB/90s in 0.421s
+(`20260927T163515Z-9a4c3177383f4f0f8ed17aa16c7af1da`); the installed source
+passes in 0.391s (`20260927T163544Z-0e661fdee8464e72873604e3fbe0226d`).
+Exact hashes: `api_pi_funext_eta_installation.json`. The sixth continuation
+verifies all 515 prior successes before resuming, through
+`api_resume_production_reviewers6.py`; state:
+`api_all_production_reviewer_resume6_results.json`; log:
+`logs/api-all-production-reviewers-resume6.log`; tool session `13215`.
+The complete path-cubical reviewer group has passed; no library source changed.
+
+## Whiskering Reviewer Alignment
+
+The sixth continuation stopped after 560 successes at
+`examples/transfor_whiskering.lp`, receipt
+`20260927T163735Z-289b0c54194e4d31aa6f5f67363c72e9`. Its isomorphism tests
+still referenced retired unqualified whiskering mappers. The current owner
+already exposes `one_cat_iso_evidence_prewhisker` and its postcomposition
+counterpart. The reviewer now supplies their ordinary-target witness and
+uses those existing operations. All four selected forward/inverse arrow
+conclusions remain the same. The two generic transformation-component
+computations remain unchanged and unqualified.
+
+The full-file candidate passes at 2 GiB/90s in 0.613s
+(`20260927T163842Z-325d000ac6a8412f99502327d7f3d6ab`); installed source
+passes in 0.636s (`20260927T163904Z-fccf1224b13645508aa428db2c0598c0`).
+Hashes: `api_whiskering_reviewer_installation.json`. No library owner,
+rule, assumption or inverse choice changed. The seventh continuation verifies
+all 560 prior successes and resumes through
+`api_resume_production_reviewers7.py`; state:
+`api_all_production_reviewer_resume7_results.json`; log:
+`logs/api-all-production-reviewers-resume7.log`; tool session `19994`.
+
+## Complete Production Reviewer Sweep
+
+The seventh continuation finishes successfully: **596/596 registered reviewers
+pass**, including all 24 cold-recipe reviewers compiled with nonempty outputs.
+Final state: `api_all_production_reviewer_resume7_results.json`; terminal tool
+session `19994` exits zero. Final receipt:
+`20260927T164043Z-7e0b0d55b4c343d6b69778bd1fb0333b`. Every current registered
+source/package input matches its staged final source hash. The predecessor
+failures and exact-input continuation verifications remain preserved.
+
+The final static audit covers 244 changed/new registered LP files relative to
+pinned main, with zero unreviewed slots and 64 annotated slots
+(`api_complete_reviewer_lhs_audit.json`). All changes since the preceding
+235-file audit are reviewer changes; no library source changed. The catalog
+is current, with 2,432 central diagnostic assertions and zero unclassified
+checks. Inventory-only health is refreshed; checked health remains pending.
+
+Thirty-three measured reviewer resource increases are registered, bringing
+the exact override total to 98. The [resource qualification record](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md#complete-reviewer-sweep-and-measured-production-profiles)
+records every target, bound, time and successful receipt. Registry defaults
+and membership are unchanged. All 58 focused runner/profile tests pass after
+updating the exact GC expectation for the three newly profiled six-term
+reviewers. Full cold recipes/formal CI, fresh production CAS replay, checked
+health and the clean semantic checkpoint remain the final acceptance work.

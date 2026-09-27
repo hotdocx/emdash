@@ -358,3 +358,65 @@ the override count to 65 while retaining 2 GiB/90s defaults. The
 [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md#adjacent-window-diagnosis-and-qualified-adaptation)
 records the failed controls, receipts, installation and the subsequent full
 reviewer sweep. Complete cold-recipe/full-CI qualification remains required.
+
+## Complete Reviewer Sweep And Measured Production Profiles
+
+All 596 registered reviewers pass in the complete production-source sweep,
+including compilation of the 24 cold-recipe reviewers. Seven exact-input
+continuations preserve the preceding successes and failures; final state:
+`api_all_production_reviewer_resume7_results.json`. Every production source
+hash still matches its final staged counterpart. This sweep uses qualified
+compiled library parents and does not replace the complete cold recipes.
+
+The sweep measures 33 further target-specific memory increases: 22 reviewers
+at 3 GiB/90s, seven at 4 GiB/90s and four at 6 GiB/90s. These are observed
+passing bounds after allocation failures, not minimum requirements. All use
+`o=20,v=1024`, warnings, subject reduction and the existing serial/file/core/
+no-swap guards. The registry now has 98 exact-target overrides; its normal
+2 GiB/90s profile and all target sets remain unchanged. The exact registry
+delta is only these 33 mappings. Installation manifest:
+`api_reviewer_profile_installation.json`.
+
+| Reviewer (`examples/`) | Memory (GiB) | Seconds | Successful receipt |
+| --- | ---: | ---: | --- |
+| `homology_bounded_generator.lp` | 3 | 11.652 | `20260927T151125Z-91385c3ad5b649e595b07e7e8306abe9` |
+| `homology_bounded_generator_arrows.lp` | 3 | 14.021 | `20260927T151151Z-39b6ed998d3a4e64aae8e69079769b0e` |
+| `homology_window_extension.lp` | 3 | 12.012 | `20260927T151315Z-642cd64745df4929a66a0779454eeace` |
+| `freyd_adjunction_model_connecting_observation.lp` | 3 | 17.845 | `20260927T153443Z-21d58bea74554c7a9d7a49ad7cccf737` |
+| `freyd_adjunction_model_whole_exactness.lp` | 4 | 22.708 | `20260927T153548Z-73811665e6b241dcaca991d22414093c` |
+| `freyd_adjunction_model_window.lp` | 4 | 19.918 | `20260927T153647Z-5e0f7f5108cb4980b7bc1036287eece7` |
+| `freyd_native_column_comparisons.lp` | 3 | 12.965 | `20260927T153731Z-e976109f74894c308baa79df45d0fe61` |
+| `freyd_native_column_homology_paths.lp` | 3 | 14.202 | `20260927T153758Z-df9af6dcb4f942f687f699612f2c5110` |
+| `freyd_native_connecting_endpoints.lp` | 3 | 16.732 | `20260927T153826Z-67a2213158444511ba03a2aa5ef9f5bb` |
+| `freyd_native_diagram_exactness.lp` | 3 | 12.534 | `20260927T153857Z-3fc76c20ecce428397e8c79749cfecb2` |
+| `freyd_native_middle_column_comparisons.lp` | 3 | 12.378 | `20260927T153937Z-b00b8c77db1b4132a6a5efff53ee67c9` |
+| `freyd_native_middle_pair_exactness.lp` | 4 | 22.710 | `20260927T154026Z-e83ada19fd31465a91fda24f179569f0` |
+| `freyd_native_middle_public_exactness.lp` | 4 | 18.733 | `20260927T154125Z-54bcd6e13d3c44439e394ef7c9ba334d` |
+| `freyd_native_snake_exactness.lp` | 4 | 19.407 | `20260927T154226Z-a9133f3b76634897af0a5097b225ba26` |
+| `freyd_native_snake_observations.lp` | 3 | 14.542 | `20260927T154307Z-d0a0f7935f6242b5a1f1ea68c25e33dd` |
+| `freyd_native_source_pair_exactness.lp` | 6 | 32.177 | `20260927T154446Z-61102a36b86d456aa0fde5e797e0ee0d` |
+| `freyd_native_source_public_exactness.lp` | 6 | 24.101 | `20260927T154624Z-326cbbabf8a644e09f6f8d52d4659795` |
+| `freyd_native_target_pair_exactness.lp` | 6 | 31.393 | `20260927T154752Z-99d1761f18d64324bde43c71742ff49b` |
+| `freyd_native_target_public_exactness.lp` | 6 | 24.090 | `20260927T154929Z-d5a75e1ee4004459818769596d02f25d` |
+| `freyd_native_whole_exactness.lp` | 4 | 20.554 | `20260927T155030Z-e301ef95a9594aa880a1e95bb3c7ea1e` |
+| `freyd_raw_native_window.lp` | 4 | 19.991 | `20260927T155130Z-14ee04e5e99946d78c6e57cab5f96822` |
+| `one_cat_connecting_source_exactness.lp` | 3 | 13.629 | `20260927T161208Z-d62454472e574b58b288c961203d2201` |
+| `one_cat_connecting_target_exactness.lp` | 3 | 13.626 | `20260927T161236Z-f2586e8c0cc64a2ca704cc540aba10fa` |
+| `one_cat_middle_homology_exactness.lp` | 3 | 13.646 | `20260927T162029Z-0d6029a1d7e642b1bcf4242bf2627d1a` |
+| `one_cat_native_exact_comparison_kernels.lp` | 3 | 11.657 | `20260927T162137Z-19092844c55f4cf99c90061253adfaae` |
+| `one_cat_native_homology_window_exactness.lp` | 3 | 16.107 | `20260927T162257Z-b6901f0f52db41e1870ced869e9c0263` |
+| `one_cat_native_snake_six_term_data.lp` | 3 | 14.369 | `20260927T162625Z-a401ebd674d244549f4bfeb84e61920b` |
+| `one_cat_native_snake_six_term_inputs.lp` | 3 | 15.532 | `20260927T162654Z-b50c8760a69c43cc9439b1926b1f6245` |
+| `one_cat_native_snake_six_term_result.lp` | 3 | 13.431 | `20260927T162734Z-d20aaf15a278493f9806cb1874636df7` |
+| `one_cat_native_window_point_exactness.lp` | 3 | 16.314 | `20260927T162851Z-904f3ffc60a54f45b805fdb153f430a0` |
+| `one_cat_native_window_snake_connecting_comparison.lp` | 3 | 17.078 | `20260927T162923Z-443df5c3f0e44e199ce6b1050e72da66` |
+| `one_cat_native_window_snake_right_homology.lp` | 3 | 14.292 | `20260927T163031Z-ec03ab150a6544329adcc5c6ce97946b` |
+| `one_cat_native_window_snake_surrounding_maps.lp` | 3 | 18.021 | `20260927T163124Z-88de414ac99947b48d988ebcb68a2987` |
+
+The focused registry/metrics/staged-adapter/native-profile tests pass all
+58 cases (`logs/api-reviewer-profile-tooling-qualified.log`). Their original
+attempt correctly caught a hard-coded GC expectation for the three newly
+profiled six-term reviewers; the expectation now names those exact measured
+overrides. No checker-runner behavior or formal source changed in this step.
+The preceding immutable receipts retain their original configuration snapshot;
+the next complete formal CI run qualifies the registered configuration.
