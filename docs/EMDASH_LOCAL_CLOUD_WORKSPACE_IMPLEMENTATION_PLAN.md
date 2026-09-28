@@ -296,3 +296,14 @@ storage-failure and restart controls. The complete controller regression before
 the final additive controls passed 69 tests with one existing root-only skip.
 The library is not yet wired to HTTP, real Codex execution or MCP. LC-1B now
 adds the durable gateway receipt and authorization/dispatch contract.
+
+LC-1B checkpoint: GetPaidX `aa5a6c99` adds the dedicated SQL execution
+receipt and start/read/cancel API contract. Qualification includes 73 distinct
+focused/adjacent gateway tests, 19 controller tests, typecheck/lint and a real
+isolated PostGIS replay of uniqueness/optimistic updates/terminal retention.
+The disposable database was removed after the check. A pre-existing ignored
+session-recovery fixture was reviewed and tracked so fresh-checkout inventory
+checks work. Source catalog is now `2026-09-28` with 270 visible endpoints;
+the deployed catalog and 54-tool MCP surface are unchanged. LC-1C next wires
+the controller HTTP routes and actual Codex worker; no end-to-end or hosted
+execution is claimed by these two component checkpoints.
