@@ -287,3 +287,12 @@ The first bounded slice is the LC-1 execution protocol/controller supervisor,
 followed by the durable gateway receipt/API/MCP integration. Baseline and
 validation evidence live with GetPaidX's plan. No shared Docker stack,
 background scheduler, public endpoint or cloud deployment has been changed.
+
+LC-1A checkpoint: GetPaidX `2ee2344b` adds the inert execution protocol and
+durable controller supervisor as an independently tested library. All 17
+focused tests, controller typecheck and changed-file lint pass, including
+duplicate launch, session binding, bounded output, deadlines, cancellation,
+storage-failure and restart controls. The complete controller regression before
+the final additive controls passed 69 tests with one existing root-only skip.
+The library is not yet wired to HTTP, real Codex execution or MCP. LC-1B now
+adds the durable gateway receipt and authorization/dispatch contract.
