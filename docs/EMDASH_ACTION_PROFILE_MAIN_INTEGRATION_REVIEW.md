@@ -2,7 +2,7 @@
 
 Date: 2026-09-27 (America/Toronto)
 
-Status: review and book/artifact qualification complete; local fast-forward pending
+Status: complete; book/artifacts refreshed and local main fast-forward verified
 
 Owner: [completed integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 Qualified implementation: `8ea6c86bda894b32a33db13b52ba51b92fd701f5`.
@@ -123,6 +123,8 @@ At the completed integration tip `ba7f7773`, the only changed-path overlap is
 `README.md` and `docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`.
 `git merge-tree --write-tree` succeeds without conflicts, producing trial
 tree `432e6bd75559518d61169b6a3d982f52ccd2d530` without changing either branch.
+The trial also succeeds after the book/documentation checkpoint `4d6cd102`,
+producing `f3fb933d38af6261404fdf877a50192b7671b04e`. The plugin tip is unchanged.
 
 This supports a small textual integration effort. It does not qualify the
 combined program: the plugin adds an MCP SDK dependency and lockfile changes,
@@ -134,7 +136,25 @@ affected package/runtime checks. No Lambdapi source overlap was found.
 ## Local Integration Receipt
 
 Book gates, visual review, promotion and documentation checks are complete.
-The documentation/artifact checkpoint and fast-forward remain pending.
-Main is a verified ancestor of the integration branch; both worktrees were
-clean before this follow-up. All 67 worktrees had no tracked changes. A final
-clean-state and ancestry check precedes `git merge --ff-only`.
+Commit `4d6cd1021b4ec239b2b436f062105c106338a523` contains exactly the nineteen
+reviewed documentation/artifact paths. The staged manifest is
+`emdash2/tmp/probes/api_main_book_checkpoint_manifest.json`; all four
+promoted artifacts match their owning generated/authored sources byte for byte.
+
+After verifying main ancestry, both clean worktrees and unchanged donor/plugin
+tips, the following command completed successfully in `/home/user1/emdash1`:
+
+```bash
+git merge --ff-only --no-stat goal/action-profile-integration-v3.2
+```
+
+Main advanced from `37ce19d5c727f8d1c5579445981a8f4f6d3f32d4` to
+`4d6cd1021b4ec239b2b436f062105c106338a523`. Git recorded a fast-forward in its
+reflog, and the main checkout was clean afterward. This receipt is a subsequent
+documentation-only checkpoint. Mathematical/TypeScript implementation remains
+the qualified `8ea6c86b` content, with its original validation scope carried
+forward. No new aggregate was needed for moving the branch reference.
+
+No push, remote publication, plugin merge, history rewrite or worktree removal
+was performed. The donor remains `114dc19f`; the plugin remains `50ccee2f`.
+The dedicated worktrees remain available for their subsequent work.

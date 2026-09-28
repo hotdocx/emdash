@@ -4,7 +4,7 @@ Date: 2026-09-25 (America/Toronto; launched 2026-09-26 UTC)
 
 Plan-ID: `ACTION-PROFILE-INTEGRATION-V3.2`
 
-Status: complete; qualified local integration checkpoint `8ea6c86b` with clean handoff
+Status: complete; qualified implementation `8ea6c86b`, book review and local main fast-forward `4d6cd102`
 
 Depends-On: current Lambdapi owners and SOP; completed source-branch
 migrations pinned below; native universality and categorical assembly
