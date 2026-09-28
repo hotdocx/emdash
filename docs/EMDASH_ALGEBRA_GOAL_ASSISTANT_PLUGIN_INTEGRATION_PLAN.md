@@ -2,7 +2,7 @@
 
 Date: 2026-09-28 UTC
 
-Status: qualified for local integration; final merge/checkpoint pending
+Status: complete; locally integrated into main at merge checkpoint `5da39dcf`
 
 Main baseline: `1b9cb02ac161458319d91fc6c53606ebd744c84d`.
 Donor: `50ccee2f8d15e6a62f5db8748805e03ec485581f` on
@@ -50,7 +50,7 @@ reinstallation, history rewrite or worktree cleanup is selected.
 | Combined TypeScript | Complete `check:ts`, with any failures diagnosed and repaired under the user's validation direction | Completed: 2,881 pass, two inherited article-pin failures, 88 skips; 15 owning tests pass after repair; user forbids another aggregate |
 | Package/tooling/print | Packed package checks, script/registry tooling and affected renderer checks; preserve existing dependency versions | Tooling and package gates pass; final package replay after CLI repair passes; both article/book renderers pass |
 | Documents and handoff | Update this ledger and current handoff, inspect exact staged diff and artifact/source identities | Qualification, failure/fix scope and aggregate waiver recorded; document checks and identity audit pass |
-| Local main integration | Validated merge checkpoint, clean main ancestry check, fast-forward and final clean verification | Pending |
+| Local main integration | Validated merge checkpoint, clean main ancestry check, fast-forward and final clean verification | Merge `5da39dcf` retains both parents; local main fast-forward, frozen bootstrap and runtime startup verified |
 
 Logs live in `emdash2/logs/plugin-integration/`; generated runtime lives in
 ignored `plugins/emdash/dist/`. Current-source input hashes and test results
@@ -200,5 +200,31 @@ The user explicitly permits the fixes and directs: “ensure you don't redo
 another full aggregate checks”. Accordingly, the acceptance evidence is the
 completed 2,971-test run plus the focused repair checks, with its two original
 failures preserved. No second full aggregate follows the article-pin repair.
-All scoped functionality is qualified; local Git integration is the remaining
-operation. Main must still be clean at the pinned baseline before fast-forward.
+All scoped functionality is qualified under that explicit validation boundary.
+
+## Local Integration Receipt
+
+Merge checkpoint `5da39dcf56f899c5238f561ba459698725e26609` retains main
+`1b9cb02ac161458319d91fc6c53606ebd744c84d` and donor
+`50ccee2f8d15e6a62f5db8748805e03ec485581f` as its two parents. All 39 committed
+paths match the reviewed staging manifest
+`emdash2/logs/plugin-integration/checkpoint-manifest.json`; no unrelated or
+unstaged files were included. No Lambdapi/book source or PDF changed.
+
+After verifying clean main at the pinned baseline and its ancestry, local
+main was advanced with:
+
+```bash
+git merge --ff-only --no-stat integration/algebra-goal-assistant-plugin-v3.2
+```
+
+Main's frozen bootstrap and workspace contract pass with its own dependency
+links. A fresh portable-runtime build on main matches all 83 qualified source
+inputs and both bundle hashes above. The actual main `scripts/emdash goal
+capabilities` launcher works from `/tmp` and reports all six commands.
+These are setup/build/startup operations, not a repeated aggregate. Main and
+the integration worktree are clean at the merge checkpoint.
+
+This final receipt is a documentation-only successor checkpoint. The donor
+branch remains unchanged, and all worktrees remain available. No push,
+publication, cloud action, installed-plugin update or cleanup was performed.
