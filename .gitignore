@@ -1,6 +1,7 @@
 node_modules/
 dist/
 dist-deploy/
+packages/emdash/dist-scientific-workspace/
 .DS_Store
 .env.local
 .convex/

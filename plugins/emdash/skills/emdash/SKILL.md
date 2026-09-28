@@ -50,17 +50,11 @@ mathematical result. This does not satisfy a separately requested checked-proof
 requirement, and standalone TypeScript reduction of the complex projections is
 not newly qualified by it.
 
-Keep the two actions distinct: `nativeImageOfOne` is the native image of the
-unit vector, whereas `goal_reuse_image` applies the internal differential to a
-supplied symbolic rank-one vector `a`. For the default column `(-x, 1, -1)`,
-the mathematical action is `a ↦ (-x*a, a, -a)`; its value at `1` is the column.
-Do not report the column as the value on an arbitrary formal argument, or claim
-the internal Core expression was reduced to those coordinates.
-
-The current internal interpretation supports integer polynomials in a supplied
-commutative ring. Native rational computation/construction remains useful when
-that interpretation rejects a coefficient. Do not silently clear denominators,
-replace the input, or recompute a different witness to make internalization pass.
+Read [the shared mathematical contract](references/mathematical-contract.md)
+for the distinction between the native image at one and internal action on a
+supplied argument, the current integer-polynomial interpretation, and precise
+assumption/plot qualification. Both local and cloud profiles package that
+same guidance.
 
 ## Portable command and TypeScript authoring
 

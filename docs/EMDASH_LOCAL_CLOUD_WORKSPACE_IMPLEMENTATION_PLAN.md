@@ -370,3 +370,40 @@ instructions in the dedicated Arrowgram branch. Template generation should
 copy the built portable project through an explicit artifact rather than
 importing from a sibling checkout at runtime. Scientific browser controls
 and their authorized gateway bridge remain LC-4.
+
+## LC-3 Qualification And Checkpoints
+
+The portable scientific runtime is a 519.2 KiB standalone ES module over the
+existing owners, with a generated declaration closure and source/bundle hash
+receipt. The copied consumer passes on Node 24.11.1: exact relation, native
+complex/action, retained reuse, alternate valid coefficients, stale/invalid
+coefficient rejection, nonmembership, optional one-assumption Core construction,
+plot and an authored extra operation without a new platform tool. Declaration
+checks retain the exact-input type boundary. Building from an unrelated cwd
+also passes after making declaration type roots explicit.
+
+GetPaidX checkpoint `a3ffde10` adds the generated `emdash_scientific` template
+and actual-controller replay on Node 22.23.2 / UID 400124. Compute, reuse and
+internal modes agree with the local mathematical result. The portable runtime
+SHA-256 is `bb936ec29e6937b416e03c074d473fdcaa652d24110e534257ede44433569691`.
+The template has nine declared runtime files / 551,458 bytes, no dependency
+installation, and complete generated source/type/license byte parity.
+Its initial preview is static-only pending LC-4.
+
+The `emdash-cloud` profile is skills-only. Both Emdash skill packages copy one
+shared mathematical guidance source. Codex 0.158.0 installs both profiles from
+this worktree into an isolated test cache; manifest, skill and guidance bytes
+match source, and cloud has no MCP-server declaration. The copied installed
+local plugin passes actual SDK/CLI compute, plot, internal reuse, restart and
+stale/root controls. The user's active plugin configuration is unchanged.
+Arrowgram checkpoint `96fa500` updates both branded GetPaidX skill sources to
+the new immediate/program workflows, with validation and isolated cache parity;
+their OAuth configurations remain unchanged.
+
+The complete `check:ts` gate passes: 481 suites / 2,971 tests, 2,883 passes,
+88 existing skips and zero failures, in 2,258.472 seconds. Workspace checks,
+registration, typecheck and lint pass. The slow aggregate was observed in the
+existing Freyd long-exact serialization/encoding and reviewer tests; its ordered
+progress output did not imply a stalled cancellation worker. No mathematical
+owner or evidence pin was changed. Do not rerun this unchanged boundary for
+subsequent static UI work without a new failure or semantic change.

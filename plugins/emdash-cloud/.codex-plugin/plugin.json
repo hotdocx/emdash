@@ -1,0 +1,25 @@
+{
+  "name": "emdash-cloud",
+  "version": "0.1.0+codex.20260928191142",
+  "description": "Use Emdash mathematics in an authenticated GetPaidX cloud workspace.",
+  "author": {
+    "name": "Emdash",
+    "url": "https://github.com/hotdocx/emdash"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Emdash Cloud",
+    "shortDescription": "Scientific work in a cloud workspace",
+    "longDescription": "Author TypeScript, compute and reuse exact mathematical results through the existing GetPaidX workspace tools. No local server or separate OAuth client.",
+    "developerName": "Emdash",
+    "category": "Education & Research",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Compute a polynomial relation in my cloud workspace.",
+      "Continue this scientific project from its retained results."
+    ]
+  }
+}
