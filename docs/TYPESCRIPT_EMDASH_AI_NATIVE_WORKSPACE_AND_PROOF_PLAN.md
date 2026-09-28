@@ -65,9 +65,16 @@ removal. Existing history and every other worktree must be preserved.
 
 ## Executive Decision
 
-The next TypeScript/emdash product abstraction should be an **AI-native proof
-document and workspace**, not another stateful tactic server and not another
-classical text parser.
+The broader product orientation is an
+[AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
+computation, internal/synthetic mathematical construction and reusable results,
+with the assistant carrying routine bookkeeping. This plan owns the existing
+source-first workspace and proof-document foundation within that broader
+workflow. Proof development is an available activity, not a prerequisite for
+ordinary mathematical computation. The
+[Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) records the
+locally qualified portable CLI/MCP delivery layer over these contracts; it does
+not introduce a new canonical stateful server or require a textual parser.
 
 The current TypeScript implementation is already substantially aligned with
 this direction:
@@ -86,8 +93,8 @@ this direction:
   mandatory producer while treating textual parsing as an optional
   acquisition adapter rather than the semantic architecture.
 
-The missing product layer is therefore a restricted, serializable and
-replayable workspace/proof protocol above explicit Core. It must make source
+The workspace/proof layer governed here is a restricted, serializable and
+replayable protocol above explicit Core. It makes source
 and derived proof state easy for an AI agent to inspect and edit while keeping
 all proof authority in the existing checker and explicit Core term.
 

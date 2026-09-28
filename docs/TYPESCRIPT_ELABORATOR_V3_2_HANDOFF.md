@@ -1,6 +1,6 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Reviewed: 2026-09-24. This is current orientation; detailed qualification lives
+Reviewed: 2026-09-28. This is current orientation; detailed qualification lives
 with the source contracts and plans linked below. The former running narrative
 is preserved in [handoff history](history/TYPESCRIPT_ELABORATOR_HANDOFF_THROUGH_2026-09-23.md).
 
@@ -21,12 +21,30 @@ aggregate waiver. Its actual external coefficients survive typed internal
 construction and reuse with explicit equation adoption. The
 [host/ecosystem review](EMDASH_TYPESCRIPT_HOST_AND_ECOSYSTEM_REVIEW_2026-09-24.md)
 assesses the broader TypeScript/Julia/Lean analogy and published npm boundary.
-Its public-package/Vega-Lite consumer is now complete on the goal branch at
-focused qualification. The additive `/algebra` entry and a clean tarball
-consumer share exact source between computation and an interactive Vega-Lite
+Its public-package/Vega-Lite consumer is now integrated into local main at
+`37ce19d5`, at focused qualification. The additive `/algebra` entry and a clean
+tarball consumer share exact source between computation and an interactive Vega-Lite
 plot. The current continuation in the same workbench plan owns exact
-validation and artifact identity; npm publication and main integration are
-separate from that local checkpoint.
+validation and artifact identity; npm publication remains separate.
+
+The user-selected product emphasis is an
+[AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
+computation, internal/synthetic construction and reuse, and reduced bookkeeping.
+The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) records
+completed GAP-1 through GAP-3: a portable local runtime, installed Codex plugin
+and native/internal reuse through shared CLI/MCP operations. Focused tests,
+bounded Singular/Lambdapi controls and fresh installed-plugin Codex CLI sessions
+passed on the donor under its aggregate waiver. The subsequent
+[local integration plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_INTEGRATION_PLAN.md)
+records combined qualification against the action-profile main baseline,
+including a complete TypeScript run and a corrected contributor CLI launcher.
+That run's two inherited article-pin failures are repaired under exact-content
+review, with all 15 owning tests passing; the user waived a repeated aggregate.
+The optional internal construction retains one
+explicit computed-equation assumption and its existing interpretation boundary.
+The plan also records a future cloud-container transport comparison; no cloud
+deployment is selected. Existing
+proof protocols retain their precise meaning within the broader workflow.
 
 For mathematical status use the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md)
@@ -99,6 +117,7 @@ ledger as an onboarding prerequisite.
 
 | Task | Current route and scope |
 | --- | --- |
+| Algebra goal assistant, Codex plugin or agent-facing mathematical UX | [Product orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and [plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md); existing CAS/internal owners remain authoritative and certification is optional |
 | Checker/compiler or a new transfer | Generic LF/Core source and nearest tests; [scale plan](TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md) records retained architecture and deferred bulk work; [source requalification](TYPESCRIPT_PROFILE_SOURCE_REQUALIFICATION_2026-09-23.md) records current reviewed pins |
 | Categorical/dependent binders | [Mixed-introduction continuation](TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md) and [compositional binder plan](TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md); their qualified bodies and structural prerequisites, not unrestricted binder synthesis |
 | Proof development, classes, automation or maintenance | [Proof-assistant plan](TYPESCRIPT_EMDASH_PROOF_ASSISTANT_AND_GOAL_GRAPH_PLAN.md) and source-visible [capabilities](../src/v3_2/ai_native_capabilities.ts); exact source, named goals and fresh checking remain the essential workflow |

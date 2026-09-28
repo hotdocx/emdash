@@ -11,6 +11,12 @@ if [ "${1-}" = "capabilities" ]; then
     exec node --require ts-node/register \
         "$script_dir/../examples/v3_2_ai_native_capabilities_cli.ts" "$@"
 fi
+if [ "${1-}" = "goal" ]; then
+    shift
+    TS_NODE_PROJECT="$script_dir/../tsconfig.json" \
+      exec node --require "$script_dir/../node_modules/ts-node/register" \
+        "$script_dir/../examples/v3_2_algebra_goal_cli.ts" "$@"
+fi
 if [ "${1-}" = "workspace" ]; then
     shift
     exec node --require ts-node/register \

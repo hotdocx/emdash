@@ -12,6 +12,18 @@ dependent type theory with categories, directed families, functors,
 transfors, and higher cells, using cut-elimination-inspired operations so
 that functoriality and naturality can compute.
 
+The product direction is an **AI-native algebra goal assistant**: help users
+compute, construct and reuse mathematical objects in an internal/synthetic
+language, with less manual bookkeeping. Proof development and certification
+are available activities within that broader workflow. TypeScript supplies
+the host programming environment; explicit Core retains the mathematical
+checking boundary. See the
+[product orientation](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and
+[Codex plugin plan](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). The
+[local plugin](./plugins/emdash/README.md) supports exact polynomial computation,
+source-derived views and native/internal complex reuse through shared CLI/MCP
+operations. Public distribution remains a separate milestone.
+
 The active development now carries that calculus into local geometry:
 Cat-valued presheaves, ordinary sieves and sites, a direct fixed-site
 sheafification construction, universal-property commutative algebra, affine

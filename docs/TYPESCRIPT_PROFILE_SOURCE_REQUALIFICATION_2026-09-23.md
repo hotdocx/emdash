@@ -229,3 +229,15 @@ internalized PathInd proposal test now uses the same hash-checked historical
 source as its audit parent, preserving original positions and decisions.
 The [consolidation follow-up](EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md#user-run-validation-follow-up)
 records reproduction, corrected qualification and main integration.
+
+Follow-up on 2026-09-28: the plugin integration's combined TypeScript run
+exposed an article pin left stale by the later action-profile exposition.
+The [plugin integration ledger](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_INTEGRATION_PLAN.md#article-binding-failure-and-reviewed-repair)
+records an unchanged-main reproducer and exact-content review. Only the Gray
+description and higher-category boundary prose differ from the v4 article.
+Both diagrams, all declaration bindings, the proof source/profile and both
+proof artifacts retain their exact hashes. The binding advances to v5 and
+the current article digest `sha256:c9b44fda0e2d8083d39e2926896ee45ecd54a2beaf26c7014acedeb4e38d5059`;
+its management-source pin is updated after that review. All 15 owning tests
+pass, including the unchanged drift-rejection controls. No article, proof,
+Core rule or Lambdapi owner is changed by this follow-up.

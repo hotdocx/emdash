@@ -16,17 +16,17 @@ import {
 } from './research_document';
 
 export const CORE_AI_RESEARCH_OVERVIEW_PROFILE = Object.freeze({
-    revision: 'emdash-ai-research-overview-v4' as const,
+    revision: 'emdash-ai-research-overview-v5' as const,
     documentId: 'emdash-v3-2-overview' as const,
-    documentRevision: '2026-09-11-research-draft' as const,
+    documentRevision: '2026-09-27-action-profile-draft' as const,
     managementSourcePath:
         'src/v3_2/ai_research_overview.ts' as const,
     documentSourcePath:
         'emdash2/print/public/emdash-v3-2-overview.md' as const,
     proofSourcePath: CORE_AI_PROOF_DEMO_SOURCE_PATH,
     documentSourceSha256:
-        'sha256:1fdcc5e222d8aa707911343a44c091293' +
-        'a07e1727305e52237e12f28009624d4',
+        'sha256:c9b44fda0e2d8083d39e2926896ee45e' +
+        'cd54a2beaf26c7014acedeb4e38d5059',
     proofSourceSha256:
         'sha256:1f06e96e8230008e4d25952e8920ac9' +
         'd43a2da5d4c5ad6a152b7772e81a22565',

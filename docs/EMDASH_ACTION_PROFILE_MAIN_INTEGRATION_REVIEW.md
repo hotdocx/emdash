@@ -158,3 +158,13 @@ forward. No new aggregate was needed for moving the branch reference.
 No push, remote publication, plugin merge, history rewrite or worktree removal
 was performed. The donor remains `114dc19f`; the plugin remains `50ccee2f`.
 The dedicated worktrees remain available for their subsequent work.
+
+Subsequent finding on 2026-09-28: the plugin integration's complete TypeScript
+run exposed an overlooked consequence of the overview edit: the existing
+research-file CLI still pinned the older whole-article digest. Its two
+materialization tests failed on unchanged main as well. The
+[reviewed repair](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_INTEGRATION_PLAN.md#article-binding-failure-and-reviewed-repair)
+updates the document binding after verifying unchanged diagram/proof bytes
+and passes all 15 owning tests. This closes a document-provenance regression
+missed by the earlier aggregate snapshot and artifact checks; it does not
+change the mathematical migration or the book's content.
