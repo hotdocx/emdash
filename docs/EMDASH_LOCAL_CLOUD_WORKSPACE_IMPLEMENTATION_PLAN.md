@@ -337,3 +337,36 @@ source/artifact reads. Source MCP 0.3.0 has 62 tools and catalog 274 methods /
 24 workflows; the four inventory gates and owning API/SDK/controller tests
 pass. Controller regression now has 96 passes/one existing skip. LC-2C next
 qualifies the complete SQL-to-program flow and export before Emdash packaging.
+
+LC-2C checkpoint: GetPaidX `e1734798` qualifies the actual SQL receipt,
+gateway/file services and controller against a disposable persistent-volume
+fixture. Direct Node computation, source/artifact export and idempotent replay
+pass with zero model usage. A running program is interrupted by an actual
+controller restart and is not replayed; completed artifacts survive and remain
+readable after session closure. Full root regression passes 380 suites / 1,566
+tests, with two existing skips. All fixture containers were removed.
+
+## LC-3 Active Packaging Slice
+
+Ship the pilot as a relocatable source project plus a pinned Emdash ES module,
+built from a deliberately small export entry over existing mathematical owners.
+The portable dependency includes its source/bundle hashes and declarations;
+it does not rely on an older published npm package having newer APIs.
+The existing browser-safe `/algebra` entry and six-tool local MCP remain intact.
+
+The authored TypeScript program composes exact membership, checked retained
+coefficients, native complex construction and a source-derived plot. Its
+optional internal mode must retain the explicit computed-equation adoption
+reason and current Core profile/assumption boundary. No checker, compiler,
+formal rewrite, source evidence pin or mathematical qualification is broadened.
+Run the copied project in both the local and controller Node environments,
+test stale/invalid retained input controls, and qualify the public artifact
+through its generated declarations and bounded consumer.
+
+Keep the cloud plugin skills-only, depending on the already authenticated
+GetPaidX tool connection rather than bundling a local server or another OAuth
+client. Source guidance belongs with Emdash; update GetPaidX's distributed
+instructions in the dedicated Arrowgram branch. Template generation should
+copy the built portable project through an explicit artifact rather than
+importing from a sibling checkout at runtime. Scientific browser controls
+and their authorized gateway bridge remain LC-4.

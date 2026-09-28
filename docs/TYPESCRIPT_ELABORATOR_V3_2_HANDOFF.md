@@ -34,14 +34,17 @@ complementary local and GetPaidX/LastRevision workflows. The
 [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
 recommends generic workspace runs of TypeScript programs, optional Node
 mini-app views and a small tool surface independent of the mathematical API.
-Cloud execution and conversation/inline/browser UX remain proposals. Current
+Generic cloud execution is now locally qualified in the dedicated implementation
+branch; Emdash packaging and scientific browser UX are in progress. Current
 mathematical qualification is unchanged.
 
 The [local/cloud implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
 is the concrete recommended next baseline. It separates program execution from
 immediate Codex tasks over shared GetPaidX lifecycle services, preserves the
 intended `--yolo` workspace mode, and records plugin/UI packaging and phased
-acceptance. Implementation has not started.
+acceptance. Its active persistent goal has completed the generic immediate-task
+and direct-program tranches in GetPaidX, with real controller/provider and
+restart/export checks. Hosted deployment remains separate.
 
 The first delivered product workflow is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
