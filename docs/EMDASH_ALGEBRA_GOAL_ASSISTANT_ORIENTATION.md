@@ -20,8 +20,11 @@ every backend algorithm is not a prerequisite.
 
 Local use remains independently useful. GetPaidX/LastRevision is the intended
 commercial cloud/community path, with its existing plugin supplying platform
-access and a proposed broker for remote Emdash operations. The strategy reviews
-inline cards, a browser research workspace and conversation-driven use over the
+access and proposed generic workspace execution of TypeScript/Emdash programs.
+The [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+keeps mathematical library methods independent of platform tools/routes.
+The strategy reviews inline cards, a browser research workspace and
+conversation-driven use over the
 same durable source. These are design recommendations, not completed cloud/UI
 qualification.
 

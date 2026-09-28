@@ -73,6 +73,12 @@ views. This plan retains ownership of its qualified source/proof contracts;
 the wider scientific data/run model and hosted algebra tools require their
 own consumer-led implementation.
 
+The [execution architecture review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+proposes coarse source/run/result access to TypeScript programs and examines
+GetPaidX mini-app hosting and Codex remote facilities. This program-execution
+capability is separate from inert source inspection and from the qualified
+proof-source acquisition contracts below.
+
 The broader product orientation is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
 computation, internal/synthetic mathematical construction and reusable results,

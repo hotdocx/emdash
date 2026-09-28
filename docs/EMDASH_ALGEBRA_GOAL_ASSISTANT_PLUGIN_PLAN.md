@@ -17,10 +17,13 @@ the donor's historical implementation boundary.
 
 Strategy follow-up (2026-09-28): the user selected the broader direction of
 [AI-native, cloud-capable scientific computing](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md).
-That review recommends a GetPaidX broker for direct cloud Emdash operations,
-complementary local/cloud plugin workflows and source-backed inline/browser
-views. Its proposed cloud pilot refines the alternatives below; GAP-5 remains
-unimplemented. This follow-up is review/documentation, not activation of the
+The subsequent [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+recommends generic workspace execution of TypeScript/Emdash programs, existing
+Node mini-app hosting and a small project/run/result protocol. Mathematical
+library operations must not become individual MCP tools or controller routes.
+It also compares Codex remote control and executor facilities. This proposed
+cloud pilot refines the alternatives below; GAP-5 remains unimplemented.
+This follow-up is review/documentation, not activation of the
 historical implementation authorization or selection of a deployment.
 
 ## Selected work and authority
@@ -181,6 +184,11 @@ a demonstrated distribution need.
 
 ## Cloud container tools for desktop Codex
 
+The [2026-09-28 execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+owns the current forward recommendation. The comparison below records the
+earlier transport analysis; the scalable boundary is now a composed TypeScript
+program over a generic workspace execution protocol.
+
 The user's proposed future mode is architecturally feasible: Emdash's runtime,
 dependencies and mathematical workspace can live in a GetPaidX container while
 desktop Codex remains the user's agent interface. Starting a STDIO server in
@@ -192,7 +200,8 @@ transport. [MCP transports](https://modelcontextprotocol.io/specification/2026-0
 | Design | What is on the end-user host? | Connection and tradeoff |
 | --- | --- | --- |
 | Local Emdash runtime, selected first | Codex plus the plugin runtime and its host prerequisites | Direct local STDIO; least platform coupling and useful without an active cloud workspace |
-| Cloud Codex uses container-local Emdash STDIO | Codex/GetPaidX client; no local Emdash mathematics installation | The user delegates work to the workspace agent through existing workspace workflows; Emdash tools belong to the cloud agent, so this is agent delegation rather than direct desktop Emdash tools |
+| Delegation to cloud Codex with container-local Emdash STDIO | Codex/GetPaidX client; no local Emdash mathematics installation | Existing workspace automation asks the cloud agent to perform a task; Emdash tools belong to that agent |
+| Client attaches to a cloud Codex host | A supported Codex remote client; no local Emdash mathematics installation | A single remotely hosted conversation can use container-local tools; this differs from delegation and requires actual host/client enrollment acceptance |
 | Desktop Codex calls workspace HTTP MCP | Codex plus a remote plugin configuration; no local Emdash runtime | A stable authenticated gateway routes to a workspace-bound Emdash service; best direct-tool product path for ordinary hosted containers, but needs lifecycle, routing and actor/workspace authorization |
 | Desktop STDIO command relays to the container | A small authenticated relay/remote-execution client; no local Emdash mathematics installation | Preserve STDIO JSON-RPC end to end over a supported channel; useful on developer hosts, but requires robust process/session teardown and does not arise from merely starting a container process |
 | Existing GetPaidX MCP brokers mathematical operations | GetPaidX connection and workflow skill; no local Emdash runtime | Reuse existing access/workspace selection and call the Emdash service behind it; avoids another client connection but needs a maintained schema/version/discovery adapter |
@@ -209,7 +218,7 @@ executor environment is already available. That setting does not by itself
 enroll arbitrary GetPaidX containers as Codex remote executors.
 [Codex MCP configuration](https://learn.chatgpt.com/docs/extend/mcp).
 
-Recommended future sequence: first use the same portable local runtime inside
+The earlier comparison proposed first using the same portable local runtime inside
 a cloud workspace for its in-container Codex. If users need direct desktop
 tool calls, add a workspace-bound HTTP MCP adapter or a broker behind the
 existing GetPaidX endpoint. An internal HTTP-to-STDIO proxy may bridge the

@@ -10,6 +10,9 @@ places this algebra workflow within the broader TypeScript scientific-computing
 direction. It recommends optional GetPaidX cloud execution and inline/browser
 views over the same source and results. Those adapters remain proposed; this
 runtime currently supplies local CLI/STDIO operations.
+The [execution review](../../docs/EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+proposes generic program runs for growth beyond the six current workflow tools,
+with GetPaidX mini-app hosting and optional native Codex remote integration.
 
 ## Local Codex installation
 

@@ -4,6 +4,12 @@ Reviewed: 2026-09-28.
 Status: user-selected long-term direction; cloud architecture, UX and next
 implementation slice below are recommendations for review.
 
+Execution clarification: the [workspace execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+refines the initial broker proposal into a small project/run protocol over
+TypeScript programs. It evaluates existing mini-app hosting, controller
+extensions and native Codex remote facilities. Mathematical functions do not
+become individual MCP tools or platform endpoints.
+
 **Emdash aims to become an open-source, AI-native, cloud-capable scientific
 computing system in the TypeScript ecosystem, with integrated functorial type
 theory and proof development.** Users should be able to express mathematical
@@ -89,7 +95,8 @@ recovered by static inspection.
 
 ## Local And Cloud Execution
 
-Recommend one mathematical operation contract with explicit execution targets.
+Recommend shared mathematical libraries and program source, a small project/run
+contract and explicit execution targets.
 The user's project can live on a local host or in a selected GetPaidX workspace.
 The assistant should show the active target and handle routine identifiers.
 Moving work between targets should be an explicit source/artifact transfer;
@@ -98,9 +105,9 @@ cloud unavailability should not silently run against a different local project.
 ```mermaid
 flowchart TD
   C[Codex conversation and Emdash skill] --> L[Local CLI or STDIO MCP]
-  C --> G[GetPaidX authenticated MCP gateway]
+  C --> G[GetPaidX generic workspace execution tools]
   L --> LR[Local Emdash runtime]
-  G --> CR[Emdash runtime in selected cloud workspace]
+  G --> CR[Worker running TypeScript and Emdash in selected workspace]
   LR --> S[Portable mathematical source and result contracts]
   CR --> S
   S --> V[Inline result cards, browser views and documents]
@@ -109,26 +116,28 @@ flowchart TD
 The diagram describes shared formats and owners, not a shared storage service
 or automatic bidirectional synchronization.
 
-**Recommend a broker behind the existing GetPaidX MCP endpoint for the first
-direct desktop-to-cloud implementation.** GetPaidX supplies identity, workspace
-selection, permissions, lifecycle, resource accounting and artifact access.
-Its adapter invokes Emdash's versioned operation service inside the selected
-workspace. Emdash supplies the mathematical schemas, execution and results.
-No second AI agent is needed to execute a fixed mathematical operation.
+**Recommend generic workspace execution behind the existing GetPaidX MCP
+endpoint for the first direct desktop-to-cloud implementation.** GetPaidX
+supplies identity, workspace selection, permissions, process lifecycle, resource
+accounting and artifact access. A selected TypeScript program composes Emdash
+library operations inside the workspace. One run can perform many calculations
+and constructions without another model turn. GetPaidX does not maintain a
+registry of mathematical methods.
 
 Keep the plugins complementary:
 
 - The Emdash plugin owns mathematical workflows and the independently usable
   local runtime.
 - The GetPaidX plugin owns authenticated platform operations and the proposed
-  cloud Emdash tool projection.
+  generic workspace execution tools.
 - Codex can use both sets of tools in one workflow. This is orchestration by
   the host, not a plugin importing another plugin's live session or credentials.
 
-For the pilot, an Emdash skill can select the available GetPaidX tools after the
-user chooses a cloud workspace. Generate a small namespaced cloud projection
-from the Emdash catalog, with platform workspace addressing in place of local
-filesystem roots. Avoid duplicating OAuth connections under both plugins.
+For the pilot, an Emdash skill can use workspace source/run/result tools after
+the user chooses a cloud workspace. The current six Emdash tools remain useful
+bounded workflow conveniences, rather than a catalog to expand with every
+library operation. Adding mathematics should not require new gateway or
+controller handlers. Avoid duplicating OAuth connections under both plugins.
 Whether a later unified installation should bundle that connection is a
 distribution decision to test after the cross-plugin workflow works.
 
@@ -140,14 +149,23 @@ that workflow in GetPaidX's skill set. Keep its mathematical guidance owned by
 Emdash. Test selectable local/cloud installation before promising a single
 package with automatic modes. Cloud-only acceptance should work on a host
 without a local Emdash runtime or Node requirement from this integration.
+If the Codex execution host itself runs in the container, a container-local
+Node/STDIO server may instead be appropriate. Native remote-host enrollment
+and plugin-path resolution require their own client acceptance.
+
+GetPaidX's existing Node mini-app hosting can supply the scientific browser
+workspace, including HTTP/WebSocket proxying. The detailed execution review
+recommends reusing that facility while giving compute jobs a separate worker
+lifecycle. A headless calculation need not start a browser app.
 
 Alternatives remain useful but solve different problems:
 
 | Route | Assessment |
 | --- | --- |
 | Existing GetPaidX workspace automation | Near-term way to ask a cloud agent to edit/run TypeScript; adds agent execution and is not a direct mathematical tool API |
-| Dedicated Emdash HTTP MCP gateway | Good future self-hosted or independent-provider route; adds connection/authentication/lifecycle work for the first GetPaidX consumer |
+| Dedicated Emdash HTTP MCP gateway | Possible self-hosted route for the same project/run contract; adds connection/authentication/lifecycle work for the first GetPaidX consumer |
 | Remote STDIO relay | Useful for suitable development hosts; requires an actual supported execution channel |
+| Codex remote host or registered executor | Could supply remote conversation access or execution infrastructure; actual GetPaidX/client enrollment is not established by command availability |
 | WebMCP in a browser workspace | Browser interaction surface; does not itself connect desktop MCP to a container |
 
 Current OpenAI documentation supports local STDIO and remote Streamable HTTP
@@ -182,9 +200,10 @@ workspace lock.
 Cloud calls need idempotency, cancellation, access revocation, cold-start and
 resume behavior. A lost response after a write must be recoverable by inspecting
 the operation and its artifacts, rather than blindly repeating the mutation.
-Start with the current bounded synchronous workload; introduce durable job
-submission/status/cancel when longer computations require it. Record the
-disconnect policy explicitly for each kind of run.
+Start with bounded workloads and explicit run identity/status/cancellation.
+Short runs may return immediately. A distributed scheduler and jobs that
+survive workspace shutdown are separate extensions. Record the disconnect
+policy explicitly for each kind of run.
 
 Running authored TypeScript is a separate execution capability from accepting
 inert mathematical requests. Preserve normal workspace code execution for
@@ -321,17 +340,21 @@ No license or publication terms change through this strategy document.
 Recommend an **Emdash cloud workspace pilot**, with the existing bounded
 polynomial workflow as its acceptance case:
 
-1. Package the current portable runtime as an explicit versioned workspace
-   dependency and verify it in a disposable cloud development environment;
-   select the companion-skill route for a cloud-only desktop installation.
-2. Add a small GetPaidX broker projection of inspect/update/compute/render/
-   construct, plus explicit initialization where needed, using the same Emdash
-   service and selected workspace identity. Reuse existing workspace lifecycle.
-3. Demonstrate a desktop Codex session computing remotely, inspecting its plot,
-   changing the input, reusing retained coefficients and resuming after closure.
+1. Package the required supported Emdash APIs/runtime as explicit versioned
+   workspace dependencies; select the cloud-only desktop installation route.
+2. Add generic source/run/result access through the existing GetPaidX
+   connection, with a controller-managed worker and existing workspace policy.
+   Use the mini-app proxy for the optional browser workspace.
+3. Demonstrate a desktop Codex session executing one TypeScript program that
+   composes several Emdash operations, inspecting its plot, changing the input,
+   reusing retained coefficients and resuming from saved results after closure.
 4. Add one inline result card if the target host supports it; retain a browser
    artifact link and ordinary structured/text output.
 5. Export the project and rerun it locally at the pinned runtime version.
+
+Adding a further library operation to the program should leave the platform's
+tool inventory and routes unchanged. The [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+owns this refinement of the initial six-command broker proposal.
 
 The mathematical example should retain the actual relation
 `g = a1*f1 + ... + an*fn`, construct the native complex from those coefficients
@@ -352,7 +375,7 @@ formal interfaces worth developing. That is a proposed consumer, not current
 numerical support.
 
 Before implementation, settle the pilot's workspace/source location, runtime
-artifact delivery, generated broker schemas and supported inline-UI client.
+artifact delivery, generic run/file/result schemas and supported inline-UI client.
 The current choice between a standalone cloud companion and GetPaidX-bundled
 workflow instructions is also open. This proposal does not select a cloud
 deployment or modify sibling repositories. A follow-up implementation plan

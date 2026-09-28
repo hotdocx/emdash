@@ -30,8 +30,11 @@ validation and artifact identity; npm publication remains separate.
 The user-selected long-term direction is
 [AI-native, cloud-capable scientific computing in TypeScript](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md),
 with integrated formal mathematics, native CAS/checker independence and
-complementary local and GetPaidX/LastRevision workflows. The strategy's cloud
-broker and conversation/inline/browser UX remain proposals. Current
+complementary local and GetPaidX/LastRevision workflows. The
+[execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
+recommends generic workspace runs of TypeScript programs, optional Node
+mini-app views and a small tool surface independent of the mathematical API.
+Cloud execution and conversation/inline/browser UX remain proposals. Current
 mathematical qualification is unchanged.
 
 The first delivered product workflow is an
