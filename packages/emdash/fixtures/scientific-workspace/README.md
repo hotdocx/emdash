@@ -39,3 +39,22 @@ The bundled library and its declaration closure are under `vendor/`.
 Declaration files support authoring and are excluded from the runtime snapshot.
 The same source project runs locally and in a cloud workspace. Generated output
 and conversation history are views and records of that source.
+
+The cloud preview shows equations, exact results, the complex, an approximate
+plot, source editing and recent executions. Its controls use the existing
+authenticated workspace execution service. Plot zoom changes only the view.
+Older results are labelled when the declared source revision differs.
+
+`Export this run` downloads the captured source, parameters, runtime pins and
+artifacts as a ZIP. Unpack it and run `node replay.mjs` with the recorded Node
+version. The replay checks source hashes and writes a new `replayed-artifacts`
+directory. It does not export workspace credentials or session identifiers.
+
+For a local read-only view after computing into `./results`:
+
+```bash
+EMDASH_LOCAL_VIEW=1 node server.mjs
+```
+
+Open the loopback address on port 4173. This local view has no second executor;
+use the local program or Codex tools to compute and refresh the page afterward.

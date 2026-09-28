@@ -2,8 +2,8 @@
 
 Date: 2026-09-28
 Plan-ID: EMDASH-LOCAL-CLOUD-WORKSPACE
-Status: active persistent goal; accepted architecture, LC-1 implementation
-started in dedicated worktrees
+Status: completed local implementation and qualification through LC-4;
+integration and public rollout remain separate
 Baseline: Emdash `acb33a29`; inspected GetPaidX `a03c667a` and Arrowgram
 `214ec0a`, to be rechecked in their own repositories before edits
 
@@ -238,10 +238,9 @@ hosted acceptance separately against its actual authorized deployment and
 client. No public deployment, publication or push follows automatically
 from local implementation or checkpoint authorization.
 
-This turn prepares and checkpoints the plan only. On the next implementation
-instruction, start with LC-1 and preserve the boundaries above. A persistent
-`/goal`, if explicitly requested then, uses the repository's living-plan and
-Git-isolation workflow.
+The accepted persistent goal implements these four tranches using dedicated
+worktrees and validated local checkpoints. Deployment/publication remain
+outside that authorization boundary.
 
 ## Accepted Launch And Recovery Ledger
 
@@ -249,8 +248,7 @@ The user accepted the consolidated review and this implementation baseline,
 explicitly requested a persistent goal and authorized dedicated branches/
 worktrees and local checkpoints. The active goal delegates implementation
 specifics to this evolving plan and the repository-specific plan below.
-The preceding paragraph records the preparation-turn boundary; implementation
-is now active.
+The accepted launch superseded the earlier preparation-only turn.
 
 | Repository | Branch | Worktree | Start |
 | --- | --- | --- | --- |
@@ -407,3 +405,61 @@ existing Freyd long-exact serialization/encoding and reviewer tests; its ordered
 progress output did not imply a stalled cancellation worker. No mathematical
 owner or evidence pin was changed. Do not rerun this unchanged boundary for
 subsequent static UI work without a new failure or semantic change.
+
+## LC-4 Delivery And Final Boundary
+
+The portable project now includes a Node scientific mini-app and browser view:
+equations, exact result, native complex/action, approximate plot zoom, optional
+internal adoption, source editing, recent runs and ZIP export. Cloud actions
+use GetPaidX's session-bound relay and the same generic execution/file services.
+The mini-app has no cloud worker queue or controller credential. A local
+read-only view is available alongside ordinary program/CLI replay.
+
+The browser labels retained results against current source, protects edits with
+expected hashes, preserves drafts when switching files and reconciles uncertain
+starts with the same identity. The gateway constrains current-post access and
+can read confirmed retained files through a new same-post controller without
+rewriting or replaying the original execution.
+
+Headed Playwright CLI checks pass against the actual Node mini-app, controller,
+gateway services and disposable SQL database. They cover compute, retained
+reuse, optional one-assumption Core construction, source save/stale indication,
+cancellation, reload restoration and a 390-pixel layout without overflow. The
+final fresh browser reports zero console errors/warnings. A downloaded ZIP
+passes a standard ZIP reader, then reproduces `result.json`, `retained.json`,
+`internal.json` and `plot.svg` byte-for-byte in a separate network-disabled
+Node 22.23.2 container. Exported request metadata omits platform session IDs.
+
+Final GetPaidX regression passes 381 suites / 1,571 tests with two existing
+skips (108.721 seconds); controller regression passes 98 tests with one existing
+root-only skip. Typecheck, affected lint, template registry and archive checks
+pass. The final portable consumer passes after UI packaging; the unchanged
+mathematical/TypeScript boundary retains LC-3's full 2,883-pass evidence.
+GetPaidX source catalog has 275 visible methods / 24 workflows and source MCP
+0.3.0 has 62 tools. No mathematical function became a platform endpoint.
+
+The final template's declared revision is
+`29e7c2bba25a0c0e8ac7f59038b649a6f2ad84815549c1c2c67eb6e36e94d7e3`,
+with nine runtime files / 551,438 bytes. Its library bundle retains the LC-3
+hash and the current mathematical interpretation boundary.
+
+Review artifacts are in the GetPaidX goal worktree under
+`output/playwright/scientific-workspace/`, including
+`scientific-final-desktop.png`, `scientific-mobile.png` and the downloaded
+`.playwright-cli/emdash-scientific-run.zip`. Test controllers, database containers
+and the named browser session are removed/closed after validation; the isolated
+plugin cache is retained only as local installation evidence. Original working
+copies and unrelated CRM/landing edits are untouched.
+
+This completes the authorized local implementation. Public hosting, image/schema
+rollout, plugin-directory review, pushing/merging and publication require their
+own integration/release step. Installed-source tests do not claim Codex-app GUI
+or hosted OAuth qualification. An inline execution card is optional future UI;
+the delivered first interface is the conversation tools plus scientific browser.
+
+Final GetPaidX implementation checkpoint: `217cc3a7` on
+`goal/workspace-executions-v1`. Emdash's portable/library/cloud-profile checkpoint
+is `8abf04bc`; the final view and this completion ledger follow it on the same
+goal branch. Arrowgram's distributed skill checkpoint is `96fa500`, followed
+only by its source-completion ledger update. These are reviewable local branches,
+not main integrations or public releases.

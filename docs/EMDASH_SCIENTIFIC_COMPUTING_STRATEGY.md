@@ -1,8 +1,8 @@
 # Emdash Scientific Computing Strategy
 
 Reviewed: 2026-09-28.
-Status: user-selected long-term direction; cloud architecture, UX and next
-implementation slice below are recommendations for review.
+Status: user-selected long-term direction; the first local/cloud pilot is
+implemented and locally qualified, with broader capabilities remaining a roadmap.
 
 Execution clarification: the [workspace execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
 refines the initial broker proposal into a small project/run protocol over
@@ -13,8 +13,10 @@ become individual MCP tools or platform endpoints.
 The [local/cloud implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
 now supplies the concrete recommended baseline: one generic execution service,
 distinct program and immediate Codex-task adapters, a cloud-only Emdash skill
-profile and the existing Node mini-app hosting. It owns the proposed tranche
-order for the next implementation turn.
+profile and the existing Node mini-app hosting. Its LC-1–LC-4 ledger now records
+the completed local implementation, real controller/provider checks, scientific
+browser controls and byte-identical captured-source replay. Public hosting and
+plugin-directory release remain separate from that qualification.
 
 **Emdash aims to become an open-source, AI-native, cloud-capable scientific
 computing system in the TypeScript ecosystem, with integrated functorial type

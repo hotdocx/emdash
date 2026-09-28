@@ -25,8 +25,11 @@ The [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28
 keeps mathematical library methods independent of platform tools/routes.
 The strategy reviews inline cards, a browser research workspace and
 conversation-driven use over the
-same durable source. These are design recommendations, not completed cloud/UI
-qualification.
+same durable source. The dedicated local/cloud implementation branch now
+qualifies generic remote program execution, a skills-only cloud companion,
+scientific browser controls and captured-source export/replay. Public hosting
+and Codex-app GUI acceptance remain separate release boundaries; see the
+[implementation ledger](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
 
 The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) turns this
 orientation into a local delivery path. The installed plugin now supports a

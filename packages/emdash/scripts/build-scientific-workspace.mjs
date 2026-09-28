@@ -46,15 +46,15 @@ const receipt = { revision: 'emdash-scientific-runtime-v1',
   bundles: { 'emdash.mjs': hash(await fs.readFile(path.join(vendor, 'emdash.mjs'))) } };
 await fs.writeFile(path.join(vendor, 'build.json'), JSON.stringify(receipt, null, 2) + '\n');
 await fs.copyFile(path.join(root, 'packages/emdash/LICENSE'), path.join(vendor, 'LICENSE'));
-for (const filename of ['compute.ts', 'reuse.ts', 'study.ts', 'run-local.mjs', 'README.md']) {
+for (const filename of ['compute.ts', 'reuse.ts', 'study.ts', 'run-local.mjs', 'replay.mjs', 'server.mjs', 'index.html', 'workbench.js', 'workbench.css', 'README.md']) {
   await fs.copyFile(path.join(root, 'packages/emdash/fixtures/scientific-workspace', filename), path.join(output, filename));
 }
 const library = await import(pathToFileURL(path.join(vendor, 'emdash.mjs')).href);
 await fs.writeFile(path.join(output, 'package.json'), JSON.stringify({
   name: 'emdash-scientific-workspace', private: true, type: 'module', engines: { node: nodeVersion.slice(1) },
-  scripts: { compute: 'node run-local.mjs compute', reuse: 'node run-local.mjs reuse' },
+  scripts: { start: 'node server.mjs', compute: 'node run-local.mjs compute', reuse: 'node run-local.mjs reuse' },
 }, null, 2) + '\n');
-const source = library.createAlgebraGoalExampleSource();
+const source = { ...library.createAlgebraGoalExampleSource(), title: 'A polynomial relation' };
 await fs.writeFile(path.join(output, 'input.json'), JSON.stringify(source, null, 2) + '\n');
 await fs.writeFile(path.join(output, 'retained.json'), JSON.stringify(library.computeAlgebraGoal(source), null, 2) + '\n');
 const manifest = { version: 1, runtime: { kind: 'node-strip-types', node: nodeVersion },

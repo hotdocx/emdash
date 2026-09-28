@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Emdash · Scientific workspace</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23246952'/%3E%3Cpath d='M8 16h16' stroke='white' stroke-width='3'/%3E%3C/svg%3E"><link rel="stylesheet" href="workbench.css"><script type="module" src="workbench.js"></script></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#">em<span>—</span>dash</a>
+    <div class="eyebrow">SCIENTIFIC WORKSPACE</div>
+    <div class="project-label"><span class="project-mark">∑</span><div>Polynomial study<small id="connection">Connecting…</small></div></div>
+    <div class="side-heading">Recent runs <button id="refresh" class="icon-button" aria-label="Refresh workspace">↻</button></div>
+    <div id="history" class="history"><p class="muted">Your results will appear here.</p></div>
+    <div class="side-note"><span class="status-dot"></span> Source stays with the project.<br>Continue in Codex or here.</div>
+  </aside>
+  <main>
+    <header class="page-header"><div><div class="eyebrow">COMPUTE · CONSTRUCT · REUSE</div><h1 id="title">A polynomial relation</h1><p class="subtitle">One source, exact results, and a construction you can use again.</p></div><span id="state" class="pill">Loading</span></header>
+    <div id="notice" class="notice" role="status" hidden></div>
+    <section class="input-card card">
+      <div class="section-heading"><h2>Mathematical input</h2><span id="ring" class="math small-math">ℚ[x, y]</span></div>
+      <div id="equations" class="equations"><p class="muted">Reading the selected project…</p></div>
+      <div class="run-bar">
+        <label class="task-label">Program <select id="task" aria-label="Program task"><option value="compute">compute</option></select></label>
+        <button id="run" class="primary" disabled>Run computation <span>↗</span></button>
+        <button id="reuse" class="secondary" disabled>Reuse this relation</button>
+        <button id="cancel" class="quiet" hidden>Cancel run</button>
+      </div>
+      <details class="formal-options"><summary>Internal construction</summary><label><input type="checkbox" id="internal"> Also construct the complex and its action in Core</label><p class="muted">This optional route uses one explicit computed-equation assumption.</p><label class="reason-label" for="reason">Adoption reason</label><input id="reason" type="text" value="Use the computed zero-composition equation as an explicit assumption." maxlength="2048"></details>
+    </section>
+    <div class="result-grid">
+      <section class="card result-card"><div class="section-heading"><h2>Exact result</h2><span class="mini-label">RATIONAL ARITHMETIC</span></div>
+        <div id="result-empty" class="empty"><span>∈</span><h3>Start with the calculation.</h3><p>Compute the relation, then reuse its coefficients in a complex.</p></div>
+        <div id="result-body" hidden><div id="membership" class="result-verdict"></div><p id="relation" class="math relation"></p><div class="rule"></div><div class="eyebrow">NATIVE CONSTRUCTION</div><p id="complex" class="math complex"></p><p id="column" class="math small-math"></p><p id="native-note" class="muted"></p><div id="internal-result" class="internal-result" hidden></div></div>
+        <div class="result-footer"><span id="freshness" class="muted">No completed run selected</span><button id="export" class="quiet" disabled>Export this run ↓</button></div>
+      </section>
+      <section class="card plot-card"><div class="section-heading"><h2>Real-locus view</h2><span class="mini-label">APPROXIMATE</span></div><div id="plot-shell" class="plot-shell"><div id="plot-empty" class="plot-empty">The curves will appear after computation.</div><img id="plot" alt="Sampled real curves from the same polynomial source" hidden></div><div class="plot-controls"><label for="zoom">View scale</label><input id="zoom" type="range" min="100" max="220" value="100"><span id="zoom-value">100%</span></div><p class="plot-note">Sampling can miss features. Exact arithmetic remains the authority for the relation.</p></section>
+    </div>
+    <section class="card source-card"><details id="source-details"><summary><span>Project source</span><span class="muted">TypeScript & inputs</span></summary><div class="source-toolbar"><select id="source-file" aria-label="Source file"></select><span id="source-state" class="muted">Saved</span><button id="save" class="secondary" disabled>Save source</button></div><textarea id="source" spellcheck="false" aria-label="Source editor"></textarea><p class="source-note">Edit here or ask Codex. Each run captures its declared source and inputs.</p></details></section>
+    <details class="run-details"><summary>Run details</summary><pre id="details">No run selected.</pre><pre id="log"></pre></details>
+    <footer>Emdash <span>Exact computation. Optional formal development.</span></footer>
+  </main>
+</body>
+</html>
