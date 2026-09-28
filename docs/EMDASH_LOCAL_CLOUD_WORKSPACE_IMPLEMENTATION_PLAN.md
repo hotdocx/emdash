@@ -2,8 +2,8 @@
 
 Date: 2026-09-28
 Plan-ID: EMDASH-LOCAL-CLOUD-WORKSPACE
-Status: concrete recommended baseline for the next implementation turn;
-no runtime implementation has started
+Status: active persistent goal; accepted architecture, LC-1 implementation
+started in dedicated worktrees
 Baseline: Emdash `acb33a29`; inspected GetPaidX `a03c667a` and Arrowgram
 `214ec0a`, to be rechecked in their own repositories before edits
 
@@ -242,3 +242,48 @@ This turn prepares and checkpoints the plan only. On the next implementation
 instruction, start with LC-1 and preserve the boundaries above. A persistent
 `/goal`, if explicitly requested then, uses the repository's living-plan and
 Git-isolation workflow.
+
+## Accepted Launch And Recovery Ledger
+
+The user accepted the consolidated review and this implementation baseline,
+explicitly requested a persistent goal and authorized dedicated branches/
+worktrees and local checkpoints. The active goal delegates implementation
+specifics to this evolving plan and the repository-specific plan below.
+The preceding paragraph records the preparation-turn boundary; implementation
+is now active.
+
+| Repository | Branch | Worktree | Start |
+| --- | --- | --- | --- |
+| Emdash | `goal/local-cloud-workspace-v1` | `/home/user1/emdash1-local-cloud-workspace-v1` | `4b7469e2` |
+| GetPaidX | `goal/workspace-executions-v1` | `/home/user1/closerfans-workspace-executions-v1` | `a03c667a` |
+| Plugin distribution | `goal/emdash-cloud-plugin-v1` | `/home/user1/arrowgram-emdash-cloud-plugin-v1` | `214ec0a` |
+
+GetPaidX's detailed implementation owner is
+`reports/GETPAIDX_WORKSPACE_EXECUTIONS_IMPLEMENTATION_PLAN_2026-09-28.md`
+in its dedicated worktree. The sibling project is private; only public
+contracts and integration evidence belong in the Emdash repository.
+
+Initial inventory: 68 Emdash worktrees were clean. The three existing GetPaidX
+worktrees included an unrelated CRM-plan edit on master; Arrowgram main
+contained unrelated consulting-landing changes. Preserve both working copies.
+All new worktrees start at their pinned baselines with empty indexes.
+The existing Infinity Codex archive verifies 1,378 responses.
+
+Recovery decisions are the user-accepted responses under the original root's
+`emdash2/tmp/ai-responses/sessions/2026-09-28_01a0e715a5b6/responses/`:
+`0001_2026-09-28T11-50-53Z_01a0e7cb-1954-7032-a0e0-8ec142d378cf.md`,
+`0002_2026-09-28T15-03-36Z_01a0e88a-19fe-7e21-b42e-645fad119b3f.md` and
+`0003_2026-09-28T15-14-02Z_01a0e88d-9c74-7c82-b965-6f88fdb626fb.md`.
+These are recovery evidence; current source, SOP and living plans govern work.
+
+The Emdash worktree's frozen pnpm bootstrap and workspace contract pass on
+Node 24.11.1/pnpm 11.16.0, using its independent dependency links. GetPaidX
+root/controller use their own frozen npm installs; no env files, mutable
+dependencies or private implementation are copied from sibling working trees.
+Its existing workspace/provider context is the user-selected authentication
+route; no new model-provider credential is requested.
+
+The first bounded slice is the LC-1 execution protocol/controller supervisor,
+followed by the durable gateway receipt/API/MCP integration. Baseline and
+validation evidence live with GetPaidX's plan. No shared Docker stack,
+background scheduler, public endpoint or cloud deployment has been changed.
