@@ -327,3 +327,13 @@ provider usage accounting and idempotent completed replay. The shared stack
 and production records were untouched; disposable fixture containers were
 removed. LC-2 now adds declared Node/TypeScript source bundles, revision-aware
 files and retained artifacts under the same execution service.
+
+LC-2A checkpoint: GetPaidX `0e507df4` adds declared TypeScript snapshots,
+runtime/source pins and retained artifact hashes under the shared supervisor.
+The actual controller passes on Node 22.23.2 as non-root UID 400124 without a
+model turn; 92 controller tests pass with one existing skip. LC-2B checkpoint `03cda2e6` adds public
+program starts, manifest inspection, revision-aware project files and retained
+source/artifact reads. Source MCP 0.3.0 has 62 tools and catalog 274 methods /
+24 workflows; the four inventory gates and owning API/SDK/controller tests
+pass. Controller regression now has 96 passes/one existing skip. LC-2C next
+qualifies the complete SQL-to-program flow and export before Emdash packaging.
