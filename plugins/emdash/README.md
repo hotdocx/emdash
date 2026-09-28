@@ -5,6 +5,12 @@ ordinary files. This directory is the source of the locally installed Codex
 plugin governed by the [living plan](../../docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). Public distribution
 and cloud delivery are separate milestones.
 
+The [scientific computing strategy](../../docs/EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md)
+places this algebra workflow within the broader TypeScript scientific-computing
+direction. It recommends optional GetPaidX cloud execution and inline/browser
+views over the same source and results. Those adapters remain proposed; this
+runtime currently supplies local CLI/STDIO operations.
+
 ## Local Codex installation
 
 Build the runtime first, then register this repository marketplace and install:

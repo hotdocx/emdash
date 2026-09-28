@@ -27,7 +27,14 @@ tarball consumer share exact source between computation and an interactive Vega-
 plot. The current continuation in the same workbench plan owns exact
 validation and artifact identity; npm publication remains separate.
 
-The user-selected product emphasis is an
+The user-selected long-term direction is
+[AI-native, cloud-capable scientific computing in TypeScript](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md),
+with integrated formal mathematics, native CAS/checker independence and
+complementary local and GetPaidX/LastRevision workflows. The strategy's cloud
+broker and conversation/inline/browser UX remain proposals. Current
+mathematical qualification is unchanged.
+
+The first delivered product workflow is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
 computation, internal/synthetic construction and reuse, and reduced bookkeeping.
 The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) records
@@ -117,6 +124,7 @@ ledger as an onboarding prerequisite.
 
 | Task | Current route and scope |
 | --- | --- |
+| Scientific-computing product strategy, local/cloud architecture or research UX | [Scientific computing strategy](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md); distinguishes the user-selected direction from proposed cloud/UI implementation and current capabilities |
 | Algebra goal assistant, Codex plugin or agent-facing mathematical UX | [Product orientation](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and [plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md); existing CAS/internal owners remain authoritative and certification is optional |
 | Checker/compiler or a new transfer | Generic LF/Core source and nearest tests; [scale plan](TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md) records retained architecture and deferred bulk work; [source requalification](TYPESCRIPT_PROFILE_SOURCE_REQUALIFICATION_2026-09-23.md) records current reviewed pins |
 | Categorical/dependent binders | [Mixed-introduction continuation](TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md) and [compositional binder plan](TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md); their qualified bodies and structural prerequisites, not unrestricted binder synthesis |

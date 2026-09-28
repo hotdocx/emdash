@@ -2,6 +2,16 @@
 
 Last reviewed: 2026-09-18
 
+Product strategy update (2026-09-28): Emdash's long-term software aim is an
+open-source, AI-native, cloud-capable scientific computing system in TypeScript
+with integrated functorial type theory. Computation, abstract mathematical
+development and visualization should share usable mathematical interfaces;
+formalizing every backend algorithm is not a prerequisite. The
+[scientific computing strategy](../../docs/EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md)
+owns that product direction and proposed local/cloud research UX. This
+Foundations report continues to explain the mathematical theory and its
+qualifications; product ambitions do not extend current checking evidence.
+
 The [current reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md)
 records the completed whole Hom/Adjunction and Γ/H assembly, remaining
 profile/duality qualifications, and the preference for whole categorical

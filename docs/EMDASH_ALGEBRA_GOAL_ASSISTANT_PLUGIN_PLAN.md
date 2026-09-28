@@ -8,12 +8,20 @@ Implementation continuation baseline: `06769acc`
 Branch: `goal/algebra-goal-assistant-plugin-v3.2`
 Worktree: `/home/user1/emdash1-goal-assistant-plugin`
 
-Subsequent integration: the user has now authorized local main integration
+Subsequent integration: locally integrated into main through `13523b87`,
 with combined validation and no push. The
 [integration plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_INTEGRATION_PLAN.md)
-owns that follow-up against the completed action-profile baseline. Statements
+records that follow-up against the completed action-profile baseline. Statements
 below about main remaining at `37ce19d5` and the aggregate waiver describe
 the donor's historical implementation boundary.
+
+Strategy follow-up (2026-09-28): the user selected the broader direction of
+[AI-native, cloud-capable scientific computing](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md).
+That review recommends a GetPaidX broker for direct cloud Emdash operations,
+complementary local/cloud plugin workflows and source-backed inline/browser
+views. Its proposed cloud pilot refines the alternatives below; GAP-5 remains
+unimplemented. This follow-up is review/documentation, not activation of the
+historical implementation authorization or selection of a deployment.
 
 ## Selected work and authority
 

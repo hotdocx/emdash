@@ -65,6 +65,14 @@ removal. Existing history and every other worktree must be preserved.
 
 ## Executive Decision
 
+The [scientific computing strategy](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md)
+extends the product direction to AI-native, cloud-capable TypeScript scientific
+computing with integrated formal mathematics. Its proposed research workspace
+uses durable source and results across conversation, inline UI and browser
+views. This plan retains ownership of its qualified source/proof contracts;
+the wider scientific data/run model and hosted algebra tools require their
+own consumer-led implementation.
+
 The broader product orientation is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):
 computation, internal/synthetic mathematical construction and reusable results,

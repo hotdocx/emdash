@@ -1,6 +1,7 @@
 # Emdash Algebra Goal Assistant
 
 Date: 2026-09-26
+Reviewed: 2026-09-28
 Status: user-selected product orientation; implementation remains profile-specific
 
 **Emdash helps people do mathematics: express a goal, construct mathematical
@@ -8,6 +9,21 @@ objects, compute, explore and reuse results, while delegating routine
 bookkeeping to the language and assistant.** Computation and internal/synthetic
 expression are the primary experience. Proof development and certification
 remain useful capabilities when the mathematical work calls for them.
+
+The broader [scientific computing strategy](EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md)
+now places this assistant within an open-source, AI-native, cloud-capable
+TypeScript scientific computing system. Algebra is the first delivered
+workflow. Future numerical, PDE and dynamics capabilities should connect
+scientific models, computation, formal theory and visualization through usable
+mathematical interfaces. Proof development concerns that mathematics; verifying
+every backend algorithm is not a prerequisite.
+
+Local use remains independently useful. GetPaidX/LastRevision is the intended
+commercial cloud/community path, with its existing plugin supplying platform
+access and a proposed broker for remote Emdash operations. The strategy reviews
+inline cards, a browser research workspace and conversation-driven use over the
+same durable source. These are design recommendations, not completed cloud/UI
+qualification.
 
 The [Codex plugin plan](EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md) turns this
 orientation into a local delivery path. The installed plugin now supports a
@@ -74,8 +90,8 @@ The assistant should help write concise source using existing builders and
 whole operations, rather than requiring a new textual language or exposing
 raw Core trees as the normal interaction.
 
-Codex supplies the agent conversation and execution host. The Emdash plugin
-should supply mathematical workflows, capability discovery and a portable
+Codex supplies the agent conversation and access to execution tools. The Emdash
+plugin should supply mathematical workflows, capability discovery and a portable
 runtime over the existing library. It does not need a second model backend or
 another chat product merely to become usable. Files and mathematical artifacts
 remain recoverable independently of a particular chat session.
