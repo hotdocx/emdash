@@ -10,6 +10,12 @@ TypeScript programs. It evaluates existing mini-app hosting, controller
 extensions and native Codex remote facilities. Mathematical functions do not
 become individual MCP tools or platform endpoints.
 
+The [local/cloud implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
+now supplies the concrete recommended baseline: one generic execution service,
+distinct program and immediate Codex-task adapters, a cloud-only Emdash skill
+profile and the existing Node mini-app hosting. It owns the proposed tranche
+order for the next implementation turn.
+
 **Emdash aims to become an open-source, AI-native, cloud-capable scientific
 computing system in the TypeScript ecosystem, with integrated functorial type
 theory and proof development.** Users should be able to express mathematical
@@ -374,12 +380,12 @@ model, numerical method, convergence diagnostics and plots, then identify the
 formal interfaces worth developing. That is a proposed consumer, not current
 numerical support.
 
-Before implementation, settle the pilot's workspace/source location, runtime
-artifact delivery, generic run/file/result schemas and supported inline-UI client.
-The current choice between a standalone cloud companion and GetPaidX-bundled
-workflow instructions is also open. This proposal does not select a cloud
-deployment or modify sibling repositories. A follow-up implementation plan
-should freeze those decisions and the cross-repository validation scope.
+The [implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
+now selects a skills-only cloud companion, generic execution records and
+separate program/agent starts, a pinned workspace runtime artifact and browser
+preview before inline UI. It records source/run storage responsibilities and
+cross-repository validation. Runtime implementation and public deployment have
+not started.
 
 ## Review Evidence
 

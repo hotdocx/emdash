@@ -10,6 +10,13 @@ Codex remote control and possible controller extensions before implementation.
 The suggested mechanisms are alternatives to assess, not required technologies.
 Local review/documentation checkpoints are explicitly authorized.
 
+Forward implementation baseline: the
+[local/cloud implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
+resolves the choices below into a concrete recommendation for the next turn.
+It gives program and immediate Codex-task execution separate adapters over a
+shared lifecycle, while preserving their distinct purposes. This review
+retains the alternatives, source evidence and separate GetPaidX reassessment.
+
 ## Recommendation And Correction
 
 **Keep the mathematical API in TypeScript. Expose a small workspace execution

@@ -26,6 +26,12 @@ cloud pilot refines the alternatives below; GAP-5 remains unimplemented.
 This follow-up is review/documentation, not activation of the
 historical implementation authorization or selection of a deployment.
 
+Next implementation recommendation:
+[local/cloud workspace plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
+It owns LC-1 through LC-4, including the independent GetPaidX immediate-task
+improvement, direct TypeScript program execution, cloud-only plugin packaging
+and the Node mini-app consumer. No tranche has been implemented yet.
+
 ## Selected work and authority
 
 The user selected main integration, a careful review of a Codex plugin for
