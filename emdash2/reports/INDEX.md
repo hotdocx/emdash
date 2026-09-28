@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Reviewed: 2026-09-24. Start with active source and [AGENTS](../AGENTS.md).
+Reviewed: 2026-09-27. Start with active source and [AGENTS](../AGENTS.md).
 This index routes to existing owners; it does not repeat implementation ledgers.
 The former narrative is preserved in
 [index history](history/REPORT_INDEX_THROUGH_2026-09-23.md); earlier mathematical
@@ -14,7 +14,7 @@ Dated “next” statements are not current work authorization.
 - [TypeScript entry point](../../docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md) and [DevOps commands](../../docs/DEVOPS.md).
 - [Repository consolidation](../../docs/EMDASH_REPOSITORY_CONSOLIDATION_PLAN.md) records maintenance, corrected full TypeScript qualification and main integration; [profile/performance repair](../../docs/TYPESCRIPT_PROFILE_AND_PERFORMANCE_REPAIR_PLAN.md) retains the source/performance evidence.
 - [Native homology final audit](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_FINAL_AUDIT.md), [categorical consolidation audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_CORE_CONSOLIDATION_FINAL_AUDIT.md) and [universality assembly audit](../../docs/TYPESCRIPT_EMDASH_CATEGORICAL_UNIVERSALITY_FINAL_AUDIT.md) record qualified results and supplied contracts.
-- [Foundational reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md) records the source action-profile branch. The [integration plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md) and [acceptance audit](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) record its qualified main-based reimplementation on the dedicated branch; main integration and Op/duality remain separate subsequent work. Current check success is not a consistency claim.
+- [Foundational reassessment](../../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md) records the source action-profile branch. The completed [integration plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md) and [acceptance audit](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) record its qualified reimplementation; the [main integration review](../../docs/EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md) records compatibility, book corrections and the local fast-forward boundary. Op/duality remains separate. Current check success is not a consistency claim.
 - [Native nerves review](../../docs/TYPESCRIPT_EMDASH_NATIVE_NERVES_AND_HOMOLOGY_NOTATION_REVIEW.md) and [dependent-spectra review](../../docs/EMDASH_DEPENDENT_SPECTRA_RESEARCH_REVIEW.md) distinguish implemented owners from proposals.
 - [Local research resources](../research/LOCAL_RESOURCES.md) locate existing reading notes, PDFs/text and source checkouts.
 
@@ -34,7 +34,6 @@ deferred. Exact status, evidence and resumption boundaries live in each owner.
 
 ## Active Plans
 
-- `../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md`: [Emdash v3.2 Action-Profile Integration Plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 - `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`: [Emdash v3.2 Presheaves, Sites, And Schemes Living Preliminary Plan](REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md).
 - `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`: [TypeScript Elaborator v3.2 — Systematic Transfer Scale Qualification](../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
 - `REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md`: [EMDASH v3.2 Profunctor Representability Redesign Preliminary Plan](REPORT_EMDASH_V3_2_PROFUNCTOR_REPRESENTABILITY_REDESIGN_PRELIM_PLAN_2026-06-19.md).
@@ -46,6 +45,7 @@ deferred. Exact status, evidence and resumption boundaries live in each owner.
 
 ## Completed Current-Architecture Ledgers
 
+- `../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md`: [Emdash v3.2 Action-Profile Integration Plan](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 - `../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md`: [Native Universality And Homology: Living Implementation Plan](../../docs/TYPESCRIPT_EMDASH_NATIVE_UNIVERSALITY_AND_HOMOLOGY_PLAN.md).
 - `REPORT_EMDASH_V3_2_FOUNDATIONAL_DOCUMENTATION_SOP_AND_REGISTRY_MAINTENANCE_PLAN_2026-08-30.md`: [EMDASH v3.2 Foundational Documentation, SOP, And Registry Maintenance Plan](REPORT_EMDASH_V3_2_FOUNDATIONAL_DOCUMENTATION_SOP_AND_REGISTRY_MAINTENANCE_PLAN_2026-08-30.md).
 - `REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md`: [Emdash v3.2 Slice Dependent Products And LCCC Computation Plan](REPORT_EMDASH_V3_2_SLICE_DEPENDENT_PRODUCTS_AND_LCCC_COMPUTATION_PLAN_2026-08-29.md).

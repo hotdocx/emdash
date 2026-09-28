@@ -8,6 +8,11 @@ verified, with a clean local handoff.
 Plan: [living integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
 Detailed execution evidence: [production continuation](EMDASH_ACTION_PROFILE_PRODUCTION_CONTINUATION.md).
 
+Subsequent user-requested book review and local main integration are recorded
+in the [main integration review](EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md).
+The main/branch statements below describe this completed goal's handoff
+snapshot, before that separately requested follow-up.
+
 ## Scope And Revision Identity
 
 The goal reimplements donor `114dc19fdee4b952f1c75be4e2000d6ff7195741`

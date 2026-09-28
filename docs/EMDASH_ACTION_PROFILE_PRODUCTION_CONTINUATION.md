@@ -2,11 +2,17 @@
 
 Date: 2026-09-27 UTC
 
-Status: active, uncheckpointed semantic integration; full qualification remains pending
+Status: complete; qualified semantic checkpoint `8ea6c86b` and handoff `ba7f7773`
 
 Owner: [integration plan](EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md), API-04/05/09/10.
 
-The previous goal turn made progress: checkpoints `388a3e71` and `6bb2fc07`
+The sections below are chronological execution evidence, including superseded
+in-progress states. The final section records complete production qualification;
+the [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md) owns
+its summary and the [main integration review](EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md)
+records the subsequent book and fast-forward follow-up.
+
+The first production turn followed checkpoints `388a3e71` and `6bb2fc07`, which
 qualified native/CAS/cubical consumers and complete central diagnostics. This
 turn applies their permanent names and resumes production validation. The
 current source tree, not the earlier prototypes, is the active authority.

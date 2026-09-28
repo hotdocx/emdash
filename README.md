@@ -203,7 +203,8 @@ The [foundations and DevOps review](./docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_
 records the earlier qualification boundaries. The
 [action-profile acceptance audit](./docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
 records the qualified reimplementation on the dedicated integration branch;
-main integration remains a separate review boundary.
+the [main integration review](./docs/EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md)
+records the compatibility assessment, refreshed book and local fast-forward.
 
 The browser workbench is published from `main` by GitHub Pages. It is wholly
 client-side and does not require a Lambdapi process or other production

@@ -53,7 +53,9 @@ classified Gray arrows, inherited assembly and bounded path-cubical owners
 pass complete production CI across 1,388 targets and the original 94-assertion
 proof–CAS corpus. Checked health and the affected TypeScript/renderer
 qualification are recorded in the [acceptance audit](../../docs/EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md).
-This is a local integration-branch result, not a main/Pages publication.
+The [main integration review](../../docs/EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md)
+records the subsequent book refresh and local fast-forward boundary;
+remote publication is separate.
 Op/duality and the large six-term package comparison remain deferred.
 
 The initial main/Pages publication was df9b4778. The user subsequently
@@ -1495,15 +1497,16 @@ Active equality/equivalence staging includes:
   `StrictFunctor` admits carriers opaquely, and its stable `strict_functor`
   view owns classified computation and canonical evidence. An explicit raw
   observation recovers visible carriers. `StrictFunctor_cat` owns the full
-  category; `GrayHom_lax` still reuses `Transf_cat` homs at this stage;
+  category with ambient transfors; `GrayHom_lax` instead selects
+  `LaxTransfor_cat` homs between the stable strict views;
   `GrayTensor_R` has whole curry/uncurry maps paired with supplied strictness
   evidence and equality-valued beta/eta; `WalkingArrow_cat` is
   transparently `Join_cat(1,1)`; and the four-object walking square and its
   nonidentity directed interchanger derive from coevaluation and the existing
   whole post/left laxity owner. `gray_interchanger_next_func` retains one next
   action. The raw boundary composites are readable presentations, not a new
-  endpoint normal form. Mirror closure, full monoidal coherence, and migration
-  of the historical global strict cuts remain outside this tranche;
+  endpoint normal form. The action-profile integration retires the selected
+  generic strict cuts. Mirror closure and full monoidal coherence remain open;
 - `GrpdUnivalence` and decoder-based groupoid-univalence capabilities, with
   named decoder round trips, a canonical contractible-fibre capability
   selecting `grpd_equiv_path`, a propositional decoder transport square, and

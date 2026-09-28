@@ -46,7 +46,10 @@ main's newer qualified consumers. Produce a clean, validated local integration
 branch with an exact migration ledger and reviewable checkpoints.
 
 The [acceptance audit](EMDASH_ACTION_PROFILE_INTEGRATION_FINAL_AUDIT.md)
-records the inspected requirement evidence and remaining completion gates.
+records the completed local qualification. The subsequent user-requested
+[main integration review](EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md)
+owns the book corrections/artifact refresh, compatibility assessment and
+local fast-forward receipt. The original acceptance snapshot stays intact.
 
 Use active source and the [formal SOP](../emdash2/AGENTS.md), followed by the
 [current architecture report](../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md),

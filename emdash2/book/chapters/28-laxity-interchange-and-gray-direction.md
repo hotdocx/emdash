@@ -262,10 +262,10 @@ with the appropriate identity functors by whole beta and eta paths, and the
 resulting fixed-forward equivalence retains hom action.
 
 Equation (28.9) is an equivalence of profiled mapping *categories*. On the
-left, objects are strict packages for maps out of the selected tensor and
-arrows are ambient transformations. On the right, an outer strict package
-selects, at each object of $A$, an inner strict package $B\to C$; its arrows
-are allowed the lax transformation behaviour retained by (28.7). Curry and
+left, objects are strict classifiers for maps out of the selected tensor and
+arrows are classified lax transformations. On the right, an outer strict
+classifier selects, at each object of $A$, an inner strict classifier
+$B\to C$; its arrows have the classified lax behaviour of (28.8). Curry and
 uncurry transport not only objects but this transformation tower.
 
 The adjective *right* fixes which variable is moved into the internal hom. A

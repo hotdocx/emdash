@@ -1612,10 +1612,12 @@ restriction_q(glue_q(m))[V](p,member) = m[V](p,member).
 One whole transformation `rho : restriction o glue => id_Matching` owns these
 components through ordinary, displayed, and fibre projection. The point
 component computes to `path_to_hom` of the displayed equation above.
-Pointwise path equivalences are then lifted through a generic strict
-pointwise-to-whole `OmegaEquivAlong` closure. That closure consumes an
-already-whole transformation, so its naturality is internal; it does not
-construct a transformation from a bare component family. The resulting path
+Pointwise path equivalences are then lifted through the inherited ordinary
+and displayed pointwise-to-whole `OmegaEquivAlong` primitive. It consumes an
+already-whole transformation without a strict-profile premise, preserves both
+selected component inverses, and assumes whole cancellation. It does not
+construct a transformation from a bare component family or derive assembly
+from laxity. The resulting path
 
 ```text
 restriction_q o glue_q = id_Matching(q)
@@ -1629,10 +1631,11 @@ make restriction the fixed-forward equivalence required by
 IsTopologyLocalPsh(K,T,DirectCoverCompletionPsh(K,T,P)).
 ```
 
-The retained-member equality is an opaque proof owner in the active library,
-but not a new runtime operation or consumer-supplied sheaf field. Its complete
-internal endpoint derivation and non-collapse controls are retained in the
-CS-12 living plan and focused probes. The computational data remain the whole
+The retained-member equality now has a derived body in
+`emdash3_2_direct_cover_completion_retained_sections.lp`, used by the original
+locality interface without an added premise. It is neither a new runtime
+operation nor a consumer-supplied sheaf field. The integration plan records
+its endpoint derivation and noncollapse controls. The computational data remain the whole
 restriction, glue, transformation projections, and selected inverse arrows.
 
 The categorical-HIT eliminator is also whole in its seed.  For one selected

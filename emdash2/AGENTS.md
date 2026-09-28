@@ -29,9 +29,11 @@ Do not use invalid higher action to justify a result. Legitimate local Op
 computations with an independently qualified ordinary interpretation are
 not blanket-prohibited.
 
-The user has authorized action-profile integration in the dedicated
-`goal/action-profile-integration-v3.2` worktree under the
-[living integration plan](../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
+Action-profile integration is qualified on
+`goal/action-profile-integration-v3.2` under the completed
+[integration plan](../docs/EMDASH_ACTION_PROFILE_INTEGRATION_PLAN.md).
+The [main integration review](../docs/EMDASH_ACTION_PROFILE_MAIN_INTEGRATION_REVIEW.md)
+records the user-requested book refresh and local fast-forward boundary.
 Op/duality repair and further Empty audits remain deferred. Preserve
 hom_int/homd_int as foundations and the checkpoint/resumption bundle in
 `audits/deferred_native_homd_y/README.md`. The selected native duality design
@@ -126,8 +128,9 @@ laxity, higher diagram eta or a `Groupoidify` adjunction.
 The completed successor branch `goal/opaque-action-profile-classifiers-v3.2`
 at `114dc19f` is the pinned source for this integration. The
 [continuation review](../docs/TYPESCRIPT_EMDASH_FOUNDATIONS_DEVOPS_AND_CONTINUATION_REVIEW.md#completed-action-profile-branch)
-owns its exact worktree/plan recovery and selective migration proposal. Do not
-copy its counts or claim main already has its lax/profile behavior.
+owns its exact worktree/plan recovery and original selective migration proposal.
+Use the completed integration audit for the current adapted implementation;
+do not substitute donor counts or donor receipts for current qualification.
 
 ## Starting A v3.2 Task
 

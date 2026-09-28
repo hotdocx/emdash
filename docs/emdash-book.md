@@ -2,8 +2,8 @@
 title: "Functorial Type Theory: Univalent Foundations for Mathematics"
 authors: "The emdash contributors"
 edition: "expanded development edition"
-editionVersion: "0.9.2-dev"
-publicationDate: "2026-09-18"
+editionVersion: "0.9.3-dev"
+publicationDate: "2026-09-27"
 status: "draft"
 license: "CC-BY-SA-3.0"
 ---
@@ -1972,28 +1972,29 @@ of a map even though an explicit quasi-inverse package may contain choices.
 ## 4.7 Hom Action And Groupoidal Sources
 
 Equivalence evidence must itself act functorially if the foundation is to be
-usable at higher dimension. The one-way derived hom-action layer sends
-fixed-arrow omega-equivalence evidence through the next hom action of an
-ordinary functor. In particular, if a category is coherently groupoidal, its
+usable at higher dimension. The one-way derived hom-action layer takes an
+equality-valued omega-equivalence between categories and derives equivalences
+on its next homs. In particular, if a category is coherently groupoidal, its
 core inclusion is an omega-equivalence and each directed arrow can be related
 to an object path through the selected homwise inverse.
 
-For a directed family `D:C -> Cat`, coherent groupoidality of `C`
-then implies that transport along a base arrow is an equivalence:
+For a directed family classified as `D:StrictFunctor(C,Cat)`, coherent
+groupoidality of `C` supplies equivalence of transport along a base arrow:
 
 $$
 D[f]:D[x]\simeq D[y].
 $$
 
 This recovers the familiar groupoidal behavior of path-indexed families as a
-special case. It also states the boundary sharply: without groupoidality,
-`D[f]` remains only a functor.
+special case. The fibre-transport theorem uses both the source's groupoidality
+and the family's classified strict action. It does not supply the same
+conclusion for an arbitrary unclassified directed family.
 
 <!-- evidence:EQUIV-HOM-ACTION -->
 
 > **Formal status — checked.** Evidence `EQUIV-HOM-ACTION` covers the
 > one-way next-hom action and its specialization to equivalence of fibre
-> transport over a coherently groupoidal source.
+> transport over a coherently groupoidal source for a classified strict family.
 
 <a id="chapter-4-8"></a>
 
@@ -2618,9 +2619,9 @@ $$
 <!-- evidence:DHIT-DERIVED-ELIMINATORS -->
 
 > **Formal status — checked.** Evidence `DHIT-DERIVED-ELIMINATORS`.
-> `walking_end_ind_sec` and `walking_end_rec_func` are transparent
-> specializations of the contextual eliminator, with checked base and loop
-> observations.
+> `walking_end_ind_sec` is a transparent specialization of the contextual
+> eliminator. The ordinary recursor is derived from it and then made opaque;
+> its public head owns checked base, loop and strict-composition observations.
 
 This dependency is architecturally important. There is one semantic
 elimination principle, not three unrelated black boxes. The derived views
@@ -3309,15 +3310,16 @@ $$
 \mathsf{succ}(\mathsf{encode}_*(p)).
 $$
 
-The first is the identity action of a functor. The second will follow from the
-generator computation of `Code` together with generic functoriality
-on a composite. No WalkingEnd-specific composition rewrite is needed.
+The first is retained normal identity action. The second follows from the
+generator computation of `Code` and the named strict-composition computation
+of the opaque WalkingEnd recursor. This computation does not apply to an
+arbitrary ambient functor and adds no separate composite-prefix rule.
 
 <!-- evidence:WE-ENCODE-PREFIX -->
 
 > **Formal status — checked.** Evidence `WE-ENCODE-PREFIX`. The
-> prefix equation is propositional; its owner specializes ordinary functor
-> action on composition and the literal generator computation.
+> prefix equation is propositional; its owner specializes the recursor's
+> named composition computation and the literal generator computation.
 
 <a id="chapter-8-1-2"></a>
 
@@ -4096,10 +4098,11 @@ Before capping at $g$, `hom_postcomp_func` remains a functor between
 hom-categories, so its action on 2-cells between possible values of $g$ is
 still available.
 
-The functor-indexed version says the same thing. If $p:x\to y$ and
-$q:y\to z$ in $A$, then consecutive action by $K[p]$ and $K[q]$ accumulates
-under the single arrow $q\circ p$. Ordinary functoriality belongs to the
-generic `fapp*` calculus; no constructor receives a private composition law.
+For a general functor $K$, consecutive action by $K[p]$ and $K[q]$ instead
+retains the ambient compositor. Accumulation under $q\circ p$ needs the
+corresponding strict profile or a qualified named construction. The
+identity-indexed represented-hom computation displayed above remains
+available without making every functor strict.
 
 ### 9.2.2 Example 2: Precomposition Reverses The Action Order
 
@@ -4134,7 +4137,8 @@ That reversal is contravariance, not a special exception to associativity.
 
 > **Formal status — checked.** Evidence `CAT-HOM-CUTS`. The full and capped
 > lower-star and upper-star actions have identity, consecutive-action, and
-> adjacent raw-cut computations. Their ordinary-composition readings remain
+> adjacent raw-cut computations at their qualified identity/profile instances.
+> Arbitrary functor-indexed action retains its laxity. Ordinary-composition readings remain
 > proof-time comparisons where selecting a second runtime normal form would
 > be harmful.
 
@@ -4179,7 +4183,8 @@ $$
 h:w\to x,\qquad f:x\to y,\qquad g:y\to z.
 $$
 
-There are two neighboring cuts, one on each side of the varying arrow:
+For the stable view of a classified strict transfor $\eta$, there are two
+neighboring cuts, one on each side of the varying arrow:
 
 $$
 \begin{aligned}
@@ -4190,8 +4195,9 @@ $$
 
 The first source and target are $Fx\to Gz$; the second are $Fw\to Gy$.
 In each case the selected normal form is one off-diagonal action on the
-composite source arrow. The generic owner is `tapp1_fapp0`, and both
-displayed equalities are runtime reductions. At the uncapped level
+composite source arrow. The action still uses `tapp1_fapp0`; the stable
+strict-profile head authorizes these runtime reductions. An arbitrary
+ambient transfor retains directed comparison cells instead. At the uncapped level
 `tapp1_func` remains a functor between hom-categories, so a 2-cell between
 $f$ and $f'$ is carried to a 2-cell between $\eta[f]$ and $\eta[f']$ after
 the cut has normalized.
@@ -4199,15 +4205,16 @@ the cut has normalized.
 <!-- evidence:TRANSF-STRICT-NATURALITY -->
 
 > **Formal status — checked.** Evidence `TRANSF-STRICT-NATURALITY`. Both
-> full-functor and capped-arrow forms are owned by the generic `tapp*`
-> calculus. Constructor-specific copies of ordinary naturality are neither
-> needed nor desired.
+> full-functor and capped-arrow forms reuse the generic `tapp*` calculus at
+> the stable classified strict view. Raw evidence supplies paths; it does
+> not install runtime cuts on every ambient transformation.
 
-The familiar naturality square is the identity-boundary instance. For
+The familiar strict naturality square is the identity-boundary instance. For
 $f:x\to y$, the expressions $G[f]\circ\eta_x$ and
 $\eta_y\circ F[f]$ both normalize through the common interior $\eta[f]$.
-Naturality is therefore not an equality proof added after defining a family
-of point components. It is computation exposed by the family action itself.
+For a general ambient transfor these boundaries are connected through its
+retained laxity cells. OneCat targets turn the appropriate cells into ordinary
+equality paths; a classified strict view additionally selects computation.
 
 Identity and vertical composition follow the same architecture. The identity
 transfor and a vertical composite live in the transformation category, so
@@ -4661,8 +4668,8 @@ D[p](\Phi_xu)\longrightarrow\Phi_y(E[p]u)
 $$
 
 in $D[y]$. This is the displayed laxity cell. It has a direction and need not
-be invertible. The generic functor and transfor cuts around it compute
-strictly, but the comparison itself remains mathematical data.
+be invertible. Generic action retains this comparison and its higher action;
+stricter computation needs its own profile or qualified constructor instance.
 
 <!-- evidence:FUNCTORD-DISPLAYED-LAXITY -->
 
@@ -4752,9 +4759,9 @@ negative direction.
 > **Formal status — checked.** Evidence `FUNCTORD-WHOLE-LAXITY`. The whole
 > displayed owner, both ordinary variance surfaces, their capped cells, and
 > the functor-compositor specialization are active. Their next actions remain
-> in the generic hom calculus. This does not claim a complete weak
-> omega-category coherence theorem or remove the prototype's historical
-> strict endpoint cuts.
+> in the generic hom calculus. The action-profile integration has retired
+> the generic strict endpoint cuts. A complete weak omega-category coherence
+> theorem remains outside this checked boundary.
 
 Cut elimination is therefore not a feature catalogue. It is the organizing
 principle by which functorial type theory decides what should compute, what
@@ -5128,18 +5135,22 @@ on higher cells by iteration.
 
 > **Formal status — checked.** Evidence `CAT-FUNCTOR-CALCULUS`.
 > `fapp0` is object action, `fapp1_func` is the full next-hom action,
-> and `fapp1_fapp0` is its value at one arrow. Identity and composition
-> reductions belong to these generic owners.
+> and `fapp1_fapp0` is its value at one arrow. Normal identity computation
+> remains generic; composition retains an ambient laxity cell. Strict
+> composition computation uses a classified view or a qualified constructor.
 
-The preservation law is oriented as cut elimination:
+For the stable view of a classified strict functor, preservation is oriented
+as cut elimination:
 
 $$
 F[g]\circ F[f]\rightsquigarrow F[g\circ f].
 $$
 
-This is not a theorem copied onto each constructor. It is computation of the
-global functor-action interface. A specialized construction should expose its
-own semantic projections, while ordinary functoriality remains owned here.
+An arbitrary ambient functor instead retains the compositor between these
+endpoints and its higher action. Explicit strictness evidence constrains that
+existing cell. Admission to the opaque strict classifier supplies a stable
+view with the displayed computation; evidence alone does not rewrite the raw
+carrier. Named constructions may also have separately qualified strict rules.
 
 ## 11.2 From Natural Transformations To Transfors
 
@@ -5194,7 +5205,7 @@ In the native higher setting, however, retaining $\eta_{x,y}$ as a functor
 also retains its action on cells between possible $f$'s. Point components
 alone would hide that action and force it to be reconstructed later.
 
-## 11.3 Naturality Is A Pair Of Family Cuts
+## 11.3 Profiled Naturality And Family Cuts
 
 Take composable arrows
 
@@ -5202,7 +5213,8 @@ $$
 h:w\to x,\qquad f:x\to y,\qquad g:y\to z.
 $$
 
-The two strict naturality computations are
+For a stable classified strict transfor $\eta$, the two naturality
+computations are
 
 $$
 \begin{aligned}
@@ -5211,22 +5223,25 @@ G[g]\circ\eta[f]&\rightsquigarrow\eta[g\circ f],\\
 \end{aligned}
 $$
 
-Setting $f$ to an identity makes the usual naturality square reappear. Both
+Setting $f$ to an identity makes the usual strict naturality square reappear. Both
 boundary composites normalize through the same off-diagonal interior
 $\eta[f]$. Thus naturality is not merely a proposition verified after a
-family of components has been assembled; it is the way the family action
-absorbs neighboring cuts.
+family of components has been assembled; the classified family action
+absorbs neighboring cuts. An ambient transfor retains the two directed cells
+instead. The conventional lax profile selects only pre/right strictness,
+leaving the post/left cell observable.
 
 <!-- evidence:TRANSF-STRICT-NATURALITY -->
 
 > **Formal status — checked.** Evidence
 > `TRANSF-STRICT-NATURALITY`. Both capped equations and their uncapped
-> hom-functor forms are runtime reductions of the global `tapp1*`
-> calculus. The full forms retain action on the next cells.
+> hom-functor forms are runtime reductions at the stable `strict_transfor`
+> view, using the existing `tapp1*` calculus. The full forms retain action on
+> the next cells; raw ambient transfors have negative noncollapse controls.
 
 This is the chapter's central checked theorem. It explains why the calculus
 uses a transfor rather than a bare dependent function of point components:
-the transfor is the computational natural family.
+the transfor retains a whole family action, with its chosen strict/lax profile.
 
 ## 11.4 The Functor Category
 
@@ -5327,10 +5342,10 @@ $$
 
 In an ordinary functor precategory this is an equality of natural
 transformations, proved componentwise using associativity and naturality. In
-the native calculus, the corresponding computation is organized by the
-generic product-composition action and the off-diagonal vertical-composite
-folds. A representable four-cell instance is exposed as propositional
-interchange evidence.
+the native calculus, product-composition action retains the comparison.
+The representable four-cell equality requires the actual composition and
+transformation profiles recorded by the profiled interchange theorem. It is
+not an unrestricted equality for arbitrary ambient lax data.
 
 The equality mode matters. Functor composition has associativity and unit
 comparisons, and ordinary category theory packages their familiar pentagon
@@ -6766,7 +6781,7 @@ The following terms remain separate throughout the book.
 | gaunt category | a HoTT category that is also strict | runtime strictness |
 | native `IsNCat(n,C)` | recursive finite height of the hom-categories | object identity agrees with isomorphism |
 | strict naturality cut | a selected `tapp1` composite reduces to one off-diagonal action | all coherence is judgmental |
-| computational strict-functor property | `IsStrictFunctor(F)` compares the existing compositor with its equality-induced arrow; `StrictFunctor(A,B)` pairs $F$ with that evidence | every ambient functor is strict or every coherence is judgmental |
+| computational strict-functor property | `IsStrictFunctor(F)` compares the existing compositor with its equality-induced arrow; `StrictFunctor(A,B)` admits $F$ with that evidence opaquely | every ambient functor is strict or every coherence is judgmental |
 | runtime strictness | an oriented kernel reduction chooses a normal form | object truncation or invertibility |
 | dagger category | identity agrees with *unitary* isomorphism | identity agrees with every isomorphism |
 
@@ -6777,11 +6792,11 @@ automorphisms that cannot come from its proposition-valued object identity.
 
 The proof-carrying row is the profile used in Chapter 28. It does not decode a
 second functor grammar. `IsStrictFunctor` constrains the compositor already
-extracted from an ambient functor, and the exact `StrictFunctor` package pairs
-that functor with its evidence while leaving the ambient transformation and
+extracted from an ambient functor, and the opaque `StrictFunctor` classifier
+admits that functor with its evidence while leaving the ambient transformation and
 higher-hom calculus shared with lax maps. This is a local property/evidence
-specialization, not a blanket compositor-to-identity rewrite or evidence that
-every historical global strict endpoint cut has already migrated.
+specialization. The integration retires generic strict endpoint cuts while
+retaining normal identity computation and qualified constructor instances.
 
 <!-- evidence:GRAY-WALKING-INTERCHANGER -->
 
@@ -6841,8 +6856,8 @@ hom-category is discrete and entails that the object classifier is a
 1-type. HoTT strictness instead asks directly that the object classifier be a
 set. Neither condition supplies a native identity-to-isomorphism theorem.
 
-The second notion is strict naturality. For an ordinary transfor
-$\eta:F\Rightarrow G$, the generic off-diagonal action has the two reductions
+The second notion is strict naturality. For the stable view of a classified
+strict transfor $\eta:F\Rightarrow G$, the off-diagonal action has two reductions
 
 $$
 \begin{aligned}
@@ -6852,9 +6867,9 @@ G[g]\circ\eta[f]&\rightsquigarrow\eta[g\circ f],\\
 $$
 
 The phrase *strict transfor* in this book describes this selected two-sided
-cut behavior; it is not a new classifier of categories. A displayed lax
-comparison can instead retain a directed naturality cell without forcing it
-to equality.
+cut behavior; it is not a new classifier of categories. Ambient ordinary and
+displayed transfors retain directed comparison cells. The conventional lax
+profile selects pre/right computation while retaining the post/left cell.
 
 The third notion is runtime strictness itself. The arrow
 $t\rightsquigarrow u$ records a chosen normal form in the Lambdapi theory.
@@ -6869,7 +6884,7 @@ do compute.
 
 > **Formal status — checked.** Evidence `CAT-DIMENSION` and
 > `TRANSF-STRICT-NATURALITY`. The active theory separately checks recursive
-> dimension/object truncation and the two ordinary `tapp1` naturality
+> dimension/object truncation and the two profiled `tapp1` naturality
 > reductions. No checked theorem identifies these interfaces.
 
 ## 14.4 Opposite Duality Computes
@@ -9952,9 +9967,14 @@ $$
 \operatorname{id}_{\operatorname{Match}_{aP}(R)},
 $$
 
-and the strict pointwise-to-whole principle closes it to (20.4). No new
-naturality square is assumed at this stage. The necessary compatibility came
-from the one displayed glue functor in the categorical-HIT signature.
+and the inherited pointwise-to-whole assembly principle supplies the whole
+equivalence and cancellation used in (20.4). This principle is an explicit
+primitive assumption over an existing whole ordinary or displayed
+transformation. It retains both selected component inverses and assumes whole
+cancellation; its historical `strict_*` name imposes no strict-profile
+premise. The construction uses ordinary fibre assembly, displayed assembly,
+and ordinary outer assembly. It does not add a caller-supplied naturality
+square or derive the assembly assumption from laxity.
 
 **Theorem 20.1 (locality of cover completion).** For every Cat-valued
 presheaf $P$ on the site $(\mathcal K,J)$, the direct cover completion $aP$ is
@@ -9968,8 +9988,9 @@ local at every $J$-covering sieve. Hence $aP$ is a Cat-valued sheaf.
 > whole glue naturality, and silent; combines it with the primitive
 > glue-after-restriction path; and produces the existing two-sided
 > fixed-forward locality interface at every eligible question and over the
-> whole topology. It assumes neither generic functor extensionality nor a
-> category-of-elements retraction.
+> whole topology, using the inherited ordinary/displayed assembly primitive.
+> It assumes neither generic functor extensionality nor a category-of-elements
+> retraction. An explicit-profile replacement of assembly is deferred.
 
 This proof explains why the chosen constructor set is not merely mnemonic.
 Return begins the free object. Glue supplies a candidate inverse to
@@ -14023,9 +14044,9 @@ only to its collection of arrows.
 In a strict specialization the two endpoints displayed in (27.17) may become
 convertible. That does not make the compositor term itself an identity, and
 the active negative check confirms it is not collapsed to one. This is useful
-for eventual migration away from historical global strict endpoint cuts: the
-coherence witness and its next action are already present rather than having
-to be reconstructed from an equation that erased them.
+after retirement of the historical generic strict endpoint cuts: the
+coherence witness and its next action remain present, with stronger
+computation confined to its qualified profiles and named instances.
 
 Nor is an infinite record of associators and higher laws added beside the
 unit. The compositor in (27.17) is projected from the same internal-action
@@ -14408,45 +14429,45 @@ $$
   \sum_{p:x=y}\bigl(c=\operatorname{pathToHom}(p)\bigr).
 $$
 
-The endpoint path is explicit. This matters because the prototype still has
-historical cuts that identify several strict endpoints judgmentally; the
-property continues to say something meaningful after those cuts are moved to
-their proper profiles. Applying it to every binary compositor gives
+The endpoint path is explicit. Ambient lax endpoints need not agree
+judgmentally; the property supplies the particular agreement and identifies
+the existing cell with its equality-induced arrow. Apply it to the whole compositor transformation
+$\Phi^F_{X,g}$, whose component at $f$ is $\phi^F_{g,f}$. For an ambient
+carrier $F$ and evidence $p$ this gives
 
 $$
 \begin{aligned}
 \mathsf{IsStrictFunctor}(F)
   &\equiv
-    \prod_{f,g}\mathsf{IsStrictCell}(\phi^F_{g,f}),\\
-\mathsf{StrictFunctor}(A,B)
-  &\equiv
-    \sum_{F:\operatorname{Functor}(A,B)}
-      \mathsf{IsStrictFunctor}(F).
+    \prod_{X,Y,Z,g}\mathsf{IsStrictCell}(\Phi^F_{X,g}),\\
+\mathsf{makeStrict}(F,p)
+  &:\mathsf{StrictFunctor}(A,B).
 \end{aligned}
 \tag{28.6}
 $$
 
-Thus the evidence itself is the proof-carrying code; there is no second
-grammar of strict functors. In the logical framework the outer
-$\mathsf{StrictFunctor}(A,B)$ name is nevertheless kept as a rigid
-record-like head whose carrier is exactly the second line of (28.6). This
-retains the indices $A$ and $B$ when a rule must invert a package. Its
-constructor and projections recover the ambient functor and its proof.
+The property remains witness-rich, but the classifier is opaque. Admission
+internalizes the certificate; the classified object does not reveal which
+certificate was chosen. Visible admissions compare at proof time by their
+ambient carriers. This does not assert proof irrelevance for the property
+itself, and it introduces no second grammar of strict functors.
 
 A stable view, written $\operatorname{strict}(S)$, places such a package back
-in the ambient functor classifier. When the package constructor is visible,
-point and hom action compute to the packaged carrier. When a strict package is
-itself returned by higher action, the stable head remains visible instead of
-prematurely erasing the evidence discriminator.
+in the ambient functor classifier. For a visible admission its point action
+computes, while its hom action retains the classified head. The explicit raw
+observation $\operatorname{underlying}(S)$ recovers the admitted carrier and
+its action. The stable and raw presentations compare at proof time.
 
-There is a deliberate limit to the present computation. The former rule that
-reduced every selected compositor to a literal identity has been retired: an
-arbitrary proof of $\mathsf{IsStrictCell}(c)$ identifies $c$ with an
-equality-induced arrow, and does not justify that blanket rewrite by subject
-reduction. A later consolidation will move the historical global strict cuts
-to evidence-bearing functor and transformation profiles. The current package
-records the correct semantic information without anticipating that normal-form
-migration.
+The stable view owns strict composition and identity computation of the
+existing whole internal-action compositor. Canonical strictness evidence is
+derived from these computations, independently of the admission certificate.
+Capped evidence is obtained by evaluating the whole property. Arbitrary raw
+evidence does not install a blanket identity rule on its carrier.
+
+The full category $\mathsf{StrictFunctor}_{\mathrm{cat}}(A,B)$ now packages
+these objects with all ambient transformations and their higher homs. Generic
+composition/naturality cuts have been retired. Focused negative controls
+check the separation between ambient lax action and classified computation.
 
 This still requires no second functor theory. Define the profiled internal hom
 
@@ -14455,8 +14476,8 @@ $$
 \tag{28.7}
 $$
 
-to have strict packages as objects and the existing ambient transformation
-categories between their stable views as homs:
+to have strict packages as objects and classified conventional lax
+transformations between their stable views as homs:
 
 $$
 \begin{aligned}
@@ -14464,28 +14485,30 @@ $$
   &\equiv\mathsf{StrictFunctor}(A,B),\\
 \operatorname{Hom}(S,T)
   &\equiv
-  \operatorname{Transf}(\operatorname{strict}S,
+  \operatorname{LaxTransfor}(\operatorname{strict}S,
                          \operatorname{strict}T).
 \end{aligned}
 \tag{28.8}
 $$
 
-Identity and composition delegate to the ambient functor category. Homs
-between transformations are the existing modification categories, and every
-subsequent hom is reused. A whole inclusion acts as the identity on this shared
-transformation tower.
+`IsLaxTransfor` constrains the existing pre/right cell. Opaque admission gives
+a stable `lax_transfor` view with that one-sided computation, while its
+post/left cell remains directed. Profiled identity and composition project to
+the ambient operations. Homs between classified transformations reuse ambient
+modifications and all subsequent iterated cells. The whole inclusion exposes
+these selected carriers and their retained higher action.
 
-The word *lax* in (28.7) describes the arrow profile. Objects are functors
-equipped with strictness evidence; arrows are the ambient transformations whose
-off-diagonal action retains laxity. The category is not definitionally the
+Thus (28.8) differs from the full `StrictFunctor_cat`: Gray arrows have an
+explicit lax profile, while the full subcategory retains all ambient
+transformations. The category is not definitionally the
 ambient functor category, and an arbitrary ambient functor is not silently
 accepted as one of its objects.
 
 The selected identity illustrates the separation. It is the ordinary identity
-functor paired with supplied strictness evidence. Gray curry, uncurry, join
+functor admitted with supplied strictness evidence. Gray curry, uncurry, join
 maps, and transformation graphs follow the same pattern: first construct the
-ordinary whole functor, then retain an $\mathsf{IsStrictFunctor}$ proof about
-its existing compositor. The proof may initially be supplied where its full
+ordinary whole functor, then supply an $\mathsf{IsStrictFunctor}$ proof about
+its existing whole compositor for admission. The proof may be supplied where its full
 internal derivation is not yet needed, but it can never conceal an independent
 forward cell because the property fixes that cell in its own type.
 
@@ -14497,13 +14520,14 @@ duplication is reserved for a genuinely different classifier or computation.
 <!-- evidence:GRAY-COMPUTATIONAL-PROFILE -->
 
 > **Formal status — checked.** Evidence `GRAY-COMPUTATIONAL-PROFILE`.
-> `IsStrictFunctor` constrains the existing extracted compositor, and
-> `StrictFunctor` is its exact carrier/evidence package behind a rigid indexed
-> facade. Constructor-visible stable-view action computes to the carrier.
-> GrayHom_lax reuses the complete ambient transformation and higher-hom tower;
-> no duplicate strict-functor grammar, compositor, modification hierarchy, or
-> broad category-head conversion is introduced. Reflection of strict evidence
-> into judgmental computation remains part of the later global-cut migration.
+> `IsStrictFunctor` constrains the existing whole compositor. `StrictFunctor`
+> admits carriers opaquely, with stable classified action, an explicit raw
+> observation and canonical evidence independent of the admission certificate.
+> `StrictFunctor_cat` reuses the complete ambient transformation tower.
+> `GrayHom_lax` instead uses opaque classified conventional lax arrows,
+> retaining ambient modifications above them. Generic strict cuts are retired;
+> normal identities and qualified named strict instances remain.
+> No duplicate functor grammar or compositor is introduced.
 
 ## 28.3 One Selected Right Closure
 
@@ -14526,10 +14550,10 @@ with the appropriate identity functors by whole beta and eta paths, and the
 resulting fixed-forward equivalence retains hom action.
 
 Equation (28.9) is an equivalence of profiled mapping *categories*. On the
-left, objects are strict packages for maps out of the selected tensor and
-arrows are ambient transformations. On the right, an outer strict package
-selects, at each object of $A$, an inner strict package $B\to C$; its arrows
-are allowed the lax transformation behaviour retained by (28.7). Curry and
+left, objects are strict classifiers for maps out of the selected tensor and
+arrows are classified lax transformations. On the right, an outer strict
+classifier selects, at each object of $A$, an inner strict classifier
+$B\to C$; its arrows have the classified lax behaviour of (28.8). Curry and
 uncurry transport not only objects but this transformation tower.
 
 The adjective *right* fixes which variable is moved into the internal hom. A
@@ -14651,7 +14675,7 @@ $$
 
 The formal source and target are owned by the stable transport functors of the
 internal action; (28.13) gives their readable composite presentations under
-the current strict endpoint conversions. The direction (28.15), rather than
+the selected graph/profile comparisons. The direction (28.15), rather than
 the choice of a terminology convention in isolation, is why the internal hom
 is named $\mathsf{GrayHom}_{\mathrm{lax}}$.
 
@@ -14716,14 +14740,12 @@ whole constructions. The tensor in this chapter is consequently written
 $\otimes_R$: it records the selected right closure rather than pretending
 that the mirror and monoidal boundaries have already been built.
 
-There is a second historical boundary. Some ambient functoriality and
-naturality endpoints are still identified by global prototype conversion
-rules. The strict property now records where the compositor cell itself is
-constrained by semantic evidence, and the unprofiled interchanger remains
-nonidentity, but the eventual migration must both re-home endpoint conversions
-at explicit strict profiles and decide where that evidence should be reflected
-into judgmental computation. This chapter does not perform that repository-wide
-normal-form change.
+The action-profile integration removes the historical generic strict
+composition and naturality conversions. Stable classified views select their
+own computation; explicit raw evidence provides paths, and qualified named
+constructors may compute directly. Ambient noncollapse controls and the
+nonidentity interchanger check these boundaries. This qualification does not
+establish general confluence or resolve the separate higher Op/duality defects.
 
 ## 28.7 The End Of The Fourth Spiral
 
@@ -14746,18 +14768,18 @@ $$
 \tag{28.16}
 $$
 
-This table also explains why the historical strict endpoint conversions do
-not invalidate the experiment. They may simplify the written source and
-target of a comparison, but they do not turn the unprofiled cell into the
-identity. The path target, strict property, and arbitrary directed target still
-select observably different behaviours of the retained witness.
+The path target, strict property, and arbitrary directed target select
+different behaviours of the retained witness. The unprofiled cell remains
+observable; neither ordinary equality evidence nor opaque admission of a
+particular carrier makes every ambient cell an identity.
 
 The three rows of (28.16) should be read as operations on one owner, not as
 three parallel theories. The arbitrary directed cell is primary. A
 path-valued target changes its hom into equality and thereby supplies an
 inverse. A strict package retains an endpoint path and identifies the same
-cell with the arrow induced by that path; judgmental reflection is deliberately
-deferred. Neither specialization requires the ambient compositor, its whole
+cell with the arrow induced by that path. A stable classified view supplies
+its specified judgmental computation, while raw evidence remains a path.
+Neither specialization requires the ambient compositor, its whole
 transformation, or its next action to be redeclared.
 
 This suggests a discipline for extending the higher theory. First locate the
@@ -15016,7 +15038,7 @@ $$
 \operatorname{Hom}_{\sum E}((x,u),(y,v))
   \simeq
   \sum_{p:x\to y}
-    \operatorname{Hom}_{E(y)}(E[p](u),v).
+    \operatorname{Hom}_{E(y)}(E[p]{(u)},v).
 \tag{29.12}
 $$
 
@@ -15028,7 +15050,7 @@ every stage is built from the existing `Hom`, dependent `Sigma`, and
 dependent-hom owners.
 
 With both total endpoints fixed, (29.12) projects $(p,\alpha)$ to $p$ and,
-through covariant fibre action, to $E[p](u)$ in the already fixed fibre
+through covariant fibre action, to $E[p]{(u)}$ in the already fixed fibre
 $E(y)$. The latter is internal transport, not the independently varying
 simplex target supplied by the outer `PathOut` Sigma in (29.8).
 
@@ -15149,7 +15171,9 @@ The third case is where higher action matters: a face is not only a function
 on stored points, but a functor on the outgoing-path category. The result
 retains its own hom action. Direct and sequential face presentations are not
 globally collapsed to one judgmental normal form; the structural recursion
-provides the selected whole observation.
+provides the selected whole observation. The focused edge-zero-two followed
+by vertex-one comparison does compute to the direct whole face; this
+particular observation is not a general composition theorem for face codes.
 
 ## 29.6 The Ordinal Source Grows By A Transformation
 
@@ -16934,8 +16958,9 @@ Several boundaries remain explicit:
   successful matrix tests. The supplied semantic contracts remain visible.
 - General categorical terminality and higher coherence require their own
   refinement beyond the current ordinary-target presentation.
-- The higher Op/duality and strictness-profile migration belongs to a
-  separate development. No general higher-duality repair is claimed here.
+- Action-profile integration preserves the whole ordinary constructions and
+  their actual OneCat, model and interpretation contracts. Higher Op/duality
+  repair remains a separate development.
 - Categories of unbounded or derived complexes and further derived or stable
   constructions are outside the implemented boundary of this chapter.
 
@@ -17198,14 +17223,14 @@ formal and executable evidence.
 | `TT-SIGMA-PI-PATHS` | checked | The groupoid layer has dependent-pair and dependent-function classifiers, observational Sigma paths, and a checked happly/funext equivalence for Pi paths. | `sigma_Fst`<br><small>`emdash3_2.lp`</small><br>`sigma_Snd`<br><small>`emdash3_2.lp`</small><br>`PiHapply`<br><small>`emdash3_2.lp`</small><br>`PiFunext`<br><small>`emdash3_2.lp`</small><br>`pi_happly_type_equiv`<br><small>`emdash3_2.lp`</small> | `PiFunext`<br><small>`examples/pi_funext.lp`</small> |
 | `CAT-ITERATED-HOMS` | checked | A category has an object classifier and category-valued homs, so higher cells are represented by iterating Hom. | `Cat`<br><small>`emdash3_2.lp`</small><br>`Obj`<br><small>`emdash3_2.lp`</small><br>`Hom`<br><small>`emdash3_2.lp`</small> | `Hom`<br><small>`emdash3_2_checks.lp`</small> |
 | `CAT-PATH-CATEGORY` | checked | Path(A) internalizes equality as a groupoidal category, and an ordinary function induces an iterable functor between path categories. | `Path_cat`<br><small>`emdash3_2.lp`</small><br>`Path_cat_func`<br><small>`emdash3_2.lp`</small><br>`path_map_func`<br><small>`emdash3_2.lp`</small> | `path_map_func`<br><small>`examples/path_category.lp`</small> |
-| `CAT-FUNCTOR-CALCULUS` | checked | Ordinary functors expose object and iterated-hom action, with generic identity and composition computation rather than constructor-specific functor laws. | `Functor`<br><small>`emdash3_2.lp`</small><br>`fapp0`<br><small>`emdash3_2.lp`</small><br>`fapp1_func`<br><small>`emdash3_2.lp`</small><br>`fapp1_fapp0`<br><small>`emdash3_2.lp`</small><br>`id_func`<br><small>`emdash3_2.lp`</small><br>`comp_cat_fapp0`<br><small>`emdash3_2.lp`</small> | `fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
+| `CAT-FUNCTOR-CALCULUS` | checked | Ambient functors expose object and iterated-hom action with normal identity computation and retained compositor cells. Strict composition computation requires a classified stable view or a qualified named constructor. | `Functor`<br><small>`emdash3_2.lp`</small><br>`fapp0`<br><small>`emdash3_2.lp`</small><br>`fapp1_func`<br><small>`emdash3_2.lp`</small><br>`fapp1_fapp0`<br><small>`emdash3_2.lp`</small><br>`id_func`<br><small>`emdash3_2.lp`</small><br>`comp_cat_fapp0`<br><small>`emdash3_2.lp`</small><br>`strict_functor`<br><small>`emdash3_2_gray_profiles.lp`</small> | `fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small><br>`strict_functor`<br><small>`examples/gray_profiles.lp`</small> |
 | `CAT-PRODUCT-CALCULUS` | checked | Binary product categories have projection functors and a stable two-sided product-map constructor whose object, arrow, and projection observations compute componentwise. | `Product_cat`<br><small>`emdash3_2.lp`</small><br>`Product_projL_func`<br><small>`emdash3_2.lp`</small><br>`Product_map_func`<br><small>`emdash3_2.lp`</small> | text `product/projection cut used by the book`<br><small>`emdash3_2_checks.lp`</small><br>text `General two-sided product maps used by profunctor reindexing`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRIANGULAR-BINARY-PRODUCTS` | checked | A selected whole product functor P:C×C→C exposes whole projection transfors, represented-family pairing, stable K1a/K2a and pairing heads, runtime beta/distribution/eta computation, and transparent whole unpair action without duplicating the ambient product-category calculus. | `BinaryProducts`<br><small>`emdash3_2_triangular_binary_products.lp`</small><br>`binary_products_proj1_transf`<br><small>`emdash3_2_triangular_binary_products.lp`</small><br>`binary_products_proj2_transf`<br><small>`emdash3_2_triangular_binary_products.lp`</small><br>`binary_products_pair_transf`<br><small>`emdash3_2_triangular_binary_products.lp`</small><br>`binary_products_K1a_fapp0`<br><small>`emdash3_2_triangular_binary_products.lp`</small><br>`binary_products_K2a_fapp0`<br><small>`emdash3_2_triangular_binary_products.lp`</small> | `binary_products_pair_fapp0`<br><small>`examples/triangular_binary_products.lp`</small><br>`binary_products_map_fapp0`<br><small>`examples/triangular_binary_products.lp`</small> |
 | `TERMINAL-OBJECT-COMPUTATION` | checked | A selected terminal object exposes one whole transformation from the identity functor to the constant terminal functor, computing components and off-diagonal action; every Hom_C(A,t) is contractible at the canonical arrow, yielding arbitrary-arrow uniqueness without a variable-headed runtime rule. | `TerminalObject`<br><small>`emdash3_2_terminal_objects.lp`</small><br>`terminal_arrow_transf`<br><small>`emdash3_2_terminal_objects.lp`</small><br>`terminal_hom_contr`<br><small>`emdash3_2_terminal_objects.lp`</small><br>`terminal_unique_path`<br><small>`emdash3_2_terminal_objects.lp`</small> | `terminal_arrow_transf`<br><small>`examples/terminal_objects.lp`</small><br>`terminal_unique_path`<br><small>`examples/terminal_objects.lp`</small> |
 | `PULLBACK-SLICE-BASE-CHANGE` | checked | Chosen pullbacks form one whole opposite-variance exact-slice family u*:C/Y→C/X with Σ_u⊣u*, actual whole unit/counit transfors, full Došen rectangles, proof-time whole/point semantic comparison, guarded whole mate cancellation, and pullback object/projection/square observations derived from u*(g) and the counit rather than from a cone record. | `PullbackStructure`<br><small>`emdash3_2_pullbacks.lp`</small><br>`SliceBaseChange_catd`<br><small>`emdash3_2_pullbacks.lp`</small><br>`slice_base_change_adjunction`<br><small>`emdash3_2_pullbacks.lp`</small><br>`slice_base_change_gamma`<br><small>`emdash3_2_pullbacks.lp`</small><br>`slice_base_change_transpose_func_semantic_path`<br><small>`emdash3_2_pullbacks.lp`</small><br>`pullback_square_readable_cell`<br><small>`emdash3_2_pullbacks.lp`</small> | `slice_base_change_gamma`<br><small>`examples/pullbacks.lp`</small><br>`pullback_lift_slice`<br><small>`examples/pullbacks.lp`</small> |
 | `SLICE-DEPENDENT-PRODUCTS` | checked | A selected coherent dependent-product structure supplies one whole covariant exact-slice family Π_u:C/X→C/Y and the existing adjunction u*⊣Π_u; its actual unit/counit tapp1 observations, both full Došen rectangles, component triangles, transparent whole mate action, generic Hom comparison, and thin total SliceDependentProducts package are active. | `DependentProductStructure`<br><small>`emdash3_2_slice_dependent_products.lp`</small><br>`SliceDependentProduct_catd`<br><small>`emdash3_2_slice_dependent_products.lp`</small><br>`slice_dependent_product_adjunction`<br><small>`emdash3_2_slice_dependent_products.lp`</small><br>`slice_dependent_product_gamma`<br><small>`emdash3_2_slice_dependent_products.lp`</small><br>`slice_dependent_product_hom_prof_comparison`<br><small>`emdash3_2_slice_dependent_products.lp`</small><br>`SliceDependentProducts`<br><small>`emdash3_2_slice_dependent_products.lp`</small> | `slice_dependent_product_gamma`<br><small>`examples/slice_dependent_products.lp`</small><br>`slice_dependent_product_hom_prof_comparison`<br><small>`examples/slice_dependent_products.lp`</small> |
 | `CUT-PRODUCT-PROJECTION` | formal-consequence | In the Cat-specialized case, for h:A0→A1, k:B0→B1, and g:A1→C, the readable equation pi1^*(g) composed with h×k equals pi1'^*(g composed with h); its owner-aligned projection and nested-precomposition forms are checked, while the literal raw projection-composite equality is not packaged. | `hom_precomp_along_fapp0`<br><small>`emdash3_2.lp`</small><br>`Product_projL_func`<br><small>`emdash3_2.lp`</small><br>`Product_map_func`<br><small>`emdash3_2.lp`</small><br>`comp_assoc`<br><small>`emdash3_2.lp`</small> | text `product/projection cut used by the book`<br><small>`emdash3_2_checks.lp`</small> |
-| `CAT-HOM-CUTS` | checked | Represented-hom postcomposition and precomposition have distinct stable full and capped owners with identity, consecutive-action, adjacent-cut, and proof-time ordinary-composition comparisons. | `hom_postcomp_func`<br><small>`emdash3_2.lp`</small><br>`hom_postcomp_fapp0`<br><small>`emdash3_2.lp`</small><br>`hom_precomp_along_func`<br><small>`emdash3_2.lp`</small><br>`hom_precomp_along_fapp0`<br><small>`emdash3_2.lp`</small> | text `Hom-action functoriality joins for postcomposition`<br><small>`emdash3_2_checks.lp`</small><br>text `Hom-action functoriality joins for precomposition`<br><small>`emdash3_2_checks.lp`</small> |
+| `CAT-HOM-CUTS` | checked | Represented-hom postcomposition and precomposition retain distinct stable full and capped owners, normal identity computation, qualified identity/profile accumulation and adjacent cuts, and proof-time ordinary-composition comparisons. Arbitrary functor-indexed action retains its laxity. | `hom_postcomp_func`<br><small>`emdash3_2.lp`</small><br>`hom_postcomp_fapp0`<br><small>`emdash3_2.lp`</small><br>`hom_precomp_along_func`<br><small>`emdash3_2.lp`</small><br>`hom_precomp_along_fapp0`<br><small>`emdash3_2.lp`</small> | text `Hom-action functoriality joins for postcomposition`<br><small>`emdash3_2_checks.lp`</small><br>text `Hom-action functoriality joins for precomposition`<br><small>`emdash3_2_checks.lp`</small> |
 | `CAT-TRANSFOR-CALCULUS` | checked | Transformations form the next hom between functors and expose point components together with higher naturality action. | `Transf`<br><small>`emdash3_2.lp`</small><br>`tapp0_fapp0`<br><small>`emdash3_2.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2.lp`</small> | `tapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
 | `CAT-DIRECTED-FAMILIES` | checked | A Cat-valued directed family has fibres and functorial reindexing, while a family morphism has fibre functors and directed comparison cells. | `Catd`<br><small>`emdash3_2.lp`</small><br>`Fibre_cat`<br><small>`emdash3_2.lp`</small><br>`catd_transport_func`<br><small>`emdash3_2.lp`</small><br>`Functord`<br><small>`emdash3_2.lp`</small><br>`fdapp1_int_cell`<br><small>`emdash3_2.lp`</small> | `fdapp1_int_cell`<br><small>`examples/dependent_hom_laxity.lp`</small> |
 | `CAT-SIGMA-PI` | checked | Directed families have a Sigma total category, canonical transport arrows, and a Pi section category with coherent evaluation. | `Sigma_cat`<br><small>`emdash3_2.lp`</small><br>`sigma_transport_arrow`<br><small>`emdash3_2.lp`</small><br>`Pi_cat`<br><small>`emdash3_2.lp`</small><br>`piapp0`<br><small>`emdash3_2.lp`</small> | `sigma_transport_arrow`<br><small>`emdash3_2_checks.lp`</small> |
@@ -17260,7 +17285,7 @@ formal and executable evidence.
 | `WE-FULL-CATEGORICAL-COMPARISON` | research-boundary | A reverse BNat functor, full hom-category equivalence, and functor-category initiality require additional reusable infrastructure. | — | — |
 | `WE-GROUP-COMPLETION` | checked | The concrete WalkingEnd-to-Circle functor sends every directed natural power to the corresponding nonnegative Circle power, and restriction along it is a whole fixed-forward OmegaEquivAlong from Circle maps into every groupoid G to path-valued WalkingEnd functors; source-functorial generic adjunction packaging remains separate. | `walking_to_circle_func`<br><small>`emdash3_2_walking_circle_completion.lp`</small><br>`walking_to_circle_power`<br><small>`emdash3_2_walking_circle_completion.lp`</small><br>`walking_circle_groupoidification_hom_omega`<br><small>`emdash3_2_walking_circle_universality.lp`</small> | `walking_to_circle_power`<br><small>`examples/walking_circle_completion.lp`</small><br>`walking_circle_groupoidification_hom_omega`<br><small>`examples/walking_circle_groupoidification_universality.lp`</small> |
 | `TRANSF-POINT-OFFDIAGONAL` | checked | An ordinary transfor has point components and an iterable off-diagonal hom action from F(x) to G(y) along every source arrow x to y. | `Transf_cat`<br><small>`emdash3_2.lp`</small><br>`tapp0_fapp0`<br><small>`emdash3_2.lp`</small><br>`tapp1_func`<br><small>`emdash3_2.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2.lp`</small> | `tapp1_at_transf`<br><small>`emdash3_2_checks.lp`</small> |
-| `TRANSF-STRICT-NATURALITY` | checked | Postcomposition and precomposition adjacent to an ordinary transfor's off-diagonal action reduce to the action on the corresponding composite source arrow. | text `Full strict naturality for ordinary transfors`<br><small>`emdash3_2.lp`</small> | text `Full strict naturality: post/left accumulation before capping`<br><small>`emdash3_2_checks.lp`</small> |
+| `TRANSF-STRICT-NATURALITY` | checked | The stable classified strict-transfor view owns both post/left and pre/right naturality cuts through the existing tapp1 calculus. Raw ambient transfors retain directed cells; property evidence alone supplies paths rather than blanket runtime rewriting. | `strict_transfor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`IsStrictTransfor`<br><small>`emdash3_2_gray_profiles.lp`</small> | `strict_transfor`<br><small>`examples/gray_profiles.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRANSF-HORIZONTAL-CALCULUS` | checked | The product-composition action supplies an iterable horizontal composite of a pair of ordinary transfors, with checked point, full off-diagonal, and capped off-diagonal projections. | `comp_prod_fapp1_fapp0`<br><small>`emdash3_2.lp`</small> | `comp_prod_fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
 | `TRANSFD-FIBRE-COMPONENTS` | checked | A natural family transformation between displayed functors has a transformation in every fibre and a point component at every fibre object, with identity and vertical composition inherited from the generic transfor calculus. | `Transfd_cat`<br><small>`emdash3_2.lp`</small><br>`Fibre_transf`<br><small>`emdash3_2.lp`</small><br>`Fibre_transf_app`<br><small>`emdash3_2.lp`</small> | `Fibre_transf_app`<br><small>`emdash3_2_checks.lp`</small> |
 | `FUNCTORD-DISPLAYED-LAXITY` | checked | For a natural family morphism and a base arrow, the internal displayed hom action supplies a directed component from target transport after the source fibre functor to the target fibre functor after source transport. | `functord_transport_lhs_func`<br><small>`emdash3_2.lp`</small><br>`functord_transport_rhs_func`<br><small>`emdash3_2.lp`</small><br>`fdapp1_int_cell`<br><small>`emdash3_2.lp`</small> | `fdapp1_int_cell`<br><small>`examples/dependent_hom_laxity.lp`</small> |
@@ -17292,16 +17317,16 @@ formal and executable evidence.
 | `NATIVE-STRUCTURE-IDENTITY` | research-boundary | A generic native structure identity theorem requires a directed structure signature, a higher structure-preserving equivalence classifier, qualified base univalence, and coherent off-diagonal and next-hom action. | — | — |
 | `NATIVE-REZK-COMPLETION` | research-boundary | No selected native saturation predicate, Rezk completion object, unit weak equivalence, or iterable higher mapping property is currently implemented. | — | — |
 | `ADJ-TRIANGLE-CUTS` | checked | An indexed adjunction exposes stable unit and counit observations whose two component-level triangle cuts reduce to the corresponding functorial composites. | `Adjunction`<br><small>`emdash3_2.lp`</small><br>`unit_adj_transf`<br><small>`emdash3_2.lp`</small><br>`counit_adj_transf`<br><small>`emdash3_2.lp`</small> | `unit_adj_transf`<br><small>`examples/adjunction_triangles.lp`</small><br>text `Indexed adjunction triangles, opposite, and operation-trust boundary`<br><small>`emdash3_2_checks.lp`</small> |
-| `ADJ-HOM-PROF-COMPARISON` | checked | An indexed adjunction supplies a reindexable profunctor comparison between Hom_B(LM,F) and Hom_A(M,RF), whose push and pull inherit the generic comparison beta and eta laws. | `Adjunction_hom_prof_comparison`<br><small>`emdash3_2.lp`</small><br>`Adjunction_hom_prof_comparison_along`<br><small>`emdash3_2.lp`</small> | `Adjunction_hom_prof_comparison_along`<br><small>`emdash3_2_checks.lp`</small> |
+| `ADJ-HOM-PROF-COMPARISON` | checked | An indexed adjunction supplies a reindexable profunctor comparison between Hom_B(LM,F) and Hom_A(M,RF), whose push and pull inherit the generic comparison beta and eta laws. | `Adjunction_hom_prof_comparison`<br><small>`emdash3_2.lp`</small><br>`Adjunction_hom_prof_comparison_along`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | `Adjunction_hom_prof_comparison_along`<br><small>`emdash3_2_checks.lp`</small> |
 | `MONAD-TRIANGULAR-COMPUTATION` | checked | A selected monad exposes whole unit and multiplication observations and one whole Kleisli-extension operation whose point action supports the ambient Došen beta and accumulation cuts; an adjunction supplies the canonical monad with runtime unit and transparent G-epsilon-F multiplication semantics. | `Monad`<br><small>`emdash3_2_monads.lp`</small><br>`unit_monad_transf`<br><small>`emdash3_2_monads.lp`</small><br>`mult_monad_transf`<br><small>`emdash3_2_monads.lp`</small><br>`kleisli_extend_func`<br><small>`emdash3_2_monads.lp`</small><br>`kleisli_extend_fapp0`<br><small>`emdash3_2_monads.lp`</small><br>`adjunction_monad`<br><small>`emdash3_2_monads.lp`</small> | `kleisli_extend_fapp0`<br><small>`examples/monads_comonads.lp`</small><br>`adjunction_monad`<br><small>`examples/monads_comonads.lp`</small> |
-| `WEIGHTED-LIMIT-REPRESENTABILITY` | checked | A parameterized weighted-cone profunctor is formed by the selected covariant residual, and its computational representation by a functor exposes inverse push and pull operations on every reindexed incoming profunctor map. | `WeightedCone_prof`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_iso`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`weighted_limit_cov_push`<br><small>`emdash3_2.lp`</small><br>`weighted_limit_cov_pull`<br><small>`emdash3_2.lp`</small> | text `Computational profunctor comparisons and weighted representability`<br><small>`emdash3_2_checks.lp`</small><br>`weighted_limit_cov_pull`<br><small>`emdash3_2_checks.lp`</small><br>`weighted_limit_cov_pull`<br><small>`examples/profunctor_weighted_limits.lp`</small> |
-| `WEIGHTED-LIMIT-SPECIALIZATIONS` | formal-consequence | Terminal weights and conjoint weights inhabit the selected weighted-limit classifier, so the general right-adjoint preservation construction specializes to the corresponding conical-limit and right-Kan interfaces; this does not assert their missing semantic end identifications. | `Terminal_prof`<br><small>`emdash3_2.lp`</small><br>`Conjoint_prof`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2.lp`</small> | text `Weighted limit and colimit specialization typing`<br><small>`emdash3_2_checks.lp`</small> |
+| `WEIGHTED-LIMIT-REPRESENTABILITY` | checked | A parameterized weighted-cone profunctor is formed by the selected covariant residual, and its computational representation by a functor exposes inverse push and pull operations on every reindexed incoming profunctor map. | `WeightedCone_prof`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_iso`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`weighted_limit_cov_push`<br><small>`emdash3_2_strict_functor_actions.lp`</small><br>`weighted_limit_cov_pull`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | text `Computational profunctor comparisons and weighted representability`<br><small>`emdash3_2_checks.lp`</small><br>`weighted_limit_cov_pull`<br><small>`emdash3_2_checks.lp`</small><br>`weighted_limit_cov_pull`<br><small>`examples/profunctor_weighted_limits.lp`</small> |
+| `WEIGHTED-LIMIT-SPECIALIZATIONS` | formal-consequence | Terminal weights and conjoint weights inhabit the selected weighted-limit classifier, so the general right-adjoint preservation construction specializes to the corresponding conical-limit and right-Kan interfaces; this does not assert their missing semantic end identifications. | `Terminal_prof`<br><small>`emdash3_2.lp`</small><br>`Conjoint_prof`<br><small>`emdash3_2.lp`</small><br>`IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | text `Weighted limit and colimit specialization typing`<br><small>`emdash3_2_checks.lp`</small> |
 | `WEIGHTED-END-KAN-SEMANTICS` | mathematical-development | With semantic ends and coends, terminal weights recover ordinary cone and cocone categories while conjoint and companion weights recover the standard pointwise right and left Kan extension formulas. | — | — |
 | `DEPENDENT-ADJUNCTIONS` | research-boundary | A general dependent Sigma-change-of-base-Pi adjunction chain requires base-arrow action, off-diagonal and next-hom coherence, and Beck-Chevalley comparisons beyond the current Sigma and Pi family interfaces. | — | — |
 | `OP-DUALITY` | checked | Opposite category, functor, transfor, and adjunction operations expose the selected involutive and variance-reversing computations used by the duality arguments. | `Op_cat`<br><small>`emdash3_2.lp`</small><br>`Op_func`<br><small>`emdash3_2.lp`</small><br>`Op_transf`<br><small>`emdash3_2.lp`</small><br>`Op_adjunction`<br><small>`emdash3_2.lp`</small> | `Op_adjunction`<br><small>`emdash3_2_checks.lp`</small> |
-| `WEIGHTED-LIMIT-PRESERVATION` | checked | The selected profunctor comparison certifying a weighted limit is transported by an indexed right adjoint to a weighted-limit comparison for the composed diagram and cone point. | `IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2.lp`</small> | `right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2_checks.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`examples/profunctor_weighted_limits.lp`</small> |
-| `WEIGHTED-COLIMIT-PRESERVATION` | checked | Weighted colimits are presented through opposite weighted limits, and the selected left-adjoint preservation certificate is derived by applying right-adjoint preservation to the opposite adjunction. | `WeightedColimit_con`<br><small>`emdash3_2.lp`</small><br>`left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2.lp`</small> | `left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2_checks.lp`</small> |
-| `WEIGHTED-COLIMIT-SPECIALIZATIONS` | formal-consequence | Terminal weights and companion weights inhabit the selected opposite-defined weighted-colimit classifier, so left-adjoint preservation specializes to the corresponding conical-colimit and left-Kan interfaces without supplying semantic coend identifications. | `Terminal_prof`<br><small>`emdash3_2.lp`</small><br>`Companion_prof`<br><small>`emdash3_2.lp`</small><br>`WeightedColimit_con`<br><small>`emdash3_2.lp`</small><br>`left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2.lp`</small> | text `Weighted limit and colimit specialization typing`<br><small>`emdash3_2_checks.lp`</small> |
+| `WEIGHTED-LIMIT-PRESERVATION` | checked | The selected profunctor comparison certifying a weighted limit is transported by an indexed right adjoint to a weighted-limit comparison for the composed diagram and cone point. | `IsWeightedLimit_cov_comp`<br><small>`emdash3_2.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | `right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`emdash3_2_checks.lp`</small><br>`right_adjoint_preserves_weighted_limit_cov_comp`<br><small>`examples/profunctor_weighted_limits.lp`</small> |
+| `WEIGHTED-COLIMIT-PRESERVATION` | checked | Weighted colimits are presented through opposite weighted limits, and the selected left-adjoint preservation certificate is derived by applying right-adjoint preservation to the opposite adjunction. | `WeightedColimit_con`<br><small>`emdash3_2.lp`</small><br>`left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | `left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2_checks.lp`</small> |
+| `WEIGHTED-COLIMIT-SPECIALIZATIONS` | formal-consequence | Terminal weights and companion weights inhabit the selected opposite-defined weighted-colimit classifier, so left-adjoint preservation specializes to the corresponding conical-colimit and left-Kan interfaces without supplying semantic coend identifications. | `Terminal_prof`<br><small>`emdash3_2.lp`</small><br>`Companion_prof`<br><small>`emdash3_2.lp`</small><br>`WeightedColimit_con`<br><small>`emdash3_2.lp`</small><br>`left_adjoint_preserves_weighted_colimit_con`<br><small>`emdash3_2_strict_functor_actions.lp`</small> | text `Weighted limit and colimit specialization typing`<br><small>`emdash3_2_checks.lp`</small> |
 | `JOIN-RECURSOR` | checked | The primitive directed join has two inclusion functors, an internally natural cross cell, and a nondependent recursor with beta computation on both inclusions and the cross-cell datum. | `Join_cat`<br><small>`emdash3_2.lp`</small><br>`join_cross_transf`<br><small>`emdash3_2.lp`</small><br>`join_elim_func`<br><small>`emdash3_2.lp`</small><br>`join_elim_cross_transf`<br><small>`emdash3_2.lp`</small> | `join_elim_cross_transf`<br><small>`emdash3_2_checks.lp`</small><br>`join_elim_cross_transf`<br><small>`examples/directed_join.lp`</small> |
 | `JOIN-COLLAGE-BOUNDARY` | research-boundary | The join recursor has the input shape of the collage of the terminal profunctor, but no object or hom decomposition, mapping-category equivalence, opposite comparison, or dependent collage eliminator is active. | — | — |
 | `FORMAL-KERNEL-PRESENTATION` | checked | The active v3.2 modules expose categories, iterated homs, functors, transfors, and directed families through explicit classifiers and full or capped application owners, with executable assertions checking representative typing and computation. | `Cat`<br><small>`emdash3_2.lp`</small><br>`Hom_cat`<br><small>`emdash3_2.lp`</small><br>`fapp1_func`<br><small>`emdash3_2.lp`</small><br>`tapp1_func`<br><small>`emdash3_2.lp`</small><br>`Catd`<br><small>`emdash3_2.lp`</small> | `fapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small><br>`tapp1_fapp0`<br><small>`emdash3_2_checks.lp`</small> |
@@ -17314,7 +17339,7 @@ formal and executable evidence.
 | `ORDINARY-SIEVE-PULLBACK` | checked | An ordinary sieve is a Cat-valued higher sieve with pointwise subterminal evidence; pullback reuses the higher-sieve action, preserves that evidence, and computes membership at a probe as old membership at its postcomposition image. | `Sieve`<br><small>`emdash3_2_sieves.lp`</small><br>`ordinary_sieve_pullback_evidence`<br><small>`emdash3_2_sieves.lp`</small><br>`sieve_pullback`<br><small>`emdash3_2_sieves.lp`</small><br>`SieveMembership`<br><small>`emdash3_2_sites.lp`</small><br>`sieve_pullback_membership`<br><small>`emdash3_2_sites.lp`</small> | `sieve_pullback`<br><small>`examples/ordinary_sieves.lp`</small><br>`SieveMembership`<br><small>`examples/grothendieck_topology.lp`</small> |
 | `COMM-RING-INVERTIBILITY-SIEVE` | checked | For a commutative-ring-valued presheaf and a section over U, the invertibility construction produces an ordinary sieve whose membership at a probe computes to unit evidence for the restricted section. | `CommRingPshInvertibleAlong`<br><small>`emdash3_2_commutative_algebra_presheaves.lp`</small><br>`comm_ring_psh_invertibility_sieve`<br><small>`emdash3_2_commutative_algebra_presheaves.lp`</small> | `comm_ring_psh_invertibility_sieve`<br><small>`examples/commutative_ring_presheaf_invertibility.lp`</small><br>`CommRingPshInvertibleAlong`<br><small>`examples/commutative_ring_presheaf_invertibility.lp`</small> |
 | `DIRECT-COVER-COMPLETION-HIT` | checked | For every site and Cat-valued presheaf, the direct cover-completion categorical-HIT boundary provides a whole unit, one cover-question-indexed glue functor, and one whole silent path, with pullback compatibility inherited from displayed functoriality and a packaged internal direct-cover sheaf structure. | `DirectCoverSheafStructure`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`direct_cover_sheaf_structure_glue_funcd`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`direct_cover_sheaf_structure_silent_funcd`<br><small>`emdash3_2_direct_cover_internal_sheaves.lp`</small><br>`DirectCoverCompletionPsh`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_unit`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_glue_funcd`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_silent_funcd`<br><small>`emdash3_2_direct_cover_completion_hit.lp`</small> | `DirectCoverSheafStructure`<br><small>`examples/direct_cover_internal_sheaves.lp`</small><br>`direct_cover_completion_glue_funcd`<br><small>`examples/direct_cover_completion_hit.lp`</small><br>`direct_cover_completion_silent_funcd`<br><small>`examples/direct_cover_completion_hit.lp`</small> |
-| `DIRECT-COVER-COMPLETION-LOCALITY` | checked | Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology. | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_local_at_question`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small> | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_checks.lp`</small> |
+| `DIRECT-COVER-COMPLETION-LOCALITY` | checked | Canonical cover pullback, retained-member calculation, whole glue naturality, and silent derive restriction after glue as the second inverse law; the direct cover completion is consequently local at every eligible question and over the whole topology. Whole equivalence assembly uses the inherited ordinary/displayed pointwise-to-whole primitive with both selected inverse slots and assumed cancellation; no strict-profile premise is required. | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_local_at_question`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_direct_cover_completion_locality.lp`</small><br>`StrictTransfPointwiseOmegaAlong`<br><small>`emdash3_2_strict_pointwise_equivalences.lp`</small><br>`StrictTransfdPointwiseOmegaAlong`<br><small>`emdash3_2_strict_pointwise_equivalences.lp`</small> | `direct_cover_completion_restriction_glue_path`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_completion_is_topology_local`<br><small>`emdash3_2_checks.lp`</small> |
 | `DIRECT-COVER-COMPLETION-UNIVERSALITY` | checked | The completion recursor extends a whole seed map with return, glue, and silent coherence; it varies functorially in the seed, and at a topology-local target its whole beta and eta laws make unit precomposition an omega-equivalence of complete Hom categories. | `direct_cover_completion_rec`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_unit`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_glue`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_beta_silent`<br><small>`emdash3_2_direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_func`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small><br>`direct_cover_completion_rec_eta_local_func`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small><br>`direct_cover_completion_hom_omega`<br><small>`emdash3_2_direct_cover_completion_universality.lp`</small> | `direct_cover_completion_rec_beta_glue`<br><small>`examples/direct_cover_completion_eliminator.lp`</small><br>`direct_cover_completion_rec_eta_local_func`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_completion_hom_omega`<br><small>`emdash3_2_checks.lp`</small> |
 | `CAT-VALUED-SHEAFIFICATION-REFLECTOR` | checked | At Cat-valued coefficients, direct cover completion forms a functor into topology-local presheaves left adjoint to inclusion; its unit is return, its counit is local recursion from the identity seed, and the two counit cancellations make the adjunction reflective and instantiate the sheafification capability. | `CatValuedSheafData`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`cat_valued_sheaf_include_psh_func`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_func`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_adjunction`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_reflector`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small><br>`direct_cover_sheafification_capability`<br><small>`emdash3_2_direct_cover_sheafification.lp`</small> | `direct_cover_sheafification_func`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_sheafification_reflector_at`<br><small>`emdash3_2_checks.lp`</small><br>`direct_cover_sheafification_capability`<br><small>`emdash3_2_checks.lp`</small> |
 | `COMM-RING-STRUCTURED-CATEGORY` | checked | Commutative rings have set-valued carriers and retained operations and laws, including the zero ring; operation-preserving carrier maps are extensional structured homs and form the one-category CommRing_cat, while componentwise products and the Boolean-carrier F2 ring supply closed models without a claimed categorical-product universal property. | `comm_ring_carrier_is_set`<br><small>`emdash3_2_commutative_algebra.lp`</small><br>`zero_comm_ring`<br><small>`emdash3_2_commutative_algebra.lp`</small><br>`CommRingHom`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_hom_ext`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`CommRing_cat`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_cat_is_one_cat`<br><small>`emdash3_2_commutative_algebra_category.lp`</small><br>`comm_ring_product`<br><small>`emdash3_2_commutative_algebra_product.lp`</small><br>`f2_comm_ring`<br><small>`emdash3_2_commutative_algebra_f2.lp`</small> | `zero_comm_ring`<br><small>`examples/commutative_ring_objects.lp`</small><br>`CommRing_cat`<br><small>`examples/commutative_ring_morphisms.lp`</small><br>`f2_comm_ring`<br><small>`examples/commutative_ring_split_idempotent_localization.lp`</small> |
@@ -17349,8 +17374,8 @@ formal and executable evidence.
 | `WALKING-INTERVAL-GROUPOIDIFICATION` | checked | The groupoidal interval has two endpoints, one generating path, judgmental point and dependent-segment computation, and a whole fixed-forward mapping-object equivalence from maps Interval to G to path-valued functors WalkingArrow to Path(G), with endpoint/generator projections and retained higher action. | `interval_ind`<br><small>`emdash3_2_groupoidal_interval_hit.lp`</small><br>`walking_arrow_to_interval_func`<br><small>`emdash3_2_walking_interval_comparison.lp`</small><br>`walking_interval_groupoidification_hom_omega`<br><small>`emdash3_2_walking_interval_universality.lp`</small> | `interval_ind_beta_seg`<br><small>`examples/groupoidal_interval_hit.lp`</small><br>`walking_interval_groupoidification_hom_omega`<br><small>`examples/walking_interval_groupoidification.lp`</small> |
 | `GROUPOIDIFICATION-INTERVAL-RECOVERY` | checked | Specializing generic groupoidification to WalkingArrow and comparing the generic and interval extension owners gives maps Groupoidify(WalkingArrow) to Interval and back; their whole beta/eta laws yield both cancellation paths and a TypeEquiv without a definitional identification of the two HITs. | `groupoidify_walking_to_interval`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small><br>`interval_to_groupoidify_walking`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small><br>`groupoidify_walking_interval_type_equiv`<br><small>`emdash3_2_groupoidification_interval_recovery.lp`</small> | `groupoidify_walking_to_interval`<br><small>`examples/generic_groupoidification_interval.lp`</small><br>`groupoidify_walking_interval_type_equiv`<br><small>`examples/generic_groupoidification_interval.lp`</small> |
 | `GENERIC-GROUPOIDIFICATION-MAPPING` | checked | For every category C and groupoid G, restriction along the whole unit C to Path(Groupoidify(C)) is a fixed-forward OmegaEquivAlong between groupoidal maps out of Groupoidify(C) and path-valued functors out of C; the unit recursor computes on represented objects and dependent first cells and retains higher action. | `groupoidify_unit_func`<br><small>`emdash3_2_groupoidification_hit.lp`</small><br>`groupoidify_extend_func`<br><small>`emdash3_2_groupoidification_hit.lp`</small><br>`groupoidification_hom_omega`<br><small>`emdash3_2_groupoidification_universality.lp`</small><br>`groupoidify_unit_compositor_next_func`<br><small>`emdash3_2_groupoidification_composition.lp`</small> | `groupoidification_hom_omega`<br><small>`examples/generic_groupoidification.lp`</small><br>`groupoidify_unit_compositor_next_func`<br><small>`examples/generic_groupoidification.lp`</small> |
-| `GRAY-COMPUTATIONAL-PROFILE` | checked | IsStrictFunctor constrains the existing extracted compositor, StrictFunctor is its exact carrier/evidence Sigma package behind a rigid indexed facade, and constructor-visible strict_functor action computes to the carrier; GrayHom_lax uses those packages as objects and reuses the ambient Transf_cat tower without a duplicate code grammar or compositor. | `IsStrictFunctor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`StrictFunctor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`strict_functor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`emdash3_2_gray_profiles.lp`</small> | `IsStrictFunctor`<br><small>`examples/gray_profiles.lp`</small><br>`strict_functor_evidence`<br><small>`examples/gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`examples/gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`examples/gray_profiles.lp`</small> |
-| `GRAY-RIGHT-CLOSURE` | checked | The selected GrayTensor_R has one profiled right closure: whole curry and uncurry, each paired with supplied IsStrictFunctor evidence, form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity packages. | `GrayTensor_R`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_is_strict`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small> | `GrayTensor_R`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_curry_R_is_strict`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`examples/gray_right_closure.lp`</small> |
+| `GRAY-COMPUTATIONAL-PROFILE` | checked | IsStrictFunctor constrains the existing whole compositor. Opaque StrictFunctor admission provides stable classified action, a raw-carrier observation and canonical evidence. StrictFunctor_cat retains ambient transfors; GrayHom_lax selects opaque conventional LaxTransfor arrows, with pre/right computation and retained post/left laxity. Higher modifications are shared. Generic strict cuts are retired, with normal identities and qualified constructor instances retained. | `IsStrictFunctor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`StrictFunctor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`strict_functor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`LaxTransfor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`lax_transfor`<br><small>`emdash3_2_gray_profiles.lp`</small><br>`IsStrictTransfor`<br><small>`emdash3_2_gray_profiles.lp`</small> | `IsStrictFunctor`<br><small>`examples/gray_profiles.lp`</small><br>`strict_functor_is_strict`<br><small>`examples/gray_profiles.lp`</small><br>`GrayHom_lax`<br><small>`examples/gray_profiles.lp`</small><br>`grayhom_lax_include_func`<br><small>`examples/gray_profiles.lp`</small><br>`LaxTransfor`<br><small>`examples/gray_profiles.lp`</small><br>`lax_transfor`<br><small>`examples/gray_profiles.lp`</small><br>`IsStrictTransfor`<br><small>`examples/gray_profiles.lp`</small> |
+| `GRAY-RIGHT-CLOSURE` | checked | The selected GrayTensor_R has one profiled right closure: whole curry and uncurry, each paired with supplied IsStrictFunctor evidence, form an OmegaEquivAlong between GrayHom_lax(GrayTensor_R(A,B),C) and GrayHom_lax(A,GrayHom_lax(B,C)), with whole beta/eta and coevaluation/evaluation derived at strict identity packages. | `GrayTensor_R`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_curry_R_is_strict`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`emdash3_2_gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`emdash3_2_gray_right_closure.lp`</small> | `GrayTensor_R`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_right_closure_omega`<br><small>`examples/gray_right_closure.lp`</small><br>`strict_functor_is_strict`<br><small>`examples/gray_right_closure.lp`</small><br>`gray_coevaluation_R_func`<br><small>`examples/gray_right_closure.lp`</small> |
 | `GRAY-WALKING-INTERCHANGER` | checked | In the selected strict-object/lax-arrow Gray right-closure slice, the walking square has four coevaluation-derived vertices and two coordinate arrow families, while its oriented nonidentity interchanger is projected from the existing whole post/left laxity action and retains one next hom action. | `gray_square_inner_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_square_outer_src_arrow`<br><small>`emdash3_2_gray_walking_square.lp`</small><br>`gray_interchanger`<br><small>`emdash3_2_gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`emdash3_2_gray_interchanger.lp`</small> | `gray_interchanger`<br><small>`examples/gray_interchanger.lp`</small><br>`gray_interchanger_next_func`<br><small>`examples/gray_interchanger.lp`</small> |
 | `SEMISIMPLICIAL-FACE-SUBSTRATE` | checked | Injective skip/keep face codes compute, form the locally discrete augmented semi-simplex category, realize selected ordinal shapes by directed join, and define Yoneda standard semisimplices and whole groupoid-valued semisimplicial diagram realization with retained higher action. | `FaceCode`<br><small>`emdash3_2_semisimplicial_face_codes.lp`</small><br>`SemiDeltaPlus_cat`<br><small>`emdash3_2_semisimplicial_index.lp`</small><br>`DirectedSimplex_cat`<br><small>`emdash3_2_simplex_shapes.lp`</small><br>`StandardSimplex`<br><small>`emdash3_2_semisimplicial_diagrams.lp`</small> | `face_vertex_zero`<br><small>`examples/semisimplicial_face_codes.lp`</small><br>`semi_delta_edge_zero_one`<br><small>`examples/semisimplicial_index_category.lp`</small><br>text `Ordinary dimension n means n+1 vertices`<br><small>`examples/simplex_shapes.lp`</small><br>`semisimplicial_grpd_realized_face_func`<br><small>`examples/semisimplicial_diagrams.lp`</small> |
 | `DEPENDENT-SIMPLEX-INTERNAL-ACTION` | checked | The fixed-endpoint dependent hom is the existing hom of a Sigma total and retains whole base-arrow and transported-endpoint observations; the recursive PathOut triangle category has whole target-line and base-line projections whose hom actions expose the 023 and 123 faces, while the next internal action maps a visible dependent tetrahedron and remains iterable rather than adding an independent coherence record. | `DependentTriangle_cat`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_triangle_boundary_face_func`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small><br>`dependent_simplex2_boundary_line_func`<br><small>`emdash3_2_dependent_simplex_faces.lp`</small><br>`dependent_tetrahedron_map`<br><small>`emdash3_2_dependent_simplex_bridge.lp`</small> | text `The triangle classifier is the active Hom(Sigma) presentation`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>text `A further hom action remains available`<br><small>`examples/dependent_simplex_bridge.lp`</small><br>`dependent_simplex2_boundary_target_action_path_test`<br><small>`examples/dependent_simplex_faces.lp`</small><br>`dependent_simplex2_boundary_base_action_path_test`<br><small>`examples/dependent_simplex_faces.lp`</small> |
@@ -17371,7 +17396,7 @@ formal and executable evidence.
 | `NATIVE-SNAKE-LES-COMPARISON` | checked | The native homology window specializes to the general native snake, with retained endpoint equivalences and the whole positive-sign connecting-map agreement. | `one_cat_native_window_snake_connecting_forward_path`<br><small>`emdash3_2_one_cat_native_window_snake_connecting_comparison.lp`</small> | `one_cat_native_window_snake_connecting_forward_path`<br><small>`examples/one_cat_native_window_snake_connecting_comparison.lp`</small> |
 | `NATIVE-FREYD-MODEL` | checked | A supplied native Freyd adjunction model and normality support direct whole H/maps/delta observations on introduced raw chain data, without a legacy homology-model prerequisite. | `FreydAdjunctionModel`<br><small>`emdash3_2_commutative_algebra_freyd_adjunction_models.lp`</small><br>`freyd_adjunction_model_map`<br><small>`emdash3_2_commutative_algebra_freyd_adjunction_model_observations.lp`</small><br>`freyd_adjunction_model_connecting_observation`<br><small>`emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp`</small> | `freyd_adjunction_model_map`<br><small>`examples/freyd_adjunction_model_observations.lp`</small><br>`freyd_adjunction_model_connecting_observation`<br><small>`examples/freyd_adjunction_model_connecting_observation.lp`</small> |
 | `NATIVE-CAS-DISPLAYED-EXACTNESS` | checked | Under explicit original model and arrow-interpretation contracts, the native canonical proofs certify each actual displayed pair and a complete coherent finite diagram. No output-exactness assumption or universal reselection is added. | `FreydNativeDiagramExactness`<br><small>`emdash3_2_commutative_algebra_freyd_native_diagram_exactness.lp`</small><br>`freyd_native_model_middle_pair_exact_at`<br><small>`emdash3_2_commutative_algebra_freyd_native_les_certificate_views.lp`</small><br>`FreydNativeSnakeDiagramExactness`<br><small>`emdash3_2_commutative_algebra_freyd_native_snake_diagram_exactness.lp`</small> | `freyd_native_exact_diagram_intro`<br><small>`examples/freyd_native_diagram_exactness.lp`</small><br>`freyd_native_middle_public_pair_exact_at`<br><small>`examples/freyd_native_middle_pair_exactness.lp`</small><br>`freyd_native_source_public_pair_exact_at`<br><small>`examples/freyd_native_source_pair_exactness.lp`</small><br>`freyd_native_target_public_pair_exact_at`<br><small>`examples/freyd_native_target_pair_exactness.lp`</small><br>`freyd_native_snake_first_exact_at`<br><small>`examples/freyd_native_snake_pair_exactness.lp`</small> |
-| `ORDINARY-ADJUNCTION-FAMILIES` | checked | The explicitly declared ordinary postcomposition adjunction lift retains the original functors, projects the original whiskered unit/counit, and supplies derived whole-family mate operations. | `one_cat_postcomp_adjunction`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small><br>`one_cat_functor_category`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small> | `one_cat_adjunction_family_transpose_func`<br><small>`examples/one_cat_adjunction_families.lp`</small> |
+| `ORDINARY-ADJUNCTION-FAMILIES` | checked | The explicitly declared ordinary postcomposition adjunction lift retains the original functors, projects the original whiskered unit/counit, and supplies derived whole-family mate operations. | `one_cat_postcomp_adjunction`<br><small>`emdash3_2_one_cat_adjunction_families.lp`</small><br>`one_cat_functor_category`<br><small>`emdash3_2_one_cat_functor_closure.lp`</small> | `one_cat_adjunction_family_transpose_func`<br><small>`examples/one_cat_adjunction_families.lp`</small> |
 | `ORDINARY-PRODUCT-ADJUNCTION` | checked | The declared ordinary diagonal/product adjunction uses the original BinaryProducts choice; whole family pairing and unpairing are derived from its mate comparison. | `one_cat_binary_product_adjunction`<br><small>`emdash3_2_one_cat_product_adjunction.lp`</small><br>`one_cat_product_category`<br><small>`emdash3_2_one_cat_product_adjunction.lp`</small><br>`one_cat_product_family_pair_func`<br><small>`emdash3_2_one_cat_product_families.lp`</small> | `one_cat_binary_product_adjunction`<br><small>`examples/one_cat_product_families.lp`</small> |
 | `WHOLE-CATEGORICAL-CONTRACTION` | checked | Category and coherent-family contractions are transparent instances of existing OmegaEquivAlong; evaluation retains both inverse slots, and ordinary object contractibility is a derived observation. | `CatContraction`<br><small>`emdash3_2_categorical_contractions.lp`</small><br>`CatdContraction`<br><small>`emdash3_2_categorical_contractions.lp`</small><br>`cat_contraction_objects_along`<br><small>`emdash3_2_categorical_contractions.lp`</small> | `catd_contraction_at`<br><small>`examples/categorical_contractions.lp`</small><br>`cat_contraction_objects`<br><small>`examples/categorical_contractions.lp`</small> |
 | `ORDINARY-TERMINAL-ADJUNCTIONS` | checked | Two explicit ordinary terminal/initial adjunction presentations give derived whole unit/counit and Hom equivalence views, retaining selected inverses and the original terminal runtime forms. | `one_cat_terminal_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_adjunction`<br><small>`emdash3_2_one_cat_terminal_adjunctions.lp`</small> | `one_cat_terminal_arrow_family_to_src_path`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small><br>`one_cat_initial_hom_equivalence`<br><small>`examples/one_cat_terminal_adjunctions.lp`</small> |
@@ -17884,10 +17909,11 @@ packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
 
 <a id="glossary-gray-profile"></a>
 
-**Gray profile, selected.** The computational full-subcategory facade
-$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are ordinary functors
-paired with `IsStrictFunctor` evidence and whose arrows and higher homs reuse
-the ambient transfor tower. One checked
+**Gray profile, selected.** The category
+$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are opaque
+`StrictFunctor` classifiers and whose arrows are classified `LaxTransfor`
+objects. Higher homs reuse the ambient tower. The separate full subcategory
+`StrictFunctor_cat` retains ambient transfors. One checked
 right closure yields a walking-square interchanger; a full Crans–Gray
 biclosed monoidal structure is not claimed. See [Chapter 28](#chapter-28).
 
@@ -18210,10 +18236,11 @@ with strict transfor computation or strict higher associativity. See
 
 <a id="glossary-strict-transfor"></a>
 
-**Strict transfor.** A native transfor for which the selected two-sided
-naturality cuts compute through the global `tapp*` calculus. The adjective
-does not say that every coherence law in its ambient category is
-judgmental. See [Chapters 9](#chapter-9) and [14](#chapter-14).
+**Strict transfor.** A transfor admitted with two-sided strictness evidence.
+Its stable classified view owns both naturality cuts through the existing
+`tapp*` calculus; raw evidence alone supplies paths. This does not make every
+ambient transfor or every higher coherence judgmentally strict. See
+[Chapters 9](#chapter-9) and [14](#chapter-14).
 
 <a id="glossary-structure-identity"></a>
 
@@ -18418,11 +18445,13 @@ the source expressions are definitionally identical.
 
 ## E.2 Semantic Owners
 
-A computational operation should have one owner. Generic functoriality is
-owned by the `fapp*` calculus; generic naturality by `tapp*`;
+A computational operation should have one owner. Ambient functor action is
+owned by the `fapp*` calculus; transfor action by `tapp*`;
 displayed hom action by `fdapp*` and `tdapp*`; Sigma and Pi expose
 their own structural projections. Readable aliases route through these owners
-instead of copying their semantic bodies.
+instead of copying their semantic bodies. Composition and naturality retain
+laxity by default; stricter computation needs its actual profile or a
+qualified named constructor.
 
 This prevents two kinds of drift:
 
@@ -18431,8 +18460,9 @@ This prevents two kinds of drift:
   needs for further iteration.
 
 The WalkingEnd development illustrates the policy. The contextual eliminator
-owns the constructor-specific base and generator observations. It does not
-restate generic preservation of identity or composition. The decoder's
+owns the constructor-specific base and generator observations. Its derived
+recursor has separately qualified strict composition computation at a stable
+named head; this does not make every functor strict. The decoder's
 normalization cell is the displayed hom-action of one constructed functor; it
 is not a custom recursion rule for every arbitrary based arrow.
 
@@ -18462,15 +18492,15 @@ action; it is not globally collapsed to identity.
 
 The Gray experiment makes strictness a property rather than a second functor
 grammar. `IsStrictFunctor` constrains the compositor already extracted from
-whole internal action, and `StrictFunctor` pairs an ambient functor with that
-evidence. One stable evidence-bearing view retains the proof where a selected
-consumer needs it. The retired blanket rule that sent every such compositor
-to literal identity was not justified by arbitrary semantic evidence. Curry
+whole internal action. `StrictFunctor` admits an ambient functor with that
+evidence opaquely, without exposing the admission proof. Its stable view owns
+strict computation and canonical evidence; the explicit raw view recovers a
+visible carrier. Raw evidence alone does not install those reductions. Curry
 and uncurry for the selected right closure have whole beta/eta paths, and the
 walking-square interchanger is a nonidentity directed cell projected from
-whole laxity. These facts do not install a general weak-category normalizer,
-a profile-local replacement for every historical global strict cut, or a full
-Crans–Gray tensor.
+whole laxity. The integration replaces the selected generic strict cuts with
+profiled or qualified constructor computation. It does not supply a general
+weak-category normalizer or a full Crans–Gray tensor.
 
 ## E.4 Direction And Variance In Normal Forms
 
@@ -18616,14 +18646,14 @@ the implementation authority.
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
 | Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fibrewise products, pullback totalization, displayed evaluation, and finite canonical sibling/Sigma telescopes | Arbitrary dependency or variance graphs, unrestricted mixed introduction/evaluation, and exchange across genuine dependency remain open |
-| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts, whole internal displayed laxity, ordinary post/pre surfaces, and the retained functor compositor | No unrestricted runtime associativity rewrite, completed generic lax classifier, or claim that all higher coherence is judgmental |
+| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts, whole internal displayed laxity, ordinary post/pre surfaces, and the retained functor compositor | No unrestricted runtime associativity rewrite, fully lax units, or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
 | Directed and groupoidal HITs | Opaque WalkingEnd and Circle signatures, the groupoidal interval, category-indexed `Groupoidify(C)`, selected dependent eliminators, and constructor computation at their reviewed owners | No general directed/HIT signature compiler, arbitrary pushout or cell-complex schema, or automatic positivity/coherence checker |
 | Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation, classified `NType_cat(n)` targets, point-computing `Trunc_ntype(n,A)`, restricted elimination, and whole map action | No general directed categorical truncation, arbitrary quotient schema, left-exactness theorem, or complete comparison with every hub-and-spoke presentation |
 | WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence, noninvertibility results, and the whole free-inversion comparison with the Circle | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence with `BNat`, or directed initiality theorem |
 | Groupoidal realization | Path categories and path functors; product-path split/join and coherent transport; Circle/Integer encode-decode and monodromy; WalkingEnd/Circle and WalkingArrow/interval mapping theorems; category-indexed groupoidification; path-realized pseudo-laxity | Source functoriality and the packaged groupoidification adjunction, closure for every former, generic simplex regressions, and a complete computational HoTT metatheory remain open |
-| Profiled Gray direction | `IsStrictFunctor` properties, exact functor/evidence packages, the strict-object/lax-arrow `GrayHom_lax` profile, one selected right closure, the walking square, and a nonidentity interchanger with retained next action | No mirror closure, full Crans–Gray biclosed monoidal structure, tensor functoriality/coherence, or global/profile-local strict-cut migration |
+| Profiled Gray direction | Whole `IsStrictFunctor` properties, opaque action classifiers, ambient transfors in `StrictFunctor_cat`, classified `LaxTransfor` arrows in `GrayHom_lax`, selected strict-cut migration, one right closure, and the walking square with nonidentity interchanger and next action | No mirror closure, full Crans–Gray biclosed monoidal structure, or tensor functoriality/coherence |
 | Semisimplicial and dependent simplexes | Computing injective face codes and augmented index; join-built ordinal shapes; Yoneda standard semisimplices; homd/Sigma triangle and tetrahedron action; intrinsic flagged codes; generic nonempty faces; one canonical ordinal source in variable dimension with selected checks through dimension four and retained next action | No degeneracies, whole `DependentSimplex_cat(C,n)` classifier, mapping-category equivalence with `Functor_cat(Delta[n],C)`, judgmental agreement of all finite presentations, or general Kan, Segal, Rezk, complicial, or oriental theory |
 | Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
 | Adjunctions and equivalences | Triangle cuts, whole Hom-comparison identity-image extraction and ordinary introduction with retained heads; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
@@ -18633,7 +18663,7 @@ the implementation authority.
 | Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
 | Presheaves and sieves | Cat-valued presheaves, Yoneda and slices, higher sieves, ordinary pointwise-subterminal sieves, pullback membership, and commutative-ring invertibility sieves | No global ordinary-sieve classifier, automatic representation by one open, topology, descent, or sheafification follows from this layer |
 | Sites and descent | Ordinary-sieve Grothendieck topology laws, chaotic model, internally generated least topology, whole sieve extensions, matching and section Hom families, and topology-locality | No inductive cover derivations, coverhood decision procedure, automatic subcanonicity, sheafification reflector, or identification with a separate rigid sheaf facade follows from locality alone |
-| Direct cover sheafification | Cat-valued categorical-HIT completion with whole return/glue/silent data, derived topology-locality, recursor, whole Hom universality, adjunction, and reflective counit | Fixed-site and Cat-valued only; no arbitrary coefficients, commutative-ring lift, left exactness, site base-change theorem, or classical plus-construction comparison |
+| Direct cover sheafification | Cat-valued categorical-HIT completion with whole return/glue/silent data, derived topology-locality under inherited ordinary/displayed pointwise-to-whole equivalence assembly, recursor, whole Hom universality, adjunction, and reflective counit | Assembly remains a primitive assumption; fixed-site and Cat-valued only; no arbitrary coefficients, commutative-ring lift, left exactness, site base-change theorem, or classical plus-construction comparison |
 | Commutative algebra | Set-carrier rings and structured maps, finite unimodular presentations, polynomial and localization universal-property interfaces, selected unit/zero/idempotent models, and whole iterated/product-localization equivalence | No arbitrary polynomial/localization existence, monomial or fraction representation, categorical product theorem, global ring-package identity, or affine geometry follows from this layer alone |
 | Affine geometry | Yoneda functor of points; ordinary basic-open sieve; pointwise localization representation and multiplicative intersection; big affine slice, coordinate presheaf, and least generated Zariski topology; assumption-explicit reflective structure sheaf, localization locality, and thin affine presentation | No whole natural basic-open equivalence, global localization choice, CommRing-valued sheafification construction, small-site comparison, subcanonicity, stalk-local theorem, qcqs comparison, or representation-independent category of affine schemes |
 | Site-relative schemes | One global reflective ringed object and covering sieve; witness-rich binary generation; whole actual-slice restriction; supplied affine-basis realizations; topology-local ring forcing; dependent binary scheme total; selected actual overlap with derived ring restrictions | Binary and relative to the supplied site; no atlas-first gluing, induced slice topology, arbitrary pullback construction, overlap-affineness theorem, scheme-morphism category, compact-open/classical comparison, or representation-independent scheme theorem |
@@ -19098,7 +19128,9 @@ $$
 
 The hom action, not only its value at one arrow, is primary. It can act again
 on a 2-cell between arrows, and its own hom action continues the same pattern.
-At the first capped level, the selected functoriality cuts are
+At the first capped level, normal identity computation is generic. The
+composition cut additionally requires a stable classified strict view of
+$F$, or a separately qualified strict constructor:
 
 $$
 F[\operatorname{id}_x]\rightsquigarrow\operatorname{id}_{F[x]},
@@ -19125,8 +19157,8 @@ $$
 \operatorname{Hom}_{B}(F[x],G[y]).
 $$
 
-We write $\eta[f]$ for its value at $f:x\to y$. Its two adjacent naturality
-cuts compute:
+We write $\eta[f]$ for its value at $f:x\to y$. For a stable classified
+strict transfor, its two adjacent naturality cuts compute:
 
 $$
 \begin{aligned}
@@ -19136,8 +19168,9 @@ G[g]\circ\eta[f]&\rightsquigarrow\eta[g\circ f],\\
 $$
 
 The diagonal component is the identity-arrow instance of this family action.
-Thus naturality is not a proposition pasted onto a bare family of arrows. It
-is part of an operation whose higher action remains available.
+An ambient transfor retains directed comparison cells at these boundaries;
+the conventional lax profile makes only the pre/right cut strict. In each
+case naturality belongs to an operation whose higher action remains available.
 
 ### Directed Families, Totals, And Sections
 
@@ -19300,17 +19333,19 @@ rule fapp0 (fapp1_func $F_AB) $f
 ```
 
 The last line is runtime computation: observing the full hom-action at one
-arrow exposes the capped action. The generic identity and composition rules
-then contract $F[\operatorname{id}]$ and
-$F[g]\circ F[f]$. Concrete functor constructors inherit those rules; they do
-not each receive private copies of ordinary functoriality.
+arrow exposes the capped action. Generic normal identity rules contract
+$F[\operatorname{id}]$. The composite $F[g]\circ F[f]$ contracts only at
+a stable classified strict view or a qualified named constructor. Raw
+strictness evidence supplies an internal equality without selecting that
+runtime reduction for the raw carrier.
 
 The same ownership policy governs transfors. `tapp0_fapp0` observes a point
 component, while `tapp1_func` and `tapp1_fapp0` own off-diagonal action.
-The two strict naturality rewrites are attached to that generic action. A
-constructor-specific rule is justified only when it expresses extra
-constructor computation, not the fact that something already typed as a
-transfor is natural.
+The two strict naturality rewrites use those observers at the stable
+`strict_transfor` view. The `lax_transfor` view selects pre/right computation
+and retains post/left laxity. A named constructor may own separately
+qualified strict computation; typing an arbitrary term as a transfor does
+not give it those reductions.
 
 ### Proof-Time Unification
 
@@ -19381,7 +19416,7 @@ register supplies the exact owner and reviewer for each cited claim.
 | `emdash3_2_eq1_*.lp`, `emdash3_2_nat_arithmetic.lp`, `emdash3_2_walking_end_hit.lp` | equality-valued higher action, reusable arithmetic, and the WalkingEnd encode-decode development |
 | the groupoidal-closure, Integer, Circle, truncation, and connectedness modules | path-former comparisons, successor-localized integers, Circle encode–decode, classified truncation, and the selected connectedness consumer |
 | the groupoidal-interval, walking-comparison, and groupoidification modules | two finite free-inversion tests, category-indexed formation and whole unit, target extension/restriction, whole mapping equivalence, compositor, and Interval recovery |
-| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity surfaces, `IsStrictFunctor` properties, exact functor/evidence packages, the shared Gray hom profile, one selected right closure, and the derived walking interchanger |
+| the whole-laxity and Gray profile/right-closure modules | displayed and ordinary whole laxity, opaque action classifiers, strict objects with ambient transfors in `StrictFunctor_cat`, classified lax arrows in `GrayHom_lax`, one selected right closure, and the derived walking interchanger |
 | `emdash3_2_checks.lp` and `examples/` | executable diagnostics and independent reviewer-facing witnesses rather than mathematical owners |
 
 Imports use `require`; `open` brings imported public names into scope. The
@@ -19476,14 +19511,16 @@ generated by its displayed arrows.
 
 For a functor, formation is `Functor A B`. Its elimination operations are
 `fapp0` and `fapp1_func`. The projection beta from full hom action to
-`fapp1_fapp0` and the identity/composition cuts are its generic
-computations. The active theory obtains inhabitants from named functor
+`fapp1_fapp0` and normal identity cuts are generic computations; strict
+composition needs its classified view or named constructor. The active
+theory obtains inhabitants from named functor
 constructors and categorical operations; the book does not posit one
 record-style constructor whose fields may be supplied incoherently.
 
 For a transfor, formation is `Transf F G`. Point and off-diagonal
-application are eliminations. Identity-boundary, composition, and the two
-naturality cuts are computations. The full off-diagonal functor is the action
+application are eliminations. Identity-boundary computation remains generic;
+the adjacent strict naturality and mixed vertical folds require their
+selected profiles or qualified constructors. The full off-diagonal functor is the action
 clause: it says what happens not just to an arrow $f$ but to a higher cell
 between possible values of $f$.
 
@@ -19642,15 +19679,16 @@ $$
 
 Because $f$ still ranges over a whole hom category, one further hom action can
 observe how $\phi$ varies. A path-valued target makes the comparison
-invertible. A strict-functor property instead stores an endpoint path and an
-equality identifying the selected compositor with its equality-induced arrow.
-This is evidence about one action, not a duplicate functor theory or a blanket
-compositor-to-identity rewrite.
+invertible. The strict-functor property constrains the whole existing
+compositor to its canonical strict action; component evidence is obtained by
+evaluation. Stable classified views compute using that profile while an
+arbitrary ambient functor retains its compositor.
 
-The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses proof-carrying
-strict-functor packages as objects: each package is an ambient functor paired
-with `IsStrictFunctor` evidence. It reuses the ambient transfor and higher-hom
-tower between their stable views. One selected right closure is checked:
+The category $\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ uses opaque
+`StrictFunctor` objects and classified `LaxTransfor` arrows, with ambient
+higher homs. Its pre/right action is strict and its post/left comparison is
+retained. The separate full subcategory `StrictFunctor_cat` has strict objects
+and ambient transfors. One selected right closure is checked:
 
 $$
 \mathsf{GrayHom}_{\mathrm{lax}}(A\otimes_R B,C)
@@ -20083,9 +20121,11 @@ $$
 
 At the base, its fibre functor reduces to $u$. At the literal generator, its
 displayed laxity component reduces to the supplied component of $\sigma$.
-These are constructor beta rules. Generic functoriality and transfor
-naturality own the remaining identity, composition, and ordinary naturality
-cuts.
+These are constructor beta rules. The existing functor/transfor calculus
+retains identities and higher action, with ambient lax comparison cells.
+The derived WalkingEnd recursor has separately qualified named strict
+composition observations; arbitrary eliminators do not acquire strictness
+from their types alone.
 
 The coherence cell is directed:
 

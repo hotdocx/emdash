@@ -324,10 +324,11 @@ packaged adjunction remain future interfaces. See [Chapter 27](#chapter-27).
 
 <a id="glossary-gray-profile"></a>
 
-**Gray profile, selected.** The computational full-subcategory facade
-$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are ordinary functors
-paired with `IsStrictFunctor` evidence and whose arrows and higher homs reuse
-the ambient transfor tower. One checked
+**Gray profile, selected.** The category
+$\mathsf{GrayHom}_{\mathrm{lax}}(A,B)$ whose objects are opaque
+`StrictFunctor` classifiers and whose arrows are classified `LaxTransfor`
+objects. Higher homs reuse the ambient tower. The separate full subcategory
+`StrictFunctor_cat` retains ambient transfors. One checked
 right closure yields a walking-square interchanger; a full Crans–Gray
 biclosed monoidal structure is not claimed. See [Chapter 28](#chapter-28).
 
@@ -650,10 +651,11 @@ with strict transfor computation or strict higher associativity. See
 
 <a id="glossary-strict-transfor"></a>
 
-**Strict transfor.** A native transfor for which the selected two-sided
-naturality cuts compute through the global `tapp*` calculus. The adjective
-does not say that every coherence law in its ambient category is
-judgmental. See [Chapters 9](#chapter-9) and [14](#chapter-14).
+**Strict transfor.** A transfor admitted with two-sided strictness evidence.
+Its stable classified view owns both naturality cuts through the existing
+`tapp*` calculus; raw evidence alone supplies paths. This does not make every
+ambient transfor or every higher coherence judgmentally strict. See
+[Chapters 9](#chapter-9) and [14](#chapter-14).
 
 <a id="glossary-structure-identity"></a>
 

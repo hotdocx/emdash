@@ -35,11 +35,13 @@ the source expressions are definitionally identical.
 
 ## E.2 Semantic Owners
 
-A computational operation should have one owner. Generic functoriality is
-owned by the `fapp*` calculus; generic naturality by `tapp*`;
+A computational operation should have one owner. Ambient functor action is
+owned by the `fapp*` calculus; transfor action by `tapp*`;
 displayed hom action by `fdapp*` and `tdapp*`; Sigma and Pi expose
 their own structural projections. Readable aliases route through these owners
-instead of copying their semantic bodies.
+instead of copying their semantic bodies. Composition and naturality retain
+laxity by default; stricter computation needs its actual profile or a
+qualified named constructor.
 
 This prevents two kinds of drift:
 
@@ -48,8 +50,9 @@ This prevents two kinds of drift:
   needs for further iteration.
 
 The WalkingEnd development illustrates the policy. The contextual eliminator
-owns the constructor-specific base and generator observations. It does not
-restate generic preservation of identity or composition. The decoder's
+owns the constructor-specific base and generator observations. Its derived
+recursor has separately qualified strict composition computation at a stable
+named head; this does not make every functor strict. The decoder's
 normalization cell is the displayed hom-action of one constructed functor; it
 is not a custom recursion rule for every arbitrary based arrow.
 
@@ -79,15 +82,15 @@ action; it is not globally collapsed to identity.
 
 The Gray experiment makes strictness a property rather than a second functor
 grammar. `IsStrictFunctor` constrains the compositor already extracted from
-whole internal action, and `StrictFunctor` pairs an ambient functor with that
-evidence. One stable evidence-bearing view retains the proof where a selected
-consumer needs it. The retired blanket rule that sent every such compositor
-to literal identity was not justified by arbitrary semantic evidence. Curry
+whole internal action. `StrictFunctor` admits an ambient functor with that
+evidence opaquely, without exposing the admission proof. Its stable view owns
+strict computation and canonical evidence; the explicit raw view recovers a
+visible carrier. Raw evidence alone does not install those reductions. Curry
 and uncurry for the selected right closure have whole beta/eta paths, and the
 walking-square interchanger is a nonidentity directed cell projected from
-whole laxity. These facts do not install a general weak-category normalizer,
-a profile-local replacement for every historical global strict cut, or a full
-Crans–Gray tensor.
+whole laxity. The integration replaces the selected generic strict cuts with
+profiled or qualified constructor computation. It does not supply a general
+weak-category normalizer or a full Crans–Gray tensor.
 
 ## E.4 Direction And Variance In Normal Forms
 
