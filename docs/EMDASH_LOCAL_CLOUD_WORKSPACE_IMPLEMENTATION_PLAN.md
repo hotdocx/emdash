@@ -307,3 +307,14 @@ checks work. Source catalog is now `2026-09-28` with 270 visible endpoints;
 the deployed catalog and 54-tool MCP surface are unchanged. LC-1C next wires
 the controller HTTP routes and actual Codex worker; no end-to-end or hosted
 execution is claimed by these two component checkpoints.
+
+LC-1C checkpoint: GetPaidX `52b7c544` wires the real controller and managed
+Codex worker, with 81 passing controller tests and one existing root-only skip.
+An isolated container verifies non-root execution, `--yolo`, owned resume,
+detached-descendant cancellation, session closure and replay using a deterministic
+CLI. LC-1D checkpoint `20f6b706` exposes immediate task start/read/cancel through
+MCP/WebMCP `0.3.0`: 57 source tools, 270 catalog endpoints and 23 workflows.
+All 34 focused MCP tests, nine inventory checks, typecheck, lint and skill
+validation pass. LC-1E now exercises complete regression in an isolated database
+and the configured real provider. These are source checkpoints, not deployed or
+directory-reviewed capabilities.
