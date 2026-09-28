@@ -318,3 +318,12 @@ All 34 focused MCP tests, nine inventory checks, typecheck, lint and skill
 validation pass. LC-1E now exercises complete regression in an isolated database
 and the configured real provider. These are source checkpoints, not deployed or
 directory-reviewed capabilities.
+
+LC-1 is locally qualified at GetPaidX `9b0cc50f`: complete root regression passes
+378 suites / 1,558 tests with two existing skips. An isolated real-provider
+replay using the cached controller's Codex 0.152.0 and gpt-5.4 verifies the SQL
+receipt, gateway/controller dispatch, expected workspace file, successful
+provider usage accounting and idempotent completed replay. The shared stack
+and production records were untouched; disposable fixture containers were
+removed. LC-2 now adds declared Node/TypeScript source bundles, revision-aware
+files and retained artifacts under the same execution service.
