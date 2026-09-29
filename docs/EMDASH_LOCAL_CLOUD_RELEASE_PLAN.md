@@ -189,3 +189,27 @@ Only these two target bindings select the already existing
 mathematical sources, subject reduction, serialization and no-swap remain
 unchanged. The action-profile resource ledger records the same bounded
 follow-up under the user's standing resource authorization.
+
+## User-requested background handoff
+
+The user requests a final response while existing background work continues,
+and will resume the goal afterward. Leave the local controller build (process
+1080938 at handoff, tool session 30622) and GitHub run `36526254196` running.
+The local log is `/tmp/getpaidx-release-controller-retry.log`; the build helper
+already pushes all three images after all three builds succeed. No extra manual
+deployment wrapper is needed or retained. If a push fails after build completion,
+the existing `az acr login` and `docker push` commands suffice.
+
+Controller build source is GetPaidX `3874736d`; gateway image source remains
+`dff2dbea`. GetPaidX canonical master and the release checkout are clean. The
+gateway still serves revision 167; only its additive execution table has been
+applied. The prepared standard-rollout manifest generator and attended hosted
+acceptance script are retained under that release checkout's ignored
+`reports/env/`. Resume at R3: inspect build/image results and current live work,
+then use the existing repository rollout SOP and complete R4/R7/R8. Do not
+infer that a finished build means production deployment or hosted acceptance.
+
+The OpenAI bundle remains prepared at the recorded Downloads path. Final
+hosted evidence, bundle checksums and portal handoff verification are still
+pending. The user prefers ordinary sequential GetPaidX development; this one
+existing release worktree remains a bounded staging exception.
