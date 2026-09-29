@@ -434,3 +434,19 @@ measurements. No additional resource/profile changes were required after
 the complete reviewer sweep. Defaults remain 2 GiB/90s and the registry
 retains 98 exact-target overrides. The original production CAS artifacts
 also pass at the separately recorded explicit 6 GiB/180s and 8 GiB/300s bounds.
+
+## September 29 public CI follow-up
+
+The first public cold-checkout run exposed an ordinary-profile allocation
+failure in `emdash3_2_commutative_algebra_affine_glue.lp`. The
+[release ledger](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md#cold-formal-ci-resource-follow-up)
+records a source-identical cold replay: 2 GiB/90s with `o=20,v=1024` fails in
+48.230s; the existing `action-profile-3g-90s` profile passes the owner in
+46.310s at 1,933,456 KiB maximum child RSS and its concrete
+`examples/commutative_ring_affine_glue.lp` consumer in 53.275s at 2,341,096 KiB.
+Those two exact targets now select that existing profile, bringing the
+override count to 100. This uses the standing action-profile resource
+authorization. No mathematical declaration, proof, source pin, checker,
+global default, subject-reduction setting or resource ceiling changes.
+It is repository-validation maintenance, not a requirement for the independent
+GetPaidX Node/TypeScript scientific runtime.

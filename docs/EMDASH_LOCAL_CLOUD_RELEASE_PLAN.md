@@ -165,3 +165,27 @@ matches the unchanged manifest and there are no unexpected dependencies.
 Machine-readable package collection now explicitly passes `--color=never`.
 Verification is exercised locally with `OPAMCOLOR=always` to reproduce the
 hosted environment without changing any package or source pin.
+
+## Cold formal CI resource follow-up
+
+This concerns Emdash's repository validation, not the GetPaidX scientific
+runtime: the cloud pilot executes Node/TypeScript, and the cloud LambdaPi image
+retains its existing independent recipe. The pinned formal verification setup
+was introduced by `f9ae8d6a` on September 23, before this cloud implementation.
+
+After setup succeeded, the cold affine-glue library check exceeded the ordinary
+2 GiB address-space limit. A source-identical temporary package, containing no
+compiled objects, reproduces the allocation failure with `o=20,v=1024` in
+48.230 seconds (maximum child RSS 1,818,884 KiB). Under the existing authorized
+action-profile 3 GiB/90-second profile, that same owner passes in 46.310 seconds
+(1,933,456 KiB), and its required `commutative_ring_affine_glue` reviewer passes
+in 53.275 seconds (2,341,096 KiB). Exact receipts are
+`20260929T051747Z-a9a7500a802341f1a36cbaf0920f43ba`,
+`20260929T052035Z-08819d7a9b614e6e8fda2e545ee61ab3` and
+`20260929T052228Z-d5482add87094e70ae544106b2ab8012`.
+
+Only these two target bindings select the already existing
+`action-profile-3g-90s` profile. Defaults, memory ceiling, checker source,
+mathematical sources, subject reduction, serialization and no-swap remain
+unchanged. The action-profile resource ledger records the same bounded
+follow-up under the user's standing resource authorization.

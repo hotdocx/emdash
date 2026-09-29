@@ -2244,6 +2244,8 @@
   },
   "targetProfileOverrides": {
     "emdash3_2_checks.lp": "action-profile-6g-180s",
+    "emdash3_2_commutative_algebra_affine_glue.lp": "action-profile-3g-90s",
+    "examples/commutative_ring_affine_glue.lp": "action-profile-3g-90s",
     "emdash3_2_commutative_algebra_freyd_adjunction_model_connecting.lp": "action-profile-3g-90s",
     "emdash3_2_commutative_algebra_freyd_adjunction_model_connecting_observation.lp": "action-profile-3g-90s",
     "emdash3_2_commutative_algebra_freyd_adjunction_model_exactness.lp": "action-profile-4g-90s",
