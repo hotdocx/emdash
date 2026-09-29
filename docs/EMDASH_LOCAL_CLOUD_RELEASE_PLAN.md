@@ -19,7 +19,7 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
 | R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Additive schema applied; local image builds active |
 | R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Pending |
-| R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Pending |
+| R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
 | R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Prepared in Downloads; awaiting final hosted evidence/checksums |
 | R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | Pending |
@@ -105,3 +105,38 @@ until the guarded release applies its exact image manifest.
 Operator bundle: `/home/user1/Downloads/emdash-getpaidx-release-20260929`.
 The final release evidence and integrity manifest will be written after hosted
 acceptance; preparatory artifacts are not yet claims of deployed success.
+
+## Published package and local installation
+
+Emdash main was fast-forwarded and pushed at `618fdb2e`; annotated release
+`emdash-v0.4.0` points to that immutable source. npm workflow `36521885693`
+built and published successfully through the existing trusted-publisher route
+after the user-authorized environment approval. npm reports 0.4.0 and its SLSA
+provenance attestation. The registry tarball and the workflow's exact artifact
+have identical SHA-256
+`999649a3f0869e8322e4a99adfd7da7d3473cbcfdcc826805b4e13e8ca4b9f58`.
+The registry-downloaded tarball passes the independent packed consumer checks,
+including ESM/CJS algebra, declarations and browser bundling.
+
+The [GitHub release](https://github.com/hotdocx/emdash/releases/tag/emdash-v0.4.0)
+provides the prebuilt local/cloud marketplace, cloud skill, portable scientific
+workspace and exact npm tarball. The user's `personal` marketplace now points
+at canonical `/home/user1/emdash1`, replacing the old implementation-worktree
+source. Local `emdash` and `emdash-cloud` are installed at
+`0.1.0+codex.20260929035421`; source/cache comparisons pass. A new Codex thread
+is needed to pick up the updated installed skills/tools.
+
+The first public aggregate found an older documentation link to an optional
+host-local Cisinski text. Commit `8c7cd1bc` replaces only that link with the
+portable local-resource index; mathematical claims and evidence are unchanged.
+The full changed-document gate passes locally, and public aggregate
+`36522289039` is validating that corrected main. The package's independently
+qualified release artifact remains pinned to `618fdb2e`.
+
+The user clarified that GetPaidX should normally use simple sequential work in
+its canonical checkout. Its worktree SOP now describes this release as an
+optional exception for clean staging beside unrelated edits, not a requirement
+for parallel development or multiple Docker stacks. The user then explicitly
+asked to checkpoint the leftover CRM report. It is preserved in a separate
+canonical commit `4256e2e6`; GetPaidX master and the release worktree are clean.
+That report checkpoint performs no CRM campaign or implementation action.
