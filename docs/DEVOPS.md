@@ -186,6 +186,14 @@ EMDASH_INSTALL_VERIFICATION_TOOLCHAIN=1 python3 scripts/verification-toolchain.p
 python3 scripts/verification-toolchain.py verify
 ```
 
+The installer first seeds any explicitly reviewed `opamSourceArchives` into
+opam's content-addressed download cache. Each archive must match the pinned
+package version and both recorded digests before use. Pratter 5.0.1 is available
+from the official opam cache with the exact original MD5 and SHA-256; its
+upstream forge returned different bytes during the first hosted rollout.
+This mirror does not update a package, checksum, Lambdapi source pin or
+mathematical qualification. A mismatch still stops installation.
+
 The installer changes the selected switch/repository configuration. Do not use
 it to replace an exploratory switch unintentionally. To update dependency pins
 after a separately qualified upgrade, use `capture`, review its exact diff, and

@@ -52,8 +52,10 @@ test('progress preserves successful, skipped and todo results without logging ev
   assert.match(result.stdout, /fast pass/);
   assert.match(result.stdout, /skipped 1/);
   assert.match(result.stdout, /todo 1/);
-  assert.doesNotMatch(result.stderr, /completed passed "fast pass"/);
-  assert.doesNotMatch(result.stderr, /completed not-passed "todo"/);
+  // Heartbeats may name the last fast event; only standalone completion lines
+  // would violate the reporter's policy of omitting routine fast successes.
+  assert.doesNotMatch(result.stderr, /^\[progress\] completed passed "fast pass"/m);
+  assert.doesNotMatch(result.stderr, /^\[progress\] completed not-passed "todo"/m);
 });
 
 test('progress reports an early failure before its earlier-declared sibling finishes', async (t) => {

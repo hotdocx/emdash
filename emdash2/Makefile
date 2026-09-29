@@ -40,6 +40,7 @@ ci-tooling:
 > python3 -m py_compile scripts/*.py ../scripts/*.py ../.github/scripts/*.py
 > for script in scripts/*.sh ../scripts/*.sh ../scripts/pnpmw ../scripts/emdash; do bash -n "$$script" || exit; done
 > python3 ../scripts/test_devops.py
+> python3 ../scripts/test_verification_toolchain.py
 > python3 -m unittest tests.test_infinity_codex tests.test_book_typography tests.test_book_evidence tests.test_source_toc tests.test_report_registry tests.test_check_metrics tests.test_check_registry tests.test_check_runner tests.test_staged_target tests.test_validation_artifacts tests.test_warning_summary scripts.test_lambdapi_resource_guard scripts.test_native_snake_pair_profile scripts.test_native_snake_gc_profile
 > node --test ../scripts/check-test-registration.test.mjs ../scripts/test-progress.test.mjs
 > node ../scripts/check-test-registration.mjs

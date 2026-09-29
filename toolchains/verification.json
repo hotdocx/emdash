@@ -151,6 +151,15 @@
     "yojson": "3.0.0",
     "zarith": "1.14"
   },
+  "opamSourceArchives": [
+    {
+      "name": "pratter",
+      "version": "5.0.1",
+      "url": "https://opam.ocaml.org/cache/md5/7a/7a75f978f8746f5745318422d562e361",
+      "md5": "7a75f978f8746f5745318422d562e361",
+      "sha256": "1083dd78ef5413366fdd0bcfcdb19a59f92d145f677d89a502a5da109e965cac"
+    }
+  ],
   "captureCommand": "opam list --installed --required-by=lambdapi --recursive --columns=name,version --short",
   "note": "Logical toolchain/dependency pins; OS image and resulting binary digest are recorded separately in execution evidence.",
   "opamRepository": "git+https://github.com/ocaml/opam-repository.git#6261f3c853ae417b354c06496e8458053131f14b"

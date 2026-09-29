@@ -140,3 +140,20 @@ for parallel development or multiple Docker stacks. The user then explicitly
 asked to checkpoint the leftover CRM report. It is preserved in a separate
 canonical commit `4256e2e6`; GetPaidX master and the release worktree are clean.
 That report checkpoint performs no CRM campaign or implementation action.
+
+## First hosted CI follow-up
+
+The corrected public run passed docs, package, reviewer and publication gates,
+but exposed two independent infrastructure issues before the formal checks.
+The progress-reporter test matched a heartbeat's last-event description as if
+it were a standalone fast-test completion line. Its assertion now matches only
+the actual completion-line prefix; reporter behavior is unchanged.
+
+The pinned opam setup rejected the upstream Pratter 5.0.1 archive with a bad
+checksum. The official opam cache and the existing accepted local archive both
+match the original MD5 `7a75f978f8746f5745318422d562e361` and SHA-256
+`1083dd78ef5413366fdd0bcfcdb19a59f92d145f677d89a502a5da109e965cac`.
+The installer now seeds those exact reviewed bytes into opam's download cache,
+with package-version and both digest checks. No compiler, package, Lambdapi
+source or mathematical evidence pin changes. Tests cover verified-cache reuse,
+changed upstream/cache rejection and refusal to override the package version.
