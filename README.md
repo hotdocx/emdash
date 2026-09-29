@@ -24,15 +24,17 @@ See the [scientific computing strategy](./docs/EMDASH_SCIENTIFIC_COMPUTING_STRAT
 The **algebra goal assistant** is the first delivered workflow. Its
 [local plugin](./plugins/emdash/README.md) supports exact polynomial computation,
 source-derived views and native/internal complex reuse through shared CLI/MCP
-operations. The strategy proposes complementary local and GetPaidX/LastRevision
-cloud execution, with conversations and interactive views over portable
-mathematical projects. Direct cloud tools and broader scientific domains remain
-future work. See the
+operations. The [cloud companion](./plugins/emdash-cloud/README.md) uses
+GetPaidX/LastRevision's generic workspace execution service for direct
+TypeScript programs and optional immediate Codex tasks. Its scientific browser
+view supports source editing, exact results, plots, retained reuse and export
+over a portable project. Broader scientific domains remain future work. See the
 [product orientation](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md) and
 [Codex plugin plan](./docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md).
 The long-term native CAS/checker direction is independent of Singular and
 Lambdapi; current profile-specific conformance requirements remain in force.
-Public distribution remains a separate milestone.
+The [release ledger](./docs/EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md) records npm,
+Codex plugin and hosted deployment identities and their verification status.
 
 The active development now carries that calculus into local geometry:
 Cat-valued presheaves, ordinary sieves and sites, a direct fixed-site

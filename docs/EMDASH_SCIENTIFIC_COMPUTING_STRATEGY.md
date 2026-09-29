@@ -2,7 +2,9 @@
 
 Reviewed: 2026-09-28.
 Status: user-selected long-term direction; the first local/cloud pilot is
-implemented and locally qualified, with broader capabilities remaining a roadmap.
+implemented and qualified, with public rollout tracked in the
+[release ledger](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md) and broader capabilities
+remaining a roadmap.
 
 Execution clarification: the [workspace execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
 refines the initial broker proposal into a small project/run protocol over
@@ -136,7 +138,7 @@ Keep the plugins complementary:
 
 - The Emdash plugin owns mathematical workflows and the independently usable
   local runtime.
-- The GetPaidX plugin owns authenticated platform operations and the proposed
+- The GetPaidX plugin owns authenticated platform operations and the
   generic workspace execution tools.
 - Codex can use both sets of tools in one workflow. This is orchestration by
   the host, not a plugin importing another plugin's live session or credentials.

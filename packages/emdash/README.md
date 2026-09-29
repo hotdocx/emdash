@@ -9,9 +9,9 @@ produce ordinary terms which are checked at the same explicit Core boundary.
 pnpm add @hotdocx/emdash
 ```
 
-The checkout has five deliberately bounded entries. The additive `/algebra`
-entry described below is qualified through local packed-artifact checks; it is
-not included in the previously published npm `0.3.0` artifact.
+Version 0.4.0 has five deliberately bounded entries. The additive `/algebra`
+entry described below is qualified through packed-artifact checks and is new
+since the previously published npm `0.3.0` artifact.
 
 - `@hotdocx/emdash` — Core syntax, contexts, sessions, checking, evaluation,
   conversion, and the reviewed v3.2 manifest;

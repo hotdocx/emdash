@@ -3,16 +3,17 @@
 The local runtime helps an agent compute, view and reuse mathematical data in
 ordinary files. This directory is the source of the locally installed Codex
 plugin governed by the [living plan](../../docs/EMDASH_ALGEBRA_GOAL_ASSISTANT_PLUGIN_PLAN.md). Public distribution
-and cloud delivery are separate milestones.
+and cloud delivery are coordinated by the [release plan](../../docs/EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md).
 
 The [scientific computing strategy](../../docs/EMDASH_SCIENTIFIC_COMPUTING_STRATEGY.md)
 places this algebra workflow within the broader TypeScript scientific-computing
 direction. It recommends optional GetPaidX cloud execution and inline/browser
-views over the same source and results. Those adapters remain proposed; this
-runtime currently supplies local CLI/STDIO operations.
+views over the same source and results. The `emdash-cloud` companion uses
+GetPaidX's generic execution service; this runtime supplies local CLI/STDIO
+operations independently.
 The [execution review](../../docs/EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
-proposes generic program runs for growth beyond the six current workflow tools,
-with GetPaidX mini-app hosting and optional native Codex remote integration.
+records generic program runs for growth beyond the six current workflow tools,
+with GetPaidX mini-app hosting. Native Codex remote integration remains optional.
 
 ## Local Codex installation
 
@@ -43,7 +44,7 @@ and at most two concurrent operations. Cancellation or transport closure
 terminates the corresponding worker. After an interrupted write, inspect the
 workspace before retrying. No caller-provided shell command or module is executed.
 
-The current local CLI acceptance used Codex 0.156.1 and Node 24.11.1. It verified
+The current local CLI acceptance used Codex 0.158.0 and Node 24.11.1. It verified
 real installed-plugin MCP calls from a clean unrelated directory. The Codex app
 uses the shared local plugin/MCP configuration; GUI invocation is not a separate
 qualification claim from that CLI smoke.
@@ -161,5 +162,5 @@ authoring, source updates, computation, rendering and native/internal reuse
 with no borrowed `node_modules`. The copied-plugin check uses real SDK STDIO
 discovery and calls, CLI parity and process restart. Fresh Codex CLI sessions
 exercise the installed plugin from unrelated mathematical workspaces. The
-living plan records these results and the separately deferred browser/cloud
-and public-distribution work.
+living implementation and release plans record local, cloud and public
+distribution evidence separately.

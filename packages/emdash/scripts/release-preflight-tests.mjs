@@ -32,11 +32,11 @@ test('accepts the exact immutable emdash release identity', () => {
   assert.deepEqual(report, {
     revision: 'emdash-npm-release-preflight-v1',
     packageName: '@hotdocx/emdash',
-    version: '0.3.0',
-    tag: 'emdash-v0.3.0',
+    version: '0.4.0',
+    tag: 'emdash-v0.4.0',
     repository: 'hotdocx/emdash',
-    artifactName: 'emdash-npm-0.3.0',
-    tarballName: 'hotdocx-emdash-0.3.0.tgz',
+    artifactName: 'emdash-npm-0.4.0',
+    tarballName: 'hotdocx-emdash-0.4.0.tgz',
     provenance: true,
   });
   assert.equal(Object.isFrozen(report), true);
@@ -63,7 +63,7 @@ test('accepts the exact immutable emdash release identity', () => {
 
 test('rejects tag, repository, and public-manifest drift', () => {
   assert.throws(
-    () => validate({ tag: 'v0.3.0' }),
+    () => validate({ tag: 'v0.4.0' }),
     (error) => error instanceof EmdashNpmReleasePreflightError &&
       error.code === 'INVALID_TAG',
   );

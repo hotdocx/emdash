@@ -34,8 +34,8 @@ complementary local and GetPaidX/LastRevision workflows. The
 [execution review](EMDASH_WORKSPACE_EXECUTION_ARCHITECTURE_REVIEW_2026-09-28.md)
 recommends generic workspace runs of TypeScript programs, optional Node
 mini-app views and a small tool surface independent of the mathematical API.
-Generic cloud execution is now locally qualified in the dedicated implementation
-branch, with portable Emdash packaging and a scientific browser view. Current
+Generic cloud execution is qualified in the implementation branch, with
+portable Emdash packaging and a scientific browser view. Current
 mathematical qualification is unchanged.
 
 The [local/cloud implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md)
@@ -45,7 +45,9 @@ intended `--yolo` workspace mode, and records plugin/UI packaging and phased
 acceptance. Its active persistent goal has completed the generic immediate-task
 and direct-program tranches in GetPaidX, cloud/local plugin packaging and
 scientific browser/export delivery. Real controller/provider, restart and
-network-disabled local replay checks pass. Hosted deployment remains separate.
+network-disabled local replay checks pass. The user-authorized
+[release continuation](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md) now owns public
+integration, npm/plugin distribution, hosted deployment and submission files.
 
 The first delivered product workflow is an
 [AI-native algebra goal assistant](EMDASH_ALGEBRA_GOAL_ASSISTANT_ORIENTATION.md):

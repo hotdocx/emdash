@@ -1,6 +1,6 @@
 {
   "name": "emdash-cloud",
-  "version": "0.1.0+codex.20260928191142",
+  "version": "0.1.0+codex.20260929035421",
   "description": "Use Emdash mathematics in an authenticated GetPaidX cloud workspace.",
   "author": {
     "name": "Emdash",

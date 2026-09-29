@@ -195,8 +195,12 @@ assert resource.getrlimit(resource.RLIMIT_CORE) == (0, 0)
             self.assertLess(time.monotonic() - started, 3)
             # A reparented zombie is dead even if its /proc entry still exists.
             stat = Path(f"/proc/{child_pid}/stat")
-            if stat.exists():
-                self.assertEqual(stat.read_text().split(")", 1)[1].split()[0], "Z")
+            try:
+                child_stat = stat.read_text()
+            except (FileNotFoundError, ProcessLookupError):
+                pass  # The dead child may be reaped while we inspect /proc.
+            else:
+                self.assertEqual(child_stat.split(")", 1)[1].split()[0], "Z")
         finally:
             if first.poll() is None:
                 first.kill()

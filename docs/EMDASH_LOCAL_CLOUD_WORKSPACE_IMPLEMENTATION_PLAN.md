@@ -3,7 +3,7 @@
 Date: 2026-09-28
 Plan-ID: EMDASH-LOCAL-CLOUD-WORKSPACE
 Status: completed local implementation and qualification through LC-4;
-integration and public rollout remain separate
+authorized public rollout continues in the [release plan](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md)
 Baseline: Emdash `acb33a29`; inspected GetPaidX `a03c667a` and Arrowgram
 `214ec0a`, to be rechecked in their own repositories before edits
 
