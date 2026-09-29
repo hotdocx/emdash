@@ -157,3 +157,11 @@ The installer now seeds those exact reviewed bytes into opam's download cache,
 with package-version and both digest checks. No compiler, package, Lambdapi
 source or mathematical evidence pin changes. Tests cover verified-cache reuse,
 changed upstream/cache rejection and refusal to override the package version.
+
+The next hosted setup successfully installed the exact archive and checker,
+then revealed that Actions forces colored opam output even when it is piped.
+After removing ANSI sequences from the diagnostic, every installed package
+matches the unchanged manifest and there are no unexpected dependencies.
+Machine-readable package collection now explicitly passes `--color=never`.
+Verification is exercised locally with `OPAMCOLOR=always` to reproduce the
+hosted environment without changing any package or source pin.

@@ -48,7 +48,7 @@ def seed_source_archives(manifest, cache, fetch=urllib.request.urlopen):
 
 def installed_packages():
     output = subprocess.check_output(
-        ["opam", "list", "--installed", "--required-by=lambdapi", "--recursive", "--columns=name,version", "--short"],
+        ["opam", "list", "--installed", "--required-by=lambdapi", "--recursive", "--columns=name,version", "--short", "--color=never"],
         text=True, timeout=30,
     )
     return dict(line.split() for line in output.splitlines() if line.strip())
