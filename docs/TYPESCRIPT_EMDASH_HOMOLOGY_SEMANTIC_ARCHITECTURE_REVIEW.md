@@ -233,7 +233,9 @@ Nguyen–Walde draft. Its §5.9 explicitly introduces a functoriality-of-univers
 an actual fibration and supplies comparisons with chosen fibre universals.
 This is useful semantic guidance, not an already proved emdash constructor
 or a promise of literal equality of all chosen representations. The inspected
-dated source is [the September 7 text](/home/user1/algebraic-geometry/cisinski-Book-project-Synthetic-Category-Theory-2026-sep-7.txt),
+dated source is the September 7 text, recorded as
+`cisinski-Book-project-Synthetic-Category-Theory-2026-sep-7` in the
+[optional local literature index](../emdash2/research/LOCAL_RESOURCES.md),
 §5.9 and Theorem 5.9.12.
 
 ## 2. The Two Previous Failures Have Different Diagnoses
