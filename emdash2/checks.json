@@ -2183,6 +2183,11 @@
       "timeoutSeconds": 180,
       "ocamlrunparam": "o=20"
     },
+    "action-profile-2g-90s": {
+      "memoryMiB": 2048,
+      "timeoutSeconds": 90,
+      "ocamlrunparam": "o=20,v=1024"
+    },
     "action-profile-3g-90s": {
       "memoryMiB": 3072,
       "timeoutSeconds": 90,
@@ -2342,6 +2347,22 @@
     "examples/one_cat_native_window_snake_connecting_comparison.lp": "action-profile-3g-90s",
     "examples/one_cat_native_window_snake_right_homology.lp": "action-profile-3g-90s",
     "examples/one_cat_native_window_snake_surrounding_maps.lp": "action-profile-3g-90s",
-    "examples/short_exact_normalization_structure.lp": "action-profile-3g-90s"
+    "examples/short_exact_normalization_structure.lp": "action-profile-3g-90s",
+    "emdash3_2_one_cat_homology_covers.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_homology_window_covers.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_connecting_kernel_paths.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_cycles_connecting.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_connecting_upper_lifts.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_connecting.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_homology_window_connecting.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_covered_middle_cycles.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_connecting_projection_zero.lp": "action-profile-3g-90s",
+    "emdash3_2_one_cat_native_connecting_inclusion_zero.lp": "action-profile-3g-90s",
+    "emdash3_2_one_cat_connecting_source_representatives.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_connecting.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_connecting_lifts.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_homology_window_connecting.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_homology_window_covers.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_homology_window_exact_inputs.lp": "action-profile-3g-90s"
   }
 }

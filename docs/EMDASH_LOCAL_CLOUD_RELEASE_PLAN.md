@@ -17,7 +17,7 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | --- | --- | --- |
 | R1 | Review refs, deployment config, dependency audits, schema diff and rollback identities | Complete |
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
-| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Additive schema applied; universal image passes; LambdaPi/Lean build and rollout pending |
+| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | All controller images uploaded and runtime-checked; fresh gateway audit requires compatible patches/rebuild before rollout |
 | R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Pending |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
@@ -280,3 +280,46 @@ This starts no deployment and introduces no replacement rollout wrapper. A
 successful build/push does not complete R3/R4; resume the goal to inspect the
 immutable registry digests, revalidate current live state and run the standard
 guarded rollout and hosted acceptance.
+
+## September 30 image completion and refreshed preflight
+
+The prior goal turn made concrete progress: it fixed and qualified the pnpm
+failure, committed the change and resumed the builds. Both background jobs are
+now terminal. All three controllers built and uploaded successfully under
+`dev-20260929-workspace-executions-r1`; exact ACR digests match local images:
+
+- universal: `sha256:2b3f8a45f270be63751792f67ab721d64c8f7d311fc7395c52f55de1cb2e3e13`;
+- LambdaPi: `sha256:aed05e368146472a0727c5a5ba763ed7d5601b4197d93a80865f4576e2d580b8`;
+- Lean: `sha256:272288967888ae44818e133945211aff5381825bf8c7af5583ffffd674958242`.
+
+LambdaPi and Lean root/non-root runtime smokes pass on those exact images;
+the universal image retains its prior offline books and Emdash execution
+acceptance. The controller full/production audits remain at zero findings.
+The refreshed gateway full and production audits expose five dependency
+findings absent from the September 29 audit. Compatible targeted updates are
+being qualified before a new gateway build: brace-expansion 1.1.21/2.1.7/5.0.12,
+engine.io 6.6.11, fast-uri 3.1.8, ip-address 10.7.2 and markdown-it 15.0.2.
+Only seven lockfile package entries and two existing override pins change.
+The clean installation and updated lockfile audits report zero findings.
+Full isolated regression passes 381 suites / 1,571 tests / two existing skips
+in 74.469s, and fresh typecheck passes. GetPaidX commit `799f0c77` is integrated
+into clean canonical master. The disposable regression database was removed
+after validation. A replacement gateway build/push is running locally at
+`dev-20260930-workspace-executions-r2`; log
+`/tmp/getpaidx-release-gateway-r2-20260930.log`, tool session 65514 at launch.
+The Docker clean/pruned audits remain required. Keep the uploaded controller
+images unchanged.
+
+The read-only deployment preflight reached a transient database-connectivity
+failure; a direct retry succeeds with zero live sessions. No deployment
+mutation occurred. Regenerate the manifest with the new gateway source/tag
+after qualification; rebind its current fingerprints before apply.
+
+The formal follow-up stopped exactly at its first unsuccessful 2 GiB GC
+control. The reviewed continuation completes all 16 affected targets: 13 pass
+at 2 GiB with scoped GC, three require the existing 3 GiB/90s profile.
+Their exact bindings and receipts are recorded in the
+[resource ledger](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md#september-30-cold-homology-consumer-follow-up).
+No mathematical source changes. The complete tooling gate passes at receipt
+`tooling-20260930T090405Z-94ccff361cfd4961a498d30266a83d30`; document checks pass.
+Publish this bounded CI repair, then inspect the next public formal result.

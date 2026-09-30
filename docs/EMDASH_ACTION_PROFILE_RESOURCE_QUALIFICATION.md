@@ -450,3 +450,50 @@ authorization. No mathematical declaration, proof, source pin, checker,
 global default, subject-reduction setting or resource ceiling changes.
 It is repository-validation maintenance, not a requirement for the independent
 GetPaidX Node/TypeScript scientific runtime.
+
+## September 30 cold homology consumer follow-up
+
+Public CI `36526254196` stopped at the ordinary-profile
+`one_cat_homology_covers` owner. A source-identical temporary package with no
+compiled objects reproduces the allocation failure. Its 16 ordinary-profile
+owner/consumer targets were then checked serially at the existing 2 GiB/90s
+bound. Every default-GC control fails allocation. Scoped `o=20,v=1024` passes
+13; the projection-zero and inclusion-zero owners and the exact-input reviewer
+still fail at 2 GiB, then pass at the already authorized 3 GiB/90s bound.
+
+Only those 16 exact targets receive overrides: 13 select the new GC-only
+`action-profile-2g-90s`, three select existing `action-profile-3g-90s`.
+The registry now has 116 exact overrides. Normal defaults, subject reduction,
+checker/source pins, all mathematical files, serial/file/core/no-swap guards
+and the resource ceiling remain unchanged. These are observed passing bounds,
+not minimum requirements. No new mathematical qualification is asserted.
+
+| Target (library prefix `emdash3_2_` omitted) | GiB | Seconds | Successful receipt |
+| --- | ---: | ---: | --- |
+| `one_cat_homology_covers.lp` | 2 | 36.062 | `20260930T054039Z-ddbf0b7acfd547bda3764607673097a3` |
+| `one_cat_native_homology_window_covers.lp` | 2 | 32.835 | `20260930T054301Z-365a6c0859434a7e832d18a94761712d` |
+| `one_cat_native_connecting_kernel_paths.lp` | 2 | 44.352 | `20260930T054753Z-1ff01e021f914ab183cb7cdbca16d984` |
+| `one_cat_native_cycles_connecting.lp` | 2 | 32.457 | `20260930T054907Z-17e383bfe8f94a139657cce2af31ea3a` |
+| `one_cat_native_connecting_upper_lifts.lp` | 2 | 32.453 | `20260930T055007Z-e73afe227f734cf2b42565453d5ef2ca` |
+| `one_cat_native_connecting.lp` | 2 | 37.272 | `20260930T055106Z-8c7ba4ecd425462e8b4391400b3d8498` |
+| `one_cat_native_homology_window_connecting.lp` | 2 | 33.170 | `20260930T055209Z-922831ab49d5427e8b287ed3a2ed3c68` |
+| `one_cat_covered_middle_cycles.lp` | 2 | 33.171 | `20260930T055309Z-d33821f6e4a24e6696a1aa22eec53d02` |
+| `one_cat_native_connecting_projection_zero.lp` | 3 | 24.422 | `20260930T085358Z-356d8ba024294f868a49fcd1d70949b8` |
+| `one_cat_native_connecting_inclusion_zero.lp` | 3 | 26.461 | `20260930T085650Z-1966d6e756d44674b7c06036023a3957` |
+| `one_cat_connecting_source_representatives.lp` | 2 | 25.060 | `20260930T085735Z-adb8a7f41b73421581b672f4f93ed9d2` |
+| `examples/one_cat_native_connecting.lp` | 2 | 24.714 | `20260930T085820Z-84cfca10f2244c8f95a8ad15ba75da87` |
+| `examples/one_cat_native_connecting_lifts.lp` | 2 | 22.733 | `20260930T085905Z-cbc452279e0f4c9793e20b76b610dce3` |
+| `examples/one_cat_native_homology_window_connecting.lp` | 2 | 27.311 | `20260930T085946Z-ed8e443ee9d04482b58abd3af39a3c3a` |
+| `examples/one_cat_native_homology_window_covers.lp` | 2 | 30.938 | `20260930T054423Z-880a2877b5f24e648535fd2179d07c71` |
+| `examples/one_cat_native_homology_window_exact_inputs.lp` | 3 | 29.057 | `20260930T090131Z-996568ca9f5443b5835eb222070a1f39` |
+
+Full controls are indexed in `/tmp/emdash-homology-cold-followup-complete.json`;
+immutable source snapshots and execution receipts remain under
+`emdash2/logs/check-runs/`. The first batch reused a launcher, so its child RSS
+field is a cumulative high-water measurement, not per-target RSS. Later
+controls use fresh runner processes. All memory bounds above are explicit
+guard limits; the per-target wall times exclude unrelated work.
+
+The registry/tooling checks and next public formal run qualify this routing;
+earlier full formal evidence does not substitute for that cold hosted run.
+This maintenance remains independent of the cloud Node/TypeScript runtime.
