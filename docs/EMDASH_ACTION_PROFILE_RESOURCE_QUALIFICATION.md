@@ -647,3 +647,14 @@ hashes match the current checkout. The initial reviewer setup attempt lacked
 its file in the scratch package; copying its exact source closure resolves
 that setup failure. It is not a typechecking/allocation failure. Required full
 public formal validation still follows this metadata correction.
+
+## Feature-release closeout and independent remote follow-up
+
+The user requests completing the local/cloud feature release while existing
+remote run `36744636789` finishes independently. Its formal result remains
+pending and no whole-repository green status is claimed. Existing source pins,
+measured profiles and required reference-library evidence remain review signals.
+Later review is routed through [the CI follow-up](EMDASH_REFERENCE_CI_FOLLOWUP_2026-09-30.md).
+This does not reopen deferred mathematics or require repeating product release
+acceptance. The feature-release requirement boundary is recorded in its final
+[closeout audit](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md#user-directed-scoped-closeout).

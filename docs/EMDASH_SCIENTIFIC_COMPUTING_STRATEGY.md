@@ -2,7 +2,7 @@
 
 Reviewed: 2026-09-28.
 Status: user-selected long-term direction; the first local/cloud pilot is
-implemented and qualified, with public rollout tracked in the
+implemented, published and hosted-qualified, with closeout tracked in the
 [release ledger](EMDASH_LOCAL_CLOUD_RELEASE_PLAN.md) and broader capabilities
 remaining a roadmap.
 
@@ -17,8 +17,9 @@ now supplies the concrete recommended baseline: one generic execution service,
 distinct program and immediate Codex-task adapters, a cloud-only Emdash skill
 profile and the existing Node mini-app hosting. Its LC-1–LC-4 ledger now records
 the completed local implementation, real controller/provider checks, scientific
-browser controls and byte-identical captured-source replay. Public hosting and
-plugin-directory release remain separate from that qualification.
+browser controls and byte-identical captured-source replay. Hosted rollout,
+npm and plugin-source publication are complete. OpenAI directory
+submission/approval remains an operator handoff.
 
 **Emdash aims to become an open-source, AI-native, cloud-capable scientific
 computing system in the TypeScript ecosystem, with integrated functorial type

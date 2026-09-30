@@ -1,7 +1,7 @@
 # Emdash Local And Cloud Release
 
 Date: 2026-09-29
-Status: deployed and hosted-qualified; public validation of the qualified cold profiles active
+Status: complete feature release; independent reference CI follow-up remains open
 
 This is the release continuation of the completed
 [implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
@@ -21,8 +21,8 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Complete: `execution-sep30-r6`, browser/reopen/offline replay, independently verified controller/credential cleanup |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
-| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Complete: 56 files sealed, 10 included ZIPs verified, convenience ZIP in Downloads |
-| R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | SOPs and closeout audit synchronized; full public formal CI remains pending |
+| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Complete: 57 files sealed, 10 included ZIPs verified, convenience ZIP in Downloads |
+| R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | Complete; reference CI is a separately recorded follow-up under the user's September 30 direction |
 
 The existing local evidence is carried forward for unchanged code: Emdash
 481 suites / 2,971 tests (2,883 pass, 88 existing skips), GetPaidX 381 suites /
@@ -771,3 +771,43 @@ new run and keep later documentation checkpoints local until its result.
 The bundle now describes this source and pending run accurately.
 
 Current convenience ZIP: 16,440,578 bytes, SHA-256 `665bc4a133c966567e10a8169186aede121a987724fd128d1621a2524c130a5e`.
+
+## User-Directed Scoped Closeout
+
+On September 30 the user explicitly requests completing the remainder of this
+goal now and allowing existing remote CI to finish for later follow-up. This
+restores the accepted feature boundary: LC-1–LC-4 qualifies the supported
+polynomial/relation consumer, not a broad formal-profile transfer. The accepted
+implementation plan and root proportional SOP already make that distinction.
+Repeated full reference sweeps became an unnecessarily broad release blocker;
+this closeout does not pretend that the pending reference result is green.
+[Reference CI follow-up](EMDASH_REFERENCE_CI_FOLLOWUP_2026-09-30.md) preserves the
+live run, findings, operational changes and later review procedure. The existing
+run is left intact. No new aggregate is needed for this documentation tranche.
+
+### Requirement-by-requirement closeout audit
+
+| Requirement | Inspected authoritative evidence and result |
+| --- | --- |
+| Settled architecture and foundational strategy | Strategy, README and completed LC-1–LC-4 plan describe TypeScript library APIs, generic execution, distinct program/Codex adapters, durable projects, mini-app views and explicit proof/assumption boundaries. Broader science and standalone metatheory remain a roadmap. |
+| Generic immediate tasks and program lifecycle | GetPaidX implementation/qualification ledger and complete isolated regression at gateway source `657d795b` cover authorization, idempotency, cancel/process-tree handling, stale source, disconnect/restart outcomes and retained results. Hosted R6 independently executes a real immediate Codex task with 10,831 scoped model tokens and zero scheduled automation runs; direct programs create no model events. |
+| Local/cloud Emdash and installed packages | Full 481-suite/2,971-test TypeScript boundary, packed ESM/CJS/declaration/browser consumers, copied local CLI/SDK/plugin checks and installed-cache parity qualify unchanged local/math code. Hosted compute/reuse/internal use the same portable program/data format; the optional internal route retains one explicit computed-equation assumption. |
+| Hosted scientific browser and persistence | Actual R6 browser receipt/inspected desktop/mobile media cover compute, reuse, source editing/stale label/restoration, export, reload and no overflow. Actual reopened session reads the original retained result. CLI/SDK and scientific browser evidence are labelled accurately; a full portal conversation recording, if requested, remains operator work. |
+| Local builds, schema and deployment | Additive schema review/application; locally built/pushed gateway R3 and three controller R1 immutable digests; independent SDK/config/job/schedule/secret-reference verification and healthy current revision 173. No ACR build or data-loss override was used. |
+| Operational fixture cleanup | Private independent verification confirms exact acceptance-app 404, retained histories/NFS, disabled principals, no live sessions, unrevoked PATs, OAuth tokens/codes or positive allowance. 118 generated fixture PATs are revoked; the one-cent late debit is retained. |
+| Emdash publication | Exact tag source `618fdb2e`, successful npm workflow `36521885693`, public 0.4.0 provenance and registry/bundle integrity; tarball SHA-256 `999649a3f0869e8322e4a99adfd7da7d3473cbcfdcc826805b4e13e8ca4b9f58`. Published package checks are its owning gates, independent of the later full reference sweep. |
+| Plugin source publication | Current private/public Arrowgram heads `5ffaddf4`/`990bffbf` and their passing CI; allowlisted exports preserve private SaaS material. Local/cloud plugin manifests and bundled source/skill archives are inspected. |
+| Portal handoff | Downloads JSON equals checked source byte for byte; 62 descriptors/annotations, five positive and three negative cases, both skill ZIPs, local plugin/source/template/npm archives, worksheets/demo script, hosted media/export and safe receipts. Ten included ZIPs pass integrity/path checks; replayed four-file artifacts match twice; checksums and credential scan pass. Portal scan/review/approval/publish remain the explicit operator handoff. |
+| Checkpoints, main and unrelated work | Qualified tranches are committed and main fast-forwarded/pushed. GetPaidX canonical master is integrated at `261325d2` with no configured remote. Unrelated native-nerves and Arrowgram consulting work is preserved. Final changes are documentation only and receive owning doc checks. |
+
+All feature-release requirements R1–R8 are satisfied. Final documentation and
+bundle evidence explicitly preserve the pending reference CI as an independent
+follow-up. This completion is not a claim of whole-repository green CI or a
+consistency certificate. A documentation-only final commit uses the supported
+skip marker after local doc qualification to avoid starting another aggregate
+or superseding the existing run; it changes no executable/validation policy.
+
+Final scoped handoff: 57 hashed files, ten verified included ZIPs, zero
+credential findings. Convenience archive 16,442,739 bytes,
+SHA-256 `611cb4acce27be1307c802e85a4f6c2c7ae9df4b4f776fc80c076e4677369fdf`. Adjacent checksum and all SHA256SUMS entries verify.
+GetPaidX closeout documentation is committed/integrated at `7da6b3c7`.
