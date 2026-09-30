@@ -406,3 +406,26 @@ then 3 GiB only after measured allocation failures. Stop other failures for
 review; retain subject reduction, exact source, serial/file/core/no-swap guards
 and normal defaults. Register only qualified exact-target settings, then run
 the next public formal gate. This remains independent repository validation.
+
+The metering correction is committed/integrated as GetPaidX `657d795b` and
+gateway R3 is built and uploaded at
+`sha256:08e6ae82dacb41bf3ed15fe752d6a470f9d426dedee9a0e3adc837f5b53b6e8e`.
+Its Docker clean/pruned audits pass and dependency layers were reused.
+The reviewed manifest generator now selects that source/image and expected
+revision 169, retaining all controller R1 digests. It includes only the two
+disabled acceptance journals for exact owned controller cleanup. The first
+read-only R3 preflight reaches a host-to-Azure database-connectivity error;
+no R3 mutation occurs. Retry is running in
+`/tmp/getpaidx-release-r3-plan-retry-20260930.log`. Inspect its successful plan
+and bind current gateway/job/cleanup fingerprints before apply.
+
+The operator acceptance now requires successful scoped model events with
+positive token counts, and its direct-program no-model assertion covers all
+configured model-provider enums. Operator typecheck passes. The next acceptance
+must use a fresh identity after the R3 rollout; retain the existing failure
+journals and clean their exact controllers through the reviewed manifest.
+The 25-target formal follow-up runs separately through
+`/tmp/emdash-snake-zeros-cold-followup-20260930.py` (session 92526), recording
+controls in `/tmp/emdash-snake-zeros-cold-controls-20260930.json`; log
+`/tmp/emdash-snake-zeros-cold-followup-20260930.log`. No new profile bindings
+have been installed until that measured group is qualified.
