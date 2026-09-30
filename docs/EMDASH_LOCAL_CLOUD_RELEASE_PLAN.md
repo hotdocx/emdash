@@ -621,3 +621,13 @@ synchronized with this new failure/pending qualification.
 
 After updating the CI evidence, the re-sealed convenience ZIP has SHA-256
 `667fac4378abc8368a3d6f030a896cf96fcb003ae5036d9d319f6ae9b219952d` (16,440,458 bytes); the earlier bundle hash is superseded.
+
+The first right-window target reproduces allocation failure at default 2 GiB
+(24.720s), scoped GC/2 GiB (38.023s) and GC/3 GiB (61.354s). The driver stops
+for review, as required. Under the existing standing resource authorization,
+only this owner is now replaying at the existing explicit 4 GiB/90s GC profile;
+defaults, formal source, subject reduction and no-swap/serial/file guards are
+unchanged. Receipt JSON will be
+`/tmp/emdash-window-right-owner-4g-20260930.json`. The remaining three targets
+and real consumer still need their own measured qualification before bindings
+or another public run. The four-target driver is stopped, not still running.
