@@ -1,7 +1,7 @@
 # Emdash Local And Cloud Release
 
 Date: 2026-09-29
-Status: deployed and hosted-qualified; full public formal CI remains active
+Status: deployed and hosted-qualified; public validation of the qualified cold profiles active
 
 This is the release continuation of the completed
 [implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
@@ -690,3 +690,19 @@ exact bundled tarball SHA-256, peeled tag source `618fdb2e`, successful publish
 workflow, private/public Arrowgram heads `5ffaddf4`/`990bffbf`, and healthy
 gateway 173 with unchanged R3 image. Hosted acceptance/replay/fixture cleanup
 receipts remain valid for that unchanged artifact; they are not repeated.
+
+## Current Public Validation
+
+The qualified metadata is committed as `86ae3a78`, fast-forwarded into clean
+canonical main and pushed. Docs and complete owning tooling gates pass at
+receipts `docs-20260930T144643Z-1ae73e9694f440dfb70192cd8a4f511b` and
+`tooling-20260930T144642Z-38df7973a1024beb98754e3ae5602738`.
+Fresh public run `36731930747` is verified in progress at exact source
+`86ae3a78b9474e95ab61b1d33bcad041147adbbb`. All local cold/deadline controls
+are now terminal and green; no local checker is still running.
+Keep this goal active and inspect that run's terminal outcome. Preserve its
+execution by keeping later documentation checkpoints local while it runs.
+A verified wait on that live job is progress toward its required outcome,
+not a reason to mark the goal blocked. Any next failure needs its own evidence;
+any complete result needs the final requirement-by-requirement release audit,
+updated bundle evidence/checksums and final doc integration/publication.
