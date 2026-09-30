@@ -575,3 +575,44 @@ without an explicit memory override used 2 GiB and failed; the cold scratch
 package does not carry registry metadata, so its subsequent 3 GiB control is
 explicit. Do not report that initial control as a 3 GiB failure. Full public
 formal validation remains required after this bounded metadata correction.
+
+## September 30 cold native window-right follow-up
+
+Public run `36720083359` passes every other job and the previous left-window
+correction, then stops after 215 formal checks at right kernel quotients
+(exit 134, 28.213s). Eleven source-identical cold owners/consumers are replayed
+with no object inputs. Four previous defaults require 4 GiB with scoped GC;
+seven existing 3 GiB/90s targets pass unchanged, including whole right homology,
+connecting comparison and surrounding-map owners/reviewers. Only four exact
+bindings are added, bringing the count to 147. Defaults, formal source,
+checker, subject reduction and serial/file/no-swap guards remain unchanged.
+
+The pair/reviewer pass 4 GiB/90s in 82.481/85.574s, close to the deadline.
+Reviewed repetitions at the existing 4 GiB/180s profile pass in 91.939/94.318s,
+confirming runtime variability that can exceed 90 seconds. Only those two
+receive 180 seconds; the other two select the existing 4 GiB/90s profile.
+This operational qualification does not certify CAS algorithm implementations
+or change any mathematical qualification. It makes clean-checkout checking
+of the published formal reference reproducible within explicit bounds.
+
+| Target | GiB / seconds ceiling | Measured seconds | Passed receipt |
+| --- | --- | --- | --- |
+| `emdash3_2_one_cat_native_window_snake_right_kernel_quotients.lp` | 4 / 90 | 72.376 | `20260930T141608Z-18a17d6272da41a785c619c87df90f0b` |
+| `emdash3_2_one_cat_native_window_snake_right_kernel_pair.lp` | 4 / 180 | 91.939 | `20260930T144119Z-f77b89dbac8f411da14e07215684c898` |
+| `emdash3_2_one_cat_native_window_snake_right_kernels.lp` | 4 / 90 | 73.049 | `20260930T142643Z-ffbebd1628674adba435a64b4d5e443d` |
+| `emdash3_2_one_cat_native_window_snake_right_homology.lp` | 3 / 90 | 41.378 | `20260930T142757Z-220c88b766db4a0286da5c5bc75902af` |
+| `emdash3_2_one_cat_native_window_snake_connecting_covers.lp` | 3 / 90 | 44.085 | `20260930T142840Z-cb91fbb52ea1403bb29e95ffe29437b4` |
+| `emdash3_2_one_cat_native_window_snake_connecting_comparison.lp` | 3 / 90 | 59.786 | `20260930T142925Z-3de7ea8a4c314816b9313916fb9b1776` |
+| `emdash3_2_one_cat_native_window_snake_surrounding_maps.lp` | 3 / 90 | 51.142 | `20260930T143026Z-bca9e1f4919c49c2a67df8908241d67d` |
+| `examples/one_cat_native_window_snake_connecting_comparison.lp` | 3 / 90 | 49.295 | `20260930T143118Z-38d3443090c54eada88f2633069c4dd5` |
+| `examples/one_cat_native_window_snake_right_homology.lp` | 3 / 90 | 46.848 | `20260930T143209Z-f2ac1bf5e66f4ef29cac621d7bc0da9d` |
+| `examples/one_cat_native_window_snake_right_kernels.lp` | 4 / 180 | 94.318 | `20260930T144252Z-2e5163de5d4a4b1e82127839cc6f6187` |
+| `examples/one_cat_native_window_snake_surrounding_maps.lp` | 3 / 90 | 53.224 | `20260930T143624Z-2bed83590b6340de94d1de252b8c0ce7` |
+
+Allocation controls: `/tmp/emdash-window-right-cold-controls-20260930.json`;
+complete import group `/tmp/emdash-window-right-import-controls-20260930.json`;
+reviewed deadline controls `/tmp/emdash-window-right-time-headroom-20260930.json`.
+All successful receipt input hashes are checked against the current checkout
+and contain no compiled objects. The scratch package uses explicit runtime
+settings rather than its own registry metadata. Required public full formal
+validation still follows this bounded metadata correction.

@@ -666,3 +666,27 @@ fixture cleanup and portal artifact preparation need no repetition.
 
 Current sealed handoff hash after that evidence update: `4e6239deed92245e357c4b7c73d24c9369cd2dd20037f1513b5957bf123dd4a0`
 (16,440,525 bytes). Earlier convenience ZIP hashes are historical.
+
+## Qualified Right-Window Metadata And Resumed Goal
+
+The goal is explicitly resumed and `get_goal` reports active. The previous
+turn completed hosted closeout and produced new allocation evidence; this
+continuation verifies the live driver, not a stale process marker. The user's
+latest instruction also reaffirms committing progress and fast-forwarding
+canonical main. Main is already fast-forwarded through `b22bfb31` while the
+relevant metadata is qualified.
+
+All eleven cold import controls complete. Source pins match the current
+checkout; three owners plus the right-kernel reviewer require 4 GiB, while
+seven existing 3 GiB/90s consumers remain unchanged. Pair/reviewer deadline
+replays at 4 GiB/180s pass in 91.939/94.318s, exceeding their earlier strict
+90s-run durations and justifying deadline headroom. Four exact bindings are
+installed (147 total), with full measurements in the resource ledger.
+No formal source/default-limit change is made. Run owning tooling/docs gates,
+checkpoint, fast-forward main and push, then verify the fresh public CI result.
+
+Current-state audit also confirms npm 0.4.0 registry integrity/provenance and
+exact bundled tarball SHA-256, peeled tag source `618fdb2e`, successful publish
+workflow, private/public Arrowgram heads `5ffaddf4`/`990bffbf`, and healthy
+gateway 173 with unchanged R3 image. Hosted acceptance/replay/fixture cleanup
+receipts remain valid for that unchanged artifact; they are not repeated.
