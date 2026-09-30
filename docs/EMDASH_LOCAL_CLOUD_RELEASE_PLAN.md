@@ -1,7 +1,7 @@
 # Emdash Local And Cloud Release
 
 Date: 2026-09-29
-Status: active release preflight
+Status: deployed and hosted-qualified; cleanup and final handoff active
 
 This is the release continuation of the completed
 [implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
@@ -17,11 +17,11 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | --- | --- | --- |
 | R1 | Review refs, deployment config, dependency audits, schema diff and rollback identities | Complete |
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
-| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Complete at revision 169; qualified metering correction requires a gateway follow-up |
-| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | OAuth/program/task phases pass; metering fix, browser/reopen/replay and controller cleanup remain |
+| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Complete: gateway R3/revision 171; three locally built controller R1 digests deployed |
+| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Complete hosted run `execution-sep30-r6`, including browser/reopen/offline replay; exact controller cleanup pending |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
-| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Prepared in Downloads; awaiting final hosted evidence/checksums |
+| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Hosted screenshots, recording, captured export and replay receipts added; final evidence/checksums pending |
 | R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | Pending |
 
 The existing local evidence is carried forward for unchanged code: Emdash
@@ -480,7 +480,42 @@ two exactness reviewers require the existing 3 GiB/90s profile. Only their
 resource ledger records every receipt. Complete tooling passes at receipt
 `tooling-20260930T113011Z-7286298fad7943939798c660fbf7da1a`.
 The qualification is committed/integrated/pushed as `d946d6ab`; public run
-`36712188754` is active. All its non-aggregate jobs except TypeScript/formal
-have passed at the latest observation. Preserve that run by keeping later
+`36712188754` is active. All jobs except formal have passed at the latest observation, including
+TypeScript. Preserve that run by keeping later
 documentation checkpoints local until it completes. No mathematical source,
 checker or default-limit change is included.
+
+## September 30 complete hosted acceptance
+
+`execution-sep30-r6` completes with `ok: true`, `browserCompleted: true` and
+no cleanup failures. Fresh OAuth sees MCP 0.3.0, 62 tools and catalog 275/24.
+Compute/reuse/internal, idempotency, stale-input rejection, cancellation,
+immediate real Codex execution and project reopen all pass. Its successful
+scoped OPENAI/gpt-5.4 event records 10,802 prompt/29 completion tokens, totaling
+10,831; billed cents round to zero. Scheduled automation count remains zero.
+The operator revokes credentials, closes its own sessions, cancels its private
+fixture and disables its principal; unused non-cash credit is reclaimed.
+
+Browser compute/reuse and one-assumption Core construction pass. Editing
+mathematical input marks the retained result stale; restoring the source
+restores the current-source label. Export, reload persistence and inspected
+desktop/mobile layouts pass; mobile width 390 has scroll width 375. Browser
+console records zero errors/warnings. The operator's 60-second export wait
+expired, but the application finished the paged export and downloaded the ZIP;
+this is not a failed application export. The completed 16-member ZIP has
+SHA-256 `d6f0cebe82eed48bcc114213e8976f4182604f9e277f25044afa00987ebda154`.
+
+Both this browser ZIP and the API capture independently replay in a
+network-disabled 512 MiB/no-swap container using captured Node 22.23.2 from
+`controller@sha256:2b3f8a45f270be63751792f67ab721d64c8f7d311fc7395c52f55de1cb2e3e13`.
+All four result/retained/internal/SVG artifacts match byte for byte. Hosted
+screenshots, automated browser recording, ZIP and safe receipts are copied to
+Downloads `hosted-acceptance/`. The recording is labelled as scientific browser
+evidence; the complete portal conversation/demo remains an operator recording.
+The R4 journal confirms failure before principal creation; it has no user ID.
+
+Final exact controller cleanup is being planned through the existing guarded
+rollout helper using the same gateway/controller digests and R3/R5/R6 identity
+journals. No new image build is needed. Public run `36712188754` has passed
+TypeScript and every other job except the still-running formal aggregate.
+Keep later documentation checkpoints local until that run completes.
