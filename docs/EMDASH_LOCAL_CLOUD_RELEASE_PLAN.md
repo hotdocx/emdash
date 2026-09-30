@@ -756,3 +756,18 @@ terminal/failed; it also replaces that run's still-live dependency-setup job.
 This is validation of new qualified source, not a restart based solely on an
 observation timeout. Preserve the old run/error evidence. Complete public
 validation and the final release audit still remain required.
+
+## Current Qualified Boundary Source
+
+The new qualification/setup change is committed as `5a9c4f61`, fast-forwarded
+into clean main and pushed. Complete owning tooling passes at
+`tooling-20260930T162817Z-54807154643245ef8469a5485eebf800`; docs passes at
+`docs-20260930T162816Z-d8a38a9c0c534370b7d19f4ab489be0d`. Changed shell syntax
+and APT option parsing also pass. Fresh run `36744636789` is verified live at
+exact source `5a9c4f610cdbdb375dcc5f412b5c0ef02d06fd3a`. The old run is now
+terminal/cancelled due to this intentional new-source supersession; retain its
+formal failure as evidence. No local checker is still running. Preserve the
+new run and keep later documentation checkpoints local until its result.
+The bundle now describes this source and pending run accurately.
+
+Current convenience ZIP: 16,440,578 bytes, SHA-256 `665bc4a133c966567e10a8169186aede121a987724fd128d1621a2524c130a5e`.
