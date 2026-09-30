@@ -62,8 +62,11 @@ Retain the already-published listing until the portal review completes.
 
 ## Release evidence in progress
 
-The regenerated GetPaidX submission has 62 explicit three-hint annotations and
-62 output schemas, five positive and three negative tests. The tests now cover
+The regenerated GetPaidX submission has 62 explicit three-hint annotations,
+five positive and three negative tests. Its generator independently requires
+an output schema on each of the 62 MCP tool descriptors. The portal JSON
+contains annotation metadata and justifications; the endpoint scan supplies
+the tool schemas. The tests now cover
 direct scientific programs and immediate tasks. Recommended portal version is
 1.2.0 under the existing listing, with the GetPaidX and Emdash cloud skills.
 The optional separately branded cloud skill is packaged honestly as a
@@ -335,3 +338,22 @@ generator after gateway R2's upload succeeds, then repeat the read-only
 preflight and bind current gateway/job fingerprints. The production gateway
 remains revision 167; all hosted acceptance and final submission evidence are
 still outstanding.
+
+## Prepared artifact integrity follow-up
+
+The next continuation classifies the preceding turn as progress: compatible
+gateway patches were qualified and committed, the replacement build was
+started, and measured formal profiles were pushed. Its live build handle and
+CI run remain active; package, tooling, reviewer, docs, publication and
+conformance CI jobs have passed at the latest observation. Remaining jobs are
+still required.
+
+All nine ZIP files currently in the Downloads bundle pass ZIP integrity,
+duplicate-name and path-traversal checks. The npm tarball has 194 members and
+matches the published/workflow SHA-256 recorded above. The two cloud skill
+copies are byte-identical. `npm run openai:submission:check` passes against
+the actual source MCP descriptors: 62 tools, five positive and three negative
+tests, all three annotations and every output schema. The Downloads JSON
+matches that checked generator output byte for byte. This proves the prepared
+source artifacts; the deployed scan, hosted media and final bundle integrity
+manifest remain pending until rollout/acceptance.
