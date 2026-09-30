@@ -1,7 +1,7 @@
 # Emdash Local And Cloud Release
 
 Date: 2026-09-29
-Status: deployed and hosted-qualified; cleanup and final handoff active
+Status: deployed and hosted-qualified; full public formal CI remains active
 
 This is the release continuation of the completed
 [implementation plan](EMDASH_LOCAL_CLOUD_WORKSPACE_IMPLEMENTATION_PLAN.md).
@@ -17,12 +17,12 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | --- | --- | --- |
 | R1 | Review refs, deployment config, dependency audits, schema diff and rollback identities | Complete |
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
-| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Complete: gateway R3/revision 171; three locally built controller R1 digests deployed |
-| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Complete hosted run `execution-sep30-r6`, including browser/reopen/offline replay; exact controller cleanup pending |
+| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Complete: gateway R3/revision 173; three locally built controller R1 digests deployed |
+| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Complete: `execution-sep30-r6`, browser/reopen/offline replay, independently verified controller/credential cleanup |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
-| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Hosted screenshots, recording, captured export and replay receipts added; final evidence/checksums pending |
-| R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | Pending |
+| R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Complete: 56 files sealed, 10 included ZIPs verified, convenience ZIP in Downloads |
+| R8 | Synchronize SOPs/ledgers and report published identities and remaining portal-only actions | SOPs and closeout audit synchronized; full public formal CI remains pending |
 
 The existing local evidence is carried forward for unchanged code: Emdash
 481 suites / 2,971 tests (2,883 pass, 88 existing skips), GetPaidX 381 suites /
@@ -533,3 +533,55 @@ uses 15-second operator-only connect/pool budgets while preserving exact live
 URL identity checks and all runtime settings. Six focused suites/92 tests,
 typecheck and source/script lint pass at checkpoint `aa15f78d`, integrated into
 canonical master. A clean guarded cleanup retry is active with the same images.
+
+## Deployment Closeout And Completion Audit
+
+The final guarded cleanup succeeds at healthy revision 173 using the same R3
+gateway/R1 controller images. All four job schedules are restored; every write
+is confirmed. Independent fingerprints verify config/secret preservation and
+canonical runtime env. The exact acceptance controller returns 404, retaining
+its UNAVAILABLE history, provider reference and five terminal session/assignment
+histories; NFS data is preserved.
+
+The independent credential audit finds that the operator helper's OAuth cleanup
+had omitted generated workspace/tool PATs. Exact disabled fixture ownership is
+rechecked, then 118 PATs are revoked. The ignored helper now performs that step
+and conditions its completion flag on success. Final independent verification
+finds zero live sessions, active PATs, OAuth tokens/codes and positive test
+allowance for every fixture; R4 has no principal. R5 retains a one-cent late
+usage debit. Evidence is private GetPaidX
+`reports/env/workspace-executions-final-verification-20260930.json` and
+`reports/env/workspace-executions-pat-reconciliation-20260930.json`.
+
+R1–R6 deployment/publication and hosted acceptance requirements are satisfied.
+R7 files are prepared with actual hosted media and safe captured-run replay;
+portal scan, conversation recording if required, review and approval/publish
+are operator handoff actions. GetPaidX AGENTS/README/current operations and its
+living plan now point to deployed 0.3.0/62/275/24 and revision 173.
+The source-identical two-target resource correction is committed/integrated/
+pushed at `72812f3e`. Public run `36720083359` passes all jobs except the
+still-running formal aggregate at the latest observation. Keep this goal
+active and later documentation checkpoints local until that required job
+completes; do not claim a fully green repository or completed release goal yet.
+
+## Sealed Portal Bundle
+
+The Downloads handoff contains 56 hashed files, including ten integrity-checked
+ZIPs, actual hosted desktop/mobile screenshots, automated scientific browser
+recording, portable captured run and safe offline/deployment receipts. The
+submission JSON matches its checked source byte for byte. Archive/path checks
+and high-confidence credential scans pass; every `SHA256SUMS` entry verifies.
+The convenience archive is
+`/home/user1/Downloads/emdash-getpaidx-release-20260929.zip` (16,440,375 bytes),
+SHA-256 `3d5a3f0d9c24c02971644f23add56d2e165609730206ed6245a41e030b6c6e3d`.
+Its adjacent `.zip.sha256` verifies that archive. This version explicitly
+labels the remaining public formal-CI result as pending; after that result,
+refresh the evidence and reseal hashes before claiming complete qualification.
+
+GetPaidX final documentation checkpoint `261325d2` is integrated into clean
+canonical master. GetPaidX has no configured remote. The standalone portal
+upload/review actions remain operator handoff. No hosted build/push/deploy,
+API/browser acceptance, artifact replay or fixture cleanup is still running.
+The only active automated release requirement is public formal CI
+`36720083359`; follow its terminal outcome, preserve source pins and record
+any additional measured correction rather than suppressing a failed check.
