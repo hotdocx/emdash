@@ -2388,6 +2388,8 @@
     "examples/one_cat_native_snake_six_term_zeros.lp": "action-profile-2g-90s",
     "examples/one_cat_native_snake_third_covers.lp": "action-profile-2g-90s",
     "examples/one_cat_native_snake_third_exactness.lp": "action-profile-3g-90s",
-    "examples/one_cat_native_snake_third_representatives.lp": "action-profile-2g-90s"
+    "examples/one_cat_native_snake_third_representatives.lp": "action-profile-2g-90s",
+    "emdash3_2_one_cat_native_window_snake_left_homology.lp": "action-profile-2g-90s",
+    "examples/one_cat_native_window_snake_left_homology.lp": "action-profile-3g-90s"
   }
 }

@@ -548,3 +548,30 @@ receipts remain in `emdash2/logs/check-runs/`. Each control uses a fresh runner
 process. Registry/tooling checks and the subsequent public formal run are
 required for the recorded routing. This is repository validation and does
 not add a Lambdapi runtime dependency to cloud scientific programs.
+
+## September 30 cold native window-left follow-up
+
+Public run `36712188754` passes every other gate, then formal stops after 211
+checks at `emdash3_2_one_cat_native_window_snake_left_homology.lp` (allocation
+failure/exit 134, 29.006s). Both default-profile targets importing this owner
+were replayed source-identically without any `.lpo` inputs. The default-GC
+controls fail allocation. The owner passes scoped GC at 2 GiB/90s; its reviewer
+still fails GC at 2 GiB and passes the existing 3 GiB/90s profile. The real
+whole connecting-comparison consumer passes cold at its existing 3 GiB/90s.
+Only these two exact bindings are added, bringing the override count to 143.
+Formal source, checker, subject reduction, normal defaults, file/deadline/serial
+and no-swap guards are unchanged.
+
+| Target | GiB | Seconds | Passed receipt |
+| --- | --- | --- | --- |
+| `emdash3_2_one_cat_native_window_snake_left_homology.lp` | 2 | 36.079 | `20260930T130305Z-e495f3a571624e389c2662cf591aec17` |
+| `examples/one_cat_native_window_snake_left_homology.lp` | 3 | 43.799 | `20260930T130449Z-b887506a61114b7fa27ed0b9237e19db` |
+| `emdash3_2_one_cat_native_window_snake_connecting_comparison.lp` (existing profile) | 3 | 54.159 | `20260930T130857Z-a143946a513446a7b2be92ea6a0a54bf` |
+
+Controls: `/tmp/emdash-window-left-cold-controls-20260930.json` and
+`/tmp/emdash-window-left-consumer-3g-20260930.json`; immutable input/settings
+snapshots remain in the referenced receipt files. An initial consumer control
+without an explicit memory override used 2 GiB and failed; the cold scratch
+package does not carry registry metadata, so its subsequent 3 GiB control is
+explicit. Do not report that initial control as a 3 GiB failure. Full public
+formal validation remains required after this bounded metadata correction.

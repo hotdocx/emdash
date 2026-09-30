@@ -519,3 +519,17 @@ rollout helper using the same gateway/controller digests and R3/R5/R6 identity
 journals. No new image build is needed. Public run `36712188754` has passed
 TypeScript and every other job except the still-running formal aggregate.
 Keep later documentation checkpoints local until that run completes.
+
+## Latest public CI and cleanup follow-up
+
+Run `36712188754` finishes with all gates passing except formal, which reaches
+211 checks and fails allocation in native window-left homology (29.006s).
+Two source-identical cold target controls and the whole connecting-comparison
+consumer qualify two exact resource bindings, recorded in the resource ledger;
+normal defaults and formal source remain unchanged. Fresh public validation
+is required. The GetPaidX cleanup attempts stop before mutation at database
+preflight; a bounded query succeeds in 8.792s. Its existing rollout helper now
+uses 15-second operator-only connect/pool budgets while preserving exact live
+URL identity checks and all runtime settings. Six focused suites/92 tests,
+typecheck and source/script lint pass at checkpoint `aa15f78d`, integrated into
+canonical master. A clean guarded cleanup retry is active with the same images.
