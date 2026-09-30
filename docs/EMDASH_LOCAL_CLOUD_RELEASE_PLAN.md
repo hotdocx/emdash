@@ -322,4 +322,16 @@ Their exact bindings and receipts are recorded in the
 [resource ledger](EMDASH_ACTION_PROFILE_RESOURCE_QUALIFICATION.md#september-30-cold-homology-consumer-follow-up).
 No mathematical source changes. The complete tooling gate passes at receipt
 `tooling-20260930T090405Z-94ccff361cfd4961a498d30266a83d30`; document checks pass.
-Publish this bounded CI repair, then inspect the next public formal result.
+The bounded CI repair is committed, integrated and pushed as `cfab92fc`.
+Public validation run `36693986974` is queued/running for that exact commit;
+inspect its formal result before claiming a green public aggregate. Keep
+documentation-only follow-up checkpoints local while it runs to avoid
+canceling the active validation through a superseding push.
+
+The ignored rollout-manifest generator now selects gateway R2/source
+`799f0c772bb050fb248fc2a846b17c7799a53e33`, retaining all controller R1 digests.
+The existing generated R1 manifest is stale and must not be applied. Run the
+generator after gateway R2's upload succeeds, then repeat the read-only
+preflight and bind current gateway/job fingerprints. The production gateway
+remains revision 167; all hosted acceptance and final submission evidence are
+still outstanding.
