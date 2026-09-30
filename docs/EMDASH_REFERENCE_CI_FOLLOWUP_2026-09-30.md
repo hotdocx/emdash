@@ -1,7 +1,7 @@
 # Emdash Reference CI Follow-up
 
 Date: 2026-09-30
-Status: pending remote result; separate from the completed local/cloud feature release
+Status: terminal formal failure awaiting later review; separate from the completed feature release
 
 The user explicitly requests completion of the feature-release goal now and
 allows the existing remote CI to finish independently. This file preserves the
@@ -10,8 +10,10 @@ persistent goal or authorization to resume deferred mathematical research.
 
 Current run: [36744636789](https://github.com/hotdocx/emdash/actions/runs/36744636789),
 source `5a9c4f610cdbdb375dcc5f412b5c0ef02d06fd3a`, formal job `109987961127`.
-At closeout every non-formal job passes; formal remains live. Do not claim a
-fully green repository result. No cancellation or restart is requested.
+The run finished naturally during closeout. Every non-formal job passes;
+formal and the summary report failure. No whole-repository green result is
+claimed. No cancellation, restart or further investigation is performed in
+this feature-release goal; the user requests later follow-up.
 
 The workflow falls back to all gates when no qualified prior-success baseline
 is available. That caused repeated aggregate runs after bounded operational

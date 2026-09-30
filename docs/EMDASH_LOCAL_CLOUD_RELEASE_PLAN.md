@@ -811,3 +811,13 @@ Final scoped handoff: 57 hashed files, ten verified included ZIPs, zero
 credential findings. Convenience archive 16,442,739 bytes,
 SHA-256 `611cb4acce27be1307c802e85a4f6c2c7ae9df4b4f776fc80c076e4677369fdf`. Adjacent checksum and all SHA256SUMS entries verify.
 GetPaidX closeout documentation is committed/integrated at `7da6b3c7`.
+
+The existing remote run finished naturally during final closeout: all
+non-formal jobs pass; formal and the summary report failure. The terminal
+result is recorded in the independent follow-up, not investigated or rerun
+under this completed feature goal. The documentation-only push preserved the
+existing run and started no new aggregate. Final public closeout documentation
+is integrated; this later outcome update also changes documentation only.
+
+The final outcome-aware ZIP supersedes prior hashes: 16,442,881 bytes,
+SHA-256 `554ac801bb23aeb94cff61cb5e44022716c3dbf759c2d74eb782d43bf5297bbb`, with 57 verified hashed files.
