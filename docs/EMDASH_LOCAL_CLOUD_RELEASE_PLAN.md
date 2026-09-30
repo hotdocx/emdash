@@ -455,9 +455,17 @@ is now explicitly sixty minutes. Fresh `execution-sep30-r4` stops before
 principal creation at a host-to-Azure connection error. The operator now uses
 an explicit fifteen-second connection/pool timeout in its own process, without
 changing the canonical or deployed database URL. Fresh `execution-sep30-r5`
-is active with the same credit bounds and stronger token accounting. The
+reaches workspace start, then stops at a transient `CONTROLLER_UNAVAILABLE`
+inspection response; its cleanup completes. The operator now polls only the
+read-only inspection for at most three minutes after start/reopen, without
+repeating workspace creation. The script typechecks, and a fresh complete
+`execution-sep30-r6` run is active with the same credit bounds and stronger
+token accounting. Its log is
+`/tmp/getpaidx-hosted-execution-acceptance-r6-20260930.log` (session 45520).
+Use `reports/env/hosted-browser-cli-r6.mjs` once its private handoff is ready.
+The
 attended allowance is at most six new controller starts across these attempts;
-R1/R4 make no starts, R2 makes one and R3 makes two. Complete captures and the
+R1/R4 make no starts, R2/R5 make one each and R3 makes two. Complete captures and the
 done marker before the sixty-minute deadline. The old R3
 controllers remain exact cleanup targets after the active fixture finishes.
 
@@ -471,6 +479,8 @@ two exactness reviewers require the existing 3 GiB/90s profile. Only their
 25 exact bindings are installed, bringing the override count to 141. The
 resource ledger records every receipt. Complete tooling passes at receipt
 `tooling-20260930T113011Z-7286298fad7943939798c660fbf7da1a`.
-Finish document checks, checkpoint and push this qualification, then inspect
-the next public formal run. No mathematical source, checker or default-limit
-change is included.
+The qualification is committed/integrated/pushed as `d946d6ab`; public run
+`36712188754` is active. All its non-aggregate jobs except TypeScript/formal
+have passed at the latest observation. Preserve that run by keeping later
+documentation checkpoints local until it completes. No mathematical source,
+checker or default-limit change is included.
