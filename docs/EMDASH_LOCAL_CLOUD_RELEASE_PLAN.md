@@ -17,8 +17,8 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | --- | --- | --- |
 | R1 | Review refs, deployment config, dependency audits, schema diff and rollback identities | Complete |
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
-| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | All controller images uploaded and runtime-checked; fresh gateway audit requires compatible patches/rebuild before rollout |
-| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Pending |
+| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Complete at revision 169; qualified metering correction requires a gateway follow-up |
+| R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | OAuth/program/task phases pass; metering fix, browser/reopen/replay and controller cleanup remain |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
 | R7 | Prepare versioned portal JSON/skill ZIPs, source packages, worksheet, demo script, screenshots, checksums and release evidence | Prepared in Downloads; awaiting final hosted evidence/checksums |
@@ -357,3 +357,52 @@ tests, all three annotations and every output schema. The Downloads JSON
 matches that checked generator output byte for byte. This proves the prepared
 source artifacts; the deployed scan, hosted media and final bundle integrity
 manifest remain pending until rollout/acceptance.
+
+## Revision 169 and hosted acceptance findings
+
+Gateway R2 built/pushed successfully at
+`sha256:75bcce55b6e5ba2242046119e6b7057ab1a9b732d0c789e63e8e299b7e5d9e2b`.
+Its clean-install and pruned Docker audits pass. The guarded rollout reaches
+healthy revision 169 with all four original schedules restored and no
+unresolved cloud write. Independent SDK fingerprint comparisons verify the
+expected gateway/job templates and preservation of unrelated configuration
+and secret references. Canonical production env runtime keys were updated
+individually with a private backup; all unrelated parsed values are preserved.
+The encrypted original-state snapshot and verification receipt remain in
+GetPaidX's ignored `reports/env/`.
+
+Hosted `execution-sep30-r1` stops before a workspace start at the operator's
+five-second credit transaction deadline. Independent checks confirm a disabled
+identity, zero wallet balance and zero sessions. Only the operator grant and
+reclaim transactions now use an explicit 30-second deadline.
+
+Hosted `execution-sep30-r2` passes DCR/PKCE OAuth, the deployed 62-tool 0.3.0
+catalog (275 endpoints/24 workflows), compute/reuse/internal runs with no model
+usage, captured export, stale-source rejection, cancellation and a real
+immediate Codex file change with idempotent replay. It stops at the model
+usage assertion; browser/reopen phases have not run. All own sessions are
+closed, post canceled, OAuth credentials revoked, unused credits reclaimed
+and identity disabled. Its exact controller cleanup remains required.
+
+Focused regressions reproduce a delayed-heartbeat loss of usage and
+cross-request attribution through the shared proxy emitter. GetPaidX
+`657d795b` fixes both by using a proxy per request and attaching all response
+observers before starting the heartbeat write. Both tests fail on the old
+implementation and pass after the fix. Full isolated regression passes
+382 suites/1,573 tests/two skips; typecheck/lint and standalone scientific
+template typecheck pass. Generated exports are excluded from contributor
+Jest/typecheck discovery. Gateway R3 is building/pushing locally from this
+clean checkpoint; log `/tmp/getpaidx-release-gateway-r3-20260930.log`, session
+55676 at launch. Retain all controller R1 digests and repeat hosted token
+accounting after the guarded gateway update.
+
+Public run `36693986974` passes every non-formal job, including TypeScript,
+but stops at `emdash3_2_one_cat_native_snake_inner_zeros.lp` (exit 134/23.914s).
+A cold source-identical 2 GiB/90s replay with scoped `o=20,v=1024` passes in
+38.464s (receipt `20260930T102429Z-97bb95aae170469092a7ef43e5043046`).
+There are 25 ordinary-profile owners/reviewers importing this owner. The next
+bounded follow-up measures only that group at defaults, then GC at 2 GiB,
+then 3 GiB only after measured allocation failures. Stop other failures for
+review; retain subject reduction, exact source, serial/file/core/no-swap guards
+and normal defaults. Register only qualified exact-target settings, then run
+the next public formal gate. This remains independent repository validation.
