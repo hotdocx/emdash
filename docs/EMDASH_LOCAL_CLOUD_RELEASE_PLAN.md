@@ -706,3 +706,53 @@ A verified wait on that live job is progress toward its required outcome,
 not a reason to mark the goal blocked. Any next failure needs its own evidence;
 any complete result needs the final requirement-by-requirement release audit,
 updated bundle evidence/checksums and final doc integration/publication.
+
+## September 30 Boundary Allocation Follow-up
+
+Public formal job `109943660587` completes unsuccessfully after 246 checks:
+`emdash3_2_one_cat_boundary_representatives.lp` allocation failure (exit 134,
+30.559s). The prior right-window fixes pass in that run. Every completed
+non-formal job passes; scale-conformance job `109943660534` remains live in
+system dependency setup, with its pinned OCaml step completed at 14:50:18Z.
+The log API returns 404 while that job is live; this observation failure is
+not terminal and does not authorize an observation-only restart.
+
+The default-profile import inventory contains six exact targets: boundary
+representatives, middle homology representatives, cycles, exactness and the
+homology-representative/middle-cycle reviewers. Standard serial source-identical
+cold controls are running at 2 GiB/90s default GC, then scoped GC at 2 GiB and
+measured 3 GiB if needed. Stop unexpected outcomes for review; standing resource
+authorization remains in force. Defaults, source, checker, subject reduction,
+serial/file/no-swap guards are unchanged. No new binding is installed yet.
+
+Driver `/tmp/emdash-boundary-cold-followup-20260930.py`, log
+`/tmp/emdash-boundary-cold-followup-20260930.log`, results
+`/tmp/emdash-boundary-cold-controls-20260930.json`, tool session 99352 at launch. After the
+measured group qualifies, verify the real consumer and source hashes, select
+only measured exact bindings, run owning checks, checkpoint/fast-forward main,
+and push a fresh validation at an attended boundary. Keep current live-job
+state distinct from the terminal formal failure. Hosted release/cleanup and
+portal artifacts need no repetition.
+
+## Qualified Boundary Metadata And Bounded CI Setup
+
+All six controls and both real consumers pass with current source pins.
+Five exact targets select GC-only 2 GiB/90s and one selects 3 GiB/90s,
+bringing the override count to 153. The resource ledger records measurements
+and both consumer receipts. No mathematical source or normal default is changed.
+
+The live scale-conformance job has not completed system-dependency setup after
+more than 90 minutes. The workflow's existing APT step had no step deadline or
+explicit finite transport retry/timeouts. Bound only that step to ten minutes,
+three retries and 30-second HTTP/HTTPS connect/data timeouts, using noninteractive
+installation. Installed packages and verification pins are unchanged; the local
+APT primary manuals confirm those options. This produces a visible terminal
+setup failure rather than consuming the entire gate window. It is CI setup
+reliability work, not a cloud runtime/opam version migration.
+
+After owning checks and a clean checkpoint, fast-forward/push main. The new
+source validation intentionally supersedes the run whose formal job is already
+terminal/failed; it also replaces that run's still-live dependency-setup job.
+This is validation of new qualified source, not a restart based solely on an
+observation timeout. Preserve the old run/error evidence. Complete public
+validation and the final release audit still remain required.

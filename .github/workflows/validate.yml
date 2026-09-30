@@ -87,9 +87,11 @@ jobs:
           opam-pin: false
       - name: Install formal system dependencies
         if: matrix.formal
+        timeout-minutes: 10
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes libgmp-dev libev-dev libssl-dev pkg-config
+          apt_options=(-o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30)
+          sudo apt-get "${apt_options[@]}" update
+          sudo env DEBIAN_FRONTEND=noninteractive apt-get "${apt_options[@]}" install --yes libgmp-dev libev-dev libssl-dev pkg-config
       - name: Install and verify exact formal dependencies
         if: matrix.formal
         run: opam exec -- python3 scripts/verification-toolchain.py install

@@ -616,3 +616,34 @@ All successful receipt input hashes are checked against the current checkout
 and contain no compiled objects. The scratch package uses explicit runtime
 settings rather than its own registry metadata. Required public full formal
 validation still follows this bounded metadata correction.
+
+## September 30 cold boundary/middle homology follow-up
+
+Formal job `109943660587` at source `86ae3a78` passes the preceding right-window
+fixes, reaches 246 checks, then fails allocation in boundary representatives
+(exit 134, 30.559s). Six default-profile targets in its import cone are replayed
+source-identically without compiled objects. Every default-GC control fails
+allocation. Five pass scoped GC at 2 GiB/90s; middle homology exactness still
+fails 2 GiB/GC and passes the existing 3 GiB/90s profile. Native whole middle
+exactness and its reviewer pass their unchanged 3 GiB/90s profile. Six exact
+bindings are added (153 total); ordinary defaults, formal source, checker,
+subject reduction and serial/file/no-swap guards remain unchanged.
+
+| Target | GiB / seconds ceiling | Measured seconds | Passed receipt |
+| --- | --- | --- | --- |
+| `emdash3_2_one_cat_boundary_representatives.lp` | 2 / 90 | 30.919 | `20260930T160758Z-0a1b080ced1c4578a7492f4c370ba74a` |
+| `emdash3_2_one_cat_middle_homology_representatives.lp` | 2 / 90 | 33.704 | `20260930T160852Z-0e5a7abf217443129c218a9aa3dcc982` |
+| `emdash3_2_one_cat_middle_homology_cycles.lp` | 2 / 90 | 34.192 | `20260930T160949Z-0bd9232e974a4450a00023fca23aa143` |
+| `emdash3_2_one_cat_middle_homology_exactness.lp` | 3 / 90 | 33.149 | `20260930T161123Z-87af221ede434d639ab2fc6a3d6124ba` |
+| `examples/one_cat_homology_representatives.lp` | 2 / 90 | 30.149 | `20260930T161221Z-a66bc0241c4c4608b183d791538d20ca` |
+| `examples/one_cat_middle_homology_cycles.lp` | 2 / 90 | 32.258 | `20260930T161316Z-841d92062dd8422fbe5b30ec227ac3e2` |
+| `emdash3_2_one_cat_native_middle_homology_exactness.lp` | 3 / 90 | 37.051 | `20260930T161550Z-05a83686957e4c1aad981c30de818b6d` |
+| `examples/one_cat_middle_homology_exactness.lp` | 3 / 90 | 36.868 | `20260930T162021Z-3a826080f77a44b583705adbbe604e4c` |
+
+Controls: `/tmp/emdash-boundary-cold-controls-20260930.json`;
+consumer receipts `/tmp/emdash-boundary-consumers-20260930.json` and
+`/tmp/emdash-boundary-reviewer-consumer-20260930.json`. All successful input
+hashes match the current checkout. The initial reviewer setup attempt lacked
+its file in the scratch package; copying its exact source closure resolves
+that setup failure. It is not a typechecking/allocation failure. Required full
+public formal validation still follows this metadata correction.
