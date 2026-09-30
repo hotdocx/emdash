@@ -631,3 +631,38 @@ unchanged. Receipt JSON will be
 `/tmp/emdash-window-right-owner-4g-20260930.json`. The remaining three targets
 and real consumer still need their own measured qualification before bindings
 or another public run. The four-target driver is stopped, not still running.
+
+## Current Background Handoff
+
+The reviewed owner passes cold at 4 GiB/90s with scoped GC in 72.376s,
+maximum child RSS 3,540,324 KiB, receipt
+`20260930T141608Z-18a17d6272da41a785c619c87df90f0b`. Its source pin matches
+the prior failed controls. Default/GC 2 GiB and GC 3 GiB failures remain
+recorded; no new formal binding is installed yet.
+
+The import inventory identifies eleven exact targets: four current defaults
+and seven existing 3 GiB/90s targets. A new serial background driver reuses
+only the pinned successful owner receipt, then checks the remaining defaults
+at scoped GC/2 GiB → 3 GiB → 4 GiB as required, and current 3 GiB targets at
+3 GiB → 4 GiB as required. Every child retains 90 seconds, subject reduction,
+the normal guard, file/serial/no-swap restrictions and source-identical cold
+inputs. Any allocation failure at 4 GiB or non-allocation failure stops for
+review; standing authorization permits a separately measured extension if
+needed. The actual right-homology/connecting consumers are included in this
+inventory. Do not select metadata until the relevant whole group is qualified.
+
+Driver `/tmp/emdash-window-right-import-controls-20260930.py`; log
+`/tmp/emdash-window-right-import-controls-20260930.log`; results
+`/tmp/emdash-window-right-import-controls-20260930.json`; session 31005.
+Expected terminal line: `Completed all 11 cold import targets.` Review the
+receipts rather than treating the last log line alone as qualification.
+On interruption, restart this source-pinned driver only after confirming the
+old process ended; it replays the controlled sequence and checks each receipt.
+Do not restart the superseded four-target driver, whose 3 GiB ceiling has
+already been rejected. After a qualified group, synchronize exact overrides,
+resource ledger and current CI evidence; run owning tooling/docs gates,
+checkpoint/integrate/push and verify fresh public formal CI. Deployment,
+fixture cleanup and portal artifact preparation need no repetition.
+
+Current sealed handoff hash after that evidence update: `4e6239deed92245e357c4b7c73d24c9369cd2dd20037f1513b5957bf123dd4a0`
+(16,440,525 bytes). Earlier convenience ZIP hashes are historical.
