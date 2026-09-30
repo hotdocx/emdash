@@ -17,7 +17,7 @@ unrelated work in all canonical checkouts and never rewrite existing history.
 | --- | --- | --- |
 | R1 | Review refs, deployment config, dependency audits, schema diff and rollback identities | Complete |
 | R2 | GetPaidX targeted dependency fixes, generated submission metadata, full isolated regression, clean release checkpoint | Complete at `a0852877`; build-network correction `dff2dbea` |
-| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Additive schema applied; local image builds active |
+| R3 | Local gateway and three controller-family builds; reviewed additive schema, pool/job mapping and healthy gateway rollout | Additive schema applied; universal image passes; LambdaPi/Lean build and rollout pending |
 | R4 | Hosted OAuth catalog, immediate task, direct scientific program, preview, retained artifacts and export smoke; exact fixture cleanup | Pending |
 | R5 | Integrate and push Emdash; publish a new npm version with the existing exact-artifact provenance workflow | Complete: 0.4.0, tag/source `618fdb2e`; public registry artifact verified |
 | R6 | Integrate and push private Arrowgram source; dry-run then publish allowlisted OSS mirror; validate plugin packages | Complete: private `5ffaddf4`, public `990bffbf`; both CI runs pass |
@@ -213,3 +213,70 @@ The OpenAI bundle remains prepared at the recorded Downloads path. Final
 hosted evidence, bundle checksums and portal handoff verification are still
 pending. The user prefers ordinary sequential GetPaidX development; this one
 existing release worktree remains a bounded staging exception.
+
+## September 30 resumed build diagnosis
+
+The previous background build ended at the publisher fixture's pnpm fetch,
+before PDF generation, with `ERR_PNPM_META_FETCH_FAIL` and `ETIMEDOUT`.
+Pinned pnpm 11.16.0 explicitly enables connection-family autoselection,
+overriding Node's disabled default. A five-second per-address connection
+attempt and fetch concurrency four resolve the failure with the frozen
+lockfile, TLS and supply-chain checks intact. GetPaidX commit `0d311554`,
+also fast-forwarded into its clean canonical master, scopes the adjustment to
+that build step. The exact 89-entry policy check, offline install and PDF/qpdf
+smoke pass. Expensive preceding layers are reused.
+
+The universal candidate passes separate offline publisher, LaTeX and repeated
+Paged.js book checks. The local helper continues LambdaPi and Lean, then pushes
+all three images. Its new log is `/tmp/getpaidx-release-controllers-sep30.log`
+(tool session 59365 at launch); this replaces the terminal retry log. Download
+probes still measure roughly 14–16 KB/s from two Debian mirrors. Local builds
+remain selected; no ACR build or additional deployment wrapper was introduced.
+Live inspection still shows gateway revision 167 and no active workspace
+sessions; recheck before applying the reviewed rollout.
+
+Public CI `36526254196` passed TypeScript, conformance, scale conformance,
+docs, tooling, package, reviewer and publication gates, but failed the formal
+gate at `emdash3_2_one_cat_homology_covers.lp` (allocation failure). A cold
+source-identical replay reproduces it at ordinary defaults in 24.718s. Scoped
+`o=20,v=1024` passes within the same 2 GiB/90s limit in 36.062s; the native
+window owner and concrete reviewer pass in 32.835s and 30.938s. No mathematical
+source or profile binding has been changed at this checkpoint.
+
+A bounded serial follow-up inventories the 16 ordinary-profile targets that
+import that owner. It tests defaults, then the same 2 GiB GC control only after
+an allocation failure; any other failure stops for review. Results/receipts:
+`/tmp/emdash-homology-cold-followup-results.json`, log
+`/tmp/emdash-homology-cold-followup.log`, launcher
+`/tmp/emdash-homology-cold-followup.py` (tool session 5861 at launch). Finish
+that measurement and register only qualified exact-target settings before
+the next public formal run. This is separate repository CI maintenance, not
+a dependency or checker requirement for the hosted TypeScript pilot.
+
+The user requests another pause while those background processes finish.
+GetPaidX runtime evidence is checkpointed at `d6b4be90`, following build fix
+`0d311554`, and integrated into canonical master. Leave both existing processes
+running. The image helper uploads after all three builds succeed; production
+deployment is a subsequent attended step. Three `pushedDigests=` lines in its
+fresh log indicate successful image uploads. The formal measurement log ends
+with `Completed all 16 bounded targets.` on success, or stops at the first
+unexpected failure for review. Read the results before changing profile
+bindings or restarting a failed mathematical check.
+
+If the image helper is interrupted, first confirm no copy is still running,
+then resume its normal cached build/push command:
+
+```bash
+cd /home/user1/closerfans-workspace-executions-v1
+az acr login --name getpaidxstagingacr
+nohup env IMAGE_TAG=dev-20260929-workspace-executions-r1 \
+  WORKSPACE_CONTROLLER_IMAGE_REPOSITORY=getpaidxstagingacr.azurecr.io/controller \
+  CONTROLLER_BUILD_PUSH=true \
+  bash scripts/build-controller-images.sh \
+  > /tmp/getpaidx-release-controllers-sep30.log 2>&1 < /dev/null &
+```
+
+This starts no deployment and introduces no replacement rollout wrapper. A
+successful build/push does not complete R3/R4; resume the goal to inspect the
+immutable registry digests, revalidate current live state and run the standard
+guarded rollout and hosted acceptance.
