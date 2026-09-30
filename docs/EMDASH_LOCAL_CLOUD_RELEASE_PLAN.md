@@ -596,3 +596,28 @@ has completed deployment, acceptance, cleanup and the sealed handoff. The
 remaining public formal gate continues independently in GitHub Actions.
 Do not mark the objective complete before its terminal result, and do not
 repeat the already-finished hosted acceptance or deployment on resume.
+
+## Latest Formal Failure And Bounded Follow-up
+
+Public run `36720083359` finishes with every job passing except formal. The
+left-window correction passes in that run; it then reaches 215 checks and
+fails allocation at `emdash3_2_one_cat_native_window_snake_right_kernel_quotients.lp`
+(exit 134, 28.213s). Four current default-profile descendants are selected:
+right kernel quotients, right kernel pair, right kernels and its reviewer.
+Serial source-identical no-object controls are running through the standard
+guard, with default 2 GiB/90s then scoped GC and measured 3 GiB if needed.
+The driver stops any unexpected failure for review. No new profile binding or
+formal source change is installed before qualification.
+
+Background driver `/tmp/emdash-window-right-cold-followup-20260930.py`, log
+`/tmp/emdash-window-right-cold-followup-20260930.log`, results
+`/tmp/emdash-window-right-cold-controls-20260930.json`, tool session 41019.
+After controls finish, check the real cold right-homology consumer at its
+existing explicit 3 GiB/90s profile, synchronize exact bindings/resource
+ledger, run owning docs/tooling checks, checkpoint/integrate/push, and require
+another complete public validation. Deployment and fixture cleanup remain
+finished; do not rerun them. Keep the portal bundle's CI evidence and hashes
+synchronized with this new failure/pending qualification.
+
+After updating the CI evidence, the re-sealed convenience ZIP has SHA-256
+`667fac4378abc8368a3d6f030a896cf96fcb003ae5036d9d319f6ae9b219952d` (16,440,458 bytes); the earlier bundle hash is superseded.
