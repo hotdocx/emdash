@@ -497,3 +497,54 @@ guard limits; the per-target wall times exclude unrelated work.
 The registry/tooling checks and next public formal run qualify this routing;
 earlier full formal evidence does not substitute for that cold hosted run.
 This maintenance remains independent of the cloud Node/TypeScript runtime.
+
+## September 30 cold native snake follow-up
+
+Public CI `36693986974` passes all non-formal jobs, including the complete
+TypeScript gate, then stops at `one_cat_native_snake_inner_zeros` with an
+allocation failure. The cold, source-identical import group contains 25
+ordinary-profile owners/reviewers. Serial default controls reproduce allocation
+failures for each. Scoped `o=20,v=1024` passes 23 at the unchanged 2 GiB/90s
+bound. Only the second- and third-exactness reviewers still fail there; both
+pass at the existing authorized 3 GiB/90s bound. No compiled objects are used.
+
+Only these 25 exact target bindings change: 23 reuse `action-profile-2g-90s`,
+two reuse `action-profile-3g-90s`. There are now 141 exact overrides. Normal
+defaults, mathematical/checker/source pins, target membership, subject reduction
+and serial/file/core/no-swap guards remain unchanged. These are passing
+observations, not minimum-bound claims or broader mathematical qualification.
+
+| Target (library prefix `emdash3_2_` omitted) | GiB | Seconds | Successful receipt |
+| --- | ---: | ---: | --- |
+| `one_cat_native_snake_inner_zeros.lp` | 2 | 38.464 | `20260930T102429Z-97bb95aae170469092a7ef43e5043046` |
+| `one_cat_native_snake_exact_inputs.lp` | 2 | 37.565 | `20260930T110055Z-a4e6b5b6112d402685417dd1154f3f95` |
+| `one_cat_native_snake_comparison_kernels.lp` | 2 | 37.557 | `20260930T110203Z-15c78e15fabf48cfb2f96b0434893938` |
+| `one_cat_native_snake_first_kernel_comparison.lp` | 2 | 31.887 | `20260930T110309Z-dc417bba1d184477bda4e7ffe915c6f1` |
+| `one_cat_native_snake_first_cover.lp` | 2 | 29.601 | `20260930T110412Z-0b93fe26f04348118569795475035be4` |
+| `one_cat_native_snake_second_covers.lp` | 2 | 41.512 | `20260930T110510Z-fa93d9f1b0594241b2483c30aea8b6ab` |
+| `one_cat_native_snake_third_covers.lp` | 2 | 37.798 | `20260930T110622Z-e2b8fc77253644fd91dfa2bdab5f05ae` |
+| `one_cat_native_snake_third_representatives.lp` | 2 | 38.083 | `20260930T110727Z-8940cfecf49a4be9a0bfc29adc28866e` |
+| `one_cat_native_snake_fourth_covers.lp` | 2 | 38.774 | `20260930T110833Z-261b7a7719d44957a4792516b146b5f1` |
+| `one_cat_native_snake_first_pair_path.lp` | 2 | 30.349 | `20260930T110937Z-587924f9cc3a401cb6c49f9c86855698` |
+| `one_cat_native_snake_other_pair_paths.lp` | 2 | 29.832 | `20260930T111031Z-c8a712d3a20640a5b20680d8fc329865` |
+| `examples/one_cat_native_snake_comparison_kernels.lp` | 2 | 31.713 | `20260930T111129Z-2ff1eee69c824abd9e4166c271564e30` |
+| `examples/one_cat_native_snake_first_cover.lp` | 2 | 34.537 | `20260930T111230Z-e677fb92137a48f5b2197d0b03edd709` |
+| `examples/one_cat_native_snake_first_exactness.lp` | 2 | 35.355 | `20260930T111329Z-edddfff43cf7423ca132511088e669cc` |
+| `examples/one_cat_native_snake_first_kernel_comparison.lp` | 2 | 36.880 | `20260930T111429Z-c7da1451cde5400786931a375ef89cbf` |
+| `examples/one_cat_native_snake_fourth_covers.lp` | 2 | 35.227 | `20260930T111529Z-ba0aa53a0a534817bb93c75891ec6c01` |
+| `examples/one_cat_native_snake_fourth_exactness.lp` | 2 | 35.878 | `20260930T111628Z-02e9b52d295a4cc9b34818a024ed1d89` |
+| `examples/one_cat_native_snake_fourth_representatives.lp` | 2 | 31.321 | `20260930T111725Z-c82ca21e4a644a94b2ee804f378102fb` |
+| `examples/one_cat_native_snake_second_covers.lp` | 2 | 32.534 | `20260930T111824Z-cc6fb0e9ee9c43919a076661b3a7f64a` |
+| `examples/one_cat_native_snake_second_exactness.lp` | 3 | 39.123 | `20260930T111957Z-fdeee57d922846b5a9601229144d4109` |
+| `examples/one_cat_native_snake_second_representatives.lp` | 2 | 33.102 | `20260930T112104Z-e638654d99b0408ca1c85cbf068ed5fd` |
+| `examples/one_cat_native_snake_six_term_zeros.lp` | 2 | 30.942 | `20260930T112202Z-9b277046f11643d5bcb2ffb727892018` |
+| `examples/one_cat_native_snake_third_covers.lp` | 2 | 36.940 | `20260930T112258Z-d2403344becd4413b825f00179f31ec9` |
+| `examples/one_cat_native_snake_third_exactness.lp` | 3 | 31.271 | `20260930T112433Z-994b17595c284ce4af3de1605096ff0c` |
+| `examples/one_cat_native_snake_third_representatives.lp` | 2 | 26.611 | `20260930T112526Z-c5dc51723c9e4bcda6bd75b9faa63358` |
+
+Complete controls are indexed in
+`/tmp/emdash-snake-zeros-cold-controls-20260930.json`; immutable inputs and
+receipts remain in `emdash2/logs/check-runs/`. Each control uses a fresh runner
+process. Registry/tooling checks and the subsequent public formal run are
+required for the recorded routing. This is repository validation and does
+not add a Lambdapi runtime dependency to cloud scientific programs.

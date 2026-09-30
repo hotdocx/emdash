@@ -429,3 +429,48 @@ The 25-target formal follow-up runs separately through
 controls in `/tmp/emdash-snake-zeros-cold-controls-20260930.json`; log
 `/tmp/emdash-snake-zeros-cold-followup-20260930.log`. No new profile bindings
 have been installed until that measured group is qualified.
+
+## Corrected rollout and complete API/reopen qualification
+
+The R3 preflight retry passes with zero schema drift/live sessions and one
+exact disabled-acceptance controller target. The guarded update reaches
+healthy revision 171 on gateway
+`sha256:08e6ae82dacb41bf3ed15fe752d6a470f9d426dedee9a0e3adc837f5b53b6e8e`.
+All four schedules are restored, every write is confirmed, and the old R2
+acceptance controller is deleted. Independent SDK checks confirm gateway/job
+templates, preserved configuration/secret references, exact controller 404
+and synchronized private runtime env. Receipt:
+`reports/env/workspace-executions-deployed-r3-20260930.json` in GetPaidX.
+
+Hosted `execution-sep30-r3` passes all API/program/Codex/reopen checks. A scoped
+successful OPENAI/gpt-5.4 event records 10,812 prompt/29 completion tokens;
+direct programs use no model provider and scheduled automation count is zero.
+The new session reads the original retained result. Browser compute/reuse,
+one-assumption internal construction and mathematical source editing/stale
+result display pass. The operator missed the twenty-minute browser deadline
+before final export/screenshots; the script safely closes/revokes/disables its
+own fixture with no cleanup failures. Do not call that overall run successful.
+Its partial hosted recording is labelled as such. Operator browser allowance
+is now explicitly sixty minutes. Fresh `execution-sep30-r4` stops before
+principal creation at a host-to-Azure connection error. The operator now uses
+an explicit fifteen-second connection/pool timeout in its own process, without
+changing the canonical or deployed database URL. Fresh `execution-sep30-r5`
+is active with the same credit bounds and stronger token accounting. The
+attended allowance is at most six new controller starts across these attempts;
+R1/R4 make no starts, R2 makes one and R3 makes two. Complete captures and the
+done marker before the sixty-minute deadline. The old R3
+controllers remain exact cleanup targets after the active fixture finishes.
+
+R2's captured hosted program independently replays in a network-disabled
+container under Node 22.23.2: `result.json`, `retained.json`, `internal.json`
+and `plot.svg` match byte for byte. The final successful run/export still needs
+its own corresponding artifact evidence.
+
+All 25 cold native-snake controls complete: 23 pass at scoped GC/2 GiB and
+two exactness reviewers require the existing 3 GiB/90s profile. Only their
+25 exact bindings are installed, bringing the override count to 141. The
+resource ledger records every receipt. Complete tooling passes at receipt
+`tooling-20260930T113011Z-7286298fad7943939798c660fbf7da1a`.
+Finish document checks, checkpoint and push this qualification, then inspect
+the next public formal run. No mathematical source, checker or default-limit
+change is included.
