@@ -585,3 +585,14 @@ API/browser acceptance, artifact replay or fixture cleanup is still running.
 The only active automated release requirement is public formal CI
 `36720083359`; follow its terminal outcome, preserve source pins and record
 any additional measured correction rather than suppressing a failed check.
+
+## Persistent Tracker Handoff
+
+At the final September 30 status inspection, `get_goal` reports `blocked`
+(despite the earlier deployment/connectivity/cleanup conditions now being
+resolved). The available goal tools cannot set status back to active; resumption
+is controlled by the user/system. Work under the user's Continue instruction
+has completed deployment, acceptance, cleanup and the sealed handoff. The
+remaining public formal gate continues independently in GitHub Actions.
+Do not mark the objective complete before its terminal result, and do not
+repeat the already-finished hosted acceptance or deployment on resume.
